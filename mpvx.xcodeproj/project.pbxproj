@@ -1,0 +1,612 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		84A0BA901D2F8D4100BC8DA1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA8F1D2F8D4100BC8DA1 /* Error.swift */; };
+		84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */; };
+		84A0BA971D2FA1CE00BC8DA1 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA961D2FA1CE00BC8DA1 /* PlayerController.swift */; };
+		84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA981D2FAAA700BC8DA1 /* MPVController.swift */; };
+		84A0BA9B1D2FAB4100BC8DA1 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */; };
+		84A0BA9E1D2FAD4000BC8DA1 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA9C1D2FAD4000BC8DA1 /* MainWindow.swift */; };
+		84A0BA9F1D2FAD4000BC8DA1 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A0BA9D1D2FAD4000BC8DA1 /* MainWindow.xib */; };
+		84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */; };
+		84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */; };
+		84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */; };
+		84EB1EEA1D2F51D3004FA5A1 /* mpvxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */; };
+		84EB1F031D2F59A4004FA5A1 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F021D2F59A4004FA5A1 /* Environment.swift */; };
+		84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F041D2F5C5B004FA5A1 /* AppData.swift */; };
+		84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F061D2F5E76004FA5A1 /* Utility.swift */; };
+		84FF84791D2FF698001B318A /* libmpv.1.21.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84741D2FF698001B318A /* libmpv.1.21.0.dylib */; };
+		84FF847A1D2FF698001B318A /* libmpv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84751D2FF698001B318A /* libmpv.1.dylib */; };
+		84FF847B1D2FF698001B318A /* libmpv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84761D2FF698001B318A /* libmpv.dylib */; };
+		84FF847C1D2FF698001B318A /* mpv.pc in Resources */ = {isa = PBXBuildFile; fileRef = 84FF84781D2FF698001B318A /* mpv.pc */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		84EB1EE61D2F51D3004FA5A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84EB1ECE1D2F51D3004FA5A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84EB1ED51D2F51D3004FA5A1;
+			remoteInfo = mpvx;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8497A4831D2FF573005F504F /* mpvx-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mpvx-Bridging-Header.h"; sourceTree = "<group>"; };
+		84A0BA8F1D2F8D4100BC8DA1 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		84A0BA941D2F9E9600BC8DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		84A0BA961D2FA1CE00BC8DA1 /* PlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
+		84A0BA981D2FAAA700BC8DA1 /* MPVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVController.swift; sourceTree = "<group>"; };
+		84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
+		84A0BA9C1D2FAD4000BC8DA1 /* MainWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
+		84A0BA9D1D2FAD4000BC8DA1 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		84EB1ED61D2F51D3004FA5A1 /* mpvx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mpvx.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		84EB1EE01D2F51D3004FA5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84EB1EE51D2F51D3004FA5A1 /* mpvxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mpvxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mpvxTests.swift; sourceTree = "<group>"; };
+		84EB1EEB1D2F51D3004FA5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84EB1F021D2F59A4004FA5A1 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		84EB1F041D2F5C5B004FA5A1 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
+		84EB1F061D2F5E76004FA5A1 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		84FF84701D2FF698001B318A /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
+		84FF84711D2FF698001B318A /* opengl_cb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl_cb.h; sourceTree = "<group>"; };
+		84FF84721D2FF698001B318A /* qthelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = qthelper.hpp; sourceTree = "<group>"; };
+		84FF84741D2FF698001B318A /* libmpv.1.21.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpv.1.21.0.dylib; sourceTree = "<group>"; };
+		84FF84751D2FF698001B318A /* libmpv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpv.1.dylib; sourceTree = "<group>"; };
+		84FF84761D2FF698001B318A /* libmpv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpv.dylib; sourceTree = "<group>"; };
+		84FF84781D2FF698001B318A /* mpv.pc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mpv.pc; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		84EB1ED31D2F51D3004FA5A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84FF847B1D2FF698001B318A /* libmpv.dylib in Frameworks */,
+				84FF847A1D2FF698001B318A /* libmpv.1.dylib in Frameworks */,
+				84FF84791D2FF698001B318A /* libmpv.1.21.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84EB1EE21D2F51D3004FA5A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		84A0BAA21D2FAE8200BC8DA1 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */,
+				84EB1EE01D2F51D3004FA5A1 /* Info.plist */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		84A0BAA31D2FAEA000BC8DA1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */,
+				84A0BA9C1D2FAD4000BC8DA1 /* MainWindow.swift */,
+				84A0BA9D1D2FAD4000BC8DA1 /* MainWindow.xib */,
+				84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		84A0BAA61D2FAF8400BC8DA1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8497A4831D2FF573005F504F /* mpvx-Bridging-Header.h */,
+				84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */,
+				84EB1F061D2F5E76004FA5A1 /* Utility.swift */,
+				84EB1F021D2F59A4004FA5A1 /* Environment.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		84A0BAA71D2FAF9700BC8DA1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */,
+				84A0BA961D2FA1CE00BC8DA1 /* PlayerController.swift */,
+				84A0BA981D2FAAA700BC8DA1 /* MPVController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		84A0BAA81D2FAFCD00BC8DA1 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				84EB1F041D2F5C5B004FA5A1 /* AppData.swift */,
+				84A0BA8F1D2F8D4100BC8DA1 /* Error.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		84EB1ECD1D2F51D3004FA5A1 = {
+			isa = PBXGroup;
+			children = (
+				84EB1ED81D2F51D3004FA5A1 /* mpvx */,
+				84EB1EE81D2F51D3004FA5A1 /* mpvxTests */,
+				84EB1ED71D2F51D3004FA5A1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		84EB1ED71D2F51D3004FA5A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				84EB1ED61D2F51D3004FA5A1 /* mpvx.app */,
+				84EB1EE51D2F51D3004FA5A1 /* mpvxTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		84EB1ED81D2F51D3004FA5A1 /* mpvx */ = {
+			isa = PBXGroup;
+			children = (
+				84FF846D1D2FF698001B318A /* libmpv */,
+				84A0BAA21D2FAE8200BC8DA1 /* Assets */,
+				84A0BAA71D2FAF9700BC8DA1 /* Controllers */,
+				84A0BAA81D2FAFCD00BC8DA1 /* Data */,
+				84A0BAA31D2FAEA000BC8DA1 /* Views */,
+				84A0BAA61D2FAF8400BC8DA1 /* Utils */,
+			);
+			path = mpvx;
+			sourceTree = "<group>";
+		};
+		84EB1EE81D2F51D3004FA5A1 /* mpvxTests */ = {
+			isa = PBXGroup;
+			children = (
+				84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */,
+				84EB1EEB1D2F51D3004FA5A1 /* Info.plist */,
+			);
+			path = mpvxTests;
+			sourceTree = "<group>";
+		};
+		84FF846D1D2FF698001B318A /* libmpv */ = {
+			isa = PBXGroup;
+			children = (
+				84FF846E1D2FF698001B318A /* include */,
+				84FF84731D2FF698001B318A /* lib */,
+			);
+			path = libmpv;
+			sourceTree = SOURCE_ROOT;
+		};
+		84FF846E1D2FF698001B318A /* include */ = {
+			isa = PBXGroup;
+			children = (
+				84FF846F1D2FF698001B318A /* mpv */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		84FF846F1D2FF698001B318A /* mpv */ = {
+			isa = PBXGroup;
+			children = (
+				84FF84701D2FF698001B318A /* client.h */,
+				84FF84711D2FF698001B318A /* opengl_cb.h */,
+				84FF84721D2FF698001B318A /* qthelper.hpp */,
+			);
+			path = mpv;
+			sourceTree = "<group>";
+		};
+		84FF84731D2FF698001B318A /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				84FF84741D2FF698001B318A /* libmpv.1.21.0.dylib */,
+				84FF84751D2FF698001B318A /* libmpv.1.dylib */,
+				84FF84761D2FF698001B318A /* libmpv.dylib */,
+				84FF84771D2FF698001B318A /* pkgconfig */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		84FF84771D2FF698001B318A /* pkgconfig */ = {
+			isa = PBXGroup;
+			children = (
+				84FF84781D2FF698001B318A /* mpv.pc */,
+			);
+			path = pkgconfig;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		84EB1ED51D2F51D3004FA5A1 /* mpvx */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84EB1EF91D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "mpvx" */;
+			buildPhases = (
+				84EB1ED21D2F51D3004FA5A1 /* Sources */,
+				84EB1ED31D2F51D3004FA5A1 /* Frameworks */,
+				84EB1ED41D2F51D3004FA5A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = mpvx;
+			productName = mpvx;
+			productReference = 84EB1ED61D2F51D3004FA5A1 /* mpvx.app */;
+			productType = "com.apple.product-type.application";
+		};
+		84EB1EE41D2F51D3004FA5A1 /* mpvxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84EB1EFC1D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "mpvxTests" */;
+			buildPhases = (
+				09E168D08FA87C07190913AE /* 📦 Check Pods Manifest.lock */,
+				84EB1EE11D2F51D3004FA5A1 /* Sources */,
+				84EB1EE21D2F51D3004FA5A1 /* Frameworks */,
+				84EB1EE31D2F51D3004FA5A1 /* Resources */,
+				78CBBA0AC8422BA966B44447 /* 📦 Embed Pods Frameworks */,
+				D5EEB5F9941B38A84A117651 /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				84EB1EE71D2F51D3004FA5A1 /* PBXTargetDependency */,
+			);
+			name = mpvxTests;
+			productName = mpvxTests;
+			productReference = 84EB1EE51D2F51D3004FA5A1 /* mpvxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		84EB1ECE1D2F51D3004FA5A1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = lhc;
+				TargetAttributes = {
+					84EB1ED51D2F51D3004FA5A1 = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
+					};
+					84EB1EE41D2F51D3004FA5A1 = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
+						TestTargetID = 84EB1ED51D2F51D3004FA5A1;
+					};
+				};
+			};
+			buildConfigurationList = 84EB1ED11D2F51D3004FA5A1 /* Build configuration list for PBXProject "mpvx" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 84EB1ECD1D2F51D3004FA5A1;
+			productRefGroup = 84EB1ED71D2F51D3004FA5A1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				84EB1ED51D2F51D3004FA5A1 /* mpvx */,
+				84EB1EE41D2F51D3004FA5A1 /* mpvxTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		84EB1ED41D2F51D3004FA5A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
+				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
+				84FF847C1D2FF698001B318A /* mpv.pc in Resources */,
+				84A0BA9F1D2FAD4000BC8DA1 /* MainWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84EB1EE31D2F51D3004FA5A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		09E168D08FA87C07190913AE /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		78CBBA0AC8422BA966B44447 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mpvxTests/Pods-mpvxTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5EEB5F9941B38A84A117651 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mpvxTests/Pods-mpvxTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		84EB1ED21D2F51D3004FA5A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */,
+				84A0BA9E1D2FAD4000BC8DA1 /* MainWindow.swift in Sources */,
+				84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */,
+				84A0BA901D2F8D4100BC8DA1 /* Error.swift in Sources */,
+				84A0BA9B1D2FAB4100BC8DA1 /* Parameter.swift in Sources */,
+				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,
+				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,
+				84A0BA971D2FA1CE00BC8DA1 /* PlayerController.swift in Sources */,
+				84EB1F031D2F59A4004FA5A1 /* Environment.swift in Sources */,
+				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84EB1EE11D2F51D3004FA5A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84EB1EEA1D2F51D3004FA5A1 /* mpvxTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		84EB1EE71D2F51D3004FA5A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84EB1ED51D2F51D3004FA5A1 /* mpvx */;
+			targetProxy = 84EB1EE61D2F51D3004FA5A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84A0BA941D2F9E9600BC8DA1 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		84EB1EF71D2F51D3004FA5A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/mpv";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		84EB1EF81D2F51D3004FA5A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/mpv";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		84EB1EFA1D2F51D3004FA5A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/libmpv/include";
+				INFOPLIST_FILE = mpvx/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/libmpv/lib",
+					"$(PROJECT_DIR)/libmpv/lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvx;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "mpvx/mpvx-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		84EB1EFB1D2F51D3004FA5A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/libmpv/include";
+				INFOPLIST_FILE = mpvx/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/libmpv/lib",
+					"$(PROJECT_DIR)/libmpv/lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvx;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "mpvx/mpvx-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		84EB1EFD1D2F51D3004FA5A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = mpvxTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mpvx.app/Contents/MacOS/mpvx";
+			};
+			name = Debug;
+		};
+		84EB1EFE1D2F51D3004FA5A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = mpvxTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mpvx.app/Contents/MacOS/mpvx";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		84EB1ED11D2F51D3004FA5A1 /* Build configuration list for PBXProject "mpvx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84EB1EF71D2F51D3004FA5A1 /* Debug */,
+				84EB1EF81D2F51D3004FA5A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84EB1EF91D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "mpvx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84EB1EFA1D2F51D3004FA5A1 /* Debug */,
+				84EB1EFB1D2F51D3004FA5A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84EB1EFC1D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "mpvxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84EB1EFD1D2F51D3004FA5A1 /* Debug */,
+				84EB1EFE1D2F51D3004FA5A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 84EB1ECE1D2F51D3004FA5A1 /* Project object */;
+}

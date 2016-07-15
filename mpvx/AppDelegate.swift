@@ -40,6 +40,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return .terminateNow
   }
   
+  func application(_ sender: NSApplication, openFile filename: String) -> Bool {
+    playerController.openFile(URL(fileURLWithPath: filename))
+    return true
+  }
+  
   // MARK: - Menu
   
   @IBAction func openFile(_ sender: NSMenuItem) {

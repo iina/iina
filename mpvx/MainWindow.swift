@@ -28,7 +28,7 @@ class MainWindow: NSWindowController, NSWindowDelegate, MPVControllerDelegate {
     selfWindow.titlebarAppearsTransparent = true
     selfWindow.title = AppData.currentURL!.lastPathComponent!
     selfWindow.minSize = NSMakeSize(200, 200)
-    selfWindow.contentView?.addSubview(videoView)
+    selfWindow.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
     selfWindow.makeMain()
     selfWindow.makeKeyAndOrderFront(nil)
   }

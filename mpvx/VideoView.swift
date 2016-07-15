@@ -38,6 +38,7 @@ class VideoView: NSOpenGLView {
       prepareVideoFrameBuffer(videoSize!)
       setUpDisplayLink()
       startDisplayLink()
+      started = true
     }
   }
   
@@ -45,6 +46,8 @@ class VideoView: NSOpenGLView {
   
   var texture: GLuint = GLuint()
   var fbo: GLuint = GLuint()
+  
+  var started: Bool = false
   
   override var mouseDownCanMoveWindow: Bool {
     return true
@@ -177,18 +180,21 @@ class VideoView: NSOpenGLView {
     openGLContext?.lock()
     openGLContext?.makeCurrentContext()
     
-    glEnable(GLenum(GL_TEXTURE_2D))
-    glBindFramebufferEXT(GLenum(GL_FRAMEBUFFER_EXT), 0);
-    glBindTexture(GLenum(GL_TEXTURE_2D), texture);
-    glBegin(GLenum(GL_QUADS));
-    
-    glTexCoord2f(0, 0);    glVertex2f(-1, -1);
-    glTexCoord2f(0, 1);    glVertex2f(-1, 1);
-    glTexCoord2f(1, 1);    glVertex2f( 1, 1);
-    glTexCoord2f(1, 0);    glVertex2f( 1, -1);
-    
-    glEnd();
-    glDisable(GLenum(GL_TEXTURE_2D))
+    if !started {
+      glClearColor(0, 0, 0, 0)
+      glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+    } else {
+      glEnable(GLenum(GL_TEXTURE_2D))
+      glBindFramebufferEXT(GLenum(GL_FRAMEBUFFER_EXT), 0);
+      glBindTexture(GLenum(GL_TEXTURE_2D), texture);
+      glBegin(GLenum(GL_QUADS));
+      glTexCoord2f(0, 0);    glVertex2f(-1, -1);
+      glTexCoord2f(0, 1);    glVertex2f(-1, 1);
+      glTexCoord2f(1, 1);    glVertex2f( 1, 1);
+      glTexCoord2f(1, 0);    glVertex2f( 1, -1);
+      glEnd();
+      glDisable(GLenum(GL_TEXTURE_2D))
+    }
     openGLContext?.flushBuffer()
     openGLContext?.unlock()
   }

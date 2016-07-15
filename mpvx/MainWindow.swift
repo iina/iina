@@ -21,16 +21,33 @@ class MainWindow: NSWindowController, NSWindowDelegate, MPVControllerDelegate {
   override var windowNibName: String {
     return "MainWindow"
   }
+  
+  var fadeableViews: [NSView?] = []
+  var stopAnimation: Bool = false
+  
+  @IBOutlet weak var titleBarView: NSVisualEffectView!
+  
 
   override func windowDidLoad() {
     super.windowDidLoad()
+    let w = self.window!
     selfWindow = self.window!
-    selfWindow.titlebarAppearsTransparent = true
-    selfWindow.title = AppData.currentURL!.lastPathComponent!
-    selfWindow.minSize = NSMakeSize(200, 200)
-    selfWindow.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
-    selfWindow.makeMain()
-    selfWindow.makeKeyAndOrderFront(nil)
+    w.titleVisibility = .hidden;
+    w.styleMask.insert(NSFullSizeContentViewWindowMask);
+    w.titlebarAppearsTransparent = true
+    w.isMovableByWindowBackground  = true
+    w.title = AppData.currentURL!.lastPathComponent!
+    w.minSize = NSMakeSize(200, 200)
+    // fade-able views
+    fadeableViews.append(w.standardWindowButton(.closeButton))
+    fadeableViews.append(w.standardWindowButton(.miniaturizeButton))
+    fadeableViews.append(w.standardWindowButton(.zoomButton))
+    fadeableViews.append(titleBarView)
+    let cv = window!.contentView!
+    cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited], owner: self, userInfo: nil))
+    w.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
+    w.makeMain()
+    w.makeKeyAndOrderFront(nil)
   }
   
   // MARK: Lazy initializers
@@ -67,6 +84,38 @@ class MainWindow: NSWindowController, NSWindowDelegate, MPVControllerDelegate {
     }
   }
   
+  override func mouseEntered(_ event: NSEvent) {
+    stopAnimation = true
+    fadeableViews.forEach { (v) in
+      v?.isHidden = false
+      v?.alphaValue = 0
+    }
+    NSAnimationContext.runAnimationGroup({ (context) in
+        context.duration = 0.5
+      fadeableViews.forEach { (v) in
+        v?.animator().alphaValue = 1
+      }
+      }) {}
+  }
+  
+  override func mouseExited(_ event: NSEvent) {
+    fadeableViews.forEach { (v) in
+      v?.alphaValue = 1
+    }
+    NSAnimationContext.runAnimationGroup({ (context) in
+      context.duration = 0.5
+      fadeableViews.forEach { (v) in
+        v?.animator().alphaValue = 0
+      }
+    }) {
+      if !self.stopAnimation {
+        self.fadeableViews.forEach { (v) in
+          v?.isHidden = true
+        }
+      }
+    }
+  }
+  
   // MARK: - MPVControllerDelegate
   
   func setUpMpvGLContext(_ context: UnsafePointer<Void>) {
@@ -77,40 +126,41 @@ class MainWindow: NSWindowController, NSWindowDelegate, MPVControllerDelegate {
    Set video size when info available.
    */
   func fileLoadedWithVideoSize(_ width: Int, _ height: Int) {
-    let screenSizeOptional = NSScreen.main()?.visibleFrame.size
-    let aspectRatio = Float(width) / Float(height)
-    var videoSize = NSSize(width: width, height: height)
-    self.window!.aspectRatio = videoSize
-    // check if video size > screen size
-    if let screenSize = screenSizeOptional {
-      let tryWidth = CGFloat(Float(screenSize.height) * aspectRatio)
-      let tryHeight = CGFloat(Float(screenSize.width) / aspectRatio)
-      if screenSize.width >= videoSize.width {
-        if screenSize.height < videoSize.height {
-          videoSize.height = screenSize.height
-          videoSize.width = tryWidth
-        }
-      } else {
-        // screenSize.width < videoSize.width
-        if screenSize.height < videoSize.height {
-          if (screenSize.height >= tryHeight) {
-            videoSize.width = screenSize.width
-            videoSize.height = tryHeight
-          } else {
+    DispatchQueue.main.sync {
+      let screenSizeOptional = NSScreen.main()?.visibleFrame.size
+      let aspectRatio = Float(width) / Float(height)
+      var videoSize = NSSize(width: width, height: height)
+      self.window!.aspectRatio = videoSize
+      // check if video size > screen size
+      if let screenSize = screenSizeOptional {
+        let tryWidth = CGFloat(Float(screenSize.height) * aspectRatio)
+        let tryHeight = CGFloat(Float(screenSize.width) / aspectRatio)
+        if screenSize.width >= videoSize.width {
+          if screenSize.height < videoSize.height {
             videoSize.height = screenSize.height
             videoSize.width = tryWidth
           }
         } else {
-          videoSize.width = screenSize.width
-          videoSize.height = tryHeight
+          // screenSize.width < videoSize.width
+          if screenSize.height < videoSize.height {
+            if (screenSize.height >= tryHeight) {
+              videoSize.width = screenSize.width
+              videoSize.height = tryHeight
+            } else {
+              videoSize.height = screenSize.height
+              videoSize.width = tryWidth
+            }
+          } else {
+            videoSize.width = screenSize.width
+            videoSize.height = tryHeight
+          }
         }
       }
+      self.window!.setContentSize(videoSize)
+      if self.videoView.videoSize == nil {
+        self.videoView.videoSize = videoSize
+      }
     }
-    self.window!.setContentSize(videoSize)
-    if videoView.videoSize == nil {
-      videoView.videoSize = videoSize
-    }
-    self.showWindow(nil)
   }
   
 }

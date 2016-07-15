@@ -38,7 +38,6 @@ class VideoView: NSOpenGLView {
       prepareVideoFrameBuffer(videoSize!)
       setUpDisplayLink()
       startDisplayLink()
-      started = true
     }
   }
   
@@ -63,6 +62,7 @@ class VideoView: NSOpenGLView {
     let attributes: [NSOpenGLPixelFormatAttribute] = [
       UInt32(NSOpenGLPFADoubleBuffer),
       UInt32(NSOpenGLPFAAccelerated),
+      //UInt32(NSOpenGLPFAOpenGLProfile), UInt32(NSOpenGLProfileVersion3_2Core),
       0
     ]
     let pixelFormat = NSOpenGLPixelFormat(attributes: attributes)!
@@ -156,6 +156,9 @@ class VideoView: NSOpenGLView {
    Draw offscreen to framebuffer.
    */
   func drawFrame() {
+    if !started {
+      started = true
+    }
     renderContext.lock()
     renderContext.makeCurrentContext()
     if let context = self.mpvGLContext {

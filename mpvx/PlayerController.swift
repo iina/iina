@@ -10,8 +10,16 @@ import Cocoa
 
 class PlayerController: NSObject {
   
-  lazy var mainWindow: MainWindow! = self.initMainWindow()
-  lazy var mpvController: MPVController! = self.initMPVController()
+  lazy var mainWindow: MainWindow! = {
+    let window = MainWindow()
+    window.playerController = self
+    return window
+  }()
+  
+  lazy var mpvController: MPVController! = {
+    let controller = MPVController(playerController: self)
+    return controller
+  }()
   
   var statusPaused: Bool = false
   
@@ -25,10 +33,17 @@ class PlayerController: NSObject {
     Utility.log("Open File \(path!)")
     AppData.currentURL = url
     mainWindow.showWindow(nil)
-    // Init mpv
-    mpvController.mpvInit()
     // Send load file command
     mpvController.mpvCommand(["loadfile", path, nil])
+  }
+  
+  func startMPV() {
+    mpvController.mpvInit()
+  }
+  
+  func startMPVOpenGLCB(_ videoView: VideoView) {
+    let mpvGLContext = mpvController.mpvInitCB()
+    videoView.mpvGLContext = OpaquePointer(mpvGLContext)
   }
   
   // Terminate mpv
@@ -52,18 +67,11 @@ class PlayerController: NSObject {
     }
   }
   
-  // MARK: Lazy initializers
-  
-  func initMainWindow() -> MainWindow {
-    let window = MainWindow()
-    window.playerController = self
-    return window
-  }
-  
-  func initMPVController() -> MPVController {
-    let controller = MPVController()
-    controller.delegate = mainWindow
-    return controller
+  func fileLoadedWithVideoSize(_ width: Int, _ height: Int) {
+    DispatchQueue.main.sync {
+      mainWindow.adjustFrameByVideoSize(width, height)
+    }
+    mpvController.mpvResume()
   }
 
 }

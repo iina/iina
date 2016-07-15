@@ -21,20 +21,21 @@ func wakeup(_ ctx: UnsafeMutablePointer<Void>?) {
   mpvController.readEvents()
 }
 
-protocol MPVControllerDelegate {
-  func setUpMpvGLContext(_ context: UnsafePointer<Void>)
-  func fileLoadedWithVideoSize(_ width: Int, _ height: Int)
-}
-
 class MPVController: NSObject {
   // The mpv_handle
   var mpv: OpaquePointer!
   // The mpv client name
   var mpvClientName: UnsafePointer<Int8>!
   lazy var queue: DispatchQueue! = DispatchQueue(label: "mpvx", attributes: .serial)
-  var delegate: MPVControllerDelegate? = nil
+  var playerController: PlayerController!
   
-  // Init the mpv context
+  init(playerController: PlayerController) {
+    self.playerController = playerController
+  }
+  
+  /**
+   Init the mpv context
+   */
   func mpvInit() {
     // Create a new mpv instance and an associated client API handle to control the mpv instance.
     mpv = mpv_create()
@@ -61,19 +62,28 @@ class MPVController: NSObject {
     
     // Initialize an uninitialized mpv instance. If the mpv instance is already running, an error is retuned.
     e(mpv_initialize(mpv))
-    
+  }
+  
+  func mpvInitCB() -> UnsafeMutablePointer<Void> {
     // Get opengl-cb context.
     let mpvGL = mpv_get_sub_api(mpv, MPV_SUB_API_OPENGL_CB)!;
-    
     // Ask delegate (actually VideoView) to setup openGL context.
-    self.delegate!.setUpMpvGLContext(mpvGL)
-    
+//    self.delegate!.setUpMpvGLContext(mpvGL)
+    return mpvGL
   }
   
   // Basically send quit to mpv
   func mpvQuit() {
     mpv_suspend(mpv)
     mpvCommand(["quit", nil])
+  }
+  
+  func mpvSuspend() {
+    mpv_suspend(mpv)
+  }
+  
+  func mpvResume() {
+    mpv_resume(mpv)
   }
   
   // MARK: Command & property
@@ -158,21 +168,23 @@ class MPVController: NSObject {
   }
   
   func onFileLoaded() {
+    mpvSuspend()
     // Get video size and set the initial window size
     var width = Int64(), height = Int64()
     mpv_get_property(mpv, "width", MPV_FORMAT_INT64, &width)
     mpv_get_property(mpv, "height", MPV_FORMAT_INT64, &height)
-    mpv_suspend(mpv)
-    self.delegate!.fileLoadedWithVideoSize(Int(width), Int(height))
-    mpv_resume(mpv)
+    playerController.fileLoadedWithVideoSize(Int(width), Int(height))
   }
   
   // MARK: Utils
-  // Utility function for checking mpv api error
+  
+  /**
+   Utility function for checking mpv api error
+   */
   func e(_ status: Int32!) {
     if status < 0 {
-      Utility.log("MPV API error: \(String(cString: mpv_error_string(status)))")
-      exit(1)
+      Utility.showAlert(message: "Cannot start MPV!")
+      Utility.fatal("MPV API error: \(String(cString: mpv_error_string(status)))")
     }
   }
   

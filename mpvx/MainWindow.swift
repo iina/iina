@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MainWindow: NSWindowController, NSWindowDelegate, MPVControllerDelegate {
+class MainWindow: NSWindowController, NSWindowDelegate {
   
   var selfWindow: NSWindow!
   var playerController: PlayerController!
@@ -26,6 +26,7 @@ class MainWindow: NSWindowController, NSWindowDelegate, MPVControllerDelegate {
   var stopAnimation: Bool = false
   
   @IBOutlet weak var titleBarView: NSVisualEffectView!
+  @IBOutlet weak var titleBarTitleCell: NSTextFieldCell!
   
 
   override func windowDidLoad() {
@@ -37,6 +38,7 @@ class MainWindow: NSWindowController, NSWindowDelegate, MPVControllerDelegate {
     w.titlebarAppearsTransparent = true
     w.isMovableByWindowBackground  = true
     w.title = AppData.currentURL!.lastPathComponent!
+    titleBarTitleCell.title = w.title
     w.minSize = NSMakeSize(200, 200)
     // fade-able views
     fadeableViews.append(w.standardWindowButton(.closeButton))
@@ -46,6 +48,7 @@ class MainWindow: NSWindowController, NSWindowDelegate, MPVControllerDelegate {
     let cv = window!.contentView!
     cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited], owner: self, userInfo: nil))
     w.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
+    playerController.startMPVOpenGLCB(videoView)
     w.makeMain()
     w.makeKeyAndOrderFront(nil)
   }
@@ -116,50 +119,42 @@ class MainWindow: NSWindowController, NSWindowDelegate, MPVControllerDelegate {
     }
   }
   
-  // MARK: - MPVControllerDelegate
-  
-  func setUpMpvGLContext(_ context: UnsafePointer<Void>) {
-    videoView.mpvGLContext = OpaquePointer(context)
-  }
-  
   /**
    Set video size when info available.
    */
-  func fileLoadedWithVideoSize(_ width: Int, _ height: Int) {
-    DispatchQueue.main.sync {
-      let screenSizeOptional = NSScreen.main()?.visibleFrame.size
-      let aspectRatio = Float(width) / Float(height)
-      var videoSize = NSSize(width: width, height: height)
-      self.window!.aspectRatio = videoSize
-      // check if video size > screen size
-      if let screenSize = screenSizeOptional {
-        let tryWidth = CGFloat(Float(screenSize.height) * aspectRatio)
-        let tryHeight = CGFloat(Float(screenSize.width) / aspectRatio)
-        if screenSize.width >= videoSize.width {
-          if screenSize.height < videoSize.height {
+  func adjustFrameByVideoSize(_ width: Int, _ height: Int) {
+    let screenSizeOptional = NSScreen.main()?.visibleFrame.size
+    let aspectRatio = Float(width) / Float(height)
+    var videoSize = NSSize(width: width, height: height)
+    self.window!.aspectRatio = videoSize
+    // check if video size > screen size
+    if let screenSize = screenSizeOptional {
+      let tryWidth = CGFloat(Float(screenSize.height) * aspectRatio)
+      let tryHeight = CGFloat(Float(screenSize.width) / aspectRatio)
+      if screenSize.width >= videoSize.width {
+        if screenSize.height < videoSize.height {
+          videoSize.height = screenSize.height
+          videoSize.width = tryWidth
+        }
+      } else {
+        // screenSize.width < videoSize.width
+        if screenSize.height < videoSize.height {
+          if (screenSize.height >= tryHeight) {
+            videoSize.width = screenSize.width
+            videoSize.height = tryHeight
+          } else {
             videoSize.height = screenSize.height
             videoSize.width = tryWidth
           }
         } else {
-          // screenSize.width < videoSize.width
-          if screenSize.height < videoSize.height {
-            if (screenSize.height >= tryHeight) {
-              videoSize.width = screenSize.width
-              videoSize.height = tryHeight
-            } else {
-              videoSize.height = screenSize.height
-              videoSize.width = tryWidth
-            }
-          } else {
-            videoSize.width = screenSize.width
-            videoSize.height = tryHeight
-          }
+          videoSize.width = screenSize.width
+          videoSize.height = tryHeight
         }
       }
-      self.window!.setContentSize(videoSize)
-      if self.videoView.videoSize == nil {
-        self.videoView.videoSize = videoSize
-      }
+    }
+    self.window!.setContentSize(videoSize)
+    if self.videoView.videoSize == nil {
+      self.videoView.videoSize = videoSize
     }
   }
   

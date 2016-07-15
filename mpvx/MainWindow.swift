@@ -77,9 +77,36 @@ class MainWindow: NSWindowController, NSWindowDelegate, MPVControllerDelegate {
    Set video size when info available.
    */
   func fileLoadedWithVideoSize(_ width: Int, _ height: Int) {
-    let videoSize = NSSize(width: width, height: height)
-    self.window!.setContentSize(videoSize)
+    let screenSizeOptional = NSScreen.main()?.visibleFrame.size
+    let aspectRatio = Float(width) / Float(height)
+    var videoSize = NSSize(width: width, height: height)
     self.window!.aspectRatio = videoSize
+    // check if video size > screen size
+    if let screenSize = screenSizeOptional {
+      let tryWidth = CGFloat(Float(screenSize.height) * aspectRatio)
+      let tryHeight = CGFloat(Float(screenSize.width) / aspectRatio)
+      if screenSize.width >= videoSize.width {
+        if screenSize.height < videoSize.height {
+          videoSize.height = screenSize.height
+          videoSize.width = tryWidth
+        }
+      } else {
+        // screenSize.width < videoSize.width
+        if screenSize.height < videoSize.height {
+          if (screenSize.height >= tryHeight) {
+            videoSize.width = screenSize.width
+            videoSize.height = tryHeight
+          } else {
+            videoSize.height = screenSize.height
+            videoSize.width = tryWidth
+          }
+        } else {
+          videoSize.width = screenSize.width
+          videoSize.height = tryHeight
+        }
+      }
+    }
+    self.window!.setContentSize(videoSize)
     if videoView.videoSize == nil {
       videoView.videoSize = videoSize
     }

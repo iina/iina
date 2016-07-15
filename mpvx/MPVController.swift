@@ -48,6 +48,7 @@ class MPVController: NSObject {
     // Set options. Should be called before initialization.
     e(mpv_set_option_string(mpv, "input-media-keys", "yes"))
     e(mpv_set_option_string(mpv, "vo", "opengl-cb"))
+    e(mpv_set_option_string(mpv, "hwdec-preload", "auto"))
     
     // Receive log messages at warn level.
     e(mpv_request_log_messages(mpv, "warn"))

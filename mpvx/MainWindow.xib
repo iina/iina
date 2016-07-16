@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindow" customModule="mpvx" customModuleProvider="target">
             <connections>
+                <outlet property="controlBar" destination="OiF-pA-8Sd" id="o08-Ig-SfX"/>
                 <outlet property="titleBarTitleCell" destination="AOe-dk-iFa" id="u5U-pl-8nT"/>
                 <outlet property="titleBarView" destination="TRx-2V-Gr3" id="kOU-nP-MAP"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
@@ -42,6 +43,25 @@
                             <constraint firstAttribute="trailing" secondItem="gW1-BG-OEa" secondAttribute="trailing" id="rgt-Bi-f7K"/>
                         </constraints>
                     </visualEffectView>
+                    <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" fixedFrame="YES" blendingMode="withinWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="mpvx" customModuleProvider="target">
+                        <rect key="frame" x="100" y="33" width="480" height="94"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT">
+                                <rect key="frame" x="18" y="13" width="444" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="f1c-xF-8a2"/>
+                            </slider>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gxw-pJ-Lcg">
+                                <rect key="frame" x="216" y="40" width="48" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" alternateImage="pause" imageScaling="proportionallyUpOrDown" inset="2" id="mWQ-R0-GGr">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </visualEffectView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="TRx-2V-Gr3" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="ofB-WP-9dW"/>
@@ -55,4 +75,8 @@
             <point key="canvasLocation" x="126" y="233.5"/>
         </window>
     </objects>
+    <resources>
+        <image name="pause" width="600" height="600"/>
+        <image name="play" width="600" height="600"/>
+    </resources>
 </document>

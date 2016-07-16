@@ -15,6 +15,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   lazy var videoView: VideoView! = self.initVideoView()
   
   var mousePosRelatedToWindow: CGPoint?
+  var isDragging: Bool = false
   
   @IBOutlet weak var btn: NSButton!
   
@@ -27,6 +28,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   @IBOutlet weak var titleBarView: NSVisualEffectView!
   @IBOutlet weak var titleBarTitleCell: NSTextFieldCell!
+  @IBOutlet weak var controlBar: ControlBarView!
   
 
   override func windowDidLoad() {
@@ -36,7 +38,8 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     w.titleVisibility = .hidden;
     w.styleMask.insert(NSFullSizeContentViewWindowMask);
     w.titlebarAppearsTransparent = true
-    w.isMovableByWindowBackground  = true
+    // need to deal with control bar, so handle it manually
+    // w.isMovableByWindowBackground  = true
     w.title = AppData.currentURL!.lastPathComponent!
     titleBarTitleCell.title = w.title
     w.minSize = NSMakeSize(200, 200)
@@ -45,8 +48,10 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     fadeableViews.append(w.standardWindowButton(.miniaturizeButton))
     fadeableViews.append(w.standardWindowButton(.zoomButton))
     fadeableViews.append(titleBarView)
+    fadeableViews.append(controlBar)
     let cv = window!.contentView!
     cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited], owner: self, userInfo: nil))
+    // video view
     w.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
     playerController.startMPVOpenGLCB(videoView)
     w.makeMain()
@@ -71,12 +76,18 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   override func mouseDown(_ event: NSEvent) {
+    if controlBar.isDragging {
+      return
+    }
     mousePosRelatedToWindow = NSEvent.mouseLocation()
     mousePosRelatedToWindow!.x -= window!.frame.origin.x
     mousePosRelatedToWindow!.y -= window!.frame.origin.y
   }
   
   override func mouseDragged(_ event: NSEvent) {
+    if controlBar.isDragging {
+      return
+    }
     if mousePosRelatedToWindow != nil {
       let currentLocation = NSEvent.mouseLocation()
       let newOrigin = CGPoint(
@@ -102,6 +113,9 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   override func mouseExited(_ event: NSEvent) {
+    if controlBar.isDragging {
+      return
+    }
     fadeableViews.forEach { (v) in
       v?.alphaValue = 1
     }

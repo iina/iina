@@ -20,15 +20,18 @@ class Utility {
     NSLog("%@", message)
   }
   
-  static func assert(_ expr: Bool, _ errorMessage: String) {
+  static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
     if !expr {
       NSLog("%@", errorMessage)
+      block()
+      exit(1)
     }
   }
   
-  static func fatal(_ message: String) {
+  static func fatal(_ message: String, _ block: () -> Void = {}) {
     NSLog("%@", message)
-    NSApp.terminate(self)
+    block()
+    exit(1)
   }
 
 }

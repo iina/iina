@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8452DD851D3B956D008A543A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452DD841D3B956D008A543A /* Preference.swift */; };
+		8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD881D3CB4EF008A543A /* vertexShader.glsl */; };
+		8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD8A1D3CB519008A543A /* fragmentShader.glsl */; };
 		845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB0C61D39462E00C011E0 /* ControlBarView.swift */; };
 		845FB0CA1D3A16CC00C011E0 /* PreferenceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB0C81D3A16CC00C011E0 /* PreferenceWindow.swift */; };
 		845FB0CB1D3A16CC00C011E0 /* PreferenceWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845FB0C91D3A16CC00C011E0 /* PreferenceWindow.xib */; };
@@ -43,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		8452DD841D3B956D008A543A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
+		8452DD881D3CB4EF008A543A /* vertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertexShader.glsl; sourceTree = "<group>"; };
+		8452DD8A1D3CB519008A543A /* fragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragmentShader.glsl; sourceTree = "<group>"; };
 		845FB0C61D39462E00C011E0 /* ControlBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
 		845FB0C81D3A16CC00C011E0 /* PreferenceWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceWindow.swift; sourceTree = "<group>"; };
 		845FB0C91D3A16CC00C011E0 /* PreferenceWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferenceWindow.xib; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 				84A0BA9D1D2FAD4000BC8DA1 /* MainWindow.xib */,
 				845FB0C61D39462E00C011E0 /* ControlBarView.swift */,
 				84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */,
+				8452DD881D3CB4EF008A543A /* vertexShader.glsl */,
+				8452DD8A1D3CB519008A543A /* fragmentShader.glsl */,
 				8452DD7F1D3A1F2A008A543A /* Preference */,
 			);
 			name = Views;
@@ -329,10 +335,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */,
 				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
 				845FB0CB1D3A16CC00C011E0 /* PreferenceWindow.xib in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				84FF847C1D2FF698001B318A /* mpv.pc in Resources */,
+				8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */,
 				84A0BA9F1D2FAD4000BC8DA1 /* MainWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

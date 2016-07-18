@@ -137,12 +137,14 @@ class MainWindow: NSWindowController, NSWindowDelegate {
    Set video size when info available.
    */
   func adjustFrameByVideoSize(_ width: Int, _ height: Int) {
-    let screenSizeOptional = NSScreen.main()?.visibleFrame.size
+    // set aspect ratio
     let aspectRatio = Float(width) / Float(height)
     var videoSize = NSSize(width: width, height: height)
     self.window!.aspectRatio = videoSize
-    // check if video size > screen size
+    // check screen size
+    let screenSizeOptional = NSScreen.main()?.visibleFrame.size
     if let screenSize = screenSizeOptional {
+      // check if video size > screen size
       let tryWidth = CGFloat(Float(screenSize.height) * aspectRatio)
       let tryHeight = CGFloat(Float(screenSize.width) / aspectRatio)
       if screenSize.width >= videoSize.width {
@@ -165,7 +167,10 @@ class MainWindow: NSWindowController, NSWindowDelegate {
           videoSize.height = tryHeight
         }
       }
+      // check default window position
+      
     }
+    
     self.window!.setContentSize(videoSize)
     if self.videoView.videoSize == nil {
       self.videoView.videoSize = videoSize

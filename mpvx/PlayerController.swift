@@ -21,6 +21,11 @@ class PlayerController: NSObject {
     return controller
   }()
   
+  lazy var preferenceWindow: PreferenceWindow! = {
+    let window = PreferenceWindow()
+    return window
+  }()
+  
   var statusPaused: Bool = false
   
   // Open a file

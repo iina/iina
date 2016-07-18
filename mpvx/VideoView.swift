@@ -65,7 +65,7 @@ class VideoView: NSOpenGLView {
     -1.0, -1.0, 0,  0.0, 0.0,
     -1.0,  1.0, 0,  0.0, 1.0,
      1.0,  1.0, 0,  1.0, 1.0,
-     1.0, -1.0, 0,  1.0, 0.0,
+//     1.0, -1.0, 0,  1.0, 0.0,
   ]
   
   /** Whether mpv started drawing */
@@ -124,19 +124,22 @@ class VideoView: NSOpenGLView {
     glBindBuffer(GLenum(GL_ARRAY_BUFFER), vbo);
     glBufferData(GLenum(GL_ARRAY_BUFFER), sizeof(GLfloat.self) * vertexData.count, vertexData, GLenum(GL_STATIC_DRAW));
     // connect x, y -> vert
-    let vertPtr = GLuint(glGetAttribLocation(program, "vert"))
-    glEnableVertexAttribArray(vertPtr)
-    glVertexAttribPointer(vertPtr, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(5*sizeof(GLfloat.self)), nil);
+    let vertPtr = glGetAttribLocation(program, "vert")
+    Utility.assert(vertPtr != -1, "Cannot get location for vertex variable")
+    glEnableVertexAttribArray(GLuint(vertPtr))
+    glVertexAttribPointer(GLuint(vertPtr), 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(5*sizeof(GLfloat.self)), nil);
     // connect u, v -> vertTexCoord
-    var offset = 3*sizeof(GLfloat.self)
-    let vertTexCoordPtr = GLuint(glGetAttribLocation(program, "vertTexCoord"))
-    glEnableVertexAttribArray(vertTexCoordPtr)
-    glVertexAttribPointer(vertTexCoordPtr, 2, GLenum(GL_FLOAT), GLboolean(GL_TRUE), GLsizei(5*sizeof(GLfloat.self)), &offset);
+    let offset = 3*sizeof(GLfloat.self)
+    let vertTexCoordPtr = glGetAttribLocation(program, "vertTexCoord")
+    Utility.assert(vertTexCoordPtr != -1, "Cannot get location for texture coord variable")
+    glEnableVertexAttribArray(GLuint(vertTexCoordPtr))
+    glVertexAttribPointer(GLuint(vertTexCoordPtr), 2, GLenum(GL_FLOAT), GLboolean(GL_TRUE), GLsizei(5*sizeof(GLfloat.self)), UnsafePointer<GLuint>(bitPattern: offset));
     glBindVertexArray(0);
     glBindFragDataLocation(program, 0, "color")
     // get texture uniform location
     texUniform = glGetUniformLocation(program, "tex")
-
+    Utility.assert(texUniform != -1, "Cannot get location for texture uniform variable")
+    gle()
     autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
     wantsBestResolutionOpenGLSurface = true
   }
@@ -194,16 +197,17 @@ class VideoView: NSOpenGLView {
     openGLContext!.makeCurrentContext()
     // create frame buffer
     glGenFramebuffers(GLsizei(1), &fbo)
+    Utility.assert(fbo > 0, "Cannot generate fbo")
     glBindFramebuffer(GLenum(GL_FRAMEBUFFER), fbo)
     // create texture
     glGenTextures(1, &texture);
+    Utility.assert(texture > 0, "Cannot generate texture")
     glBindTexture(GLenum(GL_TEXTURE_2D), texture)
     // bing texture
     glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR);
     glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR);
     glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA8, GLsizei(size.width), GLsizei(size.height), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), nil)
-    glFramebufferTexture2D(GLenum(GL_FRAMEBUFFER), GLenum(GL_COLOR_ATTACHMENT0),
-                              GLenum(GL_TEXTURE_2D), texture, 0)
+    glFramebufferTexture2D(GLenum(GL_FRAMEBUFFER), GLenum(GL_COLOR_ATTACHMENT0), GLenum(GL_TEXTURE_2D), texture, 0)
     // check whether frame buffer is completed
     let status = glCheckFramebufferStatus(GLenum(GL_FRAMEBUFFER))
     Utility.assert(status == GLenum(GL_FRAMEBUFFER_COMPLETE), "Frame buffer check failed!")
@@ -226,9 +230,9 @@ class VideoView: NSOpenGLView {
       _ context: UnsafeMutablePointer<Void>?) -> CVReturn {
       
       let videoView = unsafeBitCast(context, to: VideoView.self)
-//      videoView.draw()
+      videoView.drawVideo()
       
-      videoView.needsDisplay = true
+//      videoView.needsDisplay = true
       return kCVReturnSuccess
     }
     //
@@ -289,16 +293,17 @@ class VideoView: NSOpenGLView {
       glClearColor(0, 0, 0, 1);
       glClear(GLbitfield(GL_COLOR_BUFFER_BIT));
       
-      glEnableClientState(GLenum(GL_TEXTURE_COORD_ARRAY))
-      glUseProgram(program)
       glBindFramebuffer(GLenum(GL_FRAMEBUFFER), 0)
-      gle()
+      glUseProgram(program)
+      
       glActiveTexture(GLenum(GL_TEXTURE0))
       glBindTexture(GLenum(GL_TEXTURE_2D), texture)
       glUniform1i(texUniform, 0)
+      
       glBindVertexArray(vao)
       glDrawArrays(GLenum(GL_TRIANGLES), 0, 3);
       gle()
+      
       glBindVertexArray(0)
       glBindTexture (GLenum(GL_TEXTURE_2D), 0)
       glUseProgram(0)

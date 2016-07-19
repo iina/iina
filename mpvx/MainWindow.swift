@@ -25,7 +25,17 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   var fadeableViews: [NSView?] = []
-  var stopAnimation: Bool = false
+  
+  enum UIAnimationState {
+    case shown
+    case hidden
+    case willShow
+    case willHide
+  }
+  var animationState: UIAnimationState = .shown
+  
+  /** For auto hiding ui after a timeout */
+  var hideControlTimer: Timer?
   
   @IBOutlet weak var titleBarView: NSVisualEffectView!
   @IBOutlet weak var titleBarTitleCell: NSTextFieldCell!
@@ -50,7 +60,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     fadeableViews.append(titleBarView)
     fadeableViews.append(controlBar)
     guard let cv = w.contentView else { return }
-    cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited], owner: self, userInfo: nil))
+    cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: nil))
     // video view
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
     playerController.startMPVOpenGLCB(videoView)
@@ -95,39 +105,72 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   override func mouseEntered(_ event: NSEvent) {
-    stopAnimation = true
-    fadeableViews.forEach { (v) in
-      v?.isHidden = false
-      v?.alphaValue = 0
-    }
-    NSAnimationContext.runAnimationGroup({ (context) in
-        context.duration = 0.5
-      fadeableViews.forEach { (v) in
-        v?.animator().alphaValue = 1
-      }
-      }) {}
+    showUI()
   }
   
   override func mouseExited(_ event: NSEvent) {
     if controlBar.isDragging {
       return
     }
+    hideUI()
+  }
+  
+  override func mouseMoved(_ event: NSEvent) {
+    if animationState == .hidden {
+      showUI()
+    }
+    // if timer exist, destroy first
+    if hideControlTimer != nil {
+      hideControlTimer!.invalidate()
+      hideControlTimer = nil
+    }
+    // create new timer
+    let timeout = ud.float(forKey: Preference.Key.controlBarAutoHideTimeout)
+    hideControlTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideUIAndCurdor), userInfo: nil, repeats: false)
+  }
+  
+  func hideUIAndCurdor() {
+    hideUI()
+    NSCursor.setHiddenUntilMouseMoves(true)
+  }
+  
+  func hideUI() {
     fadeableViews.forEach { (v) in
       v?.alphaValue = 1
     }
+    animationState = .willHide
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.5
       fadeableViews.forEach { (v) in
         v?.animator().alphaValue = 0
       }
     }) {
-      if !self.stopAnimation {
+      // if no interrupt then hide animation
+      if self.animationState == .willHide {
         self.fadeableViews.forEach { (v) in
           v?.isHidden = true
         }
+        self.animationState = .hidden
       }
     }
   }
+  
+  func showUI () {
+    animationState = .willShow
+    fadeableViews.forEach { (v) in
+      v?.isHidden = false
+      v?.alphaValue = 0
+    }
+    NSAnimationContext.runAnimationGroup({ (context) in
+      context.duration = 0.5
+      fadeableViews.forEach { (v) in
+        v?.animator().alphaValue = 1
+      }
+    }) {
+      self.animationState = .shown
+    }
+  }
+  
   
   func windowDidResize(_ notification: Notification) {
     if let w = window {

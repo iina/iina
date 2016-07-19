@@ -16,6 +16,9 @@ class ControlBarView: NSVisualEffectView {
 
   override func awakeFromNib() {
     self.layer?.cornerRadius = 6
+    if #available(OSX 10.11, *), UserDefaults.standard.bool(forKey: Preference.Key.controlBarDarker) {
+      self.material = .ultraDark
+    }
   }
   
   override func mouseDown(_ event: NSEvent) {
@@ -34,9 +37,11 @@ class ControlBarView: NSVisualEffectView {
       )
       // stick to center
       let windowFrame = window!.frame
-      let xPosWhenCenter = (windowFrame.width - frame.width) / 2
-      if  abs(newOrigin.x - xPosWhenCenter) <= 25 {
-        newOrigin.x = xPosWhenCenter
+      if UserDefaults.standard.bool(forKey: Preference.Key.controlBarStickToCenter) {
+        let xPosWhenCenter = (windowFrame.width - frame.width) / 2
+        if  abs(newOrigin.x - xPosWhenCenter) <= 25 {
+          newOrigin.x = xPosWhenCenter
+        }
       }
       // bound to parent
       let xMax = windowFrame.width - frame.width

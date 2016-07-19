@@ -14,17 +14,23 @@ struct Preference {
     /** Window position. (float) */
     // static let windowPosition = "windowPosition"
     
-    /** Horizontal positon of control bar. */
-    static let  controlBarPositionHorizontal = "controlBarPositionHorizontal"
+    /** Horizontal positon of control bar. (float, 0 - 1) */
+    static let controlBarPositionHorizontal = "controlBarPositionHorizontal"
     
-    /** Horizontal positon of control bar. In percentage from bottom. */
-    static let  controlBarPositionVertical = "controlBarPositionVertical"
+    /** Horizontal positon of control bar. In percentage from bottom. (float, 0 - 1) */
+    static let controlBarPositionVertical = "controlBarPositionVertical"
     
-    /** Whether control bar stick to center when dragging. */
-    static let  controlBarStickToCenter = "controlBarStickToCenter"
+    /** Whether control bar stick to center when dragging. (bool) */
+    static let controlBarStickToCenter = "controlBarStickToCenter"
     
-    /** Timeout for auto hiding control bar */
-    static let  controlBarAutoHideTimeout  = "controlBarAutoHideTimeout"
+    /** Timeout for auto hiding control bar (float) */
+    static let controlBarAutoHideTimeout  = "controlBarAutoHideTimeout"
+    
+    /** Whether use ultra dark material for controlbar and title bar (bool) */
+    static let controlBarDarker = "controlBarDarker"
+    
+    /** Soft volume (int, 0 - 100)*/
+    static let softVolume = "softVolume"
   }
   
   static let defaultPreference:[String : AnyObject] = [
@@ -32,6 +38,8 @@ struct Preference {
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,
     Key.controlBarAutoHideTimeout: 5,
+    Key.controlBarDarker: false,
+    Key.softVolume: 50,
   ]
 
 }

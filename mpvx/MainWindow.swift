@@ -52,6 +52,10 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     // w.isMovableByWindowBackground  = true
     w.title = AppData.currentURL!.lastPathComponent!
     titleBarTitleCell.title = w.title
+    if #available(OSX 10.11, *), UserDefaults.standard.bool(forKey: Preference.Key.controlBarDarker) {
+      titleBarView.material = .ultraDark
+    }
+    // size
     w.minSize = NSMakeSize(200, 200)
     // fade-able views
     fadeableViews.append(w.standardWindowButton(.closeButton))
@@ -64,6 +68,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     // video view
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
     playerController.startMPVOpenGLCB(videoView)
+    // make main
     w.makeMain()
     w.makeKeyAndOrderFront(nil)
   }

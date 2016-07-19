@@ -550,6 +550,7 @@
 					"$(SRCROOT)/libmpv/lib",
 					"$(PROJECT_DIR)/libmpv/lib",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "mpvx/mpvx-Bridging-Header.h";
@@ -571,6 +572,7 @@
 					"$(SRCROOT)/libmpv/lib",
 					"$(PROJECT_DIR)/libmpv/lib",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "mpvx/mpvx-Bridging-Header.h";

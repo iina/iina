@@ -10,7 +10,8 @@ import Cocoa
 
 class MainWindow: NSWindowController, NSWindowDelegate {
   
-  var selfWindow: NSWindow!
+  let ud: UserDefaults = UserDefaults.standard
+  
   var playerController: PlayerController!
   lazy var videoView: VideoView! = self.initVideoView()
   
@@ -33,8 +34,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    let w = self.window!
-    selfWindow = self.window!
+    guard let w = self.window else { return }
     w.titleVisibility = .hidden;
     w.styleMask.insert(NSFullSizeContentViewWindowMask);
     w.titlebarAppearsTransparent = true
@@ -49,10 +49,10 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     fadeableViews.append(w.standardWindowButton(.zoomButton))
     fadeableViews.append(titleBarView)
     fadeableViews.append(controlBar)
-    let cv = window!.contentView!
+    guard let cv = w.contentView else { return }
     cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited], owner: self, userInfo: nil))
     // video view
-    w.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
+    cv.addSubview(videoView, positioned: .below, relativeTo: nil)
     playerController.startMPVOpenGLCB(videoView)
     w.makeMain()
     w.makeKeyAndOrderFront(nil)
@@ -61,15 +61,11 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   // MARK: Lazy initializers
   
   func initVideoView() -> VideoView {
-    let v = VideoView(frame: selfWindow.contentView!.bounds)
+    let v = VideoView(frame: window!.contentView!.bounds)
     return v
   }
   
   // MARK: - NSWindowDelegate
-  
-  func windowDidEndLiveResize(_ notification: Notification) {
-    window!.setFrame(window!.constrainFrameRect(window!.frame, to: window!.screen), display: false)
-  }
   
   override func keyDown(_ event: NSEvent) {
     playerController.togglePause(nil)
@@ -130,6 +126,20 @@ class MainWindow: NSWindowController, NSWindowDelegate {
           v?.isHidden = true
         }
       }
+    }
+  }
+  
+  func windowDidResize(_ notification: Notification) {
+    if let w = window {
+      let wSize = w.frame.size, cSize = controlBar.frame.size
+      w.setFrame(w.constrainFrameRect(w.frame, to: w.screen), display: false)
+      // update control bar position
+      let cph = ud.float(forKey: Preference.Key.controlBarPositionHorizontal)
+      let cpv = ud.float(forKey: Preference.Key.controlBarPositionVertical)
+      controlBar.setFrameOrigin(NSMakePoint(
+        wSize.width * CGFloat(cph) - cSize.width * 0.5,
+        wSize.height * CGFloat(cpv)
+      ))
     }
   }
   

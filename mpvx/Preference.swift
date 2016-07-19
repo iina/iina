@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Preference: NSObject {
+struct Preference {
   
   struct Key {
     /** Window position. (float) */
@@ -27,16 +27,11 @@ class Preference: NSObject {
     static let  controlBarAutoHideTimeout  = "controlBarAutoHideTimeout"
   }
   
-  let defaultPreference:[String : AnyObject] = [
-    Key.controlBarPositionHorizontal: Float(50),
-    Key.controlBarPositionVertical: Float(10),
+  static let defaultPreference:[String : AnyObject] = [
+    Key.controlBarPositionHorizontal: Float(0.5),
+    Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,
     Key.controlBarAutoHideTimeout: 5,
   ]
-  
-  override init() {
-    UserDefaults.standard.register(defaultPreference)
-  }
-  
 
 }

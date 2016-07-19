@@ -28,7 +28,7 @@ class VideoView: NSOpenGLView {
       // Initialize the mpv OpenGL state.
       mpv_opengl_cb_init_gl(mpvGLContext, nil, getGLProcAddress, nil)
       // Set the callback that notifies you when a new video frame is available, or requires a redraw.
-      mpv_opengl_cb_set_update_callback(mpvGLContext, mpvGLUpdate, UnsafeMutablePointer<Void>(unsafeAddress(of: self)));
+      mpv_opengl_cb_set_update_callback(mpvGLContext, mpvGLUpdate, UnsafeMutablePointer<Void>(unsafeAddress(of: self)))
     }
   }
   
@@ -62,10 +62,12 @@ class VideoView: NSOpenGLView {
   var texUniform: GLint = GLint()
   let vertexData: [GLfloat] = [
     // X     Y      U    V
-    -1.0, -1.0, 0,  0.0, 0.0,
-    -1.0,  1.0, 0,  0.0, 1.0,
-     1.0,  1.0, 0,  1.0, 1.0,
-//     1.0, -1.0, 0,  1.0, 0.0,
+    -1.0, -1.0,   0.0, 0.0,
+    -1.0,  1.0,   0.0, 1.0,
+     1.0,  1.0,   1.0, 1.0,
+     1.0,  1.0,   1.0, 1.0,
+     1.0, -1.0,   1.0, 0.0,
+    -1.0, -1.0,   0.0, 0.0,
   ]
   
   /** Whether mpv started drawing */
@@ -118,59 +120,32 @@ class VideoView: NSOpenGLView {
     glDetachShader(program, fragShader)
     
     // set up vbo and vao
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GLenum(GL_ARRAY_BUFFER), vbo);
-    glBufferData(GLenum(GL_ARRAY_BUFFER), sizeof(GLfloat.self) * vertexData.count, vertexData, GLenum(GL_STATIC_DRAW));
+    glGenVertexArrays(1, &vao)
+    glBindVertexArray(vao)
+    glGenBuffers(1, &vbo)
+    glBindBuffer(GLenum(GL_ARRAY_BUFFER), vbo)
+    glBufferData(GLenum(GL_ARRAY_BUFFER), sizeof(GLfloat.self) * vertexData.count, vertexData, GLenum(GL_STATIC_DRAW))
+    let stride = GLsizei(4*sizeof(GLfloat.self))
     // connect x, y -> vert
     let vertPtr = glGetAttribLocation(program, "vert")
     Utility.assert(vertPtr != -1, "Cannot get location for vertex variable")
     glEnableVertexAttribArray(GLuint(vertPtr))
-    glVertexAttribPointer(GLuint(vertPtr), 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(5*sizeof(GLfloat.self)), nil);
+    glVertexAttribPointer(GLuint(vertPtr), 2, GLenum(GL_FLOAT), GLboolean(GL_FALSE), stride, nil)
     // connect u, v -> vertTexCoord
-    let offset = 3*sizeof(GLfloat.self)
+    let offset = 2*sizeof(GLfloat.self)
     let vertTexCoordPtr = glGetAttribLocation(program, "vertTexCoord")
     Utility.assert(vertTexCoordPtr != -1, "Cannot get location for texture coord variable")
     glEnableVertexAttribArray(GLuint(vertTexCoordPtr))
-    glVertexAttribPointer(GLuint(vertTexCoordPtr), 2, GLenum(GL_FLOAT), GLboolean(GL_TRUE), GLsizei(5*sizeof(GLfloat.self)), UnsafePointer<GLuint>(bitPattern: offset));
-    glBindVertexArray(0);
+    glVertexAttribPointer(GLuint(vertTexCoordPtr), 2, GLenum(GL_FLOAT), GLboolean(GL_TRUE), stride, UnsafePointer<GLuint>(bitPattern: offset))
+    glBindVertexArray(0)
     glBindFragDataLocation(program, 0, "color")
     // get texture uniform location
     texUniform = glGetUniformLocation(program, "tex")
     Utility.assert(texUniform != -1, "Cannot get location for texture uniform variable")
-    gle()
+    
+    // other settings
     autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
     wantsBestResolutionOpenGLSurface = true
-  }
-  
-  private func initShader(_ name: String, type: GLenum) -> GLuint {
-    // load shader
-    let shaderPath = Bundle.main.pathForResource(name, ofType: "glsl")!
-    var shaderContent: NSString? = nil
-    do {
-      shaderContent = try NSString(contentsOfFile: shaderPath, encoding: String.Encoding.utf8.rawValue)
-    } catch let error as NSError{
-      Utility.fatal("Cannot load \(name): \(error)")
-    }
-    var shaderString = shaderContent!.utf8String
-    var shaderStringLength = GLint(shaderContent!.length)
-    // create shader
-    let shader = glCreateShader(type)
-    // set source
-    glShaderSource(shader, 1, &shaderString, &shaderStringLength)
-    // compile shader
-    glCompileShader(shader)
-    // check error
-    var flag = GLint()
-    glGetShaderiv(shader, GLenum(GL_COMPILE_STATUS), &flag)
-    Utility.assert(flag != GL_FALSE, "Cannot compile shader \(name)") {
-      var len = GLsizei()
-      let str = UnsafeMutablePointer<Int8>.init(allocatingCapacity: 2000)
-      glGetShaderInfoLog(shader, GLsizei(2000), &len, str)
-      Utility.log(String(cString: str))
-    }
-    return shader
   }
 
   required init?(coder: NSCoder) {
@@ -193,28 +168,28 @@ class VideoView: NSOpenGLView {
     openGLContext!.setValues(&swapInt, for: NSOpenGLCPSwapInterval)
   }
   
-  func prepareVideoFrameBuffer(_ size: NSSize) {
+  /** Set up the frame buffer needed for offline rendering. */
+  private func prepareVideoFrameBuffer(_ size: NSSize) {
     openGLContext!.makeCurrentContext()
     // create frame buffer
     glGenFramebuffers(GLsizei(1), &fbo)
     Utility.assert(fbo > 0, "Cannot generate fbo")
     glBindFramebuffer(GLenum(GL_FRAMEBUFFER), fbo)
     // create texture
-    glGenTextures(1, &texture);
+    glGenTextures(1, &texture)
     Utility.assert(texture > 0, "Cannot generate texture")
     glBindTexture(GLenum(GL_TEXTURE_2D), texture)
     // bing texture
-    glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR);
-    glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR);
+    glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR)
+    glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
     glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA8, GLsizei(size.width), GLsizei(size.height), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), nil)
     glFramebufferTexture2D(GLenum(GL_FRAMEBUFFER), GLenum(GL_COLOR_ATTACHMENT0), GLenum(GL_TEXTURE_2D), texture, 0)
     // check whether frame buffer is completed
     let status = glCheckFramebufferStatus(GLenum(GL_FRAMEBUFFER))
-    Utility.assert(status == GLenum(GL_FRAMEBUFFER_COMPLETE), "Frame buffer check failed!")
+    Utility.assert(status == GLenum(GL_FRAMEBUFFER_COMPLETE), "Frame buffer check failed")
     // bind back to main framebuffer (may not necessary)
     glBindTexture(GLenum(GL_TEXTURE_2D), 0)
     glBindFramebuffer(GLenum(GL_FRAMEBUFFER), 0)
-    gle()
   }
   
   /**
@@ -228,11 +203,8 @@ class VideoView: NSOpenGLView {
       _ flagsIn: CVOptionFlags,
       _ flagsOut: UnsafeMutablePointer<CVOptionFlags>,
       _ context: UnsafeMutablePointer<Void>?) -> CVReturn {
-      
       let videoView = unsafeBitCast(context, to: VideoView.self)
       videoView.drawVideo()
-      
-//      videoView.needsDisplay = true
       return kCVReturnSuccess
     }
     //
@@ -255,9 +227,7 @@ class VideoView: NSOpenGLView {
   
   // MARK: - Drawing
   
-  /**
-   Draw offscreen to framebuffer.
-   */
+  /** Draw offscreen to the framebuffer. */
   func drawFrame() {
     if !started {
       started = true
@@ -274,24 +244,19 @@ class VideoView: NSOpenGLView {
     renderContext.flushBuffer()
     // report flip to mpv
     if let context = self.mpvGLContext {
-      mpv_opengl_cb_report_flip( context, 0 );
+      mpv_opengl_cb_report_flip( context, 0 )
     }
     renderContext.unlock()
   }
   
-  /**
-   Draw the video to view from framebuffer.
-   */
+  /** Draw the video to view from framebuffer. */
   func drawVideo() {
     openGLContext?.lock()
     openGLContext?.makeCurrentContext()
-    
-    if !started {
-      glClearColor(0, 0, 0, 0)
+
+    if started {
+      glClearColor(0, 0, 0, 1)
       glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-    } else {
-      glClearColor(0, 0, 0, 1);
-      glClear(GLbitfield(GL_COLOR_BUFFER_BIT));
       
       glBindFramebuffer(GLenum(GL_FRAMEBUFFER), 0)
       glUseProgram(program)
@@ -301,10 +266,9 @@ class VideoView: NSOpenGLView {
       glUniform1i(texUniform, 0)
       
       glBindVertexArray(vao)
-      glDrawArrays(GLenum(GL_TRIANGLES), 0, 3);
-      gle()
-      
+      glDrawArrays(GLenum(GL_TRIANGLES), 0, 6)
       glBindVertexArray(0)
+      
       glBindTexture (GLenum(GL_TEXTURE_2D), 0)
       glUseProgram(0)
     }
@@ -312,24 +276,50 @@ class VideoView: NSOpenGLView {
     openGLContext?.unlock()
   }
   
-  /**
-   This function is mainly called when bound changes, e.g. resize window
-   */
+  /** This function is mainly called when bound changes, e.g. resize window */
   override func draw(_ dirtyRect: NSRect) {
-    drawVideo()
+//    drawVideo()
   }
   
   // MARK: - Utils
   
-  /**
-   Check the CVReturn value.
-   */
-  func checkCVReturn(_ value: CVReturn) {
-    if value != kCVReturnSuccess {
-      Utility.fatal("CVReturn not success: \(value)")
+  /** Load a shader. */
+  private func initShader(_ name: String, type: GLenum) -> GLuint {
+    // load shader
+    let shaderPath = Bundle.main.pathForResource(name, ofType: "glsl")!
+    var shaderContent: NSString? = nil
+    do {
+      shaderContent = try NSString(contentsOfFile: shaderPath, encoding: String.Encoding.utf8.rawValue)
+    } catch let error as NSError{
+      Utility.fatal("Cannot load \(name): \(error)")
     }
+    var shaderString = shaderContent!.utf8String
+    var shaderStringLength = GLint(shaderContent!.length)
+    
+    // create & compile shader
+    let shader = glCreateShader(type)
+    glShaderSource(shader, 1, &shaderString, &shaderStringLength)
+    glCompileShader(shader)
+    
+    // check error
+    var flag = GLint()
+    glGetShaderiv(shader, GLenum(GL_COMPILE_STATUS), &flag)
+    Utility.assert(flag != GL_FALSE, "Cannot compile shader \(name)") {
+      var len = GLsizei()
+      let str = UnsafeMutablePointer<Int8>.init(allocatingCapacity: 2000)
+      glGetShaderInfoLog(shader, GLsizei(2000), &len, str)
+      Utility.log(String(cString: str))
+    }
+    
+    return shader
   }
   
+  /** Check the CVReturn value. */
+  private func checkCVReturn(_ value: CVReturn) {
+    Utility.assert(value == kCVReturnSuccess, "CVReturn not success: \(value)")
+  }
+  
+  /** Check OpenGL error (for debug only). */
   func gle() {
     let e = glGetError()
     switch e {

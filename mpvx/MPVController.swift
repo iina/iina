@@ -21,6 +21,10 @@ func wakeup(_ ctx: UnsafeMutablePointer<Void>?) {
   mpvController.readEvents()
 }
 
+protocol MPVEventDelegate {
+  func onMPVEvent(_ event: MPVEvent)
+}
+
 class MPVController: NSObject {
   // The mpv_handle
   var mpv: OpaquePointer!
@@ -53,6 +57,9 @@ class MPVController: NSObject {
     
     // Receive log messages at warn level.
     e(mpv_request_log_messages(mpv, "warn"))
+    
+    // Request tick event.
+    // e(mpv_request_event(mpv, MPV_EVENT_TICK, 1))
     
     // Set a custom function that should be called when there are new events.
     mpv_set_wakeup_callback(self.mpv, wakeup, UnsafeMutablePointer(unsafeAddress(of: self)))
@@ -156,6 +163,9 @@ class MPVController: NSObject {
     case MPV_EVENT_FILE_LOADED:
       onFileLoaded()
       break
+    case MPV_EVENT_TRACKS_CHANGED:
+      onTrackChanged()
+      break
     default:
       let eventName = String(cString: mpv_event_name(eventId))
       Utility.log("MPV event (unhandled): \(eventName)")
@@ -174,6 +184,14 @@ class MPVController: NSObject {
     mpv_get_property(mpv, "width", MPV_FORMAT_INT64, &width)
     mpv_get_property(mpv, "height", MPV_FORMAT_INT64, &height)
     playerController.fileLoadedWithVideoSize(Int(width), Int(height))
+  }
+  
+  func onTrackChanged() {
+    playerController.mainWindow.updateTitle()
+  }
+  
+  func onTick() {
+    
   }
   
   // MARK: Utils

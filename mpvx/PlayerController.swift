@@ -26,6 +26,8 @@ class PlayerController: NSObject {
     return window
   }()
   
+  lazy var info: PlaybackInfo = PlaybackInfo()
+  
   var statusPaused: Bool = false
   
   // Open a file
@@ -36,7 +38,7 @@ class PlayerController: NSObject {
       return
     }
     Utility.log("Open File \(path!)")
-    AppData.currentURL = url
+    info.currentURL = url
     mainWindow.showWindow(nil)
     // Send load file command
     mpvController.mpvCommand(["loadfile", path, nil])

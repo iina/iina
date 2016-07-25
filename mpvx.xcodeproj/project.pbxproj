@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		844DE1BF1D3E2B9900272589 /* MPVExtend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DE1BE1D3E2B9900272589 /* MPVExtend.swift */; };
 		8452DD851D3B956D008A543A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452DD841D3B956D008A543A /* Preference.swift */; };
 		8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD881D3CB4EF008A543A /* vertexShader.glsl */; };
 		8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD8A1D3CB519008A543A /* fragmentShader.glsl */; };
 		845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB0C61D39462E00C011E0 /* ControlBarView.swift */; };
 		845FB0CA1D3A16CC00C011E0 /* PreferenceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB0C81D3A16CC00C011E0 /* PreferenceWindow.swift */; };
 		845FB0CB1D3A16CC00C011E0 /* PreferenceWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845FB0C91D3A16CC00C011E0 /* PreferenceWindow.xib */; };
+		8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */; };
+		84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */; };
 		84A0BA901D2F8D4100BC8DA1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA8F1D2F8D4100BC8DA1 /* Error.swift */; };
 		84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */; };
 		84A0BA971D2FA1CE00BC8DA1 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA961D2FA1CE00BC8DA1 /* PlayerController.swift */; };
@@ -24,7 +27,6 @@
 		84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */; };
 		84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */; };
 		84EB1EEA1D2F51D3004FA5A1 /* mpvxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */; };
-		84EB1F031D2F59A4004FA5A1 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F021D2F59A4004FA5A1 /* Environment.swift */; };
 		84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F041D2F5C5B004FA5A1 /* AppData.swift */; };
 		84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F061D2F5E76004FA5A1 /* Utility.swift */; };
 		84FF84791D2FF698001B318A /* libmpv.1.21.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84741D2FF698001B318A /* libmpv.1.21.0.dylib */; };
@@ -44,12 +46,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		844DE1BE1D3E2B9900272589 /* MPVExtend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVExtend.swift; sourceTree = "<group>"; };
 		8452DD841D3B956D008A543A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		8452DD881D3CB4EF008A543A /* vertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertexShader.glsl; sourceTree = "<group>"; };
 		8452DD8A1D3CB519008A543A /* fragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragmentShader.glsl; sourceTree = "<group>"; };
 		845FB0C61D39462E00C011E0 /* ControlBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
 		845FB0C81D3A16CC00C011E0 /* PreferenceWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceWindow.swift; sourceTree = "<group>"; };
 		845FB0C91D3A16CC00C011E0 /* PreferenceWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferenceWindow.xib; sourceTree = "<group>"; };
+		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
+		84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackInfo.swift; sourceTree = "<group>"; };
 		8497A4831D2FF573005F504F /* mpvx-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mpvx-Bridging-Header.h"; sourceTree = "<group>"; };
 		84A0BA8F1D2F8D4100BC8DA1 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		84A0BA941D2F9E9600BC8DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -66,7 +71,6 @@
 		84EB1EE51D2F51D3004FA5A1 /* mpvxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mpvxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mpvxTests.swift; sourceTree = "<group>"; };
 		84EB1EEB1D2F51D3004FA5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84EB1F021D2F59A4004FA5A1 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		84EB1F041D2F5C5B004FA5A1 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		84EB1F061D2F5E76004FA5A1 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		84FF84701D2FF698001B318A /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 			children = (
 				84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */,
 				84A0BA9C1D2FAD4000BC8DA1 /* MainWindow.swift */,
+				8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */,
 				84A0BA9D1D2FAD4000BC8DA1 /* MainWindow.xib */,
 				845FB0C61D39462E00C011E0 /* ControlBarView.swift */,
 				84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */,
@@ -139,7 +144,6 @@
 				8497A4831D2FF573005F504F /* mpvx-Bridging-Header.h */,
 				84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */,
 				84EB1F061D2F5E76004FA5A1 /* Utility.swift */,
-				84EB1F021D2F59A4004FA5A1 /* Environment.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -149,7 +153,9 @@
 			children = (
 				84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */,
 				84A0BA961D2FA1CE00BC8DA1 /* PlayerController.swift */,
+				84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */,
 				84A0BA981D2FAAA700BC8DA1 /* MPVController.swift */,
+				844DE1BE1D3E2B9900272589 /* MPVExtend.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -407,8 +413,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */,
 				8452DD851D3B956D008A543A /* Preference.swift in Sources */,
 				84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */,
+				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindow.swift in Sources */,
 				84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */,
 				84A0BA901D2F8D4100BC8DA1 /* Error.swift in Sources */,
@@ -416,8 +424,8 @@
 				84A0BA9B1D2FAB4100BC8DA1 /* Parameter.swift in Sources */,
 				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,
+				844DE1BF1D3E2B9900272589 /* MPVExtend.swift in Sources */,
 				84A0BA971D2FA1CE00BC8DA1 /* PlayerController.swift in Sources */,
-				84EB1F031D2F59A4004FA5A1 /* Environment.swift in Sources */,
 				845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,
 			);
@@ -551,6 +559,7 @@
 					"$(PROJECT_DIR)/libmpv/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "mpvx/mpvx-Bridging-Header.h";
@@ -573,6 +582,7 @@
 					"$(PROJECT_DIR)/libmpv/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "mpvx/mpvx-Bridging-Header.h";

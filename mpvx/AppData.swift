@@ -9,6 +9,5 @@
 import Foundation
 
 struct AppData {
-  static var mpvPath: String?
-  static var currentURL: URL?
+  static let getTimeInterval: Float = 0.5
 }

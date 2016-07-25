@@ -18,8 +18,6 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
   
-  @IBOutlet weak var btn: NSButton!
-  
   override var windowNibName: String {
     return "MainWindow"
   }
@@ -27,10 +25,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   var fadeableViews: [NSView?] = []
   
   enum UIAnimationState {
-    case shown
-    case hidden
-    case willShow
-    case willHide
+    case shown, hidden, willShow, willHide
   }
   var animationState: UIAnimationState = .shown
   
@@ -40,6 +35,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var titleBarView: NSVisualEffectView!
   @IBOutlet weak var titleBarTitleCell: NSTextFieldCell!
   @IBOutlet weak var controlBar: ControlBarView!
+  @IBOutlet weak var playButton: NSButton!
   
 
   override func windowDidLoad() {
@@ -50,8 +46,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     w.titlebarAppearsTransparent = true
     // need to deal with control bar, so handle it manually
     // w.isMovableByWindowBackground  = true
-    w.title = AppData.currentURL!.lastPathComponent!
-    titleBarTitleCell.title = w.title
+    updateTitle()
     if #available(OSX 10.11, *), UserDefaults.standard.bool(forKey: Preference.Key.controlBarDarker) {
       titleBarView.material = .ultraDark
     }
@@ -73,7 +68,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     w.makeKeyAndOrderFront(nil)
   }
   
-  // MARK: Lazy initializers
+  // MARK: - Lazy initializers
   
   func initVideoView() -> VideoView {
     let v = VideoView(frame: window!.contentView!.bounds)
@@ -134,12 +129,14 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     hideControlTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideUIAndCurdor), userInfo: nil, repeats: false)
   }
   
+  // MARK: - Control UI
+  
   func hideUIAndCurdor() {
     hideUI()
     NSCursor.setHiddenUntilMouseMoves(true)
   }
   
-  func hideUI() {
+  private func hideUI() {
     fadeableViews.forEach { (v) in
       v?.alphaValue = 1
     }
@@ -160,7 +157,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
   }
   
-  func showUI () {
+  private func showUI () {
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v?.isHidden = false
@@ -176,6 +173,14 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
   }
   
+  func updateTitle() {
+    if let w = window, url = playerController.info.currentURL?.lastPathComponent {
+      w.title = url
+      titleBarTitleCell.title = url
+    }
+  }
+  
+  // MARK: - Window size
   
   func windowDidResize(_ notification: Notification) {
     if let w = window {
@@ -234,5 +239,19 @@ class MainWindow: NSWindowController, NSWindowDelegate {
       self.videoView.videoSize = videoSize
     }
   }
+  
+  // MARK: - IBAction
+  
+  /** Play button: pause & resume */
+  @IBAction func playButtonAction(_ sender: NSButton) {
+    if sender.state == NSOnState {
+      playerController.togglePause(true)
+    }
+    if sender.state == NSOffState {
+      playerController.togglePause(false)
+    }
+  }
+  
+  
   
 }

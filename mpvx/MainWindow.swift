@@ -28,10 +28,15 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   enum UIAnimationState {
     case shown, hidden, willShow, willHide
   }
+  
   var animationState: UIAnimationState = .shown
+  
+  var osdAnimationState: UIAnimationState = .hidden
   
   /** For auto hiding ui after a timeout */
   var hideControlTimer: Timer?
+  
+  var hideOSDTimer: Timer?
   
   @IBOutlet weak var titleBarView: NSVisualEffectView!
   @IBOutlet weak var titleBarTitleCell: NSTextFieldCell!
@@ -41,6 +46,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   @IBOutlet weak var rightLabel: NSTextField!
   @IBOutlet weak var leftLabel: NSTextField!
+  @IBOutlet weak var osd: NSTextField!
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -67,6 +73,8 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     // video view
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
     playerController.startMPVOpenGLCB(videoView)
+    // other initialization
+    osd.isHidden = true
     // make main
     w.makeMain()
     w.makeKeyAndOrderFront(nil)
@@ -90,9 +98,17 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     if controlBar.isDragging {
       return
     }
-    mousePosRelatedToWindow = NSEvent.mouseLocation()
-    mousePosRelatedToWindow!.x -= window!.frame.origin.x
-    mousePosRelatedToWindow!.y -= window!.frame.origin.y
+    var mousePos = NSEvent.mouseLocation()
+    mousePos.x -= window!.frame.origin.x
+    mousePos.y -= window!.frame.origin.y
+    Swift.print(mousePos)
+    Swift.print(titleBarView.bounds)
+    // FIXME: shoule exist a better solution
+    if NSPointInRect(mousePos, titleBarView.bounds) {
+      mousePosRelatedToWindow = nil
+      return
+    }
+    mousePosRelatedToWindow = mousePos
   }
   
   override func mouseDragged(_ event: NSEvent) {
@@ -106,6 +122,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
         y: currentLocation.y - mousePosRelatedToWindow!.y
       )
       window?.setFrameOrigin(newOrigin)
+      Swift.print("jitter \(arc4random())")
     }
   }
   
@@ -182,6 +199,31 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     if let w = window, url = playerController.info.currentURL?.lastPathComponent {
       w.title = url
       titleBarTitleCell.title = url
+    }
+  }
+  
+  func displayOSD(_ message: String) {
+    if hideOSDTimer != nil {
+      hideOSDTimer!.invalidate()
+      hideOSDTimer = nil
+    }
+    osdAnimationState = .shown
+    osd.stringValue = message
+    osd.alphaValue = 1
+    osd.isHidden = false
+    let timeout = ud.integer(forKey: Preference.Key.osdAutoHideTimeout)
+    hideOSDTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideOSD), userInfo: nil, repeats: false)
+  }
+  
+  @objc private func hideOSD() {
+    NSAnimationContext.runAnimationGroup({ (context) in
+      self.osdAnimationState = .willHide
+      context.duration = 0.5
+      osd.animator().alphaValue = 0
+    }) {
+      if self.osdAnimationState == .willHide {
+        self.osdAnimationState = .hidden
+      }
     }
   }
   
@@ -284,6 +326,13 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
     let percentage = 100 * sender.doubleValue / sender.maxValue
     playerController.seek(percent: percentage)
+  }
+  
+  
+  @IBAction func volumeSliderChanges(_ sender: NSSlider) {
+    let value = sender.integerValue
+    playerController.setVolume(value)
+    displayOSD("Volume: \(value)")
   }
   
   

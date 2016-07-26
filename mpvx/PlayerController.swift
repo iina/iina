@@ -86,6 +86,10 @@ class PlayerController: NSObject {
     mpvController.mpvCommand(["seek", "\(percent)", seekMode, nil])
   }
   
+  func setVolume(_ volume: Int) {
+    mpvController.mpvSetIntProperty("volume", Int64(volume))
+  }
+  
   func fileLoaded() {
     DispatchQueue.main.sync {
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),

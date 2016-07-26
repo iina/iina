@@ -10,7 +10,7 @@ import Cocoa
 
 class PlaySliderCell: NSSliderCell {
   
-  let knobWidth: CGFloat = 2
+  let knobWidth: CGFloat = 3
   let knobHeight: CGFloat = 13
   let knobRadius: CGFloat = 2
   

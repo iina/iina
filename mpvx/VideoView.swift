@@ -253,11 +253,12 @@ class VideoView: NSOpenGLView {
   func drawVideo() {
     openGLContext?.lock()
     openGLContext?.makeCurrentContext()
-
+    
+    // should clear color especially before started receiving frames
+    glClearColor(0, 0, 0, 1)
+    glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+    
     if started {
-      glClearColor(0, 0, 0, 1)
-      glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-      
       glBindFramebuffer(GLenum(GL_FRAMEBUFFER), 0)
       glUseProgram(program)
       

@@ -29,6 +29,8 @@ struct Preference {
     /** Whether use ultra dark material for controlbar and title bar (bool) */
     static let controlBarDarker = "controlBarDarker"
     
+    static let osdAutoHideTimeout = "osdAutoHideTimeout"
+    
     /** Soft volume (int, 0 - 100)*/
     static let softVolume = "softVolume"
     
@@ -41,6 +43,7 @@ struct Preference {
     Key.controlBarStickToCenter: true,
     Key.controlBarAutoHideTimeout: 5,
     Key.controlBarDarker: false,
+    Key.osdAutoHideTimeout: 1,
     Key.softVolume: 50,
     Key.useExactSeek: true,
   ]

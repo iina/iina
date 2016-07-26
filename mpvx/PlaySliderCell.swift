@@ -10,9 +10,9 @@ import Cocoa
 
 class PlaySliderCell: NSSliderCell {
   
-  var knobWidth: CGFloat = 2
-  var knobHeight: CGFloat = 15
-  var knobRadius: CGFloat = 2
+  let knobWidth: CGFloat = 2
+  let knobHeight: CGFloat = 13
+  let knobRadius: CGFloat = 2
   
   override func awakeFromNib() {
     minValue = 0
@@ -20,12 +20,24 @@ class PlaySliderCell: NSSliderCell {
   }
   
   override func drawKnob(_ knobRect: NSRect) {
-    let rect = NSMakeRect(knobRect.origin.x + 0.5 * (knobRect.width - knobWidth),
+    let rect = NSMakeRect(knobRect.origin.x,
                           knobRect.origin.y + 0.5 * (knobRect.height - knobHeight),
-                          knobWidth,
+                          knobRect.width,
                           knobHeight)
     let path = NSBezierPath(roundedRect: rect, xRadius: 2, yRadius: 2)
     NSColor(red: 1, green: 1, blue: 1, alpha: 0.9).setFill()
     path.fill()
   }
+  
+  override func knobRect(flipped: Bool) -> NSRect {
+    let slider = self.controlView as! NSSlider
+    let bounds = super.barRect(flipped: flipped)
+    let percentage = slider.doubleValue / (slider.maxValue - slider.minValue)
+    let pos = CGFloat(percentage) * bounds.width
+    let rect = super.knobRect(flipped: flipped)
+    let flippedMultiplier = flipped ? CGFloat(-1) : CGFloat(1)
+    return NSMakeRect(pos - flippedMultiplier * 0.5 * knobWidth, rect.origin.y, knobWidth, rect.height)
+    
+  }
+  
 }

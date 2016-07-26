@@ -9,5 +9,5 @@
 import Foundation
 
 struct AppData {
-  static let getTimeInterval: Float = 0.5
+  static let getTimeInterval: Double = 0.5
 }

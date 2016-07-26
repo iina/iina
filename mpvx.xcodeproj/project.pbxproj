@@ -15,6 +15,7 @@
 		845FB0CA1D3A16CC00C011E0 /* PreferenceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB0C81D3A16CC00C011E0 /* PreferenceWindow.swift */; };
 		845FB0CB1D3A16CC00C011E0 /* PreferenceWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845FB0C91D3A16CC00C011E0 /* PreferenceWindow.xib */; };
 		8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */; };
+		8461C5301D462488006E91FF /* VideoTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52F1D462488006E91FF /* VideoTime.swift */; };
 		84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */; };
 		84A0BA901D2F8D4100BC8DA1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA8F1D2F8D4100BC8DA1 /* Error.swift */; };
 		84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */; };
@@ -54,6 +55,7 @@
 		845FB0C81D3A16CC00C011E0 /* PreferenceWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceWindow.swift; sourceTree = "<group>"; };
 		845FB0C91D3A16CC00C011E0 /* PreferenceWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferenceWindow.xib; sourceTree = "<group>"; };
 		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
+		8461C52F1D462488006E91FF /* VideoTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTime.swift; sourceTree = "<group>"; };
 		84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackInfo.swift; sourceTree = "<group>"; };
 		8497A4831D2FF573005F504F /* mpvx-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mpvx-Bridging-Header.h"; sourceTree = "<group>"; };
 		84A0BA8F1D2F8D4100BC8DA1 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				8497A4831D2FF573005F504F /* mpvx-Bridging-Header.h */,
 				84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */,
 				84EB1F061D2F5E76004FA5A1 /* Utility.swift */,
+				8461C52F1D462488006E91FF /* VideoTime.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				8452DD851D3B956D008A543A /* Preference.swift in Sources */,
 				84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */,
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
+				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindow.swift in Sources */,
 				84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */,
 				84A0BA901D2F8D4100BC8DA1 /* Error.swift in Sources */,

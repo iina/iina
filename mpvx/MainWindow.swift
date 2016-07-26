@@ -24,6 +24,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   var fadeableViews: [NSView?] = []
   
+  /** Animation state of he hide/show part */
   enum UIAnimationState {
     case shown, hidden, willShow, willHide
   }
@@ -36,7 +37,10 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var titleBarTitleCell: NSTextFieldCell!
   @IBOutlet weak var controlBar: ControlBarView!
   @IBOutlet weak var playButton: NSButton!
+  @IBOutlet weak var playSlider: NSSlider!
   
+  @IBOutlet weak var rightLabel: NSTextField!
+  @IBOutlet weak var leftLabel: NSTextField!
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -66,6 +70,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     // make main
     w.makeMain()
     w.makeKeyAndOrderFront(nil)
+    w.setIsVisible(false)
   }
   
   // MARK: - Lazy initializers
@@ -196,10 +201,12 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
   }
   
-  /**
-   Set video size when info available.
-   */
-  func adjustFrameByVideoSize(_ width: Int, _ height: Int) {
+  /** Set video size when info available. */
+  func adjustFrameByVideoSize() {
+    guard let width = playerController.info.videoWidth, let height = playerController.info.videoHeight else {
+      Utility.fatal("video info not available")
+      return
+    }
     // set aspect ratio
     let aspectRatio = Float(width) / Float(height)
     var videoSize = NSSize(width: width, height: height)
@@ -231,12 +238,29 @@ class MainWindow: NSWindowController, NSWindowDelegate {
         }
       }
       // check default window position
-      
     }
     
     self.window!.setContentSize(videoSize)
     if self.videoView.videoSize == nil {
       self.videoView.videoSize = videoSize
+    }
+    window!.setIsVisible(true)
+    // UI and slider
+    updatePlayTime(withDuration: true, andProgressBar: true)
+  }
+  
+  func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
+    guard let duration = playerController.info.videoDuration, let pos = playerController.info.videoPosition else {
+      Utility.fatal("video info not available")
+      return
+    }
+    let percantage = (Double(pos.second) / Double(duration.second)) * 100
+    leftLabel.stringValue = pos.stringRepresentation
+    if withDuration {
+      rightLabel.stringValue = duration.stringRepresentation
+    }
+    if andProgressBar {
+      playSlider.doubleValue = percantage
     }
   }
   
@@ -252,6 +276,15 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
   }
   
+  /** When slider changes */
+  @IBAction func playSliderChanges(_ sender: NSSlider) {
+    guard let duration = playerController.info.videoDuration else {
+      Utility.fatal("video info not available")
+      return
+    }
+    let percentage = 100 * sender.doubleValue / sender.maxValue
+    playerController.seek(percent: percentage)
+  }
   
   
 }

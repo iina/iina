@@ -10,6 +10,8 @@ import Cocoa
 
 class PlayerController: NSObject {
   
+  let ud: UserDefaults = UserDefaults.standard
+  
   lazy var mainWindow: MainWindow! = {
     let window = MainWindow()
     window.playerController = self
@@ -27,6 +29,8 @@ class PlayerController: NSObject {
   }()
   
   lazy var info: PlaybackInfo = PlaybackInfo()
+  
+  var syncPlayTimeTimer: Timer?
   
   var statusPaused: Bool = false
   
@@ -55,11 +59,14 @@ class PlayerController: NSObject {
   
   // Terminate mpv
   func terminateMPV() {
+    syncPlayTimeTimer?.invalidate()
     mpvController.mpvQuit()
     mainWindow.videoView.clearGLContext()
   }
   
-  // Pause / resume
+  // MARK: - mpv commands
+  
+  /** Pause / resume */
   func togglePause(_ set: Bool?) {
     if let setPause = set {
       mpvController.mpvSetFlagProperty("pause", setPause)
@@ -74,11 +81,24 @@ class PlayerController: NSObject {
     }
   }
   
-  func fileLoadedWithVideoSize(_ width: Int, _ height: Int) {
+  func seek(percent: Double) {
+    let seekMode = ud.bool(forKey: Preference.Key.useExactSeek) ? "absolute-percent+exact" : "absolute-percent"
+    mpvController.mpvCommand(["seek", "\(percent)", seekMode, nil])
+  }
+  
+  func fileLoaded() {
     DispatchQueue.main.sync {
-      mainWindow.adjustFrameByVideoSize(width, height)
+      syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
+                                               target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
+      mainWindow.adjustFrameByVideoSize()
     }
     mpvController.mpvResume()
+  }
+  
+  func syncUITime() {
+    let time = mpvController.mpvGetIntProperty("time-pos")
+    info.videoPosition!.second = time
+    mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
   }
 
 }

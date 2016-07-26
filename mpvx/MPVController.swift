@@ -113,6 +113,12 @@ class MPVController: NSObject {
     mpv_set_property(mpv, name, MPV_FORMAT_INT64, &data)
   }
   
+  func mpvGetIntProperty(_ name: String) -> Int {
+    var data = Int64()
+    mpv_get_property(mpv, name, MPV_FORMAT_INT64, &data)
+    return Int(data)
+  }
+  
   // MARK: - Events
   
   // Read event and handle it async
@@ -166,6 +172,12 @@ class MPVController: NSObject {
     case MPV_EVENT_TRACKS_CHANGED:
       onTrackChanged()
       break
+    case MPV_EVENT_SEEK:
+      playerController.syncUITime()
+      break
+    case MPV_EVENT_PLAYBACK_RESTART:
+      playerController.syncUITime()
+      break
     default:
       let eventName = String(cString: mpv_event_name(eventId))
       Utility.log("MPV event (unhandled): \(eventName)")
@@ -180,19 +192,21 @@ class MPVController: NSObject {
   func onFileLoaded() {
     mpvSuspend()
     // Get video size and set the initial window size
-    var width = Int64(), height = Int64()
-    mpv_get_property(mpv, "width", MPV_FORMAT_INT64, &width)
-    mpv_get_property(mpv, "height", MPV_FORMAT_INT64, &height)
-    playerController.fileLoadedWithVideoSize(Int(width), Int(height))
+    let width = mpvGetIntProperty("width")
+    let height = mpvGetIntProperty("height")
+    let duration = mpvGetIntProperty("duration")
+    let pos = mpvGetIntProperty("time-pos")
+    playerController.info.videoHeight = height
+    playerController.info.videoWidth = width
+    playerController.info.videoDuration = VideoTime(duration)
+    playerController.info.videoPosition = VideoTime(pos)
+    playerController.fileLoaded()
   }
   
   func onTrackChanged() {
     playerController.mainWindow.updateTitle()
   }
   
-  func onTick() {
-    
-  }
   
   // MARK: Utils
   

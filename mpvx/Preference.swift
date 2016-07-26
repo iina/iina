@@ -31,6 +31,8 @@ struct Preference {
     
     /** Soft volume (int, 0 - 100)*/
     static let softVolume = "softVolume"
+    
+    static let useExactSeek = "useExactSeek"
   }
   
   static let defaultPreference:[String : AnyObject] = [
@@ -40,6 +42,7 @@ struct Preference {
     Key.controlBarAutoHideTimeout: 5,
     Key.controlBarDarker: false,
     Key.softVolume: 50,
+    Key.useExactSeek: true,
   ]
 
 }

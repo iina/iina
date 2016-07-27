@@ -43,6 +43,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var controlBar: ControlBarView!
   @IBOutlet weak var playButton: NSButton!
   @IBOutlet weak var playSlider: NSSlider!
+  @IBOutlet weak var volumeSlider: NSSlider!
   
   @IBOutlet weak var rightLabel: NSTextField!
   @IBOutlet weak var leftLabel: NSTextField!
@@ -288,6 +289,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     window!.setIsVisible(true)
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)
+    updateVolume()
   }
   
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
@@ -303,6 +305,12 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     if andProgressBar {
       playSlider.doubleValue = percantage
     }
+  }
+  
+  func updateVolume() {
+    let volume = ud.integer(forKey: Preference.Key.softVolume)
+    playerController.setVolume(volume)
+    volumeSlider.integerValue = volume
   }
   
   // MARK: - IBAction

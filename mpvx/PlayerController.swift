@@ -79,6 +79,18 @@ class PlayerController: NSObject {
     }
   }
   
+  func toogleMute(_ set: Bool?) {
+    if let setMute = set {
+      mpvController.mpvSetFlagProperty(MPVProperty.mute, setMute)
+    } else {
+      if (mpvController.mpvGetFlagProperty(MPVProperty.mute)) {
+        mpvController.mpvSetFlagProperty(MPVProperty.mute, false)
+      } else {
+        mpvController.mpvSetFlagProperty(MPVProperty.mute, true)
+      }
+    }
+  }
+  
   func seek(percent: Double) {
     let seekMode = ud.bool(forKey: Preference.Key.useExactSeek) ? "absolute-percent+exact" : "absolute-percent"
     mpvController.mpvCommand([MPVCommand.seek, "\(percent)", seekMode, nil])
@@ -100,7 +112,7 @@ class PlayerController: NSObject {
   enum SyncUIOption {
     case Time
     case PlayButton
-    case VolumeButton
+    case MuteButton
   }
   
   func syncUITime() {
@@ -121,8 +133,11 @@ class PlayerController: NSObject {
       DispatchQueue.main.async {
         self.mainWindow.playButton.state = pause ? NSOffState : NSOnState
       }
-    default:
-      break
+    case .MuteButton:
+      let mute = mpvController.mpvGetFlagProperty(MPVProperty.mute)
+      DispatchQueue.main.async {
+        self.mainWindow.muteButton.state = mute ? NSOnState : NSOffState
+      }
     }
   }
 

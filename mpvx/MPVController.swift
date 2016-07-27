@@ -159,8 +159,14 @@ class MPVController: NSObject {
       
     case MPV_EVENT_PROPERTY_CHANGE:
       if let property = UnsafePointer<mpv_event_property>(event.pointee.data)?.pointee {
-        if strcmp(property.name, "video-params") == 0 {
+        let propertyName = String(property.name)
+        switch propertyName {
+        case MPVProperty.videoParams:
           onVideoParamsChange(UnsafePointer<mpv_node_list>(property.data))
+        case MPVProperty.mute:
+          playerController.syncUI(.MuteButton)
+        default:
+          Utility.log("MPV property changed (unhandled): \(propertyName)")
         }
       }
       

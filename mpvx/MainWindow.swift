@@ -44,6 +44,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var playButton: NSButton!
   @IBOutlet weak var playSlider: NSSlider!
   @IBOutlet weak var volumeSlider: NSSlider!
+  @IBOutlet weak var muteButton: NSButton!
   
   @IBOutlet weak var rightLabel: NSTextField!
   @IBOutlet weak var leftLabel: NSTextField!
@@ -62,7 +63,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
       titleBarView.material = .ultraDark
     }
     // size
-    w.minSize = NSMakeSize(200, 200)
+    w.minSize = NSMakeSize(500, 200)
     // fade-able views
     fadeableViews.append(w.standardWindowButton(.closeButton))
     fadeableViews.append(w.standardWindowButton(.miniaturizeButton))
@@ -325,6 +326,18 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
   }
   
+  /** mute button */
+  @IBAction func muteButtonAction(_ sender: NSButton) {
+    if sender.state == NSOnState {
+      playerController.toogleMute(true)
+      displayOSD(OSDMessage.mute)
+    }
+    if sender.state == NSOffState {
+      playerController.toogleMute(false)
+      displayOSD(OSDMessage.unMute)
+    }
+  }
+  
   /** When slider changes */
   @IBAction func playSliderChanges(_ sender: NSSlider) {
     guard let duration = playerController.info.videoDuration else {
@@ -339,7 +352,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.integerValue
     playerController.setVolume(value)
-    displayOSD("Volume: \(value)")
+    displayOSD(OSDMessage.volume(value))
   }
   
   

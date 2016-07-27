@@ -113,6 +113,11 @@ class MPVController: NSObject {
     mpv_set_property(mpv, name, MPV_FORMAT_INT64, &data)
   }
   
+  func mpvSetDoubleProperty(_ name: String, _ value: Double) {
+    var data = value
+    mpv_set_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
+  }
+  
   func mpvGetIntProperty(_ name: String) -> Int {
     var data = Int64()
     mpv_get_property(mpv, name, MPV_FORMAT_INT64, &data)

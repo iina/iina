@@ -34,7 +34,15 @@ struct Preference {
     /** Soft volume (int, 0 - 100)*/
     static let softVolume = "softVolume"
     
+    static let arrowButtonAction = "arrowBtnAction"
+    
     static let useExactSeek = "useExactSeek"
+  }
+  
+  enum ArrowButtonAction: Int {
+    case speed = 0
+    case playlist = 1
+    case seek = 2
   }
   
   static let defaultPreference:[String : AnyObject] = [
@@ -45,6 +53,7 @@ struct Preference {
     Key.controlBarDarker: false,
     Key.osdAutoHideTimeout: 1,
     Key.softVolume: 50,
+    Key.arrowButtonAction: ArrowButtonAction.speed.rawValue,
     Key.useExactSeek: true,
   ]
 

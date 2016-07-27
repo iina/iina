@@ -66,15 +66,19 @@ class PlayerController: NSObject {
   
   // MARK: - mpv commands
   
-  /** Pause / resume */
+  /** Pause / resume. Reset speed to 0 when pause. */
   func togglePause(_ set: Bool?) {
     if let setPause = set {
       mpvController.mpvSetFlagProperty(MPVProperty.pause, setPause)
+      if setPause {
+        setSpeed(0)
+      }
     } else {
       if (info.isPaused) {
         mpvController.mpvSetFlagProperty(MPVProperty.pause, false)
       } else {
         mpvController.mpvSetFlagProperty(MPVProperty.pause, true)
+        setSpeed(0)
       }
     }
   }
@@ -95,9 +99,25 @@ class PlayerController: NSObject {
     let seekMode = ud.bool(forKey: Preference.Key.useExactSeek) ? "absolute-percent+exact" : "absolute-percent"
     mpvController.mpvCommand([MPVCommand.seek, "\(percent)", seekMode, nil])
   }
+
+  func seek(relativeSecond: Double) {
+    let seekMode = "relative"
+    mpvController.mpvCommand([MPVCommand.seek, "\(relativeSecond)", seekMode, nil])
+  }
   
   func setVolume(_ volume: Int) {
     mpvController.mpvSetIntProperty(MPVProperty.volume, Int64(volume))
+  }
+
+  /** Set speed. A negative speed -x means slow by x times */
+  func setSpeed(_ speed: Double) {
+    var realSpeed = speed
+    if realSpeed == 0 {
+      realSpeed = 1
+    } else if realSpeed < 0 {
+      realSpeed = -1 / realSpeed
+    }
+    mpvController.mpvSetDoubleProperty(MPVProperty.speed, realSpeed)
   }
   
   func fileLoaded() {
@@ -131,7 +151,7 @@ class PlayerController: NSObject {
       let pause = mpvController.mpvGetFlagProperty(MPVProperty.pause)
       info.isPaused = pause
       DispatchQueue.main.async {
-        self.mainWindow.playButton.state = pause ? NSOffState : NSOnState
+        self.mainWindow.updatePlayButtonState(pause ? NSOffState : NSOnState)
       }
     case .MuteButton:
       let mute = mpvController.mpvGetFlagProperty(MPVProperty.mute)

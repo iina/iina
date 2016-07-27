@@ -38,6 +38,9 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   var hideOSDTimer: Timer?
   
+  /** The index of current speed in speed value array */
+  var speedValueIndex: Int = 5
+  
   @IBOutlet weak var titleBarView: NSVisualEffectView!
   @IBOutlet weak var titleBarTitleCell: NSTextFieldCell!
   @IBOutlet weak var controlBar: ControlBarView!
@@ -48,6 +51,8 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   @IBOutlet weak var rightLabel: NSTextField!
   @IBOutlet weak var leftLabel: NSTextField!
+  @IBOutlet weak var leftArrowLabel: NSTextField!
+  @IBOutlet weak var rightArrowLabel: NSTextField!
   @IBOutlet weak var osd: NSTextField!
 
   override func windowDidLoad() {
@@ -77,6 +82,8 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     playerController.startMPVOpenGLCB(videoView)
     // other initialization
     osd.isHidden = true
+    leftArrowLabel.isHidden = true
+    rightArrowLabel.isHidden = true
     // make main
     w.makeMain()
     w.makeKeyAndOrderFront(nil)
@@ -314,6 +321,15 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     volumeSlider.integerValue = volume
   }
   
+  func updatePlayButtonState(_ state: Int) {
+    playButton.state = state
+    if state == NSOffState {
+      speedValueIndex = 5
+      leftArrowLabel.isHidden = true
+      rightArrowLabel.isHidden = true
+    }
+  }
+  
   // MARK: - IBAction
   
   /** Play button: pause & resume */
@@ -323,6 +339,10 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
     if sender.state == NSOffState {
       playerController.togglePause(true)
+      // speed is already reset by playerController
+      speedValueIndex = 5
+      leftArrowLabel.isHidden = true
+      rightArrowLabel.isHidden = true
     }
   }
   
@@ -338,12 +358,67 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
   }
   
+  /** left btn */
+  @IBAction func leftButtonAction(_ sender: NSButton) {
+    arrowButtonAction(left: true)
+  }
+  
+  @IBAction func rightButtonAction(_ sender: NSButton) {
+    arrowButtonAction(left: false)
+  }
+  
+  /** handle action of both left and right arrow button */
+  private func arrowButtonAction(left: Bool) {
+    let actionType = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: Preference.Key.arrowButtonAction))
+    switch actionType! {
+    case .speed:
+      if left {
+        if speedValueIndex >= 5 {
+          speedValueIndex = 4
+        } else if speedValueIndex <= 0 {
+          speedValueIndex = 0
+        } else {
+          speedValueIndex -= 1
+        }
+      } else {
+        if speedValueIndex <= 5 {
+          speedValueIndex = 6
+        } else if speedValueIndex >= 10 {
+          speedValueIndex = 10
+        } else {
+          speedValueIndex += 1
+        }
+      }
+      let speedValue = AppData.availableSpeedValues[speedValueIndex]
+      playerController.setSpeed(speedValue)
+      if speedValueIndex == 5 {
+        leftArrowLabel.isHidden = true
+        rightArrowLabel.isHidden = true
+      } else if speedValueIndex < 5 {
+        leftArrowLabel.isHidden = false
+        rightArrowLabel.isHidden = true
+        leftArrowLabel.stringValue = String(format: "%.0fx", speedValue)
+      } else if speedValueIndex > 5 {
+        leftArrowLabel.isHidden = true
+        rightArrowLabel.isHidden = false
+        rightArrowLabel.stringValue = String(format: "%.0fx", speedValue)
+      }
+      displayOSD(OSDMessage.speed(speedValue))
+      // if is paused
+      if playButton.state == NSOffState {
+        updatePlayButtonState(NSOnState)
+        playerController.togglePause(false)
+      }
+    case .playlist:
+      break
+    case .seek:
+      playerController.seek(relativeSecond: left ? -10 : 10)
+      break
+    }
+  }
+  
   /** When slider changes */
   @IBAction func playSliderChanges(_ sender: NSSlider) {
-    guard let duration = playerController.info.videoDuration else {
-      Utility.fatal("video info not available")
-      return
-    }
     let percentage = 100 * sender.doubleValue / sender.maxValue
     playerController.seek(percent: percentage)
   }

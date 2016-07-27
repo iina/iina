@@ -94,27 +94,22 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     playerController.togglePause(nil)
   }
   
+  /** record mouse pos on mouse down */
   override func mouseDown(_ event: NSEvent) {
     if controlBar.isDragging {
       return
     }
-    var mousePos = NSEvent.mouseLocation()
-    mousePos.x -= window!.frame.origin.x
-    mousePos.y -= window!.frame.origin.y
-    Swift.print(mousePos)
-    Swift.print(titleBarView.bounds)
-    // FIXME: shoule exist a better solution
-    if NSPointInRect(mousePos, titleBarView.bounds) {
-      mousePosRelatedToWindow = nil
-      return
-    }
-    mousePosRelatedToWindow = mousePos
+    mousePosRelatedToWindow = NSEvent.mouseLocation()
+    mousePosRelatedToWindow!.x -= window!.frame.origin.x
+    mousePosRelatedToWindow!.y -= window!.frame.origin.y
   }
   
+  /** move window while dragging */
   override func mouseDragged(_ event: NSEvent) {
     if controlBar.isDragging {
       return
     }
+    Swift.print(mousePosRelatedToWindow)
     if mousePosRelatedToWindow != nil {
       let currentLocation = NSEvent.mouseLocation()
       let newOrigin = CGPoint(
@@ -122,8 +117,12 @@ class MainWindow: NSWindowController, NSWindowDelegate {
         y: currentLocation.y - mousePosRelatedToWindow!.y
       )
       window?.setFrameOrigin(newOrigin)
-      Swift.print("jitter \(arc4random())")
     }
+  }
+  
+  /** if don't do so, window will jitter when dragging in titlebar */
+  override func mouseUp(_ event: NSEvent) {
+    mousePosRelatedToWindow = nil
   }
   
   override func mouseEntered(_ event: NSEvent) {

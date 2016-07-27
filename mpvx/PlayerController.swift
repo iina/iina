@@ -71,12 +71,10 @@ class PlayerController: NSObject {
     if let setPause = set {
       mpvController.mpvSetFlagProperty("pause", setPause)
     } else {
-      if (statusPaused) {
+      if (info.isPaused) {
         mpvController.mpvSetFlagProperty("pause", false)
-        statusPaused = false
       } else {
         mpvController.mpvSetFlagProperty("pause", true)
-        statusPaused = true
       }
     }
   }
@@ -99,10 +97,33 @@ class PlayerController: NSObject {
     mpvController.mpvResume()
   }
   
+  enum SyncUIOption {
+    case Time
+    case PlayButton
+    case VolumeButton
+  }
+  
   func syncUITime() {
-    let time = mpvController.mpvGetIntProperty("time-pos")
-    info.videoPosition!.second = time
-    mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
+    syncUI(.Time)
+  }
+  
+  func syncUI(_ option: SyncUIOption) {
+    switch option {
+    case .Time:
+      let time = mpvController.mpvGetIntProperty("time-pos")
+      info.videoPosition!.second = time
+      DispatchQueue.main.async {
+        self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
+      }
+    case .PlayButton:
+      let pause = mpvController.mpvGetFlagProperty("pause")
+      info.isPaused = pause
+      DispatchQueue.main.async {
+        self.mainWindow.playButton.state = pause ? NSOffState : NSOnState
+      }
+    default:
+      break
+    }
   }
 
 }

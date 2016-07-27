@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 enum MPVEvent {
   case none
   case shutdown
@@ -36,4 +35,3 @@ enum MPVEvent {
   case chapterChange
   case queueOverflow
 }
-

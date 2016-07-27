@@ -110,7 +110,6 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     if controlBar.isDragging {
       return
     }
-    Swift.print(mousePosRelatedToWindow)
     if mousePosRelatedToWindow != nil {
       let currentLocation = NSEvent.mouseLocation()
       let newOrigin = CGPoint(
@@ -290,6 +289,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)
     updateVolume()
+    
   }
   
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
@@ -318,10 +318,10 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   /** Play button: pause & resume */
   @IBAction func playButtonAction(_ sender: NSButton) {
     if sender.state == NSOnState {
-      playerController.togglePause(true)
+      playerController.togglePause(false)
     }
     if sender.state == NSOffState {
-      playerController.togglePause(false)
+      playerController.togglePause(true)
     }
   }
   

@@ -20,4 +20,6 @@ class PlaybackInfo {
   
   var videoDuration: VideoTime?
   
+  var isPaused: Bool = false
+  
 }

@@ -119,6 +119,12 @@ class MPVController: NSObject {
     return Int(data)
   }
   
+  func mpvGetFlagProperty(_ name: String) -> Bool {
+    var data = Int64()
+    mpv_get_property(mpv, name, MPV_FORMAT_FLAG, &data)
+    return data > 0
+  }
+  
   // MARK: - Events
   
   // Read event and handle it async
@@ -143,41 +149,48 @@ class MPVController: NSObject {
       mpv_detach_destroy(mpv)
       mpv = nil
       Utility.log("MPV event: shutdown")
-      break
+      
     case MPV_EVENT_LOG_MESSAGE:
       let msg = UnsafeMutablePointer<mpv_event_log_message>(event.pointee.data)
       let prefix = String(cString: (msg?.pointee.prefix)!)
       let level = String(cString: (msg?.pointee.level)!)
       let text = String(cString: (msg?.pointee.text)!)
       Utility.log("MPV log: [\(prefix)] \(level): \(text)")
-      break
+      
     case MPV_EVENT_PROPERTY_CHANGE:
       if let property = UnsafePointer<mpv_event_property>(event.pointee.data)?.pointee {
         if strcmp(property.name, "video-params") == 0 {
           onVideoParamsChange(UnsafePointer<mpv_node_list>(property.data))
         }
       }
-      break
+      
     case MPV_EVENT_AUDIO_RECONFIG:
       break
+      
     case MPV_EVENT_VIDEO_RECONFIG:
       break
+      
     case MPV_EVENT_METADATA_UPDATE:
       break
+      
     case MPV_EVENT_START_FILE:
       break
+      
     case MPV_EVENT_FILE_LOADED:
       onFileLoaded()
-      break
+      
     case MPV_EVENT_TRACKS_CHANGED:
       onTrackChanged()
-      break
+      
     case MPV_EVENT_SEEK:
-      playerController.syncUITime()
-      break
+      playerController.syncUI(.Time)
+      
     case MPV_EVENT_PLAYBACK_RESTART:
-      playerController.syncUITime()
-      break
+      playerController.syncUI(.Time)
+      
+    case MPV_EVENT_PAUSE, MPV_EVENT_UNPAUSE:
+      playerController.syncUI(.PlayButton)
+      
     default:
       let eventName = String(cString: mpv_event_name(eventId))
       Utility.log("MPV event (unhandled): \(eventName)")

@@ -51,9 +51,9 @@ class MPVController: NSObject {
     // e(mpv_load_config_file(mpv, ""))
     
     // Set options. Should be called before initialization.
-    e(mpv_set_option_string(mpv, "input-media-keys", "yes"))
-    e(mpv_set_option_string(mpv, "vo", "opengl-cb"))
-    e(mpv_set_option_string(mpv, "hwdec-preload", "auto"))
+    e(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, "yes"))
+    e(mpv_set_option_string(mpv, MPVOption.Video.vo, "opengl-cb"))
+    e(mpv_set_option_string(mpv, MPVOption.Video.hwdecPreload, "auto"))
     
     // Receive log messages at warn level.
     e(mpv_request_log_messages(mpv, "warn"))
@@ -82,7 +82,7 @@ class MPVController: NSObject {
   // Basically send quit to mpv
   func mpvQuit() {
     mpv_suspend(mpv)
-    mpvCommand(["quit", nil])
+    mpvCommand([MPVCommand.quit, nil])
   }
   
   func mpvSuspend() {
@@ -205,10 +205,10 @@ class MPVController: NSObject {
   func onFileLoaded() {
     mpvSuspend()
     // Get video size and set the initial window size
-    let width = mpvGetIntProperty("width")
-    let height = mpvGetIntProperty("height")
-    let duration = mpvGetIntProperty("duration")
-    let pos = mpvGetIntProperty("time-pos")
+    let width = mpvGetIntProperty(MPVProperty.width)
+    let height = mpvGetIntProperty(MPVProperty.height)
+    let duration = mpvGetIntProperty(MPVProperty.duration)
+    let pos = mpvGetIntProperty(MPVProperty.timePos)
     playerController.info.videoHeight = height
     playerController.info.videoWidth = width
     playerController.info.videoDuration = VideoTime(duration)

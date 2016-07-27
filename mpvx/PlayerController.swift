@@ -45,7 +45,7 @@ class PlayerController: NSObject {
     info.currentURL = url
     mainWindow.showWindow(nil)
     // Send load file command
-    mpvController.mpvCommand(["loadfile", path, nil])
+    mpvController.mpvCommand([MPVCommand.loadfile, path, nil])
   }
   
   func startMPV() {
@@ -69,23 +69,23 @@ class PlayerController: NSObject {
   /** Pause / resume */
   func togglePause(_ set: Bool?) {
     if let setPause = set {
-      mpvController.mpvSetFlagProperty("pause", setPause)
+      mpvController.mpvSetFlagProperty(MPVProperty.pause, setPause)
     } else {
       if (info.isPaused) {
-        mpvController.mpvSetFlagProperty("pause", false)
+        mpvController.mpvSetFlagProperty(MPVProperty.pause, false)
       } else {
-        mpvController.mpvSetFlagProperty("pause", true)
+        mpvController.mpvSetFlagProperty(MPVProperty.pause, true)
       }
     }
   }
   
   func seek(percent: Double) {
     let seekMode = ud.bool(forKey: Preference.Key.useExactSeek) ? "absolute-percent+exact" : "absolute-percent"
-    mpvController.mpvCommand(["seek", "\(percent)", seekMode, nil])
+    mpvController.mpvCommand([MPVCommand.seek, "\(percent)", seekMode, nil])
   }
   
   func setVolume(_ volume: Int) {
-    mpvController.mpvSetIntProperty("volume", Int64(volume))
+    mpvController.mpvSetIntProperty(MPVProperty.volume, Int64(volume))
   }
   
   func fileLoaded() {
@@ -110,13 +110,13 @@ class PlayerController: NSObject {
   func syncUI(_ option: SyncUIOption) {
     switch option {
     case .Time:
-      let time = mpvController.mpvGetIntProperty("time-pos")
+      let time = mpvController.mpvGetIntProperty(MPVProperty.timePos)
       info.videoPosition!.second = time
       DispatchQueue.main.async {
         self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
       }
     case .PlayButton:
-      let pause = mpvController.mpvGetFlagProperty("pause")
+      let pause = mpvController.mpvGetFlagProperty(MPVProperty.pause)
       info.isPaused = pause
       DispatchQueue.main.async {
         self.mainWindow.playButton.state = pause ? NSOffState : NSOnState

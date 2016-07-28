@@ -41,6 +41,13 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   /** The index of current speed in speed value array */
   var speedValueIndex: Int = 5
   
+  enum ScrollDirection {
+    case horizontal
+    case vertical
+  }
+  
+  var scrollDirection: ScrollDirection?
+  
   @IBOutlet weak var titleBarView: NSVisualEffectView!
   @IBOutlet weak var titleBarTitleCell: NSTextFieldCell!
   @IBOutlet weak var controlBar: ControlBarView!
@@ -158,9 +165,36 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     hideControlTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideUIAndCurdor), userInfo: nil, repeats: false)
   }
   
+  
+  override func scrollWheel(_ event: NSEvent) {
+    if event.phase.contains(.began) {
+      if event.scrollingDeltaX != 0 {
+        scrollDirection = .horizontal
+      } else if event.scrollingDeltaY != 0 {
+        scrollDirection = .vertical
+      }
+    } else if event.phase.contains(.ended) {
+      scrollDirection = nil
+    }
+    // handle the value
+    let seekFactor = 0.05
+    if scrollDirection == .horizontal {
+      playerController.seek(relativeSecond: seekFactor * Double(event.scrollingDeltaX))
+    } else if scrollDirection == .vertical {
+      let newVolume = playerController.info.volume - Int(event.scrollingDeltaY)
+      playerController.setVolume(newVolume)
+      volumeSlider.integerValue = newVolume
+      displayOSD(OSDMessage.volume(playerController.info.volume))
+    }
+  }
+  
   // MARK: - Control UI
   
   func hideUIAndCurdor() {
+    // don't hide UI when dragging control bar
+    if controlBar.isDragging {
+      return
+    }
     hideUI()
     NSCursor.setHiddenUntilMouseMoves(true)
   }
@@ -299,6 +333,8 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     updateVolume()
     
   }
+  
+  // MARK: - Sync UI
   
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
     guard let duration = playerController.info.videoDuration, let pos = playerController.info.videoPosition else {

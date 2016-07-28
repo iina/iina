@@ -101,11 +101,12 @@ class PlayerController: NSObject {
   }
 
   func seek(relativeSecond: Double) {
-    let seekMode = "relative"
+    let seekMode = ud.bool(forKey: Preference.Key.useExactSeek) ? "relative+exact" : "relative"
     mpvController.mpvCommand([MPVCommand.seek, "\(relativeSecond)", seekMode, nil])
   }
   
   func setVolume(_ volume: Int) {
+    info.volume = volume
     mpvController.mpvSetIntProperty(MPVProperty.volume, Int64(volume))
   }
 

@@ -18,6 +18,8 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
   
+  var isInFullScreen: Bool = false
+  
   override var windowNibName: String {
     return "MainWindow"
   }
@@ -70,6 +72,8 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     w.titlebarAppearsTransparent = true
     // need to deal with control bar, so handle it manually
     // w.isMovableByWindowBackground  = true
+    // set background color to black
+    w.backgroundColor = NSColor.black()
     updateTitle()
     if #available(OSX 10.11, *), UserDefaults.standard.bool(forKey: Preference.Key.controlBarDarker) {
       titleBarView.material = .ultraDark
@@ -77,9 +81,9 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     // size
     w.minSize = NSMakeSize(500, 200)
     // fade-able views
-    fadeableViews.append(w.standardWindowButton(.closeButton))
-    fadeableViews.append(w.standardWindowButton(.miniaturizeButton))
-    fadeableViews.append(w.standardWindowButton(.zoomButton))
+    withStandardButtons { button in
+      self.fadeableViews.append(button)
+    }
     fadeableViews.append(titleBarView)
     fadeableViews.append(controlBar)
     guard let cv = w.contentView else { return }
@@ -104,7 +108,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     return v
   }
   
-  // MARK: - NSWindowDelegate
+  // MARK: - Mouse / Trackpad event
   
   override func keyDown(_ event: NSEvent) {
     playerController.togglePause(nil)
@@ -186,6 +190,48 @@ class MainWindow: NSWindowController, NSWindowDelegate {
       volumeSlider.integerValue = newVolume
       displayOSD(OSDMessage.volume(playerController.info.volume))
     }
+  }
+  
+  // MARK: - Window delegate
+  
+  func windowWillEnterFullScreen(_ notification: Notification) {
+    // show titlebar
+    window!.titlebarAppearsTransparent = false
+    window!.titleVisibility = .visible
+    // remove buttons from fade-able views
+    withStandardButtons { button in
+      if let index = (self.fadeableViews.index {$0 === button}) {
+        self.fadeableViews.remove(at: index)
+      }
+    }
+    // remove titlebar view from fade-able views
+    if let index = (self.fadeableViews.index {$0 === titleBarView}) {
+      self.fadeableViews.remove(at: index)
+    }
+    // stop animation and hide titleBarView
+    animationState = .hidden
+    titleBarView.isHidden = true
+    Swift.print("fullscreen")
+    isInFullScreen = true
+  }
+  
+  func windowWillExitFullScreen(_ notification: Notification) {
+    // hide titlebar
+    window!.titlebarAppearsTransparent = true
+    window!.titleVisibility = .hidden
+    // show titleBarView
+    titleBarView.isHidden = false
+    animationState = .shown
+    // add back buttons to fade-able views
+    withStandardButtons { button in
+      self.fadeableViews.append(button)
+    }
+    // add back titlebar view to fade-able views
+    self.fadeableViews.append(titleBarView)
+    Swift.print("exit fullscreen")
+    isInFullScreen = false
+    // set back frame of videoview
+    videoView.frame = window!.contentView!.frame
   }
   
   // MARK: - Control UI
@@ -271,18 +317,35 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   // MARK: - Window size
   
   func windowDidResize(_ notification: Notification) {
-    if let w = window {
-      let wSize = w.frame.size, cSize = controlBar.frame.size
-      w.setFrame(w.constrainFrameRect(w.frame, to: w.screen), display: false)
-      // update control bar position
-      let cph = ud.float(forKey: Preference.Key.controlBarPositionHorizontal)
-      let cpv = ud.float(forKey: Preference.Key.controlBarPositionVertical)
-      controlBar.setFrameOrigin(NSMakePoint(
-        wSize.width * CGFloat(cph) - cSize.width * 0.5,
-        wSize.height * CGFloat(cpv)
-      ))
+    guard let w = window else { return }
+    w.setFrame(w.constrainFrameRect(w.frame, to: w.screen), display: false)
+    let wSize = w.frame.size, cSize = controlBar.frame.size
+    // update videoview size if in full screen, since aspect ratio may changed
+    if (isInFullScreen) {
+      let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
+      let tryHeight = wSize.width / aspectRatio
+      Swift.print(wSize, aspectRatio, tryHeight)
+      if tryHeight < wSize.height {
+        // should have black above and below
+        let targetHeight = wSize.width / aspectRatio
+        let yOffset = (wSize.height - targetHeight) / 2
+        videoView.frame = NSMakeRect(0, yOffset, wSize.width, targetHeight)
+      } else if tryHeight > wSize.height{
+        // should have black left and right
+        let targetWidth = wSize.height * aspectRatio
+        let xOffset = (wSize.width - targetWidth) / 2
+        videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
+      }
     }
+    // update control bar position
+    let cph = ud.float(forKey: Preference.Key.controlBarPositionHorizontal)
+    let cpv = ud.float(forKey: Preference.Key.controlBarPositionVertical)
+    controlBar.setFrameOrigin(NSMakePoint(
+      wSize.width * CGFloat(cph) - cSize.width * 0.5,
+      wSize.height * CGFloat(cpv)
+    ))
   }
+  
   
   /** Set video size when info available. */
   func adjustFrameByVideoSize() {
@@ -466,5 +529,14 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     displayOSD(OSDMessage.volume(value))
   }
   
+  
+  // MARK: - Utilility
+  
+  private func withStandardButtons(_ block: (NSButton?) -> Void) {
+    guard let w = window else { return }
+    block(w.standardWindowButton(.closeButton))
+    block(w.standardWindowButton(.miniaturizeButton))
+    block(w.standardWindowButton(.zoomButton))
+  }
   
 }

@@ -37,6 +37,9 @@ File.open(File.join(__dir__, 'MPVProperty.swift'), 'w') do |file|
         file.write "  static func #{func_name}(_ name: String) -> String {\n"
         file.write "    return \"#{return_str}\"\n"
         file.write "  }\n"
+      elsif not name.match(/<.+?>/)
+        file.write "  /** #{name} */\n"
+        file.write "  static let #{name.to_camel} = \"#{name}\"\n"
       end
     else
       file.write "  /** #{name} */\n"

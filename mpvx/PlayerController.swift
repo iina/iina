@@ -12,18 +12,18 @@ class PlayerController: NSObject {
   
   let ud: UserDefaults = UserDefaults.standard
   
-  lazy var mainWindow: MainWindow! = {
+  lazy var mainWindow: MainWindow = {
     let window = MainWindow()
     window.playerController = self
     return window
   }()
   
-  lazy var mpvController: MPVController! = {
+  lazy var mpvController: MPVController = {
     let controller = MPVController(playerController: self)
     return controller
   }()
   
-  lazy var preferenceWindow: PreferenceWindow! = {
+  lazy var preferenceWindow: PreferenceWindow = {
     let window = PreferenceWindow()
     return window
   }()
@@ -107,7 +107,23 @@ class PlayerController: NSObject {
   
   func setVolume(_ volume: Int) {
     info.volume = volume
-    mpvController.mpvSetIntProperty(MPVProperty.volume, Int64(volume))
+    mpvController.mpvSetIntProperty(MPVProperty.volume, volume)
+  }
+  
+  func setTrack(_ index: Int, forType: MPVTrack.TrackType) {
+    let name: String
+    switch forType {
+    case .audio:
+      name = MPVProperty.aid
+    case .video:
+      name = MPVProperty.vid
+    case .sub:
+      name = MPVProperty.sid
+    case .secondSub:
+      name = MPVProperty.secondarySid
+    }
+    mpvController.mpvSetIntProperty(name, index)
+    getSelectedTracks()
   }
 
   /** Set speed. A negative speed -x means slow by x times */
@@ -123,12 +139,16 @@ class PlayerController: NSObject {
   
   func fileLoaded() {
     DispatchQueue.main.sync {
+      self.getTrackInfo()
+      self.getSelectedTracks()
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
       mainWindow.adjustFrameByVideoSize()
     }
     mpvController.mpvResume()
   }
+  
+  /** Sync with UI in MainWindow */
   
   enum SyncUIOption {
     case Time
@@ -160,6 +180,49 @@ class PlayerController: NSObject {
         self.mainWindow.muteButton.state = mute ? NSOnState : NSOffState
       }
     }
+  }
+  
+  /** Get info */
+  
+  private func getTrackInfo() {
+    info.audioTracks.removeAll(keepingCapacity: true)
+    info.videoTracks.removeAll(keepingCapacity: true)
+    info.subTracks.removeAll(keepingCapacity: true)
+    let trackCount = mpvController.mpvGetIntProperty(MPVProperty.trackListCount)
+    for index in 0...trackCount-1 {
+      // get info for each track
+      let track = MPVTrack(id:         mpvController.mpvGetIntProperty(MPVProperty.trackListNId(index)),
+                           type: MPVTrack.TrackType(rawValue:
+                                       mpvController.mpvGetStringProperty(MPVProperty.trackListNType(index))!
+                           )!,
+                           isDefault:  mpvController.mpvGetFlagProperty(MPVProperty.trackListNDefault(index)),
+                           isForced:   mpvController.mpvGetFlagProperty(MPVProperty.trackListNForced(index)),
+                           isSelected: mpvController.mpvGetFlagProperty(MPVProperty.trackListNSelected(index)),
+                           isExternal: mpvController.mpvGetFlagProperty(MPVProperty.trackListNExternal(index)))
+      track.srcId = mpvController.mpvGetIntProperty(MPVProperty.trackListNSrcId(index))
+      track.title = mpvController.mpvGetStringProperty(MPVProperty.trackListNTitle(index))
+      track.lang = mpvController.mpvGetStringProperty(MPVProperty.trackListNLang(index))
+      track.codec = mpvController.mpvGetStringProperty(MPVProperty.trackListNCodec(index))
+      track.externalFilename = mpvController.mpvGetStringProperty(MPVProperty.trackListNExternalFilename(index))
+      // add to lists
+      switch track.type {
+      case .audio:
+        info.audioTracks.append(track)
+      case .video:
+        info.videoTracks.append(track)
+      case .sub:
+        info.subTracks.append(track)
+      default:
+        break
+      }
+    }
+  }
+  
+  private func getSelectedTracks() {
+    info.aid = mpvController.mpvGetIntProperty(MPVProperty.aid)
+    info.vid = mpvController.mpvGetIntProperty(MPVProperty.vid)
+    info.sid = mpvController.mpvGetIntProperty(MPVProperty.sid)
+    info.secondSid = mpvController.mpvGetIntProperty(MPVProperty.secondarySid)
   }
 
 }

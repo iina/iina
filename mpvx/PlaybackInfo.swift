@@ -31,4 +31,14 @@ class PlaybackInfo {
 
   var playSpeed: Double = 0
   
+  var audioTracks: [MPVTrack] = []
+  var videoTracks: [MPVTrack] = []
+  var subTracks: [MPVTrack] = []
+  
+  // Selected track IDs. Use these (instead of `isSelected` of a track) to check if selected
+  var aid: Int?
+  var sid: Int?
+  var vid: Int?
+  var secondSid: Int?
+  
 }

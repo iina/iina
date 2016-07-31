@@ -50,6 +50,13 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   var scrollDirection: ScrollDirection?
   
+  /** The quick setting window */
+  lazy var quickSettingPanel: QuickSettingPanel = {
+    let panel = QuickSettingPanel()
+    panel.playerController = self.playerController
+    return panel
+  }()
+  
   @IBOutlet weak var titleBarView: NSVisualEffectView!
   @IBOutlet weak var titleBarTitleCell: NSTextFieldCell!
   @IBOutlet weak var controlBar: ControlBarView!
@@ -79,7 +86,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
       titleBarView.material = .ultraDark
     }
     // size
-    w.minSize = NSMakeSize(500, 200)
+    w.minSize = NSMakeSize(500, 300)
     // fade-able views
     withStandardButtons { button in
       self.fadeableViews.append(button)
@@ -515,6 +522,11 @@ class MainWindow: NSWindowController, NSWindowDelegate {
       break
     }
   }
+  
+  @IBAction func settingsButtonAction(_ sender: NSButton) {
+    quickSettingPanel.showWindow(self)
+  }
+  
   
   /** When slider changes */
   @IBAction func playSliderChanges(_ sender: NSSlider) {

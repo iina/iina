@@ -108,8 +108,8 @@ class MPVController: NSObject {
     mpv_set_property(mpv, name, MPV_FORMAT_FLAG, &data)
   }
   
-  func mpvSetIntProperty(_ name: String, _ value: Int64) {
-    var data = value
+  func mpvSetIntProperty(_ name: String, _ value: Int) {
+    var data = Int64(value)
     mpv_set_property(mpv, name, MPV_FORMAT_INT64, &data)
   }
   
@@ -128,6 +128,13 @@ class MPVController: NSObject {
     var data = Int64()
     mpv_get_property(mpv, name, MPV_FORMAT_FLAG, &data)
     return data > 0
+  }
+  
+  func mpvGetStringProperty(_ name: String) -> String? {
+    let cstr = mpv_get_property_string(mpv, name)
+    let str: String? = cstr == nil ? nil : String(cString: cstr!)
+    mpv_free(cstr)
+    return str
   }
   
   // MARK: - Events

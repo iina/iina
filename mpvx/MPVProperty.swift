@@ -73,6 +73,12 @@ struct MPVProperty {
   static let edition = "edition"
   /** disc-titles */
   static let discTitles = "disc-titles"
+  /** disc-titles/count */
+  static let discTitlesCount = "disc-titles/count"
+  /** disc-titles/id */
+  static let discTitlesId = "disc-titles/id"
+  /** disc-titles/length */
+  static let discTitlesLength = "disc-titles/length"
   /** disc-title-list */
   static let discTitleList = "disc-title-list"
   /** disc-title */
@@ -83,6 +89,8 @@ struct MPVProperty {
   static let editions = "editions"
   /** edition-list */
   static let editionList = "edition-list"
+  /** edition-list/count */
+  static let editionListCount = "edition-list/count"
   /** edition-list/N/id */
   static func editionListNId(_ n: Int) -> String {
     return "edition-list/\(n)/id"
@@ -103,6 +111,8 @@ struct MPVProperty {
   static let angle = "angle"
   /** metadata */
   static let metadata = "metadata"
+  /** metadata/list/count */
+  static let metadataListCount = "metadata/list/count"
   /** metadata/list/N/key */
   static func metadataListNKey(_ n: Int) -> String {
     return "metadata/list/\(n)/key"
@@ -169,6 +179,16 @@ struct MPVProperty {
   static let audioCodecName = "audio-codec-name"
   /** audio-params */
   static let audioParams = "audio-params"
+  /** audio-params/format */
+  static let audioParamsFormat = "audio-params/format"
+  /** audio-params/samplerate */
+  static let audioParamsSamplerate = "audio-params/samplerate"
+  /** audio-params/channels */
+  static let audioParamsChannels = "audio-params/channels"
+  /** audio-params/hr-channels */
+  static let audioParamsHrChannels = "audio-params/hr-channels"
+  /** audio-params/channel-count */
+  static let audioParamsChannelCount = "audio-params/channel-count"
   /** audio-out-params */
   static let audioOutParams = "audio-out-params"
   /** aid */
@@ -233,6 +253,38 @@ struct MPVProperty {
   static let height = "height"
   /** video-params */
   static let videoParams = "video-params"
+  /** video-params/pixelformat */
+  static let videoParamsPixelformat = "video-params/pixelformat"
+  /** video-params/average-bpp */
+  static let videoParamsAverageBpp = "video-params/average-bpp"
+  /** video-params/plane-depth */
+  static let videoParamsPlaneDepth = "video-params/plane-depth"
+  /** video-params/w */
+  static let videoParamsW = "video-params/w"
+  /** video-params/h */
+  static let videoParamsH = "video-params/h"
+  /** video-params/dw */
+  static let videoParamsDw = "video-params/dw"
+  /** video-params/dh */
+  static let videoParamsDh = "video-params/dh"
+  /** video-params/aspect */
+  static let videoParamsAspect = "video-params/aspect"
+  /** video-params/par */
+  static let videoParamsPar = "video-params/par"
+  /** video-params/colormatrix */
+  static let videoParamsColormatrix = "video-params/colormatrix"
+  /** video-params/colorlevels */
+  static let videoParamsColorlevels = "video-params/colorlevels"
+  /** video-params/primaries */
+  static let videoParamsPrimaries = "video-params/primaries"
+  /** video-params/gamma */
+  static let videoParamsGamma = "video-params/gamma"
+  /** video-params/chroma-location */
+  static let videoParamsChromaLocation = "video-params/chroma-location"
+  /** video-params/rotate */
+  static let videoParamsRotate = "video-params/rotate"
+  /** video-params/stereo-in */
+  static let videoParamsStereoIn = "video-params/stereo-in"
   /** dwidth */
   static let dwidth = "dwidth"
   /** dheight */
@@ -347,6 +399,8 @@ struct MPVProperty {
   }
   /** track-list */
   static let trackList = "track-list"
+  /** track-list/count */
+  static let trackListCount = "track-list/count"
   /** track-list/N/id */
   static func trackListNId(_ n: Int) -> String {
     return "track-list/\(n)/id"
@@ -433,6 +487,8 @@ struct MPVProperty {
   }
   /** chapter-list */
   static let chapterList = "chapter-list"
+  /** chapter-list/count */
+  static let chapterListCount = "chapter-list/count"
   /** chapter-list/N/title */
   static func chapterListNTitle(_ n: Int) -> String {
     return "chapter-list/\(n)/title"

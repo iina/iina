@@ -16,8 +16,11 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
   
   var playerController: PlayerController!
   
+  
+  @IBOutlet weak var videoTableView: NSTableView!
   @IBOutlet weak var audioTableView: NSTableView!
   @IBOutlet weak var subTableView: NSTableView!
+  @IBOutlet weak var secSubTableView: NSTableView!
   
   override func windowDidLoad() {
     withAllTableViews { (view, _) in
@@ -32,10 +35,12 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
   // MARK: NSTableView delegate
   
   func numberOfRows(in tableView: NSTableView) -> Int {
-    if tableView == audioTableView {
-      return playerController.info.audioTracks.count
-    } else if tableView == subTableView {
-      return playerController.info.subTracks.count
+    if tableView == videoTableView {
+      return playerController.info.videoTracks.count + 1
+    } else if tableView == audioTableView {
+      return playerController.info.audioTracks.count + 1
+    } else if tableView == subTableView || tableView == secSubTableView {
+      return playerController.info.subTracks.count + 1
     } else {
       return 0
     }
@@ -43,23 +48,31 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
   
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
     // get track according to tableview
-    let track: MPVTrack
+    // row=0: <None> row=1~: tracks[row-1]
+    let track: MPVTrack?
     let activeId: Int
-    if tableView == audioTableView {
-      track = playerController.info.audioTracks[row]
+    let columnName = tableColumn?.identifier
+    if tableView == videoTableView {
+      track = row == 0 ? nil : playerController.info.videoTracks[row-1]
+      activeId = playerController.info.vid!
+    } else if tableView == audioTableView {
+      track = row == 0 ? nil : playerController.info.audioTracks[row-1]
       activeId = playerController.info.aid!
     } else if tableView == subTableView {
-      track = playerController.info.subTracks[row]
+      track = row == 0 ? nil : playerController.info.subTracks[row-1]
       activeId = playerController.info.sid!
+    } else if tableView == secSubTableView {
+      track = row == 0 ? nil : playerController.info.subTracks[row-1]
+      activeId = playerController.info.secondSid!
     } else {
       return nil
     }
     // return track data
-    let columnName = tableColumn?.identifier
     if columnName == "IsChosen" {
-      return track.id == activeId ? "●" : ""
+      let isChosen = track == nil ? (activeId == 0) : (track!.id == activeId)
+      return isChosen ? "●" : ""
     } else { // if columnName == "TrackName" {
-      return track.readableTitle
+      return track?.readableTitle ?? "<None>"
     }
   }
   
@@ -67,7 +80,7 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
     withAllTableViews { (view, type) in
       if view.numberOfSelectedRows > 0 {
         // note that track ids start from 1
-        self.playerController.setTrack(view.selectedRow + 1, forType: type)
+        self.playerController.setTrack(view.selectedRow, forType: type)
         view.deselectAll(self)
         view.reloadData()
       }
@@ -77,6 +90,8 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
   private func withAllTableViews (_ block: (NSTableView, MPVTrack.TrackType) -> Void) {
     block(audioTableView, .audio)
     block(subTableView, .sub)
+    block(secSubTableView, .secondSub)
+    block(videoTableView, .video)
   }
   
 }

@@ -21,6 +21,7 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
   @IBOutlet weak var audioTableView: NSTableView!
   @IBOutlet weak var subTableView: NSTableView!
   @IBOutlet weak var secSubTableView: NSTableView!
+  @IBOutlet weak var customAspectTextField: NSTextField!
   
   override func windowDidLoad() {
     withAllTableViews { (view, _) in
@@ -101,6 +102,14 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
       playerController.setVideoAspect(aspect)
     }
   }
+  
+  @IBAction func customAspectBtnAction(_ sender: NSButton) {
+    let value = customAspectTextField.stringValue
+    if value != "" {
+      playerController.setVideoAspect(value)
+    }
+  }
+  
   
   
 }

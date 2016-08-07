@@ -133,6 +133,9 @@
                                                     <segment label="1:1"/>
                                                 </segments>
                                             </segmentedCell>
+                                            <connections>
+                                                <action selector="aspectChangedAction:" target="-2" id="xYg-Q4-zpq"/>
+                                            </connections>
                                         </segmentedControl>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3pd-Vf-jcA">
                                             <rect key="frame" x="95" y="134" width="132" height="17"/>

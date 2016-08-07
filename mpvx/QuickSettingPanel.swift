@@ -94,4 +94,13 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
     block(videoTableView, .video)
   }
   
+  // MARK: Actions
+  
+  @IBAction func aspectChangedAction(_ sender: NSSegmentedControl) {
+    if let aspect = sender.label(forSegment: sender.selectedSegment) {
+      playerController.setVideoAspect(aspect)
+    }
+  }
+  
+  
 }

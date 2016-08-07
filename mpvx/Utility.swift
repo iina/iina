@@ -33,6 +33,22 @@ class Utility {
     block()
     exit(1)
   }
+  
+  class Regex {
+    var regex: RegularExpression?
+    
+    init (_ pattern: String) {
+      if let exp = try? RegularExpression(pattern: pattern, options: []) {
+        self.regex = exp
+      } else {
+        Utility.fatal("Cannot create regex \(pattern)")
+      }
+    }
+    
+    func matches(_ str: String) -> Bool {
+      return regex?.numberOfMatches(in: str, options: [], range: NSMakeRange(0, str.characters.count)) > 0
+    }
+  }
 
 }
 

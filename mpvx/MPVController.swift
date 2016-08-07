@@ -118,6 +118,10 @@ class MPVController: NSObject {
     mpv_set_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
   }
   
+  func mpvSetStringProperty(_ name: String, _ value: String) {
+    mpv_set_property_string(mpv, name, value)
+  }
+  
   func mpvGetIntProperty(_ name: String) -> Int {
     var data = Int64()
     mpv_get_property(mpv, name, MPV_FORMAT_INT64, &data)
@@ -186,6 +190,7 @@ class MPVController: NSObject {
       break
       
     case MPV_EVENT_VIDEO_RECONFIG:
+      onVideoReconfig()
       break
       
     case MPV_EVENT_METADATA_UPDATE:
@@ -215,27 +220,51 @@ class MPVController: NSObject {
     }
   }
   
-  func onVideoParamsChange (_ data: UnsafePointer<mpv_node_list>) {
+  private func onVideoParamsChange (_ data: UnsafePointer<mpv_node_list>) {
     //let params = data.pointee
     //params.keys.
   }
   
-  func onFileLoaded() {
+  private func onFileLoaded() {
     mpvSuspend()
     // Get video size and set the initial window size
     let width = mpvGetIntProperty(MPVProperty.width)
     let height = mpvGetIntProperty(MPVProperty.height)
+    let dwidth = mpvGetIntProperty(MPVProperty.dwidth)
+    let dheight = mpvGetIntProperty(MPVProperty.dheight)
     let duration = mpvGetIntProperty(MPVProperty.duration)
     let pos = mpvGetIntProperty(MPVProperty.timePos)
     playerController.info.videoHeight = height
     playerController.info.videoWidth = width
+    playerController.info.displayWidth = dwidth
+    playerController.info.displayHeight = dheight
     playerController.info.videoDuration = VideoTime(duration)
     playerController.info.videoPosition = VideoTime(pos)
     playerController.fileLoaded()
+    mpvResume()
   }
   
-  func onTrackChanged() {
+  private func onTrackChanged() {
     playerController.mainWindow.updateTitle()
+  }
+  
+  private func onVideoReconfig() {
+    let dwidth = mpvGetIntProperty(MPVProperty.dwidth)
+    let dheight = mpvGetIntProperty(MPVProperty.dheight)
+    // according to client api doc, check whether changed
+    if playerController.info.displayWidth! == 0 && playerController.info.displayHeight! == 0 {
+      playerController.info.displayWidth = dwidth
+      playerController.info.displayHeight = dheight
+      return
+    }
+    if dwidth != playerController.info.displayWidth! || dheight != playerController.info.displayHeight! {
+      // video size changed
+      playerController.info.displayWidth = dwidth
+      playerController.info.displayHeight = dheight
+      mpvSuspend()
+      playerController.notifyMainWindowVideoSizeChanged()
+      mpvResume()
+    }
   }
   
   

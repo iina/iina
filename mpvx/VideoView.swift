@@ -1,4 +1,4 @@
-//
+ //
 //  VideoView.swift
 //  mpvx
 //
@@ -44,7 +44,7 @@ class VideoView: NSOpenGLView {
   /** Video size for allocating fbo texture */
   var videoSize: NSSize? {
     didSet {
-      prepareVideoFrameBuffer(videoSize!)
+      prepareVideoFrameBuffer()
       setUpDisplayLink()
       startDisplayLink()
     }
@@ -55,11 +55,12 @@ class VideoView: NSOpenGLView {
   
   /** Objects for drawing to fbo */
   var program: GLuint = GLuint()
-  var texture: GLuint = GLuint()
-  var fbo: GLuint = GLuint()
+  var texture: GLuint = GLuint(0)
+  var fbo: GLuint = GLuint(0)
   var vao: GLuint = GLuint()
   var vbo: GLuint = GLuint()
   var texUniform: GLint = GLint()
+  var testi = GLint()
   let vertexData: [GLfloat] = [
     // X     Y      U    V
     -1.0, -1.0,   0.0, 0.0,
@@ -86,7 +87,6 @@ class VideoView: NSOpenGLView {
   // MARK: - Init
   
   override init(frame: CGRect) {
-    
     // init context
     let attributes: [NSOpenGLPixelFormatAttribute] = [
       UInt32(NSOpenGLPFADoubleBuffer),
@@ -169,8 +169,16 @@ class VideoView: NSOpenGLView {
   }
   
   /** Set up the frame buffer needed for offline rendering. */
-  private func prepareVideoFrameBuffer(_ size: NSSize) {
+  private func prepareVideoFrameBuffer() {
+    let size = self.videoSize!
     openGLContext!.makeCurrentContext()
+    // if texture or fbo exists
+    if fbo != 0 {
+      glDeleteTextures(1, &texture)
+    }
+    if texture != 0 {
+      glDeleteFramebuffers(1, &fbo)
+    }
     // create frame buffer
     glGenFramebuffers(GLsizei(1), &fbo)
     Utility.assert(fbo > 0, "Cannot generate fbo")
@@ -236,15 +244,16 @@ class VideoView: NSOpenGLView {
     renderContext.makeCurrentContext()
     if let context = self.mpvGLContext {
       mpv_opengl_cb_draw(context, Int32(fbo), Int32(videoSize!.width), -(Int32)(videoSize!.height))
+      ignoreGLError()
     } else {
-      glClearColor(0, 0, 0, 0)
+      glClearColor(0, 0, 0, 1)
       glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
     }
     renderContext.update()
     renderContext.flushBuffer()
     // report flip to mpv
     if let context = self.mpvGLContext {
-      mpv_opengl_cb_report_flip( context, 0 )
+      mpv_opengl_cb_report_flip(context, 0)
     }
     renderContext.unlock()
   }
@@ -323,6 +332,7 @@ class VideoView: NSOpenGLView {
   /** Check OpenGL error (for debug only). */
   func gle() {
     let e = glGetError()
+    Swift.print(arc4random())
     switch e {
     case GLenum(GL_NO_ERROR):
       break
@@ -350,6 +360,10 @@ class VideoView: NSOpenGLView {
     default:
       break
     }
+  }
+  
+  func ignoreGLError() {
+    glGetError()
   }
 
 }

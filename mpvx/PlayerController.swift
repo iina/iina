@@ -34,6 +34,8 @@ class PlayerController: NSObject {
   
   var statusPaused: Bool = false
   
+  var aspectRegEx = Utility.Regex("\\A\\d+:\\d+\\Z")
+  
   // Open a file
   func openFile(_ url: URL!) {
     let path = url.path
@@ -137,15 +139,36 @@ class PlayerController: NSObject {
     mpvController.mpvSetDoubleProperty(MPVProperty.speed, realSpeed)
   }
   
+  func setVideoAspect(_ aspect: String) {
+    if aspectRegEx.matches(aspect) {
+      mpvController.mpvSetStringProperty(MPVProperty.videoAspect, aspect)
+    } else {
+      mpvController.mpvSetStringProperty(MPVProperty.videoAspect, "-1")
+    }
+  }
+  
   func fileLoaded() {
+    guard let vwidth = info.videoWidth, vheight = info.videoHeight else {
+      Utility.fatal("Cannot get video width and height")
+      return
+    }
     DispatchQueue.main.sync {
       self.getTrackInfo()
       self.getSelectedTracks()
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
-      mainWindow.adjustFrameByVideoSize()
+      mainWindow.adjustFrameByVideoSize(vwidth, vheight)
     }
-    mpvController.mpvResume()
+  }
+  
+  func notifyMainWindowVideoSizeChanged() {
+    guard let dwidth = info.displayWidth, dheight = info.displayHeight else {
+      Utility.fatal("Cannot get video width and height")
+      return
+    }
+    DispatchQueue.main.sync {
+      mainWindow.adjustFrameByVideoSize(dwidth, dheight)
+    }
   }
   
   /** Sync with UI in MainWindow */

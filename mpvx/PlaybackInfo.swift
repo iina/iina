@@ -13,8 +13,10 @@ class PlaybackInfo {
   var currentURL: URL?
   
   var videoWidth: Int?
-  
   var videoHeight: Int?
+  
+  var displayWidth: Int?
+  var displayHeight: Int?
   
   var videoPosition: VideoTime?
   

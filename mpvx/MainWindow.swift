@@ -355,11 +355,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   
   /** Set video size when info available. */
-  func adjustFrameByVideoSize() {
-    guard let width = playerController.info.videoWidth, let height = playerController.info.videoHeight else {
-      Utility.fatal("video info not available")
-      return
-    }
+  func adjustFrameByVideoSize(_ width: Int, _ height: Int) {
     // set aspect ratio
     let aspectRatio = Float(width) / Float(height)
     var videoSize = NSSize(width: width, height: height)
@@ -394,10 +390,10 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
     
     self.window!.setContentSize(videoSize)
-    if self.videoView.videoSize == nil {
-      self.videoView.videoSize = videoSize
+    self.videoView.videoSize = videoSize
+    if (!window!.isVisible) {
+      window!.setIsVisible(true)
     }
-    window!.setIsVisible(true)
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)
     updateVolume()

@@ -241,6 +241,36 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     videoView.frame = window!.contentView!.frame
   }
   
+  func windowDidResize(_ notification: Notification) {
+    guard let w = window else { return }
+    w.setFrame(w.constrainFrameRect(w.frame, to: w.screen), display: false)
+    let wSize = w.frame.size, cSize = controlBar.frame.size
+    // update videoview size if in full screen, since aspect ratio may changed
+    if (isInFullScreen) {
+      let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
+      let tryHeight = wSize.width / aspectRatio
+      Swift.print(wSize, aspectRatio, tryHeight)
+      if tryHeight < wSize.height {
+        // should have black above and below
+        let targetHeight = wSize.width / aspectRatio
+        let yOffset = (wSize.height - targetHeight) / 2
+        videoView.frame = NSMakeRect(0, yOffset, wSize.width, targetHeight)
+      } else if tryHeight > wSize.height{
+        // should have black left and right
+        let targetWidth = wSize.height * aspectRatio
+        let xOffset = (wSize.width - targetWidth) / 2
+        videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
+      }
+    }
+    // update control bar position
+    let cph = ud.float(forKey: Preference.Key.controlBarPositionHorizontal)
+    let cpv = ud.float(forKey: Preference.Key.controlBarPositionVertical)
+    controlBar.setFrameOrigin(NSMakePoint(
+      wSize.width * CGFloat(cph) - cSize.width * 0.5,
+      wSize.height * CGFloat(cpv)
+    ))
+  }
+  
   // MARK: - Control UI
   
   func hideUIAndCurdor() {
@@ -321,38 +351,16 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
   }
   
-  // MARK: - Window size
+  // MARK: - Player controller's delegation
   
-  func windowDidResize(_ notification: Notification) {
-    guard let w = window else { return }
-    w.setFrame(w.constrainFrameRect(w.frame, to: w.screen), display: false)
-    let wSize = w.frame.size, cSize = controlBar.frame.size
-    // update videoview size if in full screen, since aspect ratio may changed
-    if (isInFullScreen) {
-      let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
-      let tryHeight = wSize.width / aspectRatio
-      Swift.print(wSize, aspectRatio, tryHeight)
-      if tryHeight < wSize.height {
-        // should have black above and below
-        let targetHeight = wSize.width / aspectRatio
-        let yOffset = (wSize.height - targetHeight) / 2
-        videoView.frame = NSMakeRect(0, yOffset, wSize.width, targetHeight)
-      } else if tryHeight > wSize.height{
-        // should have black left and right
-        let targetWidth = wSize.height * aspectRatio
-        let xOffset = (wSize.width - targetWidth) / 2
-        videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
-      }
+  func loadAnotherVideo() {
+    updateTitle()
+    if videoView != nil {
+      videoView.removeFromSuperview()
+      videoView = nil
+      videoView = initVideoView()
     }
-    // update control bar position
-    let cph = ud.float(forKey: Preference.Key.controlBarPositionHorizontal)
-    let cpv = ud.float(forKey: Preference.Key.controlBarPositionVertical)
-    controlBar.setFrameOrigin(NSMakePoint(
-      wSize.width * CGFloat(cph) - cSize.width * 0.5,
-      wSize.height * CGFloat(cpv)
-    ))
   }
-  
   
   /** Set video size when info available. */
   func adjustFrameByVideoSize(_ width: Int, _ height: Int) {

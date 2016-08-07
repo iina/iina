@@ -47,6 +47,7 @@ class PlayerController: NSObject {
     info.currentURL = url
     mainWindow.showWindow(nil)
     // Send load file command
+    info.fileLoading = true
     mpvController.mpvCommand([MPVCommand.loadfile, path, nil])
   }
   
@@ -152,6 +153,7 @@ class PlayerController: NSObject {
       Utility.fatal("Cannot get video width and height")
       return
     }
+    info.fileLoading = false
     DispatchQueue.main.sync {
       self.getTrackInfo()
       self.getSelectedTracks()

@@ -10,6 +10,8 @@ import Foundation
 
 class PlaybackInfo {
   
+  var fileLoading: Bool = false
+  
   var currentURL: URL?
   
   var videoWidth: Int?

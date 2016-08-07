@@ -249,6 +249,10 @@ class MPVController: NSObject {
   }
   
   private func onVideoReconfig() {
+    // If loading file, video reconfig can return 0 width and height
+    if playerController.info.fileLoading {
+      return
+    }
     let dwidth = mpvGetIntProperty(MPVProperty.dwidth)
     let dheight = mpvGetIntProperty(MPVProperty.dheight)
     // according to client api doc, check whether changed

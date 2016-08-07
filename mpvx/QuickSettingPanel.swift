@@ -103,6 +103,11 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
     }
   }
   
+  @IBAction func rotationChangedAction(_ sender: NSSegmentedControl) {
+    let degrees = [0, 90, 180, 270]
+    playerController.setVideoRotate(degrees[sender.selectedSegment])
+  }
+  
   @IBAction func customAspectBtnAction(_ sender: NSButton) {
     let value = customAspectTextField.stringValue
     if value != "" {

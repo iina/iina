@@ -253,8 +253,11 @@ class MPVController: NSObject {
     if playerController.info.fileLoading {
       return
     }
-    let dwidth = mpvGetIntProperty(MPVProperty.dwidth)
-    let dheight = mpvGetIntProperty(MPVProperty.dheight)
+    var dwidth = mpvGetIntProperty(MPVProperty.dwidth)
+    var dheight = mpvGetIntProperty(MPVProperty.dheight)
+    if playerController.info.rotation == 90 || playerController.info.rotation == 270 {
+      Utility.swap(&dwidth, &dheight)
+    }
     // according to client api doc, check whether changed
     if playerController.info.displayWidth! == 0 && playerController.info.displayHeight! == 0 {
       playerController.info.displayWidth = dwidth

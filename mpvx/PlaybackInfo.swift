@@ -20,6 +20,8 @@ class PlaybackInfo {
   var displayWidth: Int?
   var displayHeight: Int?
   
+  var rotation: Int = 0
+  
   var videoPosition: VideoTime?
   
   var videoDuration: VideoTime?

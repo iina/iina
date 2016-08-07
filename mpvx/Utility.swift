@@ -9,6 +9,9 @@
 import Cocoa
 
 class Utility {
+  
+  // Logs, alerts
+  
   static func showAlert(message: String, alertStyle: NSAlertStyle = .critical) {
     let alert = NSAlert()
     alert.messageText = message
@@ -33,6 +36,16 @@ class Utility {
     block()
     exit(1)
   }
+  
+  // Util functions
+  
+  static func swap<T>(_ a: inout T, _ b: inout T) {
+    let temp = a
+    a = b
+    b = temp
+  }
+  
+  // Util classes
   
   class Regex {
     var regex: RegularExpression?

@@ -148,6 +148,13 @@ class PlayerController: NSObject {
     }
   }
   
+  func setVideoRotate(_ degree: Int) {
+    if [0, 90, 270, 360].index(of: degree) >= 0 {
+      mpvController.mpvSetIntProperty(MPVProperty.videoRotate, degree)
+      info.rotation = degree
+    }
+  }
+  
   func fileLoaded() {
     guard let vwidth = info.videoWidth, vheight = info.videoHeight else {
       Utility.fatal("Cannot get video width and height")

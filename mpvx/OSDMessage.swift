@@ -18,6 +18,14 @@ struct OSDMessage {
     return "Speed: \(formattedValue)"
   }
   
+  static func aspect(_ value: String) -> String {
+    return "Aspect Ratio: \(value)"
+  }
+  
+  static func rotate(_ value: Int) -> String {
+    return "Rotate: \(value)°"
+  }
+  
   static let mute = "Mute"
   static let unMute = "Mute Off"
 }

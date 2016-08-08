@@ -173,10 +173,10 @@ class VideoView: NSOpenGLView {
     let size = self.videoSize!
     openGLContext!.makeCurrentContext()
     // if texture or fbo exists
-    if fbo != 0 {
+    if texture != 0 {
       glDeleteTextures(1, &texture)
     }
-    if texture != 0 {
+    if fbo != 0 {
       glDeleteFramebuffers(1, &fbo)
     }
     // create frame buffer

@@ -54,6 +54,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   lazy var quickSettingPanel: QuickSettingPanel = {
     let panel = QuickSettingPanel()
     panel.playerController = self.playerController
+    panel.mainWindow = self
     return panel
   }()
   
@@ -533,7 +534,10 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   @IBAction func settingsButtonAction(_ sender: NSButton) {
-    quickSettingPanel.showWindow(self)
+    let btnFramwRelativeToWindow = sender.superview!.convert(sender.frame, to: nil)
+    let btnFrameRelativeToScreen = window!.convertToScreen(btnFramwRelativeToWindow)
+    let pos = btnFrameRelativeToScreen.origin
+    quickSettingPanel.showWindowAt(pos, sender:self)
   }
   
   

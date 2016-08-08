@@ -14,23 +14,30 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
     return "QuickSettingPanel"
   }
   
-  var playerController: PlayerController!
-  
+  weak var playerController: PlayerController!
+  weak var mainWindow: MainWindow!
   
   @IBOutlet weak var videoTableView: NSTableView!
   @IBOutlet weak var audioTableView: NSTableView!
   @IBOutlet weak var subTableView: NSTableView!
   @IBOutlet weak var secSubTableView: NSTableView!
+  @IBOutlet weak var rotateSegment: NSSegmentedControl!
+  @IBOutlet weak var aspectSegment: NSSegmentedControl!
   @IBOutlet weak var customAspectTextField: NSTextField!
+  @IBOutlet weak var speedSlider: NSSlider!
+  @IBOutlet weak var customSpeedTextField: NSTextField!
   
   override func windowDidLoad() {
     withAllTableViews { (view, _) in
       view.delegate = self
       view.dataSource = self
-//      view!.selectionHighlightStyle = .none
       view.focusRingType = .none
     }
-    
+  }
+  
+  func showWindowAt(_ origin: NSPoint, sender: AnyObject?) {
+    showWindow(sender)
+    window!.setFrameOrigin(origin)
   }
   
   // MARK: NSTableView delegate
@@ -98,23 +105,39 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
   // MARK: Actions
   
   @IBAction func aspectChangedAction(_ sender: NSSegmentedControl) {
-    if let aspect = sender.label(forSegment: sender.selectedSegment) {
-      playerController.setVideoAspect(aspect)
+    if let value = sender.label(forSegment: sender.selectedSegment) {
+      playerController.setVideoAspect(value)
+      mainWindow.displayOSD(OSDMessage.aspect(value))
     }
   }
   
   @IBAction func rotationChangedAction(_ sender: NSSegmentedControl) {
-    let degrees = [0, 90, 180, 270]
-    playerController.setVideoRotate(degrees[sender.selectedSegment])
+    let value = [0, 90, 180, 270][sender.selectedSegment]
+    playerController.setVideoRotate(value)
+    mainWindow.displayOSD(OSDMessage.rotate(value))
   }
   
   @IBAction func customAspectBtnAction(_ sender: NSButton) {
     let value = customAspectTextField.stringValue
     if value != "" {
+      aspectSegment.setSelected(false, forSegment: aspectSegment.selectedSegment)
       playerController.setVideoAspect(value)
+      mainWindow.displayOSD(OSDMessage.aspect(value))
     }
   }
   
+  @IBAction func speedChangedAction(_ sender: NSSlider) {
+    let value = sender.doubleValue
+    playerController.setSpeed(value)
+    mainWindow.displayOSD(OSDMessage.speed(value))
+  }
+  
+  @IBAction func customSpeedBtnAction(_ sender: NSButton) {
+    let value = customSpeedTextField.doubleValue
+    Swift.print(value)
+    playerController.setSpeed(value)
+    mainWindow.displayOSD(OSDMessage.speed(value))
+  }
   
   
 }

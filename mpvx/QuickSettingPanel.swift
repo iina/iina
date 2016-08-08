@@ -25,6 +25,7 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
   @IBOutlet weak var aspectSegment: NSSegmentedControl!
   @IBOutlet weak var customAspectTextField: NSTextField!
   @IBOutlet weak var speedSlider: NSSlider!
+  @IBOutlet weak var speedSliderIndicator: NSTextField!
   @IBOutlet weak var customSpeedTextField: NSTextField!
   
   override func windowDidLoad() {
@@ -127,9 +128,17 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
   }
   
   @IBAction func speedChangedAction(_ sender: NSSlider) {
-    let value = sender.doubleValue
-    playerController.setSpeed(value)
-    mainWindow.displayOSD(OSDMessage.speed(value))
+    //   0     1 ..     7  8    9 ..  26
+    // -5x -4.5x .. -1.5x 1x 1.5x .. 10x
+    let sliderValue = sender.doubleValue
+    let value = sliderValue >= 8 ? (sliderValue / 2.0 - 3) : (sliderValue / 2.0 - 5)
+    speedSliderIndicator.stringValue = "\(value)x"
+    if let event = NSApp.currentEvent {
+      if event.type == .leftMouseUp {
+        playerController.setSpeed(value)
+        mainWindow.displayOSD(OSDMessage.speed(value))
+      }
+    }
   }
   
   @IBAction func customSpeedBtnAction(_ sender: NSButton) {

@@ -26,6 +26,24 @@ struct OSDMessage {
     return "Rotate: \(value)°"
   }
   
+  static func audioDelay(_ value: Double) -> String {
+    if value == 0 {
+      return "Audio Delay: No Delay"
+    } else {
+      let word = value > 0 ? "Later" : "Earlier"
+      return "Audio Delay: \(value)s \(word)"
+    }
+  }
+  
+  static func subDelay(_ value: Double) -> String {
+    if value == 0 {
+      return "Subtitle Delay: No Delay"
+    } else {
+      let word = value > 0 ? "Later" : "Earlier"
+      return "Subtitle Delay: \(value)s \(word)"
+    }
+  }
+  
   static let mute = "Mute"
   static let unMute = "Mute Off"
 }

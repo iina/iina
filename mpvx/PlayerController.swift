@@ -171,6 +171,14 @@ class PlayerController: NSObject {
     }
   }
   
+  func setAudioDelay(_ delay: Double) {
+    mpvController.mpvSetDoubleProperty(MPVProperty.audioDelay, delay)
+  }
+  
+  func setSubDelay(_ delay: Double) {
+    mpvController.mpvSetDoubleProperty(MPVProperty.subDelay, delay)
+  }
+  
   func fileLoaded() {
     guard let vwidth = info.videoWidth, vheight = info.videoHeight else {
       Utility.fatal("Cannot get video width and height")

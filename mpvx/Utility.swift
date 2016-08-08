@@ -62,6 +62,12 @@ class Utility {
     b = temp
   }
   
+  static let decimalFormatter : Formatter = {
+    let fmtr = NumberFormatter()
+    fmtr.numberStyle = .decimal
+    return fmtr
+  }()
+  
   // MARK: - Util classes
   
   class Regex {

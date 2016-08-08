@@ -196,7 +196,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
       let newVolume = playerController.info.volume - Int(event.scrollingDeltaY)
       playerController.setVolume(newVolume)
       volumeSlider.integerValue = newVolume
-      displayOSD(OSDMessage.volume(playerController.info.volume))
+      displayOSD(.volume(playerController.info.volume))
     }
   }
   
@@ -327,13 +327,13 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
   }
   
-  func displayOSD(_ message: String) {
+  func displayOSD(_ message: OSDMessage) {
     if hideOSDTimer != nil {
       hideOSDTimer!.invalidate()
       hideOSDTimer = nil
     }
     osdAnimationState = .shown
-    osd.stringValue = message
+    osd.stringValue = message.message()
     osd.alphaValue = 1
     osd.isHidden = false
     let timeout = ud.integer(forKey: Preference.Key.osdAutoHideTimeout)
@@ -466,11 +466,11 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   @IBAction func muteButtonAction(_ sender: NSButton) {
     if sender.state == NSOnState {
       playerController.toogleMute(true)
-      displayOSD(OSDMessage.mute)
+      displayOSD(.mute)
     }
     if sender.state == NSOffState {
       playerController.toogleMute(false)
-      displayOSD(OSDMessage.unMute)
+      displayOSD(.unMute)
     }
   }
   
@@ -519,7 +519,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
         rightArrowLabel.isHidden = false
         rightArrowLabel.stringValue = String(format: "%.0fx", speedValue)
       }
-      displayOSD(OSDMessage.speed(speedValue))
+      displayOSD(.speed(speedValue))
       // if is paused
       if playButton.state == NSOffState {
         updatePlayButtonState(NSOnState)
@@ -551,7 +551,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.integerValue
     playerController.setVolume(value)
-    displayOSD(OSDMessage.volume(value))
+    displayOSD(.volume(value))
   }
   
   

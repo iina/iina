@@ -119,14 +119,14 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
   @IBAction func aspectChangedAction(_ sender: NSSegmentedControl) {
     if let value = sender.label(forSegment: sender.selectedSegment) {
       playerController.setVideoAspect(value)
-      mainWindow.displayOSD(OSDMessage.aspect(value))
+      mainWindow.displayOSD(.aspect(value))
     }
   }
   
   @IBAction func rotationChangedAction(_ sender: NSSegmentedControl) {
     let value = [0, 90, 180, 270][sender.selectedSegment]
     playerController.setVideoRotate(value)
-    mainWindow.displayOSD(OSDMessage.rotate(value))
+    mainWindow.displayOSD(.rotate(value))
   }
   
   @IBAction func customAspectBtnAction(_ sender: NSButton) {
@@ -134,7 +134,7 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
     if value != "" {
       aspectSegment.setSelected(false, forSegment: aspectSegment.selectedSegment)
       playerController.setVideoAspect(value)
-      mainWindow.displayOSD(OSDMessage.aspect(value))
+      mainWindow.displayOSD(.aspect(value))
     }
   }
   
@@ -147,7 +147,7 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerController.setSpeed(value)
-        mainWindow.displayOSD(OSDMessage.speed(value))
+        mainWindow.displayOSD(.speed(value))
       }
     }
   }
@@ -156,7 +156,7 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
     let value = customSpeedTextField.doubleValue
     if value >= 1 || value <= -1 {
       playerController.setSpeed(value)
-      mainWindow.displayOSD(OSDMessage.speed(value))
+      mainWindow.displayOSD(.speed(value))
     }
   }
   
@@ -181,7 +181,7 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerController.setAudioDelay(sliderValue)
-        mainWindow.displayOSD(OSDMessage.audioDelay(sliderValue))
+        mainWindow.displayOSD(.audioDelay(sliderValue))
       }
     }
   }
@@ -189,7 +189,7 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
   @IBAction func customAudioDelayBtnAction(_ sender: NSButton) {
     let value = customAudioDelayTextField.doubleValue
     playerController.setAudioDelay(value)
-    mainWindow.displayOSD(OSDMessage.audioDelay(value))
+    mainWindow.displayOSD(.audioDelay(value))
   }
 
   
@@ -199,7 +199,7 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerController.setSubDelay(sliderValue)
-        mainWindow.displayOSD(OSDMessage.subDelay(sliderValue))
+        mainWindow.displayOSD(.subDelay(sliderValue))
       }
     }
   }
@@ -207,7 +207,7 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
   @IBAction func customSubDelayBtnAction(_ sender: NSButton) {
     let value = customSubDelayTextField.doubleValue
     playerController.setSubDelay(value)
-    mainWindow.displayOSD(OSDMessage.subDelay(value))
+    mainWindow.displayOSD(.subDelay(value))
   }
   
 }

@@ -155,6 +155,22 @@ class PlayerController: NSObject {
     }
   }
   
+  func loadExternalAudioFile(_ url: URL) {
+    if let path  = url.path {
+      mpvController.mpvCommand([MPVCommand.audioAdd, path, nil])
+      getTrackInfo()
+      getSelectedTracks()
+    }
+  }
+  
+  func loadExternalSubFile(_ url: URL) {
+    if let path  = url.path {
+      mpvController.mpvCommand([MPVCommand.subAdd, path, nil])
+      getTrackInfo()
+      getSelectedTracks()
+    }
+  }
+  
   func fileLoaded() {
     guard let vwidth = info.videoWidth, vheight = info.videoHeight else {
       Utility.fatal("Cannot get video width and height")

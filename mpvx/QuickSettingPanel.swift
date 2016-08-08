@@ -139,5 +139,20 @@ class QuickSettingPanel: NSWindowController, NSTableViewDataSource, NSTableViewD
     mainWindow.displayOSD(OSDMessage.speed(value))
   }
   
+  @IBAction func loadExternalAudioAction(_ sender: NSButton) {
+    Utility.quickOpenPanel(title: "Load external audio file") { url in
+      self.playerController.loadExternalAudioFile(url)
+    }
+    audioTableView.reloadData()
+  }
+  
+  @IBAction func loadExternalSubAction(_ sender: NSButton) {
+    Utility.quickOpenPanel(title: "Load external subtitle") { url in
+      self.playerController.loadExternalSubFile(url)
+    }
+    subTableView.reloadData()
+    secSubTableView.reloadData()
+  }
+  
   
 }

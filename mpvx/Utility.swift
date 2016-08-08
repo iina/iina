@@ -10,7 +10,7 @@ import Cocoa
 
 class Utility {
   
-  // Logs, alerts
+  // MARK: - Logs, alerts
   
   static func showAlert(message: String, alertStyle: NSAlertStyle = .critical) {
     let alert = NSAlert()
@@ -37,7 +37,24 @@ class Utility {
     exit(1)
   }
   
-  // Util functions
+  // MARK: - Panels, Alerts
+  
+  static func quickOpenPanel(title: String, ok: (URL) -> Void) {
+    let panel = NSOpenPanel()
+    panel.title = title
+    panel.canCreateDirectories = false
+    panel.canChooseFiles = true
+    panel.canChooseDirectories = false
+    panel.resolvesAliases = true
+    panel.allowsMultipleSelection = false
+    if panel.runModal() == NSFileHandlingPanelOKButton {
+      if let url = panel.url {
+        ok(url)
+      }
+    }
+  }
+  
+  // MARK: - Util functions
   
   static func swap<T>(_ a: inout T, _ b: inout T) {
     let temp = a
@@ -45,7 +62,7 @@ class Utility {
     b = temp
   }
   
-  // Util classes
+  // MARK: - Util classes
   
   class Regex {
     var regex: RegularExpression?

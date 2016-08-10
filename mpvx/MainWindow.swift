@@ -50,6 +50,8 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   var scrollDirection: ScrollDirection?
   
+  @IBOutlet var settingsView: NSVisualEffectView!
+  
   /** The quick setting window */
   lazy var quickSettingPanel: QuickSettingPanel = {
     let panel = QuickSettingPanel()
@@ -119,8 +121,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   // MARK: - Mouse / Trackpad event
   
   override func keyDown(_ event: NSEvent) {
-    playerController.togglePause(nil)
-  }
+    playerController.togglePause(nil)  }
   
   /** record mouse pos on mouse down */
   override func mouseDown(_ event: NSEvent) {
@@ -352,6 +353,10 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
   }
   
+  private func showSettingsView() {
+    window!.contentView!.addSubview(settingsView)
+  }
+  
   // MARK: - Player controller's delegation
   
   func loadAnotherVideo() {
@@ -534,10 +539,9 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   @IBAction func settingsButtonAction(_ sender: NSButton) {
-    let btnFramwRelativeToWindow = sender.superview!.convert(sender.frame, to: nil)
-    let btnFrameRelativeToScreen = window!.convertToScreen(btnFramwRelativeToWindow)
-    let pos = btnFrameRelativeToScreen.origin
-    quickSettingPanel.showWindowAt(pos, sender:self)
+    
+    showSettingsView()
+
   }
   
   

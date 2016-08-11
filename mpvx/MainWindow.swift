@@ -51,16 +51,14 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   var scrollDirection: ScrollDirection?
   
-  @IBOutlet var settingsView: NSVisualEffectView!
-  
   @IBOutlet weak var titleBarHeightConstraint: NSLayoutConstraint!
   
   /** The quick setting window */
-  lazy var quickSettingPanel: QuickSettingPanel = {
-    let panel = QuickSettingPanel()
-    panel.playerController = self.playerController
-    panel.mainWindow = self
-    return panel
+  lazy var quickSettingView: QuickSettingView = {
+    let quickSettingView = QuickSettingView()
+    quickSettingView.playerController = self.playerController
+    quickSettingView.mainWindow = self
+    return quickSettingView
   }()
   
   @IBOutlet weak var titleBarView: NSVisualEffectView!
@@ -104,6 +102,8 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     // video view
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
     playerController.startMPVOpenGLCB(videoView)
+    // init quick setting view now
+    let _ = quickSettingView
     // other initialization
     osd.isHidden = true
     leftArrowLabel.isHidden = true
@@ -357,16 +357,22 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   private func showSettingsView() {
+    let qsv = self.quickSettingView.view
+    self.titleBarView.addSubview(qsv)
+    // constraints
+    qsv.translatesAutoresizingMaskIntoConstraints = false
+    let centerXConstraint = NSLayoutConstraint(item: qsv, attribute: .centerX, relatedBy: .equal, toItem: self.titleBarView, attribute: .centerX, multiplier: 1, constant: 0)
+    let heightConstaraint = NSLayoutConstraint(item: qsv, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 320)
+    let widthConstraint = NSLayoutConstraint(item: qsv, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 600)
+    let bottomConstraint = NSLayoutConstraint(item: qsv, attribute: .bottom, relatedBy: .equal, toItem: self.titleBarView, attribute: .bottom, multiplier: 1, constant: 0)
+    NSLayoutConstraint.activate([centerXConstraint, heightConstaraint, widthConstraint, bottomConstraint])
+
+    
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       titleBarHeightConstraint.animator().constant = 344
     }) {
-      self.titleBarView.addSubview(self.settingsView)
-      let hConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[sv(==600)]", options: .alignAllCenterX , metrics: nil, views: ["sv": self.settingsView])
-      let vConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[sv(==320)]-(-8)-|", options: .alignAllCenterY , metrics: nil, views: ["sv": self.settingsView])
-      NSLayoutConstraint.activate(hConstraints)
-      NSLayoutConstraint.activate(vConstraints)
       self.isSettingViewShowing = true
     }
   }
@@ -569,7 +575,6 @@ class MainWindow: NSWindowController, NSWindowDelegate {
       showSettingsView()
     }
   }
-  
   
   /** When slider changes */
   @IBAction func playSliderChanges(_ sender: NSSlider) {

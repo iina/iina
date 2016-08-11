@@ -19,6 +19,8 @@
 		845FB0CB1D3A16CC00C011E0 /* PreferenceWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845FB0C91D3A16CC00C011E0 /* PreferenceWindow.xib */; };
 		8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */; };
 		8461C5301D462488006E91FF /* VideoTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52F1D462488006E91FF /* VideoTime.swift */; };
+		8466BE181D5CDD0300039D03 /* QuickSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466BE161D5CDD0300039D03 /* QuickSettingView.swift */; };
+		8466BE191D5CDD0300039D03 /* QuickSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8466BE171D5CDD0300039D03 /* QuickSettingView.xib */; };
 		847644081D48B413004F6DF5 /* MPVOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847644071D48B413004F6DF5 /* MPVOption.swift */; };
 		8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847644091D48CC3D004F6DF5 /* MPVCommand.swift */; };
 		8476440C1D48F63D004F6DF5 /* OSDMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476440B1D48F63D004F6DF5 /* OSDMessage.swift */; };
@@ -67,6 +69,8 @@
 		845FB0C91D3A16CC00C011E0 /* PreferenceWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferenceWindow.xib; sourceTree = "<group>"; };
 		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
 		8461C52F1D462488006E91FF /* VideoTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTime.swift; sourceTree = "<group>"; };
+		8466BE161D5CDD0300039D03 /* QuickSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSettingView.swift; sourceTree = "<group>"; };
+		8466BE171D5CDD0300039D03 /* QuickSettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuickSettingView.xib; sourceTree = "<group>"; };
 		847644071D48B413004F6DF5 /* MPVOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVOption.swift; sourceTree = "<group>"; };
 		847644091D48CC3D004F6DF5 /* MPVCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVCommand.swift; sourceTree = "<group>"; };
 		8476440B1D48F63D004F6DF5 /* OSDMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OSDMessage.swift; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 				84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */,
 				84A0BA9C1D2FAD4000BC8DA1 /* MainWindow.swift */,
 				84A0BA9D1D2FAD4000BC8DA1 /* MainWindow.xib */,
+				8466BE161D5CDD0300039D03 /* QuickSettingView.swift */,
+				8466BE171D5CDD0300039D03 /* QuickSettingView.xib */,
 				840688D61D4D2810000FA93F /* QuickSettingPanel.swift */,
 				840688D71D4D2810000FA93F /* QuickSettingPanel.xib */,
 				8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */,
@@ -377,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */,
+				8466BE191D5CDD0300039D03 /* QuickSettingView.xib in Resources */,
 				840688D91D4D2810000FA93F /* QuickSettingPanel.xib in Resources */,
 				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
 				845FB0CB1D3A16CC00C011E0 /* PreferenceWindow.xib in Resources */,
@@ -456,6 +463,7 @@
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
 				840688D81D4D2810000FA93F /* QuickSettingPanel.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
+				8466BE181D5CDD0300039D03 /* QuickSettingView.swift in Sources */,
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindow.swift in Sources */,
 				8476440C1D48F63D004F6DF5 /* OSDMessage.swift in Sources */,
 				84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */,

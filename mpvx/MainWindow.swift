@@ -19,6 +19,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   var isDragging: Bool = false
   
   var isInFullScreen: Bool = false
+  var isSettingViewShowing: Bool = false
   
   override var windowNibName: String {
     return "MainWindow"
@@ -52,6 +53,8 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   @IBOutlet var settingsView: NSVisualEffectView!
   
+  @IBOutlet weak var titleBarHeightConstraint: NSLayoutConstraint!
+  
   /** The quick setting window */
   lazy var quickSettingPanel: QuickSettingPanel = {
     let panel = QuickSettingPanel()
@@ -61,7 +64,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }()
   
   @IBOutlet weak var titleBarView: NSVisualEffectView!
-  @IBOutlet weak var titleBarTitleCell: NSTextFieldCell!
+  @IBOutlet weak var titleTextField: NSTextField!
   @IBOutlet weak var controlBar: ControlBarView!
   @IBOutlet weak var playButton: NSButton!
   @IBOutlet weak var playSlider: NSSlider!
@@ -324,7 +327,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   func updateTitle() {
     if let w = window, url = playerController.info.currentURL?.lastPathComponent {
       w.title = url
-      titleBarTitleCell.title = url
+      titleTextField.stringValue = url
     }
   }
   
@@ -354,7 +357,28 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   private func showSettingsView() {
-    window!.contentView!.addSubview(settingsView)
+    NSAnimationContext.runAnimationGroup({ (context) in
+      context.duration = 0.2
+      context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+      titleBarHeightConstraint.animator().constant = 344
+    }) {
+      self.titleBarView.addSubview(self.settingsView)
+      let hConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[sv(==600)]", options: .alignAllCenterX , metrics: nil, views: ["sv": self.settingsView])
+      let vConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[sv(==320)]-(-8)-|", options: .alignAllCenterY , metrics: nil, views: ["sv": self.settingsView])
+      NSLayoutConstraint.activate(hConstraints)
+      NSLayoutConstraint.activate(vConstraints)
+      self.isSettingViewShowing = true
+    }
+  }
+  
+  private func hideSettingsView() {
+    NSAnimationContext.runAnimationGroup({ (context) in
+      context.duration = 0.2
+      context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+      titleBarHeightConstraint.animator().constant = 22
+    }) {
+      self.isSettingViewShowing = false
+    }
   }
   
   // MARK: - Player controller's delegation
@@ -539,9 +563,11 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   @IBAction func settingsButtonAction(_ sender: NSButton) {
-    
-    showSettingsView()
-
+    if isSettingViewShowing {
+      hideSettingsView()
+    } else {
+      showSettingsView()
+    }
   }
   
   

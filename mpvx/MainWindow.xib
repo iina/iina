@@ -16,9 +16,9 @@
                 <outlet property="rightArrowLabel" destination="QTI-wi-oyB" id="icX-KI-Muj"/>
                 <outlet property="rightLabel" destination="GgV-Cc-sk0" id="fnx-gO-YPl"/>
                 <outlet property="settingsView" destination="448-me-KKw" id="teJ-9G-Imi"/>
-                <outlet property="titleBarTitleCell" destination="AOe-dk-iFa" id="u5U-pl-8nT"/>
+                <outlet property="titleBarHeightConstraint" destination="1Dw-Bg-FRS" id="IaK-ti-9vX"/>
                 <outlet property="titleBarView" destination="TRx-2V-Gr3" id="kOU-nP-MAP"/>
-                <outlet property="titleBarViewHeightConstraint" destination="1Dw-Bg-FRS" id="sMx-ov-JQA"/>
+                <outlet property="titleTextField" destination="gW1-BG-OEa" id="8wO-J1-Yp6"/>
                 <outlet property="volumeSlider" destination="SAG-kc-FAt" id="zM0-Gg-vfy"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
@@ -34,11 +34,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="680" height="355"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" misplaced="YES" blendingMode="withinWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="TRx-2V-Gr3">
-                        <rect key="frame" x="0.0" y="113" width="680" height="242"/>
+                    <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="TRx-2V-Gr3">
+                        <rect key="frame" x="0.0" y="333" width="680" height="22"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gW1-BG-OEa">
-                                <rect key="frame" x="-2" y="222" width="684" height="17"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gW1-BG-OEa">
+                                <rect key="frame" x="-2" y="2" width="684" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="Mcr-JX-OZE"/>
                                 </constraints>
@@ -191,11 +191,11 @@
             <point key="canvasLocation" x="126" y="233.5"/>
         </window>
         <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" id="448-me-KKw">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="320"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <tabView fixedFrame="YES" drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="DQB-JL-n5W">
-                    <rect key="frame" x="4" y="20" width="472" height="274"/>
+                    <rect key="frame" x="128" y="0.0" width="472" height="274"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
@@ -823,7 +823,7 @@
                     </tabViewItems>
                 </tabView>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9il-ST-dR8">
-                    <rect key="frame" x="0.0" y="302" width="147" height="58"/>
+                    <rect key="frame" x="0.0" y="216" width="120" height="58"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="square" title="VIDEO" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="ozj-wS-mgW">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
@@ -831,7 +831,7 @@
                     </buttonCell>
                 </button>
             </subviews>
-            <point key="canvasLocation" x="46" y="1135"/>
+            <point key="canvasLocation" x="125" y="1135"/>
         </visualEffectView>
     </objects>
     <resources>

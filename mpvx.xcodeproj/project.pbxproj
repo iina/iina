@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		840688D81D4D2810000FA93F /* QuickSettingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840688D61D4D2810000FA93F /* QuickSettingPanel.swift */; };
-		840688D91D4D2810000FA93F /* QuickSettingPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840688D71D4D2810000FA93F /* QuickSettingPanel.xib */; };
 		844DE1BF1D3E2B9900272589 /* MPVEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DE1BE1D3E2B9900272589 /* MPVEvent.swift */; };
 		8452DD851D3B956D008A543A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452DD841D3B956D008A543A /* Preference.swift */; };
 		8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD881D3CB4EF008A543A /* vertexShader.glsl */; };
@@ -57,8 +55,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		840688D61D4D2810000FA93F /* QuickSettingPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSettingPanel.swift; sourceTree = "<group>"; };
-		840688D71D4D2810000FA93F /* QuickSettingPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuickSettingPanel.xib; sourceTree = "<group>"; };
 		844DE1BE1D3E2B9900272589 /* MPVEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVEvent.swift; sourceTree = "<group>"; };
 		8452DD841D3B956D008A543A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		8452DD881D3CB4EF008A543A /* vertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertexShader.glsl; sourceTree = "<group>"; };
@@ -161,8 +157,6 @@
 				84A0BA9D1D2FAD4000BC8DA1 /* MainWindow.xib */,
 				8466BE161D5CDD0300039D03 /* QuickSettingView.swift */,
 				8466BE171D5CDD0300039D03 /* QuickSettingView.xib */,
-				840688D61D4D2810000FA93F /* QuickSettingPanel.swift */,
-				840688D71D4D2810000FA93F /* QuickSettingPanel.xib */,
 				8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */,
 				84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */,
 				845FB0C61D39462E00C011E0 /* ControlBarView.swift */,
@@ -384,7 +378,6 @@
 			files = (
 				8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */,
 				8466BE191D5CDD0300039D03 /* QuickSettingView.xib in Resources */,
-				840688D91D4D2810000FA93F /* QuickSettingPanel.xib in Resources */,
 				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
 				845FB0CB1D3A16CC00C011E0 /* PreferenceWindow.xib in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
@@ -461,7 +454,6 @@
 				84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */,
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
-				840688D81D4D2810000FA93F /* QuickSettingPanel.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
 				8466BE181D5CDD0300039D03 /* QuickSettingView.swift in Sources */,
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindow.swift in Sources */,

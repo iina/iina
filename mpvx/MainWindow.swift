@@ -210,16 +210,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     // show titlebar
     window!.titlebarAppearsTransparent = false
     window!.titleVisibility = .visible
-    // remove buttons from fade-able views
-    withStandardButtons { button in
-      if let index = (self.fadeableViews.index {$0 === button}) {
-        self.fadeableViews.remove(at: index)
-      }
-    }
-    // remove titlebar view from fade-able views
-    if let index = (self.fadeableViews.index {$0 === titleBarView}) {
-      self.fadeableViews.remove(at: index)
-    }
+    removeTitlebarFromFadeableViews()
     // stop animation and hide titleBarView
     animationState = .hidden
     titleBarView.isHidden = true
@@ -234,12 +225,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     // show titleBarView
     titleBarView.isHidden = false
     animationState = .shown
-    // add back buttons to fade-able views
-    withStandardButtons { button in
-      self.fadeableViews.append(button)
-    }
-    // add back titlebar view to fade-able views
-    self.fadeableViews.append(titleBarView)
+    addBackTitlebarToFadeableViews()
     Swift.print("exit fullscreen")
     isInFullScreen = false
     // set back frame of videoview
@@ -357,34 +343,65 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   private func showSettingsView() {
+    self.window!.minSize = NSMakeSize(616, 420)
+    
     let qsv = self.quickSettingView.view
     self.titleBarView.addSubview(qsv)
-    // constraints
+    qsv.alphaValue = 0
+    // add constraints
     qsv.translatesAutoresizingMaskIntoConstraints = false
     let centerXConstraint = NSLayoutConstraint(item: qsv, attribute: .centerX, relatedBy: .equal, toItem: self.titleBarView, attribute: .centerX, multiplier: 1, constant: 0)
-    let heightConstaraint = NSLayoutConstraint(item: qsv, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 320)
+    let heightConstaraint = NSLayoutConstraint(item: qsv, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 330)
     let widthConstraint = NSLayoutConstraint(item: qsv, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 600)
     let bottomConstraint = NSLayoutConstraint(item: qsv, attribute: .bottom, relatedBy: .equal, toItem: self.titleBarView, attribute: .bottom, multiplier: 1, constant: 0)
     NSLayoutConstraint.activate([centerXConstraint, heightConstaraint, widthConstraint, bottomConstraint])
-
     
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-      titleBarHeightConstraint.animator().constant = 344
+      qsv.animator().alphaValue = 1
+      titleBarHeightConstraint.animator().constant = 22 + 330
     }) {
+      self.removeTitlebarFromFadeableViews()
       self.isSettingViewShowing = true
     }
   }
   
   private func hideSettingsView() {
+    let qsv = self.quickSettingView.view
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       titleBarHeightConstraint.animator().constant = 22
+      qsv.animator().alphaValue = 0
     }) {
+      self.addBackTitlebarToFadeableViews()
+      qsv.removeFromSuperview()
+      self.window!.minSize = NSMakeSize(500, 300)
       self.isSettingViewShowing = false
     }
+  }
+  
+  private func removeTitlebarFromFadeableViews() {
+    // remove buttons from fade-able views
+    withStandardButtons { button in
+      if let index = (self.fadeableViews.index {$0 === button}) {
+        self.fadeableViews.remove(at: index)
+      }
+    }
+    // remove titlebar view from fade-able views
+    if let index = (self.fadeableViews.index {$0 === titleBarView}) {
+      self.fadeableViews.remove(at: index)
+    }
+  }
+  
+  private func addBackTitlebarToFadeableViews() {
+    // add back buttons to fade-able views
+    withStandardButtons { button in
+      self.fadeableViews.append(button)
+    }
+    // add back titlebar view to fade-able views
+    self.fadeableViews.append(titleBarView)
   }
   
   // MARK: - Player controller's delegation

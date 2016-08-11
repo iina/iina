@@ -17,6 +17,11 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
   weak var playerController: PlayerController!
   weak var mainWindow: MainWindow!
   
+  @IBOutlet weak var videoTabBtn: NSButton!
+  @IBOutlet weak var audioTabBtn: NSButton!
+  @IBOutlet weak var subTabBtn: NSButton!
+  @IBOutlet weak var tabView: NSTabView!
+  
   @IBOutlet weak var videoTableView: NSTableView!
   @IBOutlet weak var audioTableView: NSTableView!
   @IBOutlet weak var subTableView: NSTableView!
@@ -110,6 +115,15 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
   }
   
   // MARK: Actions
+  
+  // Tab buttons
+  
+  @IBAction func tabBtnAction(_ sender: NSButton) {
+    tabView.selectTabViewItem(at: sender.tag)
+  }
+  
+  
+  // Video tab
   
   @IBAction func aspectChangedAction(_ sender: NSSegmentedControl) {
     if let value = sender.label(forSegment: sender.selectedSegment) {

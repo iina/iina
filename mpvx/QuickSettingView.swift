@@ -48,8 +48,11 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
       view.delegate = self
       view.dataSource = self
       view.focusRingType = .none
+//      view.backgroundColor = NSColor.clear()
+      view.superview?.superview?.layer?.cornerRadius = 4
     }
     customSpeedTextField.formatter = Utility.decimalFormatter
+//    customAspectTextField.layer?.cornerRadius = 6
   }
   
   // MARK: NSTableView delegate
@@ -122,6 +125,9 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
     tabView.selectTabViewItem(at: sender.tag)
   }
   
+  @IBAction func slideUpBtnAction(_ sender: AnyObject) {
+    mainWindow.hideSettingsView()
+  }
   
   // Video tab
   

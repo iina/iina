@@ -168,17 +168,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   override func mouseMoved(_ event: NSEvent) {
-    if animationState == .hidden {
-      showUI()
-    }
-    // if timer exist, destroy first
-    if hideControlTimer != nil {
-      hideControlTimer!.invalidate()
-      hideControlTimer = nil
-    }
-    // create new timer
-    let timeout = ud.float(forKey: Preference.Key.controlBarAutoHideTimeout)
-    hideControlTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideUIAndCurdor), userInfo: nil, repeats: false)
+    showUIAndUpdateTimer()
   }
   
   
@@ -310,6 +300,20 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
   }
   
+  private func showUIAndUpdateTimer() {
+    if animationState == .hidden {
+      showUI()
+    }
+    // if timer exist, destroy first
+    if hideControlTimer != nil {
+      hideControlTimer!.invalidate()
+      hideControlTimer = nil
+    }
+    // create new timer
+    let timeout = ud.float(forKey: Preference.Key.controlBarAutoHideTimeout)
+    hideControlTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideUIAndCurdor), userInfo: nil, repeats: false)
+  }
+  
   func updateTitle() {
     if let w = window, url = playerController.info.currentURL?.lastPathComponent {
       w.title = url
@@ -343,11 +347,14 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   private func showSettingsView() {
-    self.window!.minSize = NSMakeSize(616, 420)
+    
+    showUIAndUpdateTimer()
+    removeTitlebarFromFadeableViews()
+    
+    window!.minSize = NSMakeSize(625, 420)
     
     let qsv = self.quickSettingView.view
     self.titleBarView.addSubview(qsv)
-    qsv.alphaValue = 0
     // add constraints
     qsv.translatesAutoresizingMaskIntoConstraints = false
     let centerXConstraint = NSLayoutConstraint(item: qsv, attribute: .centerX, relatedBy: .equal, toItem: self.titleBarView, attribute: .centerX, multiplier: 1, constant: 0)
@@ -359,21 +366,18 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-      qsv.animator().alphaValue = 1
       titleBarHeightConstraint.animator().constant = 22 + 330
     }) {
-      self.removeTitlebarFromFadeableViews()
       self.isSettingViewShowing = true
     }
   }
   
-  private func hideSettingsView() {
+  func hideSettingsView() {
     let qsv = self.quickSettingView.view
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       titleBarHeightConstraint.animator().constant = 22
-      qsv.animator().alphaValue = 0
     }) {
       self.addBackTitlebarToFadeableViews()
       qsv.removeFromSuperview()
@@ -405,15 +409,6 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   // MARK: - Player controller's delegation
-  
-  func loadAnotherVideo() {
-    updateTitle()
-    if videoView != nil {
-      videoView.removeFromSuperview()
-      videoView = nil
-      videoView = initVideoView()
-    }
-  }
   
   /** Set video size when info available. */
   func adjustFrameByVideoSize(_ width: Int, _ height: Int) {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843FFD4C1D5DAA01001F3A44 /* RoundedTextFieldCell.swift */; };
 		844DE1BF1D3E2B9900272589 /* MPVEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DE1BE1D3E2B9900272589 /* MPVEvent.swift */; };
 		8452DD851D3B956D008A543A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452DD841D3B956D008A543A /* Preference.swift */; };
 		8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD881D3CB4EF008A543A /* vertexShader.glsl */; };
@@ -55,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		843FFD4C1D5DAA01001F3A44 /* RoundedTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldCell.swift; sourceTree = "<group>"; };
 		844DE1BE1D3E2B9900272589 /* MPVEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVEvent.swift; sourceTree = "<group>"; };
 		8452DD841D3B956D008A543A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		8452DD881D3CB4EF008A543A /* vertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertexShader.glsl; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				84A0BA9D1D2FAD4000BC8DA1 /* MainWindow.xib */,
 				8466BE161D5CDD0300039D03 /* QuickSettingView.swift */,
 				8466BE171D5CDD0300039D03 /* QuickSettingView.xib */,
+				843FFD4C1D5DAA01001F3A44 /* RoundedTextFieldCell.swift */,
 				8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */,
 				84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */,
 				845FB0C61D39462E00C011E0 /* ControlBarView.swift */,
@@ -464,6 +467,7 @@
 				84A0BA901D2F8D4100BC8DA1 /* Error.swift in Sources */,
 				847644081D48B413004F6DF5 /* MPVOption.swift in Sources */,
 				845FB0CA1D3A16CC00C011E0 /* PreferenceWindow.swift in Sources */,
+				843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */,
 				84A0BA9B1D2FAB4100BC8DA1 /* Parameter.swift in Sources */,
 				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,

@@ -9,7 +9,6 @@
 import Cocoa
 
 extension NSSlider {
-  
   /** Returns the positon of knob center by point */
   func knobPointPosition() -> CGFloat {
     let sliderOrigin = frame.origin.x + knobThickness / 2
@@ -17,5 +16,22 @@ extension NSSlider {
     let knobPos = sliderOrigin + sliderWidth * CGFloat((doubleValue - minValue) / (maxValue - minValue))
     return knobPos
   }
-  
+}
+
+extension NSSize {
+  /** Constrain a NSSize to satisfy a min size while keeping same aspect */
+  func satisfyMinSizeWithFixedAspectRatio(_ minSize: NSSize) -> NSSize {
+    let aspect = width / height
+    if width >= minSize.width && height >= minSize.height {
+      return self
+    } else {
+      let tryWidth = minSize.height * aspect
+      let tryHeight = minSize.width / aspect
+      if tryWidth >= width {  // use minSize.height
+        return NSSize(width: tryWidth, height: minSize.height)
+      } else {  // use minSize.width
+        return NSSize(width: minSize.width, height: tryHeight)
+      }
+    }
+  }
 }

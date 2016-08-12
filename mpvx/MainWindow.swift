@@ -11,6 +11,7 @@ import Cocoa
 class MainWindow: NSWindowController, NSWindowDelegate {
   
   let ud: UserDefaults = UserDefaults.standard
+  let minSizeWhenSettingsViewShown = NSMakeSize(625, 352)
   
   var playerController: PlayerController!
   lazy var videoView: VideoView! = self.initVideoView()
@@ -353,7 +354,9 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     showUIAndUpdateTimer()
     removeTitlebarFromFadeableViews()
     
-    window!.minSize = NSMakeSize(625, 420)
+    guard let window = window else { return }
+    window.minSize = minSizeWhenSettingsViewShown
+    window.setFrame(NSRect(origin: window.frame.origin, size:window.frame.size.satisfyMinSizeWithFixedAspectRatio(minSizeWhenSettingsViewShown)), display: true, animate: true)
     
     let qsv = self.quickSettingView.view
     self.titleBarView.addSubview(qsv)

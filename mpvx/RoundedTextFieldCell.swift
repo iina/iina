@@ -22,7 +22,7 @@ class RoundedTextFieldCell: NSTextFieldCell {
   }
   
   override func drawingRect(forBounds rect: NSRect) -> NSRect {
-    return NSInsetRect(rect, paddingH, paddingV)
+    return rect.insetBy(dx: paddingH, dy: paddingV)
   }
 
 }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAA61D5DF2DA003BECF2 /* Extensions.swift */; };
+		8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAA81D5E3C2B003BECF2 /* Formatters.swift */; };
+		8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAAC1D5E4546003BECF2 /* SlideUpButton.swift */; };
 		843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843FFD4C1D5DAA01001F3A44 /* RoundedTextFieldCell.swift */; };
 		844DE1BF1D3E2B9900272589 /* MPVEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DE1BE1D3E2B9900272589 /* MPVEvent.swift */; };
 		8452DD851D3B956D008A543A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452DD841D3B956D008A543A /* Preference.swift */; };
@@ -56,6 +59,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8434BAA61D5DF2DA003BECF2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8434BAA81D5E3C2B003BECF2 /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		8434BAAC1D5E4546003BECF2 /* SlideUpButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideUpButton.swift; sourceTree = "<group>"; };
 		843FFD4C1D5DAA01001F3A44 /* RoundedTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldCell.swift; sourceTree = "<group>"; };
 		844DE1BE1D3E2B9900272589 /* MPVEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVEvent.swift; sourceTree = "<group>"; };
 		8452DD841D3B956D008A543A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
@@ -164,6 +170,7 @@
 				84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */,
 				845FB0C61D39462E00C011E0 /* ControlBarView.swift */,
 				84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */,
+				8434BAAC1D5E4546003BECF2 /* SlideUpButton.swift */,
 				8452DD881D3CB4EF008A543A /* vertexShader.glsl */,
 				8452DD8A1D3CB519008A543A /* fragmentShader.glsl */,
 				8452DD7F1D3A1F2A008A543A /* Preference */,
@@ -177,7 +184,9 @@
 				8497A4831D2FF573005F504F /* mpvx-Bridging-Header.h */,
 				84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */,
 				84EB1F061D2F5E76004FA5A1 /* Utility.swift */,
+				8434BAA81D5E3C2B003BECF2 /* Formatters.swift */,
 				8461C52F1D462488006E91FF /* VideoTime.swift */,
+				8434BAA61D5DF2DA003BECF2 /* Extensions.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -466,16 +475,19 @@
 				84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */,
 				84A0BA901D2F8D4100BC8DA1 /* Error.swift in Sources */,
 				847644081D48B413004F6DF5 /* MPVOption.swift in Sources */,
+				8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */,
 				845FB0CA1D3A16CC00C011E0 /* PreferenceWindow.swift in Sources */,
 				843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */,
 				84A0BA9B1D2FAB4100BC8DA1 /* Parameter.swift in Sources */,
 				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,
 				844DE1BF1D3E2B9900272589 /* MPVEvent.swift in Sources */,
+				8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */,
 				84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */,
 				84A0BA971D2FA1CE00BC8DA1 /* PlayerController.swift in Sources */,
 				845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,
+				8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

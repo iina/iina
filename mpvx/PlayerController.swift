@@ -138,6 +138,7 @@ class PlayerController: NSObject {
       realSpeed = -1 / realSpeed
     }
     mpvController.mpvSetDoubleProperty(MPVProperty.speed, realSpeed)
+    info.playSpeed = speed
   }
   
   func setVideoAspect(_ aspect: String) {

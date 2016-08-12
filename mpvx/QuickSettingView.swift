@@ -14,6 +14,9 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
     return "QuickSettingView"
   }
   
+  let distanceBetweenSliderAndIndicator: CGFloat = 18
+  let sliderIndicatorHalfWidth:CGFloat = 16
+  
   weak var playerController: PlayerController!
   weak var mainWindow: MainWindow!
   
@@ -42,17 +45,22 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
   @IBOutlet weak var customSubDelayTextField: NSTextField!
   @IBOutlet weak var subDelaySliderIndicator: NSTextField!
   
+  @IBOutlet weak var slideUpBtn: NSButton!
   
   override func viewDidLoad() {
     withAllTableViews { (view, _) in
       view.delegate = self
       view.dataSource = self
-      view.focusRingType = .none
-//      view.backgroundColor = NSColor.clear()
       view.superview?.superview?.layer?.cornerRadius = 4
     }
-    customSpeedTextField.formatter = Utility.decimalFormatter
-//    customAspectTextField.layer?.cornerRadius = 6
+    customSpeedTextField.formatter = DecimalFormatter()
+    slideUpBtn.resetCursorRects()
+  }
+  
+  override func mouseDown(_ event: NSEvent) {
+    if let window = self.view.window {
+      window.makeFirstResponder(window.contentView)
+    }
   }
   
   // MARK: NSTableView delegate
@@ -144,7 +152,7 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
     mainWindow.displayOSD(.rotate(value))
   }
   
-  @IBAction func customAspectBtnAction(_ sender: NSButton) {
+  @IBAction func customAspectEditFinishedAction(_ sender: AnyObject?) {
     let value = customAspectTextField.stringValue
     if value != "" {
       aspectSegment.setSelected(false, forSegment: aspectSegment.selectedSegment)
@@ -159,6 +167,8 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
     let sliderValue = sender.doubleValue
     let value = sliderValue >= 8 ? (sliderValue / 2.0 - 3) : (sliderValue / 2.0 - 5)
     speedSliderIndicator.stringValue = "\(value)x"
+    let knobPos = sender.knobPointPosition()
+    speedSliderIndicator.setFrameOrigin(NSPoint(x: knobPos - sliderIndicatorHalfWidth, y: sender.frame.origin.y + distanceBetweenSliderAndIndicator))
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerController.setSpeed(value)
@@ -167,13 +177,19 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
     }
   }
   
-  @IBAction func customSpeedBtnAction(_ sender: NSButton) {
+  @IBAction func customSpeedEditFinishedAction(_ sender: NSTextField) {
     let value = customSpeedTextField.doubleValue
-    if value >= 1 || value <= -1 {
-      playerController.setSpeed(value)
-      mainWindow.displayOSD(.speed(value))
+    if (value >= 1 || value <= -1 || value == 0) && playerController.info.playSpeed != value {
+      let finalValue = value == 0 ? 1 : value
+      playerController.setSpeed(finalValue)
+      mainWindow.displayOSD(.speed(finalValue))
+    }
+    if let window = sender.window {
+      window.makeFirstResponder(window.contentView)
     }
   }
+  
+  // Audio tab
   
   @IBAction func loadExternalAudioAction(_ sender: NSButton) {
     Utility.quickOpenPanel(title: "Load external audio file") { url in
@@ -181,6 +197,27 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
     }
     audioTableView.reloadData()
   }
+  
+  @IBAction func audioDelayChangedAction(_ sender: NSSlider) {
+    let sliderValue = sender.doubleValue
+    audioDelaySliderIndicator.stringValue = "\(sliderValue)s"
+    let knobPos = sender.knobPointPosition()
+    audioDelaySliderIndicator.setFrameOrigin(NSPoint(x: knobPos - sliderIndicatorHalfWidth, y: sender.frame.origin.y + distanceBetweenSliderAndIndicator))
+    if let event = NSApp.currentEvent {
+      if event.type == .leftMouseUp {
+        playerController.setAudioDelay(sliderValue)
+        mainWindow.displayOSD(.audioDelay(sliderValue))
+      }
+    }
+  }
+  
+  @IBAction func customAudioDelayEditFinishedAction(_ sender: AnyObject?) {
+    let value = customAudioDelayTextField.doubleValue
+    playerController.setAudioDelay(value)
+    mainWindow.displayOSD(.audioDelay(value))
+  }
+  
+  // Sub tab
   
   @IBAction func loadExternalSubAction(_ sender: NSButton) {
     Utility.quickOpenPanel(title: "Load external subtitle") { url in
@@ -190,27 +227,11 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
     secSubTableView.reloadData()
   }
   
-  @IBAction func audioDelayChangedAction(_ sender: NSSlider) {
-    let sliderValue = sender.doubleValue
-    audioDelaySliderIndicator.stringValue = "\(sliderValue)s"
-    if let event = NSApp.currentEvent {
-      if event.type == .leftMouseUp {
-        playerController.setAudioDelay(sliderValue)
-        mainWindow.displayOSD(.audioDelay(sliderValue))
-      }
-    }
-  }
-  
-  @IBAction func customAudioDelayBtnAction(_ sender: NSButton) {
-    let value = customAudioDelayTextField.doubleValue
-    playerController.setAudioDelay(value)
-    mainWindow.displayOSD(.audioDelay(value))
-  }
-  
-  
   @IBAction func subDelayChangedAction(_ sender: NSSlider) {
     let sliderValue = sender.doubleValue
     subDelaySliderIndicator.stringValue = "\(sliderValue)s"
+    let knobPos = sender.knobPointPosition()
+    subDelaySliderIndicator.setFrameOrigin(NSPoint(x: knobPos - sliderIndicatorHalfWidth, y: sender.frame.origin.y + distanceBetweenSliderAndIndicator))
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerController.setSubDelay(sliderValue)
@@ -219,7 +240,7 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
     }
   }
   
-  @IBAction func customSubDelayBtnAction(_ sender: NSButton) {
+  @IBAction func customSubDelayEditFinishedAction(_ sender: AnyObject?) {
     let value = customSubDelayTextField.doubleValue
     playerController.setSubDelay(value)
     mainWindow.displayOSD(.subDelay(value))

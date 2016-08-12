@@ -124,7 +124,9 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   // MARK: - Mouse / Trackpad event
   
   override func keyDown(_ event: NSEvent) {
-    playerController.togglePause(nil)  }
+    window!.makeFirstResponder(window!.contentView)
+    playerController.togglePause(nil)
+  }
   
   /** record mouse pos on mouse down */
   override func mouseDown(_ event: NSEvent) {

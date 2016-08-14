@@ -57,12 +57,6 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
     slideUpBtn.resetCursorRects()
   }
   
-  override func mouseDown(_ event: NSEvent) {
-    if let window = self.view.window {
-      window.makeFirstResponder(window.contentView)
-    }
-  }
-  
   // MARK: NSTableView delegate
   
   func numberOfRows(in tableView: NSTableView) -> Int {

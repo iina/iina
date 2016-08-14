@@ -141,6 +141,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   /** move window while dragging */
   override func mouseDragged(_ event: NSEvent) {
+    isDragging = true
     if controlBar.isDragging {
       return
     }
@@ -157,6 +158,18 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   /** if don't do so, window will jitter when dragging in titlebar */
   override func mouseUp(_ event: NSEvent) {
     mousePosRelatedToWindow = nil
+    if isDragging {
+      // if it's a mouseup after dragging
+      isDragging = false
+    } else {
+      // if it's a mouseup after clicking
+      if window!.contentView!.mouse(event.locationInWindow, in: titleBarView.frame) {
+        return
+      }
+      if isSettingViewShowing {
+        hideSettingsView()
+      }
+    }
   }
   
   override func mouseEntered(_ event: NSEvent) {

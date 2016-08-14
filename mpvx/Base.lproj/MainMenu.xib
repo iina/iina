@@ -94,24 +94,30 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Playback" id="GEO-Iw-cKr">
                         <items>
-                            <menuItem title="Play" id="UOE-MJ-8ku">
+                            <menuItem title="Pause" id="UOE-MJ-8ku">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="menuTogglePause:" target="-1" id="0pb-iN-3wA"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Stop" id="deS-xK-iBb">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="menuStop:" target="-1" id="u3M-X6-R3e"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="0Kt-sZ-ss0"/>
-                            <menuItem title="Step Forward" id="6yE-op-DTS">
+                            <menuItem title="Step Forward 5s" keyEquivalent="" id="6yE-op-DTS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Next Frame" alternate="YES" id="XDC-Pc-rS1">
+                            <menuItem title="Next Frame" alternate="YES" keyEquivalent="" id="XDC-Pc-rS1">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                            </menuItem>
+                            <menuItem title="Step Backward 5s" keyEquivalent="" id="Sif-85-FF1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Step Backward" id="Sif-85-FF1">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem title="Previous Frame" alternate="YES" id="oxF-BB-lBy">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Previous Frame" alternate="YES" keyEquivalent="" id="oxF-BB-lBy">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES"/>
                             </menuItem>
                             <menuItem title="Jump to..." keyEquivalent="j" id="2id-wn-xsC"/>
                             <menuItem isSeparatorItem="YES" id="k1k-sG-1C3"/>

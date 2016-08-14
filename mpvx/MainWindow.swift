@@ -616,4 +616,24 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     block(w.standardWindowButton(.zoomButton))
   }
   
+  // MARK: - Menu Actions
+  
+  @IBAction func menuTogglePause(_ sender: NSMenuItem) {
+    if sender.title == "Play" {
+      playerController.togglePause(false)
+      sender.title = "Pause"
+    } else {
+      playerController.togglePause(true)
+      sender.title = "Play"
+    }
+  }
+  
+  @IBAction func menuStop(_ sender: NSMenuItem) {
+    
+  }
+  
+  @IBAction func menuStepForward(_ sender: NSMenuItem) {
+    
+  }
+  
 }

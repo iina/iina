@@ -94,39 +94,35 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Playback" id="GEO-Iw-cKr">
                         <items>
-                            <menuItem title="Pause" keyEquivalent=" " id="UOE-MJ-8ku">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Pause" keyEquivalent="p" id="UOE-MJ-8ku">
                                 <connections>
                                     <action selector="menuTogglePause:" target="-1" id="0pb-iN-3wA"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Stop" id="deS-xK-iBb">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Stop and Clear Playlists" keyEquivalent="." id="deS-xK-iBb">
                                 <connections>
                                     <action selector="menuStop:" target="-1" id="u3M-X6-R3e"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="0Kt-sZ-ss0"/>
                             <menuItem title="Step Forward 5s" keyEquivalent="" id="6yE-op-DTS">
-                                <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="menuStep:" target="-1" id="3X0-5P-KGi"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Next Frame" alternate="YES" keyEquivalent="" id="XDC-Pc-rS1">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="menuStepFrame:" target="-1" id="7xh-aA-Zvw"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Step Backward 5s" tag="1" keyEquivalent="" id="Sif-85-FF1">
-                                <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="menuStep:" target="-1" id="zGv-l5-8as"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Previous Frame" tag="1" alternate="YES" keyEquivalent="" id="oxF-BB-lBy">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="menuStepFrame:" target="-1" id="Az9-mP-epb"/>
                                 </connections>

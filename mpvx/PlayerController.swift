@@ -86,6 +86,10 @@ class PlayerController: NSObject {
     }
   }
   
+  func stop() {
+    mpvController.mpvCommand([MPVCommand.stop, nil])
+  }
+  
   func toogleMute(_ set: Bool?) {
     if let setMute = set {
       mpvController.mpvSetFlagProperty(MPVProperty.mute, setMute)

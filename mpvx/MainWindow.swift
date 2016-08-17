@@ -642,7 +642,9 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   @IBAction func menuStop(_ sender: NSMenuItem) {
-    
+    // FIXME: handle stop
+    playerController.stop()
+    displayOSD(.stop)
   }
   
   @IBAction func menuStep(_ sender: NSMenuItem) {

@@ -20,6 +20,7 @@ enum OSDMessage {
   case unMute
   case screenShot
   case abLoop(Int)
+  case stop
   
   func message() -> String {
     switch self {
@@ -69,6 +70,9 @@ enum OSDMessage {
       } else {
         return "AB-Loop: Clear Both"
       }
+      
+    case .stop:
+      return "Stopped"
     }
   }
 }

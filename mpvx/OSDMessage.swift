@@ -18,6 +18,7 @@ enum OSDMessage {
   case subDelay(Double)
   case mute
   case unMute
+  case screenShot
   
   func message() -> String {
     switch self {
@@ -55,6 +56,9 @@ enum OSDMessage {
       
     case .unMute:
       return "Mute Off"
+      
+    case .screenShot:
+      return "Screenshoted"
     }
   }
 }

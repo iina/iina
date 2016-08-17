@@ -137,9 +137,16 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="k1k-sG-1C3"/>
-                            <menuItem title="Snapshot" keyEquivalent="s" id="AoP-K6-Kb5"/>
+                            <menuItem title="Snapshot" keyEquivalent="s" id="AoP-K6-Kb5">
+                                <connections>
+                                    <action selector="menuSnapshot:" target="-1" id="rCf-YM-n7j"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Goto Snapshot Folder" keyEquivalent="S" id="lj0-Oo-7nB">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="menuOpenScreenshotFolder:" target="-1" id="V79-cF-Lcy"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Advanced Snapshot..." id="CKi-JE-yLT">
                                 <modifierMask key="keyEquivalentModifierMask"/>

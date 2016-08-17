@@ -47,6 +47,17 @@ class MPVController: NSObject {
     // Get the name of this client handle.
     mpvClientName = mpv_client_name(mpv)
     
+    // Set options that can be override by user's config
+    let screenshotPath = playerController.ud.string(forKey: Preference.Key.screenshotFolder)!
+    let absoluteScreenshotPath = NSString(string: screenshotPath).expandingTildeInPath
+    e(mpv_set_option_string(mpv, MPVOption.Screenshot.screenshotDirectory, absoluteScreenshotPath))
+    
+    let screenshotFormat = playerController.ud.string(forKey: Preference.Key.screenshotFormat)!
+    e(mpv_set_option_string(mpv, MPVOption.Screenshot.screenshotFormat, screenshotFormat))
+    
+    let screenshotTemplate = playerController.ud.string(forKey: Preference.Key.screenshotTemplate)!
+    e(mpv_set_option_string(mpv, MPVOption.Screenshot.screenshotTemplate, screenshotTemplate))
+    
     // Load user's config file.
     // e(mpv_load_config_file(mpv, ""))
     
@@ -126,6 +137,12 @@ class MPVController: NSObject {
     var data = Int64()
     mpv_get_property(mpv, name, MPV_FORMAT_INT64, &data)
     return Int(data)
+  }
+  
+  func mpvGetDoubleProperty(_ name: String) -> Double {
+    var data = Double()
+    mpv_get_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
+    return data
   }
   
   func mpvGetFlagProperty(_ name: String) -> Bool {

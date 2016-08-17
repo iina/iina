@@ -120,6 +120,11 @@ class PlayerController: NSObject {
     }
   }
   
+  func screenShot() {
+    let option = ud.bool(forKey: Preference.Key.screenshotIncludeSubtitle) ? "subtitles" : "video"
+    mpvController.mpvCommand([MPVCommand.screenshot, option, nil])
+  }
+  
   func setVolume(_ volume: Int) {
     info.volume = volume
     mpvController.mpvSetIntProperty(MPVProperty.volume, volume)

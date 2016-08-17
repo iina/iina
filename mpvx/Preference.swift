@@ -37,6 +37,12 @@ struct Preference {
     static let arrowButtonAction = "arrowBtnAction"
     
     static let useExactSeek = "useExactSeek"
+    
+    static let screenshotFolder = "screenShotFolder"
+    static let screenshotIncludeSubtitle = "screenShotIncludeSubtitle"
+    static let screenshotFormat = "screenShotFormat"
+    static let screenshotTemplate = "screenShotTemplate"
+    
   }
   
   enum ArrowButtonAction: Int {
@@ -55,6 +61,10 @@ struct Preference {
     Key.softVolume: 50,
     Key.arrowButtonAction: ArrowButtonAction.speed.rawValue,
     Key.useExactSeek: true,
+    Key.screenshotFolder: "~/Pictures/ScreenShots",
+    Key.screenshotIncludeSubtitle: true,
+    Key.screenshotFormat: "png",
+    Key.screenshotTemplate: "%F-%n"
   ]
 
 }

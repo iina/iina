@@ -13,10 +13,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
   lazy var playerController: PlayerController! = PlayerController()
 
-  override init() {
-
-  }
-
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     UserDefaults.standard.register(Preference.defaultPreference)
     playerController.startMPV()
@@ -61,6 +57,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         playerController.openFile(url)
       }
     }
+  }
+  
+  @IBAction func menuOpenScreenshotFolder(_ sender: NSMenuItem) {
+    let screenshotPath = UserDefaults.standard.string(forKey: Preference.Key.screenshotFolder)!
+    let absoluteScreenshotPath = NSString(string: screenshotPath).expandingTildeInPath
+    let url = URL(fileURLWithPath: absoluteScreenshotPath, isDirectory: true)
+      NSWorkspace.shared().open(url)
   }
   
 }

@@ -672,4 +672,9 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
   }
   
+  @IBAction func menuSnapshot(_ sender: NSMenuItem) {
+    playerController.screenShot()
+    displayOSD(.screenShot)
+  }
+  
 }

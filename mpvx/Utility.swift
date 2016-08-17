@@ -54,6 +54,21 @@ class Utility {
     }
   }
   
+  static func quickPromptPanel(messageText: String, informativeText: String, ok: (String) -> Void) {
+    let panel = NSAlert()
+    panel.messageText = messageText
+    panel.informativeText = informativeText
+    let input = NSTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
+    input.bezelStyle = .roundedBezel
+    panel.accessoryView = input
+    panel.addButton(withTitle: "Jump")
+    panel.addButton(withTitle: "Cancel")
+    let response = panel.runModal()
+    if response == NSAlertFirstButtonReturn {
+      ok(input.stringValue)
+    }
+  }
+  
   // MARK: - Util functions
   
   static func swap<T>(_ a: inout T, _ b: inout T) {

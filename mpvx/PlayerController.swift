@@ -108,6 +108,18 @@ class PlayerController: NSObject {
     mpvController.mpvCommand([MPVCommand.seek, "\(relativeSecond)", seekMode, nil])
   }
   
+  func seek(absoluteSecond: Double) {
+    mpvController.mpvCommand([MPVCommand.seek, "\(absoluteSecond)", "absolute+exact", nil])
+  }
+  
+  func frameStep(backwards: Bool) {
+    if backwards {
+      mpvController.mpvCommand([MPVCommand.frameBackStep, nil])
+    } else {
+      mpvController.mpvCommand([MPVCommand.frameStep, nil])
+    }
+  }
+  
   func setVolume(_ volume: Int) {
     info.volume = volume
     mpvController.mpvSetIntProperty(MPVProperty.volume, volume)

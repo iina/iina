@@ -645,8 +645,31 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     
   }
   
-  @IBAction func menuStepForward(_ sender: NSMenuItem) {
-    
+  @IBAction func menuStep(_ sender: NSMenuItem) {
+    if sender.tag == 0 { // -> 5s
+      playerController.seek(relativeSecond: 5)
+    } else if sender.tag == 1 { // <- 5s
+      playerController.seek(relativeSecond: -5)
+    }
+  }
+  
+  @IBAction func menuStepFrame(_ sender: NSMenuItem) {
+    if !playerController.info.isPaused {
+      playerController.togglePause(true)
+    }
+    if sender.tag == 0 { // -> 1f
+      playerController.frameStep(backwards: false)
+    } else if sender.tag == 1 { // <- 1f
+      playerController.frameStep(backwards: true)
+    }
+  }
+  
+  @IBAction func menuJumpTo(_ sender: NSMenuItem) {
+    Utility.quickPromptPanel(messageText: "Jump to:", informativeText: "Example: 20:35") { input in
+      if let vt = VideoTime(input) {
+        self.playerController.seek(absoluteSecond: Double(vt.second))
+      }
+    }
   }
   
 }

@@ -109,25 +109,39 @@
                             <menuItem isSeparatorItem="YES" id="0Kt-sZ-ss0"/>
                             <menuItem title="Step Forward 5s" keyEquivalent="" id="6yE-op-DTS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="menuStep:" target="-1" id="3X0-5P-KGi"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Next Frame" alternate="YES" keyEquivalent="" id="XDC-Pc-rS1">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                <connections>
+                                    <action selector="menuStepFrame:" target="-1" id="7xh-aA-Zvw"/>
+                                </connections>
                             </menuItem>
-                            <menuItem title="Step Backward 5s" keyEquivalent="" id="Sif-85-FF1">
+                            <menuItem title="Step Backward 5s" tag="1" keyEquivalent="" id="Sif-85-FF1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="menuStep:" target="-1" id="zGv-l5-8as"/>
+                                </connections>
                             </menuItem>
-                            <menuItem title="Previous Frame" alternate="YES" keyEquivalent="" id="oxF-BB-lBy">
+                            <menuItem title="Previous Frame" tag="1" alternate="YES" keyEquivalent="" id="oxF-BB-lBy">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                <connections>
+                                    <action selector="menuStepFrame:" target="-1" id="Az9-mP-epb"/>
+                                </connections>
                             </menuItem>
-                            <menuItem title="Jump to..." keyEquivalent="j" id="2id-wn-xsC"/>
+                            <menuItem title="Jump to..." keyEquivalent="j" id="2id-wn-xsC">
+                                <connections>
+                                    <action selector="menuJumpTo:" target="-1" id="MOi-dm-LM1"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="k1k-sG-1C3"/>
-                            <menuItem title="Snapshot" id="AoP-K6-Kb5">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Snapshot" keyEquivalent="s" id="AoP-K6-Kb5"/>
+                            <menuItem title="Goto Snapshot Folder" keyEquivalent="S" id="lj0-Oo-7nB">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Goto Snapshot Folder" alternate="YES" id="lj0-Oo-7nB">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem title="Record..." id="CKi-JE-yLT">
+                            <menuItem title="Advanced Snapshot..." id="CKi-JE-yLT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="pEu-eU-Er6"/>

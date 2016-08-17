@@ -125,6 +125,20 @@ class PlayerController: NSObject {
     mpvController.mpvCommand([MPVCommand.screenshot, option, nil])
   }
   
+  func abLoop() {
+    // may subject to change
+    mpvController.mpvCommand([MPVCommand.abLoop, nil])
+    let a = mpvController.mpvGetDoubleProperty(MPVProperty.abLoopA)
+    let b = mpvController.mpvGetDoubleProperty(MPVProperty.abLoopB)
+    if a == 0 && b == 0 {
+      info.abLoopStatus = 0
+    } else if b != 0 {
+      info.abLoopStatus = 2
+    } else {
+      info.abLoopStatus = 1
+    }
+  }
+  
   func setVolume(_ volume: Int) {
     info.volume = volume
     mpvController.mpvSetIntProperty(MPVProperty.volume, volume)

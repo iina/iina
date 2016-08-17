@@ -83,4 +83,38 @@ struct MPVCommand {
   static let audioReload = "audio-reload"
   /** rescan-external-files [<mode>] */
   static let rescanExternalFiles = "rescan-external-files"
+  /** af set|add|toggle|del|clr "filter1=params,filter2,..." */
+  static let af = "af"
+  /** vf set|add|toggle|del|clr "filter1=params,filter2,..." */
+  static let vf = "vf"
+  /** cycle-values ["!reverse"] <property> "<value1>" "<value2>" ... */
+  static let cycleValues = "cycle-values"
+  /** enable-section "<section>" [flags] */
+  static let enableSection = "enable-section"
+  /** disable-section "<section>" */
+  static let disableSection = "disable-section"
+  /** define-section "<section>" "<contents>" [default|forced] */
+  static let defineSection = "define-section"
+  /** overlay-add <id> <x> <y> "<file>" <offset> "<fmt>" <w> <h> <stride> */
+  static let overlayAdd = "overlay-add"
+  /** overlay-remove <id> */
+  static let overlayRemove = "overlay-remove"
+  /** script-message "<arg1>" "<arg2>" ... */
+  static let scriptMessage = "script-message"
+  /** script-message-to "<target>" "<arg1>" "<arg2>" ... */
+  static let scriptMessageTo = "script-message-to"
+  /** script-binding "<name>" */
+  static let scriptBinding = "script-binding"
+  /** ab-loop */
+  static let abLoop = "ab-loop"
+  /** vo-cmdline "<args>" */
+  static let voCmdline = "vo-cmdline"
+  /** drop-buffers */
+  static let dropBuffers = "drop-buffers"
+  /** screenshot-raw [subtitles|video|window] */
+  static let screenshotRaw = "screenshot-raw"
+  /** vf-command "<label>" "<cmd>" "<args>" */
+  static let vfCommand = "vf-command"
+  /** af-command "<label>" "<cmd>" "<args>" */
+  static let afCommand = "af-command"
 }

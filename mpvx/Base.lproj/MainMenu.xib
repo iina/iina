@@ -94,7 +94,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Playback" id="GEO-Iw-cKr">
                         <items>
-                            <menuItem title="Pause" id="UOE-MJ-8ku">
+                            <menuItem title="Pause" keyEquivalent=" " id="UOE-MJ-8ku">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="menuTogglePause:" target="-1" id="0pb-iN-3wA"/>
@@ -137,27 +137,32 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="k1k-sG-1C3"/>
-                            <menuItem title="Snapshot" keyEquivalent="s" id="AoP-K6-Kb5">
+                            <menuItem title="Screenshot" keyEquivalent="s" id="AoP-K6-Kb5">
                                 <connections>
                                     <action selector="menuSnapshot:" target="-1" id="rCf-YM-n7j"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Goto Snapshot Folder" keyEquivalent="S" id="lj0-Oo-7nB">
+                            <menuItem title="Goto Screenshot Folder" keyEquivalent="S" id="lj0-Oo-7nB">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>
                                     <action selector="menuOpenScreenshotFolder:" target="-1" id="V79-cF-Lcy"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Advanced Snapshot..." id="CKi-JE-yLT">
+                            <menuItem title="Advanced Screenshot..." id="CKi-JE-yLT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="pEu-eU-Er6"/>
-                            <menuItem title="A-B Loop" keyEquivalent="j" id="i3P-Xw-8D7"/>
+                            <menuItem title="A-B Loop" keyEquivalent="l" id="i3P-Xw-8D7">
+                                <connections>
+                                    <action selector="menuABLoop:" target="-1" id="No2-rv-h9h"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Playlist" id="Gi5-1S-RQB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Playlist" systemMenu="font" id="aXa-aM-Jaq">
                                     <items>
-                                        <menuItem title="&lt;Empty&gt;" keyEquivalent="t" id="Q5e-8K-NDq">
+                                        <menuItem title="&lt;Empty&gt;" id="Q5e-8K-NDq">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontFontPanel:" target="YLy-65-1bz" id="WHr-nq-2xA"/>
                                             </connections>

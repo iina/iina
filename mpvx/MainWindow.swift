@@ -677,4 +677,9 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     displayOSD(.screenShot)
   }
   
+  @IBAction func menuABLoop(_ sender: NSMenuItem) {
+    playerController.abLoop()
+    displayOSD(.abLoop(playerController.info.abLoopStatus))
+  }
+  
 }

@@ -41,6 +41,8 @@ class PlaybackInfo {
   var videoTracks: [MPVTrack] = []
   var subTracks: [MPVTrack] = []
   
+  var abLoopStatus: Int = 0 // 0: none, 1: A set, 2: B set (looping) 
+  
   // Selected track IDs. Use these (instead of `isSelected` of a track) to check if selected
   var aid: Int?
   var sid: Int?

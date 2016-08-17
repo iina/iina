@@ -19,6 +19,7 @@ enum OSDMessage {
   case mute
   case unMute
   case screenShot
+  case abLoop(Int)
   
   func message() -> String {
     switch self {
@@ -59,6 +60,15 @@ enum OSDMessage {
       
     case .screenShot:
       return "Screenshoted"
+      
+    case .abLoop(let value):
+      if value == 1 {
+        return "AB-Loop: A"
+      } else if value == 2 {
+        return "AB-Loop: B"
+      } else {
+        return "AB-Loop: Clear Both"
+      }
     }
   }
 }

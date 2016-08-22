@@ -215,6 +215,7 @@ class PlayerController: NSObject {
     mpvController.mpvSetDoubleProperty(MPVProperty.subDelay, delay)
   }
   
+  /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
     guard let vwidth = info.videoWidth, vheight = info.videoHeight else {
       Utility.fatal("Cannot get video width and height")
@@ -224,6 +225,7 @@ class PlayerController: NSObject {
     DispatchQueue.main.sync {
       self.getTrackInfo()
       self.getSelectedTracks()
+      self.getPLaylist()
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
       mainWindow.adjustFrameByVideoSize(vwidth, vheight)
@@ -274,7 +276,7 @@ class PlayerController: NSObject {
     }
   }
   
-  /** Get info */
+  /** Get info from mpv */
   
   private func getTrackInfo() {
     info.audioTracks.removeAll(keepingCapacity: true)
@@ -315,6 +317,18 @@ class PlayerController: NSObject {
     info.vid = mpvController.mpvGetIntProperty(MPVProperty.vid)
     info.sid = mpvController.mpvGetIntProperty(MPVProperty.sid)
     info.secondSid = mpvController.mpvGetIntProperty(MPVProperty.secondarySid)
+  }
+  
+  private func getPLaylist() {
+    info.playlist.removeAll()
+    let playlistCount = mpvController.mpvGetIntProperty(MPVProperty.playlistCount)
+    for index in 0...playlistCount-1 {
+      let playlistItem = MPVPlaylistItem(filename: mpvController.mpvGetStringProperty(MPVProperty.playlistNFilename(index))!,
+                                         isCurrent: mpvController.mpvGetFlagProperty(MPVProperty.playlistNCurrent(index)),
+                                         isPlaying: mpvController.mpvGetFlagProperty(MPVProperty.playlistNPlaying(index)),
+                                         title: mpvController.mpvGetStringProperty(MPVProperty.playlistNTitle(index))!)
+      info.playlist.append(playlistItem)
+    }
   }
 
 }

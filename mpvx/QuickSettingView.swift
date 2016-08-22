@@ -48,6 +48,7 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
   @IBOutlet weak var slideUpBtn: NSButton!
   
   override func viewDidLoad() {
+    super.viewDidLoad()
     withAllTableViews { (view, _) in
       view.delegate = self
       view.dataSource = self
@@ -93,11 +94,13 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
       return nil
     }
     // return track data
-    if columnName == "IsChosen" {
+    if columnName == Constants.Table.Identifier.isChosen {
       let isChosen = track == nil ? (activeId == 0) : (track!.id == activeId)
-      return isChosen ? "●" : ""
-    } else { // if columnName == "TrackName" {
-      return track?.readableTitle ?? "<None>"
+      return isChosen ? Constants.Table.String.dot : ""
+    } else if columnName == Constants.Table.Identifier.trackName {
+      return track?.readableTitle ?? Constants.Table.String.none
+    } else {
+      return nil
     }
   }
   

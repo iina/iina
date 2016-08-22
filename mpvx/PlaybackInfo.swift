@@ -49,4 +49,6 @@ class PlaybackInfo {
   var vid: Int?
   var secondSid: Int?
   
+  var playlist: [MPVPlaylistItem] = []
+  
 }

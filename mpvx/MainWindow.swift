@@ -11,6 +11,7 @@ import Cocoa
 class MainWindow: NSWindowController, NSWindowDelegate {
   
   let ud: UserDefaults = UserDefaults.standard
+  let minSize = NSMakeSize(500, 300)
   let minSizeWhenSettingsViewShown = NSMakeSize(625, 352)
   
   var playerController: PlayerController!
@@ -100,7 +101,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
       titleBarView.material = .ultraDark
     }
     // size
-    w.minSize = NSMakeSize(500, 300)
+    w.minSize = minSize
     // fade-able views
     withStandardButtons { button in
       self.fadeableViews.append(button)
@@ -509,7 +510,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
       // check default window position
     }
     
-    window!.setContentSize(videoSize)
+    window!.setContentSize(videoSize.satisfyMinSizeWithFixedAspectRatio(minSize))
     videoView.videoSize = originalVideoSize
     if (!window!.isVisible) {
       window!.setIsVisible(true)

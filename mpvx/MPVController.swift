@@ -66,6 +66,9 @@ class MPVController: NSObject {
     e(mpv_set_option_string(mpv, MPVOption.Video.vo, "opengl-cb"))
     e(mpv_set_option_string(mpv, MPVOption.Video.hwdecPreload, "auto"))
     
+    // Load external scripts
+    e(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, "/Users/admin/Project/mpvx/mpvx/tools/autoload.lua"))
+    
     // Receive log messages at warn level.
     e(mpv_request_log_messages(mpv, "warn"))
     

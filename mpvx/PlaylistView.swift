@@ -44,7 +44,7 @@ class PlaylistView: NSViewController, NSTableViewDataSource, NSTableViewDelegate
     if columnName == Constants.Table.Identifier.isChosen {
       return item!.isPlaying ? Constants.Table.String.dot : ""
     } else if columnName == Constants.Table.Identifier.trackName {
-      return item?.title ?? Constants.Table.String.none
+      return item?.title ?? NSString(string: item!.filename).lastPathComponent
     } else {
       return nil
     }

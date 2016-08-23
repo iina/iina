@@ -15,6 +15,8 @@
                 <outlet property="playSlider" destination="eBP-6g-bAT" id="lGv-18-YeQ"/>
                 <outlet property="rightArrowLabel" destination="QTI-wi-oyB" id="icX-KI-Muj"/>
                 <outlet property="rightLabel" destination="GgV-Cc-sk0" id="fnx-gO-YPl"/>
+                <outlet property="sideBarRightConstraint" destination="PAj-s6-32e" id="DOs-2k-JEG"/>
+                <outlet property="sideBarView" destination="epo-S6-QVB" id="5eE-aM-VUd"/>
                 <outlet property="titleBarHeightConstraint" destination="1Dw-Bg-FRS" id="IaK-ti-9vX"/>
                 <outlet property="titleBarView" destination="TRx-2V-Gr3" id="kOU-nP-MAP"/>
                 <outlet property="titleTextField" destination="gW1-BG-OEa" id="8wO-J1-Yp6"/>
@@ -155,10 +157,21 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YvW-zG-QiW">
-                                <rect key="frame" x="360" y="24" width="77" height="32"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wy6-h4-fsN">
+                                <rect key="frame" x="436" y="30" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Settings" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="tPP-JA-L7s">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="playlist" imagePosition="only" alignment="center" alternateImage="playlist" imageScaling="proportionallyUpOrDown" inset="2" id="ZPD-PJ-11g">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="playlistButtonAction:" target="-2" id="eI6-wE-TKG"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YvW-zG-QiW" userLabel="Settings Button">
+                                <rect key="frame" x="394" y="30" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="settings" imagePosition="only" alignment="center" alternateImage="settings" imageScaling="proportionallyUpOrDown" inset="2" id="tPP-JA-L7s">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -177,23 +190,42 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gsa-LM-oo7">
+                        <rect key="frame" x="550" y="131" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Ngo-7g-e4r">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="epo-S6-QVB" userLabel="SideBar">
+                        <rect key="frame" x="680" y="0.0" width="240" height="355"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="240" id="1BL-aP-tHS"/>
+                        </constraints>
+                    </visualEffectView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="epo-S6-QVB" secondAttribute="trailing" constant="-240" id="PAj-s6-32e"/>
+                    <constraint firstItem="epo-S6-QVB" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="jpv-dz-Kql"/>
                     <constraint firstItem="TRx-2V-Gr3" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="ofB-WP-9dW"/>
                     <constraint firstAttribute="trailing" secondItem="TRx-2V-Gr3" secondAttribute="trailing" id="te1-wi-BbH"/>
                     <constraint firstItem="TRx-2V-Gr3" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="wGB-mn-a6f"/>
+                    <constraint firstAttribute="bottom" secondItem="epo-S6-QVB" secondAttribute="bottom" id="zBx-AY-VlK"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="125" y="239"/>
+            <point key="canvasLocation" x="125" y="238.5"/>
         </window>
     </objects>
     <resources>
         <image name="mute" width="600" height="600"/>
         <image name="pause" width="600" height="600"/>
         <image name="play" width="600" height="600"/>
+        <image name="playlist" width="600" height="600"/>
+        <image name="settings" width="600" height="600"/>
         <image name="speed" width="720" height="600"/>
         <image name="speedl" width="720" height="600"/>
         <image name="volume" width="600" height="600"/>

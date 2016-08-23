@@ -21,6 +21,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   var isInFullScreen: Bool = false
   var isSettingViewShowing: Bool = false
+  var isSideBarShowing: Bool = false
   
   override var windowNibName: String {
     return "MainWindow"
@@ -53,6 +54,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   var scrollDirection: ScrollDirection?
   
   @IBOutlet weak var titleBarHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var sideBarRightConstraint: NSLayoutConstraint!
   
   /** The quick setting window */
   lazy var quickSettingView: QuickSettingView = {
@@ -62,6 +64,12 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     return quickSettingView
   }()
   
+  lazy var playlistView: PlaylistView = {
+    let playListView = PlaylistView()
+    playListView.playerController = self.playerController
+    return playListView
+  }()
+  
   @IBOutlet weak var titleBarView: NSVisualEffectView!
   @IBOutlet weak var titleTextField: NSTextField!
   @IBOutlet weak var controlBar: ControlBarView!
@@ -69,6 +77,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var playSlider: NSSlider!
   @IBOutlet weak var volumeSlider: NSSlider!
   @IBOutlet weak var muteButton: NSButton!
+  @IBOutlet weak var sideBarView: NSVisualEffectView!
   
   @IBOutlet weak var rightLabel: NSTextField!
   @IBOutlet weak var leftLabel: NSTextField!
@@ -163,11 +172,13 @@ class MainWindow: NSWindowController, NSWindowDelegate {
       isDragging = false
     } else {
       // if it's a mouseup after clicking
-      if window!.contentView!.mouse(event.locationInWindow, in: titleBarView.frame) {
-        return
-      }
-      if isSettingViewShowing {
+      let mouseInTitleBar = window!.contentView!.mouse(event.locationInWindow, in: titleBarView.frame)
+      let mouseInSideBar = window!.contentView!.mouse(event.locationInWindow, in: sideBarView.frame)
+      if !mouseInTitleBar && isSettingViewShowing {
         hideSettingsView()
+      }
+      if !mouseInSideBar && isSideBarShowing {
+        hideSideBar()
       }
     }
   }
@@ -404,6 +415,36 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     }
   }
   
+  private func showSideBar() {
+    sideBarView.isHidden = false
+    let plv = playlistView.view
+    sideBarView.addSubview(plv)
+    let constraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[plv]-0-|", options: [], metrics: nil, views: ["plv": plv])
+    let constraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[plv]-0-|", options: [], metrics: nil, views: ["plv": plv])
+    NSLayoutConstraint.activate(constraintsH)
+    NSLayoutConstraint.activate(constraintsV)
+    
+    NSAnimationContext.runAnimationGroup({ (context) in
+      context.duration = 0.2
+      context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+      sideBarRightConstraint.animator().constant = 0
+    }) {
+      self.isSideBarShowing = true
+    }
+  }
+  
+  private func hideSideBar() {
+    NSAnimationContext.runAnimationGroup({ (context) in
+      context.duration = 0.2
+      context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+      sideBarRightConstraint.animator().constant = -240
+    }) {
+      self.isSideBarShowing = false
+      self.playlistView.view.removeFromSuperview()
+      self.sideBarView.isHidden = true
+    }
+  }
+  
   private func removeTitlebarFromFadeableViews() {
     // remove buttons from fade-able views
     withStandardButtons { button in
@@ -605,6 +646,15 @@ class MainWindow: NSWindowController, NSWindowDelegate {
       showSettingsView()
     }
   }
+  
+  @IBAction func playlistButtonAction(_ sender: AnyObject) {
+    if isSideBarShowing {
+      hideSideBar()
+    } else {
+      showSideBar()
+    }
+  }
+  
   
   /** When slider changes */
   @IBAction func playSliderChanges(_ sender: NSSlider) {

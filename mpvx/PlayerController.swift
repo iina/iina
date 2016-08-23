@@ -326,7 +326,7 @@ class PlayerController: NSObject {
       let playlistItem = MPVPlaylistItem(filename: mpvController.mpvGetStringProperty(MPVProperty.playlistNFilename(index))!,
                                          isCurrent: mpvController.mpvGetFlagProperty(MPVProperty.playlistNCurrent(index)),
                                          isPlaying: mpvController.mpvGetFlagProperty(MPVProperty.playlistNPlaying(index)),
-                                         title: mpvController.mpvGetStringProperty(MPVProperty.playlistNTitle(index))!)
+                                         title: mpvController.mpvGetStringProperty(MPVProperty.playlistNTitle(index)))
       info.playlist.append(playlistItem)
     }
   }

@@ -15,9 +15,9 @@ class MPVPlaylistItem: NSObject {
   var isCurrent: Bool
   var isPlaying: Bool
   
-  var title: String
+  var title: String?
   
-  init(filename: String, isCurrent: Bool, isPlaying: Bool, title: String) {
+  init(filename: String, isCurrent: Bool, isPlaying: Bool, title: String?) {
     self.filename = filename
     self.isCurrent = isCurrent
     self.isPlaying = isPlaying

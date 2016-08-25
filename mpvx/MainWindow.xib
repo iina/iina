@@ -38,12 +38,12 @@
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="TRx-2V-Gr3">
                         <rect key="frame" x="0.0" y="333" width="680" height="22"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gW1-BG-OEa">
-                                <rect key="frame" x="-2" y="2" width="684" height="17"/>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="gW1-BG-OEa">
+                                <rect key="frame" x="78" y="2" width="568" height="18"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="17" id="Mcr-JX-OZE"/>
+                                    <constraint firstAttribute="height" constant="18" id="Mcr-JX-OZE"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Title" usesSingleLineMode="YES" id="AOe-dk-iFa">
+                                <textFieldCell key="cell" lineBreakMode="truncatingMiddle" truncatesLastVisibleLine="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Title" usesSingleLineMode="YES" id="AOe-dk-iFa">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -52,9 +52,9 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="1Dw-Bg-FRS"/>
-                            <constraint firstItem="gW1-BG-OEa" firstAttribute="leading" secondItem="TRx-2V-Gr3" secondAttribute="leading" id="5N2-2O-X7D"/>
-                            <constraint firstAttribute="trailing" secondItem="gW1-BG-OEa" secondAttribute="trailing" id="Rpp-hW-yLy"/>
-                            <constraint firstItem="gW1-BG-OEa" firstAttribute="top" secondItem="TRx-2V-Gr3" secondAttribute="top" constant="3" id="Ti8-YH-IOe"/>
+                            <constraint firstItem="gW1-BG-OEa" firstAttribute="leading" secondItem="TRx-2V-Gr3" secondAttribute="leading" constant="80" id="5N2-2O-X7D"/>
+                            <constraint firstAttribute="trailing" secondItem="gW1-BG-OEa" secondAttribute="trailing" constant="36" id="Rpp-hW-yLy"/>
+                            <constraint firstItem="gW1-BG-OEa" firstAttribute="top" secondItem="TRx-2V-Gr3" secondAttribute="top" constant="2" id="Ti8-YH-IOe"/>
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" fixedFrame="YES" blendingMode="withinWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="mpvx" customModuleProvider="target">

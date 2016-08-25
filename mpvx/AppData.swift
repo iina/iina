@@ -26,6 +26,7 @@ struct Constants {
     }
     struct String {
       static let dot = "●"
+      static let play = "▶︎"
       static let none = "<None>"
     }
   }

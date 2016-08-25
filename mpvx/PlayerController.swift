@@ -215,6 +215,21 @@ class PlayerController: NSObject {
     mpvController.mpvSetDoubleProperty(MPVProperty.subDelay, delay)
   }
   
+  func addToPlaylist(_ path: String) {
+    mpvController.mpvCommand([MPVCommand.loadfile, path, "append", nil])
+    getPLaylist()
+  }
+  
+  func playFile(_ path: String) {
+    mpvController.mpvCommand([MPVCommand.loadfile, path, "replace", nil])
+    getPLaylist()
+  }
+  
+  func playFileInPlaylist(_ pos: Int) {
+    mpvController.mpvSetIntProperty(MPVProperty.playlistPos, pos)
+    getPLaylist()
+  }
+  
   /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
     guard let vwidth = info.videoWidth, vheight = info.videoHeight else {
@@ -228,6 +243,7 @@ class PlayerController: NSObject {
       self.getPLaylist()
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
+      mainWindow.updateTitle()
       mainWindow.adjustFrameByVideoSize(vwidth, vheight)
     }
   }
@@ -237,8 +253,10 @@ class PlayerController: NSObject {
       Utility.fatal("Cannot get video width and height")
       return
     }
-    DispatchQueue.main.sync {
-      mainWindow.adjustFrameByVideoSize(dwidth, dheight)
+    if dwidth != 0 && dheight != 0 {
+      DispatchQueue.main.sync {
+        mainWindow.adjustFrameByVideoSize(dwidth, dheight)
+      }
     }
   }
   

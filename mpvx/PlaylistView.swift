@@ -42,7 +42,7 @@ class PlaylistView: NSViewController, NSTableViewDataSource, NSTableViewDelegate
       return nil
     }
     if columnName == Constants.Table.Identifier.isChosen {
-      return item!.isPlaying ? Constants.Table.String.dot : ""
+      return item!.isPlaying ? Constants.Table.String.play : ""
     } else if columnName == Constants.Table.Identifier.trackName {
       return item?.title ?? NSString(string: item!.filename).lastPathComponent
     } else {
@@ -51,11 +51,29 @@ class PlaylistView: NSViewController, NSTableViewDataSource, NSTableViewDelegate
   }
   
   func tableViewSelectionDidChange(_ notification: Notification) {
-    
+    withAllTableViews { (view) in
+      if view.numberOfSelectedRows > 0 {
+        self.playerController.playFileInPlaylist(view.selectedRow)
+        view.deselectAll(self)
+        view.reloadData()
+      }
+    }
   }
   
   private func withAllTableViews(_ block: (NSTableView) -> Void) {
     block(playlistTableView)
   }
+  
+  // MARK: - IBActions
+  
+  @IBAction func addToPlaylistBtnAction(_ sender: AnyObject) {
+    Utility.quickOpenPanel(title: "Add to playlist") { (url) in
+      if url.isFileURL, let path = url.path{
+        self.playerController.addToPlaylist(path)
+        self.playlistTableView.reloadData()
+      }
+    }
+  }
+  
     
 }

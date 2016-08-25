@@ -33,6 +33,7 @@ class Utility {
   
   static func fatal(_ message: String, _ block: () -> Void = {}) {
     NSLog("%@", message)
+    print(Thread.callStackSymbols)
     block()
     exit(1)
   }

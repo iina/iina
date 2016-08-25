@@ -260,12 +260,14 @@ class MPVController: NSObject {
     playerController.info.displayHeight = dheight
     playerController.info.videoDuration = VideoTime(duration)
     playerController.info.videoPosition = VideoTime(pos)
+    let filename = mpvGetStringProperty(MPVProperty.filename)
+    playerController.info.currentURL = URL(fileURLWithPath: filename ?? "")
     playerController.fileLoaded()
     mpvResume()
   }
   
   private func onTrackChanged() {
-    playerController.mainWindow.updateTitle()
+    
   }
   
   private func onVideoReconfig() {

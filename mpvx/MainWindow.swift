@@ -96,6 +96,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     // w.isMovableByWindowBackground  = true
     // set background color to black
     w.backgroundColor = NSColor.black()
+    titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay;
     updateTitle()
     if #available(OSX 10.11, *), UserDefaults.standard.bool(forKey: Preference.Key.controlBarDarker) {
       titleBarView.material = .ultraDark
@@ -472,13 +473,14 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   /** Set video size when info available. */
   func adjustFrameByVideoSize(_ width: Int, _ height: Int) {
+    guard let w = window else { return }
     // set aspect ratio
     let aspectRatio = Float(width) / Float(height)
     let originalVideoSize = NSSize(width: width, height: height)
-    window!.aspectRatio = originalVideoSize
+    w.aspectRatio = originalVideoSize
     
-    var videoSize = window!.convertFromBacking(
-      NSMakeRect(window!.frame.origin.x, window!.frame.origin.y, CGFloat(width), CGFloat(height))
+    var videoSize = w.convertFromBacking(
+      NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))
     ).size
     
     // check screen size
@@ -510,7 +512,9 @@ class MainWindow: NSWindowController, NSWindowDelegate {
       // check default window position
     }
     
-    window!.setContentSize(videoSize.satisfyMinSizeWithFixedAspectRatio(minSize))
+//    window!.setContentSize(videoSize.satisfyMinSizeWithFixedAspectRatio(minSize))
+    let rect = NSRect(origin: w.frame.origin, size: videoSize.satisfyMinSizeWithFixedAspectRatio(minSize))
+    w.setFrame(rect, display: true, animate: true)
     videoView.videoSize = originalVideoSize
     if (!window!.isVisible) {
       window!.setIsVisible(true)

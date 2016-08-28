@@ -13,6 +13,9 @@ class PlaylistView: NSViewController, NSTableViewDataSource, NSTableViewDelegate
   weak var playerController: PlayerController!
   
   @IBOutlet weak var playlistTableView: NSTableView!
+  @IBOutlet weak var playlistBtn: NSButton!
+  @IBOutlet weak var chaptersBtn: NSButton!
+  @IBOutlet weak var tabView: NSTabView!
   
 
   override func viewDidLoad() {
@@ -73,6 +76,22 @@ class PlaylistView: NSViewController, NSTableViewDataSource, NSTableViewDelegate
         self.playlistTableView.reloadData()
       }
     }
+  }
+  
+  @IBAction func playlistBtnAction(_ sender: AnyObject) {
+    tabView.selectTabViewItem(at: 0)
+    playlistBtn.attributedTitle = AttributedString(string: "PLAYLIST",
+                                                   attributes: Utility.FontAttributes(font: .systemBold, size: .system, align: .center).value)
+    chaptersBtn.attributedTitle = AttributedString(string: "CHAPTERS",
+                                                   attributes: Utility.FontAttributes(font: .system, size: .system, align: .center).value)
+  }
+  
+  @IBAction func chaptersBtnAction(_ sender: AnyObject) {
+    tabView.selectTabViewItem(at: 1)
+    chaptersBtn.attributedTitle = AttributedString(string: "CHAPTERS",
+                                                   attributes: Utility.FontAttributes(font: .systemBold, size: .system, align: .center).value)
+    playlistBtn.attributedTitle = AttributedString(string: "PLAYLIST",
+                                                   attributes: Utility.FontAttributes(font: .system, size: .system, align: .center).value)
   }
   
     

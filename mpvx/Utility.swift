@@ -10,6 +10,9 @@ import Cocoa
 
 class Utility {
   
+  static let systemFontAttribute = [NSFontAttributeName: NSFont.systemFont(ofSize: NSFont.systemFontSize())]
+  static let systemBoldFontAttribute = [NSFontAttributeName: NSFont.boldSystemFont(ofSize: NSFont.systemFontSize())]
+  
   // MARK: - Logs, alerts
   
   static func showAlert(message: String, alertStyle: NSAlertStyle = .critical) {
@@ -93,6 +96,74 @@ class Utility {
     
     func matches(_ str: String) -> Bool {
       return regex?.numberOfMatches(in: str, options: [], range: NSMakeRange(0, str.characters.count)) > 0
+    }
+  }
+  
+  class FontAttributes {
+    struct AttributeType {
+      enum Align {
+        case left
+        case center
+        case right
+      }
+      enum Size {
+        case system
+        case pt(Float)
+      }
+      enum Font {
+        case system
+        case systemBold
+        case name(String)
+      }
+    }
+    
+    var align: AttributeType.Align
+    var size: AttributeType.Size
+    var font: AttributeType.Font
+    
+    init(font: AttributeType.Font, size: AttributeType.Size, align: AttributeType.Align) {
+      self.font = font
+      self.size = size
+      self.align = align
+    }
+    
+    var value : [String : AnyObject]? {
+      get {
+        let f: NSFont?
+        let s: CGFloat
+        let a = NSMutableParagraphStyle()
+        switch self.size {
+        case .system:
+          s = NSFont.systemFontSize()
+        case .pt(let point):
+          s = CGFloat(point)
+        }
+        switch self.font {
+        case .system:
+          f = NSFont.systemFont(ofSize: s)
+        case .systemBold:
+          f = NSFont.boldSystemFont(ofSize: s)
+        case .name(let n):
+          f = NSFont(name: n, size: s)
+        }
+        switch self.align {
+        case .left:
+          a.alignment = .left
+        case .center:
+          a.alignment = .center
+        case .right:
+          a.alignment = .right
+        }
+        if let f = f {
+          NSFont.systemFont(ofSize: NSFont.systemFontSize())
+          return [
+            NSFontAttributeName: f,
+            NSParagraphStyleAttributeName: a
+          ]
+        } else {
+          return nil
+        }
+      }
     }
   }
 

@@ -7,7 +7,10 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PlaylistView" customModule="mpvx" customModuleProvider="target">
             <connections>
+                <outlet property="chaptersBtn" destination="SOR-3l-PFj" id="W2q-tm-TA0"/>
+                <outlet property="playlistBtn" destination="5Zq-JQ-XO4" id="iAS-Co-wFQ"/>
                 <outlet property="playlistTableView" destination="xIa-sI-0Xn" id="JVO-9u-NdG"/>
+                <outlet property="tabView" destination="Yym-Zw-Hd8" id="xXL-Ne-hHh"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -126,6 +129,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="chaptersBtnAction:" target="-2" id="Gpo-6e-oRu"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Zq-JQ-XO4">
                     <rect key="frame" x="8" y="325" width="120" height="36"/>
@@ -136,6 +142,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="playlistBtnAction:" target="-2" id="cyl-Pk-pTN"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>

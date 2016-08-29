@@ -19,15 +19,16 @@ struct AppData {
 
 
 struct Constants {
-  struct Table{
-    struct Identifier {
-      static let isChosen = "IsChosen"
-      static let trackName = "TrackName"
-    }
-    struct String {
-      static let dot = "●"
-      static let play = "▶︎"
-      static let none = "<None>"
-    }
+  struct Identifier {
+    static let isChosen = "IsChosen"
+    static let trackName = "TrackName"
+    static let isPlayingCell = "IsPlayingCell"
+    static let trackNameCell = "TrackNameCell"
+  }
+  struct String {
+    static let dot = "●"
+    static let play = "▶︎"
+    static let none = "<None>"
+    static let chapter = "Chapter"
   }
 }

@@ -94,11 +94,11 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
       return nil
     }
     // return track data
-    if columnName == Constants.Table.Identifier.isChosen {
+    if columnName == Constants.Identifier.isChosen {
       let isChosen = track == nil ? (activeId == 0) : (track!.id == activeId)
-      return isChosen ? Constants.Table.String.dot : ""
-    } else if columnName == Constants.Table.Identifier.trackName {
-      return track?.readableTitle ?? Constants.Table.String.none
+      return isChosen ? Constants.String.dot : ""
+    } else if columnName == Constants.Identifier.trackName {
+      return track?.readableTitle ?? Constants.String.none
     } else {
       return nil
     }

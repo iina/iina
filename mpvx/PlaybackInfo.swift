@@ -50,5 +50,6 @@ class PlaybackInfo {
   var secondSid: Int?
   
   var playlist: [MPVPlaylistItem] = []
+  var chapters: [MPVChapter] = []
   
 }

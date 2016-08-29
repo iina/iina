@@ -67,3 +67,13 @@ class VideoTime {
   }
 
 }
+
+extension VideoTime: Comparable { }
+
+func <(lhs: VideoTime, rhs: VideoTime) -> Bool {
+  return lhs.second < rhs.second
+}
+
+func ==(lhs: VideoTime, rhs: VideoTime) -> Bool {
+  return lhs.second == rhs.second
+}

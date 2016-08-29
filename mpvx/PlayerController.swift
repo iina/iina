@@ -230,6 +230,13 @@ class PlayerController: NSObject {
     getPLaylist()
   }
   
+  func playChapter(_ pos: Int) {
+    let chapter = info.chapters[pos]
+    mpvController.mpvCommand([MPVCommand.seek, "\(chapter.time.second)", "absolute", nil])
+    // need to update time pos
+    syncUITime()
+  }
+  
   /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
     guard let vwidth = info.videoWidth, vheight = info.videoHeight else {
@@ -241,6 +248,7 @@ class PlayerController: NSObject {
       self.getTrackInfo()
       self.getSelectedTracks()
       self.getPLaylist()
+      self.getChapters()
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
       mainWindow.updateTitle()
@@ -346,6 +354,20 @@ class PlayerController: NSObject {
                                          isPlaying: mpvController.mpvGetFlagProperty(MPVProperty.playlistNPlaying(index)),
                                          title: mpvController.mpvGetStringProperty(MPVProperty.playlistNTitle(index)))
       info.playlist.append(playlistItem)
+    }
+  }
+  
+  private func getChapters() {
+    info.chapters.removeAll()
+    let chapterCount = mpvController.mpvGetIntProperty(MPVProperty.chapterListCount)
+    if chapterCount == 0 {
+      return
+    }
+    for index in 0...chapterCount-1 {
+      let chapter = MPVChapter(title: mpvController.mpvGetStringProperty(MPVProperty.chapterListNTitle(index)),
+                               startTime: mpvController.mpvGetIntProperty(MPVProperty.chapterListNTime(index)),
+                               index: index)
+      info.chapters.append(chapter)
     }
   }
 

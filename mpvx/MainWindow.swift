@@ -68,6 +68,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   lazy var playlistView: PlaylistView = {
     let playListView = PlaylistView()
     playListView.playerController = self.playerController
+    playListView.mainWindow = self
     return playListView
   }()
   

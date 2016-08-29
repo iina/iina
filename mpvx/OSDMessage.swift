@@ -21,6 +21,7 @@ enum OSDMessage {
   case screenShot
   case abLoop(Int)
   case stop
+  case chapter(String)
   
   func message() -> String {
     switch self {
@@ -73,6 +74,10 @@ enum OSDMessage {
       
     case .stop:
       return "Stopped"
+      
+    case .chapter(let name):
+      return "Go to \"\(name)\""
+      
     }
   }
 }

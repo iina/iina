@@ -14,7 +14,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   let minSize = NSMakeSize(500, 300)
   let minSizeWhenSettingsViewShown = NSMakeSize(625, 352)
   
-  var playerController: PlayerController!
+  var playerCore: PlayerCore!
   lazy var videoView: VideoView! = self.initVideoView()
   
   var mousePosRelatedToWindow: CGPoint?
@@ -60,14 +60,14 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   /** The quick setting window */
   lazy var quickSettingView: QuickSettingView = {
     let quickSettingView = QuickSettingView()
-    quickSettingView.playerController = self.playerController
+    quickSettingView.playerCore = self.playerCore
     quickSettingView.mainWindow = self
     return quickSettingView
   }()
   
   lazy var playlistView: PlaylistView = {
     let playListView = PlaylistView()
-    playListView.playerController = self.playerController
+    playListView.playerCore = self.playerCore
     playListView.mainWindow = self
     return playListView
   }()
@@ -114,7 +114,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: nil))
     // video view
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
-    playerController.startMPVOpenGLCB(videoView)
+    playerCore.startMPVOpenGLCB(videoView)
     // init quick setting view now
     let _ = quickSettingView
     // other initialization
@@ -138,7 +138,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   override func keyDown(_ event: NSEvent) {
     window!.makeFirstResponder(window!.contentView)
-    playerController.togglePause(nil)
+    playerCore.togglePause(nil)
   }
   
   /** record mouse pos on mouse down */
@@ -215,12 +215,12 @@ class MainWindow: NSWindowController, NSWindowDelegate {
     // handle the value
     let seekFactor = 0.05
     if scrollDirection == .horizontal {
-      playerController.seek(relativeSecond: seekFactor * Double(event.scrollingDeltaX))
+      playerCore.seek(relativeSecond: seekFactor * Double(event.scrollingDeltaX))
     } else if scrollDirection == .vertical {
-      let newVolume = playerController.info.volume - Int(event.scrollingDeltaY)
-      playerController.setVolume(newVolume)
+      let newVolume = playerCore.info.volume - Int(event.scrollingDeltaY)
+      playerCore.setVolume(newVolume)
       volumeSlider.integerValue = newVolume
-      displayOSD(.volume(playerController.info.volume))
+      displayOSD(.volume(playerCore.info.volume))
     }
   }
   
@@ -345,7 +345,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   }
   
   func updateTitle() {
-    if let w = window, url = playerController.info.currentURL?.lastPathComponent {
+    if let w = window, url = playerCore.info.currentURL?.lastPathComponent {
       w.title = url
       titleTextField.stringValue = url
     }
@@ -529,7 +529,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   // MARK: - Sync UI
   
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
-    guard let duration = playerController.info.videoDuration, let pos = playerController.info.videoPosition else {
+    guard let duration = playerCore.info.videoDuration, let pos = playerCore.info.videoPosition else {
       Utility.fatal("video info not available")
       return
     }
@@ -545,7 +545,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   func updateVolume() {
     let volume = ud.integer(forKey: Preference.Key.softVolume)
-    playerController.setVolume(volume)
+    playerCore.setVolume(volume)
     volumeSlider.integerValue = volume
   }
   
@@ -563,11 +563,11 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   /** Play button: pause & resume */
   @IBAction func playButtonAction(_ sender: NSButton) {
     if sender.state == NSOnState {
-      playerController.togglePause(false)
+      playerCore.togglePause(false)
     }
     if sender.state == NSOffState {
-      playerController.togglePause(true)
-      // speed is already reset by playerController
+      playerCore.togglePause(true)
+      // speed is already reset by playerCore
       speedValueIndex = 5
       leftArrowLabel.isHidden = true
       rightArrowLabel.isHidden = true
@@ -577,11 +577,11 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   /** mute button */
   @IBAction func muteButtonAction(_ sender: NSButton) {
     if sender.state == NSOnState {
-      playerController.toogleMute(true)
+      playerCore.toogleMute(true)
       displayOSD(.mute)
     }
     if sender.state == NSOffState {
-      playerController.toogleMute(false)
+      playerCore.toogleMute(false)
       displayOSD(.unMute)
     }
   }
@@ -618,7 +618,7 @@ class MainWindow: NSWindowController, NSWindowDelegate {
         }
       }
       let speedValue = AppData.availableSpeedValues[speedValueIndex]
-      playerController.setSpeed(speedValue)
+      playerCore.setSpeed(speedValue)
       if speedValueIndex == 5 {
         leftArrowLabel.isHidden = true
         rightArrowLabel.isHidden = true
@@ -635,12 +635,12 @@ class MainWindow: NSWindowController, NSWindowDelegate {
       // if is paused
       if playButton.state == NSOffState {
         updatePlayButtonState(NSOnState)
-        playerController.togglePause(false)
+        playerCore.togglePause(false)
       }
     case .playlist:
       break
     case .seek:
-      playerController.seek(relativeSecond: left ? -10 : 10)
+      playerCore.seek(relativeSecond: left ? -10 : 10)
       break
     }
   }
@@ -665,13 +665,13 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   /** When slider changes */
   @IBAction func playSliderChanges(_ sender: NSSlider) {
     let percentage = 100 * sender.doubleValue / sender.maxValue
-    playerController.seek(percent: percentage)
+    playerCore.seek(percent: percentage)
   }
   
   
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.integerValue
-    playerController.setVolume(value)
+    playerCore.setVolume(value)
     displayOSD(.volume(value))
   }
   
@@ -689,55 +689,55 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   
   @IBAction func menuTogglePause(_ sender: NSMenuItem) {
     if sender.title == "Play" {
-      playerController.togglePause(false)
+      playerCore.togglePause(false)
       sender.title = "Pause"
     } else {
-      playerController.togglePause(true)
+      playerCore.togglePause(true)
       sender.title = "Play"
     }
   }
   
   @IBAction func menuStop(_ sender: NSMenuItem) {
     // FIXME: handle stop
-    playerController.stop()
+    playerCore.stop()
     displayOSD(.stop)
   }
   
   @IBAction func menuStep(_ sender: NSMenuItem) {
     if sender.tag == 0 { // -> 5s
-      playerController.seek(relativeSecond: 5)
+      playerCore.seek(relativeSecond: 5)
     } else if sender.tag == 1 { // <- 5s
-      playerController.seek(relativeSecond: -5)
+      playerCore.seek(relativeSecond: -5)
     }
   }
   
   @IBAction func menuStepFrame(_ sender: NSMenuItem) {
-    if !playerController.info.isPaused {
-      playerController.togglePause(true)
+    if !playerCore.info.isPaused {
+      playerCore.togglePause(true)
     }
     if sender.tag == 0 { // -> 1f
-      playerController.frameStep(backwards: false)
+      playerCore.frameStep(backwards: false)
     } else if sender.tag == 1 { // <- 1f
-      playerController.frameStep(backwards: true)
+      playerCore.frameStep(backwards: true)
     }
   }
   
   @IBAction func menuJumpTo(_ sender: NSMenuItem) {
     Utility.quickPromptPanel(messageText: "Jump to:", informativeText: "Example: 20:35") { input in
       if let vt = VideoTime(input) {
-        self.playerController.seek(absoluteSecond: Double(vt.second))
+        self.playerCore.seek(absoluteSecond: Double(vt.second))
       }
     }
   }
   
   @IBAction func menuSnapshot(_ sender: NSMenuItem) {
-    playerController.screenShot()
+    playerCore.screenShot()
     displayOSD(.screenShot)
   }
   
   @IBAction func menuABLoop(_ sender: NSMenuItem) {
-    playerController.abLoop()
-    displayOSD(.abLoop(playerController.info.abLoopStatus))
+    playerCore.abLoop()
+    displayOSD(.abLoop(playerCore.info.abLoopStatus))
   }
   
 }

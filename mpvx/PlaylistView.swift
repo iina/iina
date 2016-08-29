@@ -10,7 +10,7 @@ import Cocoa
 
 class PlaylistView: NSViewController, NSTableViewDataSource {
   
-  weak var playerController: PlayerController!
+  weak var playerCore: PlayerCore!
   weak var mainWindow: MainWindow!
   
   @IBOutlet weak var playlistTableView: NSTableView!
@@ -40,9 +40,9 @@ class PlaylistView: NSViewController, NSTableViewDataSource {
   
   func numberOfRows(in tableView: NSTableView) -> Int {
     if tableView == playlistTableView {
-      return playerController.info.playlist.count
+      return playerCore.info.playlist.count
     } else if tableView == chapterTableView {
-      return playerController.info.chapters.count
+      return playerCore.info.chapters.count
     } else {
       return 0
     }
@@ -50,7 +50,7 @@ class PlaylistView: NSViewController, NSTableViewDataSource {
   
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
     if tableView == playlistTableView {
-      let item = playerController.info.playlist[row]
+      let item = playerCore.info.playlist[row]
       let columnName = tableColumn?.identifier
       if columnName == Constants.Identifier.isChosen {
         return item.isPlaying ? Constants.String.play : ""
@@ -74,7 +74,7 @@ class PlaylistView: NSViewController, NSTableViewDataSource {
   @IBAction func addToPlaylistBtnAction(_ sender: AnyObject) {
     Utility.quickOpenPanel(title: "Add to playlist") { (url) in
       if url.isFileURL, let path = url.path{
-        self.playerController.addToPlaylist(path)
+        self.playerCore.addToPlaylist(path)
         self.playlistTableView.reloadData()
       }
     }
@@ -111,7 +111,7 @@ class PlaylistView: NSViewController, NSTableViewDataSource {
     func tableViewSelectionDidChange(_ notification: Notification) {
       let tv = notification.object as! NSTableView
       if tv.numberOfSelectedRows > 0 {
-        parent.playerController.playFileInPlaylist(tv.selectedRow)
+        parent.playerCore.playFileInPlaylist(tv.selectedRow)
         tv.deselectAll(self)
         tv.reloadData()
       }
@@ -130,8 +130,8 @@ class PlaylistView: NSViewController, NSTableViewDataSource {
       let tv = notification.object as! NSTableView
       if tv.numberOfSelectedRows > 0 {
         let index = tv.selectedRow
-        parent.playerController.playChapter(index)
-        let chapter = parent.playerController.info.chapters[index]
+        parent.playerCore.playChapter(index)
+        let chapter = parent.playerCore.info.chapters[index]
         tv.deselectAll(self)
         tv.reloadData()
         parent.mainWindow.displayOSD(.chapter(chapter.title))
@@ -139,7 +139,7 @@ class PlaylistView: NSViewController, NSTableViewDataSource {
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-      let info = parent.playerController.info
+      let info = parent.playerCore.info
       let chapters = info.chapters
       let chapter = chapters[row]
       let nextChapterTime: VideoTime

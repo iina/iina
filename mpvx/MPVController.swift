@@ -31,10 +31,10 @@ class MPVController: NSObject {
   // The mpv client name
   var mpvClientName: UnsafePointer<Int8>!
   lazy var queue: DispatchQueue! = DispatchQueue(label: "mpvx", attributes: .serial)
-  var playerController: PlayerController!
+  var playerCore: PlayerCore!
   
-  init(playerController: PlayerController) {
-    self.playerController = playerController
+  init(playerCore: PlayerCore) {
+    self.playerCore = playerCore
   }
   
   /**
@@ -48,14 +48,14 @@ class MPVController: NSObject {
     mpvClientName = mpv_client_name(mpv)
     
     // Set options that can be override by user's config
-    let screenshotPath = playerController.ud.string(forKey: Preference.Key.screenshotFolder)!
+    let screenshotPath = playerCore.ud.string(forKey: Preference.Key.screenshotFolder)!
     let absoluteScreenshotPath = NSString(string: screenshotPath).expandingTildeInPath
     e(mpv_set_option_string(mpv, MPVOption.Screenshot.screenshotDirectory, absoluteScreenshotPath))
     
-    let screenshotFormat = playerController.ud.string(forKey: Preference.Key.screenshotFormat)!
+    let screenshotFormat = playerCore.ud.string(forKey: Preference.Key.screenshotFormat)!
     e(mpv_set_option_string(mpv, MPVOption.Screenshot.screenshotFormat, screenshotFormat))
     
-    let screenshotTemplate = playerController.ud.string(forKey: Preference.Key.screenshotTemplate)!
+    let screenshotTemplate = playerCore.ud.string(forKey: Preference.Key.screenshotTemplate)!
     e(mpv_set_option_string(mpv, MPVOption.Screenshot.screenshotTemplate, screenshotTemplate))
     
     // Load user's config file.
@@ -200,7 +200,7 @@ class MPVController: NSObject {
         case MPVProperty.videoParams:
           onVideoParamsChange(UnsafePointer<mpv_node_list>(property.data))
         case MPVProperty.mute:
-          playerController.syncUI(.MuteButton)
+          playerCore.syncUI(.MuteButton)
         default:
           Utility.log("MPV property changed (unhandled): \(propertyName)")
         }
@@ -226,17 +226,17 @@ class MPVController: NSObject {
       onTrackChanged()
       
     case MPV_EVENT_SEEK:
-      playerController.syncUI(.Time)
+      playerCore.syncUI(.Time)
       
     case MPV_EVENT_PLAYBACK_RESTART:
-      playerController.syncUI(.Time)
+      playerCore.syncUI(.Time)
       
     case MPV_EVENT_PAUSE, MPV_EVENT_UNPAUSE:
-      playerController.syncUI(.PlayButton)
+      playerCore.syncUI(.PlayButton)
       
     case MPV_EVENT_CHAPTER_CHANGE:
-      playerController.syncUI(.Time)
-      playerController.syncUI(.chapterList)
+      playerCore.syncUI(.Time)
+      playerCore.syncUI(.chapterList)
       
     default:
       let eventName = String(cString: mpv_event_name(eventId))
@@ -258,15 +258,15 @@ class MPVController: NSObject {
     let dheight = getInt(MPVProperty.dheight)
     let duration = getInt(MPVProperty.duration)
     let pos = getInt(MPVProperty.timePos)
-    playerController.info.videoHeight = height
-    playerController.info.videoWidth = width
-    playerController.info.displayWidth = dwidth
-    playerController.info.displayHeight = dheight
-    playerController.info.videoDuration = VideoTime(duration)
-    playerController.info.videoPosition = VideoTime(pos)
+    playerCore.info.videoHeight = height
+    playerCore.info.videoWidth = width
+    playerCore.info.displayWidth = dwidth
+    playerCore.info.displayHeight = dheight
+    playerCore.info.videoDuration = VideoTime(duration)
+    playerCore.info.videoPosition = VideoTime(pos)
     let filename = getString(MPVProperty.filename)
-    playerController.info.currentURL = URL(fileURLWithPath: filename ?? "")
-    playerController.fileLoaded()
+    playerCore.info.currentURL = URL(fileURLWithPath: filename ?? "")
+    playerCore.fileLoaded()
     mpvResume()
   }
   
@@ -276,26 +276,26 @@ class MPVController: NSObject {
   
   private func onVideoReconfig() {
     // If loading file, video reconfig can return 0 width and height
-    if playerController.info.fileLoading {
+    if playerCore.info.fileLoading {
       return
     }
     var dwidth = getInt(MPVProperty.dwidth)
     var dheight = getInt(MPVProperty.dheight)
-    if playerController.info.rotation == 90 || playerController.info.rotation == 270 {
+    if playerCore.info.rotation == 90 || playerCore.info.rotation == 270 {
       Utility.swap(&dwidth, &dheight)
     }
     // according to client api doc, check whether changed
-    if playerController.info.displayWidth! == 0 && playerController.info.displayHeight! == 0 {
-      playerController.info.displayWidth = dwidth
-      playerController.info.displayHeight = dheight
+    if playerCore.info.displayWidth! == 0 && playerCore.info.displayHeight! == 0 {
+      playerCore.info.displayWidth = dwidth
+      playerCore.info.displayHeight = dheight
       return
     }
-    if dwidth != playerController.info.displayWidth! || dheight != playerController.info.displayHeight! {
+    if dwidth != playerCore.info.displayWidth! || dheight != playerCore.info.displayHeight! {
       // video size changed
-      playerController.info.displayWidth = dwidth
-      playerController.info.displayHeight = dheight
+      playerCore.info.displayWidth = dwidth
+      playerCore.info.displayHeight = dheight
       mpvSuspend()
-      playerController.notifyMainWindowVideoSizeChanged()
+      playerCore.notifyMainWindowVideoSizeChanged()
       mpvResume()
     }
   }

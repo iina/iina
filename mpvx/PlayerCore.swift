@@ -1,5 +1,5 @@
 //
-//  PlayerController.swift
+//  PlayerCore.swift
 //  mpvx
 //
 //  Created by lhc on 8/7/16.
@@ -8,18 +8,18 @@
 
 import Cocoa
 
-class PlayerController: NSObject {
+class PlayerCore: NSObject {
   
   let ud: UserDefaults = UserDefaults.standard
   
   lazy var mainWindow: MainWindow = {
     let window = MainWindow()
-    window.playerController = self
+    window.playerCore = self
     return window
   }()
   
   lazy var mpvController: MPVController = {
-    let controller = MPVController(playerController: self)
+    let controller = MPVController(playerCore: self)
     return controller
   }()
   

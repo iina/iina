@@ -11,11 +11,11 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
   
-  lazy var playerController: PlayerController! = PlayerController()
+  lazy var playerCore: PlayerCore! = PlayerCore()
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     UserDefaults.standard.register(Preference.defaultPreference)
-    playerController.startMPV()
+    playerCore.startMPV()
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {
@@ -33,12 +33,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
   
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplicationTerminateReply {
-    playerController.terminateMPV()
+    playerCore.terminateMPV()
     return .terminateNow
   }
   
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
-    playerController.openFile(URL(fileURLWithPath: filename))
+    playerCore.openFile(URL(fileURLWithPath: filename))
     return true
   }
   
@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     panel.allowsMultipleSelection = false
     if panel.runModal() == NSFileHandlingPanelOKButton {
       if let url = panel.url {
-        playerController.openFile(url)
+        playerCore.openFile(url)
       }
     }
   }

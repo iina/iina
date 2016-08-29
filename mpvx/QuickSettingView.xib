@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11163.2"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="QuickSettingView" customModule="mpvx" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="QuickSettingViewController" customModule="mpvx" customModuleProvider="target">
             <connections>
                 <outlet property="aspectSegment" destination="Ljl-w6-gIf" id="X3Q-8g-q0e"/>
                 <outlet property="audioDelaySliderIndicator" destination="gR7-cS-zmu" id="4Zq-bk-Nxd"/>

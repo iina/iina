@@ -1,5 +1,5 @@
 //
-//  MainWindow.swift
+//  MainWindowController.swift
 //  mpvx
 //
 //  Created by lhc on 8/7/16.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MainWindow: NSWindowController, NSWindowDelegate {
+class MainWindowController: NSWindowController, NSWindowDelegate {
   
   let ud: UserDefaults = UserDefaults.standard
   let minSize = NSMakeSize(500, 300)
@@ -58,15 +58,15 @@ class MainWindow: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var sideBarRightConstraint: NSLayoutConstraint!
   
   /** The quick setting window */
-  lazy var quickSettingView: QuickSettingView = {
-    let quickSettingView = QuickSettingView()
+  lazy var quickSettingView: QuickSettingViewController = {
+    let quickSettingView = QuickSettingViewController()
     quickSettingView.playerCore = self.playerCore
     quickSettingView.mainWindow = self
     return quickSettingView
   }()
   
-  lazy var playlistView: PlaylistView = {
-    let playListView = PlaylistView()
+  lazy var playlistView: PlaylistViewController = {
+    let playListView = PlaylistViewController()
     playListView.playerCore = self.playerCore
     playListView.mainWindow = self
     return playListView

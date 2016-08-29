@@ -5,7 +5,7 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="PlaylistView" customModule="mpvx" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="PlaylistViewController" customModule="mpvx" customModuleProvider="target">
             <connections>
                 <outlet property="chapterTableView" destination="BvG-MR-6LX" id="WoF-Wg-fqX"/>
                 <outlet property="chaptersBtn" destination="SOR-3l-PFj" id="W2q-tm-TA0"/>

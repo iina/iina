@@ -1,5 +1,5 @@
 //
-//  PlaylistView.swift
+//  PlaylistViewController.swift
 //  mpvx
 //
 //  Created by lhc on 17/8/16.
@@ -8,10 +8,14 @@
 
 import Cocoa
 
-class PlaylistView: NSViewController, NSTableViewDataSource {
+class PlaylistViewController: NSViewController, NSTableViewDataSource {
+  
+  override var nibName: String {
+    return "PlaylistView"
+  }
   
   weak var playerCore: PlayerCore!
-  weak var mainWindow: MainWindow!
+  weak var mainWindow: MainWindowController!
   
   @IBOutlet weak var playlistTableView: NSTableView!
   @IBOutlet weak var chapterTableView: NSTableView!
@@ -102,9 +106,9 @@ class PlaylistView: NSViewController, NSTableViewDataSource {
   
   class PlaylistTableDelegate: NSObject, NSTableViewDelegate {
     
-    weak var parent: PlaylistView!
+    weak var parent: PlaylistViewController!
     
-    init(_ parent: PlaylistView) {
+    init(_ parent: PlaylistViewController) {
       self.parent = parent
     }
     
@@ -120,9 +124,9 @@ class PlaylistView: NSViewController, NSTableViewDataSource {
   
   class ChapterTableDelegate: NSObject, NSTableViewDelegate {
     
-    weak var parent: PlaylistView!
+    weak var parent: PlaylistViewController!
     
-    init(_ parent: PlaylistView) {
+    init(_ parent: PlaylistViewController) {
       self.parent = parent
     }
     

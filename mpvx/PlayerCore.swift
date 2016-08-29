@@ -12,8 +12,8 @@ class PlayerCore: NSObject {
   
   let ud: UserDefaults = UserDefaults.standard
   
-  lazy var mainWindow: MainWindow = {
-    let window = MainWindow()
+  lazy var mainWindow: MainWindowController = {
+    let window = MainWindowController()
     window.playerCore = self
     return window
   }()

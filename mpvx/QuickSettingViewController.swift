@@ -1,5 +1,5 @@
 //
-//  QuickSettingView.swift
+//  QuickSettingViewController.swift
 //  mpvx
 //
 //  Created by lhc on 12/8/16.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
   override var nibName: String {
     return "QuickSettingView"
@@ -18,7 +18,7 @@ class QuickSettingView: NSViewController, NSTableViewDataSource, NSTableViewDele
   let sliderIndicatorHalfWidth:CGFloat = 16
   
   weak var playerCore: PlayerCore!
-  weak var mainWindow: MainWindow!
+  weak var mainWindow: MainWindowController!
   
   @IBOutlet weak var videoTabBtn: NSButton!
   @IBOutlet weak var audioTabBtn: NSButton!

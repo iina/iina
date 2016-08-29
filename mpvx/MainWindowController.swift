@@ -25,7 +25,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var isSideBarShowing: Bool = false
   
   override var windowNibName: String {
-    return "MainWindow"
+    return "MainWindowController"
   }
   
   var fadeableViews: [NSView?] = []
@@ -56,6 +56,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   @IBOutlet weak var titleBarHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var sideBarRightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var sideBarWidthConstraint: NSLayoutConstraint!
   
   /** The quick setting window */
   lazy var quickSettingView: QuickSettingViewController = {
@@ -377,30 +378,29 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   private func showSettingsView() {
-    
     showUIAndUpdateTimer()
-    removeTitlebarFromFadeableViews()
     
     guard let window = window else { return }
     window.minSize = minSizeWhenSettingsViewShown
     window.setFrame(NSRect(origin: window.frame.origin, size:window.frame.size.satisfyMinSizeWithFixedAspectRatio(minSizeWhenSettingsViewShown)), display: true, animate: true)
     
+    sideBarWidthConstraint.constant = 360
+    sideBarRightConstraint.constant = -360
+    sideBarView.isHidden = false
     let qsv = self.quickSettingView.view
-    self.titleBarView.addSubview(qsv)
+    sideBarView.addSubview(qsv)
     // add constraints
-    qsv.translatesAutoresizingMaskIntoConstraints = false
-    let centerXConstraint = NSLayoutConstraint(item: qsv, attribute: .centerX, relatedBy: .equal, toItem: self.titleBarView, attribute: .centerX, multiplier: 1, constant: 0)
-    let heightConstaraint = NSLayoutConstraint(item: qsv, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 330)
-    let widthConstraint = NSLayoutConstraint(item: qsv, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 600)
-    let bottomConstraint = NSLayoutConstraint(item: qsv, attribute: .bottom, relatedBy: .equal, toItem: self.titleBarView, attribute: .bottom, multiplier: 1, constant: 0)
-    NSLayoutConstraint.activate([centerXConstraint, heightConstaraint, widthConstraint, bottomConstraint])
+    let constraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[qsv]-0-|", options: [], metrics: nil, views: ["qsv": qsv])
+    let constraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[qsv]-0-|", options: [], metrics: nil, views: ["qsv": qsv])
+    NSLayoutConstraint.activate(constraintsH)
+    NSLayoutConstraint.activate(constraintsV)
     
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-      titleBarHeightConstraint.animator().constant = 22 + 330
+      sideBarRightConstraint.animator().constant = 0
     }) {
-      self.isSettingViewShowing = true
+      self.isSideBarShowing = true
     }
   }
   
@@ -411,14 +411,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       titleBarHeightConstraint.animator().constant = 22
     }) {
-      self.addBackTitlebarToFadeableViews()
       qsv.removeFromSuperview()
       self.window!.minSize = NSMakeSize(500, 300)
-      self.isSettingViewShowing = false
+      self.isSideBarShowing = false
     }
   }
   
   private func showSideBar() {
+    sideBarWidthConstraint.constant = 240
+    sideBarRightConstraint.constant = -240
     sideBarView.isHidden = false
     let plv = playlistView.view
     sideBarView.addSubview(plv)

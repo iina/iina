@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11163.2"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="MainWindow" customModule="mpvx" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="mpvx" customModuleProvider="target">
             <connections>
                 <outlet property="controlBar" destination="OiF-pA-8Sd" id="o08-Ig-SfX"/>
                 <outlet property="leftArrowLabel" destination="Yg9-Sd-sWy" id="fps-VD-ZgC"/>
@@ -17,6 +17,7 @@
                 <outlet property="rightLabel" destination="GgV-Cc-sk0" id="fnx-gO-YPl"/>
                 <outlet property="sideBarRightConstraint" destination="PAj-s6-32e" id="DOs-2k-JEG"/>
                 <outlet property="sideBarView" destination="epo-S6-QVB" id="5eE-aM-VUd"/>
+                <outlet property="sideBarWidthConstraint" destination="1BL-aP-tHS" id="Qbw-L4-DAp"/>
                 <outlet property="titleBarHeightConstraint" destination="1Dw-Bg-FRS" id="IaK-ti-9vX"/>
                 <outlet property="titleBarView" destination="TRx-2V-Gr3" id="kOU-nP-MAP"/>
                 <outlet property="titleTextField" destination="gW1-BG-OEa" id="8wO-J1-Yp6"/>

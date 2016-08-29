@@ -11,7 +11,7 @@ import Cocoa
 class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
   override var nibName: String {
-    return "QuickSettingView"
+    return "QuickSettingViewController"
   }
   
   let distanceBetweenSliderAndIndicator: CGFloat = 18
@@ -45,7 +45,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var customSubDelayTextField: NSTextField!
   @IBOutlet weak var subDelaySliderIndicator: NSTextField!
   
-  @IBOutlet weak var slideUpBtn: NSButton!
+//  @IBOutlet weak var slideUpBtn: NSButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,7 +55,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.superview?.superview?.layer?.cornerRadius = 4
     }
     customSpeedTextField.formatter = DecimalFormatter()
-    slideUpBtn.resetCursorRects()
   }
   
   // MARK: NSTableView delegate

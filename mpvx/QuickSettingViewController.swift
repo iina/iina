@@ -121,16 +121,22 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     block(videoTableView, .video)
   }
   
-  // MARK: Actions
+  // MARK: - Actions
   
   // Tab buttons
   
   @IBAction func tabBtnAction(_ sender: NSButton) {
     tabView.selectTabViewItem(at: sender.tag)
-  }
-  
-  @IBAction func slideUpBtnAction(_ sender: AnyObject) {
-    mainWindow.hideSettingsView()
+    // cancel current active button
+    [videoTabBtn, audioTabBtn, subTabBtn].forEach { btn in
+      if let btn = btn {
+        let title = btn.title
+        btn.attributedTitle = AttributedString(string: title, attributes: Utility.tabTitleFontAttributes)
+      }
+    }
+    // the active one
+    let title = sender.title
+    sender.attributedTitle = AttributedString(string: title, attributes: Utility.tabTitleActiveFontAttributes)
   }
   
   // Video tab

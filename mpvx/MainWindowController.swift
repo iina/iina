@@ -12,7 +12,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   let ud: UserDefaults = UserDefaults.standard
   let minSize = NSMakeSize(500, 300)
-  let minSizeWhenSettingsViewShown = NSMakeSize(625, 352)
   
   var playerCore: PlayerCore!
   lazy var videoView: VideoView! = self.initVideoView()
@@ -21,8 +20,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var isDragging: Bool = false
   
   var isInFullScreen: Bool = false
-  var isSettingViewShowing: Bool = false
-  var isSideBarShowing: Bool = false
   
   override var windowNibName: String {
     return "MainWindowController"
@@ -54,7 +51,26 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   var scrollDirection: ScrollDirection?
   
-  @IBOutlet weak var titleBarHeightConstraint: NSLayoutConstraint!
+  /** The view embedded in sidebar */
+  enum SideBarViewType {
+    case hidden  // indicating sidebar is hidden. Should only be used by sideBarStatus
+    case settings
+    case playlist
+    func width() -> CGFloat {
+      switch self {
+      case .settings:
+        return 360
+      case .playlist:
+        return 240
+      default:
+        Utility.fatal("SideBarViewType.width shouldn't be called here")
+        return 0
+      }
+    }
+  }
+  
+  var sideBarStatus: SideBarViewType = .hidden
+  
   @IBOutlet weak var sideBarRightConstraint: NSLayoutConstraint!
   @IBOutlet weak var sideBarWidthConstraint: NSLayoutConstraint!
   
@@ -176,12 +192,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isDragging = false
     } else {
       // if it's a mouseup after clicking
-      let mouseInTitleBar = window!.contentView!.mouse(event.locationInWindow, in: titleBarView.frame)
       let mouseInSideBar = window!.contentView!.mouse(event.locationInWindow, in: sideBarView.frame)
-      if !mouseInTitleBar && isSettingViewShowing {
-        hideSettingsView()
-      }
-      if !mouseInSideBar && isSideBarShowing {
+      if !mouseInSideBar && sideBarStatus != .hidden {
         hideSideBar()
       }
     }
@@ -377,74 +389,37 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
-  private func showSettingsView() {
-    showUIAndUpdateTimer()
-    
-    guard let window = window else { return }
-    window.minSize = minSizeWhenSettingsViewShown
-    window.setFrame(NSRect(origin: window.frame.origin, size:window.frame.size.satisfyMinSizeWithFixedAspectRatio(minSizeWhenSettingsViewShown)), display: true, animate: true)
-    
-    sideBarWidthConstraint.constant = 360
-    sideBarRightConstraint.constant = -360
+  private func showSideBar(view: NSView, type: SideBarViewType) {
+    // adjust sidebar width
+    let width = type.width()
+    sideBarWidthConstraint.constant = width
+    sideBarRightConstraint.constant = -width
     sideBarView.isHidden = false
-    let qsv = self.quickSettingView.view
-    sideBarView.addSubview(qsv)
-    // add constraints
-    let constraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[qsv]-0-|", options: [], metrics: nil, views: ["qsv": qsv])
-    let constraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[qsv]-0-|", options: [], metrics: nil, views: ["qsv": qsv])
+    // add view and constraints
+    sideBarView.addSubview(view)
+    let constraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[v]-0-|", options: [], metrics: nil, views: ["v": view])
+    let constraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[v]-0-|", options: [], metrics: nil, views: ["v": view])
     NSLayoutConstraint.activate(constraintsH)
     NSLayoutConstraint.activate(constraintsV)
-    
+    // show sidebar
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       sideBarRightConstraint.animator().constant = 0
     }) {
-      self.isSideBarShowing = true
-    }
-  }
-  
-  func hideSettingsView() {
-    let qsv = self.quickSettingView.view
-    NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = 0.2
-      context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-      titleBarHeightConstraint.animator().constant = 22
-    }) {
-      qsv.removeFromSuperview()
-      self.window!.minSize = NSMakeSize(500, 300)
-      self.isSideBarShowing = false
-    }
-  }
-  
-  private func showSideBar() {
-    sideBarWidthConstraint.constant = 240
-    sideBarRightConstraint.constant = -240
-    sideBarView.isHidden = false
-    let plv = playlistView.view
-    sideBarView.addSubview(plv)
-    let constraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[plv]-0-|", options: [], metrics: nil, views: ["plv": plv])
-    let constraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[plv]-0-|", options: [], metrics: nil, views: ["plv": plv])
-    NSLayoutConstraint.activate(constraintsH)
-    NSLayoutConstraint.activate(constraintsV)
-    
-    NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = 0.2
-      context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-      sideBarRightConstraint.animator().constant = 0
-    }) {
-      self.isSideBarShowing = true
+      self.sideBarStatus = type
     }
   }
   
   private func hideSideBar() {
+    let currWidth = sideBarWidthConstraint.constant
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-      sideBarRightConstraint.animator().constant = -240
+      sideBarRightConstraint.animator().constant = -currWidth
     }) {
-      self.isSideBarShowing = false
-      self.playlistView.view.removeFromSuperview()
+      self.sideBarStatus = .hidden
+      self.sideBarView.subviews.removeAll()
       self.sideBarView.isHidden = true
     }
   }
@@ -647,18 +622,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   @IBAction func settingsButtonAction(_ sender: NSButton) {
-    if isSettingViewShowing {
-      hideSettingsView()
+    if sideBarStatus == .hidden {
+      showSideBar(view: quickSettingView.view, type: .settings)
     } else {
-      showSettingsView()
+      hideSideBar()
     }
   }
   
   @IBAction func playlistButtonAction(_ sender: AnyObject) {
-    if isSideBarShowing {
-      hideSideBar()
+    if sideBarStatus == .hidden {
+      showSideBar(view: playlistView.view, type: .playlist)
     } else {
-      showSideBar()
+      hideSideBar()
     }
   }
   

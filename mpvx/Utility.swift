@@ -10,8 +10,8 @@ import Cocoa
 
 class Utility {
   
-  static let systemFontAttribute = [NSFontAttributeName: NSFont.systemFont(ofSize: NSFont.systemFontSize())]
-  static let systemBoldFontAttribute = [NSFontAttributeName: NSFont.boldSystemFont(ofSize: NSFont.systemFontSize())]
+  static let tabTitleFontAttributes = FontAttributes(font: .system, size: .system, align: .center).value
+  static let tabTitleActiveFontAttributes = FontAttributes(font: .systemBold, size: .system, align: .center).value
   
   // MARK: - Logs, alerts
   

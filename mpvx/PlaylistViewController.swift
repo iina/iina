@@ -87,19 +87,15 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
   @IBAction func playlistBtnAction(_ sender: AnyObject) {
     tabView.selectTabViewItem(at: 0)
     playlistTableView.reloadData()
-    playlistBtn.attributedTitle = AttributedString(string: "PLAYLIST",
-                                                   attributes: Utility.FontAttributes(font: .systemBold, size: .system, align: .center).value)
-    chaptersBtn.attributedTitle = AttributedString(string: "CHAPTERS",
-                                                   attributes: Utility.FontAttributes(font: .system, size: .system, align: .center).value)
+    playlistBtn.attributedTitle = AttributedString(string: "PLAYLIST", attributes: Utility.tabTitleActiveFontAttributes)
+    chaptersBtn.attributedTitle = AttributedString(string: "CHAPTERS", attributes: Utility.tabTitleFontAttributes)
   }
   
   @IBAction func chaptersBtnAction(_ sender: AnyObject) {
     tabView.selectTabViewItem(at: 1)
     chapterTableView.reloadData()
-    chaptersBtn.attributedTitle = AttributedString(string: "CHAPTERS",
-                                                   attributes: Utility.FontAttributes(font: .systemBold, size: .system, align: .center).value)
-    playlistBtn.attributedTitle = AttributedString(string: "PLAYLIST",
-                                                   attributes: Utility.FontAttributes(font: .system, size: .system, align: .center).value)
+    chaptersBtn.attributedTitle = AttributedString(string: "CHAPTERS", attributes: Utility.tabTitleActiveFontAttributes)
+    playlistBtn.attributedTitle = AttributedString(string: "PLAYLIST", attributes: Utility.tabTitleFontAttributes)
   }
   
   // MARK: - Delegate class definition

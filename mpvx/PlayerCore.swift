@@ -303,7 +303,7 @@ class PlayerCore: NSObject {
     case .chapterList:
       DispatchQueue.main.async {
         // this should avoid sending reload when table view is not ready
-        if self.mainWindow.isSideBarShowing {
+        if self.mainWindow.sideBarStatus == .playlist {
           self.mainWindow.playlistView.chapterTableView.reloadData()
         }
       }

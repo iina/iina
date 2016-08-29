@@ -18,7 +18,6 @@
                 <outlet property="sideBarRightConstraint" destination="PAj-s6-32e" id="DOs-2k-JEG"/>
                 <outlet property="sideBarView" destination="epo-S6-QVB" id="5eE-aM-VUd"/>
                 <outlet property="sideBarWidthConstraint" destination="1BL-aP-tHS" id="Qbw-L4-DAp"/>
-                <outlet property="titleBarHeightConstraint" destination="1Dw-Bg-FRS" id="IaK-ti-9vX"/>
                 <outlet property="titleBarView" destination="TRx-2V-Gr3" id="kOU-nP-MAP"/>
                 <outlet property="titleTextField" destination="gW1-BG-OEa" id="8wO-J1-Yp6"/>
                 <outlet property="volumeSlider" destination="SAG-kc-FAt" id="zM0-Gg-vfy"/>

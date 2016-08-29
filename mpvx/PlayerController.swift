@@ -274,6 +274,7 @@ class PlayerController: NSObject {
     case Time
     case PlayButton
     case MuteButton
+    case chapterList
   }
   
   func syncUITime() {
@@ -298,6 +299,13 @@ class PlayerController: NSObject {
       let mute = mpvController.mpvGetFlagProperty(MPVProperty.mute)
       DispatchQueue.main.async {
         self.mainWindow.muteButton.state = mute ? NSOnState : NSOffState
+      }
+    case .chapterList:
+      DispatchQueue.main.async {
+        // this should avoid sending reload when table view is not ready
+        if self.mainWindow.isSideBarShowing {
+          self.mainWindow.playlistView.chapterTableView.reloadData()
+        }
       }
     }
   }

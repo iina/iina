@@ -234,6 +234,10 @@ class MPVController: NSObject {
     case MPV_EVENT_PAUSE, MPV_EVENT_UNPAUSE:
       playerController.syncUI(.PlayButton)
       
+    case MPV_EVENT_CHAPTER_CHANGE:
+      playerController.syncUI(.Time)
+      playerController.syncUI(.chapterList)
+      
     default:
       let eventName = String(cString: mpv_event_name(eventId))
       Utility.log("MPV event (unhandled): \(eventName)")

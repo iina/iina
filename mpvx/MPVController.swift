@@ -96,7 +96,7 @@ class MPVController: NSObject {
   // Basically send quit to mpv
   func mpvQuit() {
     mpv_suspend(mpv)
-    mpvCommand([MPVCommand.quit, nil])
+    command([MPVCommand.quit, nil])
   }
   
   func mpvSuspend() {
@@ -110,51 +110,51 @@ class MPVController: NSObject {
   // MARK: Command & property
   
   // Send arbitrary mpv command.
-  func mpvCommand(_ args: [String?]) {
+  func command(_ args: [String?]) {
     var cargs = args.map { $0.flatMap { UnsafePointer<Int8>(strdup($0)) } }
     self.e(mpv_command(self.mpv, &cargs))
     for ptr in cargs { free(UnsafeMutablePointer(ptr)) }
   }
   
   // Set property
-  func mpvSetFlagProperty(_ name: String, _ flag: Bool) {
+  func setFlag(_ name: String, _ flag: Bool) {
     var data: Int = flag ? 1 : 0
     mpv_set_property(mpv, name, MPV_FORMAT_FLAG, &data)
   }
   
-  func mpvSetIntProperty(_ name: String, _ value: Int) {
+  func setInt(_ name: String, _ value: Int) {
     var data = Int64(value)
     mpv_set_property(mpv, name, MPV_FORMAT_INT64, &data)
   }
   
-  func mpvSetDoubleProperty(_ name: String, _ value: Double) {
+  func setDouble(_ name: String, _ value: Double) {
     var data = value
     mpv_set_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
   }
   
-  func mpvSetStringProperty(_ name: String, _ value: String) {
+  func setString(_ name: String, _ value: String) {
     mpv_set_property_string(mpv, name, value)
   }
   
-  func mpvGetIntProperty(_ name: String) -> Int {
+  func getInt(_ name: String) -> Int {
     var data = Int64()
     mpv_get_property(mpv, name, MPV_FORMAT_INT64, &data)
     return Int(data)
   }
   
-  func mpvGetDoubleProperty(_ name: String) -> Double {
+  func getDouble(_ name: String) -> Double {
     var data = Double()
     mpv_get_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
     return data
   }
   
-  func mpvGetFlagProperty(_ name: String) -> Bool {
+  func getFlag(_ name: String) -> Bool {
     var data = Int64()
     mpv_get_property(mpv, name, MPV_FORMAT_FLAG, &data)
     return data > 0
   }
   
-  func mpvGetStringProperty(_ name: String) -> String? {
+  func getString(_ name: String) -> String? {
     let cstr = mpv_get_property_string(mpv, name)
     let str: String? = cstr == nil ? nil : String(cString: cstr!)
     mpv_free(cstr)
@@ -164,7 +164,7 @@ class MPVController: NSObject {
   // MARK: - Events
   
   // Read event and handle it async
-  func readEvents() {
+  private func readEvents() {
     queue.async {
       while ((self.mpv) != nil) {
         let event = mpv_wait_event(self.mpv, 0)
@@ -178,7 +178,7 @@ class MPVController: NSObject {
   }
   
   // Handle the event
-  func handleEvent(_ event: UnsafePointer<mpv_event>!) {
+  private func handleEvent(_ event: UnsafePointer<mpv_event>!) {
     let eventId = event.pointee.event_id
     switch eventId {
     case MPV_EVENT_SHUTDOWN:
@@ -252,19 +252,19 @@ class MPVController: NSObject {
   private func onFileLoaded() {
     mpvSuspend()
     // Get video size and set the initial window size
-    let width = mpvGetIntProperty(MPVProperty.width)
-    let height = mpvGetIntProperty(MPVProperty.height)
-    let dwidth = mpvGetIntProperty(MPVProperty.dwidth)
-    let dheight = mpvGetIntProperty(MPVProperty.dheight)
-    let duration = mpvGetIntProperty(MPVProperty.duration)
-    let pos = mpvGetIntProperty(MPVProperty.timePos)
+    let width = getInt(MPVProperty.width)
+    let height = getInt(MPVProperty.height)
+    let dwidth = getInt(MPVProperty.dwidth)
+    let dheight = getInt(MPVProperty.dheight)
+    let duration = getInt(MPVProperty.duration)
+    let pos = getInt(MPVProperty.timePos)
     playerController.info.videoHeight = height
     playerController.info.videoWidth = width
     playerController.info.displayWidth = dwidth
     playerController.info.displayHeight = dheight
     playerController.info.videoDuration = VideoTime(duration)
     playerController.info.videoPosition = VideoTime(pos)
-    let filename = mpvGetStringProperty(MPVProperty.filename)
+    let filename = getString(MPVProperty.filename)
     playerController.info.currentURL = URL(fileURLWithPath: filename ?? "")
     playerController.fileLoaded()
     mpvResume()
@@ -279,8 +279,8 @@ class MPVController: NSObject {
     if playerController.info.fileLoading {
       return
     }
-    var dwidth = mpvGetIntProperty(MPVProperty.dwidth)
-    var dheight = mpvGetIntProperty(MPVProperty.dheight)
+    var dwidth = getInt(MPVProperty.dwidth)
+    var dheight = getInt(MPVProperty.dheight)
     if playerController.info.rotation == 90 || playerController.info.rotation == 270 {
       Utility.swap(&dwidth, &dheight)
     }
@@ -306,7 +306,7 @@ class MPVController: NSObject {
   /**
    Utility function for checking mpv api error
    */
-  func e(_ status: Int32!) {
+  private func e(_ status: Int32!) {
     if status < 0 {
       Utility.showAlert(message: "Cannot start MPV!")
       Utility.fatal("MPV API error: \(String(cString: mpv_error_string(status)))")

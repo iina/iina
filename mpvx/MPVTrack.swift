@@ -10,10 +10,13 @@ import Cocoa
 
 class MPVTrack: NSObject {
   
-  /** For binding a none track object to menu */
+  /** For binding a none track object to menu, id = 0 */
   static let noneVideoTrack = MPVTrack(id: 0, type: .video, isDefault: false, isForced: false, isSelected: false, isExternal: false)
+  /** For binding a none track object to menu, id = 0 */
   static let noneAudioTrack = MPVTrack(id: 0, type: .audio, isDefault: false, isForced: false, isSelected: false, isExternal: false)
+  /** For binding a none track object to menu, id = 0 */
   static let noneSubTrack = MPVTrack(id: 0, type: .sub, isDefault: false, isForced: false, isSelected: false, isExternal: false)
+  /** For binding a none track object to menu, id = 0 */
   static let noneSecongSubTrack = MPVTrack(id: 0, type: .secondSub, isDefault: false, isForced: false, isSelected: false, isExternal: false)
   
   enum TrackType: String {

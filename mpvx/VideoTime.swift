@@ -65,6 +65,11 @@ class VideoTime {
   init(_ hour: Int, _ minute: Int, _ second: Int) {
     self.second = hour * 3600 + minute * 60 + second
   }
+  
+  /** whether self in [min, max) */
+  func between(_ min: VideoTime, _ max: VideoTime) -> Bool {
+    return self >= min && self < max
+  }
 
 }
 

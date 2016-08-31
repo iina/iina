@@ -170,13 +170,16 @@ class PlayerCore: NSObject {
   func setVideoAspect(_ aspect: String) {
     if aspectRegEx.matches(aspect) {
       mpvController.setString(MPVProperty.videoAspect, aspect)
+      info.aspect = aspect
     } else {
       mpvController.setString(MPVProperty.videoAspect, "-1")
+      // if not a aspect string, set aspect to default, and also the info string.
+      info.aspect = "Default"
     }
   }
   
   func setVideoRotate(_ degree: Int) {
-    if [0, 90, 270, 360].index(of: degree)! >= 0 {
+    if [0, 90, 180, 270].index(of: degree)! >= 0 {
       mpvController.setInt(MPVProperty.videoRotate, degree)
       info.rotation = degree
     }

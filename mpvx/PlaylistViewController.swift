@@ -180,25 +180,22 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       let info = parent.playerCore.info
       let chapters = info.chapters
       let chapter = chapters[row]
-      let nextChapterTime: VideoTime
       // next chapter time
-      if row < chapters.count - 1 {
-        nextChapterTime = chapters[row+1].time
-      } else {
-        nextChapterTime = info.videoDuration ?? VideoTime(99, 0, 0)
-      }
+      let nextChapterTime = chapters.at(row+1)?.time ?? Constants.Time.infinite
       // construct view
       let columnName = tableColumn?.identifier
       if columnName == Constants.Identifier.isChosen {
+        // left column
         let v = tableView.make(withIdentifier: Constants.Identifier.isPlayingCell, owner: self) as! NSTableCellView
         let currentPos = info.videoPosition!
-        if currentPos >= chapter.time && currentPos < nextChapterTime {
+        if currentPos.between(chapter.time, nextChapterTime) {
           v.textField?.stringValue = Constants.String.play
         } else {
           v.textField?.stringValue = ""
         }
         return v
       } else if columnName == Constants.Identifier.trackName {
+        // right column
         let v = tableView.make(withIdentifier: Constants.Identifier.trackNameCell, owner: self) as! ChapterTableCellView
         v.textField?.stringValue = chapter.title
         v.durationTextField.stringValue = "\(chapter.time.stringRepresentation) → \(nextChapterTime.stringRepresentation)"

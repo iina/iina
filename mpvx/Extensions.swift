@@ -36,11 +36,22 @@ extension NSSize {
   }
 }
 
+extension Array {
+  func at(_ pos: Int) -> Element? {
+    if pos < count - 1 {
+      return self[pos]
+    } else {
+      return nil
+    }
+  }
+}
+
 extension NSMenu {
-  func addItem(withTitle string: String, action selector: Selector?, tag: Int?, obj: Any?) {
+  func addItem(withTitle string: String, action selector: Selector?, tag: Int?, obj: Any?, stateOn: Bool) {
     let menuItem = NSMenuItem(title: string, action: selector, keyEquivalent: "")
     menuItem.tag = tag ?? -1
     menuItem.representedObject = obj
+    menuItem.state = stateOn ? NSOnState : NSOffState
     self.addItem(menuItem)
   }
 }

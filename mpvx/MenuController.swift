@@ -77,7 +77,9 @@ class MenuController: NSObject, NSMenuDelegate {
     aspectDefault.representedObject = "Default"  // actually can be any string
     aspectDefault.action = #selector(MainWindowController.menuChangeAspect(_:))
     for aspect in AppData.aspects {
-      aspectMenu.addItem(withTitle: aspect, action: #selector(MainWindowController.menuChangeAspect(_:)), tag: nil, obj: aspect)
+      let isCurrent = PlayerCore.shared.info.aspect == aspect
+      aspectMenu.addItem(withTitle: aspect, action: #selector(MainWindowController.menuChangeAspect(_:)),
+                         tag: nil, obj: aspect, stateOn: isCurrent)
     }
   }
   
@@ -86,7 +88,8 @@ class MenuController: NSObject, NSMenuDelegate {
     playlistMenu.addItem(withTitle: "Show/Hide Playlist Panel", action: #selector(MainWindowController.menuShowPlaylistPanel(_:)), keyEquivalent: "")
     playlistMenu.addItem(NSMenuItem.separator())
     for (index, item) in PlayerCore.shared.info.playlist.enumerated() {
-      playlistMenu.addItem(withTitle: item.filenameForDisplay, action: #selector(MainWindowController.menuPlaylistItem(_:)), tag: index, obj: nil)
+      playlistMenu.addItem(withTitle: item.filenameForDisplay, action: #selector(MainWindowController.menuPlaylistItem(_:)),
+                           tag: index, obj: nil, stateOn: item.isCurrent)
     }
   }
   
@@ -94,19 +97,28 @@ class MenuController: NSObject, NSMenuDelegate {
     chapterMenu.removeAllItems()
     chapterMenu.addItem(withTitle: "Show/Hide Chapter Panel", action: #selector(MainWindowController.menuShowChaptersPanel(_:)), keyEquivalent: "")
     chapterMenu.addItem(NSMenuItem.separator())
-    for (index, chapter) in PlayerCore.shared.info.chapters.enumerated() {
+    let info = PlayerCore.shared.info
+    for (index, chapter) in info.chapters.enumerated() {
       let menuTitle = "\(chapter.time.stringRepresentation) - \(chapter.title)"
-      chapterMenu.addItem(withTitle: menuTitle, action: #selector(MainWindowController.menuChapterSwitch(_:)), tag: index, obj: nil)
+      let nextChapterTime = info.chapters.at(index+1)?.time ?? Constants.Time.infinite
+      let isPlaying = info.videoPosition?.between(chapter.time, nextChapterTime) ?? false
+      chapterMenu.addItem(withTitle: menuTitle, action: #selector(MainWindowController.menuChapterSwitch(_:)),
+                          tag: index, obj: nil, stateOn: isPlaying)
     }
   }
   
   func updateVideoTracks() {
+    let info = PlayerCore.shared.info
     videoTrackMenu.removeAllItems()
     let noTrackMenuItem = NSMenuItem(title: Constants.String.none, action: #selector(MainWindowController.menuChangeTrack(_:)), keyEquivalent: "")
     noTrackMenuItem.representedObject = MPVTrack.noneVideoTrack
+    if info.vid == 0 {  // no track
+      noTrackMenuItem.state = NSOnState
+    }
     videoTrackMenu.addItem(noTrackMenuItem)
-    for track in PlayerCore.shared.info.videoTracks {
-      videoTrackMenu.addItem(withTitle: track.readableTitle, action: #selector(MainWindowController.menuChangeTrack(_:)), tag: nil, obj: track)
+    for track in info.videoTracks {
+      videoTrackMenu.addItem(withTitle: track.readableTitle, action: #selector(MainWindowController.menuChangeTrack(_:)),
+                             tag: nil, obj: track, stateOn: track.id == info.vid)
     }
   }
   

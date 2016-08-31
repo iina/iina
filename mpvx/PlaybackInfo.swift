@@ -28,6 +28,9 @@ class PlaybackInfo {
   
   var isPaused: Bool = false
   
+  /** The current applied aspect, used for find current aspect in menu, etc. Maybe not a good approach. */
+  var aspect: String = "Default"
+  
   var volume: Int = 50 {
     didSet {
       if volume < 0 { volume = 0 }
@@ -43,7 +46,7 @@ class PlaybackInfo {
   
   var abLoopStatus: Int = 0 // 0: none, 1: A set, 2: B set (looping) 
   
-  // Selected track IDs. Use these (instead of `isSelected` of a track) to check if selected
+  /** Selected track IDs. Use these (instead of `isSelected` of a track) to check if selected */
   var aid: Int?
   var sid: Int?
   var vid: Int?

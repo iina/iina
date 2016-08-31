@@ -109,6 +109,9 @@
                             <menuItem title="Previous Frame" tag="1" alternate="YES" keyEquivalent="" id="oxF-BB-lBy">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
+                            <menuItem title="Jump to beginning" id="2Ya-3g-1hy">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem title="Jump to..." keyEquivalent="j" id="2id-wn-xsC"/>
                             <menuItem isSeparatorItem="YES" id="k1k-sG-1C3"/>
                             <menuItem title="Screenshot" keyEquivalent="s" id="AoP-K6-Kb5"/>
@@ -509,6 +512,7 @@
                 <outlet property="forward" destination="6yE-op-DTS" id="ruO-zd-BjG"/>
                 <outlet property="gotoScreenshotFolder" destination="lj0-Oo-7nB" id="Jlj-kX-fv0"/>
                 <outlet property="jumpTo" destination="2id-wn-xsC" id="wyH-9I-JHJ"/>
+                <outlet property="jumpToBegin" destination="2Ya-3g-1hy" id="atq-PX-lIt"/>
                 <outlet property="nextFrame" destination="XDC-Pc-rS1" id="PGo-Nr-JQg"/>
                 <outlet property="open" destination="IAo-SY-fd9" id="fW9-2A-V4F"/>
                 <outlet property="pause" destination="UOE-MJ-8ku" id="74t-ZU-dXD"/>

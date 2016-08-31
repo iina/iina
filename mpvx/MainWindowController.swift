@@ -212,7 +212,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     showUIAndUpdateTimer()
   }
   
-  
   override func scrollWheel(_ event: NSEvent) {
     if event.phase.contains(.began) {
       if event.scrollingDeltaX != 0 {
@@ -501,7 +500,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     
   }
   
-  // MARK: - Sync UI
+  // MARK: - Sync UI with playback
   
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
     guard let duration = playerCore.info.videoDuration, let pos = playerCore.info.videoPosition else {
@@ -709,6 +708,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
+  
+  @IBAction func menuJumpToBegin(_ sender: NSMenuItem) {
+    self.playerCore.seek(absoluteSecond: 0)
+  }
+  
   @IBAction func menuJumpTo(_ sender: NSMenuItem) {
     Utility.quickPromptPanel(messageText: "Jump to:", informativeText: "Example: 20:35") { input in
       if let vt = VideoTime(input) {
@@ -728,6 +732,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   @IBAction func menuPlaylistItem(_ sender: NSMenuItem) {
+    let index = sender.tag
+    playerCore.playFileInPlaylist(index)
+  }
+  
+  @IBAction func menuShowPlaylistPanel(_ sender: NSMenuItem) {
+    playlistView.pleaseSwitchToTab(.playlist)
+    playlistButtonAction(sender)
+  }
+  
+  @IBAction func menuShowChaptersPanel(_ sender: NSMenuItem) {
+    playlistView.pleaseSwitchToTab(.chapters)
+    playlistButtonAction(sender)
+  }
+  
+  @IBAction func menuChapterSwitch(_ sender: NSMenuItem) {
     let index = sender.tag
     playerCore.playChapter(index)
     let chapter = playerCore.info.chapters[index]

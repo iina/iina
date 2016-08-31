@@ -17,6 +17,16 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   let distanceBetweenSliderAndIndicator: CGFloat = 18
   let sliderIndicatorHalfWidth:CGFloat = 16
   
+  /** Similiar to the one in `PlaylistViewController`.
+   Since IBOutlet is `nil` when the view is not loaded at first time,
+   use this variable to cache which tab it need to switch to when the
+   view is ready. The value will be handled after loaded.
+   */
+  private var pendingSwitchRequest: TabViewType?
+  
+  /** Tab type. Use TrackType for now. Propobably not a good choice. */
+  typealias TabViewType = MPVTrack.TrackType
+  
   var playerCore: PlayerCore = PlayerCore.shared
   weak var mainWindow: MainWindowController!
   
@@ -45,7 +55,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var customSubDelayTextField: NSTextField!
   @IBOutlet weak var subDelaySliderIndicator: NSTextField!
   
-//  @IBOutlet weak var slideUpBtn: NSButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,6 +64,50 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.superview?.superview?.layer?.cornerRadius = 4
     }
     customSpeedTextField.formatter = DecimalFormatter()
+    if pendingSwitchRequest != nil {
+      switchToTab(pendingSwitchRequest!)
+      pendingSwitchRequest = nil
+    }
+  }
+  
+  /** Switch tab (call from other objects) */
+  func pleaseSwitchToTab(_ tab: TabViewType) {
+    if isViewLoaded {
+      switchToTab(tab)
+    } else {
+      // cache the request
+      pendingSwitchRequest = tab
+    }
+  }
+  
+  /** Switch tab (for internal call) */
+  private func switchToTab(_ tab: TabViewType) {
+    let button: NSButton
+    let tabIndex: Int
+    switch tab {
+    case .video:
+      button = videoTabBtn
+      tabIndex = 0
+    case .audio:
+      button = audioTabBtn
+      tabIndex = 1
+    case .sub:
+      button = subTabBtn
+      tabIndex = 2
+    default:
+      return
+    }
+    tabView.selectTabViewItem(at: tabIndex)
+    // cancel current active button
+    for btn in [videoTabBtn, audioTabBtn, subTabBtn] {
+      if let btn = btn {
+        let title = btn.title
+        btn.attributedTitle = AttributedString(string: title, attributes: Utility.tabTitleFontAttributes)
+      }
+    }
+    // the active one
+    let title = button.title
+    button.attributedTitle = AttributedString(string: title, attributes: Utility.tabTitleActiveFontAttributes)
   }
   
   // MARK: NSTableView delegate

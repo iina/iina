@@ -10,7 +10,7 @@ import Cocoa
 
 class MPVChapter: NSObject {
   
-  var privTitle: String?
+  private var privTitle: String?
   var title: String {
     get {
       return privTitle ?? "\(Constants.String.chapter) \(index)"

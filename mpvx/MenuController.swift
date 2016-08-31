@@ -20,6 +20,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var nextFrame: NSMenuItem!
   @IBOutlet weak var backward: NSMenuItem!
   @IBOutlet weak var previousFrame: NSMenuItem!
+  @IBOutlet weak var jumpToBegin: NSMenuItem!
   @IBOutlet weak var jumpTo: NSMenuItem!
   @IBOutlet weak var screenShot: NSMenuItem!
   @IBOutlet weak var gotoScreenshotFolder: NSMenuItem!
@@ -38,23 +39,36 @@ class MenuController: NSObject, NSMenuDelegate {
     nextFrame.action = #selector(MainWindowController.menuStepFrame(_:))
     backward.action = #selector(MainWindowController.menuStep(_:))
     previousFrame.action = #selector(MainWindowController.menuStepFrame(_:))
+    jumpToBegin.action = #selector(MainWindowController.menuJumpToBegin(_:))
     jumpTo.action = #selector(MainWindowController.menuJumpTo(_:))
     screenShot.action = #selector(MainWindowController.menuSnapshot(_:))
     gotoScreenshotFolder.action = #selector(AppDelegate.menuOpenScreenshotFolder(_:))
 //    advancedScreenShot
     abLoop.action = #selector(MainWindowController.menuABLoop(_:))
     playlistMenu.delegate = self
-    updatePlaylist()
+    chapterMenu.delegate = self
   }
   
   func updatePlaylist() {
     playlistMenu.removeAllItems()
-    playlistMenu.addItem(withTitle: "Show/Hide Playlist Panel", action: #selector(MainWindowController.playlistButtonAction(_:)), keyEquivalent: "")
+    playlistMenu.addItem(withTitle: "Show/Hide Playlist Panel", action: #selector(MainWindowController.menuShowPlaylistPanel(_:)), keyEquivalent: "")
     playlistMenu.addItem(NSMenuItem.separator())
     for (index, item) in PlayerCore.shared.info.playlist.enumerated() {
       let menuItem = NSMenuItem(title: item.filenameForDisplay, action: #selector(MainWindowController.menuPlaylistItem(_:)), keyEquivalent: "")
       menuItem.tag = index
       playlistMenu.addItem(menuItem)
+    }
+  }
+  
+  func updateChapterList() {
+    chapterMenu.removeAllItems()
+    chapterMenu.addItem(withTitle: "Show/Hide Chapter Panel", action: #selector(MainWindowController.menuShowChaptersPanel(_:)), keyEquivalent: "")
+    chapterMenu.addItem(NSMenuItem.separator())
+    for (index, chapter) in PlayerCore.shared.info.chapters.enumerated() {
+      let menuTitle = "\(chapter.time.stringRepresentation) - \(chapter.title)"
+      let menuItem = NSMenuItem(title: menuTitle, action: #selector(MainWindowController.menuChapterSwitch(_:)), keyEquivalent: "")
+      menuItem.tag = index
+      chapterMenu.addItem(menuItem)
     }
   }
   
@@ -64,7 +78,7 @@ class MenuController: NSObject, NSMenuDelegate {
     if menu == playlistMenu {
       updatePlaylist()
     } else if menu == chapterMenu {
-      
+      updateChapterList()
     }
   }
   

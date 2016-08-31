@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MenuController: NSObject {
+class MenuController: NSObject, NSMenuDelegate {
   
   @IBOutlet weak var file: NSMenuItem!
   @IBOutlet weak var open: NSMenuItem!
@@ -43,13 +43,29 @@ class MenuController: NSObject {
     gotoScreenshotFolder.action = #selector(AppDelegate.menuOpenScreenshotFolder(_:))
 //    advancedScreenShot
     abLoop.action = #selector(MainWindowController.menuABLoop(_:))
-    updatePlaylistAndChaptersMenu()
+    playlistMenu.delegate = self
+    updatePlaylist()
   }
   
-  func updatePlaylistAndChaptersMenu() {
-    // Playlist
-    playlistMenu.addItem(withTitle: "Show/Hide PLaylist", action: #selector(MainWindowController.playlistButtonAction(_:)), keyEquivalent: "")
+  func updatePlaylist() {
+    playlistMenu.removeAllItems()
+    playlistMenu.addItem(withTitle: "Show/Hide Playlist Panel", action: #selector(MainWindowController.playlistButtonAction(_:)), keyEquivalent: "")
     playlistMenu.addItem(NSMenuItem.separator())
-//    let playlist = 
+    for (index, item) in PlayerCore.shared.info.playlist.enumerated() {
+      let menuItem = NSMenuItem(title: item.filenameForDisplay, action: #selector(MainWindowController.menuPlaylistItem(_:)), keyEquivalent: "")
+      menuItem.tag = index
+      playlistMenu.addItem(menuItem)
+    }
   }
+  
+  // MARK: - Menu delegate
+  
+  func menuWillOpen(_ menu: NSMenu) {
+    if menu == playlistMenu {
+      updatePlaylist()
+    } else if menu == chapterMenu {
+      
+    }
+  }
+  
 }

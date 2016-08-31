@@ -10,7 +10,15 @@ import Cocoa
 
 class MPVPlaylistItem: NSObject {
   
+  /** Actually this is the path. Use `filename` to conform mpv API's naming. */
   var filename: String
+  
+  /** Title or the real filename */
+  var filenameForDisplay: String {
+    get {
+      return title ?? NSString(string: filename).lastPathComponent
+    }
+  }
   
   var isCurrent: Bool
   var isPlaying: Bool

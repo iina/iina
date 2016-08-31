@@ -17,7 +17,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   let distanceBetweenSliderAndIndicator: CGFloat = 18
   let sliderIndicatorHalfWidth:CGFloat = 16
   
-  weak var playerCore: PlayerCore!
+  var playerCore: PlayerCore = PlayerCore.shared
   weak var mainWindow: MainWindowController!
   
   @IBOutlet weak var videoTabBtn: NSButton!

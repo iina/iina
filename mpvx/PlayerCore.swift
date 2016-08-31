@@ -10,24 +10,13 @@ import Cocoa
 
 class PlayerCore: NSObject {
   
+  static let shared = PlayerCore()
+  
   let ud: UserDefaults = UserDefaults.standard
   
-  lazy var mainWindow: MainWindowController = {
-    let window = MainWindowController()
-    window.playerCore = self
-    return window
-  }()
-  
-  lazy var mpvController: MPVController = {
-    let controller = MPVController(playerCore: self)
-    return controller
-  }()
-  
-  lazy var preferenceWindow: PreferenceWindow = {
-    let window = PreferenceWindow()
-    return window
-  }()
-  
+  lazy var mainWindow: MainWindowController = MainWindowController()
+  lazy var mpvController: MPVController = MPVController()
+  lazy var preferenceWindow: PreferenceWindow = PreferenceWindow()
   lazy var info: PlaybackInfo = PlaybackInfo()
   
   var syncPlayTimeTimer: Timer?
@@ -35,6 +24,8 @@ class PlayerCore: NSObject {
   var statusPaused: Bool = false
   
   var aspectRegEx = Utility.Regex("\\A\\d+:\\d+\\Z")
+  
+  // MARK: - Control commands
   
   // Open a file
   func openFile(_ url: URL!) {
@@ -67,7 +58,7 @@ class PlayerCore: NSObject {
     mainWindow.videoView.clearGLContext()
   }
   
-  // MARK: - mpv commands
+  // MARK: - MPV commands
   
   /** Pause / resume. Reset speed to 0 when pause. */
   func togglePause(_ set: Bool?) {
@@ -237,6 +228,8 @@ class PlayerCore: NSObject {
     syncUITime()
   }
   
+  // MARK: - Other
+  
   /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
     guard let vwidth = info.videoWidth, vheight = info.videoHeight else {
@@ -268,7 +261,7 @@ class PlayerCore: NSObject {
     }
   }
   
-  /** Sync with UI in MainWindow */
+  // MARK: - Sync with UI in MainWindow
   
   enum SyncUIOption {
     case Time
@@ -310,7 +303,7 @@ class PlayerCore: NSObject {
     }
   }
   
-  /** Get info from mpv */
+  // MARK: - Getting info
   
   private func getTrackInfo() {
     info.audioTracks.removeAll(keepingCapacity: true)

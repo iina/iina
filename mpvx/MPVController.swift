@@ -31,11 +31,7 @@ class MPVController: NSObject {
   // The mpv client name
   var mpvClientName: UnsafePointer<Int8>!
   lazy var queue: DispatchQueue! = DispatchQueue(label: "mpvx", attributes: .serial)
-  var playerCore: PlayerCore!
-  
-  init(playerCore: PlayerCore) {
-    self.playerCore = playerCore
-  }
+  var playerCore: PlayerCore = PlayerCore.shared
   
   /**
    Init the mpv context

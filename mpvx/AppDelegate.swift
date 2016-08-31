@@ -11,7 +11,7 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
   
-  lazy var playerCore: PlayerCore = PlayerCore()
+  lazy var playerCore: PlayerCore = PlayerCore.shared
   
   @IBOutlet weak var menuController: MenuController!
 

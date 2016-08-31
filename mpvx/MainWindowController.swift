@@ -13,8 +13,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   let ud: UserDefaults = UserDefaults.standard
   let minSize = NSMakeSize(500, 300)
   
-  var playerCore: PlayerCore!
-  lazy var videoView: VideoView! = self.initVideoView()
+  lazy var playerCore = PlayerCore.shared
+  lazy var videoView: VideoView = self.initVideoView()
   
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
@@ -77,14 +77,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** The quick setting window */
   lazy var quickSettingView: QuickSettingViewController = {
     let quickSettingView = QuickSettingViewController()
-    quickSettingView.playerCore = self.playerCore
     quickSettingView.mainWindow = self
     return quickSettingView
   }()
   
   lazy var playlistView: PlaylistViewController = {
     let playListView = PlaylistViewController()
-    playListView.playerCore = self.playerCore
     playListView.mainWindow = self
     return playListView
   }()
@@ -727,6 +725,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBAction func menuABLoop(_ sender: NSMenuItem) {
     playerCore.abLoop()
     displayOSD(.abLoop(playerCore.info.abLoopStatus))
+  }
+  
+  @IBAction func menuPlaylistItem(_ sender: NSMenuItem) {
+    let index = sender.tag
+    playerCore.playChapter(index)
+    let chapter = playerCore.info.chapters[index]
+    displayOSD(.chapter(chapter.title))
   }
   
 }

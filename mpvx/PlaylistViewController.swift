@@ -14,7 +14,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
     return "PlaylistView"
   }
   
-  weak var playerCore: PlayerCore!
+  var playerCore: PlayerCore = PlayerCore.shared
   weak var mainWindow: MainWindowController!
   
   @IBOutlet weak var playlistTableView: NSTableView!
@@ -59,7 +59,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       if columnName == Constants.Identifier.isChosen {
         return item.isPlaying ? Constants.String.play : ""
       } else if columnName == Constants.Identifier.trackName {
-        return item.title ?? NSString(string: item.filename).lastPathComponent
+        return item.filenameForDisplay
       } else {
         return nil
       }

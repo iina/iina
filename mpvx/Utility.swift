@@ -84,10 +84,10 @@ class Utility {
   // MARK: - Util classes
   
   class Regex {
-    var regex: RegularExpression?
+    var regex: NSRegularExpression?
     
     init (_ pattern: String) {
-      if let exp = try? RegularExpression(pattern: pattern, options: []) {
+      if let exp = try? NSRegularExpression(pattern: pattern, options: []) {
         self.regex = exp
       } else {
         Utility.fatal("Cannot create regex \(pattern)")
@@ -95,7 +95,11 @@ class Utility {
     }
     
     func matches(_ str: String) -> Bool {
-      return regex?.numberOfMatches(in: str, options: [], range: NSMakeRange(0, str.characters.count)) > 0
+      if let matches = regex?.numberOfMatches(in: str, options: [], range: NSMakeRange(0, str.characters.count)) {
+        return matches > 0
+      } else {
+        return false
+      }
     }
   }
   
@@ -167,5 +171,29 @@ class Utility {
     }
   }
 
+}
+
+// http://stackoverflow.com/questions/33294620/
+
+
+func rawPointerOf<T : AnyObject>(obj : T) -> UnsafeRawPointer {
+  return UnsafeRawPointer(Unmanaged.passUnretained(obj).toOpaque())
+}
+
+func mutableRawPointerOf<T : AnyObject>(obj : T) -> UnsafeMutableRawPointer {
+  return UnsafeMutableRawPointer(Unmanaged.passUnretained(obj).toOpaque())
+}
+
+
+func bridge<T : AnyObject>(ptr : UnsafeRawPointer) -> T {
+  return Unmanaged<T>.fromOpaque(ptr).takeUnretainedValue()
+}
+
+func bridgeRetained<T : AnyObject>(obj : T) -> UnsafeRawPointer {
+  return UnsafeRawPointer(Unmanaged.passRetained(obj).toOpaque())
+}
+
+func bridgeTransfer<T : AnyObject>(ptr : UnsafeRawPointer) -> T {
+  return Unmanaged<T>.fromOpaque(ptr).takeRetainedValue()
 }
 

@@ -10,7 +10,7 @@ import Cocoa
 import OpenGL.GL
 import OpenGL.GL3
 
-func mpvGLUpdate(_ ctx: UnsafeMutablePointer<Void>?) -> Void {
+func mpvGLUpdate(_ ctx: UnsafeMutableRawPointer) -> Void {
   let videoView = unsafeBitCast(ctx, to: VideoView.self)
   videoView.mpvGLQueue.async {
     videoView.drawFrame()
@@ -26,9 +26,18 @@ class VideoView: NSOpenGLView {
   var mpvGLContext: OpaquePointer! {
     didSet {
       // Initialize the mpv OpenGL state.
-      mpv_opengl_cb_init_gl(mpvGLContext, nil, getGLProcAddress, nil)
+      mpv_opengl_cb_init_gl(mpvGLContext, nil, { (ctx, name) -> UnsafeMutableRawPointer? in
+        let symbolName: CFString = CFStringCreateWithCString(kCFAllocatorDefault, name, kCFStringEncodingASCII);
+        let addr = CFBundleGetFunctionPointerForName(CFBundleGetBundleWithIdentifier(CFStringCreateCopy(kCFAllocatorDefault, "com.apple.opengl" as CFString!)), symbolName);
+        return addr!;
+      }, nil)
       // Set the callback that notifies you when a new video frame is available, or requires a redraw.
-      mpv_opengl_cb_set_update_callback(mpvGLContext, mpvGLUpdate, UnsafeMutablePointer<Void>(unsafeAddress(of: self)))
+      mpv_opengl_cb_set_update_callback(mpvGLContext, { (ctx) in
+        let videoView = unsafeBitCast(ctx, to: VideoView.self)
+        videoView.mpvGLQueue.async {
+          videoView.drawFrame()
+        }
+        }, mutableRawPointerOf(obj: self))
     }
   }
   
@@ -39,7 +48,7 @@ class VideoView: NSOpenGLView {
    The queue for drawing to fbo.
    If draw in main thread, it will block UI such as resizing
    */
-  lazy var mpvGLQueue: DispatchQueue = DispatchQueue(label: "mpvx.mpvgl", attributes: .serial)
+  lazy var mpvGLQueue: DispatchQueue = DispatchQueue(label: "mpvx.mpvgl")
   
   /** Video size for allocating fbo texture */
   var videoSize: NSSize? {
@@ -124,15 +133,15 @@ class VideoView: NSOpenGLView {
     glBindVertexArray(vao)
     glGenBuffers(1, &vbo)
     glBindBuffer(GLenum(GL_ARRAY_BUFFER), vbo)
-    glBufferData(GLenum(GL_ARRAY_BUFFER), sizeof(GLfloat.self) * vertexData.count, vertexData, GLenum(GL_STATIC_DRAW))
-    let stride = GLsizei(4*sizeof(GLfloat.self))
+    glBufferData(GLenum(GL_ARRAY_BUFFER), MemoryLayout<GLfloat>.size * vertexData.count, vertexData, GLenum(GL_STATIC_DRAW))
+    let stride = GLsizei(4*MemoryLayout<GLfloat>.size)
     // connect x, y -> vert
     let vertPtr = glGetAttribLocation(program, "vert")
     Utility.assert(vertPtr != -1, "Cannot get location for vertex variable")
     glEnableVertexAttribArray(GLuint(vertPtr))
     glVertexAttribPointer(GLuint(vertPtr), 2, GLenum(GL_FLOAT), GLboolean(GL_FALSE), stride, nil)
     // connect u, v -> vertTexCoord
-    let offset = 2*sizeof(GLfloat.self)
+    let offset = 2*MemoryLayout<GLfloat>.size
     let vertTexCoordPtr = glGetAttribLocation(program, "vertTexCoord")
     Utility.assert(vertTexCoordPtr != -1, "Cannot get location for texture coord variable")
     glEnableVertexAttribArray(GLuint(vertTexCoordPtr))
@@ -210,7 +219,7 @@ class VideoView: NSOpenGLView {
       _ inOutputTime: UnsafePointer<CVTimeStamp>,
       _ flagsIn: CVOptionFlags,
       _ flagsOut: UnsafeMutablePointer<CVOptionFlags>,
-      _ context: UnsafeMutablePointer<Void>?) -> CVReturn {
+      _ context: UnsafeMutableRawPointer?) -> CVReturn {
       let videoView = unsafeBitCast(context, to: VideoView.self)
       videoView.drawVideo()
       return kCVReturnSuccess
@@ -218,11 +227,11 @@ class VideoView: NSOpenGLView {
     //
     CVDisplayLinkCreateWithActiveCGDisplays(&displayLink)
     if let link = displayLink {
-      checkCVReturn(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, UnsafeMutablePointer<Void>(unsafeAddress(of: self))))
+      checkCVReturn(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self)))
     } else {
       Utility.fatal("Failed to create display link")
     }
-    if let context = self.openGLContext?.cglContextObj, format = self.pixelFormat?.cglPixelFormatObj {
+    if let context = self.openGLContext?.cglContextObj, let format = self.pixelFormat?.cglPixelFormatObj {
       checkCVReturn(CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(displayLink!, context, format))
     } else {
       Utility.fatal("Failed to set display with nil opengl context")
@@ -296,7 +305,7 @@ class VideoView: NSOpenGLView {
   /** Load a shader. */
   private func initShader(_ name: String, type: GLenum) -> GLuint {
     // load shader
-    let shaderPath = Bundle.main.pathForResource(name, ofType: "glsl")!
+    let shaderPath = Bundle.main.path(forResource: name, ofType: "glsl")!
     var shaderContent: NSString? = nil
     do {
       shaderContent = try NSString(contentsOfFile: shaderPath, encoding: String.Encoding.utf8.rawValue)
@@ -316,7 +325,7 @@ class VideoView: NSOpenGLView {
     glGetShaderiv(shader, GLenum(GL_COMPILE_STATUS), &flag)
     Utility.assert(flag != GL_FALSE, "Cannot compile shader \(name)") {
       var len = GLsizei()
-      let str = UnsafeMutablePointer<Int8>.init(allocatingCapacity: 2000)
+      let str = UnsafeMutablePointer<Int8>.allocate(capacity: 2000)
       glGetShaderInfoLog(shader, GLsizei(2000), &len, str)
       Utility.log(String(cString: str))
     }

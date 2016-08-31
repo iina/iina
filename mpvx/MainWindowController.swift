@@ -111,7 +111,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // need to deal with control bar, so handle it manually
     // w.isMovableByWindowBackground  = true
     // set background color to black
-    w.backgroundColor = NSColor.black()
+    w.backgroundColor = NSColor.black
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay;
     updateTitle()
     if #available(OSX 10.11, *), UserDefaults.standard.bool(forKey: Preference.Key.controlBarDarker) {
@@ -151,13 +151,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   // MARK: - Mouse / Trackpad event
   
-  override func keyDown(_ event: NSEvent) {
+  override func keyDown(with event: NSEvent) {
     window!.makeFirstResponder(window!.contentView)
     playerCore.togglePause(nil)
   }
   
   /** record mouse pos on mouse down */
-  override func mouseDown(_ event: NSEvent) {
+  override func mouseDown(with event: NSEvent) {
     if controlBar.isDragging {
       return
     }
@@ -167,7 +167,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   /** move window while dragging */
-  override func mouseDragged(_ event: NSEvent) {
+  override func mouseDragged(with event: NSEvent) {
     isDragging = true
     if controlBar.isDragging {
       return
@@ -183,7 +183,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   /** if don't do so, window will jitter when dragging in titlebar */
-  override func mouseUp(_ event: NSEvent) {
+  override func mouseUp(with event: NSEvent) {
     mousePosRelatedToWindow = nil
     if isDragging {
       // if it's a mouseup after dragging
@@ -197,22 +197,22 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
-  override func mouseEntered(_ event: NSEvent) {
+  override func mouseEntered(with event: NSEvent) {
     showUI()
   }
   
-  override func mouseExited(_ event: NSEvent) {
+  override func mouseExited(with event: NSEvent) {
     if controlBar.isDragging {
       return
     }
     hideUI()
   }
   
-  override func mouseMoved(_ event: NSEvent) {
+  override func mouseMoved(with event: NSEvent) {
     showUIAndUpdateTimer()
   }
   
-  override func scrollWheel(_ event: NSEvent) {
+  override func scrollWheel(with event: NSEvent) {
     if event.phase.contains(.began) {
       if event.scrollingDeltaX != 0 {
         scrollDirection = .horizontal
@@ -355,7 +355,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   func updateTitle() {
-    if let w = window, url = playerCore.info.currentURL?.lastPathComponent {
+    if let w = window, let url = playerCore.info.currentURL?.lastPathComponent {
       w.title = url
       titleTextField.stringValue = url
     }
@@ -408,7 +408,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
-  private func hideSideBar(_ after: () -> Void = {}) {
+  private func hideSideBar(_ after: @escaping () -> Void = {}) {
     let currWidth = sideBarWidthConstraint.constant
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2

@@ -21,14 +21,14 @@ class ControlBarView: NSVisualEffectView {
     }
   }
   
-  override func mouseDown(_ event: NSEvent) {
+  override func mouseDown(with event: NSEvent) {
     mousePosRelatedToView = NSEvent.mouseLocation()
     mousePosRelatedToView!.x -= self.frame.origin.x
     mousePosRelatedToView!.y -= self.frame.origin.y
     isDragging = true
   }
   
-  override func mouseDragged(_ event: NSEvent) {
+  override func mouseDragged(with event: NSEvent) {
     if mousePosRelatedToView != nil {
       let currentLocation = NSEvent.mouseLocation()
       var newOrigin = CGPoint(
@@ -61,7 +61,7 @@ class ControlBarView: NSVisualEffectView {
       self.setFrameOrigin(newOrigin)
     }
   }
-  override func mouseUp(_ event: NSEvent) {
+  override func mouseUp(with event: NSEvent) {
     isDragging = false
   }
   

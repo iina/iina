@@ -73,12 +73,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
     switch tab {
     case .playlist:
       tabView.selectTabViewItem(at: 0)
-      playlistBtn.attributedTitle = AttributedString(string: "PLAYLIST", attributes: Utility.tabTitleActiveFontAttributes)
-      chaptersBtn.attributedTitle = AttributedString(string: "CHAPTERS", attributes: Utility.tabTitleFontAttributes)
+      playlistBtn.attributedTitle = NSAttributedString(string: "PLAYLIST", attributes: Utility.tabTitleActiveFontAttributes)
+      chaptersBtn.attributedTitle = NSAttributedString(string: "CHAPTERS", attributes: Utility.tabTitleFontAttributes)
     case .chapters:
       tabView.selectTabViewItem(at: 1)
-      chaptersBtn.attributedTitle = AttributedString(string: "CHAPTERS", attributes: Utility.tabTitleActiveFontAttributes)
-      playlistBtn.attributedTitle = AttributedString(string: "PLAYLIST", attributes: Utility.tabTitleFontAttributes)
+      chaptersBtn.attributedTitle = NSAttributedString(string: "CHAPTERS", attributes: Utility.tabTitleActiveFontAttributes)
+      playlistBtn.attributedTitle = NSAttributedString(string: "PLAYLIST", attributes: Utility.tabTitleFontAttributes)
     }
   }
   
@@ -94,7 +94,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
     }
   }
   
-  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
+  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     if tableView == playlistTableView {
       let item = playerCore.info.playlist[row]
       let columnName = tableColumn?.identifier
@@ -119,8 +119,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
   
   @IBAction func addToPlaylistBtnAction(_ sender: AnyObject) {
     Utility.quickOpenPanel(title: "Add to playlist") { (url) in
-      if url.isFileURL, let path = url.path{
-        self.playerCore.addToPlaylist(path)
+      if url.isFileURL {
+        self.playerCore.addToPlaylist(url.path)
         self.playlistTableView.reloadData()
       }
     }
@@ -191,7 +191,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       let columnName = tableColumn?.identifier
       if columnName == Constants.Identifier.isChosen {
         let v = tableView.make(withIdentifier: Constants.Identifier.isPlayingCell, owner: self) as! NSTableCellView
-        let currentPos = info.videoPosition
+        let currentPos = info.videoPosition!
         if currentPos >= chapter.time && currentPos < nextChapterTime {
           v.textField?.stringValue = Constants.String.play
         } else {

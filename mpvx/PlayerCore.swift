@@ -28,14 +28,14 @@ class PlayerCore: NSObject {
   // MARK: - Control commands
   
   // Open a file
-  func openFile(_ url: URL!) {
-    let path = url.path
+  func openFile(_ url: URL?) {
+    let path = url?.path
     guard path != nil else {
       Utility.log("Error: empty file path or url")
       return
     }
     Utility.log("Open File \(path!)")
-    info.currentURL = url
+    info.currentURL = url!
     mainWindow.showWindow(nil)
     // Send load file command
     info.fileLoading = true
@@ -176,26 +176,22 @@ class PlayerCore: NSObject {
   }
   
   func setVideoRotate(_ degree: Int) {
-    if [0, 90, 270, 360].index(of: degree) >= 0 {
+    if [0, 90, 270, 360].index(of: degree)! >= 0 {
       mpvController.setInt(MPVProperty.videoRotate, degree)
       info.rotation = degree
     }
   }
   
   func loadExternalAudioFile(_ url: URL) {
-    if let path  = url.path {
-      mpvController.command([MPVCommand.audioAdd, path, nil])
-      getTrackInfo()
-      getSelectedTracks()
-    }
+    mpvController.command([MPVCommand.audioAdd, url.path, nil])
+    getTrackInfo()
+    getSelectedTracks()
   }
   
   func loadExternalSubFile(_ url: URL) {
-    if let path  = url.path {
-      mpvController.command([MPVCommand.subAdd, path, nil])
-      getTrackInfo()
-      getSelectedTracks()
-    }
+    mpvController.command([MPVCommand.subAdd, url.path, nil])
+    getTrackInfo()
+    getSelectedTracks()
   }
   
   func setAudioDelay(_ delay: Double) {
@@ -232,7 +228,7 @@ class PlayerCore: NSObject {
   
   /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
-    guard let vwidth = info.videoWidth, vheight = info.videoHeight else {
+    guard let vwidth = info.videoWidth, let vheight = info.videoHeight else {
       Utility.fatal("Cannot get video width and height")
       return
     }
@@ -250,7 +246,7 @@ class PlayerCore: NSObject {
   }
   
   func notifyMainWindowVideoSizeChanged() {
-    guard let dwidth = info.displayWidth, dheight = info.displayHeight else {
+    guard let dwidth = info.displayWidth, let dheight = info.displayHeight else {
       Utility.fatal("Cannot get video width and height")
       return
     }

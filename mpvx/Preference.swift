@@ -51,7 +51,7 @@ struct Preference {
     case seek = 2
   }
   
-  static let defaultPreference:[String : AnyObject] = [
+  static let defaultPreference:[String : Any] = [
     Key.controlBarPositionHorizontal: Float(0.5),
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,

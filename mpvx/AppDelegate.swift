@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @IBOutlet weak var menuController: MenuController!
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
-    UserDefaults.standard.register(Preference.defaultPreference)
+    UserDefaults.standard.register(defaults: Preference.defaultPreference)
     playerCore.startMPV()
     menuController.bindMenuItems()
   }

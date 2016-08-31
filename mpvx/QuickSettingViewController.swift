@@ -102,12 +102,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     for btn in [videoTabBtn, audioTabBtn, subTabBtn] {
       if let btn = btn {
         let title = btn.title
-        btn.attributedTitle = AttributedString(string: title, attributes: Utility.tabTitleFontAttributes)
+        btn.attributedTitle = NSAttributedString(string: title, attributes: Utility.tabTitleFontAttributes)
       }
     }
     // the active one
     let title = button.title
-    button.attributedTitle = AttributedString(string: title, attributes: Utility.tabTitleActiveFontAttributes)
+    button.attributedTitle = NSAttributedString(string: title, attributes: Utility.tabTitleActiveFontAttributes)
   }
   
   // MARK: NSTableView delegate
@@ -124,7 +124,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
   
-  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
+  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     // get track according to tableview
     // row=0: <None> row=1~: tracks[row-1]
     let track: MPVTrack?
@@ -184,12 +184,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     [videoTabBtn, audioTabBtn, subTabBtn].forEach { btn in
       if let btn = btn {
         let title = btn.title
-        btn.attributedTitle = AttributedString(string: title, attributes: Utility.tabTitleFontAttributes)
+        btn.attributedTitle = NSAttributedString(string: title, attributes: Utility.tabTitleFontAttributes)
       }
     }
     // the active one
     let title = sender.title
-    sender.attributedTitle = AttributedString(string: title, attributes: Utility.tabTitleActiveFontAttributes)
+    sender.attributedTitle = NSAttributedString(string: title, attributes: Utility.tabTitleActiveFontAttributes)
   }
   
   // Video tab

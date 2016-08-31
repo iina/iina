@@ -10,17 +10,6 @@ import Cocoa
 
 // Global functions
 
-func getGLProcAddress(ctx: UnsafeMutablePointer<Void>?, name: UnsafePointer<Int8>?) -> UnsafeMutablePointer<Void>? {
-  let symbolName: CFString = CFStringCreateWithCString(kCFAllocatorDefault, name, kCFStringEncodingASCII);
-  let addr = CFBundleGetFunctionPointerForName(CFBundleGetBundleWithIdentifier(CFStringCreateCopy(kCFAllocatorDefault, "com.apple.opengl")), symbolName);
-  return addr;
-}
-
-func wakeup(_ ctx: UnsafeMutablePointer<Void>?) {
-  let mpvController = unsafeBitCast(ctx, to: MPVController.self)
-  mpvController.readEvents()
-}
-
 protocol MPVEventDelegate {
   func onMPVEvent(_ event: MPVEvent)
 }
@@ -30,7 +19,7 @@ class MPVController: NSObject {
   var mpv: OpaquePointer!
   // The mpv client name
   var mpvClientName: UnsafePointer<Int8>!
-  lazy var queue: DispatchQueue! = DispatchQueue(label: "mpvx", attributes: .serial)
+  lazy var queue: DispatchQueue! = DispatchQueue(label: "mpvx")
   var playerCore: PlayerCore = PlayerCore.shared
   
   /**
@@ -72,7 +61,10 @@ class MPVController: NSObject {
     // e(mpv_request_event(mpv, MPV_EVENT_TICK, 1))
     
     // Set a custom function that should be called when there are new events.
-    mpv_set_wakeup_callback(self.mpv, wakeup, UnsafeMutablePointer(unsafeAddress(of: self)))
+    mpv_set_wakeup_callback(self.mpv, { (ctx) in
+      let mpvController = unsafeBitCast(ctx, to: MPVController.self)
+      mpvController.readEvents()
+      }, mutableRawPointerOf(obj: self))
     
     //
     // mpv_observe_property(mpv, 0, "track-list", MPV_FORMAT_NODE_ARRAY)
@@ -81,7 +73,7 @@ class MPVController: NSObject {
     e(mpv_initialize(mpv))
   }
   
-  func mpvInitCB() -> UnsafeMutablePointer<Void> {
+  func mpvInitCB() -> UnsafeMutableRawPointer {
     // Get opengl-cb context.
     let mpvGL = mpv_get_sub_api(mpv, MPV_SUB_API_OPENGL_CB)!;
     // Ask delegate (actually VideoView) to setup openGL context.
@@ -109,7 +101,7 @@ class MPVController: NSObject {
   func command(_ args: [String?]) {
     var cargs = args.map { $0.flatMap { UnsafePointer<Int8>(strdup($0)) } }
     self.e(mpv_command(self.mpv, &cargs))
-    for ptr in cargs { free(UnsafeMutablePointer(ptr)) }
+    for ptr in cargs { free(UnsafeMutablePointer(mutating: ptr)) }
   }
   
   // Set property
@@ -183,18 +175,20 @@ class MPVController: NSObject {
       Utility.log("MPV event: shutdown")
       
     case MPV_EVENT_LOG_MESSAGE:
-      let msg = UnsafeMutablePointer<mpv_event_log_message>(event.pointee.data)
+      let dataOpaquePtr = OpaquePointer(event.pointee.data)
+      let msg = UnsafeMutablePointer<mpv_event_log_message>(dataOpaquePtr)
       let prefix = String(cString: (msg?.pointee.prefix)!)
       let level = String(cString: (msg?.pointee.level)!)
       let text = String(cString: (msg?.pointee.text)!)
       Utility.log("MPV log: [\(prefix)] \(level): \(text)")
       
     case MPV_EVENT_PROPERTY_CHANGE:
-      if let property = UnsafePointer<mpv_event_property>(event.pointee.data)?.pointee {
-        let propertyName = String(property.name)
+      let dataOpaquePtr = OpaquePointer(event.pointee.data)
+      if let property = UnsafePointer<mpv_event_property>(dataOpaquePtr)?.pointee {
+        let propertyName = String(cString: property.name)
         switch propertyName {
         case MPVProperty.videoParams:
-          onVideoParamsChange(UnsafePointer<mpv_node_list>(property.data))
+          onVideoParamsChange(UnsafePointer<mpv_node_list>(OpaquePointer(property.data)))
         case MPVProperty.mute:
           playerCore.syncUI(.MuteButton)
         default:

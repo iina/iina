@@ -710,7 +710,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   
   @IBAction func menuJumpToBegin(_ sender: NSMenuItem) {
-    self.playerCore.seek(absoluteSecond: 0)
+    playerCore.seek(absoluteSecond: 0)
   }
   
   @IBAction func menuJumpTo(_ sender: NSMenuItem) {
@@ -751,6 +751,53 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     playerCore.playChapter(index)
     let chapter = playerCore.info.chapters[index]
     displayOSD(.chapter(chapter.title))
+  }
+  
+  @IBAction func menuShowVideoQuickSettings(_ sender: NSMenuItem) {
+    quickSettingView.pleaseSwitchToTab(.video)
+    settingsButtonAction(sender)
+  }
+  
+  @IBAction func menuShowAudioQuickSettings(_ sender: NSMenuItem) {
+    quickSettingView.pleaseSwitchToTab(.audio)
+    settingsButtonAction(sender)
+  }
+  
+  @IBAction func menuShowSubQuickSettings(_ sender: NSMenuItem) {
+    quickSettingView.pleaseSwitchToTab(.sub)
+    settingsButtonAction(sender)
+  }
+  
+  @IBAction func menuChangeTrack(_ sender: NSMenuItem) {
+    if let trackObj = sender.representedObject as? MPVTrack {
+      playerCore.setTrack(trackObj.id, forType: trackObj.type)
+    }
+  }
+
+  @IBAction func menuChangeAspect(_ sender: NSMenuItem) {
+    if let aspectStr = sender.representedObject as? String {
+      playerCore.setVideoAspect(aspectStr)
+      displayOSD(.aspect(aspectStr))
+    } else {
+      Utility.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject)")
+    }
+  }
+  
+  @IBAction func menuChangeWindowSize(_ sender: NSMenuItem) {
+    // -1: normal(non-retina), same as 1 when on non-retina screen
+    //  0: half
+    //  1: normal
+    //  2: double
+    //  3: fit screen
+    let size = sender.tag
+    // FIXME: implement
+  }
+  
+  @IBAction func menuToggleFullScreen(_ sender: NSMenuItem) {
+    if let window = window {
+      window.toggleFullScreen(sender)
+      sender.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
+    }
   }
   
 }

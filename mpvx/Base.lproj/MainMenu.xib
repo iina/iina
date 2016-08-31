@@ -138,65 +138,26 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Video" id="HyV-fh-RgO">
                         <items>
-                            <menuItem title="Open Quick Settings" id="2t8-Ot-yoO">
+                            <menuItem title="Quick Settings Panel" id="2t8-Ot-yoO">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="wep-5L-o3S"/>
-                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="HGF-Qh-LZk"/>
                             <menuItem title="Video Track" id="j8P-Gb-HR7">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Video Track" systemMenu="font" id="FTu-CF-O0R">
-                                    <items>
-                                        <menuItem title="&lt;None&gt;" id="EuM-rV-K0d">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="orderFrontFontPanel:" target="YLy-65-1bz" id="g2H-vd-bpa"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
+                                <menu key="submenu" title="Video Track" systemMenu="font" id="FTu-CF-O0R"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="CHq-3f-f42"/>
-                            <menuItem title="Half Size" keyEquivalent="0" id="snW-S8-Cw5">
-                                <connections>
-                                    <action selector="toggleToolbarShown:" target="-1" id="BXY-wc-z0C"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Normal Size" keyEquivalent="1" id="1UK-8n-QPP">
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="pQI-g3-MTW"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem title="Half Size" keyEquivalent="0" id="snW-S8-Cw5"/>
+                            <menuItem title="Normal Size" keyEquivalent="1" id="1UK-8n-QPP"/>
                             <menuItem title="Normal Size Retina" alternate="YES" keyEquivalent="1" id="c1x-bx-69F">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="q34-3F-gkZ"/>
-                                </connections>
                             </menuItem>
-                            <menuItem title="Double Size" keyEquivalent="2" id="Hal-18-Tnf">
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="6J0-Lq-2VG"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Fit to Screen" keyEquivalent="3" id="SHd-63-Xoh">
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="eck-W5-hlA"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem title="Double Size" keyEquivalent="2" id="Hal-18-Tnf"/>
+                            <menuItem title="Fit to Screen" keyEquivalent="3" id="SHd-63-Xoh"/>
                             <menuItem isSeparatorItem="YES" id="F7U-cD-2ou"/>
-                            <menuItem title="Full Screen" id="6Eq-ni-6hG">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="fnZ-M9-Hmh"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem title="Full Screen" keyEquivalent="f" id="6Eq-ni-6hG"/>
                             <menuItem title="Always on Top" id="wex-rX-PcY">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="XaC-R0-Wqw"/>
-                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="4J5-eU-sei"/>
                             <menuItem title="Aspect Ratio" id="d15-8v-dXA">
@@ -206,50 +167,14 @@
                                         <menuItem title="Default" id="hie-Th-bje">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
-                                        <menuItem title="4:3" id="ZzB-uI-M45">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="16:9" id="v1G-ny-Zk4">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="16:10" id="X34-qf-t20">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="1:1" id="8tW-JF-Gct">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="5:4" id="Fbq-2i-2TK">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Custom Value..." id="L51-c8-aMa">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
                                     </items>
                                 </menu>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="Wxh-2U-sZr"/>
-                                </connections>
                             </menuItem>
                             <menuItem title="Crop" id="Gqg-wU-RRo">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Crop" id="eo2-Tt-SLx">
                                     <items>
                                         <menuItem title="None" id="umb-AD-K2r">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="4:3" id="22x-VP-G3w">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="16:9" id="ocd-h3-7OF">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="16:10" id="dgp-AQ-duN">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="1:1" id="5Va-2F-uqi">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="5:4" id="sOi-fl-Ics">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                     </items>
@@ -504,23 +429,36 @@
             <connections>
                 <outlet property="abLoop" destination="i3P-Xw-8D7" id="cBJ-XW-MJ0"/>
                 <outlet property="advancedScreenShot" destination="CKi-JE-yLT" id="qJL-1i-PHe"/>
+                <outlet property="alwaysOnTop" destination="wex-rX-PcY" id="3UN-lm-CVf"/>
+                <outlet property="aspectDefault" destination="hie-Th-bje" id="c8o-Kd-Gtr"/>
+                <outlet property="aspectMenu" destination="KIb-Ix-D8J" id="hQ4-Bb-Rdu"/>
                 <outlet property="backward" destination="Sif-85-FF1" id="w4k-va-FGF"/>
                 <outlet property="chapter" destination="Fal-I4-PZk" id="DiY-VN-JpS"/>
                 <outlet property="chapterMenu" destination="d9c-me-L2H" id="Gs5-BM-ZGm"/>
-                <outlet property="cotrol" destination="jxT-CU-nIS" id="Wxa-Z4-nrX"/>
+                <outlet property="cropNone" destination="umb-AD-K2r" id="lt1-ID-d1K"/>
+                <outlet property="doubleSize" destination="Hal-18-Tnf" id="vnl-Rb-Y3o"/>
                 <outlet property="file" destination="dMs-cI-mzQ" id="upe-AE-Gf6"/>
+                <outlet property="fitToScreen" destination="SHd-63-Xoh" id="nzE-bA-wmk"/>
                 <outlet property="forward" destination="6yE-op-DTS" id="ruO-zd-BjG"/>
+                <outlet property="fullScreen" destination="6Eq-ni-6hG" id="y11-Q1-drn"/>
                 <outlet property="gotoScreenshotFolder" destination="lj0-Oo-7nB" id="Jlj-kX-fv0"/>
+                <outlet property="halfSize" destination="snW-S8-Cw5" id="PDi-lV-6HL"/>
                 <outlet property="jumpTo" destination="2id-wn-xsC" id="wyH-9I-JHJ"/>
                 <outlet property="jumpToBegin" destination="2Ya-3g-1hy" id="atq-PX-lIt"/>
                 <outlet property="nextFrame" destination="XDC-Pc-rS1" id="PGo-Nr-JQg"/>
+                <outlet property="normalSize" destination="1UK-8n-QPP" id="rpd-7S-IYd"/>
+                <outlet property="normalSizeRetina" destination="c1x-bx-69F" id="S22-F3-Ks9"/>
                 <outlet property="open" destination="IAo-SY-fd9" id="fW9-2A-V4F"/>
                 <outlet property="pause" destination="UOE-MJ-8ku" id="74t-ZU-dXD"/>
+                <outlet property="playback" destination="jxT-CU-nIS" id="WLn-62-0zX"/>
                 <outlet property="playlist" destination="Gi5-1S-RQB" id="oMH-9E-A8A"/>
                 <outlet property="playlistMenu" destination="aXa-aM-Jaq" id="Nkw-YD-NAi"/>
                 <outlet property="previousFrame" destination="oxF-BB-lBy" id="Kx8-vs-jMi"/>
+                <outlet property="quickSettingsVideo" destination="2t8-Ot-yoO" id="Bey-Dn-4dY"/>
                 <outlet property="screenShot" destination="AoP-K6-Kb5" id="vTV-d5-sag"/>
                 <outlet property="stop" destination="deS-xK-iBb" id="ewy-yc-P6T"/>
+                <outlet property="videoTrack" destination="j8P-Gb-HR7" id="hho-ys-R88"/>
+                <outlet property="videoTrackMenu" destination="FTu-CF-O0R" id="Iw7-fm-Ryz"/>
             </connections>
         </customObject>
     </objects>

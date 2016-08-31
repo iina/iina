@@ -35,3 +35,12 @@ extension NSSize {
     }
   }
 }
+
+extension NSMenu {
+  func addItem(withTitle string: String, action selector: Selector?, tag: Int?, obj: AnyObject?) {
+    let menuItem = NSMenuItem(title: string, action: selector, keyEquivalent: "")
+    menuItem.tag = tag ?? -1
+    menuItem.representedObject = obj
+    self.addItem(menuItem)
+  }
+}

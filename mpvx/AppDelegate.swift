@@ -11,11 +11,14 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
   
-  lazy var playerCore: PlayerCore! = PlayerCore()
+  lazy var playerCore: PlayerCore = PlayerCore()
+  
+  @IBOutlet weak var menuController: MenuController!
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     UserDefaults.standard.register(Preference.defaultPreference)
     playerCore.startMPV()
+    menuController.bindMenuItems()
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {

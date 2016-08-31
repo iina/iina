@@ -622,7 +622,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
-  @IBAction func settingsButtonAction(_ sender: NSButton) {
+  @IBAction func settingsButtonAction(_ sender: AnyObject) {
     let view = quickSettingView.view
     switch sideBarStatus {
     case .hidden:

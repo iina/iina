@@ -11,7 +11,11 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="mpvx" customModuleProvider="target"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="mpvx" customModuleProvider="target">
+            <connections>
+                <outlet property="menuController" destination="cyK-tE-xgA" id="6U6-oJ-g0G"/>
+            </connections>
+        </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
@@ -94,90 +98,35 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Playback" id="GEO-Iw-cKr">
                         <items>
-                            <menuItem title="Pause" keyEquivalent="p" id="UOE-MJ-8ku">
-                                <connections>
-                                    <action selector="menuTogglePause:" target="-1" id="0pb-iN-3wA"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Stop and Clear Playlists" keyEquivalent="." id="deS-xK-iBb">
-                                <connections>
-                                    <action selector="menuStop:" target="-1" id="u3M-X6-R3e"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem title="Pause" keyEquivalent="p" id="UOE-MJ-8ku"/>
+                            <menuItem title="Stop and Clear Playlists" keyEquivalent="." id="deS-xK-iBb"/>
                             <menuItem isSeparatorItem="YES" id="0Kt-sZ-ss0"/>
-                            <menuItem title="Step Forward 5s" keyEquivalent="" id="6yE-op-DTS">
-                                <connections>
-                                    <action selector="menuStep:" target="-1" id="3X0-5P-KGi"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem title="Step Forward 5s" keyEquivalent="" id="6yE-op-DTS"/>
                             <menuItem title="Next Frame" alternate="YES" keyEquivalent="" id="XDC-Pc-rS1">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="menuStepFrame:" target="-1" id="7xh-aA-Zvw"/>
-                                </connections>
                             </menuItem>
-                            <menuItem title="Step Backward 5s" tag="1" keyEquivalent="" id="Sif-85-FF1">
-                                <connections>
-                                    <action selector="menuStep:" target="-1" id="zGv-l5-8as"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem title="Step Backward 5s" tag="1" keyEquivalent="" id="Sif-85-FF1"/>
                             <menuItem title="Previous Frame" tag="1" alternate="YES" keyEquivalent="" id="oxF-BB-lBy">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="menuStepFrame:" target="-1" id="Az9-mP-epb"/>
-                                </connections>
                             </menuItem>
-                            <menuItem title="Jump to..." keyEquivalent="j" id="2id-wn-xsC">
-                                <connections>
-                                    <action selector="menuJumpTo:" target="-1" id="MOi-dm-LM1"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem title="Jump to..." keyEquivalent="j" id="2id-wn-xsC"/>
                             <menuItem isSeparatorItem="YES" id="k1k-sG-1C3"/>
-                            <menuItem title="Screenshot" keyEquivalent="s" id="AoP-K6-Kb5">
-                                <connections>
-                                    <action selector="menuSnapshot:" target="-1" id="rCf-YM-n7j"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem title="Screenshot" keyEquivalent="s" id="AoP-K6-Kb5"/>
                             <menuItem title="Goto Screenshot Folder" keyEquivalent="S" id="lj0-Oo-7nB">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
-                                <connections>
-                                    <action selector="menuOpenScreenshotFolder:" target="-1" id="V79-cF-Lcy"/>
-                                </connections>
                             </menuItem>
                             <menuItem title="Advanced Screenshot..." id="CKi-JE-yLT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="pEu-eU-Er6"/>
-                            <menuItem title="A-B Loop" keyEquivalent="l" id="i3P-Xw-8D7">
-                                <connections>
-                                    <action selector="menuABLoop:" target="-1" id="No2-rv-h9h"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem title="A-B Loop" keyEquivalent="l" id="i3P-Xw-8D7"/>
                             <menuItem title="Playlist" id="Gi5-1S-RQB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Playlist" systemMenu="font" id="aXa-aM-Jaq">
-                                    <items>
-                                        <menuItem title="&lt;Empty&gt;" id="Q5e-8K-NDq">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="orderFrontFontPanel:" target="YLy-65-1bz" id="WHr-nq-2xA"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
+                                <menu key="submenu" title="Playlist" systemMenu="font" id="aXa-aM-Jaq"/>
                             </menuItem>
                             <menuItem title="Chapter" id="Fal-I4-PZk">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Chapter" id="d9c-me-L2H">
-                                    <items>
-                                        <menuItem title="&lt;Empty&gt;" id="ZM1-6Q-yy1">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="alignLeft:" target="-1" id="zUv-R1-uAa"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
+                                <menu key="submenu" title="Chapter" id="d9c-me-L2H"/>
                             </menuItem>
                         </items>
                     </menu>
@@ -548,5 +497,27 @@
                 </menuItem>
             </items>
         </menu>
+        <customObject id="cyK-tE-xgA" customClass="MenuController" customModule="mpvx" customModuleProvider="target">
+            <connections>
+                <outlet property="abLoop" destination="i3P-Xw-8D7" id="cBJ-XW-MJ0"/>
+                <outlet property="advancedScreenShot" destination="CKi-JE-yLT" id="qJL-1i-PHe"/>
+                <outlet property="backward" destination="Sif-85-FF1" id="w4k-va-FGF"/>
+                <outlet property="chapter" destination="Fal-I4-PZk" id="DiY-VN-JpS"/>
+                <outlet property="chapterMenu" destination="d9c-me-L2H" id="Gs5-BM-ZGm"/>
+                <outlet property="cotrol" destination="jxT-CU-nIS" id="Wxa-Z4-nrX"/>
+                <outlet property="file" destination="dMs-cI-mzQ" id="upe-AE-Gf6"/>
+                <outlet property="forward" destination="6yE-op-DTS" id="ruO-zd-BjG"/>
+                <outlet property="gotoScreenshotFolder" destination="lj0-Oo-7nB" id="Jlj-kX-fv0"/>
+                <outlet property="jumpTo" destination="2id-wn-xsC" id="wyH-9I-JHJ"/>
+                <outlet property="nextFrame" destination="XDC-Pc-rS1" id="PGo-Nr-JQg"/>
+                <outlet property="open" destination="IAo-SY-fd9" id="fW9-2A-V4F"/>
+                <outlet property="pause" destination="UOE-MJ-8ku" id="74t-ZU-dXD"/>
+                <outlet property="playlist" destination="Gi5-1S-RQB" id="oMH-9E-A8A"/>
+                <outlet property="playlistMenu" destination="aXa-aM-Jaq" id="Nkw-YD-NAi"/>
+                <outlet property="previousFrame" destination="oxF-BB-lBy" id="Kx8-vs-jMi"/>
+                <outlet property="screenShot" destination="AoP-K6-Kb5" id="vTV-d5-sag"/>
+                <outlet property="stop" destination="deS-xK-iBb" id="ewy-yc-P6T"/>
+            </connections>
+        </customObject>
     </objects>
 </document>

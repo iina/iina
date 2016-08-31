@@ -21,22 +21,22 @@
             <rect key="frame" x="0.0" y="0.0" width="240" height="369"/>
             <subviews>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Yym-Zw-Hd8">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="317"/>
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Playlist" identifier="1" id="rjs-Qf-mT6">
                             <view key="view" id="BXH-zz-cse">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="317"/>
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5h-uy-hbd">
-                                        <rect key="frame" x="0.0" y="24" width="240" height="293"/>
+                                        <rect key="frame" x="0.0" y="24" width="240" height="297"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="2M9-8L-veI">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="293"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="297"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="22" id="xIa-sI-0Xn">
-                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="24"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="297"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.080000000000000002" colorSpace="calibratedRGB"/>
@@ -233,9 +233,9 @@
                     </tabViewItems>
                 </tabView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SOR-3l-PFj">
-                    <rect key="frame" x="112" y="325" width="120" height="36"/>
+                    <rect key="frame" x="120" y="321" width="120" height="48"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="36" id="BRL-lK-4tg"/>
+                        <constraint firstAttribute="height" constant="48" id="BRL-lK-4tg"/>
                     </constraints>
                     <buttonCell key="cell" type="square" title="CHAPTERS" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="jUF-xa-uRI">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -246,9 +246,9 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Zq-JQ-XO4">
-                    <rect key="frame" x="8" y="325" width="120" height="36"/>
+                    <rect key="frame" x="0.0" y="321" width="120" height="48"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="36" id="aPN-VC-eZR"/>
+                        <constraint firstAttribute="height" constant="48" id="aPN-VC-eZR"/>
                     </constraints>
                     <buttonCell key="cell" type="square" title="PLAYLIST" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="fAq-Pq-ThP">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -260,13 +260,13 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="Yym-Zw-Hd8" firstAttribute="top" secondItem="5Zq-JQ-XO4" secondAttribute="bottom" constant="8" id="EOu-Jc-A7S"/>
-                <constraint firstItem="5Zq-JQ-XO4" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="8" id="LDc-wa-R0O"/>
+                <constraint firstItem="Yym-Zw-Hd8" firstAttribute="top" secondItem="5Zq-JQ-XO4" secondAttribute="bottom" id="EOu-Jc-A7S"/>
+                <constraint firstItem="5Zq-JQ-XO4" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="LDc-wa-R0O"/>
                 <constraint firstAttribute="bottom" secondItem="Yym-Zw-Hd8" secondAttribute="bottom" id="VEC-3U-YTI"/>
                 <constraint firstAttribute="trailing" secondItem="Yym-Zw-Hd8" secondAttribute="trailing" id="Wu2-Mo-8NM"/>
-                <constraint firstAttribute="trailing" secondItem="SOR-3l-PFj" secondAttribute="trailing" constant="8" id="atA-b5-vwd"/>
-                <constraint firstItem="SOR-3l-PFj" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="8" id="b6J-nd-u9K"/>
-                <constraint firstItem="5Zq-JQ-XO4" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="8" id="elP-iu-vPl"/>
+                <constraint firstAttribute="trailing" secondItem="SOR-3l-PFj" secondAttribute="trailing" id="atA-b5-vwd"/>
+                <constraint firstItem="SOR-3l-PFj" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="b6J-nd-u9K"/>
+                <constraint firstItem="5Zq-JQ-XO4" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="elP-iu-vPl"/>
                 <constraint firstItem="5Zq-JQ-XO4" firstAttribute="width" secondItem="Hz6-mo-xeY" secondAttribute="width" multiplier="0.5" id="epQ-jC-a0B"/>
                 <constraint firstItem="Yym-Zw-Hd8" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="iKz-2C-iJv"/>
                 <constraint firstItem="SOR-3l-PFj" firstAttribute="width" secondItem="Hz6-mo-xeY" secondAttribute="width" multiplier="0.5" id="owL-kO-fvO"/>

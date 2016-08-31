@@ -411,7 +411,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
-  private func hideSideBar() {
+  private func hideSideBar(_ after: () -> Void = {}) {
     let currWidth = sideBarWidthConstraint.constant
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
@@ -421,6 +421,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.sideBarStatus = .hidden
       self.sideBarView.subviews.removeAll()
       self.sideBarView.isHidden = true
+      after()
     }
   }
   
@@ -622,18 +623,30 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   @IBAction func settingsButtonAction(_ sender: NSButton) {
-    if sideBarStatus == .hidden {
-      showSideBar(view: quickSettingView.view, type: .settings)
-    } else {
+    let view = quickSettingView.view
+    switch sideBarStatus {
+    case .hidden:
+      showSideBar(view: view, type: .settings)
+    case .playlist:
+      hideSideBar {
+        self.showSideBar(view: view, type: .settings)
+      }
+    case .settings:
       hideSideBar()
     }
   }
   
   @IBAction func playlistButtonAction(_ sender: AnyObject) {
-    if sideBarStatus == .hidden {
-      showSideBar(view: playlistView.view, type: .playlist)
-    } else {
+    let view = playlistView.view
+    switch sideBarStatus {
+    case .hidden:
+      showSideBar(view: view, type: .playlist)
+    case .playlist:
       hideSideBar()
+    case .settings:
+      hideSideBar {
+        self.showSideBar(view: view, type: .playlist)
+      }
     }
   }
   

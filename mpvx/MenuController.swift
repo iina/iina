@@ -10,6 +10,9 @@ import Cocoa
 
 class MenuController: NSObject, NSMenuDelegate {
   
+  /** For convinent bindings. see `bind(...)` below. [menu: check state block] */
+  private var menuBindingList: [NSMenu: (NSMenuItem) -> Bool] = [:]
+  
   // File
   @IBOutlet weak var file: NSMenuItem!
   @IBOutlet weak var open: NSMenuItem!
@@ -43,7 +46,6 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var fullScreen: NSMenuItem!
   @IBOutlet weak var alwaysOnTop: NSMenuItem!
   @IBOutlet weak var aspectMenu: NSMenu!
-  @IBOutlet weak var aspectDefault: NSMenuItem!
   @IBOutlet weak var cropNone: NSMenuItem!
   
   
@@ -52,35 +54,41 @@ class MenuController: NSObject, NSMenuDelegate {
     // Playback menu
     pause.action = #selector(MainWindowController.menuTogglePause(_:))
     stop.action = #selector(MainWindowController.menuStop(_:))
+    // -- seeking
     forward.action = #selector(MainWindowController.menuStep(_:))
     nextFrame.action = #selector(MainWindowController.menuStepFrame(_:))
     backward.action = #selector(MainWindowController.menuStep(_:))
     previousFrame.action = #selector(MainWindowController.menuStepFrame(_:))
     jumpToBegin.action = #selector(MainWindowController.menuJumpToBegin(_:))
     jumpTo.action = #selector(MainWindowController.menuJumpTo(_:))
+    // -- screenshot
     screenShot.action = #selector(MainWindowController.menuSnapshot(_:))
     gotoScreenshotFolder.action = #selector(AppDelegate.menuOpenScreenshotFolder(_:))
 //    advancedScreenShot
+    // -- list and chapter
     abLoop.action = #selector(MainWindowController.menuABLoop(_:))
     playlistMenu.delegate = self
     chapterMenu.delegate = self
     
     // Video menu
     quickSettingsVideo.action = #selector(MainWindowController.menuShowVideoQuickSettings(_:))
+    // -- window size
     videoTrackMenu.delegate = self
     (halfSize.tag, normalSize.tag, normalSizeRetina.tag, doubleSize.tag, fitToScreen.tag) = (0, 1, -1, 2, 3)
     for item in [halfSize, normalSize, normalSizeRetina, doubleSize, fitToScreen] {
       item?.action = #selector(MainWindowController.menuChangeWindowSize(_:))
     }
+    // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
 //    alwaysOnTop
-    aspectDefault.representedObject = "Default"  // actually can be any string
-    aspectDefault.action = #selector(MainWindowController.menuChangeAspect(_:))
-    for aspect in AppData.aspects {
-      let isCurrent = PlayerCore.shared.info.aspect == aspect
-      aspectMenu.addItem(withTitle: aspect, action: #selector(MainWindowController.menuChangeAspect(_:)),
-                         tag: nil, obj: aspect, stateOn: isCurrent)
+    // -- aspect
+    var aspectList = AppData.aspects
+    aspectList.insert("Default", at: 0)
+    bind(menu: aspectMenu, withOptions: aspectList, objects: nil, action: #selector(MainWindowController.menuChangeAspect(_:))) {
+      menuItem -> Bool in
+      return PlayerCore.shared.info.aspect == menuItem.representedObject as? String
     }
+    // --
   }
   
   func updatePlaylist() {
@@ -122,6 +130,25 @@ class MenuController: NSObject, NSMenuDelegate {
     }
   }
   
+  /** Bind a menu with a list of available options. */
+  private func bind(menu: NSMenu, withOptions titles: [String], objects: [Any]?, action: Selector?, checkStateBlock block: @escaping (NSMenuItem) -> Bool) {
+    // options and objects must be same
+    guard objects == nil || titles.count == objects?.count else { return }
+    // add menu items
+    for (index, title) in titles.enumerated() {
+      let menuItem = NSMenuItem(title: title, action: action, keyEquivalent: "")
+      if let object = objects?[index] {
+        menuItem.representedObject = object
+      } else {
+        menuItem.representedObject = title
+      }
+      menu.addItem(menuItem)
+    }
+    // add to list
+    menu.delegate = self
+    menuBindingList.updateValue(block, forKey: menu)
+  }
+  
   // MARK: - Menu delegate
   
   func menuWillOpen(_ menu: NSMenu) {
@@ -131,6 +158,14 @@ class MenuController: NSObject, NSMenuDelegate {
       updateChapterList()
     } else if menu == videoTrackMenu {
       updateVideoTracks()
+    }
+    // check convinently binded menus
+    for (m, checkEnableBlock) in menuBindingList {
+      if menu == m {
+        for item in menu.items {
+          item.state = checkEnableBlock(item) ? NSOnState : NSOffState
+        }
+      }
     }
   }
   

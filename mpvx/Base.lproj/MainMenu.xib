@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11163.2" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11198.2" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11163.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11198.2"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -162,13 +162,7 @@
                             <menuItem isSeparatorItem="YES" id="4J5-eU-sei"/>
                             <menuItem title="Aspect Ratio" id="d15-8v-dXA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" id="KIb-Ix-D8J">
-                                    <items>
-                                        <menuItem title="Default" id="hie-Th-bje">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                    </items>
-                                </menu>
+                                <menu key="submenu" id="KIb-Ix-D8J"/>
                             </menuItem>
                             <menuItem title="Crop" id="Gqg-wU-RRo">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -430,7 +424,6 @@
                 <outlet property="abLoop" destination="i3P-Xw-8D7" id="cBJ-XW-MJ0"/>
                 <outlet property="advancedScreenShot" destination="CKi-JE-yLT" id="qJL-1i-PHe"/>
                 <outlet property="alwaysOnTop" destination="wex-rX-PcY" id="3UN-lm-CVf"/>
-                <outlet property="aspectDefault" destination="hie-Th-bje" id="c8o-Kd-Gtr"/>
                 <outlet property="aspectMenu" destination="KIb-Ix-D8J" id="hQ4-Bb-Rdu"/>
                 <outlet property="backward" destination="Sif-85-FF1" id="w4k-va-FGF"/>
                 <outlet property="chapter" destination="Fal-I4-PZk" id="DiY-VN-JpS"/>

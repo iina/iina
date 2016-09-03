@@ -39,6 +39,8 @@
 		84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */; };
 		84A0BA9F1D2FAD4000BC8DA1 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A0BA9D1D2FAD4000BC8DA1 /* MainWindowController.xib */; };
 		84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */; };
+		84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D58E1D794CE600D98A0E /* MPVFilter.swift */; };
+		84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D5901D796F9700D98A0E /* Aspect.swift */; };
 		84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */; };
 		84D377651D7370EE007F7396 /* ChapterTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377641D7370EE007F7396 /* ChapterTableCellView.swift */; };
 		84D377671D737F58007F7396 /* MPVChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377661D737F58007F7396 /* MPVChapter.swift */; };
@@ -99,6 +101,8 @@
 		84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		84A0BA9D1D2FAD4000BC8DA1 /* MainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
 		84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		84C8D58E1D794CE600D98A0E /* MPVFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVFilter.swift; sourceTree = "<group>"; };
+		84C8D5901D796F9700D98A0E /* Aspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aspect.swift; sourceTree = "<group>"; };
 		84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVPlaylistItem.swift; sourceTree = "<group>"; };
 		84D377641D7370EE007F7396 /* ChapterTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterTableCellView.swift; sourceTree = "<group>"; };
 		84D377661D737F58007F7396 /* MPVChapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVChapter.swift; sourceTree = "<group>"; };
@@ -160,6 +164,7 @@
 				845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */,
 				84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */,
 				84D377661D737F58007F7396 /* MPVChapter.swift */,
+				84C8D58E1D794CE600D98A0E /* MPVFilter.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -201,6 +206,7 @@
 				8434BAA81D5E3C2B003BECF2 /* Formatters.swift */,
 				8461C52F1D462488006E91FF /* VideoTime.swift */,
 				8434BAA61D5DF2DA003BECF2 /* Extensions.swift */,
+				84C8D5901D796F9700D98A0E /* Aspect.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -506,6 +512,7 @@
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
+				84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */,
 				8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */,
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */,
 				8476440C1D48F63D004F6DF5 /* OSDMessage.swift in Sources */,
@@ -522,6 +529,7 @@
 				843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */,
 				84A0BA9B1D2FAB4100BC8DA1 /* Parameter.swift in Sources */,
 				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,
+				84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,
 				844DE1BF1D3E2B9900272589 /* MPVEvent.swift in Sources */,
 				8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */,

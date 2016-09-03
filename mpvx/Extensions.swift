@@ -19,19 +19,64 @@ extension NSSlider {
 }
 
 extension NSSize {
-  /** Constrain a NSSize to satisfy a min size while keeping same aspect */
-  func satisfyMinSizeWithFixedAspectRatio(_ minSize: NSSize) -> NSSize {
-    let aspect = width / height
-    if width >= minSize.width && height >= minSize.height {
+  
+  var aspect: CGFloat {
+    get {
+      return width / height
+    }
+  }
+  
+  /** Resize to no smaller than a min size while keeping same aspect */
+  func satisfyMinSizeWithSameAspectRatio(_ minSize: NSSize) -> NSSize {
+    if width >= minSize.width && height >= minSize.height {  // no need to resize if larger
       return self
     } else {
-      let tryWidth = minSize.height * aspect
-      let tryHeight = minSize.width / aspect
-      if tryWidth >= width {  // use minSize.height
-        return NSSize(width: tryWidth, height: minSize.height)
-      } else {  // use minSize.width
-        return NSSize(width: minSize.width, height: tryHeight)
-      }
+      return grow(toSize: minSize)
+    }
+  }
+  
+  /** Resize to no larger than a max size while keeping same aspect */
+  func satisfyMaxSizeWithSameAspectRatio(_ maxSize: NSSize) -> NSSize {
+    if width <= maxSize.width && height <= maxSize.height {  // no need to resize if smaller
+      return self
+    } else {
+      return shrink(toSize: maxSize)
+    }
+  }
+  
+  func crop(withAspect aspectRect: Aspect) -> NSSize {
+    let targetAspect = aspectRect.value
+    if aspect > targetAspect {  // self is wider, crop width, use same height
+      return NSSize(width: height * targetAspect, height: height)
+    } else {
+      return NSSize(width: width, height: width / targetAspect)
+    }
+  }
+  
+  func expand(withAspect aspectRect: Aspect) -> NSSize {
+    let targetAspect = aspectRect.value
+    if aspect < targetAspect {  // self is taller, expand width, use same height
+      return NSSize(width: height * targetAspect, height: height)
+    } else {
+      return NSSize(width: width, height: width / targetAspect)
+    }
+  }
+  
+  func grow(toSize size: NSSize) -> NSSize {
+    let sizeAspect = size.aspect
+    if aspect > sizeAspect {  // self is wider, grow to meet height
+      return NSSize(width: size.height * aspect, height: size.height)
+    } else {
+      return NSSize(width: size.width, height: size.width / aspect)
+    }
+  }
+  
+  func shrink(toSize size: NSSize) -> NSSize {
+    let  sizeAspect = size.aspect
+    if aspect < sizeAspect { // self is taller, shrink to meet height
+      return NSSize(width: size.height * aspect, height: size.height)
+    } else {
+      return NSSize(width: size.width, height: size.width / aspect)
     }
   }
 }
@@ -53,5 +98,11 @@ extension NSMenu {
     menuItem.representedObject = obj
     menuItem.state = stateOn ? NSOnState : NSOffState
     self.addItem(menuItem)
+  }
+}
+
+extension Int {
+  func toStr() -> String {
+    return "\(self)"
   }
 }

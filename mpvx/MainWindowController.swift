@@ -444,51 +444,27 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     self.fadeableViews.append(titleBarView)
   }
   
-  // MARK: - Player controller's delegation
+  // MARK: - Window size / aspect
   
   /** Set video size when info available. */
   func adjustFrameByVideoSize(_ width: Int, _ height: Int) {
     guard let w = window else { return }
     // set aspect ratio
-    let aspectRatio = Float(width) / Float(height)
     let originalVideoSize = NSSize(width: width, height: height)
     w.aspectRatio = originalVideoSize
-    
+    // get videoSize on screen
     var videoSize = w.convertFromBacking(
       NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))
     ).size
     
     // check screen size
-    let screenSizeOptional = NSScreen.main()?.visibleFrame.size
-    if let screenSize = screenSizeOptional {
-      // check if video size > screen size
-      let tryWidth = CGFloat(Float(screenSize.height) * aspectRatio)
-      let tryHeight = CGFloat(Float(screenSize.width) / aspectRatio)
-      if screenSize.width >= videoSize.width {
-        if screenSize.height < videoSize.height {
-          videoSize.height = screenSize.height
-          videoSize.width = tryWidth
-        }
-      } else {
-        // screenSize.width < videoSize.width
-        if screenSize.height < videoSize.height {
-          if (screenSize.height >= tryHeight) {
-            videoSize.width = screenSize.width
-            videoSize.height = tryHeight
-          } else {
-            videoSize.height = screenSize.height
-            videoSize.width = tryWidth
-          }
-        } else {
-          videoSize.width = screenSize.width
-          videoSize.height = tryHeight
-        }
-      }
+    if let screenSize = NSScreen.main()?.visibleFrame.size {
+      videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
       // check default window position
     }
     
-//    window!.setContentSize(videoSize.satisfyMinSizeWithFixedAspectRatio(minSize))
-    let rect = NSRect(origin: w.frame.origin, size: videoSize.satisfyMinSizeWithFixedAspectRatio(minSize))
+    // window!.setContentSize(videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
+    let rect = NSRect(origin: w.frame.origin, size: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
     w.setFrame(rect, display: true, animate: true)
     videoView.videoSize = originalVideoSize
     if (!window!.isVisible) {
@@ -780,6 +756,30 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       displayOSD(.aspect(aspectStr))
     } else {
       Utility.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject)")
+    }
+  }
+  
+  @IBAction func menuChangeCrop(_ sender: NSMenuItem) {
+    guard let vwidth = playerCore.info.videoWidth, let vheight = playerCore.info.videoHeight else {
+      Utility.log("Cannot get video width and height")
+      return
+    }
+    if let cropStr = sender.representedObject as? String {
+      if let aspect = Aspect(string: cropStr) {
+        let cropped = NSMakeSize(CGFloat(vwidth), CGFloat(vheight)).crop(withAspect: aspect)
+        let vf = MPVFilter.crop(w: Int(cropped.width), h: Int(cropped.height), x: nil, y: nil)
+        playerCore.addVideoFilter(vf)
+        // warning! may should not update it here
+        playerCore.info.unsureCrop = cropStr
+        playerCore.info.cropFilter = vf
+      } else {
+        if let filter = playerCore.info.cropFilter {
+          playerCore.removeVideoFiler(filter)
+          playerCore.info.unsureCrop = "None"
+        }
+      }
+    } else {
+      Utility.log("sender.representedObject is not a string in menuChangeCrop()")
     }
   }
   

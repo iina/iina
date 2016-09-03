@@ -166,38 +166,11 @@
                             </menuItem>
                             <menuItem title="Crop" id="Gqg-wU-RRo">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Crop" id="eo2-Tt-SLx">
-                                    <items>
-                                        <menuItem title="None" id="umb-AD-K2r">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="HUZ-Sh-2iq"/>
-                                </connections>
+                                <menu key="submenu" title="Crop" id="eo2-Tt-SLx"/>
                             </menuItem>
                             <menuItem title="Rotation" id="ar5-3T-O9h">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Rotation" id="5xN-ZB-VLI">
-                                    <items>
-                                        <menuItem title="0°" id="Olh-56-FuS">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="90°" id="RW6-EH-u0e">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="180°" id="Xar-T8-OMR">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="270°" id="7ty-yZ-BVq">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="lCv-QW-0x2"/>
-                                </connections>
+                                <menu key="submenu" title="Rotation" id="5xN-ZB-VLI"/>
                             </menuItem>
                             <menuItem title="Flip" id="mT1-1m-HwN">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -211,9 +184,6 @@
                                         </menuItem>
                                     </items>
                                 </menu>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="6rB-oi-xui"/>
-                                </connections>
                             </menuItem>
                             <menuItem title="Deinterlace" id="yHI-7D-OaI">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -237,16 +207,10 @@
                                         </menuItem>
                                     </items>
                                 </menu>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="U0B-eK-mdq"/>
-                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="kNp-jq-01c"/>
                             <menuItem title="Video Filters..." id="PyY-pR-jz7">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="jim-AH-9qH"/>
-                                </connections>
                             </menuItem>
                         </items>
                     </menu>
@@ -257,9 +221,6 @@
                         <items>
                             <menuItem title="Open Quick Settings" id="43n-Ed-5kT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="z9E-vY-3gk"/>
-                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Fs0-R8-rnS"/>
                             <menuItem title="Audio Track" id="GF1-xB-KcA">
@@ -278,40 +239,22 @@
                             <menuItem isSeparatorItem="YES" id="H9C-r1-7eo"/>
                             <menuItem title="Increase Volume" id="Wbq-vt-hzX">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="toggleToolbarShown:" target="-1" id="cxr-a3-cJB"/>
-                                </connections>
                             </menuItem>
                             <menuItem title="Decrease Volume" alternate="YES" id="pdj-9C-Fn1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="3wE-3s-pdS"/>
-                                </connections>
                             </menuItem>
                             <menuItem title="Mute" id="WOL-Us-ByA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="tEP-yw-6i4"/>
-                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="NlU-cH-tnU"/>
                             <menuItem title="Increase Audio Delay" id="4ae-MT-2L1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="NQe-kc-oIZ"/>
-                                </connections>
                             </menuItem>
                             <menuItem title="Decrease Audio Delay" id="Lc4-4W-thE">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="DAM-fS-SfZ"/>
-                                </connections>
                             </menuItem>
                             <menuItem title="Reset Audio Delay" id="H3d-jR-YCr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="vdq-63-b7o"/>
-                                </connections>
                             </menuItem>
                         </items>
                     </menu>
@@ -322,9 +265,6 @@
                         <items>
                             <menuItem title="Open Quick Settings" id="8y7-Cy-lKT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="DzI-lC-X3I"/>
-                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="EvW-J9-wqJ"/>
                             <menuItem title="Subtitle Track" id="uGZ-lo-pJJ">
@@ -342,9 +282,6 @@
                             </menuItem>
                             <menuItem title="Load External Subtitle..." id="k6x-hf-ATi">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="zfM-ZZ-Mmy"/>
-                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="sMg-1y-9zx"/>
                             <menuItem title="Increase Text Size" id="XHu-Dl-Vq2">
@@ -355,15 +292,9 @@
                             </menuItem>
                             <menuItem title="Decrease Text Size" id="Bli-YK-Rl0">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="X78-lT-JQ8"/>
-                                </connections>
                             </menuItem>
                             <menuItem title="Reset Text Size" id="P1a-ot-P31">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="pYB-ug-98n"/>
-                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="UZ7-ew-L1i"/>
                             <menuItem title="Subtitle Position" id="rme-fr-5rr">
@@ -428,7 +359,7 @@
                 <outlet property="backward" destination="Sif-85-FF1" id="w4k-va-FGF"/>
                 <outlet property="chapter" destination="Fal-I4-PZk" id="DiY-VN-JpS"/>
                 <outlet property="chapterMenu" destination="d9c-me-L2H" id="Gs5-BM-ZGm"/>
-                <outlet property="cropNone" destination="umb-AD-K2r" id="lt1-ID-d1K"/>
+                <outlet property="cropMenu" destination="eo2-Tt-SLx" id="uii-FZ-2wL"/>
                 <outlet property="doubleSize" destination="Hal-18-Tnf" id="vnl-Rb-Y3o"/>
                 <outlet property="file" destination="dMs-cI-mzQ" id="upe-AE-Gf6"/>
                 <outlet property="fitToScreen" destination="SHd-63-Xoh" id="nzE-bA-wmk"/>
@@ -448,6 +379,7 @@
                 <outlet property="playlistMenu" destination="aXa-aM-Jaq" id="Nkw-YD-NAi"/>
                 <outlet property="previousFrame" destination="oxF-BB-lBy" id="Kx8-vs-jMi"/>
                 <outlet property="quickSettingsVideo" destination="2t8-Ot-yoO" id="Bey-Dn-4dY"/>
+                <outlet property="rotationMenu" destination="5xN-ZB-VLI" id="YGx-Ae-oMp"/>
                 <outlet property="screenShot" destination="AoP-K6-Kb5" id="vTV-d5-sag"/>
                 <outlet property="stop" destination="deS-xK-iBb" id="ewy-yc-P6T"/>
                 <outlet property="videoTrack" destination="j8P-Gb-HR7" id="hho-ys-R88"/>

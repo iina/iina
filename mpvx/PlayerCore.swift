@@ -23,8 +23,6 @@ class PlayerCore: NSObject {
   
   var statusPaused: Bool = false
   
-  var aspectRegEx = Utility.Regex("\\A\\d+:\\d+\\Z")
-  
   // MARK: - Control commands
   
   // Open a file
@@ -168,13 +166,13 @@ class PlayerCore: NSObject {
   }
   
   func setVideoAspect(_ aspect: String) {
-    if aspectRegEx.matches(aspect) {
+    if AppData.aspectRegex.matches(aspect) {
       mpvController.setString(MPVProperty.videoAspect, aspect)
-      info.aspect = aspect
+      info.unsureAspect = aspect
     } else {
       mpvController.setString(MPVProperty.videoAspect, "-1")
       // if not a aspect string, set aspect to default, and also the info string.
-      info.aspect = "Default"
+      info.unsureAspect = "Default"
     }
   }
   
@@ -225,6 +223,14 @@ class PlayerCore: NSObject {
     mpvController.command([MPVCommand.seek, "\(chapter.time.second)", "absolute", nil])
     // need to update time pos
     syncUITime()
+  }
+  
+  func addVideoFilter(_ filter: MPVFilter) {
+    mpvController.command([MPVCommand.vf, "add", filter.stringFormat, nil])
+  }
+  
+  func removeVideoFiler(_ filter: MPVFilter) {
+    mpvController.command([MPVCommand.vf, "del", filter.stringFormat, nil])
   }
   
   // MARK: - Other

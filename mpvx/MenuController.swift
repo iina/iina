@@ -46,7 +46,8 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var fullScreen: NSMenuItem!
   @IBOutlet weak var alwaysOnTop: NSMenuItem!
   @IBOutlet weak var aspectMenu: NSMenu!
-  @IBOutlet weak var cropNone: NSMenuItem!
+  @IBOutlet weak var cropMenu: NSMenu!
+  @IBOutlet weak var rotationMenu: NSMenu!
   
   
   
@@ -86,9 +87,15 @@ class MenuController: NSObject, NSMenuDelegate {
     aspectList.insert("Default", at: 0)
     bind(menu: aspectMenu, withOptions: aspectList, objects: nil, action: #selector(MainWindowController.menuChangeAspect(_:))) {
       menuItem -> Bool in
-      return PlayerCore.shared.info.aspect == menuItem.representedObject as? String
+      return PlayerCore.shared.info.unsureAspect == menuItem.representedObject as? String
     }
-    // --
+    // -- crop
+    var cropList = AppData.aspects
+    cropList.insert("None", at: 0)
+    bind(menu: cropMenu, withOptions: cropList, objects: nil, action: #selector(MainWindowController.menuChangeCrop(_:))) {
+      menuItem -> Bool in
+      return PlayerCore.shared.info.unsureCrop == menuItem.representedObject as? String
+    }
   }
   
   func updatePlaylist() {
@@ -133,7 +140,10 @@ class MenuController: NSObject, NSMenuDelegate {
   /** Bind a menu with a list of available options. */
   private func bind(menu: NSMenu, withOptions titles: [String], objects: [Any]?, action: Selector?, checkStateBlock block: @escaping (NSMenuItem) -> Bool) {
     // options and objects must be same
-    guard objects == nil || titles.count == objects?.count else { return }
+    guard objects == nil || titles.count == objects?.count else {
+      Utility.log("different object count when binding menu")
+      return
+    }
     // add menu items
     for (index, title) in titles.enumerated() {
       let menuItem = NSMenuItem(title: title, action: action, keyEquivalent: "")
@@ -160,11 +170,9 @@ class MenuController: NSObject, NSMenuDelegate {
       updateVideoTracks()
     }
     // check convinently binded menus
-    for (m, checkEnableBlock) in menuBindingList {
-      if menu == m {
-        for item in menu.items {
-          item.state = checkEnableBlock(item) ? NSOnState : NSOffState
-        }
+    if let checkEnableBlock = menuBindingList[menu] {
+      for item in menu.items {
+        item.state = checkEnableBlock(item) ? NSOnState : NSOffState
       }
     }
   }

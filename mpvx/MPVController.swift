@@ -55,7 +55,7 @@ class MPVController: NSObject {
     e(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, "/Users/admin/Project/mpvx/mpvx/tools/autoload.lua"))
     
     // Receive log messages at warn level.
-    e(mpv_request_log_messages(mpv, "warn"))
+    e(mpv_request_log_messages(mpv, "v"))
     
     // Request tick event.
     // e(mpv_request_event(mpv, MPV_EVENT_TICK, 1))

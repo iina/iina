@@ -29,7 +29,9 @@ class PlaybackInfo {
   var isPaused: Bool = false
   
   /** The current applied aspect, used for find current aspect in menu, etc. Maybe not a good approach. */
-  var aspect: String = "Default"
+  var unsureAspect: String = "Default"
+  var unsureCrop: String = "None"
+  var cropFilter: MPVFilter?
   
   var volume: Int = 50 {
     didSet {

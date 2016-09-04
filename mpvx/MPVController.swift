@@ -250,8 +250,8 @@ class MPVController: NSObject {
     let pos = getInt(MPVProperty.timePos)
     playerCore.info.videoHeight = height
     playerCore.info.videoWidth = width
-    playerCore.info.displayWidth = dwidth
-    playerCore.info.displayHeight = dheight
+    playerCore.info.displayWidth = dwidth == 0 ? width : dwidth
+    playerCore.info.displayHeight = dheight == 0 ? height : dheight
     playerCore.info.videoDuration = VideoTime(duration)
     playerCore.info.videoPosition = VideoTime(pos)
     let filename = getString(MPVProperty.filename)

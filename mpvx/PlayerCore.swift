@@ -178,7 +178,7 @@ class PlayerCore: NSObject {
   }
   
   func setVideoRotate(_ degree: Int) {
-    if [0, 90, 180, 270].index(of: degree)! >= 0 {
+    if AppData.rotations.index(of: degree)! >= 0 {
       mpvController.setInt(MPVProperty.videoRotate, degree)
       info.rotation = degree
     }

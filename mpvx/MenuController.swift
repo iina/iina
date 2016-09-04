@@ -96,6 +96,12 @@ class MenuController: NSObject, NSMenuDelegate {
       menuItem -> Bool in
       return PlayerCore.shared.info.unsureCrop == menuItem.representedObject as? String
     }
+    // - rotation
+    var rotationTitles = AppData.rotations.map { "\($0)" }
+    bind(menu: rotationMenu, withOptions: rotationTitles, objects: AppData.rotations, action: #selector(MainWindowController.menuChangeRotation(_:))) {
+      menuItem -> Bool in
+      return PlayerCore.shared.info.rotation == menuItem.representedObject as? Int
+    }
   }
   
   func updatePlaylist() {

@@ -792,6 +792,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
+  @IBAction func menuChangeRotation(_ sender: NSMenuItem) {
+    if let rotationInt = sender.representedObject as? Int {
+      playerCore.setVideoRotate(rotationInt)
+    }
+  }
+  
   @IBAction func menuChangeWindowSize(_ sender: NSMenuItem) {
     // -1: normal(non-retina), same as 1 when on non-retina screen
     //  0: half

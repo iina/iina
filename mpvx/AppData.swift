@@ -19,7 +19,7 @@ struct AppData {
   /** generate aspect and crop options in menu */
   static let aspects: [String] = ["4:3", "5:4", "16:9", "16:10", "1:1", "3:2", "2.21:1", "2.35:1", "2.39:1"]
   
-  static let aspectRegex = Utility.Regex("\\A\\d+:\\d+\\Z")
+  static let aspectRegex = Utility.Regex("\\A\\d+(\\.\\d+)?:\\d+(\\.\\d+)?\\Z")
 }
 
 

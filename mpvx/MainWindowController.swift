@@ -810,7 +810,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       w.setFrame(retinaSize, display: true, animate: true)
     case 3:
       let screenFrame = NSScreen.main()!.visibleFrame
-      let newSize = w.frame.size.satisfyMaxSizeWithSameAspectRatio(screenFrame.size)
+      let newSize = w.frame.size.shrink(toSize: screenFrame.size)
       var newFrame = NSRect(origin: w.frame.origin, size: newSize)
       newFrame.toCenteredResize(fromOriginalRect: screenFrame)
       w.setFrame(newFrame, display: true, animate: true)

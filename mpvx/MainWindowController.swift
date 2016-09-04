@@ -18,6 +18,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
+  var windowResizeMultiplier: CGFloat = 1.0
   
   var isInFullScreen: Bool = false
   
@@ -282,6 +283,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         let xOffset = (wSize.width - targetWidth) / 2
         videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
       }
+    } else {
+      // record windowResizeMultiplier
+      let dw = playerCore.info.displayWidth!
+      // need convert to backing
+      windowResizeMultiplier = w.convertToBacking(w.frame).width / CGFloat(dw)
     }
     // update control bar position
     let cph = ud.float(forKey: Preference.Key.controlBarPositionHorizontal)
@@ -463,8 +469,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // check default window position
     }
     
+    videoSize = videoSize.multiply(windowResizeMultiplier)
+    
     // window!.setContentSize(videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
-    let rect = NSRect(origin: w.frame.origin, size: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
+    var rect = NSRect(origin: w.frame.origin, size: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
+    rect.toCenteredResize(fromOriginalRect: w.frame)
     w.setFrame(rect, display: true, animate: true)
     videoView.videoSize = originalVideoSize
     if (!window!.isVisible) {
@@ -790,7 +799,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     //  2: double
     //  3: fit screen
     let size = sender.tag
-    // FIXME: implement
+    guard let w = window, let vw = playerCore.info.displayWidth, let vh = playerCore.info.displayHeight else { return }
+    var retinaSize = w.convertFromBacking(NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(vw), CGFloat(vh)))
+    let sizeMap: [CGFloat] = [0.5, 1, 2]
+    switch size {
+    case 0, 1, 2:
+      retinaSize.size.width *= sizeMap[size]
+      retinaSize.size.height *= sizeMap[size]
+      retinaSize.toCenteredResize(fromOriginalRect: w.frame)
+      w.setFrame(retinaSize, display: true, animate: true)
+    case 3:
+      let screenFrame = NSScreen.main()!.visibleFrame
+      let newSize = w.frame.size.satisfyMaxSizeWithSameAspectRatio(screenFrame.size)
+      var newFrame = NSRect(origin: w.frame.origin, size: newSize)
+      newFrame.toCenteredResize(fromOriginalRect: screenFrame)
+      w.setFrame(newFrame, display: true, animate: true)
+    default:
+      return
+    }
   }
   
   @IBAction func menuToggleFullScreen(_ sender: NSMenuItem) {

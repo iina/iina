@@ -79,6 +79,21 @@ extension NSSize {
       return NSSize(width: size.width, height: size.width / aspect)
     }
   }
+  
+  func multiply(_ multiplier: CGFloat) -> NSSize {
+    return NSSize(width: width * multiplier, height: height * multiplier)
+  }
+  
+}
+
+extension NSRect {
+  mutating func toCenteredResize(fromOriginalRect oRect: NSRect) {
+    origin = CGPoint(x: oRect.origin.x + (oRect.width - width) / 2, y: oRect.origin.y + (oRect.height - height) / 2)
+  }
+  
+  func multiply(_ multiplier: CGFloat) -> NSRect {
+    return NSRect(x: origin.x, y: origin.y, width: width * multiplier, height: height * multiplier)
+  }
 }
 
 extension Array {

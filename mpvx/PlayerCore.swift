@@ -184,6 +184,36 @@ class PlayerCore: NSObject {
     }
   }
   
+  func setFlip(_ enable: Bool) {
+    if enable {
+      if info.flipFilter == nil {
+        let vf = MPVFilter.flip()
+        addVideoFilter(vf)
+        info.flipFilter = vf
+      }
+    } else {
+      if let vf = info.flipFilter {
+        removeVideoFiler(vf)
+        info.flipFilter = nil
+      }
+    }
+  }
+  
+  func setMirror(_ enable: Bool) {
+    if enable {
+      if info.mirrorFilter == nil {
+        let vf = MPVFilter.mirror()
+        addVideoFilter(vf)
+        info.mirrorFilter = vf
+      }
+    } else {
+      if let vf = info.mirrorFilter {
+        removeVideoFiler(vf)
+        info.mirrorFilter = nil
+      }
+    }
+  }
+  
   func loadExternalAudioFile(_ url: URL) {
     mpvController.command([MPVCommand.audioAdd, url.path, nil])
     getTrackInfo()

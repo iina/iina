@@ -48,6 +48,9 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var aspectMenu: NSMenu!
   @IBOutlet weak var cropMenu: NSMenu!
   @IBOutlet weak var rotationMenu: NSMenu!
+  @IBOutlet weak var flipMenu: NSMenu!
+  @IBOutlet weak var mirror: NSMenuItem!
+  @IBOutlet weak var flip: NSMenuItem!
   
   
   
@@ -96,12 +99,16 @@ class MenuController: NSObject, NSMenuDelegate {
       menuItem -> Bool in
       return PlayerCore.shared.info.unsureCrop == menuItem.representedObject as? String
     }
-    // - rotation
-    var rotationTitles = AppData.rotations.map { "\($0)" }
+    // -- rotation
+    let rotationTitles = AppData.rotations.map { "\($0)\(Constants.String.degree)" }
     bind(menu: rotationMenu, withOptions: rotationTitles, objects: AppData.rotations, action: #selector(MainWindowController.menuChangeRotation(_:))) {
       menuItem -> Bool in
       return PlayerCore.shared.info.rotation == menuItem.representedObject as? Int
     }
+    // -- flip and mirror
+    flipMenu.delegate = self
+    flip.action = #selector(MainWindowController.menuToggleFlip(_:))
+    mirror.action = #selector(MainWindowController.menuToggleMirror(_:))
   }
   
   func updatePlaylist() {
@@ -143,6 +150,12 @@ class MenuController: NSObject, NSMenuDelegate {
     }
   }
   
+  func updateFlipAndMirror() {
+    let info = PlayerCore.shared.info
+    flip.state = info.flipFilter == nil ? NSOffState : NSOnState
+    mirror.state = info.mirrorFilter == nil ? NSOffState : NSOnState
+  }
+  
   /** Bind a menu with a list of available options. */
   private func bind(menu: NSMenu, withOptions titles: [String], objects: [Any]?, action: Selector?, checkStateBlock block: @escaping (NSMenuItem) -> Bool) {
     // options and objects must be same
@@ -174,6 +187,8 @@ class MenuController: NSObject, NSMenuDelegate {
       updateChapterList()
     } else if menu == videoTrackMenu {
       updateVideoTracks()
+    } else if menu == flipMenu {
+      updateFlipAndMirror()
     }
     // check convinently binded menus
     if let checkEnableBlock = menuBindingList[menu] {

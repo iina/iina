@@ -33,6 +33,7 @@ struct Constants {
     static let trackNameCell = "TrackNameCell"
   }
   struct String {
+    static let degree = "°"
     static let dot = "●"
     static let play = "▶︎"
     static let none = "<None>"

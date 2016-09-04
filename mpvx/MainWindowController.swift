@@ -798,6 +798,22 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
+  @IBAction func menuToggleFlip(_ sender: NSMenuItem) {
+    if playerCore.info.flipFilter == nil {
+      playerCore.setFlip(true)
+    } else {
+      playerCore.setFlip(false)
+    }
+  }
+  
+  @IBAction func menuToggleMirror(_ sender: NSMenuItem) {
+    if playerCore.info.mirrorFilter == nil {
+      playerCore.setMirror(true)
+    } else {
+      playerCore.setMirror(false)
+    }
+  }
+  
   @IBAction func menuChangeWindowSize(_ sender: NSMenuItem) {
     // -1: normal(non-retina), same as 1 when on non-retina screen
     //  0: half

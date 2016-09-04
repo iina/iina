@@ -12,12 +12,22 @@ class MPVFilter: NSObject {
   
   enum FilterType: String {
     case crop = "crop"
+    case flip = "flip"
+    case mirror = "mirror"
   }
   
   static func crop(w: Int?, h: Int?, x: Int?, y: Int?) -> MPVFilter {
     let f = MPVFilter(.crop)
     f.params = ["w": w?.toStr() ?? "", "h": h?.toStr() ?? "", "x": x?.toStr() ?? "", "y": y?.toStr() ?? ""]
     return f
+  }
+  
+  static func flip() -> MPVFilter {
+    return MPVFilter(.flip)
+  }
+  
+  static func mirror() -> MPVFilter {
+    return MPVFilter(.mirror)
   }
   
   var type: FilterType

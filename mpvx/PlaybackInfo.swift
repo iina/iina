@@ -32,6 +32,8 @@ class PlaybackInfo {
   var unsureAspect: String = "Default"
   var unsureCrop: String = "None"
   var cropFilter: MPVFilter?
+  var flipFilter: MPVFilter?
+  var mirrorFilter: MPVFilter?
   
   var volume: Int = 50 {
     didSet {

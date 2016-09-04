@@ -219,33 +219,24 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Audio" id="sW8-ri-eA5">
                         <items>
-                            <menuItem title="Open Quick Settings" id="43n-Ed-5kT">
+                            <menuItem title="Quick Settings Panel" id="43n-Ed-5kT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Fs0-R8-rnS"/>
                             <menuItem title="Audio Track" id="GF1-xB-KcA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Audio Track" systemMenu="font" id="DRb-Y8-xir">
-                                    <items>
-                                        <menuItem title="&lt;None&gt;" id="UGD-Lt-0yY">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="orderFrontFontPanel:" target="YLy-65-1bz" id="Vny-53-Sk1"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
+                                <menu key="submenu" title="Audio Track" systemMenu="font" id="DRb-Y8-xir"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="H9C-r1-7eo"/>
-                            <menuItem title="Increase Volume" id="Wbq-vt-hzX">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Increase Volume" tag="10" keyEquivalent="" id="Wbq-vt-hzX"/>
+                            <menuItem title="Increase Volume Slightly" tag="1" alternate="YES" keyEquivalent="" id="c6Y-0e-vgf">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Decrease Volume" alternate="YES" id="pdj-9C-Fn1">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Decrease Volume" tag="10" alternate="YES" keyEquivalent="" id="pdj-9C-Fn1"/>
+                            <menuItem title="Decrease Volume Slightly" tag="1" alternate="YES" keyEquivalent="" id="Zhv-Bz-I5V">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Mute" id="WOL-Us-ByA">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
+                            <menuItem title="Mute" keyEquivalent="m" id="WOL-Us-ByA"/>
                             <menuItem isSeparatorItem="YES" id="NlU-cH-tnU"/>
                             <menuItem title="Increase Audio Delay" id="4ae-MT-2L1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -254,6 +245,10 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Reset Audio Delay" id="H3d-jR-YCr">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="MVW-Uu-gB1"/>
+                            <menuItem title="Audio Filters..." id="8Zh-hU-Cc4">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
@@ -356,10 +351,14 @@
                 <outlet property="advancedScreenShot" destination="CKi-JE-yLT" id="qJL-1i-PHe"/>
                 <outlet property="alwaysOnTop" destination="wex-rX-PcY" id="3UN-lm-CVf"/>
                 <outlet property="aspectMenu" destination="KIb-Ix-D8J" id="hQ4-Bb-Rdu"/>
+                <outlet property="audioTrackMenu" destination="DRb-Y8-xir" id="Xxw-IB-hOR"/>
                 <outlet property="backward" destination="Sif-85-FF1" id="w4k-va-FGF"/>
                 <outlet property="chapter" destination="Fal-I4-PZk" id="DiY-VN-JpS"/>
                 <outlet property="chapterMenu" destination="d9c-me-L2H" id="Gs5-BM-ZGm"/>
                 <outlet property="cropMenu" destination="eo2-Tt-SLx" id="uii-FZ-2wL"/>
+                <outlet property="decreaseAudioDelay" destination="Lc4-4W-thE" id="rZo-3n-vZW"/>
+                <outlet property="decreaseVolume" destination="pdj-9C-Fn1" id="4yi-mZ-3Bt"/>
+                <outlet property="decreaseVolumeSlightly" destination="Zhv-Bz-I5V" id="M7D-Ni-nLm"/>
                 <outlet property="doubleSize" destination="Hal-18-Tnf" id="vnl-Rb-Y3o"/>
                 <outlet property="file" destination="dMs-cI-mzQ" id="upe-AE-Gf6"/>
                 <outlet property="fitToScreen" destination="SHd-63-Xoh" id="nzE-bA-wmk"/>
@@ -369,9 +368,13 @@
                 <outlet property="fullScreen" destination="6Eq-ni-6hG" id="y11-Q1-drn"/>
                 <outlet property="gotoScreenshotFolder" destination="lj0-Oo-7nB" id="Jlj-kX-fv0"/>
                 <outlet property="halfSize" destination="snW-S8-Cw5" id="PDi-lV-6HL"/>
+                <outlet property="increaseAudioDelay" destination="4ae-MT-2L1" id="nsv-LC-B9o"/>
+                <outlet property="increaseVolume" destination="Wbq-vt-hzX" id="EaU-fj-ClV"/>
+                <outlet property="increaseVolumeSlightly" destination="c6Y-0e-vgf" id="cpM-mR-RCr"/>
                 <outlet property="jumpTo" destination="2id-wn-xsC" id="wyH-9I-JHJ"/>
                 <outlet property="jumpToBegin" destination="2Ya-3g-1hy" id="atq-PX-lIt"/>
                 <outlet property="mirror" destination="JJq-qH-toq" id="EWI-VS-c7Q"/>
+                <outlet property="mute" destination="WOL-Us-ByA" id="Hry-sv-WhY"/>
                 <outlet property="nextFrame" destination="XDC-Pc-rS1" id="PGo-Nr-JQg"/>
                 <outlet property="normalSize" destination="1UK-8n-QPP" id="rpd-7S-IYd"/>
                 <outlet property="normalSizeRetina" destination="c1x-bx-69F" id="S22-F3-Ks9"/>
@@ -381,7 +384,9 @@
                 <outlet property="playlist" destination="Gi5-1S-RQB" id="oMH-9E-A8A"/>
                 <outlet property="playlistMenu" destination="aXa-aM-Jaq" id="Nkw-YD-NAi"/>
                 <outlet property="previousFrame" destination="oxF-BB-lBy" id="Kx8-vs-jMi"/>
+                <outlet property="quickSettingsAudio" destination="43n-Ed-5kT" id="Pq5-b6-o5G"/>
                 <outlet property="quickSettingsVideo" destination="2t8-Ot-yoO" id="Bey-Dn-4dY"/>
+                <outlet property="resetAudioDelay" destination="H3d-jR-YCr" id="Qx9-n3-F90"/>
                 <outlet property="rotationMenu" destination="5xN-ZB-VLI" id="YGx-Ae-oMp"/>
                 <outlet property="screenShot" destination="AoP-K6-Kb5" id="vTV-d5-sag"/>
                 <outlet property="stop" destination="deS-xK-iBb" id="ewy-yc-P6T"/>

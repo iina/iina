@@ -120,4 +120,11 @@ extension Int {
   func toStr() -> String {
     return "\(self)"
   }
+  
+  func constrain(min: Int, max: Int) -> Int {
+    var value = self
+    if self < min { value = min }
+    if self > max { value = max }
+    return value
+  }
 }

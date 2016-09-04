@@ -848,4 +848,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
+  @IBAction func menuChangeVolume(_ sender: NSMenuItem) {
+    if let volumeDelta = sender.representedObject as? Int {
+      let newVolume = volumeDelta + playerCore.info.volume
+      playerCore.setVolume(newVolume)
+      displayOSD(.volume(newVolume))
+    } else {
+      Utility.log("sender.representedObject is not int in menuChangeVolume()")
+    }
+  }
+  
+  @IBAction func menuToggleMute(_ sender: NSMenuItem) {
+    playerCore.toogleMute(nil)
+  }
+  
 }

@@ -133,9 +133,10 @@ class PlayerCore: NSObject {
   }
   
   func setVolume(_ volume: Int) {
-    info.volume = volume
-    mpvController.setInt(MPVProperty.volume, volume)
-    ud.set(volume, forKey: Preference.Key.softVolume)
+    let realVolume = volume.constrain(min: 0, max: 100)
+    info.volume = realVolume
+    mpvController.setInt(MPVProperty.volume, realVolume)
+    ud.set(realVolume, forKey: Preference.Key.softVolume)
   }
   
   func setTrack(_ index: Int, forType: MPVTrack.TrackType) {

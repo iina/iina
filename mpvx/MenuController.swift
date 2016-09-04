@@ -51,6 +51,17 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var flipMenu: NSMenu!
   @IBOutlet weak var mirror: NSMenuItem!
   @IBOutlet weak var flip: NSMenuItem!
+  //Audio
+  @IBOutlet weak var quickSettingsAudio: NSMenuItem!
+  @IBOutlet weak var audioTrackMenu: NSMenu!
+  @IBOutlet weak var increaseVolume: NSMenuItem!
+  @IBOutlet weak var increaseVolumeSlightly: NSMenuItem!
+  @IBOutlet weak var decreaseVolume: NSMenuItem!
+  @IBOutlet weak var decreaseVolumeSlightly: NSMenuItem!
+  @IBOutlet weak var mute: NSMenuItem!
+  @IBOutlet weak var increaseAudioDelay: NSMenuItem!
+  @IBOutlet weak var decreaseAudioDelay: NSMenuItem!
+  @IBOutlet weak var resetAudioDelay: NSMenuItem!
   
   
   
@@ -109,6 +120,15 @@ class MenuController: NSObject, NSMenuDelegate {
     flipMenu.delegate = self
     flip.action = #selector(MainWindowController.menuToggleFlip(_:))
     mirror.action = #selector(MainWindowController.menuToggleMirror(_:))
+    
+    // Audio menu
+    quickSettingsAudio.action = #selector(MainWindowController.menuShowAudioQuickSettings(_:))
+    // - volume
+    (increaseVolume.representedObject, decreaseVolume.representedObject, increaseVolumeSlightly.representedObject, decreaseVolumeSlightly.representedObject) = (5, -5, 1, -1)
+    for item in [increaseVolume, decreaseVolume, increaseVolumeSlightly, decreaseVolumeSlightly] {
+      item?.action = #selector(MainWindowController.menuChangeVolume(_:))
+    }
+    mute.action = #selector(MainWindowController.menuToggleMute(_:))
   }
   
   func updatePlaylist() {

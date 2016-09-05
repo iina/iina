@@ -268,14 +268,27 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="EvW-J9-wqJ"/>
-                            <menuItem title="Subtitle Track" id="uGZ-lo-pJJ">
+                            <menuItem title="Subtitle" id="uGZ-lo-pJJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Subtitle Track" systemMenu="font" id="16p-PA-x34">
+                                <menu key="submenu" title="Subtitle" systemMenu="font" id="16p-PA-x34">
                                     <items>
                                         <menuItem title="&lt;None&gt;" id="wrS-JG-jF6">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontFontPanel:" target="YLy-65-1bz" id="Lg6-9S-G4V"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Second Subtitle" id="mGw-jm-5x2">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Second Subtitle" systemMenu="font" id="UwY-P2-Xdb">
+                                    <items>
+                                        <menuItem title="&lt;None&gt;" id="9pa-9C-ueQ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="orderFrontFontPanel:" target="YLy-65-1bz" id="We2-yo-B9l"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -298,6 +311,22 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="UZ7-ew-L1i"/>
+                            <menuItem title="Subtitle Delay: " enabled="NO" id="THG-4o-U6A">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Subtitle Delay +0.5s" id="pAo-L5-qTO">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Subtitle Delay - 0.5s" id="LsU-Qz-dax">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="toggleToolbarShown:" target="-1" id="lSt-4f-ewa"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Reset Subtitle Delay" id="SLr-6g-Mgh">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="HAm-FJ-1KF"/>
                             <menuItem title="Subtitle Position" id="rme-fr-5rr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
@@ -365,6 +394,8 @@
                 <outlet property="chapterMenu" destination="d9c-me-L2H" id="Gs5-BM-ZGm"/>
                 <outlet property="cropMenu" destination="eo2-Tt-SLx" id="uii-FZ-2wL"/>
                 <outlet property="decreaseAudioDelay" destination="Lc4-4W-thE" id="rZo-3n-vZW"/>
+                <outlet property="decreaseSubDelay" destination="LsU-Qz-dax" id="5Yw-0e-UyZ"/>
+                <outlet property="decreaseTextSize" destination="Bli-YK-Rl0" id="crH-X5-OVf"/>
                 <outlet property="decreaseVolume" destination="pdj-9C-Fn1" id="4yi-mZ-3Bt"/>
                 <outlet property="decreaseVolumeSlightly" destination="Zhv-Bz-I5V" id="M7D-Ni-nLm"/>
                 <outlet property="doubleSize" destination="Hal-18-Tnf" id="vnl-Rb-Y3o"/>
@@ -377,10 +408,13 @@
                 <outlet property="gotoScreenshotFolder" destination="lj0-Oo-7nB" id="Jlj-kX-fv0"/>
                 <outlet property="halfSize" destination="snW-S8-Cw5" id="PDi-lV-6HL"/>
                 <outlet property="increaseAudioDelay" destination="4ae-MT-2L1" id="nsv-LC-B9o"/>
+                <outlet property="increaseSubDelay" destination="pAo-L5-qTO" id="55m-ex-for"/>
+                <outlet property="increaseTextSize" destination="XHu-Dl-Vq2" id="XXf-48-N36"/>
                 <outlet property="increaseVolume" destination="Wbq-vt-hzX" id="EaU-fj-ClV"/>
                 <outlet property="increaseVolumeSlightly" destination="c6Y-0e-vgf" id="cpM-mR-RCr"/>
                 <outlet property="jumpTo" destination="2id-wn-xsC" id="wyH-9I-JHJ"/>
                 <outlet property="jumpToBegin" destination="2Ya-3g-1hy" id="atq-PX-lIt"/>
+                <outlet property="loadExternalSub" destination="k6x-hf-ATi" id="lVp-BV-A2C"/>
                 <outlet property="mirror" destination="JJq-qH-toq" id="EWI-VS-c7Q"/>
                 <outlet property="mute" destination="WOL-Us-ByA" id="Hry-sv-WhY"/>
                 <outlet property="nextFrame" destination="XDC-Pc-rS1" id="PGo-Nr-JQg"/>
@@ -393,11 +427,18 @@
                 <outlet property="playlistMenu" destination="aXa-aM-Jaq" id="Nkw-YD-NAi"/>
                 <outlet property="previousFrame" destination="oxF-BB-lBy" id="Kx8-vs-jMi"/>
                 <outlet property="quickSettingsAudio" destination="43n-Ed-5kT" id="Pq5-b6-o5G"/>
+                <outlet property="quickSettingsSub" destination="8y7-Cy-lKT" id="Dh8-CP-Coh"/>
                 <outlet property="quickSettingsVideo" destination="2t8-Ot-yoO" id="Bey-Dn-4dY"/>
                 <outlet property="resetAudioDelay" destination="H3d-jR-YCr" id="Qx9-n3-F90"/>
+                <outlet property="resetSubDelay" destination="SLr-6g-Mgh" id="8oW-hm-TNq"/>
+                <outlet property="resetTextSize" destination="P1a-ot-P31" id="fJk-GP-GBM"/>
                 <outlet property="rotationMenu" destination="5xN-ZB-VLI" id="YGx-Ae-oMp"/>
                 <outlet property="screenShot" destination="AoP-K6-Kb5" id="vTV-d5-sag"/>
+                <outlet property="secondSubTrackMenu" destination="UwY-P2-Xdb" id="D3B-WW-bAk"/>
                 <outlet property="stop" destination="deS-xK-iBb" id="ewy-yc-P6T"/>
+                <outlet property="subDelayIndicator" destination="THG-4o-U6A" id="8uv-HK-hwl"/>
+                <outlet property="subMenu" destination="EKp-Qx-4Mn" id="BeV-rZ-uYC"/>
+                <outlet property="subTrackMenu" destination="16p-PA-x34" id="yGc-SC-6rd"/>
                 <outlet property="videoTrack" destination="j8P-Gb-HR7" id="hho-ys-R88"/>
                 <outlet property="videoTrackMenu" destination="FTu-CF-O0R" id="Iw7-fm-Ryz"/>
                 <outlet property="volumeIndicator" destination="iQF-1S-9EK" id="grJ-Ta-Elr"/>

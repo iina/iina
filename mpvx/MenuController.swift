@@ -65,6 +65,20 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var increaseAudioDelay: NSMenuItem!
   @IBOutlet weak var decreaseAudioDelay: NSMenuItem!
   @IBOutlet weak var resetAudioDelay: NSMenuItem!
+  // Subtitle
+  @IBOutlet weak var subMenu: NSMenu!
+  @IBOutlet weak var quickSettingsSub: NSMenuItem!
+  @IBOutlet weak var subTrackMenu: NSMenu!
+  @IBOutlet weak var secondSubTrackMenu: NSMenu!
+  @IBOutlet weak var loadExternalSub: NSMenuItem!
+  @IBOutlet weak var increaseTextSize: NSMenuItem!
+  @IBOutlet weak var decreaseTextSize: NSMenuItem!
+  @IBOutlet weak var resetTextSize: NSMenuItem!
+  @IBOutlet weak var subDelayIndicator: NSMenuItem!
+  @IBOutlet weak var increaseSubDelay: NSMenuItem!
+  @IBOutlet weak var decreaseSubDelay: NSMenuItem!
+  @IBOutlet weak var resetSubDelay: NSMenuItem!
+  
   
   
   
@@ -140,9 +154,16 @@ class MenuController: NSObject, NSMenuDelegate {
       item?.action = #selector(MainWindowController.menuChangeAudioDelay(_:))
     }
     resetAudioDelay.action = #selector(MainWindowController.menuResetAudioDelay(_:))
+    
+    // Subtitle
+    subMenu.delegate = self
+    quickSettingsSub.action = #selector(MainWindowController.menuShowSubQuickSettings(_:))
+    loadExternalSub.action = #selector(MainWindowController.menuLoadExternalSub(_:))
+    subTrackMenu.delegate = self
+    secondSubTrackMenu.delegate = self
   }
   
-  func updatePlaylist() {
+  private func updatePlaylist() {
     playlistMenu.removeAllItems()
     playlistMenu.addItem(withTitle: "Show/Hide Playlist Panel", action: #selector(MainWindowController.menuShowPlaylistPanel(_:)), keyEquivalent: "")
     playlistMenu.addItem(NSMenuItem.separator())
@@ -152,7 +173,7 @@ class MenuController: NSObject, NSMenuDelegate {
     }
   }
   
-  func updateChapterList() {
+  private func updateChapterList() {
     chapterMenu.removeAllItems()
     chapterMenu.addItem(withTitle: "Show/Hide Chapter Panel", action: #selector(MainWindowController.menuShowChaptersPanel(_:)), keyEquivalent: "")
     chapterMenu.addItem(NSMenuItem.separator())
@@ -166,46 +187,36 @@ class MenuController: NSObject, NSMenuDelegate {
     }
   }
   
-  func updateVideoTracks() {
+  private func updateTracks(forMenu menu: NSMenu, type: MPVTrack.TrackType) {
     let info = PlayerCore.shared.info
-    videoTrackMenu.removeAllItems()
+    menu.removeAllItems()
     let noTrackMenuItem = NSMenuItem(title: Constants.String.none, action: #selector(MainWindowController.menuChangeTrack(_:)), keyEquivalent: "")
-    noTrackMenuItem.representedObject = MPVTrack.noneVideoTrack
-    if info.vid == 0 {  // no track
+    noTrackMenuItem.representedObject = MPVTrack.emptyTrack(type)
+    if info.trackId(type) == 0 {  // no track
       noTrackMenuItem.state = NSOnState
     }
-    videoTrackMenu.addItem(noTrackMenuItem)
-    for track in info.videoTracks {
-      videoTrackMenu.addItem(withTitle: track.readableTitle, action: #selector(MainWindowController.menuChangeTrack(_:)),
-                             tag: nil, obj: track, stateOn: track.id == info.vid)
+    menu.addItem(noTrackMenuItem)
+    for track in info.trackList(type) {
+      menu.addItem(withTitle: track.readableTitle, action: #selector(MainWindowController.menuChangeTrack(_:)),
+                             tag: nil, obj: track, stateOn: track.id == info.trackId(type))
     }
   }
   
-  func updateAudioMenu() {
+  private func updateAudioMenu() {
     let player = PlayerCore.shared
     volumeIndicator.title = "\(Constants.String.volume): \(player.info.volume)%"
     audioDelayIndicator.title = "\(Constants.String.audioDelay): \(player.info.audioDelay)s"
   }
   
-  func updateAudioTracks() {
-    let info = PlayerCore.shared.info
-    audioTrackMenu.removeAllItems()
-    let noTrackMenuItem = NSMenuItem(title: Constants.String.none, action: #selector(MainWindowController.menuChangeTrack(_:)), keyEquivalent: "")
-    noTrackMenuItem.representedObject = MPVTrack.noneAudioTrack
-    if info.aid == 0 {  // no track
-      noTrackMenuItem.state = NSOnState
-    }
-    audioTrackMenu.addItem(noTrackMenuItem)
-    for track in info.audioTracks {
-      audioTrackMenu.addItem(withTitle: track.readableTitle, action: #selector(MainWindowController.menuChangeTrack(_:)),
-                             tag: nil, obj: track, stateOn: track.id == info.aid)
-    }
-  }
-  
-  func updateFlipAndMirror() {
+  private func updateFlipAndMirror() {
     let info = PlayerCore.shared.info
     flip.state = info.flipFilter == nil ? NSOffState : NSOnState
     mirror.state = info.mirrorFilter == nil ? NSOffState : NSOnState
+  }
+  
+  private func updateSubMenu() {
+    let player = PlayerCore.shared
+    subDelayIndicator.title = "\(Constants.String.subDelay): \(player.info.subDelay)s"
   }
   
   /** Bind a menu with a list of available options. */
@@ -238,13 +249,19 @@ class MenuController: NSObject, NSMenuDelegate {
     } else if menu == chapterMenu {
       updateChapterList()
     } else if menu == videoTrackMenu {
-      updateVideoTracks()
+      updateTracks(forMenu: menu, type: .video)
     } else if menu == flipMenu {
       updateFlipAndMirror()
     } else if menu == audioMenu {
       updateAudioMenu()
     } else if menu == audioTrackMenu {
-      updateAudioTracks()
+      updateTracks(forMenu: menu, type: .audio)
+    } else if menu == subMenu {
+      updateSubMenu()
+    } else if menu == subTrackMenu {
+      updateTracks(forMenu: menu, type: .sub)
+    } else if menu == secondSubTrackMenu {
+      updateTracks(forMenu: menu, type: .secondSub)
     }
     // check convinently binded menus
     if let checkEnableBlock = menuBindingList[menu] {

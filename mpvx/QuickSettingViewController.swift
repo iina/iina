@@ -110,7 +110,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     button.attributedTitle = NSAttributedString(string: title, attributes: Utility.tabTitleActiveFontAttributes)
   }
   
-  // MARK: NSTableView delegate
+  // MARK: - NSTableView delegate
   
   func numberOfRows(in tableView: NSTableView) -> Int {
     if tableView == videoTableView {

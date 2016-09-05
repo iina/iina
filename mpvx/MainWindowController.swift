@@ -886,4 +886,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     displayOSD(.audioDelay(0))
   }
   
+  @IBAction func menuLoadExternalSub(_ sender: NSMenuItem) {
+    Utility.quickOpenPanel(title: "Load external subtitle file") { url in
+      self.playerCore.loadExternalSubFile(url)
+    }
+  }
+  
 }

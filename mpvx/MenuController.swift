@@ -52,13 +52,16 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var mirror: NSMenuItem!
   @IBOutlet weak var flip: NSMenuItem!
   //Audio
+  @IBOutlet weak var audioMenu: NSMenu!
   @IBOutlet weak var quickSettingsAudio: NSMenuItem!
   @IBOutlet weak var audioTrackMenu: NSMenu!
+  @IBOutlet weak var volumeIndicator: NSMenuItem!
   @IBOutlet weak var increaseVolume: NSMenuItem!
   @IBOutlet weak var increaseVolumeSlightly: NSMenuItem!
   @IBOutlet weak var decreaseVolume: NSMenuItem!
   @IBOutlet weak var decreaseVolumeSlightly: NSMenuItem!
   @IBOutlet weak var mute: NSMenuItem!
+  @IBOutlet weak var audioDelayIndicator: NSMenuItem!
   @IBOutlet weak var increaseAudioDelay: NSMenuItem!
   @IBOutlet weak var decreaseAudioDelay: NSMenuItem!
   @IBOutlet weak var resetAudioDelay: NSMenuItem!
@@ -87,8 +90,8 @@ class MenuController: NSObject, NSMenuDelegate {
     
     // Video menu
     quickSettingsVideo.action = #selector(MainWindowController.menuShowVideoQuickSettings(_:))
-    // -- window size
     videoTrackMenu.delegate = self
+    // -- window size
     (halfSize.tag, normalSize.tag, normalSizeRetina.tag, doubleSize.tag, fitToScreen.tag) = (0, 1, -1, 2, 3)
     for item in [halfSize, normalSize, normalSizeRetina, doubleSize, fitToScreen] {
       item?.action = #selector(MainWindowController.menuChangeWindowSize(_:))
@@ -122,13 +125,21 @@ class MenuController: NSObject, NSMenuDelegate {
     mirror.action = #selector(MainWindowController.menuToggleMirror(_:))
     
     // Audio menu
+    audioMenu.delegate = self
     quickSettingsAudio.action = #selector(MainWindowController.menuShowAudioQuickSettings(_:))
+    audioTrackMenu.delegate = self
     // - volume
     (increaseVolume.representedObject, decreaseVolume.representedObject, increaseVolumeSlightly.representedObject, decreaseVolumeSlightly.representedObject) = (5, -5, 1, -1)
     for item in [increaseVolume, decreaseVolume, increaseVolumeSlightly, decreaseVolumeSlightly] {
       item?.action = #selector(MainWindowController.menuChangeVolume(_:))
     }
     mute.action = #selector(MainWindowController.menuToggleMute(_:))
+    // - audio delay
+    (increaseAudioDelay.representedObject, decreaseAudioDelay.representedObject) = (0.5, -0.5)
+    for item in [increaseAudioDelay, decreaseAudioDelay] {
+      item?.action = #selector(MainWindowController.menuChangeAudioDelay(_:))
+    }
+    resetAudioDelay.action = #selector(MainWindowController.menuResetAudioDelay(_:))
   }
   
   func updatePlaylist() {
@@ -167,6 +178,27 @@ class MenuController: NSObject, NSMenuDelegate {
     for track in info.videoTracks {
       videoTrackMenu.addItem(withTitle: track.readableTitle, action: #selector(MainWindowController.menuChangeTrack(_:)),
                              tag: nil, obj: track, stateOn: track.id == info.vid)
+    }
+  }
+  
+  func updateAudioMenu() {
+    let player = PlayerCore.shared
+    volumeIndicator.title = "\(Constants.String.volume): \(player.info.volume)%"
+    audioDelayIndicator.title = "\(Constants.String.audioDelay): \(player.info.audioDelay)s"
+  }
+  
+  func updateAudioTracks() {
+    let info = PlayerCore.shared.info
+    audioTrackMenu.removeAllItems()
+    let noTrackMenuItem = NSMenuItem(title: Constants.String.none, action: #selector(MainWindowController.menuChangeTrack(_:)), keyEquivalent: "")
+    noTrackMenuItem.representedObject = MPVTrack.noneAudioTrack
+    if info.aid == 0 {  // no track
+      noTrackMenuItem.state = NSOnState
+    }
+    audioTrackMenu.addItem(noTrackMenuItem)
+    for track in info.audioTracks {
+      audioTrackMenu.addItem(withTitle: track.readableTitle, action: #selector(MainWindowController.menuChangeTrack(_:)),
+                             tag: nil, obj: track, stateOn: track.id == info.aid)
     }
   }
   
@@ -209,6 +241,10 @@ class MenuController: NSObject, NSMenuDelegate {
       updateVideoTracks()
     } else if menu == flipMenu {
       updateFlipAndMirror()
+    } else if menu == audioMenu {
+      updateAudioMenu()
+    } else if menu == audioTrackMenu {
+      updateAudioTracks()
     }
     // check convinently binded menus
     if let checkEnableBlock = menuBindingList[menu] {

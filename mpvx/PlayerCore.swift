@@ -80,15 +80,9 @@ class PlayerCore: NSObject {
   }
   
   func toogleMute(_ set: Bool?) {
-    if let setMute = set {
-      mpvController.setFlag(MPVProperty.mute, setMute)
-    } else {
-      if (mpvController.getFlag(MPVProperty.mute)) {
-        mpvController.setFlag(MPVProperty.mute, false)
-      } else {
-        mpvController.setFlag(MPVProperty.mute, true)
-      }
-    }
+    let newState = set ?? !mpvController.getFlag(MPVProperty.mute)
+    mpvController.setFlag(MPVProperty.mute, newState)
+    info.isMuted = newState
   }
   
   func seek(percent: Double) {
@@ -229,10 +223,12 @@ class PlayerCore: NSObject {
   
   func setAudioDelay(_ delay: Double) {
     mpvController.setDouble(MPVProperty.audioDelay, delay)
+    info.audioDelay = delay
   }
   
   func setSubDelay(_ delay: Double) {
     mpvController.setDouble(MPVProperty.subDelay, delay)
+    info.subDelay = delay
   }
   
   func addToPlaylist(_ path: String) {

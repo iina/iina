@@ -41,8 +41,13 @@ class PlaybackInfo {
       else if volume > 100 { volume = 100 }
     }
   }
+  
+  var isMuted: Bool = false
 
   var playSpeed: Double = 0
+  
+  var audioDelay: Double = 0
+  var subDelay: Double = 0
   
   var audioTracks: [MPVTrack] = []
   var videoTracks: [MPVTrack] = []

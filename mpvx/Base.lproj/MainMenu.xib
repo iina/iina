@@ -228,20 +228,26 @@
                                 <menu key="submenu" title="Audio Track" systemMenu="font" id="DRb-Y8-xir"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="H9C-r1-7eo"/>
-                            <menuItem title="Increase Volume" tag="10" keyEquivalent="" id="Wbq-vt-hzX"/>
-                            <menuItem title="Increase Volume Slightly" tag="1" alternate="YES" keyEquivalent="" id="c6Y-0e-vgf">
+                            <menuItem title="Volume:" enabled="NO" id="iQF-1S-9EK">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Volume + 10%" tag="10" keyEquivalent="" id="Wbq-vt-hzX"/>
+                            <menuItem title="Volume - 1%" tag="1" alternate="YES" keyEquivalent="" id="c6Y-0e-vgf">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Decrease Volume" tag="10" alternate="YES" keyEquivalent="" id="pdj-9C-Fn1"/>
-                            <menuItem title="Decrease Volume Slightly" tag="1" alternate="YES" keyEquivalent="" id="Zhv-Bz-I5V">
+                            <menuItem title="Volume - 10%" tag="10" alternate="YES" keyEquivalent="" id="pdj-9C-Fn1"/>
+                            <menuItem title="Volume - 1%" tag="1" alternate="YES" keyEquivalent="" id="Zhv-Bz-I5V">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
                             <menuItem title="Mute" keyEquivalent="m" id="WOL-Us-ByA"/>
                             <menuItem isSeparatorItem="YES" id="NlU-cH-tnU"/>
-                            <menuItem title="Increase Audio Delay" id="4ae-MT-2L1">
+                            <menuItem title="Audio Delay:" enabled="NO" id="foC-r3-8mp">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Decrease Audio Delay" id="Lc4-4W-thE">
+                            <menuItem title="Audio Delay + 0.5s" id="4ae-MT-2L1">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Audio Delay - 0.5s" id="Lc4-4W-thE">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Reset Audio Delay" id="H3d-jR-YCr">
@@ -351,6 +357,8 @@
                 <outlet property="advancedScreenShot" destination="CKi-JE-yLT" id="qJL-1i-PHe"/>
                 <outlet property="alwaysOnTop" destination="wex-rX-PcY" id="3UN-lm-CVf"/>
                 <outlet property="aspectMenu" destination="KIb-Ix-D8J" id="hQ4-Bb-Rdu"/>
+                <outlet property="audioDelayIndicator" destination="foC-r3-8mp" id="FhX-cJ-FaB"/>
+                <outlet property="audioMenu" destination="sW8-ri-eA5" id="e3E-94-i4D"/>
                 <outlet property="audioTrackMenu" destination="DRb-Y8-xir" id="Xxw-IB-hOR"/>
                 <outlet property="backward" destination="Sif-85-FF1" id="w4k-va-FGF"/>
                 <outlet property="chapter" destination="Fal-I4-PZk" id="DiY-VN-JpS"/>
@@ -392,6 +400,7 @@
                 <outlet property="stop" destination="deS-xK-iBb" id="ewy-yc-P6T"/>
                 <outlet property="videoTrack" destination="j8P-Gb-HR7" id="hho-ys-R88"/>
                 <outlet property="videoTrackMenu" destination="FTu-CF-O0R" id="Iw7-fm-Ryz"/>
+                <outlet property="volumeIndicator" destination="iQF-1S-9EK" id="grJ-Ta-Elr"/>
             </connections>
         </customObject>
     </objects>

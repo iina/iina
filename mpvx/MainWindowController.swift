@@ -481,7 +481,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)
-    updateVolume()
+    updateVolumeFromUd()
     
   }
   
@@ -503,6 +503,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   func updateVolume() {
+    volumeSlider.integerValue = playerCore.info.volume
+    muteButton.state = playerCore.info.isMuted ? NSOnState : NSOffState
+  }
+  
+  func updateVolumeFromUd() {
     let volume = ud.integer(forKey: Preference.Key.softVolume)
     playerCore.setVolume(volume)
     volumeSlider.integerValue = volume
@@ -535,12 +540,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   /** mute button */
   @IBAction func muteButtonAction(_ sender: NSButton) {
-    if sender.state == NSOnState {
-      playerCore.toogleMute(true)
+    playerCore.toogleMute(nil)
+    if playerCore.info.isMuted {
       displayOSD(.mute)
-    }
-    if sender.state == NSOffState {
-      playerCore.toogleMute(false)
+    } else {
       displayOSD(.unMute)
     }
   }
@@ -860,6 +863,27 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   @IBAction func menuToggleMute(_ sender: NSMenuItem) {
     playerCore.toogleMute(nil)
+    if playerCore.info.isMuted {
+      displayOSD(.mute)
+    } else {
+      displayOSD(.unMute)
+    }
+    updateVolume()
+  }
+  
+  @IBAction func menuChangeAudioDelay(_ sender: NSMenuItem) {
+    if let delayDelta = sender.representedObject as? Double {
+      let newDelay = playerCore.info.audioDelay + delayDelta
+      playerCore.setAudioDelay(newDelay)
+      displayOSD(.audioDelay(newDelay))
+    } else {
+      Utility.log("sender.representedObject is not Double in menuChangeAudioDelay()")
+    }
+  }
+  
+  @IBAction func menuResetAudioDelay(_ sender: NSMenuItem) {
+    playerCore.setAudioDelay(0)
+    displayOSD(.audioDelay(0))
   }
   
 }

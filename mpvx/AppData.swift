@@ -38,6 +38,9 @@ struct Constants {
     static let play = "▶︎"
     static let none = "<None>"
     static let chapter = "Chapter"
+    static let volume = "Volume"
+    static let audioDelay = "Audio Delay"
+    static let subDelay = "Subtitle Delay"
     static let fullScreen = "Full Screen"
     static let exitFullScreen = "Exit Full Screen"
   }

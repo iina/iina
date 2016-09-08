@@ -892,4 +892,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
+  @IBAction func menuChangeSubDelay(_ sender: NSMenuItem) {
+    if let delayDelta = sender.representedObject as? Double {
+      let newDelay = playerCore.info.subDelay + delayDelta
+      playerCore.setSubDelay(newDelay)
+      displayOSD(.subDelay(newDelay))
+    } else {
+      Utility.log("sender.representedObject is not Double in menuChangeAudioDelay()")
+    }
+  }
+  
+  @IBAction func menuResetSubDelay(_ sender: NSMenuItem) {
+    playerCore.setSubDelay(0)
+    displayOSD(.subDelay(0))
+  }
+  
 }

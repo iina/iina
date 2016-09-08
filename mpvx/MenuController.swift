@@ -161,6 +161,12 @@ class MenuController: NSObject, NSMenuDelegate {
     loadExternalSub.action = #selector(MainWindowController.menuLoadExternalSub(_:))
     subTrackMenu.delegate = self
     secondSubTrackMenu.delegate = self
+    // - delay
+    (increaseSubDelay.representedObject, decreaseSubDelay.representedObject) = (0.5, -0.5)
+    for item in [increaseSubDelay, decreaseSubDelay] {
+      item?.action = #selector(MainWindowController.menuChangeSubDelay(_:))
+    }
+    resetSubDelay.action = #selector(MainWindowController.menuResetSubDelay(_:))
   }
   
   private func updatePlaylist() {

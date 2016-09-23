@@ -29,6 +29,7 @@
 		8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847644091D48CC3D004F6DF5 /* MPVCommand.swift */; };
 		8476440C1D48F63D004F6DF5 /* OSDMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476440B1D48F63D004F6DF5 /* OSDMessage.swift */; };
 		84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */; };
+		848290751D95978100C3C76C /* libmpv.1.22.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 848290741D95978100C3C76C /* libmpv.1.22.0.dylib */; };
 		8487BEC11D744FA800FD17B0 /* FlippedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487BEC01D744FA800FD17B0 /* FlippedView.swift */; };
 		8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487BEC21D76A1AF00FD17B0 /* MenuController.swift */; };
 		84A0BA901D2F8D4100BC8DA1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA8F1D2F8D4100BC8DA1 /* Error.swift */; };
@@ -51,7 +52,6 @@
 		84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F061D2F5E76004FA5A1 /* Utility.swift */; };
 		84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */; };
 		84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7258E1D486185000DEF1B /* MPVProperty.swift */; };
-		84FF84791D2FF698001B318A /* libmpv.1.21.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84741D2FF698001B318A /* libmpv.1.21.0.dylib */; };
 		84FF847A1D2FF698001B318A /* libmpv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84751D2FF698001B318A /* libmpv.1.dylib */; };
 		84FF847B1D2FF698001B318A /* libmpv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84761D2FF698001B318A /* libmpv.dylib */; };
 		84FF847C1D2FF698001B318A /* mpv.pc in Resources */ = {isa = PBXBuildFile; fileRef = 84FF84781D2FF698001B318A /* mpv.pc */; };
@@ -90,6 +90,7 @@
 		847644091D48CC3D004F6DF5 /* MPVCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVCommand.swift; sourceTree = "<group>"; };
 		8476440B1D48F63D004F6DF5 /* OSDMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OSDMessage.swift; sourceTree = "<group>"; };
 		84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackInfo.swift; sourceTree = "<group>"; };
+		848290741D95978100C3C76C /* libmpv.1.22.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.22.0.dylib; path = libmpv/lib/libmpv.1.22.0.dylib; sourceTree = "<group>"; };
 		8487BEC01D744FA800FD17B0 /* FlippedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlippedView.swift; sourceTree = "<group>"; };
 		8487BEC21D76A1AF00FD17B0 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		8497A4831D2FF573005F504F /* mpvx-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mpvx-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -133,7 +134,7 @@
 			files = (
 				84FF847B1D2FF698001B318A /* libmpv.dylib in Frameworks */,
 				84FF847A1D2FF698001B318A /* libmpv.1.dylib in Frameworks */,
-				84FF84791D2FF698001B318A /* libmpv.1.21.0.dylib in Frameworks */,
+				848290751D95978100C3C76C /* libmpv.1.22.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +168,14 @@
 				84C8D58E1D794CE600D98A0E /* MPVFilter.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		848290731D95978100C3C76C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				848290741D95978100C3C76C /* libmpv.1.22.0.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		84A0BAA21D2FAE8200BC8DA1 /* Assets */ = {
@@ -264,6 +273,7 @@
 				84EB1ED81D2F51D3004FA5A1 /* mpvx */,
 				84EB1EE81D2F51D3004FA5A1 /* mpvxTests */,
 				84EB1ED71D2F51D3004FA5A1 /* Products */,
+				848290731D95978100C3C76C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

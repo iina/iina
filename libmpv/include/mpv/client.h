@@ -215,7 +215,7 @@ extern "C" {
  * relational operators (<, >, <=, >=).
  */
 #define MPV_MAKE_VERSION(major, minor) (((major) << 16) | (minor) | 0UL)
-#define MPV_CLIENT_API_VERSION MPV_MAKE_VERSION(1, 21)
+#define MPV_CLIENT_API_VERSION MPV_MAKE_VERSION(1, 22)
 
 /**
  * Return the MPV_CLIENT_API_VERSION the mpv source has been compiled with.
@@ -248,7 +248,7 @@ typedef enum mpv_error {
      * making asynchronous requests. (Bugs in the client API implementation
      * could also trigger this, e.g. if events become "lost".)
      */
-    MPV_ERROR_EVENT_QUEUE_FULL = -1,
+    MPV_ERROR_EVENT_QUEUE_FULL  = -1,
     /**
      * Memory allocation failed.
      */
@@ -299,7 +299,7 @@ typedef enum mpv_error {
      */
     MPV_ERROR_COMMAND           = -12,
     /**
-     * Generic error on loading (used with mpv_event_end_file.error).
+     * Generic error on loading (usually used with mpv_event_end_file.error).
      */
     MPV_ERROR_LOADING_FAILED    = -13,
     /**
@@ -329,7 +329,11 @@ typedef enum mpv_error {
     /**
      * The API function which was called is a stub only.
      */
-    MPV_ERROR_NOT_IMPLEMENTED   = -19
+    MPV_ERROR_NOT_IMPLEMENTED   = -19,
+    /**
+     * Unspecified error.
+     */
+    MPV_ERROR_GENERIC           = -20
 } mpv_error;
 
 /**
@@ -660,7 +664,7 @@ typedef enum mpv_format {
     MPV_FORMAT_NODE_MAP         = 8,
     /**
      * A raw, untyped byte array. Only used only with mpv_node, and only in
-     * some very special situations. (Currently, only for the screenshot_raw
+     * some very special situations. (Currently, only for the screenshot-raw
      * command.)
      */
     MPV_FORMAT_BYTE_ARRAY       = 9
@@ -1148,13 +1152,13 @@ typedef enum mpv_event_id {
      * @deprecated This was used internally with the internal "script_dispatch"
      *             command to dispatch keyboard and mouse input for the OSC.
      *             It was never useful in general and has been completely
-     *             replaced with "script_binding".
+     *             replaced with "script-binding".
      *             This event never happens anymore, and is included in this
      *             header only for compatibility.
      */
     MPV_EVENT_SCRIPT_INPUT_DISPATCH = 15,
     /**
-     * Triggered by the script_message input command. The command uses the
+     * Triggered by the script-message input command. The command uses the
      * first argument of the command as client name (see mpv_client_name()) to
      * dispatch the message, and passes along all arguments starting from the
      * second argument as strings.
@@ -1446,7 +1450,7 @@ int mpv_request_event(mpv_handle *ctx, mpv_event_id event, int enable);
  * required log level for a message to be received with MPV_EVENT_LOG_MESSAGE.
  *
  * @param min_level Minimal log level as string. Valid log levels:
- *                      no fatal error warn info status v debug trace
+ *                      no fatal error warn info v debug trace
  *                  The value "no" disables all messages. This is the default.
  *                  An exception is the value "terminal-default", which uses the
  *                  log level as set by the "--msg-level" option. This works

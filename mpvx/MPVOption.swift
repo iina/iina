@@ -41,8 +41,8 @@ struct MPVOption {
     static let shuffle = "shuffle"
     /** --chapter=<start[-end]> */
     static let chapter = "chapter"
-    /** --playlist-pos=<no|index> */
-    static let playlistPos = "playlist-pos"
+    /** --playlist-start=<auto|index> */
+    static let playlistStart = "playlist-start"
     /** --playlist=<filename> */
     static let playlist = "playlist"
     /** --chapter-merge-threshold=<number> */
@@ -82,6 +82,8 @@ struct MPVOption {
   struct ProgramBehavior {
     /** --help */
     static let help = "help"
+    /** --h */
+    static let h = "h"
     /** --version */
     static let version = "version"
     /** --no-config */
@@ -137,14 +139,12 @@ struct MPVOption {
   }
 
   struct Video {
-    /** --vo=<driver1[:suboption1[=value]:...] */
+    /** --vo=<driver> */
     static let vo = "vo"
     /** --vd=<[+|-]family1:(*|decoder1) */
     static let vd = "vd"
     /** --vf=<filter1[=parameter1:parameter2:...] */
     static let vf = "vf"
-    /** --no-video */
-    static let noVideo = "no-video"
     /** --untimed */
     static let untimed = "untimed"
     /** --framedrop=<mode> */
@@ -159,13 +159,11 @@ struct MPVOption {
     static let videotoolboxFormat = "videotoolbox-format"
     /** --panscan=<0.0-1.0> */
     static let panscan = "panscan"
-    /** --video-aspect=<ratio> */
+    /** --video-aspect=<ratio|no> */
     static let videoAspect = "video-aspect"
-    /** --no-video-aspect */
-    static let noVideoAspect = "no-video-aspect"
     /** --video-aspect-method=<hybrid|bitstream|container> */
     static let videoAspectMethod = "video-aspect-method"
-    /** --video-unscaled */
+    /** --video-unscaled=<no|yes|downscale-big> */
     static let videoUnscaled = "video-unscaled"
     /** --video-pan-x=<value> */
     static let videoPanX = "video-pan-x"
@@ -226,9 +224,11 @@ struct MPVOption {
     static let audioPitchCorrection = "audio-pitch-correction"
     /** --audio-device=<name> */
     static let audioDevice = "audio-device"
+    /** --audio-exclusive=<yes|no> */
+    static let audioExclusive = "audio-exclusive"
     /** --audio-fallback-to-null=<yes|no> */
     static let audioFallbackToNull = "audio-fallback-to-null"
-    /** --ao=<driver1[:suboption1[=value]:...] */
+    /** --ao=<driver> */
     static let ao = "ao"
     /** --af=<filter1[=parameter1:parameter2:...] */
     static let af = "af"
@@ -238,11 +238,11 @@ struct MPVOption {
     static let ad = "ad"
     /** --volume=<value> */
     static let volume = "volume"
+    /** --balance=<value> */
+    static let balance = "balance"
     /** --audio-delay=<sec> */
     static let audioDelay = "audio-delay"
-    /** --no-audio */
-    static let noAudio = "no-audio"
-    /** --mute=<auto|yes|no> */
+    /** --mute=<yes|no|auto> */
     static let mute = "mute"
     /** --softvol=<no|yes|auto> */
     static let softvol = "softvol"
@@ -262,7 +262,7 @@ struct MPVOption {
     static let dtshd = "dtshd"
     /** --no-dtshd */
     static let noDtshd = "no-dtshd"
-    /** --audio-channels=<auto|number|layout> */
+    /** --audio-channels=<auto-safe|auto|layouts> */
     static let audioChannels = "audio-channels"
     /** --audio-normalize-downmix=<yes|no> */
     static let audioNormalizeDownmix = "audio-normalize-downmix"
@@ -296,11 +296,13 @@ struct MPVOption {
     static let volumeRestoreData = "volume-restore-data"
     /** --audio-buffer=<seconds> */
     static let audioBuffer = "audio-buffer"
+    /** --audio-stream-silence=<yes|no> */
+    static let audioStreamSilence = "audio-stream-silence"
+    /** --audio-wait-open=<secs> */
+    static let audioWaitOpen = "audio-wait-open"
   }
 
   struct Subtitles {
-    /** --no-sub */
-    static let noSub = "no-sub"
     /** --sub-demuxer=<[+]name> */
     static let subDemuxer = "sub-demuxer"
     /** --sub-delay=<sec> */
@@ -381,6 +383,8 @@ struct MPVOption {
     static let noSubVisibility = "no-sub-visibility"
     /** --sub-clear-on-seek */
     static let subClearOnSeek = "sub-clear-on-seek"
+    /** --teletext-page=<1-999> */
+    static let teletextPage = "teletext-page"
   }
 
   struct Window {
@@ -396,6 +400,8 @@ struct MPVOption {
     static let fsScreen = "fs-screen"
     /** --keep-open=<yes|no|always> */
     static let keepOpen = "keep-open"
+    /** --image-display-duration=<seconds|inf> */
+    static let imageDisplayDuration = "image-display-duration"
     /** --force-window=<yes|no|immediate> */
     static let forceWindow = "force-window"
     /** --taskbar-progress */
@@ -473,8 +479,6 @@ struct MPVOption {
     static let dvdDevice = "dvd-device"
     /** --bluray-device=<path> */
     static let blurayDevice = "bluray-device"
-    /** --bluray-angle=<ID> */
-    static let blurayAngle = "bluray-angle"
     /** --cdda-speed=<value> */
     static let cddaSpeed = "cdda-speed"
     /** --cdda-paranoia=<0-2> */
@@ -723,6 +727,8 @@ struct MPVOption {
     static let osdSpacing = "osd-spacing"
     /**  --sub-text-spacing=<size> */
     static let subTextSpacing = "sub-text-spacing"
+    /** --video-osd=<yes|no> */
+    static let videoOsd = "video-osd"
   }
 
   struct Screenshot {
@@ -776,10 +782,8 @@ struct MPVOption {
     static let noMsgColor = "no-msg-color"
     /** --msg-level=<module1=level1 */
     static let msgLevel = "msg-level"
-    /** --term-osd */
+    /** --term-osd=<auto|no|force> */
     static let termOsd = "term-osd"
-    /**  --no-term-osd */
-    static let noTermOsd = "no-term-osd"
     /** --term-osd-bar */
     static let termOsdBar = "term-osd-bar"
     /** --no-term-osd-bar */
@@ -861,6 +865,156 @@ struct MPVOption {
     static let dvbinFullTransponder = "dvbin-full-transponder"
   }
 
+  struct ALSAAudioOutputOptions {
+    /** --alsa-device=<device> */
+    static let alsaDevice = "alsa-device"
+    /** --alsa-resample=yes */
+    static let alsaResample = "alsa-resample"
+    /** --alsa-mixer-device=<device> */
+    static let alsaMixerDevice = "alsa-mixer-device"
+    /** --alsa-mixer-name=<name> */
+    static let alsaMixerName = "alsa-mixer-name"
+    /** --alsa-mixer-index=<number> */
+    static let alsaMixerIndex = "alsa-mixer-index"
+    /** --alsa-non-interleaved */
+    static let alsaNonInterleaved = "alsa-non-interleaved"
+    /** --alsa-ignore-chmap */
+    static let alsaIgnoreChmap = "alsa-ignore-chmap"
+  }
+
+  struct OpenGLRendererOptions {
+    /** --opengl-dumb-mode=<yes|no> */
+    static let openglDumbMode = "opengl-dumb-mode"
+    /** --scale-param1=<value> */
+    static let scaleParam1 = "scale-param1"
+    /** --scale-param2=<value> */
+    static let scaleParam2 = "scale-param2"
+    /** --scale-blur=<value> */
+    static let scaleBlur = "scale-blur"
+    /** --scale-radius=<value> */
+    static let scaleRadius = "scale-radius"
+    /** --scale-antiring=<value> */
+    static let scaleAntiring = "scale-antiring"
+    /** --scale-window=<window> */
+    static let scaleWindow = "scale-window"
+    /** --scale-wparam=<window> */
+    static let scaleWparam = "scale-wparam"
+    /** --scaler-lut-size=<4..10> */
+    static let scalerLutSize = "scaler-lut-size"
+    /** --scaler-resizes-only */
+    static let scalerResizesOnly = "scaler-resizes-only"
+    /** --opengl-pbo */
+    static let openglPbo = "opengl-pbo"
+    /** --dither-depth=<N|no|auto> */
+    static let ditherDepth = "dither-depth"
+    /** --dither-size-fruit=<2-8> */
+    static let ditherSizeFruit = "dither-size-fruit"
+    /** --dither=<fruit|ordered|no> */
+    static let dither = "dither"
+    /** --temporal-dither */
+    static let temporalDither = "temporal-dither"
+    /** --temporal-dither-period=<1-128> */
+    static let temporalDitherPeriod = "temporal-dither-period"
+    /** --opengl-debug */
+    static let openglDebug = "opengl-debug"
+    /** --interpolation */
+    static let interpolation = "interpolation"
+    /** --opengl-swapinterval=<n> */
+    static let openglSwapinterval = "opengl-swapinterval"
+    /** --dscale=<filter> */
+    static let dscale = "dscale"
+    /** --cscale=<filter> */
+    static let cscale = "cscale"
+    /** --tscale=<filter> */
+    static let tscale = "tscale"
+    /** --tscale-clamp */
+    static let tscaleClamp = "tscale-clamp"
+    /** --interpolation-threshold=<0..1 */
+    static let interpolationThreshold = "interpolation-threshold"
+    /** --dscale-radius */
+    static let dscaleRadius = "dscale-radius"
+    /** --cscale-radius */
+    static let cscaleRadius = "cscale-radius"
+    /** --tscale-radius */
+    static let tscaleRadius = "tscale-radius"
+    /** --linear-scaling */
+    static let linearScaling = "linear-scaling"
+    /** --correct-downscaling */
+    static let correctDownscaling = "correct-downscaling"
+    /** --opengl-shaders=<files> */
+    static let openglShaders = "opengl-shaders"
+    /** --deband */
+    static let deband = "deband"
+    /** --deband-iterations=<1..16> */
+    static let debandIterations = "deband-iterations"
+    /** --deband-threshold=<0..4096> */
+    static let debandThreshold = "deband-threshold"
+    /** --deband-range=<1..64> */
+    static let debandRange = "deband-range"
+    /** --deband-grain=<0..4096> */
+    static let debandGrain = "deband-grain"
+    /** --sigmoid-upscaling */
+    static let sigmoidUpscaling = "sigmoid-upscaling"
+    /** --sigmoid-center */
+    static let sigmoidCenter = "sigmoid-center"
+    /** --sigmoid-slope */
+    static let sigmoidSlope = "sigmoid-slope"
+    /** --sharpen=<value> */
+    static let sharpen = "sharpen"
+    /** --opengl-glfinish */
+    static let openglGlfinish = "opengl-glfinish"
+    /** --opengl-waitvsync */
+    static let openglWaitvsync = "opengl-waitvsync"
+    /** --opengl-vsync-fences=<N> */
+    static let openglVsyncFences = "opengl-vsync-fences"
+    /** --opengl-dwmflush=<no|windowed|yes|auto> */
+    static let openglDwmflush = "opengl-dwmflush"
+    /** --opengl-dcomposition=<yes|no> */
+    static let openglDcomposition = "opengl-dcomposition"
+    /** --opengl-sw */
+    static let openglSw = "opengl-sw"
+    /** --opengl-backend=<sys> */
+    static let openglBackend = "opengl-backend"
+    /** --opengl-es=<mode> */
+    static let openglEs = "opengl-es"
+    /** --opengl-fbo-format=<fmt> */
+    static let openglFboFormat = "opengl-fbo-format"
+    /** --opengl-gamma=<0.1..2.0> */
+    static let openglGamma = "opengl-gamma"
+    /** --gamma-auto */
+    static let gammaAuto = "gamma-auto"
+    /** --target-prim=<value> */
+    static let targetPrim = "target-prim"
+    /** --target-trc=<value> */
+    static let targetTrc = "target-trc"
+    /** --target-brightness=<1..100000> */
+    static let targetBrightness = "target-brightness"
+    /** --hdr-tone-mapping=<value> */
+    static let hdrToneMapping = "hdr-tone-mapping"
+    /** --tone-mapping-param=<value> */
+    static let toneMappingParam = "tone-mapping-param"
+    /** --icc-profile=<file> */
+    static let iccProfile = "icc-profile"
+    /** --icc-profile-auto */
+    static let iccProfileAuto = "icc-profile-auto"
+    /** --icc-cache-dir=<dirname> */
+    static let iccCacheDir = "icc-cache-dir"
+    /** --icc-intent=<value> */
+    static let iccIntent = "icc-intent"
+    /** --icc-3dlut-size=<r>x<g>x<b> */
+    static let icc3dlutSize = "icc-3dlut-size"
+    /** --icc-contrast=<0-100000> */
+    static let iccContrast = "icc-contrast"
+    /** --blend-subtitles=<yes|video|no> */
+    static let blendSubtitles = "blend-subtitles"
+    /** --alpha=<blend-tiles|blend|yes|no> */
+    static let alpha = "alpha"
+    /** --opengl-rectangle-textures */
+    static let openglRectangleTextures = "opengl-rectangle-textures"
+    /** --background=<color> */
+    static let background = "background"
+  }
+
   struct Miscellaneous {
     /** --display-tags=tag1 */
     static let displayTags = "display-tags"
@@ -894,6 +1048,8 @@ struct MPVOption {
     static let forceMediaTitle = "force-media-title"
     /** --external-file=<filename> */
     static let externalFile = "external-file"
+    /** --autoload-files=<yes|no> */
+    static let autoloadFiles = "autoload-files"
     /** --lavfi-complex=<string> */
     static let lavfiComplex = "lavfi-complex"
   }

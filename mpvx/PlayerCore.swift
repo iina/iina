@@ -61,15 +61,15 @@ class PlayerCore: NSObject {
   /** Pause / resume. Reset speed to 0 when pause. */
   func togglePause(_ set: Bool?) {
     if let setPause = set {
-      mpvController.setFlag(MPVProperty.pause, setPause)
+      mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
       if setPause {
         setSpeed(0)
       }
     } else {
       if (info.isPaused) {
-        mpvController.setFlag(MPVProperty.pause, false)
+        mpvController.setFlag(MPVOption.PlaybackControl.pause, false)
       } else {
-        mpvController.setFlag(MPVProperty.pause, true)
+        mpvController.setFlag(MPVOption.PlaybackControl.pause, true)
         setSpeed(0)
       }
     }
@@ -80,8 +80,8 @@ class PlayerCore: NSObject {
   }
   
   func toogleMute(_ set: Bool?) {
-    let newState = set ?? !mpvController.getFlag(MPVProperty.mute)
-    mpvController.setFlag(MPVProperty.mute, newState)
+    let newState = set ?? !mpvController.getFlag(MPVOption.Audio.mute)
+    mpvController.setFlag(MPVOption.Audio.mute, newState)
     info.isMuted = newState
   }
   
@@ -115,8 +115,8 @@ class PlayerCore: NSObject {
   func abLoop() {
     // may subject to change
     mpvController.command([MPVCommand.abLoop, nil])
-    let a = mpvController.getDouble(MPVProperty.abLoopA)
-    let b = mpvController.getDouble(MPVProperty.abLoopB)
+    let a = mpvController.getDouble(MPVOption.PlaybackControl.abLoopA)
+    let b = mpvController.getDouble(MPVOption.PlaybackControl.abLoopB)
     if a == 0 && b == 0 {
       info.abLoopStatus = 0
     } else if b != 0 {
@@ -129,7 +129,7 @@ class PlayerCore: NSObject {
   func setVolume(_ volume: Int) {
     let realVolume = volume.constrain(min: 0, max: 100)
     info.volume = realVolume
-    mpvController.setInt(MPVProperty.volume, realVolume)
+    mpvController.setInt(MPVOption.Audio.volume, realVolume)
     ud.set(realVolume, forKey: Preference.Key.softVolume)
   }
   
@@ -137,13 +137,13 @@ class PlayerCore: NSObject {
     let name: String
     switch forType {
     case .audio:
-      name = MPVProperty.aid
+      name = MPVOption.TrackSelection.aid
     case .video:
-      name = MPVProperty.vid
+      name = MPVOption.TrackSelection.vid
     case .sub:
-      name = MPVProperty.sid
+      name = MPVOption.TrackSelection.sid
     case .secondSub:
-      name = MPVProperty.secondarySid
+      name = MPVOption.Subtitles.secondarySid
     }
     mpvController.setInt(name, index)
     getSelectedTracks()
@@ -157,7 +157,7 @@ class PlayerCore: NSObject {
     } else if realSpeed < 0 {
       realSpeed = -1 / realSpeed
     }
-    mpvController.setDouble(MPVProperty.speed, realSpeed)
+    mpvController.setDouble(MPVOption.PlaybackControl.speed, realSpeed)
     info.playSpeed = speed
   }
   
@@ -174,7 +174,7 @@ class PlayerCore: NSObject {
   
   func setVideoRotate(_ degree: Int) {
     if AppData.rotations.index(of: degree)! >= 0 {
-      mpvController.setInt(MPVProperty.videoRotate, degree)
+      mpvController.setInt(MPVOption.Video.videoRotate, degree)
       info.rotation = degree
     }
   }
@@ -222,12 +222,12 @@ class PlayerCore: NSObject {
   }
   
   func setAudioDelay(_ delay: Double) {
-    mpvController.setDouble(MPVProperty.audioDelay, delay)
+    mpvController.setDouble(MPVOption.Audio.audioDelay, delay)
     info.audioDelay = delay
   }
   
   func setSubDelay(_ delay: Double) {
-    mpvController.setDouble(MPVProperty.subDelay, delay)
+    mpvController.setDouble(MPVOption.Subtitles.subDelay, delay)
     info.subDelay = delay
   }
   
@@ -259,6 +259,10 @@ class PlayerCore: NSObject {
   
   func removeVideoFiler(_ filter: MPVFilter) {
     mpvController.command([MPVCommand.vf, "del", filter.stringFormat, nil])
+  }
+  
+  func setSub() {
+    
   }
   
   // MARK: - Other
@@ -316,13 +320,13 @@ class PlayerCore: NSObject {
         self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
       }
     case .PlayButton:
-      let pause = mpvController.getFlag(MPVProperty.pause)
+      let pause = mpvController.getFlag(MPVOption.PlaybackControl.pause)
       info.isPaused = pause
       DispatchQueue.main.async {
         self.mainWindow.updatePlayButtonState(pause ? NSOffState : NSOnState)
       }
     case .MuteButton:
-      let mute = mpvController.getFlag(MPVProperty.mute)
+      let mute = mpvController.getFlag(MPVOption.Audio.mute)
       DispatchQueue.main.async {
         self.mainWindow.muteButton.state = mute ? NSOnState : NSOffState
       }
@@ -371,10 +375,10 @@ class PlayerCore: NSObject {
   }
   
   private func getSelectedTracks() {
-    info.aid = mpvController.getInt(MPVProperty.aid)
-    info.vid = mpvController.getInt(MPVProperty.vid)
-    info.sid = mpvController.getInt(MPVProperty.sid)
-    info.secondSid = mpvController.getInt(MPVProperty.secondarySid)
+    info.aid = mpvController.getInt(MPVOption.TrackSelection.aid)
+    info.vid = mpvController.getInt(MPVOption.TrackSelection.vid)
+    info.sid = mpvController.getInt(MPVOption.TrackSelection.sid)
+    info.secondSid = mpvController.getInt(MPVOption.Subtitles.secondarySid)
   }
   
   private func getPLaylist() {

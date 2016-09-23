@@ -93,7 +93,7 @@ struct MPVCommand {
   static let enableSection = "enable-section"
   /** disable-section "<section>" */
   static let disableSection = "disable-section"
-  /** define-section "<section>" "<contents>" [default|forced] */
+  /** define-section "<section>" "<contents>" [default|force] */
   static let defineSection = "define-section"
   /** overlay-add <id> <x> <y> "<file>" <offset> "<fmt>" <w> <h> <stride> */
   static let overlayAdd = "overlay-add"
@@ -107,8 +107,6 @@ struct MPVCommand {
   static let scriptBinding = "script-binding"
   /** ab-loop */
   static let abLoop = "ab-loop"
-  /** vo-cmdline "<args>" */
-  static let voCmdline = "vo-cmdline"
   /** drop-buffers */
   static let dropBuffers = "drop-buffers"
   /** screenshot-raw [subtitles|video|window] */
@@ -117,4 +115,8 @@ struct MPVCommand {
   static let vfCommand = "vf-command"
   /** af-command "<label>" "<cmd>" "<args>" */
   static let afCommand = "af-command"
+  /** apply-profile "<name>" */
+  static let applyProfile = "apply-profile"
+  /** load-script "<path>" */
+  static let loadScript = "load-script"
 }

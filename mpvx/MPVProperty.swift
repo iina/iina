@@ -1,16 +1,6 @@
 import Foundation
 
 struct MPVProperty {
-  /** osd-level */
-  static let osdLevel = "osd-level"
-  /** osd-scale */
-  static let osdScale = "osd-scale"
-  /** loop */
-  static let loop = "loop"
-  /** loop-file */
-  static let loopFile = "loop-file"
-  /** speed */
-  static let speed = "speed"
   /** audio-speed-correction */
   static let audioSpeedCorrection = "audio-speed-correction"
   /** video-speed-correction */
@@ -19,6 +9,8 @@ struct MPVProperty {
   static let displaySyncActive = "display-sync-active"
   /** filename */
   static let filename = "filename"
+  /** filename/no-ext */
+  static let filenameNoExt = "filename/no-ext"
   /** file-size */
   static let fileSize = "file-size"
   /** estimated-frame-count */
@@ -31,8 +23,8 @@ struct MPVProperty {
   static let mediaTitle = "media-title"
   /** file-format */
   static let fileFormat = "file-format"
-  /** demuxer */
-  static let demuxer = "demuxer"
+  /** current-demuxer */
+  static let currentDemuxer = "current-demuxer"
   /** stream-path */
   static let streamPath = "stream-path"
   /** stream-pos */
@@ -63,6 +55,8 @@ struct MPVProperty {
   static let timeStart = "time-start"
   /** time-remaining */
   static let timeRemaining = "time-remaining"
+  /** audio-pts */
+  static let audioPts = "audio-pts"
   /** playtime-remaining */
   static let playtimeRemaining = "playtime-remaining"
   /** playback-time */
@@ -103,10 +97,6 @@ struct MPVProperty {
   static func editionListNTitle(_ n: Int) -> String {
     return "edition-list/\(n)/title"
   }
-  /** ab-loop-a */
-  static let abLoopA = "ab-loop-a"
-  /** ab-loop-b */
-  static let abLoopB = "ab-loop-b"
   /** angle */
   static let angle = "angle"
   /** metadata */
@@ -125,10 +115,8 @@ struct MPVProperty {
   static let filteredMetadata = "filtered-metadata"
   /** chapter-metadata */
   static let chapterMetadata = "chapter-metadata"
-  /** pause */
-  static let pause = "pause"
-  /** idle */
-  static let idle = "idle"
+  /** idle-active */
+  static let idleActive = "idle-active"
   /** core-idle */
   static let coreIdle = "core-idle"
   /** cache */
@@ -157,22 +145,12 @@ struct MPVProperty {
   static let eofReached = "eof-reached"
   /** seeking */
   static let seeking = "seeking"
-  /** hr-seek */
-  static let hrSeek = "hr-seek"
   /** mixer-active */
   static let mixerActive = "mixer-active"
-  /** volume */
-  static let volume = "volume"
-  /** volume-max */
-  static let volumeMax = "volume-max"
-  /** mute */
-  static let mute = "mute"
   /** ao-volume */
   static let aoVolume = "ao-volume"
   /** ao-mute */
   static let aoMute = "ao-mute"
-  /** audio-delay */
-  static let audioDelay = "audio-delay"
   /** audio-codec */
   static let audioCodec = "audio-codec"
   /** audio-codec-name */
@@ -191,58 +169,18 @@ struct MPVProperty {
   static let audioParamsChannelCount = "audio-params/channel-count"
   /** audio-out-params */
   static let audioOutParams = "audio-out-params"
-  /** aid */
-  static let aid = "aid"
-  /** audio */
-  static let audio = "audio"
-  /** balance */
-  static let balance = "balance"
-  /** fullscreen */
-  static let fullscreen = "fullscreen"
-  /** deinterlace */
-  static let deinterlace = "deinterlace"
-  /** field-dominance */
-  static let fieldDominance = "field-dominance"
   /** colormatrix */
   static let colormatrix = "colormatrix"
   /** colormatrix-input-range */
   static let colormatrixInputRange = "colormatrix-input-range"
-  /** video-output-levels */
-  static let videoOutputLevels = "video-output-levels"
   /** colormatrix-primaries */
   static let colormatrixPrimaries = "colormatrix-primaries"
-  /** taskbar-progress */
-  static let taskbarProgress = "taskbar-progress"
-  /** ontop */
-  static let ontop = "ontop"
-  /** border */
-  static let border = "border"
-  /** on-all-workspaces */
-  static let onAllWorkspaces = "on-all-workspaces"
-  /** framedrop */
-  static let framedrop = "framedrop"
-  /** gamma */
-  static let gamma = "gamma"
-  /** brightness */
-  static let brightness = "brightness"
-  /** contrast */
-  static let contrast = "contrast"
-  /** saturation */
-  static let saturation = "saturation"
-  /** hue */
-  static let hue = "hue"
   /** hwdec */
   static let hwdec = "hwdec"
   /** hwdec-current */
   static let hwdecCurrent = "hwdec-current"
   /** hwdec-interop */
   static let hwdecInterop = "hwdec-interop"
-  /** hwdec-active */
-  static let hwdecActive = "hwdec-active"
-  /** hwdec-detected */
-  static let hwdecDetected = "hwdec-detected"
-  /** panscan */
-  static let panscan = "panscan"
   /** video-format */
   static let videoFormat = "video-format"
   /** video-codec */
@@ -279,6 +217,10 @@ struct MPVProperty {
   static let videoParamsPrimaries = "video-params/primaries"
   /** video-params/gamma */
   static let videoParamsGamma = "video-params/gamma"
+  /** video-params/nom-peak */
+  static let videoParamsNomPeak = "video-params/nom-peak"
+  /** video-params/sig-peak */
+  static let videoParamsSigPeak = "video-params/sig-peak"
   /** video-params/chroma-location */
   static let videoParamsChromaLocation = "video-params/chroma-location"
   /** video-params/rotate */
@@ -289,12 +231,14 @@ struct MPVProperty {
   static let dwidth = "dwidth"
   /** dheight */
   static let dheight = "dheight"
+  /** video-dec-params */
+  static let videoDecParams = "video-dec-params"
   /** video-out-params */
   static let videoOutParams = "video-out-params"
   /** video-frame-info */
   static let videoFrameInfo = "video-frame-info"
-  /** fps */
-  static let fps = "fps"
+  /** container-fps */
+  static let containerFps = "container-fps"
   /** estimated-vf-fps */
   static let estimatedVfFps = "estimated-vf-fps"
   /** window-scale */
@@ -317,52 +261,14 @@ struct MPVProperty {
   static let osdHeight = "osd-height"
   /** osd-par */
   static let osdPar = "osd-par"
-  /** vid */
-  static let vid = "vid"
-  /** video */
-  static let video = "video"
-  /** video-align-x */
-  static let videoAlignX = "video-align-x"
-  /** video-align-y */
-  static let videoAlignY = "video-align-y"
-  /** video-pan-x */
-  static let videoPanX = "video-pan-x"
-  /** video-pan-y */
-  static let videoPanY = "video-pan-y"
-  /** video-zoom */
-  static let videoZoom = "video-zoom"
-  /** video-unscaled */
-  static let videoUnscaled = "video-unscaled"
   /** program */
   static let program = "program"
   /** dvb-channel */
   static let dvbChannel = "dvb-channel"
   /** dvb-channel-name */
   static let dvbChannelName = "dvb-channel-name"
-  /** sid */
-  static let sid = "sid"
-  /** secondary-sid */
-  static let secondarySid = "secondary-sid"
-  /** sub */
-  static let sub = "sub"
-  /** sub-delay */
-  static let subDelay = "sub-delay"
-  /** sub-pos */
-  static let subPos = "sub-pos"
-  /** sub-visibility */
-  static let subVisibility = "sub-visibility"
-  /** sub-forced-only */
-  static let subForcedOnly = "sub-forced-only"
-  /** sub-scale */
-  static let subScale = "sub-scale"
-  /** ass-force-margins */
-  static let assForceMargins = "ass-force-margins"
-  /** sub-use-margins */
-  static let subUseMargins = "sub-use-margins"
-  /** ass-vsfilter-aspect-compat */
-  static let assVsfilterAspectCompat = "ass-vsfilter-aspect-compat"
-  /** ass-style-override */
-  static let assStyleOverride = "ass-style-override"
+  /** sub-text */
+  static let subText = "sub-text"
   /** stream-capture */
   static let streamCapture = "stream-capture"
   /** tv-brightness */
@@ -485,6 +391,22 @@ struct MPVProperty {
   static func trackListNAudioChannels(_ n: Int) -> String {
     return "track-list/\(n)/audio-channels"
   }
+  /** track-list/N/replaygain-track-peak */
+  static func trackListNReplaygainTrackPeak(_ n: Int) -> String {
+    return "track-list/\(n)/replaygain-track-peak"
+  }
+  /** track-list/N/replaygain-track-gain */
+  static func trackListNReplaygainTrackGain(_ n: Int) -> String {
+    return "track-list/\(n)/replaygain-track-gain"
+  }
+  /** track-list/N/replaygain-album-peak */
+  static func trackListNReplaygainAlbumPeak(_ n: Int) -> String {
+    return "track-list/\(n)/replaygain-album-peak"
+  }
+  /** track-list/N/replaygain-album-gain */
+  static func trackListNReplaygainAlbumGain(_ n: Int) -> String {
+    return "track-list/\(n)/replaygain-album-gain"
+  }
   /** chapter-list */
   static let chapterList = "chapter-list"
   /** chapter-list/count */
@@ -501,10 +423,6 @@ struct MPVProperty {
   static let af = "af"
   /** vf */
   static let vf = "vf"
-  /** video-rotate */
-  static let videoRotate = "video-rotate"
-  /** video-stereo-mode */
-  static let videoStereoMode = "video-stereo-mode"
   /** seekable */
   static let seekable = "seekable"
   /** partially-seekable */
@@ -623,4 +541,6 @@ struct MPVProperty {
   }
   /** property-list */
   static let propertyList = "property-list"
+  /** profile-list */
+  static let profileList = "profile-list"
 }

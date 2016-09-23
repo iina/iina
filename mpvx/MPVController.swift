@@ -189,7 +189,7 @@ class MPVController: NSObject {
         switch propertyName {
         case MPVProperty.videoParams:
           onVideoParamsChange(UnsafePointer<mpv_node_list>(OpaquePointer(property.data)))
-        case MPVProperty.mute:
+        case MPVOption.Audio.mute:
           playerCore.syncUI(.MuteButton)
         default:
           Utility.log("MPV property changed (unhandled): \(propertyName)")

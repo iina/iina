@@ -55,6 +55,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var customSubDelayTextField: NSTextField!
   @IBOutlet weak var subDelaySliderIndicator: NSTextField!
   
+  @IBOutlet weak var subScaleSlider: NSSlider!
+  @IBOutlet weak var subScaleResetBtn: NSButton!
+  
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -300,5 +304,27 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     playerCore.setSubDelay(value)
     mainWindow.displayOSD(.subDelay(value))
   }
+  
+  @IBAction func subScaleReset(_ sender: AnyObject) {
+    playerCore.setSubScale(1)
+    subScaleSlider.doubleValue = 0
+    mainWindow.displayOSD(.subScale(1))
+  }
+  
+  @IBAction func subScaleSliderAction(_ sender: NSSlider) {
+    let value = sender.doubleValue
+    let mappedValue: Double, realValue: Double
+    // map [-10, -1], [1, 10] to [-9, 9], bounds may change in future
+    if value > 0 {
+      mappedValue = round((value + 1) * 20) / 20
+      realValue = mappedValue
+    } else {
+      mappedValue = round((value - 1) * 20) / 20
+      realValue = 1 / mappedValue
+    }
+    playerCore.setSubScale(realValue)
+    mainWindow.displayOSD(.subScale(mappedValue))
+  }
+  
   
 }

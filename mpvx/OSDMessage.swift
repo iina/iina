@@ -16,6 +16,7 @@ enum OSDMessage {
   case rotate(Int)
   case audioDelay(Double)
   case subDelay(Double)
+  case subScale(Double)
   case mute
   case unMute
   case screenShot
@@ -77,6 +78,9 @@ enum OSDMessage {
       
     case .chapter(let name):
       return "Go to \"\(name)\""
+      
+    case .subScale(let value):
+      return "Subtitle Scale: \(value)x"
       
     }
   }

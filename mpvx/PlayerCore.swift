@@ -261,8 +261,13 @@ class PlayerCore: NSObject {
     mpvController.command([MPVCommand.vf, "del", filter.stringFormat, nil])
   }
   
-  func setSub() {
-    
+  /** Scale is a double value in [-100, -1] + [1, 100] */
+  func setSubScale(_ scale: Double) {
+    if scale > 0 {
+      mpvController.setDouble(MPVOption.Subtitles.subScale, scale)
+    } else {
+      mpvController.setDouble(MPVOption.Subtitles.subScale, -scale)
+    }
   }
   
   // MARK: - Other

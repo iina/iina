@@ -81,6 +81,34 @@ class PlaybackInfo {
     }
   }
   
+  func currentTrack(_ type: MPVTrack.TrackType) -> MPVTrack? {
+    let id: Int?, list: [MPVTrack]
+    switch type {
+    case .video:
+      id = vid
+      list = videoTracks
+    case .audio:
+      id = aid
+      list = audioTracks
+    case .sub:
+      id = sid
+      list = subTracks
+    case .secondSub:
+      id = secondSid
+      list = subTracks
+    }
+    if let id = id {
+      for i in list {
+        if i.id == id {
+          return i
+        }
+      }
+      return nil
+    } else {
+      return nil
+    }
+  }
+  
   var playlist: [MPVPlaylistItem] = []
   var chapters: [MPVChapter] = []
   

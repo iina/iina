@@ -81,4 +81,14 @@ class MPVTrack: NSObject {
     self.isExternal = isExternal
   }
   
+  // Utils
+  
+  var isImageSub: Bool {
+    get {
+      if type == .video || type == .audio { return false }
+      // demux/demux_mkv.c:1727
+      return codec == "hdmv_pgs_subtitle" || codec == "dvb_subtitle"
+    }
+  }
+  
 }

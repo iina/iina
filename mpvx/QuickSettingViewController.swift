@@ -74,6 +74,25 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
   
+  // MARK: - Validate UI
+  
+  /** Do syncronization*/
+  override func viewDidAppear() {
+    // image sub
+    validateSubSettings()
+  }
+  
+  private func validateSubSettings() {
+    let currSub = playerCore.info.currentTrack(.sub)
+    if currSub != nil && currSub!.isImageSub {
+      subScaleSlider.isEnabled = false
+    } else {
+      subScaleSlider.isEnabled = true
+    }
+  }
+  
+  // MARK: - Switch tab
+  
   /** Switch tab (call from other objects) */
   func pleaseSwitchToTab(_ tab: TabViewType) {
     if isViewLoaded {
@@ -169,6 +188,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         view.reloadData()
       }
     }
+    validateSubSettings()
   }
   
   private func withAllTableViews (_ block: (NSTableView, MPVTrack.TrackType) -> Void) {

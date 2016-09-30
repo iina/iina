@@ -128,3 +128,11 @@ extension Int {
     return value
   }
 }
+
+extension NSColor {
+  var mpvString: String {
+    get {
+      return "\(self.redComponent)/\(self.greenComponent)/\(self.blueComponent)\(self.alphaComponent)"
+    }
+  }
+}

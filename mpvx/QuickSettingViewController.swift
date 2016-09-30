@@ -346,5 +346,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     mainWindow.displayOSD(.subScale(mappedValue))
   }
   
+  @IBAction func setSubTextColor(_ sender: AnyObject) {
+    playerCore.setSubTextColor(NSColor.black.mpvString)
+  }
   
 }

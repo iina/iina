@@ -270,6 +270,14 @@ class PlayerCore: NSObject {
     }
   }
   
+  func setSubTextColor(_ colorString: String) {
+    mpvController.setString("options/" + MPVOption.OSD.subTextColor, colorString)
+  }
+  
+  func setSubTextBgColor(_ colorString: String) {
+    mpvController.setString("options/" + MPVOption.OSD.subTextBackColor, colorString)
+  }
+  
   // MARK: - Other
   
   /** This function is called right after file loaded. Should load all meta info here. */

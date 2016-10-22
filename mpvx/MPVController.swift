@@ -83,16 +83,8 @@ class MPVController: NSObject {
   
   // Basically send quit to mpv
   func mpvQuit() {
-    mpv_suspend(mpv)
+    // mpv_suspend(mpv)
     command([MPVCommand.quit, nil])
-  }
-  
-  func mpvSuspend() {
-    mpv_suspend(mpv)
-  }
-  
-  func mpvResume() {
-    mpv_resume(mpv)
   }
   
   // MARK: Command & property
@@ -240,7 +232,7 @@ class MPVController: NSObject {
   }
   
   private func onFileLoaded() {
-    mpvSuspend()
+    // mpvSuspend()
     // Get video size and set the initial window size
     let width = getInt(MPVProperty.width)
     let height = getInt(MPVProperty.height)
@@ -257,7 +249,7 @@ class MPVController: NSObject {
     let filename = getString(MPVProperty.filename)
     playerCore.info.currentURL = URL(fileURLWithPath: filename ?? "")
     playerCore.fileLoaded()
-    mpvResume()
+    // mpvResume()
   }
   
   private func onTrackChanged() {
@@ -284,9 +276,9 @@ class MPVController: NSObject {
       // video size changed
       playerCore.info.displayWidth = dwidth
       playerCore.info.displayHeight = dheight
-      mpvSuspend()
+      // mpvSuspend()
       playerCore.notifyMainWindowVideoSizeChanged()
-      mpvResume()
+      // mpvResume()
     }
   }
   

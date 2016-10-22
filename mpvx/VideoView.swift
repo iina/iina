@@ -246,6 +246,9 @@ class VideoView: NSOpenGLView {
   
   /** Draw offscreen to the framebuffer. */
   func drawFrame() {
+    if videoSize == nil {
+      return
+    }
     if !started {
       started = true
     }

@@ -26,7 +26,6 @@
                 <outlet property="subTextBgColorWell" destination="Ure-tT-JEy" id="NAH-ul-PxD"/>
                 <outlet property="subTextBorderColorWell" destination="U2e-zB-Kue" id="07T-zX-Dfu"/>
                 <outlet property="subTextBorderWidthPopUp" destination="bkX-rt-2bg" id="122-AI-eLz"/>
-                <outlet property="subTextColorColorWell" destination="9mo-uL-hfC" id="YHH-8S-M88"/>
                 <outlet property="subTextColorWell" destination="9mo-uL-hfC" id="HEi-c0-WG6"/>
                 <outlet property="subTextSBoldCheckBox" destination="Uyh-rT-e7F" id="rUR-Vk-Qlg"/>
                 <outlet property="subTextSizePopUp" destination="xtF-tn-m9W" id="62h-S6-9gV"/>

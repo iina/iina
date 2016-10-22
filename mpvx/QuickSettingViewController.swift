@@ -99,7 +99,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       subScaleSlider.isEnabled = true
     }
     // update values
-//    let currSubTextColor = NSColor(mpvColorString: playerCore.mpvController.getString("options/" + MPVOption.OSD.subTextColor) ?? "");
+    let currSubTextColor = playerCore.mpvController.getString(MPVOption.Subtitles.subColor)
+    print(currSubTextColor)
     
   }
   

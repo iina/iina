@@ -274,6 +274,22 @@ class PlayerCore: NSObject {
     mpvController.setString("options/" + MPVOption.OSD.subTextColor, colorString)
   }
   
+  func setSubTextSize(_ size: Double) {
+    mpvController.setDouble("options/" + MPVOption.OSD.subTextFontSize, size)
+  }
+  
+  func setSubTextBold(_ bold: Bool) {
+    mpvController.setFlag("options/" + MPVOption.OSD.subTextBold, bold)
+  }
+  
+  func setSubTextBorderColor(_ colorString: String) {
+    mpvController.setString("options/" + MPVOption.OSD.subTextBorderColor, colorString)
+  }
+  
+  func setSubTextBorderSize(_ size: Double) {
+    mpvController.setDouble("options/" + MPVOption.OSD.subTextBorderSize, size)
+  }
+  
   func setSubTextBgColor(_ colorString: String) {
     mpvController.setString("options/" + MPVOption.OSD.subTextBackColor, colorString)
   }

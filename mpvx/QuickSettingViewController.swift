@@ -17,7 +17,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   let distanceBetweenSliderAndIndicator: CGFloat = 18
   let sliderIndicatorHalfWidth:CGFloat = 16
   
-  /** Similiar to the one in `PlaylistViewController`.
+  /**
+   Similiar to the one in `PlaylistViewController`.
    Since IBOutlet is `nil` when the view is not loaded at first time,
    use this variable to cache which tab it need to switch to when the
    view is ready. The value will be handled after loaded.
@@ -58,6 +59,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subScaleSlider: NSSlider!
   @IBOutlet weak var subScaleResetBtn: NSButton!
   
+  @IBOutlet weak var subTextColorWell: NSColorWell!
+  @IBOutlet weak var subTextSizePopUp: NSPopUpButton!
+  @IBOutlet weak var subTextSBoldCheckBox: NSButton!
+  @IBOutlet weak var subTextBorderColorWell: NSColorWell!
+  @IBOutlet weak var subTextBorderWidthPopUp: NSPopUpButton!
+  @IBOutlet weak var subTextBgColorWell: NSColorWell!
+  
+  
   
   
   override func viewDidLoad() {
@@ -89,6 +98,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     } else {
       subScaleSlider.isEnabled = true
     }
+    // update values
+//    let currSubTextColor = NSColor(mpvColorString: playerCore.mpvController.getString("options/" + MPVOption.OSD.subTextColor) ?? "");
+    
   }
   
   // MARK: - Switch tab
@@ -346,8 +358,36 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     mainWindow.displayOSD(.subScale(mappedValue))
   }
   
-  @IBAction func setSubTextColor(_ sender: AnyObject) {
-    playerCore.setSubTextColor(NSColor.black.mpvString)
+  @IBAction func subTextColorAction(_ sender: AnyObject) {
+    playerCore.setSubTextColor(subTextColorWell.color.mpvColorString)
   }
+  
+  @IBAction func subTextSizeAction(_ sender: AnyObject) {
+    if let selectedItem = subTextSizePopUp.selectedItem {
+      if let value = Double(selectedItem.title) {
+        playerCore.setSubTextSize(value)
+      }
+    }
+  }
+  
+  @IBAction func subTextBoldAction(_ sender: AnyObject) {
+    playerCore.setSubTextBold(subTextSBoldCheckBox.state == NSOnState)
+  }
+  
+  @IBAction func subTextBorderColorAction(_ sender: AnyObject) {
+    playerCore.setSubTextBorderColor(subTextBorderColorWell.color.mpvColorString)
+  }
+  
+  @IBAction func subTextBorderWidthAction(_ sender: AnyObject) {
+    if let value = Double(subTextBorderWidthPopUp.stringValue) {
+      playerCore.setSubTextBorderSize(value)
+    }
+  }
+  
+  @IBAction func subTextBgColorAction(_ sender: AnyObject) {
+    playerCore.setSubTextBgColor(subTextBgColorWell.color.mpvColorString)
+  }
+  
+  
   
 }

@@ -130,9 +130,27 @@ extension Int {
 }
 
 extension NSColor {
-  var mpvString: String {
+  var mpvColorString: String {
     get {
-      return "\(self.redComponent)/\(self.greenComponent)/\(self.blueComponent)\(self.alphaComponent)"
+      return "\(self.redComponent)/\(self.greenComponent)/\(self.blueComponent)/\(self.alphaComponent)"
+    }
+  }
+  
+  convenience init?(mpvColorString: String) {
+    let splitted = mpvColorString.characters.split(separator: "/").map { (seq) -> Double? in
+      return Double(String(seq))
+    }
+    // check nil
+    if (!splitted.contains {$0 == nil}) {
+      if splitted.count == 3 {  // if doesn't have alpha value
+        self.init(red: CGFloat(splitted[0]!), green: CGFloat(splitted[1]!), blue: CGFloat(splitted[2]!), alpha: CGFloat(1))
+      } else if splitted.count == 4 {  // if has alpha value
+        self.init(red: CGFloat(splitted[0]!), green: CGFloat(splitted[1]!), blue: CGFloat(splitted[2]!), alpha: CGFloat(splitted[3]!))
+      } else {
+        return nil
+      }
+    } else {
+      return nil
     }
   }
 }

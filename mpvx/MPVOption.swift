@@ -136,6 +136,8 @@ struct MPVOption {
     static let ytdlFormat = "ytdl-format"
     /** --ytdl-raw-options=<key>=<value>[ */
     static let ytdlRawOptions = "ytdl-raw-options"
+    /** --player-operation-mode=<cplayer|pseudo-gui> */
+    static let playerOperationMode = "player-operation-mode"
   }
 
   struct Video {
@@ -317,8 +319,8 @@ struct MPVOption {
     static let subScaleByWindow = "sub-scale-by-window"
     /** --sub-scale-with-window=<yes|no> */
     static let subScaleWithWindow = "sub-scale-with-window"
-    /** --ass-scale-with-window=<yes|no> */
-    static let assScaleWithWindow = "ass-scale-with-window"
+    /** --sub-ass-scale-with-window=<yes|no> */
+    static let subAssScaleWithWindow = "sub-ass-scale-with-window"
     /** --embeddedfonts */
     static let embeddedfonts = "embeddedfonts"
     /** --no-embeddedfonts */
@@ -327,28 +329,28 @@ struct MPVOption {
     static let subPos = "sub-pos"
     /** --sub-speed=<0.1-10.0> */
     static let subSpeed = "sub-speed"
-    /** --ass-force-style=<[Style.]Param=Value[ */
-    static let assForceStyle = "ass-force-style"
-    /** --ass-hinting=<none|light|normal|native> */
-    static let assHinting = "ass-hinting"
-    /** --ass-line-spacing=<value> */
-    static let assLineSpacing = "ass-line-spacing"
-    /** --ass-shaper=<simple|complex> */
-    static let assShaper = "ass-shaper"
-    /** --ass-styles=<filename> */
-    static let assStyles = "ass-styles"
-    /** --ass-style-override=<yes|no|force|signfs|strip> */
-    static let assStyleOverride = "ass-style-override"
-    /** --ass-force-margins */
-    static let assForceMargins = "ass-force-margins"
+    /** --sub-ass-force-style=<[Style.]Param=Value[ */
+    static let subAssForceStyle = "sub-ass-force-style"
+    /** --sub-ass-hinting=<none|light|normal|native> */
+    static let subAssHinting = "sub-ass-hinting"
+    /** --sub-ass-line-spacing=<value> */
+    static let subAssLineSpacing = "sub-ass-line-spacing"
+    /** --sub-ass-shaper=<simple|complex> */
+    static let subAssShaper = "sub-ass-shaper"
+    /** --sub-ass-styles=<filename> */
+    static let subAssStyles = "sub-ass-styles"
+    /** --sub-ass-style-override=<yes|no|force|signfs|strip> */
+    static let subAssStyleOverride = "sub-ass-style-override"
+    /** --sub-ass-force-margins */
+    static let subAssForceMargins = "sub-ass-force-margins"
     /** --sub-use-margins */
     static let subUseMargins = "sub-use-margins"
-    /** --ass-vsfilter-aspect-compat=<yes|no> */
-    static let assVsfilterAspectCompat = "ass-vsfilter-aspect-compat"
-    /** --ass-vsfilter-blur-compat=<yes|no> */
-    static let assVsfilterBlurCompat = "ass-vsfilter-blur-compat"
-    /** --ass-vsfilter-color-compat=<basic|full|force-601|no> */
-    static let assVsfilterColorCompat = "ass-vsfilter-color-compat"
+    /** --sub-ass-vsfilter-aspect-compat=<yes|no> */
+    static let subAssVsfilterAspectCompat = "sub-ass-vsfilter-aspect-compat"
+    /** --sub-ass-vsfilter-blur-compat=<yes|no> */
+    static let subAssVsfilterBlurCompat = "sub-ass-vsfilter-blur-compat"
+    /** --sub-ass-vsfilter-color-compat=<basic|full|force-601|no> */
+    static let subAssVsfilterColorCompat = "sub-ass-vsfilter-color-compat"
     /** --stretch-dvd-subs=<yes|no> */
     static let stretchDvdSubs = "stretch-dvd-subs"
     /** --stretch-image-subs-to-screen=<yes|no> */
@@ -385,6 +387,38 @@ struct MPVOption {
     static let subClearOnSeek = "sub-clear-on-seek"
     /** --teletext-page=<1-999> */
     static let teletextPage = "teletext-page"
+    /** --sub-font=<name> */
+    static let subFont = "sub-font"
+    /** --sub-font-size=<size> */
+    static let subFontSize = "sub-font-size"
+    /** --sub-back-color=<color> */
+    static let subBackColor = "sub-back-color"
+    /** --sub-blur=<0..20.0> */
+    static let subBlur = "sub-blur"
+    /** --sub-bold=<yes|no> */
+    static let subBold = "sub-bold"
+    /** --sub-italic=<yes|no> */
+    static let subItalic = "sub-italic"
+    /** --sub-border-color=<color> */
+    static let subBorderColor = "sub-border-color"
+    /** --sub-border-size=<size> */
+    static let subBorderSize = "sub-border-size"
+    /** --sub-color=<color> */
+    static let subColor = "sub-color"
+    /** --sub-margin-x=<size> */
+    static let subMarginX = "sub-margin-x"
+    /** --sub-margin-y=<size> */
+    static let subMarginY = "sub-margin-y"
+    /** --sub-align-x=<left|center|right> */
+    static let subAlignX = "sub-align-x"
+    /** --sub-align-y=<top|center|bottom> */
+    static let subAlignY = "sub-align-y"
+    /** --sub-shadow-color=<color> */
+    static let subShadowColor = "sub-shadow-color"
+    /** --sub-shadow-offset=<size> */
+    static let subShadowOffset = "sub-shadow-offset"
+    /** --sub-spacing=<size> */
+    static let subSpacing = "sub-spacing"
   }
 
   struct Window {
@@ -639,12 +673,8 @@ struct MPVOption {
     static let osdDuration = "osd-duration"
     /** --osd-font=<name> */
     static let osdFont = "osd-font"
-    /** --sub-text-font=<name> */
-    static let subTextFont = "sub-text-font"
     /** --osd-font-size=<size> */
     static let osdFontSize = "osd-font-size"
-    /** --sub-text-font-size=<size> */
-    static let subTextFontSize = "sub-text-font-size"
     /** --osd-msg1=<string> */
     static let osdMsg1 = "osd-msg1"
     /** --osd-msg2=<string> */
@@ -665,68 +695,40 @@ struct MPVOption {
     static let osdBarH = "osd-bar-h"
     /** --osd-back-color=<color> */
     static let osdBackColor = "osd-back-color"
-    /** --sub-text-back-color=<color> */
-    static let subTextBackColor = "sub-text-back-color"
     /** --osd-blur=<0..20.0> */
     static let osdBlur = "osd-blur"
-    /** --sub-text-blur=<0..20.0> */
-    static let subTextBlur = "sub-text-blur"
     /** --osd-bold=<yes|no> */
     static let osdBold = "osd-bold"
-    /** --sub-text-bold=<yes|no> */
-    static let subTextBold = "sub-text-bold"
     /** --osd-italic=<yes|no> */
     static let osdItalic = "osd-italic"
-    /** --sub-text-italic=<yes|no> */
-    static let subTextItalic = "sub-text-italic"
     /** --osd-border-color=<color> */
     static let osdBorderColor = "osd-border-color"
-    /** --sub-text-border-color=<color> */
-    static let subTextBorderColor = "sub-text-border-color"
     /** --osd-border-size=<size> */
     static let osdBorderSize = "osd-border-size"
-    /** --sub-text-border-size=<size> */
-    static let subTextBorderSize = "sub-text-border-size"
     /** --osd-color=<color> */
     static let osdColor = "osd-color"
-    /** --sub-text-color=<color> */
-    static let subTextColor = "sub-text-color"
     /** --osd-fractions */
     static let osdFractions = "osd-fractions"
     /** --osd-level=<0-3> */
     static let osdLevel = "osd-level"
     /** --osd-margin-x=<size> */
     static let osdMarginX = "osd-margin-x"
-    /**  --sub-text-margin-x=<size> */
-    static let subTextMarginX = "sub-text-margin-x"
     /** --osd-margin-y=<size> */
     static let osdMarginY = "osd-margin-y"
-    /**  --sub-text-margin-y=<size> */
-    static let subTextMarginY = "sub-text-margin-y"
     /** --osd-align-x=<left|center|right> */
     static let osdAlignX = "osd-align-x"
-    /** --sub-text-align-x=... */
-    static let subTextAlignX = "sub-text-align-x"
     /** --osd-align-y=<top|center|bottom> */
     static let osdAlignY = "osd-align-y"
-    /** --sub-text-align-y=... */
-    static let subTextAlignY = "sub-text-align-y"
     /** --osd-scale=<factor> */
     static let osdScale = "osd-scale"
     /** --osd-scale-by-window=<yes|no> */
     static let osdScaleByWindow = "osd-scale-by-window"
     /** --osd-shadow-color=<color> */
     static let osdShadowColor = "osd-shadow-color"
-    /**  --sub-text-shadow-color=<color> */
-    static let subTextShadowColor = "sub-text-shadow-color"
     /** --osd-shadow-offset=<size> */
     static let osdShadowOffset = "osd-shadow-offset"
-    /**  --sub-text-shadow-offset=<size> */
-    static let subTextShadowOffset = "sub-text-shadow-offset"
     /** --osd-spacing=<size> */
     static let osdSpacing = "osd-spacing"
-    /**  --sub-text-spacing=<size> */
-    static let subTextSpacing = "sub-text-spacing"
     /** --video-osd=<yes|no> */
     static let videoOsd = "video-osd"
   }
@@ -1013,6 +1015,12 @@ struct MPVOption {
     static let openglRectangleTextures = "opengl-rectangle-textures"
     /** --background=<color> */
     static let background = "background"
+    /** --opengl-tex-pad-x */
+    static let openglTexPadX = "opengl-tex-pad-x"
+    /** --opengl-tex-pad-y */
+    static let openglTexPadY = "opengl-tex-pad-y"
+    /** --opengl-early-flush=<yes|no|auto> */
+    static let openglEarlyFlush = "opengl-early-flush"
   }
 
   struct Miscellaneous {

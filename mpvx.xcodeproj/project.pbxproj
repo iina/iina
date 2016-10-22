@@ -29,7 +29,7 @@
 		8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847644091D48CC3D004F6DF5 /* MPVCommand.swift */; };
 		8476440C1D48F63D004F6DF5 /* OSDMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476440B1D48F63D004F6DF5 /* OSDMessage.swift */; };
 		84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */; };
-		848290751D95978100C3C76C /* libmpv.1.22.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 848290741D95978100C3C76C /* libmpv.1.22.0.dylib */; };
+		84817C941DBBF8E000CC2279 /* libmpv.1.23.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84817C931DBBF8E000CC2279 /* libmpv.1.23.0.dylib */; };
 		8487BEC11D744FA800FD17B0 /* FlippedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487BEC01D744FA800FD17B0 /* FlippedView.swift */; };
 		8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487BEC21D76A1AF00FD17B0 /* MenuController.swift */; };
 		84A0BA901D2F8D4100BC8DA1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA8F1D2F8D4100BC8DA1 /* Error.swift */; };
@@ -90,6 +90,7 @@
 		847644091D48CC3D004F6DF5 /* MPVCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVCommand.swift; sourceTree = "<group>"; };
 		8476440B1D48F63D004F6DF5 /* OSDMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OSDMessage.swift; sourceTree = "<group>"; };
 		84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackInfo.swift; sourceTree = "<group>"; };
+		84817C931DBBF8E000CC2279 /* libmpv.1.23.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpv.1.23.0.dylib; sourceTree = "<group>"; };
 		848290741D95978100C3C76C /* libmpv.1.22.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.22.0.dylib; path = libmpv/lib/libmpv.1.22.0.dylib; sourceTree = "<group>"; };
 		8487BEC01D744FA800FD17B0 /* FlippedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlippedView.swift; sourceTree = "<group>"; };
 		8487BEC21D76A1AF00FD17B0 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 		84FF84701D2FF698001B318A /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
 		84FF84711D2FF698001B318A /* opengl_cb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl_cb.h; sourceTree = "<group>"; };
 		84FF84721D2FF698001B318A /* qthelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = qthelper.hpp; sourceTree = "<group>"; };
-		84FF84741D2FF698001B318A /* libmpv.1.21.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpv.1.21.0.dylib; sourceTree = "<group>"; };
 		84FF84751D2FF698001B318A /* libmpv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpv.1.dylib; sourceTree = "<group>"; };
 		84FF84761D2FF698001B318A /* libmpv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpv.dylib; sourceTree = "<group>"; };
 		84FF84781D2FF698001B318A /* mpv.pc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mpv.pc; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 			files = (
 				84FF847B1D2FF698001B318A /* libmpv.dylib in Frameworks */,
 				84FF847A1D2FF698001B318A /* libmpv.1.dylib in Frameworks */,
-				848290751D95978100C3C76C /* libmpv.1.22.0.dylib in Frameworks */,
+				84817C941DBBF8E000CC2279 /* libmpv.1.23.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +339,7 @@
 		84FF84731D2FF698001B318A /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				84FF84741D2FF698001B318A /* libmpv.1.21.0.dylib */,
+				84817C931DBBF8E000CC2279 /* libmpv.1.23.0.dylib */,
 				84FF84751D2FF698001B318A /* libmpv.1.dylib */,
 				84FF84761D2FF698001B318A /* libmpv.dylib */,
 				84FF84771D2FF698001B318A /* pkgconfig */,

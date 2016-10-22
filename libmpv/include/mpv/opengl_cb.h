@@ -190,6 +190,29 @@ extern "C" {
  * In previous libmpv releases, this used "GL_MP_D3D_interfaces" and
  * "glMPGetD3DInterface". This is deprecated; use glMPGetNativeDisplay instead
  * (the semantics are 100% compatible).
+ *
+ * Windowing system interop on RPI
+ * -------------------------------
+ *
+ * The RPI uses no proper interop, but hardware overlays instead. To place the
+ * overlay correctly, you can communicate the window parameters as follows to
+ * libmpv. gl->MPGetNativeDisplay("MPV_RPI_WINDOW") return an array of type int
+ * with the following 4 elements:
+ *      0: display number (default 0)
+ *      1: layer number of the GL layer - video will be placed in the layer
+ *         directly below (default: 0)
+ *      2: absolute x position of the GL context (default: 0)
+ *      3: absolute y position of the GL context (default: 0)
+ * The (x,y) position must be the absolute screen pixel position of the
+ * top/left pixel of the dispmanx layer used for the GL context. If you render
+ * to a FBO, the position must be that of the final position of the FBO
+ * contents on screen. You can't transform or scale the video other than what
+ * mpv will render to the video overlay. The defaults are suitable for
+ * rendering the video at fullscreen.
+ * The parameters are checked on every draw by calling MPGetNativeDisplay and
+ * checking the values in the returned array for changes. The returned array
+ * must remain valid until the libmpv render function returns; then it can be
+ * deallocated by the API user.
  */
 
 /**

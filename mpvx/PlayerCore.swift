@@ -271,27 +271,27 @@ class PlayerCore: NSObject {
   }
   
   func setSubTextColor(_ colorString: String) {
-    mpvController.setString("options/" + MPVOption.OSD.subTextColor, colorString)
+    mpvController.setString("options/" + MPVOption.Subtitles.subColor, colorString)
   }
   
   func setSubTextSize(_ size: Double) {
-    mpvController.setDouble("options/" + MPVOption.OSD.subTextFontSize, size)
+    mpvController.setDouble("options/" + MPVOption.Subtitles.subFontSize, size)
   }
   
   func setSubTextBold(_ bold: Bool) {
-    mpvController.setFlag("options/" + MPVOption.OSD.subTextBold, bold)
+    mpvController.setFlag("options/" + MPVOption.Subtitles.subBold, bold)
   }
   
   func setSubTextBorderColor(_ colorString: String) {
-    mpvController.setString("options/" + MPVOption.OSD.subTextBorderColor, colorString)
+    mpvController.setString("options/" + MPVOption.Subtitles.subBorderColor, colorString)
   }
   
   func setSubTextBorderSize(_ size: Double) {
-    mpvController.setDouble("options/" + MPVOption.OSD.subTextBorderSize, size)
+    mpvController.setDouble("options/" + MPVOption.Subtitles.subBorderSize, size)
   }
   
   func setSubTextBgColor(_ colorString: String) {
-    mpvController.setString("options/" + MPVOption.OSD.subTextBackColor, colorString)
+    mpvController.setString("options/" + MPVOption.Subtitles.subBackColor, colorString)
   }
   
   // MARK: - Other

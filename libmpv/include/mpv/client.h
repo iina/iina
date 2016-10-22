@@ -135,10 +135,6 @@ extern "C" {
  *   (used through libass), ALSA, FFmpeg, and possibly more.
  * - The FPU precision must be set at least to double precision.
  * - On Windows, mpv will call timeBeginPeriod(1).
- * - On UNIX, every mpv_initialize() call will block SIGPIPE. This is done
- *   because FFmpeg makes unsafe use of OpenSSL and GnuTLS, which can raise
- *   this signal under certain circumstances. Once these libraries (or FFmpeg)
- *   are fixed, libmpv will not block the signal anymore.
  * - On memory exhaustion, mpv will kill the process.
  *
  * Encoding of filenames
@@ -215,7 +211,7 @@ extern "C" {
  * relational operators (<, >, <=, >=).
  */
 #define MPV_MAKE_VERSION(major, minor) (((major) << 16) | (minor) | 0UL)
-#define MPV_CLIENT_API_VERSION MPV_MAKE_VERSION(1, 22)
+#define MPV_CLIENT_API_VERSION MPV_MAKE_VERSION(1, 23)
 
 /**
  * Return the MPV_CLIENT_API_VERSION the mpv source has been compiled with.
@@ -370,10 +366,11 @@ const char *mpv_client_name(mpv_handle *ctx);
  * and needs to be initialized to be actually used with most other API
  * functions.
  *
- * Most API functions will return MPV_ERROR_UNINITIALIZED in the uninitialized
- * state. You can call mpv_set_option() (or mpv_set_option_string() and other
- * variants) to set initial options. After this, call mpv_initialize() to start
- * the player, and then use e.g. mpv_command() to start playback of a file.
+ * Some API functions will return MPV_ERROR_UNINITIALIZED in the uninitialized
+ * state. You can call mpv_set_property() (or mpv_set_property_string() and
+ * other variants, and before mpv 0.21.0 mpv_set_option() etc.) to set initial
+ * options. After this, call mpv_initialize() to start the player, and then use
+ * e.g. mpv_command() to start playback of a file.
  *
  * The point of separating handle creation and actual initialization is that
  * you can configure things which can't be changed during runtime.
@@ -401,7 +398,7 @@ const char *mpv_client_name(mpv_handle *ctx);
  * options.
  *
  * The mpv command line parser is not available through this API, but you can
- * set individual options with mpv_set_option(). Files for playback must be
+ * set individual options with mpv_set_property(). Files for playback must be
  * loaded with mpv_command() or others.
  *
  * Note that you should avoid doing concurrent accesses on the uninitialized
@@ -421,6 +418,17 @@ mpv_handle *mpv_create(void);
  *
  * This function needs to be called to make full use of the client API if the
  * client API handle was created with mpv_create().
+ *
+ * Only the following options require to be set _before_ mpv_initialize():
+ *      - options which are only read at initialization time:
+ *        - config
+ *        - config-dir
+ *        - input-conf
+ *        - load-scripts
+ *        - script
+ *        - player-operation-mode
+ *        - input-app-events (OSX)
+ *      - all encoding mode options
  *
  * @return error code
  */
@@ -492,10 +500,6 @@ mpv_handle *mpv_create_client(mpv_handle *ctx, const char *name);
  * possible that some options were successfully set even if any of these errors
  * happen.
  *
- * The same restrictions as with mpv_set_option() apply: some options can't
- * be set outside of idle or uninitialized state, and many options don't
- * take effect immediately.
- *
  * @param filename absolute path to the config file on the local filesystem
  * @return error code
  */
@@ -518,6 +522,11 @@ int mpv_load_config_file(mpv_handle *ctx, const char *filename);
  * mpv_suspend() is not allowed.
  *
  * Calling this on an uninitialized player (see mpv_create()) will deadlock.
+ *
+ * @deprecated This function, as well as mpv_resume(), are deprecated, and
+ *             will stop doing anything soon. Their semantics were never
+ *             well-defined, and their usefulness is extremely limited. The
+ *             calls will remain stubs in order to keep ABI compatibility.
  */
 void mpv_suspend(mpv_handle *ctx);
 
@@ -778,15 +787,35 @@ void mpv_free_node_contents(mpv_node *node);
  * works in uninitialized state (see mpv_create()), and in some cases in at
  * runtime.
  *
- * Changing options at runtime does not always work. For some options, attempts
- * to change them simply fails. Many other options may require reloading the
- * file for changes to take effect. In general, you should prefer calling
- * mpv_set_property() to change settings during playback, because the property
- * mechanism guarantees that changes take effect immediately.
- *
  * Using a format other than MPV_FORMAT_NODE is equivalent to constructing a
  * mpv_node with the given format and data, and passing the mpv_node to this
  * function.
+ *
+ * Note: this is semi-deprecated. For most purposes, this is not needed anymore.
+ *       Starting with mpv version 0.21.0 (version 1.23) most options can be set
+ *       with mpv_set_property() (and related functions), and even before
+ *       mpv_initialize(). In some obscure corner cases, using this function
+ *       to set options might still be required (see below, and also section
+ *       "Inconsistencies between options and properties" on the manpage). Once
+ *       these are resolved, the option setting functions might be fully
+ *       deprecated.
+ *
+ *       The following options still need to be set either _before_
+ *       mpv_initialize() with mpv_set_property() (or related functions), or
+ *       with mpv_set_option() (or related functions) at any time:
+ *              - options shadowed by deprecated properties:
+ *                - demuxer (property deprecated in 0.21.0)
+ *                - idle (property deprecated in 0.21.0)
+ *                - fps (property deprecated in 0.21.0)
+ *                - cache (property deprecated in 0.21.0)
+ *                - length (property deprecated in 0.10.0)
+ *                - audio-samplerate (property deprecated in 0.10.0)
+ *                - audio-channels (property deprecated in 0.10.0)
+ *                - audio-format (property deprecated in 0.10.0)
+ *              - deprecated options shadowed by properties:
+ *                - chapter (option deprecated in 0.21.0)
+ *                - playlist-pos (option deprecated in 0.21.0)
+ *       The deprecated properties will be removed in mpv 0.22.0.
  *
  * @param name Option name. This is the same as on the mpv command line, but
  *             without the leading "--".
@@ -892,6 +921,15 @@ int mpv_command_node_async(mpv_handle *ctx, uint64_t reply_userdata,
  * Using a format other than MPV_FORMAT_NODE is equivalent to constructing a
  * mpv_node with the given format and data, and passing the mpv_node to this
  * function. (Before API version 1.21, this was different.)
+ *
+ * Note: starting with mpv 0.21.0 (client API version 1.23), this can be used to
+ *       set options in general. It even can be used before mpv_initialize()
+ *       has been called. If called before mpv_initialize(), setting properties
+ *       not backed by options will result in MPV_ERROR_PROPERTY_UNAVAILABLE.
+ *       In some cases, properties and options still conflict. In these cases,
+ *       mpv_set_property() accesses the options before mpv_initialize(), and
+ *       the properties after mpv_initialize(). These conflicts will be removed
+ *       in mpv 0.22.0. See mpv_set_option() for further remarks.
  *
  * @param name The property name. See input.rst for a list of properties.
  * @param format see enum mpv_format.

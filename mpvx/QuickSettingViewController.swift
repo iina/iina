@@ -99,8 +99,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       subScaleSlider.isEnabled = true
     }
     // update values
-    let currSubTextColor = playerCore.mpvController.getString(MPVOption.Subtitles.subColor)
-    print(currSubTextColor)
+    let currSubBold = playerCore.mpvController.getFlag("sub-bold")
+    subTextSBoldCheckBox.state = currSubBold ? NSOnState : NSOffState
     
   }
   

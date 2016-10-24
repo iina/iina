@@ -777,14 +777,14 @@
                                                                 <constraint firstAttribute="height" constant="1" id="W2h-DQ-cHB"/>
                                                             </constraints>
                                                         </box>
-                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="gSw-NK-ZU6" userLabel="Sub Style">
+                                                        <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gSw-NK-ZU6" userLabel="Sub Style">
                                                             <rect key="frame" x="0.0" y="0.0" width="360" height="331"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9xm-5m-Q7G">
                                                                     <rect key="frame" x="18" y="249" width="48" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Scale:" id="Wbx-Ti-qiS">
-                                                                        <font key="font" metaFont="systemBold"/>
+                                                                        <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -820,7 +820,7 @@
                                                                     <rect key="frame" x="19" y="187" width="34" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Text:" id="ZBd-13-lA1">
-                                                                        <font key="font" metaFont="systemBold"/>
+                                                                        <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -829,7 +829,7 @@
                                                                     <rect key="frame" x="18" y="119" width="89" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Text border:" id="aj5-X6-WEF">
-                                                                        <font key="font" metaFont="systemBold"/>
+                                                                        <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -838,7 +838,7 @@
                                                                     <rect key="frame" x="19" y="51" width="122" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Text background:" id="elO-OE-lHQ">
-                                                                        <font key="font" metaFont="systemBold"/>
+                                                                        <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -982,6 +982,10 @@
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
+                                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z7w-co-Q2T">
+                                                                    <rect key="frame" x="-1" y="81" width="361" height="35"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                </customView>
                                                             </subviews>
                                                         </customView>
                                                     </subviews>

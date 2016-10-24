@@ -137,6 +137,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     osd.isHidden = true
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
+    // move to center
+    w.center()
     // make main
     w.makeMain()
     w.makeKeyAndOrderFront(nil)

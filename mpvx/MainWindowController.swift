@@ -131,11 +131,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let cv = w.contentView else { return }
     cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: nil))
     // video view
-//    videoView.translatesAutoresizingMaskIntoConstraints = false
+    // note that don't use auto resize for it (handle in windowDidResize)
+    cv.autoresizesSubviews = false
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
-    w.visualizeConstraints(videoView.constraints)
     // gesture recognizer
-    cv.addGestureRecognizer(magnificationGestureRecognizer)
+    // disable it first for poor performance
+    // cv.addGestureRecognizer(magnificationGestureRecognizer)
     // start mpv opengl_cb
     playerCore.startMPVOpenGLCB(videoView)
     // init quick setting view now
@@ -306,7 +307,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let dw = playerCore.info.displayWidth!
       // need convert to backing
       windowResizeMultiplier = w.convertToBacking(w.frame).width / CGFloat(dw)
-//      videoView.setFrameSize(w.frame.size)
+      videoView.setFrameSize(w.frame.size)
     }
     // update control bar position
     let cph = ud.float(forKey: Preference.Key.controlBarPositionHorizontal)

@@ -84,6 +84,10 @@ extension NSSize {
     return NSSize(width: width * multiplier, height: height * multiplier)
   }
   
+  func add(_ multiplier: CGFloat) -> NSSize {
+    return NSSize(width: width + multiplier, height: height + multiplier)
+  }
+  
 }
 
 extension NSRect {
@@ -175,3 +179,4 @@ extension NSColor {
     }
   }
 }
+

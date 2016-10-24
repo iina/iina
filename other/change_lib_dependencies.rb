@@ -11,6 +11,10 @@ lib_path = File.join(lib_folder, LIB_NAME)
 libs = [lib_path]
 fix_count = 0
 
+# should run these first - will add later
+"cp path/to/libmpv ./libmpv/libs"
+"sudo install_name_tool -id @executable_path/../Frameworks/libmpv.1.23.0.dylib ./libmpv/lib/libmpv.1.23.0.dylib"
+
 while not libs.empty?
 
   curr_lib = libs.pop

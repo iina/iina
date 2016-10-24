@@ -305,6 +305,23 @@
                             <menuItem title="Load External Subtitle..." id="k6x-hf-ATi">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="58S-lP-UEY"/>
+                            <menuItem title="Encode" id="Pci-OQ-Vni">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" id="Pf6-5i-B1E" userLabel="Encode Menu">
+                                    <items>
+                                        <menuItem title="Item 1" id="oT7-vJ-TMf">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Item 2" id="Hc5-ga-KI0">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Item 3" id="BFU-OF-FDJ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="sMg-1y-9zx"/>
                             <menuItem title="Increase Text Size" id="XHu-Dl-Vq2">
                                 <modifierMask key="keyEquivalentModifierMask"/>

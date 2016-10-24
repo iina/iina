@@ -88,6 +88,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     return playListView
   }()
   
+  var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
+  
   @IBOutlet weak var titleBarView: NSVisualEffectView!
   @IBOutlet weak var titleTextField: NSTextField!
   @IBOutlet weak var controlBar: ControlBarView!
@@ -129,7 +131,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let cv = w.contentView else { return }
     cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: nil))
     // video view
+//    videoView.translatesAutoresizingMaskIntoConstraints = false
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
+    w.visualizeConstraints(videoView.constraints)
+    // gesture recognizer
+    cv.addGestureRecognizer(magnificationGestureRecognizer)
+    // start mpv opengl_cb
     playerCore.startMPVOpenGLCB(videoView)
     // init quick setting view now
     let _ = quickSettingView
@@ -237,6 +244,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
+  func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
+    guard window != nil else { return }
+    let scale = recognizer.magnification * 10
+    let newWidth = window!.frame.width + scale
+    let newSize = NSSize(width: newWidth, height: window!.frame.width / (window!.aspectRatio.width / window!.aspectRatio.height))
+    let newFrame = window!.frame.centeredResize(to: newSize)
+    window!.setFrame(newFrame, display: true, animate: false)
+  }
+  
   // MARK: - Window delegate
   
   func windowWillEnterFullScreen(_ notification: Notification) {
@@ -290,6 +306,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let dw = playerCore.info.displayWidth!
       // need convert to backing
       windowResizeMultiplier = w.convertToBacking(w.frame).width / CGFloat(dw)
+//      videoView.setFrameSize(w.frame.size)
     }
     // update control bar position
     let cph = ud.float(forKey: Preference.Key.controlBarPositionHorizontal)

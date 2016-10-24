@@ -59,6 +59,7 @@
 		84817CE01DBE1A6B00CC2279 /* libavresample.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84817CDC1DBE1A5D00CC2279 /* libavresample.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84817CE11DBE1A6B00CC2279 /* libpostproc.54.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84817CDD1DBE1A5D00CC2279 /* libpostproc.54.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84817CE91DBE2E5300CC2279 /* autoload.lua in Copy Lua Scripts */ = {isa = PBXBuildFile; fileRef = 84817CE61DBE2D0300CC2279 /* autoload.lua */; };
+		84817CEC1DBE372B00CC2279 /* libuchardet.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84817CEA1DBE36F500CC2279 /* libuchardet.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8487BEC11D744FA800FD17B0 /* FlippedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487BEC01D744FA800FD17B0 /* FlippedView.swift */; };
 		8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487BEC21D76A1AF00FD17B0 /* MenuController.swift */; };
 		84A0BA901D2F8D4100BC8DA1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA8F1D2F8D4100BC8DA1 /* Error.swift */; };
@@ -102,6 +103,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				84817CEC1DBE372B00CC2279 /* libuchardet.0.dylib in Copy Dylibs */,
 				84817CE01DBE1A6B00CC2279 /* libavresample.3.dylib in Copy Dylibs */,
 				84817CE11DBE1A6B00CC2279 /* libpostproc.54.dylib in Copy Dylibs */,
 				84817CD21DBE174600CC2279 /* libfontconfig.1.dylib in Copy Dylibs */,
@@ -195,6 +197,7 @@
 		84817CDC1DBE1A5D00CC2279 /* libavresample.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavresample.3.dylib; path = libmpv/lib/libavresample.3.dylib; sourceTree = "<group>"; };
 		84817CDD1DBE1A5D00CC2279 /* libpostproc.54.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpostproc.54.dylib; path = libmpv/lib/libpostproc.54.dylib; sourceTree = "<group>"; };
 		84817CE61DBE2D0300CC2279 /* autoload.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autoload.lua; sourceTree = "<group>"; };
+		84817CEA1DBE36F500CC2279 /* libuchardet.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuchardet.0.dylib; path = libmpv/lib/libuchardet.0.dylib; sourceTree = "<group>"; };
 		8487BEC01D744FA800FD17B0 /* FlippedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlippedView.swift; sourceTree = "<group>"; };
 		8487BEC21D76A1AF00FD17B0 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		8497A4831D2FF573005F504F /* mpvx-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mpvx-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -211,7 +214,7 @@
 		84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVPlaylistItem.swift; sourceTree = "<group>"; };
 		84D377641D7370EE007F7396 /* ChapterTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterTableCellView.swift; sourceTree = "<group>"; };
 		84D377661D737F58007F7396 /* MPVChapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVChapter.swift; sourceTree = "<group>"; };
-		84EB1ED61D2F51D3004FA5A1 /* mpvx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mpvx.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84EB1ED61D2F51D3004FA5A1 /* NazoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NazoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84EB1EE01D2F51D3004FA5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -283,6 +286,7 @@
 		848290731D95978100C3C76C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84817CEA1DBE36F500CC2279 /* libuchardet.0.dylib */,
 				84817CDC1DBE1A5D00CC2279 /* libavresample.3.dylib */,
 				84817CDD1DBE1A5D00CC2279 /* libpostproc.54.dylib */,
 				84817CBE1DBE173600CC2279 /* libfontconfig.1.dylib */,
@@ -418,7 +422,7 @@
 		84EB1ED71D2F51D3004FA5A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84EB1ED61D2F51D3004FA5A1 /* mpvx.app */,
+				84EB1ED61D2F51D3004FA5A1 /* NazoPlayer.app */,
 				84EB1EE51D2F51D3004FA5A1 /* mpvxTests.xctest */,
 			);
 			name = Products;
@@ -492,7 +496,7 @@
 			);
 			name = mpvx;
 			productName = mpvx;
-			productReference = 84EB1ED61D2F51D3004FA5A1 /* mpvx.app */;
+			productReference = 84EB1ED61D2F51D3004FA5A1 /* NazoPlayer.app */;
 			productType = "com.apple.product-type.application";
 		};
 		84EB1EE41D2F51D3004FA5A1 /* mpvxTests */ = {
@@ -805,8 +809,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvx;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.mpvx;
+				PRODUCT_NAME = NazoPlayer;
 				SWIFT_OBJC_BRIDGING_HEADER = "mpvx/mpvx-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -828,8 +832,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-DRELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvx;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.mpvx;
+				PRODUCT_NAME = NazoPlayer;
 				SWIFT_OBJC_BRIDGING_HEADER = "mpvx/mpvx-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;

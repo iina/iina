@@ -87,12 +87,33 @@ extension NSSize {
 }
 
 extension NSRect {
-  mutating func toCenteredResize(fromOriginalRect oRect: NSRect) {
-    origin = CGPoint(x: oRect.origin.x + (oRect.width - width) / 2, y: oRect.origin.y + (oRect.height - height) / 2)
-  }
   
   func multiply(_ multiplier: CGFloat) -> NSRect {
     return NSRect(x: origin.x, y: origin.y, width: width * multiplier, height: height * multiplier)
+  }
+  
+  func centeredResize(to newSize: NSSize) -> NSRect {
+    return NSRect(x: origin.x - (newSize.width - size.width) / 2,
+                  y: origin.y - (newSize.height - size.height) / 2,
+                  width: newSize.width,
+                  height: newSize.height)
+  }
+  
+  func constrain(in biggerRect: NSRect) -> NSRect {
+    var newX = origin.x, newY = origin.y
+    if newX < 0 {
+      newX = 0
+    }
+    if newY < 0 {
+      newY = 0
+    }
+    if newX + size.width > biggerRect.width {
+      newX = biggerRect.width - size.width
+    }
+    if newY + size.height > biggerRect.height {
+      newY = biggerRect.height - size.height
+    }
+    return NSRect(x: newX, y: newY, width: size.width, height: size.height)
   }
 }
 

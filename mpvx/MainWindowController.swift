@@ -474,8 +474,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     videoSize = videoSize.multiply(windowResizeMultiplier)
     
     // window!.setContentSize(videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
-    var rect = NSRect(origin: w.frame.origin, size: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
-    rect.toCenteredResize(fromOriginalRect: w.frame)
+    let rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
     w.setFrame(rect, display: true, animate: true)
     videoView.videoSize = originalVideoSize
     if (!window!.isVisible) {
@@ -827,23 +826,32 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     //  3: fit screen
     let size = sender.tag
     guard let w = window, let vw = playerCore.info.displayWidth, let vh = playerCore.info.displayHeight else { return }
+    
     var retinaSize = w.convertFromBacking(NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(vw), CGFloat(vh)))
+    let screenFrame = NSScreen.main()!.visibleFrame
+    let newFrame: NSRect
     let sizeMap: [CGFloat] = [0.5, 1, 2]
+    
     switch size {
+    // scale
     case 0, 1, 2:
       retinaSize.size.width *= sizeMap[size]
       retinaSize.size.height *= sizeMap[size]
-      retinaSize.toCenteredResize(fromOriginalRect: w.frame)
-      w.setFrame(retinaSize, display: true, animate: true)
+      if retinaSize.size.width > screenFrame.size.width || retinaSize.size.height > screenFrame.size.height {
+        newFrame = w.frame.centeredResize(to: w.frame.size.shrink(toSize: screenFrame.size)).constrain(in: screenFrame)
+      } else {
+        newFrame = w.frame.centeredResize(to: retinaSize.size).constrain(in: screenFrame)
+      }
+    // fit screen
     case 3:
-      let screenFrame = NSScreen.main()!.visibleFrame
-      let newSize = w.frame.size.shrink(toSize: screenFrame.size)
-      var newFrame = NSRect(origin: w.frame.origin, size: newSize)
-      newFrame.toCenteredResize(fromOriginalRect: screenFrame)
-      w.setFrame(newFrame, display: true, animate: true)
+      w.center()
+      newFrame = w.frame.centeredResize(to: w.frame.size.shrink(toSize: screenFrame.size))
+      
     default:
       return
     }
+    
+    w.setFrame(newFrame, display: true, animate: true)
   }
   
   @IBAction func menuToggleFullScreen(_ sender: NSMenuItem) {

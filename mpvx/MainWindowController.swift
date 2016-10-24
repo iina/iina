@@ -18,7 +18,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
-  var windowResizeMultiplier: CGFloat = 1.0
   
   var isInFullScreen: Bool = false
   
@@ -264,7 +263,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // stop animation and hide titleBarView
     animationState = .hidden
     titleBarView.isHidden = true
-    Swift.print("fullscreen")
     isInFullScreen = true
   }
   
@@ -276,7 +274,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     titleBarView.isHidden = false
     animationState = .shown
     addBackTitlebarToFadeableViews()
-    Swift.print("exit fullscreen")
     isInFullScreen = false
     // set back frame of videoview
     videoView.frame = window!.contentView!.frame
@@ -284,30 +281,25 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   func windowDidResize(_ notification: Notification) {
     guard let w = window else { return }
-    w.setFrame(w.constrainFrameRect(w.frame, to: w.screen), display: false)
     let wSize = w.frame.size, cSize = controlBar.frame.size
     // update videoview size if in full screen, since aspect ratio may changed
     if (isInFullScreen) {
       let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
       let tryHeight = wSize.width / aspectRatio
-      Swift.print(wSize, aspectRatio, tryHeight)
       if tryHeight < wSize.height {
-        // should have black above and below
+        // should have black bar above and below
         let targetHeight = wSize.width / aspectRatio
         let yOffset = (wSize.height - targetHeight) / 2
         videoView.frame = NSMakeRect(0, yOffset, wSize.width, targetHeight)
       } else if tryHeight > wSize.height{
-        // should have black left and right
+        // should have black bar left and right
         let targetWidth = wSize.height * aspectRatio
         let xOffset = (wSize.width - targetWidth) / 2
         videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
       }
     } else {
-      // record windowResizeMultiplier
-      let dw = playerCore.info.displayWidth!
-      // need convert to backing
-      windowResizeMultiplier = w.convertToBacking(w.frame).width / CGFloat(dw)
-      videoView.setFrameSize(w.frame.size)
+      videoView.setFrameSize(w.contentView!.frame.size)
+      
     }
     // update control bar position
     let cph = ud.float(forKey: Preference.Key.controlBarPositionHorizontal)
@@ -478,23 +470,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // set aspect ratio
     let originalVideoSize = NSSize(width: width, height: height)
     w.aspectRatio = originalVideoSize
+    videoView.videoSize = originalVideoSize
+    
+    if isInFullScreen {
+      self.windowDidResize(Notification(name: .NSWindowDidResize))
+      return
+    }
     // get videoSize on screen
     var videoSize = w.convertFromBacking(
       NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))
     ).size
-    
     // check screen size
     if let screenSize = NSScreen.main()?.visibleFrame.size {
       videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
       // check default window position
     }
     
-    videoSize = videoSize.multiply(windowResizeMultiplier)
-    
-    // window!.setContentSize(videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
     let rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
     w.setFrame(rect, display: true, animate: true)
-    videoView.videoSize = originalVideoSize
     if (!window!.isVisible) {
       window!.setIsVisible(true)
     }

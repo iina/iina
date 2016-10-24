@@ -29,6 +29,7 @@ class Utility {
   static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
     if !expr {
       NSLog("%@", errorMessage)
+      showAlert(message: "Fatal error: \(errorMessage) The application will exit now.")
       block()
       exit(1)
     }
@@ -36,7 +37,8 @@ class Utility {
   
   static func fatal(_ message: String, _ block: () -> Void = {}) {
     NSLog("%@", message)
-    print(Thread.callStackSymbols)
+    NSLog(Thread.callStackSymbols.joined(separator: "\n"))
+    showAlert(message: "Fatal error: \(message) The application will exit now.")
     block()
     exit(1)
   }

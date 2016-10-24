@@ -52,7 +52,8 @@ class MPVController: NSObject {
     e(mpv_set_option_string(mpv, MPVOption.Video.hwdecPreload, "auto"))
     
     // Load external scripts
-    e(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, "/Users/admin/Project/mpvx/mpvx/tools/autoload.lua"))
+    let scriptPath = Bundle.main.path(forResource: "autoload", ofType: "lua", inDirectory: "scripts")!
+    e(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, scriptPath))
     
     // Receive log messages at warn level.
     e(mpv_request_log_messages(mpv, "warn"))

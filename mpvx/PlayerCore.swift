@@ -53,7 +53,9 @@ class PlayerCore: NSObject {
   func terminateMPV() {
     syncPlayTimeTimer?.invalidate()
     mpvController.mpvQuit()
-    mainWindow.videoView.clearGLContext()
+    if mainWindow.isWindowLoaded {
+      mainWindow.videoView.clearGLContext()
+    }
   }
   
   // MARK: - MPV commands

@@ -103,15 +103,24 @@ class VideoView: NSOpenGLView {
       UInt32(NSOpenGLPFAOpenGLProfile), UInt32(NSOpenGLProfileVersion3_2Core),
       0
     ]
-    let pixelFormat = NSOpenGLPixelFormat(attributes: attributes)!
-    super.init(frame: frame, pixelFormat: pixelFormat)!
+    let desentAttributes: [NSOpenGLPixelFormatAttribute] = [
+      UInt32(NSOpenGLPFADoubleBuffer),
+      UInt32(NSOpenGLPFAOpenGLProfile), UInt32(NSOpenGLProfileVersion3_2Core),
+      0
+    ]
+    
+    let pixelFormat = NSOpenGLPixelFormat(attributes: attributes) ?? NSOpenGLPixelFormat(attributes: desentAttributes)
+    Utility.assert(pixelFormat != nil, "Cannot create pixel format")
+    
+    super.init(frame: frame, pixelFormat: pixelFormat!)!
+    
     guard openGLContext != nil else {
       Utility.fatal("Cannot initialize OpenGL Context")
       return
     }
     
     // set up another context for offscreen render thread
-    renderContext = NSOpenGLContext(format: pixelFormat, share: openGLContext)!
+    renderContext = NSOpenGLContext(format: pixelFormat!, share: openGLContext)!
     
     // init shader
     let vertexShader = initShader(vertexShaderName, type: GLenum(GL_VERTEX_SHADER))

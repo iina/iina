@@ -72,6 +72,9 @@
                                     <action selector="openFile:" target="Voe-Tx-rLC" id="Aev-CZ-Gfe"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Open URL..." id="0m7-3r-twH">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem title="Open Recent" id="tXI-mr-wws">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="oas-Oc-fiZ">
@@ -84,6 +87,10 @@
                                         </menuItem>
                                     </items>
                                 </menu>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="N0Z-h7-JSg"/>
+                            <menuItem title="Share" id="BtY-iQ-6Pf">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                             <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
@@ -152,6 +159,13 @@
                             </menuItem>
                             <menuItem title="Double Size" keyEquivalent="2" id="Hal-18-Tnf"/>
                             <menuItem title="Fit to Screen" keyEquivalent="3" id="SHd-63-Xoh"/>
+                            <menuItem isSeparatorItem="YES" id="Ap4-Sw-qOT"/>
+                            <menuItem title="Bigger Size" id="lDC-IC-peP">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Smaller Size" id="ZOF-MG-6II">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="F7U-cD-2ou"/>
                             <menuItem title="Full Screen" keyEquivalent="f" id="6Eq-ni-6hG"/>
                             <menuItem title="Always on Top" id="wex-rX-PcY">

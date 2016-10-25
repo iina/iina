@@ -234,6 +234,7 @@ class MPVController: NSObject {
   
   private func onFileLoaded() {
     // mpvSuspend()
+    setFlag(MPVOption.PlaybackControl.pause, true)
     // Get video size and set the initial window size
     let width = getInt(MPVProperty.width)
     let height = getInt(MPVProperty.height)
@@ -251,6 +252,7 @@ class MPVController: NSObject {
     playerCore.info.currentURL = URL(fileURLWithPath: filename ?? "")
     playerCore.fileLoaded()
     // mpvResume()
+    setFlag(MPVOption.PlaybackControl.pause, false)
   }
   
   private func onTrackChanged() {

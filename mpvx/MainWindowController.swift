@@ -494,7 +494,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)
     updateVolumeFromUd()
-    
   }
   
   // MARK: - Sync UI with playback

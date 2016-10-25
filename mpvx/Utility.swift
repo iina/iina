@@ -67,12 +67,18 @@ class Utility {
     let input = NSTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
     input.bezelStyle = .roundedBezel
     panel.accessoryView = input
-    panel.addButton(withTitle: "Jump")
+    panel.addButton(withTitle: "OK")
     panel.addButton(withTitle: "Cancel")
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
       ok(input.stringValue)
     }
+  }
+  
+  static func quickFontPickerWindow(ok: @escaping (String?) -> Void) {
+    guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+    appDelegate.fontPicker.finishedPicking = ok
+    appDelegate.fontPicker.showWindow(self)
   }
   
   // MARK: - Util functions

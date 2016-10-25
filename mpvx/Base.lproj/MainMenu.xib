@@ -340,13 +340,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="HAm-FJ-1KF"/>
-                            <menuItem title="Subtitle Position" id="rme-fr-5rr">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem title="Text Color" id="6mZ-QC-qvP">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem title="Background Color" id="crP-fK-33d">
+                            <menuItem title="Font..." id="rme-fr-5rr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
@@ -451,6 +445,7 @@
                 <outlet property="secondSubTrackMenu" destination="UwY-P2-Xdb" id="D3B-WW-bAk"/>
                 <outlet property="stop" destination="deS-xK-iBb" id="ewy-yc-P6T"/>
                 <outlet property="subDelayIndicator" destination="THG-4o-U6A" id="8uv-HK-hwl"/>
+                <outlet property="subFont" destination="rme-fr-5rr" id="fU3-xp-rD9"/>
                 <outlet property="subMenu" destination="EKp-Qx-4Mn" id="BeV-rZ-uYC"/>
                 <outlet property="subTrackMenu" destination="16p-PA-x34" id="yGc-SC-6rd"/>
                 <outlet property="videoTrack" destination="j8P-Gb-HR7" id="hho-ys-R88"/>

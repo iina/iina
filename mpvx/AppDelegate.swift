@@ -13,6 +13,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
   lazy var playerCore: PlayerCore = PlayerCore.shared
   
+  lazy var fontPicker: FontPickerWindowController = FontPickerWindowController()
+  
   @IBOutlet weak var menuController: MenuController!
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {

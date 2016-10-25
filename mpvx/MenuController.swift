@@ -79,6 +79,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var decreaseSubDelay: NSMenuItem!
   @IBOutlet weak var resetSubDelay: NSMenuItem!
   @IBOutlet weak var encodingMenu: NSMenu!
+  @IBOutlet weak var subFont: NSMenuItem!
   
   
   
@@ -169,6 +170,7 @@ class MenuController: NSObject, NSMenuDelegate {
     bind(menu: encodingMenu, withOptions: nil, objects: nil, objectMap: AppData.encodings, action: #selector(MainWindowController.menuSetSubEncoding(_:))) {
       PlayerCore.shared.info.subEncoding == $0.representedObject as? String
     }
+    subFont.action = #selector(MainWindowController.menuSubFont(_:))
   }
   
   private func updatePlaylist() {

@@ -71,6 +71,9 @@
 		84A0BA9F1D2FAD4000BC8DA1 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A0BA9D1D2FAD4000BC8DA1 /* MainWindowController.xib */; };
 		84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */; };
 		84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AABE8A1DBF634600D138FD /* CharEncoding.swift */; };
+		84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AABE921DBFAF1A00D138FD /* FontPickerWindowController.swift */; };
+		84AABE951DBFAF1A00D138FD /* FontPickerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84AABE931DBFAF1A00D138FD /* FontPickerWindowController.xib */; };
+		84AABE981DBFB62F00D138FD /* FixedFontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AABE971DBFB62F00D138FD /* FixedFontManager.m */; };
 		84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D58E1D794CE600D98A0E /* MPVFilter.swift */; };
 		84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D5901D796F9700D98A0E /* Aspect.swift */; };
 		84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */; };
@@ -211,6 +214,10 @@
 		84A0BA9D1D2FAD4000BC8DA1 /* MainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
 		84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		84AABE8A1DBF634600D138FD /* CharEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharEncoding.swift; sourceTree = "<group>"; };
+		84AABE921DBFAF1A00D138FD /* FontPickerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPickerWindowController.swift; sourceTree = "<group>"; };
+		84AABE931DBFAF1A00D138FD /* FontPickerWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontPickerWindowController.xib; sourceTree = "<group>"; };
+		84AABE961DBFB62F00D138FD /* FixedFontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedFontManager.h; sourceTree = "<group>"; };
+		84AABE971DBFB62F00D138FD /* FixedFontManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedFontManager.m; sourceTree = "<group>"; };
 		84C8D58E1D794CE600D98A0E /* MPVFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVFilter.swift; sourceTree = "<group>"; };
 		84C8D5901D796F9700D98A0E /* Aspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aspect.swift; sourceTree = "<group>"; };
 		84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVPlaylistItem.swift; sourceTree = "<group>"; };
@@ -358,6 +365,8 @@
 				8461C52F1D462488006E91FF /* VideoTime.swift */,
 				8434BAA61D5DF2DA003BECF2 /* Extensions.swift */,
 				84C8D5901D796F9700D98A0E /* Aspect.swift */,
+				84AABE961DBFB62F00D138FD /* FixedFontManager.h */,
+				84AABE971DBFB62F00D138FD /* FixedFontManager.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -398,6 +407,8 @@
 				8487BEC01D744FA800FD17B0 /* FlippedView.swift */,
 				84817C951DBDCA5F00CC2279 /* SettingsListCellView.swift */,
 				84817C971DBDCE4300CC2279 /* RoundedColorWell.swift */,
+				84AABE921DBFAF1A00D138FD /* FontPickerWindowController.swift */,
+				84AABE931DBFAF1A00D138FD /* FontPickerWindowController.xib */,
 			);
 			name = Accessories;
 			sourceTree = "<group>";
@@ -568,6 +579,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84AABE951DBFAF1A00D138FD /* FontPickerWindowController.xib in Resources */,
 				8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */,
 				8466BE191D5CDD0300039D03 /* QuickSettingViewController.xib in Resources */,
 				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
@@ -656,6 +668,7 @@
 				84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */,
 				8487BEC11D744FA800FD17B0 /* FlippedView.swift in Sources */,
 				845ABEAC1D4D19C000BFB15B /* MPVTrack.swift in Sources */,
+				84AABE981DBFB62F00D138FD /* FixedFontManager.m in Sources */,
 				84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */,
 				84A0BA901D2F8D4100BC8DA1 /* Error.swift in Sources */,
 				847644081D48B413004F6DF5 /* MPVOption.swift in Sources */,
@@ -664,6 +677,7 @@
 				8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */,
 				845FB0CA1D3A16CC00C011E0 /* PreferenceWindow.swift in Sources */,
 				84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */,
+				84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */,
 				84D377651D7370EE007F7396 /* ChapterTableCellView.swift in Sources */,
 				843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */,
 				84A0BA9B1D2FAB4100BC8DA1 /* Parameter.swift in Sources */,

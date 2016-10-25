@@ -286,7 +286,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if (isInFullScreen) {
       let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
       let tryHeight = wSize.width / aspectRatio
-      if tryHeight < wSize.height {
+      if tryHeight <= wSize.height {
         // should have black bar above and below
         let targetHeight = wSize.width / aspectRatio
         let yOffset = (wSize.height - targetHeight) / 2
@@ -930,6 +930,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   @IBAction func menuSetSubEncoding(_ sender: NSMenuItem) {
     playerCore.setSubEncoding((sender.representedObject as? String) ?? "auto")
+  }
+  
+  @IBAction func menuSubFont(_ sender: NSMenuItem) {
+    Utility.quickFontPickerWindow() {
+      self.playerCore.setSubFont($0 ?? "")
+    }
+    
   }
   
 }

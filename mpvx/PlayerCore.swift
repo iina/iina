@@ -301,6 +301,10 @@ class PlayerCore: NSObject {
     info.subEncoding = encoding
   }
   
+  func setSubFont(_ font: String) {
+    mpvController.setString(MPVOption.Subtitles.subFont, font)
+  }
+  
   // MARK: - Other
   
   /** This function is called right after file loaded. Should load all meta info here. */

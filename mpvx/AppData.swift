@@ -22,6 +22,8 @@ struct AppData {
   static let aspectRegex = Utility.Regex("\\A\\d+(\\.\\d+)?:\\d+(\\.\\d+)?\\Z")
   
   static let rotations: [Int] = [0, 90, 180, 270]
+  
+  static let encodings = CharEncoding.list
 }
 
 

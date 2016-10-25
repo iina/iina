@@ -61,6 +61,8 @@ class PlaybackInfo {
   var vid: Int?
   var secondSid: Int?
   
+  var subEncoding: String?
+  
   func trackList(_ type: MPVTrack.TrackType) -> [MPVTrack] {
     switch type {
     case .video: return videoTracks

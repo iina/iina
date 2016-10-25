@@ -928,4 +928,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     displayOSD(.subDelay(0))
   }
   
+  @IBAction func menuSetSubEncoding(_ sender: NSMenuItem) {
+    playerCore.setSubEncoding((sender.representedObject as? String) ?? "auto")
+  }
+  
 }

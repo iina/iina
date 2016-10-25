@@ -296,6 +296,11 @@ class PlayerCore: NSObject {
     mpvController.setString("options/" + MPVOption.Subtitles.subBackColor, colorString)
   }
   
+  func setSubEncoding(_ encoding: String) {
+    mpvController.setString(MPVOption.Subtitles.subCodepage, encoding)
+    info.subEncoding = encoding
+  }
+  
   // MARK: - Other
   
   /** This function is called right after file loaded. Should load all meta info here. */

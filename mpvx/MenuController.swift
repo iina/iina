@@ -78,6 +78,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var increaseSubDelay: NSMenuItem!
   @IBOutlet weak var decreaseSubDelay: NSMenuItem!
   @IBOutlet weak var resetSubDelay: NSMenuItem!
+  @IBOutlet weak var encodingMenu: NSMenu!
   
   
   
@@ -116,22 +117,19 @@ class MenuController: NSObject, NSMenuDelegate {
     // -- aspect
     var aspectList = AppData.aspects
     aspectList.insert("Default", at: 0)
-    bind(menu: aspectMenu, withOptions: aspectList, objects: nil, action: #selector(MainWindowController.menuChangeAspect(_:))) {
-      menuItem -> Bool in
-      return PlayerCore.shared.info.unsureAspect == menuItem.representedObject as? String
+    bind(menu: aspectMenu, withOptions: aspectList, objects: nil, objectMap: nil, action: #selector(MainWindowController.menuChangeAspect(_:))) {
+      PlayerCore.shared.info.unsureAspect == $0.representedObject as? String
     }
     // -- crop
     var cropList = AppData.aspects
     cropList.insert("None", at: 0)
-    bind(menu: cropMenu, withOptions: cropList, objects: nil, action: #selector(MainWindowController.menuChangeCrop(_:))) {
-      menuItem -> Bool in
-      return PlayerCore.shared.info.unsureCrop == menuItem.representedObject as? String
+    bind(menu: cropMenu, withOptions: cropList, objects: nil, objectMap: nil, action: #selector(MainWindowController.menuChangeCrop(_:))) {
+      PlayerCore.shared.info.unsureCrop == $0.representedObject as? String
     }
     // -- rotation
     let rotationTitles = AppData.rotations.map { "\($0)\(Constants.String.degree)" }
-    bind(menu: rotationMenu, withOptions: rotationTitles, objects: AppData.rotations, action: #selector(MainWindowController.menuChangeRotation(_:))) {
-      menuItem -> Bool in
-      return PlayerCore.shared.info.rotation == menuItem.representedObject as? Int
+    bind(menu: rotationMenu, withOptions: rotationTitles, objects: AppData.rotations, objectMap: nil, action: #selector(MainWindowController.menuChangeRotation(_:))) {
+      PlayerCore.shared.info.rotation == $0.representedObject as? Int
     }
     // -- flip and mirror
     flipMenu.delegate = self
@@ -167,6 +165,10 @@ class MenuController: NSObject, NSMenuDelegate {
       item?.action = #selector(MainWindowController.menuChangeSubDelay(_:))
     }
     resetSubDelay.action = #selector(MainWindowController.menuResetSubDelay(_:))
+    // encoding
+    bind(menu: encodingMenu, withOptions: nil, objects: nil, objectMap: AppData.encodings, action: #selector(MainWindowController.menuSetSubEncoding(_:))) {
+      PlayerCore.shared.info.subEncoding == $0.representedObject as? String
+    }
   }
   
   private func updatePlaylist() {
@@ -225,22 +227,44 @@ class MenuController: NSObject, NSMenuDelegate {
     subDelayIndicator.title = "\(Constants.String.subDelay): \(player.info.subDelay)s"
   }
   
-  /** Bind a menu with a list of available options. */
-  private func bind(menu: NSMenu, withOptions titles: [String], objects: [Any]?, action: Selector?, checkStateBlock block: @escaping (NSMenuItem) -> Bool) {
-    // options and objects must be same
-    guard objects == nil || titles.count == objects?.count else {
-      Utility.log("different object count when binding menu")
-      return
-    }
-    // add menu items
-    for (index, title) in titles.enumerated() {
-      let menuItem = NSMenuItem(title: title, action: action, keyEquivalent: "")
-      if let object = objects?[index] {
-        menuItem.representedObject = object
-      } else {
-        menuItem.representedObject = title
+  /**
+   Bind a menu with a list of available options.
+   @param menu         the NSMenu
+   @param withOptions  option titles for each menu item, as an array
+   @param objects      objects that will be bind to each menu item, as an array
+   @param objectMap    alternatively, can pass a map like [title: object]
+   @action             the action for each menu item
+   @checkStateBlock    a block to set each menu item's state
+   */
+  private func bind(menu: NSMenu,
+                    withOptions titles: [String]?, objects: [Any?]?,
+                    objectMap: [String: Any?]?,
+                    action: Selector?, checkStateBlock block: @escaping (NSMenuItem) -> Bool) {
+    // if use title
+    if let titles = titles {
+      // options and objects must be same
+      guard objects == nil || titles.count == objects?.count else {
+        Utility.log("different object count when binding menu")
+        return
       }
-      menu.addItem(menuItem)
+      // add menu items
+      for (index, title) in titles.enumerated() {
+        let menuItem = NSMenuItem(title: title, action: action, keyEquivalent: "")
+        if let object = objects?[index] {
+          menuItem.representedObject = object
+        } else {
+          menuItem.representedObject = title
+        }
+        menu.addItem(menuItem)
+      }
+    }
+    // if use map
+    if let objectMap = objectMap {
+      for (title, obj) in objectMap {
+        let menuItem = NSMenuItem(title: title, action: action, keyEquivalent: "")
+        menuItem.representedObject = obj
+        menu.addItem(menuItem)
+      }
     }
     // add to list
     menu.delegate = self

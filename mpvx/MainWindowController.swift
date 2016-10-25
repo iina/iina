@@ -918,7 +918,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       playerCore.setSubDelay(newDelay)
       displayOSD(.subDelay(newDelay))
     } else {
-      Utility.log("sender.representedObject is not Double in menuChangeAudioDelay()")
+      Utility.log("sender.representedObject is not Double in menuChangeSubDelay()")
     }
   }
   

@@ -61,7 +61,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   
   @IBOutlet weak var subTextColorWell: NSColorWell!
   @IBOutlet weak var subTextSizePopUp: NSPopUpButton!
-  @IBOutlet weak var subTextSBoldCheckBox: NSButton!
   @IBOutlet weak var subTextBorderColorWell: NSColorWell!
   @IBOutlet weak var subTextBorderWidthPopUp: NSPopUpButton!
   @IBOutlet weak var subTextBgColorWell: NSColorWell!
@@ -99,8 +98,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       subScaleSlider.isEnabled = true
     }
     // update values
-    let currSubBold = playerCore.mpvController.getFlag("sub-bold")
-    subTextSBoldCheckBox.state = currSubBold ? NSOnState : NSOffState
     
   }
   
@@ -371,10 +368,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
   
-  @IBAction func subTextBoldAction(_ sender: AnyObject) {
-    playerCore.setSubTextBold(subTextSBoldCheckBox.state == NSOnState)
-  }
-  
   @IBAction func subTextBorderColorAction(_ sender: AnyObject) {
     playerCore.setSubTextBorderColor(subTextBorderColorWell.color.mpvColorString)
   }
@@ -389,6 +382,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     playerCore.setSubTextBgColor(subTextBgColorWell.color.mpvColorString)
   }
   
+  @IBAction func subFontAction(_ sender: AnyObject) {
+    Utility.quickFontPickerWindow() {
+      self.playerCore.setSubFont($0 ?? "")
+    }
+  }
   
   
 }

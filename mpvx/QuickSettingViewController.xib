@@ -27,7 +27,6 @@
                 <outlet property="subTextBorderColorWell" destination="U2e-zB-Kue" id="07T-zX-Dfu"/>
                 <outlet property="subTextBorderWidthPopUp" destination="bkX-rt-2bg" id="122-AI-eLz"/>
                 <outlet property="subTextColorWell" destination="9mo-uL-hfC" id="HEi-c0-WG6"/>
-                <outlet property="subTextSBoldCheckBox" destination="Uyh-rT-e7F" id="rUR-Vk-Qlg"/>
                 <outlet property="subTextSizePopUp" destination="xtF-tn-m9W" id="62h-S6-9gV"/>
                 <outlet property="tabView" destination="udA-m2-eJb" id="zL4-73-AVP"/>
                 <outlet property="videoTabBtn" destination="Ma8-6g-tVw" id="d0g-Fi-gzz"/>
@@ -833,17 +832,17 @@
                                                                         <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9mo-uL-hfC" customClass="RoundedColorWell" customModule="NazoPlayer" customModuleProvider="target">
                                                                             <rect key="frame" x="60" y="124" width="23" height="23"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                            <color key="color" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <connections>
                                                                                 <action selector="subTextColorAction:" target="-2" id="K9J-nN-LTp"/>
                                                                             </connections>
                                                                         </colorWell>
                                                                         <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xtF-tn-m9W" userLabel="Text fint size">
-                                                                            <rect key="frame" x="159" y="122" width="76" height="26"/>
+                                                                            <rect key="frame" x="158" y="123" width="77" height="22"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                            <popUpButtonCell key="cell" type="push" title="55" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="mep-aa-rk7" id="qha-uU-Cos" userLabel="Cell">
+                                                                            <popUpButtonCell key="cell" type="push" title="55" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="mep-aa-rk7" id="qha-uU-Cos" userLabel="Cell">
                                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                                <font key="font" metaFont="menu"/>
+                                                                                <font key="font" metaFont="smallSystem"/>
                                                                                 <menu key="menu" id="NDG-BT-qrU">
                                                                                     <items>
                                                                                         <menuItem title="30" id="JeH-nY-dU8"/>
@@ -871,26 +870,6 @@
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
-                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tgh-a0-Z45">
-                                                                            <rect key="frame" x="251" y="125" width="47" height="17"/>
-                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Bold:" id="Rvh-Ej-YW8">
-                                                                                <font key="font" metaFont="smallSystem"/>
-                                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                            </textFieldCell>
-                                                                        </textField>
-                                                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uyh-rT-e7F">
-                                                                            <rect key="frame" x="302" y="126" width="18" height="18"/>
-                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                            <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="KSl-5b-wvT">
-                                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                                <font key="font" metaFont="system"/>
-                                                                            </buttonCell>
-                                                                            <connections>
-                                                                                <action selector="subTextBoldAction:" target="-2" id="cgZ-CV-isX"/>
-                                                                            </connections>
-                                                                        </button>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vLY-cB-GEf">
                                                                             <rect key="frame" x="108" y="125" width="47" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -937,15 +916,15 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U2e-zB-Kue" customClass="RoundedColorWell" customModule="NazoPlayer" customModuleProvider="target">
-                                                                            <rect key="frame" x="60" y="72" width="23" height="23"/>
+                                                                            <rect key="frame" x="60" y="73" width="23" height="23"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                            <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <connections>
                                                                                 <action selector="subTextBorderColorAction:" target="-2" id="ACh-s2-ew1"/>
                                                                             </connections>
                                                                         </colorWell>
                                                                         <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ure-tT-JEy" customClass="RoundedColorWell" customModule="NazoPlayer" customModuleProvider="target">
-                                                                            <rect key="frame" x="60" y="20" width="23" height="23"/>
+                                                                            <rect key="frame" x="60" y="18" width="23" height="23"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <color key="color" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                                                             <connections>
@@ -971,11 +950,11 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bkX-rt-2bg" userLabel="Text Border Width">
-                                                                            <rect key="frame" x="159" y="70" width="76" height="26"/>
+                                                                            <rect key="frame" x="158" y="73" width="77" height="22"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                            <popUpButtonCell key="cell" type="push" title="3" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="h6k-DT-fv5" id="xGc-Oh-HJO">
+                                                                            <popUpButtonCell key="cell" type="push" title="3" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="h6k-DT-fv5" id="xGc-Oh-HJO">
                                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                                <font key="font" metaFont="menu"/>
+                                                                                <font key="font" metaFont="smallSystem"/>
                                                                                 <menu key="menu" id="LnU-HE-pGc">
                                                                                     <items>
                                                                                         <menuItem title="0" id="3eG-mV-UGW"/>
@@ -995,6 +974,17 @@
                                                                                 <action selector="subTextBorderWidthAction:" target="-2" id="qyR-r0-5LO"/>
                                                                             </connections>
                                                                         </popUpButton>
+                                                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qGz-rB-dsV">
+                                                                            <rect key="frame" x="266" y="120" width="79" height="28"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                            <buttonCell key="cell" type="push" title="Font..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ghy-e7-7Of">
+                                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                <font key="font" metaFont="smallSystem"/>
+                                                                            </buttonCell>
+                                                                            <connections>
+                                                                                <action selector="subFontAction:" target="-2" id="suw-pH-n9w"/>
+                                                                            </connections>
+                                                                        </button>
                                                                     </subviews>
                                                                 </customView>
                                                             </subviews>

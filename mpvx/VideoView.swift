@@ -169,14 +169,18 @@ class VideoView: NSOpenGLView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
-  deinit {
+  
+  func uninit() {
     // uninit mpv gl
     mpv_opengl_cb_set_update_callback(mpvGLContext, nil, nil)
     mpv_opengl_cb_uninit_gl(mpvGLContext)
     // delete framebuffer
     glDeleteTextures(1, &texture)
     glDeleteFramebuffers(1, &fbo)
+  }
+
+  deinit {
+    uninit()
   }
   
   // MARK: - Preparation

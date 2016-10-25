@@ -52,10 +52,11 @@ class PlayerCore: NSObject {
   // Terminate mpv
   func terminateMPV() {
     syncPlayTimeTimer?.invalidate()
-    mpvController.mpvQuit()
     if mainWindow.isWindowLoaded {
+      mainWindow.videoView.uninit()
       mainWindow.videoView.clearGLContext()
     }
+    mpvController.mpvQuit()
   }
   
   // MARK: - MPV commands

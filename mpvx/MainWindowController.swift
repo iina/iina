@@ -102,6 +102,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var leftArrowLabel: NSTextField!
   @IBOutlet weak var rightArrowLabel: NSTextField!
+  @IBOutlet weak var osdVisualEffectView: NSVisualEffectView!
   @IBOutlet weak var osd: NSTextField!
 
   override func windowDidLoad() {
@@ -141,7 +142,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // init quick setting view now
     let _ = quickSettingView
     // other initialization
-    osd.isHidden = true
+    osdVisualEffectView.isHidden = true
+    osdVisualEffectView.layer?.cornerRadius = 10
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
     // move to center
@@ -386,8 +388,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     osdAnimationState = .shown
     osd.stringValue = message.message()
-    osd.alphaValue = 1
-    osd.isHidden = false
+    osdVisualEffectView.alphaValue = 1
+    osdVisualEffectView.isHidden = false
     let timeout = ud.integer(forKey: Preference.Key.osdAutoHideTimeout)
     hideOSDTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideOSD), userInfo: nil, repeats: false)
   }
@@ -396,7 +398,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     NSAnimationContext.runAnimationGroup({ (context) in
       self.osdAnimationState = .willHide
       context.duration = 0.5
-      osd.animator().alphaValue = 0
+      osdVisualEffectView.animator().alphaValue = 0
     }) {
       if self.osdAnimationState == .willHide {
         self.osdAnimationState = .hidden

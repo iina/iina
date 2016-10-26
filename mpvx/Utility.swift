@@ -38,7 +38,7 @@ class Utility {
   static func fatal(_ message: String, _ block: () -> Void = {}) {
     NSLog("%@", message)
     NSLog(Thread.callStackSymbols.joined(separator: "\n"))
-    showAlert(message: "Fatal error: \(message) The application will exit now.")
+    showAlert(message: "Fatal error: \(message) \nThe application will exit now.")
     block()
     exit(1)
   }

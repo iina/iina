@@ -237,7 +237,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // handle the value
     let seekFactor = 0.05
     if scrollDirection == .horizontal {
-      playerCore.seek(relativeSecond: seekFactor * Double(event.scrollingDeltaX))
+      playerCore.seek(relativeSecond: seekFactor * Double(event.scrollingDeltaX), exact: true)
     } else if scrollDirection == .vertical {
       let newVolume = playerCore.info.volume - Int(event.scrollingDeltaY)
       playerCore.setVolume(newVolume)

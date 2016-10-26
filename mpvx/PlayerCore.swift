@@ -23,6 +23,9 @@ class PlayerCore: NSObject {
   
   var statusPaused: Bool = false
   
+  var triedUsingExactSeekForCurrentFile: Bool = false
+  var useExactSeekForCurrentFile: Bool = true
+  
   // MARK: - Control commands
   
   // Open a file
@@ -93,8 +96,17 @@ class PlayerCore: NSObject {
     mpvController.command([MPVCommand.seek, "\(percent)", seekMode, nil])
   }
 
-  func seek(relativeSecond: Double) {
-    let seekMode = ud.bool(forKey: Preference.Key.useExactSeek) ? "relative+exact" : "relative"
+  func seek(relativeSecond: Double, exact: Bool = false) {
+    // for each file , try use exact and record interval first
+    if !triedUsingExactSeekForCurrentFile {
+      mpvController.recordedSeekTimeListener = { interval in
+        // if seek time < 0.05, then can use exact
+        self.useExactSeekForCurrentFile = interval < 0.05
+      }
+      mpvController.needRecordSeekTime = true
+      triedUsingExactSeekForCurrentFile = true
+    }
+    let seekMode = useExactSeekForCurrentFile ? "relative+exact" : "relative"
     mpvController.command([MPVCommand.seek, "\(relativeSecond)", seekMode, nil])
   }
   
@@ -314,6 +326,7 @@ class PlayerCore: NSObject {
       Utility.fatal("Cannot get video width and height")
       return
     }
+    triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     DispatchQueue.main.sync {
       self.getTrackInfo()
@@ -422,7 +435,7 @@ class PlayerCore: NSObject {
     info.secondSid = mpvController.getInt(MPVOption.Subtitles.secondarySid)
   }
   
-  private func getPLaylist() {
+  func getPLaylist() {
     info.playlist.removeAll()
     let playlistCount = mpvController.getInt(MPVProperty.playlistCount)
     for index in 0...playlistCount-1 {
@@ -434,7 +447,7 @@ class PlayerCore: NSObject {
     }
   }
   
-  private func getChapters() {
+  func getChapters() {
     info.chapters.removeAll()
     let chapterCount = mpvController.getInt(MPVProperty.chapterListCount)
     if chapterCount == 0 {

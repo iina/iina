@@ -22,6 +22,10 @@ class MPVController: NSObject {
   lazy var queue: DispatchQueue! = DispatchQueue(label: "mpvx")
   var playerCore: PlayerCore = PlayerCore.shared
   
+  var needRecordSeekTime: Bool = false
+  var recordedSeekStartTime: CFTimeInterval = 0
+  var recordedSeekTimeListener: ((Double) -> Void)?
+  
   /**
    Init the mpv context
    */
@@ -209,9 +213,16 @@ class MPVController: NSObject {
       onTrackChanged()
       
     case MPV_EVENT_SEEK:
+      if needRecordSeekTime {
+        recordedSeekStartTime = CACurrentMediaTime()
+      }
       playerCore.syncUI(.Time)
       
     case MPV_EVENT_PLAYBACK_RESTART:
+      if needRecordSeekTime {
+        recordedSeekTimeListener?(CACurrentMediaTime() - recordedSeekStartTime)
+        recordedSeekTimeListener = nil
+      }
       playerCore.syncUI(.Time)
       
     case MPV_EVENT_PAUSE, MPV_EVENT_UNPAUSE:
@@ -293,8 +304,7 @@ class MPVController: NSObject {
    */
   private func e(_ status: Int32!) {
     if status < 0 {
-      Utility.showAlert(message: "Cannot start MPV!")
-      Utility.fatal("MPV API error: \(String(cString: mpv_error_string(status)))")
+      Utility.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status).")
     }
   }
   

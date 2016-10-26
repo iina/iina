@@ -56,6 +56,13 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil
     }
+    // get playlist when shown
+    reloadData()
+  }
+  
+  func reloadData() {
+    playerCore.getPLaylist()
+    playerCore.getChapters()
   }
   
   /** Switch tab (call from other objects) */
@@ -96,6 +103,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
   
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     if tableView == playlistTableView {
+      guard row < playerCore.info.playlist.count else { return nil }
       let item = playerCore.info.playlist[row]
       let columnName = tableColumn?.identifier
       if columnName == Constants.Identifier.isChosen {

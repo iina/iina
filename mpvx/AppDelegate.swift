@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import MASPreferences
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -14,6 +15,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   lazy var playerCore: PlayerCore = PlayerCore.shared
   
   lazy var fontPicker: FontPickerWindowController = FontPickerWindowController()
+  
+  lazy var preferenceWindowController: NSWindowController = {
+    return MASPreferencesWindowController(viewControllers: [
+      PreferenceGeneralViewController()
+      ], title: "Preference")
+  }()
   
   @IBOutlet weak var menuController: MenuController!
 
@@ -70,5 +77,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let url = URL(fileURLWithPath: absoluteScreenshotPath, isDirectory: true)
       NSWorkspace.shared().open(url)
   }
+  
+  @IBAction func showPreferences(_ sender: AnyObject) {
+    preferenceWindowController.showWindow(self)
+  }
+  
   
 }

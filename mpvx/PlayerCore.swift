@@ -16,7 +16,7 @@ class PlayerCore: NSObject {
   
   lazy var mainWindow: MainWindowController = MainWindowController()
   lazy var mpvController: MPVController = MPVController()
-  lazy var preferenceWindow: PreferenceWindow = PreferenceWindow()
+  
   lazy var info: PlaybackInfo = PlaybackInfo()
   
   var syncPlayTimeTimer: Timer?

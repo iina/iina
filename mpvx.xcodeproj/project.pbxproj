@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E0ACCEC2D7DC320BD17866D /* Pods_mpvxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E02BC1426882141B31FD7C32 /* Pods_mpvxTests.framework */; };
 		8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAA61D5DF2DA003BECF2 /* Extensions.swift */; };
 		8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAA81D5E3C2B003BECF2 /* Formatters.swift */; };
 		8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAAC1D5E4546003BECF2 /* SlideUpButton.swift */; };
@@ -17,8 +18,6 @@
 		8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD8A1D3CB519008A543A /* fragmentShader.glsl */; };
 		845ABEAC1D4D19C000BFB15B /* MPVTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */; };
 		845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB0C61D39462E00C011E0 /* ControlBarView.swift */; };
-		845FB0CA1D3A16CC00C011E0 /* PreferenceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB0C81D3A16CC00C011E0 /* PreferenceWindow.swift */; };
-		845FB0CB1D3A16CC00C011E0 /* PreferenceWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845FB0C91D3A16CC00C011E0 /* PreferenceWindow.xib */; };
 		8460FBA91D6497490081841B /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460FBA71D6497490081841B /* PlaylistViewController.swift */; };
 		8460FBAA1D6497490081841B /* PlaylistView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8460FBA81D6497490081841B /* PlaylistView.xib */; };
 		8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */; };
@@ -29,6 +28,8 @@
 		8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847644091D48CC3D004F6DF5 /* MPVCommand.swift */; };
 		8476440C1D48F63D004F6DF5 /* OSDMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476440B1D48F63D004F6DF5 /* OSDMessage.swift */; };
 		84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */; };
+		847C62CA1DC13CDA00E1EF16 /* PreferenceGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C62C81DC13CDA00E1EF16 /* PreferenceGeneralViewController.swift */; };
+		847C62CB1DC13CDA00E1EF16 /* PreferenceGeneralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847C62C91DC13CDA00E1EF16 /* PreferenceGeneralViewController.xib */; };
 		84817C941DBBF8E000CC2279 /* libmpv.1.23.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84817C931DBBF8E000CC2279 /* libmpv.1.23.0.dylib */; };
 		84817C961DBDCA5F00CC2279 /* SettingsListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84817C951DBDCA5F00CC2279 /* SettingsListCellView.swift */; };
 		84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84817C971DBDCE4300CC2279 /* RoundedColorWell.swift */; };
@@ -88,6 +89,7 @@
 		84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7258E1D486185000DEF1B /* MPVProperty.swift */; };
 		84FF847A1D2FF698001B318A /* libmpv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84751D2FF698001B318A /* libmpv.1.dylib */; };
 		84FF847B1D2FF698001B318A /* libmpv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84761D2FF698001B318A /* libmpv.dylib */; };
+		8A11331C2E4A6204BD5E3950 /* Pods_mpvx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE5147FAFA07715007A39C3 /* Pods_mpvx.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +154,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3BE5147FAFA07715007A39C3 /* Pods_mpvx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpvx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8434BAA61D5DF2DA003BECF2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8434BAA81D5E3C2B003BECF2 /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		8434BAAC1D5E4546003BECF2 /* SlideUpButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideUpButton.swift; sourceTree = "<group>"; };
@@ -162,8 +165,6 @@
 		8452DD8A1D3CB519008A543A /* fragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragmentShader.glsl; sourceTree = "<group>"; };
 		845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVTrack.swift; sourceTree = "<group>"; };
 		845FB0C61D39462E00C011E0 /* ControlBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
-		845FB0C81D3A16CC00C011E0 /* PreferenceWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceWindow.swift; sourceTree = "<group>"; };
-		845FB0C91D3A16CC00C011E0 /* PreferenceWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferenceWindow.xib; sourceTree = "<group>"; };
 		8460FBA71D6497490081841B /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		8460FBA81D6497490081841B /* PlaylistView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistView.xib; sourceTree = "<group>"; };
 		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
@@ -174,6 +175,8 @@
 		847644091D48CC3D004F6DF5 /* MPVCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVCommand.swift; sourceTree = "<group>"; };
 		8476440B1D48F63D004F6DF5 /* OSDMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OSDMessage.swift; sourceTree = "<group>"; };
 		84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackInfo.swift; sourceTree = "<group>"; };
+		847C62C81DC13CDA00E1EF16 /* PreferenceGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceGeneralViewController.swift; sourceTree = "<group>"; };
+		847C62C91DC13CDA00E1EF16 /* PreferenceGeneralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferenceGeneralViewController.xib; sourceTree = "<group>"; };
 		84817C931DBBF8E000CC2279 /* libmpv.1.23.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.23.0.dylib; path = libmpv/lib/libmpv.1.23.0.dylib; sourceTree = "<group>"; };
 		84817C951DBDCA5F00CC2279 /* SettingsListCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListCellView.swift; sourceTree = "<group>"; };
 		84817C971DBDCE4300CC2279 /* RoundedColorWell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedColorWell.swift; sourceTree = "<group>"; };
@@ -239,6 +242,11 @@
 		84FF84721D2FF698001B318A /* qthelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = qthelper.hpp; sourceTree = "<group>"; };
 		84FF84751D2FF698001B318A /* libmpv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.dylib; path = libmpv/lib/libmpv.1.dylib; sourceTree = "<group>"; };
 		84FF84761D2FF698001B318A /* libmpv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.dylib; path = libmpv/lib/libmpv.dylib; sourceTree = "<group>"; };
+		8D4EBE1369EC1EB3D9B332C4 /* Pods-mpvx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpvx.release.xcconfig"; path = "Pods/Target Support Files/Pods-mpvx/Pods-mpvx.release.xcconfig"; sourceTree = "<group>"; };
+		8D6D9C231698CD96933BCE69 /* Pods-mpvxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpvxTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mpvxTests/Pods-mpvxTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AD3BB419211322D1B24B9844 /* Pods-mpvxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpvxTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mpvxTests/Pods-mpvxTests.release.xcconfig"; sourceTree = "<group>"; };
+		E02BC1426882141B31FD7C32 /* Pods_mpvxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpvxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F276FEF5F54ED58912B668DF /* Pods-mpvx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpvx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mpvx/Pods-mpvx.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +257,7 @@
 				84FF847B1D2FF698001B318A /* libmpv.dylib in Frameworks */,
 				84FF847A1D2FF698001B318A /* libmpv.1.dylib in Frameworks */,
 				84817C941DBBF8E000CC2279 /* libmpv.1.23.0.dylib in Frameworks */,
+				8A11331C2E4A6204BD5E3950 /* Pods_mpvx.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +265,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E0ACCEC2D7DC320BD17866D /* Pods_mpvxTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,9 +275,9 @@
 		8452DD7F1D3A1F2A008A543A /* Preference */ = {
 			isa = PBXGroup;
 			children = (
-				845FB0C81D3A16CC00C011E0 /* PreferenceWindow.swift */,
-				845FB0C91D3A16CC00C011E0 /* PreferenceWindow.xib */,
 				8452DD841D3B956D008A543A /* Preference.swift */,
+				847C62C81DC13CDA00E1EF16 /* PreferenceGeneralViewController.swift */,
+				847C62C91DC13CDA00E1EF16 /* PreferenceGeneralViewController.xib */,
 			);
 			name = Preference;
 			sourceTree = "<group>";
@@ -322,6 +332,8 @@
 				84817C931DBBF8E000CC2279 /* libmpv.1.23.0.dylib */,
 				84FF84751D2FF698001B318A /* libmpv.1.dylib */,
 				84FF84761D2FF698001B318A /* libmpv.dylib */,
+				3BE5147FAFA07715007A39C3 /* Pods_mpvx.framework */,
+				E02BC1426882141B31FD7C32 /* Pods_mpvxTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -430,6 +442,7 @@
 				84EB1EE81D2F51D3004FA5A1 /* mpvxTests */,
 				84EB1ED71D2F51D3004FA5A1 /* Products */,
 				848290731D95978100C3C76C /* Frameworks */,
+				AC32CA0B7767E182D68B6353 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -491,6 +504,17 @@
 			path = mpv;
 			sourceTree = "<group>";
 		};
+		AC32CA0B7767E182D68B6353 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F276FEF5F54ED58912B668DF /* Pods-mpvx.debug.xcconfig */,
+				8D4EBE1369EC1EB3D9B332C4 /* Pods-mpvx.release.xcconfig */,
+				8D6D9C231698CD96933BCE69 /* Pods-mpvxTests.debug.xcconfig */,
+				AD3BB419211322D1B24B9844 /* Pods-mpvxTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -498,11 +522,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84EB1EF91D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "mpvx" */;
 			buildPhases = (
+				A8436D0F062F56A14DC8166A /* [CP] Check Pods Manifest.lock */,
 				84EB1ED21D2F51D3004FA5A1 /* Sources */,
 				84EB1ED31D2F51D3004FA5A1 /* Frameworks */,
 				84EB1ED41D2F51D3004FA5A1 /* Resources */,
 				84817C991DBDF57C00CC2279 /* Copy Dylibs */,
 				84817CE81DBE2E3200CC2279 /* Copy Lua Scripts */,
+				39F390C48490810A95AAB798 /* [CP] Embed Pods Frameworks */,
+				D7649DE65F9AB702CE8501C9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -517,12 +544,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84EB1EFC1D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "mpvxTests" */;
 			buildPhases = (
-				09E168D08FA87C07190913AE /* 📦 Check Pods Manifest.lock */,
+				09E168D08FA87C07190913AE /* [CP] Check Pods Manifest.lock */,
 				84EB1EE11D2F51D3004FA5A1 /* Sources */,
 				84EB1EE21D2F51D3004FA5A1 /* Frameworks */,
 				84EB1EE31D2F51D3004FA5A1 /* Resources */,
-				78CBBA0AC8422BA966B44447 /* 📦 Embed Pods Frameworks */,
-				D5EEB5F9941B38A84A117651 /* 📦 Copy Pods Resources */,
+				78CBBA0AC8422BA966B44447 /* [CP] Embed Pods Frameworks */,
+				D5EEB5F9941B38A84A117651 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -583,10 +610,10 @@
 				8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */,
 				8466BE191D5CDD0300039D03 /* QuickSettingViewController.xib in Resources */,
 				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
-				845FB0CB1D3A16CC00C011E0 /* PreferenceWindow.xib in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */,
 				8460FBAA1D6497490081841B /* PlaylistView.xib in Resources */,
+				847C62CB1DC13CDA00E1EF16 /* PreferenceGeneralViewController.xib in Resources */,
 				84A0BA9F1D2FAD4000BC8DA1 /* MainWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -601,29 +628,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		09E168D08FA87C07190913AE /* 📦 Check Pods Manifest.lock */ = {
+		09E168D08FA87C07190913AE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		78CBBA0AC8422BA966B44447 /* 📦 Embed Pods Frameworks */ = {
+		39F390C48490810A95AAB798 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mpvx/Pods-mpvx-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78CBBA0AC8422BA966B44447 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -631,19 +673,49 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mpvxTests/Pods-mpvxTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D5EEB5F9941B38A84A117651 /* 📦 Copy Pods Resources */ = {
+		A8436D0F062F56A14DC8166A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D5EEB5F9941B38A84A117651 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mpvxTests/Pods-mpvxTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7649DE65F9AB702CE8501C9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mpvx/Pods-mpvx-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -675,7 +747,6 @@
 				84817C961DBDCA5F00CC2279 /* SettingsListCellView.swift in Sources */,
 				8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */,
 				8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */,
-				845FB0CA1D3A16CC00C011E0 /* PreferenceWindow.swift in Sources */,
 				84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */,
 				84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */,
 				84D377651D7370EE007F7396 /* ChapterTableCellView.swift in Sources */,
@@ -690,6 +761,7 @@
 				84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */,
 				84A0BA971D2FA1CE00BC8DA1 /* PlayerCore.swift in Sources */,
 				84D377671D737F58007F7396 /* MPVChapter.swift in Sources */,
+				847C62CA1DC13CDA00E1EF16 /* PreferenceGeneralViewController.swift in Sources */,
 				845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,
 				8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */,
@@ -740,8 +812,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -787,8 +861,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -814,6 +890,7 @@
 		};
 		84EB1EFA1D2F51D3004FA5A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F276FEF5F54ED58912B668DF /* Pods-mpvx.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -837,6 +914,7 @@
 		};
 		84EB1EFB1D2F51D3004FA5A1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D4EBE1369EC1EB3D9B332C4 /* Pods-mpvx.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -860,6 +938,7 @@
 		};
 		84EB1EFD1D2F51D3004FA5A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D6D9C231698CD96933BCE69 /* Pods-mpvxTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -874,6 +953,7 @@
 		};
 		84EB1EFE1D2F51D3004FA5A1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD3BB419211322D1B24B9844 /* Pods-mpvxTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;

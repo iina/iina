@@ -24,6 +24,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
    */
   private var pendingSwitchRequest: TabViewType?
   
+  var playlistChangeObserver: NSObjectProtocol?
+  
   /** Enum for tab switching */
   enum TabViewType: Int {
     case playlist = 0
@@ -51,18 +53,33 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
     }
     playlistTableView.delegate = playlistDelegate
     chapterTableView.delegate = chapterDelegate
+    
     // handle pending switch tab request
     if pendingSwitchRequest != nil {
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil
     }
-    // get playlist when shown
-    reloadData()
+    
+    // nofitications
+    playlistChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.playlistChanged, object: nil, queue: OperationQueue.main) { _ in
+      self.reloadData(playlist: true, chapters: false)
+    }
   }
   
-  func reloadData() {
-    playerCore.getPLaylist()
-    playerCore.getChapters()
+  override func viewDidDisappear() {
+    // nofifications
+    NotificationCenter.default.removeObserver(self.playlistChangeObserver)
+  }
+  
+  func reloadData(playlist: Bool, chapters: Bool) {
+    if playlist {
+      playerCore.getPLaylist()
+      playlistTableView.reloadData()
+    }
+    if chapters {
+      playerCore.getChapters()
+      chapterTableView.reloadData()
+    }
   }
   
   /** Switch tab (call from other objects) */

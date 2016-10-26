@@ -248,7 +248,6 @@ class PlayerCore: NSObject {
   
   func addToPlaylist(_ path: String) {
     mpvController.command([MPVCommand.loadfile, path, "append", nil])
-    getPLaylist()
   }
   
   func playFile(_ path: String) {
@@ -355,31 +354,31 @@ class PlayerCore: NSObject {
   // MARK: - Sync with UI in MainWindow
   
   enum SyncUIOption {
-    case Time
-    case PlayButton
-    case MuteButton
+    case time
+    case playButton
+    case muteButton
     case chapterList
   }
   
   func syncUITime() {
-    syncUI(.Time)
+    syncUI(.time)
   }
   
   func syncUI(_ option: SyncUIOption) {
     switch option {
-    case .Time:
+    case .time:
       let time = mpvController.getInt(MPVProperty.timePos)
       info.videoPosition!.second = time
       DispatchQueue.main.async {
         self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
       }
-    case .PlayButton:
+    case .playButton:
       let pause = mpvController.getFlag(MPVOption.PlaybackControl.pause)
       info.isPaused = pause
       DispatchQueue.main.async {
         self.mainWindow.updatePlayButtonState(pause ? NSOffState : NSOnState)
       }
-    case .MuteButton:
+    case .muteButton:
       let mute = mpvController.getFlag(MPVOption.Audio.mute)
       DispatchQueue.main.async {
         self.mainWindow.muteButton.state = mute ? NSOnState : NSOffState
@@ -396,7 +395,7 @@ class PlayerCore: NSObject {
   
   // MARK: - Getting info
   
-  private func getTrackInfo() {
+  func getTrackInfo() {
     info.audioTracks.removeAll(keepingCapacity: true)
     info.videoTracks.removeAll(keepingCapacity: true)
     info.subTracks.removeAll(keepingCapacity: true)
@@ -438,7 +437,7 @@ class PlayerCore: NSObject {
   func getPLaylist() {
     info.playlist.removeAll()
     let playlistCount = mpvController.getInt(MPVProperty.playlistCount)
-    for index in 0...playlistCount-1 {
+    for index in 0..<playlistCount {
       let playlistItem = MPVPlaylistItem(filename:  mpvController.getString(MPVProperty.playlistNFilename(index))!,
                                          isCurrent: mpvController.getFlag(MPVProperty.playlistNCurrent(index)),
                                          isPlaying: mpvController.getFlag(MPVProperty.playlistNPlaying(index)),

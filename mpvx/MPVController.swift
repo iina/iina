@@ -71,8 +71,9 @@ class MPVController: NSObject {
       mpvController.readEvents()
       }, mutableRawPointerOf(obj: self))
     
-    //
-    // mpv_observe_property(mpv, 0, "track-list", MPV_FORMAT_NODE_ARRAY)
+    // Observe propoties.
+    mpv_observe_property(mpv, 0, MPVProperty.trackListCount, MPV_FORMAT_INT64)
+    mpv_observe_property(mpv, 0, MPVProperty.playlistCount, MPV_FORMAT_INT64)
     
     // Initialize an uninitialized mpv instance. If the mpv instance is already running, an error is retuned.
     e(mpv_initialize(mpv))
@@ -186,8 +187,18 @@ class MPVController: NSObject {
         switch propertyName {
         case MPVProperty.videoParams:
           onVideoParamsChange(UnsafePointer<mpv_node_list>(OpaquePointer(property.data)))
+          
         case MPVOption.Audio.mute:
-          playerCore.syncUI(.MuteButton)
+          playerCore.syncUI(.muteButton)
+        
+        // following properties may change before file loaded
+        
+        case MPVProperty.playlistCount:
+          NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+        
+        case MPVProperty.trackListCount:
+          NotificationCenter.default.post(Notification(name: Constants.Noti.tracklistChanged))
+          
         default:
           Utility.log("MPV property changed (unhandled): \(propertyName)")
         }
@@ -216,20 +227,20 @@ class MPVController: NSObject {
       if needRecordSeekTime {
         recordedSeekStartTime = CACurrentMediaTime()
       }
-      playerCore.syncUI(.Time)
+      playerCore.syncUI(.time)
       
     case MPV_EVENT_PLAYBACK_RESTART:
       if needRecordSeekTime {
         recordedSeekTimeListener?(CACurrentMediaTime() - recordedSeekStartTime)
         recordedSeekTimeListener = nil
       }
-      playerCore.syncUI(.Time)
+      playerCore.syncUI(.time)
       
     case MPV_EVENT_PAUSE, MPV_EVENT_UNPAUSE:
-      playerCore.syncUI(.PlayButton)
+      playerCore.syncUI(.playButton)
       
     case MPV_EVENT_CHAPTER_CHANGE:
-      playerCore.syncUI(.Time)
+      playerCore.syncUI(.time)
       playerCore.syncUI(.chapterList)
       
     default:

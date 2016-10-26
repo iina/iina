@@ -31,6 +31,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   var playerCore: PlayerCore = PlayerCore.shared
   weak var mainWindow: MainWindowController!
   
+  var tracklistChangeObserver: NSObjectProtocol?
+  
   @IBOutlet weak var videoTabBtn: NSButton!
   @IBOutlet weak var audioTabBtn: NSButton!
   @IBOutlet weak var subTabBtn: NSButton!
@@ -80,6 +82,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil
     }
+    
+    // notifications
+    tracklistChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.tracklistChanged, object: nil, queue: OperationQueue.main) { _ in
+      self.playerCore.getTrackInfo()
+      self.withAllTableViews { $0.0.reloadData() }
+    }
   }
   
   // MARK: - Validate UI
@@ -88,6 +96,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   override func viewDidAppear() {
     // image sub
     validateSubSettings()
+  }
+  
+  override func viewDidDisappear() {
+    NotificationCenter.default.removeObserver(self.tracklistChangeObserver)
   }
   
   private func validateSubSettings() {

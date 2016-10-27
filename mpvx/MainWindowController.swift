@@ -106,20 +106,32 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var osd: NSTextField!
 
   override func windowDidLoad() {
+    
     super.windowDidLoad()
+    
     guard let w = self.window else { return }
+    
     w.titleVisibility = .hidden;
     w.styleMask.insert(NSFullSizeContentViewWindowMask);
     w.titlebarAppearsTransparent = true
+    
     // need to deal with control bar, so handle it manually
     // w.isMovableByWindowBackground  = true
+    
     // set background color to black
     w.backgroundColor = NSColor.black
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay;
     updateTitle()
-    if #available(OSX 10.11, *), UserDefaults.standard.bool(forKey: Preference.Key.controlBarDarker) {
-      titleBarView.material = .ultraDark
+    if #available(OSX 10.11, *) {
+      if UserDefaults.standard.bool(forKey: Preference.Key.controlBarDarker) {
+        titleBarView.material = .ultraDark
+        controlBar.material = .ultraDark
+      } else {
+        titleBarView.material = .dark
+        controlBar.material = .dark
+      }
     }
+    
     // size
     w.minSize = minSize
     // fade-able views
@@ -130,28 +142,59 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fadeableViews.append(controlBar)
     guard let cv = w.contentView else { return }
     cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: nil))
+    
     // video view
     // note that don't use auto resize for it (handle in windowDidResize)
     cv.autoresizesSubviews = false
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
+    
     // gesture recognizer
     // disable it first for poor performance
     // cv.addGestureRecognizer(magnificationGestureRecognizer)
+    
     // start mpv opengl_cb
     playerCore.startMPVOpenGLCB(videoView)
+    
     // init quick setting view now
     let _ = quickSettingView
+    
     // other initialization
     osdVisualEffectView.isHidden = true
     osdVisualEffectView.layer?.cornerRadius = 10
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
-    // move to center
+    
+    // add user default observers
+    ud.addObserver(self, forKeyPath: Preference.Key.controlBarDarker, options: .new, context: nil)
+    
+    // move to center and make main
     w.center()
-    // make main
     w.makeMain()
     w.makeKeyAndOrderFront(nil)
     w.setIsVisible(false)
+  }
+  
+  func windowWillClose(_ notification: Notification) {
+    ud.removeObserver(self, forKeyPath: Preference.Key.controlBarDarker)
+  }
+  
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    guard let keyPath = keyPath, let change = change else { return }
+    
+    switch keyPath {
+    case Preference.Key.controlBarDarker:
+      guard #available(OSX 10.11, *) else { return }
+      
+      if change[NSKeyValueChangeKey.newKey] as! Int > 0 {
+        titleBarView.material = .ultraDark
+        controlBar.material = .ultraDark
+      } else {
+        titleBarView.material = .dark
+        controlBar.material = .dark
+      }
+    default:
+      return
+    }
   }
   
   // MARK: - Lazy initializers

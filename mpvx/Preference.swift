@@ -39,6 +39,15 @@ struct Preference {
     /** Pause st first (pause) (bool) */
     static let pauseWhenOpen = "pauseWhenOpen"
     
+    /** Enter fill screen when open (bool) */
+    static let fullScreenWhenOpen = "fullScreenWhenOpen"
+    
+    /** Quit when no open window (bool) */
+    static let quitWhenNoOpenedWindow = "quitWhenNoOpenedWindow"
+    
+    /** Resume from last position */
+    
+    
     static let useExactSeek = "useExactSeek"
     
     static let screenshotFolder = "screenShotFolder"
@@ -71,6 +80,9 @@ struct Preference {
     Key.softVolume: 50,
     Key.arrowButtonAction: ArrowButtonAction.speed.rawValue,
     Key.pauseWhenOpen: false,
+    Key.fullScreenWhenOpen: false,
+    
+    Key.quitWhenNoOpenedWindow: true,
     Key.useExactSeek: true,
     Key.screenshotFolder: "~/Pictures/ScreenShots",
     Key.screenshotIncludeSubtitle: true,

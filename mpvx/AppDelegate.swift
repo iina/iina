@@ -41,7 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
   
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-    return true
+    return UserDefaults.standard.bool(forKey: Preference.Key.quitWhenNoOpenedWindow)
   }
   
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplicationTerminateReply {

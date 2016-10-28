@@ -23,8 +23,12 @@ class PlayerCore: NSObject {
   
   var statusPaused: Bool = false
   
+  // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
+  
+  // need enter fullscreen for nect file
+  var needEnterFullScreenForNextMedia: Bool = true
   
   // MARK: - Control commands
   
@@ -336,6 +340,14 @@ class PlayerCore: NSObject {
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
       mainWindow.updateTitle()
       mainWindow.adjustFrameByVideoSize(vwidth, vheight)
+      // whether enter full screen
+      if needEnterFullScreenForNextMedia {
+        if ud.bool(forKey: Preference.Key.fullScreenWhenOpen) && !mainWindow.isInFullScreen {
+          mainWindow.window?.toggleFullScreen(self)
+        }
+        // only enter fullscreen for first file
+        needEnterFullScreenForNextMedia = false
+      }
     }
   }
   

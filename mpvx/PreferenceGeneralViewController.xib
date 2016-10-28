@@ -91,6 +91,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <binding destination="IBP-Mz-Maa" name="value" keyPath="values.fullScreenWhenOpen" id="rYv-wg-qji"/>
+                    </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mxs-ci-u1r">
                     <rect key="frame" x="158" y="323" width="223" height="18"/>
@@ -106,6 +109,9 @@
                     <buttonCell key="cell" type="check" title="Quit when no window opened" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="YLo-6E-tT7">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
+                        <connections>
+                            <binding destination="IBP-Mz-Maa" name="value" keyPath="values.quitWhenNoOpenedWindow" id="wJX-a3-saG"/>
+                        </connections>
                     </buttonCell>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xXG-2j-UNK">

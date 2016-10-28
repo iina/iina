@@ -96,6 +96,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var playSlider: NSSlider!
   @IBOutlet weak var volumeSlider: NSSlider!
   @IBOutlet weak var muteButton: NSButton!
+  @IBOutlet weak var leftArrowButton: NSButton!
+  @IBOutlet weak var rightArrowButton: NSButton!
+  @IBOutlet weak var settingsButton: NSButton!
+  @IBOutlet weak var playlistButton: NSButton!
   @IBOutlet weak var sideBarView: NSVisualEffectView!
   
   @IBOutlet weak var rightLabel: NSTextField!
@@ -122,15 +126,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     w.backgroundColor = NSColor.black
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay;
     updateTitle()
-    if #available(OSX 10.11, *) {
-      if UserDefaults.standard.bool(forKey: Preference.Key.controlBarDarker) {
-        titleBarView.material = .ultraDark
-        controlBar.material = .ultraDark
-      } else {
-        titleBarView.material = .dark
-        controlBar.material = .dark
-      }
-    }
+    
+    // set material
+    setMaterial(Preference.Theme(rawValue: ud.integer(forKey: Preference.Key.themeMaterial)))
     
     // size
     w.minSize = minSize
@@ -165,7 +163,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     rightArrowLabel.isHidden = true
     
     // add user default observers
-    ud.addObserver(self, forKeyPath: Preference.Key.controlBarDarker, options: .new, context: nil)
+    ud.addObserver(self, forKeyPath: Preference.Key.themeMaterial, options: .new, context: nil)
     
     // move to center and make main
     w.center()
@@ -175,23 +173,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   func windowWillClose(_ notification: Notification) {
-    ud.removeObserver(self, forKeyPath: Preference.Key.controlBarDarker)
+    ud.removeObserver(self, forKeyPath: Preference.Key.themeMaterial)
   }
   
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     guard let keyPath = keyPath, let change = change else { return }
     
     switch keyPath {
-    case Preference.Key.controlBarDarker:
-      guard #available(OSX 10.11, *) else { return }
       
-      if change[NSKeyValueChangeKey.newKey] as! Int > 0 {
-        titleBarView.material = .ultraDark
-        controlBar.material = .ultraDark
-      } else {
-        titleBarView.material = .dark
-        controlBar.material = .dark
+    case Preference.Key.themeMaterial:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        setMaterial(Preference.Theme(rawValue: newValue))
       }
+    
     default:
       return
     }
@@ -505,6 +499,73 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     // add back titlebar view to fade-able views
     self.fadeableViews.append(titleBarView)
+  }
+  
+  /** Set material for OSC and title bar */
+  private func setMaterial(_ theme: Preference.Theme?) {
+    guard let theme = theme else {
+      Utility.log("Nil material in setMaterial()")
+      return
+    }
+    guard #available(OSX 10.11, *) else { return }
+    
+    var appearance: NSAppearance? = nil
+    var material: NSVisualEffectMaterial
+    var isDarkTheme: Bool
+    let sliderCell = playSlider.cell as? PlaySliderCell
+    
+    switch theme {
+      
+    case .dark:
+      appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
+      material = .dark
+      isDarkTheme = true
+      
+    case .ultraDark:
+      appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
+      material = .ultraDark
+      isDarkTheme = true
+      
+    case .light:
+      appearance = NSAppearance(named: NSAppearanceNameVibrantLight)
+      material = .light
+      isDarkTheme = false
+      
+    case .mediumLight:
+      appearance = NSAppearance(named: NSAppearanceNameVibrantLight)
+      material = .mediumLight
+      isDarkTheme = false
+      
+    }
+    
+    sliderCell?.isInDarkTheme = isDarkTheme
+    
+    [titleBarView, controlBar, osdVisualEffectView].forEach {
+      $0?.material = material
+      $0?.appearance = appearance
+    }
+    
+    [muteButton, playButton, leftArrowButton, rightArrowButton, settingsButton, playlistButton].forEach { btn in
+      guard let currImageName = btn?.image?.name() else { return }
+      if currImageName.hasSuffix("-dark") {
+        if isDarkTheme {
+          // dark image but with dark theme: remove "-dark"
+          let newName = currImageName.substring(to: currImageName.index(currImageName.endIndex, offsetBy: -5))
+          btn?.image = NSImage(named: newName)
+          if let currAltImageName = btn?.alternateImage?.name() {
+            btn?.alternateImage = NSImage(named: currAltImageName.substring(to: currAltImageName.index(currAltImageName.endIndex, offsetBy: -5)))
+          }
+        }
+      } else {
+        // light image but with light theme: add "-dark"
+        if !isDarkTheme {
+          btn?.image = NSImage(named: currImageName + "-dark")
+          if let currAltImageName = btn?.alternateImage?.name() {
+            btn?.alternateImage = NSImage(named: currAltImageName + "-dark")
+          }
+        }
+      }
+    }
   }
   
   // MARK: - Window size / aspect

@@ -69,17 +69,6 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9yS-O8-dN1">
-                    <rect key="frame" x="158" y="400" width="185" height="18"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Darker panels and titlebars" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="PHS-Pf-GFh">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <binding destination="IBP-Mz-Maa" name="value" keyPath="values.controlBarDarker" id="0RC-Z6-sem"/>
-                    </connections>
-                </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ql-ym-BvF">
                     <rect key="frame" x="158" y="363" width="185" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -157,6 +146,37 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOy-i3-JWR">
+                    <rect key="frame" x="160" y="401" width="70" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="UI Material" id="2Hu-qC-UMi">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QNz-7p-k3k">
+                    <rect key="frame" x="234" y="395" width="126" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <popUpButtonCell key="cell" type="push" title="Dark" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="qeB-ls-rwg" id="bkv-B7-7Vs">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="UIu-sw-CL9">
+                            <items>
+                                <menuItem title="Dark" state="on" id="qeB-ls-rwg"/>
+                                <menuItem title="Ultra Dark" tag="1" id="3XV-iO-y0C"/>
+                                <menuItem title="Light" tag="2" id="49l-le-9k6"/>
+                                <menuItem title="Medium Light" tag="3" id="bPK-Wy-OMI"/>
+                            </items>
+                        </menu>
+                        <connections>
+                            <binding destination="IBP-Mz-Maa" name="selectedTag" keyPath="values.themeMaterial" id="AKN-fZ-cwa"/>
+                        </connections>
+                    </popUpButtonCell>
+                    <connections>
+                        <binding destination="IBP-Mz-Maa" name="selectedTag" keyPath="values.themeMaterial" id="o1S-dU-EZr"/>
+                    </connections>
+                </popUpButton>
             </subviews>
             <point key="canvasLocation" x="139" y="256.5"/>
         </customView>

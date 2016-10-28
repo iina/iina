@@ -26,8 +26,8 @@ struct Preference {
     /** Timeout for auto hiding control bar (float) */
     static let controlBarAutoHideTimeout  = "controlBarAutoHideTimeout"
     
-    /** Whether use ultra dark material for controlbar and title bar (bool) */
-    static let controlBarDarker = "controlBarDarker"
+    /** Material for OSC and title bar (Theme(int)) */
+    static let themeMaterial = "themeMaterial"
     
     static let osdAutoHideTimeout = "osdAutoHideTimeout"
     
@@ -51,12 +51,19 @@ struct Preference {
     case seek = 2
   }
   
+  enum Theme: Int {
+    case dark = 0
+    case ultraDark
+    case light
+    case mediumLight
+  }
+  
   static let defaultPreference:[String : Any] = [
     Key.controlBarPositionHorizontal: Float(0.5),
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,
     Key.controlBarAutoHideTimeout: 5,
-    Key.controlBarDarker: false,
+    Key.themeMaterial: Theme.dark.rawValue,
     Key.osdAutoHideTimeout: 1,
     Key.softVolume: 50,
     Key.arrowButtonAction: ArrowButtonAction.speed.rawValue,

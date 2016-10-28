@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="NazoPlayer" customModuleProvider="target">
             <connections>
                 <outlet property="controlBar" destination="OiF-pA-8Sd" id="o08-Ig-SfX"/>
+                <outlet property="leftArrowButton" destination="10x-bg-xlj" id="HOT-Yl-7aO"/>
                 <outlet property="leftArrowLabel" destination="Yg9-Sd-sWy" id="fps-VD-ZgC"/>
                 <outlet property="leftLabel" destination="NBD-MV-OuG" id="cCh-WT-abz"/>
                 <outlet property="muteButton" destination="2py-h1-0km" id="baB-6t-gO7"/>
@@ -14,8 +16,11 @@
                 <outlet property="osdVisualEffectView" destination="g0O-v5-RQj" id="V4X-8K-6O1"/>
                 <outlet property="playButton" destination="gxw-pJ-Lcg" id="t9H-xd-uqj"/>
                 <outlet property="playSlider" destination="eBP-6g-bAT" id="lGv-18-YeQ"/>
+                <outlet property="playlistButton" destination="wy6-h4-fsN" id="bMV-xq-L13"/>
+                <outlet property="rightArrowButton" destination="EIi-qd-glM" id="U46-Gl-e8D"/>
                 <outlet property="rightArrowLabel" destination="QTI-wi-oyB" id="icX-KI-Muj"/>
                 <outlet property="rightLabel" destination="GgV-Cc-sk0" id="fnx-gO-YPl"/>
+                <outlet property="settingsButton" destination="YvW-zG-QiW" id="jNo-7C-1PP"/>
                 <outlet property="sideBarRightConstraint" destination="PAj-s6-32e" id="DOs-2k-JEG"/>
                 <outlet property="sideBarView" destination="epo-S6-QVB" id="5eE-aM-VUd"/>
                 <outlet property="sideBarWidthConstraint" destination="1BL-aP-tHS" id="Qbw-L4-DAp"/>
@@ -31,7 +36,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="680" height="355"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="680" height="355"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -95,7 +100,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="right" title="-32x" id="eCe-SS-Wlj">
                                     <font key="font" metaFont="system" size="10"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -154,7 +159,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="32x" id="ULE-u4-k9L">
                                     <font key="font" metaFont="system" size="10"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>

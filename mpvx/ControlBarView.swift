@@ -16,9 +16,6 @@ class ControlBarView: NSVisualEffectView {
 
   override func awakeFromNib() {
     self.layer?.cornerRadius = 6
-    if #available(OSX 10.11, *), UserDefaults.standard.bool(forKey: Preference.Key.controlBarDarker) {
-      self.material = .ultraDark
-    }
   }
   
   override func mouseDown(with event: NSEvent) {

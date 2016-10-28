@@ -14,9 +14,20 @@ class PlaySliderCell: NSSliderCell {
   let knobHeight: CGFloat = 13
   let knobRadius: CGFloat = 2
   
+  static let darkColor = NSColor(red: 1, green: 1, blue: 1, alpha: 0.9)
+  static let lightColor = NSColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+  
+  var isInDarkTheme: Bool = true {
+    didSet {
+      self.knobColor = isInDarkTheme ? PlaySliderCell.darkColor : PlaySliderCell.lightColor
+    }
+  }
+  private var knobColor: NSColor = PlaySliderCell.darkColor
+  
   override func awakeFromNib() {
     minValue = 0
     maxValue = 100
+    
   }
   
   override func drawKnob(_ knobRect: NSRect) {
@@ -25,7 +36,7 @@ class PlaySliderCell: NSSliderCell {
                           knobRect.width,
                           knobHeight)
     let path = NSBezierPath(roundedRect: rect, xRadius: 2, yRadius: 2)
-    NSColor(red: 1, green: 1, blue: 1, alpha: 0.9).setFill()
+    knobColor.setFill()
     path.fill()
   }
   

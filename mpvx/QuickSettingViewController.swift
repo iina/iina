@@ -99,7 +99,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
   
   override func viewDidDisappear() {
-    NotificationCenter.default.removeObserver(self.tracklistChangeObserver)
+    NotificationCenter.default.removeObserver(self.tracklistChangeObserver!)
   }
   
   private func validateSubSettings() {

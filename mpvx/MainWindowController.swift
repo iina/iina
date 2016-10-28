@@ -141,6 +141,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let cv = w.contentView else { return }
     cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: nil))
     
+    // sidebar views
+    sideBarView.isHidden = true
+    
     // video view
     // note that don't use auto resize for it (handle in windowDidResize)
     cv.autoresizesSubviews = false

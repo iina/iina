@@ -274,7 +274,9 @@ class MPVController: NSObject {
     playerCore.info.currentURL = URL(fileURLWithPath: filename ?? "")
     playerCore.fileLoaded()
     // mpvResume()
-    setFlag(MPVOption.PlaybackControl.pause, false)
+    if !playerCore.ud.bool(forKey: Preference.Key.pauseWhenOpen) {
+      setFlag(MPVOption.PlaybackControl.pause, false)
+    }
   }
   
   private func onTrackChanged() {
@@ -315,7 +317,7 @@ class MPVController: NSObject {
    */
   private func e(_ status: Int32!) {
     if status < 0 {
-      Utility.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status).")
+      Utility.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
     }
   }
   

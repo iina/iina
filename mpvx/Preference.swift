@@ -36,6 +36,9 @@ struct Preference {
     
     static let arrowButtonAction = "arrowBtnAction"
     
+    /** Pause st first (pause) (bool) */
+    static let pauseWhenOpen = "pauseWhenOpen"
+    
     static let useExactSeek = "useExactSeek"
     
     static let screenshotFolder = "screenShotFolder"
@@ -67,6 +70,7 @@ struct Preference {
     Key.osdAutoHideTimeout: 1,
     Key.softVolume: 50,
     Key.arrowButtonAction: ArrowButtonAction.speed.rawValue,
+    Key.pauseWhenOpen: false,
     Key.useExactSeek: true,
     Key.screenshotFolder: "~/Pictures/ScreenShots",
     Key.screenshotIncludeSubtitle: true,

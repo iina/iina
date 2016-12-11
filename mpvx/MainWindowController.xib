@@ -229,7 +229,6 @@
                         <constraints>
                             <constraint firstItem="Ofw-1d-N4T" firstAttribute="top" secondItem="g0O-v5-RQj" secondAttribute="top" constant="12" id="IM4-SR-9E7"/>
                             <constraint firstItem="Ofw-1d-N4T" firstAttribute="leading" secondItem="g0O-v5-RQj" secondAttribute="leading" constant="16" id="mZR-4R-ihe"/>
-                            <constraint firstAttribute="height" constant="48" id="rVx-Se-Q8c"/>
                             <constraint firstAttribute="trailing" secondItem="Ofw-1d-N4T" secondAttribute="trailing" constant="16" id="yCc-xv-Z5S"/>
                             <constraint firstAttribute="bottom" secondItem="Ofw-1d-N4T" secondAttribute="bottom" constant="12" id="yni-EQ-Iew"/>
                         </constraints>

@@ -466,6 +466,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       hideOSDTimer = nil
     }
     osdAnimationState = .shown
+    let osdTextSize = ud.float(forKey: Preference.Key.osdTextSize)
+    osd.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
     osd.stringValue = message.message()
     osdVisualEffectView.alphaValue = 1
     osdVisualEffectView.isHidden = false

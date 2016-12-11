@@ -29,7 +29,11 @@ struct Preference {
     /** Material for OSC and title bar (Theme(int)) */
     static let themeMaterial = "themeMaterial"
     
+    /** OSD auto hide timeout (float) */
     static let osdAutoHideTimeout = "osdAutoHideTimeout"
+    
+    /** OSD text size (float) */
+    static let osdTextSize = "osdTextSize"
     
     /** Soft volume (int, 0 - 100)*/
     static let softVolume = "softVolume"
@@ -74,9 +78,10 @@ struct Preference {
     Key.controlBarPositionHorizontal: Float(0.5),
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,
-    Key.controlBarAutoHideTimeout: 5,
+    Key.controlBarAutoHideTimeout: Float(5),
     Key.themeMaterial: Theme.dark.rawValue,
     Key.osdAutoHideTimeout: 1,
+    Key.osdTextSize: Float(20),
     Key.softVolume: 50,
     Key.arrowButtonAction: ArrowButtonAction.speed.rawValue,
     Key.pauseWhenOpen: false,

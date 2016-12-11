@@ -82,3 +82,7 @@ func <(lhs: VideoTime, rhs: VideoTime) -> Bool {
 func ==(lhs: VideoTime, rhs: VideoTime) -> Bool {
   return lhs.second == rhs.second
 }
+
+func *(lhs: VideoTime, rhs: Double) -> VideoTime {
+  return VideoTime(Int(round(Double(lhs.second) * rhs)))
+}

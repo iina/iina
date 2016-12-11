@@ -21,6 +21,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   var isInFullScreen: Bool = false
   
+  // FIXME: might use another obj to handle slider?
+  var isMouseInWindow: Bool = false
+  var isMouseInSlider: Bool = false
+  
   override var windowNibName: String {
     return "MainWindowController"
   }
@@ -95,6 +99,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var playButton: NSButton!
   @IBOutlet weak var playSlider: NSSlider!
   @IBOutlet weak var volumeSlider: NSSlider!
+  @IBOutlet weak var timePreviewWhenSeek: NSTextField!
   @IBOutlet weak var muteButton: NSButton!
   @IBOutlet weak var leftArrowButton: NSButton!
   @IBOutlet weak var rightArrowButton: NSButton!
@@ -139,7 +144,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fadeableViews.append(titleBarView)
     fadeableViews.append(controlBar)
     guard let cv = w.contentView else { return }
-    cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: nil))
+    cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 0]))
     
     // sidebar views
     sideBarView.isHidden = true
@@ -164,6 +169,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     osdVisualEffectView.layer?.cornerRadius = 10
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
+    timePreviewWhenSeek.isHidden = true
+    playSlider.addTrackingArea(NSTrackingArea(rect: playSlider.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 1]))
     
     // add user default observers
     ud.addObserver(self, forKeyPath: Preference.Key.themeMaterial, options: .new, context: nil)
@@ -250,18 +257,50 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   override func mouseEntered(with event: NSEvent) {
-    showUI()
+    guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
+      Utility.log("No data for tracking area")
+      return
+    }
+    if obj == 0 {
+      // main window
+      isMouseInWindow = true
+      showUI()
+    } else if obj == 1 {
+      // slider
+      isMouseInSlider = true
+      timePreviewWhenSeek.isHidden = false
+      let mousePos = playSlider.convert(event.locationInWindow, from: nil)
+      updateTimeLabel(mousePos.x)
+    }
   }
   
   override func mouseExited(with event: NSEvent) {
-    if controlBar.isDragging {
+    guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
+      Utility.log("No data for tracking area")
       return
     }
-    hideUI()
+    if obj == 0 {
+      // main window
+      isMouseInWindow = false
+      if controlBar.isDragging { return }
+      hideUI()
+    } else if obj == 1 {
+      // slider
+      isMouseInSlider = false
+      timePreviewWhenSeek.isHidden = true
+      let mousePos = playSlider.convert(event.locationInWindow, from: nil)
+      updateTimeLabel(mousePos.x)
+    }
   }
   
   override func mouseMoved(with event: NSEvent) {
-    showUIAndUpdateTimer()
+    let mousePos = playSlider.convert(event.locationInWindow, from: nil)
+    if isMouseInSlider {
+      updateTimeLabel(mousePos.x)
+    }
+    if isMouseInWindow {
+      showUIAndUpdateTimer()
+    }
   }
   
   override func scrollWheel(with event: NSEvent) {
@@ -502,6 +541,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     // add back titlebar view to fade-able views
     self.fadeableViews.append(titleBarView)
+  }
+  
+  /** Display time label when mouse over slider */
+  private func updateTimeLabel(_ mouseXPos: CGFloat) {
+    let timeLabelXPos = playSlider.frame.origin.y + 15
+    timePreviewWhenSeek.frame.origin = CGPoint(x: mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2, y: timeLabelXPos)
+    let percentage = Double(mouseXPos / playSlider.frame.width)
+    timePreviewWhenSeek.stringValue = (playerCore.info.videoDuration! * percentage).stringRepresentation
   }
   
   /** Set material for OSC and title bar */
@@ -758,6 +805,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   /** When slider changes */
   @IBAction func playSliderChanges(_ sender: NSSlider) {
+    // guard let event = NSApp.currentEvent else { return }
+    
+    // seek and update time
     let percentage = 100 * sender.doubleValue / sender.maxValue
     playerCore.seek(percent: percentage)
   }

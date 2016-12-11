@@ -277,7 +277,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // handle the value
     let seekFactor = 0.05
     if scrollDirection == .horizontal {
-      playerCore.seek(relativeSecond: seekFactor * Double(event.scrollingDeltaX), exact: true)
+       playerCore.seek(relativeSecond: seekFactor * Double(event.scrollingDeltaX), exact: true)
     } else if scrollDirection == .vertical {
       let newVolume = playerCore.info.volume - Int(event.scrollingDeltaY)
       playerCore.setVolume(newVolume)
@@ -943,6 +943,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     //  1: normal
     //  2: double
     //  3: fit screen
+    //  10: smaller size
+    //  11: bigger size
     let size = sender.tag
     guard let w = window, let vw = playerCore.info.displayWidth, let vh = playerCore.info.displayHeight else { return }
     
@@ -950,6 +952,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let screenFrame = NSScreen.main()!.visibleFrame
     let newFrame: NSRect
     let sizeMap: [CGFloat] = [0.5, 1, 2]
+    let scaleStep: CGFloat = 25
     
     switch size {
     // scale
@@ -965,7 +968,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case 3:
       w.center()
       newFrame = w.frame.centeredResize(to: w.frame.size.shrink(toSize: screenFrame.size))
-      
+    // bigger size
+    case 10, 11:
+      let newWidth = w.frame.width + scaleStep * (size == 10 ? -1 : 1)
+      let newHeight = newWidth / (w.aspectRatio.width / w.aspectRatio.height)
+      newFrame = w.frame.centeredResize(to: NSSize(width: newWidth, height: newHeight))
     default:
       return
     }

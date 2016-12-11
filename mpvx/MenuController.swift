@@ -42,6 +42,8 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var normalSize: NSMenuItem!
   @IBOutlet weak var normalSizeRetina: NSMenuItem!
   @IBOutlet weak var doubleSize: NSMenuItem!
+  @IBOutlet weak var biggerSize: NSMenuItem!
+  @IBOutlet weak var smallerSize: NSMenuItem!
   @IBOutlet weak var fitToScreen: NSMenuItem!
   @IBOutlet weak var fullScreen: NSMenuItem!
   @IBOutlet weak var alwaysOnTop: NSMenuItem!
@@ -85,9 +87,12 @@ class MenuController: NSObject, NSMenuDelegate {
   
   
   func bindMenuItems() {
+    
     // Playback menu
+    
     pause.action = #selector(MainWindowController.menuTogglePause(_:))
     stop.action = #selector(MainWindowController.menuStop(_:))
+    
     // -- seeking
     forward.action = #selector(MainWindowController.menuStep(_:))
     nextFrame.action = #selector(MainWindowController.menuStepFrame(_:))
@@ -95,58 +100,70 @@ class MenuController: NSObject, NSMenuDelegate {
     previousFrame.action = #selector(MainWindowController.menuStepFrame(_:))
     jumpToBegin.action = #selector(MainWindowController.menuJumpToBegin(_:))
     jumpTo.action = #selector(MainWindowController.menuJumpTo(_:))
+    
     // -- screenshot
     screenShot.action = #selector(MainWindowController.menuSnapshot(_:))
     gotoScreenshotFolder.action = #selector(AppDelegate.menuOpenScreenshotFolder(_:))
 //    advancedScreenShot
+    
     // -- list and chapter
     abLoop.action = #selector(MainWindowController.menuABLoop(_:))
     playlistMenu.delegate = self
     chapterMenu.delegate = self
     
     // Video menu
+    
     quickSettingsVideo.action = #selector(MainWindowController.menuShowVideoQuickSettings(_:))
     videoTrackMenu.delegate = self
+    
     // -- window size
-    (halfSize.tag, normalSize.tag, normalSizeRetina.tag, doubleSize.tag, fitToScreen.tag) = (0, 1, -1, 2, 3)
-    for item in [halfSize, normalSize, normalSizeRetina, doubleSize, fitToScreen] {
+    (halfSize.tag, normalSize.tag, normalSizeRetina.tag, doubleSize.tag, fitToScreen.tag, biggerSize.tag, smallerSize.tag) = (0, 1, -1, 2, 3, 11, 10)
+    for item in [halfSize, normalSize, normalSizeRetina, doubleSize, fitToScreen, biggerSize, smallerSize] {
       item?.action = #selector(MainWindowController.menuChangeWindowSize(_:))
     }
+    
     // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
 //    alwaysOnTop
+    
     // -- aspect
     var aspectList = AppData.aspects
     aspectList.insert("Default", at: 0)
     bind(menu: aspectMenu, withOptions: aspectList, objects: nil, objectMap: nil, action: #selector(MainWindowController.menuChangeAspect(_:))) {
       PlayerCore.shared.info.unsureAspect == $0.representedObject as? String
     }
+    
     // -- crop
     var cropList = AppData.aspects
     cropList.insert("None", at: 0)
     bind(menu: cropMenu, withOptions: cropList, objects: nil, objectMap: nil, action: #selector(MainWindowController.menuChangeCrop(_:))) {
       PlayerCore.shared.info.unsureCrop == $0.representedObject as? String
     }
+    
     // -- rotation
     let rotationTitles = AppData.rotations.map { "\($0)\(Constants.String.degree)" }
     bind(menu: rotationMenu, withOptions: rotationTitles, objects: AppData.rotations, objectMap: nil, action: #selector(MainWindowController.menuChangeRotation(_:))) {
       PlayerCore.shared.info.rotation == $0.representedObject as? Int
     }
+    
     // -- flip and mirror
     flipMenu.delegate = self
     flip.action = #selector(MainWindowController.menuToggleFlip(_:))
     mirror.action = #selector(MainWindowController.menuToggleMirror(_:))
     
     // Audio menu
+    
     audioMenu.delegate = self
     quickSettingsAudio.action = #selector(MainWindowController.menuShowAudioQuickSettings(_:))
     audioTrackMenu.delegate = self
+    
     // - volume
     (increaseVolume.representedObject, decreaseVolume.representedObject, increaseVolumeSlightly.representedObject, decreaseVolumeSlightly.representedObject) = (5, -5, 1, -1)
     for item in [increaseVolume, decreaseVolume, increaseVolumeSlightly, decreaseVolumeSlightly] {
       item?.action = #selector(MainWindowController.menuChangeVolume(_:))
     }
     mute.action = #selector(MainWindowController.menuToggleMute(_:))
+    
     // - audio delay
     (increaseAudioDelay.representedObject, decreaseAudioDelay.representedObject) = (0.5, -0.5)
     for item in [increaseAudioDelay, decreaseAudioDelay] {
@@ -155,17 +172,20 @@ class MenuController: NSObject, NSMenuDelegate {
     resetAudioDelay.action = #selector(MainWindowController.menuResetAudioDelay(_:))
     
     // Subtitle
+    
     subMenu.delegate = self
     quickSettingsSub.action = #selector(MainWindowController.menuShowSubQuickSettings(_:))
     loadExternalSub.action = #selector(MainWindowController.menuLoadExternalSub(_:))
     subTrackMenu.delegate = self
     secondSubTrackMenu.delegate = self
+    
     // - delay
     (increaseSubDelay.representedObject, decreaseSubDelay.representedObject) = (0.5, -0.5)
     for item in [increaseSubDelay, decreaseSubDelay] {
       item?.action = #selector(MainWindowController.menuChangeSubDelay(_:))
     }
     resetSubDelay.action = #selector(MainWindowController.menuResetSubDelay(_:))
+    
     // encoding
     bind(menu: encodingMenu, withOptions: nil, objects: nil, objectMap: AppData.encodings, action: #selector(MainWindowController.menuSetSubEncoding(_:))) {
       PlayerCore.shared.info.subEncoding == $0.representedObject as? String

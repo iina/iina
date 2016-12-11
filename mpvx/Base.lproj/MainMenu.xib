@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -164,12 +164,8 @@
                             <menuItem title="Double Size" keyEquivalent="2" id="Hal-18-Tnf"/>
                             <menuItem title="Fit to Screen" keyEquivalent="3" id="SHd-63-Xoh"/>
                             <menuItem isSeparatorItem="YES" id="Ap4-Sw-qOT"/>
-                            <menuItem title="Bigger Size" id="lDC-IC-peP">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem title="Smaller Size" id="ZOF-MG-6II">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
+                            <menuItem title="Bigger Size" tag="11" keyEquivalent="=" id="lDC-IC-peP"/>
+                            <menuItem title="Smaller Size" tag="10" keyEquivalent="-" id="ZOF-MG-6II"/>
                             <menuItem isSeparatorItem="YES" id="F7U-cD-2ou"/>
                             <menuItem title="Full Screen" keyEquivalent="f" id="6Eq-ni-6hG"/>
                             <menuItem title="Always on Top" id="wex-rX-PcY">
@@ -401,6 +397,7 @@
                 <outlet property="audioMenu" destination="sW8-ri-eA5" id="e3E-94-i4D"/>
                 <outlet property="audioTrackMenu" destination="DRb-Y8-xir" id="Xxw-IB-hOR"/>
                 <outlet property="backward" destination="Sif-85-FF1" id="w4k-va-FGF"/>
+                <outlet property="biggerSize" destination="lDC-IC-peP" id="fTj-cO-9y3"/>
                 <outlet property="chapter" destination="Fal-I4-PZk" id="DiY-VN-JpS"/>
                 <outlet property="chapterMenu" destination="d9c-me-L2H" id="Gs5-BM-ZGm"/>
                 <outlet property="cropMenu" destination="eo2-Tt-SLx" id="uii-FZ-2wL"/>
@@ -447,6 +444,7 @@
                 <outlet property="rotationMenu" destination="5xN-ZB-VLI" id="YGx-Ae-oMp"/>
                 <outlet property="screenShot" destination="AoP-K6-Kb5" id="vTV-d5-sag"/>
                 <outlet property="secondSubTrackMenu" destination="UwY-P2-Xdb" id="D3B-WW-bAk"/>
+                <outlet property="smallerSize" destination="ZOF-MG-6II" id="0jA-m5-Qy7"/>
                 <outlet property="stop" destination="deS-xK-iBb" id="ewy-yc-P6T"/>
                 <outlet property="subDelayIndicator" destination="THG-4o-U6A" id="8uv-HK-hwl"/>
                 <outlet property="subFont" destination="rme-fr-5rr" id="fU3-xp-rD9"/>

@@ -35,6 +35,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var chapter: NSMenuItem!
   @IBOutlet weak var chapterMenu: NSMenu!
   // Video
+  @IBOutlet weak var videoMenu: NSMenu!
   @IBOutlet weak var quickSettingsVideo: NSMenuItem!
   @IBOutlet weak var videoTrack: NSMenuItem!
   @IBOutlet weak var videoTrackMenu: NSMenu!
@@ -113,6 +114,8 @@ class MenuController: NSObject, NSMenuDelegate {
     
     // Video menu
     
+    videoMenu.delegate = self
+    
     quickSettingsVideo.action = #selector(MainWindowController.menuShowVideoQuickSettings(_:))
     videoTrackMenu.delegate = self
     
@@ -124,7 +127,7 @@ class MenuController: NSObject, NSMenuDelegate {
     
     // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
-//    alwaysOnTop
+    alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
     
     // -- aspect
     var aspectList = AppData.aspects
@@ -232,6 +235,10 @@ class MenuController: NSObject, NSMenuDelegate {
     }
   }
   
+  private func updateVieoMenu() {
+    alwaysOnTop.state = PlayerCore.shared.info.isAlwaysOntop ? NSOnState : NSOffState
+  }
+  
   private func updateAudioMenu() {
     let player = PlayerCore.shared
     volumeIndicator.title = "\(Constants.String.volume): \(player.info.volume)%"
@@ -300,6 +307,8 @@ class MenuController: NSObject, NSMenuDelegate {
       updatePlaylist()
     } else if menu == chapterMenu {
       updateChapterList()
+    } else if menu == videoMenu {
+      updateVieoMenu()
     } else if menu == videoTrackMenu {
       updateTracks(forMenu: menu, type: .video)
     } else if menu == flipMenu {

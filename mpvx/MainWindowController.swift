@@ -980,11 +980,23 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     w.setFrame(newFrame, display: true, animate: true)
   }
   
-  @IBAction func menuToggleFullScreen(_ sender: NSMenuItem) {
-    if let window = window {
-      window.toggleFullScreen(sender)
-      sender.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
+  @IBAction func menuAlwaysOnTop(_ sender: NSMenuItem) {
+    guard let w = window else { return }
+    if playerCore.info.isAlwaysOntop {
+      w.level = Int(CGWindowLevelForKey(.baseWindow))
+      w.level = Int(CGWindowLevelForKey(.normalWindow))
+      playerCore.info.isAlwaysOntop = false
+    } else {
+      w.level = Int(CGWindowLevelForKey(.floatingWindow))
+      w.level = Int(CGWindowLevelForKey(.maximumWindow))
+      playerCore.info.isAlwaysOntop = true
     }
+  }
+  
+  @IBAction func menuToggleFullScreen(_ sender: NSMenuItem) {
+    guard let w = window else { return }
+    w.toggleFullScreen(sender)
+    sender.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
   }
   
   @IBAction func menuChangeVolume(_ sender: NSMenuItem) {

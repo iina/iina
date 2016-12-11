@@ -1102,6 +1102,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
+  
   @IBAction func menuResetSubDelay(_ sender: NSMenuItem) {
     playerCore.setSubDelay(0)
     displayOSD(.subDelay(0))

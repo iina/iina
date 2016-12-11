@@ -23,6 +23,8 @@ enum OSDMessage {
   case abLoop(Int)
   case stop
   case chapter(String)
+  case addToPlaylist(Int)
+  case clearPlaylist
   
   func message() -> String {
     switch self {
@@ -81,6 +83,12 @@ enum OSDMessage {
       
     case .subScale(let value):
       return "Subtitle Scale: \(value)x"
+      
+    case .addToPlaylist(let count):
+      return "Added \(count) files to playlist"
+      
+    case .clearPlaylist:
+      return "Cleared playlist"
       
     }
   }

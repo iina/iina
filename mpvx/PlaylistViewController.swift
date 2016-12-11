@@ -11,7 +11,7 @@ import Cocoa
 class PlaylistViewController: NSViewController, NSTableViewDataSource {
   
   override var nibName: String {
-    return "PlaylistView"
+    return "PlaylistViewController"
   }
   
   var playerCore: PlayerCore = PlayerCore.shared
@@ -147,8 +147,15 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       if url.isFileURL {
         self.playerCore.addToPlaylist(url.path)
         self.playlistTableView.reloadData()
+        self.mainWindow.displayOSD(.addToPlaylist(1))
       }
     }
+  }
+  
+  
+  @IBAction func clearPlaylistBtnAction(_ sender: AnyObject) {
+    playerCore.clearPlaylist()
+    mainWindow.displayOSD(.clearPlaylist)
   }
   
   @IBAction func playlistBtnAction(_ sender: AnyObject) {

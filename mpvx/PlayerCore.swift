@@ -254,6 +254,14 @@ class PlayerCore: NSObject {
     mpvController.command([MPVCommand.loadfile, path, "append", nil])
   }
   
+  func clearPlaylist() {
+    mpvController.command([MPVCommand.playlistClear, nil])
+  }
+  
+  func removeFromPlaylist(index: Int) {
+    mpvController.command([MPVCommand.playlistRemove, "\(index)", nil])
+  }
+  
   func playFile(_ path: String) {
     mpvController.command([MPVCommand.loadfile, path, "replace", nil])
     getPLaylist()
@@ -412,7 +420,7 @@ class PlayerCore: NSObject {
     info.videoTracks.removeAll(keepingCapacity: true)
     info.subTracks.removeAll(keepingCapacity: true)
     let trackCount = mpvController.getInt(MPVProperty.trackListCount)
-    for index in 0...trackCount-1 {
+    for index in 0..<trackCount {
       // get info for each track
       let track = MPVTrack(id:         mpvController.getInt(MPVProperty.trackListNId(index)),
                            type:       MPVTrack.TrackType(rawValue: mpvController.getString(MPVProperty.trackListNType(index))!)!,
@@ -464,7 +472,7 @@ class PlayerCore: NSObject {
     if chapterCount == 0 {
       return
     }
-    for index in 0...chapterCount-1 {
+    for index in 0..<chapterCount {
       let chapter = MPVChapter(title:     mpvController.getString(MPVProperty.chapterListNTitle(index)),
                                startTime: mpvController.getInt(MPVProperty.chapterListNTime(index)),
                                index:     index)

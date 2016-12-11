@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="PlaylistViewController" customModule="mpvx" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="PlaylistViewController" customModule="NazoPlayer" customModuleProvider="target">
             <connections>
                 <outlet property="chapterTableView" destination="BvG-MR-6LX" id="WoF-Wg-fqX"/>
                 <outlet property="chaptersBtn" destination="SOR-3l-PFj" id="W2q-tm-TA0"/>
@@ -25,7 +26,7 @@
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Playlist" identifier="1" id="rjs-Qf-mT6">
-                            <view key="view" id="BXH-zz-cse">
+                            <view key="view" id="BXH-zz-cse" customClass="PlaylistDragDestView" customModule="NazoPlayer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -86,7 +87,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="24"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W9C-Z7-hiI">
-                                                <rect key="frame" x="0.0" y="1" width="24" height="22"/>
+                                                <rect key="frame" x="0.0" y="2" width="24" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="tOv-Aj-8c4">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -94,6 +95,17 @@
                                                 </buttonCell>
                                                 <connections>
                                                     <action selector="addToPlaylistBtnAction:" target="-2" id="Jtx-UI-zuc"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7my-AM-8Ts">
+                                                <rect key="frame" x="216" y="2" width="24" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="4GG-b4-WLp">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="clearPlaylistBtnAction:" target="-2" id="7IC-nt-T1t"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -178,7 +190,7 @@
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
-                                                                <tableCellView identifier="TrackNameCell" id="KdQ-yd-ywJ" customClass="ChapterTableCellView" customModule="mpvx" customModuleProvider="target">
+                                                                <tableCellView identifier="TrackNameCell" id="KdQ-yd-ywJ" customClass="ChapterTableCellView" customModule="NazoPlayer" customModuleProvider="target">
                                                                     <rect key="frame" x="24" y="1" width="214" height="31"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
@@ -276,5 +288,6 @@
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
 </document>

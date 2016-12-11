@@ -19,7 +19,7 @@
 		845ABEAC1D4D19C000BFB15B /* MPVTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */; };
 		845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB0C61D39462E00C011E0 /* ControlBarView.swift */; };
 		8460FBA91D6497490081841B /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460FBA71D6497490081841B /* PlaylistViewController.swift */; };
-		8460FBAA1D6497490081841B /* PlaylistView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8460FBA81D6497490081841B /* PlaylistView.xib */; };
+		8460FBAA1D6497490081841B /* PlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8460FBA81D6497490081841B /* PlaylistViewController.xib */; };
 		8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */; };
 		8461C5301D462488006E91FF /* VideoTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52F1D462488006E91FF /* VideoTime.swift */; };
 		8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */; };
@@ -80,6 +80,7 @@
 		84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */; };
 		84D377651D7370EE007F7396 /* ChapterTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377641D7370EE007F7396 /* ChapterTableCellView.swift */; };
 		84D377671D737F58007F7396 /* MPVChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377661D737F58007F7396 /* MPVChapter.swift */; };
+		84E745D41DFDB27B00588DED /* PlaylistDragDestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E745D31DFDB27B00588DED /* PlaylistDragDestView.swift */; };
 		84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */; };
 		84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */; };
 		84EB1EEA1D2F51D3004FA5A1 /* mpvxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */; };
@@ -166,7 +167,7 @@
 		845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVTrack.swift; sourceTree = "<group>"; };
 		845FB0C61D39462E00C011E0 /* ControlBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
 		8460FBA71D6497490081841B /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
-		8460FBA81D6497490081841B /* PlaylistView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistView.xib; sourceTree = "<group>"; };
+		8460FBA81D6497490081841B /* PlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistViewController.xib; sourceTree = "<group>"; };
 		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
 		8461C52F1D462488006E91FF /* VideoTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTime.swift; sourceTree = "<group>"; };
 		8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSettingViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +227,7 @@
 		84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVPlaylistItem.swift; sourceTree = "<group>"; };
 		84D377641D7370EE007F7396 /* ChapterTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterTableCellView.swift; sourceTree = "<group>"; };
 		84D377661D737F58007F7396 /* MPVChapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVChapter.swift; sourceTree = "<group>"; };
+		84E745D31DFDB27B00588DED /* PlaylistDragDestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistDragDestView.swift; sourceTree = "<group>"; };
 		84EB1ED61D2F51D3004FA5A1 /* NazoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NazoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -357,7 +359,8 @@
 				8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */,
 				8466BE171D5CDD0300039D03 /* QuickSettingViewController.xib */,
 				8460FBA71D6497490081841B /* PlaylistViewController.swift */,
-				8460FBA81D6497490081841B /* PlaylistView.xib */,
+				8460FBA81D6497490081841B /* PlaylistViewController.xib */,
+				84E745D31DFDB27B00588DED /* PlaylistDragDestView.swift */,
 				84D377641D7370EE007F7396 /* ChapterTableCellView.swift */,
 				845FB0C61D39462E00C011E0 /* ControlBarView.swift */,
 				84D377691D74163B007F7396 /* Video */,
@@ -612,7 +615,7 @@
 				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */,
-				8460FBAA1D6497490081841B /* PlaylistView.xib in Resources */,
+				8460FBAA1D6497490081841B /* PlaylistViewController.xib in Resources */,
 				847C62CB1DC13CDA00E1EF16 /* PreferenceGeneralViewController.xib in Resources */,
 				84A0BA9F1D2FAD4000BC8DA1 /* MainWindowController.xib in Resources */,
 			);
@@ -752,6 +755,7 @@
 				84D377651D7370EE007F7396 /* ChapterTableCellView.swift in Sources */,
 				843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */,
 				84A0BA9B1D2FAB4100BC8DA1 /* Parameter.swift in Sources */,
+				84E745D41DFDB27B00588DED /* PlaylistDragDestView.swift in Sources */,
 				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,
 				84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,

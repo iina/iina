@@ -123,7 +123,7 @@ extension NSRect {
 
 extension Array {
   func at(_ pos: Int) -> Element? {
-    if pos < count - 1 {
+    if pos < count {
       return self[pos]
     } else {
       return nil

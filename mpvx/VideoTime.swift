@@ -32,6 +32,9 @@ class VideoTime {
   
   var stringRepresentation: String {
     get {
+      if self == Constants.Time.infinite {
+        return "End"
+      }
       let ms = (m < 10 ? "0\(m)" : "\(m)")
       let ss = (s < 10 ? "0\(s)" : "\(s)")
       let hs = (h > 0 ? "\(h):" : "")

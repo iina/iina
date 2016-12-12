@@ -329,6 +329,10 @@ class PlayerCore: NSObject {
     mpvController.setString(MPVOption.Subtitles.subFont, font)
   }
   
+  func execKeyCode(_ code: String) {
+    mpvController.command([MPVCommand.keypress, code, nil])
+  }
+  
   // MARK: - Other
   
   /** This function is called right after file loaded. Should load all meta info here. */

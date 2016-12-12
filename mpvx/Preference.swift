@@ -51,6 +51,9 @@ struct Preference {
     
     /** Resume from last position */
     
+    /** Whether catch media keys */
+    static let useMediaKeys = "useMediaKeys"
+    
     
     static let useExactSeek = "useExactSeek"
     
@@ -86,6 +89,7 @@ struct Preference {
     Key.arrowButtonAction: ArrowButtonAction.speed.rawValue,
     Key.pauseWhenOpen: false,
     Key.fullScreenWhenOpen: false,
+    Key.useMediaKeys: true,
     
     Key.quitWhenNoOpenedWindow: true,
     Key.useExactSeek: true,

@@ -36,6 +36,9 @@ class MPVController: NSObject {
     // Get the name of this client handle.
     mpvClientName = mpv_client_name(mpv)
     
+    let yes_str = "yes"
+    let no_str = "no"
+    
     // Set options that can be override by user's config
     let screenshotPath = playerCore.ud.string(forKey: Preference.Key.screenshotFolder)!
     let absoluteScreenshotPath = NSString(string: screenshotPath).expandingTildeInPath
@@ -46,6 +49,9 @@ class MPVController: NSObject {
     
     let screenshotTemplate = playerCore.ud.string(forKey: Preference.Key.screenshotTemplate)!
     e(mpv_set_option_string(mpv, MPVOption.Screenshot.screenshotTemplate, screenshotTemplate))
+    
+    let useMediaKeys = playerCore.ud.bool(forKey: Preference.Key.useMediaKeys)
+    e(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, useMediaKeys ? yes_str : no_str))
     
     // Load user's config file.
     // e(mpv_load_config_file(mpv, ""))
@@ -58,6 +64,9 @@ class MPVController: NSObject {
     // Load external scripts
     let scriptPath = Bundle.main.path(forResource: "autoload", ofType: "lua", inDirectory: "scripts")!
     e(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, scriptPath))
+    
+    let inputConfPath = Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!
+    e(mpv_set_option_string(mpv, MPVOption.Input.inputConf, inputConfPath))
     
     // Receive log messages at warn level.
     e(mpv_request_log_messages(mpv, "warn"))

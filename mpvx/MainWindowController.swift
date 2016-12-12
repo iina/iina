@@ -212,7 +212,41 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   override func keyDown(with event: NSEvent) {
     window!.makeFirstResponder(window!.contentView)
-    playerCore.togglePause(nil)
+    var keyString = ""
+    let keyChar: String
+    let keyCode = event.keyCode
+    let modifiers = event.modifierFlags
+    // shift
+    guard let keyName = KeyCodeHelper.keyMap[keyCode] else {
+      Utility.log("Undefined key code?")
+      return
+    }
+    if modifiers.contains(.shift) {
+      if KeyCodeHelper.canBeModifiedByShift(keyCode) {
+        keyChar = keyName.1!
+      } else {
+        keyChar = keyName.0
+        keyString += "Shift+"
+      }
+    } else {
+      keyChar = keyName.0
+    }
+    // control
+    if modifiers.contains(.control) {
+      keyString += "Control+"
+    }
+    // alt
+    if modifiers.contains(.option) {
+      keyString += "Alt+"
+    }
+    // meta
+    if modifiers.contains(.command) {
+      keyString += "Meta+"
+    }
+    // char
+    keyString += keyChar
+    
+    playerCore.execKeyCode(keyString)
   }
   
   /** record mouse pos on mouse down */

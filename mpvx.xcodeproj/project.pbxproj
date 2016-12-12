@@ -81,6 +81,8 @@
 		84D377651D7370EE007F7396 /* ChapterTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377641D7370EE007F7396 /* ChapterTableCellView.swift */; };
 		84D377671D737F58007F7396 /* MPVChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377661D737F58007F7396 /* MPVChapter.swift */; };
 		84E745D41DFDB27B00588DED /* PlaylistDragDestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E745D31DFDB27B00588DED /* PlaylistDragDestView.swift */; };
+		84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E745D51DFDD4FD00588DED /* KeyCodeHelper.swift */; };
+		84E745DB1DFDE9DE00588DED /* input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = 84E745D81DFDE8C100588DED /* input.conf */; };
 		84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */; };
 		84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */; };
 		84EB1EEA1D2F51D3004FA5A1 /* mpvxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */; };
@@ -150,6 +152,17 @@
 				84817CE91DBE2E5300CC2279 /* autoload.lua in Copy Lua Scripts */,
 			);
 			name = "Copy Lua Scripts";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84E745DA1DFDE9C600588DED /* Copy Configs */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = config;
+			dstSubfolderSpec = 7;
+			files = (
+				84E745DB1DFDE9DE00588DED /* input.conf in Copy Configs */,
+			);
+			name = "Copy Configs";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -228,6 +241,8 @@
 		84D377641D7370EE007F7396 /* ChapterTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterTableCellView.swift; sourceTree = "<group>"; };
 		84D377661D737F58007F7396 /* MPVChapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVChapter.swift; sourceTree = "<group>"; };
 		84E745D31DFDB27B00588DED /* PlaylistDragDestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistDragDestView.swift; sourceTree = "<group>"; };
+		84E745D51DFDD4FD00588DED /* KeyCodeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCodeHelper.swift; sourceTree = "<group>"; };
+		84E745D81DFDE8C100588DED /* input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.conf; sourceTree = "<group>"; };
 		84EB1ED61D2F51D3004FA5A1 /* NazoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NazoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -343,6 +358,7 @@
 		84A0BAA21D2FAE8200BC8DA1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				84E745D71DFDE8C100588DED /* config */,
 				84817CE51DBE2D0300CC2279 /* scripts */,
 				84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */,
 				84EB1EE01D2F51D3004FA5A1 /* Info.plist */,
@@ -382,6 +398,7 @@
 				84C8D5901D796F9700D98A0E /* Aspect.swift */,
 				84AABE961DBFB62F00D138FD /* FixedFontManager.h */,
 				84AABE971DBFB62F00D138FD /* FixedFontManager.m */,
+				84E745D51DFDD4FD00588DED /* KeyCodeHelper.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -437,6 +454,15 @@
 			);
 			name = Video;
 			sourceTree = "<group>";
+		};
+		84E745D71DFDE8C100588DED /* config */ = {
+			isa = PBXGroup;
+			children = (
+				84E745D81DFDE8C100588DED /* input.conf */,
+			);
+			name = config;
+			path = mpvx/config;
+			sourceTree = SOURCE_ROOT;
 		};
 		84EB1ECD1D2F51D3004FA5A1 = {
 			isa = PBXGroup;
@@ -531,6 +557,7 @@
 				84EB1ED41D2F51D3004FA5A1 /* Resources */,
 				84817C991DBDF57C00CC2279 /* Copy Dylibs */,
 				84817CE81DBE2E3200CC2279 /* Copy Lua Scripts */,
+				84E745DA1DFDE9C600588DED /* Copy Configs */,
 				39F390C48490810A95AAB798 /* [CP] Embed Pods Frameworks */,
 				D7649DE65F9AB702CE8501C9 /* [CP] Copy Pods Resources */,
 			);
@@ -730,6 +757,7 @@
 			files = (
 				8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */,
 				8452DD851D3B956D008A543A /* Preference.swift in Sources */,
+				84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */,
 				84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */,
 				84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */,
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,

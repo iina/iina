@@ -88,6 +88,26 @@ class Utility {
     a = b
     b = temp
   }
+  
+  static func toRealSpeed(fromDisplaySpeed speed: Double) -> Double{
+    var realSpeed = speed
+    if realSpeed == 0 {
+      realSpeed = 1
+    } else if realSpeed < 0 {
+      realSpeed = -1 / realSpeed
+    }
+    return realSpeed
+  }
+  
+  static func toDisplaySpeed(fromRealSpeed realSpeed: Double) -> Double {
+    var speed = realSpeed
+    if realSpeed == 1 {
+      speed = 0
+    } else if realSpeed < 1 {
+      speed = -1 / speed
+    }
+    return speed
+  }
     
   // MARK: - Util classes
   

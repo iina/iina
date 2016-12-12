@@ -26,6 +26,24 @@ class MPVController: NSObject {
   var recordedSeekStartTime: CFTimeInterval = 0
   var recordedSeekTimeListener: ((Double) -> Void)?
   
+  let observeProperties: [String: mpv_format] = [
+    MPVProperty.trackListCount: MPV_FORMAT_INT64,
+    MPVProperty.chapterListCount: MPV_FORMAT_INT64,
+    MPVOption.PlaybackControl.pause: MPV_FORMAT_FLAG,
+    MPVOption.Audio.mute: MPV_FORMAT_FLAG,
+    MPVOption.Audio.volume: MPV_FORMAT_DOUBLE,
+    MPVOption.Audio.audioDelay: MPV_FORMAT_DOUBLE,
+    MPVOption.PlaybackControl.speed: MPV_FORMAT_DOUBLE,
+    MPVOption.Subtitles.subDelay: MPV_FORMAT_DOUBLE,
+    MPVOption.Subtitles.subScale: MPV_FORMAT_DOUBLE,
+    MPVOption.Subtitles.subPos: MPV_FORMAT_DOUBLE,
+    MPVOption.Equalizer.contrast: MPV_FORMAT_DOUBLE,
+    MPVOption.Equalizer.brightness: MPV_FORMAT_DOUBLE,
+    MPVOption.Equalizer.gamma: MPV_FORMAT_DOUBLE,
+    MPVOption.Equalizer.hue: MPV_FORMAT_DOUBLE,
+    MPVOption.Equalizer.saturation: MPV_FORMAT_DOUBLE
+  ]
+  
   /**
    Init the mpv context
    */
@@ -40,6 +58,10 @@ class MPVController: NSObject {
     let no_str = "no"
     
     // Set options that can be override by user's config
+    
+    // disable internal OSD
+    e(mpv_set_option_string(mpv, MPVOption.OSD.osdLevel, "0"))
+    
     let screenshotPath = playerCore.ud.string(forKey: Preference.Key.screenshotFolder)!
     let absoluteScreenshotPath = NSString(string: screenshotPath).expandingTildeInPath
     e(mpv_set_option_string(mpv, MPVOption.Screenshot.screenshotDirectory, absoluteScreenshotPath))
@@ -81,8 +103,9 @@ class MPVController: NSObject {
       }, mutableRawPointerOf(obj: self))
     
     // Observe propoties.
-    mpv_observe_property(mpv, 0, MPVProperty.trackListCount, MPV_FORMAT_INT64)
-    mpv_observe_property(mpv, 0, MPVProperty.playlistCount, MPV_FORMAT_INT64)
+    observeProperties.forEach { (k, v) in
+      mpv_observe_property(mpv, 0, k, v)
+    }
     
     // Initialize an uninitialized mpv instance. If the mpv instance is already running, an error is retuned.
     e(mpv_initialize(mpv))
@@ -193,24 +216,7 @@ class MPVController: NSObject {
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
       if let property = UnsafePointer<mpv_event_property>(dataOpaquePtr)?.pointee {
         let propertyName = String(cString: property.name)
-        switch propertyName {
-        case MPVProperty.videoParams:
-          onVideoParamsChange(UnsafePointer<mpv_node_list>(OpaquePointer(property.data)))
-          
-        case MPVOption.Audio.mute:
-          playerCore.syncUI(.muteButton)
-        
-        // following properties may change before file loaded
-        
-        case MPVProperty.playlistCount:
-          NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
-        
-        case MPVProperty.trackListCount:
-          NotificationCenter.default.post(Notification(name: Constants.Noti.tracklistChanged))
-          
-        default:
-          Utility.log("MPV property changed (unhandled): \(propertyName)")
-        }
+        handlePropertyChange(propertyName, property)
       }
       
     case MPV_EVENT_AUDIO_RECONFIG:
@@ -318,8 +324,105 @@ class MPVController: NSObject {
     }
   }
   
+  // MARK: - Property listeners
   
-  // MARK: Utils
+  private func handlePropertyChange(_ name: String, _ property: mpv_event_property) {
+    switch name {
+      
+    case MPVProperty.videoParams:
+      onVideoParamsChange(UnsafePointer<mpv_node_list>(OpaquePointer(property.data)))
+      
+    case MPVOption.PlaybackControl.pause:
+      if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
+        playerCore.sendOSD(data ? .pause : .resume)
+      }
+      
+    case MPVOption.Audio.mute:
+      playerCore.syncUI(.muteButton)
+      if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
+        playerCore.info.isMuted = data
+        playerCore.sendOSD(data ? OSDMessage.mute : OSDMessage.unMute)
+      }
+      
+    case MPVOption.Audio.volume:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        playerCore.info.volume = Int(data)
+        playerCore.sendOSD(.volume(Int(data)))
+      }
+      
+    case MPVOption.Audio.audioDelay:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        playerCore.info.audioDelay = data
+        playerCore.sendOSD(.audioDelay(data))
+      }
+
+    case MPVOption.Subtitles.subDelay:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        playerCore.info.subDelay = data
+        playerCore.sendOSD(.subDelay(data))
+      }
+      
+    case MPVOption.Subtitles.subScale:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        let displayValue = data >= 1 ? data : -1/data
+        let truncated = round(displayValue * 100) / 100
+        playerCore.sendOSD(.subScale(truncated))
+      }
+      
+    case MPVOption.Subtitles.subPos:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        playerCore.sendOSD(.subPos(data))
+      }
+      
+    case MPVOption.PlaybackControl.speed:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        let displaySpeed = Utility.toDisplaySpeed(fromRealSpeed: data)
+        playerCore.sendOSD(.speed(displaySpeed))
+      }
+      
+    case MPVOption.Equalizer.contrast:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        playerCore.sendOSD(.contrast(data))
+      }
+      
+    case MPVOption.Equalizer.hue:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        playerCore.sendOSD(.hue(data))
+      }
+      
+    case MPVOption.Equalizer.brightness:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        playerCore.sendOSD(.brightness(data))
+      }
+      
+    case MPVOption.Equalizer.gamma:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        playerCore.sendOSD(.gamma(data))
+      }
+      
+    case MPVOption.Equalizer.saturation:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        playerCore.sendOSD(.saturation(data))
+      }
+    
+    // following properties may change before file loaded
+      
+    case MPVProperty.playlistCount:
+      NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+      
+    case MPVProperty.trackListCount:
+      NotificationCenter.default.post(Notification(name: Constants.Noti.tracklistChanged))
+      
+    // ignore following
+      
+      
+    default:
+      Utility.log("MPV property changed (unhandled): \(name)")
+    }
+  }
+  
+  
+  // MARK: - Utils
   
   /**
    Utility function for checking mpv api error

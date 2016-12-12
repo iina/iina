@@ -10,6 +10,8 @@ import Foundation
 
 enum OSDMessage {
   
+  case pause
+  case resume
   case volume(Int)
   case speed(Double)
   case aspect(String)
@@ -17,6 +19,7 @@ enum OSDMessage {
   case audioDelay(Double)
   case subDelay(Double)
   case subScale(Double)
+  case subPos(Double)
   case mute
   case unMute
   case screenShot
@@ -26,8 +29,21 @@ enum OSDMessage {
   case addToPlaylist(Int)
   case clearPlaylist
   
+  case contrast(Double)
+  case hue(Double)
+  case saturation(Double)
+  case brightness(Double)
+  case gamma(Double)
+  
+  
   func message() -> String {
     switch self {
+    case .pause:
+      return "Paused"
+      
+    case .resume:
+      return "Resumed"
+      
     case .volume(let value):
       return "Volume: \(value)"
       
@@ -46,7 +62,7 @@ enum OSDMessage {
         return "Audio Delay: No Delay"
       } else {
         let word = value > 0 ? "Later" : "Earlier"
-        return "Audio Delay: \(value)s \(word)"
+        return "Audio Delay: \(abs(value))s \(word)"
       }
       
     case .subDelay(let value):
@@ -54,8 +70,11 @@ enum OSDMessage {
         return "Subtitle Delay: No Delay"
       } else {
         let word = value > 0 ? "Later" : "Earlier"
-        return "Subtitle Delay: \(value)s \(word)"
+        return "Subtitle Delay: \(abs(value))s \(word)"
       }
+      
+    case .subPos(let value):
+      return "Sub Position: \(value) / 100"
       
     case .mute:
       return "Mute"
@@ -89,6 +108,21 @@ enum OSDMessage {
       
     case .clearPlaylist:
       return "Cleared playlist"
+      
+    case .contrast(let value):
+      return "Contrast: \(value)"
+      
+    case .gamma(let value):
+      return "Gamma: \(value)"
+      
+    case .hue(let value):
+      return "Hue: \(value)"
+      
+    case .saturation(let value):
+      return "Saturation: \(value)"
+      
+    case .brightness(let value):
+      return "Brightness: \(value)"
       
     }
   }

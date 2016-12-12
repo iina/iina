@@ -92,7 +92,6 @@ class PlayerCore: NSObject {
   func toogleMute(_ set: Bool?) {
     let newState = set ?? !mpvController.getFlag(MPVOption.Audio.mute)
     mpvController.setFlag(MPVOption.Audio.mute, newState)
-    info.isMuted = newState
   }
   
   func seek(percent: Double) {
@@ -170,14 +169,9 @@ class PlayerCore: NSObject {
 
   /** Set speed. A negative speed -x means slow by x times */
   func setSpeed(_ speed: Double) {
-    var realSpeed = speed
-    if realSpeed == 0 {
-      realSpeed = 1
-    } else if realSpeed < 0 {
-      realSpeed = -1 / realSpeed
-    }
+    let realSpeed = Utility.toRealSpeed(fromDisplaySpeed: speed)
     mpvController.setDouble(MPVOption.PlaybackControl.speed, realSpeed)
-    info.playSpeed = speed
+    info.playSpeed = realSpeed
   }
   
   func setVideoAspect(_ aspect: String) {
@@ -242,12 +236,10 @@ class PlayerCore: NSObject {
   
   func setAudioDelay(_ delay: Double) {
     mpvController.setDouble(MPVOption.Audio.audioDelay, delay)
-    info.audioDelay = delay
   }
   
   func setSubDelay(_ delay: Double) {
     mpvController.setDouble(MPVOption.Subtitles.subDelay, delay)
-    info.subDelay = delay
   }
   
   func addToPlaylist(_ path: String) {
@@ -389,6 +381,9 @@ class PlayerCore: NSObject {
   }
   
   func syncUI(_ option: SyncUIOption) {
+    // if window not loaded, ignore
+    guard mainWindow.isWindowLoaded else { return }
+    
     switch option {
     case .time:
       let time = mpvController.getInt(MPVProperty.timePos)
@@ -414,6 +409,16 @@ class PlayerCore: NSObject {
           self.mainWindow.playlistView.chapterTableView.reloadData()
         }
       }
+    }
+  }
+  
+  func sendOSD(_ osd: OSDMessage) {
+    
+    // if window not loaded, ignore
+    guard mainWindow.isWindowLoaded else { return }
+    
+    DispatchQueue.main.async {
+      self.mainWindow.displayOSD(osd)
     }
   }
   

@@ -355,7 +355,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let newVolume = playerCore.info.volume - Int(event.scrollingDeltaY)
       playerCore.setVolume(newVolume)
       volumeSlider.integerValue = newVolume
-      displayOSD(.volume(playerCore.info.volume))
     }
   }
   
@@ -796,7 +795,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         rightArrowLabel.isHidden = false
         rightArrowLabel.stringValue = String(format: "%.0fx", speedValue)
       }
-      displayOSD(.speed(speedValue))
       // if is paused
       if playButton.state == NSOffState {
         updatePlayButtonState(NSOnState)
@@ -852,7 +850,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.integerValue
     playerCore.setVolume(value)
-    displayOSD(.volume(value))
   }
   
   
@@ -1089,7 +1086,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if let volumeDelta = sender.representedObject as? Int {
       let newVolume = volumeDelta + playerCore.info.volume
       playerCore.setVolume(newVolume)
-      displayOSD(.volume(newVolume))
     } else {
       Utility.log("sender.representedObject is not int in menuChangeVolume()")
     }
@@ -1097,11 +1093,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   @IBAction func menuToggleMute(_ sender: NSMenuItem) {
     playerCore.toogleMute(nil)
-    if playerCore.info.isMuted {
-      displayOSD(.mute)
-    } else {
-      displayOSD(.unMute)
-    }
     updateVolume()
   }
   
@@ -1109,7 +1100,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if let delayDelta = sender.representedObject as? Double {
       let newDelay = playerCore.info.audioDelay + delayDelta
       playerCore.setAudioDelay(newDelay)
-      displayOSD(.audioDelay(newDelay))
     } else {
       Utility.log("sender.representedObject is not Double in menuChangeAudioDelay()")
     }
@@ -1117,7 +1107,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   @IBAction func menuResetAudioDelay(_ sender: NSMenuItem) {
     playerCore.setAudioDelay(0)
-    displayOSD(.audioDelay(0))
   }
   
   @IBAction func menuLoadExternalSub(_ sender: NSMenuItem) {
@@ -1130,7 +1119,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if let delayDelta = sender.representedObject as? Double {
       let newDelay = playerCore.info.subDelay + delayDelta
       playerCore.setSubDelay(newDelay)
-      displayOSD(.subDelay(newDelay))
     } else {
       Utility.log("sender.representedObject is not Double in menuChangeSubDelay()")
     }
@@ -1139,7 +1127,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   @IBAction func menuResetSubDelay(_ sender: NSMenuItem) {
     playerCore.setSubDelay(0)
-    displayOSD(.subDelay(0))
   }
   
   @IBAction func menuSetSubEncoding(_ sender: NSMenuItem) {

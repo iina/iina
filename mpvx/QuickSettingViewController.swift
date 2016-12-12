@@ -273,7 +273,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerCore.setSpeed(value)
-        mainWindow.displayOSD(.speed(value))
       }
     }
   }
@@ -283,7 +282,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if (value >= 1 || value <= -1 || value == 0) && playerCore.info.playSpeed != value {
       let finalValue = value == 0 ? 1 : value
       playerCore.setSpeed(finalValue)
-      mainWindow.displayOSD(.speed(finalValue))
     }
     if let window = sender.window {
       window.makeFirstResponder(window.contentView)
@@ -307,7 +305,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerCore.setAudioDelay(sliderValue)
-        mainWindow.displayOSD(.audioDelay(sliderValue))
       }
     }
   }
@@ -315,7 +312,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func customAudioDelayEditFinishedAction(_ sender: AnyObject?) {
     let value = customAudioDelayTextField.doubleValue
     playerCore.setAudioDelay(value)
-    mainWindow.displayOSD(.audioDelay(value))
   }
   
   // Sub tab
@@ -336,7 +332,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerCore.setSubDelay(sliderValue)
-        mainWindow.displayOSD(.subDelay(sliderValue))
       }
     }
   }
@@ -344,13 +339,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func customSubDelayEditFinishedAction(_ sender: AnyObject?) {
     let value = customSubDelayTextField.doubleValue
     playerCore.setSubDelay(value)
-    mainWindow.displayOSD(.subDelay(value))
   }
   
   @IBAction func subScaleReset(_ sender: AnyObject) {
     playerCore.setSubScale(1)
     subScaleSlider.doubleValue = 0
-    mainWindow.displayOSD(.subScale(1))
   }
   
   @IBAction func subScaleSliderAction(_ sender: NSSlider) {
@@ -365,7 +358,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       realValue = 1 / mappedValue
     }
     playerCore.setSubScale(realValue)
-    mainWindow.displayOSD(.subScale(mappedValue))
   }
   
   @IBAction func subTextColorAction(_ sender: AnyObject) {

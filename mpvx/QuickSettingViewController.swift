@@ -31,7 +31,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   var playerCore: PlayerCore = PlayerCore.shared
   weak var mainWindow: MainWindowController!
   
-  var tracklistChangeObserver: NSObjectProtocol?
+  var observers: [NSObjectProtocol] = []
+  
   
   @IBOutlet weak var videoTabBtn: NSButton!
   @IBOutlet weak var audioTabBtn: NSButton!
@@ -52,6 +53,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var speedSliderIndicator: NSTextField!
   @IBOutlet weak var customSpeedTextField: NSTextField!
   @IBOutlet weak var deinterlaceCheckBtn: NSButton!
+  
+  @IBOutlet weak var brightnessSlider: NSSlider!
+  @IBOutlet weak var contrastSlider: NSSlider!
+  @IBOutlet weak var saturationSlider: NSSlider!
+  @IBOutlet weak var gammaSlider: NSSlider!
+  @IBOutlet weak var hueSlider: NSSlider!
   
   @IBOutlet weak var customAudioDelayTextField: NSTextField!
   @IBOutlet weak var audioDelaySliderIndicator: NSTextField!
@@ -86,10 +93,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
     
     // notifications
-    tracklistChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.tracklistChanged, object: nil, queue: OperationQueue.main) { _ in
+    let tracklistChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.tracklistChanged, object: nil, queue: OperationQueue.main) { _ in
       self.playerCore.getTrackInfo()
       self.withAllTableViews { $0.0.reloadData() }
     }
+    observers.append(tracklistChangeObserver)
   }
   
   // MARK: - Validate UI
@@ -101,7 +109,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
   
   override func viewDidDisappear() {
-    NotificationCenter.default.removeObserver(self.tracklistChangeObserver!)
+    observers.forEach {
+      NotificationCenter.default.removeObserver($0)
+    }
   }
   
   private func updateControlsState() {
@@ -121,6 +131,15 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     customAudioDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Audio.audioDelay)
     customSpeedTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
     deinterlaceCheckBtn.state = playerCore.info.deinterlace ? NSOnState : NSOffState
+    updateVideoEqState()
+  }
+  
+  private func updateVideoEqState() {
+    brightnessSlider.intValue = Int32(playerCore.info.brightness)
+    contrastSlider.intValue = Int32(playerCore.info.contrast)
+    saturationSlider.intValue = Int32(playerCore.info.saturation)
+    gammaSlider.intValue = Int32(playerCore.info.gamma)
+    hueSlider.intValue = Int32(playerCore.info.hue)
   }
   
   // MARK: - Switch tab
@@ -301,6 +320,53 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func deinterlaceBtnAction(_ sender: AnyObject) {
     playerCore.toggleDeinterlace(deinterlaceCheckBtn.state == NSOnState)
   }
+  
+  @IBAction func equalizerSliderAction(_ sender: NSSlider) {
+    let type: PlayerCore.VideoEqualizerType
+    switch sender {
+    case brightnessSlider:
+      type = .brightness
+    case contrastSlider:
+      type = .contrast
+    case saturationSlider:
+      type = .saturation
+    case gammaSlider:
+      type = .gamma
+    case hueSlider:
+      type = .hue
+    default:
+      return
+    }
+    playerCore.setVideoEqualizer(forOption: type, value: Int(sender.intValue))
+  }
+  
+  // use tag for buttons
+  @IBAction func resetEqualizerBtnAction(_ sender: NSButton) {
+    let type: PlayerCore.VideoEqualizerType
+    let slider: NSSlider?
+    switch sender.tag {
+    case 0:
+      type = .brightness
+      slider = brightnessSlider
+    case 1:
+      type = .contrast
+      slider = contrastSlider
+    case 2:
+      type = .saturation
+      slider = saturationSlider
+    case 3:
+      type = .gamma
+      slider = gammaSlider
+    case 4:
+      type = .hue
+      slider = hueSlider
+    default:
+      return
+    }
+    playerCore.setVideoEqualizer(forOption: type, value: 0)
+    slider?.intValue = 0
+  }
+  
   
   // Audio tab
   

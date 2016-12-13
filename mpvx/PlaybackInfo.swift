@@ -39,6 +39,13 @@ class PlaybackInfo {
   
   var deinterlace: Bool = false
   
+  // video equalizer
+  var brightness: Int = 0
+  var contrast: Int = 0
+  var saturation: Int = 0
+  var gamma: Int = 0
+  var hue: Int = 0
+  
   var volume: Int = 50 {
     didSet {
       if volume < 0 { volume = 0 }

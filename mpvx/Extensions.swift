@@ -155,6 +155,10 @@ extension Int {
 }
 
 extension Double {
+  func toStr() -> String {
+    return "\(self)"
+  }
+  
   func constrain(min: Double, max: Double) -> Double {
     var value = self
     if self < min { value = min }

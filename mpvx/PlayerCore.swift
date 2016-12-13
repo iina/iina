@@ -226,6 +226,27 @@ class PlayerCore: NSObject {
     mpvController.setFlag(MPVOption.Video.deinterlace, enable)
   }
   
+  enum VideoEqualizerType {
+    case brightness, contrast, saturation, gamma, hue
+  }
+  
+  func setVideoEqualizer(forOption option: VideoEqualizerType, value: Int) {
+    let optionName: String
+    switch option {
+    case .brightness:
+      optionName = MPVOption.Equalizer.brightness
+    case .contrast:
+      optionName = MPVOption.Equalizer.contrast
+    case .saturation:
+      optionName = MPVOption.Equalizer.saturation
+    case .gamma:
+      optionName = MPVOption.Equalizer.gamma
+    case .hue:
+      optionName = MPVOption.Equalizer.hue
+    }
+    mpvController.command(["set", optionName, value.toStr(), nil])
+  }
+  
   func loadExternalAudioFile(_ url: URL) {
     mpvController.command([MPVCommand.audioAdd, url.path, nil])
     getTrackInfo()

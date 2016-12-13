@@ -30,11 +30,11 @@ enum OSDMessage {
   case addToPlaylist(Int)
   case clearPlaylist
   
-  case contrast(Double)
-  case hue(Double)
-  case saturation(Double)
-  case brightness(Double)
-  case gamma(Double)
+  case contrast(Int)
+  case hue(Int)
+  case saturation(Int)
+  case brightness(Int)
+  case gamma(Int)
   
   
   func message() -> String {

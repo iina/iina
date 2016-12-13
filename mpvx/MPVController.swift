@@ -38,11 +38,11 @@ class MPVController: NSObject {
     MPVOption.Subtitles.subDelay: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.subScale: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.subPos: MPV_FORMAT_DOUBLE,
-    MPVOption.Equalizer.contrast: MPV_FORMAT_DOUBLE,
-    MPVOption.Equalizer.brightness: MPV_FORMAT_DOUBLE,
-    MPVOption.Equalizer.gamma: MPV_FORMAT_DOUBLE,
-    MPVOption.Equalizer.hue: MPV_FORMAT_DOUBLE,
-    MPVOption.Equalizer.saturation: MPV_FORMAT_DOUBLE
+    MPVOption.Equalizer.contrast: MPV_FORMAT_INT64,
+    MPVOption.Equalizer.brightness: MPV_FORMAT_INT64,
+    MPVOption.Equalizer.gamma: MPV_FORMAT_INT64,
+    MPVOption.Equalizer.hue: MPV_FORMAT_INT64,
+    MPVOption.Equalizer.saturation: MPV_FORMAT_INT64
   ]
   
   /**
@@ -395,28 +395,34 @@ class MPVController: NSObject {
       }
       
     case MPVOption.Equalizer.contrast:
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        playerCore.sendOSD(.contrast(data))
+      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
+        let intData = Int(data)
+        playerCore.info.contrast = intData
+        playerCore.sendOSD(.contrast(intData))
       }
       
     case MPVOption.Equalizer.hue:
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        playerCore.sendOSD(.hue(data))
+      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
+        let intData = Int(data)
+        playerCore.info.hue = intData
       }
       
     case MPVOption.Equalizer.brightness:
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        playerCore.sendOSD(.brightness(data))
+      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
+        let intData = Int(data)
+        playerCore.info.brightness = intData
       }
       
     case MPVOption.Equalizer.gamma:
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        playerCore.sendOSD(.gamma(data))
+      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
+        let intData = Int(data)
+        playerCore.info.gamma = intData
       }
       
     case MPVOption.Equalizer.saturation:
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        playerCore.sendOSD(.saturation(data))
+      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
+        let intData = Int(data)
+        playerCore.info.saturation = intData
       }
     
     // following properties may change before file loaded

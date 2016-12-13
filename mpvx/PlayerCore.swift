@@ -23,6 +23,8 @@ class PlayerCore: NSObject {
   
   var statusPaused: Bool = false
   
+  var displayOSD: Bool = true
+  
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true

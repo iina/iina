@@ -35,6 +35,9 @@ struct Preference {
     /** OSD text size (float) */
     static let osdTextSize = "osdTextSize"
     
+    /** Use mpv's OSD (bool) */
+    static let useMpvOsd = "useMpvOsd"
+    
     /** Soft volume (int, 0 - 100)*/
     static let softVolume = "softVolume"
     
@@ -90,6 +93,7 @@ struct Preference {
     Key.themeMaterial: Theme.dark.rawValue,
     Key.osdAutoHideTimeout: 1,
     Key.osdTextSize: Float(20),
+    Key.useMpvOsd: false,
     Key.softVolume: 50,
     Key.arrowButtonAction: ArrowButtonAction.speed.rawValue,
     Key.pauseWhenOpen: false,

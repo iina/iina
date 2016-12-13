@@ -95,6 +95,8 @@
 		84EB1EEA1D2F51D3004FA5A1 /* mpvxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */; };
 		84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F041D2F5C5B004FA5A1 /* AppData.swift */; };
 		84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F061D2F5E76004FA5A1 /* Utility.swift */; };
+		84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED99FD1E009C8100A5159B /* PrefAdvancedViewController.swift */; };
+		84ED9A001E009C8100A5159B /* PrefAdvancedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84ED99FE1E009C8100A5159B /* PrefAdvancedViewController.xib */; };
 		84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */; };
 		84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7258E1D486185000DEF1B /* MPVProperty.swift */; };
 		84FF847A1D2FF698001B318A /* libmpv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84751D2FF698001B318A /* libmpv.1.dylib */; };
@@ -266,6 +268,8 @@
 		84EB1EEB1D2F51D3004FA5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84EB1F041D2F5C5B004FA5A1 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		84EB1F061D2F5E76004FA5A1 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		84ED99FD1E009C8100A5159B /* PrefAdvancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefAdvancedViewController.swift; sourceTree = "<group>"; };
+		84ED99FE1E009C8100A5159B /* PrefAdvancedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefAdvancedViewController.xib; sourceTree = "<group>"; };
 		84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeSliderCell.swift; sourceTree = "<group>"; };
 		84F7258E1D486185000DEF1B /* MPVProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVProperty.swift; sourceTree = "<group>"; };
 		84FF84701D2FF698001B318A /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
@@ -314,6 +318,8 @@
 				840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */,
 				840D479A1DFEF649000D9A64 /* KeyRecordViewController.xib */,
 				840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */,
+				84ED99FD1E009C8100A5159B /* PrefAdvancedViewController.swift */,
+				84ED99FE1E009C8100A5159B /* PrefAdvancedViewController.xib */,
 			);
 			name = Preference;
 			sourceTree = "<group>";
@@ -666,6 +672,7 @@
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */,
 				8460FBAA1D6497490081841B /* PlaylistViewController.xib in Resources */,
+				84ED9A001E009C8100A5159B /* PrefAdvancedViewController.xib in Resources */,
 				847C62CB1DC13CDA00E1EF16 /* PreferenceGeneralViewController.xib in Resources */,
 				84A0BA9F1D2FAD4000BC8DA1 /* MainWindowController.xib in Resources */,
 			);
@@ -804,6 +811,7 @@
 				84817C961DBDCA5F00CC2279 /* SettingsListCellView.swift in Sources */,
 				8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */,
 				8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */,
+				84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */,
 				84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */,
 				84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */,
 				84D377651D7370EE007F7396 /* ChapterTableCellView.swift in Sources */,

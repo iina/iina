@@ -461,6 +461,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   func displayOSD(_ message: OSDMessage) {
+    if !playerCore.displayOSD { return }
+    
     if hideOSDTimer != nil {
       hideOSDTimer!.invalidate()
       hideOSDTimer = nil

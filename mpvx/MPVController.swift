@@ -61,7 +61,12 @@ class MPVController: NSObject {
     // Set options that can be override by user's config
     
     // disable internal OSD
-    e(mpv_set_option_string(mpv, MPVOption.OSD.osdLevel, "0"))
+    let useMpvOsd = playerCore.ud.bool(forKey: Preference.Key.useMpvOsd)
+    if !useMpvOsd {
+      e(mpv_set_option_string(mpv, MPVOption.OSD.osdLevel, "0"))
+    } else {
+      playerCore.displayOSD = false
+    }
     
     let screenshotPath = playerCore.ud.string(forKey: Preference.Key.screenshotFolder)!
     let absoluteScreenshotPath = NSString(string: screenshotPath).expandingTildeInPath

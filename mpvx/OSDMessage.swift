@@ -16,6 +16,7 @@ enum OSDMessage {
   case speed(Double)
   case aspect(String)
   case rotate(Int)
+  case deinterlace(Bool)
   case audioDelay(Double)
   case subDelay(Double)
   case subScale(Double)
@@ -56,6 +57,9 @@ enum OSDMessage {
       
     case .rotate(let value):
       return "Rotate: \(value)°"
+      
+    case .deinterlace(let enable):
+      return enable ? "Deinterlace: On" : "Deinterlace: Off"
       
     case .audioDelay(let value):
       if value == 0 {

@@ -51,6 +51,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var speedSlider: NSSlider!
   @IBOutlet weak var speedSliderIndicator: NSTextField!
   @IBOutlet weak var customSpeedTextField: NSTextField!
+  @IBOutlet weak var deinterlaceCheckBtn: NSButton!
   
   @IBOutlet weak var customAudioDelayTextField: NSTextField!
   @IBOutlet weak var audioDelaySliderIndicator: NSTextField!
@@ -96,14 +97,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   /** Do syncronization*/
   override func viewDidAppear() {
     // image sub
-    validateSubSettings()
+    updateControlsState()
   }
   
   override func viewDidDisappear() {
     NotificationCenter.default.removeObserver(self.tracklistChangeObserver!)
   }
   
-  private func validateSubSettings() {
+  private func updateControlsState() {
     // Sub
     if let currSub = playerCore.info.currentTrack(.sub) {
       subScaleSlider.isEnabled = !currSub.isImageSub
@@ -119,6 +120,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     customSubDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Subtitles.subDelay)
     customAudioDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Audio.audioDelay)
     customSpeedTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
+    deinterlaceCheckBtn.state = playerCore.info.deinterlace ? NSOnState : NSOffState
   }
   
   // MARK: - Switch tab
@@ -218,7 +220,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         view.reloadData()
       }
     }
-    validateSubSettings()
+    updateControlsState()
   }
   
   private func withAllTableViews (_ block: (NSTableView, MPVTrack.TrackType) -> Void) {
@@ -294,6 +296,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if let window = sender.window {
       window.makeFirstResponder(window.contentView)
     }
+  }
+  
+  @IBAction func deinterlaceBtnAction(_ sender: AnyObject) {
+    playerCore.toggleDeinterlace(deinterlaceCheckBtn.state == NSOnState)
   }
   
   // Audio tab

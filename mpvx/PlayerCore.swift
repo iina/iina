@@ -222,6 +222,10 @@ class PlayerCore: NSObject {
     }
   }
   
+  func toggleDeinterlace(_ enable: Bool) {
+    mpvController.setFlag(MPVOption.Video.deinterlace, enable)
+  }
+  
   func loadExternalAudioFile(_ url: URL) {
     mpvController.command([MPVCommand.audioAdd, url.path, nil])
     getTrackInfo()

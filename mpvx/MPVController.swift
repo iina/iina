@@ -30,6 +30,7 @@ class MPVController: NSObject {
     MPVProperty.trackListCount: MPV_FORMAT_INT64,
     MPVProperty.chapterListCount: MPV_FORMAT_INT64,
     MPVOption.PlaybackControl.pause: MPV_FORMAT_FLAG,
+    MPVOption.Video.deinterlace: MPV_FORMAT_FLAG,
     MPVOption.Audio.mute: MPV_FORMAT_FLAG,
     MPVOption.Audio.volume: MPV_FORMAT_DOUBLE,
     MPVOption.Audio.audioDelay: MPV_FORMAT_DOUBLE,
@@ -339,6 +340,15 @@ class MPVController: NSObject {
     case MPVOption.PlaybackControl.pause:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
         playerCore.sendOSD(data ? .pause : .resume)
+      }
+      
+    case MPVOption.Video.deinterlace:
+      if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
+        // this property will fire a change event at file start
+        if playerCore.info.deinterlace != data {
+          playerCore.sendOSD(.deinterlace(data))
+          playerCore.info.deinterlace = data
+        }
       }
       
     case MPVOption.Audio.mute:

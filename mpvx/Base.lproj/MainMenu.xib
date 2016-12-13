@@ -197,28 +197,8 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Deinterlace" hidden="YES" id="yHI-7D-OaI">
+                            <menuItem title="Deinterlace" id="yHI-7D-OaI">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Deinterlace" id="gjL-Av-A9B">
-                                    <items>
-                                        <menuItem title="Activate Deinterlace" id="rqh-kU-9H6">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="31U-AC-1XU"/>
-                                        <menuItem title="First Field" id="Tpp-sj-mB6">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Bob" id="M8T-e2-whX">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Temporal" id="08H-qK-6sg">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Temporal Spatial" id="tjC-nq-SLw">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                    </items>
-                                </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="kNp-jq-01c"/>
                             <menuItem title="Video Filters..." id="PyY-pR-jz7">
@@ -406,6 +386,7 @@
                 <outlet property="decreaseTextSize" destination="Bli-YK-Rl0" id="crH-X5-OVf"/>
                 <outlet property="decreaseVolume" destination="pdj-9C-Fn1" id="4yi-mZ-3Bt"/>
                 <outlet property="decreaseVolumeSlightly" destination="Zhv-Bz-I5V" id="M7D-Ni-nLm"/>
+                <outlet property="deinterlace" destination="yHI-7D-OaI" id="Z8n-z4-52B"/>
                 <outlet property="doubleSize" destination="Hal-18-Tnf" id="vnl-Rb-Y3o"/>
                 <outlet property="encodingMenu" destination="Pf6-5i-B1E" id="Gat-gG-pkT"/>
                 <outlet property="file" destination="dMs-cI-mzQ" id="upe-AE-Gf6"/>

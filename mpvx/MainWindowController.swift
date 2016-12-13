@@ -981,6 +981,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
+  @IBAction func menuToggleDeinterlace(_ sender: NSMenuItem) {
+    playerCore.toggleDeinterlace(sender.state != NSOnState)
+  }
+  
   @IBAction func menuChangeWindowSize(_ sender: NSMenuItem) {
     // -1: normal(non-retina), same as 1 when on non-retina screen
     //  0: half

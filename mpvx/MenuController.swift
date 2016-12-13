@@ -54,6 +54,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var flipMenu: NSMenu!
   @IBOutlet weak var mirror: NSMenuItem!
   @IBOutlet weak var flip: NSMenuItem!
+  @IBOutlet weak var deinterlace: NSMenuItem!
   //Audio
   @IBOutlet weak var audioMenu: NSMenu!
   @IBOutlet weak var quickSettingsAudio: NSMenuItem!
@@ -154,6 +155,9 @@ class MenuController: NSObject, NSMenuDelegate {
     flip.action = #selector(MainWindowController.menuToggleFlip(_:))
     mirror.action = #selector(MainWindowController.menuToggleMirror(_:))
     
+    // -- deinterlace
+    deinterlace.action = #selector(MainWindowController.menuToggleDeinterlace(_:))
+    
     // Audio menu
     
     audioMenu.delegate = self
@@ -242,6 +246,7 @@ class MenuController: NSObject, NSMenuDelegate {
   
   private func updateVieoMenu() {
     alwaysOnTop.state = PlayerCore.shared.info.isAlwaysOntop ? NSOnState : NSOffState
+    deinterlace.state = PlayerCore.shared.info.deinterlace ? NSOnState : NSOffState
   }
   
   private func updateAudioMenu() {

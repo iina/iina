@@ -37,6 +37,8 @@ class PlaybackInfo {
   var flipFilter: MPVFilter?
   var mirrorFilter: MPVFilter?
   
+  var deinterlace: Bool = false
+  
   var volume: Int = 50 {
     didSet {
       if volume < 0 { volume = 0 }

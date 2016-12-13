@@ -75,6 +75,10 @@ class MPVController: NSObject {
     let useMediaKeys = playerCore.ud.bool(forKey: Preference.Key.useMediaKeys)
     e(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, useMediaKeys ? yes_str : no_str))
     
+    // User default settings
+    let volume = playerCore.ud.integer(forKey: Preference.Key.softVolume)
+    e(mpv_set_option_string(mpv, MPVOption.Audio.volume, "\(volume)"))
+    
     // Load user's config file.
     // e(mpv_load_config_file(mpv, ""))
     

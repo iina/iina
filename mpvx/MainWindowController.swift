@@ -651,7 +651,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)
-    updateVolumeFromUd()
+    updateVolume()
   }
   
   // MARK: - Sync UI with playback
@@ -674,12 +674,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func updateVolume() {
     volumeSlider.integerValue = playerCore.info.volume
     muteButton.state = playerCore.info.isMuted ? NSOnState : NSOffState
-  }
-  
-  func updateVolumeFromUd() {
-    let volume = ud.integer(forKey: Preference.Key.softVolume)
-    playerCore.setVolume(volume)
-    volumeSlider.integerValue = volume
   }
   
   func updatePlayButtonState(_ state: Int) {

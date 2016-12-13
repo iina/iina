@@ -143,7 +143,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
   // MARK: - IBActions
   
   @IBAction func addToPlaylistBtnAction(_ sender: AnyObject) {
-    Utility.quickOpenPanel(title: "Add to playlist") { (url) in
+    let _ = Utility.quickOpenPanel(title: "Add to playlist") { (url) in
       if url.isFileURL {
         self.playerCore.addToPlaylist(url.path)
         self.playlistTableView.reloadData()

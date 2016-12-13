@@ -54,8 +54,11 @@ struct Preference {
     /** Whether catch media keys */
     static let useMediaKeys = "useMediaKeys"
     
-    /**  */
+    /** User created input config list (dic) */
     static let inputConfigs = "inputConfigs"
+    
+    /** Current input config name */
+    static let currentInputConfigName = "currentInputConfigName"
     
     static let useExactSeek = "useExactSeek"
     
@@ -94,6 +97,7 @@ struct Preference {
     Key.useMediaKeys: true,
     
     Key.inputConfigs: [:],
+    Key.currentInputConfigName: "Default",
     
     Key.quitWhenNoOpenedWindow: true,
     Key.useExactSeek: true,

@@ -291,10 +291,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   // Audio tab
   
   @IBAction func loadExternalAudioAction(_ sender: NSButton) {
-    Utility.quickOpenPanel(title: "Load external audio file") { url in
+    let result = Utility.quickOpenPanel(title: "Load external audio file") { url in
       self.playerCore.loadExternalAudioFile(url)
     }
-    audioTableView.reloadData()
+    if result {
+      audioTableView.reloadData()
+    }
   }
   
   @IBAction func audioDelayChangedAction(_ sender: NSSlider) {
@@ -317,11 +319,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   // Sub tab
   
   @IBAction func loadExternalSubAction(_ sender: NSButton) {
-    Utility.quickOpenPanel(title: "Load external subtitle") { url in
+    let result = Utility.quickOpenPanel(title: "Load external subtitle") { url in
       self.playerCore.loadExternalSubFile(url)
     }
-    subTableView.reloadData()
-    secSubTableView.reloadData()
+    if result {
+      subTableView.reloadData()
+      secSubTableView.reloadData()
+    }
   }
   
   @IBAction func subDelayChangedAction(_ sender: NSSlider) {

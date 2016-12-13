@@ -17,7 +17,15 @@ class Utility {
   
   static func showAlert(message: String, alertStyle: NSAlertStyle = .critical) {
     let alert = NSAlert()
-    alert.messageText = message
+    switch alertStyle {
+    case .critical:
+      alert.messageText = "Error"
+    case .informational:
+      alert.messageText = "Information"
+    case .warning:
+      alert.messageText = "Warning"
+    }
+    alert.informativeText = message
     alert.alertStyle = alertStyle
     alert.runModal()
   }
@@ -54,7 +62,7 @@ class Utility {
     return panel.runModal() == NSAlertFirstButtonReturn
   }
   
-  static func quickOpenPanel(title: String, ok: (URL) -> Void) {
+  static func quickOpenPanel(title: String, ok: (URL) -> Void) -> Bool {
     let panel = NSOpenPanel()
     panel.title = title
     panel.canCreateDirectories = false
@@ -66,10 +74,13 @@ class Utility {
       if let url = panel.url {
         ok(url)
       }
+      return true
+    } else {
+      return false
     }
   }
   
-  static func quickPromptPanel(messageText: String, informativeText: String, ok: (String) -> Void) {
+  static func quickPromptPanel(messageText: String, informativeText: String, ok: (String) -> Void) -> Bool {
     let panel = NSAlert()
     panel.messageText = messageText
     panel.informativeText = informativeText
@@ -81,6 +92,9 @@ class Utility {
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
       ok(input.stringValue)
+      return true
+    } else {
+      return false
     }
   }
   

@@ -872,7 +872,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   @IBAction func menuJumpTo(_ sender: NSMenuItem) {
-    Utility.quickPromptPanel(messageText: "Jump to:", informativeText: "Example: 20:35") { input in
+    let _ = Utility.quickPromptPanel(messageText: "Jump to:", informativeText: "Example: 20:35") { input in
       if let vt = VideoTime(input) {
         self.playerCore.seek(absoluteSecond: Double(vt.second))
       }
@@ -1077,7 +1077,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   @IBAction func menuLoadExternalSub(_ sender: NSMenuItem) {
-    Utility.quickOpenPanel(title: "Load external subtitle file") { url in
+    let _ = Utility.quickOpenPanel(title: "Load external subtitle file") { url in
       self.playerCore.loadExternalSubFile(url)
     }
   }

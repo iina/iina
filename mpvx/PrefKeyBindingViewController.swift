@@ -82,14 +82,25 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
       configSelectPopUp.addItem(withTitle: k)
     }
     
-    if let selectedTitle = configSelectPopUp.selectedItem?.title {
-      currentConfName = selectedTitle
-      shouldEnableEdit = !isDefaultConfig(selectedTitle)
-      changeButtonEnabled()
-      guard let path = getFilePath(forConfig: selectedTitle) else { return }
-      currentConfFilePath = path
-      loadConfigFile()
+    var currentConf = ""
+    var gotCurrentConf = false
+    if let confFromUd = UserDefaults.standard.string(forKey: Preference.Key.currentInputConfigName) {
+      if getFilePath(forConfig: confFromUd, showAlert: false) != nil {
+        currentConf = confFromUd
+        gotCurrentConf = true
+      }
     }
+    if !gotCurrentConf {
+      currentConf = configSelectPopUp.titleOfSelectedItem ?? configSelectPopUp.itemTitles.first ?? "Default"
+    }
+    // load
+    configSelectPopUp.selectItem(withTitle: currentConf)
+    currentConfName = currentConf
+    shouldEnableEdit = !isDefaultConfig(currentConf)
+    changeButtonEnabled()
+    guard let path = getFilePath(forConfig: currentConf) else { return }
+    currentConfFilePath = path
+    loadConfigFile()
   }
   
   // MARK: - IBActions
@@ -98,6 +109,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     guard let title = configSelectPopUp.selectedItem?.title else { return }
     currentConfName = title
     currentConfFilePath = getFilePath(forConfig: title)!
+    loadConfigFile()
     changeButtonEnabled()
   }
   
@@ -119,6 +131,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
       kbTableView.reloadData()
       kbTableView.scrollRowToVisible(currentMapping.count - 1)
     }
+    saveToConfFile()
   }
   
   @IBAction func removeKeyMappingBtnAction(_ sender: AnyObject) {
@@ -126,14 +139,20 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
       currentMapping.remove(at: kbTableView.selectedRow)
       kbTableView.reloadData()
     }
+    saveToConfFile()
   }
   
   // FIXME: may combine with duplicate action?
   @IBAction func newConfFileAction(_ sender: AnyObject) {
     // prompt
     var newName = ""
-    Utility.quickPromptPanel(messageText: "New Input Configuration", informativeText: "Please enter a name for the new configuration.") { newName = $0 }
-    if userConfigs[newName] != nil || PrefKeyBindingViewController.defaultConfigs[newName] != nil {
+    let result = Utility.quickPromptPanel(messageText: "New Input Configuration", informativeText: "Please enter a name for the new configuration.") { newName = $0 }
+    if !result { return }
+    guard !newName.isEmpty else {
+      Utility.showAlert(message: "The name cannot br empty.")
+      return
+    }
+    guard userConfigs[newName] == nil && PrefKeyBindingViewController.defaultConfigs[newName] == nil else {
       Utility.showAlert(message: "The name already exists.")
       return
     }
@@ -177,7 +196,8 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   @IBAction func duplicateConfFileAction(_ sender: AnyObject) {
     // prompt
     var newName = ""
-    Utility.quickPromptPanel(messageText: "New Input Configuration", informativeText: "Please enter a name for the duplicated configuration.") { newName = $0 }
+    let result = Utility.quickPromptPanel(messageText: "New Input Configuration", informativeText: "Please enter a name for the duplicated configuration.") { newName = $0 }
+    if !result { return }
     if userConfigs[newName] != nil || PrefKeyBindingViewController.defaultConfigs[newName] != nil {
       Utility.showAlert(message: "The name already exists.")
       return
@@ -250,6 +270,15 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     [revealConfFileBtn, deleteConfFileBtn, addKmBtn, removeKmBtn].forEach { btn in
       btn.isEnabled = shouldEnableEdit
     }
+    kbTableView.tableColumns.forEach { $0.isEditable = shouldEnableEdit }
+  }
+  
+  func saveToConfFile() {
+    do {
+      try KeyMapping.generateConfData(from: currentMapping).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
+    } catch {
+      Utility.showAlert(message: "Cannot write to config file!")
+    }
   }
   
   
@@ -273,10 +302,11 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
       currentMapping.append(KeyMapping(key: key, action: action, comment: nil))
     }
+    UserDefaults.standard.set(currentConfName, forKey: Preference.Key.currentInputConfigName)
     kbTableView.reloadData()
   }
   
-  private func getFilePath(forConfig conf: String) -> String? {
+  private func getFilePath(forConfig conf: String, showAlert: Bool = true) -> String? {
     
     // if is default config
     if let dv = PrefKeyBindingViewController.defaultConfigs[conf] {
@@ -284,7 +314,9 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     } else if let uv = userConfigs[conf] as? String {
       return uv
     } else {
-      Utility.showAlert(message: "Cannot find config file location!")
+      if showAlert {
+        Utility.showAlert(message: "Cannot find config file location!")
+      }
       return nil
     }
   }
@@ -297,8 +329,8 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
 extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSource {
   
-  func tableViewSelectionDidChange(_ notification: Notification) {
-    
+  override func controlTextDidEndEditing(_ obj: Notification) {
+    saveToConfFile()
   }
   
   func numberOfRows(in tableView: NSTableView) -> Int {

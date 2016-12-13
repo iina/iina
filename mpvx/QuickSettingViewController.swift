@@ -66,6 +66,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subTextBorderColorWell: NSColorWell!
   @IBOutlet weak var subTextBorderWidthPopUp: NSPopUpButton!
   @IBOutlet weak var subTextBgColorWell: NSColorWell!
+  @IBOutlet weak var subTextFontBtn: NSButton!
   
   
   
@@ -103,14 +104,21 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
   
   private func validateSubSettings() {
-    let currSub = playerCore.info.currentTrack(.sub)
-    if currSub != nil && currSub!.isImageSub {
-      subScaleSlider.isEnabled = false
-    } else {
-      subScaleSlider.isEnabled = true
+    // Sub
+    if let currSub = playerCore.info.currentTrack(.sub) {
+      subScaleSlider.isEnabled = !currSub.isImageSub
+
+      // FIXME: CollorWells cannot be disable?
+      let enableTextSettings = !(currSub.isAssSub || currSub.isImageSub)
+      [subTextColorWell, subTextSizePopUp, subTextBgColorWell, subTextBorderColorWell, subTextBorderWidthPopUp, subTextFontBtn].forEach { $0?.isEnabled = enableTextSettings }
     }
     // update values
-    
+    let currSubScale = playerCore.mpvController.getDouble(MPVOption.Subtitles.subScale).constrain(min: 0.1, max: 10)
+    let displaySubScale = Utility.toDisplaySubScale(fromRealSubScale: currSubScale)
+    subScaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
+    customSubDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Subtitles.subDelay)
+    customAudioDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Audio.audioDelay)
+    customSpeedTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
   }
   
   // MARK: - Switch tab
@@ -336,6 +344,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerCore.setSubDelay(sliderValue)
+        customSubDelayTextField.doubleValue = sliderValue
       }
     }
   }

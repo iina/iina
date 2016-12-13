@@ -154,6 +154,15 @@ extension Int {
   }
 }
 
+extension Double {
+  func constrain(min: Double, max: Double) -> Double {
+    var value = self
+    if self < min { value = min }
+    if self > max { value = max }
+    return value
+  }
+}
+
 extension NSColor {
   var mpvColorString: String {
     get {

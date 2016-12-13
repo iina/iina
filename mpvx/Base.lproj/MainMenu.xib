@@ -242,7 +242,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Volume + 10%" tag="10" keyEquivalent="" id="Wbq-vt-hzX"/>
-                            <menuItem title="Volume - 1%" tag="1" alternate="YES" keyEquivalent="" id="c6Y-0e-vgf">
+                            <menuItem title="Volume + 1%" tag="1" alternate="YES" keyEquivalent="" id="c6Y-0e-vgf">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
                             <menuItem title="Volume - 10%" tag="10" alternate="YES" keyEquivalent="" id="pdj-9C-Fn1"/>
@@ -311,16 +311,16 @@
                                 <menu key="submenu" title="Encoding" id="Pf6-5i-B1E" userLabel="Encode Menu"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="sMg-1y-9zx"/>
-                            <menuItem title="Increase Text Size" id="XHu-Dl-Vq2">
+                            <menuItem title="Scale Up" tag="5" id="XHu-Dl-Vq2">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleToolbarShown:" target="-1" id="q2J-8e-6YW"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Decrease Text Size" id="Bli-YK-Rl0">
+                            <menuItem title="Scale Down" tag="-5" id="Bli-YK-Rl0">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Reset Text Size" id="P1a-ot-P31">
+                            <menuItem title="Reset Subtitle Scale" id="P1a-ot-P31">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="UZ7-ew-L1i"/>

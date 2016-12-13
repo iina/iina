@@ -1085,6 +1085,23 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
+  @IBAction func menuChangeSubScale(_ sender: NSMenuItem) {
+    if sender.tag == 0 {
+      playerCore.setSubScale(1)
+      return
+    }
+    // FIXME: better refactor this part
+    let amount = sender.tag > 0 ? 0.1 : -0.1
+    let currentScale = playerCore.mpvController.getDouble(MPVOption.Subtitles.subScale)
+    let displayValue = currentScale >= 1 ? currentScale : -1/currentScale
+    let truncated = round(displayValue * 100) / 100
+    var newTruncated = truncated + amount
+    // range for this value should be (~, -1), (1, ~)
+    if newTruncated > 0 && newTruncated < 1 || newTruncated > -1 && newTruncated < 0 {
+      newTruncated = -truncated + amount
+    }
+    playerCore.setSubScale(abs(newTruncated > 0 ? newTruncated : 1 / newTruncated))
+  }
   
   @IBAction func menuResetSubDelay(_ sender: NSMenuItem) {
     playerCore.setSubDelay(0)

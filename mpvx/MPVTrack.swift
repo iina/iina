@@ -91,4 +91,12 @@ class MPVTrack: NSObject {
     }
   }
   
+  var isAssSub: Bool {
+    get {
+      if type == .video || type == .audio { return false }
+      // demux/demux_mkv.c:1727
+      return codec == "ass"
+    }
+  }
+  
 }

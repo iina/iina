@@ -182,6 +182,11 @@ class MenuController: NSObject, NSMenuDelegate {
     subTrackMenu.delegate = self
     secondSubTrackMenu.delegate = self
     
+    // - text size
+    [increaseTextSize, decreaseTextSize, resetTextSize].forEach {
+      $0.action = #selector(MainWindowController.menuChangeSubScale(_:))
+    }
+    
     // - delay
     (increaseSubDelay.representedObject, decreaseSubDelay.representedObject) = (0.5, -0.5)
     for item in [increaseSubDelay, decreaseSubDelay] {

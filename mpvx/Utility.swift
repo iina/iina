@@ -153,6 +153,14 @@ class Utility {
     return speed
   }
   
+  static func toRealSubScale(fromDisplaySubScale scale: Double) -> Double {
+    return scale > 0 ? scale : -1 / scale
+  }
+  
+  static func toDisplaySubScale(fromRealSubScale realScale: Double) -> Double {
+    return realScale >= 1 ? realScale : 1 / realScale
+  }
+  
   static func mpvKeyCode(from event: NSEvent) -> String {
     var keyString = ""
     let keyChar: String

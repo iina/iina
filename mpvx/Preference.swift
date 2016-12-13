@@ -54,6 +54,8 @@ struct Preference {
     /** Whether catch media keys */
     static let useMediaKeys = "useMediaKeys"
     
+    /**  */
+    static let inputConfigs = "inputConfigs"
     
     static let useExactSeek = "useExactSeek"
     
@@ -90,6 +92,8 @@ struct Preference {
     Key.pauseWhenOpen: false,
     Key.fullScreenWhenOpen: false,
     Key.useMediaKeys: true,
+    
+    Key.inputConfigs: [:],
     
     Key.quitWhenNoOpenedWindow: true,
     Key.useExactSeek: true,

@@ -6,7 +6,7 @@
 //  Copyright © 2016年 lhc. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 struct AppData {
   
@@ -24,6 +24,7 @@ struct AppData {
   static let rotations: [Int] = [0, 90, 180, 270]
   
   static let encodings = CharEncoding.list
+  
 }
 
 
@@ -33,6 +34,8 @@ struct Constants {
     static let trackName = "TrackName"
     static let isPlayingCell = "IsPlayingCell"
     static let trackNameCell = "TrackNameCell"
+    static let key = "Key"
+    static let action = "Action"
   }
   struct String {
     static let degree = "°"

@@ -18,8 +18,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
   lazy var preferenceWindowController: NSWindowController = {
     return MASPreferencesWindowController(viewControllers: [
-      PreferenceGeneralViewController()
-      ], title: "Preference")
+      PreferenceGeneralViewController(),
+      PrefKeyBindingViewController()
+    ], title: "Preference")
   }()
   
   @IBOutlet weak var menuController: MenuController!

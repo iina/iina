@@ -128,7 +128,7 @@ class KeyCodeHelper {
   ]
   
   static func canBeModifiedByShift(_ key: UInt16) -> Bool {
-    return key <= 0x32
+    return key != 0x24 && (key <= 0x2F || key == 0x32)
   }
   
 }

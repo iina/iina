@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4E0ACCEC2D7DC320BD17866D /* Pods_mpvxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E02BC1426882141B31FD7C32 /* Pods_mpvxTests.framework */; };
+		840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D47971DFEEE6A000D9A64 /* KeyMapping.swift */; };
+		840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */; };
+		840D479C1DFEF649000D9A64 /* KeyRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840D479A1DFEF649000D9A64 /* KeyRecordViewController.xib */; };
+		840D47A01DFEFC49000D9A64 /* KeyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */; };
 		8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAA61D5DF2DA003BECF2 /* Extensions.swift */; };
 		8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAA81D5E3C2B003BECF2 /* Formatters.swift */; };
 		8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAAC1D5E4546003BECF2 /* SlideUpButton.swift */; };
@@ -75,6 +79,9 @@
 		84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AABE921DBFAF1A00D138FD /* FontPickerWindowController.swift */; };
 		84AABE951DBFAF1A00D138FD /* FontPickerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84AABE931DBFAF1A00D138FD /* FontPickerWindowController.xib */; };
 		84AABE981DBFB62F00D138FD /* FixedFontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AABE971DBFB62F00D138FD /* FixedFontManager.m */; };
+		84BEEC3F1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEEC3D1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift */; };
+		84BEEC401DFEDE2F00F945CA /* PrefKeyBindingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BEEC3E1DFEDE2F00F945CA /* PrefKeyBindingViewController.xib */; };
+		84BEEC421DFEE46200F945CA /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEEC411DFEE46200F945CA /* StreamReader.swift */; };
 		84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D58E1D794CE600D98A0E /* MPVFilter.swift */; };
 		84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D5901D796F9700D98A0E /* Aspect.swift */; };
 		84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */; };
@@ -169,6 +176,10 @@
 
 /* Begin PBXFileReference section */
 		3BE5147FAFA07715007A39C3 /* Pods_mpvx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpvx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		840D47971DFEEE6A000D9A64 /* KeyMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyMapping.swift; sourceTree = "<group>"; };
+		840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRecordViewController.swift; sourceTree = "<group>"; };
+		840D479A1DFEF649000D9A64 /* KeyRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyRecordViewController.xib; sourceTree = "<group>"; };
+		840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRecordView.swift; sourceTree = "<group>"; };
 		8434BAA61D5DF2DA003BECF2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8434BAA81D5E3C2B003BECF2 /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		8434BAAC1D5E4546003BECF2 /* SlideUpButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideUpButton.swift; sourceTree = "<group>"; };
@@ -235,6 +246,9 @@
 		84AABE931DBFAF1A00D138FD /* FontPickerWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontPickerWindowController.xib; sourceTree = "<group>"; };
 		84AABE961DBFB62F00D138FD /* FixedFontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedFontManager.h; sourceTree = "<group>"; };
 		84AABE971DBFB62F00D138FD /* FixedFontManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedFontManager.m; sourceTree = "<group>"; };
+		84BEEC3D1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefKeyBindingViewController.swift; sourceTree = "<group>"; };
+		84BEEC3E1DFEDE2F00F945CA /* PrefKeyBindingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefKeyBindingViewController.xib; sourceTree = "<group>"; };
+		84BEEC411DFEE46200F945CA /* StreamReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReader.swift; sourceTree = "<group>"; };
 		84C8D58E1D794CE600D98A0E /* MPVFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVFilter.swift; sourceTree = "<group>"; };
 		84C8D5901D796F9700D98A0E /* Aspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aspect.swift; sourceTree = "<group>"; };
 		84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVPlaylistItem.swift; sourceTree = "<group>"; };
@@ -295,6 +309,11 @@
 				8452DD841D3B956D008A543A /* Preference.swift */,
 				847C62C81DC13CDA00E1EF16 /* PreferenceGeneralViewController.swift */,
 				847C62C91DC13CDA00E1EF16 /* PreferenceGeneralViewController.xib */,
+				84BEEC3D1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift */,
+				84BEEC3E1DFEDE2F00F945CA /* PrefKeyBindingViewController.xib */,
+				840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */,
+				840D479A1DFEF649000D9A64 /* KeyRecordViewController.xib */,
+				840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */,
 			);
 			name = Preference;
 			sourceTree = "<group>";
@@ -399,6 +418,8 @@
 				84AABE961DBFB62F00D138FD /* FixedFontManager.h */,
 				84AABE971DBFB62F00D138FD /* FixedFontManager.m */,
 				84E745D51DFDD4FD00588DED /* KeyCodeHelper.swift */,
+				84BEEC411DFEE46200F945CA /* StreamReader.swift */,
+				840D47971DFEEE6A000D9A64 /* KeyMapping.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -636,8 +657,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84BEEC401DFEDE2F00F945CA /* PrefKeyBindingViewController.xib in Resources */,
 				84AABE951DBFAF1A00D138FD /* FontPickerWindowController.xib in Resources */,
 				8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */,
+				840D479C1DFEF649000D9A64 /* KeyRecordViewController.xib in Resources */,
 				8466BE191D5CDD0300039D03 /* QuickSettingViewController.xib in Resources */,
 				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
@@ -758,8 +781,11 @@
 				8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */,
 				8452DD851D3B956D008A543A /* Preference.swift in Sources */,
 				84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */,
+				840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */,
 				84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */,
+				84BEEC421DFEE46200F945CA /* StreamReader.swift in Sources */,
 				84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */,
+				840D47A01DFEFC49000D9A64 /* KeyRecordView.swift in Sources */,
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
 				84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */,
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
@@ -797,6 +823,8 @@
 				845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,
 				8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */,
+				840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */,
+				84BEEC3F1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

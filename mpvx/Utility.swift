@@ -45,6 +45,15 @@ class Utility {
   
   // MARK: - Panels, Alerts
   
+  static func quickAskPanel(title: String, infoText: String) -> Bool {
+    let panel = NSAlert()
+    panel.messageText = title
+    panel.informativeText = infoText
+    panel.addButton(withTitle: "OK")
+    panel.addButton(withTitle: "Cancel")
+    return panel.runModal() == NSAlertFirstButtonReturn
+  }
+  
   static func quickOpenPanel(title: String, ok: (URL) -> Void) {
     let panel = NSOpenPanel()
     panel.title = title
@@ -81,6 +90,27 @@ class Utility {
     appDelegate.fontPicker.showWindow(self)
   }
   
+  // MARK: - App functions
+  
+  static let appSupportDirUrl: URL  = {
+    let fm = FileManager.default
+    // get path
+    let asPath = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+    Utility.assert(asPath.count >= 1, "Cannot get path to Application Support directory")
+    let bundleID = Bundle.main.bundleIdentifier!
+    let appAsUrl = asPath.first!.appendingPathComponent(bundleID)
+    let appAsPath = appAsUrl.path
+    // check exist
+    if !fm.fileExists(atPath: appAsPath) {
+      do {
+        try FileManager.default.createDirectory(at: appAsUrl, withIntermediateDirectories: false, attributes: nil)
+      } catch {
+        Utility.fatal("Cannot create folder in Application Support directory")
+      }
+    }
+    return appAsUrl
+  }()
+  
   // MARK: - Util functions
   
   static func swap<T>(_ a: inout T, _ b: inout T) {
@@ -107,6 +137,43 @@ class Utility {
       speed = -1 / speed
     }
     return speed
+  }
+  
+  static func mpvKeyCode(from event: NSEvent) -> String {
+    var keyString = ""
+    let keyChar: String
+    let keyCode = event.keyCode
+    let modifiers = event.modifierFlags
+    // shift
+    guard let keyName = KeyCodeHelper.keyMap[keyCode] else {
+      Utility.log("Undefined key code?")
+      return ""
+    }
+    if modifiers.contains(.shift) {
+      if KeyCodeHelper.canBeModifiedByShift(keyCode) {
+        keyChar = keyName.1!
+      } else {
+        keyChar = keyName.0
+        keyString += "Shift+"
+      }
+    } else {
+      keyChar = keyName.0
+    }
+    // control
+    if modifiers.contains(.control) {
+      keyString += "Ctrl+"
+    }
+    // alt
+    if modifiers.contains(.option) {
+      keyString += "Alt+"
+    }
+    // meta
+    if modifiers.contains(.command) {
+      keyString += "Meta+"
+    }
+    // char
+    keyString += keyChar
+    return keyString
   }
     
   // MARK: - Util classes

@@ -132,14 +132,22 @@ class MPVController: NSObject {
   // Basically send quit to mpv
   func mpvQuit() {
     // mpv_suspend(mpv)
-    command([MPVCommand.quit, nil])
+    command(.quit)
   }
   
   // MARK: Command & property
   
   // Send arbitrary mpv command.
-  func command(_ args: [String?]) {
-    var cargs = args.map { $0.flatMap { UnsafePointer<Int8>(strdup($0)) } }
+  func command(_ command: MPVCommand, args: [String?] = []) {
+    if args.count > 0 && args.last == nil {
+      Utility.fatal("Command do not need a nil suffix")
+      return
+    }
+    
+    var strArgs = args
+    strArgs.insert(command.rawValue, at: 0)
+    strArgs.append(nil)
+    var cargs = strArgs.map { $0.flatMap { UnsafePointer<Int8>(strdup($0)) } }
     self.e(mpv_command(self.mpv, &cargs))
     for ptr in cargs { free(UnsafeMutablePointer(mutating: ptr)) }
   }

@@ -92,12 +92,16 @@ command_list = doc.css '#list-of-input-commands > .docutils > dt > tt, #input-co
 
 File.open(File.join(__dir__, 'MPVCommand.swift'), 'w') do |file|
   file.write "import Foundation\n\n"
-  file.write "struct MPVCommand {\n"
+  file.write "struct MPVCommand: RawRepresentable {\n\n"
+  file.write "  typealias RawValue = String\n\n"
+  file.write "  var rawValue: RawValue\n\n"
+  file.write "  init(_ string: String) { self.rawValue = string }\n\n"
+  file.write "  init?(rawValue: RawValue) { self.rawValue = rawValue }\n\n"
   command_list.each do |command|
     format = command.content
     name = format.split(' ')[0]
     file.write "  /** #{format} */\n"
-    file.write "  static let #{name.to_camel} = \"#{name}\"\n"
+    file.write "  static let #{name.to_camel} = MPVCommand(\"#{name}\")\n"
   end
   file.write "}\n"
 end

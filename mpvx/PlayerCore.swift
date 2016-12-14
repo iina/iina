@@ -46,7 +46,7 @@ class PlayerCore: NSObject {
     mainWindow.showWindow(nil)
     // Send load file command
     info.fileLoading = true
-    mpvController.command([MPVCommand.loadfile, path, nil])
+    mpvController.command(.loadfile, args: [path])
   }
   
   func startMPV() {
@@ -88,7 +88,7 @@ class PlayerCore: NSObject {
   }
   
   func stop() {
-    mpvController.command([MPVCommand.stop, nil])
+    mpvController.command(.stop)
   }
   
   func toogleMute(_ set: Bool?) {
@@ -98,7 +98,7 @@ class PlayerCore: NSObject {
   
   func seek(percent: Double) {
     let seekMode = ud.bool(forKey: Preference.Key.useExactSeek) ? "absolute-percent+exact" : "absolute-percent"
-    mpvController.command([MPVCommand.seek, "\(percent)", seekMode, nil])
+    mpvController.command(.seek, args: ["\(percent)", seekMode])
   }
 
   func seek(relativeSecond: Double, exact: Bool = false) {
@@ -112,29 +112,29 @@ class PlayerCore: NSObject {
       triedUsingExactSeekForCurrentFile = true
     }
     let seekMode = useExactSeekForCurrentFile ? "relative+exact" : "relative"
-    mpvController.command([MPVCommand.seek, "\(relativeSecond)", seekMode, nil])
+    mpvController.command(.seek, args: ["\(relativeSecond)", seekMode])
   }
   
   func seek(absoluteSecond: Double) {
-    mpvController.command([MPVCommand.seek, "\(absoluteSecond)", "absolute+exact", nil])
+    mpvController.command(.seek, args: ["\(absoluteSecond)", "absolute+exact"])
   }
   
   func frameStep(backwards: Bool) {
     if backwards {
-      mpvController.command([MPVCommand.frameBackStep, nil])
+      mpvController.command(.frameBackStep)
     } else {
-      mpvController.command([MPVCommand.frameStep, nil])
+      mpvController.command(.frameStep)
     }
   }
   
   func screenShot() {
     let option = ud.bool(forKey: Preference.Key.screenshotIncludeSubtitle) ? "subtitles" : "video"
-    mpvController.command([MPVCommand.screenshot, option, nil])
+    mpvController.command(.screenshot, args: [option])
   }
   
   func abLoop() {
     // may subject to change
-    mpvController.command([MPVCommand.abLoop, nil])
+    mpvController.command(.abLoop)
     let a = mpvController.getDouble(MPVOption.PlaybackControl.abLoopA)
     let b = mpvController.getDouble(MPVOption.PlaybackControl.abLoopB)
     if a == 0 && b == 0 {
@@ -246,17 +246,17 @@ class PlayerCore: NSObject {
     case .hue:
       optionName = MPVOption.Equalizer.hue
     }
-    mpvController.command(["set", optionName, value.toStr(), nil])
+    mpvController.command(.set, args: [optionName, value.toStr()])
   }
   
   func loadExternalAudioFile(_ url: URL) {
-    mpvController.command([MPVCommand.audioAdd, url.path, nil])
+    mpvController.command(.audioAdd, args: [url.path])
     getTrackInfo()
     getSelectedTracks()
   }
   
   func loadExternalSubFile(_ url: URL) {
-    mpvController.command([MPVCommand.subAdd, url.path, nil])
+    mpvController.command(.subAdd, args: [url.path])
     getTrackInfo()
     getSelectedTracks()
   }
@@ -270,19 +270,19 @@ class PlayerCore: NSObject {
   }
   
   func addToPlaylist(_ path: String) {
-    mpvController.command([MPVCommand.loadfile, path, "append", nil])
+    mpvController.command(.loadfile, args: [path, "append"])
   }
   
   func clearPlaylist() {
-    mpvController.command([MPVCommand.playlistClear, nil])
+    mpvController.command(.playlistClear)
   }
   
   func removeFromPlaylist(index: Int) {
-    mpvController.command([MPVCommand.playlistRemove, "\(index)", nil])
+    mpvController.command(.playlistRemove, args: ["\(index)"])
   }
   
   func playFile(_ path: String) {
-    mpvController.command([MPVCommand.loadfile, path, "replace", nil])
+    mpvController.command(.loadfile, args: [path, "replace"])
     getPLaylist()
   }
   
@@ -293,17 +293,17 @@ class PlayerCore: NSObject {
   
   func playChapter(_ pos: Int) {
     let chapter = info.chapters[pos]
-    mpvController.command([MPVCommand.seek, "\(chapter.time.second)", "absolute", nil])
+    mpvController.command(.seek, args: ["\(chapter.time.second)", "absolute"])
     // need to update time pos
     syncUITime()
   }
   
   func addVideoFilter(_ filter: MPVFilter) {
-    mpvController.command([MPVCommand.vf, "add", filter.stringFormat, nil])
+    mpvController.command(.vf, args: ["add", filter.stringFormat])
   }
   
   func removeVideoFiler(_ filter: MPVFilter) {
-    mpvController.command([MPVCommand.vf, "del", filter.stringFormat, nil])
+    mpvController.command(.vf, args: ["del", filter.stringFormat])
   }
   
   /** Scale is a double value in [-100, -1] + [1, 100] */
@@ -349,11 +349,7 @@ class PlayerCore: NSObject {
   }
   
   func execKeyCode(_ code: String) {
-    mpvController.command([MPVCommand.keypress, code, nil])
-  }
-  
-  func runSingleCommand(_ command: String) {
-    mpvController.command([command, nil])
+    mpvController.command(.keypress, args: [code])
   }
   
   // MARK: - Other

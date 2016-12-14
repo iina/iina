@@ -1,122 +1,131 @@
 import Foundation
 
-struct MPVCommand {
+struct MPVCommand: RawRepresentable {
+  
+  typealias RawValue = String
+  
+  var rawValue: RawValue
+  
+  init(_ string: String) { self.rawValue = string }
+  
+  init?(rawValue: RawValue) { self.rawValue = rawValue }
+  
   /** ignore */
-  static let ignore = "ignore"
+  static let ignore = MPVCommand("ignore")
   /** seek <seconds> [relative|absolute|absolute-percent|relative-percent|exact|keyframes] */
-  static let seek = "seek"
+  static let seek = MPVCommand("seek")
   /** revert-seek [mode] */
-  static let revertSeek = "revert-seek"
+  static let revertSeek = MPVCommand("revert-seek")
   /** frame-step */
-  static let frameStep = "frame-step"
+  static let frameStep = MPVCommand("frame-step")
   /** frame-back-step */
-  static let frameBackStep = "frame-back-step"
+  static let frameBackStep = MPVCommand("frame-back-step")
   /** set <property> "<value>" */
-  static let set = "set"
+  static let set = MPVCommand("set")
   /** add <property> [<value>] */
-  static let add = "add"
+  static let add = MPVCommand("add")
   /** cycle <property> [up|down] */
-  static let cycle = "cycle"
+  static let cycle = MPVCommand("cycle")
   /** multiply <property> <factor> */
-  static let multiply = "multiply"
+  static let multiply = MPVCommand("multiply")
   /** screenshot [subtitles|video|window|- [single|each-frame]] */
-  static let screenshot = "screenshot"
+  static let screenshot = MPVCommand("screenshot")
   /** screenshot-to-file "<filename>" [subtitles|video|window] */
-  static let screenshotToFile = "screenshot-to-file"
+  static let screenshotToFile = MPVCommand("screenshot-to-file")
   /** playlist-next [weak|force] */
-  static let playlistNext = "playlist-next"
+  static let playlistNext = MPVCommand("playlist-next")
   /** playlist-prev [weak|force] */
-  static let playlistPrev = "playlist-prev"
+  static let playlistPrev = MPVCommand("playlist-prev")
   /** loadfile "<file>" [replace|append|append-play [options]] */
-  static let loadfile = "loadfile"
+  static let loadfile = MPVCommand("loadfile")
   /** loadlist "<playlist>" [replace|append] */
-  static let loadlist = "loadlist"
+  static let loadlist = MPVCommand("loadlist")
   /** playlist-clear */
-  static let playlistClear = "playlist-clear"
+  static let playlistClear = MPVCommand("playlist-clear")
   /** playlist-remove current|<index> */
-  static let playlistRemove = "playlist-remove"
+  static let playlistRemove = MPVCommand("playlist-remove")
   /** playlist-move <index1> <index2> */
-  static let playlistMove = "playlist-move"
+  static let playlistMove = MPVCommand("playlist-move")
   /** playlist-shuffle */
-  static let playlistShuffle = "playlist-shuffle"
+  static let playlistShuffle = MPVCommand("playlist-shuffle")
   /** run "command" "arg1" "arg2" ... */
-  static let run = "run"
+  static let run = MPVCommand("run")
   /** quit [<code>] */
-  static let quit = "quit"
+  static let quit = MPVCommand("quit")
   /** quit-watch-later [<code>] */
-  static let quitWatchLater = "quit-watch-later"
+  static let quitWatchLater = MPVCommand("quit-watch-later")
   /** sub-add "<file>" [<flags> [<title> [<lang>]]] */
-  static let subAdd = "sub-add"
+  static let subAdd = MPVCommand("sub-add")
   /** sub-remove [<id>] */
-  static let subRemove = "sub-remove"
+  static let subRemove = MPVCommand("sub-remove")
   /** sub-reload [<id>] */
-  static let subReload = "sub-reload"
+  static let subReload = MPVCommand("sub-reload")
   /** sub-step <skip> */
-  static let subStep = "sub-step"
+  static let subStep = MPVCommand("sub-step")
   /** sub-seek <skip> */
-  static let subSeek = "sub-seek"
+  static let subSeek = MPVCommand("sub-seek")
   /** osd [<level>] */
-  static let osd = "osd"
+  static let osd = MPVCommand("osd")
   /** print-text "<string>" */
-  static let printText = "print-text"
+  static let printText = MPVCommand("print-text")
   /** show-text "<string>" [<duration>|- [<level>]] */
-  static let showText = "show-text"
+  static let showText = MPVCommand("show-text")
   /** show-progress */
-  static let showProgress = "show-progress"
+  static let showProgress = MPVCommand("show-progress")
   /** write-watch-later-config */
-  static let writeWatchLaterConfig = "write-watch-later-config"
+  static let writeWatchLaterConfig = MPVCommand("write-watch-later-config")
   /** stop */
-  static let stop = "stop"
+  static let stop = MPVCommand("stop")
   /** mouse <x> <y> [<button> [single|double]] */
-  static let mouse = "mouse"
+  static let mouse = MPVCommand("mouse")
   /** keypress <key_name> */
-  static let keypress = "keypress"
+  static let keypress = MPVCommand("keypress")
   /** keydown <key_name> */
-  static let keydown = "keydown"
+  static let keydown = MPVCommand("keydown")
   /** keyup [<key_name>] */
-  static let keyup = "keyup"
+  static let keyup = MPVCommand("keyup")
   /** audio-add "<file>" [<flags> [<title> [<lang>]]] */
-  static let audioAdd = "audio-add"
+  static let audioAdd = MPVCommand("audio-add")
   /** audio-remove [<id>] */
-  static let audioRemove = "audio-remove"
+  static let audioRemove = MPVCommand("audio-remove")
   /** audio-reload [<id>] */
-  static let audioReload = "audio-reload"
+  static let audioReload = MPVCommand("audio-reload")
   /** rescan-external-files [<mode>] */
-  static let rescanExternalFiles = "rescan-external-files"
+  static let rescanExternalFiles = MPVCommand("rescan-external-files")
   /** af set|add|toggle|del|clr "filter1=params,filter2,..." */
-  static let af = "af"
+  static let af = MPVCommand("af")
   /** vf set|add|toggle|del|clr "filter1=params,filter2,..." */
-  static let vf = "vf"
+  static let vf = MPVCommand("vf")
   /** cycle-values ["!reverse"] <property> "<value1>" "<value2>" ... */
-  static let cycleValues = "cycle-values"
+  static let cycleValues = MPVCommand("cycle-values")
   /** enable-section "<section>" [flags] */
-  static let enableSection = "enable-section"
+  static let enableSection = MPVCommand("enable-section")
   /** disable-section "<section>" */
-  static let disableSection = "disable-section"
+  static let disableSection = MPVCommand("disable-section")
   /** define-section "<section>" "<contents>" [default|force] */
-  static let defineSection = "define-section"
+  static let defineSection = MPVCommand("define-section")
   /** overlay-add <id> <x> <y> "<file>" <offset> "<fmt>" <w> <h> <stride> */
-  static let overlayAdd = "overlay-add"
+  static let overlayAdd = MPVCommand("overlay-add")
   /** overlay-remove <id> */
-  static let overlayRemove = "overlay-remove"
+  static let overlayRemove = MPVCommand("overlay-remove")
   /** script-message "<arg1>" "<arg2>" ... */
-  static let scriptMessage = "script-message"
+  static let scriptMessage = MPVCommand("script-message")
   /** script-message-to "<target>" "<arg1>" "<arg2>" ... */
-  static let scriptMessageTo = "script-message-to"
+  static let scriptMessageTo = MPVCommand("script-message-to")
   /** script-binding "<name>" */
-  static let scriptBinding = "script-binding"
+  static let scriptBinding = MPVCommand("script-binding")
   /** ab-loop */
-  static let abLoop = "ab-loop"
+  static let abLoop = MPVCommand("ab-loop")
   /** drop-buffers */
-  static let dropBuffers = "drop-buffers"
+  static let dropBuffers = MPVCommand("drop-buffers")
   /** screenshot-raw [subtitles|video|window] */
-  static let screenshotRaw = "screenshot-raw"
+  static let screenshotRaw = MPVCommand("screenshot-raw")
   /** vf-command "<label>" "<cmd>" "<args>" */
-  static let vfCommand = "vf-command"
+  static let vfCommand = MPVCommand("vf-command")
   /** af-command "<label>" "<cmd>" "<args>" */
-  static let afCommand = "af-command"
+  static let afCommand = MPVCommand("af-command")
   /** apply-profile "<name>" */
-  static let applyProfile = "apply-profile"
+  static let applyProfile = MPVCommand("apply-profile")
   /** load-script "<path>" */
-  static let loadScript = "load-script"
+  static let loadScript = MPVCommand("load-script")
 }

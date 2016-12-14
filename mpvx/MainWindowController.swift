@@ -1272,10 +1272,10 @@ extension MainWindowController: NSTouchBarDelegate {
   func touchBarSkipAction(_ sender: NSButton) {
     if sender.tag == 0 {
       // next
-      playerCore.runSingleCommand(MPVCommand.playlistNext)
+      playerCore.mpvController.command(.playlistNext)
     } else {
       // prev
-      playerCore.runSingleCommand(MPVCommand.playlistPrev)
+      playerCore.mpvController.command(.playlistPrev)
     }
   }
   

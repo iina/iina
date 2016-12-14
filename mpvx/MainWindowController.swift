@@ -113,6 +113,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var rightArrowLabel: NSTextField!
   @IBOutlet weak var osdVisualEffectView: NSVisualEffectView!
   @IBOutlet weak var osd: NSTextField!
+  
+  weak var touchBarPlaySlider: NSSlider?
+  weak var touchBarCurrentPosLabel: NSTextField?
+  
 
   override func windowDidLoad() {
     
@@ -665,11 +669,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     let percantage = (Double(pos.second) / Double(duration.second)) * 100
     leftLabel.stringValue = pos.stringRepresentation
+    touchBarCurrentPosLabel?.stringValue = pos.stringRepresentation
     if withDuration {
       rightLabel.stringValue = duration.stringRepresentation
     }
     if andProgressBar {
       playSlider.doubleValue = percantage
+      touchBarPlaySlider?.doubleValue = percantage
     }
   }
   
@@ -723,7 +729,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   /** handle action of both left and right arrow button */
-  private func arrowButtonAction(left: Bool) {
+  func arrowButtonAction(left: Bool) {
     let actionType = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: Preference.Key.arrowButtonAction))
     switch actionType! {
     case .speed:
@@ -1122,6 +1128,127 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.playerCore.setSubFont($0 ?? "")
     }
     
+  }
+  
+}
+
+// MARK: - Touch bar
+
+fileprivate extension NSTouchBarCustomizationIdentifier {
+  static let windowBar = NSTouchBarCustomizationIdentifier("\(Bundle.main.bundleIdentifier!).windowTouchBar")
+}
+
+fileprivate extension NSTouchBarItemIdentifier {
+  static let playPause = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.playPause")
+  static let slider = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.slider")
+  static let volumeUp = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.voUp")
+  static let volumeDown = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.voDn")
+  static let rewind = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.rewind")
+  static let fastForward = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.forward")
+  static let time = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.time")
+  
+}
+
+@available(OSX 10.12.2, *)
+extension MainWindowController: NSTouchBarDelegate {
+  
+  override func makeTouchBar() -> NSTouchBar? {
+    let touchBar = NSTouchBar()
+    touchBar.delegate = self
+    touchBar.customizationIdentifier = .windowBar
+    touchBar.defaultItemIdentifiers = [.playPause, .slider, .time]
+    touchBar.customizationAllowedItemIdentifiers = [.playPause, .slider, .volumeUp, .volumeDown, .rewind, .fastForward, .time, .fixedSpaceLarge]
+    return touchBar
+  }
+  
+  func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItemIdentifier) -> NSTouchBarItem? {
+    
+    switch identifier {
+      
+    case NSTouchBarItemIdentifier.playPause:
+      let item = NSCustomTouchBarItem(identifier: identifier)
+      item.view = NSButton(image: NSImage(named: NSImageNameTouchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
+      item.customizationLabel = "Play / Pause"
+      return item
+      
+    case NSTouchBarItemIdentifier.slider:
+      let item = NSSliderTouchBarItem(identifier: identifier)
+      item.slider.minValue = 0
+      item.slider.maxValue = 100
+      item.slider.target = self
+      item.slider.action = #selector(self.touchBarSliderAction(_:))
+      item.customizationLabel = "Seek"
+      self.touchBarPlaySlider = item.slider
+      return item
+      
+    case NSTouchBarItemIdentifier.volumeUp:
+      let item = NSCustomTouchBarItem(identifier: identifier)
+      item.view = NSButton(image: NSImage(named: NSImageNameTouchBarVolumeUpTemplate)!, target: self, action: #selector(self.touchBarVolumeUpAction(_:)))
+      item.customizationLabel = "Volume +"
+      return item
+      
+    case NSTouchBarItemIdentifier.volumeDown:
+      let item = NSCustomTouchBarItem(identifier: identifier)
+      item.view = NSButton(image: NSImage(named: NSImageNameTouchBarVolumeDownTemplate)!, target: self, action: #selector(self.touchBarVolumeDownAction(_:)))
+      item.customizationLabel = "Volume -"
+      return item
+      
+    case NSTouchBarItemIdentifier.rewind:
+      let item = NSCustomTouchBarItem(identifier: identifier)
+      item.view = NSButton(image: NSImage(named: NSImageNameTouchBarRewindTemplate)!, target: self, action: #selector(self.touchBarRewindAction(_:)))
+      item.customizationLabel = "Rewind"
+      return item
+      
+    case NSTouchBarItemIdentifier.fastForward:
+      let item = NSCustomTouchBarItem(identifier: identifier)
+      item.view = NSButton(image: NSImage(named: NSImageNameTouchBarFastForwardTemplate)!, target: self, action: #selector(self.touchBarFastForwardAction(_:)))
+      item.customizationLabel = "Fast forward"
+      return item
+      
+    case NSTouchBarItemIdentifier.time:
+      let item = NSCustomTouchBarItem(identifier: identifier)
+      let label = NSTextField(labelWithString: "0:00")
+      self.touchBarCurrentPosLabel = label
+      item.view = label
+      item.customizationLabel = "Time Position"
+      return item
+      
+    default:
+      return nil
+    }
+  }
+  
+  func touchBarPlayBtnAction(_ sender: NSButton) {
+    if playerCore.info.isPaused {
+      sender.image = NSImage(named: NSImageNameTouchBarPauseTemplate)
+    } else {
+      sender.image = NSImage(named: NSImageNameTouchBarPlayTemplate)
+    }
+    playerCore.togglePause(nil)
+    playerCore.setSpeed(0)
+  }
+  
+  func touchBarVolumeUpAction(_ sender: NSButton) {
+    let currVolume = playerCore.info.volume
+    playerCore.setVolume(currVolume + 5)
+  }
+  
+  func touchBarVolumeDownAction(_ sender: NSButton) {
+    let currVolume = playerCore.info.volume
+    playerCore.setVolume(currVolume - 5)
+  }
+  
+  func touchBarRewindAction(_ sender: NSButton) {
+    arrowButtonAction(left: true)
+  }
+  
+  func touchBarFastForwardAction(_ sender: NSButton) {
+    arrowButtonAction(left: false)
+  }
+  
+  func touchBarSliderAction(_ sender: NSSlider) {
+    let percentage = 100 * sender.doubleValue / sender.maxValue
+    playerCore.seek(percent: percentage)
   }
   
 }

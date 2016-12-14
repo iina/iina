@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -341,6 +341,10 @@
                                     <action selector="performZoom:" target="-1" id="DIl-cC-cCs"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="ZgO-35-2v2"/>
+                            <menuItem title="Custom Touch Bar..." id="ZnF-yX-7jP">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                             <menuItem title="Inspector" keyEquivalent="i" id="bwz-r0-peR"/>
                             <menuItem isSeparatorItem="YES" id="6qV-kv-e0C"/>
@@ -381,6 +385,7 @@
                 <outlet property="chapter" destination="Fal-I4-PZk" id="DiY-VN-JpS"/>
                 <outlet property="chapterMenu" destination="d9c-me-L2H" id="Gs5-BM-ZGm"/>
                 <outlet property="cropMenu" destination="eo2-Tt-SLx" id="uii-FZ-2wL"/>
+                <outlet property="customTouchBar" destination="ZnF-yX-7jP" id="vSq-yD-whq"/>
                 <outlet property="decreaseAudioDelay" destination="Lc4-4W-thE" id="rZo-3n-vZW"/>
                 <outlet property="decreaseSubDelay" destination="LsU-Qz-dax" id="5Yw-0e-UyZ"/>
                 <outlet property="decreaseTextSize" destination="Bli-YK-Rl0" id="crH-X5-OVf"/>

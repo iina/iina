@@ -84,7 +84,8 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var resetSubDelay: NSMenuItem!
   @IBOutlet weak var encodingMenu: NSMenu!
   @IBOutlet weak var subFont: NSMenuItem!
-  
+  // Window
+  @IBOutlet weak var customTouchBar: NSMenuItem!
   
   
   
@@ -203,6 +204,15 @@ class MenuController: NSObject, NSMenuDelegate {
       PlayerCore.shared.info.subEncoding == $0.representedObject as? String
     }
     subFont.action = #selector(MainWindowController.menuSubFont(_:))
+    
+    // Window
+    
+    if #available(OSX 10.12.2, *) {
+      customTouchBar.action = #selector(NSApplication.toggleTouchBarCustomizationPalette(_:))
+    } else {
+      customTouchBar.isHidden = true
+    }
+    
   }
   
   private func updatePlaylist() {

@@ -410,24 +410,28 @@ class MPVController: NSObject {
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
         playerCore.info.hue = intData
+        playerCore.sendOSD(.hue(intData))
       }
       
     case MPVOption.Equalizer.brightness:
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
         playerCore.info.brightness = intData
+        playerCore.sendOSD(.brightness(intData))
       }
       
     case MPVOption.Equalizer.gamma:
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
         playerCore.info.gamma = intData
+        playerCore.sendOSD(.gamma(intData))
       }
       
     case MPVOption.Equalizer.saturation:
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
         playerCore.info.saturation = intData
+        playerCore.sendOSD(.saturation(intData))
       }
     
     // following properties may change before file loaded

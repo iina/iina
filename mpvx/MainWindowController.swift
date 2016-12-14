@@ -640,21 +640,31 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.windowDidResize(Notification(name: .NSWindowDidResize))
       return
     }
-    // get videoSize on screen
-    var videoSize = w.convertFromBacking(
-      NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))
-    ).size
-    // check screen size
-    if let screenSize = NSScreen.main()?.visibleFrame.size {
-      videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
-      // check default window position
+    
+    if playerCore.info.jumppedFromPlaylist {
+      // user is navigating in playlist. remain same window width.
+      let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
+      let rect = NSRect(origin: w.frame.origin, size: NSSize(width: w.frame.width, height: newHeight))
+      w.setFrame(rect, display: true, animate: true)
+      playerCore.info.jumppedFromPlaylist = false
+    } else {
+      // get videoSize on screen
+      var videoSize = w.convertFromBacking(
+        NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))
+      ).size
+      // check screen size
+      if let screenSize = NSScreen.main()?.visibleFrame.size {
+        videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
+        // check default window position
+      }
+      
+      let rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
+      w.setFrame(rect, display: true, animate: true)
+      }
+      if (!window!.isVisible) {
+        window!.setIsVisible(true)
     }
     
-    let rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
-    w.setFrame(rect, display: true, animate: true)
-    if (!window!.isVisible) {
-      window!.setIsVisible(true)
-    }
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)
     updateVolume()
@@ -1270,13 +1280,7 @@ extension MainWindowController: NSTouchBarDelegate {
   }
   
   func touchBarSkipAction(_ sender: NSButton) {
-    if sender.tag == 0 {
-      // next
-      playerCore.mpvController.command(.playlistNext)
-    } else {
-      // prev
-      playerCore.mpvController.command(.playlistPrev)
-    }
+    playerCore.navigateInPlaylist(nextOrPrev: sender.tag == 0)
   }
   
   func touchBarSliderAction(_ sender: NSSlider) {

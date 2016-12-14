@@ -287,8 +287,14 @@ class PlayerCore: NSObject {
   }
   
   func playFileInPlaylist(_ pos: Int) {
+    info.jumppedFromPlaylist = true
     mpvController.setInt(MPVProperty.playlistPos, pos)
     getPLaylist()
+  }
+  
+  func navigateInPlaylist(nextOrPrev: Bool) {
+    info.jumppedFromPlaylist = true
+    mpvController.command(nextOrPrev ? .playlistNext : .playlistPrev)
   }
   
   func playChapter(_ pos: Int) {

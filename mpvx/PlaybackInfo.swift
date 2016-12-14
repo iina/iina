@@ -30,6 +30,8 @@ class PlaybackInfo {
   
   var isPaused: Bool = false
   
+  var jumppedFromPlaylist: Bool = false
+  
   /** The current applied aspect, used for find current aspect in menu, etc. Maybe not a good approach. */
   var unsureAspect: String = "Default"
   var unsureCrop: String = "None"

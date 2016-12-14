@@ -71,6 +71,9 @@ struct Preference {
     /** Log to log folder (bool) */
     static let enableLogging = "enableLogging"
     
+    /** User defined options ([string, string]) */
+    static let userOptions = "userOptions"
+    
     static let useExactSeek = "useExactSeek"
     
     static let screenshotFolder = "screenShotFolder"
@@ -107,12 +110,13 @@ struct Preference {
     Key.fullScreenWhenOpen: false,
     Key.useMediaKeys: true,
     
-    Key.inputConfigs: [:],
+    Key.inputConfigs: [],
     Key.currentInputConfigName: "Default",
     
     Key.enableAdvancedSettings: false,
     Key.useMpvOsd: false,
     Key.enableLogging: false,
+    Key.userOptions: [],
     
     Key.quitWhenNoOpenedWindow: true,
     Key.useExactSeek: true,

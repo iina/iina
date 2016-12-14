@@ -37,7 +37,7 @@ class Utility {
   static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
     if !expr {
       NSLog("%@", errorMessage)
-      showAlert(message: "Fatal error: \(errorMessage) The application will exit now.")
+      showAlert(message: "Fatal error: \(errorMessage) \nThe application will exit now.")
       block()
       exit(1)
     }

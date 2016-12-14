@@ -38,6 +38,7 @@ struct Constants {
     static let isPlayingCell = "IsPlayingCell"
     static let trackNameCell = "TrackNameCell"
     static let key = "Key"
+    static let value = "Value"
     static let action = "Action"
   }
   struct String {

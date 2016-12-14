@@ -329,17 +329,13 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
 extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSource {
   
-  override func controlTextDidEndEditing(_ obj: Notification) {
-    saveToConfFile()
-  }
-  
   func numberOfRows(in tableView: NSTableView) -> Int {
     return currentMapping.count
   }
   
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     guard let identifier = tableColumn?.identifier else { return nil }
-    
+
     let mapping = currentMapping[row]
     if identifier == Constants.Identifier.key {
       return mapping.key
@@ -347,6 +343,17 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
       return mapping.readableAction
     }
     return ""
+  }
+  
+  func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
+    guard let value = object as? String,
+      let identifier = tableColumn?.identifier else { return }
+    if identifier == Constants.Identifier.key {
+      currentMapping[row].key = value
+    } else if identifier == Constants.Identifier.action {
+      currentMapping[row].action = value.characters.split(separator: " ").map { return String($0) }
+    }
+    saveToConfFile()
   }
   
 }

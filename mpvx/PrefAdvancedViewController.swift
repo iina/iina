@@ -32,14 +32,31 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
     return "Advanced"
   }
   
+  var options: [[String]] = []
+  
   
   @IBOutlet weak var enableSettingsBtn: NSButton!
   @IBOutlet weak var settingsView: NSView!
+  @IBOutlet weak var optionsTableView: NSTableView!
 
 
   override func viewDidLoad() {
     super.viewDidLoad()
     updateControlStatus(self)
+    
+    guard let op = UserDefaults.standard.value(forKey: Preference.Key.userOptions) as? [[String]] else {
+      Utility.showAlert(message: "Cannot read user defined options.")
+      return
+    }
+    options = op
+    
+    optionsTableView.dataSource = self
+    optionsTableView.delegate = self
+  }
+  
+  func saveToUserDefaults() {
+    UserDefaults.standard.set(options, forKey: Preference.Key.userOptions)
+    UserDefaults.standard.synchronize()
   }
   
   // MARK: - IBAction
@@ -57,5 +74,51 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
     NSWorkspace.shared().open(Utility.logDirURL)
   }
   
-    
+  @IBAction func addOptionBtnAction(_ sender: AnyObject) {
+    options.append(["", ""])
+    optionsTableView.reloadData()
+    optionsTableView.selectRowIndexes(IndexSet(integer: options.count - 1), byExtendingSelection: false)
+    saveToUserDefaults()
+  }
+  
+  @IBAction func removeOptionBtnAction(_ sender: AnyObject) {
+    if optionsTableView.selectedRow >= 0 {
+      options.remove(at: optionsTableView.selectedRow)
+      optionsTableView.reloadData()
+      saveToUserDefaults()
+    }
+  }
+  
+}
+
+extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource {
+  
+  override func controlTextDidEndEditing(_ obj: Notification) {
+    saveToUserDefaults()
+  }
+  
+  func numberOfRows(in tableView: NSTableView) -> Int {
+    return options.count
+  }
+  
+  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+    if tableColumn?.identifier == Constants.Identifier.key {
+      return options[row][0]
+    } else if tableColumn?.identifier == Constants.Identifier.value {
+      return options[row][1]
+    }
+    return nil
+  }
+  
+  func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
+    guard let value = object as? String,
+      let identifier = tableColumn?.identifier else { return }
+    if identifier == Constants.Identifier.key {
+      options[row][0] = value
+    } else if identifier == Constants.Identifier.value {
+      options[row][1] = value
+    }
+    saveToUserDefaults()
+  }
+  
 }

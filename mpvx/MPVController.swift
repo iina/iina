@@ -58,7 +58,9 @@ class MPVController: NSObject {
     let yes_str = "yes"
     let no_str = "no"
     
-    // Set options that can be override by user's config
+    // User default settings
+    let volume = playerCore.ud.integer(forKey: Preference.Key.softVolume)
+    e(mpv_set_option_string(mpv, MPVOption.Audio.volume, "\(volume)"))
     
     // disable internal OSD
     let useMpvOsd = playerCore.ud.bool(forKey: Preference.Key.useMpvOsd)
@@ -98,14 +100,22 @@ class MPVController: NSObject {
     let useMediaKeys = playerCore.ud.bool(forKey: Preference.Key.useMediaKeys)
     e(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, useMediaKeys ? yes_str : no_str))
     
-    // User default settings
-    let volume = playerCore.ud.integer(forKey: Preference.Key.softVolume)
-    e(mpv_set_option_string(mpv, MPVOption.Audio.volume, "\(volume)"))
-    
     // Load user's config file.
     // e(mpv_load_config_file(mpv, ""))
     
-    // Set options. Should be called before initialization.
+    // Set user defined options.
+    if let userOptions = UserDefaults.standard.value(forKey: Preference.Key.userOptions) as? [[String]] {
+      userOptions.forEach { op in
+        let status = mpv_set_option_string(mpv, op[0], op[1])
+        if status < 0 {
+          Utility.showAlert(message: "Error setting option \(op[0])=\(op[1]). Pleaase check your settings.")
+        }
+      }
+    } else {
+      Utility.showAlert(message: "Cannot read user defined options.")
+    }
+    
+    // Set options that can be override by user's config.
     e(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, "yes"))
     e(mpv_set_option_string(mpv, MPVOption.Video.vo, "opengl-cb"))
     e(mpv_set_option_string(mpv, MPVOption.Video.hwdecPreload, "auto"))

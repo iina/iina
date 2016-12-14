@@ -106,23 +106,38 @@ class Utility {
   
   // MARK: - App functions
   
-  static let appSupportDirUrl: URL  = {
-    let fm = FileManager.default
-    // get path
-    let asPath = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-    Utility.assert(asPath.count >= 1, "Cannot get path to Application Support directory")
-    let bundleID = Bundle.main.bundleIdentifier!
-    let appAsUrl = asPath.first!.appendingPathComponent(bundleID)
-    let appAsPath = appAsUrl.path
+  private static func createDirIfNotExist(url: URL) {
+  let path = url.path
     // check exist
-    if !fm.fileExists(atPath: appAsPath) {
+    if !FileManager.default.fileExists(atPath: path) {
       do {
-        try FileManager.default.createDirectory(at: appAsUrl, withIntermediateDirectories: false, attributes: nil)
+      try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false, attributes: nil)
       } catch {
         Utility.fatal("Cannot create folder in Application Support directory")
       }
     }
+  }
+  
+  static let appSupportDirUrl: URL = {
+    // get path
+    let asPath = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+    Utility.assert(asPath.count >= 1, "Cannot get path to Application Support directory")
+    let bundleID = Bundle.main.bundleIdentifier!
+    let appAsUrl = asPath.first!.appendingPathComponent(bundleID)
+    createDirIfNotExist(url: appAsUrl)
     return appAsUrl
+  }()
+  
+  static let userInputConfDirURL: URL = {
+    let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.userInputConfFolder, isDirectory: true)
+    createDirIfNotExist(url: url)
+    return url
+  }()
+  
+  static let logDirURL: URL = {
+    let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.logFolder, isDirectory: true)
+    createDirIfNotExist(url: url)
+    return url
   }()
   
   // MARK: - Util functions
@@ -288,6 +303,25 @@ class Utility {
     }
   }
 
+  
+  // http://stackoverflow.com/questions/31701326/
+  
+  struct ShortCodeGenerator {
+    
+    private static let base62chars = [Character]("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".characters)
+    private static let maxBase : UInt32 = 62
+    
+    static func getCode(withBase base: UInt32 = maxBase, length: Int) -> String {
+      var code = ""
+      for _ in 0..<length {
+        let random = Int(arc4random_uniform(min(base, maxBase)))
+        code.append(base62chars[random])
+      }
+      return code
+    }
+  }
+  
+  
 }
 
 // http://stackoverflow.com/questions/33294620/

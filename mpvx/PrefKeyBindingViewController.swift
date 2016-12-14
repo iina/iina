@@ -158,7 +158,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     }
     // new file
     let newFileName = newName + ".conf"
-    let newFilePath = Utility.appSupportDirUrl.appendingPathComponent(newFileName).path
+    let newFilePath = Utility.userInputConfDirURL.appendingPathComponent(newFileName).path
     let fm = FileManager.default
     // - if exists
     if fm.fileExists(atPath: newFilePath) {
@@ -205,7 +205,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     // copy
     let currFilePath = currentConfFilePath!
     let newFileName = newName + ".conf"
-    let newFilePath = Utility.appSupportDirUrl.appendingPathComponent(newFileName).path
+    let newFilePath = Utility.userInputConfDirURL.appendingPathComponent(newFileName).path
     let fm = FileManager.default
     // - if exists
     if fm.fileExists(atPath: newFilePath) {

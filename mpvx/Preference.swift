@@ -35,9 +35,6 @@ struct Preference {
     /** OSD text size (float) */
     static let osdTextSize = "osdTextSize"
     
-    /** Use mpv's OSD (bool) */
-    static let useMpvOsd = "useMpvOsd"
-    
     /** Soft volume (int, 0 - 100)*/
     static let softVolume = "softVolume"
     
@@ -62,6 +59,17 @@ struct Preference {
     
     /** Current input config name */
     static let currentInputConfigName = "currentInputConfigName"
+    
+    // Advanced
+    
+    /** Enable advanced settings */
+    static let enableAdvancedSettings = "enableAdvancedSettings"
+    
+    /** Use mpv's OSD (bool) */
+    static let useMpvOsd = "useMpvOsd"
+    
+    /** Log to log folder (bool) */
+    static let enableLogging = "enableLogging"
     
     static let useExactSeek = "useExactSeek"
     
@@ -93,7 +101,6 @@ struct Preference {
     Key.themeMaterial: Theme.dark.rawValue,
     Key.osdAutoHideTimeout: 1,
     Key.osdTextSize: Float(20),
-    Key.useMpvOsd: false,
     Key.softVolume: 50,
     Key.arrowButtonAction: ArrowButtonAction.speed.rawValue,
     Key.pauseWhenOpen: false,
@@ -102,6 +109,10 @@ struct Preference {
     
     Key.inputConfigs: [:],
     Key.currentInputConfigName: "Default",
+    
+    Key.enableAdvancedSettings: false,
+    Key.useMpvOsd: false,
+    Key.enableLogging: false,
     
     Key.quitWhenNoOpenedWindow: true,
     Key.useExactSeek: true,

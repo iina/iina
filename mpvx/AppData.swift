@@ -25,6 +25,9 @@ struct AppData {
   
   static let encodings = CharEncoding.list
   
+  static let userInputConfFolder = "input_conf"
+  static let logFolder = "log"
+  
 }
 
 

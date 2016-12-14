@@ -31,11 +31,31 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   var toolbarItemLabel: String {
     return "Advanced"
   }
+  
+  
+  @IBOutlet weak var enableSettingsBtn: NSButton!
+  @IBOutlet weak var settingsView: NSView!
 
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do view setup here.
+    updateControlStatus(self)
   }
+  
+  // MARK: - IBAction
+  
+  @IBAction func updateControlStatus(_ sender: AnyObject) {
+    let enable = enableSettingsBtn.state == NSOnState
+    settingsView.subviews.forEach { view in
+      if let control = view as? NSControl {
+        control.isEnabled = enable
+      }
+    }
+  }
+  
+  @IBAction func revealLogDir(_ sender: AnyObject) {
+    NSWorkspace.shared().open(Utility.logDirURL)
+  }
+  
     
 }

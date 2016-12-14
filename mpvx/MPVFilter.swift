@@ -8,6 +8,7 @@
 
 import Cocoa
 
+// FIXME: can refactor using RawRepresent
 class MPVFilter: NSObject {
   
   enum FilterType: String {

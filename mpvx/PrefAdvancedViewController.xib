@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefAdvancedViewController" customModule="NazoPlayer" customModuleProvider="target">
             <connections>
+                <outlet property="enableSettingsBtn" destination="ymk-Ax-TcO" id="9Lx-0u-h5t"/>
+                <outlet property="settingsView" destination="vY6-lX-1l5" id="NN6-qU-bqp"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -16,17 +18,70 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zKI-kU-PWr">
-                    <rect key="frame" x="18" y="236" width="119" height="18"/>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ymk-Ax-TcO">
+                    <rect key="frame" x="18" y="236" width="188" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Use MPV's OSD" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="phK-g9-Vbg">
+                    <buttonCell key="cell" type="check" title="Enable advanced settings" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7ml-VU-xWv">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="nyg-fH-Pug" name="value" keyPath="values.useMpvOsd" id="lOz-BL-YHr"/>
+                        <action selector="updateControlStatus:" target="-2" id="9Ld-Pn-CIQ"/>
+                        <binding destination="nyg-fH-Pug" name="value" keyPath="values.enableAdvancedSettings" id="JrO-M2-KNJ"/>
                     </connections>
                 </button>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vY6-lX-1l5">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="205"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SHQ-mh-jeX">
+                            <rect key="frame" x="18" y="169" width="112" height="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="check" title="Enable logging" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LCd-uY-Yze">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <binding destination="nyg-fH-Pug" name="value" keyPath="values.enableLogging" id="AvT-IQ-GhJ"/>
+                            </connections>
+                        </button>
+                        <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="wYu-V5-voK">
+                            <rect key="frame" x="0.0" y="202" width="480" height="5"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        </box>
+                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="shz-CZ-kqM">
+                            <rect key="frame" x="313" y="160" width="153" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="push" title="Open log directory" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JDA-g3-RNX">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="revealLogDir:" target="-2" id="VoU-0Y-IN8"/>
+                            </connections>
+                        </button>
+                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zKI-kU-PWr">
+                            <rect key="frame" x="18" y="139" width="119" height="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="check" title="Use MPV's OSD" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="phK-g9-Vbg">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <binding destination="nyg-fH-Pug" name="value" keyPath="values.useMpvOsd" id="lOz-BL-YHr"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </customView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2l-at-Cbp">
+                    <rect key="frame" x="18" y="213" width="442" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="All following settings need restarting application to take effect." id="HMa-Vz-EUk">
+                        <font key="font" metaFont="system" size="11"/>
+                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="nyg-fH-Pug"/>

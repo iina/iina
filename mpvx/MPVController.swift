@@ -68,6 +68,23 @@ class MPVController: NSObject {
       playerCore.displayOSD = false
     }
     
+    // log
+    let enableLog = playerCore.ud.bool(forKey: Preference.Key.enableLogging)
+    if enableLog {
+      let date = Date()
+      let calendar = NSCalendar.current
+      let y = calendar.component(.year, from: date)
+      let m = calendar.component(.month, from: date)
+      let d = calendar.component(.day, from: date)
+      let h = calendar.component(.hour, from: date)
+      let mm = calendar.component(.minute, from: date)
+      let s = calendar.component(.second, from: date)
+      let token = Utility.ShortCodeGenerator.getCode(length: 6)
+      let logFileName = "\(y)-\(m)-\(d)-\(h)-\(mm)-\(s)_\(token).log"
+      let path = Utility.logDirURL.appendingPathComponent(logFileName).path
+      e(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.logFile, path))
+    }
+    
     let screenshotPath = playerCore.ud.string(forKey: Preference.Key.screenshotFolder)!
     let absoluteScreenshotPath = NSString(string: screenshotPath).expandingTildeInPath
     e(mpv_set_option_string(mpv, MPVOption.Screenshot.screenshotDirectory, absoluteScreenshotPath))

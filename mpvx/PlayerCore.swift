@@ -352,6 +352,10 @@ class PlayerCore: NSObject {
     mpvController.command([MPVCommand.keypress, code, nil])
   }
   
+  func runSingleCommand(_ command: String) {
+    mpvController.command([command, nil])
+  }
+  
   // MARK: - Other
   
   /** This function is called right after file loaded. Should load all meta info here. */

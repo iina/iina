@@ -1139,10 +1139,13 @@ extension MainWindowController {
 // MARK: - Touch bar
 
 fileprivate extension NSTouchBarCustomizationIdentifier {
+  
   static let windowBar = NSTouchBarCustomizationIdentifier("\(Bundle.main.bundleIdentifier!).windowTouchBar")
+  
 }
 
 fileprivate extension NSTouchBarItemIdentifier {
+  
   static let playPause = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.playPause")
   static let slider = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.slider")
   static let volumeUp = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.voUp")
@@ -1150,8 +1153,30 @@ fileprivate extension NSTouchBarItemIdentifier {
   static let rewind = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.rewind")
   static let fastForward = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.forward")
   static let time = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.time")
+  static let ahead15Sec = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead15Sec")
+  static let back15Sec = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.back15Sec")
+  static let ahead30Sec = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead30Sec")
+  static let back30Sec = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.back30Sec")
+  static let next = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.next")
+  static let prev = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.prev")
   
 }
+
+
+// Image name, tag, custom label
+@available(OSX 10.12.2, *)
+fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, String)] = [
+  .ahead15Sec: (NSImageNameTouchBarSkipAhead15SecondsTemplate, 15, "15sec Ahead"),
+  .ahead30Sec: (NSImageNameTouchBarSkipAhead30SecondsTemplate, 30, "30sec Ahead"),
+  .back15Sec: (NSImageNameTouchBarSkipBack15SecondsTemplate, -15, "-15sec Ahead"),
+  .back30Sec: (NSImageNameTouchBarSkipBack30SecondsTemplate, -30, "-30sec Ahead"),
+  .next: (NSImageNameTouchBarSkipAheadTemplate, 0, "Next video"),
+  .prev: (NSImageNameTouchBarSkipBackTemplate, 1, "Previous video"),
+  .volumeUp: (NSImageNameTouchBarVolumeUpTemplate, 0, "Volume +"),
+  .volumeDown: (NSImageNameTouchBarVolumeDownTemplate, 1, "Volume -"),
+  .rewind: (NSImageNameTouchBarRewindTemplate, 0, "Rewind"),
+  .fastForward: (NSImageNameTouchBarFastForwardTemplate, 1, "Fast forward")
+]
 
 @available(OSX 10.12.2, *)
 extension MainWindowController: NSTouchBarDelegate {
@@ -1161,7 +1186,7 @@ extension MainWindowController: NSTouchBarDelegate {
     touchBar.delegate = self
     touchBar.customizationIdentifier = .windowBar
     touchBar.defaultItemIdentifiers = [.playPause, .slider, .time]
-    touchBar.customizationAllowedItemIdentifiers = [.playPause, .slider, .volumeUp, .volumeDown, .rewind, .fastForward, .time, .fixedSpaceLarge]
+    touchBar.customizationAllowedItemIdentifiers = [.playPause, .slider, .volumeUp, .volumeDown, .rewind, .fastForward, .time, .ahead15Sec, .ahead30Sec, .back15Sec, .back30Sec, .next, .prev, .fixedSpaceLarge]
     return touchBar
   }
   
@@ -1185,29 +1210,15 @@ extension MainWindowController: NSTouchBarDelegate {
       self.touchBarPlaySlider = item.slider
       return item
       
-    case NSTouchBarItemIdentifier.volumeUp:
-      let item = NSCustomTouchBarItem(identifier: identifier)
-      item.view = NSButton(image: NSImage(named: NSImageNameTouchBarVolumeUpTemplate)!, target: self, action: #selector(self.touchBarVolumeUpAction(_:)))
-      item.customizationLabel = "Volume +"
-      return item
+    case NSTouchBarItemIdentifier.volumeUp,
+         NSTouchBarItemIdentifier.volumeDown:
+      guard let data = touchBarItemBinding[identifier] else { return nil }
+      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarVolumeAction(_:)))
       
-    case NSTouchBarItemIdentifier.volumeDown:
-      let item = NSCustomTouchBarItem(identifier: identifier)
-      item.view = NSButton(image: NSImage(named: NSImageNameTouchBarVolumeDownTemplate)!, target: self, action: #selector(self.touchBarVolumeDownAction(_:)))
-      item.customizationLabel = "Volume -"
-      return item
-      
-    case NSTouchBarItemIdentifier.rewind:
-      let item = NSCustomTouchBarItem(identifier: identifier)
-      item.view = NSButton(image: NSImage(named: NSImageNameTouchBarRewindTemplate)!, target: self, action: #selector(self.touchBarRewindAction(_:)))
-      item.customizationLabel = "Rewind"
-      return item
-      
-    case NSTouchBarItemIdentifier.fastForward:
-      let item = NSCustomTouchBarItem(identifier: identifier)
-      item.view = NSButton(image: NSImage(named: NSImageNameTouchBarFastForwardTemplate)!, target: self, action: #selector(self.touchBarFastForwardAction(_:)))
-      item.customizationLabel = "Fast forward"
-      return item
+    case NSTouchBarItemIdentifier.rewind,
+         NSTouchBarItemIdentifier.fastForward:
+      guard let data = touchBarItemBinding[identifier] else { return nil }
+      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarRewindAction(_:)))
       
     case NSTouchBarItemIdentifier.time:
       let item = NSCustomTouchBarItem(identifier: identifier)
@@ -1216,6 +1227,18 @@ extension MainWindowController: NSTouchBarDelegate {
       item.view = label
       item.customizationLabel = "Time Position"
       return item
+      
+    case NSTouchBarItemIdentifier.ahead15Sec,
+         NSTouchBarItemIdentifier.back15Sec,
+         NSTouchBarItemIdentifier.ahead30Sec,
+         NSTouchBarItemIdentifier.back30Sec:
+      guard let data = touchBarItemBinding[identifier] else { return nil }
+      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSeekAction(_:)))
+      
+    case NSTouchBarItemIdentifier.next,
+         NSTouchBarItemIdentifier.prev:
+      guard let data = touchBarItemBinding[identifier] else { return nil }
+      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSkipAction(_:)))
       
     default:
       return nil
@@ -1232,27 +1255,42 @@ extension MainWindowController: NSTouchBarDelegate {
     playerCore.setSpeed(0)
   }
   
-  func touchBarVolumeUpAction(_ sender: NSButton) {
+  func touchBarVolumeAction(_ sender: NSButton) {
     let currVolume = playerCore.info.volume
-    playerCore.setVolume(currVolume + 5)
-  }
-  
-  func touchBarVolumeDownAction(_ sender: NSButton) {
-    let currVolume = playerCore.info.volume
-    playerCore.setVolume(currVolume - 5)
+    playerCore.setVolume(currVolume + (sender.tag == 0 ? 5 : -5))
   }
   
   func touchBarRewindAction(_ sender: NSButton) {
-    arrowButtonAction(left: true)
+    arrowButtonAction(left: sender.tag == 0)
   }
   
-  func touchBarFastForwardAction(_ sender: NSButton) {
-    arrowButtonAction(left: false)
+  func touchBarSeekAction(_ sender: NSButton) {
+    let sec = sender.tag
+    playerCore.seek(relativeSecond: Double(sec))
+  }
+  
+  func touchBarSkipAction(_ sender: NSButton) {
+    if sender.tag == 0 {
+      // next
+      playerCore.runSingleCommand(MPVCommand.playlistNext)
+    } else {
+      // prev
+      playerCore.runSingleCommand(MPVCommand.playlistPrev)
+    }
   }
   
   func touchBarSliderAction(_ sender: NSSlider) {
     let percentage = 100 * sender.doubleValue / sender.maxValue
     playerCore.seek(percent: percentage)
+  }
+  
+  private func buttonTouchBarItem(withIdentifier identifier: NSTouchBarItemIdentifier, imageName: String, tag: Int, customLabel: String, action: Selector) -> NSCustomTouchBarItem {
+    let item = NSCustomTouchBarItem(identifier: identifier)
+    let button = NSButton(image: NSImage(named: imageName)!, target: self, action: action)
+    button.tag = tag
+    item.view = button
+    item.customizationLabel = customLabel
+    return item
   }
   
 }

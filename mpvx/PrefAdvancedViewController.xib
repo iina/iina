@@ -8,9 +8,12 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefAdvancedViewController" customModule="NazoPlayer" customModuleProvider="target">
             <connections>
+                <outlet property="chooseConfigDirBtn" destination="hbF-n4-jl3" id="QYy-Do-vje"/>
                 <outlet property="enableSettingsBtn" destination="ymk-Ax-TcO" id="9Lx-0u-h5t"/>
                 <outlet property="optionsTableView" destination="LPs-2B-Pt0" id="jFp-3K-Ub8"/>
                 <outlet property="settingsView" destination="vY6-lX-1l5" id="NN6-qU-bqp"/>
+                <outlet property="useAnotherConfigDirBtn" destination="Gf8-9e-wu7" id="JpG-gy-VmS"/>
+                <outlet property="userConfigLocLabel" destination="L7F-7X-KTx" id="4Xa-EV-LFx"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -59,7 +62,7 @@
                             </connections>
                         </button>
                         <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="wYu-V5-voK">
-                            <rect key="frame" x="0.0" y="324" width="480" height="5"/>
+                            <rect key="frame" x="0.0" y="324" width="480" height="117"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         </box>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="shz-CZ-kqM">
@@ -118,11 +121,11 @@
                                 </subviews>
                             </clipView>
                             <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="iUT-PB-HTE">
-                                <rect key="frame" x="1" y="114" width="433" height="16"/>
+                                <rect key="frame" x="1" y="7" width="0.0" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
                             <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="JMO-G9-iKp">
-                                <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                <rect key="frame" x="-15" y="23" width="16" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
                             <tableHeaderView key="headerView" id="wiq-g9-ouS">
@@ -173,17 +176,59 @@
                             <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                             <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </box>
+                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gf8-9e-wu7">
+                            <rect key="frame" x="18" y="43" width="196" height="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="check" title="Use another config directory" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ehL-8Y-G8h">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <binding destination="nyg-fH-Pug" name="value" keyPath="values.useUserDefinedConfDir" id="RwC-LQ-wlP"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hbF-n4-jl3">
+                            <rect key="frame" x="313" y="34" width="153" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="push" title="Choose directory" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRT-u8-xTX">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="chooseDirBtnAction:" target="-2" id="wqF-DD-4eM"/>
+                            </connections>
+                        </button>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7F-7X-KTx">
+                            <rect key="frame" x="37" y="24" width="425" height="17"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="/path/to/conf" id="YeO-Zb-wNJ">
+                                <font key="font" metaFont="system" size="11"/>
+                                <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="h8Z-2F-QTn"/>
+                            </connections>
+                        </textField>
                     </subviews>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2l-at-Cbp">
                     <rect key="frame" x="18" y="335" width="442" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="All following settings need restarting application to take effect." id="HMa-Vz-EUk">
-                        <font key="font" metaFont="system" size="11"/>
+                        <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Gg-Io-SlS">
+                    <rect key="frame" x="437" y="353" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jZ3-bn-f9w">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <point key="canvasLocation" x="139" y="230"/>
         </customView>

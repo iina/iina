@@ -1097,7 +1097,7 @@ extension MainWindowController {
   }
   
   @IBAction func menuLoadExternalSub(_ sender: NSMenuItem) {
-    let _ = Utility.quickOpenPanel(title: "Load external subtitle file") { url in
+    let _ = Utility.quickOpenPanel(title: "Load external subtitle file", isDir: false) { url in
       self.playerCore.loadExternalSubFile(url)
     }
   }
@@ -1262,7 +1262,6 @@ extension MainWindowController: NSTouchBarDelegate {
       sender.image = NSImage(named: NSImageNameTouchBarPlayTemplate)
     }
     playerCore.togglePause(nil)
-    playerCore.setSpeed(0)
   }
   
   func touchBarVolumeAction(_ sender: NSButton) {

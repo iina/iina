@@ -74,6 +74,10 @@ struct Preference {
     /** User defined options ([string, string]) */
     static let userOptions = "userOptions"
     
+    /** User defined conf directory */
+    static let useUserDefinedConfDir = "useUserDefinedConfDir"
+    static let userDefinedConfDir = "userDefinedConfDir"
+    
     static let useExactSeek = "useExactSeek"
     
     static let screenshotFolder = "screenShotFolder"
@@ -117,6 +121,8 @@ struct Preference {
     Key.useMpvOsd: false,
     Key.enableLogging: false,
     Key.userOptions: [],
+    Key.useUserDefinedConfDir: false,
+    Key.userDefinedConfDir: "",
     
     Key.quitWhenNoOpenedWindow: true,
     Key.useExactSeek: true,

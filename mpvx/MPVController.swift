@@ -103,12 +103,22 @@ class MPVController: NSObject {
     // Load user's config file.
     // e(mpv_load_config_file(mpv, ""))
     
+    // Set user defined conf dir.
+    if playerCore.ud.bool(forKey: Preference.Key.useUserDefinedConfDir) {
+      if let userConfDir = playerCore.ud.string(forKey: Preference.Key.userDefinedConfDir) {
+        let status = mpv_set_option_string(mpv, MPVOption.ProgramBehavior.configDir, userConfDir)
+        if status < 0 {
+          Utility.showAlert(message: "Error setting config directory \"\(userConfDir)\".")
+        }
+      }
+    }
+    
     // Set user defined options.
-    if let userOptions = UserDefaults.standard.value(forKey: Preference.Key.userOptions) as? [[String]] {
+    if let userOptions = playerCore.ud.value(forKey: Preference.Key.userOptions) as? [[String]] {
       userOptions.forEach { op in
         let status = mpv_set_option_string(mpv, op[0], op[1])
         if status < 0 {
-          Utility.showAlert(message: "Error setting option \(op[0])=\(op[1]). Pleaase check your settings.")
+          Utility.showAlert(message: "Error setting option --\(op[0])=\(op[1]) with return value \(status). Pleaase check your settings.")
         }
       }
     } else {
@@ -379,7 +389,10 @@ class MPVController: NSObject {
       
     case MPVOption.PlaybackControl.pause:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
-        playerCore.sendOSD(data ? .pause : .resume)
+        if playerCore.info.isPaused != data {
+          playerCore.sendOSD(data ? .pause : .resume)
+          playerCore.info.isPaused = data
+        }
       }
       
     case MPVOption.Video.deinterlace:

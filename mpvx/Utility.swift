@@ -62,12 +62,12 @@ class Utility {
     return panel.runModal() == NSAlertFirstButtonReturn
   }
   
-  static func quickOpenPanel(title: String, ok: (URL) -> Void) -> Bool {
+  static func quickOpenPanel(title: String, isDir: Bool, ok: (URL) -> Void) -> Bool {
     let panel = NSOpenPanel()
     panel.title = title
     panel.canCreateDirectories = false
-    panel.canChooseFiles = true
-    panel.canChooseDirectories = false
+    panel.canChooseFiles = !isDir
+    panel.canChooseDirectories = isDir
     panel.resolvesAliases = true
     panel.allowsMultipleSelection = false
     if panel.runModal() == NSFileHandlingPanelOKButton {

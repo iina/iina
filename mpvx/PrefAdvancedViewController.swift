@@ -38,6 +38,9 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   @IBOutlet weak var enableSettingsBtn: NSButton!
   @IBOutlet weak var settingsView: NSView!
   @IBOutlet weak var optionsTableView: NSTableView!
+  @IBOutlet weak var useAnotherConfigDirBtn: NSButton!
+  @IBOutlet weak var chooseConfigDirBtn: NSButton!
+  @IBOutlet weak var userConfigLocLabel: NSTextField!
 
 
   override func viewDidLoad() {
@@ -89,6 +92,12 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
     }
   }
   
+  @IBAction func chooseDirBtnAction(_ sender: AnyObject) {
+    let _ = Utility.quickOpenPanel(title: "Choose config directory", isDir: true) { url in
+      UserDefaults.standard.set(url.path, forKey: Preference.Key.userDefinedConfDir)
+      UserDefaults.standard.synchronize()
+    }
+  }
 }
 
 extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource {

@@ -561,7 +561,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private func updateTimeLabel(_ mouseXPos: CGFloat) {
     let timeLabelXPos = playSlider.frame.origin.y + 15
     timePreviewWhenSeek.frame.origin = CGPoint(x: mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2, y: timeLabelXPos)
-    let percentage = Double(mouseXPos / playSlider.frame.width)
+    let percentage = Double((mouseXPos - 3) / 354)
     timePreviewWhenSeek.stringValue = (playerCore.info.videoDuration! * percentage).stringRepresentation
   }
   
@@ -825,9 +825,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** When slider changes */
   @IBAction func playSliderChanges(_ sender: NSSlider) {
     // guard let event = NSApp.currentEvent else { return }
-    
+
     // seek and update time
     let percentage = 100 * sender.doubleValue / sender.maxValue
+    // label
+    timePreviewWhenSeek.frame.origin = CGPoint(
+      x: sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2,
+      y: playSlider.frame.origin.y + 15)
+    timePreviewWhenSeek.stringValue = (playerCore.info.videoDuration! * percentage * 0.01).stringRepresentation
     playerCore.seek(percent: percentage)
   }
   

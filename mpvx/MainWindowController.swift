@@ -178,6 +178,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     
     // add user default observers
     ud.addObserver(self, forKeyPath: Preference.Key.themeMaterial, options: .new, context: nil)
+    ud.addObserver(self, forKeyPath: Preference.Key.showChapterPos, options: .new, context: nil)
     
     // move to center and make main
     w.center()
@@ -198,6 +199,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case Preference.Key.themeMaterial:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         setMaterial(Preference.Theme(rawValue: newValue))
+      }
+    
+    case Preference.Key.showChapterPos:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+        (playSlider.cell as! PlaySliderCell).drawChapters = newValue
       }
     
     default:

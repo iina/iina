@@ -51,7 +51,10 @@ struct Preference {
     
     /** Resume from last position */
     
-    /** Whether catch media keys */
+    /** Show chapter pos in progress bar (bool) */
+    static let showChapterPos = "showChapterPos"
+    
+    /** Whether catch media keys event (bool) */
     static let useMediaKeys = "useMediaKeys"
     
     /** User created input config list (dic) */
@@ -112,6 +115,7 @@ struct Preference {
     Key.arrowButtonAction: ArrowButtonAction.speed.rawValue,
     Key.pauseWhenOpen: false,
     Key.fullScreenWhenOpen: false,
+    Key.showChapterPos: false,
     Key.useMediaKeys: true,
     
     Key.inputConfigs: [],

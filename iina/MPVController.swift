@@ -1,6 +1,6 @@
 //
 //  MPVController.swift
-//  mpvx
+//  iina
 //
 //  Created by lhc on 8/7/16.
 //  Copyright © 2016年 lhc. All rights reserved.
@@ -19,7 +19,7 @@ class MPVController: NSObject {
   var mpv: OpaquePointer!
   // The mpv client name
   var mpvClientName: UnsafePointer<Int8>!
-  lazy var queue: DispatchQueue! = DispatchQueue(label: "mpvx")
+  lazy var queue: DispatchQueue! = DispatchQueue(label: "com.colliderli.iina.controller")
   var playerCore: PlayerCore = PlayerCore.shared
   
   var needRecordSeekTime: Bool = false

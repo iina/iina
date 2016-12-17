@@ -1,6 +1,6 @@
 //
 //  SettingsListCellView.swift
-//  mpvx
+//  iina
 //
 //  Created by lhc on 24/10/2016.
 //  Copyright © 2016 lhc. All rights reserved.

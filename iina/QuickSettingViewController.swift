@@ -1,6 +1,6 @@
 //
 //  QuickSettingViewController.swift
-//  mpvx
+//  iina
 //
 //  Created by lhc on 12/8/16.
 //  Copyright © 2016年 lhc. All rights reserved.

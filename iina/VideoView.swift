@@ -1,6 +1,6 @@
  //
 //  VideoView.swift
-//  mpvx
+//  iina
 //
 //  Created by lhc on 8/7/16.
 //  Copyright © 2016年 lhc. All rights reserved.
@@ -48,7 +48,7 @@ class VideoView: NSOpenGLView {
    The queue for drawing to fbo.
    If draw in main thread, it will block UI such as resizing
    */
-  lazy var mpvGLQueue: DispatchQueue = DispatchQueue(label: "mpvx.mpvgl")
+  lazy var mpvGLQueue: DispatchQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl")
   
   /** Video size for allocating fbo texture */
   var videoSize: NSSize? {

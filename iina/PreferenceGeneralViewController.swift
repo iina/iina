@@ -1,6 +1,6 @@
 //
 //  PreferenceGeneralViewController.swift
-//  mpvx
+//  iina
 //
 //  Created by lhc on 27/10/2016.
 //  Copyright © 2016 lhc. All rights reserved.

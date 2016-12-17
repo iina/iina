@@ -1,6 +1,6 @@
 //
 //  VolumeSliderCell.swift
-//  mpvx
+//  iina
 //
 //  Created by lhc on 26/7/16.
 //  Copyright © 2016年 lhc. All rights reserved.

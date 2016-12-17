@@ -1,6 +1,6 @@
 //
 //  FontPickerWindowController.swift
-//  mpvx
+//  iina
 //
 //  Created by lhc on 25/10/2016.
 //  Copyright © 2016 lhc. All rights reserved.

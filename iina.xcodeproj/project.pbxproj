@@ -236,7 +236,7 @@
 		84817CEA1DBE36F500CC2279 /* libuchardet.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuchardet.0.dylib; path = libmpv/lib/libuchardet.0.dylib; sourceTree = "<group>"; };
 		8487BEC01D744FA800FD17B0 /* FlippedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlippedView.swift; sourceTree = "<group>"; };
 		8487BEC21D76A1AF00FD17B0 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
-		8497A4831D2FF573005F504F /* mpvx-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mpvx-Bridging-Header.h"; sourceTree = "<group>"; };
+		8497A4831D2FF573005F504F /* iina-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iina-Bridging-Header.h"; sourceTree = "<group>"; };
 		84A0BA8F1D2F8D4100BC8DA1 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		84A0BA941D2F9E9600BC8DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		84A0BA961D2FA1CE00BC8DA1 /* PlayerCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCore.swift; sourceTree = "<group>"; };
@@ -414,7 +414,7 @@
 		84A0BAA61D2FAF8400BC8DA1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				8497A4831D2FF573005F504F /* mpvx-Bridging-Header.h */,
+				8497A4831D2FF573005F504F /* iina-Bridging-Header.h */,
 				84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */,
 				84EB1F061D2F5E76004FA5A1 /* Utility.swift */,
 				8434BAA81D5E3C2B003BECF2 /* Formatters.swift */,
@@ -974,7 +974,7 @@
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
 				PRODUCT_NAME = IINA;
-				SWIFT_OBJC_BRIDGING_HEADER = "iina/mpvx-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "iina/iina-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -998,7 +998,7 @@
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
 				PRODUCT_NAME = IINA;
-				SWIFT_OBJC_BRIDGING_HEADER = "iina/mpvx-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "iina/iina-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1012,7 +1012,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = iinaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvxTests;
+				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.iinaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iina.app/Contents/MacOS/iina";
@@ -1027,7 +1027,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = iinaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvxTests;
+				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.iinaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;

@@ -1,6 +1,6 @@
 //
 //  StreamReader.swift
-//  mpvx
+//  iina
 //
 //  Created by lhc on 12/12/2016.
 //  http://stackoverflow.com/questions/24581517/read-a-file-url-line-by-line-in-swift

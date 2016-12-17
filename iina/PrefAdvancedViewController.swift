@@ -1,6 +1,6 @@
 //
 //  PrefAdvancedViewController.swift
-//  mpvx
+//  iina
 //
 //  Created by lhc on 14/12/2016.
 //  Copyright © 2016 lhc. All rights reserved.

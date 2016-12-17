@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867483705008F086E07B0A6B /* Pods_iina.framework */; };
-		82BA9BD711894F8928B0D73A /* Pods_iinaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AF541A0F933D2F3C12AAD8 /* Pods_iinaTests.framework */; };
 		840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D47971DFEEE6A000D9A64 /* KeyMapping.swift */; };
 		840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */; };
 		840D479C1DFEF649000D9A64 /* KeyRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840D479A1DFEF649000D9A64 /* KeyRecordViewController.xib */; };
@@ -93,7 +92,6 @@
 		84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E745D51DFDD4FD00588DED /* KeyCodeHelper.swift */; };
 		84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */; };
 		84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */; };
-		84EB1EEA1D2F51D3004FA5A1 /* mpvxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */; };
 		84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F041D2F5C5B004FA5A1 /* AppData.swift */; };
 		84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F061D2F5E76004FA5A1 /* Utility.swift */; };
 		84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED99FD1E009C8100A5159B /* PrefAdvancedViewController.swift */; };
@@ -103,16 +101,6 @@
 		84FF847A1D2FF698001B318A /* libmpv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84751D2FF698001B318A /* libmpv.1.dylib */; };
 		84FF847B1D2FF698001B318A /* libmpv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84761D2FF698001B318A /* libmpv.dylib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		84EB1EE61D2F51D3004FA5A1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 84EB1ECE1D2F51D3004FA5A1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 84EB1ED51D2F51D3004FA5A1;
-			remoteInfo = mpvx;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		84817C991DBDF57C00CC2279 /* Copy Dylibs */ = {
@@ -265,9 +253,6 @@
 		84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84EB1EE01D2F51D3004FA5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84EB1EE51D2F51D3004FA5A1 /* iinaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iinaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mpvxTests.swift; sourceTree = "<group>"; };
-		84EB1EEB1D2F51D3004FA5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84EB1F041D2F5C5B004FA5A1 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		84EB1F061D2F5E76004FA5A1 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		84ED99FD1E009C8100A5159B /* PrefAdvancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefAdvancedViewController.swift; sourceTree = "<group>"; };
@@ -293,14 +278,6 @@
 				84FF847A1D2FF698001B318A /* libmpv.1.dylib in Frameworks */,
 				84817C941DBBF8E000CC2279 /* libmpv.1.23.0.dylib in Frameworks */,
 				5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		84EB1EE21D2F51D3004FA5A1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				82BA9BD711894F8928B0D73A /* Pods_iinaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,7 +472,6 @@
 			isa = PBXGroup;
 			children = (
 				84EB1ED81D2F51D3004FA5A1 /* iina */,
-				84EB1EE81D2F51D3004FA5A1 /* iinaTests */,
 				84EB1ED71D2F51D3004FA5A1 /* Products */,
 				848290731D95978100C3C76C /* Frameworks */,
 				AF119E67C2E61E10DC27039C /* Pods */,
@@ -506,7 +482,6 @@
 			isa = PBXGroup;
 			children = (
 				84EB1ED61D2F51D3004FA5A1 /* IINA.app */,
-				84EB1EE51D2F51D3004FA5A1 /* iinaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -523,15 +498,6 @@
 				84A0BAA61D2FAF8400BC8DA1 /* Utils */,
 			);
 			path = iina;
-			sourceTree = "<group>";
-		};
-		84EB1EE81D2F51D3004FA5A1 /* iinaTests */ = {
-			isa = PBXGroup;
-			children = (
-				84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */,
-				84EB1EEB1D2F51D3004FA5A1 /* Info.plist */,
-			);
-			path = iinaTests;
 			sourceTree = "<group>";
 		};
 		84FF846D1D2FF698001B318A /* libmpv */ = {
@@ -597,27 +563,6 @@
 			productReference = 84EB1ED61D2F51D3004FA5A1 /* IINA.app */;
 			productType = "com.apple.product-type.application";
 		};
-		84EB1EE41D2F51D3004FA5A1 /* iinaTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 84EB1EFC1D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "iinaTests" */;
-			buildPhases = (
-				CFA5E92273B348A2660BDF44 /* [CP] Check Pods Manifest.lock */,
-				84EB1EE11D2F51D3004FA5A1 /* Sources */,
-				84EB1EE21D2F51D3004FA5A1 /* Frameworks */,
-				84EB1EE31D2F51D3004FA5A1 /* Resources */,
-				750E5EBB5A479FF9BFEE129A /* [CP] Embed Pods Frameworks */,
-				65411536F1C87E025E0301B3 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				84EB1EE71D2F51D3004FA5A1 /* PBXTargetDependency */,
-			);
-			name = iinaTests;
-			productName = mpvxTests;
-			productReference = 84EB1EE51D2F51D3004FA5A1 /* iinaTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -631,11 +576,6 @@
 					84EB1ED51D2F51D3004FA5A1 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0800;
-					};
-					84EB1EE41D2F51D3004FA5A1 = {
-						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
-						TestTargetID = 84EB1ED51D2F51D3004FA5A1;
 					};
 				};
 			};
@@ -653,7 +593,6 @@
 			projectRoot = "";
 			targets = (
 				84EB1ED51D2F51D3004FA5A1 /* iina */,
-				84EB1EE41D2F51D3004FA5A1 /* iinaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -678,13 +617,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		84EB1EE31D2F51D3004FA5A1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -703,36 +635,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		65411536F1C87E025E0301B3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iinaTests/Pods-iinaTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		750E5EBB5A479FF9BFEE129A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iinaTests/Pods-iinaTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A0E37C793B5311ABDB5D863A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -746,21 +648,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iina/Pods-iina-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CFA5E92273B348A2660BDF44 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DFB4E0114268BBFB043A6097 /* [CP] Embed Pods Frameworks */ = {
@@ -836,23 +723,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		84EB1EE11D2F51D3004FA5A1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				84EB1EEA1D2F51D3004FA5A1 /* mpvxTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		84EB1EE71D2F51D3004FA5A1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 84EB1ED51D2F51D3004FA5A1 /* iina */;
-			targetProxy = 84EB1EE61D2F51D3004FA5A1 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */ = {
@@ -1004,37 +875,6 @@
 			};
 			name = Release;
 		};
-		84EB1EFD1D2F51D3004FA5A1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81CD1350F5D0CF91249F4E6F /* Pods-iinaTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = iinaTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.iinaTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iina.app/Contents/MacOS/iina";
-			};
-			name = Debug;
-		};
-		84EB1EFE1D2F51D3004FA5A1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8D9E62A906F1FDCDF8DA03EA /* Pods-iinaTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = iinaTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.iinaTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iina.app/Contents/MacOS/iina";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1052,15 +892,6 @@
 			buildConfigurations = (
 				84EB1EFA1D2F51D3004FA5A1 /* Debug */,
 				84EB1EFB1D2F51D3004FA5A1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		84EB1EFC1D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "iinaTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				84EB1EFD1D2F51D3004FA5A1 /* Debug */,
-				84EB1EFE1D2F51D3004FA5A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

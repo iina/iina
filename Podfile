@@ -7,9 +7,9 @@ target 'iina' do
   # Pods for iina
   pod 'MASPreferences'
 
-  target 'iinaTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+#  target 'iinaTests' do
+#    inherit! :search_paths
+#    # Pods for testing
+#  end
 
 end

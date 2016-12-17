@@ -7,9 +7,9 @@
 //
 
 import XCTest
-@testable import mpvx
+@testable import iina
 
-class mpvxTests: XCTestCase {
+class iinaTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

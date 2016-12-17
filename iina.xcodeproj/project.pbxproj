@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E0ACCEC2D7DC320BD17866D /* Pods_mpvxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E02BC1426882141B31FD7C32 /* Pods_mpvxTests.framework */; };
+		5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867483705008F086E07B0A6B /* Pods_iina.framework */; };
+		82BA9BD711894F8928B0D73A /* Pods_iinaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AF541A0F933D2F3C12AAD8 /* Pods_iinaTests.framework */; };
 		840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D47971DFEEE6A000D9A64 /* KeyMapping.swift */; };
 		840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */; };
 		840D479C1DFEF649000D9A64 /* KeyRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840D479A1DFEF649000D9A64 /* KeyRecordViewController.xib */; };
@@ -16,6 +17,7 @@
 		8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAA81D5E3C2B003BECF2 /* Formatters.swift */; };
 		8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAAC1D5E4546003BECF2 /* SlideUpButton.swift */; };
 		843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843FFD4C1D5DAA01001F3A44 /* RoundedTextFieldCell.swift */; };
+		844D72EF1E056E1400522E5E /* input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = 84E745D81DFDE8C100588DED /* input.conf */; };
 		844DE1BF1D3E2B9900272589 /* MPVEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DE1BE1D3E2B9900272589 /* MPVEvent.swift */; };
 		8452DD851D3B956D008A543A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452DD841D3B956D008A543A /* Preference.swift */; };
 		8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD881D3CB4EF008A543A /* vertexShader.glsl */; };
@@ -89,7 +91,6 @@
 		84D377671D737F58007F7396 /* MPVChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377661D737F58007F7396 /* MPVChapter.swift */; };
 		84E745D41DFDB27B00588DED /* PlaylistDragDestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E745D31DFDB27B00588DED /* PlaylistDragDestView.swift */; };
 		84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E745D51DFDD4FD00588DED /* KeyCodeHelper.swift */; };
-		84E745DB1DFDE9DE00588DED /* input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = 84E745D81DFDE8C100588DED /* input.conf */; };
 		84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */; };
 		84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */; };
 		84EB1EEA1D2F51D3004FA5A1 /* mpvxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */; };
@@ -101,7 +102,6 @@
 		84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7258E1D486185000DEF1B /* MPVProperty.swift */; };
 		84FF847A1D2FF698001B318A /* libmpv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84751D2FF698001B318A /* libmpv.1.dylib */; };
 		84FF847B1D2FF698001B318A /* libmpv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF84761D2FF698001B318A /* libmpv.dylib */; };
-		8A11331C2E4A6204BD5E3950 /* Pods_mpvx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE5147FAFA07715007A39C3 /* Pods_mpvx.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,7 +169,7 @@
 			dstPath = config;
 			dstSubfolderSpec = 7;
 			files = (
-				84E745DB1DFDE9DE00588DED /* input.conf in Copy Configs */,
+				844D72EF1E056E1400522E5E /* input.conf in Copy Configs */,
 			);
 			name = "Copy Configs";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,7 +177,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3BE5147FAFA07715007A39C3 /* Pods_mpvx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpvx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		11AF541A0F933D2F3C12AAD8 /* Pods_iinaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iinaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.release.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.release.xcconfig"; sourceTree = "<group>"; };
+		81CD1350F5D0CF91249F4E6F /* Pods-iinaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iinaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iinaTests/Pods-iinaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		840D47971DFEEE6A000D9A64 /* KeyMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyMapping.swift; sourceTree = "<group>"; };
 		840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRecordViewController.swift; sourceTree = "<group>"; };
 		840D479A1DFEF649000D9A64 /* KeyRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyRecordViewController.xib; sourceTree = "<group>"; };
@@ -259,11 +261,11 @@
 		84E745D31DFDB27B00588DED /* PlaylistDragDestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistDragDestView.swift; sourceTree = "<group>"; };
 		84E745D51DFDD4FD00588DED /* KeyCodeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCodeHelper.swift; sourceTree = "<group>"; };
 		84E745D81DFDE8C100588DED /* input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.conf; sourceTree = "<group>"; };
-		84EB1ED61D2F51D3004FA5A1 /* NazoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NazoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84EB1ED61D2F51D3004FA5A1 /* IINA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IINA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84EB1EE01D2F51D3004FA5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84EB1EE51D2F51D3004FA5A1 /* mpvxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mpvxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		84EB1EE51D2F51D3004FA5A1 /* iinaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iinaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mpvxTests.swift; sourceTree = "<group>"; };
 		84EB1EEB1D2F51D3004FA5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84EB1F041D2F5C5B004FA5A1 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
@@ -277,11 +279,9 @@
 		84FF84721D2FF698001B318A /* qthelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = qthelper.hpp; sourceTree = "<group>"; };
 		84FF84751D2FF698001B318A /* libmpv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.dylib; path = libmpv/lib/libmpv.1.dylib; sourceTree = "<group>"; };
 		84FF84761D2FF698001B318A /* libmpv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.dylib; path = libmpv/lib/libmpv.dylib; sourceTree = "<group>"; };
-		8D4EBE1369EC1EB3D9B332C4 /* Pods-mpvx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpvx.release.xcconfig"; path = "Pods/Target Support Files/Pods-mpvx/Pods-mpvx.release.xcconfig"; sourceTree = "<group>"; };
-		8D6D9C231698CD96933BCE69 /* Pods-mpvxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpvxTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mpvxTests/Pods-mpvxTests.debug.xcconfig"; sourceTree = "<group>"; };
-		AD3BB419211322D1B24B9844 /* Pods-mpvxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpvxTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mpvxTests/Pods-mpvxTests.release.xcconfig"; sourceTree = "<group>"; };
-		E02BC1426882141B31FD7C32 /* Pods_mpvxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpvxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F276FEF5F54ED58912B668DF /* Pods-mpvx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpvx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mpvx/Pods-mpvx.debug.xcconfig"; sourceTree = "<group>"; };
+		867483705008F086E07B0A6B /* Pods_iina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D9E62A906F1FDCDF8DA03EA /* Pods-iinaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iinaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iinaTests/Pods-iinaTests.release.xcconfig"; sourceTree = "<group>"; };
+		A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,7 +292,7 @@
 				84FF847B1D2FF698001B318A /* libmpv.dylib in Frameworks */,
 				84FF847A1D2FF698001B318A /* libmpv.1.dylib in Frameworks */,
 				84817C941DBBF8E000CC2279 /* libmpv.1.23.0.dylib in Frameworks */,
-				8A11331C2E4A6204BD5E3950 /* Pods_mpvx.framework in Frameworks */,
+				5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +300,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E0ACCEC2D7DC320BD17866D /* Pods_mpvxTests.framework in Frameworks */,
+				82BA9BD711894F8928B0D73A /* Pods_iinaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,8 +374,8 @@
 				84817C931DBBF8E000CC2279 /* libmpv.1.23.0.dylib */,
 				84FF84751D2FF698001B318A /* libmpv.1.dylib */,
 				84FF84761D2FF698001B318A /* libmpv.dylib */,
-				3BE5147FAFA07715007A39C3 /* Pods_mpvx.framework */,
-				E02BC1426882141B31FD7C32 /* Pods_mpvxTests.framework */,
+				867483705008F086E07B0A6B /* Pods_iina.framework */,
+				11AF541A0F933D2F3C12AAD8 /* Pods_iinaTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -488,30 +488,30 @@
 				84E745D81DFDE8C100588DED /* input.conf */,
 			);
 			name = config;
-			path = mpvx/config;
+			path = iina/config;
 			sourceTree = SOURCE_ROOT;
 		};
 		84EB1ECD1D2F51D3004FA5A1 = {
 			isa = PBXGroup;
 			children = (
-				84EB1ED81D2F51D3004FA5A1 /* mpvx */,
-				84EB1EE81D2F51D3004FA5A1 /* mpvxTests */,
+				84EB1ED81D2F51D3004FA5A1 /* iina */,
+				84EB1EE81D2F51D3004FA5A1 /* iinaTests */,
 				84EB1ED71D2F51D3004FA5A1 /* Products */,
 				848290731D95978100C3C76C /* Frameworks */,
-				AC32CA0B7767E182D68B6353 /* Pods */,
+				AF119E67C2E61E10DC27039C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		84EB1ED71D2F51D3004FA5A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84EB1ED61D2F51D3004FA5A1 /* NazoPlayer.app */,
-				84EB1EE51D2F51D3004FA5A1 /* mpvxTests.xctest */,
+				84EB1ED61D2F51D3004FA5A1 /* IINA.app */,
+				84EB1EE51D2F51D3004FA5A1 /* iinaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		84EB1ED81D2F51D3004FA5A1 /* mpvx */ = {
+		84EB1ED81D2F51D3004FA5A1 /* iina */ = {
 			isa = PBXGroup;
 			children = (
 				84FF846D1D2FF698001B318A /* libmpv */,
@@ -522,16 +522,16 @@
 				84A0BAA31D2FAEA000BC8DA1 /* Views */,
 				84A0BAA61D2FAF8400BC8DA1 /* Utils */,
 			);
-			path = mpvx;
+			path = iina;
 			sourceTree = "<group>";
 		};
-		84EB1EE81D2F51D3004FA5A1 /* mpvxTests */ = {
+		84EB1EE81D2F51D3004FA5A1 /* iinaTests */ = {
 			isa = PBXGroup;
 			children = (
 				84EB1EE91D2F51D3004FA5A1 /* mpvxTests.swift */,
 				84EB1EEB1D2F51D3004FA5A1 /* Info.plist */,
 			);
-			path = mpvxTests;
+			path = iinaTests;
 			sourceTree = "<group>";
 		};
 		84FF846D1D2FF698001B318A /* libmpv */ = {
@@ -560,13 +560,13 @@
 			path = mpv;
 			sourceTree = "<group>";
 		};
-		AC32CA0B7767E182D68B6353 /* Pods */ = {
+		AF119E67C2E61E10DC27039C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F276FEF5F54ED58912B668DF /* Pods-mpvx.debug.xcconfig */,
-				8D4EBE1369EC1EB3D9B332C4 /* Pods-mpvx.release.xcconfig */,
-				8D6D9C231698CD96933BCE69 /* Pods-mpvxTests.debug.xcconfig */,
-				AD3BB419211322D1B24B9844 /* Pods-mpvxTests.release.xcconfig */,
+				A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */,
+				61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */,
+				81CD1350F5D0CF91249F4E6F /* Pods-iinaTests.debug.xcconfig */,
+				8D9E62A906F1FDCDF8DA03EA /* Pods-iinaTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -574,48 +574,48 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		84EB1ED51D2F51D3004FA5A1 /* mpvx */ = {
+		84EB1ED51D2F51D3004FA5A1 /* iina */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84EB1EF91D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "mpvx" */;
+			buildConfigurationList = 84EB1EF91D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "iina" */;
 			buildPhases = (
-				A8436D0F062F56A14DC8166A /* [CP] Check Pods Manifest.lock */,
+				36C8205F8EFBC756D3D0BD69 /* [CP] Check Pods Manifest.lock */,
 				84EB1ED21D2F51D3004FA5A1 /* Sources */,
 				84EB1ED31D2F51D3004FA5A1 /* Frameworks */,
 				84EB1ED41D2F51D3004FA5A1 /* Resources */,
 				84817C991DBDF57C00CC2279 /* Copy Dylibs */,
 				84817CE81DBE2E3200CC2279 /* Copy Lua Scripts */,
 				84E745DA1DFDE9C600588DED /* Copy Configs */,
-				39F390C48490810A95AAB798 /* [CP] Embed Pods Frameworks */,
-				D7649DE65F9AB702CE8501C9 /* [CP] Copy Pods Resources */,
+				DFB4E0114268BBFB043A6097 /* [CP] Embed Pods Frameworks */,
+				A0E37C793B5311ABDB5D863A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = mpvx;
+			name = iina;
 			productName = mpvx;
-			productReference = 84EB1ED61D2F51D3004FA5A1 /* NazoPlayer.app */;
+			productReference = 84EB1ED61D2F51D3004FA5A1 /* IINA.app */;
 			productType = "com.apple.product-type.application";
 		};
-		84EB1EE41D2F51D3004FA5A1 /* mpvxTests */ = {
+		84EB1EE41D2F51D3004FA5A1 /* iinaTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84EB1EFC1D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "mpvxTests" */;
+			buildConfigurationList = 84EB1EFC1D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "iinaTests" */;
 			buildPhases = (
-				09E168D08FA87C07190913AE /* [CP] Check Pods Manifest.lock */,
+				CFA5E92273B348A2660BDF44 /* [CP] Check Pods Manifest.lock */,
 				84EB1EE11D2F51D3004FA5A1 /* Sources */,
 				84EB1EE21D2F51D3004FA5A1 /* Frameworks */,
 				84EB1EE31D2F51D3004FA5A1 /* Resources */,
-				78CBBA0AC8422BA966B44447 /* [CP] Embed Pods Frameworks */,
-				D5EEB5F9941B38A84A117651 /* [CP] Copy Pods Resources */,
+				750E5EBB5A479FF9BFEE129A /* [CP] Embed Pods Frameworks */,
+				65411536F1C87E025E0301B3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				84EB1EE71D2F51D3004FA5A1 /* PBXTargetDependency */,
 			);
-			name = mpvxTests;
+			name = iinaTests;
 			productName = mpvxTests;
-			productReference = 84EB1EE51D2F51D3004FA5A1 /* mpvxTests.xctest */;
+			productReference = 84EB1EE51D2F51D3004FA5A1 /* iinaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -639,7 +639,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 84EB1ED11D2F51D3004FA5A1 /* Build configuration list for PBXProject "mpvx" */;
+			buildConfigurationList = 84EB1ED11D2F51D3004FA5A1 /* Build configuration list for PBXProject "iina" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -652,8 +652,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84EB1ED51D2F51D3004FA5A1 /* mpvx */,
-				84EB1EE41D2F51D3004FA5A1 /* mpvxTests */,
+				84EB1ED51D2F51D3004FA5A1 /* iina */,
+				84EB1EE41D2F51D3004FA5A1 /* iinaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -688,7 +688,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		09E168D08FA87C07190913AE /* [CP] Check Pods Manifest.lock */ = {
+		36C8205F8EFBC756D3D0BD69 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -703,7 +703,22 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		39F390C48490810A95AAB798 /* [CP] Embed Pods Frameworks */ = {
+		65411536F1C87E025E0301B3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iinaTests/Pods-iinaTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		750E5EBB5A479FF9BFEE129A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -715,25 +730,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mpvx/Pods-mpvx-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iinaTests/Pods-iinaTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		78CBBA0AC8422BA966B44447 /* [CP] Embed Pods Frameworks */ = {
+		A0E37C793B5311ABDB5D863A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mpvxTests/Pods-mpvxTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iina/Pods-iina-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A8436D0F062F56A14DC8166A /* [CP] Check Pods Manifest.lock */ = {
+		CFA5E92273B348A2660BDF44 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -748,34 +763,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D5EEB5F9941B38A84A117651 /* [CP] Copy Pods Resources */ = {
+		DFB4E0114268BBFB043A6097 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mpvxTests/Pods-mpvxTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D7649DE65F9AB702CE8501C9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mpvx/Pods-mpvx-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iina/Pods-iina-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -849,7 +849,7 @@
 /* Begin PBXTargetDependency section */
 		84EB1EE71D2F51D3004FA5A1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 84EB1ED51D2F51D3004FA5A1 /* mpvx */;
+			target = 84EB1ED51D2F51D3004FA5A1 /* iina */;
 			targetProxy = 84EB1EE61D2F51D3004FA5A1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -958,13 +958,13 @@
 		};
 		84EB1EFA1D2F51D3004FA5A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F276FEF5F54ED58912B668DF /* Pods-mpvx.debug.xcconfig */;
+			baseConfigurationReference = A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/libmpv/include";
-				INFOPLIST_FILE = mpvx/Info.plist;
+				INFOPLIST_FILE = iina/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/libmpv/lib",
@@ -972,9 +972,9 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.mpvx;
-				PRODUCT_NAME = NazoPlayer;
-				SWIFT_OBJC_BRIDGING_HEADER = "mpvx/mpvx-Bridging-Header.h";
+				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
+				PRODUCT_NAME = IINA;
+				SWIFT_OBJC_BRIDGING_HEADER = "iina/mpvx-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -982,13 +982,13 @@
 		};
 		84EB1EFB1D2F51D3004FA5A1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8D4EBE1369EC1EB3D9B332C4 /* Pods-mpvx.release.xcconfig */;
+			baseConfigurationReference = 61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/libmpv/include";
-				INFOPLIST_FILE = mpvx/Info.plist;
+				INFOPLIST_FILE = iina/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/libmpv/lib",
@@ -996,9 +996,9 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-DRELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.mpvx;
-				PRODUCT_NAME = NazoPlayer;
-				SWIFT_OBJC_BRIDGING_HEADER = "mpvx/mpvx-Bridging-Header.h";
+				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
+				PRODUCT_NAME = IINA;
+				SWIFT_OBJC_BRIDGING_HEADER = "iina/mpvx-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1006,39 +1006,39 @@
 		};
 		84EB1EFD1D2F51D3004FA5A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8D6D9C231698CD96933BCE69 /* Pods-mpvxTests.debug.xcconfig */;
+			baseConfigurationReference = 81CD1350F5D0CF91249F4E6F /* Pods-iinaTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = mpvxTests/Info.plist;
+				INFOPLIST_FILE = iinaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvxTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mpvx.app/Contents/MacOS/mpvx";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iina.app/Contents/MacOS/iina";
 			};
 			name = Debug;
 		};
 		84EB1EFE1D2F51D3004FA5A1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD3BB419211322D1B24B9844 /* Pods-mpvxTests.release.xcconfig */;
+			baseConfigurationReference = 8D9E62A906F1FDCDF8DA03EA /* Pods-iinaTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = mpvxTests/Info.plist;
+				INFOPLIST_FILE = iinaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.colliderli.mpvxTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mpvx.app/Contents/MacOS/mpvx";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iina.app/Contents/MacOS/iina";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		84EB1ED11D2F51D3004FA5A1 /* Build configuration list for PBXProject "mpvx" */ = {
+		84EB1ED11D2F51D3004FA5A1 /* Build configuration list for PBXProject "iina" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84EB1EF71D2F51D3004FA5A1 /* Debug */,
@@ -1047,7 +1047,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84EB1EF91D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "mpvx" */ = {
+		84EB1EF91D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "iina" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84EB1EFA1D2F51D3004FA5A1 /* Debug */,
@@ -1056,7 +1056,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84EB1EFC1D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "mpvxTests" */ = {
+		84EB1EFC1D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "iinaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84EB1EFD1D2F51D3004FA5A1 /* Debug */,

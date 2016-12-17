@@ -1,13 +1,13 @@
 platform :osx, '10.11'
 
-target 'mpvx' do
+target 'iina' do
   
   use_frameworks!
 
-  # Pods for mpvx
+  # Pods for iina
   pod 'MASPreferences'
 
-  target 'mpvxTests' do
+  target 'iinaTests' do
     inherit! :search_paths
     # Pods for testing
   end

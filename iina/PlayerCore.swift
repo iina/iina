@@ -101,18 +101,29 @@ class PlayerCore: NSObject {
     mpvController.command(.seek, args: ["\(percent)", seekMode])
   }
 
-  func seek(relativeSecond: Double, exact: Bool = false) {
-    // for each file , try use exact and record interval first
-    if !triedUsingExactSeekForCurrentFile {
-      mpvController.recordedSeekTimeListener = { interval in
-        // if seek time < 0.05, then can use exact
-        self.useExactSeekForCurrentFile = interval < 0.05
+  func seek(relativeSecond: Double, option: Preference.SeekOption) {
+    switch option {
+      
+    case .relative:
+      mpvController.command(.seek, args: ["\(relativeSecond)", "relative"])
+      
+    case .extract:
+      mpvController.command(.seek, args: ["\(relativeSecond)", "relative+exact"])
+      
+    case .auto:
+      // for each file , try use exact and record interval first
+      if !triedUsingExactSeekForCurrentFile {
+        mpvController.recordedSeekTimeListener = { interval in
+          // if seek time < 0.05, then can use exact
+          self.useExactSeekForCurrentFile = interval < 0.05
+        }
+        mpvController.needRecordSeekTime = true
+        triedUsingExactSeekForCurrentFile = true
       }
-      mpvController.needRecordSeekTime = true
-      triedUsingExactSeekForCurrentFile = true
+      let seekMode = useExactSeekForCurrentFile ? "relative+exact" : "relative"
+      mpvController.command(.seek, args: ["\(relativeSecond)", seekMode])
+
     }
-    let seekMode = useExactSeekForCurrentFile ? "relative+exact" : "relative"
-    mpvController.command(.seek, args: ["\(relativeSecond)", seekMode])
   }
   
   func seek(absoluteSecond: Double) {

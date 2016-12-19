@@ -55,6 +55,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   var scrollDirection: ScrollDirection?
   
+  private var useExtrackSeek: Preference.SeekOption!
+  
+  /** A list of observed preferences */
+  
+  private let observedPrefKeys: [String] = [
+    Preference.Key.themeMaterial,
+    Preference.Key.showChapterPos,
+    Preference.Key.useExactSeek
+  ]
+  
   /** The view embedded in sidebar */
   enum SideBarViewType {
     case hidden  // indicating sidebar is hidden. Should only be used by sideBarStatus
@@ -176,9 +186,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     timePreviewWhenSeek.isHidden = true
     playSlider.addTrackingArea(NSTrackingArea(rect: playSlider.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 1]))
     
+    useExtrackSeek = Preference.SeekOption(rawValue: ud.integer(forKey: Preference.Key.useExactSeek))
+    
     // add user default observers
-    ud.addObserver(self, forKeyPath: Preference.Key.themeMaterial, options: .new, context: nil)
-    ud.addObserver(self, forKeyPath: Preference.Key.showChapterPos, options: .new, context: nil)
+    observedPrefKeys.forEach { key in
+      ud.addObserver(self, forKeyPath: key, options: .new, context: nil)
+    }
     
     // move to center and make main
     w.center()
@@ -188,7 +201,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   func windowWillClose(_ notification: Notification) {
-    ud.removeObserver(self, forKeyPath: Preference.Key.themeMaterial)
+    observedPrefKeys.forEach { key in
+      ud.removeObserver(self, forKeyPath: key)
+    }
   }
   
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -204,6 +219,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case Preference.Key.showChapterPos:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
         (playSlider.cell as! PlaySliderCell).drawChapters = newValue
+      }
+      
+    case Preference.Key.useExactSeek:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+          useExtrackSeek = Preference.SeekOption(rawValue: newValue)
       }
     
     default:
@@ -325,9 +345,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       scrollDirection = nil
     }
     // handle the value
-    let seekFactor = 0.05
+    let seekFactor = 0.01
     if scrollDirection == .horizontal {
-       playerCore.seek(relativeSecond: seekFactor * Double(event.scrollingDeltaX), exact: true)
+      playerCore.seek(relativeSecond: seekFactor * Double(event.scrollingDeltaX), option: useExtrackSeek)
     } else if scrollDirection == .vertical {
       let newVolume = playerCore.info.volume - Int(event.scrollingDeltaY)
       playerCore.setVolume(newVolume)
@@ -788,7 +808,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case .playlist:
       break
     case .seek:
-      playerCore.seek(relativeSecond: left ? -10 : 10)
+      playerCore.seek(relativeSecond: left ? -10 : 10, option: .relative)
       break
     }
   }
@@ -876,9 +896,9 @@ extension MainWindowController {
   
   @IBAction func menuStep(_ sender: NSMenuItem) {
     if sender.tag == 0 { // -> 5s
-      playerCore.seek(relativeSecond: 5)
+      playerCore.seek(relativeSecond: 5, option: .relative)
     } else if sender.tag == 1 { // <- 5s
-      playerCore.seek(relativeSecond: -5)
+      playerCore.seek(relativeSecond: -5, option: .relative)
     }
   }
   
@@ -1286,7 +1306,7 @@ extension MainWindowController: NSTouchBarDelegate {
   
   func touchBarSeekAction(_ sender: NSButton) {
     let sec = sender.tag
-    playerCore.seek(relativeSecond: Double(sec))
+    playerCore.seek(relativeSecond: Double(sec), option: .relative)
   }
   
   func touchBarSkipAction(_ sender: NSButton) {

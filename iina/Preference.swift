@@ -103,6 +103,12 @@ struct Preference {
     case mediumLight
   }
   
+  enum SeekOption: Int {
+    case relative = 0
+    case extract
+    case auto
+  }
+  
   static let defaultPreference:[String : Any] = [
     Key.controlBarPositionHorizontal: Float(0.5),
     Key.controlBarPositionVertical: Float(0.1),
@@ -129,7 +135,7 @@ struct Preference {
     Key.userDefinedConfDir: "",
     
     Key.quitWhenNoOpenedWindow: true,
-    Key.useExactSeek: true,
+    Key.useExactSeek: SeekOption.relative.rawValue,
     Key.screenshotFolder: "~/Pictures/ScreenShots",
     Key.screenshotIncludeSubtitle: true,
     Key.screenshotFormat: "png",

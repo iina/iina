@@ -27,7 +27,7 @@ class PrefControlViewController: NSViewController {
   
   var toolbarItemImage: NSImage {
     get {
-      return NSImage(named: NSImageNamePreferencesGeneral)!
+      return NSImage(named: "toolbar_control")!
     }
   }
   

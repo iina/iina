@@ -10,11 +10,11 @@ import Cocoa
 import MASPreferences
 
 
-class PreferenceGeneralViewController: NSViewController, MASPreferencesViewController {
+class PrefGeneralViewController: NSViewController, MASPreferencesViewController {
   
   override var nibName: String? {
     get {
-      return "PreferenceGeneralViewController"
+      return "PrefGeneralViewController"
     }
   }
   

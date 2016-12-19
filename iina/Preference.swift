@@ -118,7 +118,7 @@ struct Preference {
     Key.showChapterPos: false,
     Key.useMediaKeys: true,
     
-    Key.inputConfigs: [],
+    Key.inputConfigs: [:],
     Key.currentInputConfigName: "Default",
     
     Key.enableAdvancedSettings: false,

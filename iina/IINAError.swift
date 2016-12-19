@@ -7,6 +7,11 @@
 //
 
 import Foundation
-enum Error {
+
+enum IINAError: Error {
+  
+  case gifCannotCreateDestination
+  case gifCannotConvertImage
+  case gifCannotFinalize
   
 }

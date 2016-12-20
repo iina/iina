@@ -177,6 +177,7 @@ class VideoView: NSOpenGLView {
     // delete framebuffer
     glDeleteTextures(1, &texture)
     glDeleteFramebuffers(1, &fbo)
+    
   }
 
   deinit {

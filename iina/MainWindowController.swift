@@ -56,13 +56,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var scrollDirection: ScrollDirection?
   
   private var useExtrackSeek: Preference.SeekOption!
+  private var relativeSeekAmount: Int = 3
+  private var arrowBtnFunction: Preference.ArrowButtonAction!
   
   /** A list of observed preferences */
   
   private let observedPrefKeys: [String] = [
     Preference.Key.themeMaterial,
     Preference.Key.showChapterPos,
-    Preference.Key.useExactSeek
+    Preference.Key.useExactSeek,
+    Preference.Key.relativeSeekAmount,
+    Preference.Key.arrowButtonAction
   ]
   
   /** The view embedded in sidebar */
@@ -187,6 +191,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     playSlider.addTrackingArea(NSTrackingArea(rect: playSlider.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 1]))
     
     useExtrackSeek = Preference.SeekOption(rawValue: ud.integer(forKey: Preference.Key.useExactSeek))
+    arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: Preference.Key.arrowButtonAction))
     
     // add user default observers
     observedPrefKeys.forEach { key in
@@ -224,6 +229,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case Preference.Key.useExactSeek:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
           useExtrackSeek = Preference.SeekOption(rawValue: newValue)
+      }
+      
+    case Preference.Key.relativeSeekAmount:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        relativeSeekAmount = newValue.constrain(min: 1, max: 5)
+      }
+      
+    case Preference.Key.arrowButtonAction:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)
       }
     
     default:
@@ -345,7 +360,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       scrollDirection = nil
     }
     // handle the value
-    let seekFactor = 0.01
+    let seekFactor = AppData.seekAmountMap[relativeSeekAmount]!
     if scrollDirection == .horizontal {
       playerCore.seek(relativeSecond: seekFactor * Double(event.scrollingDeltaX), option: useExtrackSeek)
     } else if scrollDirection == .vertical {
@@ -766,8 +781,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   /** handle action of both left and right arrow button */
   func arrowButtonAction(left: Bool) {
-    let actionType = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: Preference.Key.arrowButtonAction))
-    switch actionType! {
+    switch arrowBtnFunction! {
+      
     case .speed:
       if left {
         if speedValueIndex >= 5 {
@@ -805,11 +820,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         updatePlayButtonState(NSOnState)
         playerCore.togglePause(false)
       }
+      
     case .playlist:
-      break
+      playerCore.mpvController.command(left ? .playlistPrev : .playlistNext)
+      
     case .seek:
       playerCore.seek(relativeSecond: left ? -10 : 10, option: .relative)
-      break
+      
     }
   }
   

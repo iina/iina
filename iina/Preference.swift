@@ -81,7 +81,11 @@ struct Preference {
     static let useUserDefinedConfDir = "useUserDefinedConfDir"
     static let userDefinedConfDir = "userDefinedConfDir"
     
+    /** Seek option */
     static let useExactSeek = "useExactSeek"
+    
+    /** Seek speed for non-exact relative seek (Int, 1~5) */
+    static let relativeSeekAmount = "relativeSeekAmount"
     
     static let screenshotFolder = "screenShotFolder"
     static let screenshotIncludeSubtitle = "screenShotIncludeSubtitle"
@@ -136,6 +140,8 @@ struct Preference {
     
     Key.quitWhenNoOpenedWindow: true,
     Key.useExactSeek: SeekOption.relative.rawValue,
+    Key.relativeSeekAmount: 2,
+    
     Key.screenshotFolder: "~/Pictures/ScreenShots",
     Key.screenshotIncludeSubtitle: true,
     Key.screenshotFormat: "png",

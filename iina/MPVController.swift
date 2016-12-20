@@ -307,7 +307,8 @@ class MPVController: NSObject {
       playerCore.syncUI(.time)
       
     case MPV_EVENT_PAUSE, MPV_EVENT_UNPAUSE:
-      playerCore.syncUI(.playButton)
+      // deprecated
+      break
       
     case MPV_EVENT_CHAPTER_CHANGE:
       playerCore.syncUI(.time)
@@ -394,6 +395,7 @@ class MPVController: NSObject {
           playerCore.info.isPaused = data
         }
       }
+      playerCore.syncUI(.playButton)
       
     case MPVOption.Video.deinterlace:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {

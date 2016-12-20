@@ -23,6 +23,14 @@ struct AppData {
   
   static let rotations: [Int] = [0, 90, 180, 270]
   
+  /** Seek amount */
+  static let seekAmountMap: [Int: Double] = [
+    1: 0.001,
+    2: 0.01,
+    3: 0.1,
+    4: 0.5
+  ]
+  
   static let encodings = CharEncoding.list
   
   static let userInputConfFolder = "input_conf"

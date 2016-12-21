@@ -41,7 +41,8 @@ class PlayerCore: NSObject {
       Utility.log("Error: empty file path or url")
       return
     }
-    Utility.log("Open File \(path!)")
+    // Utility.log("Open File \(path!)")
+    info.isPaused = false
     info.currentURL = url!
     mainWindow.showWindow(nil)
     // Send load file command

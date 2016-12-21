@@ -13,6 +13,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="dockMenu" destination="fxS-xv-Jb2" id="YdT-kw-qmk"/>
                 <outlet property="menuController" destination="cyK-tE-xgA" id="6U6-oJ-g0G"/>
             </connections>
         </customObject>
@@ -442,5 +443,16 @@
                 <outlet property="volumeIndicator" destination="iQF-1S-9EK" id="grJ-Ta-Elr"/>
             </connections>
         </customObject>
+        <menu id="fxS-xv-Jb2">
+            <items>
+                <menuItem title="Open..." id="Kby-lQ-HCW">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="openFile:" target="Voe-Tx-rLC" id="Zlo-gp-oIk"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="80.5" y="397.5"/>
+        </menu>
     </objects>
 </document>

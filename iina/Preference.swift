@@ -11,8 +11,9 @@ import Cocoa
 struct Preference {
   
   struct Key {
-    /** Window position. (float) */
-    // static let windowPosition = "windowPosition"
+    
+    /** Record recent files */
+    static let recordRecentFiles = "recordRecentFiles"
     
     /** Horizontal positon of control bar. (float, 0 - 1) */
     static let controlBarPositionHorizontal = "controlBarPositionHorizontal"
@@ -114,6 +115,7 @@ struct Preference {
   }
   
   static let defaultPreference:[String : Any] = [
+    Key.recordRecentFiles: true,
     Key.controlBarPositionHorizontal: Float(0.5),
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,
@@ -138,7 +140,7 @@ struct Preference {
     Key.useUserDefinedConfDir: false,
     Key.userDefinedConfDir: "",
     
-    Key.quitWhenNoOpenedWindow: true,
+    Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
     Key.relativeSeekAmount: 2,
     

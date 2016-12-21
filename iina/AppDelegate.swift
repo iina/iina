@@ -26,6 +26,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }()
   
   @IBOutlet weak var menuController: MenuController!
+  
+  @IBOutlet weak var dockMenu: NSMenu!
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     UserDefaults.standard.register(defaults: Preference.defaultPreference)
@@ -57,7 +59,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return true
   }
   
-  // MARK: - Menu
+  // MARK: - Dock menu
+  
+  func applicationDockMenu(_ sender: NSApplication) -> NSMenu? {
+    return dockMenu
+  }
+  
+  // MARK: - Menu actions
   
   @IBAction func openFile(_ sender: NSMenuItem) {
     let panel = NSOpenPanel()
@@ -69,6 +77,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     panel.allowsMultipleSelection = false
     if panel.runModal() == NSFileHandlingPanelOKButton {
       if let url = panel.url {
+        if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) {
+          NSDocumentController.shared().noteNewRecentDocumentURL(url)
+        }
         playerCore.openFile(url)
       }
     }

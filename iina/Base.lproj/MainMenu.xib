@@ -77,8 +77,8 @@
                                     <action selector="openFile:" target="Voe-Tx-rLC" id="Aev-CZ-Gfe"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Open URL..." id="0m7-3r-twH">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Open URL..." keyEquivalent="O" id="0m7-3r-twH">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             </menuItem>
                             <menuItem title="Open Recent" id="tXI-mr-wws">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -126,11 +126,13 @@
                             </menuItem>
                             <menuItem title="Jump to..." keyEquivalent="j" id="2id-wn-xsC"/>
                             <menuItem isSeparatorItem="YES" id="k1k-sG-1C3"/>
-                            <menuItem title="Screenshot" keyEquivalent="s" id="AoP-K6-Kb5"/>
-                            <menuItem title="Goto Screenshot Folder" keyEquivalent="S" id="lj0-Oo-7nB">
+                            <menuItem title="Screenshot" keyEquivalent="S" id="AoP-K6-Kb5">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Advanced Screenshot..." id="CKi-JE-yLT">
+                            <menuItem title="Goto Screenshot Folder" id="lj0-Oo-7nB">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Advanced Screenshot..." hidden="YES" id="CKi-JE-yLT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="pEu-eU-Er6"/>

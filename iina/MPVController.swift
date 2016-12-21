@@ -234,6 +234,22 @@ class MPVController: NSObject {
     return str
   }
   
+  /** get filter. only "af" or "vf" is supported for name */
+  func getFilter(_ name: String) -> [MPVFilter]{
+    var result: [MPVFilter] = []
+    var node = mpv_node()
+    mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node)
+    guard let filters = (try? MPVNode.parse(node)!) as? [[String: Any?]] else { return result }
+    filters.forEach { f in
+      let filter = MPVFilter(name: f["name"] as! String,
+                             label: f["label"] as? String,
+                             params: f["params"] as? [String: String])
+      result.append(filter)
+    }
+    mpv_free_node_contents(&node)
+    return result
+  }
+  
   // MARK: - Events
   
   // Read event and handle it async
@@ -511,7 +527,6 @@ class MPVController: NSObject {
       Utility.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
     }
   }
-  
-  
+
   
 }

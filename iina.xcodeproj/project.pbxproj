@@ -20,6 +20,7 @@
 		844DE1BF1D3E2B9900272589 /* MPVEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DE1BE1D3E2B9900272589 /* MPVEvent.swift */; };
 		8450403D1E0A9EE20079C194 /* InspectorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450403B1E0A9EE20079C194 /* InspectorWindowController.swift */; };
 		8450403E1E0A9EE20079C194 /* InspectorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8450403C1E0A9EE20079C194 /* InspectorWindowController.xib */; };
+		845040401E0ACADD0079C194 /* MPVNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450403F1E0ACADD0079C194 /* MPVNode.swift */; };
 		8452DD851D3B956D008A543A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452DD841D3B956D008A543A /* Preference.swift */; };
 		8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD881D3CB4EF008A543A /* vertexShader.glsl */; };
 		8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD8A1D3CB519008A543A /* fragmentShader.glsl */; };
@@ -184,6 +185,7 @@
 		844DE1BE1D3E2B9900272589 /* MPVEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVEvent.swift; sourceTree = "<group>"; };
 		8450403B1E0A9EE20079C194 /* InspectorWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorWindowController.swift; sourceTree = "<group>"; };
 		8450403C1E0A9EE20079C194 /* InspectorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InspectorWindowController.xib; sourceTree = "<group>"; };
+		8450403F1E0ACADD0079C194 /* MPVNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVNode.swift; sourceTree = "<group>"; };
 		8452DD841D3B956D008A543A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		8452DD881D3CB4EF008A543A /* vertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertexShader.glsl; sourceTree = "<group>"; };
 		8452DD8A1D3CB519008A543A /* fragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragmentShader.glsl; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				8476440B1D48F63D004F6DF5 /* OSDMessage.swift */,
 				84A0BA8F1D2F8D4100BC8DA1 /* IINAError.swift */,
 				84AABE8A1DBF634600D138FD /* CharEncoding.swift */,
+				8450403F1E0ACADD0079C194 /* MPVNode.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */,
 				8476440C1D48F63D004F6DF5 /* OSDMessage.swift in Sources */,
 				84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */,
+				845040401E0ACADD0079C194 /* MPVNode.swift in Sources */,
 				84795C3A1E083EE30059A648 /* PrefControlViewController.swift in Sources */,
 				8487BEC11D744FA800FD17B0 /* FlippedView.swift in Sources */,
 				84795C371E0825AD0059A648 /* GifGenerator.swift in Sources */,

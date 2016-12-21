@@ -10,6 +10,8 @@ import Foundation
 
 enum IINAError: Error {
   
+  case unsupportedMPVNodeFormat(UInt32)
+  
   case gifCannotCreateDestination
   case gifCannotConvertImage
   case gifCannotFinalize

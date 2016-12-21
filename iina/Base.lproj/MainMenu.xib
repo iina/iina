@@ -440,6 +440,7 @@
                 <outlet property="subFont" destination="rme-fr-5rr" id="fU3-xp-rD9"/>
                 <outlet property="subMenu" destination="EKp-Qx-4Mn" id="BeV-rZ-uYC"/>
                 <outlet property="subTrackMenu" destination="16p-PA-x34" id="yGc-SC-6rd"/>
+                <outlet property="videoFilters" destination="PyY-pR-jz7" id="QII-9H-SQV"/>
                 <outlet property="videoMenu" destination="HyV-fh-RgO" id="NtM-fw-Y8Q"/>
                 <outlet property="videoTrack" destination="j8P-Gb-HR7" id="hho-ys-R88"/>
                 <outlet property="videoTrackMenu" destination="FTu-CF-O0R" id="Iw7-fm-Ryz"/>

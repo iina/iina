@@ -1196,6 +1196,10 @@ extension MainWindowController {
     (NSApp.delegate as! AppDelegate).inspector.showWindow(self)
   }
   
+  @IBAction func showVideoFilters(_ sender: AnyObject) {
+    playerCore.mpvController.getFilter("vf")
+  }
+  
 }
 
 // MARK: - Touch bar

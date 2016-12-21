@@ -55,6 +55,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var mirror: NSMenuItem!
   @IBOutlet weak var flip: NSMenuItem!
   @IBOutlet weak var deinterlace: NSMenuItem!
+  @IBOutlet weak var videoFilters: NSMenuItem!
   //Audio
   @IBOutlet weak var audioMenu: NSMenu!
   @IBOutlet weak var quickSettingsAudio: NSMenuItem!
@@ -159,6 +160,9 @@ class MenuController: NSObject, NSMenuDelegate {
     
     // -- deinterlace
     deinterlace.action = #selector(MainWindowController.menuToggleDeinterlace(_:))
+    
+    // -- filter
+    videoFilters.action = #selector(MainWindowController.showVideoFilters(_:))
     
     // Audio menu
     

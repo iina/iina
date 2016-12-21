@@ -86,6 +86,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var subFont: NSMenuItem!
   // Window
   @IBOutlet weak var customTouchBar: NSMenuItem!
+  @IBOutlet weak var inspector: NSMenuItem!
   
   
   
@@ -212,6 +213,8 @@ class MenuController: NSObject, NSMenuDelegate {
     } else {
       customTouchBar.isHidden = true
     }
+    
+    inspector.action = #selector(MainWindowController.menuShowInspector(_:))
     
   }
   

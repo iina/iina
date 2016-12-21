@@ -18,6 +18,8 @@
 		843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843FFD4C1D5DAA01001F3A44 /* RoundedTextFieldCell.swift */; };
 		844D72EF1E056E1400522E5E /* input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = 84E745D81DFDE8C100588DED /* input.conf */; };
 		844DE1BF1D3E2B9900272589 /* MPVEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DE1BE1D3E2B9900272589 /* MPVEvent.swift */; };
+		8450403D1E0A9EE20079C194 /* InspectorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450403B1E0A9EE20079C194 /* InspectorWindowController.swift */; };
+		8450403E1E0A9EE20079C194 /* InspectorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8450403C1E0A9EE20079C194 /* InspectorWindowController.xib */; };
 		8452DD851D3B956D008A543A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452DD841D3B956D008A543A /* Preference.swift */; };
 		8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD881D3CB4EF008A543A /* vertexShader.glsl */; };
 		8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD8A1D3CB519008A543A /* fragmentShader.glsl */; };
@@ -180,6 +182,8 @@
 		8434BAAC1D5E4546003BECF2 /* SlideUpButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideUpButton.swift; sourceTree = "<group>"; };
 		843FFD4C1D5DAA01001F3A44 /* RoundedTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldCell.swift; sourceTree = "<group>"; };
 		844DE1BE1D3E2B9900272589 /* MPVEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVEvent.swift; sourceTree = "<group>"; };
+		8450403B1E0A9EE20079C194 /* InspectorWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorWindowController.swift; sourceTree = "<group>"; };
+		8450403C1E0A9EE20079C194 /* InspectorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InspectorWindowController.xib; sourceTree = "<group>"; };
 		8452DD841D3B956D008A543A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		8452DD881D3CB4EF008A543A /* vertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertexShader.glsl; sourceTree = "<group>"; };
 		8452DD8A1D3CB519008A543A /* fragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragmentShader.glsl; sourceTree = "<group>"; };
@@ -389,6 +393,8 @@
 				84E745D31DFDB27B00588DED /* PlaylistDragDestView.swift */,
 				84D377641D7370EE007F7396 /* ChapterTableCellView.swift */,
 				845FB0C61D39462E00C011E0 /* ControlBarView.swift */,
+				8450403B1E0A9EE20079C194 /* InspectorWindowController.swift */,
+				8450403C1E0A9EE20079C194 /* InspectorWindowController.xib */,
 				84D377691D74163B007F7396 /* Video */,
 				84D377681D7413D8007F7396 /* Accessories */,
 				8452DD7F1D3A1F2A008A543A /* Preference */,
@@ -620,6 +626,7 @@
 				84795C3B1E083EE30059A648 /* PrefControlViewController.xib in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */,
+				8450403E1E0A9EE20079C194 /* InspectorWindowController.xib in Resources */,
 				8460FBAA1D6497490081841B /* PlaylistViewController.xib in Resources */,
 				84ED9A001E009C8100A5159B /* PrefAdvancedViewController.xib in Resources */,
 				847C62CB1DC13CDA00E1EF16 /* PrefGeneralViewController.xib in Resources */,
@@ -709,6 +716,7 @@
 				847644081D48B413004F6DF5 /* MPVOption.swift in Sources */,
 				84817C961DBDCA5F00CC2279 /* SettingsListCellView.swift in Sources */,
 				8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */,
+				8450403D1E0A9EE20079C194 /* InspectorWindowController.swift in Sources */,
 				8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */,
 				84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */,
 				84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */,

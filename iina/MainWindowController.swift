@@ -1192,6 +1192,10 @@ extension MainWindowController {
     
   }
   
+  @IBAction func menuShowInspector(_ sender: AnyObject) {
+    (NSApp.delegate as! AppDelegate).inspector.showWindow(self)
+  }
+  
 }
 
 // MARK: - Touch bar

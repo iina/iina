@@ -16,6 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
   lazy var fontPicker: FontPickerWindowController = FontPickerWindowController()
   
+  lazy var inspector: InspectorWindowController = InspectorWindowController()
+  
   lazy var preferenceWindowController: NSWindowController = {
     return MASPreferencesWindowController(viewControllers: [
       PrefGeneralViewController(),

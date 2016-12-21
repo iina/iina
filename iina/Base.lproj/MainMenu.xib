@@ -410,6 +410,7 @@
                 <outlet property="increaseTextSize" destination="XHu-Dl-Vq2" id="XXf-48-N36"/>
                 <outlet property="increaseVolume" destination="Wbq-vt-hzX" id="EaU-fj-ClV"/>
                 <outlet property="increaseVolumeSlightly" destination="c6Y-0e-vgf" id="cpM-mR-RCr"/>
+                <outlet property="inspector" destination="bwz-r0-peR" id="dES-1R-XAY"/>
                 <outlet property="jumpTo" destination="2id-wn-xsC" id="wyH-9I-JHJ"/>
                 <outlet property="jumpToBegin" destination="2Ya-3g-1hy" id="atq-PX-lIt"/>
                 <outlet property="loadExternalSub" destination="k6x-hf-ATi" id="lVp-BV-A2C"/>

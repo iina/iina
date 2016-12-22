@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="CropSettingsViewController" customModule="IINA" customModuleProvider="target">
+            <connections>
+                <outlet property="cropRectLabel" destination="hsz-Wv-zHe" id="zIf-Sm-Rqc"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="500" height="60"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EC9-NQ-gwl">
+                    <rect key="frame" x="14" y="37" width="34" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="4rt-rj-YXJ"/>
+                        <constraint firstAttribute="height" constant="17" id="Pp5-qS-eKN"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Crop" id="6tX-fN-Gm2">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yrf-Aq-Gy6">
+                    <rect key="frame" x="14" y="8" width="284" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="daU-3D-oN9"/>
+                        <constraint firstAttribute="width" constant="280" id="qxp-bm-iSs"/>
+                    </constraints>
+                    <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="bQc-2s-1MS">
+                        <font key="font" metaFont="system"/>
+                        <segments>
+                            <segment label="4:3" width="49"/>
+                            <segment label="16:9" width="49" selected="YES" tag="1"/>
+                            <segment label="16:10" width="48"/>
+                            <segment label="5:4"/>
+                            <segment label="3:2"/>
+                            <segment label="21:9"/>
+                        </segments>
+                    </segmentedCell>
+                    <connections>
+                        <action selector="PredefinedAspectValueAction:" target="-2" id="6cE-bP-meY"/>
+                    </connections>
+                </segmentedControl>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsz-Wv-zHe">
+                    <rect key="frame" x="54" y="37" width="244" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="8Hk-sR-8dp"/>
+                        <constraint firstAttribute="width" constant="240" id="kDV-FQ-J33"/>
+                    </constraints>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="Fgl-Cs-eEh">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sHe-JW-Elk">
+                    <rect key="frame" x="427" y="3" width="63" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="51" id="DKK-TJ-mvf"/>
+                        <constraint firstAttribute="height" constant="18" id="Pt7-22-dpN"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eu5-yH-hHg">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="doneBtnAction:" target="-2" id="y1L-6G-8iz"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="hsz-Wv-zHe" firstAttribute="leading" secondItem="EC9-NQ-gwl" secondAttribute="trailing" constant="10" id="FVG-qD-NKx"/>
+                <constraint firstItem="yrf-Aq-Gy6" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="Gnw-C5-HOK"/>
+                <constraint firstAttribute="bottom" secondItem="sHe-JW-Elk" secondAttribute="bottom" constant="10" id="Wx3-kf-ke1"/>
+                <constraint firstItem="EC9-NQ-gwl" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="6" id="a0X-o8-wnM"/>
+                <constraint firstAttribute="trailing" secondItem="sHe-JW-Elk" secondAttribute="trailing" constant="16" id="b0k-Ij-6vn"/>
+                <constraint firstItem="EC9-NQ-gwl" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="gic-Fg-ZHv"/>
+                <constraint firstItem="hsz-Wv-zHe" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="9" id="rNb-6O-bub"/>
+                <constraint firstAttribute="bottom" secondItem="yrf-Aq-Gy6" secondAttribute="bottom" constant="10" id="ugR-VB-Oeh"/>
+            </constraints>
+            <point key="canvasLocation" x="66" y="111"/>
+        </customView>
+    </objects>
+</document>

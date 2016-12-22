@@ -12,6 +12,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   let ud: UserDefaults = UserDefaults.standard
   let minSize = NSMakeSize(500, 300)
+  let bottomViewHeight: CGFloat = 60
   
   lazy var playerCore = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
@@ -20,6 +21,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var isDragging: Bool = false
   
   var isInFullScreen: Bool = false
+  var isInInteractiveMode: Bool = false
   
   // FIXME: might use another obj to handle slider?
   var isMouseInWindow: Bool = false
@@ -91,6 +93,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   @IBOutlet weak var sideBarRightConstraint: NSLayoutConstraint!
   @IBOutlet weak var sideBarWidthConstraint: NSLayoutConstraint!
+  @IBOutlet weak var bottomBarBottomConstraint: NSLayoutConstraint!
   
   /** The quick setting window */
   lazy var quickSettingView: QuickSettingViewController = {
@@ -103,6 +106,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let playListView = PlaylistViewController()
     playListView.mainWindow = self
     return playListView
+  }()
+
+  lazy var cropSettingsView: CropSettingsViewController = {
+    let cropView = CropSettingsViewController()
+    cropView.mainWindow = self
+    return cropView
   }()
   
   var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
@@ -120,6 +129,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var settingsButton: NSButton!
   @IBOutlet weak var playlistButton: NSButton!
   @IBOutlet weak var sideBarView: NSVisualEffectView!
+  @IBOutlet weak var bottomView: NSVisualEffectView!
   
   @IBOutlet weak var rightLabel: NSTextField!
   @IBOutlet weak var leftLabel: NSTextField!
@@ -188,6 +198,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
     timePreviewWhenSeek.isHidden = true
+    bottomView.isHidden = true
+    
     playSlider.addTrackingArea(NSTrackingArea(rect: playSlider.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 1]))
     
     useExtrackSeek = Preference.SeekOption(rawValue: ud.integer(forKey: Preference.Key.useExactSeek))
@@ -257,15 +269,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   override func keyDown(with event: NSEvent) {
     window!.makeFirstResponder(window!.contentView)
-    
-    playerCore.execKeyCode(Utility.mpvKeyCode(from: event))
+    if !isInInteractiveMode {
+      playerCore.execKeyCode(Utility.mpvKeyCode(from: event))
+    }
   }
   
   /** record mouse pos on mouse down */
   override func mouseDown(with event: NSEvent) {
-    if controlBar.isDragging {
-      return
-    }
+    guard !controlBar.isDragging else { return }
     mousePosRelatedToWindow = NSEvent.mouseLocation()
     mousePosRelatedToWindow!.x -= window!.frame.origin.x
     mousePosRelatedToWindow!.y -= window!.frame.origin.y
@@ -274,9 +285,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** move window while dragging */
   override func mouseDragged(with event: NSEvent) {
     isDragging = true
-    if controlBar.isDragging {
-      return
-    }
+    guard !controlBar.isDragging else { return }
     if mousePosRelatedToWindow != nil {
       let currentLocation = NSEvent.mouseLocation()
       let newOrigin = CGPoint(
@@ -303,6 +312,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   override func mouseEntered(with event: NSEvent) {
+    guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
       Utility.log("No data for tracking area")
       return
@@ -321,6 +331,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   override func mouseExited(with event: NSEvent) {
+    guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
       Utility.log("No data for tracking area")
       return
@@ -340,6 +351,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   override func mouseMoved(with event: NSEvent) {
+    guard !isInInteractiveMode else { return }
     let mousePos = playSlider.convert(event.locationInWindow, from: nil)
     if isMouseInSlider {
       updateTimeLabel(mousePos.x)
@@ -350,6 +362,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   override func scrollWheel(with event: NSEvent) {
+    guard !isInInteractiveMode else { return }
     if event.phase.contains(.began) {
       if event.scrollingDeltaX != 0 {
         scrollDirection = .horizontal
@@ -371,6 +384,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
+    guard !isInInteractiveMode else { return }
     guard window != nil else { return }
     let scale = recognizer.magnification * 10
     let newWidth = window!.frame.width + scale
@@ -408,8 +422,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowDidResize(_ notification: Notification) {
     guard let w = window else { return }
     let wSize = w.frame.size, cSize = controlBar.frame.size
+    
     // update videoview size if in full screen, since aspect ratio may changed
     if (isInFullScreen) {
+      
       let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
       let tryHeight = wSize.width / aspectRatio
       if tryHeight <= wSize.height {
@@ -423,8 +439,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         let xOffset = (wSize.width - targetWidth) / 2
         videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
       }
+      
     } else {
-      videoView.setFrameSize(w.contentView!.frame.size)
+      
+      let frame = NSRect(x: 0, y: 0, width: w.contentView!.frame.width, height: w.contentView!.frame.height)
+
+      if isInInteractiveMode {
+        let interactiveModeFrame = videoViewSizeInInteractiveMode(frame)
+        cropSettingsView.cropBoxView.videoRect = interactiveModeFrame
+        videoView.frame = interactiveModeFrame
+      } else {
+        videoView.frame = frame
+      }
       
     }
     // update control bar position
@@ -438,7 +464,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   // MARK: - Control UI
   
-  func hideUIAndCurdor() {
+  func hideUIAndCursor() {
     // don't hide UI when dragging control bar
     if controlBar.isDragging {
       return
@@ -495,7 +521,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     // create new timer
     let timeout = ud.float(forKey: Preference.Key.controlBarAutoHideTimeout)
-    hideControlTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideUIAndCurdor), userInfo: nil, repeats: false)
+    hideControlTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideUIAndCursor), userInfo: nil, repeats: false)
   }
   
   func updateTitle() {
@@ -556,7 +582,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
-  private func hideSideBar(_ after: @escaping () -> Void = {}) {
+  func hideSideBar(_ after: @escaping () -> Void = {}) {
     let currWidth = sideBarWidthConstraint.constant
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
@@ -590,6 +616,51 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     // add back titlebar view to fade-able views
     self.fadeableViews.append(titleBarView)
+  }
+  
+  func enterInteractiveMode() {
+    playerCore.togglePause(true)
+    isInInteractiveMode = true
+    hideUI()
+    bottomView.isHidden = false
+    bottomView.addSubview(cropSettingsView.view)
+    quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": cropSettingsView.view])
+    
+    let newFrame = videoViewSizeInInteractiveMode(videoView.frame)
+    
+    window!.contentView!.addSubview(cropSettingsView.cropBoxView)
+    cropSettingsView.cropBoxView.videoRect = newFrame
+    cropSettingsView.cropBoxView.isHidden = true
+    quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": cropSettingsView.cropBoxView])
+    
+    NSAnimationContext.runAnimationGroup({ (context) in
+      context.duration = 0.2
+      context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+      bottomBarBottomConstraint.animator().constant = 0
+      videoView.animator().frame = newFrame
+    }) {
+      self.cropSettingsView.cropBoxView.isHidden = false
+    }
+    
+  }
+  
+  func exitInteractiveMode(_ then: @escaping () -> Void) {
+    playerCore.togglePause(false)
+    isInInteractiveMode = false
+    cropSettingsView.cropBoxView.isHidden = true
+    NSAnimationContext.runAnimationGroup({ (context) in
+      context.duration = 0.2
+      context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+      bottomBarBottomConstraint.animator().constant = -bottomViewHeight
+      videoView.animator().frame = NSMakeRect(0, 0, window!.contentView!.frame.width, window!.contentView!.frame.height)
+    }) {
+      self.cropSettingsView.cropBoxView.removeFromSuperview()
+      self.sideBarStatus = .hidden
+      self.bottomView.subviews.removeAll()
+      self.bottomView.isHidden = true
+      self.showUI()
+      then()
+    }
   }
   
   /** Display time label when mouse over slider */
@@ -676,6 +747,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let originalVideoSize = NSSize(width: width, height: height)
     w.aspectRatio = originalVideoSize
     videoView.videoSize = originalVideoSize
+    cropSettingsView.cropBoxView.actualSize = originalVideoSize
     
     if isInFullScreen {
       self.windowDidResize(Notification(name: .NSWindowDidResize))
@@ -889,6 +961,22 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     block(w.standardWindowButton(.zoomButton))
   }
   
+  private func quickConstrants(_ constrants: [String], _ views: [String: NSView]) {
+    constrants.forEach { c in
+      let cc = NSLayoutConstraint.constraints(withVisualFormat: c, options: [], metrics: nil, views: views)
+      NSLayoutConstraint.activate(cc)
+    }
+  }
+  
+  private func videoViewSizeInInteractiveMode(_ rect: NSRect) -> NSRect {
+    // 60 for bottom bar and 24*2 for top and bottom margin
+    let newHeight = rect.height - 108
+    let newWidth = newHeight * rect.width / rect.height
+    return NSMakeRect(rect.origin.x + (rect.width - newWidth) / 2,
+                      rect.origin.y + 84,
+                      newWidth, newHeight)
+  }
+  
 }
 
 // MARK: - Menu Actions
@@ -1078,9 +1166,9 @@ extension MainWindowController {
       retinaSize.size.width *= sizeMap[size]
       retinaSize.size.height *= sizeMap[size]
       if retinaSize.size.width > screenFrame.size.width || retinaSize.size.height > screenFrame.size.height {
-        newFrame = w.frame.centeredResize(to: w.frame.size.shrink(toSize: screenFrame.size)).constrain(in: screenFrame)
+        newFrame = w.frame.centeredResize(to: w.frame.size.shrink(toSize: screenFrame.size)).makeLocate(in: screenFrame)
       } else {
-        newFrame = w.frame.centeredResize(to: retinaSize.size).constrain(in: screenFrame)
+        newFrame = w.frame.centeredResize(to: retinaSize.size).makeLocate(in: screenFrame)
       }
     // fit screen
     case 3:
@@ -1197,7 +1285,7 @@ extension MainWindowController {
   }
   
   @IBAction func showVideoFilters(_ sender: AnyObject) {
-    playerCore.mpvController.getFilter("vf")
+    // playerCore.mpvController.getFilter("vf")
   }
   
 }

@@ -317,6 +317,7 @@ class PlayerCore: NSObject {
   }
   
   func addVideoFilter(_ filter: MPVFilter) {
+    print(filter.stringFormat)
     mpvController.command(.vf, args: ["add", filter.stringFormat])
   }
   

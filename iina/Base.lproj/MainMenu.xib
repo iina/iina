@@ -203,8 +203,8 @@
                             <menuItem title="Deinterlace" id="yHI-7D-OaI">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="kNp-jq-01c"/>
-                            <menuItem title="Video Filters..." id="PyY-pR-jz7">
+                            <menuItem isSeparatorItem="YES" hidden="YES" id="kNp-jq-01c"/>
+                            <menuItem title="Video Filters..." hidden="YES" id="PyY-pR-jz7">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
@@ -246,8 +246,8 @@
                             <menuItem title="Reset Audio Delay" id="H3d-jR-YCr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="MVW-Uu-gB1"/>
-                            <menuItem title="Audio Filters..." id="8Zh-hU-Cc4">
+                            <menuItem isSeparatorItem="YES" hidden="YES" id="MVW-Uu-gB1"/>
+                            <menuItem title="Audio Filters..." hidden="YES" id="8Zh-hU-Cc4">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
@@ -456,7 +456,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="80.5" y="397.5"/>
+            <point key="canvasLocation" x="19" y="679"/>
         </menu>
     </objects>
 </document>

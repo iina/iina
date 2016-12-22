@@ -18,6 +18,10 @@ extension NSSlider {
   }
 }
 
+func - (lhs: NSPoint, rhs: NSPoint) -> NSPoint {
+  return NSMakePoint(lhs.x - rhs.x, lhs.y - rhs.y)
+}
+
 extension NSSize {
   
   var aspect: CGFloat {
@@ -103,7 +107,7 @@ extension NSRect {
                   height: newSize.height)
   }
   
-  func constrain(in biggerRect: NSRect) -> NSRect {
+  func makeLocate(in biggerRect: NSRect) -> NSRect {
     var newX = origin.x, newY = origin.y
     if newX < 0 {
       newX = 0
@@ -118,6 +122,34 @@ extension NSRect {
       newY = biggerRect.height - size.height
     }
     return NSRect(x: newX, y: newY, width: size.width, height: size.height)
+  }
+  
+  func constrain(in biggerRect: NSRect) -> NSRect {
+    var newX = origin.x, newY = origin.y
+    var newW = width, newH = height
+    if newX < biggerRect.origin.x {
+      newX = biggerRect.origin.x
+    }
+    if newY < biggerRect.origin.y {
+      newY = biggerRect.origin.y
+    }
+    if newX + size.width > biggerRect.origin.x + biggerRect.width {
+      newW = biggerRect.origin.x + biggerRect.width - newX
+    }
+    if newY + size.height > biggerRect.origin.y + biggerRect.height {
+      newH = biggerRect.origin.y + biggerRect.height - newY
+    }
+    return NSRect(x: newX, y: newY, width: newW, height: newH)
+  }
+}
+
+extension NSPoint {
+  func constrain(in rect: NSRect) -> NSPoint {
+    let l = rect.origin.x
+    let r = l + rect.width
+    let t = rect.origin.y
+    let b = t + rect.height
+    return NSMakePoint(x.constrain(min: l, max: r), y.constrain(min: t, max: b))
   }
 }
 
@@ -147,6 +179,15 @@ extension Int {
   }
   
   func constrain(min: Int, max: Int) -> Int {
+    var value = self
+    if self < min { value = min }
+    if self > max { value = max }
+    return value
+  }
+}
+
+extension CGFloat {
+  func constrain(min: CGFloat, max: CGFloat) -> CGFloat {
     var value = self
     if self < min { value = min }
     if self > max { value = max }

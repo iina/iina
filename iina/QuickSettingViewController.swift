@@ -367,6 +367,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     slider?.intValue = 0
   }
   
+  @IBAction func cropBtnAcction(_ sender: AnyObject) {
+    mainWindow.hideSideBar {
+      self.mainWindow.enterInteractiveMode()
+    }
+  }
   
   // Audio tab
   

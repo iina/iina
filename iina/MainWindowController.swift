@@ -445,9 +445,25 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let frame = NSRect(x: 0, y: 0, width: w.contentView!.frame.width, height: w.contentView!.frame.height)
 
       if isInInteractiveMode {
-        let interactiveModeFrame = videoViewSizeInInteractiveMode(frame)
+        
+        let origWidth = CGFloat(playerCore.info.videoWidth!)
+        let origHeight = CGFloat(playerCore.info.videoHeight!)
+        let currentCrop: NSRect
+        
+        if let cropFilter = playerCore.info.cropFilter {
+          let params = cropFilter.params!
+          let x = CGFloat(Float(params["x"]!)!)
+          let y = CGFloat(Float(params["y"]!)!)
+          let w = CGFloat(Float(params["w"]!)!)
+          let h = CGFloat(Float(params["h"]!)!)
+          currentCrop = NSMakeRect(x, y, w, h)
+        } else {
+          currentCrop = NSMakeRect(0, 0, origWidth, origHeight)
+        }
+        let interactiveModeFrame = videoViewSizeInInteractiveMode(frame, currentCrop: currentCrop, originalSize: NSMakeSize(origWidth, origHeight)).1
         cropSettingsView.cropBoxView.videoRect = interactiveModeFrame
         videoView.frame = interactiveModeFrame
+        
       } else {
         videoView.frame = frame
       }
@@ -626,10 +642,47 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     bottomView.addSubview(cropSettingsView.view)
     quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": cropSettingsView.view])
     
-    let newFrame = videoViewSizeInInteractiveMode(videoView.frame)
+    // get original frame
+    let origWidth = CGFloat(playerCore.info.videoWidth!)
+    let origHeight = CGFloat(playerCore.info.videoHeight!)
+    let currWidth = CGFloat(playerCore.info.displayWidth!)
+    let currHeight = CGFloat(playerCore.info.displayHeight!)
+    let winFrame = window!.frame
+    let newFrame: NSRect
+    let newVideoFrame: NSRect
+    let currentCrop: NSRect
+    
+    if let cropFilter = playerCore.info.cropFilter {
+      let params = cropFilter.params!
+      let x = CGFloat(Float(params["x"]!)!)
+      let y = CGFloat(Float(params["y"]!)!)
+      let w = CGFloat(Float(params["w"]!)!)
+      let h = CGFloat(Float(params["h"]!)!)
+      currentCrop = NSMakeRect(x, y, w, h)
+    } else {
+      currentCrop = NSMakeRect(0, 0, origWidth, origHeight)
+    }
+    
+    // if cropped, try get real window size
+    if origWidth != currWidth || origHeight != currHeight {
+      print("need set window size")
+      let scale = origWidth == currWidth ? winFrame.width / currWidth : winFrame.height / currHeight
+      let realFrame = NSRect(origin: winFrame.origin, size: NSMakeSize(scale * origWidth, scale * origHeight))
+      
+      window!.aspectRatio = realFrame.size
+      window!.setFrame(realFrame, display: true, animate: false)
+      (newVideoFrame, newFrame) = videoViewSizeInInteractiveMode(realFrame, currentCrop: currentCrop, originalSize: NSMakeSize(origWidth, origHeight))
+    } else {
+      (newVideoFrame, newFrame) = videoViewSizeInInteractiveMode(videoView.frame, currentCrop: currentCrop, originalSize: NSMakeSize(origWidth, origHeight))
+    }
+    
     
     window!.contentView!.addSubview(cropSettingsView.cropBoxView)
-    cropSettingsView.cropBoxView.videoRect = newFrame
+
+    cropSettingsView.cropBoxView.selectedRect = currentCrop
+    cropSettingsView.cropBoxView.actualSize = NSMakeSize(origWidth, origHeight)
+    cropSettingsView.cropBoxView.videoRect = newVideoFrame
+    cropSettingsView.updateSelectedBoxInBoxView(cropSettingsView.cropBoxView.selectedRect)
     cropSettingsView.cropBoxView.isHidden = true
     quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": cropSettingsView.cropBoxView])
     
@@ -747,7 +800,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let originalVideoSize = NSSize(width: width, height: height)
     w.aspectRatio = originalVideoSize
     videoView.videoSize = originalVideoSize
-    cropSettingsView.cropBoxView.actualSize = originalVideoSize
     
     if isInFullScreen {
       self.windowDidResize(Notification(name: .NSWindowDidResize))
@@ -968,13 +1020,23 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
-  private func videoViewSizeInInteractiveMode(_ rect: NSRect) -> NSRect {
+  private func videoViewSizeInInteractiveMode(_ rect: NSRect, currentCrop: NSRect, originalSize: NSSize) -> (NSRect, NSRect) {
     // 60 for bottom bar and 24*2 for top and bottom margin
-    let newHeight = rect.height - 108
-    let newWidth = newHeight * rect.width / rect.height
-    return NSMakeRect(rect.origin.x + (rect.width - newWidth) / 2,
-                      rect.origin.y + 84,
-                      newWidth, newHeight)
+    
+    // size if no crop
+    let nh = rect.height - 108
+    let nw = nh * rect.width / rect.height
+    let nx = (rect.width - nw) / 2
+    let ny: CGFloat = 84
+    
+    // cropped size, originalSize should have same aspect as rect
+    
+    let cw = nw * (currentCrop.width / originalSize.width)
+    let ch = nh * (currentCrop.height / originalSize.height)
+    let cx = nx + nw * (currentCrop.origin.x / originalSize.width)
+    let cy = ny + nh * (currentCrop.origin.y / originalSize.height)
+    
+    return (NSMakeRect(nx, ny, nw, nh), NSMakeRect(cx, cy, cw, ch))
   }
   
 }

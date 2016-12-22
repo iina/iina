@@ -20,6 +20,7 @@ class CropSettingsViewController: NSViewController {
   }()
 
   @IBOutlet weak var cropRectLabel: NSTextField!
+  @IBOutlet weak var predefinedAspectSegment: NSSegmentedControl!
   
   private var cropx: Int = 0
   private var cropy: Int = 0
@@ -28,7 +29,10 @@ class CropSettingsViewController: NSViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do view setup here.
+  }
+  
+  override func viewDidAppear() {
+    predefinedAspectSegment.selectedSegment = -1
   }
   
   func updateSelectedRect() {
@@ -41,33 +45,40 @@ class CropSettingsViewController: NSViewController {
     cropRectLabel.stringValue = "Origin(\(cropx), \(cropy))  Size(\(cropw) \u{d7} \(croph))"
   }
   
+  func updateSelectedBoxInBoxView(_ selectedSize: NSRect) {
+    let actualSize = cropBoxView.actualSize
+    let videoRect = cropBoxView.videoRect
+    
+    let xScale =  videoRect.width / actualSize.width
+    let yScale =  videoRect.height / actualSize.height
+    
+    let ix = selectedSize.origin.x * xScale + videoRect.origin.x
+    let iy = selectedSize.origin.y * xScale + videoRect.origin.y
+    let iw = selectedSize.width * xScale
+    let ih = selectedSize.height * yScale
+    
+    cropBoxView.boxRect = NSMakeRect(ix, iy, iw, ih)
+  }
+  
   @IBAction func doneBtnAction(_ sender: AnyObject) {
     mainWindow.exitInteractiveMode {
-      self.mainWindow.playerCore.addVideoFilter(MPVFilter.crop(w: self.cropw, h: self.croph, x: self.cropx, y: self.cropy))
+      let filter = MPVFilter.crop(w: self.cropw, h: self.croph, x: self.cropx, y: self.cropy)
+      self.mainWindow.playerCore.setCropFilter(filter)
     }
   }
   
-  @IBAction func PredefinedAspectValueAction(_ sender: NSSegmentedControl) {
+  @IBAction func predefinedAspectValueAction(_ sender: NSSegmentedControl) {
     guard let str = sender.label(forSegment: sender.selectedSegment) else { return }
     guard let aspect = Aspect(string: str) else { return }
     
     let actualSize = cropBoxView.actualSize
-    let videoRect = cropBoxView.videoRect
     let croppedSize = actualSize.crop(withAspect: aspect)
     let cropped = NSMakeRect((actualSize.width - croppedSize.width) / 2,
                              (actualSize.height - croppedSize.height) / 2,
                              croppedSize.width,
                              croppedSize.height)
     
-    let xScale =  videoRect.width / actualSize.width
-    let yScale =  videoRect.height / actualSize.height
-    
-    let ix = cropped.origin.x * xScale + videoRect.origin.x
-    let iy = cropped.origin.y * xScale + videoRect.origin.y
-    let iw = cropped.width * xScale
-    let ih = cropped.height * yScale
-    
-    cropBoxView.boxRect = NSMakeRect(ix, iy, iw, ih)
+    updateSelectedBoxInBoxView(cropped)
     cropBoxView.updateCursorRects()
     cropBoxView.needsDisplay = true
   }

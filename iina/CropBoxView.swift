@@ -15,11 +15,7 @@ class CropBoxView: NSView {
   
   weak var settingsViewController: CropSettingsViewController!
   
-  var actualSize: NSSize = NSSize() {
-    didSet {
-      selectedRect = NSMakeRect(0, 0, actualSize.width, actualSize.height)
-    }
-  }
+  var actualSize: NSSize = NSSize()
   
   var videoRect: NSRect = NSRect() {
     didSet {

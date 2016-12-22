@@ -316,8 +316,15 @@ class PlayerCore: NSObject {
     syncUITime()
   }
   
+  func setCropFilter(_ filter: MPVFilter) {
+    if let prevFilter = info.cropFilter {
+      removeVideoFiler(prevFilter)
+    }
+    addVideoFilter(filter)
+    info.cropFilter = filter
+  }
+  
   func addVideoFilter(_ filter: MPVFilter) {
-    print(filter.stringFormat)
     mpvController.command(.vf, args: ["add", filter.stringFormat])
   }
   

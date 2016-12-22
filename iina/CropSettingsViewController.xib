@@ -8,6 +8,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="CropSettingsViewController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="cropRectLabel" destination="hsz-Wv-zHe" id="zIf-Sm-Rqc"/>
+                <outlet property="predefinedAspectSegment" destination="yrf-Aq-Gy6" id="qfe-5F-cIv"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -46,7 +47,7 @@
                         </segments>
                     </segmentedCell>
                     <connections>
-                        <action selector="PredefinedAspectValueAction:" target="-2" id="6cE-bP-meY"/>
+                        <action selector="predefinedAspectValueAction:" target="-2" id="Fzw-EP-cyv"/>
                     </connections>
                 </segmentedControl>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsz-Wv-zHe">

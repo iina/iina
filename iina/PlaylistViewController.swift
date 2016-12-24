@@ -66,8 +66,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
     }
   }
   
-  override func viewDidDisappear() {
-    // nofifications
+  override func viewDidAppear() {
+    reloadData(playlist: true, chapters: true)
+  }
+  
+  deinit {
     NotificationCenter.default.removeObserver(self.playlistChangeObserver!)
   }
   

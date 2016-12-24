@@ -29,6 +29,8 @@ class MPVController: NSObject {
   let observeProperties: [String: mpv_format] = [
     MPVProperty.trackListCount: MPV_FORMAT_INT64,
     MPVProperty.chapterListCount: MPV_FORMAT_INT64,
+    MPVProperty.vf: MPV_FORMAT_NONE,
+    MPVProperty.af: MPV_FORMAT_NONE,
     MPVOption.PlaybackControl.pause: MPV_FORMAT_FLAG,
     MPVOption.Video.deinterlace: MPV_FORMAT_FLAG,
     MPVOption.Audio.mute: MPV_FORMAT_FLAG,
@@ -175,7 +177,7 @@ class MPVController: NSObject {
   // MARK: Command & property
   
   // Send arbitrary mpv command.
-  func command(_ command: MPVCommand, args: [String?] = []) {
+  func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {
     if args.count > 0 && args.last == nil {
       Utility.fatal("Command do not need a nil suffix")
       return
@@ -185,8 +187,13 @@ class MPVController: NSObject {
     strArgs.insert(command.rawValue, at: 0)
     strArgs.append(nil)
     var cargs = strArgs.map { $0.flatMap { UnsafePointer<Int8>(strdup($0)) } }
-    self.e(mpv_command(self.mpv, &cargs))
+    let returnValue = mpv_command(self.mpv, &cargs)
     for ptr in cargs { free(UnsafeMutablePointer(mutating: ptr)) }
+    if checkError {
+      e(returnValue)
+    } else if let cb = returnValueCallback {
+      cb(returnValue)
+    }
   }
   
   // Set property
@@ -257,7 +264,13 @@ class MPVController: NSObject {
     Utility.assert(name == MPVProperty.vf || name == MPVProperty.af, "setFilters() do not support \(name)!")
     
     let str = filters.map { $0.stringFormat }.joined(separator: ",")
-    command(.vf, args: ["set", str])
+    command(.vf, args: ["set", str], checkError: false) { returnValue in
+      if returnValue < 0 {
+        Utility.showAlert(message: "Error occured when setting filters. Please check your parameter format.")
+        // reload data in filter setting window
+        NotificationCenter.default.post(Notification(name: Constants.Noti.vfChanged))
+      }
+    }
   }
   
   // MARK: - Events
@@ -517,6 +530,12 @@ class MPVController: NSObject {
       
     case MPVProperty.trackListCount:
       NotificationCenter.default.post(Notification(name: Constants.Noti.tracklistChanged))
+      
+    case MPVProperty.vf:
+      NotificationCenter.default.post(Notification(name: Constants.Noti.vfChanged))
+      
+    case MPVProperty.af:
+      NotificationCenter.default.post(Notification(name: Constants.Noti.afChanged))
       
     // ignore following
       

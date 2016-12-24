@@ -16,6 +16,8 @@ class FilterWindowController: NSWindowController {
   
   var filters: [MPVFilter] = []
   
+  var observers: [NSObjectProtocol] = []
+  
   @IBOutlet weak var tableView: NSTableView!
   
   override func windowDidLoad() {
@@ -24,12 +26,49 @@ class FilterWindowController: NSWindowController {
     filters = PlayerCore.shared.mpvController.getFilters("vf")
     tableView.delegate = self
     tableView.dataSource = self
+    
+    // notifications
+    let vfChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.vfChanged, object: nil, queue: OperationQueue.main) { _ in
+      self.reloadTable()
+    }
+    observers.append(vfChangeObserver)
   }
   
   func reloadTable() {
     filters = PlayerCore.shared.mpvController.getFilters("vf")
     tableView.reloadData()
   }
+  
+  func setFilters() {
+    PlayerCore.shared.mpvController.setFilters("vf", filters: filters)
+  }
+  
+  deinit {
+    observers.forEach {
+      NotificationCenter.default.removeObserver($0)
+    }
+  }
+  
+  // MARK: - IBAction
+  
+  @IBAction func addFilterAction(_ sender: AnyObject) {
+    let _ = Utility.quickPromptPanel(messageText: "Add filter", informativeText: "Please enter a filter string in format of MPV's vf command.") { str in
+      if let newFilter = MPVFilter(rawString: str) {
+        filters.append(newFilter)
+        setFilters()
+      } else {
+        Utility.showAlert(message: "Filter is not in correct format!")
+      }
+    }
+  }
+  
+  @IBAction func removeFilterAction(_ sender: AnyObject) {
+    if tableView.selectedRow >= 0 {
+      filters.remove(at: tableView.selectedRow)
+      setFilters()
+    }
+  }
+  
   
 }
 
@@ -54,7 +93,9 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
     
     if let newFilter = MPVFilter(rawString: value) {
       filters[row] = newFilter
-      PlayerCore.shared.mpvController.setFilters("vf", filters: filters)
+      setFilters()
+    } else {
+      Utility.showAlert(message: "Filter is not in correct format!")
     }
   }
   

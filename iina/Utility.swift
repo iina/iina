@@ -89,6 +89,7 @@ class Utility {
     panel.accessoryView = input
     panel.addButton(withTitle: "OK")
     panel.addButton(withTitle: "Cancel")
+    panel.window.initialFirstResponder = input
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
       ok(input.stringValue)

@@ -110,7 +110,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     updateControlsState()
   }
   
-  override func viewDidDisappear() {
+  deinit {
     observers.forEach {
       NotificationCenter.default.removeObserver($0)
     }

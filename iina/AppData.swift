@@ -62,8 +62,10 @@ struct Constants {
     static let exitFullScreen = "Exit Full Screen"
   }
   struct Noti {
-    static let playlistChanged = Notification.Name("MVXPlaylistChanged")
-    static let tracklistChanged = Notification.Name("MVXTracklistChanged")
+    static let playlistChanged = Notification.Name("IINAPlaylistChanged")
+    static let tracklistChanged = Notification.Name("IINATracklistChanged")
+    static let vfChanged = Notification.Name("IINAVfChanged")
+    static let afChanged = Notification.Name("IINAAfChanged")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)

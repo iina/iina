@@ -35,7 +35,7 @@ class CropSettingsViewController: NSViewController {
     predefinedAspectSegment.selectedSegment = -1
   }
   
-  func updateSelectedRect() {
+  func selectedRectUpdated() {
     guard mainWindow.isInInteractiveMode else { return }
     let rect = cropBoxView.selectedRect
     cropx = Int(rect.origin.x)
@@ -44,21 +44,7 @@ class CropSettingsViewController: NSViewController {
     croph = Int(rect.height)
     cropRectLabel.stringValue = "Origin(\(cropx), \(cropy))  Size(\(cropw) \u{d7} \(croph))"
   }
-  
-  func updateSelectedBoxInBoxView(_ selectedSize: NSRect) {
-    let actualSize = cropBoxView.actualSize
-    let videoRect = cropBoxView.videoRect
-    
-    let xScale =  videoRect.width / actualSize.width
-    let yScale =  videoRect.height / actualSize.height
-    
-    let ix = selectedSize.origin.x * xScale + videoRect.origin.x
-    let iy = selectedSize.origin.y * xScale + videoRect.origin.y
-    let iw = selectedSize.width * xScale
-    let ih = selectedSize.height * yScale
-    
-    cropBoxView.boxRect = NSMakeRect(ix, iy, iw, ih)
-  }
+
   
   @IBAction func doneBtnAction(_ sender: AnyObject) {
     mainWindow.exitInteractiveMode {
@@ -78,9 +64,7 @@ class CropSettingsViewController: NSViewController {
                              croppedSize.width,
                              croppedSize.height)
     
-    updateSelectedBoxInBoxView(cropped)
-    cropBoxView.updateCursorRects()
-    cropBoxView.needsDisplay = true
+    cropBoxView.setSelectedRect(to: cropped)
   }
   
     

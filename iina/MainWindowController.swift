@@ -460,8 +460,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         } else {
           currentCrop = NSMakeRect(0, 0, origWidth, origHeight)
         }
-        let interactiveModeFrame = videoViewSizeInInteractiveMode(frame, currentCrop: currentCrop, originalSize: NSMakeSize(origWidth, origHeight)).1
-        cropSettingsView.cropBoxView.videoRect = interactiveModeFrame
+        
+        // if is in interactive mode
+        let videoRect: NSRect, interactiveModeFrame: NSRect
+        (videoRect, interactiveModeFrame) = videoViewSizeInInteractiveMode(frame, currentCrop: currentCrop, originalSize: NSMakeSize(origWidth, origHeight))
+        cropSettingsView.cropBoxView.resized(with: videoRect)
         videoView.frame = interactiveModeFrame
         
       } else {
@@ -645,13 +648,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // get original frame
     let origWidth = CGFloat(playerCore.info.videoWidth!)
     let origHeight = CGFloat(playerCore.info.videoHeight!)
+    let origSize = NSMakeSize(origWidth, origHeight)
     let currWidth = CGFloat(playerCore.info.displayWidth!)
     let currHeight = CGFloat(playerCore.info.displayHeight!)
     let winFrame = window!.frame
-    let newFrame: NSRect
-    let newVideoFrame: NSRect
+    let videoViewFrame: NSRect
+    let videoRect: NSRect
     let currentCrop: NSRect
     
+    // get current cropped region
     if let cropFilter = playerCore.info.cropFilter {
       let params = cropFilter.params!
       let x = CGFloat(Float(params["x"]!)!)
@@ -665,32 +670,30 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     
     // if cropped, try get real window size
     if origWidth != currWidth || origHeight != currHeight {
-      print("need set window size")
       let scale = origWidth == currWidth ? winFrame.width / currWidth : winFrame.height / currHeight
-      let realFrame = NSRect(origin: winFrame.origin, size: NSMakeSize(scale * origWidth, scale * origHeight))
+      let winFrameWithOrigVideoSize = NSRect(origin: winFrame.origin, size: NSMakeSize(scale * origWidth, scale * origHeight))
       
-      window!.aspectRatio = realFrame.size
-      window!.setFrame(realFrame, display: true, animate: false)
-      (newVideoFrame, newFrame) = videoViewSizeInInteractiveMode(realFrame, currentCrop: currentCrop, originalSize: NSMakeSize(origWidth, origHeight))
+      window!.aspectRatio = winFrameWithOrigVideoSize.size
+      window!.setFrame(winFrameWithOrigVideoSize, display: true, animate: false)
+      (videoRect, videoViewFrame) = videoViewSizeInInteractiveMode(winFrameWithOrigVideoSize, currentCrop: currentCrop, originalSize: origSize)
     } else {
-      (newVideoFrame, newFrame) = videoViewSizeInInteractiveMode(videoView.frame, currentCrop: currentCrop, originalSize: NSMakeSize(origWidth, origHeight))
+      (videoRect, videoViewFrame) = videoViewSizeInInteractiveMode(videoView.frame, currentCrop: currentCrop, originalSize: origSize)
     }
     
-    
+    // add crop setting view
     window!.contentView!.addSubview(cropSettingsView.cropBoxView)
-
     cropSettingsView.cropBoxView.selectedRect = currentCrop
-    cropSettingsView.cropBoxView.actualSize = NSMakeSize(origWidth, origHeight)
-    cropSettingsView.cropBoxView.videoRect = newVideoFrame
-    cropSettingsView.updateSelectedBoxInBoxView(cropSettingsView.cropBoxView.selectedRect)
+    cropSettingsView.cropBoxView.actualSize = origSize
+    cropSettingsView.cropBoxView.resized(with: videoRect)
     cropSettingsView.cropBoxView.isHidden = true
     quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": cropSettingsView.cropBoxView])
     
+    // show crop settings view
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       bottomBarBottomConstraint.animator().constant = 0
-      videoView.animator().frame = newFrame
+      videoView.animator().frame = videoViewFrame
     }) {
       self.cropSettingsView.cropBoxView.isHidden = false
     }

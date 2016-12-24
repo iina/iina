@@ -203,8 +203,8 @@
                             <menuItem title="Deinterlace" id="yHI-7D-OaI">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" hidden="YES" id="kNp-jq-01c"/>
-                            <menuItem title="Video Filters..." hidden="YES" id="PyY-pR-jz7">
+                            <menuItem isSeparatorItem="YES" id="kNp-jq-01c"/>
+                            <menuItem title="Video Filters..." id="PyY-pR-jz7">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>

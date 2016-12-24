@@ -162,7 +162,7 @@ class MenuController: NSObject, NSMenuDelegate {
     deinterlace.action = #selector(MainWindowController.menuToggleDeinterlace(_:))
     
     // -- filter
-    videoFilters.action = #selector(MainWindowController.showVideoFilters(_:))
+    videoFilters.action = #selector(AppDelegate.showVideoFilterWindow(_:))
     
     // Audio menu
     

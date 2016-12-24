@@ -18,6 +18,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
   lazy var inspector: InspectorWindowController = InspectorWindowController()
   
+  lazy var vfWindow: FilterWindowController = FilterWindowController()
+  
   lazy var preferenceWindowController: NSWindowController = {
     return MASPreferencesWindowController(viewControllers: [
       PrefGeneralViewController(),
@@ -96,6 +98,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
   @IBAction func showPreferences(_ sender: AnyObject) {
     preferenceWindowController.showWindow(self)
+  }
+  
+  @IBAction func showVideoFilterWindow(_ sender: AnyObject) {
+    vfWindow.showWindow(self)
   }
   
   

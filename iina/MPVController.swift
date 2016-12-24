@@ -234,8 +234,10 @@ class MPVController: NSObject {
     return str
   }
   
-  /** get filter. only "af" or "vf" is supported for name */
-  func getFilter(_ name: String) -> [MPVFilter]{
+  /** Get filter. only "af" or "vf" is supported for name */
+  func getFilters(_ name: String) -> [MPVFilter] {
+    Utility.assert(name == MPVProperty.vf || name == MPVProperty.af, "getFilters() do not support \(name)!")
+
     var result: [MPVFilter] = []
     var node = mpv_node()
     mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node)
@@ -248,6 +250,14 @@ class MPVController: NSObject {
     }
     mpv_free_node_contents(&node)
     return result
+  }
+  
+  /** Set filter. only "af" or "vf" is supported for name */
+  func setFilters(_ name: String, filters: [MPVFilter]) {
+    Utility.assert(name == MPVProperty.vf || name == MPVProperty.af, "setFilters() do not support \(name)!")
+    
+    let str = filters.map { $0.stringFormat }.joined(separator: ",")
+    command(.vf, args: ["set", str])
   }
   
   // MARK: - Events

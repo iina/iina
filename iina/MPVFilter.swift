@@ -17,6 +17,8 @@ class MPVFilter: NSObject {
     case mirror = "mirror"
   }
   
+  // MARK: - Static filters
+  
   static func crop(w: Int?, h: Int?, x: Int?, y: Int?) -> MPVFilter {
     let f = MPVFilter(name: "crop", label: nil,
                       params: ["w": w?.toStr() ?? "", "h": h?.toStr() ?? "", "x": x?.toStr() ?? "", "y": y?.toStr() ?? ""])
@@ -31,17 +33,23 @@ class MPVFilter: NSObject {
     return MPVFilter(name: "mirror", label: nil, params: nil)
   }
   
+  // MARK: - Members
+  
   var type: FilterType?
   var name: String
   var label: String?
   var params: [String: String]?
+  var rawParamString: String?
   
   var stringFormat: String {
     get {
       var str = ""
       if let label = label { str += "@\(label):" }
       str += name
-      if params != nil && params!.count > 0 {
+      if let rpstr = rawParamString {
+        str += "="
+        str += rpstr
+      } else if params != nil && params!.count > 0 {
         let format = MPVFilter.formats[type!]!
         str += "="
         str += format.components(separatedBy: ":").map { params![$0] ?? "" }.joined(separator: ":")
@@ -50,12 +58,23 @@ class MPVFilter: NSObject {
     }
   }
   
+  // MARK: - Initializers
+  
   init(name: String, label: String?, params: [String: String]?) {
     self.type = FilterType(rawValue: name)
     self.name = name
     self.label = label
     self.params = params
   }
+  
+  init?(rawString: String) {
+    let splitted = rawString.components(separatedBy: "=")
+    guard splitted.count == 1 || splitted.count == 2 else { return nil }
+    self.name = splitted[0]
+    self.rawParamString = splitted.at(1)
+  }
+  
+  // MARK: - Others
   
   static let formats: [FilterType: String] = [
     .crop: "w:h:x:y"

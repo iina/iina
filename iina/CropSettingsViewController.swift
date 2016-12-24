@@ -49,7 +49,9 @@ class CropSettingsViewController: NSViewController {
   @IBAction func doneBtnAction(_ sender: AnyObject) {
     mainWindow.exitInteractiveMode {
       let filter = MPVFilter.crop(w: self.cropw, h: self.croph, x: self.cropx, y: self.cropy)
-      self.mainWindow.playerCore.setCropFilter(filter)
+      self.mainWindow.playerCore.setCrop(fromFilter: filter)
+      // custom crop has no corresponding menu entry
+      self.mainWindow.playerCore.info.unsureCrop = ""
     }
   }
   

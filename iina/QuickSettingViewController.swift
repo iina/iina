@@ -49,6 +49,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var aspectSegment: NSSegmentedControl!
   @IBOutlet weak var customAspectTextField: NSTextField!
   
+  @IBOutlet weak var cropSegment: NSSegmentedControl!
+  
   @IBOutlet weak var speedSlider: NSSlider!
   @IBOutlet weak var speedSliderIndicator: NSTextField!
   @IBOutlet weak var customSpeedTextField: NSTextField!
@@ -115,22 +117,30 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
   
   private func updateControlsState() {
+    // Video
+    aspectSegment.selectSegment(withLabel: playerCore.info.unsureAspect)
+    cropSegment.selectSegment(withLabel: playerCore.info.unsureCrop)
+    rotateSegment.selectSegment(withTag: AppData.rotations.index(of: playerCore.info.rotation) ?? -1)
+    customSpeedTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
+    deinterlaceCheckBtn.state = playerCore.info.deinterlace ? NSOnState : NSOffState
+    
+    // Audio
+    customAudioDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Audio.audioDelay)
+    
     // Sub
     if let currSub = playerCore.info.currentTrack(.sub) {
       subScaleSlider.isEnabled = !currSub.isImageSub
-
       // FIXME: CollorWells cannot be disable?
       let enableTextSettings = !(currSub.isAssSub || currSub.isImageSub)
       [subTextColorWell, subTextSizePopUp, subTextBgColorWell, subTextBorderColorWell, subTextBorderWidthPopUp, subTextFontBtn].forEach { $0.isEnabled = enableTextSettings }
     }
-    // update values
+    
     let currSubScale = playerCore.mpvController.getDouble(MPVOption.Subtitles.subScale).constrain(min: 0.1, max: 10)
     let displaySubScale = Utility.toDisplaySubScale(fromRealSubScale: currSubScale)
     subScaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
     customSubDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Subtitles.subDelay)
-    customAudioDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Audio.audioDelay)
-    customSpeedTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
-    deinterlaceCheckBtn.state = playerCore.info.deinterlace ? NSOnState : NSOffState
+    
+    // Equalizer
     updateVideoEqState()
   }
   
@@ -273,6 +283,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if let value = sender.label(forSegment: sender.selectedSegment) {
       playerCore.setVideoAspect(value)
       mainWindow.displayOSD(.aspect(value))
+    }
+  }
+  
+  @IBAction func cropChangedAction(_ sender: NSSegmentedControl) {
+    if let cropStr = sender.label(forSegment: sender.selectedSegment) {
+      playerCore.setCrop(fromString: cropStr)
     }
   }
   

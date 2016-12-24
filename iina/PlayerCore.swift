@@ -316,7 +316,25 @@ class PlayerCore: NSObject {
     syncUITime()
   }
   
-  func setCropFilter(_ filter: MPVFilter) {
+  func setCrop(fromString str: String) {
+    let vwidth = info.videoWidth!
+    let vheight = info.videoHeight!
+    if let aspect = Aspect(string: str) {
+      let cropped = NSMakeSize(CGFloat(vwidth), CGFloat(vheight)).crop(withAspect: aspect)
+      let vf = MPVFilter.crop(w: Int(cropped.width), h: Int(cropped.height), x: nil, y: nil)
+      setCrop(fromFilter: vf)
+      // warning! may should not update it here
+      info.unsureCrop = str
+      info.cropFilter = vf
+    } else {
+      if let filter = info.cropFilter {
+        removeVideoFiler(filter)
+        info.unsureCrop = "None"
+      }
+    }
+  }
+  
+  func setCrop(fromFilter filter: MPVFilter) {
     if let prevFilter = info.cropFilter {
       removeVideoFiler(prevFilter)
     }

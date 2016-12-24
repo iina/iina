@@ -47,6 +47,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   var hideOSDTimer: Timer?
   
+  
+  /** Cache current crop */
+  var currentCrop: NSRect = NSRect()
+  
   /** The index of current speed in speed value array */
   var speedValueIndex: Int = 5
   
@@ -448,18 +452,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         
         let origWidth = CGFloat(playerCore.info.videoWidth!)
         let origHeight = CGFloat(playerCore.info.videoHeight!)
-        let currentCrop: NSRect
-        
-        if let cropFilter = playerCore.info.cropFilter {
-          let params = cropFilter.params!
-          let x = CGFloat(Float(params["x"]!)!)
-          let y = CGFloat(Float(params["y"]!)!)
-          let w = CGFloat(Float(params["w"]!)!)
-          let h = CGFloat(Float(params["h"]!)!)
-          currentCrop = NSMakeRect(x, y, w, h)
-        } else {
-          currentCrop = NSMakeRect(0, 0, origWidth, origHeight)
-        }
         
         // if is in interactive mode
         let videoRect: NSRect, interactiveModeFrame: NSRect
@@ -654,15 +646,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let winFrame = window!.frame
     let videoViewFrame: NSRect
     let videoRect: NSRect
-    let currentCrop: NSRect
     
     // get current cropped region
     if let cropFilter = playerCore.info.cropFilter {
-      let params = cropFilter.params!
-      let x = CGFloat(Float(params["x"]!)!)
-      let y = CGFloat(Float(params["y"]!)!)
-      let w = CGFloat(Float(params["w"]!)!)
-      let h = CGFloat(Float(params["h"]!)!)
+      let params = cropFilter.cropParams(videoSize: origSize)
+      let x = CGFloat(params["x"]!)
+      let y = CGFloat(params["y"]!)
+      let w = CGFloat(params["w"]!)
+      let h = CGFloat(params["h"]!)
       currentCrop = NSMakeRect(x, y, w, h)
     } else {
       currentCrop = NSMakeRect(0, 0, origWidth, origHeight)
@@ -1159,24 +1150,8 @@ extension MainWindowController {
   }
   
   @IBAction func menuChangeCrop(_ sender: NSMenuItem) {
-    guard let vwidth = playerCore.info.videoWidth, let vheight = playerCore.info.videoHeight else {
-      Utility.log("Cannot get video width and height")
-      return
-    }
     if let cropStr = sender.representedObject as? String {
-      if let aspect = Aspect(string: cropStr) {
-        let cropped = NSMakeSize(CGFloat(vwidth), CGFloat(vheight)).crop(withAspect: aspect)
-        let vf = MPVFilter.crop(w: Int(cropped.width), h: Int(cropped.height), x: nil, y: nil)
-        playerCore.addVideoFilter(vf)
-        // warning! may should not update it here
-        playerCore.info.unsureCrop = cropStr
-        playerCore.info.cropFilter = vf
-      } else {
-        if let filter = playerCore.info.cropFilter {
-          playerCore.removeVideoFiler(filter)
-          playerCore.info.unsureCrop = "None"
-        }
-      }
+      playerCore.setCrop(fromString: cropStr)
     } else {
       Utility.log("sender.representedObject is not a string in menuChangeCrop()")
     }

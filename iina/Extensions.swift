@@ -18,6 +18,17 @@ extension NSSlider {
   }
 }
 
+extension NSSegmentedControl {
+  func selectSegment(withLabel label: String) {
+    self.selectedSegment = -1
+    for i in 0..<segmentCount {
+      if self.label(forSegment: i) == label {
+        selectSegment(withTag: i)
+      }
+    }
+  }
+}
+
 func - (lhs: NSPoint, rhs: NSPoint) -> NSPoint {
   return NSMakePoint(lhs.x - rhs.x, lhs.y - rhs.y)
 }

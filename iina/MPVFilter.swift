@@ -60,5 +60,31 @@ class MPVFilter: NSObject {
   static let formats: [FilterType: String] = [
     .crop: "w:h:x:y"
   ]
+  
+  // MARK: - Param getter
+  
+  func cropParams(videoSize: NSSize) -> [String: Double] {
+    guard type == .crop else {
+      Utility.fatal("Trying to get crop params from a non-crop filter!")
+      return [:]
+    }
+    guard let params = params else { return [:] }
+    // w and h should always valid
+    let w = Double(params["w"]!)!
+    let h = Double(params["h"]!)!
+    let x: Double, y: Double
+    // check x and y
+    if let testx = Double(params["x"] ?? ""), let testy = Double(params["y"] ?? "") {
+      x = testx
+      y = testy
+    } else {
+      let cx = Double(videoSize.width) / 2
+      let cy = Double(videoSize.height) / 2
+      x = cx - w / 2
+      y = cy - h / 2
+    }
+    
+    return ["x": x, "y": y, "w": w, "h": h]
+  }
 
 }

@@ -654,7 +654,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let y = CGFloat(params["y"]!)
       let w = CGFloat(params["w"]!)
       let h = CGFloat(params["h"]!)
-      currentCrop = NSMakeRect(x, y, w, h)
+      // coord of cropBoxView is flipped
+      currentCrop = NSMakeRect(x, origHeight - h - y, w, h)
     } else {
       currentCrop = NSMakeRect(0, 0, origWidth, origHeight)
     }

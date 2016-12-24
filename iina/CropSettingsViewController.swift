@@ -26,6 +26,12 @@ class CropSettingsViewController: NSViewController {
   private var cropy: Int = 0
   private var cropw: Int = 0
   private var croph: Int = 0
+  // cropy is in flipped coordinate
+  private var actualCropy: Int {
+    get {
+      return mainWindow.playerCore.info.videoHeight! - croph - cropy
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -42,16 +48,29 @@ class CropSettingsViewController: NSViewController {
     cropy = Int(rect.origin.y)
     cropw = Int(rect.width)
     croph = Int(rect.height)
-    cropRectLabel.stringValue = "Origin(\(cropx), \(cropy))  Size(\(cropw) \u{d7} \(croph))"
+    cropRectLabel.stringValue = "Origin(\(cropx), \(actualCropy))  Size(\(cropw) \u{d7} \(croph))"
   }
 
   
   @IBAction func doneBtnAction(_ sender: AnyObject) {
+    let playerCore = mainWindow.playerCore
+    
     mainWindow.exitInteractiveMode {
-      let filter = MPVFilter.crop(w: self.cropw, h: self.croph, x: self.cropx, y: self.cropy)
-      self.mainWindow.playerCore.setCrop(fromFilter: filter)
+      if self.cropx == 0 && self.cropy == 0 &&
+        self.cropw == playerCore.info.videoWidth &&
+        self.croph == playerCore.info.videoHeight {
+        // if no crop, remove the crop filter
+        if let vf = playerCore.info.cropFilter {
+          playerCore.removeVideoFiler(vf)
+          playerCore.info.unsureCrop = "None"
+          return
+        }
+      }
+      // else, set the filter
+      let filter = MPVFilter.crop(w: self.cropw, h: self.croph, x: self.cropx, y: self.actualCropy)
+      playerCore.setCrop(fromFilter: filter)
       // custom crop has no corresponding menu entry
-      self.mainWindow.playerCore.info.unsureCrop = ""
+      playerCore.info.unsureCrop = ""
     }
   }
   

@@ -23,7 +23,7 @@ extension NSSegmentedControl {
     self.selectedSegment = -1
     for i in 0..<segmentCount {
       if self.label(forSegment: i) == label {
-        selectSegment(withTag: i)
+        self.selectedSegment = i
       }
     }
   }

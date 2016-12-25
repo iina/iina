@@ -64,6 +64,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private var useExtrackSeek: Preference.SeekOption!
   private var relativeSeekAmount: Int = 3
   private var arrowBtnFunction: Preference.ArrowButtonAction!
+  private var singleClickAction: Preference.MouseClickAction!
+  private var doubleClickAction: Preference.MouseClickAction!
   
   /** A list of observed preferences */
   
@@ -72,7 +74,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     Preference.Key.showChapterPos,
     Preference.Key.useExactSeek,
     Preference.Key.relativeSeekAmount,
-    Preference.Key.arrowButtonAction
+    Preference.Key.arrowButtonAction,
+    Preference.Key.singleClickAction,
+    Preference.Key.doubleClickAction
   ]
   
   /** The view embedded in sidebar */
@@ -208,6 +212,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     
     useExtrackSeek = Preference.SeekOption(rawValue: ud.integer(forKey: Preference.Key.useExactSeek))
     arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: Preference.Key.arrowButtonAction))
+    singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.singleClickAction))
+    doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.doubleClickAction))
     
     // add user default observers
     observedPrefKeys.forEach { key in
@@ -255,6 +261,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case Preference.Key.arrowButtonAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)
+      }
+      
+    case Preference.Key.singleClickAction:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        singleClickAction = Preference.MouseClickAction(rawValue: newValue)
+      }
+      
+    case Preference.Key.doubleClickAction:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        doubleClickAction = Preference.MouseClickAction(rawValue: newValue)
       }
     
     default:
@@ -309,8 +325,32 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     } else {
       // if it's a mouseup after clicking
       let mouseInSideBar = window!.contentView!.mouse(event.locationInWindow, in: sideBarView.frame)
+      // if sidebar is shown, hide it first
       if !mouseInSideBar && sideBarStatus != .hidden {
         hideSideBar()
+      } else {
+        // handle mouse click
+        let action: Preference.MouseClickAction
+        if event.clickCount == 1 {
+          // single click
+          action = singleClickAction
+        } else if event.clickCount == 2 {
+          // double click
+          action = doubleClickAction
+        } else {
+          return
+        }
+        // preform action
+        switch action {
+        case .none:
+          break
+          
+        case .fullscreen:
+          window?.toggleFullScreen(self)
+          
+        case .pause:
+          playerCore.togglePause(nil)
+        }
       }
     }
   }

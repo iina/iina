@@ -10,6 +10,8 @@ import Cocoa
 
 struct Preference {
   
+  // MARK: - Keys
+  
   struct Key {
     
     /** Record recent files */
@@ -39,8 +41,6 @@ struct Preference {
     /** Soft volume (int, 0 - 100)*/
     static let softVolume = "softVolume"
     
-    static let arrowButtonAction = "arrowBtnAction"
-    
     /** Pause st first (pause) (bool) */
     static let pauseWhenOpen = "pauseWhenOpen"
     
@@ -54,6 +54,27 @@ struct Preference {
     
     /** Show chapter pos in progress bar (bool) */
     static let showChapterPos = "showChapterPos"
+    
+    static let screenshotFolder = "screenShotFolder"
+    static let screenshotIncludeSubtitle = "screenShotIncludeSubtitle"
+    static let screenshotFormat = "screenShotFormat"
+    static let screenshotTemplate = "screenShotTemplate"
+    
+    // Control
+    
+    /** Seek option */
+    static let useExactSeek = "useExactSeek"
+    
+    /** Seek speed for non-exact relative seek (Int, 1~5) */
+    static let relativeSeekAmount = "relativeSeekAmount"
+    
+    static let arrowButtonAction = "arrowBtnAction"
+    
+    static let singleClickAction = "singleClickAction"
+    
+    static let doubleClickAction = "doubleClickAction"
+    
+    // Input
     
     /** Whether catch media keys event (bool) */
     static let useMediaKeys = "useMediaKeys"
@@ -82,18 +103,9 @@ struct Preference {
     static let useUserDefinedConfDir = "useUserDefinedConfDir"
     static let userDefinedConfDir = "userDefinedConfDir"
     
-    /** Seek option */
-    static let useExactSeek = "useExactSeek"
-    
-    /** Seek speed for non-exact relative seek (Int, 1~5) */
-    static let relativeSeekAmount = "relativeSeekAmount"
-    
-    static let screenshotFolder = "screenShotFolder"
-    static let screenshotIncludeSubtitle = "screenShotIncludeSubtitle"
-    static let screenshotFormat = "screenShotFormat"
-    static let screenshotTemplate = "screenShotTemplate"
-    
   }
+  
+  // MARK: - Enums
   
   enum ArrowButtonAction: Int {
     case speed = 0
@@ -113,6 +125,14 @@ struct Preference {
     case extract
     case auto
   }
+  
+  enum MouseClickAction: Int {
+    case none = 0
+    case fullscreen
+    case pause
+  }
+  
+  // MARK: - Defaults
   
   static let defaultPreference:[String : Any] = [
     Key.recordRecentFiles: true,
@@ -143,6 +163,8 @@ struct Preference {
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
     Key.relativeSeekAmount: 2,
+    Key.singleClickAction: MouseClickAction.none.rawValue,
+    Key.doubleClickAction: MouseClickAction.fullscreen.rawValue,
     
     Key.screenshotFolder: "~/Pictures/ScreenShots",
     Key.screenshotIncludeSubtitle: true,

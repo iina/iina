@@ -68,6 +68,17 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var customSubDelayTextField: NSTextField!
   @IBOutlet weak var subDelaySliderIndicator: NSTextField!
   
+  @IBOutlet weak var audioEqSlider1: NSSlider!
+  @IBOutlet weak var audioEqSlider2: NSSlider!
+  @IBOutlet weak var audioEqSlider3: NSSlider!
+  @IBOutlet weak var audioEqSlider4: NSSlider!
+  @IBOutlet weak var audioEqSlider5: NSSlider!
+  @IBOutlet weak var audioEqSlider6: NSSlider!
+  @IBOutlet weak var audioEqSlider7: NSSlider!
+  @IBOutlet weak var audioEqSlider8: NSSlider!
+  @IBOutlet weak var audioEqSlider9: NSSlider!
+  @IBOutlet weak var audioEqSlider10: NSSlider!
+  
   @IBOutlet weak var subScaleSlider: NSSlider!
   @IBOutlet weak var subScaleResetBtn: NSButton!
   
@@ -100,6 +111,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       self.withAllTableViews { $0.0.reloadData() }
     }
     observers.append(tracklistChangeObserver)
+    let afChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.afChanged, object: nil, queue: OperationQueue.main) { _ in
+      self.updateAudioEqState()
+    }
+    observers.append(afChangeObserver)
   }
   
   // MARK: - Validate UI
@@ -142,6 +157,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     
     // Equalizer
     updateVideoEqState()
+    updateAudioEqState()
   }
   
   private func updateVideoEqState() {
@@ -150,6 +166,16 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     saturationSlider.intValue = Int32(playerCore.info.saturation)
     gammaSlider.intValue = Int32(playerCore.info.gamma)
     hueSlider.intValue = Int32(playerCore.info.hue)
+  }
+  
+  private func updateAudioEqState() {
+    if let filter = playerCore.info.audioEqFilter {
+      withAllAudioEqSliders { slider in
+        slider.doubleValue = Double( filter.params!["e\(slider.tag)"] ?? "" ) ?? 0
+      }
+    } else {
+      withAllAudioEqSliders { $0.doubleValue = 0 }
+    }
   }
   
   // MARK: - Switch tab
@@ -257,6 +283,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     block(subTableView, .sub)
     block(secSubTableView, .secondSub)
     block(videoTableView, .video)
+  }
+  
+  private func withAllAudioEqSliders(_ block: (NSSlider) -> Void) {
+    [audioEqSlider1, audioEqSlider2, audioEqSlider3, audioEqSlider4, audioEqSlider5,
+     audioEqSlider6, audioEqSlider7, audioEqSlider8, audioEqSlider9, audioEqSlider10].forEach {
+      block($0)
+    }
   }
   
   // MARK: - Actions
@@ -416,6 +449,28 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let value = customAudioDelayTextField.doubleValue
     playerCore.setAudioDelay(value)
   }
+  
+  @IBAction func audioEqSliderAction(_ sender: NSSlider) {
+    let params: [String: String] = [
+      "e0": audioEqSlider1.stringValue,
+      "e1": audioEqSlider2.stringValue,
+      "e2": audioEqSlider3.stringValue,
+      "e3": audioEqSlider4.stringValue,
+      "e4": audioEqSlider5.stringValue,
+      "e5": audioEqSlider6.stringValue,
+      "e6": audioEqSlider7.stringValue,
+      "e7": audioEqSlider8.stringValue,
+      "e8": audioEqSlider9.stringValue,
+      "e9": audioEqSlider10.stringValue,
+    ]
+    let filter = MPVFilter(name: "equalizer", label: nil, params: params)
+    playerCore.setAudioEq(fromFilter: filter)
+  }
+  
+  @IBAction func resetAudioEqAction(_ sender: AnyObject) {
+    playerCore.removeAudioEqFilter()
+  }
+  
   
   // Sub tab
   

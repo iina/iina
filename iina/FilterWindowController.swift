@@ -85,7 +85,7 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
   }
   
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    let filter = filters[row]
+    guard let filter = filters.at(row) else { return nil }
     if tableColumn?.identifier == Constants.Identifier.key {
       return row.toStr()
     } else if tableColumn?.identifier == Constants.Identifier.value {

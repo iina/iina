@@ -335,11 +335,22 @@ class PlayerCore: NSObject {
   }
   
   func setCrop(fromFilter filter: MPVFilter) {
-    if let prevFilter = info.cropFilter {
-      removeVideoFiler(prevFilter)
-    }
+    filter.label = "iina_crop"
     addVideoFilter(filter)
     info.cropFilter = filter
+  }
+  
+  func setAudioEq(fromFilter filter: MPVFilter) {
+    filter.label = "iina_aeq"
+    addAudioFilter(filter)
+    info.audioEqFilter = filter
+  }
+  
+  func removeAudioEqFilter() {
+    if let prevFilter = info.audioEqFilter {
+      removeAudioFilter(prevFilter)
+      info.audioEqFilter = nil
+    }
   }
   
   func addVideoFilter(_ filter: MPVFilter) {
@@ -348,6 +359,14 @@ class PlayerCore: NSObject {
   
   func removeVideoFiler(_ filter: MPVFilter) {
     mpvController.command(.vf, args: ["del", filter.stringFormat])
+  }
+  
+  func addAudioFilter(_ filter: MPVFilter) {
+    mpvController.command(.af, args: ["add", filter.stringFormat])
+  }
+  
+  func removeAudioFilter(_ filter: MPVFilter) {
+    mpvController.command(.af, args: ["del", filter.stringFormat])
   }
   
   /** Scale is a double value in [-100, -1] + [1, 100] */

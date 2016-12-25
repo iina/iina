@@ -88,7 +88,7 @@
                         <binding destination="lH7-Vv-0M1" name="value" keyPath="values.osdTextSize" id="AJx-Kb-5i1"/>
                     </connections>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4XH-GU-VhV">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4XH-GU-VhV">
                     <rect key="frame" x="10" y="122" width="100" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="On Screen Controller:" id="g06-Ja-Ot8">
@@ -100,13 +100,13 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RFk-nU-SGL">
                     <rect key="frame" x="10" y="202" width="100" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Window:" id="GKy-3g-4MB">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Window:" id="GKy-3g-4MB">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zyi-J3-lSp">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zyi-J3-lSp">
                     <rect key="frame" x="10" y="33" width="99" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="On Screen Display:" id="F2e-CS-KXl">
@@ -161,6 +161,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <binding destination="lH7-Vv-0M1" name="value" keyPath="values.resizeOnlyWhenManuallyOpenFile" id="Zon-sG-O8g"/>
+                    </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RRL-GG-R45">
                     <rect key="frame" x="119" y="181" width="271" height="18"/>
@@ -169,6 +172,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <binding destination="lH7-Vv-0M1" name="value" keyPath="values.usePhysicalResolution" id="v3I-k2-1e5"/>
+                    </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="63o-gu-DxA">
                     <rect key="frame" x="121" y="22" width="61" height="17"/>

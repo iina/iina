@@ -17,26 +17,8 @@ struct Preference {
     /** Record recent files */
     static let recordRecentFiles = "recordRecentFiles"
     
-    /** Horizontal positon of control bar. (float, 0 - 1) */
-    static let controlBarPositionHorizontal = "controlBarPositionHorizontal"
-    
-    /** Horizontal positon of control bar. In percentage from bottom. (float, 0 - 1) */
-    static let controlBarPositionVertical = "controlBarPositionVertical"
-    
-    /** Whether control bar stick to center when dragging. (bool) */
-    static let controlBarStickToCenter = "controlBarStickToCenter"
-    
-    /** Timeout for auto hiding control bar (float) */
-    static let controlBarAutoHideTimeout  = "controlBarAutoHideTimeout"
-    
     /** Material for OSC and title bar (Theme(int)) */
     static let themeMaterial = "themeMaterial"
-    
-    /** OSD auto hide timeout (float) */
-    static let osdAutoHideTimeout = "osdAutoHideTimeout"
-    
-    /** OSD text size (float) */
-    static let osdTextSize = "osdTextSize"
     
     /** Soft volume (int, 0 - 100)*/
     static let softVolume = "softVolume"
@@ -59,6 +41,34 @@ struct Preference {
     static let screenshotIncludeSubtitle = "screenShotIncludeSubtitle"
     static let screenshotFormat = "screenShotFormat"
     static let screenshotTemplate = "screenShotTemplate"
+    
+    // UI
+    
+    /** Horizontal positon of control bar. (float, 0 - 1) */
+    static let controlBarPositionHorizontal = "controlBarPositionHorizontal"
+    
+    /** Horizontal positon of control bar. In percentage from bottom. (float, 0 - 1) */
+    static let controlBarPositionVertical = "controlBarPositionVertical"
+    
+    /** Whether control bar stick to center when dragging. (bool) */
+    static let controlBarStickToCenter = "controlBarStickToCenter"
+    
+    /** Timeout for auto hiding control bar (float) */
+    static let controlBarAutoHideTimeout  = "controlBarAutoHideTimeout"
+    
+    /** OSD auto hide timeout (float) */
+    static let osdAutoHideTimeout = "osdAutoHideTimeout"
+    
+    /** OSD text size (float) */
+    static let osdTextSize = "osdTextSize"
+    
+    static let usePhysicalResolution = "usePhysicalResolution"
+    
+    /** IINA will adjust window size according to video size, 
+     but if the file is not opened by user manually (File > Open),
+     e.g. jumping to next item in playlist, window size will remoain the same. */
+    static let resizeOnlyWhenManuallyOpenFile = "resizeOnlyWhenManuallyOpenFile"
+    
     
     // Control
     
@@ -149,6 +159,9 @@ struct Preference {
     Key.fullScreenWhenOpen: false,
     Key.showChapterPos: false,
     Key.useMediaKeys: true,
+    
+    Key.usePhysicalResolution: true,
+    Key.resizeOnlyWhenManuallyOpenFile: true,
     
     Key.inputConfigs: [:],
     Key.currentInputConfigName: "Default",

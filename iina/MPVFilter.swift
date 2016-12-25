@@ -50,9 +50,15 @@ class MPVFilter: NSObject {
         str += "="
         str += rpstr
       } else if params != nil && params!.count > 0 {
-        let format = MPVFilter.formats[type!]!
-        str += "="
-        str += format.components(separatedBy: ":").map { params![$0] ?? "" }.joined(separator: ":")
+        // if have format info, print using the format
+        if type != nil, let format = MPVFilter.formats[type!] {
+          str += "="
+          str += format.components(separatedBy: ":").map { params![$0] ?? "" }.joined(separator: ":")
+        // else print param names
+        } else {
+          str += "="
+          str += params!.map({ (k, v) -> String in return "\(k)=\(v)" }).joined(separator: ":")
+        }
       }
       return str
     }
@@ -68,7 +74,7 @@ class MPVFilter: NSObject {
   }
   
   init?(rawString: String) {
-    let splitted = rawString.components(separatedBy: "=")
+    let splitted = rawString.characters.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: true).map { String($0) }
     guard splitted.count == 1 || splitted.count == 2 else { return nil }
     self.name = splitted[0]
     self.rawParamString = splitted.at(1)

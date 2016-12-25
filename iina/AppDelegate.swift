@@ -18,7 +18,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
   lazy var inspector: InspectorWindowController = InspectorWindowController()
   
-  lazy var vfWindow: FilterWindowController = FilterWindowController()
+  lazy var vfWindow: FilterWindowController = {
+    let w = FilterWindowController()
+    w.filterType = MPVProperty.vf
+    return w
+  }()
+  
+  lazy var afWindow: FilterWindowController = {
+    let w = FilterWindowController()
+    w.filterType = MPVProperty.af
+    return w
+  }()
   
   lazy var preferenceWindowController: NSWindowController = {
     return MASPreferencesWindowController(viewControllers: [
@@ -104,5 +114,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     vfWindow.showWindow(self)
   }
   
-  
+  @IBAction func showAudioFilterWindow(_ sender: AnyObject) {
+    afWindow.showWindow(self)
+  }
 }

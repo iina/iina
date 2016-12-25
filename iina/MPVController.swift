@@ -262,9 +262,10 @@ class MPVController: NSObject {
   /** Set filter. only "af" or "vf" is supported for name */
   func setFilters(_ name: String, filters: [MPVFilter]) {
     Utility.assert(name == MPVProperty.vf || name == MPVProperty.af, "setFilters() do not support \(name)!")
+    let cmd = name == MPVProperty.vf ? MPVCommand.vf : MPVCommand.af
     
     let str = filters.map { $0.stringFormat }.joined(separator: ",")
-    command(.vf, args: ["set", str], checkError: false) { returnValue in
+    command(cmd, args: ["set", str], checkError: false) { returnValue in
       if returnValue < 0 {
         Utility.showAlert(message: "Error occured when setting filters. Please check your parameter format.")
         // reload data in filter setting window

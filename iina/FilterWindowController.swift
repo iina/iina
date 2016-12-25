@@ -14,6 +14,8 @@ class FilterWindowController: NSWindowController {
     return "FilterWindowController"
   }
   
+  var filterType: String!
+  
   var filters: [MPVFilter] = []
   
   var observers: [NSObjectProtocol] = []
@@ -23,24 +25,28 @@ class FilterWindowController: NSWindowController {
   override func windowDidLoad() {
     super.windowDidLoad()
     
-    filters = PlayerCore.shared.mpvController.getFilters("vf")
+    // title
+    window?.title = filterType == MPVProperty.af ? "Audio Filters" : "Video Filters"
+    
+    filters = PlayerCore.shared.mpvController.getFilters(filterType)
     tableView.delegate = self
     tableView.dataSource = self
     
     // notifications
-    let vfChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.vfChanged, object: nil, queue: OperationQueue.main) { _ in
+    let notiName = filterType == MPVProperty.af ? Constants.Noti.afChanged : Constants.Noti.vfChanged
+    let filterChangeObserver = NotificationCenter.default.addObserver(forName: notiName, object: nil, queue: OperationQueue.main) { _ in
       self.reloadTable()
     }
-    observers.append(vfChangeObserver)
+    observers.append(filterChangeObserver)
   }
   
   func reloadTable() {
-    filters = PlayerCore.shared.mpvController.getFilters("vf")
+    filters = PlayerCore.shared.mpvController.getFilters(filterType)
     tableView.reloadData()
   }
   
   func setFilters() {
-    PlayerCore.shared.mpvController.setFilters("vf", filters: filters)
+    PlayerCore.shared.mpvController.setFilters(filterType, filters: filters)
   }
   
   deinit {
@@ -52,7 +58,7 @@ class FilterWindowController: NSWindowController {
   // MARK: - IBAction
   
   @IBAction func addFilterAction(_ sender: AnyObject) {
-    let _ = Utility.quickPromptPanel(messageText: "Add filter", informativeText: "Please enter a filter string in format of MPV's vf command.") { str in
+    let _ = Utility.quickPromptPanel(messageText: "Add filter", informativeText: "Please enter a filter string in format of MPV's vf or af command.") { str in
       if let newFilter = MPVFilter(rawString: str) {
         filters.append(newFilter)
         setFilters()

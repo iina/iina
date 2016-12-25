@@ -70,6 +70,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var increaseAudioDelay: NSMenuItem!
   @IBOutlet weak var decreaseAudioDelay: NSMenuItem!
   @IBOutlet weak var resetAudioDelay: NSMenuItem!
+  @IBOutlet weak var audioFilters: NSMenuItem!
   // Subtitle
   @IBOutlet weak var subMenu: NSMenu!
   @IBOutlet weak var quickSettingsSub: NSMenuItem!
@@ -183,6 +184,9 @@ class MenuController: NSObject, NSMenuDelegate {
       item?.action = #selector(MainWindowController.menuChangeAudioDelay(_:))
     }
     resetAudioDelay.action = #selector(MainWindowController.menuResetAudioDelay(_:))
+    
+    // - filters
+    audioFilters.action = #selector(AppDelegate.showAudioFilterWindow(_:))
     
     // Subtitle
     

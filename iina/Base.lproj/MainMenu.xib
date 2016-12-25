@@ -246,8 +246,8 @@
                             <menuItem title="Reset Audio Delay" id="H3d-jR-YCr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" hidden="YES" id="MVW-Uu-gB1"/>
-                            <menuItem title="Audio Filters..." hidden="YES" id="8Zh-hU-Cc4">
+                            <menuItem isSeparatorItem="YES" id="MVW-Uu-gB1"/>
+                            <menuItem title="Audio Filters..." id="8Zh-hU-Cc4">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
@@ -381,6 +381,7 @@
                 <outlet property="alwaysOnTop" destination="wex-rX-PcY" id="3UN-lm-CVf"/>
                 <outlet property="aspectMenu" destination="KIb-Ix-D8J" id="hQ4-Bb-Rdu"/>
                 <outlet property="audioDelayIndicator" destination="foC-r3-8mp" id="FhX-cJ-FaB"/>
+                <outlet property="audioFilters" destination="8Zh-hU-Cc4" id="diF-FF-aHn"/>
                 <outlet property="audioMenu" destination="sW8-ri-eA5" id="e3E-94-i4D"/>
                 <outlet property="audioTrackMenu" destination="DRb-Y8-xir" id="Xxw-IB-hOR"/>
                 <outlet property="backward" destination="Sif-85-FF1" id="w4k-va-FGF"/>

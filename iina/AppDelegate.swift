@@ -33,6 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   lazy var preferenceWindowController: NSWindowController = {
     return MASPreferencesWindowController(viewControllers: [
       PrefGeneralViewController(),
+      PrefUIViewController(),
       PrefControlViewController(),
       PrefKeyBindingViewController(),
       PrefAdvancedViewController(),

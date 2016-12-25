@@ -1,25 +1,23 @@
 //
-//  PrefControlViewController.swift
+//  PrefUIViewController.swift
 //  iina
 //
-//  Created by lhc on 20/12/2016.
+//  Created by lhc on 25/12/2016.
 //  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
 import MASPreferences
 
-class PrefControlViewController: NSViewController, MASPreferencesViewController {
+class PrefUIViewController: NSViewController, MASPreferencesViewController {
 
-  override var nibName: String? {
-    get {
-      return "PrefControlViewController"
-    }
+  override var nibName: String {
+    return "PrefUIViewController"
   }
   
   override var identifier: String? {
     get {
-      return "control"
+      return "ui"
     }
     set {
       super.identifier = newValue
@@ -34,7 +32,7 @@ class PrefControlViewController: NSViewController, MASPreferencesViewController 
   
   var toolbarItemLabel: String {
     get {
-      return "Control"
+      return "UI"
     }
   }
   

@@ -94,13 +94,15 @@ class PlaySliderCell: NSSliderCell {
       if let totalSec = PlayerCore.shared.info.videoDuration?.second {
         chapterStrokeColor.setStroke()
         var chapters = PlayerCore.shared.info.chapters
-        chapters.remove(at: 0)
-        chapters.forEach { chapt in
-          let chapPos = CGFloat(chapt.time.second) / CGFloat(totalSec) * rect.width
-          let linePath = NSBezierPath()
-          linePath.move(to: NSPoint(x: chapPos, y: rect.origin.y))
-          linePath.line(to: NSPoint(x: chapPos, y: rect.origin.y + rect.height))
-          linePath.stroke()
+        if chapters.count > 0 {
+          chapters.remove(at: 0)
+          chapters.forEach { chapt in
+            let chapPos = CGFloat(chapt.time.second) / CGFloat(totalSec) * rect.width
+            let linePath = NSBezierPath()
+            linePath.move(to: NSPoint(x: chapPos, y: rect.origin.y))
+            linePath.line(to: NSPoint(x: chapPos, y: rect.origin.y + rect.height))
+            linePath.stroke()
+          }
         }
       }
     }

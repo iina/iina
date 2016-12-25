@@ -50,6 +50,15 @@ class PlayerCore: NSObject {
     mpvController.command(.loadfile, args: [path])
   }
   
+  func openURLString(_ str: String) {
+    info.isPaused = false
+    info.currentURL = URL(string: str)
+    mainWindow.showWindow(nil)
+    // Send load file command
+    info.fileLoading = true
+    mpvController.command(.loadfile, args: [str])
+  }
+  
   func startMPV() {
     mpvController.mpvInit()
   }

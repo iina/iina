@@ -84,8 +84,10 @@ class Utility {
     let panel = NSAlert()
     panel.messageText = messageText
     panel.informativeText = informativeText
-    let input = NSTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
-    input.bezelStyle = .roundedBezel
+    let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
+    input.lineBreakMode = .byClipping
+    input.usesSingleLineMode = true
+    input.cell?.isScrollable = true
     panel.accessoryView = input
     panel.addButton(withTitle: "OK")
     panel.addButton(withTitle: "Cancel")

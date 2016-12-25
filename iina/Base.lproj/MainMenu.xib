@@ -79,6 +79,9 @@
                             </menuItem>
                             <menuItem title="Open URL..." keyEquivalent="O" id="0m7-3r-twH">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="openURL:" target="Voe-Tx-rLC" id="uUI-BF-zJu"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Open Recent" id="tXI-mr-wws">
                                 <modifierMask key="keyEquivalentModifierMask"/>

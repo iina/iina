@@ -100,6 +100,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
   
+  @IBAction func openURL(_ sender: NSMenuItem) {
+    let _ = Utility.quickPromptPanel(messageText: "Open URL", informativeText: "Please enter the url:") { str in
+      playerCore.openURLString(str)
+    }
+  }
+  
   @IBAction func menuOpenScreenshotFolder(_ sender: NSMenuItem) {
     let screenshotPath = UserDefaults.standard.string(forKey: Preference.Key.screenshotFolder)!
     let absoluteScreenshotPath = NSString(string: screenshotPath).expandingTildeInPath

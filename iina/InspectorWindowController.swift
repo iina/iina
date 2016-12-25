@@ -24,6 +24,7 @@ class InspectorWindowController: NSWindowController {
   @IBOutlet weak var acodecField: NSTextField!
   @IBOutlet weak var achannelsField: NSTextField!
   @IBOutlet weak var abitrateField: NSTextField!
+  @IBOutlet weak var asamplerateField: NSTextField!
   
 
   override func windowDidLoad() {
@@ -44,7 +45,8 @@ class InspectorWindowController: NSWindowController {
       MPVProperty.audioCodec: acodecField,
       MPVProperty.audioParamsFormat: aformatField,
       MPVProperty.audioParamsChannels: achannelsField,
-      MPVProperty.audioBitrate: abitrateField
+      MPVProperty.audioBitrate: abitrateField,
+      MPVProperty.audioParamsSamplerate: asamplerateField
     ]
     
     strProperties.forEach { (k, v) in

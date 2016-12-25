@@ -294,7 +294,9 @@ extension MainWindowController {
   }
   
   @IBAction func menuShowInspector(_ sender: AnyObject) {
-    (NSApp.delegate as! AppDelegate).inspector.showWindow(self)
+    let inspector = (NSApp.delegate as! AppDelegate).inspector
+    inspector.showWindow(self)
+    inspector.updateInfo()
   }
   
 }

@@ -141,6 +141,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bufferIndicatorView: NSVisualEffectView!
   @IBOutlet weak var bufferProgressLabel: NSTextField!
   @IBOutlet weak var bufferSpin: NSProgressIndicator!
+  @IBOutlet weak var bufferDetailLabel: NSTextField!
   
   @IBOutlet weak var rightLabel: NSTextField!
   @IBOutlet weak var leftLabel: NSTextField!
@@ -209,6 +210,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       bufferIndicatorView.isHidden = false
       bufferSpin.startAnimation(nil)
       bufferProgressLabel.stringValue = "Opening stream..."
+      bufferDetailLabel.stringValue = ""
     } else {
       bufferIndicatorView.isHidden = true
     }
@@ -924,15 +926,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   func updateNetworkState() {
     let pausedForCache = playerCore.info.pausedForCache
-    let size = playerCore.info.cacheSize
-    let used = playerCore.info.cacheUsed
-    let time = playerCore.info.cacheTime
-    let speed = playerCore.info.cacheSpeed
+    let sizeStr = FileSize.format(playerCore.info.cacheSize, unit: .kb)
+    let usedStr = FileSize.format(playerCore.info.cacheUsed, unit: .kb)
+    let speedStr = FileSize.format(playerCore.info.cacheSpeed, unit: .b)
     let bufferingState = playerCore.info.bufferingState
-    print(pausedForCache, size, used, time, speed, bufferingState)
     if pausedForCache {
       bufferIndicatorView.isHidden = false
       bufferProgressLabel.stringValue = "Buffering... \(bufferingState)%"
+      bufferDetailLabel.stringValue = "\(usedStr)/\(sizeStr) (\(speedStr)/s)"
     } else {
       bufferIndicatorView.isHidden = true
     }

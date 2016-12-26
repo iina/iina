@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="bottomBarBottomConstraint" destination="vP1-IE-sbB" id="G77-vL-Wf8"/>
                 <outlet property="bottomView" destination="Tdb-EA-alw" id="5Xv-Ja-j4G"/>
+                <outlet property="bufferDetailLabel" destination="hlZ-5D-Wag" id="3Ld-2C-wGO"/>
                 <outlet property="bufferIndicatorView" destination="oX4-0N-but" id="fXY-gn-jfQ"/>
                 <outlet property="bufferProgressLabel" destination="2gH-wF-EpI" id="23t-nJ-ksf"/>
                 <outlet property="bufferSpin" destination="uZe-PA-1Id" id="PdW-fg-yqB"/>
@@ -245,17 +246,17 @@
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="oX4-0N-but">
-                        <rect key="frame" x="260" y="138" width="160" height="80"/>
+                        <rect key="frame" x="260" y="130" width="160" height="96"/>
                         <subviews>
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="uZe-PA-1Id">
-                                <rect key="frame" x="64" y="36" width="32" height="32"/>
+                                <rect key="frame" x="64" y="44" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="7BK-Wc-K9S"/>
                                     <constraint firstAttribute="height" constant="32" id="7n9-7n-g3H"/>
                                 </constraints>
                             </progressIndicator>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gH-wF-EpI">
-                                <rect key="frame" x="6" y="12" width="148" height="17"/>
+                                <rect key="frame" x="6" y="20" width="148" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="yt3-1K-dDJ"/>
                                 </constraints>
@@ -265,15 +266,29 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlZ-5D-Wag">
+                                <rect key="frame" x="6" y="8" width="148" height="11"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="11" id="zg3-Qp-YfX"/>
+                                </constraints>
+                                <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="WOE-SX-krh">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="hlZ-5D-Wag" secondAttribute="bottom" constant="8" id="DDG-Yw-RfA"/>
+                            <constraint firstItem="hlZ-5D-Wag" firstAttribute="leading" secondItem="oX4-0N-but" secondAttribute="leading" constant="8" id="Pie-eY-Ftg"/>
                             <constraint firstItem="uZe-PA-1Id" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="Qfn-MA-rHy"/>
                             <constraint firstItem="2gH-wF-EpI" firstAttribute="leading" secondItem="oX4-0N-but" secondAttribute="leading" constant="8" id="RLx-4b-Scw"/>
+                            <constraint firstAttribute="trailing" secondItem="hlZ-5D-Wag" secondAttribute="trailing" constant="8" id="W3A-Hg-brL"/>
                             <constraint firstAttribute="trailing" secondItem="2gH-wF-EpI" secondAttribute="trailing" constant="8" id="dDH-ph-Yex"/>
-                            <constraint firstAttribute="bottom" secondItem="2gH-wF-EpI" secondAttribute="bottom" constant="12" id="ddz-PD-RB3"/>
-                            <constraint firstAttribute="height" constant="80" id="djw-BU-Feb"/>
+                            <constraint firstAttribute="bottom" secondItem="2gH-wF-EpI" secondAttribute="bottom" constant="20" id="ddz-PD-RB3"/>
+                            <constraint firstAttribute="height" constant="96" id="djw-BU-Feb"/>
                             <constraint firstAttribute="width" constant="160" id="ehe-F5-vKu"/>
-                            <constraint firstItem="uZe-PA-1Id" firstAttribute="top" secondItem="oX4-0N-but" secondAttribute="top" constant="12" id="sio-TN-E1P"/>
+                            <constraint firstItem="uZe-PA-1Id" firstAttribute="top" secondItem="oX4-0N-but" secondAttribute="top" constant="20" id="sio-TN-E1P"/>
                         </constraints>
                     </visualEffectView>
                 </subviews>

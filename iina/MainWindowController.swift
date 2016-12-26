@@ -1066,7 +1066,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       x: sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2,
       y: playSlider.frame.origin.y + 15)
     timePreviewWhenSeek.stringValue = (playerCore.info.videoDuration! * percentage * 0.01).stringRepresentation
-    playerCore.seek(percent: percentage)
+    playerCore.seek(percent: percentage, forceExact: true)
   }
   
   

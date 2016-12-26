@@ -107,19 +107,20 @@ class PlayerCore: NSObject {
     mpvController.setFlag(MPVOption.Audio.mute, newState)
   }
   
-  func seek(percent: Double) {
-    let seekMode = ud.bool(forKey: Preference.Key.useExactSeek) ? "absolute-percent+exact" : "absolute-percent"
-    mpvController.command(.seek, args: ["\(percent)", seekMode])
+  func seek(percent: Double, forceExact: Bool = false) {
+    let useExact = forceExact ? true : ud.bool(forKey: Preference.Key.useExactSeek)
+    let seekMode = useExact ? "absolute-percent+exact" : "absolute-percent"
+    mpvController.command(.seek, args: ["\(percent)", seekMode], checkError: false)
   }
 
   func seek(relativeSecond: Double, option: Preference.SeekOption) {
     switch option {
       
     case .relative:
-      mpvController.command(.seek, args: ["\(relativeSecond)", "relative"])
+      mpvController.command(.seek, args: ["\(relativeSecond)", "relative"], checkError: false)
       
     case .extract:
-      mpvController.command(.seek, args: ["\(relativeSecond)", "relative+exact"])
+      mpvController.command(.seek, args: ["\(relativeSecond)", "relative+exact"], checkError: false)
       
     case .auto:
       // for each file , try use exact and record interval first
@@ -132,7 +133,7 @@ class PlayerCore: NSObject {
         triedUsingExactSeekForCurrentFile = true
       }
       let seekMode = useExactSeekForCurrentFile ? "relative+exact" : "relative"
-      mpvController.command(.seek, args: ["\(relativeSecond)", seekMode])
+      mpvController.command(.seek, args: ["\(relativeSecond)", seekMode], checkError: false)
 
     }
   }

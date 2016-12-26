@@ -81,6 +81,12 @@
 		8487BEC11D744FA800FD17B0 /* FlippedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487BEC01D744FA800FD17B0 /* FlippedView.swift */; };
 		8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487BEC21D76A1AF00FD17B0 /* MenuController.swift */; };
 		8488D6DC1E1167EF00D5B952 /* FileSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6DB1E1167EF00D5B952 /* FileSize.swift */; };
+		8488D6DF1E11791300D5B952 /* PrefCodecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6DD1E11791300D5B952 /* PrefCodecViewController.swift */; };
+		8488D6E01E11791300D5B952 /* PrefCodecViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8488D6DE1E11791300D5B952 /* PrefCodecViewController.xib */; };
+		8488D6E31E1183D300D5B952 /* PrefSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6E11E1183D300D5B952 /* PrefSubViewController.swift */; };
+		8488D6E41E1183D300D5B952 /* PrefSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8488D6E21E1183D300D5B952 /* PrefSubViewController.xib */; };
+		8488D6E71E11ABE900D5B952 /* PrefNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */; };
+		8488D6E81E11ABE900D5B952 /* PrefNetworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8488D6E61E11ABE900D5B952 /* PrefNetworkViewController.xib */; };
 		84A0BA901D2F8D4100BC8DA1 /* IINAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA8F1D2F8D4100BC8DA1 /* IINAError.swift */; };
 		84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */; };
 		84A0BA971D2FA1CE00BC8DA1 /* PlayerCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA961D2FA1CE00BC8DA1 /* PlayerCore.swift */; };
@@ -253,6 +259,12 @@
 		8487BEC01D744FA800FD17B0 /* FlippedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlippedView.swift; sourceTree = "<group>"; };
 		8487BEC21D76A1AF00FD17B0 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		8488D6DB1E1167EF00D5B952 /* FileSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSize.swift; sourceTree = "<group>"; };
+		8488D6DD1E11791300D5B952 /* PrefCodecViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefCodecViewController.swift; sourceTree = "<group>"; };
+		8488D6DE1E11791300D5B952 /* PrefCodecViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefCodecViewController.xib; sourceTree = "<group>"; };
+		8488D6E11E1183D300D5B952 /* PrefSubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefSubViewController.swift; sourceTree = "<group>"; };
+		8488D6E21E1183D300D5B952 /* PrefSubViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefSubViewController.xib; sourceTree = "<group>"; };
+		8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefNetworkViewController.swift; sourceTree = "<group>"; };
+		8488D6E61E11ABE900D5B952 /* PrefNetworkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefNetworkViewController.xib; sourceTree = "<group>"; };
 		8497A4831D2FF573005F504F /* iina-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iina-Bridging-Header.h"; sourceTree = "<group>"; };
 		84A0BA8F1D2F8D4100BC8DA1 /* IINAError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IINAError.swift; sourceTree = "<group>"; };
 		84A0BA941D2F9E9600BC8DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -333,6 +345,12 @@
 				840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */,
 				84ED99FD1E009C8100A5159B /* PrefAdvancedViewController.swift */,
 				84ED99FE1E009C8100A5159B /* PrefAdvancedViewController.xib */,
+				8488D6DD1E11791300D5B952 /* PrefCodecViewController.swift */,
+				8488D6DE1E11791300D5B952 /* PrefCodecViewController.xib */,
+				8488D6E11E1183D300D5B952 /* PrefSubViewController.swift */,
+				8488D6E21E1183D300D5B952 /* PrefSubViewController.xib */,
+				8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */,
+				8488D6E61E11ABE900D5B952 /* PrefNetworkViewController.xib */,
 			);
 			name = Preference;
 			sourceTree = "<group>";
@@ -654,16 +672,19 @@
 				84AABE951DBFAF1A00D138FD /* FontPickerWindowController.xib in Resources */,
 				8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */,
 				840D479C1DFEF649000D9A64 /* KeyRecordViewController.xib in Resources */,
+				8488D6E01E11791300D5B952 /* PrefCodecViewController.xib in Resources */,
 				8466BE191D5CDD0300039D03 /* QuickSettingViewController.xib in Resources */,
 				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
 				84795C3B1E083EE30059A648 /* PrefControlViewController.xib in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */,
+				8488D6E41E1183D300D5B952 /* PrefSubViewController.xib in Resources */,
 				84879A991E0FFC7E0004F894 /* PrefUIViewController.xib in Resources */,
 				8450403E1E0A9EE20079C194 /* InspectorWindowController.xib in Resources */,
 				8460FBAA1D6497490081841B /* PlaylistViewController.xib in Resources */,
 				84ED9A001E009C8100A5159B /* PrefAdvancedViewController.xib in Resources */,
 				845040481E0B0F500079C194 /* CropSettingsViewController.xib in Resources */,
+				8488D6E81E11ABE900D5B952 /* PrefNetworkViewController.xib in Resources */,
 				84E48D4F1E0F1090002C7A3F /* FilterWindowController.xib in Resources */,
 				847C62CB1DC13CDA00E1EF16 /* PrefGeneralViewController.xib in Resources */,
 				84A0BA9F1D2FAD4000BC8DA1 /* MainWindowController.xib in Resources */,
@@ -727,6 +748,7 @@
 			files = (
 				8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */,
 				8452DD851D3B956D008A543A /* Preference.swift in Sources */,
+				8488D6E31E1183D300D5B952 /* PrefSubViewController.swift in Sources */,
 				84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */,
 				840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */,
 				84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */,
@@ -747,6 +769,7 @@
 				84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */,
 				845040401E0ACADD0079C194 /* MPVNode.swift in Sources */,
 				84795C3A1E083EE30059A648 /* PrefControlViewController.swift in Sources */,
+				8488D6DF1E11791300D5B952 /* PrefCodecViewController.swift in Sources */,
 				8487BEC11D744FA800FD17B0 /* FlippedView.swift in Sources */,
 				84795C371E0825AD0059A648 /* GifGenerator.swift in Sources */,
 				845ABEAC1D4D19C000BFB15B /* MPVTrack.swift in Sources */,
@@ -761,6 +784,7 @@
 				84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */,
 				84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */,
 				8488D6DC1E1167EF00D5B952 /* FileSize.swift in Sources */,
+				8488D6E71E11ABE900D5B952 /* PrefNetworkViewController.swift in Sources */,
 				84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */,
 				84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */,
 				84D377651D7370EE007F7396 /* ChapterTableCellView.swift in Sources */,

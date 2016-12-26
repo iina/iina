@@ -34,6 +34,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return MASPreferencesWindowController(viewControllers: [
       PrefGeneralViewController(),
       PrefUIViewController(),
+      PrefCodecViewController(),
+      PrefSubViewController(),
+      PrefNetworkViewController(),
       PrefControlViewController(),
       PrefKeyBindingViewController(),
       PrefAdvancedViewController(),

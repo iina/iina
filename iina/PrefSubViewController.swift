@@ -1,23 +1,22 @@
 //
-//  PrefUIViewController.swift
+//  PrefSubViewController.swift
 //  iina
 //
-//  Created by lhc on 25/12/2016.
+//  Created by lhc on 27/12/2016.
 //  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
-import MASPreferences
 
-class PrefUIViewController: NSViewController, MASPreferencesViewController {
-
-  override var nibName: String {
-    return "PrefUIViewController"
+class PrefSubViewController: NSViewController {
+  
+  override var nibName: String? {
+    return "PrefSubViewController"
   }
   
   override var identifier: String? {
     get {
-      return "ui"
+      return "sub"
     }
     set {
       super.identifier = newValue
@@ -25,19 +24,13 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   }
   
   var toolbarItemImage: NSImage {
-    get {
-      return NSImage(named: "toolbar_play")!
-    }
+    return NSImage(named: NSImageNameFontPanel)!
   }
   
   var toolbarItemLabel: String {
-    get {
-      return "UI"
-    }
+    return "Subtitle"
   }
-  
-  
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do view setup here.

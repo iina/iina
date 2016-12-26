@@ -13,11 +13,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="220"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSQ-pa-Urx">
-                    <rect key="frame" x="64" y="234" width="133" height="17"/>
+                    <rect key="frame" x="64" y="182" width="133" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Scroll horizontally to:" id="1yb-m4-1sK">
                         <font key="font" metaFont="system"/>
@@ -26,7 +26,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VlR-LI-plv">
-                    <rect key="frame" x="219" y="228" width="171" height="26"/>
+                    <rect key="frame" x="219" y="176" width="171" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="Keyframe seek" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="wBB-fx-Mao" id="BFn-Bz-29A">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -44,7 +44,7 @@
                     </connections>
                 </popUpButton>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LN0-rs-jJB">
-                    <rect key="frame" x="64" y="209" width="369" height="17"/>
+                    <rect key="frame" x="64" y="157" width="369" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Exact seek is more precise but can cause lag and high CPU usage." id="6FZ-Qm-0k0">
                         <font key="font" metaFont="smallSystem"/>
@@ -53,7 +53,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0j-Zw-pcy">
-                    <rect key="frame" x="64" y="191" width="160" height="14"/>
+                    <rect key="frame" x="64" y="139" width="160" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Amount for normal seek:" id="of2-ec-OkC">
                         <font key="font" metaFont="smallSystem"/>
@@ -62,12 +62,12 @@
                     </textFieldCell>
                 </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h4p-a3-cku">
-                    <rect key="frame" x="20" y="209" width="38" height="43"/>
+                    <rect key="frame" x="20" y="157" width="38" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="toolbar_control" id="vfN-MS-l0X"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XY1-Z2-fmc">
-                    <rect key="frame" x="63" y="67" width="152" height="17"/>
+                    <rect key="frame" x="63" y="31" width="152" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Use left/right button for:" id="kEB-gk-wuI">
                         <font key="font" metaFont="system"/>
@@ -76,17 +76,17 @@
                     </textFieldCell>
                 </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mHM-Hf-MsN">
-                    <rect key="frame" x="33" y="56" width="24" height="24"/>
+                    <rect key="frame" x="33" y="20" width="24" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="speed-dark" id="L9h-H0-nFX"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LqA-Aj-cY4">
-                    <rect key="frame" x="20" y="70" width="24" height="24"/>
+                    <rect key="frame" x="20" y="32" width="24" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="speedl-dark" id="AFw-FC-dgo"/>
                 </imageView>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZLx-tu-rJt">
-                    <rect key="frame" x="219" y="61" width="171" height="26"/>
+                    <rect key="frame" x="219" y="25" width="171" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="Speed" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="hIG-5X-2Pm" id="w65-zr-l0v">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -104,7 +104,7 @@
                     </connections>
                 </popUpButton>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8B-5D-NHc">
-                    <rect key="frame" x="64" y="155" width="93" height="17"/>
+                    <rect key="frame" x="64" y="103" width="93" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Single click to:" id="QhO-As-ZLL">
                         <font key="font" metaFont="system"/>
@@ -113,7 +113,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGA-yr-g8l">
-                    <rect key="frame" x="64" y="130" width="98" height="17"/>
+                    <rect key="frame" x="64" y="78" width="98" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Double click to:" id="GPH-fM-XHN">
                         <font key="font" metaFont="system"/>
@@ -122,7 +122,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ltc-ek-XnI">
-                    <rect key="frame" x="219" y="149" width="171" height="26"/>
+                    <rect key="frame" x="219" y="97" width="171" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="w54-7I-QfW" id="kx4-ff-K5Z">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -139,7 +139,7 @@
                     </connections>
                 </popUpButton>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Qc-Uz-odw">
-                    <rect key="frame" x="219" y="124" width="171" height="26"/>
+                    <rect key="frame" x="219" y="72" width="171" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="Toggle fullscreen" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1" imageScaling="proportionallyDown" inset="2" selectedItem="6F4-gm-oBg" id="ZmD-ZY-OrO">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -157,11 +157,11 @@
                     </connections>
                 </popUpButton>
                 <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Lct-2w-rPO">
-                    <rect key="frame" x="66" y="103" width="382" height="5"/>
+                    <rect key="frame" x="66" y="59" width="390" height="5"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </box>
                 <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WC2-9P-fCe">
-                    <rect key="frame" x="221" y="191" width="111" height="15"/>
+                    <rect key="frame" x="221" y="139" width="111" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <sliderCell key="cell" controlSize="mini" state="on" alignment="left" minValue="1" maxValue="4" doubleValue="2" tickMarkPosition="below" numberOfTickMarks="4" allowsTickMarkValuesOnly="YES" sliderType="linear" id="6dr-c1-Y38"/>
                     <connections>
@@ -169,6 +169,7 @@
                     </connections>
                 </slider>
             </subviews>
+            <point key="canvasLocation" x="140" y="143"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="Yrj-d0-KaY"/>
     </objects>

@@ -335,12 +335,14 @@ class MPVController: NSObject {
       onTrackChanged()
       
     case MPV_EVENT_SEEK:
+      playerCore.info.isSeeking = true
       if needRecordSeekTime {
         recordedSeekStartTime = CACurrentMediaTime()
       }
       playerCore.syncUI(.time)
       
     case MPV_EVENT_PLAYBACK_RESTART:
+      playerCore.info.isSeeking = false
       if needRecordSeekTime {
         recordedSeekTimeListener?(CACurrentMediaTime() - recordedSeekStartTime)
         recordedSeekTimeListener = nil

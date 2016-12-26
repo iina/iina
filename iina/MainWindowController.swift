@@ -925,12 +925,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   func updateNetworkState() {
-    let pausedForCache = playerCore.info.pausedForCache
-    let sizeStr = FileSize.format(playerCore.info.cacheSize, unit: .kb)
-    let usedStr = FileSize.format(playerCore.info.cacheUsed, unit: .kb)
-    let speedStr = FileSize.format(playerCore.info.cacheSpeed, unit: .b)
-    let bufferingState = playerCore.info.bufferingState
-    if pausedForCache {
+    let needShowIndicator = playerCore.info.pausedForCache || playerCore.info.isSeeking
+    
+    if needShowIndicator {
+      let sizeStr = FileSize.format(playerCore.info.cacheSize, unit: .kb)
+      let usedStr = FileSize.format(playerCore.info.cacheUsed, unit: .kb)
+      let speedStr = FileSize.format(playerCore.info.cacheSpeed, unit: .b)
+      let bufferingState = playerCore.info.bufferingState
       bufferIndicatorView.isHidden = false
       bufferProgressLabel.stringValue = "Buffering... \(bufferingState)%"
       bufferDetailLabel.stringValue = "\(usedStr)/\(sizeStr) (\(speedStr)/s)"

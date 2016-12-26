@@ -29,6 +29,7 @@ class PlaybackInfo {
   
   var videoDuration: VideoTime?
   
+  var isSeeking: Bool = false
   var isPaused: Bool = false
   
   var jumppedFromPlaylist: Bool = false

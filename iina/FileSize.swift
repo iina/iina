@@ -41,7 +41,7 @@ class FileSize {
       }
     }
     
-    return "0B"
+    return "0"
   }
   
 }

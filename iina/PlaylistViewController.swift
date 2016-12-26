@@ -149,7 +149,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
     let _ = Utility.quickOpenPanel(title: "Add to playlist", isDir: false) { (url) in
       if url.isFileURL {
         self.playerCore.addToPlaylist(url.path)
-        self.playlistTableView.reloadData()
+        reloadData(playlist: true, chapters: false)
         self.mainWindow.displayOSD(.addToPlaylist(1))
       }
     }
@@ -158,16 +158,17 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
   
   @IBAction func clearPlaylistBtnAction(_ sender: AnyObject) {
     playerCore.clearPlaylist()
+    reloadData(playlist: true, chapters: false)
     mainWindow.displayOSD(.clearPlaylist)
   }
   
   @IBAction func playlistBtnAction(_ sender: AnyObject) {
-    playlistTableView.reloadData()
+    reloadData(playlist: true, chapters: false)
     switchToTab(.playlist)
   }
   
   @IBAction func chaptersBtnAction(_ sender: AnyObject) {
-    chapterTableView.reloadData()
+    reloadData(playlist: false, chapters: true)
     switchToTab(.chapters)
   }
   

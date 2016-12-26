@@ -66,8 +66,17 @@ class PlaySliderCell: NSSliderCell {
   }
   
   override func drawBar(inside rect: NSRect, flipped: Bool) {
+    let info = PlayerCore.shared.info
+    
     let slider = self.controlView as! NSSlider
-    let percentage = CGFloat(slider.doubleValue / (slider.maxValue - slider.minValue))
+    
+    let percentage: CGFloat
+    if info.isNetworkResource, info.cacheTime != 0, let duration = info.videoDuration {
+      let pos = Double(info.cacheTime) / Double(duration.second) * 100
+      percentage = CGFloat(pos / (slider.maxValue - slider.minValue))
+    } else {
+      percentage = CGFloat(slider.doubleValue / (slider.maxValue - slider.minValue))
+    }
     let knobPos = rect.width * percentage
     let rect = NSMakeRect(rect.origin.x, rect.origin.y + 1, rect.width, rect.height - 2)
     let path = NSBezierPath(roundedRect: rect, xRadius: 3, yRadius: 3)
@@ -91,9 +100,9 @@ class PlaySliderCell: NSSliderCell {
     // draw chapters
     NSGraphicsContext.saveGraphicsState()
     if drawChapters {
-      if let totalSec = PlayerCore.shared.info.videoDuration?.second {
+      if let totalSec = info.videoDuration?.second {
         chapterStrokeColor.setStroke()
-        var chapters = PlayerCore.shared.info.chapters
+        var chapters = info.chapters
         if chapters.count > 0 {
           chapters.remove(at: 0)
           chapters.forEach { chapt in

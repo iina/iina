@@ -13,6 +13,7 @@ class PlaybackInfo {
   var fileLoading: Bool = false
   
   var currentURL: URL?
+  var isNetworkResource: Bool = false
   
   var videoWidth: Int?
   var videoHeight: Int?
@@ -62,6 +63,14 @@ class PlaybackInfo {
   
   var audioDelay: Double = 0
   var subDelay: Double = 0
+  
+  // cache related
+  var pausedForCache: Bool = false
+  var cacheSize: Int = 0
+  var cacheUsed: Int = 0
+  var cacheSpeed: Int = 0
+  var cacheTime: Int = 0
+  var bufferingState: Int = 0
   
   var audioTracks: [MPVTrack] = []
   var videoTracks: [MPVTrack] = []

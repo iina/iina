@@ -293,6 +293,7 @@ class MPVController: NSObject {
   // Handle the event
   private func handleEvent(_ event: UnsafePointer<mpv_event>!) {
     let eventId = event.pointee.event_id
+    
     switch eventId {
     case MPV_EVENT_SHUTDOWN:
       mpv_detach_destroy(mpv)
@@ -325,7 +326,7 @@ class MPVController: NSObject {
       break
       
     case MPV_EVENT_START_FILE:
-      break
+      playerCore.fileStarted()
       
     case MPV_EVENT_FILE_LOADED:
       onFileLoaded()

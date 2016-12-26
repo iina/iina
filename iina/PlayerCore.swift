@@ -44,6 +44,7 @@ class PlayerCore: NSObject {
     // Utility.log("Open File \(path!)")
     info.isPaused = false
     info.currentURL = url!
+    info.isNetworkResource = false
     mainWindow.showWindow(nil)
     // Send load file command
     info.fileLoading = true
@@ -53,7 +54,7 @@ class PlayerCore: NSObject {
   func openURLString(_ str: String) {
     info.isPaused = false
     info.currentURL = URL(string: str)
-    mainWindow.showWindow(nil)
+    info.isNetworkResource = true
     // Send load file command
     info.fileLoading = true
     mpvController.command(.loadfile, args: [str])
@@ -426,6 +427,12 @@ class PlayerCore: NSObject {
   
   // MARK: - Other
   
+  func fileStarted() {
+    DispatchQueue.main.sync {
+      mainWindow.showWindow(self)
+    }
+  }
+  
   /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
     guard let vwidth = info.videoWidth, let vheight = info.videoHeight else {
@@ -468,15 +475,21 @@ class PlayerCore: NSObject {
   
   // MARK: - Sync with UI in MainWindow
   
+  // difficult to use option set
   enum SyncUIOption {
     case time
+    case timeAndCache
     case playButton
     case muteButton
     case chapterList
   }
   
   func syncUITime() {
-    syncUI(.time)
+    if info.isNetworkResource {
+      syncUI(.timeAndCache)
+    } else {
+      syncUI(.time)
+    }
   }
   
   func syncUI(_ option: SyncUIOption) {
@@ -490,17 +503,34 @@ class PlayerCore: NSObject {
       DispatchQueue.main.async {
         self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
       }
+    
+    case .timeAndCache:
+      let time = mpvController.getInt(MPVProperty.timePos)
+      info.videoPosition!.second = time
+      info.pausedForCache = mpvController.getFlag(MPVProperty.pausedForCache)
+      info.cacheSize = mpvController.getInt(MPVProperty.cacheSize)
+      info.cacheUsed = mpvController.getInt(MPVProperty.cacheUsed)
+      info.cacheSpeed = mpvController.getInt(MPVProperty.cacheSpeed)
+      info.cacheTime = mpvController.getInt(MPVProperty.demuxerCacheTime)
+      info.bufferingState = mpvController.getInt(MPVProperty.cacheBufferingState)
+      DispatchQueue.main.async {
+        self.mainWindow.updatePlayTime(withDuration: true, andProgressBar: true)
+        self.mainWindow.updateNetworkState()
+      }
+    
     case .playButton:
       let pause = mpvController.getFlag(MPVOption.PlaybackControl.pause)
       info.isPaused = pause
       DispatchQueue.main.async {
         self.mainWindow.updatePlayButtonState(pause ? NSOffState : NSOnState)
       }
+      
     case .muteButton:
       let mute = mpvController.getFlag(MPVOption.Audio.mute)
       DispatchQueue.main.async {
         self.mainWindow.muteButton.state = mute ? NSOnState : NSOffState
       }
+      
     case .chapterList:
       DispatchQueue.main.async {
         // this should avoid sending reload when table view is not ready

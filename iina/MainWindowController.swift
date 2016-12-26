@@ -138,6 +138,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var playlistButton: NSButton!
   @IBOutlet weak var sideBarView: NSVisualEffectView!
   @IBOutlet weak var bottomView: NSVisualEffectView!
+  @IBOutlet weak var bufferIndicatorView: NSVisualEffectView!
+  @IBOutlet weak var bufferProgressLabel: NSTextField!
+  @IBOutlet weak var bufferSpin: NSProgressIndicator!
   
   @IBOutlet weak var rightLabel: NSTextField!
   @IBOutlet weak var leftLabel: NSTextField!
@@ -199,6 +202,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     
     // init quick setting view now
     let _ = quickSettingView
+    
+    // buffer indicator view
+    bufferIndicatorView.layer?.cornerRadius = 10
+    if playerCore.info.isNetworkResource {
+      bufferIndicatorView.isHidden = false
+      bufferSpin.startAnimation(nil)
+      bufferProgressLabel.stringValue = "Opening stream..."
+    } else {
+      bufferIndicatorView.isHidden = true
+    }
     
     // other initialization
     osdVisualEffectView.isHidden = true
@@ -756,7 +769,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let timeLabelXPos = playSlider.frame.origin.y + 15
     timePreviewWhenSeek.frame.origin = CGPoint(x: mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2, y: timeLabelXPos)
     let percentage = Double((mouseXPos - 3) / 354)
-    timePreviewWhenSeek.stringValue = (playerCore.info.videoDuration! * percentage).stringRepresentation
+    if let duration = playerCore.info.videoDuration {
+      timePreviewWhenSeek.stringValue = (duration * percentage).stringRepresentation
+    }
   }
   
   /** Set material for OSC and title bar */
@@ -904,6 +919,22 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       speedValueIndex = 5
       leftArrowLabel.isHidden = true
       rightArrowLabel.isHidden = true
+    }
+  }
+  
+  func updateNetworkState() {
+    let pausedForCache = playerCore.info.pausedForCache
+    let size = playerCore.info.cacheSize
+    let used = playerCore.info.cacheUsed
+    let time = playerCore.info.cacheTime
+    let speed = playerCore.info.cacheSpeed
+    let bufferingState = playerCore.info.bufferingState
+    print(pausedForCache, size, used, time, speed, bufferingState)
+    if pausedForCache {
+      bufferIndicatorView.isHidden = false
+      bufferProgressLabel.stringValue = "Buffering... \(bufferingState)%"
+    } else {
+      bufferIndicatorView.isHidden = true
     }
   }
   

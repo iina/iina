@@ -562,7 +562,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="789"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oVx-Sp-Lhl">
                                             <rect key="frame" x="0.0" y="0.0" width="360" height="789"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="NZU-RD-Dm3" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="281" width="360" height="508"/>
@@ -584,7 +584,7 @@
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="vgF-KN-yHf">
                                                                         <rect key="frame" x="0.0" y="0.0" width="360" height="76"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="FLg-2m-Zaq">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="76"/>
@@ -737,7 +737,7 @@
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <subviews>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pHR-ym-VeQ">
-                                                                            <rect key="frame" x="20" y="19" width="19" height="120"/>
+                                                                            <rect key="frame" x="20" y="19" width="18" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="Twm-2U-8ou"/>
                                                                             <connections>
@@ -745,7 +745,7 @@
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Qhv-oC-xzP">
-                                                                            <rect key="frame" x="47" y="19" width="19" height="120"/>
+                                                                            <rect key="frame" x="47" y="19" width="18" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="SCy-Om-bV6"/>
                                                                             <connections>
@@ -753,7 +753,7 @@
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="iDT-gu-k7t">
-                                                                            <rect key="frame" x="74" y="19" width="19" height="120"/>
+                                                                            <rect key="frame" x="74" y="19" width="18" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="a7E-4j-6g2"/>
                                                                             <connections>
@@ -761,7 +761,7 @@
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="O2w-VO-03F">
-                                                                            <rect key="frame" x="101" y="19" width="19" height="120"/>
+                                                                            <rect key="frame" x="101" y="19" width="18" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="TbE-dB-ORk"/>
                                                                             <connections>
@@ -769,7 +769,7 @@
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="npn-V6-hjZ">
-                                                                            <rect key="frame" x="128" y="19" width="19" height="120"/>
+                                                                            <rect key="frame" x="128" y="19" width="18" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="4Ra-VR-yOK"/>
                                                                             <connections>
@@ -777,7 +777,7 @@
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="TKd-tg-Xtc">
-                                                                            <rect key="frame" x="155" y="19" width="19" height="120"/>
+                                                                            <rect key="frame" x="155" y="19" width="18" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="xV9-OM-MHq"/>
                                                                             <connections>
@@ -785,7 +785,7 @@
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="6" translatesAutoresizingMaskIntoConstraints="NO" id="nNf-gg-4tL">
-                                                                            <rect key="frame" x="182" y="19" width="19" height="120"/>
+                                                                            <rect key="frame" x="182" y="19" width="18" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="TNb-Es-VsX"/>
                                                                             <connections>
@@ -793,7 +793,7 @@
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="7" translatesAutoresizingMaskIntoConstraints="NO" id="JaQ-EH-K1U">
-                                                                            <rect key="frame" x="209" y="19" width="19" height="120"/>
+                                                                            <rect key="frame" x="209" y="19" width="18" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="P8O-pY-Nby"/>
                                                                             <connections>
@@ -801,7 +801,7 @@
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="8" translatesAutoresizingMaskIntoConstraints="NO" id="gbd-xf-hGS">
-                                                                            <rect key="frame" x="234" y="19" width="19" height="120"/>
+                                                                            <rect key="frame" x="234" y="19" width="18" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="GEq-jW-WUw"/>
                                                                             <connections>
@@ -809,7 +809,7 @@
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="9" translatesAutoresizingMaskIntoConstraints="NO" id="w04-h5-qaz">
-                                                                            <rect key="frame" x="259" y="19" width="19" height="120"/>
+                                                                            <rect key="frame" x="259" y="19" width="18" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="5FD-oT-GpE"/>
                                                                             <connections>
@@ -847,7 +847,7 @@
                                                                             <rect key="frame" x="11" y="0.0" width="37" height="14"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="31.25" id="HBF-J7-Tie">
-                                                                                <font key="font" metaFont="system" size="9"/>
+                                                                                <font key="font" metaFont="miniSystem"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -856,7 +856,7 @@
                                                                             <rect key="frame" x="68" y="3" width="30" height="11"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="125" id="1cq-dc-JfM">
-                                                                                <font key="font" metaFont="system" size="9"/>
+                                                                                <font key="font" metaFont="miniSystem"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -865,7 +865,7 @@
                                                                             <rect key="frame" x="95" y="3" width="30" height="11"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="250" id="ekh-gc-2qo">
-                                                                                <font key="font" metaFont="system" size="9"/>
+                                                                                <font key="font" metaFont="miniSystem"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -874,7 +874,7 @@
                                                                             <rect key="frame" x="122" y="3" width="30" height="11"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="500" id="tHa-vN-OlI">
-                                                                                <font key="font" metaFont="system" size="9"/>
+                                                                                <font key="font" metaFont="miniSystem"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -883,7 +883,7 @@
                                                                             <rect key="frame" x="149" y="3" width="30" height="11"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="1k" id="Rtc-Eg-J2u">
-                                                                                <font key="font" metaFont="system" size="9"/>
+                                                                                <font key="font" metaFont="miniSystem"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -892,7 +892,7 @@
                                                                             <rect key="frame" x="176" y="3" width="30" height="11"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="2k" id="j9w-YU-EcC">
-                                                                                <font key="font" metaFont="system" size="9"/>
+                                                                                <font key="font" metaFont="miniSystem"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -901,7 +901,7 @@
                                                                             <rect key="frame" x="203" y="3" width="30" height="11"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="4k" id="i0j-2a-vKD">
-                                                                                <font key="font" metaFont="system" size="9"/>
+                                                                                <font key="font" metaFont="miniSystem"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -910,7 +910,7 @@
                                                                             <rect key="frame" x="228" y="3" width="30" height="11"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="8k" id="e4X-H4-VxS">
-                                                                                <font key="font" metaFont="system" size="9"/>
+                                                                                <font key="font" metaFont="miniSystem"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -919,7 +919,7 @@
                                                                             <rect key="frame" x="253" y="3" width="30" height="11"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="16k" id="era-AG-bSl">
-                                                                                <font key="font" metaFont="system" size="9"/>
+                                                                                <font key="font" metaFont="miniSystem"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -928,7 +928,7 @@
                                                                             <rect key="frame" x="41" y="3" width="30" height="11"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="62.5" id="4PG-5R-5G0">
-                                                                                <font key="font" metaFont="system" size="9"/>
+                                                                                <font key="font" metaFont="miniSystem"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -992,7 +992,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="789"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="epy-wp-Ja5">
                                             <rect key="frame" x="0.0" y="0.0" width="360" height="789"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="pm4-x9-WJ5" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="360" height="789"/>
@@ -1005,7 +1005,7 @@
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="dJV-R0-O3M">
                                                                         <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="2vU-hm-gGB">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>
@@ -1059,7 +1059,7 @@
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="EKn-MX-Fao">
                                                                         <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="Jve-qX-Agy">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>

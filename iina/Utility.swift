@@ -176,7 +176,7 @@ class Utility {
   }
   
   static func toDisplaySubScale(fromRealSubScale realScale: Double) -> Double {
-    return realScale >= 1 ? realScale : 1 / realScale
+    return realScale >= 1 ? realScale : -1 / realScale
   }
   
   static func mpvKeyCode(from event: NSEvent) -> String {

@@ -155,6 +155,17 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     subScaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
     customSubDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Subtitles.subDelay)
     
+    let fontSize = playerCore.mpvController.getInt(MPVOption.Subtitles.subFontSize)
+    subTextSizePopUp.selectItem(withTitle: fontSize.toStr())
+    
+    let borderWidth = playerCore.mpvController.getDouble(MPVOption.Subtitles.subBorderSize)
+    subTextBorderWidthPopUp.selectItem(at: -1)
+    subTextBorderWidthPopUp.itemArray.forEach { item in
+      if borderWidth == Double(item.title) {
+        subTextBorderWidthPopUp.select(item)
+      }
+    }
+    
     // Equalizer
     updateVideoEqState()
     updateAudioEqState()

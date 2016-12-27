@@ -126,7 +126,7 @@ class MPVController: NSObject {
     
     setUserOption(PK.ignoreAssStyles, type: .other, forName: MPVOption.Subtitles.subAssStyleOverride) { key in
       let v = UserDefaults.standard.bool(forKey: key)
-      return v ? "force" : nil
+      return v ? "force" : "yes"
     }
     
     setUserOption(PK.subTextFont, type: .string, forName: MPVOption.Subtitles.subFont)

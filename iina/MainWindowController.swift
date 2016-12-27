@@ -528,6 +528,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     ))
   }
   
+  // resize framebuffer in videoView after resizing.
+  func windowDidEndLiveResize(_ notification: Notification) {
+    videoView.videoSize = videoView.frame.size
+    // new (empty) frame buffer is created, so draw a frame manually
+    videoView.drawFrame()
+  }
+  
   // MARK: - Control UI
   
   func hideUIAndCursor() {
@@ -851,7 +858,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // set aspect ratio
     let originalVideoSize = NSSize(width: width, height: height)
     w.aspectRatio = originalVideoSize
+    
     videoView.videoSize = originalVideoSize
+    videoView.restartDisplayLink()
     
     if isInFullScreen {
       self.windowDidResize(Notification(name: .NSWindowDidResize))

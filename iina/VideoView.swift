@@ -10,12 +10,7 @@ import Cocoa
 import OpenGL.GL
 import OpenGL.GL3
 
-func mpvGLUpdate(_ ctx: UnsafeMutableRawPointer) -> Void {
-  let videoView = unsafeBitCast(ctx, to: VideoView.self)
-  videoView.mpvGLQueue.async {
-    videoView.drawFrame()
-  }
-}
+
 
 class VideoView: NSOpenGLView {
   
@@ -57,8 +52,6 @@ class VideoView: NSOpenGLView {
   var videoSize: NSSize? {
     didSet {
       prepareVideoFrameBuffer()
-      setUpDisplayLink()
-      startDisplayLink()
     }
   }
   
@@ -229,7 +222,7 @@ class VideoView: NSOpenGLView {
   /**
    Set up display link.
    */
-  func setUpDisplayLink() {
+  private func setUpDisplayLink() {
     // The callback function
     func displayLinkCallback(
       _ displayLink: CVDisplayLink, _ inNow: UnsafePointer<CVTimeStamp>,
@@ -241,7 +234,10 @@ class VideoView: NSOpenGLView {
       videoView.drawVideo()
       return kCVReturnSuccess
     }
-    //
+    // stop if already created
+    if let link = displayLink {
+      CVDisplayLinkStop(link)
+    }
     CVDisplayLinkCreateWithActiveCGDisplays(&displayLink)
     if let link = displayLink {
       checkCVReturn(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self)))
@@ -255,8 +251,13 @@ class VideoView: NSOpenGLView {
     }
   }
   
-  func startDisplayLink() {
+  private func startDisplayLink() {
     CVDisplayLinkStart(displayLink!)
+  }
+  
+  func restartDisplayLink() {
+    setUpDisplayLink()
+    startDisplayLink()
   }
   
   // MARK: - Drawing

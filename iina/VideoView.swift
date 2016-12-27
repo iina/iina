@@ -191,13 +191,14 @@ class VideoView: NSOpenGLView {
   private func prepareVideoFrameBuffer() {
     let size = self.videoSize!
     openGLContext!.makeCurrentContext()
+    openGLContext!.lock()
     // if texture or fbo exists
-//    if texture != 0 {
-//      glDeleteTextures(1, &texture)
-//    }
-//    if fbo != 0 {
-//      glDeleteFramebuffers(1, &fbo)
-//    }
+    if texture != 0 {
+      glDeleteTextures(1, &texture)
+    }
+    if fbo != 0 {
+      glDeleteFramebuffers(1, &fbo)
+    }
     // create frame buffer
     glGenFramebuffers(GLsizei(1), &fbo)
     Utility.assert(fbo > 0, "Cannot generate fbo")
@@ -217,6 +218,7 @@ class VideoView: NSOpenGLView {
     // bind back to main framebuffer (may not necessary)
     glBindTexture(GLenum(GL_TEXTURE_2D), 0)
     glBindFramebuffer(GLenum(GL_FRAMEBUFFER), 0)
+    openGLContext!.unlock()
   }
   
   /**
@@ -233,10 +235,6 @@ class VideoView: NSOpenGLView {
       let videoView = unsafeBitCast(context, to: VideoView.self)
       videoView.drawVideo()
       return kCVReturnSuccess
-    }
-    // stop if already created
-    if let link = displayLink {
-      CVDisplayLinkStop(link)
     }
     CVDisplayLinkCreateWithActiveCGDisplays(&displayLink)
     if let link = displayLink {
@@ -270,6 +268,7 @@ class VideoView: NSOpenGLView {
     if !started {
       started = true
     }
+    openGLContext!.lock()
     renderContext.lock()
     renderContext.makeCurrentContext()
     if let context = self.mpvGLContext {
@@ -286,6 +285,7 @@ class VideoView: NSOpenGLView {
       mpv_opengl_cb_report_flip(context, 0)
     }
     renderContext.unlock()
+    openGLContext!.unlock()
   }
   
   /** Draw the video to view from framebuffer. */

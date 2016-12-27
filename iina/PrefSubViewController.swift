@@ -35,5 +35,13 @@ class PrefSubViewController: NSViewController {
     super.viewDidLoad()
     // Do view setup here.
   }
+  
+  @IBAction func chooseSubFontAction(_ sender: AnyObject) {
+    Utility.quickFontPickerWindow { font in
+      UserDefaults.standard.set(font ?? "sans-serif", forKey: Preference.Key.subTextFont)
+      UserDefaults.standard.synchronize()
+    }
+  }
+  
     
 }

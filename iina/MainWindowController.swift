@@ -610,7 +610,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     osd.stringValue = message.message()
     osdVisualEffectView.alphaValue = 1
     osdVisualEffectView.isHidden = false
-    let timeout = ud.integer(forKey: Preference.Key.osdAutoHideTimeout)
+    let timeout = ud.float(forKey: Preference.Key.osdAutoHideTimeout)
     hideOSDTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideOSD), userInfo: nil, repeats: false)
   }
   

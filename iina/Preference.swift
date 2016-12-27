@@ -12,6 +12,7 @@ struct Preference {
   
   // MARK: - Keys
   
+  // consider using RawRepresentable, but also need to extend UserDefaults
   struct Key {
     
     /** Record recent files */
@@ -69,6 +70,44 @@ struct Preference {
      e.g. jumping to next item in playlist, window size will remoain the same. */
     static let resizeOnlyWhenManuallyOpenFile = "resizeOnlyWhenManuallyOpenFile"
     
+    // Codec
+    
+    static let videoThreads = "videoThreads"
+    
+    static let useHardwareDecoding = "useHardwareDecoding"
+    
+    static let audioThreads = "audioThreads"
+    
+    static let audioLanguage = "audioLanguage"
+    
+    // Subtitle
+    
+    static let subAutoLoad = "subAutoLoad"
+    static let ignoreAssStyles = "ignoreAssStyles"
+    static let subTextFont = "subTextFont"
+    static let subTextSize = "subTextSize"
+    static let subTextColor = "subTextColor"
+    static let subBgColor = "subBgColor"
+    static let subBold = "subBold"
+    static let subItalic = "subItalic"
+    static let subBorderSize = "subBorderSize"
+    static let subBorderColor = "subBorderColor"
+    static let subShadowSize = "subShadowSize"
+    static let subShadowColor = "subShadowColor"
+    static let subAlignX = "subAlignX"
+    static let subAlignY = "subAlignY"
+    static let subMarginX = "subMarginX"
+    static let subMarginY = "subMarginY"
+    static let subLang = "subLang"
+    
+    // Network
+    
+    static let enableCache = "enableCache"
+    static let defaultCacheSize = "defaultCacheSize"
+    static let cacheBufferSize = "cacheBufferSize"
+    static let secPrefech = "secPrefech"
+    static let userAgent = "userAgent"
+    static let transportRTSPThrough = "transportRTSPThrough"
     
     // Control
     
@@ -142,6 +181,68 @@ struct Preference {
     case pause
   }
   
+  enum AutoLoadAction: Int {
+    case no = 0
+    case exact
+    case fuzzy
+    case all
+    
+    var string: String {
+      get {
+        switch self {
+        case .no: return "no"
+        case .exact: return "exact"
+        case .fuzzy: return "fuzzy"
+        case .all: return "all"
+        }
+      }
+    }
+  }
+  
+  enum SubAlign: Int {
+    case top = 0  // left
+    case center
+    case bottom  // right
+    
+    var stringForX: String {
+      get {
+        switch self {
+        case .top: return "left"
+        case .center: return "center"
+        case .bottom: return "right"
+        }
+      }
+    }
+    
+    var stringForY: String {
+      get {
+        switch self {
+        case .top: return "top"
+        case .center: return "center"
+        case .bottom: return "bottom"
+        }
+      }
+    }
+  }
+  
+  enum RTSPTransportation: Int {
+    case lavf = 0
+    case tcp
+    case udp
+    case http
+    
+    var string: String {
+      get {
+        switch self {
+        case .lavf: return "lavf"
+        case .tcp: return "tcp"
+        case .udp: return "udp"
+        case .http: return "http"
+        }
+      }
+    }
+  }
+  
   // MARK: - Defaults
   
   static let defaultPreference:[String : Any] = [
@@ -151,7 +252,7 @@ struct Preference {
     Key.controlBarStickToCenter: true,
     Key.controlBarAutoHideTimeout: Float(5),
     Key.themeMaterial: Theme.dark.rawValue,
-    Key.osdAutoHideTimeout: 1,
+    Key.osdAutoHideTimeout: Float(1),
     Key.osdTextSize: Float(20),
     Key.softVolume: 50,
     Key.arrowButtonAction: ArrowButtonAction.speed.rawValue,
@@ -163,6 +264,36 @@ struct Preference {
     Key.usePhysicalResolution: true,
     Key.resizeOnlyWhenManuallyOpenFile: true,
     
+    Key.videoThreads: 0,
+    Key.useHardwareDecoding: true,
+    Key.audioThreads: 0,
+    Key.audioLanguage: "",
+    
+    Key.subAutoLoad: AutoLoadAction.fuzzy.rawValue,
+    Key.ignoreAssStyles: false,
+    Key.subTextFont: "sans-serif",
+    Key.subTextSize: 55,
+    Key.subTextColor: NSArchiver.archivedData(withRootObject: NSColor.white),
+    Key.subBgColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
+    Key.subBold: false,
+    Key.subItalic: false,
+    Key.subBorderSize: 3,
+    Key.subBorderColor: NSArchiver.archivedData(withRootObject: NSColor.black),
+    Key.subShadowSize: 0,
+    Key.subShadowColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
+    Key.subAlignX: SubAlign.center.rawValue,
+    Key.subAlignY: SubAlign.bottom.rawValue,
+    Key.subMarginX: 25,
+    Key.subMarginY: 22,
+    Key.subLang: "",
+    
+    Key.enableCache: true,
+    Key.defaultCacheSize: 75000,
+    Key.cacheBufferSize: 75000,
+    Key.secPrefech: 100,
+    Key.userAgent: "",
+    Key.transportRTSPThrough: RTSPTransportation.tcp.rawValue,
+
     Key.inputConfigs: [:],
     Key.currentInputConfigName: "Default",
     

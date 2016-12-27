@@ -8,6 +8,11 @@
 
 import Cocoa
 
+fileprivate typealias PK = Preference.Key
+
+fileprivate let yes_str = "yes"
+fileprivate let no_str = "no"
+
 // Global functions
 
 protocol MPVEventDelegate {
@@ -20,7 +25,9 @@ class MPVController: NSObject {
   // The mpv client name
   var mpvClientName: UnsafePointer<Int8>!
   lazy var queue: DispatchQueue! = DispatchQueue(label: "com.colliderli.iina.controller")
+  
   var playerCore: PlayerCore = PlayerCore.shared
+  let ud: UserDefaults = UserDefaults.standard
   
   var needRecordSeekTime: Bool = false
   var recordedSeekStartTime: CFTimeInterval = 0
@@ -57,23 +64,20 @@ class MPVController: NSObject {
     // Get the name of this client handle.
     mpvClientName = mpv_client_name(mpv)
     
-    let yes_str = "yes"
-    let no_str = "no"
-    
     // User default settings
-    let volume = playerCore.ud.integer(forKey: Preference.Key.softVolume)
-    e(mpv_set_option_string(mpv, MPVOption.Audio.volume, "\(volume)"))
+    
+    setUserOption(ud.integer(forKey: PK.softVolume), forName: MPVOption.Audio.volume)
     
     // disable internal OSD
-    let useMpvOsd = playerCore.ud.bool(forKey: Preference.Key.useMpvOsd)
+    let useMpvOsd = ud.bool(forKey: PK.useMpvOsd)
     if !useMpvOsd {
-      e(mpv_set_option_string(mpv, MPVOption.OSD.osdLevel, "0"))
+      chkErr(mpv_set_option_string(mpv, MPVOption.OSD.osdLevel, "0"))
     } else {
       playerCore.displayOSD = false
     }
     
     // log
-    let enableLog = playerCore.ud.bool(forKey: Preference.Key.enableLogging)
+    let enableLog = ud.bool(forKey: PK.enableLogging)
     if enableLog {
       let date = Date()
       let calendar = NSCalendar.current
@@ -86,28 +90,81 @@ class MPVController: NSObject {
       let token = Utility.ShortCodeGenerator.getCode(length: 6)
       let logFileName = "\(y)-\(m)-\(d)-\(h)-\(mm)-\(s)_\(token).log"
       let path = Utility.logDirURL.appendingPathComponent(logFileName).path
-      e(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.logFile, path))
+      chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.logFile, path))
     }
     
-    let screenshotPath = playerCore.ud.string(forKey: Preference.Key.screenshotFolder)!
+    let screenshotPath = ud.string(forKey: PK.screenshotFolder)!
     let absoluteScreenshotPath = NSString(string: screenshotPath).expandingTildeInPath
-    e(mpv_set_option_string(mpv, MPVOption.Screenshot.screenshotDirectory, absoluteScreenshotPath))
+    setUserOption(absoluteScreenshotPath, forName: MPVOption.Screenshot.screenshotDirectory)
     
-    let screenshotFormat = playerCore.ud.string(forKey: Preference.Key.screenshotFormat)!
-    e(mpv_set_option_string(mpv, MPVOption.Screenshot.screenshotFormat, screenshotFormat))
+    setUserOption(ud.string(forKey: PK.screenshotFormat), forName: MPVOption.Screenshot.screenshotFormat)
     
-    let screenshotTemplate = playerCore.ud.string(forKey: Preference.Key.screenshotTemplate)!
-    e(mpv_set_option_string(mpv, MPVOption.Screenshot.screenshotTemplate, screenshotTemplate))
+    setUserOption(ud.string(forKey: PK.screenshotTemplate), forName: MPVOption.Screenshot.screenshotTemplate)
     
-    let useMediaKeys = playerCore.ud.bool(forKey: Preference.Key.useMediaKeys)
-    e(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, useMediaKeys ? yes_str : no_str))
+    setUserOption(ud.bool(forKey: PK.useMediaKeys), forName: MPVOption.Input.inputMediaKeys)
     
-    // Load user's config file.
-    // e(mpv_load_config_file(mpv, ""))
+    // codec settings
+    setUserOption(ud.integer(forKey: PK.videoThreads), forName: MPVOption.Video.vdLavcThreads)
+    setUserOption(ud.integer(forKey: PK.audioThreads), forName: MPVOption.Audio.adLavcThreads)
+    
+    setUserOption(ud.bool(forKey: PK.useHardwareDecoding), forName: MPVOption.Video.hwdec)
+    
+    setUserOption(ud.string(forKey: PK.audioLanguage), forName: MPVOption.TrackSelection.alang)
+    
+    // sub settings
+    let subAutoLoad = Preference.AutoLoadAction(rawValue: ud.integer(forKey: PK.subAutoLoad))!
+    chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subAuto, subAutoLoad.string))
+    
+    if ud.bool(forKey: PK.ignoreAssStyles) {
+      chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subAssStyleOverride, "force"))
+    }
+    
+    setUserOption(ud.string(forKey: PK.subTextFont), forName: MPVOption.Subtitles.subFont)
+    setUserOption(ud.integer(forKey: PK.subTextSize), forName: MPVOption.Subtitles.subFontSize)
+    
+    setUserOption(colorStringFrom(key: PK.subTextColor), forName: MPVOption.Subtitles.subColor)
+    setUserOption(colorStringFrom(key: PK.subBgColor), forName: MPVOption.Subtitles.subBackColor)
+    
+    setUserOption(ud.bool(forKey: PK.subBold), forName: MPVOption.Subtitles.subBold)
+    setUserOption(ud.bool(forKey: PK.subItalic), forName: MPVOption.Subtitles.subItalic)
+    
+    setUserOption(ud.integer(forKey: PK.subBorderSize), forName: MPVOption.Subtitles.subBorderSize)
+    setUserOption(colorStringFrom(key: PK.subBorderColor), forName: MPVOption.Subtitles.subBorderColor)
+
+    setUserOption(ud.integer(forKey: PK.subShadowSize), forName: MPVOption.Subtitles.subShadowOffset)
+    setUserOption(colorStringFrom(key: PK.subShadowColor), forName: MPVOption.Subtitles.subShadowColor)
+    
+    let subAlignX = Preference.SubAlign(rawValue: ud.integer(forKey: PK.subAlignX))!
+    setUserOption(subAlignX.stringForX, forName: MPVOption.Subtitles.subAlignX)
+    
+    let subAlignY = Preference.SubAlign(rawValue: ud.integer(forKey: PK.subAlignY))!
+    setUserOption(subAlignY.stringForY, forName: MPVOption.Subtitles.subAlignY)
+    
+    setUserOption(ud.integer(forKey: PK.subMarginX), forName: MPVOption.Subtitles.subMarginX)
+    setUserOption(ud.integer(forKey: PK.subMarginY), forName: MPVOption.Subtitles.subMarginY)
+    
+    setUserOption(ud.string(forKey: PK.subLang), forName: MPVOption.TrackSelection.slang)
+    
+    // network / cache settings
+    if !ud.bool(forKey: PK.enableCache) {
+      mpv_set_option_string(mpv, MPVOption.Cache.cache, "no")
+    }
+    
+    setUserOption(ud.integer(forKey: PK.defaultCacheSize), forName: MPVOption.Cache.cacheDefault)
+    setUserOption(ud.integer(forKey: PK.cacheBufferSize), forName: MPVOption.Cache.cacheBackbuffer)
+    setUserOption(ud.integer(forKey: PK.secPrefech), forName: MPVOption.Cache.cacheSecs)
+    
+    let ua = ud.string(forKey: PK.userAgent)!
+    if !ua.isEmpty {
+      setUserOption(ud.string(forKey: PK.userAgent), forName: MPVOption.Network.userAgent)
+    }
+    
+    let rtspLayer = Preference.RTSPTransportation(rawValue: ud.integer(forKey: PK.transportRTSPThrough))!
+    setUserOption(rtspLayer.string, forName: MPVOption.Network.rtspTransport)
     
     // Set user defined conf dir.
-    if playerCore.ud.bool(forKey: Preference.Key.useUserDefinedConfDir) {
-      if let userConfDir = playerCore.ud.string(forKey: Preference.Key.userDefinedConfDir) {
+    if ud.bool(forKey: PK.useUserDefinedConfDir) {
+      if let userConfDir = ud.string(forKey: PK.userDefinedConfDir) {
         let status = mpv_set_option_string(mpv, MPVOption.ProgramBehavior.configDir, userConfDir)
         if status < 0 {
           Utility.showAlert(message: "Error setting config directory \"\(userConfDir)\".")
@@ -116,7 +173,7 @@ class MPVController: NSObject {
     }
     
     // Set user defined options.
-    if let userOptions = playerCore.ud.value(forKey: Preference.Key.userOptions) as? [[String]] {
+    if let userOptions = ud.value(forKey: PK.userOptions) as? [[String]] {
       userOptions.forEach { op in
         let status = mpv_set_option_string(mpv, op[0], op[1])
         if status < 0 {
@@ -128,22 +185,22 @@ class MPVController: NSObject {
     }
     
     // Set options that can be override by user's config.
-    e(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, "yes"))
-    e(mpv_set_option_string(mpv, MPVOption.Video.vo, "opengl-cb"))
-    e(mpv_set_option_string(mpv, MPVOption.Video.hwdecPreload, "auto"))
+    chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, "yes"))
+    chkErr(mpv_set_option_string(mpv, MPVOption.Video.vo, "opengl-cb"))
+    chkErr(mpv_set_option_string(mpv, MPVOption.Video.hwdecPreload, "auto"))
     
     // Load external scripts
     let scriptPath = Bundle.main.path(forResource: "autoload", ofType: "lua", inDirectory: "scripts")!
-    e(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, scriptPath))
+    chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, scriptPath))
     
     let inputConfPath = Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!
-    e(mpv_set_option_string(mpv, MPVOption.Input.inputConf, inputConfPath))
+    chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputConf, inputConfPath))
     
     // Receive log messages at warn level.
-    e(mpv_request_log_messages(mpv, "warn"))
+    chkErr(mpv_request_log_messages(mpv, "warn"))
     
     // Request tick event.
-    // e(mpv_request_event(mpv, MPV_EVENT_TICK, 1))
+    // chkErr(mpv_request_event(mpv, MPV_EVENT_TICK, 1))
     
     // Set a custom function that should be called when there are new events.
     mpv_set_wakeup_callback(self.mpv, { (ctx) in
@@ -157,7 +214,7 @@ class MPVController: NSObject {
     }
     
     // Initialize an uninitialized mpv instance. If the mpv instance is already running, an error is retuned.
-    e(mpv_initialize(mpv))
+    chkErr(mpv_initialize(mpv))
   }
   
   func mpvInitCB() -> UnsafeMutableRawPointer {
@@ -190,7 +247,7 @@ class MPVController: NSObject {
     let returnValue = mpv_command(self.mpv, &cargs)
     for ptr in cargs { free(UnsafeMutablePointer(mutating: ptr)) }
     if checkError {
-      e(returnValue)
+      chkErr(returnValue)
     } else if let cb = returnValueCallback {
       cb(returnValue)
     }
@@ -388,7 +445,7 @@ class MPVController: NSObject {
     playerCore.info.currentURL = URL(fileURLWithPath: filename ?? "")
     playerCore.fileLoaded()
     // mpvResume()
-    if !playerCore.ud.bool(forKey: Preference.Key.pauseWhenOpen) {
+    if !ud.bool(forKey: PK.pauseWhenOpen) {
       setFlag(MPVOption.PlaybackControl.pause, false)
     }
   }
@@ -552,10 +609,40 @@ class MPVController: NSObject {
   
   // MARK: - Utils
   
+  private func setUserOption<T>(_ value: T, forName name: String) {
+    let code: Int32
+    
+    switch value {
+    case is Int:
+      var i = Int64(value as! Int)
+      code = mpv_set_option(mpv, name, MPV_FORMAT_INT64, &i)
+    case is Float:
+      var d = Double(value as! Float)
+      code = mpv_set_option(mpv, name, MPV_FORMAT_DOUBLE, &d)
+    case is Bool:
+      code = mpv_set_option_string(mpv, name, (value as! Bool) ? yes_str : no_str)
+    case is String:
+      code = mpv_set_option_string(mpv, name, (value as! String))
+    default:
+      Utility.log("Unsupported type for setUserOption")
+      return
+    }
+    
+    if code < 0 {
+      Utility.showAlert(message: "Error setting user option \(name)=\(value), return value: \(code).")
+    }
+  }
+  
+  private func colorStringFrom(key: String) -> String {
+    guard let data = ud.data(forKey: key) else { return "" }
+    guard let color = NSUnarchiver.unarchiveObject(with: data) as? NSColor else { return "" }
+    return color.usingColorSpace(.deviceRGB)!.mpvColorString
+  }
+  
   /**
    Utility function for checking mpv api error
    */
-  private func e(_ status: Int32!) {
+  private func chkErr(_ status: Int32!) {
     if status < 0 {
       Utility.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
     }

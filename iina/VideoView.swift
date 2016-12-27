@@ -28,8 +28,11 @@ class VideoView: NSOpenGLView {
       // Initialize the mpv OpenGL state.
       mpv_opengl_cb_init_gl(mpvGLContext, nil, { (ctx, name) -> UnsafeMutableRawPointer? in
         let symbolName: CFString = CFStringCreateWithCString(kCFAllocatorDefault, name, kCFStringEncodingASCII);
-        let addr = CFBundleGetFunctionPointerForName(CFBundleGetBundleWithIdentifier(CFStringCreateCopy(kCFAllocatorDefault, "com.apple.opengl" as CFString!)), symbolName);
-        return addr!;
+        guard let addr = CFBundleGetFunctionPointerForName(CFBundleGetBundleWithIdentifier(CFStringCreateCopy(kCFAllocatorDefault, "com.apple.opengl" as CFString!)), symbolName) else {
+          Utility.fatal("Cannot get OpenGL function pointer!")
+          return nil
+        }
+        return addr;
       }, nil)
       // Set the callback that notifies you when a new video frame is available, or requires a redraw.
       mpv_opengl_cb_set_update_callback(mpvGLContext, { (ctx) in

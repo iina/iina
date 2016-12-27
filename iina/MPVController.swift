@@ -238,8 +238,7 @@ class MPVController: NSObject {
   func mpvInitCB() -> UnsafeMutableRawPointer {
     // Get opengl-cb context.
     let mpvGL = mpv_get_sub_api(mpv, MPV_SUB_API_OPENGL_CB)!;
-    // Ask delegate (actually VideoView) to setup openGL context.
-//    self.delegate!.setUpMpvGLContext(mpvGL)
+
     return mpvGL
   }
   

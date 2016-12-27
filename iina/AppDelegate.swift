@@ -12,6 +12,8 @@ import MASPreferences
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
   
+  var isReady: Bool = false
+  
   lazy var playerCore: PlayerCore = PlayerCore.shared
   
   lazy var fontPicker: FontPickerWindowController = FontPickerWindowController()
@@ -48,9 +50,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @IBOutlet weak var dockMenu: NSMenu!
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
-    UserDefaults.standard.register(defaults: Preference.defaultPreference)
-    playerCore.startMPV()
-    menuController.bindMenuItems()
+    if !isReady {
+      UserDefaults.standard.register(defaults: Preference.defaultPreference)
+      playerCore.startMPV()
+      menuController.bindMenuItems()
+      isReady = true
+    }
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {
@@ -58,9 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
   
   func applicationDidResignActive(_ notification: Notification) {
-//    if NSApp.mainWindow == nil && NSApp.keyWindow == nil {
-//      NSApp.terminate(self)
-//    }
+
   }
   
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -73,6 +76,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
   
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
+    if !isReady {
+      UserDefaults.standard.register(defaults: Preference.defaultPreference)
+      playerCore.startMPV()
+      menuController.bindMenuItems()
+      isReady = true
+    }
     playerCore.openFile(URL(fileURLWithPath: filename))
     return true
   }

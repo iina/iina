@@ -13,11 +13,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="269"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="249"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ql-ym-BvF">
-                    <rect key="frame" x="118" y="185" width="185" height="18"/>
+                    <rect key="frame" x="118" y="165" width="185" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Pause when media opened" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FbF-jJ-W5a">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -31,7 +31,7 @@
                     </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U8N-xw-dgL">
-                    <rect key="frame" x="118" y="165" width="243" height="18"/>
+                    <rect key="frame" x="118" y="145" width="243" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Enter fullscreen when media opened" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="MlG-hl-goA">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -39,17 +39,6 @@
                     </buttonCell>
                     <connections>
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.fullScreenWhenOpen" id="rYv-wg-qji"/>
-                    </connections>
-                </button>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mxs-ci-u1r">
-                    <rect key="frame" x="118" y="145" width="352" height="18"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Remember play position when quit" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="d33-PE-PU1">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <binding destination="IBP-Mz-Maa" name="value" keyPath="values.resumeLastPosition" id="rM9-Wu-70t"/>
                     </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5G0-Ih-CIb">
@@ -64,7 +53,7 @@
                     </buttonCell>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fcb-Fl-8d8">
-                    <rect key="frame" x="9" y="226" width="99" height="17"/>
+                    <rect key="frame" x="9" y="206" width="99" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Appearance:" id="pHB-yo-Ret">
                         <font key="font" metaFont="system"/>
@@ -73,7 +62,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38y-2I-MGs">
-                    <rect key="frame" x="9" y="186" width="100" height="17"/>
+                    <rect key="frame" x="9" y="166" width="100" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Behavior:" id="uQR-Fx-oEm">
                         <font key="font" metaFont="system"/>
@@ -82,7 +71,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOy-i3-JWR">
-                    <rect key="frame" x="118" y="225" width="50" height="17"/>
+                    <rect key="frame" x="118" y="205" width="50" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Theme:" id="2Hu-qC-UMi">
                         <font key="font" metaFont="system"/>
@@ -91,7 +80,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QNz-7p-k3k">
-                    <rect key="frame" x="175" y="220" width="126" height="26"/>
+                    <rect key="frame" x="175" y="200" width="126" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="Dark" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="qeB-ls-rwg" id="bkv-B7-7Vs">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -123,12 +112,12 @@
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.recordRecentFiles" id="VvQ-80-UOa"/>
                     </connections>
                 </button>
-                <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="KvZ-mf-rv4">
-                    <rect key="frame" x="120" y="92" width="348" height="5"/>
+                <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Obh-JS-axA">
+                    <rect key="frame" x="120" y="191" width="348" height="5"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </box>
-                <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Obh-JS-axA">
-                    <rect key="frame" x="120" y="211" width="348" height="5"/>
+                <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="KvZ-mf-rv4">
+                    <rect key="frame" x="120" y="92" width="348" height="5"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </box>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLE-bn-UWS">
@@ -223,7 +212,7 @@
                     </connections>
                 </button>
             </subviews>
-            <point key="canvasLocation" x="139" y="161.5"/>
+            <point key="canvasLocation" x="139" y="151.5"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="IBP-Mz-Maa"/>
     </objects>

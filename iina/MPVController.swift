@@ -35,7 +35,6 @@ class MPVController: NSObject {
   
   let observeProperties: [String: mpv_format] = [
     MPVProperty.trackListCount: MPV_FORMAT_INT64,
-    MPVProperty.chapterListCount: MPV_FORMAT_INT64,
     MPVProperty.vf: MPV_FORMAT_NONE,
     MPVProperty.af: MPV_FORMAT_NONE,
     MPVOption.PlaybackControl.pause: MPV_FORMAT_FLAG,
@@ -467,6 +466,7 @@ class MPVController: NSObject {
     if !ud.bool(forKey: PK.pauseWhenOpen) {
       setFlag(MPVOption.PlaybackControl.pause, false)
     }
+    playerCore.syncUI(.playlist)
   }
   
   private func onTrackChanged() {

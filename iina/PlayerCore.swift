@@ -483,6 +483,7 @@ class PlayerCore: NSObject {
     case playButton
     case muteButton
     case chapterList
+    case playlist
   }
   
   func syncUITime() {
@@ -539,9 +540,16 @@ class PlayerCore: NSObject {
           self.mainWindow.playlistView.chapterTableView.reloadData()
         }
       }
+    
+    case .playlist:
+      DispatchQueue.main.async {
+        if self.mainWindow.sideBarStatus == .playlist {
+          self.mainWindow.playlistView.playlistTableView.reloadData()
+        }
+      }
     }
   }
-  
+
   func sendOSD(_ osd: OSDMessage) {
     
     // if window not loaded, ignore

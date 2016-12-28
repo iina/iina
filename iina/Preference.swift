@@ -330,7 +330,7 @@ struct Preference {
     Key.enableLogging: false,
     Key.userOptions: [],
     Key.useUserDefinedConfDir: false,
-    Key.userDefinedConfDir: "",
+    Key.userDefinedConfDir: "~/.config/mpv/",
     
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,

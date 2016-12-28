@@ -185,6 +185,7 @@ class MPVController: NSObject {
     // Set user defined conf dir.
     if ud.bool(forKey: PK.useUserDefinedConfDir) {
       if let userConfDir = ud.string(forKey: PK.userDefinedConfDir) {
+        mpv_set_option_string(mpv, "config", "yes")
         let status = mpv_set_option_string(mpv, MPVOption.ProgramBehavior.configDir, userConfDir)
         if status < 0 {
           Utility.showAlert(message: "Error setting config directory \"\(userConfDir)\".")
@@ -694,12 +695,14 @@ class MPVController: NSObject {
     }
     
     if sync {
-      ud.addObserver(self, forKeyPath: key, options: [.new], context: nil)
+      ud.addObserver(self, forKeyPath: key, options: [.new, .old], context: nil)
       optionObservers[key] = OptionObserverInfo(key, name, type, transformer)
     }
   }
   
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    guard !(change?[NSKeyValueChangeKey.oldKey] is NSNull) else { return }
+    
     guard let keyPath = keyPath else { return }
     guard let info = optionObservers[keyPath] else { return }
     

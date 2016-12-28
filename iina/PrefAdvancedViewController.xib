@@ -6,14 +6,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="PrefAdvancedViewController" customModule="NazoPlayer" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="PrefAdvancedViewController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="chooseConfigDirBtn" destination="hbF-n4-jl3" id="QYy-Do-vje"/>
                 <outlet property="enableSettingsBtn" destination="ymk-Ax-TcO" id="9Lx-0u-h5t"/>
                 <outlet property="optionsTableView" destination="LPs-2B-Pt0" id="jFp-3K-Ub8"/>
                 <outlet property="settingsView" destination="vY6-lX-1l5" id="NN6-qU-bqp"/>
                 <outlet property="useAnotherConfigDirBtn" destination="Gf8-9e-wu7" id="JpG-gy-VmS"/>
-                <outlet property="userConfigLocLabel" destination="L7F-7X-KTx" id="4Xa-EV-LFx"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -62,7 +61,7 @@
                             </connections>
                         </button>
                         <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="wYu-V5-voK">
-                            <rect key="frame" x="0.0" y="324" width="480" height="117"/>
+                            <rect key="frame" x="0.0" y="324" width="480" height="5"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         </box>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="shz-CZ-kqM">
@@ -177,9 +176,9 @@
                             <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </box>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gf8-9e-wu7">
-                            <rect key="frame" x="18" y="43" width="196" height="18"/>
+                            <rect key="frame" x="18" y="43" width="149" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="check" title="Use another config directory" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ehL-8Y-G8h">
+                            <buttonCell key="cell" type="check" title="Use config directory:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ehL-8Y-G8h">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -198,16 +197,16 @@
                                 <action selector="chooseDirBtnAction:" target="-2" id="wqF-DD-4eM"/>
                             </connections>
                         </button>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7F-7X-KTx">
-                            <rect key="frame" x="37" y="24" width="425" height="17"/>
+                        <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-pn-h6s">
+                            <rect key="frame" x="38" y="15" width="422" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="/path/to/conf" id="YeO-Zb-wNJ">
-                                <font key="font" metaFont="system" size="11"/>
-                                <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="gWN-ya-xRD">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                             <connections>
-                                <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="h8Z-2F-QTn"/>
+                                <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="tsm-NE-EV2"/>
                             </connections>
                         </textField>
                     </subviews>

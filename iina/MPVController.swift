@@ -102,7 +102,10 @@ class MPVController: NSObject {
       return NSString(string: screenshotPath).expandingTildeInPath
     }
     
-    setUserOption(PK.screenshotFormat, type: .string, forName: MPVOption.Screenshot.screenshotFormat)
+    setUserOption(PK.screenshotFormat, type: .other, forName: MPVOption.Screenshot.screenshotFormat) { key in
+      let v = UserDefaults.standard.integer(forKey: key)
+      return Preference.ScreenshotFormat(rawValue: v)?.string
+    }
     
     setUserOption(PK.screenshotTemplate, type: .string, forName: MPVOption.Screenshot.screenshotTemplate)
     
@@ -244,7 +247,6 @@ class MPVController: NSObject {
   
   // Basically send quit to mpv
   func mpvQuit() {
-    // mpv_suspend(mpv)
     command(.quit)
   }
   
@@ -688,7 +690,7 @@ class MPVController: NSObject {
     }
     
     if code < 0 {
-      Utility.showAlert(message: "Error setting user option \(name), return value: \(code).")
+      Utility.showAlert(message: "Error \(String(cString: mpv_error_string(code))) (\(code)) when setting user option \(name).")
     }
     
     if sync {
@@ -736,12 +738,6 @@ class MPVController: NSObject {
   }
   
   // MARK: - Utils
-  
-  private func colorStringFrom(key: String) -> String {
-    guard let data = ud.data(forKey: key) else { return "" }
-    guard let color = NSUnarchiver.unarchiveObject(with: data) as? NSColor else { return "" }
-    return color.usingColorSpace(.deviceRGB)!.mpvColorString
-  }
   
   /**
    Utility function for checking mpv api error

@@ -35,6 +35,7 @@ struct AppData {
   
   static let userInputConfFolder = "input_conf"
   static let logFolder = "log"
+  static let watchLaterFolder = "watch_later"
   
 }
 

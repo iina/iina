@@ -15,6 +15,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
   @IBOutlet weak var faceTableView: NSTableView!
   @IBOutlet weak var previewField: NSTextField!
   @IBOutlet weak var searchField: NSTextField!
+  @IBOutlet weak var otherField: NSTextField!
   
   var fontNames: [String] = []
   var filteredFontNames: [String] = []
@@ -96,7 +97,12 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
   
   @IBAction func okBtnPressed(_ sender: AnyObject) {
     if let block = finishedPicking {
-      block(chosenFace)
+      let otherString = otherField.stringValue
+      if otherString.isEmpty {
+        block(chosenFace)
+      } else {
+        block(otherString)
+      }
       // remove the listener
       finishedPicking = nil
     }

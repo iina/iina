@@ -886,13 +886,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
         // check default window position
       }
-      
       let rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
       w.setFrame(rect, display: true, animate: true)
-      }
-      if (!window!.isVisible) {
-        window!.setIsVisible(true)
     }
+    
+    if (!window!.isVisible) {
+      window!.setIsVisible(true)
+    }
+    
     playerCore.info.jumppedFromPlaylist = false
     
     // UI and slider

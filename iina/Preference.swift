@@ -34,6 +34,7 @@ struct Preference {
     static let quitWhenNoOpenedWindow = "quitWhenNoOpenedWindow"
     
     /** Resume from last position */
+    // static let resumeLastPosition = "resumeLastPosition"
     
     /** Show chapter pos in progress bar (bool) */
     static let showChapterPos = "showChapterPos"
@@ -145,6 +146,9 @@ struct Preference {
     /** Log to log folder (bool) */
     static let enableLogging = "enableLogging"
     
+    /** unused */
+    // static let resizeFrameBuffer = "resizeFrameBuffer"
+    
     /** User defined options ([string, string]) */
     static let userOptions = "userOptions"
     
@@ -243,6 +247,30 @@ struct Preference {
     }
   }
   
+  enum ScreenshotFormat: Int {
+    case png = 0
+    case jpg
+    case jpeg
+    case ppm
+    case pgm
+    case pgmyuv
+    case tga
+    
+    var string: String {
+      get {
+        switch self {
+        case .png: return "png"
+        case .jpg: return "jpg"
+        case .jpeg: return "jpeg"
+        case .ppm: return "ppm"
+        case .pgm: return "pgm"
+        case .pgmyuv: return "pgmyuv"
+        case .tga: return "tga"
+        }
+      }
+    }
+  }
+  
   // MARK: - Defaults
   
   static let defaultPreference:[String : Any] = [
@@ -312,7 +340,7 @@ struct Preference {
     
     Key.screenshotFolder: "~/Pictures/ScreenShots",
     Key.screenshotIncludeSubtitle: true,
-    Key.screenshotFormat: "png",
+    Key.screenshotFormat: ScreenshotFormat.png.rawValue,
     Key.screenshotTemplate: "%F-%n"
   ]
 

@@ -143,6 +143,12 @@ class Utility {
     return url
   }()
   
+  static let watchLaterURL: URL = {
+    let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.watchLaterFolder, isDirectory: true)
+    createDirIfNotExist(url: url)
+    return url
+  }()
+  
   // MARK: - Util functions
   
   static func swap<T>(_ a: inout T, _ b: inout T) {

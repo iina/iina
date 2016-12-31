@@ -355,7 +355,7 @@
 			name = Preference;
 			sourceTree = "<group>";
 		};
-		845ABEAD1D4D19CF00BFB15B /* Model */ = {
+		845ABEAD1D4D19CF00BFB15B /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */,
@@ -364,7 +364,7 @@
 				84D377661D737F58007F7396 /* MPVChapter.swift */,
 				84C8D58E1D794CE600D98A0E /* MPVFilter.swift */,
 			);
-			name = Model;
+			name = Models;
 			sourceTree = "<group>";
 		};
 		84817CE51DBE2D0300CC2279 /* scripts */ = {
@@ -559,7 +559,7 @@
 				84A0BAA21D2FAE8200BC8DA1 /* Assets */,
 				84A0BAA71D2FAF9700BC8DA1 /* Controllers */,
 				84A0BAA81D2FAFCD00BC8DA1 /* Data */,
-				845ABEAD1D4D19CF00BFB15B /* Model */,
+				845ABEAD1D4D19CF00BFB15B /* Models */,
 				84A0BAA31D2FAEA000BC8DA1 /* Views */,
 				84A0BAA61D2FAF8400BC8DA1 /* Utils */,
 			);

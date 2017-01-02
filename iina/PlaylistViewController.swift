@@ -97,15 +97,18 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
   
   /** Switch tab (for internal call) */
   private func switchToTab(_ tab: TabViewType) {
+    let playlistStr = NSLocalizedString("playlist_cap", comment: "")
+    let chapterStr = NSLocalizedString("chapter_cap", comment: "")
+    
     switch tab {
     case .playlist:
       tabView.selectTabViewItem(at: 0)
-      playlistBtn.attributedTitle = NSAttributedString(string: "PLAYLIST", attributes: Utility.tabTitleActiveFontAttributes)
-      chaptersBtn.attributedTitle = NSAttributedString(string: "CHAPTERS", attributes: Utility.tabTitleFontAttributes)
+      playlistBtn.attributedTitle = NSAttributedString(string: playlistStr, attributes: Utility.tabTitleActiveFontAttributes)
+      chaptersBtn.attributedTitle = NSAttributedString(string: chapterStr, attributes: Utility.tabTitleFontAttributes)
     case .chapters:
       tabView.selectTabViewItem(at: 1)
-      chaptersBtn.attributedTitle = NSAttributedString(string: "CHAPTERS", attributes: Utility.tabTitleActiveFontAttributes)
-      playlistBtn.attributedTitle = NSAttributedString(string: "PLAYLIST", attributes: Utility.tabTitleFontAttributes)
+      chaptersBtn.attributedTitle = NSAttributedString(string: chapterStr, attributes: Utility.tabTitleActiveFontAttributes)
+      playlistBtn.attributedTitle = NSAttributedString(string: playlistStr, attributes: Utility.tabTitleFontAttributes)
     }
   }
   

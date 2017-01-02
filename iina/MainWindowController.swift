@@ -206,14 +206,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     
     // buffer indicator view
     bufferIndicatorView.layer?.cornerRadius = 10
-    if playerCore.info.isNetworkResource {
-      bufferIndicatorView.isHidden = false
-      bufferSpin.startAnimation(nil)
-      bufferProgressLabel.stringValue = "Opening stream..."
-      bufferDetailLabel.stringValue = ""
-    } else {
-      bufferIndicatorView.isHidden = true
-    }
     
     // other initialization
     osdVisualEffectView.isHidden = true
@@ -242,7 +234,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     w.setIsVisible(false)
   }
   
-  func windowWillClose(_ notification: Notification) {
+  deinit {
     observedPrefKeys.forEach { key in
       ud.removeObserver(self, forKeyPath: key)
     }
@@ -847,6 +839,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           }
         }
       }
+    }
+  }
+  
+  func updateBufferIndicatorView() {
+    if playerCore.info.isNetworkResource {
+      bufferIndicatorView.isHidden = false
+      bufferSpin.startAnimation(nil)
+      bufferProgressLabel.stringValue = "Opening stream..."
+      bufferDetailLabel.stringValue = ""
+    } else {
+      bufferIndicatorView.isHidden = true
     }
   }
   

@@ -46,6 +46,7 @@ class PlayerCore: NSObject {
     info.currentURL = url!
     info.isNetworkResource = false
     mainWindow.showWindow(nil)
+    mainWindow.updateBufferIndicatorView()
     // Send load file command
     info.fileLoading = true
     mpvController.command(.loadfile, args: [path])
@@ -55,6 +56,8 @@ class PlayerCore: NSObject {
     info.isPaused = false
     info.currentURL = URL(string: str)
     info.isNetworkResource = true
+    mainWindow.showWindow(nil)
+    mainWindow.updateBufferIndicatorView()
     // Send load file command
     info.fileLoading = true
     mpvController.command(.loadfile, args: [str])
@@ -429,9 +432,9 @@ class PlayerCore: NSObject {
   // MARK: - Other
   
   func fileStarted() {
-    DispatchQueue.main.sync {
-      mainWindow.showWindow(self)
-    }
+//    DispatchQueue.main.sync {
+//      mainWindow.showWindow(self)
+//    }
   }
   
   /** This function is called right after file loaded. Should load all meta info here. */
@@ -557,6 +560,13 @@ class PlayerCore: NSObject {
     
     DispatchQueue.main.async {
       self.mainWindow.displayOSD(osd)
+    }
+  }
+  
+  func errorOpeningFileAndCloseMainWindow() {
+    DispatchQueue.main.async {
+      Utility.showAlert(message: "Cannot open file or stream!")
+      self.mainWindow.close()
     }
   }
   

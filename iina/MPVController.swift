@@ -33,6 +33,8 @@ class MPVController: NSObject {
   var recordedSeekStartTime: CFTimeInterval = 0
   var recordedSeekTimeListener: ((Double) -> Void)?
   
+  var receivedEndFileWhileLoading: Bool = false
+  
   let observeProperties: [String: mpv_format] = [
     MPVProperty.trackListCount: MPV_FORMAT_INT64,
     MPVProperty.vf: MPV_FORMAT_NONE,
@@ -427,6 +429,24 @@ class MPVController: NSObject {
       
     case MPV_EVENT_PAUSE, MPV_EVENT_UNPAUSE:
       // deprecated
+      break
+      
+    case MPV_EVENT_END_FILE:
+      // if receive end-file when loading file, might be error
+      // wait for idle
+      if playerCore.info.fileLoading {
+        receivedEndFileWhileLoading = true
+      }
+      break
+      
+    case MPV_EVENT_IDLE:
+      if receivedEndFileWhileLoading && playerCore.info.fileLoading {
+        playerCore.errorOpeningFileAndCloseMainWindow()
+        playerCore.info.fileLoading = false
+        playerCore.info.currentURL = nil
+        playerCore.info.isNetworkResource = false
+      }
+      receivedEndFileWhileLoading = false
       break
       
     case MPV_EVENT_CHAPTER_CHANGE:

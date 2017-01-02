@@ -260,7 +260,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Subtitle" id="EKp-Qx-4Mn">
                         <items>
-                            <menuItem title="Open Quick Settings" keyEquivalent="s" id="8y7-Cy-lKT"/>
+                            <menuItem title="Quick Settings Panel" keyEquivalent="s" id="8y7-Cy-lKT"/>
                             <menuItem isSeparatorItem="YES" id="EvW-J9-wqJ"/>
                             <menuItem title="Subtitle" id="uGZ-lo-pJJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -460,7 +460,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="19" y="679"/>
+            <point key="canvasLocation" x="18.5" y="678.5"/>
         </menu>
     </objects>
 </document>

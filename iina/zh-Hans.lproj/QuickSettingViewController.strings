@@ -129,7 +129,7 @@
 "Wbx-Ti-qiS.title" = "缩放:";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle delay:"; ObjectID = "Wkz-wW-sOM"; */
-"Wkz-wW-sOM.title" = "视频延迟:";
+"Wkz-wW-sOM.title" = "字幕延迟:";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "Xez-sb-mfB"; */
 "Xez-sb-mfB.title" = "均衡器";
@@ -165,7 +165,7 @@
 "bzk-c2-LH5.label" = "音频";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
-"cMu-YF-riv.ibShadowedLabels[0]" = "默认";
+"cMu-YF-riv.ibShadowedLabels[0]" = "Default";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[1] = "4:3"; ObjectID = "cMu-YF-riv"; */
 "cMu-YF-riv.ibShadowedLabels[1]" = "4:3";
@@ -222,7 +222,7 @@
 "iS4-Zr-9Ig.title" = "均衡器:";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
-"iuN-rN-jT7.ibShadowedLabels[0]" = "无";
+"iuN-rN-jT7.ibShadowedLabels[0]" = "None";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[1] = "4:3"; ObjectID = "iuN-rN-jT7"; */
 "iuN-rN-jT7.ibShadowedLabels[1]" = "4:3";
@@ -252,7 +252,7 @@
 "ldQ-YL-IEp.title" = "1x";
 
 /* Class = "NSTextFieldCell"; title = "Crop:"; ObjectID = "m9e-IB-IDJ"; */
-"m9e-IB-IDJ.title" = "裁切:";
+"m9e-IB-IDJ.title" = "剪切:";
 
 /* Class = "NSMenuItem"; title = "55"; ObjectID = "mep-aa-rk7"; */
 "mep-aa-rk7.title" = "55";

@@ -39,7 +39,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SHQ-mh-jeX">
-                            <rect key="frame" x="18" y="291" width="112" height="18"/>
+                            <rect key="frame" x="18" y="291" width="295" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <buttonCell key="cell" type="check" title="Enable logging" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LCd-uY-Yze">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -50,7 +50,7 @@
                             </connections>
                         </button>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zKI-kU-PWr">
-                            <rect key="frame" x="18" y="271" width="119" height="18"/>
+                            <rect key="frame" x="18" y="271" width="444" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <buttonCell key="cell" type="check" title="Use MPV's OSD" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="phK-g9-Vbg">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>

@@ -22,8 +22,10 @@ protocol MPVEventDelegate {
 class MPVController: NSObject {
   // The mpv_handle
   var mpv: OpaquePointer!
-  // The mpv client name
+  
   var mpvClientName: UnsafePointer<Int8>!
+  var mpvVersion: String!
+  
   lazy var queue: DispatchQueue! = DispatchQueue(label: "com.colliderli.iina.controller")
   
   var playerCore: PlayerCore = PlayerCore.shared
@@ -238,6 +240,9 @@ class MPVController: NSObject {
     
     // Initialize an uninitialized mpv instance. If the mpv instance is already running, an error is retuned.
     chkErr(mpv_initialize(mpv))
+    
+    // get version
+    mpvVersion = getString(MPVProperty.mpvVersion)
   }
   
   func mpvInitCB() -> UnsafeMutableRawPointer {

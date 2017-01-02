@@ -17,6 +17,7 @@ class AboutWindowController: NSWindowController {
 
   @IBOutlet weak var iconImageView: NSImageView!
   @IBOutlet weak var versionLabel: NSTextField!
+  @IBOutlet weak var mpvVersionLabel: NSTextField!
   @IBOutlet weak var copyRightLabel: NSTextField!
   @IBOutlet weak var githubLabel: NSTextField!
   @IBOutlet weak var websiteLabel: NSTextField!
@@ -33,6 +34,8 @@ class AboutWindowController: NSWindowController {
     versionLabel.stringValue = "\(version) Build \(build)"
     let copyright = infoDic["NSHumanReadableCopyright"] as! String
     copyRightLabel.stringValue = copyright
+    
+    mpvVersionLabel.stringValue = PlayerCore.shared.mpvController.mpvVersion
     
     githubLabel.allowsEditingTextAttributes = true
     githubLabel.isSelectable = true

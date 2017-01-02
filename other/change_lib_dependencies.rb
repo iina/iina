@@ -29,7 +29,7 @@ while not libs.empty?
     deps.each do |d|
       basename = File.basename(d)
       if basename == File.basename(curr_lib) then next end
-      if d.start_with?("/usr/local/opt/", "/usr/local/Cellar/")
+      if d.start_with?("/usr/local/", "/usr/local/Cellar/")
         basename = File.basename(d)
         fix_count += 1
         changes.push "sudo install_name_tool -change '#{d}' '@rpath/#{basename}' '#{curr_lib}'"

@@ -16,6 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
   lazy var playerCore: PlayerCore = PlayerCore.shared
   
+  lazy var aboutWindow: AboutWindowController = AboutWindowController()
+  
   lazy var fontPicker: FontPickerWindowController = FontPickerWindowController()
   
   lazy var inspector: InspectorWindowController = InspectorWindowController()
@@ -135,5 +137,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
   @IBAction func showAudioFilterWindow(_ sender: AnyObject) {
     afWindow.showWindow(self)
+  }
+  
+  @IBAction func showAboutWindow(_ sender: AnyObject) {
+    aboutWindow.showWindow(self)
   }
 }

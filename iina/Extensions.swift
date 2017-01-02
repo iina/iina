@@ -246,6 +246,19 @@ extension NSColor {
 }
 
 
+extension NSMutableAttributedString {
+  convenience init?(linkTo url: String, text: String, font: NSFont) {
+    self.init(string: text)
+    let range = NSRange(location: 0, length: self.length)
+    let nsurl = NSURL(string: url)!
+    self.beginEditing()
+    self.addAttribute(NSLinkAttributeName, value: nsurl, range: range)
+    self.addAttribute(NSFontAttributeName, value: font, range: range)
+    self.endEditing()
+  }
+}
+
+
 extension UserDefaults {
   
   func mpvColor(forKey key: String) -> String? {

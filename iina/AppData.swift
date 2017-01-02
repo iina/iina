@@ -37,6 +37,10 @@ struct AppData {
   static let logFolder = "log"
   static let watchLaterFolder = "watch_later"
   
+  static let githubLink = "https://github.com/lhc70000/iina"
+  static let websiteLink = "http://www.colliderli.com/iina"
+  static let emailLink = "lhc199652@gmail.com"
+  
 }
 
 

@@ -25,6 +25,8 @@ class PlayerCore: NSObject {
   
   var displayOSD: Bool = true
   
+  var isMpvTerminated: Bool = false
+  
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
@@ -80,6 +82,7 @@ class PlayerCore: NSObject {
       mainWindow.videoView.clearGLContext()
     }
     mpvController.mpvQuit()
+    isMpvTerminated = true
   }
   
   // MARK: - MPV commands

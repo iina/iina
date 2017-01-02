@@ -446,6 +446,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   // MARK: - Window delegate
   
+  func windowWillClose(_ notification: Notification) {
+    guard !playerCore.isMpvTerminated else { return }
+    playerCore.stop()
+  }
+  
   func windowWillEnterFullScreen(_ notification: Notification) {
     // show titlebar
     window!.titlebarAppearsTransparent = false

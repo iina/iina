@@ -1,0 +1,214 @@
+<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>Project IINA</title><link href="//fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css" /><link href="/stylesheets/site.css" rel="stylesheet" /><script src="/javascripts/all.js"></script></head><body class="zh-cn zh-cn_checklist zh-cn_checklist_index"><nav class="navbar navbar-fixed-top navbar-light bg-faded"><ul class="nav navbar-nav"><a href="/" class="navbar-brand"><img src="/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><end></end><li class="nav-item"><a href="/zh-cn/" class="nav-link">IINA</a></li><li class="nav-item"><a href="/zh-cn/features" class="nav-link">功能</a></li><li class="nav-item"><a href="/zh-cn/documentation" class="nav-link">文档</a></li><li class="nav-item"><a href="/zh-cn/changelog" class="nav-link">更新日志</a></li><li class="nav-item"><a href="/zh-cn/about" class="nav-link">关于</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a class="nav-link" href="/">English</a></li><li class="nav-item lang-nav-item"><a class="nav-link" href="/zh-cn">简体中文</a></li></ul></nav><div class="main"><div class="checklist container"><h2 id="terminologies">Terminologies</h2>
+
+<ul>
+  <li>"left" and "right" button: the rewind / fast forward button to the left and right of play button</li>
+</ul>
+
+<h2 id="checklist">Checklist</h2>
+
+<ul>
+  <li>General</li>
+  <li>Launchable:
+    <ul>
+      <li>No crach during launch</li>
+      <li>Able to show player window when opened a file</li>
+      <li>Able to show preference window when choose IINA - Preference in menu or Command+,</li>
+    </ul>
+  </li>
+  <li>Decoding:
+    <ul>
+      <li>Able to play all common video types</li>
+      <li>Refuse to open unrecognized files</li>
+    </ul>
+  </li>
+  <li>Theme:
+    <ul>
+      <li>All 4 themes can be changed in settings and works</li>
+    </ul>
+  </li>
+  <li>App behaviour:
+    <ul>
+      <li>All settings in Preference - General - Behaviour works without need of restarting</li>
+    </ul>
+  </li>
+  <li>Screenshots:
+    <ul>
+      <li>Screenshot menu item and shortcut works</li>
+      <li>Able to change screenshot folder</li>
+      <li>Able to change screenshot format</li>
+      <li>Able to set whether include subtitles</li>
+      <li>Able to go to screenshot folder in menu</li>
+    </ul>
+  </li>
+  <li>UI
+    <ul>
+      <li>Window:
+        <ul>
+          <li>Any action should not make window smaller than 500*300</li>
+          <li>It should adjust to video size (with animation) when opened file</li>
+          <li>When "use physical resolution on retina screen" in preference checked, it should resize window based on actual resolution</li>
+          <li>When "resize window only when open file manually" in preference checked, it will remain the same width when switching among playlist items</li>
+          <li>All size related actions in menu <code>Video</code> should work; "double size" should not make window bigger than screen</li>
+          <li>Able to set and cancel "Always on top" in menu <code>Video</code>.</li>
+        </ul>
+      </li>
+      <li>On screen control
+        <ul>
+          <li>It should contain a mute button, a volume slider, a quick settings button and a playlist button</li>
+          <li>It should display video length, current positon and a progress bar</li>
+          <li>Dragging osc should be possible, and its frame should be bounded to window</li>
+          <li>When enabled in preference, it will stick to center when dragging</li>
+          <li>It's possible to set a hide duration for osc. After such duration without any mouse operation, the titlebar, osc and cursor will be hidden.</li>
+        </ul>
+      </li>
+      <li>On screen display
+        <ul>
+          <li>Osd should be shown when certain property changed. Currently only some properties are observed, please check OSDMessage.swift for a list.</li>
+          <li>It's possible to set text size of osd</li>
+          <li>It's possible to set a hide duration for osd</li>
+        </ul>
+      </li>
+      <li>Quick settings panel
+        <ul>
+          <li>It can be triggered by clicking quick settings button in osc, or from menu (video, audio, subtitle - quick settings panel). If open from menu, it should appear with corresponding tab selected, otherwise video tab is selected by default.</li>
+          <li>Click quick settings btn again, run menu actions again or single click anywhere else in the window should hide quick settings panel</li>
+        </ul>
+      </li>
+      <li>Playlist panel
+        <ul>
+          <li>Basically the same as quick settings panel</li>
+        </ul>
+      </li>
+      <li>Fullscreen
+        <ul>
+          <li>Able to toggle fullscreen in menu <code>Video</code> and standard (green traffic light) button</li>
+          <li>When in fullscreen, it should have a normal titlebar and support all macOS standard actions</li>
+          <li>Video view should be put in center and best fit the screen size.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Playback
+    <ul>
+      <li>Pause:
+        <ul>
+          <li>Able to pause through menu and clicking play button</li>
+          <li>"Stop and clear playlists" in menu works</li>
+        </ul>
+      </li>
+      <li>Seek:
+        <ul>
+          <li>Able to seek exactly when change the progress slider</li>
+          <li>When mouse hovered progress slider, a preview label should be displayed above cursor, and after seeking, the playback position should be exactly the time shown in the label</li>
+          <li>Step forward / backward actions in menu should work, and so does frame step (pressing option)</li>
+          <li>Able to jump to beginning and jump to any time in menu; invalid input in "jump to" should trigger alert</li>
+        </ul>
+      </li>
+      <li>A-B Loop
+        <ul>
+          <li>A-B loop related actions in menu should works</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Video
+    <ul>
+      <li>(<strong><em>Syncronized</em></strong> means the sliders / input boxes in quick settings panel should display the current value when opened.)</li>
+      <li>Track:
+        <ul>
+          <li>Able to show all video tracks in a file</li>
+          <li>Able to switch between video tracks through quick settings and menu</li>
+          <li>Current track in menu and quick settings should be syncronized</li>
+        </ul>
+      </li>
+      <li>Aspect ratio:
+        <ul>
+          <li>Able to set common aspect ratios in quick settings and menu</li>
+          <li>Able to input custom aspect ratios in quick settings</li>
+          <li>Aspect ratio in menu and quick settings should be syncronized</li>
+        </ul>
+      </li>
+      <li>Crop:
+        <ul>
+          <li>Able to set common croppoing aspect ratios in quick settings and menu</li>
+          <li>Able to enter interactive crop mode by clicking "Custom" button in quick settings
+            <ul>
+              <li>Able to drag the edges of the box to change crop region</li>
+              <li>The crop region should not be bigger than video size</li>
+              <li>Able to select common cropping aspect ratios, and crop region should change respectively</li>
+              <li>Able to set the cropping by clicking "done" button</li>
+              <li>Able to expand to original video size after cropping</li>
+              <li>Crop status in menu and quick settings should be syncronized</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Rotation:
+        <ul>
+          <li>Able to set rotation in quick settings and menu</li>
+          <li>Rotation status in menu and quick settings should be syncronized</li>
+        </ul>
+      </li>
+      <li>Flip:
+        <ul>
+          <li>Able to set and cancel flip / mirror in menu</li>
+        </ul>
+      </li>
+      <li>Speed:
+        <ul>
+          <li>Able to set speed in quick settings</li>
+          <li>Able to set custom speed value in quick settings</li>
+          <li>Able to set multiple level of speed when clicking left and right button (when chosen "use left/right btn for speed" in preference)</li>
+          <li>Speed should be reset when video paused</li>
+        </ul>
+      </li>
+      <li>Deinterlace:
+        <ul>
+          <li>Able to set deinterlace in quick settings and menu</li>
+          <li>Deinterlace status in menu and quick settings should be syncronized</li>
+        </ul>
+      </li>
+      <li>Equalizer:
+        <ul>
+          <li>Able to adjust equalizers in quick settings view</li>
+          <li>Aboe to reset them by clicking reset button</li>
+        </ul>
+      </li>
+      <li>Video filters:
+        <ul>
+          <li>Able to inspect all current video filters in video filters window</li>
+          <li>Able to add new video filters (in mpv's vf format)</li>
+          <li>Able to edit existing filter</li>
+          <li>Able to delete video filters</li>
+          <li>Show warning if input invalid vf string</li>
+          <li>Filters added by IINA (e.g. flip, crop) can be edited or deleted, and status should be syncronized with quick settings view</li>
+        </ul>
+      </li>
+      <li>Codec: Codec settings in preference - codec should work</li>
+    </ul>
+  </li>
+  <li>Audio
+    <ul>
+      <li>Track: Basically the same with video track.</li>
+      <li>External audio: Able to load external audio track from menu and quick settings</li>
+      <li>Delay: Same as above requirement</li>
+      <li>Equalizer: Able to set equalizer and reset</li>
+      <li>Audio filters: Basically the same with video filters</li>
+      <li>Codec: Codec settings in preference - codec should work</li>
+    </ul>
+  </li>
+  <li>Subtitles
+    <ul>
+      <li></li>
+    </ul>
+  </li>
+  <li>Control
+    <ul>
+      <li>A single click will only hide the quick settings panel if its opened</li>
+    </ul>
+  </li>
+  <li>Key bindings</li>
+  <li>Advanced settings</li>
+  <li>Network</li>
+</ul>
+</div></div></body></html>

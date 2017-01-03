@@ -1,0 +1,41 @@
+<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>Documentation | Project IINA</title><link href="//fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css" /><link href="/stylesheets/site.css" rel="stylesheet" /><script src="/javascripts/all.js"></script></head><body class="zh-cn zh-cn_documentation zh-cn_documentation_index"><nav class="navbar navbar-fixed-top navbar-light bg-faded"><ul class="nav navbar-nav"><a href="/" class="navbar-brand"><img src="/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><end></end><li class="nav-item"><a href="/zh-cn/" class="nav-link">IINA</a></li><li class="nav-item"><a href="/zh-cn/features" class="nav-link">功能</a></li><li class="nav-item"><a href="/zh-cn/documentation" class="nav-link">文档</a></li><li class="nav-item"><a href="/zh-cn/changelog" class="nav-link">更新日志</a></li><li class="nav-item"><a href="/zh-cn/about" class="nav-link">关于</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a class="nav-link" href="/">English</a></li><li class="nav-item lang-nav-item"><a class="nav-link" href="/zh-cn">简体中文</a></li></ul></nav><div class="main"><div class="documentation"><div class="container"><h1>Documentation</h1><div class="docs"><h2 id="theme">Theme</h2>
+
+<p>All themes (materials) are enum cases from <code>NSVisualEffectMaterial</code>. This option only works on macOS 10.11+.</p>
+
+<h2 id="preferences">Preferences</h2>
+
+<p>All preferences related to playback are achieved by passing options to mpv. See <code>MpvController.swift</code> in source code for more information.</p>
+
+<h2 id="keybindings">Keybindings</h2>
+
+<p>Currently, IINA does not have a user-friendly key binding setting interface. When user add a new key binding, it can record keys but user must input the corresponding command manually. For configurations, it only parses each configuration as a <code>conf</code> file and save it (Note that after saving, all comments will lost).</p>
+
+<p>For best compatibility, it interprets user's key input at runtime and pass them to mpv directly using <code>keydown</code> command, hence all menu shortcuts (like <code>Cmd+V</code>) will not be captured. Of course, some prefixes like <code>no-osd</code> will not work unless enabling "Use MPV's OSD" in "Advanced" panel.</p>
+
+<h2 id="advanced">Advanced</h2>
+
+<p>Advanced settings are only for mpv users who have basic knowledge on mpv's option and configuration system. All settings in advanced tab will take effect after restarting application.</p>
+
+<h3 id="enable-logging">Enable logging</h3>
+
+<p>This will pass <code>--log-file=&lt;path&gt;</code> to mpv. User cannot change the default logging path, but overriding such option in "additional MPV options" should work. The default logging directory can be revealed in finder by clicking "Open log directory" button.</p>
+
+<h3 id="use-mpvs-osd">Use MPV's OSD</h3>
+
+<p>Normally, IINA will pass <code>--osd-level=0</code> to totally disable internal OSD, and use its own OSD system instead. However there still exists lots of problems in current  system, so user may want to use mpv's OSD for more information, or for compatibility of previous scripts. Enabling this option will disable IINA's OSD and set <code>--osd-level</code> to <code>1</code> by default.</p>
+
+<h3 id="config-directory">Config directory</h3>
+
+<p>MPV Client API will not automatically load <code>~/.config/mpv</code> as config Directory. If you are a previous mpv user and wants to keep all settings and scripts, you may enable this option. This is equivalent of passing <code>--config=yes --config-dir=&lt;dir&gt;</code> to mpv.</p>
+
+<h3 id="additional-mpv-options">Additional MPV options</h3>
+
+<p>You can add additional MPV options in this section. All options here has higher priority than <strong>all other options</strong> in preferences, including those in "Advanced" panel. The following list shows priority of options (low to high):</p>
+
+<ul>
+  <li>Options translated from user preferences</li>
+  <li>Options in config files from "Config directory" (if enabled)</li>
+  <li>Options in "Additional MPV options"</li>
+  <li>Some special options, namely <code>--vo</code> for stability</li>
+</ul>
+</div></div></div></div></body></html>

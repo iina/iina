@@ -2,7 +2,9 @@
 
 Project IINA is a **modern** video player for macOS.
 
-Currently work in progress, perhaps an alpha version will be available in this year.
+Website: [https://lhc70000.github.io/iina/](https://lhc70000.github.io/iina/)
+
+Releases: [https://github.com/lhc70000/iina/releases](https://github.com/lhc70000/iina/releases)
 
 # Features
 
@@ -17,4 +19,58 @@ Currently work in progress, perhaps an alpha version will be available in this y
 
 # Build
 
-__There are some works needing to be done before building. Infomation will be available later.__
+Please make sure cocoapods is installed.
+
+```
+sudo gem install cocoapods
+```
+
+Run pod install in root directory.
+
+```
+pod install
+```
+
+Theoretically no extra work is needed. If you are unwilling to use the provided dylibs, follow the instructions below.
+
+**Install mpv**
+
+```
+brew install mpv --with-uchardet
+```
+Currently `ytdl` is not included when building, but will be considered in later versions.
+
+**other/parse_doc.rb**
+
+This script will fetch the *lastest* mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. Only needed when updating libmpv. Note that once API changed, player source code may also need to be changed.
+
+**other/change_lib_dependencies.rb**
+
+This script will resolve library dependencies and copy all required dylibs into `libmpv/libs`.
+
+Before running this script, you shohuld first copy libmpv into `libmpv/libs`:
+
+```
+"cp path/to/libmpv ./libmpv/libs"
+"sudo install_name_tool -id @executable_path/../Frameworks/libmpv.1.23.0.dylib ./libmpv/lib/libmpv.1.23.0.dylib"
+```
+
+Where `path/to/libmpv` should be in your homebrew install path.
+
+Make sure in XCode build settings, you have a phase copying all these dylibs.
+
+## Contribute
+
+Any feedback is appreciated! You can
+
+- Star or fork it
+- Download and test it
+- Send bug report
+- Send feature request
+- Provide suggestions on code and design
+- Provide localizaton
+- ...
+
+## License
+
+GPLv3

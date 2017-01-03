@@ -1,3 +1,5 @@
+![IINA Icon](https://github.com/lhc70000/iina/raw/master/iina/Assets.xcassets/AppIcon.appiconset/256-1.png)
+
 # IINA
 
 Project IINA is a **modern** video player for macOS.

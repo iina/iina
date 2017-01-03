@@ -38,7 +38,7 @@ struct AppData {
   static let watchLaterFolder = "watch_later"
   
   static let githubLink = "https://github.com/lhc70000/iina"
-  static let websiteLink = "http://www.colliderli.com/iina"
+  static let websiteLink = "https://lhc70000.github.io/iina/"
   static let emailLink = "lhc199652@gmail.com"
   
 }

@@ -367,9 +367,22 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                         <items>
-                            <menuItem title="IINA Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                            <menuItem title="Documentation / Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                 <connections>
-                                    <action selector="showHelp:" target="-1" id="y7X-2Q-9no"/>
+                                    <action selector="helpAction:" target="Voe-Tx-rLC" id="aqh-p6-pB4"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="J8m-Ix-VGl"/>
+                            <menuItem title="Github" id="A9w-iE-gVg">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="githubAction:" target="Voe-Tx-rLC" id="Qaj-Kz-mRQ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Website" id="Rqg-VS-aIj">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="websiteAction:" target="Voe-Tx-rLC" id="tO9-9Q-OBu"/>
                                 </connections>
                             </menuItem>
                         </items>

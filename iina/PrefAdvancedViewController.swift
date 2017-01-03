@@ -98,6 +98,10 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
       UserDefaults.standard.synchronize()
     }
   }
+  
+  @IBAction func helpBtnAction(_ sender: AnyObject) {
+    NSWorkspace.shared().open(URL(string: AppData.websiteLink)!.appendingPathComponent("documentation"))
+  }
 }
 
 extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource {

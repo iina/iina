@@ -142,4 +142,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @IBAction func showAboutWindow(_ sender: AnyObject) {
     aboutWindow.showWindow(self)
   }
+  
+  @IBAction func helpAction(_ sender: AnyObject) {
+    NSWorkspace.shared().open(URL(string: AppData.websiteLink)!.appendingPathComponent("documentation"))
+  }
+  
+  @IBAction func githubAction(_ sender: AnyObject) {
+    NSWorkspace.shared().open(URL(string: AppData.githubLink)!)
+  }
+  
+  @IBAction func websiteAction(_ sender: AnyObject) {
+    NSWorkspace.shared().open(URL(string: AppData.websiteLink)!)
+  }
+  
 }

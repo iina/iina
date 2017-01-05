@@ -8,6 +8,12 @@ Website: [https://lhc70000.github.io/iina/](https://lhc70000.github.io/iina/)
 
 Releases: [https://github.com/lhc70000/iina/releases](https://github.com/lhc70000/iina/releases)
 
+---
+
+When raising a issue, please **use English** if possible.
+
+在提 issue 时，请尽量使用**英文**！
+
 # Features
 
 - Based on [mpv](https://github.com/mpv-player/mpv), the powerful media player project
@@ -50,16 +56,16 @@ This script will fetch the *lastest* mpv documentation and generate `MPVOption.s
 
 This script will resolve library dependencies and copy all required dylibs into `libmpv/libs`.
 
-Before running this script, you shohuld first copy libmpv into `libmpv/libs`:
+Before running this script, you should first copy libmpv into `libmpv/libs`, like:
 
 ```
-"cp path/to/libmpv ./libmpv/libs"
-"sudo install_name_tool -id @executable_path/../Frameworks/libmpv.1.23.0.dylib ./libmpv/lib/libmpv.1.23.0.dylib"
+cp path/to/libmpv ./libmpv/libs
+sudo install_name_tool -id @executable_path/../Frameworks/libmpv.1.23.0.dylib ./libmpv/lib/libmpv.1.23.0.dylib
 ```
 
 Where `path/to/libmpv` should be in your homebrew install path.
 
-Make sure in XCode build settings, you have a phase copying all these dylibs.
+Make sure in Xcode build settings, you have a phase copying all these dylibs.
 
 ## Contribute
 

@@ -97,11 +97,13 @@ class VideoView: NSOpenGLView {
       UInt32(NSOpenGLPFADoubleBuffer),
       UInt32(NSOpenGLPFAAccelerated),
       UInt32(NSOpenGLPFAOpenGLProfile), UInt32(NSOpenGLProfileVersion3_2Core),
+      UInt32(NSOpenGLPFAAllowOfflineRenderers), // allows integrated gpu to be used
       0
     ]
     let desentAttributes: [NSOpenGLPixelFormatAttribute] = [
       UInt32(NSOpenGLPFADoubleBuffer),
       UInt32(NSOpenGLPFAOpenGLProfile), UInt32(NSOpenGLProfileVersion3_2Core),
+      UInt32(NSOpenGLPFAAllowOfflineRenderers),
       0
     ]
     

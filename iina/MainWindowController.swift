@@ -478,6 +478,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // stop playing
     if !playerCore.isMpvTerminated {
       playerCore.stop()
+      videoView.stopDisplayLink()
     }
     // disable sleep preventer
     SleepPreventer.allowSleep()

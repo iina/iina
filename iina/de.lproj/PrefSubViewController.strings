@@ -1,9 +1,9 @@
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "1vo-so-iaM"; */
-"1vo-so-iaM.title" = "Subtitles containing media filename";
+"1vo-so-iaM.title" = "Untertitel, die den Dateinamen des Mediums enthalten";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "5CZ-8l-KYJ"; */
-"5CZ-8l-KYJ.title" = "Border";
+"5CZ-8l-KYJ.title" = "Rahmen";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "7NC-Ih-gMB"; */
 "7NC-Ih-gMB.title" = " X:";
@@ -12,67 +12,67 @@
 "Bjp-HJ-i7V.title" = "sans-serif";
 
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "Chj-YP-eFV"; */
-"Chj-YP-eFV.title" = "Prefered language:";
+"Chj-YP-eFV.title" = "Bevorzugte Sprache:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "HCH-sL-fT2"; */
-"HCH-sL-fT2.title" = "Center";
+"HCH-sL-fT2.title" = "Zentrieren";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "Hpt-KA-McW"; */
-"Hpt-KA-McW.title" = "Left";
+"Hpt-KA-McW.title" = "Links";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "Jvu-MV-7vD"; */
 "Jvu-MV-7vD.title" = " X:";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitle:"; ObjectID = "Mte-Lb-do4"; */
-"Mte-Lb-do4.title" = "Text subtitle:";
+"Mte-Lb-do4.title" = "Aussehen:";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "ND2-m7-ZET"; */
-"ND2-m7-ZET.title" = "Bottom";
+"ND2-m7-ZET.title" = "Unten";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "OL9-2M-Zb5"; */
-"OL9-2M-Zb5.title" = "Size:";
+"OL9-2M-Zb5.title" = "Größe:";
 
 /* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "PZ2-pZ-hHa"; */
-"PZ2-pZ-hHa.title" = "Other:";
+"PZ2-pZ-hHa.title" = "Sonstiges:";
 
 /* Class = "NSMenuItem"; title = "All subtitles in the same folder"; ObjectID = "Qcl-0x-3hh"; */
-"Qcl-0x-3hh.title" = "All subtitles in the same folder";
+"Qcl-0x-3hh.title" = "Alle Untertitel im selben Ordner";
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "RiL-Rv-eke"; */
-"RiL-Rv-eke.title" = "Font:";
+"RiL-Rv-eke.title" = "Schriftart:";
 
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "SLQ-wt-k6Y"; */
-"SLQ-wt-k6Y.title" = "Background:";
+"SLQ-wt-k6Y.title" = "Hintergrund:";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "VBZ-bi-gTh"; */
 "VBZ-bi-gTh.title" = "Y:";
 
 /* Class = "NSButtonCell"; title = "Ignore all ASS styles"; ObjectID = "VKh-1E-Ey8"; */
-"VKh-1E-Ey8.title" = "Ignore all ASS styles";
+"VKh-1E-Ey8.title" = "Alle ASS Stile ignorieren";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "Waw-Pj-REg"; */
-"Waw-Pj-REg.title" = "Color:";
+"Waw-Pj-REg.title" = "Farbe:";
 
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "Zym-2a-rt0"; */
-"Zym-2a-rt0.title" = "Auto load:";
+"Zym-2a-rt0.title" = "Automatisch laden:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "aMs-VF-WaJ"; */
-"aMs-VF-WaJ.title" = "Center";
+"aMs-VF-WaJ.title" = "Zentrieren";
 
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "bqN-gA-fs9"; */
-"bqN-gA-fs9.title" = "Offset:";
+"bqN-gA-fs9.title" = "Versatz:";
 
 /* Class = "NSButtonCell"; title = "Choose..."; ObjectID = "cVp-yI-tMu"; */
-"cVp-yI-tMu.title" = "Choose...";
+"cVp-yI-tMu.title" = "Wählen...";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "clt-eT-TMN"; */
-"clt-eT-TMN.title" = "Disabled";
+"clt-eT-TMN.title" = "Deaktiviert";
 
 /* Class = "NSBox"; title = "Font"; ObjectID = "dsH-Ze-lj5"; */
-"dsH-Ze-lj5.title" = "Font";
+"dsH-Ze-lj5.title" = "Schriftart";
 
 /* Class = "NSTextFieldCell"; title = "This will cause all ASS subtitles rendered using styles as below."; ObjectID = "i94-zQ-hFA"; */
-"i94-zQ-hFA.title" = "This will cause all ASS subtitles rendered using styles as below.";
+"i94-zQ-hFA.title" = "Dies wird alle ASS Untertitel mit den Stilen von unten darstellen.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "jTS-Yq-bvB"; */
 "jTS-Yq-bvB.title" = "Y:";
@@ -81,37 +81,37 @@
 "kCB-FU-Qvf.title" = "Position:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "kKv-lk-VPE"; */
-"kKv-lk-VPE.title" = "Color:";
+"kKv-lk-VPE.title" = "Farbe:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "mxc-gq-Ct7"; */
-"mxc-gq-Ct7.title" = "Color:";
+"mxc-gq-Ct7.title" = "Farbe:";
 
 /* Class = "NSBox"; title = "Shadow"; ObjectID = "oYE-Cd-X3V"; */
-"oYE-Cd-X3V.title" = "Shadow";
+"oYE-Cd-X3V.title" = "Schatten";
 
 /* Class = "NSTextFieldCell"; title = "Margin"; ObjectID = "sVu-u3-QwW"; */
-"sVu-u3-QwW.title" = "Margin";
+"sVu-u3-QwW.title" = "Rand";
 
 /* Class = "NSMenuItem"; title = "Subtitle with the exact same media filename"; ObjectID = "siy-Uq-tMP"; */
-"siy-Uq-tMP.title" = "Subtitle with the exact same media filename";
+"siy-Uq-tMP.title" = "Untertitel mit dem gleichen Dateinamen";
 
 /* Class = "NSTextFieldCell"; title = "Align"; ObjectID = "t3t-yJ-pM9"; */
-"t3t-yJ-pM9.title" = "Align";
+"t3t-yJ-pM9.title" = "Anordnung";
 
 /* Class = "NSTextFieldCell"; title = "ASS subtitle:"; ObjectID = "tL7-oR-LZ4"; */
-"tL7-oR-LZ4.title" = "ASS subtitle:";
+"tL7-oR-LZ4.title" = "ASS Untertitel:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "vHI-NX-bZ5"; */
-"vHI-NX-bZ5.title" = "Top";
+"vHI-NX-bZ5.title" = "Oben";
 
 /* Class = "NSButtonCell"; title = "Italic"; ObjectID = "vc5-ZJ-ozS"; */
-"vc5-ZJ-ozS.title" = "Italic";
+"vc5-ZJ-ozS.title" = "Kursiv";
 
 /* Class = "NSButtonCell"; title = "Bold"; ObjectID = "wbU-ip-uCp"; */
-"wbU-ip-uCp.title" = "Bold";
+"wbU-ip-uCp.title" = "Fett";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "xNk-Uv-jYT"; */
-"xNk-Uv-jYT.title" = "Size:";
+"xNk-Uv-jYT.title" = "Größe:";
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "zLl-vV-p1h"; */
-"zLl-vV-p1h.title" = "Right";
+"zLl-vV-p1h.title" = "Rechts";

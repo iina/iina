@@ -263,6 +263,7 @@ class VideoView: NSOpenGLView {
   }
   
   func restartDisplayLink() {
+    stopDisplayLink()
     setUpDisplayLink()
     startDisplayLink()
   }

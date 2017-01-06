@@ -8,6 +8,11 @@ First of all, please be tolerate. I'm not a professional in Cocoa development or
 
 If you believe the code structure could be improved, please raise an issue.
 
+## Issues
+
+- Please use English for both title and detail. 请在标题和正文都使用英文。
+- Before opening an issue, please check whether there already exists a similar one.
+
 ## Some Guidelines
 
 - IINA is for modern macOS.
@@ -57,4 +62,9 @@ Open `iina.xcworkspace`.
 Commit changes, test, push, and submit a pull request.
 
 If you want to build dylibs on your own, please refer to `README.md`.
+
+**Tips**
+
+- If you found master has been updated during your change, remember to do a rebase before opening pull request.
+
 

@@ -8,6 +8,9 @@ Website: [https://lhc70000.github.io/iina/](https://lhc70000.github.io/iina/)
 
 Releases: [https://github.com/lhc70000/iina/releases](https://github.com/lhc70000/iina/releases)
 
+Telegram group: 
+[https://telegram.me/joinchat/EUPqOwkAnyXQGU3cje6aQg](https://telegram.me/joinchat/EUPqOwkAnyXQGU3cje6aQg)
+
 ---
 
 When raising a issue, please **use English** if possible.

@@ -86,7 +86,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       menuController.bindMenuItems()
       isReady = true
     }
-    playerCore.openFile(URL(fileURLWithPath: filename))
+    
+    let url = URL(fileURLWithPath: filename)
+    if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) {
+      NSDocumentController.shared().noteNewRecentDocumentURL(url)
+    }
+    playerCore.openFile(url)
     return true
   }
   

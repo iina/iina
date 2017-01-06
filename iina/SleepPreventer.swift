@@ -11,7 +11,7 @@ import IOKit.pwr_mgt
 
 class SleepPreventer: NSObject {
   
-  static private let reason = "" as CFString
+  static private let reason = "IINA is playing video" as CFString
   
   static private var assertionID = IOPMAssertionID()
 

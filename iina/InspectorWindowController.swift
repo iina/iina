@@ -56,7 +56,7 @@ class InspectorWindowController: NSWindowController {
     // other properties
 
     let duration = controller.getDouble(MPVProperty.duration)
-    durationField.stringValue = VideoTime(Int(duration)).stringRepresentation
+    durationField.stringValue = VideoTime(duration).stringRepresentation
 
     let vwidth = controller.getInt(MPVProperty.width)
     let vheight = controller.getInt(MPVProperty.height)

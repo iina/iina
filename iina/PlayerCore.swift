@@ -514,15 +514,15 @@ class PlayerCore: NSObject {
 
     switch option {
     case .time:
-      let time = mpvController.getInt(MPVProperty.timePos)
-      info.videoPosition!.second = time
+      let time = mpvController.getDouble(MPVProperty.timePos)
+      info.videoPosition = VideoTime(time)
       DispatchQueue.main.async {
         self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
       }
 
     case .timeAndCache:
-      let time = mpvController.getInt(MPVProperty.timePos)
-      info.videoPosition!.second = time
+      let time = mpvController.getDouble(MPVProperty.timePos)
+      info.videoPosition = VideoTime(time)
       info.pausedForCache = mpvController.getFlag(MPVProperty.pausedForCache)
       info.cacheSize = mpvController.getInt(MPVProperty.cacheSize)
       info.cacheUsed = mpvController.getInt(MPVProperty.cacheUsed)
@@ -642,7 +642,7 @@ class PlayerCore: NSObject {
     }
     for index in 0..<chapterCount {
       let chapter = MPVChapter(title:     mpvController.getString(MPVProperty.chapterListNTitle(index)),
-                               startTime: mpvController.getInt(MPVProperty.chapterListNTime(index)),
+                               startTime: mpvController.getDouble(MPVProperty.chapterListNTime(index)),
                                index:     index)
       info.chapters.append(chapter)
     }

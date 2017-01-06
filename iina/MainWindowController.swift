@@ -983,7 +983,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       Utility.fatal("video info not available")
       return
     }
-    let percantage = (Double(pos.second) / Double(duration.second)) * 100
+    let percantage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
     touchBarCurrentPosLabel?.stringValue = pos.stringRepresentation
     if withDuration {

@@ -1,5 +1,3 @@
-(WIP)
-
 # Contributing
 
 Thank you for being interested in IINA.
@@ -37,8 +35,13 @@ If you believe the code structure could be improved, please raise an issue.
 **Current structure**
 
 - Only `VideoView` and `MPVController` may call mpv API directly.
-- `PlayerCore` encapsulates general playback functions. Setting options/properties directly through `MPVController` is discouraged.
-
+- `PlayerCore` encapsulates general playback functions.
+  - Setting options/properties directly through `MPVController` is discouraged.
+  - `PlayerCore` should only contain logic that controls playback.
+- Window related logic should be in `MainWindowController`.
+  - `windowDidLoad()`: stuff that should be done once
+  - `windowDidOpen()`: stuff that should be done every time when window shown, like resetting some UI components
+  - `windowWillClose()`: release / deinitialize 
 
 ## How to Contribute
 
@@ -65,6 +68,5 @@ If you want to build dylibs on your own, please refer to `README.md`.
 
 **Tips**
 
-- If you found master has been updated during your change, remember to do a rebase before opening pull request.
-
-
+- Please set target branch of your pull request to `develop`.
+- If you found `develop` has been updated during your change, remember to do a rebase before opening pull request.

@@ -186,7 +186,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fadeableViews.append(titleBarView)
     fadeableViews.append(controlBar)
     guard let cv = w.contentView else { return }
-    cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 0]))
     
     // sidebar views
     sideBarView.isHidden = true
@@ -216,8 +215,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     rightArrowLabel.isHidden = true
     timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
-    
-    playSlider.addTrackingArea(NSTrackingArea(rect: playSlider.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 1]))
     
     useExtrackSeek = Preference.SeekOption(rawValue: ud.integer(forKey: Preference.Key.useExactSeek))
     arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: Preference.Key.arrowButtonAction))
@@ -472,6 +469,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updateBufferIndicatorView()
     // enable sleep preventer
     SleepPreventer.preventSleep()
+    // start tracking mouse event
+    guard let w = self.window, let cv = w.contentView else { return }
+    cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 0]))
+    playSlider.addTrackingArea(NSTrackingArea(rect: playSlider.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 1]))
   }
   
   func windowWillClose(_ notification: Notification) {
@@ -482,6 +483,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     // disable sleep preventer
     SleepPreventer.allowSleep()
+    // stop tracking mouse event
+    guard let w = self.window, let cv = w.contentView else { return }
+    cv.trackingAreas.forEach(cv.removeTrackingArea)
+    playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
   }
   
   func windowWillEnterFullScreen(_ notification: Notification) {

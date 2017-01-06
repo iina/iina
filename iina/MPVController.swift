@@ -34,7 +34,7 @@ class MPVController: NSObject {
   var needRecordSeekTime: Bool = false
   var recordedSeekStartTime: CFTimeInterval = 0
   var recordedSeekTimeListener: ((Double) -> Void)?
-
+  
   var receivedEndFileWhileLoading: Bool = false
   
   let observeProperties: [String: mpv_format] = [

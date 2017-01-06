@@ -34,7 +34,6 @@ class MPVController: NSObject {
   var needRecordSeekTime: Bool = false
   var recordedSeekStartTime: CFTimeInterval = 0
   var recordedSeekTimeListener: ((Double) -> Void)?
-  var userConfigs: [String: Any]!
   var receivedEndFileWhileLoading: Bool = false
   
   let observeProperties: [String: mpv_format] = [
@@ -219,10 +218,10 @@ class MPVController: NSObject {
     chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, scriptPath))
     
     //load keybinding
-    userConfigs = UserDefaults.standard.dictionary(forKey: Preference.Key.inputConfigs)
-    var inputConfPath = Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!
-    if let confFromUd = UserDefaults.standard.string(forKey: Preference.Key.currentInputConfigName) {
-      let currentConfigFilePath = getFilePath(forConfig: confFromUd, showAlert: false)
+    let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)
+    var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["MPV Default"]
+    if let confFromUd = UserDefaults.standard.string(forKey: PK.currentInputConfigName) {
+      let currentConfigFilePath = getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false)
       if confFromUd != "MPV Default"  &&  currentConfigFilePath != nil {
         inputConfPath = currentConfigFilePath!
       }
@@ -250,7 +249,7 @@ class MPVController: NSObject {
     // get version
     mpvVersion = getString(MPVProperty.mpvVersion)
   }
-  private func getFilePath(forConfig conf: String, showAlert: Bool = true) -> String? {
+  private func getFilePath(Configs userConfigs: [String: Any]!, forConfig conf: String, showAlert: Bool = true) -> String? {
     
     // if is default config
     if let dv = PrefKeyBindingViewController.defaultConfigs[conf] {
@@ -268,7 +267,7 @@ class MPVController: NSObject {
   func mpvInitCB() -> UnsafeMutableRawPointer {
     // Get opengl-cb context.
     let mpvGL = mpv_get_sub_api(mpv, MPV_SUB_API_OPENGL_CB)!;
-    
+
     return mpvGL
   }
   
@@ -347,7 +346,7 @@ class MPVController: NSObject {
   /** Get filter. only "af" or "vf" is supported for name */
   func getFilters(_ name: String) -> [MPVFilter] {
     Utility.assert(name == MPVProperty.vf || name == MPVProperty.af, "getFilters() do not support \(name)!")
-    
+
     var result: [MPVFilter] = []
     var node = mpv_node()
     mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node)
@@ -589,7 +588,7 @@ class MPVController: NSObject {
         playerCore.info.audioDelay = data
         playerCore.sendOSD(.audioDelay(data))
       }
-      
+
     case MPVOption.Subtitles.subDelay:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         playerCore.info.subDelay = data
@@ -648,8 +647,8 @@ class MPVController: NSObject {
         playerCore.info.saturation = intData
         playerCore.sendOSD(.saturation(intData))
       }
-      
-      // following properties may change before file loaded
+
+    // following properties may change before file loaded
       
     case MPVProperty.playlistCount:
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
@@ -663,7 +662,7 @@ class MPVController: NSObject {
     case MPVProperty.af:
       NotificationCenter.default.post(Notification(name: Constants.Noti.afChanged))
       
-      // ignore following
+    // ignore following
       
       
     default:
@@ -795,6 +794,6 @@ class MPVController: NSObject {
       Utility.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
     }
   }
-  
+
   
 }

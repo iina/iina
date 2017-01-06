@@ -20,12 +20,12 @@ When raising a issue, please **use English** if possible.
 # Features
 
 - Based on [mpv](https://github.com/mpv-player/mpv), the powerful media player project
-- For and only for modern macOS (10.10+)
-- User friendly interface
+- For and only for modern versions of macOS (10.10+)
+- User-friendly interface
 - All the features you need for video, audio and subtitles
-- Support basic playlist and chapters
-- MPV config file and script system are still available for advanced users
-- Written in Swift, open for new technologies like Touch Bar
+- Support for basic playlists and chapters
+- MPV config file and script system are available for advanced users
+- Written in Swift, which is open for new technologies like Touch Bar
 - Still in active development
 
 # Build
@@ -36,7 +36,7 @@ Please make sure cocoapods is installed.
 sudo gem install cocoapods
 ```
 
-Run pod install in project root directory.
+Run `pod install` in project root directory.
 
 ```
 pod install
@@ -59,7 +59,7 @@ This script will fetch the *lastest* mpv documentation and generate `MPVOption.s
 
 This script will resolve library dependencies and copy all required dylibs into `libmpv/libs`.
 
-Before running this script, you should first copy libmpv into `libmpv/libs`, like:
+Before running this script, you should first copy libmpv into `libmpv/libs`, like so:
 
 ```
 cp path/to/libmpv ./libmpv/libs
@@ -76,10 +76,10 @@ Any feedback is appreciated! You can
 
 - Star or fork it
 - Download and test it
-- Send bug report
-- Send feature request
+- Send bug reports
+- Send feature requests
 - Provide suggestions on code structure and UI design
-- Provide localizaton
+- Provide localizations
 - ...
 
 ## License

@@ -8,14 +8,23 @@ Website: [https://lhc70000.github.io/iina/](https://lhc70000.github.io/iina/)
 
 Releases: [https://github.com/lhc70000/iina/releases](https://github.com/lhc70000/iina/releases)
 
+Telegram group: 
+[https://telegram.me/joinchat/EUPqOwkAnyXQGU3cje6aQg](https://telegram.me/joinchat/EUPqOwkAnyXQGU3cje6aQg)
+
+---
+
+When raising a issue, please **use English** if possible.
+
+在提 issue 时，请尽量使用**英文**！
+
 # Features
 
 - Based on [mpv](https://github.com/mpv-player/mpv), the powerful media player project
 - For and only for modern macOS (10.10+)
 - User friendly interface
 - All the features you need for video, audio and subtitles
-- Support chapters and playlists
-- MPV config file and script system is still available for advanced users
+- Support basic playlist and chapters
+- MPV config file and script system are still available for advanced users
 - Written in Swift, open for new technologies like Touch Bar
 - Still in active development
 
@@ -27,13 +36,13 @@ Please make sure cocoapods is installed.
 sudo gem install cocoapods
 ```
 
-Run pod install in root directory.
+Run pod install in project root directory.
 
 ```
 pod install
 ```
 
-Theoretically no extra work is needed. If you are unwilling to use the provided dylibs, follow the instructions below.
+Theoretically no extra work is needed. _If you are unwilling to use the provided dylibs, follow the instructions below._
 
 **Install mpv**
 
@@ -50,16 +59,16 @@ This script will fetch the *lastest* mpv documentation and generate `MPVOption.s
 
 This script will resolve library dependencies and copy all required dylibs into `libmpv/libs`.
 
-Before running this script, you shohuld first copy libmpv into `libmpv/libs`:
+Before running this script, you should first copy libmpv into `libmpv/libs`, like:
 
 ```
-"cp path/to/libmpv ./libmpv/libs"
-"sudo install_name_tool -id @executable_path/../Frameworks/libmpv.1.23.0.dylib ./libmpv/lib/libmpv.1.23.0.dylib"
+cp path/to/libmpv ./libmpv/libs
+sudo install_name_tool -id @executable_path/../Frameworks/libmpv.1.23.0.dylib ./libmpv/lib/libmpv.1.23.0.dylib
 ```
 
 Where `path/to/libmpv` should be in your homebrew install path.
 
-Make sure in XCode build settings, you have a phase copying all these dylibs.
+Make sure in Xcode build settings, you have a phase copying all these dylibs.
 
 ## Contribute
 
@@ -69,7 +78,7 @@ Any feedback is appreciated! You can
 - Download and test it
 - Send bug report
 - Send feature request
-- Provide suggestions on code and design
+- Provide suggestions on code structure and UI design
 - Provide localizaton
 - ...
 

@@ -237,7 +237,7 @@ class MPVController: NSObject {
     mpv_set_wakeup_callback(self.mpv, { (ctx) in
       let mpvController = unsafeBitCast(ctx, to: MPVController.self)
       mpvController.readEvents()
-    }, mutableRawPointerOf(obj: self))
+      }, mutableRawPointerOf(obj: self))
     
     // Observe propoties.
     observeProperties.forEach { (k, v) in
@@ -648,7 +648,7 @@ class MPVController: NSObject {
         playerCore.info.saturation = intData
         playerCore.sendOSD(.saturation(intData))
       }
-
+    
     // following properties may change before file loaded
       
     case MPVProperty.playlistCount:

@@ -67,6 +67,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private var singleClickAction: Preference.MouseClickAction!
   private var doubleClickAction: Preference.MouseClickAction!
   
+  private var singleClickTimer: Timer?
+  
   /** A list of observed preferences */
   
   private let observedPrefKeys: [String] = [
@@ -337,28 +339,46 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         hideSideBar()
       } else {
         // handle mouse click
-        let action: Preference.MouseClickAction
         if event.clickCount == 1 {
           // single click
-          action = singleClickAction
+          if doubleClickAction! == .none {
+            // if double click action is none, it's safe to perform action immediately
+            performMouseAction(singleClickAction)
+          } else {
+            // else start a timer
+            singleClickTimer = Timer.scheduledTimer(timeInterval: NSEvent.doubleClickInterval(), target: self, selector: #selector(self.performMouseActionLater(_:)), userInfo: singleClickAction, repeats: false)
+          }
         } else if event.clickCount == 2 {
           // double click
-          action = doubleClickAction
+          guard doubleClickAction! != .none else { return }
+          // if already scheduled a single click timer, invalidate it
+          if let timer = singleClickTimer {
+            timer.invalidate()
+            singleClickTimer = nil
+          }
+          performMouseAction(doubleClickAction)
         } else {
           return
         }
-        // preform action
-        switch action {
-        case .none:
-          break
-          
-        case .fullscreen:
-          window?.toggleFullScreen(self)
-          
-        case .pause:
-          playerCore.togglePause(nil)
-        }
       }
+    }
+  }
+  
+  @objc private func performMouseActionLater(_ timer: Timer) {
+    guard let action = timer.userInfo as? Preference.MouseClickAction else { return }
+    performMouseAction(action)
+  }
+  
+  private func performMouseAction(_ action: Preference.MouseClickAction) {
+    switch action {
+    case .none:
+      break
+      
+    case .fullscreen:
+      window?.toggleFullScreen(self)
+      
+    case .pause:
+      playerCore.togglePause(nil)
     }
   }
   

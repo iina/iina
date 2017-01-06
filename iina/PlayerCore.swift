@@ -442,6 +442,7 @@ class PlayerCore: NSObject {
   
   /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
+    Utility.log("file loaded")
     guard let vwidth = info.videoWidth, let vheight = info.videoHeight else {
       Utility.fatal("Cannot get video width and height")
       return
@@ -455,7 +456,9 @@ class PlayerCore: NSObject {
       self.getChapters()
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
+      
       mainWindow.updateTitle()
+      mainWindow.setupTouchBarUI()
       mainWindow.adjustFrameByVideoSize(vwidth, vheight)
       // whether enter full screen
       if needEnterFullScreenForNextMedia {

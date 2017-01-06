@@ -16,6 +16,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   lazy var playerCore = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
+  lazy var sizingTouchBarTextField: NSTextField = {
+    return NSTextField()
+  }()
+  var touchBarPosLabelWidthLayout: NSLayoutConstraint?
   
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
@@ -460,6 +464,25 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     animationState = .hidden
     titleBarView.isHidden = true
     isInFullScreen = true
+  }
+  
+  func setupTouchBarUI() {
+    guard let duration = playerCore.info.videoDuration else {
+      Utility.fatal("video info not available")
+      return
+    }
+    sizingTouchBarTextField.stringValue = duration.stringRepresentation
+    if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, let posLabel = touchBarCurrentPosLabel {
+      if let posConstraint = touchBarPosLabelWidthLayout {
+        posConstraint.constant = widthConstant + 16
+        posLabel.setNeedsDisplay()
+      } else {
+        let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + 16)
+        posLabel.addConstraint(posConstraint)
+        touchBarPosLabelWidthLayout = posConstraint
+      }
+    }
+
   }
   
   func windowWillExitFullScreen(_ notification: Notification) {
@@ -918,7 +941,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     let percantage = (Double(pos.second) / Double(duration.second)) * 100
     leftLabel.stringValue = pos.stringRepresentation
-    touchBarCurrentPosLabel?.stringValue = pos.stringRepresentation
+    let touchBarPosLabelCharCount = duration.stringRepresentation.characters.count
+    let posString = pos.stringRepresentation
+    let padCount = touchBarPosLabelCharCount - posString.characters.count
+    let paddedString = String(repeating: " ", count: padCount) + pos.stringRepresentation
+    touchBarCurrentPosLabel?.stringValue = posString
+
     if withDuration {
       rightLabel.stringValue = duration.stringRepresentation
     }
@@ -1177,6 +1205,7 @@ fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, St
 
 @available(OSX 10.12.2, *)
 extension MainWindowController: NSTouchBarDelegate {
+
   
   override func makeTouchBar() -> NSTouchBar? {
     let touchBar = NSTouchBar()
@@ -1219,7 +1248,7 @@ extension MainWindowController: NSTouchBarDelegate {
       
     case NSTouchBarItemIdentifier.time:
       let item = NSCustomTouchBarItem(identifier: identifier)
-      let label = NSTextField(labelWithString: "0:00")
+      let label = NSTextField(labelWithString: "00:00:00")
       self.touchBarCurrentPosLabel = label
       item.view = label
       item.customizationLabel = "Time Position"

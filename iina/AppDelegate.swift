@@ -58,6 +58,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       menuController.bindMenuItems()
       isReady = true
     }
+    // show alpha in color panels
+    NSColorPanel.shared().showsAlpha = true
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {

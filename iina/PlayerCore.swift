@@ -455,7 +455,9 @@ class PlayerCore: NSObject {
       self.getChapters()
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
+      
       mainWindow.updateTitle()
+      mainWindow.setupTouchBarUI()
       mainWindow.adjustFrameByVideoSize(vwidth, vheight)
       // whether enter full screen
       if needEnterFullScreenForNextMedia {

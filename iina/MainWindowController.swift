@@ -16,6 +16,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   lazy var playerCore = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
+  lazy var sizingTouchBarTextField: NSTextField = {
+    return NSTextField()
+  }()
+  var touchBarPosLabelWidthLayout: NSLayoutConstraint?
   
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
@@ -494,6 +498,29 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isInFullScreen = true
   }
   
+  // MARK: - Set TouchBar Time Label
+  
+  func setupTouchBarUI() {
+    guard let duration = playerCore.info.videoDuration else {
+      Utility.fatal("video info not available")
+      return
+    }
+    
+    let pad: CGFloat = 16.0
+    sizingTouchBarTextField.stringValue = duration.stringRepresentation
+    if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, let posLabel = touchBarCurrentPosLabel {
+      if let posConstraint = touchBarPosLabelWidthLayout {
+        posConstraint.constant = widthConstant + pad
+        posLabel.setNeedsDisplay()
+      } else {
+        let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + pad)
+        posLabel.addConstraint(posConstraint)
+        touchBarPosLabelWidthLayout = posConstraint
+      }
+    }
+
+  }
+  
   func windowWillExitFullScreen(_ notification: Notification) {
     // hide titlebar
     window!.titlebarAppearsTransparent = true
@@ -951,6 +978,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let percantage = (Double(pos.second) / Double(duration.second)) * 100
     leftLabel.stringValue = pos.stringRepresentation
     touchBarCurrentPosLabel?.stringValue = pos.stringRepresentation
+
     if withDuration {
       rightLabel.stringValue = duration.stringRepresentation
     }
@@ -1209,6 +1237,7 @@ fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, St
 
 @available(OSX 10.12.2, *)
 extension MainWindowController: NSTouchBarDelegate {
+
   
   override func makeTouchBar() -> NSTouchBar? {
     let touchBar = NSTouchBar()

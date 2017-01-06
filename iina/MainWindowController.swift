@@ -16,6 +16,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   lazy var playerCore = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
+  lazy var sizingTouchBarTextField: NSTextField = {
+    return NSTextField()
+  }()
+  var touchBarPosLabelWidthLayout: NSLayoutConstraint?
   
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
@@ -1252,6 +1256,7 @@ extension MainWindowController: NSTouchBarDelegate {
     case NSTouchBarItemIdentifier.time:
       let item = NSCustomTouchBarItem(identifier: identifier)
       let label = NSTextField(labelWithString: "0:00")
+      label.alignment = .center
       self.touchBarCurrentPosLabel = label
       item.view = label
       item.customizationLabel = "Time Position"
@@ -1315,4 +1320,26 @@ extension MainWindowController: NSTouchBarDelegate {
     return item
   }
   
+  // MARK: - Set TouchBar Time Label
+  
+  func setupTouchBarUI() {
+    guard let duration = playerCore.info.videoDuration else {
+      Utility.fatal("video info not available")
+      return
+    }
+    
+    let pad: CGFloat = 16.0
+    sizingTouchBarTextField.stringValue = duration.stringRepresentation
+    if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, let posLabel = touchBarCurrentPosLabel {
+      if let posConstraint = touchBarPosLabelWidthLayout {
+        posConstraint.constant = widthConstant + pad
+        posLabel.setNeedsDisplay()
+      } else {
+        let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + pad)
+        posLabel.addConstraint(posConstraint)
+        touchBarPosLabelWidthLayout = posConstraint
+      }
+    }
+    
+  }
 }

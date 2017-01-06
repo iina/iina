@@ -442,7 +442,6 @@ class PlayerCore: NSObject {
   
   /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
-    Utility.log("file loaded")
     guard let vwidth = info.videoWidth, let vheight = info.videoHeight else {
       Utility.fatal("Cannot get video width and height")
       return

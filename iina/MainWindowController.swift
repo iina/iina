@@ -466,18 +466,22 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isInFullScreen = true
   }
   
+  // MARK: - Set TouchBar Time Label
+  
   func setupTouchBarUI() {
     guard let duration = playerCore.info.videoDuration else {
       Utility.fatal("video info not available")
       return
     }
+    
+    let pad: CGFloat = 16.0
     sizingTouchBarTextField.stringValue = duration.stringRepresentation
     if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, let posLabel = touchBarCurrentPosLabel {
       if let posConstraint = touchBarPosLabelWidthLayout {
-        posConstraint.constant = widthConstant + 16
+        posConstraint.constant = widthConstant + pad
         posLabel.setNeedsDisplay()
       } else {
-        let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + 16)
+        let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + pad)
         posLabel.addConstraint(posConstraint)
         touchBarPosLabelWidthLayout = posConstraint
       }
@@ -941,11 +945,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     let percantage = (Double(pos.second) / Double(duration.second)) * 100
     leftLabel.stringValue = pos.stringRepresentation
-    let touchBarPosLabelCharCount = duration.stringRepresentation.characters.count
-    let posString = pos.stringRepresentation
-    let padCount = touchBarPosLabelCharCount - posString.characters.count
-    let paddedString = String(repeating: " ", count: padCount) + pos.stringRepresentation
-    touchBarCurrentPosLabel?.stringValue = posString
+    touchBarCurrentPosLabel?.stringValue = pos.stringRepresentation
 
     if withDuration {
       rightLabel.stringValue = duration.stringRepresentation
@@ -1248,7 +1248,7 @@ extension MainWindowController: NSTouchBarDelegate {
       
     case NSTouchBarItemIdentifier.time:
       let item = NSCustomTouchBarItem(identifier: identifier)
-      let label = NSTextField(labelWithString: "00:00:00")
+      let label = NSTextField(labelWithString: "0:00")
       self.touchBarCurrentPosLabel = label
       item.view = label
       item.customizationLabel = "Time Position"

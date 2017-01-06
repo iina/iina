@@ -34,6 +34,7 @@ class MPVController: NSObject {
   var needRecordSeekTime: Bool = false
   var recordedSeekStartTime: CFTimeInterval = 0
   var recordedSeekTimeListener: ((Double) -> Void)?
+
   var receivedEndFileWhileLoading: Bool = false
   
   let observeProperties: [String: mpv_format] = [
@@ -145,7 +146,7 @@ class MPVController: NSObject {
     
     setUserOption(PK.subBorderSize, type: .int, forName: MPVOption.Subtitles.subBorderSize)
     setUserOption(PK.subBorderColor, type: .color, forName: MPVOption.Subtitles.subBorderColor)
-    
+
     setUserOption(PK.subShadowSize, type: .int, forName: MPVOption.Subtitles.subShadowOffset)
     setUserOption(PK.subShadowColor, type: .color, forName: MPVOption.Subtitles.subShadowColor)
     

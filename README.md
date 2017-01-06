@@ -20,8 +20,8 @@ When raising a issue, please **use English** if possible.
 - For and only for modern macOS (10.10+)
 - User friendly interface
 - All the features you need for video, audio and subtitles
-- Support chapters and playlists
-- MPV config file and script system is still available for advanced users
+- Support basic playlist and chapters
+- MPV config file and script system are still available for advanced users
 - Written in Swift, open for new technologies like Touch Bar
 - Still in active development
 
@@ -33,13 +33,13 @@ Please make sure cocoapods is installed.
 sudo gem install cocoapods
 ```
 
-Run pod install in root directory.
+Run pod install in project root directory.
 
 ```
 pod install
 ```
 
-Theoretically no extra work is needed. If you are unwilling to use the provided dylibs, follow the instructions below.
+Theoretically no extra work is needed. _If you are unwilling to use the provided dylibs, follow the instructions below._
 
 **Install mpv**
 
@@ -75,7 +75,7 @@ Any feedback is appreciated! You can
 - Download and test it
 - Send bug report
 - Send feature request
-- Provide suggestions on code and design
+- Provide suggestions on code structure and UI design
 - Provide localizaton
 - ...
 

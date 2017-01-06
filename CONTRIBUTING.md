@@ -4,7 +4,7 @@
 
 Thank you for being interested in IINA.
 
-First of all, please be tolerete. I'm not a professional in Cocoa development or Swift, so my code, especially early parts may contain stupid logic or or design flaw (a refactor is in my plan).
+First of all, please be tolerate. I'm not a professional in Cocoa development or Swift, so my code, especially early parts may contain stupid logic or design flaw (a refactor is in my plan).
 
 If you believe the code structure could be improved, please raise an issue.
 
@@ -42,7 +42,7 @@ Fork, then clone the repo.
 git clone git@github.com:(your-username)/iina.git
 ```
 
-Make sure cocoapods is installed, if not , install by
+Make sure cocoapods is installed, if not, install by
 ```
 sudo gem install cocoapods
 ```

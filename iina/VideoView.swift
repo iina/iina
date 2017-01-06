@@ -272,6 +272,7 @@ class VideoView: NSOpenGLView {
     }
     openGLContext!.lock()
     renderContext.lock()
+    
     renderContext.makeCurrentContext()
     if let context = self.mpvGLContext {
       mpv_opengl_cb_draw(context, Int32(fbo), Int32(videoSize!.width), -(Int32)(videoSize!.height))
@@ -282,10 +283,7 @@ class VideoView: NSOpenGLView {
     }
     renderContext.update()
     renderContext.flushBuffer()
-    // report flip to mpv
-    if let context = self.mpvGLContext {
-      mpv_opengl_cb_report_flip(context, 0)
-    }
+    
     renderContext.unlock()
     openGLContext!.unlock()
   }
@@ -313,8 +311,13 @@ class VideoView: NSOpenGLView {
       
       glBindTexture (GLenum(GL_TEXTURE_2D), 0)
       glUseProgram(0)
+      
     }
     openGLContext?.flushBuffer()
+    // report flip to mpv
+    if let context = self.mpvGLContext {
+      mpv_opengl_cb_report_flip(context, 0)
+    }
     openGLContext?.unlock()
   }
   

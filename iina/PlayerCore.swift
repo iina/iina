@@ -48,7 +48,7 @@ class PlayerCore: NSObject {
     info.currentURL = url!
     info.isNetworkResource = false
     mainWindow.showWindow(nil)
-    mainWindow.updateBufferIndicatorView()
+    mainWindow.windowDidOpen()
     // Send load file command
     info.fileLoading = true
     mpvController.command(.loadfile, args: [path])
@@ -59,7 +59,7 @@ class PlayerCore: NSObject {
     info.currentURL = URL(string: str)
     info.isNetworkResource = true
     mainWindow.showWindow(nil)
-    mainWindow.updateBufferIndicatorView()
+    mainWindow.windowDidOpen()
     // Send load file command
     info.fileLoading = true
     mpvController.command(.loadfile, args: [str])

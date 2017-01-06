@@ -466,9 +466,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   // MARK: - Window delegate
   
+  /** A method being called when window open. Pretend to be a window delegate. */
+  func windowDidOpen() {
+    // update buffer indicator view
+    updateBufferIndicatorView()
+    // enable sleep preventer
+    SleepPreventer.preventSleep()
+  }
+  
   func windowWillClose(_ notification: Notification) {
-    guard !playerCore.isMpvTerminated else { return }
-    playerCore.stop()
+    // stop playing
+    if !playerCore.isMpvTerminated {
+      playerCore.stop()
+    }
+    // disable sleep preventer
+    SleepPreventer.allowSleep()
   }
   
   func windowWillEnterFullScreen(_ notification: Notification) {

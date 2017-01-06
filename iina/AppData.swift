@@ -11,7 +11,7 @@ import Cocoa
 struct AppData {
 
   /** time interval to sync play pos */
-  static let getTimeInterval: Double = 0.5
+  static let getTimeInterval: Double = 0.1
 
   /** speed values when clicking left / right arrow button */
   static let availableSpeedValues: [Double] = [-32, -16, -8, -4, -2, 0, 2, 4, 8, 16, 32]

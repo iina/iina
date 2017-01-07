@@ -439,21 +439,39 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override func scrollWheel(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
-    if event.phase.contains(.began) {
+
+    let isMouse = event.phase.isEmpty
+    let isTrackpadBegan = event.phase.contains(.began)
+    let isTrackpadEnd = event.phase.contains(.ended)
+
+    // determine direction
+    if isMouse || isTrackpadBegan {
       if event.scrollingDeltaX != 0 {
         scrollDirection = .horizontal
       } else if event.scrollingDeltaY != 0 {
         scrollDirection = .vertical
       }
-    } else if event.phase.contains(.ended) {
+    } else if isTrackpadEnd {
       scrollDirection = nil
     }
-    // handle the value
+
+    // handle the delta value
     let seekFactor = AppData.seekAmountMap[relativeSeekAmount]!
+    let isPrecise = event.hasPreciseScrollingDeltas
+    let isNatural = event.isDirectionInvertedFromDevice
+
+    var deltaX = isPrecise ? Double(event.scrollingDeltaX) : event.scrollingDeltaX.unifiedDouble
+    var deltaY = isPrecise ? Double(event.scrollingDeltaY) : event.scrollingDeltaY.unifiedDouble * 2
+
+    if !isNatural {
+      deltaX = -deltaX
+      deltaY = -deltaY
+    }
+
     if scrollDirection == .horizontal {
-      playerCore.seek(relativeSecond: seekFactor * Double(event.scrollingDeltaX), option: useExtrackSeek)
+      playerCore.seek(relativeSecond: seekFactor * deltaX, option: useExtrackSeek)
     } else if scrollDirection == .vertical {
-      let newVolume = playerCore.info.volume - Int(event.scrollingDeltaY)
+      let newVolume = playerCore.info.volume - Int(deltaY)
       playerCore.setVolume(newVolume)
       volumeSlider.integerValue = newVolume
     }

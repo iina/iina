@@ -204,6 +204,12 @@ extension CGFloat {
     if self > max { value = max }
     return value
   }
+
+  var unifiedDouble: Double {
+    get {
+      return self == 0 ? 0 : (self > 0 ? 1 : -1)
+    }
+  }
 }
 
 extension Double {

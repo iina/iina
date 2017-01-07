@@ -13,7 +13,7 @@ class PrefNetworkViewController: NSViewController {
   override var nibName: String? {
     return "PrefNetworkViewController"
   }
-  
+
   override var identifier: String? {
     get {
       return "network"
@@ -22,18 +22,18 @@ class PrefNetworkViewController: NSViewController {
       super.identifier = newValue
     }
   }
-  
+
   var toolbarItemImage: NSImage {
     return NSImage(named: NSImageNameNetwork)!
   }
-  
+
   var toolbarItemLabel: String {
     return "Network"
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do view setup here.
   }
-    
+
 }

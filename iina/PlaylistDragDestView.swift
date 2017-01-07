@@ -9,15 +9,15 @@
 import Cocoa
 
 class PlaylistDragDestView: NSView {
-  
+
   override func awakeFromNib() {
     register(forDraggedTypes: [NSFilenamesPboardType])
   }
-  
+
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
     return .copy
   }
-  
+
   override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
     return .copy
   }
@@ -47,5 +47,5 @@ class PlaylistDragDestView: NSView {
       return false
     }
   }
-    
+
 }

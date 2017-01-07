@@ -9,20 +9,20 @@
 import Cocoa
 
 struct AppData {
-  
+
   /** time interval to sync play pos */
   static let getTimeInterval: Double = 0.5
-  
+
   /** speed values when clicking left / right arrow button */
   static let availableSpeedValues: [Double] = [-32, -16, -8, -4, -2, 0, 2, 4, 8, 16, 32]
-  
+
   /** generate aspect and crop options in menu */
   static let aspects: [String] = ["4:3", "5:4", "16:9", "16:10", "1:1", "3:2", "2.21:1", "2.35:1", "2.39:1"]
-  
+
   static let aspectRegex = Utility.Regex("\\A\\d+(\\.\\d+)?:\\d+(\\.\\d+)?\\Z")
-  
+
   static let rotations: [Int] = [0, 90, 180, 270]
-  
+
   /** Seek amount */
   static let seekAmountMap: [Int: Double] = [
     1: 0.001,
@@ -30,17 +30,17 @@ struct AppData {
     3: 0.1,
     4: 0.5
   ]
-  
+
   static let encodings = CharEncoding.list
-  
+
   static let userInputConfFolder = "input_conf"
   static let logFolder = "log"
   static let watchLaterFolder = "watch_later"
-  
+
   static let githubLink = "https://github.com/lhc70000/iina"
   static let websiteLink = "https://lhc70000.github.io/iina/"
   static let emailLink = "lhc199652@gmail.com"
-  
+
 }
 
 

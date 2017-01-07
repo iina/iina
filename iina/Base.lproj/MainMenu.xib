@@ -227,11 +227,11 @@
                             <menuItem title="Volume:" enabled="NO" id="iQF-1S-9EK">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Volume + 10%" tag="10" keyEquivalent="" id="Wbq-vt-hzX"/>
+                            <menuItem title="Volume + 5%" tag="10" keyEquivalent="" id="Wbq-vt-hzX"/>
                             <menuItem title="Volume + 1%" tag="1" alternate="YES" keyEquivalent="" id="c6Y-0e-vgf">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Volume - 10%" tag="10" alternate="YES" keyEquivalent="" id="pdj-9C-Fn1"/>
+                            <menuItem title="Volume - 5%" tag="10" alternate="YES" keyEquivalent="" id="pdj-9C-Fn1"/>
                             <menuItem title="Volume - 1%" tag="1" alternate="YES" keyEquivalent="" id="Zhv-Bz-I5V">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>

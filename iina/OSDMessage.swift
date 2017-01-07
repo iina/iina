@@ -9,7 +9,7 @@
 import Foundation
 
 enum OSDMessage {
-  
+
   case pause
   case resume
   case volume(Int)
@@ -29,38 +29,38 @@ enum OSDMessage {
   case chapter(String)
   case addToPlaylist(Int)
   case clearPlaylist
-  
+
   case contrast(Int)
   case hue(Int)
   case saturation(Int)
   case brightness(Int)
   case gamma(Int)
-  
-  
+
+
   func message() -> String {
     switch self {
     case .pause:
       return "Paused"
-      
+
     case .resume:
       return "Resumed"
-      
+
     case .volume(let value):
       return "Volume: \(value)"
-      
+
     case .speed(let value):
       let formattedValue = String(format: "%.2f", value)
       return "Speed: \(formattedValue)"
-      
+
     case .aspect(let value):
       return "Aspect Ratio: \(value)"
-      
+
     case .rotate(let value):
       return "Rotate: \(value)°"
-      
+
     case .deinterlace(let enable):
       return enable ? "Deinterlace: On" : "Deinterlace: Off"
-      
+
     case .audioDelay(let value):
       if value == 0 {
         return "Audio Delay: No Delay"
@@ -68,7 +68,7 @@ enum OSDMessage {
         let word = value > 0 ? "Later" : "Earlier"
         return "Audio Delay: \(abs(value))s \(word)"
       }
-      
+
     case .subDelay(let value):
       if value == 0 {
         return "Subtitle Delay: No Delay"
@@ -76,19 +76,19 @@ enum OSDMessage {
         let word = value > 0 ? "Later" : "Earlier"
         return "Subtitle Delay: \(abs(value))s \(word)"
       }
-      
+
     case .subPos(let value):
       return "Sub Position: \(value) / 100"
-      
+
     case .mute:
       return "Mute"
-      
+
     case .unMute:
       return "Mute Off"
-      
+
     case .screenShot:
       return "Screenshoted"
-      
+
     case .abLoop(let value):
       if value == 1 {
         return "AB-Loop: A"
@@ -97,37 +97,37 @@ enum OSDMessage {
       } else {
         return "AB-Loop: Clear Both"
       }
-      
+
     case .stop:
       return "Stopped"
-      
+
     case .chapter(let name):
       return "Go to \"\(name)\""
-      
+
     case .subScale(let value):
       return "Subtitle Scale: \(value)x"
-      
+
     case .addToPlaylist(let count):
       return "Added \(count) files to playlist"
-      
+
     case .clearPlaylist:
       return "Cleared playlist"
-      
+
     case .contrast(let value):
       return "Contrast: \(value)"
-      
+
     case .gamma(let value):
       return "Gamma: \(value)"
-      
+
     case .hue(let value):
       return "Hue: \(value)"
-      
+
     case .saturation(let value):
       return "Saturation: \(value)"
-      
+
     case .brightness(let value):
       return "Brightness: \(value)"
-      
+
     }
   }
 }

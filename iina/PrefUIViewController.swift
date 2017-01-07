@@ -14,7 +14,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   override var nibName: String {
     return "PrefUIViewController"
   }
-  
+
   override var identifier: String? {
     get {
       return "ui"
@@ -23,24 +23,24 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
       super.identifier = newValue
     }
   }
-  
+
   var toolbarItemImage: NSImage {
     get {
       return NSImage(named: "toolbar_play")!
     }
   }
-  
+
   var toolbarItemLabel: String {
     get {
       return "UI"
     }
   }
-  
-  
-  
+
+
+
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do view setup here.
   }
-    
+
 }

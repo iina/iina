@@ -9,27 +9,27 @@
 import Foundation
 
 class VideoTime {
-  
+
   var second: Int
-  
+
   var h: Int {
     get {
       return (second / 3600)
     }
   }
-  
+
   var m: Int {
     get {
       return (second % 3600) / 60
     }
   }
-  
+
   var s: Int {
     get {
       return (second % 3600) % 60
     }
   }
-  
+
   var stringRepresentation: String {
     get {
       if self == Constants.Time.infinite {
@@ -41,7 +41,7 @@ class VideoTime {
       return "\(hs)\(ms):\(ss)"
     }
   }
-  
+
   convenience init?(_ format: String) {
     let split = format.characters.split(separator: ":").map { (seq) -> Int? in
       return Int(String(seq))
@@ -59,16 +59,16 @@ class VideoTime {
       return nil
     }
   }
-  
+
   init(_ second: Int) {
     self.second = second
-    
+
   }
-  
+
   init(_ hour: Int, _ minute: Int, _ second: Int) {
     self.second = hour * 3600 + minute * 60 + second
   }
-  
+
   /** whether self in [min, max) */
   func between(_ min: VideoTime, _ max: VideoTime) -> Bool {
     return self >= min && self < max

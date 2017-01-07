@@ -381,9 +381,17 @@ class MPVController: NSObject {
 
     switch eventId {
     case MPV_EVENT_SHUTDOWN:
-      mpv_detach_destroy(mpv)
-      mpv = nil
-      Utility.log("MPV event: shutdown")
+      if playerCore.isMpvTerminated {
+        // quit from IINA, e.g. Cmd+Q
+        mpv_detach_destroy(mpv)
+        mpv = nil
+      } else {
+        // quit by mpv, e.g. press 'q'
+        playerCore.terminateMPV(sendQuit: false)
+        mpv_detach_destroy(mpv)
+        mpv = nil
+        NSApp.terminate(nil)
+      }
 
     case MPV_EVENT_LOG_MESSAGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)

@@ -222,10 +222,8 @@ class MPVController: NSObject {
     let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)
     var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["MPV Default"]
     if let confFromUd = UserDefaults.standard.string(forKey: PK.currentInputConfigName) {
-      let currentConfigFilePath = getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false)
-      if confFromUd != "MPV Default"  &&  currentConfigFilePath != nil {
-        inputConfPath = currentConfigFilePath!
-      }
+      let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false)
+      inputConfPath = currentConfigFilePath
     }
     chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputConf, inputConfPath))    // Receive log messages at warn level.
     chkErr(mpv_request_log_messages(mpv, "warn"))
@@ -249,20 +247,6 @@ class MPVController: NSObject {
     
     // get version
     mpvVersion = getString(MPVProperty.mpvVersion)
-  }
-  private func getFilePath(Configs userConfigs: [String: Any]!, forConfig conf: String, showAlert: Bool = true) -> String? {
-    
-    // if is default config
-    if let dv = PrefKeyBindingViewController.defaultConfigs[conf] {
-      return dv
-    } else if let uv = userConfigs[conf] as? String {
-      return uv
-    } else {
-      if showAlert {
-        Utility.showAlert(message: "Cannot find config file location!")
-      }
-      return nil
-    }
   }
   
   func mpvInitCB() -> UnsafeMutableRawPointer {

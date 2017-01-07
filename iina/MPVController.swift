@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Foundation
 
 fileprivate typealias PK = Preference.Key
 
@@ -188,7 +189,8 @@ class MPVController: NSObject {
     
     // Set user defined conf dir.
     if ud.bool(forKey: PK.useUserDefinedConfDir) {
-      if let userConfDir = ud.string(forKey: PK.userDefinedConfDir) {
+      if var userConfDir = ud.string(forKey: PK.userDefinedConfDir) {
+        userConfDir = NSString(string: userConfDir).standardizingPath
         mpv_set_option_string(mpv, "config", "yes")
         let status = mpv_set_option_string(mpv, MPVOption.ProgramBehavior.configDir, userConfDir)
         if status < 0 {

@@ -9,22 +9,22 @@
 import Cocoa
 
 class ControlBarView: NSVisualEffectView {
-  
+
   var mousePosRelatedToView: CGPoint?
-  
+
   var isDragging: Bool = false
 
   override func awakeFromNib() {
     self.layer?.cornerRadius = 6
   }
-  
+
   override func mouseDown(with event: NSEvent) {
     mousePosRelatedToView = NSEvent.mouseLocation()
     mousePosRelatedToView!.x -= self.frame.origin.x
     mousePosRelatedToView!.y -= self.frame.origin.y
     isDragging = true
   }
-  
+
   override func mouseDragged(with event: NSEvent) {
     if mousePosRelatedToView != nil {
       let currentLocation = NSEvent.mouseLocation()
@@ -61,5 +61,5 @@ class ControlBarView: NSVisualEffectView {
   override func mouseUp(with event: NSEvent) {
     isDragging = false
   }
-  
+
 }

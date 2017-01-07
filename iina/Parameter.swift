@@ -13,14 +13,14 @@ class Parameter: NSObject {
     "profile": "pseudo-gui",
     "quiet": "",
   ]
-  
+
   static func defaultParameter() -> [String] {
     var p = basicParameter
     p["vd-lavc-threads"] = String(ProcessInfo.processInfo.processorCount)
     p["cache"] = "8192"
     return parameterFormatter(p)
   }
-  
+
   private static func parameterFormatter(_ dic: [String: String]) -> [String] {
     var result: [String] = []
     for (k, v) in dic {

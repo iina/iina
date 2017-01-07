@@ -1,15 +1,15 @@
 import Foundation
 
 struct MPVCommand: RawRepresentable {
-  
+
   typealias RawValue = String
-  
+
   var rawValue: RawValue
-  
+
   init(_ string: String) { self.rawValue = string }
-  
+
   init?(rawValue: RawValue) { self.rawValue = rawValue }
-  
+
   /** ignore */
   static let ignore = MPVCommand("ignore")
   /** seek <seconds> [relative|absolute|absolute-percent|relative-percent|exact|keyframes] */

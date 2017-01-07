@@ -9,11 +9,11 @@
 import Cocoa
 
 class InspectorWindowController: NSWindowController {
-  
+
   override var windowNibName: String {
     return "InspectorWindowController"
   }
-  
+
   @IBOutlet weak var pathField: NSTextField!
   @IBOutlet weak var durationField: NSTextField!
   @IBOutlet weak var vformatField: NSTextField!
@@ -25,18 +25,18 @@ class InspectorWindowController: NSWindowController {
   @IBOutlet weak var achannelsField: NSTextField!
   @IBOutlet weak var abitrateField: NSTextField!
   @IBOutlet weak var asamplerateField: NSTextField!
-  
+
 
   override func windowDidLoad() {
     super.windowDidLoad()
     updateInfo()
   }
-  
+
   func updateInfo() {
     let controller = PlayerCore.shared.mpvController
-    
+
     // string properties
-    
+
     let strProperties: [String: NSTextField] = [
       MPVProperty.path: pathField,
       MPVProperty.videoFormat: vformatField,
@@ -48,19 +48,19 @@ class InspectorWindowController: NSWindowController {
       MPVProperty.audioBitrate: abitrateField,
       MPVProperty.audioParamsSamplerate: asamplerateField
     ]
-    
+
     strProperties.forEach { (k, v) in
       v.stringValue = controller.getString(k) ?? "Error"
     }
-    
+
     // other properties
-    
+
     let duration = controller.getDouble(MPVProperty.duration)
     durationField.stringValue = VideoTime(Int(duration)).stringRepresentation
-    
+
     let vwidth = controller.getInt(MPVProperty.width)
     let vheight = controller.getInt(MPVProperty.height)
     vsizeField.stringValue = "\(vwidth)\u{d7}\(vheight)"
   }
-  
+
 }

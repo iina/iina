@@ -17,6 +17,8 @@ class VideoView: NSOpenGLView {
   let vertexShaderName = "vertexShader"
   let fragmentShaderName = "fragmentShader"
   
+  lazy var playerCore = PlayerCore.shared
+  
   /** The mpv opengl-cb context */
   var mpvGLContext: OpaquePointer! {
     didSet {
@@ -162,6 +164,9 @@ class VideoView: NSOpenGLView {
     // other settings
     autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
     wantsBestResolutionOpenGLSurface = true
+  
+    // dragging init
+    register(forDraggedTypes: [NSFilenamesPboardType])
   }
 
   required init?(coder: NSCoder) {
@@ -400,5 +405,16 @@ class VideoView: NSOpenGLView {
   func ignoreGLError() {
     glGetError()
   }
-
+  
+  override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+    return .copy
+  }
+  
+  override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
+    let board = sender.draggingPasteboard()
+    let fileURL: NSURL? = NSURL(from: board)
+    playerCore.loadExternalSubFile(fileURL as! URL)
+    return true
+  }
+  
 }

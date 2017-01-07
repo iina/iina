@@ -317,12 +317,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isDragging = true
     guard !controlBar.isDragging else { return }
     if mousePosRelatedToWindow != nil {
-      let currentLocation = NSEvent.mouseLocation()
-      let newOrigin = CGPoint(
-        x: currentLocation.x - mousePosRelatedToWindow!.x,
-        y: currentLocation.y - mousePosRelatedToWindow!.y
-      )
-      window?.setFrameOrigin(newOrigin)
+      if #available(OSX 10.11, *) {
+        window?.performDrag(with: event)
+      } else {
+        let currentLocation = NSEvent.mouseLocation()
+        let newOrigin = CGPoint(
+          x: currentLocation.x - mousePosRelatedToWindow!.x,
+          y: currentLocation.y - mousePosRelatedToWindow!.y
+        )
+        window?.setFrameOrigin(newOrigin)
+      };
     }
   }
   

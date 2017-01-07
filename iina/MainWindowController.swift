@@ -575,6 +575,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.5
       fadeableViews.forEach { (v) in
+        // Set the fade animation duration
+        NSAnimationContext.current().duration = TimeInterval(0.25);
+        
         v?.animator().alphaValue = 0
       }
     }) {
@@ -597,6 +600,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.5
       fadeableViews.forEach { (v) in
+        // Set the fade animation duration
+        NSAnimationContext.current().duration = TimeInterval(0.25);
+        
         v?.animator().alphaValue = 1
       }
     }) {
@@ -846,28 +852,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     [titleBarView, controlBar, osdVisualEffectView].forEach {
       $0?.material = material
       $0?.appearance = appearance
-    }
-    
-    [muteButton, playButton, leftArrowButton, rightArrowButton, settingsButton, playlistButton].forEach { btn in
-      guard let currImageName = btn?.image?.name() else { return }
-      if currImageName.hasSuffix("-dark") {
-        if isDarkTheme {
-          // dark image but with dark theme: remove "-dark"
-          let newName = currImageName.substring(to: currImageName.index(currImageName.endIndex, offsetBy: -5))
-          btn?.image = NSImage(named: newName)
-          if let currAltImageName = btn?.alternateImage?.name() {
-            btn?.alternateImage = NSImage(named: currAltImageName.substring(to: currAltImageName.index(currAltImageName.endIndex, offsetBy: -5)))
-          }
-        }
-      } else {
-        // light image but with light theme: add "-dark"
-        if !isDarkTheme {
-          btn?.image = NSImage(named: currImageName + "-dark")
-          if let currAltImageName = btn?.alternateImage?.name() {
-            btn?.alternateImage = NSImage(named: currAltImageName + "-dark")
-          }
-        }
-      }
     }
   }
   

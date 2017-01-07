@@ -15,7 +15,7 @@ class ControlBarView: NSVisualEffectView {
   var isDragging: Bool = false
 
   override func awakeFromNib() {
-    self.layer?.cornerRadius = 6
+    self.layer?.cornerRadius = 4
   }
   
   override func mouseDown(with event: NSEvent) {

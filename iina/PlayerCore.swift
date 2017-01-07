@@ -278,38 +278,28 @@ class PlayerCore: NSObject {
     mpvController.command(.set, args: [optionName, value.toStr()])
   }
   
-  func failedAddAudio(_ returnValue: Int32) {
-    if returnValue >= 0 {
+  func failedLoadExternalAudioFile(_ returnCode: Int32) {
+    if returnCode >= 0 {
       return
     }
-    let alertPopup: NSAlert = NSAlert()
-    alertPopup.messageText = "Unsupported audio track."
-    alertPopup.informativeText = "Error value: \(returnValue)"
-    alertPopup.alertStyle = .warning
-    alertPopup.addButton(withTitle: "OK")
-    alertPopup.runModal()
+    Utility.showAlert(message: "Unsupported external audio file.")
   }
-
+  
   func loadExternalAudioFile(_ url: URL) {
-    mpvController.command(.audioAdd, args: [url.path], checkError: false, returnValueCallback: failedAddAudio)
+    mpvController.command(.audioAdd, args: [url.path], checkError: false, returnValueCallback: failedLoadExternalAudioFile)
     getTrackInfo()
     getSelectedTracks()
   }
   
-  func failedAddSub(_ returnValue: Int32) {
-    if returnValue >= 0 {
+  func failedLoadExternalSubFile(_ returnCode: Int32) {
+    if returnCode >= 0 {
       return
     }
-    let alertPopup: NSAlert = NSAlert()
-    alertPopup.messageText = "Unsupported subtitle."
-    alertPopup.informativeText = "Error value: \(returnValue)"
-    alertPopup.alertStyle = .warning
-    alertPopup.addButton(withTitle: "OK")
-    alertPopup.runModal()
+    Utility.showAlert(message: "Unsupported external subtitle.")
   }
-
+  
   func loadExternalSubFile(_ url: URL) {
-    mpvController.command(.subAdd, args: [url.path], checkError: false, returnValueCallback: failedAddSub)
+    mpvController.command(.subAdd, args: [url.path], checkError: false, returnValueCallback: failedLoadExternalSubFile)
     getTrackInfo()
     getSelectedTracks()
   }

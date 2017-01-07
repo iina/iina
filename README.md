@@ -66,16 +66,7 @@ Theoretically no extra work is needed. _If you are unwilling to use the provided
 
 * other/change_lib_dependencies.rb
 
-  This script will deploy depended libraries into `libmpv/libs`.  
-  Before running this script, you should copy libmpv into `libmpv/libs` first, like:
-
-  ```
-  cp ##path/to/libmpv## ./libmpv/libs
-  sudo install_name_tool -id @executable_path/../Frameworks/libmpv.1.23.0.dylib ./libmpv/lib/libmpv.1.23.0.dylib
-  ```
-
-  Replace `##path/to/libmpv##` with the path to libmpv (which should be in your homebrew install path).
-
+  This script will deploy depended libraries into `libmpv/libs`.
   Make sure in Xcode build settings, you have a phase copying of all these dylibs.
 
 ## Contribute

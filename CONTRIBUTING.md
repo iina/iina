@@ -4,11 +4,11 @@ Thank you for being interested in IINA.
 
 First of all, please be tolerate. I'm not a professional in Cocoa development or Swift, so my code, especially early parts may contain stupid logic or design flaw (a refactor is in my plan).
 
-If you believe the code structure could be improved, please raise an issue.
+If you believe the code structures can be improved, please raise an issue.
 
 ## Issues
 
-- Please use English for both title and detail. 请在标题和正文都使用英文。
+- Please use English for both the title and the details. 请在标题和正文都使用英文。
 - Before opening an issue, please check whether there already exists a similar one.
 
 ## Some Guidelines
@@ -16,14 +16,14 @@ If you believe the code structure could be improved, please raise an issue.
 - IINA is for modern macOS.
   - Stay consistent with the design language of macOS.
   - Stay consistent with behaviors of macOS original Applications.
-- User interface and user experience are important.
-  - Use animation for UI items, if possible.
+- User interface and user experiences are important.
+  - Use animations for UI items, if possible.
   - Use proper font weight, size and color.
   - Leave margins everywhere.
 - IINA is based on mpv.
   - Avoid adding features (especially decoding/playback related) that mpv does not provide.
   - Lua script is also a possible solution for some features.
-- Give user more choices.
+- Give users more choices.
 
 **Technical tips**
 
@@ -45,26 +45,12 @@ If you believe the code structure could be improved, please raise an issue.
 
 ## How to Contribute
 
-Fork, then clone the repo.
-```
-git clone git@github.com:(your-username)/iina.git
-```
+1. Fork and clone the repo
+2. Follow [the guide to build with pre-compiled dylibs in README.md](README.md#use-pre-compiled-dylibs)
+3. Open `iina.xcworkspace`.
+4. Commit changes, test, push, and submit a pull request.
 
-Make sure cocoapods is installed, if not, install by
-```
-sudo gem install cocoapods
-```
-Then run
-```
-pod install
-```
-in project root directory.
-
-Open `iina.xcworkspace`.
-
-Commit changes, test, push, and submit a pull request.
-
-If you want to build dylibs on your own, please refer to `README.md`.
+If you want to build libmpv and other depended dylibs on your own, please refer to [the guide in README.md](README.md#build-with-the-lastest-mpv).
 
 **Tips**
 

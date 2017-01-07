@@ -16,6 +16,12 @@ class PlayerCore: NSObject {
   
   lazy var mainWindow: MainWindowController = MainWindowController()
   lazy var mpvController: MPVController = MPVController()
+    
+    
+  // These are just previews. Please update if find full lists.
+  let supportedVideoFormat: [String] = ["mp4", "mkv", "mov"]
+  let supportedSubtitleFormat: [String] = ["srt", "ass", "ssa"]
+
   
   lazy var info: PlaybackInfo = PlaybackInfo()
   

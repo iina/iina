@@ -27,9 +27,17 @@ class PlaylistDragDestView: NSView {
     guard let types = pb.types else { return false }
     if types.contains(NSFilenamesPboardType) {
       guard let fileNames = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else { return false }
+      var added = 0
       fileNames.forEach({ (path) in
-        PlayerCore.shared.addToPlaylist(path)
+        let ext = (path as NSString).pathExtension
+        if PlayerCore.shared.supportedVideoFormat.contains(ext) {
+          PlayerCore.shared.addToPlaylist(path)
+          added += 1
+        }
       })
+      if added == 0 {
+        return false
+      }
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
       if let wc = window?.windowController as? MainWindowController {
         wc.displayOSD(.addToPlaylist(fileNames.count))

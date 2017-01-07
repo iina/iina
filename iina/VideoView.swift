@@ -16,7 +16,7 @@ class VideoView: NSOpenGLView {
   
   let vertexShaderName = "vertexShader"
   let fragmentShaderName = "fragmentShader"
-  
+
   lazy var playerCore = PlayerCore.shared
   
   /** The mpv opengl-cb context */
@@ -409,11 +409,52 @@ class VideoView: NSOpenGLView {
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
     return .copy
   }
+    
+  override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
+    return .copy
+  }
   
   override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-    let board = sender.draggingPasteboard()
-    let fileURL: NSURL? = NSURL(from: board)
-    playerCore.loadExternalSubFile(fileURL as! URL)
+    let pb = sender.draggingPasteboard()
+    guard let types = pb.types else { return false }
+    if types.contains(NSFilenamesPboardType) {
+      guard let fileNames = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else {
+        return false
+      }
+      
+      var videoFiles: [String] = []
+      var subtitleFiles: [String] = []
+      fileNames.forEach({ (path) in
+        let ext = (path as NSString).pathExtension
+        if playerCore.supportedVideoFormat.contains(ext) {
+          videoFiles.append(path)
+        }
+        if playerCore.supportedSubtitleFormat.contains(ext) {
+          subtitleFiles.append(path)
+        }
+      })
+      
+      if videoFiles.count == 0 {
+        if subtitleFiles.count > 0 {
+          playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitleFiles[0]))
+        }
+      }
+      else if videoFiles.count == 1 {
+        playerCore.openFile(URL(fileURLWithPath: videoFiles[0]))
+        if subtitleFiles.count > 0 {
+          playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitleFiles[0]))
+        }
+      }
+      else {
+        for path in videoFiles {
+          playerCore.addToPlaylist(path)
+        }
+        if let wc = window?.windowController as? MainWindowController {
+          wc.displayOSD(.addToPlaylist(videoFiles.count))
+        }
+      }
+      NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+    }
     return true
   }
   

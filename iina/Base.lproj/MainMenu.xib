@@ -173,7 +173,9 @@
                             <menuItem title="Bigger Size" tag="11" keyEquivalent="=" id="lDC-IC-peP"/>
                             <menuItem title="Smaller Size" tag="10" keyEquivalent="-" id="ZOF-MG-6II"/>
                             <menuItem isSeparatorItem="YES" id="F7U-cD-2ou"/>
-                            <menuItem title="Full Screen" keyEquivalent="f" id="6Eq-ni-6hG"/>
+                            <menuItem title="Enter Full Screen" keyEquivalent="f" id="6Eq-ni-6hG">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                            </menuItem>
                             <menuItem title="Always on Top" id="wex-rX-PcY">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>

@@ -78,7 +78,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
-                    <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" ambiguous="YES" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
+                    <visualEffectView appearanceType="vibrantDark" ambiguous="YES" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
                         <rect key="frame" x="120" y="40" width="440" height="64"/>
                         <subviews>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT">
@@ -94,7 +94,7 @@
                                     <constraint firstAttribute="width" constant="58" id="CMl-dC-PCr"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="0:00:00" id="6mL-0A-eq2">
-                                    <font key="font" metaFont="system" size="11"/>
+                                    <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -111,23 +111,13 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-kc-FAt" userLabel="Volume Slider">
-                                <rect key="frame" x="42" y="33" width="68" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="68" id="gWW-hd-ANO"/>
-                                </constraints>
-                                <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="ncp-01-dCG"/>
-                                <connections>
-                                    <action selector="volumeSliderChanges:" target="-2" id="5AA-pG-FOc"/>
-                                </connections>
-                            </slider>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="2py-h1-0km">
-                                <rect key="frame" x="16" y="32" width="18" height="18"/>
+                                <rect key="frame" x="16" y="31" width="22" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="18" id="MPG-2q-w6a"/>
-                                    <constraint firstAttribute="width" constant="18" id="vBo-ma-Dnu"/>
+                                    <constraint firstAttribute="height" constant="22" id="MPG-2q-w6a"/>
+                                    <constraint firstAttribute="width" constant="22" id="vBo-ma-Dnu"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" imageScaling="proportionallyUpOrDown" inset="2" id="XXj-HK-hXa">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" imageScaling="proportionallyDown" inset="2" id="XXj-HK-hXa">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -237,6 +227,16 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-kc-FAt" userLabel="Volume Slider">
+                                <rect key="frame" x="46" y="34" width="69" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="69" id="5EN-dK-jOP"/>
+                                </constraints>
+                                <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="ncp-01-dCG"/>
+                                <connections>
+                                    <action selector="volumeSliderChanges:" target="-2" id="5AA-pG-FOc"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <constraints>
                             <constraint firstItem="EIi-qd-glM" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="19J-AW-dth"/>
@@ -245,10 +245,10 @@
                             <constraint firstAttribute="bottom" secondItem="NBD-MV-OuG" secondAttribute="bottom" constant="12" id="7Jy-5x-USp"/>
                             <constraint firstItem="gxw-pJ-Lcg" firstAttribute="leading" secondItem="10x-bg-xlj" secondAttribute="trailing" constant="25" id="C5Q-BE-NQl"/>
                             <constraint firstItem="gxw-pJ-Lcg" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="CBt-v9-IKk"/>
+                            <constraint firstItem="SAG-kc-FAt" firstAttribute="leading" secondItem="2py-h1-0km" secondAttribute="trailing" constant="8" id="D7r-1r-RAg"/>
                             <constraint firstItem="2py-h1-0km" firstAttribute="leading" secondItem="OiF-pA-8Sd" secondAttribute="leading" constant="16" id="G5q-Ix-iSL"/>
                             <constraint firstAttribute="bottom" secondItem="GgV-Cc-sk0" secondAttribute="bottom" constant="12" id="JVf-zk-FZE"/>
-                            <constraint firstItem="Yg9-Sd-sWy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SAG-kc-FAt" secondAttribute="trailing" constant="13" id="JZb-uM-l66"/>
-                            <constraint firstItem="SAG-kc-FAt" firstAttribute="leading" secondItem="2py-h1-0km" secondAttribute="trailing" constant="8" id="M4W-lD-w8d"/>
+                            <constraint firstItem="Yg9-Sd-sWy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SAG-kc-FAt" secondAttribute="trailing" constant="8" id="JZb-uM-l66"/>
                             <constraint firstAttribute="trailing" secondItem="wy6-h4-fsN" secondAttribute="trailing" constant="16" id="N38-df-Pr9"/>
                             <constraint firstItem="gxw-pJ-Lcg" firstAttribute="centerX" secondItem="OiF-pA-8Sd" secondAttribute="centerX" id="Omt-FZ-m1d"/>
                             <constraint firstItem="Yg9-Sd-sWy" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="17" id="V3q-eS-4TC"/>
@@ -264,9 +264,9 @@
                             <constraint firstItem="QTI-wi-oyB" firstAttribute="leading" secondItem="EIi-qd-glM" secondAttribute="trailing" constant="8" id="r1a-G2-I1e"/>
                             <constraint firstAttribute="trailing" secondItem="GgV-Cc-sk0" secondAttribute="trailing" constant="2" id="sgJ-oR-QEJ"/>
                             <constraint firstAttribute="width" constant="440" id="uS6-LZ-gyf"/>
-                            <constraint firstItem="SAG-kc-FAt" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="17" id="wIg-92-XDQ"/>
+                            <constraint firstItem="SAG-kc-FAt" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="16" id="wIg-92-XDQ"/>
                             <constraint firstItem="YvW-zG-QiW" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="wnr-6p-18l"/>
-                            <constraint firstItem="2py-h1-0km" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="14" id="wuk-mx-e29"/>
+                            <constraint firstItem="2py-h1-0km" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="wuk-mx-e29"/>
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="epo-S6-QVB" userLabel="SideBar">
@@ -380,6 +380,6 @@
         <image name="playlist" width="24" height="24"/>
         <image name="speed" width="24" height="24"/>
         <image name="speedl" width="24" height="24"/>
-        <image name="volume" width="600" height="600"/>
+        <image name="volume" width="21" height="16"/>
     </resources>
 </document>

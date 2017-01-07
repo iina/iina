@@ -337,6 +337,25 @@
 		867483705008F086E07B0A6B /* Pods_iina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9E62A906F1FDCDF8DA03EA /* Pods-iinaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iinaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iinaTests/Pods-iinaTests.release.xcconfig"; sourceTree = "<group>"; };
 		A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.debug.xcconfig"; sourceTree = "<group>"; };
+		F4C61DF01E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		F4C61DF11E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		F4C61DF21E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
+		F4C61DF31E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PlaylistViewController.strings; sourceTree = "<group>"; };
+		F4C61DF41E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CropSettingsViewController.strings; sourceTree = "<group>"; };
+		F4C61DF51E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InspectorWindowController.strings; sourceTree = "<group>"; };
+		F4C61DF61E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/FilterWindowController.strings; sourceTree = "<group>"; };
+		F4C61DF71E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AboutWindowController.strings; sourceTree = "<group>"; };
+		F4C61DF81E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
+		F4C61DF91E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefGeneralViewController.strings; sourceTree = "<group>"; };
+		F4C61DFA1E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefUIViewController.strings; sourceTree = "<group>"; };
+		F4C61DFB1E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefControlViewController.strings; sourceTree = "<group>"; };
+		F4C61DFC1E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefKeyBindingViewController.strings; sourceTree = "<group>"; };
+		F4C61DFD1E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
+		F4C61DFE1E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefAdvancedViewController.strings; sourceTree = "<group>"; };
+		F4C61DFF1E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefCodecViewController.strings; sourceTree = "<group>"; };
+		F4C61E001E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefSubViewController.strings; sourceTree = "<group>"; };
+		F4C61E011E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefNetworkViewController.strings; sourceTree = "<group>"; };
+		F4C61E021E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -683,6 +702,7 @@
 				en,
 				Base,
 				"zh-Hans",
+				de,
 			);
 			mainGroup = 84EB1ECD1D2F51D3004FA5A1;
 			productRefGroup = 84EB1ED71D2F51D3004FA5A1 /* Products */;
@@ -853,6 +873,7 @@
 			children = (
 				8400D5C71E1AB2F1006785F5 /* Base */,
 				8400D5FA1E1AB411006785F5 /* zh-Hans */,
+				F4C61DF11E20423A00A43BCC /* de */,
 			);
 			name = MainWindowController.xib;
 			sourceTree = "<group>";
@@ -862,6 +883,7 @@
 			children = (
 				8400D5CA1E1AB2F9006785F5 /* Base */,
 				8400D5FB1E1AB411006785F5 /* zh-Hans */,
+				F4C61DF21E20423A00A43BCC /* de */,
 			);
 			name = QuickSettingViewController.xib;
 			sourceTree = "<group>";
@@ -871,6 +893,7 @@
 			children = (
 				8400D5CD1E1AB2FF006785F5 /* Base */,
 				8400D5FC1E1AB411006785F5 /* zh-Hans */,
+				F4C61DF31E20423A00A43BCC /* de */,
 			);
 			name = PlaylistViewController.xib;
 			sourceTree = "<group>";
@@ -880,6 +903,7 @@
 			children = (
 				8400D5D01E1AB306006785F5 /* Base */,
 				8400D5FD1E1AB412006785F5 /* zh-Hans */,
+				F4C61DF41E20423A00A43BCC /* de */,
 			);
 			name = CropSettingsViewController.xib;
 			sourceTree = "<group>";
@@ -889,6 +913,7 @@
 			children = (
 				8400D5D31E1AB312006785F5 /* Base */,
 				8400D5FE1E1AB412006785F5 /* zh-Hans */,
+				F4C61DF51E20423A00A43BCC /* de */,
 			);
 			name = InspectorWindowController.xib;
 			sourceTree = "<group>";
@@ -898,6 +923,7 @@
 			children = (
 				8400D5D61E1AB317006785F5 /* Base */,
 				8400D5FF1E1AB412006785F5 /* zh-Hans */,
+				F4C61DF61E20423A00A43BCC /* de */,
 			);
 			name = FilterWindowController.xib;
 			sourceTree = "<group>";
@@ -907,6 +933,7 @@
 			children = (
 				8400D5D91E1AB31B006785F5 /* Base */,
 				8400D6001E1AB412006785F5 /* zh-Hans */,
+				F4C61DF71E20423A00A43BCC /* de */,
 			);
 			name = AboutWindowController.xib;
 			sourceTree = "<group>";
@@ -916,6 +943,7 @@
 			children = (
 				8400D5DC1E1AB326006785F5 /* Base */,
 				8400D6011E1AB412006785F5 /* zh-Hans */,
+				F4C61DF81E20423A00A43BCC /* de */,
 			);
 			name = FontPickerWindowController.xib;
 			sourceTree = "<group>";
@@ -925,6 +953,7 @@
 			children = (
 				8400D5DF1E1AB32A006785F5 /* Base */,
 				8400D6021E1AB412006785F5 /* zh-Hans */,
+				F4C61DF91E20423A00A43BCC /* de */,
 			);
 			name = PrefGeneralViewController.xib;
 			sourceTree = "<group>";
@@ -934,6 +963,7 @@
 			children = (
 				8400D5E21E1AB32F006785F5 /* Base */,
 				8400D6031E1AB412006785F5 /* zh-Hans */,
+				F4C61DFA1E20423A00A43BCC /* de */,
 			);
 			name = PrefUIViewController.xib;
 			sourceTree = "<group>";
@@ -943,6 +973,7 @@
 			children = (
 				8400D5E51E1AB333006785F5 /* Base */,
 				8400D6041E1AB412006785F5 /* zh-Hans */,
+				F4C61DFB1E20423A00A43BCC /* de */,
 			);
 			name = PrefControlViewController.xib;
 			sourceTree = "<group>";
@@ -952,6 +983,7 @@
 			children = (
 				8400D5E81E1AB337006785F5 /* Base */,
 				8400D6051E1AB412006785F5 /* zh-Hans */,
+				F4C61DFC1E20423A00A43BCC /* de */,
 			);
 			name = PrefKeyBindingViewController.xib;
 			sourceTree = "<group>";
@@ -961,6 +993,7 @@
 			children = (
 				8400D5EB1E1AB33B006785F5 /* Base */,
 				8400D6061E1AB412006785F5 /* zh-Hans */,
+				F4C61DFD1E20423A00A43BCC /* de */,
 			);
 			name = KeyRecordViewController.xib;
 			sourceTree = "<group>";
@@ -970,6 +1003,7 @@
 			children = (
 				8400D5EE1E1AB33F006785F5 /* Base */,
 				8400D6071E1AB412006785F5 /* zh-Hans */,
+				F4C61DFE1E20423A00A43BCC /* de */,
 			);
 			name = PrefAdvancedViewController.xib;
 			sourceTree = "<group>";
@@ -979,6 +1013,7 @@
 			children = (
 				8400D5F11E1AB344006785F5 /* Base */,
 				8400D6081E1AB412006785F5 /* zh-Hans */,
+				F4C61DFF1E20423A00A43BCC /* de */,
 			);
 			name = PrefCodecViewController.xib;
 			sourceTree = "<group>";
@@ -988,6 +1023,7 @@
 			children = (
 				8400D5F41E1AB348006785F5 /* Base */,
 				8400D6091E1AB412006785F5 /* zh-Hans */,
+				F4C61E001E20423A00A43BCC /* de */,
 			);
 			name = PrefSubViewController.xib;
 			sourceTree = "<group>";
@@ -997,6 +1033,7 @@
 			children = (
 				8400D5F71E1AB34D006785F5 /* Base */,
 				8400D60A1E1AB412006785F5 /* zh-Hans */,
+				F4C61E011E20423A00A43BCC /* de */,
 			);
 			name = PrefNetworkViewController.xib;
 			sourceTree = "<group>";
@@ -1007,6 +1044,7 @@
 				845AC09D1E1AE6C10080B614 /* Base */,
 				845AC09F1E1AE6CB0080B614 /* zh-Hans */,
 				845AC0A01E1AE71B0080B614 /* en */,
+				F4C61E021E20423A00A43BCC /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1016,6 +1054,7 @@
 			children = (
 				84A0BA941D2F9E9600BC8DA1 /* Base */,
 				8400D5F91E1AB411006785F5 /* zh-Hans */,
+				F4C61DF01E20423A00A43BCC /* de */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

@@ -935,38 +935,41 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     videoView.restartDisplayLink()
 
     if isInFullScreen {
+
       self.windowDidResize(Notification(name: .NSWindowDidResize))
-      return
-    }
 
-    if playerCore.info.jumppedFromPlaylist &&
-      ud.bool(forKey: Preference.Key.resizeOnlyWhenManuallyOpenFile) {
-      // user is navigating in playlist. remain same window width.
-      let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
-      let rect = NSRect(origin: w.frame.origin, size: NSSize(width: w.frame.width, height: newHeight))
-      w.setFrame(rect, display: true, animate: true)
     } else {
-      // get videoSize on screen
-      var videoSize = originalVideoSize
-      if ud.bool(forKey: Preference.Key.usePhysicalResolution) {
-        videoSize = w.convertFromBacking(
-          NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))
-        ).size
-      }
-      // check screen size
-      if let screenSize = NSScreen.main()?.visibleFrame.size {
-        videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
-        // check default window position
-      }
-      let rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
-      w.setFrame(rect, display: true, animate: true)
-    }
 
-    if (!window!.isVisible) {
-      window!.setIsVisible(true)
-    }
+      if playerCore.info.jumppedFromPlaylist &&
+        ud.bool(forKey: Preference.Key.resizeOnlyWhenManuallyOpenFile) {
+        // user is navigating in playlist. remain same window width.
+        let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
+        let rect = NSRect(origin: w.frame.origin, size: NSSize(width: w.frame.width, height: newHeight))
+        w.setFrame(rect, display: true, animate: true)
+      } else {
+        // get videoSize on screen
+        var videoSize = originalVideoSize
+        if ud.bool(forKey: Preference.Key.usePhysicalResolution) {
+          videoSize = w.convertFromBacking(
+            NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))
+          ).size
+        }
+        // check screen size
+        if let screenSize = NSScreen.main()?.visibleFrame.size {
+          videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
+          // check default window position
+        }
+        let rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
+        w.setFrame(rect, display: true, animate: true)
+      }
 
-    playerCore.info.jumppedFromPlaylist = false
+      if (!window!.isVisible) {
+        window!.setIsVisible(true)
+      }
+
+      playerCore.info.jumppedFromPlaylist = false
+
+    }
 
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)

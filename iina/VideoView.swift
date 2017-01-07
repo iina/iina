@@ -78,7 +78,9 @@ class VideoView: NSOpenGLView {
 
   /** Whether mpv started drawing */
   var started: Bool = false
-
+  
+  var isUninited = false
+  
   // MARK: - Attributes
 
   override var mouseDownCanMoveWindow: Bool {
@@ -169,6 +171,7 @@ class VideoView: NSOpenGLView {
   }
 
   func uninit() {
+    guard !isUninited else { return }
     // uninit mpv gl
     mpv_opengl_cb_set_update_callback(mpvGLContext, nil, nil)
     mpv_opengl_cb_uninit_gl(mpvGLContext)
@@ -177,6 +180,7 @@ class VideoView: NSOpenGLView {
     glDeleteFramebuffers(1, &fbo)
     // unlink display
     stopDisplayLink()
+    isUninited = true
   }
 
   deinit {

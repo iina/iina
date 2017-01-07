@@ -222,6 +222,7 @@ extension MainWindowController {
     if let volumeDelta = sender.representedObject as? Int {
       let newVolume = volumeDelta + playerCore.info.volume
       playerCore.setVolume(newVolume)
+      volumeSlider.integerValue = newVolume
     } else {
       Utility.log("sender.representedObject is not int in menuChangeVolume()")
     }

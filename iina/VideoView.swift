@@ -175,7 +175,8 @@ class VideoView: NSOpenGLView {
     // delete framebuffer
     glDeleteTextures(1, &texture)
     glDeleteFramebuffers(1, &fbo)
-    
+    // unlink display
+    stopDisplayLink()
   }
 
   deinit {
@@ -254,8 +255,15 @@ class VideoView: NSOpenGLView {
   private func startDisplayLink() {
     CVDisplayLinkStart(displayLink!)
   }
+
+  func stopDisplayLink() {
+    if let link = displayLink {
+      CVDisplayLinkStop(link)
+    }
+  }
   
   func restartDisplayLink() {
+    stopDisplayLink()
     setUpDisplayLink()
     startDisplayLink()
   }

@@ -106,6 +106,7 @@ class PlayerCore: NSObject {
   
   func stop() {
     mpvController.command(.stop)
+    syncPlayTimeTimer?.invalidate()
   }
   
   func toogleMute(_ set: Bool?) {
@@ -446,6 +447,7 @@ class PlayerCore: NSObject {
       Utility.fatal("Cannot get video width and height")
       return
     }
+    syncPlayTimeTimer?.invalidate()
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     DispatchQueue.main.sync {

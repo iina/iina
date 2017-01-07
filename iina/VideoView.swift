@@ -80,9 +80,9 @@ class VideoView: NSOpenGLView {
 
   /** Whether mpv started drawing */
   var started: Bool = false
-  
+
   var isUninited = false
-  
+
   // MARK: - Attributes
 
   override var mouseDownCanMoveWindow: Bool {

@@ -392,7 +392,7 @@ class MPVController: NSObject {
         mpv = nil
         NSApp.terminate(nil)
       }
-      
+
     case MPV_EVENT_LOG_MESSAGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
       let msg = UnsafeMutablePointer<mpv_event_log_message>(dataOpaquePtr)

@@ -581,6 +581,13 @@ class PlayerCore: NSObject {
     }
   }
 
+  func closeMainWindow() {
+    DispatchQueue.main.async {
+      self.mainWindow.close()
+    }
+  }
+
+
   // MARK: - Getting info
 
   func getTrackInfo() {

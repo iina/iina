@@ -165,25 +165,11 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wy6-h4-fsN">
-                                <rect key="frame" x="400" y="29" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="Rv3-oS-0Hu"/>
-                                    <constraint firstAttribute="width" constant="24" id="yzN-B1-5gA"/>
-                                </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="playlist" imagePosition="only" alignment="center" alternateImage="playlist" imageScaling="proportionallyDown" inset="2" id="ZPD-PJ-11g">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="playlistButtonAction:" target="-2" id="eI6-wE-TKG"/>
-                                </connections>
-                            </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YvW-zG-QiW" userLabel="Settings Button">
-                                <rect key="frame" x="371" y="29" width="24" height="24"/>
+                                <rect key="frame" x="385" y="35" width="14" height="14"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="FBK-0C-gcn"/>
-                                    <constraint firstAttribute="height" constant="24" id="nWg-Z7-Zhc"/>
+                                    <constraint firstAttribute="width" constant="14" id="FBK-0C-gcn"/>
+                                    <constraint firstAttribute="height" constant="14" id="nWg-Z7-Zhc"/>
                                 </constraints>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSActionTemplate" imagePosition="only" alignment="center" alternateImage="NSActionTemplate" imageScaling="proportionallyDown" inset="2" id="tPP-JA-L7s">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -237,10 +223,24 @@
                                     <action selector="volumeSliderChanges:" target="-2" id="5AA-pG-FOc"/>
                                 </connections>
                             </slider>
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wy6-h4-fsN">
+                                <rect key="frame" x="409" y="35" width="14" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="Rv3-oS-0Hu"/>
+                                    <constraint firstAttribute="width" constant="14" id="yzN-B1-5gA"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="playlist" imagePosition="only" alignment="center" alternateImage="playlist" imageScaling="proportionallyDown" inset="2" id="ZPD-PJ-11g">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="playlistButtonAction:" target="-2" id="eI6-wE-TKG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="EIi-qd-glM" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="19J-AW-dth"/>
-                            <constraint firstItem="wy6-h4-fsN" firstAttribute="leading" secondItem="YvW-zG-QiW" secondAttribute="trailing" constant="5" id="6uo-LX-tAd"/>
+                            <constraint firstItem="wy6-h4-fsN" firstAttribute="leading" secondItem="YvW-zG-QiW" secondAttribute="trailing" constant="11" id="6uo-LX-tAd"/>
                             <constraint firstItem="NBD-MV-OuG" firstAttribute="leading" secondItem="OiF-pA-8Sd" secondAttribute="leading" constant="2" id="72g-fy-o5h"/>
                             <constraint firstAttribute="bottom" secondItem="NBD-MV-OuG" secondAttribute="bottom" constant="12" id="7Jy-5x-USp"/>
                             <constraint firstItem="gxw-pJ-Lcg" firstAttribute="leading" secondItem="10x-bg-xlj" secondAttribute="trailing" constant="25" id="C5Q-BE-NQl"/>
@@ -259,13 +259,13 @@
                             <constraint firstAttribute="height" constant="64" id="g84-xP-093"/>
                             <constraint firstItem="QTI-wi-oyB" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="17" id="jS2-YP-VdM"/>
                             <constraint firstAttribute="bottom" secondItem="eBP-6g-bAT" secondAttribute="bottom" constant="11" id="lGU-KV-JXB"/>
-                            <constraint firstItem="wy6-h4-fsN" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="ltp-E1-fer"/>
+                            <constraint firstItem="wy6-h4-fsN" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="15" id="ltp-E1-fer"/>
                             <constraint firstItem="10x-bg-xlj" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="qQu-WW-eR6"/>
                             <constraint firstItem="QTI-wi-oyB" firstAttribute="leading" secondItem="EIi-qd-glM" secondAttribute="trailing" constant="8" id="r1a-G2-I1e"/>
                             <constraint firstAttribute="trailing" secondItem="GgV-Cc-sk0" secondAttribute="trailing" constant="2" id="sgJ-oR-QEJ"/>
                             <constraint firstAttribute="width" constant="440" id="uS6-LZ-gyf"/>
                             <constraint firstItem="SAG-kc-FAt" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="16" id="wIg-92-XDQ"/>
-                            <constraint firstItem="YvW-zG-QiW" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="wnr-6p-18l"/>
+                            <constraint firstItem="YvW-zG-QiW" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="15" id="wnr-6p-18l"/>
                             <constraint firstItem="2py-h1-0km" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="wuk-mx-e29"/>
                         </constraints>
                     </visualEffectView>
@@ -374,10 +374,10 @@
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="mute" width="600" height="600"/>
+        <image name="mute" width="21" height="16"/>
         <image name="pause" width="24" height="24"/>
         <image name="play" width="24" height="24"/>
-        <image name="playlist" width="24" height="24"/>
+        <image name="playlist" width="14" height="10"/>
         <image name="speed" width="24" height="24"/>
         <image name="speedl" width="24" height="24"/>
         <image name="volume" width="21" height="16"/>

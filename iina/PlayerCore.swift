@@ -93,12 +93,19 @@ class PlayerCore: NSObject {
   /** Pause / resume. Reset speed to 0 when pause. */
   func togglePause(_ set: Bool?) {
     if let setPause = set {
-      mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
       if setPause {
         setSpeed(0)
+      } else {
+        if info.videoPosition == info.videoDuration {
+          seek(absoluteSecond: 0)
+        }
       }
+      mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
     } else {
       if (info.isPaused) {
+        if info.videoPosition == info.videoDuration {
+          seek(absoluteSecond: 0)
+        }
         mpvController.setFlag(MPVOption.PlaybackControl.pause, false)
       } else {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, true)

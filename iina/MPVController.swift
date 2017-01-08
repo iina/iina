@@ -607,8 +607,7 @@ class MPVController: NSObject {
 
     case MPVOption.PlaybackControl.speed:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        let displaySpeed = Utility.toDisplaySpeed(fromRealSpeed: data)
-        playerCore.sendOSD(.speed(displaySpeed))
+        playerCore.sendOSD(.speed(data))
       }
 
     case MPVOption.Equalizer.contrast:

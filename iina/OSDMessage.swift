@@ -49,7 +49,7 @@ enum OSDMessage {
       return "Volume: \(value)"
 
     case .speed(let value):
-      let formattedValue = String(format: "%.2f", value)
+      let formattedValue = String(format: "%.2fx", value)
       return "Speed: \(formattedValue)"
 
     case .aspect(let value):

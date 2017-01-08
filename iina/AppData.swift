@@ -71,6 +71,7 @@ struct Constants {
     static let tracklistChanged = Notification.Name("IINATracklistChanged")
     static let vfChanged = Notification.Name("IINAVfChanged")
     static let afChanged = Notification.Name("IINAAfChanged")
+    static let fsChanged = Notification.Name("IINAFullscreenChanged")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)

@@ -24,7 +24,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
 
-  var isInFullScreen: Bool = false
+  var isInFullScreen: Bool = false {
+    didSet {
+      playerCore.mpvController.setFlag(MPVOption.Window.fullscreen, isInFullScreen)
+    }
+  }
   var isInInteractiveMode: Bool = false
 
   // FIXME: might use another obj to handle slider?
@@ -84,6 +88,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     Preference.Key.singleClickAction,
     Preference.Key.doubleClickAction
   ]
+
+  private var notificationObservers: [NSObjectProtocol] = []
 
   /** The view embedded in sidebar */
   enum SideBarViewType {
@@ -230,6 +236,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       ud.addObserver(self, forKeyPath: key, options: .new, context: nil)
     }
 
+    // add notification observers
+    let fsObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.fsChanged, object: nil, queue: .main) { _ in
+      let fs = self.playerCore.mpvController.getFlag(MPVOption.Window.fullscreen)
+      if fs != self.isInFullScreen {
+        self.window?.toggleFullScreen(nil)
+      }
+    }
+    notificationObservers.append(fsObserver)
+
     // move to center and make main
     w.center()
     w.makeMain()
@@ -240,6 +255,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   deinit {
     observedPrefKeys.forEach { key in
       ud.removeObserver(self, forKeyPath: key)
+    }
+    notificationObservers.forEach { observer in
+      NotificationCenter.default.removeObserver(observer)
     }
   }
 

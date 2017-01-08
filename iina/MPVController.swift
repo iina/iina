@@ -55,7 +55,8 @@ class MPVController: NSObject {
     MPVOption.Equalizer.brightness: MPV_FORMAT_INT64,
     MPVOption.Equalizer.gamma: MPV_FORMAT_INT64,
     MPVOption.Equalizer.hue: MPV_FORMAT_INT64,
-    MPVOption.Equalizer.saturation: MPV_FORMAT_INT64
+    MPVOption.Equalizer.saturation: MPV_FORMAT_INT64,
+    MPVOption.Window.fullscreen: MPV_FORMAT_FLAG
   ]
 
   /**
@@ -652,6 +653,9 @@ class MPVController: NSObject {
 
     case MPVProperty.af:
       NotificationCenter.default.post(Notification(name: Constants.Noti.afChanged))
+
+    case MPVOption.Window.fullscreen:
+      NotificationCenter.default.post(Notification(name: Constants.Noti.fsChanged))
 
     // ignore following
 

@@ -467,7 +467,7 @@ class PlayerCore: NSObject {
       // whether enter full screen
       if needEnterFullScreenForNextMedia {
         if ud.bool(forKey: Preference.Key.fullScreenWhenOpen) && !mainWindow.isInFullScreen {
-          mainWindow.window?.toggleFullScreen(self)
+          mainWindow.toggleWindowFullScreen()
         }
         // only enter fullscreen for first file
         needEnterFullScreenForNextMedia = false

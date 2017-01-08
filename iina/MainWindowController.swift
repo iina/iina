@@ -246,7 +246,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let fsObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.fsChanged, object: nil, queue: .main) { _ in
       let fs = self.playerCore.mpvController.getFlag(MPVOption.Window.fullscreen)
       if fs != self.isInFullScreen {
-        self.window?.toggleFullScreen(nil)
+        self.toggleWindowFullScreen()
       }
     }
     notificationObservers.append(fsObserver)
@@ -404,7 +404,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       break
 
     case .fullscreen:
-      window?.toggleFullScreen(self)
+      toggleWindowFullScreen()
 
     case .pause:
       playerCore.togglePause(nil)
@@ -561,6 +561,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isInFullScreen = false
     // set back frame of videoview
     videoView.frame = window!.contentView!.frame
+  }
+
+  func windowDidExitFullScreen(_ notification: Notification) {
+    // if is floating, enable it again
+    if playerCore.info.isAlwaysOntop {
+      setWindowFloatingOntop(true)
+    }
   }
 
   func windowDidResize(_ notification: Notification) {
@@ -998,6 +1005,27 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)
     updateVolume()
+  }
+
+  /** Important: `window.toggleFullScreen` should never be called directly, since it can't handle floating window. */
+  func toggleWindowFullScreen() {
+    // if is floating, disable it temporarily.
+    // it will be enabled again in `windowDidExitFullScreen()`.
+    if !isInFullScreen && playerCore.info.isAlwaysOntop {
+      setWindowFloatingOntop(false)
+    }
+    window?.toggleFullScreen(self)
+  }
+
+  func setWindowFloatingOntop(_ onTop: Bool) {
+    guard let window = window else { return }
+    if onTop {
+      window.level = Int(CGWindowLevelForKey(.floatingWindow))
+    } else {
+      window.level = Int(CGWindowLevelForKey(.normalWindow))
+    }
+    // don't know why they will be disabled
+    withStandardButtons { $0?.isEnabled = true }
   }
 
   // MARK: - Sync UI with playback

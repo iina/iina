@@ -176,7 +176,7 @@
                             <menuItem title="Enter Full Screen" keyEquivalent="f" id="6Eq-ni-6hG">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Always on Top" id="wex-rX-PcY">
+                            <menuItem title="Float on Top" id="wex-rX-PcY">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="4J5-eU-sei"/>

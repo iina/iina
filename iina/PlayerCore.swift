@@ -19,7 +19,9 @@ class PlayerCore: NSObject {
 
   // These are just previews. Please update if find full lists.
   let supportedVideoFormat: [String] = ["mp4", "mkv", "mov"]
-  let supportedSubtitleFormat: [String] = ["srt", "ass", "ssa"]
+  let supportedSubtitleFormat: [String] = ["utf", "utf8", "utf-8", "idx", "sub", "srt",
+                                           "smi", "rt", "txt", "ssa", "aqt", "jss",
+                                           "js", "ass", "mks", "vtt", "sup"]
 
   lazy var info: PlaybackInfo = PlaybackInfo()
 

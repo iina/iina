@@ -488,8 +488,8 @@ class MPVController: NSObject {
     let height = getInt(MPVProperty.height)
     let dwidth = getInt(MPVProperty.dwidth)
     let dheight = getInt(MPVProperty.dheight)
-    let duration = getInt(MPVProperty.duration)
-    let pos = getInt(MPVProperty.timePos)
+    let duration = getDouble(MPVProperty.duration)
+    let pos = getDouble(MPVProperty.timePos)
     playerCore.info.videoHeight = height
     playerCore.info.videoWidth = width
     playerCore.info.displayWidth = dwidth == 0 ? width : dwidth

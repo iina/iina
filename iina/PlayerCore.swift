@@ -96,14 +96,14 @@ class PlayerCore: NSObject {
       if setPause {
         setSpeed(0)
       } else {
-        if info.videoPosition == info.videoDuration {
+        if mpvController.getFlag(MPVProperty.eofReached) {
           seek(absoluteSecond: 0)
         }
       }
       mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
     } else {
       if (info.isPaused) {
-        if info.videoPosition == info.videoDuration {
+        if mpvController.getFlag(MPVProperty.eofReached) {
           seek(absoluteSecond: 0)
         }
         mpvController.setFlag(MPVOption.PlaybackControl.pause, false)

@@ -595,8 +595,10 @@
 				84A0BAA31D2FAEA000BC8DA1 /* Views */,
 				84A0BAA61D2FAF8400BC8DA1 /* Utils */,
 			);
+			indentWidth = 2;
 			path = iina;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		84FF846D1D2FF698001B318A /* libmpv */ = {
 			isa = PBXGroup;

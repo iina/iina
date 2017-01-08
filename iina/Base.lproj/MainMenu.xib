@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D17a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
     </dependencies>
@@ -132,7 +132,7 @@
                             <menuItem title="Screenshot" keyEquivalent="S" id="AoP-K6-Kb5">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Goto Screenshot Folder" id="lj0-Oo-7nB">
+                            <menuItem title="Go To Screenshot Folder" id="lj0-Oo-7nB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Advanced Screenshot..." hidden="YES" id="CKi-JE-yLT">
@@ -258,9 +258,9 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Subtitle" id="xDJ-GA-Gjs">
+                <menuItem title="Subtitles" id="xDJ-GA-Gjs">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Subtitle" id="EKp-Qx-4Mn">
+                    <menu key="submenu" title="Subtitles" id="EKp-Qx-4Mn">
                         <items>
                             <menuItem title="Quick Settings Panel" keyEquivalent="s" id="8y7-Cy-lKT"/>
                             <menuItem isSeparatorItem="YES" id="EvW-J9-wqJ"/>

@@ -9,10 +9,10 @@
 import Cocoa
 
 class VolumeSliderCell: NSSliderCell {
-  
+
   override func awakeFromNib() {
     minValue = 0
     maxValue = 100
   }
-  
+
 }

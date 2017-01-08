@@ -9,39 +9,39 @@
 import Cocoa
 
 class PlaylistViewController: NSViewController, NSTableViewDataSource {
-  
+
   override var nibName: String {
     return "PlaylistViewController"
   }
-  
+
   var playerCore: PlayerCore = PlayerCore.shared
   weak var mainWindow: MainWindowController!
-  
+
   /** Similiar to the one in `QuickSettingViewController`.
    Since IBOutlet is `nil` when the view is not loaded at first time,
    use this variable to cache which tab it need to switch to when the
    view is ready. The value will be handled after loaded.
    */
   private var pendingSwitchRequest: TabViewType?
-  
+
   var playlistChangeObserver: NSObjectProtocol?
-  
+
   /** Enum for tab switching */
   enum TabViewType: Int {
     case playlist = 0
     case chapters
   }
-  
+
   @IBOutlet weak var playlistTableView: NSTableView!
   @IBOutlet weak var chapterTableView: NSTableView!
   @IBOutlet weak var playlistBtn: NSButton!
   @IBOutlet weak var chaptersBtn: NSButton!
   @IBOutlet weak var tabView: NSTabView!
-  
+
   lazy var playlistDelegate: PlaylistTableDelegate = {
     return PlaylistTableDelegate(self)
   }()
-  
+
   lazy var chapterDelegate: ChapterTableDelegate = {
     return ChapterTableDelegate(self)
   }()
@@ -53,27 +53,27 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
     }
     playlistTableView.delegate = playlistDelegate
     chapterTableView.delegate = chapterDelegate
-    
+
     // handle pending switch tab request
     if pendingSwitchRequest != nil {
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil
     }
-    
+
     // nofitications
     playlistChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.playlistChanged, object: nil, queue: OperationQueue.main) { _ in
       self.reloadData(playlist: true, chapters: false)
     }
   }
-  
+
   override func viewDidAppear() {
     reloadData(playlist: true, chapters: true)
   }
-  
+
   deinit {
     NotificationCenter.default.removeObserver(self.playlistChangeObserver!)
   }
-  
+
   func reloadData(playlist: Bool, chapters: Bool) {
     if playlist {
       playerCore.getPLaylist()
@@ -84,7 +84,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       chapterTableView.reloadData()
     }
   }
-  
+
   /** Switch tab (call from other objects) */
   func pleaseSwitchToTab(_ tab: TabViewType) {
     if isViewLoaded {
@@ -94,12 +94,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       pendingSwitchRequest = tab
     }
   }
-  
+
   /** Switch tab (for internal call) */
   private func switchToTab(_ tab: TabViewType) {
-    let playlistStr = NSLocalizedString("playlist.playlist_cap", comment: "")
-    let chapterStr = NSLocalizedString("playlist.chapter_cap", comment: "")
-    
+    let playlistStr = NSLocalizedString("playlist.playlist_cap", comment: "PLAYLIST")
+    let chapterStr = NSLocalizedString("playlist.chapter_cap", comment: "CHAPTERS")
+
     switch tab {
     case .playlist:
       tabView.selectTabViewItem(at: 0)
@@ -111,9 +111,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       playlistBtn.attributedTitle = NSAttributedString(string: playlistStr, attributes: Utility.tabTitleFontAttributes)
     }
   }
-  
+
   // MARK: - NSTableViewSource
-  
+
   func numberOfRows(in tableView: NSTableView) -> Int {
     if tableView == playlistTableView {
       return playerCore.info.playlist.count
@@ -123,7 +123,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       return 0
     }
   }
-  
+
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     if tableView == playlistTableView {
       guard row < playerCore.info.playlist.count else { return nil }
@@ -140,14 +140,14 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       return nil
     }
   }
-  
+
   private func withAllTableViews(_ block: (NSTableView) -> Void) {
     block(playlistTableView)
     block(chapterTableView)
   }
-  
+
   // MARK: - IBActions
-  
+
   @IBAction func addToPlaylistBtnAction(_ sender: AnyObject) {
     let _ = Utility.quickOpenPanel(title: "Add to playlist", isDir: false) { (url) in
       if url.isFileURL {
@@ -157,34 +157,34 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       }
     }
   }
-  
-  
+
+
   @IBAction func clearPlaylistBtnAction(_ sender: AnyObject) {
     playerCore.clearPlaylist()
     reloadData(playlist: true, chapters: false)
     mainWindow.displayOSD(.clearPlaylist)
   }
-  
+
   @IBAction func playlistBtnAction(_ sender: AnyObject) {
     reloadData(playlist: true, chapters: false)
     switchToTab(.playlist)
   }
-  
+
   @IBAction func chaptersBtnAction(_ sender: AnyObject) {
     reloadData(playlist: false, chapters: true)
     switchToTab(.chapters)
   }
-  
+
   // MARK: - Table delegates
-  
+
   class PlaylistTableDelegate: NSObject, NSTableViewDelegate {
-    
+
     weak var parent: PlaylistViewController!
-    
+
     init(_ parent: PlaylistViewController) {
       self.parent = parent
     }
-    
+
     func tableViewSelectionDidChange(_ notification: Notification) {
       let tv = notification.object as! NSTableView
       if tv.numberOfSelectedRows > 0 {
@@ -194,15 +194,15 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       }
     }
   }
-  
+
   class ChapterTableDelegate: NSObject, NSTableViewDelegate {
-    
+
     weak var parent: PlaylistViewController!
-    
+
     init(_ parent: PlaylistViewController) {
       self.parent = parent
     }
-    
+
     func tableViewSelectionDidChange(_ notification: Notification) {
       let tv = notification.object as! NSTableView
       if tv.numberOfSelectedRows > 0 {
@@ -214,7 +214,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
         parent.mainWindow.displayOSD(.chapter(chapter.title))
       }
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
       let info = parent.playerCore.info
       let chapters = info.chapters
@@ -244,5 +244,5 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       }
     }
   }
-    
+
 }

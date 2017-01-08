@@ -9,7 +9,7 @@
 import Cocoa
 
 class MPVTrack: NSObject {
-  
+
   /** For binding a none track object to menu, id = 0 */
   static let noneVideoTrack = MPVTrack(id: 0, type: .video, isDefault: false, isForced: false, isSelected: false, isExternal: false)
   /** For binding a none track object to menu, id = 0 */
@@ -18,7 +18,7 @@ class MPVTrack: NSObject {
   static let noneSubTrack = MPVTrack(id: 0, type: .sub, isDefault: false, isForced: false, isSelected: false, isExternal: false)
   /** For binding a none track object to menu, id = 0 */
   static let noneSecongSubTrack = MPVTrack(id: 0, type: .secondSub, isDefault: false, isForced: false, isSelected: false, isExternal: false)
-  
+
   static func emptyTrack(_ type: TrackType) -> MPVTrack {
     switch type {
     case .video: return noneVideoTrack
@@ -28,7 +28,7 @@ class MPVTrack: NSObject {
     }
 
   }
-  
+
   enum TrackType: String {
     case audio = "audio"
     case video = "video"
@@ -36,7 +36,7 @@ class MPVTrack: NSObject {
     // Only for setting a second sub track, hence the raw value is unused
     case secondSub = "secondSub"
   }
-  
+
   var id: Int
   var type: TrackType
   var srcId: Int?
@@ -48,7 +48,7 @@ class MPVTrack: NSObject {
   var isExternal: Bool
   var externalFilename: String?
   var codec: String?
-  
+
   var readableTitle: String {
     get {
       let title = self.title ?? ""
@@ -58,11 +58,11 @@ class MPVTrack: NSObject {
       return "#\(self.id) \(title) \(lang) \(def)"
     }
   }
-  
+
   // unimplemented
-  
+
   var isAlbumart: Bool?
-  
+
   var ffIndex: Int?
   var decoderDesc: String?
   var demuxW: Int?
@@ -71,7 +71,7 @@ class MPVTrack: NSObject {
   var demuxChannels: String?
   var demuxSamplerate: Int?
   var demuxFps: Double?
-  
+
   init(id: Int, type: TrackType, isDefault: Bool, isForced: Bool, isSelected: Bool, isExternal: Bool) {
     self.id = id
     self.type = type
@@ -80,9 +80,9 @@ class MPVTrack: NSObject {
     self.isSelected = isSelected
     self.isExternal = isExternal
   }
-  
+
   // Utils
-  
+
   var isImageSub: Bool {
     get {
       if type == .video || type == .audio { return false }
@@ -90,7 +90,7 @@ class MPVTrack: NSObject {
       return codec == "hdmv_pgs_subtitle" || codec == "dvb_subtitle"
     }
   }
-  
+
   var isAssSub: Bool {
     get {
       if type == .video || type == .audio { return false }
@@ -98,5 +98,5 @@ class MPVTrack: NSObject {
       return codec == "ass"
     }
   }
-  
+
 }

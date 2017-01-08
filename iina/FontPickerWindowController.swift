@@ -9,23 +9,23 @@
 import Cocoa
 
 class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
-  
-  
+
+
   @IBOutlet weak var familyTableView: NSTableView!
   @IBOutlet weak var faceTableView: NSTableView!
   @IBOutlet weak var previewField: NSTextField!
   @IBOutlet weak var searchField: NSTextField!
   @IBOutlet weak var otherField: NSTextField!
-  
+
   var fontNames: [String] = []
   var filteredFontNames: [String] = []
   var isSearching = false
   var chosenFontMembers: [[Any]]?
   var chosenFamily: String?
   var chosenFace: String?
-  
+
   var finishedPicking: ((String?) -> Void)?
-  
+
   override var windowNibName: String {
     get {
       return "FontPickerWindowController"
@@ -34,7 +34,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    
+
     fontNames = NSFontManager.shared().availableFontFamilies.filter { !$0.hasPrefix(".") && !$0.trimmingCharacters(in: .whitespaces).isEmpty }
     withAllTableViews { tv in
       tv.dataSource = self
@@ -42,9 +42,9 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     }
     searchField.delegate = self
   }
-  
+
   // - MARK: NSTableView delegate and data source
-  
+
   func numberOfRows(in tableView: NSTableView) -> Int {
     if tableView == familyTableView {
       return isSearching ? filteredFontNames.count : fontNames.count
@@ -54,7 +54,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
       return 0
     }
   }
-  
+
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     if tableView == familyTableView {
       return isSearching ? filteredFontNames[row] : fontNames[row]
@@ -65,7 +65,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
       return 0
     }
   }
-  
+
   func tableViewSelectionDidChange(_ notification: Notification) {
     guard let activeTv = notification.object as? NSTableView else { return }
     if activeTv == familyTableView {
@@ -81,7 +81,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
       updatePreview()
     }
   }
-  
+
   override func keyUp(with event: NSEvent) {
     let str = searchField.stringValue
     if str.isEmpty {
@@ -94,7 +94,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
       faceTableView.reloadData()
     }
   }
-  
+
   @IBAction func okBtnPressed(_ sender: AnyObject) {
     if let block = finishedPicking {
       let otherString = otherField.stringValue
@@ -108,19 +108,19 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     }
     self.close()
   }
-  
-  
+
+
   // - MARK: Utils
-  
+
   private func updatePreview() {
     guard chosenFontMembers != nil else { return }
     chosenFace = (chosenFontMembers![faceTableView.selectedRow][0] as? String) ?? ""
     previewField.font = NSFont(name: chosenFace!, size: 24) ?? NSFont.systemFont(ofSize: 24)
   }
-  
+
   private func withAllTableViews (_ block: (NSTableView) -> Void) {
     block(familyTableView)
     block(faceTableView)
   }
-    
+
 }

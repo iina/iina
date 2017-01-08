@@ -13,15 +13,15 @@ class SettingsListCellView: NSView {
   override func awakeFromNib() {
     self.wantsLayer = true
   }
-  
+
   override var wantsUpdateLayer: Bool {
     get {
       return true
     }
   }
-  
+
   override func updateLayer() {
     self.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.1).cgColor
   }
-    
+
 }

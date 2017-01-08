@@ -11,5 +11,5 @@ import Cocoa
 class ChapterTableCellView: NSTableCellView {
 
   @IBOutlet weak var durationTextField: NSTextField!
-    
+
 }

@@ -59,6 +59,12 @@ class MPVController: NSObject {
     MPVOption.Window.fullscreen: MPV_FORMAT_FLAG
   ]
 
+  deinit {
+    optionObservers.forEach { (k, v) in
+      ud.removeObserver(self, forKeyPath: k)
+    }
+  }
+
   /**
    Init the mpv context, set options
    */

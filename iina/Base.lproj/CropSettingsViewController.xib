@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="500" height="60"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EC9-NQ-gwl">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EC9-NQ-gwl">
                     <rect key="frame" x="14" y="37" width="34" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="4rt-rj-YXJ"/>
@@ -50,7 +50,7 @@
                         <action selector="predefinedAspectValueAction:" target="-2" id="Fzw-EP-cyv"/>
                     </connections>
                 </segmentedControl>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsz-Wv-zHe">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hsz-Wv-zHe">
                     <rect key="frame" x="54" y="37" width="244" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="8Hk-sR-8dp"/>
@@ -76,18 +76,38 @@
                         <action selector="doneBtnAction:" target="-2" id="y1L-6G-8iz"/>
                     </connections>
                 </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="99r-Th-YSz">
+                    <rect key="frame" x="360" y="3" width="74" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="62" id="HPh-UH-exv"/>
+                        <constraint firstAttribute="height" constant="18" id="IaY-oN-WAf"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BtO-vw-tiy">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                    </buttonCell>
+                    <connections>
+                        <action selector="cancelBtnAction:" target="-2" id="L9R-GV-vYv"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="hsz-Wv-zHe" firstAttribute="leading" secondItem="EC9-NQ-gwl" secondAttribute="trailing" constant="10" id="FVG-qD-NKx"/>
                 <constraint firstItem="yrf-Aq-Gy6" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="Gnw-C5-HOK"/>
+                <constraint firstItem="sHe-JW-Elk" firstAttribute="leading" secondItem="99r-Th-YSz" secondAttribute="trailing" constant="5" id="KrU-2L-Jcb"/>
                 <constraint firstAttribute="bottom" secondItem="sHe-JW-Elk" secondAttribute="bottom" constant="10" id="Wx3-kf-ke1"/>
                 <constraint firstItem="EC9-NQ-gwl" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="6" id="a0X-o8-wnM"/>
                 <constraint firstAttribute="trailing" secondItem="sHe-JW-Elk" secondAttribute="trailing" constant="16" id="b0k-Ij-6vn"/>
                 <constraint firstItem="EC9-NQ-gwl" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="gic-Fg-ZHv"/>
                 <constraint firstItem="hsz-Wv-zHe" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="9" id="rNb-6O-bub"/>
+                <constraint firstAttribute="bottom" secondItem="99r-Th-YSz" secondAttribute="bottom" constant="10" id="sCd-g7-kMK"/>
                 <constraint firstAttribute="bottom" secondItem="yrf-Aq-Gy6" secondAttribute="bottom" constant="10" id="ugR-VB-Oeh"/>
             </constraints>
-            <point key="canvasLocation" x="66" y="111"/>
+            <point key="canvasLocation" x="73" y="121"/>
         </customView>
+        <userDefaultsController representsSharedInstance="YES" id="TVN-ds-Qtr"/>
     </objects>
 </document>

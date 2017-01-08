@@ -1,11 +1,55 @@
-/* 
-  String_ui.strings
-  iina
+/*
+ String_ui.strings
+ iina
+ 
+ Created by lhc on 3/1/2017.
+ Copyright © 2017 lhc. All rights reserved.
+ */
 
-  Created by lhc on 3/1/2017.
-  Copyright © 2017 lhc. All rights reserved.
-*/
+// Common
+"on" = "On";
+"off" = "Off";
 
-"playlist_cap" = "PLAYLIST";
+// PlaylistViewController.swift
+"playlist.playlist_cap" = "PLAYLIST";
+"playlist.chapter_cap" = "CHAPTERS";
 
-"chapter_cap" = "CHAPTERS";
+// MainWindowController.swift
+"main.buffering_indicator" = "Buffering... %@%%";
+
+// QuickSettingViewController.swift
+"quicksetting.aspect_item.Default" = "Default";
+"quicksetting.crop_item.None" = "None";
+
+// OSDMessage.swift
+"osd.pause" = "Paused";
+"osd.resume" = "Resumed";
+"osd.volume" = "Volume: %i";
+"osd.speed" = "Speed: %.2f";
+"osd.aspect" = "Aspect Ratio: %@";
+"osd.crop" = "Crop: %@";
+"osd.rotate" = "Rotate: %i";
+"osd.deinterlace" = "Deinterlace: %@";
+"osd.audio_delay.nodelay" = "Audio Delay: No Delay";
+"osd.audio_delay.later" = "Audio Delay: %.2fs Later";
+"osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
+"osd.subtitle_delay.nodelay" = "Subtitle Delay: No Delay";
+"osd.subtitle_delay.later" = "Subtitle Delay: %.2fs Later";
+"osd.subtitle_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
+"osd.subtitle_pos" = "Subtitle Position: %f";
+"osd.mute" = "Mute";
+"osd.unmute" = "Unmute";
+"osd.screenshot" = "Screenshot captured";
+"osd.abloop.a" = "AB-Loop: A";
+"osd.abloop.b" = "AB-Loop: B";
+"osd.abloop.clear" = "AB-Loop: Cleared";
+"osd.stop" = "Stopped";
+"osd.chapter" = "Chapter: %@";
+"osd.subtitle_scale" = "Subtitle Scale: %.2fx";
+"osd.add_to_playlist" = "Added %i files to playlist";
+"osd.clear_playlist" = "Cleared playlist";
+"osd.graphic_equalizer.contrast" = "Contrast: %i";
+"osd.graphic_equalizer.gamma" = "Gamma: %i";
+"osd.graphic_equalizer.hue" = "Hue: %i";
+"osd.graphic_equalizer.saturation" = "Saturation: %i";
+"osd.graphic_equalizer.brightness" = "Brightness: %i";

@@ -987,7 +987,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let speedStr = FileSize.format(playerCore.info.cacheSpeed, unit: .b)
       let bufferingState = playerCore.info.bufferingState
       bufferIndicatorView.isHidden = false
-      bufferProgressLabel.stringValue = "Buffering... \(bufferingState)%"
+      bufferProgressLabel.stringValue = String(format: NSLocalizedString("main.buffering_indicator",comment:"Buffering... %s%%"),bufferingState)
       bufferDetailLabel.stringValue = "\(usedStr)/\(sizeStr) (\(speedStr)/s)"
     } else {
       bufferIndicatorView.isHidden = true

@@ -97,8 +97,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
   
   /** Switch tab (for internal call) */
   private func switchToTab(_ tab: TabViewType) {
-    let playlistStr = NSLocalizedString("playlist_cap", comment: "")
-    let chapterStr = NSLocalizedString("chapter_cap", comment: "")
+    let playlistStr = NSLocalizedString("playlist.playlist_cap", comment: "")
+    let chapterStr = NSLocalizedString("playlist.chapter_cap", comment: "")
     
     switch tab {
     case .playlist:

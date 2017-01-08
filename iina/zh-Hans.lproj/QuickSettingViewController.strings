@@ -165,7 +165,7 @@
 "bzk-c2-LH5.label" = "音频";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
-"cMu-YF-riv.ibShadowedLabels[0]" = "Default";
+"cMu-YF-riv.ibShadowedLabels[0]" = "默认";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[1] = "4:3"; ObjectID = "cMu-YF-riv"; */
 "cMu-YF-riv.ibShadowedLabels[1]" = "4:3";
@@ -222,7 +222,7 @@
 "iS4-Zr-9Ig.title" = "均衡器:";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
-"iuN-rN-jT7.ibShadowedLabels[0]" = "None";
+"iuN-rN-jT7.ibShadowedLabels[0]" = "关闭";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[1] = "4:3"; ObjectID = "iuN-rN-jT7"; */
 "iuN-rN-jT7.ibShadowedLabels[1]" = "4:3";
@@ -266,9 +266,6 @@
 /* Class = "NSMenuItem"; title = "1"; ObjectID = "nvA-Ae-4XS"; */
 "nvA-Ae-4XS.title" = "1";
 
-/* Class = "NSButtonCell"; title = "Reset"; ObjectID = "oMb-VE-M5E"; */
-"oMb-VE-M5E.title" = "重置";
-
 /* Class = "NSTextFieldCell"; title = "10x"; ObjectID = "p63-Nx-yJZ"; */
 "p63-Nx-yJZ.title" = "10x";
 
@@ -306,7 +303,7 @@
 "vFD-HU-RVz.title" = "自定义...";
 
 /* Class = "NSTextFieldCell"; title = "Sub style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
-"wBD-pZ-Bvu.title" = "字幕样式可能破坏 ASS 渲染。下列部分选项可能会由于字幕格式被禁用。";
+"wBD-pZ-Bvu.title" = "字幕样式可能破坏 ASS 渲染。某些字幕格式无法使用下列部分选项。";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "wgA-op-JP4"; */
 "wgA-op-JP4.title" = "0s";

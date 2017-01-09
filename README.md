@@ -25,7 +25,7 @@ When raising an issue, please **use English** if possible.
 - User-friendly interface
 - All the features you need for videos, audios and subtitles
 - Supported basic playlist and chapters
-- MPV config files and script system are still available for advanced users
+- MPV config files and script system are available for advanced users
 - Written in Swift, followed up on new technologies like Touch Bar
 - Still in active development
 
@@ -33,7 +33,7 @@ When raising an issue, please **use English** if possible.
 
 ## Use pre-compiled dylibs
 
-1. Please make sure cocoapods is installed.
+1. Please make sure CocoaPods is installed.
 
   **gem**
   ```
@@ -62,12 +62,12 @@ Theoretically no extra work is needed. _If you are unwilling to use the provided
 
 * other/parse_doc.rb
 
-  This script will fetch the *lastest* mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. Only needed when updating libmpv. Note that once API changed, player source code may also need to be  changed.
+  This script will fetch the *lastest* mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. This is only needed when updating libmpv. Note that if the API changes, the player source code may also need to be changed.
 
 * other/change_lib_dependencies.rb
 
-  This script will deploy depended libraries into `libmpv/libs`.
-  Make sure in Xcode build settings, you have a phase copying of all these dylibs.
+  This script will deploy the depended libraries into `libmpv/libs`.
+  Make sure you have a phase copying of all these dylibs in Xcode's build settings.
 
 ## Contribute
 

@@ -200,21 +200,12 @@ extension MainWindowController {
   }
 
   @IBAction func menuAlwaysOnTop(_ sender: NSMenuItem) {
-    guard let w = window else { return }
-    if playerCore.info.isAlwaysOntop {
-      w.level = Int(CGWindowLevelForKey(.baseWindow))
-      w.level = Int(CGWindowLevelForKey(.normalWindow))
-      playerCore.info.isAlwaysOntop = false
-    } else {
-      w.level = Int(CGWindowLevelForKey(.floatingWindow))
-      w.level = Int(CGWindowLevelForKey(.maximumWindow))
-      playerCore.info.isAlwaysOntop = true
-    }
+    playerCore.info.isAlwaysOntop = !playerCore.info.isAlwaysOntop
+    setWindowFloatingOntop(playerCore.info.isAlwaysOntop)
   }
 
   @IBAction func menuToggleFullScreen(_ sender: NSMenuItem) {
-    guard let w = window else { return }
-    w.toggleFullScreen(sender)
+    toggleWindowFullScreen()
     sender.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
   }
 

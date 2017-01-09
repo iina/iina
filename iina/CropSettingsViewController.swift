@@ -9,9 +9,9 @@
 import Cocoa
 
 class CropSettingsViewController: NSViewController {
-  
+
   weak var mainWindow: MainWindowController!
-  
+
   lazy var cropBoxView: CropBoxView = {
     let view = CropBoxView()
     view.settingsViewController = self
@@ -21,7 +21,7 @@ class CropSettingsViewController: NSViewController {
 
   @IBOutlet weak var cropRectLabel: NSTextField!
   @IBOutlet weak var predefinedAspectSegment: NSSegmentedControl!
-  
+
   private var cropx: Int = 0
   private var cropy: Int = 0
   private var cropw: Int = 0
@@ -32,15 +32,15 @@ class CropSettingsViewController: NSViewController {
       return mainWindow.playerCore.info.videoHeight! - croph - cropy
     }
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
   }
-  
+
   override func viewDidAppear() {
     predefinedAspectSegment.selectedSegment = -1
   }
-  
+
   func selectedRectUpdated() {
     guard mainWindow.isInInteractiveMode else { return }
     let rect = cropBoxView.selectedRect
@@ -51,10 +51,10 @@ class CropSettingsViewController: NSViewController {
     cropRectLabel.stringValue = "Origin(\(cropx), \(actualCropy))  Size(\(cropw) \u{d7} \(croph))"
   }
 
-  
+
   @IBAction func doneBtnAction(_ sender: AnyObject) {
     let playerCore = mainWindow.playerCore
-    
+
     mainWindow.exitInteractiveMode {
       if self.cropx == 0 && self.cropy == 0 &&
         self.cropw == playerCore.info.videoWidth &&
@@ -73,20 +73,20 @@ class CropSettingsViewController: NSViewController {
       playerCore.info.unsureCrop = ""
     }
   }
-  
+
   @IBAction func predefinedAspectValueAction(_ sender: NSSegmentedControl) {
     guard let str = sender.label(forSegment: sender.selectedSegment) else { return }
     guard let aspect = Aspect(string: str) else { return }
-    
+
     let actualSize = cropBoxView.actualSize
     let croppedSize = actualSize.crop(withAspect: aspect)
     let cropped = NSMakeRect((actualSize.width - croppedSize.width) / 2,
                              (actualSize.height - croppedSize.height) / 2,
                              croppedSize.width,
                              croppedSize.height)
-    
+
     cropBoxView.setSelectedRect(to: cropped)
   }
-  
-    
+
+
 }

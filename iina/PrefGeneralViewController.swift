@@ -11,13 +11,13 @@ import MASPreferences
 
 
 class PrefGeneralViewController: NSViewController, MASPreferencesViewController {
-  
+
   override var nibName: String? {
     get {
       return "PrefGeneralViewController"
     }
   }
-  
+
   override var identifier: String? {
     get {
       return "general"
@@ -26,13 +26,13 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
       super.identifier = newValue
     }
   }
-  
+
   var toolbarItemImage: NSImage {
     get {
       return NSImage(named: NSImageNamePreferencesGeneral)!
     }
   }
-  
+
   var toolbarItemLabel: String {
     get {
       return "General"
@@ -43,9 +43,9 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
     super.viewDidLoad()
     // Do view setup here.
   }
-  
+
   // MARK: - IBAction
-  
+
   @IBAction func chooseScreenshotPathAction(_ sender: AnyObject) {
     let _ = Utility.quickOpenPanel(title: "Choose screenshot save path", isDir: true) {
       url in
@@ -53,6 +53,6 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
       UserDefaults.standard.synchronize()
     }
   }
-  
-    
+
+
 }

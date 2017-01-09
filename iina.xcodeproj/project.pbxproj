@@ -193,6 +193,7 @@
 /* Begin PBXFileReference section */
 		11AF541A0F933D2F3C12AAD8 /* Pods_iinaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iinaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.release.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.release.xcconfig"; sourceTree = "<group>"; };
+		72CAEE6D1E229EAE00B8C894 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefGeneralViewController.strings"; sourceTree = "<group>"; };
 		81CD1350F5D0CF91249F4E6F /* Pods-iinaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iinaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iinaTests/Pods-iinaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		8400D5C71E1AB2F1006785F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
@@ -221,7 +222,6 @@
 		8400D5FF1E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FilterWindowController.strings"; sourceTree = "<group>"; };
 		8400D6001E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AboutWindowController.strings"; sourceTree = "<group>"; };
 		8400D6011E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FontPickerWindowController.strings"; sourceTree = "<group>"; };
-		8400D6021E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefGeneralViewController.strings"; sourceTree = "<group>"; };
 		8400D6031E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefUIViewController.strings"; sourceTree = "<group>"; };
 		8400D6041E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefControlViewController.strings"; sourceTree = "<group>"; };
 		8400D6051E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefKeyBindingViewController.strings"; sourceTree = "<group>"; };
@@ -595,8 +595,11 @@
 				84A0BAA31D2FAEA000BC8DA1 /* Views */,
 				84A0BAA61D2FAF8400BC8DA1 /* Utils */,
 			);
+			indentWidth = 2;
 			path = iina;
 			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
 		};
 		84FF846D1D2FF698001B318A /* libmpv */ = {
 			isa = PBXGroup;
@@ -928,7 +931,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8400D5DF1E1AB32A006785F5 /* Base */,
-				8400D6021E1AB412006785F5 /* zh-Hans */,
+				72CAEE6D1E229EAE00B8C894 /* zh-Hans */,
 			);
 			name = PrefGeneralViewController.xib;
 			sourceTree = "<group>";
@@ -1127,7 +1130,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 67CQ77V27R;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/libmpv/include";
@@ -1155,7 +1158,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 67CQ77V27R;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/libmpv/include";

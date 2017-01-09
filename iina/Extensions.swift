@@ -34,13 +34,13 @@ func - (lhs: NSPoint, rhs: NSPoint) -> NSPoint {
 }
 
 extension NSSize {
-  
+
   var aspect: CGFloat {
     get {
       return width / height
     }
   }
-  
+
   /** Resize to no smaller than a min size while keeping same aspect */
   func satisfyMinSizeWithSameAspectRatio(_ minSize: NSSize) -> NSSize {
     if width >= minSize.width && height >= minSize.height {  // no need to resize if larger
@@ -49,7 +49,7 @@ extension NSSize {
       return grow(toSize: minSize)
     }
   }
-  
+
   /** Resize to no larger than a max size while keeping same aspect */
   func satisfyMaxSizeWithSameAspectRatio(_ maxSize: NSSize) -> NSSize {
     if width <= maxSize.width && height <= maxSize.height {  // no need to resize if smaller
@@ -58,7 +58,7 @@ extension NSSize {
       return shrink(toSize: maxSize)
     }
   }
-  
+
   func crop(withAspect aspectRect: Aspect) -> NSSize {
     let targetAspect = aspectRect.value
     if aspect > targetAspect {  // self is wider, crop width, use same height
@@ -67,7 +67,7 @@ extension NSSize {
       return NSSize(width: width, height: width / targetAspect)
     }
   }
-  
+
   func expand(withAspect aspectRect: Aspect) -> NSSize {
     let targetAspect = aspectRect.value
     if aspect < targetAspect {  // self is taller, expand width, use same height
@@ -76,7 +76,7 @@ extension NSSize {
       return NSSize(width: width, height: width / targetAspect)
     }
   }
-  
+
   func grow(toSize size: NSSize) -> NSSize {
     let sizeAspect = size.aspect
     if aspect > sizeAspect {  // self is wider, grow to meet height
@@ -85,7 +85,7 @@ extension NSSize {
       return NSSize(width: size.width, height: size.width / aspect)
     }
   }
-  
+
   func shrink(toSize size: NSSize) -> NSSize {
     let  sizeAspect = size.aspect
     if aspect < sizeAspect { // self is taller, shrink to meet height
@@ -94,30 +94,30 @@ extension NSSize {
       return NSSize(width: size.width, height: size.width / aspect)
     }
   }
-  
+
   func multiply(_ multiplier: CGFloat) -> NSSize {
     return NSSize(width: width * multiplier, height: height * multiplier)
   }
-  
+
   func add(_ multiplier: CGFloat) -> NSSize {
     return NSSize(width: width + multiplier, height: height + multiplier)
   }
-  
+
 }
 
 extension NSRect {
-  
+
   func multiply(_ multiplier: CGFloat) -> NSRect {
     return NSRect(x: origin.x, y: origin.y, width: width * multiplier, height: height * multiplier)
   }
-  
+
   func centeredResize(to newSize: NSSize) -> NSRect {
     return NSRect(x: origin.x - (newSize.width - size.width) / 2,
                   y: origin.y - (newSize.height - size.height) / 2,
                   width: newSize.width,
                   height: newSize.height)
   }
-  
+
   func makeLocate(in biggerRect: NSRect) -> NSRect {
     var newX = origin.x, newY = origin.y
     if newX < 0 {
@@ -134,7 +134,7 @@ extension NSRect {
     }
     return NSRect(x: newX, y: newY, width: size.width, height: size.height)
   }
-  
+
   func constrain(in biggerRect: NSRect) -> NSRect {
     var newX = origin.x, newY = origin.y
     var newW = width, newH = height
@@ -188,7 +188,7 @@ extension Int {
   func toStr() -> String {
     return "\(self)"
   }
-  
+
   func constrain(min: Int, max: Int) -> Int {
     var value = self
     if self < min { value = min }
@@ -204,13 +204,19 @@ extension CGFloat {
     if self > max { value = max }
     return value
   }
+
+  var unifiedDouble: Double {
+    get {
+      return self == 0 ? 0 : (self > 0 ? 1 : -1)
+    }
+  }
 }
 
 extension Double {
   func toStr() -> String {
     return "\(self)"
   }
-  
+
   func constrain(min: Double, max: Double) -> Double {
     var value = self
     if self < min { value = min }
@@ -225,7 +231,7 @@ extension NSColor {
       return "\(self.redComponent)/\(self.greenComponent)/\(self.blueComponent)/\(self.alphaComponent)"
     }
   }
-  
+
   convenience init?(mpvColorString: String) {
     let splitted = mpvColorString.characters.split(separator: "/").map { (seq) -> Double? in
       return Double(String(seq))
@@ -260,7 +266,7 @@ extension NSMutableAttributedString {
 
 
 extension UserDefaults {
-  
+
   func mpvColor(forKey key: String) -> String? {
     guard let data = self.data(forKey: key) else { return nil }
     guard let color = NSUnarchiver.unarchiveObject(with: data) as? NSColor else { return nil }

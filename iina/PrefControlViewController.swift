@@ -16,7 +16,7 @@ class PrefControlViewController: NSViewController, MASPreferencesViewController 
       return "PrefControlViewController"
     }
   }
-  
+
   override var identifier: String? {
     get {
       return "control"
@@ -25,22 +25,22 @@ class PrefControlViewController: NSViewController, MASPreferencesViewController 
       super.identifier = newValue
     }
   }
-  
+
   var toolbarItemImage: NSImage {
     get {
       return NSImage(named: "toolbar_control")!
     }
   }
-  
+
   var toolbarItemLabel: String {
     get {
       return "Control"
     }
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do view setup here.
   }
-    
+
 }

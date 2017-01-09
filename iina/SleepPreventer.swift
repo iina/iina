@@ -10,9 +10,9 @@ import IOKit.pwr_mgt
 
 
 class SleepPreventer: NSObject {
-  
+
   static private let reason = "IINA is playing video" as CFString
-  
+
   static private var assertionID = IOPMAssertionID()
 
   static func preventSleep() {
@@ -24,12 +24,12 @@ class SleepPreventer: NSObject {
       Utility.showAlert(message: "Cannot prevent display sleep")
     }
   }
-  
+
   static func allowSleep() {
     let success = IOPMAssertionRelease(assertionID)
     if success != kIOReturnSuccess {
       Utility.showAlert(message: "Cannot allow display sleep")
     }
   }
-  
+
 }

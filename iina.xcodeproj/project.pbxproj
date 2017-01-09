@@ -599,6 +599,7 @@
 			path = iina;
 			sourceTree = "<group>";
 			tabWidth = 2;
+			usesTabs = 0;
 		};
 		84FF846D1D2FF698001B318A /* libmpv */ = {
 			isa = PBXGroup;

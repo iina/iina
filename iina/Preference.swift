@@ -33,6 +33,9 @@ struct Preference {
     /** Quit when no open window (bool) */
     static let quitWhenNoOpenedWindow = "quitWhenNoOpenedWindow"
 
+    /** Keep player window open on end of file / playlist. (bool) */
+    static let keepOpenOnFileEnd = "keepOpenOnFileEnd"
+
     /** Resume from last position */
     // static let resumeLastPosition = "resumeLastPosition"
 
@@ -332,6 +335,7 @@ struct Preference {
     Key.useUserDefinedConfDir: false,
     Key.userDefinedConfDir: "~/.config/mpv/",
 
+    Key.keepOpenOnFileEnd: true,
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
     Key.relativeSeekAmount: 2,

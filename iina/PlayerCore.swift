@@ -93,12 +93,19 @@ class PlayerCore: NSObject {
   /** Pause / resume. Reset speed to 0 when pause. */
   func togglePause(_ set: Bool?) {
     if let setPause = set {
-      mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
       if setPause {
         setSpeed(1)
+      } else {
+        if mpvController.getFlag(MPVProperty.eofReached) {
+          seek(absoluteSecond: 0)
+        }
       }
+      mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
     } else {
       if (info.isPaused) {
+        if mpvController.getFlag(MPVProperty.eofReached) {
+          seek(absoluteSecond: 0)
+        }
         mpvController.setFlag(MPVOption.PlaybackControl.pause, false)
       } else {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, true)
@@ -579,6 +586,13 @@ class PlayerCore: NSObject {
       self.mainWindow.close()
     }
   }
+
+  func closeMainWindow() {
+    DispatchQueue.main.async {
+      self.mainWindow.close()
+    }
+  }
+
 
   // MARK: - Getting info
 

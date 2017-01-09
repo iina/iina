@@ -38,6 +38,8 @@ class MPVController: NSObject {
 
   var receivedEndFileWhileLoading: Bool = false
 
+  var fileLoaded: Bool = false
+
   let observeProperties: [String: mpv_format] = [
     MPVProperty.trackListCount: MPV_FORMAT_INT64,
     MPVProperty.vf: MPV_FORMAT_NONE,
@@ -121,6 +123,8 @@ class MPVController: NSObject {
     setUserOption(PK.screenshotTemplate, type: .string, forName: MPVOption.Screenshot.screenshotTemplate)
 
     setUserOption(PK.useMediaKeys, type: .bool, forName: MPVOption.Input.inputMediaKeys)
+
+    setUserOption(PK.keepOpenOnFileEnd, type: .bool, forName: MPVOption.Window.keepOpen)
 
     // - Codec
 
@@ -468,6 +472,9 @@ class MPVController: NSObject {
         playerCore.info.currentURL = nil
         playerCore.info.isNetworkResource = false
       }
+      if fileLoaded {
+        playerCore.closeMainWindow()
+      }
       receivedEndFileWhileLoading = false
       break
 
@@ -505,6 +512,7 @@ class MPVController: NSObject {
     let filename = getString(MPVProperty.filename)
     playerCore.info.currentURL = URL(fileURLWithPath: filename ?? "")
     playerCore.fileLoaded()
+    fileLoaded = true
     // mpvResume()
     if !ud.bool(forKey: PK.pauseWhenOpen) {
       setFlag(MPVOption.PlaybackControl.pause, false)

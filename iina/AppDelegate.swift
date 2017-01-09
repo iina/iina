@@ -60,6 +60,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     // show alpha in color panels
     NSColorPanel.shared().showsAlpha = true
+    
+    openFile(nil)
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {
@@ -103,7 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   // MARK: - Menu actions
 
-  @IBAction func openFile(_ sender: NSMenuItem) {
+  @IBAction func openFile(_ sender: NSMenuItem?) {
     let panel = NSOpenPanel()
     panel.title = "Choose media file"
     panel.canCreateDirectories = false

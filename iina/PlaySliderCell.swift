@@ -71,36 +71,36 @@ class PlaySliderCell: NSSliderCell {
     
     let slider = self.controlView as! NSSlider
     
-    // Rounded for cleaner drawing
-    var knobPos : CGFloat = 0;
+    /// The position of the knob, rounded for cleaner drawing
+    let knobPos : CGFloat = round(knobRect(flipped: flipped).origin.x);
     
-    /// Should the slider bar parts be offset around the knob?
-    var offsetBar : Bool = true;
+    /// How far progressed the current video is, used for drawing the bar background
+    var progress : CGFloat = 0;
     
     if info.isNetworkResource, info.cacheTime != 0, let duration = info.videoDuration {
       let pos = Double(info.cacheTime) / Double(duration.second) * 100
-      knobPos = round(rect.width * CGFloat(pos / (slider.maxValue - slider.minValue)));
-      
-      // The bar should not be offset for buffer displaying
-      offsetBar = false;
+      progress = round(rect.width * CGFloat(pos / (slider.maxValue - slider.minValue)));
     } else {
-      knobPos = round(knobRect(flipped: flipped).origin.x);
+      progress = knobPos;
     }
     
     let rect = NSMakeRect(rect.origin.x, rect.origin.y + 1, rect.width, rect.height - 2)
     let path = NSBezierPath(roundedRect: rect, xRadius: 3, yRadius: 3)
 
     // draw left
-    NSGraphicsContext.saveGraphicsState()
-    let pathLeft = NSMakeRect(rect.origin.x, rect.origin.y, knobPos - ((offsetBar) ? 1 : 0), rect.height)
-    NSBezierPath(rect: pathLeft).setClip()
+    let pathLeftRect : NSRect = NSMakeRect(rect.origin.x, rect.origin.y, progress, rect.height)
+    NSBezierPath(rect: pathLeftRect).addClip();
+    
+    // Clip 1px around the knob
+    path.append(NSBezierPath(rect: NSRect(x: knobPos - 1, y: rect.origin.y, width: knobWidth + 2, height: rect.height)).reversed);
+    
     barColorLeft.setFill()
     path.fill()
     NSGraphicsContext.restoreGraphicsState()
 
     // draw right
     NSGraphicsContext.saveGraphicsState()
-    let pathRight = NSMakeRect(rect.origin.x + knobPos + ((offsetBar) ? 4 : 0), rect.origin.y, rect.width - knobPos, rect.height)
+    let pathRight = NSMakeRect(rect.origin.x + progress, rect.origin.y, rect.width - progress, rect.height)
     NSBezierPath(rect: pathRight).setClip()
     barColorRight.setFill()
     path.fill()

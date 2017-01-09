@@ -223,6 +223,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // buffer indicator view
     bufferIndicatorView.layer?.cornerRadius = 10
+    updateBufferIndicatorView()
 
     // other initialization
     osdVisualEffectView.isHidden = true
@@ -943,6 +944,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func updateBufferIndicatorView() {
+    guard isWindowLoaded else { return }
+
     if playerCore.info.isNetworkResource {
       bufferIndicatorView.isHidden = false
       bufferSpin.startAnimation(nil)

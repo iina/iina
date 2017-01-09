@@ -95,14 +95,14 @@ class PlayerCore: NSObject {
     if let setPause = set {
       mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
       if setPause {
-        setSpeed(0)
+        setSpeed(1)
       }
     } else {
       if (info.isPaused) {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, false)
       } else {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, true)
-        setSpeed(0)
+        setSpeed(1)
       }
     }
   }
@@ -202,11 +202,10 @@ class PlayerCore: NSObject {
     getSelectedTracks()
   }
 
-  /** Set speed. A negative speed -x means slow by x times */
+  /** Set speed. */
   func setSpeed(_ speed: Double) {
-    let realSpeed = Utility.toRealSpeed(fromDisplaySpeed: speed)
-    mpvController.setDouble(MPVOption.PlaybackControl.speed, realSpeed)
-    info.playSpeed = realSpeed
+    mpvController.setDouble(MPVOption.PlaybackControl.speed, speed)
+    info.playSpeed = speed
   }
 
   func setVideoAspect(_ aspect: String) {
@@ -590,10 +589,10 @@ class PlayerCore: NSObject {
     let trackCount = mpvController.getInt(MPVProperty.trackListCount)
     for index in 0..<trackCount {
       // get info for each track
-      let track = MPVTrack(id:         mpvController.getInt(MPVProperty.trackListNId(index)),
-                           type:       MPVTrack.TrackType(rawValue: mpvController.getString(MPVProperty.trackListNType(index))!)!,
-                           isDefault:  mpvController.getFlag(MPVProperty.trackListNDefault(index)),
-                           isForced:   mpvController.getFlag(MPVProperty.trackListNForced(index)),
+      let track = MPVTrack(id: mpvController.getInt(MPVProperty.trackListNId(index)),
+                           type: MPVTrack.TrackType(rawValue: mpvController.getString(MPVProperty.trackListNType(index))!)!,
+                           isDefault: mpvController.getFlag(MPVProperty.trackListNDefault(index)),
+                           isForced: mpvController.getFlag(MPVProperty.trackListNForced(index)),
                            isSelected: mpvController.getFlag(MPVProperty.trackListNSelected(index)),
                            isExternal: mpvController.getFlag(MPVProperty.trackListNExternal(index)))
       track.srcId = mpvController.getInt(MPVProperty.trackListNSrcId(index))
@@ -626,10 +625,10 @@ class PlayerCore: NSObject {
     info.playlist.removeAll()
     let playlistCount = mpvController.getInt(MPVProperty.playlistCount)
     for index in 0..<playlistCount {
-      let playlistItem = MPVPlaylistItem(filename:  mpvController.getString(MPVProperty.playlistNFilename(index))!,
+      let playlistItem = MPVPlaylistItem(filename: mpvController.getString(MPVProperty.playlistNFilename(index))!,
                                          isCurrent: mpvController.getFlag(MPVProperty.playlistNCurrent(index)),
                                          isPlaying: mpvController.getFlag(MPVProperty.playlistNPlaying(index)),
-                                         title:     mpvController.getString(MPVProperty.playlistNTitle(index)))
+                                         title: mpvController.getString(MPVProperty.playlistNTitle(index)))
       info.playlist.append(playlistItem)
     }
   }

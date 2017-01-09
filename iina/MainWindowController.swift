@@ -58,7 +58,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** Cache current crop */
   var currentCrop: NSRect = NSRect()
-
+  
+  /** The maximum pressure recorded when clicking on the arrow buttons **/
+  var maxPressure: Int32 = 0
+  
+  /** The value of speedValueIndex before Force Touch **/
+  var oldIndex: Int = 5
+  
   /** The index of current speed in speed value array */
   var speedValueIndex: Int = 5
 
@@ -1071,35 +1077,73 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** left btn */
   @IBAction func leftButtonAction(_ sender: NSButton) {
+    if arrowBtnFunction == .speed {
+      let speeds = AppData.availableSpeedValues.count
+      // If fast forwarding change speed to 1x
+      if speedValueIndex > speeds / 2 {
+        speedValueIndex = speeds / 2
+      }
+      
+      if sender.intValue == 0 { // Released
+        if maxPressure == 1 { // Single click ended
+          speedValueIndex = oldIndex - 1
+          
+          // Wrap around to 1x
+          if speedValueIndex < 0 {
+            speedValueIndex = speeds / 2
+          }
+        } else { // Force Touch ended
+          speedValueIndex = speeds / 2
+        }
+        maxPressure = 0
+      } else {
+        if sender.intValue == 1 && maxPressure == 0 { // First press
+          oldIndex = speedValueIndex
+        } else { // Force Touch
+          speedValueIndex = max(oldIndex - Int(sender.intValue), 0)
+        }
+        maxPressure = max(maxPressure, sender.intValue)
+      }
+    }
     arrowButtonAction(left: true)
   }
 
   @IBAction func rightButtonAction(_ sender: NSButton) {
+    if arrowBtnFunction == .speed {
+      let speeds = AppData.availableSpeedValues.count
+      // If rewinding change speed to 1x
+      if speedValueIndex < speeds / 2 {
+        speedValueIndex = speeds / 2
+      }
+      
+      if sender.intValue == 0 { // Released
+        if maxPressure == 1 { // Single click ended
+          speedValueIndex = oldIndex + 1
+          
+          // Wraparound to 1x
+          if speedValueIndex >= speeds {
+            speedValueIndex = speeds / 2
+          }
+        } else { // Force Touch ended
+          speedValueIndex = speeds / 2
+        }
+        maxPressure = 0
+      } else {
+        if sender.intValue == 1 && maxPressure == 0 { // First press
+          oldIndex = speedValueIndex
+        } else { // Force Touch
+          speedValueIndex = min(oldIndex + Int(sender.intValue), speeds - 1)
+        }
+        maxPressure = max(maxPressure, sender.intValue)
+      }
+    }
     arrowButtonAction(left: false)
   }
-
+  
   /** handle action of both left and right arrow button */
   func arrowButtonAction(left: Bool) {
     switch arrowBtnFunction! {
-
     case .speed:
-      if left {
-        if speedValueIndex >= 5 {
-          speedValueIndex = 4
-        } else if speedValueIndex <= 0 {
-          speedValueIndex = 0
-        } else {
-          speedValueIndex -= 1
-        }
-      } else {
-        if speedValueIndex <= 5 {
-          speedValueIndex = 6
-        } else if speedValueIndex >= 10 {
-          speedValueIndex = 10
-        } else {
-          speedValueIndex += 1
-        }
-      }
       let speedValue = AppData.availableSpeedValues[speedValueIndex]
       playerCore.setSpeed(speedValue)
       if speedValueIndex == 5 {
@@ -1108,7 +1152,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       } else if speedValueIndex < 5 {
         leftArrowLabel.isHidden = false
         rightArrowLabel.isHidden = true
-        leftArrowLabel.stringValue = String(format: "%.0fx", speedValue)
+        leftArrowLabel.stringValue = String(format: "%.2fx", speedValue)
       } else if speedValueIndex > 5 {
         leftArrowLabel.isHidden = true
         rightArrowLabel.isHidden = false
@@ -1367,7 +1411,7 @@ extension MainWindowController: NSTouchBarDelegate {
     item.view = button
     item.customizationLabel = customLabel
     return item
-  }
+	}
 
   // MARK: - Set TouchBar Time Label
 

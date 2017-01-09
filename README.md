@@ -10,7 +10,7 @@ Website: [https://lhc70000.github.io/iina/](https://lhc70000.github.io/iina/)
 Releases: [https://github.com/lhc70000/iina/releases](https://github.com/lhc70000/iina/releases)
 
 Telegram group: 
-[https://telegram.me/joinchat/EUPqOwkAnyXQGU3cje6aQg](https://telegram.me/joinchat/EUPqOwkAnyXQGU3cje6aQg)
+[https://t.me/joinchat/AAAAAEBemW7dU8X7IHShwQ](https://t.me/joinchat/AAAAAEBemW7dU8X7IHShwQ)
 
 ---
 

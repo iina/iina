@@ -13,5 +13,5 @@ class SlideUpButton: NSButton {
   override func resetCursorRects() {
     addCursorRect(self.bounds, cursor: NSCursor.pointingHand())
   }
-  
+
 }

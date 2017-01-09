@@ -10,7 +10,7 @@ import Foundation
 
 
 class KeyCodeHelper {
-  
+
   static let keyMap: [UInt16 : (String, String?)] = [
     0x00: ("a", "A"),
     0x01: ("s", "S"),
@@ -77,7 +77,7 @@ class KeyCodeHelper {
     0x59: ("KP7", nil),
     0x5B: ("KP8", nil),
     0x5C: ("KP9", nil),
-    
+
     0x24: ("ENTER", nil),
     0x30: ("TAB", nil),
     0x31: ("SPACE", nil),
@@ -126,9 +126,9 @@ class KeyCodeHelper {
     0x7D: ("DOWN", nil),
     0x7E: ("UP", nil)
   ]
-  
+
   static func canBeModifiedByShift(_ key: UInt16) -> Bool {
     return key != 0x24 && (key <= 0x2F || key == 0x32)
   }
-  
+
 }

@@ -39,9 +39,7 @@ class PlaylistDragDestView: NSView {
         return false
       }
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
-      if let wc = window?.windowController as? MainWindowController {
-        wc.displayOSD(.addToPlaylist(added))
-      }
+      PlayerCore.shared.sendOSD(.addToPlaylist(added))
       return true
     } else {
       return false

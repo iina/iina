@@ -40,11 +40,12 @@ If you believe the code structures can be improved, please raise an issue.
   - `PlayerCore` should only contain logic that controls playback.
 - Window related logic should be in `MainWindowController`.
   - `windowDidLoad()`: stuff that should be done once
-  - `windowDidOpen()`: stuff that should be done every time when window shown, like resetting some UI components
+  - `windowDidOpen()`: stuff that should be done every time when window shown, like resetting some UI components. Note that window is not necessarily loaded here.
   - `windowWillClose()`: release / deinitialize 
 
 ## How to Contribute
 
+0. **Please open an issue before actually starting doing something** to make sure that there's not someone else working on the same feature.
 1. Fork and clone the repository
 2. Follow [the guide to build with pre-compiled dylibs in README.md](README.md#use-pre-compiled-dylibs)
 3. Open `iina.xcworkspace`.
@@ -52,7 +53,8 @@ If you believe the code structures can be improved, please raise an issue.
 
 If you want to build libmpv and other depended dylibs on your own, please refer to [the guide in README.md](README.md#build-with-the-lastest-mpv).
 
-**Tips**
+**Pull requests**
 
-- Please set target branch of your pull request to `develop`.
+- Please set base branch of your pull request to `develop`.
 - If you found `develop` has been updated during your change, remember to do a rebase before opening a pull request.
+- Please submit **separate pull requests for different features**.

@@ -157,7 +157,7 @@ class Utility {
     b = temp
   }
 
-	static func toRealSubScale(fromDisplaySubScale scale: Double) -> Double {
+  static func toRealSubScale(fromDisplaySubScale scale: Double) -> Double {
     return scale > 0 ? scale : -1 / scale
   }
 

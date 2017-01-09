@@ -235,8 +235,9 @@ class MPVController: NSObject {
     let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)
     var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["MPV Default"]
     if let confFromUd = UserDefaults.standard.string(forKey: PK.currentInputConfigName) {
-      let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false)
-      inputConfPath = currentConfigFilePath
+      if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
+        inputConfPath = currentConfigFilePath
+      }
     }
     chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputConf, inputConfPath))
     // Receive log messages at warn level.

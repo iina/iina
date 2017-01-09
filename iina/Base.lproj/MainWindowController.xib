@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D17a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,7 +43,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="680" height="355"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1600" height="900"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="680" height="355"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -78,7 +78,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
-                    <visualEffectView appearanceType="vibrantDark" ambiguous="YES" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
+                    <visualEffectView appearanceType="vibrantDark" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
                         <rect key="frame" x="120" y="40" width="440" height="64"/>
                         <subviews>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT">
@@ -223,8 +223,8 @@
                                     <action selector="volumeSliderChanges:" target="-2" id="5AA-pG-FOc"/>
                                 </connections>
                             </slider>
-                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wy6-h4-fsN">
-                                <rect key="frame" x="409" y="35" width="14" height="14"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wy6-h4-fsN">
+                                <rect key="frame" x="410" y="35" width="14" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="Rv3-oS-0Hu"/>
                                     <constraint firstAttribute="width" constant="14" id="yzN-B1-5gA"/>
@@ -255,6 +255,7 @@
                             <constraint firstItem="10x-bg-xlj" firstAttribute="leading" secondItem="Yg9-Sd-sWy" secondAttribute="trailing" constant="8" id="bH4-gR-KzH"/>
                             <constraint firstItem="EIi-qd-glM" firstAttribute="leading" secondItem="gxw-pJ-Lcg" secondAttribute="trailing" constant="25" id="cJT-Pe-szx"/>
                             <constraint firstItem="GgV-Cc-sk0" firstAttribute="leading" secondItem="eBP-6g-bAT" secondAttribute="trailing" constant="2" id="exB-rF-Yot"/>
+                            <constraint firstAttribute="width" constant="440" id="g1S-BA-95v"/>
                             <constraint firstItem="eBP-6g-bAT" firstAttribute="leading" secondItem="NBD-MV-OuG" secondAttribute="trailing" constant="2" id="g5q-vC-OGb"/>
                             <constraint firstAttribute="height" constant="64" id="g84-xP-093"/>
                             <constraint firstItem="QTI-wi-oyB" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="17" id="jS2-YP-VdM"/>
@@ -263,7 +264,6 @@
                             <constraint firstItem="10x-bg-xlj" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="qQu-WW-eR6"/>
                             <constraint firstItem="QTI-wi-oyB" firstAttribute="leading" secondItem="EIi-qd-glM" secondAttribute="trailing" constant="8" id="r1a-G2-I1e"/>
                             <constraint firstAttribute="trailing" secondItem="GgV-Cc-sk0" secondAttribute="trailing" constant="2" id="sgJ-oR-QEJ"/>
-                            <constraint firstAttribute="width" constant="440" id="uS6-LZ-gyf"/>
                             <constraint firstItem="SAG-kc-FAt" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="16" id="wIg-92-XDQ"/>
                             <constraint firstItem="YvW-zG-QiW" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="15" id="wnr-6p-18l"/>
                             <constraint firstItem="2py-h1-0km" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="wuk-mx-e29"/>

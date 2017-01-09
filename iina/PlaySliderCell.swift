@@ -15,14 +15,14 @@ class PlaySliderCell: NSSliderCell {
   }
 
   let knobWidth: CGFloat = 3
-  let knobHeight: CGFloat = 13
-  let knobRadius: CGFloat = 2
+  let knobHeight: CGFloat = 15
+  let knobRadius: CGFloat = 1
 
-  static let darkColor = NSColor(red: 1, green: 1, blue: 1, alpha: 0.9)
+  static let darkColor = NSColor(red: 1, green: 1, blue: 1, alpha: 0.5)
   static let lightColor = NSColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
 
-  static let darkBarColorLeft = NSColor(white: 1, alpha: 0.5)
-  static let darkBarColorRight = NSColor(white: 1, alpha: 0.2)
+  static let darkBarColorLeft = NSColor(white: 1, alpha: 0.3)
+  static let darkBarColorRight = NSColor(white: 1, alpha: 0.1)
   static let lightBarColorLeft = NSColor(red: 0.239, green: 0.569, blue: 0.969, alpha: 1)
   static let lightBarColorRight = NSColor(white: 0.5, alpha: 0.5)
 
@@ -46,11 +46,12 @@ class PlaySliderCell: NSSliderCell {
   }
 
   override func drawKnob(_ knobRect: NSRect) {
-    let rect = NSMakeRect(knobRect.origin.x,
+    // Round the X position for cleaner drawing
+    let rect = NSMakeRect(round(knobRect.origin.x),
                           knobRect.origin.y + 0.5 * (knobRect.height - knobHeight),
                           knobRect.width,
                           knobHeight)
-    let path = NSBezierPath(roundedRect: rect, xRadius: 2, yRadius: 2)
+    let path = NSBezierPath(roundedRect: rect, xRadius: knobRadius, yRadius: knobRadius)
     knobColor.setFill()
     path.fill()
   }
@@ -67,23 +68,31 @@ class PlaySliderCell: NSSliderCell {
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
     let info = PlayerCore.shared.info
-
+    
     let slider = self.controlView as! NSSlider
-
-    let percentage: CGFloat
+    
+    // Rounded for cleaner drawing
+    var knobPos : CGFloat = 0;
+    
+    /// Should the slider bar parts be offset around the knob?
+    var offsetBar : Bool = true;
+    
     if info.isNetworkResource, info.cacheTime != 0, let duration = info.videoDuration {
       let pos = Double(info.cacheTime) / Double(duration.second) * 100
-      percentage = CGFloat(pos / (slider.maxValue - slider.minValue))
+      knobPos = round(rect.width * CGFloat(pos / (slider.maxValue - slider.minValue)));
+      
+      // The bar should not be offset for buffer displaying
+      offsetBar = false;
     } else {
-      percentage = CGFloat(slider.doubleValue / (slider.maxValue - slider.minValue))
+      knobPos = round(knobRect(flipped: flipped).origin.x);
     }
-    let knobPos = rect.width * percentage
+    
     let rect = NSMakeRect(rect.origin.x, rect.origin.y + 1, rect.width, rect.height - 2)
     let path = NSBezierPath(roundedRect: rect, xRadius: 3, yRadius: 3)
 
     // draw left
     NSGraphicsContext.saveGraphicsState()
-    let pathLeft = NSMakeRect(rect.origin.x, rect.origin.y, knobPos, rect.height)
+    let pathLeft = NSMakeRect(rect.origin.x, rect.origin.y, knobPos - ((offsetBar) ? 1 : 0), rect.height)
     NSBezierPath(rect: pathLeft).setClip()
     barColorLeft.setFill()
     path.fill()
@@ -91,7 +100,7 @@ class PlaySliderCell: NSSliderCell {
 
     // draw right
     NSGraphicsContext.saveGraphicsState()
-    let pathRight = NSMakeRect(rect.origin.x + knobPos, rect.origin.y, rect.width - knobPos, rect.height)
+    let pathRight = NSMakeRect(rect.origin.x + knobPos + ((offsetBar) ? 4 : 0), rect.origin.y, rect.width - knobPos, rect.height)
     NSBezierPath(rect: pathRight).setClip()
     barColorRight.setFill()
     path.fill()

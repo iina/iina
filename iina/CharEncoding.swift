@@ -9,7 +9,7 @@
 import Foundation
 
 class CharEncoding {
-  
+
   static let list: [String: String] = [
     "Auto": "auto",
     "Universal (UTF-8)": "UTF-8",
@@ -55,7 +55,7 @@ class CharEncoding {
     "Western European (LATIN1)": "LATIN1",
     "Western European": "LATIN-9"
   ];
-  
-  
-  
+
+
+
 }

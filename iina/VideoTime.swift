@@ -9,27 +9,27 @@
 import Foundation
 
 class VideoTime {
-  
-  var second: Int
-  
+
+  var second: Double
+
   var h: Int {
     get {
-      return (second / 3600)
+      return (Int(second) / 3600)
     }
   }
-  
+
   var m: Int {
     get {
-      return (second % 3600) / 60
+      return (Int(second) % 3600) / 60
     }
   }
-  
+
   var s: Int {
     get {
-      return (second % 3600) % 60
+      return (Int(second) % 3600) % 60
     }
   }
-  
+
   var stringRepresentation: String {
     get {
       if self == Constants.Time.infinite {
@@ -41,7 +41,7 @@ class VideoTime {
       return "\(hs)\(ms):\(ss)"
     }
   }
-  
+
   convenience init?(_ format: String) {
     let split = format.characters.split(separator: ":").map { (seq) -> Int? in
       return Int(String(seq))
@@ -59,16 +59,16 @@ class VideoTime {
       return nil
     }
   }
-  
-  init(_ second: Int) {
+
+  init(_ second: Double) {
     self.second = second
-    
+
   }
-  
+
   init(_ hour: Int, _ minute: Int, _ second: Int) {
-    self.second = hour * 3600 + minute * 60 + second
+    self.second = Double(hour * 3600 + minute * 60 + second)
   }
-  
+
   /** whether self in [min, max) */
   func between(_ min: VideoTime, _ max: VideoTime) -> Bool {
     return self >= min && self < max
@@ -79,13 +79,15 @@ class VideoTime {
 extension VideoTime: Comparable { }
 
 func <(lhs: VideoTime, rhs: VideoTime) -> Bool {
-  return lhs.second < rhs.second
+  // ignore additional digits and compare the time in milliseconds
+  return Int(lhs.second * 1000) < Int(rhs.second * 1000)
 }
 
 func ==(lhs: VideoTime, rhs: VideoTime) -> Bool {
-  return lhs.second == rhs.second
+  // ignore additional digits and compare the time in milliseconds
+  return Int(lhs.second * 1000) == Int(rhs.second * 1000)
 }
 
 func *(lhs: VideoTime, rhs: Double) -> VideoTime {
-  return VideoTime(Int(round(Double(lhs.second) * rhs)))
+  return VideoTime(lhs.second * rhs)
 }

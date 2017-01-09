@@ -9,12 +9,12 @@
 import Foundation
 
 class FileSize {
-  
+
   enum Unit: Int {
     case b = 1
     case kb = 1000
     case mb = 1000000
-    
+
     var string: String {
       get {
         switch self {
@@ -25,14 +25,14 @@ class FileSize {
       }
     }
   }
-  
+
   static private let unitValues = [Unit.mb, Unit.kb, Unit.b]
-  
+
   static func format(_ number: Int, unit: Unit, digits: Int = 2) -> String {
     let bytes = number * unit.rawValue
     let formatter = NumberFormatter()
     formatter.maximumFractionDigits = digits
-    
+
     for (_, v) in unitValues.enumerated() {
       if bytes > v.rawValue {
         let num = NSNumber(value: Double(bytes) / Double(v.rawValue))
@@ -40,8 +40,8 @@ class FileSize {
         return str == nil ? "Error" : "\(str!)\(v.string)"
       }
     }
-    
+
     return "0"
   }
-  
+
 }

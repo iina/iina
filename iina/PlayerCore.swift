@@ -17,6 +17,10 @@ class PlayerCore: NSObject {
   lazy var mainWindow: MainWindowController = MainWindowController()
   lazy var mpvController: MPVController = MPVController()
 
+  let supportedSubtitleFormat: [String] = ["utf", "utf8", "utf-8", "idx", "sub", "srt",
+                                           "smi", "rt", "txt", "ssa", "aqt", "jss",
+                                           "js", "ass", "mks", "vtt", "sup"]
+
   lazy var info: PlaybackInfo = PlaybackInfo()
 
   var syncPlayTimeTimer: Timer?
@@ -289,13 +293,23 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalAudioFile(_ url: URL) {
-    mpvController.command(.audioAdd, args: [url.path])
+    mpvController.command(.audioAdd, args: [url.path], checkError: false, returnValueCallback: { (returnCode: Int32) in
+      if returnCode >= 0 {
+        return
+      }
+      Utility.showAlert(message: "Unsupported external audio file.")
+    })
     getTrackInfo()
     getSelectedTracks()
   }
 
   func loadExternalSubFile(_ url: URL) {
-    mpvController.command(.subAdd, args: [url.path])
+    mpvController.command(.subAdd, args: [url.path], checkError: false, returnValueCallback: { (returnCode: Int32) in
+      if returnCode >= 0 {
+        return
+      }
+      Utility.showAlert(message: "Unsupported external subtitle.")
+    })
     getTrackInfo()
     getSelectedTracks()
   }

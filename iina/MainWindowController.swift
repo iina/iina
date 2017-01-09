@@ -63,10 +63,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var maxPressure: Int32 = 0
   
   /** The value of speedValueIndex before Force Touch **/
-  var oldIndex: Int = 5
+  var oldIndex: Int = AppData.availableSpeedValues.count / 2
   
   /** The index of current speed in speed value array */
-  var speedValueIndex: Int = 5
+  var speedValueIndex: Int = AppData.availableSpeedValues.count / 2 {
+    didSet {
+      if speedValueIndex < 0 || speedValueIndex >= AppData.availableSpeedValues.count {
+        speedValueIndex = AppData.availableSpeedValues.count / 2
+      }
+    }
+  }
 
   enum ScrollDirection {
     case horizontal
@@ -1058,7 +1064,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func updatePlayButtonState(_ state: Int) {
     playButton.state = state
     if state == NSOffState {
-      speedValueIndex = 5
+      speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
       rightArrowLabel.isHidden = true
     }
@@ -1090,7 +1096,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if sender.state == NSOffState {
       playerCore.togglePause(true)
       // speed is already reset by playerCore
-      speedValueIndex = 5
+      speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
       rightArrowLabel.isHidden = true
     }
@@ -1118,11 +1124,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if sender.intValue == 0 { // Released
         if maxPressure == 1 { // Single click ended
           speedValueIndex = oldIndex - 1
-          
-          // Wrap around to 1x
-          if speedValueIndex < 0 {
-            speedValueIndex = speeds / 2
-          }
         } else { // Force Touch ended
           speedValueIndex = speeds / 2
         }
@@ -1130,6 +1131,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       } else {
         if sender.intValue == 1 && maxPressure == 0 { // First press
           oldIndex = speedValueIndex
+          speedValueIndex -= 1
         } else { // Force Touch
           speedValueIndex = max(oldIndex - Int(sender.intValue), 0)
         }
@@ -1150,11 +1152,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if sender.intValue == 0 { // Released
         if maxPressure == 1 { // Single click ended
           speedValueIndex = oldIndex + 1
-          
-          // Wraparound to 1x
-          if speedValueIndex >= speeds {
-            speedValueIndex = speeds / 2
-          }
         } else { // Force Touch ended
           speedValueIndex = speeds / 2
         }
@@ -1162,6 +1159,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       } else {
         if sender.intValue == 1 && maxPressure == 0 { // First press
           oldIndex = speedValueIndex
+          speedValueIndex += 1
         } else { // Force Touch
           speedValueIndex = min(oldIndex + Int(sender.intValue), speeds - 1)
         }
@@ -1442,7 +1440,7 @@ extension MainWindowController: NSTouchBarDelegate {
     item.view = button
     item.customizationLabel = customLabel
     return item
-	}
+  }
 
   // MARK: - Set TouchBar Time Label
 

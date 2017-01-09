@@ -121,6 +121,21 @@ class Utility {
     }
   }
 
+  static func getFilePath(Configs userConfigs: [String: Any]!, forConfig conf: String, showAlert: Bool = true) -> String? {
+    
+    // if is default config
+    if let dv = PrefKeyBindingViewController.defaultConfigs[conf] {
+      return dv
+    } else if let uv = userConfigs[conf] as? String {
+      return uv
+    } else {
+      if showAlert {
+        Utility.showAlert(message: "Cannot find config file location!")
+      }
+      return nil
+    }
+  }
+  
   static let appSupportDirUrl: URL = {
     // get path
     let asPath = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
@@ -157,7 +172,7 @@ class Utility {
     b = temp
   }
 
-	static func toRealSubScale(fromDisplaySubScale scale: Double) -> Double {
+  static func toRealSubScale(fromDisplaySubScale scale: Double) -> Double {
     return scale > 0 ? scale : -1 / scale
   }
 

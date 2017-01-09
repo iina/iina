@@ -231,9 +231,14 @@ class MPVController: NSObject {
     let scriptPath = Bundle.main.path(forResource: "autoload", ofType: "lua", inDirectory: "scripts")!
     chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, scriptPath))
 
-    let inputConfPath = Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!
+    //load keybinding
+    let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)
+    var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["MPV Default"]
+    if let confFromUd = UserDefaults.standard.string(forKey: PK.currentInputConfigName) {
+      let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false)
+      inputConfPath = currentConfigFilePath
+    }
     chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputConf, inputConfPath))
-
     // Receive log messages at warn level.
     chkErr(mpv_request_log_messages(mpv, "warn"))
 

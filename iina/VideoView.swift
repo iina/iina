@@ -438,17 +438,20 @@ class VideoView: NSOpenGLView {
       var subtitleFiles: [String] = []
       fileNames.forEach({ (path) in
         let ext = (path as NSString).pathExtension
-        if playerCore.supportedVideoFormat.contains(ext) {
-          videoFiles.append(path)
-        }
         if playerCore.supportedSubtitleFormat.contains(ext) {
           subtitleFiles.append(path)
+        }
+        else {
+          videoFiles.append(path)
         }
       })
       
       if videoFiles.count == 0 {
         if subtitleFiles.count > 0 {
           playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitleFiles[0]))
+        }
+        else {
+          return false
         }
       }
       else if videoFiles.count == 1 {

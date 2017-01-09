@@ -30,7 +30,7 @@ class PlaylistDragDestView: NSView {
       var added = 0
       fileNames.forEach({ (path) in
         let ext = (path as NSString).pathExtension
-        if PlayerCore.shared.supportedVideoFormat.contains(ext) {
+        if !PlayerCore.shared.supportedSubtitleFormat.contains(ext) {
           PlayerCore.shared.addToPlaylist(path)
           added += 1
         }
@@ -40,7 +40,7 @@ class PlaylistDragDestView: NSView {
       }
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
       if let wc = window?.windowController as? MainWindowController {
-        wc.displayOSD(.addToPlaylist(fileNames.count))
+        wc.displayOSD(.addToPlaylist(added))
       }
       return true
     } else {

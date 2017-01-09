@@ -440,33 +440,29 @@ class VideoView: NSOpenGLView {
         let ext = (path as NSString).pathExtension
         if playerCore.supportedSubtitleFormat.contains(ext) {
           subtitleFiles.append(path)
-        }
-        else {
+        } else {
           videoFiles.append(path)
         }
       })
       
       if videoFiles.count == 0 {
         if subtitleFiles.count > 0 {
-          playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitleFiles[0]))
-        }
-        else {
+          subtitleFiles.forEach { (subtitle) in
+            playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitle))
+          }
+        } else {
           return false
         }
-      }
-      else if videoFiles.count == 1 {
+      } else if videoFiles.count == 1 {
         playerCore.openFile(URL(fileURLWithPath: videoFiles[0]))
-        if subtitleFiles.count > 0 {
-          playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitleFiles[0]))
+        subtitleFiles.forEach { (subtitle) in
+          playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitle))
         }
-      }
-      else {
+      } else {
         for path in videoFiles {
           playerCore.addToPlaylist(path)
         }
-        if let wc = window?.windowController as? MainWindowController {
-          wc.displayOSD(.addToPlaylist(videoFiles.count))
-        }
+        playerCore.sendOSD(.addToPlaylist(videoFiles.count))
       }
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
     }

@@ -118,7 +118,7 @@ extension MainWindowController {
       playerCore.setVideoAspect(aspectStr)
       displayOSD(.aspect(aspectStr))
     } else {
-      Utility.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject)")
+      Logger.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject)")
     }
   }
 
@@ -126,7 +126,7 @@ extension MainWindowController {
     if let cropStr = sender.representedObject as? String {
       playerCore.setCrop(fromString: cropStr)
     } else {
-      Utility.log("sender.representedObject is not a string in menuChangeCrop()")
+      Logger.log("sender.representedObject is not a string in menuChangeCrop()")
     }
   }
 
@@ -215,7 +215,7 @@ extension MainWindowController {
       playerCore.setVolume(newVolume)
       volumeSlider.integerValue = newVolume
     } else {
-      Utility.log("sender.representedObject is not int in menuChangeVolume()")
+      Logger.log("sender.representedObject is not int in menuChangeVolume()")
     }
   }
 
@@ -229,7 +229,7 @@ extension MainWindowController {
       let newDelay = playerCore.info.audioDelay + delayDelta
       playerCore.setAudioDelay(newDelay)
     } else {
-      Utility.log("sender.representedObject is not Double in menuChangeAudioDelay()")
+      Logger.log("sender.representedObject is not Double in menuChangeAudioDelay()")
     }
   }
 
@@ -248,7 +248,7 @@ extension MainWindowController {
       let newDelay = playerCore.info.subDelay + delayDelta
       playerCore.setSubDelay(newDelay)
     } else {
-      Utility.log("sender.representedObject is not Double in menuChangeSubDelay()")
+      Logger.log("sender.representedObject is not Double in menuChangeSubDelay()")
     }
   }
 

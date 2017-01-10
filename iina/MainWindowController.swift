@@ -115,7 +115,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       case .playlist:
         return 240
       default:
-        Utility.fatal("SideBarViewType.width shouldn't be called here")
+        Logger.fatal("SideBarViewType.width shouldn't be called here")
         return 0
       }
     }
@@ -421,7 +421,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   override func mouseEntered(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
-      Utility.log("No data for tracking area")
+      Logger.log("No data for tracking area")
       return
     }
     if obj == 0 {
@@ -440,7 +440,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   override func mouseExited(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
-      Utility.log("No data for tracking area")
+      Logger.log("No data for tracking area")
       return
     }
     if obj == 0 {
@@ -885,7 +885,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Set material for OSC and title bar */
   private func setMaterial(_ theme: Preference.Theme?) {
     guard let theme = theme else {
-      Utility.log("Nil material in setMaterial()")
+      Logger.log("Nil material in setMaterial()")
       return
     }
     guard #available(OSX 10.11, *) else { return }
@@ -1041,7 +1041,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
     guard let duration = playerCore.info.videoDuration, let pos = playerCore.info.videoPosition else {
-      Utility.fatal("video info not available")
+      Logger.fatal("video info not available")
       return
     }
     let percantage = (pos.second / duration.second) * 100
@@ -1446,7 +1446,7 @@ extension MainWindowController: NSTouchBarDelegate {
 
   func setupTouchBarUI() {
     guard let duration = playerCore.info.videoDuration else {
-      Utility.fatal("video info not available")
+      Logger.fatal("video info not available")
       return
     }
 

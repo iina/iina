@@ -281,7 +281,7 @@ class MPVController: NSObject {
   // Send arbitrary mpv command.
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {
     if args.count > 0 && args.last == nil {
-      Utility.fatal("Command do not need a nil suffix")
+      Logger.fatal("Command do not need a nil suffix")
       return
     }
 
@@ -416,7 +416,7 @@ class MPVController: NSObject {
       let prefix = String(cString: (msg?.pointee.prefix)!)
       let level = String(cString: (msg?.pointee.level)!)
       let text = String(cString: (msg?.pointee.text)!)
-      Utility.log("MPV log: [\(prefix)] \(level): \(text)")
+      Logger.log("MPV log: [\(prefix)] \(level): \(text)")
 
     case MPV_EVENT_PROPERTY_CHANGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
@@ -490,7 +490,7 @@ class MPVController: NSObject {
 
     default:
       let eventName = String(cString: mpv_event_name(eventId))
-      Utility.log("MPV event (unhandled): \(eventName)")
+      Logger.log("MPV event (unhandled): \(eventName)")
     }
   }
 
@@ -680,7 +680,7 @@ class MPVController: NSObject {
 
 
     default:
-      Utility.log("MPV property changed (unhandled): \(name)")
+      Logger.log("MPV property changed (unhandled): \(name)")
     }
   }
 
@@ -738,7 +738,7 @@ class MPVController: NSObject {
 
     case .other:
       guard let tr = transformer else {
-        Utility.log("setUserOption: no transformer!")
+        Logger.log("setUserOption: no transformer!")
         return
       }
       if let value = tr(key) {
@@ -789,7 +789,7 @@ class MPVController: NSObject {
 
     case .other:
       guard let tr = info.transformer else {
-        Utility.log("setUserOption: no transformer!")
+        Logger.log("setUserOption: no transformer!")
         return
       }
       if let value = tr(info.prefKey) {
@@ -805,7 +805,7 @@ class MPVController: NSObject {
    */
   private func chkErr(_ status: Int32!) {
     if status < 0 {
-      Utility.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
+      Logger.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
     }
   }
 

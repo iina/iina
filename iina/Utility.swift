@@ -13,7 +13,7 @@ class Utility {
   static let tabTitleFontAttributes = FontAttributes(font: .system, size: .system, align: .center).value
   static let tabTitleActiveFontAttributes = FontAttributes(font: .systemBold, size: .system, align: .center).value
 
-  // MARK: - Logs, alerts
+  // MARK: - Alerts
 
   static func showAlert(message: String, alertStyle: NSAlertStyle = .critical) {
     let alert = NSAlert()
@@ -30,10 +30,6 @@ class Utility {
     alert.runModal()
   }
 
-  static func log(_ message: String) {
-    NSLog("%@", message)
-  }
-
   static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
     if !expr {
       NSLog("%@", errorMessage)
@@ -41,14 +37,6 @@ class Utility {
       block()
       exit(1)
     }
-  }
-
-  static func fatal(_ message: String, _ block: () -> Void = {}) {
-    NSLog("%@", message)
-    NSLog(Thread.callStackSymbols.joined(separator: "\n"))
-    showAlert(message: "Fatal error: \(message) \nThe application will exit now.")
-    block()
-    exit(1)
   }
 
   // MARK: - Panels, Alerts
@@ -116,7 +104,7 @@ class Utility {
       do {
       try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false, attributes: nil)
       } catch {
-        Utility.fatal("Cannot create folder in Application Support directory")
+        Logger.fatal("Cannot create folder in Application Support directory")
       }
     }
   }
@@ -187,7 +175,7 @@ class Utility {
     let modifiers = event.modifierFlags
     // shift
     guard let keyName = KeyCodeHelper.keyMap[keyCode] else {
-      Utility.log("Undefined key code?")
+      Logger.log("Undefined key code?")
       return ""
     }
     if modifiers.contains(.shift) {
@@ -226,7 +214,7 @@ class Utility {
       if let exp = try? NSRegularExpression(pattern: pattern, options: []) {
         self.regex = exp
       } else {
-        Utility.fatal("Cannot create regex \(pattern)")
+        Logger.fatal("Cannot create regex \(pattern)")
       }
     }
 

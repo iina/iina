@@ -66,7 +66,7 @@
                     </textFieldCell>
                 </textField>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Nn-zY-Z5N">
-                    <rect key="frame" x="110" y="167" width="103" height="18"/>
+                    <rect key="frame" x="110" y="167" width="352" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Enable cache" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="fpV-al-bn7">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>

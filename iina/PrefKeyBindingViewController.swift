@@ -74,7 +74,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     // - user
     guard let uc = UserDefaults.standard.dictionary(forKey: Preference.Key.inputConfigs)
     else  {
-      Utility.fatal("Cannot get config file list!")
+      Logger.fatal("Cannot get config file list!")
       return
     }
     userConfigs = uc

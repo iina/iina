@@ -26,7 +26,7 @@ class VideoView: NSOpenGLView {
       mpv_opengl_cb_init_gl(mpvGLContext, nil, { (ctx, name) -> UnsafeMutableRawPointer? in
         let symbolName: CFString = CFStringCreateWithCString(kCFAllocatorDefault, name, kCFStringEncodingASCII);
         guard let addr = CFBundleGetFunctionPointerForName(CFBundleGetBundleWithIdentifier(CFStringCreateCopy(kCFAllocatorDefault, "com.apple.opengl" as CFString!)), symbolName) else {
-          Utility.fatal("Cannot get OpenGL function pointer!")
+          Logger.fatal("Cannot get OpenGL function pointer!")
           return nil
         }
         return addr;
@@ -117,7 +117,7 @@ class VideoView: NSOpenGLView {
     super.init(frame: frame, pixelFormat: pixelFormat!)!
 
     guard openGLContext != nil else {
-      Utility.fatal("Cannot initialize OpenGL Context")
+      Logger.fatal("Cannot initialize OpenGL Context")
       return
     }
 
@@ -252,12 +252,12 @@ class VideoView: NSOpenGLView {
     if let link = displayLink {
       checkCVReturn(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self)))
     } else {
-      Utility.fatal("Failed to create display link")
+      Logger.fatal("Failed to create display link")
     }
     if let context = self.openGLContext?.cglContextObj, let format = self.pixelFormat?.cglPixelFormatObj {
       checkCVReturn(CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(displayLink!, context, format))
     } else {
-      Utility.fatal("Failed to set display with nil opengl context")
+      Logger.fatal("Failed to set display with nil opengl context")
     }
   }
 
@@ -353,7 +353,7 @@ class VideoView: NSOpenGLView {
     do {
       shaderContent = try NSString(contentsOfFile: shaderPath, encoding: String.Encoding.utf8.rawValue)
     } catch let error as NSError{
-      Utility.fatal("Cannot load \(name): \(error)")
+      Logger.fatal("Cannot load \(name): \(error)")
     }
     var shaderString = shaderContent!.utf8String
     var shaderStringLength = GLint(shaderContent!.length)
@@ -370,7 +370,7 @@ class VideoView: NSOpenGLView {
       var len = GLsizei()
       let str = UnsafeMutablePointer<Int8>.allocate(capacity: 2000)
       glGetShaderInfoLog(shader, GLsizei(2000), &len, str)
-      Utility.log(String(cString: str))
+      Logger.log(String(cString: str))
     }
 
     return shader

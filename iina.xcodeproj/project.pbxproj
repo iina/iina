@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2DB945A01E2510460005767E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB9459F1E2510460005767E /* Logger.swift */; };
 		5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867483705008F086E07B0A6B /* Pods_iina.framework */; };
 		8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */; };
 		8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */; };
@@ -192,6 +193,7 @@
 
 /* Begin PBXFileReference section */
 		11AF541A0F933D2F3C12AAD8 /* Pods_iinaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iinaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DB9459F1E2510460005767E /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.release.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.release.xcconfig"; sourceTree = "<group>"; };
 		72CAEE6D1E229EAE00B8C894 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefGeneralViewController.strings"; sourceTree = "<group>"; };
 		81CD1350F5D0CF91249F4E6F /* Pods-iinaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iinaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iinaTests/Pods-iinaTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				8497A4831D2FF573005F504F /* iina-Bridging-Header.h */,
+				2DB9459F1E2510460005767E /* Logger.swift */,
 				84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */,
 				84EB1F061D2F5E76004FA5A1 /* Utility.swift */,
 				8434BAA81D5E3C2B003BECF2 /* Formatters.swift */,
@@ -820,6 +823,7 @@
 				84817C961DBDCA5F00CC2279 /* SettingsListCellView.swift in Sources */,
 				8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */,
 				8450403D1E0A9EE20079C194 /* InspectorWindowController.swift in Sources */,
+				2DB945A01E2510460005767E /* Logger.swift in Sources */,
 				841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */,
 				8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */,
 				84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */,

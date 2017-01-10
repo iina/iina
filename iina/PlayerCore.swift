@@ -44,7 +44,7 @@ class PlayerCore: NSObject {
   func openFile(_ url: URL?) {
     let path = url?.path
     guard path != nil else {
-      Utility.log("Error: empty file path or url")
+      Logger.log("Error: empty file path or url")
       return
     }
     // Utility.log("Open File \(path!)")
@@ -467,7 +467,7 @@ class PlayerCore: NSObject {
   /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
     guard let vwidth = info.videoWidth, let vheight = info.videoHeight else {
-      Utility.fatal("Cannot get video width and height")
+      Logger.fatal("Cannot get video width and height")
       return
     }
     syncPlayTimeTimer?.invalidate()
@@ -498,7 +498,7 @@ class PlayerCore: NSObject {
 
   func notifyMainWindowVideoSizeChanged() {
     guard let dwidth = info.displayWidth, let dheight = info.displayHeight else {
-      Utility.fatal("Cannot get video width and height")
+      Logger.fatal("Cannot get video width and height")
       return
     }
     if dwidth != 0 && dheight != 0 {

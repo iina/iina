@@ -36,6 +36,9 @@ enum OSDMessage {
   case brightness(Int)
   case gamma(Int)
 
+  case startFindingSub
+  case foundSub(Int)
+
 
   func message() -> String {
     switch self {
@@ -127,6 +130,12 @@ enum OSDMessage {
 
     case .brightness(let value):
       return "Brightness: \(value)"
+
+    case .startFindingSub:
+      return "Find online subtitles..."
+
+    case .foundSub(let count):
+      return "\(count) subtitle(s) found."
 
     }
   }

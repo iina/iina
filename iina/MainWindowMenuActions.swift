@@ -285,6 +285,14 @@ extension MainWindowController {
 
   }
 
+  @IBAction func menuFindOnlineSub(_ sender: NSMenuItem) {
+    guard let url = playerCore.info.currentURL else { return }
+    displayOSD(.startFindingSub)
+    OnlineSubtitle.getSub(forFile: url) { subtitles in
+      self.displayOSD(.foundSub(subtitles.count))
+    }
+  }
+
   @IBAction func menuShowInspector(_ sender: AnyObject) {
     let inspector = (NSApp.delegate as! AppDelegate).inspector
     inspector.showWindow(self)

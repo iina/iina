@@ -1137,8 +1137,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         maxPressure = max(maxPressure, sender.intValue)
       }
+      arrowButtonAction(left: true)
+    } else {
+      // trigger action only when released button
+      if sender.intValue == 0 {
+        arrowButtonAction(left: true)
+      }
     }
-    arrowButtonAction(left: true)
   }
 
   @IBAction func rightButtonAction(_ sender: NSButton) {
@@ -1165,8 +1170,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         maxPressure = max(maxPressure, sender.intValue)
       }
+      arrowButtonAction(left: false)
+    } else {
+      // trigger action only when released button
+      if sender.intValue == 0 {
+        arrowButtonAction(left: false)
+      }
     }
-    arrowButtonAction(left: false)
   }
   
   /** handle action of both left and right arrow button */

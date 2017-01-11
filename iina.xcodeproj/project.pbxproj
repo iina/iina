@@ -103,6 +103,13 @@
 		84A0BA9B1D2FAB4100BC8DA1 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */; };
 		84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */; };
 		84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */; };
+		84A886E41E24F37D008755BB /* ShooterSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886E31E24F37D008755BB /* ShooterSubtitle.swift */; };
+		84A886E61E24F3BD008755BB /* OnlineSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886E51E24F3BD008755BB /* OnlineSubtitle.swift */; };
+		84A886EC1E2573A5008755BB /* JustExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886EB1E2573A5008755BB /* JustExtension.swift */; };
+		84A886EE1E269A2A008755BB /* iina-default-input.conf in Resources */ = {isa = PBXBuildFile; fileRef = 84A886ED1E269A2A008755BB /* iina-default-input.conf */; };
+		84A886EF1E269E67008755BB /* iina-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = 84A886ED1E269A2A008755BB /* iina-default-input.conf */; };
+		84A886F11E26A2CB008755BB /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F01E26A2CB008755BB /* UpdateChecker.swift */; };
+		84A886F31E26CA24008755BB /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F21E26CA24008755BB /* Regex.swift */; };
 		84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AABE8A1DBF634600D138FD /* CharEncoding.swift */; };
 		84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AABE921DBFAF1A00D138FD /* FontPickerWindowController.swift */; };
 		84AABE981DBFB62F00D138FD /* FixedFontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AABE971DBFB62F00D138FD /* FixedFontManager.m */; };
@@ -183,6 +190,7 @@
 			dstPath = config;
 			dstSubfolderSpec = 7;
 			files = (
+				84A886EF1E269E67008755BB /* iina-default-input.conf in Copy Configs */,
 				844D72EF1E056E1400522E5E /* input.conf in Copy Configs */,
 			);
 			name = "Copy Configs";
@@ -306,6 +314,12 @@
 		84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
 		84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		84A886E31E24F37D008755BB /* ShooterSubtitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShooterSubtitle.swift; sourceTree = "<group>"; };
+		84A886E51E24F3BD008755BB /* OnlineSubtitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineSubtitle.swift; sourceTree = "<group>"; };
+		84A886EB1E2573A5008755BB /* JustExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustExtension.swift; sourceTree = "<group>"; };
+		84A886ED1E269A2A008755BB /* iina-default-input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "iina-default-input.conf"; sourceTree = "<group>"; };
+		84A886F01E26A2CB008755BB /* UpdateChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
+		84A886F21E26CA24008755BB /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		84AABE8A1DBF634600D138FD /* CharEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharEncoding.swift; sourceTree = "<group>"; };
 		84AABE921DBFAF1A00D138FD /* FontPickerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPickerWindowController.swift; sourceTree = "<group>"; };
 		84AABE961DBFB62F00D138FD /* FixedFontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedFontManager.h; sourceTree = "<group>"; };
@@ -484,6 +498,7 @@
 		84A0BAA61D2FAF8400BC8DA1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				84A886E21E24F2D3008755BB /* Sub */,
 				8497A4831D2FF573005F504F /* iina-Bridging-Header.h */,
 				84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */,
 				84EB1F061D2F5E76004FA5A1 /* Utility.swift */,
@@ -499,6 +514,8 @@
 				84795C361E0825AD0059A648 /* GifGenerator.swift */,
 				8488D6DB1E1167EF00D5B952 /* FileSize.swift */,
 				841A599C1E1FF5800079E177 /* SleepPreventer.swift */,
+				84A886F01E26A2CB008755BB /* UpdateChecker.swift */,
+				84A886F21E26CA24008755BB /* Regex.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -528,6 +545,16 @@
 				8450403F1E0ACADD0079C194 /* MPVNode.swift */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		84A886E21E24F2D3008755BB /* Sub */ = {
+			isa = PBXGroup;
+			children = (
+				84A886E31E24F37D008755BB /* ShooterSubtitle.swift */,
+				84A886E51E24F3BD008755BB /* OnlineSubtitle.swift */,
+				84A886EB1E2573A5008755BB /* JustExtension.swift */,
+			);
+			name = Sub;
 			sourceTree = "<group>";
 		};
 		84D377681D7413D8007F7396 /* Accessories */ = {
@@ -560,6 +587,7 @@
 		84E745D71DFDE8C100588DED /* config */ = {
 			isa = PBXGroup;
 			children = (
+				84A886ED1E269A2A008755BB /* iina-default-input.conf */,
 				84E745D81DFDE8C100588DED /* input.conf */,
 			);
 			name = config;
@@ -599,6 +627,7 @@
 			path = iina;
 			sourceTree = "<group>";
 			tabWidth = 2;
+			usesTabs = 0;
 		};
 		84FF846D1D2FF698001B318A /* libmpv */ = {
 			isa = PBXGroup;
@@ -712,6 +741,7 @@
 				8400D5C91E1AB2F9006785F5 /* QuickSettingViewController.xib in Resources */,
 				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
 				8400D5E41E1AB333006785F5 /* PrefControlViewController.xib in Resources */,
+				84A886EE1E269A2A008755BB /* iina-default-input.conf in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8400D5D81E1AB31B006785F5 /* AboutWindowController.xib in Resources */,
 				8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */,
@@ -789,8 +819,10 @@
 				8488D6E31E1183D300D5B952 /* PrefSubViewController.swift in Sources */,
 				84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */,
 				840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */,
+				84A886EC1E2573A5008755BB /* JustExtension.swift in Sources */,
 				84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */,
 				8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */,
+				84A886E41E24F37D008755BB /* ShooterSubtitle.swift in Sources */,
 				84BEEC421DFEE46200F945CA /* StreamReader.swift in Sources */,
 				84879A9B1E1032480004F894 /* ShortcutAvailableTextField.swift in Sources */,
 				84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */,
@@ -817,9 +849,11 @@
 				84A0BA901D2F8D4100BC8DA1 /* IINAError.swift in Sources */,
 				847644081D48B413004F6DF5 /* MPVOption.swift in Sources */,
 				84817C961DBDCA5F00CC2279 /* SettingsListCellView.swift in Sources */,
+				84A886F31E26CA24008755BB /* Regex.swift in Sources */,
 				8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */,
 				8450403D1E0A9EE20079C194 /* InspectorWindowController.swift in Sources */,
 				841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */,
+				84A886F11E26A2CB008755BB /* UpdateChecker.swift in Sources */,
 				8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */,
 				84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */,
 				84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */,
@@ -842,6 +876,7 @@
 				84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */,
 				84A0BA971D2FA1CE00BC8DA1 /* PlayerCore.swift in Sources */,
 				84D377671D737F58007F7396 /* MPVChapter.swift in Sources */,
+				84A886E61E24F3BD008755BB /* OnlineSubtitle.swift in Sources */,
 				847C62CA1DC13CDA00E1EF16 /* PrefGeneralViewController.swift in Sources */,
 				845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,

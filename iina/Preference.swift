@@ -36,7 +36,7 @@ struct Preference {
     /** Keep player window open on end of file / playlist. (bool) */
     static let keepOpenOnFileEnd = "keepOpenOnFileEnd"
     
-    /** Open a start panel (bool) */
+    /** Open a choose file panel after opening (bool) */
     static let openStartPanel = "openStartPanel"
 
     /** Resume from last position */
@@ -106,6 +106,7 @@ struct Preference {
     static let subMarginX = "subMarginX"
     static let subMarginY = "subMarginY"
     static let subLang = "subLang"
+    static let onlineSubSource = "onlineSubSource"
 
     // Network
 
@@ -321,6 +322,7 @@ struct Preference {
     Key.subMarginX: 25,
     Key.subMarginY: 22,
     Key.subLang: "",
+    Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
 
     Key.enableCache: true,
     Key.defaultCacheSize: 75000,
@@ -330,7 +332,7 @@ struct Preference {
     Key.transportRTSPThrough: RTSPTransportation.tcp.rawValue,
 
     Key.inputConfigs: [:],
-    Key.currentInputConfigName: "Default",
+    Key.currentInputConfigName: "IINA Default",
 
     Key.enableAdvancedSettings: false,
     Key.useMpvOsd: false,

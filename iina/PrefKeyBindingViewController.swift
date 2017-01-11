@@ -35,6 +35,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   lazy var keyRecordViewController: KeyRecordViewController = KeyRecordViewController()
 
   static let defaultConfigs: [String: String] = [
+    "IINA Default": Bundle.main.path(forResource: "iina-default-input", ofType: "conf", inDirectory: "config")!,
     "MPV Default": Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!
   ]
 
@@ -91,7 +92,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
       }
     }
     if !gotCurrentConf {
-      currentConf = configSelectPopUp.titleOfSelectedItem ?? configSelectPopUp.itemTitles.first ?? "Default"
+      currentConf = configSelectPopUp.titleOfSelectedItem ?? configSelectPopUp.itemTitles.first ?? "IINA Default"
     }
     // load
     configSelectPopUp.selectItem(withTitle: currentConf)

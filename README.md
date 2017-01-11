@@ -3,7 +3,7 @@
 # IINA
 
 IINA is a **modern** video player for macOS.  
-Published under the [GPLv3](http://www.gnu.org/licenses/gpl-3.0-standalone.html).
+Published under [GPLv3](https://github.com/lhc70000/iina/blob/master/LICENSE).
 
 Website: [https://lhc70000.github.io/iina/](https://lhc70000.github.io/iina/)
 
@@ -70,6 +70,8 @@ Theoretically no extra work is needed. _If you are unwilling to use the provided
   Make sure you have a phase copying of all these dylibs in Xcode's build settings.
 
 ## Contribute
+
+**Please read [CONTRIBUTING.md](https://github.com/lhc70000/iina/blob/master/CONTRIBUTING.md) before opening an issue or pull request.**
 
 Any feedback is appreciated! You can
 

@@ -136,7 +136,7 @@ enum OSDMessage {
       return "Find online subtitles..."
 
     case .foundSub(let count):
-      return "\(count) subtitle(s) found. Downloading..."
+      return count == 0 ? "No subtitle found." : "\(count) subtitle(s) found. Downloading..."
 
     case .downloadedSub:
       return "Subtitle downloaded."

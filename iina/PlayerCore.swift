@@ -299,8 +299,6 @@ class PlayerCore: NSObject {
       }
       Utility.showAlert(message: "Unsupported external audio file.")
     })
-    getTrackInfo()
-    getSelectedTracks()
   }
 
   func loadExternalSubFile(_ url: URL) {
@@ -310,8 +308,6 @@ class PlayerCore: NSObject {
       }
       Utility.showAlert(message: "Unsupported external subtitle.")
     })
-    getTrackInfo()
-    getSelectedTracks()
   }
 
   func setAudioDelay(_ delay: Double) {
@@ -642,7 +638,7 @@ class PlayerCore: NSObject {
     }
   }
 
-  private func getSelectedTracks() {
+  func getSelectedTracks() {
     info.aid = mpvController.getInt(MPVOption.TrackSelection.aid)
     info.vid = mpvController.getInt(MPVOption.TrackSelection.vid)
     info.sid = mpvController.getInt(MPVOption.TrackSelection.sid)

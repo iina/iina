@@ -90,7 +90,7 @@ final class ShooterSubtitle: OnlineSubtitle, OnlineSubtitleSupport {
   static func request(_ info: RequestData, callback: @escaping SubCallback) {
     Just.post(apiPath, params: info.dictionary, timeout: 10) { response in
       guard let json = response.json as? ResponseData else {
-        Utility.showAlert(message: "Cannot find subtitles.")
+        callback([])
         return
       }
 

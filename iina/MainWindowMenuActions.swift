@@ -292,10 +292,12 @@ extension MainWindowController {
       // send osd in main thread
       self.playerCore.sendOSD(.foundSub(subtitles.count))
       // download them
-      subtitles[0].download { url in
-        Utility.log("Saved subtitle to \(url.path)")
-        self.playerCore.loadExternalSubFile(url)
-        self.playerCore.sendOSD(.downloadedSub)
+      for sub in subtitles {
+        sub.download { url in
+          Utility.log("Saved subtitle to \(url.path)")
+          self.playerCore.loadExternalSubFile(url)
+          self.playerCore.sendOSD(.downloadedSub)
+        }
       }
     }
   }

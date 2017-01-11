@@ -32,7 +32,7 @@ class OnlineSubtitle {
     var source: Source
 
     if userSource == nil {
-      source = Source(rawValue: UserDefaults.standard.integer(forKey: ""))!
+      source = Source(rawValue: UserDefaults.standard.integer(forKey: "")) ?? .shooter
     } else {
       source = userSource!
     }

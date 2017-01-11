@@ -237,7 +237,9 @@
                             <menuItem title="Volume - 1%" tag="1" alternate="YES" keyEquivalent="" id="Zhv-Bz-I5V">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Mute" keyEquivalent="m" id="WOL-Us-ByA"/>
+                            <menuItem title="Mute" id="WOL-Us-ByA">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="NlU-cH-tnU"/>
                             <menuItem title="Audio Delay:" enabled="NO" id="foC-r3-8mp">
                                 <modifierMask key="keyEquivalentModifierMask"/>

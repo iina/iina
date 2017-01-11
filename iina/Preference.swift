@@ -328,7 +328,7 @@ struct Preference {
     Key.transportRTSPThrough: RTSPTransportation.tcp.rawValue,
 
     Key.inputConfigs: [:],
-    Key.currentInputConfigName: "Default",
+    Key.currentInputConfigName: "IINA Default",
 
     Key.enableAdvancedSettings: false,
     Key.useMpvOsd: false,

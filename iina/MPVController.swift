@@ -233,7 +233,7 @@ class MPVController: NSObject {
 
     //load keybinding
     let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)
-    var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["MPV Default"]
+    var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["IINA Default"]
     if let confFromUd = UserDefaults.standard.string(forKey: PK.currentInputConfigName) {
       if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
         inputConfPath = currentConfigFilePath
@@ -593,6 +593,7 @@ class MPVController: NSObject {
     case MPVOption.Audio.volume:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         playerCore.info.volume = Int(data)
+        playerCore.syncUI(.volume)
         playerCore.sendOSD(.volume(Int(data)))
       }
 

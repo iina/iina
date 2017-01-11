@@ -213,7 +213,6 @@ extension MainWindowController {
     if let volumeDelta = sender.representedObject as? Int {
       let newVolume = volumeDelta + playerCore.info.volume
       playerCore.setVolume(newVolume)
-      volumeSlider.integerValue = newVolume
     } else {
       Utility.log("sender.representedObject is not int in menuChangeVolume()")
     }
@@ -221,7 +220,6 @@ extension MainWindowController {
 
   @IBAction func menuToggleMute(_ sender: NSMenuItem) {
     playerCore.toogleMute(nil)
-    updateVolume()
   }
 
   @IBAction func menuChangeAudioDelay(_ sender: NSMenuItem) {

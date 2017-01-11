@@ -511,6 +511,7 @@ class PlayerCore: NSObject {
     case time
     case timeAndCache
     case playButton
+    case volume
     case muteButton
     case chapterList
     case playlist
@@ -555,6 +556,11 @@ class PlayerCore: NSObject {
       info.isPaused = pause
       DispatchQueue.main.async {
         self.mainWindow.updatePlayButtonState(pause ? NSOffState : NSOnState)
+      }
+
+    case .volume:
+      DispatchQueue.main.async {
+        self.mainWindow.updateVolume()
       }
 
     case .muteButton:

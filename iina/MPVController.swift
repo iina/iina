@@ -715,7 +715,7 @@ class MPVController: NSObject {
   private var optionObservers: [String: OptionObserverInfo] = [:]
 
   private func setUserOption(_ key: String, type: UserOptionType, forName name: String, sync: Bool = true, transformer: OptionObserverInfo.Transformer? = nil) {
-    let code: Int32
+    var code: Int32 = 0
 
     switch type {
     case .int:
@@ -739,6 +739,11 @@ class MPVController: NSObject {
     case .color:
       let value = ud.mpvColor(forKey: key)
       code = mpv_set_option_string(mpv, name, value)
+      // Random error here (perhaps a Swift or mpv one), so set it twice
+      // 「没有什么是 set 不了的；如果有，那就 set 两次」
+      if code < 0 {
+        code = mpv_set_option_string(mpv, name, value)
+      }
 
     case .other:
       guard let tr = transformer else {

@@ -285,6 +285,23 @@ extension MainWindowController {
 
   }
 
+  @IBAction func menuFindOnlineSub(_ sender: NSMenuItem) {
+    guard let url = playerCore.info.currentURL else { return }
+    displayOSD(.startFindingSub)
+    OnlineSubtitle.getSub(forFile: url) { subtitles in
+      // send osd in main thread
+      self.playerCore.sendOSD(.foundSub(subtitles.count))
+      // download them
+      for sub in subtitles {
+        sub.download { url in
+          Utility.log("Saved subtitle to \(url.path)")
+          self.playerCore.loadExternalSubFile(url)
+          self.playerCore.sendOSD(.downloadedSub)
+        }
+      }
+    }
+  }
+
   @IBAction func menuShowInspector(_ sender: AnyObject) {
     let inspector = (NSApp.delegate as! AppDelegate).inspector
     inspector.showWindow(self)

@@ -36,6 +36,11 @@ enum OSDMessage {
   case brightness(Int)
   case gamma(Int)
 
+  case startFindingSub
+  case foundSub(Int)
+  case downloadedSub
+  case networkError
+
 
   func message() -> String {
     switch self {
@@ -127,6 +132,18 @@ enum OSDMessage {
 
     case .brightness(let value):
       return "Brightness: \(value)"
+
+    case .startFindingSub:
+      return "Find online subtitles..."
+
+    case .foundSub(let count):
+      return count == 0 ? "No subtitle found." : "\(count) subtitle(s) found. Downloading..."
+
+    case .downloadedSub:
+      return "Subtitle downloaded"
+
+    case .networkError:
+      return "Network error"
 
     }
   }

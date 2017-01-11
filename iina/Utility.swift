@@ -164,6 +164,9 @@ class Utility {
     return url
   }()
 
+  static let tempDirURL: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+
+
   // MARK: - Util functions
 
   static func swap<T>(_ a: inout T, _ b: inout T) {
@@ -236,6 +239,16 @@ class Utility {
       } else {
         return false
       }
+    }
+
+    func captures(in str: String) -> [String] {
+      var result: [String] = []
+      if let match = regex?.firstMatch(in: str, options: [], range: NSMakeRange(0, str.characters.count)) {
+        for i in 0..<match.numberOfRanges {
+          result.append((str as NSString).substring(with: match.rangeAt(i)))
+        }
+      }
+      return result
     }
   }
 

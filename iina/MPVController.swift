@@ -515,8 +515,9 @@ class MPVController: NSObject {
     playerCore.info.displayHeight = dheight == 0 ? height : dheight
     playerCore.info.videoDuration = VideoTime(duration)
     playerCore.info.videoPosition = VideoTime(pos)
-    let filename = getString(MPVProperty.filename)
-    playerCore.info.currentURL = URL(fileURLWithPath: filename ?? "")
+    if let path = getString(MPVProperty.path) {
+      playerCore.info.currentURL = URL(fileURLWithPath: path)
+    }
     playerCore.fileLoaded()
     fileLoaded = true
     // mpvResume()
@@ -665,6 +666,8 @@ class MPVController: NSObject {
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
 
     case MPVProperty.trackListCount:
+      playerCore.getTrackInfo()
+      playerCore.getSelectedTracks()
       NotificationCenter.default.post(Notification(name: Constants.Noti.tracklistChanged))
 
     case MPVProperty.vf:

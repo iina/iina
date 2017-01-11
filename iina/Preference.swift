@@ -103,6 +103,7 @@ struct Preference {
     static let subMarginX = "subMarginX"
     static let subMarginY = "subMarginY"
     static let subLang = "subLang"
+    static let onlineSubSource = "onlineSubSource"
 
     // Network
 
@@ -317,6 +318,7 @@ struct Preference {
     Key.subMarginX: 25,
     Key.subMarginY: 22,
     Key.subLang: "",
+    Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
 
     Key.enableCache: true,
     Key.defaultCacheSize: 75000,

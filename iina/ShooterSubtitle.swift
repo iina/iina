@@ -42,15 +42,17 @@ final class ShooterSubtitle: OnlineSubtitle, OnlineSubtitleSupport {
   private static let chunkSize: Int = 4096
   private static let apiPath = "https://www.shooter.cn/api/subapi.php"
 
-  init(desc: String, delay: Int, files: [SubFile]) {
+  init(index: Int, desc: String, delay: Int, files: [SubFile]) {
     self.desc = desc
     self.delay = delay
     self.files = files
-    super.init()
+    super.init(index: index)
   }
 
   override func download(callback: @escaping DownloadCallback) {
-    
+    Just.get(files[0].path) { res in
+      callback(res.saveDataToFolder(Utility.tempDirURL, index: self.index))
+    }
   }
 
   static func hash(_ url: URL) -> RequestData? {
@@ -93,6 +95,7 @@ final class ShooterSubtitle: OnlineSubtitle, OnlineSubtitleSupport {
       }
 
       var subtitles: [ShooterSubtitle] = []
+      var index = 1
 
       json.forEach { sub in
         let filesDic = sub["Files"] as! ResponseFilesData
@@ -100,7 +103,8 @@ final class ShooterSubtitle: OnlineSubtitle, OnlineSubtitleSupport {
         let desc = sub["Desc"] as? String ?? ""
         let delay = sub["Delay"] as? Int ?? 0
 
-        subtitles.append(ShooterSubtitle(desc: desc, delay: delay, files: files))
+        subtitles.append(ShooterSubtitle(index: index, desc: desc, delay: delay, files: files))
+        index += 1
       }
       callback(subtitles)
     }

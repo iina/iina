@@ -11,11 +11,20 @@ import Foundation
 class OnlineSubtitle {
 
   typealias SubCallback = ([OnlineSubtitle]) -> Void
-  typealias DownloadCallback = (String) -> Void
+
+  /** URL to downloaded subtitle*/
+  typealias DownloadCallback = (URL) -> Void
 
   enum Source: Int {
     case shooter = 0
     // case openSub
+  }
+
+  /** Prepend a number before file name to avoid overwritting. */
+  var index: Int
+
+  init(index: Int) {
+    self.index = index
   }
 
   static func getSub(forFile url: URL, from userSource: Source? = nil, callback: @escaping SubCallback) {
@@ -31,10 +40,9 @@ class OnlineSubtitle {
     switch source {
     case .shooter:
       if let info = ShooterSubtitle.hash(url) {
-        print(info)
         ShooterSubtitle.request(info, callback: callback)
       } else {
-        print("aaaa")
+        Utility.showAlert(message: "Cannot get file hash.")
       }
     }
 

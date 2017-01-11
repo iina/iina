@@ -38,6 +38,7 @@ enum OSDMessage {
 
   case startFindingSub
   case foundSub(Int)
+  case downloadedSub
 
 
   func message() -> String {
@@ -135,7 +136,10 @@ enum OSDMessage {
       return "Find online subtitles..."
 
     case .foundSub(let count):
-      return "\(count) subtitle(s) found."
+      return "\(count) subtitle(s) found. Downloading..."
+
+    case .downloadedSub:
+      return "Subtitle downloaded."
 
     }
   }

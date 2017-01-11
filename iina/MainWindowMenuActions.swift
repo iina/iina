@@ -289,7 +289,14 @@ extension MainWindowController {
     guard let url = playerCore.info.currentURL else { return }
     displayOSD(.startFindingSub)
     OnlineSubtitle.getSub(forFile: url) { subtitles in
-      self.displayOSD(.foundSub(subtitles.count))
+      // send osd in main thread
+      self.playerCore.sendOSD(.foundSub(subtitles.count))
+      // download them
+      subtitles[0].download { url in
+        Utility.log("Saved subtitle to \(url.path)")
+        self.playerCore.loadExternalSubFile(url)
+        self.playerCore.sendOSD(.downloadedSub)
+      }
     }
   }
 

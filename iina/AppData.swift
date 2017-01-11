@@ -28,6 +28,7 @@ struct AppData {
 
   static let aspectRegex = Utility.Regex("\\A\\d+(\\.\\d+)?:\\d+(\\.\\d+)?\\Z")
   static let HTTPFileNameRegex = Utility.Regex("attachment; filename=(.+?)\\Z")
+  static let tagVersionRegex = Utility.Regex("\\Av(\\d+\\.\\d+\\.\\d+)\\Z")
 
   static let rotations: [Int] = [0, 90, 180, 270]
 
@@ -46,6 +47,7 @@ struct AppData {
   static let watchLaterFolder = "watch_later"
 
   static let githubLink = "https://github.com/lhc70000/iina"
+  static let githubReleaseLink = "https://github.com/lhc70000/iina/releases"
   static let websiteLink = "https://lhc70000.github.io/iina/"
   static let emailLink = "lhc199652@gmail.com"
 

@@ -9,3 +9,21 @@
 "playlist_cap" = "PLAYLIST";
 
 "chapter_cap" = "CHAPTERS";
+
+"update.title_update_found" = "Update Found";
+
+"update.title_no_update" = "No Update";
+
+"update.title_error" = "Error";
+
+"update.update_found" = "New version detected! IINA is still in alpha, so you are recommended to stay with the latest version. Please download from website or github:";
+
+"update.no_update" = "You are running the latest version.";
+
+"update.check_failed" = "Failed to check updates. You are probably running a too old version. Please check the website or github.";
+
+"update.new_version" = "New version:";
+
+"update.dl_from_website" = "Go To Website";
+
+"update.dl_from_github" = "Go To Github";

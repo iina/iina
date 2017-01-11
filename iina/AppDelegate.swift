@@ -60,6 +60,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     // show alpha in color panels
     NSColorPanel.shared().showsAlpha = true
+    // check update
+    UpdateChecker.checkUpdate(alertIfOfflineOrNoUpdate: false)
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {
@@ -161,5 +163,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @IBAction func websiteAction(_ sender: AnyObject) {
     NSWorkspace.shared().open(URL(string: AppData.websiteLink)!)
   }
+
+  @IBAction func checkUpdate(_ sender: AnyObject) {
+    UpdateChecker.checkUpdate()
+  }
+
 
 }

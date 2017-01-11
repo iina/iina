@@ -61,7 +61,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // show alpha in color panels
     NSColorPanel.shared().showsAlpha = true
     
-    openFile(nil)
+    if UserDefaults.standard.bool(forKey: Preference.Key.openStartPanel) {
+      openFile(nil)
+    }
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {

@@ -39,6 +39,7 @@ enum OSDMessage {
   case startFindingSub
   case foundSub(Int)
   case downloadedSub
+  case networkError
 
 
   func message() -> String {
@@ -139,7 +140,10 @@ enum OSDMessage {
       return count == 0 ? "No subtitle found." : "\(count) subtitle(s) found. Downloading..."
 
     case .downloadedSub:
-      return "Subtitle downloaded."
+      return "Subtitle downloaded"
+
+    case .networkError:
+      return "Network error"
 
     }
   }

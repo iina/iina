@@ -50,8 +50,12 @@ final class ShooterSubtitle: OnlineSubtitle, OnlineSubtitleSupport {
   }
 
   override func download(callback: @escaping DownloadCallback) {
-    Just.get(files[0].path) { res in
-      callback(res.saveDataToFolder(Utility.tempDirURL, index: self.index))
+    Just.get(files[0].path) { response in
+      guard response.ok else {
+        PlayerCore.shared.sendOSD(.networkError)
+        return
+      }
+      callback(response.saveDataToFolder(Utility.tempDirURL, index: self.index))
     }
   }
 
@@ -65,8 +69,8 @@ final class ShooterSubtitle: OnlineSubtitle, OnlineSubtitleSupport {
     file.seekToEndOfFile()
     let fileSize: UInt64 = file.offsetInFile
 
-    guard fileSize >= 8192 else {
-      Utility.log("File length less than 8k??")
+    guard fileSize >= 12288 else {
+      Utility.log("File length less than 12k??")
       return nil
     }
 
@@ -89,6 +93,11 @@ final class ShooterSubtitle: OnlineSubtitle, OnlineSubtitleSupport {
 
   static func request(_ info: RequestData, callback: @escaping SubCallback) {
     Just.post(apiPath, params: info.dictionary, timeout: 10) { response in
+      guard response.ok else {
+        PlayerCore.shared.sendOSD(.networkError)
+        return
+      }
+
       guard let json = response.json as? ResponseData else {
         callback([])
         return

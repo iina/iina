@@ -42,7 +42,8 @@ class OnlineSubtitle {
       if let info = ShooterSubtitle.hash(url) {
         ShooterSubtitle.request(info, callback: callback)
       } else {
-        Utility.showAlert(message: "Cannot get file hash.")
+        // if cannot get hash, treat as sub not found
+        callback([])
       }
     }
 

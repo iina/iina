@@ -220,7 +220,7 @@ class PlayerCore: NSObject {
   }
 
   func setVideoAspect(_ aspect: String) {
-    if AppData.aspectRegex.matches(aspect) {
+    if Regex.aspect.matches(aspect) {
       mpvController.setString(MPVProperty.videoAspect, aspect)
       info.unsureAspect = aspect
     } else {

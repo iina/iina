@@ -54,8 +54,8 @@ class UpdateChecker {
         guard let name = tag["name"] as? String else { return }
 
         // discard tags like "v0.0.1-build2"
-        guard AppData.tagVersionRegex.matches(name) else { return }
-        let numericName = AppData.tagVersionRegex.captures(in: name)[1].components(separatedBy: ".").map { str -> Int in
+        guard Regex.tagVersion.matches(name) else { return }
+        let numericName = Regex.tagVersion.captures(in: name)[1].components(separatedBy: ".").map { str -> Int in
           return Int(str) ?? 0
         }
 

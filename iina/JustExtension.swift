@@ -14,7 +14,7 @@ extension Just.HTTPResult {
   var fileName: String? {
     get {
       guard let field = self.headers["Content-Disposition"] else { return nil }
-      return AppData.HTTPFileNameRegex.captures(in: field).at(1)
+      return Regex.httpFileName.captures(in: field).at(1)
     }
   }
 

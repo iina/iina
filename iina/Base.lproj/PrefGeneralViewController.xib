@@ -128,9 +128,9 @@
                     </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WLe-SS-Pas">
-                    <rect key="frame" x="118" y="101" width="257" height="18"/>
+                    <rect key="frame" x="118" y="101" width="255" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Open a choose file panel after opening" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="IYU-9y-fBL">
+                    <buttonCell key="cell" type="check" title="Open a choose file panel after starting" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="IYU-9y-fBL">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

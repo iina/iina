@@ -28,7 +28,8 @@ class SleepPreventer: NSObject {
   static func allowSleep() {
     let success = IOPMAssertionRelease(assertionID)
     if success != kIOReturnSuccess {
-      Utility.showAlert(message: "Cannot allow display sleep")
+      // do not show alert here
+      Utility.log("Cannot allow display sleep")
     }
   }
 

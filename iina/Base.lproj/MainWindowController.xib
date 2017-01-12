@@ -206,7 +206,7 @@
                                 </connections>
                             </button>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-kc-FAt" userLabel="Volume Slider">
-                                <rect key="frame" x="42" y="38" width="69" height="15"/>
+                                <rect key="frame" x="42" y="37" width="69" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="69" id="5EN-dK-jOP"/>
                                 </constraints>
@@ -265,7 +265,7 @@
                             <constraint firstItem="10x-bg-xlj" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="qQu-WW-eR6"/>
                             <constraint firstItem="QTI-wi-oyB" firstAttribute="leading" secondItem="EIi-qd-glM" secondAttribute="trailing" constant="8" id="r1a-G2-I1e"/>
                             <constraint firstAttribute="trailing" secondItem="GgV-Cc-sk0" secondAttribute="trailing" constant="2" id="sgJ-oR-QEJ"/>
-                            <constraint firstItem="SAG-kc-FAt" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="15" id="wIg-92-XDQ"/>
+                            <constraint firstItem="SAG-kc-FAt" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="16" id="wIg-92-XDQ"/>
                             <constraint firstItem="YvW-zG-QiW" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="wnr-6p-18l"/>
                             <constraint firstItem="2py-h1-0km" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="wuk-mx-e29"/>
                         </constraints>

@@ -220,7 +220,7 @@ class PlayerCore: NSObject {
   }
 
   func setVideoAspect(_ aspect: String) {
-    if AppData.aspectRegex.matches(aspect) {
+    if Regex.aspect.matches(aspect) {
       mpvController.setString(MPVProperty.videoAspect, aspect)
       info.unsureAspect = aspect
     } else {
@@ -293,25 +293,23 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalAudioFile(_ url: URL) {
-    mpvController.command(.audioAdd, args: [url.path], checkError: false, returnValueCallback: { (returnCode: Int32) in
-      if returnCode >= 0 {
-        return
+    mpvController.command(.audioAdd, args: [url.path], checkError: false) { code in
+      if code < 0 {
+        DispatchQueue.main.async {
+          Utility.showAlert(message: "Unsupported external audio file.")
+        }
       }
-      Utility.showAlert(message: "Unsupported external audio file.")
-    })
-    getTrackInfo()
-    getSelectedTracks()
+    }
   }
 
   func loadExternalSubFile(_ url: URL) {
-    mpvController.command(.subAdd, args: [url.path], checkError: false, returnValueCallback: { (returnCode: Int32) in
-      if returnCode >= 0 {
-        return
+    mpvController.command(.subAdd, args: [url.path], checkError: false) { code in
+      if code < 0 {
+        DispatchQueue.main.async {
+          Utility.showAlert(message: "Unsupported external subtitle.")
+        }
       }
-      Utility.showAlert(message: "Unsupported external subtitle.")
-    })
-    getTrackInfo()
-    getSelectedTracks()
+    }
   }
 
   func setAudioDelay(_ delay: Double) {
@@ -515,6 +513,7 @@ class PlayerCore: NSObject {
     case time
     case timeAndCache
     case playButton
+    case volume
     case muteButton
     case chapterList
     case playlist
@@ -559,6 +558,11 @@ class PlayerCore: NSObject {
       info.isPaused = pause
       DispatchQueue.main.async {
         self.mainWindow.updatePlayButtonState(pause ? NSOffState : NSOnState)
+      }
+
+    case .volume:
+      DispatchQueue.main.async {
+        self.mainWindow.updateVolume()
       }
 
     case .muteButton:
@@ -642,7 +646,7 @@ class PlayerCore: NSObject {
     }
   }
 
-  private func getSelectedTracks() {
+  func getSelectedTracks() {
     info.aid = mpvController.getInt(MPVOption.TrackSelection.aid)
     info.vid = mpvController.getInt(MPVOption.TrackSelection.vid)
     info.sid = mpvController.getInt(MPVOption.TrackSelection.sid)

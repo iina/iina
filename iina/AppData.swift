@@ -26,8 +26,6 @@ struct AppData {
   /** generate aspect and crop options in menu */
   static let aspects: [String] = ["4:3", "5:4", "16:9", "16:10", "1:1", "3:2", "2.21:1", "2.35:1", "2.39:1"]
 
-  static let aspectRegex = Utility.Regex("\\A\\d+(\\.\\d+)?:\\d+(\\.\\d+)?\\Z")
-
   static let rotations: [Int] = [0, 90, 180, 270]
 
   /** Seek amount */
@@ -45,6 +43,7 @@ struct AppData {
   static let watchLaterFolder = "watch_later"
 
   static let githubLink = "https://github.com/lhc70000/iina"
+  static let githubReleaseLink = "https://github.com/lhc70000/iina/releases"
   static let websiteLink = "https://lhc70000.github.io/iina/"
   static let emailLink = "lhc199652@gmail.com"
 

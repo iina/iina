@@ -86,6 +86,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var resetSubDelay: NSMenuItem!
   @IBOutlet weak var encodingMenu: NSMenu!
   @IBOutlet weak var subFont: NSMenuItem!
+  @IBOutlet weak var findOnlineSub: NSMenuItem!
   // Window
   @IBOutlet weak var customTouchBar: NSMenuItem!
   @IBOutlet weak var inspector: NSMenuItem!
@@ -195,6 +196,8 @@ class MenuController: NSObject, NSMenuDelegate {
     loadExternalSub.action = #selector(MainWindowController.menuLoadExternalSub(_:))
     subTrackMenu.delegate = self
     secondSubTrackMenu.delegate = self
+
+    findOnlineSub.action = #selector(MainWindowController.menuFindOnlineSub(_:))
 
     // - text size
     [increaseTextSize, decreaseTextSize, resetTextSize].forEach {

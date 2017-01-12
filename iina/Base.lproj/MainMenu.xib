@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D17a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
     </dependencies>
@@ -237,7 +237,9 @@
                             <menuItem title="Volume - 1%" tag="1" alternate="YES" keyEquivalent="" id="Zhv-Bz-I5V">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Mute" keyEquivalent="m" id="WOL-Us-ByA"/>
+                            <menuItem title="Mute" id="WOL-Us-ByA">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="NlU-cH-tnU"/>
                             <menuItem title="Audio Delay:" enabled="NO" id="foC-r3-8mp">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -292,6 +294,10 @@
                             </menuItem>
                             <menuItem title="Load External Subtitle..." id="k6x-hf-ATi">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="yh3-Pu-MGm"/>
+                            <menuItem title="Find Online Subtitles..." keyEquivalent="D" id="Mg3-WB-gjZ">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="58S-lP-UEY"/>
                             <menuItem title="Encoding" id="Pci-OQ-Vni">
@@ -375,6 +381,13 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="J8m-Ix-VGl"/>
+                            <menuItem title="Check Update..." id="gMo-qL-m08">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkUpdate:" target="Voe-Tx-rLC" id="CQ8-wR-EzN"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="ZO8-wH-FBe"/>
                             <menuItem title="Github" id="A9w-iE-gVg">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -417,6 +430,7 @@
                 <outlet property="doubleSize" destination="Hal-18-Tnf" id="vnl-Rb-Y3o"/>
                 <outlet property="encodingMenu" destination="Pf6-5i-B1E" id="Gat-gG-pkT"/>
                 <outlet property="file" destination="dMs-cI-mzQ" id="upe-AE-Gf6"/>
+                <outlet property="findOnlineSub" destination="Mg3-WB-gjZ" id="Xft-hW-B9a"/>
                 <outlet property="fitToScreen" destination="SHd-63-Xoh" id="nzE-bA-wmk"/>
                 <outlet property="flip" destination="OIu-H0-Mht" id="fYJ-Fq-hak"/>
                 <outlet property="flipMenu" destination="n90-to-nRT" id="Zpp-Q8-NiJ"/>

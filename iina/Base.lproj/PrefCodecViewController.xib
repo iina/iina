@@ -63,7 +63,7 @@
                     </connections>
                 </textField>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o5P-yj-MvN">
-                    <rect key="frame" x="113" y="85" width="195" height="18"/>
+                    <rect key="frame" x="113" y="85" width="352" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Use hardware decoding" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="WYE-SB-Ywe">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>

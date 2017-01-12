@@ -164,6 +164,9 @@ class Utility {
     return url
   }()
 
+  static let tempDirURL: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+
+
   // MARK: - Util functions
 
   static func swap<T>(_ a: inout T, _ b: inout T) {
@@ -218,26 +221,6 @@ class Utility {
   }
 
   // MARK: - Util classes
-
-  class Regex {
-    var regex: NSRegularExpression?
-
-    init (_ pattern: String) {
-      if let exp = try? NSRegularExpression(pattern: pattern, options: []) {
-        self.regex = exp
-      } else {
-        Utility.fatal("Cannot create regex \(pattern)")
-      }
-    }
-
-    func matches(_ str: String) -> Bool {
-      if let matches = regex?.numberOfMatches(in: str, options: [], range: NSMakeRange(0, str.characters.count)) {
-        return matches > 0
-      } else {
-        return false
-      }
-    }
-  }
 
   class FontAttributes {
     struct AttributeType {

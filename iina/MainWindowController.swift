@@ -788,6 +788,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         
         // Make sure the button is visible
         button!.alphaValue = 1;
+        button!.isHidden = false;
       }
     }
     // remove titlebar view from fade-able views

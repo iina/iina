@@ -881,7 +881,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Display time label when mouse over slider */
   private func updateTimeLabel(_ mouseXPos: CGFloat) {
     let timeLabelXPos = playSlider.frame.origin.y + 15
-    timePreviewWhenSeek.frame.origin = CGPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2), y: timeLabelXPos + 2)
+    timePreviewWhenSeek.frame.origin = CGPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2), y: timeLabelXPos + 1)
     let percentage = Double((mouseXPos - 3) / 354)
     if let duration = playerCore.info.videoDuration {
       timePreviewWhenSeek.stringValue = (duration * percentage).stringRepresentation
@@ -1224,7 +1224,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // label
     timePreviewWhenSeek.frame.origin = CGPoint(
       x: round(sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2),
-      y: playSlider.frame.origin.y + 17)
+      y: playSlider.frame.origin.y + 16)
     timePreviewWhenSeek.stringValue = (playerCore.info.videoDuration! * percentage * 0.01).stringRepresentation
     playerCore.seek(percent: percentage, forceExact: true)
   }

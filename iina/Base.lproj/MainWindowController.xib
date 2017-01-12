@@ -80,17 +80,17 @@
                         </buttonCell>
                     </button>
                     <visualEffectView appearanceType="vibrantDark" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
-                        <rect key="frame" x="120" y="40" width="440" height="71"/>
+                        <rect key="frame" x="120" y="40" width="440" height="67"/>
                         <subviews>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT">
-                                <rect key="frame" x="60" y="9" width="320" height="19"/>
+                                <rect key="frame" x="60" y="7" width="320" height="19"/>
                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="f1c-xF-8a2" customClass="PlaySliderCell" customModule="IINA" customModuleProvider="target"/>
                                 <connections>
                                     <action selector="playSliderChanges:" target="-2" id="UBG-Ky-3rr"/>
                                 </connections>
                             </slider>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NBD-MV-OuG" userLabel="Left Label">
-                                <rect key="frame" x="0.0" y="12" width="62" height="14"/>
+                                <rect key="frame" x="0.0" y="10" width="62" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="CMl-dC-PCr"/>
                                 </constraints>
@@ -101,7 +101,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Yg9-Sd-sWy" userLabel="Left Button Label">
-                                <rect key="frame" x="121" y="42" width="32" height="12"/>
+                                <rect key="frame" x="121" y="39" width="32" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="28" id="FZL-et-vym"/>
                                     <constraint firstAttribute="height" constant="12" id="dwX-4g-cIG"/>
@@ -113,7 +113,7 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="2py-h1-0km">
-                                <rect key="frame" x="16" y="38" width="22" height="22"/>
+                                <rect key="frame" x="16" y="35" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="MPG-2q-w6a"/>
                                     <constraint firstAttribute="width" constant="22" id="vBo-ma-Dnu"/>
@@ -127,7 +127,7 @@
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="EIi-qd-glM" userLabel="Right Button">
-                                <rect key="frame" x="257" y="36" width="24" height="24"/>
+                                <rect key="frame" x="257" y="33" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="KMp-bQ-6E5"/>
                                     <constraint firstAttribute="height" constant="24" id="jMe-zC-CIx"/>
@@ -141,7 +141,7 @@
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="10x-bg-xlj" userLabel="Left Button">
-                                <rect key="frame" x="159" y="36" width="24" height="24"/>
+                                <rect key="frame" x="159" y="33" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="2E4-Ht-wMT"/>
                                     <constraint firstAttribute="height" constant="24" id="EMj-8F-Sxr"/>
@@ -155,7 +155,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QTI-wi-oyB" userLabel="Right Button Label">
-                                <rect key="frame" x="287" y="42" width="32" height="12"/>
+                                <rect key="frame" x="287" y="39" width="32" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="rn3-Sw-gl7"/>
                                     <constraint firstAttribute="width" constant="28" id="ygE-Mh-HRU"/>
@@ -167,7 +167,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YvW-zG-QiW" userLabel="Settings Button">
-                                <rect key="frame" x="385" y="42" width="14" height="14"/>
+                                <rect key="frame" x="385" y="39" width="14" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="14" id="FBK-0C-gcn"/>
                                     <constraint firstAttribute="height" constant="14" id="nWg-Z7-Zhc"/>
@@ -181,7 +181,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="GgV-Cc-sk0" userLabel="Right Label">
-                                <rect key="frame" x="378" y="12" width="62" height="14"/>
+                                <rect key="frame" x="378" y="10" width="62" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="sDf-om-KlV"/>
                                 </constraints>
@@ -192,7 +192,7 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="gxw-pJ-Lcg">
-                                <rect key="frame" x="208" y="36" width="24" height="24"/>
+                                <rect key="frame" x="208" y="33" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="7xv-qQ-n43"/>
                                     <constraint firstAttribute="height" constant="24" id="wi7-Km-eiK"/>
@@ -206,7 +206,7 @@
                                 </connections>
                             </button>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-kc-FAt" userLabel="Volume Slider">
-                                <rect key="frame" x="46" y="41" width="69" height="15"/>
+                                <rect key="frame" x="46" y="38" width="69" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="69" id="5EN-dK-jOP"/>
                                 </constraints>
@@ -216,7 +216,7 @@
                                 </connections>
                             </slider>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wy6-h4-fsN">
-                                <rect key="frame" x="410" y="42" width="14" height="14"/>
+                                <rect key="frame" x="410" y="39" width="14" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="Rv3-oS-0Hu"/>
                                     <constraint firstAttribute="width" constant="14" id="yzN-B1-5gA"/>
@@ -230,7 +230,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" alphaValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qOq-6a-7j7">
-                                <rect key="frame" x="198" y="7" width="44" height="12"/>
+                                <rect key="frame" x="198" y="20" width="44" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="999:99" id="Pw8-rd-mUu">
                                     <font key="font" metaFont="system" size="10"/>
@@ -240,34 +240,34 @@
                             </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="EIi-qd-glM" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="19J-AW-dth"/>
+                            <constraint firstItem="EIi-qd-glM" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="19J-AW-dth"/>
                             <constraint firstItem="wy6-h4-fsN" firstAttribute="leading" secondItem="YvW-zG-QiW" secondAttribute="trailing" constant="11" id="6uo-LX-tAd"/>
                             <constraint firstItem="NBD-MV-OuG" firstAttribute="leading" secondItem="OiF-pA-8Sd" secondAttribute="leading" constant="2" id="72g-fy-o5h"/>
-                            <constraint firstAttribute="bottom" secondItem="NBD-MV-OuG" secondAttribute="bottom" constant="12" id="7Jy-5x-USp"/>
+                            <constraint firstAttribute="bottom" secondItem="NBD-MV-OuG" secondAttribute="bottom" constant="10" id="7Jy-5x-USp"/>
                             <constraint firstItem="gxw-pJ-Lcg" firstAttribute="leading" secondItem="10x-bg-xlj" secondAttribute="trailing" constant="25" id="C5Q-BE-NQl"/>
-                            <constraint firstItem="gxw-pJ-Lcg" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="CBt-v9-IKk"/>
+                            <constraint firstItem="gxw-pJ-Lcg" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="CBt-v9-IKk"/>
                             <constraint firstItem="SAG-kc-FAt" firstAttribute="leading" secondItem="2py-h1-0km" secondAttribute="trailing" constant="8" id="D7r-1r-RAg"/>
                             <constraint firstItem="2py-h1-0km" firstAttribute="leading" secondItem="OiF-pA-8Sd" secondAttribute="leading" constant="16" id="G5q-Ix-iSL"/>
-                            <constraint firstAttribute="bottom" secondItem="GgV-Cc-sk0" secondAttribute="bottom" constant="12" id="JVf-zk-FZE"/>
+                            <constraint firstAttribute="bottom" secondItem="GgV-Cc-sk0" secondAttribute="bottom" constant="10" id="JVf-zk-FZE"/>
                             <constraint firstItem="Yg9-Sd-sWy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SAG-kc-FAt" secondAttribute="trailing" constant="8" id="JZb-uM-l66"/>
                             <constraint firstAttribute="trailing" secondItem="wy6-h4-fsN" secondAttribute="trailing" constant="16" id="N38-df-Pr9"/>
                             <constraint firstItem="gxw-pJ-Lcg" firstAttribute="centerX" secondItem="OiF-pA-8Sd" secondAttribute="centerX" id="Omt-FZ-m1d"/>
-                            <constraint firstItem="Yg9-Sd-sWy" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="17" id="V3q-eS-4TC"/>
+                            <constraint firstItem="Yg9-Sd-sWy" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="16" id="V3q-eS-4TC"/>
                             <constraint firstItem="10x-bg-xlj" firstAttribute="leading" secondItem="Yg9-Sd-sWy" secondAttribute="trailing" constant="8" id="bH4-gR-KzH"/>
                             <constraint firstItem="EIi-qd-glM" firstAttribute="leading" secondItem="gxw-pJ-Lcg" secondAttribute="trailing" constant="25" id="cJT-Pe-szx"/>
                             <constraint firstItem="GgV-Cc-sk0" firstAttribute="leading" secondItem="eBP-6g-bAT" secondAttribute="trailing" constant="2" id="exB-rF-Yot"/>
                             <constraint firstAttribute="width" constant="440" id="g1S-BA-95v"/>
                             <constraint firstItem="eBP-6g-bAT" firstAttribute="leading" secondItem="NBD-MV-OuG" secondAttribute="trailing" constant="2" id="g5q-vC-OGb"/>
-                            <constraint firstAttribute="height" constant="71" id="g84-xP-093"/>
-                            <constraint firstItem="QTI-wi-oyB" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="17" id="jS2-YP-VdM"/>
-                            <constraint firstAttribute="bottom" secondItem="eBP-6g-bAT" secondAttribute="bottom" constant="11" id="lGU-KV-JXB"/>
-                            <constraint firstItem="wy6-h4-fsN" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="15" id="ltp-E1-fer"/>
-                            <constraint firstItem="10x-bg-xlj" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="qQu-WW-eR6"/>
+                            <constraint firstAttribute="height" constant="67" id="g84-xP-093"/>
+                            <constraint firstItem="QTI-wi-oyB" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="16" id="jS2-YP-VdM"/>
+                            <constraint firstAttribute="bottom" secondItem="eBP-6g-bAT" secondAttribute="bottom" constant="9" id="lGU-KV-JXB"/>
+                            <constraint firstItem="wy6-h4-fsN" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="14" id="ltp-E1-fer"/>
+                            <constraint firstItem="10x-bg-xlj" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="qQu-WW-eR6"/>
                             <constraint firstItem="QTI-wi-oyB" firstAttribute="leading" secondItem="EIi-qd-glM" secondAttribute="trailing" constant="8" id="r1a-G2-I1e"/>
                             <constraint firstAttribute="trailing" secondItem="GgV-Cc-sk0" secondAttribute="trailing" constant="2" id="sgJ-oR-QEJ"/>
-                            <constraint firstItem="SAG-kc-FAt" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="16" id="wIg-92-XDQ"/>
-                            <constraint firstItem="YvW-zG-QiW" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="15" id="wnr-6p-18l"/>
-                            <constraint firstItem="2py-h1-0km" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="11" id="wuk-mx-e29"/>
+                            <constraint firstItem="SAG-kc-FAt" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="15" id="wIg-92-XDQ"/>
+                            <constraint firstItem="YvW-zG-QiW" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="14" id="wnr-6p-18l"/>
+                            <constraint firstItem="2py-h1-0km" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="wuk-mx-e29"/>
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="epo-S6-QVB" userLabel="SideBar">

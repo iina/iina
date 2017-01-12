@@ -30,7 +30,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   /** Tab type. Use TrackType for now. Propobably not a good choice. */
   typealias TabViewType = MPVTrack.TrackType
 
-  var playerCore: PlayerCore = PlayerCore.shared
+  weak var playerCore: PlayerCore! = PlayerCore.shared
   weak var mainWindow: MainWindowController!
 
   var observers: [NSObjectProtocol] = []

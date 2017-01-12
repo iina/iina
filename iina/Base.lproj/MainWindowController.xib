@@ -79,7 +79,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
-                    <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
+                    <visualEffectView appearanceType="vibrantDark" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
                         <rect key="frame" x="120" y="40" width="440" height="67"/>
                         <subviews>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT">
@@ -113,10 +113,10 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="2py-h1-0km">
-                                <rect key="frame" x="16" y="35" width="21" height="22"/>
+                                <rect key="frame" x="12" y="33" width="24" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="MPG-2q-w6a"/>
-                                    <constraint firstAttribute="width" constant="21" id="vBo-ma-Dnu"/>
+                                    <constraint firstAttribute="height" constant="24" id="MPG-2q-w6a"/>
+                                    <constraint firstAttribute="width" constant="24" id="vBo-ma-Dnu"/>
                                 </constraints>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" imageScaling="proportionallyDown" inset="2" id="XXj-HK-hXa">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -167,7 +167,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YvW-zG-QiW" userLabel="Settings Button">
-                                <rect key="frame" x="375" y="34" width="24" height="24"/>
+                                <rect key="frame" x="375" y="33" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="FBK-0C-gcn"/>
                                     <constraint firstAttribute="height" constant="24" id="nWg-Z7-Zhc"/>
@@ -206,7 +206,7 @@
                                 </connections>
                             </button>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-kc-FAt" userLabel="Volume Slider">
-                                <rect key="frame" x="45" y="38" width="69" height="15"/>
+                                <rect key="frame" x="42" y="38" width="69" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="69" id="5EN-dK-jOP"/>
                                 </constraints>
@@ -216,7 +216,7 @@
                                 </connections>
                             </slider>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wy6-h4-fsN">
-                                <rect key="frame" x="405" y="34" width="24" height="24"/>
+                                <rect key="frame" x="405" y="33" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Rv3-oS-0Hu"/>
                                     <constraint firstAttribute="width" constant="24" id="yzN-B1-5gA"/>
@@ -246,8 +246,8 @@
                             <constraint firstAttribute="bottom" secondItem="NBD-MV-OuG" secondAttribute="bottom" constant="10" id="7Jy-5x-USp"/>
                             <constraint firstItem="gxw-pJ-Lcg" firstAttribute="leading" secondItem="10x-bg-xlj" secondAttribute="trailing" constant="25" id="C5Q-BE-NQl"/>
                             <constraint firstItem="gxw-pJ-Lcg" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="CBt-v9-IKk"/>
-                            <constraint firstItem="SAG-kc-FAt" firstAttribute="leading" secondItem="2py-h1-0km" secondAttribute="trailing" constant="8" id="D7r-1r-RAg"/>
-                            <constraint firstItem="2py-h1-0km" firstAttribute="leading" secondItem="OiF-pA-8Sd" secondAttribute="leading" constant="16" id="G5q-Ix-iSL"/>
+                            <constraint firstItem="SAG-kc-FAt" firstAttribute="leading" secondItem="2py-h1-0km" secondAttribute="trailing" constant="6" id="D7r-1r-RAg"/>
+                            <constraint firstItem="2py-h1-0km" firstAttribute="leading" secondItem="OiF-pA-8Sd" secondAttribute="leading" constant="12" id="G5q-Ix-iSL"/>
                             <constraint firstAttribute="bottom" secondItem="GgV-Cc-sk0" secondAttribute="bottom" constant="10" id="JVf-zk-FZE"/>
                             <constraint firstItem="Yg9-Sd-sWy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SAG-kc-FAt" secondAttribute="trailing" constant="8" id="JZb-uM-l66"/>
                             <constraint firstAttribute="trailing" secondItem="wy6-h4-fsN" secondAttribute="trailing" constant="11" id="N38-df-Pr9"/>
@@ -261,12 +261,12 @@
                             <constraint firstAttribute="height" constant="67" id="g84-xP-093"/>
                             <constraint firstItem="QTI-wi-oyB" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="16" id="jS2-YP-VdM"/>
                             <constraint firstAttribute="bottom" secondItem="eBP-6g-bAT" secondAttribute="bottom" constant="9" id="lGU-KV-JXB"/>
-                            <constraint firstItem="wy6-h4-fsN" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="9" id="ltp-E1-fer"/>
+                            <constraint firstItem="wy6-h4-fsN" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="ltp-E1-fer"/>
                             <constraint firstItem="10x-bg-xlj" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="qQu-WW-eR6"/>
                             <constraint firstItem="QTI-wi-oyB" firstAttribute="leading" secondItem="EIi-qd-glM" secondAttribute="trailing" constant="8" id="r1a-G2-I1e"/>
                             <constraint firstAttribute="trailing" secondItem="GgV-Cc-sk0" secondAttribute="trailing" constant="2" id="sgJ-oR-QEJ"/>
                             <constraint firstItem="SAG-kc-FAt" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="15" id="wIg-92-XDQ"/>
-                            <constraint firstItem="YvW-zG-QiW" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="9" id="wnr-6p-18l"/>
+                            <constraint firstItem="YvW-zG-QiW" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="wnr-6p-18l"/>
                             <constraint firstItem="2py-h1-0km" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="wuk-mx-e29"/>
                         </constraints>
                     </visualEffectView>
@@ -375,12 +375,12 @@
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="mute" width="21" height="16"/>
+        <image name="mute" width="17" height="14"/>
         <image name="pause" width="24" height="24"/>
         <image name="play" width="24" height="24"/>
         <image name="playlist" width="14" height="10"/>
         <image name="speed" width="24" height="24"/>
         <image name="speedl" width="24" height="24"/>
-        <image name="volume" width="21" height="16"/>
+        <image name="volume" width="17" height="14"/>
     </resources>
 </document>

@@ -1,4 +1,92 @@
-<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>Changelog | Project IINA</title><link href="//fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body class="changelog changelog_index"><nav class="navbar navbar-fixed-top navbar-light bg-faded"><ul class="nav navbar-nav"><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><end></end><li class="nav-item"><a href="/iina" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/features/" class="nav-link">Features</a></li><li class="nav-item"><a href="/iina/documentation/" class="nav-link">Documentation</a></li><li class="nav-item"><a href="/iina/changelog/" class="nav-link">Changelog</a></li><li class="nav-item"><a href="/iina/about/" class="nav-link">About</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></nav><div class="main"><div class="changelog"><div class="container"><h1>Changelog</h1><div class="clog"><h2 id="v001-jan-3-2017">v0.0.1 <em>Jan. 3, 2017</em></h2>
+<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>Changelog | Project IINA</title><link href="//fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body class="changelog changelog_index"><nav class="navbar navbar-fixed-top navbar-light bg-faded"><ul class="nav navbar-nav"><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><end></end><li class="nav-item"><a href="/iina" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/features/" class="nav-link">Features</a></li><li class="nav-item"><a href="/iina/documentation/" class="nav-link">Documentation</a></li><li class="nav-item"><a href="/iina/changelog/" class="nav-link">Changelog</a></li><li class="nav-item"><a href="/iina/about/" class="nav-link">About</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></nav><div class="main"><div class="changelog"><div class="container"><h1>Changelog</h1><div class="clog"><h2 id="v002--jan-12-2017">v0.0.2  <em>Jan. 12, 2017</em></h2>
+
+<h3 id="force-touch">Force Touch</h3>
+<ul>
+  <li><strong>Add: Force Touch support for changing speed (like QuickTime)</strong></li>
+</ul>
+
+<h3 id="touch-bar">Touch Bar</h3>
+<ul>
+  <li>Change: time position label now have a fixed width</li>
+</ul>
+
+<h3 id="key-bindings">Key bindings</h3>
+<ul>
+  <li><strong>Fix: custom input configurations not working</strong></li>
+  <li><strong>Add: an IINA default key binding</strong></li>
+  <li>Fix: some shortcuts not compatible with system</li>
+</ul>
+
+<h3 id="ui">UI</h3>
+<ul>
+  <li>Fix: volume slider not changing when changed volume from menu</li>
+  <li>Fix: volume menu items should be +/- 5%</li>
+</ul>
+
+<h3 id="control">Control</h3>
+<ul>
+  <li><strong>Add: support scroll wheel on external mouse</strong></li>
+  <li><strong>Add: support natural scroll</strong></li>
+  <li><strong>Fix: single click action also performed when double clicking</strong></li>
+</ul>
+
+<h3 id="playback">Playback</h3>
+<ul>
+  <li><strong>Add: Download subtitles automatically from <code>shooter.cn</code>.</strong> (We would like to support opensubtitles, however their API is rather complicated and requires some registration stuff, so it will be added later in 0.0.3.)</li>
+  <li>Change: support playback position in milliseconds</li>
+  <li>Change: better performance for very short videos</li>
+  <li>Change: stop using negative values for slow speed</li>
+  <li>Change: also cycle "1x" when press arrow buttons for changing speed</li>
+</ul>
+
+<h3 id="performance">Performance</h3>
+<ul>
+  <li><strong>Fix: high CPU usage when idle</strong></li>
+  <li><strong>Fix: high CPU usage when open file from playlist</strong></li>
+  <li><strong>Fix: force using dedicated GPU when playing (allow using integrated GPUs)</strong></li>
+</ul>
+
+<h3 id="program-behavior">Program behavior</h3>
+<ul>
+  <li><strong>Add: Check update automatically</strong></li>
+  <li><strong>Add: An initial open file window (Optional, available in Preference-General-Behavior)</strong></li>
+  <li><strong>Add: option for whether keep window open when playback finished</strong></li>
+  <li><strong>Add: prevent sleeping / entering screen saver while playing</strong></li>
+  <li><strong>Fix: crash when mpv shuts down internally (support pressing 'q' to quit)</strong></li>
+  <li><strong>Fix: 80% of random crashs when open file from dock or Finder</strong></li>
+  <li><strong>Fix: recent files not remembered when open from dock or Finder</strong></li>
+  <li><strong>Fix: no alpha option in color panels</strong></li>
+  <li><strong>Fix: need to expand <code>~</code> in mpv config directory</strong></li>
+</ul>
+
+<h3 id="window">Window</h3>
+<ul>
+  <li>Change: better dragging performance on 10.11+</li>
+  <li><strong>Add: support dragging &amp; drop subtitle / video files in window to open them</strong></li>
+  <li><strong>Fix: floating on top will disable all standard buttons (traffic lights)</strong></li>
+  <li><strong>Fix: unable to enter fullscreen when floating on top</strong></li>
+  <li>Change: change shortcut for fullscreen to <code>Control+Command+F</code>.</li>
+  <li>Fix: video duration in OSC does not update in fullscreen</li>
+  <li>Add: synchronize mpv's fullscreen status with IINA's fullscreen (support pressing 'f' to enter fullscreen)</li>
+</ul>
+
+<h3 id="other">Other</h3>
+<ul>
+  <li>Fix: some observers never being removed</li>
+  <li>Fix: mpv_report_flip not being called correctly</li>
+</ul>
+
+<h3 id="project">Project</h3>
+<ul>
+  <li><strong>Add: nightly builds availeble from <a href="http://raw.mrx.im">http://raw.mrx.im</a>.</strong> It builds from <code>develop</code> branch so please don't even expect it will launches normally. It's not signed.</li>
+  <li>Add: add CONTRIBUTING.md</li>
+  <li>Fix: typos and grammar problems</li>
+  <li>Fix: trailing spaces</li>
+  <li>Change: update some config files</li>
+  <li>Change: refactor some util scripts</li>
+</ul>
+
+<h2 id="v001-jan-3-2017">v0.0.1 <em>Jan. 3, 2017</em></h2>
 
 <ul>
   <li>First release.</li>

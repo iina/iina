@@ -60,7 +60,7 @@ class PlaySliderCell: NSSliderCell {
     let slider = self.controlView as! NSSlider
     let bounds = super.barRect(flipped: flipped)
     let percentage = slider.doubleValue / (slider.maxValue - slider.minValue)
-    let pos = CGFloat(percentage) * bounds.width
+    let pos = min(CGFloat(percentage) * bounds.width, bounds.width - 1);
     let rect = super.knobRect(flipped: flipped)
     let flippedMultiplier = flipped ? CGFloat(-1) : CGFloat(1)
     return NSMakeRect(pos - flippedMultiplier * 0.5 * knobWidth, rect.origin.y, knobWidth, rect.height)

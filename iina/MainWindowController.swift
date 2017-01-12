@@ -660,11 +660,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     animationState = .willHide
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = 0.5
+      context.duration = 0.25
       fadeableViews.forEach { (v) in
-        // Set the fade animation duration
-        NSAnimationContext.current().duration = TimeInterval(0.25);
-        
         v?.animator().alphaValue = 0
       }
     }) {
@@ -788,6 +785,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     withStandardButtons { button in
       if let index = (self.fadeableViews.index {$0 === button}) {
         self.fadeableViews.remove(at: index)
+        
+        // Make sure the button is visible
+        button!.alphaValue = 1;
       }
     }
     // remove titlebar view from fade-able views

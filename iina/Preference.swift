@@ -35,6 +35,9 @@ struct Preference {
 
     /** Keep player window open on end of file / playlist. (bool) */
     static let keepOpenOnFileEnd = "keepOpenOnFileEnd"
+    
+    /** Open a choose file panel after opening (bool) */
+    static let openStartPanel = "openStartPanel"
 
     /** Resume from last position */
     // static let resumeLastPosition = "resumeLastPosition"
@@ -292,6 +295,7 @@ struct Preference {
     Key.fullScreenWhenOpen: false,
     Key.showChapterPos: false,
     Key.useMediaKeys: true,
+    Key.openStartPanel: false,
 
     Key.usePhysicalResolution: true,
     Key.resizeOnlyWhenManuallyOpenFile: true,

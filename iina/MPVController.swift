@@ -515,6 +515,10 @@ class MPVController: NSObject {
     playerCore.info.displayHeight = dheight == 0 ? height : dheight
     playerCore.info.videoDuration = VideoTime(duration)
     playerCore.info.videoPosition = VideoTime(pos)
+    if (ud.value(forKey: Preference.Key.softVolume) != nil) {
+      let realVolume = ud.integer(forKey: Preference.Key.softVolume);
+      playerCore.setVolume(realVolume);
+    }
     let filename = getString(MPVProperty.filename)
     playerCore.info.currentURL = URL(fileURLWithPath: filename ?? "")
     playerCore.fileLoaded()

@@ -547,6 +547,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {
+    // Set the appearance to match the theme so the titlebar matches the theme
+    switch(Preference.Theme(rawValue: ud.integer(forKey: Preference.Key.themeMaterial))!) {
+      case .dark, .ultraDark: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantDark);
+      case .light, .mediumLight: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
+    }
+    
     // show titlebar
     window!.titlebarAppearsTransparent = false
     window!.titleVisibility = .visible
@@ -558,6 +564,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
+    // Set back the window appearance
+    self.window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
+    
     // hide titlebar
     window!.titlebarAppearsTransparent = true
     window!.titleVisibility = .hidden
@@ -930,6 +939,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     [titleBarView, controlBar, osdVisualEffectView].forEach {
       $0?.material = material
       $0?.appearance = appearance
+    }
+    
+    if(isInFullScreen) {
+      window!.appearance = appearance;
     }
   }
 

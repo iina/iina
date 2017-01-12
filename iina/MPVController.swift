@@ -233,7 +233,7 @@ class MPVController: NSObject {
 
     //load keybinding
     let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)
-    var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["MPV Default"]
+    var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["IINA Default"]
     if let confFromUd = UserDefaults.standard.string(forKey: PK.currentInputConfigName) {
       if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
         inputConfPath = currentConfigFilePath
@@ -515,8 +515,9 @@ class MPVController: NSObject {
     playerCore.info.displayHeight = dheight == 0 ? height : dheight
     playerCore.info.videoDuration = VideoTime(duration)
     playerCore.info.videoPosition = VideoTime(pos)
-    let filename = getString(MPVProperty.filename)
-    playerCore.info.currentURL = URL(fileURLWithPath: filename ?? "")
+    if let path = getString(MPVProperty.path) {
+      playerCore.info.currentURL = URL(fileURLWithPath: path)
+    }
     playerCore.fileLoaded()
     fileLoaded = true
     // mpvResume()
@@ -592,6 +593,7 @@ class MPVController: NSObject {
     case MPVOption.Audio.volume:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         playerCore.info.volume = Int(data)
+        playerCore.syncUI(.volume)
         playerCore.sendOSD(.volume(Int(data)))
       }
 
@@ -665,6 +667,8 @@ class MPVController: NSObject {
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
 
     case MPVProperty.trackListCount:
+      playerCore.getTrackInfo()
+      playerCore.getSelectedTracks()
       NotificationCenter.default.post(Notification(name: Constants.Noti.tracklistChanged))
 
     case MPVProperty.vf:
@@ -711,7 +715,7 @@ class MPVController: NSObject {
   private var optionObservers: [String: OptionObserverInfo] = [:]
 
   private func setUserOption(_ key: String, type: UserOptionType, forName name: String, sync: Bool = true, transformer: OptionObserverInfo.Transformer? = nil) {
-    let code: Int32
+    var code: Int32 = 0
 
     switch type {
     case .int:
@@ -735,6 +739,11 @@ class MPVController: NSObject {
     case .color:
       let value = ud.mpvColor(forKey: key)
       code = mpv_set_option_string(mpv, name, value)
+      // Random error here (perhaps a Swift or mpv one), so set it twice
+      // 「没有什么是 set 不了的；如果有，那就 set 两次」
+      if code < 0 {
+        code = mpv_set_option_string(mpv, name, value)
+      }
 
     case .other:
       guard let tr = transformer else {

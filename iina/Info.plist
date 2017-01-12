@@ -158,17 +158,17 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.1</string>
+	<string>0.0.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.video</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2016, Collider LI. All rights reserved.</string>
+	<string>Released under GPLv3.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

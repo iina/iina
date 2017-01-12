@@ -14,7 +14,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60
 
-  lazy var playerCore = PlayerCore.shared
+  weak var playerCore: PlayerCore! = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
   lazy var sizingTouchBarTextField: NSTextField = {
     return NSTextField()
@@ -250,7 +250,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // add notification observers
-    let fsObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.fsChanged, object: nil, queue: .main) { _ in
+    let fsObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.fsChanged, object: nil, queue: .main) { [unowned self] _ in
       let fs = self.playerCore.mpvController.getFlag(MPVOption.Window.fullscreen)
       if fs != self.isInFullScreen {
         self.toggleWindowFullScreen()
@@ -1137,8 +1137,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         maxPressure = max(maxPressure, sender.intValue)
       }
+      arrowButtonAction(left: true)
+    } else {
+      // trigger action only when released button
+      if sender.intValue == 0 {
+        arrowButtonAction(left: true)
+      }
     }
-    arrowButtonAction(left: true)
   }
 
   @IBAction func rightButtonAction(_ sender: NSButton) {
@@ -1165,8 +1170,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         maxPressure = max(maxPressure, sender.intValue)
       }
+      arrowButtonAction(left: false)
+    } else {
+      // trigger action only when released button
+      if sender.intValue == 0 {
+        arrowButtonAction(left: false)
+      }
     }
-    arrowButtonAction(left: false)
   }
   
   /** handle action of both left and right arrow button */

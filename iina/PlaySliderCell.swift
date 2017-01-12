@@ -79,7 +79,7 @@ class PlaySliderCell: NSSliderCell {
     
     if info.isNetworkResource, info.cacheTime != 0, let duration = info.videoDuration {
       let pos = Double(info.cacheTime) / Double(duration.second) * 100
-      progress = round(rect.width * CGFloat(pos / (slider.maxValue - slider.minValue)));
+      progress = round(rect.width * CGFloat(pos / (slider.maxValue - slider.minValue))) + 2;
     } else {
       progress = knobPos;
     }

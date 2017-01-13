@@ -124,7 +124,8 @@ class KeyCodeHelper {
     0x7B: ("LEFT", nil),
     0x7C: ("RIGHT", nil),
     0x7D: ("DOWN", nil),
-    0x7E: ("UP", nil)
+    0x7E: ("UP", nil),
+    0x7F: ("POWER", nil) // This should be KeyCode::PC_POWER.
   ]
 
   static func canBeModifiedByShift(_ key: UInt16) -> Bool {

@@ -120,12 +120,6 @@ extension NSRect {
 
   func makeLocate(in biggerRect: NSRect) -> NSRect {
     var newX = origin.x, newY = origin.y
-    if newX < 0 {
-      newX = 0
-    }
-    if newY < 0 {
-      newY = 0
-    }
     if newX + size.width > biggerRect.width {
       newX = biggerRect.width - size.width
     }

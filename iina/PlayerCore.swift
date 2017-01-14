@@ -25,8 +25,6 @@ class PlayerCore: NSObject {
 
   var syncPlayTimeTimer: Timer?
 
-  var statusPaused: Bool = false
-
   var displayOSD: Bool = true
 
   var isMpvTerminated: Bool = false

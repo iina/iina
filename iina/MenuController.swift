@@ -48,6 +48,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var smallerSize: NSMenuItem!
   @IBOutlet weak var fitToScreen: NSMenuItem!
   @IBOutlet weak var fullScreen: NSMenuItem!
+  @IBOutlet weak var pictureInPicture: NSMenuItem!
   @IBOutlet weak var alwaysOnTop: NSMenuItem!
   @IBOutlet weak var aspectMenu: NSMenu!
   @IBOutlet weak var cropMenu: NSMenu!
@@ -139,8 +140,9 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
+    pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
-
+    
     // -- aspect
     var aspectList = AppData.aspects
     aspectList.insert("Default", at: 0)

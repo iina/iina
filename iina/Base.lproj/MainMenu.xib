@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12100" systemVersion="16E144f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12100"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -184,6 +184,9 @@
                             <menuItem title="Smaller Size" tag="10" keyEquivalent="-" id="ZOF-MG-6II"/>
                             <menuItem isSeparatorItem="YES" id="F7U-cD-2ou"/>
                             <menuItem title="Enter Full Screen" keyEquivalent="f" id="6Eq-ni-6hG">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Enter Picture in Picture" keyEquivalent="p" id="mND-N8-z6o">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                             </menuItem>
                             <menuItem title="Float on Top" keyEquivalent="t" id="wex-rX-PcY">
@@ -467,6 +470,7 @@
                 <outlet property="normalSizeRetina" destination="c1x-bx-69F" id="S22-F3-Ks9"/>
                 <outlet property="open" destination="IAo-SY-fd9" id="fW9-2A-V4F"/>
                 <outlet property="pause" destination="UOE-MJ-8ku" id="74t-ZU-dXD"/>
+                <outlet property="pictureInPicture" destination="mND-N8-z6o" id="mrn-ku-bqH"/>
                 <outlet property="playbackMenu" destination="GEO-Iw-cKr" id="Ji3-Wv-EE5"/>
                 <outlet property="playlist" destination="Gi5-1S-RQB" id="oMH-9E-A8A"/>
                 <outlet property="playlistMenu" destination="aXa-aM-Jaq" id="Nkw-YD-NAi"/>

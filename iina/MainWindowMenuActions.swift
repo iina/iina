@@ -205,6 +205,15 @@ extension MainWindowController {
     playerCore.info.isAlwaysOntop = !playerCore.info.isAlwaysOntop
     setWindowFloatingOnTop(playerCore.info.isAlwaysOntop)
   }
+  
+  @IBAction func menuTogglePIP(_ sender: NSMenuItem) {
+    if !isInPIP {
+      enterPIP()
+    } else {
+      exitPIP(manually: true)
+    }
+    sender.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
+  }
 
   @IBAction func menuToggleFullScreen(_ sender: NSMenuItem) {
     toggleWindowFullScreen()

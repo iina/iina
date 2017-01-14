@@ -125,6 +125,7 @@ class PlayerCore: NSObject {
         }
       }
       mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
+      statusPaused = setPause
     } else {
       if (info.isPaused) {
         if mpvController.getFlag(MPVProperty.eofReached) {
@@ -135,6 +136,7 @@ class PlayerCore: NSObject {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, true)
         setSpeed(1)
       }
+      statusPaused = !statusPaused
     }
   }
 

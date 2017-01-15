@@ -75,8 +75,7 @@ class CropSettingsViewController: NSViewController {
     }
   }
 
-  @IBAction func cancelBtnAction(_ sender: AnyObject)
-  {
+  @IBAction func cancelBtnAction(_ sender: AnyObject) {
     mainWindow.exitInteractiveMode{
       return
     }

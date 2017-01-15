@@ -1,29 +1,66 @@
-/* 
-  String_ui.strings
-  iina
+/*
+ String_ui.strings
+ iina
+ 
+ Created by lhc on 3/1/2017.
+ Copyright © 2017 lhc. All rights reserved.
+ */
 
-  Created by lhc on 3/1/2017.
-  Copyright © 2017 lhc. All rights reserved.
-*/
+// Common
+"on" = "On";
+"off" = "Off";
 
-"playlist_cap" = "播放列表";
+// PlaylistViewController.swift
+"playlist.playlist_cap" = "播放列表";
+"playlist.chapter_cap" = "章节";
 
-"chapter_cap" = "章节";
+// MainWindowController.swift
+"main.buffering_indicator" = "缓冲中... %@%%";
+
+// QuickSettingViewController.swift
+"quicksetting.aspect_item.Default" = "默认";
+"quicksetting.crop_item.None" = "关闭";
+
+// OSDMessage.swift
+"osd.pause" = "暂停";
+"osd.resume" = "继续";
+"osd.volume" = "音量：%i";
+"osd.speed" = "速度：%.2fx";
+"osd.aspect" = "长宽比：%@";
+"osd.crop" = "剪切：%@";
+"osd.rotate" = "旋转：%i";
+"osd.deinterlace" = "反交错：%@";
+"osd.audio_delay.nodelay" = "音频延迟：无延迟";
+"osd.audio_delay.later" = "音频延迟：延迟 %.2f 秒";
+"osd.audio_delay.earlier" = "音频延迟：提前 %.2f 秒";
+"osd.subtitle_delay.nodelay" = "字幕延迟：无延迟";
+"osd.subtitle_delay.later" = "字幕延迟：延迟 %.2f 秒";
+"osd.subtitle_delay.earlier" = "字幕延迟：提前 %.2f 秒";
+"osd.subtitle_pos" = "字幕位置：%f";
+"osd.mute" = "静音";
+"osd.unmute" = "取消静音";
+"osd.screenshot" = "快照已截取";
+"osd.abloop.a" = "AB循环：A";
+"osd.abloop.b" = "AB循环：B";
+"osd.abloop.clear" = "AB循环：清除";
+"osd.stop" = "停止";
+"osd.chapter" = "章节：%@";
+"osd.subtitle_scale" = "字幕缩放：%.2fx";
+"osd.add_to_playlist" = "添加了 %i 个文件到播放列表";
+"osd.clear_playlist" = "清除播放列表";
+"osd.graphic_equalizer.contrast" = "对比度：%i";
+"osd.graphic_equalizer.gamma" = "反差：%i";
+"osd.graphic_equalizer.hue" = "色调：%i";
+"osd.graphic_equalizer.saturation" = "饱和度：%i";
+"osd.graphic_equalizer.brightness" = "亮度：%i";
 
 "update.title_update_found" = "检测到新版本";
-
 "update.title_no_update" = "没有新版本";
-
 "update.title_error" = "错误";
-
-"update.update_found" = "检测到更新。由于 IINA 仍处于 Alpha 测试中，我们建议你保持最新版本。请去网站或者 Github 下载：";
-
-"update.no_update" = "你正在运行的是最新版本.";
-
+"update.update_found" = "检测到更新。由于 IINA 仍处于 Alpha 测试中，我们建议您保持最新版本。请去网站或者 Github 下载：";
+"update.no_update" = "您正在运行的是最新版本。";
 "update.check_failed" = "检查更新失败。你的 IINA 版本很可能太老了，请去网站或者 Github 查看最新信息：";
-
 "update.new_version" = "新版本：";
-
 "update.dl_from_website" = "前往网站";
-
 "update.dl_from_github" = "前往 Github";
+

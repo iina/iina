@@ -87,6 +87,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return .terminateNow
   }
 
+  func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows
+    flag: Bool) -> Bool {
+    if !flag {
+      self.openFile(sender)
+    }
+    return true
+  }
+
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
     if !isReady {
       UserDefaults.standard.register(defaults: Preference.defaultPreference)

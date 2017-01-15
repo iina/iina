@@ -78,18 +78,24 @@ class PlayerCore: NSObject {
     videoView.mpvGLContext = OpaquePointer(mpvGLContext)
   }
 
-  // Terminate mpv
-  func terminateMPV(sendQuit: Bool = true) {
-    guard !isMpvTerminated else { return }
-    syncPlayTimeTimer?.invalidate()
+  // unload main window video view
+  func unloadMainWindowVideoView() {
     if mainWindow.isWindowLoaded {
       mainWindow.videoView.uninit()
       mainWindow.videoView.clearGLContext()
     }
-    if sendQuit {
-      mpvController.mpvQuit()
-    }
+  }
+
+  // Terminate mpv
+  func terminateMPV() {
+    guard !isMpvTerminated else { return }
+    mpvController.mpvQuit()
     isMpvTerminated = true
+  }
+
+  // invalidate timer
+  func invalidateTimer() {
+    syncPlayTimeTimer?.invalidate()
   }
 
   // MARK: - MPV commands
@@ -120,7 +126,7 @@ class PlayerCore: NSObject {
 
   func stop() {
     mpvController.command(.stop)
-    syncPlayTimeTimer?.invalidate()
+    invalidateTimer()
   }
 
   func toogleMute(_ set: Bool?) {
@@ -468,7 +474,7 @@ class PlayerCore: NSObject {
       Utility.fatal("Cannot get video width and height")
       return
     }
-    syncPlayTimeTimer?.invalidate()
+    invalidateTimer()
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     DispatchQueue.main.sync {

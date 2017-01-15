@@ -398,15 +398,13 @@ class MPVController: NSObject {
 
     switch eventId {
     case MPV_EVENT_SHUTDOWN:
-      if playerCore.isMpvTerminated {
-        // quit from IINA, e.g. Cmd+Q
-        mpv_detach_destroy(mpv)
-        mpv = nil
-      } else {
-        // quit by mpv, e.g. press 'q'
-        playerCore.terminateMPV(sendQuit: false)
-        mpv_detach_destroy(mpv)
-        mpv = nil
+      let quitByMPV = !playerCore.isMpvTerminated
+      playerCore.invalidateTimer()
+      mpv_detach_destroy(mpv)
+      mpv = nil
+      playerCore.unloadMainWindowVideoView()
+      if quitByMPV {
+        playerCore.isMpvTerminated = true
         NSApp.terminate(nil)
       }
 

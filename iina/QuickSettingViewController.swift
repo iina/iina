@@ -135,8 +135,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   private func updateControlsState() {
     // Video
-    aspectSegment.selectSegment(withLabel: NSLocalizedString("quicksetting.aspect_item." + playerCore.info.unsureAspect, comment: "Default"))
-    cropSegment.selectSegment(withLabel: NSLocalizedString("quicksetting.crop_item." + playerCore.info.unsureCrop, comment: "None"))
+    aspectSegment.selectSegment(withLabel: playerCore.info.unsureAspect)
+    cropSegment.selectSegment(withLabel: playerCore.info.unsureCrop)
     rotateSegment.selectSegment(withTag: AppData.rotations.index(of: playerCore.info.rotation) ?? -1)
     customSpeedTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
     deinterlaceCheckBtn.state = playerCore.info.deinterlace ? NSOnState : NSOffState

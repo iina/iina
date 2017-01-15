@@ -257,6 +257,7 @@
 		845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVTrack.swift; sourceTree = "<group>"; };
 		845AC09D1E1AE6C10080B614 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		845AC09F1E1AE6CB0080B614 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		845AC0A01E1AE71B0080B614 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		845FB0C61D39462E00C011E0 /* ControlBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
 		8460FBA71D6497490081841B /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
@@ -352,7 +353,6 @@
 		867483705008F086E07B0A6B /* Pods_iina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9E62A906F1FDCDF8DA03EA /* Pods-iinaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iinaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iinaTests/Pods-iinaTests.release.xcconfig"; sourceTree = "<group>"; };
 		A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.debug.xcconfig"; sourceTree = "<group>"; };
-		D441AA731E222D6600D750E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -704,9 +704,8 @@
 				TargetAttributes = {
 					84EB1ED51D2F51D3004FA5A1 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = T5BZKMS57H;
+						DevelopmentTeam = 67CQ77V27R;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -1048,7 +1047,7 @@
 			children = (
 				845AC09D1E1AE6C10080B614 /* Base */,
 				845AC09F1E1AE6CB0080B614 /* zh-Hans */,
-				D441AA731E222D6600D750E9 /* en */,
+				845AC0A01E1AE71B0080B614 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1167,7 +1166,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = T5BZKMS57H;
+				DEVELOPMENT_TEAM = 67CQ77V27R;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/libmpv/include";
 				INFOPLIST_FILE = iina/Info.plist;
 				INSTALL_PATH = /Application;
@@ -1195,7 +1194,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = T5BZKMS57H;
+				DEVELOPMENT_TEAM = 67CQ77V27R;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/libmpv/include";
 				INFOPLIST_FILE = iina/Info.plist;
 				INSTALL_PATH = /Application;

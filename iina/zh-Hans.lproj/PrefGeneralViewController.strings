@@ -67,3 +67,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
 "uQR-Fx-oEm.title" = "行为:";
+
+/* Class = "NSButtonCell"; title = "Keep window open when playback finished"; ObjectID = "2iM-j7-AzQ"; */
+"2iM-j7-AzQ.title" = "播放完成后保持窗口打开";
+
+/* Class = "NSButtonCell"; title = "Open a choose file panel after starting"; ObjectID = "IYU-9y-fBL"; */
+"IYU-9y-fBL.title" = "启动后显示选择文件界面";

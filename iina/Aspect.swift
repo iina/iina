@@ -45,7 +45,7 @@ class Aspect: NSObject {
   }
 
   init?(string: String) {
-    if AppData.aspectRegex.matches(string) {
+    if Regex.aspect.matches(string) {
       let wh = string.components(separatedBy: ":")
       if let cropW = Float(wh[0]), let cropH = Float(wh[1]) {
         self.size = NSMakeSize(CGFloat(cropW), CGFloat(cropH))

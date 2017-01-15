@@ -121,6 +121,21 @@ class Utility {
     }
   }
 
+  static func getFilePath(Configs userConfigs: [String: Any]!, forConfig conf: String, showAlert: Bool = true) -> String? {
+    
+    // if is default config
+    if let dv = PrefKeyBindingViewController.defaultConfigs[conf] {
+      return dv
+    } else if let uv = userConfigs[conf] as? String {
+      return uv
+    } else {
+      if showAlert {
+        Utility.showAlert(message: "Cannot find config file location!")
+      }
+      return nil
+    }
+  }
+  
   static let appSupportDirUrl: URL = {
     // get path
     let asPath = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
@@ -149,32 +164,15 @@ class Utility {
     return url
   }()
 
+  static let tempDirURL: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+
+
   // MARK: - Util functions
 
   static func swap<T>(_ a: inout T, _ b: inout T) {
     let temp = a
     a = b
     b = temp
-  }
-
-  static func toRealSpeed(fromDisplaySpeed speed: Double) -> Double{
-    var realSpeed = speed
-    if realSpeed == 0 {
-      realSpeed = 1
-    } else if realSpeed < 0 {
-      realSpeed = -1 / realSpeed
-    }
-    return realSpeed
-  }
-
-  static func toDisplaySpeed(fromRealSpeed realSpeed: Double) -> Double {
-    var speed = realSpeed
-    if realSpeed == 1 {
-      speed = 0
-    } else if realSpeed < 1 {
-      speed = -1 / speed
-    }
-    return speed
   }
 
   static func toRealSubScale(fromDisplaySubScale scale: Double) -> Double {
@@ -223,26 +221,6 @@ class Utility {
   }
 
   // MARK: - Util classes
-
-  class Regex {
-    var regex: NSRegularExpression?
-
-    init (_ pattern: String) {
-      if let exp = try? NSRegularExpression(pattern: pattern, options: []) {
-        self.regex = exp
-      } else {
-        Utility.fatal("Cannot create regex \(pattern)")
-      }
-    }
-
-    func matches(_ str: String) -> Bool {
-      if let matches = regex?.numberOfMatches(in: str, options: [], range: NSMakeRange(0, str.characters.count)) {
-        return matches > 0
-      } else {
-        return false
-      }
-    }
-  }
 
   class FontAttributes {
     struct AttributeType {

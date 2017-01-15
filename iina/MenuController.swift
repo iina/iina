@@ -86,6 +86,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var resetSubDelay: NSMenuItem!
   @IBOutlet weak var encodingMenu: NSMenu!
   @IBOutlet weak var subFont: NSMenuItem!
+  @IBOutlet weak var findOnlineSub: NSMenuItem!
   // Window
   @IBOutlet weak var customTouchBar: NSMenuItem!
   @IBOutlet weak var inspector: NSMenuItem!
@@ -136,14 +137,14 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- aspect
     var aspectList = AppData.aspects
-    aspectList.insert("Default", at: 0)
+    aspectList.insert(NSLocalizedString("quicksetting.aspect_item." + PlayerCore.shared.info.unsureAspect, comment: "Default"), at: 0)
     bind(menu: aspectMenu, withOptions: aspectList, objects: nil, objectMap: nil, action: #selector(MainWindowController.menuChangeAspect(_:))) {
       PlayerCore.shared.info.unsureAspect == $0.representedObject as? String
     }
 
     // -- crop
     var cropList = AppData.aspects
-    cropList.insert("None", at: 0)
+    cropList.insert(NSLocalizedString("quicksetting.crop_item." + PlayerCore.shared.info.unsureCrop, comment: "None"), at: 0)
     bind(menu: cropMenu, withOptions: cropList, objects: nil, objectMap: nil, action: #selector(MainWindowController.menuChangeCrop(_:))) {
       PlayerCore.shared.info.unsureCrop == $0.representedObject as? String
     }
@@ -195,6 +196,8 @@ class MenuController: NSObject, NSMenuDelegate {
     loadExternalSub.action = #selector(MainWindowController.menuLoadExternalSub(_:))
     subTrackMenu.delegate = self
     secondSubTrackMenu.delegate = self
+
+    findOnlineSub.action = #selector(MainWindowController.menuFindOnlineSub(_:))
 
     // - text size
     [increaseTextSize, decreaseTextSize, resetTextSize].forEach {

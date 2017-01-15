@@ -25,7 +25,7 @@
 "osd.pause" = "Paused";
 "osd.resume" = "Resumed";
 "osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %.2f";
+"osd.speed" = "Speed: %.2fx";
 "osd.aspect" = "Aspect Ratio: %@";
 "osd.crop" = "Crop: %@";
 "osd.rotate" = "Rotate: %i";
@@ -53,3 +53,13 @@
 "osd.graphic_equalizer.hue" = "Hue: %i";
 "osd.graphic_equalizer.saturation" = "Saturation: %i";
 "osd.graphic_equalizer.brightness" = "Brightness: %i";
+
+"update.title_update_found" = "Update Found";
+"update.title_no_update" = "No Update";
+"update.title_error" = "Error";
+"update.update_found" = "New version detected! IINA is still in alpha, so you are recommended to stay with the latest version. Please download from website or github:";
+"update.no_update" = "You are running the latest version.";
+"update.check_failed" = "Failed to check updates. You are probably running a too old version. Please check the website or github.";
+"update.new_version" = "New version:";
+"update.dl_from_website" = "Go to Website";
+"update.dl_from_github" = "Go to Github";

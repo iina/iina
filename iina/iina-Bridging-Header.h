@@ -4,3 +4,5 @@
 #import <stdlib.h>
 #import "FixedFontManager.h"
 #import <MASPreferences/MASPreferencesViewController.h>
+
+#import <CommonCrypto/CommonCrypto.h>

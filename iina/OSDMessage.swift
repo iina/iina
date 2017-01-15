@@ -37,6 +37,11 @@ enum OSDMessage {
   case brightness(Int)
   case gamma(Int)
 
+  case startFindingSub
+  case foundSub(Int)
+  case downloadedSub
+  case networkError
+
 
   func message() -> String {
     switch self {
@@ -50,7 +55,7 @@ enum OSDMessage {
       return String(format: NSLocalizedString("osd.volume", comment: "Volume: %i"), value)
       
     case .speed(let value):
-      return String(format: NSLocalizedString("osd.speed", comment: "Speed: %.2f"), value)
+      return String(format: NSLocalizedString("osd.speed", comment: "Speed: %.2fx"), value)
       
     case .aspect(let value):
       return String(format: NSLocalizedString("osd.aspect", comment: "Aspect Ratio: %@"),value)
@@ -70,14 +75,14 @@ enum OSDMessage {
       } else {
         return value > 0 ? String(format: NSLocalizedString("osd.audio_delay.later", comment: "Audio Delay: %fs Later"),abs(value)) : String(format: NSLocalizedString("osd.audio_delay.earlier", comment: "Audio Delay: %fs Earlier"), abs(value))
       }
-
+      
     case .subDelay(let value):
       if value == 0 {
         return NSLocalizedString("osd.subtitle_delay.nodelay", comment: "Subtitle Delay: No Delay")
       } else {
                 return value > 0 ? String(format: NSLocalizedString("osd.subtitle_delay.later", comment: "Subtitle Delay: %fs Later"),abs(value)) : String(format: NSLocalizedString("osd.subtitle_delay.earlier", comment: "Subtitle Delay: %fs Earlier"), abs(value))
       }
-
+      
     case .subPos(let value):
       return String(format: NSLocalizedString("osd.subtitle_pos", comment: "Subtitle Position: %f"), value)
       
@@ -89,7 +94,7 @@ enum OSDMessage {
       
     case .screenShot:
       return NSLocalizedString("osd.screenshot", comment: "Screenshot captured")
-
+      
     case .abLoop(let value):
       if value == 1 {
         return NSLocalizedString("osd.abloop.a", comment: "AB-Loop: A")
@@ -98,7 +103,7 @@ enum OSDMessage {
       } else {
         return NSLocalizedString("osd.abloop.clear", comment: "AB-Loop: Cleared")
       }
-
+      
     case .stop:
       return NSLocalizedString("osd.stop", comment: "Stopped")
       
@@ -128,6 +133,19 @@ enum OSDMessage {
       
     case .brightness(let value):
       return String(format: NSLocalizedString("osd.graphic_equalizer.brightness", comment: "Brightness: %i"), value)
+      
+    case .startFindingSub:
+      return "Find online subtitles..."
+      
+    case .foundSub(let count):
+      return count == 0 ? "No subtitle found." : "\(count) subtitle(s) found. Downloading..."
+      
+    case .downloadedSub:
+      return "Subtitle downloaded"
+      
+    case .networkError:
+      return "Network error"
+      
     }
   }
 }

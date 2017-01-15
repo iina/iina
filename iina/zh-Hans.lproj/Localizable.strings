@@ -25,7 +25,7 @@
 "osd.pause" = "暂停";
 "osd.resume" = "继续";
 "osd.volume" = "音量：%i";
-"osd.speed" = "速度：%.2f";
+"osd.speed" = "速度：%.2fx";
 "osd.aspect" = "长宽比：%@";
 "osd.crop" = "剪切：%@";
 "osd.rotate" = "旋转：%i";
@@ -53,3 +53,14 @@
 "osd.graphic_equalizer.hue" = "色调：%i";
 "osd.graphic_equalizer.saturation" = "饱和度：%i";
 "osd.graphic_equalizer.brightness" = "亮度：%i";
+
+"update.title_update_found" = "检测到新版本";
+"update.title_no_update" = "没有新版本";
+"update.title_error" = "错误";
+"update.update_found" = "检测到更新。由于 IINA 仍处于 Alpha 测试中，我们建议您保持最新版本。请去网站或者 Github 下载：";
+"update.no_update" = "您正在运行的是最新版本。";
+"update.check_failed" = "检查更新失败。你的 IINA 版本很可能太老了，请去网站或者 Github 查看最新信息：";
+"update.new_version" = "新版本：";
+"update.dl_from_website" = "前往网站";
+"update.dl_from_github" = "前往 Github";
+

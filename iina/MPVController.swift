@@ -38,6 +38,8 @@ class MPVController: NSObject {
 
   var receivedEndFileWhileLoading: Bool = false
 
+  var fileLoaded: Bool = false
+
   let observeProperties: [String: mpv_format] = [
     MPVProperty.trackListCount: MPV_FORMAT_INT64,
     MPVProperty.vf: MPV_FORMAT_NONE,
@@ -55,8 +57,15 @@ class MPVController: NSObject {
     MPVOption.Equalizer.brightness: MPV_FORMAT_INT64,
     MPVOption.Equalizer.gamma: MPV_FORMAT_INT64,
     MPVOption.Equalizer.hue: MPV_FORMAT_INT64,
-    MPVOption.Equalizer.saturation: MPV_FORMAT_INT64
+    MPVOption.Equalizer.saturation: MPV_FORMAT_INT64,
+    MPVOption.Window.fullscreen: MPV_FORMAT_FLAG
   ]
+
+  deinit {
+    optionObservers.forEach { (k, v) in
+      ud.removeObserver(self, forKeyPath: k)
+    }
+  }
 
   /**
    Init the mpv context, set options
@@ -114,6 +123,8 @@ class MPVController: NSObject {
     setUserOption(PK.screenshotTemplate, type: .string, forName: MPVOption.Screenshot.screenshotTemplate)
 
     setUserOption(PK.useMediaKeys, type: .bool, forName: MPVOption.Input.inputMediaKeys)
+
+    setUserOption(PK.keepOpenOnFileEnd, type: .bool, forName: MPVOption.Window.keepOpen)
 
     // - Codec
 
@@ -220,9 +231,15 @@ class MPVController: NSObject {
     let scriptPath = Bundle.main.path(forResource: "autoload", ofType: "lua", inDirectory: "scripts")!
     chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, scriptPath))
 
-    let inputConfPath = Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!
+    //load keybinding
+    let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)
+    var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["IINA Default"]
+    if let confFromUd = UserDefaults.standard.string(forKey: PK.currentInputConfigName) {
+      if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
+        inputConfPath = currentConfigFilePath
+      }
+    }
     chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputConf, inputConfPath))
-
     // Receive log messages at warn level.
     chkErr(mpv_request_log_messages(mpv, "warn"))
 
@@ -461,6 +478,9 @@ class MPVController: NSObject {
         playerCore.info.currentURL = nil
         playerCore.info.isNetworkResource = false
       }
+      if fileLoaded {
+        playerCore.closeMainWindow()
+      }
       receivedEndFileWhileLoading = false
       break
 
@@ -487,17 +507,19 @@ class MPVController: NSObject {
     let height = getInt(MPVProperty.height)
     let dwidth = getInt(MPVProperty.dwidth)
     let dheight = getInt(MPVProperty.dheight)
-    let duration = getInt(MPVProperty.duration)
-    let pos = getInt(MPVProperty.timePos)
+    let duration = getDouble(MPVProperty.duration)
+    let pos = getDouble(MPVProperty.timePos)
     playerCore.info.videoHeight = height
     playerCore.info.videoWidth = width
     playerCore.info.displayWidth = dwidth == 0 ? width : dwidth
     playerCore.info.displayHeight = dheight == 0 ? height : dheight
     playerCore.info.videoDuration = VideoTime(duration)
     playerCore.info.videoPosition = VideoTime(pos)
-    let filename = getString(MPVProperty.filename)
-    playerCore.info.currentURL = URL(fileURLWithPath: filename ?? "")
+    if let path = getString(MPVProperty.path) {
+      playerCore.info.currentURL = URL(fileURLWithPath: path)
+    }
     playerCore.fileLoaded()
+    fileLoaded = true
     // mpvResume()
     if !ud.bool(forKey: PK.pauseWhenOpen) {
       setFlag(MPVOption.PlaybackControl.pause, false)
@@ -571,6 +593,7 @@ class MPVController: NSObject {
     case MPVOption.Audio.volume:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         playerCore.info.volume = Int(data)
+        playerCore.syncUI(.volume)
         playerCore.sendOSD(.volume(Int(data)))
       }
 
@@ -600,8 +623,7 @@ class MPVController: NSObject {
 
     case MPVOption.PlaybackControl.speed:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        let displaySpeed = Utility.toDisplaySpeed(fromRealSpeed: data)
-        playerCore.sendOSD(.speed(displaySpeed))
+        playerCore.sendOSD(.speed(data))
       }
 
     case MPVOption.Equalizer.contrast:
@@ -645,6 +667,8 @@ class MPVController: NSObject {
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
 
     case MPVProperty.trackListCount:
+      playerCore.getTrackInfo()
+      playerCore.getSelectedTracks()
       NotificationCenter.default.post(Notification(name: Constants.Noti.tracklistChanged))
 
     case MPVProperty.vf:
@@ -652,6 +676,9 @@ class MPVController: NSObject {
 
     case MPVProperty.af:
       NotificationCenter.default.post(Notification(name: Constants.Noti.afChanged))
+
+    case MPVOption.Window.fullscreen:
+      NotificationCenter.default.post(Notification(name: Constants.Noti.fsChanged))
 
     // ignore following
 
@@ -688,7 +715,7 @@ class MPVController: NSObject {
   private var optionObservers: [String: OptionObserverInfo] = [:]
 
   private func setUserOption(_ key: String, type: UserOptionType, forName name: String, sync: Bool = true, transformer: OptionObserverInfo.Transformer? = nil) {
-    let code: Int32
+    var code: Int32 = 0
 
     switch type {
     case .int:
@@ -712,6 +739,11 @@ class MPVController: NSObject {
     case .color:
       let value = ud.mpvColor(forKey: key)
       code = mpv_set_option_string(mpv, name, value)
+      // Random error here (perhaps a Swift or mpv one), so set it twice
+      // 「没有什么是 set 不了的；如果有，那就 set 两次」
+      if code < 0 {
+        code = mpv_set_option_string(mpv, name, value)
+      }
 
     case .other:
       guard let tr = transformer else {

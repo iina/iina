@@ -200,21 +200,12 @@ extension MainWindowController {
   }
 
   @IBAction func menuAlwaysOnTop(_ sender: NSMenuItem) {
-    guard let w = window else { return }
-    if playerCore.info.isAlwaysOntop {
-      w.level = Int(CGWindowLevelForKey(.baseWindow))
-      w.level = Int(CGWindowLevelForKey(.normalWindow))
-      playerCore.info.isAlwaysOntop = false
-    } else {
-      w.level = Int(CGWindowLevelForKey(.floatingWindow))
-      w.level = Int(CGWindowLevelForKey(.maximumWindow))
-      playerCore.info.isAlwaysOntop = true
-    }
+    playerCore.info.isAlwaysOntop = !playerCore.info.isAlwaysOntop
+    setWindowFloatingOntop(playerCore.info.isAlwaysOntop)
   }
 
   @IBAction func menuToggleFullScreen(_ sender: NSMenuItem) {
-    guard let w = window else { return }
-    w.toggleFullScreen(sender)
+    toggleWindowFullScreen()
     sender.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
   }
 
@@ -222,7 +213,6 @@ extension MainWindowController {
     if let volumeDelta = sender.representedObject as? Int {
       let newVolume = volumeDelta + playerCore.info.volume
       playerCore.setVolume(newVolume)
-      volumeSlider.integerValue = newVolume
     } else {
       Utility.log("sender.representedObject is not int in menuChangeVolume()")
     }
@@ -230,7 +220,6 @@ extension MainWindowController {
 
   @IBAction func menuToggleMute(_ sender: NSMenuItem) {
     playerCore.toogleMute(nil)
-    updateVolume()
   }
 
   @IBAction func menuChangeAudioDelay(_ sender: NSMenuItem) {
@@ -292,6 +281,23 @@ extension MainWindowController {
       self.playerCore.setSubFont($0 ?? "")
     }
 
+  }
+
+  @IBAction func menuFindOnlineSub(_ sender: NSMenuItem) {
+    guard let url = playerCore.info.currentURL else { return }
+    displayOSD(.startFindingSub)
+    OnlineSubtitle.getSub(forFile: url) { subtitles in
+      // send osd in main thread
+      self.playerCore.sendOSD(.foundSub(subtitles.count))
+      // download them
+      for sub in subtitles {
+        sub.download { url in
+          Utility.log("Saved subtitle to \(url.path)")
+          self.playerCore.loadExternalSubFile(url)
+          self.playerCore.sendOSD(.downloadedSub)
+        }
+      }
+    }
   }
 
   @IBAction func menuShowInspector(_ sender: AnyObject) {

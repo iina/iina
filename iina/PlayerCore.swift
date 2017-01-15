@@ -17,6 +17,10 @@ class PlayerCore: NSObject {
   lazy var mainWindow: MainWindowController = MainWindowController()
   lazy var mpvController: MPVController = MPVController()
 
+  let supportedSubtitleFormat: [String] = ["utf", "utf8", "utf-8", "idx", "sub", "srt",
+                                           "smi", "rt", "txt", "ssa", "aqt", "jss",
+                                           "js", "ass", "mks", "vtt", "sup"]
+
   lazy var info: PlaybackInfo = PlaybackInfo()
 
   var syncPlayTimeTimer: Timer?
@@ -93,16 +97,23 @@ class PlayerCore: NSObject {
   /** Pause / resume. Reset speed to 0 when pause. */
   func togglePause(_ set: Bool?) {
     if let setPause = set {
-      mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
       if setPause {
-        setSpeed(0)
+        setSpeed(1)
+      } else {
+        if mpvController.getFlag(MPVProperty.eofReached) {
+          seek(absoluteSecond: 0)
+        }
       }
+      mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
     } else {
       if (info.isPaused) {
+        if mpvController.getFlag(MPVProperty.eofReached) {
+          seek(absoluteSecond: 0)
+        }
         mpvController.setFlag(MPVOption.PlaybackControl.pause, false)
       } else {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, true)
-        setSpeed(0)
+        setSpeed(1)
       }
     }
   }
@@ -202,15 +213,14 @@ class PlayerCore: NSObject {
     getSelectedTracks()
   }
 
-  /** Set speed. A negative speed -x means slow by x times */
+  /** Set speed. */
   func setSpeed(_ speed: Double) {
-    let realSpeed = Utility.toRealSpeed(fromDisplaySpeed: speed)
-    mpvController.setDouble(MPVOption.PlaybackControl.speed, realSpeed)
-    info.playSpeed = realSpeed
+    mpvController.setDouble(MPVOption.PlaybackControl.speed, speed)
+    info.playSpeed = speed
   }
 
   func setVideoAspect(_ aspect: String) {
-    if AppData.aspectRegex.matches(aspect) {
+    if Regex.aspect.matches(aspect) {
       mpvController.setString(MPVProperty.videoAspect, aspect)
       info.unsureAspect = aspect
     } else {
@@ -283,15 +293,23 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalAudioFile(_ url: URL) {
-    mpvController.command(.audioAdd, args: [url.path])
-    getTrackInfo()
-    getSelectedTracks()
+    mpvController.command(.audioAdd, args: [url.path], checkError: false) { code in
+      if code < 0 {
+        DispatchQueue.main.async {
+          Utility.showAlert(message: "Unsupported external audio file.")
+        }
+      }
+    }
   }
 
   func loadExternalSubFile(_ url: URL) {
-    mpvController.command(.subAdd, args: [url.path])
-    getTrackInfo()
-    getSelectedTracks()
+    mpvController.command(.subAdd, args: [url.path], checkError: false) { code in
+      if code < 0 {
+        DispatchQueue.main.async {
+          Utility.showAlert(message: "Unsupported external subtitle.")
+        }
+      }
+    }
   }
 
   func setAudioDelay(_ delay: Double) {
@@ -468,7 +486,7 @@ class PlayerCore: NSObject {
       // whether enter full screen
       if needEnterFullScreenForNextMedia {
         if ud.bool(forKey: Preference.Key.fullScreenWhenOpen) && !mainWindow.isInFullScreen {
-          mainWindow.window?.toggleFullScreen(self)
+          mainWindow.toggleWindowFullScreen()
         }
         // only enter fullscreen for first file
         needEnterFullScreenForNextMedia = false
@@ -495,6 +513,7 @@ class PlayerCore: NSObject {
     case time
     case timeAndCache
     case playButton
+    case volume
     case muteButton
     case chapterList
     case playlist
@@ -514,15 +533,15 @@ class PlayerCore: NSObject {
 
     switch option {
     case .time:
-      let time = mpvController.getInt(MPVProperty.timePos)
-      info.videoPosition!.second = time
+      let time = mpvController.getDouble(MPVProperty.timePos)
+      info.videoPosition = VideoTime(time)
       DispatchQueue.main.async {
         self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
       }
 
     case .timeAndCache:
-      let time = mpvController.getInt(MPVProperty.timePos)
-      info.videoPosition!.second = time
+      let time = mpvController.getDouble(MPVProperty.timePos)
+      info.videoPosition = VideoTime(time)
       info.pausedForCache = mpvController.getFlag(MPVProperty.pausedForCache)
       info.cacheSize = mpvController.getInt(MPVProperty.cacheSize)
       info.cacheUsed = mpvController.getInt(MPVProperty.cacheUsed)
@@ -539,6 +558,11 @@ class PlayerCore: NSObject {
       info.isPaused = pause
       DispatchQueue.main.async {
         self.mainWindow.updatePlayButtonState(pause ? NSOffState : NSOnState)
+      }
+
+    case .volume:
+      DispatchQueue.main.async {
+        self.mainWindow.updateVolume()
       }
 
     case .muteButton:
@@ -581,6 +605,13 @@ class PlayerCore: NSObject {
     }
   }
 
+  func closeMainWindow() {
+    DispatchQueue.main.async {
+      self.mainWindow.close()
+    }
+  }
+
+
   // MARK: - Getting info
 
   func getTrackInfo() {
@@ -590,10 +621,10 @@ class PlayerCore: NSObject {
     let trackCount = mpvController.getInt(MPVProperty.trackListCount)
     for index in 0..<trackCount {
       // get info for each track
-      let track = MPVTrack(id:         mpvController.getInt(MPVProperty.trackListNId(index)),
-                           type:       MPVTrack.TrackType(rawValue: mpvController.getString(MPVProperty.trackListNType(index))!)!,
-                           isDefault:  mpvController.getFlag(MPVProperty.trackListNDefault(index)),
-                           isForced:   mpvController.getFlag(MPVProperty.trackListNForced(index)),
+      let track = MPVTrack(id: mpvController.getInt(MPVProperty.trackListNId(index)),
+                           type: MPVTrack.TrackType(rawValue: mpvController.getString(MPVProperty.trackListNType(index))!)!,
+                           isDefault: mpvController.getFlag(MPVProperty.trackListNDefault(index)),
+                           isForced: mpvController.getFlag(MPVProperty.trackListNForced(index)),
                            isSelected: mpvController.getFlag(MPVProperty.trackListNSelected(index)),
                            isExternal: mpvController.getFlag(MPVProperty.trackListNExternal(index)))
       track.srcId = mpvController.getInt(MPVProperty.trackListNSrcId(index))
@@ -615,7 +646,7 @@ class PlayerCore: NSObject {
     }
   }
 
-  private func getSelectedTracks() {
+  func getSelectedTracks() {
     info.aid = mpvController.getInt(MPVOption.TrackSelection.aid)
     info.vid = mpvController.getInt(MPVOption.TrackSelection.vid)
     info.sid = mpvController.getInt(MPVOption.TrackSelection.sid)
@@ -626,10 +657,10 @@ class PlayerCore: NSObject {
     info.playlist.removeAll()
     let playlistCount = mpvController.getInt(MPVProperty.playlistCount)
     for index in 0..<playlistCount {
-      let playlistItem = MPVPlaylistItem(filename:  mpvController.getString(MPVProperty.playlistNFilename(index))!,
+      let playlistItem = MPVPlaylistItem(filename: mpvController.getString(MPVProperty.playlistNFilename(index))!,
                                          isCurrent: mpvController.getFlag(MPVProperty.playlistNCurrent(index)),
                                          isPlaying: mpvController.getFlag(MPVProperty.playlistNPlaying(index)),
-                                         title:     mpvController.getString(MPVProperty.playlistNTitle(index)))
+                                         title: mpvController.getString(MPVProperty.playlistNTitle(index)))
       info.playlist.append(playlistItem)
     }
   }
@@ -642,7 +673,7 @@ class PlayerCore: NSObject {
     }
     for index in 0..<chapterCount {
       let chapter = MPVChapter(title:     mpvController.getString(MPVProperty.chapterListNTitle(index)),
-                               startTime: mpvController.getInt(MPVProperty.chapterListNTime(index)),
+                               startTime: mpvController.getDouble(MPVProperty.chapterListNTime(index)),
                                index:     index)
       info.chapters.append(chapter)
     }

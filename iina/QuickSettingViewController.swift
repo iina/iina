@@ -13,10 +13,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   override var nibName: String {
     return "QuickSettingViewController"
   }
-
-  let distanceBetweenSliderAndIndicator: CGFloat = 18
+  
+  let distanceBetweenSliderAndIndicator: CGFloat = 14
   let sliderIndicatorHalfWidth:CGFloat = 16
-
+  
+  let sliderSteps = 24.0
+  
   /**
    Similiar to the one in `PlaylistViewController`.
    Since IBOutlet is `nil` when the view is not loaded at first time,
@@ -28,7 +30,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   /** Tab type. Use TrackType for now. Propobably not a good choice. */
   typealias TabViewType = MPVTrack.TrackType
 
-  var playerCore: PlayerCore = PlayerCore.shared
+  weak var playerCore: PlayerCore! = PlayerCore.shared
   weak var mainWindow: MainWindowController!
 
   var observers: [NSObjectProtocol] = []
@@ -133,8 +135,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   private func updateControlsState() {
     // Video
-    aspectSegment.selectSegment(withLabel: NSLocalizedString("quicksetting.aspect_item." + playerCore.info.unsureAspect, comment: "Error"))
-    cropSegment.selectSegment(withLabel: NSLocalizedString("quicksetting.crop_item." + playerCore.info.unsureCrop, comment: "Error"))
+    aspectSegment.selectSegment(withLabel: NSLocalizedString("quicksetting.aspect_item." + playerCore.info.unsureAspect, comment: "Default"))
+    cropSegment.selectSegment(withLabel: NSLocalizedString("quicksetting.crop_item." + playerCore.info.unsureCrop, comment: "None"))
     rotateSegment.selectSegment(withTag: AppData.rotations.index(of: playerCore.info.rotation) ?? -1)
     customSpeedTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
     deinterlaceCheckBtn.state = playerCore.info.deinterlace ? NSOnState : NSOffState
@@ -353,25 +355,27 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func speedChangedAction(_ sender: NSSlider) {
-    //   0     1 ..     7  8    9 ..  26
-    // -5x -4.5x .. -1.5x 1x 1.5x .. 10x
+    // Each step is 64^(1/24)
+    //   0       1   ..    7      8      9   ..   24
+    // 0.250x 0.297x .. 0.841x 1.000x 1.189x .. 16.00x
     let sliderValue = sender.doubleValue
-    let value = sliderValue >= 8 ? (sliderValue / 2.0 - 3) : (sliderValue / 2.0 - 5)
-    speedSliderIndicator.stringValue = "\(value)x"
+    let value = AppData.minSpeed * pow((AppData.maxSpeed / AppData.minSpeed), sliderValue / sliderSteps)
+    let speed = String(format: "%.2f", value)
+    speedSliderIndicator.stringValue = "\(speed)x"
+    customSpeedTextField.stringValue = speed
     let knobPos = sender.knobPointPosition()
     speedSliderIndicator.setFrameOrigin(NSPoint(x: knobPos - sliderIndicatorHalfWidth, y: sender.frame.origin.y + distanceBetweenSliderAndIndicator))
-    if let event = NSApp.currentEvent {
-      if event.type == .leftMouseUp {
-        playerCore.setSpeed(value)
-      }
-    }
+    playerCore.setSpeed(value)
   }
 
   @IBAction func customSpeedEditFinishedAction(_ sender: NSTextField) {
-    let value = customSpeedTextField.doubleValue
-    if (value >= 1 || value <= -1 || value == 0) && playerCore.info.playSpeed != value {
-      let finalValue = value == 0 ? 1 : value
-      playerCore.setSpeed(finalValue)
+    var value = customSpeedTextField.doubleValue
+    value = max(min(value, AppData.maxSpeed), AppData.minSpeed)
+    customSpeedTextField.stringValue = String(format: "%.2f", value)
+    let sliderValue = log(value / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
+    speedSlider.doubleValue = sliderValue
+    if playerCore.info.playSpeed != value {
+      playerCore.setSpeed(value)
     }
     if let window = sender.window {
       window.makeFirstResponder(window.contentView)

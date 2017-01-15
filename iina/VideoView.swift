@@ -17,6 +17,8 @@ class VideoView: NSOpenGLView {
   let vertexShaderName = "vertexShader"
   let fragmentShaderName = "fragmentShader"
 
+  lazy var playerCore = PlayerCore.shared
+
   /** The mpv opengl-cb context */
   var mpvGLContext: OpaquePointer! {
     didSet {
@@ -164,6 +166,9 @@ class VideoView: NSOpenGLView {
     // other settings
     autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
     wantsBestResolutionOpenGLSurface = true
+  
+    // dragging init
+    register(forDraggedTypes: [NSFilenamesPboardType])
   }
 
   required init?(coder: NSCoder) {
@@ -412,5 +417,56 @@ class VideoView: NSOpenGLView {
   func ignoreGLError() {
     glGetError()
   }
-
+  
+  override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+    return .copy
+  }
+    
+  override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
+    return .copy
+  }
+  
+  override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
+    let pb = sender.draggingPasteboard()
+    guard let types = pb.types else { return false }
+    if types.contains(NSFilenamesPboardType) {
+      guard let fileNames = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else {
+        return false
+      }
+      
+      var videoFiles: [String] = []
+      var subtitleFiles: [String] = []
+      fileNames.forEach({ (path) in
+        let ext = (path as NSString).pathExtension
+        if playerCore.supportedSubtitleFormat.contains(ext) {
+          subtitleFiles.append(path)
+        } else {
+          videoFiles.append(path)
+        }
+      })
+      
+      if videoFiles.count == 0 {
+        if subtitleFiles.count > 0 {
+          subtitleFiles.forEach { (subtitle) in
+            playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitle))
+          }
+        } else {
+          return false
+        }
+      } else if videoFiles.count == 1 {
+        playerCore.openFile(URL(fileURLWithPath: videoFiles[0]))
+        subtitleFiles.forEach { (subtitle) in
+          playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitle))
+        }
+      } else {
+        for path in videoFiles {
+          playerCore.addToPlaylist(path)
+        }
+        playerCore.sendOSD(.addToPlaylist(videoFiles.count))
+      }
+      NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+    }
+    return true
+  }
+  
 }

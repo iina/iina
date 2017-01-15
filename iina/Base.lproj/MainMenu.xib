@@ -132,7 +132,7 @@
                             <menuItem title="Screenshot" keyEquivalent="S" id="AoP-K6-Kb5">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Goto Screenshot Folder" id="lj0-Oo-7nB">
+                            <menuItem title="Go To Screenshot Folder" id="lj0-Oo-7nB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Advanced Screenshot..." hidden="YES" id="CKi-JE-yLT">
@@ -176,7 +176,7 @@
                             <menuItem title="Enter Full Screen" keyEquivalent="f" id="6Eq-ni-6hG">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Always on Top" id="wex-rX-PcY">
+                            <menuItem title="Float on Top" id="wex-rX-PcY">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="4J5-eU-sei"/>
@@ -237,7 +237,9 @@
                             <menuItem title="Volume - 1%" tag="1" alternate="YES" keyEquivalent="" id="Zhv-Bz-I5V">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Mute" keyEquivalent="m" id="WOL-Us-ByA"/>
+                            <menuItem title="Mute" id="WOL-Us-ByA">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="NlU-cH-tnU"/>
                             <menuItem title="Audio Delay:" enabled="NO" id="foC-r3-8mp">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -258,9 +260,9 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Subtitle" id="xDJ-GA-Gjs">
+                <menuItem title="Subtitles" id="xDJ-GA-Gjs">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Subtitle" id="EKp-Qx-4Mn">
+                    <menu key="submenu" title="Subtitles" id="EKp-Qx-4Mn">
                         <items>
                             <menuItem title="Quick Settings Panel" keyEquivalent="s" id="8y7-Cy-lKT"/>
                             <menuItem isSeparatorItem="YES" id="EvW-J9-wqJ"/>
@@ -292,6 +294,10 @@
                             </menuItem>
                             <menuItem title="Load External Subtitle..." id="k6x-hf-ATi">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="yh3-Pu-MGm"/>
+                            <menuItem title="Find Online Subtitles..." keyEquivalent="D" id="Mg3-WB-gjZ">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="58S-lP-UEY"/>
                             <menuItem title="Encoding" id="Pci-OQ-Vni">
@@ -375,6 +381,13 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="J8m-Ix-VGl"/>
+                            <menuItem title="Check Update..." id="gMo-qL-m08">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkUpdate:" target="Voe-Tx-rLC" id="CQ8-wR-EzN"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="ZO8-wH-FBe"/>
                             <menuItem title="Github" id="A9w-iE-gVg">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -417,6 +430,7 @@
                 <outlet property="doubleSize" destination="Hal-18-Tnf" id="vnl-Rb-Y3o"/>
                 <outlet property="encodingMenu" destination="Pf6-5i-B1E" id="Gat-gG-pkT"/>
                 <outlet property="file" destination="dMs-cI-mzQ" id="upe-AE-Gf6"/>
+                <outlet property="findOnlineSub" destination="Mg3-WB-gjZ" id="Xft-hW-B9a"/>
                 <outlet property="fitToScreen" destination="SHd-63-Xoh" id="nzE-bA-wmk"/>
                 <outlet property="flip" destination="OIu-H0-Mht" id="fYJ-Fq-hak"/>
                 <outlet property="flipMenu" destination="n90-to-nRT" id="Zpp-Q8-NiJ"/>

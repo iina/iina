@@ -25,7 +25,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="460" height="389"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="460" height="389"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -65,7 +65,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="TI7-3V-nUn">
                                         <font key="font" metaFont="smallSystem"/>
-                                        <string key="title">This is an alpha release. It will not update automatically, so please checkout the website to get new versions. For bug report, feature request or help, please raise an issue at github or email me.</string>
+                                        <string key="title">This is an alpha release and not recommended for daily use. Please check for updates frequently. For bug reports, feature requests or help, please create an issue on Github or email me.</string>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>

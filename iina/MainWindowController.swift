@@ -14,7 +14,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60
 
-  lazy var playerCore = PlayerCore.shared
+  weak var playerCore: PlayerCore! = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
   lazy var sizingTouchBarTextField: NSTextField = {
     return NSTextField()
@@ -24,7 +24,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
 
-  var isInFullScreen: Bool = false
+  var isInFullScreen: Bool = false {
+    didSet {
+      playerCore.mpvController.setFlag(MPVOption.Window.fullscreen, isInFullScreen)
+    }
+  }
   var isInInteractiveMode: Bool = false
 
   // FIXME: might use another obj to handle slider?
@@ -54,9 +58,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** Cache current crop */
   var currentCrop: NSRect = NSRect()
-
+  
+  /** The maximum pressure recorded when clicking on the arrow buttons **/
+  var maxPressure: Int32 = 0
+  
+  /** The value of speedValueIndex before Force Touch **/
+  var oldIndex: Int = AppData.availableSpeedValues.count / 2
+  
   /** The index of current speed in speed value array */
-  var speedValueIndex: Int = 5
+  var speedValueIndex: Int = AppData.availableSpeedValues.count / 2 {
+    didSet {
+      if speedValueIndex < 0 || speedValueIndex >= AppData.availableSpeedValues.count {
+        speedValueIndex = AppData.availableSpeedValues.count / 2
+      }
+    }
+  }
 
   enum ScrollDirection {
     case horizontal
@@ -84,6 +100,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     Preference.Key.singleClickAction,
     Preference.Key.doubleClickAction
   ]
+
+  private var notificationObservers: [NSObjectProtocol] = []
 
   /** The view embedded in sidebar */
   enum SideBarViewType {
@@ -211,6 +229,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // buffer indicator view
     bufferIndicatorView.layer?.cornerRadius = 10
+    updateBufferIndicatorView()
 
     // other initialization
     osdVisualEffectView.isHidden = true
@@ -230,6 +249,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       ud.addObserver(self, forKeyPath: key, options: .new, context: nil)
     }
 
+    // add notification observers
+    let fsObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.fsChanged, object: nil, queue: .main) { [unowned self] _ in
+      let fs = self.playerCore.mpvController.getFlag(MPVOption.Window.fullscreen)
+      if fs != self.isInFullScreen {
+        self.toggleWindowFullScreen()
+      }
+    }
+    notificationObservers.append(fsObserver)
+
     // move to center and make main
     w.center()
     w.makeMain()
@@ -240,6 +268,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   deinit {
     observedPrefKeys.forEach { key in
       ud.removeObserver(self, forKeyPath: key)
+    }
+    notificationObservers.forEach { observer in
+      NotificationCenter.default.removeObserver(observer)
     }
   }
 
@@ -380,7 +411,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       break
 
     case .fullscreen:
-      window?.toggleFullScreen(self)
+      toggleWindowFullScreen()
 
     case .pause:
       playerCore.togglePause(nil)
@@ -537,6 +568,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isInFullScreen = false
     // set back frame of videoview
     videoView.frame = window!.contentView!.frame
+  }
+
+  func windowDidExitFullScreen(_ notification: Notification) {
+    // if is floating, enable it again
+    if playerCore.info.isAlwaysOntop {
+      setWindowFloatingOntop(true)
+    }
   }
 
   func windowDidResize(_ notification: Notification) {
@@ -912,6 +950,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func updateBufferIndicatorView() {
+    guard isWindowLoaded else { return }
+
     if playerCore.info.isNetworkResource {
       bufferIndicatorView.isHidden = false
       bufferSpin.startAnimation(nil)
@@ -976,6 +1016,27 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updateVolume()
   }
 
+  /** Important: `window.toggleFullScreen` should never be called directly, since it can't handle floating window. */
+  func toggleWindowFullScreen() {
+    // if is floating, disable it temporarily.
+    // it will be enabled again in `windowDidExitFullScreen()`.
+    if !isInFullScreen && playerCore.info.isAlwaysOntop {
+      setWindowFloatingOntop(false)
+    }
+    window?.toggleFullScreen(self)
+  }
+
+  func setWindowFloatingOntop(_ onTop: Bool) {
+    guard let window = window else { return }
+    if onTop {
+      window.level = Int(CGWindowLevelForKey(.floatingWindow))
+    } else {
+      window.level = Int(CGWindowLevelForKey(.normalWindow))
+    }
+    // don't know why they will be disabled
+    withStandardButtons { $0?.isEnabled = true }
+  }
+
   // MARK: - Sync UI with playback
 
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
@@ -983,7 +1044,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       Utility.fatal("video info not available")
       return
     }
-    let percantage = (Double(pos.second) / Double(duration.second)) * 100
+    let percantage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
     touchBarCurrentPosLabel?.stringValue = pos.stringRepresentation
     if withDuration {
@@ -1003,7 +1064,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func updatePlayButtonState(_ state: Int) {
     playButton.state = state
     if state == NSOffState {
-      speedValueIndex = 5
+      speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
       rightArrowLabel.isHidden = true
     }
@@ -1035,7 +1096,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if sender.state == NSOffState {
       playerCore.togglePause(true)
       // speed is already reset by playerCore
-      speedValueIndex = 5
+      speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
       rightArrowLabel.isHidden = true
     }
@@ -1053,35 +1114,75 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** left btn */
   @IBAction func leftButtonAction(_ sender: NSButton) {
-    arrowButtonAction(left: true)
+    if arrowBtnFunction == .speed {
+      let speeds = AppData.availableSpeedValues.count
+      // If fast forwarding change speed to 1x
+      if speedValueIndex > speeds / 2 {
+        speedValueIndex = speeds / 2
+      }
+      
+      if sender.intValue == 0 { // Released
+        if maxPressure == 1 { // Single click ended
+          speedValueIndex = oldIndex - 1
+        } else { // Force Touch ended
+          speedValueIndex = speeds / 2
+        }
+        maxPressure = 0
+      } else {
+        if sender.intValue == 1 && maxPressure == 0 { // First press
+          oldIndex = speedValueIndex
+          speedValueIndex -= 1
+        } else { // Force Touch
+          speedValueIndex = max(oldIndex - Int(sender.intValue), 0)
+        }
+        maxPressure = max(maxPressure, sender.intValue)
+      }
+      arrowButtonAction(left: true)
+    } else {
+      // trigger action only when released button
+      if sender.intValue == 0 {
+        arrowButtonAction(left: true)
+      }
+    }
   }
 
   @IBAction func rightButtonAction(_ sender: NSButton) {
-    arrowButtonAction(left: false)
+    if arrowBtnFunction == .speed {
+      let speeds = AppData.availableSpeedValues.count
+      // If rewinding change speed to 1x
+      if speedValueIndex < speeds / 2 {
+        speedValueIndex = speeds / 2
+      }
+      
+      if sender.intValue == 0 { // Released
+        if maxPressure == 1 { // Single click ended
+          speedValueIndex = oldIndex + 1
+        } else { // Force Touch ended
+          speedValueIndex = speeds / 2
+        }
+        maxPressure = 0
+      } else {
+        if sender.intValue == 1 && maxPressure == 0 { // First press
+          oldIndex = speedValueIndex
+          speedValueIndex += 1
+        } else { // Force Touch
+          speedValueIndex = min(oldIndex + Int(sender.intValue), speeds - 1)
+        }
+        maxPressure = max(maxPressure, sender.intValue)
+      }
+      arrowButtonAction(left: false)
+    } else {
+      // trigger action only when released button
+      if sender.intValue == 0 {
+        arrowButtonAction(left: false)
+      }
+    }
   }
-
+  
   /** handle action of both left and right arrow button */
   func arrowButtonAction(left: Bool) {
     switch arrowBtnFunction! {
-
     case .speed:
-      if left {
-        if speedValueIndex >= 5 {
-          speedValueIndex = 4
-        } else if speedValueIndex <= 0 {
-          speedValueIndex = 0
-        } else {
-          speedValueIndex -= 1
-        }
-      } else {
-        if speedValueIndex <= 5 {
-          speedValueIndex = 6
-        } else if speedValueIndex >= 10 {
-          speedValueIndex = 10
-        } else {
-          speedValueIndex += 1
-        }
-      }
       let speedValue = AppData.availableSpeedValues[speedValueIndex]
       playerCore.setSpeed(speedValue)
       if speedValueIndex == 5 {
@@ -1090,7 +1191,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       } else if speedValueIndex < 5 {
         leftArrowLabel.isHidden = false
         rightArrowLabel.isHidden = true
-        leftArrowLabel.stringValue = String(format: "%.0fx", speedValue)
+        leftArrowLabel.stringValue = String(format: "%.2fx", speedValue)
       } else if speedValueIndex > 5 {
         leftArrowLabel.isHidden = true
         rightArrowLabel.isHidden = false

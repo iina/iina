@@ -28,7 +28,7 @@
 "osd.speed" = "速度：%.2fx";
 "osd.aspect" = "长宽比：%@";
 "osd.crop" = "剪切：%@";
-"osd.rotate" = "旋转：%i";
+"osd.rotate" = "旋转：%i°";
 "osd.deinterlace" = "反交错：%@";
 "osd.audio_delay.nodelay" = "音频延迟：无延迟";
 "osd.audio_delay.later" = "音频延迟：延迟 %.2f 秒";

@@ -28,7 +28,7 @@
 "osd.speed" = "Speed: %.2fx";
 "osd.aspect" = "Aspect Ratio: %@";
 "osd.crop" = "Crop: %@";
-"osd.rotate" = "Rotate: %i";
+"osd.rotate" = "Rotate: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
 "osd.audio_delay.nodelay" = "Audio Delay: No Delay";
 "osd.audio_delay.later" = "Audio Delay: %.2fs Later";

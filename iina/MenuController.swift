@@ -137,14 +137,14 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- aspect
     var aspectList = AppData.aspects
-    aspectList.insert(NSLocalizedString("quicksetting.aspect_item." + PlayerCore.shared.info.unsureAspect, comment: "Default"), at: 0)
+    aspectList.insert("Default", at: 0)
     bind(menu: aspectMenu, withOptions: aspectList, objects: nil, objectMap: nil, action: #selector(MainWindowController.menuChangeAspect(_:))) {
       PlayerCore.shared.info.unsureAspect == $0.representedObject as? String
     }
 
     // -- crop
     var cropList = AppData.aspects
-    cropList.insert(NSLocalizedString("quicksetting.crop_item." + PlayerCore.shared.info.unsureCrop, comment: "None"), at: 0)
+    cropList.insert("None", at: 0)
     bind(menu: cropMenu, withOptions: cropList, objects: nil, objectMap: nil, action: #selector(MainWindowController.menuChangeCrop(_:))) {
       PlayerCore.shared.info.unsureCrop == $0.representedObject as? String
     }

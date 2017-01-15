@@ -400,9 +400,9 @@ class MPVController: NSObject {
     case MPV_EVENT_SHUTDOWN:
       let quitByMPV = !playerCore.isMpvTerminated
       playerCore.invalidateTimer()
+      playerCore.unloadMainWindowVideoView()
       mpv_detach_destroy(mpv)
       mpv = nil
-      playerCore.unloadMainWindowVideoView()
       if quitByMPV {
         playerCore.isMpvTerminated = true
         NSApp.terminate(nil)

@@ -29,8 +29,8 @@ class MPVController: NSObject {
 
   lazy var queue: DispatchQueue! = DispatchQueue(label: "com.colliderli.iina.controller")
 
-  var playerCore: PlayerCore = PlayerCore.shared
-  let ud: UserDefaults = UserDefaults.standard
+  unowned let playerCore: PlayerCore = PlayerCore.shared
+  unowned let ud: UserDefaults = UserDefaults.standard
 
   var needRecordSeekTime: Bool = false
   var recordedSeekStartTime: CFTimeInterval = 0
@@ -62,8 +62,10 @@ class MPVController: NSObject {
   ]
 
   deinit {
-    optionObservers.forEach { (k, v) in
-      ud.removeObserver(self, forKeyPath: k)
+    ObjcUtils.silenced {
+      self.optionObservers.forEach { (k, v) in
+        self.ud.removeObserver(self, forKeyPath: k)
+      }
     }
   }
 

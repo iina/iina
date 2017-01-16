@@ -10,11 +10,11 @@ import Cocoa
 
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
-  let ud: UserDefaults = UserDefaults.standard
+  unowned let ud: UserDefaults = UserDefaults.standard
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60
 
-  weak var playerCore: PlayerCore! = PlayerCore.shared
+  unowned let playerCore: PlayerCore = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
   lazy var sizingTouchBarTextField: NSTextField = {
     return NSTextField()
@@ -266,11 +266,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   deinit {
-    observedPrefKeys.forEach { key in
-      ud.removeObserver(self, forKeyPath: key)
-    }
-    notificationObservers.forEach { observer in
-      NotificationCenter.default.removeObserver(observer)
+    ObjcUtils.silenced {
+      for key in self.observedPrefKeys {
+        self.ud.removeObserver(self, forKeyPath: key)
+      }
+      for observer in self.notificationObservers {
+        NotificationCenter.default.removeObserver(observer)
+      }
     }
   }
 

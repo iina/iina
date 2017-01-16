@@ -12,7 +12,7 @@ class PlayerCore: NSObject {
 
   static let shared = PlayerCore()
 
-  let ud: UserDefaults = UserDefaults.standard
+  unowned let ud: UserDefaults = UserDefaults.standard
 
   lazy var mainWindow: MainWindowController = MainWindowController()
   lazy var mpvController: MPVController = MPVController()
@@ -152,7 +152,7 @@ class PlayerCore: NSObject {
     case .auto:
       // for each file , try use exact and record interval first
       if !triedUsingExactSeekForCurrentFile {
-        mpvController.recordedSeekTimeListener = { interval in
+        mpvController.recordedSeekTimeListener = { [unowned self] interval in
           // if seek time < 0.05, then can use exact
           self.useExactSeekForCurrentFile = interval < 0.05
         }

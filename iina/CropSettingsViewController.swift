@@ -53,7 +53,7 @@ class CropSettingsViewController: NSViewController {
 
 
   @IBAction func doneBtnAction(_ sender: AnyObject) {
-    let playerCore = mainWindow.playerCore!
+    let playerCore = mainWindow.playerCore
 
     mainWindow.exitInteractiveMode {
       if self.cropx == 0 && self.cropy == 0 &&

@@ -78,9 +78,9 @@ enum OSDMessage {
 
     case .subDelay(let value):
       if value == 0 {
-        return NSLocalizedString("osd.subtitle_delay.nodelay", comment: "Subtitle Delay: No Delay")
+        return NSLocalizedString("osd.sub_delay.nodelay", comment: "Subtitle Delay: No Delay")
       } else {
-                return value > 0 ? String(format: NSLocalizedString("osd.subtitle_delay.later", comment: "Subtitle Delay: %fs Later"),abs(value)) : String(format: NSLocalizedString("osd.subtitle_delay.earlier", comment: "Subtitle Delay: %fs Earlier"), abs(value))
+                return value > 0 ? String(format: NSLocalizedString("osd.sub_delay.later", comment: "Subtitle Delay: %fs Later"),abs(value)) : String(format: NSLocalizedString("osd.sub_delay.earlier", comment: "Subtitle Delay: %fs Earlier"), abs(value))
       }
 
     case .subPos(let value):
@@ -120,19 +120,19 @@ enum OSDMessage {
       return NSLocalizedString("osd.clear_playlist", comment: "Cleared playlist")
 
     case .contrast(let value):
-      return String(format: NSLocalizedString("osd.graphic_equalizer.contrast", comment: "Contrast: %i"), value)
+      return String(format: NSLocalizedString("osd.video_eq.contrast", comment: "Contrast: %i"), value)
 
     case .gamma(let value):
-      return String(format: NSLocalizedString("osd.graphic_equalizer.gamma", comment: "Grama: %i"), value)
+      return String(format: NSLocalizedString("osd.video_eq.gamma", comment: "Grama: %i"), value)
 
     case .hue(let value):
-      return String(format: NSLocalizedString("osd.graphic_equalizer.hue", comment: "Hue: %i"), value)
+      return String(format: NSLocalizedString("osd.video_eq.hue", comment: "Hue: %i"), value)
 
     case .saturation(let value):
-      return String(format: NSLocalizedString("osd.graphic_equalizer.saturation", comment: "Saturation: %i"), value)
+      return String(format: NSLocalizedString("osd.video_eq.saturation", comment: "Saturation: %i"), value)
 
     case .brightness(let value):
-      return String(format: NSLocalizedString("osd.graphic_equalizer.brightness", comment: "Brightness: %i"), value)
+      return String(format: NSLocalizedString("osd.video_eq.brightness", comment: "Brightness: %i"), value)
 
     case .startFindingSub:
       return "Find online subtitles..."

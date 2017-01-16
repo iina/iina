@@ -28,7 +28,7 @@ class PrefNetworkViewController: NSViewController {
   }
 
   var toolbarItemLabel: String {
-    return "Network"
+    return NSLocalizedString("preference.network", comment: "Network")
   }
 
   override func viewDidLoad() {

@@ -28,7 +28,7 @@ class PrefCodecViewController: NSViewController {
   }
 
   var toolbarItemLabel: String {
-    return "Codec"
+    return NSLocalizedString("preference.codec", comment: "Codec")
   }
 
   override func viewDidLoad() {

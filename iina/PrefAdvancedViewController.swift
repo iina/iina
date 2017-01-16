@@ -29,7 +29,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   }
 
   var toolbarItemLabel: String {
-    return "Advanced"
+    return NSLocalizedString("preference.advanced", comment: "Advanced")
   }
 
   var options: [[String]] = []

@@ -33,9 +33,9 @@
 "osd.audio_delay.nodelay" = "音频延迟：无延迟";
 "osd.audio_delay.later" = "音频延迟：延迟 %.2f 秒";
 "osd.audio_delay.earlier" = "音频延迟：提前 %.2f 秒";
-"osd.subtitle_delay.nodelay" = "字幕延迟：无延迟";
-"osd.subtitle_delay.later" = "字幕延迟：延迟 %.2f 秒";
-"osd.subtitle_delay.earlier" = "字幕延迟：提前 %.2f 秒";
+"osd.sub_delay.nodelay" = "字幕延迟：无延迟";
+"osd.sub_delay.later" = "字幕延迟：延迟 %.2f 秒";
+"osd.sub_delay.earlier" = "字幕延迟：提前 %.2f 秒";
 "osd.subtitle_pos" = "字幕位置：%f";
 "osd.mute" = "静音";
 "osd.unmute" = "取消静音";
@@ -48,11 +48,11 @@
 "osd.subtitle_scale" = "字幕缩放：%.2fx";
 "osd.add_to_playlist" = "添加了 %i 个文件到播放列表";
 "osd.clear_playlist" = "清除播放列表";
-"osd.graphic_equalizer.contrast" = "对比度：%i";
-"osd.graphic_equalizer.gamma" = "反差：%i";
-"osd.graphic_equalizer.hue" = "色调：%i";
-"osd.graphic_equalizer.saturation" = "饱和度：%i";
-"osd.graphic_equalizer.brightness" = "亮度：%i";
+"osd.video_eq.contrast" = "对比度：%i";
+"osd.video_eq.gamma" = "反差：%i";
+"osd.video_eq.hue" = "色调：%i";
+"osd.video_eq.saturation" = "饱和度：%i";
+"osd.video_eq.brightness" = "亮度：%i";
 
 "update.title_update_found" = "检测到新版本";
 "update.title_no_update" = "没有新版本";
@@ -64,3 +64,20 @@
 "update.dl_from_website" = "前往网站";
 "update.dl_from_github" = "前往 Github";
 
+"preference.title" = "偏好设置";
+"preference.general" = "通用";
+"preference.ui" = "UI";
+"preference.codec" = "解码";
+"preference.subtitle" = "字幕";
+"preference.network" = "网络";
+"preference.control" = "控制";
+"preference.keybindings" = "快捷键";
+"preference.advanced" = "高级";
+
+"menu.volume"= "音量: %d";
+"menu.audio_delay" = "音频延迟: %.2f秒";
+"menu.sub_delay" = "字幕延迟: %.2f秒";
+"menu.fullscreen" = "全屏";
+"menu.exit_fullscreen" = "离开全屏";
+
+"track.none" = "<无>";

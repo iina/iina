@@ -28,7 +28,7 @@ class PrefSubViewController: NSViewController {
   }
 
   var toolbarItemLabel: String {
-    return "Subtitle"
+    return NSLocalizedString("preference.subtitle", comment: "Subtitles")
   }
 
   override func viewDidLoad() {

@@ -32,7 +32,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
 
   var toolbarItemLabel: String {
     get {
-      return "UI"
+      return NSLocalizedString("preference.ui", comment: "UI")
     }
   }
 

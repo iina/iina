@@ -34,7 +34,7 @@ class PrefControlViewController: NSViewController, MASPreferencesViewController 
 
   var toolbarItemLabel: String {
     get {
-      return "Control"
+      return NSLocalizedString("preference.control", comment: "Control")
     }
   }
 

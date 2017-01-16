@@ -33,9 +33,9 @@
 "osd.audio_delay.nodelay" = "Audio Delay: No Delay";
 "osd.audio_delay.later" = "Audio Delay: %.2fs Later";
 "osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
-"osd.subtitle_delay.nodelay" = "Subtitle Delay: No Delay";
-"osd.subtitle_delay.later" = "Subtitle Delay: %.2fs Later";
-"osd.subtitle_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
+"osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
+"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
+"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
 "osd.subtitle_pos" = "Subtitle Position: %f";
 "osd.mute" = "Mute";
 "osd.unmute" = "Unmute";
@@ -48,11 +48,11 @@
 "osd.subtitle_scale" = "Subtitle Scale: %.2fx";
 "osd.add_to_playlist" = "Added %i files to playlist";
 "osd.clear_playlist" = "Cleared playlist";
-"osd.graphic_equalizer.contrast" = "Contrast: %i";
-"osd.graphic_equalizer.gamma" = "Gamma: %i";
-"osd.graphic_equalizer.hue" = "Hue: %i";
-"osd.graphic_equalizer.saturation" = "Saturation: %i";
-"osd.graphic_equalizer.brightness" = "Brightness: %i";
+"osd.video_eq.contrast" = "Contrast: %i";
+"osd.video_eq.gamma" = "Gamma: %i";
+"osd.video_eq.hue" = "Hue: %i";
+"osd.video_eq.saturation" = "Saturation: %i";
+"osd.video_eq.brightness" = "Brightness: %i";
 
 "update.title_update_found" = "Update Found";
 "update.title_no_update" = "No Update";
@@ -63,3 +63,21 @@
 "update.new_version" = "New version:";
 "update.dl_from_website" = "Go to Website";
 "update.dl_from_github" = "Go to Github";
+
+"preference.title" = "Preference";
+"preference.general" = "General";
+"preference.ui" = "UI";
+"preference.codec" = "Codec";
+"preference.subtitle" = "Subtitle";
+"preference.network" = "Network";
+"preference.control" = "Control";
+"preference.keybindings" = "Keybindings";
+"preference.advanced" = "Advanced";
+
+"menu.volume"= "Volume: %d";
+"menu.audio_delay" = "Audio Delay: %.2fs";
+"menu.sub_delay" = "Subtitie Delay: %.2fs";
+"menu.fullscreen" = "Full Screen";
+"menu.exit_fullscreen" = "Exit Full Screen";
+
+"track.none" = "<None>";

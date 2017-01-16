@@ -44,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       PrefControlViewController(),
       PrefKeyBindingViewController(),
       PrefAdvancedViewController(),
-    ], title: "Preference")
+    ], title: NSLocalizedString("preference.title", comment: "Preference"))
   }()
 
   @IBOutlet weak var menuController: MenuController!

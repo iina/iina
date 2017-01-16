@@ -29,7 +29,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   }
 
   var toolbarItemLabel: String {
-    return "Keybindings"
+    return NSLocalizedString("preference.keybindings", comment: "Keybindings")
   }
 
   lazy var keyRecordViewController: KeyRecordViewController = KeyRecordViewController()

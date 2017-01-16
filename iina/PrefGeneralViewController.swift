@@ -35,7 +35,7 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
 
   var toolbarItemLabel: String {
     get {
-      return "General"
+      return NSLocalizedString("preference.general", comment: "General")
     }
   }
 

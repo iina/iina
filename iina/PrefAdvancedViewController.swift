@@ -29,8 +29,12 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   }
 
   var toolbarItemLabel: String {
+    view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.advanced", comment: "Advanced")
   }
+
+  var hasResizableWidth: Bool = false
+  var hasResizableHeight: Bool = false
 
   var options: [[String]] = []
 

@@ -34,9 +34,13 @@ class PrefControlViewController: NSViewController, MASPreferencesViewController 
 
   var toolbarItemLabel: String {
     get {
+      view.layoutSubtreeIfNeeded()
       return NSLocalizedString("preference.control", comment: "Control")
     }
   }
+
+  var hasResizableWidth: Bool = false
+  var hasResizableHeight: Bool = false
 
   override func viewDidLoad() {
     super.viewDidLoad()

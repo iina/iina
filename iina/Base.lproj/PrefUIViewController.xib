@@ -119,7 +119,7 @@
                     </buttonCell>
                 </button>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Xbc-Uq-fEH">
-                    <rect key="frame" x="121" y="78" width="348" height="5"/>
+                    <rect key="frame" x="120" y="78" width="349" height="5"/>
                 </box>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="QcN-dZ-Kb2">
                     <rect key="frame" x="120" y="166" width="348" height="5"/>
@@ -201,7 +201,7 @@
                 <constraint firstItem="OMM-mG-Uts" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="3IR-oC-bZh"/>
                 <constraint firstAttribute="trailing" secondItem="nDu-Yq-tPI" secondAttribute="trailing" constant="11" id="3LN-4o-lRY"/>
                 <constraint firstItem="4XH-GU-VhV" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="12" id="4Ck-v1-dnG"/>
-                <constraint firstItem="Xbc-Uq-fEH" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="121" id="6Lm-tT-rqM"/>
+                <constraint firstItem="Xbc-Uq-fEH" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="6Lm-tT-rqM"/>
                 <constraint firstItem="QcN-dZ-Kb2" firstAttribute="top" secondItem="RRL-GG-R45" secondAttribute="bottom" constant="12" id="75Y-hM-txS"/>
                 <constraint firstAttribute="bottom" secondItem="63o-gu-DxA" secondAttribute="bottom" constant="23" id="Ahr-UK-W8Y"/>
                 <constraint firstItem="RRL-GG-R45" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="C7v-r5-ck5"/>

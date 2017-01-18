@@ -35,9 +35,15 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
 
   var toolbarItemLabel: String {
     get {
-      return "General"
+      // dirty hack here: layout the view before `MASPreferencesWIndowController` getting `bounds`.
+      view.layoutSubtreeIfNeeded()
+      return NSLocalizedString("preference.general", comment: "General")
     }
   }
+
+  // view size is handled by AutoLayout, so it's not resizable
+  var hasResizableWidth: Bool = false
+  var hasResizableHeight: Bool = false
 
   override func viewDidLoad() {
     super.viewDidLoad()

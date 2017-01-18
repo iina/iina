@@ -28,8 +28,12 @@ class PrefSubViewController: NSViewController {
   }
 
   var toolbarItemLabel: String {
-    return "Subtitle"
+    view.layoutSubtreeIfNeeded()
+    return NSLocalizedString("preference.subtitle", comment: "Subtitles")
   }
+
+  var hasResizableWidth: Bool = false
+  var hasResizableHeight: Bool = false
 
   override func viewDidLoad() {
     super.viewDidLoad()

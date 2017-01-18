@@ -28,8 +28,12 @@ class PrefCodecViewController: NSViewController {
   }
 
   var toolbarItemLabel: String {
-    return "Codec"
+    view.layoutSubtreeIfNeeded()
+    return NSLocalizedString("preference.codec", comment: "Codec")
   }
+
+  var hasResizableWidth: Bool = false
+  var hasResizableHeight: Bool = false
 
   override func viewDidLoad() {
     super.viewDidLoad()

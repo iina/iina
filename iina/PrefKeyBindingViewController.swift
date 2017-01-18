@@ -29,8 +29,11 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   }
 
   var toolbarItemLabel: String {
+    view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.keybindings", comment: "Keybindings")
   }
+
+  var hasResizableWidth: Bool = false
 
   lazy var keyRecordViewController: KeyRecordViewController = KeyRecordViewController()
 

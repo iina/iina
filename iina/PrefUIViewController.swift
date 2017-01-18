@@ -32,11 +32,13 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
 
   var toolbarItemLabel: String {
     get {
+      view.layoutSubtreeIfNeeded()
       return NSLocalizedString("preference.ui", comment: "UI")
     }
   }
 
-
+  var hasResizableWidth: Bool = false
+  var hasResizableHeight: Bool = false
 
   override func viewDidLoad() {
     super.viewDidLoad()

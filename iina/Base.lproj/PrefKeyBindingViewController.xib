@@ -81,7 +81,7 @@
                         </subviews>
                     </clipView>
                     <constraints>
-                        <constraint firstAttribute="height" constant="260" id="5me-gl-Ien"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="260" id="5me-gl-Ien"/>
                     </constraints>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1PH-Mk-JzT">
                         <rect key="frame" x="1" y="7" width="0.0" height="16"/>

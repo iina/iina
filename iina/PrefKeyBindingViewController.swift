@@ -34,7 +34,6 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   }
 
   var hasResizableWidth: Bool = false
-  var hasResizableHeight: Bool = false
 
   lazy var keyRecordViewController: KeyRecordViewController = KeyRecordViewController()
 

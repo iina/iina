@@ -112,7 +112,7 @@
                                 </subviews>
                             </clipView>
                             <constraints>
-                                <constraint firstAttribute="height" constant="130" id="TZF-vz-q9V"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="130" id="TZF-vz-q9V"/>
                             </constraints>
                             <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="iUT-PB-HTE">
                                 <rect key="frame" x="1" y="7" width="0.0" height="16"/>

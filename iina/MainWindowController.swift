@@ -629,7 +629,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     ))
   }
 
-  // resize framebuffer in videoView after resizing.
+  /** resize framebuffer in videoView after resizing. */
   func windowDidEndLiveResize(_ notification: Notification) {
     videoView.videoSize = window!.convertToBacking(videoView.frame).size
     // new (empty) frame buffer is created, so draw a frame manually

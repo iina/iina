@@ -13,6 +13,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   unowned let ud: UserDefaults = UserDefaults.standard
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60
+  
+  let screenFrame = NSScreen.main()?.visibleFrame;
+  var lastMagnification:CGFloat = 0.0;
 
   unowned let playerCore: PlayerCore = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
@@ -227,7 +230,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // gesture recognizer
     // disable it first for poor performance
-    // cv.addGestureRecognizer(magnificationGestureRecognizer)
+    magnificationGestureRecognizer.delaysMagnificationEvents = true;
+    cv.addGestureRecognizer(magnificationGestureRecognizer)
 
     // start mpv opengl_cb
     playerCore.startMPVOpenGLCB(videoView)
@@ -543,11 +547,32 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
     guard !isInInteractiveMode else { return }
     guard window != nil else { return }
-    let scale = recognizer.magnification * 10
-    let newWidth = window!.frame.width + scale
-    let newSize = NSSize(width: newWidth, height: window!.frame.width / (window!.aspectRatio.width / window!.aspectRatio.height))
-    let newFrame = window!.frame.centeredResize(to: newSize)
-    window!.setFrame(newFrame, display: true, animate: false)
+    
+    //Skip those very small momvements to reduce the pinch sensitive level
+    //This number cannot be too big
+    if abs(recognizer.magnification) < 0.03 { return }
+    
+    if recognizer.state == NSGestureRecognizerState.began {
+      lastMagnification = recognizer.magnification;
+    }
+    
+    if recognizer.state == NSGestureRecognizerState.changed {
+      
+      //Increment for each movement. 30 is for zoom in, -25 for zoom out.
+      let offsetWithSign = lastMagnification < recognizer.magnification ? 30.0 : -25.0 as CGFloat;
+      
+      var newHeight = window!.frame.height + offsetWithSign;
+      if newHeight <= minSize.height { return }
+      
+      if newHeight > (screenFrame?.size.height)! {
+        newHeight = (screenFrame?.size.height)!;
+      }
+      
+      let newSize = NSSize(width: newHeight * (window!.aspectRatio.width / window!.aspectRatio.height), height: newHeight)
+      window!.centeredResized(to: newSize)
+      
+      lastMagnification = recognizer.magnification;
+    }
   }
 
   // MARK: - Window delegate

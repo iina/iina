@@ -112,7 +112,7 @@ extension NSWindow{
                           width: newSize.width,
                           height: newSize.height)
     
-    setFrame(newFrame, display: true);
+    setFrame(newFrame, display: true, animate: false);
   }
 }
 

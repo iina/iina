@@ -182,6 +182,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
   @IBOutlet weak var rightArrowLabel: NSTextField!
   @IBOutlet weak var osdVisualEffectView: NSVisualEffectView!
   @IBOutlet weak var osd: NSTextField!
+	@IBOutlet weak var pipOverlayView: NSVisualEffectView!
+  
 
   weak var touchBarPlaySlider: NSSlider?
   weak var touchBarCurrentPosLabel: NSTextField?
@@ -266,6 +268,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
     rightArrowLabel.isHidden = true
     timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
+    pipOverlayView.isHidden = true
 
     useExtrackSeek = Preference.SeekOption(rawValue: ud.integer(forKey: Preference.Key.useExactSeek))
     arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: Preference.Key.arrowButtonAction))
@@ -492,7 +495,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
     if obj == 0 {
       // main window
       isMouseInWindow = false
-      if controlBar.isDragging { return }
+      if controlBar.isDragging || isInPIP { return }
       hideUI()
     } else if obj == 1 {
       // slider
@@ -589,6 +592,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
   }
 
   func windowWillClose(_ notification: Notification) {
+    // Close PIP
+    if isInPIP {
+      exitPIP(manually: true)
+    }
     // stop playing
     if !playerCore.isMpvTerminated {
       playerCore.savePlaybackPosition()
@@ -627,7 +634,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
 
     // Set back the window appearance
     self.window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
-
+    
+    guard !isInPIP else { return }
     // hide titlebar
     window!.titlebarAppearsTransparent = true
     window!.titleVisibility = .hidden
@@ -656,7 +664,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
     }
 
     // update videoview size if in full screen, since aspect ratio may changed
-    if (isInFullScreen) {
+    if (isInFullScreen && !isInPIP) {
 
       // Let mpv decide where to draw
       /*
@@ -677,7 +685,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
 
       videoView.frame = NSRect(x: 0, y: 0, width: w.frame.width, height: w.frame.height)
 
-    } else {
+    } else if (!isInPIP) {
 
       let frame = NSRect(x: 0, y: 0, width: w.contentView!.frame.width, height: w.contentView!.frame.height)
 
@@ -726,8 +734,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
   // MARK: - Control UI
 
   func hideUIAndCursor() {
-    // don't hide UI when dragging control bar
-    if controlBar.isDragging {
+    // don't hide UI when dragging control bar or when in PIP
+    if controlBar.isDragging || isInPIP {
       return
     }
     hideUI()
@@ -1017,7 +1025,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
 
     sliderCell?.isInDarkTheme = isDarkTheme
 
-    [titleBarView, controlBar, osdVisualEffectView].forEach {
+    [titleBarView, controlBar, osdVisualEffectView, pipOverlayView].forEach {
       $0?.material = material
       $0?.appearance = appearance
     }
@@ -1025,6 +1033,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
     if isInFullScreen {
       window!.appearance = appearance;
     }
+    
+    window?.appearance = appearance
   }
 
   func updateBufferIndicatorView() {
@@ -1389,11 +1399,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
   // MARK: - Picture in Picture
 
   func enterPIP() {
+    // FIXME: Internal PIP API
+    // Do not enter PIP if already "PIPing"  (in this case, in the PIP animation)
+    // Also do not enter if PIP state cannot be determined
+    let pipping = pip.value(forKey: "_pipping") as? Bool ?? true
+    guard !pipping else {
+      return
+    }
     pipVideo.view = videoView
     pip.aspectRatio = videoView.videoSize ?? .zero
     pip.playing = !playerCore.statusPaused
     pip.title = titleTextField.stringValue
     pip.presentAsPicture(inPicture: pipVideo)
+    pipOverlayView.isHidden = false
     isInPIP = true
   }
 
@@ -1402,6 +1420,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
     if manually {
       pip.dismissViewController(pipVideo)
     }
+    pipOverlayView.isHidden = true
     window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
     videoView.frame = window?.contentView?.frame ?? .zero
 

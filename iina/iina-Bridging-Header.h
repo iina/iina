@@ -10,6 +10,8 @@
 
 #pragma mark - PIP.framework
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol PIPViewControllerDelegate;
 
 @interface PIPViewController : NSViewController
@@ -36,3 +38,5 @@
 - (void)pipActionStop:(PIPViewController * _Nonnull)pip;
 
 @end
+
+NS_ASSUME_NONNULL_END

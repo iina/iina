@@ -13,6 +13,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   unowned let ud: UserDefaults = UserDefaults.standard
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60
+  
+  let screenFrame = NSScreen.main()?.visibleFrame;
 
   unowned let playerCore: PlayerCore = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
@@ -219,7 +221,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // gesture recognizer
     // disable it first for poor performance
-    // cv.addGestureRecognizer(magnificationGestureRecognizer)
+     cv.addGestureRecognizer(magnificationGestureRecognizer)
 
     // start mpv opengl_cb
     playerCore.startMPVOpenGLCB(videoView)
@@ -513,11 +515,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
     guard !isInInteractiveMode else { return }
     guard window != nil else { return }
-    let scale = recognizer.magnification * 10
-    let newWidth = window!.frame.width + scale
-    let newSize = NSSize(width: newWidth, height: window!.frame.width / (window!.aspectRatio.width / window!.aspectRatio.height))
-    let newFrame = window!.frame.centeredResize(to: newSize)
-    window!.setFrame(newFrame, display: true, animate: false)
+    
+    if recognizer.state == NSGestureRecognizerState.changed {
+      let scale = recognizer.magnification > 0 ? recognizer.magnification + 40 : -(recognizer.magnification + 40);
+      let newHeight = window!.frame.height + scale;
+      if newHeight > (screenFrame?.size.height)! {return};
+      
+      let newWidth = (window!.frame.width * newHeight / window!.frame.height);
+      if newWidth < 300 {return};
+      
+      //Consider to deprecate this extension fun from NSRect?
+      //window!.frame.centeredResize(to: <#T##NSSize#>);
+      
+      window!.centeredResized(to: NSSize(width: newWidth, height: newHeight));
+    }
   }
 
   // MARK: - Window delegate

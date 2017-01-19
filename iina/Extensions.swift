@@ -120,12 +120,9 @@ extension NSRect {
 
   func makeLocate(in biggerRect: NSRect) -> NSRect {
     var newX = origin.x, newY = origin.y
-    if newX < 0 {
-      newX = 0
-    }
-    if newY < 0 {
-      newY = 0
-    }
+    
+    // it seems no need to reset origin point to zero, 
+    // because it will lead to wrong position when resize in multiple screens enviroment
     if newX + size.width > biggerRect.width {
       newX = biggerRect.width - size.width
     }

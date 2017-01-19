@@ -942,7 +942,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       $0?.appearance = appearance
     }
     
-    if(isInFullScreen) {
+    if isInFullScreen {
       window!.appearance = appearance;
     }
   }

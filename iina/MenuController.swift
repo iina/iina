@@ -275,8 +275,8 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateAudioMenu() {
     let player = PlayerCore.shared
-    volumeIndicator.title = "\(Constants.String.volume): \(player.info.volume)%"
-    audioDelayIndicator.title = "\(Constants.String.audioDelay): \(player.info.audioDelay)s"
+    volumeIndicator.title = String(format: NSLocalizedString("menu.volume", comment: "Volume:"), player.info.volume)
+    audioDelayIndicator.title = String(format: NSLocalizedString("menu.audio_delay", comment: "Audio Delay:"), player.info.audioDelay)
   }
 
   private func updateFlipAndMirror() {
@@ -287,7 +287,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateSubMenu() {
     let player = PlayerCore.shared
-    subDelayIndicator.title = "\(Constants.String.subDelay): \(player.info.subDelay)s"
+    subDelayIndicator.title = String(format: NSLocalizedString("menu.sub_delay", comment: "Subtitle Delay:"), player.info.subDelay)
   }
 
   /**

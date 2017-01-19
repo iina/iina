@@ -44,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       PrefControlViewController(),
       PrefKeyBindingViewController(),
       PrefAdvancedViewController(),
-    ], title: "Preference")
+    ], title: NSLocalizedString("preference.title", comment: "Preference"))
   }()
 
   @IBOutlet weak var menuController: MenuController!
@@ -65,7 +65,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     // show alpha in color panels
     NSColorPanel.shared().showsAlpha = true
-    
+
     // check update
     UpdateChecker.checkUpdate(alertIfOfflineOrNoUpdate: false)
   }
@@ -79,6 +79,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+    guard playerCore.mainWindow.isWindowLoaded else { return false }
     return UserDefaults.standard.bool(forKey: Preference.Key.quitWhenNoOpenedWindow)
   }
 

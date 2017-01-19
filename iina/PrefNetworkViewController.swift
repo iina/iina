@@ -28,8 +28,12 @@ class PrefNetworkViewController: NSViewController {
   }
 
   var toolbarItemLabel: String {
-    return "Network"
+    view.layoutSubtreeIfNeeded()
+    return NSLocalizedString("preference.network", comment: "Network")
   }
+
+  var hasResizableWidth: Bool = false
+  var hasResizableHeight: Bool = false
 
   override func viewDidLoad() {
     super.viewDidLoad()

@@ -301,6 +301,17 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
       }
       // split
       let splitted = line.characters.split(separator: " ", maxSplits: 1)
+      if splitted.count < 2 {
+        let alert = String(format: NSLocalizedString("alert.keybinding_config_error", comment: "Error setting keybinding configuration"), currentConfName)
+        Utility.showAlert(message: alert)
+        let title = "IINA Default"
+        currentConfName = title
+        currentConfFilePath = getFilePath(forConfig: title)!
+        configSelectPopUp.selectItem(withTitle: title)
+        loadConfigFile()
+        changeButtonEnabled()
+        return
+      }
       let key = String(splitted[0])
       let action = splitted[1].split(separator: " ").map { seq in return String(seq) }
 

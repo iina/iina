@@ -179,9 +179,9 @@ extension MainWindowController {
       retinaSize.size.width *= sizeMap[size]
       retinaSize.size.height *= sizeMap[size]
       if retinaSize.size.width > screenFrame.size.width || retinaSize.size.height > screenFrame.size.height {
-        newFrame = w.frame.centeredResize(to: w.frame.size.shrink(toSize: screenFrame.size)).makeLocate(in: screenFrame)
+        newFrame = w.frame.centeredResize(to: w.frame.size.shrink(toSize: screenFrame.size)).constrain(in: screenFrame)
       } else {
-        newFrame = w.frame.centeredResize(to: retinaSize.size).makeLocate(in: screenFrame)
+        newFrame = w.frame.centeredResize(to: retinaSize.size).constrain(in: screenFrame)
       }
     // fit screen
     case 3:

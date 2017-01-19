@@ -105,17 +105,6 @@ extension NSSize {
 
 }
 
-extension NSWindow{
-  func centeredResized(to newSize: NSSize) {
-    let newFrame = NSRect(x: frame.origin.x - (newSize.width - frame.size.width) / 2,
-                          y: frame.origin.y - (newSize.height - frame.size.height) / 2,
-                          width: newSize.width,
-                          height: newSize.height)
-    
-    setFrame(newFrame, display: true);
-  }
-}
-
 extension NSRect {
 
   func multiply(_ multiplier: CGFloat) -> NSRect {

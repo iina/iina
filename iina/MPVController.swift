@@ -217,7 +217,8 @@ class MPVController: NSObject {
       userOptions.forEach { op in
         let status = mpv_set_option_string(mpv, op[0], op[1])
         if status < 0 {
-          Utility.showAlert(message: "Error setting option --\(op[0])=\(op[1]) with return value \(status). Pleaase check your settings.")
+          let alert = String(format: NSLocalizedString("alert.extra_option_error", comment: "Error setting extra mpv option"), op[0], op[1], status)
+          Utility.showAlert(message: alert)
         }
       }
     } else {

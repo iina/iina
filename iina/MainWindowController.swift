@@ -18,6 +18,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
   unowned let ud: UserDefaults = UserDefaults.standard
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60
+  let minimumPressDuration: TimeInterval = 0.5
 
   unowned let playerCore: PlayerCore = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
@@ -70,6 +71,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
 
   /** The value of speedValueIndex before Force Touch **/
   var oldIndex: Int = AppData.availableSpeedValues.count / 2
+  
+  /** When the arrow buttons were last clicked **/
+  var lastClick = Date()
 
   /** The index of current speed in speed value array */
   var speedValueIndex: Int = AppData.availableSpeedValues.count / 2 {
@@ -1221,9 +1225,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
       }
 
       if sender.intValue == 0 { // Released
-        if maxPressure == 1 { // Single click ended
+        if maxPressure == 1 &&
+          (speedValueIndex < speeds / 2 - 1 ||
+          Date().timeIntervalSince(lastClick) < minimumPressDuration) { // Single click ended, 2x speed
           speedValueIndex = oldIndex - 1
-        } else { // Force Touch ended
+        } else { // Force Touch or long press ended
           speedValueIndex = speeds / 2
         }
         maxPressure = 0
@@ -1231,6 +1237,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
         if sender.intValue == 1 && maxPressure == 0 { // First press
           oldIndex = speedValueIndex
           speedValueIndex -= 1
+          lastClick = Date()
         } else { // Force Touch
           speedValueIndex = max(oldIndex - Int(sender.intValue), 0)
         }
@@ -1254,9 +1261,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
       }
 
       if sender.intValue == 0 { // Released
-        if maxPressure == 1 { // Single click ended
+        if maxPressure == 1 &&
+          (speedValueIndex > speeds / 2 + 1 ||
+          Date().timeIntervalSince(lastClick) < minimumPressDuration) { // Single click ended
           speedValueIndex = oldIndex + 1
-        } else { // Force Touch ended
+        } else { // Force Touch or long press ended
           speedValueIndex = speeds / 2
         }
         maxPressure = 0
@@ -1264,6 +1273,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
         if sender.intValue == 1 && maxPressure == 0 { // First press
           oldIndex = speedValueIndex
           speedValueIndex += 1
+          lastClick = Date()
         } else { // Force Touch
           speedValueIndex = min(oldIndex + Int(sender.intValue), speeds - 1)
         }

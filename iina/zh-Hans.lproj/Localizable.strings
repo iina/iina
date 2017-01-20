@@ -73,6 +73,7 @@
 "preference.control" = "控制";
 "preference.keybindings" = "快捷键";
 "preference.advanced" = "高级";
+"preference.scripts" = "脚本";
 
 "menu.volume"= "音量: %d";
 "menu.audio_delay" = "音频延迟: %.2f秒";
@@ -81,3 +82,5 @@
 "menu.exit_fullscreen" = "离开全屏";
 
 "track.none" = "<无>";
+
+"alert.extra_option_error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";

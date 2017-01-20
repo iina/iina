@@ -73,6 +73,7 @@
 "preference.control" = "Control";
 "preference.keybindings" = "Keybindings";
 "preference.advanced" = "Advanced";
+"preference.scripts" = "Scripts";
 
 "menu.volume"= "Volume: %d";
 "menu.audio_delay" = "Audio Delay: %.2fs";
@@ -81,3 +82,5 @@
 "menu.exit_fullscreen" = "Exit Full Screen";
 
 "track.none" = "<None>";
+
+"alert.extra_option_error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";

@@ -129,39 +129,27 @@ extension NSRect {
                   height: newSize.height)
   }
 
-  func makeLocate(in biggerRect: NSRect) -> NSRect {
-    var newX = origin.x, newY = origin.y
-    if newX < 0 {
-      newX = 0
-    }
-    if newY < 0 {
-      newY = 0
-    }
-    if newX + size.width > biggerRect.width {
-      newX = biggerRect.width - size.width
-    }
-    if newY + size.height > biggerRect.height {
-      newY = biggerRect.height - size.height
-    }
-    return NSRect(x: newX, y: newY, width: size.width, height: size.height)
-  }
-
   func constrain(in biggerRect: NSRect) -> NSRect {
-    var newX = origin.x, newY = origin.y
-    var newW = width, newH = height
-    if newX < biggerRect.origin.x {
-      newX = biggerRect.origin.x
+    // new size
+    var newSize = size
+    if newSize.width > biggerRect.width || newSize.height > biggerRect.height {
+      newSize = size.shrink(toSize: biggerRect.size)
     }
-    if newY < biggerRect.origin.y {
-      newY = biggerRect.origin.y
+    // new origin
+    var newOrigin = origin
+    if newOrigin.x < biggerRect.origin.x {
+      newOrigin.x = biggerRect.origin.x
     }
-    if newX + size.width > biggerRect.origin.x + biggerRect.width {
-      newW = biggerRect.origin.x + biggerRect.width - newX
+    if newOrigin.y < biggerRect.origin.y {
+      newOrigin.y = biggerRect.origin.y
     }
-    if newY + size.height > biggerRect.origin.y + biggerRect.height {
-      newH = biggerRect.origin.y + biggerRect.height - newY
+    if newOrigin.x + width > biggerRect.origin.x + biggerRect.width {
+      newOrigin.x = biggerRect.origin.x + biggerRect.width - width
     }
-    return NSRect(x: newX, y: newY, width: newW, height: newH)
+    if newOrigin.y + height > biggerRect.origin.y + biggerRect.height {
+      newOrigin.y = biggerRect.origin.y + biggerRect.height - height
+    }
+    return NSRect(origin: newOrigin, size: newSize)
   }
 }
 

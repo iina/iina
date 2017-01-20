@@ -43,7 +43,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="680" height="355"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="680" height="355"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,7 +79,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
-                    <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
+                    <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
                         <rect key="frame" x="120" y="40" width="440" height="67"/>
                         <subviews>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT">
@@ -352,6 +352,7 @@
                     </visualEffectView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="OiF-pA-8Sd" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" placeholder="YES" id="9z2-rX-b7C"/>
                     <constraint firstAttribute="trailing" secondItem="Tdb-EA-alw" secondAttribute="trailing" id="Mqd-Wb-vqq"/>
                     <constraint firstAttribute="trailing" secondItem="epo-S6-QVB" secondAttribute="trailing" constant="-240" id="PAj-s6-32e"/>
                     <constraint firstItem="oX4-0N-but" firstAttribute="centerY" secondItem="se5-gp-TjO" secondAttribute="centerY" id="XlV-7n-jPb"/>
@@ -359,6 +360,7 @@
                     <constraint firstItem="g0O-v5-RQj" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="8" id="a6R-6Y-zu3"/>
                     <constraint firstItem="epo-S6-QVB" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="jpv-dz-Kql"/>
                     <constraint firstItem="oX4-0N-but" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="kfR-hG-8ee"/>
+                    <constraint firstAttribute="bottom" secondItem="OiF-pA-8Sd" secondAttribute="bottom" constant="40" placeholder="YES" id="lUL-XK-HxW"/>
                     <constraint firstItem="TRx-2V-Gr3" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="ofB-WP-9dW"/>
                     <constraint firstAttribute="trailing" secondItem="TRx-2V-Gr3" secondAttribute="trailing" id="te1-wi-BbH"/>
                     <constraint firstAttribute="bottom" secondItem="Tdb-EA-alw" secondAttribute="bottom" constant="-60" id="vP1-IE-sbB"/>

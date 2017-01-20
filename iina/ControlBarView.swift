@@ -16,6 +16,7 @@ class ControlBarView: NSVisualEffectView {
 
   override func awakeFromNib() {
     self.layer?.cornerRadius = 6
+    self.translatesAutoresizingMaskIntoConstraints = true
   }
 
   override func mouseDown(with event: NSEvent) {

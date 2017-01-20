@@ -15,14 +15,14 @@ class PlaySliderCell: NSSliderCell {
   }
 
   let knobWidth: CGFloat = 3
-  let knobHeight: CGFloat = 13
-  let knobRadius: CGFloat = 2
+  let knobHeight: CGFloat = 15
+  let knobRadius: CGFloat = 1
 
-  static let darkColor = NSColor(red: 1, green: 1, blue: 1, alpha: 0.9)
+  static let darkColor = NSColor(red: 1, green: 1, blue: 1, alpha: 0.5)
   static let lightColor = NSColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
 
-  static let darkBarColorLeft = NSColor(white: 1, alpha: 0.5)
-  static let darkBarColorRight = NSColor(white: 1, alpha: 0.2)
+  static let darkBarColorLeft = NSColor(white: 1, alpha: 0.3)
+  static let darkBarColorRight = NSColor(white: 1, alpha: 0.1)
   static let lightBarColorLeft = NSColor(red: 0.239, green: 0.569, blue: 0.969, alpha: 1)
   static let lightBarColorRight = NSColor(white: 0.5, alpha: 0.5)
 
@@ -46,11 +46,12 @@ class PlaySliderCell: NSSliderCell {
   }
 
   override func drawKnob(_ knobRect: NSRect) {
-    let rect = NSMakeRect(knobRect.origin.x,
+    // Round the X position for cleaner drawing
+    let rect = NSMakeRect(round(knobRect.origin.x),
                           knobRect.origin.y + 0.5 * (knobRect.height - knobHeight),
                           knobRect.width,
                           knobHeight)
-    let path = NSBezierPath(roundedRect: rect, xRadius: 2, yRadius: 2)
+    let path = NSBezierPath(roundedRect: rect, xRadius: knobRadius, yRadius: knobRadius)
     knobColor.setFill()
     path.fill()
   }
@@ -59,7 +60,7 @@ class PlaySliderCell: NSSliderCell {
     let slider = self.controlView as! NSSlider
     let bounds = super.barRect(flipped: flipped)
     let percentage = slider.doubleValue / (slider.maxValue - slider.minValue)
-    let pos = CGFloat(percentage) * bounds.width
+    let pos = min(CGFloat(percentage) * bounds.width, bounds.width - 1);
     let rect = super.knobRect(flipped: flipped)
     let flippedMultiplier = flipped ? CGFloat(-1) : CGFloat(1)
     return NSMakeRect(pos - flippedMultiplier * 0.5 * knobWidth, rect.origin.y, knobWidth, rect.height)
@@ -67,31 +68,39 @@ class PlaySliderCell: NSSliderCell {
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
     let info = PlayerCore.shared.info
-
+    
     let slider = self.controlView as! NSSlider
-
-    let percentage: CGFloat
+    
+    /// The position of the knob, rounded for cleaner drawing
+    let knobPos : CGFloat = round(knobRect(flipped: flipped).origin.x);
+    
+    /// How far progressed the current video is, used for drawing the bar background
+    var progress : CGFloat = 0;
+    
     if info.isNetworkResource, info.cacheTime != 0, let duration = info.videoDuration {
       let pos = Double(info.cacheTime) / Double(duration.second) * 100
-      percentage = CGFloat(pos / (slider.maxValue - slider.minValue))
+      progress = round(rect.width * CGFloat(pos / (slider.maxValue - slider.minValue))) + 2;
     } else {
-      percentage = CGFloat(slider.doubleValue / (slider.maxValue - slider.minValue))
+      progress = knobPos;
     }
-    let knobPos = rect.width * percentage
+    
     let rect = NSMakeRect(rect.origin.x, rect.origin.y + 1, rect.width, rect.height - 2)
     let path = NSBezierPath(roundedRect: rect, xRadius: 3, yRadius: 3)
 
     // draw left
-    NSGraphicsContext.saveGraphicsState()
-    let pathLeft = NSMakeRect(rect.origin.x, rect.origin.y, knobPos, rect.height)
-    NSBezierPath(rect: pathLeft).setClip()
+    let pathLeftRect : NSRect = NSMakeRect(rect.origin.x, rect.origin.y, progress, rect.height)
+    NSBezierPath(rect: pathLeftRect).addClip();
+    
+    // Clip 1px around the knob
+    path.append(NSBezierPath(rect: NSRect(x: knobPos - 1, y: rect.origin.y, width: knobWidth + 2, height: rect.height)).reversed);
+    
     barColorLeft.setFill()
     path.fill()
     NSGraphicsContext.restoreGraphicsState()
 
     // draw right
     NSGraphicsContext.saveGraphicsState()
-    let pathRight = NSMakeRect(rect.origin.x + knobPos, rect.origin.y, rect.width - knobPos, rect.height)
+    let pathRight = NSMakeRect(rect.origin.x + progress, rect.origin.y, rect.width - progress, rect.height)
     NSBezierPath(rect: pathRight).setClip()
     barColorRight.setFill()
     path.fill()

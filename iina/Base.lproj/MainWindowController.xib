@@ -113,9 +113,9 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="2py-h1-0km">
-                                <rect key="frame" x="12" y="33" width="24" height="24"/>
+                                <rect key="frame" x="12" y="34" width="24" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="MPG-2q-w6a"/>
+                                    <constraint firstAttribute="height" constant="21" id="MPG-2q-w6a"/>
                                     <constraint firstAttribute="width" constant="24" id="vBo-ma-Dnu"/>
                                 </constraints>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" imageScaling="proportionallyDown" inset="2" id="XXj-HK-hXa">
@@ -167,7 +167,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YvW-zG-QiW" userLabel="Settings Button">
-                                <rect key="frame" x="375" y="33" width="24" height="24"/>
+                                <rect key="frame" x="379" y="33" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="FBK-0C-gcn"/>
                                     <constraint firstAttribute="height" constant="24" id="nWg-Z7-Zhc"/>
@@ -241,7 +241,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="EIi-qd-glM" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="19J-AW-dth"/>
-                            <constraint firstItem="wy6-h4-fsN" firstAttribute="leading" secondItem="YvW-zG-QiW" secondAttribute="trailing" constant="6" id="6uo-LX-tAd"/>
+                            <constraint firstItem="wy6-h4-fsN" firstAttribute="leading" secondItem="YvW-zG-QiW" secondAttribute="trailing" constant="2" id="6uo-LX-tAd"/>
                             <constraint firstItem="NBD-MV-OuG" firstAttribute="leading" secondItem="OiF-pA-8Sd" secondAttribute="leading" constant="2" id="72g-fy-o5h"/>
                             <constraint firstAttribute="bottom" secondItem="NBD-MV-OuG" secondAttribute="bottom" constant="10" id="7Jy-5x-USp"/>
                             <constraint firstItem="gxw-pJ-Lcg" firstAttribute="leading" secondItem="10x-bg-xlj" secondAttribute="trailing" constant="25" id="C5Q-BE-NQl"/>
@@ -267,7 +267,7 @@
                             <constraint firstAttribute="trailing" secondItem="GgV-Cc-sk0" secondAttribute="trailing" constant="2" id="sgJ-oR-QEJ"/>
                             <constraint firstItem="SAG-kc-FAt" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="16" id="wIg-92-XDQ"/>
                             <constraint firstItem="YvW-zG-QiW" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="wnr-6p-18l"/>
-                            <constraint firstItem="2py-h1-0km" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="wuk-mx-e29"/>
+                            <constraint firstItem="2py-h1-0km" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="12" id="wuk-mx-e29"/>
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="epo-S6-QVB" userLabel="SideBar">
@@ -380,7 +380,7 @@
         <image name="mute" width="17" height="14"/>
         <image name="pause" width="24" height="24"/>
         <image name="play" width="24" height="24"/>
-        <image name="playlist" width="14" height="10"/>
+        <image name="playlist" width="14" height="14"/>
         <image name="speed" width="24" height="24"/>
         <image name="speedl" width="24" height="24"/>
         <image name="volume" width="17" height="14"/>

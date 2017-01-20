@@ -66,6 +66,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // show alpha in color panels
     NSColorPanel.shared().showsAlpha = true
 
+    // other
+    if #available(OSX 10.12.2, *) {
+      NSApp.isAutomaticCustomizeTouchBarMenuItemEnabled = false
+    }
+
     // check update
     UpdateChecker.checkUpdate(alertIfOfflineOrNoUpdate: false)
   }

@@ -355,8 +355,8 @@
                                     <action selector="performZoom:" target="-1" id="DIl-cC-cCs"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="ZgO-35-2v2"/>
-                            <menuItem title="Custom Touch Bar..." id="ZnF-yX-7jP">
+                            <menuItem isSeparatorItem="YES" hidden="YES" id="ZgO-35-2v2"/>
+                            <menuItem title="Custom Touch Bar..." hidden="YES" id="ZnF-yX-7jP">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>

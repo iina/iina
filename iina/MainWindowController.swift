@@ -13,6 +13,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   unowned let ud: UserDefaults = UserDefaults.standard
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60
+  
+  let screenFrame = NSScreen.main()?.visibleFrame;
 
   unowned let playerCore: PlayerCore = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
@@ -219,7 +221,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // gesture recognizer
     // disable it first for poor performance
-    // cv.addGestureRecognizer(magnificationGestureRecognizer)
+    cv.addGestureRecognizer(magnificationGestureRecognizer)
 
     // start mpv opengl_cb
     playerCore.startMPVOpenGLCB(videoView)
@@ -513,11 +515,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
     guard !isInInteractiveMode else { return }
     guard window != nil else { return }
-    let scale = recognizer.magnification * 10
-    let newWidth = window!.frame.width + scale
-    let newSize = NSSize(width: newWidth, height: window!.frame.width / (window!.aspectRatio.width / window!.aspectRatio.height))
-    let newFrame = window!.frame.centeredResize(to: newSize)
-    window!.setFrame(newFrame, display: true, animate: false)
+    
+    if recognizer.state == NSGestureRecognizerState.changed {
+      let scale = recognizer.magnification > 0 ? recognizer.magnification + 40 : -(recognizer.magnification + 40);
+      let newHeight = window!.frame.height + scale;
+      if newHeight > (screenFrame?.size.height)! {return};
+      
+      let newWidth = (window!.frame.width * newHeight / window!.frame.height);
+      if newWidth < 300 {return};
+      
+      //Consider to deprecate this extension fun from NSRect?
+      //window!.frame.centeredResize(to: <#T##NSSize#>);
+      
+      window!.centeredResized(to: NSSize(width: newWidth, height: newHeight));
+    }
   }
 
   // MARK: - Window delegate
@@ -549,6 +560,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {
+    // Set the appearance to match the theme so the titlebar matches the theme
+    switch(Preference.Theme(rawValue: ud.integer(forKey: Preference.Key.themeMaterial))!) {
+      case .dark, .ultraDark: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantDark);
+      case .light, .mediumLight: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
+    }
+    
     // show titlebar
     window!.titlebarAppearsTransparent = false
     window!.titleVisibility = .visible
@@ -560,6 +577,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
+    // Set back the window appearance
+    self.window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
+    
     // hide titlebar
     window!.titlebarAppearsTransparent = true
     window!.titleVisibility = .hidden
@@ -653,7 +673,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     animationState = .willHide
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = 0.5
+      context.duration = 0.25
       fadeableViews.forEach { (v) in
         v?.animator().alphaValue = 0
       }
@@ -677,6 +697,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.5
       fadeableViews.forEach { (v) in
+        // Set the fade animation duration
+        NSAnimationContext.current().duration = TimeInterval(0.25);
+        
         v?.animator().alphaValue = 1
       }
     }) {
@@ -775,6 +798,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     withStandardButtons { button in
       if let index = (self.fadeableViews.index {$0 === button}) {
         self.fadeableViews.remove(at: index)
+        
+        // Make sure the button is visible
+        button!.alphaValue = 1;
+        button!.isHidden = false;
       }
     }
     // remove titlebar view from fade-able views
@@ -877,7 +904,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Display time label when mouse over slider */
   private func updateTimeLabel(_ mouseXPos: CGFloat) {
     let timeLabelXPos = playSlider.frame.origin.y + 15
-    timePreviewWhenSeek.frame.origin = CGPoint(x: mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2, y: timeLabelXPos)
+    timePreviewWhenSeek.frame.origin = CGPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2), y: timeLabelXPos + 1)
     let percentage = Double((mouseXPos - 3) / 354)
     if let duration = playerCore.info.videoDuration {
       timePreviewWhenSeek.stringValue = (duration * percentage).stringRepresentation
@@ -927,27 +954,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       $0?.material = material
       $0?.appearance = appearance
     }
-
-    [muteButton, playButton, leftArrowButton, rightArrowButton, settingsButton, playlistButton].forEach { btn in
-      guard let currImageName = btn?.image?.name() else { return }
-      if currImageName.hasSuffix("-dark") {
-        if isDarkTheme {
-          // dark image but with dark theme: remove "-dark"
-          let newName = currImageName.substring(to: currImageName.index(currImageName.endIndex, offsetBy: -5))
-          btn?.image = NSImage(named: newName)
-          if let currAltImageName = btn?.alternateImage?.name() {
-            btn?.alternateImage = NSImage(named: currAltImageName.substring(to: currAltImageName.index(currAltImageName.endIndex, offsetBy: -5)))
-          }
-        }
-      } else {
-        // light image but with light theme: add "-dark"
-        if !isDarkTheme {
-          btn?.image = NSImage(named: currImageName + "-dark")
-          if let currAltImageName = btn?.alternateImage?.name() {
-            btn?.alternateImage = NSImage(named: currAltImageName + "-dark")
-          }
-        }
-      }
+    
+    if isInFullScreen {
+      window!.appearance = appearance;
     }
   }
 
@@ -1251,8 +1260,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let percentage = 100 * sender.doubleValue / sender.maxValue
     // label
     timePreviewWhenSeek.frame.origin = CGPoint(
-      x: sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2,
-      y: playSlider.frame.origin.y + 15)
+      x: round(sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2),
+      y: playSlider.frame.origin.y + 16)
     timePreviewWhenSeek.stringValue = (playerCore.info.videoDuration! * percentage * 0.01).stringRepresentation
     playerCore.seek(percent: percentage, forceExact: true)
   }

@@ -204,7 +204,6 @@ class VideoView: NSOpenGLView {
   private func prepareVideoFrameBuffer() {
     let size = self.videoSize!
     openGLContext!.makeCurrentContext()
-    renderContext?.lock()
     openGLContext!.lock()
     // if texture or fbo exists
     if texture != 0 {
@@ -233,7 +232,6 @@ class VideoView: NSOpenGLView {
     glBindTexture(GLenum(GL_TEXTURE_2D), 0)
     glBindFramebuffer(GLenum(GL_FRAMEBUFFER), 0)
     openGLContext!.unlock()
-    renderContext?.unlock()
   }
 
   /**
@@ -290,6 +288,7 @@ class VideoView: NSOpenGLView {
     if !started {
       started = true
     }
+    openGLContext!.lock()
     renderContext.lock()
 
     renderContext.makeCurrentContext()
@@ -300,9 +299,11 @@ class VideoView: NSOpenGLView {
       glClearColor(0, 0, 0, 1)
       glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
     }
+    renderContext.update()
     renderContext.flushBuffer()
 
     renderContext.unlock()
+    openGLContext!.unlock()
   }
 
   /** Draw the video to view from framebuffer. */
@@ -336,6 +337,11 @@ class VideoView: NSOpenGLView {
       mpv_opengl_cb_report_flip(context, 0)
     }
     openGLContext?.unlock()
+  }
+
+  /** This function is mainly called when bound changes, e.g. resize window */
+  override func draw(_ dirtyRect: NSRect) {
+//    drawVideo()
   }
 
   // MARK: - Utils

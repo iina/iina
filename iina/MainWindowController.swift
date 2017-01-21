@@ -560,7 +560,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     window!.titleVisibility = .visible
     removeTitlebarFromFadeableViews()
     // stop animation and hide titleBarView
-    animationState = .hidden
     titleBarView.isHidden = true
     isInFullScreen = true
   }

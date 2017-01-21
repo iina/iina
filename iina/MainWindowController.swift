@@ -430,6 +430,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // main window
       isMouseInWindow = true
       showUI()
+      updateTimer()
     } else if obj == 1 {
       // slider
       isMouseInSlider = true
@@ -465,9 +466,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isMouseInSlider {
       updateTimeLabel(mousePos.x)
     }
-    if isMouseInWindow {
-      showUIAndUpdateTimer()
+    if isMouseInWindow && animationState == .hidden {
+      showUI()
     }
+    updateTimer()
   }
 
   override func scrollWheel(with event: NSEvent) {
@@ -695,10 +697,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  private func showUIAndUpdateTimer() {
-    if animationState == .hidden {
-      showUI()
-    }
+  private func updateTimer() {
     // if timer exist, destroy first
     if hideControlTimer != nil {
       hideControlTimer!.invalidate()

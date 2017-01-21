@@ -264,7 +264,7 @@ class MenuController: NSObject, NSMenuDelegate {
     menu.addItem(noTrackMenuItem)
     for track in info.trackList(type) {
       menu.addItem(withTitle: track.readableTitle, action: #selector(MainWindowController.menuChangeTrack(_:)),
-                             tag: nil, obj: track, stateOn: track.id == info.trackId(type))
+                             tag: nil, obj: (track, type), stateOn: track.id == info.trackId(type))
     }
   }
 

@@ -91,11 +91,8 @@ class PlaybackInfo {
     switch type {
     case .video: return videoTracks
     case .audio: return audioTracks
-    case .sub: return subTracks
-    // for menu update, etc.
-    case .secondSub: return subTracks.map { $0.type = .secondSub; return $0 }
+    case .sub, .secondSub: return subTracks
     }
-
   }
 
   func trackId(_ type: MPVTrack.TrackType) -> Int? {

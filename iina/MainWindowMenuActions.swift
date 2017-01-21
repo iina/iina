@@ -108,7 +108,9 @@ extension MainWindowController {
   }
 
   @IBAction func menuChangeTrack(_ sender: NSMenuItem) {
-    if let trackObj = sender.representedObject as? MPVTrack {
+    if let trackObj = sender.representedObject as? (MPVTrack, MPVTrack.TrackType) {
+      playerCore.setTrack(trackObj.0.id, forType: trackObj.1)
+    } else if let trackObj = sender.representedObject as? MPVTrack {
       playerCore.setTrack(trackObj.id, forType: trackObj.type)
     }
   }

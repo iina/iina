@@ -553,6 +553,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     playSlider.addTrackingArea(NSTrackingArea(rect: playSlider.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 1]))
     // update timer
     updateTimer()
+    // always on top
+    if ud.bool(forKey: Preference.Key.alwaysFloatOnTop) {
+      playerCore.info.isAlwaysOntop = true
+      setWindowFloatingOntop(true)
+    }
   }
 
   func windowWillClose(_ notification: Notification) {
@@ -1054,7 +1059,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func setWindowFloatingOntop(_ onTop: Bool) {
     guard let window = window else { return }
     if onTop {
-      window.level = Int(CGWindowLevelForKey(.floatingWindow))
+      window.level = Int(CGWindowLevelForKey(.floatingWindow) + 1)
     } else {
       window.level = Int(CGWindowLevelForKey(.normalWindow))
     }

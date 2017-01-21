@@ -197,7 +197,7 @@ extension MainWindowController {
     w.setFrame(newFrame, display: true, animate: true)
   }
 
-  @IBAction func menuAlwaysOnTop(_ sender: NSMenuItem) {
+  @IBAction func menuAlwaysOnTop(_ sender: AnyObject) {
     playerCore.info.isAlwaysOntop = !playerCore.info.isAlwaysOntop
     setWindowFloatingOntop(playerCore.info.isAlwaysOntop)
   }

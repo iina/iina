@@ -42,6 +42,8 @@ struct Preference {
     /** Resume from last position */
     static let resumeLastPosition = "resumeLastPosition"
 
+    static let alwaysFloatOnTop = "alwaysFloatOnTop"
+
     /** Show chapter pos in progress bar (bool) */
     static let showChapterPos = "showChapterPos"
 
@@ -299,6 +301,7 @@ struct Preference {
     Key.resumeLastPosition: true,
     Key.useMediaKeys: true,
     Key.openStartPanel: false,
+    Key.alwaysFloatOnTop: false,
 
     Key.usePhysicalResolution: true,
     Key.resizeOnlyWhenManuallyOpenFile: true,

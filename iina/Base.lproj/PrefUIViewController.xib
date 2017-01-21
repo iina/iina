@@ -13,7 +13,7 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="237"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="257"/>
             <subviews>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Abq-vA-BcZ">
                     <rect key="frame" x="223" y="136" width="58" height="22"/>
@@ -77,7 +77,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RFk-nU-SGL">
-                    <rect key="frame" x="10" y="200" width="100" height="17"/>
+                    <rect key="frame" x="10" y="220" width="100" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="96" id="D3y-vU-Y9J"/>
                     </constraints>
@@ -133,7 +133,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="w6j-Cj-lns">
-                    <rect key="frame" x="118" y="199" width="352" height="18"/>
+                    <rect key="frame" x="118" y="219" width="352" height="18"/>
                     <buttonCell key="cell" type="check" title="Resize to video size only when opening files manually" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="uD1-HB-46y">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -143,7 +143,7 @@
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="RRL-GG-R45">
-                    <rect key="frame" x="118" y="179" width="352" height="18"/>
+                    <rect key="frame" x="118" y="199" width="352" height="18"/>
                     <buttonCell key="cell" type="check" title="Use physical resolution on retina screens" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="fsj-YE-OB7">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -193,6 +193,16 @@
                         <binding destination="lH7-Vv-0M1" name="value" keyPath="values.osdTextSize" id="AJx-Kb-5i1"/>
                     </connections>
                 </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="Cut-Nf-Jsy">
+                    <rect key="frame" x="118" y="179" width="352" height="18"/>
+                    <buttonCell key="cell" type="check" title="Always float on top while playing" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="SFX-ct-8MB">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="lH7-Vv-0M1" name="value" keyPath="values.alwaysFloatOnTop" id="oPr-N0-bZK"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="w6j-Cj-lns" secondAttribute="trailing" constant="12" id="0I9-sm-Gmy"/>
@@ -202,7 +212,7 @@
                 <constraint firstAttribute="trailing" secondItem="nDu-Yq-tPI" secondAttribute="trailing" constant="11" id="3LN-4o-lRY"/>
                 <constraint firstItem="4XH-GU-VhV" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="12" id="4Ck-v1-dnG"/>
                 <constraint firstItem="Xbc-Uq-fEH" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="6Lm-tT-rqM"/>
-                <constraint firstItem="QcN-dZ-Kb2" firstAttribute="top" secondItem="RRL-GG-R45" secondAttribute="bottom" constant="12" id="75Y-hM-txS"/>
+                <constraint firstItem="Cut-Nf-Jsy" firstAttribute="top" secondItem="RRL-GG-R45" secondAttribute="bottom" constant="6" id="7OC-gA-uTH"/>
                 <constraint firstAttribute="bottom" secondItem="63o-gu-DxA" secondAttribute="bottom" constant="23" id="Ahr-UK-W8Y"/>
                 <constraint firstItem="RRL-GG-R45" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="C7v-r5-ck5"/>
                 <constraint firstItem="bGH-kO-7Rd" firstAttribute="width" secondItem="6ml-Xj-nVX" secondAttribute="width" id="Cjr-lu-5fc"/>
@@ -217,6 +227,7 @@
                 <constraint firstItem="6ml-Xj-nVX" firstAttribute="top" secondItem="QcN-dZ-Kb2" secondAttribute="bottom" constant="12" id="P7g-bx-NWJ"/>
                 <constraint firstItem="Abq-vA-BcZ" firstAttribute="baseline" secondItem="6ml-Xj-nVX" secondAttribute="baseline" id="P8z-Rv-1yG"/>
                 <constraint firstItem="Xbc-Uq-fEH" firstAttribute="top" secondItem="OMM-mG-Uts" secondAttribute="bottom" constant="12" id="P9N-Fw-POy"/>
+                <constraint firstItem="QcN-dZ-Kb2" firstAttribute="top" secondItem="Cut-Nf-Jsy" secondAttribute="bottom" constant="12" id="PrT-PY-0Oi"/>
                 <constraint firstItem="nDu-Yq-tPI" firstAttribute="top" secondItem="6ml-Xj-nVX" secondAttribute="bottom" constant="12" id="UZr-eo-24j"/>
                 <constraint firstItem="HcO-CN-3qi" firstAttribute="leading" secondItem="wDT-XM-dyY" secondAttribute="trailing" constant="8" id="WSe-kx-GVU"/>
                 <constraint firstAttribute="trailing" secondItem="Xbc-Uq-fEH" secondAttribute="trailing" constant="11" id="YzW-Sw-2bk"/>
@@ -224,9 +235,11 @@
                 <constraint firstItem="zyi-J3-lSp" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="12" id="c0F-zW-kY1"/>
                 <constraint firstItem="Abq-vA-BcZ" firstAttribute="leading" secondItem="6ml-Xj-nVX" secondAttribute="trailing" constant="8" id="cU3-dR-Prb"/>
                 <constraint firstItem="qNv-Yk-nvp" firstAttribute="baseline" secondItem="bGH-kO-7Rd" secondAttribute="baseline" id="d5N-69-Xpg"/>
+                <constraint firstItem="Cut-Nf-Jsy" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="ddN-8v-Xbb"/>
                 <constraint firstItem="w6j-Cj-lns" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="diT-R8-jj8"/>
                 <constraint firstItem="oz1-yC-uZC" firstAttribute="baseline" secondItem="qNv-Yk-nvp" secondAttribute="baseline" id="dq6-E9-Sp5"/>
                 <constraint firstItem="bGH-kO-7Rd" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="123" id="e6s-aa-hQy"/>
+                <constraint firstAttribute="trailing" secondItem="Cut-Nf-Jsy" secondAttribute="trailing" constant="12" id="eNs-WX-i0Q"/>
                 <constraint firstItem="nDu-Yq-tPI" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="g0u-fO-lOV"/>
                 <constraint firstItem="hkU-0W-pJb" firstAttribute="leading" secondItem="Abq-vA-BcZ" secondAttribute="trailing" constant="8" id="gpR-Yv-fec"/>
                 <constraint firstItem="OMM-mG-Uts" firstAttribute="top" secondItem="nDu-Yq-tPI" secondAttribute="bottom" constant="6" id="hLv-LH-ePv"/>

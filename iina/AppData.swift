@@ -47,6 +47,8 @@ struct AppData {
   static let websiteLink = "https://lhc70000.github.io/iina/"
   static let emailLink = "lhc199652@gmail.com"
 
+  static let widthWhenNoVideo = 640
+  static let heightWhenNoVideo = 360
 }
 
 
@@ -64,13 +66,12 @@ struct Constants {
     static let degree = "°"
     static let dot = "●"
     static let play = "▶︎"
-    static let none = "<None>"
+    static let none = NSLocalizedString("track.none", comment: "<None>")
     static let chapter = "Chapter"
-    static let volume = "Volume"
-    static let audioDelay = "Audio Delay"
-    static let subDelay = "Subtitle Delay"
-    static let fullScreen = "Full Screen"
-    static let exitFullScreen = "Exit Full Screen"
+    static let fullScreen = NSLocalizedString("menu.fullscreen", comment: "Fullscreen")
+    static let exitFullScreen = NSLocalizedString("menu.exit_fullscreen", comment: "Exit Fullscreen")
+    static let pause = NSLocalizedString("menu.pause", comment: "Pause")
+    static let resume = NSLocalizedString("menu.resume", comment: "Resume")
   }
   struct Noti {
     static let playlistChanged = Notification.Name("IINAPlaylistChanged")

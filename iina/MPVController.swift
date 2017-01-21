@@ -29,8 +29,8 @@ class MPVController: NSObject {
 
   lazy var queue: DispatchQueue! = DispatchQueue(label: "com.colliderli.iina.controller")
 
-  var playerCore: PlayerCore = PlayerCore.shared
-  let ud: UserDefaults = UserDefaults.standard
+  unowned let playerCore: PlayerCore = PlayerCore.shared
+  unowned let ud: UserDefaults = UserDefaults.standard
 
   var needRecordSeekTime: Bool = false
   var recordedSeekStartTime: CFTimeInterval = 0
@@ -62,8 +62,10 @@ class MPVController: NSObject {
   ]
 
   deinit {
-    optionObservers.forEach { (k, v) in
-      ud.removeObserver(self, forKeyPath: k)
+    ObjcUtils.silenced {
+      self.optionObservers.forEach { (k, v) in
+        self.ud.removeObserver(self, forKeyPath: k)
+      }
     }
   }
 
@@ -125,6 +127,9 @@ class MPVController: NSObject {
     setUserOption(PK.useMediaKeys, type: .bool, forName: MPVOption.Input.inputMediaKeys)
 
     setUserOption(PK.keepOpenOnFileEnd, type: .bool, forName: MPVOption.Window.keepOpen)
+
+    chkErr(mpv_set_option_string(mpv, "watch-later-directory", Utility.watchLaterURL.path))
+    setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.ProgramBehavior.savePositionOnQuit)
 
     // - Codec
 
@@ -215,7 +220,8 @@ class MPVController: NSObject {
       userOptions.forEach { op in
         let status = mpv_set_option_string(mpv, op[0], op[1])
         if status < 0 {
-          Utility.showAlert(message: "Error setting option --\(op[0])=\(op[1]) with return value \(status). Pleaase check your settings.")
+          let alert = String(format: NSLocalizedString("alert.extra_option_error", comment: "Error setting extra mpv option"), op[0], op[1], status)
+          Utility.showAlert(message: alert)
         }
       }
     } else {
@@ -223,7 +229,6 @@ class MPVController: NSObject {
     }
 
     // Set options that can be override by user's config.
-    chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, "yes"))
     chkErr(mpv_set_option_string(mpv, MPVOption.Video.vo, "opengl-cb"))
     chkErr(mpv_set_option_string(mpv, MPVOption.Video.hwdecPreload, "auto"))
 
@@ -398,16 +403,15 @@ class MPVController: NSObject {
 
     switch eventId {
     case MPV_EVENT_SHUTDOWN:
-      if playerCore.isMpvTerminated {
-        // quit from IINA, e.g. Cmd+Q
-        mpv_detach_destroy(mpv)
-        mpv = nil
-      } else {
-        // quit by mpv, e.g. press 'q'
+      let quitByMPV = !playerCore.isMpvTerminated
+      if quitByMPV {
         playerCore.terminateMPV(sendQuit: false)
         mpv_detach_destroy(mpv)
         mpv = nil
         NSApp.terminate(nil)
+      } else {
+        mpv_detach_destroy(mpv)
+        mpv = nil
       }
 
     case MPV_EVENT_LOG_MESSAGE:

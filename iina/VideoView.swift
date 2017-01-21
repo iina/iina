@@ -177,14 +177,15 @@ class VideoView: NSOpenGLView {
 
   func uninit() {
     guard !isUninited else { return }
-    // uninit mpv gl
+    // unlink display
+    stopDisplayLink()
     mpv_opengl_cb_set_update_callback(mpvGLContext, nil, nil)
+    // uninit mpv gl
     mpv_opengl_cb_uninit_gl(mpvGLContext)
     // delete framebuffer
     glDeleteTextures(1, &texture)
     glDeleteFramebuffers(1, &fbo)
-    // unlink display
-    stopDisplayLink()
+
     isUninited = true
   }
 

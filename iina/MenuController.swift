@@ -17,7 +17,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var file: NSMenuItem!
   @IBOutlet weak var open: NSMenuItem!
   // Playback
-  @IBOutlet weak var playback: NSMenuItem!
+  @IBOutlet weak var playbackMenu: NSMenu!
   @IBOutlet weak var pause: NSMenuItem!
   @IBOutlet weak var stop: NSMenuItem!
   @IBOutlet weak var forward: NSMenuItem!
@@ -96,6 +96,8 @@ class MenuController: NSObject, NSMenuDelegate {
   func bindMenuItems() {
 
     // Playback menu
+
+    playbackMenu.delegate = self
 
     pause.action = #selector(MainWindowController.menuTogglePause(_:))
     stop.action = #selector(MainWindowController.menuStop(_:))
@@ -264,19 +266,24 @@ class MenuController: NSObject, NSMenuDelegate {
     menu.addItem(noTrackMenuItem)
     for track in info.trackList(type) {
       menu.addItem(withTitle: track.readableTitle, action: #selector(MainWindowController.menuChangeTrack(_:)),
-                             tag: nil, obj: track, stateOn: track.id == info.trackId(type))
+                             tag: nil, obj: (track, type), stateOn: track.id == info.trackId(type))
     }
+  }
+
+  private func updatePlaybackMenu() {
+    pause.title = PlayerCore.shared.info.isPaused ? Constants.String.resume : Constants.String.pause
   }
 
   private func updateVieoMenu() {
     alwaysOnTop.state = PlayerCore.shared.info.isAlwaysOntop ? NSOnState : NSOffState
     deinterlace.state = PlayerCore.shared.info.deinterlace ? NSOnState : NSOffState
+    fullScreen.title = PlayerCore.shared.mainWindow.isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
   }
 
   private func updateAudioMenu() {
     let player = PlayerCore.shared
-    volumeIndicator.title = "\(Constants.String.volume): \(player.info.volume)%"
-    audioDelayIndicator.title = "\(Constants.String.audioDelay): \(player.info.audioDelay)s"
+    volumeIndicator.title = String(format: NSLocalizedString("menu.volume", comment: "Volume:"), player.info.volume)
+    audioDelayIndicator.title = String(format: NSLocalizedString("menu.audio_delay", comment: "Audio Delay:"), player.info.audioDelay)
   }
 
   private func updateFlipAndMirror() {
@@ -287,7 +294,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateSubMenu() {
     let player = PlayerCore.shared
-    subDelayIndicator.title = "\(Constants.String.subDelay): \(player.info.subDelay)s"
+    subDelayIndicator.title = String(format: NSLocalizedString("menu.sub_delay", comment: "Subtitle Delay:"), player.info.subDelay)
   }
 
   /**
@@ -341,6 +348,8 @@ class MenuController: NSObject, NSMenuDelegate {
       updatePlaylist()
     } else if menu == chapterMenu {
       updateChapterList()
+    } else if menu == playbackMenu {
+      updatePlaybackMenu()
     } else if menu == videoMenu {
       updateVieoMenu()
     } else if menu == videoTrackMenu {

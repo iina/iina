@@ -30,6 +30,12 @@
                                     <action selector="showAboutWindow:" target="Voe-Tx-rLC" id="HGv-E1-lQH"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Check Update..." id="gMo-qL-m08">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkUpdate:" target="Voe-Tx-rLC" id="CQ8-wR-EzN"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                             <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
                                 <connections>
@@ -176,8 +182,8 @@
                             <menuItem title="Enter Full Screen" keyEquivalent="f" id="6Eq-ni-6hG">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Float on Top" id="wex-rX-PcY">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Float on Top" keyEquivalent="t" id="wex-rX-PcY">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="4J5-eU-sei"/>
                             <menuItem title="Aspect Ratio" id="d15-8v-dXA">
@@ -355,8 +361,8 @@
                                     <action selector="performZoom:" target="-1" id="DIl-cC-cCs"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="ZgO-35-2v2"/>
-                            <menuItem title="Custom Touch Bar..." id="ZnF-yX-7jP">
+                            <menuItem isSeparatorItem="YES" hidden="YES" id="ZgO-35-2v2"/>
+                            <menuItem title="Custom Touch Bar..." hidden="YES" id="ZnF-yX-7jP">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
@@ -378,13 +384,6 @@
                             <menuItem title="Documentation / Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                 <connections>
                                     <action selector="helpAction:" target="Voe-Tx-rLC" id="aqh-p6-pB4"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="J8m-Ix-VGl"/>
-                            <menuItem title="Check Update..." id="gMo-qL-m08">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="checkUpdate:" target="Voe-Tx-rLC" id="CQ8-wR-EzN"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="ZO8-wH-FBe"/>
@@ -454,7 +453,7 @@
                 <outlet property="normalSizeRetina" destination="c1x-bx-69F" id="S22-F3-Ks9"/>
                 <outlet property="open" destination="IAo-SY-fd9" id="fW9-2A-V4F"/>
                 <outlet property="pause" destination="UOE-MJ-8ku" id="74t-ZU-dXD"/>
-                <outlet property="playback" destination="jxT-CU-nIS" id="WLn-62-0zX"/>
+                <outlet property="playbackMenu" destination="GEO-Iw-cKr" id="Ji3-Wv-EE5"/>
                 <outlet property="playlist" destination="Gi5-1S-RQB" id="oMH-9E-A8A"/>
                 <outlet property="playlistMenu" destination="aXa-aM-Jaq" id="Nkw-YD-NAi"/>
                 <outlet property="previousFrame" destination="oxF-BB-lBy" id="Kx8-vs-jMi"/>

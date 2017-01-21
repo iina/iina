@@ -53,7 +53,7 @@ class CropSettingsViewController: NSViewController {
 
 
   @IBAction func doneBtnAction(_ sender: AnyObject) {
-    let playerCore = mainWindow.playerCore!
+    let playerCore = mainWindow.playerCore
 
     mainWindow.exitInteractiveMode {
       if self.cropx == 0 && self.cropy == 0 &&
@@ -71,6 +71,13 @@ class CropSettingsViewController: NSViewController {
       playerCore.setCrop(fromFilter: filter)
       // custom crop has no corresponding menu entry
       playerCore.info.unsureCrop = ""
+      self.mainWindow.displayOSD(.crop("\(self.cropx),\(self.actualCropy) \(self.cropw)x\(self.croph)"))
+    }
+  }
+
+  @IBAction func cancelBtnAction(_ sender: AnyObject) {
+    mainWindow.exitInteractiveMode{
+      return
     }
   }
 

@@ -12,7 +12,7 @@ class PlayerCore: NSObject {
 
   static let shared = PlayerCore()
 
-  let ud: UserDefaults = UserDefaults.standard
+  unowned let ud: UserDefaults = UserDefaults.standard
 
   lazy var mainWindow: MainWindowController = MainWindowController()
   lazy var mpvController: MPVController = MPVController()
@@ -30,6 +30,8 @@ class PlayerCore: NSObject {
   var displayOSD: Bool = true
 
   var isMpvTerminated: Bool = false
+
+  var isWindowShown: Bool = false
 
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
@@ -53,6 +55,7 @@ class PlayerCore: NSObject {
     info.isNetworkResource = false
     mainWindow.showWindow(nil)
     mainWindow.windowDidOpen()
+    isWindowShown = true
     // Send load file command
     info.fileLoading = true
     mpvController.command(.loadfile, args: [path])
@@ -64,6 +67,7 @@ class PlayerCore: NSObject {
     info.isNetworkResource = true
     mainWindow.showWindow(nil)
     mainWindow.windowDidOpen()
+    isWindowShown = true
     // Send load file command
     info.fileLoading = true
     mpvController.command(.loadfile, args: [str])
@@ -78,18 +82,28 @@ class PlayerCore: NSObject {
     videoView.mpvGLContext = OpaquePointer(mpvGLContext)
   }
 
-  // Terminate mpv
-  func terminateMPV(sendQuit: Bool = true) {
-    guard !isMpvTerminated else { return }
-    syncPlayTimeTimer?.invalidate()
+  // unload main window video view
+  func unloadMainWindowVideoView() {
     if mainWindow.isWindowLoaded {
       mainWindow.videoView.uninit()
       mainWindow.videoView.clearGLContext()
     }
+  }
+
+  // Terminate mpv
+  func terminateMPV(sendQuit: Bool = true) {
+    guard !isMpvTerminated else { return }
+    invalidateTimer()
+    unloadMainWindowVideoView()
     if sendQuit {
       mpvController.mpvQuit()
     }
     isMpvTerminated = true
+  }
+
+  // invalidate timer
+  func invalidateTimer() {
+    syncPlayTimeTimer?.invalidate()
   }
 
   // MARK: - MPV commands
@@ -120,7 +134,7 @@ class PlayerCore: NSObject {
 
   func stop() {
     mpvController.command(.stop)
-    syncPlayTimeTimer?.invalidate()
+    invalidateTimer()
   }
 
   func toogleMute(_ set: Bool?) {
@@ -146,7 +160,7 @@ class PlayerCore: NSObject {
     case .auto:
       // for each file , try use exact and record interval first
       if !triedUsingExactSeekForCurrentFile {
-        mpvController.recordedSeekTimeListener = { interval in
+        mpvController.recordedSeekTimeListener = { [unowned self] interval in
           // if seek time < 0.05, then can use exact
           self.useExactSeekForCurrentFile = interval < 0.05
         }
@@ -454,6 +468,10 @@ class PlayerCore: NSObject {
     mpvController.command(.keypress, args: [code])
   }
 
+  func savePlaybackPosition() {
+    mpvController.command(.writeWatchLaterConfig)
+  }
+
   // MARK: - Other
 
   func fileStarted() {
@@ -468,7 +486,7 @@ class PlayerCore: NSObject {
       Utility.fatal("Cannot get video width and height")
       return
     }
-    syncPlayTimeTimer?.invalidate()
+    invalidateTimer()
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     DispatchQueue.main.sync {
@@ -589,7 +607,8 @@ class PlayerCore: NSObject {
   }
 
   func sendOSD(_ osd: OSDMessage) {
-
+    // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
+    guard isWindowShown else { return }
     // if window not loaded, ignore
     guard mainWindow.isWindowLoaded else { return }
 

@@ -40,7 +40,9 @@ struct Preference {
     static let openStartPanel = "openStartPanel"
 
     /** Resume from last position */
-    // static let resumeLastPosition = "resumeLastPosition"
+    static let resumeLastPosition = "resumeLastPosition"
+
+    static let alwaysFloatOnTop = "alwaysFloatOnTop"
 
     /** Show chapter pos in progress bar (bool) */
     static let showChapterPos = "showChapterPos"
@@ -130,6 +132,7 @@ struct Preference {
     static let singleClickAction = "singleClickAction"
 
     static let doubleClickAction = "doubleClickAction"
+    static let rightClickAction = "rightClickAction"
 
     // Input
 
@@ -190,6 +193,7 @@ struct Preference {
     case none = 0
     case fullscreen
     case pause
+    case hideOSC
   }
 
   enum AutoLoadAction: Int {
@@ -294,8 +298,10 @@ struct Preference {
     Key.pauseWhenOpen: false,
     Key.fullScreenWhenOpen: false,
     Key.showChapterPos: false,
+    Key.resumeLastPosition: true,
     Key.useMediaKeys: true,
     Key.openStartPanel: false,
+    Key.alwaysFloatOnTop: false,
 
     Key.usePhysicalResolution: true,
     Key.resizeOnlyWhenManuallyOpenFile: true,
@@ -345,8 +351,9 @@ struct Preference {
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
     Key.relativeSeekAmount: 2,
-    Key.singleClickAction: MouseClickAction.none.rawValue,
+    Key.singleClickAction: MouseClickAction.hideOSC.rawValue,
     Key.doubleClickAction: MouseClickAction.fullscreen.rawValue,
+    Key.rightClickAction: MouseClickAction.pause.rawValue,
 
     Key.screenshotFolder: "~/Pictures/ScreenShots",
     Key.screenshotIncludeSubtitle: true,

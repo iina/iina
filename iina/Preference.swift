@@ -130,6 +130,7 @@ struct Preference {
     static let singleClickAction = "singleClickAction"
 
     static let doubleClickAction = "doubleClickAction"
+    static let rightClickAction = "rightClickAction"
 
     // Input
 
@@ -349,6 +350,7 @@ struct Preference {
     Key.relativeSeekAmount: 2,
     Key.singleClickAction: MouseClickAction.hideOSC.rawValue,
     Key.doubleClickAction: MouseClickAction.fullscreen.rawValue,
+    Key.rightClickAction: MouseClickAction.pause.rawValue,
 
     Key.screenshotFolder: "~/Pictures/ScreenShots",
     Key.screenshotIncludeSubtitle: true,

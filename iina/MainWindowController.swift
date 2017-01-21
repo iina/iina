@@ -86,6 +86,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private var arrowBtnFunction: Preference.ArrowButtonAction!
   private var singleClickAction: Preference.MouseClickAction!
   private var doubleClickAction: Preference.MouseClickAction!
+  private var rightClickAction: Preference.MouseClickAction!
 
   private var singleClickTimer: Timer?
 
@@ -98,7 +99,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     Preference.Key.relativeSeekAmount,
     Preference.Key.arrowButtonAction,
     Preference.Key.singleClickAction,
-    Preference.Key.doubleClickAction
+    Preference.Key.doubleClickAction,
+    Preference.Key.rightClickAction
   ]
 
   private var notificationObservers: [NSObjectProtocol] = []
@@ -243,6 +245,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: Preference.Key.arrowButtonAction))
     singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.singleClickAction))
     doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.doubleClickAction))
+    rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.rightClickAction))
 
     // add user default observers
     observedPrefKeys.forEach { key in
@@ -314,6 +317,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case Preference.Key.doubleClickAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         doubleClickAction = Preference.MouseClickAction(rawValue: newValue)
+      }
+
+    case Preference.Key.rightClickAction:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        rightClickAction = Preference.MouseClickAction(rawValue: newValue)
       }
 
     default:
@@ -400,6 +408,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
       }
     }
+  }
+
+  override func rightMouseUp(with event: NSEvent) {
+    performMouseAction(rightClickAction)
   }
 
   @objc private func performMouseActionLater(_ timer: Timer) {

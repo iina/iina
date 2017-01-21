@@ -226,7 +226,13 @@ class MenuController: NSObject, NSMenuDelegate {
     }
 
     inspector.action = #selector(MainWindowController.menuShowInspector(_:))
-
+ 
+    NotificationCenter.default.addObserver(forName: Notification.Name("pause"), object: nil, queue: nil) { _ in
+      self.pause.title = "Play"
+    }
+    NotificationCenter.default.addObserver(forName: Notification.Name("resume"), object: nil, queue: nil) { _ in
+      self.pause.title = "Pause"
+    }
   }
 
   private func updatePlaylist() {

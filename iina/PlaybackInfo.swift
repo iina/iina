@@ -30,7 +30,15 @@ class PlaybackInfo {
   var videoDuration: VideoTime?
 
   var isSeeking: Bool = false
-  var isPaused: Bool = false
+  var isPaused: Bool = false {
+    didSet {
+      if isPaused {
+        NotificationCenter.default.post(name: Notification.Name("pause"), object: nil)
+      } else {
+        NotificationCenter.default.post(name: Notification.Name("resume"), object: nil)
+      }
+    }
+  }
 
   var jumppedFromPlaylist: Bool = false
 

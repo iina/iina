@@ -93,6 +93,7 @@ class PlayerCore: NSObject {
   // Terminate mpv
   func terminateMPV(sendQuit: Bool = true) {
     guard !isMpvTerminated else { return }
+    savePlaybackPosition()
     invalidateTimer()
     unloadMainWindowVideoView()
     if sendQuit {

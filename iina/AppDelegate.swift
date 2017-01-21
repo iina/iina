@@ -69,6 +69,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // other
     if #available(OSX 10.12.2, *) {
       NSApp.isAutomaticCustomizeTouchBarMenuItemEnabled = false
+      NSWindow.allowsAutomaticWindowTabbing = false
     }
 
     // check update

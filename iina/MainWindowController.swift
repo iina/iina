@@ -430,6 +430,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // main window
       isMouseInWindow = true
       showUI()
+      updateTimer()
     } else if obj == 1 {
       // slider
       isMouseInSlider = true
@@ -465,9 +466,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isMouseInSlider {
       updateTimeLabel(mousePos.x)
     }
-    if isMouseInWindow {
-      showUIAndUpdateTimer()
+    if isMouseInWindow && animationState == .hidden {
+      showUI()
     }
+    updateTimer()
   }
 
   override func scrollWheel(with event: NSEvent) {
@@ -532,6 +534,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = self.window, let cv = w.contentView else { return }
     cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 0]))
     playSlider.addTrackingArea(NSTrackingArea(rect: playSlider.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 1]))
+    // update timer
+    updateTimer()
   }
 
   func windowWillClose(_ notification: Notification) {
@@ -676,7 +680,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  private func showUI () {
+  private func showUI() {
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v?.isHidden = false
@@ -695,10 +699,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  private func showUIAndUpdateTimer() {
-    if animationState == .hidden {
-      showUI()
-    }
+  private func updateTimer() {
     // if timer exist, destroy first
     if hideControlTimer != nil {
       hideControlTimer!.invalidate()

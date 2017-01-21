@@ -558,6 +558,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowWillClose(_ notification: Notification) {
     // stop playing
     if !playerCore.isMpvTerminated {
+      playerCore.savePlaybackPosition()
       playerCore.stop()
       videoView.stopDisplayLink()
     }

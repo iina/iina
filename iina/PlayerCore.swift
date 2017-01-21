@@ -468,6 +468,10 @@ class PlayerCore: NSObject {
     mpvController.command(.keypress, args: [code])
   }
 
+  func savePlaybackPosition() {
+    mpvController.command(.writeWatchLaterConfig)
+  }
+
   // MARK: - Other
 
   func fileStarted() {

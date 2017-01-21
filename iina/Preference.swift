@@ -40,7 +40,7 @@ struct Preference {
     static let openStartPanel = "openStartPanel"
 
     /** Resume from last position */
-    // static let resumeLastPosition = "resumeLastPosition"
+    static let resumeLastPosition = "resumeLastPosition"
 
     /** Show chapter pos in progress bar (bool) */
     static let showChapterPos = "showChapterPos"
@@ -294,6 +294,7 @@ struct Preference {
     Key.pauseWhenOpen: false,
     Key.fullScreenWhenOpen: false,
     Key.showChapterPos: false,
+    Key.resumeLastPosition: true,
     Key.useMediaKeys: true,
     Key.openStartPanel: false,
 

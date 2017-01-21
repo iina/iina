@@ -128,6 +128,9 @@ class MPVController: NSObject {
 
     setUserOption(PK.keepOpenOnFileEnd, type: .bool, forName: MPVOption.Window.keepOpen)
 
+    chkErr(mpv_set_option_string(mpv, "watch-later-directory", Utility.watchLaterURL.path))
+    setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.ProgramBehavior.savePositionOnQuit)
+
     // - Codec
 
     setUserOption(PK.videoThreads, type: .int, forName: MPVOption.Video.vdLavcThreads)

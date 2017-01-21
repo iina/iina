@@ -417,6 +417,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case .pause:
       playerCore.togglePause(nil)
+
+    case .hideOSC:
+      hideUI()
     }
   }
 

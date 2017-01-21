@@ -132,11 +132,14 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="166" id="VCL-bP-HHb"/>
                     </constraints>
-                    <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="w54-7I-QfW" id="kx4-ff-K5Z">
+                    <popUpButtonCell key="cell" type="push" title="Hide OSC" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" tag="3" imageScaling="proportionallyDown" inset="2" selectedItem="9qx-ao-oxE" id="kx4-ff-K5Z">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="nPO-ET-BZ0">
                             <items>
+                                <menuItem title="Hide OSC" tag="3" id="9qx-ao-oxE">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
                                 <menuItem title="Pause / Resume" tag="2" id="A8c-wa-IFR"/>
                                 <menuItem title="None" state="on" id="w54-7I-QfW"/>
                             </items>

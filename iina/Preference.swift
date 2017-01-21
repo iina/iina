@@ -190,6 +190,7 @@ struct Preference {
     case none = 0
     case fullscreen
     case pause
+    case hideOSC
   }
 
   enum AutoLoadAction: Int {
@@ -346,7 +347,7 @@ struct Preference {
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
     Key.relativeSeekAmount: 2,
-    Key.singleClickAction: MouseClickAction.none.rawValue,
+    Key.singleClickAction: MouseClickAction.hideOSC.rawValue,
     Key.doubleClickAction: MouseClickAction.fullscreen.rawValue,
 
     Key.screenshotFolder: "~/Pictures/ScreenShots",

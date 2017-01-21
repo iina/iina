@@ -229,7 +229,6 @@ class MPVController: NSObject {
     }
 
     // Set options that can be override by user's config.
-    chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, "yes"))
     chkErr(mpv_set_option_string(mpv, MPVOption.Video.vo, "opengl-cb"))
     chkErr(mpv_set_option_string(mpv, MPVOption.Video.hwdecPreload, "auto"))
 

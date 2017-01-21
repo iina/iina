@@ -449,7 +449,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     } else if obj == 1 {
       // slider
       isMouseInSlider = true
-      timePreviewWhenSeek.isHidden = false
+      if !controlBar.isDragging {
+        timePreviewWhenSeek.isHidden = false
+      }
       let mousePos = playSlider.convert(event.locationInWindow, from: nil)
       updateTimeLabel(mousePos.x)
     }

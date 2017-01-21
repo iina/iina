@@ -17,7 +17,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var file: NSMenuItem!
   @IBOutlet weak var open: NSMenuItem!
   // Playback
-  @IBOutlet weak var playback: NSMenuItem!
+  @IBOutlet weak var playbackMenu: NSMenu!
   @IBOutlet weak var pause: NSMenuItem!
   @IBOutlet weak var stop: NSMenuItem!
   @IBOutlet weak var forward: NSMenuItem!
@@ -96,6 +96,8 @@ class MenuController: NSObject, NSMenuDelegate {
   func bindMenuItems() {
 
     // Playback menu
+
+    playbackMenu.delegate = self
 
     pause.action = #selector(MainWindowController.menuTogglePause(_:))
     stop.action = #selector(MainWindowController.menuStop(_:))
@@ -268,6 +270,10 @@ class MenuController: NSObject, NSMenuDelegate {
     }
   }
 
+  private func updatePlaybackMenu() {
+    pause.title = PlayerCore.shared.info.isPaused ? Constants.String.resume : Constants.String.pause
+  }
+
   private func updateVieoMenu() {
     alwaysOnTop.state = PlayerCore.shared.info.isAlwaysOntop ? NSOnState : NSOffState
     deinterlace.state = PlayerCore.shared.info.deinterlace ? NSOnState : NSOffState
@@ -342,6 +348,8 @@ class MenuController: NSObject, NSMenuDelegate {
       updatePlaylist()
     } else if menu == chapterMenu {
       updateChapterList()
+    } else if menu == playbackMenu {
+      updatePlaybackMenu()
     } else if menu == videoMenu {
       updateVieoMenu()
     } else if menu == videoTrackMenu {

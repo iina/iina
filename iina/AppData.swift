@@ -70,6 +70,8 @@ struct Constants {
     static let chapter = "Chapter"
     static let fullScreen = NSLocalizedString("menu.fullscreen", comment: "Fullscreen")
     static let exitFullScreen = NSLocalizedString("menu.exit_fullscreen", comment: "Exit Fullscreen")
+    static let pause = NSLocalizedString("menu.pause", comment: "Pause")
+    static let resume = NSLocalizedString("menu.resume", comment: "Resume")
   }
   struct Noti {
     static let playlistChanged = Notification.Name("IINAPlaylistChanged")

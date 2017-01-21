@@ -13,13 +13,7 @@ import Cocoa
 extension MainWindowController {
 
   @IBAction func menuTogglePause(_ sender: NSMenuItem) {
-    if sender.title == "Play" {
-      playerCore.togglePause(false)
-      sender.title = "Pause"
-    } else {
-      playerCore.togglePause(true)
-      sender.title = "Play"
-    }
+    playerCore.togglePause(!playerCore.info.isPaused)
   }
 
   @IBAction func menuStop(_ sender: NSMenuItem) {

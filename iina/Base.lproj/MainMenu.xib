@@ -176,8 +176,8 @@
                             <menuItem title="Enter Full Screen" keyEquivalent="f" id="6Eq-ni-6hG">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Float on Top" id="wex-rX-PcY">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Float on Top" keyEquivalent="t" id="wex-rX-PcY">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="4J5-eU-sei"/>
                             <menuItem title="Aspect Ratio" id="d15-8v-dXA">

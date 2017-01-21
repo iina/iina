@@ -31,6 +31,8 @@ class PlayerCore: NSObject {
 
   var isMpvTerminated: Bool = false
 
+  var isWindowShown: Bool = false
+
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
@@ -53,6 +55,7 @@ class PlayerCore: NSObject {
     info.isNetworkResource = false
     mainWindow.showWindow(nil)
     mainWindow.windowDidOpen()
+    isWindowShown = true
     // Send load file command
     info.fileLoading = true
     mpvController.command(.loadfile, args: [path])
@@ -64,6 +67,7 @@ class PlayerCore: NSObject {
     info.isNetworkResource = true
     mainWindow.showWindow(nil)
     mainWindow.windowDidOpen()
+    isWindowShown = true
     // Send load file command
     info.fileLoading = true
     mpvController.command(.loadfile, args: [str])
@@ -595,7 +599,8 @@ class PlayerCore: NSObject {
   }
 
   func sendOSD(_ osd: OSDMessage) {
-
+    // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
+    guard isWindowShown else { return }
     // if window not loaded, ignore
     guard mainWindow.isWindowLoaded else { return }
 

@@ -430,6 +430,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // main window
       isMouseInWindow = true
       showUI()
+      showUIAndUpdateTimer()
     } else if obj == 1 {
       // slider
       isMouseInSlider = true
@@ -676,7 +677,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  private func showUI () {
+  private func showUI() {
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v?.isHidden = false

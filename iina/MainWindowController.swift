@@ -556,7 +556,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // always on top
     if ud.bool(forKey: Preference.Key.alwaysFloatOnTop) {
       playerCore.info.isAlwaysOntop = true
-      setWindowFloatingOntop(true)
+      setWindowFloatingOnTop(true)
     }
   }
 
@@ -610,7 +610,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowDidExitFullScreen(_ notification: Notification) {
     // if is floating, enable it again
     if playerCore.info.isAlwaysOntop {
-      setWindowFloatingOntop(true)
+      setWindowFloatingOnTop(true)
     }
   }
 
@@ -1051,18 +1051,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // if is floating, disable it temporarily.
     // it will be enabled again in `windowDidExitFullScreen()`.
     if !isInFullScreen && playerCore.info.isAlwaysOntop {
-      setWindowFloatingOntop(false)
+      setWindowFloatingOnTop(false)
     }
     window?.toggleFullScreen(self)
   }
 
-  func setWindowFloatingOntop(_ onTop: Bool) {
+  func setWindowFloatingOnTop(_ onTop: Bool) {
     guard let window = window else { return }
     if onTop {
       window.level = Int(CGWindowLevelForKey(.floatingWindow) + 1)
     } else {
       window.level = Int(CGWindowLevelForKey(.normalWindow))
     }
+    
+    window.collectionBehavior = [.managed, .fullScreenPrimary]
+    
     // don't know why they will be disabled
     withStandardButtons { $0?.isEnabled = true }
   }

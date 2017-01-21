@@ -203,6 +203,9 @@ class MPVController: NSObject {
       return Preference.RTSPTransportation(rawValue: v)!.string
     }
 
+    // Receive log messages at warn level.
+    chkErr(mpv_request_log_messages(mpv, "warn"))
+
     // Set user defined conf dir.
     if ud.bool(forKey: PK.useUserDefinedConfDir) {
       if var userConfDir = ud.string(forKey: PK.userDefinedConfDir) {
@@ -228,7 +231,7 @@ class MPVController: NSObject {
       Utility.showAlert(message: "Cannot read user defined options.")
     }
 
-    // Set options that can be override by user's config.
+    // Set options which otherwise could be overridden by user's config.
     chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, "yes"))
     chkErr(mpv_set_option_string(mpv, MPVOption.Video.vo, "opengl-cb"))
     chkErr(mpv_set_option_string(mpv, MPVOption.Video.hwdecPreload, "auto"))
@@ -246,8 +249,6 @@ class MPVController: NSObject {
       }
     }
     chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputConf, inputConfPath))
-    // Receive log messages at warn level.
-    chkErr(mpv_request_log_messages(mpv, "warn"))
 
     // Request tick event.
     // chkErr(mpv_request_event(mpv, MPV_EVENT_TICK, 1))

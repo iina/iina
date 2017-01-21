@@ -210,7 +210,6 @@ extension MainWindowController {
 
   @IBAction func menuToggleFullScreen(_ sender: NSMenuItem) {
     toggleWindowFullScreen()
-    sender.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
   }
 
   @IBAction func menuChangeVolume(_ sender: NSMenuItem) {

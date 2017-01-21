@@ -980,8 +980,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Window size / aspect
 
   /** Set video size when info available. */
-  func adjustFrameByVideoSize(_ width: Int, _ height: Int) {
+  func adjustFrameByVideoSize(_ videoWidth: Int, _ videoHeight: Int) {
     guard let w = window else { return }
+    // if no video track
+    var width = videoWidth
+    var height = videoHeight
+    if width == 0 { width = AppData.widthWhenNoVideo }
+    if height == 0 { height = AppData.heightWhenNoVideo }
+
     // set aspect ratio
     let originalVideoSize = NSSize(width: width, height: height)
     w.aspectRatio = originalVideoSize
@@ -999,7 +1005,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         ud.bool(forKey: Preference.Key.resizeOnlyWhenManuallyOpenFile) {
         // user is navigating in playlist. remain same window width.
         let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
-        let rect = NSRect(origin: w.frame.origin, size: NSSize(width: w.frame.width, height: newHeight))
+        let newSize = NSSize(width: w.frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
+        let rect = NSRect(origin: w.frame.origin, size: newSize)
         w.setFrame(rect, display: true, animate: true)
       } else {
         // get videoSize on screen

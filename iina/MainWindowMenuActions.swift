@@ -167,8 +167,10 @@ extension MainWindowController {
     //  10: smaller size
     //  11: bigger size
     let size = sender.tag
-    guard let w = window, let vw = playerCore.info.displayWidth, let vh = playerCore.info.displayHeight else { return }
-
+    guard let w = window, var vw = playerCore.info.displayWidth, var vh = playerCore.info.displayHeight else { return }
+    if vw == 0 { vw = AppData.widthWhenNoVideo }
+    if vh == 0 { vh = AppData.heightWhenNoVideo }
+    
     var retinaSize = w.convertFromBacking(NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(vw), CGFloat(vh)))
     let screenFrame = NSScreen.main()!.visibleFrame
     let newFrame: NSRect
@@ -183,7 +185,7 @@ extension MainWindowController {
       if retinaSize.size.width > screenFrame.size.width || retinaSize.size.height > screenFrame.size.height {
         newFrame = w.frame.centeredResize(to: w.frame.size.shrink(toSize: screenFrame.size)).constrain(in: screenFrame)
       } else {
-        newFrame = w.frame.centeredResize(to: retinaSize.size).constrain(in: screenFrame)
+        newFrame = w.frame.centeredResize(to: retinaSize.size.satisfyMinSizeWithSameAspectRatio(minSize)).constrain(in: screenFrame)
       }
     // fit screen
     case 3:
@@ -193,7 +195,7 @@ extension MainWindowController {
     case 10, 11:
       let newWidth = w.frame.width + scaleStep * (size == 10 ? -1 : 1)
       let newHeight = newWidth / (w.aspectRatio.width / w.aspectRatio.height)
-      newFrame = w.frame.centeredResize(to: NSSize(width: newWidth, height: newHeight))
+      newFrame = w.frame.centeredResize(to: NSSize(width: newWidth, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize))
     default:
       return
     }

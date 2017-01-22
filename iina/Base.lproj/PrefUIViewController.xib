@@ -205,7 +205,7 @@
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="dKA-Tn-MiP">
                     <rect key="frame" x="118" y="78" width="352" height="18"/>
-                    <buttonCell key="cell" type="check" title="Show OSD messages" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="UVO-QM-Qkn">
+                    <buttonCell key="cell" type="check" title="Show messages" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="UVO-QM-Qkn">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

@@ -2,86 +2,84 @@
 
 # IINA
 
-Project IINA is a **modern** video player for macOS.
+IINA is a **modern** video player for macOS.  
+Published under [GPLv3](https://github.com/lhc70000/iina/blob/master/LICENSE).
 
 Website: [https://lhc70000.github.io/iina/](https://lhc70000.github.io/iina/)
 
 Releases: [https://github.com/lhc70000/iina/releases](https://github.com/lhc70000/iina/releases)
 
 Telegram group: 
-[https://telegram.me/joinchat/EUPqOwkAnyXQGU3cje6aQg](https://telegram.me/joinchat/EUPqOwkAnyXQGU3cje6aQg)
+[https://t.me/joinchat/AAAAAEBemW7dU8X7IHShwQ](https://t.me/joinchat/AAAAAEBemW7dU8X7IHShwQ)
 
 ---
 
-When raising a issue, please **use English** if possible.
+When raising an issue, please **use English** if possible.  
 
-在提 issue 时，请尽量使用**英文**！
+在提 issue 时，请尽量使用**英文**！  
 
 # Features
 
-- Based on [mpv](https://github.com/mpv-player/mpv), the powerful media player project
-- For and only for modern macOS (10.10+)
-- User friendly interface
-- All the features you need for video, audio and subtitles
-- Support basic playlist and chapters
-- MPV config file and script system are still available for advanced users
-- Written in Swift, open for new technologies like Touch Bar
+- Based on [mpv](https://github.com/mpv-player/mpv), a powerful media player
+- Designed for modern macOS (10.10+)
+- User-friendly interface
+- All the features you need for videos, audios and subtitles
+- Supported basic playlist and chapters
+- MPV config files and script system are available for advanced users
+- Written in Swift, followed up on new technologies like Touch Bar
 - Still in active development
 
 # Build
 
-Please make sure cocoapods is installed.
+## Use pre-compiled dylibs
 
-```
-sudo gem install cocoapods
-```
+1. Please make sure CocoaPods is installed.
 
-Run pod install in project root directory.
+  **gem**
+  ```
+  sudo gem install cocoapods
+  ```
+  **homebrew**
+  ```
+  brew install cocoapods
+  ```
 
-```
-pod install
-```
+2. Run pod install in project root directory.
+  ```
+  pod install
+  ```
 
 Theoretically no extra work is needed. _If you are unwilling to use the provided dylibs, follow the instructions below._
 
-**Install mpv**
+## Build with the lastest mpv
 
-```
-brew install mpv --with-uchardet
-```
-Currently `ytdl` is not included when building, but will be considered in later versions.
+* Install mpv
 
-**other/parse_doc.rb**
+  ```
+  brew install mpv --with-uchardet
+  ```
+  Currently `ytdl` is not included when building, but will be considered in later versions.
 
-This script will fetch the *lastest* mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. Only needed when updating libmpv. Note that once API changed, player source code may also need to be changed.
+* other/parse_doc.rb
 
-**other/change_lib_dependencies.rb**
+  This script will fetch the *lastest* mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. This is only needed when updating libmpv. Note that if the API changes, the player source code may also need to be changed.
 
-This script will resolve library dependencies and copy all required dylibs into `libmpv/libs`.
+* other/change_lib_dependencies.rb
 
-Before running this script, you should first copy libmpv into `libmpv/libs`, like:
-
-```
-cp path/to/libmpv ./libmpv/libs
-sudo install_name_tool -id @executable_path/../Frameworks/libmpv.1.23.0.dylib ./libmpv/lib/libmpv.1.23.0.dylib
-```
-
-Where `path/to/libmpv` should be in your homebrew install path.
-
-Make sure in Xcode build settings, you have a phase copying all these dylibs.
+  This script will deploy the depended libraries into `libmpv/libs`.
+  Make sure you have a phase copying of all these dylibs in Xcode's build settings.
 
 ## Contribute
 
+**Please read [CONTRIBUTING.md](https://github.com/lhc70000/iina/blob/master/CONTRIBUTING.md) before opening an issue or pull request.**
+
 Any feedback is appreciated! You can
 
-- Star or fork it
+- Star it or fork it
 - Download and test it
-- Send bug report
-- Send feature request
-- Provide suggestions on code structure and UI design
-- Provide localizaton
+- Send bug reports
+- Send feature requests
+- Provide suggestions on code structures or UI designs
+- Provide localizatons
 - ...
 
-## License
-
-GPLv3

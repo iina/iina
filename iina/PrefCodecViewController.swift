@@ -9,11 +9,11 @@
 import Cocoa
 
 class PrefCodecViewController: NSViewController {
-  
+
   override var nibName: String? {
     return "PrefCodecViewController"
   }
-  
+
   override var identifier: String? {
     get {
       return "codec"
@@ -22,18 +22,22 @@ class PrefCodecViewController: NSViewController {
       super.identifier = newValue
     }
   }
-  
+
   var toolbarItemImage: NSImage {
     return NSImage(named: "toolbar_codec")!
   }
-  
+
   var toolbarItemLabel: String {
-    return "Codec"
+    view.layoutSubtreeIfNeeded()
+    return NSLocalizedString("preference.codec", comment: "Codec")
   }
+
+  var hasResizableWidth: Bool = false
+  var hasResizableHeight: Bool = false
 
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do view setup here.
   }
-    
+
 }

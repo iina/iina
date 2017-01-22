@@ -10,11 +10,11 @@ import Cocoa
 import MASPreferences
 
 class PrefAdvancedViewController: NSViewController, MASPreferencesViewController {
-  
+
   override var nibName: String? {
     return "PrefAdvancedViewController"
   }
-  
+
   override var identifier: String? {
     get {
       return "advanced"
@@ -23,18 +23,21 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
       super.identifier = newValue
     }
   }
-  
+
   var toolbarItemImage: NSImage {
     return NSImage(named: NSImageNameAdvanced)!
   }
-  
+
   var toolbarItemLabel: String {
-    return "Advanced"
+    view.layoutSubtreeIfNeeded()
+    return NSLocalizedString("preference.advanced", comment: "Advanced")
   }
-  
+
+  var hasResizableWidth: Bool = false
+
   var options: [[String]] = []
-  
-  
+
+
   @IBOutlet weak var enableSettingsBtn: NSButton!
   @IBOutlet weak var settingsView: NSView!
   @IBOutlet weak var optionsTableView: NSTableView!
@@ -46,24 +49,24 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   override func viewDidLoad() {
     super.viewDidLoad()
     updateControlStatus(self)
-    
+
     guard let op = UserDefaults.standard.value(forKey: Preference.Key.userOptions) as? [[String]] else {
       Utility.showAlert(message: "Cannot read user defined options.")
       return
     }
     options = op
-    
+
     optionsTableView.dataSource = self
     optionsTableView.delegate = self
   }
-  
+
   func saveToUserDefaults() {
     UserDefaults.standard.set(options, forKey: Preference.Key.userOptions)
     UserDefaults.standard.synchronize()
   }
-  
+
   // MARK: - IBAction
-  
+
   @IBAction func updateControlStatus(_ sender: AnyObject) {
     let enable = enableSettingsBtn.state == NSOnState
     settingsView.subviews.forEach { view in
@@ -72,18 +75,18 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
       }
     }
   }
-  
+
   @IBAction func revealLogDir(_ sender: AnyObject) {
     NSWorkspace.shared().open(Utility.logDirURL)
   }
-  
+
   @IBAction func addOptionBtnAction(_ sender: AnyObject) {
     options.append(["", ""])
     optionsTableView.reloadData()
     optionsTableView.selectRowIndexes(IndexSet(integer: options.count - 1), byExtendingSelection: false)
     saveToUserDefaults()
   }
-  
+
   @IBAction func removeOptionBtnAction(_ sender: AnyObject) {
     if optionsTableView.selectedRow >= 0 {
       options.remove(at: optionsTableView.selectedRow)
@@ -91,29 +94,29 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
       saveToUserDefaults()
     }
   }
-  
+
   @IBAction func chooseDirBtnAction(_ sender: AnyObject) {
     let _ = Utility.quickOpenPanel(title: "Choose config directory", isDir: true) { url in
       UserDefaults.standard.set(url.path, forKey: Preference.Key.userDefinedConfDir)
       UserDefaults.standard.synchronize()
     }
   }
-  
+
   @IBAction func helpBtnAction(_ sender: AnyObject) {
     NSWorkspace.shared().open(URL(string: AppData.websiteLink)!.appendingPathComponent("documentation"))
   }
 }
 
 extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource {
-  
+
   override func controlTextDidEndEditing(_ obj: Notification) {
     saveToUserDefaults()
   }
-  
+
   func numberOfRows(in tableView: NSTableView) -> Int {
     return options.count
   }
-  
+
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     if tableColumn?.identifier == Constants.Identifier.key {
       return options[row][0]
@@ -122,7 +125,7 @@ extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource
     }
     return nil
   }
-  
+
   func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
     guard let value = object as? String,
       let identifier = tableColumn?.identifier else { return }
@@ -133,5 +136,5 @@ extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource
     }
     saveToUserDefaults()
   }
-  
+
 }

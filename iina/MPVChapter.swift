@@ -9,7 +9,7 @@
 import Cocoa
 
 class MPVChapter: NSObject {
-  
+
   private var privTitle: String?
   var title: String {
     get {
@@ -18,8 +18,8 @@ class MPVChapter: NSObject {
   }
   var time: VideoTime
   var index: Int
-  
-  init(title: String?, startTime: Int, index: Int) {
+
+  init(title: String?, startTime: Double, index: Int) {
     self.privTitle = title
     self.time = VideoTime(startTime)
     self.index = index

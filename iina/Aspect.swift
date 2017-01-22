@@ -9,9 +9,9 @@
 import Cocoa
 
 class Aspect: NSObject {
-  
+
   private var size: NSSize!
-  
+
   var width: CGFloat {
     get {
       return size.width
@@ -20,7 +20,7 @@ class Aspect: NSObject {
       size.width = newValue
     }
   }
-  
+
   var height: CGFloat {
     get {
       return size.height
@@ -29,23 +29,23 @@ class Aspect: NSObject {
       size.height = newValue
     }
   }
-  
+
   var value: CGFloat {
     get {
       return size.width / size.height
     }
   }
-  
+
   init(size: NSSize) {
     self.size = size
   }
-  
+
   init(width: CGFloat, height: CGFloat) {
     self.size = NSMakeSize(width, height)
   }
-  
+
   init?(string: String) {
-    if AppData.aspectRegex.matches(string) {
+    if Regex.aspect.matches(string) {
       let wh = string.components(separatedBy: ":")
       if let cropW = Float(wh[0]), let cropH = Float(wh[1]) {
         self.size = NSMakeSize(CGFloat(cropW), CGFloat(cropH))

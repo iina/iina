@@ -9,12 +9,12 @@
 import Cocoa
 
 class Utility {
-  
+
   static let tabTitleFontAttributes = FontAttributes(font: .system, size: .system, align: .center).value
   static let tabTitleActiveFontAttributes = FontAttributes(font: .systemBold, size: .system, align: .center).value
-  
+
   // MARK: - Logs, alerts
-  
+
   static func showAlert(message: String, alertStyle: NSAlertStyle = .critical) {
     let alert = NSAlert()
     switch alertStyle {
@@ -29,11 +29,11 @@ class Utility {
     alert.alertStyle = alertStyle
     alert.runModal()
   }
-  
+
   static func log(_ message: String) {
     NSLog("%@", message)
   }
-  
+
   static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
     if !expr {
       NSLog("%@", errorMessage)
@@ -42,7 +42,7 @@ class Utility {
       exit(1)
     }
   }
-  
+
   static func fatal(_ message: String, _ block: () -> Void = {}) {
     NSLog("%@", message)
     NSLog(Thread.callStackSymbols.joined(separator: "\n"))
@@ -50,9 +50,9 @@ class Utility {
     block()
     exit(1)
   }
-  
+
   // MARK: - Panels, Alerts
-  
+
   static func quickAskPanel(title: String, infoText: String) -> Bool {
     let panel = NSAlert()
     panel.messageText = title
@@ -61,7 +61,7 @@ class Utility {
     panel.addButton(withTitle: "Cancel")
     return panel.runModal() == NSAlertFirstButtonReturn
   }
-  
+
   static func quickOpenPanel(title: String, isDir: Bool, ok: (URL) -> Void) -> Bool {
     let panel = NSOpenPanel()
     panel.title = title
@@ -79,7 +79,7 @@ class Utility {
       return false
     }
   }
-  
+
   static func quickPromptPanel(messageText: String, informativeText: String, ok: (String) -> Void) -> Bool {
     let panel = NSAlert()
     panel.messageText = messageText
@@ -100,15 +100,15 @@ class Utility {
       return false
     }
   }
-  
+
   static func quickFontPickerWindow(ok: @escaping (String?) -> Void) {
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
     appDelegate.fontPicker.finishedPicking = ok
     appDelegate.fontPicker.showWindow(self)
   }
-  
+
   // MARK: - App functions
-  
+
   private static func createDirIfNotExist(url: URL) {
   let path = url.path
     // check exist
@@ -118,6 +118,21 @@ class Utility {
       } catch {
         Utility.fatal("Cannot create folder in Application Support directory")
       }
+    }
+  }
+
+  static func getFilePath(Configs userConfigs: [String: Any]!, forConfig conf: String, showAlert: Bool = true) -> String? {
+    
+    // if is default config
+    if let dv = PrefKeyBindingViewController.defaultConfigs[conf] {
+      return dv
+    } else if let uv = userConfigs[conf] as? String {
+      return uv
+    } else {
+      if showAlert {
+        Utility.showAlert(message: "Cannot find config file location!")
+      }
+      return nil
     }
   }
   
@@ -130,61 +145,44 @@ class Utility {
     createDirIfNotExist(url: appAsUrl)
     return appAsUrl
   }()
-  
+
   static let userInputConfDirURL: URL = {
     let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.userInputConfFolder, isDirectory: true)
     createDirIfNotExist(url: url)
     return url
   }()
-  
+
   static let logDirURL: URL = {
     let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.logFolder, isDirectory: true)
     createDirIfNotExist(url: url)
     return url
   }()
-  
+
   static let watchLaterURL: URL = {
     let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.watchLaterFolder, isDirectory: true)
     createDirIfNotExist(url: url)
     return url
   }()
-  
+
+  static let tempDirURL: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+
+
   // MARK: - Util functions
-  
+
   static func swap<T>(_ a: inout T, _ b: inout T) {
     let temp = a
     a = b
     b = temp
   }
-  
-  static func toRealSpeed(fromDisplaySpeed speed: Double) -> Double{
-    var realSpeed = speed
-    if realSpeed == 0 {
-      realSpeed = 1
-    } else if realSpeed < 0 {
-      realSpeed = -1 / realSpeed
-    }
-    return realSpeed
-  }
-  
-  static func toDisplaySpeed(fromRealSpeed realSpeed: Double) -> Double {
-    var speed = realSpeed
-    if realSpeed == 1 {
-      speed = 0
-    } else if realSpeed < 1 {
-      speed = -1 / speed
-    }
-    return speed
-  }
-  
+
   static func toRealSubScale(fromDisplaySubScale scale: Double) -> Double {
     return scale > 0 ? scale : -1 / scale
   }
-  
+
   static func toDisplaySubScale(fromRealSubScale realScale: Double) -> Double {
     return realScale >= 1 ? realScale : -1 / realScale
   }
-  
+
   static func mpvKeyCode(from event: NSEvent) -> String {
     var keyString = ""
     let keyChar: String
@@ -221,29 +219,9 @@ class Utility {
     keyString += keyChar
     return keyString
   }
-    
+
   // MARK: - Util classes
-  
-  class Regex {
-    var regex: NSRegularExpression?
-    
-    init (_ pattern: String) {
-      if let exp = try? NSRegularExpression(pattern: pattern, options: []) {
-        self.regex = exp
-      } else {
-        Utility.fatal("Cannot create regex \(pattern)")
-      }
-    }
-    
-    func matches(_ str: String) -> Bool {
-      if let matches = regex?.numberOfMatches(in: str, options: [], range: NSMakeRange(0, str.characters.count)) {
-        return matches > 0
-      } else {
-        return false
-      }
-    }
-  }
-  
+
   class FontAttributes {
     struct AttributeType {
       enum Align {
@@ -261,17 +239,17 @@ class Utility {
         case name(String)
       }
     }
-    
+
     var align: AttributeType.Align
     var size: AttributeType.Size
     var font: AttributeType.Font
-    
+
     init(font: AttributeType.Font, size: AttributeType.Size, align: AttributeType.Align) {
       self.font = font
       self.size = size
       self.align = align
     }
-    
+
     var value : [String : AnyObject]? {
       get {
         let f: NSFont?
@@ -312,14 +290,14 @@ class Utility {
     }
   }
 
-  
+
   // http://stackoverflow.com/questions/31701326/
-  
+
   struct ShortCodeGenerator {
-    
+
     private static let base62chars = [Character]("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".characters)
     private static let maxBase : UInt32 = 62
-    
+
     static func getCode(withBase base: UInt32 = maxBase, length: Int) -> String {
       var code = ""
       for _ in 0..<length {
@@ -329,8 +307,8 @@ class Utility {
       return code
     }
   }
-  
-  
+
+
 }
 
 // http://stackoverflow.com/questions/33294620/

@@ -1,6 +1,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Auto hide in:"; ObjectID = "82A-XQ-BvS"; */
-"82A-XQ-BvS.title" = "Ausblenden:";
+"82A-XQ-BvS.title" = "Automatisch ausblenden in:";
 
 /* Class = "NSButtonCell"; title = "Show chapter position in progress bar"; ObjectID = "BVV-Z3-LHR"; */
 "BVV-Z3-LHR.title" = "Kapitel im Fortschrittsbalken zeigen";
@@ -24,7 +24,7 @@
 "S8H-Xr-uVa.title" = "s";
 
 /* Class = "NSButtonCell"; title = "Use physical resolution on retina screens"; ObjectID = "fsj-YE-OB7"; */
-"fsj-YE-OB7.title" = "Physikal. Auflösung bei Retina Displays";
+"fsj-YE-OB7.title" = "Physikal. Auflösung bei Retina Displays verwenden";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Controller:"; ObjectID = "g06-Ja-Ot8"; */
 "g06-Ja-Ot8.title" = "On-Screen Kontroller:";
@@ -37,3 +37,5 @@
 
 /* Class = "NSButtonCell"; title = "Resize to video size only when open file manually"; ObjectID = "uD1-HB-46y"; */
 "uD1-HB-46y.title" = "Videoauflösung anpassen, wenn Datei manuell geöffnet";
+
+"SFX-ct-8MB.title" = "Immer im Vordergrund während der Wiedergabe";

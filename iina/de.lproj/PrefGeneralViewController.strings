@@ -33,19 +33,19 @@
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
 
 /* Class = "NSButtonCell"; title = "Quit when no window opened"; ObjectID = "YLo-6E-tT7"; */
-"YLo-6E-tT7.title" = "Schließen, wenn keine Fenster offen";
+"YLo-6E-tT7.title" = "Schließen, wenn keine Fenster mehr geöffnet sind";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
 "YeH-hk-7NN.title" = "/pfad/zu/den/bildschirmfotos";
 
 /* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "bPK-Wy-OMI"; */
-"bPK-Wy-OMI.title" = "Mittelhell";
+"bPK-Wy-OMI.title" = "Mittel-Hell";
 
 /* Class = "NSMenuItem"; title = "PPM"; ObjectID = "iSD-UA-cfL"; */
 "iSD-UA-cfL.title" = "PPM";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
-"lvA-Rc-Sh6.title" = "Mit Untertitel";
+"lvA-Rc-Sh6.title" = "Untertitel einbinden";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "oJY-Iz-3sO"; */
 "oJY-Iz-3sO.title" = "Format:";
@@ -67,3 +67,11 @@
 
 /* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
 "uQR-Fx-oEm.title" = "Verhalten:";
+
+/* Class = "NSButtonCell"; title = "Keep window open when playback finished"; ObjectID = "2iM-j7-AzQ"; */
+"2iM-j7-AzQ.title" = "Fenster nach Wiedergabe geöffnet halten";
+
+/* Class = "NSButtonCell"; title = "Open a choose file panel after starting"; ObjectID = "IYU-9y-fBL"; */
+"IYU-9y-fBL.title" = "\"Datei auswählen\"-Dialog beim Starten anzeigen";
+
+"jOB-D3-WT3.title" = "Letzte Wiedergabeposition merken";

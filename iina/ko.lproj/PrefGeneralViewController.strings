@@ -2,7 +2,7 @@
 "2Hu-qC-UMi.title" = "테마:";
 
 /* Class = "NSButtonCell"; title = "Keep window open when playback finished"; ObjectID = "2iM-j7-AzQ"; */
-"2iM-j7-AzQ.title" = "재생이 끝난 후에도 창을 닫지 않기";
+"2iM-j7-AzQ.title" = "재생이 끝난 후에도 윈도우를 닫지 않기";
 
 /* Class = "NSTextFieldCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
 "2rJ-mg-OuU.title" = "저장 위치";
@@ -17,7 +17,7 @@
 "49l-le-9k6.title" = "Light";
 
 /* Class = "NSButtonCell"; title = "Remember recently opened files"; ObjectID = "55O-ik-ql6"; */
-"55O-ik-ql6.title" = "최근 재생 목록 기억하기";
+"55O-ik-ql6.title" = "최근 재생목록 기억하기";
 
 /* Class = "NSMenuItem"; title = "PGM"; ObjectID = "A5p-u9-lqJ"; */
 "A5p-u9-lqJ.title" = "PGM";
@@ -26,7 +26,7 @@
 "FbF-jJ-W5a.title" = "파일을 열때 일시 정지 상태로 두기";
 
 /* Class = "NSButtonCell"; title = "Open a choose file panel after starting"; ObjectID = "IYU-9y-fBL"; */
-"IYU-9y-fBL.title" = "앱을 시작할 때 파일 선택창 열기";
+"IYU-9y-fBL.title" = "앱을 시작할 때 파일 선택 상자 열기";
 
 /* Class = "NSMenuItem"; title = "PGM (YV12)"; ObjectID = "Kru-Ho-Wpv"; */
 "Kru-Ho-Wpv.title" = "PGM (YV12)";
@@ -38,10 +38,10 @@
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
 
 /* Class = "NSButtonCell"; title = "Quit when no window is opened"; ObjectID = "YLo-6E-tT7"; */
-"YLo-6E-tT7.title" = "열려진 창이 없으면 앱을 종료";
+"YLo-6E-tT7.title" = "열려진 윈도우가 없으면 앱을 종료";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/path/to/screenshot/folder";
+"YeH-hk-7NN.title" = "/스크린샷/저장/폴더/경로";
 
 /* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "bPK-Wy-OMI"; */
 "bPK-Wy-OMI.title" = "Medium Light";
@@ -56,13 +56,13 @@
 "lvA-Rc-Sh6.title" = "자막 포함";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "oJY-Iz-3sO"; */
-"oJY-Iz-3sO.title" = "Format:";
+"oJY-Iz-3sO.title" = "파일형식:";
 
 /* Class = "NSTextFieldCell"; title = "Appearance:"; ObjectID = "pHB-yo-Ret"; */
 "pHB-yo-Ret.title" = "모양새:";
 
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
-"pdx-zt-kf2.title" = "화면 저장:";
+"pdx-zt-kf2.title" = "스크린샷:";
 
 /* Class = "NSMenuItem"; title = "TARGA"; ObjectID = "q9X-X2-uGt"; */
 "q9X-X2-uGt.title" = "TARGA";

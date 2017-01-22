@@ -56,7 +56,7 @@
 "AYu-sK-qS6.title" = "Main Menu";
 
 /* Class = "NSMenuItem"; title = "Screenshot"; ObjectID = "AoP-K6-Kb5"; */
-"AoP-K6-Kb5.title" = "화면 저장";
+"AoP-K6-Kb5.title" = "스크린샷";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
 "BOF-NM-1cW.title" = "환경설정…";
@@ -68,7 +68,7 @@
 "BtY-iQ-6Pf.title" = "공유";
 
 /* Class = "NSMenuItem"; title = "Advanced Screenshot..."; ObjectID = "CKi-JE-yLT"; */
-"CKi-JE-yLT.title" = "화면저장 사용자 설정…";
+"CKi-JE-yLT.title" = "고급 스크린샷…";
 
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "오디오 트랙";
@@ -98,7 +98,7 @@
 "GF1-xB-KcA.title" = "오디오 트랙";
 
 /* Class = "NSMenuItem"; title = "Playlist"; ObjectID = "Gi5-1S-RQB"; */
-"Gi5-1S-RQB.title" = "재생 목록";
+"Gi5-1S-RQB.title" = "재생목록";
 
 /* Class = "NSMenuItem"; title = "Crop"; ObjectID = "Gqg-wU-RRo"; */
 "Gqg-wU-RRo.title" = "화면 자르기";
@@ -182,7 +182,7 @@
 "THG-4o-U6A.title" = "자막 지연: ";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
-"Td7-aD-5lo.title" = "창";
+"Td7-aD-5lo.title" = "윈도우";
 
 /* Class = "NSMenuItem"; title = "Pause"; ObjectID = "UOE-MJ-8ku"; */
 "UOE-MJ-8ku.title" = "일시 정지";
@@ -215,10 +215,10 @@
 "ZnF-yX-7jP.title" = "터치바 사용자 설정…";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
-"aUF-d1-5bR.title" = "창";
+"aUF-d1-5bR.title" = "윈도우";
 
 /* Class = "NSMenu"; title = "Playlist"; ObjectID = "aXa-aM-Jaq"; */
-"aXa-aM-Jaq.title" = "재생 목록";
+"aXa-aM-Jaq.title" = "재생목록";
 
 /* Class = "NSMenuItem"; title = "Rotation"; ObjectID = "ar5-3T-O9h"; */
 "ar5-3T-O9h.title" = "회전";
@@ -272,7 +272,7 @@
 "jxT-CU-nIS.title" = "재생";
 
 /* Class = "NSMenuItem"; title = "Load External Subtitle..."; ObjectID = "k6x-hf-ATi"; */
-"k6x-hf-ATi.title" = "외부 자막 열기…";
+"k6x-hf-ATi.title" = "외부 자막 불러오기…";
 
 /* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
 "lDC-IC-peP.title" = "큰 크기";
@@ -281,7 +281,7 @@
 "lYN-0x-lzT.title" = "오디오";
 
 /* Class = "NSMenuItem"; title = "Go To Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
-"lj0-Oo-7nB.title" = "화면 저장 폴더로 가기";
+"lj0-Oo-7nB.title" = "스크린샷 폴더로 가기";
 
 /* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
 "mGw-jm-5x2.title" = "부자막";
@@ -326,7 +326,7 @@
 "vNY-rz-j42.title" = "목록 지우기";
 
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
-"wex-rX-PcY.title" = "모든 창 위에 두기";
+"wex-rX-PcY.title" = "모든 윈도우 위에 두기";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
 "wpr-3q-Mcd.title" = "도움말";

@@ -41,7 +41,7 @@
 "osd.abloop.clear" = "구간 반복: 해제됨";
 
 /* Added %i files to playlist */
-"osd.add_to_playlist" = "%i 파일이 재생 목록에 추가되었습니다";
+"osd.add_to_playlist" = "%i 파일이 재생목록에 추가되었습니다";
 
 /* Aspect Ratio: %@ */
 "osd.aspect" = "화면비: %@";
@@ -59,7 +59,7 @@
 "osd.chapter" = "챕터: %@";
 
 /* Cleared playlist */
-"osd.clear_playlist" = "재생 목록이 지워졌습니다";
+"osd.clear_playlist" = "재생목록이 지워졌습니다";
 
 /* Crop: %@ */
 "osd.crop" = "화면 자르기: %@";
@@ -80,7 +80,7 @@
 "osd.rotate" = "회전: %i°";
 
 /* Screenshot captured */
-"osd.screenshot" = "화면 저장됨";
+"osd.screenshot" = "스크린샷 저장됨";
 
 /* Speed: %.2fx */
 "osd.speed" = "재생 속도: %.2fx";
@@ -104,7 +104,7 @@
 "osd.subtitle_scale" = "자막 크기: %.2fx";
 
 /* Unmute */
-"osd.unmute" = "소리 켬";
+"osd.unmute" = "소리 켜짐";
 
 /* Brightness: %i */
 "osd.video_eq.brightness" = "밝기: %i";
@@ -128,7 +128,7 @@
 "playlist.chapter_cap" = "챕터";
 
 /* PLAYLIST */
-"playlist.playlist_cap" = "재생 목록";
+"playlist.playlist_cap" = "재생목록";
 
 /* Advanced */
 "preference.advanced" = "고급설정";
@@ -182,13 +182,13 @@
 "update.new_version" = "새로운 버전:";
 
 /* No update */
-"update.no_update" = "최신 버전을 사용하고 있습니다.";
+"update.no_update" = "최신 버전을 사용중입니다.";
 
 /* Title */
 "update.title_error" = "오류";
 
 /* Title */
-"update.title_no_update" = "업데이트 없음";
+"update.title_no_update" = "업데이트가 없습니다";
 
 /* Title */
 "update.title_update_found" = "업데이트를 찾았습니다";

@@ -9,10 +9,10 @@
 "6F4-gm-oBg.title" = "Vollbildmodus an-/ausschalten";
 
 /* Class = "NSTextFieldCell"; title = "Exact seek is more precise but can cause lag and high CPU usage."; ObjectID = "6FZ-Qm-0k0"; */
-"6FZ-Qm-0k0.title" = "Exaktes Positionieren kann zu Lags / hohen CPU-Auslastungen führen.";
+"6FZ-Qm-0k0.title" = "Exaktes Positionieren kann zu Lags und hohen CPU-Auslastungen führen.";
 
 /* Class = "NSMenuItem"; title = "Exact seek"; ObjectID = "70P-6t-4jC"; */
-"70P-6t-4jC.title" = "Exakte Positionierung";
+"70P-6t-4jC.title" = "Exaktes Positionieren";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "A8c-wa-IFR"; */
 "A8c-wa-IFR.title" = "Pause / Fortsetzen";
@@ -45,7 +45,15 @@
 "w54-7I-QfW.title" = "Nichts";
 
 /* Class = "NSMenuItem"; title = "Keyframe seek"; ObjectID = "wBB-fx-Mao"; */
-"wBB-fx-Mao.title" = "Grobe Positionierung";
+"wBB-fx-Mao.title" = "Grobes Positionieren";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "Nichts";
+
+"9qx-ao-oxE.title" = "Steuerelemente ausblenden";
+
+// Right click actions
+"Rqy-g2-AP2.title" = "Rechtsklick:";
+"OOM-jo-N4V.title" = "Steuerelemente ausblenden";
+"mOX-Fi-oTv.title" = "Pause / Fortsetzen";
+"oOk-y6-lek.title" = "Nichts";

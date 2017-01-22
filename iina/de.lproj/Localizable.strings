@@ -42,7 +42,7 @@
 "osd.screenshot" = "Bild aufgenommen";
 "osd.abloop.a" = "AB-Wiederholung: A";
 "osd.abloop.b" = "AB-Wiederholung: B";
-"osd.abloop.clear" = "AB-Wiederholung: Gesäubert";
+"osd.abloop.clear" = "AB-Wiederholung: Aus";
 "osd.stop" = "Stopp";
 "osd.chapter" = "Kapitel: %@";
 "osd.subtitle_scale" = "Untertitel-Skalierung: %.2fx";
@@ -81,7 +81,7 @@
 "menu.fullscreen" = "Vollbild";
 "menu.exit_fullscreen" = "Vollbild beenden";
 "menu.pause" = "Pausieren";
-"menu.resume" = "Wiedergeben";
+"menu.resume" = "Fortsetzen";
 
 "track.none" = "<Leer>";
 

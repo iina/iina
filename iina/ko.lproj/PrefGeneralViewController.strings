@@ -26,7 +26,7 @@
 "FbF-jJ-W5a.title" = "파일을 열때 일시 정지 상태로 두기";
 
 /* Class = "NSButtonCell"; title = "Open a choose file panel after starting"; ObjectID = "IYU-9y-fBL"; */
-"IYU-9y-fBL.title" = "앱을 시작할 때 파일 선택 상자 열기";
+"IYU-9y-fBL.title" = "앱을 실행하면 파일 선택 상자 열기";
 
 /* Class = "NSMenuItem"; title = "PGM (YV12)"; ObjectID = "Kru-Ho-Wpv"; */
 "Kru-Ho-Wpv.title" = "PGM (YV12)";
@@ -38,10 +38,10 @@
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
 
 /* Class = "NSButtonCell"; title = "Quit when no window is opened"; ObjectID = "YLo-6E-tT7"; */
-"YLo-6E-tT7.title" = "열려진 윈도우가 없으면 앱을 종료";
+"YLo-6E-tT7.title" = "모든 윈도우를 닫으면 앱을 종료";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/스크린샷/저장/폴더/경로";
+"YeH-hk-7NN.title" = "/path/to/screenshot/folder";
 
 /* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "bPK-Wy-OMI"; */
 "bPK-Wy-OMI.title" = "Medium Light";

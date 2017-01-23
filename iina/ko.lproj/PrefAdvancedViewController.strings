@@ -17,7 +17,7 @@
 "E3I-Q7-9t1.headerCell.title" = "항목";
 
 /* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
-"HMa-Vz-EUk.title" = "아래 설정을 적용하려면 IINA를 종료후 재실행해야 합니다.";
+"HMa-Vz-EUk.title" = "아래 설정을 적용하려면 IINA를 종료한 후 다시 실행해야 합니다.";
 
 /* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
 "JDA-g3-RNX.title" = "로그 저장 디렉토리 열기";
@@ -32,7 +32,7 @@
 "SX9-fy-bss.headerCell.title" = "값";
 
 /* Class = "NSButtonCell"; title = "Use config directory:"; ObjectID = "ehL-8Y-G8h"; */
-"ehL-8Y-G8h.title" = "사용자 config 디렉토리 사용:";
+"ehL-8Y-G8h.title" = "config 디렉토리 사용:";
 
 /* Class = "NSButtonCell"; title = "Use MPV's OSD"; ObjectID = "phK-g9-Vbg"; */
 "phK-g9-Vbg.title" = "MPV의 OSD 사용";

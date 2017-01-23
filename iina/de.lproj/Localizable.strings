@@ -15,7 +15,7 @@
 "playlist.chapter_cap" = "KAPITEL";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffern... %@%%";
+"main.buffering_indicator" = "Buffern... %d%%";
 
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "Standard";

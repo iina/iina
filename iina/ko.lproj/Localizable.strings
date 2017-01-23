@@ -2,7 +2,7 @@
 "alert.extra_option_error" = "--%@=%@ 설정에서 %d 오류가 발생했습니다. 환경설정 > 고급설정으로 이동하여 사용자가 지정한 추가 설정 사항을 점검하십시오.";
 
 /* Buffering... %s%% */
-"main.buffering_indicator" = "준비중… %@%%";
+"main.buffering_indicator" = "준비중… %d%%";
 
 /* Audio Delay: */
 "menu.audio_delay" = "오디오 지연: %.2fs";
@@ -47,19 +47,19 @@
 "osd.aspect" = "화면비: %@";
 
 /* Audio Delay: %fs Earlier */
-"osd.audio_delay.earlier" = "오디오 지연: %.2fs Earlier";
+"osd.audio_delay.earlier" = "오디오 지연: %.2fs 빠르게";
 
 /* Audio Delay: %fs Later */
-"osd.audio_delay.later" = "오디오 지연: %.2fs Later";
+"osd.audio_delay.later" = "오디오 지연: %.2fs 늦게";
 
 /* Audio Delay: No Delay */
-"osd.audio_delay.nodelay" = "오디오 지연: No Delay";
+"osd.audio_delay.nodelay" = "오디오 지연: 없음";
 
 /* Chapter: %@ */
 "osd.chapter" = "챕터: %@";
 
 /* Cleared playlist */
-"osd.clear_playlist" = "재생목록이 지워졌습니다";
+"osd.clear_playlist" = "재생목록 비움";
 
 /* Crop: %@ */
 "osd.crop" = "화면 자르기: %@";
@@ -89,13 +89,13 @@
 "osd.stop" = "정지됨";
 
 /* Subtitle Delay: %fs Earlier */
-"osd.sub_delay.earlier" = "자막 지연: %.2fs Earlier";
+"osd.sub_delay.earlier" = "자막 지연: %.2fs 빠르게";
 
 /* Subtitle Delay: %fs Later */
-"osd.sub_delay.later" = "자막 지연: %.2fs Later";
+"osd.sub_delay.later" = "자막 지연: %.2fs 늦게";
 
 /* Subtitle Delay: No Delay */
-"osd.sub_delay.nodelay" = "자막 지연: No Delay";
+"osd.sub_delay.nodelay" = "자막 지연: 없음";
 
 /* Subtitle Position: %f */
 "osd.subtitle_pos" = "자막 위치: %f";
@@ -170,7 +170,7 @@
 "track.none" = "<없음>";
 
 /* Error */
-"update.check_failed" = "업데이트 확인을 하지 못했습니다. 너무 오래된 버전을 사용하고 있는 것 같습니다. 웹사이트 또는 Github의 릴리즈를 확인해 주십시오.";
+"update.check_failed" = "업데이트를 확인하지 못했습니다. 너무 오래된 버전을 사용하고 있는 것 같습니다. 웹사이트 또는 Github에서 배포본을 확인해 주십시오.";
 
 /* Github */
 "update.dl_from_github" = "Github으로 가기";
@@ -194,5 +194,5 @@
 "update.title_update_found" = "업데이트를 찾았습니다";
 
 /* Update found */
-"update.update_found" = "새로운 버전이 있습니다. IINA는 아직 알파 단계이므로 최신버전을 유지하는 것을 권해드립니다. 웹사이트나 Github에서 다운로드 하십시오:";
+"update.update_found" = "새로운 버전이 있습니다. IINA는 아직 알파 단계이므로 최신버전으로 갱신하는 것이 좋습니다. 웹사이트나 Github에서 다운로드 하십시오:";
 

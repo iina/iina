@@ -24,7 +24,7 @@
 "43n-Ed-5kT.title" = "快速設定";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
-"4ae-MT-2L1.title" = "音訊延後 + 0.5秒";
+"4ae-MT-2L1.title" = "音訊延遲 + 0.5秒";
 
 /* Class = "NSMenuItem"; title = "Quit IINA"; ObjectID = "4sb-4s-VLi"; */
 "4sb-4s-VLi.title" = "退出 IINA";
@@ -102,7 +102,7 @@
 "Gqg-wU-RRo.title" = "剪下";
 
 /* Class = "NSMenuItem"; title = "Reset Audio Delay"; ObjectID = "H3d-jR-YCr"; */
-"H3d-jR-YCr.title" = "重置音訊延後";
+"H3d-jR-YCr.title" = "重置音訊延遲";
 
 /* Class = "NSMenuItem"; title = "Video"; ObjectID = "H8h-7b-M4v"; */
 "H8h-7b-M4v.title" = "視訊";
@@ -126,13 +126,13 @@
 "Kd2-mp-pUS.title" = "顯示全部";
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
-"LE2-aR-0XJ.title" = "前置全部視窗";
+"LE2-aR-0XJ.title" = "置頂全部視窗";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
-"Lc4-4W-thE.title" = "音訊延後 - 0.5秒";
+"Lc4-4W-thE.title" = "音訊延遲 - 0.5秒";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.5s"; ObjectID = "LsU-Qz-dax"; */
-"LsU-Qz-dax.title" = "字幕延後 - 0.5秒";
+"LsU-Qz-dax.title" = "字幕延遲 - 0.5秒";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
 "NMo-om-nkz.title" = "服務";
@@ -165,13 +165,13 @@
 "SHd-63-Xoh.title" = "符合熒幕大小";
 
 /* Class = "NSMenuItem"; title = "Reset Subtitle Delay"; ObjectID = "SLr-6g-Mgh"; */
-"SLr-6g-Mgh.title" = "重置字幕延後";
+"SLr-6g-Mgh.title" = "重置字幕延遲";
 
 /* Class = "NSMenuItem"; title = "Step Backward 5s"; ObjectID = "Sif-85-FF1"; */
 "Sif-85-FF1.title" = "後退5秒";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay: "; ObjectID = "THG-4o-U6A"; */
-"THG-4o-U6A.title" = "字幕延後: ";
+"THG-4o-U6A.title" = "字幕延遲: ";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
 "Td7-aD-5lo.title" = "視窗";
@@ -243,7 +243,7 @@
 "eo2-Tt-SLx.title" = "裁切";
 
 /* Class = "NSMenuItem"; title = "Audio Delay:"; ObjectID = "foC-r3-8mp"; */
-"foC-r3-8mp.title" = "音訊延後:";
+"foC-r3-8mp.title" = "音訊延遲:";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
 "hz9-B4-Xy5.title" = "服務";
@@ -288,7 +288,7 @@
 "oxF-BB-lBy.title" = "上一幀";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay +0.5s"; ObjectID = "pAo-L5-qTO"; */
-"pAo-L5-qTO.title" = "字幕延後 + 0.5秒";
+"pAo-L5-qTO.title" = "字幕延遲 + 0.5秒";
 
 /* Class = "NSMenuItem"; title = "Volume - 10%"; ObjectID = "pdj-9C-Fn1"; */
 "pdj-9C-Fn1.title" = "音量 - 5%";
@@ -327,7 +327,7 @@
 "xDJ-GA-Gjs.title" = "字幕";
 
 /* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
-"yHI-7D-OaI.title" = "反交錯";
+"yHI-7D-OaI.title" = "抗交錯";
 
 "Mg3-WB-gjZ.title" = "查找在線字幕...";
 

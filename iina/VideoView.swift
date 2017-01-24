@@ -288,7 +288,7 @@ class VideoView: NSOpenGLView {
     if !started {
       started = true
     }
-    openGLContext!.lock()
+
     renderContext.lock()
 
     renderContext.makeCurrentContext()
@@ -303,11 +303,11 @@ class VideoView: NSOpenGLView {
     renderContext.flushBuffer()
 
     renderContext.unlock()
-    openGLContext!.unlock()
   }
 
   /** Draw the video to view from framebuffer. */
   func drawVideo() {
+    renderContext.lock()
     openGLContext?.lock()
     openGLContext?.makeCurrentContext()
 
@@ -332,11 +332,12 @@ class VideoView: NSOpenGLView {
 
     }
     openGLContext?.flushBuffer()
+    openGLContext?.unlock()
+    renderContext.unlock()
     // report flip to mpv
     if let context = self.mpvGLContext {
       mpv_opengl_cb_report_flip(context, 0)
     }
-    openGLContext?.unlock()
   }
 
   /** This function is mainly called when bound changes, e.g. resize window */

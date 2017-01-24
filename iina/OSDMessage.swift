@@ -46,10 +46,10 @@ enum OSDMessage {
   func message() -> String {
     switch self {
     case .pause:
-      return NSLocalizedString("osd.pause", comment: "Paused")
+      return NSLocalizedString("osd.pause", comment: "Pause")
 
     case .resume:
-      return NSLocalizedString("osd.resume", comment: "Resumed")
+      return NSLocalizedString("osd.resume", comment: "Resume")
 
     case .volume(let value):
       return String(format: NSLocalizedString("osd.volume", comment: "Volume: %i"), value)
@@ -93,7 +93,7 @@ enum OSDMessage {
       return NSLocalizedString("osd.unmute", comment: "Unmute")
 
     case .screenShot:
-      return NSLocalizedString("osd.screenshot", comment: "Screenshot captured")
+      return NSLocalizedString("osd.screenshot", comment: "Screenshot Captured")
 
     case .abLoop(let value):
       if value == 1 {
@@ -105,7 +105,7 @@ enum OSDMessage {
       }
 
     case .stop:
-      return NSLocalizedString("osd.stop", comment: "Stopped")
+      return NSLocalizedString("osd.stop", comment: "Stop")
 
     case .chapter(let name):
       return String(format: NSLocalizedString("osd.chapter", comment: "Chapter: %@"), name)
@@ -114,10 +114,10 @@ enum OSDMessage {
       return String(format: NSLocalizedString("osd.subtitle_scale", comment: "Subtitle Scale: %.2fx"), value)
 
     case .addToPlaylist(let count):
-      return String(format: NSLocalizedString("osd.add_to_playlist", comment: "Added %i files to playlist"), count)
+      return String(format: NSLocalizedString("osd.add_to_playlist", comment: "Added %i Files to Playlist"), count)
 
     case .clearPlaylist:
-      return NSLocalizedString("osd.clear_playlist", comment: "Cleared playlist")
+      return NSLocalizedString("osd.clear_playlist", comment: "Cleared Playlist")
 
     case .contrast(let value):
       return String(format: NSLocalizedString("osd.video_eq.contrast", comment: "Contrast: %i"), value)

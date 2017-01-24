@@ -199,7 +199,7 @@ extension MainWindowController {
 
   @IBAction func menuAlwaysOnTop(_ sender: AnyObject) {
     playerCore.info.isAlwaysOntop = !playerCore.info.isAlwaysOntop
-    setWindowFloatingOntop(playerCore.info.isAlwaysOntop)
+    setWindowFloatingOnTop(playerCore.info.isAlwaysOntop)
   }
 
   @IBAction func menuToggleFullScreen(_ sender: NSMenuItem) {

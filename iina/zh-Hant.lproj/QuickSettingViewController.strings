@@ -30,10 +30,10 @@
 "7su-au-nwq.title" = "5";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track..."; ObjectID = "8Ax-5X-osl"; */
-"8Ax-5X-osl.title" = "加載外置音頻...";
+"8Ax-5X-osl.title" = "加載音訊檔...";
 
 /* Class = "NSTextFieldCell"; title = "Audio delay:"; ObjectID = "AKs-VQ-fKF"; */
-"AKs-VQ-fKF.title" = "音頻延遲:";
+"AKs-VQ-fKF.title" = "音訊延遲:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "ANn-CR-JOV"; */
 "ANn-CR-JOV.title" = "顏色:";
@@ -48,7 +48,7 @@
 "C0t-gm-Tim.title" = "5s";
 
 /* Class = "NSButtonCell"; title = "Load Subtitle..."; ObjectID = "C97-zJ-O3Y"; */
-"C97-zJ-O3Y.title" = "加載字幕...";
+"C97-zJ-O3Y.title" = "加載字幕檔...";
 
 /* Class = "NSTextFieldCell"; title = "0"; ObjectID = "CAr-N0-j64"; */
 "CAr-N0-j64.title" = "0";
@@ -87,7 +87,7 @@
 "LEZ-fv-buL.title" = "0s";
 
 /* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
-"Lnu-kz-cql.title" = "外置音頻:";
+"Lnu-kz-cql.title" = "外置音訊:";
 
 /* Class = "NSTextFieldCell"; title = "-12 dB"; ObjectID = "Lpw-ws-Ezh"; */
 "Lpw-ws-Ezh.title" = "-12 dB";
@@ -120,10 +120,10 @@
 "Sp8-cj-Zrx.title" = "40";
 
 /* Class = "NSButtonCell"; title = "Deinterlace"; ObjectID = "TXm-bA-7y3"; */
-"TXm-bA-7y3.title" = "反交錯";
+"TXm-bA-7y3.title" = "抗交錯";
 
 /* Class = "NSTextFieldCell"; title = "Video track:"; ObjectID = "VzC-tM-KT7"; */
-"VzC-tM-KT7.title" = "視頻軌道:";
+"VzC-tM-KT7.title" = "視訊軌道:";
 
 /* Class = "NSTextFieldCell"; title = "Scale:"; ObjectID = "Wbx-Ti-qiS"; */
 "Wbx-Ti-qiS.title" = "縮放:";
@@ -153,7 +153,7 @@
 "avJ-cW-Iws.title" = "0.5";
 
 /* Class = "NSTextFieldCell"; title = "Secondary subtitle:"; ObjectID = "bKb-pW-HnS"; */
-"bKb-pW-HnS.title" = "副字幕:";
+"bKb-pW-HnS.title" = "第二字幕:";
 
 /* Class = "NSTextFieldCell"; title = "0"; ObjectID = "bZu-Wx-06O"; */
 "bZu-Wx-06O.title" = "0";
@@ -162,10 +162,10 @@
 "bxa-ha-AXL.title" = "2";
 
 /* Class = "NSTabViewItem"; label = "Audio"; ObjectID = "bzk-c2-LH5"; */
-"bzk-c2-LH5.label" = "音頻";
+"bzk-c2-LH5.label" = "音訊";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
-"cMu-YF-riv.ibShadowedLabels[0]" = "Default";
+"cMu-YF-riv.ibShadowedLabels[0]" = "默認";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[1] = "4:3"; ObjectID = "cMu-YF-riv"; */
 "cMu-YF-riv.ibShadowedLabels[1]" = "4:3";
@@ -183,7 +183,7 @@
 "cdR-uY-riN.title" = "亮度:";
 
 /* Class = "NSButtonCell"; title = "AUDIO"; ObjectID = "cpm-5o-a2c"; */
-"cpm-5o-a2c.title" = "音頻";
+"cpm-5o-a2c.title" = "音訊";
 
 /* Class = "NSTextFieldCell"; title = "8k"; ObjectID = "e4X-H4-VxS"; */
 "e4X-H4-VxS.title" = "8k";
@@ -222,7 +222,7 @@
 "iS4-Zr-9Ig.title" = "均衡器:";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
-"iuN-rN-jT7.ibShadowedLabels[0]" = "None";
+"iuN-rN-jT7.ibShadowedLabels[0]" = "無";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[1] = "4:3"; ObjectID = "iuN-rN-jT7"; */
 "iuN-rN-jT7.ibShadowedLabels[1]" = "4:3";
@@ -246,13 +246,13 @@
 "lBn-YS-jL7.title" = "0 dB";
 
 /* Class = "NSButtonCell"; title = "VIDEO"; ObjectID = "lQt-I0-jHO"; */
-"lQt-I0-jHO.title" = "視頻";
+"lQt-I0-jHO.title" = "視訊";
 
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "ldQ-YL-IEp"; */
 "ldQ-YL-IEp.title" = "1x";
 
 /* Class = "NSTextFieldCell"; title = "Crop:"; ObjectID = "m9e-IB-IDJ"; */
-"m9e-IB-IDJ.title" = "剪切:";
+"m9e-IB-IDJ.title" = "裁切:";
 
 /* Class = "NSMenuItem"; title = "55"; ObjectID = "mep-aa-rk7"; */
 "mep-aa-rk7.title" = "55";
@@ -273,13 +273,13 @@
 "qpa-hD-ImC.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "Gamma:"; ObjectID = "r6x-z0-oFC"; */
-"r6x-z0-oFC.title" = "反差:";
+"r6x-z0-oFC.title" = "伽瑪:";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "s3F-Tl-Siy"; */
 "s3F-Tl-Siy.title" = "0s";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "s9l-Hb-SCk"; */
-"s9l-Hb-SCk.title" = "字號:";
+"s9l-Hb-SCk.title" = "字體大小:";
 
 /* Class = "NSMenuItem"; title = "4"; ObjectID = "ssK-tS-ogL"; */
 "ssK-tS-ogL.title" = "4";
@@ -300,7 +300,7 @@
 "uqb-mz-A22.title" = "背景";
 
 /* Class = "NSButtonCell"; title = "Custom..."; ObjectID = "vFD-HU-RVz"; */
-"vFD-HU-RVz.title" = "自定義...";
+"vFD-HU-RVz.title" = "自定...";
 
 /* Class = "NSTextFieldCell"; title = "Sub style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
 "wBD-pZ-Bvu.title" = "字幕樣式可能破壞 ASS 渲染。某些字幕格式無法使用下列部分選項。";
@@ -309,7 +309,7 @@
 "wgA-op-JP4.title" = "0s";
 
 /* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
-"x39-62-7KC.title" = "音頻軌道:";
+"x39-62-7KC.title" = "音訊軌道:";
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
 "xfX-wr-DTJ.title" = "+5s";

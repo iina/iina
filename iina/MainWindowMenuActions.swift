@@ -212,7 +212,6 @@ extension MainWindowController {
     } else {
       exitPIP(manually: true)
     }
-    sender.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
   }
 
   @IBAction func menuToggleFullScreen(_ sender: NSMenuItem) {

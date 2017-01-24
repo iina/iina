@@ -286,10 +286,11 @@ class MenuController: NSObject, NSMenuDelegate {
     fileLoop.state = isLoop ? NSOnState : NSOffState
   }
 
-  private func updateVieoMenu() {
+  private func updateVideoMenu() {
     alwaysOnTop.state = PlayerCore.shared.info.isAlwaysOntop ? NSOnState : NSOffState
     deinterlace.state = PlayerCore.shared.info.deinterlace ? NSOnState : NSOffState
     fullScreen.title = PlayerCore.shared.mainWindow.isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
+    pictureInPicture.title = PlayerCore.shared.mainWindow.isInPIP ? Constants.String.exitPIP : Constants.String.pip
   }
 
   private func updateAudioMenu() {
@@ -374,7 +375,7 @@ class MenuController: NSObject, NSMenuDelegate {
     } else if menu == playbackMenu {
       updatePlaybackMenu()
     } else if menu == videoMenu {
-      updateVieoMenu()
+      updateVideoMenu()
     } else if menu == videoTrackMenu {
       updateTracks(forMenu: menu, type: .video)
     } else if menu == flipMenu {

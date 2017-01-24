@@ -356,6 +356,25 @@
 		867483705008F086E07B0A6B /* Pods_iina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9E62A906F1FDCDF8DA03EA /* Pods-iinaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iinaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iinaTests/Pods-iinaTests.release.xcconfig"; sourceTree = "<group>"; };
 		A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.debug.xcconfig"; sourceTree = "<group>"; };
+		D27E35CE1E379B6D0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		D27E35CF1E379B6D0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
+		D27E35D01E379B6D0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/QuickSettingViewController.strings"; sourceTree = "<group>"; };
+		D27E35D11E379B6E0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PlaylistViewController.strings"; sourceTree = "<group>"; };
+		D27E35D21E379B6E0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/CropSettingsViewController.strings"; sourceTree = "<group>"; };
+		D27E35D31E379B6E0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InspectorWindowController.strings"; sourceTree = "<group>"; };
+		D27E35D41E379B6E0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/FilterWindowController.strings"; sourceTree = "<group>"; };
+		D27E35D51E379B6E0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AboutWindowController.strings"; sourceTree = "<group>"; };
+		D27E35D61E379B6E0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/FontPickerWindowController.strings"; sourceTree = "<group>"; };
+		D27E35D71E379B6F0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefGeneralViewController.strings"; sourceTree = "<group>"; };
+		D27E35D81E379B6F0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefUIViewController.strings"; sourceTree = "<group>"; };
+		D27E35D91E379B6F0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefControlViewController.strings"; sourceTree = "<group>"; };
+		D27E35DA1E379B6F0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefKeyBindingViewController.strings"; sourceTree = "<group>"; };
+		D27E35DB1E379B6F0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/KeyRecordViewController.strings"; sourceTree = "<group>"; };
+		D27E35DC1E379B6F0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefAdvancedViewController.strings"; sourceTree = "<group>"; };
+		D27E35DD1E379B6F0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefCodecViewController.strings"; sourceTree = "<group>"; };
+		D27E35DE1E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefSubViewController.strings"; sourceTree = "<group>"; };
+		D27E35DF1E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefNetworkViewController.strings"; sourceTree = "<group>"; };
+		D27E35E01E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -722,6 +741,7 @@
 				en,
 				Base,
 				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 84EB1ECD1D2F51D3004FA5A1;
 			productRefGroup = 84EB1ED71D2F51D3004FA5A1 /* Products */;
@@ -900,6 +920,7 @@
 			children = (
 				8400D5C71E1AB2F1006785F5 /* Base */,
 				8400D5FA1E1AB411006785F5 /* zh-Hans */,
+				D27E35CF1E379B6D0064BE57 /* zh-Hant */,
 			);
 			name = MainWindowController.xib;
 			sourceTree = "<group>";
@@ -909,6 +930,7 @@
 			children = (
 				8400D5CA1E1AB2F9006785F5 /* Base */,
 				8400D5FB1E1AB411006785F5 /* zh-Hans */,
+				D27E35D01E379B6D0064BE57 /* zh-Hant */,
 			);
 			name = QuickSettingViewController.xib;
 			sourceTree = "<group>";
@@ -918,6 +940,7 @@
 			children = (
 				8400D5CD1E1AB2FF006785F5 /* Base */,
 				8400D5FC1E1AB411006785F5 /* zh-Hans */,
+				D27E35D11E379B6E0064BE57 /* zh-Hant */,
 			);
 			name = PlaylistViewController.xib;
 			sourceTree = "<group>";
@@ -927,6 +950,7 @@
 			children = (
 				8400D5D01E1AB306006785F5 /* Base */,
 				8400D5FD1E1AB412006785F5 /* zh-Hans */,
+				D27E35D21E379B6E0064BE57 /* zh-Hant */,
 			);
 			name = CropSettingsViewController.xib;
 			sourceTree = "<group>";
@@ -936,6 +960,7 @@
 			children = (
 				8400D5D31E1AB312006785F5 /* Base */,
 				8400D5FE1E1AB412006785F5 /* zh-Hans */,
+				D27E35D31E379B6E0064BE57 /* zh-Hant */,
 			);
 			name = InspectorWindowController.xib;
 			sourceTree = "<group>";
@@ -945,6 +970,7 @@
 			children = (
 				8400D5D61E1AB317006785F5 /* Base */,
 				8400D5FF1E1AB412006785F5 /* zh-Hans */,
+				D27E35D41E379B6E0064BE57 /* zh-Hant */,
 			);
 			name = FilterWindowController.xib;
 			sourceTree = "<group>";
@@ -954,6 +980,7 @@
 			children = (
 				8400D5D91E1AB31B006785F5 /* Base */,
 				8400D6001E1AB412006785F5 /* zh-Hans */,
+				D27E35D51E379B6E0064BE57 /* zh-Hant */,
 			);
 			name = AboutWindowController.xib;
 			sourceTree = "<group>";
@@ -963,6 +990,7 @@
 			children = (
 				8400D5DC1E1AB326006785F5 /* Base */,
 				8400D6011E1AB412006785F5 /* zh-Hans */,
+				D27E35D61E379B6E0064BE57 /* zh-Hant */,
 			);
 			name = FontPickerWindowController.xib;
 			sourceTree = "<group>";
@@ -972,6 +1000,7 @@
 			children = (
 				8400D5DF1E1AB32A006785F5 /* Base */,
 				72CAEE6D1E229EAE00B8C894 /* zh-Hans */,
+				D27E35D71E379B6F0064BE57 /* zh-Hant */,
 			);
 			name = PrefGeneralViewController.xib;
 			sourceTree = "<group>";
@@ -981,6 +1010,7 @@
 			children = (
 				8400D5E21E1AB32F006785F5 /* Base */,
 				8400D6031E1AB412006785F5 /* zh-Hans */,
+				D27E35D81E379B6F0064BE57 /* zh-Hant */,
 			);
 			name = PrefUIViewController.xib;
 			sourceTree = "<group>";
@@ -990,6 +1020,7 @@
 			children = (
 				8400D5E51E1AB333006785F5 /* Base */,
 				8400D6041E1AB412006785F5 /* zh-Hans */,
+				D27E35D91E379B6F0064BE57 /* zh-Hant */,
 			);
 			name = PrefControlViewController.xib;
 			sourceTree = "<group>";
@@ -999,6 +1030,7 @@
 			children = (
 				8400D5E81E1AB337006785F5 /* Base */,
 				8400D6051E1AB412006785F5 /* zh-Hans */,
+				D27E35DA1E379B6F0064BE57 /* zh-Hant */,
 			);
 			name = PrefKeyBindingViewController.xib;
 			sourceTree = "<group>";
@@ -1008,6 +1040,7 @@
 			children = (
 				8400D5EB1E1AB33B006785F5 /* Base */,
 				8400D6061E1AB412006785F5 /* zh-Hans */,
+				D27E35DB1E379B6F0064BE57 /* zh-Hant */,
 			);
 			name = KeyRecordViewController.xib;
 			sourceTree = "<group>";
@@ -1017,6 +1050,7 @@
 			children = (
 				8400D5EE1E1AB33F006785F5 /* Base */,
 				8400D6071E1AB412006785F5 /* zh-Hans */,
+				D27E35DC1E379B6F0064BE57 /* zh-Hant */,
 			);
 			name = PrefAdvancedViewController.xib;
 			sourceTree = "<group>";
@@ -1026,6 +1060,7 @@
 			children = (
 				8400D5F11E1AB344006785F5 /* Base */,
 				8400D6081E1AB412006785F5 /* zh-Hans */,
+				D27E35DD1E379B6F0064BE57 /* zh-Hant */,
 			);
 			name = PrefCodecViewController.xib;
 			sourceTree = "<group>";
@@ -1035,6 +1070,7 @@
 			children = (
 				8400D5F41E1AB348006785F5 /* Base */,
 				8400D6091E1AB412006785F5 /* zh-Hans */,
+				D27E35DE1E379B700064BE57 /* zh-Hant */,
 			);
 			name = PrefSubViewController.xib;
 			sourceTree = "<group>";
@@ -1044,6 +1080,7 @@
 			children = (
 				8400D5F71E1AB34D006785F5 /* Base */,
 				8400D60A1E1AB412006785F5 /* zh-Hans */,
+				D27E35DF1E379B700064BE57 /* zh-Hant */,
 			);
 			name = PrefNetworkViewController.xib;
 			sourceTree = "<group>";
@@ -1054,6 +1091,7 @@
 				845AC09D1E1AE6C10080B614 /* Base */,
 				845AC09F1E1AE6CB0080B614 /* zh-Hans */,
 				845AC0A01E1AE71B0080B614 /* en */,
+				D27E35E01E379B700064BE57 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1063,6 +1101,7 @@
 			children = (
 				84A0BA941D2F9E9600BC8DA1 /* Base */,
 				8400D5F91E1AB411006785F5 /* zh-Hans */,
+				D27E35CE1E379B6D0064BE57 /* zh-Hant */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

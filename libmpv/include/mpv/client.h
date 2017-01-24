@@ -211,7 +211,7 @@ extern "C" {
  * relational operators (<, >, <=, >=).
  */
 #define MPV_MAKE_VERSION(major, minor) (((major) << 16) | (minor) | 0UL)
-#define MPV_CLIENT_API_VERSION MPV_MAKE_VERSION(1, 23)
+#define MPV_CLIENT_API_VERSION MPV_MAKE_VERSION(1, 24)
 
 /**
  * Return the MPV_CLIENT_API_VERSION the mpv source has been compiled with.
@@ -506,6 +506,9 @@ mpv_handle *mpv_create_client(mpv_handle *ctx, const char *name);
 int mpv_load_config_file(mpv_handle *ctx, const char *filename);
 
 /**
+ * This does nothing since mpv 0.23.0 (API version 1.24). Below is the
+ * description of the old behavior.
+ *
  * Stop the playback thread. This means the core will stop doing anything, and
  * only run and answer to client API requests. This is sometimes useful; for
  * example, no new frame will be queued to the video output, so doing requests
@@ -815,7 +818,7 @@ void mpv_free_node_contents(mpv_node *node);
  *              - deprecated options shadowed by properties:
  *                - chapter (option deprecated in 0.21.0)
  *                - playlist-pos (option deprecated in 0.21.0)
- *       The deprecated properties will be removed in mpv 0.22.0.
+ *       The deprecated properties will be removed in mpv 0.23.0.
  *
  * @param name Option name. This is the same as on the mpv command line, but
  *             without the leading "--".
@@ -861,8 +864,7 @@ int mpv_command(mpv_handle *ctx, const char **args);
  *                    function succeeds, this is set to command-specific return
  *                    data. You must call mpv_free_node_contents() to free it
  *                    (again, only if the command actually succeeds).
- *                    Currently, no command uses this, but that can change in
- *                    the future.
+ *                    Not many commands actually use this at all.
  * @return error code (the result parameter is not set on error)
  */
 int mpv_command_node(mpv_handle *ctx, mpv_node *args, mpv_node *result);
@@ -929,7 +931,7 @@ int mpv_command_node_async(mpv_handle *ctx, uint64_t reply_userdata,
  *       In some cases, properties and options still conflict. In these cases,
  *       mpv_set_property() accesses the options before mpv_initialize(), and
  *       the properties after mpv_initialize(). These conflicts will be removed
- *       in mpv 0.22.0. See mpv_set_option() for further remarks.
+ *       in mpv 0.23.0. See mpv_set_option() for further remarks.
  *
  * @param name The property name. See input.rst for a list of properties.
  * @param format see enum mpv_format.

@@ -361,7 +361,6 @@
 		84F942461E376126009B879B /* libmpv.1.24.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.24.0.dylib; path = libmpv/lib/libmpv.1.24.0.dylib; sourceTree = "<group>"; };
 		84FF84701D2FF698001B318A /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
 		84FF84711D2FF698001B318A /* opengl_cb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl_cb.h; sourceTree = "<group>"; };
-		84FF84721D2FF698001B318A /* qthelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = qthelper.hpp; sourceTree = "<group>"; };
 		867483705008F086E07B0A6B /* Pods_iina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.debug.xcconfig"; sourceTree = "<group>"; };
 		D27E35CE1E379B6D0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.strings"; sourceTree = "<group>"; };
@@ -723,7 +722,6 @@
 			children = (
 				84FF84701D2FF698001B318A /* client.h */,
 				84FF84711D2FF698001B318A /* opengl_cb.h */,
-				84FF84721D2FF698001B318A /* qthelper.hpp */,
 			);
 			path = mpv;
 			sourceTree = "<group>";

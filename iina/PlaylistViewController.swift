@@ -120,7 +120,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
     }
   }
 
-  // MARK: - NSTableViewSource
+  // MARK: - NSTableViewDataSource
 
   func numberOfRows(in tableView: NSTableView) -> Int {
     if tableView == playlistTableView {

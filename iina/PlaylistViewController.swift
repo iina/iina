@@ -206,6 +206,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
       
+      tableView.deselectAll(self)
+      let finalIndexSet: IndexSet = [row]
+      tableView.selectRowIndexes(finalIndexSet, byExtendingSelection: false)
+      
       return true
     } else if let fileNames = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
       var added = 0

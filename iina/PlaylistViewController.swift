@@ -67,6 +67,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
     playlistChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.playlistChanged, object: nil, queue: OperationQueue.main) { _ in
       self.reloadData(playlist: true, chapters: false)
     }
+    
+    // register for double click action
+    let action = #selector(performDoubleAction(sender:))
+    playlistTableView.doubleAction = action
+    playlistTableView.target = self
   }
 
   override func viewDidAppear() {
@@ -177,6 +182,15 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
     reloadData(playlist: false, chapters: true)
     switchToTab(.chapters)
   }
+  
+  func performDoubleAction(sender: AnyObject) {
+    let tv = sender as! NSTableView
+    if tv.numberOfSelectedRows > 0 {
+      playerCore.playFileInPlaylist(tv.selectedRow)
+      tv.deselectAll(self)
+      tv.reloadData()
+    }
+  }
 
   // MARK: - Table delegates
 
@@ -189,12 +203,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
     }
 
     func tableViewSelectionDidChange(_ notification: Notification) {
-      let tv = notification.object as! NSTableView
-      if tv.numberOfSelectedRows > 0 {
-        parent.playerCore.playFileInPlaylist(tv.selectedRow)
-        tv.deselectAll(self)
-        tv.reloadData()
-      }
+      return
     }
   }
 

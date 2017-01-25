@@ -126,7 +126,6 @@
 		84D377671D737F58007F7396 /* MPVChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377661D737F58007F7396 /* MPVChapter.swift */; };
 		84E295C01E2CF9F5006388F7 /* ObjcUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E295BF1E2CF9F4006388F7 /* ObjcUtils.m */; };
 		84E48D4E1E0F1090002C7A3F /* FilterWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E48D4C1E0F1090002C7A3F /* FilterWindowController.swift */; };
-		84E745D41DFDB27B00588DED /* PlaylistDragDestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E745D31DFDB27B00588DED /* PlaylistDragDestView.swift */; };
 		84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E745D51DFDD4FD00588DED /* KeyCodeHelper.swift */; };
 		84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */; };
 		84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */; };
@@ -354,7 +353,6 @@
 		84E295BF1E2CF9F4006388F7 /* ObjcUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcUtils.m; sourceTree = "<group>"; };
 		84E295C11E2CFA18006388F7 /* ObjcUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcUtils.h; sourceTree = "<group>"; };
 		84E48D4C1E0F1090002C7A3F /* FilterWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterWindowController.swift; sourceTree = "<group>"; };
-		84E745D31DFDB27B00588DED /* PlaylistDragDestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistDragDestView.swift; sourceTree = "<group>"; };
 		84E745D51DFDD4FD00588DED /* KeyCodeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCodeHelper.swift; sourceTree = "<group>"; };
 		84E745D81DFDE8C100588DED /* input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.conf; sourceTree = "<group>"; };
 		84EB1ED61D2F51D3004FA5A1 /* IINA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IINA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -560,7 +558,6 @@
 				8400D5CB1E1AB2F9006785F5 /* QuickSettingViewController.xib */,
 				8460FBA71D6497490081841B /* PlaylistViewController.swift */,
 				8400D5CE1E1AB2FF006785F5 /* PlaylistViewController.xib */,
-				84E745D31DFDB27B00588DED /* PlaylistDragDestView.swift */,
 				84D377641D7370EE007F7396 /* ChapterTableCellView.swift */,
 				845FB0C61D39462E00C011E0 /* ControlBarView.swift */,
 				845040451E0B0F500079C194 /* CropSettingsViewController.swift */,
@@ -958,7 +955,6 @@
 				843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */,
 				8407D1401E3A684C0043895D /* ViewLayer.swift in Sources */,
 				84A0BA9B1D2FAB4100BC8DA1 /* Parameter.swift in Sources */,
-				84E745D41DFDB27B00588DED /* PlaylistDragDestView.swift in Sources */,
 				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,
 				84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,

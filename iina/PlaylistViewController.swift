@@ -16,6 +16,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
 
   var playerCore: PlayerCore = PlayerCore.shared
   weak var mainWindow: MainWindowController!
+  
+  let IINAPlaylistItemType = "IINAPlaylistItemType"
 
   /** Similiar to the one in `QuickSettingViewController`.
    Since IBOutlet is `nil` when the view is not loaded at first time,
@@ -72,6 +74,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
     let action = #selector(performDoubleAction(sender:))
     playlistTableView.doubleAction = action
     playlistTableView.target = self
+    
+    // register for drag and drop
+    playlistTableView.register(forDraggedTypes: [IINAPlaylistItemType, NSFilenamesPboardType])
   }
 
   override func viewDidAppear() {
@@ -148,6 +153,91 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       return nil
     }
   }
+  
+  // MARK: - Drag and Drop
+  
+  
+  func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
+    let data = NSKeyedArchiver.archivedData(withRootObject: [rowIndexes])
+    pboard.declareTypes([IINAPlaylistItemType], owner:self)
+    pboard.setData(data, forType:IINAPlaylistItemType)
+    return true
+  }
+
+  
+  func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableViewDropOperation) -> NSDragOperation {
+    let pasteboard = info.draggingPasteboard()
+
+    if let fileNames = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
+      var hasItemToAdd: Bool = false
+      for path in fileNames {
+        let ext = (path as NSString).pathExtension
+        if !playerCore.supportedSubtitleFormat.contains(ext) {
+          hasItemToAdd = true
+          break
+        }
+      }
+      
+      if !hasItemToAdd {
+        return []
+      }
+      playlistTableView.setDropRow(row, dropOperation: .above)
+      return .copy
+    }
+    if let _ = pasteboard.propertyList(forType: IINAPlaylistItemType) {
+      playlistTableView.setDropRow(row, dropOperation: .above)
+      return .move
+    }
+    return []
+}
+  
+  func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableViewDropOperation) -> Bool {
+    let pasteboard = info.draggingPasteboard()
+    
+    if let rowData = pasteboard.data(forType: IINAPlaylistItemType) {
+      var dataArray = NSKeyedUnarchiver.unarchiveObject(with: rowData) as! Array<IndexSet>
+      let indexSet = dataArray[0]
+      
+      let movingFromIndex = indexSet.first
+      
+      NSLog(movingFromIndex!.toStr())
+      NSLog(row.toStr())
+      playerCore.mpvController.command(.playlistMove, args: [movingFromIndex?.toStr(), row.toStr()])
+      
+      NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+      
+      return true
+    } else if let fileNames = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
+      var added = 0
+      var currentRow = row
+      var playlistItems = tableView.numberOfRows - 1
+      fileNames.forEach({ (path) in
+        let ext = (path as NSString).pathExtension
+        if !playerCore.supportedSubtitleFormat.contains(ext) {
+          playerCore.addToPlaylist(path)
+          playlistItems += 1
+          NSLog(playlistItems.toStr())
+          NSLog(currentRow.toStr())
+          playerCore.mpvController.command(.playlistMove, args: [playlistItems.toStr(), currentRow.toStr()])
+          
+          currentRow += 1
+          added += 1
+        }
+      })
+      
+      if added == 0 {
+        return false
+      }
+      
+      NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+      playerCore.sendOSD(.addToPlaylist(added))
+      return true
+    } else {
+      return false
+    }
+  }
+  
+  // MARK: - private methods
 
   private func withAllTableViews(_ block: (NSTableView) -> Void) {
     block(playlistTableView)

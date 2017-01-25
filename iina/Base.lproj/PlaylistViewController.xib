@@ -27,7 +27,7 @@
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Playlist" identifier="1" id="rjs-Qf-mT6">
-                            <view key="view" id="BXH-zz-cse" customClass="PlaylistDragDestView" customModule="IINA" customModuleProvider="target">
+                            <view key="view" id="BXH-zz-cse">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>

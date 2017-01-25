@@ -11,6 +11,33 @@ import OpenGL.GL
 import OpenGL.GL3
 
 
+fileprivate func mpvGetOpenGL(_ ctx: UnsafeMutableRawPointer?, _ name: UnsafePointer<Int8>?) -> UnsafeMutableRawPointer? {
+  let symbolName: CFString = CFStringCreateWithCString(kCFAllocatorDefault, name, kCFStringEncodingASCII);
+  guard let addr = CFBundleGetFunctionPointerForName(CFBundleGetBundleWithIdentifier(CFStringCreateCopy(kCFAllocatorDefault, "com.apple.opengl" as CFString!)), symbolName) else {
+    Utility.fatal("Cannot get OpenGL function pointer!")
+    return nil
+  }
+  return addr
+}
+
+fileprivate func mpvUpdateCallback(_ ctx: UnsafeMutableRawPointer?) {
+  let videoView = unsafeBitCast(ctx, to: VideoView.self)
+  videoView.mpvGLQueue.async {
+    videoView.drawFrame()
+  }
+}
+
+fileprivate func displayLinkCallback(
+  _ displayLink: CVDisplayLink, _ inNow: UnsafePointer<CVTimeStamp>,
+  _ inOutputTime: UnsafePointer<CVTimeStamp>,
+  _ flagsIn: CVOptionFlags,
+  _ flagsOut: UnsafeMutablePointer<CVOptionFlags>,
+  _ context: UnsafeMutableRawPointer?) -> CVReturn {
+  let videoView = unsafeBitCast(context, to: VideoView.self)
+  videoView.drawVideo()
+  return kCVReturnSuccess
+}
+
 
 class VideoView: NSOpenGLView {
 
@@ -23,26 +50,15 @@ class VideoView: NSOpenGLView {
   var mpvGLContext: OpaquePointer! {
     didSet {
       // Initialize the mpv OpenGL state.
-      mpv_opengl_cb_init_gl(mpvGLContext, nil, { (ctx, name) -> UnsafeMutableRawPointer? in
-        let symbolName: CFString = CFStringCreateWithCString(kCFAllocatorDefault, name, kCFStringEncodingASCII);
-        guard let addr = CFBundleGetFunctionPointerForName(CFBundleGetBundleWithIdentifier(CFStringCreateCopy(kCFAllocatorDefault, "com.apple.opengl" as CFString!)), symbolName) else {
-          Utility.fatal("Cannot get OpenGL function pointer!")
-          return nil
-        }
-        return addr;
-      }, nil)
+      mpv_opengl_cb_init_gl(mpvGLContext, nil, mpvGetOpenGL, nil)
       // Set the callback that notifies you when a new video frame is available, or requires a redraw.
-      mpv_opengl_cb_set_update_callback(mpvGLContext, { (ctx) in
-        let videoView = unsafeBitCast(ctx, to: VideoView.self)
-        videoView.mpvGLQueue.async {
-          videoView.drawFrame()
-        }
-        }, mutableRawPointerOf(obj: self))
+      mpv_opengl_cb_set_update_callback(mpvGLContext, mpvUpdateCallback, mutableRawPointerOf(obj: self))
     }
   }
 
   /** The OpenGL context for drawing to fbo in mpvGLQueue */
-  var renderContext: NSOpenGLContext!
+  private var renderContext: NSOpenGLContext!
+  private var renderLock = NSLock()
 
   /**
    The queue for drawing to fbo.
@@ -203,8 +219,9 @@ class VideoView: NSOpenGLView {
   /** Set up the frame buffer needed for offline rendering. */
   private func prepareVideoFrameBuffer() {
     let size = self.videoSize!
-    openGLContext!.makeCurrentContext()
+    renderLock.lock()
     openGLContext!.lock()
+    openGLContext!.makeCurrentContext()
     // if texture or fbo exists
     if texture != 0 {
       glDeleteTextures(1, &texture)
@@ -232,6 +249,7 @@ class VideoView: NSOpenGLView {
     glBindTexture(GLenum(GL_TEXTURE_2D), 0)
     glBindFramebuffer(GLenum(GL_FRAMEBUFFER), 0)
     openGLContext!.unlock()
+    renderLock.unlock()
   }
 
   /**
@@ -239,16 +257,6 @@ class VideoView: NSOpenGLView {
    */
   private func setUpDisplayLink() {
     // The callback function
-    func displayLinkCallback(
-      _ displayLink: CVDisplayLink, _ inNow: UnsafePointer<CVTimeStamp>,
-      _ inOutputTime: UnsafePointer<CVTimeStamp>,
-      _ flagsIn: CVOptionFlags,
-      _ flagsOut: UnsafeMutablePointer<CVOptionFlags>,
-      _ context: UnsafeMutableRawPointer?) -> CVReturn {
-      let videoView = unsafeBitCast(context, to: VideoView.self)
-      videoView.drawVideo()
-      return kCVReturnSuccess
-    }
     CVDisplayLinkCreateWithActiveCGDisplays(&displayLink)
     if let link = displayLink {
       checkCVReturn(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self)))
@@ -282,13 +290,12 @@ class VideoView: NSOpenGLView {
 
   /** Draw offscreen to the framebuffer. */
   func drawFrame() {
-    if videoSize == nil {
-      return
-    }
+    guard videoSize != nil else { return }
     if !started {
       started = true
     }
 
+    renderLock.lock()
     renderContext.lock()
 
     renderContext.makeCurrentContext()
@@ -299,15 +306,14 @@ class VideoView: NSOpenGLView {
       glClearColor(0, 0, 0, 1)
       glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
     }
-    renderContext.update()
-    renderContext.flushBuffer()
 
     renderContext.unlock()
+    renderLock.unlock()
   }
 
   /** Draw the video to view from framebuffer. */
   func drawVideo() {
-    renderContext.lock()
+    renderLock.lock()
     openGLContext?.lock()
     openGLContext?.makeCurrentContext()
 
@@ -333,16 +339,11 @@ class VideoView: NSOpenGLView {
     }
     openGLContext?.flushBuffer()
     openGLContext?.unlock()
-    renderContext.unlock()
+    renderLock.unlock()
     // report flip to mpv
     if let context = self.mpvGLContext {
       mpv_opengl_cb_report_flip(context, 0)
     }
-  }
-
-  /** This function is mainly called when bound changes, e.g. resize window */
-  override func draw(_ dirtyRect: NSRect) {
-//    drawVideo()
   }
 
   // MARK: - Utils

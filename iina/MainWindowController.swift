@@ -621,6 +621,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // update videoview size if in full screen, since aspect ratio may changed
     if (isInFullScreen) {
 
+      // Let mpv decide where to draw
+      /*
       let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
       let tryHeight = wSize.width / aspectRatio
       if tryHeight <= wSize.height {
@@ -634,6 +636,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         let xOffset = (wSize.width - targetWidth) / 2
         videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
       }
+      */
+
+      videoView.frame = w.frame
 
     } else {
 

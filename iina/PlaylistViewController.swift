@@ -240,8 +240,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
         playerCore.addToPlaylist(fileList[order[i]])
         if !foundPlaying {
           playerCore.mpvController.command(.playlistMove, args: [(insertPosition + 1).toStr(), insertPosition.toStr()])
+          insertPosition += 1
         }
-        insertPosition += 1
       }
       
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
@@ -256,6 +256,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       tableView.selectRowIndexes(finalIndexSet, byExtendingSelection: false)
       
       return true
+      
     } else if let fileNames = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
       var added = 0
       var currentRow = row
@@ -265,8 +266,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
         if !playerCore.supportedSubtitleFormat.contains(ext) {
           playerCore.addToPlaylist(path)
           playlistItems += 1
-          NSLog(playlistItems.toStr())
-          NSLog(currentRow.toStr())
           playerCore.mpvController.command(.playlistMove, args: [playlistItems.toStr(), currentRow.toStr()])
           
           currentRow += 1

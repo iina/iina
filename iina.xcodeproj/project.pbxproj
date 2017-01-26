@@ -92,6 +92,7 @@
 		84C430711E390C6B00BE5E9C /* libmpv.1.24.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84C4306B1E390C3F00BE5E9C /* libmpv.1.24.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84C430721E390C6B00BE5E9C /* libmpv.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84C4306C1E390C3F00BE5E9C /* libmpv.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84C430731E390C6B00BE5E9C /* libmpv.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84C4306D1E390C3F00BE5E9C /* libmpv.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84C430791E39D01D00BE5E9C /* Python in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84C430771E39D00900BE5E9C /* Python */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D58E1D794CE600D98A0E /* MPVFilter.swift */; };
 		84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D5901D796F9700D98A0E /* Aspect.swift */; };
 		84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */; };
@@ -146,6 +147,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				84C430791E39D01D00BE5E9C /* Python in Copy Dylibs */,
 				84C430711E390C6B00BE5E9C /* libmpv.1.24.0.dylib in Copy Dylibs */,
 				84C430721E390C6B00BE5E9C /* libmpv.1.dylib in Copy Dylibs */,
 				84C430731E390C6B00BE5E9C /* libmpv.dylib in Copy Dylibs */,
@@ -311,6 +313,7 @@
 		84C4306B1E390C3F00BE5E9C /* libmpv.1.24.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.24.0.dylib; path = libmpv/lib/libmpv.1.24.0.dylib; sourceTree = "<group>"; };
 		84C4306C1E390C3F00BE5E9C /* libmpv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.dylib; path = libmpv/lib/libmpv.1.dylib; sourceTree = "<group>"; };
 		84C4306D1E390C3F00BE5E9C /* libmpv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.dylib; path = libmpv/lib/libmpv.dylib; sourceTree = "<group>"; };
+		84C430771E39D00900BE5E9C /* Python */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = Python; path = libmpv/lib/Python; sourceTree = "<group>"; };
 		84C8D58E1D794CE600D98A0E /* MPVFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVFilter.swift; sourceTree = "<group>"; };
 		84C8D5901D796F9700D98A0E /* Aspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aspect.swift; sourceTree = "<group>"; };
 		84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVPlaylistItem.swift; sourceTree = "<group>"; };
@@ -517,6 +520,7 @@
 				84C4306B1E390C3F00BE5E9C /* libmpv.1.24.0.dylib */,
 				84C4306C1E390C3F00BE5E9C /* libmpv.1.dylib */,
 				84C4306D1E390C3F00BE5E9C /* libmpv.dylib */,
+				84C430771E39D00900BE5E9C /* Python */,
 				867483705008F086E07B0A6B /* Pods_iina.framework */,
 			);
 			name = Frameworks;

@@ -423,6 +423,19 @@ class PlayerCore: NSObject {
     mpvController.command(.af, args: ["del", filter.stringFormat])
   }
 
+  func getAudioDevices() -> [[String: String]] {
+    let raw = mpvController.getNode(MPVProperty.audioDeviceList)
+    if let list = raw as? [[String: String]] {
+      return list
+    } else {
+      return []
+    }
+  }
+
+  func setAudioDevice(_ name: String) {
+    mpvController.setString(MPVProperty.audioDevice, name)
+  }
+
   /** Scale is a double value in [-100, -1] + [1, 100] */
   func setSubScale(_ scale: Double) {
     if scale > 0 {

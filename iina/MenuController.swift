@@ -71,6 +71,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var decreaseAudioDelay: NSMenuItem!
   @IBOutlet weak var resetAudioDelay: NSMenuItem!
   @IBOutlet weak var audioFilters: NSMenuItem!
+  @IBOutlet weak var audioDeviceMenu: NSMenu!
   // Subtitle
   @IBOutlet weak var subMenu: NSMenu!
   @IBOutlet weak var quickSettingsSub: NSMenuItem!
@@ -188,6 +189,9 @@ class MenuController: NSObject, NSMenuDelegate {
     }
     resetAudioDelay.action = #selector(MainWindowController.menuResetAudioDelay(_:))
 
+    // - audio device
+    audioDeviceMenu.delegate = self
+
     // - filters
     audioFilters.action = #selector(AppDelegate.showAudioFilterWindow(_:))
 
@@ -286,6 +290,17 @@ class MenuController: NSObject, NSMenuDelegate {
     audioDelayIndicator.title = String(format: NSLocalizedString("menu.audio_delay", comment: "Audio Delay:"), player.info.audioDelay)
   }
 
+  private func updateAudioDevice() {
+    let devices = PlayerCore.shared.getAudioDevices()
+    let currAudioDevice = PlayerCore.shared.mpvController.getString(MPVProperty.audioDevice)
+    audioDeviceMenu.removeAllItems()
+    devices.forEach { d in
+      let name = d["name"]!
+      let desc = d["description"]!
+      audioDeviceMenu.addItem(withTitle: "[\(desc)] \(name)", action: #selector(AppDelegate.menuSelectAudioDevice(_:)), tag: nil, obj: name, stateOn: name == currAudioDevice)
+    }
+  }
+
   private func updateFlipAndMirror() {
     let info = PlayerCore.shared.info
     flip.state = info.flipFilter == nil ? NSOffState : NSOnState
@@ -360,6 +375,8 @@ class MenuController: NSObject, NSMenuDelegate {
       updateAudioMenu()
     } else if menu == audioTrackMenu {
       updateTracks(forMenu: menu, type: .audio)
+    } else if menu == audioDeviceMenu {
+      updateAudioDevice()
     } else if menu == subMenu {
       updateSubMenu()
     } else if menu == subTrackMenu {

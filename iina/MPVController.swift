@@ -381,6 +381,14 @@ class MPVController: NSObject {
     }
   }
 
+  func getNode(_ name: String) -> Any? {
+    var node = mpv_node()
+    mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node)
+    let parsed = try? MPVNode.parse(node)
+    mpv_free_node_contents(&node)
+    return parsed!
+  }
+
   // MARK: - Events
 
   // Read event and handle it async

@@ -149,6 +149,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       NSWorkspace.shared().open(url)
   }
 
+  @IBAction func menuSelectAudioDevice(_ sender: NSMenuItem) {
+    if let name = sender.representedObject as? String {
+      PlayerCore.shared.setAudioDevice(name)
+    }
+  }
+
   @IBAction func showPreferences(_ sender: AnyObject) {
     preferenceWindowController.showWindow(self)
   }

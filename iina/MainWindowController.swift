@@ -1005,7 +1005,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let originalVideoSize = NSSize(width: width, height: height)
     w.aspectRatio = originalVideoSize
 
-    videoView.videoSize = originalVideoSize
+    videoView.videoSize = w.convertToBacking(videoView.frame).size
     videoView.restartDisplayLink()
 
     if isInFullScreen {

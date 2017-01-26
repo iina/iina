@@ -198,16 +198,61 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       var dataArray = NSKeyedUnarchiver.unarchiveObject(with: rowData) as! Array<IndexSet>
       let indexSet = dataArray[0]
       
-      let movingFromIndex = indexSet.first
+      let playlistCount = tableView.numberOfRows - 1
+      var order: Array<Int> = Array(0...playlistCount)
+      var finalRow = row
       
-      NSLog(movingFromIndex!.toStr())
-      NSLog(row.toStr())
-      playerCore.mpvController.command(.playlistMove, args: [movingFromIndex?.toStr(), row.toStr()])
+      for selectedRow in indexSet.reversed() {
+        if selectedRow < row {
+          finalRow -= 1
+        }
+        order.remove(at: selectedRow)
+      }
+      
+      for selectedRow in indexSet.reversed() {
+        order.insert(selectedRow, at: finalRow)
+      }
+      
+      var fileList: [String] = []
+      var playing: Int = 0
+      for playlistItem in playerCore.info.playlist {
+        fileList.append(playlistItem.filename)
+        if playlistItem.isPlaying {
+          playing = fileList.count - 1
+        }
+      }
+      
+      for i in Array(0...playlistCount).reversed() {
+        if i == playing {
+          continue
+        }
+        playerCore.removeFromPlaylist(index: i)
+      }
+      
+      var insertPosition = 0
+      var foundPlaying: Bool = false
+      
+      for i in 0...playlistCount {
+        if order[i] == playing {
+          foundPlaying = true
+          continue
+        }
+        playerCore.addToPlaylist(fileList[order[i]])
+        if !foundPlaying {
+          playerCore.mpvController.command(.playlistMove, args: [(insertPosition + 1).toStr(), insertPosition.toStr()])
+        }
+        insertPosition += 1
+      }
       
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
       
       tableView.deselectAll(self)
-      let finalIndexSet: IndexSet = [row]
+      var finalIndexSet: IndexSet = []
+      for i in 0...playlistCount {
+        if indexSet.contains(order[i]) {
+          finalIndexSet.insert(i)
+        }
+      }
       tableView.selectRowIndexes(finalIndexSet, byExtendingSelection: false)
       
       return true

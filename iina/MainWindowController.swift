@@ -219,6 +219,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     cv.autoresizesSubviews = false
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
 
+    //videoView.translatesAutoresizingMaskIntoConstraints = false
+    //quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": videoView])
+
     videoView.videoLayer.display()
 
     // gesture recognizer

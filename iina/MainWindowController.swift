@@ -679,6 +679,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     videoView.videoSize = window!.convertToBacking(videoView.bounds).size
   }
 
+  func windowDidChangeBackingProperties(_ notification: Notification) {
+    videoView.videoLayer.contentsScale = window!.backingScaleFactor
+    // Test later
+    /*
+    if let oldScale = (notification.userInfo?[NSBackingPropertyOldScaleFactorKey] as? NSNumber)?.doubleValue {
+      oldScale != Double(window!.backingScaleFactor) {
+      print(oldScale)
+    }
+    */
+  }
+
   // MARK: - Control UI
 
   func hideUIAndCursor() {

@@ -23,7 +23,7 @@ fileprivate func mpvGetOpenGL(_ ctx: UnsafeMutableRawPointer?, _ name: UnsafePoi
 fileprivate func mpvUpdateCallback(_ ctx: UnsafeMutableRawPointer?) {
   let videoView = unsafeBitCast(ctx, to: VideoView.self)
   videoView.mpvGLQueue.async {
-    videoView.drawFrame()
+    videoView.videoLayer.draw()
   }
 }
 
@@ -33,26 +33,29 @@ fileprivate func displayLinkCallback(
   _ flagsIn: CVOptionFlags,
   _ flagsOut: UnsafeMutablePointer<CVOptionFlags>,
   _ context: UnsafeMutableRawPointer?) -> CVReturn {
-  let videoView = unsafeBitCast(context, to: VideoView.self)
-  videoView.drawVideo()
+  // let videoView = unsafeBitCast(context, to: VideoView.self)
+  // videoView.drawVideo()
   return kCVReturnSuccess
 }
 
 
-class VideoView: NSOpenGLView {
+class VideoView: NSView {
 
   let vertexShaderName = "vertexShader"
   let fragmentShaderName = "fragmentShader"
 
   lazy var playerCore = PlayerCore.shared
 
+  lazy var videoLayer: ViewLayer = {
+    let layer = ViewLayer()
+    layer.videoView = self
+    return layer
+  }()
+
   /** The mpv opengl-cb context */
   var mpvGLContext: OpaquePointer! {
     didSet {
-      // Initialize the mpv OpenGL state.
-      mpv_opengl_cb_init_gl(mpvGLContext, nil, mpvGetOpenGL, nil)
-      // Set the callback that notifies you when a new video frame is available, or requires a redraw.
-      mpv_opengl_cb_set_update_callback(mpvGLContext, mpvUpdateCallback, mutableRawPointerOf(obj: self))
+      videoLayer.initMpvStuff()
     }
   }
 
@@ -69,7 +72,7 @@ class VideoView: NSOpenGLView {
   /** Video size for allocating fbo texture */
   var videoSize: NSSize? {
     didSet {
-      prepareVideoFrameBuffer()
+      // prepareVideoFrameBuffer()
     }
   }
 
@@ -130,17 +133,17 @@ class VideoView: NSOpenGLView {
     let pixelFormat = NSOpenGLPixelFormat(attributes: attributes) ?? NSOpenGLPixelFormat(attributes: desentAttributes)
     Utility.assert(pixelFormat != nil, "Cannot create pixel format")
 
-    super.init(frame: frame, pixelFormat: pixelFormat!)!
+    super.init(frame: frame)
 
-    guard openGLContext != nil else {
-      Utility.fatal("Cannot initialize OpenGL Context")
-      return
-    }
+    wantsLayer = true
+    layer = videoLayer
+
 
     // set up another context for offscreen render thread
-    renderContext = NSOpenGLContext(format: pixelFormat!, share: openGLContext)!
+    // renderContext = NSOpenGLContext(format: pixelFormat!, share: openGLContext)!
 
     // init shader
+    /*
     let vertexShader = initShader(vertexShaderName, type: GLenum(GL_VERTEX_SHADER))
     let fragShader = initShader(fragmentShaderName, type: GLenum(GL_FRAGMENT_SHADER))
 
@@ -178,7 +181,7 @@ class VideoView: NSOpenGLView {
     // get texture uniform location
     texUniform = glGetUniformLocation(program, "tex")
     Utility.assert(texUniform != -1, "Cannot get location for texture uniform variable")
-
+    */
     // other settings
     autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
     wantsBestResolutionOpenGLSurface = true
@@ -194,7 +197,7 @@ class VideoView: NSOpenGLView {
   func uninit() {
     guard !isUninited else { return }
     // unlink display
-    stopDisplayLink()
+    // stopDisplayLink()
     mpv_opengl_cb_set_update_callback(mpvGLContext, nil, nil)
     // uninit mpv gl
     mpv_opengl_cb_uninit_gl(mpvGLContext)
@@ -210,6 +213,8 @@ class VideoView: NSOpenGLView {
   }
 
   // MARK: - Preparation
+
+  /*
 
   override func prepareOpenGL() {
     var swapInt = GLint(1)
@@ -285,9 +290,12 @@ class VideoView: NSOpenGLView {
     setUpDisplayLink()
     startDisplayLink()
   }
+  
+  */
 
   // MARK: - Drawing
 
+  /*
   /** Draw offscreen to the framebuffer. */
   func drawFrame() {
     guard videoSize != nil else { return }
@@ -310,8 +318,10 @@ class VideoView: NSOpenGLView {
     renderContext.unlock()
     renderLock.unlock()
   }
+  */
 
   /** Draw the video to view from framebuffer. */
+  /*
   func drawVideo() {
     renderLock.lock()
     openGLContext?.lock()
@@ -345,6 +355,7 @@ class VideoView: NSOpenGLView {
       mpv_opengl_cb_report_flip(context, 0)
     }
   }
+  */
 
   // MARK: - Utils
 

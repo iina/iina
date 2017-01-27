@@ -219,6 +219,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     cv.autoresizesSubviews = false
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
 
+    videoView.videoLayer.display()
+
     // gesture recognizer
     // disable it first for poor performance
     // cv.addGestureRecognizer(magnificationGestureRecognizer)
@@ -565,7 +567,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if !playerCore.isMpvTerminated {
       playerCore.savePlaybackPosition()
       playerCore.stop()
-      videoView.stopDisplayLink()
+      // videoView.stopDisplayLink()
     }
     // disable sleep preventer
     SleepPreventer.allowSleep()
@@ -673,7 +675,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowDidEndLiveResize(_ notification: Notification) {
     videoView.videoSize = window!.convertToBacking(videoView.bounds).size
     // new (empty) frame buffer is created, so draw a frame manually
-    videoView.drawFrame()
+    // videoView.drawFrame()
   }
 
   // MARK: - Control UI
@@ -1009,7 +1011,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     w.aspectRatio = originalVideoSize
 
     videoView.videoSize = w.convertToBacking(videoView.frame).size
-    videoView.restartDisplayLink()
+    // videoView.restartDisplayLink()
 
     if isInFullScreen {
 

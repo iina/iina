@@ -53,38 +53,10 @@ class ViewLayer: CAOpenGLLayer {
     mpv_opengl_cb_set_update_callback(videoView.mpvGLContext, mpvUpdateCallback, mutableRawPointerOf(obj: self))
   }
 
-  override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
-    return true
-  }
-
-  override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
-
-    CGLLockContext(ctx)
-    CGLSetCurrentContext(ctx)
-
-    glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-
-    var i: GLint = 0
-    glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
-    var dims: [GLint] = [0, 0, 0, 0]
-    glGetIntegerv(GLenum(GL_VIEWPORT), &dims);
-
-    if let context = videoView.mpvGLContext {
-      mpv_opengl_cb_draw(context, i, dims[2], -dims[3])
-      //print("draw")
-      ignoreGLError()
-    } else {
-      glClearColor(0, 0, 0, 1)
-      glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-    }
-
-    CGLUnlockContext(ctx)
-  }
-
   override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj {
 
     let attributes: [CGLPixelFormatAttribute] = [
-      // kCGLPFADoubleBuffer,
+      kCGLPFADoubleBuffer,
       kCGLPFAOpenGLProfile, CGLPixelFormatAttribute(kCGLOGLPVersion_3_2_Core.rawValue),
       kCGLPFAAccelerated,
       kCGLPFAAllowOfflineRenderers,
@@ -112,8 +84,35 @@ class ViewLayer: CAOpenGLLayer {
     return ctx
   }
 
-  func ignoreGLError() {
-    glGetError()
+  // MARK: Draw
+
+  override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
+    return true
+  }
+
+  override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
+
+    CGLLockContext(ctx)
+    CGLSetCurrentContext(ctx)
+
+    glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+
+    var i: GLint = 0
+    glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
+    var dims: [GLint] = [0, 0, 0, 0]
+    glGetIntegerv(GLenum(GL_VIEWPORT), &dims);
+
+    if let context = videoView.mpvGLContext {
+      mpv_opengl_cb_draw(context, i, dims[2], -dims[3])
+      //print("draw")
+      ignoreGLError()
+    } else {
+      glClearColor(0, 0, 0, 1)
+      glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+    }
+    glFlush()
+
+    CGLUnlockContext(ctx)
   }
 
   func draw() {
@@ -123,6 +122,45 @@ class ViewLayer: CAOpenGLLayer {
   override func display() {
     super.display()
     CATransaction.flush()
+  }
+
+  // MARK: Utils
+
+  /** Check OpenGL error (for debug only). */
+  func gle() {
+    let e = glGetError()
+    Swift.print(arc4random())
+    switch e {
+    case GLenum(GL_NO_ERROR):
+      break
+    case GLenum(GL_OUT_OF_MEMORY):
+      Swift.print("GL_OUT_OF_MEMORY")
+      break
+    case GLenum(GL_INVALID_ENUM):
+      Swift.print("GL_INVALID_ENUM")
+      break
+    case GLenum(GL_INVALID_VALUE):
+      Swift.print("GL_INVALID_VALUE")
+      break
+    case GLenum(GL_INVALID_OPERATION):
+      Swift.print("GL_INVALID_OPERATION")
+      break
+    case GLenum(GL_INVALID_FRAMEBUFFER_OPERATION):
+      Swift.print("GL_INVALID_FRAMEBUFFER_OPERATION")
+      break
+    case GLenum(GL_STACK_UNDERFLOW):
+      Swift.print("GL_STACK_UNDERFLOW")
+      break
+    case GLenum(GL_STACK_OVERFLOW):
+      Swift.print("GL_STACK_OVERFLOW")
+      break
+    default:
+      break
+    }
+  }
+
+  func ignoreGLError() {
+    glGetError()
   }
 
 }

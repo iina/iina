@@ -17,14 +17,14 @@ class MPVTrack: NSObject {
   /** For binding a none track object to menu, id = 0 */
   static let noneSubTrack = MPVTrack(id: 0, type: .sub, isDefault: false, isForced: false, isSelected: false, isExternal: false)
   /** For binding a none track object to menu, id = 0 */
-  static let noneSecongSubTrack = MPVTrack(id: 0, type: .secondSub, isDefault: false, isForced: false, isSelected: false, isExternal: false)
+  static let noneSecondSubTrack = MPVTrack(id: 0, type: .secondSub, isDefault: false, isForced: false, isSelected: false, isExternal: false)
 
   static func emptyTrack(_ type: TrackType) -> MPVTrack {
     switch type {
     case .video: return noneVideoTrack
     case .audio: return noneAudioTrack
     case .sub: return noneSubTrack
-    case .secondSub: return noneSecongSubTrack
+    case .secondSub: return noneSecondSubTrack
     }
 
   }

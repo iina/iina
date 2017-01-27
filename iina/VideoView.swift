@@ -428,6 +428,10 @@ class VideoView: NSView {
     }
   }
 
+  override func draw(_ dirtyRect: NSRect) {
+    // do nothing
+  }
+
   func ignoreGLError() {
     glGetError()
   }

@@ -78,15 +78,13 @@ class ViewLayer: CAOpenGLLayer {
       glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
     }
 
-    //glFlush()
-    CATransaction.flush()
     CGLUnlockContext(ctx)
   }
 
   override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj {
 
     let attributes: [CGLPixelFormatAttribute] = [
-      //kCGLPFADoubleBuffer,
+      // kCGLPFADoubleBuffer,
       kCGLPFAOpenGLProfile, CGLPixelFormatAttribute(kCGLOGLPVersion_3_2_Core.rawValue),
       kCGLPFAAccelerated,
       kCGLPFAAllowOfflineRenderers,
@@ -123,15 +121,8 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   override func display() {
-    reshape()
     super.display()
-  }
-
-  func reshape() {
-    CATransaction.begin()
-    CATransaction.setDisableActions(true)
-
-    CATransaction.commit()
+    CATransaction.flush()
   }
 
 }

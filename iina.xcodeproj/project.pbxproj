@@ -428,6 +428,25 @@
 		F4C61E001E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefSubViewController.strings; sourceTree = "<group>"; };
 		F4C61E011E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefNetworkViewController.strings; sourceTree = "<group>"; };
 		F4C61E021E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E5A935551E34B38700ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		E5A935561E34B38700ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		E5A935571E34B38700ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
+		E5A935581E34B38700ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PlaylistViewController.strings; sourceTree = "<group>"; };
+		E5A935591E34B38700ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CropSettingsViewController.strings; sourceTree = "<group>"; };
+		E5A9355A1E34B38800ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InspectorWindowController.strings; sourceTree = "<group>"; };
+		E5A9355B1E34B38800ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/FilterWindowController.strings; sourceTree = "<group>"; };
+		E5A9355C1E34B38800ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AboutWindowController.strings; sourceTree = "<group>"; };
+		E5A9355D1E34B38800ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
+		E5A9355E1E34B38800ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefGeneralViewController.strings; sourceTree = "<group>"; };
+		E5A9355F1E34B38900ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefUIViewController.strings; sourceTree = "<group>"; };
+		E5A935601E34B38900ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefControlViewController.strings; sourceTree = "<group>"; };
+		E5A935611E34B38900ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefKeyBindingViewController.strings; sourceTree = "<group>"; };
+		E5A935621E34B38A00ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
+		E5A935631E34B38A00ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefAdvancedViewController.strings; sourceTree = "<group>"; };
+		E5A935641E34B38A00ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefCodecViewController.strings; sourceTree = "<group>"; };
+		E5A935651E34B38A00ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefSubViewController.strings; sourceTree = "<group>"; };
+		E5A935661E34B38A00ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefNetworkViewController.strings; sourceTree = "<group>"; };
+		E5A935671E34B38B00ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -799,6 +818,7 @@
 				"zh-Hant",
 				ko,
 				de,
+				fr,
 			);
 			mainGroup = 84EB1ECD1D2F51D3004FA5A1;
 			productRefGroup = 84EB1ED71D2F51D3004FA5A1 /* Products */;
@@ -983,6 +1003,7 @@
 				D27E35CF1E379B6D0064BE57 /* zh-Hant */,
 				C789871B1E34EBDE0005769F /* ko */,
 				F4C61DF11E20423A00A43BCC /* de */,
+				E5A935561E34B38700ABD3F5 /* fr */,
 			);
 			name = MainWindowController.xib;
 			sourceTree = "<group>";
@@ -995,6 +1016,7 @@
 				D27E35D01E379B6D0064BE57 /* zh-Hant */,
 				C789871C1E34EBDE0005769F /* ko */,
 				F4C61DF21E20423A00A43BCC /* de */,
+				E5A935571E34B38700ABD3F5 /* fr */,
 			);
 			name = QuickSettingViewController.xib;
 			sourceTree = "<group>";
@@ -1007,6 +1029,7 @@
 				D27E35D11E379B6E0064BE57 /* zh-Hant */,
 				C789871D1E34EBDE0005769F /* ko */,
 				F4C61DF31E20423A00A43BCC /* de */,
+				E5A935581E34B38700ABD3F5 /* fr */,
 			);
 			name = PlaylistViewController.xib;
 			sourceTree = "<group>";
@@ -1019,6 +1042,7 @@
 				D27E35D21E379B6E0064BE57 /* zh-Hant */,
 				C789871E1E34EBDE0005769F /* ko */,
 				F4C61DF41E20423A00A43BCC /* de */,
+				E5A935591E34B38700ABD3F5 /* fr */,
 			);
 			name = CropSettingsViewController.xib;
 			sourceTree = "<group>";
@@ -1031,6 +1055,7 @@
 				D27E35D31E379B6E0064BE57 /* zh-Hant */,
 				C789871F1E34EBDE0005769F /* ko */,
 				F4C61DF51E20423A00A43BCC /* de */,
+				E5A9355A1E34B38800ABD3F5 /* fr */,
 			);
 			name = InspectorWindowController.xib;
 			sourceTree = "<group>";
@@ -1043,6 +1068,7 @@
 				D27E35D41E379B6E0064BE57 /* zh-Hant */,
 				C78987201E34EBDE0005769F /* ko */,
 				F4C61DF61E20423A00A43BCC /* de */,
+				E5A9355B1E34B38800ABD3F5 /* fr */,
 			);
 			name = FilterWindowController.xib;
 			sourceTree = "<group>";
@@ -1055,6 +1081,7 @@
 				D27E35D51E379B6E0064BE57 /* zh-Hant */,
 				C78987211E34EBDE0005769F /* ko */,
 				F4C61DF71E20423A00A43BCC /* de */,
+				E5A9355C1E34B38800ABD3F5 /* fr */,
 			);
 			name = AboutWindowController.xib;
 			sourceTree = "<group>";
@@ -1067,6 +1094,7 @@
 				D27E35D61E379B6E0064BE57 /* zh-Hant */,
 				C78987221E34EBDE0005769F /* ko */,
 				F4C61DF81E20423A00A43BCC /* de */,
+				E5A9355D1E34B38800ABD3F5 /* fr */,
 			);
 			name = FontPickerWindowController.xib;
 			sourceTree = "<group>";
@@ -1079,6 +1107,7 @@
 				D27E35D71E379B6F0064BE57 /* zh-Hant */,
 				C78987231E34EBDF0005769F /* ko */,
 				F4C61DF91E20423A00A43BCC /* de */,
+				E5A9355E1E34B38800ABD3F5 /* fr */,
 			);
 			name = PrefGeneralViewController.xib;
 			sourceTree = "<group>";
@@ -1091,6 +1120,7 @@
 				D27E35D81E379B6F0064BE57 /* zh-Hant */,
 				C78987241E34EBDF0005769F /* ko */,
 				F4C61DFA1E20423A00A43BCC /* de */,
+				E5A9355F1E34B38900ABD3F5 /* fr */,
 			);
 			name = PrefUIViewController.xib;
 			sourceTree = "<group>";
@@ -1103,6 +1133,7 @@
 				D27E35D91E379B6F0064BE57 /* zh-Hant */,
 				C78987251E34EBDF0005769F /* ko */,
 				F4C61DFB1E20423A00A43BCC /* de */,
+				E5A935601E34B38900ABD3F5 /* fr */,
 			);
 			name = PrefControlViewController.xib;
 			sourceTree = "<group>";
@@ -1115,6 +1146,7 @@
 				D27E35DA1E379B6F0064BE57 /* zh-Hant */,
 				C78987261E34EBDF0005769F /* ko */,
 				F4C61DFC1E20423A00A43BCC /* de */,
+				E5A935611E34B38900ABD3F5 /* fr */,
 			);
 			name = PrefKeyBindingViewController.xib;
 			sourceTree = "<group>";
@@ -1127,6 +1159,7 @@
 				D27E35DB1E379B6F0064BE57 /* zh-Hant */,
 				C78987271E34EBDF0005769F /* ko */,
 				F4C61DFD1E20423A00A43BCC /* de */,
+				E5A935621E34B38A00ABD3F5 /* fr */,
 			);
 			name = KeyRecordViewController.xib;
 			sourceTree = "<group>";
@@ -1139,6 +1172,7 @@
 				D27E35DC1E379B6F0064BE57 /* zh-Hant */,
 				C78987281E34EBDF0005769F /* ko */,
 				F4C61DFE1E20423A00A43BCC /* de */,
+				E5A935631E34B38A00ABD3F5 /* fr */,
 			);
 			name = PrefAdvancedViewController.xib;
 			sourceTree = "<group>";
@@ -1151,6 +1185,7 @@
 				D27E35DD1E379B6F0064BE57 /* zh-Hant */,
 				C78987291E34EBDF0005769F /* ko */,
 				F4C61DFF1E20423A00A43BCC /* de */,
+				E5A935641E34B38A00ABD3F5 /* fr */,
 			);
 			name = PrefCodecViewController.xib;
 			sourceTree = "<group>";
@@ -1163,6 +1198,7 @@
 				D27E35DE1E379B700064BE57 /* zh-Hant */,
 				C789872A1E34EBDF0005769F /* ko */,
 				F4C61E001E20423A00A43BCC /* de */,
+				E5A935651E34B38A00ABD3F5 /* fr */,
 			);
 			name = PrefSubViewController.xib;
 			sourceTree = "<group>";
@@ -1175,6 +1211,7 @@
 				D27E35DF1E379B700064BE57 /* zh-Hant */,
 				C789872B1E34EBDF0005769F /* ko */,
 				F4C61E011E20423A00A43BCC /* de */,
+				E5A935661E34B38A00ABD3F5 /* fr */,
 			);
 			name = PrefNetworkViewController.xib;
 			sourceTree = "<group>";
@@ -1188,6 +1225,7 @@
 				D27E35E01E379B700064BE57 /* zh-Hant */,
 				C789872C1E34EBDF0005769F /* ko */,
 				F4C61E021E20423A00A43BCC /* de */,
+				E5A935671E34B38B00ABD3F5 /* fr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1200,6 +1238,7 @@
 				D27E35CE1E379B6D0064BE57 /* zh-Hant */,
 				C789871A1E34EBDE0005769F /* ko */,
 				F4C61DF01E20423A00A43BCC /* de */,
+				E5A935551E34B38700ABD3F5 /* fr */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

@@ -1,0 +1,88 @@
+/* 
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+// Common
+"on" = "On";
+"off" = "Off";
+
+// PlaylistViewController.swift
+"playlist.playlist_cap" = "PLAYLIST";
+"playlist.chapter_cap" = "CHAPITRES";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "Mise en mémoire tampon... %@%%";
+
+// QuickSettingViewController.swift
+"quicksetting.aspect_item.Default" = "Défaut";
+"quicksetting.crop_item.None" = "Aucun";
+
+// OSDMessage.swift
+"osd.pause" = "En pause";
+"osd.resume" = "Reprise de la lecture";
+"osd.volume" = "Volume : %i";
+"osd.speed" = "Vitesse : %.2fx";
+"osd.aspect" = "Format d'image : %@";
+"osd.crop" = "Rognage : %@";
+"osd.rotate" = "Rotation : %i°";
+"osd.deinterlace" = "Désentrelacer : %@";
+"osd.audio_delay.nodelay" = "Délai audio : aucun";
+"osd.audio_delay.later" = "Délai audio : %.2fs en avance";
+"osd.audio_delay.earlier" = "Délai audio : %.2fs en retard";
+"osd.sub_delay.nodelay" = "Délai des sous-titres : aucun";
+"osd.sub_delay.later" = "Délai des sous-titres : %.2fs en avance";
+"osd.sub_delay.earlier" = "Délai des sous-titres : %.2fs en retard";
+"osd.subtitle_pos" = "Positon des sous-titres : %f";
+"osd.mute" = "Son coupé";
+"osd.unmute" = "Son rétabli";
+"osd.screenshot" = "Une capture d'écran a été prise";
+"osd.abloop.a" = "Boucle AB : A";
+"osd.abloop.b" = "Boucle AB : B";
+"osd.abloop.clear" = "Boucle AB: vidé";
+"osd.stop" = "Arrêté";
+"osd.chapter" = "Chapitre: %@";
+"osd.subtitle_scale" = "Échelle des sous-titres : %.2fx";
+"osd.add_to_playlist" = "Ajouté %i fichiers à la playlist";
+"osd.clear_playlist" = "Playlist vidée";
+"osd.video_eq.contrast" = "Contraste : %i";
+"osd.video_eq.gamma" = "Gamma : %i";
+"osd.video_eq.hue" = "Teinte : %i";
+"osd.video_eq.saturation" = "Saturation : %i";
+"osd.video_eq.brightness" = "Luminosité : %i";
+
+"update.title_update_found" = "Mise à jour trouvée";
+"update.title_no_update" = "Aucune mise à jour trouvée";
+"update.title_error" = "Erreur";
+"update.update_found" = "Une nouvelle version a été détectée ! IINA est toujours en alpha, nous vous recommendons de mettre à jour régulièrement. Veuillez télécharger la mise à jour depuis le site internet ou Github.";
+"update.no_update" = "Vous avez la dernière version.";
+"update.check_failed" = "Impossible de vérifier les mises à jour. Vous avez probablement une version trop ancienne. Veuillez consulter le site internet ou Github";
+"update.new_version" = "Nouvelle version :";
+"update.dl_from_website" = "Aller sur le site";
+"update.dl_from_github" = "Aller sur Github";
+
+"preference.title" = "Préférences";
+"preference.general" = "Général";
+"preference.ui" = "UI";
+"preference.codec" = "Codec";
+"preference.subtitle" = "Sous-titres";
+"preference.network" = "Réseau";
+"preference.control" = "Contrôles";
+"preference.keybindings" = "Clavier";
+"preference.advanced" = "Avancé";
+"preference.scripts" = "Scripts";
+
+"menu.volume"= "Volume : %d";
+"menu.audio_delay" = "Délai audio : %.2fs";
+"menu.sub_delay" = "Délai des sous-titres : %.2fs";
+"menu.fullscreen" = "Plein écran";
+"menu.exit_fullscreen" = "Quitter le mode plein écran";
+"menu.pause" = "Pause";
+"menu.resume" = "Lire";
+
+"track.none" = "<Aucun>";
+
+"alert.extra_option_error" = "Erreur lors du setup de l'option --%@=%@ avec une valeur de retour %d. Veuillez vérifier vos options additionnelles dans Préférences > Avancé.";"

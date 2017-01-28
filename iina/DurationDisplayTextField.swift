@@ -33,7 +33,7 @@ class DurationDisplayTextField: NSTextField {
     let stringValue: String
     switch mode {
     case .duration:
-      stringValue = duration.stringRepresentation
+      stringValue = " \(duration.stringRepresentation)"
     case .remaining:
       let remaining = duration - current
       stringValue = "-\(remaining.stringRepresentation)"

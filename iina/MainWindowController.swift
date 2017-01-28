@@ -643,7 +643,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
       */
 
-      videoView.frame = w.frame
+      videoView.frame = NSRect(x: 0, y: 0, width: w.frame.width, height: w.frame.height)
 
     } else {
 
@@ -680,14 +680,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowDidChangeBackingProperties(_ notification: Notification) {
-    videoView.videoLayer.contentsScale = window!.backingScaleFactor
-    // Test later
-    /*
-    if let oldScale = (notification.userInfo?[NSBackingPropertyOldScaleFactorKey] as? NSNumber)?.doubleValue {
+    if let oldScale = (notification.userInfo?[NSBackingPropertyOldScaleFactorKey] as? NSNumber)?.doubleValue,
       oldScale != Double(window!.backingScaleFactor) {
-      print(oldScale)
+      videoView.videoLayer.contentsScale = window!.backingScaleFactor
     }
-    */
+
   }
 
   // MARK: - Control UI

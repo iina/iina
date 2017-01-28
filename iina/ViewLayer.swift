@@ -42,6 +42,19 @@ class ViewLayer: CAOpenGLLayer {
 
     autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
   }
+
+  override init(layer: Any) {
+    let previousLayer = layer as! ViewLayer
+
+    videoView = previousLayer.videoView
+
+    super.init()
+    isOpaque = true
+    isAsynchronous = false
+
+    autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+
+  }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")

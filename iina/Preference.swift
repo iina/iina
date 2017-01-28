@@ -109,6 +109,7 @@ struct Preference {
     static let subMarginY = "subMarginY"
     static let subLang = "subLang"
     static let onlineSubSource = "onlineSubSource"
+    static let displayInLetterBox = "displayInLetterBox"
 
     // Network
 
@@ -329,6 +330,7 @@ struct Preference {
     Key.subMarginY: 22,
     Key.subLang: "",
     Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
+    Key.displayInLetterBox: true,
 
     Key.enableCache: true,
     Key.defaultCacheSize: 75000,

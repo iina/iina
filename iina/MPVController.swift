@@ -182,6 +182,9 @@ class MPVController: NSObject {
 
     setUserOption(PK.subLang, type: .string, forName: MPVOption.TrackSelection.slang)
 
+    setUserOption(PK.displayInLetterBox, type: .bool, forName: MPVOption.Subtitles.subUseMargins)
+    setUserOption(PK.displayInLetterBox, type: .bool, forName: MPVOption.Subtitles.subAssForceMargins)
+
     // - Network / cache settings
 
     setUserOption(PK.enableCache, type: .other, forName: MPVOption.Cache.cache) { key in
@@ -724,7 +727,7 @@ class MPVController: NSObject {
     }
   }
 
-  private var optionObservers: [String: OptionObserverInfo] = [:]
+  private var optionObservers: [String: [OptionObserverInfo]] = [:]
 
   private func setUserOption(_ key: String, type: UserOptionType, forName name: String, sync: Bool = true, transformer: OptionObserverInfo.Transformer? = nil) {
     var code: Int32 = 0
@@ -775,7 +778,10 @@ class MPVController: NSObject {
 
     if sync {
       ud.addObserver(self, forKeyPath: key, options: [.new, .old], context: nil)
-      optionObservers[key] = OptionObserverInfo(key, name, type, transformer)
+      if optionObservers[key] == nil {
+        optionObservers[key] = []
+      }
+      optionObservers[key]!.append(OptionObserverInfo(key, name, type, transformer))
     }
   }
 
@@ -783,38 +789,41 @@ class MPVController: NSObject {
     guard !(change?[NSKeyValueChangeKey.oldKey] is NSNull) else { return }
 
     guard let keyPath = keyPath else { return }
-    guard let info = optionObservers[keyPath] else { return }
+    guard let infos = optionObservers[keyPath] else { return }
 
-    switch info.valueType {
-    case .int:
-      let value = ud.integer(forKey: info.prefKey)
-      setInt(info.optionName, value)
+    for info in infos {
+      switch info.valueType {
+      case .int:
+        let value = ud.integer(forKey: info.prefKey)
+        setInt(info.optionName, value)
 
-    case .float:
-      let value = ud.float(forKey: info.prefKey)
-      setDouble(info.optionName, Double(value))
+      case .float:
+        let value = ud.float(forKey: info.prefKey)
+        setDouble(info.optionName, Double(value))
 
-    case .bool:
-      let value = ud.bool(forKey: info.prefKey)
-      setFlag(info.optionName, value)
+      case .bool:
+        let value = ud.bool(forKey: info.prefKey)
+        setFlag(info.optionName, value)
+        print(info.optionName, value)
 
-    case .string:
-      if let value = ud.string(forKey: info.prefKey) {
-        setString(info.optionName, value)
-      }
+      case .string:
+        if let value = ud.string(forKey: info.prefKey) {
+          setString(info.optionName, value)
+        }
 
-    case .color:
-      if let value = ud.mpvColor(forKey: info.prefKey) {
-        setString(info.optionName, value)
-      }
+      case .color:
+        if let value = ud.mpvColor(forKey: info.prefKey) {
+          setString(info.optionName, value)
+        }
 
-    case .other:
-      guard let tr = info.transformer else {
-        Utility.log("setUserOption: no transformer!")
-        return
-      }
-      if let value = tr(info.prefKey) {
-        setString(info.optionName, value)
+      case .other:
+        guard let tr = info.transformer else {
+          Utility.log("setUserOption: no transformer!")
+          return
+        }
+        if let value = tr(info.prefKey) {
+          setString(info.optionName, value)
+        }
       }
     }
   }

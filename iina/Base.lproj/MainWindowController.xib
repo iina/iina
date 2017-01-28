@@ -180,7 +180,7 @@
                                     <action selector="settingsButtonAction:" target="-2" id="2Yu-Jn-GXF"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="GgV-Cc-sk0" userLabel="Right Label" customClass="DurationDisplayView" customModule="IINA" customModuleProvider="target">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="GgV-Cc-sk0" userLabel="Right Label" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
                                 <rect key="frame" x="378" y="10" width="62" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="sDf-om-KlV"/>

@@ -127,6 +127,10 @@ class ViewLayer: CAOpenGLLayer {
     glFlush()
 
     CGLUnlockContext(ctx)
+
+    if let context = videoView.mpvGLContext {
+      mpv_opengl_cb_report_flip(context, 0)
+    }
   }
 
   func draw() {

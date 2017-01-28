@@ -139,6 +139,7 @@ class MPVController: NSObject {
     setUserOption(PK.useHardwareDecoding, type: .bool, forName: MPVOption.Video.hwdec)
 
     setUserOption(PK.audioLanguage, type: .string, forName: MPVOption.TrackSelection.alang)
+    setUserOption(PK.maxVolume, type: .int, forName: MPVOption.Audio.volumeMax)
 
     // - Sub
 

@@ -88,6 +88,7 @@ struct Preference {
     static let audioThreads = "audioThreads"
 
     static let audioLanguage = "audioLanguage"
+    static let maxVolume = "maxVolume"
 
     // Subtitle
 
@@ -314,6 +315,7 @@ struct Preference {
     Key.useHardwareDecoding: true,
     Key.audioThreads: 0,
     Key.audioLanguage: "",
+    Key.maxVolume: 130,
 
     Key.subAutoLoad: AutoLoadAction.fuzzy.rawValue,
     Key.ignoreAssStyles: false,

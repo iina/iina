@@ -138,6 +138,7 @@
 		84F942801E376136009B879B /* libvapoursynth.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84F942421E376126009B879B /* libvapoursynth.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84F942811E376136009B879B /* libx264.148.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84F942431E376126009B879B /* libx264.148.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84F942821E376136009B879B /* libzimg.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84F942441E376126009B879B /* libzimg.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		9E47DABE1E3A4AD300457420 /* DurationDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABD1E3A4AD300457420 /* DurationDisplayView.swift */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
@@ -567,6 +568,7 @@
 				84D377691D74163B007F7396 /* Video */,
 				84D377681D7413D8007F7396 /* Accessories */,
 				8452DD7F1D3A1F2A008A543A /* Preference */,
+				9E47DABD1E3A4AD300457420 /* DurationDisplayView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -918,6 +920,7 @@
 				84E48D4E1E0F1090002C7A3F /* FilterWindowController.swift in Sources */,
 				8476440C1D48F63D004F6DF5 /* OSDMessage.swift in Sources */,
 				84AE59491E0FD65800771B7E /* MainWindowMenuActions.swift in Sources */,
+				9E47DABE1E3A4AD300457420 /* DurationDisplayView.swift in Sources */,
 				84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */,
 				845040401E0ACADD0079C194 /* MPVNode.swift in Sources */,
 				84795C3A1E083EE30059A648 /* PrefControlViewController.swift in Sources */,

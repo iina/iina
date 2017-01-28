@@ -86,7 +86,7 @@ class PlayerCore: NSObject {
   func unloadMainWindowVideoView() {
     if mainWindow.isWindowLoaded {
       mainWindow.videoView.uninit()
-      mainWindow.videoView.clearGLContext()
+      // mainWindow.videoView.clearGLContext()
     }
   }
 

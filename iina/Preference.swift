@@ -111,6 +111,7 @@ struct Preference {
     static let subLang = "subLang"
     static let onlineSubSource = "onlineSubSource"
     static let displayInLetterBox = "displayInLetterBox"
+    static let subScaleWithWindow = "subScaleWithWindow"
 
     // Network
 
@@ -336,6 +337,7 @@ struct Preference {
     Key.subLang: "",
     Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
     Key.displayInLetterBox: true,
+    Key.subScaleWithWindow: true,
 
     Key.enableCache: true,
     Key.defaultCacheSize: 75000,

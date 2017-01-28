@@ -186,6 +186,8 @@ class MPVController: NSObject {
     setUserOption(PK.displayInLetterBox, type: .bool, forName: MPVOption.Subtitles.subUseMargins)
     setUserOption(PK.displayInLetterBox, type: .bool, forName: MPVOption.Subtitles.subAssForceMargins)
 
+    setUserOption(PK.subScaleWithWindow, type: .bool, forName: MPVOption.Subtitles.subScaleByWindow)
+
     // - Network / cache settings
 
     setUserOption(PK.enableCache, type: .other, forName: MPVOption.Cache.cache) { key in
@@ -805,7 +807,6 @@ class MPVController: NSObject {
       case .bool:
         let value = ud.bool(forKey: info.prefKey)
         setFlag(info.optionName, value)
-        print(info.optionName, value)
 
       case .string:
         if let value = ud.string(forKey: info.prefKey) {

@@ -39,7 +39,8 @@ class ViewLayer: CAOpenGLLayer {
     super.init()
     isOpaque = true
     isAsynchronous = false
-    drawsAsynchronously = true
+
+    autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
   }
   
   required init?(coder aDecoder: NSCoder) {

@@ -87,6 +87,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private var singleClickAction: Preference.MouseClickAction!
   private var doubleClickAction: Preference.MouseClickAction!
   private var rightClickAction: Preference.MouseClickAction!
+  
+  private var verticalScrollAction: Preference.VerticalScrollAction!
+  private var horizontalScrollAction: Preference.HorizontalScrollAction!
 
   private var singleClickTimer: Timer?
 
@@ -100,7 +103,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     Preference.Key.arrowButtonAction,
     Preference.Key.singleClickAction,
     Preference.Key.doubleClickAction,
-    Preference.Key.rightClickAction
+    Preference.Key.rightClickAction,
+    Preference.Key.verticalScrollAction,
+    Preference.Key.horizontalScrollAction
   ]
 
   private var notificationObservers: [NSObjectProtocol] = []
@@ -251,6 +256,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.singleClickAction))
     doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.doubleClickAction))
     rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.rightClickAction))
+    
+    verticalScrollAction = Preference.VerticalScrollAction(rawValue: ud.integer(forKey: Preference.Key.verticalScrollAction))
+    horizontalScrollAction = Preference.HorizontalScrollAction(rawValue: ud.integer(forKey: Preference.Key.horizontalScrollAction))
 
     // add user default observers
     observedPrefKeys.forEach { key in
@@ -327,6 +335,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case Preference.Key.rightClickAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         rightClickAction = Preference.MouseClickAction(rawValue: newValue)
+      }
+      
+    case Preference.Key.verticalScrollAction:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        verticalScrollAction = Preference.VerticalScrollAction(rawValue: newValue)
+      }
+      
+    case Preference.Key.horizontalScrollAction:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        horizontalScrollAction = Preference.HorizontalScrollAction(rawValue: newValue)
       }
 
     default:
@@ -526,11 +544,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     if scrollDirection == .horizontal {
-      playerCore.seek(relativeSecond: seekFactor * deltaX, option: useExtrackSeek)
+      switch horizontalScrollAction! {
+        case .seek: playerCore.seek(relativeSecond: seekFactor * deltaX, option: useExtrackSeek)
+        default: return
+      }
     } else if scrollDirection == .vertical {
-      let newVolume = playerCore.info.volume - Int(deltaY)
-      playerCore.setVolume(newVolume)
-      volumeSlider.integerValue = newVolume
+      switch verticalScrollAction! {
+        case .volume:
+          let newVolume = playerCore.info.volume - Int(deltaY)
+          playerCore.setVolume(newVolume)
+          volumeSlider.integerValue = newVolume
+        default: return
+      }
     }
   }
 

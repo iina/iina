@@ -131,9 +131,11 @@ struct Preference {
     static let arrowButtonAction = "arrowBtnAction"
 
     static let singleClickAction = "singleClickAction"
-
     static let doubleClickAction = "doubleClickAction"
     static let rightClickAction = "rightClickAction"
+    
+    static let verticalScrollAction = "verticalScrollAction"
+    static let horizontalScrollAction = "horizontalScrollAction"
 
     // Input
 
@@ -195,6 +197,16 @@ struct Preference {
     case fullscreen
     case pause
     case hideOSC
+  }
+  
+  enum VerticalScrollAction: Int {
+    case none = -1
+    case volume
+  }
+  
+  enum HorizontalScrollAction: Int {
+    case none = -1
+    case seek
   }
 
   enum AutoLoadAction: Int {
@@ -356,6 +368,9 @@ struct Preference {
     Key.singleClickAction: MouseClickAction.hideOSC.rawValue,
     Key.doubleClickAction: MouseClickAction.fullscreen.rawValue,
     Key.rightClickAction: MouseClickAction.pause.rawValue,
+    
+    Key.verticalScrollAction: VerticalScrollAction.volume.rawValue,
+    Key.horizontalScrollAction: HorizontalScrollAction.seek.rawValue,
 
     Key.screenshotFolder: "~/Pictures/ScreenShots",
     Key.screenshotIncludeSubtitle: true,

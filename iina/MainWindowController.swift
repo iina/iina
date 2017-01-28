@@ -100,7 +100,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     Preference.Key.arrowButtonAction,
     Preference.Key.singleClickAction,
     Preference.Key.doubleClickAction,
-    Preference.Key.rightClickAction
+    Preference.Key.rightClickAction,
+    Preference.Key.showRemainingTime
   ]
 
   private var notificationObservers: [NSObjectProtocol] = []
@@ -327,6 +328,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case Preference.Key.rightClickAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         rightClickAction = Preference.MouseClickAction(rawValue: newValue)
+      }
+
+    case Preference.Key.showRemainingTime:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+        rightLabel.mode = newValue ? .remaining : .duration
       }
 
     default:

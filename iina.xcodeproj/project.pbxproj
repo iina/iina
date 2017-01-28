@@ -560,7 +560,6 @@
 				845040451E0B0F500079C194 /* CropSettingsViewController.swift */,
 				8400D5D11E1AB306006785F5 /* CropSettingsViewController.xib */,
 				845040491E0B13230079C194 /* CropBoxView.swift */,
-				9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */,
 				8450403B1E0A9EE20079C194 /* InspectorWindowController.swift */,
 				8400D5D41E1AB312006785F5 /* InspectorWindowController.xib */,
 				84E48D4C1E0F1090002C7A3F /* FilterWindowController.swift */,
@@ -641,6 +640,7 @@
 		84D377681D7413D8007F7396 /* Accessories */ = {
 			isa = PBXGroup;
 			children = (
+				9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */,
 				843FFD4C1D5DAA01001F3A44 /* RoundedTextFieldCell.swift */,
 				8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */,
 				84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */,
@@ -921,7 +921,6 @@
 				84E48D4E1E0F1090002C7A3F /* FilterWindowController.swift in Sources */,
 				8476440C1D48F63D004F6DF5 /* OSDMessage.swift in Sources */,
 				84AE59491E0FD65800771B7E /* MainWindowMenuActions.swift in Sources */,
-				9E47DABE1E3A4AD300457420 /* (null) in Sources */,
 				84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */,
 				845040401E0ACADD0079C194 /* MPVNode.swift in Sources */,
 				84795C3A1E083EE30059A648 /* PrefControlViewController.swift in Sources */,

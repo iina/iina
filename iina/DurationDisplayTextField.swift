@@ -10,12 +10,12 @@ import Foundation
 
 class DurationDisplayTextField: NSTextField {
   
-  private enum DisplayMode {
+  enum DisplayMode {
     case duration // displays the duration of the movie
     case remaining // displays the remaining time in the movie
   }
   
-  private var mode = DisplayMode.duration
+  var mode = DisplayMode.duration
   
   /** Switches the display mode for the right label */
   func switchMode() {

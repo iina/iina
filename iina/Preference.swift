@@ -135,6 +135,8 @@ struct Preference {
     static let doubleClickAction = "doubleClickAction"
     static let rightClickAction = "rightClickAction"
 
+    static let showRemainingTime = "showRemainingTime"
+
     // Input
 
     /** Whether catch media keys event (bool) */
@@ -306,6 +308,7 @@ struct Preference {
 
     Key.usePhysicalResolution: true,
     Key.resizeOnlyWhenManuallyOpenFile: true,
+    Key.showRemainingTime: false,
 
     Key.videoThreads: 0,
     Key.useHardwareDecoding: true,

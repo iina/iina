@@ -138,6 +138,7 @@
 		84F942801E376136009B879B /* libvapoursynth.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84F942421E376126009B879B /* libvapoursynth.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84F942811E376136009B879B /* libx264.148.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84F942431E376126009B879B /* libx264.148.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84F942821E376136009B879B /* libzimg.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84F942441E376126009B879B /* libzimg.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
@@ -367,6 +368,7 @@
 		84FF84701D2FF698001B318A /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
 		84FF84711D2FF698001B318A /* opengl_cb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl_cb.h; sourceTree = "<group>"; };
 		867483705008F086E07B0A6B /* Pods_iina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationDisplayTextField.swift; sourceTree = "<group>"; };
 		A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.debug.xcconfig"; sourceTree = "<group>"; };
 		C789871A1E34EBDE0005769F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		C789871B1E34EBDE0005769F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MainWindowController.strings; sourceTree = "<group>"; };
@@ -558,6 +560,7 @@
 				845040451E0B0F500079C194 /* CropSettingsViewController.swift */,
 				8400D5D11E1AB306006785F5 /* CropSettingsViewController.xib */,
 				845040491E0B13230079C194 /* CropBoxView.swift */,
+				9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */,
 				8450403B1E0A9EE20079C194 /* InspectorWindowController.swift */,
 				8400D5D41E1AB312006785F5 /* InspectorWindowController.xib */,
 				84E48D4C1E0F1090002C7A3F /* FilterWindowController.swift */,
@@ -918,6 +921,7 @@
 				84E48D4E1E0F1090002C7A3F /* FilterWindowController.swift in Sources */,
 				8476440C1D48F63D004F6DF5 /* OSDMessage.swift in Sources */,
 				84AE59491E0FD65800771B7E /* MainWindowMenuActions.swift in Sources */,
+				9E47DABE1E3A4AD300457420 /* (null) in Sources */,
 				84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */,
 				845040401E0ACADD0079C194 /* MPVNode.swift in Sources */,
 				84795C3A1E083EE30059A648 /* PrefControlViewController.swift in Sources */,
@@ -933,6 +937,7 @@
 				84A886F31E26CA24008755BB /* Regex.swift in Sources */,
 				8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */,
 				8450403D1E0A9EE20079C194 /* InspectorWindowController.swift in Sources */,
+				9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */,
 				841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */,
 				84A886F11E26A2CB008755BB /* UpdateChecker.swift in Sources */,
 				8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */,

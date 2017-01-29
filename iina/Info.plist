@@ -9,140 +9,343 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>aa3</string>
+				<string>mkv</string>
+				<string>mka</string>
+				<string>mk3d</string>
+				<string>mks</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_mkv.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Matroska media</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>rm</string>
+				<string>rmvb</string>
+				<string>ra</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_rm.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Real Media file</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>asf</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_asf.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Advanced Systems Format (ASF) media</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
 				<string>aac</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_aac.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Advanced Audio Coding (AAC) media</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>flv</string>
+				<string>f4v</string>
+				<string>f4p</string>
+				<string>f4a</string>
+				<string>f4b</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_flv.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Flash Video file</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>webm</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_webm.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>WebM media</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>3gp</string>
+				<string>3g2</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_3gp.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>3GPP media</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>mp3</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_mp3.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>MPEG Layer III (MP3) audio</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>ogg</string>
+				<string>oga</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_ogg.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>OGG audio</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>ts</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_ts.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>MPEG transport stream (TS) media</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>avi</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_avi.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>AVI media</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>wav</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_wav.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Waveform Audio File (WAV) audio</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>m4a</string>
+				<string>m4b</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_m4a.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>MPEG-4 audio</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>wmv</string>
+				<string>wma</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_wmv.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Windows Media Video/Audio (WMV/WMA) media</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>qt</string>
+				<string>mov</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_qt.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>QuickTime media</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>flac</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_flac.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Free Lossless Audio Codec (FLAC) audio</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>mp4</string>
+				<string>m4v</string>
+				<string>m4b</string>
+				<string>mpeg</string>
+				<string>mpg</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_mp4.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>MPEG-4 video</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>dat</string>
+				<string>divx</string>
+				<string>vob</string>
+				<string>amv</string>
+				<string>mxf</string>
+				<string>mcf</string>
+				<string>swf</string>
+				<string>xvid</string>
+				<string>yuv</string>
+				<string>*</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_other_v.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Video file</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>aa3</string>
 				<string>ac3</string>
 				<string>acm</string>
 				<string>aif</string>
 				<string>aiff</string>
 				<string>ape</string>
 				<string>caf</string>
-				<string>flac</string>
-				<string>m3u</string>
-				<string>m4a</string>
-				<string>m4b</string>
 				<string>mid</string>
 				<string>midi</string>
-				<string>mka</string>
-				<string>mp3</string>
-				<string>mpa</string>
-				<string>ogg</string>
 				<string>pcm</string>
-				<string>ra</string>
-				<string>ram</string>
-				<string>wav</string>
-				<string>wma</string>
+				<string>vox</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_audio.icns</string>
+			<string>doc_other_a.icns</string>
 			<key>CFBundleTypeName</key>
-			<string>Audio Media</string>
+			<string>Audio file</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
 			<string>XML</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>3g2</string>
-				<string>3gp</string>
-				<string>asf</string>
-				<string>asx</string>
-				<string>avi</string>
-				<string>dat</string>
-				<string>divx</string>
-				<string>dv</string>
-				<string>f4v</string>
-				<string>fli</string>
-				<string>flv</string>
-				<string>m2t</string>
-				<string>m2ts</string>
-				<string>m4v</string>
-				<string>mjp</string>
-				<string>mkv</string>
-				<string>mov</string>
-				<string>mp4</string>
-				<string>mpeg</string>
-				<string>mpg</string>
-				<string>mpg2</string>
-				<string>mpg4</string>
-				<string>mts</string>
-				<string>mtv</string>
-				<string>mxf</string>
-				<string>ogm</string>
-				<string>ogv</string>
-				<string>qt</string>
-				<string>qtz</string>
-				<string>rm</string>
-				<string>rmvb</string>
-				<string>rv</string>
-				<string>swf</string>
-				<string>ts</string>
-				<string>tp</string>
-				<string>vc1</string>
-				<string>vcd</string>
-				<string>vfw</string>
-				<string>vob</string>
-				<string>vro</string>
-				<string>webm</string>
-				<string>wmv</string>
-				<string>xvid</string>
-				<string>yuv</string>
-				<string>*</string>
-			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string>doc_video.icns</string>
-			<key>CFBundleTypeName</key>
-			<string>Video Media</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSTypeIsPackage</key>
-			<false/>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>XML</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>utf</string>
-				<string>utf8</string>
-				<string>srt</string>
-				<string>ass</string>
-				<string>smi</string>
-				<string>ssa</string>
-				<string>smil</string>
-				<string>jss</string>
-				<string>rt</string>
-				<string>sub</string>
-				<string>idx</string>
-			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string>doc_sub.icns</string>
-			<key>CFBundleTypeName</key>
-			<string>Subtitle</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSTypeIsPackage</key>
-			<false/>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>XML</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>dvdmedia</string>
-			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string>doc_video.icns</string>
-			<key>CFBundleTypeName</key>
-			<string>DVD Media</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSTypeIsPackage</key>
-			<true/>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -162,7 +365,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>6</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.video</string>
 	<key>LSMinimumSystemVersion</key>

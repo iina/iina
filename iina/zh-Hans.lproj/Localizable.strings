@@ -39,7 +39,7 @@
 "osd.subtitle_pos" = "字幕位置：%f";
 "osd.mute" = "静音";
 "osd.unmute" = "取消静音";
-"osd.screenshot" = "快照已截取";
+"osd.screenshot" = "抓图已截取";
 "osd.abloop.a" = "AB循环：A";
 "osd.abloop.b" = "AB循环：B";
 "osd.abloop.clear" = "AB循环：清除";
@@ -54,14 +54,13 @@
 "osd.video_eq.saturation" = "饱和度：%i";
 "osd.video_eq.brightness" = "亮度：%i";
 
-"update.title_update_found" = "检测到新版本";
-"update.title_no_update" = "没有更新的版本";
-"update.title_error" = "更新错误";
-"update.update_found" = "检测到更新。由于 IINA 仍处于 Alpha 测试中，我们建议您保持最新版本。请前往网站或者 GitHub 下载：";
-"update.no_update" = "您正在运行的是最新版本。";
-"update.check_failed" = "检查更新失败。请去网站或者 GitHub 下载最新版：";
-"update.new_version" = "新版本：";
-"update.dl_from_website" = "前往网站";
+"update.title_update_found" = "新版本已发布。";
+"update.title_no_update" = "已经是最新版本。";
+"update.title_error" = "更新时出现错误。";
+"update.update_found" = "由于 IINA 仍处于 Alpha 测试中，我们建议您保持最新版本。\n请前往官网或者 GitHub 下载。";
+"update.no_update" = "此版本的 IINA (版本 %version) 是最新版本。";
+"update.check_failed" = "确保您的网络连接是活跃的，然后重新尝试，或者前往官网或者 GitHub 下载最新版。";
+"update.dl_from_website" = "前往官网";
 "update.dl_from_github" = "前往 GitHub";
 
 "preference.title" = "偏好设置";

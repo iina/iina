@@ -103,6 +103,10 @@
                                 </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="N0Z-h7-JSg"/>
+                            <menuItem title="Save Playlist" id="Mjr-lL-oEt">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="xX3-Bc-McX"/>
                             <menuItem title="Share" id="BtY-iQ-6Pf">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
@@ -482,6 +486,7 @@
                 <outlet property="resetSubDelay" destination="SLr-6g-Mgh" id="8oW-hm-TNq"/>
                 <outlet property="resetTextSize" destination="P1a-ot-P31" id="fJk-GP-GBM"/>
                 <outlet property="rotationMenu" destination="5xN-ZB-VLI" id="YGx-Ae-oMp"/>
+                <outlet property="savePlaylist" destination="Mjr-lL-oEt" id="ftc-bn-4Qi"/>
                 <outlet property="saveDownloadedSub" destination="9zk-co-roT" id="lGr-mb-oHw"/>
                 <outlet property="screenShot" destination="AoP-K6-Kb5" id="vTV-d5-sag"/>
                 <outlet property="secondSubTrackMenu" destination="UwY-P2-Xdb" id="D3B-WW-bAk"/>

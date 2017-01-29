@@ -16,6 +16,7 @@ class MenuController: NSObject, NSMenuDelegate {
   // File
   @IBOutlet weak var file: NSMenuItem!
   @IBOutlet weak var open: NSMenuItem!
+  @IBOutlet weak var savePlaylist: NSMenuItem!
   // Playback
   @IBOutlet weak var playbackMenu: NSMenu!
   @IBOutlet weak var pause: NSMenuItem!
@@ -99,6 +100,10 @@ class MenuController: NSObject, NSMenuDelegate {
 
   func bindMenuItems() {
 
+    // File menu
+    
+    savePlaylist.action = #selector(MainWindowController.menuSavePlaylist(_:))
+    
     // Playback menu
 
     playbackMenu.delegate = self

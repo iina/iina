@@ -100,7 +100,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     Preference.Key.arrowButtonAction,
     Preference.Key.singleClickAction,
     Preference.Key.doubleClickAction,
-    Preference.Key.rightClickAction
+    Preference.Key.rightClickAction,
+    Preference.Key.showRemainingTime
   ]
 
   private var notificationObservers: [NSObjectProtocol] = []
@@ -169,7 +170,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bufferSpin: NSProgressIndicator!
   @IBOutlet weak var bufferDetailLabel: NSTextField!
 
-  @IBOutlet weak var rightLabel: NSTextField!
+  @IBOutlet weak var rightLabel: DurationDisplayTextField!
   @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var leftArrowLabel: NSTextField!
   @IBOutlet weak var rightArrowLabel: NSTextField!
@@ -218,6 +219,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // note that don't use auto resize for it (handle in windowDidResize)
     cv.autoresizesSubviews = false
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
+
+    //videoView.translatesAutoresizingMaskIntoConstraints = false
+    //quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": videoView])
+
+    videoView.videoLayer.display()
 
     // gesture recognizer
     // disable it first for poor performance
@@ -322,6 +328,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case Preference.Key.rightClickAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         rightClickAction = Preference.MouseClickAction(rawValue: newValue)
+      }
+
+    case Preference.Key.showRemainingTime:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+        rightLabel.mode = newValue ? .remaining : .duration
       }
 
     default:
@@ -565,7 +576,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if !playerCore.isMpvTerminated {
       playerCore.savePlaybackPosition()
       playerCore.stop()
-      videoView.stopDisplayLink()
+      // videoView.stopDisplayLink()
     }
     // disable sleep preventer
     SleepPreventer.allowSleep()
@@ -638,7 +649,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
       */
 
-      videoView.frame = w.frame
+      videoView.frame = NSRect(x: 0, y: 0, width: w.frame.width, height: w.frame.height)
 
     } else {
 
@@ -671,9 +682,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // resize framebuffer in videoView after resizing.
   func windowDidEndLiveResize(_ notification: Notification) {
-    videoView.videoSize = window!.convertToBacking(videoView.frame).size
-    // new (empty) frame buffer is created, so draw a frame manually
-    videoView.drawFrame()
+    videoView.videoSize = window!.convertToBacking(videoView.bounds).size
+  }
+
+  func windowDidChangeBackingProperties(_ notification: Notification) {
+    if let oldScale = (notification.userInfo?[NSBackingPropertyOldScaleFactorKey] as? NSNumber)?.doubleValue,
+      oldScale != Double(window!.backingScaleFactor) {
+      videoView.videoLayer.contentsScale = window!.backingScaleFactor
+    }
+
   }
 
   // MARK: - Control UI
@@ -1009,7 +1026,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     w.aspectRatio = originalVideoSize
 
     videoView.videoSize = w.convertToBacking(videoView.frame).size
-    videoView.restartDisplayLink()
+    // videoView.restartDisplayLink()
 
     if isInFullScreen {
 
@@ -1088,9 +1105,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let percantage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
     touchBarCurrentPosLabel?.stringValue = pos.stringRepresentation
-    if withDuration {
-      rightLabel.stringValue = duration.stringRepresentation
-    }
+    rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {
       playSlider.doubleValue = percantage
       touchBarPlaySlider?.doubleValue = percantage

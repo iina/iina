@@ -60,5 +60,11 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
     }
   }
 
+  @IBAction func rememberRecentChanged(_ sender: NSButton) {
+    if sender.state == NSOffState {
+      NSDocumentController.shared().clearRecentDocuments(self)
+    }
+  }
+
 
 }

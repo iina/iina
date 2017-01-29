@@ -88,6 +88,7 @@ struct Preference {
     static let audioThreads = "audioThreads"
 
     static let audioLanguage = "audioLanguage"
+    static let maxVolume = "maxVolume"
 
     // Subtitle
 
@@ -109,6 +110,8 @@ struct Preference {
     static let subMarginY = "subMarginY"
     static let subLang = "subLang"
     static let onlineSubSource = "onlineSubSource"
+    static let displayInLetterBox = "displayInLetterBox"
+    static let subScaleWithWindow = "subScaleWithWindow"
 
     // Network
 
@@ -133,6 +136,8 @@ struct Preference {
 
     static let doubleClickAction = "doubleClickAction"
     static let rightClickAction = "rightClickAction"
+
+    static let showRemainingTime = "showRemainingTime"
 
     // Input
 
@@ -305,11 +310,13 @@ struct Preference {
 
     Key.usePhysicalResolution: true,
     Key.resizeOnlyWhenManuallyOpenFile: true,
+    Key.showRemainingTime: false,
 
     Key.videoThreads: 0,
     Key.useHardwareDecoding: true,
     Key.audioThreads: 0,
     Key.audioLanguage: "",
+    Key.maxVolume: 130,
 
     Key.subAutoLoad: AutoLoadAction.fuzzy.rawValue,
     Key.ignoreAssStyles: false,
@@ -329,6 +336,8 @@ struct Preference {
     Key.subMarginY: 22,
     Key.subLang: "",
     Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
+    Key.displayInLetterBox: true,
+    Key.subScaleWithWindow: true,
 
     Key.enableCache: true,
     Key.defaultCacheSize: 75000,

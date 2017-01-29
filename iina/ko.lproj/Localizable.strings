@@ -98,7 +98,7 @@
 "osd.sub_delay.nodelay" = "자막 지연: 없음";
 
 /* Subtitle Position: %f */
-"osd.subtitle_pos" = "자막 위치: %f";
+"osd.subtitle_pos" = "자막 위치: %.1f";
 
 /* Subtitle Scale: %.2fx */
 "osd.subtitle_scale" = "자막 크기: %.2fx";

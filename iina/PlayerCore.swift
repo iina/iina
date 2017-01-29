@@ -86,7 +86,7 @@ class PlayerCore: NSObject {
   func unloadMainWindowVideoView() {
     if mainWindow.isWindowLoaded {
       mainWindow.videoView.uninit()
-      mainWindow.videoView.clearGLContext()
+      // mainWindow.videoView.clearGLContext()
     }
   }
 
@@ -423,6 +423,19 @@ class PlayerCore: NSObject {
     mpvController.command(.af, args: ["del", filter.stringFormat])
   }
 
+  func getAudioDevices() -> [[String: String]] {
+    let raw = mpvController.getNode(MPVProperty.audioDeviceList)
+    if let list = raw as? [[String: String]] {
+      return list
+    } else {
+      return []
+    }
+  }
+
+  func setAudioDevice(_ name: String) {
+    mpvController.setString(MPVProperty.audioDevice, name)
+  }
+
   /** Scale is a double value in [-100, -1] + [1, 100] */
   func setSubScale(_ scale: Double) {
     if scale > 0 {
@@ -430,6 +443,10 @@ class PlayerCore: NSObject {
     } else {
       mpvController.setDouble(MPVOption.Subtitles.subScale, -scale)
     }
+  }
+
+  func setSubPos(_ pos: Int) {
+    mpvController.setInt(MPVOption.Subtitles.subPos, pos)
   }
 
   func setSubTextColor(_ colorString: String) {

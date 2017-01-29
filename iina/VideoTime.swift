@@ -91,3 +91,7 @@ func ==(lhs: VideoTime, rhs: VideoTime) -> Bool {
 func *(lhs: VideoTime, rhs: Double) -> VideoTime {
   return VideoTime(lhs.second * rhs)
 }
+
+func -(lhs: VideoTime, rhs: VideoTime) -> VideoTime {
+  return VideoTime(lhs.second - rhs.second)
+}

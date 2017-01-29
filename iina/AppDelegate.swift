@@ -96,7 +96,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows
     flag: Bool) -> Bool {
-    if !flag {
+    if !flag && UserDefaults.standard.bool(forKey: Preference.Key.openStartPanel) {
       self.openFile(sender)
     }
     return true

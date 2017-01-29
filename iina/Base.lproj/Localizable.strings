@@ -15,15 +15,15 @@
 "playlist.chapter_cap" = "CHAPTERS";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering... %@%%";
+"main.buffering_indicator" = "Buffering... %d%%";
 
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "Default";
 "quicksetting.crop_item.None" = "None";
 
 // OSDMessage.swift
-"osd.pause" = "Paused";
-"osd.resume" = "Resumed";
+"osd.pause" = "Pause";
+"osd.resume" = "Resume";
 "osd.volume" = "Volume: %i";
 "osd.speed" = "Speed: %.2fx";
 "osd.aspect" = "Aspect Ratio: %@";
@@ -39,15 +39,15 @@
 "osd.subtitle_pos" = "Subtitle Position: %f";
 "osd.mute" = "Mute";
 "osd.unmute" = "Unmute";
-"osd.screenshot" = "Screenshot captured";
+"osd.screenshot" = "Screenshot Captured";
 "osd.abloop.a" = "AB-Loop: A";
 "osd.abloop.b" = "AB-Loop: B";
 "osd.abloop.clear" = "AB-Loop: Cleared";
-"osd.stop" = "Stopped";
+"osd.stop" = "Stop";
 "osd.chapter" = "Chapter: %@";
 "osd.subtitle_scale" = "Subtitle Scale: %.2fx";
-"osd.add_to_playlist" = "Added %i files to playlist";
-"osd.clear_playlist" = "Cleared playlist";
+"osd.add_to_playlist" = "Added %i Files to Playlist";
+"osd.clear_playlist" = "Cleared Playlist";
 "osd.video_eq.contrast" = "Contrast: %i";
 "osd.video_eq.gamma" = "Gamma: %i";
 "osd.video_eq.hue" = "Hue: %i";
@@ -80,6 +80,8 @@
 "menu.sub_delay" = "Subtitie Delay: %.2fs";
 "menu.fullscreen" = "Full Screen";
 "menu.exit_fullscreen" = "Exit Full Screen";
+"menu.pause" = "Pause";
+"menu.resume" = "Resume";
 
 "track.none" = "<None>";
 

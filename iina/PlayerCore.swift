@@ -31,6 +31,8 @@ class PlayerCore: NSObject {
 
   var isMpvTerminated: Bool = false
 
+  var isWindowShown: Bool = false
+
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
@@ -53,6 +55,7 @@ class PlayerCore: NSObject {
     info.isNetworkResource = false
     mainWindow.showWindow(nil)
     mainWindow.windowDidOpen()
+    isWindowShown = true
     // Send load file command
     info.fileLoading = true
     mpvController.command(.loadfile, args: [path])
@@ -64,6 +67,7 @@ class PlayerCore: NSObject {
     info.isNetworkResource = true
     mainWindow.showWindow(nil)
     mainWindow.windowDidOpen()
+    isWindowShown = true
     // Send load file command
     info.fileLoading = true
     mpvController.command(.loadfile, args: [str])
@@ -82,14 +86,19 @@ class PlayerCore: NSObject {
   func unloadMainWindowVideoView() {
     if mainWindow.isWindowLoaded {
       mainWindow.videoView.uninit()
-      mainWindow.videoView.clearGLContext()
+      // mainWindow.videoView.clearGLContext()
     }
   }
 
   // Terminate mpv
-  func terminateMPV() {
+  func terminateMPV(sendQuit: Bool = true) {
     guard !isMpvTerminated else { return }
-    mpvController.mpvQuit()
+    savePlaybackPosition()
+    invalidateTimer()
+    unloadMainWindowVideoView()
+    if sendQuit {
+      mpvController.mpvQuit()
+    }
     isMpvTerminated = true
   }
 
@@ -414,6 +423,19 @@ class PlayerCore: NSObject {
     mpvController.command(.af, args: ["del", filter.stringFormat])
   }
 
+  func getAudioDevices() -> [[String: String]] {
+    let raw = mpvController.getNode(MPVProperty.audioDeviceList)
+    if let list = raw as? [[String: String]] {
+      return list
+    } else {
+      return []
+    }
+  }
+
+  func setAudioDevice(_ name: String) {
+    mpvController.setString(MPVProperty.audioDevice, name)
+  }
+
   /** Scale is a double value in [-100, -1] + [1, 100] */
   func setSubScale(_ scale: Double) {
     if scale > 0 {
@@ -458,6 +480,10 @@ class PlayerCore: NSObject {
 
   func execKeyCode(_ code: String) {
     mpvController.command(.keypress, args: [code])
+  }
+
+  func savePlaybackPosition() {
+    mpvController.command(.writeWatchLaterConfig)
   }
 
   // MARK: - Other
@@ -595,7 +621,8 @@ class PlayerCore: NSObject {
   }
 
   func sendOSD(_ osd: OSDMessage) {
-
+    // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
+    guard isWindowShown else { return }
     // if window not loaded, ignore
     guard mainWindow.isWindowLoaded else { return }
 

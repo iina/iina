@@ -66,6 +66,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // show alpha in color panels
     NSColorPanel.shared().showsAlpha = true
 
+    // other
+    if #available(OSX 10.12.2, *) {
+      NSApp.isAutomaticCustomizeTouchBarMenuItemEnabled = false
+      NSWindow.allowsAutomaticWindowTabbing = false
+    }
+
     // check update
     UpdateChecker.checkUpdate(alertIfOfflineOrNoUpdate: false)
   }
@@ -86,6 +92,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplicationTerminateReply {
     playerCore.terminateMPV()
     return .terminateNow
+  }
+
+  func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows
+    flag: Bool) -> Bool {
+    if !flag {
+      self.openFile(sender)
+    }
+    return true
   }
 
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
@@ -141,6 +155,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let absoluteScreenshotPath = NSString(string: screenshotPath).expandingTildeInPath
     let url = URL(fileURLWithPath: absoluteScreenshotPath, isDirectory: true)
       NSWorkspace.shared().open(url)
+  }
+
+  @IBAction func menuSelectAudioDevice(_ sender: NSMenuItem) {
+    if let name = sender.representedObject as? String {
+      PlayerCore.shared.setAudioDevice(name)
+    }
   }
 
   @IBAction func showPreferences(_ sender: AnyObject) {

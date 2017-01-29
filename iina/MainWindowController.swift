@@ -86,6 +86,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private var arrowBtnFunction: Preference.ArrowButtonAction!
   private var singleClickAction: Preference.MouseClickAction!
   private var doubleClickAction: Preference.MouseClickAction!
+  private var rightClickAction: Preference.MouseClickAction!
 
   private var singleClickTimer: Timer?
 
@@ -98,7 +99,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     Preference.Key.relativeSeekAmount,
     Preference.Key.arrowButtonAction,
     Preference.Key.singleClickAction,
-    Preference.Key.doubleClickAction
+    Preference.Key.doubleClickAction,
+    Preference.Key.rightClickAction,
+    Preference.Key.showRemainingTime
   ]
 
   private var notificationObservers: [NSObjectProtocol] = []
@@ -167,7 +170,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bufferSpin: NSProgressIndicator!
   @IBOutlet weak var bufferDetailLabel: NSTextField!
 
-  @IBOutlet weak var rightLabel: NSTextField!
+  @IBOutlet weak var rightLabel: DurationDisplayTextField!
   @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var leftArrowLabel: NSTextField!
   @IBOutlet weak var rightArrowLabel: NSTextField!
@@ -217,6 +220,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     cv.autoresizesSubviews = false
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
 
+    //videoView.translatesAutoresizingMaskIntoConstraints = false
+    //quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": videoView])
+
+    videoView.videoLayer.display()
+
     // gesture recognizer
     // disable it first for poor performance
     // cv.addGestureRecognizer(magnificationGestureRecognizer)
@@ -243,6 +251,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: Preference.Key.arrowButtonAction))
     singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.singleClickAction))
     doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.doubleClickAction))
+    rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.rightClickAction))
 
     // add user default observers
     observedPrefKeys.forEach { key in
@@ -314,6 +323,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case Preference.Key.doubleClickAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         doubleClickAction = Preference.MouseClickAction(rawValue: newValue)
+      }
+
+    case Preference.Key.rightClickAction:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        rightClickAction = Preference.MouseClickAction(rawValue: newValue)
+      }
+
+    case Preference.Key.showRemainingTime:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+        rightLabel.mode = newValue ? .remaining : .duration
       }
 
     default:
@@ -402,6 +421,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  override func rightMouseUp(with event: NSEvent) {
+    performMouseAction(rightClickAction)
+  }
+
   @objc private func performMouseActionLater(_ timer: Timer) {
     guard let action = timer.userInfo as? Preference.MouseClickAction else { return }
     performMouseAction(action)
@@ -417,6 +440,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case .pause:
       playerCore.togglePause(nil)
+
+    case .hideOSC:
+      hideUI()
     }
   }
 
@@ -430,10 +456,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // main window
       isMouseInWindow = true
       showUI()
+      updateTimer()
     } else if obj == 1 {
       // slider
       isMouseInSlider = true
-      timePreviewWhenSeek.isHidden = false
+      if !controlBar.isDragging {
+        timePreviewWhenSeek.isHidden = false
+      }
       let mousePos = playSlider.convert(event.locationInWindow, from: nil)
       updateTimeLabel(mousePos.x)
     }
@@ -465,9 +494,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isMouseInSlider {
       updateTimeLabel(mousePos.x)
     }
-    if isMouseInWindow {
-      showUIAndUpdateTimer()
+    if isMouseInWindow && animationState == .hidden {
+      showUI()
     }
+    updateTimer()
   }
 
   override func scrollWheel(with event: NSEvent) {
@@ -532,13 +562,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = self.window, let cv = w.contentView else { return }
     cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 0]))
     playSlider.addTrackingArea(NSTrackingArea(rect: playSlider.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 1]))
+    // update timer
+    updateTimer()
+    // always on top
+    if ud.bool(forKey: Preference.Key.alwaysFloatOnTop) {
+      playerCore.info.isAlwaysOntop = true
+      setWindowFloatingOnTop(true)
+    }
   }
 
   func windowWillClose(_ notification: Notification) {
     // stop playing
     if !playerCore.isMpvTerminated {
+      playerCore.savePlaybackPosition()
       playerCore.stop()
-      videoView.stopDisplayLink()
+      // videoView.stopDisplayLink()
     }
     // disable sleep preventer
     SleepPreventer.allowSleep()
@@ -549,17 +587,25 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {
+    // Set the appearance to match the theme so the titlebar matches the theme
+    switch(Preference.Theme(rawValue: ud.integer(forKey: Preference.Key.themeMaterial))!) {
+      case .dark, .ultraDark: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantDark);
+      case .light, .mediumLight: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
+    }
+    
     // show titlebar
     window!.titlebarAppearsTransparent = false
     window!.titleVisibility = .visible
     removeTitlebarFromFadeableViews()
     // stop animation and hide titleBarView
-    animationState = .hidden
     titleBarView.isHidden = true
     isInFullScreen = true
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
+    // Set back the window appearance
+    self.window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
+    
     // hide titlebar
     window!.titlebarAppearsTransparent = true
     window!.titleVisibility = .hidden
@@ -575,7 +621,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowDidExitFullScreen(_ notification: Notification) {
     // if is floating, enable it again
     if playerCore.info.isAlwaysOntop {
-      setWindowFloatingOntop(true)
+      setWindowFloatingOnTop(true)
     }
   }
 
@@ -586,6 +632,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // update videoview size if in full screen, since aspect ratio may changed
     if (isInFullScreen) {
 
+      // Let mpv decide where to draw
+      /*
       let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
       let tryHeight = wSize.width / aspectRatio
       if tryHeight <= wSize.height {
@@ -599,6 +647,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         let xOffset = (wSize.width - targetWidth) / 2
         videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
       }
+      */
+
+      videoView.frame = NSRect(x: 0, y: 0, width: w.frame.width, height: w.frame.height)
 
     } else {
 
@@ -631,9 +682,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // resize framebuffer in videoView after resizing.
   func windowDidEndLiveResize(_ notification: Notification) {
-    videoView.videoSize = window!.convertToBacking(videoView.frame).size
-    // new (empty) frame buffer is created, so draw a frame manually
-    videoView.drawFrame()
+    videoView.videoSize = window!.convertToBacking(videoView.bounds).size
+  }
+
+  func windowDidChangeBackingProperties(_ notification: Notification) {
+    if let oldScale = (notification.userInfo?[NSBackingPropertyOldScaleFactorKey] as? NSNumber)?.doubleValue,
+      oldScale != Double(window!.backingScaleFactor) {
+      videoView.videoLayer.contentsScale = window!.backingScaleFactor
+    }
+
   }
 
   // MARK: - Control UI
@@ -653,7 +710,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     animationState = .willHide
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = 0.5
+      context.duration = 0.25
       fadeableViews.forEach { (v) in
         v?.animator().alphaValue = 0
       }
@@ -668,7 +725,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  private func showUI () {
+  private func showUI() {
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v?.isHidden = false
@@ -677,6 +734,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.5
       fadeableViews.forEach { (v) in
+        // Set the fade animation duration
+        NSAnimationContext.current().duration = TimeInterval(0.25);
+        
         v?.animator().alphaValue = 1
       }
     }) {
@@ -684,10 +744,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  private func showUIAndUpdateTimer() {
-    if animationState == .hidden {
-      showUI()
-    }
+  private func updateTimer() {
     // if timer exist, destroy first
     if hideControlTimer != nil {
       hideControlTimer!.invalidate()
@@ -775,6 +832,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     withStandardButtons { button in
       if let index = (self.fadeableViews.index {$0 === button}) {
         self.fadeableViews.remove(at: index)
+        
+        // Make sure the button is visible
+        button!.alphaValue = 1;
+        button!.isHidden = false;
       }
     }
     // remove titlebar view from fade-able views
@@ -877,8 +938,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Display time label when mouse over slider */
   private func updateTimeLabel(_ mouseXPos: CGFloat) {
     let timeLabelXPos = playSlider.frame.origin.y + 15
-    timePreviewWhenSeek.frame.origin = CGPoint(x: mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2, y: timeLabelXPos)
-    let percentage = Double((mouseXPos - 3) / 354)
+    timePreviewWhenSeek.frame.origin = CGPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2), y: timeLabelXPos + 1)
+    var percentage = Double((mouseXPos - 3) / 314)
+    if percentage < 0 {
+      percentage = 0
+    }
     if let duration = playerCore.info.videoDuration {
       timePreviewWhenSeek.stringValue = (duration * percentage).stringRepresentation
     }
@@ -927,27 +991,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       $0?.material = material
       $0?.appearance = appearance
     }
-
-    [muteButton, playButton, leftArrowButton, rightArrowButton, settingsButton, playlistButton].forEach { btn in
-      guard let currImageName = btn?.image?.name() else { return }
-      if currImageName.hasSuffix("-dark") {
-        if isDarkTheme {
-          // dark image but with dark theme: remove "-dark"
-          let newName = currImageName.substring(to: currImageName.index(currImageName.endIndex, offsetBy: -5))
-          btn?.image = NSImage(named: newName)
-          if let currAltImageName = btn?.alternateImage?.name() {
-            btn?.alternateImage = NSImage(named: currAltImageName.substring(to: currAltImageName.index(currAltImageName.endIndex, offsetBy: -5)))
-          }
-        }
-      } else {
-        // light image but with light theme: add "-dark"
-        if !isDarkTheme {
-          btn?.image = NSImage(named: currImageName + "-dark")
-          if let currAltImageName = btn?.alternateImage?.name() {
-            btn?.alternateImage = NSImage(named: currAltImageName + "-dark")
-          }
-        }
-      }
+    
+    if isInFullScreen {
+      window!.appearance = appearance;
     }
   }
 
@@ -967,14 +1013,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Window size / aspect
 
   /** Set video size when info available. */
-  func adjustFrameByVideoSize(_ width: Int, _ height: Int) {
+  func adjustFrameByVideoSize(_ videoWidth: Int, _ videoHeight: Int) {
     guard let w = window else { return }
+    // if no video track
+    var width = videoWidth
+    var height = videoHeight
+    if width == 0 { width = AppData.widthWhenNoVideo }
+    if height == 0 { height = AppData.heightWhenNoVideo }
+
     // set aspect ratio
     let originalVideoSize = NSSize(width: width, height: height)
     w.aspectRatio = originalVideoSize
 
-    videoView.videoSize = originalVideoSize
-    videoView.restartDisplayLink()
+    videoView.videoSize = w.convertToBacking(videoView.frame).size
+    // videoView.restartDisplayLink()
 
     if isInFullScreen {
 
@@ -986,7 +1038,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         ud.bool(forKey: Preference.Key.resizeOnlyWhenManuallyOpenFile) {
         // user is navigating in playlist. remain same window width.
         let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
-        let rect = NSRect(origin: w.frame.origin, size: NSSize(width: w.frame.width, height: newHeight))
+        let newSize = NSSize(width: w.frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
+        let rect = NSRect(origin: w.frame.origin, size: newSize)
         w.setFrame(rect, display: true, animate: true)
       } else {
         // get videoSize on screen
@@ -1023,18 +1076,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // if is floating, disable it temporarily.
     // it will be enabled again in `windowDidExitFullScreen()`.
     if !isInFullScreen && playerCore.info.isAlwaysOntop {
-      setWindowFloatingOntop(false)
+      setWindowFloatingOnTop(false)
     }
     window?.toggleFullScreen(self)
   }
 
-  func setWindowFloatingOntop(_ onTop: Bool) {
+  func setWindowFloatingOnTop(_ onTop: Bool) {
     guard let window = window else { return }
     if onTop {
-      window.level = Int(CGWindowLevelForKey(.floatingWindow))
+      window.level = Int(CGWindowLevelForKey(.floatingWindow) + 1)
     } else {
       window.level = Int(CGWindowLevelForKey(.normalWindow))
     }
+    
+    window.collectionBehavior = [.managed, .fullScreenPrimary]
+    
     // don't know why they will be disabled
     withStandardButtons { $0?.isEnabled = true }
   }
@@ -1049,9 +1105,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let percantage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
     touchBarCurrentPosLabel?.stringValue = pos.stringRepresentation
-    if withDuration {
-      rightLabel.stringValue = duration.stringRepresentation
-    }
+    rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {
       playSlider.doubleValue = percantage
       touchBarPlaySlider?.doubleValue = percantage
@@ -1081,7 +1135,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let speedStr = FileSize.format(playerCore.info.cacheSpeed, unit: .b)
       let bufferingState = playerCore.info.bufferingState
       bufferIndicatorView.isHidden = false
-      bufferProgressLabel.stringValue = String(format: NSLocalizedString("main.buffering_indicator",comment:"Buffering... %s%%"),bufferingState)
+      bufferProgressLabel.stringValue = String(format: NSLocalizedString("main.buffering_indicator", comment:"Buffering... %s%%"), bufferingState)
       bufferDetailLabel.stringValue = "\(usedStr)/\(sizeStr) (\(speedStr)/s)"
     } else {
       bufferIndicatorView.isHidden = true
@@ -1251,8 +1305,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let percentage = 100 * sender.doubleValue / sender.maxValue
     // label
     timePreviewWhenSeek.frame.origin = CGPoint(
-      x: sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2,
-      y: playSlider.frame.origin.y + 15)
+      x: round(sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2),
+      y: playSlider.frame.origin.y + 16)
     timePreviewWhenSeek.stringValue = (playerCore.info.videoDuration! * percentage * 0.01).stringRepresentation
     playerCore.seek(percent: percentage, forceExact: true)
   }

@@ -40,7 +40,9 @@ struct Preference {
     static let openStartPanel = "openStartPanel"
 
     /** Resume from last position */
-    // static let resumeLastPosition = "resumeLastPosition"
+    static let resumeLastPosition = "resumeLastPosition"
+
+    static let alwaysFloatOnTop = "alwaysFloatOnTop"
 
     /** Show chapter pos in progress bar (bool) */
     static let showChapterPos = "showChapterPos"
@@ -86,6 +88,7 @@ struct Preference {
     static let audioThreads = "audioThreads"
 
     static let audioLanguage = "audioLanguage"
+    static let maxVolume = "maxVolume"
 
     // Subtitle
 
@@ -107,6 +110,8 @@ struct Preference {
     static let subMarginY = "subMarginY"
     static let subLang = "subLang"
     static let onlineSubSource = "onlineSubSource"
+    static let displayInLetterBox = "displayInLetterBox"
+    static let subScaleWithWindow = "subScaleWithWindow"
 
     // Network
 
@@ -130,6 +135,9 @@ struct Preference {
     static let singleClickAction = "singleClickAction"
 
     static let doubleClickAction = "doubleClickAction"
+    static let rightClickAction = "rightClickAction"
+
+    static let showRemainingTime = "showRemainingTime"
 
     // Input
 
@@ -190,6 +198,7 @@ struct Preference {
     case none = 0
     case fullscreen
     case pause
+    case hideOSC
   }
 
   enum AutoLoadAction: Int {
@@ -294,16 +303,20 @@ struct Preference {
     Key.pauseWhenOpen: false,
     Key.fullScreenWhenOpen: false,
     Key.showChapterPos: false,
+    Key.resumeLastPosition: true,
     Key.useMediaKeys: true,
     Key.openStartPanel: false,
+    Key.alwaysFloatOnTop: false,
 
     Key.usePhysicalResolution: true,
     Key.resizeOnlyWhenManuallyOpenFile: true,
+    Key.showRemainingTime: false,
 
     Key.videoThreads: 0,
     Key.useHardwareDecoding: true,
     Key.audioThreads: 0,
     Key.audioLanguage: "",
+    Key.maxVolume: 130,
 
     Key.subAutoLoad: AutoLoadAction.fuzzy.rawValue,
     Key.ignoreAssStyles: false,
@@ -323,6 +336,8 @@ struct Preference {
     Key.subMarginY: 22,
     Key.subLang: "",
     Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
+    Key.displayInLetterBox: true,
+    Key.subScaleWithWindow: true,
 
     Key.enableCache: true,
     Key.defaultCacheSize: 75000,
@@ -345,8 +360,9 @@ struct Preference {
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
     Key.relativeSeekAmount: 2,
-    Key.singleClickAction: MouseClickAction.none.rawValue,
+    Key.singleClickAction: MouseClickAction.hideOSC.rawValue,
     Key.doubleClickAction: MouseClickAction.fullscreen.rawValue,
+    Key.rightClickAction: MouseClickAction.pause.rawValue,
 
     Key.screenshotFolder: "~/Pictures/ScreenShots",
     Key.screenshotIncludeSubtitle: true,

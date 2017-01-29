@@ -36,7 +36,7 @@
 "osd.sub_delay.nodelay" = "字幕延遲：無";
 "osd.sub_delay.later" = "字幕延遲：延後 %.2f 秒";
 "osd.sub_delay.earlier" = "字幕延遲：提前 %.2f 秒";
-"osd.subtitle_pos" = "字幕位置：%f";
+"osd.subtitle_pos" = "字幕位置：%.1f";
 "osd.mute" = "靜音";
 "osd.unmute" = "取消靜音";
 "osd.screenshot" = "熒幕已截取";

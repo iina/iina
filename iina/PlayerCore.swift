@@ -445,6 +445,10 @@ class PlayerCore: NSObject {
     }
   }
 
+  func setSubPos(_ pos: Int) {
+    mpvController.setInt(MPVOption.Subtitles.subPos, pos)
+  }
+
   func setSubTextColor(_ colorString: String) {
     mpvController.setString("options/" + MPVOption.Subtitles.subColor, colorString)
   }

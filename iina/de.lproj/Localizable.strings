@@ -36,7 +36,7 @@
 "osd.sub_delay.nodelay" = "Keine Untertitel-Verzögerung";
 "osd.sub_delay.later" = "Untertitel-Verzögerung: %.2fs später";
 "osd.sub_delay.earlier" = "Untertitel-Verzögerung: %.2fs früher";
-"osd.subtitle_pos" = "Untertitel-Position: %f";
+"osd.subtitle_pos" = "Untertitel-Position: %.1f";
 "osd.mute" = "Stumm";
 "osd.unmute" = "Stumm aus";
 "osd.screenshot" = "Bild aufgenommen";

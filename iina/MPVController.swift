@@ -588,6 +588,11 @@ class MPVController: NSObject {
         if playerCore.info.isPaused != data {
           playerCore.sendOSD(data ? .pause : .resume)
           playerCore.info.isPaused = data
+          if data {
+            SleepPreventer.allowSleep()
+          } else {
+            SleepPreventer.preventSleep()
+          }
         }
       }
       playerCore.syncUI(.playButton)

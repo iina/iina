@@ -1,6 +1,6 @@
 
 /* Class = "NSMenuItem"; title = "Open URL..."; ObjectID = "0m7-3r-twH"; */
-"0m7-3r-twH.title" = "打开 URL...";
+"0m7-3r-twH.title" = "打开位置…";
 
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "字幕";
@@ -15,7 +15,7 @@
 "2Ya-3g-1hy.title" = "回到开头";
 
 /* Class = "NSMenuItem"; title = "Jump to..."; ObjectID = "2id-wn-xsC"; */
-"2id-wn-xsC.title" = "跳转至...";
+"2id-wn-xsC.title" = "跳转至…";
 
 /* Class = "NSMenuItem"; title = "Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
 "2t8-Ot-yoO.title" = "快速设置";
@@ -42,7 +42,7 @@
 "6yE-op-DTS.title" = "前进5秒";
 
 /* Class = "NSMenuItem"; title = "Audio Filters..."; ObjectID = "8Zh-hU-Cc4"; */
-"8Zh-hU-Cc4.title" = "音频滤镜...";
+"8Zh-hU-Cc4.title" = "音频滤镜…";
 
 /* Class = "NSMenuItem"; title = "Open Quick Settings"; ObjectID = "8y7-Cy-lKT"; */
 "8y7-Cy-lKT.title" = "快速设置";
@@ -54,7 +54,7 @@
 "AYu-sK-qS6.title" = "主菜单";
 
 /* Class = "NSMenuItem"; title = "Screenshot"; ObjectID = "AoP-K6-Kb5"; */
-"AoP-K6-Kb5.title" = "截屏";
+"AoP-K6-Kb5.title" = "抓图";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
 "BOF-NM-1cW.title" = "偏好设置…";
@@ -66,7 +66,7 @@
 "BtY-iQ-6Pf.title" = "分享";
 
 /* Class = "NSMenuItem"; title = "Advanced Screenshot..."; ObjectID = "CKi-JE-yLT"; */
-"CKi-JE-yLT.title" = "高级截图...";
+"CKi-JE-yLT.title" = "高级抓图…";
 
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "音频轨道";
@@ -120,7 +120,7 @@
 "JJq-qH-toq.title" = "水平 (镜像)";
 
 /* Class = "NSMenuItem"; title = "Open..."; ObjectID = "Kby-lQ-HCW"; */
-"Kby-lQ-HCW.title" = "打开...";
+"Kby-lQ-HCW.title" = "打开…";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
 "Kd2-mp-pUS.title" = "显示所有";
@@ -204,7 +204,7 @@
 "Zhv-Bz-I5V.title" = "音量 - 1%";
 
 /* Class = "NSMenuItem"; title = "Custom Touch Bar..."; ObjectID = "ZnF-yX-7jP"; */
-"ZnF-yX-7jP.title" = "自定义 Touch Bar...";
+"ZnF-yX-7jP.title" = "自定义 Touch Bar…";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
 "aUF-d1-5bR.title" = "窗口";
@@ -261,7 +261,7 @@
 "jxT-CU-nIS.title" = "播放";
 
 /* Class = "NSMenuItem"; title = "Load External Subtitle..."; ObjectID = "k6x-hf-ATi"; */
-"k6x-hf-ATi.title" = "加载外置字幕...";
+"k6x-hf-ATi.title" = "加载外置字幕…";
 
 /* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
 "lDC-IC-peP.title" = "大一点";
@@ -270,7 +270,7 @@
 "lYN-0x-lzT.title" = "音频";
 
 /* Class = "NSMenuItem"; title = "Goto Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
-"lj0-Oo-7nB.title" = "前往截图文件夹";
+"lj0-Oo-7nB.title" = "前往抓图文件夹";
 
 /* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
 "mGw-jm-5x2.title" = "副字幕";
@@ -294,7 +294,7 @@
 "pdj-9C-Fn1.title" = "音量 - 5%";
 
 /* Class = "NSMenuItem"; title = "Font..."; ObjectID = "rme-fr-5rr"; */
-"rme-fr-5rr.title" = "字体...";
+"rme-fr-5rr.title" = "字体…";
 
 /* Class = "NSMenu"; title = "Audio"; ObjectID = "sW8-ri-eA5"; */
 "sW8-ri-eA5.title" = "音频";
@@ -303,7 +303,7 @@
 "snW-S8-Cw5.title" = "一半大小";
 
 /* Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "tXI-mr-wws"; */
-"tXI-mr-wws.title" = "打开最近文件";
+"tXI-mr-wws.title" = "打开最近文档";
 
 /* Class = "NSMenuItem"; title = "Subtitle"; ObjectID = "uGZ-lo-pJJ"; */
 "uGZ-lo-pJJ.title" = "字幕";
@@ -329,6 +329,6 @@
 /* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
 "yHI-7D-OaI.title" = "反交错";
 
-"Mg3-WB-gjZ.title" = "查找在线字幕...";
+"Mg3-WB-gjZ.title" = "查找在线字幕…";
 
-"gMo-qL-m08.title" = "检查更新...";
+"gMo-qL-m08.title" = "检查更新…";

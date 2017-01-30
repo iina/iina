@@ -53,6 +53,12 @@
 "osd.video_eq.hue" = "Farbton: %i";
 "osd.video_eq.saturation" = "Sättigung: %i";
 "osd.video_eq.brightness" = "Helligkeit: %i";
+"osd.find_online_sub" = "Online nach Untertiteln suchen...";
+"osd.sub_not_found" = "Keine Untertitel gefunden";
+"osd.sub_found" = "%d Untertitel gefunden. Laden...";
+"osd.sub_downloaded" = "Untertitel geladen";
+"osd.sub_saved" = "Untertitel gespeichert";
+"osd.network_error" = "Netzwerkfehler";
 
 "update.title_update_found" = "Neues Update verfügbar";
 "update.title_no_update" = "Kein Update verfügbar";

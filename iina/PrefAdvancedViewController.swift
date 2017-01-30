@@ -51,7 +51,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
     updateControlStatus(self)
 
     guard let op = UserDefaults.standard.value(forKey: Preference.Key.userOptions) as? [[String]] else {
-      Utility.showAlert(message: "Cannot read user defined options.")
+      Utility.showAlertByKey("error_reading_user_options")
       return
     }
     options = op

@@ -30,6 +30,34 @@ class Utility {
     alert.runModal()
   }
 
+  static func showAlertByKey(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, alertStyle: NSAlertStyle = .critical) {
+    let alert = NSAlert()
+    switch alertStyle {
+    case .critical:
+      alert.messageText = "Error"
+    case .informational:
+      alert.messageText = "Information"
+    case .warning:
+      alert.messageText = "Warning"
+    }
+    
+    var format: String
+    if let stringComment = comment {
+      format = NSLocalizedString("alert." + key, comment: stringComment)
+    } else {
+      format = NSLocalizedString("alert." + key, comment: key)
+    }
+    
+    if let stringArguments = arguments {
+      alert.informativeText = String(format: format, arguments: stringArguments)
+    } else {
+      alert.informativeText = String(format: format)
+    }
+    
+    alert.alertStyle = alertStyle
+    alert.runModal()
+  }
+
   static func log(_ message: String) {
     NSLog("%@", message)
   }
@@ -37,7 +65,7 @@ class Utility {
   static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
     if !expr {
       NSLog("%@", errorMessage)
-      showAlert(message: "Fatal error: \(errorMessage) \nThe application will exit now.")
+      showAlertByKey("fatal_error", arguments: [errorMessage])
       block()
       exit(1)
     }
@@ -46,7 +74,7 @@ class Utility {
   static func fatal(_ message: String, _ block: () -> Void = {}) {
     NSLog("%@", message)
     NSLog(Thread.callStackSymbols.joined(separator: "\n"))
-    showAlert(message: "Fatal error: \(message) \nThe application will exit now.")
+    showAlertByKey("fatal_error", arguments: [message])
     block()
     exit(1)
   }
@@ -130,7 +158,7 @@ class Utility {
       return uv
     } else {
       if showAlert {
-        Utility.showAlert(message: "Cannot find config file location!")
+        Utility.showAlertByKey("keybinding_cannot_find_location")
       }
       return nil
     }

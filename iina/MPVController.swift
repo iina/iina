@@ -141,6 +141,12 @@ class MPVController: NSObject {
     setUserOption(PK.audioLanguage, type: .string, forName: MPVOption.TrackSelection.alang)
     setUserOption(PK.maxVolume, type: .int, forName: MPVOption.Audio.volumeMax)
 
+    var spdif: [String] = []
+    if ud.bool(forKey: PK.spdifAC3) { spdif.append("ac3") }
+    if ud.bool(forKey: PK.spdifDTS){ spdif.append("dts") }
+    if ud.bool(forKey: PK.spdifDTSHD) { spdif.append("dts-hd") }
+    setString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","))
+
     // - Sub
 
     setUserOption(PK.subAutoLoad, type: .other, forName: MPVOption.Subtitles.subAuto) { key in

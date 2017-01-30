@@ -90,6 +90,10 @@ struct Preference {
     static let audioLanguage = "audioLanguage"
     static let maxVolume = "maxVolume"
 
+    static let spdifAC3 = "spdifAC3"
+    static let spdifDTS = "spdifDTS"
+    static let spdifDTSHD = "spdifDTSHD"
+
     // Subtitle
 
     static let subAutoLoad = "subAutoLoad"
@@ -317,6 +321,9 @@ struct Preference {
     Key.audioThreads: 0,
     Key.audioLanguage: "",
     Key.maxVolume: 130,
+    Key.spdifAC3: false,
+    Key.spdifDTS: false,
+    Key.spdifDTSHD: false,
 
     Key.subAutoLoad: AutoLoadAction.fuzzy.rawValue,
     Key.ignoreAssStyles: false,

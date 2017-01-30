@@ -2,10 +2,13 @@
 "0m7-3r-twH.title" = "URL 열기…";
 
 /* Class = "NSMenuItem"; title = "Normal Size"; ObjectID = "1UK-8n-QPP"; */
-"1UK-8n-QPP.title" = "보통 크기";
+"1UK-8n-QPP.title" = "원본 크기";
 
 /* Class = "NSMenuItem"; title = "IINA"; ObjectID = "1Xt-HY-uBw"; */
 "1Xt-HY-uBw.title" = "IINA";
+
+/* Class = "NSMenu"; title = "Audio Device"; ObjectID = "2Dp-Ol-Zcf"; */
+"2Dp-Ol-Zcf.title" = "오디오 장치";
 
 /* Class = "NSMenuItem"; title = "Jump to beginning"; ObjectID = "2Ya-3g-1hy"; */
 "2Ya-3g-1hy.title" = "처음으로 가기";
@@ -42,6 +45,9 @@
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
 "9pa-9C-ueQ.title" = "<없음>";
+
+/* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
+"9zk-co-roT.title" = "내려받은 자막 저장";
 
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "자막";
@@ -117,6 +123,9 @@
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "IAo-SY-fd9"; */
 "IAo-SY-fd9.title" = "열기…";
+
+/* Class = "NSMenuItem"; title = "Audio Device"; ObjectID = "IXq-yq-uDF"; */
+"IXq-yq-uDF.title" = "오디오 장치";
 
 /* Class = "NSMenuItem"; title = "Horizontal (Mirror)"; ObjectID = "JJq-qH-toq"; */
 "JJq-qH-toq.title" = "좌우 반전";
@@ -230,7 +239,7 @@
 "bwz-r0-peR.title" = "파일 정보";
 
 /* Class = "NSMenuItem"; title = "Normal Size Retina"; ObjectID = "c1x-bx-69F"; */
-"c1x-bx-69F.title" = "레티나 일반 크기";
+"c1x-bx-69F.title" = "레티나 원본 크기";
 
 /* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
 "c6Y-0e-vgf.title" = "음량 + 1%";

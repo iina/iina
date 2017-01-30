@@ -4,6 +4,9 @@
 /* Class = "NSButtonCell"; title = "Show chapter position in progress bar"; ObjectID = "BVV-Z3-LHR"; */
 "BVV-Z3-LHR.title" = "재생 상태 막대에 챕터 위치 표시";
 
+/* Class = "NSButtonCell"; title = "Show remaining time"; ObjectID = "EAa-gN-8dL"; */
+"EAa-gN-8dL.title" = "남은 재생시간 표시";
+
 /* Class = "NSTextFieldCell"; title = "On Screen Display:"; ObjectID = "F2e-CS-KXl"; */
 "F2e-CS-KXl.title" = "정보 표시 화면 (OSD):";
 

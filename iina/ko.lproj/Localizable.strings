@@ -40,7 +40,7 @@
 /* AB-Loop: Cleared */
 "osd.abloop.clear" = "구간 반복: 해제됨";
 
-/* Added %i files to playlist */
+/* Added %i Files to Playlist */
 "osd.add_to_playlist" = "%i 파일이 재생목록에 추가되었습니다";
 
 /* Aspect Ratio: %@ */
@@ -58,7 +58,7 @@
 /* Chapter: %@ */
 "osd.chapter" = "챕터: %@";
 
-/* Cleared playlist */
+/* Cleared Playlist */
 "osd.clear_playlist" = "재생목록 비움";
 
 /* Crop: %@ */
@@ -70,22 +70,22 @@
 /* Mute */
 "osd.mute" = "소리 끔";
 
-/* Paused */
+/* Pause */
 "osd.pause" = "일시 정지됨";
 
-/* Resumed */
+/* Resume */
 "osd.resume" = "재생 복원됨";
 
 /* Rotate: %i° */
 "osd.rotate" = "회전: %i°";
 
-/* Screenshot captured */
+/* Screenshot Captured */
 "osd.screenshot" = "스크린샷 저장됨";
 
 /* Speed: %.2fx */
 "osd.speed" = "재생 속도: %.2fx";
 
-/* Stopped */
+/* Stop */
 "osd.stop" = "정지됨";
 
 /* Subtitle Delay: %fs Earlier */

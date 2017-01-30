@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
     </dependencies>
@@ -259,6 +259,11 @@
                             <menuItem title="Reset Audio Delay" id="H3d-jR-YCr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="xKj-xX-Nny"/>
+                            <menuItem title="Audio Device" id="IXq-yq-uDF">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Audio Device" id="2Dp-Ol-Zcf"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="MVW-Uu-gB1"/>
                             <menuItem title="Audio Filters..." id="8Zh-hU-Cc4">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -304,6 +309,9 @@
                             <menuItem isSeparatorItem="YES" id="yh3-Pu-MGm"/>
                             <menuItem title="Find Online Subtitles..." keyEquivalent="D" id="Mg3-WB-gjZ">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Save Downloaded Subtitle" id="9zk-co-roT">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="58S-lP-UEY"/>
                             <menuItem title="Encoding" id="Pci-OQ-Vni">
@@ -411,6 +419,7 @@
                 <outlet property="alwaysOnTop" destination="wex-rX-PcY" id="3UN-lm-CVf"/>
                 <outlet property="aspectMenu" destination="KIb-Ix-D8J" id="hQ4-Bb-Rdu"/>
                 <outlet property="audioDelayIndicator" destination="foC-r3-8mp" id="FhX-cJ-FaB"/>
+                <outlet property="audioDeviceMenu" destination="2Dp-Ol-Zcf" id="TOK-Ua-AHa"/>
                 <outlet property="audioFilters" destination="8Zh-hU-Cc4" id="diF-FF-aHn"/>
                 <outlet property="audioMenu" destination="sW8-ri-eA5" id="e3E-94-i4D"/>
                 <outlet property="audioTrackMenu" destination="DRb-Y8-xir" id="Xxw-IB-hOR"/>
@@ -464,6 +473,7 @@
                 <outlet property="resetSubDelay" destination="SLr-6g-Mgh" id="8oW-hm-TNq"/>
                 <outlet property="resetTextSize" destination="P1a-ot-P31" id="fJk-GP-GBM"/>
                 <outlet property="rotationMenu" destination="5xN-ZB-VLI" id="YGx-Ae-oMp"/>
+                <outlet property="saveDownloadedSub" destination="9zk-co-roT" id="lGr-mb-oHw"/>
                 <outlet property="screenShot" destination="AoP-K6-Kb5" id="vTV-d5-sag"/>
                 <outlet property="secondSubTrackMenu" destination="UwY-P2-Xdb" id="D3B-WW-bAk"/>
                 <outlet property="smallerSize" destination="ZOF-MG-6II" id="0jA-m5-Qy7"/>

@@ -15,15 +15,15 @@
 "playlist.chapter_cap" = "CHAPTERS";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering... %@%%";
+"main.buffering_indicator" = "Buffering... %d%%";
 
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "Default";
 "quicksetting.crop_item.None" = "None";
 
 // OSDMessage.swift
-"osd.pause" = "Paused";
-"osd.resume" = "Resumed";
+"osd.pause" = "Pause";
+"osd.resume" = "Resume";
 "osd.volume" = "Volume: %i";
 "osd.speed" = "Speed: %.2fx";
 "osd.aspect" = "Aspect Ratio: %@";
@@ -36,23 +36,29 @@
 "osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
 "osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
 "osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
-"osd.subtitle_pos" = "Subtitle Position: %f";
+"osd.subtitle_pos" = "Subtitle Position: %.1f";
 "osd.mute" = "Mute";
 "osd.unmute" = "Unmute";
-"osd.screenshot" = "Screenshot captured";
+"osd.screenshot" = "Screenshot Captured";
 "osd.abloop.a" = "AB-Loop: A";
 "osd.abloop.b" = "AB-Loop: B";
 "osd.abloop.clear" = "AB-Loop: Cleared";
-"osd.stop" = "Stopped";
+"osd.stop" = "Stop";
 "osd.chapter" = "Chapter: %@";
 "osd.subtitle_scale" = "Subtitle Scale: %.2fx";
-"osd.add_to_playlist" = "Added %i files to playlist";
-"osd.clear_playlist" = "Cleared playlist";
+"osd.add_to_playlist" = "Added %i Files to Playlist";
+"osd.clear_playlist" = "Cleared Playlist";
 "osd.video_eq.contrast" = "Contrast: %i";
 "osd.video_eq.gamma" = "Gamma: %i";
 "osd.video_eq.hue" = "Hue: %i";
 "osd.video_eq.saturation" = "Saturation: %i";
 "osd.video_eq.brightness" = "Brightness: %i";
+"osd.find_online_sub" = "Finding online subtitles...";
+"osd.sub_not_found" = "No subtitle found";
+"osd.sub_found" = "%d subtitle(s) found. Downloading...";
+"osd.sub_downloaded" = "Subtitle downloaded";
+"osd.sub_saved" = "Subtitle saved";
+"osd.network_error" = "Network error";
 
 "update.title_update_found" = "Update Found";
 "update.title_no_update" = "No Update";

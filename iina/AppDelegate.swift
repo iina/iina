@@ -94,6 +94,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return .terminateNow
   }
 
+  func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows
+    flag: Bool) -> Bool {
+    if !flag && UserDefaults.standard.bool(forKey: Preference.Key.openStartPanel) {
+      self.openFile(sender)
+    }
+    return true
+  }
+
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
     if !isReady {
       UserDefaults.standard.register(defaults: Preference.defaultPreference)
@@ -147,6 +155,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let absoluteScreenshotPath = NSString(string: screenshotPath).expandingTildeInPath
     let url = URL(fileURLWithPath: absoluteScreenshotPath, isDirectory: true)
       NSWorkspace.shared().open(url)
+  }
+
+  @IBAction func menuSelectAudioDevice(_ sender: NSMenuItem) {
+    if let name = sender.representedObject as? String {
+      PlayerCore.shared.setAudioDevice(name)
+    }
   }
 
   @IBAction func showPreferences(_ sender: AnyObject) {

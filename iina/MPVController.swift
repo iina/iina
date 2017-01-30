@@ -139,6 +139,13 @@ class MPVController: NSObject {
     setUserOption(PK.useHardwareDecoding, type: .bool, forName: MPVOption.Video.hwdec)
 
     setUserOption(PK.audioLanguage, type: .string, forName: MPVOption.TrackSelection.alang)
+    setUserOption(PK.maxVolume, type: .int, forName: MPVOption.Audio.volumeMax)
+
+    var spdif: [String] = []
+    if ud.bool(forKey: PK.spdifAC3) { spdif.append("ac3") }
+    if ud.bool(forKey: PK.spdifDTS){ spdif.append("dts") }
+    if ud.bool(forKey: PK.spdifDTSHD) { spdif.append("dts-hd") }
+    setString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","))
 
     // - Sub
 
@@ -181,6 +188,11 @@ class MPVController: NSObject {
     setUserOption(PK.subMarginY, type: .int, forName: MPVOption.Subtitles.subMarginY)
 
     setUserOption(PK.subLang, type: .string, forName: MPVOption.TrackSelection.slang)
+
+    setUserOption(PK.displayInLetterBox, type: .bool, forName: MPVOption.Subtitles.subUseMargins)
+    setUserOption(PK.displayInLetterBox, type: .bool, forName: MPVOption.Subtitles.subAssForceMargins)
+
+    setUserOption(PK.subScaleWithWindow, type: .bool, forName: MPVOption.Subtitles.subScaleByWindow)
 
     // - Network / cache settings
 
@@ -381,6 +393,14 @@ class MPVController: NSObject {
     }
   }
 
+  func getNode(_ name: String) -> Any? {
+    var node = mpv_node()
+    mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node)
+    let parsed = try? MPVNode.parse(node)
+    mpv_free_node_contents(&node)
+    return parsed!
+  }
+
   // MARK: - Events
 
   // Read event and handle it async
@@ -574,6 +594,11 @@ class MPVController: NSObject {
         if playerCore.info.isPaused != data {
           playerCore.sendOSD(data ? .pause : .resume)
           playerCore.info.isPaused = data
+          if data {
+            SleepPreventer.allowSleep()
+          } else {
+            SleepPreventer.preventSleep()
+          }
         }
       }
       playerCore.syncUI(.playButton)
@@ -716,7 +741,7 @@ class MPVController: NSObject {
     }
   }
 
-  private var optionObservers: [String: OptionObserverInfo] = [:]
+  private var optionObservers: [String: [OptionObserverInfo]] = [:]
 
   private func setUserOption(_ key: String, type: UserOptionType, forName name: String, sync: Bool = true, transformer: OptionObserverInfo.Transformer? = nil) {
     var code: Int32 = 0
@@ -767,7 +792,10 @@ class MPVController: NSObject {
 
     if sync {
       ud.addObserver(self, forKeyPath: key, options: [.new, .old], context: nil)
-      optionObservers[key] = OptionObserverInfo(key, name, type, transformer)
+      if optionObservers[key] == nil {
+        optionObservers[key] = []
+      }
+      optionObservers[key]!.append(OptionObserverInfo(key, name, type, transformer))
     }
   }
 
@@ -775,38 +803,40 @@ class MPVController: NSObject {
     guard !(change?[NSKeyValueChangeKey.oldKey] is NSNull) else { return }
 
     guard let keyPath = keyPath else { return }
-    guard let info = optionObservers[keyPath] else { return }
+    guard let infos = optionObservers[keyPath] else { return }
 
-    switch info.valueType {
-    case .int:
-      let value = ud.integer(forKey: info.prefKey)
-      setInt(info.optionName, value)
+    for info in infos {
+      switch info.valueType {
+      case .int:
+        let value = ud.integer(forKey: info.prefKey)
+        setInt(info.optionName, value)
 
-    case .float:
-      let value = ud.float(forKey: info.prefKey)
-      setDouble(info.optionName, Double(value))
+      case .float:
+        let value = ud.float(forKey: info.prefKey)
+        setDouble(info.optionName, Double(value))
 
-    case .bool:
-      let value = ud.bool(forKey: info.prefKey)
-      setFlag(info.optionName, value)
+      case .bool:
+        let value = ud.bool(forKey: info.prefKey)
+        setFlag(info.optionName, value)
 
-    case .string:
-      if let value = ud.string(forKey: info.prefKey) {
-        setString(info.optionName, value)
-      }
+      case .string:
+        if let value = ud.string(forKey: info.prefKey) {
+          setString(info.optionName, value)
+        }
 
-    case .color:
-      if let value = ud.mpvColor(forKey: info.prefKey) {
-        setString(info.optionName, value)
-      }
+      case .color:
+        if let value = ud.mpvColor(forKey: info.prefKey) {
+          setString(info.optionName, value)
+        }
 
-    case .other:
-      guard let tr = info.transformer else {
-        Utility.log("setUserOption: no transformer!")
-        return
-      }
-      if let value = tr(info.prefKey) {
-        setString(info.optionName, value)
+      case .other:
+        guard let tr = info.transformer else {
+          Utility.log("setUserOption: no transformer!")
+          return
+        }
+        if let value = tr(info.prefKey) {
+          setString(info.optionName, value)
+        }
       }
     }
   }

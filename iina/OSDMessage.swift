@@ -136,19 +136,21 @@ enum OSDMessage {
       return String(format: NSLocalizedString("osd.video_eq.brightness", comment: "Brightness: %i"), value)
 
     case .startFindingSub:
-      return "Find online subtitles..."
+      return NSLocalizedString("osd.find_online_sub", comment: "Finding online subtitles...")
 
     case .foundSub(let count):
-      return count == 0 ? "No subtitle found." : "\(count) subtitle(s) found. Downloading..."
+      return count == 0 ?
+        NSLocalizedString("osd.sub_not_found", comment: "No subtitle found.") :
+        String(format: NSLocalizedString("osd.sub_found", comment: "%d subtitle(s) found. Downloading..."), count)
 
     case .downloadedSub:
-      return "Subtitle downloaded"
+      return NSLocalizedString("osd.sub_downloaded", comment: "Subtitle downloaded")
 
     case .savedSub:
-      return "Subtitle saved"
+      return NSLocalizedString("osd.sub_saved", comment: "Subtitle saved")
 
     case .networkError:
-      return "Network error"
+      return NSLocalizedString("osd.network_error", comment: "Network error")
 
     }
   }

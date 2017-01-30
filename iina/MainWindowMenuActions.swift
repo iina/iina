@@ -292,9 +292,35 @@ extension MainWindowController {
           Utility.log("Saved subtitle to \(url.path)")
           self.playerCore.loadExternalSubFile(url)
           self.playerCore.sendOSD(.downloadedSub)
+          self.playerCore.info.haveDownloadedSub = true
         }
       }
     }
+  }
+
+  @IBAction func saveDownloadedSub(_ sender: NSMenuItem) {
+    let selected = playerCore.info.subTracks.filter { $0.isSelected }
+    guard let currURL = playerCore.info.currentURL else { return }
+    guard selected.count > 0 else {
+      Utility.showAlert(message: "Please select a downloaded subtitle first.")
+      return
+    }
+    let sub = selected[0]
+    // make sure it's a downloaded sub
+    guard let path = sub.externalFilename, path.contains("/var/") else {
+      Utility.showAlert(message: "Please select a downloaded subtitle first.")
+      return
+    }
+    let subURL = URL(fileURLWithPath: path)
+    let subFileName = subURL.lastPathComponent
+    let destURL = currURL.deletingLastPathComponent().appendingPathComponent(subFileName, isDirectory: false)
+    do {
+      try FileManager.default.copyItem(at: subURL, to: destURL)
+      displayOSD(.savedSub)
+    } catch let error as NSError {
+      Utility.showAlert(message: "Error occured when copying file: \(error.localizedDescription)")
+    }
+
   }
 
   @IBAction func menuShowInspector(_ sender: AnyObject) {

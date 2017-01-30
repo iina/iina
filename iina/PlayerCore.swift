@@ -507,6 +507,7 @@ class PlayerCore: NSObject {
     invalidateTimer()
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
+    info.haveDownloadedSub = false
     DispatchQueue.main.sync {
       self.getTrackInfo()
       self.getSelectedTracks()

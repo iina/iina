@@ -40,6 +40,7 @@ enum OSDMessage {
   case startFindingSub
   case foundSub(Int)
   case downloadedSub
+  case savedSub
   case networkError
 
 
@@ -142,6 +143,9 @@ enum OSDMessage {
 
     case .downloadedSub:
       return "Subtitle downloaded"
+
+    case .savedSub:
+      return "Subtitle saved"
 
     case .networkError:
       return "Network error"

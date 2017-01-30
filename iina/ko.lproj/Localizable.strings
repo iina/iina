@@ -67,8 +67,14 @@
 /* Deinterlace: %@ */
 "osd.deinterlace" = "디인터레이스: %@";
 
+/* Finding online subtitles... */
+"osd.find_online_sub" = "인터넷에서 자막을 찾는 중…";
+
 /* Mute */
 "osd.mute" = "소리 끔";
+
+/* Network error */
+"osd.network_error" = "네트워크 오류";
 
 /* Pause */
 "osd.pause" = "일시 정지됨";
@@ -96,6 +102,18 @@
 
 /* Subtitle Delay: No Delay */
 "osd.sub_delay.nodelay" = "자막 지연: 없음";
+
+/* Subtitle downloaded */
+"osd.sub_downloaded" = "자막 다운로드됨";
+
+/* %d subtitle(s) found. Downloading... */
+"osd.sub_found" = "%d 자막을 찾았습니다. 내려받는 중…";
+
+/* No subtitle found. */
+"osd.sub_not_found" = "자막을 찾지 못했습니다";
+
+/* Subtitle saved */
+"osd.sub_saved" = "자막 저장됨";
 
 /* Subtitle Position: %f */
 "osd.subtitle_pos" = "자막 위치: %.1f";

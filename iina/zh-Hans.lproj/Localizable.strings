@@ -15,7 +15,7 @@
 "playlist.chapter_cap" = "章节";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "缓冲中... %@%%";
+"main.buffering_indicator" = "缓冲中... %d%%";
 
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "默认";
@@ -36,7 +36,7 @@
 "osd.sub_delay.nodelay" = "字幕延迟：无延迟";
 "osd.sub_delay.later" = "字幕延迟：延迟 %.2f 秒";
 "osd.sub_delay.earlier" = "字幕延迟：提前 %.2f 秒";
-"osd.subtitle_pos" = "字幕位置：%f";
+"osd.subtitle_pos" = "字幕位置：%.1f";
 "osd.mute" = "静音";
 "osd.unmute" = "取消静音";
 "osd.screenshot" = "快照已截取";
@@ -53,6 +53,12 @@
 "osd.video_eq.hue" = "色调：%i";
 "osd.video_eq.saturation" = "饱和度：%i";
 "osd.video_eq.brightness" = "亮度：%i";
+"osd.find_online_sub" = "查找在线字幕中...";
+"osd.sub_not_found" = "未找到字幕";
+"osd.sub_found" = "已找到 %d 个字幕。下载中...";
+"osd.sub_downloaded" = "字幕已下载";
+"osd.sub_saved" = "字幕已保存";
+"osd.network_error" = "网络错误";
 
 "update.title_update_found" = "检测到新版本";
 "update.title_no_update" = "没有新版本";

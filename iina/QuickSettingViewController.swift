@@ -83,6 +83,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBOutlet weak var subScaleSlider: NSSlider!
   @IBOutlet weak var subScaleResetBtn: NSButton!
+  @IBOutlet weak var subPosSlider: NSSlider!
 
   @IBOutlet weak var subTextColorWell: NSColorWell!
   @IBOutlet weak var subTextSizePopUp: NSPopUpButton!
@@ -156,6 +157,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let displaySubScale = Utility.toDisplaySubScale(fromRealSubScale: currSubScale)
     subScaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
     customSubDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Subtitles.subDelay)
+
+    let currSubPos = playerCore.mpvController.getInt(MPVOption.Subtitles.subPos)
+    subPosSlider.intValue = Int32(currSubPos)
 
     let fontSize = playerCore.mpvController.getInt(MPVOption.Subtitles.subFontSize)
     subTextSizePopUp.selectItem(withTitle: fontSize.toStr())
@@ -521,6 +525,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func subScaleReset(_ sender: AnyObject) {
     playerCore.setSubScale(1)
     subScaleSlider.doubleValue = 0
+  }
+
+  @IBAction func subPosSliderAction(_ sender: NSSlider) {
+    playerCore.setSubPos(Int(sender.intValue))
   }
 
   @IBAction func subScaleSliderAction(_ sender: NSSlider) {

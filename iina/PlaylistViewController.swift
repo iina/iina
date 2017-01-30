@@ -37,6 +37,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
   @IBOutlet weak var playlistBtn: NSButton!
   @IBOutlet weak var chaptersBtn: NSButton!
   @IBOutlet weak var tabView: NSTabView!
+  @IBOutlet weak var deleteBtn: NSButton!
 
   lazy var playlistDelegate: PlaylistTableDelegate = {
     return PlaylistTableDelegate(self)
@@ -53,6 +54,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
     }
     playlistTableView.delegate = playlistDelegate
     chapterTableView.delegate = chapterDelegate
+
+    deleteBtn.image?.isTemplate = true
 
     // handle pending switch tab request
     if pendingSwitchRequest != nil {

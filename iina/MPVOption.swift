@@ -59,6 +59,8 @@ struct MPVOption {
     static let index = "index"
     /** --load-unsafe-playlists */
     static let loadUnsafePlaylists = "load-unsafe-playlists"
+    /** --access-references=<yes|no> */
+    static let accessReferences = "access-references"
     /** --loop-file=<N|inf|no> */
     static let loopFile = "loop-file"
     /** --ab-loop-a=<time> */
@@ -143,7 +145,7 @@ struct MPVOption {
   struct Video {
     /** --vo=<driver> */
     static let vo = "vo"
-    /** --vd=<[+|-]family1:(*|decoder1) */
+    /** --vd=<...> */
     static let vd = "vd"
     /** --vf=<filter1[=parameter1:parameter2:...] */
     static let vf = "vf"
@@ -488,6 +490,10 @@ struct MPVOption {
     static let keepaspectWindow = "keepaspect-window"
     /** --monitoraspect=<ratio> */
     static let monitoraspect = "monitoraspect"
+    /** --hidpi-window-scale */
+    static let hidpiWindowScale = "hidpi-window-scale"
+    /** --no-hidpi-window-scale */
+    static let noHidpiWindowScale = "no-hidpi-window-scale"
     /** --monitorpixelaspect=<ratio> */
     static let monitorpixelaspect = "monitorpixelaspect"
     /** --stop-screensaver */
@@ -885,26 +891,110 @@ struct MPVOption {
   }
 
   struct OpenGLRendererOptions {
-    /** --opengl-dumb-mode=<yes|no> */
-    static let openglDumbMode = "opengl-dumb-mode"
+    /** --cscale=<filter> */
+    static let cscale = "cscale"
+    /** --dscale=<filter> */
+    static let dscale = "dscale"
+    /** --tscale=<filter> */
+    static let tscale = "tscale"
     /** --scale-param1=<value> */
     static let scaleParam1 = "scale-param1"
     /** --scale-param2=<value> */
     static let scaleParam2 = "scale-param2"
+    /** --cscale-param1=<value> */
+    static let cscaleParam1 = "cscale-param1"
+    /** --cscale-param2=<value> */
+    static let cscaleParam2 = "cscale-param2"
+    /** --dscale-param1=<value> */
+    static let dscaleParam1 = "dscale-param1"
+    /** --dscale-param2=<value> */
+    static let dscaleParam2 = "dscale-param2"
+    /** --tscale-param1=<value> */
+    static let tscaleParam1 = "tscale-param1"
+    /** --tscale-param2=<value> */
+    static let tscaleParam2 = "tscale-param2"
     /** --scale-blur=<value> */
     static let scaleBlur = "scale-blur"
+    /** --scale-wblur=<value> */
+    static let scaleWblur = "scale-wblur"
+    /** --cscale-blur=<value> */
+    static let cscaleBlur = "cscale-blur"
+    /** --cscale-wblur=<value> */
+    static let cscaleWblur = "cscale-wblur"
+    /** --dscale-blur=<value> */
+    static let dscaleBlur = "dscale-blur"
+    /** --dscale-wblur=<value> */
+    static let dscaleWblur = "dscale-wblur"
+    /** --tscale-blur=<value> */
+    static let tscaleBlur = "tscale-blur"
+    /** --tscale-wblur=<value> */
+    static let tscaleWblur = "tscale-wblur"
+    /** --scale-clamp */
+    static let scaleClamp = "scale-clamp"
+    /** --cscale-clamp */
+    static let cscaleClamp = "cscale-clamp"
+    /** --dscale-clamp */
+    static let dscaleClamp = "dscale-clamp"
+    /** --tscale-clamp */
+    static let tscaleClamp = "tscale-clamp"
+    /** --scale-taper=<value> */
+    static let scaleTaper = "scale-taper"
+    /** --scale-wtaper=<value> */
+    static let scaleWtaper = "scale-wtaper"
+    /** --dscale-taper=<value> */
+    static let dscaleTaper = "dscale-taper"
+    /** --dscale-wtaper=<value> */
+    static let dscaleWtaper = "dscale-wtaper"
+    /** --cscale-taper=<value> */
+    static let cscaleTaper = "cscale-taper"
+    /** --cscale-wtaper=<value> */
+    static let cscaleWtaper = "cscale-wtaper"
+    /** --tscale-taper=<value> */
+    static let tscaleTaper = "tscale-taper"
+    /** --tscale-wtaper=<value> */
+    static let tscaleWtaper = "tscale-wtaper"
     /** --scale-radius=<value> */
     static let scaleRadius = "scale-radius"
+    /** --cscale-radius=<value> */
+    static let cscaleRadius = "cscale-radius"
+    /** --dscale-radius=<value> */
+    static let dscaleRadius = "dscale-radius"
+    /** --tscale-radius=<value> */
+    static let tscaleRadius = "tscale-radius"
     /** --scale-antiring=<value> */
     static let scaleAntiring = "scale-antiring"
+    /** --cscale-antiring=<value> */
+    static let cscaleAntiring = "cscale-antiring"
+    /** --dscale-antiring=<value> */
+    static let dscaleAntiring = "dscale-antiring"
+    /** --tscale-antiring=<value> */
+    static let tscaleAntiring = "tscale-antiring"
     /** --scale-window=<window> */
     static let scaleWindow = "scale-window"
+    /** --cscale-window=<window> */
+    static let cscaleWindow = "cscale-window"
+    /** --dscale-window=<window> */
+    static let dscaleWindow = "dscale-window"
+    /** --tscale-window=<window> */
+    static let tscaleWindow = "tscale-window"
     /** --scale-wparam=<window> */
     static let scaleWparam = "scale-wparam"
+    /** --cscale-wparam=<window> */
+    static let cscaleWparam = "cscale-wparam"
+    /** --tscale-wparam=<window> */
+    static let tscaleWparam = "tscale-wparam"
     /** --scaler-lut-size=<4..10> */
     static let scalerLutSize = "scaler-lut-size"
     /** --scaler-resizes-only */
     static let scalerResizesOnly = "scaler-resizes-only"
+    /** --linear-scaling */
+    static let linearScaling = "linear-scaling"
+    /** --correct-downscaling */
+    static let correctDownscaling = "correct-downscaling"
+    /** --interpolation */
+    static let interpolation = "interpolation"
+    /** --interpolation-threshold=<0..1 */
+    static let interpolationThreshold = "interpolation-threshold"
     /** --opengl-pbo */
     static let openglPbo = "opengl-pbo"
     /** --dither-depth=<N|no|auto> */
@@ -919,30 +1009,8 @@ struct MPVOption {
     static let temporalDitherPeriod = "temporal-dither-period"
     /** --opengl-debug */
     static let openglDebug = "opengl-debug"
-    /** --interpolation */
-    static let interpolation = "interpolation"
     /** --opengl-swapinterval=<n> */
     static let openglSwapinterval = "opengl-swapinterval"
-    /** --dscale=<filter> */
-    static let dscale = "dscale"
-    /** --cscale=<filter> */
-    static let cscale = "cscale"
-    /** --tscale=<filter> */
-    static let tscale = "tscale"
-    /** --tscale-clamp */
-    static let tscaleClamp = "tscale-clamp"
-    /** --interpolation-threshold=<0..1 */
-    static let interpolationThreshold = "interpolation-threshold"
-    /** --dscale-radius */
-    static let dscaleRadius = "dscale-radius"
-    /** --cscale-radius */
-    static let cscaleRadius = "cscale-radius"
-    /** --tscale-radius */
-    static let tscaleRadius = "tscale-radius"
-    /** --linear-scaling */
-    static let linearScaling = "linear-scaling"
-    /** --correct-downscaling */
-    static let correctDownscaling = "correct-downscaling"
     /** --opengl-shaders=<files> */
     static let openglShaders = "opengl-shaders"
     /** --deband */
@@ -1021,6 +1089,8 @@ struct MPVOption {
     static let openglTexPadY = "opengl-tex-pad-y"
     /** --opengl-early-flush=<yes|no|auto> */
     static let openglEarlyFlush = "opengl-early-flush"
+    /** --opengl-dumb-mode=<yes|no> */
+    static let openglDumbMode = "opengl-dumb-mode"
   }
 
   struct Miscellaneous {

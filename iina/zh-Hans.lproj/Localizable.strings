@@ -117,3 +117,17 @@
 
 "alert.cannot_prevent_sleep" = "无法保持常亮！";
 "alert.fatal_error" = "致命错误：%@ \n程序现在将退出。";
+
+// Panels
+"panel.ok" = "确定";
+"panel.cancel" = "取消";
+"panel.open_url" = "打开 URL";
+"panel.open_url.informative" = "请输入地址：";
+"panel.add_filter" = "添加滤镜";
+"panel.add_filter.informative" = "请输入MPV的vf或af格式滤镜命令:";
+"panel.jump_to" = "跳转至：";
+"panel.jump_to.informative" = "比如：20:35";
+"panel.new_input_config" = "新的快捷键配置";
+"panel.new_input_config.informative" = "请输入新配置文件名：";
+"panel.duplicated_input_config.informative" = "请输入复制的新配置文件名：";
+

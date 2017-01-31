@@ -133,13 +133,13 @@ class Utility {
   
   static func quickPromptPanel(messageKey: String, informativeKey: String = "", ok: (String) -> Void) -> Bool {
     let panel = NSAlert()
-    panel.messageText = NSLocalizedString("panel" + messageKey, comment: messageKey)
+    panel.messageText = NSLocalizedString("panel." + messageKey, comment: messageKey)
     
     var informativeKey = informativeKey
     if informativeKey.isEmpty {
-      informativeKey = "\(messageKey)_informative"
+      informativeKey = "\(messageKey).informative"
     }
-    panel.informativeText = NSLocalizedString("panel" + informativeKey, comment: informativeKey)
+    panel.informativeText = NSLocalizedString("panel." + informativeKey, comment: informativeKey)
     
     let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
     input.lineBreakMode = .byClipping

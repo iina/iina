@@ -122,11 +122,11 @@
 "panel.ok" = "OK";
 "panel.cancel" = "Cancel";
 "panel.open_url" = "Open URL";
-"panel.open_url_informative" = "Please enter the url:";
+"panel.open_url.informative" = "Please enter the url:";
 "panel.add_filter" = "Add filter";
-"panel.add_filter_informative" = "Please enter a filter string in format of MPV's vf or af command:";
+"panel.add_filter.informative" = "Please enter a filter string in format of MPV's vf or af command:";
 "panel.jump_to" = "Jump to:";
-"panel.jump_to_informative" = "Example: 20:35";
+"panel.jump_to.informative" = "Example: 20:35";
 "panel.new_input_config" = "New Input Configuration";
-"panel.new_input_config_informative" = "Please enter a name for the new configuration:";
-"panel.duplicated_input_config_informative" = "Please enter a name for the duplicated configuration:";
+"panel.new_input_config.informative" = "Please enter a name for the new configuration:";
+"panel.duplicated_input_config.informative" = "Please enter a name for the duplicated configuration:";

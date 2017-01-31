@@ -47,7 +47,7 @@ extension MainWindowController {
   }
 
   @IBAction func menuJumpTo(_ sender: NSMenuItem) {
-    let _ = Utility.quickPromptPanel(messageText: "Jump to:", informativeText: "Example: 20:35") { input in
+    let _ = Utility.quickPromptPanel(messageKey: "jump_to") { input in
       if let vt = VideoTime(input) {
         self.playerCore.seek(absoluteSecond: Double(vt.second))
       }

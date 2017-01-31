@@ -145,7 +145,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func openURL(_ sender: NSMenuItem) {
-    let _ = Utility.quickPromptPanel(messageText: "Open URL", informativeText: "Please enter the url:") { str in
+    let _ = Utility.quickPromptPanel(messageKey: "open_url") { str in
       playerCore.openURLString(str)
     }
   }

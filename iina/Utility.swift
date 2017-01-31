@@ -15,7 +15,7 @@ class Utility {
 
   // MARK: - Logs, alerts
 
-  @available(*, deprecated, message: "showAlert(message:_, alertStyle:_) is deprecated, use showAlert(_ key:_, comment: _, arguments: _, alertStyle:_) instead")
+  @available(*, deprecated, message: "showAlert(message:alertStyle:) is deprecated, use showAlert(_ key:comment:arguments:alertStyle:) instead")
   static func showAlert(message: String, alertStyle: NSAlertStyle = .critical) {
     let alert = NSAlert()
     switch alertStyle {
@@ -109,7 +109,7 @@ class Utility {
     }
   }
 
-  @available(*, deprecated, message: "quickPromptPanel(messageText:_, informativeText:_) is deprecated, use quickPromptPanel(messageKey:_, informativeKey:_) instead")
+  @available(*, deprecated, message: "quickPromptPanel(messageText:informativeText:ok) is deprecated, use quickPromptPanel(messageKey:informativeKey:ok) instead")
   static func quickPromptPanel(messageText: String, informativeText: String, ok: (String) -> Void) -> Bool {
     let panel = NSAlert()
     panel.messageText = messageText
@@ -131,10 +131,16 @@ class Utility {
     }
   }
   
-  static func quickPromptPanel(messageKey: String, informativeKey: String, ok: (String) -> Void) -> Bool {
+  static func quickPromptPanel(messageKey: String, informativeKey: String = "", ok: (String) -> Void) -> Bool {
     let panel = NSAlert()
-    panel.messageText = NSLocalizedString(messageKey, comment: messageKey)
-    panel.informativeText = NSLocalizedString(informativeKey, comment: informativeKey)
+    panel.messageText = NSLocalizedString("panel" + messageKey, comment: messageKey)
+    
+    var informativeKey = informativeKey
+    if informativeKey.isEmpty {
+      informativeKey = "\(messageKey)_informative"
+    }
+    panel.informativeText = NSLocalizedString("panel" + informativeKey, comment: informativeKey)
+    
     let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
     input.lineBreakMode = .byClipping
     input.usesSingleLineMode = true

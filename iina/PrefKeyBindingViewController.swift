@@ -150,7 +150,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   @IBAction func newConfFileAction(_ sender: AnyObject) {
     // prompt
     var newName = ""
-    let result = Utility.quickPromptPanel(messageText: "New Input Configuration", informativeText: "Please enter a name for the new configuration.") { newName = $0 }
+    let result = Utility.quickPromptPanel(messageKey: "new_input_config") { newName = $0 }
     if !result { return }
     guard !newName.isEmpty else {
       Utility.showAlert("keybinding_config_name_empty")
@@ -200,7 +200,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   @IBAction func duplicateConfFileAction(_ sender: AnyObject) {
     // prompt
     var newName = ""
-    let result = Utility.quickPromptPanel(messageText: "New Input Configuration", informativeText: "Please enter a name for the duplicated configuration.") { newName = $0 }
+    let result = Utility.quickPromptPanel(messageKey: "new_input_config", informativeKey: "duplicated_input_config_informative") { newName = $0 }
     if !result { return }
     if userConfigs[newName] != nil || PrefKeyBindingViewController.defaultConfigs[newName] != nil {
       Utility.showAlert("keybinding_config_name_exist")

@@ -23,7 +23,7 @@ extension Just.HTTPResult {
     do {
       try self.content?.write(to: url)
     } catch {
-      Utility.showAlertByKey("cannot_write_to_disk")
+      Utility.showAlert("cannot_write_to_disk")
     }
     return url
   }

@@ -63,7 +63,7 @@ class FilterWindowController: NSWindowController {
         filters.append(newFilter)
         setFilters()
       } else {
-        Utility.showAlertByKey("filter_wrong_format")
+        Utility.showAlert("filter_wrong_format")
       }
     }
   }
@@ -101,7 +101,7 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
       filters[row] = newFilter
       setFilters()
     } else {
-      Utility.showAlertByKey("filter_wrong_format")
+      Utility.showAlert("filter_wrong_format")
     }
   }
 

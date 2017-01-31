@@ -311,7 +311,7 @@ class PlayerCore: NSObject {
     mpvController.command(.audioAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
         DispatchQueue.main.async {
-          Utility.showAlertByKey("unsupported_external_audio")
+          Utility.showAlert("unsupported_external_audio")
         }
       }
     }
@@ -321,7 +321,7 @@ class PlayerCore: NSObject {
     mpvController.command(.subAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
         DispatchQueue.main.async {
-          Utility.showAlertByKey("unsupported_external_subtitle")
+          Utility.showAlert("unsupported_external_subtitle")
         }
       }
     }
@@ -638,7 +638,7 @@ class PlayerCore: NSObject {
 
   func errorOpeningFileAndCloseMainWindow() {
     DispatchQueue.main.async {
-      Utility.showAlertByKey("cannot_open")
+      Utility.showAlert("cannot_open")
       self.mainWindow.close()
     }
   }

@@ -302,13 +302,13 @@ extension MainWindowController {
     let selected = playerCore.info.subTracks.filter { $0.isSelected }
     guard let currURL = playerCore.info.currentURL else { return }
     guard selected.count > 0 else {
-      Utility.showAlertByKey("no_downloaded_subtitle")
+      Utility.showAlert("no_downloaded_subtitle")
       return
     }
     let sub = selected[0]
     // make sure it's a downloaded sub
     guard let path = sub.externalFilename, path.contains("/var/") else {
-       Utility.showAlertByKey("no_downloaded_subtitle")
+       Utility.showAlert("no_downloaded_subtitle")
       return
     }
     let subURL = URL(fileURLWithPath: path)
@@ -318,7 +318,7 @@ extension MainWindowController {
       try FileManager.default.copyItem(at: subURL, to: destURL)
       displayOSD(.savedSub)
     } catch let error as NSError {
-      Utility.showAlertByKey("error_when_coppy", arguments: [error.localizedDescription])
+      Utility.showAlert("error_when_coppy", arguments: [error.localizedDescription])
     }
 
   }

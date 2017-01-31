@@ -25,7 +25,7 @@ class SleepPreventer: NSObject {
     if success == kIOReturnSuccess {
       lock += 1
     } else {
-      Utility.showAlertByKey("cannot_prevent_sleep")
+      Utility.showAlert("cannot_prevent_sleep")
     }
   }
 

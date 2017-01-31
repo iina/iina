@@ -117,3 +117,7 @@
 
 "alert.cannot_prevent_sleep" = "Cannot prevent display sleep!";
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
+
+// Panels
+"panel.ok" = "OK";
+"panel.cancel" = "Cancel";

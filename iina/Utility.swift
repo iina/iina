@@ -15,6 +15,7 @@ class Utility {
 
   // MARK: - Logs, alerts
 
+  @available(*, deprecated, message: "showAlert(message:_, alertStyle:_) is deprecated, use showAlert(_ key:_, comment: _, arguments: _, alertStyle:_) instead")
   static func showAlert(message: String, alertStyle: NSAlertStyle = .critical) {
     let alert = NSAlert()
     switch alertStyle {
@@ -30,7 +31,7 @@ class Utility {
     alert.runModal()
   }
 
-  static func showAlertByKey(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, alertStyle: NSAlertStyle = .critical) {
+  static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, alertStyle: NSAlertStyle = .critical) {
     let alert = NSAlert()
     switch alertStyle {
     case .critical:
@@ -65,7 +66,7 @@ class Utility {
   static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
     if !expr {
       NSLog("%@", errorMessage)
-      showAlertByKey("fatal_error", arguments: [errorMessage])
+      showAlert("fatal_error", arguments: [errorMessage])
       block()
       exit(1)
     }
@@ -74,7 +75,7 @@ class Utility {
   static func fatal(_ message: String, _ block: () -> Void = {}) {
     NSLog("%@", message)
     NSLog(Thread.callStackSymbols.joined(separator: "\n"))
-    showAlertByKey("fatal_error", arguments: [message])
+    showAlert("fatal_error", arguments: [message])
     block()
     exit(1)
   }
@@ -108,6 +109,7 @@ class Utility {
     }
   }
 
+  @available(*, deprecated, message: "quickPromptPanel(messageText:_, informativeText:_) is deprecated, use quickPromptPanel(messageKey:_, informativeKey:_) instead")
   static func quickPromptPanel(messageText: String, informativeText: String, ok: (String) -> Void) -> Bool {
     let panel = NSAlert()
     panel.messageText = messageText
@@ -119,6 +121,27 @@ class Utility {
     panel.accessoryView = input
     panel.addButton(withTitle: "OK")
     panel.addButton(withTitle: "Cancel")
+    panel.window.initialFirstResponder = input
+    let response = panel.runModal()
+    if response == NSAlertFirstButtonReturn {
+      ok(input.stringValue)
+      return true
+    } else {
+      return false
+    }
+  }
+  
+  static func quickPromptPanel(messageKey: String, informativeKey: String, ok: (String) -> Void) -> Bool {
+    let panel = NSAlert()
+    panel.messageText = NSLocalizedString(messageKey, comment: messageKey)
+    panel.informativeText = NSLocalizedString(informativeKey, comment: informativeKey)
+    let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
+    input.lineBreakMode = .byClipping
+    input.usesSingleLineMode = true
+    input.cell?.isScrollable = true
+    panel.accessoryView = input
+    panel.addButton(withTitle: NSLocalizedString("panel.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("panel.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
@@ -158,7 +181,7 @@ class Utility {
       return uv
     } else {
       if showAlert {
-        Utility.showAlertByKey("keybinding_cannot_find_location")
+        Utility.showAlert("keybinding_cannot_find_location")
       }
       return nil
     }

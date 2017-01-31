@@ -276,6 +276,18 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       if added == 0 {
         return false
       }
+      
+      var finalIndexSet: IndexSet = []
+      let selectedIndexSet: IndexSet = tableView.selectedRowIndexes
+      for i in selectedIndexSet {
+        if i >= row {
+          finalIndexSet.insert(i + added)
+        } else {
+          finalIndexSet.insert(i)
+        }
+      }
+      tableView.deselectAll(self)
+      tableView.selectRowIndexes(finalIndexSet, byExtendingSelection: false)
 
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
       playerCore.sendOSD(.addToPlaylist(added))

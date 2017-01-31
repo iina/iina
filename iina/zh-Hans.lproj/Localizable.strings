@@ -91,4 +91,29 @@
 
 "track.none" = "<无>";
 
+// Alerts
+"alert.filter_wrong_format" = "滤镜格式错误！";
+"alert.filter_error" = "设置滤镜错误。请检查你的滤镜参数。";
+
+"alert.cannot_write_to_disk" = "磁盘无法写入。";
+"alert.no_downloaded_subtitle" = "请先选择一个已下载的字幕。";
+"alert.error_when_copy" = "文件拷贝错误: %@";
+
+"alert.error_setting_config_folder" = "配置目录错误 \"%@\"。";
 "alert.extra_option_error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";
+"alert.error_reading_user_options" = "无法读取用户指定的选项。";
+"alert.error_setting_user_options" = "设置选项 %@ 时发生错误 %@ (%d)。";
+
+"alert.unsupported_external_audio" = "未支持的外部音频文件。";
+"alert.unsupported_external_subtitle" = "未支持的外部字幕。";
+"alert.cannot_open" = "无法打开文件或者流！";
+
+"alert.keybinding_config_name_empty" = "文件名不能为空。";
+"alert.keybinding_config_name_exist" = "文件名已存在。";
+"alert.keybinding_cannot_delete_config" = "无法删除配置文件。";
+"alert.keybinding_cannot_create_config" = "无法创建配置文件。";
+"alert.keybinding_cannot_write_config" = "无法写入配置文件！";
+"alert.keybinding_cannot_find_location" = "找不到配置文件位置！";
+
+"alert.cannot_prevent_sleep" = "无法保持常亮！";
+"alert.fatal_error" = "致命错误：%@ \n程序现在将退出。";

@@ -1,6 +1,3 @@
-/* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "1vo-so-iaM"; */
-"1vo-so-iaM.title" = "Untertitel mit dem Namen des Mediums";
-
 /* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "4EG-eE-S3y"; */
 "4EG-eE-S3y.title" = "Vertikale Position:";
 
@@ -8,46 +5,49 @@
 "5Bo-HI-z0D.title" = "Shooter.cn";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "5CZ-8l-KYJ"; */
-"5CZ-8l-KYJ.title" = "Rahmen";
+"5CZ-8l-KYJ.title" = "Kontur";
+
+/* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "5eA-EB-Hco"; */
+"5eA-EB-Hco.title" = "Bitte gib durch Komma getrennte Werte ein.";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "7NC-Ih-gMB"; */
 "7NC-Ih-gMB.title" = " X:";
 
-/* Class = "NSButtonCell"; title = "Display subtitles in letter box in full screen"; ObjectID = "9kA-0S-Nl8"; */
-"9kA-0S-Nl8.title" = "Bei Vollbild Untertitel als Letterbox anzeigen.";
+/* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "9kA-0S-Nl8"; */
+"9kA-0S-Nl8.title" = "Untertitel im Vollbildmodus als Letterbox anzeigen";
 
 /* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "99d-UG-eDD"; */
-"99d-UG-eDD.title" = "Laufweite der Schrift:";
+"99d-UG-eDD.title" = "Laufweite:";
 
 /* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "A1r-kr-uDi"; */
-"A1r-kr-uDi.title" = "Untertitel zusammen mit dem Fenster vergrößern/verkleinern";
+"A1r-kr-uDi.title" = "Untertitelgröße an Fenster anpassen";
 
 /* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "AnI-pG-XQo"; */
 "AnI-pG-XQo.title" = "strip";
 
 /* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "Bjp-HJ-i7V"; */
-"Bjp-HJ-i7V.title" = "Serifenlos";
+"Bjp-HJ-i7V.title" = "sans-serif";
 
-/* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "CKG-r9-NoN"; */
-"CKG-r9-NoN.title" = "Benutzerkonto bei OpenSubtitles:";
+/* Class = "NSTextFieldCell"; title = "Opensubtitles account:"; ObjectID = "CKG-r9-NoN"; */
+"CKG-r9-NoN.title" = "OpenSubtitles-Konto:";
 
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "Chj-YP-eFV"; */
-"Chj-YP-eFV.title" = "Bevorzugte Sprache:";
+"Chj-YP-eFV.title" = "Bevorzugte Sprachen:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "HCH-sL-fT2"; */
-"HCH-sL-fT2.title" = "Zentrieren";
+"HCH-sL-fT2.title" = "Zentriert";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "Hpt-KA-McW"; */
 "Hpt-KA-McW.title" = "Links";
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "IU1-wz-lJW"; */
-"IU1-wz-lJW.title" = "Level überschreiben:";
+"IU1-wz-lJW.title" = "Überschreibungslevel:";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "Jvu-MV-7vD"; */
 "Jvu-MV-7vD.title" = " X:";
 
 /* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "MiO-eP-c1f"; */
-"MiO-eP-c1f.title" = "Untertitel laden von:";
+"MiO-eP-c1f.title" = "Untertitelquelle:";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Mte-Lb-do4"; */
 "Mte-Lb-do4.title" = "Aussehen:";
@@ -55,14 +55,14 @@
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "ND2-m7-ZET"; */
 "ND2-m7-ZET.title" = "Unten";
 
+/* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "NHu-6z-rEm"; */
+"NHu-6z-rEm.title" = "Ordner mittels Doppelpunkt (:) trennen. Relative Dateipfade und Platzhalter (*) am Ende sind erlaubt.";
+
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "OL9-2M-Zb5"; */
 "OL9-2M-Zb5.title" = "Größe:";
 
 /* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "PZ2-pZ-hHa"; */
 "PZ2-pZ-hHa.title" = "Sonstiges:";
-
-/* Class = "NSMenuItem"; title = "All subtitles in the same folder"; ObjectID = "Qcl-0x-3hh"; */
-"Qcl-0x-3hh.title" = "Alle Untertitel im selben Ordner";
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "RiL-Rv-eke"; */
 "RiL-Rv-eke.title" = "Schriftart:";
@@ -70,14 +70,17 @@
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "SLQ-wt-k6Y"; */
 "SLQ-wt-k6Y.title" = "Hintergrund:";
 
-/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and OpenSubtitles."; ObjectID = "Uj3-om-L26"; */
-"Uj3-om-L26.title" = "Diese Auswahl wird als ISO 639-2 gespeichert. Ist mit MPV und OpenSubtitles kompatibel.";
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Uj3-om-L26"; */
+"Uj3-om-L26.title" = "Diese Auswahl wird als ISO 639-2 gespeichert und ist mit mpv und OpenSubtitles kompatibel.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "VBZ-bi-gTh"; */
 "VBZ-bi-gTh.title" = "Y:";
 
 /* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "VKh-1E-Ey8"; */
-"VKh-1E-Ey8.title" = "Alle ASS Stile ignorieren";
+"VKh-1E-Ey8.title" = "ASS-Stile ignorieren";
+
+/* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "VZs-zv-0oM"; */
+"VZs-zv-0oM.title" = "Auch in folgenden Ordnern suchen:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "Waw-Pj-REg"; */
 "Waw-Pj-REg.title" = "Farbe:";
@@ -89,16 +92,16 @@
 "Zym-2a-rt0.title" = "Automatisch laden:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "aMs-VF-WaJ"; */
-"aMs-VF-WaJ.title" = "Zentrieren";
+"aMs-VF-WaJ.title" = "Zentriert";
 
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "bqN-gA-fs9"; */
 "bqN-gA-fs9.title" = "Versatz:";
 
 /* Class = "NSButtonCell"; title = "Choose..."; ObjectID = "cVp-yI-tMu"; */
-"cVp-yI-tMu.title" = "Wählen…";
+"cVp-yI-tMu.title" = "Wählen …";
 
-/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "clt-eT-TMN"; */
-"clt-eT-TMN.title" = "Deaktiviert";
+/* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "d5R-vH-0o0"; */
+"d5R-vH-0o0.title" = "Von IINA automatisch erkennen";
 
 /* Class = "NSBox"; title = "Font"; ObjectID = "dsH-Ze-lj5"; */
 "dsH-Ze-lj5.title" = "Schrift";
@@ -107,7 +110,10 @@
 "fUB-ll-Nvz.title" = "Nicht angemeldet";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "i94-zQ-hFA"; */
-"i94-zQ-hFA.title" = "Bei Aktivierung werden alls ASS Untertitel im folgendem Stil dargestellt.";
+"i94-zQ-hFA.title" = "Alle ASS-Untertitel werden mit den untenstehenden Stilen dargestellt.";
+
+/* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "jLe-gY-UdB"; */
+"jLe-gY-UdB.title" = "Standardkodierung:";
 
 /* Class = "NSTextFieldCell"; title = "%"; ObjectID = "jPu-Ax-MOA"; */
 "jPu-Ax-MOA.title" = "%";
@@ -124,6 +130,9 @@
 /* Class = "NSButtonCell"; title = "Login"; ObjectID = "l4s-EW-FkT"; */
 "l4s-EW-FkT.title" = "Anmelden";
 
+/* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "mVR-wA-nID"; */
+"mVR-wA-nID.title" = "Untertitel priorisieren, deren Dateiname folgendes enthält:";
+
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "mxc-gq-Ct7"; */
 "mxc-gq-Ct7.title" = "Farbe:";
 
@@ -134,16 +143,16 @@
 "rbK-VB-FDZ.title" = "Weichzeichnen:";
 
 /* Class = "NSTextFieldCell"; title = "Margin"; ObjectID = "sVu-u3-QwW"; */
-"sVu-u3-QwW.title" = "Rand";
-
-/* Class = "NSMenuItem"; title = "Subtitle with the exact same media filename"; ObjectID = "siy-Uq-tMP"; */
-"siy-Uq-tMP.title" = "Untertitel mit dem gleichen Dateinamen";
+"sVu-u3-QwW.title" = "Abstand";
 
 /* Class = "NSTextFieldCell"; title = "Align"; ObjectID = "t3t-yJ-pM9"; */
 "t3t-yJ-pM9.title" = "Anordnung";
 
 /* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "tL7-oR-LZ4"; */
-"tL7-oR-LZ4.title" = "ASS Untertitel:";
+"tL7-oR-LZ4.title" = "ASS-Untertitel:";
+
+/* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "ul7-yg-cCb"; */
+"ul7-yg-cCb.title" = "Untertitel, die den Dateinamen enthalten";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "vHI-NX-bZ5"; */
 "vHI-NX-bZ5.title" = "Oben";
@@ -155,8 +164,10 @@
 "wbU-ip-uCp.title" = "Fett";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "xNk-Uv-jYT"; */
-"xNk-Uv-jYT.title" = "Größe:";
+"xNk-Uv-jYT.title" = "Stärke:";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "xsH-Bm-ZPp"; */
+"xsH-Bm-ZPp.title" = "Deaktiviert";
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "zLl-vV-p1h"; */
 "zLl-vV-p1h.title" = "Rechts";
-

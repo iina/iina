@@ -1,9 +1,6 @@
 /* Class = "NSWindow"; title = "About"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Über IINA";
 
-/* Class = "NSTextFieldCell"; title = "This is an alpha release and not recommended for daily use. Please check for updates frequently. For bug reports, feature requests or help, please create an issue on GitHub or email me."; ObjectID = "TI7-3V-nUn"; */
-"TI7-3V-nUn.title" = "Dies ist ein Programm im Aplpha Stadium und von daher noch nicht für den täglichen Gebrauch gedacht. Bitte regelmäßig nach Aktualisierungen suchen. Um Fehler zu melden oder für Vorschläge zur Verbessung des Programms bitte auf GitHub einen Fall erzeugen oder mir eine E-Mail schreiben.";
-
 /* Class = "NSTextFieldCell"; title = "mpv 0.0.0"; ObjectID = "ZAx-ah-fbZ"; */
 "ZAx-ah-fbZ.title" = "mpv 0.0.0";
 
@@ -13,6 +10,5 @@
 /* Class = "NSTextFieldCell"; title = "0.0.1"; ObjectID = "gZA-85-Zaw"; */
 "gZA-85-Zaw.title" = "0.0.1";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "igW-n0-W0W"; */
-"igW-n0-W0W.title" = "Box";
-
+/* Class = "NSButtonCell"; title = "Credits"; ObjectID = "zCH-uO-acx"; */
+"zCH-uO-acx.title" = "Danksagungen";

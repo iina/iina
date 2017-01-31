@@ -222,7 +222,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // gesture recognizer
     // disable it first for poor performance
-    magnificationGestureRecognizer.delaysMagnificationEvents = true;
+//    magnificationGestureRecognizer.delaysMagnificationEvents = true;
     cv.addGestureRecognizer(magnificationGestureRecognizer)
 
     // start mpv opengl_cb
@@ -515,31 +515,27 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
-    guard !isInInteractiveMode else { return }
-    guard window != nil else { return }
-    
-    //Skip those very small momvements to reduce the pinch sensitive level
-    //This number cannot be too big
-    if abs(recognizer.magnification) < 0.03 { return }
+    guard !isInInteractiveMode && window != nil && screenFrame != nil else { return }
     
     if recognizer.state == NSGestureRecognizerState.began {
       lastMagnification = recognizer.magnification;
     }
     
     if recognizer.state == NSGestureRecognizerState.changed {
-      
-      //Increment for each movement. 30 is for zoom in, -25 for zoom out.
-      let offsetWithSign = lastMagnification < recognizer.magnification ? 30.0 : -25.0 as CGFloat;
-      
-      var newHeight = window!.frame.height + offsetWithSign;
-      if newHeight <= minSize.height { return }
-      
-      if newHeight > (screenFrame?.size.height)! {
-        newHeight = (screenFrame?.size.height)!;
+      let offset = recognizer.magnification - lastMagnification + 1.0;
+      var newWidth = window!.frame.width * offset, newHeight = window!.frame.height * offset;
+    
+      //Check against max & min threshold
+      if newHeight > screenFrame!.height || newHeight < minSize.height {
+        newHeight = newHeight > screenFrame!.height ? screenFrame!.height : minSize.height;
+        newWidth = newHeight * (window!.aspectRatio.width / window!.aspectRatio.height);
       }
       
-      let newSize = NSSize(width: newHeight * (window!.aspectRatio.width / window!.aspectRatio.height), height: newHeight)
+      let newSize = NSSize(width: newWidth, height: newHeight);
+      
       window!.centeredResized(to: newSize)
+      //This fixes movie blinking issue, haven't found a better way to make it more smoothly.
+      window!.contentView?.setFrameSize(newSize);
       
       lastMagnification = recognizer.magnification;
     }

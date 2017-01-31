@@ -36,7 +36,7 @@
 "osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
 "osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
 "osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
-"osd.subtitle_pos" = "Subtitle Position: %f";
+"osd.subtitle_pos" = "Subtitle Position: %.1f";
 "osd.mute" = "Mute";
 "osd.unmute" = "Unmute";
 "osd.screenshot" = "Screenshot Captured";
@@ -53,6 +53,12 @@
 "osd.video_eq.hue" = "Hue: %i";
 "osd.video_eq.saturation" = "Saturation: %i";
 "osd.video_eq.brightness" = "Brightness: %i";
+"osd.find_online_sub" = "Finding online subtitles...";
+"osd.sub_not_found" = "No subtitle found";
+"osd.sub_found" = "%d subtitle(s) found. Downloading...";
+"osd.sub_downloaded" = "Subtitle downloaded";
+"osd.sub_saved" = "Subtitle saved";
+"osd.network_error" = "Network error";
 
 "update.title_update_found" = "Update Found";
 "update.title_no_update" = "No Update";

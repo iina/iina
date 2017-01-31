@@ -628,6 +628,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowDidResize(_ notification: Notification) {
     guard let w = window else { return }
     let wSize = w.frame.size, cSize = controlBar.frame.size
+    // is paused, draw new frame
+    if playerCore.info.isPaused {
+      videoView.videoLayer.draw()
+    }
 
     // update videoview size if in full screen, since aspect ratio may changed
     if (isInFullScreen) {

@@ -40,7 +40,7 @@
 /* AB-Loop: Cleared */
 "osd.abloop.clear" = "구간 반복: 해제됨";
 
-/* Added %i files to playlist */
+/* Added %i Files to Playlist */
 "osd.add_to_playlist" = "%i 파일이 재생목록에 추가되었습니다";
 
 /* Aspect Ratio: %@ */
@@ -58,7 +58,7 @@
 /* Chapter: %@ */
 "osd.chapter" = "챕터: %@";
 
-/* Cleared playlist */
+/* Cleared Playlist */
 "osd.clear_playlist" = "재생목록 비움";
 
 /* Crop: %@ */
@@ -67,25 +67,31 @@
 /* Deinterlace: %@ */
 "osd.deinterlace" = "디인터레이스: %@";
 
+/* Finding online subtitles... */
+"osd.find_online_sub" = "인터넷에서 자막을 찾는 중…";
+
 /* Mute */
 "osd.mute" = "소리 끔";
 
-/* Paused */
+/* Network error */
+"osd.network_error" = "네트워크 오류";
+
+/* Pause */
 "osd.pause" = "일시 정지됨";
 
-/* Resumed */
+/* Resume */
 "osd.resume" = "재생 복원됨";
 
 /* Rotate: %i° */
 "osd.rotate" = "회전: %i°";
 
-/* Screenshot captured */
+/* Screenshot Captured */
 "osd.screenshot" = "스크린샷 저장됨";
 
 /* Speed: %.2fx */
 "osd.speed" = "재생 속도: %.2fx";
 
-/* Stopped */
+/* Stop */
 "osd.stop" = "정지됨";
 
 /* Subtitle Delay: %fs Earlier */
@@ -97,8 +103,20 @@
 /* Subtitle Delay: No Delay */
 "osd.sub_delay.nodelay" = "자막 지연: 없음";
 
+/* Subtitle downloaded */
+"osd.sub_downloaded" = "자막 다운로드됨";
+
+/* %d subtitle(s) found. Downloading... */
+"osd.sub_found" = "%d 자막을 찾았습니다. 내려받는 중…";
+
+/* No subtitle found. */
+"osd.sub_not_found" = "자막을 찾지 못했습니다";
+
+/* Subtitle saved */
+"osd.sub_saved" = "자막 저장됨";
+
 /* Subtitle Position: %f */
-"osd.subtitle_pos" = "자막 위치: %f";
+"osd.subtitle_pos" = "자막 위치: %.1f";
 
 /* Subtitle Scale: %.2fx */
 "osd.subtitle_scale" = "자막 크기: %.2fx";

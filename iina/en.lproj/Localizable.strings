@@ -36,7 +36,7 @@
 "osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
 "osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
 "osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
-"osd.subtitle_pos" = "Subtitle Position: %f";
+"osd.subtitle_pos" = "Subtitle Position: %.1f";
 "osd.mute" = "Mute";
 "osd.unmute" = "Unmute";
 "osd.screenshot" = "Screenshot Captured";

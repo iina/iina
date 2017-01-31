@@ -445,6 +445,10 @@ class PlayerCore: NSObject {
     }
   }
 
+  func setSubPos(_ pos: Int) {
+    mpvController.setInt(MPVOption.Subtitles.subPos, pos)
+  }
+
   func setSubTextColor(_ colorString: String) {
     mpvController.setString("options/" + MPVOption.Subtitles.subColor, colorString)
   }
@@ -503,6 +507,7 @@ class PlayerCore: NSObject {
     invalidateTimer()
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
+    info.haveDownloadedSub = false
     DispatchQueue.main.sync {
       self.getTrackInfo()
       self.getSelectedTracks()

@@ -87,6 +87,8 @@ class PlaybackInfo {
 
   var subEncoding: String?
 
+  var haveDownloadedSub: Bool = false
+
   func trackList(_ type: MPVTrack.TrackType) -> [MPVTrack] {
     switch type {
     case .video: return videoTracks

@@ -166,6 +166,8 @@ class Utility {
 
   static let tempDirURL: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
 
+  static let exeDirURL: URL = URL(fileURLWithPath: Bundle.main.executablePath!).deletingLastPathComponent()
+
 
   // MARK: - Util functions
 

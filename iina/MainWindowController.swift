@@ -366,6 +366,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** move window while dragging */
   override func mouseDragged(with event: NSEvent) {
+    /*current mechanism to differentiate between drag event and click event is via isDragging,
+     *it's necessary to filter out tiny movement to click rather than drag.
+     */
+    //reduce drag event sensitive, requires minimum 1px movement to trigger dragging event.
+    if (abs(mousePosRelatedToWindow!.x - NSEvent.mouseLocation().x + window!.frame.origin.x) +
+      abs(mousePosRelatedToWindow!.y - NSEvent.mouseLocation().y + window!.frame.origin.y)) < 1.0 {
+      //consider as click event rather drag event;
+      return
+    }
+    
     isDragging = true
     guard !controlBar.isDragging else { return }
     if mousePosRelatedToWindow != nil {

@@ -352,7 +352,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   override func keyDown(with event: NSEvent) {
     window!.makeFirstResponder(window!.contentView)
     if !isInInteractiveMode {
-      playerCore.execKeyCode(Utility.mpvKeyCode(from: event))
+      let keyCode = Utility.mpvKeyCode(from: event);
+      playerCore.execKeyCode(keyCode)
+      //intercept SPACE keycode.
+      //MPV has --ontop flag, but iina floats top itself window, so here has to intercept SPACE key.
+      if keyCode == "SPACE" {
+        if !playerCore.info.isPaused {
+          setWindowFloatingOnTop(false)
+        } else if playerCore.info.isAlwaysOntop {
+          setWindowFloatingOnTop(true)
+        }
+      }
     }
   }
 
@@ -1152,6 +1162,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBAction func playButtonAction(_ sender: NSButton) {
     if sender.state == NSOnState {
       playerCore.togglePause(false)
+      if playerCore.info.isAlwaysOntop {
+        setWindowFloatingOnTop(true);
+      }
     }
     if sender.state == NSOffState {
       playerCore.togglePause(true)
@@ -1159,6 +1172,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
       rightArrowLabel.isHidden = true
+      
+      //cancel floating top during pausing.
+      setWindowFloatingOnTop(false);
     }
   }
 

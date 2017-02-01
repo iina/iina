@@ -43,7 +43,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="680" height="355"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="680" height="355"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -71,14 +71,6 @@
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gW1-BG-OEa" secondAttribute="trailing" constant="19" id="cT5-1h-pRJ"/>
                         </constraints>
                     </visualEffectView>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gsa-LM-oo7">
-                        <rect key="frame" x="550" y="131" width="48" height="48"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Ngo-7g-e4r">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                    </button>
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
                         <rect key="frame" x="120" y="40" width="440" height="67"/>
                         <subviews>

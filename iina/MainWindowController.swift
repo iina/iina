@@ -1182,14 +1182,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBAction func leftButtonAction(_ sender: NSButton) {
     if arrowBtnFunction == .speed {
       let speeds = AppData.availableSpeedValues.count
-      // If fast forwarding change speed to 1x
-      if speedValueIndex > speeds / 2 {
-        speedValueIndex = speeds / 2
-      }
       
       if sender.intValue == 0 { // Released
         if maxPressure == 1 { // Single click ended
-          speedValueIndex = oldIndex - 1
+          // If fast forwarding change speed to 1x
+          if speedValueIndex > speeds / 2 {
+            speedValueIndex = speeds / 2
+          } else {
+            speedValueIndex = oldIndex - 1
+          }
         } else { // Force Touch ended
           speedValueIndex = speeds / 2
         }
@@ -1215,14 +1216,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBAction func rightButtonAction(_ sender: NSButton) {
     if arrowBtnFunction == .speed {
       let speeds = AppData.availableSpeedValues.count
-      // If rewinding change speed to 1x
-      if speedValueIndex < speeds / 2 {
-        speedValueIndex = speeds / 2
-      }
       
       if sender.intValue == 0 { // Released
         if maxPressure == 1 { // Single click ended
-          speedValueIndex = oldIndex + 1
+          // If rewinding change speed to 1x
+          if speedValueIndex < speeds / 2 {
+            speedValueIndex = speeds / 2
+          } else {
+            speedValueIndex = oldIndex + 1
+          }
         } else { // Force Touch ended
           speedValueIndex = speeds / 2
         }

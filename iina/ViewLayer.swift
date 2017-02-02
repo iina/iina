@@ -69,7 +69,7 @@ class ViewLayer: CAOpenGLLayer {
 
   override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj {
 
-    let attributes: [CGLPixelFormatAttribute] = [
+    let attributes0: [CGLPixelFormatAttribute] = [
       kCGLPFADoubleBuffer,
       kCGLPFAOpenGLProfile, CGLPixelFormatAttribute(kCGLOGLPVersion_3_2_Core.rawValue),
       kCGLPFAAccelerated,
@@ -77,10 +77,33 @@ class ViewLayer: CAOpenGLLayer {
       _CGLPixelFormatAttribute(rawValue: 0)
     ]
 
+    let attributes1: [CGLPixelFormatAttribute] = [
+      kCGLPFADoubleBuffer,
+      kCGLPFAOpenGLProfile, CGLPixelFormatAttribute(kCGLOGLPVersion_3_2_Core.rawValue),
+      kCGLPFAAllowOfflineRenderers,
+      _CGLPixelFormatAttribute(rawValue: 0)
+    ]
+
+    let attributes2: [CGLPixelFormatAttribute] = [
+      kCGLPFADoubleBuffer,
+      kCGLPFAAllowOfflineRenderers,
+      _CGLPixelFormatAttribute(rawValue: 0)
+    ]
+
     var pix: CGLPixelFormatObj?
     var npix: GLint = 0
 
-    CGLChoosePixelFormat(attributes, &pix, &npix)
+    CGLChoosePixelFormat(attributes0, &pix, &npix)
+
+    if pix == nil {
+      CGLChoosePixelFormat(attributes1, &pix, &npix)
+    }
+
+    if pix == nil {
+      CGLChoosePixelFormat(attributes2, &pix, &npix)
+    }
+
+    Utility.assert(pix != nil, "Cannot create OpenGL pixel format!")
 
     return pix!
   }

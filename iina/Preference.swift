@@ -128,6 +128,8 @@ struct Preference {
     static let secPrefech = "secPrefech"
     static let userAgent = "userAgent"
     static let transportRTSPThrough = "transportRTSPThrough"
+    static let ytdlEnabled = "ytdlEnabled"
+    static let ytdlRawOptions = "ytdlRawOptions"
 
     // Control
 
@@ -358,6 +360,8 @@ struct Preference {
     Key.secPrefech: 100,
     Key.userAgent: "",
     Key.transportRTSPThrough: RTSPTransportation.tcp.rawValue,
+    Key.ytdlEnabled: true,
+    Key.ytdlRawOptions: "",
 
     Key.inputConfigs: [:],
     Key.currentInputConfigName: "IINA Default",

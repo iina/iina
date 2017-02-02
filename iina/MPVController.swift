@@ -225,6 +225,9 @@ class MPVController: NSObject {
       return Preference.RTSPTransportation(rawValue: v)!.string
     }
 
+    setUserOption(PK.ytdlEnabled, type: .bool, forName: MPVOption.ProgramBehavior.ytdl)
+    setUserOption(PK.ytdlRawOptions, type: .string, forName: MPVOption.ProgramBehavior.ytdlRawOptions)
+
     // Set user defined conf dir.
     if ud.bool(forKey: PK.useUserDefinedConfDir) {
       if var userConfDir = ud.string(forKey: PK.userDefinedConfDir) {

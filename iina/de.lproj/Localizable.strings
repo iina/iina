@@ -9,6 +9,8 @@
 // Common
 "on" = "Ein";
 "off" = "Aus";
+"button.ok"= "OK";
+"button.cancel" = "Abbrechen";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "PLAYLIST";
@@ -88,6 +90,14 @@
 "menu.exit_fullscreen" = "Vollbildmodus aus";
 "menu.pause" = "Pausieren";
 "menu.resume" = "Fortsetzen";
+"menu.aspect" = "Standard";
+"menu.crop" = "Aus";
+
+"filter.audio" = "Audiofilter";
+"filter.video" = "Videofilter";
+"filter.add" = "Filter hinzufügen";
+"filter.enter_string" = "Please enter a filter string in format of MPV's vf or af command.";
+"filter.incorrect_format" = "Filter ist nicht im richtigen Format!";
 
 "track.none" = "<Leer>";
 

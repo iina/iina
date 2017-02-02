@@ -161,14 +161,14 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- aspect
     var aspectList = AppData.aspects
-    aspectList.insert("Default", at: 0)
+    aspectList.insert(NSLocalizedString("menu.aspect", comment: "Default"), at: 0)
     bind(menu: aspectMenu, withOptions: aspectList, objects: nil, objectMap: nil, action: #selector(MainWindowController.menuChangeAspect(_:))) {
       PlayerCore.shared.info.unsureAspect == $0.representedObject as? String
     }
 
     // -- crop
     var cropList = AppData.aspects
-    cropList.insert("None", at: 0)
+    cropList.insert(NSLocalizedString("menu.crop", comment: "None"), at: 0)
     bind(menu: cropMenu, withOptions: cropList, objects: nil, objectMap: nil, action: #selector(MainWindowController.menuChangeCrop(_:))) {
       PlayerCore.shared.info.unsureCrop == $0.representedObject as? String
     }

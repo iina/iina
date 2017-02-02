@@ -123,8 +123,8 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     panel.informativeText = "Press any key to start."
     panel.accessoryView = keyRecordViewController.view
     panel.window.initialFirstResponder = keyRecordViewController.keyRecordView
-    panel.addButton(withTitle: "OK")
-    panel.addButton(withTitle: "Cancel")
+    panel.addButton(withTitle: NSLocalizedString("button.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("button.cancel", comment: "Cancel"))
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
       let key = keyRecordViewController.keyCode
@@ -153,7 +153,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     let result = Utility.quickPromptPanel(messageText: "New Input Configuration", informativeText: "Please enter a name for the new configuration.") { newName = $0 }
     if !result { return }
     guard !newName.isEmpty else {
-      Utility.showAlert(message: "The name cannot br empty.")
+      Utility.showAlert(message: "The name cannot be empty.")
       return
     }
     guard userConfigs[newName] == nil && PrefKeyBindingViewController.defaultConfigs[newName] == nil else {

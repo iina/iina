@@ -26,7 +26,7 @@ class FilterWindowController: NSWindowController {
     super.windowDidLoad()
 
     // title
-    window?.title = filterType == MPVProperty.af ? "Audio Filters" : "Video Filters"
+    window?.title = filterType == MPVProperty.af ? NSLocalizedString("filter.audio", comment: "Audio Filters") : NSLocalizedString("filter.video", comment: "Video Filters")
 
     filters = PlayerCore.shared.mpvController.getFilters(filterType)
     tableView.delegate = self
@@ -58,12 +58,12 @@ class FilterWindowController: NSWindowController {
   // MARK: - IBAction
 
   @IBAction func addFilterAction(_ sender: AnyObject) {
-    let _ = Utility.quickPromptPanel(messageText: "Add filter", informativeText: "Please enter a filter string in format of MPV's vf or af command.") { str in
+    let _ = Utility.quickPromptPanel(messageText: NSLocalizedString("filter.add", comment: "Add filter"), informativeText: NSLocalizedString("filter.enter_string", comment: "Please enter a filter string in format of MPV's vf or af command.")) { str in
       if let newFilter = MPVFilter(rawString: str) {
         filters.append(newFilter)
         setFilters()
       } else {
-        Utility.showAlert(message: "Filter is not in correct format!")
+        Utility.showAlert(message: NSLocalizedString("filter.incorrect_format", comment: "Filter is not in the correct format!"))
       }
     }
   }
@@ -101,7 +101,7 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
       filters[row] = newFilter
       setFilters()
     } else {
-      Utility.showAlert(message: "Filter is not in correct format!")
+      Utility.showAlert(message: NSLocalizedString("filter.incorrect_format", comment: "Filter is not in the correct format!"))
     }
   }
 

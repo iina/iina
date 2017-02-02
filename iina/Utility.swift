@@ -57,8 +57,8 @@ class Utility {
     let panel = NSAlert()
     panel.messageText = title
     panel.informativeText = infoText
-    panel.addButton(withTitle: "OK")
-    panel.addButton(withTitle: "Cancel")
+    panel.addButton(withTitle: NSLocalizedString("button.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("button.cancel", comment: "Cancel"))
     return panel.runModal() == NSAlertFirstButtonReturn
   }
 
@@ -104,8 +104,8 @@ class Utility {
     input.usesSingleLineMode = true
     input.cell?.isScrollable = true
     panel.accessoryView = input
-    panel.addButton(withTitle: "OK")
-    panel.addButton(withTitle: "Cancel")
+    panel.addButton(withTitle: NSLocalizedString("button.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("button.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {

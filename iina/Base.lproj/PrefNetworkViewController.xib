@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,6 +17,9 @@
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3H-1Y-XVT">
                     <rect key="frame" x="118" y="140" width="149" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="NIy-Bb-hpm"/>
+                    </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default cache size (KB):" id="0yu-5Q-363">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -25,6 +28,9 @@
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWO-sb-Y1b">
                     <rect key="frame" x="118" y="115" width="149" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="lbj-Wa-T7h"/>
+                    </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Cache buffer size (KB):" id="dDD-g3-54w">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -33,6 +39,9 @@
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlx-wF-OsB">
                     <rect key="frame" x="118" y="90" width="149" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="DYs-4k-wyf"/>
+                    </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Seconds to prefech:" id="J96-32-M9A">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -66,6 +75,9 @@
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="1Nn-zY-Z5N">
                     <rect key="frame" x="118" y="163" width="352" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="23" id="lYM-iN-f5L"/>
+                    </constraints>
                     <buttonCell key="cell" type="check" title="Enable cache" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="fpV-al-bn7">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -76,6 +88,9 @@
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jI5-X0-mph">
                     <rect key="frame" x="118" y="45" width="75" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="c71-BR-PVa"/>
+                    </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="User agent:" id="eN6-Sk-kUa">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -95,6 +110,9 @@
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xX8-Nn-BdK">
                     <rect key="frame" x="118" y="20" width="200" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="Pzl-8V-BZQ"/>
+                    </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Transport RTSP stream through:" id="hfn-h6-NCd">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -239,7 +257,7 @@
                 <constraint firstAttribute="trailing" secondItem="FE2-RS-jZf" secondAttribute="trailing" constant="12" id="v9m-3K-xhu"/>
                 <constraint firstItem="VFl-PR-eId" firstAttribute="leading" secondItem="DH1-5d-J02" secondAttribute="trailing" constant="10" id="vLw-8l-6L3"/>
             </constraints>
-            <point key="canvasLocation" x="140" y="136"/>
+            <point key="canvasLocation" x="136" y="185"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="KNf-nq-d77"/>
     </objects>

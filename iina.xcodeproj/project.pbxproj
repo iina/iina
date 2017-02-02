@@ -44,6 +44,8 @@
 		8452DD851D3B956D008A543A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452DD841D3B956D008A543A /* Preference.swift */; };
 		8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD881D3CB4EF008A543A /* vertexShader.glsl */; };
 		8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD8A1D3CB519008A543A /* fragmentShader.glsl */; };
+		845404AA1E4396F500B02B12 /* ScriptLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845404A91E4396F500B02B12 /* ScriptLoader.swift */; };
+		845404AC1E43980900B02B12 /* LuaScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845404AB1E43980900B02B12 /* LuaScript.swift */; };
 		845ABEAC1D4D19C000BFB15B /* MPVTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */; };
 		845AC09C1E1AE6C10080B614 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 845AC09E1E1AE6C10080B614 /* Localizable.strings */; };
 		845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB0C61D39462E00C011E0 /* ControlBarView.swift */; };
@@ -269,6 +271,8 @@
 		8452DD841D3B956D008A543A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		8452DD881D3CB4EF008A543A /* vertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertexShader.glsl; sourceTree = "<group>"; };
 		8452DD8A1D3CB519008A543A /* fragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragmentShader.glsl; sourceTree = "<group>"; };
+		845404A91E4396F500B02B12 /* ScriptLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptLoader.swift; sourceTree = "<group>"; };
+		845404AB1E43980900B02B12 /* LuaScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuaScript.swift; sourceTree = "<group>"; };
 		845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVTrack.swift; sourceTree = "<group>"; };
 		845AC09D1E1AE6C10080B614 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		845AC09F1E1AE6CB0080B614 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -479,6 +483,7 @@
 				84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */,
 				84D377661D737F58007F7396 /* MPVChapter.swift */,
 				84C8D58E1D794CE600D98A0E /* MPVFilter.swift */,
+				845404AB1E43980900B02B12 /* LuaScript.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -613,6 +618,7 @@
 				84A0BA961D2FA1CE00BC8DA1 /* PlayerCore.swift */,
 				84A0BA981D2FAAA700BC8DA1 /* MPVController.swift */,
 				8487BEC21D76A1AF00FD17B0 /* MenuController.swift */,
+				845404A91E4396F500B02B12 /* ScriptLoader.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -961,10 +967,12 @@
 				84E745D41DFDB27B00588DED /* PlaylistDragDestView.swift in Sources */,
 				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,
 				84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */,
+				845404AA1E4396F500B02B12 /* ScriptLoader.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,
 				844DE1BF1D3E2B9900272589 /* MPVEvent.swift in Sources */,
 				845040471E0B0F500079C194 /* CropSettingsViewController.swift in Sources */,
 				8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */,
+				845404AC1E43980900B02B12 /* LuaScript.swift in Sources */,
 				8460FBA91D6497490081841B /* PlaylistViewController.swift in Sources */,
 				8450404A1E0B13230079C194 /* CropBoxView.swift in Sources */,
 				84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */,

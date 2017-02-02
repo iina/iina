@@ -2,11 +2,14 @@
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "2yO-To-el7"; */
 "2yO-To-el7.title" = "Standard: 0 (Automatisch)";
 
+/* Class = "NSTextFieldCell"; title = "Maximum volume:"; ObjectID = "44m-ge-naq"; */
+"44m-ge-naq.title" = "Maximale Lautstärke:";
+
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
 "50C-1R-wlJ.title" = "Anzahl der Threads:";
 
 /* Class = "NSButtonCell"; title = "Use hardware decoding"; ObjectID = "WYE-SB-Ywe"; */
-"WYE-SB-Ywe.title" = "Hardware Dekodierung benutzen";
+"WYE-SB-Ywe.title" = "Hardwaredekodierung benutzen";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "Standard: 0 (Automatisch)";
@@ -20,9 +23,8 @@
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "tO4-pw-2W9"; */
 "tO4-pw-2W9.title" = "Anzahl der Threads:";
 
+/* Class = "NSTextFieldCell"; title = "S/PDIF output:"; ObjectID = "up6-6A-4sn"; */
+"up6-6A-4sn.title" = "S/PDIF-Ausgabe:";
+
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "wjt-O6-KbC"; */
 "wjt-O6-KbC.title" = "Bevorzugte Sprache:";
-
-"44m-ge-naq.title" = "Maximale Lautstärke:";
-
-"up6-6A-4sn.title" = "S/PDIF Ausgabe:";

@@ -1,6 +1,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Additional MPV options"; ObjectID = "6F6-Y7-8oR"; */
-"6F6-Y7-8oR.title" = "Erweiterte MPV Optionen";
+"6F6-Y7-8oR.title" = "Erweiterte MPV-Optionen";
 
 /* Class = "NSButtonCell"; title = "Enable advanced settings"; ObjectID = "7ml-VU-xWv"; */
 "7ml-VU-xWv.title" = "Erweiterte Einstellungen aktivieren";
@@ -8,8 +8,8 @@
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "E3I-Q7-9t1"; */
 "E3I-Q7-9t1.headerCell.title" = "Name";
 
-/* Class = "NSTextFieldCell"; title = "All following settings need restarting application to take effect."; ObjectID = "HMa-Vz-EUk"; */
-"HMa-Vz-EUk.title" = "Für die folgenden Einstellungen muss IINA neu gestartet werden";
+/* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
+"HMa-Vz-EUk.title" = "IINA muss für die folgenden Einstellungen neu gestartet werden.";
 
 /* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
 "JDA-g3-RNX.title" = "Log-Ordner öffnen";

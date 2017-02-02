@@ -138,8 +138,8 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Akd-0e-FKG">
-                    <rect key="frame" x="279" y="337" width="78" height="32"/>
-                    <buttonCell key="cell" type="push" title="New..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JYL-hr-KZT">
+                    <rect key="frame" x="281" y="337" width="77" height="32"/>
+                    <buttonCell key="cell" type="push" title="New…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JYL-hr-KZT">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -148,8 +148,8 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5WK-s3-J9x">
-                    <rect key="frame" x="357" y="337" width="109" height="32"/>
-                    <buttonCell key="cell" type="push" title="Duplicate..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gpZ-Rh-DMn">
+                    <rect key="frame" x="358" y="337" width="108" height="32"/>
+                    <buttonCell key="cell" type="push" title="Duplicate…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gpZ-Rh-DMn">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

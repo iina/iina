@@ -30,7 +30,7 @@
                                     <action selector="showAboutWindow:" target="Voe-Tx-rLC" id="HGv-E1-lQH"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Check Update..." id="gMo-qL-m08">
+                            <menuItem title="Check Update…" id="gMo-qL-m08">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="checkUpdate:" target="Voe-Tx-rLC" id="CQ8-wR-EzN"/>
@@ -103,7 +103,7 @@
                                 </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="N0Z-h7-JSg"/>
-                            <menuItem title="Save Current Playlist..." id="Mjr-lL-oEt">
+                            <menuItem title="Save Current Playlist…" id="Mjr-lL-oEt">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="xX3-Bc-McX"/>
@@ -147,7 +147,7 @@
                             <menuItem title="Go To Screenshot Folder" id="lj0-Oo-7nB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Advanced Screenshot..." hidden="YES" id="CKi-JE-yLT">
+                            <menuItem title="Advanced Screenshot…" hidden="YES" id="CKi-JE-yLT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="pEu-eU-Er6"/>
@@ -367,7 +367,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="HAm-FJ-1KF"/>
-                            <menuItem title="Font..." id="rme-fr-5rr">
+                            <menuItem title="Font…" id="rme-fr-5rr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
@@ -389,7 +389,7 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" hidden="YES" id="ZgO-35-2v2"/>
-                            <menuItem title="Custom Touch Bar..." hidden="YES" id="ZnF-yX-7jP">
+                            <menuItem title="Custom Touch Bar…" hidden="YES" id="ZnF-yX-7jP">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
@@ -516,7 +516,7 @@
         </customObject>
         <menu id="fxS-xv-Jb2">
             <items>
-                <menuItem title="Open..." id="Kby-lQ-HCW">
+                <menuItem title="Open…" id="Kby-lQ-HCW">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="openFile:" target="Voe-Tx-rLC" id="Zlo-gp-oIk"/>

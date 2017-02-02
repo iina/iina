@@ -17,7 +17,7 @@
 "playlist.chapter_cap" = "CHAPTERS";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering... %d%%";
+"main.buffering_indicator" = "Buffering… %d%%";
 
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "Default";
@@ -55,9 +55,9 @@
 "osd.video_eq.hue" = "Hue: %i";
 "osd.video_eq.saturation" = "Saturation: %i";
 "osd.video_eq.brightness" = "Brightness: %i";
-"osd.find_online_sub" = "Finding online subtitles...";
+"osd.find_online_sub" = "Finding online subtitles…";
 "osd.sub_not_found" = "No subtitle found";
-"osd.sub_found" = "%d subtitle(s) found. Downloading...";
+"osd.sub_found" = "%d subtitle(s) found. Downloading…";
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
 "osd.network_error" = "Network error";

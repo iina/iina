@@ -30,6 +30,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var gotoScreenshotFolder: NSMenuItem!
   @IBOutlet weak var advancedScreenShot: NSMenuItem!
   @IBOutlet weak var abLoop: NSMenuItem!
+  @IBOutlet weak var fileLoop: NSMenuItem!
   @IBOutlet weak var playlist: NSMenuItem!
   @IBOutlet weak var playlistMenu: NSMenu!
   @IBOutlet weak var chapter: NSMenuItem!
@@ -119,6 +120,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- list and chapter
     abLoop.action = #selector(MainWindowController.menuABLoop(_:))
+    fileLoop.action = #selector(MainWindowController.menuFileLoop(_:))
     playlistMenu.delegate = self
     chapterMenu.delegate = self
 
@@ -278,6 +280,8 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updatePlaybackMenu() {
     pause.title = PlayerCore.shared.info.isPaused ? Constants.String.resume : Constants.String.pause
+    let isLoop = PlayerCore.shared.mpvController.getFlag(MPVOption.PlaybackControl.loopFile)
+    fileLoop.state = isLoop ? NSOnState : NSOffState
   }
 
   private func updateVieoMenu() {

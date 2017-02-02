@@ -210,6 +210,11 @@ class PlayerCore: NSObject {
     }
   }
 
+  func toggleFileLoop() {
+    let isLoop = mpvController.getFlag(MPVOption.PlaybackControl.loopFile)
+    mpvController.setFlag(MPVOption.PlaybackControl.loopFile, !isLoop)
+  }
+
   func setVolume(_ volume: Int) {
     let realVolume = volume.constrain(min: 0, max: 100)
     info.volume = realVolume

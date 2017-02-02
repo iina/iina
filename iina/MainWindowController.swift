@@ -268,10 +268,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     notificationObservers.append(fsObserver)
 
     // move to center and make main
+    w.setIsVisible(false)
     w.center()
     w.makeMain()
-    w.makeKeyAndOrderFront(nil)
-    w.setIsVisible(false)
   }
 
   deinit {
@@ -552,8 +551,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Window delegate
 
+
+
   /** A method being called when window open. Pretend to be a window delegate. */
   func windowDidOpen() {
+    window!.makeKeyAndOrderFront(nil)
     // update buffer indicator view
     updateBufferIndicatorView()
     // enable sleep preventer
@@ -695,6 +697,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       videoView.videoLayer.contentsScale = window!.backingScaleFactor
     }
 
+  }
+
+  func windowDidBecomeKey(_ notification: Notification) {
+    window!.makeFirstResponder(window!)
   }
 
   // MARK: - Control UI

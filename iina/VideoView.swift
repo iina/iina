@@ -58,7 +58,7 @@ class VideoView: NSView {
     wantsBestResolutionOpenGLSurface = true
   
     // dragging init
-    register(forDraggedTypes: [NSFilenamesPboardType])
+    register(forDraggedTypes: [NSFilenamesPboardType, NSURLPboardType])
   }
 
   required init?(coder: NSCoder) {
@@ -98,9 +98,7 @@ class VideoView: NSView {
     let pb = sender.draggingPasteboard()
     guard let types = pb.types else { return false }
     if types.contains(NSFilenamesPboardType) {
-      guard let fileNames = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else {
-        return false
-      }
+      guard let fileNames = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else { return false }
       
       var videoFiles: [String] = []
       var subtitleFiles: [String] = []
@@ -133,8 +131,14 @@ class VideoView: NSView {
         playerCore.sendOSD(.addToPlaylist(videoFiles.count))
       }
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+      return true
+    } else if types.contains(NSURLPboardType) {
+      guard let url = pb.propertyList(forType: NSURLPboardType) as? [String] else { return false }
+      
+      playerCore.openURLString(url[0])
+      return true
     }
-    return true
+    return false
   }
   
 }

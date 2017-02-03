@@ -20,6 +20,7 @@
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "Standard";
 "quicksetting.crop_item.None" = "Kein";
+"quicksetting.track.none" = "<Leer>";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
@@ -88,7 +89,5 @@
 "menu.exit_fullscreen" = "Vollbild beenden";
 "menu.pause" = "Pausieren";
 "menu.resume" = "Fortsetzen";
-
-"track.none" = "<Leer>";
 
 "alert.extra_option_error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";

@@ -20,6 +20,7 @@
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "Default";
 "quicksetting.crop_item.None" = "None";
+"quicksetting.track.none" = "<None>";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
@@ -53,6 +54,12 @@
 "osd.video_eq.hue" = "Hue: %i";
 "osd.video_eq.saturation" = "Saturation: %i";
 "osd.video_eq.brightness" = "Brightness: %i";
+"osd.find_online_sub" = "Finding online subtitles...";
+"osd.sub_not_found" = "No subtitle found";
+"osd.sub_found" = "%d subtitle(s) found. Downloading...";
+"osd.sub_downloaded" = "Subtitle downloaded";
+"osd.sub_saved" = "Subtitle saved";
+"osd.network_error" = "Network error";
 
 "update.title_update_found" = "Update Found";
 "update.title_no_update" = "No Update";
@@ -61,8 +68,8 @@
 "update.no_update" = "You are running the latest version.";
 "update.check_failed" = "Failed to check updates. You are probably running a too old version. Please check the website or github.";
 "update.new_version" = "New version:";
-"update.dl_from_website" = "Go To Website";
-"update.dl_from_github" = "Go To Github";
+"update.dl_from_website" = "Go to Website";
+"update.dl_from_github" = "Go to Github";
 
 "preference.title" = "Preference";
 "preference.general" = "General";
@@ -83,6 +90,13 @@
 "menu.pause" = "Pause";
 "menu.resume" = "Resume";
 
-"track.none" = "<None>";
-
 "alert.extra_option_error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+
+// These aren't all of the accessibility message,just the mutable ones.
+"accessibility.arrows.speed.left.label" = "Slow down";
+"accessibility.arrows.speed.right.label" = "Speed up";
+"accessibility.arrows.playlist.left.label" = "Previous media";
+"accessibility.arrows.playlist.right.label" = "Next media";
+"accessibility.arrows.seek.left.label" = "Rewind";
+"accessibility.arrows.seek.right.label" = "Fastforward";
+

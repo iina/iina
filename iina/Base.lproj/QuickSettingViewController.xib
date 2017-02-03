@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -102,29 +102,29 @@
                     <tabViewItems>
                         <tabViewItem label="Video" identifier="1" id="CYP-el-A6A">
                             <view key="view" id="NRI-ba-KMd">
-                                <rect key="frame" x="0.0" y="0.0" width="373" height="789"/>
+                                <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="SHU-hX-9MT">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="789"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="8Es-YX-dNf">
-                                            <rect key="frame" x="0.0" y="0.0" width="373" height="789"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="345" height="823"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <view translatesAutoresizingMaskIntoConstraints="NO" id="ZGz-La-n9c" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="103" width="373" height="686"/>
+                                                    <rect key="frame" x="0.0" y="135" width="345" height="688"/>
                                                     <subviews>
                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="5v4-Te-950">
-                                                            <rect key="frame" x="0.0" y="0.0" width="373" height="686"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="688"/>
                                                             <subviews>
                                                                 <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykw-rb-M9D">
-                                                                    <rect key="frame" x="0.0" y="565" width="373" height="76"/>
+                                                                    <rect key="frame" x="0.0" y="567" width="345" height="76"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="jek-w4-LTf">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="373" height="76"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="345" height="76"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="rsV-qL-l7b">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="373" height="76"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="76"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                                 <color key="backgroundColor" white="1" alpha="0.082057643580000006" colorSpace="deviceWhite"/>
@@ -144,7 +144,7 @@
                                                                                         </textFieldCell>
                                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                     </tableColumn>
-                                                                                    <tableColumn identifier="TrackName" editable="NO" width="351" minWidth="40" maxWidth="3.4028234663852886e+38" id="DgA-Ly-Gb8">
+                                                                                    <tableColumn identifier="TrackName" editable="NO" width="323" minWidth="40" maxWidth="3.4028234663852886e+38" id="DgA-Ly-Gb8">
                                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                                                             <font key="font" metaFont="smallSystem"/>
                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -172,9 +172,10 @@
                                                                         <rect key="frame" x="-16" y="0.0" width="16" height="0.0"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
+                                                                    <accessibility description="Video track list" identifier="VideoTrackView"/>
                                                                 </scrollView>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ng5-FC-tts">
-                                                                    <rect key="frame" x="17" y="649" width="323" height="17"/>
+                                                                    <rect key="frame" x="17" y="651" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Video track:" id="VzC-tM-KT7">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -182,7 +183,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ljl-w6-gIf">
-                                                                    <rect key="frame" x="18" y="497" width="256" height="24"/>
+                                                                    <rect key="frame" x="18" y="499" width="256" height="24"/>
                                                                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="cMu-YF-riv">
                                                                         <font key="font" metaFont="system"/>
                                                                         <segments>
@@ -198,7 +199,7 @@
                                                                     </connections>
                                                                 </segmentedControl>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8ZJ-PD-t0R">
-                                                                    <rect key="frame" x="17" y="528" width="323" height="17"/>
+                                                                    <rect key="frame" x="17" y="530" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Aspect Ratio:" id="YgL-iV-bca">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -206,7 +207,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XAI-y0-tcy">
-                                                                    <rect key="frame" x="295" y="499" width="58" height="22"/>
+                                                                    <rect key="frame" x="267" y="501" width="58" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="58" id="6bj-r1-RIj"/>
                                                                     </constraints>
@@ -215,12 +216,13 @@
                                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <accessibility description="Custom Ratio" identifier="CustomRatioTextField"/>
                                                                     <connections>
                                                                         <action selector="customAspectEditFinishedAction:" target="-2" id="8DL-tk-4rJ"/>
                                                                     </connections>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oAm-jJ-3kE">
-                                                                    <rect key="frame" x="17" y="460" width="323" height="17"/>
+                                                                    <rect key="frame" x="17" y="462" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Crop:" id="m9e-IB-IDJ">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -228,7 +230,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="720" translatesAutoresizingMaskIntoConstraints="NO" id="ItN-JT-puN">
-                                                                    <rect key="frame" x="260" y="424" width="99" height="32"/>
+                                                                    <rect key="frame" x="260" y="426" width="71" height="32"/>
                                                                     <buttonCell key="cell" type="push" title="Custom..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vFD-HU-RVz">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -238,7 +240,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kUi-hW-BR6">
-                                                                    <rect key="frame" x="18" y="429" width="242" height="24"/>
+                                                                    <rect key="frame" x="18" y="431" width="242" height="24"/>
                                                                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="iuN-rN-jT7">
                                                                         <font key="font" metaFont="system"/>
                                                                         <segments>
@@ -254,7 +256,7 @@
                                                                     </connections>
                                                                 </segmentedControl>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7vv-En-VYY">
-                                                                    <rect key="frame" x="17" y="392" width="323" height="17"/>
+                                                                    <rect key="frame" x="17" y="394" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Rotation:" id="to3-rc-Agv">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -262,7 +264,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bza-SA-tXE">
-                                                                    <rect key="frame" x="18" y="361" width="182" height="24"/>
+                                                                    <rect key="frame" x="18" y="363" width="182" height="24"/>
                                                                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="z1L-0N-dfK">
                                                                         <font key="font" metaFont="system"/>
                                                                         <segments>
@@ -301,17 +303,18 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UWh-M9-5Nw">
-                                                                    <rect key="frame" x="21" y="294" width="236" height="18"/>
+                                                                    <rect key="frame" x="21" y="294" width="236" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="236" id="mhI-LR-I5w"/>
                                                                     </constraints>
                                                                     <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="24" doubleValue="8" tickMarkPosition="below" numberOfTickMarks="25" allowsTickMarkValuesOnly="YES" sliderType="linear" id="qxp-Lt-D6o"/>
+                                                                    <accessibility description="Speed slider" identifier="SpeedSlider"/>
                                                                     <connections>
                                                                         <action selector="speedChangedAction:" target="-2" id="asr-iq-ZNJ"/>
                                                                     </connections>
                                                                 </slider>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3EN-WD-QNI" userLabel="Speed Slider Indicator">
-                                                                    <rect key="frame" x="86" y="312" width="32" height="14"/>
+                                                                    <rect key="frame" x="86" y="314" width="32" height="14"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="14" id="Fo3-vO-Bk1"/>
                                                                         <constraint firstAttribute="width" constant="28" id="UMm-n3-mDl"/>
@@ -335,7 +338,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d4r-sL-0Vo">
-                                                                    <rect key="frame" x="17" y="324" width="323" height="17"/>
+                                                                    <rect key="frame" x="17" y="326" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Speed:" id="1KQ-oZ-A2x">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -355,7 +358,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sIs-a1-rGR">
-                                                                    <rect key="frame" x="267" y="292" width="57" height="22"/>
+                                                                    <rect key="frame" x="267" y="293" width="57" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="57" id="Ood-Jd-gLJ"/>
                                                                     </constraints>
@@ -364,6 +367,7 @@
                                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <accessibility description="Custom Speed" identifier="CustomSpeedButton"/>
                                                                     <connections>
                                                                         <action selector="customSpeedEditFinishedAction:" target="-2" id="f1u-Mu-w4S"/>
                                                                     </connections>
@@ -379,10 +383,10 @@
                                                                     </connections>
                                                                 </button>
                                                                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="IWj-Dg-ZDI">
-                                                                    <rect key="frame" x="0.0" y="211" width="373" height="5"/>
+                                                                    <rect key="frame" x="0.0" y="211" width="345" height="5"/>
                                                                 </box>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dFy-zT-BqP">
-                                                                    <rect key="frame" x="17" y="172" width="323" height="17"/>
+                                                                    <rect key="frame" x="17" y="172" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Equalizer" id="Xez-sb-mfB">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -390,8 +394,9 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sBU-NZ-sp3">
-                                                                    <rect key="frame" x="93" y="138" width="229" height="15"/>
+                                                                    <rect key="frame" x="93" y="137" width="201" height="17"/>
                                                                     <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="0Sg-Ca-QjC"/>
+                                                                    <accessibility description="Brightness"/>
                                                                     <connections>
                                                                         <action selector="equalizerSliderAction:" target="-2" id="bF8-qZ-hks"/>
                                                                     </connections>
@@ -409,8 +414,9 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Ww-YT-a8e">
-                                                                    <rect key="frame" x="93" y="110" width="229" height="15"/>
+                                                                    <rect key="frame" x="93" y="109" width="201" height="17"/>
                                                                     <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="d8Q-Fw-bbA"/>
+                                                                    <accessibility description="Contrast"/>
                                                                     <connections>
                                                                         <action selector="equalizerSliderAction:" target="-2" id="Mtl-BL-VYs"/>
                                                                     </connections>
@@ -427,8 +433,9 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qeO-tk-I0D">
-                                                                    <rect key="frame" x="93" y="82" width="229" height="15"/>
+                                                                    <rect key="frame" x="93" y="81" width="201" height="17"/>
                                                                     <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="aEN-2P-ffr"/>
+                                                                    <accessibility description="Saturation"/>
                                                                     <connections>
                                                                         <action selector="equalizerSliderAction:" target="-2" id="64F-Yg-BY8"/>
                                                                     </connections>
@@ -445,8 +452,9 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SL7-DZ-5ff">
-                                                                    <rect key="frame" x="93" y="54" width="229" height="15"/>
+                                                                    <rect key="frame" x="93" y="53" width="201" height="17"/>
                                                                     <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="IEh-at-wdd"/>
+                                                                    <accessibility description="Gamma"/>
                                                                     <connections>
                                                                         <action selector="equalizerSliderAction:" target="-2" id="h5f-VW-qGS"/>
                                                                     </connections>
@@ -463,8 +471,9 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ntv-89-1iw">
-                                                                    <rect key="frame" x="93" y="26" width="229" height="15"/>
+                                                                    <rect key="frame" x="93" y="25" width="201" height="17"/>
                                                                     <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="MTr-Ze-dRm"/>
+                                                                    <accessibility description="Hue"/>
                                                                     <connections>
                                                                         <action selector="equalizerSliderAction:" target="-2" id="b6L-ZX-hlF"/>
                                                                     </connections>
@@ -481,7 +490,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RVg-iv-SLo">
-                                                                    <rect key="frame" x="333" y="137" width="20" height="17"/>
+                                                                    <rect key="frame" x="305" y="137" width="20" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="20" id="Blq-7B-wXj"/>
                                                                         <constraint firstAttribute="height" constant="17" id="K2i-XQ-bmF"/>
@@ -490,12 +499,13 @@
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
+                                                                    <accessibility description="Reset brightness"/>
                                                                     <connections>
                                                                         <action selector="resetEqualizerBtnAction:" target="-2" id="7EI-ef-QfR"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="g2t-lZ-AEy">
-                                                                    <rect key="frame" x="333" y="109" width="20" height="17"/>
+                                                                    <rect key="frame" x="305" y="109" width="20" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="No4-dM-lef"/>
                                                                         <constraint firstAttribute="width" constant="20" id="jcC-Wn-oMq"/>
@@ -504,12 +514,13 @@
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
+                                                                    <accessibility description="Reset contrast"/>
                                                                     <connections>
                                                                         <action selector="resetEqualizerBtnAction:" target="-2" id="WbP-Bb-JbW"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="N1k-37-4OP">
-                                                                    <rect key="frame" x="333" y="81" width="20" height="17"/>
+                                                                    <rect key="frame" x="305" y="81" width="20" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="BH7-Hv-t8g"/>
                                                                         <constraint firstAttribute="width" constant="20" id="USW-FS-jQa"/>
@@ -518,12 +529,13 @@
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
+                                                                    <accessibility description="Reset saturation"/>
                                                                     <connections>
                                                                         <action selector="resetEqualizerBtnAction:" target="-2" id="MF6-Fz-yqb"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="Cec-wN-J62">
-                                                                    <rect key="frame" x="333" y="53" width="20" height="17"/>
+                                                                    <rect key="frame" x="305" y="53" width="20" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="hEq-A3-uQc"/>
                                                                         <constraint firstAttribute="width" constant="20" id="xPQ-W8-bBW"/>
@@ -532,12 +544,13 @@
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
+                                                                    <accessibility description="Reset gamma"/>
                                                                     <connections>
                                                                         <action selector="resetEqualizerBtnAction:" target="-2" id="wMC-t4-VKN"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button verticalHuggingPriority="750" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="Cs3-ib-x4Y">
-                                                                    <rect key="frame" x="333" y="25" width="20" height="17"/>
+                                                                    <rect key="frame" x="305" y="25" width="20" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="HBL-aN-fWE"/>
                                                                         <constraint firstAttribute="width" constant="20" id="q46-CR-8Im"/>
@@ -546,12 +559,13 @@
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
+                                                                    <accessibility description="Reset hue"/>
                                                                     <connections>
                                                                         <action selector="resetEqualizerBtnAction:" target="-2" id="5MT-kZ-5Mh"/>
                                                                     </connections>
                                                                 </button>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C7W-xd-6OE">
-                                                                    <rect key="frame" x="327" y="295" width="11" height="17"/>
+                                                                    <rect key="frame" x="327" y="296" width="11" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="x" id="W7H-mU-v3D">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -675,7 +689,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Vtu-Wx-ydk">
-                                            <rect key="frame" x="357" y="0.0" width="16" height="789"/>
+                                            <rect key="frame" x="345" y="0.0" width="15" height="823"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
@@ -690,23 +704,23 @@
                         </tabViewItem>
                         <tabViewItem label="Audio" identifier="2" id="bzk-c2-LH5">
                             <view key="view" id="Dxl-wa-zgc">
-                                <rect key="frame" x="0.0" y="0.0" width="360" height="789"/>
+                                <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXn-sV-AmG">
-                                        <rect key="frame" x="0.0" y="0.0" width="360" height="789"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oVx-Sp-Lhl">
-                                            <rect key="frame" x="0.0" y="0.0" width="360" height="789"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="345" height="808"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="NZU-RD-Dm3" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="277" width="360" height="512"/>
+                                                    <rect key="frame" x="0.0" y="294" width="345" height="514"/>
                                                     <subviews>
                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="my2-5o-bNb">
-                                                            <rect key="frame" x="0.0" y="0.0" width="360" height="512"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="514"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E4v-kh-61H">
-                                                                    <rect key="frame" x="17" y="475" width="310" height="17"/>
+                                                                    <rect key="frame" x="17" y="477" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Audio track:" id="x39-62-7KC">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -714,13 +728,13 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qal-0X-4kS">
-                                                                    <rect key="frame" x="0.0" y="391" width="360" height="76"/>
+                                                                    <rect key="frame" x="0.0" y="393" width="345" height="76"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="vgF-KN-yHf">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="360" height="76"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="345" height="76"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="FLg-2m-Zaq">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="360" height="76"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="76"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                                 <color key="backgroundColor" white="1" alpha="0.080000000000000002" colorSpace="deviceWhite"/>
@@ -740,7 +754,7 @@
                                                                                         </textFieldCell>
                                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                     </tableColumn>
-                                                                                    <tableColumn identifier="TrackName" editable="NO" width="338" minWidth="40" maxWidth="3.4028234663852886e+38" id="cKa-XV-ATZ">
+                                                                                    <tableColumn identifier="TrackName" editable="NO" width="323" minWidth="40" maxWidth="3.4028234663852886e+38" id="cKa-XV-ATZ">
                                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                                                             <font key="font" metaFont="smallSystem"/>
                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -768,9 +782,10 @@
                                                                         <rect key="frame" x="-16" y="0.0" width="16" height="0.0"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
+                                                                    <accessibility description="Audio track list" identifier="AudioTrackView"/>
                                                                 </scrollView>
                                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-fV-DCz">
-                                                                    <rect key="frame" x="14" y="318" width="317" height="32"/>
+                                                                    <rect key="frame" x="14" y="320" width="317" height="32"/>
                                                                     <buttonCell key="cell" type="push" title="Load External Audio Track..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Ax-5X-osl">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -780,17 +795,18 @@
                                                                     </connections>
                                                                 </button>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="a7T-nr-ELY">
-                                                                    <rect key="frame" x="20" y="240" width="240" height="18"/>
+                                                                    <rect key="frame" x="20" y="240" width="240" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="240" id="Rhl-RX-l4v"/>
                                                                     </constraints>
                                                                     <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-5" maxValue="5" tickMarkPosition="below" numberOfTickMarks="21" allowsTickMarkValuesOnly="YES" sliderType="linear" id="ERU-lE-Yhg"/>
+                                                                    <accessibility description="Audio delay slider"/>
                                                                     <connections>
                                                                         <action selector="audioDelayChangedAction:" target="-2" id="egE-eN-9bo"/>
                                                                     </connections>
                                                                 </slider>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kvu-fg-olx">
-                                                                    <rect key="frame" x="17" y="354" width="310" height="17"/>
+                                                                    <rect key="frame" x="17" y="356" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="External audio:" id="Lnu-kz-cql">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -822,7 +838,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0DM-CY-o8W" userLabel="Delay">
-                                                                    <rect key="frame" x="276" y="239" width="64" height="22"/>
+                                                                    <rect key="frame" x="276" y="240" width="64" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="64" id="Alb-o2-pM2"/>
                                                                     </constraints>
@@ -832,12 +848,13 @@
                                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <accessibility description="Custom audio delay"/>
                                                                     <connections>
                                                                         <action selector="customAudioDelayEditFinishedAction:" target="-2" id="if3-IB-m6c"/>
                                                                     </connections>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZPW-fz-5Oi">
-                                                                    <rect key="frame" x="17" y="281" width="310" height="17"/>
+                                                                    <rect key="frame" x="17" y="283" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Audio delay:" id="AKs-VQ-fKF">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -845,7 +862,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gR7-cS-zmu" userLabel="Speed Slider Indicator">
-                                                                    <rect key="frame" x="130" y="260" width="20" height="13"/>
+                                                                    <rect key="frame" x="130" y="262" width="20" height="13"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="0s" usesSingleLineMode="YES" id="s3F-Tl-Siy">
                                                                         <font key="font" metaFont="system" size="10"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -853,10 +870,10 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="KKr-0Y-831">
-                                                                    <rect key="frame" x="0.0" y="204" width="360" height="5"/>
+                                                                    <rect key="frame" x="0.0" y="204" width="345" height="5"/>
                                                                 </box>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IHl-Ks-v7I">
-                                                                    <rect key="frame" x="17" y="171" width="305" height="17"/>
+                                                                    <rect key="frame" x="17" y="171" width="290" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Equalizer" id="iS4-Zr-9Ig">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -864,84 +881,94 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="PLF-x4-bMC">
-                                                                    <rect key="frame" x="0.0" y="24" width="360" height="139"/>
+                                                                    <rect key="frame" x="0.0" y="24" width="345" height="139"/>
                                                                     <subviews>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pHR-ym-VeQ">
-                                                                            <rect key="frame" x="20" y="19" width="18" height="120"/>
+                                                                            <rect key="frame" x="20" y="19" width="20" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="Twm-2U-8ou"/>
+                                                                            <accessibility description="31.25 Equalizer slider"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="ywO-zh-sWU"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Qhv-oC-xzP">
-                                                                            <rect key="frame" x="47" y="19" width="18" height="120"/>
+                                                                            <rect key="frame" x="47" y="19" width="20" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="SCy-Om-bV6"/>
+                                                                            <accessibility description="62.5 Equalizer slider"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="xQb-Li-0pw"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="iDT-gu-k7t">
-                                                                            <rect key="frame" x="74" y="19" width="18" height="120"/>
+                                                                            <rect key="frame" x="74" y="19" width="20" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="a7E-4j-6g2"/>
+                                                                            <accessibility description="125 Equalizer slider"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="bCl-L6-1iR"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="O2w-VO-03F">
-                                                                            <rect key="frame" x="101" y="19" width="18" height="120"/>
+                                                                            <rect key="frame" x="101" y="19" width="20" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="TbE-dB-ORk"/>
+                                                                            <accessibility description="250 Equalizer slider"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="15r-Ui-dhW"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="npn-V6-hjZ">
-                                                                            <rect key="frame" x="128" y="19" width="18" height="120"/>
+                                                                            <rect key="frame" x="128" y="19" width="20" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="4Ra-VR-yOK"/>
+                                                                            <accessibility description="500 Equalizer slider"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="sWe-Hb-axh"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="TKd-tg-Xtc">
-                                                                            <rect key="frame" x="155" y="19" width="18" height="120"/>
+                                                                            <rect key="frame" x="155" y="19" width="20" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="xV9-OM-MHq"/>
+                                                                            <accessibility description="1k Equalizer slider"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="bVX-Tj-pgM"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="6" translatesAutoresizingMaskIntoConstraints="NO" id="nNf-gg-4tL">
-                                                                            <rect key="frame" x="182" y="19" width="18" height="120"/>
+                                                                            <rect key="frame" x="182" y="19" width="20" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="TNb-Es-VsX"/>
+                                                                            <accessibility description="2k Equalizer slider"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="p1d-eK-UB3"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="7" translatesAutoresizingMaskIntoConstraints="NO" id="JaQ-EH-K1U">
-                                                                            <rect key="frame" x="209" y="19" width="18" height="120"/>
+                                                                            <rect key="frame" x="209" y="19" width="20" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="P8O-pY-Nby"/>
+                                                                            <accessibility description="4k Equalizer slider"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="oxX-UX-l6i"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="8" translatesAutoresizingMaskIntoConstraints="NO" id="gbd-xf-hGS">
-                                                                            <rect key="frame" x="234" y="19" width="18" height="120"/>
+                                                                            <rect key="frame" x="234" y="19" width="20" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="GEq-jW-WUw"/>
+                                                                            <accessibility description="8k Equalizer slider"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="pkI-fs-ZCs"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" fixedFrame="YES" tag="9" translatesAutoresizingMaskIntoConstraints="NO" id="w04-h5-qaz">
-                                                                            <rect key="frame" x="259" y="19" width="18" height="120"/>
+                                                                            <rect key="frame" x="259" y="19" width="20" height="120"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="5FD-oT-GpE"/>
+                                                                            <accessibility description="16k Equalizer slider"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="I08-gI-z8e"/>
                                                                             </connections>
@@ -1069,7 +1096,7 @@
                                                                     </constraints>
                                                                 </customView>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="dB1-5J-5YU">
-                                                                    <rect key="frame" x="324" y="171" width="16" height="16"/>
+                                                                    <rect key="frame" x="309" y="171" width="16" height="16"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="16" id="T2d-bE-Rq1"/>
                                                                         <constraint firstAttribute="height" constant="16" id="xEH-z6-Ltg"/>
@@ -1107,7 +1134,7 @@
                                                                 <constraint firstItem="Qal-0X-4kS" firstAttribute="top" secondItem="E4v-kh-61H" secondAttribute="bottom" constant="8" id="PfL-cK-sd5"/>
                                                                 <constraint firstItem="C39-jO-zwp" firstAttribute="centerX" secondItem="a7T-nr-ELY" secondAttribute="centerX" id="Pq3-Ff-F3F"/>
                                                                 <constraint firstItem="IHl-Ks-v7I" firstAttribute="top" secondItem="KKr-0Y-831" secondAttribute="bottom" constant="18" id="Q61-jq-LnT"/>
-                                                                <constraint firstAttribute="trailing" secondItem="XdF-fV-DCz" secondAttribute="trailing" constant="35" id="Qgj-tE-Ji4"/>
+                                                                <constraint firstAttribute="trailing" secondItem="XdF-fV-DCz" secondAttribute="trailing" constant="20" id="Qgj-tE-Ji4"/>
                                                                 <constraint firstItem="Qal-0X-4kS" firstAttribute="leading" secondItem="my2-5o-bNb" secondAttribute="leading" id="SwW-S7-LX2"/>
                                                                 <constraint firstItem="gR7-cS-zmu" firstAttribute="centerX" secondItem="a7T-nr-ELY" secondAttribute="centerX" id="VmP-Jn-P9Z"/>
                                                                 <constraint firstItem="dB1-5J-5YU" firstAttribute="centerY" secondItem="IHl-Ks-v7I" secondAttribute="centerY" id="Ym6-Rk-xwx"/>
@@ -1142,11 +1169,11 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="klo-Db-oQE">
-                                            <rect key="frame" x="0.0" y="773" width="360" height="16"/>
+                                            <rect key="frame" x="0.0" y="808" width="345" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="17z-n6-rH9">
-                                            <rect key="frame" x="344" y="0.0" width="16" height="789"/>
+                                            <rect key="frame" x="345" y="0.0" width="15" height="808"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
@@ -1167,23 +1194,23 @@
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kA-IY-poi">
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="epy-wp-Ja5">
-                                            <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="345" height="808"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="pm4-x9-WJ5" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="-9" width="360" height="832"/>
+                                                    <rect key="frame" x="0.0" y="-30" width="345" height="838"/>
                                                     <subviews>
                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Wuf-PX-OYd" userLabel="Sub Basic">
-                                                            <rect key="frame" x="0.0" y="411" width="360" height="421"/>
+                                                            <rect key="frame" x="0.0" y="415" width="345" height="423"/>
                                                             <subviews>
                                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fq-4o-8Hh">
-                                                                    <rect key="frame" x="0.0" y="304" width="360" height="72"/>
+                                                                    <rect key="frame" x="0.0" y="306" width="345" height="72"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="dJV-R0-O3M">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="345" height="72"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="2vU-hm-gGB">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="72"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.080000000000000002" colorSpace="calibratedRGB"/>
@@ -1203,7 +1230,7 @@
                                                                                         </textFieldCell>
                                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                     </tableColumn>
-                                                                                    <tableColumn identifier="TrackName" width="338" minWidth="40" maxWidth="3.4028234663852886e+38" id="jxP-dI-qjH">
+                                                                                    <tableColumn identifier="TrackName" width="323" minWidth="40" maxWidth="3.4028234663852886e+38" id="jxP-dI-qjH">
                                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                                                             <font key="font" metaFont="smallSystem"/>
                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1231,15 +1258,16 @@
                                                                         <rect key="frame" x="-16" y="0.0" width="16" height="0.0"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
+                                                                    <accessibility description="Subtitle list"/>
                                                                 </scrollView>
                                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LMp-7Y-Rxg">
-                                                                    <rect key="frame" x="0.0" y="187" width="360" height="72"/>
+                                                                    <rect key="frame" x="0.0" y="189" width="345" height="72"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="EKn-MX-Fao">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="345" height="72"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="Jve-qX-Agy">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="72"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                                 <color key="backgroundColor" white="1" alpha="0.080000000000000002" colorSpace="deviceWhite"/>
@@ -1259,7 +1287,7 @@
                                                                                         </textFieldCell>
                                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                     </tableColumn>
-                                                                                    <tableColumn identifier="TrackName" width="338" minWidth="40" maxWidth="3.4028234663852886e+38" id="jc0-mX-0JS">
+                                                                                    <tableColumn identifier="TrackName" width="323" minWidth="40" maxWidth="3.4028234663852886e+38" id="jc0-mX-0JS">
                                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                                                             <font key="font" metaFont="smallSystem"/>
                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1287,9 +1315,10 @@
                                                                         <rect key="frame" x="-16" y="0.0" width="16" height="0.0"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
+                                                                    <accessibility description="Secondary subtitle list"/>
                                                                 </scrollView>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mYH-DV-e4F" userLabel="Subtitle">
-                                                                    <rect key="frame" x="17" y="384" width="310" height="17"/>
+                                                                    <rect key="frame" x="17" y="386" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Subtitle:" id="eXZ-HN-qL4">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1297,7 +1326,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3xe-mv-ORw" userLabel="Subtitle">
-                                                                    <rect key="frame" x="17" y="267" width="310" height="17"/>
+                                                                    <rect key="frame" x="17" y="269" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Secondary subtitle:" id="bKb-pW-HnS">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1305,7 +1334,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M2U-rq-X2L" userLabel="Sub Delay">
-                                                                    <rect key="frame" x="17" y="150" width="310" height="17"/>
+                                                                    <rect key="frame" x="17" y="152" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="External subtitles:" id="RA1-fF-OrB">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1313,7 +1342,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SpJ-zD-xUM">
-                                                                    <rect key="frame" x="14" y="114" width="317" height="32"/>
+                                                                    <rect key="frame" x="14" y="116" width="317" height="32"/>
                                                                     <buttonCell key="cell" type="push" title="Load Subtitle..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="C97-zJ-O3Y">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -1323,11 +1352,12 @@
                                                                     </connections>
                                                                 </button>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dXz-x4-sm5">
-                                                                    <rect key="frame" x="20" y="37" width="240" height="18"/>
+                                                                    <rect key="frame" x="20" y="37" width="240" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="240" id="Qpm-gC-Y2e"/>
                                                                     </constraints>
                                                                     <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-5" maxValue="5" tickMarkPosition="below" numberOfTickMarks="21" allowsTickMarkValuesOnly="YES" sliderType="linear" id="h1D-gP-Dst"/>
+                                                                    <accessibility description="Subtitle slider"/>
                                                                     <connections>
                                                                         <action selector="subDelayChangedAction:" target="-2" id="rzg-cd-v6B"/>
                                                                     </connections>
@@ -1349,7 +1379,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VdJ-nq-zaM" userLabel="Speed Slider Indicator">
-                                                                    <rect key="frame" x="130" y="55" width="20" height="13"/>
+                                                                    <rect key="frame" x="130" y="57" width="20" height="13"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="0s" usesSingleLineMode="YES" id="upM-Lz-YwK">
                                                                         <font key="font" metaFont="system" size="10"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1357,7 +1387,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cOv-Yl-KdH">
-                                                                    <rect key="frame" x="17" y="77" width="310" height="17"/>
+                                                                    <rect key="frame" x="17" y="79" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Subtitle delay:" id="Wkz-wW-sOM">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1365,7 +1395,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eOz-bB-vzM" userLabel="Delay">
-                                                                    <rect key="frame" x="276" y="36" width="64" height="22"/>
+                                                                    <rect key="frame" x="276" y="37" width="64" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="64" id="ptd-kK-aWm"/>
                                                                     </constraints>
@@ -1375,6 +1405,7 @@
                                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <accessibility description="Custom subtitle"/>
                                                                     <connections>
                                                                         <action selector="customSubDelayEditFinishedAction:" target="-2" id="oMk-9O-MYn"/>
                                                                     </connections>
@@ -1401,7 +1432,7 @@
                                                                 <constraint firstItem="r77-VA-Z1b" firstAttribute="top" secondItem="dXz-x4-sm5" secondAttribute="bottom" id="Cev-r5-9om"/>
                                                                 <constraint firstAttribute="bottom" secondItem="dXz-x4-sm5" secondAttribute="bottom" constant="37" id="Doh-No-t5F"/>
                                                                 <constraint firstItem="dXz-x4-sm5" firstAttribute="top" secondItem="VdJ-nq-zaM" secondAttribute="bottom" id="Fdp-D4-VPU"/>
-                                                                <constraint firstAttribute="trailing" secondItem="SpJ-zD-xUM" secondAttribute="trailing" constant="35" id="HwV-jO-qIQ"/>
+                                                                <constraint firstAttribute="trailing" secondItem="SpJ-zD-xUM" secondAttribute="trailing" constant="20" id="HwV-jO-qIQ"/>
                                                                 <constraint firstItem="3xe-mv-ORw" firstAttribute="top" secondItem="1Fq-4o-8Hh" secondAttribute="bottom" constant="20" id="I4y-iB-fWM"/>
                                                                 <constraint firstItem="mYH-DV-e4F" firstAttribute="top" secondItem="Wuf-PX-OYd" secondAttribute="top" constant="20" id="Izb-ki-XeU"/>
                                                                 <constraint firstAttribute="trailing" secondItem="M2U-rq-X2L" secondAttribute="trailing" constant="35" id="LH3-mi-eMt"/>
@@ -1426,16 +1457,16 @@
                                                             </constraints>
                                                         </customView>
                                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="jRc-VZ-Vv2">
-                                                            <rect key="frame" x="0.0" y="409" width="360" height="5"/>
+                                                            <rect key="frame" x="0.0" y="413" width="345" height="5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="W2h-DQ-cHB"/>
                                                             </constraints>
                                                         </box>
                                                         <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gSw-NK-ZU6" userLabel="Sub Style">
-                                                            <rect key="frame" x="0.0" y="0.0" width="360" height="411"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="415"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9xm-5m-Q7G">
-                                                                    <rect key="frame" x="17" y="329" width="305" height="17"/>
+                                                                    <rect key="frame" x="17" y="333" width="290" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Scale:" id="Wbx-Ti-qiS">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1443,14 +1474,15 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B8f-KH-BaO">
-                                                                    <rect key="frame" x="18" y="304" width="324" height="19"/>
+                                                                    <rect key="frame" x="18" y="306" width="309" height="21"/>
                                                                     <sliderCell key="cell" continuous="YES" alignment="left" minValue="-5" maxValue="5" tickMarkPosition="above" sliderType="linear" id="Qpw-NH-Unh"/>
+                                                                    <accessibility description="Scale slider"/>
                                                                     <connections>
                                                                         <action selector="subScaleSliderAction:" target="-2" id="zEB-hd-cz8"/>
                                                                     </connections>
                                                                 </slider>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ipr-WR-eax">
-                                                                    <rect key="frame" x="17" y="215" width="310" height="17"/>
+                                                                    <rect key="frame" x="17" y="215" width="295" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Text Style:" id="ZBd-13-lA1">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1458,7 +1490,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lkf-Yn-nsR">
-                                                                    <rect key="frame" x="18" y="363" width="324" height="28"/>
+                                                                    <rect key="frame" x="18" y="367" width="324" height="28"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="320" id="TJx-rX-qcD"/>
                                                                     </constraints>
@@ -1469,7 +1501,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="XwE-7y-DXJ" customClass="SettingsListCellView" customModule="IINA" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="24" width="360" height="183"/>
+                                                                    <rect key="frame" x="0.0" y="24" width="345" height="183"/>
                                                                     <subviews>
                                                                         <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="9mo-uL-hfC" customClass="RoundedColorWell" customModule="IINA" customModuleProvider="target">
                                                                             <rect key="frame" x="60" y="120" width="23" height="23"/>
@@ -1478,12 +1510,13 @@
                                                                                 <constraint firstAttribute="width" constant="23" id="tlC-zK-dZi"/>
                                                                             </constraints>
                                                                             <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <accessibility description="Font color picker"/>
                                                                             <connections>
                                                                                 <action selector="subTextColorAction:" target="-2" id="K9J-nN-LTp"/>
                                                                             </connections>
                                                                         </colorWell>
                                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xtF-tn-m9W" userLabel="Text fint size">
-                                                                            <rect key="frame" x="142" y="119" width="77" height="22"/>
+                                                                            <rect key="frame" x="134" y="119" width="77" height="22"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="71" id="d7u-5q-vDg"/>
                                                                             </constraints>
@@ -1504,6 +1537,7 @@
                                                                                     </items>
                                                                                 </menu>
                                                                             </popUpButtonCell>
+                                                                            <accessibility description="Font size"/>
                                                                             <connections>
                                                                                 <action selector="subTextSizeAction:" target="-2" id="Z3b-cC-c1V"/>
                                                                             </connections>
@@ -1517,7 +1551,7 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vLY-cB-GEf">
-                                                                            <rect key="frame" x="109" y="124" width="30" height="14"/>
+                                                                            <rect key="frame" x="101" y="124" width="30" height="14"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Size:" id="s9l-Hb-SCk">
                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1525,7 +1559,7 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xdm-hT-rQs">
-                                                                            <rect key="frame" x="18" y="97" width="324" height="14"/>
+                                                                            <rect key="frame" x="18" y="97" width="309" height="14"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BORDER" id="GlZ-YU-dNm">
                                                                                 <font key="font" metaFont="smallSystemBold"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1549,7 +1583,7 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Lw-84-lts">
-                                                                            <rect key="frame" x="100" y="72" width="39" height="14"/>
+                                                                            <rect key="frame" x="92" y="72" width="39" height="14"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Width:" id="22j-ra-GAY">
                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1563,6 +1597,7 @@
                                                                                 <constraint firstAttribute="width" constant="23" id="kwW-fi-4RZ"/>
                                                                             </constraints>
                                                                             <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <accessibility description="Border color picker"/>
                                                                             <connections>
                                                                                 <action selector="subTextBorderColorAction:" target="-2" id="ACh-s2-ew1"/>
                                                                             </connections>
@@ -1574,12 +1609,13 @@
                                                                                 <constraint firstAttribute="width" constant="23" id="qQW-fy-gq5"/>
                                                                             </constraints>
                                                                             <color key="color" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                                                            <accessibility description="Background color picker"/>
                                                                             <connections>
                                                                                 <action selector="subTextBgColorAction:" target="-2" id="hoQ-1z-12N"/>
                                                                             </connections>
                                                                         </colorWell>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WJ6-Fb-q7a">
-                                                                            <rect key="frame" x="18" y="45" width="324" height="14"/>
+                                                                            <rect key="frame" x="18" y="45" width="309" height="14"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BACKGROUND" id="uqb-mz-A22">
                                                                                 <font key="font" metaFont="smallSystemBold"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1587,7 +1623,7 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jTT-rB-qLu">
-                                                                            <rect key="frame" x="18" y="149" width="324" height="14"/>
+                                                                            <rect key="frame" x="18" y="149" width="309" height="14"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="FONT" id="g6B-DC-lJ0">
                                                                                 <font key="font" metaFont="smallSystemBold"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1595,7 +1631,7 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bkX-rt-2bg" userLabel="Text Border Width">
-                                                                            <rect key="frame" x="142" y="67" width="77" height="22"/>
+                                                                            <rect key="frame" x="134" y="67" width="77" height="22"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="71" id="Udn-GZ-bGb"/>
                                                                             </constraints>
@@ -1617,12 +1653,13 @@
                                                                                     </items>
                                                                                 </menu>
                                                                             </popUpButtonCell>
+                                                                            <accessibility description="Border width"/>
                                                                             <connections>
                                                                                 <action selector="subTextBorderWidthAction:" target="-2" id="qyR-r0-5LO"/>
                                                                             </connections>
                                                                         </popUpButton>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qGz-rB-dsV">
-                                                                            <rect key="frame" x="251" y="116" width="74" height="28"/>
+                                                                            <rect key="frame" x="236" y="116" width="74" height="28"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="0zp-I9-Wwd"/>
                                                                             </constraints>
@@ -1630,6 +1667,7 @@
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                             </buttonCell>
+                                                                            <accessibility description="Select font"/>
                                                                             <connections>
                                                                                 <action selector="subFontAction:" target="-2" id="suw-pH-n9w"/>
                                                                             </connections>
@@ -1671,7 +1709,7 @@
                                                                     </constraints>
                                                                 </customView>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="8ZC-Wx-nt7">
-                                                                    <rect key="frame" x="324" y="329" width="16" height="16"/>
+                                                                    <rect key="frame" x="309" y="333" width="16" height="16"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="16" id="GIz-PJ-9SR"/>
                                                                         <constraint firstAttribute="width" constant="16" id="HE1-PU-O12"/>
@@ -1685,7 +1723,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OEX-Gn-xCa">
-                                                                    <rect key="frame" x="17" y="272" width="305" height="17"/>
+                                                                    <rect key="frame" x="17" y="274" width="290" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Position:" id="t03-36-Zge">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1693,8 +1731,9 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lzW-d6-Asr">
-                                                                    <rect key="frame" x="18" y="247" width="324" height="19"/>
+                                                                    <rect key="frame" x="18" y="247" width="309" height="21"/>
                                                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="fZU-F1-3pO"/>
+                                                                    <accessibility description="Position slider"/>
                                                                     <connections>
                                                                         <action selector="subPosSliderAction:" target="-2" id="Top-XW-i2A"/>
                                                                     </connections>
@@ -1749,11 +1788,11 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="jEt-nA-sGO">
-                                            <rect key="frame" x="0.0" y="807" width="360" height="16"/>
+                                            <rect key="frame" x="0.0" y="808" width="345" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="3ZS-ug-kkq">
-                                            <rect key="frame" x="344" y="0.0" width="16" height="823"/>
+                                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.5" horizontal="NO" id="3ZS-ug-kkq">
+                                            <rect key="frame" x="345" y="0.0" width="15" height="808"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>

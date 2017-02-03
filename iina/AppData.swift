@@ -66,7 +66,7 @@ struct Constants {
     static let degree = "°"
     static let dot = "●"
     static let play = "▶︎"
-    static let none = NSLocalizedString("track.none", comment: "<None>")
+    static let none = NSLocalizedString("quicksetting.track.none", comment: "<None>")
     static let chapter = "Chapter"
     static let fullScreen = NSLocalizedString("menu.fullscreen", comment: "Fullscreen")
     static let exitFullScreen = NSLocalizedString("menu.exit_fullscreen", comment: "Exit Fullscreen")

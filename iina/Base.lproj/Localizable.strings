@@ -20,6 +20,7 @@
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "Default";
 "quicksetting.crop_item.None" = "None";
+"quicksetting.track.none" = "<None>";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
@@ -89,6 +90,13 @@
 "menu.pause" = "Pause";
 "menu.resume" = "Resume";
 
-"track.none" = "<None>";
-
 "alert.extra_option_error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+
+// These aren't all of the accessibility message,just the mutable ones.
+"accessibility.arrows.speed.left.label" = "Slow down";
+"accessibility.arrows.speed.right.label" = "Speed up";
+"accessibility.arrows.playlist.left.label" = "Previous media";
+"accessibility.arrows.playlist.right.label" = "Next media";
+"accessibility.arrows.seek.left.label" = "Rewind";
+"accessibility.arrows.seek.right.label" = "Fastforward";
+

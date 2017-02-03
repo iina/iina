@@ -15,8 +15,8 @@
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="480" height="229"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSQ-pa-Urx">
-                    <rect key="frame" x="64" y="191" width="152" height="17"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zSQ-pa-Urx">
+                    <rect key="frame" x="64" y="191" width="154" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Scroll horizontally to:" id="1yb-m4-1sK">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -24,7 +24,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VlR-LI-plv">
-                    <rect key="frame" x="220" y="185" width="171" height="26"/>
+                    <rect key="frame" x="222" y="185" width="171" height="26"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="166" id="7de-eo-zQL"/>
                     </constraints>
@@ -43,7 +43,7 @@
                         <binding destination="Yrj-d0-KaY" name="selectedTag" keyPath="values.useExactSeek" id="wcY-Ar-BKb"/>
                     </connections>
                 </popUpButton>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LN0-rs-jJB">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LN0-rs-jJB">
                     <rect key="frame" x="64" y="169" width="406" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="jRo-EH-zOV"/>
@@ -101,7 +101,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="speedl-dark" id="AFw-FC-dgo"/>
                 </imageView>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZLx-tu-rJt">
-                    <rect key="frame" x="219" y="14" width="171" height="26"/>
+                    <rect key="frame" x="221" y="14" width="171" height="26"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="166" id="k0A-kQ-QN2"/>
                     </constraints>
@@ -154,7 +154,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ltc-ek-XnI">
-                    <rect key="frame" x="220" y="106" width="171" height="26"/>
+                    <rect key="frame" x="222" y="106" width="171" height="26"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="166" id="VCL-bP-HHb"/>
                     </constraints>
@@ -176,7 +176,7 @@
                     </connections>
                 </popUpButton>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Qc-Uz-odw">
-                    <rect key="frame" x="220" y="81" width="171" height="26"/>
+                    <rect key="frame" x="222" y="81" width="171" height="26"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="166" id="2iV-Ay-gD5"/>
                     </constraints>
@@ -196,7 +196,7 @@
                     </connections>
                 </popUpButton>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WC2-9P-fCe">
-                    <rect key="frame" x="221" y="151" width="111" height="15"/>
+                    <rect key="frame" x="223" y="150" width="111" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="111" id="kej-sl-3p8"/>
                     </constraints>
@@ -209,7 +209,7 @@
                     <rect key="frame" x="66" y="47" width="402" height="5"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mdI-b4-54O">
-                    <rect key="frame" x="220" y="56" width="171" height="26"/>
+                    <rect key="frame" x="222" y="56" width="171" height="26"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="166" id="g3x-33-XfH"/>
                     </constraints>

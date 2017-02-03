@@ -238,7 +238,6 @@
 		8400D5F41E1AB348006785F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefSubViewController.xib; sourceTree = "<group>"; };
 		8400D5F71E1AB34D006785F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefNetworkViewController.xib; sourceTree = "<group>"; };
 		8400D5F91E1AB411006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
-		8400D5FA1E1AB411006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
 		8400D5FB1E1AB411006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/QuickSettingViewController.strings"; sourceTree = "<group>"; };
 		8400D5FC1E1AB411006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PlaylistViewController.strings"; sourceTree = "<group>"; };
 		8400D5FD1E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CropSettingsViewController.strings"; sourceTree = "<group>"; };
@@ -414,6 +413,7 @@
 		D27E35DE1E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefSubViewController.strings"; sourceTree = "<group>"; };
 		D27E35DF1E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefNetworkViewController.strings"; sourceTree = "<group>"; };
 		D27E35E01E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D49FC2FA1E4373910064B9D5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
 		F4C61DF01E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F4C61DF11E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		F4C61DF21E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
@@ -995,10 +995,10 @@
 			isa = PBXVariantGroup;
 			children = (
 				8400D5C71E1AB2F1006785F5 /* Base */,
-				8400D5FA1E1AB411006785F5 /* zh-Hans */,
 				D27E35CF1E379B6D0064BE57 /* zh-Hant */,
 				C789871B1E34EBDE0005769F /* ko */,
 				F4C61DF11E20423A00A43BCC /* de */,
+				D49FC2FA1E4373910064B9D5 /* zh-Hans */,
 			);
 			name = MainWindowController.xib;
 			sourceTree = "<group>";

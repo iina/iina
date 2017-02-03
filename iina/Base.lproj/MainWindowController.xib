@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,7 +43,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="680" height="355"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="680" height="355"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -75,8 +75,9 @@
                         <rect key="frame" x="120" y="40" width="440" height="67"/>
                         <subviews>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT">
-                                <rect key="frame" x="60" y="7" width="320" height="19"/>
+                                <rect key="frame" x="60" y="7" width="320" height="21"/>
                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="f1c-xF-8a2" customClass="PlaySliderCell" customModule="IINA" customModuleProvider="target"/>
+                                <accessibility description="Playback progress" identifier="PlaybackProgressSlider"/>
                                 <connections>
                                     <action selector="playSliderChanges:" target="-2" id="UBG-Ky-3rr"/>
                                 </connections>
@@ -110,10 +111,11 @@
                                     <constraint firstAttribute="height" constant="21" id="MPG-2q-w6a"/>
                                     <constraint firstAttribute="width" constant="24" id="vBo-ma-Dnu"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" imageScaling="proportionallyDown" inset="2" id="XXj-HK-hXa">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="overlaps" alignment="center" alternateImage="mute" imageScaling="proportionallyDown" inset="2" id="XXj-HK-hXa">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <accessibility description="Mute" help="Mute" identifier="MuteButton"/>
                                 <connections>
                                     <action selector="muteButtonAction:" target="-2" id="wUf-9f-uHT"/>
                                 </connections>
@@ -128,6 +130,7 @@
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES" multiLevelAccelerator="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <accessibility identifier="RightArrowButton"/>
                                 <connections>
                                     <action selector="rightButtonAction:" target="-2" id="mQT-3l-E7s"/>
                                 </connections>
@@ -142,6 +145,7 @@
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES" multiLevelAccelerator="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <accessibility identifier="LeftArrowButton"/>
                                 <connections>
                                     <action selector="leftButtonAction:" target="-2" id="WRV-J4-Hq8"/>
                                 </connections>
@@ -168,6 +172,7 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <accessibility description="Quick settings" identifier="QuickSettingsButton"/>
                                 <connections>
                                     <action selector="settingsButtonAction:" target="-2" id="2Yu-Jn-GXF"/>
                                 </connections>
@@ -193,16 +198,18 @@
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <accessibility description="Pause" identifier="PauseButton"/>
                                 <connections>
                                     <action selector="playButtonAction:" target="-2" id="JbM-wO-FAa"/>
                                 </connections>
                             </button>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-kc-FAt" userLabel="Volume Slider">
-                                <rect key="frame" x="42" y="37" width="69" height="15"/>
+                                <rect key="frame" x="42" y="35" width="69" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="69" id="5EN-dK-jOP"/>
                                 </constraints>
                                 <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="ncp-01-dCG"/>
+                                <accessibility description="Volume" identifier="VolumeSlider"/>
                                 <connections>
                                     <action selector="volumeSliderChanges:" target="-2" id="5AA-pG-FOc"/>
                                 </connections>
@@ -217,6 +224,7 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <accessibility description="Playlist&amp;Chapter" identifier="PlaylistNChapterButton"/>
                                 <connections>
                                     <action selector="playlistButtonAction:" target="-2" id="eI6-wE-TKG"/>
                                 </connections>
@@ -306,7 +314,7 @@
                                     <constraint firstAttribute="height" constant="32" id="7n9-7n-g3H"/>
                                 </constraints>
                             </progressIndicator>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gH-wF-EpI">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2gH-wF-EpI">
                                 <rect key="frame" x="6" y="20" width="148" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="yt3-1K-dDJ"/>
@@ -317,7 +325,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlZ-5D-Wag">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hlZ-5D-Wag">
                                 <rect key="frame" x="6" y="8" width="148" height="11"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="11" id="zg3-Qp-YfX"/>
@@ -366,6 +374,7 @@
             </connections>
             <point key="canvasLocation" x="207" y="110"/>
         </window>
+        <userDefaultsController representsSharedInstance="YES" id="AEI-ub-HGP"/>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>

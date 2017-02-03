@@ -20,6 +20,7 @@
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "默認";
 "quicksetting.crop_item.None" = "關閉";
+"quicksetting.track.none" = "<無>";
 
 // OSDMessage.swift
 "osd.pause" = "暫停";
@@ -82,7 +83,5 @@
 "menu.exit_fullscreen" = "離開全熒幕";
 "menu.pause" = "暫停";
 "menu.resume" = "繼續";
-
-"track.none" = "<無>";
 
 "alert.extra_option_error" = "無法設定選項 --%@=%@ （返回值 %d）。 請在「設置>高級」中檢查你的額外 mpv 選項。";

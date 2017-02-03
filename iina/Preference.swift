@@ -52,6 +52,9 @@ struct Preference {
     static let screenshotFormat = "screenShotFormat"
     static let screenshotTemplate = "screenShotTemplate"
 
+    static let playlistAutoAdd = "playlistAutoAdd"
+    static let playlistAutoPlayNext = "playlistAutoPlayNext"
+
     // UI
 
     /** Horizontal positon of control bar. (float, 0 - 1) */
@@ -125,6 +128,8 @@ struct Preference {
     static let secPrefech = "secPrefech"
     static let userAgent = "userAgent"
     static let transportRTSPThrough = "transportRTSPThrough"
+    static let ytdlEnabled = "ytdlEnabled"
+    static let ytdlRawOptions = "ytdlRawOptions"
 
     // Control
 
@@ -326,6 +331,9 @@ struct Preference {
     Key.openStartPanel: false,
     Key.alwaysFloatOnTop: false,
 
+    Key.playlistAutoAdd: true,
+    Key.playlistAutoPlayNext: true,
+
     Key.usePhysicalResolution: true,
     Key.resizeOnlyWhenManuallyOpenFile: true,
     Key.showRemainingTime: false,
@@ -366,6 +374,8 @@ struct Preference {
     Key.secPrefech: 100,
     Key.userAgent: "",
     Key.transportRTSPThrough: RTSPTransportation.tcp.rawValue,
+    Key.ytdlEnabled: true,
+    Key.ytdlRawOptions: "",
 
     Key.inputConfigs: [:],
     Key.currentInputConfigName: "IINA Default",

@@ -64,6 +64,10 @@ extension MainWindowController {
     displayOSD(.abLoop(playerCore.info.abLoopStatus))
   }
 
+  @IBAction func menuFileLoop(_ sender: NSMenuItem) {
+    playerCore.toggleFileLoop()
+  }
+
   @IBAction func menuPlaylistItem(_ sender: NSMenuItem) {
     let index = sender.tag
     playerCore.playFileInPlaylist(index)

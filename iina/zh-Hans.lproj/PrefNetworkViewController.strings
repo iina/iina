@@ -27,7 +27,7 @@
 "dDD-g3-54w.title" = "Cache buffer 大小 (KB):";
 
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
-"eN6-Sk-kUa.title" = "User agent:";
+"eN6-Sk-kUa.title" = "用户代理:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 10"; ObjectID = "fab-7d-mMQ"; */
 "fab-7d-mMQ.title" = "默认: 10";
@@ -43,3 +43,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Network:"; ObjectID = "yrh-Jm-Q4e"; */
 "yrh-Jm-Q4e.title" = "网络:";
+
+"cyH-Md-FAD.title" = "启用 youtube-dl";
+
+"zCD-9d-ziV.title" = "额外参数:";
+
+"GBe-wd-tne.title" = "格式: <key>=<value>[,<key>=<value>[,...]]";

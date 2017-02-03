@@ -126,7 +126,17 @@ class MPVController: NSObject {
 
     setUserOption(PK.useMediaKeys, type: .bool, forName: MPVOption.Input.inputMediaKeys)
 
-    setUserOption(PK.keepOpenOnFileEnd, type: .bool, forName: MPVOption.Window.keepOpen)
+    setUserOption(PK.keepOpenOnFileEnd, type: .other, forName: MPVOption.Window.keepOpen) { key in
+      let keepOpen = UserDefaults.standard.bool(forKey: PK.keepOpenOnFileEnd)
+      let keepOpenPl = !UserDefaults.standard.bool(forKey: PK.playlistAutoPlayNext)
+      return keepOpenPl ? "always" : (keepOpen ? "yes" : "no")
+    }
+
+    setUserOption(PK.playlistAutoPlayNext, type: .other, forName: MPVOption.Window.keepOpen) { key in
+      let keepOpen = UserDefaults.standard.bool(forKey: key)
+      let keepOpenPl = !UserDefaults.standard.bool(forKey: PK.playlistAutoPlayNext)
+      return keepOpenPl ? "always" : (keepOpen ? "yes" : "no")
+    }
 
     chkErr(mpv_set_option_string(mpv, "watch-later-directory", Utility.watchLaterURL.path))
     setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.ProgramBehavior.savePositionOnQuit)
@@ -215,6 +225,9 @@ class MPVController: NSObject {
       return Preference.RTSPTransportation(rawValue: v)!.string
     }
 
+    setUserOption(PK.ytdlEnabled, type: .bool, forName: MPVOption.ProgramBehavior.ytdl)
+    setUserOption(PK.ytdlRawOptions, type: .string, forName: MPVOption.ProgramBehavior.ytdlRawOptions)
+
     // Set user defined conf dir.
     if ud.bool(forKey: PK.useUserDefinedConfDir) {
       if var userConfDir = ud.string(forKey: PK.userDefinedConfDir) {
@@ -245,8 +258,11 @@ class MPVController: NSObject {
     chkErr(mpv_set_option_string(mpv, MPVOption.Video.hwdecPreload, "auto"))
 
     // Load external scripts
-    let scriptPath = Bundle.main.path(forResource: "autoload", ofType: "lua", inDirectory: "scripts")!
-    chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, scriptPath))
+    let loader = ScriptLoader()
+    if ud.bool(forKey: PK.playlistAutoAdd) {
+      loader.add(defaultScript: "autoload")
+    }
+    chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, loader.stringForOption))
 
     //load keybinding
     let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)

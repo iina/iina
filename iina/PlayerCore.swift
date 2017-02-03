@@ -210,6 +210,11 @@ class PlayerCore: NSObject {
     }
   }
 
+  func toggleFileLoop() {
+    let isLoop = mpvController.getFlag(MPVOption.PlaybackControl.loopFile)
+    mpvController.setFlag(MPVOption.PlaybackControl.loopFile, !isLoop)
+  }
+
   func setVolume(_ volume: Int) {
     let realVolume = volume.constrain(min: 0, max: 100)
     info.volume = realVolume
@@ -323,6 +328,8 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalSubFile(_ url: URL) {
+    guard !(info.subTracks.contains { $0.externalFilename == url.path }) else { return }
+
     mpvController.command(.subAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
         DispatchQueue.main.async {

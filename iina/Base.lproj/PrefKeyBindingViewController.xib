@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="box content view" minToolsVersion="7.0"/>
@@ -26,6 +26,9 @@
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="LU9-QU-BFL">
                     <rect key="frame" x="18" y="386" width="444" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="lOm-I3-MpB"/>
+                    </constraints>
                     <buttonCell key="cell" type="check" title="Use media keys" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2WY-CR-baD">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -98,6 +101,9 @@
                 </scrollView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZWR-gT-S2p">
                     <rect key="frame" x="20" y="347" width="91" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="xjv-Ji-BGm"/>
+                    </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Configuration:" id="au5-6f-s55">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -120,6 +126,9 @@
                 </popUpButton>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KZA-hu-vhZ">
                     <rect key="frame" x="13" y="13" width="200" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="eqT-ce-xnf"/>
+                    </constraints>
                     <buttonCell key="cell" type="push" title="Reveal config file in Finder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gDo-JL-a9k">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>

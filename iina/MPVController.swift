@@ -11,9 +11,6 @@ import Foundation
 
 fileprivate typealias PK = Preference.Key
 
-fileprivate let yes_str = "yes"
-fileprivate let no_str = "no"
-
 // Global functions
 
 protocol MPVEventDelegate {
@@ -775,7 +772,9 @@ class MPVController: NSObject {
 
     case .bool:
       let value = ud.bool(forKey: key)
-      code = mpv_set_option_string(mpv, name, value ? yes_str : no_str)
+      let yesStr = "yes"
+      let noStr = "no"
+      code = mpv_set_option_string(mpv, name, value ? yesStr : noStr)
 
     case .string:
       let value = ud.string(forKey: key)

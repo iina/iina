@@ -17,15 +17,15 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="288" height="132"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="132"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LZ8-DJ-i0e" customClass="KeyRecordView" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="86" width="288" height="46"/>
+                    <rect key="frame" x="0.0" y="86" width="320" height="46"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jqj-WM-ez4">
-                            <rect key="frame" x="-2" y="7" width="292" height="31"/>
+                            <rect key="frame" x="-2" y="7" width="324" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="xhl-U2-M3Q">
                                 <font key="font" size="22" name="Menlo-Regular"/>
@@ -36,7 +36,7 @@
                     </subviews>
                 </customView>
                 <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="24G-a7-cRM">
-                    <rect key="frame" x="0.0" y="7" width="288" height="22"/>
+                    <rect key="frame" x="0.0" y="7" width="320" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" focusRingType="none" drawsBackground="YES" id="z0F-wj-JKA">
                         <font key="font" metaFont="system"/>
@@ -54,14 +54,14 @@
                     </textFieldCell>
                 </textField>
                 <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="y9W-a9-7sk">
-                    <rect key="frame" x="0.0" y="28" width="288" height="28"/>
+                    <rect key="frame" x="0.0" y="28" width="320" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <clipView key="contentView" ambiguous="YES" copiesOnScroll="NO" id="it8-db-s5l">
-                        <rect key="frame" x="1" y="1" width="286" height="26"/>
+                        <rect key="frame" x="1" y="1" width="318" height="26"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <ruleEditor ambiguous="YES" nestingMode="simple" rowHeight="25" id="aaj-fS-PWS">
-                                <rect key="frame" x="0.0" y="0.0" width="286" height="26"/>
+                                <rect key="frame" x="0.0" y="0.0" width="318" height="26"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </ruleEditor>
                         </subviews>

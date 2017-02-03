@@ -7,9 +7,22 @@
 */
 
 "cmd.ignore" = "Ignore";
-
 "cmd.seek" = "Seek";
-
 "cmd.set" = "Set";
-
 "cmd.cycle" = "Cycle";
+"cmd.add" = "Change";
+"cmd.multiply" = "Multiply";
+
+"to" = "to";
+"by" = "by";
+"add" = "add";
+"minus" = "minus";
+
+"opt.pause" = "Pause";
+"opt.volume" = "Volume";
+"opt.mute" = "Mute";
+"opt.speed" = "Speed";
+"opt.fullscreen" = "Fullscreen";
+"opt.sub-delay" = "Sub delay";
+"opt.sub-pos" = "Sub pos";
+"opt.sub-scale" = "Sub scale";

@@ -139,6 +139,7 @@
 		84F5D4951E44D5230060A838 /* KeyBindingCriterion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D4941E44D5230060A838 /* KeyBindingCriterion.swift */; };
 		84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D4981E44E8AC0060A838 /* KeyBindingDataLoader.swift */; };
 		84F5D49A1E44E9A50060A838 /* KeyBinding.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84F5D49C1E44E9A50060A838 /* KeyBinding.strings */; };
+		84F5D4A01E44F9DB0060A838 /* KeyBindingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D49F1E44F9DB0060A838 /* KeyBindingItem.swift */; };
 		84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */; };
 		84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7258E1D486185000DEF1B /* MPVProperty.swift */; };
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
@@ -378,6 +379,7 @@
 		84F5D49B1E44E9A50060A838 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		84F5D49D1E44E9A90060A838 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
 		84F5D49E1E44E9AA0060A838 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		84F5D49F1E44F9DB0060A838 /* KeyBindingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingItem.swift; sourceTree = "<group>"; };
 		84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeSliderCell.swift; sourceTree = "<group>"; };
 		84F7258E1D486185000DEF1B /* MPVProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVProperty.swift; sourceTree = "<group>"; };
 		84FF84701D2FF698001B318A /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 				8400D5F81E1AB34D006785F5 /* PrefNetworkViewController.xib */,
 				84F5D49C1E44E9A50060A838 /* KeyBinding.strings */,
 				84F5D4981E44E8AC0060A838 /* KeyBindingDataLoader.swift */,
+				84F5D49F1E44F9DB0060A838 /* KeyBindingItem.swift */,
 			);
 			name = Preference;
 			sourceTree = "<group>";
@@ -999,6 +1002,7 @@
 				84A886E61E24F3BD008755BB /* OnlineSubtitle.swift in Sources */,
 				847C62CA1DC13CDA00E1EF16 /* PrefGeneralViewController.swift in Sources */,
 				845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */,
+				84F5D4A01E44F9DB0060A838 /* KeyBindingItem.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,
 				8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */,
 				840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */,

@@ -118,7 +118,7 @@ extension MainWindowController {
       playerCore.setVideoAspect(aspectStr)
       displayOSD(.aspect(aspectStr))
     } else {
-      Utility.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject)")
+      Utility.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject.debugDescription)")
     }
   }
 

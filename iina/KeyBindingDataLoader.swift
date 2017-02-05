@@ -10,9 +10,13 @@ import Foundation
 
 fileprivate typealias KBI = KeyBindingItem
 
+fileprivate enum PropertyType {
+  case bool, num, choose, separator
+}
+
 class KeyBindingDataLoader {
 
-  static let commands: [KeyBindingItem] = [
+  fileprivate static let commands: [KeyBindingItem] = [
     KBI("ignore"),
     KBI.separator(),
     KBI("seek", type: .label, children:
@@ -30,9 +34,11 @@ class KeyBindingDataLoader {
     ),
     KBI("frame-step"),
     KBI("frame-back-step"),
+    KBI("ab-loop"),
     KBI.separator(),
     KBI("set", type: .label, children: propertiesForSet()),
     KBI("cycle", type: .label, children: propertiesForCycle()),
+    KBI("cycle-values", type: .label, children: propertiesForCycleValues()),
     KBI("add", type: .label, children: propertiesForAdd()),
     KBI("multiply", type: .label, children: propertiesForMultiply()),
     KBI.separator(),
@@ -47,19 +53,41 @@ class KeyBindingDataLoader {
     KBI("quit")
   ]
 
-  static let propertyList: [String] = [
-    "pause",
-    "volume", "mute",
-    "speed",
-    "fullscreen",
-    "sub-delay", "sub-pos", "sub-scale"
+  fileprivate static let propertyList: [(String, PropertyType)] = [
+    ("pause", .bool),
+    ("speed", .num),
+    ("---", .separator),
+    ("video", .num),
+    ("contrast", .num),
+    ("brightness", .num),
+    ("gamma", .num),
+    ("saturation", .num),
+    ("deinterlace", .bool),
+    ("---", .separator),
+    ("audio", .num),
+    ("volume", .num),
+    ("mute", .bool),
+    ("audio-delay", .num),
+    ("---", .separator),
+    ("sub", .num),
+    ("sub-delay", .num),
+    ("sub-pos", .num),
+    ("sub-scale", .num),
+    ("sub-visibility", .bool),
+    ("---", .separator),
+    ("fullscreen", .bool),
+    ("---", .separator),
+    ("chapter", .num)
   ]
 
   static private func propertiesForSet() -> [KeyBindingItem] {
-    return propertyList.map { str -> KeyBindingItem in
+    return propertyList.map { (str, type) -> KeyBindingItem in
+      if type == .separator { return KBI.separator() }
       let kbi = KBI(str, type: .label, children:
                   KBI("to", type: .placeholder, children:
-                    KBI("value", type: .string)
+                    type == .bool ?
+                      KBI.chooseIn("yes|no") :
+                      [KBI("value", type: .string)]
                   )
                 )
       kbi.l10nKey = "opt"
@@ -68,7 +96,8 @@ class KeyBindingDataLoader {
   }
 
   static private func propertiesForMultiply() -> [KeyBindingItem] {
-    return propertyList.map { str -> KeyBindingItem in
+    return propertyList.filter { $0.1 != .bool }.map { (str, type) -> KeyBindingItem in
+      if type == .separator { return KBI.separator() }
       let kbi = KBI(str, type: .label, children:
                   KBI("by", type: .placeholder, children:
                     KBI("value", type: .string)
@@ -80,7 +109,8 @@ class KeyBindingDataLoader {
   }
 
   static private func propertiesForAdd() -> [KeyBindingItem] {
-    return propertyList.map { str -> KeyBindingItem in
+    return propertyList.filter { $0.1 != .bool }.map { (str, type) -> KeyBindingItem in
+      if type == .separator { return KBI.separator() }
       let kbi = KBI(str, type: .label, children:
                   KBI.chooseIn("add|minus", children:
                     KBI("value", type: .string)
@@ -92,8 +122,22 @@ class KeyBindingDataLoader {
   }
 
   static private func propertiesForCycle() -> [KeyBindingItem] {
-    return propertyList.map { str -> KeyBindingItem in
+    return propertyList.map { (str, type) -> KeyBindingItem in
+      if type == .separator { return KBI.separator() }
       let kbi = KBI(str)
+      kbi.l10nKey = "opt"
+      return kbi
+    }
+  }
+
+  static private func propertiesForCycleValues() -> [KeyBindingItem] {
+    return propertyList.filter { $0.1 != .bool }.map { (str, type) -> KeyBindingItem in
+      if type == .separator { return KBI.separator() }
+      let kbi = KBI(str, type: .label, children:
+        KBI("in", type: .placeholder, children:
+          KBI("value", type: .string)
+        )
+      )
       kbi.l10nKey = "opt"
       return kbi
     }

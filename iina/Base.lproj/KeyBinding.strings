@@ -10,10 +10,12 @@
 "cmd.seek" = "Seek";
 "cmd.set" = "Set";
 "cmd.cycle" = "Cycle";
+"cmd.cycle-values" = "Cycle in";
 "cmd.add" = "Change";
 "cmd.multiply" = "Multiply";
 "cmd.frame-step" = "Next frame";
 "cmd.frame-back-step" = "Previous frame";
+"cmd.ab-loop" = "A-B loop";
 "cmd.playlist-next" = "Next";
 "cmd.playlist-prev" = "Previous";
 "cmd.playlist-clear" = "Clear playlist";
@@ -23,8 +25,11 @@
 "cmd.stop" = "Stop";
 "cmd.quit" = "Quit";
 
+"yes" = "Yes";
+"no" = "No";
 "to" = "to";
 "by" = "by";
+"in" = "in";
 "add" = "add";
 "minus" = "minus";
 "forward" = "forward";
@@ -41,10 +46,26 @@
 "absolute-percent+keyframe" = "% (keyframe)";
 
 "opt.pause" = "Pause";
+"opt.speed" = "Speed";
+
+"opt.video" = "Video track";
+"opt.contrast" = "Contrast";
+"opt.brightness" = "Brightness";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Saturation";
+"opt.deinterlace" = "Deinterlace";
+
+"opt.audio" = "Audio track";
 "opt.volume" = "Volume";
 "opt.mute" = "Mute";
-"opt.speed" = "Speed";
-"opt.fullscreen" = "Fullscreen";
+"opt.audio-delay" = "Audio delay";
+
+"opt.sub" = "Sub track";
 "opt.sub-delay" = "Sub delay";
 "opt.sub-pos" = "Sub pos";
 "opt.sub-scale" = "Sub scale";
+"opt.sub-visibility" = "Sub visibility";
+
+"opt.fullscreen" = "Fullscreen";
+
+"opt.chapter" = "Chapter";

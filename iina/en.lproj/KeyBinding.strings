@@ -12,6 +12,16 @@
 "cmd.cycle" = "Cycle";
 "cmd.add" = "Change";
 "cmd.multiply" = "Multiply";
+"cmd.frame-step" = "Next frame";
+"cmd.frame-back-step" = "Previous frame";
+"cmd.playlist-next" = "Next";
+"cmd.playlist-prev" = "Previous";
+"cmd.playlist-clear" = "Clear playlist";
+"cmd.playlist-remove" = "Remove current";
+"cmd.playlist-shuffle" = "Shuffle";
+"cmd.write-watch-later-config" = "Record play history";
+"cmd.stop" = "Stop";
+"cmd.quit" = "Quit";
 
 "to" = "to";
 "by" = "by";

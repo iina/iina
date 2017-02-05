@@ -95,3 +95,11 @@ class TextFieldCriterion: Criterion, NSTextFieldDelegate {
   }
 
 }
+
+class SeparatorCriterion: Criterion {
+
+  override func displayValue() -> Any {
+    return NSMenuItem.separator()
+  }
+
+}

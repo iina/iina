@@ -21,7 +21,7 @@ class KeyBindingItem {
   // MARK: KeyBindingItem
 
   enum ItemType {
-    case label, string, number, placeholder
+    case label, string, number, placeholder, separator
   }
 
   var name: String
@@ -47,6 +47,10 @@ class KeyBindingItem {
       items.append(KeyBindingItem(op, type: .label, children: children))
     }
     return items
+  }
+
+  static func separator() -> KeyBindingItem {
+    return KeyBindingItem("---", type: .separator)
   }
 
   init(_ name: String, type: ItemType, children: KeyBindingItem...) {
@@ -91,6 +95,8 @@ class KeyBindingItem {
       }
     case .string, .number:
       criterion = TextFieldCriterion()
+    case .separator:
+      criterion = SeparatorCriterion()
     }
 
     if !children.isEmpty {

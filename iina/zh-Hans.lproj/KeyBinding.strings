@@ -12,6 +12,16 @@
 "cmd.cycle" = "循环";
 "cmd.add" = "增减";
 "cmd.multiply" = "乘倍";
+"cmd.frame-step" = "下一帧";
+"cmd.frame-back-step" = "上一帧";
+"cmd.playlist-next" = "上一个媒体";
+"cmd.playlist-prev" = "下一个媒体";
+"cmd.playlist-clear" = "清空播放列表";
+"cmd.playlist-remove" = "移除当前媒体";
+"cmd.playlist-shuffle" = "随机播放";
+"cmd.write-watch-later-config" = "记录播放进度";
+"cmd.stop" = "停止";
+"cmd.quit" = "退出";
 
 "to" = "为";
 "by" = "倍数";

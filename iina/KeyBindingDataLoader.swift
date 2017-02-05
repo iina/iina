@@ -14,6 +14,7 @@ class KeyBindingDataLoader {
 
   static let commands: [KeyBindingItem] = [
     KBI("ignore"),
+    KBI.separator(),
     KBI("seek", type: .label, children:
       KBI.chooseIn("forward|backward", children:
         KBI("value", type: .number, children:
@@ -27,10 +28,23 @@ class KeyBindingDataLoader {
         )
       )
     ),
+    KBI("frame-step"),
+    KBI("frame-back-step"),
+    KBI.separator(),
     KBI("set", type: .label, children: propertiesForSet()),
     KBI("cycle", type: .label, children: propertiesForCycle()),
     KBI("add", type: .label, children: propertiesForAdd()),
     KBI("multiply", type: .label, children: propertiesForMultiply()),
+    KBI.separator(),
+    KBI("playlist-next"),
+    KBI("playlist-prev"),
+    KBI("playlist-clear"),
+    KBI("playlist-remove"),
+    KBI("playlist-shuffle"),
+    KBI.separator(),
+    KBI("write-watch-later-config"),
+    KBI("stop"),
+    KBI("quit")
   ]
 
   static let propertyList: [String] = [

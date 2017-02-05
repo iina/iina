@@ -187,6 +187,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     guard let w = self.window else { return }
 
+    w.setIsVisible(false)
+    w.center()
+
     w.titleVisibility = .hidden;
     w.styleMask.insert(NSFullSizeContentViewWindowMask);
     w.titlebarAppearsTransparent = true
@@ -267,9 +270,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     notificationObservers.append(fsObserver)
 
-    // move to center and make main
-    w.setIsVisible(false)
-    w.center()
   }
 
   deinit {

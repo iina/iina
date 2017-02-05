@@ -268,10 +268,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     notificationObservers.append(fsObserver)
 
     // move to center and make main
-    w.center()
-    w.makeMain()
-    w.makeKeyAndOrderFront(nil)
     w.setIsVisible(false)
+    w.center()
   }
 
   deinit {
@@ -350,7 +348,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Mouse / Trackpad event
 
   override func keyDown(with event: NSEvent) {
-    window!.makeFirstResponder(window!.contentView)
+    window!.makeFirstResponder(window!)
     if !isInInteractiveMode {
       playerCore.execKeyCode(Utility.mpvKeyCode(from: event))
     }
@@ -554,6 +552,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** A method being called when window open. Pretend to be a window delegate. */
   func windowDidOpen() {
+    window!.makeMain()
+    window!.makeKeyAndOrderFront(nil)
     // update buffer indicator view
     updateBufferIndicatorView()
     // enable sleep preventer

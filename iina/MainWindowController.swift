@@ -58,13 +58,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** Cache current crop */
   var currentCrop: NSRect = NSRect()
-  
+
   /** The maximum pressure recorded when clicking on the arrow buttons **/
   var maxPressure: Int32 = 0
-  
+
   /** The value of speedValueIndex before Force Touch **/
   var oldIndex: Int = AppData.availableSpeedValues.count / 2
-  
+
   /** The index of current speed in speed value array */
   var speedValueIndex: Int = AppData.availableSpeedValues.count / 2 {
     didSet {
@@ -268,9 +268,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     notificationObservers.append(fsObserver)
 
     // move to center and make main
-    w.setIsVisible(false)
     w.center()
     w.makeMain()
+    w.makeKeyAndOrderFront(nil)
+    w.setIsVisible(false)
   }
 
   deinit {
@@ -301,7 +302,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case Preference.Key.useExactSeek:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-          useExtrackSeek = Preference.SeekOption(rawValue: newValue)
+        useExtrackSeek = Preference.SeekOption(rawValue: newValue)
       }
 
     case Preference.Key.relativeSeekAmount:
@@ -551,11 +552,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Window delegate
 
-
-
   /** A method being called when window open. Pretend to be a window delegate. */
   func windowDidOpen() {
-    window!.makeKeyAndOrderFront(nil)
     // update buffer indicator view
     updateBufferIndicatorView()
     // enable sleep preventer
@@ -594,7 +592,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       case .dark, .ultraDark: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantDark);
       case .light, .mediumLight: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
     }
-    
+
     // show titlebar
     window!.titlebarAppearsTransparent = false
     window!.titleVisibility = .visible
@@ -607,7 +605,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowWillExitFullScreen(_ notification: Notification) {
     // Set back the window appearance
     self.window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
-    
+
     // hide titlebar
     window!.titlebarAppearsTransparent = true
     window!.titleVisibility = .hidden
@@ -746,7 +744,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       fadeableViews.forEach { (v) in
         // Set the fade animation duration
         NSAnimationContext.current().duration = TimeInterval(0.25);
-        
+
         v?.animator().alphaValue = 1
       }
     }) {
@@ -842,7 +840,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     withStandardButtons { button in
       if let index = (self.fadeableViews.index {$0 === button}) {
         self.fadeableViews.remove(at: index)
-        
+
         // Make sure the button is visible
         button!.alphaValue = 1;
         button!.isHidden = false;
@@ -1001,7 +999,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       $0?.material = material
       $0?.appearance = appearance
     }
-    
+
     if isInFullScreen {
       window!.appearance = appearance;
     }
@@ -1056,8 +1054,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         var videoSize = originalVideoSize
         if ud.bool(forKey: Preference.Key.usePhysicalResolution) {
           videoSize = w.convertFromBacking(
-            NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))
-          ).size
+            NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))).size
         }
         // check screen size
         if let screenSize = NSScreen.main()?.visibleFrame.size {
@@ -1098,9 +1095,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     } else {
       window.level = Int(CGWindowLevelForKey(.normalWindow))
     }
-    
+
     window.collectionBehavior = [.managed, .fullScreenPrimary]
-    
+
     // don't know why they will be disabled
     withStandardButtons { $0?.isEnabled = true }
   }
@@ -1186,7 +1183,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if speedValueIndex > speeds / 2 {
         speedValueIndex = speeds / 2
       }
-      
+
       if sender.intValue == 0 { // Released
         if maxPressure == 1 { // Single click ended
           speedValueIndex = oldIndex - 1
@@ -1219,7 +1216,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if speedValueIndex < speeds / 2 {
         speedValueIndex = speeds / 2
       }
-      
+
       if sender.intValue == 0 { // Released
         if maxPressure == 1 { // Single click ended
           speedValueIndex = oldIndex + 1
@@ -1244,7 +1241,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     }
   }
-  
+
   /** handle action of both left and right arrow button */
   func arrowButtonAction(left: Bool) {
     switch arrowBtnFunction! {

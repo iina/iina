@@ -10,6 +10,11 @@ import Cocoa
 
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
+  override var nextResponder: NSResponder? {
+    get { return nil }
+    set { }
+  }
+
   unowned let ud: UserDefaults = UserDefaults.standard
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60
@@ -186,6 +191,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     super.windowDidLoad()
 
     guard let w = self.window else { return }
+
+    w.initialFirstResponder = nil
 
     w.setIsVisible(false)
     w.center()

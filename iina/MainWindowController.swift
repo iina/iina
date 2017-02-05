@@ -587,6 +587,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {
+    playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, true)
+
     // Set the appearance to match the theme so the titlebar matches the theme
     switch(Preference.Theme(rawValue: ud.integer(forKey: Preference.Key.themeMaterial))!) {
       case .dark, .ultraDark: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantDark);
@@ -597,12 +599,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     window!.titlebarAppearsTransparent = false
     window!.titleVisibility = .visible
     removeTitlebarFromFadeableViews()
+
     // stop animation and hide titleBarView
     titleBarView.isHidden = true
     isInFullScreen = true
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
+    playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, false)
+
     // Set back the window appearance
     self.window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
 

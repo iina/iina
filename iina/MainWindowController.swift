@@ -1046,13 +1046,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.windowDidResize(Notification(name: .NSWindowDidResize))
 
     } else {
+      var rect: NSRect
 
       if playerCore.info.jumppedFromPlaylist &&
         ud.bool(forKey: Preference.Key.resizeOnlyWhenManuallyOpenFile) {
         // user is navigating in playlist. remain same window width.
         let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
         let newSize = NSSize(width: w.frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
-        let rect = NSRect(origin: w.frame.origin, size: newSize)
+        rect = NSRect(origin: w.frame.origin, size: newSize)
         w.setFrame(rect, display: true, animate: true)
       } else {
         // get videoSize on screen
@@ -1066,9 +1067,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
           // check default window position
         }
-        let rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
+        rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
         w.setFrame(rect, display: true, animate: true)
       }
+
+      // animated `setFrame` can be inaccurate!
+      w.setFrame(rect, display: true)
 
       if (!window!.isVisible) {
         window!.setIsVisible(true)

@@ -1,10 +1,10 @@
-/* 
-  KeyBinding.strings
-  iina
+/*
+ KeyBinding.strings
+ iina
 
-  Created by lhc on 4/2/2017.
-  Copyright © 2017 lhc. All rights reserved.
-*/
+ Created by lhc on 4/2/2017.
+ Copyright © 2017 lhc. All rights reserved.
+ */
 
 "cmd.ignore" = "Ignore";
 "cmd.seek" = "Seek";
@@ -17,6 +17,18 @@
 "by" = "by";
 "add" = "add";
 "minus" = "minus";
+"forward" = "forward";
+"backward" = "backward";
+"seek-to" = "to";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (exact)";
+"relative-percent+exact" = "% (exact)";
+"absolute+keyframe" = "s (keyframe)";
+"absolute-percent+keyframe" = "% (keyframe)";
 
 "opt.pause" = "Pause";
 "opt.volume" = "Volume";

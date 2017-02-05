@@ -37,6 +37,10 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     ruleEditor.canRemoveAllRows = false
     ruleEditor.delegate = self
     ruleEditor.addRow(self)
+
+    NotificationCenter.default.addObserver(forName: Constants.Noti.keyBindingInputChanged, object: nil, queue: .main) { _ in
+      self.updateCommandField()
+    }
   }
 
   func recordedKeyDown(with event: NSEvent) {
@@ -63,6 +67,17 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
 
   func ruleEditor(_ editor: NSRuleEditor, displayValueForCriterion criterion: Any, inRow row: Int) -> Any {
     return (criterion as! Criterion).displayValue()
+  }
+
+  func ruleEditorRowsDidChange(_ notification: Notification) {
+    updateCommandField()
+  }
+
+  // MARK: - Other
+
+  private func updateCommandField() {
+    guard let criterions = ruleEditor.criteria(forRow: 0) as? [Criterion] else { return }
+    actionTextField.stringValue = KeyBindingTranslator.string(fromCriterions: criterions)
   }
 
 }

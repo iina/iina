@@ -21,7 +21,7 @@ class KeyBindingItem {
   // MARK: KeyBindingItem
 
   enum ItemType {
-    case label, string, number
+    case label, string, number, placeholder
   }
 
   var name: String
@@ -36,6 +36,15 @@ class KeyBindingItem {
     var items: [KeyBindingItem] = []
     for op in options {
       items.append(KeyBindingItem(op))
+    }
+    return items
+  }
+
+  static func chooseIn(_ optionsList: String, children: KeyBindingItem...) -> [KeyBindingItem] {
+    let options = optionsList.components(separatedBy: "|")
+    var items: [KeyBindingItem] = []
+    for op in options {
+      items.append(KeyBindingItem(op, type: .label, children: children))
     }
     return items
   }
@@ -69,13 +78,16 @@ class KeyBindingItem {
     let criterion: Criterion
 
     switch type {
-    case .label:
+    case .label, .placeholder:
       let k = l10nKey ?? self.l10nKey
       let l10nPath = k == nil ? name : "\(k!).\(name)"
       if let l10nString = KeyBindingItem.l10nDic[l10nPath] {
-        criterion = TextCriterion(name: l10nString)
+        criterion = TextCriterion(name: name, localizedName: l10nString)
       } else {
-        criterion = TextCriterion(name: name)
+        criterion = TextCriterion(name: name, localizedName: name)
+      }
+      if type == .placeholder {
+        criterion.isPlaceholder = true
       }
     case .string, .number:
       criterion = TextFieldCriterion()

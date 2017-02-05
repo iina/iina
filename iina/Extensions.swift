@@ -211,6 +211,14 @@ extension Double {
     if self > max { value = max }
     return value
   }
+
+  func prettyFormat() -> String {
+    if truncatingRemainder(dividingBy: 1) == 0 {
+      return "\(Int(self))"
+    } else {
+      return "\(self)"
+    }
+  }
 }
 
 extension NSColor {

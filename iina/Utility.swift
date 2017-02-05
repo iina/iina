@@ -233,6 +233,8 @@ class Utility {
       }
       enum Size {
         case system
+        case small
+        case mini
         case pt(Float)
       }
       enum Font {
@@ -260,6 +262,10 @@ class Utility {
         switch self.size {
         case .system:
           s = NSFont.systemFontSize()
+        case .small:
+          s = NSFont.systemFontSize(for: .small)
+        case .mini:
+          s = NSFont.systemFontSize(for: .mini)
         case .pt(let point):
           s = CGFloat(point)
         }

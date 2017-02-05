@@ -7,16 +7,28 @@
 */
 
 "cmd.ignore" = "忽略";
-"cmd.seek" = "查找";
-"cmd.set" = "设置属性";
-"cmd.cycle" = "循环属性";
-"cmd.add" = "增减属性";
-"cmd.multiply" = "循环属性";
+"cmd.seek" = "查找（跳转）";
+"cmd.set" = "设置";
+"cmd.cycle" = "循环";
+"cmd.add" = "增减";
+"cmd.multiply" = "乘倍";
 
 "to" = "为";
 "by" = "倍数";
 "add" = "增加";
 "minus" = "减少";
+"forward" = "向前";
+"backward" = "向后";
+"seek-to" = "跳转到";
+
+"relative" = "秒";
+"absolute" = "秒";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "秒（精确）";
+"relative-percent+exact" = "%（精确）";
+"absolute+keyframe" = "秒（关键帧）";
+"absolute-percent+keyframe" = "%（关键帧）";
 
 "opt.pause" = "暂停";
 "opt.volume" = "音量";

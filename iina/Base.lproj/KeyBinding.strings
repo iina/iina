@@ -17,6 +17,18 @@
 "by" = "by";
 "add" = "add";
 "minus" = "minus";
+"forward" = "forward";
+"backward" = "backward";
+"seek-to" = "to";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (exact)";
+"relative-percent+exact" = "% (exact)";
+"absolute+keyframe" = "s (keyframe)";
+"absolute-percent+keyframe" = "% (keyframe)";
 
 "opt.pause" = "Pause";
 "opt.volume" = "Volume";

@@ -15,8 +15,16 @@ class KeyBindingDataLoader {
   static let commands: [KeyBindingItem] = [
     KBI("ignore"),
     KBI("seek", type: .label, children:
-      KBI("value", type: .string, children:
-        KBI.chooseIn("relative|absolute|absolute-percent|relative-percent|exact|keyframes")
+      KBI.chooseIn("forward|backward", children:
+        KBI("value", type: .number, children:
+          KBI.chooseIn("relative|relative-percent|relative+exact|relative-percent+exact")
+        )
+      )
+      +
+      KBI.chooseIn("seek-to", children:
+        KBI("value", type: .number, children:
+          KBI.chooseIn("absolute|absolute-percent|absolute+keyframe|absolute-percent+keyframe")
+        )
       )
     ),
     KBI("set", type: .label, children: propertiesForSet()),
@@ -36,7 +44,7 @@ class KeyBindingDataLoader {
   static private func propertiesForSet() -> [KeyBindingItem] {
     return propertyList.map { str -> KeyBindingItem in
       let kbi = KBI(str, type: .label, children:
-                  KBI("to", type: .label, children:
+                  KBI("to", type: .placeholder, children:
                     KBI("value", type: .string)
                   )
                 )
@@ -48,7 +56,7 @@ class KeyBindingDataLoader {
   static private func propertiesForMultiply() -> [KeyBindingItem] {
     return propertyList.map { str -> KeyBindingItem in
       let kbi = KBI(str, type: .label, children:
-                  KBI("by", type: .label, children:
+                  KBI("by", type: .placeholder, children:
                     KBI("value", type: .string)
                   )
                 )
@@ -60,10 +68,7 @@ class KeyBindingDataLoader {
   static private func propertiesForAdd() -> [KeyBindingItem] {
     return propertyList.map { str -> KeyBindingItem in
       let kbi = KBI(str, type: .label, children:
-                  KBI("add", type: .label, children:
-                    KBI("value", type: .string)
-                  ),
-                  KBI("minus", type: .label, children:
+                  KBI.chooseIn("add|minus", children:
                     KBI("value", type: .string)
                   )
                 )

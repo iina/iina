@@ -43,7 +43,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="680" height="355"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="680" height="355"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,7 +76,7 @@
                         <subviews>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT">
                                 <rect key="frame" x="60" y="7" width="320" height="19"/>
-                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="f1c-xF-8a2" customClass="PlaySliderCell" customModule="IINA" customModuleProvider="target"/>
+                                <sliderCell key="cell" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="f1c-xF-8a2" customClass="PlaySliderCell" customModule="IINA" customModuleProvider="target"/>
                                 <connections>
                                     <action selector="playSliderChanges:" target="-2" id="UBG-Ky-3rr"/>
                                 </connections>
@@ -86,7 +86,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="CMl-dC-PCr"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="0:00:00" id="6mL-0A-eq2">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="0:00:00" id="6mL-0A-eq2">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -98,7 +98,7 @@
                                     <constraint firstAttribute="width" constant="28" id="FZL-et-vym"/>
                                     <constraint firstAttribute="height" constant="12" id="dwX-4g-cIG"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="right" title="-32x" id="eCe-SS-Wlj">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="right" title="-32x" id="eCe-SS-Wlj">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -110,7 +110,7 @@
                                     <constraint firstAttribute="height" constant="21" id="MPG-2q-w6a"/>
                                     <constraint firstAttribute="width" constant="24" id="vBo-ma-Dnu"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" imageScaling="proportionallyDown" inset="2" id="XXj-HK-hXa">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="XXj-HK-hXa">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -124,7 +124,7 @@
                                     <constraint firstAttribute="width" constant="24" id="KMp-bQ-6E5"/>
                                     <constraint firstAttribute="height" constant="24" id="jMe-zC-CIx"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="speed" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" maxAcceleratorLevel="5" id="Aiu-eh-hd9">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="speed" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" maxAcceleratorLevel="5" id="Aiu-eh-hd9">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES" multiLevelAccelerator="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -138,7 +138,7 @@
                                     <constraint firstAttribute="width" constant="24" id="2E4-Ht-wMT"/>
                                     <constraint firstAttribute="height" constant="24" id="EMj-8F-Sxr"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="speedl" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" maxAcceleratorLevel="5" id="ijT-3Y-AK2">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="speedl" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" maxAcceleratorLevel="5" id="ijT-3Y-AK2">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES" multiLevelAccelerator="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -152,7 +152,7 @@
                                     <constraint firstAttribute="height" constant="12" id="rn3-Sw-gl7"/>
                                     <constraint firstAttribute="width" constant="28" id="ygE-Mh-HRU"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="32x" id="ULE-u4-k9L">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="32x" id="ULE-u4-k9L">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -164,7 +164,7 @@
                                     <constraint firstAttribute="width" constant="24" id="FBK-0C-gcn"/>
                                     <constraint firstAttribute="height" constant="24" id="nWg-Z7-Zhc"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSActionTemplate" imagePosition="only" alignment="center" alternateImage="NSActionTemplate" imageScaling="proportionallyDown" inset="2" id="tPP-JA-L7s">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSActionTemplate" imagePosition="only" alignment="center" alternateImage="NSActionTemplate" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="tPP-JA-L7s">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -177,7 +177,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="sDf-om-KlV"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="9:99:99" id="1XQ-Mt-jmZ">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="9:99:99" id="1XQ-Mt-jmZ">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -189,7 +189,7 @@
                                     <constraint firstAttribute="width" constant="24" id="7xv-qQ-n43"/>
                                     <constraint firstAttribute="height" constant="24" id="wi7-Km-eiK"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" alternateImage="pause" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="mWQ-R0-GGr">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" alternateImage="pause" refusesFirstResponder="YES" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="mWQ-R0-GGr">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -202,7 +202,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="69" id="5EN-dK-jOP"/>
                                 </constraints>
-                                <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="ncp-01-dCG"/>
+                                <sliderCell key="cell" controlSize="small" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="ncp-01-dCG"/>
                                 <connections>
                                     <action selector="volumeSliderChanges:" target="-2" id="5AA-pG-FOc"/>
                                 </connections>
@@ -213,7 +213,7 @@
                                     <constraint firstAttribute="height" constant="24" id="Rv3-oS-0Hu"/>
                                     <constraint firstAttribute="width" constant="24" id="yzN-B1-5gA"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="playlist" imagePosition="only" alignment="center" alternateImage="playlist" imageScaling="proportionallyDown" inset="2" id="ZPD-PJ-11g">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="playlist" imagePosition="only" alignment="center" alternateImage="playlist" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="ZPD-PJ-11g">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -224,7 +224,7 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" alphaValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qOq-6a-7j7">
                                 <rect key="frame" x="198" y="23" width="44" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="999:99" id="Pw8-rd-mUu">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="999:99" id="Pw8-rd-mUu">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

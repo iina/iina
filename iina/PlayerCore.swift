@@ -671,8 +671,9 @@ class PlayerCore: NSObject {
     let trackCount = mpvController.getInt(MPVProperty.trackListCount)
     for index in 0..<trackCount {
       // get info for each track
+      guard let trackType = mpvController.getString(MPVProperty.trackListNType(index)) else { continue }
       let track = MPVTrack(id: mpvController.getInt(MPVProperty.trackListNId(index)),
-                           type: MPVTrack.TrackType(rawValue: mpvController.getString(MPVProperty.trackListNType(index))!)!,
+                           type: MPVTrack.TrackType(rawValue: trackType)!,
                            isDefault: mpvController.getFlag(MPVProperty.trackListNDefault(index)),
                            isForced: mpvController.getFlag(MPVProperty.trackListNForced(index)),
                            isSelected: mpvController.getFlag(MPVProperty.trackListNSelected(index)),

@@ -10,6 +10,11 @@ import Cocoa
 
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
+  override var nextResponder: NSResponder? {
+    get { return nil }
+    set { }
+  }
+
   unowned let ud: UserDefaults = UserDefaults.standard
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60
@@ -187,6 +192,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     guard let w = self.window else { return }
 
+    w.initialFirstResponder = nil
+
+    w.setIsVisible(false)
+    w.center()
+
     w.titleVisibility = .hidden;
     w.styleMask.insert(NSFullSizeContentViewWindowMask);
     w.titlebarAppearsTransparent = true
@@ -267,11 +277,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     notificationObservers.append(fsObserver)
 
-    // move to center and make main
-    w.center()
-    w.makeMain()
-    w.makeKeyAndOrderFront(nil)
-    w.setIsVisible(false)
   }
 
   deinit {
@@ -350,7 +355,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Mouse / Trackpad event
 
   override func keyDown(with event: NSEvent) {
-    window!.makeFirstResponder(window!.contentView)
+    window!.makeFirstResponder(window!)
     if !isInInteractiveMode {
       playerCore.execKeyCode(Utility.mpvKeyCode(from: event))
     }
@@ -554,6 +559,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** A method being called when window open. Pretend to be a window delegate. */
   func windowDidOpen() {
+    window!.makeMain()
+    window!.makeKeyAndOrderFront(nil)
     // update buffer indicator view
     updateBufferIndicatorView()
     // enable sleep preventer
@@ -587,6 +594,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {
+    playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, true)
+
     // Set the appearance to match the theme so the titlebar matches the theme
     switch(Preference.Theme(rawValue: ud.integer(forKey: Preference.Key.themeMaterial))!) {
       case .dark, .ultraDark: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantDark);
@@ -597,12 +606,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     window!.titlebarAppearsTransparent = false
     window!.titleVisibility = .visible
     removeTitlebarFromFadeableViews()
+
     // stop animation and hide titleBarView
     titleBarView.isHidden = true
     isInFullScreen = true
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
+    playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, false)
+
     // Set back the window appearance
     self.window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
 
@@ -1041,13 +1053,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.windowDidResize(Notification(name: .NSWindowDidResize))
 
     } else {
+      var rect: NSRect
 
       if playerCore.info.jumppedFromPlaylist &&
         ud.bool(forKey: Preference.Key.resizeOnlyWhenManuallyOpenFile) {
         // user is navigating in playlist. remain same window width.
         let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
         let newSize = NSSize(width: w.frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
-        let rect = NSRect(origin: w.frame.origin, size: newSize)
+        rect = NSRect(origin: w.frame.origin, size: newSize)
         w.setFrame(rect, display: true, animate: true)
       } else {
         // get videoSize on screen
@@ -1061,9 +1074,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
           // check default window position
         }
-        let rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
+        rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
         w.setFrame(rect, display: true, animate: true)
       }
+
+      // animated `setFrame` can be inaccurate!
+      w.setFrame(rect, display: true)
 
       if (!window!.isVisible) {
         window!.setIsVisible(true)

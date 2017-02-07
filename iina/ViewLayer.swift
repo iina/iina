@@ -129,6 +129,9 @@ class ViewLayer: CAOpenGLLayer {
 
   override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
 
+    guard !videoView.isUninited else { return }
+
+    videoView.uninitLock.lock()
     CGLLockContext(ctx)
     CGLSetCurrentContext(ctx)
 
@@ -141,7 +144,6 @@ class ViewLayer: CAOpenGLLayer {
 
     if let context = videoView.mpvGLContext {
       mpv_opengl_cb_draw(context, i, dims[2], -dims[3])
-      //print("draw")
       ignoreGLError()
     } else {
       glClearColor(0, 0, 0, 1)
@@ -150,6 +152,7 @@ class ViewLayer: CAOpenGLLayer {
     glFlush()
 
     CGLUnlockContext(ctx)
+    videoView.uninitLock.unlock()
 
     if let context = videoView.mpvGLContext {
       mpv_opengl_cb_report_flip(context, 0)

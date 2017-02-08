@@ -142,7 +142,7 @@ class MenuController: NSObject, NSMenuDelegate {
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
     pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
-    
+
     // -- aspect
     var aspectList = AppData.aspects
     aspectList.insert("Default", at: 0)

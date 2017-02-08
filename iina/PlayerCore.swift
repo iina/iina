@@ -25,8 +25,6 @@ class PlayerCore: NSObject {
 
   var syncPlayTimeTimer: Timer?
 
-  var statusPaused: Bool = false
-
   var displayOSD: Bool = true
 
   var isMpvTerminated: Bool = false
@@ -125,7 +123,7 @@ class PlayerCore: NSObject {
         }
       }
       mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
-      statusPaused = setPause
+      info.isPaused = setPause
     } else {
       if (info.isPaused) {
         if mpvController.getFlag(MPVProperty.eofReached) {
@@ -136,7 +134,7 @@ class PlayerCore: NSObject {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, true)
         setSpeed(1)
       }
-      statusPaused = !statusPaused
+      info.isPaused = !info.isPaused
     }
   }
 

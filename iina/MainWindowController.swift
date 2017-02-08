@@ -186,7 +186,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
   @IBOutlet weak var rightArrowLabel: NSTextField!
   @IBOutlet weak var osdVisualEffectView: NSVisualEffectView!
   @IBOutlet weak var osd: NSTextField!
-	@IBOutlet weak var pipOverlayView: NSVisualEffectView!
+  @IBOutlet weak var pipOverlayView: NSVisualEffectView!
   
 
   weak var touchBarPlaySlider: NSSlider?
@@ -499,7 +499,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
     if obj == 0 {
       // main window
       isMouseInWindow = false
-      if controlBar.isDragging || isInPIP { return }
+      if controlBar.isDragging { return }
       hideUI()
     } else if obj == 1 {
       // slider
@@ -639,7 +639,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
     // Set back the window appearance
     self.window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
     
-    guard !isInPIP else { return }
     // hide titlebar
     window!.titlebarAppearsTransparent = true
     window!.titleVisibility = .hidden
@@ -648,7 +647,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
     animationState = .shown
     addBackTitlebarToFadeableViews()
     isInFullScreen = false
-    // set back frame of videoview
+    // set back frame of videoview, but only if not in PIP
+    guard !isInPIP else { return }
     videoView.frame = window!.contentView!.frame
   }
 
@@ -738,8 +738,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
   // MARK: - Control UI
 
   func hideUIAndCursor() {
-    // don't hide UI when dragging control bar or when in PIP
-    if controlBar.isDragging || isInPIP {
+    // don't hide UI when dragging control bar
+    if controlBar.isDragging {
       return
     }
     hideUI()
@@ -747,6 +747,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
   }
 
   private func hideUI() {
+    // Don't hide UI when in PIP
+    guard !isInPIP else {
+      return
+    }
     fadeableViews.forEach { (v) in
       v?.alphaValue = 1
     }
@@ -928,7 +932,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
 
     // if cropped, try get real window size
     if origWidth != currWidth || origHeight != currHeight {
-      let scale = origWidth == currWidth ? winFrame.width / currWidth: winFrame.height / currHeight
+      let scale = origWidth == currWidth ? winFrame.width / currWidth : winFrame.height / currHeight
       let winFrameWithOrigVideoSize = NSRect(origin: winFrame.origin, size: NSMakeSize(scale * origWidth, scale * origHeight))
 
       window!.aspectRatio = winFrameWithOrigVideoSize.size
@@ -1418,7 +1422,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
     }
     pipVideo.view = videoView
     pip.aspectRatio = videoView.videoSize ?? .zero
-    pip.playing = !playerCore.statusPaused
+    pip.playing = !playerCore.info.isPaused
     pip.title = titleTextField.stringValue
     pip.presentAsPicture(inPicture: pipVideo)
     pipOverlayView.isHidden = false

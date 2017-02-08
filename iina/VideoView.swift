@@ -30,6 +30,8 @@ class VideoView: NSView {
 
   var isUninited = false
 
+  var uninitLock = NSLock()
+
   // MARK: - Attributes
 
   override var mouseDownCanMoveWindow: Bool {
@@ -66,9 +68,10 @@ class VideoView: NSView {
   func uninit() {
     guard !isUninited else { return }
 
+    uninitLock.lock()
     mpv_opengl_cb_set_update_callback(mpvGLContext, nil, nil)
-    // uninit mpv gl
     mpv_opengl_cb_uninit_gl(mpvGLContext)
+    uninitLock.unlock()
 
     isUninited = true
   }

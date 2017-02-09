@@ -72,6 +72,11 @@ struct Constants {
     static let exitFullScreen = NSLocalizedString("menu.exit_fullscreen", comment: "Exit Fullscreen")
     static let pause = NSLocalizedString("menu.pause", comment: "Pause")
     static let resume = NSLocalizedString("menu.resume", comment: "Resume")
+    static let volume = "Volume"
+    static let audioDelay = "Audio Delay"
+    static let subDelay = "Subtitle Delay"
+    static let pip = "Enter Picture in Picture"
+    static let exitPIP = "Exit Picture in Picture"
   }
   struct Noti {
     static let playlistChanged = Notification.Name("IINAPlaylistChanged")

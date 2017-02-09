@@ -118,7 +118,7 @@ extension MainWindowController {
       playerCore.setVideoAspect(aspectStr)
       displayOSD(.aspect(aspectStr))
     } else {
-      Utility.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject)")
+      Utility.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject.debugDescription)")
     }
   }
 
@@ -204,6 +204,14 @@ extension MainWindowController {
   @IBAction func menuAlwaysOnTop(_ sender: AnyObject) {
     playerCore.info.isAlwaysOntop = !playerCore.info.isAlwaysOntop
     setWindowFloatingOnTop(playerCore.info.isAlwaysOntop)
+  }
+  
+  @IBAction func menuTogglePIP(_ sender: NSMenuItem) {
+    if !isInPIP {
+      enterPIP()
+    } else {
+      exitPIP(manually: true)
+    }
   }
 
   @IBAction func menuToggleFullScreen(_ sender: NSMenuItem) {

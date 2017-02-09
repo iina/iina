@@ -688,19 +688,29 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dn8-IA-mqQ">
-                                        <rect key="frame" x="323" y="494" width="30" height="14"/>
-                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Strip" id="AnI-pG-XQo">
+                                        <rect key="frame" x="323" y="494" width="28" height="14"/>
+                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="strip" id="AnI-pG-XQo">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subOverrideLevel" id="7O2-zE-INT">
+                                                <dictionary key="options">
+                                                    <string key="NSValueTransformerName">ASSOverrideLevelTransformer</string>
+                                                </dictionary>
+                                            </binding>
+                                        </connections>
                                     </textField>
                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YqV-oa-fRX">
                                         <rect key="frame" x="222" y="492" width="92" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="92" id="JkE-CF-4jy"/>
                                         </constraints>
-                                        <sliderCell key="cell" controlSize="small" state="on" alignment="left" maxValue="2" doubleValue="2" tickMarkPosition="below" numberOfTickMarks="3" allowsTickMarkValuesOnly="YES" sliderType="linear" id="1gR-b9-c1M"/>
+                                        <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="2" doubleValue="2" tickMarkPosition="below" numberOfTickMarks="3" allowsTickMarkValuesOnly="YES" sliderType="linear" id="1gR-b9-c1M"/>
+                                        <connections>
+                                            <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subOverrideLevel" id="vfG-1W-zsm"/>
+                                        </connections>
                                     </slider>
                                 </subviews>
                                 <constraints>

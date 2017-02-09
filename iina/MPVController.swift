@@ -164,10 +164,14 @@ class MPVController: NSObject {
       return Preference.AutoLoadAction(rawValue: v)?.string
     }
 
-    setUserOption(PK.ignoreAssStyles, type: .other, forName: MPVOption.Subtitles.subAssStyleOverride) { key in
-      let v = UserDefaults.standard.bool(forKey: key)
-      return v ? "force" : "yes"
+    let subOverrideHandler: OptionObserverInfo.Transformer = { key in
+      let v = UserDefaults.standard.bool(forKey: PK.ignoreAssStyles)
+      let level = Preference.SubOverrideLevel(rawValue: UserDefaults.standard.integer(forKey: PK.subOverrideLevel))
+      return v ? level?.string : "yes"
     }
+
+    setUserOption(PK.ignoreAssStyles, type: .other, forName: MPVOption.Subtitles.subAssStyleOverride, transformer: subOverrideHandler)
+    setUserOption(PK.subOverrideLevel, type: .other, forName: MPVOption.Subtitles.subAssStyleOverride, transformer: subOverrideHandler)
 
     setUserOption(PK.subTextFont, type: .string, forName: MPVOption.Subtitles.subFont)
     setUserOption(PK.subTextSize, type: .int, forName: MPVOption.Subtitles.subFontSize)

@@ -101,6 +101,7 @@ struct Preference {
 
     static let subAutoLoad = "subAutoLoad"
     static let ignoreAssStyles = "ignoreAssStyles"
+    static let subOverrideLevel = "subOverrideLevel"
     static let subTextFont = "subTextFont"
     static let subTextSize = "subTextSize"
     static let subTextColor = "subTextColor"
@@ -228,6 +229,22 @@ struct Preference {
     }
   }
 
+  enum SubOverrideLevel: Int {
+    case yes = 0
+    case force
+    case strip
+
+    var string: String {
+      get {
+        switch self {
+        case .yes: return "yes"
+        case .force : return "force"
+        case .strip: return "strip"
+        }
+      }
+    }
+  }
+
   enum SubAlign: Int {
     case top = 0  // left
     case center
@@ -335,6 +352,7 @@ struct Preference {
 
     Key.subAutoLoad: AutoLoadAction.fuzzy.rawValue,
     Key.ignoreAssStyles: false,
+    Key.subOverrideLevel: SubOverrideLevel.strip.rawValue,
     Key.subTextFont: "sans-serif",
     Key.subTextSize: 55,
     Key.subTextColor: NSArchiver.archivedData(withRootObject: NSColor.white),

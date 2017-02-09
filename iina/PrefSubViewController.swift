@@ -53,3 +53,20 @@ class PrefSubViewController: NSViewController {
 
 
 }
+
+@objc(ASSOverrideLevelTransformer) class ASSOverrideLevelTransformer: ValueTransformer {
+
+  static override func allowsReverseTransformation() -> Bool {
+    return false
+  }
+
+  static override func transformedValueClass() -> AnyClass {
+    return NSString.self
+  }
+
+  override func transformedValue(_ value: Any?) -> Any? {
+    guard let num = value as? NSNumber else { return nil }
+    return Preference.SubOverrideLevel(rawValue: num.intValue)?.string
+  }
+
+}

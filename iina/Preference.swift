@@ -355,8 +355,8 @@ struct Preference {
     Key.subScaleWithWindow: true,
 
     Key.enableCache: true,
-    Key.defaultCacheSize: 75000,
-    Key.cacheBufferSize: 75000,
+    Key.defaultCacheSize: 153600,
+    Key.cacheBufferSize: 153600,
     Key.secPrefech: 100,
     Key.userAgent: "",
     Key.transportRTSPThrough: RTSPTransportation.tcp.rawValue,

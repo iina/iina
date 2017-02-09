@@ -495,7 +495,11 @@ class PlayerCore: NSObject {
   }
 
   func execKeyCode(_ code: String) {
-    mpvController.command(.keypress, args: [code])
+    mpvController.command(.keypress, args: [code], checkError: false) { errCode in
+      if errCode < 0 {
+        Utility.log("Error when executing key code (\(errCode))")
+      }
+    }
   }
 
   func savePlaybackPosition() {

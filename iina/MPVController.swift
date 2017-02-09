@@ -310,7 +310,7 @@ class MPVController: NSObject {
     command(.quit)
   }
 
-  // MARK: Command & property
+  // MARK: - Command & property
 
   // Send arbitrary mpv command.
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {

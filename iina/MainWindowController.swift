@@ -1317,7 +1317,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
       }
 
     case .playlist:
-      playerCore.mpvController.command(left ? .playlistPrev : .playlistNext)
+      playerCore.mpvController.command(left ? .playlistPrev : .playlistNext, checkError: false)
 
     case .seek:
       playerCore.seek(relativeSecond: left ? -10 : 10, option: .relative)

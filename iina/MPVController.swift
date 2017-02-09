@@ -140,6 +140,7 @@ class MPVController: NSObject {
 
     chkErr(mpv_set_option_string(mpv, "watch-later-directory", Utility.watchLaterURL.path))
     setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.ProgramBehavior.savePositionOnQuit)
+    setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback")
 
     // - Codec
 

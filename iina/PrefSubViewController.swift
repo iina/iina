@@ -35,9 +35,13 @@ class PrefSubViewController: NSViewController {
   var hasResizableWidth: Bool = false
   var hasResizableHeight: Bool = false
 
+  @IBOutlet weak var scrollView: NSScrollView!
+
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do view setup here.
+
+    scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 420))
   }
 
   @IBAction func chooseSubFontAction(_ sender: AnyObject) {

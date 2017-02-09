@@ -108,6 +108,8 @@ struct Preference {
     static let subBgColor = "subBgColor"
     static let subBold = "subBold"
     static let subItalic = "subItalic"
+    static let subBlur = "subBlur"
+    static let subSpacing = "subSpacing"
     static let subBorderSize = "subBorderSize"
     static let subBorderColor = "subBorderColor"
     static let subShadowSize = "subShadowSize"
@@ -360,6 +362,8 @@ struct Preference {
     Key.subBgColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
     Key.subBold: false,
     Key.subItalic: false,
+    Key.subBlur: 0,
+    Key.subSpacing: 0,
     Key.subBorderSize: 3,
     Key.subBorderColor: NSArchiver.archivedData(withRootObject: NSColor.black),
     Key.subShadowSize: 0,

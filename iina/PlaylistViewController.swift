@@ -189,7 +189,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       return .move
     }
     return []
-}
+  }
 
   func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableViewDropOperation) -> Bool {
     let pasteboard = info.draggingPasteboard()
@@ -198,23 +198,24 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       var dataArray = NSKeyedUnarchiver.unarchiveObject(with: rowData) as! Array<IndexSet>
       let indexSet = dataArray[0]
 
-      let playlistCount = tableView.numberOfRows - 1
-      var order: Array<Int> = Array(0...playlistCount)
+      let playlistCount = playerCore.info.playlist.count - 1
+      var order: [Int] = Array(0...playlistCount)
       var finalRow = row
+      let reversedIndexSet = indexSet.reversed()
 
-      for selectedRow in indexSet.reversed() {
+      for selectedRow in reversedIndexSet {
         if selectedRow < row {
           finalRow -= 1
         }
         order.remove(at: selectedRow)
       }
 
-      for selectedRow in indexSet.reversed() {
+      for selectedRow in reversedIndexSet {
         order.insert(selectedRow, at: finalRow)
       }
 
       var fileList: [String] = []
-      var playing: Int = 0
+      var playing = 0
       for playlistItem in playerCore.info.playlist {
         fileList.append(playlistItem.filename)
         if playlistItem.isPlaying {
@@ -222,7 +223,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
         }
       }
 
-      for i in Array(0...playlistCount).reversed() {
+      for i in (0...playlistCount).reversed() {
         if i == playing {
           continue
         }
@@ -239,7 +240,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
         }
         playerCore.addToPlaylist(fileList[order[i]])
         if !foundPlaying {
-          playerCore.mpvController.command(.playlistMove, args: [(insertPosition + 1).toStr(), insertPosition.toStr()])
+          playerCore.playlistMove(insertPosition + 1, to: insertPosition)
           insertPosition += 1
         }
       }

@@ -351,7 +351,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     guard let identifier = tableColumn?.identifier else { return nil }
 
-    let mapping = currentMapping[row]
+    guard let mapping = currentMapping.at(row) else { return nil }
     if identifier == Constants.Identifier.key {
       return mapping.key
     } else if identifier == Constants.Identifier.action {

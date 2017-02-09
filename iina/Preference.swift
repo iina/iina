@@ -183,6 +183,20 @@ struct Preference {
     case speed = 0
     case playlist = 1
     case seek = 2
+
+    func toStr() -> String {
+      switch self {
+      case .speed:
+        return "speed"
+
+      case .playlist:
+        return "playlist"
+
+      case .seek:
+        return "seek"
+
+      }
+    }
   }
 
   enum Theme: Int {

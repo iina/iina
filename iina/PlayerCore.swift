@@ -74,6 +74,11 @@ class PlayerCore: NSObject {
   }
 
   func startMPV() {
+    // set path for youtube-dl
+    let oldPath = String(cString: getenv("PATH")!)
+    let path = Utility.exeDirURL.path + ":" + oldPath
+    setenv("PATH", path, 1)
+
     mpvController.mpvInit()
   }
 

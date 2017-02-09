@@ -247,11 +247,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
 
-    useExtrackSeek = Preference.SeekOption(rawValue: ud.integer(forKey: Preference.Key.useExactSeek))
-    arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: Preference.Key.arrowButtonAction))
-    singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.singleClickAction))
-    doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.doubleClickAction))
-    rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.rightClickAction))
+    setUseExtrackSeek(Preference.SeekOption(rawValue: ud.integer(forKey: Preference.Key.useExactSeek)))
+    setArrowBtnFunction(Preference.ArrowButtonAction(rawValue: ud.integer(forKey: Preference.Key.arrowButtonAction)))
+    
+    setSingleClickAction(Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.singleClickAction)))
+    setDoubleClickAction(Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.doubleClickAction)))
+    setRightClickAction(Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.rightClickAction)))
 
     // add user default observers
     observedPrefKeys.forEach { key in
@@ -297,42 +298,42 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case Preference.Key.showChapterPos:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
-        (playSlider.cell as! PlaySliderCell).drawChapters = newValue
+        setDrawChapters(newValue)
       }
 
     case Preference.Key.useExactSeek:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-          useExtrackSeek = Preference.SeekOption(rawValue: newValue)
+        setUseExtrackSeek(Preference.SeekOption(rawValue: newValue))
       }
 
     case Preference.Key.relativeSeekAmount:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        relativeSeekAmount = newValue.constrain(min: 1, max: 5)
+        setRelativeSeekAmount(newValue.constrain(min: 1, max: 5))
       }
 
     case Preference.Key.arrowButtonAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)
+        setArrowBtnFunction(Preference.ArrowButtonAction(rawValue: newValue))
       }
 
     case Preference.Key.singleClickAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        singleClickAction = Preference.MouseClickAction(rawValue: newValue)
+        setSingleClickAction(Preference.MouseClickAction(rawValue: newValue))
       }
 
     case Preference.Key.doubleClickAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        doubleClickAction = Preference.MouseClickAction(rawValue: newValue)
+        setSingleClickAction(Preference.MouseClickAction(rawValue: newValue))
       }
 
     case Preference.Key.rightClickAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        rightClickAction = Preference.MouseClickAction(rawValue: newValue)
+        setRightClickAction(Preference.MouseClickAction(rawValue: newValue))
       }
 
     case Preference.Key.showRemainingTime:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
-        rightLabel.mode = newValue ? .remaining : .duration
+        setShowRemainingTime(newValue)
       }
 
     default:
@@ -999,6 +1000,41 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isInFullScreen {
       window!.appearance = appearance;
     }
+  }
+
+  private func setDrawChapters(_ value: Bool) {
+    (playSlider.cell as! PlaySliderCell).drawChapters = value
+  }
+  
+  private func setUseExtrackSeek(_ option: Preference.SeekOption!) {
+    useExtrackSeek = option
+  }
+  
+  private func setRelativeSeekAmount(_ amout: Int) {
+    relativeSeekAmount = amout
+  }
+  
+  private func setArrowBtnFunction(_ action: Preference.ArrowButtonAction!) {
+    arrowBtnFunction = action
+    leftArrowButton.setAccessibilityLabel(NSLocalizedString(String(format:"accessibility.arrows.%@.left.label",action.toStr()),comment: "!mutiple!"))
+    rightArrowButton.setAccessibilityLabel(NSLocalizedString(String(format:"accessibility.arrows.%@.right.label",action.toStr()),comment: "!mutiple!"))
+    
+  }
+  
+  private func setSingleClickAction(_ action: Preference.MouseClickAction!) {
+    singleClickAction = action
+  }
+  
+  private func setDoubleClickAction(_ action: Preference.MouseClickAction!) {
+    doubleClickAction = action
+  }
+  
+  private func setRightClickAction(_ action: Preference.MouseClickAction!) {
+    rightClickAction = action
+  }
+  
+  private func setShowRemainingTime(_ value: Bool) {
+    rightLabel.mode = value ? .remaining : .duration
   }
 
   func updateBufferIndicatorView() {

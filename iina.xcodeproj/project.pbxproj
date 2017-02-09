@@ -77,6 +77,7 @@
 		8461BA601E407E24008BB852 /* libswscale.4.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA281E407DF7008BB852 /* libswscale.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8461BA611E407E24008BB852 /* libuchardet.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA291E407DF7008BB852 /* libuchardet.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8461BA621E407E24008BB852 /* libx264.148.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA2A1E407DF7008BB852 /* libx264.148.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8461BA681E4237C7008BB852 /* youtube-dl in Copy Executables */ = {isa = PBXBuildFile; fileRef = 8461BA671E4237C2008BB852 /* youtube-dl */; };
 		8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */; };
 		8461C5301D462488006E91FF /* VideoTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52F1D462488006E91FF /* VideoTime.swift */; };
 		8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */; };
@@ -139,6 +140,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		8461BA631E423423008BB852 /* Copy Executables */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				8461BA681E4237C7008BB852 /* youtube-dl in Copy Executables */,
+			);
+			name = "Copy Executables";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84817C991DBDF57C00CC2279 /* Copy Dylibs */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -224,7 +236,6 @@
 		8400D5F41E1AB348006785F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefSubViewController.xib; sourceTree = "<group>"; };
 		8400D5F71E1AB34D006785F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefNetworkViewController.xib; sourceTree = "<group>"; };
 		8400D5F91E1AB411006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
-		8400D5FA1E1AB411006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
 		8400D5FB1E1AB411006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/QuickSettingViewController.strings"; sourceTree = "<group>"; };
 		8400D5FC1E1AB411006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PlaylistViewController.strings"; sourceTree = "<group>"; };
 		8400D5FD1E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CropSettingsViewController.strings"; sourceTree = "<group>"; };
@@ -291,6 +302,7 @@
 		8461BA281E407DF7008BB852 /* libswscale.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.4.dylib; path = libmpv/lib/libswscale.4.dylib; sourceTree = "<group>"; };
 		8461BA291E407DF7008BB852 /* libuchardet.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuchardet.0.dylib; path = libmpv/lib/libuchardet.0.dylib; sourceTree = "<group>"; };
 		8461BA2A1E407DF7008BB852 /* libx264.148.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libx264.148.dylib; path = libmpv/lib/libx264.148.dylib; sourceTree = "<group>"; };
+		8461BA671E4237C2008BB852 /* youtube-dl */ = {isa = PBXFileReference; lastKnownFileType = file; name = "youtube-dl"; path = "libmpv/executable/youtube-dl"; sourceTree = SOURCE_ROOT; };
 		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
 		8461C52F1D462488006E91FF /* VideoTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTime.swift; sourceTree = "<group>"; };
 		8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSettingViewController.swift; sourceTree = "<group>"; };
@@ -397,6 +409,7 @@
 		D27E35DE1E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefSubViewController.strings"; sourceTree = "<group>"; };
 		D27E35DF1E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefNetworkViewController.strings"; sourceTree = "<group>"; };
 		D27E35E01E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D49FC2FA1E4373910064B9D5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
 		F4C61DF01E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F4C61DF11E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		F4C61DF21E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
@@ -468,6 +481,15 @@
 				84C8D58E1D794CE600D98A0E /* MPVFilter.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		8461BA641E42344D008BB852 /* Executables */ = {
+			isa = PBXGroup;
+			children = (
+				8461BA671E4237C2008BB852 /* youtube-dl */,
+			);
+			name = Executables;
+			path = iina;
 			sourceTree = "<group>";
 		};
 		84817CE51DBE2D0300CC2279 /* scripts */ = {
@@ -665,6 +687,7 @@
 			children = (
 				84EB1ED81D2F51D3004FA5A1 /* iina */,
 				84EB1ED71D2F51D3004FA5A1 /* Products */,
+				8461BA641E42344D008BB852 /* Executables */,
 				848290731D95978100C3C76C /* Frameworks */,
 				AF119E67C2E61E10DC27039C /* Pods */,
 			);
@@ -743,6 +766,7 @@
 				84817C991DBDF57C00CC2279 /* Copy Dylibs */,
 				84817CE81DBE2E3200CC2279 /* Copy Lua Scripts */,
 				84E745DA1DFDE9C600588DED /* Copy Configs */,
+				8461BA631E423423008BB852 /* Copy Executables */,
 				DFB4E0114268BBFB043A6097 /* [CP] Embed Pods Frameworks */,
 				A0E37C793B5311ABDB5D863A /* [CP] Copy Pods Resources */,
 			);
@@ -963,10 +987,10 @@
 			isa = PBXVariantGroup;
 			children = (
 				8400D5C71E1AB2F1006785F5 /* Base */,
-				8400D5FA1E1AB411006785F5 /* zh-Hans */,
 				D27E35CF1E379B6D0064BE57 /* zh-Hant */,
 				C789871B1E34EBDE0005769F /* ko */,
 				F4C61DF11E20423A00A43BCC /* de */,
+				D49FC2FA1E4373910064B9D5 /* zh-Hans */,
 			);
 			name = MainWindowController.xib;
 			sourceTree = "<group>";

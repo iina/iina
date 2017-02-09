@@ -116,6 +116,7 @@ struct Preference {
     static let subAlignY = "subAlignY"
     static let subMarginX = "subMarginX"
     static let subMarginY = "subMarginY"
+    static let subPos = "subPos"
     static let subLang = "subLang"
     static let onlineSubSource = "onlineSubSource"
     static let displayInLetterBox = "displayInLetterBox"
@@ -367,6 +368,7 @@ struct Preference {
     Key.subAlignY: SubAlign.bottom.rawValue,
     Key.subMarginX: 25,
     Key.subMarginY: 22,
+    Key.subPos: 100,
     Key.subLang: "",
     Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
     Key.displayInLetterBox: true,

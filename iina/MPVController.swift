@@ -201,6 +201,8 @@ class MPVController: NSObject {
     setUserOption(PK.subMarginX, type: .int, forName: MPVOption.Subtitles.subMarginX)
     setUserOption(PK.subMarginY, type: .int, forName: MPVOption.Subtitles.subMarginY)
 
+    setUserOption(PK.subPos, type: .int, forName: MPVOption.Subtitles.subPos)
+
     setUserOption(PK.subLang, type: .string, forName: MPVOption.TrackSelection.slang)
 
     setUserOption(PK.displayInLetterBox, type: .bool, forName: MPVOption.Subtitles.subUseMargins)

@@ -67,8 +67,8 @@
 "update.no_update" = "You are running the latest version.";
 "update.check_failed" = "Failed to check updates. You are probably running a too old version. Please check the website or github.";
 "update.new_version" = "New version:";
-"update.dl_from_website" = "Go to Website";
-"update.dl_from_github" = "Go to Github";
+"update.dl_from_website" = "Go To Website";
+"update.dl_from_github" = "Go To Github";
 
 "preference.title" = "Preference";
 "preference.general" = "General";
@@ -91,4 +91,42 @@
 
 "track.none" = "<None>";
 
+// Alerts
+"alert.filter_wrong_format" = "Filter is not in correct format!";
+"alert.filter_error" = "Error occured when setting filters. Please check your parameter format.";
+
+"alert.cannot_write_to_disk" = "Cannot write data to disk.";
+"alert.no_downloaded_subtitle" = "Please select a downloaded subtitle first.";
+"alert.error_when_copy" = "Error occured when copying file: %@";
+
+"alert.error_setting_config_folder" = "Error setting config directory \"%@\".";
 "alert.extra_option_error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.error_reading_user_options" = "Cannot read user defined options.";
+"alert.error_setting_user_options" = "Error %@ (%d) when setting user option %@.";
+
+"alert.unsupported_external_audio" = "Unsupported external audio file.";
+"alert.unsupported_external_subtitle" = "Unsupported external subtitle.";
+"alert.cannot_open" = "Cannot open file or stream!";
+
+"alert.keybinding_config_name_empty" = "The name cannot br empty.";
+"alert.keybinding_config_name_exist" = "The name already exists.";
+"alert.keybinding_cannot_delete_config" = "Cannot delete the file.";
+"alert.keybinding_cannot_create_config" = "Cannot create config file.";
+"alert.keybinding_cannot_write_config" = "Cannot write to config file!";
+"alert.keybinding_cannot_find_location" = "Cannot find config file location!";
+
+"alert.cannot_prevent_sleep" = "Cannot prevent display sleep!";
+"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
+
+// Panels
+"panel.ok" = "OK";
+"panel.cancel" = "Cancel";
+"panel.open_url" = "Open URL";
+"panel.open_url.informative" = "Please enter the url:";
+"panel.add_filter" = "Add filter";
+"panel.add_filter.informative" = "Please enter a filter string in format of MPV's vf or af command:";
+"panel.jump_to" = "Jump to:";
+"panel.jump_to.informative" = "Example: 20:35";
+"panel.new_input_config" = "New Input Configuration";
+"panel.new_input_config.informative" = "Please enter a name for the new configuration:";
+"panel.duplicated_input_config.informative" = "Please enter a name for the duplicated configuration:";

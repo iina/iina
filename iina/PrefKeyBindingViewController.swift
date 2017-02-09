@@ -150,14 +150,14 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   @IBAction func newConfFileAction(_ sender: AnyObject) {
     // prompt
     var newName = ""
-    let result = Utility.quickPromptPanel(messageText: "New Input Configuration", informativeText: "Please enter a name for the new configuration.") { newName = $0 }
+    let result = Utility.quickPromptPanel(messageKey: "new_input_config") { newName = $0 }
     if !result { return }
     guard !newName.isEmpty else {
-      Utility.showAlert(message: "The name cannot br empty.")
+      Utility.showAlert("keybinding_config_name_empty")
       return
     }
     guard userConfigs[newName] == nil && PrefKeyBindingViewController.defaultConfigs[newName] == nil else {
-      Utility.showAlert(message: "The name already exists.")
+      Utility.showAlert("keybinding_config_name_exist")
       return
     }
     // new file
@@ -171,7 +171,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
         do {
           try fm.removeItem(atPath: newFilePath)
         } catch {
-          Utility.showAlert(message: "Cannot delete the file.")
+          Utility.showAlert("keybinding_cannot_delete_config")
           return
         }
       } else {
@@ -181,7 +181,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     }
     // - new file
     if !fm.createFile(atPath: newFilePath, contents: nil, attributes: nil) {
-      Utility.showAlert(message: "Cannot create config file.")
+      Utility.showAlert("keybinding_cannot_create_config")
       return
     }
     // save
@@ -200,10 +200,10 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   @IBAction func duplicateConfFileAction(_ sender: AnyObject) {
     // prompt
     var newName = ""
-    let result = Utility.quickPromptPanel(messageText: "New Input Configuration", informativeText: "Please enter a name for the duplicated configuration.") { newName = $0 }
+    let result = Utility.quickPromptPanel(messageKey: "new_input_config", informativeKey: "duplicated_input_config.informative") { newName = $0 }
     if !result { return }
     if userConfigs[newName] != nil || PrefKeyBindingViewController.defaultConfigs[newName] != nil {
-      Utility.showAlert(message: "The name already exists.")
+      Utility.showAlert("keybinding_config_name_exist")
       return
     }
     // copy
@@ -218,7 +218,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
         do {
           try fm.removeItem(atPath: newFilePath)
         } catch {
-          Utility.showAlert(message: "Cannot delete the file.")
+          Utility.showAlert("keybinding_cannot_delete_config")
           return
         }
       } else {
@@ -230,7 +230,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     do {
       try fm.copyItem(atPath: currFilePath, toPath: newFilePath)
     } catch {
-      Utility.showAlert(message: "Cannot create config file.")
+      Utility.showAlert("keybinding_cannot_create_config")
       return
     }
     // save
@@ -254,7 +254,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     do {
       try FileManager.default.removeItem(atPath: currentConfFilePath)
     } catch {
-      Utility.showAlert(message: "Cannot delete config file!")
+      Utility.showAlert("keybinding_cannot_delete_config")
       return
     }
     userConfigs.removeValue(forKey: currentConfName)
@@ -281,7 +281,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     do {
       try KeyMapping.generateConfData(from: currentMapping).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
     } catch {
-      Utility.showAlert(message: "Cannot write to config file!")
+      Utility.showAlert("keybinding_cannot_write_config")
     }
   }
 
@@ -319,7 +319,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
       return uv
     } else {
       if showAlert {
-        Utility.showAlert(message: "Cannot find config file location!")
+        Utility.showAlert("keybinding_cannot_find_location")
       }
       return nil
     }

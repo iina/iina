@@ -58,12 +58,12 @@ class FilterWindowController: NSWindowController {
   // MARK: - IBAction
 
   @IBAction func addFilterAction(_ sender: AnyObject) {
-    let _ = Utility.quickPromptPanel(messageText: "Add filter", informativeText: "Please enter a filter string in format of MPV's vf or af command.") { str in
+    let _ = Utility.quickPromptPanel(messageKey: "add_filter") { str in
       if let newFilter = MPVFilter(rawString: str) {
         filters.append(newFilter)
         setFilters()
       } else {
-        Utility.showAlert(message: "Filter is not in correct format!")
+        Utility.showAlert("filter_wrong_format")
       }
     }
   }
@@ -101,7 +101,7 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
       filters[row] = newFilter
       setFilters()
     } else {
-      Utility.showAlert(message: "Filter is not in correct format!")
+      Utility.showAlert("filter_wrong_format")
     }
   }
 

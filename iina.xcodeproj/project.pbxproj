@@ -279,7 +279,6 @@
 		845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVTrack.swift; sourceTree = "<group>"; };
 		845AC09D1E1AE6C10080B614 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		845AC09F1E1AE6CB0080B614 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		845AC0A01E1AE71B0080B614 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		845FB0C61D39462E00C011E0 /* ControlBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
 		8460FBA71D6497490081841B /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		8461BA0F1E407DF7008BB852 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = libmpv/lib/libass.9.dylib; sourceTree = "<group>"; };
@@ -812,7 +811,6 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 				"zh-Hans",
 				"zh-Hant",
@@ -1205,7 +1203,6 @@
 			children = (
 				845AC09D1E1AE6C10080B614 /* Base */,
 				845AC09F1E1AE6CB0080B614 /* zh-Hans */,
-				845AC0A01E1AE71B0080B614 /* en */,
 				D27E35E01E379B700064BE57 /* zh-Hant */,
 				C789872C1E34EBDF0005769F /* ko */,
 				F4C61E021E20423A00A43BCC /* de */,

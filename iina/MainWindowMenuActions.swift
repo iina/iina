@@ -47,7 +47,7 @@ extension MainWindowController {
   }
 
   @IBAction func menuJumpTo(_ sender: NSMenuItem) {
-    let _ = Utility.quickPromptPanel(messageText: "Jump to:", informativeText: "Example: 20:35") { input in
+    let _ = Utility.quickPromptPanel(messageKey: "jump_to") { input in
       if let vt = VideoTime(input) {
         self.playerCore.seek(absoluteSecond: Double(vt.second))
       }
@@ -314,13 +314,13 @@ extension MainWindowController {
     let selected = playerCore.info.subTracks.filter { $0.isSelected }
     guard let currURL = playerCore.info.currentURL else { return }
     guard selected.count > 0 else {
-      Utility.showAlert(message: "Please select a downloaded subtitle first.")
+      Utility.showAlert("no_downloaded_subtitle")
       return
     }
     let sub = selected[0]
     // make sure it's a downloaded sub
     guard let path = sub.externalFilename, path.contains("/var/") else {
-      Utility.showAlert(message: "Please select a downloaded subtitle first.")
+       Utility.showAlert("no_downloaded_subtitle")
       return
     }
     let subURL = URL(fileURLWithPath: path)
@@ -330,7 +330,7 @@ extension MainWindowController {
       try FileManager.default.copyItem(at: subURL, to: destURL)
       displayOSD(.savedSub)
     } catch let error as NSError {
-      Utility.showAlert(message: "Error occured when copying file: \(error.localizedDescription)")
+      Utility.showAlert("error_when_coppy", arguments: [error.localizedDescription])
     }
 
   }

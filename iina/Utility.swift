@@ -15,6 +15,7 @@ class Utility {
 
   // MARK: - Logs, alerts
 
+  @available(*, deprecated, message: "showAlert(message:alertStyle:) is deprecated, use showAlert(_ key:comment:arguments:alertStyle:) instead")
   static func showAlert(message: String, alertStyle: NSAlertStyle = .critical) {
     let alert = NSAlert()
     switch alertStyle {
@@ -30,6 +31,34 @@ class Utility {
     alert.runModal()
   }
 
+  static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, alertStyle: NSAlertStyle = .critical) {
+    let alert = NSAlert()
+    switch alertStyle {
+    case .critical:
+      alert.messageText = "Error"
+    case .informational:
+      alert.messageText = "Information"
+    case .warning:
+      alert.messageText = "Warning"
+    }
+    
+    var format: String
+    if let stringComment = comment {
+      format = NSLocalizedString("alert." + key, comment: stringComment)
+    } else {
+      format = NSLocalizedString("alert." + key, comment: key)
+    }
+    
+    if let stringArguments = arguments {
+      alert.informativeText = String(format: format, arguments: stringArguments)
+    } else {
+      alert.informativeText = String(format: format)
+    }
+    
+    alert.alertStyle = alertStyle
+    alert.runModal()
+  }
+
   static func log(_ message: String) {
     NSLog("%@", message)
   }
@@ -37,7 +66,7 @@ class Utility {
   static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
     if !expr {
       NSLog("%@", errorMessage)
-      showAlert(message: "Fatal error: \(errorMessage) \nThe application will exit now.")
+      showAlert("fatal_error", arguments: [errorMessage])
       block()
       exit(1)
     }
@@ -46,7 +75,7 @@ class Utility {
   static func fatal(_ message: String, _ block: () -> Void = {}) {
     NSLog("%@", message)
     NSLog(Thread.callStackSymbols.joined(separator: "\n"))
-    showAlert(message: "Fatal error: \(message) \nThe application will exit now.")
+    showAlert("fatal_error", arguments: [message])
     block()
     exit(1)
   }
@@ -80,6 +109,7 @@ class Utility {
     }
   }
 
+  @available(*, deprecated, message: "quickPromptPanel(messageText:informativeText:ok) is deprecated, use quickPromptPanel(messageKey:informativeKey:ok) instead")
   static func quickPromptPanel(messageText: String, informativeText: String, ok: (String) -> Void) -> Bool {
     let panel = NSAlert()
     panel.messageText = messageText
@@ -91,6 +121,33 @@ class Utility {
     panel.accessoryView = input
     panel.addButton(withTitle: "OK")
     panel.addButton(withTitle: "Cancel")
+    panel.window.initialFirstResponder = input
+    let response = panel.runModal()
+    if response == NSAlertFirstButtonReturn {
+      ok(input.stringValue)
+      return true
+    } else {
+      return false
+    }
+  }
+  
+  static func quickPromptPanel(messageKey: String, informativeKey: String = "", ok: (String) -> Void) -> Bool {
+    let panel = NSAlert()
+    panel.messageText = NSLocalizedString("panel." + messageKey, comment: messageKey)
+    
+    var informativeKey = informativeKey
+    if informativeKey.isEmpty {
+      informativeKey = "\(messageKey).informative"
+    }
+    panel.informativeText = NSLocalizedString("panel." + informativeKey, comment: informativeKey)
+    
+    let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
+    input.lineBreakMode = .byClipping
+    input.usesSingleLineMode = true
+    input.cell?.isScrollable = true
+    panel.accessoryView = input
+    panel.addButton(withTitle: NSLocalizedString("panel.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("panel.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
@@ -130,7 +187,7 @@ class Utility {
       return uv
     } else {
       if showAlert {
-        Utility.showAlert(message: "Cannot find config file location!")
+        Utility.showAlert("keybinding_cannot_find_location")
       }
       return nil
     }

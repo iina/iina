@@ -3,7 +3,7 @@
 - macOS 10.12.2
 - IINA 0.0.4
 
-**Expected hehavior:**
+**Expected behavior:**
 
 
 

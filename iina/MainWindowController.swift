@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControllerDelegate {
+class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override var nextResponder: NSResponder? {
     get { return nil }
@@ -192,12 +192,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
   weak var touchBarPlaySlider: NSSlider?
   weak var touchBarCurrentPosLabel: NSTextField?
 
+  @available(macOS 10.12, *)
   lazy var pip: PIPViewController = {
     let pip = PIPViewController()
     pip.userCanResize = true
     pip.delegate = self
     return pip
   }()
+  @available(macOS 10.12, *)
   lazy var pipVideo: NSViewController = {
     return NSViewController()
   }()
@@ -598,7 +600,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
   func windowWillClose(_ notification: Notification) {
     // Close PIP
     if isInPIP {
-      exitPIP(manually: true)
+      if #available(macOS 10.12, *) {
+        exitPIP(manually: true)
+      }
     }
     // stop playing
     if !playerCore.isMpvTerminated {
@@ -1410,63 +1414,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate, PIPViewControl
     return (NSMakeRect(nx, ny, nw, nh), NSMakeRect(cx, cy, cw, ch))
   }
 
-  // MARK: - Picture in Picture
-
-  func enterPIP() {
-    // FIXME: Internal PIP API
-    // Do not enter PIP if already "PIPing"  (in this case, in the PIP animation)
-    // Also do not enter if PIP state cannot be determined
-    let pipping = pip.value(forKey: "_pipping") as? Bool ?? true
-    guard !pipping else {
-      return
-    }
-    pipVideo.view = videoView
-    pip.aspectRatio = videoView.videoSize ?? .zero
-    pip.playing = !playerCore.info.isPaused
-    pip.title = titleTextField.stringValue
-    pip.presentAsPicture(inPicture: pipVideo)
-    pipOverlayView.isHidden = false
-    isInPIP = true
-  }
-
-  func exitPIP(manually: Bool) {
-    isInPIP = false
-    if manually {
-      pip.dismissViewController(pipVideo)
-    }
-    pipOverlayView.isHidden = true
-    window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
-    videoView.frame = window?.contentView?.frame ?? .zero
-
-    // Reset animation (disabling it if exitPIP is called manually)
-    // See WebKit issue 25096170 as well as the workaround:
-    // https://trac.webkit.org/browser/trunk/Source/WebCore/platform/mac/WebVideoFullscreenInterfaceMac.mm#L343
-    pip.replacementRect = .infinite
-    pip.replacementWindow = nil
-  }
-
-  func pipShouldClose(_ pip: PIPViewController) -> Bool {
-    // Set frame to animate back to
-    pip.replacementRect = window?.contentView?.frame ?? .zero
-    pip.replacementWindow = window
-    return true
-  }
-
-  func pipDidClose(_ pip: PIPViewController) {
-    exitPIP(manually: false)
-  }
-
-  func pipActionPlay(_ pip: PIPViewController) {
-    playerCore.togglePause(false)
-  }
-
-  func pipActionPause(_ pip: PIPViewController) {
-    playerCore.togglePause(true)
-  }
-
-  func pipActionStop(_ pip: PIPViewController) {
-    exitPIP(manually: false)
-  }
 }
 
 
@@ -1642,5 +1589,68 @@ extension MainWindowController: NSTouchBarDelegate {
       }
     }
 
+  }
+}
+
+// MARK: - Picture in Picture
+
+@available(macOS 10.12, *)
+extension MainWindowController: PIPViewControllerDelegate {
+
+  @available(macOS 10.12, *)
+  func enterPIP() {
+    // FIXME: Internal PIP API
+    // Do not enter PIP if already "PIPing"  (in this case, in the PIP animation)
+    // Also do not enter if PIP state cannot be determined
+    let pipping = pip.value(forKey: "_pipping") as? Bool ?? true
+    guard !pipping else {
+      return
+    }
+    pipVideo.view = videoView
+    pip.aspectRatio = videoView.videoSize ?? .zero
+    pip.playing = !playerCore.info.isPaused
+    pip.title = titleTextField.stringValue
+    pip.presentAsPicture(inPicture: pipVideo)
+    pipOverlayView.isHidden = false
+    isInPIP = true
+  }
+
+  func exitPIP(manually: Bool) {
+    isInPIP = false
+    if manually {
+      pip.dismissViewController(pipVideo)
+    }
+    pipOverlayView.isHidden = true
+    window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
+    videoView.frame = window?.contentView?.frame ?? .zero
+    
+    // Reset animation (disabling it if exitPIP is called manually)
+    // See WebKit issue 25096170 as well as the workaround:
+    // https://trac.webkit.org/browser/trunk/Source/WebCore/platform/mac/WebVideoFullscreenInterfaceMac.mm#L343
+    pip.replacementRect = .infinite
+    pip.replacementWindow = nil
+  }
+
+  func pipShouldClose(_ pip: PIPViewController) -> Bool {
+    // Set frame to animate back to
+    pip.replacementRect = window?.contentView?.frame ?? .zero
+    pip.replacementWindow = window
+    return true
+  }
+
+  func pipDidClose(_ pip: PIPViewController) {
+    exitPIP(manually: false)
+  }
+
+  func pipActionPlay(_ pip: PIPViewController) {
+    playerCore.togglePause(false)
+  }
+
+  func pipActionPause(_ pip: PIPViewController) {
+    playerCore.togglePause(true)
+  }
+
+  func pipActionStop(_ pip: PIPViewController) {
+    exitPIP(manually: false)
   }
 }

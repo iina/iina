@@ -206,6 +206,7 @@ extension MainWindowController {
     setWindowFloatingOnTop(playerCore.info.isAlwaysOntop)
   }
   
+  @available(macOS 10.12, *)
   @IBAction func menuTogglePIP(_ sender: NSMenuItem) {
     if !isInPIP {
       enterPIP()

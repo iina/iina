@@ -8,6 +8,8 @@
 
 #import <CommonCrypto/CommonCrypto.h>
 
+#import <Availability.h>
+
 #pragma mark - PIP.framework
 
 NS_ASSUME_NONNULL_BEGIN
@@ -31,12 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol PIPViewControllerDelegate <NSObject>
 
 @optional
-- (BOOL)pipShouldClose:(PIPViewController * _Nonnull)pip;
-- (void)pipDidClose:(PIPViewController * _Nonnull)pip;
-- (void)pipActionPlay:(PIPViewController * _Nonnull)pip;
-- (void)pipActionPause:(PIPViewController * _Nonnull)pip;
-- (void)pipActionStop:(PIPViewController * _Nonnull)pip;
-
+- (BOOL)pipShouldClose:(PIPViewController * _Nonnull)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
+- (void)pipDidClose:(PIPViewController * _Nonnull)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
+- (void)pipActionPlay:(PIPViewController * _Nonnull)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
+- (void)pipActionPause:(PIPViewController * _Nonnull)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
+- (void)pipActionStop:(PIPViewController * _Nonnull)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
 @end
 
 NS_ASSUME_NONNULL_END

@@ -352,8 +352,7 @@ extension MainWindowController {
         do {
           try playlist.write(to: url, atomically: true, encoding: String.Encoding.utf8)
         } catch let error as NSError {
-          print("error writing to url \(url)")
-          print(error.localizedDescription)
+          Utility.showAlert(message: "Error occured when saving playlist: \(error.localizedDescription)")
         }
       }
     }

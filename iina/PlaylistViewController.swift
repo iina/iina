@@ -267,7 +267,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
         if !playerCore.supportedSubtitleFormat.contains(ext) {
           playerCore.addToPlaylist(path)
           playlistItems += 1
-          playerCore.mpvController.command(.playlistMove, args: [playlistItems.toStr(), currentRow.toStr()])
+          playerCore.playlistMove(playlistItems, to: currentRow)
 
           currentRow += 1
           added += 1

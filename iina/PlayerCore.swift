@@ -25,8 +25,6 @@ class PlayerCore: NSObject {
 
   var syncPlayTimeTimer: Timer?
 
-  var statusPaused: Bool = false
-
   var displayOSD: Bool = true
 
   var isMpvTerminated: Bool = false
@@ -125,6 +123,7 @@ class PlayerCore: NSObject {
         }
       }
       mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
+      info.isPaused = setPause
     } else {
       if (info.isPaused) {
         if mpvController.getFlag(MPVProperty.eofReached) {
@@ -135,6 +134,7 @@ class PlayerCore: NSObject {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, true)
         setSpeed(1)
       }
+      info.isPaused = !info.isPaused
     }
   }
 
@@ -495,7 +495,11 @@ class PlayerCore: NSObject {
   }
 
   func execKeyCode(_ code: String) {
-    mpvController.command(.keypress, args: [code])
+    mpvController.command(.keypress, args: [code], checkError: false) { errCode in
+      if errCode < 0 {
+        Utility.log("Error when executing key code (\(errCode))")
+      }
+    }
   }
 
   func savePlaybackPosition() {

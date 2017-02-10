@@ -48,6 +48,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var smallerSize: NSMenuItem!
   @IBOutlet weak var fitToScreen: NSMenuItem!
   @IBOutlet weak var fullScreen: NSMenuItem!
+  @IBOutlet weak var pictureInPicture: NSMenuItem!
   @IBOutlet weak var alwaysOnTop: NSMenuItem!
   @IBOutlet weak var aspectMenu: NSMenu!
   @IBOutlet weak var cropMenu: NSMenu!
@@ -139,6 +140,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
+    pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
 
     // -- aspect
@@ -284,10 +286,11 @@ class MenuController: NSObject, NSMenuDelegate {
     fileLoop.state = isLoop ? NSOnState : NSOffState
   }
 
-  private func updateVieoMenu() {
+  private func updateVideoMenu() {
     alwaysOnTop.state = PlayerCore.shared.info.isAlwaysOntop ? NSOnState : NSOffState
     deinterlace.state = PlayerCore.shared.info.deinterlace ? NSOnState : NSOffState
     fullScreen.title = PlayerCore.shared.mainWindow.isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
+    pictureInPicture.title = PlayerCore.shared.mainWindow.isInPIP ? Constants.String.exitPIP : Constants.String.pip
   }
 
   private func updateAudioMenu() {
@@ -372,7 +375,7 @@ class MenuController: NSObject, NSMenuDelegate {
     } else if menu == playbackMenu {
       updatePlaybackMenu()
     } else if menu == videoMenu {
-      updateVieoMenu()
+      updateVideoMenu()
     } else if menu == videoTrackMenu {
       updateTracks(forMenu: menu, type: .video)
     } else if menu == flipMenu {

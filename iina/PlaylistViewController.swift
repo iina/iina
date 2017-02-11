@@ -399,7 +399,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource {
       } else if columnName == Constants.Identifier.trackName {
         // right column
         let v = tableView.make(withIdentifier: Constants.Identifier.trackNameCell, owner: self) as! ChapterTableCellView
-        v.textField?.stringValue = chapter.title
+        v.textField?.stringValue = chapter.title.isEmpty ? "Chapter \(row)" : chapter.title
         v.durationTextField.stringValue = "\(chapter.time.stringRepresentation) → \(nextChapterTime.stringRepresentation)"
         return v
       } else {

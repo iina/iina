@@ -153,6 +153,9 @@
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="EZg-oY-9Ip"/>
                             <menuItem title="Playlist Panel" keyEquivalent="p" id="0T7-Nu-SL7"/>
+                            <menuItem title="Playlist Loop" id="aSc-P6-fiZ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem title="Playlist" id="Gi5-1S-RQB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Playlist" systemMenu="font" id="aXa-aM-Jaq"/>
@@ -479,6 +482,7 @@
                 <outlet property="pictureInPicture" destination="mND-N8-z6o" id="mrn-ku-bqH"/>
                 <outlet property="playbackMenu" destination="GEO-Iw-cKr" id="Ji3-Wv-EE5"/>
                 <outlet property="playlist" destination="Gi5-1S-RQB" id="oMH-9E-A8A"/>
+                <outlet property="playlistLoop" destination="aSc-P6-fiZ" id="V5V-Wv-Pxk"/>
                 <outlet property="playlistMenu" destination="aXa-aM-Jaq" id="Nkw-YD-NAi"/>
                 <outlet property="playlistPanel" destination="0T7-Nu-SL7" id="kIo-HV-YPh"/>
                 <outlet property="previousFrame" destination="oxF-BB-lBy" id="Kx8-vs-jMi"/>

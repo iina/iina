@@ -33,6 +33,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var fileLoop: NSMenuItem!
   @IBOutlet weak var playlistPanel: NSMenuItem!
   @IBOutlet weak var playlist: NSMenuItem!
+  @IBOutlet weak var playlistLoop: NSMenuItem!
   @IBOutlet weak var playlistMenu: NSMenu!
   @IBOutlet weak var chapterPanel: NSMenuItem!
   @IBOutlet weak var chapter: NSMenuItem!
@@ -127,6 +128,7 @@ class MenuController: NSObject, NSMenuDelegate {
     fileLoop.action = #selector(MainWindowController.menuFileLoop(_:))
     playlistMenu.delegate = self
     chapterMenu.delegate = self
+    playlistLoop.action = #selector(MainWindowController.menuPlaylistLoop(_:))
     playlistPanel.action = #selector(MainWindowController.menuShowPlaylistPanel(_:))
     chapterPanel.action = #selector(MainWindowController.menuShowChaptersPanel(_:))
 
@@ -287,6 +289,8 @@ class MenuController: NSObject, NSMenuDelegate {
     pause.title = PlayerCore.shared.info.isPaused ? Constants.String.resume : Constants.String.pause
     let isLoop = PlayerCore.shared.mpvController.getFlag(MPVOption.PlaybackControl.loopFile)
     fileLoop.state = isLoop ? NSOnState : NSOffState
+    let loopStatus = PlayerCore.shared.mpvController.getString(MPVOption.PlaybackControl.loop)
+    playlistLoop.state = (loopStatus == "inf" || loopStatus == "force") ? NSOnState : NSOffState
   }
 
   private func updateVideoMenu() {

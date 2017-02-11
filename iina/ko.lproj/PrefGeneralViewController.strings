@@ -13,6 +13,12 @@
 /* Class = "NSMenuItem"; title = "Ultra Dark"; ObjectID = "3XV-iO-y0C"; */
 "3XV-iO-y0C.title" = "Ultra Dark";
 
+/* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
+"6TV-DG-503.title" = "재생목록:";
+
+/* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
+"8kU-8g-VgX.title" = "설정을 적용하려면 IINA를 종료후 다시 실행해야 합니다.";
+
 /* Class = "NSMenuItem"; title = "Light"; ObjectID = "49l-le-9k6"; */
 "49l-le-9k6.title" = "Light";
 
@@ -31,11 +37,17 @@
 /* Class = "NSMenuItem"; title = "PGM (YV12)"; ObjectID = "Kru-Ho-Wpv"; */
 "Kru-Ho-Wpv.title" = "PGM (YV12)";
 
+/* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
+"Lac-Ol-g6E.title" = "다음 항목 자동 재생";
+
 /* Class = "NSButtonCell"; title = "Enter fullscreen when media is opened"; ObjectID = "MlG-hl-goA"; */
 "MlG-hl-goA.title" = "파일을 열때 전체화면으로 전환";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
+
+/* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
+"QJq-fO-hhK.title" = "같은 폴더에 있는 파일을 자동으로 추가";
 
 /* Class = "NSButtonCell"; title = "Quit when no window is opened"; ObjectID = "YLo-6E-tT7"; */
 "YLo-6E-tT7.title" = "모든 윈도우를 닫으면 앱을 종료";

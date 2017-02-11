@@ -93,3 +93,14 @@
 
 "alert.extra_option_error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
 "alert.keybinding_config_error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+
+
+"pl_menu.title_multi" = "%d Items";
+"pl_menu.play_next" = "Play Next";
+"pl_menu.remove" = "Remove";
+"pl_menu.remove_multi" = "Remove All";
+"pl_menu.delete" = "Delete File";
+"pl_menu.delete_multi" = "Delete All Files";
+"pl_menu.delete_after_play" = "Delete After Playback";
+"pl_menu.delete_after_play_multi" = "Delete All After Playback";
+"pl_menu.reveal_in_finder" = "Reveal in Finder";

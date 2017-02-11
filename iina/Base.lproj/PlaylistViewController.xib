@@ -72,6 +72,9 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                         </tableColumn>
                                                     </tableColumns>
+                                                    <connections>
+                                                        <outlet property="menu" destination="DE5-wv-zGL" id="Is2-VS-jBG"/>
+                                                    </connections>
                                                 </tableView>
                                             </subviews>
                                         </clipView>
@@ -286,6 +289,28 @@
             </constraints>
             <point key="canvasLocation" x="150" y="217.5"/>
         </customView>
+        <menu id="DE5-wv-zGL">
+            <items>
+                <menuItem title="Play Next" id="4lG-mi-jbS">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Remove" id="teK-DD-5a5">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="d29-JC-hRy"/>
+                <menuItem title="Delete File" id="Fx3-bJ-Jfa">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Delete File After Playback" id="fml-9O-FZk">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="JUC-gy-nJA"/>
+                <menuItem title="Reveal in Finder" id="Lr3-Qu-3hV">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="558" y="284"/>
+        </menu>
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>

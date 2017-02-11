@@ -92,3 +92,8 @@
 "track.none" = "<None>";
 
 "alert.extra_option_error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.keybinding_config_error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+
+
+"pl_menu.title_multiple" = "%d Items";
+

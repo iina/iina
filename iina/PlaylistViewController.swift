@@ -409,13 +409,16 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
     }
   }
 
-  // MARK: - Menu actions
+  // MARK: - Context menu
+
+  var selectedRows: IndexSet?
 
   func menuNeedsUpdate(_ menu: NSMenu) {
     var indexSet = playlistTableView.selectedRowIndexes
     indexSet.insert(playlistTableView.clickedRow)
     guard !indexSet.isEmpty else { return }
 
+    selectedRows = indexSet
     menu.removeAllItems()
     let items = buildMenu(forRows: indexSet).items
     for item in items {
@@ -424,23 +427,56 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
   }
 
   @IBAction func contextMenuPlayNext(_ sender: NSMenuItem) {
-    print("")
+    let current = playerCore.mpvController.getInt(MPVProperty.playlistPos)
+    var ob = 0  // index offset before current playing item
+    var mc = 1  // moved item count, +1 because move to next item of current played one
+    for item in selectedRows! {
+      if item == current { continue }
+      if item < current {
+        playerCore.playlistMove(item + ob, to: current + mc + ob)
+        ob -= 1
+      } else {
+        playerCore.playlistMove(item, to: current + mc + ob)
+      }
+      mc += 1
+    }
+    playlistTableView.deselectAll(nil)
+    NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
   }
 
   @IBAction func contextMenuRemove(_ sender: NSMenuItem) {
-
+    for item in selectedRows! {
+      playerCore.playlistRemove(item)
+    }
+    playlistTableView.deselectAll(nil)
+    NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
   }
 
   @IBAction func contextMenuDeleteFile(_ sender: NSMenuItem) {
-
+    for index in selectedRows! {
+      playerCore.playlistRemove(index)
+      let path = playerCore.info.playlist[index].filename
+      do {
+        try FileManager.default.removeItem(atPath: path)
+      } catch let error {
+        Utility.showAlert(message: "Error deleting file: \(error.localizedDescription)")
+      }
+    }
+    playlistTableView.deselectAll(nil)
+    NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
   }
 
   @IBAction func contextMenuDeleteFileAfterPlayback(_ sender: NSMenuItem) {
-
+    // WIP
   }
 
   @IBAction func contextMenuRevealInFinder(_ sender: NSMenuItem) {
-
+    var urls: [URL] = []
+    for index in selectedRows! {
+      urls.append(URL(fileURLWithPath: playerCore.info.playlist[index].filename))
+    }
+    playlistTableView.deselectAll(nil)
+    NSWorkspace.shared().activateFileViewerSelecting(urls)
   }
 
   private func buildMenu(forRows rows: IndexSet) -> NSMenu {
@@ -448,7 +484,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
     let isSingleItem = rows.count == 1
     let title: String = isSingleItem ?
       playerCore.info.playlist[rows.first!].filenameForDisplay :
-      String(format: NSLocalizedString("pl_menu.title_multiple", comment: "%d Items"), rows.count)
+      String(format: NSLocalizedString("pl_menu.title_multi", comment: "%d Items"), rows.count)
 
     result.addItem(withTitle: title)
     result.addItem(NSMenuItem.separator())
@@ -457,9 +493,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
 
     result.addItem(NSMenuItem.separator())
     result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
-    result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete_after_play" : "pl_menu.delete_after_play_multi", comment: "Delete After Playback"), action: #selector(self.contextMenuDeleteFileAfterPlayback(_:)))
+    // result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete_after_play" : "pl_menu.delete_after_play_multi", comment: "Delete After Playback"), action: #selector(self.contextMenuDeleteFileAfterPlayback(_:)))
 
-    result.addItem(NSMenuItem.separator())
+    // result.addItem(NSMenuItem.separator())
     result.addItem(withTitle: NSLocalizedString("pl_menu.reveal_in_finder", comment: "Reveal in Finder"), action: #selector(self.contextMenuRevealInFinder(_:)))
     return result
   }

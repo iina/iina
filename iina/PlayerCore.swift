@@ -355,6 +355,10 @@ class PlayerCore: NSObject {
     mpvController.command(.playlistMove, args: ["\(from)", "\(to)"])
   }
 
+  func playlistRemove(_ index: Int) {
+    mpvController.command(.playlistRemove, args: [index.toStr()])
+  }
+
   func clearPlaylist() {
     mpvController.command(.playlistClear)
   }

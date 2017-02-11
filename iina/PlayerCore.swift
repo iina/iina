@@ -351,6 +351,10 @@ class PlayerCore: NSObject {
     mpvController.command(.loadfile, args: [path, "append"])
   }
 
+  func playlistMove(_ from: Int, to: Int) {
+    mpvController.command(.playlistMove, args: ["\(from)", "\(to)"])
+  }
+
   func clearPlaylist() {
     mpvController.command(.playlistClear)
   }

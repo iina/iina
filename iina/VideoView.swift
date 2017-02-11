@@ -141,9 +141,6 @@ class VideoView: NSView {
       guard let droppedString = pb.pasteboardItems![0].string(forType: "public.utf8-plain-text") else {
         return false
       }
-
-      Swift.print(droppedString, Regex.urlDetect.matches(droppedString))
-
       if Regex.urlDetect.matches(droppedString) {
         playerCore.openURLString(droppedString)
         return true

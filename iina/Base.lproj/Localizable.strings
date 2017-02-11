@@ -95,5 +95,14 @@
 "alert.keybinding_config_error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
 
 
-"pl_menu.title_multiple" = "%d Items";
-
+"pl_menu.title_multi" = "%d Items";
+"pl_menu.play_next" = "Play Next";
+"pl_menu.remove" = "Remove";
+"pl_menu.remove_multi" = "Remove Selected";
+"pl_menu.delete" = "Move to Trash";
+"pl_menu.delete_multi" = "Move Selected Files to Trash";
+"pl_menu.delete_after_play" = "Move to Trash After Playback";
+"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
+"pl_menu.reveal_in_finder" = "Reveal in Finder";
+"pl_menu.add_item" = "Add Item…";
+"pl_menu.clear_playlist" = "Clear Playlist";

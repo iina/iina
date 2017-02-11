@@ -445,19 +445,23 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
   }
 
   @IBAction func contextMenuRemove(_ sender: NSMenuItem) {
+    var count = 0
     for item in selectedRows! {
-      playerCore.playlistRemove(item)
+      playerCore.playlistRemove(item - count)
+      count += 1
     }
     playlistTableView.deselectAll(nil)
     NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
   }
 
   @IBAction func contextMenuDeleteFile(_ sender: NSMenuItem) {
+    var count = 0
     for index in selectedRows! {
       playerCore.playlistRemove(index)
-      let path = playerCore.info.playlist[index].filename
+      let url = URL(fileURLWithPath: playerCore.info.playlist[index].filename)
       do {
-        try FileManager.default.removeItem(atPath: path)
+        try FileManager.default.trashItem(at: url, resultingItemURL: nil)
+        count += 1
       } catch let error {
         Utility.showAlert(message: "Error deleting file: \(error.localizedDescription)")
       }
@@ -497,6 +501,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
 
     // result.addItem(NSMenuItem.separator())
     result.addItem(withTitle: NSLocalizedString("pl_menu.reveal_in_finder", comment: "Reveal in Finder"), action: #selector(self.contextMenuRevealInFinder(_:)))
+    result.addItem(NSMenuItem.separator())
+    result.addItem(withTitle: NSLocalizedString("pl_menu.add_item", comment: "Add Item"), action: #selector(self.addToPlaylistBtnAction(_:)))
+    result.addItem(withTitle: NSLocalizedString("pl_menu.clear_playlist", comment: "Clear Playlist"), action: #selector(self.clearPlaylistBtnAction(_:)))
     return result
   }
 

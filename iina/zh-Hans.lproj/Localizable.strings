@@ -84,8 +84,10 @@
 "menu.volume"= "音量: %d";
 "menu.audio_delay" = "音频延迟: %.2f秒";
 "menu.sub_delay" = "字幕延迟: %.2f秒";
-"menu.fullscreen" = "全屏";
+"menu.fullscreen" = "进入全屏";
 "menu.exit_fullscreen" = "离开全屏";
+"menu.pip" = "进入「画中画」";
+"menu.exit_pip" = "离开「画中画」";
 "menu.pause" = "暂停";
 "menu.resume" = "继续";
 

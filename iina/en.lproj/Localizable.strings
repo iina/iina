@@ -84,8 +84,10 @@
 "menu.volume"= "Volume: %d";
 "menu.audio_delay" = "Audio Delay: %.2fs";
 "menu.sub_delay" = "Subtitie Delay: %.2fs";
-"menu.fullscreen" = "Full Screen";
+"menu.fullscreen" = "Enter Full Screen";
 "menu.exit_fullscreen" = "Exit Full Screen";
+"menu.pip" = "Enter Picture-in-Picture";
+"menu.exit_pip" = "Exit Picture-in-Picture";
 "menu.pause" = "Pause";
 "menu.resume" = "Resume";
 

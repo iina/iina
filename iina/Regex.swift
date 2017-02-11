@@ -13,6 +13,7 @@ class Regex {
   static let aspect = Regex("\\A\\d+(\\.\\d+)?:\\d+(\\.\\d+)?\\Z")
   static let httpFileName = Regex("attachment; filename=(.+?)\\Z")
   static let tagVersion = Regex("\\Av(\\d+\\.\\d+\\.\\d+)\\Z")
+  static let urlDetect = Regex("((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?")
 
   var regex: NSRegularExpression?
 

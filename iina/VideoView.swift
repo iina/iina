@@ -58,7 +58,7 @@ class VideoView: NSView {
     wantsBestResolutionOpenGLSurface = true
   
     // dragging init
-    register(forDraggedTypes: [NSFilenamesPboardType, NSURLPboardType])
+    register(forDraggedTypes: [NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeString])
   }
 
   required init?(coder: NSCoder) {
@@ -134,9 +134,23 @@ class VideoView: NSView {
       return true
     } else if types.contains(NSURLPboardType) {
       guard let url = pb.propertyList(forType: NSURLPboardType) as? [String] else { return false }
-      
+
       playerCore.openURLString(url[0])
       return true
+    } else if types.contains(NSPasteboardTypeString) {
+      guard let droppedString = pb.pasteboardItems![0].string(forType: "public.utf8-plain-text") else {
+        return false
+      }
+
+      Swift.print(droppedString, Regex.urlDetect.matches(droppedString))
+
+      if Regex.urlDetect.matches(droppedString) {
+        playerCore.openURLString(droppedString)
+        return true
+      } else {
+        Utility.showAlert(message: "Unsupported URL.")
+        return false
+      }
     }
     return false
   }

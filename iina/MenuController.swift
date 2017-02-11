@@ -140,7 +140,11 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
-    pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
+    if #available(OSX 10.12, *) {
+      pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
+    } else {
+      videoMenu.removeItem(pictureInPicture)
+    }
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
 
     // -- aspect
@@ -290,7 +294,7 @@ class MenuController: NSObject, NSMenuDelegate {
     alwaysOnTop.state = PlayerCore.shared.info.isAlwaysOntop ? NSOnState : NSOffState
     deinterlace.state = PlayerCore.shared.info.deinterlace ? NSOnState : NSOffState
     fullScreen.title = PlayerCore.shared.mainWindow.isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
-    pictureInPicture.title = PlayerCore.shared.mainWindow.isInPIP ? Constants.String.exitPIP : Constants.String.pip
+    pictureInPicture?.title = PlayerCore.shared.mainWindow.isInPIP ? Constants.String.exitPIP : Constants.String.pip
   }
 
   private func updateAudioMenu() {

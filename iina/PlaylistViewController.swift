@@ -40,6 +40,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
   @IBOutlet weak var chaptersBtn: NSButton!
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var deleteBtn: NSButton!
+  @IBOutlet weak var loopBtn: NSButton!
+  @IBOutlet weak var shuffleBtn: NSButton!
 
   lazy var playlistDelegate: PlaylistTableDelegate = {
     return PlaylistTableDelegate(self)
@@ -58,7 +60,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
     playlistTableView.menu?.delegate = self
     chapterTableView.delegate = chapterDelegate
 
-    deleteBtn.image?.isTemplate = true
+    [deleteBtn, loopBtn, shuffleBtn].forEach {
+      $0?.image?.isTemplate = true
+      $0?.alternateImage?.isTemplate = true
+    }
+
 
     // handle pending switch tab request
     if pendingSwitchRequest != nil {
@@ -82,6 +88,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
 
   override func viewDidAppear() {
     reloadData(playlist: true, chapters: true)
+
+    let loopStatus = playerCore.mpvController.getString(MPVOption.PlaybackControl.loop)
+    loopBtn.state = (loopStatus == "inf" || loopStatus == "force") ? NSOnState : NSOffState
   }
 
   deinit {
@@ -334,6 +343,15 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
     reloadData(playlist: false, chapters: true)
     switchToTab(.chapters)
   }
+
+  @IBAction func loopBtnAction(_ sender: AnyObject) {
+    playerCore.togglePlaylistLoop()
+  }
+
+  @IBAction func shuffleBtnAction(_ sender: AnyObject) {
+    playerCore.toggleShuffle()
+  }
+
   
   func performDoubleAction(sender: AnyObject) {
     let tv = sender as! NSTableView

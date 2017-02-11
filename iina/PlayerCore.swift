@@ -215,6 +215,17 @@ class PlayerCore: NSObject {
     mpvController.setFlag(MPVOption.PlaybackControl.loopFile, !isLoop)
   }
 
+  func togglePlaylistLoop() {
+    let loopStatus = mpvController.getString(MPVOption.PlaybackControl.loop)
+    let isLoop = (loopStatus == "inf" || loopStatus == "force")
+    mpvController.setString(MPVOption.PlaybackControl.loop, isLoop ? "no" : "inf")
+  }
+
+  func toggleShuffle() {
+    mpvController.command(.playlistShuffle)
+    NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+  }
+
   func setVolume(_ volume: Int) {
     let realVolume = volume.constrain(min: 0, max: 100)
     info.volume = realVolume

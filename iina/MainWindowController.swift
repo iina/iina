@@ -210,6 +210,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     guard let w = self.window else { return }
 
+    w.collectionBehavior = [.managed, .fullScreenPrimary]
+
     w.initialFirstResponder = nil
 
     w.setIsVisible(false)

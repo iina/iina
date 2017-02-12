@@ -214,7 +214,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     w.initialFirstResponder = nil
 
-    w.setIsVisible(false)
     w.center()
 
     w.titleVisibility = .hidden;
@@ -249,6 +248,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // note that don't use auto resize for it (handle in windowDidResize)
     cv.autoresizesSubviews = false
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
+
+    w.setIsVisible(true)
 
     //videoView.translatesAutoresizingMaskIntoConstraints = false
     //quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": videoView])

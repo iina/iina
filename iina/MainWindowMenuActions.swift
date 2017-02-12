@@ -64,6 +64,14 @@ extension MainWindowController {
     displayOSD(.abLoop(playerCore.info.abLoopStatus))
   }
 
+  @IBAction func menuFileLoop(_ sender: NSMenuItem) {
+    playerCore.toggleFileLoop()
+  }
+
+  @IBAction func menuPlaylistLoop(_ sender: NSMenuItem) {
+    playerCore.togglePlaylistLoop()
+  }
+
   @IBAction func menuPlaylistItem(_ sender: NSMenuItem) {
     let index = sender.tag
     playerCore.playFileInPlaylist(index)
@@ -114,7 +122,7 @@ extension MainWindowController {
       playerCore.setVideoAspect(aspectStr)
       displayOSD(.aspect(aspectStr))
     } else {
-      Utility.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject)")
+      Utility.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject.debugDescription)")
     }
   }
 
@@ -200,6 +208,15 @@ extension MainWindowController {
   @IBAction func menuAlwaysOnTop(_ sender: AnyObject) {
     playerCore.info.isAlwaysOntop = !playerCore.info.isAlwaysOntop
     setWindowFloatingOnTop(playerCore.info.isAlwaysOntop)
+  }
+  
+  @available(macOS 10.12, *)
+  @IBAction func menuTogglePIP(_ sender: NSMenuItem) {
+    if !isInPIP {
+      enterPIP()
+    } else {
+      exitPIP(manually: true)
+    }
   }
 
   @IBAction func menuToggleFullScreen(_ sender: NSMenuItem) {
@@ -327,6 +344,23 @@ extension MainWindowController {
     let inspector = (NSApp.delegate as! AppDelegate).inspector
     inspector.showWindow(self)
     inspector.updateInfo()
+  }
+  
+  @IBAction func menuSavePlaylist(_ sender: NSMenuItem) {
+    let _ = Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"]) {
+      (url) in if url.isFileURL {
+        var playlist = ""
+        for item in playerCore.info.playlist {
+          playlist.append((item.filename + "\n"))
+        }
+        
+        do {
+          try playlist.write(to: url, atomically: true, encoding: String.Encoding.utf8)
+        } catch let error as NSError {
+          Utility.showAlert(message: "Error occured when saving playlist: \(error.localizedDescription)")
+        }
+      }
+    }
   }
 
 }

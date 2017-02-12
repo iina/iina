@@ -81,14 +81,30 @@
 "preference.advanced" = "Avancé";
 "preference.scripts" = "Scripts";
 
-"menu.volume"= "Volume : %d";
+"menu.volume" = "Volume : %d";
 "menu.audio_delay" = "Délai audio : %.2fs";
 "menu.sub_delay" = "Délai des sous-titres : %.2fs";
 "menu.fullscreen" = "Plein écran";
 "menu.exit_fullscreen" = "Quitter le mode plein écran";
+"menu.pip" = "Passer en inscrustation";
+"menu.exit_pip" = "Quitter le mode incrustation";
 "menu.pause" = "Pause";
 "menu.resume" = "Lire";
 
 "track.none" = "<Aucun>";
 
-"alert.extra_option_error" = "Erreur lors du setup de l'option --%@=%@ avec une valeur de retour %d. Veuillez vérifier vos options additionnelles dans Préférences > Avancé.";"
+"alert.extra_option_error" = "Erreur lors du setup de l'option --%@=%@ avec une valeur de retour %d. Veuillez vérifier vos options additionnelles dans Préférences > Avancé.";
+"alert.keybinding_config_error" = "Erreur lors de la lecture du fichier de configuration des touches \"%@\" ! Les valeurs par défaut de IINA seront utilisées. Veuillez vérifier votre configuration.";
+
+
+"pl_menu.title_multi" = "%d éléments";
+"pl_menu.play_next" = "Écouter ensuite";
+"pl_menu.remove" = "Enlever";
+"pl_menu.remove_multi" = "Enlever la sélection";
+"pl_menu.delete" = "Placer dans la corbeille";
+"pl_menu.delete_multi" = "Placer la sélection dans la corbeille";
+"pl_menu.delete_after_play" = "Placer dans la corbeille après lecture";
+"pl_menu.delete_after_play_multi" = "Placer la sélection dans la corbeille après lecture";
+"pl_menu.reveal_in_finder" = "Afficher dans le Finder";
+"pl_menu.add_item" = "Ajouter...";
+"pl_menu.clear_playlist" = "Vider la playlist";

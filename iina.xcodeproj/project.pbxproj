@@ -445,6 +445,7 @@
 		E5A935651E34B38A00ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefSubViewController.strings; sourceTree = "<group>"; };
 		E5A935661E34B38A00ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefNetworkViewController.strings; sourceTree = "<group>"; };
 		E5A935671E34B38B00ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E5A9E1841E50F1E200950BD5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		F4C61DF01E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F4C61DF11E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		F4C61DF21E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
@@ -1287,6 +1288,7 @@
 				84F5D49B1E44E9A50060A838 /* Base */,
 				84F5D49D1E44E9A90060A838 /* zh-Hans */,
 				84F5D49E1E44E9AA0060A838 /* en */,
+				E5A9E1841E50F1E200950BD5 /* fr */,
 			);
 			name = KeyBinding.strings;
 			sourceTree = "<group>";

@@ -1,0 +1,71 @@
+/* 
+  KeyBinding.strings
+  iina
+
+  Created by Nicolas Allemand on 12/02/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Ignorer";
+"cmd.seek" = "Aller";
+"cmd.set" = "Configurer";
+"cmd.cycle" = "Cycler";
+"cmd.cycle-values" = "Cycler de";
+"cmd.add" = "Changer";
+"cmd.multiply" = "Multiplier";
+"cmd.frame-step" = "Image suivante";
+"cmd.frame-back-step" = "Image précédente";
+"cmd.ab-loop" = "Boucle A-B";
+"cmd.playlist-next" = "Média suivant";
+"cmd.playlist-prev" = "Média précédent";
+"cmd.playlist-clear" = "Vider la playlist";
+"cmd.playlist-remove" = "Enlever le média courant";
+"cmd.playlist-shuffle" = "Ordre aléatoire";
+"cmd.write-watch-later-config" = "Enregistrer l'historique de lecture";
+"cmd.stop" = "Stopper";
+"cmd.quit" = "Quitter";
+
+"yes" = "Oui";
+"no" = "Non";
+"to" = "à";
+"by" = "de";
+"in" = "de";
+"add" = "ajouter";
+"minus" = "enlever";
+"forward" = "en avant";
+"backward" = "en arrière";
+"seek-to" = "à";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (exact)";
+"relative-percent+exact" = "% (exact)";
+"absolute+keyframe" = "s (keyframe)";
+"absolute-percent+keyframe" = "% (keyframe)";
+
+"opt.pause" = "Pause";
+"opt.speed" = "Vitesse";
+
+"opt.video" = "Piste vidéo";
+"opt.contrast" = "Contraste";
+"opt.brightness" = "Luminosité";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Saturation";
+"opt.deinterlace" = "Désentrelacer";
+
+"opt.audio" = "Piste audio";
+"opt.volume" = "Volume";
+"opt.mute" = "Couper le son";
+"opt.audio-delay" = "Délai audio";
+
+"opt.sub" = "Piste de sous-titres";
+"opt.sub-delay" = "Délai des sous-titres";
+"opt.sub-pos" = "Position des sous-titres";
+"opt.sub-scale" = "Échelle des sous-titres";
+"opt.sub-visibility" = "Visibilité des sous-titres";
+
+"opt.fullscreen" = "Plein écran";
+
+"opt.chapter" = "Chapitre";

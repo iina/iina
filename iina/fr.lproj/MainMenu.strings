@@ -1,4 +1,7 @@
 
+/* Class = "NSMenuItem"; title = "Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
+"0T7-Nu-SL7.title" = "Panneau des playlists";
+
 /* Class = "NSMenuItem"; title = "Open URL..."; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "Ouvrir une adresse...";
 
@@ -10,6 +13,9 @@
 
 /* Class = "NSMenuItem"; title = "IINA"; ObjectID = "1Xt-HY-uBw"; */
 "1Xt-HY-uBw.title" = "IINA";
+
+/* Class = "NSMenu"; title = "Audio Device"; ObjectID = "2Dp-Ol-Zcf"; */
+"2Dp-Ol-Zcf.title" = "Périphérique audio";
 
 /* Class = "NSMenuItem"; title = "Jump to beginning"; ObjectID = "2Ya-3g-1hy"; */
 "2Ya-3g-1hy.title" = "Aller au début";
@@ -50,6 +56,9 @@
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
 "9pa-9C-ueQ.title" = "<Aucune>";
 
+/* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
+"9zk-co-roT.title" = "Sauvegarder le sous-titre téléchargé";
+
 /* Class = "NSMenuItem"; title = "Github"; ObjectID = "A9w-iE-gVg"; */
 "A9w-iE-gVg.title" = "Github";
 
@@ -71,11 +80,17 @@
 /* Class = "NSMenuItem"; title = "Advanced Screenshot..."; ObjectID = "CKi-JE-yLT"; */
 "CKi-JE-yLT.title" = "Capture d'écran avancée...";
 
+/* Class = "NSMenuItem"; title = "File Loop"; ObjectID = "D1y-kv-85s"; */
+"D1y-kv-85s.title" = "Boucle de fichiers";
+
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "Piste audio";
 
 /* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
 "DVo-aG-piG.title" = "Fermer";
+
+/* Class = "NSMenuItem"; title = "Chapters Panel"; ObjectID = "DwM-3d-Eb9"; */
+"DwM-3d-Eb9.title" = "Panneau des chapitres";
 
 /* Class = "NSMenu"; title = "Subtitles"; ObjectID = "EKp-Qx-4Mn"; */
 "EKp-Qx-4Mn.title" = "Sous-titres";
@@ -119,6 +134,9 @@
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "IAo-SY-fd9"; */
 "IAo-SY-fd9.title" = "Ouvrir…";
 
+/* Class = "NSMenuItem"; title = "Audio Device"; ObjectID = "IXq-yq-uDF"; */
+"IXq-yq-uDF.title" = "Périphérique audio";
+
 /* Class = "NSMenuItem"; title = "Horizontal (Mirror)"; ObjectID = "JJq-qH-toq"; */
 "JJq-qH-toq.title" = "Horizontalement (miroir)";
 
@@ -138,7 +156,10 @@
 "LsU-Qz-dax.title" = "Délai des sous-titres - 0.5s";
 
 /* Class = "NSMenuItem"; title = "Find Online Subtitles..."; ObjectID = "Mg3-WB-gjZ"; */
-"Mg3-WB-gjZ.title" = "Trouver des sous-titres en ligne...";
+"Mg3-WB-gjZ.title" = "Chercher des sous-titres en ligne...";
+
+/* Class = "NSMenuItem"; title = "Save Current Playlist..."; ObjectID = "Mjr-lL-oEt"; */
+"Mjr-lL-oEt.title" = "Sauvegarder la playlist...";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
 "NMo-om-nkz.title" = "Services";
@@ -215,6 +236,9 @@
 /* Class = "NSMenuItem"; title = "Custom Touch Bar..."; ObjectID = "ZnF-yX-7jP"; */
 "ZnF-yX-7jP.title" = "Touch Bar personnalisée...";
 
+/* Class = "NSMenuItem"; title = "Playlist Loop"; ObjectID = "aSc-P6-fiZ"; */
+"aSc-P6-fiZ.title" = "Boucler la playlist";
+
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
 "aUF-d1-5bR.title" = "Fenêtre";
 
@@ -246,7 +270,7 @@
 "dMs-cI-mzQ.title" = "Fichier";
 
 /* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
-"deS-xK-iBb.title" = "Arrêter et effacer les playlists";
+"deS-xK-iBb.title" = "Arrêter et vider les playlists";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
 "eo2-Tt-SLx.title" = "Rognage";
@@ -286,6 +310,9 @@
 
 /* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
 "mGw-jm-5x2.title" = "Sous-titres secondaires";
+
+/* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
+"mND-N8-z6o.title" = "Passer en incrustation";
 
 /* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
 "mT1-1m-HwN.title" = "Pivoter";
@@ -340,10 +367,3 @@
 
 /* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
 "yHI-7D-OaI.title" = "Désentrelacer";
-
-/* Class = "NSMenu"; title = "Audio Device"; ObjectID = "IXq-yq-uDF"; */
-"IXq-yq-uDF.title" = "Périphérique audio";
-
-"Mg3-WB-gjZ.title" = "Chercher des sous-titres en ligne ...";
-
-"9zk-co-roT.title" = "Sauvegarder le sous-titre téléchargé";

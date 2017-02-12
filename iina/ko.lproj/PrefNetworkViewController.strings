@@ -1,14 +1,20 @@
-/* Class = "NSTextFieldCell"; title = "Default: 75000"; ObjectID = "0bT-f6-rXb"; */
+/* Class = "NSTextFieldCell"; title = "Default: 153600"; ObjectID = "0bT-f6-rXb"; */
 "0bT-f6-rXb.title" = "기본값: 153600";
 
 /* Class = "NSTextFieldCell"; title = "Default cache size (KB):"; ObjectID = "0yu-5Q-363"; */
 "0yu-5Q-363.title" = "기본 캐시 크기 (KB):";
 
-/* Class = "NSTextFieldCell"; title = "Default: 75000"; ObjectID = "3os-7u-lv8"; */
+/* Class = "NSTextFieldCell"; title = "youtube-dl:"; ObjectID = "1Ex-0X-pjo"; */
+"1Ex-0X-pjo.title" = "youtube-dl:";
+
+/* Class = "NSTextFieldCell"; title = "Default: 153600"; ObjectID = "3os-7u-lv8"; */
 "3os-7u-lv8.title" = "기본값: 153600";
 
 /* Class = "NSMenuItem"; title = "TCP"; ObjectID = "6JF-48-aCE"; */
 "6JF-48-aCE.title" = "TCP";
+
+/* Class = "NSTextFieldCell"; title = "Format: <key>=<value>[,<key>=<value>[,...]]"; ObjectID = "GBe-wd-tne"; */
+"GBe-wd-tne.title" = "형식: <key>=<value>[,<key>=<value>[,...]]";
 
 /* Class = "NSTextFieldCell"; title = "Seconds to prefech:"; ObjectID = "J96-32-M9A"; */
 "J96-32-M9A.title" = "미리 읽어오기 (초):";
@@ -22,13 +28,16 @@
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "aNr-lv-K0r"; */
 "aNr-lv-K0r.title" = "자동";
 
+/* Class = "NSButtonCell"; title = "Enable youtube-dl"; ObjectID = "cyH-Md-FAD"; */
+"cyH-Md-FAD.title" = "youtube-dl 사용";
+
 /* Class = "NSTextFieldCell"; title = "Cache buffer size (KB):"; ObjectID = "dDD-g3-54w"; */
 "dDD-g3-54w.title" = "캐시 버퍼 크기 (KB):";
 
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
-"eN6-Sk-kUa.title" = "User agent:";
+"eN6-Sk-kUa.title" = "사용자 에이전트:";
 
-/* Class = "NSTextFieldCell"; title = "Default: 10"; ObjectID = "fab-7d-mMQ"; */
+/* Class = "NSTextFieldCell"; title = "Default: 100"; ObjectID = "fab-7d-mMQ"; */
 "fab-7d-mMQ.title" = "기본값: 100";
 
 /* Class = "NSButtonCell"; title = "Enable cache"; ObjectID = "fpV-al-bn7"; */
@@ -42,4 +51,7 @@
 
 /* Class = "NSTextFieldCell"; title = "Network:"; ObjectID = "yrh-Jm-Q4e"; */
 "yrh-Jm-Q4e.title" = "네트워크:";
+
+/* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
+"zCD-9d-ziV.title" = "추가 옵션";
 

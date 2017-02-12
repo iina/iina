@@ -345,5 +345,22 @@ extension MainWindowController {
     inspector.showWindow(self)
     inspector.updateInfo()
   }
+  
+  @IBAction func menuSavePlaylist(_ sender: NSMenuItem) {
+    let _ = Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"]) {
+      (url) in if url.isFileURL {
+        var playlist = ""
+        for item in playerCore.info.playlist {
+          playlist.append((item.filename + "\n"))
+        }
+        
+        do {
+          try playlist.write(to: url, atomically: true, encoding: String.Encoding.utf8)
+        } catch let error as NSError {
+          Utility.showAlert(message: "Error occured when saving playlist: \(error.localizedDescription)")
+        }
+      }
+    }
+  }
 
 }

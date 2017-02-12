@@ -79,6 +79,21 @@ class Utility {
       return false
     }
   }
+  
+  static func quickSavePanel(title: String, types: [String], ok: (URL) -> Void) -> Bool {
+    let panel = NSSavePanel()
+    panel.title = title
+    panel.canCreateDirectories = true
+    panel.allowedFileTypes = types
+    if panel.runModal() == NSFileHandlingPanelOKButton {
+      if let url = panel.url {
+        ok(url)
+      }
+      return true
+    } else {
+      return false
+    }
+  }
 
   static func quickPromptPanel(messageText: String, informativeText: String, ok: (String) -> Void) -> Bool {
     let panel = NSAlert()

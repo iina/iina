@@ -68,6 +68,10 @@ extension MainWindowController {
     playerCore.toggleFileLoop()
   }
 
+  @IBAction func menuPlaylistLoop(_ sender: NSMenuItem) {
+    playerCore.togglePlaylistLoop()
+  }
+
   @IBAction func menuPlaylistItem(_ sender: NSMenuItem) {
     let index = sender.tag
     playerCore.playFileInPlaylist(index)

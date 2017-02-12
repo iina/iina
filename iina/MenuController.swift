@@ -31,8 +31,11 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var advancedScreenShot: NSMenuItem!
   @IBOutlet weak var abLoop: NSMenuItem!
   @IBOutlet weak var fileLoop: NSMenuItem!
+  @IBOutlet weak var playlistPanel: NSMenuItem!
   @IBOutlet weak var playlist: NSMenuItem!
+  @IBOutlet weak var playlistLoop: NSMenuItem!
   @IBOutlet weak var playlistMenu: NSMenu!
+  @IBOutlet weak var chapterPanel: NSMenuItem!
   @IBOutlet weak var chapter: NSMenuItem!
   @IBOutlet weak var chapterMenu: NSMenu!
   // Video
@@ -96,6 +99,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var inspector: NSMenuItem!
 
 
+  // MARK: - Construct Menus
 
   func bindMenuItems() {
 
@@ -124,6 +128,9 @@ class MenuController: NSObject, NSMenuDelegate {
     fileLoop.action = #selector(MainWindowController.menuFileLoop(_:))
     playlistMenu.delegate = self
     chapterMenu.delegate = self
+    playlistLoop.action = #selector(MainWindowController.menuPlaylistLoop(_:))
+    playlistPanel.action = #selector(MainWindowController.menuShowPlaylistPanel(_:))
+    chapterPanel.action = #selector(MainWindowController.menuShowChaptersPanel(_:))
 
     // Video menu
 
@@ -245,10 +252,10 @@ class MenuController: NSObject, NSMenuDelegate {
 
   }
 
+  // MARK: - Update Menus
+
   private func updatePlaylist() {
     playlistMenu.removeAllItems()
-    playlistMenu.addItem(withTitle: "Show/Hide Playlist Panel", action: #selector(MainWindowController.menuShowPlaylistPanel(_:)), keyEquivalent: "")
-    playlistMenu.addItem(NSMenuItem.separator())
     for (index, item) in PlayerCore.shared.info.playlist.enumerated() {
       playlistMenu.addItem(withTitle: item.filenameForDisplay, action: #selector(MainWindowController.menuPlaylistItem(_:)),
                            tag: index, obj: nil, stateOn: item.isCurrent)
@@ -257,8 +264,6 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateChapterList() {
     chapterMenu.removeAllItems()
-    chapterMenu.addItem(withTitle: "Show/Hide Chapter Panel", action: #selector(MainWindowController.menuShowChaptersPanel(_:)), keyEquivalent: "")
-    chapterMenu.addItem(NSMenuItem.separator())
     let info = PlayerCore.shared.info
     for (index, chapter) in info.chapters.enumerated() {
       let menuTitle = "\(chapter.time.stringRepresentation) - \(chapter.title)"
@@ -288,6 +293,8 @@ class MenuController: NSObject, NSMenuDelegate {
     pause.title = PlayerCore.shared.info.isPaused ? Constants.String.resume : Constants.String.pause
     let isLoop = PlayerCore.shared.mpvController.getFlag(MPVOption.PlaybackControl.loopFile)
     fileLoop.state = isLoop ? NSOnState : NSOffState
+    let loopStatus = PlayerCore.shared.mpvController.getString(MPVOption.PlaybackControl.loop)
+    playlistLoop.state = (loopStatus == "inf" || loopStatus == "force") ? NSOnState : NSOffState
   }
 
   private func updateVideoMenu() {

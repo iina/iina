@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12100" systemVersion="16E144f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12100"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -119,7 +119,9 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Playback" id="GEO-Iw-cKr">
                         <items>
-                            <menuItem title="Pause" keyEquivalent="p" id="UOE-MJ-8ku"/>
+                            <menuItem title="Pause" id="UOE-MJ-8ku">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem title="Stop and Clear Playlists" keyEquivalent="." id="deS-xK-iBb"/>
                             <menuItem isSeparatorItem="YES" id="0Kt-sZ-ss0"/>
                             <menuItem title="Step Forward 5s" keyEquivalent="" id="6yE-op-DTS"/>
@@ -146,14 +148,20 @@
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="pEu-eU-Er6"/>
                             <menuItem title="A-B Loop" keyEquivalent="l" id="i3P-Xw-8D7"/>
-                            <menuItem title="File Loop" id="D1y-kv-85s">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="File Loop" keyEquivalent="L" id="D1y-kv-85s">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="EZg-oY-9Ip"/>
+                            <menuItem title="Playlist Panel" keyEquivalent="p" id="0T7-Nu-SL7"/>
+                            <menuItem title="Playlist Loop" id="aSc-P6-fiZ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem title="Playlist" id="Gi5-1S-RQB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Playlist" systemMenu="font" id="aXa-aM-Jaq"/>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="KQu-z8-ZqI"/>
+                            <menuItem title="Chapters Panel" keyEquivalent="c" id="DwM-3d-Eb9"/>
                             <menuItem title="Chapter" id="Fal-I4-PZk">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Chapter" id="d9c-me-L2H"/>
@@ -434,6 +442,7 @@
                 <outlet property="biggerSize" destination="lDC-IC-peP" id="fTj-cO-9y3"/>
                 <outlet property="chapter" destination="Fal-I4-PZk" id="DiY-VN-JpS"/>
                 <outlet property="chapterMenu" destination="d9c-me-L2H" id="Gs5-BM-ZGm"/>
+                <outlet property="chapterPanel" destination="DwM-3d-Eb9" id="Z0I-q7-mi7"/>
                 <outlet property="cropMenu" destination="eo2-Tt-SLx" id="uii-FZ-2wL"/>
                 <outlet property="customTouchBar" destination="ZnF-yX-7jP" id="vSq-yD-whq"/>
                 <outlet property="decreaseAudioDelay" destination="Lc4-4W-thE" id="rZo-3n-vZW"/>
@@ -473,7 +482,9 @@
                 <outlet property="pictureInPicture" destination="mND-N8-z6o" id="mrn-ku-bqH"/>
                 <outlet property="playbackMenu" destination="GEO-Iw-cKr" id="Ji3-Wv-EE5"/>
                 <outlet property="playlist" destination="Gi5-1S-RQB" id="oMH-9E-A8A"/>
+                <outlet property="playlistLoop" destination="aSc-P6-fiZ" id="V5V-Wv-Pxk"/>
                 <outlet property="playlistMenu" destination="aXa-aM-Jaq" id="Nkw-YD-NAi"/>
+                <outlet property="playlistPanel" destination="0T7-Nu-SL7" id="kIo-HV-YPh"/>
                 <outlet property="previousFrame" destination="oxF-BB-lBy" id="Kx8-vs-jMi"/>
                 <outlet property="quickSettingsAudio" destination="43n-Ed-5kT" id="Pq5-b6-o5G"/>
                 <outlet property="quickSettingsSub" destination="8y7-Cy-lKT" id="Dh8-CP-Coh"/>

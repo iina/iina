@@ -281,6 +281,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.singleClickAction))
     doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.doubleClickAction))
     rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.rightClickAction))
+    rightLabel.mode = ud.bool(forKey: Preference.Key.showRemainingTime) ? .remaining : .duration
 
     // add user default observers
     observedPrefKeys.forEach { key in

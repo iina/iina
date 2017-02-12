@@ -84,6 +84,7 @@ struct Constants {
     static let vfChanged = Notification.Name("IINAVfChanged")
     static let afChanged = Notification.Name("IINAAfChanged")
     static let fsChanged = Notification.Name("IINAFullscreenChanged")
+    static let keyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)

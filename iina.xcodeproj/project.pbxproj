@@ -135,6 +135,11 @@
 		84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F041D2F5C5B004FA5A1 /* AppData.swift */; };
 		84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F061D2F5E76004FA5A1 /* Utility.swift */; };
 		84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED99FD1E009C8100A5159B /* PrefAdvancedViewController.swift */; };
+		84F5D4951E44D5230060A838 /* KeyBindingCriterion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D4941E44D5230060A838 /* KeyBindingCriterion.swift */; };
+		84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D4981E44E8AC0060A838 /* KeyBindingDataLoader.swift */; };
+		84F5D49A1E44E9A50060A838 /* KeyBinding.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84F5D49C1E44E9A50060A838 /* KeyBinding.strings */; };
+		84F5D4A01E44F9DB0060A838 /* KeyBindingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D49F1E44F9DB0060A838 /* KeyBindingItem.swift */; };
+		84F5D4A21E4796F50060A838 /* KeyBindingTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D4A11E4796F50060A838 /* KeyBindingTranslator.swift */; };
 		84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */; };
 		84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7258E1D486185000DEF1B /* MPVProperty.swift */; };
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
@@ -368,6 +373,13 @@
 		84EB1F041D2F5C5B004FA5A1 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		84EB1F061D2F5E76004FA5A1 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		84ED99FD1E009C8100A5159B /* PrefAdvancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefAdvancedViewController.swift; sourceTree = "<group>"; };
+		84F5D4941E44D5230060A838 /* KeyBindingCriterion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingCriterion.swift; sourceTree = "<group>"; };
+		84F5D4981E44E8AC0060A838 /* KeyBindingDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingDataLoader.swift; sourceTree = "<group>"; };
+		84F5D49B1E44E9A50060A838 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		84F5D49D1E44E9A90060A838 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
+		84F5D49E1E44E9AA0060A838 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		84F5D49F1E44F9DB0060A838 /* KeyBindingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingItem.swift; sourceTree = "<group>"; };
+		84F5D4A11E4796F50060A838 /* KeyBindingTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingTranslator.swift; sourceTree = "<group>"; };
 		84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeSliderCell.swift; sourceTree = "<group>"; };
 		84F7258E1D486185000DEF1B /* MPVProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVProperty.swift; sourceTree = "<group>"; };
 		84FF84701D2FF698001B318A /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
@@ -463,6 +475,10 @@
 				8400D5E91E1AB337006785F5 /* PrefKeyBindingViewController.xib */,
 				840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */,
 				8400D5EC1E1AB33B006785F5 /* KeyRecordViewController.xib */,
+				84F5D4941E44D5230060A838 /* KeyBindingCriterion.swift */,
+				84F5D4981E44E8AC0060A838 /* KeyBindingDataLoader.swift */,
+				84F5D49F1E44F9DB0060A838 /* KeyBindingItem.swift */,
+				84F5D4A11E4796F50060A838 /* KeyBindingTranslator.swift */,
 				840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */,
 				84ED99FD1E009C8100A5159B /* PrefAdvancedViewController.swift */,
 				8400D5EF1E1AB33F006785F5 /* PrefAdvancedViewController.xib */,
@@ -472,6 +488,7 @@
 				8400D5F51E1AB348006785F5 /* PrefSubViewController.xib */,
 				8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */,
 				8400D5F81E1AB34D006785F5 /* PrefNetworkViewController.xib */,
+				84F5D49C1E44E9A50060A838 /* KeyBinding.strings */,
 			);
 			name = Preference;
 			sourceTree = "<group>";
@@ -845,6 +862,7 @@
 				8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */,
 				8400D5F31E1AB348006785F5 /* PrefSubViewController.xib in Resources */,
 				8400D5E11E1AB32F006785F5 /* PrefUIViewController.xib in Resources */,
+				84F5D49A1E44E9A50060A838 /* KeyBinding.strings in Resources */,
 				8400D5D21E1AB312006785F5 /* InspectorWindowController.xib in Resources */,
 				8400D5CC1E1AB2FF006785F5 /* PlaylistViewController.xib in Resources */,
 				8400D5ED1E1AB33F006785F5 /* PrefAdvancedViewController.xib in Resources */,
@@ -913,10 +931,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */,
+				84F5D4A21E4796F50060A838 /* KeyBindingTranslator.swift in Sources */,
 				8452DD851D3B956D008A543A /* Preference.swift in Sources */,
 				8488D6E31E1183D300D5B952 /* PrefSubViewController.swift in Sources */,
 				84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */,
 				840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */,
+				84F5D4951E44D5230060A838 /* KeyBindingCriterion.swift in Sources */,
 				84A886EC1E2573A5008755BB /* JustExtension.swift in Sources */,
 				84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */,
 				84E295C01E2CF9F5006388F7 /* ObjcUtils.m in Sources */,
@@ -929,6 +949,7 @@
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
 				84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */,
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
+				84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
 				84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */,
 				8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */,
@@ -981,6 +1002,7 @@
 				84A886E61E24F3BD008755BB /* OnlineSubtitle.swift in Sources */,
 				847C62CA1DC13CDA00E1EF16 /* PrefGeneralViewController.swift in Sources */,
 				845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */,
+				84F5D4A01E44F9DB0060A838 /* KeyBindingItem.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,
 				8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */,
 				840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */,
@@ -1218,6 +1240,16 @@
 				F4C61DF01E20423A00A43BCC /* de */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		84F5D49C1E44E9A50060A838 /* KeyBinding.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84F5D49B1E44E9A50060A838 /* Base */,
+				84F5D49D1E44E9A90060A838 /* zh-Hans */,
+				84F5D49E1E44E9AA0060A838 /* en */,
+			);
+			name = KeyBinding.strings;
 			sourceTree = "<group>";
 		};
 		C78987311E34EF170005769F /* InfoPlist.strings */ = {

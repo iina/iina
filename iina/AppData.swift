@@ -75,8 +75,8 @@ struct Constants {
     static let volume = "Volume"
     static let audioDelay = "Audio Delay"
     static let subDelay = "Subtitle Delay"
-    static let pip = "Enter Picture in Picture"
-    static let exitPIP = "Exit Picture in Picture"
+    static let pip = NSLocalizedString("menu.pip", comment: "Enter Picture-in-Picture")
+    static let exitPIP = NSLocalizedString("menu.exit_pip", comment: "Exit Picture-in-Picture")
   }
   struct Noti {
     static let playlistChanged = Notification.Name("IINAPlaylistChanged")

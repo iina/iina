@@ -46,7 +46,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     return "MainWindowController"
   }
 
-  var fadeableViews: [NSView?] = []
+  var fadeableViews: [NSView] = []
 
   /** Animation state of he hide/show part */
   enum UIAnimationState {
@@ -162,7 +162,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
-  @IBOutlet weak var titleTextField: NSTextField!
+  var standardWindowButtons: [NSButton] {
+    get {
+      return ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindowButton]).flatMap {
+        window?.standardWindowButton($0)
+      }
+    }
+  }
+  
+  var titleTextField: NSTextField? {
+    get {
+      // FIXME: Internal NSWindow API
+      return window?.perform(Selector(("_borderView")))?.takeUnretainedValue().perform(Selector(("_titleTextFieldView")))?.takeUnretainedValue() as? NSTextField
+//      return window?.standardWindowButton(.documentIconButton)?.superview?.subviews.flatMap({ $0 as? NSTextField }).first
+    }
+  }
   @IBOutlet weak var controlBar: ControlBarView!
   @IBOutlet weak var playButton: NSButton!
   @IBOutlet weak var playSlider: NSSlider!
@@ -216,8 +230,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     w.center()
 
-    w.titleVisibility = .hidden;
-    w.styleMask.insert(NSFullSizeContentViewWindowMask);
+    w.styleMask.insert(NSFullSizeContentViewWindowMask)
     w.titlebarAppearsTransparent = true
 
     // need to deal with control bar, so handle it manually
@@ -225,7 +238,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // set background color to black
     w.backgroundColor = NSColor.black
-    titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay;
+    titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay
     updateTitle()
 
     // set material
@@ -234,9 +247,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // size
     w.minSize = minSize
     // fade-able views
-    withStandardButtons { button in
-      self.fadeableViews.append(button)
-    }
+    fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
     fadeableViews.append(titleBarView)
     fadeableViews.append(controlBar)
     guard let cv = w.contentView else { return }
@@ -643,13 +654,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowWillExitFullScreen(_ notification: Notification) {
     playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, false)
-
-    // Set back the window appearance
-    self.window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
     
     // hide titlebar
     window!.titlebarAppearsTransparent = true
-    window!.titleVisibility = .hidden
     // show titleBarView
     titleBarView.isHidden = false
     animationState = .shown
@@ -760,19 +767,23 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       return
     }
     fadeableViews.forEach { (v) in
-      v?.alphaValue = 1
+      v.alphaValue = 1
+      v.isHidden = true
     }
     animationState = .willHide
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.25
       fadeableViews.forEach { (v) in
-        v?.animator().alphaValue = 0
+        v.animator().alphaValue = 0
+      }
+      if !isInFullScreen {
+        titleTextField?.animator().alphaValue = 0
       }
     }) {
       // if no interrupt then hide animation
       if self.animationState == .willHide {
         self.fadeableViews.forEach { (v) in
-          v?.isHidden = true
+          v.isHidden = true
         }
         self.animationState = .hidden
       }
@@ -782,8 +793,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private func showUI() {
     animationState = .willShow
     fadeableViews.forEach { (v) in
-      v?.isHidden = false
-      v?.alphaValue = 0
+      v.isHidden = false
+      v.alphaValue = 0
     }
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.5
@@ -791,7 +802,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         // Set the fade animation duration
         NSAnimationContext.current().duration = TimeInterval(0.25);
 
-        v?.animator().alphaValue = 1
+        v.animator().alphaValue = 1
+        if !isInFullScreen {
+          titleTextField?.animator().alphaValue = 1
+        }
       }
     }) {
       self.animationState = .shown
@@ -810,10 +824,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func updateTitle() {
-    if let w = window, let url = playerCore.info.currentURL?.lastPathComponent {
-      w.title = url
-      titleTextField.stringValue = url
-    }
+    window?.representedURL = playerCore.info.currentURL
+    window?.setTitleWithRepresentedFilename(playerCore.info.currentURL?.path ?? "")
   }
 
   func displayOSD(_ message: OSDMessage) {
@@ -883,14 +895,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   private func removeTitlebarFromFadeableViews() {
     // remove buttons from fade-able views
-    withStandardButtons { button in
-      if let index = (self.fadeableViews.index { $0 === button }) {
-        self.fadeableViews.remove(at: index)
-
-        // Make sure the button is visible
-        button!.alphaValue = 1;
-        button!.isHidden = false;
+    fadeableViews = fadeableViews.filter { view in
+      !standardWindowButtons.contains {
+        $0 == view
       }
+    }
+    for view in standardWindowButtons {
+      view.alphaValue = 1
+      view.isHidden = false
     }
     // remove titlebar view from fade-able views
     if let index = (self.fadeableViews.index { $0 === titleBarView }) {
@@ -899,10 +911,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func addBackTitlebarToFadeableViews() {
-    // add back buttons to fade-able views
-    withStandardButtons { button in
-      self.fadeableViews.append(button)
-    }
+    fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
     // add back titlebar view to fade-able views
     self.fadeableViews.append(titleBarView)
   }
@@ -1154,7 +1163,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     window.collectionBehavior = [.managed, .fullScreenPrimary]
 
     // don't know why they will be disabled
-    withStandardButtons { $0?.isEnabled = true }
+    standardWindowButtons.forEach { $0.isEnabled = true }
   }
 
   // MARK: - Sync UI with playback
@@ -1385,15 +1394,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     playerCore.setVolume(value)
   }
 
-
   // MARK: - Utility
-
-  private func withStandardButtons(_ block: (NSButton?) -> Void) {
-    guard let w = window else { return }
-    block(w.standardWindowButton(.closeButton))
-    block(w.standardWindowButton(.miniaturizeButton))
-    block(w.standardWindowButton(.zoomButton))
-  }
 
   private func quickConstrants(_ constrants: [String], _ views: [String: NSView]) {
     constrants.forEach { c in
@@ -1616,7 +1617,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     pipVideo.view = videoView
     pip.aspectRatio = NSSize(width: playerCore.info.videoWidth!, height: playerCore.info.videoHeight!)
     pip.playing = !playerCore.info.isPaused
-    pip.title = titleTextField.stringValue
+    pip.title = window?.title
     pip.presentAsPicture(inPicture: pipVideo)
     pipOverlayView.isHidden = false
     isInPIP = true

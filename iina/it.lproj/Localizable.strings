@@ -68,7 +68,7 @@
 "update.check_failed" = "Impossibile controllare gli aggiornamenti. Probabilmente state usando una versione troppo vecchia. Controllate il sito internet o github.";
 "update.new_version" = "Nuova versione:";
 "update.dl_from_website" = "Vai al sito internet";
-"update.dl_from_github" = "Vai a Github";
+"update.dl_from_github" = "Vai su Github";
 
 "preference.title" = "Preferenze";
 "preference.general" = "Generali";
@@ -77,7 +77,7 @@
 "preference.subtitle" = "Sottotitoli";
 "preference.network" = "Network";
 "preference.control" = "Controlli";
-"preference.keybindings" = "Tasti speciali";
+"preference.keybindings" = "Scorciatoie di tastiera";
 "preference.advanced" = "Avanzate";
 "preference.scripts" = "Script";
 
@@ -86,9 +86,25 @@
 "menu.sub_delay" = "Ritardo sottotitoli: %.2fs";
 "menu.fullscreen" = "Schermo intero";
 "menu.exit_fullscreen" = "Esci da schermo intero";
+"menu.pip" = "Attiva Picture-in-Picture";
+"menu.exit_pip" = "Termina Picture-in-Picture";
 "menu.pause" = "Pausa";
 "menu.resume" = "Riprendi";
 
 "track.none" = "<Nessuno>";
 
 "alert.extra_option_error" = "Errore nelle opzioni delle impostazioni --%@=%@ con un valore di risposta %d. Controlla le opzioni di impostazione in Preferenze > Avanzate.";
+"alert.keybinding_config_error" = "Errore nell'analisi del file di configurazione \"%@\"! Ripristino delle scorciatoie di tastiera di default di IINA. Controlla il tuo file di configurazione.";
+
+
+"pl_menu.title_multi" = "%d Elementi";
+"pl_menu.play_next" = "Riproduci il successivo";
+"pl_menu.remove" = "Rimuovi";
+"pl_menu.remove_multi" = "Rimuovi gli elementi selezionati";
+"pl_menu.delete" = "Sposta nel cestino";
+"pl_menu.delete_multi" = "Sposta i file selezionati nel cestino";
+"pl_menu.delete_after_play" = "Sposta nel cestino dopo la riporoduzione";
+"pl_menu.delete_after_play_multi" = "Muovi i file selezionati nel cestiono dopo la riproduzione";
+"pl_menu.reveal_in_finder" = "Mostra nel Finder";
+"pl_menu.add_item" = "Aggiungi elementi…";
+"pl_menu.clear_playlist" = "Cancella la playlist";

@@ -26,10 +26,10 @@
 "cmd.add" = "변경";
 
 /* (No Commment) */
-"cmd.cycle" = "순환";
+"cmd.cycle" = "켬/끔";
 
 /* (No Commment) */
-"cmd.cycle-values" = "범위에서 순환";
+"cmd.cycle-values" = "설정값 안에서 순환";
 
 /* (No Commment) */
 "cmd.frame-back-step" = "이전 프레임";
@@ -41,7 +41,7 @@
 "cmd.ignore" = "키입력 무시";
 
 /* (No Commment) */
-"cmd.multiply" = "배수 증가";
+"cmd.multiply" = "설정값 배수";
 
 /* (No Commment) */
 "cmd.playlist-clear" = "재생목록 지우기";
@@ -77,7 +77,7 @@
 "forward" = "앞으로";
 
 /* (No Commment) */
-"in" = "범위에서";
+"in" = "다음 값 중에서";
 
 /* (No Commment) */
 "minus" = "감소";

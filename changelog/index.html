@@ -1,4 +1,75 @@
-<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>Changelog | Project IINA</title><link href="/iina/stylesheets/lato.css" rel="stylesheet" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body><nav class="navbar navbar-fixed-top navbar-light bg-faded navbar-toggleable-md"><button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#nav_c" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><div class="collapse navbar-collapse" id="nav_c"><ul class="navbar-nav mr-auto"><li class="nav-item"><a href="/iina" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/features/" class="nav-link">Features</a></li><li class="nav-item"><a href="/iina/documentation/" class="nav-link">Documentation</a></li><li class="nav-item"><a href="/iina/changelog/" class="nav-link">Changelog</a></li><li class="nav-item"><a href="/iina/about/" class="nav-link">About</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></div></nav><div class="main"><div class="changelog"><div class="container"><h1>Changelog</h1><div class="clog"><h2 id="v004--jan-30-2017">v0.0.4  <em>Jan. 30, 2017</em></h2>
+<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>Changelog | Project IINA</title><link href="/iina/stylesheets/lato.css" rel="stylesheet" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body><nav class="navbar navbar-fixed-top navbar-light bg-faded navbar-toggleable-md"><button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#nav_c" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><div class="collapse navbar-collapse" id="nav_c"><ul class="navbar-nav mr-auto"><li class="nav-item"><a href="/iina" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/features/" class="nav-link">Features</a></li><li class="nav-item"><a href="/iina/documentation/" class="nav-link">Documentation</a></li><li class="nav-item"><a href="/iina/changelog/" class="nav-link">Changelog</a></li><li class="nav-item"><a href="/iina/about/" class="nav-link">About</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></div></nav><div class="main"><div class="changelog"><div class="container"><h1>Changelog</h1><div class="clog"><h2 id="v005--feb-14-2017">v0.0.5  <em>Feb. 14, 2017</em></h2>
+
+<h3 id="online-video">Online video</h3>
+
+<ul>
+  <li>Add support for <a href="https://rg3.github.io/youtube-dl/index.html">youtube-dl</a>, which enables video streaming from YouTube and <a href="https://rg3.github.io/youtube-dl/supportedsites.html">hundreds of other websites</a></li>
+  <li>Add prefernce for youtube-dl</li>
+  <li>Add Chrome/Safari extension to open curent webpage in IINA: <a href="https://chrome.google.com/webstore/detail/open-in-iina/pdnojahnhpgmdhjdhgphgdcecehkbhfo">Chrome</a>, <a href="https://github.com/lhc70000/iina/releases/download/v0.0.5/Open_In_IINA.safariextz">Safari</a></li>
+  <li>Support dragging URL/text in window to open</li>
+</ul>
+
+<h3 id="playlist">Playlist</h3>
+
+<ul>
+  <li>Add option for whether auto creating playlist</li>
+  <li>Add option for whether auto playing next playlist item</li>
+  <li>Support multiple selection</li>
+  <li>Support reorder playlist items</li>
+  <li>Support dragging file into any position in playlist</li>
+  <li>Add context menu for playlist items, including
+    <ul>
+      <li>Play next, remove</li>
+      <li>Delete file, reveal in Finder</li>
+      <li>Add new items, clear playlist</li>
+    </ul>
+  </li>
+  <li>Support playlist loop</li>
+  <li>Support shuffle (this will only reorder the playlist randomly)</li>
+  <li>Support saving current playlist to m3u8 file</li>
+</ul>
+
+<p><em>*Double clicking a playlist item to play</em></p>
+
+<h3 id="new-features">New features</h3>
+
+<ul>
+  <li>Add Picture-in-Picture (PIP) support</li>
+  <li>A new graphical interface for adding key bindings</li>
+  <li>Support single file loop</li>
+  <li>Allow adjusting override level for ASS styles</li>
+  <li>Add option for subtitle position</li>
+  <li>Add option for subtitle blur and letter spacing</li>
+  <li>Display chapter number for BD files</li>
+  <li>New translations: French, Italian</li>
+</ul>
+
+<h3 id="enhancement">Enhancement</h3>
+
+<ul>
+  <li>Support old Mac models and improve stability on Hackintosh</li>
+  <li>Stop terminating app on MPV command error (like wrong key binding)</li>
+  <li>Avoid saving empty extra mpv options</li>
+  <li>Add basic checking when loading key binding files</li>
+  <li>Increase default cache size to 150M</li>
+  <li>DMG installation, signed App</li>
+</ul>
+
+<h3 id="bug-fixes">Bug fixes</h3>
+
+<ul>
+  <li>Fix space key not working sometimes</li>
+  <li>Fix unexpected quit on launch (experimental)</li>
+  <li>Avoid adding duplicated subtitles</li>
+  <li>Fix "show chapter in progress bar" not work</li>
+  <li>Fix unchecking "resume playback" not work</li>
+  <li>Fix "show remaining time" not work on launch</li>
+  <li>Fix 1px bottom border sometimes</li>
+  <li>Fix no transaltion for subtitle downloading</li>
+  <li>Other minor fixes</li>
+</ul>
+
+<h2 id="v004--jan-30-2017">v0.0.4  <em>Jan. 30, 2017</em></h2>
 
 <h3 id="performance">Performance</h3>
 
@@ -12,7 +83,7 @@
   </li>
 </ul>
 
-<h3 id="new-features">New Features</h3>
+<h3 id="new-features-1">New Features</h3>
 
 <ul>
   <li><strong>Support macOS 10.10</strong></li>
@@ -38,7 +109,7 @@
   <li>Clear recent files when unchecked option</li>
 </ul>
 
-<h3 id="bug-fixes">Bug Fixes</h3>
+<h3 id="bug-fixes-1">Bug Fixes</h3>
 
 <ul>
   <li><strong>Fix: Crash when buffering</strong></li>
@@ -59,7 +130,7 @@
   <li>Add full simplified Chinese localization</li>
 </ul>
 
-<h3 id="new-features-1">New features</h3>
+<h3 id="new-features-2">New features</h3>
 
 <ul>
   <li>Redesigned on screen controller</li>
@@ -69,7 +140,7 @@
   <li>Add "Always on top while playing" option</li>
 </ul>
 
-<h3 id="bug-fixes-1">Bug fixes</h3>
+<h3 id="bug-fixes-2">Bug fixes</h3>
 
 <ul>
   <li>Support playing pure audio files</li>

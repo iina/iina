@@ -36,7 +36,7 @@
 "osd.sub_delay.nodelay" = "Délai des sous-titres : aucun";
 "osd.sub_delay.later" = "Délai des sous-titres : %.2fs en avance";
 "osd.sub_delay.earlier" = "Délai des sous-titres : %.2fs en retard";
-"osd.subtitle_pos" = "Positon des sous-titres : %f";
+"osd.subtitle_pos" = "Positon des sous-titres : %.1f";
 "osd.mute" = "Son coupé";
 "osd.unmute" = "Son rétabli";
 "osd.screenshot" = "Une capture d'écran a été prise";

@@ -41,10 +41,10 @@
 "AmU-VN-wGN.title" = "70";
 
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "B0I-bX-HZS"; */
-"B0I-bX-HZS.title" = "1x";
+"B0I-bX-HZS.title" = "1배";
 
 /* Class = "NSTextFieldCell"; title = "5s"; ObjectID = "C0t-gm-Tim"; */
-"C0t-gm-Tim.title" = "5s";
+"C0t-gm-Tim.title" = "5초";
 
 /* Class = "NSButtonCell"; title = "Load Subtitle..."; ObjectID = "C97-zJ-O3Y"; */
 "C97-zJ-O3Y.title" = "자막 불러오기…";
@@ -62,7 +62,7 @@
 "DdO-VX-HCz.title" = "0.25";
 
 /* Class = "NSTextFieldCell"; title = "0.25x"; ObjectID = "Ew1-N1-0Pi"; */
-"Ew1-N1-0Pi.title" = "0.25x";
+"Ew1-N1-0Pi.title" = "0.25배";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "GXH-iA-cJP"; */
 "GXH-iA-cJP.title" = "Text Cell";
@@ -83,7 +83,7 @@
 "L0u-GY-T4V.title" = "0";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "LEZ-fv-buL"; */
-"LEZ-fv-buL.title" = "0s";
+"LEZ-fv-buL.title" = "0초";
 
 /* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
 "Lnu-kz-cql.title" = "외부 오디오:";
@@ -104,7 +104,7 @@
 "OVn-Oj-YAr.title" = "45";
 
 /* Class = "NSTextFieldCell"; title = "4x"; ObjectID = "PLX-gY-e0h"; */
-"PLX-gY-e0h.title" = "4x";
+"PLX-gY-e0h.title" = "4배";
 
 /* Class = "NSTextFieldCell"; title = "External subtitles:"; ObjectID = "RA1-fF-OrB"; */
 "RA1-fF-OrB.title" = "외부 자막:";
@@ -125,7 +125,7 @@
 "VzC-tM-KT7.title" = "비디오 트랙:";
 
 /* Class = "NSTextFieldCell"; title = "x"; ObjectID = "W7H-mU-v3D"; */
-"W7H-mU-v3D.title" = "x";
+"W7H-mU-v3D.title" = "배속";
 
 /* Class = "NSTextFieldCell"; title = "Scale:"; ObjectID = "Wbx-Ti-qiS"; */
 "Wbx-Ti-qiS.title" = "확대:";
@@ -137,7 +137,7 @@
 "Xez-sb-mfB.title" = "이퀄라이저";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "YCG-xK-eAs"; */
-"YCG-xK-eAs.title" = "-5s";
+"YCG-xK-eAs.title" = "-5초";
 
 /* Class = "NSMenuItem"; title = "50"; ObjectID = "YTM-1c-Gl0"; */
 "YTM-1c-Gl0.title" = "50";
@@ -269,7 +269,7 @@
 "nvA-Ae-4XS.title" = "1";
 
 /* Class = "NSTextFieldCell"; title = "16x"; ObjectID = "p63-Nx-yJZ"; */
-"p63-Nx-yJZ.title" = "16x";
+"p63-Nx-yJZ.title" = "16배";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "qpa-hD-ImC"; */
 "qpa-hD-ImC.title" = "Text Cell";
@@ -296,7 +296,7 @@
 "to3-rc-Agv.title" = "회전:";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
-"uCX-EC-jXM.title" = "-5s";
+"uCX-EC-jXM.title" = "-5초";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "upM-Lz-YwK"; */
 "upM-Lz-YwK.title" = "0s";
@@ -308,16 +308,16 @@
 "vFD-HU-RVz.title" = "사용자 설정…";
 
 /* Class = "NSTextFieldCell"; title = "Sub style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
-"wBD-pZ-Bvu.title" = "자막 스타일을 사용하면 ASS 자막이 잘 표시되지 않을 수도 있으며, 일부 설정은 자막 유형에 따라 사용할 수 없는 경우도 있습니다.";
+"wBD-pZ-Bvu.title" = "자막 스타일을 사용하면 ASS 자막이 잘 표시되지 않을 수도 있으며, 일부 설정은 자막 유형에 따라 사용할 수 없는 때도 있습니다.";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "wgA-op-JP4"; */
-"wgA-op-JP4.title" = "0s";
+"wgA-op-JP4.title" = "0초";
 
 /* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
 "x39-62-7KC.title" = "오디오 트랙:";
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
-"xfX-wr-DTJ.title" = "+5s";
+"xfX-wr-DTJ.title" = "+5초";
 
 /* Class = "NSSegmentedCell"; z1L-0N-dfK.ibShadowedLabels[0] = "0°"; ObjectID = "z1L-0N-dfK"; */
 "z1L-0N-dfK.ibShadowedLabels[0]" = "0°";

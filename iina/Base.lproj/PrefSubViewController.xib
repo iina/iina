@@ -885,7 +885,7 @@
                         <rect key="frame" x="0.0" y="613" width="480" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="2kq-OT-dqq">
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="2kq-OT-dqq">
                         <rect key="frame" x="464" y="0.0" width="16" height="629"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>

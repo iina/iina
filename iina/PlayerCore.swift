@@ -25,8 +25,6 @@ class PlayerCore: NSObject {
 
   var syncPlayTimeTimer: Timer?
 
-  var statusPaused: Bool = false
-
   var displayOSD: Bool = true
 
   var isMpvTerminated: Bool = false
@@ -74,6 +72,11 @@ class PlayerCore: NSObject {
   }
 
   func startMPV() {
+    // set path for youtube-dl
+    let oldPath = String(cString: getenv("PATH")!)
+    let path = Utility.exeDirURL.path + ":" + oldPath
+    setenv("PATH", path, 1)
+
     mpvController.mpvInit()
   }
 
@@ -120,6 +123,7 @@ class PlayerCore: NSObject {
         }
       }
       mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
+      info.isPaused = setPause
     } else {
       if (info.isPaused) {
         if mpvController.getFlag(MPVProperty.eofReached) {
@@ -130,6 +134,7 @@ class PlayerCore: NSObject {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, true)
         setSpeed(1)
       }
+      info.isPaused = !info.isPaused
     }
   }
 
@@ -203,6 +208,22 @@ class PlayerCore: NSObject {
     } else {
       info.abLoopStatus = 1
     }
+  }
+
+  func toggleFileLoop() {
+    let isLoop = mpvController.getFlag(MPVOption.PlaybackControl.loopFile)
+    mpvController.setFlag(MPVOption.PlaybackControl.loopFile, !isLoop)
+  }
+
+  func togglePlaylistLoop() {
+    let loopStatus = mpvController.getString(MPVOption.PlaybackControl.loop)
+    let isLoop = (loopStatus == "inf" || loopStatus == "force")
+    mpvController.setString(MPVOption.PlaybackControl.loop, isLoop ? "no" : "inf")
+  }
+
+  func toggleShuffle() {
+    mpvController.command(.playlistShuffle)
+    NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
   }
 
   func setVolume(_ volume: Int) {
@@ -318,6 +339,8 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalSubFile(_ url: URL) {
+    guard !(info.subTracks.contains { $0.externalFilename == url.path }) else { return }
+
     mpvController.command(.subAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
         DispatchQueue.main.async {
@@ -337,6 +360,14 @@ class PlayerCore: NSObject {
 
   func addToPlaylist(_ path: String) {
     mpvController.command(.loadfile, args: [path, "append"])
+  }
+
+  func playlistMove(_ from: Int, to: Int) {
+    mpvController.command(.playlistMove, args: ["\(from)", "\(to)"])
+  }
+
+  func playlistRemove(_ index: Int) {
+    mpvController.command(.playlistRemove, args: [index.toStr()])
   }
 
   func clearPlaylist() {
@@ -483,7 +514,11 @@ class PlayerCore: NSObject {
   }
 
   func execKeyCode(_ code: String) {
-    mpvController.command(.keypress, args: [code])
+    mpvController.command(.keypress, args: [code], checkError: false) { errCode in
+      if errCode < 0 {
+        Utility.log("Error when executing key code (\(errCode))")
+      }
+    }
   }
 
   func savePlaybackPosition() {
@@ -659,8 +694,9 @@ class PlayerCore: NSObject {
     let trackCount = mpvController.getInt(MPVProperty.trackListCount)
     for index in 0..<trackCount {
       // get info for each track
+      guard let trackType = mpvController.getString(MPVProperty.trackListNType(index)) else { continue }
       let track = MPVTrack(id: mpvController.getInt(MPVProperty.trackListNId(index)),
-                           type: MPVTrack.TrackType(rawValue: mpvController.getString(MPVProperty.trackListNType(index))!)!,
+                           type: MPVTrack.TrackType(rawValue: trackType)!,
                            isDefault: mpvController.getFlag(MPVProperty.trackListNDefault(index)),
                            isForced: mpvController.getFlag(MPVProperty.trackListNForced(index)),
                            isSelected: mpvController.getFlag(MPVProperty.trackListNSelected(index)),

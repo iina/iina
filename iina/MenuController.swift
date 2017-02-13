@@ -16,6 +16,7 @@ class MenuController: NSObject, NSMenuDelegate {
   // File
   @IBOutlet weak var file: NSMenuItem!
   @IBOutlet weak var open: NSMenuItem!
+  @IBOutlet weak var savePlaylist: NSMenuItem!
   // Playback
   @IBOutlet weak var playbackMenu: NSMenu!
   @IBOutlet weak var pause: NSMenuItem!
@@ -30,8 +31,12 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var gotoScreenshotFolder: NSMenuItem!
   @IBOutlet weak var advancedScreenShot: NSMenuItem!
   @IBOutlet weak var abLoop: NSMenuItem!
+  @IBOutlet weak var fileLoop: NSMenuItem!
+  @IBOutlet weak var playlistPanel: NSMenuItem!
   @IBOutlet weak var playlist: NSMenuItem!
+  @IBOutlet weak var playlistLoop: NSMenuItem!
   @IBOutlet weak var playlistMenu: NSMenu!
+  @IBOutlet weak var chapterPanel: NSMenuItem!
   @IBOutlet weak var chapter: NSMenuItem!
   @IBOutlet weak var chapterMenu: NSMenu!
   // Video
@@ -47,6 +52,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var smallerSize: NSMenuItem!
   @IBOutlet weak var fitToScreen: NSMenuItem!
   @IBOutlet weak var fullScreen: NSMenuItem!
+  @IBOutlet weak var pictureInPicture: NSMenuItem!
   @IBOutlet weak var alwaysOnTop: NSMenuItem!
   @IBOutlet weak var aspectMenu: NSMenu!
   @IBOutlet weak var cropMenu: NSMenu!
@@ -94,9 +100,14 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var inspector: NSMenuItem!
 
 
+  // MARK: - Construct Menus
 
   func bindMenuItems() {
 
+    // File menu
+    
+    savePlaylist.action = #selector(MainWindowController.menuSavePlaylist(_:))
+    
     // Playback menu
 
     playbackMenu.delegate = self
@@ -119,8 +130,12 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- list and chapter
     abLoop.action = #selector(MainWindowController.menuABLoop(_:))
+    fileLoop.action = #selector(MainWindowController.menuFileLoop(_:))
     playlistMenu.delegate = self
     chapterMenu.delegate = self
+    playlistLoop.action = #selector(MainWindowController.menuPlaylistLoop(_:))
+    playlistPanel.action = #selector(MainWindowController.menuShowPlaylistPanel(_:))
+    chapterPanel.action = #selector(MainWindowController.menuShowChaptersPanel(_:))
 
     // Video menu
 
@@ -137,6 +152,11 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
+    if #available(OSX 10.12, *) {
+      pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
+    } else {
+      videoMenu.removeItem(pictureInPicture)
+    }
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
 
     // -- aspect
@@ -237,10 +257,10 @@ class MenuController: NSObject, NSMenuDelegate {
 
   }
 
+  // MARK: - Update Menus
+
   private func updatePlaylist() {
     playlistMenu.removeAllItems()
-    playlistMenu.addItem(withTitle: "Show/Hide Playlist Panel", action: #selector(MainWindowController.menuShowPlaylistPanel(_:)), keyEquivalent: "")
-    playlistMenu.addItem(NSMenuItem.separator())
     for (index, item) in PlayerCore.shared.info.playlist.enumerated() {
       playlistMenu.addItem(withTitle: item.filenameForDisplay, action: #selector(MainWindowController.menuPlaylistItem(_:)),
                            tag: index, obj: nil, stateOn: item.isCurrent)
@@ -249,8 +269,6 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateChapterList() {
     chapterMenu.removeAllItems()
-    chapterMenu.addItem(withTitle: "Show/Hide Chapter Panel", action: #selector(MainWindowController.menuShowChaptersPanel(_:)), keyEquivalent: "")
-    chapterMenu.addItem(NSMenuItem.separator())
     let info = PlayerCore.shared.info
     for (index, chapter) in info.chapters.enumerated() {
       let menuTitle = "\(chapter.time.stringRepresentation) - \(chapter.title)"
@@ -278,12 +296,17 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updatePlaybackMenu() {
     pause.title = PlayerCore.shared.info.isPaused ? Constants.String.resume : Constants.String.pause
+    let isLoop = PlayerCore.shared.mpvController.getFlag(MPVOption.PlaybackControl.loopFile)
+    fileLoop.state = isLoop ? NSOnState : NSOffState
+    let loopStatus = PlayerCore.shared.mpvController.getString(MPVOption.PlaybackControl.loop)
+    playlistLoop.state = (loopStatus == "inf" || loopStatus == "force") ? NSOnState : NSOffState
   }
 
-  private func updateVieoMenu() {
+  private func updateVideoMenu() {
     alwaysOnTop.state = PlayerCore.shared.info.isAlwaysOntop ? NSOnState : NSOffState
     deinterlace.state = PlayerCore.shared.info.deinterlace ? NSOnState : NSOffState
     fullScreen.title = PlayerCore.shared.mainWindow.isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
+    pictureInPicture?.title = PlayerCore.shared.mainWindow.isInPIP ? Constants.String.exitPIP : Constants.String.pip
   }
 
   private func updateAudioMenu() {
@@ -368,7 +391,7 @@ class MenuController: NSObject, NSMenuDelegate {
     } else if menu == playbackMenu {
       updatePlaybackMenu()
     } else if menu == videoMenu {
-      updateVieoMenu()
+      updateVideoMenu()
     } else if menu == videoTrackMenu {
       updateTracks(forMenu: menu, type: .video)
     } else if menu == flipMenu {

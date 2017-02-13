@@ -1,45 +1,44 @@
+
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "82A-XQ-BvS"; */
-"82A-XQ-BvS.title" = "일정 시간후 자동 숨김:";
+"82A-XQ-BvS.title" = "Masquer automatiquement après :";
 
 /* Class = "NSButtonCell"; title = "Show chapter position in progress bar"; ObjectID = "BVV-Z3-LHR"; */
-"BVV-Z3-LHR.title" = "재생 상태 막대에 챕터 위치 표시";
-
-/* Class = "NSButtonCell"; title = "Show remaining time"; ObjectID = "EAa-gN-8dL"; */
-"EAa-gN-8dL.title" = "남은 재생시간 표시";
+"BVV-Z3-LHR.title" = "Afficher la position du chapitre dans la barre de progression";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Display:"; ObjectID = "F2e-CS-KXl"; */
-"F2e-CS-KXl.title" = "정보 표시 화면 (OSD):";
+"F2e-CS-KXl.title" = "Informations à l'écran :";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "GKy-3g-4MB"; */
-"GKy-3g-4MB.title" = "윈도우:";
+"GKy-3g-4MB.title" = "Fenêtre :";
 
 /* Class = "NSTextFieldCell"; title = "pt"; ObjectID = "I8t-ey-016"; */
 "I8t-ey-016.title" = "pt";
 
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "NUr-hY-gfo"; */
-"NUr-hY-gfo.title" = "일정 시간후 자동 숨김:";
+"NUr-hY-gfo.title" = "Masquer automatiquement après :";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "ObY-7B-NTO"; */
-"ObY-7B-NTO.title" = "초";
+"ObY-7B-NTO.title" = "s";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "S8H-Xr-uVa"; */
-"S8H-Xr-uVa.title" = "초";
+"S8H-Xr-uVa.title" = "s";
 
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
-"SFX-ct-8MB.title" = "재생할 때 모든 윈도우 위에 두기";
+"SFX-ct-8MB.title" = "Toujours flotter au-dessus pendant la lecture";
 
 /* Class = "NSButtonCell"; title = "Use physical resolution on retina screens"; ObjectID = "fsj-YE-OB7"; */
-"fsj-YE-OB7.title" = "레티나 화면에서 실제 해상도 사용";
+"fsj-YE-OB7.title" = "Utiliser la résolution physique sur les écrans Retina";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Controller:"; ObjectID = "g06-Ja-Ot8"; */
-"g06-Ja-Ot8.title" = "재생 제어기 (OSC):";
+"g06-Ja-Ot8.title" = "Contrôleur à l'écran :";
 
 /* Class = "NSButtonCell"; title = "Snap to center when dragging"; ObjectID = "mdD-if-Wqw"; */
-"mdD-if-Wqw.title" = "드래그 할 때 화면 가운데 맞춤";
+"mdD-if-Wqw.title" = "Attirer au centre lors du déplacement";
 
 /* Class = "NSTextFieldCell"; title = "Text size:"; ObjectID = "suy-e8-j4i"; */
-"suy-e8-j4i.title" = "텍스트 크기:";
+"suy-e8-j4i.title" = "Taille du texte :";
 
 /* Class = "NSButtonCell"; title = "Resize to video size only when opening files manually"; ObjectID = "uD1-HB-46y"; */
-"uD1-HB-46y.title" = "파일을 수동으로 열 때만 비디오 크기 재조정";
+"uD1-HB-46y.title" = "Redimensionner seulement à l'ouverture manuelle de fichiers";
 
+"EAa-gN-8dL.title" = "Afficher le temps restant plutôt que la durée";

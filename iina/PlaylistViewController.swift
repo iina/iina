@@ -433,8 +433,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
 
   func menuNeedsUpdate(_ menu: NSMenu) {
     var indexSet = playlistTableView.selectedRowIndexes
-    indexSet.insert(playlistTableView.clickedRow)
-    guard !indexSet.isEmpty else { return }
+    if playlistTableView.clickedRow >= 0 {
+      indexSet.insert(playlistTableView.clickedRow)
+    }
 
     selectedRows = indexSet
     menu.removeAllItems()
@@ -508,18 +509,20 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
       playerCore.info.playlist[rows.first!].filenameForDisplay :
       String(format: NSLocalizedString("pl_menu.title_multi", comment: "%d Items"), rows.count)
 
-    result.addItem(withTitle: title)
-    result.addItem(NSMenuItem.separator())
-    result.addItem(withTitle: NSLocalizedString("pl_menu.play_next", comment: "Play Next"), action: #selector(self.contextMenuPlayNext(_:)))
-    result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.remove" : "pl_menu.remove_multi", comment: "Remove"), action: #selector(self.contextMenuRemove(_:)))
+    if !rows.isEmpty {
+      result.addItem(withTitle: title)
+      result.addItem(NSMenuItem.separator())
+      result.addItem(withTitle: NSLocalizedString("pl_menu.play_next", comment: "Play Next"), action: #selector(self.contextMenuPlayNext(_:)))
+      result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.remove" : "pl_menu.remove_multi", comment: "Remove"), action: #selector(self.contextMenuRemove(_:)))
 
-    result.addItem(NSMenuItem.separator())
-    result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
-    // result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete_after_play" : "pl_menu.delete_after_play_multi", comment: "Delete After Playback"), action: #selector(self.contextMenuDeleteFileAfterPlayback(_:)))
+      result.addItem(NSMenuItem.separator())
+      result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
+      // result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete_after_play" : "pl_menu.delete_after_play_multi", comment: "Delete After Playback"), action: #selector(self.contextMenuDeleteFileAfterPlayback(_:)))
 
-    // result.addItem(NSMenuItem.separator())
-    result.addItem(withTitle: NSLocalizedString("pl_menu.reveal_in_finder", comment: "Reveal in Finder"), action: #selector(self.contextMenuRevealInFinder(_:)))
-    result.addItem(NSMenuItem.separator())
+      // result.addItem(NSMenuItem.separator())
+      result.addItem(withTitle: NSLocalizedString("pl_menu.reveal_in_finder", comment: "Reveal in Finder"), action: #selector(self.contextMenuRevealInFinder(_:)))
+      result.addItem(NSMenuItem.separator())
+    }
     result.addItem(withTitle: NSLocalizedString("pl_menu.add_item", comment: "Add Item"), action: #selector(self.addToPlaylistBtnAction(_:)))
     result.addItem(withTitle: NSLocalizedString("pl_menu.clear_playlist", comment: "Clear Playlist"), action: #selector(self.clearPlaylistBtnAction(_:)))
     return result

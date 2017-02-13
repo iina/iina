@@ -1611,7 +1611,7 @@ extension MainWindowController: PIPViewControllerDelegate {
       return
     }
     pipVideo.view = videoView
-    pip.aspectRatio = videoView.videoSize ?? .zero
+    pip.aspectRatio = NSSize(width: playerCore.info.videoWidth!, height: playerCore.info.videoHeight!)
     pip.playing = !playerCore.info.isPaused
     pip.title = titleTextField.stringValue
     pip.presentAsPicture(inPicture: pipVideo)

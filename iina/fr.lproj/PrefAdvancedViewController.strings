@@ -1,3 +1,4 @@
+
 /* Class = "NSBox"; title = "Box"; ObjectID = "1NU-Lr-cuR"; */
 "1NU-Lr-cuR.title" = "Box";
 
@@ -5,35 +6,34 @@
 "1nQ-mn-luW.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "Additional MPV options"; ObjectID = "6F6-Y7-8oR"; */
-"6F6-Y7-8oR.title" = "추가 MPV 설정";
+"6F6-Y7-8oR.title" = "Options MPV additionnelles";
 
 /* Class = "NSButtonCell"; title = "Enable advanced settings"; ObjectID = "7ml-VU-xWv"; */
-"7ml-VU-xWv.title" = "고급 설정 사용";
+"7ml-VU-xWv.title" = "Activer les paramètres avancés";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "A9b-rU-8Ku"; */
 "A9b-rU-8Ku.title" = "Text Cell";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "E3I-Q7-9t1"; */
-"E3I-Q7-9t1.headerCell.title" = "항목";
+"E3I-Q7-9t1.headerCell.title" = "Nom";
 
 /* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
-"HMa-Vz-EUk.title" = "아래 설정을 적용하려면 IINA를 종료한 후 다시 실행해야 합니다.";
+"HMa-Vz-EUk.title" = "Les paramètres suivants nécessitent le redémarrage de IINA.";
 
 /* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
-"JDA-g3-RNX.title" = "로그 저장 디렉토리 열기";
+"JDA-g3-RNX.title" = "Ouvrir le dossier des logs";
 
 /* Class = "NSButtonCell"; title = "Enable logging"; ObjectID = "LCd-uY-Yze"; */
-"LCd-uY-Yze.title" = "로그 기록하기";
+"LCd-uY-Yze.title" = "Activer le logging";
 
-/* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
-"MRT-u8-xTX.title" = "디렉토리 선택…";
+/* Class = "NSButtonCell"; title = "Choose directory"; ObjectID = "MRT-u8-xTX"; */
+"MRT-u8-xTX.title" = "Choisir un dossier...";
 
 /* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "SX9-fy-bss"; */
-"SX9-fy-bss.headerCell.title" = "값";
+"SX9-fy-bss.headerCell.title" = "Valeur";
 
 /* Class = "NSButtonCell"; title = "Use config directory:"; ObjectID = "ehL-8Y-G8h"; */
-"ehL-8Y-G8h.title" = "config 디렉토리 사용:";
+"ehL-8Y-G8h.title" = "Utiliser le dossier de configuration :";
 
 /* Class = "NSButtonCell"; title = "Use MPV's OSD"; ObjectID = "phK-g9-Vbg"; */
-"phK-g9-Vbg.title" = "MPV의 OSD 사용";
-
+"phK-g9-Vbg.title" = "Utiliser l'OSD de MPV";

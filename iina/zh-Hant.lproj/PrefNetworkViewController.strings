@@ -1,15 +1,17 @@
-
-/* Class = "NSTextFieldCell"; title = "Default: 75000"; ObjectID = "0bT-f6-rXb"; */
+/* Class = "NSTextFieldCell"; title = "Default: 153600"; ObjectID = "0bT-f6-rXb"; */
 "0bT-f6-rXb.title" = "默認: 153600";
 
 /* Class = "NSTextFieldCell"; title = "Default cache size (KB):"; ObjectID = "0yu-5Q-363"; */
 "0yu-5Q-363.title" = "默認暫存大小 (KB):";
 
-/* Class = "NSTextFieldCell"; title = "Default: 75000"; ObjectID = "3os-7u-lv8"; */
+/* Class = "NSTextFieldCell"; title = "Default: 153600"; ObjectID = "3os-7u-lv8"; */
 "3os-7u-lv8.title" = "默認: 153600";
 
 /* Class = "NSMenuItem"; title = "TCP"; ObjectID = "6JF-48-aCE"; */
 "6JF-48-aCE.title" = "TCP";
+
+/* Class = "NSTextFieldCell"; title = "Format: <key>=<value>[,<key>=<value>[,...]]"; ObjectID = "GBe-wd-tne"; */
+"GBe-wd-tne.title" = "格式: <key>=<value>[,<key>=<value>[,...]]";
 
 /* Class = "NSTextFieldCell"; title = "Seconds to prefech:"; ObjectID = "J96-32-M9A"; */
 "J96-32-M9A.title" = "預讀取秒數:";
@@ -23,13 +25,16 @@
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "aNr-lv-K0r"; */
 "aNr-lv-K0r.title" = "自動";
 
+/* Class = "NSButtonCell"; title = "Enable youtube-dl"; ObjectID = "cyH-Md-FAD"; */
+"cyH-Md-FAD.title" = "啓用 youtube-dl";
+
 /* Class = "NSTextFieldCell"; title = "Cache buffer size (KB):"; ObjectID = "dDD-g3-54w"; */
 "dDD-g3-54w.title" = "暫存區大小 (KB):";
 
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
 "eN6-Sk-kUa.title" = "客戶端:";
 
-/* Class = "NSTextFieldCell"; title = "Default: 10"; ObjectID = "fab-7d-mMQ"; */
+/* Class = "NSTextFieldCell"; title = "Default: 100"; ObjectID = "fab-7d-mMQ"; */
 "fab-7d-mMQ.title" = "默認: 100";
 
 /* Class = "NSButtonCell"; title = "Enable cache"; ObjectID = "fpV-al-bn7"; */
@@ -43,3 +48,7 @@
 
 /* Class = "NSTextFieldCell"; title = "Network:"; ObjectID = "yrh-Jm-Q4e"; */
 "yrh-Jm-Q4e.title" = "網路:";
+
+/* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
+"zCD-9d-ziV.title" = "參數:";
+

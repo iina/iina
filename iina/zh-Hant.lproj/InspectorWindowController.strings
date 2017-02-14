@@ -1,24 +1,23 @@
-
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "99G-7I-C2S"; */
-"99G-7I-C2S.title" = "Format:";
+"99G-7I-C2S.title" = "格式:";
 
 /* Class = "NSBox"; title = "Audio"; ObjectID = "AI9-Ye-I3s"; */
-"AI9-Ye-I3s.title" = "Audio";
+"AI9-Ye-I3s.title" = "音訊";
 
 /* Class = "NSBox"; title = "Video"; ObjectID = "Bbu-1w-8Vc"; */
-"Bbu-1w-8Vc.title" = "Video";
+"Bbu-1w-8Vc.title" = "視訊";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "Ccm-z8-cY5"; */
-"Ccm-z8-cY5.title" = "Codec:";
+"Ccm-z8-cY5.title" = "編碼格式:";
 
 /* Class = "NSWindow"; title = "Inspector"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "Inspector";
+"F0z-JX-Cv5.title" = "檢視器";
 
 /* Class = "NSTextFieldCell"; title = "_vformat"; ObjectID = "GHF-ef-Fbc"; */
 "GHF-ef-Fbc.title" = "_vformat";
 
 /* Class = "NSTextFieldCell"; title = "Channel:"; ObjectID = "Ge8-Hj-Onm"; */
-"Ge8-Hj-Onm.title" = "Channel:";
+"Ge8-Hj-Onm.title" = "聲道:";
 
 /* Class = "NSTextFieldCell"; title = "_asamplerate"; ObjectID = "Jgp-04-5QG"; */
 "Jgp-04-5QG.title" = "_asamplerate";
@@ -30,10 +29,10 @@
 "OCm-Ew-Huy.title" = "_vsize";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "PXe-9m-rBw"; */
-"PXe-9m-rBw.title" = "Codec:";
+"PXe-9m-rBw.title" = "編碼格式:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "TLL-kK-uic"; */
-"TLL-kK-uic.title" = "Format:";
+"TLL-kK-uic.title" = "格式:";
 
 /* Class = "NSTextFieldCell"; title = "_achannels"; ObjectID = "Tb1-Hm-Obu"; */
 "Tb1-Hm-Obu.title" = "_achannels";
@@ -42,7 +41,7 @@
 "bLh-sh-tg4.title" = "_acodec";
 
 /* Class = "NSTextFieldCell"; title = "Path:"; ObjectID = "cCQ-Os-CfA"; */
-"cCQ-Os-CfA.title" = "Path:";
+"cCQ-Os-CfA.title" = "檔案路徑:";
 
 /* Class = "NSTextFieldCell"; title = "_duration"; ObjectID = "fog-xa-Mb2"; */
 "fog-xa-Mb2.title" = "_duration";
@@ -51,10 +50,10 @@
 "ncn-oj-TYE.title" = "_vcodec";
 
 /* Class = "NSTextFieldCell"; title = "Bitrate:"; ObjectID = "nhh-9N-9T6"; */
-"nhh-9N-9T6.title" = "Bitrate:";
+"nhh-9N-9T6.title" = "比特率:";
 
 /* Class = "NSTextFieldCell"; title = "Duration:"; ObjectID = "qJ3-DQ-M1k"; */
-"qJ3-DQ-M1k.title" = "Duration:";
+"qJ3-DQ-M1k.title" = "時長:";
 
 /* Class = "NSTextFieldCell"; title = "_vbitrate"; ObjectID = "qg3-Yq-bCq"; */
 "qg3-Yq-bCq.title" = "_vbitrate";
@@ -63,10 +62,11 @@
 "rGh-q7-OsK.title" = "_abitrate";
 
 /* Class = "NSTextFieldCell"; title = "Bitrate:"; ObjectID = "uaf-XC-cvH"; */
-"uaf-XC-cvH.title" = "Bitrate:";
+"uaf-XC-cvH.title" = "比特率:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "ywY-dg-e8h"; */
-"ywY-dg-e8h.title" = "Size:";
+"ywY-dg-e8h.title" = "尺寸:";
 
 /* Class = "NSTextFieldCell"; title = "Sample rate:"; ObjectID = "zIl-ws-aNH"; */
-"zIl-ws-aNH.title" = "Sample rate:";
+"zIl-ws-aNH.title" = "採樣率:";
+

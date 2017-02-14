@@ -134,7 +134,7 @@ struct MPVOption {
     static let ytdl = "ytdl"
     /** --no-ytdl */
     static let noYtdl = "no-ytdl"
-    /** --ytdl-format=<best|worst|mp4|webm|...> */
+    /** --ytdl-format=<best|worst|mp4|webm|…> */
     static let ytdlFormat = "ytdl-format"
     /** --ytdl-raw-options=<key>=<value>[ */
     static let ytdlRawOptions = "ytdl-raw-options"
@@ -145,9 +145,9 @@ struct MPVOption {
   struct Video {
     /** --vo=<driver> */
     static let vo = "vo"
-    /** --vd=<...> */
+    /** --vd=<…> */
     static let vd = "vd"
-    /** --vf=<filter1[=parameter1:parameter2:...] */
+    /** --vf=<filter1[=parameter1:parameter2:…] */
     static let vf = "vf"
     /** --untimed */
     static let untimed = "untimed"
@@ -234,7 +234,7 @@ struct MPVOption {
     static let audioFallbackToNull = "audio-fallback-to-null"
     /** --ao=<driver> */
     static let ao = "ao"
-    /** --af=<filter1[=parameter1:parameter2:...] */
+    /** --af=<filter1[=parameter1:parameter2:…] */
     static let af = "af"
     /** --audio-spdif=<codecs> */
     static let audioSpdif = "audio-spdif"
@@ -286,13 +286,13 @@ struct MPVOption {
     static let noInitialAudioSync = "no-initial-audio-sync"
     /** --volume-max=<100.0-1000.0> */
     static let volumeMax = "volume-max"
-    /** --softvol-max=<...> */
+    /** --softvol-max=<…> */
     static let softvolMax = "softvol-max"
     /** --audio-file-auto=<no|exact|fuzzy|all> */
     static let audioFileAuto = "audio-file-auto"
     /** --no-audio-file-auto */
     static let noAudioFileAuto = "no-audio-file-auto"
-    /** --audio-file-paths=<path1:path2:...> */
+    /** --audio-file-paths=<path1:path2:…> */
     static let audioFilePaths = "audio-file-paths"
     /** --audio-client-name=<name> */
     static let audioClientName = "audio-client-name"
@@ -379,7 +379,7 @@ struct MPVOption {
     static let subGauss = "sub-gauss"
     /** --sub-gray */
     static let subGray = "sub-gray"
-    /** --sub-paths=<path1:path2:...> */
+    /** --sub-paths=<path1:path2:…> */
     static let subPaths = "sub-paths"
     /** --sub-visibility */
     static let subVisibility = "sub-visibility"
@@ -1100,7 +1100,7 @@ struct MPVOption {
     static let mc = "mc"
     /** --autosync=<factor> */
     static let autosync = "autosync"
-    /** --video-sync=<audio|...> */
+    /** --video-sync=<audio|…> */
     static let videoSync = "video-sync"
     /** --video-sync-max-video-change=<value> */
     static let videoSyncMaxVideoChange = "video-sync-max-video-change"

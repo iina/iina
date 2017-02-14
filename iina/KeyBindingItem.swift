@@ -40,7 +40,7 @@ class KeyBindingItem {
     return items
   }
 
-  static func chooseIn(_ optionsList: String, children: KeyBindingItem...) -> [KeyBindingItem] {
+  static func chooseIn(_ optionsList: String, children: KeyBindingItem…) -> [KeyBindingItem] {
     let options = optionsList.components(separatedBy: "|")
     var items: [KeyBindingItem] = []
     for op in options {
@@ -53,7 +53,7 @@ class KeyBindingItem {
     return KeyBindingItem("---", type: .separator)
   }
 
-  init(_ name: String, type: ItemType, children: KeyBindingItem...) {
+  init(_ name: String, type: ItemType, children: KeyBindingItem…) {
     self.name = name
     self.type = type
     self.children = children

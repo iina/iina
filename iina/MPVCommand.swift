@@ -48,7 +48,7 @@ struct MPVCommand: RawRepresentable {
   static let playlistMove = MPVCommand("playlist-move")
   /** playlist-shuffle */
   static let playlistShuffle = MPVCommand("playlist-shuffle")
-  /** run "command" "arg1" "arg2" ... */
+  /** run "command" "arg1" "arg2" … */
   static let run = MPVCommand("run")
   /** quit [<code>] */
   static let quit = MPVCommand("quit")
@@ -92,11 +92,11 @@ struct MPVCommand: RawRepresentable {
   static let audioReload = MPVCommand("audio-reload")
   /** rescan-external-files [<mode>] */
   static let rescanExternalFiles = MPVCommand("rescan-external-files")
-  /** af set|add|toggle|del|clr "filter1=params,filter2,..." */
+  /** af set|add|toggle|del|clr "filter1=params,filter2,…" */
   static let af = MPVCommand("af")
-  /** vf set|add|toggle|del|clr "filter1=params,filter2,..." */
+  /** vf set|add|toggle|del|clr "filter1=params,filter2,…" */
   static let vf = MPVCommand("vf")
-  /** cycle-values ["!reverse"] <property> "<value1>" "<value2>" ... */
+  /** cycle-values ["!reverse"] <property> "<value1>" "<value2>" … */
   static let cycleValues = MPVCommand("cycle-values")
   /** enable-section "<section>" [flags] */
   static let enableSection = MPVCommand("enable-section")
@@ -108,9 +108,9 @@ struct MPVCommand: RawRepresentable {
   static let overlayAdd = MPVCommand("overlay-add")
   /** overlay-remove <id> */
   static let overlayRemove = MPVCommand("overlay-remove")
-  /** script-message "<arg1>" "<arg2>" ... */
+  /** script-message "<arg1>" "<arg2>" … */
   static let scriptMessage = MPVCommand("script-message")
-  /** script-message-to "<target>" "<arg1>" "<arg2>" ... */
+  /** script-message-to "<target>" "<arg1>" "<arg2>" … */
   static let scriptMessageTo = MPVCommand("script-message-to")
   /** script-binding "<name>" */
   static let scriptBinding = MPVCommand("script-binding")

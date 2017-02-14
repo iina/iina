@@ -74,7 +74,7 @@ File.open(File.join(__dir__, 'MPVOption.swift'), 'w') do |file|
         match = f.match(/--(.+?)(=|\Z)/)
         if match.nil? then next end
         op_name = match[1]
-        if exist_op.include?(op_name) or op_name.include?('...') then next end
+        if exist_op.include?(op_name) or op_name.include?('…') then next end
         file.write "    /** #{f} */\n"
         file.write "    static let #{op_name.to_camel} = \"#{op_name}\"\n"
         exist_op << op_name

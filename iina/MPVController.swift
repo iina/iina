@@ -126,10 +126,21 @@ class MPVController: NSObject {
 
     setUserOption(PK.useMediaKeys, type: .bool, forName: MPVOption.Input.inputMediaKeys)
 
-    setUserOption(PK.keepOpenOnFileEnd, type: .bool, forName: MPVOption.Window.keepOpen)
+    setUserOption(PK.keepOpenOnFileEnd, type: .other, forName: MPVOption.Window.keepOpen) { key in
+      let keepOpen = UserDefaults.standard.bool(forKey: PK.keepOpenOnFileEnd)
+      let keepOpenPl = !UserDefaults.standard.bool(forKey: PK.playlistAutoPlayNext)
+      return keepOpenPl ? "always" : (keepOpen ? "yes" : "no")
+    }
+
+    setUserOption(PK.playlistAutoPlayNext, type: .other, forName: MPVOption.Window.keepOpen) { key in
+      let keepOpen = UserDefaults.standard.bool(forKey: key)
+      let keepOpenPl = !UserDefaults.standard.bool(forKey: PK.playlistAutoPlayNext)
+      return keepOpenPl ? "always" : (keepOpen ? "yes" : "no")
+    }
 
     chkErr(mpv_set_option_string(mpv, "watch-later-directory", Utility.watchLaterURL.path))
     setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.ProgramBehavior.savePositionOnQuit)
+    setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback")
 
     // - Codec
 
@@ -139,6 +150,13 @@ class MPVController: NSObject {
     setUserOption(PK.useHardwareDecoding, type: .bool, forName: MPVOption.Video.hwdec)
 
     setUserOption(PK.audioLanguage, type: .string, forName: MPVOption.TrackSelection.alang)
+    setUserOption(PK.maxVolume, type: .int, forName: MPVOption.Audio.volumeMax)
+
+    var spdif: [String] = []
+    if ud.bool(forKey: PK.spdifAC3) { spdif.append("ac3") }
+    if ud.bool(forKey: PK.spdifDTS){ spdif.append("dts") }
+    if ud.bool(forKey: PK.spdifDTSHD) { spdif.append("dts-hd") }
+    setString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","))
 
     // - Sub
 
@@ -147,10 +165,14 @@ class MPVController: NSObject {
       return Preference.AutoLoadAction(rawValue: v)?.string
     }
 
-    setUserOption(PK.ignoreAssStyles, type: .other, forName: MPVOption.Subtitles.subAssStyleOverride) { key in
-      let v = UserDefaults.standard.bool(forKey: key)
-      return v ? "force" : "yes"
+    let subOverrideHandler: OptionObserverInfo.Transformer = { key in
+      let v = UserDefaults.standard.bool(forKey: PK.ignoreAssStyles)
+      let level = Preference.SubOverrideLevel(rawValue: UserDefaults.standard.integer(forKey: PK.subOverrideLevel))
+      return v ? level?.string : "yes"
     }
+
+    setUserOption(PK.ignoreAssStyles, type: .other, forName: MPVOption.Subtitles.subAssStyleOverride, transformer: subOverrideHandler)
+    setUserOption(PK.subOverrideLevel, type: .other, forName: MPVOption.Subtitles.subAssStyleOverride, transformer: subOverrideHandler)
 
     setUserOption(PK.subTextFont, type: .string, forName: MPVOption.Subtitles.subFont)
     setUserOption(PK.subTextSize, type: .int, forName: MPVOption.Subtitles.subFontSize)
@@ -160,6 +182,9 @@ class MPVController: NSObject {
 
     setUserOption(PK.subBold, type: .bool, forName: MPVOption.Subtitles.subBold)
     setUserOption(PK.subItalic, type: .bool, forName: MPVOption.Subtitles.subItalic)
+
+    setUserOption(PK.subBlur, type: .float, forName: MPVOption.Subtitles.subBlur)
+    setUserOption(PK.subSpacing, type: .float, forName: MPVOption.Subtitles.subSpacing)
 
     setUserOption(PK.subBorderSize, type: .int, forName: MPVOption.Subtitles.subBorderSize)
     setUserOption(PK.subBorderColor, type: .color, forName: MPVOption.Subtitles.subBorderColor)
@@ -180,7 +205,14 @@ class MPVController: NSObject {
     setUserOption(PK.subMarginX, type: .int, forName: MPVOption.Subtitles.subMarginX)
     setUserOption(PK.subMarginY, type: .int, forName: MPVOption.Subtitles.subMarginY)
 
+    setUserOption(PK.subPos, type: .int, forName: MPVOption.Subtitles.subPos)
+
     setUserOption(PK.subLang, type: .string, forName: MPVOption.TrackSelection.slang)
+
+    setUserOption(PK.displayInLetterBox, type: .bool, forName: MPVOption.Subtitles.subUseMargins)
+    setUserOption(PK.displayInLetterBox, type: .bool, forName: MPVOption.Subtitles.subAssForceMargins)
+
+    setUserOption(PK.subScaleWithWindow, type: .bool, forName: MPVOption.Subtitles.subScaleByWindow)
 
     // - Network / cache settings
 
@@ -202,6 +234,9 @@ class MPVController: NSObject {
       let v = UserDefaults.standard.integer(forKey: key)
       return Preference.RTSPTransportation(rawValue: v)!.string
     }
+
+    setUserOption(PK.ytdlEnabled, type: .bool, forName: MPVOption.ProgramBehavior.ytdl)
+    setUserOption(PK.ytdlRawOptions, type: .string, forName: MPVOption.ProgramBehavior.ytdlRawOptions)
 
     // Set user defined conf dir.
     if ud.bool(forKey: PK.useUserDefinedConfDir) {
@@ -230,11 +265,15 @@ class MPVController: NSObject {
 
     // Set options that can be override by user's config.
     chkErr(mpv_set_option_string(mpv, MPVOption.Video.vo, "opengl-cb"))
+    chkErr(mpv_set_option_string(mpv, MPVOption.Window.keepaspect, "no"))
     chkErr(mpv_set_option_string(mpv, MPVOption.Video.hwdecPreload, "auto"))
 
     // Load external scripts
-    let scriptPath = Bundle.main.path(forResource: "autoload", ofType: "lua", inDirectory: "scripts")!
-    chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, scriptPath))
+    let loader = ScriptLoader()
+    if ud.bool(forKey: PK.playlistAutoAdd) {
+      loader.add(defaultScript: "autoload")
+    }
+    chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, loader.stringForOption))
 
     //load keybinding
     let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)
@@ -281,7 +320,7 @@ class MPVController: NSObject {
     command(.quit)
   }
 
-  // MARK: Command & property
+  // MARK: - Command & property
 
   // Send arbitrary mpv command.
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {
@@ -379,6 +418,14 @@ class MPVController: NSObject {
         NotificationCenter.default.post(Notification(name: Constants.Noti.vfChanged))
       }
     }
+  }
+
+  func getNode(_ name: String) -> Any? {
+    var node = mpv_node()
+    mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node)
+    let parsed = try? MPVNode.parse(node)
+    mpv_free_node_contents(&node)
+    return parsed!
   }
 
   // MARK: - Events
@@ -574,6 +621,11 @@ class MPVController: NSObject {
         if playerCore.info.isPaused != data {
           playerCore.sendOSD(data ? .pause : .resume)
           playerCore.info.isPaused = data
+          if data {
+            SleepPreventer.allowSleep()
+          } else {
+            SleepPreventer.preventSleep()
+          }
         }
       }
       playerCore.syncUI(.playButton)
@@ -716,7 +768,7 @@ class MPVController: NSObject {
     }
   }
 
-  private var optionObservers: [String: OptionObserverInfo] = [:]
+  private var optionObservers: [String: [OptionObserverInfo]] = [:]
 
   private func setUserOption(_ key: String, type: UserOptionType, forName name: String, sync: Bool = true, transformer: OptionObserverInfo.Transformer? = nil) {
     var code: Int32 = 0
@@ -767,7 +819,10 @@ class MPVController: NSObject {
 
     if sync {
       ud.addObserver(self, forKeyPath: key, options: [.new, .old], context: nil)
-      optionObservers[key] = OptionObserverInfo(key, name, type, transformer)
+      if optionObservers[key] == nil {
+        optionObservers[key] = []
+      }
+      optionObservers[key]!.append(OptionObserverInfo(key, name, type, transformer))
     }
   }
 
@@ -775,38 +830,40 @@ class MPVController: NSObject {
     guard !(change?[NSKeyValueChangeKey.oldKey] is NSNull) else { return }
 
     guard let keyPath = keyPath else { return }
-    guard let info = optionObservers[keyPath] else { return }
+    guard let infos = optionObservers[keyPath] else { return }
 
-    switch info.valueType {
-    case .int:
-      let value = ud.integer(forKey: info.prefKey)
-      setInt(info.optionName, value)
+    for info in infos {
+      switch info.valueType {
+      case .int:
+        let value = ud.integer(forKey: info.prefKey)
+        setInt(info.optionName, value)
 
-    case .float:
-      let value = ud.float(forKey: info.prefKey)
-      setDouble(info.optionName, Double(value))
+      case .float:
+        let value = ud.float(forKey: info.prefKey)
+        setDouble(info.optionName, Double(value))
 
-    case .bool:
-      let value = ud.bool(forKey: info.prefKey)
-      setFlag(info.optionName, value)
+      case .bool:
+        let value = ud.bool(forKey: info.prefKey)
+        setFlag(info.optionName, value)
 
-    case .string:
-      if let value = ud.string(forKey: info.prefKey) {
-        setString(info.optionName, value)
-      }
+      case .string:
+        if let value = ud.string(forKey: info.prefKey) {
+          setString(info.optionName, value)
+        }
 
-    case .color:
-      if let value = ud.mpvColor(forKey: info.prefKey) {
-        setString(info.optionName, value)
-      }
+      case .color:
+        if let value = ud.mpvColor(forKey: info.prefKey) {
+          setString(info.optionName, value)
+        }
 
-    case .other:
-      guard let tr = info.transformer else {
-        Utility.log("setUserOption: no transformer!")
-        return
-      }
-      if let value = tr(info.prefKey) {
-        setString(info.optionName, value)
+      case .other:
+        guard let tr = info.transformer else {
+          Utility.log("setUserOption: no transformer!")
+          return
+        }
+        if let value = tr(info.prefKey) {
+          setString(info.optionName, value)
+        }
       }
     }
   }

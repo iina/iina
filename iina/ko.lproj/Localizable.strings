@@ -1,14 +1,20 @@
 /* Error setting extra mpv option */
 "alert.extra_option_error" = "--%@=%@ 설정에서 %d 오류가 발생했습니다. 환경설정 > 고급설정으로 이동하여 사용자가 지정한 추가 설정 사항을 점검하십시오.";
 
+/* Error setting keybinding configuration */
+"alert.keybinding_config_error" = "단축키 설정 파일 \"%@\"를 읽어올 때 오류가 발생했습니다! IINA 기본값을 사용하도록 설정됩니다. 사용자가 지정한 단축키 설정 내용을 점검하십시오.";
+
 /* Buffering... %s%% */
 "main.buffering_indicator" = "준비중… %d%%";
 
 /* Audio Delay: */
-"menu.audio_delay" = "오디오 지연: %.2fs";
+"menu.audio_delay" = "오디오 지연: %.2f초";
 
 /* Exit Fullscreen */
 "menu.exit_fullscreen" = "전체화면에서 나가기";
+
+/* Exit Picture-in-Picture */
+"menu.exit_pip" = "화면 속 화면에서 나가기";
 
 /* Fullscreen */
 "menu.fullscreen" = "전체화면";
@@ -16,11 +22,14 @@
 /* Pause */
 "menu.pause" = "일시 정지";
 
+/* Enter Picture-in-Picture */
+"menu.pip" = "화면 속 화면으로 가기";
+
 /* Resume */
 "menu.resume" = "재생";
 
 /* Subtitle Delay: */
-"menu.sub_delay" = "자막 지연: %.2fs";
+"menu.sub_delay" = "자막 지연: %.2f초";
 
 /* Volume: */
 "menu.volume" = "음량: %d";
@@ -40,17 +49,17 @@
 /* AB-Loop: Cleared */
 "osd.abloop.clear" = "구간 반복: 해제됨";
 
-/* Added %i files to playlist */
+/* Added %i Files to Playlist */
 "osd.add_to_playlist" = "%i 파일이 재생목록에 추가되었습니다";
 
 /* Aspect Ratio: %@ */
 "osd.aspect" = "화면비: %@";
 
 /* Audio Delay: %fs Earlier */
-"osd.audio_delay.earlier" = "오디오 지연: %.2fs 빠르게";
+"osd.audio_delay.earlier" = "오디오 지연: %.2f초 빠르게";
 
 /* Audio Delay: %fs Later */
-"osd.audio_delay.later" = "오디오 지연: %.2fs 늦게";
+"osd.audio_delay.later" = "오디오 지연: %.2f초 늦게";
 
 /* Audio Delay: No Delay */
 "osd.audio_delay.nodelay" = "오디오 지연: 없음";
@@ -58,7 +67,7 @@
 /* Chapter: %@ */
 "osd.chapter" = "챕터: %@";
 
-/* Cleared playlist */
+/* Cleared Playlist */
 "osd.clear_playlist" = "재생목록 비움";
 
 /* Crop: %@ */
@@ -67,41 +76,59 @@
 /* Deinterlace: %@ */
 "osd.deinterlace" = "디인터레이스: %@";
 
+/* Finding online subtitles... */
+"osd.find_online_sub" = "인터넷에서 자막을 찾는 중…";
+
 /* Mute */
 "osd.mute" = "소리 끔";
 
-/* Paused */
+/* Network error */
+"osd.network_error" = "네트워크 오류";
+
+/* Pause */
 "osd.pause" = "일시 정지됨";
 
-/* Resumed */
+/* Resume */
 "osd.resume" = "재생 복원됨";
 
 /* Rotate: %i° */
 "osd.rotate" = "회전: %i°";
 
-/* Screenshot captured */
+/* Screenshot Captured */
 "osd.screenshot" = "스크린샷 저장됨";
 
 /* Speed: %.2fx */
-"osd.speed" = "재생 속도: %.2fx";
+"osd.speed" = "재생 속도: %.2f배속";
 
-/* Stopped */
+/* Stop */
 "osd.stop" = "정지됨";
 
 /* Subtitle Delay: %fs Earlier */
-"osd.sub_delay.earlier" = "자막 지연: %.2fs 빠르게";
+"osd.sub_delay.earlier" = "자막 지연: %.2f초 빠르게";
 
 /* Subtitle Delay: %fs Later */
-"osd.sub_delay.later" = "자막 지연: %.2fs 늦게";
+"osd.sub_delay.later" = "자막 지연: %.2f초 늦게";
 
 /* Subtitle Delay: No Delay */
 "osd.sub_delay.nodelay" = "자막 지연: 없음";
 
+/* Subtitle downloaded */
+"osd.sub_downloaded" = "자막 다운로드됨";
+
+/* %d subtitle(s) found. Downloading... */
+"osd.sub_found" = "%d 자막을 찾았습니다. 내려받는 중…";
+
+/* No subtitle found. */
+"osd.sub_not_found" = "자막을 찾지 못했습니다";
+
+/* Subtitle saved */
+"osd.sub_saved" = "자막 저장됨";
+
 /* Subtitle Position: %f */
-"osd.subtitle_pos" = "자막 위치: %f";
+"osd.subtitle_pos" = "자막 위치: %.1f";
 
 /* Subtitle Scale: %.2fx */
-"osd.subtitle_scale" = "자막 크기: %.2fx";
+"osd.subtitle_scale" = "자막 크기: %.2f배";
 
 /* Unmute */
 "osd.unmute" = "소리 켜짐";
@@ -110,7 +137,7 @@
 "osd.video_eq.brightness" = "밝기: %i";
 
 /* Contrast: %i */
-"osd.video_eq.contrast" = "명암: %i";
+"osd.video_eq.contrast" = "대비: %i";
 
 /* Grama: %i */
 "osd.video_eq.gamma" = "감마: %i";
@@ -123,6 +150,39 @@
 
 /* Volume: %i */
 "osd.volume" = "음량: %i";
+
+/* Add Item */
+"pl_menu.add_item" = "항목 추가…";
+
+/* Clear Playlist */
+"pl_menu.clear_playlist" = "재생목록 지움";
+
+/* (No Commment) */
+"pl_menu.delete" = "휴지통으로 이동";
+
+/* (No Commment) */
+"pl_menu.delete_after_play" = "재생 후 휴지통으로 이동";
+
+/* (No Commment) */
+"pl_menu.delete_after_play_multi" = "선택항목 재생 후 휴지통으로 이동";
+
+/* (No Commment) */
+"pl_menu.delete_multi" = "선택한 파일을 휴지통으로 이동";
+
+/* Play Next */
+"pl_menu.play_next" = "다음 항목 재생";
+
+/* (No Commment) */
+"pl_menu.remove" = "제거";
+
+/* (No Commment) */
+"pl_menu.remove_multi" = "선택 항목 제거";
+
+/* Reveal in Finder */
+"pl_menu.reveal_in_finder" = "파인더에서 보기";
+
+/* %d Items */
+"pl_menu.title_multi" = "%d개의 항목";
 
 /* CHAPTERS */
 "playlist.chapter_cap" = "챕터";
@@ -137,7 +197,7 @@
 "preference.codec" = "코덱";
 
 /* Control */
-"preference.control" = "입력장치";
+"preference.control" = "마우스";
 
 /* General */
 "preference.general" = "일반";

@@ -36,7 +36,7 @@
 "osd.sub_delay.nodelay" = "Keine Untertitel-Verzögerung";
 "osd.sub_delay.later" = "Untertitel-Verzögerung: %.2fs später";
 "osd.sub_delay.earlier" = "Untertitel-Verzögerung: %.2fs früher";
-"osd.subtitle_pos" = "Untertitel-Position: %f";
+"osd.subtitle_pos" = "Untertitel-Position: %.1f";
 "osd.mute" = "Stumm";
 "osd.unmute" = "Stumm aus";
 "osd.screenshot" = "Bild aufgenommen";
@@ -53,6 +53,12 @@
 "osd.video_eq.hue" = "Farbton: %i";
 "osd.video_eq.saturation" = "Sättigung: %i";
 "osd.video_eq.brightness" = "Helligkeit: %i";
+"osd.find_online_sub" = "Online nach Untertiteln suchen...";
+"osd.sub_not_found" = "Keine Untertitel gefunden";
+"osd.sub_found" = "%d Untertitel gefunden. Laden...";
+"osd.sub_downloaded" = "Untertitel geladen";
+"osd.sub_saved" = "Untertitel gespeichert";
+"osd.network_error" = "Netzwerkfehler";
 
 "update.title_update_found" = "Neues Update verfügbar";
 "update.title_no_update" = "Kein Update verfügbar";

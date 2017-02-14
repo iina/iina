@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="box content view" minToolsVersion="7.0"/>
@@ -23,6 +23,9 @@
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="ymk-Ax-TcO">
                     <rect key="frame" x="18" y="358" width="403" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="eNF-O9-9JG"/>
+                    </constraints>
                     <buttonCell key="cell" type="check" title="Enable advanced settings" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7ml-VU-xWv">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -37,6 +40,9 @@
                     <subviews>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="SHQ-mh-jeX">
                             <rect key="frame" x="18" y="294" width="112" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="95c-9B-hM5"/>
+                            </constraints>
                             <buttonCell key="cell" type="check" title="Enable logging" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LCd-uY-Yze">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -47,6 +53,9 @@
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="zKI-kU-PWr">
                             <rect key="frame" x="18" y="274" width="444" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="h0j-bq-bLh"/>
+                            </constraints>
                             <buttonCell key="cell" type="check" title="Use MPV's OSD" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="phK-g9-Vbg">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -129,6 +138,9 @@
                         </scrollView>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wWR-n2-u2E">
                             <rect key="frame" x="18" y="242" width="444" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="17" id="a7J-mS-2v6"/>
+                            </constraints>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Additional MPV options" id="6F6-Y7-8oR">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -173,6 +185,9 @@
                         </box>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="Gf8-9e-wu7">
                             <rect key="frame" x="18" y="46" width="149" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="nel-hG-EmW"/>
+                            </constraints>
                             <buttonCell key="cell" type="check" title="Use config directory:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ehL-8Y-G8h">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -182,8 +197,8 @@
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hbF-n4-jl3">
-                            <rect key="frame" x="321" y="37" width="145" height="32"/>
-                            <buttonCell key="cell" type="push" title="Choose directory" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRT-u8-xTX">
+                            <rect key="frame" x="312" y="37" width="154" height="32"/>
+                            <buttonCell key="cell" type="push" title="Choose directory…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRT-u8-xTX">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -193,6 +208,9 @@
                         </button>
                         <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-pn-h6s">
                             <rect key="frame" x="38" y="18" width="422" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="XEU-L9-uIM"/>
+                            </constraints>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="gWN-ya-xRD">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -238,6 +256,9 @@
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2l-at-Cbp">
                     <rect key="frame" x="18" y="338" width="444" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="i4O-W0-fJb"/>
+                    </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="The following settings will require restarting IINA to take effect." id="HMa-Vz-EUk">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>

@@ -31,7 +31,7 @@ When raising an issue, please **use English** if possible.
 
 # Build
 
-## Use pre-compiled dylibs
+**Use pre-compiled dylibs**
 
 1. Please make sure CocoaPods is installed.
 
@@ -48,17 +48,22 @@ When raising an issue, please **use English** if possible.
   ```
   pod install
   ```
+  
+3. Open `.xcworkspace` file.
 
 Theoretically no extra work is needed. _If you are unwilling to use the provided dylibs, follow the instructions below._
 
-## Build with the lastest mpv
+**Build with the lastest mpv**
 
 * Install mpv
 
   ```
   brew install mpv --with-uchardet
   ```
-  Currently `ytdl` is not included when building, but will be considered in later versions.
+  
+  Feel free to include any other libraries if you like.
+  
+* Copy latest [header files](https://github.com/mpv-player/mpv/tree/master/libmpv) into `libmpv/include/mpv/`
 
 * other/parse_doc.rb
 
@@ -72,6 +77,8 @@ Theoretically no extra work is needed. _If you are unwilling to use the provided
 ## Contribute
 
 **Please read [CONTRIBUTING.md](https://github.com/lhc70000/iina/blob/master/CONTRIBUTING.md) before opening an issue or pull request.**
+
+**Please ask for permission from the author before staring working on a pull request** to make sure that there's not someone else working on the same feature.
 
 Any feedback is appreciated! You can
 

@@ -79,6 +79,21 @@ class Utility {
       return false
     }
   }
+  
+  static func quickSavePanel(title: String, types: [String], ok: (URL) -> Void) -> Bool {
+    let panel = NSSavePanel()
+    panel.title = title
+    panel.canCreateDirectories = true
+    panel.allowedFileTypes = types
+    if panel.runModal() == NSFileHandlingPanelOKButton {
+      if let url = panel.url {
+        ok(url)
+      }
+      return true
+    } else {
+      return false
+    }
+  }
 
   static func quickPromptPanel(messageText: String, informativeText: String, ok: (String) -> Void) -> Bool {
     let panel = NSAlert()
@@ -166,6 +181,8 @@ class Utility {
 
   static let tempDirURL: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
 
+  static let exeDirURL: URL = URL(fileURLWithPath: Bundle.main.executablePath!).deletingLastPathComponent()
+
 
   // MARK: - Util functions
 
@@ -231,6 +248,8 @@ class Utility {
       }
       enum Size {
         case system
+        case small
+        case mini
         case pt(Float)
       }
       enum Font {
@@ -258,6 +277,10 @@ class Utility {
         switch self.size {
         case .system:
           s = NSFont.systemFontSize()
+        case .small:
+          s = NSFont.systemFontSize(for: .small)
+        case .mini:
+          s = NSFont.systemFontSize(for: .mini)
         case .pt(let point):
           s = CGFloat(point)
         }

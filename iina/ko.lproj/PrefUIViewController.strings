@@ -4,6 +4,9 @@
 /* Class = "NSButtonCell"; title = "Show chapter position in progress bar"; ObjectID = "BVV-Z3-LHR"; */
 "BVV-Z3-LHR.title" = "재생 상태 막대에 챕터 위치 표시";
 
+/* Class = "NSButtonCell"; title = "Show remaining time"; ObjectID = "EAa-gN-8dL"; */
+"EAa-gN-8dL.title" = "남은 재생시간 표시";
+
 /* Class = "NSTextFieldCell"; title = "On Screen Display:"; ObjectID = "F2e-CS-KXl"; */
 "F2e-CS-KXl.title" = "정보 표시 화면 (OSD):";
 
@@ -17,13 +20,13 @@
 "NUr-hY-gfo.title" = "일정 시간후 자동 숨김:";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "ObY-7B-NTO"; */
-"ObY-7B-NTO.title" = "s";
+"ObY-7B-NTO.title" = "초";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "S8H-Xr-uVa"; */
-"S8H-Xr-uVa.title" = "s";
+"S8H-Xr-uVa.title" = "초";
 
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
-"SFX-ct-8MB.title" = "재생중인 경우 모든 윈도우 위에 두기";
+"SFX-ct-8MB.title" = "재생할 때 모든 윈도우 위에 두기";
 
 /* Class = "NSButtonCell"; title = "Use physical resolution on retina screens"; ObjectID = "fsj-YE-OB7"; */
 "fsj-YE-OB7.title" = "레티나 화면에서 실제 해상도 사용";
@@ -32,11 +35,11 @@
 "g06-Ja-Ot8.title" = "재생 제어기 (OSC):";
 
 /* Class = "NSButtonCell"; title = "Snap to center when dragging"; ObjectID = "mdD-if-Wqw"; */
-"mdD-if-Wqw.title" = "드래그 할때 화면 가운데 맞춤";
+"mdD-if-Wqw.title" = "드래그 할 때 화면 가운데 맞춤";
 
 /* Class = "NSTextFieldCell"; title = "Text size:"; ObjectID = "suy-e8-j4i"; */
 "suy-e8-j4i.title" = "텍스트 크기:";
 
 /* Class = "NSButtonCell"; title = "Resize to video size only when opening files manually"; ObjectID = "uD1-HB-46y"; */
-"uD1-HB-46y.title" = "파일을 수동으로 열때만 비디오 크기 재조정";
+"uD1-HB-46y.title" = "파일을 수동으로 열 때만 비디오 크기 재조정";
 

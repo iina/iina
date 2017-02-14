@@ -1,0 +1,88 @@
+/*
+ String_ui.strings
+ iina
+ 
+ Created by lhc on 3/1/2017.
+ Copyright © 2017 lhc. All rights reserved.
+ */
+
+// Common
+"on" = "On";
+"off" = "Off";
+
+// PlaylistViewController.swift
+"playlist.playlist_cap" = "播放列表";
+"playlist.chapter_cap" = "章節";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "緩衝中... %@%%";
+
+// QuickSettingViewController.swift
+"quicksetting.aspect_item.Default" = "默認";
+"quicksetting.crop_item.None" = "關閉";
+
+// OSDMessage.swift
+"osd.pause" = "暫停";
+"osd.resume" = "繼續";
+"osd.volume" = "音量：%i";
+"osd.speed" = "速度：%.2fx";
+"osd.aspect" = "長寬比：%@";
+"osd.crop" = "裁切：%@";
+"osd.rotate" = "旋轉：%i°";
+"osd.deinterlace" = "反交錯：%@";
+"osd.audio_delay.nodelay" = "音訊延遲：無";
+"osd.audio_delay.later" = "音訊延遲：延後 %.2f 秒";
+"osd.audio_delay.earlier" = "音訊延遲：提前 %.2f 秒";
+"osd.sub_delay.nodelay" = "字幕延遲：無";
+"osd.sub_delay.later" = "字幕延遲：延後 %.2f 秒";
+"osd.sub_delay.earlier" = "字幕延遲：提前 %.2f 秒";
+"osd.subtitle_pos" = "字幕位置：%.1f";
+"osd.mute" = "靜音";
+"osd.unmute" = "取消靜音";
+"osd.screenshot" = "熒幕已截取";
+"osd.abloop.a" = "AB循環：A";
+"osd.abloop.b" = "AB循環：B";
+"osd.abloop.clear" = "AB循環：清除";
+"osd.stop" = "停止";
+"osd.chapter" = "章節：%@";
+"osd.subtitle_scale" = "字幕縮放：%.2fx";
+"osd.add_to_playlist" = "已添加 %i 份文檔到播放列表";
+"osd.clear_playlist" = "清空播放列表";
+"osd.video_eq.contrast" = "對比度：%i";
+"osd.video_eq.gamma" = "伽瑪：%i";
+"osd.video_eq.hue" = "色調：%i";
+"osd.video_eq.saturation" = "飽和度：%i";
+"osd.video_eq.brightness" = "亮度：%i";
+
+"update.title_update_found" = "檢測到更新";
+"update.title_no_update" = "沒有更新";
+"update.title_error" = "錯誤";
+"update.update_found" = "檢測到更新。由於 IINA 仍處於 Alpha 測試中，我們建議您保持最新版本。請去網站或者 Github 下載：";
+"update.no_update" = "您正在運行的是最新版本。";
+"update.check_failed" = "檢查更新失敗。你的 IINA 版本很可能過於陳舊，請去網站或者 Github 查看最新信息：";
+"update.new_version" = "新版本：";
+"update.dl_from_website" = "前往網站";
+"update.dl_from_github" = "前往 Github";
+
+"preference.title" = "偏好設定";
+"preference.general" = "通用";
+"preference.ui" = "UI";
+"preference.codec" = "解碼";
+"preference.subtitle" = "字幕";
+"preference.network" = "網路";
+"preference.control" = "控制";
+"preference.keybindings" = "快速鍵";
+"preference.advanced" = "進階";
+"preference.scripts" = "腳本";
+
+"menu.volume"= "音量: %d";
+"menu.audio_delay" = "音訊延遲 卜木: %.2f秒";
+"menu.sub_delay" = "字幕延遲: %.2f秒";
+"menu.fullscreen" = "進入全熒幕";
+"menu.exit_fullscreen" = "離開全熒幕";
+"menu.pause" = "暫停";
+"menu.resume" = "繼續";
+
+"track.none" = "<無>";
+
+"alert.extra_option_error" = "無法設定選項 --%@=%@ （返回值 %d）。 請在「設置>高級」中檢查你的額外 mpv 選項。";

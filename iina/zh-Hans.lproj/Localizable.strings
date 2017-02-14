@@ -15,7 +15,7 @@
 "playlist.chapter_cap" = "章节";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "缓冲中... %@%%";
+"main.buffering_indicator" = "缓冲中... %d%%";
 
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "默认";
@@ -36,7 +36,7 @@
 "osd.sub_delay.nodelay" = "字幕延迟：无延迟";
 "osd.sub_delay.later" = "字幕延迟：延迟 %.2f 秒";
 "osd.sub_delay.earlier" = "字幕延迟：提前 %.2f 秒";
-"osd.subtitle_pos" = "字幕位置：%f";
+"osd.subtitle_pos" = "字幕位置：%.1f";
 "osd.mute" = "静音";
 "osd.unmute" = "取消静音";
 "osd.screenshot" = "快照已截取";
@@ -53,6 +53,12 @@
 "osd.video_eq.hue" = "色调：%i";
 "osd.video_eq.saturation" = "饱和度：%i";
 "osd.video_eq.brightness" = "亮度：%i";
+"osd.find_online_sub" = "查找在线字幕中...";
+"osd.sub_not_found" = "未找到字幕";
+"osd.sub_found" = "已找到 %d 个字幕。下载中...";
+"osd.sub_downloaded" = "字幕已下载";
+"osd.sub_saved" = "字幕已保存";
+"osd.network_error" = "网络错误";
 
 "update.title_update_found" = "检测到新版本";
 "update.title_no_update" = "没有新版本";
@@ -78,11 +84,27 @@
 "menu.volume"= "音量: %d";
 "menu.audio_delay" = "音频延迟: %.2f秒";
 "menu.sub_delay" = "字幕延迟: %.2f秒";
-"menu.fullscreen" = "全屏";
+"menu.fullscreen" = "进入全屏";
 "menu.exit_fullscreen" = "离开全屏";
+"menu.pip" = "进入「画中画」";
+"menu.exit_pip" = "离开「画中画」";
 "menu.pause" = "暂停";
 "menu.resume" = "继续";
 
 "track.none" = "<无>";
 
 "alert.extra_option_error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";
+"alert.keybinding_config_error" = "无法设置快捷键「%@」！退回到IINA默认配置。请检查你的快捷键文件是否正确。";
+
+
+"pl_menu.title_multi" = "%d 个项目";
+"pl_menu.play_next" = "接下来播放";
+"pl_menu.remove" = "移除";
+"pl_menu.remove_multi" = "移除选中项";
+"pl_menu.delete" = "移到垃圾桶";
+"pl_menu.delete_multi" = "将选中项移到垃圾桶";
+"pl_menu.delete_after_play" = "播放后移到垃圾桶";
+"pl_menu.delete_after_play_multi" = "播放后将选中项移到垃圾桶";
+"pl_menu.reveal_in_finder" = "在 Finder 中显示";
+"pl_menu.add_item" = "添加项目…";
+"pl_menu.clear_playlist" = "清除播放列表";

@@ -1,0 +1,258 @@
+/* Error setting extra mpv option */
+"alert.extra_option_error" = "--%@=%@ 설정에서 %d 오류가 발생했습니다. 환경설정 > 고급설정으로 이동하여 사용자가 지정한 추가 설정 사항을 점검하십시오.";
+
+/* Error setting keybinding configuration */
+"alert.keybinding_config_error" = "단축키 설정 파일 \"%@\"를 읽어올 때 오류가 발생했습니다! IINA 기본값을 사용하도록 설정됩니다. 사용자가 지정한 단축키 설정 내용을 점검하십시오.";
+
+/* Buffering... %s%% */
+"main.buffering_indicator" = "준비중… %d%%";
+
+/* Audio Delay: */
+"menu.audio_delay" = "오디오 지연: %.2f초";
+
+/* Exit Fullscreen */
+"menu.exit_fullscreen" = "전체화면에서 나가기";
+
+/* Exit Picture-in-Picture */
+"menu.exit_pip" = "화면 속 화면에서 나가기";
+
+/* Fullscreen */
+"menu.fullscreen" = "전체화면";
+
+/* Pause */
+"menu.pause" = "일시 정지";
+
+/* Enter Picture-in-Picture */
+"menu.pip" = "화면 속 화면으로 가기";
+
+/* Resume */
+"menu.resume" = "재생";
+
+/* Subtitle Delay: */
+"menu.sub_delay" = "자막 지연: %.2f초";
+
+/* Volume: */
+"menu.volume" = "음량: %d";
+
+/* Off */
+"off" = "끄기";
+
+/* On */
+"on" = "켜기";
+
+/* AB-Loop: A */
+"osd.abloop.a" = "구간 반복: 시작 위치";
+
+/* AB-Loop: B */
+"osd.abloop.b" = "구간 반복: 마침 위치";
+
+/* AB-Loop: Cleared */
+"osd.abloop.clear" = "구간 반복: 해제됨";
+
+/* Added %i Files to Playlist */
+"osd.add_to_playlist" = "%i 파일이 재생목록에 추가되었습니다";
+
+/* Aspect Ratio: %@ */
+"osd.aspect" = "화면비: %@";
+
+/* Audio Delay: %fs Earlier */
+"osd.audio_delay.earlier" = "오디오 지연: %.2f초 빠르게";
+
+/* Audio Delay: %fs Later */
+"osd.audio_delay.later" = "오디오 지연: %.2f초 늦게";
+
+/* Audio Delay: No Delay */
+"osd.audio_delay.nodelay" = "오디오 지연: 없음";
+
+/* Chapter: %@ */
+"osd.chapter" = "챕터: %@";
+
+/* Cleared Playlist */
+"osd.clear_playlist" = "재생목록 비움";
+
+/* Crop: %@ */
+"osd.crop" = "화면 자르기: %@";
+
+/* Deinterlace: %@ */
+"osd.deinterlace" = "디인터레이스: %@";
+
+/* Finding online subtitles... */
+"osd.find_online_sub" = "인터넷에서 자막을 찾는 중…";
+
+/* Mute */
+"osd.mute" = "소리 끔";
+
+/* Network error */
+"osd.network_error" = "네트워크 오류";
+
+/* Pause */
+"osd.pause" = "일시 정지됨";
+
+/* Resume */
+"osd.resume" = "재생 복원됨";
+
+/* Rotate: %i° */
+"osd.rotate" = "회전: %i°";
+
+/* Screenshot Captured */
+"osd.screenshot" = "스크린샷 저장됨";
+
+/* Speed: %.2fx */
+"osd.speed" = "재생 속도: %.2f배속";
+
+/* Stop */
+"osd.stop" = "정지됨";
+
+/* Subtitle Delay: %fs Earlier */
+"osd.sub_delay.earlier" = "자막 지연: %.2f초 빠르게";
+
+/* Subtitle Delay: %fs Later */
+"osd.sub_delay.later" = "자막 지연: %.2f초 늦게";
+
+/* Subtitle Delay: No Delay */
+"osd.sub_delay.nodelay" = "자막 지연: 없음";
+
+/* Subtitle downloaded */
+"osd.sub_downloaded" = "자막 다운로드됨";
+
+/* %d subtitle(s) found. Downloading... */
+"osd.sub_found" = "%d 자막을 찾았습니다. 내려받는 중…";
+
+/* No subtitle found. */
+"osd.sub_not_found" = "자막을 찾지 못했습니다";
+
+/* Subtitle saved */
+"osd.sub_saved" = "자막 저장됨";
+
+/* Subtitle Position: %f */
+"osd.subtitle_pos" = "자막 위치: %.1f";
+
+/* Subtitle Scale: %.2fx */
+"osd.subtitle_scale" = "자막 크기: %.2f배";
+
+/* Unmute */
+"osd.unmute" = "소리 켜짐";
+
+/* Brightness: %i */
+"osd.video_eq.brightness" = "밝기: %i";
+
+/* Contrast: %i */
+"osd.video_eq.contrast" = "대비: %i";
+
+/* Grama: %i */
+"osd.video_eq.gamma" = "감마: %i";
+
+/* Hue: %i */
+"osd.video_eq.hue" = "색조: %i";
+
+/* Saturation: %i */
+"osd.video_eq.saturation" = "채도: %i";
+
+/* Volume: %i */
+"osd.volume" = "음량: %i";
+
+/* Add Item */
+"pl_menu.add_item" = "항목 추가…";
+
+/* Clear Playlist */
+"pl_menu.clear_playlist" = "재생목록 지움";
+
+/* (No Commment) */
+"pl_menu.delete" = "휴지통으로 이동";
+
+/* (No Commment) */
+"pl_menu.delete_after_play" = "재생 후 휴지통으로 이동";
+
+/* (No Commment) */
+"pl_menu.delete_after_play_multi" = "선택항목 재생 후 휴지통으로 이동";
+
+/* (No Commment) */
+"pl_menu.delete_multi" = "선택한 파일을 휴지통으로 이동";
+
+/* Play Next */
+"pl_menu.play_next" = "다음 항목 재생";
+
+/* (No Commment) */
+"pl_menu.remove" = "제거";
+
+/* (No Commment) */
+"pl_menu.remove_multi" = "선택 항목 제거";
+
+/* Reveal in Finder */
+"pl_menu.reveal_in_finder" = "파인더에서 보기";
+
+/* %d Items */
+"pl_menu.title_multi" = "%d개의 항목";
+
+/* CHAPTERS */
+"playlist.chapter_cap" = "챕터";
+
+/* PLAYLIST */
+"playlist.playlist_cap" = "재생목록";
+
+/* Advanced */
+"preference.advanced" = "고급설정";
+
+/* Codec */
+"preference.codec" = "코덱";
+
+/* Control */
+"preference.control" = "마우스";
+
+/* General */
+"preference.general" = "일반";
+
+/* Keybindings */
+"preference.keybindings" = "단축키";
+
+/* Network */
+"preference.network" = "네트워크";
+
+/* (No Commment) */
+"preference.scripts" = "스크립트";
+
+/* Subtitles */
+"preference.subtitle" = "자막";
+
+/* Preference */
+"preference.title" = "환경설정";
+
+/* UI */
+"preference.ui" = "화면";
+
+/* (No Commment) */
+"quicksetting.aspect_item.Default" = "기본값";
+
+/* (No Commment) */
+"quicksetting.crop_item.None" = "없음";
+
+/* <None> */
+"track.none" = "<없음>";
+
+/* Error */
+"update.check_failed" = "업데이트를 확인하지 못했습니다. 너무 오래된 버전을 사용하고 있는 것 같습니다. 웹사이트 또는 Github에서 배포본을 확인해 주십시오.";
+
+/* Github */
+"update.dl_from_github" = "Github으로 가기";
+
+/* Website */
+"update.dl_from_website" = "웹사이트로 가기";
+
+/* (No Commment) */
+"update.new_version" = "새로운 버전:";
+
+/* No update */
+"update.no_update" = "최신 버전을 사용중입니다.";
+
+/* Title */
+"update.title_error" = "오류";
+
+/* Title */
+"update.title_no_update" = "업데이트가 없습니다";
+
+/* Title */
+"update.title_update_found" = "업데이트를 찾았습니다";
+
+/* Update found */
+"update.update_found" = "새로운 버전이 있습니다. IINA는 아직 알파 단계이므로 최신버전으로 갱신하는 것이 좋습니다. 웹사이트나 Github에서 다운로드 하십시오:";
+

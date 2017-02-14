@@ -52,6 +52,9 @@ struct Preference {
     static let screenshotFormat = "screenShotFormat"
     static let screenshotTemplate = "screenShotTemplate"
 
+    static let playlistAutoAdd = "playlistAutoAdd"
+    static let playlistAutoPlayNext = "playlistAutoPlayNext"
+
     // UI
 
     /** Horizontal positon of control bar. (float, 0 - 1) */
@@ -88,17 +91,25 @@ struct Preference {
     static let audioThreads = "audioThreads"
 
     static let audioLanguage = "audioLanguage"
+    static let maxVolume = "maxVolume"
+
+    static let spdifAC3 = "spdifAC3"
+    static let spdifDTS = "spdifDTS"
+    static let spdifDTSHD = "spdifDTSHD"
 
     // Subtitle
 
     static let subAutoLoad = "subAutoLoad"
     static let ignoreAssStyles = "ignoreAssStyles"
+    static let subOverrideLevel = "subOverrideLevel"
     static let subTextFont = "subTextFont"
     static let subTextSize = "subTextSize"
     static let subTextColor = "subTextColor"
     static let subBgColor = "subBgColor"
     static let subBold = "subBold"
     static let subItalic = "subItalic"
+    static let subBlur = "subBlur"
+    static let subSpacing = "subSpacing"
     static let subBorderSize = "subBorderSize"
     static let subBorderColor = "subBorderColor"
     static let subShadowSize = "subShadowSize"
@@ -107,8 +118,11 @@ struct Preference {
     static let subAlignY = "subAlignY"
     static let subMarginX = "subMarginX"
     static let subMarginY = "subMarginY"
+    static let subPos = "subPos"
     static let subLang = "subLang"
     static let onlineSubSource = "onlineSubSource"
+    static let displayInLetterBox = "displayInLetterBox"
+    static let subScaleWithWindow = "subScaleWithWindow"
 
     // Network
 
@@ -118,6 +132,8 @@ struct Preference {
     static let secPrefech = "secPrefech"
     static let userAgent = "userAgent"
     static let transportRTSPThrough = "transportRTSPThrough"
+    static let ytdlEnabled = "ytdlEnabled"
+    static let ytdlRawOptions = "ytdlRawOptions"
 
     // Control
 
@@ -133,6 +149,8 @@ struct Preference {
 
     static let doubleClickAction = "doubleClickAction"
     static let rightClickAction = "rightClickAction"
+
+    static let showRemainingTime = "showRemainingTime"
 
     // Input
 
@@ -209,6 +227,22 @@ struct Preference {
         case .exact: return "exact"
         case .fuzzy: return "fuzzy"
         case .all: return "all"
+        }
+      }
+    }
+  }
+
+  enum SubOverrideLevel: Int {
+    case yes = 0
+    case force
+    case strip
+
+    var string: String {
+      get {
+        switch self {
+        case .yes: return "yes"
+        case .force : return "force"
+        case .strip: return "strip"
         }
       }
     }
@@ -303,22 +337,33 @@ struct Preference {
     Key.openStartPanel: false,
     Key.alwaysFloatOnTop: false,
 
+    Key.playlistAutoAdd: true,
+    Key.playlistAutoPlayNext: true,
+
     Key.usePhysicalResolution: true,
     Key.resizeOnlyWhenManuallyOpenFile: true,
+    Key.showRemainingTime: false,
 
     Key.videoThreads: 0,
     Key.useHardwareDecoding: true,
     Key.audioThreads: 0,
     Key.audioLanguage: "",
+    Key.maxVolume: 130,
+    Key.spdifAC3: false,
+    Key.spdifDTS: false,
+    Key.spdifDTSHD: false,
 
     Key.subAutoLoad: AutoLoadAction.fuzzy.rawValue,
     Key.ignoreAssStyles: false,
+    Key.subOverrideLevel: SubOverrideLevel.strip.rawValue,
     Key.subTextFont: "sans-serif",
     Key.subTextSize: 55,
     Key.subTextColor: NSArchiver.archivedData(withRootObject: NSColor.white),
     Key.subBgColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
     Key.subBold: false,
     Key.subItalic: false,
+    Key.subBlur: 0,
+    Key.subSpacing: 0,
     Key.subBorderSize: 3,
     Key.subBorderColor: NSArchiver.archivedData(withRootObject: NSColor.black),
     Key.subShadowSize: 0,
@@ -327,15 +372,20 @@ struct Preference {
     Key.subAlignY: SubAlign.bottom.rawValue,
     Key.subMarginX: 25,
     Key.subMarginY: 22,
+    Key.subPos: 100,
     Key.subLang: "",
     Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
+    Key.displayInLetterBox: true,
+    Key.subScaleWithWindow: true,
 
     Key.enableCache: true,
-    Key.defaultCacheSize: 75000,
-    Key.cacheBufferSize: 75000,
+    Key.defaultCacheSize: 153600,
+    Key.cacheBufferSize: 153600,
     Key.secPrefech: 100,
     Key.userAgent: "",
     Key.transportRTSPThrough: RTSPTransportation.tcp.rawValue,
+    Key.ytdlEnabled: true,
+    Key.ytdlRawOptions: "",
 
     Key.inputConfigs: [:],
     Key.currentInputConfigName: "IINA Default",

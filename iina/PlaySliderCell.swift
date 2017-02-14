@@ -25,18 +25,21 @@ class PlaySliderCell: NSSliderCell {
   static let darkBarColorRight = NSColor(white: 1, alpha: 0.1)
   static let lightBarColorLeft = NSColor(red: 0.239, green: 0.569, blue: 0.969, alpha: 1)
   static let lightBarColorRight = NSColor(white: 0.5, alpha: 0.5)
+  static let lightChapterStrokeColor = NSColor(white: 0.4, alpha: 1)
+  static let darkChapterStrokeColor = NSColor(white: 0.2, alpha: 1)
 
   var isInDarkTheme: Bool = true {
     didSet {
       self.knobColor = isInDarkTheme ? PlaySliderCell.darkColor : PlaySliderCell.lightColor
       self.barColorLeft = isInDarkTheme ? PlaySliderCell.darkBarColorLeft : PlaySliderCell.lightBarColorLeft
       self.barColorRight = isInDarkTheme ? PlaySliderCell.darkBarColorRight : PlaySliderCell.lightBarColorRight
+      self.chapterStrokeColor = isInDarkTheme ? PlaySliderCell.darkChapterStrokeColor : PlaySliderCell.lightChapterStrokeColor
     }
   }
   private var knobColor: NSColor = PlaySliderCell.darkColor
   private var barColorLeft: NSColor = PlaySliderCell.darkBarColorLeft
   private var barColorRight: NSColor = PlaySliderCell.darkBarColorRight
-  private var chapterStrokeColor: NSColor = NSColor(white: 0, alpha: 0.8)
+  private var chapterStrokeColor: NSColor = PlaySliderCell.darkChapterStrokeColor
 
   var drawChapters = UserDefaults.standard.bool(forKey: Preference.Key.showChapterPos)
 

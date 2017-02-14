@@ -40,16 +40,17 @@ enum OSDMessage {
   case startFindingSub
   case foundSub(Int)
   case downloadedSub
+  case savedSub
   case networkError
 
 
   func message() -> String {
     switch self {
     case .pause:
-      return NSLocalizedString("osd.pause", comment: "Paused")
+      return NSLocalizedString("osd.pause", comment: "Pause")
 
     case .resume:
-      return NSLocalizedString("osd.resume", comment: "Resumed")
+      return NSLocalizedString("osd.resume", comment: "Resume")
 
     case .volume(let value):
       return String(format: NSLocalizedString("osd.volume", comment: "Volume: %i"), value)
@@ -93,7 +94,7 @@ enum OSDMessage {
       return NSLocalizedString("osd.unmute", comment: "Unmute")
 
     case .screenShot:
-      return NSLocalizedString("osd.screenshot", comment: "Screenshot captured")
+      return NSLocalizedString("osd.screenshot", comment: "Screenshot Captured")
 
     case .abLoop(let value):
       if value == 1 {
@@ -105,7 +106,7 @@ enum OSDMessage {
       }
 
     case .stop:
-      return NSLocalizedString("osd.stop", comment: "Stopped")
+      return NSLocalizedString("osd.stop", comment: "Stop")
 
     case .chapter(let name):
       return String(format: NSLocalizedString("osd.chapter", comment: "Chapter: %@"), name)
@@ -114,10 +115,10 @@ enum OSDMessage {
       return String(format: NSLocalizedString("osd.subtitle_scale", comment: "Subtitle Scale: %.2fx"), value)
 
     case .addToPlaylist(let count):
-      return String(format: NSLocalizedString("osd.add_to_playlist", comment: "Added %i files to playlist"), count)
+      return String(format: NSLocalizedString("osd.add_to_playlist", comment: "Added %i Files to Playlist"), count)
 
     case .clearPlaylist:
-      return NSLocalizedString("osd.clear_playlist", comment: "Cleared playlist")
+      return NSLocalizedString("osd.clear_playlist", comment: "Cleared Playlist")
 
     case .contrast(let value):
       return String(format: NSLocalizedString("osd.video_eq.contrast", comment: "Contrast: %i"), value)
@@ -135,16 +136,21 @@ enum OSDMessage {
       return String(format: NSLocalizedString("osd.video_eq.brightness", comment: "Brightness: %i"), value)
 
     case .startFindingSub:
-      return "Find online subtitles..."
+      return NSLocalizedString("osd.find_online_sub", comment: "Finding online subtitles...")
 
     case .foundSub(let count):
-      return count == 0 ? "No subtitle found." : "\(count) subtitle(s) found. Downloading..."
+      return count == 0 ?
+        NSLocalizedString("osd.sub_not_found", comment: "No subtitle found.") :
+        String(format: NSLocalizedString("osd.sub_found", comment: "%d subtitle(s) found. Downloading..."), count)
 
     case .downloadedSub:
-      return "Subtitle downloaded"
+      return NSLocalizedString("osd.sub_downloaded", comment: "Subtitle downloaded")
+
+    case .savedSub:
+      return NSLocalizedString("osd.sub_saved", comment: "Subtitle saved")
 
     case .networkError:
-      return "Network error"
+      return NSLocalizedString("osd.network_error", comment: "Network error")
 
     }
   }

@@ -19,10 +19,6 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Puffern … %d%%";
 
-// QuickSettingViewController.swift
-"quicksetting.aspect_item.Default" = "Standard";
-"quicksetting.crop_item.None" = "Kein";
-
 // OSDMessage.swift
 "osd.pause" = "Pause";
 "osd.resume" = "Wiedergabe";
@@ -42,9 +38,9 @@
 "osd.mute" = "Stumm";
 "osd.unmute" = "Stumm aus";
 "osd.screenshot" = "Bild aufgenommen";
-"osd.abloop.a" = "AB-Wiederholung: A";
-"osd.abloop.b" = "AB-Wiederholung: B";
-"osd.abloop.clear" = "AB-Wiederholung: Aus";
+"osd.abloop.a" = "A-B-Schleife: A";
+"osd.abloop.b" = "A-B-Schleife: B";
+"osd.abloop.clear" = "AB-Schleife: Aus";
 "osd.stop" = "Stopp";
 "osd.chapter" = "Kapitel: %@";
 "osd.subtitle_scale" = "Untertitel-Skalierung: %.2fx";
@@ -88,6 +84,8 @@
 "menu.sub_delay" = "Untertitel-Verzögerung: %.2fs";
 "menu.fullscreen" = "Vollbildmodus";
 "menu.exit_fullscreen" = "Vollbildmodus aus";
+"menu.pip" = "Bild-in-Bild öffnen";
+"menu.exit_pip" = "Bild-in-Bild schließen";
 "menu.pause" = "Pausieren";
 "menu.resume" = "Fortsetzen";
 "menu.aspect" = "Standard";
@@ -102,3 +100,16 @@
 "track.none" = "<Leer>";
 
 "alert.extra_option_error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.keybinding_config_error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+
+"pl_menu.title_multi" = "%d Objekte";
+"pl_menu.play_next" = "Als nächstes abspielen";
+"pl_menu.remove" = "Entfernen";
+"pl_menu.remove_multi" = "Entfernen";
+"pl_menu.delete" = "In den Papierkorb legen";
+"pl_menu.delete_multi" = "In den Papierkorb legen";
+"pl_menu.delete_after_play" = "Nach Wiedergabe in den Papierkorb legen";
+"pl_menu.delete_after_play_multi" = "Nach Wiedergabe in den Papierkorb legen";
+"pl_menu.reveal_in_finder" = "Im Finder anzeigen";
+"pl_menu.add_item" = "Hinzufügen …";
+"pl_menu.clear_playlist" = "Wiedergabeliste leeren";

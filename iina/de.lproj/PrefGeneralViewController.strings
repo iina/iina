@@ -20,6 +20,12 @@
 /* Class = "NSButtonCell"; title = "Remember recently opened files"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "Zuletzt geöffnete Dateien merken";
 
+/* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
+"6TV-DG-503.title" = "Wiedergabeliste:";
+
+/* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
+"8kU-8g-VgX.title" = "IINA muss hierfür neu gestartet werden.";
+
 /* Class = "NSMenuItem"; title = "PGM"; ObjectID = "A5p-u9-lqJ"; */
 "A5p-u9-lqJ.title" = "PGM";
 
@@ -32,11 +38,17 @@
 /* Class = "NSMenuItem"; title = "PGM (YV12)"; ObjectID = "Kru-Ho-Wpv"; */
 "Kru-Ho-Wpv.title" = "PGM (YV12)";
 
+/* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
+"Lac-Ol-g6E.title" = "Nächstes Objekt automatisch abspielen";
+
 /* Class = "NSButtonCell"; title = "Enter fullscreen when media is opened"; ObjectID = "MlG-hl-goA"; */
 "MlG-hl-goA.title" = "Datei im Vollbildmodus öffnen";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
+
+/* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
+"QJq-fO-hhK.title" = "Dateien im gleichen Ordner automatisch hinzufügen";
 
 /* Class = "NSButtonCell"; title = "Quit when no window is opened"; ObjectID = "YLo-6E-tT7"; */
 "YLo-6E-tT7.title" = "Beenden, wenn keine Fenster mehr geöffnet sind";

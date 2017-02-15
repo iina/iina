@@ -14,7 +14,7 @@ class PlayerCore: NSObject {
 
   unowned let ud: UserDefaults = UserDefaults.standard
 
-  lazy var mainWindow: MainWindowController = MainWindowController()
+  var mainWindow: MainWindowController?
   lazy var mpvController: MPVController = MPVController()
 
   let supportedSubtitleFormat: [String] = ["utf", "utf8", "utf-8", "idx", "sub", "srt",
@@ -29,8 +29,6 @@ class PlayerCore: NSObject {
 
   var isMpvTerminated: Bool = false
 
-  var isWindowShown: Bool = false
-
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
@@ -42,33 +40,27 @@ class PlayerCore: NSObject {
 
   // Open a file
   func openFile(_ url: URL?) {
-    let path = url?.path
-    guard path != nil else {
+    guard let path = url?.path else {
       Utility.log("Error: empty file path or url")
       return
     }
-    // Utility.log("Open File \(path!)")
-    info.isPaused = false
-    info.currentURL = url!
-    info.isNetworkResource = false
-    mainWindow.showWindow(nil)
-    mainWindow.windowDidOpen()
-    isWindowShown = true
-    // Send load file command
-    info.fileLoading = true
-    mpvController.command(.loadfile, args: [path])
+    openMainWindow(path: path, url: url!, isNetwork: false)
   }
 
   func openURLString(_ str: String) {
+    openMainWindow(path: str, url: URL(string: str)!, isNetwork: true)
+  }
+
+  private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
     info.isPaused = false
-    info.currentURL = URL(string: str)
-    info.isNetworkResource = true
-    mainWindow.showWindow(nil)
-    mainWindow.windowDidOpen()
-    isWindowShown = true
+    info.currentURL = url
+    info.isNetworkResource = isNetwork
+    mainWindow = MainWindowController()
+    mainWindow!.showWindow(nil)
+    mainWindow!.windowDidOpen()
     // Send load file command
     info.fileLoading = true
-    mpvController.command(.loadfile, args: [str])
+    mpvController.command(.loadfile, args: [path])
   }
 
   func startMPV() {
@@ -87,10 +79,8 @@ class PlayerCore: NSObject {
 
   // unload main window video view
   func unloadMainWindowVideoView() {
-    if mainWindow.isWindowLoaded {
-      mainWindow.videoView.uninit()
-      // mainWindow.videoView.clearGLContext()
-    }
+    guard let mw = mainWindow, mw.isWindowLoaded else { return }
+    mw.videoView.uninit()
   }
 
   // Terminate mpv
@@ -535,6 +525,10 @@ class PlayerCore: NSObject {
 
   /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
+    guard let mw = mainWindow else {
+      Utility.fatal("Window is nil at fileLoaded")
+      return
+    }
     guard let vwidth = info.videoWidth, let vheight = info.videoHeight else {
       Utility.fatal("Cannot get video width and height")
       return
@@ -550,15 +544,15 @@ class PlayerCore: NSObject {
       self.getChapters()
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
-      mainWindow.updateTitle()
+      mw.updateTitle()
       if #available(OSX 10.12.2, *) {
-        mainWindow.setupTouchBarUI()
+        mw.setupTouchBarUI()
       }
-      mainWindow.adjustFrameByVideoSize(vwidth, vheight)
+      mw.adjustFrameByVideoSize(vwidth, vheight)
       // whether enter full screen
       if needEnterFullScreenForNextMedia {
-        if ud.bool(forKey: Preference.Key.fullScreenWhenOpen) && !mainWindow.isInFullScreen {
-          mainWindow.toggleWindowFullScreen()
+        if ud.bool(forKey: Preference.Key.fullScreenWhenOpen) && !mw.isInFullScreen {
+          mw.toggleWindowFullScreen()
         }
         // only enter fullscreen for first file
         needEnterFullScreenForNextMedia = false
@@ -567,13 +561,14 @@ class PlayerCore: NSObject {
   }
 
   func notifyMainWindowVideoSizeChanged() {
+    guard let mw = mainWindow else { return }
     guard let dwidth = info.displayWidth, let dheight = info.displayHeight else {
       Utility.fatal("Cannot get video width and height")
       return
     }
     if dwidth != 0 && dheight != 0 {
       DispatchQueue.main.sync {
-        mainWindow.adjustFrameByVideoSize(dwidth, dheight)
+        mw.adjustFrameByVideoSize(dwidth, dheight)
       }
     }
   }
@@ -601,14 +596,14 @@ class PlayerCore: NSObject {
 
   func syncUI(_ option: SyncUIOption) {
     // if window not loaded, ignore
-    guard mainWindow.isWindowLoaded else { return }
+    guard let mw = mainWindow, mw.isWindowLoaded else { return }
 
     switch option {
     case .time:
       let time = mpvController.getDouble(MPVProperty.timePos)
       info.videoPosition = VideoTime(time)
       DispatchQueue.main.async {
-        self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
+        mw.updatePlayTime(withDuration: false, andProgressBar: true)
       }
 
     case .timeAndCache:
@@ -621,40 +616,40 @@ class PlayerCore: NSObject {
       info.cacheTime = mpvController.getInt(MPVProperty.demuxerCacheTime)
       info.bufferingState = mpvController.getInt(MPVProperty.cacheBufferingState)
       DispatchQueue.main.async {
-        self.mainWindow.updatePlayTime(withDuration: true, andProgressBar: true)
-        self.mainWindow.updateNetworkState()
+        mw.updatePlayTime(withDuration: true, andProgressBar: true)
+        mw.updateNetworkState()
       }
 
     case .playButton:
       let pause = mpvController.getFlag(MPVOption.PlaybackControl.pause)
       info.isPaused = pause
       DispatchQueue.main.async {
-        self.mainWindow.updatePlayButtonState(pause ? NSOffState : NSOnState)
+        mw.updatePlayButtonState(pause ? NSOffState : NSOnState)
       }
 
     case .volume:
       DispatchQueue.main.async {
-        self.mainWindow.updateVolume()
+        mw.updateVolume()
       }
 
     case .muteButton:
       let mute = mpvController.getFlag(MPVOption.Audio.mute)
       DispatchQueue.main.async {
-        self.mainWindow.muteButton.state = mute ? NSOnState : NSOffState
+        mw.muteButton.state = mute ? NSOnState : NSOffState
       }
 
     case .chapterList:
       DispatchQueue.main.async {
         // this should avoid sending reload when table view is not ready
-        if self.mainWindow.sideBarStatus == .playlist {
-          self.mainWindow.playlistView.chapterTableView.reloadData()
+        if mw.sideBarStatus == .playlist {
+          mw.playlistView.chapterTableView.reloadData()
         }
       }
 
     case .playlist:
       DispatchQueue.main.async {
-        if self.mainWindow.sideBarStatus == .playlist {
-          self.mainWindow.playlistView.playlistTableView.reloadData()
+        if mw.sideBarStatus == .playlist {
+          mw.playlistView.playlistTableView.reloadData()
         }
       }
     }
@@ -662,25 +657,23 @@ class PlayerCore: NSObject {
 
   func sendOSD(_ osd: OSDMessage) {
     // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
-    guard isWindowShown else { return }
-    // if window not loaded, ignore
-    guard mainWindow.isWindowLoaded else { return }
+    guard let mw = mainWindow, mw.isWindowLoaded else { return }
 
     DispatchQueue.main.async {
-      self.mainWindow.displayOSD(osd)
+      mw.displayOSD(osd)
     }
   }
 
   func errorOpeningFileAndCloseMainWindow() {
     DispatchQueue.main.async {
       Utility.showAlert(message: "Cannot open file or stream!")
-      self.mainWindow.close()
+      self.mainWindow?.close()
     }
   }
 
   func closeMainWindow() {
     DispatchQueue.main.async {
-      self.mainWindow.close()
+      self.mainWindow?.close()
     }
   }
 

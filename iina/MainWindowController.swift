@@ -1059,7 +1059,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if playerCore.info.isNetworkResource {
       bufferIndicatorView.isHidden = false
       bufferSpin.startAnimation(nil)
-      bufferProgressLabel.stringValue = "Opening stream..."
+      bufferProgressLabel.stringValue = "Opening stream…"
       bufferDetailLabel.stringValue = ""
     } else {
       bufferIndicatorView.isHidden = true
@@ -1194,7 +1194,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let speedStr = FileSize.format(playerCore.info.cacheSpeed, unit: .b)
       let bufferingState = playerCore.info.bufferingState
       bufferIndicatorView.isHidden = false
-      bufferProgressLabel.stringValue = String(format: NSLocalizedString("main.buffering_indicator", comment:"Buffering... %s%%"), bufferingState)
+      bufferProgressLabel.stringValue = String(format: NSLocalizedString("main.buffering_indicator", comment:"Buffering… %s%%"), bufferingState)
       bufferDetailLabel.stringValue = "\(usedStr)/\(sizeStr) (\(speedStr)/s)"
     } else {
       bufferIndicatorView.isHidden = true

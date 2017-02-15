@@ -15,7 +15,7 @@
 "playlist.chapter_cap" = "KAPITEL";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffern... %d%%";
+"main.buffering_indicator" = "Buffern… %d%%";
 
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "Standard";
@@ -53,9 +53,9 @@
 "osd.video_eq.hue" = "Farbton: %i";
 "osd.video_eq.saturation" = "Sättigung: %i";
 "osd.video_eq.brightness" = "Helligkeit: %i";
-"osd.find_online_sub" = "Online nach Untertiteln suchen...";
+"osd.find_online_sub" = "Online nach Untertiteln suchen…";
 "osd.sub_not_found" = "Keine Untertitel gefunden";
-"osd.sub_found" = "%d Untertitel gefunden. Laden...";
+"osd.sub_found" = "%d Untertitel gefunden. Laden…";
 "osd.sub_downloaded" = "Untertitel geladen";
 "osd.sub_saved" = "Untertitel gespeichert";
 "osd.network_error" = "Netzwerkfehler";

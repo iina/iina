@@ -140,6 +140,7 @@ class MPVController: NSObject {
 
     chkErr(mpv_set_option_string(mpv, "watch-later-directory", Utility.watchLaterURL.path))
     setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.ProgramBehavior.savePositionOnQuit)
+    setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback")
 
     // - Codec
 
@@ -164,10 +165,14 @@ class MPVController: NSObject {
       return Preference.AutoLoadAction(rawValue: v)?.string
     }
 
-    setUserOption(PK.ignoreAssStyles, type: .other, forName: MPVOption.Subtitles.subAssStyleOverride) { key in
-      let v = UserDefaults.standard.bool(forKey: key)
-      return v ? "force" : "yes"
+    let subOverrideHandler: OptionObserverInfo.Transformer = { key in
+      let v = UserDefaults.standard.bool(forKey: PK.ignoreAssStyles)
+      let level = Preference.SubOverrideLevel(rawValue: UserDefaults.standard.integer(forKey: PK.subOverrideLevel))
+      return v ? level?.string : "yes"
     }
+
+    setUserOption(PK.ignoreAssStyles, type: .other, forName: MPVOption.Subtitles.subAssStyleOverride, transformer: subOverrideHandler)
+    setUserOption(PK.subOverrideLevel, type: .other, forName: MPVOption.Subtitles.subAssStyleOverride, transformer: subOverrideHandler)
 
     setUserOption(PK.subTextFont, type: .string, forName: MPVOption.Subtitles.subFont)
     setUserOption(PK.subTextSize, type: .int, forName: MPVOption.Subtitles.subFontSize)
@@ -177,6 +182,9 @@ class MPVController: NSObject {
 
     setUserOption(PK.subBold, type: .bool, forName: MPVOption.Subtitles.subBold)
     setUserOption(PK.subItalic, type: .bool, forName: MPVOption.Subtitles.subItalic)
+
+    setUserOption(PK.subBlur, type: .float, forName: MPVOption.Subtitles.subBlur)
+    setUserOption(PK.subSpacing, type: .float, forName: MPVOption.Subtitles.subSpacing)
 
     setUserOption(PK.subBorderSize, type: .int, forName: MPVOption.Subtitles.subBorderSize)
     setUserOption(PK.subBorderColor, type: .color, forName: MPVOption.Subtitles.subBorderColor)
@@ -196,6 +204,8 @@ class MPVController: NSObject {
 
     setUserOption(PK.subMarginX, type: .int, forName: MPVOption.Subtitles.subMarginX)
     setUserOption(PK.subMarginY, type: .int, forName: MPVOption.Subtitles.subMarginY)
+
+    setUserOption(PK.subPos, type: .int, forName: MPVOption.Subtitles.subPos)
 
     setUserOption(PK.subLang, type: .string, forName: MPVOption.TrackSelection.slang)
 
@@ -255,6 +265,7 @@ class MPVController: NSObject {
 
     // Set options that can be override by user's config.
     chkErr(mpv_set_option_string(mpv, MPVOption.Video.vo, "opengl-cb"))
+    chkErr(mpv_set_option_string(mpv, MPVOption.Window.keepaspect, "no"))
     chkErr(mpv_set_option_string(mpv, MPVOption.Video.hwdecPreload, "auto"))
 
     // Load external scripts
@@ -309,7 +320,7 @@ class MPVController: NSObject {
     command(.quit)
   }
 
-  // MARK: Command & property
+  // MARK: - Command & property
 
   // Send arbitrary mpv command.
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {

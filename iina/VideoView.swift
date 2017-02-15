@@ -30,6 +30,8 @@ class VideoView: NSView {
 
   var isUninited = false
 
+  var uninitLock = NSLock()
+
   // MARK: - Attributes
 
   override var mouseDownCanMoveWindow: Bool {
@@ -56,7 +58,7 @@ class VideoView: NSView {
     wantsBestResolutionOpenGLSurface = true
   
     // dragging init
-    register(forDraggedTypes: [NSFilenamesPboardType])
+    register(forDraggedTypes: [NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeString])
   }
 
   required init?(coder: NSCoder) {
@@ -66,9 +68,10 @@ class VideoView: NSView {
   func uninit() {
     guard !isUninited else { return }
 
+    uninitLock.lock()
     mpv_opengl_cb_set_update_callback(mpvGLContext, nil, nil)
-    // uninit mpv gl
     mpv_opengl_cb_uninit_gl(mpvGLContext)
+    uninitLock.unlock()
 
     isUninited = true
   }
@@ -95,9 +98,7 @@ class VideoView: NSView {
     let pb = sender.draggingPasteboard()
     guard let types = pb.types else { return false }
     if types.contains(NSFilenamesPboardType) {
-      guard let fileNames = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else {
-        return false
-      }
+      guard let fileNames = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else { return false }
       
       var videoFiles: [String] = []
       var subtitleFiles: [String] = []
@@ -130,8 +131,25 @@ class VideoView: NSView {
         playerCore.sendOSD(.addToPlaylist(videoFiles.count))
       }
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+      return true
+    } else if types.contains(NSURLPboardType) {
+      guard let url = pb.propertyList(forType: NSURLPboardType) as? [String] else { return false }
+
+      playerCore.openURLString(url[0])
+      return true
+    } else if types.contains(NSPasteboardTypeString) {
+      guard let droppedString = pb.pasteboardItems![0].string(forType: "public.utf8-plain-text") else {
+        return false
+      }
+      if Regex.urlDetect.matches(droppedString) {
+        playerCore.openURLString(droppedString)
+        return true
+      } else {
+        Utility.showAlert(message: "Unsupported URL.")
+        return false
+      }
     }
-    return true
+    return false
   }
   
 }

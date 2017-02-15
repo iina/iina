@@ -81,7 +81,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   }
 
   @IBAction func addOptionBtnAction(_ sender: AnyObject) {
-    options.append(["", ""])
+    options.append(["name", "value"])
     optionsTableView.reloadData()
     optionsTableView.selectRowIndexes(IndexSet(integer: options.count - 1), byExtendingSelection: false)
     saveToUserDefaults()
@@ -129,12 +129,22 @@ extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource
   func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
     guard let value = object as? String,
       let identifier = tableColumn?.identifier else { return }
+    guard !value.isEmpty else {
+      Utility.showAlert(message: "Key or value cannot be empty!")
+      return
+    }
     if identifier == Constants.Identifier.key {
       options[row][0] = value
     } else if identifier == Constants.Identifier.value {
       options[row][1] = value
     }
     saveToUserDefaults()
+  }
+
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    if optionsTableView.selectedRowIndexes.count == 0 {
+      optionsTableView.reloadData()
+    }
   }
 
 }

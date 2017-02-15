@@ -101,12 +101,15 @@ struct Preference {
 
     static let subAutoLoad = "subAutoLoad"
     static let ignoreAssStyles = "ignoreAssStyles"
+    static let subOverrideLevel = "subOverrideLevel"
     static let subTextFont = "subTextFont"
     static let subTextSize = "subTextSize"
     static let subTextColor = "subTextColor"
     static let subBgColor = "subBgColor"
     static let subBold = "subBold"
     static let subItalic = "subItalic"
+    static let subBlur = "subBlur"
+    static let subSpacing = "subSpacing"
     static let subBorderSize = "subBorderSize"
     static let subBorderColor = "subBorderColor"
     static let subShadowSize = "subShadowSize"
@@ -115,6 +118,7 @@ struct Preference {
     static let subAlignY = "subAlignY"
     static let subMarginX = "subMarginX"
     static let subMarginY = "subMarginY"
+    static let subPos = "subPos"
     static let subLang = "subLang"
     static let onlineSubSource = "onlineSubSource"
     static let displayInLetterBox = "displayInLetterBox"
@@ -228,6 +232,22 @@ struct Preference {
     }
   }
 
+  enum SubOverrideLevel: Int {
+    case yes = 0
+    case force
+    case strip
+
+    var string: String {
+      get {
+        switch self {
+        case .yes: return "yes"
+        case .force : return "force"
+        case .strip: return "strip"
+        }
+      }
+    }
+  }
+
   enum SubAlign: Int {
     case top = 0  // left
     case center
@@ -335,12 +355,15 @@ struct Preference {
 
     Key.subAutoLoad: AutoLoadAction.fuzzy.rawValue,
     Key.ignoreAssStyles: false,
+    Key.subOverrideLevel: SubOverrideLevel.strip.rawValue,
     Key.subTextFont: "sans-serif",
     Key.subTextSize: 55,
     Key.subTextColor: NSArchiver.archivedData(withRootObject: NSColor.white),
     Key.subBgColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
     Key.subBold: false,
     Key.subItalic: false,
+    Key.subBlur: 0,
+    Key.subSpacing: 0,
     Key.subBorderSize: 3,
     Key.subBorderColor: NSArchiver.archivedData(withRootObject: NSColor.black),
     Key.subShadowSize: 0,
@@ -349,14 +372,15 @@ struct Preference {
     Key.subAlignY: SubAlign.bottom.rawValue,
     Key.subMarginX: 25,
     Key.subMarginY: 22,
+    Key.subPos: 100,
     Key.subLang: "",
     Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
     Key.displayInLetterBox: true,
     Key.subScaleWithWindow: true,
 
     Key.enableCache: true,
-    Key.defaultCacheSize: 75000,
-    Key.cacheBufferSize: 75000,
+    Key.defaultCacheSize: 153600,
+    Key.cacheBufferSize: 153600,
     Key.secPrefech: 100,
     Key.userAgent: "",
     Key.transportRTSPThrough: RTSPTransportation.tcp.rawValue,

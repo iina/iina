@@ -15,7 +15,7 @@ class DurationDisplayTextField: NSTextField {
     case remaining // displays the remaining time in the movie
   }
   
-  var mode = DisplayMode.duration
+  var mode: DisplayMode = .duration
   
   /** Switches the display mode for the right label */
   func switchMode() {

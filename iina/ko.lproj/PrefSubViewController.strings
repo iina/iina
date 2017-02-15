@@ -1,6 +1,9 @@
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "1vo-so-iaM"; */
 "1vo-so-iaM.title" = "파일 이름이 포함된 자막";
 
+/* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "4EG-eE-S3y"; */
+"4EG-eE-S3y.title" = "상하 위치";
+
 /* Class = "NSMenuItem"; title = "Shooter.cn"; ObjectID = "5Bo-HI-z0D"; */
 "5Bo-HI-z0D.title" = "Shooter.cn";
 
@@ -11,10 +14,16 @@
 "7NC-Ih-gMB.title" = " X:";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letter box in full screen"; ObjectID = "9kA-0S-Nl8"; */
-"9kA-0S-Nl8.title" = "전체화면인 경우 자막을 레터박스에 표시";
+"9kA-0S-Nl8.title" = "전체화면일 때 자막을 레터박스에 표시";
+
+/* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "99d-UG-eDD"; */
+"99d-UG-eDD.title" = "글자 간격:";
 
 /* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "A1r-kr-uDi"; */
 "A1r-kr-uDi.title" = "윈도우 크기에 따라 자막 크기 조정";
+
+/* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "AnI-pG-XQo"; */
+"AnI-pG-XQo.title" = "모두 무시";
 
 /* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "Bjp-HJ-i7V"; */
 "Bjp-HJ-i7V.title" = "sans-serif";
@@ -27,6 +36,9 @@
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "Hpt-KA-McW"; */
 "Hpt-KA-McW.title" = "왼쪽";
+
+/* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "IU1-wz-lJW"; */
+"IU1-wz-lJW.title" = "설정 무시 정도";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "Jvu-MV-7vD"; */
 "Jvu-MV-7vD.title" = " X:";
@@ -58,7 +70,7 @@
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "VBZ-bi-gTh"; */
 "VBZ-bi-gTh.title" = "Y:";
 
-/* Class = "NSButtonCell"; title = "Ignore all ASS styles"; ObjectID = "VKh-1E-Ey8"; */
+/* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "VKh-1E-Ey8"; */
 "VKh-1E-Ey8.title" = "모든 ASS 스타일 무시";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "Waw-Pj-REg"; */
@@ -71,7 +83,7 @@
 "aMs-VF-WaJ.title" = "가운데";
 
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "bqN-gA-fs9"; */
-"bqN-gA-fs9.title" = "오프셋:";
+"bqN-gA-fs9.title" = "거리:";
 
 /* Class = "NSButtonCell"; title = "Choose..."; ObjectID = "cVp-yI-tMu"; */
 "cVp-yI-tMu.title" = "선택…";
@@ -84,6 +96,9 @@
 
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "i94-zQ-hFA"; */
 "i94-zQ-hFA.title" = "선택하면 모든 ASS 자막은 아래 설정에 따라 표시됩니다.";
+
+/* Class = "NSTextFieldCell"; title = "%"; ObjectID = "jPu-Ax-MOA"; */
+"jPu-Ax-MOA.title" = "%";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "jTS-Yq-bvB"; */
 "jTS-Yq-bvB.title" = "Y:";
@@ -99,6 +114,9 @@
 
 /* Class = "NSBox"; title = "Shadow"; ObjectID = "oYE-Cd-X3V"; */
 "oYE-Cd-X3V.title" = "그림자";
+
+/* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "rbK-VB-FDZ"; */
+"rbK-VB-FDZ.title" = "흐림 효과:";
 
 /* Class = "NSTextFieldCell"; title = "Margin"; ObjectID = "sVu-u3-QwW"; */
 "sVu-u3-QwW.title" = "여백";
@@ -116,10 +134,10 @@
 "vHI-NX-bZ5.title" = "위쪽";
 
 /* Class = "NSButtonCell"; title = "Italic"; ObjectID = "vc5-ZJ-ozS"; */
-"vc5-ZJ-ozS.title" = "기울임체";
+"vc5-ZJ-ozS.title" = "기울임꼴";
 
 /* Class = "NSButtonCell"; title = "Bold"; ObjectID = "wbU-ip-uCp"; */
-"wbU-ip-uCp.title" = "굵은 서체";
+"wbU-ip-uCp.title" = "굵게";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "xNk-Uv-jYT"; */
 "xNk-Uv-jYT.title" = "두께:";

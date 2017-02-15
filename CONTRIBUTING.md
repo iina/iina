@@ -45,7 +45,7 @@ If you believe the code structures can be improved, please raise an issue.
 
 ## How to Contribute
 
-**Please open an issue before actually starting doing something** to make sure that there's not someone else working on the same feature.
+**Please open an issue and ask for permission from the author before actually starting doing something** to make sure that there's not someone else working on the same feature.
 
 1. Fork and clone the repository
 2. Follow [the guide to build with pre-compiled dylibs in README.md](README.md#use-pre-compiled-dylibs)
@@ -57,7 +57,11 @@ If you want to build libmpv and other depended dylibs on your own, please refer 
 **Pull requests**
 
 - Please set base branch of your pull request to `develop`.
-- If you found `develop` has been updated during your change, remember to do a rebase before opening a pull request.
+- If you found `develop` has been updated during your change, remember to do a rebase before opening a pull request:
+
+  ```
+  git rebase upstream/develop
+  ```
 - Please submit separate pull requests for different features.
 - Please make sure the pull request only contains changes made by yourself *intentionally*. Here are some examples:
   - `Podfile.lock`: This file may change if you have a different Cocoapods version installed. We suggest updating to the latest beta release by `sudo gem install cocoapods --pre`.

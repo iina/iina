@@ -174,7 +174,7 @@ extension Array {
 }
 
 extension NSMenu {
-  func addItem(withTitle string: String, action selector: Selector?, tag: Int?, obj: Any?, stateOn: Bool) {
+  func addItem(withTitle string: String, action selector: Selector? = nil, tag: Int? = nil, obj: Any? = nil, stateOn: Bool = false) {
     let menuItem = NSMenuItem(title: string, action: selector, keyEquivalent: "")
     menuItem.tag = tag ?? -1
     menuItem.representedObject = obj
@@ -221,6 +221,14 @@ extension Double {
     if self < min { value = min }
     if self > max { value = max }
     return value
+  }
+
+  func prettyFormat() -> String {
+    if truncatingRemainder(dividingBy: 1) == 0 {
+      return "\(Int(self))"
+    } else {
+      return "\(self)"
+    }
   }
 }
 

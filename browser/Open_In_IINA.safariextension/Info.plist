@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Collider LI</string>
+	<key>Builder Version</key>
+	<string>12602.4.8</string>
+	<key>CFBundleDisplayName</key>
+	<string>Open in IINA</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.colliderli.openiniina</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Context Menu Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>open_in_iina_menu_cmd</string>
+				<key>Identifier</key>
+				<string>open_in_iina_menu</string>
+				<key>Title</key>
+				<string>Open Current Page in IINA</string>
+			</dict>
+		</array>
+		<key>Global Page</key>
+		<string>global.html</string>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>open_in_iina_toolbar_btn_cmd</string>
+				<key>Identifier</key>
+				<string>open_in_iina_toolbar_btn</string>
+				<key>Image</key>
+				<string>safari_toolbar.png</string>
+				<key>Include By Default</key>
+				<true/>
+				<key>Label</key>
+				<string>Open in IINA</string>
+				<key>Tool Tip</key>
+				<string>Open current webpage in IINA</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Description</key>
+	<string>Open current webpage in IINA</string>
+	<key>DeveloperIdentifier</key>
+	<string>67CQ77V27R</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Website</key>
+	<string>https://github.com/lhc70000/iina</string>
+</dict>
+</plist>

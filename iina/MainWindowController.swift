@@ -10,6 +10,11 @@ import Cocoa
 
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
+  override var nextResponder: NSResponder? {
+    get { return nil }
+    set { }
+  }
+
   unowned let ud: UserDefaults = UserDefaults.standard
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60
@@ -17,6 +22,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   let screenFrame = NSScreen.main()?.visibleFrame;
   var lastMagnification:CGFloat = 0.0;
 
+  let minimumPressDuration: TimeInterval = 0.5
+  
   unowned let playerCore: PlayerCore = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
   lazy var sizingTouchBarTextField: NSTextField = {
@@ -32,6 +39,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       playerCore.mpvController.setFlag(MPVOption.Window.fullscreen, isInFullScreen)
     }
   }
+  var isInPIP: Bool = false
   var isInInteractiveMode: Bool = false
 
   // FIXME: might use another obj to handle slider?
@@ -61,13 +69,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** Cache current crop */
   var currentCrop: NSRect = NSRect()
-  
+
   /** The maximum pressure recorded when clicking on the arrow buttons **/
   var maxPressure: Int32 = 0
-  
+
   /** The value of speedValueIndex before Force Touch **/
   var oldIndex: Int = AppData.availableSpeedValues.count / 2
   
+  /** When the arrow buttons were last clicked **/
+  var lastClick = Date()
+
   /** The index of current speed in speed value array */
   var speedValueIndex: Int = AppData.availableSpeedValues.count / 2 {
     didSet {
@@ -111,7 +122,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** The view embedded in sidebar */
   enum SideBarViewType {
-    case hidden  // indicating sidebar is hidden. Should only be used by sideBarStatus
+    case hidden // indicating sidebar is hidden. Should only be used by sideBarStatus
     case settings
     case playlist
     func width() -> CGFloat {
@@ -179,16 +190,35 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var rightArrowLabel: NSTextField!
   @IBOutlet weak var osdVisualEffectView: NSVisualEffectView!
   @IBOutlet weak var osd: NSTextField!
+  @IBOutlet weak var pipOverlayView: NSVisualEffectView!
+  
 
   weak var touchBarPlaySlider: NSSlider?
   weak var touchBarCurrentPosLabel: NSTextField?
 
+  @available(macOS 10.12, *)
+  lazy var pip: PIPViewController = {
+    let pip = PIPViewController()
+    pip.userCanResize = true
+    pip.delegate = self
+    return pip
+  }()
+  @available(macOS 10.12, *)
+  lazy var pipVideo: NSViewController = {
+    return NSViewController()
+  }()
 
   override func windowDidLoad() {
 
     super.windowDidLoad()
 
     guard let w = self.window else { return }
+
+    w.collectionBehavior = [.managed, .fullScreenPrimary]
+
+    w.initialFirstResponder = nil
+
+    w.center()
 
     w.titleVisibility = .hidden;
     w.styleMask.insert(NSFullSizeContentViewWindowMask);
@@ -223,6 +253,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     cv.autoresizesSubviews = false
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
 
+    w.setIsVisible(true)
+
     //videoView.translatesAutoresizingMaskIntoConstraints = false
     //quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": videoView])
 
@@ -250,12 +282,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     rightArrowLabel.isHidden = true
     timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
+    pipOverlayView.isHidden = true
 
     useExtrackSeek = Preference.SeekOption(rawValue: ud.integer(forKey: Preference.Key.useExactSeek))
     arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: Preference.Key.arrowButtonAction))
     singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.singleClickAction))
     doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.doubleClickAction))
     rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.rightClickAction))
+    rightLabel.mode = ud.bool(forKey: Preference.Key.showRemainingTime) ? .remaining : .duration
 
     // add user default observers
     observedPrefKeys.forEach { key in
@@ -271,11 +305,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     notificationObservers.append(fsObserver)
 
-    // move to center and make main
-    w.center()
-    w.makeMain()
-    w.makeKeyAndOrderFront(nil)
-    w.setIsVisible(false)
   }
 
   deinit {
@@ -289,7 +318,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
     guard let keyPath = keyPath, let change = change else { return }
 
     switch keyPath {
@@ -306,7 +335,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case Preference.Key.useExactSeek:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-          useExtrackSeek = Preference.SeekOption(rawValue: newValue)
+        useExtrackSeek = Preference.SeekOption(rawValue: newValue)
       }
 
     case Preference.Key.relativeSeekAmount:
@@ -354,7 +383,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Mouse / Trackpad event
 
   override func keyDown(with event: NSEvent) {
-    window!.makeFirstResponder(window!.contentView)
+    window!.makeFirstResponder(window!)
     if !isInInteractiveMode {
       playerCore.execKeyCode(Utility.mpvKeyCode(from: event))
     }
@@ -575,6 +604,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** A method being called when window open. Pretend to be a window delegate. */
   func windowDidOpen() {
+    window!.makeMain()
+    window!.makeKeyAndOrderFront(nil)
     // update buffer indicator view
     updateBufferIndicatorView()
     // enable sleep preventer
@@ -593,6 +624,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillClose(_ notification: Notification) {
+    // Close PIP
+    if isInPIP {
+      if #available(macOS 10.12, *) {
+        exitPIP(manually: true)
+      }
+    }
     // stop playing
     if !playerCore.isMpvTerminated {
       playerCore.savePlaybackPosition()
@@ -608,22 +645,27 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {
+    playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, true)
+
     // Set the appearance to match the theme so the titlebar matches the theme
     switch(Preference.Theme(rawValue: ud.integer(forKey: Preference.Key.themeMaterial))!) {
       case .dark, .ultraDark: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantDark);
       case .light, .mediumLight: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
     }
-    
+
     // show titlebar
     window!.titlebarAppearsTransparent = false
     window!.titleVisibility = .visible
     removeTitlebarFromFadeableViews()
+
     // stop animation and hide titleBarView
     titleBarView.isHidden = true
     isInFullScreen = true
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
+    playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, false)
+
     // Set back the window appearance
     self.window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
     
@@ -635,7 +677,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     animationState = .shown
     addBackTitlebarToFadeableViews()
     isInFullScreen = false
-    // set back frame of videoview
+    // set back frame of videoview, but only if not in PIP
+    guard !isInPIP else { return }
     videoView.frame = window!.contentView!.frame
   }
 
@@ -655,7 +698,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // update videoview size if in full screen, since aspect ratio may changed
-    if (isInFullScreen) {
+    if (isInFullScreen && !isInPIP) {
 
       // Let mpv decide where to draw
       /*
@@ -666,7 +709,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         let targetHeight = wSize.width / aspectRatio
         let yOffset = (wSize.height - targetHeight) / 2
         videoView.frame = NSMakeRect(0, yOffset, wSize.width, targetHeight)
-      } else if tryHeight > wSize.height{
+      } else if tryHeight > wSize.height {
         // should have black bar left and right
         let targetWidth = wSize.height * aspectRatio
         let xOffset = (wSize.width - targetWidth) / 2
@@ -676,7 +719,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
       videoView.frame = NSRect(x: 0, y: 0, width: w.frame.width, height: w.frame.height)
 
-    } else {
+    } else if (!isInPIP) {
 
       let frame = NSRect(x: 0, y: 0, width: w.contentView!.frame.width, height: w.contentView!.frame.height)
 
@@ -718,6 +761,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   }
 
+  func windowDidBecomeKey(_ notification: Notification) {
+    window!.makeFirstResponder(window!)
+  }
+
   // MARK: - Control UI
 
   func hideUIAndCursor() {
@@ -730,6 +777,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func hideUI() {
+    // Don't hide UI when in PIP
+    guard !isInPIP else {
+      return
+    }
     fadeableViews.forEach { (v) in
       v?.alphaValue = 1
     }
@@ -761,7 +812,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       fadeableViews.forEach { (v) in
         // Set the fade animation duration
         NSAnimationContext.current().duration = TimeInterval(0.25);
-        
+
         v?.animator().alphaValue = 1
       }
     }) {
@@ -838,7 +889,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  func hideSideBar(_ after: @escaping () -> Void = {}) {
+  func hideSideBar(_ after: @escaping () -> Void = { }) {
     let currWidth = sideBarWidthConstraint.constant
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
@@ -855,16 +906,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private func removeTitlebarFromFadeableViews() {
     // remove buttons from fade-able views
     withStandardButtons { button in
-      if let index = (self.fadeableViews.index {$0 === button}) {
+      if let index = (self.fadeableViews.index { $0 === button }) {
         self.fadeableViews.remove(at: index)
-        
+
         // Make sure the button is visible
         button!.alphaValue = 1;
         button!.isHidden = false;
       }
     }
     // remove titlebar view from fade-able views
-    if let index = (self.fadeableViews.index {$0 === titleBarView}) {
+    if let index = (self.fadeableViews.index { $0 === titleBarView }) {
       self.fadeableViews.remove(at: index)
     }
   }
@@ -1012,14 +1063,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     sliderCell?.isInDarkTheme = isDarkTheme
 
-    [titleBarView, controlBar, osdVisualEffectView].forEach {
+    [titleBarView, controlBar, osdVisualEffectView, pipOverlayView].forEach {
       $0?.material = material
       $0?.appearance = appearance
     }
-    
+
     if isInFullScreen {
       window!.appearance = appearance;
     }
+    
+    window?.appearance = appearance
   }
 
   func updateBufferIndicatorView() {
@@ -1058,30 +1111,33 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.windowDidResize(Notification(name: .NSWindowDidResize))
 
     } else {
+      var rect: NSRect
 
       if playerCore.info.jumppedFromPlaylist &&
-        ud.bool(forKey: Preference.Key.resizeOnlyWhenManuallyOpenFile) {
+      ud.bool(forKey: Preference.Key.resizeOnlyWhenManuallyOpenFile) {
         // user is navigating in playlist. remain same window width.
         let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
         let newSize = NSSize(width: w.frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
-        let rect = NSRect(origin: w.frame.origin, size: newSize)
+        rect = NSRect(origin: w.frame.origin, size: newSize)
         w.setFrame(rect, display: true, animate: true)
       } else {
         // get videoSize on screen
         var videoSize = originalVideoSize
         if ud.bool(forKey: Preference.Key.usePhysicalResolution) {
           videoSize = w.convertFromBacking(
-            NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))
-          ).size
+            NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))).size
         }
         // check screen size
         if let screenSize = NSScreen.main()?.visibleFrame.size {
           videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
           // check default window position
         }
-        let rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
+        rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
         w.setFrame(rect, display: true, animate: true)
       }
+
+      // animated `setFrame` can be inaccurate!
+      w.setFrame(rect, display: true)
 
       if (!window!.isVisible) {
         window!.setIsVisible(true)
@@ -1113,9 +1169,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     } else {
       window.level = Int(CGWindowLevelForKey(.normalWindow))
     }
-    
+
     window.collectionBehavior = [.managed, .fullScreenPrimary]
-    
+
     // don't know why they will be disabled
     withStandardButtons { $0?.isEnabled = true }
   }
@@ -1201,11 +1257,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if speedValueIndex > speeds / 2 {
         speedValueIndex = speeds / 2
       }
-      
+
       if sender.intValue == 0 { // Released
-        if maxPressure == 1 { // Single click ended
+        if maxPressure == 1 &&
+          (speedValueIndex < speeds / 2 - 1 ||
+          Date().timeIntervalSince(lastClick) < minimumPressDuration) { // Single click ended, 2x speed
           speedValueIndex = oldIndex - 1
-        } else { // Force Touch ended
+        } else { // Force Touch or long press ended
           speedValueIndex = speeds / 2
         }
         maxPressure = 0
@@ -1213,6 +1271,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         if sender.intValue == 1 && maxPressure == 0 { // First press
           oldIndex = speedValueIndex
           speedValueIndex -= 1
+          lastClick = Date()
         } else { // Force Touch
           speedValueIndex = max(oldIndex - Int(sender.intValue), 0)
         }
@@ -1234,11 +1293,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if speedValueIndex < speeds / 2 {
         speedValueIndex = speeds / 2
       }
-      
+
       if sender.intValue == 0 { // Released
-        if maxPressure == 1 { // Single click ended
+        if maxPressure == 1 &&
+          (speedValueIndex > speeds / 2 + 1 ||
+          Date().timeIntervalSince(lastClick) < minimumPressDuration) { // Single click ended
           speedValueIndex = oldIndex + 1
-        } else { // Force Touch ended
+        } else { // Force Touch or long press ended
           speedValueIndex = speeds / 2
         }
         maxPressure = 0
@@ -1246,6 +1307,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         if sender.intValue == 1 && maxPressure == 0 { // First press
           oldIndex = speedValueIndex
           speedValueIndex += 1
+          lastClick = Date()
         } else { // Force Touch
           speedValueIndex = min(oldIndex + Int(sender.intValue), speeds - 1)
         }
@@ -1259,7 +1321,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     }
   }
-  
+
   /** handle action of both left and right arrow button */
   func arrowButtonAction(left: Bool) {
     switch arrowBtnFunction! {
@@ -1285,7 +1347,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
 
     case .playlist:
-      playerCore.mpvController.command(left ? .playlistPrev : .playlistNext)
+      playerCore.mpvController.command(left ? .playlistPrev : .playlistNext, checkError: false)
 
     case .seek:
       playerCore.seek(relativeSecond: left ? -10 : 10, option: .relative)
@@ -1343,7 +1405,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
 
-  // MARK: - Utilility
+  // MARK: - Utility
 
   private func withStandardButtons(_ block: (NSButton?) -> Void) {
     guard let w = window else { return }
@@ -1408,20 +1470,19 @@ fileprivate extension NSTouchBarItemIdentifier {
 
 }
 
-
 // Image name, tag, custom label
 @available(OSX 10.12.2, *)
 fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, String)] = [
-  .ahead15Sec: (NSImageNameTouchBarSkipAhead15SecondsTemplate, 15, "15sec Ahead"),
-  .ahead30Sec: (NSImageNameTouchBarSkipAhead30SecondsTemplate, 30, "30sec Ahead"),
-  .back15Sec: (NSImageNameTouchBarSkipBack15SecondsTemplate, -15, "-15sec Ahead"),
-  .back30Sec: (NSImageNameTouchBarSkipBack30SecondsTemplate, -30, "-30sec Ahead"),
-  .next: (NSImageNameTouchBarSkipAheadTemplate, 0, "Next video"),
-  .prev: (NSImageNameTouchBarSkipBackTemplate, 1, "Previous video"),
-  .volumeUp: (NSImageNameTouchBarVolumeUpTemplate, 0, "Volume +"),
-  .volumeDown: (NSImageNameTouchBarVolumeDownTemplate, 1, "Volume -"),
-  .rewind: (NSImageNameTouchBarRewindTemplate, 0, "Rewind"),
-  .fastForward: (NSImageNameTouchBarFastForwardTemplate, 1, "Fast forward")
+    .ahead15Sec: (NSImageNameTouchBarSkipAhead15SecondsTemplate, 15, "15sec Ahead"),
+    .ahead30Sec: (NSImageNameTouchBarSkipAhead30SecondsTemplate, 30, "30sec Ahead"),
+    .back15Sec: (NSImageNameTouchBarSkipBack15SecondsTemplate, -15, "-15sec Ahead"),
+    .back30Sec: (NSImageNameTouchBarSkipBack30SecondsTemplate, -30, "-30sec Ahead"),
+    .next: (NSImageNameTouchBarSkipAheadTemplate, 0, "Next video"),
+    .prev: (NSImageNameTouchBarSkipBackTemplate, 1, "Previous video"),
+    .volumeUp: (NSImageNameTouchBarVolumeUpTemplate, 0, "Volume +"),
+    .volumeDown: (NSImageNameTouchBarVolumeDownTemplate, 1, "Volume -"),
+    .rewind: (NSImageNameTouchBarRewindTemplate, 0, "Rewind"),
+    .fastForward: (NSImageNameTouchBarFastForwardTemplate, 1, "Fast forward")
 ]
 
 @available(OSX 10.12.2, *)
@@ -1457,12 +1518,12 @@ extension MainWindowController: NSTouchBarDelegate {
       return item
 
     case NSTouchBarItemIdentifier.volumeUp,
-         NSTouchBarItemIdentifier.volumeDown:
+        NSTouchBarItemIdentifier.volumeDown:
       guard let data = touchBarItemBinding[identifier] else { return nil }
       return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarVolumeAction(_:)))
 
     case NSTouchBarItemIdentifier.rewind,
-         NSTouchBarItemIdentifier.fastForward:
+        NSTouchBarItemIdentifier.fastForward:
       guard let data = touchBarItemBinding[identifier] else { return nil }
       return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarRewindAction(_:)))
 
@@ -1476,14 +1537,14 @@ extension MainWindowController: NSTouchBarDelegate {
       return item
 
     case NSTouchBarItemIdentifier.ahead15Sec,
-         NSTouchBarItemIdentifier.back15Sec,
-         NSTouchBarItemIdentifier.ahead30Sec,
-         NSTouchBarItemIdentifier.back30Sec:
+        NSTouchBarItemIdentifier.back15Sec,
+        NSTouchBarItemIdentifier.ahead30Sec,
+        NSTouchBarItemIdentifier.back30Sec:
       guard let data = touchBarItemBinding[identifier] else { return nil }
       return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSeekAction(_:)))
 
     case NSTouchBarItemIdentifier.next,
-         NSTouchBarItemIdentifier.prev:
+        NSTouchBarItemIdentifier.prev:
       guard let data = touchBarItemBinding[identifier] else { return nil }
       return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSkipAction(_:)))
 
@@ -1554,5 +1615,68 @@ extension MainWindowController: NSTouchBarDelegate {
       }
     }
 
+  }
+}
+
+// MARK: - Picture in Picture
+
+@available(macOS 10.12, *)
+extension MainWindowController: PIPViewControllerDelegate {
+
+  @available(macOS 10.12, *)
+  func enterPIP() {
+    // FIXME: Internal PIP API
+    // Do not enter PIP if already "PIPing"  (in this case, in the PIP animation)
+    // Also do not enter if PIP state cannot be determined
+    let pipping = pip.value(forKey: "_pipping") as? Bool ?? true
+    guard !pipping else {
+      return
+    }
+    pipVideo.view = videoView
+    pip.aspectRatio = NSSize(width: playerCore.info.videoWidth!, height: playerCore.info.videoHeight!)
+    pip.playing = !playerCore.info.isPaused
+    pip.title = titleTextField.stringValue
+    pip.presentAsPicture(inPicture: pipVideo)
+    pipOverlayView.isHidden = false
+    isInPIP = true
+  }
+
+  func exitPIP(manually: Bool) {
+    isInPIP = false
+    if manually {
+      pip.dismissViewController(pipVideo)
+    }
+    pipOverlayView.isHidden = true
+    window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
+    videoView.frame = window?.contentView?.frame ?? .zero
+    
+    // Reset animation (disabling it if exitPIP is called manually)
+    // See WebKit issue 25096170 as well as the workaround:
+    // https://trac.webkit.org/browser/trunk/Source/WebCore/platform/mac/WebVideoFullscreenInterfaceMac.mm#L343
+    pip.replacementRect = .infinite
+    pip.replacementWindow = nil
+  }
+
+  func pipShouldClose(_ pip: PIPViewController) -> Bool {
+    // Set frame to animate back to
+    pip.replacementRect = window?.contentView?.frame ?? .zero
+    pip.replacementWindow = window
+    return true
+  }
+
+  func pipDidClose(_ pip: PIPViewController) {
+    exitPIP(manually: false)
+  }
+
+  func pipActionPlay(_ pip: PIPViewController) {
+    playerCore.togglePause(false)
+  }
+
+  func pipActionPause(_ pip: PIPViewController) {
+    playerCore.togglePause(true)
+  }
+
+  func pipActionStop(_ pip: PIPViewController) {
+    exitPIP(manually: false)
   }
 }

@@ -2,7 +2,7 @@
 "2Hu-qC-UMi.title" = "主題:";
 
 /* Class = "NSButtonCell"; title = "Keep window open when playback finished"; ObjectID = "2iM-j7-AzQ"; */
-"2iM-j7-AzQ.title" = "播放完畢後保持視窗開啓";
+"2iM-j7-AzQ.title" = "播放完畢後保持視窗打開";
 
 /* Class = "NSTextFieldCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
 "2rJ-mg-OuU.title" = "存儲爲";
@@ -14,31 +14,31 @@
 "6TV-DG-503.title" = "播放列表:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
-"8kU-8g-VgX.title" = "需重啓 IINA 方可生效";
+"8kU-8g-VgX.title" = "需重啟 IINA 方可生效";
 
 /* Class = "NSMenuItem"; title = "Light"; ObjectID = "49l-le-9k6"; */
 "49l-le-9k6.title" = "淺色";
 
 /* Class = "NSButtonCell"; title = "Remember recently opened files"; ObjectID = "55O-ik-ql6"; */
-"55O-ik-ql6.title" = "記錄最近開啓的檔案";
+"55O-ik-ql6.title" = "記錄最近打開的檔案";
 
 /* Class = "NSButtonCell"; title = "Pause when media is opened"; ObjectID = "FbF-jJ-W5a"; */
-"FbF-jJ-W5a.title" = "開啓媒體後暫停";
+"FbF-jJ-W5a.title" = "打開媒體後暫停";
 
 /* Class = "NSButtonCell"; title = "Open a choose file panel after starting"; ObjectID = "IYU-9y-fBL"; */
-"IYU-9y-fBL.title" = "啓動後顯示檔案選擇介面";
+"IYU-9y-fBL.title" = "啟動後顯示檔案選擇介面";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "自動播放下一個";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen when media is opened"; ObjectID = "MlG-hl-goA"; */
-"MlG-hl-goA.title" = "開啓媒體後進入全熒幕";
+"MlG-hl-goA.title" = "打開媒體後進入全熒幕";
 
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
 "QJq-fO-hhK.title" = "自動添加檔案至當前檔案夾";
 
 /* Class = "NSButtonCell"; title = "Quit when no window is opened"; ObjectID = "YLo-6E-tT7"; */
-"YLo-6E-tT7.title" = "沒有開啓的視窗時退出";
+"YLo-6E-tT7.title" = "沒有打開的視窗時退出";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
 "YeH-hk-7NN.title" = "熒幕截取路徑";

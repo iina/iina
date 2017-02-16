@@ -52,12 +52,15 @@ class PlayerCore: NSObject {
   }
 
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
+    if mainWindow == nil || !mainWindow!.isWindowLoaded {
+      mainWindow = nil
+      mainWindow = MainWindowController()
+    }
     info.isPaused = false
     info.currentURL = url
     info.isNetworkResource = isNetwork
-    mainWindow = MainWindowController()
-    mainWindow!.showWindow(nil)
-    mainWindow!.windowDidOpen()
+     mainWindow!.showWindow(nil)
+     mainWindow!.windowDidOpen()
     // Send load file command
     info.fileLoading = true
     mpvController.command(.loadfile, args: [path])
@@ -518,9 +521,7 @@ class PlayerCore: NSObject {
   // MARK: - Other
 
   func fileStarted() {
-//    DispatchQueue.main.sync {
-//      mainWindow.showWindow(self)
-//    }
+
   }
 
   /** This function is called right after file loaded. Should load all meta info here. */

@@ -109,13 +109,21 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
   }
 
   /** Switch tab (call from other objects) */
-  func pleaseSwitchToTab(_ tab: TabViewType) {
+  func pleaseSwitchToTab(_ tab: TabViewType) -> Bool {
+    if mainWindow.sideBarStatus == .playlist && tab == .playlist {
+      return true
+    }
+    if mainWindow.sideBarStatus == .chapter && tab == .chapters {
+      return true
+    }
+    let flag = mainWindow.sideBarStatus == .hidden
     if isViewLoaded {
       switchToTab(tab)
     } else {
       // cache the request
       pendingSwitchRequest = tab
     }
+    return flag
   }
 
   /** Switch tab (for internal call) */
@@ -337,11 +345,13 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
   @IBAction func playlistBtnAction(_ sender: AnyObject) {
     reloadData(playlist: true, chapters: false)
     switchToTab(.playlist)
+    mainWindow.sideBarStatus = .playlist
   }
 
   @IBAction func chaptersBtnAction(_ sender: AnyObject) {
     reloadData(playlist: false, chapters: true)
     switchToTab(.chapters)
+    mainWindow.sideBarStatus = .chapter
   }
 
   @IBAction func loopBtnAction(_ sender: AnyObject) {

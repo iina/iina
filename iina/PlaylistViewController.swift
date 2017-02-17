@@ -209,7 +209,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
       let indexSet = dataArray[0]
 
       let playlistCount = playerCore.info.playlist.count - 1
-      var order: [Int] = Array(0...playlistCount)
+      var order: [Int] = Array(0…playlistCount)
       var finalRow = row
       let reversedIndexSet = indexSet.reversed()
 
@@ -233,7 +233,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
         }
       }
 
-      for i in (0...playlistCount).reversed() {
+      for i in (0…playlistCount).reversed() {
         if i == playing {
           continue
         }
@@ -243,7 +243,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
       var insertPosition = 0
       var foundPlaying: Bool = false
 
-      for i in 0...playlistCount {
+      for i in 0…playlistCount {
         if order[i] == playing {
           foundPlaying = true
           continue
@@ -258,7 +258,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
 
       var finalIndexSet: IndexSet = []
-      for i in 0...playlistCount {
+      for i in 0…playlistCount {
         if tableView.selectedRowIndexes.contains(order[i]) {
           finalIndexSet.insert(i)
         }

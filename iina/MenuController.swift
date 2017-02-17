@@ -10,7 +10,7 @@ import Cocoa
 
 class MenuController: NSObject, NSMenuDelegate {
 
-  /** For convinent bindings. see `bind(...)` below. [menu: check state block] */
+  /** For convinent bindings. see `bind(…)` below. [menu: check state block] */
   private var menuBindingList: [NSMenu: (NSMenuItem) -> Bool] = [:]
 
   // File

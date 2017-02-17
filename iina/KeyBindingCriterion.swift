@@ -55,7 +55,7 @@ class TextCriterion: Criterion {
     super.init()
   }
 
-  init(name: String, localizedName: String, children: Criterion...) {
+  init(name: String, localizedName: String, children: Criterion…) {
     self.name = name
     self.localizedName = localizedName
     super.init()

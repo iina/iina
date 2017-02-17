@@ -15,7 +15,7 @@
 "playlist.chapter_cap" = "CHAPITRES";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Mise en mémoire tampon... %@%%";
+"main.buffering_indicator" = "Mise en mémoire tampon… %@%%";
 
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "Défaut";
@@ -53,9 +53,9 @@
 "osd.video_eq.hue" = "Teinte : %i";
 "osd.video_eq.saturation" = "Saturation : %i";
 "osd.video_eq.brightness" = "Luminosité : %i";
-"osd.find_online_sub" = "Recherche de sous-titres en ligne...";
+"osd.find_online_sub" = "Recherche de sous-titres en ligne…";
 "osd.sub_not_found" = "Aucun sous-titre trouvé";
-"osd.sub_found" = "%d sous-titre(s) trouvé(s). Téléchargement...";
+"osd.sub_found" = "%d sous-titre(s) trouvé(s). Téléchargement…";
 "osd.sub_downloaded" = "Sous-titre téléchargé";
 "osd.sub_saved" = "Sous-titre sauvegardé";
 "osd.network_error" = "Erreur réseau";
@@ -106,5 +106,5 @@
 "pl_menu.delete_after_play" = "Placer dans la corbeille après lecture";
 "pl_menu.delete_after_play_multi" = "Placer la sélection dans la corbeille après lecture";
 "pl_menu.reveal_in_finder" = "Afficher dans le Finder";
-"pl_menu.add_item" = "Ajouter...";
+"pl_menu.add_item" = "Ajouter…";
 "pl_menu.clear_playlist" = "Vider la playlist";

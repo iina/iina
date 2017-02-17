@@ -21,6 +21,9 @@ This may caused by issue #377. Please **quit IINA completely** and try opening t
 
 (N/A for feature requests)
 
+<!-- If it crashes, please upload the report (you can also find them in Console.app) -->
+Crash report:
+
 **Steps to reproduce:**
 
 (N/A for feature requests)

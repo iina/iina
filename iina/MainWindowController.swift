@@ -119,13 +119,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** The view embedded in sidebar */
   enum SideBarViewType {
     case hidden // indicating sidebar is hidden. Should only be used by sideBarStatus
-    case settings
+    case video
+    case audio
+    case subtitle
     case playlist
+    case chapter
     func width() -> CGFloat {
       switch self {
-      case .settings:
+      case .video, .audio, .subtitle:
         return 360
-      case .playlist:
+      case .playlist, .chapter:
         return 240
       default:
         Utility.fatal("SideBarViewType.width shouldn't be called here")
@@ -863,7 +866,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       sideBarRightConstraint.animator().constant = 0
     }) {
-      self.sideBarStatus = type
+      if type == .playlist {
+        let currentTab = self.playlistView.tabView.selectedTabViewItem
+        let index = self.playlistView.tabView.indexOfTabViewItem(currentTab!)
+        self.sideBarStatus = index == 1 ? SideBarViewType.chapter : SideBarViewType.playlist
+      } else {
+        let currentTab = self.quickSettingView.tabView.selectedTabViewItem
+        let index = self.quickSettingView.tabView.indexOfTabViewItem(currentTab!)
+        switch index {
+        case 0:
+          self.sideBarStatus = .video
+        case 1:
+          self.sideBarStatus = .audio
+        case 2:
+          self.sideBarStatus = .subtitle
+        default:
+          break
+        }
+      }
     }
   }
 
@@ -1337,12 +1357,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let view = quickSettingView.view
     switch sideBarStatus {
     case .hidden:
-      showSideBar(view: view, type: .settings)
-    case .playlist:
+      showSideBar(view: view, type: .video)
+    case .playlist, .chapter:
       hideSideBar {
-        self.showSideBar(view: view, type: .settings)
+        self.showSideBar(view: view, type: .video)
       }
-    case .settings:
+    case .audio, .video, .subtitle:
       hideSideBar()
     }
   }
@@ -1352,9 +1372,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     switch sideBarStatus {
     case .hidden:
       showSideBar(view: view, type: .playlist)
-    case .playlist:
+    case .playlist, .chapter:
       hideSideBar()
-    case .settings:
+    case .video, .audio, .subtitle:
       hideSideBar {
         self.showSideBar(view: view, type: .playlist)
       }

@@ -78,13 +78,19 @@ extension MainWindowController {
   }
 
   @IBAction func menuShowPlaylistPanel(_ sender: NSMenuItem) {
-    playlistView.pleaseSwitchToTab(.playlist)
-    playlistButtonAction(sender)
+    let willToggle = playlistView.pleaseSwitchToTab(.playlist)
+    if willToggle {
+      playlistButtonAction(sender)
+    }
+    sideBarStatus = .playlist
   }
 
   @IBAction func menuShowChaptersPanel(_ sender: NSMenuItem) {
-    playlistView.pleaseSwitchToTab(.chapters)
-    playlistButtonAction(sender)
+    let willToggle = playlistView.pleaseSwitchToTab(.chapters)
+    if willToggle {
+      playlistButtonAction(sender)
+    }
+    sideBarStatus = .chapter
   }
 
   @IBAction func menuChapterSwitch(_ sender: NSMenuItem) {
@@ -95,18 +101,27 @@ extension MainWindowController {
   }
 
   @IBAction func menuShowVideoQuickSettings(_ sender: NSMenuItem) {
-    quickSettingView.pleaseSwitchToTab(.video)
-    settingsButtonAction(sender)
+    let willToggle = quickSettingView.pleaseSwitchToTab(.video)
+    if willToggle {
+      settingsButtonAction(sender)
+    }
+    sideBarStatus = .video
   }
 
   @IBAction func menuShowAudioQuickSettings(_ sender: NSMenuItem) {
-    quickSettingView.pleaseSwitchToTab(.audio)
-    settingsButtonAction(sender)
+    let willToggle = quickSettingView.pleaseSwitchToTab(.audio)
+    if willToggle {
+      settingsButtonAction(sender)
+    }
+    sideBarStatus = .audio
   }
 
   @IBAction func menuShowSubQuickSettings(_ sender: NSMenuItem) {
-    quickSettingView.pleaseSwitchToTab(.sub)
-    settingsButtonAction(sender)
+    let willToggle = quickSettingView.pleaseSwitchToTab(.sub)
+    if willToggle {
+      settingsButtonAction(sender)
+    }
+    sideBarStatus = .subtitle
   }
 
   @IBAction func menuChangeTrack(_ sender: NSMenuItem) {

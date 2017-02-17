@@ -198,13 +198,24 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   // MARK: - Switch tab
 
   /** Switch tab (call from other objects) */
-  func pleaseSwitchToTab(_ tab: TabViewType) {
+  func pleaseSwitchToTab(_ tab: TabViewType) -> Bool {
+    if mainWindow.sideBarStatus == .audio && tab == .audio {
+      return true
+    }
+    if mainWindow.sideBarStatus == .video && tab == .video {
+      return true
+    }
+    if mainWindow.sideBarStatus == .subtitle && tab == .sub {
+      return true
+    }
+    let flag = mainWindow.sideBarStatus == .hidden
     if isViewLoaded {
       switchToTab(tab)
     } else {
       // cache the request
       pendingSwitchRequest = tab
     }
+    return flag
   }
 
   /** Switch tab (for internal call) */
@@ -325,6 +336,17 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     // the active one
     let title = sender.title
     sender.attributedTitle = NSAttributedString(string: title, attributes: Utility.tabTitleActiveFontAttributes)
+
+    switch sender {
+    case videoTabBtn:
+      mainWindow.sideBarStatus = .video
+    case audioTabBtn:
+      mainWindow.sideBarStatus = .audio
+    case subTabBtn:
+      mainWindow.sideBarStatus = .subtitle
+    default:
+      break
+    }
   }
 
   // Video tab

@@ -9,13 +9,15 @@
 // Common
 "on" = "On";
 "off" = "Off";
+"button.ok"= "OK";
+"button.cancel" = "Cancel";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "PLAYLIST";
 "playlist.chapter_cap" = "CHAPTERS";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering... %d%%";
+"main.buffering_indicator" = "Buffering… %d%%";
 
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "Default";
@@ -53,9 +55,9 @@
 "osd.video_eq.hue" = "Hue: %i";
 "osd.video_eq.saturation" = "Saturation: %i";
 "osd.video_eq.brightness" = "Brightness: %i";
-"osd.find_online_sub" = "Finding online subtitles...";
+"osd.find_online_sub" = "Finding online subtitles…";
 "osd.sub_not_found" = "No subtitle found";
-"osd.sub_found" = "%d subtitle(s) found. Downloading...";
+"osd.sub_found" = "%d subtitle(s) found. Downloading…";
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
 "osd.network_error" = "Network error";
@@ -90,6 +92,14 @@
 "menu.exit_pip" = "Exit Picture-in-Picture";
 "menu.pause" = "Pause";
 "menu.resume" = "Resume";
+"menu.aspect" = "Default";
+"menu.crop" = "None";
+
+"filter.audio" = "Audio Filters";
+"filter.video" = "Video Filters";
+"filter.add" = "Add filter";
+"filter.enter_string" = "Please enter a filter string in format of MPV's vf or af command.";
+"filter.incorrect_format" = "Filter is not in the correct format!";
 
 "track.none" = "<None>";
 
@@ -108,3 +118,17 @@
 "pl_menu.reveal_in_finder" = "Reveal in Finder";
 "pl_menu.add_item" = "Add Item…";
 "pl_menu.clear_playlist" = "Clear Playlist";
+
+"tb.play_pause" = "Play / Pause";
+"tb.seek" = "Seek";
+"tb.time_position" = "Time Position";
+"tb.15sec_ahead" = "15sec Ahead";
+"tb.30sec_ahead" = "30sec Ahead";
+"tb.-15sec_ahead" = "-15sec Ahead";
+"tb.-30sec_ahead" = "-30sec Ahead";
+"tb.next_video" = "Next Video";
+"tb.prev_video" = "Previous Video";
+"tb.vol+" = "Volume +";
+"tb.vol-" = "Volume -";
+"tb.rewind" = "Rewind";
+"tb.fast_forward" = "Fast Forward";

@@ -3,16 +3,19 @@
 "1yb-m4-1sK.title" = "Horizontales Scrollen:";
 
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "2Ig-fw-UvW"; */
-"2Ig-fw-UvW.title" = "Vorherige / Nächste Medie";
+"2Ig-fw-UvW.title" = "Vorherige / Nächste Datei";
 
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "6F4-gm-oBg"; */
 "6F4-gm-oBg.title" = "Vollbildmodus an-/ausschalten";
 
 /* Class = "NSTextFieldCell"; title = "Exact seek is more precise but can cause lag and high CPU usage."; ObjectID = "6FZ-Qm-0k0"; */
-"6FZ-Qm-0k0.title" = "Exaktes Positionieren kann zu Lags und hohen CPU-Auslastungen führen.";
+"6FZ-Qm-0k0.title" = "Exaktes Positionieren kann zu Lags und hoher CPU-Auslastung führen.";
 
 /* Class = "NSMenuItem"; title = "Exact seek"; ObjectID = "70P-6t-4jC"; */
 "70P-6t-4jC.title" = "Exaktes Positionieren";
+
+/* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "9qx-ao-oxE"; */
+"9qx-ao-oxE.title" = "Steuerelemente ausblenden";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "A8c-wa-IFR"; */
 "A8c-wa-IFR.title" = "Pause / Fortsetzen";
@@ -26,8 +29,14 @@
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "K9H-w9-wmT"; */
 "K9H-w9-wmT.title" = "Automatisch";
 
+/* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "OOM-jo-N4V"; */
+"OOM-jo-N4V.title" = "Steuerelemente ausblenden";
+
 /* Class = "NSTextFieldCell"; title = "Single click to:"; ObjectID = "QhO-As-ZLL"; */
 "QhO-As-ZLL.title" = "Klick:";
+
+/* Class = "NSTextFieldCell"; title = "Right click to:"; ObjectID = "Rqy-g2-AP2"; */
+"Rqy-g2-AP2.title" = "Rechtsklick:";
 
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "hIG-5X-2Pm"; */
 "hIG-5X-2Pm.title" = "Wiedergabegeschwindigkeit";
@@ -35,11 +44,17 @@
 /* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "kEB-gk-wuI"; */
 "kEB-gk-wuI.title" = "Linke/Rechte Pfeiltaste:";
 
+/* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "mOX-Fi-oTv"; */
+"mOX-Fi-oTv.title" = "Pause / Fortsetzen";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "oOk-y6-lek"; */
+"oOk-y6-lek.title" = "Nichts";
+
 /* Class = "NSTextFieldCell"; title = "Amount for normal seek:"; ObjectID = "of2-ec-OkC"; */
 "of2-ec-OkC.title" = "Empfindlichkeit:";
 
 /* Class = "NSMenuItem"; title = "Fastforward / Rewind"; ObjectID = "q50-Po-JYO"; */
-"q50-Po-JYO.title" = "Vorspulen / Zurückspulen";
+"q50-Po-JYO.title" = "Vor- / Zurückspulen";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "w54-7I-QfW"; */
 "w54-7I-QfW.title" = "Nichts";
@@ -49,11 +64,3 @@
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "Nichts";
-
-"9qx-ao-oxE.title" = "On-Screen Steuerelemente ausblenden";
-
-// Right click actions
-"Rqy-g2-AP2.title" = "Rechtsklick:";
-"OOM-jo-N4V.title" = "Steuerelemente ausblenden";
-"mOX-Fi-oTv.title" = "Pause / Fortsetzen";
-"oOk-y6-lek.title" = "Nichts";

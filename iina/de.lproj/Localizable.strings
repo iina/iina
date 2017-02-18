@@ -7,19 +7,17 @@
 */
 
 // Common
-"on" = "An";
+"on" = "Ein";
 "off" = "Aus";
+"button.ok"= "OK";
+"button.cancel" = "Abbrechen";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "PLAYLIST";
 "playlist.chapter_cap" = "KAPITEL";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffern... %d%%";
-
-// QuickSettingViewController.swift
-"quicksetting.aspect_item.Default" = "Standard";
-"quicksetting.crop_item.None" = "Kein";
+"main.buffering_indicator" = "Puffern … %d%%";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
@@ -40,22 +38,22 @@
 "osd.mute" = "Stumm";
 "osd.unmute" = "Stumm aus";
 "osd.screenshot" = "Bild aufgenommen";
-"osd.abloop.a" = "AB-Wiederholung: A";
-"osd.abloop.b" = "AB-Wiederholung: B";
-"osd.abloop.clear" = "AB-Wiederholung: Aus";
+"osd.abloop.a" = "A-B-Schleife: A";
+"osd.abloop.b" = "A-B-Schleife: B";
+"osd.abloop.clear" = "AB-Schleife: Aus";
 "osd.stop" = "Stopp";
 "osd.chapter" = "Kapitel: %@";
 "osd.subtitle_scale" = "Untertitel-Skalierung: %.2fx";
-"osd.add_to_playlist" = "%i Dateien zur Playlist hinzugefügt";
-"osd.clear_playlist" = "Playlist geleert";
+"osd.add_to_playlist" = "%i Dateien zur Wiedergabeliste hinzugefügt";
+"osd.clear_playlist" = "Wiedergabeliste geleert";
 "osd.video_eq.contrast" = "Kontrast: %i";
 "osd.video_eq.gamma" = "Gamma: %i";
 "osd.video_eq.hue" = "Farbton: %i";
 "osd.video_eq.saturation" = "Sättigung: %i";
 "osd.video_eq.brightness" = "Helligkeit: %i";
-"osd.find_online_sub" = "Online nach Untertiteln suchen...";
+"osd.find_online_sub" = "Online nach Untertiteln suchen …";
 "osd.sub_not_found" = "Keine Untertitel gefunden";
-"osd.sub_found" = "%d Untertitel gefunden. Laden...";
+"osd.sub_found" = "%d Untertitel gefunden. Laden …";
 "osd.sub_downloaded" = "Untertitel geladen";
 "osd.sub_saved" = "Untertitel gespeichert";
 "osd.network_error" = "Netzwerkfehler";
@@ -63,7 +61,7 @@
 "update.title_update_found" = "Neues Update verfügbar";
 "update.title_no_update" = "Kein Update verfügbar";
 "update.title_error" = "Fehler";
-"update.update_found" = "Es gibt eine neuere Version! Da sich IINA no in der Alpha-Phase befindet, wird die neueste Version empfohlen. Laden von der Website oder von Github:";
+"update.update_found" = "Es gibt eine neuere Version! Da sich IINA noch in der Alpha-Phase befindet, wird die neueste Version empfohlen. Laden von der Website oder von Github:";
 "update.no_update" = "Dies ist die neueste Version.";
 "update.check_failed" = "Fehler beim Suchen nach Updates. Wahrscheinlich ist diese Version von IINA zu alt. Updates von der Website oder von Github laden.";
 "update.new_version" = "Neue Version:";
@@ -84,11 +82,48 @@
 "menu.volume"= "Lautstärke: %d";
 "menu.audio_delay" = "Audio-Verzögerung: %.2fs";
 "menu.sub_delay" = "Untertitel-Verzögerung: %.2fs";
-"menu.fullscreen" = "Vollbild";
-"menu.exit_fullscreen" = "Vollbild beenden";
+"menu.fullscreen" = "Vollbildmodus";
+"menu.exit_fullscreen" = "Vollbildmodus aus";
+"menu.pip" = "Bild-in-Bild öffnen";
+"menu.exit_pip" = "Bild-in-Bild schließen";
 "menu.pause" = "Pausieren";
 "menu.resume" = "Fortsetzen";
+"menu.aspect" = "Standard";
+"menu.crop" = "Aus";
+
+"filter.audio" = "Audiofilter";
+"filter.video" = "Videofilter";
+"filter.add" = "Filter hinzufügen";
+"filter.enter_string" = "Please enter a filter string in format of MPV's vf or af command.";
+"filter.incorrect_format" = "Filter ist nicht im richtigen Format!";
 
 "track.none" = "<Leer>";
 
 "alert.extra_option_error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.keybinding_config_error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+
+"pl_menu.title_multi" = "%d Objekte";
+"pl_menu.play_next" = "Als nächstes abspielen";
+"pl_menu.remove" = "Entfernen";
+"pl_menu.remove_multi" = "Entfernen";
+"pl_menu.delete" = "In den Papierkorb legen";
+"pl_menu.delete_multi" = "In den Papierkorb legen";
+"pl_menu.delete_after_play" = "Nach Wiedergabe in den Papierkorb legen";
+"pl_menu.delete_after_play_multi" = "Nach Wiedergabe in den Papierkorb legen";
+"pl_menu.reveal_in_finder" = "Im Finder anzeigen";
+"pl_menu.add_item" = "Hinzufügen …";
+"pl_menu.clear_playlist" = "Wiedergabeliste leeren";
+
+"tb.play_pause" = "Wiedergabe / Pause";
+"tb.seek" = "Verlauf";
+"tb.time_position" = "Position";
+"tb.15sec_ahead" = "15 Sekunden vor";
+"tb.30sec_ahead" = "30 Sekunden vor";
+"tb.-15sec_ahead" = "15 Sekunden zurück";
+"tb.-30sec_ahead" = "30 Sekunden zurück";
+"tb.next_video" = "Nächstes Video";
+"tb.prev_video" = "Vorheriges Video";
+"tb.vol+" = "Lautstärke erhöhen";
+"tb.vol-" = "Lautstärke verringern";
+"tb.rewind" = "Zurückspulen";
+"tb.fast_forward" = "Vorspulen";

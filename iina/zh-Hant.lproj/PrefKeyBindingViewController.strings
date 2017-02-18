@@ -5,8 +5,8 @@
 /* Class = "NSTableColumn"; headerCell.title = "Action"; ObjectID = "4Bn-MF-dfY"; */
 "4Bn-MF-dfY.headerCell.title" = "命令";
 
-/* Class = "NSButtonCell"; title = "New..."; ObjectID = "JYL-hr-KZT"; */
-"JYL-hr-KZT.title" = "新建...";
+/* Class = "NSButtonCell"; title = "New…"; ObjectID = "JYL-hr-KZT"; */
+"JYL-hr-KZT.title" = "新建…";
 
 /* Class = "NSTableColumn"; headerCell.title = "Key"; ObjectID = "JwC-60-7Hp"; */
 "JwC-60-7Hp.headerCell.title" = "鍵位";
@@ -14,20 +14,11 @@
 /* Class = "NSButtonCell"; title = "Delete this config file"; ObjectID = "QAL-MQ-b0l"; */
 "QAL-MQ-b0l.title" = "刪除此設定檔案";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "aXG-QD-GyW"; */
-"aXG-QD-GyW.title" = "Text Cell";
-
 /* Class = "NSTextFieldCell"; title = "Configuration:"; ObjectID = "au5-6f-s55"; */
 "au5-6f-s55.title" = "設定檔案:";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "c46-i5-iw0"; */
-"c46-i5-iw0.title" = "Text Cell";
 
 /* Class = "NSButtonCell"; title = "Reveal config file in finder"; ObjectID = "gDo-JL-a9k"; */
 "gDo-JL-a9k.title" = "在 Finder 中瀏覽設定檔案";
 
-/* Class = "NSButtonCell"; title = "Duplicate..."; ObjectID = "gpZ-Rh-DMn"; */
-"gpZ-Rh-DMn.title" = "複製...";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "mLe-eI-lIk"; */
-"mLe-eI-lIk.title" = "Box";
+/* Class = "NSButtonCell"; title = "Duplicate…"; ObjectID = "gpZ-Rh-DMn"; */
+"gpZ-Rh-DMn.title" = "複製…";

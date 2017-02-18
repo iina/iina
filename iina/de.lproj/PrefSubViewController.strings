@@ -1,12 +1,18 @@
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "1vo-so-iaM"; */
-"1vo-so-iaM.title" = "Untertitel, die den Dateinamen des Mediums enthalten";
+"1vo-so-iaM.title" = "Untertitel, die den Dateinamen enthalten";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "5CZ-8l-KYJ"; */
-"5CZ-8l-KYJ.title" = "Rahmen";
+"5CZ-8l-KYJ.title" = "Umrandung";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "7NC-Ih-gMB"; */
 "7NC-Ih-gMB.title" = " X:";
+
+/* Class = "NSButtonCell"; title = "Display subtitles in letter box in full screen"; ObjectID = "9kA-0S-Nl8"; */
+"9kA-0S-Nl8.title" = "Untertitel im Vollbildmodus schwarz anzeigen";
+
+/* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "A1r-kr-uDi"; */
+"A1r-kr-uDi.title" = "Untertitelgröße an Fenster anpassen";
 
 /* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "Bjp-HJ-i7V"; */
 "Bjp-HJ-i7V.title" = "sans-serif";
@@ -23,7 +29,10 @@
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "Jvu-MV-7vD"; */
 "Jvu-MV-7vD.title" = " X:";
 
-/* Class = "NSTextFieldCell"; title = "Text subtitle:"; ObjectID = "Mte-Lb-do4"; */
+/* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "MiO-eP-c1f"; */
+"MiO-eP-c1f.title" = "Untertitel laden von:";
+
+/* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Mte-Lb-do4"; */
 "Mte-Lb-do4.title" = "Aussehen:";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "ND2-m7-ZET"; */
@@ -48,7 +57,7 @@
 "VBZ-bi-gTh.title" = "Y:";
 
 /* Class = "NSButtonCell"; title = "Ignore all ASS styles"; ObjectID = "VKh-1E-Ey8"; */
-"VKh-1E-Ey8.title" = "Alle ASS Stile ignorieren";
+"VKh-1E-Ey8.title" = "Alle ASS-Stile ignorieren";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "Waw-Pj-REg"; */
 "Waw-Pj-REg.title" = "Farbe:";
@@ -62,8 +71,8 @@
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "bqN-gA-fs9"; */
 "bqN-gA-fs9.title" = "Versatz:";
 
-/* Class = "NSButtonCell"; title = "Choose..."; ObjectID = "cVp-yI-tMu"; */
-"cVp-yI-tMu.title" = "Wählen...";
+/* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "cVp-yI-tMu"; */
+"cVp-yI-tMu.title" = "Wählen …";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "clt-eT-TMN"; */
 "clt-eT-TMN.title" = "Deaktiviert";
@@ -71,8 +80,8 @@
 /* Class = "NSBox"; title = "Font"; ObjectID = "dsH-Ze-lj5"; */
 "dsH-Ze-lj5.title" = "Schrift";
 
-/* Class = "NSTextFieldCell"; title = "This will cause all ASS subtitles rendered using styles as below."; ObjectID = "i94-zQ-hFA"; */
-"i94-zQ-hFA.title" = "Dies wird alle ASS Untertitel mit den Stilen von unten darstellen";
+/* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "i94-zQ-hFA"; */
+"i94-zQ-hFA.title" = "Alle ASS-Untertitel werden mit den Stilen von unten dargestellt werden.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "jTS-Yq-bvB"; */
 "jTS-Yq-bvB.title" = "Y:";
@@ -90,16 +99,16 @@
 "oYE-Cd-X3V.title" = "Schatten";
 
 /* Class = "NSTextFieldCell"; title = "Margin"; ObjectID = "sVu-u3-QwW"; */
-"sVu-u3-QwW.title" = "Rand";
+"sVu-u3-QwW.title" = "Abstand";
 
 /* Class = "NSMenuItem"; title = "Subtitle with the exact same media filename"; ObjectID = "siy-Uq-tMP"; */
-"siy-Uq-tMP.title" = "Untertitel mit dem gleichen Dateinamen";
+"siy-Uq-tMP.title" = "Untertitel mit gleichem Dateinamen";
 
 /* Class = "NSTextFieldCell"; title = "Align"; ObjectID = "t3t-yJ-pM9"; */
 "t3t-yJ-pM9.title" = "Anordnung";
 
-/* Class = "NSTextFieldCell"; title = "ASS subtitle:"; ObjectID = "tL7-oR-LZ4"; */
-"tL7-oR-LZ4.title" = "ASS Untertitel:";
+/* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "tL7-oR-LZ4"; */
+"tL7-oR-LZ4.title" = "ASS-Untertitel:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "vHI-NX-bZ5"; */
 "vHI-NX-bZ5.title" = "Oben";
@@ -115,11 +124,3 @@
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "zLl-vV-p1h"; */
 "zLl-vV-p1h.title" = "Rechts";
-
-/* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "MiO-eP-c1f"; */
-"MiO-eP-c1f.title" = "Untertitel laden von:";
-
-"9kA-0S-Nl8.title" = "Untertitel im Vollbildmodus schwarz anzeigen";
-
-"A1r-kr-uDi.title" = "Größe des Untertitels an Fenster anpassen";
-

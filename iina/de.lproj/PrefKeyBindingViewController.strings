@@ -1,33 +1,24 @@
 
-/* Class = "NSButtonCell"; title = "Use macOS media key"; ObjectID = "2WY-CR-baD"; */
+/* Class = "NSButtonCell"; title = "Use media keys"; ObjectID = "2WY-CR-baD"; */
 "2WY-CR-baD.title" = "Medientasten verwenden";
 
 /* Class = "NSTableColumn"; headerCell.title = "Action"; ObjectID = "4Bn-MF-dfY"; */
 "4Bn-MF-dfY.headerCell.title" = "Aktion";
 
-/* Class = "NSButtonCell"; title = "New..."; ObjectID = "JYL-hr-KZT"; */
-"JYL-hr-KZT.title" = "Neu...";
+/* Class = "NSButtonCell"; title = "New…"; ObjectID = "JYL-hr-KZT"; */
+"JYL-hr-KZT.title" = "Neu …";
 
 /* Class = "NSTableColumn"; headerCell.title = "Key"; ObjectID = "JwC-60-7Hp"; */
-"JwC-60-7Hp.headerCell.title" = "Schlüssel";
+"JwC-60-7Hp.headerCell.title" = "Taste";
 
 /* Class = "NSButtonCell"; title = "Delete this config file"; ObjectID = "QAL-MQ-b0l"; */
 "QAL-MQ-b0l.title" = "Konfiguration löschen";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "aXG-QD-GyW"; */
-"aXG-QD-GyW.title" = "Text Cell";
-
 /* Class = "NSTextFieldCell"; title = "Configuration:"; ObjectID = "au5-6f-s55"; */
 "au5-6f-s55.title" = "Konfiguration:";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "c46-i5-iw0"; */
-"c46-i5-iw0.title" = "Text Cell";
-
-/* Class = "NSButtonCell"; title = "Reveal config file in finder"; ObjectID = "gDo-JL-a9k"; */
+/* Class = "NSButtonCell"; title = "Reveal config file in Finder"; ObjectID = "gDo-JL-a9k"; */
 "gDo-JL-a9k.title" = "Im Finder anzeigen";
 
-/* Class = "NSButtonCell"; title = "Duplicate..."; ObjectID = "gpZ-Rh-DMn"; */
-"gpZ-Rh-DMn.title" = "Duplizieren...";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "mLe-eI-lIk"; */
-"mLe-eI-lIk.title" = "Box";
+/* Class = "NSButtonCell"; title = "Duplicate…"; ObjectID = "gpZ-Rh-DMn"; */
+"gpZ-Rh-DMn.title" = "Duplizieren …";

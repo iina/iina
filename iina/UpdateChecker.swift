@@ -133,7 +133,7 @@ class UpdateChecker {
         // if require user action
         alert.addButton(withTitle: NSLocalizedString("update.dl_from_website", comment: "Website"))
         alert.addButton(withTitle: NSLocalizedString("update.dl_from_github", comment: "Github"))
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: NSLocalizedString("button.cancel", comment: "Cancel"))
 
         let result = alert.runModal()
 

@@ -4,7 +4,7 @@
 /* Error setting keybinding configuration */
 "alert.keybinding_config_error" = "단축키 설정 파일 \"%@\"를 읽어올 때 오류가 발생했습니다! IINA 기본값을 사용하도록 설정됩니다. 사용자가 지정한 단축키 설정 내용을 점검하십시오.";
 
-/* Buffering... %s%% */
+/* Buffering… %s%% */
 "main.buffering_indicator" = "준비중… %d%%";
 
 /* Audio Delay: */
@@ -76,7 +76,7 @@
 /* Deinterlace: %@ */
 "osd.deinterlace" = "디인터레이스: %@";
 
-/* Finding online subtitles... */
+/* Finding online subtitles… */
 "osd.find_online_sub" = "인터넷에서 자막을 찾는 중…";
 
 /* Mute */
@@ -115,7 +115,7 @@
 /* Subtitle downloaded */
 "osd.sub_downloaded" = "자막 다운로드됨";
 
-/* %d subtitle(s) found. Downloading... */
+/* %d subtitle(s) found. Downloading… */
 "osd.sub_found" = "%d 자막을 찾았습니다. 내려받는 중…";
 
 /* No subtitle found. */

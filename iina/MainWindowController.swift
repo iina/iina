@@ -1071,6 +1071,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Set video size when info available. */
   func adjustFrameByVideoSize(_ videoWidth: Int, _ videoHeight: Int) {
     guard let w = window else { return }
+
+    // video size can change during playback. make sure window size is adjusted only once for each file here.
+    guard playerCore.info.justStartedFile else { return }
+
     // if no video track
     var width = videoWidth
     var height = videoHeight
@@ -1082,23 +1086,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     w.aspectRatio = originalVideoSize
 
     videoView.videoSize = w.convertToBacking(videoView.frame).size
-    // videoView.restartDisplayLink()
 
     if isInFullScreen {
 
       self.windowDidResize(Notification(name: .NSWindowDidResize))
 
     } else {
-      var rect: NSRect
 
-      if playerCore.info.jumppedFromPlaylist &&
-      ud.bool(forKey: Preference.Key.resizeOnlyWhenManuallyOpenFile) {
-        // user is navigating in playlist. remain same window width.
-        let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
-        let newSize = NSSize(width: w.frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
-        rect = NSRect(origin: w.frame.origin, size: newSize)
-        w.setFrame(rect, display: true, animate: true)
-      } else {
+      var rect: NSRect
+      let needResizeWindow = playerCore.info.justOpenedFile || !ud.bool(forKey: Preference.Key.resizeOnlyWhenManuallyOpenFile)
+
+      if needResizeWindow {
         // get videoSize on screen
         var videoSize = originalVideoSize
         if ud.bool(forKey: Preference.Key.usePhysicalResolution) {
@@ -1112,6 +1110,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
         w.setFrame(rect, display: true, animate: true)
+      } else {
+        // user is navigating in playlist. remain same window width.
+        let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
+        let newSize = NSSize(width: w.frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
+        rect = NSRect(origin: w.frame.origin, size: newSize)
+        w.setFrame(rect, display: true, animate: true)
       }
 
       // animated `setFrame` can be inaccurate!
@@ -1121,7 +1125,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         window!.setIsVisible(true)
       }
 
-      playerCore.info.jumppedFromPlaylist = false
+      // maybe not a good position, consider putting these at playback-restart
+      playerCore.info.justOpenedFile = false
+      playerCore.info.justStartedFile = false
 
     }
 

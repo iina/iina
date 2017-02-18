@@ -32,7 +32,8 @@ class PlaybackInfo {
   var isSeeking: Bool = false
   var isPaused: Bool = false
 
-  var jumppedFromPlaylist: Bool = false
+  var justStartedFile: Bool = false
+  var justOpenedFile: Bool = false
 
   /** The current applied aspect, used for find current aspect in menu, etc. Maybe not a good approach. */
   var unsureAspect: String = "Default"

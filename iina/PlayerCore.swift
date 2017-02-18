@@ -63,6 +63,7 @@ class PlayerCore: NSObject {
      mainWindow!.windowDidOpen()
     // Send load file command
     info.fileLoading = true
+    info.justOpenedFile = true
     mpvController.command(.loadfile, args: [path])
   }
 
@@ -372,18 +373,17 @@ class PlayerCore: NSObject {
   }
 
   func playFile(_ path: String) {
+    info.justOpenedFile = true
     mpvController.command(.loadfile, args: [path, "replace"])
     getPLaylist()
   }
 
   func playFileInPlaylist(_ pos: Int) {
-    info.jumppedFromPlaylist = true
     mpvController.setInt(MPVProperty.playlistPos, pos)
     getPLaylist()
   }
 
   func navigateInPlaylist(nextOrPrev: Bool) {
-    info.jumppedFromPlaylist = true
     mpvController.command(nextOrPrev ? .playlistNext : .playlistPrev)
   }
 
@@ -521,7 +521,7 @@ class PlayerCore: NSObject {
   // MARK: - Other
 
   func fileStarted() {
-
+    info.justStartedFile = true
   }
 
   /** This function is called right after file loaded. Should load all meta info here. */

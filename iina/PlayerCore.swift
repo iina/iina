@@ -271,8 +271,9 @@ class PlayerCore: NSObject {
     if enable {
       if info.flipFilter == nil {
         let vf = MPVFilter.flip()
-        addVideoFilter(vf)
-        info.flipFilter = vf
+        if addVideoFilter(vf) {
+          info.flipFilter = vf
+        }
       }
     } else {
       if let vf = info.flipFilter {
@@ -286,8 +287,9 @@ class PlayerCore: NSObject {
     if enable {
       if info.mirrorFilter == nil {
         let vf = MPVFilter.mirror()
-        addVideoFilter(vf)
-        info.mirrorFilter = vf
+        if addVideoFilter(vf) {
+          info.mirrorFilter = vf
+        }
       }
     } else {
       if let vf = info.mirrorFilter {
@@ -414,8 +416,9 @@ class PlayerCore: NSObject {
 
   func setCrop(fromFilter filter: MPVFilter) {
     filter.label = "iina_crop"
-    addVideoFilter(filter)
-    info.cropFilter = filter
+    if addVideoFilter(filter) {
+      info.cropFilter = filter
+    }
   }
 
   func setAudioEq(fromFilter filter: MPVFilter) {
@@ -431,8 +434,10 @@ class PlayerCore: NSObject {
     }
   }
 
-  func addVideoFilter(_ filter: MPVFilter) {
-    mpvController.command(.vf, args: ["add", filter.stringFormat], checkError: false)
+  func addVideoFilter(_ filter: MPVFilter) -> Bool {
+    var result = true
+    mpvController.command(.vf, args: ["add", filter.stringFormat], checkError: false) { result = $0 >= 0 }
+    return result
   }
 
   func removeVideoFiler(_ filter: MPVFilter) {

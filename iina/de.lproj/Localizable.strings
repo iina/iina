@@ -113,3 +113,17 @@
 "pl_menu.reveal_in_finder" = "Im Finder anzeigen";
 "pl_menu.add_item" = "Hinzufügen …";
 "pl_menu.clear_playlist" = "Wiedergabeliste leeren";
+
+"tb.play_pause" = "Wiedergabe / Pause";
+"tb.seek" = "Verlauf";
+"tb.time_position" = "Position";
+"tb.15sec_ahead" = "15 Sekunden vor";
+"tb.30sec_ahead" = "30 Sekunden vor";
+"tb.-15sec_ahead" = "15 Sekunden zurück";
+"tb.-30sec_ahead" = "30 Sekunden zurück";
+"tb.next_video" = "Nächstes Video";
+"tb.prev_video" = "Vorheriges Video";
+"tb.vol+" = "Lautstärke erhöhen";
+"tb.vol-" = "Lautstärke verringern";
+"tb.rewind" = "Zurückspulen";
+"tb.fast_forward" = "Vorspulen";

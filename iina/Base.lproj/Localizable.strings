@@ -118,3 +118,17 @@
 "pl_menu.reveal_in_finder" = "Reveal in Finder";
 "pl_menu.add_item" = "Add Item…";
 "pl_menu.clear_playlist" = "Clear Playlist";
+
+"tb.play_pause" = "Play / Pause";
+"tb.seek" = "Seek";
+"tb.time_position" = "Time Position";
+"tb.15sec_ahead" = "15sec Ahead";
+"tb.30sec_ahead" = "30sec Ahead";
+"tb.-15sec_ahead" = "-15sec Ahead";
+"tb.-30sec_ahead" = "-30sec Ahead";
+"tb.next_video" = "Next Video";
+"tb.prev_video" = "Previous Video";
+"tb.vol+" = "Volume +";
+"tb.vol-" = "Volume -";
+"tb.rewind" = "Rewind";
+"tb.fast_forward" = "Fast Forward";

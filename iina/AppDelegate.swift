@@ -153,7 +153,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     guard let parsed = NSURLComponents(string: url) else { return }
     // links
     if let host = parsed.host, host == "weblink" {
-      guard let urlValue = (parsed.queryItems?.filter { $0.name == "url" }.at(0)?.value) else { return }
+      guard let urlValue = (parsed.queryItems?.filter { $0.name == "url" }.first?.value?.removingPercentEncoding) else { return }
       playerCore.openURLString(urlValue)
     }
   }

@@ -432,19 +432,19 @@ class PlayerCore: NSObject {
   }
 
   func addVideoFilter(_ filter: MPVFilter) {
-    mpvController.command(.vf, args: ["add", filter.stringFormat])
+    mpvController.command(.vf, args: ["add", filter.stringFormat], checkError: false)
   }
 
   func removeVideoFiler(_ filter: MPVFilter) {
-    mpvController.command(.vf, args: ["del", filter.stringFormat])
+    mpvController.command(.vf, args: ["del", filter.stringFormat], checkError: false)
   }
 
   func addAudioFilter(_ filter: MPVFilter) {
-    mpvController.command(.af, args: ["add", filter.stringFormat])
+    mpvController.command(.af, args: ["add", filter.stringFormat], checkError: false)
   }
 
   func removeAudioFilter(_ filter: MPVFilter) {
-    mpvController.command(.af, args: ["del", filter.stringFormat])
+    mpvController.command(.af, args: ["del", filter.stringFormat], checkError: false)
   }
 
   func getAudioDevices() -> [[String: String]] {

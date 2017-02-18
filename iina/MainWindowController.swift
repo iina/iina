@@ -382,6 +382,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if !isInInteractiveMode {
       playerCore.execKeyCode(Utility.mpvKeyCode(from: event))
     }
+    super.keyDown(with: event)
   }
 
   /** record mouse pos on mouse down */

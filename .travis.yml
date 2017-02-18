@@ -1,0 +1,14 @@
+language: objective-c
+osx_image: xcode8.2
+xcode_workspace: iina.xcworkspace
+xcode_scheme: iina
+before_install:
+- brew update
+- brew outdated xctool || brew upgrade xctool
+- gem install xcpretty
+install:
+- pod install --project-directory=$TRAVIS_BUILD_DIR
+before_script:
+- xctool -workspace ${TRAVIS_XCODE_WORKSPACE} -scheme ${TRAVIS_XCODE_SCHEME} run-tests
+script:
+- set -o pipefail && xcodebuild -workspace ${TRAVIS_XCODE_WORKSPACE} -scheme ${TRAVIS_XCODE_SCHEME} -configuration Release | xcpretty

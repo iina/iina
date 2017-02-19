@@ -8,13 +8,15 @@
 
 import Cocoa
 
-class InspectorWindowController: NSWindowController {
+class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource {
 
   override var windowNibName: String {
     return "InspectorWindowController"
   }
 
   var updateTimer: Timer?
+
+  var watchProperties: [String] = []
 
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var trackPopup: NSPopUpButton!
@@ -55,10 +57,23 @@ class InspectorWindowController: NSWindowController {
   @IBOutlet weak var trackChannelsField: NSTextField!
   @IBOutlet weak var trackSampleRateField: NSTextField!
 
+  @IBOutlet weak var avsyncField: NSTextField!
+  @IBOutlet weak var totalAvsyncField: NSTextField!
+  @IBOutlet weak var droppedFramesField: NSTextField!
+  @IBOutlet weak var mistimedFramesField: NSTextField!
+  @IBOutlet weak var displayFPSField: NSTextField!
+  @IBOutlet weak var voFPSField: NSTextField!
+  @IBOutlet weak var edispFPSField: NSTextField!
+  @IBOutlet weak var watchTableView: NSTableView!
+
 
   override func windowDidLoad() {
     super.windowDidLoad()
     window?.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
+
+    watchProperties = UserDefaults.standard.array(forKey: Preference.Key.watchProperties) as! [String]
+    watchTableView.delegate = self
+    watchTableView.dataSource = self
 
     updateInfo()
 
@@ -146,6 +161,22 @@ class InspectorWindowController: NSWindowController {
     let abitrate = controller.getInt(MPVProperty.audioBitrate)
     abitrateField.stringValue = FileSize.format(abitrate, unit: .b) + "bps"
 
+    let dynamicStrProperties: [String: NSTextField] = [
+      MPVProperty.avsync: avsyncField,
+      MPVProperty.totalAvsyncChange: totalAvsyncField,
+      MPVProperty.dropFrameCount: droppedFramesField,
+      MPVProperty.mistimedFrameCount: mistimedFramesField,
+      MPVProperty.displayFps: displayFPSField,
+      MPVProperty.estimatedVfFps: voFPSField,
+      MPVProperty.estimatedDisplayFps: edispFPSField
+    ]
+
+    for (k, v) in dynamicStrProperties {
+      let value = controller.getString(k)
+      v.stringValue = value ?? "N/A"
+      setLabelColor(v, by: value != nil)
+    }
+
   }
 
   func fileLoaded() {
@@ -154,6 +185,7 @@ class InspectorWindowController: NSWindowController {
 
   func dynamicUpdate() {
     updateInfo(dynamic: true)
+    watchTableView.reloadData()
   }
 
   func updateTrack() {
@@ -183,6 +215,49 @@ class InspectorWindowController: NSWindowController {
     }
   }
 
+  // MARK: NSTableView
+
+  func numberOfRows(in tableView: NSTableView) -> Int {
+    return watchProperties.count
+  }
+
+  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+    guard let identifier = tableColumn?.identifier else { return nil }
+
+    guard let property = watchProperties.at(row) else { return nil }
+    if identifier == Constants.Identifier.key {
+      return property
+    } else if identifier == Constants.Identifier.value {
+      return PlayerCore.shared.mpvController.getString(property)
+    }
+    return ""
+  }
+
+  func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
+    guard let value = object as? String,
+      let identifier = tableColumn?.identifier else { return }
+    if identifier == Constants.Identifier.key {
+      watchProperties[row] = value
+    }
+    saveWatchList()
+  }
+
+  @IBAction func addWatchAction(_ sender: AnyObject) {
+    let _ = Utility.quickPromptPanel(messageText: "Add watch property", informativeText: "Please enter a valid MPV property name.") { str in
+      watchProperties.append(str)
+      watchTableView.reloadData()
+      saveWatchList()
+    }
+  }
+
+  @IBAction func removeWatchAction(_ sender: AnyObject) {
+    if watchTableView.selectedRow >= 0 {
+      watchProperties.remove(at: watchTableView.selectedRow)
+      watchTableView.reloadData()
+    }
+    saveWatchList()
+  }
+
 
   // MARK: IBActions
 
@@ -199,6 +274,10 @@ class InspectorWindowController: NSWindowController {
 
   private func setLabelColor(_ label: NSTextField, by state: Bool) {
     label.textColor = state ? NSColor.textColor : NSColor.disabledControlTextColor
+  }
+
+  private func saveWatchList() {
+    UserDefaults.standard.set(watchProperties, forKey: Preference.Key.watchProperties)
   }
 
 }

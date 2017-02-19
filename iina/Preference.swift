@@ -184,6 +184,8 @@ struct Preference {
     static let useUserDefinedConfDir = "useUserDefinedConfDir"
     static let userDefinedConfDir = "userDefinedConfDir"
 
+    static let watchProperties = "watchProperties"
+
   }
 
   // MARK: - Enums
@@ -408,7 +410,9 @@ struct Preference {
     Key.screenshotFolder: "~/Pictures/ScreenShots",
     Key.screenshotIncludeSubtitle: true,
     Key.screenshotFormat: ScreenshotFormat.png.rawValue,
-    Key.screenshotTemplate: "%F-%n"
+    Key.screenshotTemplate: "%F-%n",
+
+    Key.watchProperties: []
   ]
 
 }

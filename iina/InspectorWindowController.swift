@@ -22,6 +22,9 @@ class InspectorWindowController: NSWindowController {
   @IBOutlet weak var pathField: NSTextField!
   @IBOutlet weak var fileSizeField: NSTextField!
   @IBOutlet weak var fileFormatField: NSTextField!
+  @IBOutlet weak var chaptersField: NSTextField!
+  @IBOutlet weak var editionsField: NSTextField!
+
   @IBOutlet weak var durationField: NSTextField!
   @IBOutlet weak var vformatField: NSTextField!
   @IBOutlet weak var vcodecField: NSTextField!
@@ -81,6 +84,8 @@ class InspectorWindowController: NSWindowController {
       let strProperties: [String: NSTextField] = [
         MPVProperty.path: pathField,
         MPVProperty.fileFormat: fileFormatField,
+        MPVProperty.chapters: chaptersField,
+        MPVProperty.editions: editionsField,
 
         MPVProperty.videoFormat: vformatField,
         MPVProperty.videoCodec: vcodecField,

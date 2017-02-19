@@ -564,6 +564,8 @@ class PlayerCore: NSObject {
         needEnterFullScreenForNextMedia = false
       }
     }
+    
+    NotificationCenter.default.post(Notification(name: Constants.Noti.fileLoaded))
   }
 
   func notifyMainWindowVideoSizeChanged() {

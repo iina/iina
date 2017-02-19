@@ -20,7 +20,7 @@ class InspectorWindowController: NSWindowController {
   @IBOutlet weak var trackPopup: NSPopUpButton!
 
   @IBOutlet weak var pathField: NSTextField!
-  @IBOutlet weak var fileSizeFormat: NSTextField!
+  @IBOutlet weak var fileSizeField: NSTextField!
   @IBOutlet weak var fileFormatField: NSTextField!
   @IBOutlet weak var durationField: NSTextField!
   @IBOutlet weak var vformatField: NSTextField!
@@ -60,6 +60,14 @@ class InspectorWindowController: NSWindowController {
     updateInfo()
 
     updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
+
+    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: Constants.Noti.fileLoaded, object: nil)
+  }
+
+  deinit {
+    ObjcUtils.silenced {
+      NotificationCenter.default.removeObserver(self)
+    }
   }
 
   func updateInfo(dynamic: Bool = false) {
@@ -102,6 +110,9 @@ class InspectorWindowController: NSWindowController {
       let vheight = controller.getInt(MPVProperty.height)
       vsizeField.stringValue = "\(vwidth)\u{d7}\(vheight)"
 
+      let fileSize = controller.getInt(MPVProperty.fileSize)
+      fileSizeField.stringValue = FileSize.format(fileSize, unit: .b)
+
       // track list
 
       trackPopup.removeAllItems()
@@ -130,6 +141,10 @@ class InspectorWindowController: NSWindowController {
     let abitrate = controller.getInt(MPVProperty.audioBitrate)
     abitrateField.stringValue = FileSize.format(abitrate, unit: .b) + "bps"
 
+  }
+
+  func fileLoaded() {
+    updateInfo()
   }
 
   func dynamicUpdate() {

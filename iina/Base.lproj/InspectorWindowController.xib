@@ -15,7 +15,7 @@
                 <outlet property="asamplerateField" destination="Ghr-q6-WAW" id="iz6-4W-IyG"/>
                 <outlet property="durationField" destination="uzH-YO-YLT" id="zK3-y6-25V"/>
                 <outlet property="fileFormatField" destination="3Lj-7X-tNH" id="e0X-bg-Xj6"/>
-                <outlet property="fileSizeFormat" destination="UBX-ge-nPN" id="tEq-z3-LdY"/>
+                <outlet property="fileSizeField" destination="UBX-ge-nPN" id="YZi-k9-d2u"/>
                 <outlet property="pathField" destination="nJF-Fe-glJ" id="zY0-Vm-keO"/>
                 <outlet property="tabView" destination="wHY-jo-uW0" id="9Lk-Mi-4Aw"/>
                 <outlet property="trackChannelsField" destination="VR8-mY-Zfn" id="0Dg-SL-01x"/>
@@ -316,7 +316,7 @@
                                         <constraint firstItem="4PF-1d-gZO" firstAttribute="top" secondItem="Hmg-bS-UMv" secondAttribute="bottom" constant="6" id="DiR-e9-8Yv"/>
                                         <constraint firstItem="v4j-fa-olc" firstAttribute="leading" secondItem="GSF-Y5-FGJ" secondAttribute="trailing" constant="8" id="Dyx-ec-SEg"/>
                                         <constraint firstItem="apr-sq-JIb" firstAttribute="leading" secondItem="mRY-yK-FeT" secondAttribute="leading" constant="12" id="EDW-pS-WKA"/>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ghr-q6-WAW" secondAttribute="bottom" constant="16" id="FXY-TE-UkS"/>
+                                        <constraint firstAttribute="bottom" secondItem="Ghr-q6-WAW" secondAttribute="bottom" constant="16" id="FXY-TE-UkS"/>
                                         <constraint firstAttribute="trailing" secondItem="hBf-Sx-lbf" secondAttribute="trailing" constant="12" id="Hb2-Jx-92q"/>
                                         <constraint firstItem="a3w-YC-7oN" firstAttribute="top" secondItem="6EL-aj-Hjq" secondAttribute="top" id="Hla-Px-41r"/>
                                         <constraint firstItem="6EL-aj-Hjq" firstAttribute="leading" secondItem="mRY-yK-FeT" secondAttribute="leading" constant="12" id="IVp-gv-R6l"/>
@@ -601,8 +601,8 @@
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7e-QU-Pta">
-                                            <rect key="frame" x="94" y="123" width="37" height="14"/>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7e-QU-Pta">
+                                            <rect key="frame" x="94" y="123" width="296" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="u39-dg-rLQ">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

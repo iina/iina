@@ -14,53 +14,171 @@ class InspectorWindowController: NSWindowController {
     return "InspectorWindowController"
   }
 
+  var updateTimer: Timer?
+
+  @IBOutlet weak var tabView: NSTabView!
+  @IBOutlet weak var trackPopup: NSPopUpButton!
+
   @IBOutlet weak var pathField: NSTextField!
+  @IBOutlet weak var fileSizeFormat: NSTextField!
+  @IBOutlet weak var fileFormatField: NSTextField!
   @IBOutlet weak var durationField: NSTextField!
   @IBOutlet weak var vformatField: NSTextField!
   @IBOutlet weak var vcodecField: NSTextField!
+  @IBOutlet weak var vdecoderField: NSTextField!
+  @IBOutlet weak var voField: NSTextField!
   @IBOutlet weak var vsizeField: NSTextField!
   @IBOutlet weak var vbitrateField: NSTextField!
+  @IBOutlet weak var vfpsField: NSTextField!
   @IBOutlet weak var aformatField: NSTextField!
   @IBOutlet weak var acodecField: NSTextField!
+  @IBOutlet weak var aoField: NSTextField!
   @IBOutlet weak var achannelsField: NSTextField!
   @IBOutlet weak var abitrateField: NSTextField!
   @IBOutlet weak var asamplerateField: NSTextField!
 
+  @IBOutlet weak var trackIdField: NSTextField!
+  @IBOutlet weak var trackDefaultField: NSTextField!
+  @IBOutlet weak var trackForcedField: NSTextField!
+  @IBOutlet weak var trackSelectedField: NSTextField!
+  @IBOutlet weak var trackExternalField: NSTextField!
+  @IBOutlet weak var trackSourceIdField: NSTextField!
+  @IBOutlet weak var trackTitleField: NSTextField!
+  @IBOutlet weak var trackLangField: NSTextField!
+  @IBOutlet weak var trackFilePathField: NSTextField!
+  @IBOutlet weak var trackCodecField: NSTextField!
+  @IBOutlet weak var trackDecoderField: NSTextField!
+  @IBOutlet weak var trackFPSField: NSTextField!
+  @IBOutlet weak var trackChannelsField: NSTextField!
+  @IBOutlet weak var trackSampleRateField: NSTextField!
+
 
   override func windowDidLoad() {
     super.windowDidLoad()
+    window?.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
+
     updateInfo()
+
+    updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
   }
 
-  func updateInfo() {
+  func updateInfo(dynamic: Bool = false) {
     let controller = PlayerCore.shared.mpvController
+    let info = PlayerCore.shared.info
 
-    // string properties
+    if !dynamic {
 
-    let strProperties: [String: NSTextField] = [
-      MPVProperty.path: pathField,
-      MPVProperty.videoFormat: vformatField,
-      MPVProperty.videoCodec: vcodecField,
-      MPVProperty.videoBitrate: vbitrateField,
-      MPVProperty.audioCodec: acodecField,
-      MPVProperty.audioParamsFormat: aformatField,
-      MPVProperty.audioParamsChannels: achannelsField,
-      MPVProperty.audioBitrate: abitrateField,
-      MPVProperty.audioParamsSamplerate: asamplerateField
-    ]
+      // string properties
 
-    strProperties.forEach { (k, v) in
-      v.stringValue = controller.getString(k) ?? "Error"
+      let strProperties: [String: NSTextField] = [
+        MPVProperty.path: pathField,
+        MPVProperty.fileFormat: fileFormatField,
+
+        MPVProperty.videoFormat: vformatField,
+        MPVProperty.videoCodec: vcodecField,
+        MPVProperty.hwdecCurrent: vdecoderField,
+        MPVProperty.containerFps: vfpsField,
+        MPVProperty.currentVo: voField,
+        MPVProperty.audioCodec: acodecField,
+        MPVProperty.currentAo: aoField,
+        MPVProperty.audioParamsFormat: aformatField,
+        MPVProperty.audioParamsChannels: achannelsField,
+        MPVProperty.audioBitrate: abitrateField,
+        MPVProperty.audioParamsSamplerate: asamplerateField
+      ]
+
+      for (k, v) in strProperties {
+        let value = controller.getString(k)
+        v.stringValue = value ?? "N/A"
+        setLabelColor(v, by: value != nil)
+      }
+
+      // other properties
+
+      let duration = controller.getDouble(MPVProperty.duration)
+      durationField.stringValue = VideoTime(duration).stringRepresentation
+
+      let vwidth = controller.getInt(MPVProperty.width)
+      let vheight = controller.getInt(MPVProperty.height)
+      vsizeField.stringValue = "\(vwidth)\u{d7}\(vheight)"
+
+      // track list
+
+      trackPopup.removeAllItems()
+      for track in info.videoTracks {
+        trackPopup.menu?.addItem(withTitle: "Video" + track.readableTitle,
+                                 action: nil, tag: nil, obj: track, stateOn: false)
+      }
+      trackPopup.menu?.addItem(NSMenuItem.separator())
+      for track in info.audioTracks {
+        trackPopup.menu?.addItem(withTitle: "Audio" + track.readableTitle,
+                                 action: nil, tag: nil, obj: track, stateOn: false)
+      }
+      trackPopup.menu?.addItem(NSMenuItem.separator())
+      for track in info.subTracks {
+        trackPopup.menu?.addItem(withTitle: "Sub" + track.readableTitle,
+                                 action: nil, tag: nil, obj: track, stateOn: false)
+      }
+      trackPopup.selectItem(at: 0)
+      updateTrack()
+
     }
 
-    // other properties
+    let vbitrate = controller.getInt(MPVProperty.videoBitrate)
+    vbitrateField.stringValue = FileSize.format(vbitrate, unit: .b) + "bps"
 
-    let duration = controller.getDouble(MPVProperty.duration)
-    durationField.stringValue = VideoTime(duration).stringRepresentation
+    let abitrate = controller.getInt(MPVProperty.audioBitrate)
+    abitrateField.stringValue = FileSize.format(abitrate, unit: .b) + "bps"
 
-    let vwidth = controller.getInt(MPVProperty.width)
-    let vheight = controller.getInt(MPVProperty.height)
-    vsizeField.stringValue = "\(vwidth)\u{d7}\(vheight)"
+  }
+
+  func dynamicUpdate() {
+    updateInfo(dynamic: true)
+  }
+
+  func updateTrack() {
+    guard let track = trackPopup.selectedItem?.representedObject as? MPVTrack else { return }
+
+    trackIdField.stringValue = "\(track.id)"
+    setLabelColor(trackDefaultField, by: track.isDefault)
+    setLabelColor(trackForcedField, by: track.isForced)
+    setLabelColor(trackSelectedField, by: track.isSelected)
+    setLabelColor(trackExternalField, by: track.isExternal)
+
+    let strProperties: [(String?, NSTextField)] = [
+      (track.srcId?.toStr(), trackSourceIdField),
+      (track.title, trackTitleField),
+      (track.lang, trackLangField),
+      (track.externalFilename, trackFilePathField),
+      (track.codec, trackCodecField),
+      (track.decoderDesc, trackDecoderField),
+      (track.demuxFps?.toStr(), trackFPSField),
+      (track.demuxChannels, trackChannelsField),
+      (track.demuxSamplerate?.toStr(), trackSampleRateField)
+    ]
+
+    for (str, field) in strProperties {
+      field.stringValue = str ?? "N/A"
+      setLabelColor(field, by: str != nil)
+    }
+  }
+
+
+  // MARK: IBActions
+
+  @IBAction func tabSwitched(_ sender: NSSegmentedControl) {
+    tabView.selectTabViewItem(at: sender.selectedSegment)
+  }
+
+  @IBAction func trackSwitched(_ sender: AnyObject) {
+    updateTrack()
+  }
+
+
+  // MARK: Utils
+
+  private func setLabelColor(_ label: NSTextField, by state: Bool) {
+    label.textColor = state ? NSColor.textColor : NSColor.disabledControlTextColor
   }
 
 }

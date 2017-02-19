@@ -705,6 +705,11 @@ class PlayerCore: NSObject {
       track.lang = mpvController.getString(MPVProperty.trackListNLang(index))
       track.codec = mpvController.getString(MPVProperty.trackListNCodec(index))
       track.externalFilename = mpvController.getString(MPVProperty.trackListNExternalFilename(index))
+      track.decoderDesc = mpvController.getString(MPVProperty.trackListNDecoderDesc(index))
+      track.demuxFps = mpvController.getDouble(MPVProperty.trackListNDemuxFps(index))
+      track.demuxChannels = mpvController.getString(MPVProperty.trackListNDemuxChannels(index))
+      track.demuxSamplerate = mpvController.getInt(MPVProperty.trackListNDemuxSamplerate(index))
+
       // add to lists
       switch track.type {
       case .audio:

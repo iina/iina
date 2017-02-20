@@ -1072,9 +1072,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func adjustFrameByVideoSize(_ videoWidth: Int, _ videoHeight: Int) {
     guard let w = window else { return }
 
-    // video size can change during playback. make sure window size is adjusted only once for each file here.
-    guard playerCore.info.justStartedFile else { return }
-
     // if no video track
     var width = videoWidth
     var height = videoHeight

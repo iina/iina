@@ -134,6 +134,7 @@ struct Preference {
     static let transportRTSPThrough = "transportRTSPThrough"
     static let ytdlEnabled = "ytdlEnabled"
     static let ytdlRawOptions = "ytdlRawOptions"
+    static let httpProxy = "httpProxy"
 
     // Control
 
@@ -388,6 +389,7 @@ struct Preference {
     Key.transportRTSPThrough: RTSPTransportation.tcp.rawValue,
     Key.ytdlEnabled: true,
     Key.ytdlRawOptions: "",
+    Key.httpProxy: "",
 
     Key.inputConfigs: [:],
     Key.currentInputConfigName: "IINA Default",

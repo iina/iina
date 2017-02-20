@@ -290,6 +290,9 @@
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="KNf-nq-d77" name="value" keyPath="values.httpProxy" id="5or-8i-P1x"/>
+                    </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8XM-Bb-OoC">
                     <rect key="frame" x="204" y="132" width="266" height="14"/>

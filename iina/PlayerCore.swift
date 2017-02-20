@@ -73,6 +73,11 @@ class PlayerCore: NSObject {
     let path = Utility.exeDirURL.path + ":" + oldPath
     setenv("PATH", path, 1)
 
+    // set http proxy
+    if let proxy = ud.string(forKey: Preference.Key.httpProxy), !proxy.isEmpty {
+      setenv("http_proxy", proxy, 1)
+    }
+
     mpvController.mpvInit()
   }
 

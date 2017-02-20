@@ -75,7 +75,7 @@ class PlayerCore: NSObject {
 
     // set http proxy
     if let proxy = ud.string(forKey: Preference.Key.httpProxy), !proxy.isEmpty {
-      setenv("http_proxy", proxy, 1)
+      setenv("http_proxy", "http://" + proxy, 1)
     }
 
     mpvController.mpvInit()

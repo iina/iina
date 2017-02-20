@@ -59,7 +59,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" utility="YES" HUD="YES"/>
             <windowPositionMask key="initialPositionMask" rightStrut="YES"/>
             <rect key="contentRect" x="1539" y="436" width="424" height="399"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="1680" y="463" width="1920" height="1057"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="424" height="399"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -158,7 +158,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGE-iz-M2h">
                                             <rect key="frame" x="10" y="301" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Format:" id="PQD-yB-mm6">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -166,7 +166,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6EL-aj-Hjq">
                                             <rect key="frame" x="10" y="116" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Format:" id="5H6-qJ-RDS">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -174,7 +174,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FwA-X7-Alr">
                                             <rect key="frame" x="10" y="281" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Codec:" id="bki-sE-xCA">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -182,7 +182,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zp5-es-UTa">
                                             <rect key="frame" x="10" y="96" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Codec:" id="n0s-eM-42w">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -190,7 +190,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxW-1z-Af9">
                                             <rect key="frame" x="10" y="221" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Size:" id="f2P-qb-wRx">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -198,7 +198,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EiP-Mu-9cf">
                                             <rect key="frame" x="10" y="56" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Channels:" id="it3-05-Pwu">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -206,7 +206,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apr-sq-JIb">
                                             <rect key="frame" x="10" y="36" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Bit Rate:" id="A4y-LL-x0z">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -214,7 +214,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qke-bh-4oG">
                                             <rect key="frame" x="10" y="201" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Bit Rate:" id="jyV-Pd-UvH">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -230,7 +230,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1d-SG-OZB">
                                             <rect key="frame" x="10" y="261" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hw Decoder:" id="DHh-ne-10f">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -238,7 +238,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ldf-jT-tdl">
                                             <rect key="frame" x="10" y="241" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Driver:" id="I2E-6Z-Gnn">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -246,7 +246,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSF-Y5-FGJ">
                                             <rect key="frame" x="10" y="76" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Driver:" id="MME-KZ-jrG">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -281,7 +281,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nn4-TP-Hpd">
                                             <rect key="frame" x="10" y="16" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Sample Rate:" id="llF-4b-Z8b">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -297,7 +297,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOE-eM-QQi">
                                             <rect key="frame" x="10" y="181" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="FPS:" id="7QX-tu-rvs">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -422,7 +422,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2o-Mf-T1P">
                                             <rect key="frame" x="10" y="283" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ID:" id="mZG-ik-Led">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -438,7 +438,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oof-Fn-7Cw">
                                             <rect key="frame" x="10" y="263" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Properties:" id="dtn-wS-j6U">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -446,7 +446,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ZF-PG-IIG">
                                             <rect key="frame" x="10" y="243" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Source ID:" id="jCY-og-BAa">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -454,7 +454,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4x-fQ-Uau">
                                             <rect key="frame" x="10" y="223" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Title:" id="9eq-rd-zGy">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -462,7 +462,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dl1-oz-GjJ">
                                             <rect key="frame" x="10" y="203" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Language:" id="FIw-CH-b05">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -470,7 +470,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brr-Ci-pQU">
                                             <rect key="frame" x="10" y="183" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File Path:" id="Jxp-Wf-BhU">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -478,7 +478,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9p-qC-0t4">
                                             <rect key="frame" x="10" y="163" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Codec:" id="daB-hU-mku">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -486,7 +486,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l34-Lu-Nzf">
                                             <rect key="frame" x="10" y="143" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Decoder:" id="xix-0S-ehE">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -494,7 +494,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rif-ov-KDp">
                                             <rect key="frame" x="10" y="123" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="FPS:" id="1dz-Vt-0MO">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -502,7 +502,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OgS-y8-ape">
                                             <rect key="frame" x="10" y="103" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Channels:" id="Luq-rQ-aO4">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -606,7 +606,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj8-mz-w6w">
                                             <rect key="frame" x="10" y="83" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Sample Rate:" id="vrP-XL-Weg">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -725,7 +725,7 @@
                                                 <constraint firstAttribute="width" constant="60" id="one-tZ-t6P"/>
                                             </constraints>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Size:" id="KqD-NM-WiK">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -749,7 +749,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EaI-Lh-edg">
                                             <rect key="frame" x="10" y="246" width="64" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Format:" id="mgl-Et-20K">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -757,7 +757,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYJ-iA-Cdg">
                                             <rect key="frame" x="10" y="323" width="380" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File path:" id="4jf-w4-kkv">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -765,7 +765,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEN-lo-1AP">
                                             <rect key="frame" x="10" y="226" width="64" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Duration:" id="OCm-zb-deg">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -773,7 +773,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpH-Qz-kKo">
                                             <rect key="frame" x="10" y="206" width="64" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Chapters:" id="PBk-VC-4gu">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -781,7 +781,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2xR-1D-bSh">
                                             <rect key="frame" x="10" y="186" width="64" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Editions:" id="POj-mQ-zP9">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -861,7 +861,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAy-hh-4mE">
                                             <rect key="frame" x="10" y="327" width="131" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="A/V Sync Diff:" id="iVK-Ck-Lyq">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -877,7 +877,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xx9-GE-Qp4">
                                             <rect key="frame" x="10" y="307" width="131" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Total A/V Sync:" id="sbO-Cn-gpI">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -893,7 +893,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9k-Bu-wSB">
                                             <rect key="frame" x="10" y="287" width="131" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Dropped Frames:" id="CrF-UR-udW">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -909,7 +909,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4a-xE-z4Y">
                                             <rect key="frame" x="10" y="267" width="131" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mistimed Frames:" id="AYt-pH-UCi">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -925,7 +925,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7h-Wk-a9A">
                                             <rect key="frame" x="10" y="247" width="131" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Display FPS:" id="AjU-1T-aGR">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -941,7 +941,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G90-uq-cW4">
                                             <rect key="frame" x="10" y="227" width="131" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Estimated Output FPS:" id="g8p-Ec-awO">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -957,7 +957,7 @@
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLQ-aa-TdR">
                                             <rect key="frame" x="10" y="207" width="131" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Estimated Disp FPS" id="JN9-3E-OJp">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -976,7 +976,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oof-hT-luu">
                                             <rect key="frame" x="10" y="168" width="40" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Watch" id="tNS-gW-PcC">
-                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -991,7 +991,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="376" height="132"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
-                                                        <color key="backgroundColor" white="0.5" alpha="0.1955065016778523" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" white="0.69999999999999996" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
                                                             <tableColumn identifier="Key" editable="NO" width="116" minWidth="40" maxWidth="1000" id="zDk-Ie-EPs">
@@ -1001,7 +1001,7 @@
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                 </tableHeaderCell>
                                                                 <textFieldCell key="dataCell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="ydW-J5-Kk2">
-                                                                    <font key="font" metaFont="system" size="11"/>
+                                                                    <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
@@ -1014,7 +1014,7 @@
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                 </tableHeaderCell>
                                                                 <textFieldCell key="dataCell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="cCV-DA-Kkq">
-                                                                    <font key="font" metaFont="system" size="11"/>
+                                                                    <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>

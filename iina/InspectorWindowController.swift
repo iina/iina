@@ -228,7 +228,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     if identifier == Constants.Identifier.key {
       return property
     } else if identifier == Constants.Identifier.value {
-      return PlayerCore.shared.mpvController.getString(property)
+      return PlayerCore.shared.mpvController.getString(property) ?? "<Error>"
     }
     return ""
   }

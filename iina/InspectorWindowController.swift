@@ -164,7 +164,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     let dynamicStrProperties: [String: NSTextField] = [
       MPVProperty.avsync: avsyncField,
       MPVProperty.totalAvsyncChange: totalAvsyncField,
-      MPVProperty.dropFrameCount: droppedFramesField,
+      MPVProperty.frameDropCount: droppedFramesField,
       MPVProperty.mistimedFrameCount: mistimedFramesField,
       MPVProperty.displayFps: displayFPSField,
       MPVProperty.estimatedVfFps: voFPSField,

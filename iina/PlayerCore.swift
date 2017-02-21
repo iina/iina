@@ -70,7 +70,10 @@ class PlayerCore: NSObject {
   func startMPV() {
     // set path for youtube-dl
     let oldPath = String(cString: getenv("PATH")!)
-    let path = Utility.exeDirURL.path + ":" + oldPath
+    var path = Utility.exeDirURL.path + ":" + oldPath
+    if let customYtdlPath = ud.string(forKey: Preference.Key.ytdlSearchPath), !customYtdlPath.isEmpty {
+      path = customYtdlPath + ":" + path
+    }
     setenv("PATH", path, 1)
 
     // set http proxy

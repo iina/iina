@@ -133,6 +133,7 @@ struct Preference {
     static let userAgent = "userAgent"
     static let transportRTSPThrough = "transportRTSPThrough"
     static let ytdlEnabled = "ytdlEnabled"
+    static let ytdlSearchPath = "ytdlSearchPath"
     static let ytdlRawOptions = "ytdlRawOptions"
     static let httpProxy = "httpProxy"
 
@@ -388,6 +389,7 @@ struct Preference {
     Key.userAgent: "",
     Key.transportRTSPThrough: RTSPTransportation.tcp.rawValue,
     Key.ytdlEnabled: true,
+    Key.ytdlSearchPath: "",
     Key.ytdlRawOptions: "",
     Key.httpProxy: "",
 

@@ -14,7 +14,9 @@ extension Just.HTTPResult {
   var fileName: String? {
     get {
       guard let field = self.headers["Content-Disposition"] else { return nil }
-      return Regex.httpFileName.captures(in: field).at(1)
+      let unicodeArray: [UInt8] = field.unicodeScalars.map { UInt8($0.value) }
+      let unicodeStr = String(bytes: unicodeArray, encoding: String.Encoding.utf8)!
+      return Regex.httpFileName.captures(in: unicodeStr).at(1)
     }
   }
 
@@ -27,5 +29,5 @@ extension Just.HTTPResult {
     }
     return url
   }
-  
+
 }

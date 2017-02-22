@@ -14,6 +14,7 @@ class FileSize {
     case b = 1
     case kb = 1000
     case mb = 1000000
+    case gb = 1000000000
 
     var string: String {
       get {
@@ -21,12 +22,13 @@ class FileSize {
         case .b: return "B"
         case .kb: return "K"
         case .mb: return "M"
+        case .gb: return "G"
         }
       }
     }
   }
 
-  static private let unitValues = [Unit.mb, Unit.kb, Unit.b]
+  static private let unitValues = [Unit.gb, Unit.mb, Unit.kb, Unit.b]
 
   static func format(_ number: Int, unit: Unit, digits: Int = 2) -> String {
     let bytes = number * unit.rawValue

@@ -15,7 +15,7 @@
 "playlist.chapter_cap" = "章節";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "緩衝中... %@%%";
+"main.buffering_indicator" = "緩衝中... %d%%";
 
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "默認";

@@ -266,7 +266,7 @@ class MPVController: NSObject {
     // Set options that can be override by user's config.
     chkErr(mpv_set_option_string(mpv, MPVOption.Video.vo, "opengl-cb"))
     chkErr(mpv_set_option_string(mpv, MPVOption.Window.keepaspect, "no"))
-    chkErr(mpv_set_option_string(mpv, MPVOption.Video.hwdecPreload, "auto"))
+    chkErr(mpv_set_option_string(mpv, MPVOption.Video.openglHwdecInterop, "auto"))
 
     // Load external scripts
     let loader = ScriptLoader()

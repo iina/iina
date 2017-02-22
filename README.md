@@ -33,11 +33,11 @@ When raising an issue, please **use English** if possible.
 
 # Installing
 
-To install IINA, please go to the [releases page](https://github.com/lhc70000/iina/releases) and download the latest version of IINA. Simply open the downloaded .dmg file and then drag the IINA icon to your Applications folder.
+To install IINA, please go to the [releases page](https://github.com/lhc70000/iina/releases) and download the latest version of IINA. Simply open the downloaded .dmg file and then drag the IINA icon to your Applications folder. Done!
 
 # Building
 
-**Use pre-compiled dylibs**
+**Using pre-compiled dylibs**
 
 1. Please make sure CocoaPods is installed.
 
@@ -84,7 +84,7 @@ Theoretically no extra work is needed. _If you are unwilling to use the provided
 
 **Please read [CONTRIBUTING.md](https://github.com/lhc70000/iina/blob/master/CONTRIBUTING.md) before opening an issue or a pull request.**
 
-**Please the author for permission before starting to work on a pull request** to ensure that no one else is working on the same feature.
+**Please ask the author before starting to work on a pull request** to ensure that no one else is working on the same feature.
 
 Any feedback is appreciated! You can
 

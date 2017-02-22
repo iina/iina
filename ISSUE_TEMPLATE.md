@@ -1,17 +1,7 @@
-<!--
-
-Note: If you encountered one of the following issue:
-- No window shown when opening file
-- The window flashes and disappears immediately
-- It opens a different file, especially another audio file in the same folder
-This may caused by issue #377. Please **quit IINA completely** and try opening the same file again.
-
--->
-
 **System and IINA version:**
 
 - macOS 10.12.3
-- IINA 0.0.5
+- IINA 0.0.6
 
 **Expected behavior:**
 
@@ -22,11 +12,16 @@ This may caused by issue #377. Please **quit IINA completely** and try opening t
 (N/A for feature requests)
 
 <!-- If it crashes, please upload the report (you can also find them in Console.app) -->
-Crash report:
+- Crash report:
+<!-- Please provide mpv log if possible (you can enable logging in Preference>Advanced) -->
+- MPV log:
 
 **Steps to reproduce:**
 
 (N/A for feature requests)
+
+<!-- If it's related to playback, please check whether mpv having the same problem. If so, it might be mpv's problem. -->
+- [x] MPV does not have this problem.
 
 **How often does this happen?**
 

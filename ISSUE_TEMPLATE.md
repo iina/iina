@@ -1,15 +1,28 @@
+<!--
+
+Note: If you encountered one of the following issue:
+- No window shown when opening file
+- The window flashes and disappears immediately
+- It opens a different file, especially another audio file in the same folder
+This may caused by issue #377. Please **quit IINA completely** and try opening the same file again.
+
+-->
+
 **System and IINA version:**
 
-- macOS 10.12.2
-- IINA 0.0.4
+- macOS 10.12.3
+- IINA 0.0.5
 
-**Expected hehavior:**
+**Expected behavior:**
 
 
 
 **Actual behavior:**
 
 (N/A for feature requests)
+
+<!-- If it crashes, please upload the report (you can also find them in Console.app) -->
+Crash report:
 
 **Steps to reproduce:**
 

@@ -48,7 +48,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="680" height="355"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <visualEffectView appearanceType="vibrantDark" blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Nrz-jZ-Luf">
+                    <visualEffectView hidden="YES" appearanceType="vibrantDark" blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Nrz-jZ-Luf">
                         <rect key="frame" x="0.0" y="0.0" width="680" height="355"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxV-jX-kfL">
@@ -288,7 +288,7 @@
                             <color key="color" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                         </shadow>
                     </visualEffectView>
-                    <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="g0O-v5-RQj">
+                    <visualEffectView hidden="YES" wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="g0O-v5-RQj">
                         <rect key="frame" x="8" y="277" width="197" height="48"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ofw-1d-N4T" userLabel="OSD">
@@ -313,7 +313,7 @@
                             <constraint firstAttribute="height" constant="60" id="sUc-WO-8kQ"/>
                         </constraints>
                     </visualEffectView>
-                    <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="oX4-0N-but">
+                    <visualEffectView hidden="YES" wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="oX4-0N-but">
                         <rect key="frame" x="260" y="130" width="160" height="96"/>
                         <subviews>
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="uZe-PA-1Id">

@@ -98,7 +98,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-    guard playerCore.mainWindow.isWindowLoaded else { return false }
+    guard let mw = playerCore.mainWindow, mw.isWindowLoaded else { return false }
     return UserDefaults.standard.bool(forKey: Preference.Key.quitWhenNoOpenedWindow)
   }
 

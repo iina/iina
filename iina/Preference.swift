@@ -133,7 +133,9 @@ struct Preference {
     static let userAgent = "userAgent"
     static let transportRTSPThrough = "transportRTSPThrough"
     static let ytdlEnabled = "ytdlEnabled"
+    static let ytdlSearchPath = "ytdlSearchPath"
     static let ytdlRawOptions = "ytdlRawOptions"
+    static let httpProxy = "httpProxy"
 
     // Control
 
@@ -183,6 +185,8 @@ struct Preference {
     /** User defined conf directory */
     static let useUserDefinedConfDir = "useUserDefinedConfDir"
     static let userDefinedConfDir = "userDefinedConfDir"
+
+    static let watchProperties = "watchProperties"
 
   }
 
@@ -385,7 +389,9 @@ struct Preference {
     Key.userAgent: "",
     Key.transportRTSPThrough: RTSPTransportation.tcp.rawValue,
     Key.ytdlEnabled: true,
+    Key.ytdlSearchPath: "",
     Key.ytdlRawOptions: "",
+    Key.httpProxy: "",
 
     Key.inputConfigs: [:],
     Key.currentInputConfigName: "IINA Default",
@@ -408,7 +414,9 @@ struct Preference {
     Key.screenshotFolder: "~/Pictures/ScreenShots",
     Key.screenshotIncludeSubtitle: true,
     Key.screenshotFormat: ScreenshotFormat.png.rawValue,
-    Key.screenshotTemplate: "%F-%n"
+    Key.screenshotTemplate: "%F-%n",
+
+    Key.watchProperties: []
   ]
 
 }

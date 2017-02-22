@@ -375,7 +375,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     // 0.250x 0.297x .. 0.841x 1.000x 1.189x .. 16.00x
     let sliderValue = sender.doubleValue
     let value = AppData.minSpeed * pow((AppData.maxSpeed / AppData.minSpeed), sliderValue / sliderSteps)
-    let speed = String(format: "%.2f", value)
+    let speed = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: value)) ?? ""
     speedSliderIndicator.stringValue = "\(speed)x"
     customSpeedTextField.stringValue = speed
     let knobPos = sender.knobPointPosition()
@@ -387,7 +387,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func customSpeedEditFinishedAction(_ sender: NSTextField) {
     var value = customSpeedTextField.doubleValue
     value = max(min(value, AppData.maxSpeed), AppData.minSpeed)
-    customSpeedTextField.stringValue = String(format: "%.2f", value)
+    customSpeedTextField.stringValue = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: value)) ?? ""
     let sliderValue = log(value / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
     speedSlider.doubleValue = sliderValue
     if playerCore.info.playSpeed != value {
@@ -469,7 +469,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func audioDelayChangedAction(_ sender: NSSlider) {
     let sliderValue = sender.doubleValue
-    audioDelaySliderIndicator.stringValue = "\(sliderValue)s"
+    let delay = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: sliderValue)) ?? ""
+    audioDelaySliderIndicator.stringValue = "\(delay)s"
     let knobPos = sender.knobPointPosition()
     audioDelaySliderConstraint.constant = knobPos - audioDelaySliderIndicator.frame.width
     if let event = NSApp.currentEvent {
@@ -521,7 +522,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func subDelayChangedAction(_ sender: NSSlider) {
     let sliderValue = sender.doubleValue
-    subDelaySliderIndicator.stringValue = "\(sliderValue)s"
+    let delay = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: sliderValue)) ?? ""
+    subDelaySliderIndicator.stringValue = "\(delay)s"
     let knobPos = sender.knobPointPosition()
     subDelaySliderConstraint.constant = knobPos - subDelaySliderIndicator.frame.width
     if let event = NSApp.currentEvent {

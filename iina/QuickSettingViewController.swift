@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, SidebarViewController {
 
   override var nibName: String {
     return "QuickSettingViewController"
@@ -38,6 +38,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subTabBtn: NSButton!
   @IBOutlet weak var tabView: NSTabView!
 
+	@IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var tabViewTopConstraint: NSLayoutConstraint!
+	
   @IBOutlet weak var videoTableView: NSTableView!
   @IBOutlet weak var audioTableView: NSTableView!
   @IBOutlet weak var subTableView: NSTableView!
@@ -95,8 +98,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subTextBgColorWell: NSColorWell!
   @IBOutlet weak var subTextFontBtn: NSButton!
 
-
-
+  var downShift: CGFloat = 0 {
+    didSet {
+      buttonTopConstraint.animator().constant = downShift
+      tabViewTopConstraint.animator().constant = 48 + downShift
+    }
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()

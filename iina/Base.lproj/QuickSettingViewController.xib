@@ -27,6 +27,7 @@
                 <outlet property="audioTabBtn" destination="3Fk-ey-FhK" id="I1P-Dg-gtv"/>
                 <outlet property="audioTableView" destination="FLg-2m-Zaq" id="rId-Io-Y2B"/>
                 <outlet property="brightnessSlider" destination="sBU-NZ-sp3" id="IWR-1I-CcR"/>
+                <outlet property="buttonTopConstraint" destination="86G-SF-ekk" id="T0q-y5-GEU"/>
                 <outlet property="contrastSlider" destination="0Ww-YT-a8e" id="wNQ-VI-uMd"/>
                 <outlet property="cropSegment" destination="kUi-hW-BR6" id="fsg-We-n2K"/>
                 <outlet property="customAspectTextField" destination="XAI-y0-tcy" id="j96-rd-E5w"/>
@@ -57,6 +58,7 @@
                 <outlet property="subTextFontBtn" destination="qGz-rB-dsV" id="Xkg-P1-vDv"/>
                 <outlet property="subTextSizePopUp" destination="xtF-tn-m9W" id="62h-S6-9gV"/>
                 <outlet property="tabView" destination="udA-m2-eJb" id="zL4-73-AVP"/>
+                <outlet property="tabViewTopConstraint" destination="SrL-is-N20" id="FpM-Gl-use"/>
                 <outlet property="videoTabBtn" destination="Ma8-6g-tVw" id="d0g-Fi-gzz"/>
                 <outlet property="videoTableView" destination="rsV-qL-l7b" id="A8k-AU-noQ"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
@@ -655,7 +657,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="743"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oVx-Sp-Lhl">
                                             <rect key="frame" x="0.0" y="0.0" width="360" height="743"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="NZU-RD-Dm3" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="267" width="360" height="476"/>
@@ -675,7 +677,7 @@
                                                                     <rect key="frame" x="0.0" y="355" width="360" height="76"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="vgF-KN-yHf">
                                                                         <rect key="frame" x="0.0" y="0.0" width="360" height="76"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="FLg-2m-Zaq">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="76"/>
@@ -762,7 +764,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C39-jO-zwp">
-                                                                    <rect key="frame" x="130.5" y="226" width="19" height="11"/>
+                                                                    <rect key="frame" x="130" y="226" width="19" height="11"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="0s" id="wgA-op-JP4">
                                                                         <font key="font" metaFont="miniSystem"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1284,7 +1286,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="743"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="epy-wp-Ja5">
                                             <rect key="frame" x="0.0" y="0.0" width="360" height="743"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="pm4-x9-WJ5" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="360" height="743"/>
@@ -1296,7 +1298,7 @@
                                                                     <rect key="frame" x="0.0" y="274" width="360" height="72"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="dJV-R0-O3M">
                                                                         <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="2vU-hm-gGB">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>
@@ -1352,7 +1354,7 @@
                                                                     <rect key="frame" x="0.0" y="157" width="360" height="72"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="EKn-MX-Fao">
                                                                         <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="Jve-qX-Agy">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>

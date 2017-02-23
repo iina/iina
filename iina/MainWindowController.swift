@@ -121,17 +121,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case hidden // indicating sidebar is hidden. Should only be used by sideBarStatus
     case settings
     case playlist
-    func width() -> CGFloat {
-      switch self {
-      case .settings:
-        return 360
-      case .playlist:
-        return 240
-      default:
-        Utility.fatal("SideBarViewType.width shouldn't be called here")
-        return 0
-      }
-    }
   }
 
   var sideBarStatus: SideBarViewType = .hidden
@@ -779,6 +768,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if !isInFullScreen {
         titleTextField?.animator().alphaValue = 0
       }
+      var viewController: SidebarViewController
+      switch sideBarStatus {
+      case .playlist:
+        viewController = playlistView
+      case .settings:
+        viewController = quickSettingView
+      default:
+        return
+      }
+      viewController.downShift = 0
     }) {
       // if no interrupt then hide animation
       if self.animationState == .willHide {
@@ -806,6 +805,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         if !isInFullScreen {
           titleTextField?.animator().alphaValue = 1
         }
+        var viewController: SidebarViewController
+        switch sideBarStatus {
+        case .playlist:
+          viewController = playlistView
+        case .settings:
+          viewController = quickSettingView
+        default:
+          return
+        }
+        viewController.downShift = titleBarView.frame.height
       }
     }) {
       self.animationState = .shown
@@ -857,19 +866,25 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  private func showSideBar(view: NSView, type: SideBarViewType) {
+  private func showSideBar(viewController: SidebarViewController, type: SideBarViewType) {
     // adjust sidebar width
-    let width = type.width()
-    sideBarWidthConstraint.constant = width
-    sideBarRightConstraint.constant = -width
+    guard let view = (viewController as? NSViewController)?.view else {
+        Utility.fatal("viewController is not a NSViewController")
+    }
+    sideBarWidthConstraint.constant = view.fittingSize.width
+    sideBarRightConstraint.constant = -view.fittingSize.width
     sideBarView.isHidden = false
     // add view and constraints
     sideBarView.addSubview(view)
-    let constraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[v]-0-|", options: [], metrics: nil, views: ["v": view])
-    let constraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[v]-0-|", options: [], metrics: nil, views: ["v": view])
+    let constraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v]|", options: [], metrics: nil, views: ["v": view])
+    let constraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|[v]|", options: [], metrics: nil, views: ["v": view])
     NSLayoutConstraint.activate(constraintsH)
     NSLayoutConstraint.activate(constraintsV)
     // show sidebar
+    if animationState == .shown {
+      var viewController = viewController
+      viewController.downShift = titleBarView.frame.height
+    }
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
@@ -881,6 +896,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func hideSideBar(_ after: @escaping () -> Void = { }) {
     let currWidth = sideBarWidthConstraint.constant
+    var viewController: SidebarViewController
+    switch sideBarStatus {
+    case .playlist:
+      viewController = playlistView
+    case .settings:
+      viewController = quickSettingView
+    default:
+      Utility.fatal("SideBarViewType is invalid")
+    }
+    viewController.downShift = 0
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
@@ -1171,7 +1196,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
     guard let duration = playerCore.info.videoDuration, let pos = playerCore.info.videoPosition else {
       Utility.fatal("video info not available")
-      return
     }
     let percantage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
@@ -1346,13 +1370,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func settingsButtonAction(_ sender: AnyObject) {
-    let view = quickSettingView.view
+    let view = quickSettingView
     switch sideBarStatus {
     case .hidden:
-      showSideBar(view: view, type: .settings)
+      showSideBar(viewController: view, type: .settings)
     case .playlist:
       hideSideBar {
-        self.showSideBar(view: view, type: .settings)
+        self.showSideBar(viewController: view, type: .settings)
       }
     case .settings:
       hideSideBar()
@@ -1360,15 +1384,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func playlistButtonAction(_ sender: AnyObject) {
-    let view = playlistView.view
+    let view = playlistView
     switch sideBarStatus {
     case .hidden:
-      showSideBar(view: view, type: .playlist)
+      showSideBar(viewController: view, type: .playlist)
     case .playlist:
       hideSideBar()
     case .settings:
       hideSideBar {
-        self.showSideBar(view: view, type: .playlist)
+        self.showSideBar(viewController: view, type: .playlist)
       }
     }
   }
@@ -1581,7 +1605,6 @@ extension MainWindowController: NSTouchBarDelegate {
   func setupTouchBarUI() {
     guard let duration = playerCore.info.videoDuration else {
       Utility.fatal("video info not available")
-      return
     }
 
     let pad: CGFloat = 16.0
@@ -1661,4 +1684,8 @@ extension MainWindowController: PIPViewControllerDelegate {
   func pipActionStop(_ pip: PIPViewController) {
     exitPIP(manually: false)
   }
+}
+
+protocol SidebarViewController {
+  var downShift: CGFloat { get set }
 }

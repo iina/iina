@@ -263,11 +263,6 @@ class MPVController: NSObject {
       Utility.showAlert(message: "Cannot read user defined options.")
     }
 
-    // Set options that can be override by user's config.
-    chkErr(mpv_set_option_string(mpv, MPVOption.Video.vo, "opengl-cb"))
-    chkErr(mpv_set_option_string(mpv, MPVOption.Window.keepaspect, "no"))
-    chkErr(mpv_set_option_string(mpv, MPVOption.Video.openglHwdecInterop, "auto"))
-
     // Load external scripts
     let loader = ScriptLoader()
     if ud.bool(forKey: PK.playlistAutoAdd) {
@@ -303,6 +298,12 @@ class MPVController: NSObject {
 
     // Initialize an uninitialized mpv instance. If the mpv instance is already running, an error is retuned.
     chkErr(mpv_initialize(mpv))
+
+    // Set options that can be override by user's config. mpv will log user config when initialize,
+    // so we put them here.
+    chkErr(mpv_set_property_string(mpv, MPVOption.Video.vo, "opengl-cb"))
+    chkErr(mpv_set_property_string(mpv, MPVOption.Window.keepaspect, "no"))
+    chkErr(mpv_set_property_string(mpv, MPVOption.Video.openglHwdecInterop, "auto"))
 
     // get version
     mpvVersion = getString(MPVProperty.mpvVersion)

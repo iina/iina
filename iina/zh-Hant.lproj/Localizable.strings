@@ -1,88 +1,260 @@
-/*
- String_ui.strings
- iina
- 
- Created by lhc on 3/1/2017.
- Copyright © 2017 lhc. All rights reserved.
- */
+/* Error setting extra mpv option */
+"alert.extra_option_error" = "無法設定選項 --%@=%@ （返回值 %d）。 請在「設置>高級」中檢查你的額外 mpv 選項。";
 
-// Common
-"on" = "On";
-"off" = "Off";
+<<<<<<< HEAD
+/* Error setting keybinding configuration */
+"alert.keybinding_config_error" = "無法讀取快速鍵設定檔 \"%@\"！ 將使用 IINA 默認快速鍵設定。請檢查該設定檔。";
 
-// PlaylistViewController.swift
-"playlist.playlist_cap" = "播放列表";
-"playlist.chapter_cap" = "章節";
-
+/* Buffering... %s%% */
+"main.buffering_indicator" = "緩衝中... %@%%";
+=======
 // MainWindowController.swift
 "main.buffering_indicator" = "緩衝中... %d%%";
+>>>>>>> lhc70000/develop
 
-// QuickSettingViewController.swift
-"quicksetting.aspect_item.Default" = "默認";
-"quicksetting.crop_item.None" = "關閉";
+/* Audio Delay: */
+"menu.audio_delay" = "音訊延遲: %.2f秒";
 
-// OSDMessage.swift
-"osd.pause" = "暫停";
-"osd.resume" = "繼續";
-"osd.volume" = "音量：%i";
-"osd.speed" = "速度：%.2fx";
-"osd.aspect" = "長寬比：%@";
-"osd.crop" = "裁切：%@";
-"osd.rotate" = "旋轉：%i°";
-"osd.deinterlace" = "反交錯：%@";
-"osd.audio_delay.nodelay" = "音訊延遲：無";
-"osd.audio_delay.later" = "音訊延遲：延後 %.2f 秒";
-"osd.audio_delay.earlier" = "音訊延遲：提前 %.2f 秒";
-"osd.sub_delay.nodelay" = "字幕延遲：無";
-"osd.sub_delay.later" = "字幕延遲：延後 %.2f 秒";
-"osd.sub_delay.earlier" = "字幕延遲：提前 %.2f 秒";
-"osd.subtitle_pos" = "字幕位置：%.1f";
-"osd.mute" = "靜音";
-"osd.unmute" = "取消靜音";
-"osd.screenshot" = "熒幕已截取";
-"osd.abloop.a" = "AB循環：A";
-"osd.abloop.b" = "AB循環：B";
-"osd.abloop.clear" = "AB循環：清除";
-"osd.stop" = "停止";
-"osd.chapter" = "章節：%@";
-"osd.subtitle_scale" = "字幕縮放：%.2fx";
-"osd.add_to_playlist" = "已添加 %i 份文檔到播放列表";
-"osd.clear_playlist" = "清空播放列表";
-"osd.video_eq.contrast" = "對比度：%i";
-"osd.video_eq.gamma" = "伽瑪：%i";
-"osd.video_eq.hue" = "色調：%i";
-"osd.video_eq.saturation" = "飽和度：%i";
-"osd.video_eq.brightness" = "亮度：%i";
-
-"update.title_update_found" = "檢測到更新";
-"update.title_no_update" = "沒有更新";
-"update.title_error" = "錯誤";
-"update.update_found" = "檢測到更新。由於 IINA 仍處於 Alpha 測試中，我們建議您保持最新版本。請去網站或者 Github 下載：";
-"update.no_update" = "您正在運行的是最新版本。";
-"update.check_failed" = "檢查更新失敗。你的 IINA 版本很可能過於陳舊，請去網站或者 Github 查看最新信息：";
-"update.new_version" = "新版本：";
-"update.dl_from_website" = "前往網站";
-"update.dl_from_github" = "前往 Github";
-
-"preference.title" = "偏好設定";
-"preference.general" = "通用";
-"preference.ui" = "UI";
-"preference.codec" = "解碼";
-"preference.subtitle" = "字幕";
-"preference.network" = "網路";
-"preference.control" = "控制";
-"preference.keybindings" = "快速鍵";
-"preference.advanced" = "進階";
-"preference.scripts" = "腳本";
-
-"menu.volume"= "音量: %d";
-"menu.audio_delay" = "音訊延遲 卜木: %.2f秒";
-"menu.sub_delay" = "字幕延遲: %.2f秒";
-"menu.fullscreen" = "進入全熒幕";
+/* Exit Fullscreen */
 "menu.exit_fullscreen" = "離開全熒幕";
+
+/* Exit Picture-in-Picture */
+"menu.exit_pip" = "離開畫中畫模式";
+
+/* Fullscreen */
+"menu.fullscreen" = "進入全熒幕";
+
+/* Pause */
 "menu.pause" = "暫停";
+
+/* Enter Picture-in-Picture */
+"menu.pip" = "進入畫中畫模式";
+
+/* Resume */
 "menu.resume" = "繼續";
 
+/* Subtitle Delay: */
+"menu.sub_delay" = "字幕延遲: %.2f秒";
+
+/* Volume: */
+"menu.volume" = "音量: %d";
+
+/* Off */
+"off" = "關";
+
+/* On */
+"on" = "開";
+
+/* AB-Loop: A */
+"osd.abloop.a" = "AB循環：A";
+
+/* AB-Loop: B */
+"osd.abloop.b" = "AB循環：B";
+
+/* AB-Loop: Cleared */
+"osd.abloop.clear" = "AB循環：清除";
+
+/* Added %i Files to Playlist */
+"osd.add_to_playlist" = "已添加 %i 份文檔到播放列表";
+
+/* Aspect Ratio: %@ */
+"osd.aspect" = "長寬比：%@";
+
+/* Audio Delay: %fs Earlier */
+"osd.audio_delay.earlier" = "音訊延遲：提前 %.2f 秒";
+
+/* Audio Delay: %fs Later */
+"osd.audio_delay.later" = "音訊延遲：延後 %.2f 秒";
+
+/* Audio Delay: No Delay */
+"osd.audio_delay.nodelay" = "音訊延遲：無";
+
+/* Chapter: %@ */
+"osd.chapter" = "章節：%@";
+
+/* Cleared Playlist */
+"osd.clear_playlist" = "清空播放列表";
+
+/* Crop: %@ */
+"osd.crop" = "裁切：%@";
+
+/* Deinterlace: %@ */
+"osd.deinterlace" = "反交錯：%@";
+
+/* Finding online subtitles... */
+"osd.find_online_sub" = "查找網絡字幕...";
+
+/* Mute */
+"osd.mute" = "靜音";
+
+/* Pause */
+"osd.pause" = "暫停";
+
+/* Resume */
+"osd.resume" = "繼續";
+
+/* Rotate: %i° */
+"osd.rotate" = "旋轉：%i°";
+
+/* Screenshot Captured */
+"osd.screenshot" = "熒幕已截取";
+
+/* Speed: %.2fx */
+"osd.speed" = "速度：%.2fx";
+
+/* Stop */
+"osd.stop" = "停止";
+
+/* Subtitle Delay: %fs Earlier */
+"osd.sub_delay.earlier" = "字幕延遲：提前 %.2f 秒";
+
+/* Subtitle Delay: %fs Later */
+"osd.sub_delay.later" = "字幕延遲：延後 %.2f 秒";
+
+/* Subtitle Delay: No Delay */
+"osd.sub_delay.nodelay" = "字幕延遲：無";
+
+/* Subtitle downloaded */
+"osd.sub_downloaded" = "字幕下載成功";
+
+/* %d subtitle(s) found. Downloading... */
+"osd.sub_found" = "找到 %d 個字幕。下載中...";
+
+/* No subtitle found. */
+"osd.sub_not_found" = "找不到字幕";
+
+/* Subtitle saved */
+"osd.sub_saved" = "已存儲字幕";
+
+/* Subtitle Position: %f */
+"osd.subtitle_pos" = "字幕位置：%.1f";
+
+/* Subtitle Scale: %.2fx */
+"osd.subtitle_scale" = "字幕縮放：%.2fx";
+
+/* Unmute */
+"osd.unmute" = "取消靜音";
+
+/* Brightness: %i */
+"osd.video_eq.brightness" = "亮度：%i";
+
+/* Contrast: %i */
+"osd.video_eq.contrast" = "對比度：%i";
+
+/* Grama: %i */
+"osd.video_eq.gamma" = "伽瑪：%i";
+
+/* Hue: %i */
+"osd.video_eq.hue" = "色調：%i";
+
+/* Saturation: %i */
+"osd.video_eq.saturation" = "飽和度：%i";
+
+/* Volume: %i */
+"osd.volume" = "音量：%i";
+
+/* Add Item */
+"pl_menu.add_item" = "添加項...";
+
+/* Clear Playlist */
+"pl_menu.clear_playlist" = "清空播放列表";
+
+/* (No Commment) */
+"pl_menu.delete" = "丢入垃圾桶";
+
+/* (No Commment) */
+"pl_menu.delete_after_play" = "播放完畢後丢入垃圾桶";
+
+/* (No Commment) */
+"pl_menu.delete_after_play_multi" = "播放已選取文件，播放完畢後丢入垃圾桶";
+
+/* (No Commment) */
+"pl_menu.delete_multi" = "將已選取的檔案丢入垃圾桶";
+
+/* Play Next */
+"pl_menu.play_next" = "播放下一個";
+
+/* (No Commment) */
+"pl_menu.remove" = "移除";
+
+/* (No Commment) */
+"pl_menu.remove_multi" = "移除選取項";
+
+/* Reveal in Finder */
+"pl_menu.reveal_in_finder" = "在 Finder 中打開";
+
+/* %d Items */
+"pl_menu.title_multi" = "%d 個項目";
+
+/* CHAPTERS */
+"playlist.chapter_cap" = "章節";
+
+/* PLAYLIST */
+"playlist.playlist_cap" = "播放列表";
+
+/* Advanced */
+"preference.advanced" = "進階";
+
+/* Codec */
+"preference.codec" = "解碼";
+
+/* Control */
+"preference.control" = "控制";
+
+/* General */
+"preference.general" = "通用";
+
+/* Keybindings */
+"preference.keybindings" = "快速鍵";
+
+/* Network */
+"preference.network" = "網路";
+
+/* (No Commment) */
+"preference.scripts" = "腳本";
+
+/* Subtitles */
+"preference.subtitle" = "字幕";
+
+/* Preference */
+"preference.title" = "偏好設定";
+
+/* UI */
+"preference.ui" = "UI";
+
+/* (No Commment) */
+"quicksetting.aspect_item.Default" = "默認";
+
+/* (No Commment) */
+"quicksetting.crop_item.None" = "關閉";
+
+/* <None> */
 "track.none" = "<無>";
 
-"alert.extra_option_error" = "無法設定選項 --%@=%@ （返回值 %d）。 請在「設置>高級」中檢查你的額外 mpv 選項。";
+/* Error */
+"update.check_failed" = "檢查更新失敗。你的 IINA 版本很可能過於陳舊，請至網站或者 Github 查看最新信息：";
+
+/* Github */
+"update.dl_from_github" = "前往 Github";
+
+/* Website */
+"update.dl_from_website" = "前往網站";
+
+/* (No Commment) */
+"update.new_version" = "新版本：";
+
+/* No update */
+"update.no_update" = "您正在運行的是最新版本。";
+
+/* Title */
+"update.title_error" = "錯誤";
+
+/* Title */
+"update.title_no_update" = "沒有更新";
+
+/* Title */
+"update.title_update_found" = "檢測到更新";
+
+/* Update found */
+"update.update_found" = "檢測到更新。由於 IINA 仍處於 Alpha 測試中，我們建議您保持最新版本。請去網站或者 Github 下載：";
+

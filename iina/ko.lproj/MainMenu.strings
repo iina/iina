@@ -35,7 +35,7 @@
 "5xN-ZB-VLI.title" = "회전";
 
 /* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "6Eq-ni-6hG"; */
-"6Eq-ni-6hG.title" = "전체화면 전환";
+"6Eq-ni-6hG.title" = "전체 화면 전환";
 
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
 "6yE-op-DTS.title" = "5초 후로 가기";
@@ -71,7 +71,7 @@
 "BOF-NM-1cW.title" = "환경설정…";
 
 /* Class = "NSMenuItem"; title = "Scale Down"; ObjectID = "Bli-YK-Rl0"; */
-"Bli-YK-Rl0.title" = "작게";
+"Bli-YK-Rl0.title" = "자막 작게";
 
 /* Class = "NSMenuItem"; title = "Share"; ObjectID = "BtY-iQ-6Pf"; */
 "BtY-iQ-6Pf.title" = "공유";
@@ -89,7 +89,7 @@
 "DVo-aG-piG.title" = "닫기";
 
 /* Class = "NSMenuItem"; title = "Chapters Panel"; ObjectID = "DwM-3d-Eb9"; */
-"DwM-3d-Eb9.title" = "챕터목록 보기";
+"DwM-3d-Eb9.title" = "챕터 목록 보기";
 
 /* Class = "NSMenu"; title = "Subtitles"; ObjectID = "EKp-Qx-4Mn"; */
 "EKp-Qx-4Mn.title" = "자막";
@@ -137,7 +137,7 @@
 "IXq-yq-uDF.title" = "오디오 장치";
 
 /* Class = "NSMenuItem"; title = "Horizontal (Mirror)"; ObjectID = "JJq-qH-toq"; */
-"JJq-qH-toq.title" = "좌우 반전";
+"JJq-qH-toq.title" = "좌우 뒤집기";
 
 /* Class = "NSMenuItem"; title = "Open..."; ObjectID = "Kby-lQ-HCW"; */
 "Kby-lQ-HCW.title" = "열기…";
@@ -224,7 +224,7 @@
 "XDC-Pc-rS1.title" = "다음 프레임";
 
 /* Class = "NSMenuItem"; title = "Scale Up"; ObjectID = "XHu-Dl-Vq2"; */
-"XHu-Dl-Vq2.title" = "크게";
+"XHu-Dl-Vq2.title" = "자막 크게";
 
 /* Class = "NSMenuItem"; title = "Smaller Size"; ObjectID = "ZOF-MG-6II"; */
 "ZOF-MG-6II.title" = "화면 작게";
@@ -251,7 +251,7 @@
 "bib-Uj-vzu.title" = "파일";
 
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
-"bwz-r0-peR.title" = "파일 정보";
+"bwz-r0-peR.title" = "재생 정보 보기";
 
 /* Class = "NSMenuItem"; title = "Normal Size Retina"; ObjectID = "c1x-bx-69F"; */
 "c1x-bx-69F.title" = "레티나 원본 크기";
@@ -269,7 +269,7 @@
 "dMs-cI-mzQ.title" = "파일";
 
 /* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
-"deS-xK-iBb.title" = "재생중단 후 재생목록 지우기";
+"deS-xK-iBb.title" = "재생 중단 후 재생목록 지우기";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
 "eo2-Tt-SLx.title" = "화면 자르기";

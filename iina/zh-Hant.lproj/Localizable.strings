@@ -1,16 +1,11 @@
 /* Error setting extra mpv option */
 "alert.extra_option_error" = "無法設定選項 --%@=%@ （返回值 %d）。 請在「設置>高級」中檢查你的額外 mpv 選項。";
 
-<<<<<<< HEAD
 /* Error setting keybinding configuration */
 "alert.keybinding_config_error" = "無法讀取快速鍵設定檔 \"%@\"！ 將使用 IINA 默認快速鍵設定。請檢查該設定檔。";
 
 /* Buffering... %s%% */
 "main.buffering_indicator" = "緩衝中... %@%%";
-=======
-// MainWindowController.swift
-"main.buffering_indicator" = "緩衝中... %d%%";
->>>>>>> lhc70000/develop
 
 /* Audio Delay: */
 "menu.audio_delay" = "音訊延遲: %.2f秒";

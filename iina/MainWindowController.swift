@@ -98,7 +98,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   var scrollDirection: ScrollDirection?
 
-  private var useExtrackSeek: Preference.SeekOption!
+  private var useExtractSeek: Preference.SeekOption!
   private var relativeSeekAmount: Int = 3
   private var volumeScrollAmount: Int = 4
   private var horizontalScrollAction: Preference.ScrollAction!
@@ -297,7 +297,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     volumeScrollAmount = ud.integer(forKey: PK.volumeScrollAmount)
     horizontalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.horizontalScrollAction))
     verticalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.verticalScrollAction))
-    useExtrackSeek = Preference.SeekOption(rawValue: ud.integer(forKey: PK.useExactSeek))
+    useExtractSeek = Preference.SeekOption(rawValue: ud.integer(forKey: PK.useExactSeek))
     arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: PK.arrowButtonAction))
     singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.singleClickAction))
     doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.doubleClickAction))
@@ -349,7 +349,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.useExactSeek:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        useExtrackSeek = Preference.SeekOption(rawValue: newValue)
+        useExtractSeek = Preference.SeekOption(rawValue: newValue)
       }
 
     case PK.relativeSeekAmount:
@@ -591,7 +591,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // handle the delta value
-    let seekFactor = AppData.seekAmountMap[relativeSeekAmount]!
     let isPrecise = event.hasPreciseScrollingDeltas
     let isNatural = event.isDirectionInvertedFromDevice
 
@@ -608,11 +607,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let delta = scrollDirection == .horizontal ? deltaX : deltaY
 
     if scrollAction == .seek {
-      playerCore.seek(relativeSecond: seekFactor * delta, option: useExtrackSeek)
+      let seekAmount = (isMouse ? AppData.seekAmountMapMouse : AppData.seekAmountMap)[relativeSeekAmount] * delta
+      playerCore.seek(relativeSecond: seekAmount, option: useExtractSeek)
     } else if scrollAction == .volume {
-      let volumeMap = [0, 0.25, 0.5, 0.75, 1]
       // don't use precised delta for mouse
-      let newVolume = playerCore.info.volume + (isMouse ? delta : volumeMap[volumeScrollAmount] * delta)
+      let newVolume = playerCore.info.volume + (isMouse ? delta : AppData.volumeMap[volumeScrollAmount] * delta)
       playerCore.setVolume(newVolume)
       volumeSlider.doubleValue = newVolume
     }

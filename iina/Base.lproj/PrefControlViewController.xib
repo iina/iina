@@ -235,8 +235,8 @@
                         <menu key="menu" id="B7Y-mP-CKn">
                             <items>
                                 <menuItem title="Adjust window size" state="on" id="Ols-Lr-fiH"/>
-                                <menuItem title="Fullscreen" id="Hm3-dh-jgb"/>
-                                <menuItem title="None" id="chS-d2-TG1"/>
+                                <menuItem title="Fullscreen" tag="1" id="Hm3-dh-jgb"/>
+                                <menuItem title="None" tag="2" id="chS-d2-TG1"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -310,12 +310,12 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="166" id="dPd-yE-FvZ"/>
                     </constraints>
-                    <popUpButtonCell key="cell" type="push" title="Seek" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" tag="1" imageScaling="proportionallyDown" inset="2" selectedItem="wcS-tP-wav" id="haA-8R-BiR">
+                    <popUpButtonCell key="cell" type="push" title="Seek" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1" imageScaling="proportionallyDown" inset="2" selectedItem="wcS-tP-wav" id="haA-8R-BiR">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="aEA-Qe-wDM">
                             <items>
-                                <menuItem title="Seek" tag="1" id="wcS-tP-wav"/>
+                                <menuItem title="Seek" state="on" tag="1" id="wcS-tP-wav"/>
                                 <menuItem title="None" tag="2" id="guu-dK-YfL"/>
                             </items>
                         </menu>

@@ -105,6 +105,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private var singleClickAction: Preference.MouseClickAction!
   private var doubleClickAction: Preference.MouseClickAction!
   private var rightClickAction: Preference.MouseClickAction!
+  private var pinchAction: Preference.PinchAction!
 
   private var singleClickTimer: Timer?
 
@@ -120,6 +121,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     PK.singleClickAction,
     PK.doubleClickAction,
     PK.rightClickAction,
+    PK.pinchAction,
     PK.showRemainingTime
   ]
 
@@ -294,6 +296,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.singleClickAction))
     doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.doubleClickAction))
     rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.rightClickAction))
+    pinchAction = Preference.PinchAction(rawValue: ud.integer(forKey: PK.pinchAction))
     rightLabel.mode = ud.bool(forKey: PK.showRemainingTime) ? .remaining : .duration
 
     // add user default observers
@@ -371,6 +374,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case PK.rightClickAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         rightClickAction = Preference.MouseClickAction(rawValue: newValue)
+      }
+
+    case PK.pinchAction:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        pinchAction = Preference.PinchAction(rawValue: newValue)
       }
 
     case PK.showRemainingTime:
@@ -585,22 +593,39 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
+    guard pinchAction != .none else { return }
     guard !isInInteractiveMode, let window = window, let screenFrame = NSScreen.main()?.visibleFrame else { return }
-    
-    if recognizer.state == NSGestureRecognizerState.began {
-      lastMagnification = recognizer.magnification;
-    }else if recognizer.state == NSGestureRecognizerState.changed {
-      let offset = recognizer.magnification - lastMagnification + 1.0;
-      let newWidth = window.frame.width * offset
-      let newHeight = newWidth / window.aspectRatio.aspect
-    
-      //Check against max & min threshold
-      if newHeight < screenFrame.height && newHeight > minSize.height && newWidth > minSize.width {
-        let newSize = NSSize(width: newWidth, height: newHeight);
-        window.setFrame(window.frame.centeredResize(to: newSize), display: true)
-      }
+
+    if pinchAction == .windowSize {
+      // adjust window size
+      if recognizer.state == .began {
+        // began
+        lastMagnification = recognizer.magnification
+      } else if recognizer.state == .changed {
+        // changed
+        let offset = recognizer.magnification - lastMagnification + 1.0;
+        let newWidth = window.frame.width * offset
+        let newHeight = newWidth / window.aspectRatio.aspect
       
-      lastMagnification = recognizer.magnification;
+        //Check against max & min threshold
+        if newHeight < screenFrame.height && newHeight > minSize.height && newWidth > minSize.width {
+          let newSize = NSSize(width: newWidth, height: newHeight);
+          window.setFrame(window.frame.centeredResize(to: newSize), display: true)
+        }
+        
+        lastMagnification = recognizer.magnification
+      }
+
+    } else if pinchAction == .fullscreen{
+      // enter/exit fullscreen
+      if recognizer.state == .began {
+        let isEnlarge = recognizer.magnification > 0
+        // xor
+        if isEnlarge != isInFullScreen {
+          recognizer.state = .recognized
+          self.toggleWindowFullScreen()
+        }
+      }
     }
   }
 

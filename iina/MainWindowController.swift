@@ -8,6 +8,8 @@
 
 import Cocoa
 
+fileprivate typealias PK = Preference.Key
+
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override var nextResponder: NSResponder? {
@@ -98,6 +100,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   private var useExtrackSeek: Preference.SeekOption!
   private var relativeSeekAmount: Int = 3
+  private var volumeScrollAmount: Int = 4
   private var arrowBtnFunction: Preference.ArrowButtonAction!
   private var singleClickAction: Preference.MouseClickAction!
   private var doubleClickAction: Preference.MouseClickAction!
@@ -108,15 +111,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** A list of observed preferences */
 
   private let observedPrefKeys: [String] = [
-    Preference.Key.themeMaterial,
-    Preference.Key.showChapterPos,
-    Preference.Key.useExactSeek,
-    Preference.Key.relativeSeekAmount,
-    Preference.Key.arrowButtonAction,
-    Preference.Key.singleClickAction,
-    Preference.Key.doubleClickAction,
-    Preference.Key.rightClickAction,
-    Preference.Key.showRemainingTime
+    PK.themeMaterial,
+    PK.showChapterPos,
+    PK.useExactSeek,
+    PK.relativeSeekAmount,
+    PK.volumeScrollAmount,
+    PK.arrowButtonAction,
+    PK.singleClickAction,
+    PK.doubleClickAction,
+    PK.rightClickAction,
+    PK.showRemainingTime
   ]
 
   private var notificationObservers: [NSObjectProtocol] = []
@@ -234,7 +238,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updateTitle()
 
     // set material
-    setMaterial(Preference.Theme(rawValue: ud.integer(forKey: Preference.Key.themeMaterial)))
+    setMaterial(Preference.Theme(rawValue: ud.integer(forKey: PK.themeMaterial)))
 
     // size
     w.minSize = minSize
@@ -262,8 +266,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     videoView.videoLayer.display()
 
     // gesture recognizer
-    // disable it first for poor performance
-//    magnificationGestureRecognizer.delaysMagnificationEvents = true;
     cv.addGestureRecognizer(magnificationGestureRecognizer)
 
     // start mpv opengl_cb
@@ -285,12 +287,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     bottomView.isHidden = true
     pipOverlayView.isHidden = true
 
-    useExtrackSeek = Preference.SeekOption(rawValue: ud.integer(forKey: Preference.Key.useExactSeek))
-    arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: Preference.Key.arrowButtonAction))
-    singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.singleClickAction))
-    doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.doubleClickAction))
-    rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.rightClickAction))
-    rightLabel.mode = ud.bool(forKey: Preference.Key.showRemainingTime) ? .remaining : .duration
+    relativeSeekAmount = ud.integer(forKey: PK.relativeSeekAmount)
+    volumeScrollAmount = ud.integer(forKey: PK.volumeScrollAmount)
+    useExtrackSeek = Preference.SeekOption(rawValue: ud.integer(forKey: PK.useExactSeek))
+    arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: PK.arrowButtonAction))
+    singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.singleClickAction))
+    doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.doubleClickAction))
+    rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.rightClickAction))
+    rightLabel.mode = ud.bool(forKey: PK.showRemainingTime) ? .remaining : .duration
 
     // add user default observers
     observedPrefKeys.forEach { key in
@@ -324,47 +328,52 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     switch keyPath {
 
-    case Preference.Key.themeMaterial:
+    case PK.themeMaterial:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         setMaterial(Preference.Theme(rawValue: newValue))
       }
 
-    case Preference.Key.showChapterPos:
+    case PK.showChapterPos:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
         (playSlider.cell as! PlaySliderCell).drawChapters = newValue
       }
 
-    case Preference.Key.useExactSeek:
+    case PK.useExactSeek:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         useExtrackSeek = Preference.SeekOption(rawValue: newValue)
       }
 
-    case Preference.Key.relativeSeekAmount:
+    case PK.relativeSeekAmount:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         relativeSeekAmount = newValue.constrain(min: 1, max: 5)
       }
 
-    case Preference.Key.arrowButtonAction:
+    case PK.volumeScrollAmount:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        volumeScrollAmount = newValue.constrain(min: 1, max: 4)
+      }
+
+    case PK.arrowButtonAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)
       }
 
-    case Preference.Key.singleClickAction:
+    case PK.singleClickAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         singleClickAction = Preference.MouseClickAction(rawValue: newValue)
       }
 
-    case Preference.Key.doubleClickAction:
+    case PK.doubleClickAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         doubleClickAction = Preference.MouseClickAction(rawValue: newValue)
       }
 
-    case Preference.Key.rightClickAction:
+    case PK.rightClickAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         rightClickAction = Preference.MouseClickAction(rawValue: newValue)
       }
 
-    case Preference.Key.showRemainingTime:
+    case PK.showRemainingTime:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
         rightLabel.mode = newValue ? .remaining : .duration
       }
@@ -412,7 +421,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           y: currentLocation.y - mousePosRelatedToWindow!.y
         )
         window?.setFrameOrigin(newOrigin)
-      };
+      }
     }
   }
 
@@ -568,9 +577,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if scrollDirection == .horizontal {
       playerCore.seek(relativeSecond: seekFactor * deltaX, option: useExtrackSeek)
     } else if scrollDirection == .vertical {
-      let newVolume = playerCore.info.volume - Int(deltaY)
+      let volumeMap = [0, 0.25, 0.5, 0.75, 1]
+      let newVolume = playerCore.info.volume - volumeMap[volumeScrollAmount] * deltaY
       playerCore.setVolume(newVolume)
-      volumeSlider.integerValue = newVolume
+      volumeSlider.doubleValue = newVolume
     }
   }
 
@@ -611,7 +621,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // update timer
     updateTimer()
     // always on top
-    if ud.bool(forKey: Preference.Key.alwaysFloatOnTop) {
+    if ud.bool(forKey: PK.alwaysFloatOnTop) {
       playerCore.info.isAlwaysOntop = true
       setWindowFloatingOnTop(true)
     }
@@ -642,7 +652,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, true)
 
     // Set the appearance to match the theme so the titlebar matches the theme
-    switch(Preference.Theme(rawValue: ud.integer(forKey: Preference.Key.themeMaterial))!) {
+    switch(Preference.Theme(rawValue: ud.integer(forKey: PK.themeMaterial))!) {
       case .dark, .ultraDark: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantDark);
       case .light, .mediumLight: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
     }
@@ -734,8 +744,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     }
     // update control bar position
-    let cph = ud.float(forKey: Preference.Key.controlBarPositionHorizontal)
-    let cpv = ud.float(forKey: Preference.Key.controlBarPositionVertical)
+    let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
+    let cpv = ud.float(forKey: PK.controlBarPositionVertical)
     controlBar.setFrameOrigin(NSMakePoint(
       wSize.width * CGFloat(cph) - cSize.width * 0.5,
       wSize.height * CGFloat(cpv)
@@ -821,7 +831,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       hideControlTimer = nil
     }
     // create new timer
-    let timeout = ud.float(forKey: Preference.Key.controlBarAutoHideTimeout)
+    let timeout = ud.float(forKey: PK.controlBarAutoHideTimeout)
     hideControlTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideUIAndCursor), userInfo: nil, repeats: false)
   }
 
@@ -840,12 +850,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       hideOSDTimer = nil
     }
     osdAnimationState = .shown
-    let osdTextSize = ud.float(forKey: Preference.Key.osdTextSize)
+    let osdTextSize = ud.float(forKey: PK.osdTextSize)
     osd.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
     osd.stringValue = message.message()
     osdVisualEffectView.alphaValue = 1
     osdVisualEffectView.isHidden = false
-    let timeout = ud.float(forKey: Preference.Key.osdAutoHideTimeout)
+    let timeout = ud.float(forKey: PK.osdAutoHideTimeout)
     hideOSDTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideOSD), userInfo: nil, repeats: false)
   }
 
@@ -1107,12 +1117,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     } else {
 
       var rect: NSRect
-      let needResizeWindow = playerCore.info.justOpenedFile || !ud.bool(forKey: Preference.Key.resizeOnlyWhenManuallyOpenFile)
+      let needResizeWindow = playerCore.info.justOpenedFile || !ud.bool(forKey: PK.resizeOnlyWhenManuallyOpenFile)
 
       if needResizeWindow {
         // get videoSize on screen
         var videoSize = originalVideoSize
-        if ud.bool(forKey: Preference.Key.usePhysicalResolution) {
+        if ud.bool(forKey: PK.usePhysicalResolution) {
           videoSize = w.convertFromBacking(
             NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))).size
         }
@@ -1191,7 +1201,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func updateVolume() {
-    volumeSlider.integerValue = playerCore.info.volume
+    volumeSlider.doubleValue = playerCore.info.volume
     muteButton.state = playerCore.info.isMuted ? NSOnState : NSOffState
   }
 
@@ -1403,7 +1413,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
 
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
-    let value = sender.integerValue
+    let value = sender.doubleValue
     playerCore.setVolume(value)
   }
 

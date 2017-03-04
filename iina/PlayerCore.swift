@@ -226,11 +226,11 @@ class PlayerCore: NSObject {
     NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
   }
 
-  func setVolume(_ volume: Int, constrain: Bool = true) {
+  func setVolume(_ volume: Double, constrain: Bool = true) {
     let constrainedVolume = volume.constrain(min: 0, max: 100)
     let appliedVolume = constrain ? constrainedVolume : volume
     info.volume = appliedVolume
-    mpvController.setInt(MPVOption.Audio.volume, appliedVolume)
+    mpvController.setDouble(MPVOption.Audio.volume, appliedVolume)
     ud.set(constrainedVolume, forKey: Preference.Key.softVolume)
   }
 

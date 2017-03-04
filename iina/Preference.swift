@@ -424,7 +424,7 @@ struct Preference {
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
     Key.relativeSeekAmount: 2,
-    Key.volumeScrollAmount: 4,
+    Key.volumeScrollAmount: 3,
     Key.verticalScrollAction: ScrollAction.volume.rawValue,
     Key.horizontalScrollAction: ScrollAction.seek.rawValue,
     Key.singleClickAction: MouseClickAction.hideOSC.rawValue,

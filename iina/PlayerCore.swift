@@ -117,9 +117,8 @@ class PlayerCore: NSObject {
   /** Pause / resume. Reset speed to 0 when pause. */
   func togglePause(_ set: Bool?) {
     if let setPause = set {
-      if setPause {
-        setSpeed(1)
-      } else {
+      // if paused by EOF, replay the video.
+      if !setPause {
         if mpvController.getFlag(MPVProperty.eofReached) {
           seek(absoluteSecond: 0)
         }
@@ -134,7 +133,6 @@ class PlayerCore: NSObject {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, false)
       } else {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, true)
-        setSpeed(1)
       }
       info.isPaused = !info.isPaused
     }

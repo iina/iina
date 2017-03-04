@@ -42,6 +42,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var isMouseInWindow: Bool = false
   var isMouseInSlider: Bool = false
 
+  var isFastforwarding: Bool = false
+
   override var windowNibName: String {
     return "MainWindowController"
   }
@@ -1217,6 +1219,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
       rightArrowLabel.isHidden = true
+      // set speed to 0 if is fastforwarding
+      if isFastforwarding {
+        playerCore.setSpeed(1)
+        isFastforwarding = false
+      }
     }
   }
 
@@ -1307,6 +1314,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func arrowButtonAction(left: Bool) {
     switch arrowBtnFunction! {
     case .speed:
+      isFastforwarding = true
       let speedValue = AppData.availableSpeedValues[speedValueIndex]
       playerCore.setSpeed(speedValue)
       if speedValueIndex == 5 {

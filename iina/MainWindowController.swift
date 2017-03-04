@@ -101,6 +101,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private var useExtrackSeek: Preference.SeekOption!
   private var relativeSeekAmount: Int = 3
   private var volumeScrollAmount: Int = 4
+  private var horizontalScrollAction: Preference.ScrollAction!
+  private var verticalScrollAction: Preference.ScrollAction!
   private var arrowBtnFunction: Preference.ArrowButtonAction!
   private var singleClickAction: Preference.MouseClickAction!
   private var doubleClickAction: Preference.MouseClickAction!
@@ -117,6 +119,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     PK.useExactSeek,
     PK.relativeSeekAmount,
     PK.volumeScrollAmount,
+    PK.horizontalScrollAction,
+    PK.verticalScrollAction,
     PK.arrowButtonAction,
     PK.singleClickAction,
     PK.doubleClickAction,
@@ -291,6 +295,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     relativeSeekAmount = ud.integer(forKey: PK.relativeSeekAmount)
     volumeScrollAmount = ud.integer(forKey: PK.volumeScrollAmount)
+    horizontalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.horizontalScrollAction))
+    verticalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.verticalScrollAction))
     useExtrackSeek = Preference.SeekOption(rawValue: ud.integer(forKey: PK.useExactSeek))
     arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: PK.arrowButtonAction))
     singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.singleClickAction))
@@ -354,6 +360,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case PK.volumeScrollAmount:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         volumeScrollAmount = newValue.constrain(min: 1, max: 4)
+      }
+
+    case PK.verticalScrollAction:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        verticalScrollAction = Preference.ScrollAction(rawValue: newValue)
+      }
+
+    case PK.horizontalScrollAction:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        horizontalScrollAction = Preference.ScrollAction(rawValue: newValue)
+      }
+
+    case PK.arrowButtonAction:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)
       }
 
     case PK.arrowButtonAction:
@@ -574,19 +595,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let isPrecise = event.hasPreciseScrollingDeltas
     let isNatural = event.isDirectionInvertedFromDevice
 
+
     var deltaX = isPrecise ? Double(event.scrollingDeltaX) : event.scrollingDeltaX.unifiedDouble
     var deltaY = isPrecise ? Double(event.scrollingDeltaY) : event.scrollingDeltaY.unifiedDouble * 2
 
-    if !isNatural {
-      deltaX = -deltaX
+    if isNatural {
       deltaY = -deltaY
+    } else {
+      deltaX = -deltaX
     }
+    let scrollAction = scrollDirection == .horizontal ? horizontalScrollAction : verticalScrollAction
+    let delta = scrollDirection == .horizontal ? deltaX : deltaY
 
-    if scrollDirection == .horizontal {
-      playerCore.seek(relativeSecond: seekFactor * deltaX, option: useExtrackSeek)
-    } else if scrollDirection == .vertical {
+    if scrollAction == .seek {
+      playerCore.seek(relativeSecond: seekFactor * delta, option: useExtrackSeek)
+    } else if scrollAction == .volume {
       let volumeMap = [0, 0.25, 0.5, 0.75, 1]
-      let newVolume = playerCore.info.volume - volumeMap[volumeScrollAmount] * deltaY
+      // don't use precised delta for mouse
+      let newVolume = playerCore.info.volume + (isMouse ? delta : volumeMap[volumeScrollAmount] * delta)
       playerCore.setVolume(newVolume)
       volumeSlider.doubleValue = newVolume
     }

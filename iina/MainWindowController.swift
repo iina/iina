@@ -18,9 +18,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   unowned let ud: UserDefaults = UserDefaults.standard
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60
-  
-  let screenFrame = NSScreen.main()?.visibleFrame;
-  var lastMagnification:CGFloat = 0.0;
+
+  var lastMagnification:CGFloat = 0.0
 
   let minimumPressDuration: TimeInterval = 0.5
   
@@ -576,27 +575,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
-    guard !isInInteractiveMode && window != nil && screenFrame != nil else { return }
+    guard !isInInteractiveMode, let window = window, let screenFrame = NSScreen.main()?.visibleFrame else { return }
     
     if recognizer.state == NSGestureRecognizerState.began {
       lastMagnification = recognizer.magnification;
-    }
-    
-    if recognizer.state == NSGestureRecognizerState.changed {
+    }else if recognizer.state == NSGestureRecognizerState.changed {
       let offset = recognizer.magnification - lastMagnification + 1.0;
-      var newWidth = window!.frame.width * offset, newHeight = window!.frame.height * offset;
+      let newWidth = window.frame.width * offset
+      let newHeight = newWidth / window.aspectRatio.aspect
     
       //Check against max & min threshold
-      if newHeight > screenFrame!.height || newHeight < minSize.height {
-        newHeight = newHeight > screenFrame!.height ? screenFrame!.height : minSize.height;
-        newWidth = newHeight * (window!.aspectRatio.width / window!.aspectRatio.height);
+      if newHeight < screenFrame.height && newHeight > minSize.height && newWidth > minSize.width {
+        let newSize = NSSize(width: newWidth, height: newHeight);
+        window.setFrame(window.frame.centeredResize(to: newSize), display: true)
       }
-      
-      let newSize = NSSize(width: newWidth, height: newHeight);
-      
-      window!.centeredResized(to: newSize)
-      //This fixes movie blinking issue, haven't found a better way to make it more smoothly.
-      window!.contentView?.setFrameSize(newSize);
       
       lastMagnification = recognizer.magnification;
     }

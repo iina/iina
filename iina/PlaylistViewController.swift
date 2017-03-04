@@ -141,7 +141,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
       playlistBtn.attributedTitle = NSAttributedString(string: playlistStr, attributes: Utility.tabTitleFontAttributes)
     }
   }
-  
+
   // MARK: - NSTableViewDataSource
 
   func numberOfRows(in tableView: NSTableView) -> Int {

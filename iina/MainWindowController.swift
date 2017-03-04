@@ -161,9 +161,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   var titleTextField: NSTextField? {
     get {
-      // FIXME: Internal NSWindow API
-      return window?.perform(Selector(("_borderView")))?.takeUnretainedValue().perform(Selector(("_titleTextFieldView")))?.takeUnretainedValue() as? NSTextField
-//      return window?.standardWindowButton(.documentIconButton)?.superview?.subviews.flatMap({ $0 as? NSTextField }).first
+      return window?.standardWindowButton(.documentIconButton)?.superview?.subviews.flatMap({ $0 as? NSTextField }).first
     }
   }
   @IBOutlet weak var controlBar: ControlBarView!

@@ -38,7 +38,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subTabBtn: NSButton!
   @IBOutlet weak var tabView: NSTabView!
 
-	@IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var tabViewTopConstraint: NSLayoutConstraint!
 	
   @IBOutlet weak var videoTableView: NSTableView!
@@ -386,6 +386,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let knobPos = sender.knobPointPosition()
     speedSliderConstraint.constant = knobPos - speedSliderIndicator.frame.width
     playerCore.setSpeed(value)
+    view.layout()
   }
 
   @IBAction func customSpeedEditFinishedAction(_ sender: NSTextField) {
@@ -400,6 +401,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if let window = sender.window {
       window.makeFirstResponder(window.contentView)
     }
+    speedSliderConstraint.constant = speedSlider.knobPointPosition() - speedSliderIndicator.frame.width
+    view.layout()
   }
 
   @IBAction func deinterlaceBtnAction(_ sender: AnyObject) {
@@ -479,6 +482,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         playerCore.setAudioDelay(sliderValue)
       }
     }
+    view.layout()
   }
 
   @IBAction func customAudioDelayEditFinishedAction(_ sender: AnyObject?) {
@@ -531,6 +535,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         customSubDelayTextField.doubleValue = sliderValue
       }
     }
+    view.layout()
   }
 
   @IBAction func customSubDelayEditFinishedAction(_ sender: AnyObject?) {

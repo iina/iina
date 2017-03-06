@@ -17,19 +17,56 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     set { }
   }
 
+  override var windowNibName: String {
+    return "MainWindowController"
+  }
+
+  // MARK: - Constants
+
   unowned let ud: UserDefaults = UserDefaults.standard
+
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60
-
-  var lastMagnification:CGFloat = 0.0
-
   let minimumPressDuration: TimeInterval = 0.5
-  
+
+  // MARK: - Objects, Views
+
   unowned let playerCore: PlayerCore = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
   lazy var sizingTouchBarTextField: NSTextField = {
     return NSTextField()
   }()
+
+  /** The quick setting window */
+  lazy var quickSettingView: QuickSettingViewController = {
+    let quickSettingView = QuickSettingViewController()
+    quickSettingView.mainWindow = self
+    return quickSettingView
+  }()
+
+  lazy var playlistView: PlaylistViewController = {
+    let playListView = PlaylistViewController()
+    playListView.mainWindow = self
+    return playListView
+  }()
+
+  lazy var cropSettingsView: CropSettingsViewController = {
+    let cropView = CropSettingsViewController()
+    cropView.mainWindow = self
+    return cropView
+  }()
+
+  private var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
+
+  private var singleClickTimer: Timer?
+
+  /** For auto hiding ui after a timeout */
+  var hideControlTimer: Timer?
+
+  var hideOSDTimer: Timer?
+
+  // MARK: - Status
+
   var touchBarPosLabelWidthLayout: NSLayoutConstraint?
 
   var mousePosRelatedToWindow: CGPoint?
@@ -43,32 +80,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var isInPIP: Bool = false
   var isInInteractiveMode: Bool = false
 
-  // FIXME: might use another obj to handle slider?
+  // might use another obj to handle slider?
   var isMouseInWindow: Bool = false
   var isMouseInSlider: Bool = false
 
   var isFastforwarding: Bool = false
 
-  override var windowNibName: String {
-    return "MainWindowController"
-  }
+  var lastMagnification: CGFloat = 0.0
 
   var fadeableViews: [NSView?] = []
-
-  /** Animation state of he hide/show part */
-  enum UIAnimationState {
-    case shown, hidden, willShow, willHide
-  }
-
-  var animationState: UIAnimationState = .shown
-
-  var osdAnimationState: UIAnimationState = .hidden
-
-  /** For auto hiding ui after a timeout */
-  var hideControlTimer: Timer?
-
-  var hideOSDTimer: Timer?
-
 
   /** Cache current crop */
   var currentCrop: NSRect = NSRect()
@@ -91,43 +111,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  var wasPlayingWhenSeekBegan: Bool?
+
+  // MARK: - Enums
+
+  /** Animation state of he hide/show part */
+  enum UIAnimationState {
+    case shown, hidden, willShow, willHide
+  }
+
+  var animationState: UIAnimationState = .shown
+  var osdAnimationState: UIAnimationState = .hidden
+
   enum ScrollDirection {
     case horizontal
     case vertical
   }
 
   var scrollDirection: ScrollDirection?
-
-  private var useExtractSeek: Preference.SeekOption!
-  private var relativeSeekAmount: Int = 3
-  private var volumeScrollAmount: Int = 4
-  private var horizontalScrollAction: Preference.ScrollAction!
-  private var verticalScrollAction: Preference.ScrollAction!
-  private var arrowBtnFunction: Preference.ArrowButtonAction!
-  private var singleClickAction: Preference.MouseClickAction!
-  private var doubleClickAction: Preference.MouseClickAction!
-  private var rightClickAction: Preference.MouseClickAction!
-  private var pinchAction: Preference.PinchAction!
-
-  private var singleClickTimer: Timer?
-
-  /** A list of observed preferences */
-
-  private let observedPrefKeys: [String] = [
-    PK.themeMaterial,
-    PK.showChapterPos,
-    PK.useExactSeek,
-    PK.relativeSeekAmount,
-    PK.volumeScrollAmount,
-    PK.horizontalScrollAction,
-    PK.verticalScrollAction,
-    PK.arrowButtonAction,
-    PK.singleClickAction,
-    PK.doubleClickAction,
-    PK.rightClickAction,
-    PK.pinchAction,
-    PK.showRemainingTime
-  ]
 
   private var notificationObservers: [NSObjectProtocol] = []
 
@@ -151,30 +152,41 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   var sideBarStatus: SideBarViewType = .hidden
 
+  // MARK: - Observed user defaults
+
+  private var useExtractSeek: Preference.SeekOption!
+  private var relativeSeekAmount: Int = 3
+  private var volumeScrollAmount: Int = 4
+  private var horizontalScrollAction: Preference.ScrollAction!
+  private var verticalScrollAction: Preference.ScrollAction!
+  private var arrowBtnFunction: Preference.ArrowButtonAction!
+  private var singleClickAction: Preference.MouseClickAction!
+  private var doubleClickAction: Preference.MouseClickAction!
+  private var rightClickAction: Preference.MouseClickAction!
+  private var pinchAction: Preference.PinchAction!
+
+  /** A list of observed preferences */
+  private let observedPrefKeys: [String] = [
+    PK.themeMaterial,
+    PK.showChapterPos,
+    PK.useExactSeek,
+    PK.relativeSeekAmount,
+    PK.volumeScrollAmount,
+    PK.horizontalScrollAction,
+    PK.verticalScrollAction,
+    PK.arrowButtonAction,
+    PK.singleClickAction,
+    PK.doubleClickAction,
+    PK.rightClickAction,
+    PK.pinchAction,
+    PK.showRemainingTime
+  ]
+
+  // MARK: - Outlets
+
   @IBOutlet weak var sideBarRightConstraint: NSLayoutConstraint!
   @IBOutlet weak var sideBarWidthConstraint: NSLayoutConstraint!
   @IBOutlet weak var bottomBarBottomConstraint: NSLayoutConstraint!
-
-  /** The quick setting window */
-  lazy var quickSettingView: QuickSettingViewController = {
-    let quickSettingView = QuickSettingViewController()
-    quickSettingView.mainWindow = self
-    return quickSettingView
-  }()
-
-  lazy var playlistView: PlaylistViewController = {
-    let playListView = PlaylistViewController()
-    playListView.mainWindow = self
-    return playListView
-  }()
-
-  lazy var cropSettingsView: CropSettingsViewController = {
-    let cropView = CropSettingsViewController()
-    cropView.mainWindow = self
-    return cropView
-  }()
-
-  var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
   @IBOutlet weak var titleTextField: NSTextField!
@@ -218,6 +230,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   lazy var pipVideo: NSViewController = {
     return NSViewController()
   }()
+
+  // MARK: - Initialization
 
   override func windowDidLoad() {
 
@@ -412,8 +426,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  // MARK: - Lazy initializers
-
   func initVideoView() -> VideoView {
     let v = VideoView(frame: window!.contentView!.bounds)
     return v
@@ -580,6 +592,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let isTrackpadEnd = event.phase.contains(.ended)
 
     // determine direction
+
     if isMouse || isTrackpadBegan {
       if event.scrollingDeltaX != 0 {
         scrollDirection = .horizontal
@@ -590,10 +603,30 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       scrollDirection = nil
     }
 
+    let scrollAction = scrollDirection == .horizontal ? horizontalScrollAction : verticalScrollAction
+
+    // pause video when seek begins.
+
+    if scrollAction == .seek && isTrackpadBegan {
+      // record pause status
+      wasPlayingWhenSeekBegan = !playerCore.info.isPaused
+      if wasPlayingWhenSeekBegan! {
+        playerCore.togglePause(true)
+      }
+    }
+
+    if isTrackpadEnd && wasPlayingWhenSeekBegan != nil {
+      // only resume playback when it was playing when began
+      if wasPlayingWhenSeekBegan! {
+        playerCore.togglePause(false)
+      }
+      wasPlayingWhenSeekBegan = nil
+    }
+
     // handle the delta value
+
     let isPrecise = event.hasPreciseScrollingDeltas
     let isNatural = event.isDirectionInvertedFromDevice
-
 
     var deltaX = isPrecise ? Double(event.scrollingDeltaX) : event.scrollingDeltaX.unifiedDouble
     var deltaY = isPrecise ? Double(event.scrollingDeltaY) : event.scrollingDeltaY.unifiedDouble * 2
@@ -603,8 +636,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     } else {
       deltaX = -deltaX
     }
-    let scrollAction = scrollDirection == .horizontal ? horizontalScrollAction : verticalScrollAction
+
     let delta = scrollDirection == .horizontal ? deltaX : deltaY
+
+    // perform action
 
     if scrollAction == .seek {
       let seekAmount = (isMouse ? AppData.seekAmountMapMouse : AppData.seekAmountMap)[relativeSeekAmount] * delta

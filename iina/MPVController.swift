@@ -125,6 +125,7 @@ class MPVController: NSObject {
     setUserOption(PK.screenshotTemplate, type: .string, forName: MPVOption.Screenshot.screenshotTemplate)
 
     setUserOption(PK.useMediaKeys, type: .bool, forName: MPVOption.Input.inputMediaKeys)
+    setUserOption(PK.useAppleRemote, type: .bool, forName: MPVOption.Input.inputAppleremote)
 
     setUserOption(PK.keepOpenOnFileEnd, type: .other, forName: MPVOption.Window.keepOpen) { key in
       let keepOpen = UserDefaults.standard.bool(forKey: PK.keepOpenOnFileEnd)

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12106.1" systemVersion="16E163f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12106.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PlaylistViewController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="buttonTopConstraint" destination="hLh-Or-ZUd" id="wDU-9e-scd"/>
                 <outlet property="chapterTableView" destination="BvG-MR-6LX" id="WoF-Wg-fqX"/>
                 <outlet property="chaptersBtn" destination="SOR-3l-PFj" id="W2q-tm-TA0"/>
                 <outlet property="deleteBtn" destination="7my-AM-8Ts" id="wTg-jz-wRa"/>
@@ -294,9 +295,6 @@
                 </tabView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SOR-3l-PFj">
                     <rect key="frame" x="120" y="321" width="120" height="48"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="48" id="BRL-lK-4tg"/>
-                    </constraints>
                     <buttonCell key="cell" type="square" title="CHAPTERS" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="jUF-xa-uRI">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -321,15 +319,17 @@
             </subviews>
             <constraints>
                 <constraint firstItem="Yym-Zw-Hd8" firstAttribute="top" secondItem="5Zq-JQ-XO4" secondAttribute="bottom" id="EOu-Jc-A7S"/>
-                <constraint firstItem="5Zq-JQ-XO4" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="LDc-wa-R0O"/>
                 <constraint firstAttribute="bottom" secondItem="Yym-Zw-Hd8" secondAttribute="bottom" id="VEC-3U-YTI"/>
                 <constraint firstAttribute="trailing" secondItem="Yym-Zw-Hd8" secondAttribute="trailing" id="Wu2-Mo-8NM"/>
                 <constraint firstAttribute="trailing" secondItem="SOR-3l-PFj" secondAttribute="trailing" id="atA-b5-vwd"/>
-                <constraint firstItem="SOR-3l-PFj" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="b6J-nd-u9K"/>
+                <constraint firstAttribute="width" constant="240" id="clJ-Nh-tAc"/>
                 <constraint firstItem="5Zq-JQ-XO4" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="elP-iu-vPl"/>
                 <constraint firstItem="5Zq-JQ-XO4" firstAttribute="width" secondItem="Hz6-mo-xeY" secondAttribute="width" multiplier="0.5" id="epQ-jC-a0B"/>
+                <constraint firstItem="5Zq-JQ-XO4" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="hLh-Or-ZUd"/>
                 <constraint firstItem="Yym-Zw-Hd8" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="iKz-2C-iJv"/>
+                <constraint firstItem="SOR-3l-PFj" firstAttribute="top" secondItem="5Zq-JQ-XO4" secondAttribute="top" id="iZK-4D-ROr"/>
                 <constraint firstItem="SOR-3l-PFj" firstAttribute="width" secondItem="Hz6-mo-xeY" secondAttribute="width" multiplier="0.5" id="owL-kO-fvO"/>
+                <constraint firstItem="SOR-3l-PFj" firstAttribute="height" secondItem="5Zq-JQ-XO4" secondAttribute="height" id="sRW-ep-6n7"/>
             </constraints>
             <point key="canvasLocation" x="150" y="217.5"/>
         </customView>

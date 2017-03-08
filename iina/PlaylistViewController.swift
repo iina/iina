@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDelegate {
+class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDelegate, SidebarViewController {
 
   override var nibName: String {
     return "PlaylistViewController"
@@ -39,6 +39,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
   @IBOutlet weak var playlistBtn: NSButton!
   @IBOutlet weak var chaptersBtn: NSButton!
   @IBOutlet weak var tabView: NSTabView!
+  @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var deleteBtn: NSButton!
   @IBOutlet weak var loopBtn: NSButton!
   @IBOutlet weak var shuffleBtn: NSButton!
@@ -50,6 +51,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
   lazy var chapterDelegate: ChapterTableDelegate = {
     return ChapterTableDelegate(self)
   }()
+  
+  var downShift: CGFloat = 0 {
+    didSet {
+      buttonTopConstraint.animator().constant = downShift
+    }
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()

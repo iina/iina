@@ -13,6 +13,7 @@ import MASPreferences
 class AppDelegate: NSObject, NSApplicationDelegate {
 
   var isReady: Bool = false
+  var isServiceStartup: Bool = false
 
   var pendingURL: String?
 
@@ -67,7 +68,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
       if UserDefaults.standard.bool(forKey: Preference.Key.openStartPanel) {
         // invoke after 0.5s
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(self.openFile(_:)), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(self.judgeServiceStartup), userInfo: nil, repeats: false)
       }
     }
 
@@ -87,6 +88,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if let url = pendingURL {
       parsePendingURL(url)
     }
+
+    NSApplication.shared().servicesProvider = self
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {
@@ -131,6 +134,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return true
   }
 
+  // MARK: - Accept dropped string and URL
+
+  func droppedText(_ pboard: NSPasteboard, userData:String, error: NSErrorPointer) {
+    if let url = pboard.string(forType: NSStringPboardType) {
+      isServiceStartup = true
+      playerCore.openURLString(url)
+    }
+  }
+
+  func judgeServiceStartup() {
+    if !isServiceStartup {
+      openFile(self)
+    }
+  }
+  
   // MARK: - Dock menu
 
   func applicationDockMenu(_ sender: NSApplication) -> NSMenu? {

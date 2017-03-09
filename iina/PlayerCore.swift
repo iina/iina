@@ -56,7 +56,6 @@ class PlayerCore: NSObject {
       mainWindow = nil
       mainWindow = MainWindowController()
     }
-    info.isPaused = false
     info.currentURL = url
     info.isNetworkResource = isNetwork
      mainWindow!.showWindow(nil)
@@ -124,7 +123,6 @@ class PlayerCore: NSObject {
         }
       }
       mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
-      info.isPaused = setPause
     } else {
       if (info.isPaused) {
         if mpvController.getFlag(MPVProperty.eofReached) {
@@ -134,7 +132,6 @@ class PlayerCore: NSObject {
       } else {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, true)
       }
-      info.isPaused = !info.isPaused
     }
   }
 

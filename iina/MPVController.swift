@@ -328,7 +328,6 @@ class MPVController: NSObject {
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {
     if args.count > 0 && args.last == nil {
       Utility.fatal("Command do not need a nil suffix")
-      return
     }
 
     var strArgs = args

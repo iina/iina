@@ -540,11 +540,9 @@ class PlayerCore: NSObject {
   func fileLoaded() {
     guard let mw = mainWindow else {
       Utility.fatal("Window is nil at fileLoaded")
-      return
     }
     guard let vwidth = info.videoWidth, let vheight = info.videoHeight else {
       Utility.fatal("Cannot get video width and height")
-      return
     }
     invalidateTimer()
     triedUsingExactSeekForCurrentFile = false
@@ -579,7 +577,6 @@ class PlayerCore: NSObject {
     guard let mw = mainWindow else { return }
     guard let dwidth = info.displayWidth, let dheight = info.displayHeight else {
       Utility.fatal("Cannot get video width and height")
-      return
     }
     if dwidth != 0 && dheight != 0 {
       DispatchQueue.main.sync {

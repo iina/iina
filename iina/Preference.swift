@@ -17,6 +17,7 @@ struct Preference {
 
     /** Record recent files */
     static let recordRecentFiles = "recordRecentFiles"
+    static let recordAllFiles = "recordAllFiles"
 
     /** Material for OSC and title bar (Theme(int)) */
     static let themeMaterial = "themeMaterial"
@@ -324,6 +325,7 @@ struct Preference {
 
   static let defaultPreference:[String : Any] = [
     Key.recordRecentFiles: true,
+    Key.recordAllFiles: false,
     Key.controlBarPositionHorizontal: Float(0.5),
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,

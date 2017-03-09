@@ -574,7 +574,7 @@ class PlayerCore: NSObject {
       }
     }
 
-    if ud.bool(forKey: Preference.Key.recordRecentFiles) {
+    if ud.bool(forKey: Preference.Key.recordRecentFiles) && ud.bool(forKey: Preference.Key.recordAllFiles) {
       if let current = info.currentURL {
         NSDocumentController.shared().noteNewRecentDocumentURL(current)
       }

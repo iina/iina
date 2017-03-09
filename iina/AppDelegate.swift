@@ -124,6 +124,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     let url = URL(fileURLWithPath: filename)
+    if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) && !playerCore.ud.bool(forKey: Preference.Key.recordAllFiles) {
+      NSDocumentController.shared().noteNewRecentDocumentURL(url)
+    }
     playerCore.openFile(url)
     return true
   }
@@ -167,7 +170,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     panel.allowsMultipleSelection = false
     if panel.runModal() == NSFileHandlingPanelOKButton {
       if let url = panel.url {
-        if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) {
+        if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) && !playerCore.ud.bool(forKey: Preference.Key.recordAllFiles) {
           NSDocumentController.shared().noteNewRecentDocumentURL(url)
         }
         playerCore.openFile(url)

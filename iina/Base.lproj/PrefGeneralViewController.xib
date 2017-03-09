@@ -333,6 +333,10 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <binding destination="IBP-Mz-Maa" name="enabled" keyPath="values.recordRecentFiles" id="pUN-no-lKA"/>
+                        <binding destination="IBP-Mz-Maa" name="value" keyPath="values.recordAllFiles" id="zTM-dd-kCv"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>

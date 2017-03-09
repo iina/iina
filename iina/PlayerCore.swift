@@ -573,6 +573,12 @@ class PlayerCore: NSObject {
         needEnterFullScreenForNextMedia = false
       }
     }
+
+    if ud.bool(forKey: Preference.Key.recordRecentFiles) {
+      if let current = info.currentURL {
+        NSDocumentController.shared().noteNewRecentDocumentURL(current)
+      }
+    }
     
     NotificationCenter.default.post(Notification(name: Constants.Noti.fileLoaded))
   }

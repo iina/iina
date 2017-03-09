@@ -124,9 +124,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     let url = URL(fileURLWithPath: filename)
-    if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) {
-      NSDocumentController.shared().noteNewRecentDocumentURL(url)
-    }
     playerCore.openFile(url)
     return true
   }

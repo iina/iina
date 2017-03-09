@@ -123,6 +123,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case hidden // indicating sidebar is hidden. Should only be used by sideBarStatus
     case settings
     case playlist
+    func width() -> CGFloat {
+      switch self {
+      case .settings:
+        return 360
+      case .playlist:
+        return 240
+      default:
+        Utility.fatal("SideBarViewType.width shouldn't be called here")
+      }
+    }
   }
 
   var sideBarStatus: SideBarViewType = .hidden
@@ -871,8 +881,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let view = (viewController as? NSViewController)?.view else {
         Utility.fatal("viewController is not a NSViewController")
     }
-    sideBarWidthConstraint.constant = view.fittingSize.width
-    sideBarRightConstraint.constant = -view.fittingSize.width
+    let width = type.width()
+    sideBarWidthConstraint.constant = width
+    sideBarRightConstraint.constant = -width
     sideBarView.isHidden = false
     // add view and constraints
     sideBarView.addSubview(view)

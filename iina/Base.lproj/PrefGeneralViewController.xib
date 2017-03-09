@@ -324,24 +324,37 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="LPz-O1-G2r">
+                    <rect key="frame" x="118" y="179" width="352" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="Mhb-IV-Asl"/>
+                    </constraints>
+                    <buttonCell key="cell" type="check" title="Record all played videos in recently opend" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ekf-td-zpk">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="tV0-X6-PhP" secondAttribute="trailing" constant="12" id="2ZH-xq-acW"/>
+                <constraint firstItem="fMz-O7-X4u" firstAttribute="top" secondItem="LPz-O1-G2r" secondAttribute="bottom" constant="12" id="2n9-aS-I5z"/>
                 <constraint firstAttribute="trailing" secondItem="OVz-Nv-1WW" secondAttribute="trailing" constant="12" id="3YO-34-5pc"/>
                 <constraint firstItem="Nj3-EX-JeL" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="3ZU-bQ-LqL"/>
                 <constraint firstItem="Obh-JS-axA" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="579-UV-gca"/>
                 <constraint firstItem="Nj3-EX-JeL" firstAttribute="top" secondItem="KvZ-mf-rv4" secondAttribute="bottom" constant="9" id="5hD-Tj-ds1"/>
                 <constraint firstItem="KvZ-mf-rv4" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="6Ch-vb-RIw"/>
+                <constraint firstAttribute="trailing" secondItem="LPz-O1-G2r" secondAttribute="trailing" constant="12" id="6OX-k8-uY1"/>
                 <constraint firstItem="8Ql-ym-BvF" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="7S0-4z-TFj"/>
                 <constraint firstItem="OVz-Nv-1WW" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="138" id="81T-zv-PFn"/>
                 <constraint firstItem="HOy-i3-JWR" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="97m-MP-bnq"/>
-                <constraint firstItem="fMz-O7-X4u" firstAttribute="top" secondItem="F6o-D4-gDa" secondAttribute="bottom" constant="12" id="AJk-1P-g2A"/>
+                <constraint firstItem="LPz-O1-G2r" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="AWc-tj-cF1"/>
                 <constraint firstAttribute="bottom" secondItem="tV0-X6-PhP" secondAttribute="bottom" constant="20" id="Ayn-Ef-5Z8"/>
                 <constraint firstAttribute="trailing" secondItem="fMz-O7-X4u" secondAttribute="trailing" constant="12" id="CTn-bI-pr2"/>
                 <constraint firstItem="Fcb-Fl-8d8" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="11" id="Cdw-Ce-Bi4"/>
                 <constraint firstAttribute="trailing" secondItem="PKl-oI-CuN" secondAttribute="trailing" constant="12" id="Ewc-z9-Xbo"/>
                 <constraint firstItem="6gO-wx-MWj" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="11" id="HBx-nm-pXG"/>
                 <constraint firstItem="ZA7-QS-FAH" firstAttribute="baseline" secondItem="Nj3-EX-JeL" secondAttribute="baseline" id="Hvx-H2-Gff"/>
+                <constraint firstItem="LPz-O1-G2r" firstAttribute="top" secondItem="F6o-D4-gDa" secondAttribute="bottom" constant="6" id="IXi-SK-Lpd"/>
                 <constraint firstItem="iLE-bn-UWS" firstAttribute="top" secondItem="KvZ-mf-rv4" secondAttribute="bottom" constant="9" id="K2S-eN-hcp"/>
                 <constraint firstItem="fMz-O7-X4u" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="KEH-Uc-oSm"/>
                 <constraint firstItem="8Ql-ym-BvF" firstAttribute="top" secondItem="Obh-JS-axA" secondAttribute="bottom" constant="12" id="KKb-RK-FwR"/>

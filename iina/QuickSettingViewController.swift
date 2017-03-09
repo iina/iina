@@ -39,7 +39,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var tabView: NSTabView!
 
   @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
-	@IBOutlet weak var tabViewTopConstraint: NSLayoutConstraint!
 	
   @IBOutlet weak var videoTableView: NSTableView!
   @IBOutlet weak var audioTableView: NSTableView!
@@ -101,7 +100,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   var downShift: CGFloat = 0 {
     didSet {
       buttonTopConstraint.animator().constant = downShift
-      tabViewTopConstraint.animator().constant = 48 + downShift
     }
   }
 

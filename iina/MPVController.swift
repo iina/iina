@@ -622,6 +622,8 @@ class MPVController: NSObject {
         if playerCore.info.isPaused != data {
           playerCore.sendOSD(data ? .pause : .resume)
           playerCore.info.isPaused = data
+        }
+        if let mw = playerCore.mainWindow, mw.isWindowLoaded {
           if data {
             SleepPreventer.allowSleep()
           } else {

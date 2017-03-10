@@ -1,15 +1,18 @@
 PODS:
+  - AEXML (4.0.1)
   - Just (0.5.7)
   - MASPreferences (1.1.4)
 
 DEPENDENCIES:
+  - AEXML
   - Just
   - MASPreferences
 
 SPEC CHECKSUMS:
+  AEXML: 905e50474c0a261d335aa8be4ee32d22d69b6fd5
   Just: d19e769d86b965e39ae58cb3c0cbad07706634a8
   MASPreferences: 7bdcfe891d7840453cf48f95fa866c3e152ace7a
 
-PODFILE CHECKSUM: 1660afcf8e29f4d915d2c02e6adc97cd9068a0dd
+PODFILE CHECKSUM: e6d82d169a6dc161ceb650f99ce4e6699cf3e198
 
 COCOAPODS: 1.2.0

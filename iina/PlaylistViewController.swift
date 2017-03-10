@@ -54,7 +54,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
   
   var downShift: CGFloat = 0 {
     didSet {
-      buttonTopConstraint.animator().constant = downShift
+      buttonTopConstraint.constant = downShift
     }
   }
 

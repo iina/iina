@@ -778,16 +778,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if !isInFullScreen {
         titleTextField?.animator().alphaValue = 0
       }
-      var viewController: SidebarViewController
-      switch sideBarStatus {
-      case .playlist:
-        viewController = playlistView
-      case .settings:
-        viewController = quickSettingView
-      default:
-        return
-      }
-      viewController.downShift = 0
     }) {
       // if no interrupt then hide animation
       if self.animationState == .willHide {
@@ -815,16 +805,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         if !isInFullScreen {
           titleTextField?.animator().alphaValue = 1
         }
-        var viewController: SidebarViewController
-        switch sideBarStatus {
-        case .playlist:
-          viewController = playlistView
-        case .settings:
-          viewController = quickSettingView
-        default:
-          return
-        }
-        viewController.downShift = titleBarView.frame.height
       }
     }) {
       self.animationState = .shown
@@ -891,11 +871,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let constraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|[v]|", options: [], metrics: nil, views: ["v": view])
     NSLayoutConstraint.activate(constraintsH)
     NSLayoutConstraint.activate(constraintsV)
+    var viewController = viewController
+    viewController.downShift = titleBarView.frame.height
     // show sidebar
-    if animationState == .shown {
-      var viewController = viewController
-      viewController.downShift = titleBarView.frame.height
-    }
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
@@ -907,16 +885,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func hideSideBar(_ after: @escaping () -> Void = { }) {
     let currWidth = sideBarWidthConstraint.constant
-    var viewController: SidebarViewController
-    switch sideBarStatus {
-    case .playlist:
-      viewController = playlistView
-    case .settings:
-      viewController = quickSettingView
-    default:
-      Utility.fatal("SideBarViewType is invalid")
-    }
-    viewController.downShift = 0
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)

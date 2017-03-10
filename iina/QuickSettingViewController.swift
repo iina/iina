@@ -99,7 +99,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   var downShift: CGFloat = 0 {
     didSet {
-      buttonTopConstraint.animator().constant = downShift
+      buttonTopConstraint.constant = downShift
     }
   }
 

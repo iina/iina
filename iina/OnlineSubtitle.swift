@@ -7,17 +7,18 @@
 //
 
 import Foundation
+import PromiseKit
 
 class OnlineSubtitle {
 
   typealias SubCallback = ([OnlineSubtitle]) -> Void
 
-  /** URL to downloaded subtitle*/
+  /** URL of downloaded subtitle*/
   typealias DownloadCallback = (URL) -> Void
 
   enum Source: Int {
     case shooter = 0
-    // case openSub
+    case openSub
   }
 
   /** Prepend a number before file name to avoid overwritting. */
@@ -39,25 +40,43 @@ class OnlineSubtitle {
 
     switch source {
     case .shooter:
-      if let info = ShooterSubtitle.hash(url) {
-        ShooterSubtitle.request(info, callback: callback)
+      // shooter
+      let subSupport = ShooterSupport()
+      if let info = subSupport.hash(url) {
+        subSupport.request(info, callback: callback)
       } else {
         // if cannot get hash, treat as sub not found
         callback([])
       }
+    case .openSub:
+      // opensubtitles
+      let subSupport = OpenSubSupport.shared
+      subSupport.login()
+      .then {
+        subSupport.hash(url)
+      }.then { info in
+        subSupport.request(info)
+      }.then { subs in
+        callback(subs)
+      }.catch { err in
+        let osdMessage: OSDMessage
+        switch err {
+        case OpenSubSupport.OpenSubError.cannotReadFile,
+             OpenSubSupport.OpenSubError.fileTooSmall:
+          osdMessage = .fileError
+        case OpenSubSupport.OpenSubError.loginFailed(_):
+          osdMessage = .cannotLogin
+        case OpenSubSupport.OpenSubError.xmlRpcError(_):
+          osdMessage = .networkError
+        default:
+          osdMessage = .networkError
+        }
+        PlayerCore.shared.sendOSD(osdMessage)
+      }
     }
-
   }
 
   func download(callback: @escaping DownloadCallback) { }
 
 }
 
-protocol OnlineSubtitleSupport {
-
-  associatedtype RequestData
-
-  static func request(_ info: RequestData, callback: @escaping OnlineSubtitle.SubCallback)
-  static func hash(_ url: URL) -> RequestData?
-
-}

@@ -2,17 +2,30 @@ PODS:
   - AEXML (4.0.1)
   - Just (0.5.7)
   - MASPreferences (1.1.4)
+  - PromiseKit (4.1.0):
+    - PromiseKit/Foundation (= 4.1.0)
+    - PromiseKit/QuartzCore (= 4.1.0)
+    - PromiseKit/UIKit (= 4.1.0)
+  - PromiseKit/CorePromise (4.1.0)
+  - PromiseKit/Foundation (4.1.0):
+    - PromiseKit/CorePromise
+  - PromiseKit/QuartzCore (4.1.0):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (4.1.0):
+    - PromiseKit/CorePromise
 
 DEPENDENCIES:
   - AEXML
   - Just
   - MASPreferences
+  - PromiseKit (~> 4.0)
 
 SPEC CHECKSUMS:
   AEXML: 905e50474c0a261d335aa8be4ee32d22d69b6fd5
   Just: d19e769d86b965e39ae58cb3c0cbad07706634a8
   MASPreferences: 7bdcfe891d7840453cf48f95fa866c3e152ace7a
+  PromiseKit: c98453ff78544c0ad5bb0ea980782e6875f47978
 
-PODFILE CHECKSUM: e6d82d169a6dc161ceb650f99ce4e6699cf3e198
+PODFILE CHECKSUM: 33dee2109382bf2b09e97296b217e54b78e2d581
 
 COCOAPODS: 1.2.0

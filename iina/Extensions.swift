@@ -293,4 +293,14 @@ extension Data {
       return (self as NSData).md5() as String
     }
   }
+
+  var chksum64: UInt64 {
+    get {
+      let count64 = self.count / MemoryLayout<UInt64>.size
+      return self.withUnsafeBytes{ (ptr: UnsafePointer<UInt64>) -> UInt64 in
+        let bufferPtr = UnsafeBufferPointer(start: ptr, count: count64)
+        return bufferPtr.reduce(UInt64(0), &+)
+      }
+    }
+  }
 }

@@ -15,16 +15,28 @@ fileprivate let ISO8601FormatString = "yyyyMMdd'T'HH:mm:ss"
 
 class JustXMLRPC {
 
+  struct XMLRPCError: Error {
+    var method: String
+    var httpCode: Int?
+    var reason: String
+  }
+
+  enum Result {
+    case ok(Any)
+    case failure(Any)
+    case error(XMLRPCError)
+  }
+
   /** (success, result) */
-  typealias CallBack = (Bool, Any?) -> Void
+  typealias CallBack = (Result) -> Void
 
-  var location: String
-
-  static let iso8601DateFormatter: DateFormatter = {
+  private static let iso8601DateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = ISO8601FormatString
     return formatter
   }()
+
+  var location: String
 
   init(_ loc: String) {
     self.location = loc
@@ -52,17 +64,17 @@ class JustXMLRPC {
         let eFault = responseDoc.root["fault"]
         if eParam.count == 1 {
           // if success
-          callback(true, JustXMLRPC.value(fromValueNode: eParam["value"]))
+          callback(.ok(JustXMLRPC.value(fromValueNode: eParam["value"])))
         } else if eFault.count == 1 {
           // if fault
-          callback(false, JustXMLRPC.value(fromValueNode: eFault["value"]))
+          callback(.failure(JustXMLRPC.value(fromValueNode: eParam["value"])))
         } else {
           // unexpected return value
-          callback(false, nil)
+          callback(.error(XMLRPCError(method: method, httpCode: response.statusCode, reason: "Bad response")))
         }
       } else {
-        // bad response
-        callback(false, nil)
+        // http error
+        callback(.error(XMLRPCError(method: method, httpCode: response.statusCode, reason: response.reason)))
       }
     }
   }

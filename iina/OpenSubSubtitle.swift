@@ -78,7 +78,6 @@ class OpenSubSupport {
     var dictionary: [String: String] {
       get {
         return [
-          "sublanguageid": "eng,zho",
           "moviehash": hashValue,
           "moviebytesize": "\(fileSize)"
         ]
@@ -183,7 +182,9 @@ class OpenSubSupport {
   func request(_ info: FileInfo) -> Promise<[OpenSubSubtitle]> {
     return Promise { fullfill, reject in
       let limit = 100
-      xmlRpc.call("SearchSubtitles", [token, [info.dictionary], ["limit": limit]]) { status in
+      var requestInfo = info.dictionary
+      requestInfo["sublanguageid"] = self.language
+      xmlRpc.call("SearchSubtitles", [token, [requestInfo], ["limit": limit]]) { status in
         switch status {
         case .ok(let response):
           // OK

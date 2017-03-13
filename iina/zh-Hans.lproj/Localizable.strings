@@ -98,6 +98,7 @@
 
 "alert.extra_option_error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";
 "alert.keybinding_config_error" = "无法设置快捷键「%@」！退回到IINA默认配置。请检查你的快捷键文件是否正确。";
+"alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。";
 
 
 "pl_menu.title_multi" = "%d 个项目";

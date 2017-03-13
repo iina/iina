@@ -106,6 +106,8 @@
 		8488D6DF1E11791300D5B952 /* PrefCodecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6DD1E11791300D5B952 /* PrefCodecViewController.swift */; };
 		8488D6E31E1183D300D5B952 /* PrefSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6E11E1183D300D5B952 /* PrefSubViewController.swift */; };
 		8488D6E71E11ABE900D5B952 /* PrefNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */; };
+		8492C2861E771FB200CE5825 /* ISO639_2.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8492C2851E771FB200CE5825 /* ISO639_2.strings */; };
+		8492C2881E7721A600CE5825 /* ISO639_2Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8492C2871E7721A600CE5825 /* ISO639_2Helper.swift */; };
 		84A0BA901D2F8D4100BC8DA1 /* IINAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA8F1D2F8D4100BC8DA1 /* IINAError.swift */; };
 		84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */; };
 		84A0BA971D2FA1CE00BC8DA1 /* PlayerCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA961D2FA1CE00BC8DA1 /* PlayerCore.swift */; };
@@ -345,6 +347,8 @@
 		8488D6DD1E11791300D5B952 /* PrefCodecViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefCodecViewController.swift; sourceTree = "<group>"; };
 		8488D6E11E1183D300D5B952 /* PrefSubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefSubViewController.swift; sourceTree = "<group>"; };
 		8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefNetworkViewController.swift; sourceTree = "<group>"; };
+		8492C2851E771FB200CE5825 /* ISO639_2.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ISO639_2.strings; sourceTree = "<group>"; };
+		8492C2871E7721A600CE5825 /* ISO639_2Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO639_2Helper.swift; sourceTree = "<group>"; };
 		8497A4831D2FF573005F504F /* iina-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iina-Bridging-Header.h"; sourceTree = "<group>"; };
 		84A0BA8F1D2F8D4100BC8DA1 /* IINAError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IINAError.swift; sourceTree = "<group>"; };
 		84A0BA941D2F9E9600BC8DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -703,6 +707,8 @@
 				84A886F21E26CA24008755BB /* Regex.swift */,
 				84E295BF1E2CF9F4006388F7 /* ObjcUtils.m */,
 				84E295C11E2CFA18006388F7 /* ObjcUtils.h */,
+				8492C2851E771FB200CE5825 /* ISO639_2.strings */,
+				8492C2871E7721A600CE5825 /* ISO639_2Helper.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -942,6 +948,7 @@
 				8400D5C91E1AB2F9006785F5 /* QuickSettingViewController.xib in Resources */,
 				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
 				8400D5E41E1AB333006785F5 /* PrefControlViewController.xib in Resources */,
+				8492C2861E771FB200CE5825 /* ISO639_2.strings in Resources */,
 				84A886EE1E269A2A008755BB /* iina-default-input.conf in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8400D5D81E1AB31B006785F5 /* AboutWindowController.xib in Resources */,
@@ -1036,6 +1043,7 @@
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
 				84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */,
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
+				8492C2881E7721A600CE5825 /* ISO639_2Helper.swift in Sources */,
 				84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
 				84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */,

@@ -55,6 +55,15 @@ class OnlineSubtitle: NSObject {
     case .openSub:
       // opensubtitles
       let subSupport = OpenSubSupport.shared
+      // - language
+      let userLang = UserDefaults.standard.string(forKey: Preference.Key.subLang) ?? ""
+      if userLang.isEmpty {
+        Utility.showAlert(message: NSLocalizedString("alert.sub_lang_not_set", comment: ""))
+        callback([])
+      } else {
+        subSupport.language = userLang
+      }
+      // - request
       subSupport.login()
       .then {
         subSupport.hash(url)

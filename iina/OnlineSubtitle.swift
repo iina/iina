@@ -64,9 +64,11 @@ class OnlineSubtitle {
         case OpenSubSupport.OpenSubError.cannotReadFile,
              OpenSubSupport.OpenSubError.fileTooSmall:
           osdMessage = .fileError
-        case OpenSubSupport.OpenSubError.loginFailed(_):
+        case OpenSubSupport.OpenSubError.loginFailed(let reason):
+          print(reason)
           osdMessage = .cannotLogin
-        case OpenSubSupport.OpenSubError.xmlRpcError(_):
+        case OpenSubSupport.OpenSubError.xmlRpcError(let error):
+          print(error)
           osdMessage = .networkError
         default:
           osdMessage = .networkError

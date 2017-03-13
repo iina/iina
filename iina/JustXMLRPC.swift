@@ -128,7 +128,7 @@ class JustXMLRPC {
     case "double":
       return eNode.double
     case "string":
-      return eNode.value!
+      return eNode.value ?? ""
     case "dateTime.iso8601":
       return iso8601DateFormatter.date(from: eNode.value!)!
     case "base64":

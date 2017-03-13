@@ -101,6 +101,9 @@ class OpenSubSupport {
   }()
   var token: String!
 
+  var heartBeatTimer: Timer?
+  let heartbeatInterval = TimeInterval(800)
+
   static let shared = OpenSubSupport()
 
   init(language: String? = nil) {
@@ -129,6 +132,7 @@ class OpenSubSupport {
           if pStatus.hasPrefix("200") {
             self.token = parsed["token"] as! String
             Utility.log("OpenSub: logged in")
+            self.startHeartbeat()
             fullfill()
           } else {
             Utility.log("OpenSub: login failed, \(pStatus)")
@@ -235,7 +239,42 @@ class OpenSubSupport {
       }
       DispatchQueue.main.async {
         subSelectWindow.showWindow(self)
+        subSelectWindow.arrayController.content = nil
         subSelectWindow.arrayController.add(contentsOf: subs)
+      }
+    }
+  }
+
+  private func startHeartbeat() {
+    heartBeatTimer = Timer(timeInterval: heartbeatInterval, target: self, selector: #selector(sendHeartbeat), userInfo: nil, repeats: true)
+  }
+
+  @objc private func sendHeartbeat() {
+    xmlRpc.call("NoOperation", [token]) { result in
+      switch result {
+      case .ok(let value):
+        // 406 No session
+        if let pValue = value as? [String: Any], (pValue["status"] as? String ?? "").hasPrefix("406") {
+          Utility.log("OpenSub: heartbeat no session")
+          self.token = nil
+          self.login().catch { err in
+            switch err {
+            case OpenSubError.loginFailed(let reason):
+              Utility.log("OpenSub: (re-login) \(reason)")
+              PlayerCore.shared.sendOSD(.cannotLogin)
+            case OpenSubError.xmlRpcError(let error):
+              Utility.log("OpenSub: (re-login) \(error.readableDescription)")
+              PlayerCore.shared.sendOSD(.networkError)
+            default:
+              Utility.log("OpenSub: (re-login) other error")
+            }
+          }
+        } else {
+          Utility.log("OpenSub: heartbeat ok")
+        }
+      default:
+        Utility.log("OpenSub: heartbeat failed")
+        self.token = nil
       }
     }
   }

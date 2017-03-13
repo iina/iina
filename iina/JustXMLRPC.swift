@@ -17,7 +17,7 @@ class JustXMLRPC {
 
   struct XMLRPCError: Error {
     var method: String
-    var httpCode: Int?
+    var httpCode: Int
     var reason: String
     var readableDescription: String {
       return "\(method): [\(httpCode)] \(reason)"
@@ -73,11 +73,11 @@ class JustXMLRPC {
           callback(.failure(JustXMLRPC.value(fromValueNode: eParam["value"])))
         } else {
           // unexpected return value
-          callback(.error(XMLRPCError(method: method, httpCode: response.statusCode, reason: "Bad response")))
+          callback(.error(XMLRPCError(method: method, httpCode: response.statusCode ?? 0, reason: "Bad response")))
         }
       } else {
         // http error
-        callback(.error(XMLRPCError(method: method, httpCode: response.statusCode, reason: response.reason)))
+        callback(.error(XMLRPCError(method: method, httpCode: response.statusCode ?? 0, reason: response.reason)))
       }
     }
   }

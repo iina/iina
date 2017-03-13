@@ -59,6 +59,9 @@
 "osd.sub_downloaded" = "字幕已下载";
 "osd.sub_saved" = "字幕已保存";
 "osd.network_error" = "网络错误";
+"osd.file_error" = "读取文件错误";
+"osd.cannot_login" = "无法登录";
+"osd.canceled" = "已取消";
 
 "update.title_update_found" = "检测到新版本";
 "update.title_no_update" = "没有新版本";

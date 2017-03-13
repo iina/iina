@@ -59,6 +59,9 @@
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
 "osd.network_error" = "Network error";
+"osd.file_error" = "Error reading file";
+"osd.cannot_login" = "Cannot login";
+"osd.canceled" = "Canceled";
 
 "update.title_update_found" = "Update Found";
 "update.title_no_update" = "No Update";

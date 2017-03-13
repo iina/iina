@@ -20,14 +20,4 @@ extension Just.HTTPResult {
     }
   }
 
-  func saveDataToFolder(_ url: URL, index: Int) -> URL {
-    let url = url.appendingPathComponent("\(index):\(fileName!)")
-    do {
-      try self.content?.write(to: url)
-    } catch {
-      Utility.showAlert(message: "Cannot write data to disk.")
-    }
-    return url
-  }
-
 }

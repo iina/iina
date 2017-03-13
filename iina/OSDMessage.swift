@@ -44,6 +44,7 @@ enum OSDMessage {
   case cannotLogin
   case fileError
   case networkError
+  case canceled
 
 
   func message() -> String {
@@ -159,6 +160,9 @@ enum OSDMessage {
 
     case .cannotLogin:
       return NSLocalizedString("osd.cannot_login", comment: "Cannot login")
+
+    case .canceled:
+      return NSLocalizedString("osd.cancaled", comment: "Canceled")
     }
   }
 }

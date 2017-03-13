@@ -305,11 +305,16 @@ extension MainWindowController {
       self.playerCore.sendOSD(.foundSub(subtitles.count))
       // download them
       for sub in subtitles {
-        sub.download { url in
-          Utility.log("Saved subtitle to \(url.path)")
-          self.playerCore.loadExternalSubFile(url)
-          self.playerCore.sendOSD(.downloadedSub)
-          self.playerCore.info.haveDownloadedSub = true
+        sub.download { result in
+          switch result {
+          case .ok(let url):
+            Utility.log("Saved subtitle to \(url.path)")
+            self.playerCore.loadExternalSubFile(url)
+            self.playerCore.sendOSD(.downloadedSub)
+            self.playerCore.info.haveDownloadedSub = true
+          case .failed:
+            self.playerCore.sendOSD(.networkError)
+          }
         }
       }
     }

@@ -9,6 +9,7 @@
 import Foundation
 import Just
 import PromiseKit
+import Gzip
 
 final class OpenSubSubtitle: OnlineSubtitle {
 
@@ -36,7 +37,16 @@ final class OpenSubSubtitle: OnlineSubtitle {
   }
 
   override func download(callback: @escaping DownloadCallback) {
-
+    Just.get(subDlLink) { response in
+      guard response.ok, let data = response.content, let unzipped = try? data.gunzipped() else {
+        callback(.failed)
+        return
+      }
+      let subFilename = "[\(self.index)]\(self.filename)"
+      if let url = unzipped.saveToFolder(Utility.tempDirURL, filename: subFilename) {
+        callback(.ok(url))
+      }
+    }
   }
 
 }
@@ -54,6 +64,8 @@ class OpenSubSupport {
     case fileTooSmall
     // search failed (reason)
     case searchFailed(String)
+    // user canceled
+    case userCanceled
     // lower level error
     case wrongResponseFormat
     case xmlRpcError(JustXMLRPC.XMLRPCError)
@@ -164,7 +176,7 @@ class OpenSubSupport {
     }
   }
 
-  func request(_ info: FileInfo) -> Promise<[OnlineSubtitle]> {
+  func request(_ info: FileInfo) -> Promise<[OpenSubSubtitle]> {
     return Promise { fullfill, reject in
       let limit = 100
       xmlRpc.call("SearchSubtitles", [token, [info.dictionary], ["limit": limit]]) { status in
@@ -208,6 +220,22 @@ class OpenSubSupport {
           // Error
           reject(OpenSubError.xmlRpcError(error))
         }
+      }
+    }
+  }
+
+  func showSubSelectWindow(subs: [OpenSubSubtitle]) -> Promise<[OpenSubSubtitle]> {
+    return Promise { fullfill, reject in
+      let subSelectWindow = (NSApp.delegate as! AppDelegate).subSelectWindow
+      subSelectWindow.whenUserAction = { subs in
+        fullfill(subs)
+      }
+      subSelectWindow.whenUserClosed = {
+        reject(OpenSubError.userCanceled)
+      }
+      DispatchQueue.main.async {
+        subSelectWindow.showWindow(self)
+        subSelectWindow.arrayController.add(contentsOf: subs)
       }
     }
   }

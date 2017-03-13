@@ -303,4 +303,15 @@ extension Data {
       }
     }
   }
+
+  func saveToFolder(_ url: URL, filename: String) -> URL? {
+    let fileUrl = url.appendingPathComponent(filename)
+    do {
+      try self.write(to: fileUrl)
+    } catch {
+      Utility.showAlert(message: "Cannot write data to disk.")
+      return nil
+    }
+    return fileUrl
+  }
 }

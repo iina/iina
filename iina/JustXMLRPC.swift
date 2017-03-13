@@ -19,6 +19,9 @@ class JustXMLRPC {
     var method: String
     var httpCode: Int?
     var reason: String
+    var readableDescription: String {
+      return "\(method): [\(httpCode)] \(reason)"
+    }
   }
 
   enum Result {

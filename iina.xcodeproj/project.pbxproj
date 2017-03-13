@@ -51,6 +51,8 @@
 		845404AC1E43980900B02B12 /* LuaScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845404AB1E43980900B02B12 /* LuaScript.swift */; };
 		845ABEAC1D4D19C000BFB15B /* MPVTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */; };
 		845AC09C1E1AE6C10080B614 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 845AC09E1E1AE6C10080B614 /* Localizable.strings */; };
+		845E2F441E76B641002C6588 /* SubSelectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E2F421E76B641002C6588 /* SubSelectWindowController.swift */; };
+		845E2F451E76B641002C6588 /* SubSelectWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845E2F431E76B641002C6588 /* SubSelectWindowController.xib */; };
 		845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB0C61D39462E00C011E0 /* ControlBarView.swift */; };
 		8460FBA91D6497490081841B /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460FBA71D6497490081841B /* PlaylistViewController.swift */; };
 		8461BA3D1E407DF7008BB852 /* libmpv.1.24.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8461BA211E407DF7008BB852 /* libmpv.1.24.0.dylib */; };
@@ -288,6 +290,9 @@
 		845AC09D1E1AE6C10080B614 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		845AC09F1E1AE6CB0080B614 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		845AC0A01E1AE71B0080B614 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		845E2F421E76B641002C6588 /* SubSelectWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectWindowController.swift; sourceTree = "<group>"; };
+		845E2F431E76B641002C6588 /* SubSelectWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubSelectWindowController.xib; sourceTree = "<group>"; };
+		845E2F491E76CFC2002C6588 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		845FB0C61D39462E00C011E0 /* ControlBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
 		8460FBA71D6497490081841B /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		8461BA0F1E407DF7008BB852 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = libmpv/lib/libass.9.dylib; sourceTree = "<group>"; };
@@ -597,6 +602,7 @@
 		848290731D95978100C3C76C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				845E2F491E76CFC2002C6588 /* libz.tbd */,
 				8461BA0F1E407DF7008BB852 /* libass.9.dylib */,
 				8461BA101E407DF7008BB852 /* libavcodec.57.dylib */,
 				8461BA111E407DF7008BB852 /* libavdevice.57.dylib */,
@@ -737,6 +743,8 @@
 				84A886E51E24F3BD008755BB /* OnlineSubtitle.swift */,
 				84A886EB1E2573A5008755BB /* JustExtension.swift */,
 				840AF5811E732C8F00F4AF92 /* JustXMLRPC.swift */,
+				845E2F421E76B641002C6588 /* SubSelectWindowController.swift */,
+				845E2F431E76B641002C6588 /* SubSelectWindowController.xib */,
 			);
 			name = Sub;
 			sourceTree = "<group>";
@@ -929,6 +937,7 @@
 				8400D5DB1E1AB326006785F5 /* FontPickerWindowController.xib in Resources */,
 				8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */,
 				8400D5EA1E1AB33B006785F5 /* KeyRecordViewController.xib in Resources */,
+				845E2F451E76B641002C6588 /* SubSelectWindowController.xib in Resources */,
 				8400D5F01E1AB344006785F5 /* PrefCodecViewController.xib in Resources */,
 				8400D5C91E1AB2F9006785F5 /* QuickSettingViewController.xib in Resources */,
 				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
@@ -1056,6 +1065,7 @@
 				84A886F11E26A2CB008755BB /* UpdateChecker.swift in Sources */,
 				8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */,
 				84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */,
+				845E2F441E76B641002C6588 /* SubSelectWindowController.swift in Sources */,
 				840AF5841E73CE3900F4AF92 /* OpenSubSubtitle.swift in Sources */,
 				84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */,
 				8488D6DC1E1167EF00D5B952 /* FileSize.swift in Sources */,
@@ -1533,6 +1543,7 @@
 					"$(PROJECT_DIR)/libmpv/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = module.modulemap;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
 				PRODUCT_NAME = IINA;
@@ -1566,6 +1577,7 @@
 					"$(PROJECT_DIR)/libmpv/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = module.modulemap;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
 				PRODUCT_NAME = IINA;

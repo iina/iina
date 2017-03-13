@@ -9,12 +9,16 @@
 import Foundation
 import PromiseKit
 
-class OnlineSubtitle {
+class OnlineSubtitle: NSObject {
 
   typealias SubCallback = ([OnlineSubtitle]) -> Void
 
-  /** URL of downloaded subtitle*/
-  typealias DownloadCallback = (URL) -> Void
+  enum DownloadResult {
+    case ok(URL)
+    case failed
+  }
+
+  typealias DownloadCallback = (DownloadResult) -> Void
 
   enum Source: Int {
     case shooter = 0
@@ -57,7 +61,9 @@ class OnlineSubtitle {
       }.then { info in
         subSupport.request(info)
       }.then { subs in
-        callback(subs)
+        subSupport.showSubSelectWindow(subs: subs)
+      }.then { selectedSubs -> Void in
+        callback(selectedSubs)
       }.catch { err in
         let osdMessage: OSDMessage
         switch err {
@@ -65,10 +71,12 @@ class OnlineSubtitle {
              OpenSubSupport.OpenSubError.fileTooSmall:
           osdMessage = .fileError
         case OpenSubSupport.OpenSubError.loginFailed(let reason):
-          print(reason)
+          Utility.log("OpenSub: \(reason)")
           osdMessage = .cannotLogin
+        case OpenSubSupport.OpenSubError.userCanceled:
+          osdMessage = .canceled
         case OpenSubSupport.OpenSubError.xmlRpcError(let error):
-          print(error)
+          Utility.log("OpenSub: \(error.readableDescription)")
           osdMessage = .networkError
         default:
           osdMessage = .networkError

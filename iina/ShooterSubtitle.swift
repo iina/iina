@@ -29,11 +29,14 @@ final class ShooterSubtitle: OnlineSubtitle {
 
   override func download(callback: @escaping DownloadCallback) {
     Just.get(files[0].path) { response in
-      guard response.ok else {
-        PlayerCore.shared.sendOSD(.networkError)
+      guard response.ok, let data = response.content else {
+        callback(.failed)
         return
       }
-      callback(response.saveDataToFolder(Utility.tempDirURL, index: self.index))
+      let fileName = "[\(self.index)]\(response.fileName ?? "")"
+      if let url = data.saveToFolder(Utility.tempDirURL, filename: fileName) {
+        callback(.ok(url))
+      }
     }
   }
 

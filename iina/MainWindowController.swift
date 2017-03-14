@@ -1041,7 +1041,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     hideUI()
     bottomView.isHidden = false
     bottomView.addSubview(cropSettingsView.view)
-    quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": cropSettingsView.view])
+    quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.view])
 
     // get original frame
     let origWidth = CGFloat(playerCore.info.videoWidth!)
@@ -1084,7 +1084,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     cropSettingsView.cropBoxView.actualSize = origSize
     cropSettingsView.cropBoxView.resized(with: videoRect)
     cropSettingsView.cropBoxView.isHidden = true
-    quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": cropSettingsView.cropBoxView])
+    quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.cropBoxView])
 
     // show crop settings view
     NSAnimationContext.runAnimationGroup({ (context) in
@@ -1520,7 +1520,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Utility
 
-  private func quickConstrants(_ constrants: [String], _ views: [String: NSView]) {
+  private func quickConstraints(_ constrants: [String], _ views: [String: NSView]) {
     constrants.forEach { c in
       let cc = NSLayoutConstraint.constraints(withVisualFormat: c, options: [], metrics: nil, views: views)
       NSLayoutConstraint.activate(cc)

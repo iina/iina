@@ -48,7 +48,13 @@ class PlayerCore: NSObject {
   }
 
   func openURLString(_ str: String) {
-    openMainWindow(path: str, url: URL(string: str)!, isNetwork: true)
+    // FIXME: Technically, we shouldn't be percent encoding the whole URL with
+    // one character set.
+    guard let str = str.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
+      let url = URL(string: str) else {
+        return
+    }
+    openMainWindow(path: str, url: url, isNetwork: true)
   }
 
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {

@@ -124,6 +124,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     let url = URL(fileURLWithPath: filename)
+    // Note the controller when user want to record opened files, otherwise will note the controller in PlayerCore
+    // for all files played
     if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) && !playerCore.ud.bool(forKey: Preference.Key.recordAllFiles) {
       NSDocumentController.shared().noteNewRecentDocumentURL(url)
     }
@@ -170,6 +172,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     panel.allowsMultipleSelection = false
     if panel.runModal() == NSFileHandlingPanelOKButton {
       if let url = panel.url {
+        // Note the controller when user want to record opened files, otherwise will note the controller in PlayerCore
+        // for all files played
         if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) && !playerCore.ud.bool(forKey: Preference.Key.recordAllFiles) {
           NSDocumentController.shared().noteNewRecentDocumentURL(url)
         }

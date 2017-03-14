@@ -1,5 +1,5 @@
-/* Class = "NSTextFieldCell"; title = "Scroll horizontally to:"; ObjectID = "1yb-m4-1sK"; */
-"1yb-m4-1sK.title" = "좌우 스크롤 사용시:";
+/* Class = "NSTextFieldCell"; title = "Seek type:"; ObjectID = "1yb-m4-1sK"; */
+"1yb-m4-1sK.title" = "탐색 방식:";
 
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "2Ig-fw-UvW"; */
 "2Ig-fw-UvW.title" = "이전 / 다음 파일";
@@ -8,7 +8,7 @@
 "6F4-gm-oBg.title" = "전체 화면 전환 / 복귀";
 
 /* Class = "NSTextFieldCell"; title = "Exact seek is more precise but can cause lag and high CPU usage."; ObjectID = "6FZ-Qm-0k0"; */
-"6FZ-Qm-0k0.title" = "정밀 탐색은 더 정확하게 조정할 수 있지만, 재생이 느려지거나 CPU 사용률이 높아질 수 있습니다.";
+"6FZ-Qm-0k0.title" = "정밀 탐색은 더 세밀하게 조정할 수 있지만, 재생이 느려지거나 CPU 사용률이 높아질 수 있습니다.";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "9qx-ao-oxE"; */
 "9qx-ao-oxE.title" = "OSC 숨기기";
@@ -22,23 +22,53 @@
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "Dm7-JG-fLd"; */
 "Dm7-JG-fLd.title" = "일시 정지 / 재생";
 
+/* Class = "NSTextFieldCell"; title = "Pinch to:"; ObjectID = "E8H-pO-MLc"; */
+"E8H-pO-MLc.title" = "오므리기/벌리기:";
+
 /* Class = "NSTextFieldCell"; title = "Double click to:"; ObjectID = "GPH-fM-XHN"; */
 "GPH-fM-XHN.title" = "더블 클릭:";
+
+/* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
+"Hm3-dh-jgb.title" = "전체 화면";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "K9H-w9-wmT"; */
 "K9H-w9-wmT.title" = "자동";
 
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "NjV-fH-YgN"; */
+"NjV-fH-YgN.title" = "동작 없음";
+
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "OOM-jo-N4V"; */
 "OOM-jo-N4V.title" = "OSC 숨기기";
+
+/* Class = "NSMenuItem"; title = "Adjust window size"; ObjectID = "Ols-Lr-fiH"; */
+"Ols-Lr-fiH.title" = "윈도우 크기조정";
 
 /* Class = "NSTextFieldCell"; title = "Single click to:"; ObjectID = "QhO-As-ZLL"; */
 "QhO-As-ZLL.title" = "한번 클릭:";
 
+/* Class = "NSMenuItem"; title = "Seek"; ObjectID = "RCe-3m-q9N"; */
+"RCe-3m-q9N.title" = "탐색";
+
 /* Class = "NSTextFieldCell"; title = "Right click to:"; ObjectID = "Rqy-g2-AP2"; */
 "Rqy-g2-AP2.title" = "오른쪽 버튼 클릭:";
 
+/* Class = "NSMenuItem"; title = "Adjust volume"; ObjectID = "SYg-hW-b6r"; */
+"SYg-hW-b6r.title" = "음량 조정";
+
+/* Class = "NSTextFieldCell"; title = "Sensitivity for volume:"; ObjectID = "YQH-1a-WcM"; */
+"YQH-1a-WcM.title" = "음량 조정 감도:";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "chS-d2-TG1"; */
+"chS-d2-TG1.title" = "동작 없음";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "guu-dK-YfL"; */
+"guu-dK-YfL.title" = "동작 없음";
+
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "hIG-5X-2Pm"; */
 "hIG-5X-2Pm.title" = "재생속도";
+
+/* Class = "NSTextFieldCell"; title = "Scroll vertically to:"; ObjectID = "hNU-dJ-5Cj"; */
+"hNU-dJ-5Cj.title" = "상하 스크롤:";
 
 /* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "kEB-gk-wuI"; */
 "kEB-gk-wuI.title" = "좌/우 버튼 설정:";
@@ -47,20 +77,26 @@
 "mOX-Fi-oTv.title" = "일시 정지 / 재생";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "oOk-y6-lek"; */
-"oOk-y6-lek.title" = "없음";
+"oOk-y6-lek.title" = "동작 없음";
 
-/* Class = "NSTextFieldCell"; title = "Amount for normal seek:"; ObjectID = "of2-ec-OkC"; */
+/* Class = "NSTextFieldCell"; title = "Sensitivity for normal seek:"; ObjectID = "of2-ec-OkC"; */
 "of2-ec-OkC.title" = "일반 탐색시 탐색 간격:";
 
 /* Class = "NSMenuItem"; title = "Fastforward / Rewind"; ObjectID = "q50-Po-JYO"; */
 "q50-Po-JYO.title" = "빨리 감기 / 되감기";
 
+/* Class = "NSTextFieldCell"; title = "Scroll horizontally to:"; ObjectID = "w1Y-jy-vNc"; */
+"w1Y-jy-vNc.title" = "좌우 스크롤:";
+
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "w54-7I-QfW"; */
-"w54-7I-QfW.title" = "없음";
+"w54-7I-QfW.title" = "동작 없음";
 
 /* Class = "NSMenuItem"; title = "Keyframe seek"; ObjectID = "wBB-fx-Mao"; */
 "wBB-fx-Mao.title" = "키프레임 탐색";
 
+/* Class = "NSMenuItem"; title = "Seek"; ObjectID = "wcS-tP-wav"; */
+"wcS-tP-wav.title" = "탐색";
+
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
-"wkV-Gq-B0T.title" = "없음";
+"wkV-Gq-B0T.title" = "동작 없음";
 

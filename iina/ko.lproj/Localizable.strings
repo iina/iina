@@ -4,6 +4,15 @@
 /* Error setting keybinding configuration */
 "alert.keybinding_config_error" = "단축키 설정 파일 \"%@\"를 읽어올 때 오류가 발생했습니다! IINA 기본값을 사용하도록 설정됩니다. 사용자가 지정한 단축키 설정 내용을 점검하십시오.";
 
+/* No comment provided by engineer. */
+"alert.sub_lang_not_set" = "자막 언어 설정되지 않음";
+
+/* (No Commment) */
+"login" = "로그인";
+
+/* (No Commment) */
+"logout" = "로그아웃";
+
 /* Buffering... %s%% */
 "main.buffering_indicator" = "준비중… %d%%";
 
@@ -64,6 +73,12 @@
 /* Audio Delay: No Delay */
 "osd.audio_delay.nodelay" = "오디오 지연: 없음";
 
+/* Canceled */
+"osd.canceled" = "취소됨";
+
+/* Cannot login */
+"osd.cannot_login" = "로그인할 수 없음";
+
 /* Chapter: %@ */
 "osd.chapter" = "챕터: %@";
 
@@ -75,6 +90,9 @@
 
 /* Deinterlace: %@ */
 "osd.deinterlace" = "디인터레이스: %@";
+
+/* Error reading file */
+"osd.file_error" = "파일 읽기 오류";
 
 /* Finding online subtitles... */
 "osd.find_online_sub" = "인터넷에서 자막을 찾는 중…";
@@ -116,7 +134,7 @@
 "osd.sub_downloaded" = "자막 다운로드됨";
 
 /* %d subtitle(s) found. Downloading... */
-"osd.sub_found" = "%d 자막을 찾았습니다. 내려받는 중…";
+"osd.sub_found" = "%d 자막을 찾았습니다. 다운로드하는 중…";
 
 /* No subtitle found. */
 "osd.sub_not_found" = "자막을 찾지 못했습니다";
@@ -197,7 +215,7 @@
 "preference.codec" = "코덱";
 
 /* Control */
-"preference.control" = "마우스";
+"preference.control" = "컨트롤";
 
 /* General */
 "preference.general" = "일반";
@@ -205,8 +223,14 @@
 /* Keybindings */
 "preference.keybindings" = "단축키";
 
+/* Logged in as */
+"preference.logged_in_as" = "%@(으)로 로그인됨";
+
 /* Network */
 "preference.network" = "네트워크";
+
+/* Not logged in */
+"preference.not_logged_in" = "로그인되지 않음";
 
 /* (No Commment) */
 "preference.scripts" = "스크립트";

@@ -10,6 +10,9 @@
 /* Class = "NSTableColumn"; headerCell.title = "Key"; ObjectID = "JwC-60-7Hp"; */
 "JwC-60-7Hp.headerCell.title" = "키";
 
+/* Class = "NSTextFieldCell"; title = "All following settings will require restarting IINA to take effect."; ObjectID = "Mxa-CP-JlM"; */
+"Mxa-CP-JlM.title" = "아래 설정을 적용하려면 IINA를 종료한 후 다시 시작해야 합니다.";
+
 /* Class = "NSButtonCell"; title = "Delete this config file"; ObjectID = "QAL-MQ-b0l"; */
 "QAL-MQ-b0l.title" = "현재 설정 파일 삭제";
 
@@ -21,6 +24,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "c46-i5-iw0"; */
 "c46-i5-iw0.title" = "Text Cell";
+
+/* Class = "NSButtonCell"; title = "Enable Apple Remote support"; ObjectID = "e70-25-5E4"; */
+"e70-25-5E4.title" = "애플 리모트 사용";
 
 /* Class = "NSButtonCell"; title = "Reveal config file in Finder"; ObjectID = "gDo-JL-a9k"; */
 "gDo-JL-a9k.title" = "설정 파일 폴더 보기";

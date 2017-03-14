@@ -487,6 +487,9 @@ class MPVController: NSObject {
     case MPV_EVENT_METADATA_UPDATE:
       break
 
+    case MPV_EVENT_TRACK_SWITCHED:
+      break
+
     case MPV_EVENT_START_FILE:
       playerCore.fileStarted()
 

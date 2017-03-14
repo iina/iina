@@ -9,6 +9,8 @@
 // Common
 "on" = "On";
 "off" = "Off";
+"login" = "登录";
+"logout" = "退出";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "播放列表";
@@ -83,6 +85,8 @@
 "preference.keybindings" = "快捷键";
 "preference.advanced" = "高级";
 "preference.scripts" = "脚本";
+"preference.not_logged_in" = "未登录";
+"preference.logged_in_as" = "已登录 %@";
 
 "menu.volume"= "音量: %d";
 "menu.audio_delay" = "音频延迟: %.2f秒";

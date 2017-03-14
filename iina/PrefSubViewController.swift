@@ -169,7 +169,7 @@ class SubLangToken: NSObject {
 
   override func transformedValue(_ value: Any?) -> Any? {
     guard let str = value as? NSString else { return nil }
-    return str.components(separatedBy: ",")
+    return str.components(separatedBy: ",").map { SubLangToken($0) }
   }
 
   override func reverseTransformedValue(_ value: Any?) -> Any? {
@@ -193,10 +193,28 @@ class SubLangToken: NSObject {
   override func transformedValue(_ value: Any?) -> Any? {
     let username = value as? NSString ?? ""
     if username.length == 0 {
-      return "Not logged in"
+      return NSLocalizedString("preference.not_logged_in", comment: "Not logged in")
     } else {
-      return "Logged in as: \(username)"
+      return String(format: NSLocalizedString("preference.logged_in_as", comment: "Logged in as"), username)
     }
+  }
+  
+}
+
+
+@objc(LoginButtonTitleTransformer) class LoginButtonTitleTransformer: ValueTransformer {
+
+  static override func allowsReverseTransformation() -> Bool {
+    return false
+  }
+
+  static override func transformedValueClass() -> AnyClass {
+    return NSString.self
+  }
+
+  override func transformedValue(_ value: Any?) -> Any? {
+    let username = value as? NSString ?? ""
+    return NSLocalizedString((username.length == 0 ? "login" : "logout"), comment: "")
   }
   
 }

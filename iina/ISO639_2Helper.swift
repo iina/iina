@@ -16,9 +16,7 @@ class ISO639_2Helper {
     var name: [String]
 
     var description: String {
-      get {
-        return "\(name[0]) (\(code))"
-      }
+      return "\(name[0]) (\(code))"
     }
   }
 

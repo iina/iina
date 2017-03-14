@@ -248,6 +248,11 @@ class OpenSubSupport {
 
   func showSubSelectWindow(subs: [OpenSubSubtitle]) -> Promise<[OpenSubSubtitle]> {
     return Promise { fullfill, reject in
+      // return when found 0 or 1 sub
+      if subs.count <= 1 {
+        fullfill(subs)
+        return
+      }
       let subSelectWindow = (NSApp.delegate as! AppDelegate).subSelectWindow
       subSelectWindow.whenUserAction = { subs in
         fullfill(subs)

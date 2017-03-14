@@ -162,7 +162,7 @@ enum OSDMessage {
       return NSLocalizedString("osd.cannot_login", comment: "Cannot login")
 
     case .canceled:
-      return NSLocalizedString("osd.cancaled", comment: "Canceled")
+      return NSLocalizedString("osd.canceled", comment: "Canceled")
     }
   }
 }

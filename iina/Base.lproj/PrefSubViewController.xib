@@ -771,7 +771,7 @@
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcq-QM-7Hf">
                                         <rect key="frame" x="118" y="65" width="356" height="28"/>
-                                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Please use comma seperated ISO 639-2 language code. This works for both mpv and opensubtitles." id="Uj3-om-L26">
+                                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles." id="Uj3-om-L26">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -811,6 +811,11 @@
                                         </buttonCell>
                                         <connections>
                                             <action selector="openSubLoginAction:" target="-2" id="HRx-Bo-NRk"/>
+                                            <binding destination="5Up-Ab-aAm" name="title" keyPath="values.openSubUsername" id="9JZ-Q7-SQh">
+                                                <dictionary key="options">
+                                                    <string key="NSValueTransformerName">LoginButtonTitleTransformer</string>
+                                                </dictionary>
+                                            </binding>
                                         </connections>
                                     </button>
                                     <tokenField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5l-Np-cah">
@@ -829,7 +834,7 @@
                                         </connections>
                                     </tokenField>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Rt1-vy-xTy">
-                                        <rect key="frame" x="269" y="14.5" width="16" height="16"/>
+                                        <rect key="frame" x="269" y="14" width="16" height="16"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>

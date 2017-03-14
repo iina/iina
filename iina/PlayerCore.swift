@@ -223,11 +223,11 @@ class PlayerCore: NSObject {
     NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
   }
 
-  func setVolume(_ volume: Int, constrain: Bool = true) {
+  func setVolume(_ volume: Double, constrain: Bool = true) {
     let constrainedVolume = volume.constrain(min: 0, max: 100)
     let appliedVolume = constrain ? constrainedVolume : volume
     info.volume = appliedVolume
-    mpvController.setInt(MPVOption.Audio.volume, appliedVolume)
+    mpvController.setDouble(MPVOption.Audio.volume, appliedVolume)
     ud.set(constrainedVolume, forKey: Preference.Key.softVolume)
   }
 
@@ -537,11 +537,9 @@ class PlayerCore: NSObject {
   func fileLoaded() {
     guard let mw = mainWindow else {
       Utility.fatal("Window is nil at fileLoaded")
-      return
     }
     guard let vwidth = info.videoWidth, let vheight = info.videoHeight else {
       Utility.fatal("Cannot get video width and height")
-      return
     }
     invalidateTimer()
     triedUsingExactSeekForCurrentFile = false
@@ -576,7 +574,6 @@ class PlayerCore: NSObject {
     guard let mw = mainWindow else { return }
     guard let dwidth = info.displayWidth, let dheight = info.displayHeight else {
       Utility.fatal("Cannot get video width and height")
-      return
     }
     if dwidth != 0 && dheight != 0 {
       DispatchQueue.main.sync {

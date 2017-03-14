@@ -8,14 +8,11 @@
 
 import Cocoa
 
-class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, SidebarViewController {
 
   override var nibName: String {
     return "QuickSettingViewController"
   }
-  
-  let distanceBetweenSliderAndIndicator: CGFloat = 14
-  let sliderIndicatorHalfWidth:CGFloat = 16
   
   let sliderSteps = 24.0
   
@@ -41,6 +38,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subTabBtn: NSButton!
   @IBOutlet weak var tabView: NSTabView!
 
+  @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
+	
   @IBOutlet weak var videoTableView: NSTableView!
   @IBOutlet weak var audioTableView: NSTableView!
   @IBOutlet weak var subTableView: NSTableView!
@@ -55,6 +54,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBOutlet weak var speedSlider: NSSlider!
   @IBOutlet weak var speedSliderIndicator: NSTextField!
+  @IBOutlet weak var speedSliderConstraint: NSLayoutConstraint!
   @IBOutlet weak var customSpeedTextField: NSTextField!
   @IBOutlet weak var deinterlaceCheckBtn: NSButton!
 
@@ -64,12 +64,17 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var gammaSlider: NSSlider!
   @IBOutlet weak var hueSlider: NSSlider!
 
-  @IBOutlet weak var customAudioDelayTextField: NSTextField!
+  @IBOutlet weak var audioDelaySlider: NSSlider!
   @IBOutlet weak var audioDelaySliderIndicator: NSTextField!
-
-  @IBOutlet weak var customSubDelayTextField: NSTextField!
+  @IBOutlet weak var audioDelaySliderConstraint: NSLayoutConstraint!
+  @IBOutlet weak var customAudioDelayTextField: NSTextField!
+	
+	
+  @IBOutlet weak var subDelaySlider: NSSlider!
   @IBOutlet weak var subDelaySliderIndicator: NSTextField!
-
+  @IBOutlet weak var subDelaySliderConstraint: NSLayoutConstraint!
+  @IBOutlet weak var customSubDelayTextField: NSTextField!
+	
   @IBOutlet weak var audioEqSlider1: NSSlider!
   @IBOutlet weak var audioEqSlider2: NSSlider!
   @IBOutlet weak var audioEqSlider3: NSSlider!
@@ -92,8 +97,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subTextBgColorWell: NSColorWell!
   @IBOutlet weak var subTextFontBtn: NSButton!
 
-
-
+  var downShift: CGFloat = 0 {
+    didSet {
+      buttonTopConstraint.constant = downShift
+    }
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -125,6 +133,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   /** Do syncronization*/
   override func viewDidAppear() {
     // image sub
+    super.viewDidAppear()
     updateControlsState()
   }
 
@@ -139,11 +148,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     aspectSegment.selectSegment(withLabel: playerCore.info.unsureAspect)
     cropSegment.selectSegment(withLabel: playerCore.info.unsureCrop)
     rotateSegment.selectSegment(withTag: AppData.rotations.index(of: playerCore.info.rotation) ?? -1)
+    speedChangedAction(speedSlider)
     customSpeedTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
     deinterlaceCheckBtn.state = playerCore.info.deinterlace ? NSOnState : NSOffState
 
     // Audio
     customAudioDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Audio.audioDelay)
+    audioDelayChangedAction(audioDelaySlider)
 
     // Sub
     if let currSub = playerCore.info.currentTrack(.sub) {
@@ -155,6 +166,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
     let currSubScale = playerCore.mpvController.getDouble(MPVOption.Subtitles.subScale).constrain(min: 0.1, max: 10)
     let displaySubScale = Utility.toDisplaySubScale(fromRealSubScale: currSubScale)
+    subDelayChangedAction(subDelaySlider)
     subScaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
     customSubDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Subtitles.subDelay)
 
@@ -292,6 +304,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         view.reloadData()
       }
     }
+    // Revalidate layout and controls
     updateControlsState()
   }
 
@@ -325,6 +338,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     // the active one
     let title = sender.title
     sender.attributedTitle = NSAttributedString(string: title, attributes: Utility.tabTitleActiveFontAttributes)
+    updateControlsState()
   }
 
   // Video tab
@@ -368,8 +382,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     speedSliderIndicator.stringValue = "\(speed)x"
     customSpeedTextField.stringValue = speed
     let knobPos = sender.knobPointPosition()
-    speedSliderIndicator.setFrameOrigin(NSPoint(x: knobPos - sliderIndicatorHalfWidth, y: sender.frame.origin.y + distanceBetweenSliderAndIndicator))
+    speedSliderConstraint.constant = knobPos - speedSliderIndicator.frame.width
     playerCore.setSpeed(value)
+    view.layout()
   }
 
   @IBAction func customSpeedEditFinishedAction(_ sender: NSTextField) {
@@ -384,6 +399,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if let window = sender.window {
       window.makeFirstResponder(window.contentView)
     }
+    speedSliderConstraint.constant = speedSlider.knobPointPosition() - speedSliderIndicator.frame.width
+    view.layout()
   }
 
   @IBAction func deinterlaceBtnAction(_ sender: AnyObject) {
@@ -457,12 +474,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let sliderValue = sender.doubleValue
     audioDelaySliderIndicator.stringValue = "\(sliderValue)s"
     let knobPos = sender.knobPointPosition()
-    audioDelaySliderIndicator.setFrameOrigin(NSPoint(x: knobPos - sliderIndicatorHalfWidth, y: sender.frame.origin.y + distanceBetweenSliderAndIndicator))
+    audioDelaySliderConstraint.constant = knobPos - audioDelaySliderIndicator.frame.width
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerCore.setAudioDelay(sliderValue)
       }
     }
+    view.layout()
   }
 
   @IBAction func customAudioDelayEditFinishedAction(_ sender: AnyObject?) {
@@ -508,13 +526,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let sliderValue = sender.doubleValue
     subDelaySliderIndicator.stringValue = "\(sliderValue)s"
     let knobPos = sender.knobPointPosition()
-    subDelaySliderIndicator.setFrameOrigin(NSPoint(x: knobPos - sliderIndicatorHalfWidth, y: sender.frame.origin.y + distanceBetweenSliderAndIndicator))
+    subDelaySliderConstraint.constant = knobPos - subDelaySliderIndicator.frame.width
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerCore.setSubDelay(sliderValue)
         customSubDelayTextField.doubleValue = sliderValue
       }
     }
+    view.layout()
   }
 
   @IBAction func customSubDelayEditFinishedAction(_ sender: AnyObject?) {

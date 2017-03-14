@@ -328,7 +328,6 @@ class MPVController: NSObject {
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {
     if args.count > 0 && args.last == nil {
       Utility.fatal("Command do not need a nil suffix")
-      return
     }
 
     var strArgs = args
@@ -652,7 +651,7 @@ class MPVController: NSObject {
 
     case MPVOption.Audio.volume:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        playerCore.info.volume = Int(data)
+        playerCore.info.volume = data
         playerCore.syncUI(.volume)
         playerCore.sendOSD(.volume(Int(data)))
       }

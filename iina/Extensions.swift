@@ -105,6 +105,7 @@ extension NSSize {
 
 }
 
+
 extension NSRect {
 
   func multiply(_ multiplier: CGFloat) -> NSRect {

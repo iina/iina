@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefSubViewController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="loginIndicator" destination="Rt1-vy-xTy" id="pKn-JU-EIa"/>
                 <outlet property="scrollView" destination="alK-5O-zTG" id="bBw-gU-5ei"/>
                 <outlet property="subLangTokenView" destination="t5l-Np-cah" id="KkH-Zr-lxq"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
@@ -794,6 +795,13 @@
                                             <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <binding destination="5Up-Ab-aAm" name="value" keyPath="values.openSubUsername" id="GgA-Ks-Ug7">
+                                                <dictionary key="options">
+                                                    <string key="NSValueTransformerName">OpenSubAccountNameTransformer</string>
+                                                </dictionary>
+                                            </binding>
+                                        </connections>
                                     </textField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VGB-NO-Ygc">
                                         <rect key="frame" x="193" y="5" width="74" height="32"/>
@@ -801,6 +809,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="openSubLoginAction:" target="-2" id="HRx-Bo-NRk"/>
+                                        </connections>
                                     </button>
                                     <tokenField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5l-Np-cah">
                                         <rect key="frame" x="279" y="96" width="193" height="21"/>
@@ -817,6 +828,9 @@
                                             </binding>
                                         </connections>
                                     </tokenField>
+                                    <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Rt1-vy-xTy">
+                                        <rect key="frame" x="269" y="14.5" width="16" height="16"/>
+                                    </progressIndicator>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="YqV-oa-fRX" firstAttribute="centerY" secondItem="U1t-O7-7V7" secondAttribute="centerY" id="04I-WQ-InH"/>
@@ -877,6 +891,7 @@
                                     <constraint firstItem="d3t-81-gDp" firstAttribute="leading" secondItem="jjO-mG-6MD" secondAttribute="trailing" constant="8" id="XsS-BP-J5r"/>
                                     <constraint firstItem="a2I-C8-wD5" firstAttribute="baseline" secondItem="Q02-3C-Ho6" secondAttribute="baseline" id="XzN-YU-VGu"/>
                                     <constraint firstItem="R5C-2W-VSc" firstAttribute="top" secondItem="jjO-mG-6MD" secondAttribute="bottom" constant="10" id="YdK-TL-VWm"/>
+                                    <constraint firstItem="Rt1-vy-xTy" firstAttribute="leading" secondItem="VGB-NO-Ygc" secondAttribute="trailing" constant="8" id="Z2J-yn-ESB"/>
                                     <constraint firstItem="jjO-mG-6MD" firstAttribute="top" secondItem="2rh-Xe-HUH" secondAttribute="bottom" constant="10" id="Z3u-Kl-PDv"/>
                                     <constraint firstItem="4UU-oq-PeY" firstAttribute="baseline" secondItem="AiQ-IB-PFT" secondAttribute="baseline" id="ZKC-zs-3ig"/>
                                     <constraint firstItem="vcq-QM-7Hf" firstAttribute="top" secondItem="yso-EN-rP5" secondAttribute="bottom" constant="6" id="ZxT-jm-I7x"/>
@@ -908,6 +923,7 @@
                                     <constraint firstItem="Qm1-HJ-E9R" firstAttribute="baseline" secondItem="2rh-Xe-HUH" secondAttribute="baseline" id="nuE-YL-hBH"/>
                                     <constraint firstItem="zAA-Yl-kkv" firstAttribute="leading" secondItem="DWT-bx-9wc" secondAttribute="leading" constant="120" id="oU4-Ka-6ZO"/>
                                     <constraint firstItem="4UU-oq-PeY" firstAttribute="leading" secondItem="AiQ-IB-PFT" secondAttribute="trailing" constant="8" id="osu-pv-evd"/>
+                                    <constraint firstItem="Rt1-vy-xTy" firstAttribute="centerY" secondItem="VGB-NO-Ygc" secondAttribute="centerY" id="pAe-T0-1QA"/>
                                     <constraint firstItem="RqJ-dk-hiT" firstAttribute="top" secondItem="UWL-fO-MOo" secondAttribute="bottom" constant="16" id="rJz-tC-hYS"/>
                                     <constraint firstItem="UWL-fO-MOo" firstAttribute="leading" secondItem="DWT-bx-9wc" secondAttribute="leading" constant="120" id="rgW-EI-zBr"/>
                                     <constraint firstAttribute="trailing" secondItem="Ldb-xB-kAT" secondAttribute="trailing" constant="8" id="rry-To-4yM"/>

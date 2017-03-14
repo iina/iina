@@ -89,6 +89,7 @@ class OpenSubSupport {
 
   private let chunkSize: Int = 65536
   private let apiPath = "https://api.opensubtitles.org:443/xml-rpc"
+  private static let serviceName: NSString = "IINA Opensubtitles Account"
   private let xmlRpc: JustXMLRPC
 
   var language: String
@@ -110,15 +111,31 @@ class OpenSubSupport {
     self.xmlRpc = JustXMLRPC(apiPath)
   }
 
-  func login() -> Promise<Void> {
+  func login(testUser username: String? = nil, password: String? = nil) -> Promise<Void> {
     return Promise { fullfill, reject in
-      // check logged in
-      if self.loggedIn {
-        fullfill()
-        return
+      var finalUser = ""
+      var finalPw = ""
+      if let testUser = username, let testPw = password {
+        // if test login
+        finalUser = testUser
+        finalPw = testPw
+      } else {
+        // check logged in
+        if self.loggedIn {
+          fullfill()
+          return
+        }
+        // read password
+        if let udUsername = UserDefaults.standard.string(forKey: Preference.Key.openSubUsername) {
+          let (readResult, readPassword, _) = OpenSubSupport.findPassword(username: udUsername)
+          if readResult == errSecSuccess {
+            finalUser = udUsername
+            finalPw = readPassword!
+          }
+        }
       }
       // login
-      xmlRpc.call("LogIn", ["", "", "eng", ua]) { status in
+      xmlRpc.call("LogIn", [finalUser, finalPw, "eng", ua]) { status in
         switch status {
         case .ok(let response):
           // OK
@@ -130,7 +147,7 @@ class OpenSubSupport {
           let pStatus = parsed["status"] as! String
           if pStatus.hasPrefix("200") {
             self.token = parsed["token"] as! String
-            Utility.log("OpenSub: logged in")
+            Utility.log("OpenSub: logged in as user \(finalUser)")
             self.startHeartbeat()
             fullfill()
           } else {
@@ -244,6 +261,60 @@ class OpenSubSupport {
         subSelectWindow.arrayController.add(contentsOf: subs)
       }
     }
+  }
+
+  static func savePassword(username: String, passwd: String) -> OSStatus {
+    let service = OpenSubSupport.serviceName as NSString
+    let accountName = username as NSString
+    let pw = passwd as NSString
+    let pwData = pw.data(using: String.Encoding.utf8.rawValue)! as NSData
+
+    let status: OSStatus
+    // try read password
+    let (readResult, _, readItemRef) = findPassword(username: username)
+    if readResult == errSecSuccess {
+      // else, try modify the password
+      status = SecKeychainItemModifyContent(readItemRef!,
+                                            nil,
+                                            UInt32(pw.length),
+                                            pwData.bytes)
+    } else {
+      // if can't read, try add password
+      status = SecKeychainAddGenericPassword(nil,
+                                             UInt32(service.length),
+                                             service.utf8String,
+                                             UInt32(accountName.length),
+                                             accountName.utf8String,
+                                             UInt32(pw.length),
+                                             pwData.bytes,
+                                             nil)
+    }
+    return status
+  }
+
+  static func findPassword(username: String) -> (OSStatus, String?, SecKeychainItem?) {
+    let service = OpenSubSupport.serviceName as NSString
+    let accountName = username as NSString
+    var pwLength = UInt32()
+    var pwData: UnsafeMutableRawPointer? = nil
+    var itemRef: SecKeychainItem? = nil
+    let status = SecKeychainFindGenericPassword(nil,
+                                                UInt32(service.length),
+                                                service.utf8String,
+                                                UInt32(accountName.length),
+                                                accountName.utf8String,
+                                                &pwLength,
+                                                &pwData,
+                                                &itemRef)
+    var password: String? = ""
+    if status == errSecSuccess {
+      let data = Data(bytes: pwData!, count: Int(pwLength))
+      password = String(data: data, encoding: .utf8)
+    }
+    if pwData != nil {
+      SecKeychainItemFreeContent(nil, pwData)
+    }
+    return (status, password, itemRef)
   }
 
   private func startHeartbeat() {

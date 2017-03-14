@@ -123,6 +123,7 @@ struct Preference {
     static let onlineSubSource = "onlineSubSource"
     static let displayInLetterBox = "displayInLetterBox"
     static let subScaleWithWindow = "subScaleWithWindow"
+    static let openSubUsername = "openSubUsername"
 
     // Network
 
@@ -383,6 +384,7 @@ struct Preference {
     Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
     Key.displayInLetterBox: true,
     Key.subScaleWithWindow: true,
+    Key.openSubUsername: "",
 
     Key.enableCache: true,
     Key.defaultCacheSize: 153600,

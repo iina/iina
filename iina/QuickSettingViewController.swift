@@ -148,13 +148,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     aspectSegment.selectSegment(withLabel: playerCore.info.unsureAspect)
     cropSegment.selectSegment(withLabel: playerCore.info.unsureCrop)
     rotateSegment.selectSegment(withTag: AppData.rotations.index(of: playerCore.info.rotation) ?? -1)
-    speedChangedAction(speedSlider)
     customSpeedTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
     deinterlaceCheckBtn.state = playerCore.info.deinterlace ? NSOnState : NSOffState
 
     // Audio
     customAudioDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Audio.audioDelay)
-    audioDelayChangedAction(audioDelaySlider)
 
     // Sub
     if let currSub = playerCore.info.currentTrack(.sub) {
@@ -166,7 +164,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
     let currSubScale = playerCore.mpvController.getDouble(MPVOption.Subtitles.subScale).constrain(min: 0.1, max: 10)
     let displaySubScale = Utility.toDisplaySubScale(fromRealSubScale: currSubScale)
-    subDelayChangedAction(subDelaySlider)
     subScaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
     customSubDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Subtitles.subDelay)
 

@@ -9,6 +9,8 @@
 // Common
 "on" = "On";
 "off" = "Off";
+"login" = "Login";
+"logout" = "Logout";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "PLAYLIST";
@@ -59,6 +61,9 @@
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
 "osd.network_error" = "Network error";
+"osd.file_error" = "Error reading file";
+"osd.cannot_login" = "Cannot login";
+"osd.canceled" = "Canceled";
 
 "update.title_update_found" = "Update Found";
 "update.title_no_update" = "No Update";
@@ -80,6 +85,8 @@
 "preference.keybindings" = "Keybindings";
 "preference.advanced" = "Advanced";
 "preference.scripts" = "Scripts";
+"preference.not_logged_in" = "Not logged in";
+"preference.logged_in_as" = "Logged in as %@";
 
 "menu.volume"= "Volume: %d";
 "menu.audio_delay" = "Audio Delay: %.2fs";

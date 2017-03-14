@@ -120,6 +120,43 @@ class Utility {
     }
   }
 
+  static func quickUsernamePasswordPanel(messageText: String, informativeText: String, ok: (String, String) -> Void) -> Bool {
+    let quickLabel: (String, Int) -> NSTextField = { title, yPos in
+      let label = NSTextField(frame: NSRect(x: 0, y: yPos, width: 240, height: 14))
+      label.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize())
+      label.stringValue = title
+      label.drawsBackground = false
+      label.isBezeled = false
+      label.isSelectable = false
+      label.isEditable = false
+      return label
+    }
+    let panel = NSAlert()
+    panel.messageText = messageText
+    panel.informativeText = informativeText
+    let view = NSView(frame: NSRect(x: 0, y: 0, width: 240, height: 82))
+    view.addSubview(quickLabel("Username:", 68))
+    let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 42, width: 240, height: 24))
+    input.lineBreakMode = .byClipping
+    input.usesSingleLineMode = true
+    input.cell?.isScrollable = true
+    view.addSubview(input)
+    view.addSubview(quickLabel("Password:", 26))
+    let pwField = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
+    view.addSubview(pwField)
+    panel.accessoryView = view
+    panel.addButton(withTitle: "OK")
+    panel.addButton(withTitle: "Cancel")
+    panel.window.initialFirstResponder = input
+    let response = panel.runModal()
+    if response == NSAlertFirstButtonReturn {
+      ok(input.stringValue, pwField.stringValue)
+      return true
+    } else {
+      return false
+    }
+  }
+
   static func quickFontPickerWindow(ok: @escaping (String?) -> Void) {
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
     appDelegate.fontPicker.finishedPicking = ok

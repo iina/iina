@@ -9,6 +9,8 @@
 // Common
 "on" = "On";
 "off" = "Off";
+"login" = "登录";
+"logout" = "退出";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "播放列表";
@@ -59,6 +61,9 @@
 "osd.sub_downloaded" = "字幕已下载";
 "osd.sub_saved" = "字幕已保存";
 "osd.network_error" = "网络错误";
+"osd.file_error" = "读取文件错误";
+"osd.cannot_login" = "无法登录";
+"osd.canceled" = "已取消";
 
 "update.title_update_found" = "检测到新版本";
 "update.title_no_update" = "没有新版本";
@@ -80,6 +85,8 @@
 "preference.keybindings" = "快捷键";
 "preference.advanced" = "高级";
 "preference.scripts" = "脚本";
+"preference.not_logged_in" = "未登录";
+"preference.logged_in_as" = "已登录 %@";
 
 "menu.volume"= "音量: %d";
 "menu.audio_delay" = "音频延迟: %.2f秒";
@@ -95,6 +102,7 @@
 
 "alert.extra_option_error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";
 "alert.keybinding_config_error" = "无法设置快捷键「%@」！退回到IINA默认配置。请检查你的快捷键文件是否正确。";
+"alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。";
 
 
 "pl_menu.title_multi" = "%d 个项目";

@@ -28,6 +28,8 @@
 		8400D5F31E1AB348006785F5 /* PrefSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5F51E1AB348006785F5 /* PrefSubViewController.xib */; };
 		8400D5F61E1AB34D006785F5 /* PrefNetworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5F81E1AB34D006785F5 /* PrefNetworkViewController.xib */; };
 		8407D1401E3A684C0043895D /* ViewLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407D13F1E3A684C0043895D /* ViewLayer.swift */; };
+		840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AF5811E732C8F00F4AF92 /* JustXMLRPC.swift */; };
+		840AF5841E73CE3900F4AF92 /* OpenSubSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AF5831E73CE3900F4AF92 /* OpenSubSubtitle.swift */; };
 		840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D47971DFEEE6A000D9A64 /* KeyMapping.swift */; };
 		840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */; };
 		840D47A01DFEFC49000D9A64 /* KeyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */; };
@@ -49,6 +51,8 @@
 		845404AC1E43980900B02B12 /* LuaScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845404AB1E43980900B02B12 /* LuaScript.swift */; };
 		845ABEAC1D4D19C000BFB15B /* MPVTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */; };
 		845AC09C1E1AE6C10080B614 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 845AC09E1E1AE6C10080B614 /* Localizable.strings */; };
+		845E2F441E76B641002C6588 /* SubSelectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E2F421E76B641002C6588 /* SubSelectWindowController.swift */; };
+		845E2F451E76B641002C6588 /* SubSelectWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845E2F431E76B641002C6588 /* SubSelectWindowController.xib */; };
 		845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB0C61D39462E00C011E0 /* ControlBarView.swift */; };
 		8460FBA91D6497490081841B /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460FBA71D6497490081841B /* PlaylistViewController.swift */; };
 		8461BA3D1E407DF7008BB852 /* libmpv.1.24.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8461BA211E407DF7008BB852 /* libmpv.1.24.0.dylib */; };
@@ -102,6 +106,8 @@
 		8488D6DF1E11791300D5B952 /* PrefCodecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6DD1E11791300D5B952 /* PrefCodecViewController.swift */; };
 		8488D6E31E1183D300D5B952 /* PrefSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6E11E1183D300D5B952 /* PrefSubViewController.swift */; };
 		8488D6E71E11ABE900D5B952 /* PrefNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */; };
+		8492C2861E771FB200CE5825 /* ISO639_2.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8492C2851E771FB200CE5825 /* ISO639_2.strings */; };
+		8492C2881E7721A600CE5825 /* ISO639_2Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8492C2871E7721A600CE5825 /* ISO639_2Helper.swift */; };
 		84A0BA901D2F8D4100BC8DA1 /* IINAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA8F1D2F8D4100BC8DA1 /* IINAError.swift */; };
 		84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */; };
 		84A0BA971D2FA1CE00BC8DA1 /* PlayerCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA961D2FA1CE00BC8DA1 /* PlayerCore.swift */; };
@@ -262,6 +268,8 @@
 		8400D6091E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefSubViewController.strings"; sourceTree = "<group>"; };
 		8400D60A1E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefNetworkViewController.strings"; sourceTree = "<group>"; };
 		8407D13F1E3A684C0043895D /* ViewLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewLayer.swift; sourceTree = "<group>"; };
+		840AF5811E732C8F00F4AF92 /* JustXMLRPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustXMLRPC.swift; sourceTree = "<group>"; };
+		840AF5831E73CE3900F4AF92 /* OpenSubSubtitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSubSubtitle.swift; sourceTree = "<group>"; };
 		840D47971DFEEE6A000D9A64 /* KeyMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyMapping.swift; sourceTree = "<group>"; };
 		840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRecordViewController.swift; sourceTree = "<group>"; };
 		840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRecordView.swift; sourceTree = "<group>"; };
@@ -284,6 +292,9 @@
 		845AC09D1E1AE6C10080B614 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		845AC09F1E1AE6CB0080B614 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		845AC0A01E1AE71B0080B614 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		845E2F421E76B641002C6588 /* SubSelectWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectWindowController.swift; sourceTree = "<group>"; };
+		845E2F431E76B641002C6588 /* SubSelectWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubSelectWindowController.xib; sourceTree = "<group>"; };
+		845E2F491E76CFC2002C6588 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		845FB0C61D39462E00C011E0 /* ControlBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
 		8460FBA71D6497490081841B /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		8461BA0F1E407DF7008BB852 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = libmpv/lib/libass.9.dylib; sourceTree = "<group>"; };
@@ -336,6 +347,8 @@
 		8488D6DD1E11791300D5B952 /* PrefCodecViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefCodecViewController.swift; sourceTree = "<group>"; };
 		8488D6E11E1183D300D5B952 /* PrefSubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefSubViewController.swift; sourceTree = "<group>"; };
 		8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefNetworkViewController.swift; sourceTree = "<group>"; };
+		8492C2851E771FB200CE5825 /* ISO639_2.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ISO639_2.strings; sourceTree = "<group>"; };
+		8492C2871E7721A600CE5825 /* ISO639_2Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO639_2Helper.swift; sourceTree = "<group>"; };
 		8497A4831D2FF573005F504F /* iina-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iina-Bridging-Header.h"; sourceTree = "<group>"; };
 		84A0BA8F1D2F8D4100BC8DA1 /* IINAError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IINAError.swift; sourceTree = "<group>"; };
 		84A0BA941D2F9E9600BC8DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -594,6 +607,7 @@
 		848290731D95978100C3C76C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				845E2F491E76CFC2002C6588 /* libz.tbd */,
 				8461BA0F1E407DF7008BB852 /* libass.9.dylib */,
 				8461BA101E407DF7008BB852 /* libavcodec.57.dylib */,
 				8461BA111E407DF7008BB852 /* libavdevice.57.dylib */,
@@ -694,6 +708,8 @@
 				84A886F21E26CA24008755BB /* Regex.swift */,
 				84E295BF1E2CF9F4006388F7 /* ObjcUtils.m */,
 				84E295C11E2CFA18006388F7 /* ObjcUtils.h */,
+				8492C2851E771FB200CE5825 /* ISO639_2.strings */,
+				8492C2871E7721A600CE5825 /* ISO639_2Helper.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -730,8 +746,12 @@
 			isa = PBXGroup;
 			children = (
 				84A886E31E24F37D008755BB /* ShooterSubtitle.swift */,
+				840AF5831E73CE3900F4AF92 /* OpenSubSubtitle.swift */,
 				84A886E51E24F3BD008755BB /* OnlineSubtitle.swift */,
 				84A886EB1E2573A5008755BB /* JustExtension.swift */,
+				840AF5811E732C8F00F4AF92 /* JustXMLRPC.swift */,
+				845E2F421E76B641002C6588 /* SubSelectWindowController.swift */,
+				845E2F431E76B641002C6588 /* SubSelectWindowController.xib */,
 			);
 			name = Sub;
 			sourceTree = "<group>";
@@ -924,10 +944,12 @@
 				8400D5DB1E1AB326006785F5 /* FontPickerWindowController.xib in Resources */,
 				8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */,
 				8400D5EA1E1AB33B006785F5 /* KeyRecordViewController.xib in Resources */,
+				845E2F451E76B641002C6588 /* SubSelectWindowController.xib in Resources */,
 				8400D5F01E1AB344006785F5 /* PrefCodecViewController.xib in Resources */,
 				8400D5C91E1AB2F9006785F5 /* QuickSettingViewController.xib in Resources */,
 				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
 				8400D5E41E1AB333006785F5 /* PrefControlViewController.xib in Resources */,
+				8492C2861E771FB200CE5825 /* ISO639_2.strings in Resources */,
 				84A886EE1E269A2A008755BB /* iina-default-input.conf in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8400D5D81E1AB31B006785F5 /* AboutWindowController.xib in Resources */,
@@ -1022,6 +1044,7 @@
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
 				84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */,
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
+				8492C2881E7721A600CE5825 /* ISO639_2Helper.swift in Sources */,
 				84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
 				84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */,
@@ -1046,10 +1069,13 @@
 				8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */,
 				8450403D1E0A9EE20079C194 /* InspectorWindowController.swift in Sources */,
 				9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */,
+				840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */,
 				841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */,
 				84A886F11E26A2CB008755BB /* UpdateChecker.swift in Sources */,
 				8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */,
 				84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */,
+				845E2F441E76B641002C6588 /* SubSelectWindowController.swift in Sources */,
+				840AF5841E73CE3900F4AF92 /* OpenSubSubtitle.swift in Sources */,
 				84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */,
 				8488D6DC1E1167EF00D5B952 /* FileSize.swift in Sources */,
 				8488D6E71E11ABE900D5B952 /* PrefNetworkViewController.swift in Sources */,
@@ -1527,6 +1553,7 @@
 					"$(PROJECT_DIR)/libmpv/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = module.modulemap;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
 				PRODUCT_NAME = IINA;
@@ -1560,6 +1587,7 @@
 					"$(PROJECT_DIR)/libmpv/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = module.modulemap;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
 				PRODUCT_NAME = IINA;

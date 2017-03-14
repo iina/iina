@@ -14,6 +14,7 @@ class Regex {
   static let httpFileName = Regex("attachment; filename=(.+?)\\Z")
   static let tagVersion = Regex("\\Av(\\d+\\.\\d+\\.\\d+)\\Z")
   static let urlDetect = Regex("^(https?|ftp)://[^\\s/$.?#].[^\\s]*$")
+  static let iso639_2Desc = Regex("^.+?\\(([a-z]{3})\\)$")
 
   var regex: NSRegularExpression?
 

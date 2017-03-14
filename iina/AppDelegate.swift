@@ -24,6 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   lazy var inspector: InspectorWindowController = InspectorWindowController()
 
+  lazy var subSelectWindow: SubSelectWindowController = SubSelectWindowController()
+
   lazy var vfWindow: FilterWindowController = {
     let w = FilterWindowController()
     w.filterType = MPVProperty.vf

@@ -296,6 +296,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: Preference.Key.rightClickAction))
     rightLabel.mode = ud.bool(forKey: Preference.Key.showRemainingTime) ? .remaining : .duration
 
+    setArrowButtonIcon(buttonAction: arrowBtnFunction);
+    
     // add user default observers
     observedPrefKeys.forEach { key in
       ud.addObserver(self, forKeyPath: key, options: .new, context: nil)
@@ -351,6 +353,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case Preference.Key.arrowButtonAction:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)
+        setArrowButtonIcon(buttonAction: arrowBtnFunction);
       }
 
     case Preference.Key.singleClickAction:
@@ -378,6 +381,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  func setArrowButtonIcon(buttonAction: Preference.ArrowButtonAction) -> Void{
+    switch buttonAction{
+    case .playlist:
+      self.leftArrowButton.image = NSImage(named: "previous-video");
+      self.rightArrowButton.image = NSImage(named: "next-video");
+      break;
+    default:
+      self.leftArrowButton.image = NSImage(named: "speedl");
+      self.rightArrowButton.image = NSImage(named: "speed");
+    }
+  }
+  
   // MARK: - Lazy initializers
 
   func initVideoView() -> VideoView {

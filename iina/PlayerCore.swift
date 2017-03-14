@@ -117,9 +117,8 @@ class PlayerCore: NSObject {
   /** Pause / resume. Reset speed to 0 when pause. */
   func togglePause(_ set: Bool?) {
     if let setPause = set {
-      if setPause {
-        setSpeed(1)
-      } else {
+      // if paused by EOF, replay the video.
+      if !setPause {
         if mpvController.getFlag(MPVProperty.eofReached) {
           seek(absoluteSecond: 0)
         }
@@ -134,7 +133,6 @@ class PlayerCore: NSObject {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, false)
       } else {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, true)
-        setSpeed(1)
       }
       info.isPaused = !info.isPaused
     }
@@ -542,11 +540,9 @@ class PlayerCore: NSObject {
   func fileLoaded() {
     guard let mw = mainWindow else {
       Utility.fatal("Window is nil at fileLoaded")
-      return
     }
     guard let vwidth = info.videoWidth, let vheight = info.videoHeight else {
       Utility.fatal("Cannot get video width and height")
-      return
     }
     invalidateTimer()
     triedUsingExactSeekForCurrentFile = false
@@ -581,7 +577,6 @@ class PlayerCore: NSObject {
     guard let mw = mainWindow else { return }
     guard let dwidth = info.displayWidth, let dheight = info.displayHeight else {
       Utility.fatal("Cannot get video width and height")
-      return
     }
     if dwidth != 0 && dheight != 0 {
       DispatchQueue.main.sync {

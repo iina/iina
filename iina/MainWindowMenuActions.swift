@@ -225,7 +225,7 @@ extension MainWindowController {
 
   @IBAction func menuChangeVolume(_ sender: NSMenuItem) {
     if let volumeDelta = sender.representedObject as? Int {
-      let newVolume = volumeDelta + playerCore.info.volume
+      let newVolume = Double(volumeDelta) + playerCore.info.volume
       playerCore.setVolume(newVolume, constrain: false)
     } else {
       Utility.log("sender.representedObject is not int in menuChangeVolume()")

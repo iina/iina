@@ -651,7 +651,7 @@ class MPVController: NSObject {
 
     case MPVOption.Audio.volume:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        playerCore.info.volume = Int(data)
+        playerCore.info.volume = data
         playerCore.syncUI(.volume)
         playerCore.sendOSD(.volume(Int(data)))
       }

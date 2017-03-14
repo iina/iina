@@ -52,7 +52,7 @@ class PlaybackInfo {
   var gamma: Int = 0
   var hue: Int = 0
 
-  var volume: Int = 50
+  var volume: Double = 50
 
   var isMuted: Bool = false
 

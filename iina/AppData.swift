@@ -29,12 +29,9 @@ struct AppData {
   static let rotations: [Int] = [0, 90, 180, 270]
 
   /** Seek amount */
-  static let seekAmountMap: [Int: Double] = [
-    1: 0.001,
-    2: 0.01,
-    3: 0.1,
-    4: 0.5
-  ]
+  static let seekAmountMap = [0, 0.001, 0.01, 0.1, 0.5]
+  static let seekAmountMapMouse = [0, 0.5, 1, 2, 4]
+  static let volumeMap = [0, 0.25, 0.5, 0.75, 1]
 
   static let encodings = CharEncoding.list
 

@@ -146,11 +146,15 @@ struct Preference {
     static let relativeSeekAmount = "relativeSeekAmount"
 
     static let arrowButtonAction = "arrowBtnAction"
+    /** (1~4) */
+    static let volumeScrollAmount = "volumeScrollAmount"
+    static let verticalScrollAction = "verticalScrollAction"
+    static let horizontalScrollAction = "horizontalScrollAction"
 
     static let singleClickAction = "singleClickAction"
-
     static let doubleClickAction = "doubleClickAction"
     static let rightClickAction = "rightClickAction"
+    static let pinchAction = "pinchAction"
 
     static let showRemainingTime = "showRemainingTime"
 
@@ -217,6 +221,19 @@ struct Preference {
     case fullscreen
     case pause
     case hideOSC
+  }
+
+  enum ScrollAction: Int {
+    case volume = 0
+    case seek
+    case none
+    case passToMpv
+  }
+
+  enum PinchAction: Int {
+    case windowSize = 0
+    case fullscreen
+    case none
   }
 
   enum AutoLoadAction: Int {
@@ -409,9 +426,13 @@ struct Preference {
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
     Key.relativeSeekAmount: 2,
+    Key.volumeScrollAmount: 3,
+    Key.verticalScrollAction: ScrollAction.volume.rawValue,
+    Key.horizontalScrollAction: ScrollAction.seek.rawValue,
     Key.singleClickAction: MouseClickAction.hideOSC.rawValue,
     Key.doubleClickAction: MouseClickAction.fullscreen.rawValue,
     Key.rightClickAction: MouseClickAction.pause.rawValue,
+    Key.pinchAction: PinchAction.windowSize.rawValue,
 
     Key.screenshotFolder: "~/Pictures/ScreenShots",
     Key.screenshotIncludeSubtitle: true,

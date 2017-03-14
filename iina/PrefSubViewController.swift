@@ -176,6 +176,7 @@ class SubLangToken: NSObject {
 
   override func transformedValue(_ value: Any?) -> Any? {
     guard let str = value as? NSString else { return nil }
+    if str.length == 0 { return [] }
     return str.components(separatedBy: ",").map { SubLangToken($0) }
   }
 

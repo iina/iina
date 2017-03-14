@@ -13,7 +13,7 @@ import MASPreferences
 class AppDelegate: NSObject, NSApplicationDelegate {
 
   var isReady: Bool = false
-  var isServiceStartup: Bool = false
+  var handledDroppedText: Bool = false
 
   var pendingURL: String?
 
@@ -68,7 +68,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
       if UserDefaults.standard.bool(forKey: Preference.Key.openStartPanel) {
         // invoke after 0.5s
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(self.judgeServiceStartup), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(self.checkServiceStartup), userInfo: nil, repeats: false)
       }
     }
 
@@ -138,13 +138,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func droppedText(_ pboard: NSPasteboard, userData:String, error: NSErrorPointer) {
     if let url = pboard.string(forType: NSStringPboardType) {
-      isServiceStartup = true
+      handledDroppedText = true
       playerCore.openURLString(url)
     }
   }
 
-  func judgeServiceStartup() {
-    if !isServiceStartup {
+  func checkServiceStartup() {
+    if !handledDroppedText {
       openFile(self)
     }
   }

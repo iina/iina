@@ -58,34 +58,41 @@ class PrefSubViewController: NSViewController {
   }
 
   @IBAction func openSubLoginAction(_ sender: AnyObject) {
-    let _ = Utility.quickUsernamePasswordPanel(messageText: "Opensubtitles Login", informativeText: "Please enter your username and password") {
-      (username, password) in
-      loginIndicator.isHidden = false
-      loginIndicator.startAnimation(nil)
-      firstly {
-        OpenSubSupport().login(testUser: username, password: password)
-      }.then { () -> Void in
-        let status = OpenSubSupport.savePassword(username: username, passwd: password)
-        if status == errSecSuccess {
-          UserDefaults.standard.set(username, forKey: Preference.Key.openSubUsername)
-        } else {
-          Utility.showAlert(message: "Cannot save your password to Keychain: \(SecCopyErrorMessageString(status, nil))")
+    let currUsername = UserDefaults.standard.string(forKey: Preference.Key.openSubUsername) ?? ""
+    if currUsername.isEmpty {
+      // if current username is empty, login
+      let _ = Utility.quickUsernamePasswordPanel(messageText: "Opensubtitles Login", informativeText: "Please enter your username and password") {
+        (username, password) in
+        loginIndicator.isHidden = false
+        loginIndicator.startAnimation(nil)
+        firstly {
+          OpenSubSupport().login(testUser: username, password: password)
+        }.then { () -> Void in
+          let status = OpenSubSupport.savePassword(username: username, passwd: password)
+          if status == errSecSuccess {
+            UserDefaults.standard.set(username, forKey: Preference.Key.openSubUsername)
+          } else {
+            Utility.showAlert(message: "Cannot save your password to Keychain: \(SecCopyErrorMessageString(status, nil))")
+          }
+        }.always {
+          self.loginIndicator.isHidden = true
+          self.loginIndicator.stopAnimation(nil)
+        }.catch { err in
+          let message: String
+          switch err {
+          case OpenSubSupport.OpenSubError.loginFailed(let reason):
+            message = reason
+          case OpenSubSupport.OpenSubError.xmlRpcError(let e):
+            message = e.readableDescription
+          default:
+            message = "Unknown error"
+          }
+          Utility.showAlert(message: "Cannot login. Please check your username, password and network status.\n\n\(message)")
         }
-      }.always {
-        self.loginIndicator.isHidden = true
-        self.loginIndicator.stopAnimation(nil)
-      }.catch { err in
-        let message: String
-        switch err {
-        case OpenSubSupport.OpenSubError.loginFailed(let reason):
-          message = reason
-        case OpenSubSupport.OpenSubError.xmlRpcError(let e):
-          message = e.readableDescription
-        default:
-          message = "Unknown error"
-        }
-        Utility.showAlert(message: "Cannot login. Please check your username, password and network status.\n\n\(message)")
       }
+    } else {
+      // else, logout
+      UserDefaults.standard.set("", forKey: Preference.Key.openSubUsername)
     }
   }
 

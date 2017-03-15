@@ -18,20 +18,26 @@ When raising an issue, please **use English** if possible.
 
 在提 issue 时，请尽量使用**英文**！  
 
+---
+
 # Features
 
 - Based on [mpv](https://github.com/mpv-player/mpv), a powerful media player
-- Designed for modern macOS (10.10+)
+- Designed for modern versions of macOS (10.10+)
 - User-friendly interface
-- All the features you need for videos, audios and subtitles
-- Supported basic playlist and chapters
-- MPV config files and script system are available for advanced users
+- Contains all features for videos, audios and subtitles
+- Supports basic playlists and chapters
+- MPV config files and script system available for advanced users
 - Written in Swift, followed up on new technologies like Touch Bar
 - Still in active development
 
-# Build
+# Installing
 
-**Use pre-compiled dylibs**
+To install IINA, please go to the [releases page](https://github.com/lhc70000/iina/releases) and download the latest version of IINA. Simply open the downloaded .dmg file and then drag the IINA icon to your Applications folder. Done!
+
+# Building
+
+**Using pre-compiled dylibs**
 
 1. Please make sure CocoaPods is installed.
 
@@ -53,7 +59,7 @@ When raising an issue, please **use English** if possible.
 
 Theoretically no extra work is needed. _If you are unwilling to use the provided dylibs, follow the instructions below._
 
-**Build with the lastest mpv**
+**Building with the lastest mpv**
 
 * Install mpv
 
@@ -74,19 +80,19 @@ Theoretically no extra work is needed. _If you are unwilling to use the provided
   This script will deploy the depended libraries into `libmpv/libs`.
   Make sure you have a phase copying of all these dylibs in Xcode's build settings.
 
-## Contribute
+## Contributing
 
-**Please read [CONTRIBUTING.md](https://github.com/lhc70000/iina/blob/master/CONTRIBUTING.md) before opening an issue or pull request.**
+**Please read [CONTRIBUTING.md](https://github.com/lhc70000/iina/blob/master/CONTRIBUTING.md) before opening an issue or a pull request.**
 
-**Please ask for permission from the author before staring working on a pull request** to make sure that there's not someone else working on the same feature.
+**Please ask the author before starting to work on a pull request** to ensure that no one else is working on the same feature.
 
 Any feedback is appreciated! You can
 
-- Star it or fork it
+- Star or fork it
 - Download and test it
-- Send bug reports
-- Send feature requests
-- Provide suggestions on code structures or UI designs
+- Post bug reports
+- Post feature requests
+- Provide suggestions on code structure or UI design
 - Provide localizatons
 - ...
 

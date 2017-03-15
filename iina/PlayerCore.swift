@@ -338,7 +338,7 @@ class PlayerCore: NSObject {
     mpvController.command(.audioAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
         DispatchQueue.main.async {
-          Utility.showAlert(message: "Unsupported external audio file.")
+          Utility.showAlert("unsupported_audio")
         }
       }
     }
@@ -350,7 +350,7 @@ class PlayerCore: NSObject {
     mpvController.command(.subAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
         DispatchQueue.main.async {
-          Utility.showAlert(message: "Unsupported external subtitle.")
+          Utility.showAlert("unsupported_sub")
         }
       }
     }
@@ -702,7 +702,7 @@ class PlayerCore: NSObject {
 
   func errorOpeningFileAndCloseMainWindow() {
     DispatchQueue.main.async {
-      Utility.showAlert(message: "Cannot open file or stream!")
+      Utility.showAlert("error_open")
       self.mainWindow?.close()
     }
   }

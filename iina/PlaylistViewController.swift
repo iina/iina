@@ -489,7 +489,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
         try FileManager.default.trashItem(at: url, resultingItemURL: nil)
         count += 1
       } catch let error {
-        Utility.showAlert(message: "Error deleting file: \(error.localizedDescription)")
+        Utility.showAlert("playlist.error_deleting", arguments:
+          [error.localizedDescription])
       }
     }
     playlistTableView.deselectAll(nil)

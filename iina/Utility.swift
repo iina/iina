@@ -15,6 +15,7 @@ class Utility {
 
   // MARK: - Logs, alerts
 
+  @available(*, deprecated, message: "showAlert(message:alertStyle:) is deprecated, use showAlert(_ key:comment:arguments:alertStyle:) instead")
   static func showAlert(message: String, alertStyle: NSAlertStyle = .critical) {
     let alert = NSAlert()
     switch alertStyle {
@@ -29,6 +30,34 @@ class Utility {
     alert.alertStyle = alertStyle
     alert.runModal()
   }
+  
+  static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlertStyle = .critical) {
+    let alert = NSAlert()
+    switch style {
+    case .critical:
+      alert.messageText = "Error"
+    case .informational:
+      alert.messageText = "Information"
+    case .warning:
+      alert.messageText = "Warning"
+    }
+    
+    var format: String
+    if let stringComment = comment {
+      format = NSLocalizedString("alert." + key, comment: stringComment)
+    } else {
+      format = NSLocalizedString("alert." + key, comment: key)
+    }
+    
+    if let stringArguments = arguments {
+      alert.informativeText = String(format: format, arguments: stringArguments)
+    } else {
+      alert.informativeText = String(format: format)
+    }
+    
+    alert.alertStyle = style
+    alert.runModal()
+  }
 
   static func log(_ message: String) {
     NSLog("%@", message)
@@ -37,7 +66,7 @@ class Utility {
   static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
     if !expr {
       NSLog("%@", errorMessage)
-      showAlert(message: "Fatal error: \(errorMessage) \nThe application will exit now.")
+      showAlert("fatal_error", arguments: [errorMessage])
       block()
       exit(1)
     }
@@ -46,7 +75,7 @@ class Utility {
   static func fatal(_ message: String, _ block: () -> Void = {}) -> Never {
     NSLog("%@", message)
     NSLog(Thread.callStackSymbols.joined(separator: "\n"))
-    showAlert(message: "Fatal error: \(message) \nThe application will exit now.")
+    showAlert("fatal_error", arguments: [message])
     block()
     // Make sure the application exits
     DispatchQueue.main.sync {
@@ -186,7 +215,7 @@ class Utility {
       return uv
     } else {
       if showAlert {
-        Utility.showAlert(message: "Cannot find config file location!")
+        Utility.showAlert("error_finding_file", arguments: ["config"])
       }
       return nil
     }

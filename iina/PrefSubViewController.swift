@@ -72,7 +72,7 @@ class PrefSubViewController: NSViewController {
           if status == errSecSuccess {
             UserDefaults.standard.set(username, forKey: Preference.Key.openSubUsername)
           } else {
-            Utility.showAlert(message: "Cannot save your password to Keychain: \(String(describing: SecCopyErrorMessageString(status, nil)))")
+            Utility.showAlert("sub.cannot_save_passwd", arguments: [SecCopyErrorMessageString(status, nil) as! CVarArg])
           }
         }.always {
           self.loginIndicator.isHidden = true
@@ -87,7 +87,7 @@ class PrefSubViewController: NSViewController {
           default:
             message = "Unknown error"
           }
-          Utility.showAlert(message: "Cannot login. Please check your username, password and network status.\n\n\(message)")
+          Utility.showAlert("sub.cannot_login", arguments: [message])
         }
       }
     } else {

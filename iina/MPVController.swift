@@ -247,7 +247,7 @@ class MPVController: NSObject {
         mpv_set_option_string(mpv, "config", "yes")
         let status = mpv_set_option_string(mpv, MPVOption.ProgramBehavior.configDir, userConfDir)
         if status < 0 {
-          Utility.showAlert(message: "Error setting config directory \"\(userConfDir)\".")
+          Utility.showAlert("extra_option.config_folder", arguments: [userConfDir])
         }
       }
     }
@@ -257,12 +257,12 @@ class MPVController: NSObject {
       userOptions.forEach { op in
         let status = mpv_set_option_string(mpv, op[0], op[1])
         if status < 0 {
-          let alert = String(format: NSLocalizedString("alert.extra_option_error", comment: "Error setting extra mpv option"), op[0], op[1], status)
-          Utility.showAlert(message: alert)
+          Utility.showAlert("extra_option.error", arguments:
+            [op[0], op[1], status])
         }
       }
     } else {
-      Utility.showAlert(message: "Cannot read user defined options.")
+      Utility.showAlert("extra_option.cannot_read")
     }
 
     // Load external scripts
@@ -415,7 +415,7 @@ class MPVController: NSObject {
     let str = filters.map { $0.stringFormat }.joined(separator: ",")
     command(cmd, args: ["set", str], checkError: false) { returnValue in
       if returnValue < 0 {
-        Utility.showAlert(message: "Error occured when setting filters. Please check your parameter format.")
+        Utility.showAlert("alert.filter.incorrect")
         // reload data in filter setting window
         NotificationCenter.default.post(Notification(name: Constants.Noti.vfChanged))
       }
@@ -824,7 +824,7 @@ class MPVController: NSObject {
     }
 
     if code < 0 {
-      Utility.showAlert(message: "Error \(String(cString: mpv_error_string(code))) (\(code)) when setting user option \(name).")
+      Utility.showAlert("mpv_error", arguments: [mpv_error_string(code), code, name])
     }
 
     if sync {

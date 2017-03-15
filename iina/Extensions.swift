@@ -310,7 +310,7 @@ extension Data {
     do {
       try self.write(to: fileUrl)
     } catch {
-      Utility.showAlert(message: "Cannot write data to disk.")
+      Utility.showAlert("error_saving_file", arguments: ["data", filename])
       return nil
     }
     return fileUrl

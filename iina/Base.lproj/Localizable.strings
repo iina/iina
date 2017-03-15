@@ -100,9 +100,41 @@
 
 "track.none" = "<None>";
 
-"alert.extra_option_error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
-"alert.keybinding_config_error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+// Alerts
+"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
+"alert.mpv_error" = "Error %@ (%@) when setting user option %@.";
+"alert.sleep" = "Cannot prevent display sleep!";
+
+"alert.unsupported_audio" = "Unsupported external audio file.";
+"alert.unsupported_sub" = "Unsupported external subtitle.";
+"alert.unsupported_url" = "Unsupported URL.";
+
+"alert.error_open" = "Cannot open file or stream!";
+"alert.error_finding_file" = "Cannot find %@ file!";
+"alert.error_loading_script" = "Cannot load script %@!";
+"alert.error_saving_file" = "Error occured when saving %@: %@";
+"alert.error_deleting_file" = "Cannot delete the file.";
+
+"alert.config.empty_name" = "The name cannot br empty.";
+"alert.config.name_exsisting" = "The name already exists.";
+"alert.config.cannot_create" = "Cannot crete config file.";
+"alert.config.cannot_write" = "Cannot write to config file!";
+
+"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+
+"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+
+"alert.extra_option.cannot_read" = "Cannot read user defined options.";
+"alert.extra_option.empty" = "Key or value cannot be empty!";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+
+"alert.playlist.error_deleting" = "Error deleting: $@";
+
+"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
 "alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using opensubtitles. English(eng) will be used this time.";
+"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
+"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 
 
 "pl_menu.title_multi" = "%d Items";

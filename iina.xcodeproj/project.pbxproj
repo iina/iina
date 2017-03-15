@@ -293,7 +293,6 @@
 		845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVTrack.swift; sourceTree = "<group>"; };
 		845AC09D1E1AE6C10080B614 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		845AC09F1E1AE6CB0080B614 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		845AC0A01E1AE71B0080B614 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		845E2F421E76B641002C6588 /* SubSelectWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectWindowController.swift; sourceTree = "<group>"; };
 		845E2F491E76CFC2002C6588 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		845FB0C61D39462E00C011E0 /* ControlBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
@@ -416,7 +415,6 @@
 		84F5D4981E44E8AC0060A838 /* KeyBindingDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingDataLoader.swift; sourceTree = "<group>"; };
 		84F5D49B1E44E9A50060A838 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		84F5D49D1E44E9A90060A838 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
-		84F5D49E1E44E9AA0060A838 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		84F5D49F1E44F9DB0060A838 /* KeyBindingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingItem.swift; sourceTree = "<group>"; };
 		84F5D4A11E4796F50060A838 /* KeyBindingTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingTranslator.swift; sourceTree = "<group>"; };
 		84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeSliderCell.swift; sourceTree = "<group>"; };
@@ -919,7 +917,6 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 				"zh-Hans",
 				"zh-Hant",
@@ -1378,7 +1375,6 @@
 			children = (
 				845AC09D1E1AE6C10080B614 /* Base */,
 				845AC09F1E1AE6CB0080B614 /* zh-Hans */,
-				845AC0A01E1AE71B0080B614 /* en */,
 				D27E35E01E379B700064BE57 /* zh-Hant */,
 				C789872C1E34EBDF0005769F /* ko */,
 				F4C61E021E20423A00A43BCC /* de */,
@@ -1419,7 +1415,6 @@
 			children = (
 				84F5D49B1E44E9A50060A838 /* Base */,
 				84F5D49D1E44E9A90060A838 /* zh-Hans */,
-				84F5D49E1E44E9AA0060A838 /* en */,
 				B3860ED81E50F73A00FF012B /* it */,
 				C70BC05C1E511D1000D8CB79 /* ko */,
 				E5A9E1841E50F1E200950BD5 /* fr */,

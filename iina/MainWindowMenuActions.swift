@@ -324,13 +324,14 @@ extension MainWindowController {
     let selected = playerCore.info.subTracks.filter { $0.isSelected }
     guard let currURL = playerCore.info.currentURL else { return }
     guard selected.count > 0 else {
-      Utility.showAlert(message: "Please select a downloaded subtitle first.")
+      Utility.showAlert("sub.no_selected")
+      
       return
     }
     let sub = selected[0]
     // make sure it's a downloaded sub
     guard let path = sub.externalFilename, path.contains("/var/") else {
-      Utility.showAlert(message: "Please select a downloaded subtitle first.")
+      Utility.showAlert("sub.no_selected")
       return
     }
     let subURL = URL(fileURLWithPath: path)
@@ -340,7 +341,8 @@ extension MainWindowController {
       try FileManager.default.copyItem(at: subURL, to: destURL)
       displayOSD(.savedSub)
     } catch let error as NSError {
-      Utility.showAlert(message: "Error occured when copying file: \(error.localizedDescription)")
+      Utility.showAlert("error_saving_file", arguments: ["subtitle",
+                                                         error.localizedDescription])
     }
 
   }
@@ -362,7 +364,8 @@ extension MainWindowController {
         do {
           try playlist.write(to: url, atomically: true, encoding: String.Encoding.utf8)
         } catch let error as NSError {
-          Utility.showAlert(message: "Error occured when saving playlist: \(error.localizedDescription)")
+          Utility.showAlert("error_saving_file", arguments: ["subtitle",
+                                                            error.localizedDescription])
         }
       }
     }

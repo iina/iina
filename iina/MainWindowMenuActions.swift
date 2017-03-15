@@ -206,8 +206,8 @@ extension MainWindowController {
   }
 
   @IBAction func menuAlwaysOnTop(_ sender: AnyObject) {
-    playerCore.info.isAlwaysOntop = !playerCore.info.isAlwaysOntop
-    setWindowFloatingOnTop(playerCore.info.isAlwaysOntop)
+    isOntop = !isOntop
+    setWindowFloatingOnTop(isOntop)
   }
   
   @available(macOS 10.12, *)

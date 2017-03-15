@@ -77,6 +77,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       playerCore.mpvController.setFlag(MPVOption.Window.fullscreen, isInFullScreen)
     }
   }
+
+  var isOntop: Bool = false {
+    didSet {
+      playerCore.mpvController.setFlag(MPVOption.Window.ontop, isOntop)
+
+    }
+  }
+
   var isInPIP: Bool = false
   var isInInteractiveMode: Bool = false
 
@@ -339,8 +347,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         self.toggleWindowFullScreen()
       }
     }
+    let ontopObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.ontopChanged, object: nil, queue: .main) { [unowned self] _ in
+      let ontop = self.playerCore.mpvController.getFlag(MPVOption.Window.ontop)
+      if ontop != self.isOntop {
+        self.isOntop = ontop
+        self.setWindowFloatingOnTop(ontop)
+      }
+    }
     notificationObservers.append(fsObserver)
-
+    notificationObservers.append(ontopObserver)
   }
 
   deinit {
@@ -715,7 +730,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updateTimer()
     // always on top
     if ud.bool(forKey: PK.alwaysFloatOnTop) {
-      playerCore.info.isAlwaysOntop = true
+      isOntop = true
       setWindowFloatingOnTop(true)
     }
     // truncate middle for title
@@ -783,7 +798,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidExitFullScreen(_ notification: Notification) {
     // if is floating, enable it again
-    if playerCore.info.isAlwaysOntop {
+    if isOntop {
       setWindowFloatingOnTop(true)
     }
   }
@@ -1265,12 +1280,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func toggleWindowFullScreen() {
     // if is floating, disable it temporarily.
     // it will be enabled again in `windowDidExitFullScreen()`.
-    if !isInFullScreen && playerCore.info.isAlwaysOntop {
+    if !isInFullScreen && isOntop {
       setWindowFloatingOnTop(false)
     }
     window?.toggleFullScreen(self)
   }
 
+  /** This method will not set `isOntop`! */
   func setWindowFloatingOnTop(_ onTop: Bool) {
     guard let window = window else { return }
     if onTop {

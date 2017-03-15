@@ -10,7 +10,7 @@ import Cocoa
 
 class RestrictedNumberFormatter : NumberFormatter {
 
-  init(_ min: Float?, max: Float?, isDecimal: Bool) {
+  init(_ min: Double?, max: Double?, isDecimal: Bool) {
     super.init()
     if isDecimal {
       self.numberStyle = .decimal

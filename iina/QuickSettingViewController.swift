@@ -110,8 +110,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.dataSource = self
       view.superview?.superview?.layer?.cornerRadius = 4
     }
-    customSpeedTextField.formatter = RestrictedNumberFormatter(0.25, max: 16, isDecimal: true)
-    customAudioDelayTextField.formatter = RestrictedNumberFormatter(-5, max: 5, isDecimal: true)
+    customSpeedTextField.formatter = RestrictedNumberFormatter(AppData.minSpeed, max: AppData.maxSpeed, isDecimal: true)
+    customAudioDelayTextField.formatter = RestrictedNumberFormatter(AppData.minAudioDelay, max: AppData.maxAudioDelay, isDecimal: true)
+    customSubDelayTextField.formatter = RestrictedNumberFormatter(AppData.minSubDelay, max: AppData.maxSubDelay, isDecimal: true)
     if pendingSwitchRequest != nil {
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil

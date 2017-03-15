@@ -22,6 +22,14 @@ struct AppData {
   /** min/max speed for playback **/
   static let minSpeed = 0.25
   static let maxSpeed = 16.0
+
+  /** min/max delay for audio **/
+  static let minAudioDelay = -5.0
+  static let maxAudioDelay = 5.0
+
+  /** min/max delay for subtitle **/
+  static let minSubDelay = -5.0
+  static let maxSubDelay = 5.0
   
   /** generate aspect and crop options in menu */
   static let aspects: [String] = ["4:3", "5:4", "16:9", "16:10", "1:1", "3:2", "2.21:1", "2.35:1", "2.39:1"]

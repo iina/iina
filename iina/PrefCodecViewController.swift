@@ -39,6 +39,9 @@ class PrefCodecViewController: NSViewController {
   @IBOutlet weak var spdifDTSBtn: NSButton!
   @IBOutlet weak var spdifDTSHDBtn: NSButton!
 
+  @IBOutlet weak var videoThreadsTextField: NSTextField!
+  @IBOutlet weak var audioThreadsTextField: NSTextField!
+  @IBOutlet weak var maximumVolumeTextField: NSTextField!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -47,6 +50,10 @@ class PrefCodecViewController: NSViewController {
     spdifAC3Btn.state = spdif.contains("ac3") ? NSOnState : NSOffState
     spdifDTSBtn.state = spdif.contains("dts") ? NSOnState : NSOffState
     spdifDTSHDBtn.state = spdif.contains("dts-hd") ? NSOnState : NSOffState
+
+    videoThreadsTextField.formatter = RestrictedNumberFormatter(0, max: nil, isDecimal: false)
+    audioThreadsTextField.formatter = RestrictedNumberFormatter(0, max: nil, isDecimal: false)
+    maximumVolumeTextField.formatter = RestrictedNumberFormatter(100, max: 1000, isDecimal: false)
   }
 
   @IBAction func spdifBtnAction(_ sender: AnyObject) {

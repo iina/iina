@@ -7,9 +7,12 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefCodecViewController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="audioThreadsTextField" destination="Ld5-Mm-4Pt" id="nJr-YC-p8q"/>
+                <outlet property="maximumVolumeTextField" destination="iB2-dA-Y1E" id="JvU-FA-utY"/>
                 <outlet property="spdifAC3Btn" destination="iAK-W4-XCh" id="WqH-nb-dND"/>
                 <outlet property="spdifDTSBtn" destination="FJ2-As-AUm" id="GuI-ys-Mub"/>
                 <outlet property="spdifDTSHDBtn" destination="haq-Mp-LHn" id="WsL-zK-EYy"/>
+                <outlet property="videoThreadsTextField" destination="NZA-64-tXh" id="nlQ-el-CzZ"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -60,9 +63,6 @@
                         <constraint firstAttribute="width" constant="58" id="FTi-QA-gJe"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="t5g-ak-jUK">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="BV6-3i-W2c">
-                            <real key="minimum" value="0.0"/>
-                        </numberFormatter>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -101,9 +101,6 @@
                         <constraint firstAttribute="width" constant="58" id="Dwo-eo-Aga"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="i6x-kr-xKs">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="ZEY-n9-gQY">
-                            <real key="minimum" value="0.0"/>
-                        </numberFormatter>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -178,10 +175,6 @@
                         <constraint firstAttribute="width" constant="58" id="hr5-Dg-Xii"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="87s-it-sge">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="5cT-DG-pnp">
-                            <real key="minimum" value="100"/>
-                            <real key="maximum" value="1000"/>
-                        </numberFormatter>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

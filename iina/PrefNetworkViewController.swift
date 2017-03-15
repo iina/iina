@@ -35,9 +35,13 @@ class PrefNetworkViewController: NSViewController {
   var hasResizableWidth: Bool = false
   var hasResizableHeight: Bool = false
 
+  @IBOutlet weak var defaultCacheSizeTextField: NSTextField!
+  @IBOutlet weak var cacheBufferSizeTextField: NSTextField!
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do view setup here.
+
+    defaultCacheSizeTextField.formatter = RestrictedNumberFormatter(0, max: nil, isDecimal: false)
+    cacheBufferSizeTextField.formatter = RestrictedNumberFormatter(0, max: nil, isDecimal:false)
   }
 
 }

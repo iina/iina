@@ -70,7 +70,7 @@
                         <subviews>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT">
                                 <rect key="frame" x="60" y="7" width="320" height="19"/>
-                                <sliderCell key="cell" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="f1c-xF-8a2" customClass="PlaySliderCell" customModule="IINA" customModuleProvider="target"/>
+                                <sliderCell key="cell" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="f1c-xF-8a2" customClass="PlaySliderCell" customModule="IINA" customModuleProvider="target"/>
                                 <connections>
                                     <action selector="playSliderChanges:" target="-2" id="UBG-Ky-3rr"/>
                                 </connections>
@@ -80,7 +80,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="CMl-dC-PCr"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="0:00:00" id="6mL-0A-eq2">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="-:--:--" id="6mL-0A-eq2">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -163,7 +163,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="sDf-om-KlV"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="9:99:99" id="1XQ-Mt-jmZ">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="-:--:--" id="1XQ-Mt-jmZ">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -210,7 +210,7 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" alphaValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qOq-6a-7j7">
                                 <rect key="frame" x="198" y="23" width="44" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="999:99" id="Pw8-rd-mUu">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="-:--:--" id="Pw8-rd-mUu">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

@@ -67,6 +67,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Status
 
+  var hasCustomInitialWidthOrHeight: Bool = false
+
   var touchBarPosLabelWidthLayout: NSLayoutConstraint?
 
   var mousePosRelatedToWindow: CGPoint?
@@ -280,6 +282,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // size
     w.minSize = minSize
+    if let wf = windowFrameFromGeometry() {
+      w.setFrame(wf, display: false)
+    }
+
     // fade-able views
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
     fadeableViews.append(titleBarView)
@@ -1211,6 +1217,63 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Window size / aspect
 
+  func windowFrameFromGeometry(newSize: NSSize? = nil) -> NSRect? {
+    // set geometry. using `!` should be safe since it passed the regex.
+    if let geometry = playerCore.getGeometry(), let screenFrame = NSScreen.main()?.visibleFrame {
+      var winFrame = window!.frame
+      if let ns = newSize {
+        winFrame.size.width = ns.width
+        winFrame.size.height = ns.height
+      }
+      let winAspect = winFrame.size.aspect
+      // w and h can't take effect at same time
+      if let strw = geometry.w, strw != "0" {
+        let w: CGFloat
+        if strw.hasSuffix("%") {
+          w = CGFloat(Double(String(strw.characters.dropLast()))! * 0.01 * Double(screenFrame.width))
+        } else {
+          w = CGFloat(Int(strw)!)
+        }
+        winFrame.size.width = w
+        winFrame.size.height = w / winAspect
+        hasCustomInitialWidthOrHeight = true
+      } else if let strh = geometry.h, strh != "0" {
+        let h: CGFloat
+        if strh.hasSuffix("%") {
+          h = CGFloat(Double(String(strh.characters.dropLast()))! * 0.01 * Double(screenFrame.height))
+        } else {
+          h = CGFloat(Int(strh)!)
+        }
+        winFrame.size.height = h
+        winFrame.size.width = h * winAspect
+        hasCustomInitialWidthOrHeight = true
+      }
+      // x, origin is window center
+      if let strx = geometry.x, let xSign = geometry.xSign {
+        let x: CGFloat
+        if strx.hasSuffix("%") {
+          x = CGFloat(Double(String(strx.characters.dropLast()))! * 0.01 * Double(screenFrame.width)) - winFrame.width / 2
+        } else {
+          x = CGFloat(Int(strx)!)
+        }
+        winFrame.origin.x = (xSign == "+" ? x : screenFrame.width - x) + screenFrame.origin.x
+      }
+      // y
+      if let stry = geometry.y, let ySign = geometry.ySign {
+        let y: CGFloat
+        if stry.hasSuffix("%") {
+          y = CGFloat(Double(String(stry.characters.dropLast()))! * 0.01 * Double(screenFrame.height)) - winFrame.height / 2
+        } else {
+          y = CGFloat(Int(stry)!)
+        }
+        winFrame.origin.y = (ySign == "+" ? y : screenFrame.height - y) + screenFrame.origin.y
+      }
+      return winFrame
+    } else {
+      return nil
+    }
+  }
+
   /** Set video size when info available. */
   func adjustFrameByVideoSize(_ videoWidth: Int, _ videoHeight: Int) {
     guard let w = window else { return }
@@ -1246,10 +1309,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         // check screen size
         if let screenSize = NSScreen.main()?.visibleFrame.size {
           videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
-          // check default window position
         }
-        rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
+        // guard min size
+        videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize)
+        // check if have geometry set
+        if let wfg = windowFrameFromGeometry(newSize: videoSize) {
+          rect = wfg
+        } else {
+          rect = w.frame.centeredResize(to: videoSize)
+        }
         w.setFrame(rect, display: true, animate: true)
+
       } else {
         // user is navigating in playlist. remain same window width.
         let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)

@@ -67,7 +67,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Status
 
-  var hasCustomInitialWidthOrHeight: Bool = false
+  var cachedGeometry: PlayerCore.GeometryDef?
 
   var touchBarPosLabelWidthLayout: NSLayoutConstraint?
 
@@ -1219,7 +1219,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowFrameFromGeometry(newSize: NSSize? = nil) -> NSRect? {
     // set geometry. using `!` should be safe since it passed the regex.
-    if let geometry = playerCore.getGeometry(), let screenFrame = NSScreen.main()?.visibleFrame {
+    if let geometry = cachedGeometry ?? playerCore.getGeometry(), let screenFrame = NSScreen.main()?.visibleFrame {
+      cachedGeometry = geometry
       var winFrame = window!.frame
       if let ns = newSize {
         winFrame.size.width = ns.width
@@ -1236,7 +1237,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         winFrame.size.width = w
         winFrame.size.height = w / winAspect
-        hasCustomInitialWidthOrHeight = true
       } else if let strh = geometry.h, strh != "0" {
         let h: CGFloat
         if strh.hasSuffix("%") {
@@ -1246,7 +1246,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         winFrame.size.height = h
         winFrame.size.width = h * winAspect
-        hasCustomInitialWidthOrHeight = true
       }
       // x, origin is window center
       if let strx = geometry.x, let xSign = geometry.xSign {
@@ -1257,6 +1256,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           x = CGFloat(Int(strx)!)
         }
         winFrame.origin.x = (xSign == "+" ? x : screenFrame.width - x) + screenFrame.origin.x
+        // if xSign equals "-", need set right border as origin
+        if (xSign == "-") {
+          winFrame.origin.x -= winFrame.width
+        }
       }
       // y
       if let stry = geometry.y, let ySign = geometry.ySign {
@@ -1267,6 +1270,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           y = CGFloat(Int(stry)!)
         }
         winFrame.origin.y = (ySign == "+" ? y : screenFrame.height - y) + screenFrame.origin.y
+        if (ySign == "-") {
+          winFrame.origin.y -= winFrame.height
+        }
       }
       return winFrame
     } else {

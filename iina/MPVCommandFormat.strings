@@ -1,0 +1,16 @@
+/* 
+  MPVCommandFormat.strings
+  iina
+
+  Created by lhc on 17/3/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+
+"seek" = "command value opt:relative|absolute|absolute-percent|relative-percent|exact|keyframes";
+"set" = "command property value";
+"add" = "command property value#+1";
+"cycle" = "command property dir:up|down";
+"multiply" = "command property factor";
+"quit" = "command value";
+"sub-seek" = "command skip:1|-1";

@@ -1,5 +1,6 @@
 PODS:
   - AEXML (4.0.1)
+  - GRMustache.swift (2.0.0)
   - GzipSwift (3.1.2)
   - Just (0.5.7)
   - MASPreferences (1.1.4)
@@ -17,6 +18,7 @@ PODS:
 
 DEPENDENCIES:
   - AEXML
+  - GRMustache.swift
   - GzipSwift
   - Just
   - MASPreferences
@@ -24,11 +26,12 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AEXML: 905e50474c0a261d335aa8be4ee32d22d69b6fd5
+  GRMustache.swift: 8a547c12bea16052071b2b540af83d770075f0eb
   GzipSwift: 86700e6530b3aa5e782ed7107cde2deea6b16688
   Just: d19e769d86b965e39ae58cb3c0cbad07706634a8
   MASPreferences: 7bdcfe891d7840453cf48f95fa866c3e152ace7a
   PromiseKit: c98453ff78544c0ad5bb0ea980782e6875f47978
 
-PODFILE CHECKSUM: e3f5f493bf96cedbedde65343f4dc9e2ca6d3043
+PODFILE CHECKSUM: 7bc6111c191d1fa43fa2a156023797fa28b7e775
 
 COCOAPODS: 1.2.0

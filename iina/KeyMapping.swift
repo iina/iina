@@ -56,6 +56,10 @@ class KeyMapping {
     }
   }
 
+  var prettyCommand: String {
+    return KeyBindingTranslator.readable(fromCommand: action)
+  }
+
   init(key: String, action: [String], comment: String? = nil) {
     self.key = key
     self.action = action

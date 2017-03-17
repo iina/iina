@@ -355,7 +355,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
     if identifier == Constants.Identifier.key {
       return mapping.prettyKey
     } else if identifier == Constants.Identifier.action {
-      return mapping.readableAction
+      return mapping.prettyCommand
     }
     return ""
   }

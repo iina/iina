@@ -183,6 +183,12 @@ extension NSMenu {
   }
 }
 
+extension String {
+  func splitted(by separator: Character) -> [String] {
+    return self.characters.split(separator: separator).map { String($0) }
+  }
+}
+
 extension Int {
   func toStr() -> String {
     return "\(self)"

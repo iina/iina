@@ -7,6 +7,31 @@
 */
 
 
+/**
+ Only for internal use. `KeyBindingTranslator` will use formats in this file to generate a data dict
+ for Mustache rendering.
+
+ Examples:
+
+ <key>
+ will add a key and corresponding value in outputted data, value will be `nil` if not exist
+ e.g. "set pause yes" =>
+      ["command": "set", "property": "pause", "value": "yes"]
+
+
+ <Key>#<default>
+ instead of outputting nil, set a default value for the key.
+ e.g. "add volume" =>
+ ["command": "add", "property": "volume", "value": "+1"]
+
+
+ <key>:<choice(default)>|<choice>
+ set value to the first choice if it doesn't exist. at the same time, add an extra entry "<key>_<choice>"="true"
+ e.g. "sub-seek 1" =>
+ ["command": "sub-seek", "skip": "1", "skip_1": "true"]
+ */
+
+
 "seek" = "command value opt:relative|absolute|absolute-percent|relative-percent|exact|keyframes";
 "set" = "command property value";
 "add" = "command property value#+1";

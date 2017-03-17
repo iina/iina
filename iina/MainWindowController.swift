@@ -67,6 +67,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Status
 
+  var cachedGeometry: PlayerCore.GeometryDef?
+
   var touchBarPosLabelWidthLayout: NSLayoutConstraint?
 
   var mousePosRelatedToWindow: CGPoint?
@@ -77,6 +79,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       playerCore.mpvController.setFlag(MPVOption.Window.fullscreen, isInFullScreen)
     }
   }
+
+  var isOntop: Bool = false {
+    didSet {
+      playerCore.mpvController.setFlag(MPVOption.Window.ontop, isOntop)
+    }
+  }
+
   var isInPIP: Bool = false
   var isInInteractiveMode: Bool = false
 
@@ -272,6 +281,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // size
     w.minSize = minSize
+    if let wf = windowFrameFromGeometry() {
+      w.setFrame(wf, display: false)
+    }
+
     // fade-able views
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
     fadeableViews.append(titleBarView)
@@ -339,8 +352,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         self.toggleWindowFullScreen()
       }
     }
+    let ontopObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.ontopChanged, object: nil, queue: .main) { [unowned self] _ in
+      let ontop = self.playerCore.mpvController.getFlag(MPVOption.Window.ontop)
+      if ontop != self.isOntop {
+        self.isOntop = ontop
+        self.setWindowFloatingOnTop(ontop)
+      }
+    }
     notificationObservers.append(fsObserver)
-
+    notificationObservers.append(ontopObserver)
   }
 
   deinit {
@@ -715,7 +735,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updateTimer()
     // always on top
     if ud.bool(forKey: PK.alwaysFloatOnTop) {
-      playerCore.info.isAlwaysOntop = true
+      isOntop = true
       setWindowFloatingOnTop(true)
     }
     // truncate middle for title
@@ -783,7 +803,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidExitFullScreen(_ notification: Notification) {
     // if is floating, enable it again
-    if playerCore.info.isAlwaysOntop {
+    if isOntop {
       setWindowFloatingOnTop(true)
     }
   }
@@ -1196,6 +1216,69 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Window size / aspect
 
+  func windowFrameFromGeometry(newSize: NSSize? = nil) -> NSRect? {
+    // set geometry. using `!` should be safe since it passed the regex.
+    if let geometry = cachedGeometry ?? playerCore.getGeometry(), let screenFrame = NSScreen.main()?.visibleFrame {
+      cachedGeometry = geometry
+      var winFrame = window!.frame
+      if let ns = newSize {
+        winFrame.size.width = ns.width
+        winFrame.size.height = ns.height
+      }
+      let winAspect = winFrame.size.aspect
+      // w and h can't take effect at same time
+      if let strw = geometry.w, strw != "0" {
+        let w: CGFloat
+        if strw.hasSuffix("%") {
+          w = CGFloat(Double(String(strw.characters.dropLast()))! * 0.01 * Double(screenFrame.width))
+        } else {
+          w = CGFloat(Int(strw)!)
+        }
+        winFrame.size.width = w
+        winFrame.size.height = w / winAspect
+      } else if let strh = geometry.h, strh != "0" {
+        let h: CGFloat
+        if strh.hasSuffix("%") {
+          h = CGFloat(Double(String(strh.characters.dropLast()))! * 0.01 * Double(screenFrame.height))
+        } else {
+          h = CGFloat(Int(strh)!)
+        }
+        winFrame.size.height = h
+        winFrame.size.width = h * winAspect
+      }
+      // x, origin is window center
+      if let strx = geometry.x, let xSign = geometry.xSign {
+        let x: CGFloat
+        if strx.hasSuffix("%") {
+          x = CGFloat(Double(String(strx.characters.dropLast()))! * 0.01 * Double(screenFrame.width)) - winFrame.width / 2
+        } else {
+          x = CGFloat(Int(strx)!)
+        }
+        winFrame.origin.x = (xSign == "+" ? x : screenFrame.width - x) + screenFrame.origin.x
+        // if xSign equals "-", need set right border as origin
+        if (xSign == "-") {
+          winFrame.origin.x -= winFrame.width
+        }
+      }
+      // y
+      if let stry = geometry.y, let ySign = geometry.ySign {
+        let y: CGFloat
+        if stry.hasSuffix("%") {
+          y = CGFloat(Double(String(stry.characters.dropLast()))! * 0.01 * Double(screenFrame.height)) - winFrame.height / 2
+        } else {
+          y = CGFloat(Int(stry)!)
+        }
+        winFrame.origin.y = (ySign == "+" ? y : screenFrame.height - y) + screenFrame.origin.y
+        if (ySign == "-") {
+          winFrame.origin.y -= winFrame.height
+        }
+      }
+      return winFrame
+    } else {
+      return nil
+    }
+  }
+
   /** Set video size when info available. */
   func adjustFrameByVideoSize(_ videoWidth: Int, _ videoHeight: Int) {
     guard let w = window else { return }
@@ -1231,10 +1314,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         // check screen size
         if let screenSize = NSScreen.main()?.visibleFrame.size {
           videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
-          // check default window position
         }
-        rect = w.frame.centeredResize(to: videoSize.satisfyMinSizeWithSameAspectRatio(minSize))
+        // guard min size
+        videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize)
+        // check if have geometry set
+        if let wfg = windowFrameFromGeometry(newSize: videoSize) {
+          rect = wfg
+        } else {
+          rect = w.frame.centeredResize(to: videoSize)
+        }
         w.setFrame(rect, display: true, animate: true)
+
       } else {
         // user is navigating in playlist. remain same window width.
         let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
@@ -1265,12 +1355,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func toggleWindowFullScreen() {
     // if is floating, disable it temporarily.
     // it will be enabled again in `windowDidExitFullScreen()`.
-    if !isInFullScreen && playerCore.info.isAlwaysOntop {
+    if !isInFullScreen && isOntop {
       setWindowFloatingOnTop(false)
     }
     window?.toggleFullScreen(self)
   }
 
+  /** This method will not set `isOntop`! */
   func setWindowFloatingOnTop(_ onTop: Bool) {
     guard let window = window else { return }
     if onTop {

@@ -69,6 +69,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     // tableview
     kbTableView.dataSource = self
     kbTableView.delegate = self
+    kbTableView.doubleAction = #selector(editRow)
 
     // config files
     // - default
@@ -352,7 +353,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
 
     guard let mapping = currentMapping.at(row) else { return nil }
     if identifier == Constants.Identifier.key {
-      return mapping.key
+      return mapping.prettyKey
     } else if identifier == Constants.Identifier.action {
       return mapping.readableAction
     }
@@ -368,6 +369,14 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
       currentMapping[row].action = value.characters.split(separator: " ").map { return String($0) }
     }
     saveToConfFile()
+  }
+
+  func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
+    return false
+  }
+
+  func editRow() {
+    print(kbTableView.selectedRow)
   }
 
 }

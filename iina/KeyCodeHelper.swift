@@ -128,6 +128,10 @@ class KeyCodeHelper {
     0x7F: ("POWER", nil) // This should be KeyCode::PC_POWER.
   ]
 
+  static var reversedKeyMapForShift = Dictionary(keyMap.flatMap { (k, v) in
+    return v.1 == nil ? nil : (v.1!, v.0)
+  })
+
   static func canBeModifiedByShift(_ key: UInt16) -> Bool {
     return key != 0x24 && (key <= 0x2F || key == 0x32)
   }

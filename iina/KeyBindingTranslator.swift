@@ -11,6 +11,12 @@ import Mustache
 
 class KeyBindingTranslator {
 
+  static let l10nDic: [String: String] = {
+    let filePath = Bundle.main.path(forResource: "KeyBinding", ofType: "strings")!
+    let dic = NSDictionary(contentsOfFile: filePath) as! [String : String]
+    return dic
+  }()
+
   static let mpvCmdFormat: [String: String] = {
     let filePath = Bundle.main.path(forResource: "MPVCommandFormat", ofType: "strings")!
     let dic = NSDictionary(contentsOfFile: filePath) as! [String : String]
@@ -28,7 +34,7 @@ class KeyBindingTranslator {
 
     // If translated
     if let mpvFormat = KeyBindingTranslator.mpvCmdFormat[cmd],
-      let cmdTranslation = KeyBindingItem.l10nDic["read." + cmd],
+      let cmdTranslation = l10nDic["read." + cmd],
       let tmpl = try? Template(string: cmdTranslation) {
       // parse command
       var data: [String: String] = [:]
@@ -55,13 +61,13 @@ class KeyBindingTranslator {
         }
       }
       // add translation for property
-      if let opt = data["property"], let optTranslation = KeyBindingItem.l10nDic["opt." + opt] {
+      if let opt = data["property"], let optTranslation = l10nDic["opt." + opt] {
         data["property"] = optTranslation
       }
       // add translation for values
       if let value = data["value"] {
         if value == "yes" || value == "no" {
-          data["value"] = KeyBindingItem.l10nDic[value]
+          data["value"] = l10nDic[value]
         } else if cmd == "add", !value.hasPrefix("-"), !value.hasPrefix("+") {
           data["value"] = "+" + value
         }
@@ -95,7 +101,7 @@ class KeyBindingTranslator {
       }
     }
     // If not translated, just translate the cmd name
-    if let translationForCmd = KeyBindingItem.l10nDic["cmd." + cmd] {
+    if let translationForCmd = l10nDic["cmd." + cmd] {
       commands[0] = translationForCmd
     }
     return commands.joined(separator: " ")

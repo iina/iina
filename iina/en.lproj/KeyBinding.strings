@@ -75,6 +75,7 @@
 "opt.sub-pos" = "Sub pos";
 "opt.sub-scale" = "Sub scale";
 "opt.sub-visibility" = "Sub visibility";
+"opt.sub-ass-style-override" = "ASS style override";
 
 "opt.fullscreen" = "Fullscreen";
 
@@ -85,5 +86,6 @@
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "Multiply {{property}} by {{factor}}x";
 "read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
+"read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
 "read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
 "read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";

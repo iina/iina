@@ -17,8 +17,12 @@ class KeyBindingTranslator {
     return dic
   }()
 
+  static private let UnsupportedCmdPrefix: [String] = [
+    "no-osd", "osd-auto", "osd-bar", "osd-msg-bar", "raw", "repeatable", "expand-properties"
+  ]
+
   static func readable(fromCommand action: [String]) -> String {
-    var commands = action.filter { $0 != "no-osd" }
+    var commands = action.filter { !KeyBindingTranslator.UnsupportedCmdPrefix.contains($0) }
     // Command
     let cmd = commands[0]
 
@@ -30,9 +34,11 @@ class KeyBindingTranslator {
       var data: [String: String] = [:]
       for (index, part) in mpvFormat.splitted(by: " ").enumerated() {
         if part.contains("#") {
+          // check '#' syntax
           let ss = part.splitted(by: "#")
           data[ss[0]] = commands.at(index) ?? ss[1]
         } else if part.contains(":") {
+          // check ':' syntax
           let ss = part.splitted(by: ":")
           let key = ss[0]
           let value = commands.at(index)
@@ -40,6 +46,10 @@ class KeyBindingTranslator {
           let boolKey = key + "_" + (value ?? choices[0])
           data[boolKey] = "true"
           data[key] = commands.at(index)
+        } else if part.hasSuffix("...") {
+          var mPart = part
+          mPart.characters.removeLast(3)
+          data[mPart] = commands[index..<commands.count].joined(separator: " ")
         } else {
           data[part] = commands.at(index)
         }

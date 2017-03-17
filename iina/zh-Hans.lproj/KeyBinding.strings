@@ -75,6 +75,7 @@
 "opt.sub-pos" = "字幕位置";
 "opt.sub-scale" = "字幕缩放";
 "opt.sub-visibility" = "字幕可见";
+"opt.sub-ass-style-override" = "ASS 字幕样式覆盖";
 
 "opt.fullscreen" = "全屏";
 
@@ -85,5 +86,6 @@
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "{{property}} 乘 {{factor}} 倍";
 "read.cycle" = "{{#dir_down}}反向{{/dir_down}}循环 {{property}}";
+"read.cycle-values" = "在 ({{{values}}}) 中循环 {{property}}";
 "read.seek" = "{{#fwd}}向前{{/fwd}}{{#bwd}}向后{{/bwd}}跳转{{#abs}}到{{/abs}} {{value}} {{#sec}}秒{{/sec}}{{#per}}%{{/per}}{{#exact}}（精确）{{/exact}}{{#kf}}（关键帧）{{/kf}}";
 "read.sub-seek" = "跳转到{{#skip_1}}下{{/skip_1}}{{#skip_-1}}上{{/skip_-1}}一句字幕";

@@ -369,19 +369,22 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
 
+  func redraw(_ indicator: NSTextField, constraint: NSLayoutConstraint, slider: NSSlider, value: Double) {
+    indicator.stringValue = String(format: "%.2f%@", value, indicator == speedSliderIndicator ? "x" : "s")
+    let knobPos = slider.knobPointPosition()
+    constraint.constant = knobPos - indicator.frame.width
+    view.layout()
+  }
+
   @IBAction func speedChangedAction(_ sender: NSSlider) {
     // Each step is 64^(1/24)
     //   0       1   ..    7      8      9   ..   24
     // 0.250x 0.297x .. 0.841x 1.000x 1.189x .. 16.00x
     let sliderValue = sender.doubleValue
     let value = AppData.minSpeed * pow((AppData.maxSpeed / AppData.minSpeed), sliderValue / sliderSteps)
-    let speed = String(format: "%.2f", value)
-    speedSliderIndicator.stringValue = "\(speed)x"
-    customSpeedTextField.stringValue = speed
-    let knobPos = sender.knobPointPosition()
-    speedSliderConstraint.constant = knobPos - speedSliderIndicator.frame.width
+    customSpeedTextField.stringValue = String(format: "%.2f", value)
     playerCore.setSpeed(value)
-    view.layout()
+    redraw(speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: value)
   }
 
   @IBAction func customSpeedEditFinishedAction(_ sender: NSTextField) {
@@ -393,11 +396,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if playerCore.info.playSpeed != value {
       playerCore.setSpeed(value)
     }
+    redraw(speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: value)
     if let window = sender.window {
       window.makeFirstResponder(window.contentView)
     }
-    speedSliderConstraint.constant = speedSlider.knobPointPosition() - speedSliderIndicator.frame.width
-    view.layout()
   }
 
   @IBAction func deinterlaceBtnAction(_ sender: AnyObject) {
@@ -469,20 +471,19 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func audioDelayChangedAction(_ sender: NSSlider) {
     let sliderValue = sender.doubleValue
-    audioDelaySliderIndicator.stringValue = "\(sliderValue)s"
-    let knobPos = sender.knobPointPosition()
-    audioDelaySliderConstraint.constant = knobPos - audioDelaySliderIndicator.frame.width
+    redraw(audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: sliderValue)
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerCore.setAudioDelay(sliderValue)
       }
     }
-    view.layout()
   }
 
   @IBAction func customAudioDelayEditFinishedAction(_ sender: AnyObject?) {
     let value = customAudioDelayTextField.doubleValue
     playerCore.setAudioDelay(value)
+    audioDelaySlider.doubleValue = value
+    redraw(audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: value)
   }
 
   @IBAction func audioEqSliderAction(_ sender: NSSlider) {
@@ -521,9 +522,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func subDelayChangedAction(_ sender: NSSlider) {
     let sliderValue = sender.doubleValue
-    subDelaySliderIndicator.stringValue = "\(sliderValue)s"
-    let knobPos = sender.knobPointPosition()
-    subDelaySliderConstraint.constant = knobPos - subDelaySliderIndicator.frame.width
+    redraw(subDelaySliderIndicator, constraint: subDelaySliderConstraint, slider: subDelaySlider, value: sliderValue)
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerCore.setSubDelay(sliderValue)
@@ -536,6 +535,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func customSubDelayEditFinishedAction(_ sender: AnyObject?) {
     let value = customSubDelayTextField.doubleValue
     playerCore.setSubDelay(value)
+    subDelaySlider.doubleValue = value
+    redraw(subDelaySliderIndicator, constraint: subDelaySliderConstraint, slider: subDelaySlider, value: value)
   }
 
   @IBAction func subScaleReset(_ sender: AnyObject) {

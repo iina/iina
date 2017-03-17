@@ -83,7 +83,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var isOntop: Bool = false {
     didSet {
       playerCore.mpvController.setFlag(MPVOption.Window.ontop, isOntop)
-
     }
   }
 

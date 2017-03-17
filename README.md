@@ -12,12 +12,6 @@ Releases: [https://github.com/lhc70000/iina/releases](https://github.com/lhc7000
 Telegram group: 
 [https://t.me/joinchat/AAAAAEBemW7dU8X7IHShwQ](https://t.me/joinchat/AAAAAEBemW7dU8X7IHShwQ)
 
----
-
-When raising an issue, please **use English** if possible.  
-
-在提 issue 时，请尽量使用**英文**！  
-
 # Features
 
 - Based on [mpv](https://github.com/mpv-player/mpv), a powerful media player

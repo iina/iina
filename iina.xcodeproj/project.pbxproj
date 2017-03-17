@@ -283,6 +283,7 @@
 		8450403F1E0ACADD0079C194 /* MPVNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVNode.swift; sourceTree = "<group>"; };
 		845040451E0B0F500079C194 /* CropSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropSettingsViewController.swift; sourceTree = "<group>"; };
 		845040491E0B13230079C194 /* CropBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropBoxView.swift; sourceTree = "<group>"; };
+		845260661E7BC9CC00D3CF6A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SubSelectWindowController.strings"; sourceTree = "<group>"; };
 		8452DD841D3B956D008A543A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		8452DD881D3CB4EF008A543A /* vertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertexShader.glsl; sourceTree = "<group>"; };
 		8452DD8A1D3CB519008A543A /* fragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragmentShader.glsl; sourceTree = "<group>"; };
@@ -1429,6 +1430,7 @@
 			children = (
 				C75540761E7886FE00C13D4A /* Base */,
 				C75540791E78870200C13D4A /* ko */,
+				845260661E7BC9CC00D3CF6A /* zh-Hans */,
 			);
 			name = SubSelectWindowController.xib;
 			sourceTree = "<group>";

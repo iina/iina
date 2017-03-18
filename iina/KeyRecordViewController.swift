@@ -17,15 +17,32 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
 
   private lazy var criterions: [Criterion] = KeyBindingDataLoader.load()
 
+  private var pendingKey: String?
+  private var pendingAction: String?
+
   var keyCode: String {
     get {
       return keyLabel.stringValue
+    }
+    set {
+      if let f = keyLabel {
+        f.stringValue = newValue
+      } else {
+        pendingKey = newValue
+      }
     }
   }
 
   var action: String {
     get {
       return actionTextField.stringValue
+    }
+    set {
+      if let f = actionTextField {
+        f.stringValue = newValue
+      } else {
+        pendingAction = newValue
+      }
     }
   }
 
@@ -37,6 +54,15 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     ruleEditor.canRemoveAllRows = false
     ruleEditor.delegate = self
     ruleEditor.addRow(self)
+
+    if let pk = pendingKey {
+      keyLabel.stringValue = pk
+      pendingKey = nil
+    }
+    if let pa = pendingAction {
+      actionTextField.stringValue = pa
+      pendingAction = nil
+    }
 
     NotificationCenter.default.addObserver(forName: Constants.Noti.keyBindingInputChanged, object: nil, queue: .main) { _ in
       self.updateCommandField()

@@ -29,6 +29,11 @@
  set value to the first choice if it doesn't exist. at the same time, add an extra entry "<key>_<choice>"="true"
  e.g. "sub-seek 1" =>
  ["command": "sub-seek", "skip": "1", "skip_1": "true"]
+ 
+ 
+ <key>...
+ variadic arguments.
+
  */
 
 

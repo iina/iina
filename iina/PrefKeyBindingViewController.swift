@@ -109,15 +109,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
   // MARK: - IBActions
 
-  @IBAction func configSelectAction(_ sender: AnyObject) {
-    guard let title = configSelectPopUp.selectedItem?.title else { return }
-    currentConfName = title
-    currentConfFilePath = getFilePath(forConfig: title)!
-    loadConfigFile()
-    changeButtonEnabled()
-  }
-
-  @IBAction func addKeyMappingBtnAction(_ sender: AnyObject) {
+  func showKeyBindingPanel(ok: () -> Void) {
     let panel = NSAlert()
     panel.messageText = "Add Key Mapping"
     panel.informativeText = "Press any key to start."
@@ -127,6 +119,20 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     panel.addButton(withTitle: "Cancel")
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
+      ok()
+    }
+  }
+
+  @IBAction func configSelectAction(_ sender: AnyObject) {
+    guard let title = configSelectPopUp.selectedItem?.title else { return }
+    currentConfName = title
+    currentConfFilePath = getFilePath(forConfig: title)!
+    loadConfigFile()
+    changeButtonEnabled()
+  }
+
+  @IBAction func addKeyMappingBtnAction(_ sender: AnyObject) {
+    showKeyBindingPanel {
       let key = keyRecordViewController.keyCode
       let action = keyRecordViewController.action
       guard !key.isEmpty && !action.isEmpty else { return }
@@ -134,8 +140,8 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
       currentMapping.append(KeyMapping(key: key, action: splitted))
       kbTableView.reloadData()
       kbTableView.scrollRowToVisible(currentMapping.count - 1)
+      saveToConfFile()
     }
-    saveToConfFile()
   }
 
   @IBAction func removeKeyMappingBtnAction(_ sender: AnyObject) {
@@ -376,7 +382,19 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
   }
 
   func editRow() {
-    print(kbTableView.selectedRow)
+    let selectedData = currentMapping[kbTableView.selectedRow]
+    keyRecordViewController.keyCode = selectedData.key
+    keyRecordViewController.action = selectedData.readableAction
+    showKeyBindingPanel {
+      let key = keyRecordViewController.keyCode
+      let action = keyRecordViewController.action
+      guard !key.isEmpty && !action.isEmpty else { return }
+      let splitted = action.characters.split(separator: " ").map { String($0) }
+      selectedData.key = key
+      selectedData.action = splitted
+      kbTableView.reloadData()
+      saveToConfFile()
+    }
   }
 
 }

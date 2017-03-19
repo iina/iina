@@ -118,8 +118,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     panel.window.initialFirstResponder = keyRecordViewController.keyRecordView
     panel.addButton(withTitle: "OK")
     panel.addButton(withTitle: "Cancel")
-    let response = panel.runModal()
-    if response == NSAlertFirstButtonReturn {
+    if panel.runModal() == NSAlertFirstButtonReturn {
       ok()
     }
   }
@@ -397,7 +396,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
       let key = keyRecordViewController.keyCode
       let action = keyRecordViewController.action
       guard !key.isEmpty && !action.isEmpty else { return }
-      let splitted = action.characters.split(separator: " ").map { String($0) }
+      let splitted = action.components(separatedBy: " ")
       selectedData.key = key
       selectedData.action = splitted
       kbTableView.reloadData()

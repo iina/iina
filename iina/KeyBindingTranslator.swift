@@ -12,22 +12,26 @@ import Mustache
 class KeyBindingTranslator {
 
   static let l10nDic: [String: String] = {
-    let filePath = Bundle.main.path(forResource: "KeyBinding", ofType: "strings")!
-    let dic = NSDictionary(contentsOfFile: filePath) as! [String : String]
+    guard let filePath = Bundle.main.path(forResource: "KeyBinding", ofType: "strings"),
+      let dic = NSDictionary(contentsOfFile: filePath) as? [String : String] else {
+        return [:]
+    }
     return dic
   }()
 
   static let mpvCmdFormat: [String: String] = {
-    let filePath = Bundle.main.path(forResource: "MPVCommandFormat", ofType: "strings")!
-    let dic = NSDictionary(contentsOfFile: filePath) as! [String : String]
+    guard let filePath = Bundle.main.path(forResource: "MPVCommandFormat", ofType: "strings"),
+      let dic = NSDictionary(contentsOfFile: filePath) as? [String : String] else {
+        return [:]
+    }
     return dic
   }()
 
-  static private let UnsupportedCmdPrefix: [String] = [
+  static private let UnsupportedCmdPrefix = [
     "no-osd", "osd-auto", "osd-bar", "osd-msg-bar", "raw", "repeatable", "expand-properties"
   ]
 
-  static func readable(fromCommand action: [String]) -> String {
+  static func readableCommand(fromAction action: [String]) -> String {
     var commands = action.filter { !KeyBindingTranslator.UnsupportedCmdPrefix.contains($0) }
     // Command
     let cmd = commands[0]
@@ -38,17 +42,17 @@ class KeyBindingTranslator {
       let tmpl = try? Template(string: cmdTranslation) {
       // parse command
       var data: [String: String] = [:]
-      for (index, part) in mpvFormat.splitted(by: " ").enumerated() {
+      for (index, part) in mpvFormat.components(separatedBy: " ").enumerated() {
         if part.contains("#") {
           // check '#' syntax
-          let ss = part.splitted(by: "#")
+          let ss = part.components(separatedBy: "#")
           data[ss[0]] = commands.at(index) ?? ss[1]
         } else if part.contains(":") {
           // check ':' syntax
-          let ss = part.splitted(by: ":")
+          let ss = part.components(separatedBy: ":")
           let key = ss[0]
           let value = commands.at(index)
-          let choices = ss[1].splitted(by: "|")
+          let choices = ss[1].components(separatedBy: "|")
           let boolKey = key + "_" + (value ?? choices[0])
           data[boolKey] = "true"
           data[key] = commands.at(index)
@@ -74,7 +78,7 @@ class KeyBindingTranslator {
         // tweak for "seek"
         if cmd == "seek" {
           let seekOpt = data["opt"] ?? "relative"
-          let splittedOpt = seekOpt.splitted(by: "+")
+          let splittedOpt = seekOpt.components(separatedBy: "+")
           if splittedOpt.contains(where: { $0.hasPrefix("absolute") }) {
             data["abs"] = "true"
           } else if value.hasPrefix("-") {

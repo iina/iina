@@ -153,16 +153,6 @@ extension NSPoint {
   }
 }
 
-extension Dictionary {
-  init<S: Sequence>
-    (_ seq: S) where S.Iterator.Element == Element {
-    self.init()
-    for (k, v) in seq {
-      self[k] = v
-    }
-  }
-}
-
 extension Array {
   func at(_ pos: Int) -> Element? {
     if pos < count {
@@ -180,12 +170,6 @@ extension NSMenu {
     menuItem.representedObject = obj
     menuItem.state = stateOn ? NSOnState : NSOffState
     self.addItem(menuItem)
-  }
-}
-
-extension String {
-  func splitted(by separator: Character) -> [String] {
-    return self.characters.split(separator: separator).map { String($0) }
   }
 }
 

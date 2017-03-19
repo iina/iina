@@ -10,7 +10,7 @@ import Foundation
 
 class KeyMapping {
 
-  static let prettyKeySymbol: [String: String] = [
+  static let prettyKeySymbol = [
     "META": "⌘",
     "ENTER": "↩︎",
     "SHIFT": "⇧",
@@ -49,9 +49,8 @@ class KeyMapping {
   var prettyKey: String {
     get {
       return key
-        .characters.split(separator: "+")
-        .map { charSeq -> String in
-          let token = String(charSeq)
+        .components(separatedBy: "+")
+        .map { token -> String in
           let uppercasedToken = token.uppercased()
           if let symbol = KeyMapping.prettyKeySymbol[uppercasedToken] {
             return symbol
@@ -65,7 +64,7 @@ class KeyMapping {
   }
 
   var prettyCommand: String {
-    return KeyBindingTranslator.readable(fromCommand: action)
+    return KeyBindingTranslator.readableCommand(fromAction: action)
   }
 
   init(key: String, action: [String], comment: String? = nil) {

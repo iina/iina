@@ -72,7 +72,7 @@ class PrefSubViewController: NSViewController {
           if status == errSecSuccess {
             UserDefaults.standard.set(username, forKey: Preference.Key.openSubUsername)
           } else {
-            Utility.showAlert(message: "Cannot save your password to Keychain: \(SecCopyErrorMessageString(status, nil))")
+            Utility.showAlert(message: "Cannot save your password to Keychain: \(String(describing: SecCopyErrorMessageString(status, nil)))")
           }
         }.always {
           self.loginIndicator.isHidden = true

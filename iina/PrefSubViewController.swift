@@ -57,14 +57,14 @@ class PrefSubViewController: NSViewController {
     subLangTokenView.delegate = self
     loginIndicator.isHidden = true
 
-    fontSizeTextField.formatter = RestrictedNumberFormatter(0, max: nil, isDecimal: false)
-    fontBlurTextField.formatter = RestrictedNumberFormatter(0, max: 20, isDecimal: true)
-    fontSpacingTextField.formatter = RestrictedNumberFormatter(nil, max: nil, isDecimal: true)
-    borderSizeTextField.formatter = RestrictedNumberFormatter(0, max: nil, isDecimal: false)
-    shadowOffsetTextField.formatter = RestrictedNumberFormatter(0, max: nil, isDecimal: false)
-    positionXTextField.formatter = RestrictedNumberFormatter(nil, max: nil, isDecimal: false)
-    positionYTextField.formatter = RestrictedNumberFormatter(nil, max: nil, isDecimal: false)
-    verticalPositionTextField.formatter = RestrictedNumberFormatter(0, max: 100, isDecimal: false)
+    fontSizeTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal: false)
+    fontBlurTextField.formatter = RestrictedNumberFormatter(min: 0, max: 20, isDecimal: true)
+    fontSpacingTextField.formatter = RestrictedNumberFormatter(isDecimal: true)
+    borderSizeTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal: false)
+    shadowOffsetTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal: false)
+    positionXTextField.formatter = RestrictedNumberFormatter(isDecimal: false)
+    positionYTextField.formatter = RestrictedNumberFormatter(isDecimal: false)
+    verticalPositionTextField.formatter = RestrictedNumberFormatter(min: 0, max: 100, isDecimal: false)
   }
 
   @IBAction func chooseSubFontAction(_ sender: AnyObject) {

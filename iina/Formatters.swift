@@ -10,17 +10,13 @@ import Cocoa
 
 class RestrictedNumberFormatter : NumberFormatter {
 
-  init(_ min: Double?, max: Double?, isDecimal: Bool) {
+  init(min: Double? = nil, max: Double? = nil, isDecimal: Bool) {
     super.init()
     if isDecimal {
       self.numberStyle = .decimal
     }
-    if let minValue = min {
-      minimum = minValue as NSNumber?
-    }
-    if let maxValue = max {
-      maximum = maxValue as NSNumber?
-    }
+    minimum = min as NSNumber?
+    maximum = max as NSNumber?
   }
 
   override init() {
@@ -28,7 +24,7 @@ class RestrictedNumberFormatter : NumberFormatter {
   }
   
   required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    super.init(coder: aDecoder)
   }
 
   override func isPartialStringValid(_ partialString: String, newEditingString newString: AutoreleasingUnsafeMutablePointer<NSString?>?, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {

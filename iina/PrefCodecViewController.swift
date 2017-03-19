@@ -51,9 +51,9 @@ class PrefCodecViewController: NSViewController {
     spdifDTSBtn.state = spdif.contains("dts") ? NSOnState : NSOffState
     spdifDTSHDBtn.state = spdif.contains("dts-hd") ? NSOnState : NSOffState
 
-    videoThreadsTextField.formatter = RestrictedNumberFormatter(0, max: nil, isDecimal: false)
-    audioThreadsTextField.formatter = RestrictedNumberFormatter(0, max: nil, isDecimal: false)
-    maximumVolumeTextField.formatter = RestrictedNumberFormatter(100, max: 1000, isDecimal: false)
+    videoThreadsTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal: false)
+    audioThreadsTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal: false)
+    maximumVolumeTextField.formatter = RestrictedNumberFormatter(min: 100, max: 1000, isDecimal: false)
   }
 
   @IBAction func spdifBtnAction(_ sender: AnyObject) {

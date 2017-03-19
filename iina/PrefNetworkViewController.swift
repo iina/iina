@@ -40,8 +40,8 @@ class PrefNetworkViewController: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    defaultCacheSizeTextField.formatter = RestrictedNumberFormatter(0, max: nil, isDecimal: false)
-    cacheBufferSizeTextField.formatter = RestrictedNumberFormatter(0, max: nil, isDecimal:false)
+    defaultCacheSizeTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal: false)
+    cacheBufferSizeTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal:false)
   }
 
 }

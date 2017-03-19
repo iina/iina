@@ -47,9 +47,9 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    OSCAutoHideTimeTextField.formatter = RestrictedNumberFormatter(0, max: nil, isDecimal: true)
-    OSDAutoHideTimeTextField.formatter = RestrictedNumberFormatter(0, max: nil, isDecimal: true)
-    OSCFontSizeTextField.formatter = RestrictedNumberFormatter(5, max: nil, isDecimal: true)
+    OSCAutoHideTimeTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal: true)
+    OSDAutoHideTimeTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal: true)
+    OSCFontSizeTextField.formatter = RestrictedNumberFormatter(min: 5, isDecimal: true)
   }
 
 }

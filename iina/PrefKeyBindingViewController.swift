@@ -49,6 +49,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   var currentConfFilePath: String!
 
   var shouldEnableEdit: Bool = true
+  var displayRawValues: Bool = false
 
   // MARK: - Outlets
 
@@ -273,6 +274,12 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     changeButtonEnabled()
   }
 
+  @IBAction func displayRawValueAction(_ sender: NSButton) {
+    displayRawValues = sender.state == NSOnState
+    kbTableView.doubleAction = displayRawValues ? nil : #selector(editRow)
+    kbTableView.reloadData()
+  }
+
   // MARK: - UI
 
   private func changeButtonEnabled() {
@@ -359,9 +366,9 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
 
     guard let mapping = currentMapping.at(row) else { return nil }
     if identifier == Constants.Identifier.key {
-      return mapping.prettyKey
+      return displayRawValues ? mapping.key : mapping.prettyKey
     } else if identifier == Constants.Identifier.action {
-      return mapping.prettyCommand
+      return displayRawValues ? mapping.readableAction : mapping.prettyCommand
     }
     return ""
   }
@@ -378,10 +385,11 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
   }
 
   func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
-    return false
+    return displayRawValues
   }
 
   func editRow() {
+    guard shouldEnableEdit else { return }
     let selectedData = currentMapping[kbTableView.selectedRow]
     keyRecordViewController.keyCode = selectedData.key
     keyRecordViewController.action = selectedData.readableAction

@@ -195,7 +195,27 @@
                                     <action selector="removeKeyMappingBtnAction:" target="-2" id="AMw-dz-4NC"/>
                                 </connections>
                             </button>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="l2M-TH-eCt">
+                                <rect key="frame" x="330" y="1" width="104" height="18"/>
+                                <buttonCell key="cell" type="check" title="Display raw values" bezelStyle="regularSquare" imagePosition="left" controlSize="mini" inset="2" id="3RK-1k-otl">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="miniSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="displayRawValueAction:" target="-2" id="EX1-Ia-ua1"/>
+                                </connections>
+                            </button>
+                            <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="GnK-98-Zrg">
+                                <rect key="frame" x="323" y="0.0" width="5" height="20"/>
+                            </box>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="l2M-TH-eCt" firstAttribute="leading" secondItem="GnK-98-Zrg" secondAttribute="trailing" constant="8" id="Qbj-KE-dFO"/>
+                            <constraint firstItem="GnK-98-Zrg" firstAttribute="top" secondItem="0le-1T-r5f" secondAttribute="top" id="XSn-ja-Q3m"/>
+                            <constraint firstAttribute="trailing" secondItem="l2M-TH-eCt" secondAttribute="trailing" constant="6" id="ced-22-S2H"/>
+                            <constraint firstItem="l2M-TH-eCt" firstAttribute="centerY" secondItem="0le-1T-r5f" secondAttribute="centerY" constant="1" id="umX-M8-lLx"/>
+                            <constraint firstAttribute="bottom" secondItem="GnK-98-Zrg" secondAttribute="bottom" id="wG6-Hf-CPU"/>
+                        </constraints>
                     </view>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="fam-VI-AzZ"/>

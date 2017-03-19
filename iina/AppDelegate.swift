@@ -126,7 +126,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let url = URL(fileURLWithPath: filename)
     // Note the controller when user want to record opened files, otherwise will note the controller in PlayerCore
     // for all files played
-    if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) && !playerCore.ud.bool(forKey: Preference.Key.recordAllFiles) {
+    if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) && playerCore.ud.bool(forKey: Preference.Key.recordOnlyManuallyOpenedFiles) {
       NSDocumentController.shared().noteNewRecentDocumentURL(url)
     }
     playerCore.openFile(url)
@@ -174,7 +174,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       if let url = panel.url {
         // Note the controller when user want to record opened files, otherwise will note the controller in PlayerCore
         // for all files played
-        if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) && !playerCore.ud.bool(forKey: Preference.Key.recordAllFiles) {
+        if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) && playerCore.ud.bool(forKey: Preference.Key.recordOnlyManuallyOpenedFiles) {
           NSDocumentController.shared().noteNewRecentDocumentURL(url)
         }
         playerCore.openFile(url)

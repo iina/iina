@@ -329,13 +329,13 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="Mhb-IV-Asl"/>
                     </constraints>
-                    <buttonCell key="cell" type="check" title="Record all played videos in recently opend" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ekf-td-zpk">
+                    <buttonCell key="cell" type="check" title="Open Recent menu only includes manually opened files" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ekf-td-zpk">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
+                        <binding destination="IBP-Mz-Maa" name="value" keyPath="values.recordOnlyManuallyOpenedFiles" id="bnX-Kg-u7Y"/>
                         <binding destination="IBP-Mz-Maa" name="enabled" keyPath="values.recordRecentFiles" id="pUN-no-lKA"/>
-                        <binding destination="IBP-Mz-Maa" name="value" keyPath="values.recordAllFiles" id="zTM-dd-kCv"/>
                     </connections>
                 </button>
             </subviews>

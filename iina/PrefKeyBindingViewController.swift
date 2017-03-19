@@ -111,8 +111,8 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
   func showKeyBindingPanel(ok: () -> Void) {
     let panel = NSAlert()
-    panel.messageText = "Add Key Mapping"
-    panel.informativeText = "Press any key to start."
+    panel.messageText = "Key Mapping"
+    panel.informativeText = "Press any key to record."
     panel.accessoryView = keyRecordViewController.view
     panel.window.initialFirstResponder = keyRecordViewController.keyRecordView
     panel.addButton(withTitle: "OK")

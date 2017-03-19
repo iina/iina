@@ -12,18 +12,26 @@ class KeyMapping {
 
   static let prettyKeySymbol: [String: String] = [
     "META": "⌘",
-    "ENTER": "⏎",
+    "ENTER": "↩︎",
     "SHIFT": "⇧",
     "ALT": "⌥",
     "CTRL":"⌃",
     "SPACE": "␣",
-    "DEL": "⌫",
+    "BS": "⌫",
+    "DEL": "⌦",
     "TAB": "⇥",
     "ESC": "⎋",
     "UP": "↑",
     "DOWN": "↓",
     "LEFT": "←",
-    "RIGHT" : "→"
+    "RIGHT" : "→",
+    "PGUP": "⇞",
+    "PGDWN": "⇟",
+    "HOME": "↖︎",
+    "END": "↘︎",
+    "PLAY": "▶︎\u{2006}❙\u{200A}❙",
+    "PREV": "◀︎◀︎",
+    "NEXT": "▶︎▶︎"
   ]
 
   var key: String

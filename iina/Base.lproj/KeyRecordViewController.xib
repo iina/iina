@@ -45,7 +45,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="gEe-Ws-Den"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" focusRingType="none" drawsBackground="YES" usesSingleLineMode="YES" id="z0F-wj-JKA">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" focusRingType="none" drawsBackground="YES" usesSingleLineMode="YES" id="z0F-wj-JKA">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -88,10 +88,7 @@
                     </scroller>
                 </scrollView>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uvc-Ad-e71">
-                    <rect key="frame" x="0.0" y="89" width="140" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="Que-Bf-gCM"/>
-                    </constraints>
+                    <rect key="frame" x="112" y="90" width="94" height="17"/>
                     <popUpButtonCell key="cell" type="roundRect" title="Media keys…" bezelStyle="roundedRect" alignment="center" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="aN6-RD-WKe">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -110,21 +107,47 @@
                         <action selector="ChooseMediaKeyAction:" target="-2" id="lcy-rG-UYB"/>
                     </connections>
                 </popUpButton>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyu-uZ-u4y">
+                    <rect key="frame" x="-2" y="92" width="108" height="14"/>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You need to choose" id="5ka-4N-rOs">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XC5-O1-Yq2">
+                    <rect key="frame" x="212" y="92" width="54" height="14"/>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="manually." id="oLU-uj-hjt">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ehc-8J-6hY">
+                    <rect key="frame" x="0.0" y="78" width="480" height="5"/>
+                </box>
             </subviews>
             <constraints>
                 <constraint firstItem="24G-a7-cRM" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="4eP-VG-6UP"/>
-                <constraint firstItem="Q4h-ui-SRm" firstAttribute="top" secondItem="LZ8-DJ-i0e" secondAttribute="bottom" constant="42" id="A6y-r9-hco"/>
+                <constraint firstItem="XC5-O1-Yq2" firstAttribute="leading" secondItem="Uvc-Ad-e71" secondAttribute="trailing" constant="8" id="5rn-PR-cru"/>
+                <constraint firstItem="ehc-8J-6hY" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="CR6-q3-4he"/>
+                <constraint firstItem="Q4h-ui-SRm" firstAttribute="top" secondItem="ehc-8J-6hY" secondAttribute="bottom" constant="8" id="F8h-FH-Nwq"/>
+                <constraint firstAttribute="trailing" secondItem="ehc-8J-6hY" secondAttribute="trailing" id="H7d-NV-ZrV"/>
+                <constraint firstItem="uyu-uZ-u4y" firstAttribute="top" secondItem="LZ8-DJ-i0e" secondAttribute="bottom" constant="8" id="HjA-HO-Fxx"/>
                 <constraint firstAttribute="trailing" secondItem="y9W-a9-7sk" secondAttribute="trailing" id="Jsy-8K-AVg"/>
                 <constraint firstItem="Q4h-ui-SRm" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="PWR-BD-XDF"/>
+                <constraint firstItem="Uvc-Ad-e71" firstAttribute="baseline" secondItem="uyu-uZ-u4y" secondAttribute="baseline" id="Pr1-SM-brf"/>
+                <constraint firstItem="XC5-O1-Yq2" firstAttribute="baseline" secondItem="uyu-uZ-u4y" secondAttribute="baseline" id="VL2-mZ-2xU"/>
                 <constraint firstAttribute="trailing" secondItem="Q4h-ui-SRm" secondAttribute="trailing" id="WVx-dp-0NP"/>
+                <constraint firstItem="ehc-8J-6hY" firstAttribute="top" secondItem="uyu-uZ-u4y" secondAttribute="bottom" constant="11" id="ZUu-4D-5yY"/>
                 <constraint firstItem="y9W-a9-7sk" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="ZWv-09-F64"/>
+                <constraint firstItem="Uvc-Ad-e71" firstAttribute="leading" secondItem="uyu-uZ-u4y" secondAttribute="trailing" constant="8" id="b1K-eF-vK7"/>
                 <constraint firstAttribute="trailing" secondItem="LZ8-DJ-i0e" secondAttribute="trailing" id="c0J-o9-dRP"/>
-                <constraint firstItem="Uvc-Ad-e71" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="e7U-oO-T8C"/>
+                <constraint firstItem="uyu-uZ-u4y" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="d6B-Ta-AY8"/>
                 <constraint firstAttribute="bottom" secondItem="24G-a7-cRM" secondAttribute="bottom" constant="7" id="fFX-cM-Ju2"/>
                 <constraint firstAttribute="trailing" secondItem="24G-a7-cRM" secondAttribute="trailing" id="gwS-fV-JVt"/>
                 <constraint firstItem="LZ8-DJ-i0e" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="ohU-zG-czm"/>
                 <constraint firstItem="y9W-a9-7sk" firstAttribute="top" secondItem="Q4h-ui-SRm" secondAttribute="bottom" constant="2" id="rlA-oC-ItM"/>
-                <constraint firstItem="Uvc-Ad-e71" firstAttribute="top" secondItem="LZ8-DJ-i0e" secondAttribute="bottom" constant="8" id="ueX-Yb-o3N"/>
                 <constraint firstItem="LZ8-DJ-i0e" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="zSD-EJ-u6N"/>
             </constraints>
             <point key="canvasLocation" x="43" y="98"/>

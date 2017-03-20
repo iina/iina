@@ -139,6 +139,7 @@
                 <constraint firstItem="Uvc-Ad-e71" firstAttribute="baseline" secondItem="uyu-uZ-u4y" secondAttribute="baseline" id="Pr1-SM-brf"/>
                 <constraint firstItem="XC5-O1-Yq2" firstAttribute="baseline" secondItem="uyu-uZ-u4y" secondAttribute="baseline" id="VL2-mZ-2xU"/>
                 <constraint firstAttribute="trailing" secondItem="Q4h-ui-SRm" secondAttribute="trailing" id="WVx-dp-0NP"/>
+                <constraint firstItem="24G-a7-cRM" firstAttribute="top" secondItem="aaj-fS-PWS" secondAttribute="bottom" constant="-1" id="Ydo-eJ-Cgp"/>
                 <constraint firstItem="ehc-8J-6hY" firstAttribute="top" secondItem="uyu-uZ-u4y" secondAttribute="bottom" constant="11" id="ZUu-4D-5yY"/>
                 <constraint firstItem="y9W-a9-7sk" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="ZWv-09-F64"/>
                 <constraint firstItem="Uvc-Ad-e71" firstAttribute="leading" secondItem="uyu-uZ-u4y" secondAttribute="trailing" constant="8" id="b1K-eF-vK7"/>

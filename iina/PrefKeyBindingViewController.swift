@@ -35,8 +35,6 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
   var hasResizableWidth: Bool = false
 
-  lazy var keyRecordViewController: KeyRecordViewController = KeyRecordViewController()
-
   static let defaultConfigs: [String: String] = [
     "IINA Default": Bundle.main.path(forResource: "iina-default-input", ofType: "conf", inDirectory: "config")!,
     "MPV Default": Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!
@@ -110,8 +108,11 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
   // MARK: - IBActions
 
-  func showKeyBindingPanel(ok: () -> Void) {
+  func showKeyBindingPanel(key: String = "", action: String = "", ok: (String, String) -> Void) {
     let panel = NSAlert()
+    let keyRecordViewController = KeyRecordViewController()
+    keyRecordViewController.keyCode = key
+    keyRecordViewController.action = action
     panel.messageText = NSLocalizedString("keymapping.title", comment: "Key Mapping")
     panel.informativeText = NSLocalizedString("keymapping.message", comment: "Press any key to record.")
     panel.accessoryView = keyRecordViewController.view
@@ -119,7 +120,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     panel.addButton(withTitle: "OK")
     panel.addButton(withTitle: "Cancel")
     if panel.runModal() == NSAlertFirstButtonReturn {
-      ok()
+      ok(keyRecordViewController.keyCode, keyRecordViewController.action)
     }
   }
 
@@ -132,9 +133,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   }
 
   @IBAction func addKeyMappingBtnAction(_ sender: AnyObject) {
-    showKeyBindingPanel {
-      let key = keyRecordViewController.keyCode
-      let action = keyRecordViewController.action
+    showKeyBindingPanel { key, action in
       guard !key.isEmpty && !action.isEmpty else { return }
       let splitted = action.characters.split(separator: " ").map { String($0) }
       currentMapping.append(KeyMapping(key: key, action: splitted))
@@ -390,11 +389,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
   func editRow() {
     guard shouldEnableEdit else { return }
     let selectedData = currentMapping[kbTableView.selectedRow]
-    keyRecordViewController.keyCode = selectedData.key
-    keyRecordViewController.action = selectedData.readableAction
-    showKeyBindingPanel {
-      let key = keyRecordViewController.keyCode
-      let action = keyRecordViewController.action
+    showKeyBindingPanel(key: selectedData.key, action: selectedData.readableAction) { key, action in
       guard !key.isEmpty && !action.isEmpty else { return }
       let splitted = action.components(separatedBy: " ")
       selectedData.key = key

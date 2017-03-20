@@ -7,7 +7,8 @@
 */
 
 "cmd.ignore" = "忽略";
-"cmd.seek" = "查找（跳转）";
+"cmd.seek" = "查找/跳转";
+"cmd.revert-seek" = "撤销查找";
 "cmd.set" = "设置";
 "cmd.cycle" = "循环";
 "cmd.cycle-values" = "指定值中循环";
@@ -16,14 +17,23 @@
 "cmd.frame-step" = "下一帧";
 "cmd.frame-back-step" = "上一帧";
 "cmd.ab-loop" = "A-B 循环";
+"cmd.sub-seek" = "字幕跳转";
 "cmd.playlist-next" = "上一个媒体";
 "cmd.playlist-prev" = "下一个媒体";
+"cmd.playlist-move" = "移动列表项目";
 "cmd.playlist-clear" = "清空播放列表";
 "cmd.playlist-remove" = "移除当前媒体";
 "cmd.playlist-shuffle" = "打乱列表顺序";
 "cmd.write-watch-later-config" = "记录播放进度";
 "cmd.stop" = "停止";
 "cmd.quit" = "退出";
+"cmd.quit-watch-later" = "退出";
+"cmd.screenshot" = "截图";
+"cmd.screenshot-to-file" = "截图至文件";
+"cmd.loadfile" = "打开文件";
+"cmd.loadlist" = "加载播放列表";
+"cmd.run" = "运行";
+
 
 "yes" = "是";
 "no" = "否";
@@ -65,7 +75,17 @@
 "opt.sub-pos" = "字幕位置";
 "opt.sub-scale" = "字幕缩放";
 "opt.sub-visibility" = "字幕可见";
+"opt.sub-ass-style-override" = "ASS 字幕样式覆盖";
 
 "opt.fullscreen" = "全屏";
 
 "opt.chapter" = "章节";
+
+
+"read.set" = "设置 {{property}} 为 {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "{{property}} 乘 {{factor}} 倍";
+"read.cycle" = "{{#dir_down}}反向{{/dir_down}}循环 {{property}}";
+"read.cycle-values" = "在 ({{{values}}}) 中循环 {{property}}";
+"read.seek" = "{{#fwd}}向前{{/fwd}}{{#bwd}}向后{{/bwd}}跳转{{#abs}}到{{/abs}} {{value}} {{#sec}}秒{{/sec}}{{#per}}%{{/per}}{{#exact}}（精确）{{/exact}}{{#kf}}（关键帧）{{/kf}}";
+"read.sub-seek" = "跳转到{{#skip_1}}下{{/skip_1}}{{#skip_-1}}上{{/skip_-1}}一句字幕";

@@ -35,8 +35,6 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
   var hasResizableWidth: Bool = false
 
-  lazy var keyRecordViewController: KeyRecordViewController = KeyRecordViewController()
-
   static let defaultConfigs: [String: String] = [
     "IINA Default": Bundle.main.path(forResource: "iina-default-input", ofType: "conf", inDirectory: "config")!,
     "MPV Default": Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!
@@ -49,6 +47,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   var currentConfFilePath: String!
 
   var shouldEnableEdit: Bool = true
+  var displayRawValues: Bool = false
 
   // MARK: - Outlets
 
@@ -69,6 +68,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     // tableview
     kbTableView.dataSource = self
     kbTableView.delegate = self
+    kbTableView.doubleAction = #selector(editRow)
 
     // config files
     // - default
@@ -108,6 +108,22 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
   // MARK: - IBActions
 
+  func showKeyBindingPanel(key: String = "", action: String = "", ok: (String, String) -> Void) {
+    let panel = NSAlert()
+    let keyRecordViewController = KeyRecordViewController()
+    keyRecordViewController.keyCode = key
+    keyRecordViewController.action = action
+    panel.messageText = NSLocalizedString("keymapping.title", comment: "Key Mapping")
+    panel.informativeText = NSLocalizedString("keymapping.message", comment: "Press any key to record.")
+    panel.accessoryView = keyRecordViewController.view
+    panel.window.initialFirstResponder = keyRecordViewController.keyRecordView
+    panel.addButton(withTitle: "OK")
+    panel.addButton(withTitle: "Cancel")
+    if panel.runModal() == NSAlertFirstButtonReturn {
+      ok(keyRecordViewController.keyCode, keyRecordViewController.action)
+    }
+  }
+
   @IBAction func configSelectAction(_ sender: AnyObject) {
     guard let title = configSelectPopUp.selectedItem?.title else { return }
     currentConfName = title
@@ -117,24 +133,14 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   }
 
   @IBAction func addKeyMappingBtnAction(_ sender: AnyObject) {
-    let panel = NSAlert()
-    panel.messageText = "Add Key Mapping"
-    panel.informativeText = "Press any key to start."
-    panel.accessoryView = keyRecordViewController.view
-    panel.window.initialFirstResponder = keyRecordViewController.keyRecordView
-    panel.addButton(withTitle: "OK")
-    panel.addButton(withTitle: "Cancel")
-    let response = panel.runModal()
-    if response == NSAlertFirstButtonReturn {
-      let key = keyRecordViewController.keyCode
-      let action = keyRecordViewController.action
+    showKeyBindingPanel { key, action in
       guard !key.isEmpty && !action.isEmpty else { return }
       let splitted = action.characters.split(separator: " ").map { String($0) }
       currentMapping.append(KeyMapping(key: key, action: splitted))
       kbTableView.reloadData()
       kbTableView.scrollRowToVisible(currentMapping.count - 1)
+      saveToConfFile()
     }
-    saveToConfFile()
   }
 
   @IBAction func removeKeyMappingBtnAction(_ sender: AnyObject) {
@@ -266,6 +272,12 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     changeButtonEnabled()
   }
 
+  @IBAction func displayRawValueAction(_ sender: NSButton) {
+    displayRawValues = sender.state == NSOnState
+    kbTableView.doubleAction = displayRawValues ? nil : #selector(editRow)
+    kbTableView.reloadData()
+  }
+
   // MARK: - UI
 
   private func changeButtonEnabled() {
@@ -352,9 +364,9 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
 
     guard let mapping = currentMapping.at(row) else { return nil }
     if identifier == Constants.Identifier.key {
-      return mapping.key
+      return displayRawValues ? mapping.key : mapping.prettyKey
     } else if identifier == Constants.Identifier.action {
-      return mapping.readableAction
+      return displayRawValues ? mapping.readableAction : mapping.prettyCommand
     }
     return ""
   }
@@ -368,6 +380,23 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
       currentMapping[row].action = value.characters.split(separator: " ").map { return String($0) }
     }
     saveToConfFile()
+  }
+
+  func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
+    return displayRawValues
+  }
+
+  func editRow() {
+    guard shouldEnableEdit else { return }
+    let selectedData = currentMapping[kbTableView.selectedRow]
+    showKeyBindingPanel(key: selectedData.key, action: selectedData.readableAction) { key, action in
+      guard !key.isEmpty && !action.isEmpty else { return }
+      let splitted = action.components(separatedBy: " ")
+      selectedData.key = key
+      selectedData.action = splitted
+      kbTableView.reloadData()
+      saveToConfFile()
+    }
   }
 
 }

@@ -145,7 +145,7 @@ class VideoView: NSView {
         playerCore.openURLString(droppedString)
         return true
       } else {
-        Utility.showAlert(message: "Unsupported URL.")
+        Utility.showAlert("unsupported_url")
         return false
       }
     }

@@ -58,7 +58,7 @@ class OnlineSubtitle: NSObject {
       // - language
       let userLang = UserDefaults.standard.string(forKey: Preference.Key.subLang) ?? ""
       if userLang.isEmpty {
-        Utility.showAlert(message: NSLocalizedString("alert.sub_lang_not_set", comment: ""))
+        Utility.showAlert("sub_lang_not_set")
         callback([])
       } else {
         subSupport.language = userLang

@@ -436,7 +436,7 @@ struct Preference {
     Key.rightClickAction: MouseClickAction.pause.rawValue,
     Key.pinchAction: PinchAction.windowSize.rawValue,
 
-    Key.screenshotFolder: "~/Pictures/ScreenShots",
+    Key.screenshotFolder: "~/Pictures/Screenshots",
     Key.screenshotIncludeSubtitle: true,
     Key.screenshotFormat: ScreenshotFormat.png.rawValue,
     Key.screenshotTemplate: "%F-%n",

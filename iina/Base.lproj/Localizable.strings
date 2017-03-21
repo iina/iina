@@ -117,19 +117,19 @@
 
 "alert.config.empty_name" = "The name cannot br empty.";
 "alert.config.name_exsisting" = "The name already exists.";
-"alert.config.cannot_create" = "Cannot crete config file.";
+"alert.config.cannot_create" = "Cannot create config file!";
 "alert.config.cannot_write" = "Cannot write to config file!";
 
 "alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
 
 "alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
 
-"alert.extra_option.cannot_read" = "Cannot read user defined options.";
+"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
 "alert.extra_option.empty" = "Key or value cannot be empty!";
 "alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
 "alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
 
-"alert.playlist.error_deleting" = "Error deleting: $@";
+"alert.playlist.error_deleting" = "Error deleting: %@";
 
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
 "alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using opensubtitles. English(eng) will be used this time.";

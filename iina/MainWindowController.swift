@@ -1289,6 +1289,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if width == 0 { width = AppData.widthWhenNoVideo }
     if height == 0 { height = AppData.heightWhenNoVideo }
 
+    // if video has rotation
+    let rotate = playerCore.mpvController.getInt(MPVProperty.videoParamsRotate)
+    if rotate == 90 || rotate == 270 {
+      swap(&width, &height)
+    }
+
     // set aspect ratio
     let originalVideoSize = NSSize(width: width, height: height)
     w.aspectRatio = originalVideoSize

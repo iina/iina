@@ -445,6 +445,8 @@
 		B38F24281E44D0A000FFE600 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/PrefSubViewController.strings; sourceTree = "<group>"; };
 		B38F24291E44D0A000FFE600 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/PrefNetworkViewController.strings; sourceTree = "<group>"; };
 		B38F242A1E44D0A000FFE600 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B3B24B621E831068008393CE /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/SubSelectWindowController.strings; sourceTree = "<group>"; };
+		B3DB9C081E82CE2B00CFB888 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = it; path = it.lproj/Contribution.rtf; sourceTree = "<group>"; };
 		C70BC05C1E511D1000D8CB79 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		C75540761E7886FE00C13D4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SubSelectWindowController.xib; sourceTree = "<group>"; };
 		C75540791E78870200C13D4A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/SubSelectWindowController.strings; sourceTree = "<group>"; };
@@ -1406,6 +1408,7 @@
 				84AF03D31E67492C003E3753 /* Base */,
 				84AF03D51E674930003E3753 /* zh-Hans */,
 				C7583B471E67802200BEF9B7 /* ko */,
+				B3DB9C081E82CE2B00CFB888 /* it */,
 			);
 			name = Contribution.rtf;
 			sourceTree = "<group>";
@@ -1430,6 +1433,7 @@
 				C75540761E7886FE00C13D4A /* Base */,
 				C75540791E78870200C13D4A /* ko */,
 				845260661E7BC9CC00D3CF6A /* zh-Hans */,
+				B3B24B621E831068008393CE /* it */,
 			);
 			name = SubSelectWindowController.xib;
 			sourceTree = "<group>";

@@ -1,6 +1,6 @@
 
-/* Class = "NSTextFieldCell"; title = "Scroll horizontally to:"; ObjectID = "1yb-m4-1sK"; */
-"1yb-m4-1sK.title" = "Scroller horizontalement pour :";
+/* Class = "NSTextFieldCell"; title = "Seek type:"; ObjectID = "1yb-m4-1sK"; */
+"1yb-m4-1sK.title" = "Type de recherche de frame :";
 
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "2Ig-fw-UvW"; */
 "2Ig-fw-UvW.title" = "Précédent / Prochain média";
@@ -50,8 +50,8 @@
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "oOk-y6-lek"; */
 "oOk-y6-lek.title" = "Aucun";
 
-/* Class = "NSTextFieldCell"; title = "Amount for normal seek:"; ObjectID = "of2-ec-OkC"; */
-"of2-ec-OkC.title" = "Quantité pour la recherche normale:";
+/* Class = "NSTextFieldCell"; title = "Sensitivity for normal seek:"; ObjectID = "of2-ec-OkC"; */
+"of2-ec-OkC.title" = "Sensibilité pour la recherche normale :";
 
 /* Class = "NSMenuItem"; title = "Fastforward / Rewind"; ObjectID = "q50-Po-JYO"; */
 "q50-Po-JYO.title" = "Avance rapide / Rembobiner";
@@ -64,3 +64,39 @@
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "Aucun";
+
+/* Class = "NSTextFieldCell"; title = "Pinch to:"; ObjectID = "E8H-pO-MLc"; */
+"E8H-pO-MLc.title" = "Pincer avec 2 doigts pour :";
+
+/* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
+"Hm3-dh-jgb.title" = "Plein écran";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "NjV-fH-YgN"; */
+"NjV-fH-YgN.title" = "Aucun";
+
+/* Class = "NSMenuItem"; title = "Adjust window size"; ObjectID = "Ols-Lr-fiH"; */
+"Ols-Lr-fiH.title" = "Ajuster la taille de la fenêtre";
+
+/* Class = "NSMenuItem"; title = "Seek"; ObjectID = "RCe-3m-q9N"; */
+"RCe-3m-q9N.title" = "Recherche de frame";
+
+/* Class = "NSMenuItem"; title = "Adjust volume"; ObjectID = "SYg-hW-b6r"; */
+"SYg-hW-b6r.title" = "Ajuster le volume";
+
+/* Class = "NSTextFieldCell"; title = "Sensitivity for volume:"; ObjectID = "YQH-1a-WcM"; */
+"YQH-1a-WcM.title" = "Sensibilité pour le volume :";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "chS-d2-TG1"; */
+"chS-d2-TG1.title" = "Aucun";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "guu-dK-YfL"; */
+"guu-dK-YfL.title" = "Aucun";
+
+/* Class = "NSTextFieldCell"; title = "Scroll vertically to:"; ObjectID = "hNU-dJ-5Cj"; */
+"hNU-dJ-5Cj.title" = "Scroller verticalement pour :";
+
+/* Class = "NSTextFieldCell"; title = "Scroll horizontally to:"; ObjectID = "w1Y-jy-vNc"; */
+"w1Y-jy-vNc.title" = "Scroller horizontalement pour :";
+
+/* Class = "NSMenuItem"; title = "Seek"; ObjectID = "wcS-tP-wav"; */
+"wcS-tP-wav.title" = "Recherche de frame";

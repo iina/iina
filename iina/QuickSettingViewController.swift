@@ -395,8 +395,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func customSpeedEditFinishedAction(_ sender: NSTextField) {
-    var value = customSpeedTextField.doubleValue
-    value = max(min(value, AppData.maxSpeed), AppData.minSpeed)
+    let value = customSpeedTextField.doubleValue
     let formattedValue = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: value)) ?? ""
     customSpeedTextField.stringValue = formattedValue
     let sliderValue = log(value / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
@@ -491,8 +490,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func customAudioDelayEditFinishedAction(_ sender: NSTextField) {
-    // Clamp to -5, 5
-    sender.doubleValue = min(5, max(-5, sender.doubleValue))
     let value = sender.doubleValue
     playerCore.setAudioDelay(value)
     audioDelaySlider.doubleValue = value
@@ -547,8 +544,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func customSubDelayEditFinishedAction(_ sender: NSTextField) {
-    // Clamp to -5, 5
-    sender.doubleValue = min(5, max(-5, sender.doubleValue))
     let value = sender.doubleValue
     playerCore.setSubDelay(value)
     subDelaySlider.doubleValue = value

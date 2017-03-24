@@ -385,6 +385,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     // Each step is 64^(1/24)
     //   0       1   ..    7      8      9   ..   24
     // 0.250x 0.297x .. 0.841x 1.000x 1.189x .. 16.00x
+    let eventType = NSApp.currentEvent!.type
+    if eventType == .leftMouseDown {
+      sender.allowsTickMarkValuesOnly = true
+    }
+    if eventType == .leftMouseUp {
+      sender.allowsTickMarkValuesOnly = false
+    }
     let sliderValue = sender.doubleValue
     let value = AppData.minSpeed * pow((AppData.maxSpeed / AppData.minSpeed), sliderValue / sliderSteps)
     let formattedValue = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: value)) ?? ""
@@ -477,6 +484,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func audioDelayChangedAction(_ sender: NSSlider) {
+    let eventType = NSApp.currentEvent!.type
+    if eventType == .leftMouseDown {
+      sender.allowsTickMarkValuesOnly = true
+    }
+    if eventType == .leftMouseUp {
+      sender.allowsTickMarkValuesOnly = false
+    }
     let sliderValue = sender.doubleValue
     let formattedValue = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: sliderValue)) ?? ""
     audioDelaySliderIndicator.stringValue = "\(formattedValue)s"
@@ -531,6 +545,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func subDelayChangedAction(_ sender: NSSlider) {
+    let eventType = NSApp.currentEvent!.type
+    if eventType == .leftMouseDown {
+      sender.allowsTickMarkValuesOnly = true
+    }
+    if eventType == .leftMouseUp {
+      sender.allowsTickMarkValuesOnly = false
+    }
     let sliderValue = sender.doubleValue
     let formattedValue = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: sliderValue)) ?? ""
     subDelaySliderIndicator.stringValue = "\(formattedValue)s"

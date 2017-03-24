@@ -78,13 +78,33 @@ extension MainWindowController {
   }
 
   @IBAction func menuShowPlaylistPanel(_ sender: NSMenuItem) {
-    playlistView.pleaseSwitchToTab(.playlist)
-    playlistButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .settings {
+      playlistView.pleaseSwitchToTab(.playlist)
+      playlistButtonAction(sender)
+    } else {
+      let currentView = playlistView.tabView.selectedTabViewItem
+      let index = playlistView.tabView.indexOfTabViewItem(currentView!)
+      if index != 0 {
+        playlistView.pleaseSwitchToTab(.playlist)
+      } else {
+        playlistButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuShowChaptersPanel(_ sender: NSMenuItem) {
-    playlistView.pleaseSwitchToTab(.chapters)
-    playlistButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .settings {
+      playlistView.pleaseSwitchToTab(.chapters)
+      playlistButtonAction(sender)
+    } else {
+      let currentView = playlistView.tabView.selectedTabViewItem
+      let index = playlistView.tabView.indexOfTabViewItem(currentView!)
+      if index != 1 {
+        playlistView.pleaseSwitchToTab(.chapters)
+      } else {
+        playlistButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuChapterSwitch(_ sender: NSMenuItem) {
@@ -95,18 +115,48 @@ extension MainWindowController {
   }
 
   @IBAction func menuShowVideoQuickSettings(_ sender: NSMenuItem) {
-    quickSettingView.pleaseSwitchToTab(.video)
-    settingsButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .playlist {
+      quickSettingView.pleaseSwitchToTab(.video)
+      settingsButtonAction(sender)
+    } else {
+      let currentView = quickSettingView.tabView.selectedTabViewItem
+      let index = quickSettingView.tabView.indexOfTabViewItem(currentView!)
+      if index != 0 {
+        quickSettingView.pleaseSwitchToTab(.video)
+      } else {
+        settingsButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuShowAudioQuickSettings(_ sender: NSMenuItem) {
-    quickSettingView.pleaseSwitchToTab(.audio)
-    settingsButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .playlist {
+      quickSettingView.pleaseSwitchToTab(.audio)
+      settingsButtonAction(sender)
+    } else {
+      let currentView = quickSettingView.tabView.selectedTabViewItem
+      let index = quickSettingView.tabView.indexOfTabViewItem(currentView!)
+      if index != 1 {
+        quickSettingView.pleaseSwitchToTab(.audio)
+      } else {
+        settingsButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuShowSubQuickSettings(_ sender: NSMenuItem) {
-    quickSettingView.pleaseSwitchToTab(.sub)
-    settingsButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .playlist {
+      quickSettingView.pleaseSwitchToTab(.sub)
+      settingsButtonAction(sender)
+    } else {
+      let currentView = quickSettingView.tabView.selectedTabViewItem
+      let index = quickSettingView.tabView.indexOfTabViewItem(currentView!)
+      if index != 2 {
+        quickSettingView.pleaseSwitchToTab(.sub)
+      } else {
+        settingsButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuChangeTrack(_ sender: NSMenuItem) {

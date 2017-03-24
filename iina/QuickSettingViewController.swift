@@ -30,6 +30,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   weak var playerCore: PlayerCore! = PlayerCore.shared
   weak var mainWindow: MainWindowController!
 
+  var currentTab: TabViewType = .video
+
   var observers: [NSObjectProtocol] = []
 
 
@@ -244,6 +246,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     // the active one
     let title = button.title
     button.attributedTitle = NSAttributedString(string: title, attributes: Utility.tabTitleActiveFontAttributes)
+
+    currentTab = tab
   }
 
   // MARK: - NSTableView delegate

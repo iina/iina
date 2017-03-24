@@ -82,9 +82,7 @@ extension MainWindowController {
       playlistView.pleaseSwitchToTab(.playlist)
       playlistButtonAction(sender)
     } else {
-      let currentView = playlistView.tabView.selectedTabViewItem
-      let index = playlistView.tabView.indexOfTabViewItem(currentView!)
-      if index != 0 {
+      if playlistView.currentTab != .playlist {
         playlistView.pleaseSwitchToTab(.playlist)
       } else {
         playlistButtonAction(sender)
@@ -97,9 +95,7 @@ extension MainWindowController {
       playlistView.pleaseSwitchToTab(.chapters)
       playlistButtonAction(sender)
     } else {
-      let currentView = playlistView.tabView.selectedTabViewItem
-      let index = playlistView.tabView.indexOfTabViewItem(currentView!)
-      if index != 1 {
+      if playlistView.currentTab != .chapters {
         playlistView.pleaseSwitchToTab(.chapters)
       } else {
         playlistButtonAction(sender)
@@ -119,9 +115,7 @@ extension MainWindowController {
       quickSettingView.pleaseSwitchToTab(.video)
       settingsButtonAction(sender)
     } else {
-      let currentView = quickSettingView.tabView.selectedTabViewItem
-      let index = quickSettingView.tabView.indexOfTabViewItem(currentView!)
-      if index != 0 {
+      if quickSettingView.currentTab != .video {
         quickSettingView.pleaseSwitchToTab(.video)
       } else {
         settingsButtonAction(sender)
@@ -134,9 +128,7 @@ extension MainWindowController {
       quickSettingView.pleaseSwitchToTab(.audio)
       settingsButtonAction(sender)
     } else {
-      let currentView = quickSettingView.tabView.selectedTabViewItem
-      let index = quickSettingView.tabView.indexOfTabViewItem(currentView!)
-      if index != 1 {
+      if quickSettingView.currentTab != .audio {
         quickSettingView.pleaseSwitchToTab(.audio)
       } else {
         settingsButtonAction(sender)
@@ -149,9 +141,7 @@ extension MainWindowController {
       quickSettingView.pleaseSwitchToTab(.sub)
       settingsButtonAction(sender)
     } else {
-      let currentView = quickSettingView.tabView.selectedTabViewItem
-      let index = quickSettingView.tabView.indexOfTabViewItem(currentView!)
-      if index != 2 {
+      if quickSettingView.currentTab != .sub {
         quickSettingView.pleaseSwitchToTab(.sub)
       } else {
         settingsButtonAction(sender)

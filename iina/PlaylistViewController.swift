@@ -34,6 +34,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
     case chapters
   }
 
+  var currentTab: TabViewType = .playlist
+
   @IBOutlet weak var playlistTableView: NSTableView!
   @IBOutlet weak var chapterTableView: NSTableView!
   @IBOutlet weak var playlistBtn: NSButton!
@@ -115,6 +117,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
     }
   }
 
+  // MARK: - Tab switching
+
   /** Switch tab (call from other objects) */
   func pleaseSwitchToTab(_ tab: TabViewType) {
     if isViewLoaded {
@@ -140,6 +144,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
       chaptersBtn.attributedTitle = NSAttributedString(string: chapterStr, attributes: Utility.tabTitleActiveFontAttributes)
       playlistBtn.attributedTitle = NSAttributedString(string: playlistStr, attributes: Utility.tabTitleFontAttributes)
     }
+
+    currentTab = tab
   }
 
   // MARK: - NSTableViewDataSource

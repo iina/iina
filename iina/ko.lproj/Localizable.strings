@@ -1,12 +1,3 @@
-/* Error setting extra mpv option */
-"alert.extra_option_error" = "--%@=%@ 설정에서 %d 오류가 발생했습니다. 환경설정 > 고급설정으로 이동하여 사용자가 지정한 추가 설정 사항을 점검하십시오.";
-
-/* Error setting keybinding configuration */
-"alert.keybinding_config_error" = "단축키 설정 파일 \"%@\"를 읽어올 때 오류가 발생했습니다! IINA 기본값을 사용하도록 설정됩니다. 사용자가 지정한 단축키 설정 내용을 점검하십시오.";
-
-/* No comment provided by engineer. */
-"alert.sub_lang_not_set" = "자막 언어 설정되지 않음";
-
 /* (No Commment) */
 "login" = "로그인";
 
@@ -280,3 +271,32 @@
 /* Update found */
 "update.update_found" = "새로운 버전이 있습니다. IINA는 아직 알파 단계이므로 최신버전으로 갱신하는 것이 좋습니다. 웹사이트나 Github에서 다운로드 하십시오:";
 
+"keymapping.title" = "단축키 지정";
+"keymapping.message" = "기록할 키를 누르십시오.";
+
+"alert.config.cannot_create" = "설정 파일을 만들 수 없습니다!";
+"alert.config.cannot_write" = "설정 파일에 저장할 수 없습니다!";
+"alert.config.empty_name" = "파일 이름을 지정해 주십시오.";
+"alert.config.name_exsisting" = "같은 이름의 파일이 이미 있습니다.";
+"alert.error_deleting_file" = "파일을 삭제할 수 없습니다.";
+"alert.error_finding_file" = "%@ 파일을 찾을 수 없습니다!";
+"alert.error_loading_script" = "%@ 스크립트를 불러올 수 없습니다!";
+"alert.error_open" = "파일 또는 스트림을 열 수 없습니다!";
+"alert.error_saving_file" = "%@: %@을 저장하는 도중 오류가 발생했습니다.";
+"alert.extra_option.cannot_read" = "사용자가 지정한 mpv 추가옵션을 읽을 수 없습니다.";
+"alert.extra_option.config_folder" = "\"%@\"를 설정 디렉토리로 지정하는 도중 오류가 발생했습니다.";
+"alert.extra_option.empty" = "항목과 그 설정값을 반드시 지정해야 합니다!";
+"alert.extra_option_error" = "--%@=%@ 설정에서 %d 오류가 발생했습니다. 환경설정 > 고급설정으로 이동하여 사용자가 지정한 추가 설정 사항을 점검하십시오.";
+"alert.fatal_error" = "심각한 오류: %@ \n프로그램이 지금 종료됩니다.";
+"alert.filter.incorrect" = "필터를 설정하는 도중 오류가 발생했습니다. 매개변수 형식을 확인하십시오.";
+"alert.keybinding_config_error" = "단축키 설정 파일 \"%@\"를 읽어올 때 오류가 발생했습니다! IINA 기본값을 사용하도록 설정됩니다. 사용자가 지정한 단축키 설정 내용을 점검하십시오.";
+"alert.mpv_error" = "%@ (%@)오류가 사용자 지정 옵션 %@을 설정하는 도중 발생했습니다.";
+"alert.playlist.error_deleting" = "삭제 오류: %@";
+"alert.sleep" = "화면 잠자기 설정을 끌 수 없습니다!";
+"alert.sub.cannot_login" = "로그인 할 수 없습니다. 계정 이름과 암호, 네트워크 상태를 확인하십시오.\n\n%@";
+"alert.sub.cannot_save_passwd" = "키체인에 암호를 저장할 수 없습니다: %@";
+"alert.sub.no_selected" = "다운로드한 자막을 선택하십시오.";
+"alert.sub_lang_not_set" = "OpenSubtitles를 사용하기 전에 자막의 선호 언어를 설정하십시오. 지금은 영어(eng)를 사용합니다.";
+"alert.unsupported_audio" = "지원되지 않는 외부 오디오 파일입니다.";
+"alert.unsupported_sub" = "지원되지 않는 자막 형식입니다.";
+"alert.unsupported_url" = "지원되지 않는 URL입니다.";

@@ -375,7 +375,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   func redraw(indicator: NSTextField, constraint: NSLayoutConstraint, slider: NSSlider, value: String) {
     indicator.stringValue = value
-    constraint.constant = slider.frame.width * CGFloat((slider.doubleValue - slider.minValue) / (slider.maxValue - slider.minValue))
+    let offset: CGFloat = 6
+    let sliderInnerWidth = slider.frame.width - offset * 2
+    constraint.constant = offset + sliderInnerWidth * CGFloat((slider.doubleValue - slider.minValue) / (slider.maxValue - slider.minValue))
     view.layout()
   }
 
@@ -402,7 +404,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if playerCore.info.playSpeed != value {
       playerCore.setSpeed(value)
     }
-    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: formattedValue)
+    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(formattedValue)x")
     if let window = sender.window {
       window.makeFirstResponder(window.contentView)
     }

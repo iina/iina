@@ -373,7 +373,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
 
-  func redraw(indicator: NSTextField, constraint: NSLayoutConstraint, slider: NSSlider, value: String) {
+  private func redraw(indicator: NSTextField, constraint: NSLayoutConstraint, slider: NSSlider, value: String) {
     indicator.stringValue = value
     let offset: CGFloat = 6
     let sliderInnerWidth = slider.frame.width - offset * 2

@@ -40,9 +40,16 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   var hasResizableWidth: Bool = false
   var hasResizableHeight: Bool = false
 
+  @IBOutlet weak var OSCAutoHideTimeTextField: NSTextField!
+  @IBOutlet weak var OSDAutoHideTimeTextField: NSTextField!
+  @IBOutlet weak var OSCFontSizeTextField: NSTextField!
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do view setup here.
+
+    OSCAutoHideTimeTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal: true)
+    OSDAutoHideTimeTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal: true)
+    OSCFontSizeTextField.formatter = RestrictedNumberFormatter(min: 5, isDecimal: true)
   }
 
 }

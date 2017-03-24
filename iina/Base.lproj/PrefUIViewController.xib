@@ -7,6 +7,9 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefUIViewController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="OSCAutoHideTimeTextField" destination="Abq-vA-BcZ" id="1NF-f7-sPZ"/>
+                <outlet property="OSCFontSizeTextField" destination="wDT-XM-dyY" id="Y3g-Qi-uF6"/>
+                <outlet property="OSDAutoHideTimeTextField" destination="qNv-Yk-nvp" id="s1E-Mj-Z4Y"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -21,9 +24,6 @@
                         <constraint firstAttribute="width" constant="58" id="asW-La-UC2"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="KrP-E9-lbY">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="zoH-gE-wdn">
-                            <real key="minimum" value="0.0"/>
-                        </numberFormatter>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -49,9 +49,6 @@
                         <constraint firstAttribute="width" constant="58" id="J5e-Bd-2ub"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="ZES-n7-9GN">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="til-Jn-vQj">
-                            <real key="minimum" value="0.0"/>
-                        </numberFormatter>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -203,9 +200,6 @@
                         <constraint firstAttribute="width" constant="58" id="rtB-DT-Hgf"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="FTd-qk-X5R">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="Uva-ww-Iw6">
-                            <real key="minimum" value="5"/>
-                        </numberFormatter>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

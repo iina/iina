@@ -8,18 +8,44 @@
 
 import Cocoa
 
-class DecimalFormatter : NumberFormatter {
+class RestrictedNumberFormatter : NumberFormatter {
+
+  init(min: Double? = nil, max: Double? = nil, isDecimal: Bool) {
+    super.init()
+    if isDecimal {
+      self.numberStyle = .decimal
+    }
+    minimum = min as NSNumber?
+    maximum = max as NSNumber?
+  }
 
   override init() {
     super.init()
-    self.numberStyle = .decimal
   }
-
+  
   required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    super.init(coder: aDecoder)
   }
 
   override func isPartialStringValid(_ partialString: String, newEditingString newString: AutoreleasingUnsafeMutablePointer<NSString?>?, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
+    if partialString.isEmpty {
+      return true
+    }
+
+    var filteredString = partialString
+    if self.numberStyle == .decimal {
+      filteredString = filteredString.replacingOccurrences(of: ".", with: "")
+    }
+
+    if self.minimum == nil || self.minimum!.floatValue < 0 {
+      filteredString = filteredString.replacingOccurrences(of: "-", with: "")
+    }
+
+    if filteredString.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil {
+      NSBeep()
+      return false
+    }
     return true
   }
+
 }

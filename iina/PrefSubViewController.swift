@@ -40,6 +40,14 @@ class PrefSubViewController: NSViewController {
   @IBOutlet weak var subLangTokenView: NSTokenField!
   @IBOutlet weak var loginIndicator: NSProgressIndicator!
 
+  @IBOutlet weak var fontSizeTextField: NSTextField!
+  @IBOutlet weak var fontBlurTextField: NSTextField!
+  @IBOutlet weak var fontSpacingTextField: NSTextField!
+  @IBOutlet weak var borderSizeTextField: NSTextField!
+  @IBOutlet weak var shadowOffsetTextField: NSTextField!
+  @IBOutlet weak var positionXTextField: NSTextField!
+  @IBOutlet weak var positionYTextField: NSTextField!
+  @IBOutlet weak var verticalPositionTextField: NSTextField!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -48,6 +56,15 @@ class PrefSubViewController: NSViewController {
 
     subLangTokenView.delegate = self
     loginIndicator.isHidden = true
+
+    fontSizeTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal: false)
+    fontBlurTextField.formatter = RestrictedNumberFormatter(min: 0, max: 20, isDecimal: true)
+    fontSpacingTextField.formatter = RestrictedNumberFormatter(isDecimal: true)
+    borderSizeTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal: false)
+    shadowOffsetTextField.formatter = RestrictedNumberFormatter(min: 0, isDecimal: false)
+    positionXTextField.formatter = RestrictedNumberFormatter(isDecimal: false)
+    positionYTextField.formatter = RestrictedNumberFormatter(isDecimal: false)
+    verticalPositionTextField.formatter = RestrictedNumberFormatter(min: 0, max: 100, isDecimal: false)
   }
 
   @IBAction func chooseSubFontAction(_ sender: AnyObject) {

@@ -7,6 +7,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefNetworkViewController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="cacheBufferSizeTextField" destination="KgO-2A-tSs" id="OPc-h5-VGB"/>
+                <outlet property="defaultCacheSizeTextField" destination="DH1-5d-J02" id="T9A-RH-0kd"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>

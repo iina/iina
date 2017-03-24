@@ -1,13 +1,14 @@
-/* 
-  KeyBinding.strings
-  iina
-
-  Created by lhc on 4/2/2017.
-  Copyright © 2017 lhc. All rights reserved.
-*/
+/*
+ KeyBinding.strings
+ iina
+ 
+ Created by lhc on 4/2/2017.
+ Copyright © 2017 lhc. All rights reserved.
+ */
 
 "cmd.ignore" = "Ignora";
 "cmd.seek" = "Scorri";
+"cmd.revert-seek" = "Scorri indietro";
 "cmd.set" = "Imposta";
 "cmd.cycle" = "Ciclo";
 "cmd.cycle-values" = "Ciclo in";
@@ -16,14 +17,23 @@
 "cmd.frame-step" = "Frame successivo";
 "cmd.frame-back-step" = "Frame precedente";
 "cmd.ab-loop" = "A-B loop";
+"cmd.sub-seek" = "Sub seek";
 "cmd.playlist-next" = "Media successivo";
 "cmd.playlist-prev" = "Media precedente";
+"cmd.playlist-move" = "Muovi elementi della playlist";
 "cmd.playlist-clear" = "Cancella playlist";
 "cmd.playlist-remove" = "Rimuovi";
 "cmd.playlist-shuffle" = "Mescola";
 "cmd.write-watch-later-config" = "Registra storia delle riproduzioni";
 "cmd.stop" = "Stop";
 "cmd.quit" = "Esci";
+"cmd.quit-watch-later" = "Esci (salva stato attuale)";
+"cmd.screenshot" = "Screenshot";
+"cmd.screenshot-to-file" = "Screenshot al file";
+"cmd.loadfile" = "Carica file";
+"cmd.loadlist" = "Carica playlist";
+"cmd.run" = "Run";
+
 
 "yes" = "Si";
 "no" = "No";
@@ -69,3 +79,14 @@
 "opt.fullscreen" = "Schermo intero";
 
 "opt.chapter" = "Capitolo";
+
+
+
+"read.set" = "Imposta {{property}} al {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Moltiplica {{property}} per {{factor}}x";
+"read.cycle" = "Cicla {{property}}{{#dir_down}} Verso{{/dir_down}}";
+"read.cycle-values" = "Cicla {{property}} in ({{{values}}})";
+"read.seek" = "Scorri {{#fwd}}avanti{{/fwd}}{{#bwd}}indietro{{/bwd}}{{#abs}}a{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Scorri al {{#skip_1}}successivo{{/skip_1}}{{#skip_-1}}precedente{{/skip_-1}} sottotitolo";
+

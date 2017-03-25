@@ -35,7 +35,10 @@ class DurationDisplayTextField: NSTextField {
     case .duration:
       stringValue = duration.stringRepresentation
     case .remaining:
-      let remaining = duration - current
+      var remaining = (duration - current)
+      if remaining.second < 0 {
+        remaining = VideoTime.zero
+      }
       stringValue = "-\(remaining.stringRepresentation)"
     }
     self.stringValue = stringValue

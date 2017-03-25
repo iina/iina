@@ -824,7 +824,7 @@ class MPVController: NSObject {
     }
 
     if code < 0 {
-      Utility.showAlert("mpv_error", arguments: [mpv_error_string(code), "\(code)", name])
+      Utility.showAlert("mpv_error", arguments: [String(cString: mpv_error_string(code)), "\(code)", name])
     }
 
     if sync {

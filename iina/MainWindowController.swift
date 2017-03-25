@@ -259,8 +259,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     guard let w = self.window else { return }
 
-    w.collectionBehavior = [.managed, .fullScreenPrimary]
-
     w.initialFirstResponder = nil
 
     w.center()
@@ -723,6 +721,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowDidOpen() {
     window!.makeMain()
     window!.makeKeyAndOrderFront(nil)
+    window!.collectionBehavior = [.managed, .fullScreenPrimary]
     // update buffer indicator view
     updateBufferIndicatorView()
     // enable sleep preventer

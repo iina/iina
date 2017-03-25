@@ -68,8 +68,8 @@ class PlayerCore: NSObject {
     }
     info.currentURL = url
     info.isNetworkResource = isNetwork
-     mainWindow!.showWindow(nil)
-     mainWindow!.windowDidOpen()
+    mainWindow!.showWindow(nil)
+    mainWindow!.windowDidOpen()
     // Send load file command
     info.fileLoading = true
     info.justOpenedFile = true

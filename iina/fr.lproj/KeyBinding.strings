@@ -1,4 +1,4 @@
-/* 
+/*
   KeyBinding.strings
   iina
 
@@ -69,3 +69,11 @@
 "opt.fullscreen" = "Plein écran";
 
 "opt.chapter" = "Chapitre";
+
+"read.set" = "Configurer {{property}} à {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Multiplier {{property}} par {{factor}}x";
+"read.cycle" = "Alterner {{property}}{{#dir_down}} à l'envers{{/dir_down}}";
+"read.cycle-values" = "Alterner {{property}} de ({{{values}}})";
+"read.seek" = "Aller {{#fwd}}en avant{{/fwd}}{{#bwd}}en arrière{{/bwd}}{{#abs}}à{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Aller au {{#skip_1}}prochain{{/skip_1}}{{#skip_-1}}précédent{{/skip_-1}} sous-titre";

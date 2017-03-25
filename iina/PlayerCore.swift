@@ -48,9 +48,13 @@ class PlayerCore: NSObject {
   }
 
   func openURLString(_ str: String) {
-    // FIXME: Technically, we shouldn't be percent encoding the whole URL with
-    // one character set.
-    guard let str = str.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
+    let urlAllowed = CharacterSet.urlHostAllowed
+      .union(.urlUserAllowed)
+      .union(.urlPasswordAllowed)
+      .union(.urlPathAllowed)
+      .union(.urlQueryAllowed)
+      .union(.urlFragmentAllowed)
+    guard let str = str.addingPercentEncoding(withAllowedCharacters: urlAllowed),
       let url = URL(string: str) else {
         return
     }

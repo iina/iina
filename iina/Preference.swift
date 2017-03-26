@@ -346,7 +346,7 @@ struct Preference {
     Key.controlBarPositionHorizontal: Float(0.5),
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,
-    Key.controlBarAutoHideTimeout: Float(5),
+    Key.controlBarAutoHideTimeout: Float(2.5),
     Key.themeMaterial: Theme.dark.rawValue,
     Key.osdAutoHideTimeout: Float(1),
     Key.osdTextSize: Float(20),

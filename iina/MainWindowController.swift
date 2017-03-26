@@ -896,7 +896,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   private func hideUI() {
     // Don't hide UI when in PIP
-    guard !isInPIP else {
+    guard !isInPIP || animationState == .hidden else {
       return
     }
     fadeableViews.forEach { (v) in
@@ -929,6 +929,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       v.isHidden = false
       v.alphaValue = 0
     }
+    standardWindowButtons.forEach { $0.isEnabled = true }
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.5
       fadeableViews.forEach { (v) in

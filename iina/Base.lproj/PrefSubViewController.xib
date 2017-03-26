@@ -836,6 +836,16 @@
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Rt1-vy-xTy">
                                         <rect key="frame" x="269" y="14" width="16" height="16"/>
                                     </progressIndicator>
+                                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rEk-de-pp0">
+                                        <rect key="frame" x="449" y="11" width="25" height="25"/>
+                                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xvE-Q0-nvZ">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="OpenSubHelpBtnAction:" target="-2" id="UcT-GQ-hJG"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="YqV-oa-fRX" firstAttribute="centerY" secondItem="U1t-O7-7V7" secondAttribute="centerY" id="04I-WQ-InH"/>
@@ -865,6 +875,7 @@
                                     <constraint firstItem="UWL-fO-MOo" firstAttribute="top" secondItem="ATW-R6-yfQ" secondAttribute="bottom" constant="6" id="IRs-uG-jDY"/>
                                     <constraint firstItem="2rh-Xe-HUH" firstAttribute="leading" secondItem="DWT-bx-9wc" secondAttribute="leading" constant="120" id="ITC-D7-AQ6"/>
                                     <constraint firstItem="yJF-Lm-QV9" firstAttribute="baseline" secondItem="jjO-mG-6MD" secondAttribute="baseline" id="JCv-bK-I7a"/>
+                                    <constraint firstAttribute="bottom" secondItem="rEk-de-pp0" secondAttribute="bottom" constant="14" id="Jtr-k7-t4q"/>
                                     <constraint firstItem="1Kr-uc-A0C" firstAttribute="top" secondItem="vcq-QM-7Hf" secondAttribute="bottom" constant="8" id="Kmi-B9-K15"/>
                                     <constraint firstItem="yso-EN-rP5" firstAttribute="top" secondItem="Q02-3C-Ho6" secondAttribute="bottom" constant="8" id="L0t-8E-KA5"/>
                                     <constraint firstItem="dsH-Ze-lj5" firstAttribute="leading" secondItem="DWT-bx-9wc" secondAttribute="leading" constant="120" id="LfO-D7-Rgf"/>
@@ -909,6 +920,7 @@
                                     <constraint firstItem="KVg-PQ-YEb" firstAttribute="leading" secondItem="DWT-bx-9wc" secondAttribute="leading" constant="8" id="cKR-1Y-qFV"/>
                                     <constraint firstItem="5CZ-8l-KYJ" firstAttribute="leading" secondItem="DWT-bx-9wc" secondAttribute="leading" constant="120" id="cUK-1A-eXb"/>
                                     <constraint firstItem="dn8-IA-mqQ" firstAttribute="baseline" secondItem="U1t-O7-7V7" secondAttribute="baseline" id="ce5-j8-54K"/>
+                                    <constraint firstAttribute="trailing" secondItem="rEk-de-pp0" secondAttribute="trailing" constant="8" id="crR-I8-HwJ"/>
                                     <constraint firstAttribute="trailing" secondItem="dsH-Ze-lj5" secondAttribute="trailing" constant="8" id="dNa-iI-fvz"/>
                                     <constraint firstItem="VGB-NO-Ygc" firstAttribute="baseline" secondItem="JbV-Y0-o3A" secondAttribute="baseline" id="eYN-tI-rwG"/>
                                     <constraint firstAttribute="trailing" secondItem="PMI-9B-Beg" secondAttribute="trailing" constant="8" id="fer-Hu-Mki"/>

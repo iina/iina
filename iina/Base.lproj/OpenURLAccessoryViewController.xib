@@ -50,6 +50,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystemBold"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="chromeLinkBtnAction:" target="-2" id="ZsX-Ht-wc9"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jg3-Bk-btZ">
                                 <rect key="frame" x="347" y="7" width="46" height="17"/>
@@ -57,6 +60,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystemBold"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="safariLinkBtnAction:" target="-2" id="JzX-kB-UCG"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>

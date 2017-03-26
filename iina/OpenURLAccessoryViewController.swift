@@ -17,6 +17,9 @@ class OpenURLAccessoryViewController: NSViewController {
   @IBOutlet weak var usernameField: NSTextField!
   @IBOutlet weak var passwordField: NSSecureTextField!
 
+  private let safariExtensionLink = "https://github.com/lhc70000/iina/releases/download/v0.0.5/Open_In_IINA.safariextz"
+  private let chromeExtensionLink = "https://chrome.google.com/webstore/detail/open-in-iina/pdnojahnhpgmdhjdhgphgdcecehkbhfo"
+
   var url: URL? {
     get {
       let username = usernameField.stringValue
@@ -44,4 +47,12 @@ class OpenURLAccessoryViewController: NSViewController {
     }
   }
     
+  @IBAction func safariLinkBtnAction(_ sender: AnyObject) {
+    NSWorkspace.shared().open(URL(string: safariExtensionLink)!)
+  }
+
+  @IBAction func chromeLinkBtnAction(_ sender: AnyObject) {
+    NSWorkspace.shared().open(URL(string: chromeExtensionLink)!)
+  }
+
 }

@@ -107,7 +107,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** The value of speedValueIndex before Force Touch **/
   var oldIndex: Int = AppData.availableSpeedValues.count / 2
-  
+
   /** When the arrow buttons were last clicked **/
   var lastClick = Date()
 
@@ -131,6 +131,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   var animationState: UIAnimationState = .shown
   var osdAnimationState: UIAnimationState = .hidden
+  var sidebarAnimationState: UIAnimationState = .hidden
 
   enum ScrollDirection {
     case horizontal
@@ -204,7 +205,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     }
   }
-  
+
   var titleTextField: NSTextField? {
     get {
       return window?.standardWindowButton(.documentIconButton)?.superview?.subviews.flatMap({ $0 as? NSTextField }).first
@@ -234,7 +235,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var osdVisualEffectView: NSVisualEffectView!
   @IBOutlet weak var osd: NSTextField!
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
-  
+
 
   weak var touchBarPlaySlider: NSSlider?
   weak var touchBarCurrentPosLabel: NSTextField?
@@ -692,13 +693,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         let offset = recognizer.magnification - lastMagnification + 1.0;
         let newWidth = window.frame.width * offset
         let newHeight = newWidth / window.aspectRatio.aspect
-      
+
         //Check against max & min threshold
         if newHeight < screenFrame.height && newHeight > minSize.height && newWidth > minSize.width {
           let newSize = NSSize(width: newWidth, height: newHeight);
           window.setFrame(window.frame.centeredResize(to: newSize), display: true)
         }
-        
+
         lastMagnification = recognizer.magnification
       }
 
@@ -787,7 +788,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowWillExitFullScreen(_ notification: Notification) {
     playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, false)
-    
+
     // hide titlebar
     window!.titlebarAppearsTransparent = true
     // show titleBarView
@@ -996,6 +997,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let view = (viewController as? NSViewController)?.view else {
         Utility.fatal("viewController is not a NSViewController")
     }
+    sidebarAnimationState = .willShow
     let width = type.width()
     sideBarWidthConstraint.constant = width
     sideBarRightConstraint.constant = -width
@@ -1014,21 +1016,26 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       sideBarRightConstraint.animator().constant = 0
     }) {
+      self.sidebarAnimationState = .shown
       self.sideBarStatus = type
     }
   }
 
   func hideSideBar(_ after: @escaping () -> Void = { }) {
+    sidebarAnimationState = .willHide
     let currWidth = sideBarWidthConstraint.constant
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       sideBarRightConstraint.animator().constant = -currWidth
     }) {
-      self.sideBarStatus = .hidden
-      self.sideBarView.subviews.removeAll()
-      self.sideBarView.isHidden = true
-      after()
+      if self.sidebarAnimationState == .willHide {
+        self.sideBarStatus = .hidden
+        self.sideBarView.subviews.removeAll()
+        self.sideBarView.isHidden = true
+        self.sidebarAnimationState = .hidden
+        after()
+      }
     }
   }
 
@@ -1197,7 +1204,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isInFullScreen {
       window!.appearance = appearance;
     }
-    
+
     window?.appearance = appearance
   }
 
@@ -1567,6 +1574,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func settingsButtonAction(_ sender: AnyObject) {
+    if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
+      return  // do not interrput other actions while it is animating
+    }
     let view = quickSettingView
     switch sideBarStatus {
     case .hidden:
@@ -1581,6 +1591,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func playlistButtonAction(_ sender: AnyObject) {
+    if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
+      return  // do not interrput other actions while it is animating
+    }
     let view = playlistView
     switch sideBarStatus {
     case .hidden:
@@ -1851,7 +1864,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     pipOverlayView.isHidden = true
     window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
     videoView.frame = window?.contentView?.frame ?? .zero
-    
+
     // Reset animation (disabling it if exitPIP is called manually)
     // See WebKit issue 25096170 as well as the workaround:
     // https://trac.webkit.org/browser/trunk/Source/WebCore/platform/mac/WebVideoFullscreenInterfaceMac.mm#L343

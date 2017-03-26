@@ -28,6 +28,9 @@
 /* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "Bjp-HJ-i7V"; */
 "Bjp-HJ-i7V.title" = "sans-serif";
 
+/* Class = "NSTextFieldCell"; title = "Opensubtitles account:"; ObjectID = "CKG-r9-NoN"; */
+"CKG-r9-NoN.title" = "Konto OpenSubtitles:";
+
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "Chj-YP-eFV"; */
 "Chj-YP-eFV.title" = "Preferowany język:";
 
@@ -67,6 +70,9 @@
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "SLQ-wt-k6Y"; */
 "SLQ-wt-k6Y.title" = "Tło:";
 
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Uj3-om-L26"; */
+"Uj3-om-L26.title" = "Opcja zostanie przechowywana jako kod języka ISO 639-2 oraz będzie działać zarówno z MPV jak i OpenSubtitles.";
+
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "VBZ-bi-gTh"; */
 "VBZ-bi-gTh.title" = "Y:";
 
@@ -75,6 +81,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "Waw-Pj-REg"; */
 "Waw-Pj-REg.title" = "Kolor:";
+
+/* Class = "NSMenuItem"; title = "OpenSubtitles.org"; ObjectID = "ZE6-eZ-zQy"; */
+"ZE6-eZ-zQy.title" = "OpenSubtitles.org";
 
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "Zym-2a-rt0"; */
 "Zym-2a-rt0.title" = "Automatyczne załadowanie:";
@@ -94,6 +103,9 @@
 /* Class = "NSBox"; title = "Font"; ObjectID = "dsH-Ze-lj5"; */
 "dsH-Ze-lj5.title" = "Czcionka";
 
+/* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "fUB-ll-Nvz"; */
+"fUB-ll-Nvz.title" = "Nie zalogowany";
+
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "i94-zQ-hFA"; */
 "i94-zQ-hFA.title" = "Kiedy włączone, wszystkie napisy ASS będą wyświetlane ze stylem wybranym poniżej.";
 
@@ -108,6 +120,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "kKv-lk-VPE"; */
 "kKv-lk-VPE.title" = "Kolor:";
+
+/* Class = "NSButtonCell"; title = "Login"; ObjectID = "l4s-EW-FkT"; */
+"l4s-EW-FkT.title" = "Zaloguj się";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "mxc-gq-Ct7"; */
 "mxc-gq-Ct7.title" = "Kolor:";

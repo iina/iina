@@ -181,8 +181,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func openURL(_ sender: NSMenuItem) {
-    let _ = Utility.quickPromptPanel(messageText: "Open URL", informativeText: "Please enter the url:") { str in
-      playerCore.openURLString(str)
+    let panel = NSAlert()
+    panel.messageText = "Open URL"
+    panel.informativeText = "Please enter the url:"
+    let inputViewController = OpenURLAccessoryViewController()
+    panel.accessoryView = inputViewController.view
+    panel.addButton(withTitle: "OK")
+    panel.addButton(withTitle: "Cancel")
+    panel.window.initialFirstResponder = inputViewController.urlField
+    let response = panel.runModal()
+    if response == NSAlertFirstButtonReturn {
+      playerCore.openURLString(inputViewController.urlField.stringValue)
     }
   }
 

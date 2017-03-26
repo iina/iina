@@ -9,8 +9,10 @@
         <customObject id="-2" userLabel="File's Owner" customClass="OpenURLAccessoryViewController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="chromeLinkBtn" destination="ZrL-Dr-kW0" id="zlH-mZ-CDy"/>
+                <outlet property="passwordField" destination="iws-4E-RLR" id="TQQ-iH-Uy8"/>
                 <outlet property="safariLinkBtn" destination="jg3-Bk-btZ" id="HE2-Vt-q68"/>
                 <outlet property="urlField" destination="Xut-NB-Mqu" id="xHQ-O3-Fy7"/>
+                <outlet property="usernameField" destination="KvW-Xu-QXt" id="qdF-AV-3Vw"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -91,7 +93,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iws-4E-RLR">
+                            <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iws-4E-RLR" customClass="NSSecureTextField">
                                 <rect key="frame" x="237" y="12" width="216" height="19"/>
                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="eip-sU-duC">
                                     <font key="font" metaFont="smallSystem"/>

@@ -191,7 +191,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     panel.window.initialFirstResponder = inputViewController.urlField
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
-      playerCore.openURLString(inputViewController.urlField.stringValue)
+      if let url = inputViewController.url {
+        playerCore.openURL(url)
+      } else {
+        Utility.showAlert("wrong_url_format")
+      }
     }
   }
 

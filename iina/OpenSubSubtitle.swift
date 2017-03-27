@@ -126,7 +126,7 @@ class OpenSubSupport {
           return
         }
         // read password
-        if let udUsername = UserDefaults.standard.string(forKey: Preference.Key.openSubUsername) {
+        if let udUsername = UserDefaults.standard.string(forKey: Preference.Key.openSubUsername), !udUsername.isEmpty {
           let (readResult, readPassword, _) = OpenSubSupport.findPassword(username: udUsername)
           if readResult == errSecSuccess {
             finalUser = udUsername

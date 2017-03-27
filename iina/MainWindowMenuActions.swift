@@ -361,7 +361,7 @@ extension MainWindowController {
   }
 
   @IBAction func saveDownloadedSub(_ sender: NSMenuItem) {
-    let selected = playerCore.info.subTracks.filter { $0.isSelected }
+    let selected = playerCore.info.subTracks.filter { $0.id == playerCore.info.sid }
     guard let currURL = playerCore.info.currentURL else { return }
     guard selected.count > 0 else {
       Utility.showAlert("sub.no_selected")

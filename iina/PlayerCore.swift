@@ -49,7 +49,6 @@ class PlayerCore: NSObject {
 
   func openURL(_ url: URL) {
     let path = url.absoluteString
-    print(path)
     openMainWindow(path: path, url: url, isNetwork: true)
   }
 

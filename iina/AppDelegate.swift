@@ -183,7 +183,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @IBAction func openURL(_ sender: NSMenuItem) {
     let panel = NSAlert()
     panel.messageText = "Open URL"
-    panel.informativeText = "Please enter the url:"
+    panel.informativeText = "Please enter the URL:"
     let inputViewController = OpenURLAccessoryViewController()
     panel.accessoryView = inputViewController.view
     panel.addButton(withTitle: "OK")

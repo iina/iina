@@ -1,4 +1,69 @@
-<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>Changelog | Project IINA</title><link href="/iina/stylesheets/lato.css" rel="stylesheet" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body><nav class="navbar navbar-fixed-top navbar-light bg-faded navbar-toggleable-md"><button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#nav_c" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><div class="collapse navbar-collapse" id="nav_c"><ul class="navbar-nav mr-auto"><li class="nav-item"><a href="/iina" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/features/" class="nav-link">Features</a></li><li class="nav-item"><a href="/iina/documentation/" class="nav-link">Documentation</a></li><li class="nav-item"><a href="/iina/changelog/" class="nav-link">Changelog</a></li><li class="nav-item"><a href="/iina/about/" class="nav-link">About</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></div></nav><div class="main"><div class="changelog"><div class="container"><h1>Changelog</h1><div class="clog"><h2 id="v006--feb-22-2017">v0.0.6  <em>Feb. 22, 2017</em></h2>
+<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>Changelog | Project IINA</title><link href="/iina/stylesheets/lato.css" rel="stylesheet" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body><nav class="navbar navbar-fixed-top navbar-light bg-faded navbar-toggleable-md"><button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#nav_c" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><div class="collapse navbar-collapse" id="nav_c"><ul class="navbar-nav mr-auto"><li class="nav-item"><a href="/iina" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/features/" class="nav-link">Features</a></li><li class="nav-item"><a href="/iina/documentation/" class="nav-link">Documentation</a></li><li class="nav-item"><a href="/iina/changelog/" class="nav-link">Changelog</a></li><li class="nav-item"><a href="/iina/about/" class="nav-link">About</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></div></nav><div class="main"><div class="changelog"><div class="container"><h1>Changelog</h1><div class="clog"><h2 id="v007--mar-28-2017">v0.0.7  <em>Mar. 28, 2017</em></h2>
+
+<p>IINA's wiki is now under construction: <a href="https://github.com/lhc70000/iina/wiki">https://github.com/lhc70000/iina/wiki</a>.
+You may find some helps on common issues like youtube-dl or downloading online subtitles.</p>
+
+<h3 id="new-features">New features</h3>
+
+<ul>
+  <li>Add support for OpenSubtitles
+    <ul>
+      <li>Please set "Subtitle source" to "opensubtitles.org"</li>
+      <li>Please read https://github.com/lhc70000/iina/wiki/Download-Online-Subtitles#opensubtitles for detailed usage.</li>
+    </ul>
+  </li>
+  <li>Auto complete for subtitle language settings</li>
+  <li>Display document icon in titlebar
+    <ul>
+      <li>Right click titlebar to show path menu</li>
+    </ul>
+  </li>
+  <li>More gesture controls：
+    <ul>
+      <li>Customizing vertical and horizontal scrolling actions</li>
+      <li>Setting sensitivity for volume (and seek)</li>
+      <li>Support pinch gesture (to zoom window or toggle fullscreen)</li>
+      <li>Optimize for mouses that don't support precise scrolling</li>
+    </ul>
+  </li>
+  <li>Human readable key binding settings, doesn't require knowledge on mpv command</li>
+  <li>Improved open URL dialog, add GUI for HTTP authentication
+    <ul>
+      <li>Support url containing spaces / lacking protocol</li>
+    </ul>
+  </li>
+  <li>Support mpv's <code>ontop</code> and <code>geometry</code> options</li>
+  <li>Support Apple Remote</li>
+</ul>
+
+<h3 id="bug-fixes">Bug fixes</h3>
+
+<ul>
+  <li>Fix prevent/allow sleep not working when pause/resume by right click</li>
+  <li>Fix standard buttons (traffic lights) may be disabled after opening new files (in build 15)</li>
+  <li>Fix wrong aspect ratio when playing some portrait videos recorded by mobile devices</li>
+  <li>Fix "saving downloaded sub" always saves the last subtitle</li>
+  <li>Fix the logic of whether resetting speed to normal when paused</li>
+  <li>Fix hanging when using some custom mpv.conf</li>
+  <li>Fix audio language preference not work</li>
+  <li>Other bug fixes</li>
+</ul>
+
+<h3 id="enhancements">Enhancements</h3>
+
+<ul>
+  <li>Now shortcuts for sidebar (Cmd+A/V/S/P/C) will switch to panel/tab directly</li>
+  <li>Set default UI auto hide time to 2.5s (5s in previous version)</li>
+  <li>Ignore hidden files when adding files into playlist</li>
+  <li>Better synchronization of sliders and text fields (for play speed, sub/audio delay)</li>
+  <li>Update "About" window</li>
+  <li>Allow decimal numbers for sub settings, like border, shadow</li>
+  <li>Change default screenshot folder to "~/Pictures/Screenshots"</li>
+  <li>Polish translation</li>
+  <li>Other enhancements</li>
+</ul>
+
+<h2 id="v006--feb-22-2017">v0.0.6  <em>Feb. 22, 2017</em></h2>
 
 <p>This version mainly fixed the following critical bug:</p>
 
@@ -54,7 +119,7 @@
 
 <p><em>*Double clicking a playlist item to play</em></p>
 
-<h3 id="new-features">New features</h3>
+<h3 id="new-features-1">New features</h3>
 
 <ul>
   <li>Add Picture-in-Picture (PIP) support</li>
@@ -78,7 +143,7 @@
   <li>DMG installation, signed App</li>
 </ul>
 
-<h3 id="bug-fixes">Bug fixes</h3>
+<h3 id="bug-fixes-1">Bug fixes</h3>
 
 <ul>
   <li>Fix space key not working sometimes</li>
@@ -106,7 +171,7 @@
   </li>
 </ul>
 
-<h3 id="new-features-1">New Features</h3>
+<h3 id="new-features-2">New Features</h3>
 
 <ul>
   <li><strong>Support macOS 10.10</strong></li>
@@ -121,7 +186,7 @@
   <li>**Support displaying remaining time **</li>
 </ul>
 
-<h3 id="enhancements">Enhancements</h3>
+<h3 id="enhancements-1">Enhancements</h3>
 
 <ul>
   <li>Changed "clear playlist" button icon</li>
@@ -132,7 +197,7 @@
   <li>Clear recent files when unchecked option</li>
 </ul>
 
-<h3 id="bug-fixes-1">Bug Fixes</h3>
+<h3 id="bug-fixes-2">Bug Fixes</h3>
 
 <ul>
   <li><strong>Fix: Crash when buffering</strong></li>
@@ -153,7 +218,7 @@
   <li>Add full simplified Chinese localization</li>
 </ul>
 
-<h3 id="new-features-2">New features</h3>
+<h3 id="new-features-3">New features</h3>
 
 <ul>
   <li>Redesigned on screen controller</li>
@@ -163,7 +228,7 @@
   <li>Add "Always on top while playing" option</li>
 </ul>
 
-<h3 id="bug-fixes-2">Bug fixes</h3>
+<h3 id="bug-fixes-3">Bug fixes</h3>
 
 <ul>
   <li>Support playing pure audio files</li>

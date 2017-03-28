@@ -293,10 +293,11 @@
 "alert.mpv_error" = "%@ (%@)오류가 사용자 지정 옵션 %@을 설정하는 도중 발생했습니다.";
 "alert.playlist.error_deleting" = "삭제 오류: %@";
 "alert.sleep" = "화면 잠자기 설정을 끌 수 없습니다!";
-"alert.sub.cannot_login" = "로그인 할 수 없습니다. 계정 이름과 암호, 네트워크 상태를 확인하십시오.\n\n%@";
+"alert.sub.cannot_login" = "로그인할 수 없습니다. 계정 이름과 암호, 네트워크 상태를 확인하십시오.\n\n%@";
 "alert.sub.cannot_save_passwd" = "키체인에 암호를 저장할 수 없습니다: %@";
 "alert.sub.no_selected" = "다운로드한 자막을 선택하십시오.";
 "alert.sub_lang_not_set" = "OpenSubtitles를 사용하기 전에 자막의 선호 언어를 설정하십시오. 지금은 영어(eng)를 사용합니다.";
 "alert.unsupported_audio" = "지원되지 않는 외부 오디오 파일입니다.";
 "alert.unsupported_sub" = "지원되지 않는 자막 형식입니다.";
 "alert.unsupported_url" = "지원되지 않는 URL입니다.";
+"alert.wrong_url_format" = "잘못된 URL 형식입니다.";

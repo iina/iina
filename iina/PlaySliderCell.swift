@@ -17,6 +17,8 @@ class PlaySliderCell: NSSliderCell {
   let knobWidth: CGFloat = 3
   let knobHeight: CGFloat = 15
   let knobRadius: CGFloat = 1
+  
+  let barRadius: CGFloat = 1.5
 
   static let darkColor = NSColor(red: 1, green: 1, blue: 1, alpha: 0.5)
   static let lightColor = NSColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
@@ -66,7 +68,20 @@ class PlaySliderCell: NSSliderCell {
     let pos = min(CGFloat(percentage) * bounds.width, bounds.width - 1);
     let rect = super.knobRect(flipped: flipped)
     let flippedMultiplier = flipped ? CGFloat(-1) : CGFloat(1)
-    return NSMakeRect(pos - flippedMultiplier * 0.5 * knobWidth, rect.origin.y, knobWidth, rect.height)
+    
+    let originX: CGFloat = {
+      var x = pos - flippedMultiplier * 0.5 * knobWidth
+      let width = barRect(flipped: true).size.width
+      // fix value for mouse click
+      x = x - 0.5
+      if x < knobWidth * 1.5 {
+        x = knobWidth * 1.5
+      } else if x > width - knobWidth {
+        x = width - knobWidth
+      }
+      return x
+    }()
+    return NSMakeRect(originX, rect.origin.y, knobWidth, rect.height)
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
@@ -88,7 +103,7 @@ class PlaySliderCell: NSSliderCell {
     }
     
     let rect = NSMakeRect(rect.origin.x, rect.origin.y + 1, rect.width, rect.height - 2)
-    let path = NSBezierPath(roundedRect: rect, xRadius: 3, yRadius: 3)
+    let path = NSBezierPath(roundedRect: rect, xRadius: barRadius, yRadius: barRadius)
 
     // draw left
     let pathLeftRect : NSRect = NSMakeRect(rect.origin.x, rect.origin.y, progress, rect.height)
@@ -129,10 +144,4 @@ class PlaySliderCell: NSSliderCell {
     }
     NSGraphicsContext.restoreGraphicsState()
   }
-
-  override func barRect(flipped: Bool) -> NSRect {
-    let rect = super.barRect(flipped: flipped)
-    return NSMakeRect(0, rect.origin.y, rect.width + rect.origin.x * 2, rect.height)
-  }
-
 }

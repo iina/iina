@@ -316,3 +316,13 @@ extension Data {
     return fileUrl
   }
 }
+
+
+extension CharacterSet {
+  static let urlAllowed = CharacterSet.urlHostAllowed
+    .union(.urlUserAllowed)
+    .union(.urlPasswordAllowed)
+    .union(.urlPathAllowed)
+    .union(.urlQueryAllowed)
+    .union(.urlFragmentAllowed)
+}

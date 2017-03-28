@@ -47,14 +47,13 @@ class PlayerCore: NSObject {
     openMainWindow(path: path, url: url!, isNetwork: false)
   }
 
+  func openURL(_ url: URL) {
+    let path = url.absoluteString
+    openMainWindow(path: path, url: url, isNetwork: true)
+  }
+
   func openURLString(_ str: String) {
-    let urlAllowed = CharacterSet.urlHostAllowed
-      .union(.urlUserAllowed)
-      .union(.urlPasswordAllowed)
-      .union(.urlPathAllowed)
-      .union(.urlQueryAllowed)
-      .union(.urlFragmentAllowed)
-    guard let str = str.addingPercentEncoding(withAllowedCharacters: urlAllowed),
+    guard let str = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed),
       let url = URL(string: str) else {
         return
     }

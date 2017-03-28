@@ -108,6 +108,7 @@
 "alert.unsupported_audio" = "Unsupported external audio file.";
 "alert.unsupported_sub" = "Unsupported external subtitle.";
 "alert.unsupported_url" = "Unsupported URL.";
+"alert.wrong_url_format" = "Wrong URL format.";
 
 "alert.error_open" = "Cannot open file or stream!";
 "alert.error_finding_file" = "Cannot find %@ file!";

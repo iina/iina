@@ -77,11 +77,8 @@ class Utility {
     NSLog(Thread.callStackSymbols.joined(separator: "\n"))
     showAlert("fatal_error", arguments: [message])
     block()
-    // Make sure the application exits
-    DispatchQueue.main.sync {
-      fatalError()
-    }
-    fatalError()
+    // Exit without crash since it's not uncatched/unhandled
+    exit(1)
   }
 
   // MARK: - Panels, Alerts

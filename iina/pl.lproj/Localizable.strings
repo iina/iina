@@ -20,7 +20,7 @@
 "menu.exit_pip" = "Wyjdź z Picture-in-Picture";
 
 /* Fullscreen */
-"menu.fullscreen" = "Pełno ekran";
+"menu.fullscreen" = "Pełny ekran";
 
 /* Pause */
 "menu.pause" = "Pauza";
@@ -77,7 +77,7 @@
 "osd.chapter" = "Rozdział: %@";
 
 /* Cleared Playlist */
-"osd.clear_playlist" = "Wyczyszczono Playliste";
+"osd.clear_playlist" = "Wyczyszczono Playlistę";
 
 /* Crop: %@ */
 "osd.crop" = "Przytnij: %@";
@@ -167,7 +167,7 @@
 "pl_menu.add_item" = "Dodaj plik";
 
 /* Clear Playlist */
-"pl_menu.clear_playlist" = "Wyczyść Playliste";
+"pl_menu.clear_playlist" = "Wyczyść Playlistę";
 
 /* Play Next */
 "pl_menu.play_next" = "Odtwórz następny";
@@ -212,7 +212,7 @@
 "preference.subtitle" = "Napisy";
 
 /* Preference */
-"preference.title" = "Właściwości";
+"preference.title" = "Preferencje";
 
 /* UI */
 "preference.ui" = "UI";

@@ -58,7 +58,8 @@ class MPVController: NSObject {
     MPVOption.Equalizer.gamma: MPV_FORMAT_INT64,
     MPVOption.Equalizer.hue: MPV_FORMAT_INT64,
     MPVOption.Equalizer.saturation: MPV_FORMAT_INT64,
-    MPVOption.Window.fullscreen: MPV_FORMAT_FLAG
+    MPVOption.Window.fullscreen: MPV_FORMAT_FLAG,
+    MPVOption.Window.ontop: MPV_FORMAT_FLAG
   ]
 
   deinit {
@@ -125,6 +126,7 @@ class MPVController: NSObject {
     setUserOption(PK.screenshotTemplate, type: .string, forName: MPVOption.Screenshot.screenshotTemplate)
 
     setUserOption(PK.useMediaKeys, type: .bool, forName: MPVOption.Input.inputMediaKeys)
+    setUserOption(PK.useAppleRemote, type: .bool, forName: MPVOption.Input.inputAppleremote)
 
     setUserOption(PK.keepOpenOnFileEnd, type: .other, forName: MPVOption.Window.keepOpen) { key in
       let keepOpen = UserDefaults.standard.bool(forKey: PK.keepOpenOnFileEnd)
@@ -245,7 +247,7 @@ class MPVController: NSObject {
         mpv_set_option_string(mpv, "config", "yes")
         let status = mpv_set_option_string(mpv, MPVOption.ProgramBehavior.configDir, userConfDir)
         if status < 0 {
-          Utility.showAlert(message: "Error setting config directory \"\(userConfDir)\".")
+          Utility.showAlert("extra_option.config_folder", arguments: [userConfDir])
         }
       }
     }
@@ -255,18 +257,13 @@ class MPVController: NSObject {
       userOptions.forEach { op in
         let status = mpv_set_option_string(mpv, op[0], op[1])
         if status < 0 {
-          let alert = String(format: NSLocalizedString("alert.extra_option_error", comment: "Error setting extra mpv option"), op[0], op[1], status)
-          Utility.showAlert(message: alert)
+          Utility.showAlert("extra_option.error", arguments:
+            [op[0], op[1], status])
         }
       }
     } else {
-      Utility.showAlert(message: "Cannot read user defined options.")
+      Utility.showAlert("extra_option.cannot_read")
     }
-
-    // Set options that can be override by user's config.
-    chkErr(mpv_set_option_string(mpv, MPVOption.Video.vo, "opengl-cb"))
-    chkErr(mpv_set_option_string(mpv, MPVOption.Window.keepaspect, "no"))
-    chkErr(mpv_set_option_string(mpv, MPVOption.Video.openglHwdecInterop, "auto"))
 
     // Load external scripts
     let loader = ScriptLoader()
@@ -304,6 +301,12 @@ class MPVController: NSObject {
     // Initialize an uninitialized mpv instance. If the mpv instance is already running, an error is retuned.
     chkErr(mpv_initialize(mpv))
 
+    // Set options that can be override by user's config. mpv will log user config when initialize,
+    // so we put them here.
+    chkErr(mpv_set_property_string(mpv, MPVOption.Video.vo, "opengl-cb"))
+    chkErr(mpv_set_property_string(mpv, MPVOption.Window.keepaspect, "no"))
+    chkErr(mpv_set_property_string(mpv, MPVOption.Video.openglHwdecInterop, "auto"))
+
     // get version
     mpvVersion = getString(MPVProperty.mpvVersion)
   }
@@ -326,7 +329,6 @@ class MPVController: NSObject {
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {
     if args.count > 0 && args.last == nil {
       Utility.fatal("Command do not need a nil suffix")
-      return
     }
 
     var strArgs = args
@@ -413,7 +415,7 @@ class MPVController: NSObject {
     let str = filters.map { $0.stringFormat }.joined(separator: ",")
     command(cmd, args: ["set", str], checkError: false) { returnValue in
       if returnValue < 0 {
-        Utility.showAlert(message: "Error occured when setting filters. Please check your parameter format.")
+        Utility.showAlert("alert.filter.incorrect")
         // reload data in filter setting window
         NotificationCenter.default.post(Notification(name: Constants.Noti.vfChanged))
       }
@@ -484,6 +486,9 @@ class MPVController: NSObject {
       break
 
     case MPV_EVENT_METADATA_UPDATE:
+      break
+
+    case MPV_EVENT_TRACK_SWITCHED:
       break
 
     case MPV_EVENT_START_FILE:
@@ -621,6 +626,8 @@ class MPVController: NSObject {
         if playerCore.info.isPaused != data {
           playerCore.sendOSD(data ? .pause : .resume)
           playerCore.info.isPaused = data
+        }
+        if let mw = playerCore.mainWindow, mw.isWindowLoaded {
           if data {
             SleepPreventer.allowSleep()
           } else {
@@ -648,7 +655,7 @@ class MPVController: NSObject {
 
     case MPVOption.Audio.volume:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        playerCore.info.volume = Int(data)
+        playerCore.info.volume = data
         playerCore.syncUI(.volume)
         playerCore.sendOSD(.volume(Int(data)))
       }
@@ -736,6 +743,9 @@ class MPVController: NSObject {
     case MPVOption.Window.fullscreen:
       NotificationCenter.default.post(Notification(name: Constants.Noti.fsChanged))
 
+    case MPVOption.Window.ontop:
+      NotificationCenter.default.post(Notification(name: Constants.Noti.ontopChanged))
+
     // ignore following
 
 
@@ -814,7 +824,7 @@ class MPVController: NSObject {
     }
 
     if code < 0 {
-      Utility.showAlert(message: "Error \(String(cString: mpv_error_string(code))) (\(code)) when setting user option \(name).")
+      Utility.showAlert("mpv_error", arguments: [String(cString: mpv_error_string(code)), "\(code)", name])
     }
 
     if sync {

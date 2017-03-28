@@ -21,8 +21,6 @@ class PlaybackInfo {
   var displayWidth: Int?
   var displayHeight: Int?
 
-  var isAlwaysOntop: Bool = false
-
   var rotation: Int = 0
 
   var videoPosition: VideoTime?
@@ -52,7 +50,7 @@ class PlaybackInfo {
   var gamma: Int = 0
   var hue: Int = 0
 
-  var volume: Int = 50
+  var volume: Double = 50
 
   var isMuted: Bool = false
 

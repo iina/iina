@@ -123,6 +123,7 @@ struct Preference {
     static let onlineSubSource = "onlineSubSource"
     static let displayInLetterBox = "displayInLetterBox"
     static let subScaleWithWindow = "subScaleWithWindow"
+    static let openSubUsername = "openSubUsername"
 
     // Network
 
@@ -146,11 +147,15 @@ struct Preference {
     static let relativeSeekAmount = "relativeSeekAmount"
 
     static let arrowButtonAction = "arrowBtnAction"
+    /** (1~4) */
+    static let volumeScrollAmount = "volumeScrollAmount"
+    static let verticalScrollAction = "verticalScrollAction"
+    static let horizontalScrollAction = "horizontalScrollAction"
 
     static let singleClickAction = "singleClickAction"
-
     static let doubleClickAction = "doubleClickAction"
     static let rightClickAction = "rightClickAction"
+    static let pinchAction = "pinchAction"
 
     static let showRemainingTime = "showRemainingTime"
 
@@ -158,6 +163,7 @@ struct Preference {
 
     /** Whether catch media keys event (bool) */
     static let useMediaKeys = "useMediaKeys"
+    static let useAppleRemote = "useAppleRemote"
 
     /** User created input config list (dic) */
     static let inputConfigs = "inputConfigs"
@@ -216,6 +222,19 @@ struct Preference {
     case fullscreen
     case pause
     case hideOSC
+  }
+
+  enum ScrollAction: Int {
+    case volume = 0
+    case seek
+    case none
+    case passToMpv
+  }
+
+  enum PinchAction: Int {
+    case windowSize = 0
+    case fullscreen
+    case none
   }
 
   enum AutoLoadAction: Int {
@@ -327,7 +346,7 @@ struct Preference {
     Key.controlBarPositionHorizontal: Float(0.5),
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,
-    Key.controlBarAutoHideTimeout: Float(5),
+    Key.controlBarAutoHideTimeout: Float(2.5),
     Key.themeMaterial: Theme.dark.rawValue,
     Key.osdAutoHideTimeout: Float(1),
     Key.osdTextSize: Float(20),
@@ -338,6 +357,7 @@ struct Preference {
     Key.showChapterPos: false,
     Key.resumeLastPosition: true,
     Key.useMediaKeys: true,
+    Key.useAppleRemote: true,
     Key.openStartPanel: false,
     Key.alwaysFloatOnTop: false,
 
@@ -361,26 +381,27 @@ struct Preference {
     Key.ignoreAssStyles: false,
     Key.subOverrideLevel: SubOverrideLevel.strip.rawValue,
     Key.subTextFont: "sans-serif",
-    Key.subTextSize: 55,
+    Key.subTextSize: Float(55),
     Key.subTextColor: NSArchiver.archivedData(withRootObject: NSColor.white),
     Key.subBgColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
     Key.subBold: false,
     Key.subItalic: false,
-    Key.subBlur: 0,
-    Key.subSpacing: 0,
-    Key.subBorderSize: 3,
+    Key.subBlur: Float(0),
+    Key.subSpacing: Float(0),
+    Key.subBorderSize: Float(3),
     Key.subBorderColor: NSArchiver.archivedData(withRootObject: NSColor.black),
-    Key.subShadowSize: 0,
+    Key.subShadowSize: Float(0),
     Key.subShadowColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
     Key.subAlignX: SubAlign.center.rawValue,
     Key.subAlignY: SubAlign.bottom.rawValue,
-    Key.subMarginX: 25,
-    Key.subMarginY: 22,
-    Key.subPos: 100,
+    Key.subMarginX: Float(25),
+    Key.subMarginY: Float(22),
+    Key.subPos: Float(100),
     Key.subLang: "",
     Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
     Key.displayInLetterBox: true,
     Key.subScaleWithWindow: true,
+    Key.openSubUsername: "",
 
     Key.enableCache: true,
     Key.defaultCacheSize: 153600,
@@ -407,11 +428,15 @@ struct Preference {
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
     Key.relativeSeekAmount: 2,
+    Key.volumeScrollAmount: 3,
+    Key.verticalScrollAction: ScrollAction.volume.rawValue,
+    Key.horizontalScrollAction: ScrollAction.seek.rawValue,
     Key.singleClickAction: MouseClickAction.hideOSC.rawValue,
     Key.doubleClickAction: MouseClickAction.fullscreen.rawValue,
     Key.rightClickAction: MouseClickAction.pause.rawValue,
+    Key.pinchAction: PinchAction.windowSize.rawValue,
 
-    Key.screenshotFolder: "~/Pictures/ScreenShots",
+    Key.screenshotFolder: "~/Pictures/Screenshots",
     Key.screenshotIncludeSubtitle: true,
     Key.screenshotFormat: ScreenshotFormat.png.rawValue,
     Key.screenshotTemplate: "%F-%n",

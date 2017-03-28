@@ -105,6 +105,7 @@ extension NSSize {
 
 }
 
+
 extension NSRect {
 
   func multiply(_ multiplier: CGFloat) -> NSRect {
@@ -293,4 +294,35 @@ extension Data {
       return (self as NSData).md5() as String
     }
   }
+
+  var chksum64: UInt64 {
+    get {
+      let count64 = self.count / MemoryLayout<UInt64>.size
+      return self.withUnsafeBytes{ (ptr: UnsafePointer<UInt64>) -> UInt64 in
+        let bufferPtr = UnsafeBufferPointer(start: ptr, count: count64)
+        return bufferPtr.reduce(UInt64(0), &+)
+      }
+    }
+  }
+
+  func saveToFolder(_ url: URL, filename: String) -> URL? {
+    let fileUrl = url.appendingPathComponent(filename)
+    do {
+      try self.write(to: fileUrl)
+    } catch {
+      Utility.showAlert("error_saving_file", arguments: ["data", filename])
+      return nil
+    }
+    return fileUrl
+  }
+}
+
+
+extension CharacterSet {
+  static let urlAllowed = CharacterSet.urlHostAllowed
+    .union(.urlUserAllowed)
+    .union(.urlPasswordAllowed)
+    .union(.urlPathAllowed)
+    .union(.urlQueryAllowed)
+    .union(.urlFragmentAllowed)
 }

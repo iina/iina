@@ -305,7 +305,8 @@ class MenuController: NSObject, NSMenuDelegate {
   private func updateVideoMenu() {
     let isInFullScreen = PlayerCore.shared.mainWindow?.isInFullScreen ?? false
     let isInPIP = PlayerCore.shared.mainWindow?.isInPIP ?? false
-    alwaysOnTop.state = PlayerCore.shared.info.isAlwaysOntop ? NSOnState : NSOffState
+    let isOntop = PlayerCore.shared.mainWindow?.isOntop ?? false
+    alwaysOnTop.state = isOntop ? NSOnState : NSOffState
     deinterlace.state = PlayerCore.shared.info.deinterlace ? NSOnState : NSOffState
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip

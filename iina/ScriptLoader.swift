@@ -22,7 +22,7 @@ class ScriptLoader {
     if let script = LuaScript(defaultName: name) {
       list.append(script)
     } else {
-      Utility.showAlert(message: "Cannot load script \(name)!")
+      Utility.showAlert("error_loading_script")
     }
   }
 

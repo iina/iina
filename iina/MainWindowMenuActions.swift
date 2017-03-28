@@ -78,13 +78,29 @@ extension MainWindowController {
   }
 
   @IBAction func menuShowPlaylistPanel(_ sender: NSMenuItem) {
-    playlistView.pleaseSwitchToTab(.playlist)
-    playlistButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .settings {
+      playlistView.pleaseSwitchToTab(.playlist)
+      playlistButtonAction(sender)
+    } else {
+      if playlistView.currentTab != .playlist {
+        playlistView.pleaseSwitchToTab(.playlist)
+      } else {
+        playlistButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuShowChaptersPanel(_ sender: NSMenuItem) {
-    playlistView.pleaseSwitchToTab(.chapters)
-    playlistButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .settings {
+      playlistView.pleaseSwitchToTab(.chapters)
+      playlistButtonAction(sender)
+    } else {
+      if playlistView.currentTab != .chapters {
+        playlistView.pleaseSwitchToTab(.chapters)
+      } else {
+        playlistButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuChapterSwitch(_ sender: NSMenuItem) {
@@ -95,18 +111,42 @@ extension MainWindowController {
   }
 
   @IBAction func menuShowVideoQuickSettings(_ sender: NSMenuItem) {
-    quickSettingView.pleaseSwitchToTab(.video)
-    settingsButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .playlist {
+      quickSettingView.pleaseSwitchToTab(.video)
+      settingsButtonAction(sender)
+    } else {
+      if quickSettingView.currentTab != .video {
+        quickSettingView.pleaseSwitchToTab(.video)
+      } else {
+        settingsButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuShowAudioQuickSettings(_ sender: NSMenuItem) {
-    quickSettingView.pleaseSwitchToTab(.audio)
-    settingsButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .playlist {
+      quickSettingView.pleaseSwitchToTab(.audio)
+      settingsButtonAction(sender)
+    } else {
+      if quickSettingView.currentTab != .audio {
+        quickSettingView.pleaseSwitchToTab(.audio)
+      } else {
+        settingsButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuShowSubQuickSettings(_ sender: NSMenuItem) {
-    quickSettingView.pleaseSwitchToTab(.sub)
-    settingsButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .playlist {
+      quickSettingView.pleaseSwitchToTab(.sub)
+      settingsButtonAction(sender)
+    } else {
+      if quickSettingView.currentTab != .sub {
+        quickSettingView.pleaseSwitchToTab(.sub)
+      } else {
+        settingsButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuChangeTrack(_ sender: NSMenuItem) {
@@ -206,8 +246,8 @@ extension MainWindowController {
   }
 
   @IBAction func menuAlwaysOnTop(_ sender: AnyObject) {
-    playerCore.info.isAlwaysOntop = !playerCore.info.isAlwaysOntop
-    setWindowFloatingOnTop(playerCore.info.isAlwaysOntop)
+    isOntop = !isOntop
+    setWindowFloatingOnTop(isOntop)
   }
   
   @available(macOS 10.12, *)
@@ -225,7 +265,7 @@ extension MainWindowController {
 
   @IBAction func menuChangeVolume(_ sender: NSMenuItem) {
     if let volumeDelta = sender.representedObject as? Int {
-      let newVolume = volumeDelta + playerCore.info.volume
+      let newVolume = Double(volumeDelta) + playerCore.info.volume
       playerCore.setVolume(newVolume, constrain: false)
     } else {
       Utility.log("sender.representedObject is not int in menuChangeVolume()")
@@ -305,27 +345,33 @@ extension MainWindowController {
       self.playerCore.sendOSD(.foundSub(subtitles.count))
       // download them
       for sub in subtitles {
-        sub.download { url in
-          Utility.log("Saved subtitle to \(url.path)")
-          self.playerCore.loadExternalSubFile(url)
-          self.playerCore.sendOSD(.downloadedSub)
-          self.playerCore.info.haveDownloadedSub = true
+        sub.download { result in
+          switch result {
+          case .ok(let url):
+            Utility.log("Saved subtitle to \(url.path)")
+            self.playerCore.loadExternalSubFile(url)
+            self.playerCore.sendOSD(.downloadedSub)
+            self.playerCore.info.haveDownloadedSub = true
+          case .failed:
+            self.playerCore.sendOSD(.networkError)
+          }
         }
       }
     }
   }
 
   @IBAction func saveDownloadedSub(_ sender: NSMenuItem) {
-    let selected = playerCore.info.subTracks.filter { $0.isSelected }
+    let selected = playerCore.info.subTracks.filter { $0.id == playerCore.info.sid }
     guard let currURL = playerCore.info.currentURL else { return }
     guard selected.count > 0 else {
-      Utility.showAlert(message: "Please select a downloaded subtitle first.")
+      Utility.showAlert("sub.no_selected")
+      
       return
     }
     let sub = selected[0]
     // make sure it's a downloaded sub
     guard let path = sub.externalFilename, path.contains("/var/") else {
-      Utility.showAlert(message: "Please select a downloaded subtitle first.")
+      Utility.showAlert("sub.no_selected")
       return
     }
     let subURL = URL(fileURLWithPath: path)
@@ -335,7 +381,8 @@ extension MainWindowController {
       try FileManager.default.copyItem(at: subURL, to: destURL)
       displayOSD(.savedSub)
     } catch let error as NSError {
-      Utility.showAlert(message: "Error occured when copying file: \(error.localizedDescription)")
+      Utility.showAlert("error_saving_file", arguments: ["subtitle",
+                                                         error.localizedDescription])
     }
 
   }
@@ -357,7 +404,8 @@ extension MainWindowController {
         do {
           try playlist.write(to: url, atomically: true, encoding: String.Encoding.utf8)
         } catch let error as NSError {
-          Utility.showAlert(message: "Error occured when saving playlist: \(error.localizedDescription)")
+          Utility.showAlert("error_saving_file", arguments: ["subtitle",
+                                                            error.localizedDescription])
         }
       }
     }

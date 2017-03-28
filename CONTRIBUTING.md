@@ -6,11 +6,6 @@ First of all, please be tolerant. I'm not a professional in Cocoa development or
 
 If you believe the code structures can be improved, please raise an issue.
 
-## Issues
-
-- Please use English for both the title and the details. 请在标题和正文都使用英文。
-- Before opening an issue, please check whether a similar one already exists.
-
 ## Some Guidelines
 
 - IINA is for modern macOS.

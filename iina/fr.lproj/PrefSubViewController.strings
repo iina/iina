@@ -71,8 +71,8 @@
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "VBZ-bi-gTh"; */
 "VBZ-bi-gTh.title" = "Y :";
 
-/* Class = "NSButtonCell"; title = "Ignore all ASS styles"; ObjectID = "VKh-1E-Ey8"; */
-"VKh-1E-Ey8.title" = "Ignorer tous les styles ASS";
+/* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "VKh-1E-Ey8"; */
+"VKh-1E-Ey8.title" = "Ignorer les styles ASS";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "Waw-Pj-REg"; */
 "Waw-Pj-REg.title" = "Couleur :";
@@ -145,3 +145,18 @@
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "zLl-vV-p1h"; */
 "zLl-vV-p1h.title" = "À droite";
+
+/* Class = "NSTextFieldCell"; title = "Opensubtitles account:"; ObjectID = "CKG-r9-NoN"; */
+"CKG-r9-NoN.title" = "Compte OpenSubtitles :";
+
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Uj3-om-L26"; */
+"Uj3-om-L26.title" = "Cette option doit être un code de langue ISO 639-2 (utilisé pour mpv et OpenSubtitles)";
+
+/* Class = "NSMenuItem"; title = "OpenSubtitles.org"; ObjectID = "ZE6-eZ-zQy"; */
+"ZE6-eZ-zQy.title" = "OpenSubtitles.org";
+
+/* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "fUB-ll-Nvz"; */
+"fUB-ll-Nvz.title" = "Déconnecté";
+
+/* Class = "NSButtonCell"; title = "Login"; ObjectID = "l4s-EW-FkT"; */
+"l4s-EW-FkT.title" = "Connexion";

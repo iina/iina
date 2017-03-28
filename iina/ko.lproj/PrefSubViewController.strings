@@ -14,7 +14,7 @@
 "7NC-Ih-gMB.title" = " X:";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letter box in full screen"; ObjectID = "9kA-0S-Nl8"; */
-"9kA-0S-Nl8.title" = "전체화면일 때 자막을 레터박스에 표시";
+"9kA-0S-Nl8.title" = "전체 화면일 때 자막을 레터박스에 표시";
 
 /* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "99d-UG-eDD"; */
 "99d-UG-eDD.title" = "글자 간격:";
@@ -27,6 +27,11 @@
 
 /* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "Bjp-HJ-i7V"; */
 "Bjp-HJ-i7V.title" = "sans-serif";
+
+"Uj3-om-L26.title" = "ISO 639-2의 언어 코드를 쉼표로 구분하여 사용하십시오. 이 설정은 mpv와 opensubtitles 모두에 적용됩니다.";
+
+/* Class = "NSTextFieldCell"; title = "Opensubtitles account:"; ObjectID = "CKG-r9-NoN"; */
+"CKG-r9-NoN.title" = "Opensubtitles 계정:";
 
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "Chj-YP-eFV"; */
 "Chj-YP-eFV.title" = "선호 언어:";
@@ -94,6 +99,9 @@
 /* Class = "NSBox"; title = "Font"; ObjectID = "dsH-Ze-lj5"; */
 "dsH-Ze-lj5.title" = "서체";
 
+/* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "fUB-ll-Nvz"; */
+"fUB-ll-Nvz.title" = "로그인되지 않음";
+
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "i94-zQ-hFA"; */
 "i94-zQ-hFA.title" = "선택하면 모든 ASS 자막은 아래 설정에 따라 표시됩니다.";
 
@@ -108,6 +116,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "kKv-lk-VPE"; */
 "kKv-lk-VPE.title" = "색상:";
+
+/* Class = "NSButtonCell"; title = "Login"; ObjectID = "l4s-EW-FkT"; */
+"l4s-EW-FkT.title" = "로그인";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "mxc-gq-Ct7"; */
 "mxc-gq-Ct7.title" = "색상:";

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDelegate {
+class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDelegate, SidebarViewController {
 
   override var nibName: String {
     return "PlaylistViewController"
@@ -34,11 +34,14 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
     case chapters
   }
 
+  var currentTab: TabViewType = .playlist
+
   @IBOutlet weak var playlistTableView: NSTableView!
   @IBOutlet weak var chapterTableView: NSTableView!
   @IBOutlet weak var playlistBtn: NSButton!
   @IBOutlet weak var chaptersBtn: NSButton!
   @IBOutlet weak var tabView: NSTabView!
+  @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var deleteBtn: NSButton!
   @IBOutlet weak var loopBtn: NSButton!
   @IBOutlet weak var shuffleBtn: NSButton!
@@ -50,6 +53,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
   lazy var chapterDelegate: ChapterTableDelegate = {
     return ChapterTableDelegate(self)
   }()
+  
+  var downShift: CGFloat = 0 {
+    didSet {
+      buttonTopConstraint.constant = downShift
+    }
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -108,6 +117,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
     }
   }
 
+  // MARK: - Tab switching
+
   /** Switch tab (call from other objects) */
   func pleaseSwitchToTab(_ tab: TabViewType) {
     if isViewLoaded {
@@ -133,6 +144,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
       chaptersBtn.attributedTitle = NSAttributedString(string: chapterStr, attributes: Utility.tabTitleActiveFontAttributes)
       playlistBtn.attributedTitle = NSAttributedString(string: playlistStr, attributes: Utility.tabTitleFontAttributes)
     }
+
+    currentTab = tab
   }
 
   // MARK: - NSTableViewDataSource
@@ -482,7 +495,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
         try FileManager.default.trashItem(at: url, resultingItemURL: nil)
         count += 1
       } catch let error {
-        Utility.showAlert(message: "Error deleting file: \(error.localizedDescription)")
+        Utility.showAlert("playlist.error_deleting", arguments:
+          [error.localizedDescription])
       }
     }
     playlistTableView.deselectAll(nil)

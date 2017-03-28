@@ -33,7 +33,9 @@ class OpenURLAccessoryViewController: NSViewController {
       guard let urlComponents = NSURLComponents(string: urlValue) else { return nil }
       if !username.isEmpty {
         urlComponents.user = username
-        urlComponents.password = password
+        if !password.isEmpty {
+          urlComponents.password = password
+        }
       }
       return urlComponents.url
     }

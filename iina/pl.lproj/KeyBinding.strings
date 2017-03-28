@@ -163,3 +163,10 @@
 /* (No Commment) */
 "yes" = "Tak";
 
+"read.set" = "Ustaw {{property}} na {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Pomnóż {{property}} przez {{factor}}x";
+"read.cycle" = "Cykl {{property}}{{#dir_down}} W dół {{/dir_down}}";
+"read.cycle-values" = "Cykl {{property}} w ({{{values}}})";
+"read.seek" = "Szukaj {{#fwd}}Do przodu{{/fwd}}{{#bwd}}Do dołu{{/bwd}}{{#abs}}do{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Szukaj w{{#skip_1}}następny{{/skip_1}}{{#skip_-1}}poprzedni{{/skip_-1}} napisy";

@@ -396,6 +396,8 @@
 		84AC621D1E87A4F3002D6F92 /* OpenURLAccessoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenURLAccessoryViewController.swift; sourceTree = "<group>"; };
 		84AC62221E87C6CF002D6F92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OpenURLAccessoryViewController.xib; sourceTree = "<group>"; };
 		84AC62251E87C6D1002D6F92 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OpenURLAccessoryViewController.strings"; sourceTree = "<group>"; };
+		84AC62281E87DC07002D6F92 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/SubSelectWindowController.strings; sourceTree = "<group>"; };
+		84AC62291E87DC07002D6F92 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84AE59481E0FD65800771B7E /* MainWindowMenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowMenuActions.swift; sourceTree = "<group>"; };
 		84AF03BB1E6725A1003E3753 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/PrefGeneralViewController.strings; sourceTree = "<group>"; };
 		84AF03BC1E6725A1003E3753 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/PrefUIViewController.strings; sourceTree = "<group>"; };
@@ -1501,6 +1503,7 @@
 				845260661E7BC9CC00D3CF6A /* zh-Hans */,
 				B3B24B621E831068008393CE /* it */,
 				843B97991E82D3BD00D07261 /* uk */,
+				84AC62281E87DC07002D6F92 /* pl */,
 			);
 			name = SubSelectWindowController.xib;
 			sourceTree = "<group>";
@@ -1511,6 +1514,7 @@
 				C78987301E34EF170005769F /* ko */,
 				D2B411431E5336AE002819E1 /* zh-Hant */,
 				843B97AA1E82D3C100D07261 /* Base */,
+				84AC62291E87DC07002D6F92 /* pl */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

@@ -65,7 +65,7 @@
 "Fqo-1c-3L1.ibShadowedLabels[0]" = "Ogólne";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[1] = "Tracks"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[1]" = "Tracks";
+"Fqo-1c-3L1.ibShadowedLabels[1]" = "Ścieżki";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[2] = "File"; ObjectID = "Fqo-1c-3L1"; */
 "Fqo-1c-3L1.ibShadowedLabels[2]" = "Plik";
@@ -146,7 +146,7 @@
 "UPK-o2-eTo.title" = "Label";
 
 /* Class = "NSTabViewItem"; label = "Tracks"; ObjectID = "UuR-M1-YLj"; */
-"UuR-M1-YLj.label" = "Tracks";
+"UuR-M1-YLj.label" = "Ścieżki";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "V7s-Tp-SD6"; */
 "V7s-Tp-SD6.title" = "Label";
@@ -167,7 +167,7 @@
 "Zaf-qd-A4D.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "bki-sE-xCA"; */
-"bki-sE-xCA.title" = "Codec:";
+"bki-sE-xCA.title" = "Kodek:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "c6m-YO-xqZ"; */
 "c6m-YO-xqZ.title" = "Label";
@@ -179,7 +179,7 @@
 "cwF-5C-5nd.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "daB-hU-mku"; */
-"daB-hU-mku.title" = "Codec:";
+"daB-hU-mku.title" = "Kodek:";
 
 /* Class = "NSTextFieldCell"; title = "Properties:"; ObjectID = "dtn-wS-j6U"; */
 "dtn-wS-j6U.title" = "Preferencje:";
@@ -194,13 +194,13 @@
 "f7a-XG-NCc.label" = "Ogólne";
 
 /* Class = "NSTextFieldCell"; title = "Track:"; ObjectID = "f7i-wX-uxQ"; */
-"f7i-wX-uxQ.title" = "Track:";
+"f7i-wX-uxQ.title" = "Ścieżka:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "fYh-pA-yDU"; */
 "fYh-pA-yDU.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "Szacowany FPS - Output:";
+"g8p-Ec-awO.title" = "Szacowane wyjście FPS:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "OBRAZ";
@@ -215,7 +215,7 @@
 "it3-05-Pwu.title" = "Kanały:";
 
 /* Class = "NSTextFieldCell"; title = "Source ID:"; ObjectID = "jCY-og-BAa"; */
-"jCY-og-BAa.title" = "Źródło:";
+"jCY-og-BAa.title" = "Źródło ID:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "jMN-aN-DqI"; */
 "jMN-aN-DqI.title" = "Label";
@@ -233,7 +233,7 @@
 "mgl-Et-20K.title" = "Format:";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "n0s-eM-42w"; */
-"n0s-eM-42w.title" = "Codec:";
+"n0s-eM-42w.title" = "Kodek:";
 
 /* Class = "NSTextFieldCell"; title = "AUDIO"; ObjectID = "nrG-IH-kFg"; */
 "nrG-IH-kFg.title" = "DŹWIĘK";

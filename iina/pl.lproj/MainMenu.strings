@@ -5,7 +5,7 @@
 "0m7-3r-twH.title" = "Otwórz URL…";
 
 /* Class = "NSMenuItem"; title = "Normal Size"; ObjectID = "1UK-8n-QPP"; */
-"1UK-8n-QPP.title" = "Normalny Rozmiar";
+"1UK-8n-QPP.title" = "Normalny rozmiar";
 
 /* Class = "NSMenuItem"; title = "IINA"; ObjectID = "1Xt-HY-uBw"; */
 "1Xt-HY-uBw.title" = "IINA";
@@ -23,7 +23,7 @@
 "2t8-Ot-yoO.title" = "Panel Szybkich Opcji";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
-"4ae-MT-2L1.title" = "Opóźnienie dźwięku + 0.5s";
+"4ae-MT-2L1.title" = "Opóźnienie dźwięku: + 0.5s";
 
 /* Class = "NSMenuItem"; title = "Quit IINA"; ObjectID = "4sb-4s-VLi"; */
 "4sb-4s-VLi.title" = "Wyjdź z IINA";
@@ -47,7 +47,7 @@
 "8y7-Cy-lKT.title" = "Panel Szybkich Opcji";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
-"9pa-9C-ueQ.title" = "<Brak>";
+"9pa-9C-ueQ.title" = "";
 
 /* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
 "9zk-co-roT.title" = "Zapisz Pobrane Napisy";
@@ -68,7 +68,7 @@
 "AoP-K6-Kb5.title" = "Zrzut ekranu";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
-"BOF-NM-1cW.title" = "Właściwości…";
+"BOF-NM-1cW.title" = "Preferencje…";
 
 /* Class = "NSMenuItem"; title = "Scale Down"; ObjectID = "Bli-YK-Rl0"; */
 "Bli-YK-Rl0.title" = "Pomniejsz";
@@ -83,7 +83,7 @@
 "D1y-kv-85s.title" = "Powtarzaj";
 
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
-"DRb-Y8-xir.title" = "Audio Track";
+"DRb-Y8-xir.title" = "Ścieżka Dźwięku";
 
 /* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
 "DVo-aG-piG.title" = "Zamknij";
@@ -101,16 +101,16 @@
 "FKE-Sm-Kum.title" = "Dokumentacja / Pomoc";
 
 /* Class = "NSMenu"; title = "Video Track"; ObjectID = "FTu-CF-O0R"; */
-"FTu-CF-O0R.title" = "Video Track";
+"FTu-CF-O0R.title" = "Ścieżka Obrazu";
 
 /* Class = "NSMenuItem"; title = "Chapter"; ObjectID = "Fal-I4-PZk"; */
 "Fal-I4-PZk.title" = "Rozdział";
 
 /* Class = "NSMenu"; title = "Playback"; ObjectID = "GEO-Iw-cKr"; */
-"GEO-Iw-cKr.title" = "Odtwarzanie nagranego dźwięku";
+"GEO-Iw-cKr.title" = "Odtwarzaj";
 
 /* Class = "NSMenuItem"; title = "Audio Track"; ObjectID = "GF1-xB-KcA"; */
-"GF1-xB-KcA.title" = "Audio Track";
+"GF1-xB-KcA.title" = "Ścieżka Dźwięku";
 
 /* Class = "NSMenuItem"; title = "Playlist"; ObjectID = "Gi5-1S-RQB"; */
 "Gi5-1S-RQB.title" = "Playlista";
@@ -149,10 +149,10 @@
 "LE2-aR-0XJ.title" = "Przenieś wszystkie na przód ";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
-"Lc4-4W-thE.title" = "Opóźnienie dźwięku - 0.5s";
+"Lc4-4W-thE.title" = "Opóźnienie dźwięku: - 0.5s";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.5s"; ObjectID = "LsU-Qz-dax"; */
-"LsU-Qz-dax.title" = "Opóźnienie Napisów - 0.5s";
+"LsU-Qz-dax.title" = "Opóźnienie napisów: - 0.5s";
 
 /* Class = "NSMenuItem"; title = "Find Online Subtitles…"; ObjectID = "Mg3-WB-gjZ"; */
 "Mg3-WB-gjZ.title" = "Znajdź Napisy Online…";
@@ -176,13 +176,13 @@
 "P1a-ot-P31.title" = "Zrestartuj rozmiar napisów";
 
 /* Class = "NSMenuItem"; title = "Encoding"; ObjectID = "Pci-OQ-Vni"; */
-"Pci-OQ-Vni.title" = "Encoding";
+"Pci-OQ-Vni.title" = "Kodowanie";
 
 /* Class = "NSMenu"; title = "Encoding"; ObjectID = "Pf6-5i-B1E"; */
-"Pf6-5i-B1E.title" = "Encoding";
+"Pf6-5i-B1E.title" = "Kodowanie";
 
 /* Class = "NSMenuItem"; title = "Video Filters…"; ObjectID = "PyY-pR-jz7"; */
-"PyY-pR-jz7.title" = "Filtry obrazu…";
+"PyY-pR-jz7.title" = "Filtry Obrazu…";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4"; */
 "R4o-n2-Eq4.title" = "Powiększ";
@@ -269,7 +269,7 @@
 "dMs-cI-mzQ.title" = "Plik";
 
 /* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
-"deS-xK-iBb.title" = "Zastopuj i wyczyść Playliste";
+"deS-xK-iBb.title" = "Zastopuj i wyczyść Playlistę";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
 "eo2-Tt-SLx.title" = "Przytnij";
@@ -284,19 +284,19 @@
 "hz9-B4-Xy5.title" = "Usługi";
 
 /* Class = "NSMenuItem"; title = "A-B Loop"; ObjectID = "i3P-Xw-8D7"; */
-"i3P-Xw-8D7.title" = "A-B Loop";
+"i3P-Xw-8D7.title" = "Pętla A-B";
 
 /* Class = "NSMenuItem"; title = "Volume:"; ObjectID = "iQF-1S-9EK"; */
 "iQF-1S-9EK.title" = "Głośność:";
 
 /* Class = "NSMenuItem"; title = "Video Track"; ObjectID = "j8P-Gb-HR7"; */
-"j8P-Gb-HR7.title" = "Video Track";
+"j8P-Gb-HR7.title" = "Ścieżka Obrazu";
 
 /* Class = "NSMenuItem"; title = "Playback"; ObjectID = "jxT-CU-nIS"; */
-"jxT-CU-nIS.title" = "Odtwarzanie nagranego dźwięku";
+"jxT-CU-nIS.title" = "Odtwarzaj";
 
 /* Class = "NSMenuItem"; title = "Load External Subtitle…"; ObjectID = "k6x-hf-ATi"; */
-"k6x-hf-ATi.title" = "Załaduj zewnętrzne napisy...";
+"k6x-hf-ATi.title" = "Załaduj Zewnętrzne Napisy...";
 
 /* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
 "lDC-IC-peP.title" = "Większy rozmiar";
@@ -320,13 +320,13 @@
 "n90-to-nRT.title" = "Obróć";
 
 /* Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ"; */
-"oas-Oc-fiZ.title" = "Otwórz ostatni";
+"oas-Oc-fiZ.title" = "Otwórz ostatnie";
 
 /* Class = "NSMenuItem"; title = "Previous Frame"; ObjectID = "oxF-BB-lBy"; */
 "oxF-BB-lBy.title" = "Poprzednia klatka";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay +0.5s"; ObjectID = "pAo-L5-qTO"; */
-"pAo-L5-qTO.title" = "Opóźnienie napisów +0.5s";
+"pAo-L5-qTO.title" = "Opóźnienie napisów: +0.5s";
 
 /* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
 "pdj-9C-Fn1.title" = "Głośność - 5%";
@@ -341,7 +341,7 @@
 "snW-S8-Cw5.title" = "Połowa rozmiaru";
 
 /* Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "tXI-mr-wws"; */
-"tXI-mr-wws.title" = "Otwórz ostatni";
+"tXI-mr-wws.title" = "Otwórz ostatnie";
 
 /* Class = "NSMenuItem"; title = "Subtitle"; ObjectID = "uGZ-lo-pJJ"; */
 "uGZ-lo-pJJ.title" = "Napisy";
@@ -359,7 +359,7 @@
 "wpr-3q-Mcd.title" = "Pomoc";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "wrS-JG-jF6"; */
-"wrS-JG-jF6.title" = "<Brak>";
+"wrS-JG-jF6.title" = "";
 
 /* Class = "NSMenuItem"; title = "Subtitles"; ObjectID = "xDJ-GA-Gjs"; */
 "xDJ-GA-Gjs.title" = "Napisy";

@@ -498,7 +498,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       sender.allowsTickMarkValuesOnly = false
     }
     let sliderValue = sender.doubleValue
-    customAudioDelaytextField.doubleValue = sliderValue
+    customAudioDelayTextField.doubleValue = sliderValue
     redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(customAudioDelayTextField.stringValue)s")
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
@@ -509,6 +509,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func customAudioDelayEditFinishedAction(_ sender: NSTextField) {
     let value = sender.doubleValue
+    if value == 0 {
+      sender.stringValue = "0"
+    }
     playerCore.setAudioDelay(value)
     audioDelaySlider.doubleValue = value
     redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(sender.stringValue)s")
@@ -568,6 +571,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func customSubDelayEditFinishedAction(_ sender: NSTextField) {
     let value = sender.doubleValue
+    if value == 0 {
+      sender.stringValue = "0"
+    }
     playerCore.setSubDelay(value)
     subDelaySlider.doubleValue = value
     redraw(indicator: subDelaySliderIndicator, constraint: subDelaySliderConstraint, slider: subDelaySlider, value: "\(sender.stringValue)s")

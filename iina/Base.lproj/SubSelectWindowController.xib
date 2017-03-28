@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12118"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -29,13 +29,13 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" emptySelection="NO" autosaveColumns="NO" rowHeight="18" headerView="v1l-v9-Csn" id="loj-9S-OmY">
-                                    <rect key="frame" x="0.0" y="0.0" width="480" height="328"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="481" height="328"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="0.14999999999999999" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="67" minWidth="40" maxWidth="1000" id="XbH-kl-Ugn">
+                                        <tableColumn editable="NO" width="67" minWidth="40" maxWidth="1000" id="XbH-kl-Ugn">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Downloads">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -51,7 +51,7 @@
                                                 <binding destination="dAR-b7-886" name="value" keyPath="arrangedObjects.dlCount" id="YrH-Ra-K4X"/>
                                             </connections>
                                         </tableColumn>
-                                        <tableColumn width="66.5" minWidth="40" maxWidth="1000" id="PPf-0C-Swv">
+                                        <tableColumn editable="NO" width="66.5" minWidth="40" maxWidth="1000" id="PPf-0C-Swv">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Language">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -67,7 +67,7 @@
                                                 <binding destination="dAR-b7-886" name="value" keyPath="arrangedObjects.langID" id="bWe-5U-xed"/>
                                             </connections>
                                         </tableColumn>
-                                        <tableColumn identifier="" width="337.5" minWidth="10" maxWidth="3.4028234663852886e+38" id="KfR-kc-tzb">
+                                        <tableColumn identifier="" editable="NO" width="337.5" minWidth="10" maxWidth="3.4028234663852886e+38" id="KfR-kc-tzb">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -91,7 +91,7 @@
                                 </tableView>
                             </subviews>
                         </clipView>
-                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="cP0-00-4w2">
+                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="cP0-00-4w2">
                             <rect key="frame" x="0.0" y="335" width="480" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -100,7 +100,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <tableHeaderView key="headerView" id="v1l-v9-Csn">
-                            <rect key="frame" x="0.0" y="0.0" width="480" height="23"/>
+                            <rect key="frame" x="0.0" y="0.0" width="481" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>

@@ -224,7 +224,6 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="rememberFloatingToggle:" target="-2" id="2yc-qj-tJZ"/>
                         <binding destination="lH7-Vv-0M1" name="value" keyPath="values.alwaysFloatOnTop" id="oPr-N0-bZK"/>
                     </connections>
                 </button>

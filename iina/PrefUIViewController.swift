@@ -45,4 +45,10 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
     // Do view setup here.
   }
 
+  @IBAction func rememberFloatingToggle(_ sender: NSButton) {
+    let ontop = sender.state == NSOnState
+    PlayerCore.shared.mainWindow!.isOntop = ontop
+    PlayerCore.shared.mainWindow!.setWindowFloatingOnTop(ontop)
+  }
+
 }

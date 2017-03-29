@@ -219,11 +219,12 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="cRD-ki-Ue7"/>
                     </constraints>
-                    <buttonCell key="cell" type="check" title="Always float on top while playing" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="SFX-ct-8MB">
+                    <buttonCell key="cell" type="check" title="Remember floating on top status" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="SFX-ct-8MB">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
+                        <action selector="rememberFloatingToggle:" target="-2" id="2yc-qj-tJZ"/>
                         <binding destination="lH7-Vv-0M1" name="value" keyPath="values.alwaysFloatOnTop" id="oPr-N0-bZK"/>
                     </connections>
                 </button>

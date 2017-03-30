@@ -47,8 +47,17 @@ class PlayerCore: NSObject {
     openMainWindow(path: path, url: url!, isNetwork: false)
   }
 
+  func openURL(_ url: URL) {
+    let path = url.absoluteString
+    openMainWindow(path: path, url: url, isNetwork: true)
+  }
+
   func openURLString(_ str: String) {
-    openMainWindow(path: str, url: URL(string: str)!, isNetwork: true)
+    guard let str = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed),
+      let url = URL(string: str) else {
+        return
+    }
+    openMainWindow(path: str, url: url, isNetwork: true)
   }
 
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
@@ -56,11 +65,10 @@ class PlayerCore: NSObject {
       mainWindow = nil
       mainWindow = MainWindowController()
     }
-    info.isPaused = false
     info.currentURL = url
     info.isNetworkResource = isNetwork
-     mainWindow!.showWindow(nil)
-     mainWindow!.windowDidOpen()
+    mainWindow!.showWindow(nil)
+    mainWindow!.windowDidOpen()
     // Send load file command
     info.fileLoading = true
     info.justOpenedFile = true
@@ -117,15 +125,13 @@ class PlayerCore: NSObject {
   /** Pause / resume. Reset speed to 0 when pause. */
   func togglePause(_ set: Bool?) {
     if let setPause = set {
-      if setPause {
-        setSpeed(1)
-      } else {
+      // if paused by EOF, replay the video.
+      if !setPause {
         if mpvController.getFlag(MPVProperty.eofReached) {
           seek(absoluteSecond: 0)
         }
       }
       mpvController.setFlag(MPVOption.PlaybackControl.pause, setPause)
-      info.isPaused = setPause
     } else {
       if (info.isPaused) {
         if mpvController.getFlag(MPVProperty.eofReached) {
@@ -134,9 +140,7 @@ class PlayerCore: NSObject {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, false)
       } else {
         mpvController.setFlag(MPVOption.PlaybackControl.pause, true)
-        setSpeed(1)
       }
-      info.isPaused = !info.isPaused
     }
   }
 
@@ -228,11 +232,11 @@ class PlayerCore: NSObject {
     NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
   }
 
-  func setVolume(_ volume: Int, constrain: Bool = true) {
+  func setVolume(_ volume: Double, constrain: Bool = true) {
     let constrainedVolume = volume.constrain(min: 0, max: 100)
     let appliedVolume = constrain ? constrainedVolume : volume
     info.volume = appliedVolume
-    mpvController.setInt(MPVOption.Audio.volume, appliedVolume)
+    mpvController.setDouble(MPVOption.Audio.volume, appliedVolume)
     ud.set(constrainedVolume, forKey: Preference.Key.softVolume)
   }
 
@@ -337,7 +341,7 @@ class PlayerCore: NSObject {
     mpvController.command(.audioAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
         DispatchQueue.main.async {
-          Utility.showAlert(message: "Unsupported external audio file.")
+          Utility.showAlert("unsupported_audio")
         }
       }
     }
@@ -349,7 +353,7 @@ class PlayerCore: NSObject {
     mpvController.command(.subAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
         DispatchQueue.main.async {
-          Utility.showAlert(message: "Unsupported external subtitle.")
+          Utility.showAlert("unsupported_sub")
         }
       }
     }
@@ -532,6 +536,27 @@ class PlayerCore: NSObject {
     mpvController.command(.writeWatchLaterConfig)
   }
 
+  struct GeometryDef {
+    var x: String?, y: String?, w: String?, h: String?, xSign: String?, ySign: String?
+  }
+
+  func getGeometry() -> GeometryDef? {
+    let geometry = mpvController.getString(MPVOption.Window.geometry) ?? ""
+    // guard option value
+    guard !geometry.isEmpty else { return nil }
+    // match the string, replace empty group by nil
+    let captures: [String?] = Regex.geometry.captures(in: geometry).map { $0.isEmpty ? nil : $0 }
+    // guard matches
+    guard captures.count == 10 else { return nil }
+    // return struct
+    return GeometryDef(x: captures[7],
+                       y: captures[9],
+                       w: captures[2],
+                       h: captures[4],
+                       xSign: captures[6],
+                       ySign: captures[8])
+  }
+
   // MARK: - Other
 
   func fileStarted() {
@@ -542,11 +567,9 @@ class PlayerCore: NSObject {
   func fileLoaded() {
     guard let mw = mainWindow else {
       Utility.fatal("Window is nil at fileLoaded")
-      return
     }
     guard let vwidth = info.videoWidth, let vheight = info.videoHeight else {
       Utility.fatal("Cannot get video width and height")
-      return
     }
     invalidateTimer()
     triedUsingExactSeekForCurrentFile = false
@@ -581,7 +604,6 @@ class PlayerCore: NSObject {
     guard let mw = mainWindow else { return }
     guard let dwidth = info.displayWidth, let dheight = info.displayHeight else {
       Utility.fatal("Cannot get video width and height")
-      return
     }
     if dwidth != 0 && dheight != 0 {
       DispatchQueue.main.sync {
@@ -683,7 +705,7 @@ class PlayerCore: NSObject {
 
   func errorOpeningFileAndCloseMainWindow() {
     DispatchQueue.main.async {
-      Utility.showAlert(message: "Cannot open file or stream!")
+      Utility.showAlert("error_open")
       self.mainWindow?.close()
     }
   }

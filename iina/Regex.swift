@@ -14,6 +14,8 @@ class Regex {
   static let httpFileName = Regex("attachment; filename=(.+?)\\Z")
   static let tagVersion = Regex("\\Av(\\d+\\.\\d+\\.\\d+)\\Z")
   static let urlDetect = Regex("^(https?|ftp)://[^\\s/$.?#].[^\\s]*$")
+  static let iso639_2Desc = Regex("^.+?\\(([a-z]{3})\\)$")
+  static let geometry = Regex("^((\\d+%?)?(x(\\d+%?))?)?((\\+|\\-)(\\d+%?)(\\+|\\-)(\\d+%?))?$")
 
   var regex: NSRegularExpression?
 
@@ -37,7 +39,12 @@ class Regex {
     var result: [String] = []
     if let match = regex?.firstMatch(in: str, options: [], range: NSMakeRange(0, str.characters.count)) {
       for i in 0..<match.numberOfRanges {
-        result.append((str as NSString).substring(with: match.rangeAt(i)))
+        let range = match.rangeAt(i)
+        if range.length > 0 {
+          result.append((str as NSString).substring(with: match.rangeAt(i)))
+        } else {
+          result.append("")
+        }
       }
     }
     return result

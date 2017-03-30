@@ -1,14 +1,16 @@
-/* 
-  String_ui.strings
-  iina
-
-  Created by lhc on 3/1/2017.
-  Copyright © 2017 lhc. All rights reserved.
-*/
+/*
+ String_ui.strings
+ iina
+ 
+ Created by lhc on 3/1/2017.
+ Copyright © 2017 lhc. All rights reserved.
+ */
 
 // Common
 "on" = "On";
 "off" = "Off";
+"login" = "Login";
+"logout" = "Logout";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "PLAYLIST";
@@ -59,6 +61,9 @@
 "osd.sub_downloaded" = "Sottotitoli scaricati";
 "osd.sub_saved" = "Sottotitolo salvato";
 "osd.network_error" = "Errore di rete";
+"osd.file_error" = "Errore lettura file";
+"osd.cannot_login" = "Login non riuscito";
+"osd.canceled" = "Annullato";
 
 "update.title_update_found" = "Trovato aggiornamento";
 "update.title_no_update" = "Nessun aggiornamento";
@@ -80,6 +85,8 @@
 "preference.keybindings" = "Scorciatoie di tastiera";
 "preference.advanced" = "Avanzate";
 "preference.scripts" = "Script";
+"preference.not_logged_in" = "Accesso non effettuato";
+"preference.logged_in_as" = "Collegato come %@";
 
 "menu.volume"= "Volume: %d";
 "menu.audio_delay" = "Ritardo audio: %.2fs";
@@ -93,8 +100,41 @@
 
 "track.none" = "<Nessuno>";
 
-"alert.extra_option_error" = "Errore nelle opzioni delle impostazioni --%@=%@ con un valore di risposta %d. Controlla le opzioni di impostazione in Preferenze > Avanzate.";
+// Alerts
+"alert.fatal_error" = "Fatal error: %@ \nL'appicazione will exit now.";
+"alert.mpv_error" = "Errore %@ (%@) nell'impostazioni dell'utente %@.";
+"alert.sleep" = "Impossibile impedire lo stop dello schermo!";
+
+"alert.unsupported_audio" = "File audo esterno non supportato.";
+"alert.unsupported_sub" = "Sottotitoli esterni non supportati.";
+"alert.unsupported_url" = "URL non supportato.";
+
+"alert.error_open" = "Impossibile aprire il file o lo stream!";
+"alert.error_finding_file" = "Impossibile trovare il %@ file!";
+"alert.error_loading_script" = "Impossibile caricare lo script %@!";
+"alert.error_saving_file" = "Si è verificato un errore durante il salvataggio %@: %@";
+"alert.error_deleting_file" = "Impossibile eliminare il file.";
+
+"alert.config.empty_name" = "Il nome non può essere vuoto.";
+"alert.config.name_exsisting" = "Il nome esite già.";
+"alert.config.cannot_create" = "Impossibile creare il file di configurazione!";
+"alert.config.cannot_write" = "Impossibile scrivere il file di configurazione!";
+
+"alert.filter.incorrect" = "Si è verificato un errore durante l'impostazione dei filtri. Si prega di verificare il formato dei parametri.";
+
 "alert.keybinding_config_error" = "Errore nell'analisi del file di configurazione \"%@\"! Ripristino delle scorciatoie di tastiera di default di IINA. Controlla il tuo file di configurazione.";
+
+"alert.extra_option.cannot_read" = "Impossibile leggere le opzioni MPV extra definiti dall'utente.";
+"alert.extra_option.empty" = "La chiave o il valore non può essere vuoto!";
+"alert.extra_option.error" = "Errore nell'impostazione delle opzioni --%@=%@ con il valore di %d. Verifica le impostazioni delle opzioni supplementari in Preferenze > Avanzate.";
+"alert.extra_option.config_folder" = "Errore nell'impostazione della directory di configurazione \"%@\".";
+
+"alert.playlist.error_deleting" = "Errore durante l'eliminazione: %@";
+
+"alert.sub.no_selected" = "Si prega per prima di selezionare un sottotitolo scaricato.";
+"alert.sub_lang_not_set" = "Si prega di impostare la lingua preferita per i sottotitoli nelle preferenze prima di utilizzare OpenSubtitles. Questa volta verrà utilizzato l'Inglese(eng).";
+"alert.sub.cannot_save_passwd" = "Impossibile salvare la password nel portachiavi: %@";
+"alert.sub.cannot_login" = "Impossibile accedere. Si prega di controllare il vostro nome utente, la password e la connessione di rete.\n\n%@";
 
 
 "pl_menu.title_multi" = "%d Elementi";

@@ -10,14 +10,6 @@ import Foundation
 
 class KeyBindingItem {
 
-  // MARK: Localization
-
-  static let l10nDic: [String: String] = {
-    let filePath = Bundle.main.path(forResource: "KeyBinding", ofType: "strings")!
-    let dic = NSDictionary(contentsOfFile: filePath) as! [String : String]
-    return dic
-  }()
-
   // MARK: KeyBindingItem
 
   enum ItemType {
@@ -85,7 +77,7 @@ class KeyBindingItem {
     case .label, .placeholder:
       let k = l10nKey ?? self.l10nKey
       let l10nPath = k == nil ? name : "\(k!).\(name)"
-      if let l10nString = KeyBindingItem.l10nDic[l10nPath] {
+      if let l10nString = KeyBindingTranslator.l10nDic[l10nPath] {
         criterion = TextCriterion(name: name, localizedName: l10nString)
       } else {
         criterion = TextCriterion(name: name, localizedName: name)

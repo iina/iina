@@ -51,7 +51,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
     updateControlStatus(self)
 
     guard let op = UserDefaults.standard.value(forKey: Preference.Key.userOptions) as? [[String]] else {
-      Utility.showAlert(message: "Cannot read user defined options.")
+      Utility.showAlert("extra_option.cannot_read")
       return
     }
     options = op
@@ -130,7 +130,7 @@ extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource
     guard let value = object as? String,
       let identifier = tableColumn?.identifier else { return }
     guard !value.isEmpty else {
-      Utility.showAlert(message: "Key or value cannot be empty!")
+      Utility.showAlert("extra_option.empty")
       return
     }
     if identifier == Constants.Identifier.key {

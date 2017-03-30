@@ -9,6 +9,8 @@
 // Common
 "on" = "On";
 "off" = "Off";
+"login" = "登录";
+"logout" = "退出";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "播放列表";
@@ -59,6 +61,9 @@
 "osd.sub_downloaded" = "字幕已下载";
 "osd.sub_saved" = "字幕已保存";
 "osd.network_error" = "网络错误";
+"osd.file_error" = "读取文件错误";
+"osd.cannot_login" = "无法登录";
+"osd.canceled" = "已取消";
 
 "update.title_update_found" = "检测到新版本";
 "update.title_no_update" = "没有新版本";
@@ -80,6 +85,8 @@
 "preference.keybindings" = "快捷键";
 "preference.advanced" = "高级";
 "preference.scripts" = "脚本";
+"preference.not_logged_in" = "未登录";
+"preference.logged_in_as" = "已登录 %@";
 
 "menu.volume"= "音量: %d";
 "menu.audio_delay" = "音频延迟: %.2f秒";
@@ -93,8 +100,41 @@
 
 "track.none" = "<无>";
 
+// Alerts
+"alert.fatal_error" = "严重错误：%@ \n程序将立刻结束。";
+"alert.mpv_error" = "在设置用户选项时出现错误 %@ (%@)。";
+"alert.sleep" = "无法阻止系统睡眠。";
+
+"alert.unsupported_audio" = "不支持的外部音频文件。";
+"alert.unsupported_sub" = "不支持的外部字幕。";
+"alert.unsupported_url" = "不支持的 URL。";
+
+"alert.error_open" = "无法打开文件或流！";
+"alert.error_finding_file" = "无法找到文件 %@ ！";
+"alert.error_loading_script" = "无法加载脚本 %@！";
+"alert.error_saving_file" = "保存文件 %@ 时出现错误 %@";
+"alert.error_deleting_file" = "无法删除文件。";
+
+"alert.config.empty_name" = "名称不能为空。";
+"alert.config.name_exsisting" = "此配置名称已存在。";
+"alert.config.cannot_create" = "无法创建配置文件！";
+"alert.config.cannot_write" = "无法写入配置文件！";
+
+"alert.filter.incorrect" = "设置滤镜时出现错误。请检查你的参数格式。";
+
+"alert.keybinding_config_error" = "无法设置快捷键「%@」！已回退到 IINA 默认配置。请检查你的快捷键文件是否正确。";
+
+"alert.extra_option.cannot_read" = "无法读取自定义的 mpv 额外选项。";
+"alert.extra_option.empty" = "键或值不能为空！";
 "alert.extra_option_error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";
-"alert.keybinding_config_error" = "无法设置快捷键「%@」！退回到IINA默认配置。请检查你的快捷键文件是否正确。";
+"alert.extra_option.config_folder" = "设置配置文件目录 \"%@\" 时出现错误。";
+
+"alert.playlist.error_deleting" = "删除 %@ 时出现错误。";
+
+"alert.sub.no_selected" = "请先启用一个下载的字幕。";
+"alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。\n\n0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";
+"alert.sub.cannot_save_passwd" = "无法将密码保存到钥匙串：%@";
+"alert.sub.cannot_login" = "无法登录。请检查你的用户名、密码及网络状态。\n\n%@";
 
 
 "pl_menu.title_multi" = "%d 个项目";
@@ -108,3 +148,6 @@
 "pl_menu.reveal_in_finder" = "在 Finder 中显示";
 "pl_menu.add_item" = "添加项目…";
 "pl_menu.clear_playlist" = "清除播放列表";
+
+"keymapping.title" = "快捷键";
+"keymapping.message" = "请按任意键来开始录制。";

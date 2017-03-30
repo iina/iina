@@ -10,6 +10,30 @@ import Foundation
 
 class KeyMapping {
 
+  static let prettyKeySymbol = [
+    "META": "⌘",
+    "ENTER": "↩︎",
+    "SHIFT": "⇧",
+    "ALT": "⌥",
+    "CTRL":"⌃",
+    "SPACE": "␣",
+    "BS": "⌫",
+    "DEL": "⌦",
+    "TAB": "⇥",
+    "ESC": "⎋",
+    "UP": "↑",
+    "DOWN": "↓",
+    "LEFT": "←",
+    "RIGHT" : "→",
+    "PGUP": "⇞",
+    "PGDWN": "⇟",
+    "HOME": "↖︎",
+    "END": "↘︎",
+    "PLAY": "▶︎\u{2006}❙\u{200A}❙",
+    "PREV": "◀︎◀︎",
+    "NEXT": "▶︎▶︎"
+  ]
+
   var key: String
 
   var action: [String]
@@ -20,6 +44,27 @@ class KeyMapping {
     get {
       return action.joined(separator: " ")
     }
+  }
+
+  var prettyKey: String {
+    get {
+      return key
+        .components(separatedBy: "+")
+        .map { token -> String in
+          let uppercasedToken = token.uppercased()
+          if let symbol = KeyMapping.prettyKeySymbol[uppercasedToken] {
+            return symbol
+          } else if let origToken = KeyCodeHelper.reversedKeyMapForShift[token] {
+            return KeyMapping.prettyKeySymbol["SHIFT"]! + origToken.uppercased()
+          } else {
+            return uppercasedToken
+          }
+        }.joined(separator: "")
+    }
+  }
+
+  var prettyCommand: String {
+    return KeyBindingTranslator.readableCommand(fromAction: action)
   }
 
   init(key: String, action: [String], comment: String? = nil) {

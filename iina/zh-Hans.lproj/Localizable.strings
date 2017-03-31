@@ -116,7 +116,7 @@
 "alert.error_deleting_file" = "无法删除文件。";
 
 "alert.config.empty_name" = "名称不能为空。";
-"alert.config.name_exsisting" = "此配置名称已存在。";
+"alert.config.name_existing" = "此配置名称已存在。";
 "alert.config.cannot_create" = "无法创建配置文件！";
 "alert.config.cannot_write" = "无法写入配置文件！";
 

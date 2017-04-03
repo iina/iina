@@ -162,6 +162,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Observed user defaults
 
+  private var oscPosition: Preference.OSCPosition!
   private var useExtractSeek: Preference.SeekOption!
   private var relativeSeekAmount: Int = 3
   private var volumeScrollAmount: Int = 4
@@ -197,6 +198,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bottomBarBottomConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
+
   var standardWindowButtons: [NSButton] {
     get {
       return ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindowButton]).flatMap {
@@ -210,7 +212,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       return window?.standardWindowButton(.documentIconButton)?.superview?.subviews.flatMap({ $0 as? NSTextField }).first
     }
   }
-  @IBOutlet weak var controlBar: ControlBarView!
+
+  var currentControlBar: NSView!
+
+  @IBOutlet weak var controlBarFloating: ControlBarView!
+  @IBOutlet weak var controlBarBottom: NSVisualEffectView!
   @IBOutlet weak var playButton: NSButton!
   @IBOutlet weak var playSlider: NSSlider!
   @IBOutlet weak var volumeSlider: NSSlider!
@@ -229,6 +235,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBOutlet weak var oscFloatingTopView: NSStackView!
   @IBOutlet weak var oscFloatingBottomView: NSView!
+  @IBOutlet weak var oscBottomMainView: NSStackView!
   @IBOutlet var fragControlView: NSView!
   @IBOutlet var fragToolbarView: NSView!
   @IBOutlet var fragVolumeView: NSView!
@@ -290,17 +297,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       w.setFrame(wf, display: false)
     }
 
-    // fade-able views
-    fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
-    fadeableViews.append(titleBarView)
-    fadeableViews.append(controlBar)
-    guard let cv = w.contentView else { return }
-
     // sidebar views
     sideBarView.isHidden = true
 
     // osc views
+    oscPosition = Preference.OSCPosition(rawValue: ud.integer(forKey: PK.oscPosition))
     setupOnScreenController()
+
+    // fade-able views
+    fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
+    fadeableViews.append(titleBarView)
+    fadeableViews.append(currentControlBar)
+    guard let cv = w.contentView else { return }
 
     // video view
     // note that don't use auto resize for it (handle in windowDidResize)
@@ -468,11 +476,45 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func setupOnScreenController() {
-    oscFloatingTopView.addView(fragVolumeView, in: .leading)
-    oscFloatingTopView.addView(fragToolbarView, in: .trailing)
-    oscFloatingTopView.addView(fragControlView, in: .center)
-    oscFloatingBottomView.addSubview(fragSliderView)
-    quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
+
+    var isCurrentControlBarHidden = false
+
+    if currentControlBar != nil {
+      // remove current osc view from fadeable views
+      fadeableViews = fadeableViews.filter { $0 != currentControlBar }
+      // record hidden status
+      isCurrentControlBarHidden = currentControlBar.isHidden
+    }
+
+    [controlBarFloating, controlBarBottom].forEach { $0?.isHidden = true }
+
+    controlBarFloating.isDragging = false
+
+    // detach all fragment views
+    [fragSliderView, fragControlView, fragToolbarView, fragVolumeView].forEach { $0?.removeFromSuperview() }
+
+    // add fragment viewss
+    switch oscPosition! {
+    case .floating:
+      currentControlBar = controlBarFloating
+      oscFloatingTopView.addView(fragVolumeView, in: .leading)
+      oscFloatingTopView.addView(fragToolbarView, in: .trailing)
+      oscFloatingTopView.addView(fragControlView, in: .center)
+      oscFloatingBottomView.addSubview(fragSliderView)
+      quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
+    case .top:
+      break
+    case .bottom:
+      currentControlBar = controlBarBottom
+      oscBottomMainView.addView(fragVolumeView, in: .trailing)
+      oscBottomMainView.addView(fragToolbarView, in: .trailing)
+      oscBottomMainView.addView(fragControlView, in: .leading)
+      oscBottomMainView.addView(fragSliderView, in: .leading)
+    }
+
+    currentControlBar.isHidden = isCurrentControlBarHidden
+    fadeableViews.append(currentControlBar)
+
   }
 
   // MARK: - Mouse / Trackpad event
@@ -486,7 +528,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** record mouse pos on mouse down */
   override func mouseDown(with event: NSEvent) {
-    guard !controlBar.isDragging else { return }
+    guard !controlBarFloating.isDragging else { return }
     mousePosRelatedToWindow = NSEvent.mouseLocation()
     mousePosRelatedToWindow!.x -= window!.frame.origin.x
     mousePosRelatedToWindow!.y -= window!.frame.origin.y
@@ -495,7 +537,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** move window while dragging */
   override func mouseDragged(with event: NSEvent) {
     isDragging = true
-    guard !controlBar.isDragging else { return }
+    guard !controlBarFloating.isDragging else { return }
     if mousePosRelatedToWindow != nil {
       if #available(OSX 10.11, *) {
         window?.performDrag(with: event)
@@ -588,7 +630,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     } else if obj == 1 {
       // slider
       isMouseInSlider = true
-      if !controlBar.isDragging {
+      if !controlBarFloating.isDragging {
         timePreviewWhenSeek.isHidden = false
       }
       let mousePos = playSlider.convert(event.locationInWindow, from: nil)
@@ -605,7 +647,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if obj == 0 {
       // main window
       isMouseInWindow = false
-      if controlBar.isDragging { return }
+      if controlBarFloating.isDragging { return }
       hideUI()
     } else if obj == 1 {
       // slider
@@ -827,7 +869,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidResize(_ notification: Notification) {
     guard let w = window else { return }
-    let wSize = w.frame.size, cSize = controlBar.frame.size
+    let wSize = w.frame.size
     // is paused, draw new frame
     if playerCore.info.isPaused {
       videoView.videoLayer.draw()
@@ -876,12 +918,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     }
     // update control bar position
-    let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
-    let cpv = ud.float(forKey: PK.controlBarPositionVertical)
-    controlBar.setFrameOrigin(NSMakePoint(
-      wSize.width * CGFloat(cph) - cSize.width * 0.5,
-      wSize.height * CGFloat(cpv)
-    ))
+    if oscPosition == .floating {
+      let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
+      let cpv = ud.float(forKey: PK.controlBarPositionVertical)
+      controlBarFloating.setFrameOrigin(NSMakePoint(
+        wSize.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5,
+        wSize.height * CGFloat(cpv)
+      ))
+    }
   }
 
   // resize framebuffer in videoView after resizing.
@@ -905,7 +949,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func hideUIAndCursor() {
     // don't hide UI when dragging control bar
-    if controlBar.isDragging {
+    if controlBarFloating.isDragging {
       return
     }
     hideUI()
@@ -1207,7 +1251,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     sliderCell?.isInDarkTheme = isDarkTheme
 
-    [titleBarView, controlBar, osdVisualEffectView, pipOverlayView].forEach {
+    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView].forEach {
       $0?.material = material
       $0?.appearance = appearance
     }

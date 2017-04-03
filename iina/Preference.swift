@@ -82,6 +82,8 @@ struct Preference {
      e.g. jumping to next item in playlist, window size will remoain the same. */
     static let resizeOnlyWhenManuallyOpenFile = "resizeOnlyWhenManuallyOpenFile"
 
+    static let oscPosition = "oscPosition"
+
     // Codec
 
     static let videoThreads = "videoThreads"
@@ -209,6 +211,12 @@ struct Preference {
     case ultraDark
     case light
     case mediumLight
+  }
+
+  enum OSCPosition: Int {
+    case floating = 0
+    case top
+    case bottom
   }
 
   enum SeekOption: Int {
@@ -347,6 +355,7 @@ struct Preference {
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,
     Key.controlBarAutoHideTimeout: Float(2.5),
+    Key.oscPosition: OSCPosition.floating.rawValue,
     Key.themeMaterial: Theme.dark.rawValue,
     Key.osdAutoHideTimeout: Float(1),
     Key.osdTextSize: Float(20),

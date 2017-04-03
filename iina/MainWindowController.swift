@@ -963,7 +963,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     fadeableViews.forEach { (v) in
       v.alphaValue = 1
-      v.isHidden = true
+      v.isHidden = false
     }
     animationState = .willHide
     NSAnimationContext.runAnimationGroup({ (context) in

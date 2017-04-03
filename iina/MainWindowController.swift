@@ -1203,7 +1203,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private func updateTimeLabel(_ mouseXPos: CGFloat) {
     let timeLabelXPos = playSlider.frame.origin.y + 15
     timePreviewWhenSeek.frame.origin = CGPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2), y: timeLabelXPos + 1)
-    var percentage = Double((mouseXPos - 3) / 314)
+    let sliderFrame = playSlider.bounds
+    var percentage = Double((mouseXPos - 3) / (sliderFrame.width - 6))
     if percentage < 0 {
       percentage = 0
     }

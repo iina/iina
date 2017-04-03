@@ -227,6 +227,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bufferSpin: NSProgressIndicator!
   @IBOutlet weak var bufferDetailLabel: NSTextField!
 
+  @IBOutlet weak var oscFloatingTopView: NSStackView!
+  @IBOutlet weak var oscFloatingBottomView: NSView!
+  @IBOutlet var fragControlView: NSView!
+  @IBOutlet var fragToolbarView: NSView!
+  @IBOutlet var fragVolumeView: NSView!
+  @IBOutlet var fragSliderView: NSView!
+
   @IBOutlet weak var rightLabel: DurationDisplayTextField!
   @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var leftArrowLabel: NSTextField!
@@ -291,6 +298,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // sidebar views
     sideBarView.isHidden = true
+
+    // osc views
+    setupOnScreenController()
 
     // video view
     // note that don't use auto resize for it (handle in windowDidResize)
@@ -455,6 +465,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func initVideoView() -> VideoView {
     let v = VideoView(frame: window!.contentView!.bounds)
     return v
+  }
+
+  func setupOnScreenController() {
+    oscFloatingTopView.addView(fragVolumeView, in: .leading)
+    oscFloatingTopView.addView(fragToolbarView, in: .trailing)
+    oscFloatingTopView.addView(fragControlView, in: .center)
+    oscFloatingBottomView.addSubview(fragSliderView)
+    quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
   }
 
   // MARK: - Mouse / Trackpad event

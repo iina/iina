@@ -558,7 +558,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       currentControlBar!.isHidden = isCurrentControlBarHidden
     }
 
-
   }
 
   // MARK: - Mouse / Trackpad event
@@ -692,6 +691,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // main window
       isMouseInWindow = false
       if controlBarFloating.isDragging { return }
+      destroyTimer()
       hideUI()
     } else if obj == 1 {
       // slider
@@ -711,7 +711,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isMouseInWindow && animationState == .hidden {
       showUI()
     }
-    updateTimer()
+    // check whether mouse is in osc
+    let osc = currentControlBar ?? titleBarView
+    let mousePosInOSC = osc!.convert(event.locationInWindow, from: nil)
+    let isMouseInOSC = osc!.mouse(mousePosInOSC, in: osc!.bounds)
+    if isMouseInOSC {
+      destroyTimer()
+    } else {
+      updateTimer()
+    }
   }
 
   override func scrollWheel(with event: NSEvent) {
@@ -1053,11 +1061,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func updateTimer() {
+    destroyTimer()
+    createTimer()
+  }
+
+  private func destroyTimer() {
     // if timer exist, destroy first
     if hideControlTimer != nil {
       hideControlTimer!.invalidate()
       hideControlTimer = nil
     }
+  }
+
+  private func createTimer() {
     // create new timer
     let timeout = ud.float(forKey: PK.controlBarAutoHideTimeout)
     hideControlTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideUIAndCursor), userInfo: nil, repeats: false)

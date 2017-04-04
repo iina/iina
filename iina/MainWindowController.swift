@@ -197,6 +197,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var sideBarRightConstraint: NSLayoutConstraint!
   @IBOutlet weak var sideBarWidthConstraint: NSLayoutConstraint!
   @IBOutlet weak var bottomBarBottomConstraint: NSLayoutConstraint!
+  @IBOutlet weak var titleBarHeightConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
 
@@ -214,7 +215,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  var currentControlBar: NSView!
+  var currentControlBar: NSView?
 
   @IBOutlet weak var controlBarFloating: ControlBarView!
   @IBOutlet weak var controlBarBottom: NSVisualEffectView!
@@ -237,6 +238,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var oscFloatingTopView: NSStackView!
   @IBOutlet weak var oscFloatingBottomView: NSView!
   @IBOutlet weak var oscBottomMainView: NSStackView!
+  @IBOutlet weak var oscTopMainView: NSStackView!
 
   @IBOutlet var fragControlView: NSStackView!
   @IBOutlet var fragToolbarView: NSView!
@@ -315,7 +317,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // fade-able views
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
     fadeableViews.append(titleBarView)
-    fadeableViews.append(currentControlBar)
+
     guard let cv = w.contentView else { return }
 
     // video view
@@ -493,14 +495,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     var isCurrentControlBarHidden = false
 
-    if currentControlBar != nil {
+    if let cb = currentControlBar {
       // remove current osc view from fadeable views
-      fadeableViews = fadeableViews.filter { $0 != currentControlBar }
+      fadeableViews = fadeableViews.filter { $0 != cb }
       // record hidden status
-      isCurrentControlBarHidden = currentControlBar.isHidden
+      isCurrentControlBarHidden = cb.isHidden
     }
 
-    [controlBarFloating, controlBarBottom].forEach { $0?.isHidden = true }
+    // reset
+    ([controlBarFloating, controlBarBottom, oscTopMainView] as [NSView]).forEach { $0.isHidden = true }
+    titleBarHeightConstraint.constant = 22
 
     controlBarFloating.isDragging = false
 
@@ -526,7 +530,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         window!.frame.height * CGFloat(cpv)
       ))
     case .top:
-      break
+      titleBarHeightConstraint.constant = 22 + 24 + 10
+      oscTopMainView.isHidden = false
+      currentControlBar = nil
+      fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: fragControlViewLeftView)
+      fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: fragControlViewRightView)
+      oscTopMainView.addView(fragVolumeView, in: .trailing)
+      oscTopMainView.addView(fragToolbarView, in: .trailing)
+      oscTopMainView.addView(fragControlView, in: .leading)
+      oscTopMainView.addView(fragSliderView, in: .leading)
+      oscTopMainView.setClippingResistancePriority(NSLayoutPriorityDefaultLow, for: .horizontal)
+      oscTopMainView.setVisibilityPriority(NSStackViewVisibilityPriorityDetachOnlyIfNecessary, for: fragVolumeView)
     case .bottom:
       currentControlBar = controlBarBottom
       fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: fragControlViewLeftView)
@@ -539,8 +553,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscBottomMainView.setVisibilityPriority(NSStackViewVisibilityPriorityDetachOnlyIfNecessary, for: fragVolumeView)
     }
 
-    currentControlBar.isHidden = isCurrentControlBarHidden
-    fadeableViews.append(currentControlBar)
+    if currentControlBar != nil {
+      fadeableViews.append(currentControlBar!)
+      currentControlBar!.isHidden = isCurrentControlBarHidden
+    }
+
 
   }
 

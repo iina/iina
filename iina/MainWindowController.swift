@@ -177,6 +177,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** A list of observed preferences */
   private let observedPrefKeys: [String] = [
     PK.themeMaterial,
+    PK.oscPosition,
     PK.showChapterPos,
     PK.useExactSeek,
     PK.relativeSeekAmount,
@@ -407,6 +408,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         setMaterial(Preference.Theme(rawValue: newValue))
       }
 
+    case PK.oscPosition:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        oscPosition = Preference.OSCPosition(rawValue: newValue)
+        setupOnScreenController()
+      }
+
     case PK.showChapterPos:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
         (playSlider.cell as! PlaySliderCell).drawChapters = newValue
@@ -511,6 +518,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscFloatingTopView.addView(fragControlView, in: .center)
       oscFloatingBottomView.addSubview(fragSliderView)
       quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
+      // center control bar
+      let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
+      let cpv = ud.float(forKey: PK.controlBarPositionVertical)
+      controlBarFloating.setFrameOrigin(NSMakePoint(
+        window!.frame.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5,
+        window!.frame.height * CGFloat(cpv)
+      ))
     case .top:
       break
     case .bottom:

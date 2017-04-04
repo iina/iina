@@ -236,10 +236,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var oscFloatingTopView: NSStackView!
   @IBOutlet weak var oscFloatingBottomView: NSView!
   @IBOutlet weak var oscBottomMainView: NSStackView!
-  @IBOutlet var fragControlView: NSView!
+
+  @IBOutlet var fragControlView: NSStackView!
   @IBOutlet var fragToolbarView: NSView!
   @IBOutlet var fragVolumeView: NSView!
   @IBOutlet var fragSliderView: NSView!
+  @IBOutlet var fragControlViewMiddleView: NSView!
+  @IBOutlet var fragControlViewLeftView: NSView!
+  @IBOutlet var fragControlViewRightView: NSView!
 
   @IBOutlet weak var rightLabel: DurationDisplayTextField!
   @IBOutlet weak var leftLabel: NSTextField!
@@ -302,6 +306,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // osc views
     oscPosition = Preference.OSCPosition(rawValue: ud.integer(forKey: PK.oscPosition))
+    fragControlView.addView(fragControlViewLeftView, in: .center)
+    fragControlView.addView(fragControlViewMiddleView, in: .center)
+    fragControlView.addView(fragControlViewRightView, in: .center)
     setupOnScreenController()
 
     // fade-able views
@@ -497,6 +504,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     switch oscPosition! {
     case .floating:
       currentControlBar = controlBarFloating
+      fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityMustHold, for: fragControlViewLeftView)
+      fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityMustHold, for: fragControlViewRightView)
       oscFloatingTopView.addView(fragVolumeView, in: .leading)
       oscFloatingTopView.addView(fragToolbarView, in: .trailing)
       oscFloatingTopView.addView(fragControlView, in: .center)
@@ -506,10 +515,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       break
     case .bottom:
       currentControlBar = controlBarBottom
+      fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: fragControlViewLeftView)
+      fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: fragControlViewRightView)
       oscBottomMainView.addView(fragVolumeView, in: .trailing)
       oscBottomMainView.addView(fragToolbarView, in: .trailing)
       oscBottomMainView.addView(fragControlView, in: .leading)
       oscBottomMainView.addView(fragSliderView, in: .leading)
+      oscBottomMainView.setClippingResistancePriority(NSLayoutPriorityDefaultLow, for: .horizontal)
+      oscBottomMainView.setVisibilityPriority(NSStackViewVisibilityPriorityDetachOnlyIfNecessary, for: fragVolumeView)
     }
 
     currentControlBar.isHidden = isCurrentControlBarHidden

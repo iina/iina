@@ -40,9 +40,27 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   var hasResizableWidth: Bool = false
   var hasResizableHeight: Bool = false
 
+  @IBOutlet weak var oscPreviewImageView: NSImageView!
+  @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do view setup here.
+    oscPositionPopupBtnAction(oscPositionPopupButton)
+  }
+
+  @IBAction func oscPositionPopupBtnAction(_ sender: NSPopUpButton) {
+    var name: String
+    switch sender.selectedTag() {
+    case 0:
+      name = "osc_float"
+    case 1:
+      name = "osc_top"
+    case 2:
+      name = "osc_bottom"
+    default:
+      name = "osc_float"
+    }
+    oscPreviewImageView.image = NSImage(named: name)
   }
 
 }

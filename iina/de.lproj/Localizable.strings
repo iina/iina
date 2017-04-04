@@ -59,16 +59,14 @@
 "osd.sub_downloaded" = "Untertitel geladen";
 "osd.sub_saved" = "Untertitel gespeichert";
 "osd.network_error" = "Netzwerkfehler";
-
-// ! Not translated
-"osd.file_error" = "Error reading file";
-"osd.cannot_login" = "Cannot login";
-"osd.canceled" = "Canceled";
+"osd.file_error" = "Fehler beim Lesen der Datei";
+"osd.cannot_login" = "Login nicht möglich";
+"osd.canceled" = "Abgebrochen";
 
 "update.title_update_found" = "Neues Update verfügbar";
 "update.title_no_update" = "Kein Update verfügbar";
 "update.title_error" = "Fehler";
-"update.update_found" = "Es gibt eine neuere Version! Da sich IINA no in der Alpha-Phase befindet, wird die neueste Version empfohlen. Laden von der Website oder von Github:";
+"update.update_found" = "Es gibt eine neuere Version! Da sich IINA noch in der Alpha-Phase befindet, wird die neueste Version empfohlen. Laden von der Website oder von Github:";
 "update.no_update" = "Dies ist die neueste Version.";
 "update.check_failed" = "Fehler beim Suchen nach Updates. Wahrscheinlich ist diese Version von IINA zu alt. Updates von der Website oder von Github laden.";
 "update.new_version" = "Neue Version:";
@@ -96,44 +94,41 @@
 
 "track.none" = "<Leer>";
 
+"alert.fatal_error" = "Schwerer Fehler: %@ \nDas Programm wird sich jetzt schließen.";
+"alert.mpv_error" = "Fehler %@ (%@) beim Setzen der Nutzereinstellung %@.";
+"alert.sleep" = "Kann den Ruhemodus des Displays nicht verhindern!";
 
-// ! Not translated
-"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
-"alert.mpv_error" = "Error %@ (%@) when setting user option %@.";
-"alert.sleep" = "Cannot prevent display sleep!";
+"alert.unsupported_audio" = "Nicht unterstützte, externe Audiodatei.";
+"alert.unsupported_sub" = "Nicht unterstützte, externer Untertitel.";
+"alert.unsupported_url" = "Nicht unterstützte URL.";
+"alert.wrong_url_format" = "Falsches URL-Format.";
 
-"alert.unsupported_audio" = "Unsupported external audio file.";
-"alert.unsupported_sub" = "Unsupported external subtitle.";
-"alert.unsupported_url" = "Unsupported URL.";
-"alert.wrong_url_format" = "Wrong URL format.";
+"alert.error_open" = "Kann Datei oder Stream nicht öffnen!";
+"alert.error_finding_file" = "Kann Datei %@ nicht finden!";
+"alert.error_loading_script" = "Kann Script %@ nicht laden!";
+"alert.error_saving_file" = "Beim Speichern von %@: %@ trat ein Fehler auf.";
+"alert.error_deleting_file" = "Kann die Datei nicht löschen.";
 
-"alert.error_open" = "Cannot open file or stream!";
-"alert.error_finding_file" = "Cannot find %@ file!";
-"alert.error_loading_script" = "Cannot load script %@!";
-"alert.error_saving_file" = "Error occured when saving %@: %@";
-"alert.error_deleting_file" = "Cannot delete the file.";
+"alert.config.empty_name" = "Der Name darf nicht leer sein.";
+"alert.config.name_exsisting" = "Der Name existiert bereits.";
+"alert.config.cannot_create" = "Kann Konfigurationsdatei nicht erstellen!";
+"alert.config.cannot_write" = "Kann Konfigurationsdatei nicht schreiben!";
 
-"alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_exsisting" = "The name already exists.";
-"alert.config.cannot_create" = "Cannot create config file!";
-"alert.config.cannot_write" = "Cannot write to config file!";
+"alert.filter.incorrect" = "Ein Fehler beim Einstellen der Filter trat auf. Bitte überprüfe das Paramaterformat.";
 
-"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+"alert.keybinding_config.error" = "Fehler beim Parsen der Konfigurationsdatei für die Tastaturbelegung \"%@\"! Falle zurück auf IINA Standard-Tastaturbelegung zurück. Bitte überprüfe deine Einstellungen.";
 
-"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+"alert.extra_option.cannot_read" = "Kann nutzerdefinierte, zusätzliche mpv Optionen nicht lesen.";
+"alert.extra_option.empty" = "Schlüssel oder Wert darf nicht leer sein!";
+"alert.extra_option.error" = "Fehler beim Setzen der Option --%@=%@ mit dem Rückgabewert %d. Bitte überprüfe die Einstellungen deiner zusätzlichen Optionen unter Einstellungen > Erweitert.";
+"alert.extra_option.config_folder" = "Fehler beim Setzen des Konfigurationsordners \"%@\".";
 
-"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
-"alert.extra_option.empty" = "Key or value cannot be empty!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
-"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+"alert.playlist.error_deleting" = "Fehler beim Löschen von: %@";
 
-"alert.playlist.error_deleting" = "Error deleting: %@";
+"alert.sub.no_selected" = "Bitte wähle zuerst einen herunterladbaren Untertitel.";
+"alert.sub_lang_not_set" = "Bitte wähle eine bevorzugte Untertitelsprache in den Untertiteleinstellungen bevor du OpenSubtitles nutzt. Diesmal wird Englisch(eng) genutzt.";
+"alert.sub.cannot_save_passwd" = "Kann das Passwort nicht im Schlüsselbund speichern: %@";
+"alert.sub.cannot_login" = "Einloggen nicht möglich. Bitte überprüfe Benutzernamen, Passwort und den Netzwerkstatus.\n\n%@";
 
-"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using opensubtitles. English(eng) will be used this time.";
-"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
-"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
-
-// ! Not translated
-"keymapping.title" = "Key Mapping";
-"keymapping.message" = "Press any key to record.";
+"keymapping.title" = "Tastaturbelegung";
+"keymapping.message" = "Drücke einen beliebigen Knopf zum aufnehmen.";

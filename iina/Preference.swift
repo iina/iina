@@ -436,7 +436,7 @@ struct Preference {
     Key.keepOpenOnFileEnd: true,
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
-    Key.relativeSeekAmount: 2,
+    Key.relativeSeekAmount: 3,
     Key.volumeScrollAmount: 3,
     Key.verticalScrollAction: ScrollAction.volume.rawValue,
     Key.horizontalScrollAction: ScrollAction.seek.rawValue,

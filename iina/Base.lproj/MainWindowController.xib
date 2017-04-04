@@ -4,7 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12118"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="IINA" customModuleProvider="target">
@@ -133,7 +132,7 @@
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="TRx-2V-Gr3">
                         <rect key="frame" x="0.0" y="333" width="680" height="22"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fDY-vk-Ylv">
+                            <stackView orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="fDY-vk-Ylv">
                                 <rect key="frame" x="0.0" y="-28" width="680" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="lFl-7d-z9u"/>

@@ -1594,8 +1594,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     blackWindowControllers = []
     
     for screen in screens {
-      let screenRect = screen.frame
-      let blackWindow = NSWindow(contentRect: screenRect, styleMask: NSBorderlessWindowMask, backing: .buffered, defer: false)
+      var screenRect = screen.frame
+      screenRect.origin = CGPoint(x: 0, y: 0)
+      let blackWindow = NSWindow(contentRect: screenRect, styleMask: [], backing: .buffered, defer: false, screen: screen)
       blackWindow.backgroundColor = .black
       blackWindow.level = Int(CGWindowLevelForKey(CGWindowLevelKey.mainMenuWindow)) + 1
       

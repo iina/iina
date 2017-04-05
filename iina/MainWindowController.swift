@@ -72,6 +72,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var hideControlTimer: Timer?
 
   var hideOSDTimer: Timer?
+  
+  var screens: [NSScreen] = []
+  var blackWindowControllers: [NSWindowController] = []
 
   // MARK: - Status
 
@@ -198,7 +201,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     PK.doubleClickAction,
     PK.rightClickAction,
     PK.pinchAction,
-    PK.showRemainingTime
+    PK.showRemainingTime,
+    PK.blackOutMonitor
   ]
 
   // MARK: - Outlets
@@ -497,6 +501,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case PK.showRemainingTime:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
         rightLabel.mode = newValue ? .remaining : .duration
+      }
+    
+    case PK.blackOutMonitor:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+        if isInFullScreen {
+          if newValue {
+            blackOutOtherMonitors()
+          } else {
+            removeBlackWindow()
+          }
+        }
       }
 
     default:
@@ -1561,9 +1576,40 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updatePlayTime(withDuration: true, andProgressBar: true)
     updateVolume()
   }
+  
+  func blackOutOtherMonitors() {
+    screens = (NSScreen.screens()?.filter() { $0 != NSScreen.main() }) ?? []
+    blackWindowControllers = []
+    
+    for screen in screens {
+      let screenRect = screen.frame
+      let blackWindow = NSWindow(contentRect: screenRect, styleMask: NSBorderlessWindowMask, backing: .buffered, defer: false)
+      blackWindow.backgroundColor = .black
+      blackWindow.level = Int(CGWindowLevelForKey(CGWindowLevelKey.mainMenuWindow)) + 1
+      
+      let newBlackWindowController = NSWindowController.init(window: blackWindow)
+      blackWindowControllers.append(newBlackWindowController)
+      newBlackWindowController.showWindow(self)
+    }
+  }
+  
+  func removeBlackWindow() {
+    for blackWindowController in blackWindowControllers {
+      blackWindowController.close()
+    }
+    blackWindowControllers = []
+  }
 
   func toggleWindowFullScreen() {
     window?.toggleFullScreen(self)
+
+    if ud.bool(forKey: PK.blackOutMonitor) {
+      if isInFullScreen {
+        blackOutOtherMonitors()
+      } else {
+        removeBlackWindow()
+      }
+    }
   }
 
   /** This method will not set `isOntop`! */

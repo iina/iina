@@ -324,6 +324,19 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="QvG-Ma-br0">
+                    <rect key="frame" x="118" y="279" width="352" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="atP-TC-6rm"/>
+                    </constraints>
+                    <buttonCell key="cell" type="check" title="Black out other monitors while fullscreen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="KYi-0W-zOr">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="IBP-Mz-Maa" name="value" keyPath="values.blackOutMonitor" id="LYr-PX-pOF"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="tV0-X6-PhP" secondAttribute="trailing" constant="12" id="2ZH-xq-acW"/>
@@ -339,6 +352,7 @@
                 <constraint firstAttribute="bottom" secondItem="tV0-X6-PhP" secondAttribute="bottom" constant="20" id="Ayn-Ef-5Z8"/>
                 <constraint firstAttribute="trailing" secondItem="fMz-O7-X4u" secondAttribute="trailing" constant="12" id="CTn-bI-pr2"/>
                 <constraint firstItem="Fcb-Fl-8d8" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="11" id="Cdw-Ce-Bi4"/>
+                <constraint firstItem="QvG-Ma-br0" firstAttribute="top" secondItem="U8N-xw-dgL" secondAttribute="bottom" constant="6" id="Ek6-uz-T3u"/>
                 <constraint firstAttribute="trailing" secondItem="PKl-oI-CuN" secondAttribute="trailing" constant="12" id="Ewc-z9-Xbo"/>
                 <constraint firstItem="6gO-wx-MWj" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="11" id="HBx-nm-pXG"/>
                 <constraint firstItem="ZA7-QS-FAH" firstAttribute="baseline" secondItem="Nj3-EX-JeL" secondAttribute="baseline" id="Hvx-H2-Gff"/>
@@ -365,7 +379,6 @@
                 <constraint firstItem="PKl-oI-CuN" firstAttribute="baseline" secondItem="Nj3-EX-JeL" secondAttribute="baseline" id="ZIu-kC-OSs"/>
                 <constraint firstItem="tV0-X6-PhP" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="aEN-bA-oGL"/>
                 <constraint firstAttribute="trailing" secondItem="UHf-eK-ba5" secondAttribute="trailing" constant="12" id="b3c-R8-aPl"/>
-                <constraint firstItem="5G0-Ih-CIb" firstAttribute="top" secondItem="U8N-xw-dgL" secondAttribute="bottom" constant="6" id="bhG-cH-bye"/>
                 <constraint firstItem="Obh-JS-axA" firstAttribute="top" secondItem="Fcb-Fl-8d8" secondAttribute="bottom" constant="11" id="bqu-hh-Ntr"/>
                 <constraint firstItem="QNz-7p-k3k" firstAttribute="baseline" secondItem="HOy-i3-JWR" secondAttribute="baseline" id="c6v-Gf-RDV"/>
                 <constraint firstItem="xmd-ef-R8e" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="cFX-8p-KIT"/>
@@ -380,20 +393,23 @@
                 <constraint firstItem="xmd-ef-R8e" firstAttribute="top" secondItem="fMz-O7-X4u" secondAttribute="bottom" constant="12" id="kxy-4X-Xo4"/>
                 <constraint firstItem="Xi9-i5-9V4" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="l6A-ct-Ddd"/>
                 <constraint firstItem="Xi9-i5-9V4" firstAttribute="top" secondItem="4zm-YX-iM8" secondAttribute="bottom" constant="6" id="mef-KG-4Ln"/>
+                <constraint firstItem="5G0-Ih-CIb" firstAttribute="top" secondItem="QvG-Ma-br0" secondAttribute="bottom" constant="6" id="o4u-tM-pKt"/>
                 <constraint firstItem="OVz-Nv-1WW" firstAttribute="top" secondItem="xmd-ef-R8e" secondAttribute="bottom" constant="4" id="oFA-VF-Y3j"/>
                 <constraint firstItem="tV0-X6-PhP" firstAttribute="top" secondItem="aEK-1q-7Vr" secondAttribute="bottom" constant="8" id="oON-d8-mG6"/>
                 <constraint firstItem="iLE-bn-UWS" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="11" id="pcS-zr-vCF"/>
                 <constraint firstItem="aEK-1q-7Vr" firstAttribute="top" secondItem="Nj3-EX-JeL" secondAttribute="bottom" constant="6" id="r8s-Gt-cpP"/>
                 <constraint firstItem="UHf-eK-ba5" firstAttribute="top" secondItem="OVz-Nv-1WW" secondAttribute="bottom" constant="6" id="rIe-bI-pI1"/>
                 <constraint firstItem="38y-2I-MGs" firstAttribute="top" secondItem="Obh-JS-axA" secondAttribute="bottom" constant="10" id="s5o-6u-Fe8"/>
+                <constraint firstAttribute="trailing" secondItem="QvG-Ma-br0" secondAttribute="trailing" constant="12" id="sj3-78-Uef"/>
                 <constraint firstItem="4zm-YX-iM8" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="tT6-XS-isC"/>
                 <constraint firstItem="PKl-oI-CuN" firstAttribute="leading" secondItem="ZA7-QS-FAH" secondAttribute="trailing" constant="8" id="ttq-LO-bs7"/>
                 <constraint firstItem="F6o-D4-gDa" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="umU-Er-ifL"/>
+                <constraint firstItem="QvG-Ma-br0" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="voa-iL-qQ8"/>
                 <constraint firstItem="HOy-i3-JWR" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="wHg-Rc-1Wf"/>
                 <constraint firstAttribute="trailing" secondItem="U8N-xw-dgL" secondAttribute="trailing" constant="12" id="wZB-Ak-IJm"/>
                 <constraint firstItem="ZA7-QS-FAH" firstAttribute="leading" secondItem="Nj3-EX-JeL" secondAttribute="trailing" constant="4" id="zb6-fR-Rwb"/>
             </constraints>
-            <point key="canvasLocation" x="139" y="268.5"/>
+            <point key="canvasLocation" x="139" y="276"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="IBP-Mz-Maa"/>
     </objects>

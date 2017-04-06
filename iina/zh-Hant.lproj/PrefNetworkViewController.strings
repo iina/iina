@@ -4,11 +4,17 @@
 /* Class = "NSTextFieldCell"; title = "Default cache size (KB):"; ObjectID = "0yu-5Q-363"; */
 "0yu-5Q-363.title" = "默認暫存大小 (KB):";
 
+/* Class = "NSTextFieldCell"; title = "Custom youtube-dl path:"; ObjectID = "2qf-cC-Lfi"; */
+"2qf-cC-Lfi.title" = "自訂 youtube-dl 路徑:";
+
 /* Class = "NSTextFieldCell"; title = "Default: 153600"; ObjectID = "3os-7u-lv8"; */
 "3os-7u-lv8.title" = "默認: 153600";
 
 /* Class = "NSMenuItem"; title = "TCP"; ObjectID = "6JF-48-aCE"; */
 "6JF-48-aCE.title" = "TCP";
+
+/* Class = "NSTextFieldCell"; title = "HTTP proxy:"; ObjectID = "9ut-ID-ffZ"; */
+"9ut-ID-ffZ.title" = "HTTP 代理:";
 
 /* Class = "NSTextFieldCell"; title = "Format: <key>=<value>[,<key>=<value>[,...]]"; ObjectID = "GBe-wd-tne"; */
 "GBe-wd-tne.title" = "格式: <key>=<value>[,<key>=<value>[,...]]";
@@ -21,6 +27,12 @@
 
 /* Class = "NSMenuItem"; title = "HTTP"; ObjectID = "NWQ-Bm-1mJ"; */
 "NWQ-Bm-1mJ.title" = "HTTP";
+
+/* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "RwW-JS-iTv"; */
+"RwW-JS-iTv.title" = "需重啟 IINA 後生效";
+
+/* Class = "NSTextFieldCell"; title = "IINA will search youtube-dl in this folder. Restart needed."; ObjectID = "YqE-yV-BvQ"; */
+"YqE-yV-BvQ.title" = "IINA 將在此檔案夾內搜尋 youtube-dl，需重啟";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "aNr-lv-K0r"; */
 "aNr-lv-K0r.title" = "自動";

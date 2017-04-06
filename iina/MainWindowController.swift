@@ -107,7 +107,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** The value of speedValueIndex before Force Touch **/
   var oldIndex: Int = AppData.availableSpeedValues.count / 2
-  
+
   /** When the arrow buttons were last clicked **/
   var lastClick = Date()
 
@@ -131,6 +131,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   var animationState: UIAnimationState = .shown
   var osdAnimationState: UIAnimationState = .hidden
+  var sidebarAnimationState: UIAnimationState = .hidden
 
   enum ScrollDirection {
     case horizontal
@@ -162,6 +163,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Observed user defaults
 
+  private var oscPosition: Preference.OSCPosition!
   private var useExtractSeek: Preference.SeekOption!
   private var relativeSeekAmount: Int = 3
   private var volumeScrollAmount: Int = 4
@@ -176,6 +178,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** A list of observed preferences */
   private let observedPrefKeys: [String] = [
     PK.themeMaterial,
+    PK.oscPosition,
     PK.showChapterPos,
     PK.useExactSeek,
     PK.relativeSeekAmount,
@@ -195,8 +198,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var sideBarRightConstraint: NSLayoutConstraint!
   @IBOutlet weak var sideBarWidthConstraint: NSLayoutConstraint!
   @IBOutlet weak var bottomBarBottomConstraint: NSLayoutConstraint!
+  @IBOutlet weak var titleBarHeightConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
+
   var standardWindowButtons: [NSButton] {
     get {
       return ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindowButton]).flatMap {
@@ -204,13 +209,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     }
   }
-  
+
   var titleTextField: NSTextField? {
     get {
       return window?.standardWindowButton(.documentIconButton)?.superview?.subviews.flatMap({ $0 as? NSTextField }).first
     }
   }
-  @IBOutlet weak var controlBar: ControlBarView!
+
+  var currentControlBar: NSView?
+
+  @IBOutlet weak var controlBarFloating: ControlBarView!
+  @IBOutlet weak var controlBarBottom: NSVisualEffectView!
   @IBOutlet weak var playButton: NSButton!
   @IBOutlet weak var playSlider: NSSlider!
   @IBOutlet weak var volumeSlider: NSSlider!
@@ -227,6 +236,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bufferSpin: NSProgressIndicator!
   @IBOutlet weak var bufferDetailLabel: NSTextField!
 
+  @IBOutlet weak var oscFloatingTopView: NSStackView!
+  @IBOutlet weak var oscFloatingBottomView: NSView!
+  @IBOutlet weak var oscBottomMainView: NSStackView!
+  @IBOutlet weak var oscTopMainView: NSStackView!
+
+  @IBOutlet var fragControlView: NSStackView!
+  @IBOutlet var fragToolbarView: NSView!
+  @IBOutlet var fragVolumeView: NSView!
+  @IBOutlet var fragSliderView: NSView!
+  @IBOutlet var fragControlViewMiddleView: NSView!
+  @IBOutlet var fragControlViewLeftView: NSView!
+  @IBOutlet var fragControlViewRightView: NSView!
+
   @IBOutlet weak var rightLabel: DurationDisplayTextField!
   @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var leftArrowLabel: NSTextField!
@@ -234,7 +256,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var osdVisualEffectView: NSVisualEffectView!
   @IBOutlet weak var osd: NSTextField!
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
-  
+
 
   weak var touchBarPlaySlider: NSSlider?
   weak var touchBarCurrentPosLabel: NSTextField?
@@ -283,14 +305,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       w.setFrame(wf, display: false)
     }
 
+    // sidebar views
+    sideBarView.isHidden = true
+
+    // osc views
+    oscPosition = Preference.OSCPosition(rawValue: ud.integer(forKey: PK.oscPosition))
+    fragControlView.addView(fragControlViewLeftView, in: .center)
+    fragControlView.addView(fragControlViewMiddleView, in: .center)
+    fragControlView.addView(fragControlViewRightView, in: .center)
+    setupOnScreenController()
+
     // fade-able views
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
     fadeableViews.append(titleBarView)
-    fadeableViews.append(controlBar)
-    guard let cv = w.contentView else { return }
 
-    // sidebar views
-    sideBarView.isHidden = true
+    guard let cv = w.contentView else { return }
 
     // video view
     // note that don't use auto resize for it (handle in windowDidResize)
@@ -382,6 +411,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         setMaterial(Preference.Theme(rawValue: newValue))
       }
 
+    case PK.oscPosition:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+        oscPosition = Preference.OSCPosition(rawValue: newValue)
+        setupOnScreenController()
+      }
+
     case PK.showChapterPos:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
         (playSlider.cell as! PlaySliderCell).drawChapters = newValue
@@ -457,6 +492,75 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     return v
   }
 
+  func setupOnScreenController() {
+
+    var isCurrentControlBarHidden = false
+
+    if let cb = currentControlBar {
+      // remove current osc view from fadeable views
+      fadeableViews = fadeableViews.filter { $0 != cb }
+      // record hidden status
+      isCurrentControlBarHidden = cb.isHidden
+    }
+
+    // reset
+    ([controlBarFloating, controlBarBottom, oscTopMainView] as [NSView]).forEach { $0.isHidden = true }
+    titleBarHeightConstraint.constant = 22
+
+    controlBarFloating.isDragging = false
+
+    // detach all fragment views
+    [fragSliderView, fragControlView, fragToolbarView, fragVolumeView].forEach { $0?.removeFromSuperview() }
+
+    // add fragment viewss
+    switch oscPosition! {
+    case .floating:
+      currentControlBar = controlBarFloating
+      fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityMustHold, for: fragControlViewLeftView)
+      fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityMustHold, for: fragControlViewRightView)
+      oscFloatingTopView.addView(fragVolumeView, in: .leading)
+      oscFloatingTopView.addView(fragToolbarView, in: .trailing)
+      oscFloatingTopView.addView(fragControlView, in: .center)
+      oscFloatingBottomView.addSubview(fragSliderView)
+      quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
+      // center control bar
+      let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
+      let cpv = ud.float(forKey: PK.controlBarPositionVertical)
+      controlBarFloating.setFrameOrigin(NSMakePoint(
+        window!.frame.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5,
+        window!.frame.height * CGFloat(cpv)
+      ))
+    case .top:
+      titleBarHeightConstraint.constant = 22 + 24 + 10
+      oscTopMainView.isHidden = false
+      currentControlBar = nil
+      fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: fragControlViewLeftView)
+      fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: fragControlViewRightView)
+      oscTopMainView.addView(fragVolumeView, in: .trailing)
+      oscTopMainView.addView(fragToolbarView, in: .trailing)
+      oscTopMainView.addView(fragControlView, in: .leading)
+      oscTopMainView.addView(fragSliderView, in: .leading)
+      oscTopMainView.setClippingResistancePriority(NSLayoutPriorityDefaultLow, for: .horizontal)
+      oscTopMainView.setVisibilityPriority(NSStackViewVisibilityPriorityDetachOnlyIfNecessary, for: fragVolumeView)
+    case .bottom:
+      currentControlBar = controlBarBottom
+      fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: fragControlViewLeftView)
+      fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: fragControlViewRightView)
+      oscBottomMainView.addView(fragVolumeView, in: .trailing)
+      oscBottomMainView.addView(fragToolbarView, in: .trailing)
+      oscBottomMainView.addView(fragControlView, in: .leading)
+      oscBottomMainView.addView(fragSliderView, in: .leading)
+      oscBottomMainView.setClippingResistancePriority(NSLayoutPriorityDefaultLow, for: .horizontal)
+      oscBottomMainView.setVisibilityPriority(NSStackViewVisibilityPriorityDetachOnlyIfNecessary, for: fragVolumeView)
+    }
+
+    if currentControlBar != nil {
+      fadeableViews.append(currentControlBar!)
+      currentControlBar!.isHidden = isCurrentControlBarHidden
+    }
+
+  }
+
   // MARK: - Mouse / Trackpad event
 
   override func keyDown(with event: NSEvent) {
@@ -468,7 +572,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** record mouse pos on mouse down */
   override func mouseDown(with event: NSEvent) {
-    guard !controlBar.isDragging else { return }
+    guard !controlBarFloating.isDragging else { return }
     mousePosRelatedToWindow = NSEvent.mouseLocation()
     mousePosRelatedToWindow!.x -= window!.frame.origin.x
     mousePosRelatedToWindow!.y -= window!.frame.origin.y
@@ -477,7 +581,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** move window while dragging */
   override func mouseDragged(with event: NSEvent) {
     isDragging = true
-    guard !controlBar.isDragging else { return }
+    guard !controlBarFloating.isDragging else { return }
     if mousePosRelatedToWindow != nil {
       if #available(OSX 10.11, *) {
         window?.performDrag(with: event)
@@ -570,7 +674,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     } else if obj == 1 {
       // slider
       isMouseInSlider = true
-      if !controlBar.isDragging {
+      if !controlBarFloating.isDragging {
         timePreviewWhenSeek.isHidden = false
       }
       let mousePos = playSlider.convert(event.locationInWindow, from: nil)
@@ -587,7 +691,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if obj == 0 {
       // main window
       isMouseInWindow = false
-      if controlBar.isDragging { return }
+      if controlBarFloating.isDragging { return }
+      destroyTimer()
       hideUI()
     } else if obj == 1 {
       // slider
@@ -607,7 +712,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isMouseInWindow && animationState == .hidden {
       showUI()
     }
-    updateTimer()
+    // check whether mouse is in osc
+    let osc = currentControlBar ?? titleBarView
+    let mousePosInOSC = osc!.convert(event.locationInWindow, from: nil)
+    let isMouseInOSC = osc!.mouse(mousePosInOSC, in: osc!.bounds)
+    if isMouseInOSC {
+      destroyTimer()
+    } else {
+      updateTimer()
+    }
   }
 
   override func scrollWheel(with event: NSEvent) {
@@ -692,13 +805,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         let offset = recognizer.magnification - lastMagnification + 1.0;
         let newWidth = window.frame.width * offset
         let newHeight = newWidth / window.aspectRatio.aspect
-      
+
         //Check against max & min threshold
         if newHeight < screenFrame.height && newHeight > minSize.height && newWidth > minSize.width {
           let newSize = NSSize(width: newWidth, height: newHeight);
           window.setFrame(window.frame.centeredResize(to: newSize), display: true)
         }
-        
+
         lastMagnification = recognizer.magnification
       }
 
@@ -787,7 +900,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowWillExitFullScreen(_ notification: Notification) {
     playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, false)
-    
+
     // hide titlebar
     window!.titlebarAppearsTransparent = true
     // show titleBarView
@@ -809,7 +922,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidResize(_ notification: Notification) {
     guard let w = window else { return }
-    let wSize = w.frame.size, cSize = controlBar.frame.size
+    let wSize = w.frame.size
     // is paused, draw new frame
     if playerCore.info.isPaused {
       videoView.videoLayer.draw()
@@ -858,12 +971,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     }
     // update control bar position
-    let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
-    let cpv = ud.float(forKey: PK.controlBarPositionVertical)
-    controlBar.setFrameOrigin(NSMakePoint(
-      wSize.width * CGFloat(cph) - cSize.width * 0.5,
-      wSize.height * CGFloat(cpv)
-    ))
+    if oscPosition == .floating {
+      let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
+      let cpv = ud.float(forKey: PK.controlBarPositionVertical)
+      controlBarFloating.setFrameOrigin(NSMakePoint(
+        wSize.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5,
+        wSize.height * CGFloat(cpv)
+      ))
+    }
   }
 
   // resize framebuffer in videoView after resizing.
@@ -887,7 +1002,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func hideUIAndCursor() {
     // don't hide UI when dragging control bar
-    if controlBar.isDragging {
+    if controlBarFloating.isDragging {
       return
     }
     hideUI()
@@ -901,7 +1016,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     fadeableViews.forEach { (v) in
       v.alphaValue = 1
-      v.isHidden = true
+      v.isHidden = false
     }
     animationState = .willHide
     NSAnimationContext.runAnimationGroup({ (context) in
@@ -947,11 +1062,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func updateTimer() {
+    destroyTimer()
+    createTimer()
+  }
+
+  private func destroyTimer() {
     // if timer exist, destroy first
     if hideControlTimer != nil {
       hideControlTimer!.invalidate()
       hideControlTimer = nil
     }
+  }
+
+  private func createTimer() {
     // create new timer
     let timeout = ud.float(forKey: PK.controlBarAutoHideTimeout)
     hideControlTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideUIAndCursor), userInfo: nil, repeats: false)
@@ -996,6 +1119,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let view = (viewController as? NSViewController)?.view else {
         Utility.fatal("viewController is not a NSViewController")
     }
+    sidebarAnimationState = .willShow
     let width = type.width()
     sideBarWidthConstraint.constant = width
     sideBarRightConstraint.constant = -width
@@ -1014,21 +1138,26 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       sideBarRightConstraint.animator().constant = 0
     }) {
+      self.sidebarAnimationState = .shown
       self.sideBarStatus = type
     }
   }
 
   func hideSideBar(_ after: @escaping () -> Void = { }) {
+    sidebarAnimationState = .willHide
     let currWidth = sideBarWidthConstraint.constant
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = 0.2
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       sideBarRightConstraint.animator().constant = -currWidth
     }) {
-      self.sideBarStatus = .hidden
-      self.sideBarView.subviews.removeAll()
-      self.sideBarView.isHidden = true
-      after()
+      if self.sidebarAnimationState == .willHide {
+        self.sideBarStatus = .hidden
+        self.sideBarView.subviews.removeAll()
+        self.sideBarView.isHidden = true
+        self.sidebarAnimationState = .hidden
+        after()
+      }
     }
   }
 
@@ -1141,7 +1270,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private func updateTimeLabel(_ mouseXPos: CGFloat) {
     let timeLabelXPos = playSlider.frame.origin.y + 15
     timePreviewWhenSeek.frame.origin = CGPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2), y: timeLabelXPos + 1)
-    var percentage = Double((mouseXPos - 3) / 314)
+    let sliderFrame = playSlider.bounds
+    var percentage = Double((mouseXPos - 3) / (sliderFrame.width - 6))
     if percentage < 0 {
       percentage = 0
     }
@@ -1189,7 +1319,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     sliderCell?.isInDarkTheme = isDarkTheme
 
-    [titleBarView, controlBar, osdVisualEffectView, pipOverlayView].forEach {
+    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView].forEach {
       $0?.material = material
       $0?.appearance = appearance
     }
@@ -1197,7 +1327,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isInFullScreen {
       window!.appearance = appearance;
     }
-    
+
     window?.appearance = appearance
   }
 
@@ -1567,6 +1697,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func settingsButtonAction(_ sender: AnyObject) {
+    if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
+      return  // do not interrput other actions while it is animating
+    }
     let view = quickSettingView
     switch sideBarStatus {
     case .hidden:
@@ -1581,6 +1714,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func playlistButtonAction(_ sender: AnyObject) {
+    if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
+      return  // do not interrput other actions while it is animating
+    }
     let view = playlistView
     switch sideBarStatus {
     case .hidden:
@@ -1851,7 +1987,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     pipOverlayView.isHidden = true
     window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
     videoView.frame = window?.contentView?.frame ?? .zero
-    
+
     // Reset animation (disabling it if exitPIP is called manually)
     // See WebKit issue 25096170 as well as the workaround:
     // https://trac.webkit.org/browser/trunk/Source/WebCore/platform/mac/WebVideoFullscreenInterfaceMac.mm#L343

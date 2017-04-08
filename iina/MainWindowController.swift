@@ -75,8 +75,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   var screens: [NSScreen] = []
   var totalScreens = 0;
-  var blackWindowControllers: [NSWindowController] = []
+  var lastScreen: NSScreen?
 
+  var blackWindows: [NSWindow] = []
+  
   // MARK: - Status
 
   var cachedGeometry: PlayerCore.GeometryDef?
@@ -410,16 +412,29 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     }
     let screenChangeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSApplicationDidChangeScreenParameters, object: nil, queue: .main) { [unowned self] _ in
-      if NSScreen.screens()?.count ?? 0 != self.totalScreens {
-        if self.isInFullScreen && self.ud.bool(forKey: PK.blackOutMonitor) {
+      // This observer handles a situation that the user connected a new screen or removed a screen
+      if self.isInFullScreen && self.ud.bool(forKey: PK.blackOutMonitor) {
+        if NSScreen.screens()?.count ?? 0 != self.totalScreens {
           self.removeBlackWindow()
           self.blackOutOtherMonitors()
         }
       }
     }
+    let resignActiveObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSApplicationDidResignActive, object: nil, queue: .main) { [unowned self] _ in
+      // This observer handles a situation that the user drag the fullscreen video to another screen
+      if self.isInFullScreen && self.ud.bool(forKey: PK.blackOutMonitor) {
+        if self.window?.screen != self.lastScreen {
+          self.removeBlackWindow()
+          self.blackOutOtherMonitors()
+        }
+      }
+      self.lastScreen = self.window?.screen
+    }
+
     notificationObservers.append(fsObserver)
     notificationObservers.append(ontopObserver)
     notificationObservers.append(screenChangeObserver)
+    notificationObservers.append(resignActiveObserver)
   }
 
   deinit {
@@ -1588,34 +1603,31 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   func blackOutOtherMonitors() {
-    screens = (NSScreen.screens()?.filter() { $0 != NSScreen.main() }) ?? []
+    screens = (NSScreen.screens()?.filter() { $0 != window?.screen }) ?? []
     totalScreens = screens.count + 1
 
-    blackWindowControllers = []
+    blackWindows = []
     
     for screen in screens {
       var screenRect = screen.frame
       screenRect.origin = CGPoint(x: 0, y: 0)
       let blackWindow = NSWindow(contentRect: screenRect, styleMask: [], backing: .buffered, defer: false, screen: screen)
       blackWindow.backgroundColor = .black
-      blackWindow.level = Int(CGWindowLevelForKey(CGWindowLevelKey.mainMenuWindow)) + 1
+      blackWindow.level = Int(CGWindowLevelForKey(.mainMenuWindow) + 1)
       
-      let newBlackWindowController = NSWindowController.init(window: blackWindow)
-      blackWindowControllers.append(newBlackWindowController)
-      newBlackWindowController.showWindow(self)
+      blackWindows.append(blackWindow)
+      blackWindow.makeKeyAndOrderFront(nil)
     }
   }
   
   func removeBlackWindow() {
-    for blackWindowController in blackWindowControllers {
-      blackWindowController.close()
-    }
-    blackWindowControllers = []
+    blackWindows = []
   }
 
   func toggleWindowFullScreen() {
     window?.toggleFullScreen(self)
 
+    lastScreen = window?.screen
     if ud.bool(forKey: PK.blackOutMonitor) {
       if isInFullScreen {
         blackOutOtherMonitors()

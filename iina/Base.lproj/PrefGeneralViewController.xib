@@ -329,7 +329,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="atP-TC-6rm"/>
                     </constraints>
-                    <buttonCell key="cell" type="check" title="Black out other monitors while fullscreen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="KYi-0W-zOr">
+                    <buttonCell key="cell" type="check" title="Black out other monitors while in full screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="KYi-0W-zOr">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

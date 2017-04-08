@@ -1003,6 +1003,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  func windowDidExitFullScreen(_ notification: Notification) {
+    if ud.bool(forKey: PK.blackOutMonitor) {
+      removeBlackWindow()
+    }
+  }
+  
+  func windowDidEnterFullScreen(_ noitification: Notification) {
+    lastScreen = window?.screen
+    if ud.bool(forKey: PK.blackOutMonitor) {
+      blackOutOtherMonitors()
+    }
+  }
+
   func windowDidResize(_ notification: Notification) {
     guard let w = window else { return }
     let wSize = w.frame.size
@@ -1626,15 +1639,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func toggleWindowFullScreen() {
     window?.toggleFullScreen(self)
-
-    lastScreen = window?.screen
-    if ud.bool(forKey: PK.blackOutMonitor) {
-      if isInFullScreen {
-        blackOutOtherMonitors()
-      } else {
-        removeBlackWindow()
-      }
-    }
   }
 
   /** This method will not set `isOntop`! */

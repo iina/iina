@@ -75,7 +75,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   var screens: [NSScreen] = []
   var totalScreens = 0;
-  var lastScreen: NSScreen?
 
   var blackWindows: [NSWindow] = []
   
@@ -420,21 +419,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
       }
     }
-    let resignActiveObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSApplicationDidResignActive, object: nil, queue: .main) { [unowned self] _ in
-      // This observer handles a situation that the user drag the fullscreen video to another screen
+    let changeWorkspaceObserver = NSWorkspace.shared().notificationCenter.addObserver(forName: NSNotification.Name.NSWorkspaceActiveSpaceDidChange, object: nil, queue: .main) { [unowned self] _ in
       if self.isInFullScreen && self.ud.bool(forKey: PK.blackOutMonitor) {
-        if self.window?.screen != self.lastScreen {
+        if self.window?.isOnActiveSpace ?? false {
           self.removeBlackWindow()
           self.blackOutOtherMonitors()
+        } else {
+          self.removeBlackWindow()
         }
       }
-      self.lastScreen = self.window?.screen
     }
 
     notificationObservers.append(fsObserver)
     notificationObservers.append(ontopObserver)
     notificationObservers.append(screenChangeObserver)
-    notificationObservers.append(resignActiveObserver)
+    notificationObservers.append(changeWorkspaceObserver)
   }
 
   deinit {
@@ -1006,13 +1005,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowDidExitFullScreen(_ notification: Notification) {
     if ud.bool(forKey: PK.blackOutMonitor) {
       removeBlackWindow()
-    }
-  }
-  
-  func windowDidEnterFullScreen(_ noitification: Notification) {
-    lastScreen = window?.screen
-    if ud.bool(forKey: PK.blackOutMonitor) {
-      blackOutOtherMonitors()
     }
   }
 

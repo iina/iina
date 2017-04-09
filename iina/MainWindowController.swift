@@ -10,6 +10,13 @@ import Cocoa
 
 fileprivate typealias PK = Preference.Key
 
+fileprivate let TitleBarHeightNormal: CGFloat = 22
+fileprivate let TitleBarHeightWithOSC: CGFloat = 22 + 24 + 10
+fileprivate let TitleBarHeightWithOSCInFullScreen: CGFloat = 24 + 10
+fileprivate let OSCTopMainViewMarginTop: CGFloat = 26
+fileprivate let OSCTopMainViewMarginTopInFullScreen: CGFloat = 6
+
+
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override var nextResponder: NSResponder? {
@@ -199,6 +206,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var sideBarWidthConstraint: NSLayoutConstraint!
   @IBOutlet weak var bottomBarBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var titleBarHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var oscTopMainViewTopConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
 
@@ -313,7 +321,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fragControlView.addView(fragControlViewLeftView, in: .center)
     fragControlView.addView(fragControlViewMiddleView, in: .center)
     fragControlView.addView(fragControlViewRightView, in: .center)
-    setupOnScreenController()
+    setupOnScreenController(position: oscPosition)
 
     // fade-able views
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
@@ -413,8 +421,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.oscPosition:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        oscPosition = Preference.OSCPosition(rawValue: newValue)
-        setupOnScreenController()
+        setupOnScreenController(position: Preference.OSCPosition(rawValue: newValue) ?? .floating)
       }
 
     case PK.showChapterPos:
@@ -492,9 +499,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     return v
   }
 
-  func setupOnScreenController() {
+  func setupOnScreenController(position newPosition: Preference.OSCPosition) {
 
     var isCurrentControlBarHidden = false
+
+    let isSwitchingToTop = newPosition == .top
+    let isSwitchingFromTop = oscPosition == .top
 
     if let cb = currentControlBar {
       // remove current osc view from fadeable views
@@ -505,12 +515,30 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // reset
     ([controlBarFloating, controlBarBottom, oscTopMainView] as [NSView]).forEach { $0.isHidden = true }
-    titleBarHeightConstraint.constant = 22
+    titleBarHeightConstraint.constant = TitleBarHeightNormal
 
     controlBarFloating.isDragging = false
 
     // detach all fragment views
     [fragSliderView, fragControlView, fragToolbarView, fragVolumeView].forEach { $0?.removeFromSuperview() }
+
+    if isSwitchingToTop {
+      if isInFullScreen {
+        addBackTitlebarViewToFadeableViews()
+        oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTopInFullScreen
+        titleBarHeightConstraint.constant = TitleBarHeightWithOSCInFullScreen
+      } else {
+        oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
+        titleBarHeightConstraint.constant = TitleBarHeightWithOSC
+      }
+    }
+
+    if isSwitchingFromTop {
+      if isInFullScreen {
+        titleBarView.isHidden = true
+        removeTitlebarViewFromFadeableViews()
+      }
+    }
 
     // add fragment viewss
     switch oscPosition! {
@@ -531,7 +559,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         window!.frame.height * CGFloat(cpv)
       ))
     case .top:
-      titleBarHeightConstraint.constant = 22 + 24 + 10
       oscTopMainView.isHidden = false
       currentControlBar = nil
       fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: fragControlViewLeftView)
@@ -559,6 +586,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       currentControlBar!.isHidden = isCurrentControlBarHidden
     }
 
+    oscPosition = newPosition
   }
 
   // MARK: - Mouse / Trackpad event
@@ -889,34 +917,39 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // show titlebar
-    window!.titlebarAppearsTransparent = false
-    window!.titleVisibility = .visible
-    removeTitlebarFromFadeableViews()
+    if oscPosition == .top {
+      oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTopInFullScreen
+      titleBarHeightConstraint.constant = TitleBarHeightWithOSCInFullScreen
+    } else {
+      // stop animation and hide titleBarView
+      removeTitlebarViewFromFadeableViews()
+      titleBarView.isHidden = true
+    }
+    removeStandardButtonsFromFadeableViews()
 
-    // stop animation and hide titleBarView
-    titleBarView.isHidden = true
     isInFullScreen = true
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
     playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, false)
 
-    // hide titlebar
-    window!.titlebarAppearsTransparent = true
     // show titleBarView
-    titleBarView.isHidden = false
-    animationState = .shown
-    addBackTitlebarToFadeableViews()
-    isInFullScreen = false
-    // set back frame of videoview, but only if not in PIP
-    guard !isInPIP else { return }
-    videoView.frame = window!.contentView!.frame
-  }
+    if oscPosition == .top {
+      oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
+      titleBarHeightConstraint.constant = TitleBarHeightWithOSC
+    } else {
+      addBackTitlebarViewToFadeableViews()
+      titleBarView.isHidden = false
+      animationState = .shown
+    }
+    addBackStandardButtonsToFadeableViews()
 
-  func windowDidExitFullScreen(_ notification: Notification) {
-    // if is floating, enable it again
-    if isOntop {
-      setWindowFloatingOnTop(true)
+
+    isInFullScreen = false
+
+    // set back frame of videoview, but only if not in PIP
+    if !isInPIP {
+      videoView.frame = window!.contentView!.frame
     }
   }
 
@@ -1161,8 +1194,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  private func removeTitlebarFromFadeableViews() {
-    // remove buttons from fade-able views
+  private func removeStandardButtonsFromFadeableViews() {
     fadeableViews = fadeableViews.filter { view in
       !standardWindowButtons.contains {
         $0 == view
@@ -1172,15 +1204,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       view.alphaValue = 1
       view.isHidden = false
     }
-    // remove titlebar view from fade-able views
+  }
+
+  private func removeTitlebarViewFromFadeableViews() {
     if let index = (self.fadeableViews.index { $0 === titleBarView }) {
       self.fadeableViews.remove(at: index)
     }
   }
 
-  private func addBackTitlebarToFadeableViews() {
+  private func addBackStandardButtonsToFadeableViews() {
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
-    // add back titlebar view to fade-able views
+  }
+
+  private func addBackTitlebarViewToFadeableViews() {
     self.fadeableViews.append(titleBarView)
   }
 
@@ -1487,13 +1523,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updateVolume()
   }
 
-  /** Important: `window.toggleFullScreen` should never be called directly, since it can't handle floating window. */
   func toggleWindowFullScreen() {
-    // if is floating, disable it temporarily.
-    // it will be enabled again in `windowDidExitFullScreen()`.
-    if !isInFullScreen && isOntop {
-      setWindowFloatingOnTop(false)
-    }
     window?.toggleFullScreen(self)
   }
 

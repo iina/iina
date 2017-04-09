@@ -32,7 +32,11 @@
                 <outlet property="oscFloatingTopView" destination="Unr-Y6-JoM" id="URb-3v-Gzc"/>
                 <outlet property="oscTopMainView" destination="fDY-vk-Ylv" id="phs-Yu-dGn"/>
                 <outlet property="oscTopMainViewTopConstraint" destination="dAZ-xc-uEC" id="qjt-RT-cqK"/>
-                <outlet property="osd" destination="Ofw-1d-N4T" id="9Rf-if-Brn"/>
+                <outlet property="osdAccessoryProgress" destination="i10-rt-9cb" id="ZdR-ZV-uoQ"/>
+                <outlet property="osdAccessoryText" destination="lb1-5R-hR3" id="A7o-3l-NYe"/>
+                <outlet property="osdAccessoryView" destination="sqF-0E-LwH" id="Y43-Cx-f6X"/>
+                <outlet property="osdLabel" destination="Ofw-1d-N4T" id="9ei-8o-aYw"/>
+                <outlet property="osdStackView" destination="g0j-zS-jKv" id="aoo-Tm-yhj"/>
                 <outlet property="osdVisualEffectView" destination="g0O-v5-RQj" id="V4X-8K-6O1"/>
                 <outlet property="pipOverlayView" destination="Nrz-jZ-Luf" id="EU7-oY-Bwp"/>
                 <outlet property="playButton" destination="gxw-pJ-Lcg" id="t9H-xd-uqj"/>
@@ -148,22 +152,65 @@
                         </constraints>
                     </visualEffectView>
                     <visualEffectView hidden="YES" wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="g0O-v5-RQj">
-                        <rect key="frame" x="8" y="277" width="197" height="48"/>
+                        <rect key="frame" x="8" y="267" width="197" height="58"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofw-1d-N4T" userLabel="OSD">
-                                <rect key="frame" x="14" y="12" width="169" height="24"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="On Screen Display" id="JAn-Yu-XA2">
-                                    <font key="font" size="20" name=".AppleSystemUIFont"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                            <stackView orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="g0j-zS-jKv">
+                                <rect key="frame" x="16" y="8" width="165" height="42"/>
+                                <beginningViews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofw-1d-N4T" userLabel="OSD">
+                                        <rect key="frame" x="-2" y="18" width="169" height="24"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="On Screen Display" id="JAn-Yu-XA2">
+                                            <font key="font" size="20" name=".AppleSystemUIFont"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="sqF-0E-LwH">
+                                        <rect key="frame" x="0.0" y="0.0" width="165" height="16"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lb1-5R-hR3">
+                                                <rect key="frame" x="-2" y="0.0" width="169" height="16"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="7aL-lH-m8i">
+                                                    <font key="font" metaFont="system" size="11"/>
+                                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <progressIndicator wantsLayer="YES" maxValue="1" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="i10-rt-9cb">
+                                                <rect key="frame" x="0.0" y="0.0" width="165" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="165" placeholder="YES" id="9mH-xV-bEs"/>
+                                                </constraints>
+                                            </progressIndicator>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="i10-rt-9cb" firstAttribute="top" secondItem="sqF-0E-LwH" secondAttribute="top" id="6VV-8F-fIH"/>
+                                            <constraint firstAttribute="height" constant="16" id="IaX-Wp-jG2"/>
+                                            <constraint firstAttribute="trailing" secondItem="lb1-5R-hR3" secondAttribute="trailing" id="KSs-66-Nqu"/>
+                                            <constraint firstItem="lb1-5R-hR3" firstAttribute="leading" secondItem="sqF-0E-LwH" secondAttribute="leading" id="U8W-4f-d9R"/>
+                                            <constraint firstAttribute="trailing" secondItem="i10-rt-9cb" secondAttribute="trailing" id="Wki-rH-9vF"/>
+                                            <constraint firstItem="i10-rt-9cb" firstAttribute="leading" secondItem="sqF-0E-LwH" secondAttribute="leading" id="bRT-Sx-sbX"/>
+                                            <constraint firstItem="lb1-5R-hR3" firstAttribute="top" secondItem="sqF-0E-LwH" secondAttribute="top" id="fma-JE-HJ5"/>
+                                            <constraint firstAttribute="bottom" secondItem="lb1-5R-hR3" secondAttribute="bottom" id="gzw-ss-Cew"/>
+                                            <constraint firstAttribute="bottom" secondItem="i10-rt-9cb" secondAttribute="bottom" id="q3e-Wz-myO"/>
+                                        </constraints>
+                                    </customView>
+                                </beginningViews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Ofw-1d-N4T" firstAttribute="top" secondItem="g0O-v5-RQj" secondAttribute="top" constant="12" id="IM4-SR-9E7"/>
-                            <constraint firstItem="Ofw-1d-N4T" firstAttribute="leading" secondItem="g0O-v5-RQj" secondAttribute="leading" constant="16" id="mZR-4R-ihe"/>
-                            <constraint firstAttribute="trailing" secondItem="Ofw-1d-N4T" secondAttribute="trailing" constant="16" id="yCc-xv-Z5S"/>
-                            <constraint firstAttribute="bottom" secondItem="Ofw-1d-N4T" secondAttribute="bottom" constant="12" id="yni-EQ-Iew"/>
+                            <constraint firstItem="g0j-zS-jKv" firstAttribute="leading" secondItem="g0O-v5-RQj" secondAttribute="leading" constant="16" id="C3A-d2-EBc"/>
+                            <constraint firstItem="g0j-zS-jKv" firstAttribute="top" secondItem="g0O-v5-RQj" secondAttribute="top" constant="8" id="Pt2-sQ-VPI"/>
+                            <constraint firstAttribute="bottom" secondItem="g0j-zS-jKv" secondAttribute="bottom" constant="8" id="Vjj-vg-tA7"/>
+                            <constraint firstAttribute="trailing" secondItem="g0j-zS-jKv" secondAttribute="trailing" constant="16" id="WKr-7v-aYn"/>
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Tdb-EA-alw">

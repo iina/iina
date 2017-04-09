@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Mustache
 
 fileprivate typealias PK = Preference.Key
 
@@ -207,6 +208,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bottomBarBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var titleBarHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var oscTopMainViewTopConstraint: NSLayoutConstraint!
+  var osdProgressBarWidthConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
 
@@ -261,8 +263,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var leftArrowLabel: NSTextField!
   @IBOutlet weak var rightArrowLabel: NSTextField!
+
   @IBOutlet weak var osdVisualEffectView: NSVisualEffectView!
-  @IBOutlet weak var osd: NSTextField!
+  @IBOutlet weak var osdStackView: NSStackView!
+  @IBOutlet weak var osdLabel: NSTextField!
+  @IBOutlet weak var osdAccessoryView: NSView!
+  @IBOutlet weak var osdAccessoryText: NSTextField!
+  @IBOutlet weak var osdAccessoryProgress: NSProgressIndicator!
+
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
 
@@ -374,6 +382,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.rightClickAction))
     pinchAction = Preference.PinchAction(rawValue: ud.integer(forKey: PK.pinchAction))
     rightLabel.mode = ud.bool(forKey: PK.showRemainingTime) ? .remaining : .duration
+
+    osdProgressBarWidthConstraint = NSLayoutConstraint(item: osdAccessoryProgress, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150)
 
     // add user default observers
     observedPrefKeys.forEach { key in
@@ -1126,9 +1136,32 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       hideOSDTimer = nil
     }
     osdAnimationState = .shown
+    [osdAccessoryText, osdAccessoryProgress].forEach { $0.isHidden = true }
+
+    let (osdString, osdType) = message.message()
+
     let osdTextSize = ud.float(forKey: PK.osdTextSize)
-    osd.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
-    osd.stringValue = message.message()
+    osdLabel.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
+    osdLabel.stringValue = osdString
+    switch osdType {
+    case .normal:
+      osdStackView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: osdAccessoryView)
+    case .withProgress(let value):
+      NSLayoutConstraint.activate([osdProgressBarWidthConstraint])
+      osdStackView.setVisibilityPriority(NSStackViewVisibilityPriorityMustHold, for: osdAccessoryView)
+      osdAccessoryProgress.isHidden = false
+      osdAccessoryProgress.doubleValue = value
+    case .withText(let text):
+      NSLayoutConstraint.deactivate([osdProgressBarWidthConstraint])
+      osdStackView.setVisibilityPriority(NSStackViewVisibilityPriorityMustHold, for: osdAccessoryView)
+      let osdData: [String: String] = [
+        "duration": playerCore.info.videoDuration?.stringRepresentation ?? "--:--:--",
+        "position": playerCore.info.videoPosition?.stringRepresentation ?? "--:--:--"
+      ]
+      osdAccessoryText.isHidden = false
+      osdAccessoryText.stringValue = try! (try! Template(string: text)).render(osdData)
+    }
+
     osdVisualEffectView.alphaValue = 1
     osdVisualEffectView.isHidden = false
     let timeout = ud.float(forKey: PK.osdAutoHideTimeout)

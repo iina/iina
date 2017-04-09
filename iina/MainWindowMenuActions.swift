@@ -339,7 +339,7 @@ extension MainWindowController {
 
   @IBAction func menuFindOnlineSub(_ sender: NSMenuItem) {
     guard let url = playerCore.info.currentURL else { return }
-    displayOSD(.startFindingSub)
+    displayOSD(.startFindingSub("source"))
     OnlineSubtitle.getSub(forFile: url) { subtitles in
       // send osd in main thread
       self.playerCore.sendOSD(.foundSub(subtitles.count))

@@ -621,6 +621,7 @@
 			isa = PBXGroup;
 			children = (
 				84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */,
+				8476440B1D48F63D004F6DF5 /* OSDMessage.swift */,
 				845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */,
 				84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */,
 				84D377661D737F58007F7396 /* MPVChapter.swift */,
@@ -779,7 +780,6 @@
 				844DE1BE1D3E2B9900272589 /* MPVEvent.swift */,
 				84F7258E1D486185000DEF1B /* MPVProperty.swift */,
 				84EB1F041D2F5C5B004FA5A1 /* AppData.swift */,
-				8476440B1D48F63D004F6DF5 /* OSDMessage.swift */,
 				84A0BA8F1D2F8D4100BC8DA1 /* IINAError.swift */,
 				84AABE8A1DBF634600D138FD /* CharEncoding.swift */,
 				8450403F1E0ACADD0079C194 /* MPVNode.swift */,

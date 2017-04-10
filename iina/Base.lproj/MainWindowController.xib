@@ -152,13 +152,13 @@
                         </constraints>
                     </visualEffectView>
                     <visualEffectView hidden="YES" wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="g0O-v5-RQj">
-                        <rect key="frame" x="8" y="267" width="197" height="58"/>
+                        <rect key="frame" x="8" y="269" width="197" height="56"/>
                         <subviews>
                             <stackView orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="g0j-zS-jKv">
-                                <rect key="frame" x="16" y="8" width="165" height="42"/>
+                                <rect key="frame" x="16" y="8" width="165" height="40"/>
                                 <beginningViews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofw-1d-N4T" userLabel="OSD">
-                                        <rect key="frame" x="-2" y="18" width="169" height="24"/>
+                                        <rect key="frame" x="-2" y="16" width="169" height="24"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="On Screen Display" id="JAn-Yu-XA2">
                                             <font key="font" size="20" name=".AppleSystemUIFont"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -166,10 +166,10 @@
                                         </textFieldCell>
                                     </textField>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="sqF-0E-LwH">
-                                        <rect key="frame" x="0.0" y="0.0" width="165" height="16"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="165" height="14"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lb1-5R-hR3">
-                                                <rect key="frame" x="-2" y="0.0" width="169" height="16"/>
+                                                <rect key="frame" x="-1" y="0.0" width="168" height="14"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="7aL-lH-m8i">
                                                     <font key="font" metaFont="system" size="11"/>
                                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -177,17 +177,17 @@
                                                 </textFieldCell>
                                             </textField>
                                             <progressIndicator wantsLayer="YES" maxValue="1" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="i10-rt-9cb">
-                                                <rect key="frame" x="0.0" y="0.0" width="165" height="16"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="165" height="10"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="165" placeholder="YES" id="9mH-xV-bEs"/>
                                                 </constraints>
                                             </progressIndicator>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="i10-rt-9cb" firstAttribute="top" secondItem="sqF-0E-LwH" secondAttribute="top" id="6VV-8F-fIH"/>
-                                            <constraint firstAttribute="height" constant="16" id="IaX-Wp-jG2"/>
+                                            <constraint firstItem="i10-rt-9cb" firstAttribute="top" secondItem="sqF-0E-LwH" secondAttribute="top" constant="4" id="6VV-8F-fIH"/>
+                                            <constraint firstAttribute="height" constant="14" id="IaX-Wp-jG2"/>
                                             <constraint firstAttribute="trailing" secondItem="lb1-5R-hR3" secondAttribute="trailing" id="KSs-66-Nqu"/>
-                                            <constraint firstItem="lb1-5R-hR3" firstAttribute="leading" secondItem="sqF-0E-LwH" secondAttribute="leading" id="U8W-4f-d9R"/>
+                                            <constraint firstItem="lb1-5R-hR3" firstAttribute="leading" secondItem="sqF-0E-LwH" secondAttribute="leading" constant="1" id="U8W-4f-d9R"/>
                                             <constraint firstAttribute="trailing" secondItem="i10-rt-9cb" secondAttribute="trailing" id="Wki-rH-9vF"/>
                                             <constraint firstItem="i10-rt-9cb" firstAttribute="leading" secondItem="sqF-0E-LwH" secondAttribute="leading" id="bRT-Sx-sbX"/>
                                             <constraint firstItem="lb1-5R-hR3" firstAttribute="top" secondItem="sqF-0E-LwH" secondAttribute="top" id="fma-JE-HJ5"/>

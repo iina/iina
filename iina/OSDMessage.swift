@@ -10,6 +10,9 @@
 ///
 /// {{duration}}
 /// {{position}}
+/// {{percentPos}}
+/// {{currChapter}}
+/// {{chapterCount}}
 
 import Foundation
 
@@ -27,6 +30,7 @@ enum OSDMessage {
 
   case pause
   case resume
+  case seek(String, Double)  // text, percentage
   case volume(Int)
   case speed(Double)
   case aspect(String)
@@ -54,7 +58,7 @@ enum OSDMessage {
 
   case startFindingSub(String)  // sub source
   case foundSub(Int)
-  case downloadedSub
+  case downloadedSub(String)  // filename
   case savedSub
   case cannotLogin
   case fileError
@@ -69,6 +73,9 @@ enum OSDMessage {
 
     case .resume:
       return (NSLocalizedString("osd.resume", comment: "Resume"), .withText("{{position}} / {{duration}}"))
+
+    case .seek(let text, let percent):
+      return (text, .withProgress(percent))
 
     case .volume(let value):
       return (
@@ -153,12 +160,12 @@ enum OSDMessage {
       }
 
     case .stop:
-      return (NSLocalizedString("osd.stop", comment: "Stop"), .withText("{{position}} / {{duration}}"))
+      return (NSLocalizedString("osd.stop", comment: "Stop"), .normal)
 
     case .chapter(let name):
       return (
         String(format: NSLocalizedString("osd.chapter", comment: "Chapter: %@"), name),
-        .withText("{{position}}")
+        .withText("({{currChapter}}/{{chapterCount}}) {{position}} / {{duration}}")
       )
 
     case .subScale(let value):
@@ -179,31 +186,31 @@ enum OSDMessage {
     case .contrast(let value):
       return (
         String(format: NSLocalizedString("osd.video_eq.contrast", comment: "Contrast: %i"), value),
-        .withProgress(Double(value / 100))
+        .withProgress(Double(value) / 100)
       )
 
     case .gamma(let value):
       return (
         String(format: NSLocalizedString("osd.video_eq.gamma", comment: "Grama: %i"), value),
-        .withProgress(Double(value / 100))
+        .withProgress(Double(value) / 100)
       )
 
     case .hue(let value):
       return (
         String(format: NSLocalizedString("osd.video_eq.hue", comment: "Hue: %i"), value),
-        .withProgress(Double(value / 100))
+        .withProgress(Double(value) / 100)
       )
 
     case .saturation(let value):
       return (
         String(format: NSLocalizedString("osd.video_eq.saturation", comment: "Saturation: %i"), value),
-        .withProgress(Double(value / 100))
+        .withProgress(Double(value) / 100)
       )
 
     case .brightness(let value):
       return (
         String(format: NSLocalizedString("osd.video_eq.brightness", comment: "Brightness: %i"), value),
-        .withProgress(Double(value / 100))
+        .withProgress(Double(value) / 100)
       )
 
     case .startFindingSub(let source):
@@ -218,10 +225,10 @@ enum OSDMessage {
         String(format: NSLocalizedString("osd.sub_found", comment: "%d subtitle(s) found. Downloading..."), count)
       return (str, .normal)
 
-    case .downloadedSub:
+    case .downloadedSub(let filename):
       return (
         NSLocalizedString("osd.sub_downloaded", comment: "Subtitle downloaded"),
-        .normal
+        .withText(filename)
       )
 
     case .savedSub:

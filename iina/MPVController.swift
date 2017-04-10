@@ -506,6 +506,10 @@ class MPVController: NSObject {
         recordedSeekStartTime = CACurrentMediaTime()
       }
       playerCore.syncUI(.time)
+      let osdText = (playerCore.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
+        (playerCore.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder)
+      let percentage = (playerCore.info.videoPosition / playerCore.info.videoDuration) ?? 1
+      playerCore.sendOSD(.seek(osdText, percentage))
 
     case MPV_EVENT_PLAYBACK_RESTART:
       playerCore.info.isSeeking = false

@@ -1143,6 +1143,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let osdTextSize = ud.float(forKey: PK.osdTextSize)
     osdLabel.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
     osdLabel.stringValue = osdString
+
     switch osdType {
     case .normal:
       osdStackView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: osdAccessoryView)
@@ -1153,11 +1154,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       osdAccessoryProgress.doubleValue = value
     case .withText(let text):
       NSLayoutConstraint.deactivate([osdProgressBarWidthConstraint])
-      osdStackView.setVisibilityPriority(NSStackViewVisibilityPriorityMustHold, for: osdAccessoryView)
+
+      // data for mustache redering
       let osdData: [String: String] = [
-        "duration": playerCore.info.videoDuration?.stringRepresentation ?? "--:--:--",
-        "position": playerCore.info.videoPosition?.stringRepresentation ?? "--:--:--"
+        "duration": playerCore.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
+        "position": playerCore.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
+        "currChapter": (playerCore.mpvController.getInt(MPVProperty.chapter) + 1).toStr(),
+        "chapterCount": playerCore.info.chapters.count.toStr()
       ]
+
+      osdStackView.setVisibilityPriority(NSStackViewVisibilityPriorityMustHold, for: osdAccessoryView)
       osdAccessoryText.isHidden = false
       osdAccessoryText.stringValue = try! (try! Template(string: text)).render(osdData)
     }

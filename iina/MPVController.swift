@@ -493,6 +493,7 @@ class MPVController: NSObject {
 
     case MPV_EVENT_START_FILE:
       playerCore.fileStarted()
+      playerCore.sendOSD(.fileStart(playerCore.info.currentURL?.lastPathComponent ?? "-"))
 
     case MPV_EVENT_FILE_LOADED:
       onFileLoaded()

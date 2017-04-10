@@ -16,8 +16,8 @@
 
 import Foundation
 
-fileprivate func delayToPercent(_ value: Double) -> Double {
-  return (value + 10).constrain(min: 0, max: 20) / 20
+fileprivate func toPercent(_ value: Double, _ bound: Double) -> Double {
+  return (value + bound).constrain(min: 0, max: bound * 2) / (bound * 2)
 }
 
 enum OSDType {
@@ -27,6 +27,8 @@ enum OSDType {
 }
 
 enum OSDMessage {
+
+  case fileStart(String)
 
   case pause
   case resume
@@ -68,6 +70,9 @@ enum OSDMessage {
 
   func message() -> (String, OSDType) {
     switch self {
+    case .fileStart(let filename):
+      return (filename, .normal)
+
     case .pause:
       return (NSLocalizedString("osd.pause", comment: "Pause"), .withText("{{position}} / {{duration}}"))
 
@@ -121,7 +126,7 @@ enum OSDMessage {
         )
       } else {
         let str = value > 0 ? String(format: NSLocalizedString("osd.audio_delay.later", comment: "Audio Delay: %fs Later"),abs(value)) : String(format: NSLocalizedString("osd.audio_delay.earlier", comment: "Audio Delay: %fs Earlier"), abs(value))
-        return (str, .withProgress(delayToPercent(value)))
+        return (str, .withProgress(toPercent(value, 10)))
       }
 
     case .subDelay(let value):
@@ -132,7 +137,7 @@ enum OSDMessage {
         )
       } else {
         let str = value > 0 ? String(format: NSLocalizedString("osd.sub_delay.later", comment: "Subtitle Delay: %fs Later"),abs(value)) : String(format: NSLocalizedString("osd.sub_delay.earlier", comment: "Subtitle Delay: %fs Earlier"), abs(value))
-        return (str, .withProgress(delayToPercent(value)))
+        return (str, .withProgress(toPercent(value, 10)))
       }
 
     case .subPos(let value):
@@ -186,31 +191,31 @@ enum OSDMessage {
     case .contrast(let value):
       return (
         String(format: NSLocalizedString("osd.video_eq.contrast", comment: "Contrast: %i"), value),
-        .withProgress(Double(value) / 100)
+        .withProgress(toPercent(Double(value), 100))
       )
 
     case .gamma(let value):
       return (
         String(format: NSLocalizedString("osd.video_eq.gamma", comment: "Grama: %i"), value),
-        .withProgress(Double(value) / 100)
+        .withProgress(toPercent(Double(value), 100))
       )
 
     case .hue(let value):
       return (
         String(format: NSLocalizedString("osd.video_eq.hue", comment: "Hue: %i"), value),
-        .withProgress(Double(value) / 100)
+        .withProgress(toPercent(Double(value), 100))
       )
 
     case .saturation(let value):
       return (
         String(format: NSLocalizedString("osd.video_eq.saturation", comment: "Saturation: %i"), value),
-        .withProgress(Double(value) / 100)
+        .withProgress(toPercent(Double(value), 100))
       )
 
     case .brightness(let value):
       return (
         String(format: NSLocalizedString("osd.video_eq.brightness", comment: "Brightness: %i"), value),
-        .withProgress(Double(value) / 100)
+        .withProgress(toPercent(Double(value), 100))
       )
 
     case .startFindingSub(let source):

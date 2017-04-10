@@ -154,12 +154,12 @@
                     <visualEffectView hidden="YES" wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="g0O-v5-RQj">
                         <rect key="frame" x="8" y="269" width="197" height="56"/>
                         <subviews>
-                            <stackView orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="g0j-zS-jKv">
+                            <stackView orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" horizontalClippingResistancePriority="260" translatesAutoresizingMaskIntoConstraints="NO" id="g0j-zS-jKv">
                                 <rect key="frame" x="16" y="8" width="165" height="40"/>
                                 <beginningViews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofw-1d-N4T" userLabel="OSD">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="200" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofw-1d-N4T" userLabel="OSD">
                                         <rect key="frame" x="-2" y="16" width="169" height="24"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="On Screen Display" id="JAn-Yu-XA2">
+                                        <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="left" title="On Screen Display" usesSingleLineMode="YES" id="JAn-Yu-XA2">
                                             <font key="font" size="20" name=".AppleSystemUIFont"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -280,6 +280,7 @@
                     <constraint firstAttribute="bottom" secondItem="Tdb-EA-alw" secondAttribute="bottom" constant="-60" id="vP1-IE-sbB"/>
                     <constraint firstItem="TRx-2V-Gr3" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="wGB-mn-a6f"/>
                     <constraint firstItem="Tdb-EA-alw" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="wYH-h6-46f"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="g0O-v5-RQj" secondAttribute="trailing" constant="8" id="yKZ-no-kD6"/>
                     <constraint firstAttribute="bottom" secondItem="epo-S6-QVB" secondAttribute="bottom" id="zBx-AY-VlK"/>
                 </constraints>
             </view>

@@ -267,6 +267,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
 
   weak var touchBarPlaySlider: NSSlider?
+  weak var touchBarPlayPauseBtn: NSButton?
   weak var touchBarCurrentPosLabel: NSTextField?
 
   @available(macOS 10.12, *)
@@ -1592,11 +1593,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** Play button: pause & resume */
   @IBAction func playButtonAction(_ sender: NSButton) {
-    if sender.state == NSOnState {
-      playerCore.togglePause(false)
-    }
-    if sender.state == NSOffState {
-      playerCore.togglePause(true)
+    playerCore.togglePause(nil)
+    if playerCore.info.isPaused {
       // speed is already reset by playerCore
       speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
@@ -1605,6 +1603,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if isFastforwarding {
         playerCore.setSpeed(1)
         isFastforwarding = false
+      }
+      if sender.state != NSOnState {
+        sender.state = NSOnState
+      }
+      if #available(OSX 10.12.2, *) {
+        touchBarPlayPauseBtn?.image = NSImage(named: NSImageNameTouchBarPauseTemplate)
+      }
+    } else {
+      if sender.state != NSOffState {
+        sender.state = NSOffState
+      }
+      if #available(OSX 10.12.2, *) {
+        touchBarPlayPauseBtn?.image = NSImage(named: NSImageNameTouchBarPlayTemplate)
       }
     }
   }
@@ -1872,8 +1883,10 @@ extension MainWindowController: NSTouchBarDelegate {
 
     case NSTouchBarItemIdentifier.playPause:
       let item = NSCustomTouchBarItem(identifier: identifier)
-      item.view = NSButton(image: NSImage(named: NSImageNameTouchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
+      let button = NSButton(image: NSImage(named: NSImageNameTouchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
+      item.view = button
       item.customizationLabel = "Play / Pause"
+      self.touchBarPlayPauseBtn = button
       return item
 
     case NSTouchBarItemIdentifier.slider:

@@ -75,7 +75,7 @@ extension MainWindowController {
     playerCore.playFileInPlaylist(index)
   }
 
-  @IBAction func menuShowPlaylistPanel(_ sender: NSMenuItem) {
+  @IBAction func menuShowPlaylistPanel(_ sender: AnyObject) {
     if sideBarStatus == .hidden || sideBarStatus == .settings {
       playlistView.pleaseSwitchToTab(.playlist)
       playlistButtonAction(sender)

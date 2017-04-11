@@ -8,6 +8,7 @@
 
 import Cocoa
 
+fileprivate typealias PK = Preference.Key
 
 class VideoView: NSView {
 
@@ -31,6 +32,8 @@ class VideoView: NSView {
   var isUninited = false
 
   var uninitLock = NSLock()
+  
+  var playlistAutoShowTimer = Timer()
 
   // MARK: - Attributes
 
@@ -92,21 +95,35 @@ class VideoView: NSView {
   }
 
   // MARK: Drag and drop
-  
+
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+    if playerCore.ud.bool(forKey: PK.playlistAutoShow) {
+      playlistAutoShowTimer = Timer.scheduledTimer(timeInterval: TimeInterval(playerCore.ud.float(forKey: PK.playlistAutoShowTime)), target: self, selector: #selector(showPlaylist), userInfo: nil, repeats: false)
+    }
     return .copy
   }
-    
+
+  func showPlaylist() {
+    if playerCore.mainWindow?.sideBarStatus != .playlist {
+      playerCore.mainWindow?.menuShowPlaylistPanel(self)
+    }
+    playlistAutoShowTimer.invalidate()
+  }
+
   override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
     return .copy
   }
-  
+
+  override func draggingExited(_ sender: NSDraggingInfo?) {
+    playlistAutoShowTimer.invalidate()
+  }
+
   override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
     let pb = sender.draggingPasteboard()
     guard let types = pb.types else { return false }
     if types.contains(NSFilenamesPboardType) {
       guard let fileNames = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else { return false }
-      
+
       var videoFiles: [String] = []
       var subtitleFiles: [String] = []
       fileNames.forEach({ (path) in
@@ -117,7 +134,7 @@ class VideoView: NSView {
           videoFiles.append(path)
         }
       })
-      
+
       if videoFiles.count == 0 {
         if subtitleFiles.count > 0 {
           subtitleFiles.forEach { (subtitle) in
@@ -158,5 +175,5 @@ class VideoView: NSView {
     }
     return false
   }
-  
+
 }

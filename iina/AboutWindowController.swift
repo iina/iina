@@ -18,7 +18,7 @@ class AboutWindowController: NSWindowController {
   @IBOutlet weak var iconImageView: NSImageView!
   @IBOutlet weak var iinaLabel: NSTextField! {
     didSet {
-      if #available(OSX 10.11, *) {
+      if #available(macOS 10.11, *) {
         iinaLabel.font = NSFont.systemFont(ofSize: 24, weight: NSFontWeightLight)
       }
     }

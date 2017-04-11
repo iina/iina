@@ -49,6 +49,7 @@ enum OSDMessage {
   case abLoop(Int)
   case stop
   case chapter(String)
+  case track(MPVTrack)
   case addToPlaylist(Int)
   case clearPlaylist
 
@@ -172,6 +173,16 @@ enum OSDMessage {
         String(format: NSLocalizedString("osd.chapter", comment: "Chapter: %@"), name),
         .withText("({{currChapter}}/{{chapterCount}}) {{position}} / {{duration}}")
       )
+
+    case .track(let track):
+      let trackTypeStr: String
+      switch track.type {
+      case .video: trackTypeStr = "Video"
+      case .audio: trackTypeStr = "Audio"
+      case .sub: trackTypeStr = "Subtitle"
+      case .secondSub: trackTypeStr = "Second Sub"
+      }
+      return (trackTypeStr + ": " + track.readableTitle, .normal)
 
     case .subScale(let value):
       return (

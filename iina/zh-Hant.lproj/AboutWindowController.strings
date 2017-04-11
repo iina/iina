@@ -1,27 +1,8 @@
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "5xy-6V-bAd"; */
-"5xy-6V-bAd.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Website:"; ObjectID = "AfN-ft-1xe"; */
-"AfN-ft-1xe.title" = "網站:";
-
 /* Class = "NSWindow"; title = "About"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "關於";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "L8a-Ak-JW7"; */
-"L8a-Ak-JW7.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "Nd4-sj-z8a"; */
-"Nd4-sj-z8a.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Github:"; ObjectID = "SMU-4a-EZu"; */
-"SMU-4a-EZu.title" = "Github:";
-
-/* Class = "NSTextFieldCell"; title = "This is an alpha release. It will not update automatically, so please checkout the website to get new versions. For bug report, feature request or help, please raise an issue at github or email me."; ObjectID = "TI7-3V-nUn"; */
+/* Class = "NSTextFieldCell"; title = "This is an alpha release and not recommended for daily use. Please check for updates frequently. For bug reports, feature requests or help, please create an issue on Github or email me."; ObjectID = "TI7-3V-nUn"; */
 "TI7-3V-nUn.title" = "這是 Alpha 版本，並不推薦日常使用，請經常檢查更新。如果需要反饋或幫助, 請在 Github 上提 issue 或者郵件聯繫作者。";
-
-/* Class = "NSTextFieldCell"; title = "Email:"; ObjectID = "YZN-bC-GbO"; */
-"YZN-bC-GbO.title" = "郵件:";
 
 /* Class = "NSTextFieldCell"; title = "IINA"; ObjectID = "dkA-td-UyX"; */
 "dkA-td-UyX.title" = "IINA";
@@ -32,5 +13,3 @@
 /* Class = "NSBox"; title = "Box"; ObjectID = "igW-n0-W0W"; */
 "igW-n0-W0W.title" = "Box";
 
-/* Class = "NSTextFieldCell"; title = "Copyright"; ObjectID = "vrF-41-HfU"; */
-"vrF-41-HfU.title" = "Copyright";

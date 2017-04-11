@@ -117,15 +117,19 @@ extern "C" {
  *
  * While "normal" mpv loads the OpenGL hardware decoding interop on demand,
  * this can't be done with opengl_cb for internal technical reasons. Instead,
- * make it load the interop at load time by setting the "hwdec-preload"="auto"
- * option before calling mpv_opengl_cb_init_gl().
+ * make it load the interop at load time by setting the
+ * "opengl-hwdec-interop"="auto" option before calling mpv_opengl_cb_init_gl()
+ * ("hwdec-preload" in older mpv releases).
  *
  * There may be certain requirements on the OpenGL implementation:
  * - Windows: ANGLE is required (although in theory GL/DX interop could be used)
  * - Intel/Linux: EGL is required, and also a glMPGetNativeDisplay() callback
  *                must be provided (see sections below)
- * - nVidia/Linux: GLX is required
+ * - nVidia/Linux: GLX is required (if you force "cuda", it should work on EGL
+ *                 as well, if you have recent enough drivers and the
+ *                 "hwaccel" option is set to "cuda" as well)
  * - OSX: CGL is required (CGLGetCurrentContext() returning non-NULL)
+ * - iOS: EAGL is required (EAGLContext.currentContext returning non-nil)
  *
  * Once these things are setup, hardware decoding can be enabled/disabled at
  * any time by setting the "hwdec" property.
@@ -170,26 +174,9 @@ extern "C" {
  * Windowing system interop on MS win32
  * ------------------------------------
  *
- * Warning: the following is only required if native OpenGL instead of ANGLE
- *          is used. ANGLE is recommended, because it also allows direct
- *          hardware decoding interop without further setup by the libmpv
- *          API user, while the same with native OpenGL is either very hard
- *          to do (via GL/DX interop with D3D9), or not implemented.
- *
- * If OpenGL switches to fullscreen, most players give it access GPU access,
- * which means DXVA2 hardware decoding in mpv won't work. This can be worked
- * around by giving mpv access to Direct3D device, which it will then use to
- * create a decoder. The device can be either the real device used for display,
- * or a "blank" device created before switching to fullscreen.
- *
- * You can provide glMPGetNativeDisplay as described in the previous section.
- * If it is called with name set to "IDirect3DDevice9", it should return a
- * IDirect3DDevice9 pointer (or NULL if not available). libmpv will release
- * this interface when it is done with it.
- *
- * In previous libmpv releases, this used "GL_MP_D3D_interfaces" and
- * "glMPGetD3DInterface". This is deprecated; use glMPGetNativeDisplay instead
- * (the semantics are 100% compatible).
+ * You should use ANGLE, and make sure your application and libmpv are linked
+ * to the same ANGLE DLLs. libmpv will pick the device context (needed for
+ * hardware decoding) from the current ANGLE EGL context.
  *
  * Windowing system interop on RPI
  * -------------------------------

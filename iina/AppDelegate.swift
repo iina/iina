@@ -24,6 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   lazy var inspector: InspectorWindowController = InspectorWindowController()
 
+  lazy var subSelectWindow: SubSelectWindowController = SubSelectWindowController()
+
   lazy var vfWindow: FilterWindowController = {
     let w = FilterWindowController()
     w.filterType = MPVProperty.vf
@@ -98,7 +100,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-    guard playerCore.mainWindow.isWindowLoaded else { return false }
+    guard let mw = playerCore.mainWindow, mw.isWindowLoaded else { return false }
     return UserDefaults.standard.bool(forKey: Preference.Key.quitWhenNoOpenedWindow)
   }
 
@@ -179,8 +181,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func openURL(_ sender: NSMenuItem) {
-    let _ = Utility.quickPromptPanel(messageText: "Open URL", informativeText: "Please enter the url:") { str in
-      playerCore.openURLString(str)
+    let panel = NSAlert()
+    panel.messageText = "Open URL"
+    panel.informativeText = "Please enter the URL:"
+    let inputViewController = OpenURLAccessoryViewController()
+    panel.accessoryView = inputViewController.view
+    panel.addButton(withTitle: "OK")
+    panel.addButton(withTitle: "Cancel")
+    panel.window.initialFirstResponder = inputViewController.urlField
+    let response = panel.runModal()
+    if response == NSAlertFirstButtonReturn {
+      if let url = inputViewController.url {
+        playerCore.openURL(url)
+      } else {
+        Utility.showAlert("wrong_url_format")
+      }
     }
   }
 
@@ -214,7 +229,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func helpAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: AppData.websiteLink)!.appendingPathComponent("documentation"))
+    NSWorkspace.shared().open(URL(string: AppData.wikiLink)!)
   }
 
   @IBAction func githubAction(_ sender: AnyObject) {

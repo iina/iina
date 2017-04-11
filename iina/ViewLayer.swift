@@ -15,7 +15,6 @@ fileprivate func mpvGetOpenGL(_ ctx: UnsafeMutableRawPointer?, _ name: UnsafePoi
   let symbolName: CFString = CFStringCreateWithCString(kCFAllocatorDefault, name, kCFStringEncodingASCII);
   guard let addr = CFBundleGetFunctionPointerForName(CFBundleGetBundleWithIdentifier(CFStringCreateCopy(kCFAllocatorDefault, "com.apple.opengl" as CFString!)), symbolName) else {
     Utility.fatal("Cannot get OpenGL function pointer!")
-    return nil
   }
   return addr
 }
@@ -69,7 +68,7 @@ class ViewLayer: CAOpenGLLayer {
 
   override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj {
 
-    let attributes: [CGLPixelFormatAttribute] = [
+    let attributes0: [CGLPixelFormatAttribute] = [
       kCGLPFADoubleBuffer,
       kCGLPFAOpenGLProfile, CGLPixelFormatAttribute(kCGLOGLPVersion_3_2_Core.rawValue),
       kCGLPFAAccelerated,
@@ -77,10 +76,33 @@ class ViewLayer: CAOpenGLLayer {
       _CGLPixelFormatAttribute(rawValue: 0)
     ]
 
+    let attributes1: [CGLPixelFormatAttribute] = [
+      kCGLPFADoubleBuffer,
+      kCGLPFAOpenGLProfile, CGLPixelFormatAttribute(kCGLOGLPVersion_3_2_Core.rawValue),
+      kCGLPFAAllowOfflineRenderers,
+      _CGLPixelFormatAttribute(rawValue: 0)
+    ]
+
+    let attributes2: [CGLPixelFormatAttribute] = [
+      kCGLPFADoubleBuffer,
+      kCGLPFAAllowOfflineRenderers,
+      _CGLPixelFormatAttribute(rawValue: 0)
+    ]
+
     var pix: CGLPixelFormatObj?
     var npix: GLint = 0
 
-    CGLChoosePixelFormat(attributes, &pix, &npix)
+    CGLChoosePixelFormat(attributes0, &pix, &npix)
+
+    if pix == nil {
+      CGLChoosePixelFormat(attributes1, &pix, &npix)
+    }
+
+    if pix == nil {
+      CGLChoosePixelFormat(attributes2, &pix, &npix)
+    }
+
+    Utility.assert(pix != nil, "Cannot create OpenGL pixel format!")
 
     return pix!
   }
@@ -106,6 +128,9 @@ class ViewLayer: CAOpenGLLayer {
 
   override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
 
+    guard !videoView.isUninited else { return }
+
+    videoView.uninitLock.lock()
     CGLLockContext(ctx)
     CGLSetCurrentContext(ctx)
 
@@ -118,7 +143,6 @@ class ViewLayer: CAOpenGLLayer {
 
     if let context = videoView.mpvGLContext {
       mpv_opengl_cb_draw(context, i, dims[2], -dims[3])
-      //print("draw")
       ignoreGLError()
     } else {
       glClearColor(0, 0, 0, 1)
@@ -127,6 +151,7 @@ class ViewLayer: CAOpenGLLayer {
     glFlush()
 
     CGLUnlockContext(ctx)
+    videoView.uninitLock.unlock()
 
     if let context = videoView.mpvGLContext {
       mpv_opengl_cb_report_flip(context, 0)

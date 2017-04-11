@@ -29,12 +29,9 @@ struct AppData {
   static let rotations: [Int] = [0, 90, 180, 270]
 
   /** Seek amount */
-  static let seekAmountMap: [Int: Double] = [
-    1: 0.001,
-    2: 0.01,
-    3: 0.1,
-    4: 0.5
-  ]
+  static let seekAmountMap = [0, 0.05, 0.1, 0.25, 0.5]
+  static let seekAmountMapMouse = [0, 0.5, 1, 2, 4]
+  static let volumeMap = [0, 0.25, 0.5, 0.75, 1]
 
   static let encodings = CharEncoding.list
 
@@ -44,6 +41,7 @@ struct AppData {
 
   static let githubLink = "https://github.com/lhc70000/iina"
   static let githubReleaseLink = "https://github.com/lhc70000/iina/releases"
+  static let wikiLink = "https://github.com/lhc70000/iina/wiki"
   static let websiteLink = "https://lhc70000.github.io/iina/"
   static let emailLink = "lhc199652@gmail.com"
 
@@ -72,6 +70,11 @@ struct Constants {
     static let exitFullScreen = NSLocalizedString("menu.exit_fullscreen", comment: "Exit Fullscreen")
     static let pause = NSLocalizedString("menu.pause", comment: "Pause")
     static let resume = NSLocalizedString("menu.resume", comment: "Resume")
+    static let volume = "Volume"
+    static let audioDelay = "Audio Delay"
+    static let subDelay = "Subtitle Delay"
+    static let pip = NSLocalizedString("menu.pip", comment: "Enter Picture-in-Picture")
+    static let exitPIP = NSLocalizedString("menu.exit_pip", comment: "Exit Picture-in-Picture")
   }
   struct Noti {
     static let playlistChanged = Notification.Name("IINAPlaylistChanged")
@@ -79,6 +82,9 @@ struct Constants {
     static let vfChanged = Notification.Name("IINAVfChanged")
     static let afChanged = Notification.Name("IINAAfChanged")
     static let fsChanged = Notification.Name("IINAFullscreenChanged")
+    static let ontopChanged = Notification.Name("IINAOnTopChanged")
+    static let keyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
+    static let fileLoaded = Notification.Name("IINAFileLoaded")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)

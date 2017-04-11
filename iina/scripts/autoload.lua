@@ -7,6 +7,13 @@
 -- Add at most 5000 * 2 files when starting a file (before + after).
 MAXENTRIES = 5000
 
+local options = require 'mp.options'
+
+o = {
+    disabled = false
+}
+options.read_options(o)
+
 function Set (t)
     local set = {}
     for _, v in pairs(t) do set[v] = true end
@@ -49,7 +56,7 @@ end
 function find_and_add_entries()
     local path = mp.get_property("path", "")
     local dir, filename = mputils.split_path(path)
-    if #dir == 0 then
+    if o.disabled or #dir == 0 then
         return
     end
     local pl_count = mp.get_property_number("playlist-count", 1)
@@ -66,10 +73,10 @@ function find_and_add_entries()
     end
     table.filter(files, function (v, k)
         local ext = get_extension(v)
-        if ext == nil then
-            return false
-        end
-        return EXTENSIONS[string.lower(ext)]
+        local valid_ext = ext ~= nil and EXTENSIONS[string.lower(ext)]
+        -- filter macOS temp files
+        local not_temp_file = string.find(v, "._") ~= 1
+        return valid_ext and not_temp_file
     end)
     table.sort(files, function (a, b)
         local len = string.len(a) - string.len(b)

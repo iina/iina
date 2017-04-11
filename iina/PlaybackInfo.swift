@@ -21,8 +21,6 @@ class PlaybackInfo {
   var displayWidth: Int?
   var displayHeight: Int?
 
-  var isAlwaysOntop: Bool = false
-
   var rotation: Int = 0
 
   var videoPosition: VideoTime?
@@ -32,7 +30,8 @@ class PlaybackInfo {
   var isSeeking: Bool = false
   var isPaused: Bool = false
 
-  var jumppedFromPlaylist: Bool = false
+  var justStartedFile: Bool = false
+  var justOpenedFile: Bool = false
 
   /** The current applied aspect, used for find current aspect in menu, etc. Maybe not a good approach. */
   var unsureAspect: String = "Default"
@@ -51,12 +50,7 @@ class PlaybackInfo {
   var gamma: Int = 0
   var hue: Int = 0
 
-  var volume: Int = 50 {
-    didSet {
-      if volume < 0 { volume = 0 }
-      else if volume > 100 { volume = 100 }
-    }
-  }
+  var volume: Double = 50
 
   var isMuted: Bool = false
 

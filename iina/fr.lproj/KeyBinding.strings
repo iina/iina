@@ -1,0 +1,79 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by Nicolas Allemand on 12/02/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Ignorer";
+"cmd.seek" = "Aller";
+"cmd.set" = "Configurer";
+"cmd.cycle" = "Alterner";
+"cmd.cycle-values" = "Alterner de";
+"cmd.add" = "Changer";
+"cmd.multiply" = "Multiplier";
+"cmd.frame-step" = "Image suivante";
+"cmd.frame-back-step" = "Image précédente";
+"cmd.ab-loop" = "Boucle A-B";
+"cmd.playlist-next" = "Média suivant";
+"cmd.playlist-prev" = "Média précédent";
+"cmd.playlist-clear" = "Vider la playlist";
+"cmd.playlist-remove" = "Enlever le média courant";
+"cmd.playlist-shuffle" = "Ordre aléatoire";
+"cmd.write-watch-later-config" = "Enregistrer l'historique de lecture";
+"cmd.stop" = "Stopper";
+"cmd.quit" = "Quitter";
+
+"yes" = "Oui";
+"no" = "Non";
+"to" = "à";
+"by" = "de";
+"in" = "de";
+"add" = "ajouter";
+"minus" = "enlever";
+"forward" = "en avant";
+"backward" = "en arrière";
+"seek-to" = "à";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (exact)";
+"relative-percent+exact" = "% (exact)";
+"absolute+keyframe" = "s (keyframe)";
+"absolute-percent+keyframe" = "% (keyframe)";
+
+"opt.pause" = "Pause";
+"opt.speed" = "Vitesse";
+
+"opt.video" = "Piste vidéo";
+"opt.contrast" = "Contraste";
+"opt.brightness" = "Luminosité";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Saturation";
+"opt.deinterlace" = "Désentrelacer";
+
+"opt.audio" = "Piste audio";
+"opt.volume" = "Volume";
+"opt.mute" = "Couper le son";
+"opt.audio-delay" = "Délai audio";
+
+"opt.sub" = "Piste de sous-titres";
+"opt.sub-delay" = "Délai des sous-titres";
+"opt.sub-pos" = "Position des sous-titres";
+"opt.sub-scale" = "Échelle des sous-titres";
+"opt.sub-visibility" = "Visibilité des sous-titres";
+
+"opt.fullscreen" = "Plein écran";
+
+"opt.chapter" = "Chapitre";
+
+"read.set" = "Configurer {{property}} à {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Multiplier {{property}} par {{factor}}x";
+"read.cycle" = "Alterner {{property}}{{#dir_down}} à l'envers{{/dir_down}}";
+"read.cycle-values" = "Alterner {{property}} de ({{{values}}})";
+"read.seek" = "Aller {{#fwd}}en avant{{/fwd}}{{#bwd}}en arrière{{/bwd}}{{#abs}}à{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Aller au {{#skip_1}}prochain{{/skip_1}}{{#skip_-1}}précédent{{/skip_-1}} sous-titre";

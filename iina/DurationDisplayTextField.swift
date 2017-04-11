@@ -15,7 +15,7 @@ class DurationDisplayTextField: NSTextField {
     case remaining // displays the remaining time in the movie
   }
   
-  var mode = DisplayMode.duration
+  var mode: DisplayMode = .duration
   
   /** Switches the display mode for the right label */
   func switchMode() {
@@ -35,7 +35,10 @@ class DurationDisplayTextField: NSTextField {
     case .duration:
       stringValue = duration.stringRepresentation
     case .remaining:
-      let remaining = duration - current
+      var remaining = (duration - current)
+      if remaining.second < 0 {
+        remaining = VideoTime.zero
+      }
       stringValue = "-\(remaining.stringRepresentation)"
     }
     self.stringValue = stringValue

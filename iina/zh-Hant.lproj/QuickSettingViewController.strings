@@ -1,4 +1,3 @@
-
 /* Class = "NSTextFieldCell"; title = "0"; ObjectID = "0ju-Sf-fcb"; */
 "0ju-Sf-fcb.title" = "0";
 
@@ -8,9 +7,6 @@
 /* Class = "NSTextFieldCell"; title = "125"; ObjectID = "1cq-dc-JfM"; */
 "1cq-dc-JfM.title" = "125";
 
-/* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
-"22j-ra-GAY.title" = "寬度:";
-
 /* Class = "NSMenuItem"; title = "0"; ObjectID = "3eG-mV-UGW"; */
 "3eG-mV-UGW.title" = "0";
 
@@ -18,7 +14,7 @@
 "3kI-6i-ujt.title" = "顏色:";
 
 /* Class = "NSTextFieldCell"; title = "+12 dB"; ObjectID = "4BZ-H1-GEU"; */
-"4BZ-H1-GEU.title" = "+12 dB";
+"4BZ-H1-GEU.title" = "+12分貝";
 
 /* Class = "NSTextFieldCell"; title = "62.5"; ObjectID = "4PG-5R-5G0"; */
 "4PG-5R-5G0.title" = "62.5";
@@ -31,6 +27,9 @@
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track..."; ObjectID = "8Ax-5X-osl"; */
 "8Ax-5X-osl.title" = "加載音訊檔...";
+
+/* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
+"22j-ra-GAY.title" = "寬度:";
 
 /* Class = "NSTextFieldCell"; title = "Audio delay:"; ObjectID = "AKs-VQ-fKF"; */
 "AKs-VQ-fKF.title" = "音訊延遲:";
@@ -62,8 +61,8 @@
 /* Class = "NSMenuItem"; title = "0.25"; ObjectID = "DdO-VX-HCz"; */
 "DdO-VX-HCz.title" = "0.25";
 
-/* Class = "NSTextFieldCell"; title = "-5x"; ObjectID = "Ew1-N1-0Pi"; */
-"Ew1-N1-0Pi.title" = "-5x";
+/* Class = "NSTextFieldCell"; title = "0.25x"; ObjectID = "Ew1-N1-0Pi"; */
+"Ew1-N1-0Pi.title" = "0.25x";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "GXH-iA-cJP"; */
 "GXH-iA-cJP.title" = "Text Cell";
@@ -90,7 +89,7 @@
 "Lnu-kz-cql.title" = "外置音訊:";
 
 /* Class = "NSTextFieldCell"; title = "-12 dB"; ObjectID = "Lpw-ws-Ezh"; */
-"Lpw-ws-Ezh.title" = "-12 dB";
+"Lpw-ws-Ezh.title" = "-12分貝";
 
 /* Class = "NSTextFieldCell"; title = "1"; ObjectID = "Mav-NA-RfN"; */
 "Mav-NA-RfN.title" = "1";
@@ -98,14 +97,14 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Ml5-Kc-QjI"; */
 "Ml5-Kc-QjI.title" = "Text Cell";
 
-/* Class = "NSButtonCell"; title = "SUBTITLE"; ObjectID = "NxO-to-jcI"; */
+/* Class = "NSButtonCell"; title = "SUBTITLES"; ObjectID = "NxO-to-jcI"; */
 "NxO-to-jcI.title" = "字幕";
 
 /* Class = "NSMenuItem"; title = "45"; ObjectID = "OVn-Oj-YAr"; */
 "OVn-Oj-YAr.title" = "45";
 
-/* Class = "NSTextFieldCell"; title = "5x"; ObjectID = "PLX-gY-e0h"; */
-"PLX-gY-e0h.title" = "5x";
+/* Class = "NSTextFieldCell"; title = "4x"; ObjectID = "PLX-gY-e0h"; */
+"PLX-gY-e0h.title" = "4x";
 
 /* Class = "NSTextFieldCell"; title = "External subtitles:"; ObjectID = "RA1-fF-OrB"; */
 "RA1-fF-OrB.title" = "外置字幕:";
@@ -218,7 +217,7 @@
 /* Class = "NSTextFieldCell"; title = "4k"; ObjectID = "i0j-2a-vKD"; */
 "i0j-2a-vKD.title" = "4k";
 
-/* Class = "NSTextFieldCell"; title = "Equalizer:"; ObjectID = "iS4-Zr-9Ig"; */
+/* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "iS4-Zr-9Ig"; */
 "iS4-Zr-9Ig.title" = "均衡器:";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
@@ -243,7 +242,7 @@
 "jND-MZ-sKB.label" = "字幕";
 
 /* Class = "NSTextFieldCell"; title = "0 dB"; ObjectID = "lBn-YS-jL7"; */
-"lBn-YS-jL7.title" = "0 dB";
+"lBn-YS-jL7.title" = "0分貝";
 
 /* Class = "NSButtonCell"; title = "VIDEO"; ObjectID = "lQt-I0-jHO"; */
 "lQt-I0-jHO.title" = "視訊";
@@ -266,8 +265,8 @@
 /* Class = "NSMenuItem"; title = "1"; ObjectID = "nvA-Ae-4XS"; */
 "nvA-Ae-4XS.title" = "1";
 
-/* Class = "NSTextFieldCell"; title = "10x"; ObjectID = "p63-Nx-yJZ"; */
-"p63-Nx-yJZ.title" = "10x";
+/* Class = "NSTextFieldCell"; title = "16x"; ObjectID = "p63-Nx-yJZ"; */
+"p63-Nx-yJZ.title" = "16x";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "qpa-hD-ImC"; */
 "qpa-hD-ImC.title" = "Text Cell";
@@ -283,6 +282,9 @@
 
 /* Class = "NSMenuItem"; title = "4"; ObjectID = "ssK-tS-ogL"; */
 "ssK-tS-ogL.title" = "4";
+
+/* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "t03-36-Zge"; */
+"t03-36-Zge.title" = "位置:";
 
 /* Class = "NSTextFieldCell"; title = "500"; ObjectID = "tHa-vN-OlI"; */
 "tHa-vN-OlI.title" = "500";
@@ -331,3 +333,4 @@
 
 /* Class = "NSMenuItem"; title = "35"; ObjectID = "zcb-7y-OVG"; */
 "zcb-7y-OVG.title" = "35";
+

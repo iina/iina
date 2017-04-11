@@ -157,8 +157,8 @@ struct MPVOption {
     static let displayFps = "display-fps"
     /** --hwdec=<api> */
     static let hwdec = "hwdec"
-    /** --hwdec-preload=<api> */
-    static let hwdecPreload = "hwdec-preload"
+    /** --opengl-hwdec-interop=<name> */
+    static let openglHwdecInterop = "opengl-hwdec-interop"
     /** --videotoolbox-format=<name> */
     static let videotoolboxFormat = "videotoolbox-format"
     /** --panscan=<0.0-1.0> */
@@ -238,7 +238,7 @@ struct MPVOption {
     static let af = "af"
     /** --audio-spdif=<codecs> */
     static let audioSpdif = "audio-spdif"
-    /** --ad=<[+|-]family1:(*|decoder1) */
+    /** --ad=<decoder1 */
     static let ad = "ad"
     /** --volume=<value> */
     static let volume = "volume"
@@ -296,8 +296,6 @@ struct MPVOption {
     static let audioFilePaths = "audio-file-paths"
     /** --audio-client-name=<name> */
     static let audioClientName = "audio-client-name"
-    /** --volume-restore-data=<string> */
-    static let volumeRestoreData = "volume-restore-data"
     /** --audio-buffer=<seconds> */
     static let audioBuffer = "audio-buffer"
     /** --audio-stream-silence=<yes|no> */
@@ -357,6 +355,8 @@ struct MPVOption {
     static let stretchDvdSubs = "stretch-dvd-subs"
     /** --stretch-image-subs-to-screen=<yes|no> */
     static let stretchImageSubsToScreen = "stretch-image-subs-to-screen"
+    /** --image-subs-video-resolution=<yes|no> */
+    static let imageSubsVideoResolution = "image-subs-video-resolution"
     /** --sub-ass */
     static let subAss = "sub-ass"
     /** --no-sub-ass */
@@ -415,6 +415,10 @@ struct MPVOption {
     static let subAlignX = "sub-align-x"
     /** --sub-align-y=<top|center|bottom> */
     static let subAlignY = "sub-align-y"
+    /** --sub-justify=<auto|left|center|right> */
+    static let subJustify = "sub-justify"
+    /** --sub-ass-justify=<yes|no> */
+    static let subAssJustify = "sub-ass-justify"
     /** --sub-shadow-color=<color> */
     static let subShadowColor = "sub-shadow-color"
     /** --sub-shadow-offset=<size> */
@@ -444,8 +448,12 @@ struct MPVOption {
     static let taskbarProgress = "taskbar-progress"
     /** --no-taskbar-progress */
     static let noTaskbarProgress = "no-taskbar-progress"
+    /** --snap-window */
+    static let snapWindow = "snap-window"
     /** --ontop */
     static let ontop = "ontop"
+    /** --ontop-level=<window|system|level> */
+    static let ontopLevel = "ontop-level"
     /** --border */
     static let border = "border"
     /** --no-border */
@@ -615,6 +623,8 @@ struct MPVOption {
     static let demuxerThread = "demuxer-thread"
     /** --demuxer-readahead-secs=<seconds> */
     static let demuxerReadaheadSecs = "demuxer-readahead-secs"
+    /** --prefetch-playlist=<yes|no> */
+    static let prefetchPlaylist = "prefetch-playlist"
     /** --force-seekable=<yes|no> */
     static let forceSeekable = "force-seekable"
   }
@@ -1039,8 +1049,18 @@ struct MPVOption {
     static let openglVsyncFences = "opengl-vsync-fences"
     /** --opengl-dwmflush=<no|windowed|yes|auto> */
     static let openglDwmflush = "opengl-dwmflush"
-    /** --opengl-dcomposition=<yes|no> */
-    static let openglDcomposition = "opengl-dcomposition"
+    /** --angle-d3d11-feature-level=<11_0|10_1|10_0|9_3> */
+    static let angleD3d11FeatureLevel = "angle-d3d11-feature-level"
+    /** --angle-d3d11-warp=<yes|no|auto> */
+    static let angleD3d11Warp = "angle-d3d11-warp"
+    /** --angle-egl-windowing=<yes|no|auto> */
+    static let angleEglWindowing = "angle-egl-windowing"
+    /** --angle-max-frame-latency=<1-16> */
+    static let angleMaxFrameLatency = "angle-max-frame-latency"
+    /** --angle-renderer=<d3d9|d3d11|auto> */
+    static let angleRenderer = "angle-renderer"
+    /** --angle-swapchain-length=<2-16> */
+    static let angleSwapchainLength = "angle-swapchain-length"
     /** --opengl-sw */
     static let openglSw = "opengl-sw"
     /** --opengl-backend=<sys> */
@@ -1112,9 +1132,7 @@ struct MPVOption {
     static let mfFps = "mf-fps"
     /** --mf-type=<value> */
     static let mfType = "mf-type"
-    /** --stream-capture=<filename> */
-    static let streamCapture = "stream-capture"
-    /** --stream-dump=<filename> */
+    /** --stream-dump=<destination-filename> */
     static let streamDump = "stream-dump"
     /** --stream-lavf-o=opt1=value1 */
     static let streamLavfO = "stream-lavf-o"
@@ -1128,6 +1146,8 @@ struct MPVOption {
     static let externalFile = "external-file"
     /** --autoload-files=<yes|no> */
     static let autoloadFiles = "autoload-files"
+    /** --record-file=<file> */
+    static let recordFile = "record-file"
     /** --lavfi-complex=<string> */
     static let lavfiComplex = "lavfi-complex"
   }

@@ -52,6 +52,9 @@ struct Preference {
     static let screenshotFormat = "screenShotFormat"
     static let screenshotTemplate = "screenShotTemplate"
 
+    static let playlistAutoAdd = "playlistAutoAdd"
+    static let playlistAutoPlayNext = "playlistAutoPlayNext"
+
     // UI
 
     /** Horizontal positon of control bar. (float, 0 - 1) */
@@ -79,6 +82,8 @@ struct Preference {
      e.g. jumping to next item in playlist, window size will remoain the same. */
     static let resizeOnlyWhenManuallyOpenFile = "resizeOnlyWhenManuallyOpenFile"
 
+    static let oscPosition = "oscPosition"
+
     // Codec
 
     static let videoThreads = "videoThreads"
@@ -98,12 +103,15 @@ struct Preference {
 
     static let subAutoLoad = "subAutoLoad"
     static let ignoreAssStyles = "ignoreAssStyles"
+    static let subOverrideLevel = "subOverrideLevel"
     static let subTextFont = "subTextFont"
     static let subTextSize = "subTextSize"
     static let subTextColor = "subTextColor"
     static let subBgColor = "subBgColor"
     static let subBold = "subBold"
     static let subItalic = "subItalic"
+    static let subBlur = "subBlur"
+    static let subSpacing = "subSpacing"
     static let subBorderSize = "subBorderSize"
     static let subBorderColor = "subBorderColor"
     static let subShadowSize = "subShadowSize"
@@ -112,10 +120,12 @@ struct Preference {
     static let subAlignY = "subAlignY"
     static let subMarginX = "subMarginX"
     static let subMarginY = "subMarginY"
+    static let subPos = "subPos"
     static let subLang = "subLang"
     static let onlineSubSource = "onlineSubSource"
     static let displayInLetterBox = "displayInLetterBox"
     static let subScaleWithWindow = "subScaleWithWindow"
+    static let openSubUsername = "openSubUsername"
 
     // Network
 
@@ -125,6 +135,10 @@ struct Preference {
     static let secPrefech = "secPrefech"
     static let userAgent = "userAgent"
     static let transportRTSPThrough = "transportRTSPThrough"
+    static let ytdlEnabled = "ytdlEnabled"
+    static let ytdlSearchPath = "ytdlSearchPath"
+    static let ytdlRawOptions = "ytdlRawOptions"
+    static let httpProxy = "httpProxy"
 
     // Control
 
@@ -135,11 +149,15 @@ struct Preference {
     static let relativeSeekAmount = "relativeSeekAmount"
 
     static let arrowButtonAction = "arrowBtnAction"
+    /** (1~4) */
+    static let volumeScrollAmount = "volumeScrollAmount"
+    static let verticalScrollAction = "verticalScrollAction"
+    static let horizontalScrollAction = "horizontalScrollAction"
 
     static let singleClickAction = "singleClickAction"
-
     static let doubleClickAction = "doubleClickAction"
     static let rightClickAction = "rightClickAction"
+    static let pinchAction = "pinchAction"
 
     static let showRemainingTime = "showRemainingTime"
 
@@ -147,6 +165,7 @@ struct Preference {
 
     /** Whether catch media keys event (bool) */
     static let useMediaKeys = "useMediaKeys"
+    static let useAppleRemote = "useAppleRemote"
 
     /** User created input config list (dic) */
     static let inputConfigs = "inputConfigs"
@@ -175,6 +194,8 @@ struct Preference {
     static let useUserDefinedConfDir = "useUserDefinedConfDir"
     static let userDefinedConfDir = "userDefinedConfDir"
 
+    static let watchProperties = "watchProperties"
+
   }
 
   // MARK: - Enums
@@ -192,6 +213,12 @@ struct Preference {
     case mediumLight
   }
 
+  enum OSCPosition: Int {
+    case floating = 0
+    case top
+    case bottom
+  }
+
   enum SeekOption: Int {
     case relative = 0
     case extract
@@ -203,6 +230,19 @@ struct Preference {
     case fullscreen
     case pause
     case hideOSC
+  }
+
+  enum ScrollAction: Int {
+    case volume = 0
+    case seek
+    case none
+    case passToMpv
+  }
+
+  enum PinchAction: Int {
+    case windowSize = 0
+    case fullscreen
+    case none
   }
 
   enum AutoLoadAction: Int {
@@ -218,6 +258,22 @@ struct Preference {
         case .exact: return "exact"
         case .fuzzy: return "fuzzy"
         case .all: return "all"
+        }
+      }
+    }
+  }
+
+  enum SubOverrideLevel: Int {
+    case yes = 0
+    case force
+    case strip
+
+    var string: String {
+      get {
+        switch self {
+        case .yes: return "yes"
+        case .force : return "force"
+        case .strip: return "strip"
         }
       }
     }
@@ -298,7 +354,8 @@ struct Preference {
     Key.controlBarPositionHorizontal: Float(0.5),
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,
-    Key.controlBarAutoHideTimeout: Float(5),
+    Key.controlBarAutoHideTimeout: Float(2.5),
+    Key.oscPosition: OSCPosition.floating.rawValue,
     Key.themeMaterial: Theme.dark.rawValue,
     Key.osdAutoHideTimeout: Float(1),
     Key.osdTextSize: Float(20),
@@ -309,8 +366,12 @@ struct Preference {
     Key.showChapterPos: false,
     Key.resumeLastPosition: true,
     Key.useMediaKeys: true,
+    Key.useAppleRemote: true,
     Key.openStartPanel: false,
     Key.alwaysFloatOnTop: false,
+
+    Key.playlistAutoAdd: true,
+    Key.playlistAutoPlayNext: true,
 
     Key.usePhysicalResolution: true,
     Key.resizeOnlyWhenManuallyOpenFile: true,
@@ -327,31 +388,40 @@ struct Preference {
 
     Key.subAutoLoad: AutoLoadAction.fuzzy.rawValue,
     Key.ignoreAssStyles: false,
+    Key.subOverrideLevel: SubOverrideLevel.strip.rawValue,
     Key.subTextFont: "sans-serif",
-    Key.subTextSize: 55,
+    Key.subTextSize: Float(55),
     Key.subTextColor: NSArchiver.archivedData(withRootObject: NSColor.white),
     Key.subBgColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
     Key.subBold: false,
     Key.subItalic: false,
-    Key.subBorderSize: 3,
+    Key.subBlur: Float(0),
+    Key.subSpacing: Float(0),
+    Key.subBorderSize: Float(3),
     Key.subBorderColor: NSArchiver.archivedData(withRootObject: NSColor.black),
-    Key.subShadowSize: 0,
+    Key.subShadowSize: Float(0),
     Key.subShadowColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
     Key.subAlignX: SubAlign.center.rawValue,
     Key.subAlignY: SubAlign.bottom.rawValue,
-    Key.subMarginX: 25,
-    Key.subMarginY: 22,
+    Key.subMarginX: Float(25),
+    Key.subMarginY: Float(22),
+    Key.subPos: Float(100),
     Key.subLang: "",
     Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
     Key.displayInLetterBox: true,
     Key.subScaleWithWindow: true,
+    Key.openSubUsername: "",
 
     Key.enableCache: true,
-    Key.defaultCacheSize: 75000,
-    Key.cacheBufferSize: 75000,
+    Key.defaultCacheSize: 153600,
+    Key.cacheBufferSize: 153600,
     Key.secPrefech: 100,
     Key.userAgent: "",
     Key.transportRTSPThrough: RTSPTransportation.tcp.rawValue,
+    Key.ytdlEnabled: true,
+    Key.ytdlSearchPath: "",
+    Key.ytdlRawOptions: "",
+    Key.httpProxy: "",
 
     Key.inputConfigs: [:],
     Key.currentInputConfigName: "IINA Default",
@@ -366,15 +436,21 @@ struct Preference {
     Key.keepOpenOnFileEnd: true,
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
-    Key.relativeSeekAmount: 2,
+    Key.relativeSeekAmount: 3,
+    Key.volumeScrollAmount: 3,
+    Key.verticalScrollAction: ScrollAction.volume.rawValue,
+    Key.horizontalScrollAction: ScrollAction.seek.rawValue,
     Key.singleClickAction: MouseClickAction.hideOSC.rawValue,
     Key.doubleClickAction: MouseClickAction.fullscreen.rawValue,
     Key.rightClickAction: MouseClickAction.pause.rawValue,
+    Key.pinchAction: PinchAction.windowSize.rawValue,
 
-    Key.screenshotFolder: "~/Pictures/ScreenShots",
+    Key.screenshotFolder: "~/Pictures/Screenshots",
     Key.screenshotIncludeSubtitle: true,
     Key.screenshotFormat: ScreenshotFormat.png.rawValue,
-    Key.screenshotTemplate: "%F-%n"
+    Key.screenshotTemplate: "%F-%n",
+
+    Key.watchProperties: []
   ]
 
 }

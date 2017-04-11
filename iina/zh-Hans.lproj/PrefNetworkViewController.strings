@@ -1,12 +1,12 @@
 
 /* Class = "NSTextFieldCell"; title = "Default: 75000"; ObjectID = "0bT-f6-rXb"; */
-"0bT-f6-rXb.title" = "默认: 75000";
+"0bT-f6-rXb.title" = "默认: 153600";
 
 /* Class = "NSTextFieldCell"; title = "Default cache size (KB):"; ObjectID = "0yu-5Q-363"; */
 "0yu-5Q-363.title" = "默认缓存大小 (KB):";
 
 /* Class = "NSTextFieldCell"; title = "Default: 75000"; ObjectID = "3os-7u-lv8"; */
-"3os-7u-lv8.title" = "默认: 75000";
+"3os-7u-lv8.title" = "默认: 153600";
 
 /* Class = "NSMenuItem"; title = "TCP"; ObjectID = "6JF-48-aCE"; */
 "6JF-48-aCE.title" = "TCP";
@@ -27,10 +27,10 @@
 "dDD-g3-54w.title" = "Cache buffer 大小 (KB):";
 
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
-"eN6-Sk-kUa.title" = "User agent:";
+"eN6-Sk-kUa.title" = "用户代理:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 10"; ObjectID = "fab-7d-mMQ"; */
-"fab-7d-mMQ.title" = "默认: 10";
+"fab-7d-mMQ.title" = "默认: 100";
 
 /* Class = "NSButtonCell"; title = "Enable cache"; ObjectID = "fpV-al-bn7"; */
 "fpV-al-bn7.title" = "启用缓存";
@@ -43,3 +43,17 @@
 
 /* Class = "NSTextFieldCell"; title = "Network:"; ObjectID = "yrh-Jm-Q4e"; */
 "yrh-Jm-Q4e.title" = "网络:";
+
+"cyH-Md-FAD.title" = "启用 youtube-dl";
+
+"zCD-9d-ziV.title" = "额外参数:";
+
+"GBe-wd-tne.title" = "格式: <key>=<value>[,<key>=<value>[,...]]";
+
+"9ut-ID-ffZ.title" = "HTTP 代理";
+
+"RwW-JS-iTv.title" = "重启 IINA 后生效。";
+
+"2qf-cC-Lfi.title" = "自定义 youtube-dl 路径";
+
+"YqE-yV-BvQ.title" = "IINA 会在此文件夹中搜索 youtube-dl。需要重启。";

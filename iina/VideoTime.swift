@@ -10,6 +10,9 @@ import Foundation
 
 class VideoTime {
 
+  static let infinite = VideoTime(999, 0, 0)
+  static let zero = VideoTime(0)
+
   var second: Double
 
   var h: Int {

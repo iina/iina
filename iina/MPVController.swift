@@ -44,6 +44,9 @@ class MPVController: NSObject {
     MPVProperty.trackListCount: MPV_FORMAT_INT64,
     MPVProperty.vf: MPV_FORMAT_NONE,
     MPVProperty.af: MPV_FORMAT_NONE,
+    MPVOption.TrackSelection.vid: MPV_FORMAT_INT64,
+    MPVOption.TrackSelection.aid: MPV_FORMAT_INT64,
+    MPVOption.TrackSelection.sid: MPV_FORMAT_INT64,
     MPVOption.PlaybackControl.pause: MPV_FORMAT_FLAG,
     MPVOption.Video.deinterlace: MPV_FORMAT_FLAG,
     MPVOption.Audio.mute: MPV_FORMAT_FLAG,
@@ -493,6 +496,7 @@ class MPVController: NSObject {
 
     case MPV_EVENT_START_FILE:
       playerCore.fileStarted()
+      playerCore.sendOSD(.fileStart(playerCore.info.currentURL?.lastPathComponent ?? "-"))
 
     case MPV_EVENT_FILE_LOADED:
       onFileLoaded()
@@ -506,6 +510,10 @@ class MPVController: NSObject {
         recordedSeekStartTime = CACurrentMediaTime()
       }
       playerCore.syncUI(.time)
+      let osdText = (playerCore.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
+        (playerCore.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder)
+      let percentage = (playerCore.info.videoPosition / playerCore.info.videoDuration) ?? 1
+      playerCore.sendOSD(.seek(osdText, percentage))
 
     case MPV_EVENT_PLAYBACK_RESTART:
       playerCore.info.isSeeking = false
@@ -620,6 +628,27 @@ class MPVController: NSObject {
 
     case MPVProperty.videoParams:
       onVideoParamsChange(UnsafePointer<mpv_node_list>(OpaquePointer(property.data)))
+
+    case MPVOption.TrackSelection.vid:
+      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
+        playerCore.info.vid = Int(data)
+        let currTrack = playerCore.info.currentTrack(.video) ?? .noneVideoTrack
+        playerCore.sendOSD(.track(currTrack))
+      }
+
+    case MPVOption.TrackSelection.aid:
+      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
+        playerCore.info.aid = Int(data)
+        let currTrack = playerCore.info.currentTrack(.audio) ?? .noneAudioTrack
+        playerCore.sendOSD(.track(currTrack))
+      }
+
+    case MPVOption.TrackSelection.sid:
+      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
+        playerCore.info.sid = Int(data)
+        let currTrack = playerCore.info.currentTrack(.sub) ?? .noneSubTrack
+        playerCore.sendOSD(.track(currTrack))
+      }
 
     case MPVOption.PlaybackControl.pause:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {

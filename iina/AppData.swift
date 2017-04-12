@@ -64,6 +64,7 @@ struct Constants {
     static let degree = "°"
     static let dot = "●"
     static let play = "▶︎"
+    static let videoTimePlaceholder = "--:--:--"
     static let none = NSLocalizedString("track.none", comment: "<None>")
     static let chapter = "Chapter"
     static let fullScreen = NSLocalizedString("menu.fullscreen", comment: "Fullscreen")

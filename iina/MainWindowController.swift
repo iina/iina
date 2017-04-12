@@ -7,8 +7,16 @@
 //
 
 import Cocoa
+import Mustache
 
 fileprivate typealias PK = Preference.Key
+
+fileprivate let TitleBarHeightNormal: CGFloat = 22
+fileprivate let TitleBarHeightWithOSC: CGFloat = 22 + 24 + 10
+fileprivate let TitleBarHeightWithOSCInFullScreen: CGFloat = 24 + 10
+fileprivate let OSCTopMainViewMarginTop: CGFloat = 26
+fileprivate let OSCTopMainViewMarginTopInFullScreen: CGFloat = 6
+
 
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
@@ -199,6 +207,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var sideBarWidthConstraint: NSLayoutConstraint!
   @IBOutlet weak var bottomBarBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var titleBarHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var oscTopMainViewTopConstraint: NSLayoutConstraint!
+  var osdProgressBarWidthConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
 
@@ -253,8 +263,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var leftArrowLabel: NSTextField!
   @IBOutlet weak var rightArrowLabel: NSTextField!
+
   @IBOutlet weak var osdVisualEffectView: NSVisualEffectView!
-  @IBOutlet weak var osd: NSTextField!
+  @IBOutlet weak var osdStackView: NSStackView!
+  @IBOutlet weak var osdLabel: NSTextField!
+  @IBOutlet weak var osdAccessoryView: NSView!
+  @IBOutlet weak var osdAccessoryText: NSTextField!
+  @IBOutlet weak var osdAccessoryProgress: NSProgressIndicator!
+
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
 
@@ -313,7 +329,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fragControlView.addView(fragControlViewLeftView, in: .center)
     fragControlView.addView(fragControlViewMiddleView, in: .center)
     fragControlView.addView(fragControlViewRightView, in: .center)
-    setupOnScreenController()
+    setupOnScreenController(position: oscPosition)
 
     // fade-able views
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
@@ -367,6 +383,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     pinchAction = Preference.PinchAction(rawValue: ud.integer(forKey: PK.pinchAction))
     rightLabel.mode = ud.bool(forKey: PK.showRemainingTime) ? .remaining : .duration
 
+    osdProgressBarWidthConstraint = NSLayoutConstraint(item: osdAccessoryProgress, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150)
+
     // add user default observers
     observedPrefKeys.forEach { key in
       ud.addObserver(self, forKeyPath: key, options: .new, context: nil)
@@ -413,8 +431,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.oscPosition:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        oscPosition = Preference.OSCPosition(rawValue: newValue)
-        setupOnScreenController()
+        setupOnScreenController(position: Preference.OSCPosition(rawValue: newValue) ?? .floating)
       }
 
     case PK.showChapterPos:
@@ -492,9 +509,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     return v
   }
 
-  func setupOnScreenController() {
+  func setupOnScreenController(position newPosition: Preference.OSCPosition) {
 
     var isCurrentControlBarHidden = false
+
+    let isSwitchingToTop = newPosition == .top
+    let isSwitchingFromTop = oscPosition == .top
 
     if let cb = currentControlBar {
       // remove current osc view from fadeable views
@@ -505,12 +525,30 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // reset
     ([controlBarFloating, controlBarBottom, oscTopMainView] as [NSView]).forEach { $0.isHidden = true }
-    titleBarHeightConstraint.constant = 22
+    titleBarHeightConstraint.constant = TitleBarHeightNormal
 
     controlBarFloating.isDragging = false
 
     // detach all fragment views
     [fragSliderView, fragControlView, fragToolbarView, fragVolumeView].forEach { $0?.removeFromSuperview() }
+
+    if isSwitchingToTop {
+      if isInFullScreen {
+        addBackTitlebarViewToFadeableViews()
+        oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTopInFullScreen
+        titleBarHeightConstraint.constant = TitleBarHeightWithOSCInFullScreen
+      } else {
+        oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
+        titleBarHeightConstraint.constant = TitleBarHeightWithOSC
+      }
+    }
+
+    if isSwitchingFromTop {
+      if isInFullScreen {
+        titleBarView.isHidden = true
+        removeTitlebarViewFromFadeableViews()
+      }
+    }
 
     // add fragment viewss
     switch oscPosition! {
@@ -531,7 +569,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         window!.frame.height * CGFloat(cpv)
       ))
     case .top:
-      titleBarHeightConstraint.constant = 22 + 24 + 10
       oscTopMainView.isHidden = false
       currentControlBar = nil
       fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: fragControlViewLeftView)
@@ -559,6 +596,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       currentControlBar!.isHidden = isCurrentControlBarHidden
     }
 
+    oscPosition = newPosition
   }
 
   // MARK: - Mouse / Trackpad event
@@ -889,34 +927,39 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // show titlebar
-    window!.titlebarAppearsTransparent = false
-    window!.titleVisibility = .visible
-    removeTitlebarFromFadeableViews()
+    if oscPosition == .top {
+      oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTopInFullScreen
+      titleBarHeightConstraint.constant = TitleBarHeightWithOSCInFullScreen
+    } else {
+      // stop animation and hide titleBarView
+      removeTitlebarViewFromFadeableViews()
+      titleBarView.isHidden = true
+    }
+    removeStandardButtonsFromFadeableViews()
 
-    // stop animation and hide titleBarView
-    titleBarView.isHidden = true
     isInFullScreen = true
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
     playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, false)
 
-    // hide titlebar
-    window!.titlebarAppearsTransparent = true
     // show titleBarView
-    titleBarView.isHidden = false
-    animationState = .shown
-    addBackTitlebarToFadeableViews()
-    isInFullScreen = false
-    // set back frame of videoview, but only if not in PIP
-    guard !isInPIP else { return }
-    videoView.frame = window!.contentView!.frame
-  }
+    if oscPosition == .top {
+      oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
+      titleBarHeightConstraint.constant = TitleBarHeightWithOSC
+    } else {
+      addBackTitlebarViewToFadeableViews()
+      titleBarView.isHidden = false
+      animationState = .shown
+    }
+    addBackStandardButtonsToFadeableViews()
 
-  func windowDidExitFullScreen(_ notification: Notification) {
-    // if is floating, enable it again
-    if isOntop {
-      setWindowFloatingOnTop(true)
+
+    isInFullScreen = false
+
+    // set back frame of videoview, but only if not in PIP
+    if !isInPIP {
+      videoView.frame = window!.contentView!.frame
     }
   }
 
@@ -1093,9 +1136,38 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       hideOSDTimer = nil
     }
     osdAnimationState = .shown
+    [osdAccessoryText, osdAccessoryProgress].forEach { $0.isHidden = true }
+
+    let (osdString, osdType) = message.message()
+
     let osdTextSize = ud.float(forKey: PK.osdTextSize)
-    osd.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
-    osd.stringValue = message.message()
+    osdLabel.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
+    osdLabel.stringValue = osdString
+
+    switch osdType {
+    case .normal:
+      osdStackView.setVisibilityPriority(NSStackViewVisibilityPriorityNotVisible, for: osdAccessoryView)
+    case .withProgress(let value):
+      NSLayoutConstraint.activate([osdProgressBarWidthConstraint])
+      osdStackView.setVisibilityPriority(NSStackViewVisibilityPriorityMustHold, for: osdAccessoryView)
+      osdAccessoryProgress.isHidden = false
+      osdAccessoryProgress.doubleValue = value
+    case .withText(let text):
+      NSLayoutConstraint.deactivate([osdProgressBarWidthConstraint])
+
+      // data for mustache redering
+      let osdData: [String: String] = [
+        "duration": playerCore.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
+        "position": playerCore.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
+        "currChapter": (playerCore.mpvController.getInt(MPVProperty.chapter) + 1).toStr(),
+        "chapterCount": playerCore.info.chapters.count.toStr()
+      ]
+
+      osdStackView.setVisibilityPriority(NSStackViewVisibilityPriorityMustHold, for: osdAccessoryView)
+      osdAccessoryText.isHidden = false
+      osdAccessoryText.stringValue = try! (try! Template(string: text)).render(osdData)
+    }
+
     osdVisualEffectView.alphaValue = 1
     osdVisualEffectView.isHidden = false
     let timeout = ud.float(forKey: PK.osdAutoHideTimeout)
@@ -1161,8 +1233,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  private func removeTitlebarFromFadeableViews() {
-    // remove buttons from fade-able views
+  private func removeStandardButtonsFromFadeableViews() {
     fadeableViews = fadeableViews.filter { view in
       !standardWindowButtons.contains {
         $0 == view
@@ -1172,15 +1243,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       view.alphaValue = 1
       view.isHidden = false
     }
-    // remove titlebar view from fade-able views
+  }
+
+  private func removeTitlebarViewFromFadeableViews() {
     if let index = (self.fadeableViews.index { $0 === titleBarView }) {
       self.fadeableViews.remove(at: index)
     }
   }
 
-  private func addBackTitlebarToFadeableViews() {
+  private func addBackStandardButtonsToFadeableViews() {
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
-    // add back titlebar view to fade-able views
+  }
+
+  private func addBackTitlebarViewToFadeableViews() {
     self.fadeableViews.append(titleBarView)
   }
 
@@ -1487,13 +1562,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updateVolume()
   }
 
-  /** Important: `window.toggleFullScreen` should never be called directly, since it can't handle floating window. */
   func toggleWindowFullScreen() {
-    // if is floating, disable it temporarily.
-    // it will be enabled again in `windowDidExitFullScreen()`.
-    if !isInFullScreen && isOntop {
-      setWindowFloatingOnTop(false)
-    }
     window?.toggleFullScreen(self)
   }
 

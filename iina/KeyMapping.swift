@@ -38,6 +38,8 @@ class KeyMapping {
 
   var action: [String]
 
+  var rawAction: String
+
   var comment: String?
 
   var readableAction: String {
@@ -67,10 +69,40 @@ class KeyMapping {
     return KeyBindingTranslator.readableCommand(fromAction: action)
   }
 
-  init(key: String, action: [String], comment: String? = nil) {
+  init(key: String, rawAction: String, comment: String? = nil) {
     self.key = key
-    self.action = action
+    self.rawAction = rawAction
+    self.action = rawAction.components(separatedBy: " ")
     self.comment = comment
+  }
+
+  static func parseInputConf(_ path: String) -> [KeyMapping]? {
+    let reader = StreamReader(path: path)
+    var mapping: [KeyMapping] = []
+    while var line: String = reader?.nextLine() {      // ignore empty lines
+      if line.isEmpty { continue }
+      if line.hasPrefix("#@iina") {
+        // extended syntax
+        continue
+      } else if line.hasPrefix("#") {
+        // igore comment
+        continue
+      }
+      // remove inline comment
+      if let sharpIndex = line.characters.index(of: "#") {
+        line = line.substring(to: sharpIndex)
+      }
+      // split
+      let splitted = line.characters.split(separator: " ", maxSplits: 1)
+      if splitted.count < 2 {
+        return nil
+      }
+      let key = String(splitted[0])
+      let action = String(splitted[1])
+
+      mapping.append(KeyMapping(key: key, rawAction: action, comment: nil))
+    }
+    return mapping
   }
 
   static func generateConfData(from mappings: [KeyMapping]) -> String {

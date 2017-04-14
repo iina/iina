@@ -602,9 +602,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Mouse / Trackpad event
 
   override func keyDown(with event: NSEvent) {
-    window!.makeFirstResponder(window!)
     if !isInInteractiveMode {
-      playerCore.execKeyCode(Utility.mpvKeyCode(from: event))
+      let keyCode = Utility.mpvKeyCode(from: event)
+      if let kb = PlayerCore.keyBindings[keyCode] {
+        let returnValue = playerCore.mpvController.command(raw: kb.rawAction)
+        Utility.log("\(returnValue)")
+      } else {
+        super.keyDown(with: event)
+      }
     }
   }
 

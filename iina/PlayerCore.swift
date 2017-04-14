@@ -36,6 +36,8 @@ class PlayerCore: NSObject {
   // need enter fullscreen for nect file
   var needEnterFullScreenForNextMedia: Bool = true
 
+  static var keyBindings: [String: KeyMapping] = [:]
+
   // MARK: - Control commands
 
   // Open a file
@@ -83,6 +85,18 @@ class PlayerCore: NSObject {
       path = customYtdlPath + ":" + path
     }
     setenv("PATH", path, 1)
+
+    // load keybindings
+    let userConfigs = UserDefaults.standard.dictionary(forKey: Preference.Key.inputConfigs)
+    var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["IINA Default"]
+    if let confFromUd = UserDefaults.standard.string(forKey: Preference.Key.currentInputConfigName) {
+      if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
+        inputConfPath = currentConfigFilePath
+      }
+    }
+    let mapping = KeyMapping.parseInputConf(inputConfPath!)!
+    PlayerCore.keyBindings = [:]
+    mapping.forEach { PlayerCore.keyBindings[$0.key] = $0 }
 
     // set http proxy
     if let proxy = ud.string(forKey: Preference.Key.httpProxy), !proxy.isEmpty {

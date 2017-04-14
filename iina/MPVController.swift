@@ -516,6 +516,7 @@ class MPVController: NSObject {
         recordedSeekTimeListener?(CACurrentMediaTime() - recordedSeekStartTime)
         recordedSeekTimeListener = nil
       }
+      playerCore.playbackRestarted()
       playerCore.syncUI(.time)
 
     case MPV_EVENT_PAUSE, MPV_EVENT_UNPAUSE:

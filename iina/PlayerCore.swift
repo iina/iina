@@ -577,6 +577,7 @@ class PlayerCore: NSObject {
 
   func fileStarted() {
     info.justStartedFile = true
+    info.disableOSDForFileLoading = true
   }
 
   /** This function is called right after file loaded. Should load all meta info here. */
@@ -626,6 +627,16 @@ class PlayerCore: NSObject {
         mw.adjustFrameByVideoSize(dwidth, dheight)
       }
     }
+  }
+
+  func playbackRestarted() {
+    DispatchQueue.main.async {
+      Timer.scheduledTimer(timeInterval: TimeInterval(0.2), target: self, selector: #selector(self.reEnableOSDAfterFileLoading), userInfo: nil, repeats: false)
+    }
+  }
+
+  @objc private func reEnableOSDAfterFileLoading() {
+    info.disableOSDForFileLoading = false
   }
 
   // MARK: - Sync with UI in MainWindow
@@ -713,6 +724,15 @@ class PlayerCore: NSObject {
   func sendOSD(_ osd: OSDMessage) {
     // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
     guard let mw = mainWindow, mw.isWindowLoaded else { return }
+
+    if info.disableOSDForFileLoading {
+      switch osd {
+      case .fileStart(_):
+        break
+      default:
+        return
+      }
+    }
 
     DispatchQueue.main.async {
       mw.displayOSD(osd)

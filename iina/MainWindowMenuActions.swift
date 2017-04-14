@@ -56,12 +56,10 @@ extension MainWindowController {
 
   @IBAction func menuSnapshot(_ sender: NSMenuItem) {
     playerCore.screenShot()
-    displayOSD(.screenShot)
   }
 
   @IBAction func menuABLoop(_ sender: NSMenuItem) {
     playerCore.abLoop()
-    displayOSD(.abLoop(playerCore.info.abLoopStatus))
   }
 
   @IBAction func menuFileLoop(_ sender: NSMenuItem) {

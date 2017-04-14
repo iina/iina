@@ -605,7 +605,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if !isInInteractiveMode {
       let keyCode = Utility.mpvKeyCode(from: event)
       if let kb = PlayerCore.keyBindings[keyCode] {
-        let returnValue = playerCore.mpvController.command(raw: kb.rawAction)
+        let returnValue: Int32
+        // execute the command
+        switch kb.action[0] {
+        case MPVCommand.abLoop.rawValue:
+          playerCore.abLoop()
+          returnValue = 0
+        default:
+          returnValue = playerCore.mpvController.command(raw: kb.rawAction)
+        }
         // handle return value, display osd if needed
         if returnValue == 0 {
           // screenshot

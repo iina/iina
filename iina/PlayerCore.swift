@@ -214,6 +214,7 @@ class PlayerCore: NSObject {
   func screenShot() {
     let option = ud.bool(forKey: Preference.Key.screenshotIncludeSubtitle) ? "subtitles" : "video"
     mpvController.command(.screenshot, args: [option])
+    sendOSD(.screenShot)
   }
 
   func abLoop() {
@@ -228,6 +229,7 @@ class PlayerCore: NSObject {
     } else {
       info.abLoopStatus = 1
     }
+    sendOSD(.abLoop(info.abLoopStatus))
   }
 
   func toggleFileLoop() {

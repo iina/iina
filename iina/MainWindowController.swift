@@ -606,7 +606,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let keyCode = Utility.mpvKeyCode(from: event)
       if let kb = PlayerCore.keyBindings[keyCode] {
         let returnValue = playerCore.mpvController.command(raw: kb.rawAction)
-        Utility.log("\(returnValue)")
+        // handle return value, display osd if needed
+        if returnValue == 0 {
+          // screenshot
+          if kb.action[0] == MPVCommand.screenshot.rawValue {
+            displayOSD(.screenShot)
+          }
+        } else {
+          Utility.log("Return value \(returnValue) when executing key command \(kb.rawAction)")
+        }
       } else {
         super.keyDown(with: event)
       }

@@ -31,10 +31,15 @@ class KeyBindingTranslator {
     "no-osd", "osd-auto", "osd-bar", "osd-msg-bar", "raw", "repeatable", "expand-properties"
   ]
 
-  static func readableCommand(fromAction action: [String]) -> String {
+  static func readableCommand(fromAction action: [String], isIINACommand: Bool = false) -> String {
     var commands = action.filter { !KeyBindingTranslator.UnsupportedCmdPrefix.contains($0) }
     // Command
     let cmd = commands[0]
+
+    // If is IINA command
+    if isIINACommand {
+      return l10nDic["iina." + cmd] ?? cmd
+    }
 
     // If translated
     if let mpvFormat = KeyBindingTranslator.mpvCmdFormat[cmd],
@@ -114,12 +119,16 @@ class KeyBindingTranslator {
   static func string(fromCriterions criterions: [Criterion]) -> String {
     var mapped = criterions.filter { !$0.isPlaceholder }.map { $0.mpvCommandValue }
 
-    let firstName = (criterions[0] as! TextCriterion).name
+    let firstCriterion = criterions[0] as! TextCriterion
+
+    if firstCriterion.isIINACommand {
+      mapped.insert("@iina", at: 0)
+    }
 
     // special cases
 
     /// [add property add|minus value] (length: 4)s
-    if firstName == "add" {
+    if firstCriterion.name == "add" {
       // - format the number
       if var doubleValue = Double(mapped.popLast()!) {
         let sign = mapped.popLast()
@@ -133,7 +142,7 @@ class KeyBindingTranslator {
     }
 
     /// [seek forward|backward|seek-to value flag] (length: 4)
-    else if firstName == "seek" {
+    else if firstCriterion.name == "seek" {
       // - relative is default value
       if mapped[3] == "relative" {
         mapped.removeLast()
@@ -147,6 +156,16 @@ class KeyBindingTranslator {
       }
       mapped.remove(at: 1)
     }
+
+    /// iina properties
+    else if firstCriterion.name == "cycle" {
+      if let name = (criterions[1] as? TextCriterion)?.name,
+        KeyBindingDataLoader.toggleableIINAProperties.contains(name) {
+        return "@iina toggle-\(name)"
+      }
+    }
+
+
     return mapped.joined(separator: " ")
   }
 

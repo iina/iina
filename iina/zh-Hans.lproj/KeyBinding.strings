@@ -34,6 +34,23 @@
 "cmd.loadlist" = "加载播放列表";
 "cmd.run" = "运行";
 
+"iina.flip" = "翻转";
+"iina.mirror" = "镜像";
+
+"iina.toggle-pip" = "切换「画中画」模式";
+"iina.open-file" = "打开文件";
+"iina.open-url" = "打开 URL";
+"iina.video-panel" = "视频设置面板";
+"iina.audio-panel" = "音频设置面板";
+"iina.sub-panel" = "字幕设置面板";
+"iina.playlist-panel" = "播放列表面板";
+"iina.chapter-panel" = "章节面板";
+"iina.toggle-flip" = "切换 垂直翻转";
+"iina.toggle-mirror" = "切换 镜像";
+"iina.save-playlist" = "保存当前播放列表";
+"iina.delete-current-file" = "删除当前文件";
+"iina.find-online-subs" = "查找在线字幕";
+"iina.save-downloaded-sub" = "保存已下载的字幕";
 
 "yes" = "是";
 "no" = "否";

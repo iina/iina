@@ -135,7 +135,15 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   @IBAction func addKeyMappingBtnAction(_ sender: AnyObject) {
     showKeyBindingPanel { key, action in
       guard !key.isEmpty && !action.isEmpty else { return }
-      currentMapping.append(KeyMapping(key: key, rawAction: action))
+      if action.hasPrefix("@iina") {
+        let trimmedAction = action.substring(from: action.index(action.startIndex, offsetBy: 5)).trimmingCharacters(in: .whitespaces)
+        currentMapping.append(KeyMapping(key: key,
+                                         rawAction: trimmedAction,
+                                         isIINACommand: true))
+      } else {
+        currentMapping.append(KeyMapping(key: key, rawAction: action))
+      }
+
       kbTableView.reloadData()
       kbTableView.scrollRowToVisible(currentMapping.count - 1)
       saveToConfFile()
@@ -368,7 +376,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
     if identifier == Constants.Identifier.key {
       currentMapping[row].key = value
     } else if identifier == Constants.Identifier.action {
-      currentMapping[row].action = value.characters.split(separator: " ").map { return String($0) }
+      currentMapping[row].rawAction = value
     }
     saveToConfFile()
   }
@@ -382,9 +390,8 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
     let selectedData = currentMapping[kbTableView.selectedRow]
     showKeyBindingPanel(key: selectedData.key, action: selectedData.readableAction) { key, action in
       guard !key.isEmpty && !action.isEmpty else { return }
-      let splitted = action.components(separatedBy: " ")
       selectedData.key = key
-      selectedData.action = splitted
+      selectedData.rawAction = action
       kbTableView.reloadData()
       saveToConfFile()
     }

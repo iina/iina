@@ -61,7 +61,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="680" height="355"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="680" height="355"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -110,7 +110,7 @@
                                 </constraints>
                             </stackView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="hb6-oe-rHm" customClass="TimeLabelOverflowedView" customModule="IINA" customModuleProvider="target">
-                                <rect key="frame" x="8" y="4.5" width="424" height="24"/>
+                                <rect key="frame" x="8" y="5" width="424" height="24"/>
                             </customView>
                         </subviews>
                         <constraints>
@@ -373,7 +373,7 @@
             <rect key="frame" x="0.0" y="0.0" width="500" height="24"/>
             <subviews>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT">
-                    <rect key="frame" x="48" y="2.5" width="404" height="19"/>
+                    <rect key="frame" x="48" y="3" width="404" height="19"/>
                     <sliderCell key="cell" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="f1c-xF-8a2" customClass="PlaySliderCell" customModule="IINA" customModuleProvider="target"/>
                     <connections>
                         <action selector="playSliderChanges:" target="-2" id="UBG-Ky-3rr"/>

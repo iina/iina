@@ -34,6 +34,8 @@ class KeyMapping {
     "NEXT": "▶︎▶︎"
   ]
 
+  var isIINACommand: Bool
+
   var key: String
 
   var action: [String]
@@ -69,8 +71,9 @@ class KeyMapping {
     return KeyBindingTranslator.readableCommand(fromAction: action)
   }
 
-  init(key: String, rawAction: String, comment: String? = nil) {
+  init(key: String, rawAction: String, isIINACommand: Bool = false, comment: String? = nil) {
     self.key = key
+    self.isIINACommand = isIINACommand
     self.rawAction = rawAction
     self.action = rawAction.components(separatedBy: " ")
     self.comment = comment
@@ -79,11 +82,13 @@ class KeyMapping {
   static func parseInputConf(_ path: String) -> [KeyMapping]? {
     let reader = StreamReader(path: path)
     var mapping: [KeyMapping] = []
+    var isIINACommand = false
     while var line: String = reader?.nextLine() {      // ignore empty lines
       if line.isEmpty { continue }
       if line.hasPrefix("#@iina") {
         // extended syntax
-        continue
+        isIINACommand = true
+        line = line.substring(from: line.index(line.startIndex, offsetBy: 6))
       } else if line.hasPrefix("#") {
         // igore comment
         continue
@@ -97,10 +102,10 @@ class KeyMapping {
       if splitted.count < 2 {
         return nil
       }
-      let key = String(splitted[0])
-      let action = String(splitted[1])
+      let key = String(splitted[0]).trimmingCharacters(in: .whitespaces)
+      let action = String(splitted[1]).trimmingCharacters(in: .whitespaces)
 
-      mapping.append(KeyMapping(key: key, rawAction: action, comment: nil))
+      mapping.append(KeyMapping(key: key, rawAction: action, isIINACommand: isIINACommand, comment: nil))
     }
     return mapping
   }

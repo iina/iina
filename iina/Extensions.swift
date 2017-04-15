@@ -330,3 +330,8 @@ extension CharacterSet {
     .union(.urlQueryAllowed)
     .union(.urlFragmentAllowed)
 }
+
+
+extension NSMenuItem {
+  static let dummy = NSMenuItem(title: "Dummy", action: nil, keyEquivalent: "")
+}

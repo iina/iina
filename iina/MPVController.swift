@@ -497,7 +497,7 @@ class MPVController: NSObject {
       onFileLoaded()
 
     case MPV_EVENT_TRACKS_CHANGED:
-      onTrackChanged()
+      break
 
     case MPV_EVENT_SEEK:
       playerCore.info.isSeeking = true
@@ -575,9 +575,6 @@ class MPVController: NSObject {
     playerCore.info.displayHeight = dheight == 0 ? height : dheight
     playerCore.info.videoDuration = VideoTime(duration)
     playerCore.info.videoPosition = VideoTime(pos)
-    if let path = getString(MPVProperty.path) {
-      playerCore.info.currentURL = URL(fileURLWithPath: path)
-    }
     playerCore.fileLoaded()
     fileLoaded = true
     // mpvResume()
@@ -585,10 +582,6 @@ class MPVController: NSObject {
       setFlag(MPVOption.PlaybackControl.pause, false)
     }
     playerCore.syncUI(.playlist)
-  }
-
-  private func onTrackChanged() {
-
   }
 
   private func onVideoReconfig() {

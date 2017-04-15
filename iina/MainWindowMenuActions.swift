@@ -408,4 +408,15 @@ extension MainWindowController {
     }
   }
 
+  @IBAction func menuDeleteCurrentFile(_ sender: NSMenuItem) {
+    guard let url = playerCore.info.currentURL else { return }
+    do {
+      let index = playerCore.mpvController.getInt(MPVProperty.playlistPos)
+      playerCore.playlistRemove(index)
+      try FileManager.default.trashItem(at: url, resultingItemURL: nil)
+    } catch let error {
+      Utility.showAlert("playlist.error_deleting", arguments: [error.localizedDescription])
+    }
+  }
+
 }

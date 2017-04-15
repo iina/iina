@@ -578,6 +578,9 @@ class PlayerCore: NSObject {
   func fileStarted() {
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
+    if let path = mpvController.getString(MPVProperty.path) {
+      info.currentURL = URL(fileURLWithPath: path)
+    }
   }
 
   /** This function is called right after file loaded. Should load all meta info here. */

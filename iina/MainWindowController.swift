@@ -1906,7 +1906,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case .saveCurrentPlaylist:
       self.menuSavePlaylist(.dummy)
     case .deleteCurrentFile:
-      break
+      self.menuDeleteCurrentFile(.dummy)
     case .findOnlineSubs:
       self.menuFindOnlineSub(.dummy)
     case .saveDownloadedSub:

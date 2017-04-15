@@ -11,7 +11,7 @@ import Foundation
 fileprivate typealias KBI = KeyBindingItem
 
 fileprivate enum PropertyType {
-  case bool, num, choose, separator
+  case bool, num, string, choose, separator
 }
 
 class KeyBindingDataLoader {
@@ -72,6 +72,7 @@ class KeyBindingDataLoader {
     ("speed", .num),
     ("---", .separator),
     ("video", .num),
+    ("video-aspect", .string),
     ("contrast", .num),
     ("brightness", .num),
     ("gamma", .num),
@@ -90,6 +91,7 @@ class KeyBindingDataLoader {
     ("sub-visibility", .bool),
     ("---", .separator),
     ("fullscreen", .bool),
+    ("ontop", .bool),
     ("---", .separator),
     ("chapter", .num)
   ]
@@ -114,7 +116,7 @@ class KeyBindingDataLoader {
   }
 
   static private func propertiesForMultiply() -> [KeyBindingItem] {
-    return propertyList.filter { $0.1 != .bool }.map { (str, type) -> KeyBindingItem in
+    return propertyList.filter { $0.1 != .bool && $0.1 != .string }.map { (str, type) -> KeyBindingItem in
       if type == .separator { return KBI.separator() }
       let kbi = KBI(str, type: .label, children:
                   KBI("by", type: .placeholder, children:
@@ -127,7 +129,7 @@ class KeyBindingDataLoader {
   }
 
   static private func propertiesForAdd() -> [KeyBindingItem] {
-    return propertyList.filter { $0.1 != .bool }.map { (str, type) -> KeyBindingItem in
+    return propertyList.filter { $0.1 != .bool && $0.1 != .string }.map { (str, type) -> KeyBindingItem in
       if type == .separator { return KBI.separator() }
       let kbi = KBI(str, type: .label, children:
                   KBI.chooseIn("add|minus", children:
@@ -140,7 +142,7 @@ class KeyBindingDataLoader {
   }
 
   static private func propertiesForCycle() -> [KeyBindingItem] {
-    var list = propertyList.map { (str, type) -> KeyBindingItem in
+    var list = propertyList.filter { $0.1 != .string }.map { (str, type) -> KeyBindingItem in
       if type == .separator { return KBI.separator() }
       let kbi = KBI(str)
       kbi.l10nKey = "opt"

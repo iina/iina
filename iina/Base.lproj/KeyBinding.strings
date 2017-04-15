@@ -76,6 +76,7 @@
 "opt.speed" = "Speed";
 
 "opt.video" = "Video track";
+"opt.video-aspect" = "Video aspect";
 "opt.contrast" = "Contrast";
 "opt.brightness" = "Brightness";
 "opt.gamma" = "Gamma";
@@ -95,6 +96,7 @@
 "opt.sub-ass-style-override" = "ASS style override";
 
 "opt.fullscreen" = "Fullscreen";
+"opt.ontop" = "Float on top";
 
 "opt.chapter" = "Chapter";
 

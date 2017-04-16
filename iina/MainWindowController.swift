@@ -74,7 +74,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var hideOSDTimer: Timer?
   
   var screens: [NSScreen] = []
-  var totalScreens = 0;
+  var cachedScreenCount = 0
 
   var blackWindows: [NSWindow] = []
   
@@ -413,7 +413,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let screenChangeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSApplicationDidChangeScreenParameters, object: nil, queue: .main) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
       if self.isInFullScreen && self.ud.bool(forKey: PK.blackOutMonitor) {
-        if NSScreen.screens()?.count ?? 0 != self.totalScreens {
+        if NSScreen.screens()?.count ?? 0 != self.cachedScreenCount {
           self.removeBlackWindow()
           self.blackOutOtherMonitors()
         }
@@ -1609,7 +1609,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   func blackOutOtherMonitors() {
     screens = (NSScreen.screens()?.filter() { $0 != window?.screen }) ?? []
-    totalScreens = screens.count + 1
+    cachedScreenCount = screens.count + 1
 
     blackWindows = []
     

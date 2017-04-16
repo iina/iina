@@ -198,7 +198,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     PK.doubleClickAction,
     PK.rightClickAction,
     PK.pinchAction,
-    PK.showRemainingTime
+    PK.showRemainingTime,
+    PK.alwaysFloatOnTop
   ]
 
   // MARK: - Outlets
@@ -497,6 +498,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case PK.showRemainingTime:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
         rightLabel.mode = newValue ? .remaining : .duration
+      }
+
+    case PK.alwaysFloatOnTop:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+        setWindowFloatingOnTop(newValue)
       }
 
     default:

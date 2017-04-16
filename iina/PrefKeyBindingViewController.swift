@@ -136,7 +136,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     showKeyBindingPanel { key, action in
       guard !key.isEmpty && !action.isEmpty else { return }
       if action.hasPrefix("@iina") {
-        let trimmedAction = action.substring(from: action.index(action.startIndex, offsetBy: 5)).trimmingCharacters(in: .whitespaces)
+        let trimmedAction = action.substring(from: action.index(action.startIndex, offsetBy: "@iina".characters.count)).trimmingCharacters(in: .whitespaces)
         currentMapping.append(KeyMapping(key: key,
                                          rawAction: trimmedAction,
                                          isIINACommand: true))
@@ -308,7 +308,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   // MARK: - Private
 
   private func loadConfigFile() {
-    if let mapping = KeyMapping.parseInputConf(currentConfFilePath) {
+    if let mapping = KeyMapping.parseInputConf(at: currentConfFilePath) {
       currentMapping = mapping
     } else {
       // on error

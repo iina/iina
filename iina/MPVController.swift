@@ -338,7 +338,7 @@ class MPVController: NSObject {
     }
   }
 
-  func command(raw rawString: String) -> Int32 {
+  func command(rawString: String) -> Int32 {
     return mpv_command_string(mpv, rawString)
   }
 

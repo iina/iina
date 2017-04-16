@@ -116,10 +116,10 @@ class KeyBindingTranslator {
     return commands.joined(separator: " ")
   }
 
-  static func string(fromCriterions criterions: [Criterion]) -> String {
-    var mapped = criterions.filter { !$0.isPlaceholder }.map { $0.mpvCommandValue }
+  static func string(fromCriteria criteria: [Criterion]) -> String {
+    var mapped = criteria.filter { !$0.isPlaceholder }.map { $0.mpvCommandValue }
 
-    let firstCriterion = criterions[0] as! TextCriterion
+    let firstCriterion = criteria[0] as! TextCriterion
 
     if firstCriterion.isIINACommand {
       mapped.insert("@iina", at: 0)
@@ -159,7 +159,7 @@ class KeyBindingTranslator {
 
     /// iina properties
     else if firstCriterion.name == "cycle" {
-      if let name = (criterions[1] as? TextCriterion)?.name,
+      if let name = (criteria[1] as? TextCriterion)?.name,
         KeyBindingDataLoader.toggleableIINAProperties.contains(name) {
         return "@iina toggle-\(name)"
       }

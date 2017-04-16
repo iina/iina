@@ -45,7 +45,7 @@ class KeyMapping {
   var rawAction: String {
     set {
       if newValue.hasPrefix("@iina") {
-        privateRawAction = newValue.substring(from: newValue.index(newValue.startIndex, offsetBy: 5)).trimmingCharacters(in: .whitespaces)
+        privateRawAction = newValue.substring(from: newValue.index(newValue.startIndex, offsetBy: "@iina".characters.count)).trimmingCharacters(in: .whitespaces)
         action = rawAction.components(separatedBy: " ")
         isIINACommand = true
       } else {
@@ -97,7 +97,7 @@ class KeyMapping {
     self.comment = comment
   }
 
-  static func parseInputConf(_ path: String) -> [KeyMapping]? {
+  static func parseInputConf(at path: String) -> [KeyMapping]? {
     let reader = StreamReader(path: path)
     var mapping: [KeyMapping] = []
     var isIINACommand = false
@@ -106,7 +106,7 @@ class KeyMapping {
       if line.hasPrefix("#@iina") {
         // extended syntax
         isIINACommand = true
-        line = line.substring(from: line.index(line.startIndex, offsetBy: 6))
+        line = line.substring(from: line.index(line.startIndex, offsetBy: "#@iina".characters.count))
       } else if line.hasPrefix("#") {
         // igore comment
         continue

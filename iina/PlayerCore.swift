@@ -94,7 +94,7 @@ class PlayerCore: NSObject {
         inputConfPath = currentConfigFilePath
       }
     }
-    let mapping = KeyMapping.parseInputConf(inputConfPath!)!
+    let mapping = KeyMapping.parseInputConf(at: inputConfPath!)!
     PlayerCore.keyBindings = [:]
     mapping.forEach { PlayerCore.keyBindings[$0.key] = $0 }
 

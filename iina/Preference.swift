@@ -29,6 +29,9 @@ struct Preference {
 
     /** Enter fill screen when open (bool) */
     static let fullScreenWhenOpen = "fullScreenWhenOpen"
+    
+    /** Black out other monitors while fullscreen (bool) */
+    static let blackOutMonitor = "blackOutMonitor"
 
     /** Quit when no open window (bool) */
     static let quitWhenNoOpenedWindow = "quitWhenNoOpenedWindow"

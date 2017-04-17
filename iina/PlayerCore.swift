@@ -729,10 +729,7 @@ class PlayerCore: NSObject {
     guard let mw = mainWindow, mw.isWindowLoaded else { return }
 
     if info.disableOSDForFileLoading {
-      switch osd {
-      case .fileStart(_):
-        break
-      default:
+      guard case .fileStart = osd else {
         return
       }
     }

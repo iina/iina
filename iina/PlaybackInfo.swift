@@ -38,6 +38,7 @@ class PlaybackInfo {
 
   var justStartedFile: Bool = false
   var justOpenedFile: Bool = false
+  var disableOSDForFileLoading: Bool = false
 
   /** The current applied aspect, used for find current aspect in menu, etc. Maybe not a good approach. */
   var unsureAspect: String = "Default"

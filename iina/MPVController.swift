@@ -662,6 +662,11 @@ class MPVController: NSObject {
           } else {
             SleepPreventer.preventSleep()
           }
+          if ud.bool(forKey: PK.alwaysFloatOnTop) {
+            DispatchQueue.main.async {
+              mw.setWindowFloatingOnTop(!data)
+            }
+          }
         }
       }
       playerCore.syncUI(.playButton)

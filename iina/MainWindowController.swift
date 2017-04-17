@@ -204,7 +204,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     PK.rightClickAction,
     PK.pinchAction,
     PK.showRemainingTime,
-    PK.blackOutMonitor
+    PK.blackOutMonitor,
+    PK.alwaysFloatOnTop
   ]
 
   // MARK: - Outlets
@@ -536,6 +537,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
             removeBlackWindow()
           }
         }
+      }
+
+    case PK.alwaysFloatOnTop:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+        setWindowFloatingOnTop(newValue)
       }
 
     default:

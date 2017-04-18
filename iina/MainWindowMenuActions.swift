@@ -56,12 +56,10 @@ extension MainWindowController {
 
   @IBAction func menuSnapshot(_ sender: NSMenuItem) {
     playerCore.screenShot()
-    displayOSD(.screenShot)
   }
 
   @IBAction func menuABLoop(_ sender: NSMenuItem) {
     playerCore.abLoop()
-    displayOSD(.abLoop(playerCore.info.abLoopStatus))
   }
 
   @IBAction func menuFileLoop(_ sender: NSMenuItem) {
@@ -407,6 +405,17 @@ extension MainWindowController {
                                                             error.localizedDescription])
         }
       }
+    }
+  }
+
+  @IBAction func menuDeleteCurrentFile(_ sender: NSMenuItem) {
+    guard let url = playerCore.info.currentURL else { return }
+    do {
+      let index = playerCore.mpvController.getInt(MPVProperty.playlistPos)
+      playerCore.playlistRemove(index)
+      try FileManager.default.trashItem(at: url, resultingItemURL: nil)
+    } catch let error {
+      Utility.showAlert("playlist.error_deleting", arguments: [error.localizedDescription])
     }
   }
 

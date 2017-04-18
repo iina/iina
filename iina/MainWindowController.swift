@@ -64,7 +64,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     return cropView
   }()
 
-  private var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
+  private lazy var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = {
+    return NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
+  }()
 
   private var singleClickTimer: Timer?
 
@@ -204,7 +206,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     PK.rightClickAction,
     PK.pinchAction,
     PK.showRemainingTime,
-    PK.blackOutMonitor
+    PK.blackOutMonitor,
+    PK.alwaysFloatOnTop
   ]
 
   // MARK: - Outlets
@@ -538,6 +541,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
       }
 
+    case PK.alwaysFloatOnTop:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+        setWindowFloatingOnTop(newValue)
+      }
+
     default:
       return
     }
@@ -641,9 +649,40 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Mouse / Trackpad event
 
   override func keyDown(with event: NSEvent) {
-    window!.makeFirstResponder(window!)
     if !isInInteractiveMode {
-      playerCore.execKeyCode(Utility.mpvKeyCode(from: event))
+      let keyCode = Utility.mpvKeyCode(from: event)
+      if let kb = PlayerCore.keyBindings[keyCode] {
+        if kb.isIINACommand {
+          // - IINA command
+          if let iinaCommand = IINACommand(rawValue: kb.rawAction) {
+            handleIINACommand(iinaCommand)
+          } else {
+            Utility.log("Unknown iina command \(kb.rawAction)")
+          }
+        } else {
+          // - MPV command
+          let returnValue: Int32
+          // execute the command
+          switch kb.action[0] {
+          case MPVCommand.abLoop.rawValue:
+            playerCore.abLoop()
+            returnValue = 0
+          default:
+            returnValue = playerCore.mpvController.command(rawString: kb.rawAction)
+          }
+          // handle return value, display osd if needed
+          if returnValue == 0 {
+            // screenshot
+            if kb.action[0] == MPVCommand.screenshot.rawValue {
+              displayOSD(.screenShot)
+            }
+          } else {
+            Utility.log("Return value \(returnValue) when executing key command \(kb.rawAction)")
+          }
+        }
+      } else {
+        super.keyDown(with: event)
+      }
     }
   }
 
@@ -1915,6 +1954,41 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     return (NSMakeRect(nx, ny, nw, nh), NSMakeRect(cx, cy, cw, ch))
   }
 
+  func handleIINACommand(_ cmd: IINACommand) {
+    switch cmd {
+    case .openFile:
+      (NSApp.delegate! as! AppDelegate).openFile(self)
+    case .openURL:
+      (NSApp.delegate! as! AppDelegate).openURL(self)
+    case .togglePIP:
+      if #available(OSX 10.12, *) {
+        self.menuTogglePIP(.dummy)
+      }
+    case .videoPanel:
+      self.menuShowVideoQuickSettings(.dummy)
+    case .audioPanel:
+      self.menuShowAudioQuickSettings(.dummy)
+    case .subPanel:
+      self.menuShowSubQuickSettings(.dummy)
+    case .playlistPanel:
+      self.menuShowPlaylistPanel(.dummy)
+    case .chapterPanel:
+      self.menuShowChaptersPanel(.dummy)
+    case .flip:
+      self.menuToggleFlip(.dummy)
+    case .mirror:
+      self.menuToggleMirror(.dummy)
+    case .saveCurrentPlaylist:
+      self.menuSavePlaylist(.dummy)
+    case .deleteCurrentFile:
+      self.menuDeleteCurrentFile(.dummy)
+    case .findOnlineSubs:
+      self.menuFindOnlineSub(.dummy)
+    case .saveDownloadedSub:
+      self.saveDownloadedSub(.dummy)
+    }
+  }
+
 }
 
 
@@ -2097,7 +2171,6 @@ extension MainWindowController: NSTouchBarDelegate {
 @available(macOS 10.12, *)
 extension MainWindowController: PIPViewControllerDelegate {
 
-  @available(macOS 10.12, *)
   func enterPIP() {
     // FIXME: Internal PIP API
     // Do not enter PIP if already "PIPing"  (in this case, in the PIP animation)

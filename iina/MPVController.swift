@@ -275,15 +275,6 @@ class MPVController: NSObject {
     }
     chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, loader.stringForOption))
 
-    //load keybinding
-    let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)
-    var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["IINA Default"]
-    if let confFromUd = UserDefaults.standard.string(forKey: PK.currentInputConfigName) {
-      if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
-        inputConfPath = currentConfigFilePath
-      }
-    }
-    chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputConf, inputConfPath))
     // Receive log messages at warn level.
     chkErr(mpv_request_log_messages(mpv, "warn"))
 
@@ -345,6 +336,10 @@ class MPVController: NSObject {
     } else if let cb = returnValueCallback {
       cb(returnValue)
     }
+  }
+
+  func command(rawString: String) -> Int32 {
+    return mpv_command_string(mpv, rawString)
   }
 
   // Set property
@@ -502,7 +497,7 @@ class MPVController: NSObject {
       onFileLoaded()
 
     case MPV_EVENT_TRACKS_CHANGED:
-      onTrackChanged()
+      break
 
     case MPV_EVENT_SEEK:
       playerCore.info.isSeeking = true
@@ -521,6 +516,7 @@ class MPVController: NSObject {
         recordedSeekTimeListener?(CACurrentMediaTime() - recordedSeekStartTime)
         recordedSeekTimeListener = nil
       }
+      playerCore.playbackRestarted()
       playerCore.syncUI(.time)
 
     case MPV_EVENT_PAUSE, MPV_EVENT_UNPAUSE:
@@ -579,9 +575,6 @@ class MPVController: NSObject {
     playerCore.info.displayHeight = dheight == 0 ? height : dheight
     playerCore.info.videoDuration = VideoTime(duration)
     playerCore.info.videoPosition = VideoTime(pos)
-    if let path = getString(MPVProperty.path) {
-      playerCore.info.currentURL = URL(fileURLWithPath: path)
-    }
     playerCore.fileLoaded()
     fileLoaded = true
     // mpvResume()
@@ -589,10 +582,6 @@ class MPVController: NSObject {
       setFlag(MPVOption.PlaybackControl.pause, false)
     }
     playerCore.syncUI(.playlist)
-  }
-
-  private func onTrackChanged() {
-
   }
 
   private func onVideoReconfig() {
@@ -661,6 +650,11 @@ class MPVController: NSObject {
             SleepPreventer.allowSleep()
           } else {
             SleepPreventer.preventSleep()
+          }
+          if ud.bool(forKey: PK.alwaysFloatOnTop) {
+            DispatchQueue.main.async {
+              mw.setWindowFloatingOnTop(!data)
+            }
           }
         }
       }

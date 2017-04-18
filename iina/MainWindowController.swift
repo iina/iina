@@ -64,7 +64,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     return cropView
   }()
 
-  private var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
+  private lazy var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = {
+    return NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
+  }()
 
   private var singleClickTimer: Timer?
 

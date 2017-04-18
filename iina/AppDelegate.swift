@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   var isReady: Bool = false
   var handledDroppedText: Bool = false
+  var handledURLEvent: Bool = false
 
   var pendingURL: String?
 
@@ -144,7 +145,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func checkServiceStartup() {
-    if !handledDroppedText {
+    if !handledDroppedText && !handledURLEvent {
       openFile(self)
     }
   }
@@ -159,6 +160,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   // MARK: - URL Scheme
 
   func handleURLEvent(event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
+    handledURLEvent = true
     guard let url = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue else { return }
     if isReady {
       parsePendingURL(url)

@@ -56,12 +56,10 @@ extension MainWindowController {
 
   @IBAction func menuSnapshot(_ sender: NSMenuItem) {
     playerCore.screenShot()
-    displayOSD(.screenShot)
   }
 
   @IBAction func menuABLoop(_ sender: NSMenuItem) {
     playerCore.abLoop()
-    displayOSD(.abLoop(playerCore.info.abLoopStatus))
   }
 
   @IBAction func menuFileLoop(_ sender: NSMenuItem) {
@@ -339,7 +337,6 @@ extension MainWindowController {
 
   @IBAction func menuFindOnlineSub(_ sender: NSMenuItem) {
     guard let url = playerCore.info.currentURL else { return }
-    displayOSD(.startFindingSub)
     OnlineSubtitle.getSub(forFile: url) { subtitles in
       // send osd in main thread
       self.playerCore.sendOSD(.foundSub(subtitles.count))
@@ -350,7 +347,7 @@ extension MainWindowController {
           case .ok(let url):
             Utility.log("Saved subtitle to \(url.path)")
             self.playerCore.loadExternalSubFile(url)
-            self.playerCore.sendOSD(.downloadedSub)
+            self.playerCore.sendOSD(.downloadedSub(url.lastPathComponent))
             self.playerCore.info.haveDownloadedSub = true
           case .failed:
             self.playerCore.sendOSD(.networkError)
@@ -408,6 +405,17 @@ extension MainWindowController {
                                                             error.localizedDescription])
         }
       }
+    }
+  }
+
+  @IBAction func menuDeleteCurrentFile(_ sender: NSMenuItem) {
+    guard let url = playerCore.info.currentURL else { return }
+    do {
+      let index = playerCore.mpvController.getInt(MPVProperty.playlistPos)
+      playerCore.playlistRemove(index)
+      try FileManager.default.trashItem(at: url, resultingItemURL: nil)
+    } catch let error {
+      Utility.showAlert("playlist.error_deleting", arguments: [error.localizedDescription])
     }
   }
 

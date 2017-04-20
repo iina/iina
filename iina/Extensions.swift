@@ -202,8 +202,12 @@ extension CGFloat {
 }
 
 extension Double {
-  func toStr() -> String {
-    return "\(self)"
+  func toStr(format: String? = nil) -> String {
+    if let f = format {
+      return String(format: f, self)
+    } else {
+      return "\(self)"
+    }
   }
 
   func constrain(min: Double, max: Double) -> Double {
@@ -325,4 +329,9 @@ extension CharacterSet {
     .union(.urlPathAllowed)
     .union(.urlQueryAllowed)
     .union(.urlFragmentAllowed)
+}
+
+
+extension NSMenuItem {
+  static let dummy = NSMenuItem(title: "Dummy", action: nil, keyEquivalent: "")
 }

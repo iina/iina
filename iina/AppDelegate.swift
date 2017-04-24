@@ -180,7 +180,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  @IBAction func openURL(_ sender: AnyObject) {
+  @IBAction func openURL(_ sender: NSMenuItem) {
     let panel = NSAlert()
     panel.messageText = "Open URL"
     panel.informativeText = "Please enter the URL:"

@@ -13,7 +13,7 @@ class KeyBindingItem {
   // MARK: KeyBindingItem
 
   enum ItemType {
-    case label, iinaCmd, string, number, placeholder, separator
+    case label, string, number, placeholder, separator
   }
 
   var name: String
@@ -74,8 +74,8 @@ class KeyBindingItem {
     let criterion: Criterion
 
     switch type {
-    case .label, .placeholder, .iinaCmd:
-      let k = type == .iinaCmd ? "iina" : (l10nKey ?? self.l10nKey)
+    case .label, .placeholder:
+      let k = l10nKey ?? self.l10nKey
       let l10nPath = k == nil ? name : "\(k!).\(name)"
       if let l10nString = KeyBindingTranslator.l10nDic[l10nPath] {
         criterion = TextCriterion(name: name, localizedName: l10nString)
@@ -84,8 +84,6 @@ class KeyBindingItem {
       }
       if type == .placeholder {
         criterion.isPlaceholder = true
-      } else if type == .iinaCmd {
-        criterion.isIINACommand = true
       }
     case .string, .number:
       criterion = TextFieldCriterion()

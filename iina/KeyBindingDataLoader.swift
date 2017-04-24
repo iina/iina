@@ -11,7 +11,7 @@ import Foundation
 fileprivate typealias KBI = KeyBindingItem
 
 fileprivate enum PropertyType {
-  case bool, num, string, choose, separator
+  case bool, num, choose, separator
 }
 
 class KeyBindingDataLoader {
@@ -48,20 +48,6 @@ class KeyBindingDataLoader {
     KBI("playlist-remove"),
     KBI("playlist-shuffle"),
     KBI.separator(),
-    KBI("video-panel", type: .iinaCmd),
-    KBI("audio-panel", type: .iinaCmd),
-    KBI("sub-panel", type: .iinaCmd),
-    KBI("playlist-panel", type: .iinaCmd),
-    KBI("chapter-panel", type: .iinaCmd),
-    KBI.separator(),
-    KBI("open-file", type: .iinaCmd),
-    KBI("open-url", type: .iinaCmd),
-    KBI("save-playlist", type: .iinaCmd),
-    KBI("delete-current-file", type: .iinaCmd),
-    KBI.separator(),
-    KBI("find-online-subs", type: .iinaCmd),
-    KBI("save-downloaded-sub", type: .iinaCmd),
-    KBI.separator(),
     KBI("write-watch-later-config"),
     KBI("stop"),
     KBI("quit")
@@ -72,7 +58,6 @@ class KeyBindingDataLoader {
     ("speed", .num),
     ("---", .separator),
     ("video", .num),
-    ("video-aspect", .string),
     ("contrast", .num),
     ("brightness", .num),
     ("gamma", .num),
@@ -91,13 +76,8 @@ class KeyBindingDataLoader {
     ("sub-visibility", .bool),
     ("---", .separator),
     ("fullscreen", .bool),
-    ("ontop", .bool),
     ("---", .separator),
     ("chapter", .num)
-  ]
-
-  static let toggleableIINAProperties: [String] = [
-    "flip", "mirror"
   ]
 
   static private func propertiesForSet() -> [KeyBindingItem] {
@@ -116,7 +96,7 @@ class KeyBindingDataLoader {
   }
 
   static private func propertiesForMultiply() -> [KeyBindingItem] {
-    return propertyList.filter { $0.1 != .bool && $0.1 != .string }.map { (str, type) -> KeyBindingItem in
+    return propertyList.filter { $0.1 != .bool }.map { (str, type) -> KeyBindingItem in
       if type == .separator { return KBI.separator() }
       let kbi = KBI(str, type: .label, children:
                   KBI("by", type: .placeholder, children:
@@ -129,7 +109,7 @@ class KeyBindingDataLoader {
   }
 
   static private func propertiesForAdd() -> [KeyBindingItem] {
-    return propertyList.filter { $0.1 != .bool && $0.1 != .string }.map { (str, type) -> KeyBindingItem in
+    return propertyList.filter { $0.1 != .bool }.map { (str, type) -> KeyBindingItem in
       if type == .separator { return KBI.separator() }
       let kbi = KBI(str, type: .label, children:
                   KBI.chooseIn("add|minus", children:
@@ -142,20 +122,12 @@ class KeyBindingDataLoader {
   }
 
   static private func propertiesForCycle() -> [KeyBindingItem] {
-    var list = propertyList.filter { $0.1 != .string }.map { (str, type) -> KeyBindingItem in
+    return propertyList.map { (str, type) -> KeyBindingItem in
       if type == .separator { return KBI.separator() }
       let kbi = KBI(str)
       kbi.l10nKey = "opt"
       return kbi
     }
-    // add properties for iina
-    list.append(KBI.separator())
-    toggleableIINAProperties.forEach { p in
-      let kbi = KBI(p, type: .iinaCmd)
-      kbi.l10nKey = "opt"
-      list.append(kbi)
-    }
-    return list
   }
 
   static private func propertiesForCycleValues() -> [KeyBindingItem] {

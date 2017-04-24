@@ -135,15 +135,8 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   @IBAction func addKeyMappingBtnAction(_ sender: AnyObject) {
     showKeyBindingPanel { key, action in
       guard !key.isEmpty && !action.isEmpty else { return }
-      if action.hasPrefix("@iina") {
-        let trimmedAction = action.substring(from: action.index(action.startIndex, offsetBy: "@iina".characters.count)).trimmingCharacters(in: .whitespaces)
-        currentMapping.append(KeyMapping(key: key,
-                                         rawAction: trimmedAction,
-                                         isIINACommand: true))
-      } else {
-        currentMapping.append(KeyMapping(key: key, rawAction: action))
-      }
-
+      let splitted = action.characters.split(separator: " ").map { String($0) }
+      currentMapping.append(KeyMapping(key: key, action: splitted))
       kbTableView.reloadData()
       kbTableView.scrollRowToVisible(currentMapping.count - 1)
       saveToConfFile()
@@ -296,7 +289,6 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   }
 
   func saveToConfFile() {
-    setKeybindingsForPlayerCore()
     do {
       try KeyMapping.generateConfData(from: currentMapping).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
     } catch {
@@ -308,25 +300,39 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   // MARK: - Private
 
   private func loadConfigFile() {
-    if let mapping = KeyMapping.parseInputConf(at: currentConfFilePath) {
-      currentMapping = mapping
-    } else {
-      // on error
-      Utility.showAlert("keybinding_config.error", arguments: [currentConfName])
-      let title = "IINA Default"
-      currentConfName = title
-      currentConfFilePath = getFilePath(forConfig: title)!
-      configSelectPopUp.selectItem(withTitle: title)
-      loadConfigFile()
-      changeButtonEnabled()
-      return
+    let reader = StreamReader(path: currentConfFilePath)
+    currentMapping = []
+    while var line: String = reader?.nextLine() {      // ignore empty lines
+      if line.isEmpty { continue }
+      // igore comment
+      if line.hasPrefix("#") { continue }
+      // remove inline comment
+      if let sharpIndex = line.characters.index(of: "#") {
+        line = line.substring(to: sharpIndex)
+      }
+      // split
+      let splitted = line.characters.split(separator: " ", maxSplits: 1)
+      if splitted.count < 2 {
+        Utility.showAlert("keybinding_config.error", arguments: [currentConfName])
+        let title = "IINA Default"
+        currentConfName = title
+        currentConfFilePath = getFilePath(forConfig: title)!
+        configSelectPopUp.selectItem(withTitle: title)
+        loadConfigFile()
+        changeButtonEnabled()
+        return
+      }
+      let key = String(splitted[0])
+      let action = splitted[1].split(separator: " ").map { seq in return String(seq) }
+
+      currentMapping.append(KeyMapping(key: key, action: action, comment: nil))
     }
     UserDefaults.standard.set(currentConfName, forKey: Preference.Key.currentInputConfigName)
-    setKeybindingsForPlayerCore()
     kbTableView.reloadData()
   }
 
   private func getFilePath(forConfig conf: String, showAlert: Bool = true) -> String? {
+
     // if is default config
     if let dv = PrefKeyBindingViewController.defaultConfigs[conf] {
       return dv
@@ -342,12 +348,6 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
   private func isDefaultConfig(_ conf: String) -> Bool {
     return PrefKeyBindingViewController.defaultConfigs[conf] != nil
-  }
-
-  private func setKeybindingsForPlayerCore() {
-    var result: [String: KeyMapping] = [:]
-    currentMapping.forEach { result[$0.key] = $0 }
-    PlayerCore.keyBindings = result
   }
 
 }
@@ -376,7 +376,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
     if identifier == Constants.Identifier.key {
       currentMapping[row].key = value
     } else if identifier == Constants.Identifier.action {
-      currentMapping[row].rawAction = value
+      currentMapping[row].action = value.characters.split(separator: " ").map { return String($0) }
     }
     saveToConfFile()
   }
@@ -390,8 +390,9 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
     let selectedData = currentMapping[kbTableView.selectedRow]
     showKeyBindingPanel(key: selectedData.key, action: selectedData.readableAction) { key, action in
       guard !key.isEmpty && !action.isEmpty else { return }
+      let splitted = action.components(separatedBy: " ")
       selectedData.key = key
-      selectedData.rawAction = action
+      selectedData.action = splitted
       kbTableView.reloadData()
       saveToConfFile()
     }

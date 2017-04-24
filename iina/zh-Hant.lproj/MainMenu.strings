@@ -7,9 +7,6 @@
 /* Class = "NSMenuItem"; title = "Normal Size"; ObjectID = "1UK-8n-QPP"; */
 "1UK-8n-QPP.title" = "原始大小";
 
-/* Class = "NSMenuItem"; title = "IINA"; ObjectID = "1Xt-HY-uBw"; */
-"1Xt-HY-uBw.title" = "IINA";
-
 /* Class = "NSMenu"; title = "Audio Device"; ObjectID = "2Dp-Ol-Zcf"; */
 "2Dp-Ol-Zcf.title" = "音訊裝置";
 
@@ -315,6 +312,9 @@
 
 /* Class = "NSMenu"; title = "Flip"; ObjectID = "n90-to-nRT"; */
 "n90-to-nRT.title" = "翻轉";
+
+/* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
+"npH-8B-XA4.title" = "移除當前檔案";
 
 /* Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ"; */
 "oas-Oc-fiZ.title" = "打開最近檔案";

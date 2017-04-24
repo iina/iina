@@ -568,7 +568,7 @@ class PlayerCore: NSObject {
     guard let mw = mainWindow else {
       Utility.fatal("Window is nil at fileLoaded")
     }
-    guard let vwidth = info.videoWidth, let vheight = info.videoHeight else {
+    guard let vwidth = info.displayWidth, let vheight = info.displayHeight else {
       Utility.fatal("Cannot get video width and height")
     }
     invalidateTimer()

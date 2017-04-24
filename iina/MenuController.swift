@@ -17,7 +17,6 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var file: NSMenuItem!
   @IBOutlet weak var open: NSMenuItem!
   @IBOutlet weak var savePlaylist: NSMenuItem!
-  @IBOutlet weak var deleteCurrentFile: NSMenuItem!
   // Playback
   @IBOutlet weak var playbackMenu: NSMenu!
   @IBOutlet weak var pause: NSMenuItem!
@@ -108,7 +107,6 @@ class MenuController: NSObject, NSMenuDelegate {
     // File menu
     
     savePlaylist.action = #selector(MainWindowController.menuSavePlaylist(_:))
-    deleteCurrentFile.action = #selector(MainWindowController.menuDeleteCurrentFile(_:))
     
     // Playback menu
 

@@ -23,13 +23,7 @@ class PlaybackInfo {
 
   var rotation: Int = 0
 
-  var videoPosition: VideoTime? {
-    didSet {
-      guard let duration = videoDuration else { return }
-      if videoPosition!.second < 0 { videoPosition!.second = 0 }
-      if videoPosition!.second > duration.second { videoPosition!.second = duration.second }
-    }
-  }
+  var videoPosition: VideoTime?
 
   var videoDuration: VideoTime?
 
@@ -38,7 +32,6 @@ class PlaybackInfo {
 
   var justStartedFile: Bool = false
   var justOpenedFile: Bool = false
-  var disableOSDForFileLoading: Bool = false
 
   /** The current applied aspect, used for find current aspect in menu, etc. Maybe not a good approach. */
   var unsureAspect: String = "Default"
@@ -124,7 +117,12 @@ class PlaybackInfo {
       list = subTracks
     }
     if let id = id {
-      return list.filter { $0.id == id }.at(0)
+      for i in list {
+        if i.id == id {
+          return i
+        }
+      }
+      return nil
     } else {
       return nil
     }

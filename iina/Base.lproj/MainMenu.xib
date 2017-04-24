@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12118"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -103,9 +103,6 @@
                                 </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="N0Z-h7-JSg"/>
-                            <menuItem title="Delete Current File" id="npH-8B-XA4">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
                             <menuItem title="Save Current Playlist..." id="Mjr-lL-oEt">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
@@ -458,7 +455,6 @@
                 <outlet property="decreaseVolume" destination="pdj-9C-Fn1" id="4yi-mZ-3Bt"/>
                 <outlet property="decreaseVolumeSlightly" destination="Zhv-Bz-I5V" id="M7D-Ni-nLm"/>
                 <outlet property="deinterlace" destination="yHI-7D-OaI" id="Z8n-z4-52B"/>
-                <outlet property="deleteCurrentFile" destination="npH-8B-XA4" id="23t-fO-TbK"/>
                 <outlet property="doubleSize" destination="Hal-18-Tnf" id="vnl-Rb-Y3o"/>
                 <outlet property="encodingMenu" destination="Pf6-5i-B1E" id="Gat-gG-pkT"/>
                 <outlet property="file" destination="dMs-cI-mzQ" id="upe-AE-Gf6"/>

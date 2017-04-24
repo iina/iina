@@ -31,15 +31,10 @@ class KeyBindingTranslator {
     "no-osd", "osd-auto", "osd-bar", "osd-msg-bar", "raw", "repeatable", "expand-properties"
   ]
 
-  static func readableCommand(fromAction action: [String], isIINACommand: Bool = false) -> String {
+  static func readableCommand(fromAction action: [String]) -> String {
     var commands = action.filter { !KeyBindingTranslator.UnsupportedCmdPrefix.contains($0) }
     // Command
     let cmd = commands[0]
-
-    // If is IINA command
-    if isIINACommand {
-      return l10nDic["iina." + cmd] ?? cmd
-    }
 
     // If translated
     if let mpvFormat = KeyBindingTranslator.mpvCmdFormat[cmd],
@@ -116,19 +111,15 @@ class KeyBindingTranslator {
     return commands.joined(separator: " ")
   }
 
-  static func string(fromCriteria criteria: [Criterion]) -> String {
-    var mapped = criteria.filter { !$0.isPlaceholder }.map { $0.mpvCommandValue }
+  static func string(fromCriterions criterions: [Criterion]) -> String {
+    var mapped = criterions.filter { !$0.isPlaceholder }.map { $0.mpvCommandValue }
 
-    let firstCriterion = criteria[0] as! TextCriterion
-
-    if firstCriterion.isIINACommand {
-      mapped.insert("@iina", at: 0)
-    }
+    let firstName = (criterions[0] as! TextCriterion).name
 
     // special cases
 
     /// [add property add|minus value] (length: 4)s
-    if firstCriterion.name == "add" {
+    if firstName == "add" {
       // - format the number
       if var doubleValue = Double(mapped.popLast()!) {
         let sign = mapped.popLast()
@@ -142,7 +133,7 @@ class KeyBindingTranslator {
     }
 
     /// [seek forward|backward|seek-to value flag] (length: 4)
-    else if firstCriterion.name == "seek" {
+    else if firstName == "seek" {
       // - relative is default value
       if mapped[3] == "relative" {
         mapped.removeLast()
@@ -156,16 +147,6 @@ class KeyBindingTranslator {
       }
       mapped.remove(at: 1)
     }
-
-    /// iina properties
-    else if firstCriterion.name == "cycle" {
-      if let name = (criteria[1] as? TextCriterion)?.name,
-        KeyBindingDataLoader.toggleableIINAProperties.contains(name) {
-        return "@iina toggle-\(name)"
-      }
-    }
-
-
     return mapped.joined(separator: " ")
   }
 

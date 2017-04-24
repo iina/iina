@@ -34,8 +34,6 @@
 		840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */; };
 		840D47A01DFEFC49000D9A64 /* KeyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */; };
 		841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A599C1E1FF5800079E177 /* SleepPreventer.swift */; };
-		841B14281E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */; };
-		842F55A51EA17E7E0081D475 /* IINACommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F55A41EA17E7E0081D475 /* IINACommand.swift */; };
 		8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAA61D5DF2DA003BECF2 /* Extensions.swift */; };
 		8434BAA91D5E3C2B003BECF2 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAA81D5E3C2B003BECF2 /* Formatters.swift */; };
 		8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAAC1D5E4546003BECF2 /* SlideUpButton.swift */; };
@@ -133,7 +131,6 @@
 		84BEEC3F1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEEC3D1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift */; };
 		84BEEC421DFEE46200F945CA /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEEC411DFEE46200F945CA /* StreamReader.swift */; };
 		84C3AB8B1E7BF22300FEFB7A /* MPVCommandFormat.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84C3AB8A1E7BF22300FEFB7A /* MPVCommandFormat.strings */; };
-		84C644601E92BA2700B1410B /* TimeLabelOverflowedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */; };
 		84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D58E1D794CE600D98A0E /* MPVFilter.swift */; };
 		84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D5901D796F9700D98A0E /* Aspect.swift */; };
 		84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */; };
@@ -280,8 +277,6 @@
 		840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRecordViewController.swift; sourceTree = "<group>"; };
 		840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRecordView.swift; sourceTree = "<group>"; };
 		841A599C1E1FF5800079E177 /* SleepPreventer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepPreventer.swift; sourceTree = "<group>"; };
-		841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabelOverflowedStackView.swift; sourceTree = "<group>"; };
-		842F55A41EA17E7E0081D475 /* IINACommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IINACommand.swift; sourceTree = "<group>"; };
 		8434BAA61D5DF2DA003BECF2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8434BAA81D5E3C2B003BECF2 /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		8434BAAC1D5E4546003BECF2 /* SlideUpButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideUpButton.swift; sourceTree = "<group>"; };
@@ -429,7 +424,6 @@
 		84BEEC3D1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefKeyBindingViewController.swift; sourceTree = "<group>"; };
 		84BEEC411DFEE46200F945CA /* StreamReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReader.swift; sourceTree = "<group>"; };
 		84C3AB8A1E7BF22300FEFB7A /* MPVCommandFormat.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = MPVCommandFormat.strings; sourceTree = "<group>"; };
-		84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabelOverflowedView.swift; sourceTree = "<group>"; };
 		84C8D58E1D794CE600D98A0E /* MPVFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVFilter.swift; sourceTree = "<group>"; };
 		84C8D5901D796F9700D98A0E /* Aspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aspect.swift; sourceTree = "<group>"; };
 		84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVPlaylistItem.swift; sourceTree = "<group>"; };
@@ -623,7 +617,6 @@
 			isa = PBXGroup;
 			children = (
 				84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */,
-				8476440B1D48F63D004F6DF5 /* OSDMessage.swift */,
 				845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */,
 				84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */,
 				84D377661D737F58007F7396 /* MPVChapter.swift */,
@@ -782,10 +775,10 @@
 				844DE1BE1D3E2B9900272589 /* MPVEvent.swift */,
 				84F7258E1D486185000DEF1B /* MPVProperty.swift */,
 				84EB1F041D2F5C5B004FA5A1 /* AppData.swift */,
+				8476440B1D48F63D004F6DF5 /* OSDMessage.swift */,
 				84A0BA8F1D2F8D4100BC8DA1 /* IINAError.swift */,
 				84AABE8A1DBF634600D138FD /* CharEncoding.swift */,
 				8450403F1E0ACADD0079C194 /* MPVNode.swift */,
-				842F55A41EA17E7E0081D475 /* IINACommand.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -818,8 +811,6 @@
 				84AABE921DBFAF1A00D138FD /* FontPickerWindowController.swift */,
 				8400D5DD1E1AB326006785F5 /* FontPickerWindowController.xib */,
 				84879A9A1E1032480004F894 /* ShortcutAvailableTextField.swift */,
-				84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */,
-				841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */,
 			);
 			name = Accessories;
 			sourceTree = "<group>";
@@ -1090,7 +1081,6 @@
 				8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */,
 				84A886E41E24F37D008755BB /* ShooterSubtitle.swift in Sources */,
 				84BEEC421DFEE46200F945CA /* StreamReader.swift in Sources */,
-				84C644601E92BA2700B1410B /* TimeLabelOverflowedView.swift in Sources */,
 				84879A9B1E1032480004F894 /* ShortcutAvailableTextField.swift in Sources */,
 				84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */,
 				840D47A01DFEFC49000D9A64 /* KeyRecordView.swift in Sources */,
@@ -1147,7 +1137,6 @@
 				845040471E0B0F500079C194 /* CropSettingsViewController.swift in Sources */,
 				8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */,
 				845404AC1E43980900B02B12 /* LuaScript.swift in Sources */,
-				841B14281E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift in Sources */,
 				8460FBA91D6497490081841B /* PlaylistViewController.swift in Sources */,
 				8450404A1E0B13230079C194 /* CropBoxView.swift in Sources */,
 				84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */,
@@ -1158,7 +1147,6 @@
 				845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */,
 				84F5D4A01E44F9DB0060A838 /* KeyBindingItem.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,
-				842F55A51EA17E7E0081D475 /* IINACommand.swift in Sources */,
 				8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */,
 				840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */,
 				84BEEC3F1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift in Sources */,

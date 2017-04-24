@@ -29,9 +29,6 @@ struct Preference {
 
     /** Enter fill screen when open (bool) */
     static let fullScreenWhenOpen = "fullScreenWhenOpen"
-    
-    /** Black out other monitors while fullscreen (bool) */
-    static let blackOutMonitor = "blackOutMonitor"
 
     /** Quit when no open window (bool) */
     static let quitWhenNoOpenedWindow = "quitWhenNoOpenedWindow"
@@ -84,8 +81,6 @@ struct Preference {
      but if the file is not opened by user manually (File > Open),
      e.g. jumping to next item in playlist, window size will remoain the same. */
     static let resizeOnlyWhenManuallyOpenFile = "resizeOnlyWhenManuallyOpenFile"
-
-    static let oscPosition = "oscPosition"
 
     // Codec
 
@@ -214,12 +209,6 @@ struct Preference {
     case ultraDark
     case light
     case mediumLight
-  }
-
-  enum OSCPosition: Int {
-    case floating = 0
-    case top
-    case bottom
   }
 
   enum SeekOption: Int {
@@ -358,7 +347,6 @@ struct Preference {
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,
     Key.controlBarAutoHideTimeout: Float(2.5),
-    Key.oscPosition: OSCPosition.floating.rawValue,
     Key.themeMaterial: Theme.dark.rawValue,
     Key.osdAutoHideTimeout: Float(1),
     Key.osdTextSize: Float(20),
@@ -439,7 +427,7 @@ struct Preference {
     Key.keepOpenOnFileEnd: true,
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
-    Key.relativeSeekAmount: 3,
+    Key.relativeSeekAmount: 2,
     Key.volumeScrollAmount: 3,
     Key.verticalScrollAction: ScrollAction.volume.rawValue,
     Key.horizontalScrollAction: ScrollAction.seek.rawValue,

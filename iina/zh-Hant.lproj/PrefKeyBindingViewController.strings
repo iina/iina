@@ -13,6 +13,9 @@
 /* Class = "NSTableColumn"; headerCell.title = "Key"; ObjectID = "JwC-60-7Hp"; */
 "JwC-60-7Hp.headerCell.title" = "鍵位";
 
+/* Class = "NSTextFieldCell"; title = "All following settings will require restarting IINA to take effect."; ObjectID = "Mxa-CP-JlM"; */
+"Mxa-CP-JlM.title" = "以下設定需重啟 IINA 後生效";
+
 /* Class = "NSButtonCell"; title = "Delete this config file"; ObjectID = "QAL-MQ-b0l"; */
 "QAL-MQ-b0l.title" = "刪除此設定檔案";
 

@@ -222,9 +222,9 @@ class PlayerCore: NSObject {
   }
 
   func togglePlaylistLoop() {
-    let loopStatus = mpvController.getString(MPVOption.PlaybackControl.loop)
+    let loopStatus = mpvController.getString(MPVOption.PlaybackControl.loopPlaylist)
     let isLoop = (loopStatus == "inf" || loopStatus == "force")
-    mpvController.setString(MPVOption.PlaybackControl.loop, isLoop ? "no" : "inf")
+    mpvController.setString(MPVOption.PlaybackControl.loopPlaylist, isLoop ? "no" : "inf")
   }
 
   func toggleShuffle() {

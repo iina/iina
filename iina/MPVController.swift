@@ -545,8 +545,9 @@ class MPVController: NSObject {
       playerCore.syncUI(.chapterList)
 
     default:
-      let eventName = String(cString: mpv_event_name(eventId))
-      Utility.log("MPV event (unhandled): \(eventName)")
+      // let eventName = String(cString: mpv_event_name(eventId))
+      // Utility.log("MPV event (unhandled): \(eventName)")
+      break
     }
   }
 

@@ -126,7 +126,7 @@
 
 "alert.extra_option.cannot_read" = "无法读取自定义的 mpv 额外选项。";
 "alert.extra_option.empty" = "键或值不能为空！";
-"alert.extra_option_error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";
+"alert.extra_option.error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";
 "alert.extra_option.config_folder" = "设置配置文件目录 \"%@\" 时出现错误。";
 
 "alert.playlist.error_deleting" = "删除 %@ 时出现错误。";

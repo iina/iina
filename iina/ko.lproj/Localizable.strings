@@ -286,7 +286,7 @@
 "alert.extra_option.cannot_read" = "사용자가 지정한 mpv 추가옵션을 읽을 수 없습니다.";
 "alert.extra_option.config_folder" = "\"%@\"를 설정 디렉토리로 지정하는 도중 오류가 발생했습니다.";
 "alert.extra_option.empty" = "항목과 그 설정값을 반드시 지정해야 합니다!";
-"alert.extra_option_error" = "--%@=%@ 설정에서 %d 오류가 발생했습니다. 환경설정 > 고급설정으로 이동하여 사용자가 지정한 추가 설정 사항을 점검하십시오.";
+"alert.extra_option.error" = "--%@=%@ 설정에서 %d 오류가 발생했습니다. 환경설정 > 고급설정으로 이동하여 사용자가 지정한 추가 설정 사항을 점검하십시오.";
 "alert.fatal_error" = "심각한 오류: %@ \n프로그램이 지금 종료됩니다.";
 "alert.filter.incorrect" = "필터를 설정하는 도중 오류가 발생했습니다. 매개변수 형식을 확인하십시오.";
 "alert.keybinding_config_error" = "단축키 설정 파일 \"%@\"를 읽어올 때 오류가 발생했습니다! IINA 기본값을 사용하도록 설정됩니다. 사용자가 지정한 단축키 설정 내용을 점검하십시오.";

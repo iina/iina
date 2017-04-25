@@ -64,7 +64,6 @@
 		8461BA4B1E407E24008BB852 /* libavformat.57.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA131E407DF7008BB852 /* libavformat.57.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8461BA4C1E407E24008BB852 /* libavresample.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA141E407DF7008BB852 /* libavresample.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8461BA4D1E407E24008BB852 /* libavutil.55.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA151E407DF7008BB852 /* libavutil.55.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA4E1E407E24008BB852 /* libbluray.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA161E407DF7008BB852 /* libbluray.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8461BA4F1E407E24008BB852 /* libfontconfig.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA171E407DF7008BB852 /* libfontconfig.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8461BA501E407E24008BB852 /* libfreetype.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA181E407DF7008BB852 /* libfreetype.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8461BA511E407E24008BB852 /* libfribidi.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA191E407DF7008BB852 /* libfribidi.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -134,6 +133,7 @@
 		84BEEC421DFEE46200F945CA /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEEC411DFEE46200F945CA /* StreamReader.swift */; };
 		84C3AB8B1E7BF22300FEFB7A /* MPVCommandFormat.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84C3AB8A1E7BF22300FEFB7A /* MPVCommandFormat.strings */; };
 		84C644601E92BA2700B1410B /* TimeLabelOverflowedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */; };
+		84C6D3601EAF69DC009BF721 /* libbluray.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA161E407DF7008BB852 /* libbluray.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D58E1D794CE600D98A0E /* MPVFilter.swift */; };
 		84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D5901D796F9700D98A0E /* Aspect.swift */; };
 		84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */; };
@@ -177,6 +177,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				84C6D3601EAF69DC009BF721 /* libbluray.2.dylib in Copy Dylibs */,
 				8461BA471E407E24008BB852 /* libass.9.dylib in Copy Dylibs */,
 				8461BA481E407E24008BB852 /* libavcodec.57.dylib in Copy Dylibs */,
 				8461BA491E407E24008BB852 /* libavdevice.57.dylib in Copy Dylibs */,
@@ -184,7 +185,6 @@
 				8461BA4B1E407E24008BB852 /* libavformat.57.dylib in Copy Dylibs */,
 				8461BA4C1E407E24008BB852 /* libavresample.3.dylib in Copy Dylibs */,
 				8461BA4D1E407E24008BB852 /* libavutil.55.dylib in Copy Dylibs */,
-				8461BA4E1E407E24008BB852 /* libbluray.1.dylib in Copy Dylibs */,
 				8461BA4F1E407E24008BB852 /* libfontconfig.1.dylib in Copy Dylibs */,
 				8461BA501E407E24008BB852 /* libfreetype.6.dylib in Copy Dylibs */,
 				8461BA511E407E24008BB852 /* libfribidi.0.dylib in Copy Dylibs */,
@@ -335,7 +335,7 @@
 		8461BA131E407DF7008BB852 /* libavformat.57.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.57.dylib; path = libmpv/lib/libavformat.57.dylib; sourceTree = "<group>"; };
 		8461BA141E407DF7008BB852 /* libavresample.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavresample.3.dylib; path = libmpv/lib/libavresample.3.dylib; sourceTree = "<group>"; };
 		8461BA151E407DF7008BB852 /* libavutil.55.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.55.dylib; path = libmpv/lib/libavutil.55.dylib; sourceTree = "<group>"; };
-		8461BA161E407DF7008BB852 /* libbluray.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbluray.1.dylib; path = libmpv/lib/libbluray.1.dylib; sourceTree = "<group>"; };
+		8461BA161E407DF7008BB852 /* libbluray.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbluray.2.dylib; path = libmpv/lib/libbluray.2.dylib; sourceTree = "<group>"; };
 		8461BA171E407DF7008BB852 /* libfontconfig.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfontconfig.1.dylib; path = libmpv/lib/libfontconfig.1.dylib; sourceTree = "<group>"; };
 		8461BA181E407DF7008BB852 /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = libmpv/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
 		8461BA191E407DF7008BB852 /* libfribidi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfribidi.0.dylib; path = libmpv/lib/libfribidi.0.dylib; sourceTree = "<group>"; };
@@ -661,7 +661,7 @@
 				8461BA131E407DF7008BB852 /* libavformat.57.dylib */,
 				8461BA141E407DF7008BB852 /* libavresample.3.dylib */,
 				8461BA151E407DF7008BB852 /* libavutil.55.dylib */,
-				8461BA161E407DF7008BB852 /* libbluray.1.dylib */,
+				8461BA161E407DF7008BB852 /* libbluray.2.dylib */,
 				8461BA171E407DF7008BB852 /* libfontconfig.1.dylib */,
 				8461BA181E407DF7008BB852 /* libfreetype.6.dylib */,
 				8461BA191E407DF7008BB852 /* libfribidi.0.dylib */,

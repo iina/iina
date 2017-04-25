@@ -98,7 +98,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
   override func viewDidAppear() {
     reloadData(playlist: true, chapters: true)
 
-    let loopStatus = playerCore.mpvController.getString(MPVOption.PlaybackControl.loop)
+    let loopStatus = playerCore.mpvController.getString(MPVOption.PlaybackControl.loopPlaylist)
     loopBtn.state = (loopStatus == "inf" || loopStatus == "force") ? NSOnState : NSOffState
   }
 

@@ -238,9 +238,9 @@ class PlayerCore: NSObject {
   }
 
   func togglePlaylistLoop() {
-    let loopStatus = mpvController.getString(MPVOption.PlaybackControl.loop)
+    let loopStatus = mpvController.getString(MPVOption.PlaybackControl.loopPlaylist)
     let isLoop = (loopStatus == "inf" || loopStatus == "force")
-    mpvController.setString(MPVOption.PlaybackControl.loop, isLoop ? "no" : "inf")
+    mpvController.setString(MPVOption.PlaybackControl.loopPlaylist, isLoop ? "no" : "inf")
   }
 
   func toggleShuffle() {
@@ -588,7 +588,7 @@ class PlayerCore: NSObject {
     guard let mw = mainWindow else {
       Utility.fatal("Window is nil at fileLoaded")
     }
-    guard let vwidth = info.videoWidth, let vheight = info.videoHeight else {
+    guard let vwidth = info.displayWidth, let vheight = info.displayHeight else {
       Utility.fatal("Cannot get video width and height")
     }
     invalidateTimer()

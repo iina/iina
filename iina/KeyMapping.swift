@@ -100,8 +100,8 @@ class KeyMapping {
   static func parseInputConf(at path: String) -> [KeyMapping]? {
     let reader = StreamReader(path: path)
     var mapping: [KeyMapping] = []
-    var isIINACommand = false
     while var line: String = reader?.nextLine() {      // ignore empty lines
+      var isIINACommand = false
       if line.isEmpty { continue }
       if line.hasPrefix("#@iina") {
         // extended syntax

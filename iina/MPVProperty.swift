@@ -137,6 +137,10 @@ struct MPVProperty {
   static let demuxerCacheTime = "demuxer-cache-time"
   /** demuxer-cache-idle */
   static let demuxerCacheIdle = "demuxer-cache-idle"
+  /** demuxer-via-network */
+  static let demuxerViaNetwork = "demuxer-via-network"
+  /** demuxer-start-time */
+  static let demuxerStartTime = "demuxer-start-time"
   /** paused-for-cache */
   static let pausedForCache = "paused-for-cache"
   /** cache-buffering-state */

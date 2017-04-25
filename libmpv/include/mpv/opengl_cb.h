@@ -1,4 +1,6 @@
-/* Permission to use, copy, modify, and/or distribute this software for any
+/* Copyright (C) 2017 the mpv developers
+ *
+ * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
  *
@@ -11,16 +13,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*
- * Note: the client API is licensed under ISC (see above) to ease
- * interoperability with other licenses. But keep in mind that the
- * mpv core is still mostly GPLv2+. It's up to lawyers to decide
- * whether applications using this API are affected by the GPL.
- * One argument against this is that proprietary applications
- * using mplayer in slave mode is apparently tolerated, and this
- * API is basically equivalent to slave mode.
- */
-
 #ifndef MPV_CLIENT_API_OPENGL_CB_H_
 #define MPV_CLIENT_API_OPENGL_CB_H_
 
@@ -31,21 +23,22 @@ extern "C" {
 #endif
 
 /**
- * Warning: this API is not stable yet.
  *
  * Overview
  * --------
  *
  * This API can be used to make mpv render into a foreign OpenGL context. It
- * can be used to handle video display. Be aware that using this API is not
- * required: you can embed the mpv window by setting the mpv "wid" option to
- * a native window handle (see "Embedding the video window" section in the
- * client.h header). In general, using the "wid" option is recommended over
- * the OpenGL API, because it's simpler and more flexible on the mpv side.
+ * can be used to handle video display.
  *
  * The renderer needs to be explicitly initialized with mpv_opengl_cb_init_gl(),
  * and then video can be drawn with mpv_opengl_cb_draw(). The user thread can
  * be notified by new frames with mpv_opengl_cb_set_update_callback().
+ *
+ * You can output and embed video without this API by setting the mpv "wid"
+ * option to a native window handle (see "Embedding the video window" section
+ * in the client.h header). In general, using the opengl-cb API is recommended,
+ * because window embedding can cause various issues, especially with GUI
+ * toolkits and certain platforms.
  *
  * OpenGL interop
  * --------------
@@ -293,6 +286,7 @@ int mpv_opengl_cb_init_gl(mpv_opengl_cb_context *ctx, const char *exts,
  */
 int mpv_opengl_cb_draw(mpv_opengl_cb_context *ctx, int fbo, int w, int h);
 
+#if MPV_ENABLE_DEPRECATED
 /**
  * Deprecated. Use mpv_opengl_cb_draw(). This function is equivalent to:
  *
@@ -305,6 +299,7 @@ int mpv_opengl_cb_draw(mpv_opengl_cb_context *ctx, int fbo, int w, int h);
  * was never marked as stable).
  */
 int mpv_opengl_cb_render(mpv_opengl_cb_context *ctx, int fbo, int vp[4]);
+#endif
 
 /**
  * Tell the renderer that a frame was flipped at the given time. This is

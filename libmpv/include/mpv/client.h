@@ -214,7 +214,7 @@ extern "C" {
  * other functionality will still work.)
  */
 #ifndef MPV_ENABLE_DEPRECATED
-#define MPV_ENABLE_DEPRECATED 1
+#define MPV_ENABLE_DEPRECATED 0
 #endif
 
 /**

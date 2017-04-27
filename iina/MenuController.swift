@@ -265,9 +265,19 @@ class MenuController: NSObject, NSMenuDelegate {
   // MARK: - Update Menus
 
   private func updateHistory() {
+    let workspace = NSWorkspace.shared()
+    let iconRect = NSRect(x: 0, y: 0, width: 16, height: 16)
     historyMenu.removeAllItems()
     for item in HistoryController.shared.history {
-      historyMenu.addItem(withTitle: item.name, action: nil, tag: nil, obj: nil, stateOn: false)
+      let menuItem = NSMenuItem()
+      menuItem.title = item.name
+      menuItem.action = #selector(MainWindowController.menuOpenHistory(_:))
+      menuItem.representedObject = item.url
+      if let docImageRef = workspace.icon(forFileType: item.url.pathExtension).bestRepresentation(for: iconRect, context: nil, hints: nil) {
+        menuItem.image = NSImage()
+        menuItem.image!.addRepresentation(docImageRef)
+      }
+      historyMenu.addItem(menuItem)
     }
   }
 

@@ -45,7 +45,7 @@ class PlaybackHistory: NSObject, NSCoding {
   init(url: URL, name: String? = nil) {
     self.url = url
     self.name = name ?? url.lastPathComponent
-    self.mpvMd5 = url.path.md5
+    self.mpvMd5 = url.path.md5  // FIXME: should implement mpv's algorithm for dvd://, etc
     self.played = true
     self.addedDate = Date()
   }

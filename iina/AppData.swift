@@ -41,6 +41,7 @@ struct AppData {
   static let userInputConfFolder = "input_conf"
   static let logFolder = "log"
   static let watchLaterFolder = "watch_later"
+  static let historyFile = "history.plist"
 
   static let githubLink = "https://github.com/lhc70000/iina"
   static let githubReleaseLink = "https://github.com/lhc70000/iina/releases"

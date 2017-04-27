@@ -102,6 +102,17 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="m38-SL-vHw"/>
+                            <menuItem title="History" id="LND-1n-DU2">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="History" id="dQa-hg-e7w">
+                                    <items>
+                                        <menuItem title="Item" id="5BN-Z4-sLJ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="N0Z-h7-JSg"/>
                             <menuItem title="Delete Current File" id="npH-8B-XA4">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -478,6 +489,7 @@
                 <outlet property="fullScreen" destination="6Eq-ni-6hG" id="y11-Q1-drn"/>
                 <outlet property="gotoScreenshotFolder" destination="lj0-Oo-7nB" id="Jlj-kX-fv0"/>
                 <outlet property="halfSize" destination="snW-S8-Cw5" id="PDi-lV-6HL"/>
+                <outlet property="historyMenu" destination="dQa-hg-e7w" id="kGN-xz-cnw"/>
                 <outlet property="increaseAudioDelay" destination="4ae-MT-2L1" id="nsv-LC-B9o"/>
                 <outlet property="increaseSubDelay" destination="pAo-L5-qTO" id="55m-ex-for"/>
                 <outlet property="increaseTextSize" destination="XHu-Dl-Vq2" id="XXf-48-N36"/>

@@ -318,6 +318,10 @@ class Utility {
     return url
   }()
 
+  static let playbackHistoryURL: URL = {
+    return Utility.appSupportDirUrl.appendingPathComponent(AppData.historyFile, isDirectory: false)
+  }()
+
   static let tempDirURL: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
 
   static let exeDirURL: URL = URL(fileURLWithPath: Bundle.main.executablePath!).deletingLastPathComponent()

@@ -18,6 +18,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var open: NSMenuItem!
   @IBOutlet weak var savePlaylist: NSMenuItem!
   @IBOutlet weak var deleteCurrentFile: NSMenuItem!
+  @IBOutlet weak var historyMenu: NSMenu!
   // Playback
   @IBOutlet weak var playbackMenu: NSMenu!
   @IBOutlet weak var pause: NSMenuItem!
@@ -109,6 +110,8 @@ class MenuController: NSObject, NSMenuDelegate {
     
     savePlaylist.action = #selector(MainWindowController.menuSavePlaylist(_:))
     deleteCurrentFile.action = #selector(MainWindowController.menuDeleteCurrentFile(_:))
+
+    historyMenu.delegate = self
     
     // Playback menu
 
@@ -261,6 +264,13 @@ class MenuController: NSObject, NSMenuDelegate {
 
   // MARK: - Update Menus
 
+  private func updateHistory() {
+    historyMenu.removeAllItems()
+    for item in HistoryController.shared.history {
+      historyMenu.addItem(withTitle: item.name, action: nil, tag: nil, obj: nil, stateOn: false)
+    }
+  }
+
   private func updatePlaylist() {
     playlistMenu.removeAllItems()
     for (index, item) in PlayerCore.shared.info.playlist.enumerated() {
@@ -389,7 +399,9 @@ class MenuController: NSObject, NSMenuDelegate {
   // MARK: - Menu delegate
 
   func menuWillOpen(_ menu: NSMenu) {
-    if menu == playlistMenu {
+    if menu == historyMenu {
+      updateHistory()
+    } else if menu == playlistMenu {
       updatePlaylist()
     } else if menu == chapterMenu {
       updateChapterList()

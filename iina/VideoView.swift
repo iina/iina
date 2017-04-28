@@ -86,6 +86,10 @@ class VideoView: NSView {
   override func draw(_ dirtyRect: NSRect) {
     // do nothing
   }
+  
+  override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
+    return true
+  }
 
   // MARK: Drag and drop
   

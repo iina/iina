@@ -453,9 +453,6 @@ class MPVController: NSObject {
     case MPV_EVENT_SHUTDOWN:
       let quitByMPV = !playerCore.isMpvTerminated
       if quitByMPV {
-        playerCore.terminateMPV(sendQuit: false)
-        mpv_detach_destroy(mpv)
-        mpv = nil
         NSApp.terminate(nil)
       } else {
         mpv_detach_destroy(mpv)

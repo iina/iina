@@ -1,0 +1,154 @@
+/* 
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+// Common
+"on" = "On";
+"off" = "Off";
+"login" = "Login";
+"logout" = "Logout";
+
+// PlaylistViewController.swift
+"playlist.playlist_cap" = "PLAYLIST";
+"playlist.chapter_cap" = "CHAPTERS";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "Buffering... %d%%";
+
+// QuickSettingViewController.swift
+"quicksetting.aspect_item.Default" = "Default";
+"quicksetting.crop_item.None" = "None";
+
+// OSDMessage.swift
+"osd.pause" = "Pause";
+"osd.resume" = "Resume";
+"osd.volume" = "Volume: %i";
+"osd.speed" = "Speed: %.2fx";
+"osd.aspect" = "Aspect Ratio: %@";
+"osd.crop" = "Crop: %@";
+"osd.rotate" = "Rotate: %i°";
+"osd.deinterlace" = "Deinterlace: %@";
+"osd.audio_delay.nodelay" = "Audio Delay: No Delay";
+"osd.audio_delay.later" = "Audio Delay: %.2fs Later";
+"osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
+"osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
+"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
+"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
+"osd.subtitle_pos" = "Subtitle Position: %.1f";
+"osd.mute" = "Mute";
+"osd.unmute" = "Unmute";
+"osd.screenshot" = "Screenshot Captured";
+"osd.abloop.a" = "AB-Loop: A";
+"osd.abloop.b" = "AB-Loop: B";
+"osd.abloop.clear" = "AB-Loop: Cleared";
+"osd.stop" = "Stop";
+"osd.chapter" = "Chapter: %@";
+"osd.subtitle_scale" = "Subtitle Scale: %.2fx";
+"osd.add_to_playlist" = "Added %i Files to Playlist";
+"osd.clear_playlist" = "Cleared Playlist";
+"osd.video_eq.contrast" = "Contrast: %i";
+"osd.video_eq.gamma" = "Gamma: %i";
+"osd.video_eq.hue" = "Hue: %i";
+"osd.video_eq.saturation" = "Saturation: %i";
+"osd.video_eq.brightness" = "Brightness: %i";
+"osd.find_online_sub" = "Finding online subtitles...";
+"osd.sub_not_found" = "No subtitle found";
+"osd.sub_found" = "%d subtitle(s) found. Downloading...";
+"osd.sub_downloaded" = "Subtitle downloaded";
+"osd.sub_saved" = "Subtitle saved";
+"osd.network_error" = "Network error";
+"osd.file_error" = "Error reading file";
+"osd.cannot_login" = "Cannot login";
+"osd.canceled" = "Canceled";
+
+"update.title_update_found" = "Update Found";
+"update.title_no_update" = "No Update";
+"update.title_error" = "Error";
+"update.update_found" = "New version detected! IINA is still in alpha, so you are recommended to stay with the latest version. Please download from website or github:";
+"update.no_update" = "You are running the latest version.";
+"update.check_failed" = "Failed to check updates. You are probably running a too old version. Please check the website or github.";
+"update.new_version" = "New version:";
+"update.dl_from_website" = "Go to Website";
+"update.dl_from_github" = "Go to Github";
+
+"preference.title" = "Preference";
+"preference.general" = "General";
+"preference.ui" = "UI";
+"preference.codec" = "Codec";
+"preference.subtitle" = "Subtitle";
+"preference.network" = "Network";
+"preference.control" = "Control";
+"preference.keybindings" = "Keybindings";
+"preference.advanced" = "Advanced";
+"preference.scripts" = "Scripts";
+"preference.not_logged_in" = "Not logged in";
+"preference.logged_in_as" = "Logged in as %@";
+
+"menu.volume"= "Volume: %d";
+"menu.audio_delay" = "Audio Delay: %.2fs";
+"menu.sub_delay" = "Subtitie Delay: %.2fs";
+"menu.fullscreen" = "Enter Full Screen";
+"menu.exit_fullscreen" = "Exit Full Screen";
+"menu.pip" = "Enter Picture-in-Picture";
+"menu.exit_pip" = "Exit Picture-in-Picture";
+"menu.pause" = "Pause";
+"menu.resume" = "Resume";
+
+"track.none" = "<None>";
+
+// Alerts
+"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
+"alert.mpv_error" = "Error %@ (%@) when setting user option %@.";
+"alert.sleep" = "Cannot prevent display sleep!";
+
+"alert.unsupported_audio" = "Unsupported external audio file.";
+"alert.unsupported_sub" = "Unsupported external subtitle.";
+"alert.unsupported_url" = "Unsupported URL.";
+"alert.wrong_url_format" = "Wrong URL format.";
+
+"alert.error_open" = "Cannot open file or stream!";
+"alert.error_finding_file" = "Cannot find %@ file!";
+"alert.error_loading_script" = "Cannot load script %@!";
+"alert.error_saving_file" = "Error occured when saving %@: %@";
+"alert.error_deleting_file" = "Cannot delete the file.";
+
+"alert.config.empty_name" = "The name cannot be empty.";
+"alert.config.name_existing" = "The name already exists.";
+"alert.config.cannot_create" = "Cannot create config file!";
+"alert.config.cannot_write" = "Cannot write to config file!";
+
+"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+
+"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+
+"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
+"alert.extra_option.empty" = "Key or value cannot be empty!";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+
+"alert.playlist.error_deleting" = "Error deleting: %@";
+
+"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using opensubtitles. English(eng) will be used this time.";
+"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
+"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+
+
+"pl_menu.title_multi" = "%d Items";
+"pl_menu.play_next" = "Play Next";
+"pl_menu.remove" = "Remove";
+"pl_menu.remove_multi" = "Remove Selected";
+"pl_menu.delete" = "Move to Trash";
+"pl_menu.delete_multi" = "Move Selected Files to Trash";
+"pl_menu.delete_after_play" = "Move to Trash After Playback";
+"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
+"pl_menu.reveal_in_finder" = "Reveal in Finder";
+"pl_menu.add_item" = "Add Item…";
+"pl_menu.clear_playlist" = "Clear Playlist";
+
+"keymapping.title" = "Key Mapping";
+"keymapping.message" = "Press any key to record.";

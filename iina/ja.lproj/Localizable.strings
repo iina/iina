@@ -7,148 +7,148 @@
 */
 
 // Common
-"on" = "On";
-"off" = "Off";
-"login" = "Login";
-"logout" = "Logout";
+"on" = "オン";
+"off" = "オフ";
+"login" = "ログイン";
+"logout" = "ログアウト";
 
 // PlaylistViewController.swift
-"playlist.playlist_cap" = "PLAYLIST";
-"playlist.chapter_cap" = "CHAPTERS";
+"playlist.playlist_cap" = "プレイリスト";
+"playlist.chapter_cap" = "チャプタ";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering... %d%%";
+"main.buffering_indicator" = "バッファ中... %d%%";
 
 // QuickSettingViewController.swift
-"quicksetting.aspect_item.Default" = "Default";
-"quicksetting.crop_item.None" = "None";
+"quicksetting.aspect_item.Default" = "デフォルト";
+"quicksetting.crop_item.None" = "なし";
 
 // OSDMessage.swift
-"osd.pause" = "Pause";
-"osd.resume" = "Resume";
-"osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %.2fx";
-"osd.aspect" = "Aspect Ratio: %@";
-"osd.crop" = "Crop: %@";
-"osd.rotate" = "Rotate: %i°";
-"osd.deinterlace" = "Deinterlace: %@";
-"osd.audio_delay.nodelay" = "Audio Delay: No Delay";
-"osd.audio_delay.later" = "Audio Delay: %.2fs Later";
-"osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
-"osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
-"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
-"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
-"osd.subtitle_pos" = "Subtitle Position: %.1f";
-"osd.mute" = "Mute";
-"osd.unmute" = "Unmute";
-"osd.screenshot" = "Screenshot Captured";
-"osd.abloop.a" = "AB-Loop: A";
-"osd.abloop.b" = "AB-Loop: B";
-"osd.abloop.clear" = "AB-Loop: Cleared";
-"osd.stop" = "Stop";
-"osd.chapter" = "Chapter: %@";
-"osd.subtitle_scale" = "Subtitle Scale: %.2fx";
-"osd.add_to_playlist" = "Added %i Files to Playlist";
-"osd.clear_playlist" = "Cleared Playlist";
-"osd.video_eq.contrast" = "Contrast: %i";
-"osd.video_eq.gamma" = "Gamma: %i";
-"osd.video_eq.hue" = "Hue: %i";
-"osd.video_eq.saturation" = "Saturation: %i";
-"osd.video_eq.brightness" = "Brightness: %i";
-"osd.find_online_sub" = "Finding online subtitles...";
-"osd.sub_not_found" = "No subtitle found";
-"osd.sub_found" = "%d subtitle(s) found. Downloading...";
-"osd.sub_downloaded" = "Subtitle downloaded";
-"osd.sub_saved" = "Subtitle saved";
-"osd.network_error" = "Network error";
-"osd.file_error" = "Error reading file";
-"osd.cannot_login" = "Cannot login";
-"osd.canceled" = "Canceled";
+"osd.pause" = "一時停止";
+"osd.resume" = "再開";
+"osd.volume" = "音量: %i";
+"osd.speed" = "速度: %.2fx";
+"osd.aspect" = "アスペクト比: %@";
+"osd.crop" = "クロップ: %@";
+"osd.rotate" = "回転: %i°";
+"osd.deinterlace" = "インターレース解除: %@";
+"osd.audio_delay.nodelay" = "オーディオディレイ: ディレイなし";
+"osd.audio_delay.later" = "オーディオディレイ: %.2f秒 遅く";
+"osd.audio_delay.earlier" = "オーディオディレイ: %.2f秒 早く";
+"osd.sub_delay.nodelay" = "字幕ディレイ: ディレイなし";
+"osd.sub_delay.later" = "字幕ディレイ: %.2f秒 遅く";
+"osd.sub_delay.earlier" = "字幕ディレイ: %.2f秒 早く";
+"osd.subtitle_pos" = "字幕の位置: %.1f";
+"osd.mute" = "ミュート";
+"osd.unmute" = "ミュート解除";
+"osd.screenshot" = "スクリーンショットを保存しました";
+"osd.abloop.a" = "AB-リピート: A";
+"osd.abloop.b" = "AB-リピート: B";
+"osd.abloop.clear" = "AB-リピート: クリア";
+"osd.stop" = "一時停止";
+"osd.chapter" = "チャプタ: %@";
+"osd.subtitle_scale" = "字幕の大きさ: %.2fx";
+"osd.add_to_playlist" = "%i個のファイルをプレイリストに追加しました";
+"osd.clear_playlist" = "プレイリストをクリア";
+"osd.video_eq.contrast" = "コントラスト: %i";
+"osd.video_eq.gamma" = "ガンマ値: %i";
+"osd.video_eq.hue" = "色調: %i";
+"osd.video_eq.saturation" = "彩度: %i";
+"osd.video_eq.brightness" = "明るさ: %i";
+"osd.find_online_sub" = "オンラインで字幕を探しています...";
+"osd.sub_not_found" = "字幕が見つかりませんでした";
+"osd.sub_found" = "%d個の字幕が見つかりました。ダウンロードしています...";
+"osd.sub_downloaded" = "字幕をダウンロードしました";
+"osd.sub_saved" = "字幕を保存しました";
+"osd.network_error" = "ネットワークエラー";
+"osd.file_error" = "ファイルの読み込みエラー";
+"osd.cannot_login" = "ログインできません";
+"osd.canceled" = "キャンセルされました";
 
-"update.title_update_found" = "Update Found";
-"update.title_no_update" = "No Update";
-"update.title_error" = "Error";
-"update.update_found" = "New version detected! IINA is still in alpha, so you are recommended to stay with the latest version. Please download from website or github:";
-"update.no_update" = "You are running the latest version.";
-"update.check_failed" = "Failed to check updates. You are probably running a too old version. Please check the website or github.";
-"update.new_version" = "New version:";
-"update.dl_from_website" = "Go to Website";
-"update.dl_from_github" = "Go to Github";
+"update.title_update_found" = "アップデートがあります";
+"update.title_no_update" = "アップデートはありません";
+"update.title_error" = "エラー";
+"update.update_found" = "最新のバージョンが見つかりました! IINAは現在α版のため、最新のバージョンを推奨しています。WebサイトかGithubよりダウンロードしてください:";
+"update.no_update" = "最新のバージョンです。";
+"update.check_failed" = "アップデートが確認できませんでした。バージョンが古すぎる可能性があります。WebサイトまたはGithubをご確認ください。";
+"update.new_version" = "新たなバージョン:";
+"update.dl_from_website" = "Webサイトへ移動";
+"update.dl_from_github" = "Githubへ移動";
 
-"preference.title" = "Preference";
-"preference.general" = "General";
+"preference.title" = "環境設定";
+"preference.general" = "一般";
 "preference.ui" = "UI";
-"preference.codec" = "Codec";
-"preference.subtitle" = "Subtitle";
-"preference.network" = "Network";
-"preference.control" = "Control";
-"preference.keybindings" = "Keybindings";
-"preference.advanced" = "Advanced";
-"preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Not logged in";
-"preference.logged_in_as" = "Logged in as %@";
+"preference.codec" = "コーデック";
+"preference.subtitle" = "字幕";
+"preference.network" = "ネットワーク";
+"preference.control" = "コントロール";
+"preference.keybindings" = "キーの割り当て";
+"preference.advanced" = "拡張";
+"preference.scripts" = "スクリプト";
+"preference.not_logged_in" = "ログインしていません";
+"preference.logged_in_as" = "%@でログイン中";
 
-"menu.volume"= "Volume: %d";
-"menu.audio_delay" = "Audio Delay: %.2fs";
-"menu.sub_delay" = "Subtitie Delay: %.2fs";
-"menu.fullscreen" = "Enter Full Screen";
-"menu.exit_fullscreen" = "Exit Full Screen";
+"menu.volume"= "音量: %d";
+"menu.audio_delay" = "オーディオディレイ: %.2fs";
+"menu.sub_delay" = "字幕ディレイ: %.2fs";
+"menu.fullscreen" = "フルスクリーン化";
+"menu.exit_fullscreen" = "フルスクリーンを解除";
 "menu.pip" = "Enter Picture-in-Picture";
 "menu.exit_pip" = "Exit Picture-in-Picture";
-"menu.pause" = "Pause";
-"menu.resume" = "Resume";
+"menu.pause" = "一時停止";
+"menu.resume" = "再生";
 
-"track.none" = "<None>";
+"track.none" = "<なし>";
 
 // Alerts
-"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
-"alert.mpv_error" = "Error %@ (%@) when setting user option %@.";
-"alert.sleep" = "Cannot prevent display sleep!";
+"alert.fatal_error" = "致命的なエラー: %@ \nアプリケーションを終了します。";
+"alert.mpv_error" = "ユーザーオプション %@ 設定時にエラー %@ (%@)が発生しました。";
+"alert.sleep" = "ディスプレイのスリープを解除できません!";
 
-"alert.unsupported_audio" = "Unsupported external audio file.";
-"alert.unsupported_sub" = "Unsupported external subtitle.";
-"alert.unsupported_url" = "Unsupported URL.";
-"alert.wrong_url_format" = "Wrong URL format.";
+"alert.unsupported_audio" = "対応していない外部のオーディオファイルです。";
+"alert.unsupported_sub" = "対応していない外部の字幕ファイルです。";
+"alert.unsupported_url" = "対応していないURLです。";
+"alert.wrong_url_format" = "URLの形式が間違っています。";
 
-"alert.error_open" = "Cannot open file or stream!";
-"alert.error_finding_file" = "Cannot find %@ file!";
-"alert.error_loading_script" = "Cannot load script %@!";
-"alert.error_saving_file" = "Error occured when saving %@: %@";
-"alert.error_deleting_file" = "Cannot delete the file.";
+"alert.error_open" = "ファイルもしくはURLを開けません!";
+"alert.error_finding_file" = "%@ が見つかりません!";
+"alert.error_loading_script" = "スクリプトを読み込めません %@!";
+"alert.error_saving_file" = "保存時にエラーが起きました %@: %@";
+"alert.error_deleting_file" = "ファイルを削除できません。";
 
-"alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "The name already exists.";
-"alert.config.cannot_create" = "Cannot create config file!";
-"alert.config.cannot_write" = "Cannot write to config file!";
+"alert.config.empty_name" = "名前を入力してください。";
+"alert.config.name_existing" = "すでに同名のファイルが存在しています。";
+"alert.config.cannot_create" = "設定ファイルは作成できません!";
+"alert.config.cannot_write" = "設定ファイルには書き込めません!";
 
-"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "フィルタの設定時にエラーが起きました。パラメータの形式を確認してください。";
 
-"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+"alert.keybinding_config.error" = "キーバインディングの設定ファイル読み込み時にエラーが発生しました \"%@\"! IINAのデフォルト設定に戻します。設定を確認してください。";
 
-"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
-"alert.extra_option.empty" = "Key or value cannot be empty!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
-"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+"alert.extra_option.cannot_read" = "mpvの追加オプションを読み込めません。";
+"alert.extra_option.empty" = "キーもしくは値を空にできません!";
+"alert.extra_option.error" = "オプションの設定 --%@=%@ 返り値 %d でエラーが発生しました。設定 > 拡張 より追加オプションの設定を確認してください。";
+"alert.extra_option.config_folder" = "設定ディレクトリの設定エラー\"%@\".";
 
-"alert.playlist.error_deleting" = "Error deleting: %@";
+"alert.playlist.error_deleting" = "削除エラー: %@";
 
-"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using opensubtitles. English(eng) will be used this time.";
-"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
-"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+"alert.sub.no_selected" = "最初にダウンロードした字幕を選択してください。";
+"alert.sub_lang_not_set" = "opensubtitlesを利用する前に、環境設定で字幕の優先言語を設定してください。英語(eng)が今回使用されます。";
+"alert.sub.cannot_save_passwd" = "パスワードをKeychainに保存できません: %@";
+"alert.sub.cannot_login" = "ログインできません。ユーザー名とパスワード、ネットワーク環境をご確認ください。\n\n%@";
 
 
-"pl_menu.title_multi" = "%d Items";
-"pl_menu.play_next" = "Play Next";
-"pl_menu.remove" = "Remove";
-"pl_menu.remove_multi" = "Remove Selected";
-"pl_menu.delete" = "Move to Trash";
-"pl_menu.delete_multi" = "Move Selected Files to Trash";
-"pl_menu.delete_after_play" = "Move to Trash After Playback";
-"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
-"pl_menu.reveal_in_finder" = "Reveal in Finder";
-"pl_menu.add_item" = "Add Item…";
-"pl_menu.clear_playlist" = "Clear Playlist";
+"pl_menu.title_multi" = "%d個のアイテム";
+"pl_menu.play_next" = "次を再生";
+"pl_menu.remove" = "削除";
+"pl_menu.remove_multi" = "選択して削除";
+"pl_menu.delete" = "ゴミ箱へ移動";
+"pl_menu.delete_multi" = "選択したファイルをゴミ箱へ移動";
+"pl_menu.delete_after_play" = "再生した後にゴミ箱へ移動";
+"pl_menu.delete_after_play_multi" = "再生した後に選択したファイルをゴミ箱へ移動";
+"pl_menu.reveal_in_finder" = "Finderで表示";
+"pl_menu.add_item" = "アイテムの追加…";
+"pl_menu.clear_playlist" = "プレイリストのクリア";
 
-"keymapping.title" = "Key Mapping";
-"keymapping.message" = "Press any key to record.";
+"keymapping.title" = "キーマッピング";
+"keymapping.message" = "保存するには何かキーを押してください。";

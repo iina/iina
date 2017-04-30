@@ -41,4 +41,9 @@ class HistoryController: NSObject {
     save()
   }
 
+  func remove(_ entry: PlaybackHistory) {
+    history = history.filter { $0 != entry }
+    save()
+  }
+
 }

@@ -136,6 +136,8 @@
 		84C6D3601EAF69DC009BF721 /* libbluray.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA161E407DF7008BB852 /* libbluray.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84C6D3621EAF8D63009BF721 /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6D3611EAF8D63009BF721 /* HistoryController.swift */; };
 		84C6D3641EB276E9009BF721 /* PlaybackHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6D3631EB276E9009BF721 /* PlaybackHistory.swift */; };
+		84C6D3671EB2A427009BF721 /* HistoryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6D3651EB2A427009BF721 /* HistoryWindowController.swift */; };
+		84C6D3681EB2A427009BF721 /* HistoryWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6D3661EB2A427009BF721 /* HistoryWindowController.xib */; };
 		84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D58E1D794CE600D98A0E /* MPVFilter.swift */; };
 		84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D5901D796F9700D98A0E /* Aspect.swift */; };
 		84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */; };
@@ -459,6 +461,8 @@
 		84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabelOverflowedView.swift; sourceTree = "<group>"; };
 		84C6D3611EAF8D63009BF721 /* HistoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
 		84C6D3631EB276E9009BF721 /* PlaybackHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackHistory.swift; sourceTree = "<group>"; };
+		84C6D3651EB2A427009BF721 /* HistoryWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryWindowController.swift; sourceTree = "<group>"; };
+		84C6D3661EB2A427009BF721 /* HistoryWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryWindowController.xib; sourceTree = "<group>"; };
 		84C8D58E1D794CE600D98A0E /* MPVFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVFilter.swift; sourceTree = "<group>"; };
 		84C8D5901D796F9700D98A0E /* Aspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aspect.swift; sourceTree = "<group>"; };
 		84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVPlaylistItem.swift; sourceTree = "<group>"; };
@@ -758,6 +762,8 @@
 				8400D5DA1E1AB31B006785F5 /* AboutWindowController.xib */,
 				84AC621D1E87A4F3002D6F92 /* OpenURLAccessoryViewController.swift */,
 				84AC62231E87C6CF002D6F92 /* OpenURLAccessoryViewController.xib */,
+				84C6D3651EB2A427009BF721 /* HistoryWindowController.swift */,
+				84C6D3661EB2A427009BF721 /* HistoryWindowController.xib */,
 				84D377691D74163B007F7396 /* Video */,
 				84D377681D7413D8007F7396 /* Accessories */,
 				8452DD7F1D3A1F2A008A543A /* Preference */,
@@ -1051,6 +1057,7 @@
 				845AC09C1E1AE6C10080B614 /* Localizable.strings in Resources */,
 				8400D5F61E1AB34D006785F5 /* PrefNetworkViewController.xib in Resources */,
 				8400D5D51E1AB317006785F5 /* FilterWindowController.xib in Resources */,
+				84C6D3681EB2A427009BF721 /* HistoryWindowController.xib in Resources */,
 				8400D5DE1E1AB32A006785F5 /* PrefGeneralViewController.xib in Resources */,
 				8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */,
 			);
@@ -1157,6 +1164,7 @@
 				84A886F31E26CA24008755BB /* Regex.swift in Sources */,
 				8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */,
 				8450403D1E0A9EE20079C194 /* InspectorWindowController.swift in Sources */,
+				84C6D3671EB2A427009BF721 /* HistoryWindowController.swift in Sources */,
 				9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */,
 				840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */,
 				841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */,

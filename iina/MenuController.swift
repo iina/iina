@@ -112,6 +112,7 @@ class MenuController: NSObject, NSMenuDelegate {
     deleteCurrentFile.action = #selector(MainWindowController.menuDeleteCurrentFile(_:))
 
     historyMenu.delegate = self
+    updateHistory()
     
     // Playback menu
 
@@ -268,6 +269,10 @@ class MenuController: NSObject, NSMenuDelegate {
     let workspace = NSWorkspace.shared()
     let iconRect = NSRect(x: 0, y: 0, width: 16, height: 16)
     historyMenu.removeAllItems()
+    let showHistoryMenuItem = NSMenuItem(title: "Show History", action: #selector(AppDelegate.showHistoryWindow(_:)), keyEquivalent: "h")
+    showHistoryMenuItem.keyEquivalentModifierMask = [.command, .shift]
+    historyMenu.addItem(showHistoryMenuItem)
+    historyMenu.addItem(NSMenuItem.separator())
     for item in HistoryController.shared.history {
       let menuItem = NSMenuItem()
       menuItem.title = item.name

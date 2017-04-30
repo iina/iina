@@ -170,6 +170,9 @@
 "alert.open_url.message" = "Please enter the URL:";
 "alert.choose_media_file.title" = "Choose Media File";
 
+"alert.delete_history.title" = "Delete Playback History";
+"alert.delete_history.message" = "Are you sure to delete select entries?";
+
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.remove" = "Remove";

@@ -46,11 +46,11 @@ class KeyMapping {
     set {
       if newValue.hasPrefix("@iina") {
         privateRawAction = newValue.substring(from: newValue.index(newValue.startIndex, offsetBy: "@iina".characters.count)).trimmingCharacters(in: .whitespaces)
-        action = rawAction.components(separatedBy: " ")
+        action = rawAction.components(separatedBy: .whitespaces).filter { $0.isEmpty }
         isIINACommand = true
       } else {
         privateRawAction = newValue
-        action = rawAction.components(separatedBy: " ")
+        action = rawAction.components(separatedBy: .whitespaces).filter { $0.isEmpty }
         isIINACommand = false
       }
     }
@@ -92,7 +92,7 @@ class KeyMapping {
   init(key: String, rawAction: String, isIINACommand: Bool = false, comment: String? = nil) {
     self.key = key
     self.privateRawAction = rawAction
-    self.action = rawAction.components(separatedBy: " ")
+    self.action = rawAction.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
     self.isIINACommand = isIINACommand
     self.comment = comment
   }
@@ -116,7 +116,7 @@ class KeyMapping {
         line = line.substring(to: sharpIndex)
       }
       // split
-      let splitted = line.characters.split(separator: " ", maxSplits: 1)
+      let splitted = line.characters.split(maxSplits: 1, whereSeparator: { $0 == " " || $0 == "\t"})
       if splitted.count < 2 {
         return nil
       }

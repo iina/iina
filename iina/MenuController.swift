@@ -300,8 +300,8 @@ class MenuController: NSObject, NSMenuDelegate {
     pause.title = PlayerCore.shared.info.isPaused ? Constants.String.resume : Constants.String.pause
     let isLoop = PlayerCore.shared.mpvController.getFlag(MPVOption.PlaybackControl.loopFile)
     fileLoop.state = isLoop ? NSOnState : NSOffState
-    let loopStatus = PlayerCore.shared.mpvController.getString(MPVOption.PlaybackControl.loop)
-    playlistLoop.state = (loopStatus == "inf" || loopStatus == "force") ? NSOnState : NSOffState
+    let isPlaylistLoop = PlayerCore.shared.mpvController.getString(MPVOption.PlaybackControl.loopPlaylist)
+    playlistLoop.state = (isPlaylistLoop == "inf" || isPlaylistLoop == "force") ? NSOnState : NSOffState
   }
 
   private func updateVideoMenu() {

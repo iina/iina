@@ -24,7 +24,7 @@
 "cmd.playlist-clear" = "Cancella playlist";
 "cmd.playlist-remove" = "Rimuovi";
 "cmd.playlist-shuffle" = "Mescola";
-"cmd.write-watch-later-config" = "Registra storia delle riproduzioni";
+"cmd.write-watch-later-config" = "Salva momento di riproduzione";
 "cmd.stop" = "Stop";
 "cmd.quit" = "Esci";
 "cmd.quit-watch-later" = "Esci (salva stato attuale)";
@@ -34,6 +34,23 @@
 "cmd.loadlist" = "Carica playlist";
 "cmd.run" = "Run";
 
+"iina.flip" = "Capovolgi";
+"iina.mirror" = "Specchia";
+
+"iina.toggle-pip" = "Inverti Picture-in-Picture";
+"iina.open-file" = "Apri file";
+"iina.open-url" = "Apri URL";
+"iina.video-panel" = "Pannello video";
+"iina.audio-panel" = "Pannello audio";
+"iina.sub-panel" = "Pannello sottotitoli";
+"iina.playlist-panel" = "Pannello playlist";
+"iina.chapter-panel" = "Pannello capitoli";
+"iina.toggle-flip" = "Inverti capovolgi";
+"iina.toggle-mirror" = "Inverti specchia";
+"iina.save-playlist" = "Salva playlist corrente";
+"iina.delete-current-file" = "Elimina file corrente";
+"iina.find-online-subs" = "Trova sottotitoli online";
+"iina.save-downloaded-sub" = "Salva i sottotitoli scaricati";
 
 "yes" = "Si";
 "no" = "No";
@@ -59,6 +76,7 @@
 "opt.speed" = "Velocità";
 
 "opt.video" = "Traccia video";
+"opt.video-aspect" = "Aspetto video";
 "opt.contrast" = "Contrasto";
 "opt.brightness" = "Luminosità";
 "opt.gamma" = "Gamma";
@@ -68,7 +86,7 @@
 "opt.audio" = "Traccia audio";
 "opt.volume" = "Volume";
 "opt.mute" = "Silenzio";
-"opt.audio-delay" = "Tirtardo audio";
+"opt.audio-delay" = "Rirtardo audio";
 
 "opt.sub" = "Traccia sottotitoli";
 "opt.sub-delay" = "Ritardo sottotitoli";
@@ -77,6 +95,7 @@
 "opt.sub-visibility" = "Visibilità sottotitotli";
 
 "opt.fullscreen" = "Schermo intero";
+"opt.ontop" = "Mostra in primo piano";
 
 "opt.chapter" = "Capitolo";
 

@@ -82,7 +82,7 @@
 "preference.subtitle" = "Sottotitoli";
 "preference.network" = "Network";
 "preference.control" = "Controlli";
-"preference.keybindings" = "Scorciatoie di tastiera";
+"preference.keybindings" = "Abbreviazioni";
 "preference.advanced" = "Avanzate";
 "preference.scripts" = "Script";
 "preference.not_logged_in" = "Accesso non effettuato";
@@ -148,3 +148,6 @@
 "pl_menu.reveal_in_finder" = "Mostra nel Finder";
 "pl_menu.add_item" = "Aggiungi elementi…";
 "pl_menu.clear_playlist" = "Cancella la playlist";
+
+"keymapping.title" = "Abbreviazioni";
+"keymapping.message" = "Premi i nuovi tasti per aggiungere o modficare le abbreviazioni.";

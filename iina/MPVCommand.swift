@@ -28,7 +28,7 @@ struct MPVCommand: RawRepresentable {
   static let cycle = MPVCommand("cycle")
   /** multiply <property> <factor> */
   static let multiply = MPVCommand("multiply")
-  /** screenshot [subtitles|video|window|- [single|each-frame]] */
+  /** screenshot [subtitles|video|window|single|each-frame] */
   static let screenshot = MPVCommand("screenshot")
   /** screenshot-to-file "<filename>" [subtitles|video|window] */
   static let screenshotToFile = MPVCommand("screenshot-to-file")
@@ -70,6 +70,8 @@ struct MPVCommand: RawRepresentable {
   static let printText = MPVCommand("print-text")
   /** show-text "<string>" [<duration>|- [<level>]] */
   static let showText = MPVCommand("show-text")
+  /** expand-text "<string>" */
+  static let expandText = MPVCommand("expand-text")
   /** show-progress */
   static let showProgress = MPVCommand("show-progress")
   /** write-watch-later-config */

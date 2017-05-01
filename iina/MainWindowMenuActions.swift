@@ -56,12 +56,10 @@ extension MainWindowController {
 
   @IBAction func menuSnapshot(_ sender: NSMenuItem) {
     playerCore.screenShot()
-    displayOSD(.screenShot)
   }
 
   @IBAction func menuABLoop(_ sender: NSMenuItem) {
     playerCore.abLoop()
-    displayOSD(.abLoop(playerCore.info.abLoopStatus))
   }
 
   @IBAction func menuFileLoop(_ sender: NSMenuItem) {
@@ -213,7 +211,9 @@ extension MainWindowController {
     if vw == 0 { vw = AppData.widthWhenNoVideo }
     if vh == 0 { vh = AppData.heightWhenNoVideo }
     
-    var retinaSize = w.convertFromBacking(NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(vw), CGFloat(vh)))
+    let useRetinaSize = ud.bool(forKey: Preference.Key.usePhysicalResolution)
+    let logicalSize = NSRect(x: w.frame.origin.x, y: w.frame.origin.y, width: CGFloat(vw), height: CGFloat(vh))
+    var retinaSize = useRetinaSize ? w.convertFromBacking(logicalSize) : logicalSize
     let screenFrame = NSScreen.main()!.visibleFrame
     let newFrame: NSRect
     let sizeMap: [CGFloat] = [0.5, 1, 2]
@@ -407,6 +407,17 @@ extension MainWindowController {
                                                             error.localizedDescription])
         }
       }
+    }
+  }
+
+  @IBAction func menuDeleteCurrentFile(_ sender: NSMenuItem) {
+    guard let url = playerCore.info.currentURL else { return }
+    do {
+      let index = playerCore.mpvController.getInt(MPVProperty.playlistPos)
+      playerCore.playlistRemove(index)
+      try FileManager.default.trashItem(at: url, resultingItemURL: nil)
+    } catch let error {
+      Utility.showAlert("playlist.error_deleting", arguments: [error.localizedDescription])
     }
   }
 

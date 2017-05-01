@@ -118,7 +118,7 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
 
   private func updateCommandField() {
     guard let criterions = ruleEditor.criteria(forRow: 0) as? [Criterion] else { return }
-    actionTextField.stringValue = KeyBindingTranslator.string(fromCriterions: criterions)
+    actionTextField.stringValue = KeyBindingTranslator.string(fromCriteria: criterions)
   }
 
 }

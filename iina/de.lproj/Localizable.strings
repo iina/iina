@@ -117,7 +117,7 @@
 "alert.error_deleting_file" = "Datei kann nicht gelöscht werden.";
 
 "alert.config.empty_name" = "Dateiname kann nicht leer sein.";
-"alert.config.name_exsisting" = "Dateiname bereits vorhanden.";
+"alert.config.name_existing" = "Dateiname bereits vorhanden.";
 "alert.config.cannot_create" = "Config-Datei kann nicht erzeugt werden!";
 "alert.config.cannot_write" = "Config-Datei konnte nicht geschrieben werden!";
 

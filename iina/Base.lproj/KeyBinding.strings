@@ -34,6 +34,23 @@
 "cmd.loadlist" = "Load playlist";
 "cmd.run" = "Run";
 
+"iina.flip" = "Flip";
+"iina.mirror" = "Mirror";
+
+"iina.toggle-pip" = "Toggle Picture-in-Picture";
+"iina.open-file" = "Open file";
+"iina.open-url" = "Open URL";
+"iina.video-panel" = "Video panel";
+"iina.audio-panel" = "Audio panel";
+"iina.sub-panel" = "Subtitle panel";
+"iina.playlist-panel" = "Playlist panel";
+"iina.chapter-panel" = "Chapter panel";
+"iina.toggle-flip" = "Toggle flip";
+"iina.toggle-mirror" = "Toggle mirror";
+"iina.save-playlist" = "Save current playlist";
+"iina.delete-current-file" = "Delete current file";
+"iina.find-online-subs" = "Find online subtitles";
+"iina.save-downloaded-sub" = "Save downloaded subtitle";
 
 "yes" = "Yes";
 "no" = "No";
@@ -59,6 +76,7 @@
 "opt.speed" = "Speed";
 
 "opt.video" = "Video track";
+"opt.video-aspect" = "Video aspect";
 "opt.contrast" = "Contrast";
 "opt.brightness" = "Brightness";
 "opt.gamma" = "Gamma";
@@ -78,6 +96,7 @@
 "opt.sub-ass-style-override" = "ASS style override";
 
 "opt.fullscreen" = "Fullscreen";
+"opt.ontop" = "Float on top";
 
 "opt.chapter" = "Chapter";
 

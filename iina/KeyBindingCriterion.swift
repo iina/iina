@@ -11,6 +11,7 @@ import Cocoa
 class Criterion: NSObject {
 
   var isPlaceholder = false
+  var isIINACommand = false
 
   var children: [Criterion]
 

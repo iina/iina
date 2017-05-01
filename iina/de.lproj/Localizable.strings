@@ -9,13 +9,15 @@
 // Common
 "on" = "An";
 "off" = "Aus";
+"login" = "Einloggen";
+"logout" = "Ausloggen";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "PLAYLIST";
 "playlist.chapter_cap" = "KAPITEL";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffern... %d%%";
+"main.buffering_indicator" = "Puffern... %d%%";
 
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "Standard";
@@ -59,6 +61,9 @@
 "osd.sub_downloaded" = "Untertitel geladen";
 "osd.sub_saved" = "Untertitel gespeichert";
 "osd.network_error" = "Netzwerkfehler";
+"osd.file_error" = "Dateilesefehler";
+"osd.cannot_login" = "Einloggen nicht möglich";
+"osd.canceled" = "Abgebrochen";
 
 "update.title_update_found" = "Neues Update verfügbar";
 "update.title_no_update" = "Kein Update verfügbar";
@@ -80,15 +85,69 @@
 "preference.keybindings" = "Tastenkürzel";
 "preference.advanced" = "Erweitert";
 "preference.scripts" = "Skripte";
+"preference.not_logged_in" = "nicht eingeloggt";
+"preference.logged_in_as" = "Eingeloggt als %@";
 
 "menu.volume"= "Lautstärke: %d";
 "menu.audio_delay" = "Audio-Verzögerung: %.2fs";
 "menu.sub_delay" = "Untertitel-Verzögerung: %.2fs";
 "menu.fullscreen" = "Vollbild";
 "menu.exit_fullscreen" = "Vollbild beenden";
+"menu.pip" = "Picture-in-Picture starten";
+"menu.exit_pip" = "Picture-in-Picture beenden";
 "menu.pause" = "Pausieren";
 "menu.resume" = "Fortsetzen";
 
 "track.none" = "<Leer>";
 
-"alert.extra_option_error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+//Alerts
+"alert.fatal_error" = "Schwerer Fehler: %@ \nProgramm wird beendet.";
+"alert.mpv_error" = "Fehler %@ (%@) beim setzen der Benutzereinstellung %@.";
+"alert.sleep" = "Monitorruhezustand kann nicht abeschaltet werden!";
+
+"alert.unsupported_audio" = "Externe Audio-Datei nicht unterstützt.";
+"alert.unsupported_sub" = "Externe Untertitel-Datei nicht unterstützt.";
+"alert.unsupported_url" = "URL wird nicht unterstützt.";
+"alert.wrong_url_format" = "Falsche URL-Format.";
+
+"alert.error_open" = "Datei oder Stream kann nicht geöffnet werden!";
+"alert.error_finding_file" = "Datei %@ kann nicht gefunden werden!";
+"alert.error_loading_script" = "Das Skript %@ kann nicht geladen werden!";
+"alert.error_saving_file" = "Fehler beim Speichern von %@: %@";
+"alert.error_deleting_file" = "Datei kann nicht gelöscht werden.";
+
+"alert.config.empty_name" = "Dateiname kann nicht leer sein.";
+"alert.config.name_existing" = "Dateiname bereits vorhanden.";
+"alert.config.cannot_create" = "Config-Datei kann nicht erzeugt werden!";
+"alert.config.cannot_write" = "Config-Datei konnte nicht geschrieben werden!";
+
+"alert.filter.incorrect" = "Fehler bei den Filtereinstellungen. Bitte Werte überprüfen.";
+
+"alert.keybinding_config.error" = "Die Konfigurationsdatei für die Tastaturkürzel \"%@\" konnnte nicht gelesen werden! Standardtastaturkürzel werden benutzt. Bitte die Konfiguration überprüfen.";
+
+"alert.extra_option.cannot_read" = "Die Benutzerkonfiguration für die erweiterten mpv Optionen kann nicht gelesen werden.";
+"alert.extra_option.empty" = "Schlüsse oder Wert kann nicht leer bleiben!";
+"alert.extra_option.error" = "Fehler beim setzen der Option --%@=%@ Rückgabewert %d. Bitte die die Erweiterten Einstellungen überprüfen Einstellungen > Erweitert.";
+"alert.extra_option.config_folder" = "Konfigurationsverzeichnis konnte nicht ausgewählt werden. \"%@\".";
+
+"alert.playlist.error_deleting" = "Fehler beim Löschen: %@";
+
+"alert.sub.no_selected" = "Bitte zuerst eine Untertiteldatei wählen.";
+"alert.sub_lang_not_set" = "Vor der Benutzung von opensubtitles bitte zuerst in den Einstellungen die bevorzugte Sprache für Untertitel wählen. Benutze jetzt Englisch(eng).";
+"alert.sub.cannot_save_passwd" = "Passwort konnte nicht im Schlüsselbund gespeichert werden: %@";
+"alert.sub.cannot_login" = "Einloggen nicht möglich. Bitte Benutzername, Passwort und Netzwerkverbindung prüfen.\n\n%@";
+
+"pl_menu.title_multi" = "%d Einträge";
+"pl_menu.play_next" = "Nächsten Eintrag abspielen";
+"pl_menu.remove" = "Entfernen";
+"pl_menu.remove_multi" = "Ausgewählte entfernen";
+"pl_menu.delete" = "In den Papierkorb legen;
+"pl_menu.delete_multi" = "Ausgewählte Objekte in den Papierkorb legen.";
+"pl_menu.delete_after_play" = "Nach dem Abspielen in den Papierkorb legen.";
+"pl_menu.delete_after_play_multi" = "Ausgewählte Objekte nach dem Abspielen in den Papierkorb legen.";
+"pl_menu.reveal_in_finder" = "Im Finder anzeigen";
+"pl_menu.add_item" = "Hinzufügen …";
+"pl_menu.clear_playlist" = "Playlist leeren";
+
+"keymapping.title" = "Tastaturkürzel";
+"keymapping.message" = "Für Aufnahme beliebige Taste drücken.";

@@ -17,6 +17,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var file: NSMenuItem!
   @IBOutlet weak var open: NSMenuItem!
   @IBOutlet weak var savePlaylist: NSMenuItem!
+  @IBOutlet weak var deleteCurrentFile: NSMenuItem!
   // Playback
   @IBOutlet weak var playbackMenu: NSMenu!
   @IBOutlet weak var pause: NSMenuItem!
@@ -107,6 +108,7 @@ class MenuController: NSObject, NSMenuDelegate {
     // File menu
     
     savePlaylist.action = #selector(MainWindowController.menuSavePlaylist(_:))
+    deleteCurrentFile.action = #selector(MainWindowController.menuDeleteCurrentFile(_:))
     
     // Playback menu
 
@@ -298,8 +300,8 @@ class MenuController: NSObject, NSMenuDelegate {
     pause.title = PlayerCore.shared.info.isPaused ? Constants.String.resume : Constants.String.pause
     let isLoop = PlayerCore.shared.mpvController.getFlag(MPVOption.PlaybackControl.loopFile)
     fileLoop.state = isLoop ? NSOnState : NSOffState
-    let loopStatus = PlayerCore.shared.mpvController.getString(MPVOption.PlaybackControl.loop)
-    playlistLoop.state = (loopStatus == "inf" || loopStatus == "force") ? NSOnState : NSOffState
+    let isPlaylistLoop = PlayerCore.shared.mpvController.getString(MPVOption.PlaybackControl.loopPlaylist)
+    playlistLoop.state = (isPlaylistLoop == "inf" || isPlaylistLoop == "force") ? NSOnState : NSOffState
   }
 
   private func updateVideoMenu() {

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12117" systemVersion="16E189a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12117"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -310,17 +311,13 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="236" id="mhI-LR-I5w"/>
                                                                     </constraints>
-                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="24" doubleValue="8" tickMarkPosition="below" numberOfTickMarks="25" allowsTickMarkValuesOnly="YES" sliderType="linear" id="qxp-Lt-D6o"/>
+                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="24" doubleValue="8" tickMarkPosition="below" numberOfTickMarks="25" sliderType="linear" id="qxp-Lt-D6o"/>
                                                                     <connections>
                                                                         <action selector="speedChangedAction:" target="-2" id="asr-iq-ZNJ"/>
                                                                     </connections>
                                                                 </slider>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3EN-WD-QNI" userLabel="Speed Slider Indicator">
-                                                                    <rect key="frame" x="86" y="312" width="32" height="14"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="14" id="Fo3-vO-Bk1"/>
-                                                                        <constraint firstAttribute="width" constant="28" id="UMm-n3-mDl"/>
-                                                                    </constraints>
+                                                                    <rect key="frame" x="92" y="312" width="19" height="13"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="1x" usesSingleLineMode="YES" id="ldQ-YL-IEp">
                                                                         <font key="font" metaFont="system" size="10"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -575,7 +572,7 @@
                                                                 <constraint firstItem="ykw-rb-M9D" firstAttribute="top" secondItem="Ng5-FC-tts" secondAttribute="bottom" constant="8" id="6Od-LZ-fNN"/>
                                                                 <constraint firstItem="7vv-En-VYY" firstAttribute="top" secondItem="kUi-hW-BR6" secondAttribute="bottom" constant="22" id="7nW-Fa-zR9"/>
                                                                 <constraint firstAttribute="trailing" secondItem="ntv-89-1iw" secondAttribute="trailing" constant="51" id="8GY-ka-LVa"/>
-                                                                <constraint firstItem="3EN-WD-QNI" firstAttribute="leading" secondItem="UWh-M9-5Nw" secondAttribute="leading" constant="67" id="92J-9M-Lrn"/>
+                                                                <constraint firstItem="3EN-WD-QNI" firstAttribute="centerX" secondItem="UWh-M9-5Nw" secondAttribute="leading" constant="80" id="92J-9M-Lrn"/>
                                                                 <constraint firstItem="KVn-1o-Qzh" firstAttribute="top" secondItem="dFy-zT-BqP" secondAttribute="bottom" constant="19" id="970-TZ-ALY"/>
                                                                 <constraint firstItem="8ZJ-PD-t0R" firstAttribute="leading" secondItem="5v4-Te-950" secondAttribute="leading" constant="19" id="9Sd-Mo-oNR"/>
                                                                 <constraint firstItem="ItN-JT-puN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kUi-hW-BR6" secondAttribute="trailing" constant="8" id="AE2-Nj-RJv"/>
@@ -789,7 +786,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="240" id="Rhl-RX-l4v"/>
                                                                     </constraints>
-                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="-5" maxValue="5" tickMarkPosition="below" numberOfTickMarks="21" allowsTickMarkValuesOnly="YES" sliderType="linear" id="ERU-lE-Yhg"/>
+                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="-5" maxValue="5" tickMarkPosition="below" numberOfTickMarks="21" sliderType="linear" id="ERU-lE-Yhg"/>
                                                                     <connections>
                                                                         <action selector="audioDelayChangedAction:" target="-2" id="egE-eN-9bo"/>
                                                                     </connections>
@@ -1102,7 +1099,7 @@
                                                                 <constraint firstItem="KKr-0Y-831" firstAttribute="leading" secondItem="my2-5o-bNb" secondAttribute="leading" id="AXq-h3-TVD"/>
                                                                 <constraint firstItem="0DM-CY-o8W" firstAttribute="centerY" secondItem="a7T-nr-ELY" secondAttribute="centerY" constant="-1" id="B5R-Ja-IjZ"/>
                                                                 <constraint firstItem="a7T-nr-ELY" firstAttribute="top" secondItem="gR7-cS-zmu" secondAttribute="bottom" constant="2" id="C2d-F4-WIg"/>
-                                                                <constraint firstItem="gR7-cS-zmu" firstAttribute="leading" secondItem="a7T-nr-ELY" secondAttribute="leading" constant="112" id="Er7-gv-OMp"/>
+                                                                <constraint firstItem="gR7-cS-zmu" firstAttribute="centerX" secondItem="a7T-nr-ELY" secondAttribute="leading" constant="120" id="Er7-gv-OMp"/>
                                                                 <constraint firstItem="doa-7T-eeK" firstAttribute="top" secondItem="a7T-nr-ELY" secondAttribute="bottom" id="FFk-YH-GZp"/>
                                                                 <constraint firstItem="C39-jO-zwp" firstAttribute="top" secondItem="a7T-nr-ELY" secondAttribute="bottom" id="GZM-yD-gvm"/>
                                                                 <constraint firstAttribute="trailing" secondItem="KKr-0Y-831" secondAttribute="trailing" id="HbW-t2-Z43"/>
@@ -1332,7 +1329,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="240" id="Qpm-gC-Y2e"/>
                                                                     </constraints>
-                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-5" maxValue="5" tickMarkPosition="below" numberOfTickMarks="21" allowsTickMarkValuesOnly="YES" sliderType="linear" id="h1D-gP-Dst"/>
+                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-5" maxValue="5" tickMarkPosition="below" numberOfTickMarks="21" sliderType="linear" id="h1D-gP-Dst"/>
                                                                     <connections>
                                                                         <action selector="subDelayChangedAction:" target="-2" id="rzg-cd-v6B"/>
                                                                     </connections>
@@ -1399,7 +1396,7 @@
                                                                 <constraint firstItem="kzp-GR-Sy4" firstAttribute="centerX" secondItem="dXz-x4-sm5" secondAttribute="centerX" id="33J-Xb-Xbh"/>
                                                                 <constraint firstItem="cOv-Yl-KdH" firstAttribute="leading" secondItem="Wuf-PX-OYd" secondAttribute="leading" constant="19" id="55g-oO-gXc"/>
                                                                 <constraint firstItem="cOv-Yl-KdH" firstAttribute="top" secondItem="SpJ-zD-xUM" secondAttribute="bottom" constant="27" id="5dh-Cb-Z5Q"/>
-                                                                <constraint firstItem="VdJ-nq-zaM" firstAttribute="leading" secondItem="dXz-x4-sm5" secondAttribute="leading" constant="112" id="7t1-v0-J55"/>
+                                                                <constraint firstItem="VdJ-nq-zaM" firstAttribute="centerX" secondItem="dXz-x4-sm5" secondAttribute="leading" constant="120" id="7t1-v0-J55"/>
                                                                 <constraint firstItem="kzp-GR-Sy4" firstAttribute="top" secondItem="dXz-x4-sm5" secondAttribute="bottom" id="9mp-6s-MHB"/>
                                                                 <constraint firstItem="dXz-x4-sm5" firstAttribute="top" secondItem="cOv-Yl-KdH" secondAttribute="bottom" constant="22" id="Axq-IW-PvK"/>
                                                                 <constraint firstItem="3xe-mv-ORw" firstAttribute="leading" secondItem="Wuf-PX-OYd" secondAttribute="leading" constant="19" id="C4V-Gw-CZp"/>

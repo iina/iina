@@ -36,6 +36,8 @@ class PlayerCore: NSObject {
   // need enter fullscreen for nect file
   var needEnterFullScreenForNextMedia: Bool = true
 
+  static var keyBindings: [String: KeyMapping] = [:]
+
   // MARK: - Control commands
 
   // Open a file
@@ -47,10 +49,13 @@ class PlayerCore: NSObject {
     openMainWindow(path: path, url: url!, isNetwork: false)
   }
 
+  func openURL(_ url: URL) {
+    let path = url.absoluteString
+    openMainWindow(path: path, url: url, isNetwork: true)
+  }
+
   func openURLString(_ str: String) {
-    // FIXME: Technically, we shouldn't be percent encoding the whole URL with
-    // one character set.
-    guard let str = str.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
+    guard let str = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed),
       let url = URL(string: str) else {
         return
     }
@@ -64,8 +69,8 @@ class PlayerCore: NSObject {
     }
     info.currentURL = url
     info.isNetworkResource = isNetwork
-     mainWindow!.showWindow(nil)
-     mainWindow!.windowDidOpen()
+    mainWindow!.showWindow(nil)
+    mainWindow!.windowDidOpen()
     // Send load file command
     info.fileLoading = true
     info.justOpenedFile = true
@@ -80,6 +85,18 @@ class PlayerCore: NSObject {
       path = customYtdlPath + ":" + path
     }
     setenv("PATH", path, 1)
+
+    // load keybindings
+    let userConfigs = UserDefaults.standard.dictionary(forKey: Preference.Key.inputConfigs)
+    var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["IINA Default"]
+    if let confFromUd = UserDefaults.standard.string(forKey: Preference.Key.currentInputConfigName) {
+      if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
+        inputConfPath = currentConfigFilePath
+      }
+    }
+    let mapping = KeyMapping.parseInputConf(at: inputConfPath!)!
+    PlayerCore.keyBindings = [:]
+    mapping.forEach { PlayerCore.keyBindings[$0.key.lowercased()] = $0 }
 
     // set http proxy
     if let proxy = ud.string(forKey: Preference.Key.httpProxy), !proxy.isEmpty {
@@ -197,6 +214,7 @@ class PlayerCore: NSObject {
   func screenShot() {
     let option = ud.bool(forKey: Preference.Key.screenshotIncludeSubtitle) ? "subtitles" : "video"
     mpvController.command(.screenshot, args: [option])
+    sendOSD(.screenShot)
   }
 
   func abLoop() {
@@ -211,6 +229,7 @@ class PlayerCore: NSObject {
     } else {
       info.abLoopStatus = 1
     }
+    sendOSD(.abLoop(info.abLoopStatus))
   }
 
   func toggleFileLoop() {
@@ -219,9 +238,9 @@ class PlayerCore: NSObject {
   }
 
   func togglePlaylistLoop() {
-    let loopStatus = mpvController.getString(MPVOption.PlaybackControl.loop)
+    let loopStatus = mpvController.getString(MPVOption.PlaybackControl.loopPlaylist)
     let isLoop = (loopStatus == "inf" || loopStatus == "force")
-    mpvController.setString(MPVOption.PlaybackControl.loop, isLoop ? "no" : "inf")
+    mpvController.setString(MPVOption.PlaybackControl.loopPlaylist, isLoop ? "no" : "inf")
   }
 
   func toggleShuffle() {
@@ -558,6 +577,10 @@ class PlayerCore: NSObject {
 
   func fileStarted() {
     info.justStartedFile = true
+    info.disableOSDForFileLoading = true
+    if let path = mpvController.getString(MPVProperty.path) {
+      info.currentURL = URL(fileURLWithPath: path)
+    }
   }
 
   /** This function is called right after file loaded. Should load all meta info here. */
@@ -565,7 +588,7 @@ class PlayerCore: NSObject {
     guard let mw = mainWindow else {
       Utility.fatal("Window is nil at fileLoaded")
     }
-    guard let vwidth = info.videoWidth, let vheight = info.videoHeight else {
+    guard let vwidth = info.displayWidth, let vheight = info.displayHeight else {
       Utility.fatal("Cannot get video width and height")
     }
     invalidateTimer()
@@ -607,6 +630,16 @@ class PlayerCore: NSObject {
         mw.adjustFrameByVideoSize(dwidth, dheight)
       }
     }
+  }
+
+  func playbackRestarted() {
+    DispatchQueue.main.async {
+      Timer.scheduledTimer(timeInterval: TimeInterval(0.2), target: self, selector: #selector(self.reEnableOSDAfterFileLoading), userInfo: nil, repeats: false)
+    }
+  }
+
+  @objc private func reEnableOSDAfterFileLoading() {
+    info.disableOSDForFileLoading = false
   }
 
   // MARK: - Sync with UI in MainWindow
@@ -694,6 +727,12 @@ class PlayerCore: NSObject {
   func sendOSD(_ osd: OSDMessage) {
     // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
     guard let mw = mainWindow, mw.isWindowLoaded else { return }
+
+    if info.disableOSDForFileLoading {
+      guard case .fileStart = osd else {
+        return
+      }
+    }
 
     DispatchQueue.main.async {
       mw.displayOSD(osd)

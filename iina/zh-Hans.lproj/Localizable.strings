@@ -41,7 +41,7 @@
 "osd.subtitle_pos" = "字幕位置：%.1f";
 "osd.mute" = "静音";
 "osd.unmute" = "取消静音";
-"osd.screenshot" = "快照已截取";
+"osd.screenshot" = "已保存截图";
 "osd.abloop.a" = "AB循环：A";
 "osd.abloop.b" = "AB循环：B";
 "osd.abloop.clear" = "AB循环：清除";
@@ -116,7 +116,7 @@
 "alert.error_deleting_file" = "无法删除文件。";
 
 "alert.config.empty_name" = "名称不能为空。";
-"alert.config.name_exsisting" = "此配置名称已存在。";
+"alert.config.name_existing" = "此配置名称已存在。";
 "alert.config.cannot_create" = "无法创建配置文件！";
 "alert.config.cannot_write" = "无法写入配置文件！";
 
@@ -126,13 +126,13 @@
 
 "alert.extra_option.cannot_read" = "无法读取自定义的 mpv 额外选项。";
 "alert.extra_option.empty" = "键或值不能为空！";
-"alert.extra_option_error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";
+"alert.extra_option.error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";
 "alert.extra_option.config_folder" = "设置配置文件目录 \"%@\" 时出现错误。";
 
 "alert.playlist.error_deleting" = "删除 %@ 时出现错误。";
 
 "alert.sub.no_selected" = "请先启用一个下载的字幕。";
-"alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。";
+"alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。\n\n0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";
 "alert.sub.cannot_save_passwd" = "无法将密码保存到钥匙串：%@";
 "alert.sub.cannot_login" = "无法登录。请检查你的用户名、密码及网络状态。\n\n%@";
 

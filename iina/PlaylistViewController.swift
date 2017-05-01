@@ -34,6 +34,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
     case chapters
   }
 
+  var currentTab: TabViewType = .playlist
+
   @IBOutlet weak var playlistTableView: NSTableView!
   @IBOutlet weak var chapterTableView: NSTableView!
   @IBOutlet weak var playlistBtn: NSButton!
@@ -96,7 +98,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
   override func viewDidAppear() {
     reloadData(playlist: true, chapters: true)
 
-    let loopStatus = playerCore.mpvController.getString(MPVOption.PlaybackControl.loop)
+    let loopStatus = playerCore.mpvController.getString(MPVOption.PlaybackControl.loopPlaylist)
     loopBtn.state = (loopStatus == "inf" || loopStatus == "force") ? NSOnState : NSOffState
   }
 
@@ -114,6 +116,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
       chapterTableView.reloadData()
     }
   }
+
+  // MARK: - Tab switching
 
   /** Switch tab (call from other objects) */
   func pleaseSwitchToTab(_ tab: TabViewType) {
@@ -140,6 +144,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
       chaptersBtn.attributedTitle = NSAttributedString(string: chapterStr, attributes: Utility.tabTitleActiveFontAttributes)
       playlistBtn.attributedTitle = NSAttributedString(string: playlistStr, attributes: Utility.tabTitleFontAttributes)
     }
+
+    currentTab = tab
   }
 
   // MARK: - NSTableViewDataSource

@@ -29,7 +29,7 @@ struct AppData {
   static let rotations: [Int] = [0, 90, 180, 270]
 
   /** Seek amount */
-  static let seekAmountMap = [0, 0.001, 0.01, 0.1, 0.5]
+  static let seekAmountMap = [0, 0.05, 0.1, 0.25, 0.5]
   static let seekAmountMapMouse = [0, 0.5, 1, 2, 4]
   static let volumeMap = [0, 0.25, 0.5, 0.75, 1]
 
@@ -41,6 +41,7 @@ struct AppData {
 
   static let githubLink = "https://github.com/lhc70000/iina"
   static let githubReleaseLink = "https://github.com/lhc70000/iina/releases"
+  static let wikiLink = "https://github.com/lhc70000/iina/wiki"
   static let websiteLink = "https://lhc70000.github.io/iina/"
   static let emailLink = "lhc199652@gmail.com"
 
@@ -63,6 +64,7 @@ struct Constants {
     static let degree = "°"
     static let dot = "●"
     static let play = "▶︎"
+    static let videoTimePlaceholder = "--:--:--"
     static let none = NSLocalizedString("track.none", comment: "<None>")
     static let chapter = "Chapter"
     static let fullScreen = NSLocalizedString("menu.fullscreen", comment: "Fullscreen")

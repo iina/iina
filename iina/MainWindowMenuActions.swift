@@ -56,12 +56,10 @@ extension MainWindowController {
 
   @IBAction func menuSnapshot(_ sender: NSMenuItem) {
     playerCore.screenShot()
-    displayOSD(.screenShot)
   }
 
   @IBAction func menuABLoop(_ sender: NSMenuItem) {
     playerCore.abLoop()
-    displayOSD(.abLoop(playerCore.info.abLoopStatus))
   }
 
   @IBAction func menuFileLoop(_ sender: NSMenuItem) {
@@ -78,13 +76,29 @@ extension MainWindowController {
   }
 
   @IBAction func menuShowPlaylistPanel(_ sender: NSMenuItem) {
-    playlistView.pleaseSwitchToTab(.playlist)
-    playlistButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .settings {
+      playlistView.pleaseSwitchToTab(.playlist)
+      playlistButtonAction(sender)
+    } else {
+      if playlistView.currentTab != .playlist {
+        playlistView.pleaseSwitchToTab(.playlist)
+      } else {
+        playlistButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuShowChaptersPanel(_ sender: NSMenuItem) {
-    playlistView.pleaseSwitchToTab(.chapters)
-    playlistButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .settings {
+      playlistView.pleaseSwitchToTab(.chapters)
+      playlistButtonAction(sender)
+    } else {
+      if playlistView.currentTab != .chapters {
+        playlistView.pleaseSwitchToTab(.chapters)
+      } else {
+        playlistButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuChapterSwitch(_ sender: NSMenuItem) {
@@ -95,18 +109,42 @@ extension MainWindowController {
   }
 
   @IBAction func menuShowVideoQuickSettings(_ sender: NSMenuItem) {
-    quickSettingView.pleaseSwitchToTab(.video)
-    settingsButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .playlist {
+      quickSettingView.pleaseSwitchToTab(.video)
+      settingsButtonAction(sender)
+    } else {
+      if quickSettingView.currentTab != .video {
+        quickSettingView.pleaseSwitchToTab(.video)
+      } else {
+        settingsButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuShowAudioQuickSettings(_ sender: NSMenuItem) {
-    quickSettingView.pleaseSwitchToTab(.audio)
-    settingsButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .playlist {
+      quickSettingView.pleaseSwitchToTab(.audio)
+      settingsButtonAction(sender)
+    } else {
+      if quickSettingView.currentTab != .audio {
+        quickSettingView.pleaseSwitchToTab(.audio)
+      } else {
+        settingsButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuShowSubQuickSettings(_ sender: NSMenuItem) {
-    quickSettingView.pleaseSwitchToTab(.sub)
-    settingsButtonAction(sender)
+    if sideBarStatus == .hidden || sideBarStatus == .playlist {
+      quickSettingView.pleaseSwitchToTab(.sub)
+      settingsButtonAction(sender)
+    } else {
+      if quickSettingView.currentTab != .sub {
+        quickSettingView.pleaseSwitchToTab(.sub)
+      } else {
+        settingsButtonAction(sender)
+      }
+    }
   }
 
   @IBAction func menuChangeTrack(_ sender: NSMenuItem) {
@@ -173,7 +211,9 @@ extension MainWindowController {
     if vw == 0 { vw = AppData.widthWhenNoVideo }
     if vh == 0 { vh = AppData.heightWhenNoVideo }
     
-    var retinaSize = w.convertFromBacking(NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(vw), CGFloat(vh)))
+    let useRetinaSize = ud.bool(forKey: Preference.Key.usePhysicalResolution)
+    let logicalSize = NSRect(x: w.frame.origin.x, y: w.frame.origin.y, width: CGFloat(vw), height: CGFloat(vh))
+    var retinaSize = useRetinaSize ? w.convertFromBacking(logicalSize) : logicalSize
     let screenFrame = NSScreen.main()!.visibleFrame
     let newFrame: NSRect
     let sizeMap: [CGFloat] = [0.5, 1, 2]
@@ -299,7 +339,6 @@ extension MainWindowController {
 
   @IBAction func menuFindOnlineSub(_ sender: NSMenuItem) {
     guard let url = playerCore.info.currentURL else { return }
-    displayOSD(.startFindingSub)
     OnlineSubtitle.getSub(forFile: url) { subtitles in
       // send osd in main thread
       self.playerCore.sendOSD(.foundSub(subtitles.count))
@@ -310,7 +349,7 @@ extension MainWindowController {
           case .ok(let url):
             Utility.log("Saved subtitle to \(url.path)")
             self.playerCore.loadExternalSubFile(url)
-            self.playerCore.sendOSD(.downloadedSub)
+            self.playerCore.sendOSD(.downloadedSub(url.lastPathComponent))
             self.playerCore.info.haveDownloadedSub = true
           case .failed:
             self.playerCore.sendOSD(.networkError)
@@ -321,7 +360,7 @@ extension MainWindowController {
   }
 
   @IBAction func saveDownloadedSub(_ sender: NSMenuItem) {
-    let selected = playerCore.info.subTracks.filter { $0.isSelected }
+    let selected = playerCore.info.subTracks.filter { $0.id == playerCore.info.sid }
     guard let currURL = playerCore.info.currentURL else { return }
     guard selected.count > 0 else {
       Utility.showAlert("sub.no_selected")
@@ -368,6 +407,17 @@ extension MainWindowController {
                                                             error.localizedDescription])
         }
       }
+    }
+  }
+
+  @IBAction func menuDeleteCurrentFile(_ sender: NSMenuItem) {
+    guard let url = playerCore.info.currentURL else { return }
+    do {
+      let index = playerCore.mpvController.getInt(MPVProperty.playlistPos)
+      playerCore.playlistRemove(index)
+      try FileManager.default.trashItem(at: url, resultingItemURL: nil)
+    } catch let error {
+      Utility.showAlert("playlist.error_deleting", arguments: [error.localizedDescription])
     }
   }
 

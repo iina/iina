@@ -44,7 +44,7 @@ class PrefSubViewController: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 420))
+    scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 460))
 
     subLangTokenView.delegate = self
     loginIndicator.isHidden = true
@@ -96,6 +96,9 @@ class PrefSubViewController: NSViewController {
     }
   }
 
+  @IBAction func OpenSubHelpBtnAction(_ sender: AnyObject) {
+    NSWorkspace.shared().open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#opensubtitles"))!)
+  }
 }
 
 

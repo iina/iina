@@ -180,9 +180,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  @IBAction func openURL(_ sender: NSMenuItem) {
-    let _ = Utility.quickPromptPanel(messageText: "Open URL", informativeText: "Please enter the url:") { str in
-      playerCore.openURLString(str)
+  @IBAction func openURL(_ sender: AnyObject) {
+    let panel = NSAlert()
+    panel.messageText = "Open URL"
+    panel.informativeText = "Please enter the URL:"
+    let inputViewController = OpenURLAccessoryViewController()
+    panel.accessoryView = inputViewController.view
+    panel.addButton(withTitle: "OK")
+    panel.addButton(withTitle: "Cancel")
+    panel.window.initialFirstResponder = inputViewController.urlField
+    let response = panel.runModal()
+    if response == NSAlertFirstButtonReturn {
+      if let url = inputViewController.url {
+        playerCore.openURL(url)
+      } else {
+        Utility.showAlert("wrong_url_format")
+      }
     }
   }
 
@@ -216,7 +229,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func helpAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: AppData.websiteLink)!.appendingPathComponent("documentation"))
+    NSWorkspace.shared().open(URL(string: AppData.wikiLink)!)
   }
 
   @IBAction func githubAction(_ sender: AnyObject) {

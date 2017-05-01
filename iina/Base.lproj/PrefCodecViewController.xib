@@ -133,6 +133,9 @@
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="pxc-7C-SGP" name="value" keyPath="values.audioLanguage" id="JUe-KZ-wac"/>
+                    </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kas-7q-TbK">
                     <rect key="frame" x="312" y="162" width="91" height="14"/>

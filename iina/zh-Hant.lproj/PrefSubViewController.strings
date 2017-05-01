@@ -2,10 +2,7 @@
 "1vo-so-iaM.title" = "包含媒體檔案名的字幕";
 
 /* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "4EG-eE-S3y"; */
-"4EG-eE-S3y.title" = "垂直位置:";
-
-/* Class = "NSMenuItem"; title = "Shooter.cn"; ObjectID = "5Bo-HI-z0D"; */
-"5Bo-HI-z0D.title" = "射手網";
+"4EG-eE-S3y.title" = "豎直位置:";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "5CZ-8l-KYJ"; */
 "5CZ-8l-KYJ.title" = "邊框";
@@ -27,6 +24,9 @@
 
 /* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "Bjp-HJ-i7V"; */
 "Bjp-HJ-i7V.title" = "無襯線";
+
+/* Class = "NSTextFieldCell"; title = "Opensubtitles account:"; ObjectID = "CKG-r9-NoN"; */
+"CKG-r9-NoN.title" = "Opensubtitles 帳戶:";
 
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "Chj-YP-eFV"; */
 "Chj-YP-eFV.title" = "偏好語言:";
@@ -67,6 +67,9 @@
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "SLQ-wt-k6Y"; */
 "SLQ-wt-k6Y.title" = "背景:";
 
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Uj3-om-L26"; */
+"Uj3-om-L26.title" = "該設定將以ISO 639-2 字符集儲存，兼容於 mpv 和 opensubtitles";
+
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "VBZ-bi-gTh"; */
 "VBZ-bi-gTh.title" = "Y:";
 
@@ -94,6 +97,9 @@
 /* Class = "NSBox"; title = "Font"; ObjectID = "dsH-Ze-lj5"; */
 "dsH-Ze-lj5.title" = "字體";
 
+/* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "fUB-ll-Nvz"; */
+"fUB-ll-Nvz.title" = "未登入";
+
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "i94-zQ-hFA"; */
 "i94-zQ-hFA.title" = "這將導致 ASS 字幕使用以下設定渲染。";
 
@@ -105,6 +111,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "kKv-lk-VPE"; */
 "kKv-lk-VPE.title" = "顏色:";
+
+/* Class = "NSButtonCell"; title = "Login"; ObjectID = "l4s-EW-FkT"; */
+"l4s-EW-FkT.title" = "登入";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "mxc-gq-Ct7"; */
 "mxc-gq-Ct7.title" = "顏色:";

@@ -18,8 +18,8 @@
 "cmd.frame-back-step" = "上一帧";
 "cmd.ab-loop" = "A-B 循环";
 "cmd.sub-seek" = "字幕跳转";
-"cmd.playlist-next" = "上一个媒体";
-"cmd.playlist-prev" = "下一个媒体";
+"cmd.playlist-next" = "下一个媒体";
+"cmd.playlist-prev" = "上一个媒体";
 "cmd.playlist-move" = "移动列表项目";
 "cmd.playlist-clear" = "清空播放列表";
 "cmd.playlist-remove" = "移除当前媒体";
@@ -34,6 +34,23 @@
 "cmd.loadlist" = "加载播放列表";
 "cmd.run" = "运行";
 
+"iina.flip" = "翻转";
+"iina.mirror" = "镜像";
+
+"iina.toggle-pip" = "切换「画中画」模式";
+"iina.open-file" = "打开文件";
+"iina.open-url" = "打开 URL";
+"iina.video-panel" = "视频设置面板";
+"iina.audio-panel" = "音频设置面板";
+"iina.sub-panel" = "字幕设置面板";
+"iina.playlist-panel" = "播放列表面板";
+"iina.chapter-panel" = "章节面板";
+"iina.toggle-flip" = "切换 翻转";
+"iina.toggle-mirror" = "切换 镜像";
+"iina.save-playlist" = "保存当前播放列表";
+"iina.delete-current-file" = "删除当前文件";
+"iina.find-online-subs" = "查找在线字幕";
+"iina.save-downloaded-sub" = "保存已下载的字幕";
 
 "yes" = "是";
 "no" = "否";
@@ -59,11 +76,13 @@
 "opt.speed" = "速度";
 
 "opt.video" = "视频轨道";
+"opt.video-aspect" = "长宽比";
 "opt.contrast" = "对比度";
 "opt.brightness" = "亮度";
 "opt.gamma" = "Gamma";
 "opt.saturation" = "明度";
 "opt.deinterlace" = "反交错";
+
 
 "opt.audio" = "音频轨道";
 "opt.volume" = "音量";
@@ -78,6 +97,7 @@
 "opt.sub-ass-style-override" = "ASS 字幕样式覆盖";
 
 "opt.fullscreen" = "全屏";
+"opt.ontop" = "窗口置顶";
 
 "opt.chapter" = "章节";
 

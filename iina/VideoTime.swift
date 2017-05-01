@@ -10,6 +10,9 @@ import Foundation
 
 class VideoTime {
 
+  static let infinite = VideoTime(999, 0, 0)
+  static let zero = VideoTime(0)
+
   var second: Double
 
   var h: Int {
@@ -90,6 +93,14 @@ func ==(lhs: VideoTime, rhs: VideoTime) -> Bool {
 
 func *(lhs: VideoTime, rhs: Double) -> VideoTime {
   return VideoTime(lhs.second * rhs)
+}
+
+func /(lhs: VideoTime?, rhs: VideoTime?) -> Double? {
+  if let lhs = lhs, let rhs = rhs {
+    return lhs.second / rhs.second
+  } else {
+    return nil
+  }
 }
 
 func -(lhs: VideoTime, rhs: VideoTime) -> VideoTime {

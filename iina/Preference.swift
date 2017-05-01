@@ -29,6 +29,9 @@ struct Preference {
 
     /** Enter fill screen when open (bool) */
     static let fullScreenWhenOpen = "fullScreenWhenOpen"
+    
+    /** Black out other monitors while fullscreen (bool) */
+    static let blackOutMonitor = "blackOutMonitor"
 
     /** Quit when no open window (bool) */
     static let quitWhenNoOpenedWindow = "quitWhenNoOpenedWindow"
@@ -81,6 +84,8 @@ struct Preference {
      but if the file is not opened by user manually (File > Open),
      e.g. jumping to next item in playlist, window size will remoain the same. */
     static let resizeOnlyWhenManuallyOpenFile = "resizeOnlyWhenManuallyOpenFile"
+
+    static let oscPosition = "oscPosition"
 
     // Codec
 
@@ -209,6 +214,12 @@ struct Preference {
     case ultraDark
     case light
     case mediumLight
+  }
+
+  enum OSCPosition: Int {
+    case floating = 0
+    case top
+    case bottom
   }
 
   enum SeekOption: Int {
@@ -346,7 +357,8 @@ struct Preference {
     Key.controlBarPositionHorizontal: Float(0.5),
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,
-    Key.controlBarAutoHideTimeout: Float(5),
+    Key.controlBarAutoHideTimeout: Float(2.5),
+    Key.oscPosition: OSCPosition.floating.rawValue,
     Key.themeMaterial: Theme.dark.rawValue,
     Key.osdAutoHideTimeout: Float(1),
     Key.osdTextSize: Float(20),
@@ -381,22 +393,22 @@ struct Preference {
     Key.ignoreAssStyles: false,
     Key.subOverrideLevel: SubOverrideLevel.strip.rawValue,
     Key.subTextFont: "sans-serif",
-    Key.subTextSize: 55,
+    Key.subTextSize: Float(55),
     Key.subTextColor: NSArchiver.archivedData(withRootObject: NSColor.white),
     Key.subBgColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
     Key.subBold: false,
     Key.subItalic: false,
-    Key.subBlur: 0,
-    Key.subSpacing: 0,
-    Key.subBorderSize: 3,
+    Key.subBlur: Float(0),
+    Key.subSpacing: Float(0),
+    Key.subBorderSize: Float(3),
     Key.subBorderColor: NSArchiver.archivedData(withRootObject: NSColor.black),
-    Key.subShadowSize: 0,
+    Key.subShadowSize: Float(0),
     Key.subShadowColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
     Key.subAlignX: SubAlign.center.rawValue,
     Key.subAlignY: SubAlign.bottom.rawValue,
-    Key.subMarginX: 25,
-    Key.subMarginY: 22,
-    Key.subPos: 100,
+    Key.subMarginX: Float(25),
+    Key.subMarginY: Float(22),
+    Key.subPos: Float(100),
     Key.subLang: "",
     Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
     Key.displayInLetterBox: true,
@@ -427,7 +439,7 @@ struct Preference {
     Key.keepOpenOnFileEnd: true,
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
-    Key.relativeSeekAmount: 2,
+    Key.relativeSeekAmount: 3,
     Key.volumeScrollAmount: 3,
     Key.verticalScrollAction: ScrollAction.volume.rawValue,
     Key.horizontalScrollAction: ScrollAction.seek.rawValue,

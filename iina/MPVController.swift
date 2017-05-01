@@ -44,7 +44,11 @@ class MPVController: NSObject {
     MPVProperty.trackListCount: MPV_FORMAT_INT64,
     MPVProperty.vf: MPV_FORMAT_NONE,
     MPVProperty.af: MPV_FORMAT_NONE,
+    MPVOption.TrackSelection.vid: MPV_FORMAT_INT64,
+    MPVOption.TrackSelection.aid: MPV_FORMAT_INT64,
+    MPVOption.TrackSelection.sid: MPV_FORMAT_INT64,
     MPVOption.PlaybackControl.pause: MPV_FORMAT_FLAG,
+    MPVProperty.chapter: MPV_FORMAT_INT64,
     MPVOption.Video.deinterlace: MPV_FORMAT_FLAG,
     MPVOption.Audio.mute: MPV_FORMAT_FLAG,
     MPVOption.Audio.volume: MPV_FORMAT_DOUBLE,
@@ -272,7 +276,7 @@ class MPVController: NSObject {
     }
     chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, loader.stringForOption))
 
-    //load keybinding
+    // Load keybindings. This is still required for mpv to handle media keys or apple remote.
     let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)
     var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["IINA Default"]
     if let confFromUd = UserDefaults.standard.string(forKey: PK.currentInputConfigName) {
@@ -281,6 +285,7 @@ class MPVController: NSObject {
       }
     }
     chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputConf, inputConfPath))
+
     // Receive log messages at warn level.
     chkErr(mpv_request_log_messages(mpv, "warn"))
 
@@ -342,6 +347,10 @@ class MPVController: NSObject {
     } else if let cb = returnValueCallback {
       cb(returnValue)
     }
+  }
+
+  func command(rawString: String) -> Int32 {
+    return mpv_command_string(mpv, rawString)
   }
 
   // Set property
@@ -485,20 +494,12 @@ class MPVController: NSObject {
       onVideoReconfig()
       break
 
-    case MPV_EVENT_METADATA_UPDATE:
-      break
-
-    case MPV_EVENT_TRACK_SWITCHED:
-      break
-
     case MPV_EVENT_START_FILE:
       playerCore.fileStarted()
+      playerCore.sendOSD(.fileStart(playerCore.info.currentURL?.lastPathComponent ?? "-"))
 
     case MPV_EVENT_FILE_LOADED:
       onFileLoaded()
-
-    case MPV_EVENT_TRACKS_CHANGED:
-      onTrackChanged()
 
     case MPV_EVENT_SEEK:
       playerCore.info.isSeeking = true
@@ -506,6 +507,10 @@ class MPVController: NSObject {
         recordedSeekStartTime = CACurrentMediaTime()
       }
       playerCore.syncUI(.time)
+      let osdText = (playerCore.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
+        (playerCore.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder)
+      let percentage = (playerCore.info.videoPosition / playerCore.info.videoDuration) ?? 1
+      playerCore.sendOSD(.seek(osdText, percentage))
 
     case MPV_EVENT_PLAYBACK_RESTART:
       playerCore.info.isSeeking = false
@@ -513,11 +518,8 @@ class MPVController: NSObject {
         recordedSeekTimeListener?(CACurrentMediaTime() - recordedSeekStartTime)
         recordedSeekTimeListener = nil
       }
+      playerCore.playbackRestarted()
       playerCore.syncUI(.time)
-
-    case MPV_EVENT_PAUSE, MPV_EVENT_UNPAUSE:
-      // deprecated
-      break
 
     case MPV_EVENT_END_FILE:
       // if receive end-file when loading file, might be error
@@ -540,13 +542,10 @@ class MPVController: NSObject {
       receivedEndFileWhileLoading = false
       break
 
-    case MPV_EVENT_CHAPTER_CHANGE:
-      playerCore.syncUI(.time)
-      playerCore.syncUI(.chapterList)
-
     default:
-      let eventName = String(cString: mpv_event_name(eventId))
-      Utility.log("MPV event (unhandled): \(eventName)")
+      // let eventName = String(cString: mpv_event_name(eventId))
+      // Utility.log("MPV event (unhandled): \(eventName)")
+      break
     }
   }
 
@@ -571,9 +570,6 @@ class MPVController: NSObject {
     playerCore.info.displayHeight = dheight == 0 ? height : dheight
     playerCore.info.videoDuration = VideoTime(duration)
     playerCore.info.videoPosition = VideoTime(pos)
-    if let path = getString(MPVProperty.path) {
-      playerCore.info.currentURL = URL(fileURLWithPath: path)
-    }
     playerCore.fileLoaded()
     fileLoaded = true
     // mpvResume()
@@ -581,10 +577,6 @@ class MPVController: NSObject {
       setFlag(MPVOption.PlaybackControl.pause, false)
     }
     playerCore.syncUI(.playlist)
-  }
-
-  private func onTrackChanged() {
-
   }
 
   private func onVideoReconfig() {
@@ -621,6 +613,27 @@ class MPVController: NSObject {
     case MPVProperty.videoParams:
       onVideoParamsChange(UnsafePointer<mpv_node_list>(OpaquePointer(property.data)))
 
+    case MPVOption.TrackSelection.vid:
+      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
+        playerCore.info.vid = Int(data)
+        let currTrack = playerCore.info.currentTrack(.video) ?? .noneVideoTrack
+        playerCore.sendOSD(.track(currTrack))
+      }
+
+    case MPVOption.TrackSelection.aid:
+      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
+        playerCore.info.aid = Int(data)
+        let currTrack = playerCore.info.currentTrack(.audio) ?? .noneAudioTrack
+        playerCore.sendOSD(.track(currTrack))
+      }
+
+    case MPVOption.TrackSelection.sid:
+      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
+        playerCore.info.sid = Int(data)
+        let currTrack = playerCore.info.currentTrack(.sub) ?? .noneSubTrack
+        playerCore.sendOSD(.track(currTrack))
+      }
+
     case MPVOption.PlaybackControl.pause:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
         if playerCore.info.isPaused != data {
@@ -633,9 +646,19 @@ class MPVController: NSObject {
           } else {
             SleepPreventer.preventSleep()
           }
+          if ud.bool(forKey: PK.alwaysFloatOnTop) {
+            DispatchQueue.main.async {
+              mw.setWindowFloatingOnTop(!data)
+            }
+          }
         }
       }
       playerCore.syncUI(.playButton)
+
+    case MPVProperty.chapter:
+      playerCore.syncUI(.time)
+      playerCore.syncUI(.chapterList)
+
 
     case MPVOption.Video.deinterlace:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
@@ -746,11 +769,9 @@ class MPVController: NSObject {
     case MPVOption.Window.ontop:
       NotificationCenter.default.post(Notification(name: Constants.Noti.ontopChanged))
 
-    // ignore following
-
-
     default:
-      Utility.log("MPV property changed (unhandled): \(name)")
+      // Utility.log("MPV property changed (unhandled): \(name)")
+      break
     }
   }
 
@@ -824,7 +845,7 @@ class MPVController: NSObject {
     }
 
     if code < 0 {
-      Utility.showAlert("mpv_error", arguments: [mpv_error_string(code), code, name])
+      Utility.showAlert("mpv_error", arguments: [String(cString: mpv_error_string(code)), "\(code)", name])
     }
 
     if sync {

@@ -543,6 +543,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.alwaysFloatOnTop:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+        self.isOntop = newValue
         setWindowFloatingOnTop(newValue)
       }
 
@@ -1014,6 +1015,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       titleBarView.isHidden = true
     }
     removeStandardButtonsFromFadeableViews()
+    
+    setWindowFloatingOnTop(false)
 
     isInFullScreen = true
   }
@@ -1045,6 +1048,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if ud.bool(forKey: PK.blackOutMonitor) {
       removeBlackWindow()
     }
+    
+    setWindowFloatingOnTop(isOntop)
   }
 
   func windowDidResize(_ notification: Notification) {
@@ -1675,8 +1680,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** This method will not set `isOntop`! */
   func setWindowFloatingOnTop(_ onTop: Bool) {
     guard let window = window else { return }
+    if isInFullScreen { return }
     if onTop {
-      window.level = Int(CGWindowLevelForKey(.floatingWindow) + 1)
+      window.level = Int(CGWindowLevelForKey(.floatingWindow)) - 1
     } else {
       window.level = Int(CGWindowLevelForKey(.normalWindow))
     }

@@ -568,9 +568,6 @@ class PlayerCore: NSObject {
     guard let mw = mainWindow else {
       Utility.fatal("Window is nil at fileLoaded")
     }
-    guard let vwidth = info.displayWidth, let vheight = info.displayHeight else {
-      Utility.fatal("Cannot get video width and height")
-    }
     invalidateTimer()
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
@@ -586,7 +583,6 @@ class PlayerCore: NSObject {
       if #available(OSX 10.12.2, *) {
         mw.setupTouchBarUI()
       }
-      mw.adjustFrameByVideoSize(vwidth, vheight)
       // whether enter full screen
       if needEnterFullScreenForNextMedia {
         if ud.bool(forKey: Preference.Key.fullScreenWhenOpen) && !mw.isInFullScreen {

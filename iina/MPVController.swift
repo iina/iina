@@ -559,14 +559,12 @@ class MPVController: NSObject {
     // Get video size and set the initial window size
     let width = getInt(MPVProperty.width)
     let height = getInt(MPVProperty.height)
-    let dwidth = getInt(MPVProperty.dwidth)
-    let dheight = getInt(MPVProperty.dheight)
     let duration = getDouble(MPVProperty.duration)
     let pos = getDouble(MPVProperty.timePos)
     playerCore.info.videoHeight = height
     playerCore.info.videoWidth = width
-    playerCore.info.displayWidth = dwidth == 0 ? width : dwidth
-    playerCore.info.displayHeight = dheight == 0 ? height : dheight
+    playerCore.info.displayWidth = 0
+    playerCore.info.displayHeight = 0
     playerCore.info.videoDuration = VideoTime(duration)
     playerCore.info.videoPosition = VideoTime(pos)
     if let path = getString(MPVProperty.path) {
@@ -595,19 +593,11 @@ class MPVController: NSObject {
     if playerCore.info.rotation == 90 || playerCore.info.rotation == 270 {
       Utility.swap(&dwidth, &dheight)
     }
-    // according to client api doc, check whether changed
-    if playerCore.info.displayWidth! == 0 && playerCore.info.displayHeight! == 0 {
-      playerCore.info.displayWidth = dwidth
-      playerCore.info.displayHeight = dheight
-      return
-    }
     if dwidth != playerCore.info.displayWidth! || dheight != playerCore.info.displayHeight! {
       // video size changed
       playerCore.info.displayWidth = dwidth
       playerCore.info.displayHeight = dheight
-      // mpvSuspend()
       playerCore.notifyMainWindowVideoSizeChanged()
-      // mpvResume()
     }
   }
 

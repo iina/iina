@@ -100,7 +100,7 @@
 
 "track.none" = "<Leer>";
 
-//Alerts
+// Alerts
 "alert.fatal_error" = "Schwerer Fehler: %@ \nProgramm wird beendet.";
 "alert.mpv_error" = "Fehler %@ (%@) beim setzen der Benutzereinstellung %@.";
 "alert.sleep" = "Monitorruhezustand kann nicht abeschaltet werden!";
@@ -141,7 +141,7 @@
 "pl_menu.play_next" = "Nächsten Eintrag abspielen";
 "pl_menu.remove" = "Entfernen";
 "pl_menu.remove_multi" = "Ausgewählte entfernen";
-"pl_menu.delete" = "In den Papierkorb legen;
+"pl_menu.delete" = "In den Papierkorb legen";
 "pl_menu.delete_multi" = "Ausgewählte Objekte in den Papierkorb legen.";
 "pl_menu.delete_after_play" = "Nach dem Abspielen in den Papierkorb legen.";
 "pl_menu.delete_after_play_multi" = "Ausgewählte Objekte nach dem Abspielen in den Papierkorb legen.";

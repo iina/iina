@@ -11,7 +11,7 @@
 "cmd.revert-seek" = "シークの中止";
 "cmd.set" = "値の設定";
 "cmd.cycle" = "循環";
-"cmd.cycle-values" = "設定値内の循環";
+"cmd.cycle-values" = "循環(指定値内)";
 "cmd.add" = "追加";
 "cmd.multiply" = "倍";
 "cmd.frame-step" = "次のフレームへ";
@@ -104,7 +104,7 @@
 "read.set" = "{{property}}に{{value}}を設定";
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "{{property}}を{{factor}}倍";
-"read.cycle" = "{{#dir_down}}逆に{{/dir_down}} {{property}} オン/オフ";
-"read.cycle-values" = "{{property}}の値を({{{values}}})の中で循環";
+"read.cycle" = "{{property}}の値を{{#dir_down}}順番に{{/dir_down}}繰り返す";
+"read.cycle-values" = "{{property}}の値を({{{values}}})の中で繰り返す";
 "read.seek" = "{{#fwd}}先へ{{/fwd}}{{#bwd}}前へ{{/bwd}}{{#abs}}{{/abs}} {{value}}{{#sec}}秒{{/sec}}{{#per}}%{{/per}} {{#exact}}(精細){{/exact}}{{#kf}}(キーフレーム){{/kf}} シーク";
 "read.sub-seek" = "{{#skip_1}}次{{/skip_1}}{{#skip_-1}}前{{/skip_-1}} の字幕へシーク";

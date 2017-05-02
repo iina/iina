@@ -105,7 +105,7 @@ class VideoView: NSView {
 
   func showPlaylist() {
     if playerCore.mainWindow?.sideBarStatus != .playlist {
-      playerCore.mainWindow?.menuShowPlaylistPanel(self)
+      playerCore.mainWindow?.menuShowPlaylistPanel(.dummy)
     }
     playlistAutoShowTimer.invalidate()
   }

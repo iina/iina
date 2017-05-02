@@ -255,5 +255,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     UpdateChecker.checkUpdate()
   }
 
+  @IBAction func setSelfAsDefaultAction(_ sender: AnyObject) {
+    Utility.setSelfAsDefaultForAllFileTypes()
+  }
 
 }

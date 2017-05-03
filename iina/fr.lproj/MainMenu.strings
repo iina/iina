@@ -237,7 +237,7 @@
 "ZnF-yX-7jP.title" = "Touch Bar personnalisée...";
 
 /* Class = "NSMenuItem"; title = "Playlist Loop"; ObjectID = "aSc-P6-fiZ"; */
-"aSc-P6-fiZ.title" = "Boucler la playlist";
+"aSc-P6-fiZ.title" = "Tout répéter";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
 "aUF-d1-5bR.title" = "Fenêtre";
@@ -367,3 +367,6 @@
 
 /* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
 "yHI-7D-OaI.title" = "Désentrelacer";
+
+/* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
+"npH-8B-XA4.title" = "Enlever le fichier actuel de la playlist";

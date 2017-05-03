@@ -27,6 +27,24 @@
 "cmd.sub-seek" = "자막 탐색";
 "cmd.write-watch-later-config" = "현재 재생 정보 기록";
 
+"iina.flip" = "상하 뒤집기";
+"iina.mirror" = "좌우 뒤집기";
+
+"iina.toggle-pip" = "화면 속 화면 전환/복귀";
+"iina.open-file" = "파일 열기";
+"iina.open-url" = "URL 열기";
+"iina.video-panel" = "비디오 패널";
+"iina.audio-panel" = "오디오 패널";
+"iina.sub-panel" = "자막 패널";
+"iina.playlist-panel" = "재생목록 패널";
+"iina.chapter-panel" = "챕터 목록 패널";
+"iina.toggle-flip" = "상하 뒤집기 전환/복귀";
+"iina.toggle-mirror" = "좌우 뒤집기 전환/복귀";
+"iina.save-playlist" = "현재 재생목록 저장";
+"iina.delete-current-file" = "현재 파일 삭제";
+"iina.find-online-subs" = "인터넷에서 자막 찾기";
+"iina.save-downloaded-sub" = "다운로드된 자막 저장";
+
 "opt.audio" = "오디오 트랙";
 "opt.audio-delay" = "오디오 지연";
 "opt.brightness" = "밝기";
@@ -36,6 +54,7 @@
 "opt.fullscreen" = "전체 화면";
 "opt.gamma" = "감마";
 "opt.mute" = "소리 끔";
+"opt.ontop" = "모든 윈도우 위에 두기";
 "opt.pause" = "일시 정지";
 "opt.saturation" = "채도";
 "opt.speed" = "재생속도";
@@ -46,6 +65,7 @@
 "opt.sub-scale" = "자막 크기";
 "opt.sub-visibility" = "자막 보이기";
 "opt.video" = "비디오 트랙";
+"opt.video-aspect" = "비디오 화면비";
 "opt.volume" = "음량";
 
 "read.add" = "{{property}} {{value}}";

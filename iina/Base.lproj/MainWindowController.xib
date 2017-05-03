@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12118"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,7 +31,12 @@
                 <outlet property="oscFloatingBottomView" destination="hb6-oe-rHm" id="ZKe-zm-evE"/>
                 <outlet property="oscFloatingTopView" destination="Unr-Y6-JoM" id="URb-3v-Gzc"/>
                 <outlet property="oscTopMainView" destination="fDY-vk-Ylv" id="phs-Yu-dGn"/>
-                <outlet property="osd" destination="Ofw-1d-N4T" id="9Rf-if-Brn"/>
+                <outlet property="oscTopMainViewTopConstraint" destination="dAZ-xc-uEC" id="qjt-RT-cqK"/>
+                <outlet property="osdAccessoryProgress" destination="i10-rt-9cb" id="ZdR-ZV-uoQ"/>
+                <outlet property="osdAccessoryText" destination="lb1-5R-hR3" id="A7o-3l-NYe"/>
+                <outlet property="osdAccessoryView" destination="sqF-0E-LwH" id="Y43-Cx-f6X"/>
+                <outlet property="osdLabel" destination="Ofw-1d-N4T" id="9ei-8o-aYw"/>
+                <outlet property="osdStackView" destination="g0j-zS-jKv" id="aoo-Tm-yhj"/>
                 <outlet property="osdVisualEffectView" destination="g0O-v5-RQj" id="V4X-8K-6O1"/>
                 <outlet property="pipOverlayView" destination="Nrz-jZ-Luf" id="EU7-oY-Bwp"/>
                 <outlet property="playButton" destination="gxw-pJ-Lcg" id="t9H-xd-uqj"/>
@@ -56,7 +61,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="680" height="355"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="680" height="355"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -147,22 +152,65 @@
                         </constraints>
                     </visualEffectView>
                     <visualEffectView hidden="YES" wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="g0O-v5-RQj">
-                        <rect key="frame" x="8" y="277" width="197" height="48"/>
+                        <rect key="frame" x="8" y="269" width="197" height="56"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofw-1d-N4T" userLabel="OSD">
-                                <rect key="frame" x="14" y="12" width="169" height="24"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="On Screen Display" id="JAn-Yu-XA2">
-                                    <font key="font" size="20" name=".AppleSystemUIFont"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                            <stackView orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="g0j-zS-jKv">
+                                <rect key="frame" x="16" y="8" width="165" height="40"/>
+                                <beginningViews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="499" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofw-1d-N4T" userLabel="OSD">
+                                        <rect key="frame" x="-2" y="16" width="169" height="24"/>
+                                        <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="left" title="On Screen Display" usesSingleLineMode="YES" id="JAn-Yu-XA2">
+                                            <font key="font" size="20" name=".AppleSystemUIFont"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="sqF-0E-LwH">
+                                        <rect key="frame" x="0.0" y="0.0" width="165" height="14"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="499" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lb1-5R-hR3">
+                                                <rect key="frame" x="-1" y="0.0" width="168" height="14"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="7aL-lH-m8i">
+                                                    <font key="font" metaFont="smallSystem"/>
+                                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <progressIndicator wantsLayer="YES" maxValue="1" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="i10-rt-9cb">
+                                                <rect key="frame" x="0.0" y="0.0" width="165" height="10"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="165" placeholder="YES" id="9mH-xV-bEs"/>
+                                                </constraints>
+                                            </progressIndicator>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="i10-rt-9cb" firstAttribute="top" secondItem="sqF-0E-LwH" secondAttribute="top" constant="4" id="6VV-8F-fIH"/>
+                                            <constraint firstAttribute="height" constant="14" id="IaX-Wp-jG2"/>
+                                            <constraint firstAttribute="trailing" secondItem="lb1-5R-hR3" secondAttribute="trailing" id="KSs-66-Nqu"/>
+                                            <constraint firstItem="lb1-5R-hR3" firstAttribute="leading" secondItem="sqF-0E-LwH" secondAttribute="leading" constant="1" id="U8W-4f-d9R"/>
+                                            <constraint firstAttribute="trailing" secondItem="i10-rt-9cb" secondAttribute="trailing" id="Wki-rH-9vF"/>
+                                            <constraint firstItem="i10-rt-9cb" firstAttribute="leading" secondItem="sqF-0E-LwH" secondAttribute="leading" id="bRT-Sx-sbX"/>
+                                            <constraint firstItem="lb1-5R-hR3" firstAttribute="top" secondItem="sqF-0E-LwH" secondAttribute="top" id="fma-JE-HJ5"/>
+                                            <constraint firstAttribute="bottom" secondItem="lb1-5R-hR3" secondAttribute="bottom" id="gzw-ss-Cew"/>
+                                            <constraint firstAttribute="bottom" secondItem="i10-rt-9cb" secondAttribute="bottom" id="q3e-Wz-myO"/>
+                                        </constraints>
+                                    </customView>
+                                </beginningViews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Ofw-1d-N4T" firstAttribute="top" secondItem="g0O-v5-RQj" secondAttribute="top" constant="12" id="IM4-SR-9E7"/>
-                            <constraint firstItem="Ofw-1d-N4T" firstAttribute="leading" secondItem="g0O-v5-RQj" secondAttribute="leading" constant="16" id="mZR-4R-ihe"/>
-                            <constraint firstAttribute="trailing" secondItem="Ofw-1d-N4T" secondAttribute="trailing" constant="16" id="yCc-xv-Z5S"/>
-                            <constraint firstAttribute="bottom" secondItem="Ofw-1d-N4T" secondAttribute="bottom" constant="12" id="yni-EQ-Iew"/>
+                            <constraint firstItem="g0j-zS-jKv" firstAttribute="leading" secondItem="g0O-v5-RQj" secondAttribute="leading" constant="16" id="C3A-d2-EBc"/>
+                            <constraint firstItem="g0j-zS-jKv" firstAttribute="top" secondItem="g0O-v5-RQj" secondAttribute="top" constant="8" id="Pt2-sQ-VPI"/>
+                            <constraint firstAttribute="bottom" secondItem="g0j-zS-jKv" secondAttribute="bottom" constant="8" id="Vjj-vg-tA7"/>
+                            <constraint firstAttribute="trailing" secondItem="g0j-zS-jKv" secondAttribute="trailing" constant="16" id="WKr-7v-aYn"/>
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Tdb-EA-alw">
@@ -182,7 +230,7 @@
                                 </constraints>
                             </progressIndicator>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gH-wF-EpI">
-                                <rect key="frame" x="24" y="20" width="112" height="17"/>
+                                <rect key="frame" x="10" y="20" width="140" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Buffering... 100%" id="3fe-fP-yMB">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -199,14 +247,16 @@
                             </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="CKq-QQ-TvO"/>
                             <constraint firstAttribute="bottom" secondItem="hlZ-5D-Wag" secondAttribute="bottom" constant="8" id="DDG-Yw-RfA"/>
                             <constraint firstItem="2gH-wF-EpI" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="Nfu-GM-Wcw"/>
                             <constraint firstItem="uZe-PA-1Id" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="Qfn-MA-rHy"/>
+                            <constraint firstAttribute="trailing" secondItem="2gH-wF-EpI" secondAttribute="trailing" constant="12" id="TQS-Yy-cH6"/>
                             <constraint firstItem="hlZ-5D-Wag" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="bOz-TB-YLY"/>
                             <constraint firstAttribute="bottom" secondItem="2gH-wF-EpI" secondAttribute="bottom" constant="20" id="ddz-PD-RB3"/>
-                            <constraint firstAttribute="width" constant="160" id="ehe-F5-vKu"/>
                             <constraint firstItem="uZe-PA-1Id" firstAttribute="top" secondItem="oX4-0N-but" secondAttribute="top" constant="20" id="sio-TN-E1P"/>
                             <constraint firstItem="2gH-wF-EpI" firstAttribute="top" secondItem="uZe-PA-1Id" secondAttribute="bottom" constant="8" id="swz-Rz-9Hv"/>
+                            <constraint firstItem="2gH-wF-EpI" firstAttribute="leading" secondItem="oX4-0N-but" secondAttribute="leading" constant="12" id="ufO-Jb-vdH"/>
                         </constraints>
                     </visualEffectView>
                 </subviews>
@@ -232,6 +282,7 @@
                     <constraint firstAttribute="bottom" secondItem="Tdb-EA-alw" secondAttribute="bottom" constant="-60" id="vP1-IE-sbB"/>
                     <constraint firstItem="TRx-2V-Gr3" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="wGB-mn-a6f"/>
                     <constraint firstItem="Tdb-EA-alw" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="wYH-h6-46f"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="g0O-v5-RQj" secondAttribute="trailing" constant="8" id="yKZ-no-kD6"/>
                     <constraint firstAttribute="bottom" secondItem="epo-S6-QVB" secondAttribute="bottom" id="zBx-AY-VlK"/>
                 </constraints>
             </view>
@@ -331,7 +382,7 @@
                     </connections>
                 </slider>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NBD-MV-OuG" userLabel="Left Label">
-                    <rect key="frame" x="0.0" y="6" width="50" height="14"/>
+                    <rect key="frame" x="0.0" y="4.5" width="50" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="46" id="CMl-dC-PCr"/>
                     </constraints>
@@ -342,7 +393,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GgV-Cc-sk0" userLabel="Right Label" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="450" y="6" width="50" height="14"/>
+                    <rect key="frame" x="450" y="4.5" width="50" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="46" id="sDf-om-KlV"/>
                     </constraints>

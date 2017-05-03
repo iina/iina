@@ -83,7 +83,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     // check update
-    UpdateChecker.checkUpdate(alertIfOfflineOrNoUpdate: false)
+    let now = Date()
+    let checkUpdate = {
+      UpdateChecker.checkUpdate(alertIfOfflineOrNoUpdate: false)
+      UserDefaults.standard.set(now, forKey: Preference.Key.lastCheckUpdateTime)
+    }
+    if let lastCheckUpdateTime = UserDefaults.standard.object(forKey: Preference.Key.lastCheckUpdateTime) as? Date {
+      if lastCheckUpdateTime < now - TimeInterval(12*3600) {
+        checkUpdate()
+      }
+    } else {
+      checkUpdate()
+    }
 
     // pending open request
     if let url = pendingURL {
@@ -180,7 +191,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  @IBAction func openURL(_ sender: NSMenuItem) {
+  @IBAction func openURL(_ sender: AnyObject) {
     let panel = NSAlert()
     panel.messageText = "Open URL"
     panel.informativeText = "Please enter the URL:"
@@ -244,5 +255,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     UpdateChecker.checkUpdate()
   }
 
+  @IBAction func setSelfAsDefaultAction(_ sender: AnyObject) {
+    Utility.setSelfAsDefaultForAllFileTypes()
+  }
 
 }

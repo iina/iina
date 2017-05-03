@@ -15,6 +15,8 @@ struct Preference {
   // consider using RawRepresentable, but also need to extend UserDefaults
   struct Key {
 
+    static let lastCheckUpdateTime = "lastCheckUpdateTime"
+
     /** Record recent files */
     static let recordRecentFiles = "recordRecentFiles"
 
@@ -29,6 +31,9 @@ struct Preference {
 
     /** Enter fill screen when open (bool) */
     static let fullScreenWhenOpen = "fullScreenWhenOpen"
+    
+    /** Black out other monitors while fullscreen (bool) */
+    static let blackOutMonitor = "blackOutMonitor"
 
     /** Quit when no open window (bool) */
     static let quitWhenNoOpenedWindow = "quitWhenNoOpenedWindow"
@@ -350,6 +355,7 @@ struct Preference {
   // MARK: - Defaults
 
   static let defaultPreference:[String : Any] = [
+    Key.lastCheckUpdateTime: Date(timeIntervalSince1970: 1),
     Key.recordRecentFiles: true,
     Key.controlBarPositionHorizontal: Float(0.5),
     Key.controlBarPositionVertical: Float(0.1),
@@ -436,7 +442,7 @@ struct Preference {
     Key.keepOpenOnFileEnd: true,
     Key.quitWhenNoOpenedWindow: false,
     Key.useExactSeek: SeekOption.relative.rawValue,
-    Key.relativeSeekAmount: 2,
+    Key.relativeSeekAmount: 3,
     Key.volumeScrollAmount: 3,
     Key.verticalScrollAction: ScrollAction.volume.rawValue,
     Key.horizontalScrollAction: ScrollAction.seek.rawValue,

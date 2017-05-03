@@ -23,6 +23,15 @@ class OnlineSubtitle: NSObject {
   enum Source: Int {
     case shooter = 0
     case openSub
+
+    var name: String {
+      switch self {
+      case .shooter:
+        return "shooter.cn"
+      case .openSub:
+        return "opensubtitles.org"
+      }
+    }
   }
 
   /** Prepend a number before file name to avoid overwritting. */
@@ -37,10 +46,12 @@ class OnlineSubtitle: NSObject {
     var source: Source
 
     if userSource == nil {
-      source = Source(rawValue: UserDefaults.standard.integer(forKey: Preference.Key.onlineSubSource)) ?? .shooter
+      source = Source(rawValue: UserDefaults.standard.integer(forKey: Preference.Key.onlineSubSource)) ?? .openSub
     } else {
       source = userSource!
     }
+
+    PlayerCore.shared.sendOSD(.startFindingSub(source.name))
 
     switch source {
     case .shooter:

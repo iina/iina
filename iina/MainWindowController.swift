@@ -598,7 +598,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     }
 
-    // add fragment viewss
+    oscPosition = newPosition
+
+    // add fragment views
     switch oscPosition! {
     case .floating:
       currentControlBar = controlBarFloating
@@ -643,8 +645,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       fadeableViews.append(currentControlBar!)
       currentControlBar!.isHidden = isCurrentControlBarHidden
     }
-
-    oscPosition = newPosition
   }
 
   // MARK: - Mouse / Trackpad event

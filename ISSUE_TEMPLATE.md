@@ -5,7 +5,7 @@
 **System and IINA version:**
 
 - macOS 10.12.4
-- IINA 0.0.7
+- IINA 0.0.8
 
 **Expected behavior:**
 

@@ -81,6 +81,6 @@ Any feedback is appreciated! You can
 - Send bug reports
 - Send feature requests
 - Provide suggestions on code structures or UI designs
-- Provide localizatons
+- Provide localizations
 - ...
 

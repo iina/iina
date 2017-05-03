@@ -8,6 +8,7 @@
 
 "cmd.ignore" = "Ignorer";
 "cmd.seek" = "Aller";
+"cmd.revert-seek" = "Revenir";
 "cmd.set" = "Configurer";
 "cmd.cycle" = "Alterner";
 "cmd.cycle-values" = "Alterner de";
@@ -16,14 +17,40 @@
 "cmd.frame-step" = "Image suivante";
 "cmd.frame-back-step" = "Image précédente";
 "cmd.ab-loop" = "Boucle A-B";
+"cmd.sub-seek" = "Changer de fichier de sous-titres";
 "cmd.playlist-next" = "Média suivant";
 "cmd.playlist-prev" = "Média précédent";
+"cmd.playlist-move" = "Déplacer l'élément dans la playlist";
 "cmd.playlist-clear" = "Vider la playlist";
-"cmd.playlist-remove" = "Enlever le média courant";
+"cmd.playlist-remove" = "Enlever le média sélectionné de la playlist";
 "cmd.playlist-shuffle" = "Ordre aléatoire";
 "cmd.write-watch-later-config" = "Enregistrer l'historique de lecture";
 "cmd.stop" = "Stopper";
 "cmd.quit" = "Quitter";
+"cmd.quit-watch-later" = "Quitter (sauvegarder l'état)";
+"cmd.screenshot" = "Capture d'écran";
+"cmd.screenshot-to-file" = "Capture d'écran vers un fichier";
+"cmd.loadfile" = "Charger un fichier";
+"cmd.loadlist" = "Charger une playlist";
+"cmd.run" = "Lancer";
+
+"iina.flip" = "Pivoter";
+"iina.mirror" = "Miroir";
+
+"iina.toggle-pip" = "Activer/désactiver Image dans l'Image";
+"iina.open-file" = "Ouvrir un fichier";
+"iina.open-url" = "Ouvrir une URL";
+"iina.video-panel" = "Panel vidéo";
+"iina.audio-panel" = "Panel audio";
+"iina.sub-panel" = "Panel des sous-titres";
+"iina.playlist-panel" = "Panel des playlists";
+"iina.chapter-panel" = "Panel des chapitres";
+"iina.toggle-flip" = "Activer/désactiver le pivot";
+"iina.toggle-mirror" = "Activer/désactiver le miroir";
+"iina.save-playlist" = "Sauvegarder la playlist";
+"iina.delete-current-file" = "Enlever le fichier sélectionné de la playlist";
+"iina.find-online-subs" = "Trouver des sous-titres en ligne";
+"iina.save-downloaded-sub" = "Sauvegarder les sous-titres téléchargés";
 
 "yes" = "Oui";
 "no" = "Non";
@@ -49,6 +76,7 @@
 "opt.speed" = "Vitesse";
 
 "opt.video" = "Piste vidéo";
+"opt.video-aspect" = "Format d'image";
 "opt.contrast" = "Contraste";
 "opt.brightness" = "Luminosité";
 "opt.gamma" = "Gamma";
@@ -65,10 +93,13 @@
 "opt.sub-pos" = "Position des sous-titres";
 "opt.sub-scale" = "Échelle des sous-titres";
 "opt.sub-visibility" = "Visibilité des sous-titres";
+"opt.sub-ass-style-override" = "Override du style ASS";
 
 "opt.fullscreen" = "Plein écran";
+"opt.ontop" = "Flotter au-dessus";
 
 "opt.chapter" = "Chapitre";
+
 
 "read.set" = "Configurer {{property}} à {{value}}";
 "read.add" = "{{property}} {{value}}";

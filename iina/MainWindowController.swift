@@ -1103,7 +1103,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     }
     // update control bar position
-    if oscPosition == .floating {
+    if oscPosition != nil && oscPosition == .floating {
       let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
       let cpv = ud.float(forKey: PK.controlBarPositionVertical)
       controlBarFloating.setFrameOrigin(NSMakePoint(

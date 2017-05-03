@@ -759,7 +759,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // videoView.stopDisplayLink()
     }
     // disable sleep preventer
-    SleepPreventer.allowSleep()
+    if !playerCore.info.isPaused {
+      SleepPreventer.allowSleep()
+    }
     // stop tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)

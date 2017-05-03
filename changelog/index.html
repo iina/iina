@@ -1,4 +1,59 @@
-<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>Changelog | Project IINA</title><link href="/iina/stylesheets/lato.css" rel="stylesheet" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body><nav class="navbar navbar-fixed-top navbar-light bg-faded navbar-toggleable-md"><button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#nav_c" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><div class="collapse navbar-collapse" id="nav_c"><ul class="navbar-nav mr-auto"><li class="nav-item"><a href="/iina" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/features/" class="nav-link">Features</a></li><li class="nav-item"><a href="/iina/documentation/" class="nav-link">Documentation</a></li><li class="nav-item"><a href="/iina/changelog/" class="nav-link">Changelog</a></li><li class="nav-item"><a href="/iina/about/" class="nav-link">About</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></div></nav><div class="main"><div class="changelog"><div class="container"><h1>Changelog</h1><div class="clog"><h2 id="v007--mar-28-2017">v0.0.7  <em>Mar. 28, 2017</em></h2>
+<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>Changelog | Project IINA</title><link href="/iina/stylesheets/lato.css" rel="stylesheet" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body><nav class="navbar navbar-fixed-top navbar-light bg-faded navbar-toggleable-md"><button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#nav_c" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><div class="collapse navbar-collapse" id="nav_c"><ul class="navbar-nav mr-auto"><li class="nav-item"><a href="/iina" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/features/" class="nav-link">Features</a></li><li class="nav-item"><a href="/iina/documentation/" class="nav-link">Documentation</a></li><li class="nav-item"><a href="/iina/changelog/" class="nav-link">Changelog</a></li><li class="nav-item"><a href="/iina/about/" class="nav-link">About</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></div></nav><div class="main"><div class="changelog"><div class="container"><h1>Changelog</h1><div class="clog"><h2 id="v008--may-3-2017">v0.0.8  <em>May. 3, 2017</em></h2>
+
+<h3 id="new-features">New features</h3>
+
+<ul>
+  <li><strong>OSC layout</strong>: Now IINA supports three layouts for On Screen Controller</li>
+</ul>
+<img src="/iina/images/osc_layout.png" class="img-fluid" width="90%" alt="Osc layout" /><ul>
+  <li><strong>New key bindings system</strong>:
+    <ul>
+      <li>Support binding keys to native IINA commands, like search online subtitles, enter PIP, flip/mirror, delete current file, etc.</li>
+      <li>Key bindings can be changed dynamically without restarting the App</li>
+      <li>IINA will only consume key events that bound to actions</li>
+    </ul>
+  </li>
+  <li><strong>New OSD</strong>:
+    <ul>
+      <li>Add more OSD types, like displaying filename on start, OSD for track changes and seeking, etc.</li>
+      <li>Display more information in OSD</li>
+    </ul>
+  </li>
+  <li>Support blacking out other screens when entered full screen</li>
+  <li>Support setting itself as the default App for all file types it supports (Menu &gt; Help)</li>
+  <li>Update mpv to 0.25.0</li>
+  <li>Update youtube-dl to the latest version</li>
+  <li>Japanese translation</li>
+</ul>
+
+<h3 id="enhancements">Enhancements:</h3>
+
+<ul>
+  <li>Fix the logic for floating on top
+    <ul>
+      <li>Now panels won't be covered by video window</li>
+      <li>Cancel floaing on top when paused (if "always float on top" is on)</li>
+    </ul>
+  </li>
+  <li>Draggable window when not focused</li>
+  <li>Adjusted default key bindings</li>
+  <li>Check update every 12 hours</li>
+</ul>
+
+<h3 id="bug-fixes">Bug fixes:</h3>
+
+<ul>
+  <li>Fix: Crash when exit</li>
+  <li>Fix: Crash when performing pinch gesture on 10.10-10.11</li>
+  <li>Fix: Blocks system sleep in some rare cases when paused</li>
+  <li>Fix: Incorrect aspect ratio for some videos with non-square pixels</li>
+  <li>Fix: Fail to play when url contains '%'</li>
+  <li>Fix: Cmd+0/1/2 behavior when uses logical resolution</li>
+  <li>Fix: Various layout problem in some languages</li>
+  <li>Other bug fixes</li>
+</ul>
+
+<h2 id="v007--mar-28-2017">v0.0.7  <em>Mar. 28, 2017</em></h2>
 
 <p>IINA's wiki is now under construction: <a href="https://github.com/lhc70000/iina/wiki">https://github.com/lhc70000/iina/wiki</a>.
 You may find some helps on common issues like youtube-dl or downloading online subtitles.</p>
@@ -36,7 +91,7 @@ You may find some helps on common issues like youtube-dl or downloading online s
   <li>Support Apple Remote</li>
 </ul>
 
-<h3 id="bug-fixes">Bug fixes</h3>
+<h3 id="bug-fixes-1">Bug fixes</h3>
 
 <ul>
   <li>Fix prevent/allow sleep not working when pause/resume by right click</li>
@@ -49,7 +104,7 @@ You may find some helps on common issues like youtube-dl or downloading online s
   <li>Other bug fixes</li>
 </ul>
 
-<h3 id="enhancements">Enhancements</h3>
+<h3 id="enhancements-1">Enhancements</h3>
 
 <ul>
   <li>Now shortcuts for sidebar (Cmd+A/V/S/P/C) will switch to panel/tab directly</li>
@@ -143,7 +198,7 @@ You may find some helps on common issues like youtube-dl or downloading online s
   <li>DMG installation, signed App</li>
 </ul>
 
-<h3 id="bug-fixes-1">Bug fixes</h3>
+<h3 id="bug-fixes-2">Bug fixes</h3>
 
 <ul>
   <li>Fix space key not working sometimes</li>
@@ -186,7 +241,7 @@ You may find some helps on common issues like youtube-dl or downloading online s
   <li>**Support displaying remaining time **</li>
 </ul>
 
-<h3 id="enhancements-1">Enhancements</h3>
+<h3 id="enhancements-2">Enhancements</h3>
 
 <ul>
   <li>Changed "clear playlist" button icon</li>
@@ -197,7 +252,7 @@ You may find some helps on common issues like youtube-dl or downloading online s
   <li>Clear recent files when unchecked option</li>
 </ul>
 
-<h3 id="bug-fixes-2">Bug Fixes</h3>
+<h3 id="bug-fixes-3">Bug Fixes</h3>
 
 <ul>
   <li><strong>Fix: Crash when buffering</strong></li>
@@ -228,7 +283,7 @@ You may find some helps on common issues like youtube-dl or downloading online s
   <li>Add "Always on top while playing" option</li>
 </ul>
 
-<h3 id="bug-fixes-3">Bug fixes</h3>
+<h3 id="bug-fixes-4">Bug fixes</h3>
 
 <ul>
   <li>Support playing pure audio files</li>

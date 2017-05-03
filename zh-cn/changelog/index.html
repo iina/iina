@@ -1,10 +1,66 @@
-<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>更新日志 | Project IINA</title><link href="/iina/stylesheets/lato.css" rel="stylesheet" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body><nav class="navbar navbar-fixed-top navbar-light bg-faded navbar-toggleable-md"><button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#nav_c" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><div class="collapse navbar-collapse" id="nav_c"><ul class="navbar-nav mr-auto"><li class="nav-item"><a href="/iina/zh-cn" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/zh-cn/features/" class="nav-link">功能</a></li><li class="nav-item"><a href="/iina/zh-cn/documentation/" class="nav-link">文档</a></li><li class="nav-item"><a href="/iina/zh-cn/changelog/" class="nav-link">更新日志</a></li><li class="nav-item"><a href="/iina/zh-cn/about/" class="nav-link">关于</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></div></nav><div class="main"><div class="changelog"><div class="container"><h1>更新日志</h1><div class="clog"><h2 id="v007--mar-28-2017">v0.0.7  <em>Mar. 28, 2017</em></h2>
+<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>更新日志 | Project IINA</title><link href="/iina/stylesheets/lato.css" rel="stylesheet" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body><nav class="navbar navbar-fixed-top navbar-light bg-faded navbar-toggleable-md"><button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#nav_c" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><div class="collapse navbar-collapse" id="nav_c"><ul class="navbar-nav mr-auto"><li class="nav-item"><a href="/iina/zh-cn" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/zh-cn/features/" class="nav-link">功能</a></li><li class="nav-item"><a href="/iina/zh-cn/documentation/" class="nav-link">文档</a></li><li class="nav-item"><a href="/iina/zh-cn/changelog/" class="nav-link">更新日志</a></li><li class="nav-item"><a href="/iina/zh-cn/about/" class="nav-link">关于</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></div></nav><div class="main"><div class="changelog"><div class="container"><h1>更新日志</h1><div class="clog"><h2 id="v008--may-3-2017">v0.0.8  <em>May. 3, 2017</em></h2>
+
+<h3 id="section">新增功能</h3>
+
+<ul>
+  <li><strong>播放控制</strong>: 现在 IINA 支持三种播放控制样式</li>
+</ul>
+<img src="/iina/images/osc_layout.png" class="img-fluid" width="90%" alt="Osc layout" /><ul>
+  <li><strong>新的快捷键处理机制</strong>
+    <ul>
+      <li>现在快捷键的更改会实时生效，不需重启</li>
+      <li>现在 iina 不会吞掉所有键盘事件，理论上无法切换输入法等问题</li>
+      <li>你现在可以为 iina 的自身功能设置快捷键，比如画中画，镜像翻转，删除当前文件等等。</li>
+    </ul>
+  </li>
+  <li><strong>新的 OSD 样式</strong>
+    <ul>
+      <li>增加了不少 OSD 种类，比如打开文件时显示文件名</li>
+      <li>对于某些 OSD 会同时显示进度条或详细信息</li>
+    </ul>
+  </li>
+  <li>多屏下，全屏播放时关闭其他屏幕</li>
+  <li>支持一键关联所有支持的文件类型（菜单 &gt; 帮助）</li>
+  <li>升级 mpv 至 0.25.0</li>
+  <li>升级 youtube-dl 至最新版本</li>
+  <li>日语翻译</li>
+</ul>
+
+<h3 id="section">改进</h3>
+
+<ul>
+  <li>修复窗口置顶的逻辑
+    <ul>
+      <li>置顶时不会挡住各种设置窗口</li>
+      <li>偏好设置中的窗口置顶是永久性设置，对所有窗口生效。启用此选项后，视频暂停时会取消置顶</li>
+      <li>菜单中的窗口置顶是临时性设置，暂停不会影响</li>
+    </ul>
+  </li>
+  <li>窗口为非焦点时可以拖拽</li>
+  <li>调整默认快捷键</li>
+  <li>每 12 小时检查更新</li>
+</ul>
+
+<h3 id="bug-">Bug 修复</h3>
+
+<ul>
+  <li>修复：退出时崩溃</li>
+  <li>修复：10.11 以下双指缩放时崩溃</li>
+  <li>修复：极少情况下暂停时阻止系统睡眠</li>
+  <li>修复：一些视频长宽比错误</li>
+  <li>修复：含有 '%' 的 URL 播放失败</li>
+  <li>修复：不使用 Retina 分辨率时，Cmd+0/1/2 的行为</li>
+  <li>修复：一些语言中的界面排版问题</li>
+  <li>其他 Bug 修复</li>
+</ul>
+
+<h2 id="v007--mar-28-2017">v0.0.7  <em>Mar. 28, 2017</em></h2>
 
 <p>欢迎访问 IINA 的 Github wiki（英文）: <a href="https://github.com/lhc70000/iina/wiki">https://github.com/lhc70000/iina/wiki</a>。</p>
 
 <p>注意！此次更新之后默认的字幕来源将会是 OpenSubtitles。如果您是中文用户，请在「偏好设置 &gt; 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。</p>
 
-<h3 id="section">新功能</h3>
+<h3 id="section-1">新功能</h3>
 
 <ul>
   <li>支持 OpenSubtitles
@@ -37,7 +93,7 @@
   <li>支持 Apple Remote</li>
 </ul>
 
-<h3 id="bug-">Bug 修复</h3>
+<h3 id="bug--1">Bug 修复</h3>
 
 <ul>
   <li>修复：右键暂停/继续时不会触发防止/允许睡眠机制</li>
@@ -50,7 +106,7 @@
   <li>其他修复</li>
 </ul>
 
-<h3 id="section-1">改进</h3>
+<h3 id="section-2">改进</h3>
 
 <ul>
   <li>侧边栏各快捷键 (Cmd+A/V/S/P/C) 现在会直接切换到对应页面</li>
@@ -89,7 +145,7 @@
 
 <h2 id="v005--feb-14-2017">v0.0.5  <em>Feb. 14, 2017</em></h2>
 
-<h3 id="section-2">在线视频</h3>
+<h3 id="section-3">在线视频</h3>
 
 <ul>
   <li>支持 <a href="https://rg3.github.io/youtube-dl/index.html">youtube-dl</a>，播放 YouTube 和其他<a href="https://rg3.github.io/youtube-dl/supportedsites.html">上百家网站</a> 的在线视频</li>
@@ -98,7 +154,7 @@
   <li>支持拖拽 URL 和文本来播放</li>
 </ul>
 
-<h3 id="section-3">播放列表</h3>
+<h3 id="section-4">播放列表</h3>
 
 <ul>
   <li>增加自动添加文件进播放列表的选项</li>
@@ -120,7 +176,7 @@
 
 <p><em>*此版本之后需要双击项目来播放</em></p>
 
-<h3 id="section-4">新增</h3>
+<h3 id="section-5">新增</h3>
 
 <ul>
   <li>新增「画中画」（PIP）支持</li>
@@ -133,7 +189,7 @@
   <li>本地化：法语、意大利语</li>
 </ul>
 
-<h3 id="section-5">改进</h3>
+<h3 id="section-6">改进</h3>
 
 <ul>
   <li>支持老 Mac 型号及提升黑苹果上的稳定性</li>
@@ -144,7 +200,7 @@
   <li>DMG 安装，App 签名</li>
 </ul>
 
-<h3 id="section-6">修复</h3>
+<h3 id="section-7">修复</h3>
 
 <ul>
   <li>修复空格键有时不起作用</li>
@@ -160,7 +216,7 @@
 
 <h2 id="v004--jan-30-2017">v0.0.4  <em>Jan. 30, 2017</em></h2>
 
-<h3 id="section-7">性能</h3>
+<h3 id="section-8">性能</h3>
 
 <ul>
   <li><strong>更新至 mpv 0.23.0</strong></li>
@@ -172,7 +228,7 @@
   </li>
 </ul>
 
-<h3 id="section-8">新增功能</h3>
+<h3 id="section-9">新增功能</h3>
 
 <ul>
   <li><strong>支持 macOS 10.10</strong></li>
@@ -187,7 +243,7 @@
   <li><strong>支持显示剩余时间</strong></li>
 </ul>
 
-<h3 id="section-9">改进</h3>
+<h3 id="section-10">改进</h3>
 
 <ul>
   <li>更换「清空播放列表」图标</li>
@@ -198,7 +254,7 @@
   <li>取消勾选记录最近文件时清除最近文件列表</li>
 </ul>
 
-<h3 id="section-10">修复</h3>
+<h3 id="section-11">修复</h3>
 
 <ul>
   <li><strong>修复显示缓冲界面时奔溃</strong></li>
@@ -211,7 +267,7 @@
 
 <h2 id="v003--jan-21-2017">v0.0.3  <em>Jan. 21, 2017</em></h2>
 
-<h3 id="section-11">界面 / 本地化</h3>
+<h3 id="section-12">界面 / 本地化</h3>
 
 <ul>
   <li>为所有界面添加 AutoLayout</li>
@@ -219,7 +275,7 @@
   <li>完整的简体中文本地化</li>
 </ul>
 
-<h3 id="section-12">新增功能</h3>
+<h3 id="section-13">新增功能</h3>
 
 <ul>
   <li>重新设计的播放控制条</li>
@@ -229,7 +285,7 @@
   <li>增加播放时永久置顶选项</li>
 </ul>
 
-<h3 id="bug--1">Bug 修复</h3>
+<h3 id="bug--2">Bug 修复</h3>
 
 <ul>
   <li>支持播放纯音频</li>
@@ -244,7 +300,7 @@
   <li>修复启动时强制启用媒体键</li>
 </ul>
 
-<h3 id="section-13">改进</h3>
+<h3 id="section-14">改进</h3>
 
 <ul>
   <li>设置用户自定义 MPV 参数失败时，更加人性化的提示</li>
@@ -264,7 +320,7 @@
   <li>改进：当前播放时间的标签固定宽度</li>
 </ul>
 
-<h3 id="section-14">快捷键</h3>
+<h3 id="section-15">快捷键</h3>
 <ul>
   <li><strong>修复：自定义快捷键配置不工作</strong></li>
   <li><strong>新增：IINA 默认的一套快捷键配置</strong></li>
@@ -277,14 +333,14 @@
   <li>修复: 菜单中音量应为 +/- 5%</li>
 </ul>
 
-<h3 id="section-15">控制</h3>
+<h3 id="section-16">控制</h3>
 <ul>
   <li><strong>新增：支持外接鼠标和滚轮</strong></li>
   <li><strong>新增：支持自然滚动</strong></li>
   <li><strong>修复：双击时也运行单击指令</strong></li>
 </ul>
 
-<h3 id="section-16">播放</h3>
+<h3 id="section-17">播放</h3>
 <ul>
   <li><strong>新增：从射手网自动下载字幕（Shift+Cmd+D，或菜单中「字幕-查找在线字幕」）</strong>。目前会下载所有找到的字幕；由于射手网有些字幕格式有误，添加时可能会弹框提醒无法添加</li>
   <li>改进：（内部）播放时间精确到毫秒</li>
@@ -293,14 +349,14 @@
   <li>改进：连续点击左右箭头按钮时，最终会回到原速（即 1-2-4-8-16-32-1-2…）</li>
 </ul>
 
-<h3 id="section-17">性能</h3>
+<h3 id="section-18">性能</h3>
 <ul>
   <li><strong>修复：空闲时高 CPU 占用</strong></li>
   <li><strong>修复：从播放列表中打开文件时高 CPU 占用</strong></li>
   <li><strong>修复：播放时强制切换到独显（即允许使用集显播放）</strong></li>
 </ul>
 
-<h3 id="section-18">程序行为</h3>
+<h3 id="section-19">程序行为</h3>
 <ul>
   <li><strong>新增：自动检查更新</strong></li>
   <li><strong>新增：可选的初始窗口（「偏好设置-General-行为」中开启）</strong></li>
@@ -313,7 +369,7 @@
   <li><strong>修复：需要手动展开 mpv 设置路径中的 <code>~</code></strong></li>
 </ul>
 
-<h3 id="section-19">窗口</h3>
+<h3 id="section-20">窗口</h3>
 <ul>
   <li>改进：在 10.11+ 上更流畅的拖动体验</li>
   <li><strong>新增：拖放字幕和视频进入窗口来打开</strong></li>
@@ -324,13 +380,13 @@
   <li>新增：同步 mpv 的 fullscreen 选项和 IINA 的全屏（即支持按 'f' 全屏）</li>
 </ul>
 
-<h3 id="section-20">其他</h3>
+<h3 id="section-21">其他</h3>
 <ul>
   <li>修复：一些 observers 没有被移除</li>
   <li>修复：mpv_report_flip 没有被正确调用</li>
 </ul>
 
-<h3 id="section-21">项目</h3>
+<h3 id="section-22">项目</h3>
 <ul>
   <li><strong>新增：Nightly build（每天更新的测试版本）：<a href="http://raw.mrx.im">http://raw.mrx.im</a>。由于从 <code>develop</code> 分支编译，请不要期待可用性。此版本不签名。</strong></li>
   <li>新增：加入 CONTRIBUTING.md</li>

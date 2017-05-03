@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12118"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +24,10 @@
             <subviews>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xut-NB-Mqu" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="148" width="463" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="TLL-Ng-90e">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="QYP-Aq-eWm"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="TLL-Ng-90e">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -46,6 +49,9 @@
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZrL-Dr-kW0">
                                 <rect key="frame" x="401" y="7" width="56" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="eBr-Q7-j1n"/>
+                                </constraints>
                                 <buttonCell key="cell" type="inline" title="Chrome" bezelStyle="inline" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="0IK-4h-w0l">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystemBold"/>
@@ -85,6 +91,9 @@
                         <subviews>
                             <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KvW-Xu-QXt">
                                 <rect key="frame" x="12" y="12" width="217" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="11O-me-4Ik"/>
+                                </constraints>
                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="F7n-ob-C0s">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -93,6 +102,9 @@
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wu1-R1-mik">
                                 <rect key="frame" x="10" y="35" width="58" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="0OE-hu-YYv"/>
+                                </constraints>
                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Username" id="OVp-jN-yx4">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -101,6 +113,9 @@
                             </textField>
                             <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iws-4E-RLR" customClass="NSSecureTextField">
                                 <rect key="frame" x="237" y="12" width="216" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="yRK-an-vUU"/>
+                                </constraints>
                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="eip-sU-duC">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -129,6 +144,7 @@
                             <constraint firstItem="Wu1-R1-mik" firstAttribute="width" relation="lessThanOrEqual" secondItem="KvW-Xu-QXt" secondAttribute="width" id="ozh-IA-dsi"/>
                             <constraint firstItem="KvW-Xu-QXt" firstAttribute="top" secondItem="Wu1-R1-mik" secondAttribute="bottom" constant="4" id="pcb-U5-UFX"/>
                             <constraint firstItem="Fqe-aA-Kyt" firstAttribute="leading" secondItem="iws-4E-RLR" secondAttribute="leading" id="qO0-xU-YV3"/>
+                            <constraint firstAttribute="bottom" secondItem="KvW-Xu-QXt" secondAttribute="bottom" constant="12" id="rfa-v7-jkJ"/>
                             <constraint firstItem="Fqe-aA-Kyt" firstAttribute="width" relation="lessThanOrEqual" secondItem="iws-4E-RLR" secondAttribute="width" id="wvr-Ax-Q6c"/>
                         </constraints>
                     </view>

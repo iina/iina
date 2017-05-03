@@ -300,6 +300,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Initialization
 
+
+  override func windowWillLoad() {
+    oscPosition = Preference.OSCPosition(rawValue: ud.integer(forKey: PK.oscPosition))
+    relativeSeekAmount = ud.integer(forKey: PK.relativeSeekAmount)
+    volumeScrollAmount = ud.integer(forKey: PK.volumeScrollAmount)
+    horizontalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.horizontalScrollAction))
+    verticalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.verticalScrollAction))
+    useExtractSeek = Preference.SeekOption(rawValue: ud.integer(forKey: PK.useExactSeek))
+    arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: PK.arrowButtonAction))
+    singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.singleClickAction))
+    doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.doubleClickAction))
+    rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.rightClickAction))
+    pinchAction = Preference.PinchAction(rawValue: ud.integer(forKey: PK.pinchAction))
+  }
+
   override func windowDidLoad() {
 
     super.windowDidLoad()
@@ -334,7 +349,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     sideBarView.isHidden = true
 
     // osc views
-    oscPosition = Preference.OSCPosition(rawValue: ud.integer(forKey: PK.oscPosition))
     fragControlView.addView(fragControlViewLeftView, in: .center)
     fragControlView.addView(fragControlViewMiddleView, in: .center)
     fragControlView.addView(fragControlViewRightView, in: .center)
@@ -379,17 +393,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
     pipOverlayView.isHidden = true
-
-    relativeSeekAmount = ud.integer(forKey: PK.relativeSeekAmount)
-    volumeScrollAmount = ud.integer(forKey: PK.volumeScrollAmount)
-    horizontalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.horizontalScrollAction))
-    verticalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.verticalScrollAction))
-    useExtractSeek = Preference.SeekOption(rawValue: ud.integer(forKey: PK.useExactSeek))
-    arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: PK.arrowButtonAction))
-    singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.singleClickAction))
-    doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.doubleClickAction))
-    rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.rightClickAction))
-    pinchAction = Preference.PinchAction(rawValue: ud.integer(forKey: PK.pinchAction))
     rightLabel.mode = ud.bool(forKey: PK.showRemainingTime) ? .remaining : .duration
 
     osdProgressBarWidthConstraint = NSLayoutConstraint(item: osdAccessoryProgress, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150)
@@ -1103,7 +1106,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     }
     // update control bar position
-    if oscPosition != nil && oscPosition == .floating {
+    if oscPosition == .floating {
       let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
       let cpv = ud.float(forKey: PK.controlBarPositionVertical)
       controlBarFloating.setFrameOrigin(NSMakePoint(

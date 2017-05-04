@@ -1,4 +1,4 @@
-/*
+/* 
   String_ui.strings
   iina
 
@@ -13,67 +13,67 @@
 "logout" = "Ausloggen";
 
 // PlaylistViewController.swift
-"playlist.playlist_cap" = "PLAYLIST";
+"playlist.playlist_cap" = "WIEDERGABELISTE";
 "playlist.chapter_cap" = "KAPITEL";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Puffern... %d%%";
+"main.buffering_indicator" = "Puffern … %d%%";
 
 // QuickSettingViewController.swift
 "quicksetting.aspect_item.Default" = "Standard";
-"quicksetting.crop_item.None" = "Kein";
+"quicksetting.crop_item.None" = "Keine";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
-"osd.resume" = "Wiedergabe";
+"osd.resume" = "Weiter";
 "osd.volume" = "Lautstärke: %i";
-"osd.speed" = "Wiedergabegeschwindigkeit: %.2fx";
+"osd.speed" = "Geschwindigkeit: %.2fx";
 "osd.aspect" = "Seitenverhältnis: %@";
 "osd.crop" = "Zuschneiden: %@";
-"osd.rotate" = "Rotation: %i°";
-"osd.deinterlace" = "Deinterlacing: %@";
-"osd.audio_delay.nodelay" = "Keine Audio-Verzögerung";
-"osd.audio_delay.later" = "Audio-Verzögerung: %.2fs später";
-"osd.audio_delay.earlier" = "Audio-Verzögerung: %.2fs früher";
-"osd.sub_delay.nodelay" = "Keine Untertitel-Verzögerung";
-"osd.sub_delay.later" = "Untertitel-Verzögerung: %.2fs später";
-"osd.sub_delay.earlier" = "Untertitel-Verzögerung: %.2fs früher";
-"osd.subtitle_pos" = "Untertitel-Position: %.1f";
-"osd.mute" = "Stumm";
-"osd.unmute" = "Stumm aus";
-"osd.screenshot" = "Bild aufgenommen";
-"osd.abloop.a" = "AB-Wiederholung: A";
-"osd.abloop.b" = "AB-Wiederholung: B";
-"osd.abloop.clear" = "AB-Wiederholung: Aus";
-"osd.stop" = "Stopp";
+"osd.rotate" = "Drehen: %i°";
+"osd.deinterlace" = "Deinterlace: %@";
+"osd.audio_delay.nodelay" = "Tonverzögerung: keine";
+"osd.audio_delay.later" = "Tonverzögerung: um %.2fs verzögert";
+"osd.audio_delay.earlier" = "Tonverzögerung: %.2fs früher";
+"osd.sub_delay.nodelay" = "Untertitelverzögerung: keine";
+"osd.sub_delay.later" = "Untertitelverzögerung: %.2fs verspätet";
+"osd.sub_delay.earlier" = "Untertitelverzögerung: %.2fs vorgezogen";
+"osd.subtitle_pos" = "Untertitelposition: %.1f";
+"osd.mute" = "Stummgeschaltet";
+"osd.unmute" = "Stummschlatung aufgehoben";
+"osd.screenshot" = "Screenshot aufgenomme";
+"osd.abloop.a" = "AB-Schleife: A";
+"osd.abloop.b" = "AB-Schleife: B";
+"osd.abloop.clear" = "AB-Schleife: Gelöscht";
+"osd.stop" = "Stop";
 "osd.chapter" = "Kapitel: %@";
-"osd.subtitle_scale" = "Untertitel-Skalierung: %.2fx";
-"osd.add_to_playlist" = "%i Dateien zur Playlist hinzugefügt";
-"osd.clear_playlist" = "Playlist geleert";
+"osd.subtitle_scale" = "Untertitelvergrößerung: %.2fx";
+"osd.add_to_playlist" = "%i Dateien zur Wiedergabeliste hinzugefügt";
+"osd.clear_playlist" = "Wiedergabeliste geleert";
 "osd.video_eq.contrast" = "Kontrast: %i";
 "osd.video_eq.gamma" = "Gamma: %i";
 "osd.video_eq.hue" = "Farbton: %i";
 "osd.video_eq.saturation" = "Sättigung: %i";
-"osd.video_eq.brightness" = "Helligkeit: %i";
-"osd.find_online_sub" = "Online nach Untertiteln suchen...";
+"osd.video_eq.brightness" = "Helligkei: %i";
+"osd.find_online_sub" = "Suche online nach Untertiteln…";
 "osd.sub_not_found" = "Keine Untertitel gefunden";
-"osd.sub_found" = "%d Untertitel gefunden. Laden...";
-"osd.sub_downloaded" = "Untertitel geladen";
+"osd.sub_found" = "%d Untertitel gefunden. Herunterladen…";
+"osd.sub_downloaded" = "Untertitel heruntergeladen";
 "osd.sub_saved" = "Untertitel gespeichert";
 "osd.network_error" = "Netzwerkfehler";
-"osd.file_error" = "Dateilesefehler";
+"osd.file_error" = "Fehler beim einlesen der Datei";
 "osd.cannot_login" = "Einloggen nicht möglich";
 "osd.canceled" = "Abgebrochen";
 
-"update.title_update_found" = "Neues Update verfügbar";
-"update.title_no_update" = "Kein Update verfügbar";
+"update.title_update_found" = "Update der Software gefunden";
+"update.title_no_update" = "Kein Update vorhanden";
 "update.title_error" = "Fehler";
-"update.update_found" = "Es gibt eine neuere Version! Da sich IINA no in der Alpha-Phase befindet, wird die neueste Version empfohlen. Laden von der Website oder von Github:";
-"update.no_update" = "Dies ist die neueste Version.";
-"update.check_failed" = "Fehler beim Suchen nach Updates. Wahrscheinlich ist diese Version von IINA zu alt. Updates von der Website oder von Github laden.";
+"update.update_found" = "Neue Version gefunden! IINA ist noch im Alpha-Stadium. Es wird empfohlen immer die neueste Version zu benutzen. Bitte von der Website oder GitHub herunterladen:";
+"update.no_update" = "Du hast bereits die neueste Version.";
+"update.check_failed" = "Konnte nicht nach Updated suchen. Vermutlich benutzt du eine veraltete Version von IINA. Schau mal auf der Website des Projekts oder auf GitHub nach.";
 "update.new_version" = "Neue Version:";
-"update.dl_from_website" = "Website öffnen";
-"update.dl_from_github" = "Github öffnen";
+"update.dl_from_website" = "Die Webseite aufrufen";
+"update.dl_from_github" = "Github aufrufen";
 
 "preference.title" = "Einstellungen";
 "preference.general" = "Allgemein";
@@ -81,73 +81,74 @@
 "preference.codec" = "Codec";
 "preference.subtitle" = "Untertitel";
 "preference.network" = "Netzwerk";
-"preference.control" = "Steuerung";
-"preference.keybindings" = "Tastenkürzel";
-"preference.advanced" = "Erweitert";
+"preference.control" = "Bedienung";
+"preference.keybindings" = "Tastaturkürzel";
+"preference.advanced" = "Erweiterte Einstellungen";
 "preference.scripts" = "Skripte";
-"preference.not_logged_in" = "nicht eingeloggt";
-"preference.logged_in_as" = "Eingeloggt als %@";
+"preference.not_logged_in" = "Nicht angemeldet";
+"preference.logged_in_as" = "Als %@ angemeldet";
 
-"menu.volume"= "Lautstärke: %d";
-"menu.audio_delay" = "Audio-Verzögerung: %.2fs";
-"menu.sub_delay" = "Untertitel-Verzögerung: %.2fs";
-"menu.fullscreen" = "Vollbild";
-"menu.exit_fullscreen" = "Vollbild beenden";
-"menu.pip" = "Picture-in-Picture starten";
-"menu.exit_pip" = "Picture-in-Picture beenden";
-"menu.pause" = "Pausieren";
-"menu.resume" = "Fortsetzen";
+"menu.volume"= "Volume: %d";
+"menu.audio_delay" = "Tonverzögerung: %.2fs";
+"menu.sub_delay" = "Untertitelverzögerung: %.2fs";
+"menu.fullscreen" = "Vollbild AN";
+"menu.exit_fullscreen" = "Vollbild AUS";
+"menu.pip" = "Bild-im-Bild AN";
+"menu.exit_pip" = "Bild-im-Bild AUS";
+"menu.pause" = "Pause";
+"menu.resume" = "Weiter";
 
 "track.none" = "<Leer>";
 
 // Alerts
-"alert.fatal_error" = "Schwerer Fehler: %@ \nProgramm wird beendet.";
-"alert.mpv_error" = "Fehler %@ (%@) beim setzen der Benutzereinstellung %@.";
-"alert.sleep" = "Monitorruhezustand kann nicht abeschaltet werden!";
+"alert.fatal_error" = "Schwerer Fehler: %@ \nDas Programm wird beendet.";
+"alert.mpv_error" = "Fehler %@ (%@) beim setzen der Einstellung %@.";
+"alert.sleep" = "Ruhezustand des Monitors kann nicht verhindert werden!";
 
-"alert.unsupported_audio" = "Externe Audio-Datei nicht unterstützt.";
-"alert.unsupported_sub" = "Externe Untertitel-Datei nicht unterstützt.";
+"alert.unsupported_audio" = "Externe Audio-Datei wird nicht unterstützt.";
+"alert.unsupported_sub" = "Externe Untertiteldatei wird nicht unterstützt.";
 "alert.unsupported_url" = "URL wird nicht unterstützt.";
-"alert.wrong_url_format" = "Falsche URL-Format.";
+"alert.wrong_url_format" = "Falsches URL-Format.";
 
 "alert.error_open" = "Datei oder Stream kann nicht geöffnet werden!";
-"alert.error_finding_file" = "Datei %@ kann nicht gefunden werden!";
-"alert.error_loading_script" = "Das Skript %@ kann nicht geladen werden!";
-"alert.error_saving_file" = "Fehler beim Speichern von %@: %@";
-"alert.error_deleting_file" = "Datei kann nicht gelöscht werden.";
+"alert.error_finding_file" = " Datei %@ kann nicht gefunden werden!";
+"alert.error_loading_script" = "Das Skript %@ konnte nicht geladen werden!";
+"alert.error_saving_file" = "Fehler beim Speichern %@: %@";
+"alert.error_deleting_file" = "Datei konnte nicht gespeichert werden.";
 
-"alert.config.empty_name" = "Dateiname kann nicht leer sein.";
-"alert.config.name_existing" = "Dateiname bereits vorhanden.";
-"alert.config.cannot_create" = "Config-Datei kann nicht erzeugt werden!";
-"alert.config.cannot_write" = "Config-Datei konnte nicht geschrieben werden!";
+"alert.config.empty_name" = "Bitte Namen vergeben.";
+"alert.config.name_existing" = "Name bereits vergeben.";
+"alert.config.cannot_create" = "Konfigurationsdatei konnnte nicht erstellt werden!";
+"alert.config.cannot_write" = "Konfigurationsdatei nicht beschreibbar!";
 
-"alert.filter.incorrect" = "Fehler bei den Filtereinstellungen. Bitte Werte überprüfen.";
+"alert.filter.incorrect" = "Fehler beim erstellen der Filter. Bitte Parameter überprüfen.";
 
-"alert.keybinding_config.error" = "Die Konfigurationsdatei für die Tastaturkürzel \"%@\" konnnte nicht gelesen werden! Standardtastaturkürzel werden benutzt. Bitte die Konfiguration überprüfen.";
+"alert.keybinding_config.error" = "Fehler beim parsen der Tastaturkürzeldatei \"%@\"! Greife auf die Standardeinstellungen zurück. Bitte Einstellungen überprüfen.";
 
-"alert.extra_option.cannot_read" = "Die Benutzerkonfiguration für die erweiterten mpv Optionen kann nicht gelesen werden.";
-"alert.extra_option.empty" = "Schlüsse oder Wert kann nicht leer bleiben!";
-"alert.extra_option.error" = "Fehler beim setzen der Option --%@=%@ Rückgabewert %d. Bitte die die Erweiterten Einstellungen überprüfen Einstellungen > Erweitert.";
-"alert.extra_option.config_folder" = "Konfigurationsverzeichnis konnte nicht ausgewählt werden. \"%@\".";
+"alert.extra_option.cannot_read" = "Die Benutzerdefinierten extra MPV-Optionen können nicht gelesen werden.";
+"alert.extra_option.empty" = "Schlüssel oder Wert können nicht leer sein!";
+"alert.extra_option.error" = "Fehler beim setzen der Optioen --%@=%@ Fehlernummer %d. Bitte die extra Optionen unter Einstellungen > Erweitert überprüfen.";
+"alert.extra_option.config_folder" = "Fehler beim setzen des Verzeichnisses für die Einstellungen\"%@\".";
 
-"alert.playlist.error_deleting" = "Fehler beim Löschen: %@";
+"alert.playlist.error_deleting" = "Fehler beim Löschen der Datei: %@";
 
-"alert.sub.no_selected" = "Bitte zuerst eine Untertiteldatei wählen.";
-"alert.sub_lang_not_set" = "Vor der Benutzung von opensubtitles bitte zuerst in den Einstellungen die bevorzugte Sprache für Untertitel wählen. Benutze jetzt Englisch(eng).";
-"alert.sub.cannot_save_passwd" = "Passwort konnte nicht im Schlüsselbund gespeichert werden: %@";
-"alert.sub.cannot_login" = "Einloggen nicht möglich. Bitte Benutzername, Passwort und Netzwerkverbindung prüfen.\n\n%@";
+"alert.sub.no_selected" = "Bitte zuerst einen bereits heruntergeladene Untertitel auswählen.";
+"alert.sub_lang_not_set" = "Bitte zuerst die gewünschte Sprache für Untertitel in den Einstellungen auswählen. Englisch(eng) wird für diesmal benutzt.";
+"alert.sub.cannot_save_passwd" = "Passwort kann nicht in der Schlüsselbundverwaltung gespeichert werden: %@";
+"alert.sub.cannot_login" = "Einloggen nicht mögliche. Bitte Benutzername, Passwort und die Netzwerkverbindung überprüfen.\n\n%@";
 
-"pl_menu.title_multi" = "%d Einträge";
-"pl_menu.play_next" = "Nächsten Eintrag abspielen";
-"pl_menu.remove" = "Entfernen";
-"pl_menu.remove_multi" = "Ausgewählte entfernen";
+
+"pl_menu.title_multi" = "%d Elemente";
+"pl_menu.play_next" = "Nächte abspielen";
+"pl_menu.remove" = "Löschen";
+"pl_menu.remove_multi" = "Ausgewählte löschen";
 "pl_menu.delete" = "In den Papierkorb legen";
-"pl_menu.delete_multi" = "Ausgewählte Objekte in den Papierkorb legen.";
-"pl_menu.delete_after_play" = "Nach dem Abspielen in den Papierkorb legen.";
-"pl_menu.delete_after_play_multi" = "Ausgewählte Objekte nach dem Abspielen in den Papierkorb legen.";
+"pl_menu.delete_multi" = "Ausgewählte Dateien in den Papierkorb legen";
+"pl_menu.delete_after_play" = "Nach dem Abspielen in den Papierkorb legen";
+"pl_menu.delete_after_play_multi" = "Ausgewählte Dateien nach dem Abspielen in den Papierkorb legen";
 "pl_menu.reveal_in_finder" = "Im Finder anzeigen";
-"pl_menu.add_item" = "Hinzufügen …";
-"pl_menu.clear_playlist" = "Playlist leeren";
+"pl_menu.add_item" = "Element hinzufügen …";
+"pl_menu.clear_playlist" = "Wiedergabeliste leeren";
 
-"keymapping.title" = "Tastaturkürzel";
-"keymapping.message" = "Für Aufnahme beliebige Taste drücken.";
+"keymapping.title" = "Tastenzuordnung";
+"keymapping.message" = "Zum Starten der Aufnahme beliebige Taste drücken.";

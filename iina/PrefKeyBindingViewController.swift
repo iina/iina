@@ -178,7 +178,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     let fm = FileManager.default
     // - if exists
     if fm.fileExists(atPath: newFilePath) {
-      if Utility.quickAskPanel(title: "Config file already exists", infoText: "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.") {
+      if Utility.quickAskPanel("config.file_existing") {
         // - delete file
         do {
           try fm.removeItem(atPath: newFilePath)
@@ -193,7 +193,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     }
     // - new file
     if !fm.createFile(atPath: newFilePath, contents: nil, attributes: nil) {
-      Utility.showAlert("config.cannot_crete")
+      Utility.showAlert("config.cannot_create")
       return
     }
     // save
@@ -225,7 +225,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     let fm = FileManager.default
     // - if exists
     if fm.fileExists(atPath: newFilePath) {
-      if Utility.quickAskPanel(title: "Config file already exists", infoText: "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.") {
+      if Utility.quickAskPanel("config.file_existing") {
         // - delete file
         do {
           try fm.removeItem(atPath: newFilePath)

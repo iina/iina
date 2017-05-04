@@ -163,6 +163,9 @@
 "alert.jump_to.title" = "Jump to";
 "alert.jump_to.message" = "Please enter the time you want to jumo to. Example: 20:35";
 
+"opensub.login.title" = "Opensubtitles Login";
+"opensub.login.message" = "Please enter your username and password";
+
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.remove" = "Remove";
@@ -177,6 +180,3 @@
 
 "keymapping.title" = "Key Mapping";
 "keymapping.message" = "Press any key to record.";
-
-"opensub.login.title" = "Opensubtitles Login";
-"opensub.login.message" = "Please enter your username and password";

@@ -61,7 +61,7 @@ class PrefSubViewController: NSViewController {
     let currUsername = UserDefaults.standard.string(forKey: Preference.Key.openSubUsername) ?? ""
     if currUsername.isEmpty {
       // if current username is empty, login
-      let _ = Utility.quickUsernamePasswordPanel(messageText: NSLocalizedString("opensub.login.title", comment: "Opensubtitles Login"), informativeText: NSLocalizedString("opensub.login.message", comment: "Please enter your username and password")) {
+      let _ = Utility.quickUsernamePasswordPanel("opensub.login") {
         (username, password) in
         loginIndicator.isHidden = false
         loginIndicator.startAnimation(nil)

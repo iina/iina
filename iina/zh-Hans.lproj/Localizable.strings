@@ -162,6 +162,9 @@
 "alert.jump_to.title" = "跳转至";
 "alert.jump_to.message" = "请输入希望跳转的时间。例: 20:35";
 
+"alert.opensub.login.title" = "Opensubtitles 登录";
+"alert.opensub.login.message" = "请输入用户名和密码。";
+
 "pl_menu.title_multi" = "%d 个项目";
 "pl_menu.play_next" = "接下来播放";
 "pl_menu.remove" = "移除";
@@ -176,6 +179,3 @@
 
 "keymapping.title" = "快捷键";
 "keymapping.message" = "请按任意键来开始录制。";
-
-"opensub.login.title" = "Opensubtitles 登录";
-"opensub.login.message" = "请输入用户名和密码";

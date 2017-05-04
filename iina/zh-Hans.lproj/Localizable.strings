@@ -110,12 +110,13 @@
 "alert.title_info" = "提示";
 
 "alert.fatal_error" = "严重错误：%@ \n程序将立刻结束。";
-"alert.mpv_error" = "在设置用户选项时出现错误 %@ (%@)。";
+"alert.mpv_error" = "出现内部错误 %@ (%@) (设定选项 %@ 时)。";
 "alert.sleep" = "无法阻止系统睡眠。";
 
 "alert.unsupported_audio" = "不支持的外部音频文件。";
 "alert.unsupported_sub" = "不支持的外部字幕。";
 "alert.unsupported_url" = "不支持的 URL。";
+"alert.wrong_url_format" = "URL 格式错误。";
 
 "alert.error_open" = "无法打开文件或流！";
 "alert.error_finding_file" = "无法找到文件 %@ ！";
@@ -138,7 +139,7 @@
 "alert.add_filter.title" = "添加滤镜";
 "alert.add_filter.message" = "请输入符合 mpv 的 vf 或 af 选项格式的滤镜字符串。";
 
-"alert.keybinding_config_error" = "无法设置快捷键「%@」！已回退到 IINA 默认配置。请检查你的快捷键文件是否正确。";
+"alert.keybinding_config.error" = "无法设置快捷键「%@」！已回退到 IINA 默认配置。请检查你的快捷键文件是否正确。";
 
 "alert.extra_option.cannot_read" = "无法读取自定义的 mpv 额外选项。";
 "alert.extra_option.empty" = "键或值不能为空！";

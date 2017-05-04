@@ -3,16 +3,19 @@
 "1XQ-Mt-jmZ.title" = "-:--:--";
 
 /* Class = "NSTextFieldCell"; title = "Buffering... 100%"; ObjectID = "3fe-fP-yMB"; */
-"3fe-fP-yMB.title" = "Mise en mémoire tampon... 100%";
+"3fe-fP-yMB.title" = "バッファ中... 100%";
 
 /* Class = "NSTextFieldCell"; title = "-:--:--"; ObjectID = "6mL-0A-eq2"; */
 "6mL-0A-eq2.title" = "-:--:--";
 
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "7aL-lH-m8i"; */
+"7aL-lH-m8i.title" = "Label";
+
 /* Class = "NSWindow"; title = "Window"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "Fenêtre";
+"F0z-JX-Cv5.title" = "ウィンドウ";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Display"; ObjectID = "JAn-Yu-XA2"; */
-"JAn-Yu-XA2.title" = "Informations à l'écran";
+"JAn-Yu-XA2.title" = "表示画面";
 
 /* Class = "NSTextFieldCell"; title = "-:--:--"; ObjectID = "Pw8-rd-mUu"; */
 "Pw8-rd-mUu.title" = "-:--:--";
@@ -27,7 +30,4 @@
 "eCe-SS-Wlj.title" = "-32x";
 
 /* Class = "NSTextFieldCell"; title = "This video is playing in Picture in Picture"; ObjectID = "gdE-b5-kod"; */
-"gdE-b5-kod.title" = "Cette vidéo est en cours de lecture en Image dans l'image";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "7aL-lH-m8i"; */
-"7aL-lH-m8i.title" = "Label";
+"gdE-b5-kod.title" = "このビデオは画面内の画面で再生しています";

@@ -191,6 +191,35 @@ class Utility {
 
   // MARK: - App functions
 
+  static func setSelfAsDefaultForAllFileTypes() {
+    guard
+    let docTypes = Bundle.main.infoDictionary?["CFBundleDocumentTypes"] as? [[String: Any]],
+    let cfBundleID = Bundle.main.bundleIdentifier as CFString?
+    else { return }
+
+    guard quickAskPanel(title: "Setting IINA as Default App", infoText: "IINA will be set as the default app for all file types it supports.") else { return }
+
+    var successCount = 0
+    var failedCount = 0
+    Utility.log("Set self as default...")
+    for docType in docTypes {
+      if let exts = docType["CFBundleTypeExtensions"] as? [String] {
+        for ext in exts {
+          let utiString = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, ext as CFString, nil)!.takeUnretainedValue()
+          let status = LSSetDefaultRoleHandlerForContentType(utiString, .all, cfBundleID)
+          if status == kOSReturnSuccess {
+            successCount += 1
+          } else {
+            Utility.log("failed for \(ext): return value \(status)")
+            failedCount += 1
+          }
+        }
+      }
+    }
+
+    showAlert(message: "Finished with \(successCount) success and \(failedCount) failed.")
+  }
+
   private static func createDirIfNotExist(url: URL) {
   let path = url.path
     // check exist

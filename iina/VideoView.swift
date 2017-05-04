@@ -66,14 +66,17 @@ class VideoView: NSView {
   }
 
   func uninit() {
-    guard !isUninited else { return }
-
     uninitLock.lock()
+    
+    guard !isUninited else {
+      uninitLock.unlock()
+      return
+    }
+    
     mpv_opengl_cb_set_update_callback(mpvGLContext, nil, nil)
     mpv_opengl_cb_uninit_gl(mpvGLContext)
-    uninitLock.unlock()
-
     isUninited = true
+    uninitLock.unlock()
   }
 
   deinit {

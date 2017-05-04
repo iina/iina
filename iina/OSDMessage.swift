@@ -95,13 +95,19 @@ enum OSDMessage {
         .normal
       )
 
-    case .aspect(let value):
+    case .aspect(var value):
+      if value == "Default" {
+        value = NSLocalizedString("quicksetting.item_default", comment: "Default")
+      }
       return (
         String(format: NSLocalizedString("osd.aspect", comment: "Aspect Ratio: %@"), value),
         .normal
       )
 
-    case .crop(let value):
+    case .crop(var value):
+      if value == "None" {
+        value = NSLocalizedString("quicksetting.item_none", comment: "None")
+      }
       return (
         String(format: NSLocalizedString("osd.crop", comment: "Crop: %@"), value),
         .normal

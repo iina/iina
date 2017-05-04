@@ -20,8 +20,8 @@
 "main.buffering_indicator" = "バッファ中... %d%%";
 
 // QuickSettingViewController.swift
-"quicksetting.aspect_item.Default" = "デフォルト";
-"quicksetting.crop_item.None" = "なし";
+"quicksetting.item_default" = "デフォルト";
+"quicksetting.item_none" = "なし";
 
 // OSDMessage.swift
 "osd.pause" = "一時停止";

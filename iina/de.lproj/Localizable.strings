@@ -20,8 +20,8 @@
 "main.buffering_indicator" = "Puffern... %d%%";
 
 // QuickSettingViewController.swift
-"quicksetting.aspect_item.Default" = "Standard";
-"quicksetting.crop_item.None" = "Kein";
+"quicksetting.item_default" = "Standard";
+"quicksetting.item_none" = "Kein";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";

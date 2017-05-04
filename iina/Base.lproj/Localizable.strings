@@ -13,7 +13,7 @@
 "general.logout" = "Logout";
 "general.ok" = "OK";
 "general.cancel" = "Cancel";
-"general.usernme" = "Username";
+"general.username" = "Username";
 "general.password" = "Password";
 
 // PlaylistViewController.swift
@@ -110,7 +110,7 @@
 "alert.title_info" = "Information";
 
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
-"alert.mpv_error" = "Error %@ (%@) when setting user option %@.";
+"alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
 "alert.sleep" = "Cannot prevent display sleep!";
 
 "alert.unsupported_audio" = "Unsupported external audio file.";
@@ -163,8 +163,8 @@
 "alert.jump_to.title" = "Jump to";
 "alert.jump_to.message" = "Please enter the time you want to jumo to. Example: 20:35";
 
-"opensub.login.title" = "Opensubtitles Login";
-"opensub.login.message" = "Please enter your username and password";
+"alert.opensub.login.title" = "Opensubtitles Login";
+"alert.opensub.login.message" = "Please enter your username and password";
 
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";

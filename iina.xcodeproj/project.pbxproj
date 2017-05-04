@@ -387,6 +387,7 @@
 		847644091D48CC3D004F6DF5 /* MPVCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVCommand.swift; sourceTree = "<group>"; };
 		8476440B1D48F63D004F6DF5 /* OSDMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OSDMessage.swift; sourceTree = "<group>"; };
 		84791C8A1D405E9D0069E28A /* PlaybackInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackInfo.swift; sourceTree = "<group>"; };
+		84792F541EBB957E002E98F6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		84795C361E0825AD0059A648 /* GifGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifGenerator.swift; sourceTree = "<group>"; };
 		84795C381E083EE30059A648 /* PrefControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefControlViewController.swift; sourceTree = "<group>"; };
 		847C62C81DC13CDA00E1EF16 /* PrefGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefGeneralViewController.swift; sourceTree = "<group>"; };
@@ -1586,6 +1587,7 @@
 				843B97AA1E82D3C100D07261 /* Base */,
 				84AC62291E87DC07002D6F92 /* pl */,
 				133400251EB3831E007FE17E /* ja */,
+				84792F541EBB957E002E98F6 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

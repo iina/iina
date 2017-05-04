@@ -13,6 +13,8 @@
 "general.logout" = "退出";
 "general.ok" = "好";
 "general.cancel" = "取消";
+"general.username" = "用户名";
+"general.password" = "密码";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "播放列表";
@@ -160,3 +162,6 @@
 
 "keymapping.title" = "快捷键";
 "keymapping.message" = "请按任意键来开始录制。";
+
+"opensub.login.title" = "Opensubtitles 登录";
+"opensub.login.message" = "请输入用户名和密码";

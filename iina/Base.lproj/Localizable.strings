@@ -13,6 +13,8 @@
 "general.logout" = "Logout";
 "general.ok" = "OK";
 "general.cancel" = "Cancel";
+"general.usernme" = "Username";
+"general.password" = "Password";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "PLAYLIST";
@@ -161,3 +163,6 @@
 
 "keymapping.title" = "Key Mapping";
 "keymapping.message" = "Press any key to record.";
+
+"opensub.login.title" = "Opensubtitles Login";
+"opensub.login.message" = "Please enter your username and password";

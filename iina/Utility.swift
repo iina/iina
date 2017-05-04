@@ -161,13 +161,13 @@ class Utility {
     panel.messageText = messageText
     panel.informativeText = informativeText
     let view = NSView(frame: NSRect(x: 0, y: 0, width: 240, height: 82))
-    view.addSubview(quickLabel("Username:", 68))
+    view.addSubview(quickLabel(NSLocalizedString("general.username", comment: "Username") + ":", 68))
     let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 42, width: 240, height: 24))
     input.lineBreakMode = .byClipping
     input.usesSingleLineMode = true
     input.cell?.isScrollable = true
     view.addSubview(input)
-    view.addSubview(quickLabel("Password:", 26))
+    view.addSubview(quickLabel(NSLocalizedString("general.password", comment: "Password") + ":", 26))
     let pwField = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
     view.addSubview(pwField)
     panel.accessoryView = view

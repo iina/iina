@@ -123,6 +123,10 @@
 "alert.error_saving_file" = "保存文件 %@ 时出现错误 %@";
 "alert.error_deleting_file" = "无法删除文件。";
 
+"alert.config.new.title" = "新建快捷键配置";
+"alert.config.new.message" = "请输入配置名。";
+"alert.config.duplicate.title" = "复制快捷键配置";
+"alert.config.duplicate.message" = "请输入复制后的配置文件名。";
 "alert.config.empty_name" = "名称不能为空。";
 "alert.config.name_existing" = "此配置名称已存在。";
 "alert.config.file_existing.title" = "同名文件已存在";
@@ -131,6 +135,8 @@
 "alert.config.cannot_write" = "无法写入配置文件！";
 
 "alert.filter.incorrect" = "设置滤镜时出现错误。请检查你的参数格式。";
+"alert.add_filter.title" = "添加滤镜";
+"alert.add_filter.message" = "请输入符合 mpv 的 vf 或 af 选项格式的滤镜字符串。";
 
 "alert.keybinding_config_error" = "无法设置快捷键「%@」！已回退到 IINA 默认配置。请检查你的快捷键文件是否正确。";
 
@@ -149,6 +155,12 @@
 "alert.set_default.title" = "将 IINA 设为默认播放器";
 "alert.set_default.message" = "IINA 将会被关联至所有支持的文件格式。";
 "alert.set_default.success" = "操作已完成。%d 成功，%d 失败。";
+
+"alert.add_watch.title" = "监视 mpv 属性";
+"alert.add_watch.message" = "请输入一个有效的 mpv 属性名。";
+
+"alert.jump_to.title" = "跳转至";
+"alert.jump_to.message" = "请输入希望跳转的时间。例: 20:35";
 
 "pl_menu.title_multi" = "%d 个项目";
 "pl_menu.play_next" = "接下来播放";

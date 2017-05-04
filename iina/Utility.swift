@@ -89,7 +89,7 @@ class Utility {
      - key: A localization key. "alert.`key`.title" will be used as alert title, and "alert.`key`.message" will be the informative text.
      - titleComment: (Optional) Comment for title key.
      - messageComment: (Optional) Comment for message key.
-   - Returns: Whether user clicked OK.
+   - Returns: Whether user dismissed the panel by clicking OK.
    */
   static func quickAskPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil) -> Bool {
     let panel = NSAlert()
@@ -102,6 +102,10 @@ class Utility {
     return panel.runModal() == NSAlertFirstButtonReturn
   }
 
+  /**
+   Pop up an open panel.
+   - Returns: Whether user dismissed the panel by clicking OK.
+   */
   static func quickOpenPanel(title: String, isDir: Bool, ok: (URL) -> Void) -> Bool {
     let panel = NSOpenPanel()
     panel.title = title
@@ -119,7 +123,11 @@ class Utility {
       return false
     }
   }
-  
+
+  /**
+   Pop up a save panel.
+   - Returns: Whether user dismissed the panel by clicking OK.
+   */
   static func quickSavePanel(title: String, types: [String], ok: (URL) -> Void) -> Bool {
     let panel = NSSavePanel()
     panel.title = title
@@ -135,10 +143,20 @@ class Utility {
     }
   }
 
-  static func quickPromptPanel(messageText: String, informativeText: String, ok: (String) -> Void) -> Bool {
+  /**
+   Pop up a prompt panel.
+   - parameters:
+     - key: A localization key. "alert.`key`.title" will be used as alert title, and "alert.`key`.message" will be the informative text.
+     - titleComment: (Optional) Comment for title key.
+     - messageComment: (Optional) Comment for message key.
+   - Returns: Whether user dismissed the panel by clicking OK.
+   */
+  static func quickPromptPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, ok: (String) -> Void) -> Bool {
     let panel = NSAlert()
-    panel.messageText = messageText
-    panel.informativeText = informativeText
+    let titleKey = "alert." + key + ".title"
+    let messageKey = "alert." + key + ".message"
+    panel.messageText = NSLocalizedString(titleKey, comment: titleComment ?? titleKey)
+    panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
     let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
     input.lineBreakMode = .byClipping
     input.usesSingleLineMode = true

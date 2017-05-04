@@ -124,14 +124,20 @@
 "alert.error_saving_file" = "Error occured when saving %@: %@";
 "alert.error_deleting_file" = "Cannot delete the file.";
 
+"alert.config.new.title" = "New Input Configuration";
+"alert.config.new.message" = "Please enter a name for the new configuration.";
+"alert.config.duplicate.title" = "Duplicate Configuration";
+"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
 "alert.config.empty_name" = "The name cannot be empty.";
 "alert.config.name_existing" = "The name already exists.";
-"alert.config.file_existing.title" = "A file with the same name already exists";
+"alert.config.file_existing.title" = "File Already Exists";
 "alert.config.file_existing.message" = "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.";
 "alert.config.cannot_create" = "Cannot create config file!";
 "alert.config.cannot_write" = "Cannot write to config file!";
 
 "alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+"alert.add_filter.title" = "New Filter";
+"alert.add_filter.message" = "Please enter a filter string in format of MPV's vf or af command.";
 
 "alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
 
@@ -150,6 +156,12 @@
 "alert.set_default.title" = "Setting IINA as Default App";
 "alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
 "alert.set_default.success" = "Finished with %d success and %d failed.";
+
+"alert.add_watch.title" = "Add Watch Property";
+"alert.add_watch.message" = "Please enter a valid MPV property name.";
+
+"alert.jump_to.title" = "Jump to";
+"alert.jump_to.message" = "Please enter the time you want to jumo to. Example: 20:35";
 
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";

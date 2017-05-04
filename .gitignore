@@ -75,6 +75,8 @@ Pods/
 
 # Carthage
 #
+
+
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
 # Carthage/Checkouts
 
@@ -92,7 +94,7 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 
-other/*.swift
+other/MPV*.swift
 psd/
 temp/
 

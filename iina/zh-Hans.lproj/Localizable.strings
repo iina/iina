@@ -24,8 +24,8 @@
 "main.buffering_indicator" = "缓冲中... %d%%";
 
 // QuickSettingViewController.swift
-"quicksetting.aspect_item.Default" = "默认";
-"quicksetting.crop_item.None" = "关闭";
+"quicksetting.item_default" = "默认";
+"quicksetting.item_none" = "无";
 
 // OSDMessage.swift
 "osd.pause" = "暂停";

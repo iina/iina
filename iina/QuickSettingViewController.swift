@@ -147,8 +147,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   private func updateControlsState() {
     // Video
-    aspectSegment.selectSegment(withLabel: playerCore.info.unsureAspect)
-    cropSegment.selectSegment(withLabel: playerCore.info.unsureCrop)
+    if let index = AppData.aspectsInPanel.index(of: playerCore.info.unsureAspect) {
+      aspectSegment.selectedSegment = index
+    }
+    if let index = AppData.cropsInPanel.index(of: playerCore.info.unsureCrop) {
+      cropSegment.selectedSegment = index
+    }
     rotateSegment.selectSegment(withTag: AppData.rotations.index(of: playerCore.info.rotation) ?? -1)
     customSpeedTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
     deinterlaceCheckBtn.state = playerCore.info.deinterlace ? NSOnState : NSOffState
@@ -325,7 +329,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   // MARK: - Actions
 
-  // Tab buttons
+  // MARK: Tab buttons
 
   @IBAction func tabBtnAction(_ sender: NSButton) {
     tabView.selectTabViewItem(at: sender.tag)
@@ -342,24 +346,22 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     updateControlsState()
   }
 
-  // Video tab
+  // MARK: Video tab
 
   @IBAction func aspectChangedAction(_ sender: NSSegmentedControl) {
-    if let value = sender.label(forSegment: sender.selectedSegment) {
-      playerCore.setVideoAspect(value)
-      mainWindow.displayOSD(.aspect(value))
-    }
+    let aspect = AppData.aspectsInPanel[sender.selectedSegment]
+    playerCore.setVideoAspect(aspect)
+    mainWindow.displayOSD(.aspect(aspect))
   }
 
   @IBAction func cropChangedAction(_ sender: NSSegmentedControl) {
-    if let cropStr = sender.label(forSegment: sender.selectedSegment) {
-      playerCore.setCrop(fromString: cropStr)
-      mainWindow.displayOSD(.crop(cropStr))
-    }
+    let cropStr = AppData.cropsInPanel[sender.selectedSegment]
+    playerCore.setCrop(fromString: cropStr)
+    mainWindow.displayOSD(.crop(cropStr))
   }
 
   @IBAction func rotationChangedAction(_ sender: NSSegmentedControl) {
-    let value = [0, 90, 180, 270][sender.selectedSegment]
+    let value = AppData.rotations[sender.selectedSegment]
     playerCore.setVideoRotate(value)
     mainWindow.displayOSD(.rotate(value))
   }
@@ -472,7 +474,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
 
-  // Audio tab
+  // MARK: Audio tab
 
   @IBAction func loadExternalAudioAction(_ sender: NSButton) {
     let result = Utility.quickOpenPanel(title: "Load external audio file", isDir: false) { url in
@@ -532,7 +534,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
 
-  // Sub tab
+  // MARK: Sub tab
 
   @IBAction func loadExternalSubAction(_ sender: NSButton) {
     let result = Utility.quickOpenPanel(title: "Load external subtitle", isDir: false) { url in

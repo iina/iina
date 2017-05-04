@@ -101,6 +101,10 @@
 "track.none" = "<无>";
 
 // Alerts
+"alert.title_error" = "错误";
+"alert.title_warning" = "警告";
+"alert.title_info" = "提示";
+
 "alert.fatal_error" = "严重错误：%@ \n程序将立刻结束。";
 "alert.mpv_error" = "在设置用户选项时出现错误 %@ (%@)。";
 "alert.sleep" = "无法阻止系统睡眠。";
@@ -136,6 +140,9 @@
 "alert.sub.cannot_save_passwd" = "无法将密码保存到钥匙串：%@";
 "alert.sub.cannot_login" = "无法登录。请检查你的用户名、密码及网络状态。\n\n%@";
 
+"set_default.title" = "将 IINA 设为默认播放器";
+"set_default.message" = "IINA 将会被关联至所有支持的文件格式。";
+"alert.set_default.success" = "操作已完成。%d 成功，%d 失败。";
 
 "pl_menu.title_multi" = "%d 个项目";
 "pl_menu.play_next" = "接下来播放";

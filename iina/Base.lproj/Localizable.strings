@@ -101,6 +101,10 @@
 "track.none" = "<None>";
 
 // Alerts
+"alert.title_error" = "Error";
+"alert.title_warning" = "Warning";
+"alert.title_info" = "Information";
+
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
 "alert.mpv_error" = "Error %@ (%@) when setting user option %@.";
 "alert.sleep" = "Cannot prevent display sleep!";
@@ -137,6 +141,9 @@
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 
+"set_default.title" = "Setting IINA as Default App";
+"set_default.message" = "IINA will be set as the default app for all file types it supports.";
+"set_default.success" = "Finished with %d success and %d failed.";
 
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";

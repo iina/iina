@@ -126,6 +126,8 @@
 
 "alert.config.empty_name" = "The name cannot be empty.";
 "alert.config.name_existing" = "The name already exists.";
+"alert.config.file_existing.title" = "A file with the same name already exists";
+"alert.config.file_existing.message" = "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.";
 "alert.config.cannot_create" = "Cannot create config file!";
 "alert.config.cannot_write" = "Cannot write to config file!";
 
@@ -145,9 +147,9 @@
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 
-"set_default.title" = "Setting IINA as Default App";
-"set_default.message" = "IINA will be set as the default app for all file types it supports.";
-"set_default.success" = "Finished with %d success and %d failed.";
+"alert.set_default.title" = "Setting IINA as Default App";
+"alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
+"alert.set_default.success" = "Finished with %d success and %d failed.";
 
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";

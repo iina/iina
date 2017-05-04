@@ -83,10 +83,20 @@ class Utility {
 
   // MARK: - Panels, Alerts
 
-  static func quickAskPanel(title: String, infoText: String) -> Bool {
+  /** 
+   Pop up an ask panel.
+   - parameters:
+     - key: A localization key. "alert.`key`.title" will be used as alert title, and "alert.`key`.message" will be the informative text.
+     - titleComment: (Optional) Comment for title key.
+     - messageComment: (Optional) Comment for message key.
+   - Returns: Whether user clicked OK.
+   */
+  static func quickAskPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil) -> Bool {
     let panel = NSAlert()
-    panel.messageText = title
-    panel.informativeText = infoText
+    let titleKey = "alert." + key + ".title"
+    let messageKey = "alert." + key + ".message"
+    panel.messageText = NSLocalizedString(titleKey, comment: titleComment ?? titleKey)
+    panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     return panel.runModal() == NSAlertFirstButtonReturn
@@ -197,9 +207,7 @@ class Utility {
     let cfBundleID = Bundle.main.bundleIdentifier as CFString?
     else { return }
 
-    guard
-      quickAskPanel(title: NSLocalizedString("set_default.title", comment: "Setting IINA as Default App"),
-                        infoText: NSLocalizedString("set_default.message", comment: "IINA will be set as the default app for all file types it supports.")) else { return }
+    guard quickAskPanel("set_default") else { return }
 
     var successCount = 0
     var failedCount = 0

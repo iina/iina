@@ -125,6 +125,8 @@
 
 "alert.config.empty_name" = "名称不能为空。";
 "alert.config.name_existing" = "此配置名称已存在。";
+"alert.config.file_existing.title" = "同名文件已存在";
+"alert.config.file_existing.message" = "选择「好」来覆盖，选择「取消」来在 Finder 中查看该文件。";
 "alert.config.cannot_create" = "无法创建配置文件！";
 "alert.config.cannot_write" = "无法写入配置文件！";
 
@@ -144,8 +146,8 @@
 "alert.sub.cannot_save_passwd" = "无法将密码保存到钥匙串：%@";
 "alert.sub.cannot_login" = "无法登录。请检查你的用户名、密码及网络状态。\n\n%@";
 
-"set_default.title" = "将 IINA 设为默认播放器";
-"set_default.message" = "IINA 将会被关联至所有支持的文件格式。";
+"alert.set_default.title" = "将 IINA 设为默认播放器";
+"alert.set_default.message" = "IINA 将会被关联至所有支持的文件格式。";
 "alert.set_default.success" = "操作已完成。%d 成功，%d 失败。";
 
 "pl_menu.title_multi" = "%d 个项目";

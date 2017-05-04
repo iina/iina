@@ -7,12 +7,12 @@
 */
 
 // Common
-"on" = "On";
-"off" = "Off";
-"login" = "Login";
-"logout" = "Logout";
-"ok" = "OK";
-"cancel" = "Cancel";
+"general.on" = "On";
+"general.off" = "Off";
+"general.login" = "Login";
+"general.logout" = "Logout";
+"general.ok" = "OK";
+"general.cancel" = "Cancel";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "PLAYLIST";

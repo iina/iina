@@ -87,8 +87,8 @@ class Utility {
     let panel = NSAlert()
     panel.messageText = title
     panel.informativeText = infoText
-    panel.addButton(withTitle: NSLocalizedString("ok", comment: "OK"))
-    panel.addButton(withTitle: NSLocalizedString("cancel", comment: "Cancel"))
+    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     return panel.runModal() == NSAlertFirstButtonReturn
   }
 
@@ -134,8 +134,8 @@ class Utility {
     input.usesSingleLineMode = true
     input.cell?.isScrollable = true
     panel.accessoryView = input
-    panel.addButton(withTitle: NSLocalizedString("ok", comment: "OK"))
-    panel.addButton(withTitle: NSLocalizedString("cancel", comment: "Cancel"))
+    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
@@ -171,8 +171,8 @@ class Utility {
     let pwField = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
     view.addSubview(pwField)
     panel.accessoryView = view
-    panel.addButton(withTitle: NSLocalizedString("ok", comment: "OK"))
-    panel.addButton(withTitle: NSLocalizedString("cancel", comment: "Cancel"))
+    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {

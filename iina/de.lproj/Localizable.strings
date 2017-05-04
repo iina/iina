@@ -7,10 +7,10 @@
 */
 
 // Common
-"on" = "An";
-"off" = "Aus";
-"login" = "Einloggen";
-"logout" = "Ausloggen";
+"general.on" = "An";
+"general.off" = "Aus";
+"general.login" = "Einloggen";
+"general.logout" = "Ausloggen";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "PLAYLIST";

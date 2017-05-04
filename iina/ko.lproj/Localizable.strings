@@ -1,8 +1,8 @@
 /* (No Commment) */
-"login" = "로그인";
+"general.login" = "로그인";
 
 /* (No Commment) */
-"logout" = "로그아웃";
+"general.logout" = "로그아웃";
 
 /* Buffering... %s%% */
 "main.buffering_indicator" = "준비중… %d%%";
@@ -35,10 +35,10 @@
 "menu.volume" = "음량: %d";
 
 /* Off */
-"off" = "끄기";
+"general.off" = "끄기";
 
 /* On */
-"on" = "켜기";
+"general.on" = "켜기";
 
 /* AB-Loop: A */
 "osd.abloop.a" = "구간 반복: 시작 위치";

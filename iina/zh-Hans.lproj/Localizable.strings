@@ -7,12 +7,12 @@
  */
 
 // Common
-"on" = "On";
-"off" = "Off";
-"login" = "登录";
-"logout" = "退出";
-"ok" = "好";
-"cancel" = "取消";
+"general.on" = "On";
+"general.off" = "Off";
+"general.login" = "登录";
+"general.logout" = "退出";
+"general.ok" = "好";
+"general.cancel" = "取消";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "播放列表";

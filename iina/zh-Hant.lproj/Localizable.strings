@@ -2,7 +2,7 @@
 "keymapping.message" = "按任意鍵";
 
 /* Buffering... %s%% */
-"main.buffering_indicator" = "緩衝中... %@%%";
+"main.buffering_indicator" = "緩衝中... %d%%";
 
 /* Audio Delay: */
 "menu.audio_delay" = "音訊延遲: %.2f秒";

@@ -225,7 +225,7 @@ class SubLangToken: NSObject {
 
   override func transformedValue(_ value: Any?) -> Any? {
     let username = value as? NSString ?? ""
-    return NSLocalizedString((username.length == 0 ? "login" : "logout"), comment: "")
+    return NSLocalizedString((username.length == 0 ? "general.login" : "general.logout"), comment: "")
   }
   
 }

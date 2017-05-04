@@ -20,11 +20,11 @@ class Utility {
     let alert = NSAlert()
     switch alertStyle {
     case .critical:
-      alert.messageText = "Error"
+      alert.messageText = NSLocalizedString("alert.title_error", comment: "Error")
     case .informational:
-      alert.messageText = "Information"
+      alert.messageText = NSLocalizedString("alert.title_info", comment: "Information")
     case .warning:
-      alert.messageText = "Warning"
+      alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
     }
     alert.informativeText = message
     alert.alertStyle = alertStyle
@@ -35,11 +35,11 @@ class Utility {
     let alert = NSAlert()
     switch style {
     case .critical:
-      alert.messageText = "Error"
+      alert.messageText = NSLocalizedString("alert.title_error", comment: "Error")
     case .informational:
-      alert.messageText = "Information"
+      alert.messageText = NSLocalizedString("alert.title_info", comment: "Information")
     case .warning:
-      alert.messageText = "Warning"
+      alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
     }
     
     var format: String
@@ -197,7 +197,9 @@ class Utility {
     let cfBundleID = Bundle.main.bundleIdentifier as CFString?
     else { return }
 
-    guard quickAskPanel(title: "Setting IINA as Default App", infoText: "IINA will be set as the default app for all file types it supports.") else { return }
+    guard
+      quickAskPanel(title: NSLocalizedString("set_default.title", comment: "Setting IINA as Default App"),
+                        infoText: NSLocalizedString("set_default.message", comment: "IINA will be set as the default app for all file types it supports.")) else { return }
 
     var successCount = 0
     var failedCount = 0
@@ -217,7 +219,7 @@ class Utility {
       }
     }
 
-    showAlert(message: "Finished with \(successCount) success and \(failedCount) failed.")
+    showAlert("set_default.success", arguments: [successCount, failedCount], style: .informational)
   }
 
   private static func createDirIfNotExist(url: URL) {

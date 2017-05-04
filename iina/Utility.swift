@@ -174,7 +174,15 @@ class Utility {
     }
   }
 
-  static func quickUsernamePasswordPanel(messageText: String, informativeText: String, ok: (String, String) -> Void) -> Bool {
+  /**
+   Pop up a username and password panel.
+   - parameters:
+     - key: A localization key. "alert.`key`.title" will be used as alert title, and "alert.`key`.message" will be the informative text.
+     - titleComment: (Optional) Comment for title key.
+     - messageComment: (Optional) Comment for message key.
+   - Returns: Whether user dismissed the panel by clicking OK.
+   */
+  static func quickUsernamePasswordPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, ok: (String, String) -> Void) -> Bool {
     let quickLabel: (String, Int) -> NSTextField = { title, yPos in
       let label = NSTextField(frame: NSRect(x: 0, y: yPos, width: 240, height: 14))
       label.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize())
@@ -186,8 +194,10 @@ class Utility {
       return label
     }
     let panel = NSAlert()
-    panel.messageText = messageText
-    panel.informativeText = informativeText
+    let titleKey = "alert." + key + ".title"
+    let messageKey = "alert." + key + ".message"
+    panel.messageText = NSLocalizedString(titleKey, comment: titleComment ?? titleKey)
+    panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
     let view = NSView(frame: NSRect(x: 0, y: 0, width: 240, height: 82))
     view.addSubview(quickLabel(NSLocalizedString("general.username", comment: "Username") + ":", 68))
     let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 42, width: 240, height: 24))
@@ -211,6 +221,11 @@ class Utility {
     }
   }
 
+  /**
+   Pop up a font picker panel.
+   - parameters:
+     - ok: A closure accepting the font name.
+   */
   static func quickFontPickerWindow(ok: @escaping (String?) -> Void) {
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
     appDelegate.fontPicker.finishedPicking = ok

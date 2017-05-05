@@ -40,6 +40,7 @@ class Regex {
 
 
 let ignorePlaceHolderTitle = true
+let checkRedundantKey = false
 
 let languages = ["de", "fr", "it", "ja", "ko", "pl", "zh-Hans", "zh-Hant"]
 
@@ -146,6 +147,7 @@ func makeSure(allKeysExistInFile file: String, basedOn base: BaseLang) {
     }
     // check redundant keys
     for (key, langValue) in langDic {
+      guard checkRedundantKey else { continue }
       if ignorePlaceHolderTitle && (langValue == "Label" || langValue == "Text Cell") { continue }
       print("  [-][\(lang)] Redundant key \"\(key)\" (\(langValue))")
       stat[lang]! += 1

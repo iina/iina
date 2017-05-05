@@ -29,8 +29,8 @@
 /* Class = "NSMenuItem"; title = "5"; ObjectID = "7su-au-nwq"; */
 "7su-au-nwq.title" = "5";
 
-/* Class = "NSButtonCell"; title = "Load External Audio Track..."; ObjectID = "8Ax-5X-osl"; */
-"8Ax-5X-osl.title" = "Externe Audiospur laden...";
+/* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
+"8Ax-5X-osl.title" = "Externe Audiospur laden…";
 
 /* Class = "NSTextFieldCell"; title = "Audio delay:"; ObjectID = "AKs-VQ-fKF"; */
 "AKs-VQ-fKF.title" = "Audio-Verzögerung:";
@@ -47,8 +47,8 @@
 /* Class = "NSTextFieldCell"; title = "5s"; ObjectID = "C0t-gm-Tim"; */
 "C0t-gm-Tim.title" = "5s";
 
-/* Class = "NSButtonCell"; title = "Load Subtitle..."; ObjectID = "C97-zJ-O3Y"; */
-"C97-zJ-O3Y.title" = "Untertitel laden...";
+/* Class = "NSButtonCell"; title = "Load Subtitle…"; ObjectID = "C97-zJ-O3Y"; */
+"C97-zJ-O3Y.title" = "Untertitel laden…";
 
 /* Class = "NSTextFieldCell"; title = "0"; ObjectID = "CAr-N0-j64"; */
 "CAr-N0-j64.title" = "0";
@@ -124,6 +124,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Video track:"; ObjectID = "VzC-tM-KT7"; */
 "VzC-tM-KT7.title" = "Videospur:";
+
+/* Class = "NSTextFieldCell"; title = "x"; ObjectID = "W7H-mU-v3D"; */
+"W7H-mU-v3D.title" = "x";
 
 /* Class = "NSTextFieldCell"; title = "Scale:"; ObjectID = "Wbx-Ti-qiS"; */
 "Wbx-Ti-qiS.title" = "Skalierung:";
@@ -209,8 +212,8 @@
 /* Class = "NSTextFieldCell"; title = "FONT"; ObjectID = "g6B-DC-lJ0"; */
 "g6B-DC-lJ0.title" = "SCHRIFT";
 
-/* Class = "NSButtonCell"; title = "Font..."; ObjectID = "ghy-e7-7Of"; */
-"ghy-e7-7Of.title" = "Schrift...";
+/* Class = "NSButtonCell"; title = "Font…"; ObjectID = "ghy-e7-7Of"; */
+"ghy-e7-7Of.title" = "Schrift…";
 
 /* Class = "NSMenuItem"; title = "3"; ObjectID = "h6k-DT-fv5"; */
 "h6k-DT-fv5.title" = "3";
@@ -284,6 +287,9 @@
 /* Class = "NSMenuItem"; title = "4"; ObjectID = "ssK-tS-ogL"; */
 "ssK-tS-ogL.title" = "4";
 
+/* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "t03-36-Zge"; */
+"t03-36-Zge.title" = "Position:";
+
 /* Class = "NSTextFieldCell"; title = "500"; ObjectID = "tHa-vN-OlI"; */
 "tHa-vN-OlI.title" = "500";
 
@@ -299,8 +305,8 @@
 /* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
 "uqb-mz-A22.title" = "HINTERGRUND";
 
-/* Class = "NSButtonCell"; title = "Custom..."; ObjectID = "vFD-HU-RVz"; */
-"vFD-HU-RVz.title" = "Eigene...";
+/* Class = "NSButtonCell"; title = "Custom…"; ObjectID = "vFD-HU-RVz"; */
+"vFD-HU-RVz.title" = "Eigene…";
 
 /* Class = "NSTextFieldCell"; title = "Sub style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
 "wBD-pZ-Bvu.title" = "Optionen für Untertitel können ASS Rendering verfälschen, und manche werden abhängig von Untertiteltyp deaktiviert";
@@ -331,5 +337,3 @@
 
 /* Class = "NSMenuItem"; title = "35"; ObjectID = "zcb-7y-OVG"; */
 "zcb-7y-OVG.title" = "35";
-
-"t03-36-Zge.title" = "Position:";

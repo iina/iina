@@ -1570,6 +1570,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
       rightArrowLabel.isHidden = true
+      if #available(OSX 10.12.2, *) {
+        touchBarPlayPauseBtn?.image = NSImage(named: NSImageNameTouchBarPlayTemplate)
+      }
+    } else {
+      if #available(OSX 10.12.2, *) {
+        touchBarPlayPauseBtn?.image = NSImage(named: NSImageNameTouchBarPauseTemplate)
+      }
     }
   }
 
@@ -1607,15 +1614,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if sender.state != NSOnState {
         sender.state = NSOnState
       }
-      if #available(OSX 10.12.2, *) {
-        touchBarPlayPauseBtn?.image = NSImage(named: NSImageNameTouchBarPauseTemplate)
-      }
     } else {
       if sender.state != NSOffState {
         sender.state = NSOffState
-      }
-      if #available(OSX 10.12.2, *) {
-        touchBarPlayPauseBtn?.image = NSImage(named: NSImageNameTouchBarPlayTemplate)
       }
     }
   }

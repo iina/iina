@@ -77,7 +77,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSColorPanel.shared().showsAlpha = true
 
     // other
-    if #available(macOS 10.12.2, *) {
+    if #available(OSX 10.12.2, *) {
       NSApp.isAutomaticCustomizeTouchBarMenuItemEnabled = false
       NSWindow.allowsAutomaticWindowTabbing = false
     }

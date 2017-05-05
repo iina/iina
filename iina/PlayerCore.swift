@@ -583,7 +583,7 @@ class PlayerCore: NSObject {
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
       mw.updateTitle()
-      if #available(macOS 10.12.2, *) {
+      if #available(OSX 10.12.2, *) {
         mw.setupTouchBarUI()
       }
       mw.adjustFrameByVideoSize(vwidth, vheight)

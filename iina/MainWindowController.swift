@@ -612,7 +612,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isDragging = true
     guard !controlBarFloating.isDragging else { return }
     if mousePosRelatedToWindow != nil {
-      if #available(macOS 10.11, *) {
+      if #available(OSX 10.11, *) {
         window?.performDrag(with: event)
       } else {
         let currentLocation = NSEvent.mouseLocation()
@@ -1323,7 +1323,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       Utility.log("Nil material in setMaterial()")
       return
     }
-    guard #available(macOS 10.11, *) else { return }
+    guard #available(OSX 10.11, *) else { return }
 
     var appearance: NSAppearance? = nil
     var material: NSVisualEffectMaterial
@@ -1607,14 +1607,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if sender.state != NSOnState {
         sender.state = NSOnState
       }
-      if #available(macOS 10.12.2, *) {
+      if #available(OSX 10.12.2, *) {
         touchBarPlayPauseBtn?.image = NSImage(named: NSImageNameTouchBarPauseTemplate)
       }
     } else {
       if sender.state != NSOffState {
         sender.state = NSOffState
       }
-      if #available(macOS 10.12.2, *) {
+      if #available(OSX 10.12.2, *) {
         touchBarPlayPauseBtn?.image = NSImage(named: NSImageNameTouchBarPlayTemplate)
       }
     }
@@ -1851,7 +1851,7 @@ fileprivate extension NSTouchBarItemIdentifier {
 }
 
 // Image name, tag, custom label
-@available(macOS 10.12.2, *)
+@available(OSX 10.12.2, *)
 fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, String)] = [
     .ahead15Sec: (NSImageNameTouchBarSkipAhead15SecondsTemplate, 15, "15sec Ahead"),
     .ahead30Sec: (NSImageNameTouchBarSkipAhead30SecondsTemplate, 30, "30sec Ahead"),
@@ -1865,7 +1865,7 @@ fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, St
     .fastForward: (NSImageNameTouchBarFastForwardTemplate, 1, "Fast forward")
 ]
 
-@available(macOS 10.12.2, *)
+@available(OSX 10.12.2, *)
 extension MainWindowController: NSTouchBarDelegate {
 
   override func makeTouchBar() -> NSTouchBar? {

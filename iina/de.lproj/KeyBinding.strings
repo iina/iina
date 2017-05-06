@@ -25,12 +25,12 @@
 "cmd.playlist-remove" = "Aktuelle Datei entfernen";
 "cmd.playlist-shuffle" = "Zufällig";
 "cmd.write-watch-later-config" = "Abgespielte Medien protokollieren";
-"cmd.stop" = "Stop";
+"cmd.stop" = "Stopp";
 "cmd.quit" = "Schließen";
 "cmd.quit-watch-later" = "Schließen (Fortschritt abspeichern)";
 "cmd.screenshot" = "Screenshot";
 "cmd.screenshot-to-file" = "Screenshot in Datei";
-"cmd.loadfile" = "Datei lasen";
+"cmd.loadfile" = "Datei laden";
 "cmd.loadlist" = "Wiedergabeliste laden";
 "cmd.run" = "Ausführen";
 
@@ -93,7 +93,7 @@
 "opt.sub-pos" = "Untertitelposition";
 "opt.sub-scale" = "Untertitelgröße;
 "opt.sub-visibility" = "Untertitelsichtbarkeit";
-"opt.sub-ass-style-override" = "ASS design überschreiben";
+"opt.sub-ass-style-override" = "ASS Design überschreiben";
 
 "opt.fullscreen" = "Vollbild";
 "opt.ontop" = "Schwebend";

@@ -55,13 +55,13 @@
 "osd.video_eq.hue" = "Farbton: %i";
 "osd.video_eq.saturation" = "Sättigung: %i";
 "osd.video_eq.brightness" = "Helligkei: %i";
-"osd.find_online_sub" = "Suche online nach Untertiteln…";
+"osd.find_online_sub" = "Suche online nach Untertiteln …";
 "osd.sub_not_found" = "Keine Untertitel gefunden";
-"osd.sub_found" = "%d Untertitel gefunden. Herunterladen…";
+"osd.sub_found" = "%d Untertitel gefunden. Herunterladen …";
 "osd.sub_downloaded" = "Untertitel heruntergeladen";
 "osd.sub_saved" = "Untertitel gespeichert";
 "osd.network_error" = "Netzwerkfehler";
-"osd.file_error" = "Fehler beim einlesen der Datei";
+"osd.file_error" = "Fehler beim Einlesen der Datei";
 "osd.cannot_login" = "Einloggen nicht möglich";
 "osd.canceled" = "Abgebrochen";
 
@@ -70,7 +70,7 @@
 "update.title_error" = "Fehler";
 "update.update_found" = "Neue Version gefunden! IINA ist noch im Alpha-Stadium. Es wird empfohlen immer die neueste Version zu benutzen. Bitte von der Website oder GitHub herunterladen:";
 "update.no_update" = "Du hast bereits die neueste Version.";
-"update.check_failed" = "Konnte nicht nach Updated suchen. Vermutlich benutzt du eine veraltete Version von IINA. Schau mal auf der Website des Projekts oder auf GitHub nach.";
+"update.check_failed" = "Konnte nicht nach Update suchen. Vermutlich benutzt du eine veraltete Version von IINA. Schau mal auf der Website des Projekts oder auf GitHub nach.";
 "update.new_version" = "Neue Version:";
 "update.dl_from_website" = "Die Webseite aufrufen";
 "update.dl_from_github" = "Github aufrufen";
@@ -102,7 +102,7 @@
 
 // Alerts
 "alert.fatal_error" = "Schwerer Fehler: %@ \nDas Programm wird beendet.";
-"alert.mpv_error" = "Fehler %@ (%@) beim setzen der Einstellung %@.";
+"alert.mpv_error" = "Fehler %@ (%@) beim Setzen der Einstellung %@.";
 "alert.sleep" = "Ruhezustand des Monitors kann nicht verhindert werden!";
 
 "alert.unsupported_audio" = "Externe Audio-Datei wird nicht unterstützt.";
@@ -123,23 +123,23 @@
 
 "alert.filter.incorrect" = "Fehler beim erstellen der Filter. Bitte Parameter überprüfen.";
 
-"alert.keybinding_config.error" = "Fehler beim parsen der Tastaturkürzeldatei \"%@\"! Greife auf die Standardeinstellungen zurück. Bitte Einstellungen überprüfen.";
+"alert.keybinding_config.error" = "Fehler beim Parsen der Tastaturkürzeldatei \"%@\"! Greife auf die Standardeinstellungen zurück. Bitte Einstellungen überprüfen.";
 
-"alert.extra_option.cannot_read" = "Die Benutzerdefinierten extra MPV-Optionen können nicht gelesen werden.";
+"alert.extra_option.cannot_read" = "Die benutzerdefinierten extra MPV-Optionen können nicht gelesen werden.";
 "alert.extra_option.empty" = "Schlüssel oder Wert können nicht leer sein!";
-"alert.extra_option.error" = "Fehler beim setzen der Optioen --%@=%@ Fehlernummer %d. Bitte die extra Optionen unter Einstellungen > Erweitert überprüfen.";
-"alert.extra_option.config_folder" = "Fehler beim setzen des Verzeichnisses für die Einstellungen\"%@\".";
+"alert.extra_option.error" = "Fehler beim Setzen der Optioen --%@=%@ Fehlernummer %d. Bitte die extra Optionen unter Einstellungen > Erweitert überprüfen.";
+"alert.extra_option.config_folder" = "Fehler beim Setzen des Verzeichnisses für die Einstellungen\"%@\".";
 
 "alert.playlist.error_deleting" = "Fehler beim Löschen der Datei: %@";
 
-"alert.sub.no_selected" = "Bitte zuerst einen bereits heruntergeladene Untertitel auswählen.";
+"alert.sub.no_selected" = "Bitte zuerst einen bereits heruntergeladenen Untertitel auswählen.";
 "alert.sub_lang_not_set" = "Bitte zuerst die gewünschte Sprache für Untertitel in den Einstellungen auswählen. Englisch(eng) wird für diesmal benutzt.";
 "alert.sub.cannot_save_passwd" = "Passwort kann nicht in der Schlüsselbundverwaltung gespeichert werden: %@";
-"alert.sub.cannot_login" = "Einloggen nicht mögliche. Bitte Benutzername, Passwort und die Netzwerkverbindung überprüfen.\n\n%@";
+"alert.sub.cannot_login" = "Anmelden nicht mögliche. Bitte Benutzername, Passwort und die Netzwerkverbindung überprüfen.\n\n%@";
 
 
 "pl_menu.title_multi" = "%d Elemente";
-"pl_menu.play_next" = "Nächte abspielen";
+"pl_menu.play_next" = "Nächstes abspielen";
 "pl_menu.remove" = "Löschen";
 "pl_menu.remove_multi" = "Ausgewählte löschen";
 "pl_menu.delete" = "In den Papierkorb legen";

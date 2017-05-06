@@ -1,4 +1,3 @@
-
 /* Class = "NSTextFieldCell"; title = "Seek type:"; ObjectID = "1yb-m4-1sK"; */
 "1yb-m4-1sK.title" = "Seek type:";
 
@@ -11,11 +10,11 @@
 /* Class = "NSTextFieldCell"; title = "Exact seek is more precise but can cause lag and high CPU usage."; ObjectID = "6FZ-Qm-0k0"; */
 "6FZ-Qm-0k0.title" = "Exaktes Positionieren kann zu Lags und hohen CPU-Auslastungen führen.";
 
-/* Class = "NSMenuItem"; title = "Exact seek"; ObjectID = "70P-6t-4jC"; */
-"70P-6t-4jC.title" = "Exaktes Positionieren";
-
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "9qx-ao-oxE"; */
 "9qx-ao-oxE.title" = "OSC verbergen";
+
+/* Class = "NSMenuItem"; title = "Exact seek"; ObjectID = "70P-6t-4jC"; */
+"70P-6t-4jC.title" = "Exaktes Positionieren";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "A8c-wa-IFR"; */
 "A8c-wa-IFR.title" = "Pause / Fortsetzen";
@@ -80,7 +79,7 @@
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "oOk-y6-lek"; */
 "oOk-y6-lek.title" = "Nichts";
 
-/* Class = "NSTextFieldCell"; title = "Amount for normal seek:"; ObjectID = "of2-ec-OkC"; */
+/* Class = "NSTextFieldCell"; title = "Sensitivity for normal seek:"; ObjectID = "of2-ec-OkC"; */
 "of2-ec-OkC.title" = "Empfindlichkeit:";
 
 /* Class = "NSMenuItem"; title = "Fastforward / Rewind"; ObjectID = "q50-Po-JYO"; */
@@ -100,3 +99,4 @@
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "Nichts";
+

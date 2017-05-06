@@ -1,12 +1,8 @@
-
 /* Class = "NSTextFieldCell"; title = "Forced"; ObjectID = "0vG-Pg-DIl"; */
 "0vG-Pg-DIl.title" = "Forced";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
 "1dz-Vt-0MO.title" = "FPS:";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "21M-40-ac5"; */
-"21M-40-ac5.title" = "Bezeichnung";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "3bw-Kl-SeY"; */
 "3bw-Kl-SeY.title" = "Bezeichnung";
@@ -34,6 +30,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
 "9eq-rd-zGy.title" = "Titel:";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "21M-40-ac5"; */
+"21M-40-ac5.title" = "Bezeichnung";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
 "A4y-LL-x0z.title" = "Bitrate:";
@@ -138,7 +137,7 @@
 "R14-IF-0dZ.title" = "Bezeichnung";
 
 /* Class = "NSTextFieldCell"; title = "Default"; ObjectID = "S3X-Df-UMB"; */
-"S3X-Df-UMB.title" = "Voreingestellt";
+"S3X-Df-UMB.title" = "Standard";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "SzU-uF-10g"; */
 "SzU-uF-10g.title" = "Bezeichnung";
@@ -274,3 +273,4 @@
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "ydW-J5-Kk2"; */
 "ydW-J5-Kk2.title" = "Textzelle";
+

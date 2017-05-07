@@ -46,11 +46,11 @@ class KeyMapping {
     set {
       if newValue.hasPrefix("@iina") {
         privateRawAction = newValue.substring(from: newValue.index(newValue.startIndex, offsetBy: "@iina".characters.count)).trimmingCharacters(in: .whitespaces)
-        action = rawAction.components(separatedBy: .whitespaces).filter { $0.isEmpty }
+        action = rawAction.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
         isIINACommand = true
       } else {
         privateRawAction = newValue
-        action = rawAction.components(separatedBy: .whitespaces).filter { $0.isEmpty }
+        action = rawAction.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
         isIINACommand = false
       }
     }
@@ -118,7 +118,8 @@ class KeyMapping {
       // split
       let splitted = line.characters.split(maxSplits: 1, whereSeparator: { $0 == " " || $0 == "\t"})
       if splitted.count < 2 {
-        return nil
+        Utility.log("Skipped corrupted line in input.conf: \(line)")
+        continue  // no command, wrong format
       }
       let key = String(splitted[0]).trimmingCharacters(in: .whitespaces)
       let action = String(splitted[1]).trimmingCharacters(in: .whitespaces)

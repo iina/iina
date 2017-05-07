@@ -61,7 +61,7 @@ class PrefSubViewController: NSViewController {
     let currUsername = UserDefaults.standard.string(forKey: Preference.Key.openSubUsername) ?? ""
     if currUsername.isEmpty {
       // if current username is empty, login
-      let _ = Utility.quickUsernamePasswordPanel(messageText: "Opensubtitles Login", informativeText: "Please enter your username and password") {
+      let _ = Utility.quickUsernamePasswordPanel("opensub.login") {
         (username, password) in
         loginIndicator.isHidden = false
         loginIndicator.startAnimation(nil)
@@ -225,7 +225,7 @@ class SubLangToken: NSObject {
 
   override func transformedValue(_ value: Any?) -> Any? {
     let username = value as? NSString ?? ""
-    return NSLocalizedString((username.length == 0 ? "login" : "logout"), comment: "")
+    return NSLocalizedString((username.length == 0 ? "general.login" : "general.logout"), comment: "")
   }
   
 }

@@ -54,7 +54,7 @@ class MPVTrack: NSObject {
       let title = self.title ?? ""
       let rawLang = self.lang ?? ""
       let lang = rawLang == "" ? "" : "[\(rawLang)]"
-      let def = self.isDefault ? "(Default)" : ""
+      let def = self.isDefault ? "(" + NSLocalizedString("quicksetting.item_default", comment: "Default") + ")" : ""
       return "#\(self.id) \(title) \(lang) \(def)"
     }
   }

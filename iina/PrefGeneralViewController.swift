@@ -47,7 +47,7 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do view setup here.
+    playlistAutoShowChanged(playlistAutoShowBtn)
   }
 
   // MARK: - IBAction
@@ -63,6 +63,17 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
   @IBAction func rememberRecentChanged(_ sender: NSButton) {
     if sender.state == NSOffState {
       NSDocumentController.shared().clearRecentDocuments(self)
+    }
+  }
+  
+  @IBOutlet weak var playlistAutoShowBtn: NSButton!
+  @IBOutlet weak var triggerTimeTextField: NSTextField!
+  
+  @IBAction func playlistAutoShowChanged(_ sender: NSButton) {
+    if sender.state == NSOffState {
+      triggerTimeTextField.textColor = .secondaryLabelColor
+    } else {
+      triggerTimeTextField.textColor = .labelColor
     }
   }
 

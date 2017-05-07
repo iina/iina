@@ -15,6 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var isReady: Bool = false
 
   var pendingURL: String?
+  
+  lazy var keyTap: SPMediaKeyTap = SPMediaKeyTap(delegate: self)
 
   lazy var playerCore: PlayerCore = PlayerCore.shared
 
@@ -58,6 +60,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationWillFinishLaunching(_ notification: Notification) {
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
+    // register for the whitelist of apps that want to use media keys
+    UserDefaults.standard.register(defaults: [kMediaKeyUsingBundleIdentifiersDefaultsKey: SPMediaKeyTap.defaultMediaKeyUserBundleIdentifiers()])
   }
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -99,6 +103,41 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // pending open request
     if let url = pendingURL {
       parsePendingURL(url)
+    }
+    
+    if SPMediaKeyTap.usesGlobalMediaKeyTap() {
+      keyTap.startWatchingMediaKeys()
+    } else {
+      Utility.log("Media key monitoring disabled")
+    }
+  }
+  
+  override func mediaKeyTap(_ keyTap: SPMediaKeyTap!, receivedMediaKeyEvent event: NSEvent!) {
+    guard event.type == NSSystemDefined && event.subtype == .screenChanged else {
+      Utility.log("Unexpected NSEvent in mediaKeyTap")
+      return
+    }
+    
+    print("success")
+    let keyCode: Int32 = Int32((event.data1 & 0xFFFF0000) >> 16)
+    let keyFlags: Int = event.data1 & 0x0000FFFF
+    let keyIsPressed: Bool = ((keyFlags & 0xFF00) >> 8) == 0xA
+    let keyRepeat: Int = keyFlags & 0x1
+    
+    if keyIsPressed {
+      switch keyCode {
+      case NX_KEYTYPE_PLAY:
+        print("play/pause pressed")
+        break
+      case NX_KEYTYPE_FAST:
+        print("fwd pressed")
+        break
+      case NX_KEYTYPE_REWIND:
+        print("rewind pressed")
+        break
+      default:
+        print("Key %d pressed", keyCode)
+      }
     }
   }
 

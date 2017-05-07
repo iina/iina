@@ -37,10 +37,10 @@
 
 
 /* On */
-"on" = "On";
+"general.on" = "On";
 
 /* Off */
-"off" = "Off";
+"general.off" = "Off";
 
 /* PLAYLIST */
 "playlist.playlist_cap" = "PLAYLIST";
@@ -268,7 +268,9 @@
 "keymapping.title" = "Paramétrage des touches";
 
 /* No comment provided by engineer. */
-"loginlogout" = "";
+"general.login" = "Login";
+
+"general.logout" = "Logout";
 
 /* Canceled */
 "osd.canceled" = "Annulé";

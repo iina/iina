@@ -170,7 +170,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="76" id="fts-DH-Iho"/>
                                                                     </constraints>
-                                                                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="XXI-Cy-jma">
+                                                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="XXI-Cy-jma">
                                                                         <rect key="frame" x="0.0" y="60" width="360" height="16"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
@@ -194,9 +194,9 @@
                                                                         <segments>
                                                                             <segment label="Default" selected="YES"/>
                                                                             <segment label="4:3" tag="1"/>
-                                                                            <segment label="16:9"/>
-                                                                            <segment label="16:10"/>
-                                                                            <segment label="5:4"/>
+                                                                            <segment label="16:9" tag="2"/>
+                                                                            <segment label="16:10" tag="3"/>
+                                                                            <segment label="5:4" tag="4"/>
                                                                         </segments>
                                                                     </segmentedCell>
                                                                     <connections>
@@ -250,9 +250,9 @@
                                                                         <segments>
                                                                             <segment label="None" width="46"/>
                                                                             <segment label="4:3" width="46" selected="YES" tag="1"/>
-                                                                            <segment label="16:9" width="46"/>
-                                                                            <segment label="16:10"/>
-                                                                            <segment label="5:4"/>
+                                                                            <segment label="16:9" width="46" tag="2"/>
+                                                                            <segment label="16:10" tag="3"/>
+                                                                            <segment label="5:4" tag="4"/>
                                                                         </segments>
                                                                     </segmentedCell>
                                                                     <connections>
@@ -1170,7 +1170,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="epy-wp-Ja5">
                                             <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="pm4-x9-WJ5" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="-9" width="360" height="832"/>
@@ -1182,7 +1182,7 @@
                                                                     <rect key="frame" x="0.0" y="304" width="360" height="72"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="dJV-R0-O3M">
                                                                         <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="2vU-hm-gGB">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>
@@ -1238,7 +1238,7 @@
                                                                     <rect key="frame" x="0.0" y="187" width="360" height="72"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="EKn-MX-Fao">
                                                                         <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" id="Jve-qX-Agy">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="72"/>

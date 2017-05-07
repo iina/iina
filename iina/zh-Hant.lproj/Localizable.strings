@@ -32,10 +32,10 @@
 "menu.volume" = "音量: %d";
 
 /* Off */
-"off" = "關";
+"general.off" = "關";
 
 /* On */
-"on" = "開";
+"general.on" = "開";
 
 /* AB-Loop: A */
 "osd.abloop.a" = "AB循環：A";

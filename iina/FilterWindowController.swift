@@ -26,7 +26,7 @@ class FilterWindowController: NSWindowController {
     super.windowDidLoad()
 
     // title
-    window?.title = filterType == MPVProperty.af ? "Audio Filters" : "Video Filters"
+    window?.title = filterType == MPVProperty.af ? NSLocalizedString("filter.audio_filters", comment: "Audio Filters") : NSLocalizedString("filter.video_filters", comment: "Video Filters")
 
     filters = PlayerCore.shared.mpvController.getFilters(filterType)
     tableView.delegate = self
@@ -58,7 +58,7 @@ class FilterWindowController: NSWindowController {
   // MARK: - IBAction
 
   @IBAction func addFilterAction(_ sender: AnyObject) {
-    let _ = Utility.quickPromptPanel(messageText: "Add filter", informativeText: "Please enter a filter string in format of MPV's vf or af command.") { str in
+    let _ = Utility.quickPromptPanel("add_filter") { str in
       if let newFilter = MPVFilter(rawString: str) {
         filters.append(newFilter)
         setFilters()

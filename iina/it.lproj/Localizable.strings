@@ -7,10 +7,10 @@
  */
 
 // Common
-"on" = "On";
-"off" = "Off";
-"login" = "Login";
-"logout" = "Logout";
+"general.on" = "On";
+"general.off" = "Off";
+"general.login" = "Login";
+"general.logout" = "Logout";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "PLAYLIST";
@@ -20,8 +20,8 @@
 "main.buffering_indicator" = "Buffer… %d%%";
 
 // QuickSettingViewController.swift
-"quicksetting.aspect_item.Default" = "Default";
-"quicksetting.crop_item.None" = "Nessuno";
+"quicksetting.item_default" = "Default";
+"quicksetting.item_none" = "Nessuno";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";

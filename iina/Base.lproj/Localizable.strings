@@ -166,6 +166,10 @@
 "alert.opensub.login.title" = "Opensubtitles Login";
 "alert.opensub.login.message" = "Please enter your username and password";
 
+"alert.open_url.title" = "Open URL";
+"alert.open_url.message" = "Please enter the URL:";
+"alert.choose_media_file.title" = "Choose Media File";
+
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.remove" = "Remove";
@@ -180,3 +184,6 @@
 
 "keymapping.title" = "Key Mapping";
 "keymapping.message" = "Press any key to record.";
+
+"filter.video_filters" = "Video Filters";
+"filter.audio_filters" = "Audio Filters";

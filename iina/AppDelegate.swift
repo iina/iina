@@ -175,7 +175,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func openFile(_ sender: AnyObject) {
     let panel = NSOpenPanel()
-    panel.title = "Choose media file"
+    panel.title = NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File")
     panel.canCreateDirectories = false
     panel.canChooseFiles = true
     panel.canChooseDirectories = false
@@ -193,12 +193,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func openURL(_ sender: AnyObject) {
     let panel = NSAlert()
-    panel.messageText = "Open URL"
-    panel.informativeText = "Please enter the URL:"
+    panel.messageText = NSLocalizedString("alert.open_url.title", comment: "Open URL")
+    panel.informativeText = NSLocalizedString("alert.open_url.message", comment: "Please enter the URL:")
     let inputViewController = OpenURLAccessoryViewController()
     panel.accessoryView = inputViewController.view
-    panel.addButton(withTitle: "OK")
-    panel.addButton(withTitle: "Cancel")
+    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = inputViewController.urlField
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {

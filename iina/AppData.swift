@@ -68,13 +68,14 @@ struct Constants {
     static let dot = "●"
     static let play = "▶︎"
     static let videoTimePlaceholder = "--:--:--"
-    static let none = NSLocalizedString("track.none", comment: "<None>")
+    static let trackNone = NSLocalizedString("track.none", comment: "<None>")
     static let chapter = "Chapter"
     static let fullScreen = NSLocalizedString("menu.fullscreen", comment: "Fullscreen")
     static let exitFullScreen = NSLocalizedString("menu.exit_fullscreen", comment: "Exit Fullscreen")
     static let pause = NSLocalizedString("menu.pause", comment: "Pause")
     static let resume = NSLocalizedString("menu.resume", comment: "Resume")
-    static let volume = "Volume"
+    static let `default` = NSLocalizedString("quicksetting.item_default", comment: "Default")
+    static let none = NSLocalizedString("quicksetting.item_none", comment: "None")
     static let audioDelay = "Audio Delay"
     static let subDelay = "Subtitle Delay"
     static let pip = NSLocalizedString("menu.pip", comment: "Enter Picture-in-Picture")

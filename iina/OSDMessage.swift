@@ -97,7 +97,7 @@ enum OSDMessage {
 
     case .aspect(var value):
       if value == "Default" {
-        value = NSLocalizedString("quicksetting.item_default", comment: "Default")
+        value = Constants.String.default
       }
       return (
         String(format: NSLocalizedString("osd.aspect", comment: "Aspect Ratio: %@"), value),
@@ -106,7 +106,7 @@ enum OSDMessage {
 
     case .crop(var value):
       if value == "None" {
-        value = NSLocalizedString("quicksetting.item_none", comment: "None")
+        value = Constants.String.none
       }
       return (
         String(format: NSLocalizedString("osd.crop", comment: "Crop: %@"), value),

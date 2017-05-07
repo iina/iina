@@ -26,7 +26,7 @@ class FilterWindowController: NSWindowController {
     super.windowDidLoad()
 
     // title
-    window?.title = filterType == MPVProperty.af ? "Audio Filters" : "Video Filters"
+    window?.title = filterType == MPVProperty.af ? NSLocalizedString("filter.audio_filters", comment: "Audio Filters") : NSLocalizedString("filter.video_filters", comment: "Video Filters")
 
     filters = PlayerCore.shared.mpvController.getFilters(filterType)
     tableView.delegate = self

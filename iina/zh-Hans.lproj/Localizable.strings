@@ -166,6 +166,10 @@
 "alert.opensub.login.title" = "Opensubtitles 登录";
 "alert.opensub.login.message" = "请输入用户名和密码。";
 
+"alert.open_url.title" = "打开 URL";
+"alert.open_url.message" = "请输入 URL:";
+"alert.choose_media_file.title" = "选择媒体文件";
+
 "pl_menu.title_multi" = "%d 个项目";
 "pl_menu.play_next" = "接下来播放";
 "pl_menu.remove" = "移除";
@@ -180,3 +184,7 @@
 
 "keymapping.title" = "快捷键";
 "keymapping.message" = "请按任意键来开始录制。";
+
+
+"filter.video_filters" = "视频滤镜";
+"filter.audio_filters" = "音频滤镜";

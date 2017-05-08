@@ -18,7 +18,6 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var open: NSMenuItem!
   @IBOutlet weak var savePlaylist: NSMenuItem!
   @IBOutlet weak var deleteCurrentFile: NSMenuItem!
-  @IBOutlet weak var historyMenu: NSMenu!
   // Playback
   @IBOutlet weak var playbackMenu: NSMenu!
   @IBOutlet weak var pause: NSMenuItem!
@@ -110,9 +109,6 @@ class MenuController: NSObject, NSMenuDelegate {
     
     savePlaylist.action = #selector(MainWindowController.menuSavePlaylist(_:))
     deleteCurrentFile.action = #selector(MainWindowController.menuDeleteCurrentFile(_:))
-
-    historyMenu.delegate = self
-    updateHistory()
     
     // Playback menu
 
@@ -265,27 +261,6 @@ class MenuController: NSObject, NSMenuDelegate {
 
   // MARK: - Update Menus
 
-  private func updateHistory() {
-    let workspace = NSWorkspace.shared()
-    let iconRect = NSRect(x: 0, y: 0, width: 16, height: 16)
-    historyMenu.removeAllItems()
-    let showHistoryMenuItem = NSMenuItem(title: "Show History", action: #selector(AppDelegate.showHistoryWindow(_:)), keyEquivalent: "h")
-    showHistoryMenuItem.keyEquivalentModifierMask = [.command, .shift]
-    historyMenu.addItem(showHistoryMenuItem)
-    historyMenu.addItem(NSMenuItem.separator())
-    for item in HistoryController.shared.history {
-      let menuItem = NSMenuItem()
-      menuItem.title = item.name
-      menuItem.action = #selector(MainWindowController.menuOpenHistory(_:))
-      menuItem.representedObject = item.url
-      if let docImageRef = workspace.icon(forFileType: item.url.pathExtension).bestRepresentation(for: iconRect, context: nil, hints: nil) {
-        menuItem.image = NSImage()
-        menuItem.image!.addRepresentation(docImageRef)
-      }
-      historyMenu.addItem(menuItem)
-    }
-  }
-
   private func updatePlaylist() {
     playlistMenu.removeAllItems()
     for (index, item) in PlayerCore.shared.info.playlist.enumerated() {
@@ -414,9 +389,7 @@ class MenuController: NSObject, NSMenuDelegate {
   // MARK: - Menu delegate
 
   func menuWillOpen(_ menu: NSMenu) {
-    if menu == historyMenu {
-      updateHistory()
-    } else if menu == playlistMenu {
+    if menu == playlistMenu {
       updatePlaylist()
     } else if menu == chapterMenu {
       updateChapterList()

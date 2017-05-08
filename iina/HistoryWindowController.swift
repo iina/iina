@@ -39,13 +39,13 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   private static let dateFormatterTime: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateFormat = "hh:mm a"
+    formatter.dateFormat = "HH:mm"
     return formatter
   }()
 
   private static let dateFormatterDateAndTime: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateFormat = "MM-dd hh:mm a"
+    formatter.dateFormat = "MM-dd HH:mm"
     return formatter
   }()
 
@@ -156,7 +156,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
         let filenameView = (view as! HistoryProgressCellView)
         if let progress = entry.mpvProgress {
           filenameView.textField?.stringValue = progress.stringRepresentation
-          filenameView.indicator.controlTint = .graphiteControlTint
+          filenameView.indicator.isHidden = false
           filenameView.indicator.doubleValue = (progress / entry.duration) ?? 0
         } else {
           filenameView.textField?.stringValue = ""

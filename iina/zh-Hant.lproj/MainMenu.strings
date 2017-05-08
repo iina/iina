@@ -4,6 +4,9 @@
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "打開 URL...";
 
+/* Class = "NSMenuItem"; title = "Set IINA as The Default App…"; ObjectID = "0os-i1-tJF"; */
+"0os-i1-tJF.title" = "將 IINA 設爲預設APP…";
+
 /* Class = "NSMenuItem"; title = "Normal Size"; ObjectID = "1UK-8n-QPP"; */
 "1UK-8n-QPP.title" = "原始大小";
 
@@ -315,6 +318,9 @@
 
 /* Class = "NSMenu"; title = "Flip"; ObjectID = "n90-to-nRT"; */
 "n90-to-nRT.title" = "翻轉";
+
+/* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
+"npH-8B-XA4.title" = "將當前播放檔丢到垃圾桶";
 
 /* Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ"; */
 "oas-Oc-fiZ.title" = "打開最近檔案";

@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="HistoryWindowController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="historySearchField" destination="nfA-G1-DVj" id="ySQ-Ee-v7t"/>
                 <outlet property="outlineView" destination="6jR-CS-fgx" id="kxD-T8-Xoo"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
@@ -24,11 +25,15 @@
                 <subviews>
                     <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfA-G1-DVj">
                         <rect key="frame" x="2" y="320" width="538" height="19"/>
-                        <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" focusRingType="none" usesSingleLineMode="YES" bezelStyle="round" id="k5B-TS-AUl">
+                        <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" focusRingType="none" usesSingleLineMode="YES" bezelStyle="round" recentsAutosaveName="IINAHistorySearchField" id="k5B-TS-AUl">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </searchFieldCell>
+                        <connections>
+                            <action selector="searchFieldAction:" target="-2" id="GHt-cO-ckm"/>
+                            <outlet property="searchMenuTemplate" destination="u6g-IF-TSS" id="y2i-UM-V7o"/>
+                        </connections>
                     </searchField>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="II4-dF-AGa">
                         <rect key="frame" x="-1" y="-1" width="544" height="319"/>
@@ -88,7 +93,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="459" height="14"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="vDR-ax-UJb">
-                                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                                <font key="font" metaFont="smallSystemBold"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -175,7 +180,7 @@
             </connections>
             <point key="canvasLocation" x="171" y="200"/>
         </window>
-        <menu id="lR3-1E-Rwr">
+        <menu title="Context Menu" identifier="ContextMenu" id="lR3-1E-Rwr" userLabel="Context Menu">
             <items>
                 <menuItem title="Reveal in Finder" tag="100" id="FPK-nx-hvF">
                     <modifierMask key="keyEquivalentModifierMask"/>
@@ -192,6 +197,40 @@
                 </menuItem>
             </items>
             <point key="canvasLocation" x="455.5" y="543.5"/>
+        </menu>
+        <menu identifier="SearchMenu" id="u6g-IF-TSS" userLabel="Search Menu">
+            <items>
+                <menuItem title="Search in" enabled="NO" id="Gx5-gP-rzr">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Filename" tag="200" indentationLevel="1" id="Wkp-Vn-JoJ">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="searchOptionFilenameAction:" target="-2" id="ojh-2T-Drj"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Full path" tag="201" indentationLevel="1" id="AZL-gY-Tob">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="searchOptionFullPathAction:" target="-2" id="51W-C3-T6u"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="Uvl-9Y-Q1e"/>
+                <menuItem title="No Recent Searches" tag="1003" enabled="NO" id="ndC-eb-4GZ">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Recent Searches" tag="1000" enabled="NO" id="zhe-yr-CTO">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Item" tag="1001" indentationLevel="1" id="tmr-oC-rNa">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="wPq-2H-Qcs"/>
+                <menuItem title="Clear Recents" tag="1002" id="07n-bk-3ma">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="84" y="549"/>
         </menu>
     </objects>
 </document>

@@ -14,6 +14,10 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     case lastPlayed, fileLocation
   }
 
+  enum SearchOption {
+    case filename, fullPath
+  }
+
   private let getKey: [SortBy: (PlaybackHistory) -> String] = [
     .lastPlayed: { HistoryWindowController.dateFormatterDate.string(from: $0.addedDate) },
     .fileLocation: { $0.url.path }
@@ -24,6 +28,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   @IBOutlet weak var outlineView: NSOutlineView!
+  @IBOutlet weak var historySearchField: NSSearchField!
 
   private static let dateFormatterDate: DateFormatter = {
     let formatter = DateFormatter()
@@ -38,6 +43,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }()
 
   var sortBy: SortBy = .lastPlayed
+  var searchOption: SearchOption = .fullPath
 
   private var historyData: [String: [PlaybackHistory]] = [:]
   private var historyDataKeys: [String] = []
@@ -59,14 +65,17 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   func reloadData() {
     prepareData()
     outlineView.reloadData()
+    outlineView.expandItem(nil, expandChildren: true)
   }
 
-  private func prepareData() {
+  private func prepareData(fromHistory historyList: [PlaybackHistory]? = nil) {
     // reconstruct data
     historyData.removeAll()
     historyDataKeys.removeAll()
 
-    for entry in HistoryController.shared.history {
+    let historyList = historyList ?? HistoryController.shared.history
+
+    for entry in historyList {
       addToData(entry, forKey: getKey[sortBy]!(entry))
     }
   }
@@ -128,17 +137,43 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     }
   }
 
-  // MARK: - Context menu
+  // MARK: - Searching
+
+  @IBAction func searchFieldAction(_ sender: NSSearchField) {
+    let searchString = sender.stringValue
+    guard !searchString.isEmpty else {
+      reloadData()
+      return
+    }
+    let newObjects = HistoryController.shared.history.filter { entry in
+      let string = searchOption == .filename ? entry.name : entry.url.path
+      return string.lowercased().contains(searchString)
+    }
+    prepareData(fromHistory: newObjects)
+    outlineView.reloadData()
+    outlineView.expandItem(nil, expandChildren: true)
+  }
+
+  // MARK: - Menu
 
   private var selectedEntries: [PlaybackHistory] = []
 
   func menuNeedsUpdate(_ menu: NSMenu) {
-    var indexSet = outlineView.selectedRowIndexes
-    if outlineView.clickedRow >= 0 {
-      indexSet.insert(outlineView.clickedRow)
+    if menu.identifier == "ContextMenu" {
+      var indexSet = outlineView.selectedRowIndexes
+      if outlineView.clickedRow >= 0 {
+        indexSet.insert(outlineView.clickedRow)
+      }
+      selectedEntries = indexSet.flatMap { outlineView.item(atRow: $0) as? PlaybackHistory }
     }
-
-    selectedEntries = indexSet.flatMap { outlineView.item(atRow: $0) as? PlaybackHistory }
+  }
+  override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    if menuItem.tag == 200 {
+      menuItem.state = searchOption == .filename ? NSOnState : NSOffState
+    } else if menuItem.tag == 201 {
+      menuItem.state = searchOption == .fullPath ? NSOnState : NSOffState
+    }
+    return menuItem.isEnabled
   }
 
   // MARK: - IBActions
@@ -156,8 +191,18 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     }
   }
 
+  @IBAction func searchOptionFilenameAction(_ sender: AnyObject) {
+    searchOption = .filename
+  }
+
+  @IBAction func searchOptionFullPathAction(_ sender: AnyObject) {
+    searchOption = .fullPath
+  }
+
 }
 
+
+// MARK: - Other classes
 
 class HistoryFilenameCellView: NSTableCellView {
 

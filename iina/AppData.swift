@@ -91,6 +91,7 @@ struct Constants {
     static let ontopChanged = Notification.Name("IINAOnTopChanged")
     static let keyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
     static let fileLoaded = Notification.Name("IINAFileLoaded")
+    static let historyUpdated = Notification.Name("IINAHistoryUpdated")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)

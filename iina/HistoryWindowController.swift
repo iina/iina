@@ -44,11 +44,21 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   override func windowDidLoad() {
     super.windowDidLoad()
+
+    NotificationCenter.default.addObserver(forName: Constants.Noti.historyUpdated, object: nil, queue: .main) { [unowned self] _ in
+      self.reloadData()
+    }
+
     prepareData()
     outlineView.delegate = self
     outlineView.dataSource = self
     outlineView.menu?.delegate = self
     outlineView.expandItem(nil, expandChildren: true)
+  }
+
+  func reloadData() {
+    prepareData()
+    outlineView.reloadData()
   }
 
   private func prepareData() {

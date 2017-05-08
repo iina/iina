@@ -31,6 +31,7 @@ class HistoryController: NSObject {
     if !result {
       Utility.log("Cannot save playback history!")
     }
+    NotificationCenter.default.post(Notification(name: Constants.Noti.historyUpdated))
   }
 
   func add(_ url: URL) {

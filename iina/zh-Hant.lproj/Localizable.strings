@@ -19,8 +19,8 @@
 /* Press any key to record. */
 "keymapping.message" = "按任意鍵";
 
-/* Buffering... %d%% */
-"main.buffering_indicator" = "緩衝中... %d%%";
+/* Buffering... %s%% */
+"main.buffering_indicator" = "緩衝中... %s%%";
 
 /* Audio Delay: */
 "menu.audio_delay" = "音訊延遲: %.2f秒";

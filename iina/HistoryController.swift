@@ -34,11 +34,11 @@ class HistoryController: NSObject {
     NotificationCenter.default.post(Notification(name: Constants.Noti.historyUpdated))
   }
 
-  func add(_ url: URL) {
+  func add(_ url: URL, duration: Double) {
     if let existingItem = (history.filter { $0.mpvMd5 == url.path.md5 }).first, let index = history.index(of: existingItem) {
       history.remove(at: index)
     }
-    history.insert(PlaybackHistory(url: url), at: 0)
+    history.insert(PlaybackHistory(url: url, duration: duration), at: 0)
     save()
   }
 

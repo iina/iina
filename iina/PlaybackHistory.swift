@@ -13,6 +13,7 @@ fileprivate let KeyName = "IINAPHNme"
 fileprivate let KeyMpvMd5 = "IINAPHMpvmd5"
 fileprivate let KeyPlayed = "IINAPHPlayed"
 fileprivate let KeyAddedDate = "IINAPHDate"
+fileprivate let KeyDuration = "IINAPHDuration"
 
 class PlaybackHistory: NSObject, NSCoding {
 
@@ -22,6 +23,9 @@ class PlaybackHistory: NSObject, NSCoding {
 
   var played: Bool
   var addedDate: Date
+
+  var duration: VideoTime
+  var mpvProgress: VideoTime?
 
   required init?(coder aDecoder: NSCoder) {
     guard
@@ -34,20 +38,35 @@ class PlaybackHistory: NSObject, NSCoding {
     }
 
     let played = aDecoder.decodeBool(forKey: KeyPlayed)
+    let duration = aDecoder.decodeDouble(forKey: KeyDuration)
 
     self.url = url
     self.name = name
     self.mpvMd5 = md5
     self.played = played
     self.addedDate = date
+    self.duration = VideoTime(duration)
+
+    // try read mpv watch_later file
+
+    let fileURL = Utility.watchLaterURL.appendingPathComponent(mpvMd5)
+    if let reader = StreamReader(path: fileURL.path) {
+      if let firstLine = reader.nextLine(),
+        firstLine.hasPrefix("start="),
+        let progressString = firstLine.components(separatedBy: "=").last,
+        let progress = Double(progressString) {
+        self.mpvProgress = VideoTime(progress)
+      }
+    }
   }
 
-  init(url: URL, name: String? = nil) {
+  init(url: URL, duration: Double, name: String? = nil) {
     self.url = url
     self.name = name ?? url.lastPathComponent
     self.mpvMd5 = url.path.md5  // FIXME: should implement mpv's algorithm for dvd://, etc
     self.played = true
     self.addedDate = Date()
+    self.duration = VideoTime(duration)
   }
 
   func encode(with aCoder: NSCoder) {
@@ -56,6 +75,7 @@ class PlaybackHistory: NSObject, NSCoding {
     aCoder.encode(mpvMd5, forKey: KeyMpvMd5)
     aCoder.encode(played, forKey: KeyPlayed)
     aCoder.encode(addedDate, forKey: KeyAddedDate)
+    aCoder.encode(duration.second, forKey: KeyDuration)
   }
 
 }

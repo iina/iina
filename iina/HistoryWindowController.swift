@@ -39,13 +39,13 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   private static let dateFormatterTime: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm"
+    formatter.dateFormat = "hh:mm a"
     return formatter
   }()
 
   private static let dateFormatterDateAndTime: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateFormat = "MM-dd HH:mm"
+    formatter.dateFormat = "MM-dd hh:mm a"
     return formatter
   }()
 
@@ -122,9 +122,13 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
-    if tableColumn?.identifier == "Time", item is PlaybackHistory {
-      let formatter = groupBy == .lastPlayed ? HistoryWindowController.dateFormatterTime : HistoryWindowController.dateFormatterDateAndTime
-      return formatter.string(from: (item as! PlaybackHistory).addedDate)
+    if let entry = item as? PlaybackHistory {
+      if tableColumn?.identifier == "Time" {
+        let formatter = groupBy == .lastPlayed ? HistoryWindowController.dateFormatterTime : HistoryWindowController.dateFormatterDateAndTime
+        return formatter.string(from: entry.addedDate)
+      } else if tableColumn?.identifier == "Progress" {
+        return entry.duration.stringRepresentation
+      }
     }
     return item
   }
@@ -133,10 +137,23 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     if let identifier = tableColumn?.identifier {
       let view = outlineView.make(withIdentifier: identifier, owner: nil)
       if identifier == "Filename" {
+        // Filename cell
         let entry = item as! PlaybackHistory
         let filenameView = (view as! HistoryFilenameCellView)
         filenameView.textField?.stringValue = entry.name
         filenameView.docImage.image = NSWorkspace.shared().icon(forFileType: entry.url.pathExtension)
+      } else if identifier == "Progress" {
+        // Progress cell
+        let entry = item as! PlaybackHistory
+        let filenameView = (view as! HistoryProgressCellView)
+        if let progress = entry.mpvProgress {
+          filenameView.textField?.stringValue = progress.stringRepresentation
+          filenameView.indicator.isHidden = false
+          filenameView.indicator.doubleValue = (progress / entry.duration) ?? 0
+        } else {
+          filenameView.textField?.stringValue = ""
+          filenameView.indicator.isHidden = true
+        }
       }
       return view
     } else {
@@ -221,4 +238,10 @@ class HistoryFilenameCellView: NSTableCellView {
 
   @IBOutlet var docImage: NSImageView!
 
+}
+
+class HistoryProgressCellView: NSTableCellView {
+
+  @IBOutlet var indicator: NSProgressIndicator!
+  
 }

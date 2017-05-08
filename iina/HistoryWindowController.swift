@@ -66,6 +66,8 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     outlineView.delegate = self
     outlineView.dataSource = self
     outlineView.menu?.delegate = self
+    outlineView.target = self
+    outlineView.doubleAction = #selector(doubleAction)
     outlineView.expandItem(nil, expandChildren: true)
   }
 
@@ -96,6 +98,12 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   // MARK: NSOutlineViewDelegate
+
+  func doubleAction() {
+    if let selected = outlineView.item(atRow: outlineView.clickedRow) as? PlaybackHistory {
+      PlayerCore.shared.openFile(selected.url)
+    }
+  }
 
   func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
     return item is String
@@ -148,7 +156,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
         let filenameView = (view as! HistoryProgressCellView)
         if let progress = entry.mpvProgress {
           filenameView.textField?.stringValue = progress.stringRepresentation
-          filenameView.indicator.isHidden = false
+          filenameView.indicator.controlTint = .graphiteControlTint
           filenameView.indicator.doubleValue = (progress / entry.duration) ?? 0
         } else {
           filenameView.textField?.stringValue = ""

@@ -1,7 +1,25 @@
+/* Cancel */
+"general.cancel" = "取消";
+
+/* Off */
+"general.off" = "關";
+
+/* OK */
+"general.ok" = "好";
+
+/* On */
+"general.on" = "開";
+
+/* Password */
+"general.password" = "密碼";
+
+/* Username */
+"general.username" = "用戶名";
+
 /* Press any key to record. */
 "keymapping.message" = "按任意鍵";
 
-/* Buffering... %s%% */
+/* Buffering... %d%% */
 "main.buffering_indicator" = "緩衝中... %d%%";
 
 /* Audio Delay: */
@@ -30,12 +48,6 @@
 
 /* Volume: */
 "menu.volume" = "音量: %d";
-
-/* Off */
-"general.off" = "關";
-
-/* On */
-"general.on" = "開";
 
 /* AB-Loop: A */
 "osd.abloop.a" = "AB循環：A";
@@ -207,6 +219,12 @@
 
 /* UI */
 "preference.ui" = "UI";
+
+/* Default */
+"quicksetting.item_default" = "默認選項";
+
+/* None */
+"quicksetting.item_none" = "未選中";
 
 /* <None> */
 "track.none" = "<無>";

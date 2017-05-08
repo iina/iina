@@ -150,7 +150,9 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   @IBAction func deleteAction(_ sender: AnyObject) {
     if Utility.quickAskPanel("delete_history") {
-      
+      for entry in selectedEntries {
+        HistoryController.shared.remove(entry)
+      }
     }
   }
 

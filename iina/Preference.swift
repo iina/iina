@@ -20,6 +20,8 @@ struct Preference {
     /** Record recent files */
     static let recordRecentFiles = "recordRecentFiles"
 
+    static let trackAllFilesInRecentOpenMenu = "trackAllFilesInRecentOpenMenu"
+
     /** Material for OSC and title bar (Theme(int)) */
     static let themeMaterial = "themeMaterial"
 
@@ -357,6 +359,7 @@ struct Preference {
   static let defaultPreference:[String : Any] = [
     Key.lastCheckUpdateTime: Date(timeIntervalSince1970: 1),
     Key.recordRecentFiles: true,
+    Key.trackAllFilesInRecentOpenMenu: true,
     Key.controlBarPositionHorizontal: Float(0.5),
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,

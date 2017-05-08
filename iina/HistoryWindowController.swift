@@ -10,17 +10,18 @@ import Cocoa
 
 class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutlineViewDataSource, NSMenuDelegate {
 
-  enum SortBy {
-    case lastPlayed, fileLocation
+  enum SortOption: Int {
+    case lastPlayed = 0
+    case fileLocation
   }
 
   enum SearchOption {
     case filename, fullPath
   }
 
-  private let getKey: [SortBy: (PlaybackHistory) -> String] = [
+  private let getKey: [SortOption: (PlaybackHistory) -> String] = [
     .lastPlayed: { HistoryWindowController.dateFormatterDate.string(from: $0.addedDate) },
-    .fileLocation: { $0.url.path }
+    .fileLocation: { $0.url.deletingLastPathComponent().path }
   ]
 
   override var windowNibName: String {
@@ -42,7 +43,13 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     return formatter
   }()
 
-  var sortBy: SortBy = .lastPlayed
+  private static let dateFormatterDateAndTime: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MM-dd HH:mm"
+    return formatter
+  }()
+
+  var groupBy: SortOption = .lastPlayed
   var searchOption: SearchOption = .fullPath
 
   private var historyData: [String: [PlaybackHistory]] = [:]
@@ -76,7 +83,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     let historyList = historyList ?? HistoryController.shared.history
 
     for entry in historyList {
-      addToData(entry, forKey: getKey[sortBy]!(entry))
+      addToData(entry, forKey: getKey[groupBy]!(entry))
     }
   }
 
@@ -116,7 +123,8 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
     if tableColumn?.identifier == "Time", item is PlaybackHistory {
-      return HistoryWindowController.dateFormatterTime.string(from: (item as! PlaybackHistory).addedDate)
+      let formatter = groupBy == .lastPlayed ? HistoryWindowController.dateFormatterTime : HistoryWindowController.dateFormatterDateAndTime
+      return formatter.string(from: (item as! PlaybackHistory).addedDate)
     }
     return item
   }
@@ -177,6 +185,11 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   // MARK: - IBActions
+
+  @IBAction func groupByChangedAction(_ sender: NSPopUpButton) {
+    groupBy = SortOption(rawValue: sender.selectedTag()) ?? .lastPlayed
+    reloadData()
+  }
 
   @IBAction func revealInFinderAction(_ sender: AnyObject) {
     let urls = selectedEntries.map { $0.url }

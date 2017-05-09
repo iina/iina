@@ -88,13 +88,14 @@ class PlayerCore: NSObject {
 
     // load keybindings
     let userConfigs = UserDefaults.standard.dictionary(forKey: Preference.Key.inputConfigs)
-    var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["IINA Default"]
+    let iinaDefaultConfPath = PrefKeyBindingViewController.defaultConfigs["IINA Default"]!
+    var inputConfPath = iinaDefaultConfPath
     if let confFromUd = UserDefaults.standard.string(forKey: Preference.Key.currentInputConfigName) {
       if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
         inputConfPath = currentConfigFilePath
       }
     }
-    let mapping = KeyMapping.parseInputConf(at: inputConfPath!)!
+    let mapping = KeyMapping.parseInputConf(at: inputConfPath) ?? KeyMapping.parseInputConf(at: iinaDefaultConfPath)!
     PlayerCore.keyBindings = [:]
     mapping.forEach { PlayerCore.keyBindings[$0.key.lowercased()] = $0 }
 

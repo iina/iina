@@ -352,6 +352,8 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
 }
 
+// MARK: -
+
 extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSource {
 
   func numberOfRows(in tableView: NSTableView) -> Int {

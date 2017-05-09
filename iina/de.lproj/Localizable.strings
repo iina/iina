@@ -1,3 +1,48 @@
+/* No comment provided by engineer. */
+"alert." = "Warnung.";
+
+/* Choose Media File */
+"alert.choose_media_file.title" = "Datei auswählen";
+
+/* Please enter the URL: */
+"alert.open_url.message" = "URL auswählen";
+
+/* Open URL */
+"alert.open_url.title" = "URL öffnen";
+
+/* Error */
+"alert.title_error" = "Fehler";
+
+/* Information */
+"alert.title_info" = "Info";
+
+/* Warning */
+"alert.title_warning" = "Warnung";
+
+/* Audio Filters */
+"filter.audio_filters" = "Audio Filter";
+
+/* Video Filters */
+"filter.video_filters" = "Video Filter";
+
+/* Cancel */
+"general.cancel" = "Abbrechen";
+
+/* Off */
+"general.off" = "Aus";
+
+/* OK */
+"general.ok" = "OK";
+
+/* On */
+"general.on" = "An";
+
+/* Password */
+"general.password" = "Passwort";
+
+/* Username */
+"general.username" = "Benutzername";
+
 /* Press any key to record. */
 "keymapping.message" = "Zum Starten der Aufnahme beliebige Taste drücken.";
 
@@ -33,12 +78,6 @@
 
 /* Volume: */
 "menu.volume" = "Volume: %d";
-
-/* Off */
-"off" = "Aus";
-
-/* On */
-"on" = "An";
 
 /* AB-Loop: A */
 "osd.abloop.a" = "AB-Schleife: A";
@@ -213,6 +252,12 @@
 
 /* UI */
 "preference.ui" = "Aussehen";
+
+/* Default */
+"quicksetting.item_default" = "Standard";
+
+/* None */
+"quicksetting.item_none" = "Kein";
 
 /* <None> */
 "track.none" = "<Leer>";

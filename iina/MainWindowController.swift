@@ -443,10 +443,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     notificationObservers.append(changeWorkspaceObserver)
     
     // enable media key monitoring
-    if SPMediaKeyTap.usesGlobalMediaKeyTap() {
-      appDelegate.keyTap.startWatchingMediaKeys()
-    } else {
-      Utility.log("Media key monitoring disabled")
+    if ud.bool(forKey: PK.useMediaKeys) {
+      if SPMediaKeyTap.usesGlobalMediaKeyTap() {
+        appDelegate.keyTap.startWatchingMediaKeys()
+      } else {
+        Utility.log("Media key monitoring disabled")
+      }
     }
   }
 
@@ -1010,7 +1012,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     
     
     // stop media key monitoring
-    appDelegate.keyTap.stopWatchingMediaKeys()
+    if ud.bool(forKey: PK.useMediaKeys) {
+      appDelegate.keyTap.stopWatchingMediaKeys()
+    }
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {

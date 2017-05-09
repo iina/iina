@@ -104,34 +104,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if let url = pendingURL {
       parsePendingURL(url)
     }
-  }
-  
-  override func mediaKeyTap(_ keyTap: SPMediaKeyTap!, receivedMediaKeyEvent event: NSEvent!) {
-    guard event.type == NSSystemDefined && event.subtype == .screenChanged else {
-      Utility.log("Unexpected NSEvent in mediaKeyTap")
-      return
-    }
     
-    let keyCode: Int32 = Int32((event.data1 & 0xFFFF0000) >> 16)
-    let keyFlags: Int = event.data1 & 0x0000FFFF
-    let keyIsPressed: Bool = ((keyFlags & 0xFF00) >> 8) == 0xA
-    // let keyRepeat: Int = keyFlags & 0x1
-    
-    if keyIsPressed {
-      switch keyCode {
-      case NX_KEYTYPE_PLAY:
-        playerCore.togglePause(nil)
-        break
-      case NX_KEYTYPE_FAST:
-        playerCore.navigateInPlaylist(nextOrPrev: true)
-        break
-      case NX_KEYTYPE_REWIND:
-        playerCore.navigateInPlaylist(nextOrPrev: false)
-        break
-      default:
-        print("unhandled media keys from keyTap")
-      }
-    }
+    // observers
+    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.useMediaKeys, options: .new, context: nil)
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {
@@ -174,6 +149,56 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     playerCore.openFile(url)
     return true
+  }
+  
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
+    guard let keyPath = keyPath, let change = change else { return }
+    
+    switch keyPath {
+    case Preference.Key.useMediaKeys:
+      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+        if newValue && (playerCore.mainWindow?.isWindowLoaded) ?? false {
+          if SPMediaKeyTap.usesGlobalMediaKeyTap() {
+            keyTap.startWatchingMediaKeys()
+          } else {
+            Utility.log("Media key monitoring disabled")
+          }
+        } else if !newValue && (playerCore.mainWindow?.isWindowLoaded) ?? false {
+          keyTap.stopWatchingMediaKeys()
+        }
+      }
+      
+    default:
+      return
+    }
+  }
+  
+  override func mediaKeyTap(_ keyTap: SPMediaKeyTap!, receivedMediaKeyEvent event: NSEvent!) {
+    guard event.type == NSSystemDefined && event.subtype == .screenChanged else {
+      Utility.log("Unexpected NSEvent in mediaKeyTap")
+      return
+    }
+    
+    let keyCode: Int32 = Int32((event.data1 & 0xFFFF0000) >> 16)
+    let keyFlags: Int = event.data1 & 0x0000FFFF
+    let keyIsPressed: Bool = ((keyFlags & 0xFF00) >> 8) == 0xA
+    // let keyRepeat: Int = keyFlags & 0x1
+    
+    if keyIsPressed {
+      switch keyCode {
+      case NX_KEYTYPE_PLAY:
+        playerCore.togglePause(nil)
+        break
+      case NX_KEYTYPE_FAST:
+        playerCore.navigateInPlaylist(nextOrPrev: true)
+        break
+      case NX_KEYTYPE_REWIND:
+        playerCore.navigateInPlaylist(nextOrPrev: false)
+        break
+      default:
+        print("unhandled media keys from keyTap")
+      }
+    }
   }
 
   // MARK: - Dock menu

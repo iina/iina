@@ -39,6 +39,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Objects, Views
 
+  unowned let appDelegate = NSApplication.shared().delegate as! AppDelegate
   unowned let playerCore: PlayerCore = PlayerCore.shared
   lazy var videoView: VideoView = self.initVideoView()
   lazy var sizingTouchBarTextField: NSTextField = {
@@ -440,6 +441,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     notificationObservers.append(ontopObserver)
     notificationObservers.append(screenChangeObserver)
     notificationObservers.append(changeWorkspaceObserver)
+    
+    // enable media key monitoring
+    if SPMediaKeyTap.usesGlobalMediaKeyTap() {
+      appDelegate.keyTap.startWatchingMediaKeys()
+    } else {
+      Utility.log("Media key monitoring disabled")
+    }
   }
 
   deinit {
@@ -999,6 +1007,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
+    
+    
+    // stop media key monitoring
+    appDelegate.keyTap.stopWatchingMediaKeys()
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {

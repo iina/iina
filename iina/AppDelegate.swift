@@ -104,12 +104,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if let url = pendingURL {
       parsePendingURL(url)
     }
-    
-    if SPMediaKeyTap.usesGlobalMediaKeyTap() {
-      keyTap.startWatchingMediaKeys()
-    } else {
-      Utility.log("Media key monitoring disabled")
-    }
   }
   
   override func mediaKeyTap(_ keyTap: SPMediaKeyTap!, receivedMediaKeyEvent event: NSEvent!) {
@@ -118,25 +112,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       return
     }
     
-    print("success")
     let keyCode: Int32 = Int32((event.data1 & 0xFFFF0000) >> 16)
     let keyFlags: Int = event.data1 & 0x0000FFFF
     let keyIsPressed: Bool = ((keyFlags & 0xFF00) >> 8) == 0xA
-    let keyRepeat: Int = keyFlags & 0x1
+    // let keyRepeat: Int = keyFlags & 0x1
     
     if keyIsPressed {
       switch keyCode {
       case NX_KEYTYPE_PLAY:
-        print("play/pause pressed")
+        playerCore.togglePause(nil)
         break
       case NX_KEYTYPE_FAST:
-        print("fwd pressed")
+        playerCore.navigateInPlaylist(nextOrPrev: true)
         break
       case NX_KEYTYPE_REWIND:
-        print("rewind pressed")
+        playerCore.navigateInPlaylist(nextOrPrev: false)
         break
       default:
-        print("Key %d pressed", keyCode)
+        print("unhandled media keys from keyTap")
       }
     }
   }

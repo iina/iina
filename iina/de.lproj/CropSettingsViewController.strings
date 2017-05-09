@@ -1,12 +1,11 @@
-
 /* Class = "NSTextFieldCell"; title = "Crop"; ObjectID = "6tX-fN-Gm2"; */
-"6tX-fN-Gm2.title" = "Zuschneiden";
+"6tX-fN-Gm2.title" = "Beschneiden";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "BtO-vw-tiy"; */
 "BtO-vw-tiy.title" = "Abbrechen";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "Fgl-Cs-eEh"; */
-"Fgl-Cs-eEh.title" = "Label";
+"Fgl-Cs-eEh.title" = "Bezeichnung";
 
 /* Class = "NSSegmentedCell"; bQc-2s-1MS.ibShadowedLabels[0] = "4:3"; ObjectID = "bQc-2s-1MS"; */
 "bQc-2s-1MS.ibShadowedLabels[0]" = "4:3";
@@ -28,3 +27,4 @@
 
 /* Class = "NSButtonCell"; title = "Done"; ObjectID = "eu5-yH-hHg"; */
 "eu5-yH-hHg.title" = "Fertig";
+

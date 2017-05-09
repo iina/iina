@@ -1,153 +1,288 @@
-/*
-  String_ui.strings
-  iina
+/* No comment provided by engineer. */
+"alert." = "Warnung.";
 
-  Created by lhc on 3/1/2017.
-  Copyright © 2017 lhc. All rights reserved.
-*/
+/* Choose Media File */
+"alert.choose_media_file.title" = "Datei auswählen";
 
-// Common
-"general.on" = "An";
+/* Please enter the URL: */
+"alert.open_url.message" = "URL auswählen";
+
+/* Open URL */
+"alert.open_url.title" = "URL öffnen";
+
+/* Error */
+"alert.title_error" = "Fehler";
+
+/* Information */
+"alert.title_info" = "Info";
+
+/* Warning */
+"alert.title_warning" = "Warnung";
+
+/* Audio Filters */
+"filter.audio_filters" = "Audio Filter";
+
+/* Video Filters */
+"filter.video_filters" = "Video Filter";
+
+/* Cancel */
+"general.cancel" = "Abbrechen";
+
+/* Off */
 "general.off" = "Aus";
-"general.login" = "Einloggen";
-"general.logout" = "Ausloggen";
 
-// PlaylistViewController.swift
-"playlist.playlist_cap" = "PLAYLIST";
-"playlist.chapter_cap" = "KAPITEL";
+/* OK */
+"general.ok" = "OK";
 
-// MainWindowController.swift
-"main.buffering_indicator" = "Puffern... %d%%";
+/* On */
+"general.on" = "An";
 
-// QuickSettingViewController.swift
-"quicksetting.item_default" = "Standard";
-"quicksetting.item_none" = "Kein";
+/* Password */
+"general.password" = "Passwort";
 
-// OSDMessage.swift
-"osd.pause" = "Pause";
-"osd.resume" = "Wiedergabe";
-"osd.volume" = "Lautstärke: %i";
-"osd.speed" = "Wiedergabegeschwindigkeit: %.2fx";
+/* Username */
+"general.username" = "Benutzername";
+
+/* Press any key to record. */
+"keymapping.message" = "Zum Starten der Aufnahme beliebige Taste drücken.";
+
+/* Key Mapping */
+"keymapping.title" = "Tastenzuordnung";
+
+/* Buffering... %d%% */
+"main.buffering_indicator" = "Puffern … %d%%";
+
+/* Audio Delay: */
+"menu.audio_delay" = "Tonverzögerung: %.2fs";
+
+/* Exit Fullscreen */
+"menu.exit_fullscreen" = "Vollbild AUS";
+
+/* Exit Picture-in-Picture */
+"menu.exit_pip" = "Bild-im-Bild AUS";
+
+/* Fullscreen */
+"menu.fullscreen" = "Vollbild AN";
+
+/* Pause */
+"menu.pause" = "Pause";
+
+/* Enter Picture-in-Picture */
+"menu.pip" = "Bild-im-Bild AN";
+
+/* Resume */
+"menu.resume" = "Weiter";
+
+/* Subtitle Delay: */
+"menu.sub_delay" = "Untertitelverzögerung: %.2fs";
+
+/* Volume: */
+"menu.volume" = "Volume: %d";
+
+/* AB-Loop: A */
+"osd.abloop.a" = "AB-Schleife: A";
+
+/* AB-Loop: B */
+"osd.abloop.b" = "AB-Schleife: B";
+
+/* AB-Loop: Cleared */
+"osd.abloop.clear" = "AB-Schleife: Gelöscht";
+
+/* Added %i Files to Playlist */
+"osd.add_to_playlist" = "%i Dateien zur Wiedergabeliste hinzugefügt";
+
+/* Aspect Ratio: %@ */
 "osd.aspect" = "Seitenverhältnis: %@";
-"osd.crop" = "Zuschneiden: %@";
-"osd.rotate" = "Rotation: %i°";
-"osd.deinterlace" = "Deinterlacing: %@";
-"osd.audio_delay.nodelay" = "Keine Audio-Verzögerung";
-"osd.audio_delay.later" = "Audio-Verzögerung: %.2fs später";
-"osd.audio_delay.earlier" = "Audio-Verzögerung: %.2fs früher";
-"osd.sub_delay.nodelay" = "Keine Untertitel-Verzögerung";
-"osd.sub_delay.later" = "Untertitel-Verzögerung: %.2fs später";
-"osd.sub_delay.earlier" = "Untertitel-Verzögerung: %.2fs früher";
-"osd.subtitle_pos" = "Untertitel-Position: %.1f";
-"osd.mute" = "Stumm";
-"osd.unmute" = "Stumm aus";
-"osd.screenshot" = "Bild aufgenommen";
-"osd.abloop.a" = "AB-Wiederholung: A";
-"osd.abloop.b" = "AB-Wiederholung: B";
-"osd.abloop.clear" = "AB-Wiederholung: Aus";
-"osd.stop" = "Stopp";
-"osd.chapter" = "Kapitel: %@";
-"osd.subtitle_scale" = "Untertitel-Skalierung: %.2fx";
-"osd.add_to_playlist" = "%i Dateien zur Playlist hinzugefügt";
-"osd.clear_playlist" = "Playlist geleert";
-"osd.video_eq.contrast" = "Kontrast: %i";
-"osd.video_eq.gamma" = "Gamma: %i";
-"osd.video_eq.hue" = "Farbton: %i";
-"osd.video_eq.saturation" = "Sättigung: %i";
-"osd.video_eq.brightness" = "Helligkeit: %i";
-"osd.find_online_sub" = "Online nach Untertiteln suchen...";
-"osd.sub_not_found" = "Keine Untertitel gefunden";
-"osd.sub_found" = "%d Untertitel gefunden. Laden...";
-"osd.sub_downloaded" = "Untertitel geladen";
-"osd.sub_saved" = "Untertitel gespeichert";
-"osd.network_error" = "Netzwerkfehler";
-"osd.file_error" = "Dateilesefehler";
-"osd.cannot_login" = "Einloggen nicht möglich";
+
+/* Audio Delay: %fs Earlier */
+"osd.audio_delay.earlier" = "Tonverzögerung: %.2fs früher";
+
+/* Audio Delay: %fs Later */
+"osd.audio_delay.later" = "Tonverzögerung: um %.2fs verzögert";
+
+/* Audio Delay: No Delay */
+"osd.audio_delay.nodelay" = "Tonverzögerung: keine";
+
+/* Canceled */
 "osd.canceled" = "Abgebrochen";
 
-"update.title_update_found" = "Neues Update verfügbar";
-"update.title_no_update" = "Kein Update verfügbar";
-"update.title_error" = "Fehler";
-"update.update_found" = "Es gibt eine neuere Version! Da sich IINA no in der Alpha-Phase befindet, wird die neueste Version empfohlen. Laden von der Website oder von Github:";
-"update.no_update" = "Dies ist die neueste Version.";
-"update.check_failed" = "Fehler beim Suchen nach Updates. Wahrscheinlich ist diese Version von IINA zu alt. Updates von der Website oder von Github laden.";
-"update.new_version" = "Neue Version:";
-"update.dl_from_website" = "Website öffnen";
-"update.dl_from_github" = "Github öffnen";
+/* Cannot login */
+"osd.cannot_login" = "Einloggen nicht möglich";
 
-"preference.title" = "Einstellungen";
-"preference.general" = "Allgemein";
-"preference.ui" = "Aussehen";
+/* Chapter: %@ */
+"osd.chapter" = "Kapitel: %@";
+
+/* Cleared Playlist */
+"osd.clear_playlist" = "Wiedergabeliste geleert";
+
+/* Crop: %@ */
+"osd.crop" = "Zuschneiden: %@";
+
+/* Deinterlace: %@ */
+"osd.deinterlace" = "Deinterlace: %@";
+
+/* Error reading file */
+"osd.file_error" = "Fehler beim Einlesen der Datei";
+
+/* Finding online subtitles... */
+"osd.find_online_sub" = "Suche online nach Untertiteln …";
+
+/* Mute */
+"osd.mute" = "Stummgeschaltet";
+
+/* Network error */
+"osd.network_error" = "Netzwerkfehler";
+
+/* Pause */
+"osd.pause" = "Pause";
+
+/* Resume */
+"osd.resume" = "Weiter";
+
+/* Rotate: %i° */
+"osd.rotate" = "Drehen: %i°";
+
+/* Screenshot Captured */
+"osd.screenshot" = "Screenshot aufgenomme";
+
+/* Speed: %.2fx */
+"osd.speed" = "Geschwindigkeit: %.2fx";
+
+/* Stop */
+"osd.stop" = "Stopp";
+
+/* Subtitle Delay: %fs Earlier */
+"osd.sub_delay.earlier" = "Untertitelverzögerung: %.2fs vorgezogen";
+
+/* Subtitle Delay: %fs Later */
+"osd.sub_delay.later" = "Untertitelverzögerung: %.2fs verspätet";
+
+/* Subtitle Delay: No Delay */
+"osd.sub_delay.nodelay" = "Untertitelverzögerung: keine";
+
+/* Subtitle downloaded */
+"osd.sub_downloaded" = "Untertitel heruntergeladen";
+
+/* %d subtitle(s) found. Downloading... */
+"osd.sub_found" = "%d Untertitel gefunden. Herunterladen …";
+
+/* No subtitle found. */
+"osd.sub_not_found" = "Keine Untertitel gefunden";
+
+/* Subtitle saved */
+"osd.sub_saved" = "Untertitel gespeichert";
+
+/* Subtitle Position: %f */
+"osd.subtitle_pos" = "Untertitelposition: %.1f";
+
+/* Subtitle Scale: %.2fx */
+"osd.subtitle_scale" = "Untertitelvergrößerung: %.2fx";
+
+/* Unmute */
+"osd.unmute" = "Stummschlatung aufgehoben";
+
+/* Brightness: %i */
+"osd.video_eq.brightness" = "Helligkei: %i";
+
+/* Contrast: %i */
+"osd.video_eq.contrast" = "Kontrast: %i";
+
+/* Grama: %i */
+"osd.video_eq.gamma" = "Gamma: %i";
+
+/* Hue: %i */
+"osd.video_eq.hue" = "Farbton: %i";
+
+/* Saturation: %i */
+"osd.video_eq.saturation" = "Sättigung: %i";
+
+/* Volume: %i */
+"osd.volume" = "Lautstärke: %i";
+
+/* Add Item */
+"pl_menu.add_item" = "Element hinzufügen …";
+
+/* Clear Playlist */
+"pl_menu.clear_playlist" = "Wiedergabeliste leeren";
+
+/* Play Next */
+"pl_menu.play_next" = "Nächstes abspielen";
+
+/* Reveal in Finder */
+"pl_menu.reveal_in_finder" = "Im Finder anzeigen";
+
+/* %d Items */
+"pl_menu.title_multi" = "%d Elemente";
+
+/* CHAPTERS */
+"playlist.chapter_cap" = "KAPITEL";
+
+/* PLAYLIST */
+"playlist.playlist_cap" = "WIEDERGABELISTE";
+
+/* Advanced */
+"preference.advanced" = "Erweiterte Einstellungen";
+
+/* Codec */
 "preference.codec" = "Codec";
-"preference.subtitle" = "Untertitel";
+
+/* Control */
+"preference.control" = "Bedienung";
+
+/* General */
+"preference.general" = "Allgemein";
+
+/* Keybindings */
+"preference.keybindings" = "Tastaturkürzel";
+
+/* Logged in as */
+"preference.logged_in_as" = "Als %@ angemeldet";
+
+/* Network */
 "preference.network" = "Netzwerk";
-"preference.control" = "Steuerung";
-"preference.keybindings" = "Tastenkürzel";
-"preference.advanced" = "Erweitert";
-"preference.scripts" = "Skripte";
-"preference.not_logged_in" = "nicht eingeloggt";
-"preference.logged_in_as" = "Eingeloggt als %@";
 
-"menu.volume"= "Lautstärke: %d";
-"menu.audio_delay" = "Audio-Verzögerung: %.2fs";
-"menu.sub_delay" = "Untertitel-Verzögerung: %.2fs";
-"menu.fullscreen" = "Vollbild";
-"menu.exit_fullscreen" = "Vollbild beenden";
-"menu.pip" = "Picture-in-Picture starten";
-"menu.exit_pip" = "Picture-in-Picture beenden";
-"menu.pause" = "Pausieren";
-"menu.resume" = "Fortsetzen";
+/* Not logged in */
+"preference.not_logged_in" = "Nicht angemeldet";
 
+/* Subtitles */
+"preference.subtitle" = "Untertitel";
+
+/* Preference */
+"preference.title" = "Einstellungen";
+
+/* UI */
+"preference.ui" = "Aussehen";
+
+/* Default */
+"quicksetting.item_default" = "Standard";
+
+/* None */
+"quicksetting.item_none" = "Kein";
+
+/* <None> */
 "track.none" = "<Leer>";
 
-// Alerts
-"alert.fatal_error" = "Schwerer Fehler: %@ \nProgramm wird beendet.";
-"alert.mpv_error" = "Fehler %@ (%@) beim setzen der Benutzereinstellung %@.";
-"alert.sleep" = "Monitorruhezustand kann nicht abeschaltet werden!";
+/* Error */
+"update.check_failed" = "Konnte nicht nach Update suchen. Vermutlich benutzt du eine veraltete Version von IINA. Schau mal auf der Website des Projekts oder auf GitHub nach.";
 
-"alert.unsupported_audio" = "Externe Audio-Datei nicht unterstützt.";
-"alert.unsupported_sub" = "Externe Untertitel-Datei nicht unterstützt.";
-"alert.unsupported_url" = "URL wird nicht unterstützt.";
-"alert.wrong_url_format" = "Falsche URL-Format.";
+/* Github */
+"update.dl_from_github" = "Github aufrufen";
 
-"alert.error_open" = "Datei oder Stream kann nicht geöffnet werden!";
-"alert.error_finding_file" = "Datei %@ kann nicht gefunden werden!";
-"alert.error_loading_script" = "Das Skript %@ kann nicht geladen werden!";
-"alert.error_saving_file" = "Fehler beim Speichern von %@: %@";
-"alert.error_deleting_file" = "Datei kann nicht gelöscht werden.";
+/* Website */
+"update.dl_from_website" = "Die Webseite aufrufen";
 
-"alert.config.empty_name" = "Dateiname kann nicht leer sein.";
-"alert.config.name_existing" = "Dateiname bereits vorhanden.";
-"alert.config.cannot_create" = "Config-Datei kann nicht erzeugt werden!";
-"alert.config.cannot_write" = "Config-Datei konnte nicht geschrieben werden!";
+/* No update */
+"update.no_update" = "Du hast bereits die neueste Version.";
 
-"alert.filter.incorrect" = "Fehler bei den Filtereinstellungen. Bitte Werte überprüfen.";
+/* Title */
+"update.title_error" = "Fehler";
 
-"alert.keybinding_config.error" = "Die Konfigurationsdatei für die Tastaturkürzel \"%@\" konnnte nicht gelesen werden! Standardtastaturkürzel werden benutzt. Bitte die Konfiguration überprüfen.";
+/* Title */
+"update.title_no_update" = "Kein Update vorhanden";
 
-"alert.extra_option.cannot_read" = "Die Benutzerkonfiguration für die erweiterten mpv Optionen kann nicht gelesen werden.";
-"alert.extra_option.empty" = "Schlüsse oder Wert kann nicht leer bleiben!";
-"alert.extra_option.error" = "Fehler beim setzen der Option --%@=%@ Rückgabewert %d. Bitte die die Erweiterten Einstellungen überprüfen Einstellungen > Erweitert.";
-"alert.extra_option.config_folder" = "Konfigurationsverzeichnis konnte nicht ausgewählt werden. \"%@\".";
+/* Title */
+"update.title_update_found" = "Update der Software gefunden";
 
-"alert.playlist.error_deleting" = "Fehler beim Löschen: %@";
+/* Update found */
+"update.update_found" = "Neue Version gefunden! IINA ist noch im Alpha-Stadium. Es wird empfohlen immer die neueste Version zu benutzen. Bitte von der Website oder GitHub herunterladen:";
 
-"alert.sub.no_selected" = "Bitte zuerst eine Untertiteldatei wählen.";
-"alert.sub_lang_not_set" = "Vor der Benutzung von opensubtitles bitte zuerst in den Einstellungen die bevorzugte Sprache für Untertitel wählen. Benutze jetzt Englisch(eng).";
-"alert.sub.cannot_save_passwd" = "Passwort konnte nicht im Schlüsselbund gespeichert werden: %@";
-"alert.sub.cannot_login" = "Einloggen nicht möglich. Bitte Benutzername, Passwort und Netzwerkverbindung prüfen.\n\n%@";
-
-"pl_menu.title_multi" = "%d Einträge";
-"pl_menu.play_next" = "Nächsten Eintrag abspielen";
-"pl_menu.remove" = "Entfernen";
-"pl_menu.remove_multi" = "Ausgewählte entfernen";
-"pl_menu.delete" = "In den Papierkorb legen";
-"pl_menu.delete_multi" = "Ausgewählte Objekte in den Papierkorb legen.";
-"pl_menu.delete_after_play" = "Nach dem Abspielen in den Papierkorb legen.";
-"pl_menu.delete_after_play_multi" = "Ausgewählte Objekte nach dem Abspielen in den Papierkorb legen.";
-"pl_menu.reveal_in_finder" = "Im Finder anzeigen";
-"pl_menu.add_item" = "Hinzufügen …";
-"pl_menu.clear_playlist" = "Playlist leeren";
-
-"keymapping.title" = "Tastaturkürzel";
-"keymapping.message" = "Für Aufnahme beliebige Taste drücken.";

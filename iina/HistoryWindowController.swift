@@ -97,6 +97,22 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     historyData[key]!.append(entry)
   }
 
+  // MARK: Key event
+
+  override func keyDown(with event: NSEvent) {
+    let commandKey = NSEventModifierFlags.command.rawValue
+    if (event.modifierFlags.rawValue & NSEventModifierFlags.deviceIndependentFlagsMask.rawValue) == commandKey  {
+      switch event.charactersIgnoringModifiers! {
+      case "f":
+        window!.makeFirstResponder(historySearchField)
+      case "a":
+        outlineView.selectAll(nil)
+      default:
+        break
+      }
+    }
+  }
+
   // MARK: NSOutlineViewDelegate
 
   func doubleAction() {
@@ -191,6 +207,8 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   private var selectedEntries: [PlaybackHistory] = []
 
+
+
   func menuNeedsUpdate(_ menu: NSMenu) {
     if menu.identifier == "ContextMenu" {
       var indexSet = outlineView.selectedRowIndexes
@@ -201,10 +219,15 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     }
   }
   override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-    if menuItem.tag == 200 {
+    switch menuItem.tag {
+    case 100, 101: // reveal in finder, delete
+      return !selectedEntries.isEmpty
+    case 200: // search filename
       menuItem.state = searchOption == .filename ? NSOnState : NSOffState
-    } else if menuItem.tag == 201 {
+    case 201: // search fullpath
       menuItem.state = searchOption == .fullPath ? NSOnState : NSOffState
+    default:
+      break
     }
     return menuItem.isEnabled
   }

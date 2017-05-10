@@ -35,6 +35,7 @@ class HistoryController: NSObject {
   }
 
   func add(_ url: URL, duration: Double) {
+    guard UserDefaults.standard.bool(forKey: Preference.Key.recordPlaybackHistory) else { return }
     if let existingItem = (history.filter { $0.mpvMd5 == url.path.md5 }).first, let index = history.index(of: existingItem) {
       history.remove(at: index)
     }
@@ -44,6 +45,11 @@ class HistoryController: NSObject {
 
   func remove(_ entry: PlaybackHistory) {
     history = history.filter { $0 != entry }
+    save()
+  }
+
+  func removeAll() {
+    history.removeAll()
     save()
   }
 

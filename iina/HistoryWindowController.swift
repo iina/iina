@@ -164,7 +164,9 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
         // Filename cell
         let entry = item as! PlaybackHistory
         let filenameView = (view as! HistoryFilenameCellView)
+        let fileExists = FileManager.default.fileExists(atPath: entry.url.path)
         filenameView.textField?.stringValue = entry.name
+        filenameView.textField?.textColor = fileExists ? .controlTextColor : .disabledControlTextColor
         filenameView.docImage.image = NSWorkspace.shared().icon(forFileType: entry.url.pathExtension)
       } else if identifier == "Progress" {
         // Progress cell
@@ -207,8 +209,6 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   private var selectedEntries: [PlaybackHistory] = []
 
-
-
   func menuNeedsUpdate(_ menu: NSMenu) {
     if menu.identifier == "ContextMenu" {
       var indexSet = outlineView.selectedRowIndexes
@@ -218,9 +218,13 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
       selectedEntries = indexSet.flatMap { outlineView.item(atRow: $0) as? PlaybackHistory }
     }
   }
+
   override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     switch menuItem.tag {
-    case 100, 101: // reveal in finder, delete
+    case 100: // reveal in finder
+      if selectedEntries.isEmpty { return false }
+      return !selectedEntries.filter { FileManager.default.fileExists(atPath: $0.url.path) }.isEmpty
+    case 101: // delete
       return !selectedEntries.isEmpty
     case 200: // search filename
       menuItem.state = searchOption == .filename ? NSOnState : NSOffState
@@ -240,7 +244,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   @IBAction func revealInFinderAction(_ sender: AnyObject) {
-    let urls = selectedEntries.map { $0.url }
+    let urls = selectedEntries.flatMap { FileManager.default.fileExists(atPath: $0.url.path) ? $0.url: nil }
     NSWorkspace.shared().activateFileViewerSelecting(urls)
   }
 

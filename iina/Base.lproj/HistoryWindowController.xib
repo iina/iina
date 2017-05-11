@@ -111,7 +111,7 @@
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn identifier="Progress" width="107" minWidth="10" maxWidth="3.4028234663852886e+38" id="MJU-JY-7fx">
+                                        <tableColumn identifier="Progress" width="107" minWidth="107" maxWidth="3.4028234663852886e+38" id="MJU-JY-7fx">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Progress">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -128,13 +128,17 @@
                                                     <rect key="frame" x="371" y="1" width="107" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="1" bezeled="NO" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="MG3-Zj-U3c">
-                                                            <rect key="frame" x="3" y="2" width="46" height="12"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="1" bezeled="NO" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="MG3-Zj-U3c">
+                                                            <rect key="frame" x="3" y="2" width="51" height="12"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="f9e-xF-cPT"/>
+                                                            </constraints>
                                                         </progressIndicator>
-                                                        <textField identifier="Progress" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIs-Aj-nFe">
-                                                            <rect key="frame" x="55" y="1" width="51" height="14"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                                                        <textField identifier="Progress" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIs-Aj-nFe">
+                                                            <rect key="frame" x="60" y="1" width="46" height="14"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="NmX-g8-rAb"/>
+                                                            </constraints>
                                                             <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="0:00:00" id="cu8-Oe-yca">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -142,6 +146,13 @@
                                                             </textFieldCell>
                                                         </textField>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="UIs-Aj-nFe" secondAttribute="trailing" constant="3" id="4hJ-zz-4Ud"/>
+                                                        <constraint firstItem="UIs-Aj-nFe" firstAttribute="leading" secondItem="MG3-Zj-U3c" secondAttribute="trailing" constant="8" id="Adl-4O-Gzf"/>
+                                                        <constraint firstItem="MG3-Zj-U3c" firstAttribute="leading" secondItem="pqd-3v-fYy" secondAttribute="leading" constant="3" id="VAL-K4-ovJ"/>
+                                                        <constraint firstItem="UIs-Aj-nFe" firstAttribute="centerY" secondItem="MG3-Zj-U3c" secondAttribute="centerY" id="b4k-rE-hv3"/>
+                                                        <constraint firstItem="MG3-Zj-U3c" firstAttribute="top" secondItem="pqd-3v-fYy" secondAttribute="top" constant="3" id="vZl-MW-PU5"/>
+                                                    </constraints>
                                                     <connections>
                                                         <outlet property="indicator" destination="MG3-Zj-U3c" id="RZu-DK-R6o"/>
                                                         <outlet property="textField" destination="UIs-Aj-nFe" id="9wH-lo-boD"/>

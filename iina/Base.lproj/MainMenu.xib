@@ -102,6 +102,13 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="m38-SL-vHw"/>
+                            <menuItem title="Playback History" keyEquivalent="H" id="LND-1n-DU2">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="showHistoryWindow:" target="Voe-Tx-rLC" id="yVv-sR-1DQ"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="N0Z-h7-JSg"/>
                             <menuItem title="Delete Current File" id="npH-8B-XA4">
                                 <modifierMask key="keyEquivalentModifierMask"/>

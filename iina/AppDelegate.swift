@@ -26,6 +26,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   lazy var subSelectWindow: SubSelectWindowController = SubSelectWindowController()
 
+  lazy var historyWindow: HistoryWindowController = HistoryWindowController()
+
   lazy var vfWindow: FilterWindowController = {
     let w = FilterWindowController()
     w.filterType = MPVProperty.vf
@@ -237,6 +239,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func showAboutWindow(_ sender: AnyObject) {
     aboutWindow.showWindow(self)
+  }
+
+  @IBAction func showHistoryWindow(_ sender: AnyObject) {
+    historyWindow.showWindow(self)
   }
 
   @IBAction func helpAction(_ sender: AnyObject) {

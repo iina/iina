@@ -421,4 +421,10 @@ extension MainWindowController {
     }
   }
 
+  @IBAction func menuOpenHistory(_ sender: NSMenuItem) {
+    guard let url = sender.representedObject as? URL else { return }
+    playerCore.playFile(url.path)
+    // FIXME: this line shouldn't be here
+    playerCore.info.isNetworkResource = url.isFileURL
+  }
 }

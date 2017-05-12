@@ -41,6 +41,7 @@ struct AppData {
   static let userInputConfFolder = "input_conf"
   static let logFolder = "log"
   static let watchLaterFolder = "watch_later"
+  static let historyFile = "history.plist"
 
   static let githubLink = "https://github.com/lhc70000/iina"
   static let githubReleaseLink = "https://github.com/lhc70000/iina/releases"
@@ -90,6 +91,7 @@ struct Constants {
     static let ontopChanged = Notification.Name("IINAOnTopChanged")
     static let keyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
     static let fileLoaded = Notification.Name("IINAFileLoaded")
+    static let historyUpdated = Notification.Name("IINAHistoryUpdated")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)

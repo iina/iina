@@ -66,5 +66,4 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
     }
   }
 
-
 }

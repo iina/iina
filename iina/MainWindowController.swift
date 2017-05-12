@@ -300,6 +300,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Initialization
 
+
+  override func windowWillLoad() {
+    oscPosition = Preference.OSCPosition(rawValue: ud.integer(forKey: PK.oscPosition))
+    relativeSeekAmount = ud.integer(forKey: PK.relativeSeekAmount)
+    volumeScrollAmount = ud.integer(forKey: PK.volumeScrollAmount)
+    horizontalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.horizontalScrollAction))
+    verticalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.verticalScrollAction))
+    useExtractSeek = Preference.SeekOption(rawValue: ud.integer(forKey: PK.useExactSeek))
+    arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: PK.arrowButtonAction))
+    singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.singleClickAction))
+    doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.doubleClickAction))
+    rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.rightClickAction))
+    pinchAction = Preference.PinchAction(rawValue: ud.integer(forKey: PK.pinchAction))
+  }
+
   override func windowDidLoad() {
 
     super.windowDidLoad()
@@ -334,7 +349,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     sideBarView.isHidden = true
 
     // osc views
-    oscPosition = Preference.OSCPosition(rawValue: ud.integer(forKey: PK.oscPosition))
     fragControlView.addView(fragControlViewLeftView, in: .center)
     fragControlView.addView(fragControlViewMiddleView, in: .center)
     fragControlView.addView(fragControlViewRightView, in: .center)
@@ -379,17 +393,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
     pipOverlayView.isHidden = true
-
-    relativeSeekAmount = ud.integer(forKey: PK.relativeSeekAmount)
-    volumeScrollAmount = ud.integer(forKey: PK.volumeScrollAmount)
-    horizontalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.horizontalScrollAction))
-    verticalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.verticalScrollAction))
-    useExtractSeek = Preference.SeekOption(rawValue: ud.integer(forKey: PK.useExactSeek))
-    arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: PK.arrowButtonAction))
-    singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.singleClickAction))
-    doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.doubleClickAction))
-    rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.rightClickAction))
-    pinchAction = Preference.PinchAction(rawValue: ud.integer(forKey: PK.pinchAction))
     rightLabel.mode = ud.bool(forKey: PK.showRemainingTime) ? .remaining : .duration
 
     osdProgressBarWidthConstraint = NSLayoutConstraint(item: osdAccessoryProgress, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150)
@@ -543,6 +546,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.alwaysFloatOnTop:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+        self.isOntop = newValue
         setWindowFloatingOnTop(newValue)
       }
 
@@ -597,7 +601,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     }
 
-    // add fragment viewss
+    oscPosition = newPosition
+
+    // add fragment views
     switch oscPosition! {
     case .floating:
       currentControlBar = controlBarFloating
@@ -642,8 +648,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       fadeableViews.append(currentControlBar!)
       currentControlBar!.isHidden = isCurrentControlBarHidden
     }
-
-    oscPosition = newPosition
   }
 
   // MARK: - Mouse / Trackpad event
@@ -988,7 +992,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // videoView.stopDisplayLink()
     }
     // disable sleep preventer
-    SleepPreventer.allowSleep()
+    if !playerCore.info.isPaused {
+      SleepPreventer.allowSleep()
+    }
     // stop tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
@@ -1014,6 +1020,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       titleBarView.isHidden = true
     }
     removeStandardButtonsFromFadeableViews()
+    
+    setWindowFloatingOnTop(false)
 
     isInFullScreen = true
   }
@@ -1045,6 +1053,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if ud.bool(forKey: PK.blackOutMonitor) {
       removeBlackWindow()
     }
+    
+    setWindowFloatingOnTop(isOntop)
   }
 
   func windowDidResize(_ notification: Notification) {
@@ -1675,8 +1685,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** This method will not set `isOntop`! */
   func setWindowFloatingOnTop(_ onTop: Bool) {
     guard let window = window else { return }
+    if isInFullScreen { return }
     if onTop {
-      window.level = Int(CGWindowLevelForKey(.floatingWindow) + 1)
+      window.level = Int(CGWindowLevelForKey(.floatingWindow)) - 1
     } else {
       window.level = Int(CGWindowLevelForKey(.normalWindow))
     }
@@ -1726,7 +1737,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let speedStr = FileSize.format(playerCore.info.cacheSpeed, unit: .b)
       let bufferingState = playerCore.info.bufferingState
       bufferIndicatorView.isHidden = false
-      bufferProgressLabel.stringValue = String(format: NSLocalizedString("main.buffering_indicator", comment:"Buffering... %s%%"), bufferingState)
+      bufferProgressLabel.stringValue = String(format: NSLocalizedString("main.buffering_indicator", comment:"Buffering... %d%%"), bufferingState)
       bufferDetailLabel.stringValue = "\(usedStr)/\(sizeStr) (\(speedStr)/s)"
     } else {
       bufferIndicatorView.isHidden = true

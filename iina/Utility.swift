@@ -20,11 +20,11 @@ class Utility {
     let alert = NSAlert()
     switch alertStyle {
     case .critical:
-      alert.messageText = "Error"
+      alert.messageText = NSLocalizedString("alert.title_error", comment: "Error")
     case .informational:
-      alert.messageText = "Information"
+      alert.messageText = NSLocalizedString("alert.title_info", comment: "Information")
     case .warning:
-      alert.messageText = "Warning"
+      alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
     }
     alert.informativeText = message
     alert.alertStyle = alertStyle
@@ -35,11 +35,11 @@ class Utility {
     let alert = NSAlert()
     switch style {
     case .critical:
-      alert.messageText = "Error"
+      alert.messageText = NSLocalizedString("alert.title_error", comment: "Error")
     case .informational:
-      alert.messageText = "Information"
+      alert.messageText = NSLocalizedString("alert.title_info", comment: "Information")
     case .warning:
-      alert.messageText = "Warning"
+      alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
     }
     
     var format: String
@@ -73,7 +73,7 @@ class Utility {
   }
 
   static func fatal(_ message: String, _ block: () -> Void = {}) -> Never {
-    NSLog("%@", message)
+    NSLog("%@\n", message)
     NSLog(Thread.callStackSymbols.joined(separator: "\n"))
     showAlert("fatal_error", arguments: [message])
     block()
@@ -83,15 +83,29 @@ class Utility {
 
   // MARK: - Panels, Alerts
 
-  static func quickAskPanel(title: String, infoText: String) -> Bool {
+  /** 
+   Pop up an ask panel.
+   - parameters:
+     - key: A localization key. "alert.`key`.title" will be used as alert title, and "alert.`key`.message" will be the informative text.
+     - titleComment: (Optional) Comment for title key.
+     - messageComment: (Optional) Comment for message key.
+   - Returns: Whether user dismissed the panel by clicking OK.
+   */
+  static func quickAskPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil) -> Bool {
     let panel = NSAlert()
-    panel.messageText = title
-    panel.informativeText = infoText
-    panel.addButton(withTitle: "OK")
-    panel.addButton(withTitle: "Cancel")
+    let titleKey = "alert." + key + ".title"
+    let messageKey = "alert." + key + ".message"
+    panel.messageText = NSLocalizedString(titleKey, comment: titleComment ?? titleKey)
+    panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
+    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     return panel.runModal() == NSAlertFirstButtonReturn
   }
 
+  /**
+   Pop up an open panel.
+   - Returns: Whether user dismissed the panel by clicking OK.
+   */
   static func quickOpenPanel(title: String, isDir: Bool, ok: (URL) -> Void) -> Bool {
     let panel = NSOpenPanel()
     panel.title = title
@@ -109,7 +123,11 @@ class Utility {
       return false
     }
   }
-  
+
+  /**
+   Pop up a save panel.
+   - Returns: Whether user dismissed the panel by clicking OK.
+   */
   static func quickSavePanel(title: String, types: [String], ok: (URL) -> Void) -> Bool {
     let panel = NSSavePanel()
     panel.title = title
@@ -125,17 +143,27 @@ class Utility {
     }
   }
 
-  static func quickPromptPanel(messageText: String, informativeText: String, ok: (String) -> Void) -> Bool {
+  /**
+   Pop up a prompt panel.
+   - parameters:
+     - key: A localization key. "alert.`key`.title" will be used as alert title, and "alert.`key`.message" will be the informative text.
+     - titleComment: (Optional) Comment for title key.
+     - messageComment: (Optional) Comment for message key.
+   - Returns: Whether user dismissed the panel by clicking OK.
+   */
+  static func quickPromptPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, ok: (String) -> Void) -> Bool {
     let panel = NSAlert()
-    panel.messageText = messageText
-    panel.informativeText = informativeText
+    let titleKey = "alert." + key + ".title"
+    let messageKey = "alert." + key + ".message"
+    panel.messageText = NSLocalizedString(titleKey, comment: titleComment ?? titleKey)
+    panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
     let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
     input.lineBreakMode = .byClipping
     input.usesSingleLineMode = true
     input.cell?.isScrollable = true
     panel.accessoryView = input
-    panel.addButton(withTitle: "OK")
-    panel.addButton(withTitle: "Cancel")
+    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
@@ -146,7 +174,15 @@ class Utility {
     }
   }
 
-  static func quickUsernamePasswordPanel(messageText: String, informativeText: String, ok: (String, String) -> Void) -> Bool {
+  /**
+   Pop up a username and password panel.
+   - parameters:
+     - key: A localization key. "alert.`key`.title" will be used as alert title, and "alert.`key`.message" will be the informative text.
+     - titleComment: (Optional) Comment for title key.
+     - messageComment: (Optional) Comment for message key.
+   - Returns: Whether user dismissed the panel by clicking OK.
+   */
+  static func quickUsernamePasswordPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, ok: (String, String) -> Void) -> Bool {
     let quickLabel: (String, Int) -> NSTextField = { title, yPos in
       let label = NSTextField(frame: NSRect(x: 0, y: yPos, width: 240, height: 14))
       label.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize())
@@ -158,21 +194,23 @@ class Utility {
       return label
     }
     let panel = NSAlert()
-    panel.messageText = messageText
-    panel.informativeText = informativeText
+    let titleKey = "alert." + key + ".title"
+    let messageKey = "alert." + key + ".message"
+    panel.messageText = NSLocalizedString(titleKey, comment: titleComment ?? titleKey)
+    panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
     let view = NSView(frame: NSRect(x: 0, y: 0, width: 240, height: 82))
-    view.addSubview(quickLabel("Username:", 68))
+    view.addSubview(quickLabel(NSLocalizedString("general.username", comment: "Username") + ":", 68))
     let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 42, width: 240, height: 24))
     input.lineBreakMode = .byClipping
     input.usesSingleLineMode = true
     input.cell?.isScrollable = true
     view.addSubview(input)
-    view.addSubview(quickLabel("Password:", 26))
+    view.addSubview(quickLabel(NSLocalizedString("general.password", comment: "Password") + ":", 26))
     let pwField = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
     view.addSubview(pwField)
     panel.accessoryView = view
-    panel.addButton(withTitle: "OK")
-    panel.addButton(withTitle: "Cancel")
+    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
@@ -183,6 +221,11 @@ class Utility {
     }
   }
 
+  /**
+   Pop up a font picker panel.
+   - parameters:
+     - ok: A closure accepting the font name.
+   */
   static func quickFontPickerWindow(ok: @escaping (String?) -> Void) {
     guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
     appDelegate.fontPicker.finishedPicking = ok
@@ -190,6 +233,35 @@ class Utility {
   }
 
   // MARK: - App functions
+
+  static func setSelfAsDefaultForAllFileTypes() {
+    guard
+    let docTypes = Bundle.main.infoDictionary?["CFBundleDocumentTypes"] as? [[String: Any]],
+    let cfBundleID = Bundle.main.bundleIdentifier as CFString?
+    else { return }
+
+    guard quickAskPanel("set_default") else { return }
+
+    var successCount = 0
+    var failedCount = 0
+    Utility.log("Set self as default...")
+    for docType in docTypes {
+      if let exts = docType["CFBundleTypeExtensions"] as? [String] {
+        for ext in exts {
+          let utiString = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, ext as CFString, nil)!.takeUnretainedValue()
+          let status = LSSetDefaultRoleHandlerForContentType(utiString, .all, cfBundleID)
+          if status == kOSReturnSuccess {
+            successCount += 1
+          } else {
+            Utility.log("failed for \(ext): return value \(status)")
+            failedCount += 1
+          }
+        }
+      }
+    }
+
+    showAlert("set_default.success", arguments: [successCount, failedCount], style: .informational)
+  }
 
   private static func createDirIfNotExist(url: URL) {
   let path = url.path
@@ -244,6 +316,10 @@ class Utility {
     let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.watchLaterFolder, isDirectory: true)
     createDirIfNotExist(url: url)
     return url
+  }()
+
+  static let playbackHistoryURL: URL = {
+    return Utility.appSupportDirUrl.appendingPathComponent(AppData.historyFile, isDirectory: false)
   }()
 
   static let tempDirURL: URL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)

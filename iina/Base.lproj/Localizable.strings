@@ -7,10 +7,14 @@
 */
 
 // Common
-"on" = "On";
-"off" = "Off";
-"login" = "Login";
-"logout" = "Logout";
+"general.on" = "On";
+"general.off" = "Off";
+"general.login" = "Login";
+"general.logout" = "Logout";
+"general.ok" = "OK";
+"general.cancel" = "Cancel";
+"general.username" = "Username";
+"general.password" = "Password";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "PLAYLIST";
@@ -20,8 +24,8 @@
 "main.buffering_indicator" = "Buffering... %d%%";
 
 // QuickSettingViewController.swift
-"quicksetting.aspect_item.Default" = "Default";
-"quicksetting.crop_item.None" = "None";
+"quicksetting.item_default" = "Default";
+"quicksetting.item_none" = "None";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
@@ -101,8 +105,12 @@
 "track.none" = "<None>";
 
 // Alerts
+"alert.title_error" = "Error";
+"alert.title_warning" = "Warning";
+"alert.title_info" = "Information";
+
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
-"alert.mpv_error" = "Error %@ (%@) when setting user option %@.";
+"alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
 "alert.sleep" = "Cannot prevent display sleep!";
 
 "alert.unsupported_audio" = "Unsupported external audio file.";
@@ -116,12 +124,20 @@
 "alert.error_saving_file" = "Error occured when saving %@: %@";
 "alert.error_deleting_file" = "Cannot delete the file.";
 
+"alert.config.new.title" = "New Input Configuration";
+"alert.config.new.message" = "Please enter a name for the new configuration.";
+"alert.config.duplicate.title" = "Duplicate Configuration";
+"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
 "alert.config.empty_name" = "The name cannot be empty.";
 "alert.config.name_existing" = "The name already exists.";
+"alert.config.file_existing.title" = "File Already Exists";
+"alert.config.file_existing.message" = "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.";
 "alert.config.cannot_create" = "Cannot create config file!";
 "alert.config.cannot_write" = "Cannot write to config file!";
 
 "alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+"alert.add_filter.title" = "New Filter";
+"alert.add_filter.message" = "Please enter a filter string in format of MPV's vf or af command.";
 
 "alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
 
@@ -137,6 +153,25 @@
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 
+"alert.set_default.title" = "Setting IINA as Default App";
+"alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
+"alert.set_default.success" = "Finished with %d success and %d failed.";
+
+"alert.add_watch.title" = "Add Watch Property";
+"alert.add_watch.message" = "Please enter a valid MPV property name.";
+
+"alert.jump_to.title" = "Jump to";
+"alert.jump_to.message" = "Please enter the time you want to jumo to. Example: 20:35";
+
+"alert.opensub.login.title" = "Opensubtitles Login";
+"alert.opensub.login.message" = "Please enter your username and password";
+
+"alert.open_url.title" = "Open URL";
+"alert.open_url.message" = "Please enter the URL:";
+"alert.choose_media_file.title" = "Choose Media File";
+
+"alert.delete_history.title" = "Delete Playback History";
+"alert.delete_history.message" = "Are you sure to delete select entries?";
 
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
@@ -152,3 +187,6 @@
 
 "keymapping.title" = "Key Mapping";
 "keymapping.message" = "Press any key to record.";
+
+"filter.video_filters" = "Video Filters";
+"filter.audio_filters" = "Audio Filters";

@@ -162,7 +162,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   @IBAction func newConfFileAction(_ sender: AnyObject) {
     // prompt
     var newName = ""
-    let result = Utility.quickPromptPanel(messageText: "New Input Configuration", informativeText: "Please enter a name for the new configuration.") { newName = $0 }
+    let result = Utility.quickPromptPanel("config.new") { newName = $0 }
     if !result { return }
     guard !newName.isEmpty else {
       Utility.showAlert("config.empty_name")
@@ -178,7 +178,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     let fm = FileManager.default
     // - if exists
     if fm.fileExists(atPath: newFilePath) {
-      if Utility.quickAskPanel(title: "Config file already exists", infoText: "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.") {
+      if Utility.quickAskPanel("config.file_existing") {
         // - delete file
         do {
           try fm.removeItem(atPath: newFilePath)
@@ -193,7 +193,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     }
     // - new file
     if !fm.createFile(atPath: newFilePath, contents: nil, attributes: nil) {
-      Utility.showAlert("config.cannot_crete")
+      Utility.showAlert("config.cannot_create")
       return
     }
     // save
@@ -212,7 +212,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   @IBAction func duplicateConfFileAction(_ sender: AnyObject) {
     // prompt
     var newName = ""
-    let result = Utility.quickPromptPanel(messageText: "New Input Configuration", informativeText: "Please enter a name for the duplicated configuration.") { newName = $0 }
+    let result = Utility.quickPromptPanel("config.duplicate") { newName = $0 }
     if !result { return }
     if userConfigs[newName] != nil || PrefKeyBindingViewController.defaultConfigs[newName] != nil {
       Utility.showAlert("config.name_existing")
@@ -225,7 +225,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     let fm = FileManager.default
     // - if exists
     if fm.fileExists(atPath: newFilePath) {
-      if Utility.quickAskPanel(title: "Config file already exists", infoText: "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.") {
+      if Utility.quickAskPanel("config.file_existing") {
         // - delete file
         do {
           try fm.removeItem(atPath: newFilePath)
@@ -351,6 +351,8 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   }
 
 }
+
+// MARK: -
 
 extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSource {
 

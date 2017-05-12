@@ -26,6 +26,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   lazy var subSelectWindow: SubSelectWindowController = SubSelectWindowController()
 
+  lazy var historyWindow: HistoryWindowController = HistoryWindowController()
+
   lazy var vfWindow: FilterWindowController = {
     let w = FilterWindowController()
     w.filterType = MPVProperty.vf
@@ -83,7 +85,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     // check update
-    UpdateChecker.checkUpdate(alertIfOfflineOrNoUpdate: false)
+    let now = Date()
+    let checkUpdate = {
+      UpdateChecker.checkUpdate(alertIfOfflineOrNoUpdate: false)
+      UserDefaults.standard.set(now, forKey: Preference.Key.lastCheckUpdateTime)
+    }
+    if let lastCheckUpdateTime = UserDefaults.standard.object(forKey: Preference.Key.lastCheckUpdateTime) as? Date {
+      if lastCheckUpdateTime < now - TimeInterval(12*3600) {
+        checkUpdate()
+      }
+    } else {
+      checkUpdate()
+    }
 
     // pending open request
     if let url = pendingURL {
@@ -164,7 +177,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func openFile(_ sender: AnyObject) {
     let panel = NSOpenPanel()
-    panel.title = "Choose media file"
+    panel.title = NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File")
     panel.canCreateDirectories = false
     panel.canChooseFiles = true
     panel.canChooseDirectories = false
@@ -182,12 +195,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func openURL(_ sender: AnyObject) {
     let panel = NSAlert()
-    panel.messageText = "Open URL"
-    panel.informativeText = "Please enter the URL:"
+    panel.messageText = NSLocalizedString("alert.open_url.title", comment: "Open URL")
+    panel.informativeText = NSLocalizedString("alert.open_url.message", comment: "Please enter the URL:")
     let inputViewController = OpenURLAccessoryViewController()
     panel.accessoryView = inputViewController.view
-    panel.addButton(withTitle: "OK")
-    panel.addButton(withTitle: "Cancel")
+    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = inputViewController.urlField
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
@@ -228,6 +241,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     aboutWindow.showWindow(self)
   }
 
+  @IBAction func showHistoryWindow(_ sender: AnyObject) {
+    historyWindow.showWindow(self)
+  }
+
   @IBAction func helpAction(_ sender: AnyObject) {
     NSWorkspace.shared().open(URL(string: AppData.wikiLink)!)
   }
@@ -244,5 +261,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     UpdateChecker.checkUpdate()
   }
 
+  @IBAction func setSelfAsDefaultAction(_ sender: AnyObject) {
+    Utility.setSelfAsDefaultForAllFileTypes()
+  }
 
 }

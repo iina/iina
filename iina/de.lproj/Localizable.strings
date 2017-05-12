@@ -7,10 +7,10 @@
 */
 
 // Common
-"on" = "An";
-"off" = "Aus";
-"login" = "Einloggen";
-"logout" = "Ausloggen";
+"general.on" = "An";
+"general.off" = "Aus";
+"general.login" = "Einloggen";
+"general.logout" = "Ausloggen";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "PLAYLIST";
@@ -20,8 +20,8 @@
 "main.buffering_indicator" = "Puffern... %d%%";
 
 // QuickSettingViewController.swift
-"quicksetting.aspect_item.Default" = "Standard";
-"quicksetting.crop_item.None" = "Kein";
+"quicksetting.item_default" = "Standard";
+"quicksetting.item_none" = "Kein";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
@@ -100,7 +100,7 @@
 
 "track.none" = "<Leer>";
 
-//Alerts
+// Alerts
 "alert.fatal_error" = "Schwerer Fehler: %@ \nProgramm wird beendet.";
 "alert.mpv_error" = "Fehler %@ (%@) beim setzen der Benutzereinstellung %@.";
 "alert.sleep" = "Monitorruhezustand kann nicht abeschaltet werden!";
@@ -141,7 +141,7 @@
 "pl_menu.play_next" = "Nächsten Eintrag abspielen";
 "pl_menu.remove" = "Entfernen";
 "pl_menu.remove_multi" = "Ausgewählte entfernen";
-"pl_menu.delete" = "In den Papierkorb legen;
+"pl_menu.delete" = "In den Papierkorb legen";
 "pl_menu.delete_multi" = "Ausgewählte Objekte in den Papierkorb legen.";
 "pl_menu.delete_after_play" = "Nach dem Abspielen in den Papierkorb legen.";
 "pl_menu.delete_after_play_multi" = "Ausgewählte Objekte nach dem Abspielen in den Papierkorb legen.";

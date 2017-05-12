@@ -321,6 +321,14 @@ extension Data {
   }
 }
 
+extension String {
+  var md5: String {
+    get {
+      return self.data(using: .utf8)!.md5
+    }
+  }
+}
+
 
 extension CharacterSet {
   static let urlAllowed: CharacterSet = {

@@ -1,0 +1,246 @@
+/* No comment provided by engineer. */
+"alert." = "";
+
+/* Press any key to record. */
+"keymapping.message" = "Press any key to record.";
+
+/* Key Mapping */
+"keymapping.title" = "Key Mapping";
+
+/* Buffering... %s%% */
+"main.buffering_indicator" = "Буферизация... %d%%";
+
+/* Audio Delay: */
+"menu.audio_delay" = "Audio Delay: %.2fs";
+
+/* Exit Fullscreen */
+"menu.exit_fullscreen" = "Exit Full Screen";
+
+/* Exit Picture-in-Picture */
+"menu.exit_pip" = "Exit Picture-in-Picture";
+
+/* Fullscreen */
+"menu.fullscreen" = "Enter Full Screen";
+
+/* Pause */
+"menu.pause" = "Pause";
+
+/* Enter Picture-in-Picture */
+"menu.pip" = "Enter Picture-in-Picture";
+
+/* Resume */
+"menu.resume" = "Resume";
+
+/* Subtitle Delay: */
+"menu.sub_delay" = "Subtitie Delay: %.2fs";
+
+/* Volume: */
+"menu.volume" = "Volume: %d";
+
+/* Off */
+"off" = "Off";
+
+/* On */
+"on" = "On";
+
+/* AB-Loop: A */
+"osd.abloop.a" = "Цикл: точка А";
+
+/* AB-Loop: B */
+"osd.abloop.b" = "Цикл: точка Б";
+
+/* AB-Loop: Cleared */
+"osd.abloop.clear" = "Цикл: сброшен";
+
+/* Added %i Files to Playlist */
+"osd.add_to_playlist" = "Added %i Files to Playlist";
+
+/* Aspect Ratio: %@ */
+"osd.aspect" = "Aspect Ratio: %@";
+
+/* Audio Delay: %fs Earlier */
+"osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
+
+/* Audio Delay: %fs Later */
+"osd.audio_delay.later" = "Audio Delay: %.2fs Later";
+
+/* Audio Delay: No Delay */
+"osd.audio_delay.nodelay" = "Audio Delay: No Delay";
+
+/* Canceled */
+"osd.canceled" = "Canceled";
+
+/* Cannot login */
+"osd.cannot_login" = "Cannot login";
+
+/* Chapter: %@ */
+"osd.chapter" = "Chapter: %@";
+
+/* Cleared Playlist */
+"osd.clear_playlist" = "Cleared Playlist";
+
+/* Crop: %@ */
+"osd.crop" = "Crop: %@";
+
+/* Deinterlace: %@ */
+"osd.deinterlace" = "Deinterlace: %@";
+
+/* Error reading file */
+"osd.file_error" = "Error reading file";
+
+/* Finding online subtitles... */
+"osd.find_online_sub" = "Finding online subtitles...";
+
+/* Mute */
+"osd.mute" = "Mute";
+
+/* Network error */
+"osd.network_error" = "Network error";
+
+/* Pause */
+"osd.pause" = "Pause";
+
+/* Resume */
+"osd.resume" = "Resume";
+
+/* Rotate: %i° */
+"osd.rotate" = "Rotate: %i°";
+
+/* Screenshot Captured */
+"osd.screenshot" = "Screenshot Captured";
+
+/* Speed: %.2fx */
+"osd.speed" = "Speed: %.2fx";
+
+/* Stop */
+"osd.stop" = "Stop";
+
+/* Subtitle Delay: %fs Earlier */
+"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
+
+/* Subtitle Delay: %fs Later */
+"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
+
+/* Subtitle Delay: No Delay */
+"osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
+
+/* Subtitle downloaded */
+"osd.sub_downloaded" = "Subtitle downloaded";
+
+/* %d subtitle(s) found. Downloading... */
+"osd.sub_found" = "%d subtitle(s) found. Downloading...";
+
+/* No subtitle found. */
+"osd.sub_not_found" = "No subtitle found";
+
+/* Subtitle saved */
+"osd.sub_saved" = "Subtitle saved";
+
+/* Subtitle Position: %f */
+"osd.subtitle_pos" = "Subtitle Position: %.1f";
+
+/* Subtitle Scale: %.2fx */
+"osd.subtitle_scale" = "Subtitle Scale: %.2fx";
+
+/* Unmute */
+"osd.unmute" = "Unmute";
+
+/* Brightness: %i */
+"osd.video_eq.brightness" = "Brightness: %i";
+
+/* Contrast: %i */
+"osd.video_eq.contrast" = "Contrast: %i";
+
+/* Grama: %i */
+"osd.video_eq.gamma" = "Gamma: %i";
+
+/* Hue: %i */
+"osd.video_eq.hue" = "Hue: %i";
+
+/* Saturation: %i */
+"osd.video_eq.saturation" = "Saturation: %i";
+
+/* Volume: %i */
+"osd.volume" = "Volume: %i";
+
+/* Add Item */
+"pl_menu.add_item" = "Add Item…";
+
+/* Clear Playlist */
+"pl_menu.clear_playlist" = "Clear Playlist";
+
+/* Play Next */
+"pl_menu.play_next" = "Play Next";
+
+/* Reveal in Finder */
+"pl_menu.reveal_in_finder" = "Reveal in Finder";
+
+/* %d Items */
+"pl_menu.title_multi" = "%d Items";
+
+/* CHAPTERS */
+"playlist.chapter_cap" = "CHAPTERS";
+
+/* PLAYLIST */
+"playlist.playlist_cap" = "PLAYLIST";
+
+/* Advanced */
+"preference.advanced" = "Advanced";
+
+/* Codec */
+"preference.codec" = "Codec";
+
+/* Control */
+"preference.control" = "Control";
+
+/* General */
+"preference.general" = "General";
+
+/* Keybindings */
+"preference.keybindings" = "Keybindings";
+
+/* Logged in as */
+"preference.logged_in_as" = "Logged in as %@";
+
+/* Network */
+"preference.network" = "Network";
+
+/* Not logged in */
+"preference.not_logged_in" = "Not logged in";
+
+/* Subtitles */
+"preference.subtitle" = "Subtitle";
+
+/* Preference */
+"preference.title" = "Preference";
+
+/* UI */
+"preference.ui" = "UI";
+
+/* <None> */
+"track.none" = "<Нет>";
+
+/* Error */
+"update.check_failed" = "Failed to check updates. You are probably running a too old version. Please check the website or github.";
+
+/* Github */
+"update.dl_from_github" = "Go to Github";
+
+/* Website */
+"update.dl_from_website" = "Go to Website";
+
+/* No update */
+"update.no_update" = "You are running the latest version.";
+
+/* Title */
+"update.title_error" = "Error";
+
+/* Title */
+"update.title_no_update" = "No Update";
+
+/* Title */
+"update.title_update_found" = "Update Found";
+
+/* Update found */
+"update.update_found" = "New version detected! IINA is still in alpha, so you are recommended to stay with the latest version. Please download from website or github:";
+

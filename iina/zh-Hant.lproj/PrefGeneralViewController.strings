@@ -19,8 +19,11 @@
 /* Class = "NSMenuItem"; title = "Light"; ObjectID = "49l-le-9k6"; */
 "49l-le-9k6.title" = "淺色";
 
-/* Class = "NSButtonCell"; title = "Remember recently opened files"; ObjectID = "55O-ik-ql6"; */
+/* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "記錄最近打開的檔案";
+
+/* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
+"Ci8-j2-QS3.title" = "在「最近打開」菜單中查看所有播放過的檔案";
 
 /* Class = "NSButtonCell"; title = "Pause when media is opened"; ObjectID = "FbF-jJ-W5a"; */
 "FbF-jJ-W5a.title" = "打開媒體後暫停";
@@ -40,6 +43,9 @@
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
 "QJq-fO-hhK.title" = "自動添加檔案至當前檔案夾";
 
+/* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu"; ObjectID = "XFC-Lr-LmP"; */
+"XFC-Lr-LmP.title" = "若否，則僅手動打開的檔案會顯示於此菜單中";
+
 /* Class = "NSButtonCell"; title = "Quit when no window is opened"; ObjectID = "YLo-6E-tT7"; */
 "YLo-6E-tT7.title" = "沒有打開的視窗時退出";
 
@@ -49,8 +55,14 @@
 /* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "bPK-Wy-OMI"; */
 "bPK-Wy-OMI.title" = "半淺色";
 
+/* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
+"iGS-qN-f5q.title" = "啟用播放記錄";
+
 /* Class = "NSButtonCell"; title = "Resume last playback position"; ObjectID = "jOB-D3-WT3"; */
 "jOB-D3-WT3.title" = "自動恢復上次播放位置";
+
+/* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
+"jeK-46-2BG.title" = "記錄:";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
 "lvA-Rc-Sh6.title" = "包括字幕";

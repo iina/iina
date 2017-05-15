@@ -2,46 +2,46 @@
 "alert." = "";
 
 /* Press any key to record. */
-"keymapping.message" = "Press any key to record.";
+"keymapping.message" = "Нажмите любую клавишу для записи.";
 
 /* Key Mapping */
-"keymapping.title" = "Key Mapping";
+"keymapping.title" = "Сопоставление клавиш";
 
 /* Buffering... %s%% */
 "main.buffering_indicator" = "Буферизация... %d%%";
 
 /* Audio Delay: */
-"menu.audio_delay" = "Audio Delay: %.2fs";
+"menu.audio_delay" = "Задержка аудио: %.2fс";
 
 /* Exit Fullscreen */
-"menu.exit_fullscreen" = "Exit Full Screen";
+"menu.exit_fullscreen" = "Выйти из полноэкранного режима";
 
 /* Exit Picture-in-Picture */
-"menu.exit_pip" = "Exit Picture-in-Picture";
+"menu.exit_pip" = "Выйти из режима «Картинка-в-картинке»";
 
 /* Fullscreen */
-"menu.fullscreen" = "Enter Full Screen";
+"menu.fullscreen" = "Войти в полноэкранный режим";
 
 /* Pause */
-"menu.pause" = "Pause";
+"menu.pause" = "Пауза";
 
 /* Enter Picture-in-Picture */
-"menu.pip" = "Enter Picture-in-Picture";
+"menu.pip" = "Войти в режим «Картинка-в-картинке»";
 
 /* Resume */
-"menu.resume" = "Resume";
+"menu.resume" = "Продолжить";
 
 /* Subtitle Delay: */
-"menu.sub_delay" = "Subtitie Delay: %.2fs";
+"menu.sub_delay" = "Задержка субтитров: %.2fс";
 
 /* Volume: */
-"menu.volume" = "Volume: %d";
+"menu.volume" = "Громкость: %d";
 
 /* Off */
-"off" = "Off";
+"off" = "Выкл.";
 
 /* On */
-"on" = "On";
+"on" = "Вкл.";
 
 /* AB-Loop: A */
 "osd.abloop.a" = "Цикл: точка А";
@@ -53,194 +53,194 @@
 "osd.abloop.clear" = "Цикл: сброшен";
 
 /* Added %i Files to Playlist */
-"osd.add_to_playlist" = "Added %i Files to Playlist";
+"osd.add_to_playlist" = "Добавлено %i файлов в плейлист";
 
 /* Aspect Ratio: %@ */
-"osd.aspect" = "Aspect Ratio: %@";
+"osd.aspect" = "Соотношение сторон: %@";
 
 /* Audio Delay: %fs Earlier */
-"osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
+"osd.audio_delay.earlier" = "Задержка аудио: на %.2fс раньше";
 
 /* Audio Delay: %fs Later */
-"osd.audio_delay.later" = "Audio Delay: %.2fs Later";
+"osd.audio_delay.later" = "Задержка аудио: на %.2fс позже";
 
 /* Audio Delay: No Delay */
-"osd.audio_delay.nodelay" = "Audio Delay: No Delay";
+"osd.audio_delay.nodelay" = "Задержка аудио: нет задержки";
 
 /* Canceled */
-"osd.canceled" = "Canceled";
+"osd.canceled" = "Отменено";
 
 /* Cannot login */
-"osd.cannot_login" = "Cannot login";
+"osd.cannot_login" = "Не удалось выполнить вход";
 
 /* Chapter: %@ */
-"osd.chapter" = "Chapter: %@";
+"osd.chapter" = "Глава: %@";
 
 /* Cleared Playlist */
-"osd.clear_playlist" = "Cleared Playlist";
+"osd.clear_playlist" = "Плейлист очищен";
 
 /* Crop: %@ */
-"osd.crop" = "Crop: %@";
+"osd.crop" = "Кадрирование: %@";
 
 /* Deinterlace: %@ */
-"osd.deinterlace" = "Deinterlace: %@";
+"osd.deinterlace" = "Деинтерлейсинг: %@";
 
 /* Error reading file */
-"osd.file_error" = "Error reading file";
+"osd.file_error" = "Ошибка чтения файла";
 
 /* Finding online subtitles... */
-"osd.find_online_sub" = "Finding online subtitles...";
+"osd.find_online_sub" = "Поиск субтитров онлайн…";
 
 /* Mute */
-"osd.mute" = "Mute";
+"osd.mute" = "Звук выкл.";
 
 /* Network error */
-"osd.network_error" = "Network error";
+"osd.network_error" = "Ошибка сети";
 
 /* Pause */
-"osd.pause" = "Pause";
+"osd.pause" = "Пауза";
 
 /* Resume */
-"osd.resume" = "Resume";
+"osd.resume" = "Продолжить";
 
 /* Rotate: %i° */
-"osd.rotate" = "Rotate: %i°";
+"osd.rotate" = "Поворот: %i°";
 
 /* Screenshot Captured */
-"osd.screenshot" = "Screenshot Captured";
+"osd.screenshot" = "Снимок экрана сохранён";
 
 /* Speed: %.2fx */
-"osd.speed" = "Speed: %.2fx";
+"osd.speed" = "Скорость: %.2fx";
 
 /* Stop */
-"osd.stop" = "Stop";
+"osd.stop" = "Стоп";
 
 /* Subtitle Delay: %fs Earlier */
-"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
+"osd.sub_delay.earlier" = "Задержка субтитров: на %.2fс раньше";
 
 /* Subtitle Delay: %fs Later */
-"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
+"osd.sub_delay.later" = "Задержка субтитров: на %.2fс позже";
 
 /* Subtitle Delay: No Delay */
-"osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
+"osd.sub_delay.nodelay" = "Задержка субтитров: нет задержки";
 
 /* Subtitle downloaded */
-"osd.sub_downloaded" = "Subtitle downloaded";
+"osd.sub_downloaded" = "Субтитры скачаны";
 
 /* %d subtitle(s) found. Downloading... */
-"osd.sub_found" = "%d subtitle(s) found. Downloading...";
+"osd.sub_found" = "Найдено %d субтитров. Скачивание…";
 
 /* No subtitle found. */
-"osd.sub_not_found" = "No subtitle found";
+"osd.sub_not_found" = "Субтитры не найдены";
 
 /* Subtitle saved */
-"osd.sub_saved" = "Subtitle saved";
+"osd.sub_saved" = "Субтитры сохранены";
 
 /* Subtitle Position: %f */
-"osd.subtitle_pos" = "Subtitle Position: %.1f";
+"osd.subtitle_pos" = "Позиция субтитров: %.1f";
 
 /* Subtitle Scale: %.2fx */
-"osd.subtitle_scale" = "Subtitle Scale: %.2fx";
+"osd.subtitle_scale" = "Масштаб субтитров: %.2fx";
 
 /* Unmute */
-"osd.unmute" = "Unmute";
+"osd.unmute" = "Звук вкл.";
 
 /* Brightness: %i */
-"osd.video_eq.brightness" = "Brightness: %i";
+"osd.video_eq.brightness" = "Яркость: %i";
 
 /* Contrast: %i */
-"osd.video_eq.contrast" = "Contrast: %i";
+"osd.video_eq.contrast" = "Контраст: %i";
 
 /* Grama: %i */
-"osd.video_eq.gamma" = "Gamma: %i";
+"osd.video_eq.gamma" = "Гамма: %i";
 
 /* Hue: %i */
-"osd.video_eq.hue" = "Hue: %i";
+"osd.video_eq.hue" = "Оттенок: %i";
 
 /* Saturation: %i */
-"osd.video_eq.saturation" = "Saturation: %i";
+"osd.video_eq.saturation" = "Насыщенность: %i";
 
 /* Volume: %i */
-"osd.volume" = "Volume: %i";
+"osd.volume" = "Громкость: %i";
 
 /* Add Item */
-"pl_menu.add_item" = "Add Item…";
+"pl_menu.add_item" = "Добавить элемент…";
 
 /* Clear Playlist */
-"pl_menu.clear_playlist" = "Clear Playlist";
+"pl_menu.clear_playlist" = "Очистить плейлист";
 
 /* Play Next */
-"pl_menu.play_next" = "Play Next";
+"pl_menu.play_next" = "Воспроизвести следующим";
 
 /* Reveal in Finder */
-"pl_menu.reveal_in_finder" = "Reveal in Finder";
+"pl_menu.reveal_in_finder" = "Показать в Finder";
 
 /* %d Items */
-"pl_menu.title_multi" = "%d Items";
+"pl_menu.title_multi" = "%d элементов";
 
 /* CHAPTERS */
-"playlist.chapter_cap" = "CHAPTERS";
+"playlist.chapter_cap" = "ГЛАВЫ";
 
 /* PLAYLIST */
-"playlist.playlist_cap" = "PLAYLIST";
+"playlist.playlist_cap" = "ПЛЕЙЛИСТ";
 
 /* Advanced */
-"preference.advanced" = "Advanced";
+"preference.advanced" = "Дополнительно";
 
 /* Codec */
-"preference.codec" = "Codec";
+"preference.codec" = "Кодек";
 
 /* Control */
-"preference.control" = "Control";
+"preference.control" = "Управление";
 
 /* General */
-"preference.general" = "General";
+"preference.general" = "Общие";
 
 /* Keybindings */
-"preference.keybindings" = "Keybindings";
+"preference.keybindings" = "Сочетания клавиш";
 
 /* Logged in as */
-"preference.logged_in_as" = "Logged in as %@";
+"preference.logged_in_as" = "Выполнен вход как %@";
 
 /* Network */
-"preference.network" = "Network";
+"preference.network" = "Сеть";
 
 /* Not logged in */
-"preference.not_logged_in" = "Not logged in";
+"preference.not_logged_in" = "Вход не выполнен";
 
 /* Subtitles */
-"preference.subtitle" = "Subtitle";
+"preference.subtitle" = "Субтитры";
 
 /* Preference */
-"preference.title" = "Preference";
+"preference.title" = "Настройки";
 
 /* UI */
-"preference.ui" = "UI";
+"preference.ui" = "Интерфейс";
 
 /* <None> */
 "track.none" = "<Нет>";
 
 /* Error */
-"update.check_failed" = "Failed to check updates. You are probably running a too old version. Please check the website or github.";
+"update.check_failed" = "Не удалось проверить обновления. Возможно, вы используете слишком старую версию. Посетите веб-сайт или Github.";
 
 /* Github */
-"update.dl_from_github" = "Go to Github";
+"update.dl_from_github" = "Перейти на Github";
 
 /* Website */
-"update.dl_from_website" = "Go to Website";
+"update.dl_from_website" = "Перейти на веб-сайт";
 
 /* No update */
-"update.no_update" = "You are running the latest version.";
+"update.no_update" = "Вы используете последнюю версию.";
 
 /* Title */
-"update.title_error" = "Error";
+"update.title_error" = "Ошибка";
 
 /* Title */
-"update.title_no_update" = "No Update";
+"update.title_no_update" = "Обновлений нет";
 
 /* Title */
-"update.title_update_found" = "Update Found";
+"update.title_update_found" = "Найдено обновление";
 
 /* Update found */
-"update.update_found" = "New version detected! IINA is still in alpha, so you are recommended to stay with the latest version. Please download from website or github:";
+"update.update_found" = "Найдена новая версия! IINA ещё в стадии альфы, поэтому рекомендуется обновиться. Скачайте с веб-сайта или Github:";
 

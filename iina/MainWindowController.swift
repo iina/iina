@@ -1525,6 +1525,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         winFrame.size.height = ns.height
       }
       let winAspect = winFrame.size.aspect
+      var widthOrHeightIsSet = false
       // w and h can't take effect at same time
       if let strw = geometry.w, strw != "0" {
         let w: CGFloat
@@ -1535,6 +1536,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         winFrame.size.width = w
         winFrame.size.height = w / winAspect
+        widthOrHeightIsSet = true
       } else if let strh = geometry.h, strh != "0" {
         let h: CGFloat
         if strh.hasSuffix("%") {
@@ -1544,6 +1546,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         winFrame.size.height = h
         winFrame.size.width = h * winAspect
+        widthOrHeightIsSet = true
       }
       // x, origin is window center
       if let strx = geometry.x, let xSign = geometry.xSign {
@@ -1572,6 +1575,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           winFrame.origin.y -= winFrame.height
         }
       }
+      // if x and y not specified
+      if geometry.x == nil && geometry.y == nil && widthOrHeightIsSet {
+        winFrame.origin.x = (screenFrame.width - winFrame.width) / 2
+        winFrame.origin.y = (screenFrame.height - winFrame.height) / 2
+      }
+      // return
       return winFrame
     } else {
       return nil

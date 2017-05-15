@@ -8,6 +8,12 @@
 
 import Cocoa
 
+fileprivate let MenuItemTagRevealInFinder = 100
+fileprivate let MenuItemTagDelete = 101
+fileprivate let MenuItemTagSearchFilename = 200
+fileprivate let MenuItemTagSearchFullPath = 201
+
+
 class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutlineViewDataSource, NSMenuDelegate {
 
   enum SortOption: Int {
@@ -221,14 +227,14 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     switch menuItem.tag {
-    case 100: // reveal in finder
+    case MenuItemTagRevealInFinder:
       if selectedEntries.isEmpty { return false }
       return !selectedEntries.filter { FileManager.default.fileExists(atPath: $0.url.path) }.isEmpty
-    case 101: // delete
+    case MenuItemTagDelete:
       return !selectedEntries.isEmpty
-    case 200: // search filename
+    case MenuItemTagSearchFilename:
       menuItem.state = searchOption == .filename ? NSOnState : NSOffState
-    case 201: // search fullpath
+    case MenuItemTagSearchFullPath:
       menuItem.state = searchOption == .fullPath ? NSOnState : NSOffState
     default:
       break

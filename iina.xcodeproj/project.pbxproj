@@ -516,6 +516,7 @@
 		B3A6ED0B1EBBC9ED00BE4956 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InspectorWindowController.strings; sourceTree = "<group>"; };
 		B3A6ED0D1EBBCE0700BE4956 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/OpenURLAccessoryViewController.strings; sourceTree = "<group>"; };
 		B3A6ED0F1EBBD51F00BE4956 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/PrefControlViewController.strings; sourceTree = "<group>"; };
+		B3B163411EC9A1AC000ED121 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
 		B3B24B621E831068008393CE /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/SubSelectWindowController.strings; sourceTree = "<group>"; };
 		B3D578841EBCE6B200757AAA /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B3DB9C081E82CE2B00CFB888 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = it; path = it.lproj/Contribution.rtf; sourceTree = "<group>"; };
@@ -1526,6 +1527,7 @@
 			children = (
 				84996F911EC11CE6009A8A39 /* Base */,
 				84996F941EC11CEC009A8A39 /* zh-Hans */,
+				B3B163411EC9A1AC000ED121 /* it */,
 			);
 			name = HistoryWindowController.xib;
 			sourceTree = "<group>";

@@ -285,7 +285,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   weak var touchBarPlaySlider: NSSlider?
   weak var touchBarPlayPauseBtn: NSButton?
-  weak var touchBarCurrentPosLabel: NSTextField?
+  weak var touchBarCurrentPosLabel: DurationDisplayTextField?
 
   @available(macOS 10.12, *)
   lazy var pip: PIPViewController = {
@@ -532,6 +532,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case PK.showRemainingTime:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
         rightLabel.mode = newValue ? .remaining : .duration
+        touchBarCurrentPosLabel?.mode = newValue ? .remaining : .current
       }
     
     case PK.blackOutMonitor:
@@ -1716,7 +1717,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     let percantage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
-    touchBarCurrentPosLabel?.stringValue = pos.stringRepresentation
+    touchBarCurrentPosLabel?.updateText(with: duration, given: pos)
     rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {
       playSlider.doubleValue = percantage

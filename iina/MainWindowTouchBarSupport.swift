@@ -95,8 +95,9 @@ extension MainWindowController: NSTouchBarDelegate {
 
     case NSTouchBarItemIdentifier.time:
       let item = NSCustomTouchBarItem(identifier: identifier)
-      let label = NSTextField(labelWithString: "0:00")
+      let label = DurationDisplayTextField(labelWithString: "00:00")
       label.alignment = .center
+      label.mode = ud.bool(forKey: Preference.Key.showRemainingTime) ? .remaining : .current
       self.touchBarCurrentPosLabel = label
       item.view = label
       item.customizationLabel = "Time Position"
@@ -163,7 +164,7 @@ extension MainWindowController: NSTouchBarDelegate {
     return item
   }
 
-  // MARK: - Set TouchBar Time Label
+  // Set TouchBar Time Label
 
   func setupTouchBarUI() {
     guard let duration = playerCore.info.videoDuration else {
@@ -186,6 +187,7 @@ extension MainWindowController: NSTouchBarDelegate {
   }
 }
 
+// MARK: - Slider
 
 class TouchBarPlaySliderCell: NSSliderCell {
 

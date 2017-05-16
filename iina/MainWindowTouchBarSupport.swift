@@ -69,11 +69,12 @@ extension MainWindowController: NSTouchBarDelegate {
       let item = NSCustomTouchBarItem(identifier: identifier)
       item.view = NSButton(image: NSImage(named: NSImageNameTouchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
       item.customizationLabel = "Play / Pause"
-      self.touchBarPlayPauseBtn = item.view as! NSButton
+      self.touchBarPlayPauseBtn = item.view as? NSButton
       return item
 
     case NSTouchBarItemIdentifier.slider:
       let item = NSSliderTouchBarItem(identifier: identifier)
+      item.slider.cell = TouchBarPlaySliderCell()
       item.slider.minValue = 0
       item.slider.maxValue = 100
       item.slider.target = self
@@ -183,4 +184,67 @@ extension MainWindowController: NSTouchBarDelegate {
     }
     
   }
+}
+
+
+class TouchBarPlaySliderCell: NSSliderCell {
+
+  let gradient = NSGradient(starting: NSColor(calibratedRed: 0.471, green: 0.8, blue: 0.929, alpha: 1),
+                            ending: NSColor(calibratedRed: 0.784, green: 0.471, blue: 0.929, alpha: 1))
+  let solidColor = NSColor.labelColor.withAlphaComponent(0.4)
+
+  override var knobThickness: CGFloat {
+    return 12
+  }
+
+  override func barRect(flipped: Bool) -> NSRect {
+    let rect = super.barRect(flipped: flipped)
+    return NSRect(x: rect.origin.x,
+                  y: 6,
+                  width: rect.width,
+                  height: self.controlView!.frame.height - 12)
+  }
+
+  override func knobRect(flipped: Bool) -> NSRect {
+    let frameRect = controlView!.frame
+    let barRect = super.barRect(flipped: flipped)
+    let actualWidth = barRect.width - knobThickness
+    return NSRect(x: barRect.origin.x + actualWidth * CGFloat(doubleValue/100),
+                  y: frameRect.origin.y,
+                  width: knobThickness,
+                  height: frameRect.height)
+  }
+
+  override func drawKnob(_ knobRect: NSRect) {
+    NSColor.labelColor.setFill()
+    let path = NSBezierPath(roundedRect: knobRect, xRadius: 3, yRadius: 3)
+    path.fill()
+  }
+
+  override func drawBar(inside rect: NSRect, flipped: Bool) {
+    let barRect = self.barRect(flipped: flipped)
+    NSGraphicsContext.saveGraphicsState()
+    NSBezierPath(roundedRect: barRect, xRadius: 2.5, yRadius: 2.5).setClip()
+    let step: CGFloat = 2
+    let mid = barRect.origin.x + barRect.width * CGFloat(doubleValue/100)
+    let end = barRect.origin.x + barRect.width
+    var i: CGFloat = barRect.origin.x
+    var j: CGFloat = 0
+    while (i < mid) {
+      let rect = NSRect(x: i, y: barRect.origin.y, width: 1, height: barRect.height)
+      gradient?.interpolatedColor(atLocation: CGFloat(j / barRect.width)).setFill()
+      NSBezierPath(rect: rect).fill()
+      i += step
+      j += step
+    }
+    while (i < end) {
+      let rect = NSRect(x: i, y: barRect.origin.y, width: 1, height: barRect.height)
+      solidColor.setFill()
+      NSBezierPath(rect: rect).fill()
+      i += step
+      j += step
+    }
+    NSGraphicsContext.restoreGraphicsState()
+  }
+
 }

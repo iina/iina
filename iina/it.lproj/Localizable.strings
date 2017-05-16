@@ -164,6 +164,9 @@
 "alert.config.new.message" = "Si prega di inserire un nome per la nuova configurazione.";
 "alert.keybinding_config.error" = "Errore durante l'analisi del file di configurazione delle abbreviazioni dei tasti \"%@\"! Ritorna alle impostazioni di default di IINA. Si prega di controllare la vostra configurazione.";
 
+"alert.delete_history.title" = "Cancella cronologia riproduzioni";
+"alert.delete_history.message" = "Sei sicuro di cancellare le voci selezionate?";
+
 "pl_menu.title_multi" = "%d Elementi";
 "pl_menu.play_next" = "Riproduci il successivo";
 "pl_menu.remove" = "Rimuovi";

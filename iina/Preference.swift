@@ -91,6 +91,8 @@ struct Preference {
 
     static let oscPosition = "oscPosition"
 
+    static let playlistWidth = "playlistWidth"
+
     // Codec
 
     static let videoThreads = "videoThreads"
@@ -366,6 +368,7 @@ struct Preference {
     Key.controlBarStickToCenter: true,
     Key.controlBarAutoHideTimeout: Float(2.5),
     Key.oscPosition: OSCPosition.floating.rawValue,
+    Key.playlistWidth: 270,
     Key.themeMaterial: Theme.dark.rawValue,
     Key.osdAutoHideTimeout: Float(1),
     Key.osdTextSize: Float(20),

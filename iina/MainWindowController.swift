@@ -17,6 +17,8 @@ fileprivate let TitleBarHeightWithOSCInFullScreen: CGFloat = 24 + 10
 fileprivate let OSCTopMainViewMarginTop: CGFloat = 26
 fileprivate let OSCTopMainViewMarginTopInFullScreen: CGFloat = 6
 
+fileprivate let PlaylistMinWidth: CGFloat = 240
+fileprivate let PlaylistMaxWidth: CGFloat = 400
 
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
@@ -88,6 +90,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
+  var isResizingSidebar: Bool = false
 
   var isInFullScreen: Bool = false {
     didSet {
@@ -167,7 +170,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       case .settings:
         return 360
       case .playlist:
-        return 240
+        return CGFloat(UserDefaults.standard.integer(forKey: PK.playlistWidth)).constrain(min: PlaylistMinWidth, max: PlaylistMaxWidth)
       default:
         Utility.fatal("SideBarViewType.width shouldn't be called here")
       }
@@ -695,25 +698,36 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** record mouse pos on mouse down */
   override func mouseDown(with event: NSEvent) {
     guard !controlBarFloating.isDragging else { return }
-    mousePosRelatedToWindow = NSEvent.mouseLocation()
-    mousePosRelatedToWindow!.x -= window!.frame.origin.x
-    mousePosRelatedToWindow!.y -= window!.frame.origin.y
+    mousePosRelatedToWindow = event.locationInWindow
+    // playlist resizing
+    if sideBarStatus == .playlist {
+      let sf = sideBarView.frame
+      if NSPointInRect(mousePosRelatedToWindow!, NSMakeRect(sf.origin.x-4, sf.origin.y, 4, sf.height)) {
+        isResizingSidebar = true
+      }
+    }
   }
 
   /** move window while dragging */
   override func mouseDragged(with event: NSEvent) {
-    isDragging = true
-    guard !controlBarFloating.isDragging else { return }
-    if mousePosRelatedToWindow != nil {
-      if #available(OSX 10.11, *) {
-        window?.performDrag(with: event)
-      } else {
-        let currentLocation = NSEvent.mouseLocation()
-        let newOrigin = CGPoint(
-          x: currentLocation.x - mousePosRelatedToWindow!.x,
-          y: currentLocation.y - mousePosRelatedToWindow!.y
-        )
-        window?.setFrameOrigin(newOrigin)
+    if isResizingSidebar {
+      let currentLocation = event.locationInWindow
+      let newWidth = window!.frame.width - currentLocation.x - 2
+      sideBarWidthConstraint.constant = newWidth.constrain(min: PlaylistMinWidth, max: PlaylistMaxWidth)
+    } else {
+      isDragging = true
+      guard !controlBarFloating.isDragging else { return }
+      if mousePosRelatedToWindow != nil {
+        if #available(OSX 10.11, *) {
+          window?.performDrag(with: event)
+        } else {
+          let currentLocation = NSEvent.mouseLocation()
+          let newOrigin = CGPoint(
+            x: currentLocation.x - mousePosRelatedToWindow!.x,
+            y: currentLocation.y - mousePosRelatedToWindow!.y
+          )
+          window?.setFrameOrigin(newOrigin)
+        }
       }
     }
   }
@@ -724,6 +738,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isDragging {
       // if it's a mouseup after dragging
       isDragging = false
+    } else if isResizingSidebar {
+      isResizingSidebar = false
+      ud.set(Int(sideBarWidthConstraint.constant), forKey: PK.playlistWidth)
     } else {
       // if it's a mouseup after clicking
       let mouseInSideBar = window!.contentView!.mouse(event.locationInWindow, in: sideBarView.frame)

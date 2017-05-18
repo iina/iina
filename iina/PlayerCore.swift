@@ -674,6 +674,7 @@ class PlayerCore: NSObject {
 
     let subtitles = groups[.sub]!
     // handle video files
+    var addedCurrentVideo = false
     for video in groups[.video]! {
       // match subtitle
       var minDist = UInt.max
@@ -687,7 +688,17 @@ class PlayerCore: NSObject {
         if dist <= minDist { distCache[dist]!.append(sub) }
       }
       info.matchedSubs[video.path] = distCache[minDist]
-      addToPlaylist(video.path)
+      // add to playlist
+      if video == info.currentURL {
+        addedCurrentVideo = true
+      } else if addedCurrentVideo {
+        addToPlaylist(video.path)
+      } else {
+        let count = mpvController.getInt(MPVProperty.playlistCount)
+        let current = mpvController.getInt(MPVProperty.playlistPos)
+        addToPlaylist(video.path)
+        playlistMove(count, to: current)
+      }
     }
     // handle audio files
     for audio in groups[.audio]! {

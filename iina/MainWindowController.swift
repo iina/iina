@@ -1715,13 +1715,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let duration = playerCore.info.videoDuration, let pos = playerCore.info.videoPosition else {
       Utility.fatal("video info not available")
     }
-    let percantage = (pos.second / duration.second) * 100
+    let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
     touchBarCurrentPosLabel?.updateText(with: duration, given: pos)
     rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {
-      playSlider.doubleValue = percantage
-      touchBarPlaySlider?.doubleValue = percantage
+      playSlider.doubleValue = percentage
+      touchBarPlaySlider?.doubleValue = percentage
     }
   }
 

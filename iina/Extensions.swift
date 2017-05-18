@@ -163,6 +163,15 @@ extension Array {
   }
 }
 
+extension Dictionary {
+  mutating func safeAppend<T: Any>(_ value: T, forKey key: Key) where Value == Array<T> {
+    if self[key] == nil {
+      self[key] = Array<T>()
+    }
+    self[key]!.append(value)
+  }
+}
+
 extension NSMenu {
   func addItem(withTitle string: String, action selector: Selector? = nil, tag: Int? = nil, obj: Any? = nil, stateOn: Bool = false) {
     let menuItem = NSMenuItem(title: string, action: selector, keyEquivalent: "")

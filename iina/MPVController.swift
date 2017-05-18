@@ -270,11 +270,6 @@ class MPVController: NSObject {
     }
 
     // Load external scripts
-    let loader = ScriptLoader()
-    if ud.bool(forKey: PK.playlistAutoAdd) {
-      loader.add(defaultScript: "autoload")
-    }
-    chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, loader.stringForOption))
 
     // Load keybindings. This is still required for mpv to handle media keys or apple remote.
     let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)

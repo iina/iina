@@ -582,6 +582,10 @@ class PlayerCore: NSObject {
     if let path = mpvController.getString(MPVProperty.path) {
       info.currentURL = URL(fileURLWithPath: path)
     }
+    // add files in same folder
+    if ud.bool(forKey: Preference.Key.playlistAutoAdd) {
+      autoLoadFilesInCurrentFolder()
+    }
   }
 
   /** This function is called right after file loaded. Should load all meta info here. */
@@ -644,6 +648,51 @@ class PlayerCore: NSObject {
 
   @objc private func reEnableOSDAfterFileLoading() {
     info.disableOSDForFileLoading = false
+  }
+
+  /// Add files in the same folder to playlist.
+  private func autoLoadFilesInCurrentFolder() {
+    guard let folder = info.currentURL?.deletingLastPathComponent() else { return }
+
+    // don't load file if user didn't switch folder
+    guard folder.path != info.currentFolder?.path else { return }
+    info.currentFolder = folder
+    guard let files = try?
+      FileManager.default.contentsOfDirectory(at: folder,
+                                              includingPropertiesForKeys: nil,
+                                              options: [.skipsHiddenFiles, .skipsPackageDescendants])
+      else { return }
+
+    // group by extension
+    var groups: [MPVTrack.TrackType: [URL]] = [.video: [], .audio: [], .sub: []]
+    for file in files {
+      let ext = file.pathExtension
+      let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
+      guard let mediaType = allTypes.first(where: { Utility.fileExtensionMap[$0]!.contains(ext) }) else { continue }
+      groups[mediaType]!.append(file)
+    }
+
+    let subtitles = groups[.sub]!
+    // handle video files
+    for video in groups[.video]! {
+      // match subtitle
+      var minDist = UInt.max
+      var distCache: [UInt: [URL]] = [:]
+      for sub in subtitles {
+        let dist = ObjcUtils.levDistance(video.deletingPathExtension().lastPathComponent, and: sub.deletingPathExtension().lastPathComponent)
+        if dist < minDist {
+          minDist = dist
+          distCache[dist] = []
+        }
+        if dist <= minDist { distCache[dist]!.append(sub) }
+      }
+      info.matchedSubs[video.path] = distCache[minDist]
+      addToPlaylist(video.path)
+    }
+    // handle audio files
+    for audio in groups[.audio]! {
+      addToPlaylist(audio.path)
+    }
   }
 
   // MARK: - Sync with UI in MainWindow

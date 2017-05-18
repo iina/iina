@@ -13,6 +13,14 @@ class Utility {
   static let tabTitleFontAttributes = FontAttributes(font: .system, size: .system, align: .center).value
   static let tabTitleActiveFontAttributes = FontAttributes(font: .systemBold, size: .system, align: .center).value
 
+  static let fileExtensionMap: [MPVTrack.TrackType: [String]] = {
+    var result: [MPVTrack.TrackType: [String]] = [:]
+    result[.video] = ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt"]
+    result[.audio] = ["mp3", "aac", "ogg", "wav", "flac", "m4a", "wma", "ape", "midi", "mka"]
+    result[.sub] = ["ass", "srt", "lrc"]
+    return result
+  }()
+
   // MARK: - Logs, alerts
 
   @available(*, deprecated, message: "showAlert(message:alertStyle:) is deprecated, use showAlert(_ key:comment:arguments:alertStyle:) instead")

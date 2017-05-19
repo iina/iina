@@ -159,23 +159,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
       return 0
     }
   }
-
-  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    if tableView == playlistTableView {
-      guard row < playerCore.info.playlist.count else { return nil }
-      let item = playerCore.info.playlist[row]
-      let columnName = tableColumn?.identifier
-      if columnName == Constants.Identifier.isChosen {
-        return item.isPlaying ? Constants.String.play : ""
-      } else if columnName == Constants.Identifier.trackName {
-        return item.filenameForDisplay
-      } else {
-        return nil
-      }
-    } else {
-      return nil
-    }
-  }
   
   // MARK: - Drag and Drop
   
@@ -291,7 +274,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
           playerCore.addToPlaylist(path)
           playlistItems += 1
           playerCore.playlistMove(playlistItems, to: currentRow)
-
           currentRow += 1
           added += 1
         }
@@ -387,6 +369,25 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
 
     func tableViewSelectionDidChange(_ notification: Notification) {
       return
+    }
+
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+      guard let identifier = tableColumn?.identifier else { return nil }
+      let info = parent.playerCore.info
+      guard row < info.playlist.count else { return nil }
+      let item = info.playlist[row]
+
+      let v = tableView.make(withIdentifier: identifier, owner: self) as! NSTableCellView
+
+      if identifier == Constants.Identifier.isChosen {
+        v.textField?.stringValue = item.isPlaying ? Constants.String.play : ""
+      } else if identifier == Constants.Identifier.trackName {
+        let cellView = v as! PlaylistTrackCellView
+        cellView.textField?.stringValue = item.filenameForDisplay
+        cellView.subBtn.isHidden = (parent.playerCore.info.matchedSubs[item.filename] == nil)
+        cellView.subBtn.image?.isTemplate = true
+      }
+      return v
     }
   }
 
@@ -541,6 +542,13 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
     result.addItem(withTitle: NSLocalizedString("pl_menu.clear_playlist", comment: "Clear Playlist"), action: #selector(self.clearPlaylistBtnAction(_:)))
     return result
   }
+
+}
+
+
+class PlaylistTrackCellView: NSTableCellView {
+
+  @IBOutlet weak var subBtn: NSButton!
 
 }
 

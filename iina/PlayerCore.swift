@@ -579,12 +579,17 @@ class PlayerCore: NSObject {
   func fileStarted() {
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
-    if let path = mpvController.getString(MPVProperty.path) {
-      info.currentURL = URL(fileURLWithPath: path)
-    }
+    guard let path = mpvController.getString(MPVProperty.path) else { return }
+    info.currentURL = URL(fileURLWithPath: path)
     // add files in same folder
     if ud.bool(forKey: Preference.Key.playlistAutoAdd) {
       autoLoadFilesInCurrentFolder()
+    }
+    // auto load matched subtitles
+    if let matchedSubs = info.matchedSubs[path] {
+      for sub in matchedSubs {
+        loadExternalSubFile(sub)
+      }
     }
   }
 

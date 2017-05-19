@@ -87,7 +87,7 @@
                                                                 </tableCellView>
                                                             </prototypeCellViews>
                                                         </tableColumn>
-                                                        <tableColumn identifier="TrackName" editable="NO" width="214" minWidth="100" maxWidth="1000" id="csQ-Z4-hxP">
+                                                        <tableColumn identifier="TrackName" editable="NO" width="218" minWidth="100" maxWidth="1000" id="csQ-Z4-hxP">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -101,12 +101,12 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView id="yTp-yO-UE2" customClass="PlaylistTrackCellView" customModule="IINA" customModuleProvider="target">
-                                                                    <rect key="frame" x="20" y="1" width="214" height="17"/>
+                                                                    <rect key="frame" x="20" y="1" width="218" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzW-2W-iPg">
-                                                                            <rect key="frame" x="-2" y="0.0" width="196" height="17"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="M5s-Bm-l3O">
+                                                                            <rect key="frame" x="-2" y="0.0" width="200" height="17"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="Table View Cell" id="M5s-Bm-l3O">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -116,7 +116,7 @@
                                                                             </connections>
                                                                         </textField>
                                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="MbV-7g-8Gm">
-                                                                            <rect key="frame" x="194" y="1" width="16" height="16"/>
+                                                                            <rect key="frame" x="198" y="1" width="16" height="16"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="16" id="PKT-tg-lPD"/>
                                                                                 <constraint firstAttribute="height" constant="16" id="aG1-SY-pnl"/>
@@ -250,7 +250,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="6tr-hz-bdD">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="31" rowSizeStyle="automatic" viewBased="YES" id="BvG-MR-6LX">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>

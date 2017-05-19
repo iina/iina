@@ -166,10 +166,7 @@ class MPVController: NSObject {
 
     // - Sub
 
-    setUserOption(PK.subAutoLoad, type: .other, forName: MPVOption.Subtitles.subAuto) { key in
-      let v = UserDefaults.standard.integer(forKey: key)
-      return Preference.AutoLoadAction(rawValue: v)?.string
-    }
+    chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subAuto, Preference.AutoLoadAction.no.string))
 
     let subOverrideHandler: OptionObserverInfo.Transformer = { key in
       let v = UserDefaults.standard.bool(forKey: PK.ignoreAssStyles)

@@ -671,7 +671,35 @@ class PlayerCore: NSObject {
       guard let mediaType = allTypes.first(where: { Utility.fileExtensionMap[$0]!.contains(ext) }) else { continue }
       groups[mediaType]!.append(file)
     }
-
+    // natural sort
+    let getNaturalSegments: ((String) -> [String]) = { string in
+      var segments: [String] = []
+      var currentSegemnt = ""
+      let firstChar = string.characters.first!
+      var currentSegmentIsDigit = firstChar >= "0" && firstChar <= "9"
+      for char in string.characters {
+        let isDigit = char >= "0" && char <= "9"
+        if isDigit != currentSegmentIsDigit {
+          segments.append(currentSegemnt)
+          currentSegemnt = String(char)
+          currentSegmentIsDigit = isDigit
+        } else {
+          currentSegemnt.append(char)
+        }
+      }
+      return segments
+    }
+    groups[.video]!.sort { url1, url2 -> Bool in
+      let name1 = getNaturalSegments(url1.deletingPathExtension().lastPathComponent)
+      let name2 = getNaturalSegments(url2.deletingPathExtension().lastPathComponent)
+      return name1.lexicographicallyPrecedes(name2) { a, b in
+        if let inta = Int(a), let intb = Int(b) {
+          return inta < intb
+        } else {
+          return a < b
+        }
+      }
+    }
     let subtitles = groups[.sub]!
     // handle video files
     var addedCurrentVideo = false

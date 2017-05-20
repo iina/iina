@@ -45,6 +45,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBOutlet weak var deleteBtn: NSButton!
   @IBOutlet weak var loopBtn: NSButton!
   @IBOutlet weak var shuffleBtn: NSButton!
+  @IBOutlet var subPopover: NSPopover!
   
   var downShift: CGFloat = 0 {
     didSet {
@@ -353,6 +354,14 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     sender.isFolded = !sender.isFolded
   }
 
+  @IBAction func subBtnAction(_ sender: NSButton) {
+    let row = playlistTableView.row(for: sender)
+    guard let vc = subPopover.contentViewController as? SubPopoverViewController else { return }
+    vc.filePath = playerCore.info.playlist[row].filename
+    subPopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .maxY)
+    vc.tableView.reloadData()
+  }
+
   func tableViewSelectionDidChange(_ notification: Notification) {
     let tv = notification.object as! NSTableView
     guard tv.numberOfSelectedRows > 0 else { return }
@@ -570,6 +579,24 @@ class PlaylistView: NSView {
   override func resetCursorRects() {
     let rect = NSRect(x: frame.origin.x - 4, y: frame.origin.y, width: 4, height: frame.height)
     addCursorRect(rect, cursor: NSCursor.resizeLeftRight())
+  }
+
+}
+
+
+class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+
+  @IBOutlet weak var tableView: NSTableView!
+
+  var filePath: String = ""
+
+  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+    guard let matchedSubs = PlayerCore.shared.info.matchedSubs[filePath] else { return nil }
+    return matchedSubs[row].lastPathComponent
+  }
+
+  func numberOfRows(in tableView: NSTableView) -> Int {
+    return PlayerCore.shared.info.matchedSubs[filePath]?.count ?? 0
   }
 
 }

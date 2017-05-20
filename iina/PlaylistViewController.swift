@@ -57,9 +57,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     withAllTableViews { (view) in
       view.dataSource = self
     }
-    playlistTableView.delegate = self
     playlistTableView.menu?.delegate = self
-    chapterTableView.delegate = self
 
     [deleteBtn, loopBtn, shuffleBtn].forEach {
       $0?.image?.isTemplate = true
@@ -371,12 +369,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     guard let identifier = tableColumn?.identifier else { return nil }
     let info = playerCore.info
+    let v = tableView.make(withIdentifier: identifier, owner: self) as! NSTableCellView
 
     // playlist
     if tableView == playlistTableView {
       guard row < info.playlist.count else { return nil }
       let item = info.playlist[row]
-      let v = tableView.make(withIdentifier: identifier, owner: self) as! NSTableCellView
 
       if identifier == Constants.Identifier.isChosen {
         v.textField?.stringValue = item.isPlaying ? Constants.String.play : ""
@@ -385,7 +383,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         let filename = item.filenameForDisplay
         if let prefix = playerCore.info.commonPrefixes.first(where: { $1.contains(item.filename) })?.key {
           cellView.prefixBtn.text = prefix
-          cellView.prefixBtn.action = #selector(self.prefixBtnAction(_:))
           cellView.textField?.stringValue = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
         } else {
           cellView.prefixBtn.hasPrefix = false
@@ -406,7 +403,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
       if identifier == Constants.Identifier.isChosen {
         // left column
-        let v = tableView.make(withIdentifier: Constants.Identifier.isPlayingCell, owner: self) as! NSTableCellView
         let currentPos = info.videoPosition!
         if currentPos.between(chapter.time, nextChapterTime) {
           v.textField?.stringValue = Constants.String.play
@@ -416,10 +412,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         return v
       } else if identifier == Constants.Identifier.trackName {
         // right column
-        let v = tableView.make(withIdentifier: Constants.Identifier.trackNameCell, owner: self) as! ChapterTableCellView
-        v.textField?.stringValue = chapter.title.isEmpty ? "Chapter \(row)" : chapter.title
-        v.durationTextField.stringValue = "\(chapter.time.stringRepresentation) → \(nextChapterTime.stringRepresentation)"
-        return v
+        let cellView = v as! ChapterTableCellView
+        cellView.textField?.stringValue = chapter.title.isEmpty ? "Chapter \(row)" : chapter.title
+        cellView.durationTextField.stringValue = "\(chapter.time.stringRepresentation) → \(nextChapterTime.stringRepresentation)"
+        return cellView
       } else {
         return nil
       }
@@ -565,10 +561,6 @@ class PlaylistPrefixButton: NSButton {
   private func refresh() {
     self.title = hasPrefix ? (isFolded ? "…" : text) : ""
   }
-
-//  override func mouseDown(with event: NSEvent) {
-//    self.isFolded = !isFolded
-//  }
 
 }
 

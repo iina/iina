@@ -71,7 +71,9 @@ class FileGroup {
       groups = tempGroup.map { FileGroup(prefix: $0, contents: $1) }
       // continue
       for g in groups {
-        g.tryGroupFiles()
+        if g.contents.count >= 3 {
+          g.tryGroupFiles()
+        }
       }
     }
   }
@@ -84,7 +86,7 @@ class FileGroup {
         for g in group.groups {
           search(g)
         }
-      } else {
+      } else if group.prefix.characters.count >= 5 {
         result[group.prefix] = group.contents.map { $0.url.path }
       }
     }

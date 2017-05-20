@@ -104,18 +104,21 @@
                                                                     <rect key="frame" x="20" y="1" width="218" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
-                                                                        <button horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U4W-Xv-hkh" customClass="PlaylistPrefixButton" customModule="IINA" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="101" height="17"/>
+                                                                        <button toolTip="Folded common prefix" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U4W-Xv-hkh" customClass="PlaylistPrefixButton" customModule="IINA" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="15" height="17"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="17" id="vUd-CP-5bg"/>
                                                                             </constraints>
-                                                                            <buttonCell key="cell" type="bevel" title="Button" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingMiddle" imageScaling="proportionallyDown" inset="2" id="CVl-Xv-m3u">
+                                                                            <buttonCell key="cell" type="bevel" title="…" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingMiddle" imageScaling="proportionallyDown" inset="2" id="CVl-Xv-m3u">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="system"/>
                                                                             </buttonCell>
+                                                                            <connections>
+                                                                                <action selector="prefixBtnAction:" target="-2" id="wWr-Uf-zah"/>
+                                                                            </connections>
                                                                         </button>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzW-2W-iPg">
-                                                                            <rect key="frame" x="99" y="0.0" width="97" height="17"/>
+                                                                            <rect key="frame" x="13" y="0.0" width="183" height="17"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="Table View Cell" id="M5s-Bm-l3O">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -156,6 +159,7 @@
                                                         </tableColumn>
                                                     </tableColumns>
                                                     <connections>
+                                                        <outlet property="delegate" destination="-2" id="IFf-LM-YRj"/>
                                                         <outlet property="menu" destination="DE5-wv-zGL" id="Is2-VS-jBG"/>
                                                     </connections>
                                                 </tableView>
@@ -286,7 +290,7 @@
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
-                                                                <tableCellView identifier="IsPlayingCell" id="GOd-be-WfJ">
+                                                                <tableCellView identifier="IsChosen" id="GOd-be-WfJ">
                                                                     <rect key="frame" x="1" y="1" width="20" height="31"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
@@ -319,7 +323,7 @@
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
-                                                                <tableCellView identifier="TrackNameCell" id="KdQ-yd-ywJ" customClass="ChapterTableCellView" customModule="IINA" customModuleProvider="target">
+                                                                <tableCellView identifier="TrackName" id="KdQ-yd-ywJ" customClass="ChapterTableCellView" customModule="IINA" customModuleProvider="target">
                                                                     <rect key="frame" x="24" y="1" width="214" height="31"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
@@ -350,6 +354,9 @@
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                     </tableColumns>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-2" id="7fh-QL-McD"/>
+                                                    </connections>
                                                 </tableView>
                                             </subviews>
                                         </clipView>

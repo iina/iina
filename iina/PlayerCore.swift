@@ -717,17 +717,20 @@ class PlayerCore: NSObject {
     var addedCurrentVideo = false
     for video in groups[.video]! {
       // match subtitle
+      let videoName = video.deletingPathExtension().lastPathComponent
       var minDist = UInt.max
       var distCache: [UInt: [URL]] = [:]
       for sub in subtitles {
-        let dist = ObjcUtils.levDistance(video.deletingPathExtension().lastPathComponent, and: sub.deletingPathExtension().lastPathComponent)
+        let dist = ObjcUtils.levDistance(videoName, and: sub.deletingPathExtension().lastPathComponent)
         if dist < minDist {
           minDist = dist
           distCache[dist] = []
         }
         if dist <= minDist { distCache[dist]!.append(sub) }
       }
-      info.matchedSubs[video.path] = distCache[minDist]
+      if Double(minDist) <= Double(videoName.characters.count) * 0.25 {
+        info.matchedSubs[video.path] = distCache[minDist]
+      }
       // add to playlist
       if video == info.currentURL {
         addedCurrentVideo = true

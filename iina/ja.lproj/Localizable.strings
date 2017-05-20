@@ -170,6 +170,9 @@
 "alert.open_url.message" = "URLを入力してください:";
 "alert.choose_media_file.title" = "メディアファイルを選択";
 
+"alert.delete_history.title" = "再生履歴の削除";
+"alert.delete_history.message" = "選択した項目を削除しますか?";
+
 "pl_menu.title_multi" = "%d個のアイテム";
 "pl_menu.play_next" = "次を再生";
 "pl_menu.remove" = "削除";

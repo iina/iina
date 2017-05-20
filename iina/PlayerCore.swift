@@ -574,7 +574,7 @@ class PlayerCore: NSObject {
                        ySign: captures[8])
   }
 
-  // MARK: - Other
+  // MARK: - Listeners
 
   func fileStarted() {
     info.justStartedFile = true
@@ -651,7 +651,8 @@ class PlayerCore: NSObject {
     }
   }
 
-  @objc private func reEnableOSDAfterFileLoading() {
+  @objc
+  private func reEnableOSDAfterFileLoading() {
     info.disableOSDForFileLoading = false
   }
 
@@ -676,6 +677,7 @@ class PlayerCore: NSObject {
       guard let mediaType = allTypes.first(where: { Utility.fileExtensionMap[$0]!.contains(ext) }) else { continue }
       groups[mediaType]!.append(file)
     }
+
     // natural sort
     let getNaturalSegments: ((String) -> [String]) = { string in
       var segments: [String] = []
@@ -706,7 +708,12 @@ class PlayerCore: NSObject {
       }
     }
     let subtitles = groups[.sub]!
-    // handle video files
+
+    // grop video files
+    let series = FileGroup.group(files: groups[.video]!)
+    info.commonPrefixes = series.flatten()
+
+    // match sub for video files
     var addedCurrentVideo = false
     for video in groups[.video]! {
       // match subtitle
@@ -733,6 +740,7 @@ class PlayerCore: NSObject {
         playlistMove(count, to: current)
       }
     }
+
     // handle audio files
     for audio in groups[.audio]! {
       addToPlaylist(audio.path)

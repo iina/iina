@@ -66,7 +66,7 @@
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZG-xB-blk">
                                                                             <rect key="frame" x="0.0" y="0.0" width="18" height="17"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="4yj-cg-fli">
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="▶︎" id="4yj-cg-fli">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -104,8 +104,18 @@
                                                                     <rect key="frame" x="20" y="1" width="218" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
+                                                                        <button horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U4W-Xv-hkh" customClass="PlaylistPrefixButton" customModule="IINA" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="101" height="17"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="17" id="vUd-CP-5bg"/>
+                                                                            </constraints>
+                                                                            <buttonCell key="cell" type="bevel" title="Button" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingMiddle" imageScaling="proportionallyDown" inset="2" id="CVl-Xv-m3u">
+                                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                <font key="font" metaFont="system"/>
+                                                                            </buttonCell>
+                                                                        </button>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzW-2W-iPg">
-                                                                            <rect key="frame" x="-2" y="0.0" width="200" height="17"/>
+                                                                            <rect key="frame" x="99" y="0.0" width="97" height="17"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="Table View Cell" id="M5s-Bm-l3O">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -116,10 +126,10 @@
                                                                             </connections>
                                                                         </textField>
                                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="MbV-7g-8Gm">
-                                                                            <rect key="frame" x="198" y="1" width="16" height="16"/>
+                                                                            <rect key="frame" x="202" y="3" width="12" height="12"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" constant="16" id="PKT-tg-lPD"/>
-                                                                                <constraint firstAttribute="height" constant="16" id="aG1-SY-pnl"/>
+                                                                                <constraint firstAttribute="width" constant="12" id="PKT-tg-lPD"/>
+                                                                                <constraint firstAttribute="height" constant="12" id="aG1-SY-pnl"/>
                                                                             </constraints>
                                                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="sub-small" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Hae-Zb-lOE">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -128,13 +138,16 @@
                                                                         </button>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="mzW-2W-iPg" firstAttribute="leading" secondItem="yTp-yO-UE2" secondAttribute="leading" id="8CH-DO-2Op"/>
                                                                         <constraint firstItem="MbV-7g-8Gm" firstAttribute="centerY" secondItem="yTp-yO-UE2" secondAttribute="centerY" id="CoT-xg-AvY"/>
-                                                                        <constraint firstItem="MbV-7g-8Gm" firstAttribute="leading" secondItem="mzW-2W-iPg" secondAttribute="trailing" constant="2" id="PeW-IQ-RAA"/>
+                                                                        <constraint firstItem="MbV-7g-8Gm" firstAttribute="leading" secondItem="mzW-2W-iPg" secondAttribute="trailing" constant="8" id="PeW-IQ-RAA"/>
                                                                         <constraint firstAttribute="trailing" secondItem="MbV-7g-8Gm" secondAttribute="trailing" constant="4" id="WBC-vQ-swm"/>
+                                                                        <constraint firstItem="mzW-2W-iPg" firstAttribute="leading" secondItem="U4W-Xv-hkh" secondAttribute="trailing" id="XeG-0c-05U"/>
+                                                                        <constraint firstItem="U4W-Xv-hkh" firstAttribute="centerY" secondItem="yTp-yO-UE2" secondAttribute="centerY" id="g5U-ZA-Kco"/>
+                                                                        <constraint firstItem="U4W-Xv-hkh" firstAttribute="leading" secondItem="yTp-yO-UE2" secondAttribute="leading" id="pTq-Bj-ICm"/>
                                                                         <constraint firstItem="mzW-2W-iPg" firstAttribute="centerY" secondItem="yTp-yO-UE2" secondAttribute="centerY" id="qW6-QF-Yl2"/>
                                                                     </constraints>
                                                                     <connections>
+                                                                        <outlet property="prefixBtn" destination="U4W-Xv-hkh" id="Uyd-uy-W5S"/>
                                                                         <outlet property="subBtn" destination="MbV-7g-8Gm" id="5Ob-Et-XBK"/>
                                                                         <outlet property="textField" destination="mzW-2W-iPg" id="WVu-Av-omY"/>
                                                                     </connections>
@@ -250,7 +263,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="6tr-hz-bdD">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="31" rowSizeStyle="automatic" viewBased="YES" id="BvG-MR-6LX">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>

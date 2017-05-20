@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDelegate, SidebarViewController {
+class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSMenuDelegate, SidebarViewController {
 
   override var nibName: String {
     return "PlaylistViewController"
@@ -45,14 +45,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
   @IBOutlet weak var deleteBtn: NSButton!
   @IBOutlet weak var loopBtn: NSButton!
   @IBOutlet weak var shuffleBtn: NSButton!
-
-  lazy var playlistDelegate: PlaylistTableDelegate = {
-    return PlaylistTableDelegate(self)
-  }()
-
-  lazy var chapterDelegate: ChapterTableDelegate = {
-    return ChapterTableDelegate(self)
-  }()
   
   var downShift: CGFloat = 0 {
     didSet {
@@ -65,9 +57,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
     withAllTableViews { (view) in
       view.dataSource = self
     }
-    playlistTableView.delegate = playlistDelegate
+    playlistTableView.delegate = self
     playlistTableView.menu?.delegate = self
-    chapterTableView.delegate = chapterDelegate
+    chapterTableView.delegate = self
 
     [deleteBtn, loopBtn, shuffleBtn].forEach {
       $0?.image?.isTemplate = true
@@ -359,67 +351,60 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
 
   // MARK: - Table delegates
 
-  class PlaylistTableDelegate: NSObject, NSTableViewDelegate {
+  @IBAction func prefixBtnAction(_ sender: PlaylistPrefixButton) {
+    sender.isFolded = !sender.isFolded
+  }
 
-    weak var parent: PlaylistViewController!
-
-    init(_ parent: PlaylistViewController) {
-      self.parent = parent
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    let tv = notification.object as! NSTableView
+    guard tv.numberOfSelectedRows > 0 else { return }
+    if tv == chapterTableView {
+      let index = tv.selectedRow
+      playerCore.playChapter(index)
+      let chapter = playerCore.info.chapters[index]
+      tv.deselectAll(self)
+      tv.reloadData()
+      mainWindow.displayOSD(.chapter(chapter.title))
     }
+  }
 
-    func tableViewSelectionDidChange(_ notification: Notification) {
-      return
-    }
+  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    guard let identifier = tableColumn?.identifier else { return nil }
+    let info = playerCore.info
 
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-      guard let identifier = tableColumn?.identifier else { return nil }
-      let info = parent.playerCore.info
+    // playlist
+    if tableView == playlistTableView {
       guard row < info.playlist.count else { return nil }
       let item = info.playlist[row]
-
       let v = tableView.make(withIdentifier: identifier, owner: self) as! NSTableCellView
 
       if identifier == Constants.Identifier.isChosen {
         v.textField?.stringValue = item.isPlaying ? Constants.String.play : ""
       } else if identifier == Constants.Identifier.trackName {
         let cellView = v as! PlaylistTrackCellView
-        cellView.textField?.stringValue = item.filenameForDisplay
-        cellView.subBtn.isHidden = (parent.playerCore.info.matchedSubs[item.filename] == nil)
+        let filename = item.filenameForDisplay
+        if let prefix = playerCore.info.commonPrefixes.first(where: { $1.contains(item.filename) })?.key {
+          cellView.prefixBtn.text = prefix
+          cellView.prefixBtn.action = #selector(self.prefixBtnAction(_:))
+          cellView.textField?.stringValue = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
+        } else {
+          cellView.prefixBtn.hasPrefix = false
+          cellView.textField?.stringValue = item.filenameForDisplay
+        }
+        cellView.subBtn.isHidden = (playerCore.info.matchedSubs[item.filename] == nil)
         cellView.subBtn.image?.isTemplate = true
       }
       return v
     }
-  }
-
-  class ChapterTableDelegate: NSObject, NSTableViewDelegate {
-
-    weak var parent: PlaylistViewController!
-
-    init(_ parent: PlaylistViewController) {
-      self.parent = parent
-    }
-
-    func tableViewSelectionDidChange(_ notification: Notification) {
-      let tv = notification.object as! NSTableView
-      if tv.numberOfSelectedRows > 0 {
-        let index = tv.selectedRow
-        parent.playerCore.playChapter(index)
-        let chapter = parent.playerCore.info.chapters[index]
-        tv.deselectAll(self)
-        tv.reloadData()
-        parent.mainWindow.displayOSD(.chapter(chapter.title))
-      }
-    }
-
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-      let info = parent.playerCore.info
+    // chapter
+    else if tableView == chapterTableView {
       let chapters = info.chapters
       let chapter = chapters[row]
       // next chapter time
       let nextChapterTime = chapters.at(row+1)?.time ?? Constants.Time.infinite
       // construct view
-      let columnName = tableColumn?.identifier
-      if columnName == Constants.Identifier.isChosen {
+
+      if identifier == Constants.Identifier.isChosen {
         // left column
         let v = tableView.make(withIdentifier: Constants.Identifier.isPlayingCell, owner: self) as! NSTableCellView
         let currentPos = info.videoPosition!
@@ -429,7 +414,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
           v.textField?.stringValue = ""
         }
         return v
-      } else if columnName == Constants.Identifier.trackName {
+      } else if identifier == Constants.Identifier.trackName {
         // right column
         let v = tableView.make(withIdentifier: Constants.Identifier.trackNameCell, owner: self) as! ChapterTableCellView
         v.textField?.stringValue = chapter.title.isEmpty ? "Chapter \(row)" : chapter.title
@@ -438,6 +423,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
       } else {
         return nil
       }
+    }
+    else {
+      return nil
     }
   }
 
@@ -549,6 +537,38 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSMenuDel
 class PlaylistTrackCellView: NSTableCellView {
 
   @IBOutlet weak var subBtn: NSButton!
+  @IBOutlet weak var prefixBtn: PlaylistPrefixButton!
+
+}
+
+
+class PlaylistPrefixButton: NSButton {
+
+  var text = "" {
+    didSet {
+      refresh()
+    }
+  }
+
+  var hasPrefix = true {
+    didSet {
+      refresh()
+    }
+  }
+
+  var isFolded = true {
+    didSet {
+      refresh()
+    }
+  }
+
+  private func refresh() {
+    self.title = hasPrefix ? (isFolded ? "…" : text) : ""
+  }
+
+//  override func mouseDown(with event: NSEvent) {
+//    self.isFolded = !isFolded
+//  }
 
 }
 

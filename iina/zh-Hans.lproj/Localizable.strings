@@ -170,6 +170,10 @@
 "alert.open_url.message" = "请输入 URL:";
 "alert.choose_media_file.title" = "选择媒体文件";
 
+
+"alert.delete_history.title" = "删除历史记录";
+"alert.delete_history.message" = "确定要删除所选的历史记录吗？";
+
 "pl_menu.title_multi" = "%d 个项目";
 "pl_menu.play_next" = "接下来播放";
 "pl_menu.remove" = "移除";

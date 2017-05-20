@@ -59,7 +59,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES" HUD="YES"/>
             <windowPositionMask key="initialPositionMask" rightStrut="YES"/>
             <rect key="contentRect" x="1539" y="436" width="424" height="395"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="424" height="395"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -983,7 +983,7 @@
                                             <rect key="frame" x="12" y="24" width="376" height="132"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="MlR-S8-3gW">
                                                 <rect key="frame" x="0.0" y="0.0" width="376" height="132"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" id="oUp-DO-OKl">
                                                         <rect key="frame" x="0.0" y="0.0" width="376" height="132"/>

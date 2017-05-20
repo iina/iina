@@ -139,7 +139,7 @@ class MPVController: NSObject {
     }
 
     setUserOption(PK.playlistAutoPlayNext, type: .other, forName: MPVOption.Window.keepOpen) { key in
-      let keepOpen = UserDefaults.standard.bool(forKey: key)
+      let keepOpen = UserDefaults.standard.bool(forKey: PK.keepOpenOnFileEnd)
       let keepOpenPl = !UserDefaults.standard.bool(forKey: PK.playlistAutoPlayNext)
       return keepOpenPl ? "always" : (keepOpen ? "yes" : "no")
     }

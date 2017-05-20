@@ -613,7 +613,14 @@ class PlayerCore: NSObject {
         needEnterFullScreenForNextMedia = false
       }
     }
-    
+    // add to history
+    if let url = info.currentURL {
+      let duration = info.videoDuration ?? .zero
+      HistoryController.shared.add(url, duration: duration.second)
+      if ud.bool(forKey: Preference.Key.recordRecentFiles) && ud.bool(forKey: Preference.Key.trackAllFilesInRecentOpenMenu) {
+        NSDocumentController.shared().noteNewRecentDocumentURL(url)
+      }
+    }
     NotificationCenter.default.post(Notification(name: Constants.Noti.fileLoaded))
   }
 

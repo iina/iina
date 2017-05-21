@@ -397,7 +397,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           cellView.prefixBtn.hasPrefix = false
           cellView.textField?.stringValue = item.filenameForDisplay
         }
-        cellView.subBtn.isHidden = (playerCore.info.matchedSubs[item.filename] == nil)
+        if let matchedSubs = playerCore.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
+          cellView.subBtn.isHidden = false
+        } else {
+          cellView.subBtn.isHidden = true
+        }
         cellView.subBtn.image?.isTemplate = true
       }
       return v
@@ -453,10 +457,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   @IBAction func contextMenuPlayNext(_ sender: NSMenuItem) {
+    guard let selectedRows = selectedRows else { return }
     let current = playerCore.mpvController.getInt(MPVProperty.playlistPos)
     var ob = 0  // index offset before current playing item
     var mc = 1  // moved item count, +1 because move to next item of current played one
-    for item in selectedRows! {
+    for item in selectedRows {
       if item == current { continue }
       if item < current {
         playerCore.playlistMove(item + ob, to: current + mc + ob)
@@ -471,8 +476,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   @IBAction func contextMenuRemove(_ sender: NSMenuItem) {
+    guard let selectedRows = selectedRows else { return }
     var count = 0
-    for item in selectedRows! {
+    for item in selectedRows {
       playerCore.playlistRemove(item - count)
       count += 1
     }
@@ -481,8 +487,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   @IBAction func contextMenuDeleteFile(_ sender: NSMenuItem) {
+    guard let selectedRows = selectedRows else { return }
     var count = 0
-    for index in selectedRows! {
+    for index in selectedRows {
       playerCore.playlistRemove(index)
       let url = URL(fileURLWithPath: playerCore.info.playlist[index].filename)
       do {
@@ -502,26 +509,60 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   @IBAction func contextMenuRevealInFinder(_ sender: NSMenuItem) {
+    guard let selectedRows = selectedRows else { return }
     var urls: [URL] = []
-    for index in selectedRows! {
+    for index in selectedRows {
       urls.append(URL(fileURLWithPath: playerCore.info.playlist[index].filename))
     }
     playlistTableView.deselectAll(nil)
     NSWorkspace.shared().activateFileViewerSelecting(urls)
   }
 
+  @IBAction func contextMenuAddSubtitle(_ sender: NSMenuItem) {
+    guard let selectedRows = selectedRows, let index = selectedRows.first else { return }
+    let filename = playerCore.info.playlist[index].filename
+    let fileURL = URL(fileURLWithPath: filename).deletingLastPathComponent()
+    let _ = Utility.quickMultipleOpenPanel(title: NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File"), dir: fileURL) { subURLs in
+      for subURL in subURLs {
+        guard Utility.fileExtensionMap[.sub]!.contains(subURL.pathExtension) else { return }
+        playerCore.info.matchedSubs.safeAppend(subURL, forKey: filename)
+      }
+      playlistTableView.reloadData(forRowIndexes: selectedRows, columnIndexes: IndexSet(integersIn: 0...1))
+    }
+  }
+
+  @IBAction func contextMenuWrongSubtitle(_ sender: NSMenuItem) {
+    guard let selectedRows = selectedRows else { return }
+    for index in selectedRows {
+      let filename = playerCore.info.playlist[index].filename
+      playerCore.info.matchedSubs[filename]?.removeAll()
+      playlistTableView.reloadData(forRowIndexes: selectedRows, columnIndexes: IndexSet(integersIn: 0...1))
+    }
+
+  }
+
   private func buildMenu(forRows rows: IndexSet) -> NSMenu {
     let result = NSMenu()
     let isSingleItem = rows.count == 1
-    let title: String = isSingleItem ?
-      playerCore.info.playlist[rows.first!].filenameForDisplay :
-      String(format: NSLocalizedString("pl_menu.title_multi", comment: "%d Items"), rows.count)
 
     if !rows.isEmpty {
+      let firstURL = playerCore.info.playlist[rows.first!]
+      let matchedSubCount = playerCore.info.matchedSubs[firstURL.filename]?.count ?? 0
+      let title: String = isSingleItem ?
+        firstURL.filenameForDisplay :
+        String(format: NSLocalizedString("pl_menu.title_multi", comment: "%d Items"), rows.count)
+
       result.addItem(withTitle: title)
       result.addItem(NSMenuItem.separator())
       result.addItem(withTitle: NSLocalizedString("pl_menu.play_next", comment: "Play Next"), action: #selector(self.contextMenuPlayNext(_:)))
       result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.remove" : "pl_menu.remove_multi", comment: "Remove"), action: #selector(self.contextMenuRemove(_:)))
+
+      result.addItem(NSMenuItem.separator())
+      if isSingleItem {
+        result.addItem(withTitle: String(format: NSLocalizedString("pl_menu.matched_sub", comment: "Matched %d Subtitle(s)"), matchedSubCount))
+        result.addItem(withTitle: NSLocalizedString("pl_menu.add_sub", comment: "Add Subtitle…"), action: #selector(self.contextMenuAddSubtitle(_:)))
+      }
+      result.addItem(withTitle: NSLocalizedString("pl_menu.wrong_sub", comment: "Wrong Subtitle"), action: #selector(self.contextMenuWrongSubtitle(_:)))
 
       result.addItem(NSMenuItem.separator())
       result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
@@ -587,6 +628,7 @@ class PlaylistView: NSView {
 class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
 
   @IBOutlet weak var tableView: NSTableView!
+  @IBOutlet weak var playlistTableView: NSTableView!
 
   var filePath: String = ""
 
@@ -597,6 +639,13 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
 
   func numberOfRows(in tableView: NSTableView) -> Int {
     return PlayerCore.shared.info.matchedSubs[filePath]?.count ?? 0
+  }
+
+  @IBAction func wrongSubBtnAction(_ sender: AnyObject) {
+    PlayerCore.shared.info.matchedSubs[filePath]?.removeAll()
+    if let row = PlayerCore.shared.info.playlist.index(where: { $0.filename == filePath }) {
+      playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
+    }
   }
 
 }

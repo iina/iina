@@ -184,6 +184,9 @@
 "pl_menu.reveal_in_finder" = "Reveal in Finder";
 "pl_menu.add_item" = "Add Item…";
 "pl_menu.clear_playlist" = "Clear Playlist";
+"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
+"pl_menu.add_sub" = "Add Subtitle…";
+"pl_menu.wrong_sub" = "Wrong Subtitle!";
 
 "keymapping.title" = "Key Mapping";
 "keymapping.message" = "Press any key to record.";

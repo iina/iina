@@ -164,10 +164,11 @@ extension Array {
 }
 
 extension Dictionary {
-  mutating func safeAppend<T: Any>(_ value: T, forKey key: Key) where Value == Array<T> {
+  mutating func safeAppend<T: Equatable>(_ value: T, forKey key: Key) where Value == Array<T> {
     if self[key] == nil {
       self[key] = Array<T>()
     }
+    if self[key]!.contains(value) { return }
     self[key]!.append(value)
   }
 }

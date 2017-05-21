@@ -663,11 +663,27 @@ class PlayerCore: NSObject {
     // don't load file if user didn't switch folder
     guard folder.path != info.currentFolder?.path else { return }
     info.currentFolder = folder
-    guard let files = try?
+    guard var files = try?
       FileManager.default.contentsOfDirectory(at: folder,
-                                              includingPropertiesForKeys: nil,
+                                              includingPropertiesForKeys: [.isDirectoryKey],
                                               options: [.skipsHiddenFiles, .skipsPackageDescendants])
       else { return }
+
+    // find subs in sub directories
+    let subExts = Utility.fileExtensionMap[.sub]!
+    let subDirs: [URL]
+    if #available(OSX 10.11, *) {
+      subDirs = files.filter { $0.hasDirectoryPath }
+    } else {
+      subDirs = files.filter { (try? $0.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false }
+    }
+    for subDir in subDirs {
+      guard let contents = try? FileManager.default.contentsOfDirectory(at: subDir,
+                                                                        includingPropertiesForKeys: nil,
+                                                                        options: [.skipsHiddenFiles, .skipsPackageDescendants, .skipsSubdirectoryDescendants])
+        else { continue }
+      files.append(contentsOf: contents.filter { subExts.contains($0.pathExtension) })
+    }
 
     // group by extension
     var groups: [MPVTrack.TrackType: [URL]] = [.video: [], .audio: [], .sub: []]
@@ -728,7 +744,7 @@ class PlayerCore: NSObject {
         }
         if dist <= minDist { distCache[dist]!.append(sub) }
       }
-      if Double(minDist) <= Double(videoName.characters.count) * 0.25 {
+      if Double(minDist) <= min(Double(videoName.characters.count) * 0.25, 15) {
         info.matchedSubs[video.path] = distCache[minDist]
       }
       // add to playlist

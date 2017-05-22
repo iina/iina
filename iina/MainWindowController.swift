@@ -1010,6 +1010,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       playerCore.stop()
       // videoView.stopDisplayLink()
     }
+    playerCore.info.currentFolder = nil
     // disable sleep preventer
     if !playerCore.info.isPaused {
       SleepPreventer.allowSleep()

@@ -26,6 +26,8 @@ class FileGroup {
   var contents: [FileInfo]
   var groups: [FileGroup]
 
+  private let chineseNumbers: [Character] = ["零", "一", "十", "二", "三", "四", "五", "六", "七", "八", "九", "十"]
+
   static func group(files: [URL]) -> FileGroup {
     let fileInfo = files.map { FileInfo($0) }
     let group = FileGroup(prefix: "", contents: fileInfo)
@@ -95,8 +97,12 @@ class FileGroup {
   }
 
   private func stopGrouping(_ chars: [(Character, String)]) -> Bool {
+    var chineseNumberCount = 0
     for (c, _) in chars {
       if c >= "0" && c <= "9" { return true }
+      // chinese characters
+      if chineseNumbers.contains(c) { chineseNumberCount += 1}
+      if chineseNumberCount >= 3 { return true }
     }
     return false
   }

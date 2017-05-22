@@ -690,7 +690,7 @@ class PlayerCore: NSObject {
     // group by extension
     var groups: [MPVTrack.TrackType: [URL]] = [.video: [], .audio: [], .sub: []]
     for file in files {
-      let ext = file.pathExtension
+      let ext = file.pathExtension.lowercased()
       let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
       guard let mediaType = allTypes.first(where: { Utility.fileExtensionMap[$0]!.contains(ext) }) else { continue }
       groups[mediaType]!.append(file)

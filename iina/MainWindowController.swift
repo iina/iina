@@ -283,7 +283,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
 
-  weak var touchBarPlaySlider: NSSlider?
+  weak var touchBarPlaySlider: TouchBarPlaySlider?
   weak var touchBarPlayPauseBtn: NSButton?
   weak var touchBarCurrentPosLabel: DurationDisplayTextField?
 
@@ -1721,7 +1721,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {
       playSlider.doubleValue = percentage
-      touchBarPlaySlider?.doubleValue = percentage
+      touchBarPlaySlider?.setDoubleValueSafely(percentage)
     }
   }
 

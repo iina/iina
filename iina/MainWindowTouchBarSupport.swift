@@ -74,13 +74,14 @@ extension MainWindowController: NSTouchBarDelegate {
 
     case NSTouchBarItemIdentifier.slider:
       let item = NSSliderTouchBarItem(identifier: identifier)
+      item.slider = TouchBarPlaySlider()
       item.slider.cell = TouchBarPlaySliderCell()
       item.slider.minValue = 0
       item.slider.maxValue = 100
       item.slider.target = self
       item.slider.action = #selector(self.touchBarSliderAction(_:))
       item.customizationLabel = "Seek"
-      self.touchBarPlaySlider = item.slider
+      self.touchBarPlaySlider = item.slider as? TouchBarPlaySlider
       return item
 
     case NSTouchBarItemIdentifier.volumeUp,
@@ -189,11 +190,37 @@ extension MainWindowController: NSTouchBarDelegate {
 
 // MARK: - Slider
 
+class TouchBarPlaySlider: NSSlider {
+
+  var isTouching = false
+
+  override func touchesBegan(with event: NSEvent) {
+    isTouching = true
+    super.touchesBegan(with: event)
+  }
+
+  override func touchesEnded(with event: NSEvent) {
+    isTouching = false
+    super.touchesEnded(with: event)
+  }
+
+  func setDoubleValueSafely(_ value: Double) {
+    guard !isTouching else { return }
+    doubleValue = value
+  }
+
+}
+
+
 class TouchBarPlaySliderCell: NSSliderCell {
 
-  let gradient = NSGradient(starting: NSColor(calibratedRed: 0.471, green: 0.8, blue: 0.929, alpha: 1),
+  private let gradient = NSGradient(starting: NSColor(calibratedRed: 0.471, green: 0.8, blue: 0.929, alpha: 1),
                             ending: NSColor(calibratedRed: 0.784, green: 0.471, blue: 0.929, alpha: 1))
-  let solidColor = NSColor.labelColor.withAlphaComponent(0.4)
+  private let solidColor = NSColor.labelColor.withAlphaComponent(0.4)
+
+  var isTouching: Bool {
+    return (self.controlView as? TouchBarPlaySlider)?.isTouching ?? false
+  }
 
   override var knobThickness: CGFloat {
     return 12
@@ -208,13 +235,16 @@ class TouchBarPlaySliderCell: NSSliderCell {
   }
 
   override func knobRect(flipped: Bool) -> NSRect {
-    let frameRect = controlView!.frame
-    let barRect = super.barRect(flipped: flipped)
-    let actualWidth = barRect.width - knobThickness
-    return NSRect(x: barRect.origin.x + actualWidth * CGFloat(doubleValue/100),
-                  y: frameRect.origin.y,
-                  width: knobThickness,
-                  height: frameRect.height)
+    let superKnob = super.knobRect(flipped: flipped)
+    if isTouching {
+      return superKnob
+    } else {
+      let remainingKnobWidth = superKnob.width - knobThickness
+      return NSRect(x: superKnob.origin.x + remainingKnobWidth * CGFloat(doubleValue/100),
+                    y: superKnob.origin.y,
+                    width: knobThickness,
+                    height: superKnob.height)
+    }
   }
 
   override func drawKnob(_ knobRect: NSRect) {

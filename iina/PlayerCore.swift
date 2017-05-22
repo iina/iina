@@ -68,6 +68,8 @@ class PlayerCore: NSObject {
       mainWindow = MainWindowController()
     }
     info.currentURL = url
+    // clear currentFolder since playlist is cleared, so need to auto-load again in playerCore#fileStarted
+    info.currentFolder = nil
     info.isNetworkResource = isNetwork
     mainWindow!.showWindow(nil)
     mainWindow!.windowDidOpen()

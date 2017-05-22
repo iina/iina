@@ -110,7 +110,7 @@ struct Preference {
 
     // Subtitle
 
-    static let subAutoLoad = "subAutoLoad"
+    static let subAutoLoadIINA = "subAutoLoadIINA"
     static let ignoreAssStyles = "ignoreAssStyles"
     static let subOverrideLevel = "subOverrideLevel"
     static let subTextFont = "subTextFont"
@@ -252,6 +252,20 @@ struct Preference {
     case windowSize = 0
     case fullscreen
     case none
+  }
+
+  enum IINAAutoLoadAction: Int {
+    case disabled = 0
+    case mpvFuzzy
+    case iina
+
+    func shouldLoadSubsContainingVideoName() -> Bool {
+      return self != .disabled
+    }
+
+    func shouldLoadSubsMatchedByIINA() -> Bool {
+      return self == .iina
+    }
   }
 
   enum AutoLoadAction: Int {
@@ -399,7 +413,7 @@ struct Preference {
     Key.spdifDTS: false,
     Key.spdifDTSHD: false,
 
-    Key.subAutoLoad: AutoLoadAction.fuzzy.rawValue,
+    Key.subAutoLoadIINA: IINAAutoLoadAction.iina.rawValue,
     Key.ignoreAssStyles: false,
     Key.subOverrideLevel: SubOverrideLevel.strip.rawValue,
     Key.subTextFont: "sans-serif",

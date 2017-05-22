@@ -736,6 +736,9 @@ class PlayerCore: NSObject {
     let series = FileGroup.group(files: groups[.video]!)
     info.commonPrefixes = series.flatten()
 
+    // get auto load option
+    let subAutoLoadOption: Preference.IINAAutoLoadAction = Preference.IINAAutoLoadAction(rawValue: ud.integer(forKey: Preference.Key.subAutoLoadIINA)) ?? .iina
+
     // match sub for video files
     var addedCurrentVideo = false
     for video in groups[.video]! {
@@ -754,10 +757,16 @@ class PlayerCore: NSObject {
         }
         if dist <= minDist { distCache[dist]!.append(sub) }
       }
-      if Double(minDist) <= min(Double(videoName.characters.count) * 0.25, 15) {
-        info.matchedSubs[video.path] = distCache[minDist]
+      // add subtitles to matched subs
+      if subAutoLoadOption.shouldLoadSubsMatchedByIINA() {
+        // the edit distance should be < 15 or 25% of video filename
+        if Double(minDist) <= min(Double(videoName.characters.count) * 0.25, 15) {
+          info.matchedSubs[video.path] = distCache[minDist]
+        }
       }
-      subsContainingVideoName.forEach { info.matchedSubs.safeAppend($0, forKey: video.path) }
+      if subAutoLoadOption.shouldLoadSubsContainingVideoName() {
+        subsContainingVideoName.forEach { info.matchedSubs.safeAppend($0, forKey: video.path) }
+      }
       // add to playlist
       if video == info.currentURL {
         addedCurrentVideo = true

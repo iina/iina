@@ -592,6 +592,8 @@ class PlayerCore: NSObject {
       for sub in matchedSubs {
         loadExternalSubFile(sub)
       }
+      // set sub to the first one
+      setTrack(1, forType: .sub)
     }
   }
 
@@ -698,7 +700,7 @@ class PlayerCore: NSObject {
 
     // natural sort
     var naturalSegments: [URL: [String]] = [:]
-    let getNaturalSegments: ((String) -> [String]) = { string in
+    let getSegments: ((String) -> [String]) = { string in
       var segments: [String] = []
       var currentSegemnt = ""
       let firstChar = string.characters.first!
@@ -716,7 +718,7 @@ class PlayerCore: NSObject {
       segments.append(currentSegemnt)
       return segments
     }
-    groups[.video]!.forEach { naturalSegments[$0] = getNaturalSegments($0.deletingPathExtension().lastPathComponent) }
+    groups[.video]!.forEach { naturalSegments[$0] = getSegments($0.deletingPathExtension().lastPathComponent) }
     groups[.video]!.sort { url1, url2 -> Bool in
       let name1 = naturalSegments[url1]!
       let name2 = naturalSegments[url2]!
@@ -741,8 +743,11 @@ class PlayerCore: NSObject {
       let videoName = video.deletingPathExtension().lastPathComponent
       var minDist = UInt.max
       var distCache: [UInt: [URL]] = [:]
+      var subsContainingVideoName: [URL] = []
       for sub in subtitles {
-        let dist = ObjcUtils.levDistance(videoName, and: sub.deletingPathExtension().lastPathComponent)
+        let subName = sub.deletingPathExtension().lastPathComponent
+        if subName.contains(videoName) { subsContainingVideoName.append(sub) }
+        let dist = ObjcUtils.levDistance(videoName, and: subName)
         if dist < minDist {
           minDist = dist
           distCache[dist] = []
@@ -752,6 +757,7 @@ class PlayerCore: NSObject {
       if Double(minDist) <= min(Double(videoName.characters.count) * 0.25, 15) {
         info.matchedSubs[video.path] = distCache[minDist]
       }
+      subsContainingVideoName.forEach { info.matchedSubs.safeAppend($0, forKey: video.path) }
       // add to playlist
       if video == info.currentURL {
         addedCurrentVideo = true

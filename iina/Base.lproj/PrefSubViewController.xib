@@ -247,7 +247,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVX-kc-a0v">
-                                                    <rect key="frame" x="64" y="9" width="38" height="19"/>
+                                                    <rect key="frame" x="64" y="8" width="38" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="38" id="CwO-Sn-Rrb"/>
                                                     </constraints>
@@ -273,7 +273,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYk-CC-Zgh">
-                                                    <rect key="frame" x="237" y="9" width="38" height="19"/>
+                                                    <rect key="frame" x="237" y="8" width="38" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="38" id="AMs-2A-3qg"/>
                                                     </constraints>

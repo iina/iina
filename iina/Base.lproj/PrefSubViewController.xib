@@ -19,7 +19,7 @@
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="480" height="730"/>
             <subviews>
-                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="alK-5O-zTG">
+                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="alK-5O-zTG">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="730"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="tkO-EZ-Nb9">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="730"/>
@@ -247,7 +247,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVX-kc-a0v">
-                                                    <rect key="frame" x="64" y="8" width="38" height="19"/>
+                                                    <rect key="frame" x="64" y="9" width="38" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="38" id="CwO-Sn-Rrb"/>
                                                     </constraints>
@@ -273,7 +273,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYk-CC-Zgh">
-                                                    <rect key="frame" x="237" y="8" width="38" height="19"/>
+                                                    <rect key="frame" x="237" y="9" width="38" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="38" id="AMs-2A-3qg"/>
                                                     </constraints>
@@ -960,14 +960,14 @@
                         </constraints>
                     </clipView>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="DWT-bx-9wc" secondAttribute="trailing" id="CAw-bd-m9f"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DWT-bx-9wc" secondAttribute="trailing" priority="750" constant="11" id="CAw-bd-m9f"/>
                     </constraints>
-                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="tPL-7H-hvw">
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="tPL-7H-hvw">
                         <rect key="frame" x="0.0" y="714" width="480" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="2kq-OT-dqq">
-                        <rect key="frame" x="464" y="0.0" width="16" height="730"/>
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" controlSize="small" horizontal="NO" id="2kq-OT-dqq">
+                        <rect key="frame" x="466" y="0.0" width="14" height="730"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>

@@ -358,8 +358,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let row = playlistTableView.row(for: sender)
     guard let vc = subPopover.contentViewController as? SubPopoverViewController else { return }
     vc.filePath = playerCore.info.playlist[row].filename
-    subPopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .maxY)
     vc.tableView.reloadData()
+    subPopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .maxY)
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {

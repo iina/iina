@@ -17,7 +17,7 @@ class FileGroup {
 
     init(_ url: URL) {
       self.url = url
-      self.filename = url.lastPathComponent
+      self.filename = url.deletingPathExtension().lastPathComponent
       self.characters = [Character](self.filename.characters)
     }
   }
@@ -42,14 +42,20 @@ class FileGroup {
   }
 
   private func tryGroupFiles() {
+    guard contents.count >= 3 else { return }
+
     var tempGroup: [String: [FileInfo]] = [:]
     var currChars: [(Character, String)] = []
     var i = prefix.characters.count
 
-    while tempGroup.count < 2 {
+    var shouldContinue = true
+    while tempGroup.count < 2 && shouldContinue {
       var lastPrefix = ""
       for finfo in contents {
-        if i >= finfo.characters.count { continue }
+        if i >= finfo.characters.count {
+          shouldContinue = false
+          continue
+        }
         let c = finfo.characters[i]
         var p = prefix
         p.append(c)
@@ -73,9 +79,7 @@ class FileGroup {
       groups = tempGroup.map { FileGroup(prefix: $0, contents: $1) }
       // continue
       for g in groups {
-        if g.contents.count >= 3 {
-          g.tryGroupFiles()
-        }
+        g.tryGroupFiles()
       }
     }
   }

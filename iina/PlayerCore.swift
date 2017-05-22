@@ -718,7 +718,6 @@ class PlayerCore: NSObject {
     groups[.video]!.sort { url1, url2 -> Bool in
       let name1 = naturalSegments[url1]!
       let name2 = naturalSegments[url2]!
-      print(name1, name2)
       return name1.lexicographicallyPrecedes(name2) { a, b in
         if let inta = Int(a), let intb = Int(b) {
           return inta < intb

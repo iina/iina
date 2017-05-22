@@ -477,7 +477,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   // MARK: Audio tab
 
   @IBAction func loadExternalAudioAction(_ sender: NSButton) {
-    let result = Utility.quickOpenPanel(title: "Load external audio file", isDir: false) { url in
+    let currentDir = playerCore.info.currentURL?.deletingLastPathComponent()
+    let result = Utility.quickOpenPanel(title: "Load external audio file", isDir: false, dir: currentDir) { url in
       self.playerCore.loadExternalAudioFile(url)
     }
     if result {
@@ -537,7 +538,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   // MARK: Sub tab
 
   @IBAction func loadExternalSubAction(_ sender: NSButton) {
-    let result = Utility.quickOpenPanel(title: "Load external subtitle", isDir: false) { url in
+    let currentDir = playerCore.info.currentURL?.deletingLastPathComponent()
+    let result = Utility.quickOpenPanel(title: "Load external subtitle", isDir: false, dir: currentDir) { url in
       self.playerCore.loadExternalSubFile(url)
     }
     if result {

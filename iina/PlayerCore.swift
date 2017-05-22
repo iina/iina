@@ -698,6 +698,9 @@ class PlayerCore: NSObject {
       info.isPaused = pause
       DispatchQueue.main.async {
         mw.updatePlayButtonState(pause ? NSOffState : NSOnState)
+        if #available(OSX 10.12.2, *) {
+          mw.updateTouchBarPlayBtn()
+        }
       }
 
     case .volume:

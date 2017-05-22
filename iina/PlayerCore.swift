@@ -695,6 +695,7 @@ class PlayerCore: NSObject {
     }
 
     // natural sort
+    var naturalSegments: [URL: [String]] = [:]
     let getNaturalSegments: ((String) -> [String]) = { string in
       var segments: [String] = []
       var currentSegemnt = ""
@@ -710,11 +711,14 @@ class PlayerCore: NSObject {
           currentSegemnt.append(char)
         }
       }
+      segments.append(currentSegemnt)
       return segments
     }
+    groups[.video]!.forEach { naturalSegments[$0] = getNaturalSegments($0.deletingPathExtension().lastPathComponent) }
     groups[.video]!.sort { url1, url2 -> Bool in
-      let name1 = getNaturalSegments(url1.deletingPathExtension().lastPathComponent)
-      let name2 = getNaturalSegments(url2.deletingPathExtension().lastPathComponent)
+      let name1 = naturalSegments[url1]!
+      let name2 = naturalSegments[url2]!
+      print(name1, name2)
       return name1.lexicographicallyPrecedes(name2) { a, b in
         if let inta = Int(a), let intb = Int(b) {
           return inta < intb

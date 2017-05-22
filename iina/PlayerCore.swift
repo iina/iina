@@ -744,6 +744,7 @@ class PlayerCore: NSObject {
     for video in groups[.video]! {
       // match subtitle
       let videoName = video.deletingPathExtension().lastPathComponent
+      let videoPath = video.path
       var minDist = UInt.max
       var distCache: [UInt: [URL]] = [:]
       var subsContainingVideoName: [URL] = []
@@ -761,21 +762,35 @@ class PlayerCore: NSObject {
       if subAutoLoadOption.shouldLoadSubsMatchedByIINA() {
         // the edit distance should be < 15 or 25% of video filename
         if Double(minDist) <= min(Double(videoName.characters.count) * 0.25, 15) {
-          info.matchedSubs[video.path] = distCache[minDist]
+          info.matchedSubs[videoPath] = distCache[minDist]
         }
       }
       if subAutoLoadOption.shouldLoadSubsContainingVideoName() {
-        subsContainingVideoName.forEach { info.matchedSubs.safeAppend($0, forKey: video.path) }
+        subsContainingVideoName.forEach { info.matchedSubs.safeAppend($0, forKey: videoPath) }
+      }
+      // handle priority strings
+      if let priorString = ud.string(forKey: Preference.Key.subAutoLoadPriorityString),
+        let matchedSubs = info.matchedSubs[videoPath] {
+        let stringList = priorString.components(separatedBy: ",").filter { !$0.isEmpty }
+        matchedSubs.enumerated().flatMap { (index, sub) -> Int? in
+          // get indeces of subs that contains prior string
+          let subName = sub.deletingPathExtension().lastPathComponent
+          return stringList.contains(where: { subName.contains($0) }) ? index : nil
+        }.forEach {
+          // move the sub with index to first
+          let s = info.matchedSubs[videoPath]!.remove(at: $0)
+          info.matchedSubs[videoPath]!.insert(s, at: 0)
+        }
       }
       // add to playlist
       if video == info.currentURL {
         addedCurrentVideo = true
       } else if addedCurrentVideo {
-        addToPlaylist(video.path)
+        addToPlaylist(videoPath)
       } else {
         let count = mpvController.getInt(MPVProperty.playlistCount)
         let current = mpvController.getInt(MPVProperty.playlistPos)
-        addToPlaylist(video.path)
+        addToPlaylist(videoPath)
         playlistMove(count, to: current)
       }
     }

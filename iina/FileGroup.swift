@@ -8,6 +8,9 @@
 
 import Foundation
 
+fileprivate let GroupPrefixMinLength = 7
+fileprivate let GroupFilenameMaxLength = 12
+
 class FileGroup {
 
   class FileInfo {
@@ -92,8 +95,11 @@ class FileGroup {
         for g in group.groups {
           search(g)
         }
-      } else if group.prefix.characters.count >= 5 {
-        result[group.prefix] = group.contents.map { $0.url.path }
+      } else {
+        let filenameMaxLength = group.contents.reduce(0, { max($0, $1.characters.count) })
+        if group.prefix.characters.count >= GroupPrefixMinLength && filenameMaxLength > GroupFilenameMaxLength {
+          result[group.prefix] = group.contents.map { $0.url.path }
+        }
       }
     }
     search(self)

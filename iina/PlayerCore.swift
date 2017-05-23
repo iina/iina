@@ -667,26 +667,44 @@ class PlayerCore: NSObject {
     // don't load file if user didn't switch folder
     guard folder.path != info.currentFolder?.path else { return }
     info.currentFolder = folder
-    guard var files = try?
-      FileManager.default.contentsOfDirectory(at: folder,
-                                              includingPropertiesForKeys: [.isDirectoryKey],
-                                              options: [.skipsHiddenFiles, .skipsPackageDescendants])
-      else { return }
 
-    // find subs in sub directories
+    // search subs
+    let fm = FileManager.default
+    let searchOptions: FileManager.DirectoryEnumerationOptions = [.skipsHiddenFiles, .skipsPackageDescendants, .skipsSubdirectoryDescendants]
     let subExts = Utility.fileExtensionMap[.sub]!
-    let subDirs: [URL]
-    if #available(OSX 10.11, *) {
-      subDirs = files.filter { $0.hasDirectoryPath }
-    } else {
-      subDirs = files.filter { (try? $0.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false }
-    }
-    for subDir in subDirs {
-      guard let contents = try? FileManager.default.contentsOfDirectory(at: subDir,
-                                                                        includingPropertiesForKeys: nil,
-                                                                        options: [.skipsHiddenFiles, .skipsPackageDescendants, .skipsSubdirectoryDescendants])
-        else { continue }
-      files.append(contentsOf: contents.filter { subExts.contains($0.pathExtension) })
+    var subDirs: [URL] = []
+
+    // search subs in current directory
+    guard let files = try? fm.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil, options: searchOptions) else { return }
+
+    // search subs in other directories
+    let rawUserDefinedSearchPaths = ud.string(forKey: Preference.Key.subAutoLoadSearchPath) ?? "./*"
+    let userDefinedSearchPaths = rawUserDefinedSearchPaths.components(separatedBy: ":").filter { !$0.isEmpty }
+    for path in userDefinedSearchPaths {
+      var p = path
+      // handle absolute paths
+      if path.hasPrefix("/") {
+        subDirs.append(URL(fileURLWithPath: path, isDirectory: true))
+      }
+      if path.hasPrefix("~") {
+        subDirs.append(URL(fileURLWithPath: NSString(string: path).expandingTildeInPath, isDirectory: true))
+      }
+      // handle wildcards
+      if path.hasSuffix("/") { p.deleteLast(1) }
+      if path.hasSuffix("/*") {  // only check wildcard at the end
+        p.deleteLast(2)
+        let pathURL = folder.appendingPathComponent(p, isDirectory: true)
+        // append all sub dirs
+        if let contents = try? fm.contentsOfDirectory(at: pathURL, includingPropertiesForKeys: [.isDirectoryKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
+          if #available(OSX 10.11, *) {
+            subDirs.append(contentsOf: contents.filter { $0.hasDirectoryPath })
+          } else {
+            subDirs.append(contentsOf: contents.filter { (try? $0.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false })
+          }
+        }
+      } else {
+        subDirs.append(folder.appendingPathComponent(p, isDirectory: true))
+      }
     }
 
     // group by extension
@@ -730,7 +748,14 @@ class PlayerCore: NSObject {
         }
       }
     }
-    let subtitles = groups[.sub]!
+
+    // get all possible sub files
+    var subtitles = groups[.sub]!
+    for subDir in subDirs {
+      if let contents = try? fm.contentsOfDirectory(at: subDir, includingPropertiesForKeys: nil, options: searchOptions) {
+        subtitles.append(contentsOf: contents.filter { subExts.contains($0.pathExtension) })
+      }
+    }
 
     // grop video files
     let series = FileGroup.group(files: groups[.video]!)

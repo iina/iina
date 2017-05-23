@@ -112,6 +112,7 @@ struct Preference {
 
     static let subAutoLoadIINA = "subAutoLoadIINA"
     static let subAutoLoadPriorityString = "subAutoLoadPriorityString"
+    static let subAutoLoadSearchPath = "subAutoLoadSearchPath"
     static let ignoreAssStyles = "ignoreAssStyles"
     static let subOverrideLevel = "subOverrideLevel"
     static let subTextFont = "subTextFont"
@@ -416,6 +417,7 @@ struct Preference {
 
     Key.subAutoLoadIINA: IINAAutoLoadAction.iina.rawValue,
     Key.subAutoLoadPriorityString: "",
+    Key.subAutoLoadSearchPath: "./*",
     Key.ignoreAssStyles: false,
     Key.subOverrideLevel: SubOverrideLevel.strip.rawValue,
     Key.subTextFont: "sans-serif",

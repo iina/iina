@@ -337,6 +337,11 @@ extension String {
       return self.data(using: .utf8)!.md5
     }
   }
+
+  mutating func deleteLast(_ num: Int) {
+    guard num <= characters.count else { self = ""; return }
+    self = self.substring(to: self.index(endIndex, offsetBy: -num))
+  }
 }
 
 

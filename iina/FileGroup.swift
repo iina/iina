@@ -11,19 +11,54 @@ import Foundation
 fileprivate let GroupPrefixMinLength = 7
 fileprivate let GroupFilenameMaxLength = 12
 
-class FileGroup {
 
-  class FileInfo {
-    var filename: String
-    var url: URL
-    var characters: [Character]
+class FileInfo: Hashable {
+  var url: URL
+  var path: String
+  var filename: String
+  var ext: String
+  var characters: [Character]
+  var dist: [FileInfo: UInt] = [:]
+  var minDist: [FileInfo] = []
+  var segments: [String] = []
 
-    init(_ url: URL) {
-      self.url = url
-      self.filename = url.deletingPathExtension().lastPathComponent
-      self.characters = [Character](self.filename.characters)
-    }
+  init(_ url: URL) {
+    self.url = url
+    self.path = url.path
+    self.ext = url.pathExtension
+    self.filename = url.deletingPathExtension().lastPathComponent
+    self.characters = [Character](self.filename.characters)
+    self.getSegments()
   }
+
+  private func getSegments() {
+    var currentSegemnt = ""
+    let firstChar = filename.characters.first!
+    var currentSegmentIsDigit = firstChar >= "0" && firstChar <= "9"
+    for char in filename.characters {
+      let isDigit = char >= "0" && char <= "9"
+      if isDigit != currentSegmentIsDigit {
+        segments.append(currentSegemnt)
+        currentSegemnt = String(char)
+        currentSegmentIsDigit = isDigit
+      } else {
+        currentSegemnt.append(char)
+      }
+    }
+    segments.append(currentSegemnt)
+  }
+
+  var hashValue: Int {
+    return path.hashValue
+  }
+
+  static func == (lhs: FileInfo, rhs: FileInfo) -> Bool {
+    return lhs.path == rhs.path
+  }
+}
+
+
+class FileGroup {
 
   var prefix: String
   var contents: [FileInfo]
@@ -31,9 +66,8 @@ class FileGroup {
 
   private let chineseNumbers: [Character] = ["零", "一", "十", "二", "三", "四", "五", "六", "七", "八", "九", "十"]
 
-  static func group(files: [URL]) -> FileGroup {
-    let fileInfo = files.map { FileInfo($0) }
-    let group = FileGroup(prefix: "", contents: fileInfo)
+  static func group(files: [FileInfo]) -> FileGroup {
+    let group = FileGroup(prefix: "", contents: files)
     group.tryGroupFiles()
     return group
   }

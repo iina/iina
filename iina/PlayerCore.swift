@@ -708,39 +708,17 @@ class PlayerCore: NSObject {
     }
 
     // group by extension
-    var groups: [MPVTrack.TrackType: [URL]] = [.video: [], .audio: [], .sub: []]
+    var groups: [MPVTrack.TrackType: [FileInfo]] = [.video: [], .audio: [], .sub: []]
+    let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
     for file in files {
-      let ext = file.pathExtension.lowercased()
-      let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
-      guard let mediaType = allTypes.first(where: { Utility.fileExtensionMap[$0]!.contains(ext) }) else { continue }
-      groups[mediaType]!.append(file)
+      let fileInfo = FileInfo(file)
+      guard let mediaType = allTypes.first(where: { Utility.fileExtensionMap[$0]!.contains(fileInfo.ext) }) else { continue }
+      groups[mediaType]!.append(fileInfo)
     }
 
     // natural sort
-    var naturalSegments: [URL: [String]] = [:]
-    let getSegments: ((String) -> [String]) = { string in
-      var segments: [String] = []
-      var currentSegemnt = ""
-      let firstChar = string.characters.first!
-      var currentSegmentIsDigit = firstChar >= "0" && firstChar <= "9"
-      for char in string.characters {
-        let isDigit = char >= "0" && char <= "9"
-        if isDigit != currentSegmentIsDigit {
-          segments.append(currentSegemnt)
-          currentSegemnt = String(char)
-          currentSegmentIsDigit = isDigit
-        } else {
-          currentSegemnt.append(char)
-        }
-      }
-      segments.append(currentSegemnt)
-      return segments
-    }
-    groups[.video]!.forEach { naturalSegments[$0] = getSegments($0.deletingPathExtension().lastPathComponent) }
-    groups[.video]!.sort { url1, url2 -> Bool in
-      let name1 = naturalSegments[url1]!
-      let name2 = naturalSegments[url2]!
-      return name1.lexicographicallyPrecedes(name2) { a, b in
+    groups[.video]!.sort { file1, file2 -> Bool in
+      return file1.segments.lexicographicallyPrecedes(file2.segments) { a, b in
         if let inta = Int(a), let intb = Int(b) {
           return inta < intb
         } else {
@@ -753,7 +731,7 @@ class PlayerCore: NSObject {
     var subtitles = groups[.sub]!
     for subDir in subDirs {
       if let contents = try? fm.contentsOfDirectory(at: subDir, includingPropertiesForKeys: nil, options: searchOptions) {
-        subtitles.append(contentsOf: contents.filter { subExts.contains($0.pathExtension) })
+        subtitles.append(contentsOf: contents.filter { subExts.contains($0.pathExtension) }.map { FileInfo($0) })
       }
     }
 
@@ -764,38 +742,37 @@ class PlayerCore: NSObject {
     // get auto load option
     let subAutoLoadOption: Preference.IINAAutoLoadAction = Preference.IINAAutoLoadAction(rawValue: ud.integer(forKey: Preference.Key.subAutoLoadIINA)) ?? .iina
 
+    // calculate edit distance
+    for sub in subtitles {
+      var minDistToVideo: UInt = .max
+      for video in groups[.video]! {
+        let dist = ObjcUtils.levDistance(video.filename, and: sub.filename)
+        sub.dist[video] = dist
+        video.dist[sub] = dist
+        if dist < minDistToVideo { minDistToVideo = dist }
+      }
+      sub.minDist = groups[.video]!.filter { sub.dist[$0] == minDistToVideo }
+    }
+
     // match sub for video files
     var addedCurrentVideo = false
     for video in groups[.video]! {
-      // match subtitle
-      let videoName = video.deletingPathExtension().lastPathComponent
-      let videoPath = video.path
-      var minDist = UInt.max
-      var distCache: [UInt: [URL]] = [:]
-      var subsContainingVideoName: [URL] = []
-      for sub in subtitles {
-        let subName = sub.deletingPathExtension().lastPathComponent
-        if subName.contains(videoName) { subsContainingVideoName.append(sub) }
-        let dist = ObjcUtils.levDistance(videoName, and: subName)
-        if dist < minDist {
-          minDist = dist
-          distCache[dist] = []
-        }
-        if dist <= minDist { distCache[dist]!.append(sub) }
-      }
-      // add subtitles to matched subs
+      // match video and sub if both are the closest one to each other
       if subAutoLoadOption.shouldLoadSubsMatchedByIINA() {
-        // the edit distance should be < 15 or 25% of video filename
-        if Double(minDist) <= min(Double(videoName.characters.count) * 0.25, 15) {
-          info.matchedSubs[videoPath] = distCache[minDist]
-        }
+        let minDistToSub = video.dist.reduce(UInt.max, { min($0.0, $0.1.value) })
+        subtitles
+          .filter { video.dist[$0]! == minDistToSub && $0.minDist.contains(video) }
+          .forEach { info.matchedSubs.safeAppend($0.url, forKey: video.path) }
       }
+      // add subs that contains video name
       if subAutoLoadOption.shouldLoadSubsContainingVideoName() {
-        subsContainingVideoName.forEach { info.matchedSubs.safeAppend($0, forKey: videoPath) }
+        subtitles
+          .filter { $0.filename.contains(video.filename) }
+          .forEach { info.matchedSubs.safeAppend($0.url, forKey: video.path) }
       }
-      // handle priority strings
+      // move the sub to front if it contains priority strings
       if let priorString = ud.string(forKey: Preference.Key.subAutoLoadPriorityString),
-        let matchedSubs = info.matchedSubs[videoPath] {
+        let matchedSubs = info.matchedSubs[video.path] {
         let stringList = priorString.components(separatedBy: ",").filter { !$0.isEmpty }
         matchedSubs.enumerated().flatMap { (index, sub) -> Int? in
           // get indeces of subs that contains prior string
@@ -803,19 +780,20 @@ class PlayerCore: NSObject {
           return stringList.contains(where: { subName.contains($0) }) ? index : nil
         }.forEach {
           // move the sub with index to first
-          let s = info.matchedSubs[videoPath]!.remove(at: $0)
-          info.matchedSubs[videoPath]!.insert(s, at: 0)
+          let s = info.matchedSubs[video.path]!.remove(at: $0)
+          info.matchedSubs[video.path]!.insert(s, at: 0)
         }
       }
+
       // add to playlist
-      if video == info.currentURL {
+      if video.url.path == info.currentURL!.path {
         addedCurrentVideo = true
       } else if addedCurrentVideo {
-        addToPlaylist(videoPath)
+        addToPlaylist(video.path)
       } else {
         let count = mpvController.getInt(MPVProperty.playlistCount)
         let current = mpvController.getInt(MPVProperty.playlistPos)
-        addToPlaylist(videoPath)
+        addToPlaylist(video.path)
         playlistMove(count, to: current)
       }
     }

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "ObjcUtils.h"
 
+#import <wchar.h>
+
 static inline int min(int a, int b, int c) {
   int m = a;
   if (b < m) m = b;
@@ -39,40 +41,34 @@ static inline int min(int a, int b, int c) {
 }
 
 + (NSUInteger)levDistance:(NSString *)str0 and:(NSString *)str1 {
-  int i, j, d1, d2, d3;
-  const char *cstr0 = str0.UTF8String;
-  const char *cstr1 = str1.UTF8String;
-  int len0 = (int)str0.length;
-  int len1 = (int)str1.length;
+  int i, j;
 
-  int **dist = malloc(sizeof(int*) * len0);
-  for (i = 0; i < len0; i++) {
-    dist[i] = malloc(sizeof(int*) * len1);
-    memset(dist[i], 0, sizeof(int) * len1);
-  }
+  str0 = [@" " stringByAppendingString:str0];
+  str1 = [@" " stringByAppendingString:str1];
+  const wchar_t *cstr0 = (const wchar_t *)[str0 cStringUsingEncoding:NSUTF32LittleEndianStringEncoding];
+  const wchar_t *cstr1 = (const wchar_t *)[str1 cStringUsingEncoding:NSUTF32LittleEndianStringEncoding];
+  size_t len0 = wcslen(cstr0);
+  size_t len1 = wcslen(cstr1);
 
-  for (i = 0; i < len0; i++) {
+  int dist[len0 + 1][len1 + 1];
+  for (i = 0; i <= len0; ++i)
+    memset(dist[i], 0, sizeof(int) * (len1 + 1));
+
+  for (i = 0; i <= len0; ++i)
+    for (j = 0; j <= len1; ++j)
+        dist[i][j] = 0;
+
+  for (i = 1; i <= len0; ++i)
     dist[i][0] = i;
-  }
-  for (i = 0; i < len1; i++) {
-    dist[0][i] = i;
-  }
-  for (i = 1; i < len0; i++) {
-    for (j = 1; j < len1; j++) {
-      d1 = dist[i-1][j] + 1;
-      d2 = dist[i][j-1] + 1;
-      d3 = dist[i-1][j-1] + (cstr0[i] == cstr1[j] ? 0 : 1);
-      dist[i][j] = min(d1, d2, d3);
-    }
-  }
-  int result = dist[len0 - 1][len1 - 1];
-  for (i = 0; i < len0; i++) {
-    free(dist[i]);
-  }
-  free(dist);
+  for (j = 1; j <= len1; ++j)
+    dist[0][j] = j;
 
-  return result;
+  for (j = 1; j <= len1; ++j)
+    for (i = 1; i <= len0; ++i)
+        dist[i][j] = min(dist[i - 1][j] + 1,
+                         dist[i][j - 1] + 1,
+                         dist[i - 1][j - 1] + (cstr0[i] != cstr1[j]));
+  return dist[len0][len1];
 }
-
 
 @end

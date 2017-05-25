@@ -1,0 +1,192 @@
+/* 
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+// Common
+"general.on" = "Выключить";
+"general.off" = "Включить";
+"general.login" = "Авторизоваться";
+"general.logout" = "Выйти";
+"general.ok" = "OK";
+"general.cancel" = "Отмена";
+"general.username" = "Имя пользователя";
+"general.password" = "Пароль";
+
+// PlaylistViewController.swift
+"playlist.playlist_cap" = "ПЛЕЙЛИСТ";
+"playlist.chapter_cap" = "ГЛАВЫ";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "Буферизация... %d%%";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "По умолчанию";
+"quicksetting.item_none" = "Нет";
+
+// OSDMessage.swift
+"osd.pause" = "Пауза";
+"osd.resume" = "Возобновить";
+"osd.volume" = "Громкость: %i";
+"osd.speed" = "Скорость: %.2fx";
+"osd.aspect" = "Соотношение сторон: %@";
+"osd.crop" = "Кадрирование: %@";
+"osd.rotate" = "Поворот: %i°";
+"osd.deinterlace" = "Деинтерлейс: %@";
+"osd.audio_delay.nodelay" = "Задержка звука: нет задержки";
+"osd.audio_delay.later" = "Задержка звука: %.2fs Позже";
+"osd.audio_delay.earlier" = "Задержка звука: %.2fs Ранее";
+"osd.sub_delay.nodelay" = "Задержка субтитров: нет задержки";
+"osd.sub_delay.later" = "Задержка субтитров: %.2fs Позже";
+"osd.sub_delay.earlier" = "Задержка субтитров: %.2fs Ранее";
+"osd.subtitle_pos" = "Позиция субтитров: %.1f";
+"osd.mute" = "Отключение";
+"osd.unmute" = "Включение звука";
+"osd.screenshot" = "Снимок экрана";
+"osd.abloop.a" = "AB-повтор: A";
+"osd.abloop.b" = "AB-повтор: B";
+"osd.abloop.clear" = "AB-повтор: очищен";
+"osd.stop" = "Стоп";
+"osd.chapter" = "Глава: %@";
+"osd.subtitle_scale" = "Масштаб субтитров: %.2fx";
+"osd.add_to_playlist" = "Добавлено %i файлов в плейлист";
+"osd.clear_playlist" = "Плейлист очищен";
+"osd.video_eq.contrast" = "Контрастность: %i";
+"osd.video_eq.gamma" = "Гамма: %i";
+"osd.video_eq.hue" = "Оттенок: %i";
+"osd.video_eq.saturation" = "Насыщенность: %i";
+"osd.video_eq.brightness" = "Яркость: %i";
+"osd.find_online_sub" = "Поиск субтитров в интернете...";
+"osd.sub_not_found" = "Субтитры не найдены";
+"osd.sub_found" = "Найдено %d субтитров. Загрузка...";
+"osd.sub_downloaded" = "Субтитры загружены";
+"osd.sub_saved" = "Субтитры сохранены";
+"osd.network_error" = "Ошибка сети";
+"osd.file_error" = "Ошибка при чтении файла";
+"osd.cannot_login" = "Не могу войти";
+"osd.canceled" = "Отменено";
+
+"update.title_update_found" = "Найдено обновление";
+"update.title_no_update" = "нет обновлений";
+"update.title_error" = "Ощибка";
+"update.update_found" = "Обнаружена новая версия! IINA все еще находится в альфа-версии, поэтому вам рекомендуется остаться с последней версией. Пожалуйста, скачайте с сайта или github::";
+"update.no_update" = "Вы используете последнюю версию.";
+"update.check_failed" = "Не удалось проверить обновления. Вероятно, вы используете старую версию. Пожалуйста, проверьте сайт или github.";
+"update.new_version" = "Новая версия:";
+"update.dl_from_website" = "Перейти на сайт";
+"update.dl_from_github" = "Перейти на Github";
+
+"preference.title" = "Найтройки";
+"preference.general" = "Основные";
+"preference.ui" = "UI";
+"preference.codec" = "Кодек";
+"preference.subtitle" = "Субтитры";
+"preference.network" = "Сеть";
+"preference.control" = "Управление";
+"preference.keybindings" = "Сочетания клавиш";
+"preference.advanced" = "Продвинутые";
+"preference.scripts" = "Скрипты";
+"preference.not_logged_in" = "Не вошли";
+"preference.logged_in_as" = "Вы вошли как %@";
+
+"menu.volume"= "Громкость: %d";
+"menu.audio_delay" = "Задержка звука: %.2fs";
+"menu.sub_delay" = "Задержка субтитров: %.2fs";
+"menu.fullscreen" = "Войти в полноэкранный режим";
+"menu.exit_fullscreen" = "Выйти из полноэкранного режима";
+"menu.pip" = "Перейти в картинка-в-картинке";
+"menu.exit_pip" = "Выйти из картинка-в-картинке";
+"menu.pause" = "Пауза";
+"menu.resume" = "Возобновить";
+
+"track.none" = "<Нет>";
+
+// Alerts
+"alert.title_error" = "Ошибка";
+"alert.title_warning" = "Предупреждение";
+"alert.title_info" = "Информация";
+
+"alert.fatal_error" = "Фатальная ошибка: %@ \nПриложение будет завершено.";
+"alert.mpv_error" = "Внутренняя ошибка %@ (%@) при установке опции %@.";
+"alert.sleep" = "Cannot prevent display sleep!";
+
+"alert.unsupported_audio" = "Неподдерживаемая внешная аудиодорожка.";
+"alert.unsupported_sub" = "Неподдерживаемые внешние субтитры.";
+"alert.unsupported_url" = "Неподдерживаемый URL.";
+"alert.wrong_url_format" = "Неверный формат URL.";
+
+"alert.error_open" = "Не удается открыть файл или поток!";
+"alert.error_finding_file" = "Невозможно найти файл %@ !";
+"alert.error_loading_script" = "Не удалось загрузить скрипт %@!";
+"alert.error_saving_file" = "Ошибка при сохранении %@: %@";
+"alert.error_deleting_file" = "Невозможно удалить файл.";
+
+"alert.config.new.title" = "New Input Configuration";
+"alert.config.new.message" = "Please enter a name for the new configuration.";
+"alert.config.duplicate.title" = "Duplicate Configuration";
+"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
+"alert.config.empty_name" = "The name cannot be empty.";
+"alert.config.name_existing" = "The name already exists.";
+"alert.config.file_existing.title" = "File Already Exists";
+"alert.config.file_existing.message" = "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.";
+"alert.config.cannot_create" = "Cannot create config file!";
+"alert.config.cannot_write" = "Cannot write to config file!";
+
+"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+"alert.add_filter.title" = "New Filter";
+"alert.add_filter.message" = "Please enter a filter string in format of MPV's vf or af command.";
+
+"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+
+"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
+"alert.extra_option.empty" = "Key or value cannot be empty!";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+
+"alert.playlist.error_deleting" = "Error deleting: %@";
+
+"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using opensubtitles. English(eng) will be used this time.";
+"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
+"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+
+"alert.set_default.title" = "Setting IINA as Default App";
+"alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
+"alert.set_default.success" = "Finished with %d success and %d failed.";
+
+"alert.add_watch.title" = "Add Watch Property";
+"alert.add_watch.message" = "Please enter a valid MPV property name.";
+
+"alert.jump_to.title" = "Jump to";
+"alert.jump_to.message" = "Please enter the time you want to jumo to. Example: 20:35";
+
+"alert.opensub.login.title" = "Opensubtitles Login";
+"alert.opensub.login.message" = "Please enter your username and password";
+
+"alert.open_url.title" = "Open URL";
+"alert.open_url.message" = "Please enter the URL:";
+"alert.choose_media_file.title" = "Choose Media File";
+
+"alert.delete_history.title" = "Delete Playback History";
+"alert.delete_history.message" = "Are you sure to delete select entries?";
+
+"pl_menu.title_multi" = "%d Items";
+"pl_menu.play_next" = "Play Next";
+"pl_menu.remove" = "Remove";
+"pl_menu.remove_multi" = "Remove Selected";
+"pl_menu.delete" = "Move to Trash";
+"pl_menu.delete_multi" = "Move Selected Files to Trash";
+"pl_menu.delete_after_play" = "Move to Trash After Playback";
+"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
+"pl_menu.reveal_in_finder" = "Reveal in Finder";
+"pl_menu.add_item" = "Add Item…";
+"pl_menu.clear_playlist" = "Clear Playlist";
+
+"keymapping.title" = "Key Mapping";
+"keymapping.message" = "Press any key to record.";
+
+"filter.video_filters" = "Video Filters";
+"filter.audio_filters" = "Audio Filters";

@@ -17,10 +17,6 @@ class PlayerCore: NSObject {
   var mainWindow: MainWindowController?
   lazy var mpvController: MPVController = MPVController()
 
-  let supportedSubtitleFormat: [String] = ["utf", "utf8", "utf-8", "idx", "sub", "srt",
-                                           "smi", "rt", "txt", "ssa", "aqt", "jss",
-                                           "js", "ass", "mks", "vtt", "sup"]
-
   lazy var info: PlaybackInfo = PlaybackInfo()
 
   var syncPlayTimeTimer: Timer?
@@ -671,7 +667,7 @@ class PlayerCore: NSObject {
     // search subs
     let fm = FileManager.default
     let searchOptions: FileManager.DirectoryEnumerationOptions = [.skipsHiddenFiles, .skipsPackageDescendants, .skipsSubdirectoryDescendants]
-    let subExts = Utility.fileExtensionMap[.sub]!
+    let subExts = Utility.supportedFileExt[.sub]!
     var subDirs: [URL] = []
 
     // search subs in current directory
@@ -712,7 +708,7 @@ class PlayerCore: NSObject {
     let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
     for file in files {
       let fileInfo = FileInfo(file)
-      guard let mediaType = allTypes.first(where: { Utility.fileExtensionMap[$0]!.contains(fileInfo.ext) }) else { continue }
+      guard let mediaType = allTypes.first(where: { Utility.supportedFileExt[$0]!.contains(fileInfo.ext) }) else { continue }
       groups[mediaType]!.append(fileInfo)
     }
 

@@ -169,7 +169,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       var hasItemToAdd: Bool = false
       for path in fileNames {
         let ext = (path as NSString).pathExtension
-        if !playerCore.supportedSubtitleFormat.contains(ext) {
+        if !Utility.supportedFileExt[.sub]!.contains(ext) {
           hasItemToAdd = true
           break
         }
@@ -261,7 +261,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       var playlistItems = tableView.numberOfRows - 1
       fileNames.forEach({ (path) in
         let ext = (path as NSString).pathExtension
-        if !playerCore.supportedSubtitleFormat.contains(ext) {
+        if !Utility.supportedFileExt[.sub]!.contains(ext)  {
           playerCore.addToPlaylist(path)
           playlistItems += 1
           playerCore.playlistMove(playlistItems, to: currentRow)
@@ -524,7 +524,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let fileURL = URL(fileURLWithPath: filename).deletingLastPathComponent()
     let _ = Utility.quickMultipleOpenPanel(title: NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File"), dir: fileURL) { subURLs in
       for subURL in subURLs {
-        guard Utility.fileExtensionMap[.sub]!.contains(subURL.pathExtension) else { return }
+        guard Utility.supportedFileExt[.sub]!.contains(subURL.pathExtension) else { return }
         playerCore.info.matchedSubs.safeAppend(subURL, forKey: filename)
       }
       playlistTableView.reloadData(forRowIndexes: selectedRows, columnIndexes: IndexSet(integersIn: 0...1))

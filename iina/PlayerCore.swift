@@ -753,32 +753,38 @@ class PlayerCore: NSObject {
     // match sub for video files
     var addedCurrentVideo = false
     for video in groups[.video]! {
+      var matchedSubs = Set<FileInfo>()
       // match video and sub if both are the closest one to each other
       if subAutoLoadOption.shouldLoadSubsMatchedByIINA() {
         let minDistToSub = video.dist.reduce(UInt.max, { min($0.0, $0.1.value) })
         subtitles
           .filter { video.dist[$0]! == minDistToSub && $0.minDist.contains(video) }
-          .forEach { info.matchedSubs.safeAppend($0.url, forKey: video.path) }
+          .forEach { info.matchedSubs.safeAppend($0.url, forKey: video.path); matchedSubs.insert($0) }
       }
       // add subs that contains video name
       if subAutoLoadOption.shouldLoadSubsContainingVideoName() {
         subtitles
           .filter { $0.filename.contains(video.filename) }
-          .forEach { info.matchedSubs.safeAppend($0.url, forKey: video.path) }
+          .forEach { info.matchedSubs.safeAppend($0.url, forKey: video.path); matchedSubs.insert($0) }
       }
       // move the sub to front if it contains priority strings
-      if let priorString = ud.string(forKey: Preference.Key.subAutoLoadPriorityString),
-        let matchedSubs = info.matchedSubs[video.path] {
+      if let priorString = ud.string(forKey: Preference.Key.subAutoLoadPriorityString), !matchedSubs.isEmpty {
         let stringList = priorString.components(separatedBy: ",").filter { !$0.isEmpty }
-        matchedSubs.enumerated().flatMap { (index, sub) -> Int? in
-          // get indeces of subs that contains prior string
-          let subName = sub.deletingPathExtension().lastPathComponent
-          return stringList.contains(where: { subName.contains($0) }) ? index : nil
-        }.forEach {
-          // move the sub with index to first
-          let s = info.matchedSubs[video.path]!.remove(at: $0)
-          info.matchedSubs[video.path]!.insert(s, at: 0)
+        // find the min occurance count first
+        var minOccurances = Int.max
+        matchedSubs.forEach { sub in
+          sub.priorityStringOccurances = stringList.reduce(0, { $0 + sub.filename.occurancesOf($1, inRange: nil) })
+          if sub.priorityStringOccurances < minOccurances {
+            minOccurances = sub.priorityStringOccurances
+          }
         }
+        matchedSubs
+          .filter { $0.priorityStringOccurances > minOccurances }  // eliminate false positives in filenames
+          .flatMap { info.matchedSubs[video.path]!.index(of: $0.url) }  // get index
+          .forEach {  // move the sub with index to first
+            let s = info.matchedSubs[video.path]!.remove(at: $0)
+            info.matchedSubs[video.path]!.insert(s, at: 0)
+          }
       }
 
       // add to playlist

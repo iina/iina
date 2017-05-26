@@ -342,6 +342,15 @@ extension String {
     guard num <= characters.count else { self = ""; return }
     self = self.substring(to: self.index(endIndex, offsetBy: -num))
   }
+
+  public func occurancesOf(_ str: String, inRange r: Range<Index>?) -> Int {
+    if let range = range(of: str, options: [], range: r, locale: nil) {
+      let nextRange = range.upperBound..<self.endIndex
+      return 1 + occurancesOf(str, inRange: nextRange)
+    } else {
+      return 0
+    }
+  }
 }
 
 

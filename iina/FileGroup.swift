@@ -21,6 +21,7 @@ class FileInfo: Hashable {
   var dist: [FileInfo: UInt] = [:]
   var minDist: [FileInfo] = []
   var segments: [String] = []
+  var priorityStringOccurances = 0
 
   init(_ url: URL) {
     self.url = url

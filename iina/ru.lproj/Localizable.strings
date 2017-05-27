@@ -19,7 +19,7 @@
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "ПЛЕЙЛИСТ";
-"playlist.chapter_cap" = "ЗАГОЛОВКИ";
+"playlist.chapter_cap" = "ГЛАВЫ";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизация... %d%%";
@@ -34,7 +34,7 @@
 "osd.volume" = "Громкость: %i";
 "osd.speed" = "Скорость: %.2fx";
 "osd.aspect" = "Соотношение сторон: %@";
-"osd.crop" = "Обрезка: %@";
+"osd.crop" = "Кадрирование: %@";
 "osd.rotate" = "Поворот: %i°";
 "osd.deinterlace" = "Деинтерлейсинг: %@";
 "osd.audio_delay.nodelay" = "Аудио задержка: Нет задержки";
@@ -42,16 +42,16 @@
 "osd.audio_delay.earlier" = "Аудио задержка: %.2fs Быстрее";
 "osd.sub_delay.nodelay" = "Задержка субтитров: Нет задержки";
 "osd.sub_delay.later" = "Задержка субтитров: %.2fs Медленее";
-"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Быстрее";
+"osd.sub_delay.earlier" = "Задержка субтитров: %.2fs Быстрее";
 "osd.subtitle_pos" = "Позиция субтитров: %.1f";
 "osd.mute" = "Звук: ВЫКЛ";
 "osd.unmute" = "Звук: ВКЛ";
 "osd.screenshot" = "Снимок экрана";
-"osd.abloop.a" = "AB-Петля: A";
-"osd.abloop.b" = "AB-Петля: B";
-"osd.abloop.clear" = "AB-Петля: Убрана";
+"osd.abloop.a" = "AB-Повтор: A";
+"osd.abloop.b" = "AB-Повтор: B";
+"osd.abloop.clear" = "AB-Повтор: Очищен";
 "osd.stop" = "Стоп";
-"osd.chapter" = "Заголовок: %@";
+"osd.chapter" = "Глава: %@";
 "osd.subtitle_scale" = "Масштаб субтитров: %.2fx";
 "osd.add_to_playlist" = "Добавленно %i Файлов в Плейлист";
 "osd.clear_playlist" = "Плейлист очищен";

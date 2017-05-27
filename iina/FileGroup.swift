@@ -31,22 +31,21 @@ class FileInfo: Hashable {
     self.characters = [Character](self.filename.characters)
     self.getSegments()
   }
-
   private func getSegments() {
-    var currentSegemnt = ""
-    let firstChar = filename.characters.first!
-    var currentSegmentIsDigit = firstChar >= "0" && firstChar <= "9"
-    for char in filename.characters {
-      let isDigit = char >= "0" && char <= "9"
-      if isDigit != currentSegmentIsDigit {
-        segments.append(currentSegemnt)
-        currentSegemnt = String(char)
-        currentSegmentIsDigit = isDigit
-      } else {
-        currentSegemnt.append(char)
+    var breakPoints: [Int] = []
+    var lastChar: Character = " "
+    for (i, char) in filename.characters.enumerated() {
+      if i == 0 || ((char >= "0" && char <= "9") != (lastChar >= "0" && lastChar <= "9")) {
+        breakPoints.append(i)
       }
+      lastChar = char
     }
-    segments.append(currentSegemnt)
+    breakPoints.append(filename.characters.count)
+    for i in 1..<breakPoints.count {
+      let start = filename.index(filename.startIndex, offsetBy: breakPoints[i - 1])
+      let end = filename.index(filename.startIndex, offsetBy: breakPoints[i])
+      segments.append(filename.substring(with: start..<end))
+    }
   }
 
   var hashValue: Int {
@@ -65,7 +64,7 @@ class FileGroup {
   var contents: [FileInfo]
   var groups: [FileGroup]
 
-  private let chineseNumbers: [Character] = ["零", "一", "十", "二", "三", "四", "五", "六", "七", "八", "九", "十"]
+  private let chineseNumbers: [Character] = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"]
 
   static func group(files: [FileInfo]) -> FileGroup {
     let group = FileGroup(prefix: "", contents: files)
@@ -146,7 +145,7 @@ class FileGroup {
     for (c, _) in chars {
       if c >= "0" && c <= "9" { return true }
       // chinese characters
-      if chineseNumbers.contains(c) { chineseNumberCount += 1}
+      if chineseNumbers.contains(c) { chineseNumberCount += 1 }
       if chineseNumberCount >= 3 { return true }
     }
     return false

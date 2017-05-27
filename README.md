@@ -33,7 +33,6 @@ Telegram group:
   ```
   sudo gem install cocoapods
   ```
-  **homebrew**
   ```
   brew install cocoapods
   ```
@@ -81,6 +80,6 @@ Any feedback is appreciated! You can
 - Send bug reports
 - Send feature requests
 - Provide suggestions on code structures or UI designs
-- Provide localizatons
+- Provide localizations
 - ...
 

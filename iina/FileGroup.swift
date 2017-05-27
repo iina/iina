@@ -23,14 +23,24 @@ class FileInfo: Hashable {
   var segments: [String] = []
   var priorityStringOccurances = 0
 
+  var prefix: String {  // prefix detected
+    didSet {
+      suffix = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
+    }
+  }
+  var suffix: String  // filename - prefix
+
   init(_ url: URL) {
     self.url = url
     self.path = url.path
     self.ext = url.pathExtension
     self.filename = url.deletingPathExtension().lastPathComponent
     self.characters = [Character](self.filename.characters)
+    self.prefix = ""
+    self.suffix = self.filename
     self.getSegments()
   }
+
   private func getSegments() {
     var breakPoints: [Int] = []
     var lastChar: Character = " "
@@ -112,7 +122,9 @@ class FileGroup {
       i += 1
     }
 
-    if !stopGrouping(currChars) {
+    if stopGrouping(currChars) {
+      contents.forEach { $0.prefix = self.prefix }
+    } else {
       groups = tempGroup.map { FileGroup(prefix: $0, contents: $1) }
       // continue
       for g in groups {

@@ -62,15 +62,16 @@ static inline int min(int a, int b, int c) {
         dist[i][j] = 0;
 
   for (i = 1; i <= len0; ++i)
-    dist[i][0] = dist[i -1][0] + INDEL_WEIGHT;
+    dist[i][0] = dist[i - 1][0] + INDEL_WEIGHT;
   for (j = 1; j <= len1; ++j)
-    dist[0][j] = dist[0][i-1] + INDEL_WEIGHT;
+    dist[0][j] = dist[0][j - 1] + INDEL_WEIGHT;
 
   for (j = 1; j <= len1; ++j)
     for (i = 1; i <= len0; ++i)
         dist[i][j] = min(dist[i - 1][j] + INDEL_WEIGHT,
                          dist[i][j - 1] + INDEL_WEIGHT,
                          dist[i - 1][j - 1] + (cstr0[i] == cstr1[j] ? 0 : SUBSTITUTION_WEIGHT));
+
   return dist[len0][len1];
 }
 

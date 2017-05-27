@@ -735,6 +735,9 @@ class PlayerCore: NSObject {
     let series = FileGroup.group(files: groups[.video]!)
     info.commonPrefixes = series.flatten()
 
+    // group sub files
+    let _ = FileGroup.group(files: subtitles)
+
     // get auto load option
     let subAutoLoadOption: Preference.IINAAutoLoadAction = Preference.IINAAutoLoadAction(rawValue: ud.integer(forKey: Preference.Key.subAutoLoadIINA)) ?? .iina
 
@@ -742,7 +745,7 @@ class PlayerCore: NSObject {
     for sub in subtitles {
       var minDistToVideo: UInt = .max
       for video in groups[.video]! {
-        let dist = ObjcUtils.levDistance(video.filename, and: sub.filename)
+        let dist = ObjcUtils.levDistance(video.prefix, and: sub.prefix) + ObjcUtils.levDistance(video.suffix, and: sub.suffix)
         sub.dist[video] = dist
         video.dist[sub] = dist
         if dist < minDistToVideo { minDistToVideo = dist }

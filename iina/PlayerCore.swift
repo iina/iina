@@ -769,7 +769,10 @@ class PlayerCore: NSObject {
       }
       // move the sub to front if it contains priority strings
       if let priorString = ud.string(forKey: Preference.Key.subAutoLoadPriorityString), !matchedSubs.isEmpty {
-        let stringList = priorString.components(separatedBy: ",").filter { !$0.isEmpty }
+        let stringList = priorString
+          .components(separatedBy: ",")
+          .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+          .filter { !$0.isEmpty }
         // find the min occurance count first
         var minOccurances = Int.max
         matchedSubs.forEach { sub in

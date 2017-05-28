@@ -1,246 +1,192 @@
-/* No comment provided by engineer. */
-"alert." = "";
+/*
+ String_ui.strings
+ iina
+ 
+ Created by lhc on 3/1/2017.
+ Copyright © 2017 lhc. All rights reserved.
+ */
 
-/* Press any key to record. */
-"keymapping.message" = "Нажмите любую клавишу для записи.";
+// Common
+"general.on" = "Выкл.";
+"general.off" = "Вкл.";
+"general.login" = "Войти";
+"general.logout" = "Выйти";
+"general.ok" = "OK";
+"general.cancel" = "Отмена";
+"general.username" = "Имя пользователя";
+"general.password" = "Пароль";
 
-/* Key Mapping */
-"keymapping.title" = "Сопоставление клавиш";
-
-/* Buffering... %s%% */
-"main.buffering_indicator" = "Буферизация... %d%%";
-
-/* Audio Delay: */
-"menu.audio_delay" = "Задержка аудио: %.2fс";
-
-/* Exit Fullscreen */
-"menu.exit_fullscreen" = "Выйти из полноэкранного режима";
-
-/* Exit Picture-in-Picture */
-"menu.exit_pip" = "Выйти из режима «Картинка-в-картинке»";
-
-/* Fullscreen */
-"menu.fullscreen" = "Войти в полноэкранный режим";
-
-/* Pause */
-"menu.pause" = "Пауза";
-
-/* Enter Picture-in-Picture */
-"menu.pip" = "Войти в режим «Картинка-в-картинке»";
-
-/* Resume */
-"menu.resume" = "Продолжить";
-
-/* Subtitle Delay: */
-"menu.sub_delay" = "Задержка субтитров: %.2fс";
-
-/* Volume: */
-"menu.volume" = "Громкость: %d";
-
-/* Off */
-"off" = "Выкл.";
-
-/* On */
-"on" = "Вкл.";
-
-/* AB-Loop: A */
-"osd.abloop.a" = "Цикл: точка А";
-
-/* AB-Loop: B */
-"osd.abloop.b" = "Цикл: точка Б";
-
-/* AB-Loop: Cleared */
-"osd.abloop.clear" = "Цикл: сброшен";
-
-/* Added %i Files to Playlist */
-"osd.add_to_playlist" = "Добавлено %i файлов в плейлист";
-
-/* Aspect Ratio: %@ */
-"osd.aspect" = "Соотношение сторон: %@";
-
-/* Audio Delay: %fs Earlier */
-"osd.audio_delay.earlier" = "Задержка аудио: на %.2fс раньше";
-
-/* Audio Delay: %fs Later */
-"osd.audio_delay.later" = "Задержка аудио: на %.2fс позже";
-
-/* Audio Delay: No Delay */
-"osd.audio_delay.nodelay" = "Задержка аудио: нет задержки";
-
-/* Canceled */
-"osd.canceled" = "Отменено";
-
-/* Cannot login */
-"osd.cannot_login" = "Не удалось выполнить вход";
-
-/* Chapter: %@ */
-"osd.chapter" = "Глава: %@";
-
-/* Cleared Playlist */
-"osd.clear_playlist" = "Плейлист очищен";
-
-/* Crop: %@ */
-"osd.crop" = "Кадрирование: %@";
-
-/* Deinterlace: %@ */
-"osd.deinterlace" = "Деинтерлейсинг: %@";
-
-/* Error reading file */
-"osd.file_error" = "Ошибка чтения файла";
-
-/* Finding online subtitles... */
-"osd.find_online_sub" = "Поиск субтитров онлайн…";
-
-/* Mute */
-"osd.mute" = "Звук выкл.";
-
-/* Network error */
-"osd.network_error" = "Ошибка сети";
-
-/* Pause */
-"osd.pause" = "Пауза";
-
-/* Resume */
-"osd.resume" = "Продолжить";
-
-/* Rotate: %i° */
-"osd.rotate" = "Поворот: %i°";
-
-/* Screenshot Captured */
-"osd.screenshot" = "Снимок экрана сохранён";
-
-/* Speed: %.2fx */
-"osd.speed" = "Скорость: %.2fx";
-
-/* Stop */
-"osd.stop" = "Стоп";
-
-/* Subtitle Delay: %fs Earlier */
-"osd.sub_delay.earlier" = "Задержка субтитров: на %.2fс раньше";
-
-/* Subtitle Delay: %fs Later */
-"osd.sub_delay.later" = "Задержка субтитров: на %.2fс позже";
-
-/* Subtitle Delay: No Delay */
-"osd.sub_delay.nodelay" = "Задержка субтитров: нет задержки";
-
-/* Subtitle downloaded */
-"osd.sub_downloaded" = "Субтитры скачаны";
-
-/* %d subtitle(s) found. Downloading... */
-"osd.sub_found" = "Найдено %d субтитров. Скачивание…";
-
-/* No subtitle found. */
-"osd.sub_not_found" = "Субтитры не найдены";
-
-/* Subtitle saved */
-"osd.sub_saved" = "Субтитры сохранены";
-
-/* Subtitle Position: %f */
-"osd.subtitle_pos" = "Позиция субтитров: %.1f";
-
-/* Subtitle Scale: %.2fx */
-"osd.subtitle_scale" = "Масштаб субтитров: %.2fx";
-
-/* Unmute */
-"osd.unmute" = "Звук вкл.";
-
-/* Brightness: %i */
-"osd.video_eq.brightness" = "Яркость: %i";
-
-/* Contrast: %i */
-"osd.video_eq.contrast" = "Контраст: %i";
-
-/* Grama: %i */
-"osd.video_eq.gamma" = "Гамма: %i";
-
-/* Hue: %i */
-"osd.video_eq.hue" = "Оттенок: %i";
-
-/* Saturation: %i */
-"osd.video_eq.saturation" = "Насыщенность: %i";
-
-/* Volume: %i */
-"osd.volume" = "Громкость: %i";
-
-/* Add Item */
-"pl_menu.add_item" = "Добавить элемент…";
-
-/* Clear Playlist */
-"pl_menu.clear_playlist" = "Очистить плейлист";
-
-/* Play Next */
-"pl_menu.play_next" = "Воспроизвести следующим";
-
-/* Reveal in Finder */
-"pl_menu.reveal_in_finder" = "Показать в Finder";
-
-/* %d Items */
-"pl_menu.title_multi" = "%d элементов";
-
-/* CHAPTERS */
+// PlaylistViewController.swift
+"playlist.playlist_cap" = "ПЛЕЙЛИСТ";
 "playlist.chapter_cap" = "ГЛАВЫ";
 
-/* PLAYLIST */
-"playlist.playlist_cap" = "ПЛЕЙЛИСТ";
+// MainWindowController.swift
+"main.buffering_indicator" = "Буферизация... %d%%";
 
-/* Advanced */
-"preference.advanced" = "Дополнительно";
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "По умолчанию";
+"quicksetting.item_none" = "Нет";
 
-/* Codec */
-"preference.codec" = "Кодек";
+// OSDMessage.swift
+"osd.pause" = "Пауза";
+"osd.resume" = "Возобновить";
+"osd.volume" = "Громкость: %i";
+"osd.speed" = "Скорость: %.2fx";
+"osd.aspect" = "Соотношение сторон: %@";
+"osd.crop" = "Кадрирование: %@";
+"osd.rotate" = "Поворот: %i°";
+"osd.deinterlace" = "Деинтерлейсинг: %@";
+"osd.audio_delay.nodelay" = "Задержка аудио: нет задержки";
+"osd.audio_delay.earlier" = "Задержка аудио: на %.2fс раньше";
+"osd.audio_delay.later" = "Задержка аудио: на %.2fс позже";
+"osd.sub_delay.nodelay" = "Задержка субтитров: нет задержки";
+"osd.sub_delay.later" = "Задержка субтитров: на %.2fс позже";
+"osd.sub_delay.earlier" = "Задержка субтитров: на %.2fс раньше";
+"osd.subtitle_pos" = "Позиция субтитров: %.1f";
+"osd.mute" = "Отключение";
+"osd.unmute" = "Включение звука";
+"osd.screenshot" = "Снимок экрана";
+"osd.abloop.a" = "Цикл: точка А";
+"osd.abloop.b" = "Цикл: точка Б";
+"osd.abloop.clear" = "Цикл: сброшен";
+"osd.stop" = "Стоп";
+"osd.chapter" = "Глава: %@";
+"osd.subtitle_scale" = "Масштаб субтитров: %.2fx";
+"osd.add_to_playlist" = "Добавлено %i файлов в плейлист";
+"osd.clear_playlist" = "Плейлист очищен";
+"osd.video_eq.contrast" = "Контраст: %i";
+"osd.video_eq.gamma" = "Гамма: %i";
+"osd.video_eq.hue" = "Оттенок: %i";
+"osd.video_eq.saturation" = "Насыщенность: %i";
+"osd.video_eq.brightness" = "Яркость: %i";
+"osd.find_online_sub" = "Поиск субтитров в интернете...";
+"osd.sub_not_found" = "Субтитры не найдены";
+"osd.sub_found" = "Найдено %d субтитров. Скачивание…";
+"osd.sub_downloaded" = "Субтитры скачаны";
+"osd.sub_saved" = "Субтитры сохранены";
+"osd.network_error" = "Ошибка сети";
+"osd.file_error" = "Ошибка при чтении файла";
+"osd.cannot_login" = "Не могу войти";
+"osd.canceled" = "Отменено";
 
-/* Control */
-"preference.control" = "Управление";
-
-/* General */
-"preference.general" = "Общие";
-
-/* Keybindings */
-"preference.keybindings" = "Сочетания клавиш";
-
-/* Logged in as */
-"preference.logged_in_as" = "Выполнен вход как %@";
-
-/* Network */
-"preference.network" = "Сеть";
-
-/* Not logged in */
-"preference.not_logged_in" = "Вход не выполнен";
-
-/* Subtitles */
-"preference.subtitle" = "Субтитры";
-
-/* Preference */
-"preference.title" = "Настройки";
-
-/* UI */
-"preference.ui" = "Интерфейс";
-
-/* <None> */
-"track.none" = "<Нет>";
-
-/* Error */
-"update.check_failed" = "Не удалось проверить обновления. Возможно, вы используете слишком старую версию. Посетите веб-сайт или Github.";
-
-/* Github */
+"update.title_update_found" = "Найдено обновление";
+"update.title_no_update" = "Обновлений нет";
+"update.title_error" = "Ошибка";
+"update.update_found" = "Найдена новая версия! IINA ещё в альфа-версии, поэтому рекомендуется обновиться. Скачайте с веб-сайта или Github:";
+"update.no_update" = "Вы используете последнюю версию.";
+"update.check_failed" = "Не удалось проверить обновления. Вероятно, вы используете старую версию. Пожалуйста, проверьте сайт или github.";
+"update.new_version" = "Новая версия:";
+"update.dl_from_website" = "Перейти на веб-сайт";
 "update.dl_from_github" = "Перейти на Github";
 
-/* Website */
-"update.dl_from_website" = "Перейти на веб-сайт";
+"preference.title" = "Настройки";
+"preference.general" = "Основные";
+"preference.ui" = "Интерфейс";
+"preference.codec" = "Кодек";
+"preference.subtitle" = "Субтитры";
+"preference.network" = "Сеть";
+"preference.control" = "Управление";
+"preference.keybindings" = "Клавиши";
+"preference.advanced" = "Дополнительно";
+"preference.scripts" = "Скрипты";
+"preference.not_logged_in" = "Вход не выполнен";
+"preference.logged_in_as" = "Выполнен вход как %@";
 
-/* No update */
-"update.no_update" = "Вы используете последнюю версию.";
+"menu.volume"= "Громкость: %d";
+"menu.audio_delay" = "Задержка аудио: %.2fс";
+"menu.sub_delay" = "Задержка субтитров: %.2fс";
+"menu.fullscreen" = "Перейти в полноэкранный режим";
+"menu.exit_fullscreen" = "Выйти из полноэкранного режима";
+"menu.pip" = "Перейти в режим «Картинка-в-картинке»";
+"menu.exit_pip" = "Выйти из режима «Картинка-в-картинке»";
+"menu.pause" = "Пауза";
+"menu.resume" = "Возобновить";
 
-/* Title */
-"update.title_error" = "Ошибка";
+"track.none" = "<Нет>";
 
-/* Title */
-"update.title_no_update" = "Обновлений нет";
+// Alerts
+"alert.title_error" = "Ошибка";
+"alert.title_warning" = "Предупреждение";
+"alert.title_info" = "Информация";
 
-/* Title */
-"update.title_update_found" = "Найдено обновление";
+"alert.fatal_error" = "Фатальная ошибка: %@ \nПриложение будет завершено.";
+"alert.mpv_error" = "Внутренняя ошибка %@ (%@) при установке опции %@.";
+"alert.sleep" = "Cannot prevent display sleep!";
 
-/* Update found */
-"update.update_found" = "Найдена новая версия! IINA ещё в стадии альфы, поэтому рекомендуется обновиться. Скачайте с веб-сайта или Github:";
+"alert.unsupported_audio" = "Неподдерживаемая внешняя аудиодорожка.";
+"alert.unsupported_sub" = "Неподдерживаемые внешние субтитры.";
+"alert.unsupported_url" = "Неподдерживаемый URL.";
+"alert.wrong_url_format" = "Неверный формат URL.";
 
+"alert.error_open" = "Не удается открыть файл или поток!";
+"alert.error_finding_file" = "Невозможно найти файл %@ !";
+"alert.error_loading_script" = "Не удалось загрузить скрипт %@!";
+"alert.error_saving_file" = "Ошибка при сохранении %@: %@";
+"alert.error_deleting_file" = "Невозможно удалить файл.";
+
+"alert.config.new.title" = "New Input Configuration";
+"alert.config.new.message" = "Please enter a name for the new configuration.";
+"alert.config.duplicate.title" = "Duplicate Configuration";
+"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
+"alert.config.empty_name" = "The name cannot be empty.";
+"alert.config.name_existing" = "The name already exists.";
+"alert.config.file_existing.title" = "File Already Exists";
+"alert.config.file_existing.message" = "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.";
+"alert.config.cannot_create" = "Cannot create config file!";
+"alert.config.cannot_write" = "Cannot write to config file!";
+
+"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+"alert.add_filter.title" = "New Filter";
+"alert.add_filter.message" = "Please enter a filter string in format of MPV's vf or af command.";
+
+"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+
+"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
+"alert.extra_option.empty" = "Key or value cannot be empty!";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+
+"alert.playlist.error_deleting" = "Error deleting: %@";
+
+"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using opensubtitles. English(eng) will be used this time.";
+"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
+"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+
+"alert.set_default.title" = "Установка IINA приложением по умолчанию";
+"alert.set_default.message" = "IINA станет приложением по умолчанию для всех поддерживаемых типов файлов.;
+"alert.set_default.success" = "Завершено: %d успешно и %d неудачно.";
+
+"alert.add_watch.title" = "Add Watch Property";
+"alert.add_watch.message" = "Please enter a valid MPV property name.";
+
+"alert.jump_to.title" = "Перейти к";
+"alert.jump_to.message" = "Введите время, к которому хотите перейти. Например: 20:35";
+
+"alert.opensub.login.title" = "Войти в OpenSubtitles";
+"alert.opensub.login.message" = "Введите имя пользователя и пароль";
+
+"alert.open_url.title" = "Открыть URL";
+"alert.open_url.message" = "Введите URL:";
+"alert.choose_media_file.title" = "Выбрать медиафайл";
+
+"alert.delete_history.title" = "Удалить историю воспроизведения";
+"alert.delete_history.message" = "Вы уверены, что хотите удалить выбранное?";
+
+"pl_menu.title_multi" = "%d элементов";
+"pl_menu.play_next" = "Воспроизвести следующим";
+"pl_menu.remove" = "Удалить";
+"pl_menu.remove_multi" = "Удалить выбранные";
+"pl_menu.delete" = "Переместить в Корзину";
+"pl_menu.delete_multi" = "Переместить выбранные в Корзину";
+"pl_menu.delete_after_play" = "Переместить в Корзину после воспроизведения";
+"pl_menu.delete_after_play_multi" = "Переместить выбранные в Корзину после воспроизведения";
+"pl_menu.reveal_in_finder" = "Показать в Finder";
+"pl_menu.add_item" = "Добавить элемент…";
+"pl_menu.clear_playlist" = "Очистить плейлист";
+
+"keymapping.title" = "Назначить клавиши";
+"keymapping.message" = "Нажмите любую клавишу для записи.";
+
+"filter.video_filters" = "Видеофильтры";
+"filter.audio_filters" = "Аудиофильтры";

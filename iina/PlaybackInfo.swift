@@ -136,4 +136,5 @@ class PlaybackInfo {
 
   var matchedSubs: [String: [URL]] = [:]
   var commonPrefixes: [String: [String]] = [:]
+  var currentVideosInfo: [FileInfo] = []
 }

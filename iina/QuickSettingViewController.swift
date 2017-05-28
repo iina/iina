@@ -72,6 +72,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var customAudioDelayTextField: NSTextField!
 	
 	
+  @IBOutlet weak var subLoadSementedControl: NSSegmentedControl!
   @IBOutlet weak var subDelaySlider: NSSlider!
   @IBOutlet weak var subDelaySliderIndicator: NSTextField!
   @IBOutlet weak var subDelaySliderConstraint: NSLayoutConstraint!
@@ -117,6 +118,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil
     }
+
+    subLoadSementedControl.image(forSegment: 1)?.isTemplate = true
 
     // notifications
     let tracklistChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.tracklistChanged, object: nil, queue: OperationQueue.main) { _ in
@@ -537,15 +540,44 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   // MARK: Sub tab
 
-  @IBAction func loadExternalSubAction(_ sender: NSButton) {
-    let currentDir = playerCore.info.currentURL?.deletingLastPathComponent()
-    let result = Utility.quickOpenPanel(title: "Load external subtitle", isDir: false, dir: currentDir) { url in
-      self.playerCore.loadExternalSubFile(url)
+  @IBAction func loadExternalSubAction(_ sender: NSSegmentedControl) {
+    if sender.selectedSegment == 0 {
+      let currentDir = playerCore.info.currentURL?.deletingLastPathComponent()
+      let result = Utility.quickOpenPanel(title: "Load external subtitle", isDir: false, dir: currentDir) { url in
+        self.playerCore.loadExternalSubFile(url)
+      }
+      if result {
+        subTableView.reloadData()
+        secSubTableView.reloadData()
+      }
+    } else if sender.selectedSegment == 1 {
+      let activeSubs = playerCore.info.trackList(.sub) + playerCore.info.trackList(.secondSub)
+      let menu = NSMenu()
+      menu.autoenablesItems = false
+      if let videoInfo = playerCore.info.currentVideosInfo.first(where: { $0.url == playerCore.info.currentURL }),
+        !videoInfo.dist.isEmpty {
+        let subtitles = videoInfo.dist.map { ($0.value, $0.key) }.sorted { $0.0 < $1.0 }
+        for sub in subtitles {
+          let isActive = activeSubs.contains { $0.externalFilename == sub.1.path }
+          menu.addItem(withTitle: "\(sub.1.filename).\(sub.1.ext)",
+            action: #selector(self.chosenSubFromMenu(_:)),
+                       tag: nil, obj: sub.1, stateOn: isActive)
+        }
+      } else {
+        menu.addItem(withTitle: NSLocalizedString("track.none", comment: "<None>"))
+      }
+      NSMenu.popUpContextMenu(menu, with: NSApp.currentEvent!, for: sender)
     }
-    if result {
-      subTableView.reloadData()
-      secSubTableView.reloadData()
-    }
+  }
+
+  @objc
+  private func chosenSubFromMenu(_ sender: NSMenuItem) {
+    guard let fileInfo = sender.representedObject as? FileInfo else { return }
+    playerCore.loadExternalSubFile(fileInfo.url)
+  }
+
+  @IBAction func searchOnlineAction(_ sender: AnyObject) {
+    mainWindow.menuFindOnlineSub(.dummy)
   }
 
   @IBAction func subDelayChangedAction(_ sender: NSSlider) {

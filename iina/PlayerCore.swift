@@ -810,6 +810,8 @@ class PlayerCore: NSObject {
     for audio in groups[.audio]! {
       addToPlaylist(audio.path)
     }
+
+    info.currentVideosInfo = groups[.video]!
   }
 
   // MARK: - Sync with UI in MainWindow

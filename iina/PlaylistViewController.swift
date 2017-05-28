@@ -391,6 +391,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         let cellView = v as! PlaylistTrackCellView
         let filename = item.filenameForDisplay
         if let prefix = playerCore.info.commonPrefixes.first(where: { $1.contains(item.filename) })?.key {
+          cellView.prefixBtn.hasPrefix = true
           cellView.prefixBtn.text = prefix
           cellView.textField?.stringValue = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
         } else {

@@ -12,7 +12,7 @@
 #import <wchar.h>
 
 #define INDEL_WEIGHT 1
-#define SUBSTITUTION_WEIGHT 2
+#define SUBSTITUTION_WEIGHT 4
 
 static inline int min(int a, int b, int c) {
   int m = a;

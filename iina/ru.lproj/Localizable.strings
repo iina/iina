@@ -111,7 +111,7 @@
 
 "alert.fatal_error" = "Фатальная ошибка: %@ \nПриложение будет завершено.";
 "alert.mpv_error" = "Внутренняя ошибка %@ (%@) при установке опции %@.";
-"alert.sleep" = "Cannot prevent display sleep!";
+"alert.sleep" = "Не удалось предотвратить переход дисплея в режим сна!";
 
 "alert.unsupported_audio" = "Неподдерживаемая внешняя аудиодорожка.";
 "alert.unsupported_sub" = "Неподдерживаемые внешние субтитры.";
@@ -119,42 +119,42 @@
 "alert.wrong_url_format" = "Неверный формат URL.";
 
 "alert.error_open" = "Не удается открыть файл или поток!";
-"alert.error_finding_file" = "Невозможно найти файл %@ !";
+"alert.error_finding_file" = "Невозможно найти файл %@!";
 "alert.error_loading_script" = "Не удалось загрузить скрипт %@!";
 "alert.error_saving_file" = "Ошибка при сохранении %@: %@";
 "alert.error_deleting_file" = "Невозможно удалить файл.";
 
-"alert.config.new.title" = "New Input Configuration";
-"alert.config.new.message" = "Please enter a name for the new configuration.";
-"alert.config.duplicate.title" = "Duplicate Configuration";
-"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
-"alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "The name already exists.";
-"alert.config.file_existing.title" = "File Already Exists";
-"alert.config.file_existing.message" = "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.";
-"alert.config.cannot_create" = "Cannot create config file!";
-"alert.config.cannot_write" = "Cannot write to config file!";
+"alert.config.new.title" = "Новая конфигурация клавиш";
+"alert.config.new.message" = "Введите имя для новой конфигурации.";
+"alert.config.duplicate.title" = "Дублировать конфигурацию";
+"alert.config.duplicate.message" = "Введите имя для дублированного файла конфигурации.";
+"alert.config.empty_name" = "Имя не может быть пустым.";
+"alert.config.name_existing" = "Имя уже существует.";
+"alert.config.file_existing.title" = "Файл уже существует";
+"alert.config.file_existing.message" = "Так не должно быть. Нажмите «OK» для перезаписи, «Отмена» для обнаружения файла в Finder.";
+"alert.config.cannot_create" = "Не удалось создать файл конфигурации!";
+"alert.config.cannot_write" = "Не удалось записать файл конфигурации!";
 
-"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
-"alert.add_filter.title" = "New Filter";
-"alert.add_filter.message" = "Please enter a filter string in format of MPV's vf or af command.";
+"alert.filter.incorrect" = "Пр установке фильтров произошла ошибка. Проверьте формат параметров.";
+"alert.add_filter.title" = "Новый фильтр";
+"alert.add_filter.message" = "Введите строку фильтра в формате команд «vf» или «af» из MPV.";
 
-"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+"alert.keybinding_config.error" = "Ошибка разбора  файл конфигурации клавиш «%@»! Используется стандартная конфигурация клавиш IINA. Проверьте свою конфигурацию.";
 
-"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
-"alert.extra_option.empty" = "Key or value cannot be empty!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
-"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+"alert.extra_option.cannot_read" = "Не удалось прочесть пользовательские параметры MPV.";
+"alert.extra_option.empty" = "Ключ или значение не могут быть пустыми!";
+"alert.extra_option.error" = "Ошибка установки параметра --%@=%@ со значением %d. Проверьте установленные параметры в Настройки > Дополнительно.";
+"alert.extra_option.config_folder" = "Ошибка при установке папки конфигурации «%@».";
 
-"alert.playlist.error_deleting" = "Error deleting: %@";
+"alert.playlist.error_deleting" = "Ошибка удаления: %@";
 
-"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using opensubtitles. English(eng) will be used this time.";
-"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
-"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+"alert.sub.no_selected" = "Сначала выберите скачанные субтитры.";
+"alert.sub_lang_not_set" = "Выберите в настройках предпочитаемый язык субтитров перед использованием OpenSubtitles. Сейчас будет использован английский (eng).";
+"alert.sub.cannot_save_passwd" = "Не удалось сохранить пароль в Keychain: %@";
+"alert.sub.cannot_login" = "Не удалось выполнить вход. Проверьте имя пользователя, пароль и состояние сети.\n\n%@";
 
 "alert.set_default.title" = "Установка IINA приложением по умолчанию";
-"alert.set_default.message" = "IINA станет приложением по умолчанию для всех поддерживаемых типов файлов.;
+"alert.set_default.message" = "IINA станет приложением по умолчанию для всех поддерживаемых типов файлов.";
 "alert.set_default.success" = "Завершено: %d успешно и %d неудачно.";
 
 "alert.add_watch.title" = "Add Watch Property";

@@ -321,6 +321,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     super.windowDidLoad()
 
     guard let w = self.window else { return }
+    
+    // enable sleep preventer
+    SleepPreventer.preventSleep()
 
     w.initialFirstResponder = nil
 
@@ -959,8 +962,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     window!.collectionBehavior = [.managed, .fullScreenPrimary]
     // update buffer indicator view
     updateBufferIndicatorView()
-    // enable sleep preventer
-    SleepPreventer.preventSleep()
     // start tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
     cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 0]))

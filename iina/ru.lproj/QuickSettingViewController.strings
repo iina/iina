@@ -26,7 +26,7 @@
 "7su-au-nwq.title" = "5";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track..."; ObjectID = "8Ax-5X-osl"; */
-"8Ax-5X-osl.title" = "Загрузить внешний аудиотрек…";
+"8Ax-5X-osl.title" = "Загрузить внешнюю аудиодорожку…";
 
 /* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
 "22j-ra-GAY.title" = "Ширина:";
@@ -167,7 +167,7 @@
 "bzk-c2-LH5.label" = "Аудио";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
-"cMu-YF-riv.ibShadowedLabels[0]" = "По умолчанию";
+"cMu-YF-riv.ibShadowedLabels[0]" = "Обычное";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[1] = "4:3"; ObjectID = "cMu-YF-riv"; */
 "cMu-YF-riv.ibShadowedLabels[1]" = "4:3";
@@ -305,7 +305,7 @@
 "uqb-mz-A22.title" = "ФОН";
 
 /* Class = "NSButtonCell"; title = "Custom..."; ObjectID = "vFD-HU-RVz"; */
-"vFD-HU-RVz.title" = "Вручную…";
+"vFD-HU-RVz.title" = "Другое…";
 
 /* Class = "NSTextFieldCell"; title = "Sub style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
 "wBD-pZ-Bvu.title" = "Cтилизация субтитров может повредить отображение ASS, и в зависимости от типа субтитров некоторые опции будут отключены.";

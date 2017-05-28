@@ -29,7 +29,7 @@
 "Bjp-HJ-i7V.title" = "sans-serif";
 
 /* Class = "NSTextFieldCell"; title = "Opensubtitles account:"; ObjectID = "CKG-r9-NoN"; */
-"CKG-r9-NoN.title" = "Учетная запись Opensubtitles:";
+"CKG-r9-NoN.title" = "Учетная запись OpenSubtitles:";
 
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "Chj-YP-eFV"; */
 "Chj-YP-eFV.title" = "Предпочитаемый язык:";
@@ -107,7 +107,7 @@
 "fUB-ll-Nvz.title" = "Вход не выполнен";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "i94-zQ-hFA"; */
-"i94-zQ-hFA.title" = "Если включено, все субтитры ASS будут отображены с использованием следующих стилей.";
+"i94-zQ-hFA.title" = "Если включено, субтитры ASS будут стилизованы заданным образом.";
 
 /* Class = "NSTextFieldCell"; title = "%"; ObjectID = "jPu-Ax-MOA"; */
 "jPu-Ax-MOA.title" = "%";
@@ -116,7 +116,7 @@
 "jTS-Yq-bvB.title" = "Y:";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "kCB-FU-Qvf"; */
-"kCB-FU-Qvf.title" = "Позиционирование:";
+"kCB-FU-Qvf.title" = "Расположение:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "kKv-lk-VPE"; */
 "kKv-lk-VPE.title" = "Цвет:";
@@ -137,7 +137,7 @@
 "sVu-u3-QwW.title" = "Отступ";
 
 /* Class = "NSMenuItem"; title = "Subtitle with the exact same media filename"; ObjectID = "siy-Uq-tMP"; */
-"siy-Uq-tMP.title" = "Субтитры, содержащие имя медиафайла";
+"siy-Uq-tMP.title" = "Субтитры, совпадающие с именем медиафайла";
 
 /* Class = "NSTextFieldCell"; title = "Align"; ObjectID = "t3t-yJ-pM9"; */
 "t3t-yJ-pM9.title" = "Выравнивание";

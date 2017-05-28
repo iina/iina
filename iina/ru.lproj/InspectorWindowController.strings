@@ -2,7 +2,7 @@
 "0vG-Pg-DIl.title" = "Форсированная";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
-"1dz-Vt-0MO.title" = "FPS:";
+"1dz-Vt-0MO.title" = "Кадр/с:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "3bw-Kl-SeY"; */
 "3bw-Kl-SeY.title" = "Label";
@@ -35,22 +35,22 @@
 "21M-40-ac5.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
-"A4y-LL-x0z.title" = "Bit Rate:";
+"A4y-LL-x0z.title" = "Битрейт:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
-"AYt-pH-UCi.title" = "Mistimed Frames:";
+"AYt-pH-UCi.title" = "Рассинхрон. кадров:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "Aes-4j-UT6"; */
 "Aes-4j-UT6.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
-"AjU-1T-aGR.title" = "Display FPS:";
+"AjU-1T-aGR.title" = "Воспроизв. кадр/с:";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
-"CrF-UR-udW.title" = "Dropped Frames:";
+"CrF-UR-udW.title" = "Пропущенных кадров:";
 
 /* Class = "NSTextFieldCell"; title = "Hw Decoder:"; ObjectID = "DHh-ne-10f"; */
-"DHh-ne-10f.title" = "Hw Decoder:";
+"DHh-ne-10f.title" = "Аппаратный декодер:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "ElK-iN-YiE"; */
 "ElK-iN-YiE.title" = "Label";
@@ -83,7 +83,7 @@
 "IME-9M-YdQ.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
-"JN9-3E-OJp.title" = "Estimated Disp FPS";
+"JN9-3E-OJp.title" = "Оцен. воспр. кадр/с";
 
 /* Class = "NSTextFieldCell"; title = "Multiline Label"; ObjectID = "JkC-3s-Ela"; */
 "JkC-3s-Ela.title" = "Multiline Label";
@@ -125,7 +125,7 @@
 "PLL-fC-blc.title" = "Внешняя";
 
 /* Class = "NSTextFieldCell"; title = "Editions:"; ObjectID = "POj-mQ-zP9"; */
-"POj-mQ-zP9.title" = "Editions:";
+"POj-mQ-zP9.title" = "Версии:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "PQD-yB-mm6"; */
 "PQD-yB-mm6.title" = "Формат:";
@@ -191,7 +191,7 @@
 "f2P-qb-wRx.title" = "Размер:";
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "f7a-XG-NCc"; */
-"f7a-XG-NCc.label" = "General";
+"f7a-XG-NCc.label" = "Обшее";
 
 /* Class = "NSTextFieldCell"; title = "Track:"; ObjectID = "f7i-wX-uxQ"; */
 "f7i-wX-uxQ.title" = "Дорожка:";
@@ -209,13 +209,13 @@
 "iMk-qU-kVv.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "A/V Sync Diff:"; ObjectID = "iVK-Ck-Lyq"; */
-"iVK-Ck-Lyq.title" = "A/V Sync Diff:";
+"iVK-Ck-Lyq.title" = "Разн. синхр. ауд/вид:";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "it3-05-Pwu"; */
 "it3-05-Pwu.title" = "Каналы:";
 
 /* Class = "NSTextFieldCell"; title = "Source ID:"; ObjectID = "jCY-og-BAa"; */
-"jCY-og-BAa.title" = "Source ID:";
+"jCY-og-BAa.title" = "ID источника:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "jMN-aN-DqI"; */
 "jMN-aN-DqI.title" = "Label";
@@ -245,7 +245,7 @@
 "rcA-a7-rVn.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
-"sbO-Cn-gpI.title" = "Total A/V Sync:";
+"sbO-Cn-gpI.title" = "Итог. синхр. ауд/вид:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "sgp-Kk-awA"; */
 "sgp-Kk-awA.title" = "Label";

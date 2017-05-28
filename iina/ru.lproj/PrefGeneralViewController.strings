@@ -29,10 +29,10 @@
 "A5p-u9-lqJ.title" = "PGM";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
-"Ci8-j2-QS3.title" = "Отслеживать все проигрываемые файлы в меню «Открыть недавние»";
+"Ci8-j2-QS3.title" = "Показывать все проигранные файлы в меню «Открыть недавние»";
 
 /* Class = "NSButtonCell"; title = "Pause when media is opened"; ObjectID = "FbF-jJ-W5a"; */
-"FbF-jJ-W5a.title" = "Ставить на паузу при открытии медиа";
+"FbF-jJ-W5a.title" = "Ставить на паузу при открытии файла";
 
 /* Class = "NSButtonCell"; title = "Open a choose file panel after starting"; ObjectID = "IYU-9y-fBL"; */
 "IYU-9y-fBL.title" = "Открывать окно для выбора файла после запуска";
@@ -47,7 +47,7 @@
 "Lac-Ol-g6E.title" = "Автоматически воспроизводить следующий файл";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen when media is opened"; ObjectID = "MlG-hl-goA"; */
-"MlG-hl-goA.title" = "Войти в полноэкранный режим при открытии медиа";
+"MlG-hl-goA.title" = "Войти в полноэкранный режим при открытии файла";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
@@ -59,7 +59,7 @@
 "XFC-Lr-LmP.title" = "Иначе в этом меню будут отображаться файлы, открытые вручную";
 
 /* Class = "NSButtonCell"; title = "Quit when no window is opened"; ObjectID = "YLo-6E-tT7"; */
-"YLo-6E-tT7.title" = "Выйти, когда все окна закрыты";
+"YLo-6E-tT7.title" = "Завершить программу, когда все окна закрыты";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
 "YeH-hk-7NN.title" = "/путь/к/папке/скриншотов/";

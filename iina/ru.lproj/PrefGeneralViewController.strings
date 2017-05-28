@@ -29,7 +29,7 @@
 "A5p-u9-lqJ.title" = "PGM";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
-"Ci8-j2-QS3.title" = "Показывать все проигранные файлы в меню «Открыть недавние»";
+"Ci8-j2-QS3.title" = "Показывать все открытые файлы в меню «Открыть недавние»";
 
 /* Class = "NSButtonCell"; title = "Pause when media is opened"; ObjectID = "FbF-jJ-W5a"; */
 "FbF-jJ-W5a.title" = "Ставить на паузу при открытии файла";
@@ -56,7 +56,7 @@
 "QJq-fO-hhK.title" = "Автоматически добавлять файлы из той же папки";
 
 /* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu"; ObjectID = "XFC-Lr-LmP"; */
-"XFC-Lr-LmP.title" = "Иначе в этом меню будут отображаться файлы, открытые вручную";
+"XFC-Lr-LmP.title" = "Иначе там будут отображены только файлы, запущенные вручную";
 
 /* Class = "NSButtonCell"; title = "Quit when no window is opened"; ObjectID = "YLo-6E-tT7"; */
 "YLo-6E-tT7.title" = "Завершить программу, когда все окна закрыты";
@@ -80,7 +80,7 @@
 "jeK-46-2BG.title" = "История:";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
-"lvA-Rc-Sh6.title" = "Включить субтитры";
+"lvA-Rc-Sh6.title" = "Включая субтитры";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "oJY-Iz-3sO"; */
 "oJY-Iz-3sO.title" = "Формат:";

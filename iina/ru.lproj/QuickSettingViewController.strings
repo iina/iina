@@ -47,7 +47,7 @@
 "C0t-gm-Tim.title" = "5с";
 
 /* Class = "NSButtonCell"; title = "Load Subtitle..."; ObjectID = "C97-zJ-O3Y"; */
-"C97-zJ-O3Y.title" = "Подключить субтитры…";
+"C97-zJ-O3Y.title" = "Подключить внешние субтитры…";
 
 /* Class = "NSTextFieldCell"; title = "0"; ObjectID = "CAr-N0-j64"; */
 "CAr-N0-j64.title" = "0";
@@ -308,7 +308,7 @@
 "vFD-HU-RVz.title" = "Другое…";
 
 /* Class = "NSTextFieldCell"; title = "Sub style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
-"wBD-pZ-Bvu.title" = "Cтилизация субтитров может повредить отображение ASS, и в зависимости от типа субтитров некоторые опции будут отключены.";
+"wBD-pZ-Bvu.title" = "Опции стилизации могут повредить отображение ASS, и часть из них не работает с некоторыми субтитрами.";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "wgA-op-JP4"; */
 "wgA-op-JP4.title" = "0с";

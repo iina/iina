@@ -97,8 +97,8 @@
 "menu.sub_delay" = "Задержка субтитров: %.2fс";
 "menu.fullscreen" = "Перейти в полноэкранный режим";
 "menu.exit_fullscreen" = "Выйти из полноэкранного режима";
-"menu.pip" = "Перейти в режим «Картинка-в-картинке»";
-"menu.exit_pip" = "Выйти из режима «Картинка-в-картинке»";
+"menu.pip" = "Войти в режим «Картинка в картинке»";
+"menu.exit_pip" = "Выйти из режима «Картинка в картинке»";
 "menu.pause" = "Пауза";
 "menu.resume" = "Возобновить";
 
@@ -139,7 +139,7 @@
 "alert.add_filter.title" = "Новый фильтр";
 "alert.add_filter.message" = "Введите строку фильтра в формате команд «vf» или «af» из MPV.";
 
-"alert.keybinding_config.error" = "Ошибка разбора  файл конфигурации клавиш «%@»! Используется стандартная конфигурация клавиш IINA. Проверьте свою конфигурацию.";
+"alert.keybinding_config.error" = "Ошибка разбора файла конфигурации клавиш «%@»! Используется стандартная конфигурация клавиш IINA. Проверьте свою конфигурацию.";
 
 "alert.extra_option.cannot_read" = "Не удалось прочесть пользовательские параметры MPV.";
 "alert.extra_option.empty" = "Ключ или значение не могут быть пустыми!";
@@ -149,7 +149,7 @@
 "alert.playlist.error_deleting" = "Ошибка удаления: %@";
 
 "alert.sub.no_selected" = "Сначала выберите скачанные субтитры.";
-"alert.sub_lang_not_set" = "Выберите в настройках предпочитаемый язык субтитров перед использованием OpenSubtitles. Сейчас будет использован английский (eng).";
+"alert.sub_lang_not_set" = "Перед использованием OpenSubtitles выберите в настройках предпочитаемый язык субтитров. Сейчас используется английский.";
 "alert.sub.cannot_save_passwd" = "Не удалось сохранить пароль в Keychain: %@";
 "alert.sub.cannot_login" = "Не удалось выполнить вход. Проверьте имя пользователя, пароль и состояние сети.\n\n%@";
 
@@ -157,8 +157,8 @@
 "alert.set_default.message" = "IINA станет приложением по умолчанию для всех поддерживаемых типов файлов.";
 "alert.set_default.success" = "Завершено: %d успешно и %d неудачно.";
 
-"alert.add_watch.title" = "Add Watch Property";
-"alert.add_watch.message" = "Please enter a valid MPV property name.";
+"alert.add_watch.title" = "Добавить свойство для наблюдения";
+"alert.add_watch.message" = "Введите корректное свойство (property) из MPV для наблюдения за ним.";
 
 "alert.jump_to.title" = "Перейти к";
 "alert.jump_to.message" = "Введите время, к которому хотите перейти. Например: 20:35";

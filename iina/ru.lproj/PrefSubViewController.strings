@@ -2,7 +2,7 @@
 "1vo-so-iaM.title" = "Субтитры, содержащие имя медиафайла";
 
 /* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "4EG-eE-S3y"; */
-"4EG-eE-S3y.title" = "Вертикальная позиция:";
+"4EG-eE-S3y.title" = "Положение по вертикали:";
 
 /* Class = "NSMenuItem"; title = "Shooter.cn"; ObjectID = "5Bo-HI-z0D"; */
 "5Bo-HI-z0D.title" = "Shooter.cn";
@@ -17,7 +17,7 @@
 "99d-UG-eDD.title" = "Интервал:";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letter box in full screen"; ObjectID = "9kA-0S-Nl8"; */
-"9kA-0S-Nl8.title" = "Display subtitles in letter box in full screen";
+"9kA-0S-Nl8.title" = "В полноэкранном режиме показывать субтитры под видео";
 
 /* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "A1r-kr-uDi"; */
 "A1r-kr-uDi.title" = "Масштабировать субтитры с размером окна";
@@ -35,10 +35,10 @@
 "Chj-YP-eFV.title" = "Предпочитаемый язык:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "HCH-sL-fT2"; */
-"HCH-sL-fT2.title" = "Центр";
+"HCH-sL-fT2.title" = "По центру";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "Hpt-KA-McW"; */
-"Hpt-KA-McW.title" = "Лево";
+"Hpt-KA-McW.title" = "Слева";
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "IU1-wz-lJW"; */
 "IU1-wz-lJW.title" = "Уровень переопределения:";
@@ -53,7 +53,7 @@
 "Mte-Lb-do4.title" = "Текст субтитров:";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "ND2-m7-ZET"; */
-"ND2-m7-ZET.title" = "Низ";
+"ND2-m7-ZET.title" = "Снизу";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "OL9-2M-Zb5"; */
 "OL9-2M-Zb5.title" = "Размер:";
@@ -77,7 +77,7 @@
 "VBZ-bi-gTh.title" = "Y:";
 
 /* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "VKh-1E-Ey8"; */
-"VKh-1E-Ey8.title" = "Игнорировать ASS стили";
+"VKh-1E-Ey8.title" = "Игнорировать стили ASS";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "Waw-Pj-REg"; */
 "Waw-Pj-REg.title" = "Цвет:";
@@ -89,7 +89,7 @@
 "Zym-2a-rt0.title" = "Автозагрузка:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "aMs-VF-WaJ"; */
-"aMs-VF-WaJ.title" = "Центр";
+"aMs-VF-WaJ.title" = "По центру";
 
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "bqN-gA-fs9"; */
 "bqN-gA-fs9.title" = "Смещение:";
@@ -146,7 +146,7 @@
 "tL7-oR-LZ4.title" = "ASS субтитры:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "vHI-NX-bZ5"; */
-"vHI-NX-bZ5.title" = "Вверх";
+"vHI-NX-bZ5.title" = "Сверху";
 
 /* Class = "NSButtonCell"; title = "Italic"; ObjectID = "vc5-ZJ-ozS"; */
 "vc5-ZJ-ozS.title" = "Курсивный";
@@ -158,4 +158,4 @@
 "xNk-Uv-jYT.title" = "Размер:";
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "zLl-vV-p1h"; */
-"zLl-vV-p1h.title" = "Право";
+"zLl-vV-p1h.title" = "Справа";

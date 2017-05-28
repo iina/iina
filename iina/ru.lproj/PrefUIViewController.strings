@@ -3,19 +3,19 @@
 "0Gp-vj-UzY.title" = "Снизу";
 
 /* Class = "NSMenuItem"; title = "Floating"; ObjectID = "7Dv-q2-5TV"; */
-"7Dv-q2-5TV.title" = "Плавающий";
+"7Dv-q2-5TV.title" = "Свободное";
 
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "82A-XQ-BvS"; */
 "82A-XQ-BvS.title" = "Автоматически скрывать после:";
 
 /* Class = "NSButtonCell"; title = "Show chapter position in progress bar"; ObjectID = "BVV-Z3-LHR"; */
-"BVV-Z3-LHR.title" = "Показывать позиции глав в прогресс-баре";
+"BVV-Z3-LHR.title" = "Показывать отметки глав в прогресс-баре";
 
 /* Class = "NSButtonCell"; title = "Show remaining time"; ObjectID = "EAa-gN-8dL"; */
 "EAa-gN-8dL.title" = "Показывать оставшееся время";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Display:"; ObjectID = "F2e-CS-KXl"; */
-"F2e-CS-KXl.title" = "Экранное управление:";
+"F2e-CS-KXl.title" = "Экранные сообщения:";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "GKy-3g-4MB"; */
 "GKy-3g-4MB.title" = "Окно:";
@@ -42,10 +42,10 @@
 "fsj-YE-OB7.title" = "Использовать физическое разрешение на экранах Retina";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Controller:"; ObjectID = "g06-Ja-Ot8"; */
-"g06-Ja-Ot8.title" = "Экранное управление:";
+"g06-Ja-Ot8.title" = "Экранное меню:";
 
 /* Class = "NSTextFieldCell"; title = "Layout:"; ObjectID = "l54-63-V6n"; */
-"l54-63-V6n.title" = "Макет:";
+"l54-63-V6n.title" = "Расположение:";
 
 /* Class = "NSButtonCell"; title = "Snap to center when dragging"; ObjectID = "mdD-if-Wqw"; */
 "mdD-if-Wqw.title" = "Привязка к центру при перетаскивании";
@@ -57,4 +57,4 @@
 "suy-e8-j4i.title" = "Размер текста:";
 
 /* Class = "NSButtonCell"; title = "Resize to video size only when opening files manually"; ObjectID = "uD1-HB-46y"; */
-"uD1-HB-46y.title" = "Подстраивать под размер видео только при открытии файлов вручную";
+"uD1-HB-46y.title" = "Подстраивать размер только при открытии файлов вручную";

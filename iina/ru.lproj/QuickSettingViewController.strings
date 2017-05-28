@@ -86,7 +86,7 @@
 "LEZ-fv-buL.title" = "0с";
 
 /* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
-"Lnu-kz-cql.title" = "Внешнее аудио:";
+"Lnu-kz-cql.title" = "Внешняя аудиодорожка:";
 
 /* Class = "NSTextFieldCell"; title = "-12 dB"; ObjectID = "Lpw-ws-Ezh"; */
 "Lpw-ws-Ezh.title" = "-12 dB";
@@ -308,7 +308,7 @@
 "vFD-HU-RVz.title" = "Вручную…";
 
 /* Class = "NSTextFieldCell"; title = "Sub style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
-"wBD-pZ-Bvu.title" = "Cтилизация субтитров может повредить отображение ASS, и в зависимости от типа субтитров некоторые опции не будут использоваться.";
+"wBD-pZ-Bvu.title" = "Cтилизация субтитров может повредить отображение ASS, и в зависимости от типа субтитров некоторые опции будут отключены.";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "wgA-op-JP4"; */
 "wgA-op-JP4.title" = "0с";
@@ -336,4 +336,3 @@
 
 /* Class = "NSMenuItem"; title = "35"; ObjectID = "zcb-7y-OVG"; */
 "zcb-7y-OVG.title" = "35";
-

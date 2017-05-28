@@ -35,10 +35,10 @@
 "21M-40-ac5.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
-"A4y-LL-x0z.title" = "Битрейт:";
+"A4y-LL-x0z.title" = "Bit Rate:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
-"AYt-pH-UCi.title" = "Несвоевременных кадров:";
+"AYt-pH-UCi.title" = "Mistimed Frames:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "Aes-4j-UT6"; */
 "Aes-4j-UT6.title" = "Label";
@@ -47,7 +47,7 @@
 "AjU-1T-aGR.title" = "Display FPS:";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
-"CrF-UR-udW.title" = "Пропущенных кадров:";
+"CrF-UR-udW.title" = "Dropped Frames:";
 
 /* Class = "NSTextFieldCell"; title = "Hw Decoder:"; ObjectID = "DHh-ne-10f"; */
 "DHh-ne-10f.title" = "Hw Decoder:";
@@ -273,4 +273,3 @@
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "ydW-J5-Kk2"; */
 "ydW-J5-Kk2.title" = "Text Cell";
-

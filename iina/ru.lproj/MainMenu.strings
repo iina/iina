@@ -5,6 +5,12 @@
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "Открыть URL…";
 
+/* Class = "NSMenuItem"; title = "Set IINA as The Default App…"; ObjectID = "0os-i1-tJF"; */
+"0os-i1-tJF.title" = "Установить IINA в качестве приложения по умолчанию…";
+/* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
+
+"16p-PA-x34.title" = "Субтитры";
+
 /* Class = "NSMenuItem"; title = "Normal Size"; ObjectID = "1UK-8n-QPP"; */
 "1UK-8n-QPP.title" = "Реальный размер";
 
@@ -22,6 +28,9 @@
 
 /* Class = "NSMenuItem"; title = "Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
 "2t8-Ot-yoO.title" = "Панель быстрых настроек";
+
+/* Class = "NSMenuItem"; title = "Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
+"43n-Ed-5kT.title" = "Панель быстрых настроек";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
 "4ae-MT-2L1.title" = "Задержка аудио + 0.5с";
@@ -149,6 +158,9 @@
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
 "LE2-aR-0XJ.title" = "Все окна — на передний план";
 
+/* Class = "NSMenuItem"; title = "Playback History"; ObjectID = "LND-1n-DU2"; */
+"LND-1n-DU2.title" = "История воспроизведения";
+
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
 "Lc4-4W-thE.title" = "Задержка аудио − 0.5с";
 
@@ -266,6 +278,9 @@
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
 "d15-8v-dXA.title" = "Соотношение сторон";
 
+/* Class = "NSMenu"; title = "Chapter"; ObjectID = "d9c-me-L2H"; */
+"d9c-me-L2H.title" = "Главы";
+
 /* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
 "dMs-cI-mzQ.title" = "Файл";
 
@@ -319,6 +334,9 @@
 
 /* Class = "NSMenu"; title = "Flip"; ObjectID = "n90-to-nRT"; */
 "n90-to-nRT.title" = "Отразить";
+
+/* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
+"npH-8B-XA4.title" = "Удалить текущий файл";
 
 /* Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ"; */
 "oas-Oc-fiZ.title" = "Открыть недавние";

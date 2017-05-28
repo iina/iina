@@ -7,8 +7,8 @@
  */
 
 // Common
-"general.on" = "Выкл.";
-"general.off" = "Вкл.";
+"general.on" = "Вкл.";
+"general.off" = "Выкл.";
 "general.login" = "Войти";
 "general.logout" = "Выйти";
 "general.ok" = "OK";
@@ -21,7 +21,7 @@
 "playlist.chapter_cap" = "ГЛАВЫ";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Буферизация... %d%%";
+"main.buffering_indicator" = "Буферизация… %d%%";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "По умолчанию";

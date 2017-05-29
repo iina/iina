@@ -159,3 +159,24 @@
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "zLl-vV-p1h"; */
 "zLl-vV-p1h.title" = "Справа";
+
+/* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "5eA-EB-Hco"; */
+"5eA-EB-Hco.title" = "Введите список строк, разделённых запятой.";
+
+/* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "NHu-6z-rEm"; */
+"NHu-6z-rEm.title" = "Папки отделяются запятыми (:). Разрешены относительные пути и знак подстановки (*) в конце.";
+
+/* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "VZs-zv-0oM"; */
+"VZs-zv-0oM.title" = "Также искать субтитры в следующих папках:";
+
+/* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "mVR-wA-nID"; */
+"mVR-wA-nID.title" = "Предпочитать субтитры, содержащие в имени файла:";
+
+/* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "ul7-yg-cCb"; */
+"ul7-yg-cCb.title" = "Субтитры, содержащие имя медиафайла";
+
+/* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "d5R-vH-0o0"; */
+"d5R-vH-0o0.title" = "Умное определение IINA";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "xsH-Bm-ZPp"; */
+"xsH-Bm-ZPp.title" = "Отключено";

@@ -25,3 +25,8 @@
 /* Class = "NSTextFieldCell"; title = "Chapter Title"; ObjectID = "vmJ-Ry-xgK"; */
 "vmJ-Ry-xgK.title" = "Название главы";
 
+/* Class = "NSTextFieldCell"; title = "Matched subtitles"; ObjectID = "j2t-mO-cpo"; */
+"j2t-mO-cpo.title" = "Подходящие субтитры";
+
+/* Class = "NSButtonCell"; title = "Wrong Subtitle!"; ObjectID = "zod-Ch-cOH"; */
+"zod-Ch-cOH.title" = "Неверные субтитры!";

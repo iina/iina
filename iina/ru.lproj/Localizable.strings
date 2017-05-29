@@ -184,6 +184,9 @@
 "pl_menu.reveal_in_finder" = "Показать в Finder";
 "pl_menu.add_item" = "Добавить элемент…";
 "pl_menu.clear_playlist" = "Очистить плейлист";
+"pl_menu.matched_sub" = "%d подходящих субтитров";
+"pl_menu.add_sub" = "Добавить субтитры…";
+"pl_menu.wrong_sub" = "Неверные субтитры!";
 
 "keymapping.title" = "Назначить клавиши";
 "keymapping.message" = "Нажмите любую клавишу для записи.";

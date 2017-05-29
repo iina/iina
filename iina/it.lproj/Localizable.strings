@@ -178,8 +178,14 @@
 "pl_menu.reveal_in_finder" = "Mostra nel Finder";
 "pl_menu.add_item" = "Aggiungi elementi…";
 "pl_menu.clear_playlist" = "Cancella la playlist";
+"pl_menu.matched_sub" = "Sottotitoli %d corrispondenti";
+"pl_menu.add_sub" = "Aggiungi sottotitoli…";
+"pl_menu.wrong_sub" = "Sotttotioli errati!";
 
 "keymapping.title" = "Abbreviazioni";
 "keymapping.message" = "Premi i nuovi tasti per aggiungere o modficare le abbreviazioni.";
+
+"filter.video_filters" = "Filtri Video";
+"filter.audio_filters" = "Filtri Audio";
 
 

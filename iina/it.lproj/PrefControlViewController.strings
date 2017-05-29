@@ -1,6 +1,6 @@
 
-/* Class = "NSTextFieldCell"; title = "Scroll horizontally to:"; ObjectID = "1yb-m4-1sK"; */
-"1yb-m4-1sK.title" = "Scorri in orizzontale per:";
+/* Class = "NSTextFieldCell"; title = "Seek type:"; ObjectID = "1yb-m4-1sK"; */
+"1yb-m4-1sK.title" = "Tipo di ricerca:";
 
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "2Ig-fw-UvW"; */
 "2Ig-fw-UvW.title" = "Traccia Precedente / Seguente";
@@ -23,23 +23,53 @@
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "Dm7-JG-fLd"; */
 "Dm7-JG-fLd.title" = "Pausa / Riprendi";
 
+/* Class = "NSTextFieldCell"; title = "Pinch to:"; ObjectID = "E8H-pO-MLc"; */
+"E8H-pO-MLc.title" = "Pizzica:";
+
 /* Class = "NSTextFieldCell"; title = "Double click to:"; ObjectID = "GPH-fM-XHN"; */
-"GPH-fM-XHN.title" = "Click doppio:";
+"GPH-fM-XHN.title" = "Doppio click:";
+
+/* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
+"Hm3-dh-jgb.title" = "Schermo intero";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "K9H-w9-wmT"; */
 "K9H-w9-wmT.title" = "Auto";
 
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "NjV-fH-YgN"; */
+"NjV-fH-YgN.title" = "—";
+
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "OOM-jo-N4V"; */
-"OOM-jo-N4V.title" = "Nascodni OSC";
+"OOM-jo-N4V.title" = "Nascondi OSC";
+
+/* Class = "NSMenuItem"; title = "Adjust window size"; ObjectID = "Ols-Lr-fiH"; */
+"Ols-Lr-fiH.title" = "Regola la dimensione della finestra";
 
 /* Class = "NSTextFieldCell"; title = "Single click to:"; ObjectID = "QhO-As-ZLL"; */
 "QhO-As-ZLL.title" = "Click singolo:";
 
+/* Class = "NSMenuItem"; title = "Seek"; ObjectID = "RCe-3m-q9N"; */
+"RCe-3m-q9N.title" = "Ricerca";
+
 /* Class = "NSTextFieldCell"; title = "Right click to:"; ObjectID = "Rqy-g2-AP2"; */
 "Rqy-g2-AP2.title" = "Click destro:";
 
+/* Class = "NSMenuItem"; title = "Adjust volume"; ObjectID = "SYg-hW-b6r"; */
+"SYg-hW-b6r.title" = "Regola il volume";
+
+/* Class = "NSTextFieldCell"; title = "Sensitivity for volume:"; ObjectID = "YQH-1a-WcM"; */
+"YQH-1a-WcM.title" = "Sensibilità per il volume:";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "chS-d2-TG1"; */
+"chS-d2-TG1.title" = "—";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "guu-dK-YfL"; */
+"guu-dK-YfL.title" = "—";
+
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "hIG-5X-2Pm"; */
-"hIG-5X-2Pm.title" = "Velocità di riproduzione";
+"hIG-5X-2Pm.title" = "Velocità";
+
+/* Class = "NSTextFieldCell"; title = "Scroll vertically to:"; ObjectID = "hNU-dJ-5Cj"; */
+"hNU-dJ-5Cj.title" = "Scorri in verticale:";
 
 /* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "kEB-gk-wuI"; */
 "kEB-gk-wuI.title" = "Usa i bottoni destro/sinistro per:";
@@ -48,19 +78,25 @@
 "mOX-Fi-oTv.title" = "Pausa / Riprendi";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "oOk-y6-lek"; */
-"oOk-y6-lek.title" = "-";
+"oOk-y6-lek.title" = "—";
 
-/* Class = "NSTextFieldCell"; title = "Amount for normal seek:"; ObjectID = "of2-ec-OkC"; */
-"of2-ec-OkC.title" = "Quantità per la ricerca normale:";
+/* Class = "NSTextFieldCell"; title = "Sensitivity for normal seek:"; ObjectID = "of2-ec-OkC"; */
+"of2-ec-OkC.title" = "Sensibilità per la ricerca normale:";
 
 /* Class = "NSMenuItem"; title = "Fastforward / Rewind"; ObjectID = "q50-Po-JYO"; */
 "q50-Po-JYO.title" = "Avanti / Indietro veloce";
 
+/* Class = "NSTextFieldCell"; title = "Scroll horizontally to:"; ObjectID = "w1Y-jy-vNc"; */
+"w1Y-jy-vNc.title" = "Scorri in orizzontale:";
+
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "w54-7I-QfW"; */
-"w54-7I-QfW.title" = "-";
+"w54-7I-QfW.title" = "—";
 
 /* Class = "NSMenuItem"; title = "Keyframe seek"; ObjectID = "wBB-fx-Mao"; */
 "wBB-fx-Mao.title" = "Ricerca fotogramma";
 
+/* Class = "NSMenuItem"; title = "Seek"; ObjectID = "wcS-tP-wav"; */
+"wcS-tP-wav.title" = "Ricerca";
+
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
-"wkV-Gq-B0T.title" = "-";
+"wkV-Gq-B0T.title" = "—";

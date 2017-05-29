@@ -101,7 +101,7 @@
 "track.none" = "<Nessuno>";
 
 // Alerts
-"alert.fatal_error" = "Fatal error: %@ \nL'appicazione will exit now.";
+"alert.fatal_error" = "Fatal error: %@ \nL'appicazione verrà subito chiusa.";
 "alert.mpv_error" = "Errore %@ (%@) nell'impostazioni dell'utente %@.";
 "alert.sleep" = "Impossibile impedire lo stop dello schermo!";
 
@@ -137,6 +137,36 @@
 "alert.sub.cannot_login" = "Impossibile accedere. Si prega di controllare il vostro nome utente, la password e la connessione di rete.\n\n%@";
 
 
+"alert.config.duplicate.message" = "Si prega di inserire il nome per il duplicato del file di configurazione.";
+"alert.config.file_existing.title" = "Il file è già esistente";
+"alert.set_default.title" = "Imposta IINA come applicazione predefinita";
+"general.ok" = "OK";
+"alert.config.file_existing.message" = "Questo non sarebbe dovuto succedere. Scegli OK per sovrascrivere, Annulla per mostrere il file nel Finder.";
+"alert.config.new.title" = "Nuova configurazione di input";
+"alert.add_filter.message" = "Si prega di inserire una stringa di filtro nel formato dei comandi vf o af di MPV.";
+"alert.add_watch.message" = "Si prega di inserire un nome di proprietà MPV valido.";
+"alert.add_filter.title" = "Nuovo filtro";
+"alert.set_default.success" = "Terminato con %d di successo e %d di errore.";
+"alert.opensub.login.title" = "Login Opensubtitles";
+"alert.config.duplicate.title" = "Configurazione del duplicato";
+"alert.set_default.message" = "IINA sarà impostata come applicazione predefinita per tutti i formati che supporta.";
+"general.username" = "Nome utente";
+"alert.opensub.login.message" = "Si prega di inserire il vostro nome utente e password";
+"alert.title_info" = "Informazione";
+"general.password" = "Password";
+"alert.add_watch.title" = "Aggiungi proprietà di riproduzione";
+"alert.title_error" = "Errore";
+"alert.wrong_url_format" = "Formato URL errato.";
+"general.cancel" = "Annulla";
+"alert.jump_to.title" = "Salta a";
+"alert.jump_to.message" = "Si prega di inserire il tempo a cui vuoi saltare. Esempio: 35:20";
+"alert.title_warning" = "Attenzione";
+"alert.config.new.message" = "Si prega di inserire un nome per la nuova configurazione.";
+"alert.keybinding_config.error" = "Errore durante l'analisi del file di configurazione delle abbreviazioni dei tasti \"%@\"! Ritorna alle impostazioni di default di IINA. Si prega di controllare la vostra configurazione.";
+
+"alert.delete_history.title" = "Cancella cronologia riproduzioni";
+"alert.delete_history.message" = "Sei sicuro di cancellare le voci selezionate?";
+
 "pl_menu.title_multi" = "%d Elementi";
 "pl_menu.play_next" = "Riproduci il successivo";
 "pl_menu.remove" = "Rimuovi";
@@ -151,3 +181,5 @@
 
 "keymapping.title" = "Abbreviazioni";
 "keymapping.message" = "Premi i nuovi tasti per aggiungere o modficare le abbreviazioni.";
+
+

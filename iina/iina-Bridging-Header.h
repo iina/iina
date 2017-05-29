@@ -10,6 +10,8 @@
 
 #import <Availability.h>
 
+#import "SPMediaKeyTap.h"
+
 #pragma mark - PIP.framework
 
 NS_ASSUME_NONNULL_BEGIN

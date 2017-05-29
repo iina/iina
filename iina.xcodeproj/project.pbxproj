@@ -99,6 +99,8 @@
 		84817C961DBDCA5F00CC2279 /* SettingsListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84817C951DBDCA5F00CC2279 /* SettingsListCellView.swift */; };
 		84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84817C971DBDCE4300CC2279 /* RoundedColorWell.swift */; };
 		84817CE91DBE2E5300CC2279 /* autoload.lua in Copy Lua Scripts */ = {isa = PBXBuildFile; fileRef = 84817CE61DBE2D0300CC2279 /* autoload.lua */; };
+		8485E5911EBFBD7B00CDE2E1 /* SPInvocationGrabbing in Resources */ = {isa = PBXBuildFile; fileRef = 8485E5891EBFBD7B00CDE2E1 /* SPInvocationGrabbing */; };
+		8485E5961EBFBD7B00CDE2E1 /* SPMediaKeyTap.m in Sources */ = {isa = PBXBuildFile; fileRef = 8485E5901EBFBD7B00CDE2E1 /* SPMediaKeyTap.m */; };
 		84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84879A961E0FFC7E0004F894 /* PrefUIViewController.swift */; };
 		84879A9B1E1032480004F894 /* ShortcutAvailableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84879A9A1E1032480004F894 /* ShortcutAvailableTextField.swift */; };
 		8487BEC11D744FA800FD17B0 /* FlippedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487BEC01D744FA800FD17B0 /* FlippedView.swift */; };
@@ -401,6 +403,9 @@
 		84817C951DBDCA5F00CC2279 /* SettingsListCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListCellView.swift; sourceTree = "<group>"; };
 		84817C971DBDCE4300CC2279 /* RoundedColorWell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedColorWell.swift; sourceTree = "<group>"; };
 		84817CE61DBE2D0300CC2279 /* autoload.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autoload.lua; sourceTree = "<group>"; };
+		8485E5891EBFBD7B00CDE2E1 /* SPInvocationGrabbing */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SPInvocationGrabbing; sourceTree = "<group>"; };
+		8485E58F1EBFBD7B00CDE2E1 /* SPMediaKeyTap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPMediaKeyTap.h; sourceTree = "<group>"; };
+		8485E5901EBFBD7B00CDE2E1 /* SPMediaKeyTap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPMediaKeyTap.m; sourceTree = "<group>"; };
 		84879A961E0FFC7E0004F894 /* PrefUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefUIViewController.swift; sourceTree = "<group>"; };
 		84879A9A1E1032480004F894 /* ShortcutAvailableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutAvailableTextField.swift; sourceTree = "<group>"; };
 		8487BEC01D744FA800FD17B0 /* FlippedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlippedView.swift; sourceTree = "<group>"; };
@@ -732,6 +737,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8485E5821EBFBBE700CDE2E1 /* Imported */ = {
+			isa = PBXGroup;
+			children = (
+				8485E5891EBFBD7B00CDE2E1 /* SPInvocationGrabbing */,
+				8485E58F1EBFBD7B00CDE2E1 /* SPMediaKeyTap.h */,
+				8485E5901EBFBD7B00CDE2E1 /* SPMediaKeyTap.m */,
+			);
+			name = Imported;
+			sourceTree = "<group>";
+		};
 		84A0BAA21D2FAE8200BC8DA1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -923,6 +938,7 @@
 				845ABEAD1D4D19CF00BFB15B /* Models */,
 				84A0BAA31D2FAEA000BC8DA1 /* Views */,
 				84A0BAA61D2FAF8400BC8DA1 /* Utils */,
+				8485E5821EBFBBE700CDE2E1 /* Imported */,
 			);
 			indentWidth = 2;
 			path = iina;
@@ -1046,6 +1062,7 @@
 				8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */,
 				8400D5EA1E1AB33B006785F5 /* KeyRecordViewController.xib in Resources */,
 				C75540751E7886FE00C13D4A /* SubSelectWindowController.xib in Resources */,
+				8485E5911EBFBD7B00CDE2E1 /* SPInvocationGrabbing in Resources */,
 				8400D5F01E1AB344006785F5 /* PrefCodecViewController.xib in Resources */,
 				84C3AB8B1E7BF22300FEFB7A /* MPVCommandFormat.strings in Resources */,
 				8400D5C91E1AB2F9006785F5 /* QuickSettingViewController.xib in Resources */,
@@ -1191,6 +1208,7 @@
 				8488D6E71E11ABE900D5B952 /* PrefNetworkViewController.swift in Sources */,
 				84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */,
 				84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */,
+				8485E5961EBFBD7B00CDE2E1 /* SPMediaKeyTap.m in Sources */,
 				84D377651D7370EE007F7396 /* ChapterTableCellView.swift in Sources */,
 				84C6D3641EB276E9009BF721 /* PlaybackHistory.swift in Sources */,
 				843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */,

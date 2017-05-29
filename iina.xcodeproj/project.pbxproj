@@ -28,6 +28,7 @@
 		8400D5F31E1AB348006785F5 /* PrefSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5F51E1AB348006785F5 /* PrefSubViewController.xib */; };
 		8400D5F61E1AB34D006785F5 /* PrefNetworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5F81E1AB34D006785F5 /* PrefNetworkViewController.xib */; };
 		8407D1401E3A684C0043895D /* ViewLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407D13F1E3A684C0043895D /* ViewLayer.swift */; };
+		840820111ECF6C1800361416 /* FileGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840820101ECF6C1800361416 /* FileGroup.swift */; };
 		840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AF5811E732C8F00F4AF92 /* JustXMLRPC.swift */; };
 		840AF5841E73CE3900F4AF92 /* OpenSubSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AF5831E73CE3900F4AF92 /* OpenSubSubtitle.swift */; };
 		840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D47971DFEEE6A000D9A64 /* KeyMapping.swift */; };
@@ -302,6 +303,7 @@
 		8400D6091E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefSubViewController.strings"; sourceTree = "<group>"; };
 		8400D60A1E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefNetworkViewController.strings"; sourceTree = "<group>"; };
 		8407D13F1E3A684C0043895D /* ViewLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewLayer.swift; sourceTree = "<group>"; };
+		840820101ECF6C1800361416 /* FileGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileGroup.swift; sourceTree = "<group>"; };
 		840AF5811E732C8F00F4AF92 /* JustXMLRPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustXMLRPC.swift; sourceTree = "<group>"; };
 		840AF5831E73CE3900F4AF92 /* OpenSubSubtitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSubSubtitle.swift; sourceTree = "<group>"; };
 		840D47971DFEEE6A000D9A64 /* KeyMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyMapping.swift; sourceTree = "<group>"; };
@@ -800,6 +802,7 @@
 				84E295C11E2CFA18006388F7 /* ObjcUtils.h */,
 				8492C2851E771FB200CE5825 /* ISO639_2.strings */,
 				8492C2871E7721A600CE5825 /* ISO639_2Helper.swift */,
+				840820101ECF6C1800361416 /* FileGroup.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1017,6 +1020,7 @@
 				pl,
 				uk,
 				ja,
+				en,
 			);
 			mainGroup = 84EB1ECD1D2F51D3004FA5A1;
 			productRefGroup = 84EB1ED71D2F51D3004FA5A1 /* Products */;
@@ -1162,6 +1166,7 @@
 				845ABEAC1D4D19C000BFB15B /* MPVTrack.swift in Sources */,
 				84AABE981DBFB62F00D138FD /* FixedFontManager.m in Sources */,
 				84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */,
+				840820111ECF6C1800361416 /* FileGroup.swift in Sources */,
 				84A0BA901D2F8D4100BC8DA1 /* IINAError.swift in Sources */,
 				84C6D3621EAF8D63009BF721 /* HistoryController.swift in Sources */,
 				847644081D48B413004F6DF5 /* MPVOption.swift in Sources */,

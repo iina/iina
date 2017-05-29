@@ -13,6 +13,14 @@ class Utility {
   static let tabTitleFontAttributes = FontAttributes(font: .system, size: .system, align: .center).value
   static let tabTitleActiveFontAttributes = FontAttributes(font: .systemBold, size: .system, align: .center).value
 
+  static let supportedFileExt: [MPVTrack.TrackType: [String]] = {
+    var result: [MPVTrack.TrackType: [String]] = [:]
+    result[.video] = ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt"]
+    result[.audio] = ["mp3", "aac", "mka", "dts", "flac", "ogg", "m4a", "ac3", "opus", "wav", "wv"]
+    result[.sub] = ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc"]
+    return result
+  }()
+
   // MARK: - Logs, alerts
 
   @available(*, deprecated, message: "showAlert(message:alertStyle:) is deprecated, use showAlert(_ key:comment:arguments:alertStyle:) instead")
@@ -106,7 +114,7 @@ class Utility {
    Pop up an open panel.
    - Returns: Whether user dismissed the panel by clicking OK.
    */
-  static func quickOpenPanel(title: String, isDir: Bool, ok: (URL) -> Void) -> Bool {
+  static func quickOpenPanel(title: String, isDir: Bool, dir: URL? = nil, ok: (URL) -> Void) -> Bool {
     let panel = NSOpenPanel()
     panel.title = title
     panel.canCreateDirectories = false
@@ -114,10 +122,34 @@ class Utility {
     panel.canChooseDirectories = isDir
     panel.resolvesAliases = true
     panel.allowsMultipleSelection = false
+    if let dir = dir {
+      panel.directoryURL = dir
+    }
     if panel.runModal() == NSFileHandlingPanelOKButton {
-      if let url = panel.url {
-        ok(url)
-      }
+      if let url = panel.url { ok(url) }
+      return true
+    } else {
+      return false
+    }
+  }
+
+  /**
+   Pop up an open panel.
+   - Returns: Whether user dismissed the panel by clicking OK.
+   */
+  static func quickMultipleOpenPanel(title: String, dir: URL? = nil, ok: ([URL]) -> Void) -> Bool {
+    let panel = NSOpenPanel()
+    panel.title = title
+    panel.canCreateDirectories = false
+    panel.canChooseFiles = true
+    panel.canChooseDirectories = false
+    panel.resolvesAliases = true
+    panel.allowsMultipleSelection = true
+    if let dir = dir {
+      panel.directoryURL = dir
+    }
+    if panel.runModal() == NSFileHandlingPanelOKButton {
+      ok(panel.urls)
       return true
     } else {
       return false

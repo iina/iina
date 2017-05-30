@@ -681,18 +681,18 @@ class PlayerCore: NSObject {
     let userDefinedSearchPaths = rawUserDefinedSearchPaths.components(separatedBy: ":").filter { !$0.isEmpty }
     for path in userDefinedSearchPaths {
       var p = path
-      // handle absolute paths
-      if path.hasPrefix("/") {
-        subDirs.append(URL(fileURLWithPath: path, isDirectory: true))
-      }
+      // handle `~`
       if path.hasPrefix("~") {
-        subDirs.append(URL(fileURLWithPath: NSString(string: path).expandingTildeInPath, isDirectory: true))
+        p = NSString(string: path).expandingTildeInPath
       }
-      // handle wildcards
       if path.hasSuffix("/") { p.deleteLast(1) }
-      if path.hasSuffix("/*") {  // only check wildcard at the end
-        p.deleteLast(2)
-        let pathURL = folder.appendingPathComponent(p, isDirectory: true)
+      // only check wildcard at the end
+      let hasWildcard = path.hasSuffix("/*")
+      if hasWildcard { p.deleteLast(2) }
+      // handle absolute paths
+      let pathURL = path.hasPrefix("/") || path.hasPrefix("~") ? URL(fileURLWithPath: p, isDirectory: true) : folder.appendingPathComponent(p, isDirectory: true)
+      // handle wildcards
+      if hasWildcard {
         // append all sub dirs
         if let contents = try? fm.contentsOfDirectory(at: pathURL, includingPropertiesForKeys: [.isDirectoryKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
           if #available(OSX 10.11, *) {
@@ -702,7 +702,7 @@ class PlayerCore: NSObject {
           }
         }
       } else {
-        subDirs.append(folder.appendingPathComponent(p, isDirectory: true))
+        subDirs.append(pathURL)
       }
     }
 

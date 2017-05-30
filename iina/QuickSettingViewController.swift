@@ -112,7 +112,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.dataSource = self
       view.superview?.superview?.layer?.cornerRadius = 4
     }
-    customSpeedTextField.formatter = DecimalFormatter()
     if pendingSwitchRequest != nil {
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil

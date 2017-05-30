@@ -403,13 +403,16 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       sender.allowsTickMarkValuesOnly = false
     }
     let sliderValue = sender.doubleValue
-    let value = AppData.minSpeed * pow((AppData.maxSpeed / AppData.minSpeed), sliderValue / sliderSteps)
+    let value = AppData.minSpeed * pow(AppData.maxSpeed / AppData.minSpeed, sliderValue / sliderSteps)
     customSpeedTextField.doubleValue = value
     playerCore.setSpeed(value)
     redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(customSpeedTextField.stringValue)x")
   }
 
   @IBAction func customSpeedEditFinishedAction(_ sender: NSTextField) {
+    if sender.stringValue.isEmpty {
+      sender.stringValue = "1"
+    }
     let value = customSpeedTextField.doubleValue
     let sliderValue = log(value / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
     speedSlider.doubleValue = sliderValue
@@ -508,10 +511,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func customAudioDelayEditFinishedAction(_ sender: NSTextField) {
-    let value = sender.doubleValue
-    if value == 0 {
+    if sender.stringValue.isEmpty {
       sender.stringValue = "0"
     }
+    let value = sender.doubleValue
     playerCore.setAudioDelay(value)
     audioDelaySlider.doubleValue = value
     redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(sender.stringValue)s")
@@ -570,10 +573,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func customSubDelayEditFinishedAction(_ sender: NSTextField) {
-    let value = sender.doubleValue
-    if value == 0 {
+    if sender.stringValue.isEmpty {
       sender.stringValue = "0"
     }
+    let value = sender.doubleValue
     playerCore.setSubDelay(value)
     subDelaySlider.doubleValue = value
     redraw(indicator: subDelaySliderIndicator, constraint: subDelaySliderConstraint, slider: subDelaySlider, value: "\(sender.stringValue)s")

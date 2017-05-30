@@ -481,11 +481,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func loadExternalAudioAction(_ sender: NSButton) {
     let currentDir = playerCore.info.currentURL?.deletingLastPathComponent()
-    let result = Utility.quickOpenPanel(title: "Load external audio file", isDir: false, dir: currentDir) { url in
+    Utility.quickOpenPanel(title: "Load external audio file", isDir: false, dir: currentDir) { url in
       self.playerCore.loadExternalAudioFile(url)
-    }
-    if result {
-      audioTableView.reloadData()
+      self.audioTableView.reloadData()
     }
   }
 
@@ -543,12 +541,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func loadExternalSubAction(_ sender: NSSegmentedControl) {
     if sender.selectedSegment == 0 {
       let currentDir = playerCore.info.currentURL?.deletingLastPathComponent()
-      let result = Utility.quickOpenPanel(title: "Load external subtitle", isDir: false, dir: currentDir) { url in
+      Utility.quickOpenPanel(title: "Load external subtitle", isDir: false, dir: currentDir) { url in
         self.playerCore.loadExternalSubFile(url)
-      }
-      if result {
-        subTableView.reloadData()
-        secSubTableView.reloadData()
+        self.subTableView.reloadData()
+        self.secSubTableView.reloadData()
       }
     } else if sender.selectedSegment == 1 {
       let activeSubs = playerCore.info.trackList(.sub) + playerCore.info.trackList(.secondSub)

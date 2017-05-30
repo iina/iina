@@ -304,10 +304,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   // MARK: - IBActions
 
   @IBAction func addToPlaylistBtnAction(_ sender: AnyObject) {
-    let _ = Utility.quickOpenPanel(title: "Add to playlist", isDir: false) { (url) in
+    Utility.quickOpenPanel(title: "Add to playlist", isDir: false) { (url) in
       if url.isFileURL {
         self.playerCore.addToPlaylist(url.path)
-        reloadData(playlist: true, chapters: false)
+        self.reloadData(playlist: true, chapters: false)
         self.mainWindow.displayOSD(.addToPlaylist(1))
       }
     }
@@ -523,12 +523,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     guard let selectedRows = selectedRows, let index = selectedRows.first else { return }
     let filename = playerCore.info.playlist[index].filename
     let fileURL = URL(fileURLWithPath: filename).deletingLastPathComponent()
-    let _ = Utility.quickMultipleOpenPanel(title: NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File"), dir: fileURL) { subURLs in
+    Utility.quickMultipleOpenPanel(title: NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File"), dir: fileURL) { subURLs in
       for subURL in subURLs {
         guard Utility.supportedFileExt[.sub]!.contains(subURL.pathExtension) else { return }
-        playerCore.info.matchedSubs.safeAppend(subURL, forKey: filename)
+        self.playerCore.info.matchedSubs.safeAppend(subURL, forKey: filename)
       }
-      playlistTableView.reloadData(forRowIndexes: selectedRows, columnIndexes: IndexSet(integersIn: 0...1))
+      self.playlistTableView.reloadData(forRowIndexes: selectedRows, columnIndexes: IndexSet(integersIn: 0...1))
     }
   }
 

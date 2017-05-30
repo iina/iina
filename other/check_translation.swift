@@ -1,3 +1,5 @@
+#!/usr/bin/swift
+
 import Cocoa
 
 class Regex {
@@ -43,6 +45,7 @@ let ignorePlaceHolderTitle = true
 let checkRedundantKey = false
 
 let languages = ["de", "fr", "it", "ja", "ko", "pl", "zh-Hans", "zh-Hant"]
+var testLanguages: [String] = []
 
 var stat: [String: Int] = {
   var dic: [String: Int] = [:]
@@ -106,7 +109,7 @@ func sameArray(_ a: [String], _ b: [String]) -> Bool {
 
 func makeSure(fileExists file: String, withExtension ext: String, basedOn base: BaseLang) {
   let fullname = "\(file).\(ext)"
-  for lang in languages {
+  for lang in testLanguages {
     if base == .zhHans && lang == "zh-Hans" { continue }
     guard lang.directory.file(fullname).exists else {
       print("  [x][\(lang)] File \"\(fullname)\" doesn't extst")
@@ -121,7 +124,7 @@ func makeSure(allKeysExistInFile file: String, basedOn base: BaseLang) {
   let fullname = "\(file).strings"
   guard let baseDic = baseLang.directory.file(fullname).stringsContent else { return }
 
-  for lang in languages {
+  for lang in testLanguages {
     if base == .zhHans && lang == "zh-Hans" { continue }
     guard var langDic = lang.directory.file(fullname).stringsContent else { stat[lang]! += 1; return }
     // for all keys in base dic
@@ -157,6 +160,26 @@ func makeSure(allKeysExistInFile file: String, basedOn base: BaseLang) {
 
 // start
 
+let arguments = CommandLine.arguments
+
+if arguments.count == 1 {
+  print("usage: ./check_translation.swift lang [lang2 ...] | all")
+  exit(0)
+}
+
+if arguments.count == 2 && arguments[1] == "all" {
+  testLanguages = languages
+} else {
+  for i in 1..<arguments.count {
+    if !languages.contains(arguments[i]) {
+      print("Unknown language. Exit.")
+      exit(1)
+    } else {
+      testLanguages.append(arguments[i])
+    }
+  }
+}
+
 guard let rawFileList = try? fm.contentsOfDirectory(atPath: "Base".directory) else {
   print("[ERROR] Cannot get file list")
   exit(1)
@@ -183,4 +206,7 @@ for file in fileList {
 }
 
 print("\nFinished. Issues count:")
-print(stat)
+for lang in testLanguages {
+  print(lang, stat[lang]!)
+}
+

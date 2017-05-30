@@ -661,7 +661,7 @@ class PlayerCore: NSObject {
 
   /// Add files in the same folder to playlist.
   private func autoLoadFilesInCurrentFolder() {
-    guard let folder = info.currentURL?.deletingLastPathComponent() else { return }
+    guard let folder = info.currentURL?.deletingLastPathComponent(), folder.isFileURL else { return }
 
     // don't load file if user didn't switch folder
     guard folder.path != info.currentFolder?.path else { return }

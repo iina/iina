@@ -24,7 +24,12 @@ class FileInfo: Hashable {
 
   var prefix: String {  // prefix detected by FileGroup
     didSet {
-      suffix = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
+      if prefix.characters.count < self.characters.count {
+        suffix = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
+      } else {
+        prefix = ""
+        suffix = self.filename
+      }
     }
   }
   var suffix: String  // filename - prefix

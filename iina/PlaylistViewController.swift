@@ -389,15 +389,18 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         v.textField?.stringValue = item.isPlaying ? Constants.String.play : ""
       } else if identifier == Constants.Identifier.trackName {
         let cellView = v as! PlaylistTrackCellView
+        // file name
         let filename = item.filenameForDisplay
-        if let prefix = playerCore.info.commonPrefixes.first(where: { $1.contains(item.filename) })?.key {
+        let filenameWithoutExt: String = NSString(string: filename).deletingPathExtension
+        if let prefix = playerCore.info.commonPrefixes.first(where: { $1.contains(item.filename) })?.key,
+          prefix.characters.count <= filenameWithoutExt.characters.count {  // check whether prefix length > filename length
           cellView.prefixBtn.hasPrefix = true
-          cellView.prefixBtn.text = prefix
           cellView.textField?.stringValue = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
         } else {
           cellView.prefixBtn.hasPrefix = false
-          cellView.textField?.stringValue = item.filenameForDisplay
+          cellView.textField?.stringValue = filename
         }
+        // sub button
         if let matchedSubs = playerCore.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
           cellView.subBtn.isHidden = false
         } else {

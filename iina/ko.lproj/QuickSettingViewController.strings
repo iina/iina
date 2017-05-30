@@ -46,9 +46,6 @@
 /* Class = "NSTextFieldCell"; title = "5s"; ObjectID = "C0t-gm-Tim"; */
 "C0t-gm-Tim.title" = "5초";
 
-/* Class = "NSButtonCell"; title = "Load Subtitle..."; ObjectID = "C97-zJ-O3Y"; */
-"C97-zJ-O3Y.title" = "자막 불러오기…";
-
 /* Class = "NSTextFieldCell"; title = "0"; ObjectID = "CAr-N0-j64"; */
 "CAr-N0-j64.title" = "0";
 
@@ -337,3 +334,6 @@
 /* Class = "NSMenuItem"; title = "35"; ObjectID = "zcb-7y-OVG"; */
 "zcb-7y-OVG.title" = "35";
 
+"AB5-UZ-euc.ibShadowedLabels[0]" = "자막 열기…";
+
+"Rbb-wh-cLc.ibShadowedLabels[0]" = "온라인 검색…";

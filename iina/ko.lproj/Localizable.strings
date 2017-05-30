@@ -184,6 +184,9 @@
 "pl_menu.reveal_in_finder" = "파인더에서 보기";
 "pl_menu.add_item" = "항목 추가…";
 "pl_menu.clear_playlist" = "재생목록 지움";
+"pl_menu.matched_sub" = "%d개의 자막 일치";
+"pl_menu.add_sub" = "자막 추가…";
+"pl_menu.wrong_sub" = "일치되지 않은 자막!";
 
 "keymapping.title" = "단축키 지정";
 "keymapping.message" = "기록할 키를 누르십시오.";

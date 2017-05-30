@@ -164,7 +164,7 @@ extension Array {
 }
 
 extension Dictionary {
-  mutating func safeAppend<T: Equatable>(_ value: T, forKey key: Key) where Value == Array<T> {
+  mutating func safeAppend<T: Equatable>(_ value: T, for key: Key) where Value == Array<T> {
     if self[key] == nil {
       self[key] = Array<T>()
     }
@@ -343,10 +343,10 @@ extension String {
     self = self.substring(to: self.index(endIndex, offsetBy: -num))
   }
 
-  public func occurancesOf(_ str: String, inRange r: Range<Index>?) -> Int {
+  public func countOccurances(of str: String, inRange r: Range<Index>?) -> Int {
     if let range = range(of: str, options: [], range: r, locale: nil) {
       let nextRange = range.upperBound..<self.endIndex
-      return 1 + occurancesOf(str, inRange: nextRange)
+      return 1 + countOccurances(of: str, inRange: nextRange)
     } else {
       return 0
     }

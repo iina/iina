@@ -713,21 +713,13 @@ class PlayerCore: NSObject {
     }
 
     // natural sort
-    groups[.video]!.sort { file1, file2 -> Bool in
-      return file1.segments.lexicographicallyPrecedes(file2.segments) { a, b in
-        if let inta = Int(a), let intb = Int(b) {
-          return inta < intb
-        } else {
-          return a < b
-        }
-      }
-    }
+    groups[.video]!.sort { $0.filename.localizedStandardCompare($1.filename) == .orderedAscending }
 
     // get all possible sub files
     var subtitles = groups[.sub]!
     for subDir in subDirs {
       if let contents = try? fm.contentsOfDirectory(at: subDir, includingPropertiesForKeys: nil, options: searchOptions) {
-        subtitles.append(contentsOf: contents.filter { subExts.contains($0.pathExtension) }.map { FileInfo($0) })
+        subtitles.append(contentsOf: contents.flatMap { subExts.contains($0.pathExtension) ? FileInfo($0) : nil })
       }
     }
 
@@ -736,7 +728,7 @@ class PlayerCore: NSObject {
     info.commonPrefixes = series.flatten()
 
     // group sub files
-    let _ = FileGroup.group(files: subtitles)
+    _ = FileGroup.group(files: subtitles)
 
     // get auto load option
     let subAutoLoadOption: Preference.IINAAutoLoadAction = Preference.IINAAutoLoadAction(rawValue: ud.integer(forKey: Preference.Key.subAutoLoadIINA)) ?? .iina
@@ -762,13 +754,19 @@ class PlayerCore: NSObject {
         let minDistToSub = video.dist.reduce(UInt.max, { min($0.0, $0.1.value) })
         subtitles
           .filter { video.dist[$0]! == minDistToSub && $0.minDist.contains(video) }
-          .forEach { info.matchedSubs.safeAppend($0.url, forKey: video.path); matchedSubs.insert($0) }
+          .forEach {
+            info.matchedSubs.safeAppend($0.url, for: video.path)
+            matchedSubs.insert($0)
+          }
       }
       // add subs that contains video name
       if subAutoLoadOption.shouldLoadSubsContainingVideoName() {
         subtitles
           .filter { $0.filename.contains(video.filename) }
-          .forEach { info.matchedSubs.safeAppend($0.url, forKey: video.path); matchedSubs.insert($0) }
+          .forEach {
+            info.matchedSubs.safeAppend($0.url, for: video.path)
+            matchedSubs.insert($0)
+          }
       }
       // move the sub to front if it contains priority strings
       if let priorString = ud.string(forKey: Preference.Key.subAutoLoadPriorityString), !matchedSubs.isEmpty {
@@ -779,7 +777,7 @@ class PlayerCore: NSObject {
         // find the min occurance count first
         var minOccurances = Int.max
         matchedSubs.forEach { sub in
-          sub.priorityStringOccurances = stringList.reduce(0, { $0 + sub.filename.occurancesOf($1, inRange: nil) })
+          sub.priorityStringOccurances = stringList.reduce(0, { $0 + sub.filename.countOccurances(of: $1, inRange: nil) })
           if sub.priorityStringOccurances < minOccurances {
             minOccurances = sub.priorityStringOccurances
           }

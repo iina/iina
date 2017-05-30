@@ -20,10 +20,9 @@ class FileInfo: Hashable {
   var characters: [Character]
   var dist: [FileInfo: UInt] = [:]
   var minDist: [FileInfo] = []
-  var segments: [String] = []
   var priorityStringOccurances = 0
 
-  var prefix: String {  // prefix detected
+  var prefix: String {  // prefix detected by FileGroup
     didSet {
       suffix = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
     }
@@ -38,24 +37,6 @@ class FileInfo: Hashable {
     self.characters = [Character](self.filename.characters)
     self.prefix = ""
     self.suffix = self.filename
-    self.getSegments()
-  }
-
-  private func getSegments() {
-    var breakPoints: [Int] = []
-    var lastChar: Character = " "
-    for (i, char) in filename.characters.enumerated() {
-      if i == 0 || ((char >= "0" && char <= "9") != (lastChar >= "0" && lastChar <= "9")) {
-        breakPoints.append(i)
-      }
-      lastChar = char
-    }
-    breakPoints.append(filename.characters.count)
-    for i in 1..<breakPoints.count {
-      let start = filename.index(filename.startIndex, offsetBy: breakPoints[i - 1])
-      let end = filename.index(filename.startIndex, offsetBy: breakPoints[i])
-      segments.append(filename.substring(with: start..<end))
-    }
   }
 
   var hashValue: Int {

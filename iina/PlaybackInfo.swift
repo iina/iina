@@ -13,6 +13,7 @@ class PlaybackInfo {
   var fileLoading: Bool = false
 
   var currentURL: URL?
+  var currentFolder: URL?
   var isNetworkResource: Bool = false
 
   var videoWidth: Int?
@@ -133,4 +134,7 @@ class PlaybackInfo {
   var playlist: [MPVPlaylistItem] = []
   var chapters: [MPVChapter] = []
 
+  var matchedSubs: [String: [URL]] = [:]
+  var commonPrefixes: [String: [String]] = [:]
+  var currentVideosInfo: [FileInfo] = []
 }

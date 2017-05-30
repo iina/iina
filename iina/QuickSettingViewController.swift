@@ -72,6 +72,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var customAudioDelayTextField: NSTextField!
 	
 	
+  @IBOutlet weak var subLoadSementedControl: NSSegmentedControl!
   @IBOutlet weak var subDelaySlider: NSSlider!
   @IBOutlet weak var subDelaySliderIndicator: NSTextField!
   @IBOutlet weak var subDelaySliderConstraint: NSLayoutConstraint!
@@ -112,11 +113,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.dataSource = self
       view.superview?.superview?.layer?.cornerRadius = 4
     }
-    customSpeedTextField.formatter = DecimalFormatter()
     if pendingSwitchRequest != nil {
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil
     }
+
+    subLoadSementedControl.image(forSegment: 1)?.isTemplate = true
 
     // notifications
     let tracklistChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.tracklistChanged, object: nil, queue: OperationQueue.main) { _ in
@@ -154,11 +156,18 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       cropSegment.selectedSegment = index
     }
     rotateSegment.selectSegment(withTag: AppData.rotations.index(of: playerCore.info.rotation) ?? -1)
-    customSpeedTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
     deinterlaceCheckBtn.state = playerCore.info.deinterlace ? NSOnState : NSOffState
+    let speed = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
+    customSpeedTextField.doubleValue = speed
+    let sliderValue = log(speed / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
+    speedSlider.doubleValue = sliderValue
+    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(customSpeedTextField.stringValue)x")
 
     // Audio
-    customAudioDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Audio.audioDelay)
+    let audioDelay = playerCore.mpvController.getDouble(MPVOption.Audio.audioDelay)
+    audioDelaySlider.doubleValue = audioDelay
+    customAudioDelayTextField.doubleValue = audioDelay
+    redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(customAudioDelayTextField.stringValue)s")
 
     // Sub
     if let currSub = playerCore.info.currentTrack(.sub) {
@@ -171,7 +180,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let currSubScale = playerCore.mpvController.getDouble(MPVOption.Subtitles.subScale).constrain(min: 0.1, max: 10)
     let displaySubScale = Utility.toDisplaySubScale(fromRealSubScale: currSubScale)
     subScaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
-    customSubDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Subtitles.subDelay)
+    let subDelay = playerCore.mpvController.getDouble(MPVOption.Subtitles.subDelay)
+    subDelaySlider.doubleValue = subDelay
+    customSubDelayTextField.doubleValue = subDelay
+    redraw(indicator: subDelaySliderIndicator, constraint: subDelaySliderConstraint, slider: subDelaySlider, value: "\(customSubDelayTextField.stringValue)s")
 
     let currSubPos = playerCore.mpvController.getInt(MPVOption.Subtitles.subPos)
     subPosSlider.intValue = Int32(currSubPos)
@@ -395,24 +407,23 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       sender.allowsTickMarkValuesOnly = false
     }
     let sliderValue = sender.doubleValue
-    let value = AppData.minSpeed * pow((AppData.maxSpeed / AppData.minSpeed), sliderValue / sliderSteps)
-    let formattedValue = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: value)) ?? ""
-    speedSliderIndicator.stringValue = "\(formattedValue)x"
-    customSpeedTextField.stringValue = formattedValue
+    let value = AppData.minSpeed * pow(AppData.maxSpeed / AppData.minSpeed, sliderValue / sliderSteps)
+    customSpeedTextField.doubleValue = value
     playerCore.setSpeed(value)
-    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(formattedValue)x")
+    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(customSpeedTextField.stringValue)x")
   }
 
   @IBAction func customSpeedEditFinishedAction(_ sender: NSTextField) {
+    if sender.stringValue.isEmpty {
+      sender.stringValue = "1"
+    }
     let value = customSpeedTextField.doubleValue
-    let formattedValue = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: value)) ?? ""
-    customSpeedTextField.stringValue = formattedValue
     let sliderValue = log(value / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
     speedSlider.doubleValue = sliderValue
     if playerCore.info.playSpeed != value {
       playerCore.setSpeed(value)
     }
-    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(formattedValue)x")
+    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(sender.stringValue)x")
     if let window = sender.window {
       window.makeFirstResponder(window.contentView)
     }
@@ -477,11 +488,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   // MARK: Audio tab
 
   @IBAction func loadExternalAudioAction(_ sender: NSButton) {
-    let result = Utility.quickOpenPanel(title: "Load external audio file", isDir: false) { url in
+    let currentDir = playerCore.info.currentURL?.deletingLastPathComponent()
+    Utility.quickOpenPanel(title: "Load external audio file", isDir: false, dir: currentDir) { url in
       self.playerCore.loadExternalAudioFile(url)
-    }
-    if result {
-      audioTableView.reloadData()
+      self.audioTableView.reloadData()
     }
   }
 
@@ -494,10 +504,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       sender.allowsTickMarkValuesOnly = false
     }
     let sliderValue = sender.doubleValue
-    let formattedValue = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: sliderValue)) ?? ""
-    audioDelaySliderIndicator.stringValue = "\(formattedValue)s"
-    customAudioDelayTextField.stringValue = formattedValue
-    redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(formattedValue)s")
+    customAudioDelayTextField.doubleValue = sliderValue
+    redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(customAudioDelayTextField.stringValue)s")
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerCore.setAudioDelay(sliderValue)
@@ -506,6 +514,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func customAudioDelayEditFinishedAction(_ sender: NSTextField) {
+    if sender.stringValue.isEmpty {
+      sender.stringValue = "0"
+    }
     let value = sender.doubleValue
     playerCore.setAudioDelay(value)
     audioDelaySlider.doubleValue = value
@@ -536,14 +547,42 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   // MARK: Sub tab
 
-  @IBAction func loadExternalSubAction(_ sender: NSButton) {
-    let result = Utility.quickOpenPanel(title: "Load external subtitle", isDir: false) { url in
-      self.playerCore.loadExternalSubFile(url)
+  @IBAction func loadExternalSubAction(_ sender: NSSegmentedControl) {
+    if sender.selectedSegment == 0 {
+      let currentDir = playerCore.info.currentURL?.deletingLastPathComponent()
+      Utility.quickOpenPanel(title: "Load external subtitle", isDir: false, dir: currentDir) { url in
+        self.playerCore.loadExternalSubFile(url)
+        self.subTableView.reloadData()
+        self.secSubTableView.reloadData()
+      }
+    } else if sender.selectedSegment == 1 {
+      let activeSubs = playerCore.info.trackList(.sub) + playerCore.info.trackList(.secondSub)
+      let menu = NSMenu()
+      menu.autoenablesItems = false
+      if let videoInfo = playerCore.info.currentVideosInfo.first(where: { $0.url == playerCore.info.currentURL }),
+        !videoInfo.dist.isEmpty {
+        let subtitles = videoInfo.dist.map { ($0.value, $0.key) }.sorted { $0.0 < $1.0 }
+        for sub in subtitles {
+          let isActive = activeSubs.contains { $0.externalFilename == sub.1.path }
+          menu.addItem(withTitle: "\(sub.1.filename).\(sub.1.ext)",
+            action: #selector(self.chosenSubFromMenu(_:)),
+                       tag: nil, obj: sub.1, stateOn: isActive)
+        }
+      } else {
+        menu.addItem(withTitle: NSLocalizedString("track.none", comment: "<None>"))
+      }
+      NSMenu.popUpContextMenu(menu, with: NSApp.currentEvent!, for: sender)
     }
-    if result {
-      subTableView.reloadData()
-      secSubTableView.reloadData()
-    }
+  }
+
+  @objc
+  private func chosenSubFromMenu(_ sender: NSMenuItem) {
+    guard let fileInfo = sender.representedObject as? FileInfo else { return }
+    playerCore.loadExternalSubFile(fileInfo.url)
+  }
+
+  @IBAction func searchOnlineAction(_ sender: AnyObject) {
+    mainWindow.menuFindOnlineSub(.dummy)
   }
 
   @IBAction func subDelayChangedAction(_ sender: NSSlider) {
@@ -555,10 +594,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       sender.allowsTickMarkValuesOnly = false
     }
     let sliderValue = sender.doubleValue
-    let formattedValue = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: sliderValue)) ?? ""
-    subDelaySliderIndicator.stringValue = "\(formattedValue)s"
-    customSubDelayTextField.stringValue = formattedValue
-    redraw(indicator: subDelaySliderIndicator, constraint: subDelaySliderConstraint, slider: subDelaySlider, value: "\(formattedValue)s")
+    customSubDelayTextField.doubleValue = sliderValue
+    redraw(indicator: subDelaySliderIndicator, constraint: subDelaySliderConstraint, slider: subDelaySlider, value: "\(customSubDelayTextField.stringValue)s")
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerCore.setSubDelay(sliderValue)
@@ -567,6 +604,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func customSubDelayEditFinishedAction(_ sender: NSTextField) {
+    if sender.stringValue.isEmpty {
+      sender.stringValue = "0"
+    }
     let value = sender.doubleValue
     playerCore.setSubDelay(value)
     subDelaySlider.doubleValue = value

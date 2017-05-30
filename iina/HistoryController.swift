@@ -36,7 +36,7 @@ class HistoryController: NSObject {
 
   func add(_ url: URL, duration: Double) {
     guard UserDefaults.standard.bool(forKey: Preference.Key.recordPlaybackHistory) else { return }
-    if let existingItem = (history.filter { $0.mpvMd5 == url.path.md5 }).first, let index = history.index(of: existingItem) {
+    if let existingItem = history.first(where: { $0.mpvMd5 == url.path.md5 }), let index = history.index(of: existingItem) {
       history.remove(at: index)
     }
     history.insert(PlaybackHistory(url: url, duration: duration), at: 0)

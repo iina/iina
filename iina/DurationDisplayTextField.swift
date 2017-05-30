@@ -11,6 +11,7 @@ import Foundation
 class DurationDisplayTextField: NSTextField {
   
   enum DisplayMode {
+    case current
     case duration // displays the duration of the movie
     case remaining // displays the remaining time in the movie
   }
@@ -32,6 +33,8 @@ class DurationDisplayTextField: NSTextField {
     
     let stringValue: String
     switch mode {
+    case .current:
+      stringValue = current.stringRepresentation
     case .duration:
       stringValue = duration.stringRepresentation
     case .remaining:

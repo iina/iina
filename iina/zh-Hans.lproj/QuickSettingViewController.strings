@@ -47,9 +47,6 @@
 /* Class = "NSTextFieldCell"; title = "5s"; ObjectID = "C0t-gm-Tim"; */
 "C0t-gm-Tim.title" = "5s";
 
-/* Class = "NSButtonCell"; title = "Load Subtitle..."; ObjectID = "C97-zJ-O3Y"; */
-"C97-zJ-O3Y.title" = "加载字幕...";
-
 /* Class = "NSTextFieldCell"; title = "0"; ObjectID = "CAr-N0-j64"; */
 "CAr-N0-j64.title" = "0";
 
@@ -333,3 +330,7 @@
 "zcb-7y-OVG.title" = "35";
 
 "t03-36-Zge.title" = "位置";
+
+"AB5-UZ-euc.ibShadowedLabels[0]" = "加载字幕…";
+
+"Rbb-wh-cLc.ibShadowedLabels[0]" = "在线查找…";

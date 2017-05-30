@@ -139,7 +139,7 @@ class MPVController: NSObject {
     }
 
     setUserOption(PK.playlistAutoPlayNext, type: .other, forName: MPVOption.Window.keepOpen) { key in
-      let keepOpen = UserDefaults.standard.bool(forKey: key)
+      let keepOpen = UserDefaults.standard.bool(forKey: PK.keepOpenOnFileEnd)
       let keepOpenPl = !UserDefaults.standard.bool(forKey: PK.playlistAutoPlayNext)
       return keepOpenPl ? "always" : (keepOpen ? "yes" : "no")
     }
@@ -166,10 +166,7 @@ class MPVController: NSObject {
 
     // - Sub
 
-    setUserOption(PK.subAutoLoad, type: .other, forName: MPVOption.Subtitles.subAuto) { key in
-      let v = UserDefaults.standard.integer(forKey: key)
-      return Preference.AutoLoadAction(rawValue: v)?.string
-    }
+    chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subAuto, "no"))
 
     let subOverrideHandler: OptionObserverInfo.Transformer = { key in
       let v = UserDefaults.standard.bool(forKey: PK.ignoreAssStyles)
@@ -270,11 +267,6 @@ class MPVController: NSObject {
     }
 
     // Load external scripts
-    let loader = ScriptLoader()
-    if ud.bool(forKey: PK.playlistAutoAdd) {
-      loader.add(defaultScript: "autoload")
-    }
-    chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.script, loader.stringForOption))
 
     // Load keybindings. This is still required for mpv to handle media keys or apple remote.
     let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)

@@ -17,6 +17,8 @@ fileprivate let TitleBarHeightWithOSCInFullScreen: CGFloat = 24 + 10
 fileprivate let OSCTopMainViewMarginTop: CGFloat = 26
 fileprivate let OSCTopMainViewMarginTopInFullScreen: CGFloat = 6
 
+fileprivate let PlaylistMinWidth: CGFloat = 240
+fileprivate let PlaylistMaxWidth: CGFloat = 400
 
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
@@ -88,6 +90,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
+  var isResizingSidebar: Bool = false
 
   var isInFullScreen: Bool = false {
     didSet {
@@ -167,7 +170,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       case .settings:
         return 360
       case .playlist:
-        return 240
+        return CGFloat(UserDefaults.standard.integer(forKey: PK.playlistWidth)).constrain(min: PlaylistMinWidth, max: PlaylistMaxWidth)
       default:
         Utility.fatal("SideBarViewType.width shouldn't be called here")
       }
@@ -283,8 +286,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
 
-  weak var touchBarPlaySlider: NSSlider?
-  weak var touchBarCurrentPosLabel: NSTextField?
+  weak var touchBarPlaySlider: TouchBarPlaySlider?
+  weak var touchBarPlayPauseBtn: NSButton?
+  weak var touchBarCurrentPosLabel: DurationDisplayTextField?
 
   @available(macOS 10.12, *)
   lazy var pip: PIPViewController = {
@@ -320,6 +324,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     super.windowDidLoad()
 
     guard let w = self.window else { return }
+    
+    // enable sleep preventer
+    SleepPreventer.preventSleep()
 
     w.initialFirstResponder = nil
 
@@ -531,6 +538,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case PK.showRemainingTime:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
         rightLabel.mode = newValue ? .remaining : .duration
+        touchBarCurrentPosLabel?.mode = newValue ? .remaining : .current
       }
     
     case PK.blackOutMonitor:
@@ -693,25 +701,36 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** record mouse pos on mouse down */
   override func mouseDown(with event: NSEvent) {
     guard !controlBarFloating.isDragging else { return }
-    mousePosRelatedToWindow = NSEvent.mouseLocation()
-    mousePosRelatedToWindow!.x -= window!.frame.origin.x
-    mousePosRelatedToWindow!.y -= window!.frame.origin.y
+    mousePosRelatedToWindow = event.locationInWindow
+    // playlist resizing
+    if sideBarStatus == .playlist {
+      let sf = sideBarView.frame
+      if NSPointInRect(mousePosRelatedToWindow!, NSMakeRect(sf.origin.x-4, sf.origin.y, 4, sf.height)) {
+        isResizingSidebar = true
+      }
+    }
   }
 
   /** move window while dragging */
   override func mouseDragged(with event: NSEvent) {
-    isDragging = true
-    guard !controlBarFloating.isDragging else { return }
-    if mousePosRelatedToWindow != nil {
-      if #available(OSX 10.11, *) {
-        window?.performDrag(with: event)
-      } else {
-        let currentLocation = NSEvent.mouseLocation()
-        let newOrigin = CGPoint(
-          x: currentLocation.x - mousePosRelatedToWindow!.x,
-          y: currentLocation.y - mousePosRelatedToWindow!.y
-        )
-        window?.setFrameOrigin(newOrigin)
+    if isResizingSidebar {
+      let currentLocation = event.locationInWindow
+      let newWidth = window!.frame.width - currentLocation.x - 2
+      sideBarWidthConstraint.constant = newWidth.constrain(min: PlaylistMinWidth, max: PlaylistMaxWidth)
+    } else {
+      isDragging = true
+      guard !controlBarFloating.isDragging else { return }
+      if mousePosRelatedToWindow != nil {
+        if #available(OSX 10.11, *) {
+          window?.performDrag(with: event)
+        } else {
+          let currentLocation = NSEvent.mouseLocation()
+          let newOrigin = CGPoint(
+            x: currentLocation.x - mousePosRelatedToWindow!.x,
+            y: currentLocation.y - mousePosRelatedToWindow!.y
+          )
+          window?.setFrameOrigin(newOrigin)
+        }
       }
     }
   }
@@ -722,6 +741,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isDragging {
       // if it's a mouseup after dragging
       isDragging = false
+    } else if isResizingSidebar {
+      isResizingSidebar = false
+      ud.set(Int(sideBarWidthConstraint.constant), forKey: PK.playlistWidth)
     } else {
       // if it's a mouseup after clicking
       let mouseInSideBar = window!.contentView!.mouse(event.locationInWindow, in: sideBarView.frame)
@@ -957,8 +979,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     window!.collectionBehavior = [.managed, .fullScreenPrimary]
     // update buffer indicator view
     updateBufferIndicatorView()
-    // enable sleep preventer
-    SleepPreventer.preventSleep()
     // start tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
     cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 0]))
@@ -991,6 +1011,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       playerCore.stop()
       // videoView.stopDisplayLink()
     }
+    playerCore.info.currentFolder = nil
     // disable sleep preventer
     if !playerCore.info.isPaused {
       SleepPreventer.allowSleep()
@@ -1525,6 +1546,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         winFrame.size.height = ns.height
       }
       let winAspect = winFrame.size.aspect
+      var widthOrHeightIsSet = false
       // w and h can't take effect at same time
       if let strw = geometry.w, strw != "0" {
         let w: CGFloat
@@ -1535,6 +1557,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         winFrame.size.width = w
         winFrame.size.height = w / winAspect
+        widthOrHeightIsSet = true
       } else if let strh = geometry.h, strh != "0" {
         let h: CGFloat
         if strh.hasSuffix("%") {
@@ -1544,6 +1567,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         winFrame.size.height = h
         winFrame.size.width = h * winAspect
+        widthOrHeightIsSet = true
       }
       // x, origin is window center
       if let strx = geometry.x, let xSign = geometry.xSign {
@@ -1572,6 +1596,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           winFrame.origin.y -= winFrame.height
         }
       }
+      // if x and y not specified
+      if geometry.x == nil && geometry.y == nil && widthOrHeightIsSet {
+        winFrame.origin.x = (screenFrame.width - winFrame.width) / 2
+        winFrame.origin.y = (screenFrame.height - winFrame.height) / 2
+      }
+      // return
       return winFrame
     } else {
       return nil
@@ -1704,13 +1734,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let duration = playerCore.info.videoDuration, let pos = playerCore.info.videoPosition else {
       Utility.fatal("video info not available")
     }
-    let percantage = (pos.second / duration.second) * 100
+    let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
-    touchBarCurrentPosLabel?.stringValue = pos.stringRepresentation
+    touchBarCurrentPosLabel?.updateText(with: duration, given: pos)
     rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {
-      playSlider.doubleValue = percantage
-      touchBarPlaySlider?.doubleValue = percantage
+      playSlider.doubleValue = percentage
+      touchBarPlaySlider?.setDoubleValueSafely(percentage)
     }
   }
 
@@ -2000,181 +2030,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-}
-
-
-
-// MARK: - Touch bar
-
-fileprivate extension NSTouchBarCustomizationIdentifier {
-
-  static let windowBar = NSTouchBarCustomizationIdentifier("\(Bundle.main.bundleIdentifier!).windowTouchBar")
-
-}
-
-fileprivate extension NSTouchBarItemIdentifier {
-
-  static let playPause = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.playPause")
-  static let slider = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.slider")
-  static let volumeUp = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.voUp")
-  static let volumeDown = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.voDn")
-  static let rewind = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.rewind")
-  static let fastForward = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.forward")
-  static let time = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.time")
-  static let ahead15Sec = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead15Sec")
-  static let back15Sec = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.back15Sec")
-  static let ahead30Sec = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead30Sec")
-  static let back30Sec = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.back30Sec")
-  static let next = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.next")
-  static let prev = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.prev")
-
-}
-
-// Image name, tag, custom label
-@available(OSX 10.12.2, *)
-fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, String)] = [
-    .ahead15Sec: (NSImageNameTouchBarSkipAhead15SecondsTemplate, 15, "15sec Ahead"),
-    .ahead30Sec: (NSImageNameTouchBarSkipAhead30SecondsTemplate, 30, "30sec Ahead"),
-    .back15Sec: (NSImageNameTouchBarSkipBack15SecondsTemplate, -15, "-15sec Ahead"),
-    .back30Sec: (NSImageNameTouchBarSkipBack30SecondsTemplate, -30, "-30sec Ahead"),
-    .next: (NSImageNameTouchBarSkipAheadTemplate, 0, "Next video"),
-    .prev: (NSImageNameTouchBarSkipBackTemplate, 1, "Previous video"),
-    .volumeUp: (NSImageNameTouchBarVolumeUpTemplate, 0, "Volume +"),
-    .volumeDown: (NSImageNameTouchBarVolumeDownTemplate, 1, "Volume -"),
-    .rewind: (NSImageNameTouchBarRewindTemplate, 0, "Rewind"),
-    .fastForward: (NSImageNameTouchBarFastForwardTemplate, 1, "Fast forward")
-]
-
-@available(OSX 10.12.2, *)
-extension MainWindowController: NSTouchBarDelegate {
-
-  override func makeTouchBar() -> NSTouchBar? {
-    let touchBar = NSTouchBar()
-    touchBar.delegate = self
-    touchBar.customizationIdentifier = .windowBar
-    touchBar.defaultItemIdentifiers = [.playPause, .slider, .time]
-    touchBar.customizationAllowedItemIdentifiers = [.playPause, .slider, .volumeUp, .volumeDown, .rewind, .fastForward, .time, .ahead15Sec, .ahead30Sec, .back15Sec, .back30Sec, .next, .prev, .fixedSpaceLarge]
-    return touchBar
-  }
-
-  func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItemIdentifier) -> NSTouchBarItem? {
-
-    switch identifier {
-
-    case NSTouchBarItemIdentifier.playPause:
-      let item = NSCustomTouchBarItem(identifier: identifier)
-      item.view = NSButton(image: NSImage(named: NSImageNameTouchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
-      item.customizationLabel = "Play / Pause"
-      return item
-
-    case NSTouchBarItemIdentifier.slider:
-      let item = NSSliderTouchBarItem(identifier: identifier)
-      item.slider.minValue = 0
-      item.slider.maxValue = 100
-      item.slider.target = self
-      item.slider.action = #selector(self.touchBarSliderAction(_:))
-      item.customizationLabel = "Seek"
-      self.touchBarPlaySlider = item.slider
-      return item
-
-    case NSTouchBarItemIdentifier.volumeUp,
-        NSTouchBarItemIdentifier.volumeDown:
-      guard let data = touchBarItemBinding[identifier] else { return nil }
-      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarVolumeAction(_:)))
-
-    case NSTouchBarItemIdentifier.rewind,
-        NSTouchBarItemIdentifier.fastForward:
-      guard let data = touchBarItemBinding[identifier] else { return nil }
-      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarRewindAction(_:)))
-
-    case NSTouchBarItemIdentifier.time:
-      let item = NSCustomTouchBarItem(identifier: identifier)
-      let label = NSTextField(labelWithString: "0:00")
-      label.alignment = .center
-      self.touchBarCurrentPosLabel = label
-      item.view = label
-      item.customizationLabel = "Time Position"
-      return item
-
-    case NSTouchBarItemIdentifier.ahead15Sec,
-        NSTouchBarItemIdentifier.back15Sec,
-        NSTouchBarItemIdentifier.ahead30Sec,
-        NSTouchBarItemIdentifier.back30Sec:
-      guard let data = touchBarItemBinding[identifier] else { return nil }
-      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSeekAction(_:)))
-
-    case NSTouchBarItemIdentifier.next,
-        NSTouchBarItemIdentifier.prev:
-      guard let data = touchBarItemBinding[identifier] else { return nil }
-      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSkipAction(_:)))
-
-    default:
-      return nil
-    }
-  }
-
-  func touchBarPlayBtnAction(_ sender: NSButton) {
-    if playerCore.info.isPaused {
-      sender.image = NSImage(named: NSImageNameTouchBarPauseTemplate)
-    } else {
-      sender.image = NSImage(named: NSImageNameTouchBarPlayTemplate)
-    }
-    playerCore.togglePause(nil)
-  }
-
-  func touchBarVolumeAction(_ sender: NSButton) {
-    let currVolume = playerCore.info.volume
-    playerCore.setVolume(currVolume + (sender.tag == 0 ? 5 : -5))
-  }
-
-  func touchBarRewindAction(_ sender: NSButton) {
-    arrowButtonAction(left: sender.tag == 0)
-  }
-
-  func touchBarSeekAction(_ sender: NSButton) {
-    let sec = sender.tag
-    playerCore.seek(relativeSecond: Double(sec), option: .relative)
-  }
-
-  func touchBarSkipAction(_ sender: NSButton) {
-    playerCore.navigateInPlaylist(nextOrPrev: sender.tag == 0)
-  }
-
-  func touchBarSliderAction(_ sender: NSSlider) {
-    let percentage = 100 * sender.doubleValue / sender.maxValue
-    playerCore.seek(percent: percentage)
-  }
-
-  private func buttonTouchBarItem(withIdentifier identifier: NSTouchBarItemIdentifier, imageName: String, tag: Int, customLabel: String, action: Selector) -> NSCustomTouchBarItem {
-    let item = NSCustomTouchBarItem(identifier: identifier)
-    let button = NSButton(image: NSImage(named: imageName)!, target: self, action: action)
-    button.tag = tag
-    item.view = button
-    item.customizationLabel = customLabel
-    return item
-  }
-
-  // MARK: - Set TouchBar Time Label
-
-  func setupTouchBarUI() {
-    guard let duration = playerCore.info.videoDuration else {
-      Utility.fatal("video info not available")
-    }
-
-    let pad: CGFloat = 16.0
-    sizingTouchBarTextField.stringValue = duration.stringRepresentation
-    if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, let posLabel = touchBarCurrentPosLabel {
-      if let posConstraint = touchBarPosLabelWidthLayout {
-        posConstraint.constant = widthConstant + pad
-        posLabel.setNeedsDisplay()
-      } else {
-        let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + pad)
-        posLabel.addConstraint(posConstraint)
-        touchBarPosLabelWidthLayout = posConstraint
-      }
-    }
-
-  }
 }
 
 // MARK: - Picture in Picture

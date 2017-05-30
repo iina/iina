@@ -17,10 +17,6 @@ class PlayerCore: NSObject {
   var mainWindow: MainWindowController?
   lazy var mpvController: MPVController = MPVController()
 
-  let supportedSubtitleFormat: [String] = ["utf", "utf8", "utf-8", "idx", "sub", "srt",
-                                           "smi", "rt", "txt", "ssa", "aqt", "jss",
-                                           "js", "ass", "mks", "vtt", "sup"]
-
   lazy var info: PlaybackInfo = PlaybackInfo()
 
   var syncPlayTimeTimer: Timer?
@@ -68,6 +64,8 @@ class PlayerCore: NSObject {
       mainWindow = MainWindowController()
     }
     info.currentURL = url
+    // clear currentFolder since playlist is cleared, so need to auto-load again in playerCore#fileStarted
+    info.currentFolder = nil
     info.isNetworkResource = isNetwork
     mainWindow!.showWindow(nil)
     mainWindow!.windowDidOpen()
@@ -574,13 +572,24 @@ class PlayerCore: NSObject {
                        ySign: captures[8])
   }
 
-  // MARK: - Other
+  // MARK: - Listeners
 
   func fileStarted() {
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
-    if let path = mpvController.getString(MPVProperty.path) {
-      info.currentURL = URL(fileURLWithPath: path)
+    guard let path = mpvController.getString(MPVProperty.path) else { return }
+    info.currentURL = URL(fileURLWithPath: path)
+    // add files in same folder
+    if ud.bool(forKey: Preference.Key.playlistAutoAdd) {
+      autoLoadFilesInCurrentFolder()
+    }
+    // auto load matched subtitles
+    if let matchedSubs = info.matchedSubs[path] {
+      for sub in matchedSubs {
+        loadExternalSubFile(sub)
+      }
+      // set sub to the first one
+      setTrack(1, forType: .sub)
     }
   }
 
@@ -642,8 +651,167 @@ class PlayerCore: NSObject {
     }
   }
 
-  @objc private func reEnableOSDAfterFileLoading() {
+  @objc
+  private func reEnableOSDAfterFileLoading() {
     info.disableOSDForFileLoading = false
+  }
+
+  /// Add files in the same folder to playlist.
+  private func autoLoadFilesInCurrentFolder() {
+    guard let folder = info.currentURL?.deletingLastPathComponent() else { return }
+
+    // don't load file if user didn't switch folder
+    guard folder.path != info.currentFolder?.path else { return }
+    info.currentFolder = folder
+
+    // search subs
+    let fm = FileManager.default
+    let searchOptions: FileManager.DirectoryEnumerationOptions = [.skipsHiddenFiles, .skipsPackageDescendants, .skipsSubdirectoryDescendants]
+    let subExts = Utility.supportedFileExt[.sub]!
+    var subDirs: [URL] = []
+
+    // search subs in current directory
+    guard let files = try? fm.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil, options: searchOptions) else { return }
+
+    // search subs in other directories
+    let rawUserDefinedSearchPaths = ud.string(forKey: Preference.Key.subAutoLoadSearchPath) ?? "./*"
+    let userDefinedSearchPaths = rawUserDefinedSearchPaths.components(separatedBy: ":").filter { !$0.isEmpty }
+    for path in userDefinedSearchPaths {
+      var p = path
+      // handle absolute paths
+      if path.hasPrefix("/") {
+        subDirs.append(URL(fileURLWithPath: path, isDirectory: true))
+      }
+      if path.hasPrefix("~") {
+        subDirs.append(URL(fileURLWithPath: NSString(string: path).expandingTildeInPath, isDirectory: true))
+      }
+      // handle wildcards
+      if path.hasSuffix("/") { p.deleteLast(1) }
+      if path.hasSuffix("/*") {  // only check wildcard at the end
+        p.deleteLast(2)
+        let pathURL = folder.appendingPathComponent(p, isDirectory: true)
+        // append all sub dirs
+        if let contents = try? fm.contentsOfDirectory(at: pathURL, includingPropertiesForKeys: [.isDirectoryKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
+          if #available(OSX 10.11, *) {
+            subDirs.append(contentsOf: contents.filter { $0.hasDirectoryPath })
+          } else {
+            subDirs.append(contentsOf: contents.filter { (try? $0.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false })
+          }
+        }
+      } else {
+        subDirs.append(folder.appendingPathComponent(p, isDirectory: true))
+      }
+    }
+
+    // group by extension
+    var groups: [MPVTrack.TrackType: [FileInfo]] = [.video: [], .audio: [], .sub: []]
+    let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
+    for file in files {
+      let fileInfo = FileInfo(file)
+      guard let mediaType = allTypes.first(where: { Utility.supportedFileExt[$0]!.contains(fileInfo.ext) }) else { continue }
+      groups[mediaType]!.append(fileInfo)
+    }
+
+    // natural sort
+    groups[.video]!.sort { file1, file2 -> Bool in
+      return file1.segments.lexicographicallyPrecedes(file2.segments) { a, b in
+        if let inta = Int(a), let intb = Int(b) {
+          return inta < intb
+        } else {
+          return a < b
+        }
+      }
+    }
+
+    // get all possible sub files
+    var subtitles = groups[.sub]!
+    for subDir in subDirs {
+      if let contents = try? fm.contentsOfDirectory(at: subDir, includingPropertiesForKeys: nil, options: searchOptions) {
+        subtitles.append(contentsOf: contents.filter { subExts.contains($0.pathExtension) }.map { FileInfo($0) })
+      }
+    }
+
+    // grop video files
+    let series = FileGroup.group(files: groups[.video]!)
+    info.commonPrefixes = series.flatten()
+
+    // group sub files
+    let _ = FileGroup.group(files: subtitles)
+
+    // get auto load option
+    let subAutoLoadOption: Preference.IINAAutoLoadAction = Preference.IINAAutoLoadAction(rawValue: ud.integer(forKey: Preference.Key.subAutoLoadIINA)) ?? .iina
+
+    // calculate edit distance
+    for sub in subtitles {
+      var minDistToVideo: UInt = .max
+      for video in groups[.video]! {
+        let dist = ObjcUtils.levDistance(video.prefix, and: sub.prefix) + ObjcUtils.levDistance(video.suffix, and: sub.suffix)
+        sub.dist[video] = dist
+        video.dist[sub] = dist
+        if dist < minDistToVideo { minDistToVideo = dist }
+      }
+      sub.minDist = groups[.video]!.filter { sub.dist[$0] == minDistToVideo }
+    }
+
+    // match sub for video files
+    var addedCurrentVideo = false
+    for video in groups[.video]! {
+      var matchedSubs = Set<FileInfo>()
+      // match video and sub if both are the closest one to each other
+      if subAutoLoadOption.shouldLoadSubsMatchedByIINA() {
+        let minDistToSub = video.dist.reduce(UInt.max, { min($0.0, $0.1.value) })
+        subtitles
+          .filter { video.dist[$0]! == minDistToSub && $0.minDist.contains(video) }
+          .forEach { info.matchedSubs.safeAppend($0.url, forKey: video.path); matchedSubs.insert($0) }
+      }
+      // add subs that contains video name
+      if subAutoLoadOption.shouldLoadSubsContainingVideoName() {
+        subtitles
+          .filter { $0.filename.contains(video.filename) }
+          .forEach { info.matchedSubs.safeAppend($0.url, forKey: video.path); matchedSubs.insert($0) }
+      }
+      // move the sub to front if it contains priority strings
+      if let priorString = ud.string(forKey: Preference.Key.subAutoLoadPriorityString), !matchedSubs.isEmpty {
+        let stringList = priorString
+          .components(separatedBy: ",")
+          .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+          .filter { !$0.isEmpty }
+        // find the min occurance count first
+        var minOccurances = Int.max
+        matchedSubs.forEach { sub in
+          sub.priorityStringOccurances = stringList.reduce(0, { $0 + sub.filename.occurancesOf($1, inRange: nil) })
+          if sub.priorityStringOccurances < minOccurances {
+            minOccurances = sub.priorityStringOccurances
+          }
+        }
+        matchedSubs
+          .filter { $0.priorityStringOccurances > minOccurances }  // eliminate false positives in filenames
+          .flatMap { info.matchedSubs[video.path]!.index(of: $0.url) }  // get index
+          .forEach {  // move the sub with index to first
+            let s = info.matchedSubs[video.path]!.remove(at: $0)
+            info.matchedSubs[video.path]!.insert(s, at: 0)
+          }
+      }
+
+      // add to playlist
+      if video.url.path == info.currentURL!.path {
+        addedCurrentVideo = true
+      } else if addedCurrentVideo {
+        addToPlaylist(video.path)
+      } else {
+        let count = mpvController.getInt(MPVProperty.playlistCount)
+        let current = mpvController.getInt(MPVProperty.playlistPos)
+        addToPlaylist(video.path)
+        playlistMove(count, to: current)
+      }
+    }
+
+    // handle audio files
+    for audio in groups[.audio]! {
+      addToPlaylist(audio.path)
+    }
+
+    info.currentVideosInfo = groups[.video]!
   }
 
   // MARK: - Sync with UI in MainWindow
@@ -698,6 +866,9 @@ class PlayerCore: NSObject {
       info.isPaused = pause
       DispatchQueue.main.async {
         mw.updatePlayButtonState(pause ? NSOffState : NSOnState)
+        if #available(OSX 10.12.2, *) {
+          mw.updateTouchBarPlayBtn()
+        }
       }
 
     case .volume:

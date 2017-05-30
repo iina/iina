@@ -1081,8 +1081,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowDidResize(_ notification: Notification) {
     guard let w = window else { return }
     let wSize = w.frame.size
-    // is paused, draw new frame
-    if playerCore.info.isPaused {
+    // is paused or very low fps (assume audio file), draw new frame
+    if playerCore.info.isPaused || playerCore.mpvController.getDouble(MPVProperty.estimatedVfFps) < 1 {
       videoView.videoLayer.draw()
     }
 

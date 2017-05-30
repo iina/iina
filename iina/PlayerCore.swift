@@ -13,6 +13,7 @@ class PlayerCore: NSObject {
   static let shared = PlayerCore()
 
   unowned let ud: UserDefaults = UserDefaults.standard
+  let backgroundQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreTask")
 
   var mainWindow: MainWindowController?
   lazy var mpvController: MPVController = MPVController()
@@ -579,17 +580,19 @@ class PlayerCore: NSObject {
     info.disableOSDForFileLoading = true
     guard let path = mpvController.getString(MPVProperty.path) else { return }
     info.currentURL = URL(fileURLWithPath: path)
-    // add files in same folder
-    if ud.bool(forKey: Preference.Key.playlistAutoAdd) {
-      autoLoadFilesInCurrentFolder()
-    }
-    // auto load matched subtitles
-    if let matchedSubs = info.matchedSubs[path] {
-      for sub in matchedSubs {
-        loadExternalSubFile(sub)
+    backgroundQueue.async {
+      // add files in same folder
+      if self.ud.bool(forKey: Preference.Key.playlistAutoAdd) {
+        self.autoLoadFilesInCurrentFolder()
       }
-      // set sub to the first one
-      setTrack(1, forType: .sub)
+      // auto load matched subtitles
+      if let matchedSubs = self.info.matchedSubs[path] {
+        for sub in matchedSubs {
+          self.loadExternalSubFile(sub)
+        }
+        // set sub to the first one
+        self.setTrack(1, forType: .sub)
+      }
     }
   }
 
@@ -727,6 +730,26 @@ class PlayerCore: NSObject {
     let series = FileGroup.group(files: groups[.video]!)
     info.commonPrefixes = series.flatten()
 
+    // add files to playlist
+    var addedCurrentVideo = false
+    for video in groups[.video]! {
+      // add to playlist
+      if video.url.path == info.currentURL!.path {
+        addedCurrentVideo = true
+      } else if addedCurrentVideo {
+        addToPlaylist(video.path)
+      } else {
+        let count = mpvController.getInt(MPVProperty.playlistCount)
+        let current = mpvController.getInt(MPVProperty.playlistPos)
+        addToPlaylist(video.path)
+        playlistMove(count, to: current)
+      }
+    }
+    for audio in groups[.audio]! {
+      addToPlaylist(audio.path)
+    }
+    NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
+
     // group sub files
     _ = FileGroup.group(files: subtitles)
 
@@ -746,7 +769,6 @@ class PlayerCore: NSObject {
     }
 
     // match sub for video files
-    var addedCurrentVideo = false
     for video in groups[.video]! {
       var matchedSubs = Set<FileInfo>()
       // match video and sub if both are the closest one to each other
@@ -790,26 +812,10 @@ class PlayerCore: NSObject {
             info.matchedSubs[video.path]!.insert(s, at: 0)
           }
       }
-
-      // add to playlist
-      if video.url.path == info.currentURL!.path {
-        addedCurrentVideo = true
-      } else if addedCurrentVideo {
-        addToPlaylist(video.path)
-      } else {
-        let count = mpvController.getInt(MPVProperty.playlistCount)
-        let current = mpvController.getInt(MPVProperty.playlistPos)
-        addToPlaylist(video.path)
-        playlistMove(count, to: current)
-      }
-    }
-
-    // handle audio files
-    for audio in groups[.audio]! {
-      addToPlaylist(audio.path)
     }
 
     info.currentVideosInfo = groups[.video]!
+    NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
   }
 
   // MARK: - Sync with UI in MainWindow

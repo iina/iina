@@ -114,7 +114,7 @@ class Utility {
    Pop up an open panel.
    - Returns: Whether user dismissed the panel by clicking OK.
    */
-  static func quickOpenPanel(title: String, isDir: Bool, dir: URL? = nil, ok: (URL) -> Void) -> Bool {
+  static func quickOpenPanel(title: String, isDir: Bool, dir: URL? = nil, ok: @escaping (URL) -> Void) {
     let panel = NSOpenPanel()
     panel.title = title
     panel.canCreateDirectories = false
@@ -125,11 +125,10 @@ class Utility {
     if let dir = dir {
       panel.directoryURL = dir
     }
-    if panel.runModal() == NSFileHandlingPanelOKButton {
-      if let url = panel.url { ok(url) }
-      return true
-    } else {
-      return false
+    panel.begin() { result in
+      if result == NSFileHandlingPanelOKButton, let url = panel.url {
+        ok(url)
+      }
     }
   }
 
@@ -137,7 +136,7 @@ class Utility {
    Pop up an open panel.
    - Returns: Whether user dismissed the panel by clicking OK.
    */
-  static func quickMultipleOpenPanel(title: String, dir: URL? = nil, ok: ([URL]) -> Void) -> Bool {
+  static func quickMultipleOpenPanel(title: String, dir: URL? = nil, ok: @escaping ([URL]) -> Void) {
     let panel = NSOpenPanel()
     panel.title = title
     panel.canCreateDirectories = false
@@ -148,11 +147,10 @@ class Utility {
     if let dir = dir {
       panel.directoryURL = dir
     }
-    if panel.runModal() == NSFileHandlingPanelOKButton {
-      ok(panel.urls)
-      return true
-    } else {
-      return false
+    panel.begin() { result in
+      if result == NSFileHandlingPanelOKButton {
+        ok(panel.urls)
+      }
     }
   }
 
@@ -160,18 +158,15 @@ class Utility {
    Pop up a save panel.
    - Returns: Whether user dismissed the panel by clicking OK.
    */
-  static func quickSavePanel(title: String, types: [String], ok: (URL) -> Void) -> Bool {
+  static func quickSavePanel(title: String, types: [String], ok: @escaping (URL) -> Void) {
     let panel = NSSavePanel()
     panel.title = title
     panel.canCreateDirectories = true
     panel.allowedFileTypes = types
-    if panel.runModal() == NSFileHandlingPanelOKButton {
-      if let url = panel.url {
+    panel.begin() { result in
+      if result == NSFileHandlingPanelOKButton, let url = panel.url {
         ok(url)
       }
-      return true
-    } else {
-      return false
     }
   }
 

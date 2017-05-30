@@ -33,6 +33,7 @@ Telegram group:
   ```
   sudo gem install cocoapods
   ```
+  **homebrew**
   ```
   brew install cocoapods
   ```

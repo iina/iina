@@ -96,7 +96,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   }
 
   @IBAction func chooseDirBtnAction(_ sender: AnyObject) {
-    let _ = Utility.quickOpenPanel(title: "Choose config directory", isDir: true) { url in
+    Utility.quickOpenPanel(title: "Choose config directory", isDir: true) { url in
       UserDefaults.standard.set(url.path, forKey: Preference.Key.userDefinedConfDir)
       UserDefaults.standard.synchronize()
     }

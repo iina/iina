@@ -113,7 +113,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.dataSource = self
       view.superview?.superview?.layer?.cornerRadius = 4
     }
-    customSpeedTextField.formatter = DecimalFormatter()
     if pendingSwitchRequest != nil {
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil
@@ -157,11 +156,18 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       cropSegment.selectedSegment = index
     }
     rotateSegment.selectSegment(withTag: AppData.rotations.index(of: playerCore.info.rotation) ?? -1)
-    customSpeedTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
     deinterlaceCheckBtn.state = playerCore.info.deinterlace ? NSOnState : NSOffState
+    let speed = playerCore.mpvController.getDouble(MPVOption.PlaybackControl.speed)
+    customSpeedTextField.doubleValue = speed
+    let sliderValue = log(speed / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
+    speedSlider.doubleValue = sliderValue
+    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(customSpeedTextField.stringValue)x")
 
     // Audio
-    customAudioDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Audio.audioDelay)
+    let audioDelay = playerCore.mpvController.getDouble(MPVOption.Audio.audioDelay)
+    audioDelaySlider.doubleValue = audioDelay
+    customAudioDelayTextField.doubleValue = audioDelay
+    redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(customAudioDelayTextField.stringValue)s")
 
     // Sub
     if let currSub = playerCore.info.currentTrack(.sub) {
@@ -174,7 +180,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let currSubScale = playerCore.mpvController.getDouble(MPVOption.Subtitles.subScale).constrain(min: 0.1, max: 10)
     let displaySubScale = Utility.toDisplaySubScale(fromRealSubScale: currSubScale)
     subScaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
-    customSubDelayTextField.doubleValue = playerCore.mpvController.getDouble(MPVOption.Subtitles.subDelay)
+    let subDelay = playerCore.mpvController.getDouble(MPVOption.Subtitles.subDelay)
+    subDelaySlider.doubleValue = subDelay
+    customSubDelayTextField.doubleValue = subDelay
+    redraw(indicator: subDelaySliderIndicator, constraint: subDelaySliderConstraint, slider: subDelaySlider, value: "\(customSubDelayTextField.stringValue)s")
 
     let currSubPos = playerCore.mpvController.getInt(MPVOption.Subtitles.subPos)
     subPosSlider.intValue = Int32(currSubPos)
@@ -398,24 +407,23 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       sender.allowsTickMarkValuesOnly = false
     }
     let sliderValue = sender.doubleValue
-    let value = AppData.minSpeed * pow((AppData.maxSpeed / AppData.minSpeed), sliderValue / sliderSteps)
-    let formattedValue = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: value)) ?? ""
-    speedSliderIndicator.stringValue = "\(formattedValue)x"
-    customSpeedTextField.stringValue = formattedValue
+    let value = AppData.minSpeed * pow(AppData.maxSpeed / AppData.minSpeed, sliderValue / sliderSteps)
+    customSpeedTextField.doubleValue = value
     playerCore.setSpeed(value)
-    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(formattedValue)x")
+    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(customSpeedTextField.stringValue)x")
   }
 
   @IBAction func customSpeedEditFinishedAction(_ sender: NSTextField) {
+    if sender.stringValue.isEmpty {
+      sender.stringValue = "1"
+    }
     let value = customSpeedTextField.doubleValue
-    let formattedValue = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: value)) ?? ""
-    customSpeedTextField.stringValue = formattedValue
     let sliderValue = log(value / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
     speedSlider.doubleValue = sliderValue
     if playerCore.info.playSpeed != value {
       playerCore.setSpeed(value)
     }
-    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(formattedValue)x")
+    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(sender.stringValue)x")
     if let window = sender.window {
       window.makeFirstResponder(window.contentView)
     }
@@ -496,10 +504,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       sender.allowsTickMarkValuesOnly = false
     }
     let sliderValue = sender.doubleValue
-    let formattedValue = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: sliderValue)) ?? ""
-    audioDelaySliderIndicator.stringValue = "\(formattedValue)s"
-    customAudioDelayTextField.stringValue = formattedValue
-    redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(formattedValue)s")
+    customAudioDelayTextField.doubleValue = sliderValue
+    redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(customAudioDelayTextField.stringValue)s")
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerCore.setAudioDelay(sliderValue)
@@ -508,6 +514,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func customAudioDelayEditFinishedAction(_ sender: NSTextField) {
+    if sender.stringValue.isEmpty {
+      sender.stringValue = "0"
+    }
     let value = sender.doubleValue
     playerCore.setAudioDelay(value)
     audioDelaySlider.doubleValue = value
@@ -585,10 +594,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       sender.allowsTickMarkValuesOnly = false
     }
     let sliderValue = sender.doubleValue
-    let formattedValue = (customSpeedTextField.formatter as? NumberFormatter)?.string(from: NSNumber(value: sliderValue)) ?? ""
-    subDelaySliderIndicator.stringValue = "\(formattedValue)s"
-    customSubDelayTextField.stringValue = formattedValue
-    redraw(indicator: subDelaySliderIndicator, constraint: subDelaySliderConstraint, slider: subDelaySlider, value: "\(formattedValue)s")
+    customSubDelayTextField.doubleValue = sliderValue
+    redraw(indicator: subDelaySliderIndicator, constraint: subDelaySliderConstraint, slider: subDelaySlider, value: "\(customSubDelayTextField.stringValue)s")
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         playerCore.setSubDelay(sliderValue)
@@ -597,6 +604,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func customSubDelayEditFinishedAction(_ sender: NSTextField) {
+    if sender.stringValue.isEmpty {
+      sender.stringValue = "0"
+    }
     let value = sender.doubleValue
     playerCore.setSubDelay(value)
     subDelaySlider.doubleValue = value

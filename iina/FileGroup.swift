@@ -103,10 +103,11 @@ class FileGroup {
       i += 1
     }
 
-    if stopGrouping(currChars) {
+    let maxSubGroupCount = tempGroup.reduce(0, { max($0, $1.value.count) })
+    if stopGrouping(currChars) || maxSubGroupCount < 3 {
       contents.forEach { $0.prefix = self.prefix }
     } else {
-      groups = tempGroup.map { FileGroup(prefix: $0, contents: $1) }
+      groups = tempGroup.flatMap { FileGroup(prefix: $0, contents: $1) }
       // continue
       for g in groups {
         g.tryGroupFiles()

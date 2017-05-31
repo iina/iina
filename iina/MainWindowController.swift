@@ -662,7 +662,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override func keyDown(with event: NSEvent) {
     if !isInInteractiveMode {
-      let keyCode = Utility.mpvKeyCode(from: event).lowercased()
+      let keyCode = Utility.mpvKeyCode(from: event)
       if let kb = PlayerCore.keyBindings[keyCode] {
         if kb.isIINACommand {
           // - IINA command

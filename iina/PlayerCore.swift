@@ -95,7 +95,7 @@ class PlayerCore: NSObject {
     }
     let mapping = KeyMapping.parseInputConf(at: inputConfPath) ?? KeyMapping.parseInputConf(at: iinaDefaultConfPath)!
     PlayerCore.keyBindings = [:]
-    mapping.forEach { PlayerCore.keyBindings[$0.key.lowercased()] = $0 }
+    mapping.forEach { PlayerCore.keyBindings[$0.key] = $0 }
 
     // set http proxy
     if let proxy = ud.string(forKey: Preference.Key.httpProxy), !proxy.isEmpty {

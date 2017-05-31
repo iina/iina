@@ -63,6 +63,8 @@ class PlayerCore: NSObject {
     if mainWindow == nil || !mainWindow!.isWindowLoaded {
       mainWindow = nil
       mainWindow = MainWindowController()
+    } else if !mainWindow!.window!.isVisible {
+      SleepPreventer.preventSleep()
     }
     info.currentURL = url
     // clear currentFolder since playlist is cleared, so need to auto-load again in playerCore#fileStarted

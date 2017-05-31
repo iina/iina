@@ -764,7 +764,8 @@ class PlayerCore: NSObject {
       prefixDistance[sp] = [:]
       var minDist = UInt.max
       var minVideo = ""
-      for (vp, _) in info.commonPrefixes {
+      for (vp, vl) in info.commonPrefixes {
+        guard vl.count > 2 else { continue }
         let dist = ObjcUtils.levDistance(vp, and: sp)
         prefixDistance[sp]![vp] = dist
         if dist < minDist {
@@ -775,7 +776,8 @@ class PlayerCore: NSObject {
       closestVideoForSub[sp] = minVideo
     }
     var matchedPrefixes: [String: String] = [:]  // video: sub
-    for (vp, _) in info.commonPrefixes {
+    for (vp, vl) in info.commonPrefixes {
+      guard vl.count > 2 else { continue }
       var minDist = UInt.max
       var minSub = ""
       for (sp, _) in subPrefiexes {
@@ -792,7 +794,6 @@ class PlayerCore: NSObject {
 
     var unmatchedVideos: [FileInfo] = []
 
-    print("match")
     // match sub for video files
     for video in groups[.video]! {
       var matchedSubs = Set<FileInfo>()
@@ -853,33 +854,35 @@ class PlayerCore: NSObject {
       }
     }
 
-    // match unmatched subs and videos
-    let unmatchedSubs = subtitles.filter { !$0.isMatched }
-
-    // calculate edit distance
-    for sub in unmatchedSubs {
-      var minDistToVideo: UInt = .max
-      for video in unmatchedVideos {
-        let dist = ObjcUtils.levDistance(video.prefix, and: sub.prefix) + ObjcUtils.levDistance(video.suffix, and: sub.suffix)
-        sub.dist[video] = dist
-        video.dist[sub] = dist
-        if dist < minDistToVideo { minDistToVideo = dist }
-      }
-      sub.minDist = groups[.video]!.filter { sub.dist[$0] == minDistToVideo }
-    }
-
-    // match them
-    for video in unmatchedVideos {
-      let minDistToSub = video.dist.reduce(UInt.max, { min($0.0, $0.1.value) })
-      unmatchedSubs
-        .filter { video.dist[$0]! == minDistToSub && $0.minDist.contains(video) }
-        .forEach {
-          info.matchedSubs.safeAppend($0.url, for: video.path)
-        }
-    }
-
     info.currentVideosInfo = groups[.video]!
     NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
+
+    // match unmatched subs and videos
+    let unmatchedSubs = subtitles.filter { !$0.isMatched }
+    if unmatchedSubs.count > 0 && unmatchedVideos.count > 0 {
+      // calculate edit distance
+      for sub in unmatchedSubs {
+        var minDistToVideo: UInt = .max
+        for video in unmatchedVideos {
+          let dist = ObjcUtils.levDistance(video.prefix, and: sub.prefix) + ObjcUtils.levDistance(video.suffix, and: sub.suffix)
+          sub.dist[video] = dist
+          video.dist[sub] = dist
+          if dist < minDistToVideo { minDistToVideo = dist }
+        }
+        sub.minDist = groups[.video]!.filter { sub.dist[$0] == minDistToVideo }
+      }
+
+      // match them
+      for video in unmatchedVideos {
+        let minDistToSub = video.dist.reduce(UInt.max, { min($0.0, $0.1.value) })
+        unmatchedSubs
+          .filter { video.dist[$0]! == minDistToSub && $0.minDist.contains(video) }
+          .forEach {
+            info.matchedSubs.safeAppend($0.url, for: video.path)
+          }
+      }
+      NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
+    }
   }
 
   // MARK: - Sync with UI in MainWindow

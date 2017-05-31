@@ -98,12 +98,13 @@ class FileGroup {
     var currChars: [(Character, String)] = []
     var i = prefix.characters.count
 
-    var shouldContinue = true
-    while tempGroup.count < 2 && shouldContinue {
+    while tempGroup.count < 2 {
       var lastPrefix = ""
       for finfo in contents {
+        // if reached string end
         if i >= finfo.characters.count {
-          shouldContinue = false
+          tempGroup.safeAppend(finfo, for: prefix)
+          currChars.append(("/", prefix))
           continue
         }
         let c = finfo.characters[i]

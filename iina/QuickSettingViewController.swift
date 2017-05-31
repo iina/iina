@@ -559,17 +559,23 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       let activeSubs = playerCore.info.trackList(.sub) + playerCore.info.trackList(.secondSub)
       let menu = NSMenu()
       menu.autoenablesItems = false
-      if let videoInfo = playerCore.info.currentVideosInfo.first(where: { $0.url == playerCore.info.currentURL }),
-        !videoInfo.dist.isEmpty {
-        let subtitles = videoInfo.dist.map { ($0.value, $0.key) }.sorted { $0.0 < $1.0 }
-        for sub in subtitles {
-          let isActive = activeSubs.contains { $0.externalFilename == sub.1.path }
-          menu.addItem(withTitle: "\(sub.1.filename).\(sub.1.ext)",
-            action: #selector(self.chosenSubFromMenu(_:)),
-                       tag: nil, obj: sub.1, stateOn: isActive)
-        }
-      } else {
+      if playerCore.info.currentSubsInfo.isEmpty {
         menu.addItem(withTitle: NSLocalizedString("track.none", comment: "<None>"))
+      } else {
+        if let videoInfo = playerCore.info.currentVideosInfo.first(where: { $0.url == playerCore.info.currentURL }),
+          !videoInfo.relatedSubs.isEmpty {
+          videoInfo.relatedSubs.forEach { sub in
+            let isActive = activeSubs.contains { $0.externalFilename == sub.path }
+            menu.addItem(withTitle: "\(sub.filename).\(sub.ext)", action: #selector(self.chosenSubFromMenu(_:)), tag: nil, obj: sub, stateOn: isActive)
+          }
+          menu.addItem(NSMenuItem.separator())
+        }
+        playerCore.info.currentSubsInfo.sorted { (f1, f2) in
+          return f1.filename.localizedStandardCompare(f2.filename) == .orderedAscending
+        }.forEach { sub in
+          let isActive = activeSubs.contains { $0.externalFilename == sub.path }
+          menu.addItem(withTitle: "\(sub.filename).\(sub.ext)", action: #selector(self.chosenSubFromMenu(_:)), tag: nil, obj: sub, stateOn: isActive)
+        }
       }
       NSMenu.popUpContextMenu(menu, with: NSApp.currentEvent!, for: sender)
     }

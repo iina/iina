@@ -135,6 +135,6 @@ class PlaybackInfo {
   var chapters: [MPVChapter] = []
 
   var matchedSubs: [String: [URL]] = [:]
-  var commonPrefixes: [String: [FileInfo]] = [:]
+  var currentSubsInfo: [FileInfo] = []
   var currentVideosInfo: [FileInfo] = []
 }

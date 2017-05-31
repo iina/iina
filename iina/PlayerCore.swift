@@ -725,6 +725,7 @@ class PlayerCore: NSObject {
         subtitles.append(contentsOf: contents.flatMap { subExts.contains($0.pathExtension) ? FileInfo($0) : nil })
       }
     }
+    info.currentSubsInfo = subtitles
 
     // add files to playlist
     var addedCurrentVideo = false
@@ -752,7 +753,7 @@ class PlayerCore: NSObject {
 
     // group video files
     let series = FileGroup.group(files: groups[.video]!)
-    info.commonPrefixes = series.flatten()
+    let videoPrefixes = series.flatten()
 
     // group sub files
     let subPrefiexes = FileGroup.group(files: subtitles).flatten()
@@ -764,7 +765,7 @@ class PlayerCore: NSObject {
       prefixDistance[sp] = [:]
       var minDist = UInt.max
       var minVideo = ""
-      for (vp, vl) in info.commonPrefixes {
+      for (vp, vl) in videoPrefixes {
         guard vl.count > 2 else { continue }
         let dist = ObjcUtils.levDistance(vp, and: sp)
         prefixDistance[sp]![vp] = dist
@@ -776,7 +777,7 @@ class PlayerCore: NSObject {
       closestVideoForSub[sp] = minVideo
     }
     var matchedPrefixes: [String: String] = [:]  // video: sub
-    for (vp, vl) in info.commonPrefixes {
+    for (vp, vl) in videoPrefixes {
       guard vl.count > 2 else { continue }
       var minDist = UInt.max
       var minSub = ""
@@ -802,17 +803,22 @@ class PlayerCore: NSObject {
         // is in series
         if !video.prefix.isEmpty, let matchedSubPrefix = matchedPrefixes[video.prefix] {
           // find sub with same name
-          subPrefiexes[matchedSubPrefix]!.filter { s in
-            guard let vn = video.nameInSeries, let sn = s.nameInSeries else { return false }
+          subtitles.forEach { sub in
+            guard let vn = video.nameInSeries, let sn = sub.nameInSeries else { return }
+            var nameMatched: Bool
             if let vnInt = Int(vn), let snInt = Int(sn) {
-              return vnInt == snInt
+              nameMatched = vnInt == snInt
             } else {
-              return vn == sn
+              nameMatched = vn == sn
             }
-          }.forEach { sub in
-            info.matchedSubs.safeAppend(sub.url, for: video.path)
-            sub.isMatched = true
-            matchedSubs.insert(sub)
+            if nameMatched {
+              video.relatedSubs.append(sub)
+              if sub.prefix == matchedSubPrefix {
+                info.matchedSubs.safeAppend(sub.url, for: video.path)
+                sub.isMatched = true
+                matchedSubs.insert(sub)
+              }
+            }
           }
         }
       }

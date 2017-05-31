@@ -23,6 +23,7 @@ class FileInfo: Hashable {
   var characters: [Character]
   var dist: [FileInfo: UInt] = [:]
   var minDist: [FileInfo] = []
+  var relatedSubs: [FileInfo] = []
   var priorityStringOccurances = 0
   var isMatched = false
 

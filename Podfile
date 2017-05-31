@@ -11,6 +11,7 @@ target 'iina' do
   pod "PromiseKit", "~> 4.0"
   pod 'GzipSwift'
   pod 'GRMustache.swift'
+  pod 'Sparkle'
 
 #  target 'iinaTests' do
 #    inherit! :search_paths

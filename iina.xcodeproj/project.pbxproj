@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		496B19921E2968530035AF10 /* PIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B19911E2968530035AF10 /* PIP.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867483705008F086E07B0A6B /* Pods_iina.framework */; };
+		61BF6E151EDF75FC009F1695 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 61BF6E141EDF75FC009F1695 /* dsa_pub.pem */; };
 		8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */; };
 		8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */; };
 		8400D5C91E1AB2F9006785F5 /* QuickSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5CB1E1AB2F9006785F5 /* QuickSettingViewController.xib */; };
@@ -265,6 +266,7 @@
 		133400271EB3831F007FE17E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ja; path = ja.lproj/Contribution.rtf; sourceTree = "<group>"; };
 		133400281EB3831F007FE17E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		496B19911E2968530035AF10 /* PIP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIP.framework; path = ../../../../System/Library/PrivateFrameworks/PIP.framework; sourceTree = "<group>"; };
+		61BF6E141EDF75FC009F1695 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../../../../../private/tmp/Sparkle/dsa_pub.pem; sourceTree = "<group>"; };
 		61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.release.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.release.xcconfig"; sourceTree = "<group>"; };
 		72CAEE6D1E229EAE00B8C894 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefGeneralViewController.strings"; sourceTree = "<group>"; };
 		8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
@@ -711,6 +713,7 @@
 		84A0BAA21D2FAE8200BC8DA1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				61BF6E141EDF75FC009F1695 /* dsa_pub.pem */,
 				C78987311E34EF170005769F /* InfoPlist.strings */,
 				84E745D71DFDE8C100588DED /* config */,
 				84817CE51DBE2D0300CC2279 /* scripts */,
@@ -1039,6 +1042,7 @@
 				8400D5CC1E1AB2FF006785F5 /* PlaylistViewController.xib in Resources */,
 				8400D5ED1E1AB33F006785F5 /* PrefAdvancedViewController.xib in Resources */,
 				8400D5CF1E1AB306006785F5 /* CropSettingsViewController.xib in Resources */,
+				61BF6E151EDF75FC009F1695 /* dsa_pub.pem in Resources */,
 				845AC09C1E1AE6C10080B614 /* Localizable.strings in Resources */,
 				8400D5F61E1AB34D006785F5 /* PrefNetworkViewController.xib in Resources */,
 				8400D5D51E1AB317006785F5 /* FilterWindowController.xib in Resources */,

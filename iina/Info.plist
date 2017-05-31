@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>SUPublicDSAKeyFile</key>
+	<string>dsa_pub.pem</string>
 	<key>NSServices</key>
 	<array>
 		<dict>
@@ -20,6 +22,8 @@
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>SUFeedURL</key>
+	<string>https://www.iina.io/appcast.xml</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>

@@ -726,10 +726,6 @@ class PlayerCore: NSObject {
       }
     }
 
-    // grop video files
-    let series = FileGroup.group(files: groups[.video]!)
-    info.commonPrefixes = series.flatten()
-
     // add files to playlist
     var addedCurrentVideo = false
     for video in groups[.video]! {
@@ -750,45 +746,88 @@ class PlayerCore: NSObject {
     }
     NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
 
-    // group sub files
-    _ = FileGroup.group(files: subtitles)
-
     // get auto load option
     let subAutoLoadOption: Preference.IINAAutoLoadAction = Preference.IINAAutoLoadAction(rawValue: ud.integer(forKey: Preference.Key.subAutoLoadIINA)) ?? .iina
+    guard subAutoLoadOption != .disabled else { return }
 
-    // calculate edit distance
-    for sub in subtitles {
-      var minDistToVideo: UInt = .max
-      for video in groups[.video]! {
-        let dist = ObjcUtils.levDistance(video.prefix, and: sub.prefix) + ObjcUtils.levDistance(video.suffix, and: sub.suffix)
-        sub.dist[video] = dist
-        video.dist[sub] = dist
-        if dist < minDistToVideo { minDistToVideo = dist }
+    // group video files
+    let series = FileGroup.group(files: groups[.video]!)
+    info.commonPrefixes = series.flatten()
+
+    // group sub files
+    let subPrefiexes = FileGroup.group(files: subtitles).flatten()
+
+    // match video and sub groups (series)
+    var prefixDistance: [String: [String: UInt]] = [:]
+    var closestVideoForSub: [String: String] = [:]
+    for (sp, _) in subPrefiexes {
+      prefixDistance[sp] = [:]
+      var minDist = UInt.max
+      var minVideo = ""
+      for (vp, _) in info.commonPrefixes {
+        let dist = ObjcUtils.levDistance(vp, and: sp)
+        prefixDistance[sp]![vp] = dist
+        if dist < minDist {
+          minDist = dist
+          minVideo = vp
+        }
       }
-      sub.minDist = groups[.video]!.filter { sub.dist[$0] == minDistToVideo }
+      closestVideoForSub[sp] = minVideo
+    }
+    var matchedPrefixes: [String: String] = [:]  // video: sub
+    for (vp, _) in info.commonPrefixes {
+      var minDist = UInt.max
+      var minSub = ""
+      for (sp, _) in subPrefiexes {
+        let dist = prefixDistance[sp]![vp]!
+        if dist < minDist {
+          minDist = dist
+          minSub = sp
+        }
+      }
+      if closestVideoForSub[minSub] == vp {
+        matchedPrefixes[vp] = minSub
+      }
     }
 
+    var unmatchedVideos: [FileInfo] = []
+
+    print("match")
     // match sub for video files
     for video in groups[.video]! {
       var matchedSubs = Set<FileInfo>()
       // match video and sub if both are the closest one to each other
       if subAutoLoadOption.shouldLoadSubsMatchedByIINA() {
-        let minDistToSub = video.dist.reduce(UInt.max, { min($0.0, $0.1.value) })
-        subtitles
-          .filter { video.dist[$0]! == minDistToSub && $0.minDist.contains(video) }
-          .forEach {
-            info.matchedSubs.safeAppend($0.url, for: video.path)
-            matchedSubs.insert($0)
+        // is in series
+        if !video.prefix.isEmpty, let matchedSubPrefix = matchedPrefixes[video.prefix] {
+          // find sub with same name
+          subPrefiexes[matchedSubPrefix]!.filter { s in
+            guard let vn = video.nameInSeries, let sn = s.nameInSeries else { return false }
+            if let vnInt = Int(vn), let snInt = Int(sn) {
+              return vnInt == snInt
+            } else {
+              return vn == sn
+            }
+          }.forEach { sub in
+            info.matchedSubs.safeAppend(sub.url, for: video.path)
+            sub.isMatched = true
+            matchedSubs.insert(sub)
           }
+        }
       }
       // add subs that contains video name
       if subAutoLoadOption.shouldLoadSubsContainingVideoName() {
         subtitles
           .filter { $0.filename.contains(video.filename) }
-          .forEach {
-            info.matchedSubs.safeAppend($0.url, for: video.path)
-            matchedSubs.insert($0)
+          .forEach { sub in
+            info.matchedSubs.safeAppend(sub.url, for: video.path)
+            sub.isMatched = true
+            matchedSubs.insert(sub)
           }
+      }
+      // if no match
+      if matchedSubs.isEmpty {
+        unmatchedVideos.append(video)
       }
       // move the sub to front if it contains priority strings
       if let priorString = ud.string(forKey: Preference.Key.subAutoLoadPriorityString), !matchedSubs.isEmpty {
@@ -812,6 +851,31 @@ class PlayerCore: NSObject {
             info.matchedSubs[video.path]!.insert(s, at: 0)
           }
       }
+    }
+
+    // match unmatched subs and videos
+    let unmatchedSubs = subtitles.filter { !$0.isMatched }
+
+    // calculate edit distance
+    for sub in unmatchedSubs {
+      var minDistToVideo: UInt = .max
+      for video in unmatchedVideos {
+        let dist = ObjcUtils.levDistance(video.prefix, and: sub.prefix) + ObjcUtils.levDistance(video.suffix, and: sub.suffix)
+        sub.dist[video] = dist
+        video.dist[sub] = dist
+        if dist < minDistToVideo { minDistToVideo = dist }
+      }
+      sub.minDist = groups[.video]!.filter { sub.dist[$0] == minDistToVideo }
+    }
+
+    // match them
+    for video in unmatchedVideos {
+      let minDistToSub = video.dist.reduce(UInt.max, { min($0.0, $0.1.value) })
+      unmatchedSubs
+        .filter { video.dist[$0]! == minDistToSub && $0.minDist.contains(video) }
+        .forEach {
+          info.matchedSubs.safeAppend($0.url, for: video.path)
+        }
     }
 
     info.currentVideosInfo = groups[.video]!

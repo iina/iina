@@ -11,21 +11,26 @@ import Foundation
 fileprivate let GroupPrefixMinLength = 7
 fileprivate let GroupFilenameMaxLength = 12
 
+fileprivate let charSetGroups: [CharacterSet] = [.decimalDigits, .letters]
+
 
 class FileInfo: Hashable {
   var url: URL
   var path: String
   var filename: String
   var ext: String
+  var nameInSeries: String?
   var characters: [Character]
   var dist: [FileInfo: UInt] = [:]
   var minDist: [FileInfo] = []
   var priorityStringOccurances = 0
+  var isMatched = false
 
   var prefix: String {  // prefix detected by FileGroup
     didSet {
       if prefix.characters.count < self.characters.count {
         suffix = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
+        getNameInSeries()
       } else {
         prefix = ""
         suffix = self.filename
@@ -42,6 +47,18 @@ class FileInfo: Hashable {
     self.characters = [Character](self.filename.characters)
     self.prefix = ""
     self.suffix = self.filename
+  }
+
+  private func getNameInSeries() {
+    // check word bound
+    guard let firstChar = suffix.unicodeScalars.first,
+      let firstCharGroup = charSetGroups.first(where: { $0.contains(firstChar) }) else { return }
+    var name: String = ""
+    for c in suffix.unicodeScalars {
+      guard firstCharGroup.contains(c) else { break }
+      name.append(String(c))
+    }
+    self.nameInSeries = name
   }
 
   var hashValue: Int {
@@ -120,8 +137,8 @@ class FileGroup {
     }
   }
 
-  func flatten() -> [String: [String]] {
-    var result: [String: [String]] = [:]
+  func flatten() -> [String: [FileInfo]] {
+    var result: [String: [FileInfo]] = [:]
     var search: ((FileGroup) -> Void)!
     search = { group in
       if group.groups.count > 0 {
@@ -131,7 +148,7 @@ class FileGroup {
       } else {
         let filenameMaxLength = group.contents.reduce(0, { max($0, $1.characters.count) })
         if group.prefix.characters.count >= GroupPrefixMinLength && filenameMaxLength > GroupFilenameMaxLength {
-          result[group.prefix] = group.contents.map { $0.url.path }
+          result[group.prefix] = group.contents
         }
       }
     }

@@ -444,14 +444,23 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   var selectedRows: IndexSet?
 
   func menuNeedsUpdate(_ menu: NSMenu) {
-    var indexSet = playlistTableView.selectedRowIndexes
-    if playlistTableView.clickedRow >= 0 {
-      indexSet.insert(playlistTableView.clickedRow)
-    }
-
-    selectedRows = indexSet
+    let selectedIndexs: IndexSet = {
+      let clickedRow = playlistTableView.clickedRow
+      let selectedRowIndexes = playlistTableView.selectedRowIndexes
+      if clickedRow != -1 {
+        if selectedRowIndexes.contains(clickedRow) {
+          return selectedRowIndexes
+        } else {
+          return IndexSet(integer: clickedRow)
+        }
+      } else {
+        return selectedRowIndexes
+      }
+    }()
+    
+    selectedRows = selectedIndexs
     menu.removeAllItems()
-    let items = buildMenu(forRows: indexSet).items
+    let items = buildMenu(forRows: selectedIndexs).items
     for item in items {
       menu.addItem(item)
     }

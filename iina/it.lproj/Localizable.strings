@@ -152,6 +152,11 @@
 "alert.set_default.message" = "IINA sarà impostata come applicazione predefinita per tutti i formati che supporta.";
 "general.username" = "Nome utente";
 "alert.opensub.login.message" = "Si prega di inserire il vostro nome utente e password";
+
+"alert.open_url.title" = "Apri URL";
+"alert.open_url.message" = "Si prega di inserire l'URL:";
+"alert.choose_media_file.title" = "Scegli file media";
+
 "alert.title_info" = "Informazione";
 "general.password" = "Password";
 "alert.add_watch.title" = "Aggiungi proprietà di riproduzione";

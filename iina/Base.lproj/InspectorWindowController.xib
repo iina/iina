@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -61,11 +61,11 @@
             <rect key="contentRect" x="1539" y="436" width="424" height="395"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="424" height="395"/>
+                <rect key="frame" x="0.0" y="0.0" width="424" height="399"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <tabView drawsBackground="NO" controlSize="small" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="wHY-jo-uW0">
-                        <rect key="frame" x="12" y="12" width="400" height="349"/>
+                        <rect key="frame" x="12" y="12" width="400" height="353"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="oPY-Uu-Jby"/>
                         </constraints>
@@ -1066,6 +1066,7 @@
                                     <constraints>
                                         <constraint firstItem="BSs-zY-Ycq" firstAttribute="leading" secondItem="YAy-hh-4mE" secondAttribute="trailing" constant="10" id="1Wr-UJ-n7p"/>
                                         <constraint firstAttribute="trailing" secondItem="drh-59-1Az" secondAttribute="trailing" constant="12" id="3fy-6D-R7b"/>
+                                        <constraint firstItem="PST-dF-CNB" firstAttribute="top" secondItem="9In-dC-gN9" secondAttribute="bottom" constant="3" id="3tQ-G5-ECY"/>
                                         <constraint firstItem="Y8Q-PG-bHl" firstAttribute="top" secondItem="G90-uq-cW4" secondAttribute="top" id="4Qz-QM-m3g"/>
                                         <constraint firstItem="cwU-SQ-A8V" firstAttribute="leading" secondItem="Xx9-GE-Qp4" secondAttribute="trailing" constant="10" id="54H-zn-ZFJ"/>
                                         <constraint firstItem="cwU-SQ-A8V" firstAttribute="top" secondItem="Xx9-GE-Qp4" secondAttribute="top" id="5dj-zX-RZE"/>
@@ -1076,6 +1077,7 @@
                                         <constraint firstItem="9In-dC-gN9" firstAttribute="top" secondItem="Oof-hT-luu" secondAttribute="bottom" constant="12" id="EPG-sq-qur"/>
                                         <constraint firstItem="Tel-U0-EC3" firstAttribute="leading" secondItem="PST-dF-CNB" secondAttribute="trailing" id="FaS-Uj-OAZ"/>
                                         <constraint firstItem="Soa-90-mcv" firstAttribute="leading" secondItem="r7h-Wk-a9A" secondAttribute="trailing" constant="10" id="IRq-6F-l0K"/>
+                                        <constraint firstItem="PST-dF-CNB" firstAttribute="leading" secondItem="9In-dC-gN9" secondAttribute="leading" id="Ib8-uE-P0D"/>
                                         <constraint firstItem="Soa-90-mcv" firstAttribute="top" secondItem="r7h-Wk-a9A" secondAttribute="top" id="Jbw-kR-3dq"/>
                                         <constraint firstItem="drh-59-1Az" firstAttribute="top" secondItem="l4a-xE-z4Y" secondAttribute="top" id="Mle-FM-hAD"/>
                                         <constraint firstItem="G90-uq-cW4" firstAttribute="width" secondItem="YAy-hh-4mE" secondAttribute="width" id="POd-3I-0Lk"/>
@@ -1093,7 +1095,6 @@
                                         <constraint firstAttribute="trailing" secondItem="cwU-SQ-A8V" secondAttribute="trailing" constant="12" id="afa-42-bpC"/>
                                         <constraint firstItem="oRb-Bc-1u0" firstAttribute="top" secondItem="XLQ-aa-TdR" secondAttribute="top" id="b1r-aF-o3e"/>
                                         <constraint firstItem="drh-59-1Az" firstAttribute="leading" secondItem="l4a-xE-z4Y" secondAttribute="trailing" constant="10" id="b7k-Cv-DYR"/>
-                                        <constraint firstItem="PST-dF-CNB" firstAttribute="leading" secondItem="oUp-DO-OKl" secondAttribute="leading" id="cOW-3l-vKt"/>
                                         <constraint firstItem="uvv-R0-JCz" firstAttribute="leading" secondItem="VWf-29-TwU" secondAttribute="leading" constant="12" id="eDX-hv-gCA"/>
                                         <constraint firstItem="G90-uq-cW4" firstAttribute="leading" secondItem="VWf-29-TwU" secondAttribute="leading" constant="12" id="eKz-Ds-t06"/>
                                         <constraint firstItem="YAy-hh-4mE" firstAttribute="top" secondItem="VWf-29-TwU" secondAttribute="top" constant="12" id="fDS-Er-I6m"/>
@@ -1108,7 +1109,6 @@
                                         <constraint firstItem="r7h-Wk-a9A" firstAttribute="leading" secondItem="VWf-29-TwU" secondAttribute="leading" constant="12" id="qWT-XQ-nDa"/>
                                         <constraint firstItem="BSs-zY-Ycq" firstAttribute="top" secondItem="YAy-hh-4mE" secondAttribute="top" id="r9k-A7-3OU"/>
                                         <constraint firstAttribute="trailing" secondItem="9In-dC-gN9" secondAttribute="trailing" constant="12" id="raH-Xs-aww"/>
-                                        <constraint firstItem="PST-dF-CNB" firstAttribute="top" secondItem="oUp-DO-OKl" secondAttribute="bottom" constant="3" id="ret-2M-uUG"/>
                                         <constraint firstItem="Oof-hT-luu" firstAttribute="leading" secondItem="VWf-29-TwU" secondAttribute="leading" constant="12" id="uhf-3W-HrV"/>
                                         <constraint firstItem="Evy-yh-2vU" firstAttribute="leading" secondItem="R9k-Bu-wSB" secondAttribute="trailing" constant="10" id="vmF-UY-Fd6"/>
                                         <constraint firstItem="l4a-xE-z4Y" firstAttribute="leading" secondItem="VWf-29-TwU" secondAttribute="leading" constant="12" id="vy3-MM-NPS"/>
@@ -1124,7 +1124,7 @@
                         </tabViewItems>
                     </tabView>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0rt-Td-kr8">
-                        <rect key="frame" x="111" y="367" width="202" height="20"/>
+                        <rect key="frame" x="111" y="371" width="202" height="20"/>
                         <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Fqo-1c-3L1">
                             <font key="font" metaFont="smallSystem"/>
                             <segments>

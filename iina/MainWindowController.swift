@@ -393,6 +393,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updateBufferIndicatorView()
 
     // other initialization
+    [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
+      $0?.state = .active
+    }
     osdVisualEffectView.isHidden = true
     osdVisualEffectView.layer?.cornerRadius = 10
     leftArrowLabel.isHidden = true
@@ -662,7 +665,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override func keyDown(with event: NSEvent) {
     if !isInInteractiveMode {
-      let keyCode = Utility.mpvKeyCode(from: event).lowercased()
+      let keyCode = Utility.mpvKeyCode(from: event)
       if let kb = PlayerCore.keyBindings[keyCode] {
         if kb.isIINACommand {
           // - IINA command
@@ -934,7 +937,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
-    guard pinchAction != .none else { return }
+    guard pinchAction != .none && !isInFullScreen else { return }
     guard !isInInteractiveMode, let window = window, let screenFrame = NSScreen.main()?.visibleFrame else { return }
 
     if pinchAction == .windowSize {

@@ -285,7 +285,7 @@ class MenuController: NSObject, NSMenuDelegate {
     let info = PlayerCore.shared.info
     menu.removeAllItems()
     let noTrackMenuItem = NSMenuItem(title: Constants.String.trackNone, action: #selector(MainWindowController.menuChangeTrack(_:)), keyEquivalent: "")
-    noTrackMenuItem.representedObject = MPVTrack.emptyTrack(type)
+    noTrackMenuItem.representedObject = MPVTrack.emptyTrack(for: type)
     if info.trackId(type) == 0 {  // no track
       noTrackMenuItem.state = NSOnState
     }

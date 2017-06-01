@@ -217,11 +217,20 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   func menuNeedsUpdate(_ menu: NSMenu) {
     if menu.identifier == "ContextMenu" {
-      var indexSet = outlineView.selectedRowIndexes
-      if outlineView.clickedRow >= 0 {
-        indexSet.insert(outlineView.clickedRow)
-      }
-      selectedEntries = indexSet.flatMap { outlineView.item(atRow: $0) as? PlaybackHistory }
+      let selectedIndexs: IndexSet = {
+        let clickedRow = outlineView.clickedRow
+        let selectedRowIndexes = outlineView.selectedRowIndexes
+        if clickedRow != -1 {
+          if selectedRowIndexes.contains(clickedRow) {
+            return selectedRowIndexes
+          } else {
+            return IndexSet(integer: clickedRow)
+          }
+        } else {
+          return selectedRowIndexes
+        }
+      }()
+      selectedEntries = selectedIndexs.flatMap { outlineView.item(atRow: $0) as? PlaybackHistory }
     }
   }
 

@@ -934,7 +934,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
-    guard pinchAction != .none else { return }
+    guard pinchAction != .none && !isInFullScreen else { return }
     guard !isInInteractiveMode, let window = window, let screenFrame = NSScreen.main()?.visibleFrame else { return }
 
     if pinchAction == .windowSize {

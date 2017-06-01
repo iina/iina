@@ -593,25 +593,22 @@ class MPVController: NSObject {
       onVideoParamsChange(UnsafePointer<mpv_node_list>(OpaquePointer(property.data)))
 
     case MPVOption.TrackSelection.vid:
-      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
-        playerCore.info.vid = Int(data)
-        let currTrack = playerCore.info.currentTrack(.video) ?? .noneVideoTrack
-        playerCore.sendOSD(.track(currTrack))
-      }
+      let data = getInt(MPVOption.TrackSelection.vid)
+      playerCore.info.vid = Int(data)
+      let currTrack = playerCore.info.currentTrack(.video) ?? .noneVideoTrack
+      playerCore.sendOSD(.track(currTrack))
 
     case MPVOption.TrackSelection.aid:
-      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
-        playerCore.info.aid = Int(data)
-        let currTrack = playerCore.info.currentTrack(.audio) ?? .noneAudioTrack
-        playerCore.sendOSD(.track(currTrack))
-      }
+      let data = getInt(MPVOption.TrackSelection.aid)
+      playerCore.info.aid = Int(data)
+      let currTrack = playerCore.info.currentTrack(.audio) ?? .noneAudioTrack
+      playerCore.sendOSD(.track(currTrack))
 
     case MPVOption.TrackSelection.sid:
-      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
-        playerCore.info.sid = Int(data)
-        let currTrack = playerCore.info.currentTrack(.sub) ?? .noneSubTrack
-        playerCore.sendOSD(.track(currTrack))
-      }
+      let data = getInt(MPVOption.TrackSelection.sid)
+      playerCore.info.sid = Int(data)
+      let currTrack = playerCore.info.currentTrack(.sub) ?? .noneSubTrack
+      playerCore.sendOSD(.track(currTrack))
 
     case MPVOption.PlaybackControl.pause:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {

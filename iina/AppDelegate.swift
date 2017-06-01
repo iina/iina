@@ -86,20 +86,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       NSWindow.allowsAutomaticWindowTabbing = false
     }
 
-    // check update
-    let now = Date()
-    let checkUpdate = {
-      UpdateChecker.checkUpdate(alertIfOfflineOrNoUpdate: false)
-      UserDefaults.standard.set(now, forKey: Preference.Key.lastCheckUpdateTime)
-    }
-    if let lastCheckUpdateTime = UserDefaults.standard.object(forKey: Preference.Key.lastCheckUpdateTime) as? Date {
-      if lastCheckUpdateTime < now - TimeInterval(12*3600) {
-        checkUpdate()
-      }
-    } else {
-      checkUpdate()
-    }
-
     // pending open request
     if let url = pendingURL {
       parsePendingURL(url)
@@ -275,10 +261,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func websiteAction(_ sender: AnyObject) {
     NSWorkspace.shared().open(URL(string: AppData.websiteLink)!)
-  }
-
-  @IBAction func checkUpdate(_ sender: AnyObject) {
-    UpdateChecker.checkUpdate()
   }
 
   @IBAction func setSelfAsDefaultAction(_ sender: AnyObject) {

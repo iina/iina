@@ -393,6 +393,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updateBufferIndicatorView()
 
     // other initialization
+    [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
+      $0?.state = .active
+    }
     osdVisualEffectView.isHidden = true
     osdVisualEffectView.layer?.cornerRadius = 10
     leftArrowLabel.isHidden = true

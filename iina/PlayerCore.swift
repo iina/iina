@@ -414,7 +414,7 @@ class PlayerCore: NSObject {
   }
 
   func navigateInPlaylist(nextOrPrev: Bool) {
-    mpvController.command(nextOrPrev ? .playlistNext : .playlistPrev)
+    mpvController.command(nextOrPrev ? .playlistNext : .playlistPrev, checkError: false)
   }
 
   func playChapter(_ pos: Int) {

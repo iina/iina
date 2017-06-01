@@ -17,6 +17,7 @@ class PlaySliderCell: NSSliderCell {
   let knobWidth: CGFloat = 3
   let knobHeight: CGFloat = 15
   let knobRadius: CGFloat = 1
+  let barRadius: CGFloat = 1.5
 
   static let darkColor = NSColor(red: 1, green: 1, blue: 1, alpha: 0.5)
   static let lightColor = NSColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
@@ -88,7 +89,7 @@ class PlaySliderCell: NSSliderCell {
     }
     
     let rect = NSMakeRect(rect.origin.x, rect.origin.y + 1, rect.width, rect.height - 2)
-    let path = NSBezierPath(roundedRect: rect, xRadius: 3, yRadius: 3)
+    let path = NSBezierPath(roundedRect: rect, xRadius: barRadius, yRadius: barRadius)
 
     // draw left
     let pathLeftRect : NSRect = NSMakeRect(rect.origin.x, rect.origin.y, progress, rect.height)

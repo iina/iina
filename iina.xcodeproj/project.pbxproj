@@ -98,6 +98,7 @@
 		84817C961DBDCA5F00CC2279 /* SettingsListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84817C951DBDCA5F00CC2279 /* SettingsListCellView.swift */; };
 		84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84817C971DBDCE4300CC2279 /* RoundedColorWell.swift */; };
 		84817CE91DBE2E5300CC2279 /* autoload.lua in Copy Lua Scripts */ = {isa = PBXBuildFile; fileRef = 84817CE61DBE2D0300CC2279 /* autoload.lua */; };
+		8483FB001EDFF325000F55D6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8483FAFF1EDFF325000F55D6 /* Credits.rtf */; };
 		84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84879A961E0FFC7E0004F894 /* PrefUIViewController.swift */; };
 		84879A9B1E1032480004F894 /* ShortcutAvailableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84879A9A1E1032480004F894 /* ShortcutAvailableTextField.swift */; };
 		8487BEC11D744FA800FD17B0 /* FlippedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487BEC01D744FA800FD17B0 /* FlippedView.swift */; };
@@ -377,6 +378,7 @@
 		84817C951DBDCA5F00CC2279 /* SettingsListCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListCellView.swift; sourceTree = "<group>"; };
 		84817C971DBDCE4300CC2279 /* RoundedColorWell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedColorWell.swift; sourceTree = "<group>"; };
 		84817CE61DBE2D0300CC2279 /* autoload.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autoload.lua; sourceTree = "<group>"; };
+		8483FAFF1EDFF325000F55D6 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		84879A961E0FFC7E0004F894 /* PrefUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefUIViewController.swift; sourceTree = "<group>"; };
 		84879A9A1E1032480004F894 /* ShortcutAvailableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutAvailableTextField.swift; sourceTree = "<group>"; };
 		8487BEC01D744FA800FD17B0 /* FlippedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlippedView.swift; sourceTree = "<group>"; };
@@ -718,6 +720,7 @@
 				84EB1EE01D2F51D3004FA5A1 /* Info.plist */,
 				845AC09E1E1AE6C10080B614 /* Localizable.strings */,
 				84AF03D41E67492C003E3753 /* Contribution.rtf */,
+				8483FAFF1EDFF325000F55D6 /* Credits.rtf */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -1033,6 +1036,7 @@
 				8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */,
 				8400D5F31E1AB348006785F5 /* PrefSubViewController.xib in Resources */,
 				8400D5E11E1AB32F006785F5 /* PrefUIViewController.xib in Resources */,
+				8483FB001EDFF325000F55D6 /* Credits.rtf in Resources */,
 				84F5D49A1E44E9A50060A838 /* KeyBinding.strings in Resources */,
 				84AF03D21E67492C003E3753 /* Contribution.rtf in Resources */,
 				8400D5D21E1AB312006785F5 /* InspectorWindowController.xib in Resources */,

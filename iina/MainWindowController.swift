@@ -629,7 +629,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
       let cpv = ud.float(forKey: PK.controlBarPositionVertical)
       controlBarFloating.setFrameOrigin(NSMakePoint(
-        window!.frame.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5,
+        (window!.frame.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5).constrain(min: 0, max: window!.frame.width),
         window!.frame.height * CGFloat(cpv)
       ))
     case .top:
@@ -1136,7 +1136,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
       let cpv = ud.float(forKey: PK.controlBarPositionVertical)
       controlBarFloating.setFrameOrigin(NSMakePoint(
-        wSize.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5,
+        (wSize.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5).constrain(min: 0, max: wSize.width),
         wSize.height * CGFloat(cpv)
       ))
     }

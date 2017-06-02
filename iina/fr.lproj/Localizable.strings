@@ -35,6 +35,51 @@
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 
+"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
+"alert.config.file_existing.title" = "File Already Exists";
+"alert.open_url.title" = "Open URL";
+"alert.config.file_existing.message" = "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.";
+"alert.config.new.title" = "New Input Configuration";
+"alert.add_filter.message" = "Please enter a filter string in format of MPV's vf or af command.";
+"alert.add_watch.message" = "Please enter a valid MPV property name.";
+"alert.add_filter.title" = "New Filter";
+"alert.set_default.success" = "Finished with %d success and %d failed.";
+"alert.opensub.login.title" = "Opensubtitles Login";
+"alert.delete_history.message" = "Are you sure to delete select entries?";
+"alert.config.duplicate.title" = "Duplicate Configuration";
+"alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
+"alert.opensub.login.message" = "Please enter your username and password";
+"alert.title_info" = "Information";
+"alert.add_watch.title" = "Add Watch Property";
+"alert.choose_media_file.title" = "Choose Media File";
+"alert.title_error" = "Error";
+"alert.jump_to.title" = "Jump to";
+"alert.jump_to.message" = "Please enter the time you want to jumo to. Example: 20:35";
+"alert.delete_history.title" = "Delete Playback History";
+"alert.open_url.message" = "Please enter the URL:";
+"alert.title_warning" = "Warning";
+"alert.config.new.message" = "Please enter a name for the new configuration.";
+"alert.set_default.title" = "Setting IINA as Default App";
+
+"quicksetting.item_none" = "None";
+"quicksetting.item_default" = "Default";
+
+"filter.video_filters" = "Video Filters";
+"filter.audio_filters" = "Audio Filters";
+
+"general.ok" = "OK";
+"general.username" = "Username";
+"general.password" = "Password";
+"general.cancel" = "Cancel";
+
+"preference.scripts" = "Scripts";
+
+"pl_menu.wrong_sub" = "Wrong Subtitle!";
+"pl_menu.add_sub" = "Add Subtitle…";
+"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
+
+"update.new_version" = "New version:";
+
 
 /* On */
 "general.on" = "On";
@@ -297,7 +342,7 @@
 "pl_menu.remove_multi" = "Enlever";
 
 /* Logged in as */
-"preference.logged_in_as" = "Connecté en tant que";
+"preference.logged_in_as" = "Connecté en tant que %@";
 
 /* Not logged in */
 "preference.not_logged_in" = "Déconnecté";

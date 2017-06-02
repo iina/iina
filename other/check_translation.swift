@@ -44,7 +44,7 @@ class Regex {
 let ignorePlaceHolderTitle = true
 let checkRedundantKey = false
 
-let languages = ["de", "fr", "it", "ja", "ko", "pl", "zh-Hans", "zh-Hant", "ru"]
+let languages = ["de", "fr", "it", "ja", "ko", "pl", "zh-Hans", "zh-Hant", "ru", "tr"]
 var testLanguages: [String] = []
 
 

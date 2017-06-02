@@ -290,7 +290,7 @@ extension MainWindowController {
   }
 
   @IBAction func menuLoadExternalSub(_ sender: NSMenuItem) {
-    let _ = Utility.quickOpenPanel(title: "Load external subtitle file", isDir: false) { url in
+    Utility.quickOpenPanel(title: "Load external subtitle file", isDir: false) { url in
       self.playerCore.loadExternalSubFile(url)
     }
   }
@@ -393,10 +393,10 @@ extension MainWindowController {
   }
   
   @IBAction func menuSavePlaylist(_ sender: NSMenuItem) {
-    let _ = Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"]) {
-      (url) in if url.isFileURL {
+    Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"]) { (url) in
+      if url.isFileURL {
         var playlist = ""
-        for item in playerCore.info.playlist {
+        for item in self.playerCore.info.playlist {
           playlist.append((item.filename + "\n"))
         }
         

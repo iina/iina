@@ -163,6 +163,16 @@ extension Array {
   }
 }
 
+extension Dictionary {
+  mutating func safeAppend<T: Equatable>(_ value: T, for key: Key) where Value == Array<T> {
+    if self[key] == nil {
+      self[key] = Array<T>()
+    }
+    if self[key]!.contains(value) { return }
+    self[key]!.append(value)
+  }
+}
+
 extension NSMenu {
   func addItem(withTitle string: String, action selector: Selector? = nil, tag: Int? = nil, obj: Any? = nil, stateOn: Bool = false) {
     let menuItem = NSMenuItem(title: string, action: selector, keyEquivalent: "")
@@ -325,6 +335,20 @@ extension String {
   var md5: String {
     get {
       return self.data(using: .utf8)!.md5
+    }
+  }
+
+  mutating func deleteLast(_ num: Int) {
+    guard num <= characters.count else { self = ""; return }
+    self = self.substring(to: self.index(endIndex, offsetBy: -num))
+  }
+
+  func countOccurances(of str: String, in range: Range<Index>?) -> Int {
+    if let firstRange = self.range(of: str, options: [], range: range, locale: nil) {
+      let nextRange = firstRange.upperBound..<self.endIndex
+      return 1 + countOccurances(of: str, in: nextRange)
+    } else {
+      return 0
     }
   }
 }

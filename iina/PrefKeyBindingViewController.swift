@@ -117,8 +117,8 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     panel.informativeText = NSLocalizedString("keymapping.message", comment: "Press any key to record.")
     panel.accessoryView = keyRecordViewController.view
     panel.window.initialFirstResponder = keyRecordViewController.keyRecordView
-    panel.addButton(withTitle: "OK")
-    panel.addButton(withTitle: "Cancel")
+    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     if panel.runModal() == NSAlertFirstButtonReturn {
       ok(keyRecordViewController.keyCode, keyRecordViewController.action)
     }
@@ -346,7 +346,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
   private func setKeybindingsForPlayerCore() {
     var result: [String: KeyMapping] = [:]
-    currentMapping.forEach { result[$0.key.lowercased()] = $0 }
+    currentMapping.forEach { result[$0.key] = $0 }
     PlayerCore.keyBindings = result
   }
 

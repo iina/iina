@@ -127,13 +127,13 @@ class UpdateChecker {
 
       if state == .noUpdate {
         // if no update
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: NSLocalizedString("general.ok", comment:"OK"))
         alert.runModal()
       } else {
         // if require user action
         alert.addButton(withTitle: NSLocalizedString("update.dl_from_website", comment: "Website"))
         alert.addButton(withTitle: NSLocalizedString("update.dl_from_github", comment: "Github"))
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: NSLocalizedString("general.cancel", comment:"Cancel"))
 
         let result = alert.runModal()
 

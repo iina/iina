@@ -111,7 +111,7 @@ class VideoView: NSView {
       var subtitleFiles: [String] = []
       fileNames.forEach({ (path) in
         let ext = (path as NSString).pathExtension
-        if playerCore.supportedSubtitleFormat.contains(ext) {
+        if Utility.supportedFileExt[.sub]!.contains(ext) {
           subtitleFiles.append(path)
         } else {
           videoFiles.append(path)

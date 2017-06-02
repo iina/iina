@@ -2,6 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSServices</key>
+	<array>
+		<dict>
+			<key>NSSendTypes</key>
+			<array>
+				<string>NSStringPboardType</string>
+			</array>
+			<key>NSMessage</key>
+			<string>droppedText</string>
+			<key>NSMenuItem</key>
+			<dict>
+				<key>default</key>
+				<string>Text Drop</string>
+			</dict>
+		</dict>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDocumentTypes</key>
@@ -308,6 +324,7 @@
 				<string>swf</string>
 				<string>xvid</string>
 				<string>yuv</string>
+				<string>dv</string>
 				<string>*</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
@@ -376,7 +393,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>22</string>
+	<string>25</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.video</string>
 	<key>LSMinimumSystemVersion</key>

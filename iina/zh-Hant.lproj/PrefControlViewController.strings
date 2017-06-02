@@ -22,8 +22,11 @@
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "Dm7-JG-fLd"; */
 "Dm7-JG-fLd.title" = "暫停 / 繼續";
 
+/* Class = "NSTextFieldCell"; title = "Pinch to:"; ObjectID = "E8H-pO-MLc"; */
+"E8H-pO-MLc.title" = "兩指縮放:";
+
 /* Class = "NSTextFieldCell"; title = "Double click to:"; ObjectID = "GPH-fM-XHN"; */
-"GPH-fM-XHN.title" = "雙擊滑鼠時:";
+"GPH-fM-XHN.title" = "雙擊滑鼠:";
 
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
 "Hm3-dh-jgb.title" = "全熒幕";

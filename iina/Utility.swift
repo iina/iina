@@ -13,13 +13,11 @@ class Utility {
   static let tabTitleFontAttributes = FontAttributes(font: .system, size: .system, align: .center).value
   static let tabTitleActiveFontAttributes = FontAttributes(font: .systemBold, size: .system, align: .center).value
 
-  static let supportedFileExt: [MPVTrack.TrackType: [String]] = {
-    var result: [MPVTrack.TrackType: [String]] = [:]
-    result[.video] = ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt", "dv"]
-    result[.audio] = ["mp3", "aac", "mka", "dts", "flac", "ogg", "m4a", "ac3", "opus", "wav", "wv"]
-    result[.sub] = ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc"]
-    return result
-  }()
+  static let supportedFileExt: [MPVTrack.TrackType: [String]] = [
+    .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt"],
+    .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "m4a", "ac3", "opus", "wav", "wv"],
+    .sub: ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc"]
+  ]
 
   // MARK: - Logs, alerts
 

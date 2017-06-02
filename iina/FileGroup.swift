@@ -11,21 +11,31 @@ import Foundation
 fileprivate let GroupPrefixMinLength = 7
 fileprivate let GroupFilenameMaxLength = 12
 
+fileprivate let charSetGroups: [CharacterSet] = [.decimalDigits, .letters]
+
 
 class FileInfo: Hashable {
   var url: URL
   var path: String
   var filename: String
   var ext: String
+  var nameInSeries: String?
   var characters: [Character]
   var dist: [FileInfo: UInt] = [:]
   var minDist: [FileInfo] = []
-  var segments: [String] = []
+  var relatedSubs: [FileInfo] = []
   var priorityStringOccurances = 0
+  var isMatched = false
 
-  var prefix: String {  // prefix detected
+  var prefix: String {  // prefix detected by FileGroup
     didSet {
-      suffix = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
+      if prefix.characters.count < self.characters.count {
+        suffix = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
+        getNameInSeries()
+      } else {
+        prefix = ""
+        suffix = self.filename
+      }
     }
   }
   var suffix: String  // filename - prefix
@@ -38,24 +48,18 @@ class FileInfo: Hashable {
     self.characters = [Character](self.filename.characters)
     self.prefix = ""
     self.suffix = self.filename
-    self.getSegments()
   }
 
-  private func getSegments() {
-    var breakPoints: [Int] = []
-    var lastChar: Character = " "
-    for (i, char) in filename.characters.enumerated() {
-      if i == 0 || ((char >= "0" && char <= "9") != (lastChar >= "0" && lastChar <= "9")) {
-        breakPoints.append(i)
-      }
-      lastChar = char
+  private func getNameInSeries() {
+    // check word bound
+    guard let firstChar = suffix.unicodeScalars.first,
+      let firstCharGroup = charSetGroups.first(where: { $0.contains(firstChar) }) else { return }
+    var name: String = ""
+    for c in suffix.unicodeScalars {
+      guard firstCharGroup.contains(c) else { break }
+      name.append(String(c))
     }
-    breakPoints.append(filename.characters.count)
-    for i in 1..<breakPoints.count {
-      let start = filename.index(filename.startIndex, offsetBy: breakPoints[i - 1])
-      let end = filename.index(filename.startIndex, offsetBy: breakPoints[i])
-      segments.append(filename.substring(with: start..<end))
-    }
+    self.nameInSeries = name
   }
 
   var hashValue: Int {
@@ -95,12 +99,13 @@ class FileGroup {
     var currChars: [(Character, String)] = []
     var i = prefix.characters.count
 
-    var shouldContinue = true
-    while tempGroup.count < 2 && shouldContinue {
+    while tempGroup.count < 2 {
       var lastPrefix = ""
       for finfo in contents {
+        // if reached string end
         if i >= finfo.characters.count {
-          shouldContinue = false
+          tempGroup.safeAppend(finfo, for: prefix)
+          currChars.append(("/", prefix))
           continue
         }
         let c = finfo.characters[i]
@@ -122,7 +127,8 @@ class FileGroup {
       i += 1
     }
 
-    if stopGrouping(currChars) {
+    let maxSubGroupCount = tempGroup.reduce(0, { max($0, $1.value.count) })
+    if stopGrouping(currChars) || maxSubGroupCount < 3 {
       contents.forEach { $0.prefix = self.prefix }
     } else {
       groups = tempGroup.map { FileGroup(prefix: $0, contents: $1) }
@@ -133,8 +139,8 @@ class FileGroup {
     }
   }
 
-  func flatten() -> [String: [String]] {
-    var result: [String: [String]] = [:]
+  func flatten() -> [String: [FileInfo]] {
+    var result: [String: [FileInfo]] = [:]
     var search: ((FileGroup) -> Void)!
     search = { group in
       if group.groups.count > 0 {
@@ -144,7 +150,7 @@ class FileGroup {
       } else {
         let filenameMaxLength = group.contents.reduce(0, { max($0, $1.characters.count) })
         if group.prefix.characters.count >= GroupPrefixMinLength && filenameMaxLength > GroupFilenameMaxLength {
-          result[group.prefix] = group.contents.map { $0.url.path }
+          result[group.prefix] = group.contents
         }
       }
     }

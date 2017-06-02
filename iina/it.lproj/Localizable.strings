@@ -152,6 +152,11 @@
 "alert.set_default.message" = "IINA sarà impostata come applicazione predefinita per tutti i formati che supporta.";
 "general.username" = "Nome utente";
 "alert.opensub.login.message" = "Si prega di inserire il vostro nome utente e password";
+
+"alert.open_url.title" = "Apri URL";
+"alert.open_url.message" = "Si prega di inserire l'URL:";
+"alert.choose_media_file.title" = "Scegli file media";
+
 "alert.title_info" = "Informazione";
 "general.password" = "Password";
 "alert.add_watch.title" = "Aggiungi proprietà di riproduzione";
@@ -178,8 +183,14 @@
 "pl_menu.reveal_in_finder" = "Mostra nel Finder";
 "pl_menu.add_item" = "Aggiungi elementi…";
 "pl_menu.clear_playlist" = "Cancella la playlist";
+"pl_menu.matched_sub" = "Sottotitoli %d corrispondenti";
+"pl_menu.add_sub" = "Aggiungi sottotitoli…";
+"pl_menu.wrong_sub" = "Sotttotioli errati!";
 
 "keymapping.title" = "Abbreviazioni";
 "keymapping.message" = "Premi i nuovi tasti per aggiungere o modficare le abbreviazioni.";
+
+"filter.video_filters" = "Filtri Video";
+"filter.audio_filters" = "Filtri Audio";
 
 

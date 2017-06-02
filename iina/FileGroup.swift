@@ -131,7 +131,7 @@ class FileGroup {
     if stopGrouping(currChars) || maxSubGroupCount < 3 {
       contents.forEach { $0.prefix = self.prefix }
     } else {
-      groups = tempGroup.flatMap { FileGroup(prefix: $0, contents: $1) }
+      groups = tempGroup.map { FileGroup(prefix: $0, contents: $1) }
       // continue
       for g in groups {
         g.tryGroupFiles()

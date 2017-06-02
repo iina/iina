@@ -395,6 +395,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         if let prefix = playerCore.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix, !prefix.isEmpty,
           prefix.characters.count <= filenameWithoutExt.characters.count {  // check whether prefix length > filename length
           cellView.prefixBtn.hasPrefix = true
+          cellView.prefixBtn.text = prefix
           cellView.textField?.stringValue = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
         } else {
           cellView.prefixBtn.hasPrefix = false

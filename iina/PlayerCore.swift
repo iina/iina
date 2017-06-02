@@ -845,7 +845,7 @@ class PlayerCore: NSObject {
         // find the min occurance count first
         var minOccurances = Int.max
         matchedSubs.forEach { sub in
-          sub.priorityStringOccurances = stringList.reduce(0, { $0 + sub.filename.countOccurances(of: $1, inRange: nil) })
+          sub.priorityStringOccurances = stringList.reduce(0, { $0 + sub.filename.countOccurances(of: $1, in: nil) })
           if sub.priorityStringOccurances < minOccurances {
             minOccurances = sub.priorityStringOccurances
           }

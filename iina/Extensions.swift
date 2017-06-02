@@ -343,10 +343,10 @@ extension String {
     self = self.substring(to: self.index(endIndex, offsetBy: -num))
   }
 
-  public func countOccurances(of str: String, inRange r: Range<Index>?) -> Int {
-    if let range = range(of: str, options: [], range: r, locale: nil) {
-      let nextRange = range.upperBound..<self.endIndex
-      return 1 + countOccurances(of: str, inRange: nextRange)
+  func countOccurances(of str: String, in range: Range<Index>?) -> Int {
+    if let firstRange = self.range(of: str, options: [], range: range, locale: nil) {
+      let nextRange = firstRange.upperBound..<self.endIndex
+      return 1 + countOccurances(of: str, in: nextRange)
     } else {
       return 0
     }

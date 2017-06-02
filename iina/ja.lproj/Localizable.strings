@@ -190,3 +190,13 @@
 
 "filter.video_filters" = "ビデオフィルタ一覧";
 "filter.audio_filters" = "オーディオフィルタ一覧";
+
+
+// FIXME
+// Fall back to English
+"alert.delete_history.title" = "Delete Playback History";
+"alert.delete_history.message" = "Are you sure to delete select entries?";
+
+"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
+"pl_menu.add_sub" = "Add Subtitle…";
+"pl_menu.wrong_sub" = "Wrong Subtitle!";

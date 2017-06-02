@@ -184,6 +184,10 @@
 "pl_menu.reveal_in_finder" = "在 Finder 中打開";
 "pl_menu.add_item" = "添加檔案...";
 "pl_menu.clear_playlist" = "清空播放列表";
+"pl_menu.matched_sub" = "已匹配 %d 個字幕";
+"pl_menu.add_sub" = "添加字幕…";
+"pl_menu.wrong_sub" = "錯誤的字幕!";
+
 
 "keymapping.title" = "快速鍵";
 "keymapping.message" = "現在按鍵即可設定";

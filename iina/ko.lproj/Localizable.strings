@@ -1,303 +1,195 @@
-/* (No Commment) */
-"general.login" = "로그인";
+/*
+ String_ui.strings
+ iina
+ 
+ Created by lhc on 3/1/2017.
+ Copyright © 2017 lhc. All rights reserved.
+ */
 
-/* (No Commment) */
-"general.logout" = "로그아웃";
-
-/* Buffering... %s%% */
-"main.buffering_indicator" = "준비중… %d%%";
-
-/* Audio Delay: */
-"menu.audio_delay" = "오디오 지연: %.2f초";
-
-/* Exit Fullscreen */
-"menu.exit_fullscreen" = "전체 화면에서 나가기";
-
-/* Exit Picture-in-Picture */
-"menu.exit_pip" = "화면 속 화면에서 나가기";
-
-/* Fullscreen */
-"menu.fullscreen" = "전체 화면";
-
-/* Pause */
-"menu.pause" = "일시 정지";
-
-/* Enter Picture-in-Picture */
-"menu.pip" = "화면 속 화면으로 가기";
-
-/* Resume */
-"menu.resume" = "재생";
-
-/* Subtitle Delay: */
-"menu.sub_delay" = "자막 지연: %.2f초";
-
-/* Volume: */
-"menu.volume" = "음량: %d";
-
-/* Off */
-"general.off" = "끄기";
-
-/* On */
+// Common
 "general.on" = "켜기";
+"general.off" = "끄기";
+"general.login" = "로그인";
+"general.logout" = "로그아웃";
+"general.ok" = "승인";
+"general.cancel" = "취소";
+"general.username" = "사용자";
+"general.password" = "비밀번호";
 
-/* AB-Loop: A */
-"osd.abloop.a" = "구간 반복: 시작 위치";
-
-/* AB-Loop: B */
-"osd.abloop.b" = "구간 반복: 마침 위치";
-
-/* AB-Loop: Cleared */
-"osd.abloop.clear" = "구간 반복: 해제됨";
-
-/* Added %i Files to Playlist */
-"osd.add_to_playlist" = "%i 파일이 재생목록에 추가되었습니다";
-
-/* Aspect Ratio: %@ */
-"osd.aspect" = "화면비: %@";
-
-/* Audio Delay: %fs Earlier */
-"osd.audio_delay.earlier" = "오디오 지연: %.2f초 빠르게";
-
-/* Audio Delay: %fs Later */
-"osd.audio_delay.later" = "오디오 지연: %.2f초 늦게";
-
-/* Audio Delay: No Delay */
-"osd.audio_delay.nodelay" = "오디오 지연: 없음";
-
-/* Canceled */
-"osd.canceled" = "취소됨";
-
-/* Cannot login */
-"osd.cannot_login" = "로그인할 수 없음";
-
-/* Chapter: %@ */
-"osd.chapter" = "챕터: %@";
-
-/* Cleared Playlist */
-"osd.clear_playlist" = "재생목록 비움";
-
-/* Crop: %@ */
-"osd.crop" = "화면 자르기: %@";
-
-/* Deinterlace: %@ */
-"osd.deinterlace" = "디인터레이스: %@";
-
-/* Error reading file */
-"osd.file_error" = "파일 읽기 오류";
-
-/* Finding online subtitles... */
-"osd.find_online_sub" = "인터넷에서 자막을 찾는 중…";
-
-/* Mute */
-"osd.mute" = "소리 끔";
-
-/* Network error */
-"osd.network_error" = "네트워크 오류";
-
-/* Pause */
-"osd.pause" = "일시 정지됨";
-
-/* Resume */
-"osd.resume" = "재생 복원됨";
-
-/* Rotate: %i° */
-"osd.rotate" = "회전: %i°";
-
-/* Screenshot Captured */
-"osd.screenshot" = "스크린샷 저장됨";
-
-/* Speed: %.2fx */
-"osd.speed" = "재생 속도: %.2f배속";
-
-/* Stop */
-"osd.stop" = "정지됨";
-
-/* Subtitle Delay: %fs Earlier */
-"osd.sub_delay.earlier" = "자막 지연: %.2f초 빠르게";
-
-/* Subtitle Delay: %fs Later */
-"osd.sub_delay.later" = "자막 지연: %.2f초 늦게";
-
-/* Subtitle Delay: No Delay */
-"osd.sub_delay.nodelay" = "자막 지연: 없음";
-
-/* Subtitle downloaded */
-"osd.sub_downloaded" = "자막 다운로드됨";
-
-/* %d subtitle(s) found. Downloading... */
-"osd.sub_found" = "%d 자막을 찾았습니다. 다운로드하는 중…";
-
-/* No subtitle found. */
-"osd.sub_not_found" = "자막을 찾지 못했습니다";
-
-/* Subtitle saved */
-"osd.sub_saved" = "자막 저장됨";
-
-/* Subtitle Position: %f */
-"osd.subtitle_pos" = "자막 위치: %.1f";
-
-/* Subtitle Scale: %.2fx */
-"osd.subtitle_scale" = "자막 크기: %.2f배";
-
-/* Unmute */
-"osd.unmute" = "소리 켜짐";
-
-/* Brightness: %i */
-"osd.video_eq.brightness" = "밝기: %i";
-
-/* Contrast: %i */
-"osd.video_eq.contrast" = "대비: %i";
-
-/* Grama: %i */
-"osd.video_eq.gamma" = "감마: %i";
-
-/* Hue: %i */
-"osd.video_eq.hue" = "색조: %i";
-
-/* Saturation: %i */
-"osd.video_eq.saturation" = "채도: %i";
-
-/* Volume: %i */
-"osd.volume" = "음량: %i";
-
-/* Add Item */
-"pl_menu.add_item" = "항목 추가…";
-
-/* Clear Playlist */
-"pl_menu.clear_playlist" = "재생목록 지움";
-
-/* (No Commment) */
-"pl_menu.delete" = "휴지통으로 이동";
-
-/* (No Commment) */
-"pl_menu.delete_after_play" = "재생 후 휴지통으로 이동";
-
-/* (No Commment) */
-"pl_menu.delete_after_play_multi" = "선택항목 재생 후 휴지통으로 이동";
-
-/* (No Commment) */
-"pl_menu.delete_multi" = "선택한 파일을 휴지통으로 이동";
-
-/* Play Next */
-"pl_menu.play_next" = "다음 항목 재생";
-
-/* (No Commment) */
-"pl_menu.remove" = "제거";
-
-/* (No Commment) */
-"pl_menu.remove_multi" = "선택 항목 제거";
-
-/* Reveal in Finder */
-"pl_menu.reveal_in_finder" = "파인더에서 보기";
-
-/* %d Items */
-"pl_menu.title_multi" = "%d개의 항목";
-
-/* CHAPTERS */
+// PlaylistViewController.swift
+"playlist.playlist_cap" = "재생목록";
 "playlist.chapter_cap" = "챕터";
 
-/* PLAYLIST */
-"playlist.playlist_cap" = "재생목록";
+// MainWindowController.swift
+"main.buffering_indicator" = "준비중… %d%%";
 
-/* Advanced */
-"preference.advanced" = "고급설정";
-
-/* Codec */
-"preference.codec" = "코덱";
-
-/* Control */
-"preference.control" = "컨트롤";
-
-/* General */
-"preference.general" = "일반";
-
-/* Keybindings */
-"preference.keybindings" = "단축키";
-
-/* Logged in as */
-"preference.logged_in_as" = "%@(으)로 로그인됨";
-
-/* Network */
-"preference.network" = "네트워크";
-
-/* Not logged in */
-"preference.not_logged_in" = "로그인되지 않음";
-
-/* (No Commment) */
-"preference.scripts" = "스크립트";
-
-/* Subtitles */
-"preference.subtitle" = "자막";
-
-/* Preference */
-"preference.title" = "환경설정";
-
-/* UI */
-"preference.ui" = "화면";
-
-/* (No Commment) */
+// QuickSettingViewController.swift
 "quicksetting.item_default" = "기본값";
-
-/* (No Commment) */
 "quicksetting.item_none" = "없음";
 
-/* <None> */
-"track.none" = "<없음>";
+// OSDMessage.swift
+"osd.pause" = "일시 정지됨";
+"osd.resume" = "재생 복원됨";
+"osd.volume" = "음량: %i";
+"osd.speed" = "재생 속도: %.2f배속";
+"osd.aspect" = "화면비: %@";
+"osd.crop" = "화면 자르기: %@";
+"osd.rotate" = "회전: %i°";
+"osd.deinterlace" = "디인터레이스: %@";
+"osd.audio_delay.nodelay" = "오디오 지연: 없음";
+"osd.audio_delay.later" = "오디오 지연: %.2f초 늦게";
+"osd.audio_delay.earlier" = "오디오 지연: %.2f초 빠르게";
+"osd.sub_delay.nodelay" = "자막 지연: 없음";
+"osd.sub_delay.later" = "자막 지연: %.2f초 늦게";
+"osd.sub_delay.earlier" = "자막 지연: %.2f초 빠르게";
+"osd.subtitle_pos" = "자막 위치: %.1f";
+"osd.mute" = "소리 끔";
+"osd.unmute" = "소리 켜짐";
+"osd.screenshot" = "스크린샷 저장됨";
+"osd.abloop.a" = "구간 반복: 시작 위치";
+"osd.abloop.b" = "구간 반복: 마침 위치";
+"osd.abloop.clear" = "구간 반복: 해제됨";
+"osd.stop" = "정지됨";
+"osd.chapter" = "챕터: %@";
+"osd.subtitle_scale" = "자막 크기: %.2f배";
+"osd.add_to_playlist" = "%i 파일이 재생목록에 추가되었습니다";
+"osd.clear_playlist" = "재생목록 비움";
+"osd.video_eq.contrast" = "대비: %i";
+"osd.video_eq.gamma" = "감마: %i";
+"osd.video_eq.hue" = "색조: %i";
+"osd.video_eq.saturation" = "채도: %i";
+"osd.video_eq.brightness" = "밝기: %i";
+"osd.find_online_sub" = "인터넷에서 자막을 찾는 중…";
+"osd.sub_not_found" = "자막을 찾지 못했습니다";
+"osd.sub_found" = "%d 자막을 찾았습니다. 다운로드하는 중…";
+"osd.sub_downloaded" = "자막 다운로드됨";
+"osd.sub_saved" = "자막 저장됨";
+"osd.network_error" = "네트워크 오류";
+"osd.file_error" = "파일 읽기 오류";
+"osd.cannot_login" = "로그인할 수 없음";
+"osd.canceled" = "취소됨";
 
-/* Error */
+"update.title_update_found" = "업데이트를 찾았습니다";
+"update.title_no_update" = "업데이트가 없습니다";
+"update.title_error" = "오류";
+"update.update_found" = "새로운 버전이 있습니다. IINA는 아직 알파 단계이므로 최신버전으로 갱신하는 것이 좋습니다. 웹사이트나 Github에서 다운로드 하십시오:";
+"update.no_update" = "최신 버전을 사용중입니다.";
 "update.check_failed" = "업데이트를 확인하지 못했습니다. 너무 오래된 버전을 사용하고 있는 것 같습니다. 웹사이트 또는 Github에서 배포본을 확인해 주십시오.";
-
-/* Github */
+"update.new_version" = "새로운 버전:";
+"update.dl_from_website" = "웹사이트로 가기";
 "update.dl_from_github" = "Github으로 가기";
 
-/* Website */
-"update.dl_from_website" = "웹사이트로 가기";
+"preference.title" = "환경설정";
+"preference.general" = "일반";
+"preference.ui" = "화면";
+"preference.codec" = "코덱";
+"preference.subtitle" = "자막";
+"preference.network" = "네트워크";
+"preference.control" = "컨트롤";
+"preference.keybindings" = "단축키";
+"preference.advanced" = "고급설정";
+"preference.scripts" = "스크립트";
+"preference.not_logged_in" = "로그인되지 않음";
+"preference.logged_in_as" = "%@(으)로 로그인됨";
 
-/* (No Commment) */
-"update.new_version" = "새로운 버전:";
+"menu.volume" = "음량: %d";
+"menu.audio_delay" = "오디오 지연: %.2f초";
+"menu.sub_delay" = "자막 지연: %.2f초";
+"menu.fullscreen" = "전체 화면";
+"menu.exit_fullscreen" = "전체 화면에서 나가기";
+"menu.pip" = "화면 속 화면으로 가기";
+"menu.exit_pip" = "화면 속 화면에서 나가기";
+"menu.pause" = "일시 정지";
+"menu.resume" = "재생";
 
-/* No update */
-"update.no_update" = "최신 버전을 사용중입니다.";
+"track.none" = "<없음>";
 
-/* Title */
-"update.title_error" = "오류";
+// Alerts
+"alert.title_error" = "오류";
+"alert.title_warning" = "주의";
+"alert.title_info" = "정보";
 
-/* Title */
-"update.title_no_update" = "업데이트가 없습니다";
-
-/* Title */
-"update.title_update_found" = "업데이트를 찾았습니다";
-
-/* Update found */
-"update.update_found" = "새로운 버전이 있습니다. IINA는 아직 알파 단계이므로 최신버전으로 갱신하는 것이 좋습니다. 웹사이트나 Github에서 다운로드 하십시오:";
-
-"keymapping.title" = "단축키 지정";
-"keymapping.message" = "기록할 키를 누르십시오.";
-
-"alert.config.cannot_create" = "설정 파일을 만들 수 없습니다!";
-"alert.config.cannot_write" = "설정 파일에 저장할 수 없습니다!";
-"alert.config.empty_name" = "파일 이름을 지정해 주십시오.";
-"alert.config.name_existing" = "같은 이름의 파일이 이미 있습니다.";
-"alert.error_deleting_file" = "파일을 삭제할 수 없습니다.";
-"alert.error_finding_file" = "%@ 파일을 찾을 수 없습니다!";
-"alert.error_loading_script" = "%@ 스크립트를 불러올 수 없습니다!";
-"alert.error_open" = "파일 또는 스트림을 열 수 없습니다!";
-"alert.error_saving_file" = "%@: %@을 저장하는 도중 오류가 발생했습니다.";
-"alert.extra_option.cannot_read" = "사용자가 지정한 mpv 추가옵션을 읽을 수 없습니다.";
-"alert.extra_option.config_folder" = "\"%@\"를 설정 디렉토리로 지정하는 도중 오류가 발생했습니다.";
-"alert.extra_option.empty" = "항목과 그 설정값을 반드시 지정해야 합니다!";
-"alert.extra_option.error" = "--%@=%@ 설정에서 %d 오류가 발생했습니다. 환경설정 > 고급설정으로 이동하여 사용자가 지정한 추가 설정 사항을 점검하십시오.";
 "alert.fatal_error" = "심각한 오류: %@ \n프로그램이 지금 종료됩니다.";
-"alert.filter.incorrect" = "필터를 설정하는 도중 오류가 발생했습니다. 매개변수 형식을 확인하십시오.";
-"alert.keybinding_config_error" = "단축키 설정 파일 \"%@\"를 읽어올 때 오류가 발생했습니다! IINA 기본값을 사용하도록 설정됩니다. 사용자가 지정한 단축키 설정 내용을 점검하십시오.";
 "alert.mpv_error" = "%@ (%@)오류가 사용자 지정 옵션 %@을 설정하는 도중 발생했습니다.";
-"alert.playlist.error_deleting" = "삭제 오류: %@";
 "alert.sleep" = "화면 잠자기 설정을 끌 수 없습니다!";
-"alert.sub.cannot_login" = "로그인할 수 없습니다. 계정 이름과 암호, 네트워크 상태를 확인하십시오.\n\n%@";
-"alert.sub.cannot_save_passwd" = "키체인에 암호를 저장할 수 없습니다: %@";
-"alert.sub.no_selected" = "다운로드한 자막을 선택하십시오.";
-"alert.sub_lang_not_set" = "OpenSubtitles를 사용하기 전에 자막의 선호 언어를 설정하십시오. 지금은 영어(eng)를 사용합니다.";
+
 "alert.unsupported_audio" = "지원되지 않는 외부 오디오 파일입니다.";
 "alert.unsupported_sub" = "지원되지 않는 자막 형식입니다.";
 "alert.unsupported_url" = "지원되지 않는 URL입니다.";
 "alert.wrong_url_format" = "잘못된 URL 형식입니다.";
+
+"alert.error_open" = "파일 또는 스트림을 열 수 없습니다!";
+"alert.error_finding_file" = "%@ 파일을 찾을 수 없습니다!";
+"alert.error_loading_script" = "%@ 스크립트를 불러올 수 없습니다!";
+"alert.error_saving_file" = "%@: %@을 저장하는 도중 오류가 발생했습니다.";
+"alert.error_deleting_file" = "파일을 삭제할 수 없습니다.";
+
+"alert.config.new.title" = "새 설정 파일";
+"alert.config.new.message" = "새 설정 파일의 이름을 입력하십시오.";
+"alert.config.duplicate.title" = "설정 파일 복제";
+"alert.config.duplicate.message" = "새 복제 설정 파일의 이름을 입력하십시오.";
+"alert.config.empty_name" = "파일 이름을 지정해 주십시오.";
+"alert.config.name_existing" = "같은 이름의 파일이 이미 있습니다.";
+"alert.config.file_existing.title" = "같은 이름의 설정 파일이 이미 있습니다.";
+"alert.config.file_existing.message" = "파일을 덮어 쓰려면 승인을, 파인더에서 파일을 확인하려면 취소를 누르십시오.";
+"alert.config.cannot_create" = "설정 파일을 만들 수 없습니다!";
+"alert.config.cannot_write" = "설정 파일에 저장할 수 없습니다!";
+
+"alert.filter.incorrect" = "필터를 설정하는 도중 오류가 발생했습니다. 매개변수 형식을 확인하십시오.";
+"alert.add_filter.title" = "새 필터";
+"alert.add_filter.message" = "MPV 플레이어의 vf 또는 af 명령의 형식으로 필터 설정 문자열을 입력하십시오.";
+
+"alert.keybinding_config.error" = "단축키 설정 파일 \"%@\"를 읽어올 때 오류가 발생했습니다! IINA 기본값을 사용하도록 설정됩니다. 사용자가 지정한 단축키 설정 내용을 점검하십시오.";
+
+"alert.extra_option.cannot_read" = "사용자가 지정한 mpv 추가옵션을 읽을 수 없습니다.";
+"alert.extra_option.empty" = "항목과 그 설정값을 반드시 지정해야 합니다!";
+"alert.extra_option.error" = "--%@=%@ 설정에서 %d 오류가 발생했습니다. 환경설정 > 고급설정으로 이동하여 사용자가 지정한 추가 설정 사항을 점검하십시오.";
+"alert.extra_option.config_folder" = "\"%@\"를 설정 디렉토리로 지정하는 도중 오류가 발생했습니다.";
+
+"alert.playlist.error_deleting" = "삭제 오류: %@";
+
+"alert.sub.no_selected" = "다운로드한 자막을 선택하십시오.";
+"alert.sub_lang_not_set" = "OpenSubtitles를 사용하기 전에 자막의 선호 언어를 설정하십시오. 지금은 영어(eng)를 사용합니다.";
+"alert.sub.cannot_save_passwd" = "키체인에 암호를 저장할 수 없습니다: %@";
+"alert.sub.cannot_login" = "로그인할 수 없습니다. 계정 이름과 암호, 네트워크 상태를 확인하십시오.\n\n%@";
+
+"alert.set_default.title" = "IINA를 기본 프로그램으로 설정";
+"alert.set_default.message" = "지원하는 모든 파일 유형에 대해 IINA를 기본 프로그램으로 설정합니다.";
+"alert.set_default.success" = "설정을 마쳤습니다: %d개 성공, %d개 실패";
+
+"alert.add_watch.title" = "상태 보기 항목 추가";
+"alert.add_watch.message" = "추가할 MPV 속성을 입력하십시오.";
+
+"alert.jump_to.title" = "위치로 가기";
+"alert.jump_to.message" = "재생할 위치의 시간을 입력하십시오. 예: 20:35";
+
+"alert.opensub.login.title" = "Opensubtitles 로그인";
+"alert.opensub.login.message" = "사용자 계정과 비밀번호를 입력하십시오.";
+
+"alert.open_url.title" = "URL 열기";
+"alert.open_url.message" = "URL을 입력하십시오.";
+"alert.choose_media_file.title" = "재생할 파일 선택";
+
+"alert.delete_history.title" = "최근에 재생한 기록 삭제";
+"alert.delete_history.message" = "선택한 재생 기록을 삭제하시겠습니까?";
+
+"pl_menu.title_multi" = "%d개의 항목";
+"pl_menu.play_next" = "다음 항목 재생";
+"pl_menu.remove" = "제거";
+"pl_menu.remove_multi" = "선택 항목 제거";
+"pl_menu.delete" = "휴지통으로 이동";
+"pl_menu.delete_multi" = "선택한 파일을 휴지통으로 이동";
+"pl_menu.delete_after_play" = "재생 후 휴지통으로 이동";
+"pl_menu.delete_after_play_multi" = "선택항목 재생 후 휴지통으로 이동";
+"pl_menu.reveal_in_finder" = "파인더에서 보기";
+"pl_menu.add_item" = "항목 추가…";
+"pl_menu.clear_playlist" = "재생목록 지움";
+"pl_menu.matched_sub" = "%d개의 자막 일치";
+"pl_menu.add_sub" = "자막 추가…";
+"pl_menu.wrong_sub" = "일치되지 않은 자막!";
+
+"keymapping.title" = "단축키 지정";
+"keymapping.message" = "기록할 키를 누르십시오.";
+
+"filter.video_filters" = "비디오 필터";
+"filter.audio_filters" = "오디오 필터";

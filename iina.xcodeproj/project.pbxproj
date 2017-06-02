@@ -553,6 +553,7 @@
 		C7D162511E89FD6100674AC3 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/OpenURLAccessoryViewController.strings; sourceTree = "<group>"; };
 		D26C04BB1E8D31DD00F709E4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/OpenURLAccessoryViewController.strings"; sourceTree = "<group>"; };
 		D26C04BC1E8D31DE00F709E4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/SubSelectWindowController.strings"; sourceTree = "<group>"; };
+		D27556FC1EC6E1C300CAB2A4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/HistoryWindowController.strings"; sourceTree = "<group>"; };
 		D27E35CE1E379B6D0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		D27E35CF1E379B6D0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
 		D27E35D01E379B6D0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/QuickSettingViewController.strings"; sourceTree = "<group>"; };
@@ -1539,6 +1540,7 @@
 				84996F911EC11CE6009A8A39 /* Base */,
 				84996F941EC11CEC009A8A39 /* zh-Hans */,
 				B3B163411EC9A1AC000ED121 /* it */,
+				D27556FC1EC6E1C300CAB2A4 /* zh-Hant */,
 			);
 			name = HistoryWindowController.xib;
 			sourceTree = "<group>";

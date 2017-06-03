@@ -57,6 +57,11 @@ class ControlBarView: NSVisualEffectView {
         newOrigin.y = 0
       }
       self.setFrameOrigin(newOrigin)
+      // save position
+      let xPos = (newOrigin.x + frame.width / 2) / windowFrame.width
+      let yPos = (newOrigin.y) / windowFrame.height
+      UserDefaults.standard.set(xPos, forKey: Preference.Key.controlBarPositionHorizontal)
+      UserDefaults.standard.set(yPos, forKey: Preference.Key.controlBarPositionVertical)
     }
   }
   override func mouseUp(with event: NSEvent) {

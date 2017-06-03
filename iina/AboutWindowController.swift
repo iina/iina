@@ -31,6 +31,9 @@ class AboutWindowController: NSWindowController {
   override func windowDidLoad() {
     super.windowDidLoad()
 
+    window?.titlebarAppearsTransparent = true
+    window?.backgroundColor = .white
+
     let infoDic = Bundle.main.infoDictionary!
     iconImageView.image = NSApp.applicationIconImage
     let version = infoDic["CFBundleShortVersionString"] as! String
@@ -42,7 +45,11 @@ class AboutWindowController: NSWindowController {
 
     let contrubutionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf")!
     detailTextView.readRTFD(fromFile: contrubutionFile)
+  }
 
+  @IBAction func creditsBtnAction(_ sender: Any) {
+    guard let path = Bundle.main.path(forResource: "Credits", ofType: "rtf") else { return }
+    NSWorkspace.shared().openFile(path)
   }
 
 }

@@ -95,13 +95,19 @@ enum OSDMessage {
         .normal
       )
 
-    case .aspect(let value):
+    case .aspect(var value):
+      if value == "Default" {
+        value = Constants.String.default
+      }
       return (
         String(format: NSLocalizedString("osd.aspect", comment: "Aspect Ratio: %@"), value),
         .normal
       )
 
-    case .crop(let value):
+    case .crop(var value):
+      if value == "None" {
+        value = Constants.String.none
+      }
       return (
         String(format: NSLocalizedString("osd.crop", comment: "Crop: %@"), value),
         .normal
@@ -115,7 +121,7 @@ enum OSDMessage {
 
     case .deinterlace(let enable):
       return (
-        String(format: NSLocalizedString("osd.deinterlace", comment: "Deinterlace: %@"), enable ? NSLocalizedString("on", comment: "On") : NSLocalizedString("off", comment: "Off")),
+        String(format: NSLocalizedString("osd.deinterlace", comment: "Deinterlace: %@"), enable ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
         .normal
       )
      

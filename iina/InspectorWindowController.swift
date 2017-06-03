@@ -243,7 +243,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   }
 
   @IBAction func addWatchAction(_ sender: AnyObject) {
-    let _ = Utility.quickPromptPanel(messageText: "Add watch property", informativeText: "Please enter a valid MPV property name.") { str in
+    let _ = Utility.quickPromptPanel("add_watch") { str in
       watchProperties.append(str)
       watchTableView.reloadData()
       saveWatchList()

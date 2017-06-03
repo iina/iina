@@ -13,6 +13,8 @@ import MASPreferences
 class AppDelegate: NSObject, NSApplicationDelegate {
 
   var isReady: Bool = false
+  var handledDroppedText: Bool = false
+  var handledURLEvent: Bool = false
 
   var pendingURL: String?
 
@@ -25,6 +27,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   lazy var inspector: InspectorWindowController = InspectorWindowController()
 
   lazy var subSelectWindow: SubSelectWindowController = SubSelectWindowController()
+
+  lazy var historyWindow: HistoryWindowController = HistoryWindowController()
 
   lazy var vfWindow: FilterWindowController = {
     let w = FilterWindowController()
@@ -69,7 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
       if UserDefaults.standard.bool(forKey: Preference.Key.openStartPanel) {
         // invoke after 0.5s
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(self.openFile(_:)), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(self.checkServiceStartup), userInfo: nil, repeats: false)
       }
     }
 
@@ -100,6 +104,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if let url = pendingURL {
       parsePendingURL(url)
     }
+
+    NSApplication.shared().servicesProvider = self
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {
@@ -144,6 +150,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return true
   }
 
+  // MARK: - Accept dropped string and URL
+
+  func droppedText(_ pboard: NSPasteboard, userData:String, error: NSErrorPointer) {
+    if let url = pboard.string(forType: NSStringPboardType) {
+      handledDroppedText = true
+      playerCore.openURLString(url)
+    }
+  }
+
+  func checkServiceStartup() {
+    if !handledDroppedText && !handledURLEvent {
+      openFile(self)
+    }
+  }
+  
   // MARK: - Dock menu
 
   func applicationDockMenu(_ sender: NSApplication) -> NSMenu? {
@@ -154,6 +175,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   // MARK: - URL Scheme
 
   func handleURLEvent(event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
+    handledURLEvent = true
     guard let url = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue else { return }
     if isReady {
       parsePendingURL(url)
@@ -175,7 +197,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func openFile(_ sender: AnyObject) {
     let panel = NSOpenPanel()
-    panel.title = "Choose media file"
+    panel.title = NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File")
     panel.canCreateDirectories = false
     panel.canChooseFiles = true
     panel.canChooseDirectories = false
@@ -193,12 +215,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func openURL(_ sender: AnyObject) {
     let panel = NSAlert()
-    panel.messageText = "Open URL"
-    panel.informativeText = "Please enter the URL:"
+    panel.messageText = NSLocalizedString("alert.open_url.title", comment: "Open URL")
+    panel.informativeText = NSLocalizedString("alert.open_url.message", comment: "Please enter the URL:")
     let inputViewController = OpenURLAccessoryViewController()
     panel.accessoryView = inputViewController.view
-    panel.addButton(withTitle: "OK")
-    panel.addButton(withTitle: "Cancel")
+    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = inputViewController.urlField
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
@@ -237,6 +259,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func showAboutWindow(_ sender: AnyObject) {
     aboutWindow.showWindow(self)
+  }
+
+  @IBAction func showHistoryWindow(_ sender: AnyObject) {
+    historyWindow.showWindow(self)
   }
 
   @IBAction func helpAction(_ sender: AnyObject) {

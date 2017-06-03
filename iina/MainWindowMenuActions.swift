@@ -47,7 +47,7 @@ extension MainWindowController {
   }
 
   @IBAction func menuJumpTo(_ sender: NSMenuItem) {
-    let _ = Utility.quickPromptPanel(messageText: "Jump to:", informativeText: "Example: 20:35") { input in
+    let _ = Utility.quickPromptPanel("jump_to") { input in
       if let vt = VideoTime(input) {
         self.playerCore.seek(absoluteSecond: Double(vt.second))
       }
@@ -290,7 +290,7 @@ extension MainWindowController {
   }
 
   @IBAction func menuLoadExternalSub(_ sender: NSMenuItem) {
-    let _ = Utility.quickOpenPanel(title: "Load external subtitle file", isDir: false) { url in
+    Utility.quickOpenPanel(title: "Load external subtitle file", isDir: false) { url in
       self.playerCore.loadExternalSubFile(url)
     }
   }
@@ -393,10 +393,10 @@ extension MainWindowController {
   }
   
   @IBAction func menuSavePlaylist(_ sender: NSMenuItem) {
-    let _ = Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"]) {
-      (url) in if url.isFileURL {
+    Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"]) { (url) in
+      if url.isFileURL {
         var playlist = ""
-        for item in playerCore.info.playlist {
+        for item in self.playerCore.info.playlist {
           playlist.append((item.filename + "\n"))
         }
         
@@ -421,4 +421,10 @@ extension MainWindowController {
     }
   }
 
+  @IBAction func menuOpenHistory(_ sender: NSMenuItem) {
+    guard let url = sender.representedObject as? URL else { return }
+    playerCore.playFile(url.path)
+    // FIXME: this line shouldn't be here
+    playerCore.info.isNetworkResource = url.isFileURL
+  }
 }

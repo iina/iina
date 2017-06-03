@@ -7,10 +7,14 @@
 */
 
 // Common
-"on" = "オン";
-"off" = "オフ";
-"login" = "ログイン";
-"logout" = "ログアウト";
+"general.on" = "オン";
+"general.off" = "オフ";
+"general.login" = "ログイン";
+"general.logout" = "ログアウト";
+"general.ok" = "OK";
+"general.cancel" = "キャンセル";
+"general.username" = "ユーザ名";
+"general.password" = "パスワード";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "プレイリスト";
@@ -20,8 +24,8 @@
 "main.buffering_indicator" = "バッファ中... %d%%";
 
 // QuickSettingViewController.swift
-"quicksetting.aspect_item.Default" = "デフォルト";
-"quicksetting.crop_item.None" = "なし";
+"quicksetting.item_default" = "デフォルト";
+"quicksetting.item_none" = "なし";
 
 // OSDMessage.swift
 "osd.pause" = "一時停止";
@@ -101,6 +105,10 @@
 "track.none" = "<なし>";
 
 // Alerts
+"alert.title_error" = "エラー";
+"alert.title_warning" = "警告";
+"alert.title_info" = "情報";
+
 "alert.fatal_error" = "致命的なエラー: %@ \nアプリケーションを終了します。";
 "alert.mpv_error" = "ユーザーオプション %@ 設定時にエラー %@ (%@)が発生しました。";
 "alert.sleep" = "ディスプレイのスリープを解除できません!";
@@ -116,12 +124,20 @@
 "alert.error_saving_file" = "保存時にエラーが起きました %@: %@";
 "alert.error_deleting_file" = "ファイルを削除できません。";
 
+"alert.config.new.title" = "設定の新規作成";
+"alert.config.new.message" = "新しい設定ファイルの名前を入力を入力してください。";
+"alert.config.duplicate.title" = "設定の複製";
+"alert.config.duplicate.message" = "複製する設定ファイルの名前を入力してください。";
 "alert.config.empty_name" = "名前を入力してください。";
 "alert.config.name_existing" = "すでに同名のファイルが存在しています。";
+"alert.config.file_existing.title" = "ファイルが既に存在しています";
+"alert.config.file_existing.message" = "上書きするにはOKを選択、Finderで表示するにはキャンセルを選択してください。";
 "alert.config.cannot_create" = "設定ファイルは作成できません!";
 "alert.config.cannot_write" = "設定ファイルには書き込めません!";
 
 "alert.filter.incorrect" = "フィルタの設定時にエラーが起きました。パラメータの形式を確認してください。";
+"alert.add_filter.title" = "フィルタの新規作成";
+"alert.add_filter.message" = "mpvの vf または af オプションの形式でフィルタ名を入力してください。";
 
 "alert.keybinding_config.error" = "キーバインディングの設定ファイル読み込み時にエラーが発生しました \"%@\"! IINAのデフォルト設定に戻します。設定を確認してください。";
 
@@ -137,6 +153,25 @@
 "alert.sub.cannot_save_passwd" = "パスワードをKeychainに保存できません: %@";
 "alert.sub.cannot_login" = "ログインできません。ユーザー名とパスワード、ネットワーク環境をご確認ください。\n\n%@";
 
+"alert.set_default.title" = "IINAをデフォルトのアプリケーションに設定";
+"alert.set_default.message" = "対応する形式のファイルすべてにIINAを設定します。";
+"alert.set_default.success" = "完了しました。(成功: %d件, 失敗: %d件)";
+
+"alert.add_watch.title" = "監視するmpvのプロパティを追加";
+"alert.add_watch.message" = "有効なmpvのプロパティ名を入力してください。";
+
+"alert.jump_to.title" = "時間の指定";
+"alert.jump_to.message" = "再生を開始する時間を入力してください。例: 20:35";
+
+"alert.opensub.login.title" = "Opensubtitlesにログイン";
+"alert.opensub.login.message" = "ユーザ名とパスワードを入力してください。";
+
+"alert.open_url.title" = "URLを開く";
+"alert.open_url.message" = "URLを入力してください:";
+"alert.choose_media_file.title" = "メディアファイルを選択";
+
+"alert.delete_history.title" = "再生履歴の削除";
+"alert.delete_history.message" = "選択した項目を削除しますか?";
 
 "pl_menu.title_multi" = "%d個のアイテム";
 "pl_menu.play_next" = "次を再生";
@@ -152,3 +187,16 @@
 
 "keymapping.title" = "キーマッピング";
 "keymapping.message" = "保存するには何かキーを押してください。";
+
+"filter.video_filters" = "ビデオフィルタ一覧";
+"filter.audio_filters" = "オーディオフィルタ一覧";
+
+
+// FIXME
+// Fall back to English
+"alert.delete_history.title" = "Delete Playback History";
+"alert.delete_history.message" = "Are you sure to delete select entries?";
+
+"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
+"pl_menu.add_sub" = "Add Subtitle…";
+"pl_menu.wrong_sub" = "Wrong Subtitle!";

@@ -48,7 +48,7 @@
 "iina.toggle-flip" = "Inverti capovolgi";
 "iina.toggle-mirror" = "Inverti specchia";
 "iina.save-playlist" = "Salva playlist corrente";
-"iina.delete-current-file" = "Elimina file corrente";
+"iina.delete-current-file" = "Sposta nel cestino file corrente";
 "iina.find-online-subs" = "Trova sottotitoli online";
 "iina.save-downloaded-sub" = "Salva i sottotitoli scaricati";
 
@@ -93,6 +93,7 @@
 "opt.sub-pos" = "Posizione sottotitotli";
 "opt.sub-scale" = "Dimensione sottotitotli";
 "opt.sub-visibility" = "Visibilità sottotitotli";
+"opt.sub-ass-style-override" = "Sovrascrivi stili ASS";
 
 "opt.fullscreen" = "Schermo intero";
 "opt.ontop" = "Mostra in primo piano";

@@ -26,6 +26,9 @@ struct AppData {
   /** generate aspect and crop options in menu */
   static let aspects: [String] = ["4:3", "5:4", "16:9", "16:10", "1:1", "3:2", "2.21:1", "2.35:1", "2.39:1"]
 
+  static let aspectsInPanel: [String] = ["Default", "4:3", "16:9", "16:10", "5:4"]
+  static let cropsInPanel: [String] = ["None", "4:3", "16:9", "16:10", "5:4"]
+
   static let rotations: [Int] = [0, 90, 180, 270]
 
   /** Seek amount */
@@ -38,6 +41,7 @@ struct AppData {
   static let userInputConfFolder = "input_conf"
   static let logFolder = "log"
   static let watchLaterFolder = "watch_later"
+  static let historyFile = "history.plist"
 
   static let githubLink = "https://github.com/lhc70000/iina"
   static let githubReleaseLink = "https://github.com/lhc70000/iina/releases"
@@ -65,13 +69,14 @@ struct Constants {
     static let dot = "●"
     static let play = "▶︎"
     static let videoTimePlaceholder = "--:--:--"
-    static let none = NSLocalizedString("track.none", comment: "<None>")
+    static let trackNone = NSLocalizedString("track.none", comment: "<None>")
     static let chapter = "Chapter"
     static let fullScreen = NSLocalizedString("menu.fullscreen", comment: "Fullscreen")
     static let exitFullScreen = NSLocalizedString("menu.exit_fullscreen", comment: "Exit Fullscreen")
     static let pause = NSLocalizedString("menu.pause", comment: "Pause")
     static let resume = NSLocalizedString("menu.resume", comment: "Resume")
-    static let volume = "Volume"
+    static let `default` = NSLocalizedString("quicksetting.item_default", comment: "Default")
+    static let none = NSLocalizedString("quicksetting.item_none", comment: "None")
     static let audioDelay = "Audio Delay"
     static let subDelay = "Subtitle Delay"
     static let pip = NSLocalizedString("menu.pip", comment: "Enter Picture-in-Picture")
@@ -86,6 +91,7 @@ struct Constants {
     static let ontopChanged = Notification.Name("IINAOnTopChanged")
     static let keyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
     static let fileLoaded = Notification.Name("IINAFileLoaded")
+    static let historyUpdated = Notification.Name("IINAHistoryUpdated")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)

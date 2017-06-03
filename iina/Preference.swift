@@ -18,7 +18,9 @@ struct Preference {
     static let lastCheckUpdateTime = "lastCheckUpdateTime"
 
     /** Record recent files */
+    static let recordPlaybackHistory = "recordPlaybackHistory"
     static let recordRecentFiles = "recordRecentFiles"
+    static let trackAllFilesInRecentOpenMenu = "trackAllFilesInRecentOpenMenu"
 
     /** Material for OSC and title bar (Theme(int)) */
     static let themeMaterial = "themeMaterial"
@@ -89,6 +91,8 @@ struct Preference {
 
     static let oscPosition = "oscPosition"
 
+    static let playlistWidth = "playlistWidth"
+
     // Codec
 
     static let videoThreads = "videoThreads"
@@ -106,7 +110,9 @@ struct Preference {
 
     // Subtitle
 
-    static let subAutoLoad = "subAutoLoad"
+    static let subAutoLoadIINA = "subAutoLoadIINA"
+    static let subAutoLoadPriorityString = "subAutoLoadPriorityString"
+    static let subAutoLoadSearchPath = "subAutoLoadSearchPath"
     static let ignoreAssStyles = "ignoreAssStyles"
     static let subOverrideLevel = "subOverrideLevel"
     static let subTextFont = "subTextFont"
@@ -250,6 +256,20 @@ struct Preference {
     case none
   }
 
+  enum IINAAutoLoadAction: Int {
+    case disabled = 0
+    case mpvFuzzy
+    case iina
+
+    func shouldLoadSubsContainingVideoName() -> Bool {
+      return self != .disabled
+    }
+
+    func shouldLoadSubsMatchedByIINA() -> Bool {
+      return self == .iina
+    }
+  }
+
   enum AutoLoadAction: Int {
     case no = 0
     case exact
@@ -356,12 +376,15 @@ struct Preference {
 
   static let defaultPreference:[String : Any] = [
     Key.lastCheckUpdateTime: Date(timeIntervalSince1970: 1),
+    Key.recordPlaybackHistory: true,
     Key.recordRecentFiles: true,
+    Key.trackAllFilesInRecentOpenMenu: true,
     Key.controlBarPositionHorizontal: Float(0.5),
     Key.controlBarPositionVertical: Float(0.1),
     Key.controlBarStickToCenter: true,
     Key.controlBarAutoHideTimeout: Float(2.5),
     Key.oscPosition: OSCPosition.floating.rawValue,
+    Key.playlistWidth: 270,
     Key.themeMaterial: Theme.dark.rawValue,
     Key.osdAutoHideTimeout: Float(1),
     Key.osdTextSize: Float(20),
@@ -392,7 +415,9 @@ struct Preference {
     Key.spdifDTS: false,
     Key.spdifDTSHD: false,
 
-    Key.subAutoLoad: AutoLoadAction.fuzzy.rawValue,
+    Key.subAutoLoadIINA: IINAAutoLoadAction.iina.rawValue,
+    Key.subAutoLoadPriorityString: "",
+    Key.subAutoLoadSearchPath: "./*",
     Key.ignoreAssStyles: false,
     Key.subOverrideLevel: SubOverrideLevel.strip.rawValue,
     Key.subTextFont: "sans-serif",

@@ -110,7 +110,7 @@ class VideoView: NSView {
       var videoFiles: [String] = []
       var subtitleFiles: [String] = []
       fileNames.forEach({ (path) in
-        let ext = (path as NSString).pathExtension
+        let ext = (path as NSString).pathExtension.lowercased()
         if Utility.supportedFileExt[.sub]!.contains(ext) {
           subtitleFiles.append(path)
         } else {

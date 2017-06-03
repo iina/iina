@@ -724,7 +724,7 @@ class PlayerCore: NSObject {
     var subtitles = groups[.sub]!
     for subDir in subDirs {
       if let contents = try? fm.contentsOfDirectory(at: subDir, includingPropertiesForKeys: nil, options: searchOptions) {
-        subtitles.append(contentsOf: contents.flatMap { subExts.contains($0.pathExtension) ? FileInfo($0) : nil })
+        subtitles.append(contentsOf: contents.flatMap { subExts.contains($0.pathExtension.lowercased()) ? FileInfo($0) : nil })
       }
     }
     info.currentSubsInfo = subtitles

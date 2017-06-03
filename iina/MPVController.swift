@@ -324,10 +324,10 @@ class MPVController: NSObject {
 
   // Send arbitrary mpv command.
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {
+    guard mpv != nil else { return }
     if args.count > 0 && args.last == nil {
       Utility.fatal("Command do not need a nil suffix")
     }
-
     var strArgs = args
     strArgs.insert(command.rawValue, at: 0)
     strArgs.append(nil)

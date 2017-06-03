@@ -713,7 +713,7 @@ class PlayerCore: NSObject {
     let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
     for file in files {
       let fileInfo = FileInfo(file)
-      guard let mediaType = allTypes.first(where: { Utility.supportedFileExt[$0]!.contains(fileInfo.ext) }) else { continue }
+      guard let mediaType = allTypes.first(where: { Utility.supportedFileExt[$0]!.contains(fileInfo.ext.lowercased()) }) else { continue }
       groups[mediaType]!.append(fileInfo)
     }
 

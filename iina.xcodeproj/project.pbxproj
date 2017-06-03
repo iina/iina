@@ -97,7 +97,6 @@
 		847C62CA1DC13CDA00E1EF16 /* PrefGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C62C81DC13CDA00E1EF16 /* PrefGeneralViewController.swift */; };
 		84817C961DBDCA5F00CC2279 /* SettingsListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84817C951DBDCA5F00CC2279 /* SettingsListCellView.swift */; };
 		84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84817C971DBDCE4300CC2279 /* RoundedColorWell.swift */; };
-		84817CE91DBE2E5300CC2279 /* autoload.lua in Copy Lua Scripts */ = {isa = PBXBuildFile; fileRef = 84817CE61DBE2D0300CC2279 /* autoload.lua */; };
 		8483FB001EDFF325000F55D6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8483FAFF1EDFF325000F55D6 /* Credits.rtf */; };
 		84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84879A961E0FFC7E0004F894 /* PrefUIViewController.swift */; };
 		84879A9B1E1032480004F894 /* ShortcutAvailableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84879A9A1E1032480004F894 /* ShortcutAvailableTextField.swift */; };
@@ -221,7 +220,6 @@
 			dstPath = scripts;
 			dstSubfolderSpec = 7;
 			files = (
-				84817CE91DBE2E5300CC2279 /* autoload.lua in Copy Lua Scripts */,
 			);
 			name = "Copy Lua Scripts";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,7 +448,6 @@
 		847C62C81DC13CDA00E1EF16 /* PrefGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefGeneralViewController.swift; sourceTree = "<group>"; };
 		84817C951DBDCA5F00CC2279 /* SettingsListCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListCellView.swift; sourceTree = "<group>"; };
 		84817C971DBDCE4300CC2279 /* RoundedColorWell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedColorWell.swift; sourceTree = "<group>"; };
-		84817CE61DBE2D0300CC2279 /* autoload.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autoload.lua; sourceTree = "<group>"; };
 		8483FAFF1EDFF325000F55D6 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		84879A961E0FFC7E0004F894 /* PrefUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefUIViewController.swift; sourceTree = "<group>"; };
 		84879A9A1E1032480004F894 /* ShortcutAvailableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutAvailableTextField.swift; sourceTree = "<group>"; };
@@ -720,14 +717,6 @@
 			path = iina;
 			sourceTree = "<group>";
 		};
-		84817CE51DBE2D0300CC2279 /* scripts */ = {
-			isa = PBXGroup;
-			children = (
-				84817CE61DBE2D0300CC2279 /* autoload.lua */,
-			);
-			path = scripts;
-			sourceTree = "<group>";
-		};
 		848290731D95978100C3C76C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -771,7 +760,6 @@
 			children = (
 				C78987311E34EF170005769F /* InfoPlist.strings */,
 				84E745D71DFDE8C100588DED /* config */,
-				84817CE51DBE2D0300CC2279 /* scripts */,
 				84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */,
 				84EB1EE01D2F51D3004FA5A1 /* Info.plist */,
 				845AC09E1E1AE6C10080B614 /* Localizable.strings */,

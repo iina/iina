@@ -398,6 +398,7 @@ struct Preference {
     Key.useAppleRemote: true,
     Key.openStartPanel: false,
     Key.alwaysFloatOnTop: false,
+    Key.blackOutMonitor: false,
 
     Key.playlistAutoAdd: true,
     Key.playlistAutoPlayNext: true,

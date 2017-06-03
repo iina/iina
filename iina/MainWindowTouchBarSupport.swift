@@ -223,7 +223,7 @@ class TouchBarPlaySliderCell: NSSliderCell {
   }
 
   override var knobThickness: CGFloat {
-    return 12
+    return 4
   }
 
   override func barRect(flipped: Bool) -> NSRect {
@@ -249,7 +249,7 @@ class TouchBarPlaySliderCell: NSSliderCell {
 
   override func drawKnob(_ knobRect: NSRect) {
     NSColor.labelColor.setFill()
-    let path = NSBezierPath(roundedRect: knobRect, xRadius: 3, yRadius: 3)
+    let path = NSBezierPath(roundedRect: knobRect, xRadius: 2, yRadius: 2)
     path.fill()
   }
 

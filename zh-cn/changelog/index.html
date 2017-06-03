@@ -1,4 +1,75 @@
-<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>更新日志 | Project IINA</title><link href="/iina/stylesheets/lato.css" rel="stylesheet" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body><nav class="navbar navbar-fixed-top navbar-light bg-faded navbar-toggleable-md"><button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#nav_c" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><div class="collapse navbar-collapse" id="nav_c"><ul class="navbar-nav mr-auto"><li class="nav-item"><a href="/iina/zh-cn" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/zh-cn/features/" class="nav-link">功能</a></li><li class="nav-item"><a href="/iina/zh-cn/documentation/" class="nav-link">文档</a></li><li class="nav-item"><a href="/iina/zh-cn/changelog/" class="nav-link">更新日志</a></li><li class="nav-item"><a href="/iina/zh-cn/about/" class="nav-link">关于</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></div></nav><div class="main"><div class="changelog"><div class="container"><h1>更新日志</h1><div class="clog"><h2 id="v009--may-8-2017">v0.0.9  <em>May. 8, 2017</em></h2>
+<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>更新日志 | Project IINA</title><link href="/iina/stylesheets/lato.css" rel="stylesheet" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body><nav class="navbar navbar-fixed-top navbar-light bg-faded navbar-toggleable-md"><button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#nav_c" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><div class="collapse navbar-collapse" id="nav_c"><ul class="navbar-nav mr-auto"><li class="nav-item"><a href="/iina/zh-cn" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/zh-cn/features/" class="nav-link">功能</a></li><li class="nav-item"><a href="/iina/zh-cn/documentation/" class="nav-link">文档</a></li><li class="nav-item"><a href="/iina/zh-cn/changelog/" class="nav-link">更新日志</a></li><li class="nav-item"><a href="/iina/zh-cn/about/" class="nav-link">关于</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></div></nav><div class="main"><div class="changelog"><div class="container"><h1>更新日志</h1><div class="clog"><h2 id="v0010-june-3-2017">v0.0.10 <em>June 3, 2017</em></h2>
+
+<h3 id="section">新增功能</h3>
+
+<p><strong>播放历史</strong></p>
+
+<ul>
+  <li>无限的播放历史 (Shift+Cmd+H)</li>
+  <li>按日期或文件夹分组</li>
+  <li>可选在「最近打开」菜单中显示所有播放过的文件</li>
+</ul>
+
+<p><strong>Touch Bar 优化</strong></p>
+
+<ul>
+  <li>重新设计的 Touch Bar 滑条</li>
+  <li>现在 Touch Bar 可显示剩余/播放时间</li>
+  <li>修复：Touch Bar 播放/暂停按钮状态不更新</li>
+  <li>修复：Touch Bar 滑条拖动时抖动</li>
+</ul>
+
+<p><strong>播放列表</strong></p>
+
+<p>mpv 的 <code>auto_load.lua</code> 带来了很多问题，所以从 0.0.10 开始我们使用自己的自动加载逻辑。</p>
+
+<ul>
+  <li>修复之前的各种自动加载问题</li>
+  <li>播放列表按数字自然排序</li>
+  <li>播放列表宽度可调整</li>
+  <li>自动折叠一系列文件中的相同文件名前缀</li>
+</ul>
+
+<p><strong>字幕</strong></p>
+
+<ul>
+  <li>支持为播放列表项目关联字幕 (类似 Movist)</li>
+  <li>支持设置一系列字幕搜索路径，支持通配符</li>
+  <li>在搜索路径中自动搜索和模糊匹配字幕</li>
+  <li>侧边栏中增加了一个包括搜索路径中的所有字幕的菜单，以供快速选择</li>
+  <li>侧边栏中加入搜索在线字幕的按钮</li>
+</ul>
+
+<p><strong>本地化</strong></p>
+
+<ul>
+  <li>彻底本地化</li>
+  <li>更新几乎所有语言的翻译</li>
+  <li>增加土耳其语和俄语</li>
+</ul>
+
+<p><strong>其他</strong></p>
+
+<ul>
+  <li>记忆播放控制条的位置</li>
+  <li>支持拖拽 URL 至 Dock 图标</li>
+  <li>改进关于窗口的外观</li>
+  <li>增加无视频/音轨/字幕的 OSD</li>
+  <li>增加 <code>dv</code> 文件关联</li>
+  <li>其他（我不记得的）改进</li>
+</ul>
+
+<h3 id="bug-">Bug 修复</h3>
+
+<ul>
+  <li>修复：大写 (即 Shift) mpv key code 的支持</li>
+  <li>修复：侧边栏中的数字格式化问题</li>
+  <li>修复：无法加载外置字幕时，打开文件窗口不消失</li>
+  <li>修复：全屏下双指缩放手势仍然有效</li>
+  <li>其他 bug 修复</li>
+</ul>
+
+<h2 id="v009--may-8-2017">v0.0.9  <em>May. 8, 2017</em></h2>
 
 <p>此版本紧急修复了以下两个关键性问题：</p>
 
@@ -15,7 +86,7 @@
 
 <h2 id="v008--may-3-2017">v0.0.8  <em>May. 3, 2017</em></h2>
 
-<h3 id="section">新增功能</h3>
+<h3 id="section-1">新增功能</h3>
 
 <ul>
   <li><strong>播放控制</strong>: 现在 IINA 支持三种播放控制样式</li>

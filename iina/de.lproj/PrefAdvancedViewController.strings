@@ -1,3 +1,4 @@
+
 /* Class = "NSBox"; title = "Box"; ObjectID = "1NU-Lr-cuR"; */
 "1NU-Lr-cuR.title" = "Box";
 
@@ -16,7 +17,7 @@
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "E3I-Q7-9t1"; */
 "E3I-Q7-9t1.headerCell.title" = "Name";
 
-/* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
+/* Class = "NSTextFieldCell"; title = "All following settings need restarting application to take effect."; ObjectID = "HMa-Vz-EUk"; */
 "HMa-Vz-EUk.title" = "Für die folgenden Einstellungen muss IINA neu gestartet werden";
 
 /* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
@@ -25,8 +26,8 @@
 /* Class = "NSButtonCell"; title = "Enable logging"; ObjectID = "LCd-uY-Yze"; */
 "LCd-uY-Yze.title" = "Logging aktivieren";
 
-/* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
-"MRT-u8-xTX.title" = "Ordner wählen …";
+/* Class = "NSButtonCell"; title = "Choose directory"; ObjectID = "MRT-u8-xTX"; */
+"MRT-u8-xTX.title" = "Ordner wählen…";
 
 /* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "SX9-fy-bss"; */
 "SX9-fy-bss.headerCell.title" = "Wert";
@@ -36,4 +37,3 @@
 
 /* Class = "NSButtonCell"; title = "Use MPV's OSD"; ObjectID = "phK-g9-Vbg"; */
 "phK-g9-Vbg.title" = "MPVs OSD benutzen";
-

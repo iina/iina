@@ -89,6 +89,7 @@ class PlayerCore: NSObject {
     // Send load file command
     info.fileLoading = true
     info.justOpenedFile = true
+    info.currentFileIsOpenedManually = true
     mpvController.command(.loadfile, args: [path])
   }
 
@@ -421,6 +422,7 @@ class PlayerCore: NSObject {
 
   func playFile(_ path: String) {
     info.justOpenedFile = true
+    info.currentFileIsOpenedManually = true
     mpvController.command(.loadfile, args: [path, "replace"])
     getPLaylist()
   }
@@ -597,10 +599,11 @@ class PlayerCore: NSObject {
     guard let path = mpvController.getString(MPVProperty.path) else { return }
     info.currentURL = URL(fileURLWithPath: path)
     backgroundQueueTicket += 1
+    let currentFileIsOpenedManually = info.currentFileIsOpenedManually
     let currentTicket = backgroundQueueTicket
     backgroundQueue.async {
       // add files in same folder
-      if self.ud.bool(forKey: Preference.Key.playlistAutoAdd) {
+      if self.ud.bool(forKey: Preference.Key.playlistAutoAdd) && currentFileIsOpenedManually {
         self.autoLoadFilesInCurrentFolder(ticket: currentTicket)
       }
       // auto load matched subtitles
@@ -697,12 +700,7 @@ class PlayerCore: NSObject {
       guard ticket == self.backgroundQueueTicket else { return nil }
       return self.info
     }
-
     guard let folder = info()?.currentURL?.deletingLastPathComponent(), folder.isFileURL else { return }
-
-    // don't load file if user didn't switch folder
-    guard folder.path != info()?.currentFolder?.path else { return }
-    info()?.currentFolder = folder
 
     // search subs
     let fm = FileManager.default
@@ -763,9 +761,10 @@ class PlayerCore: NSObject {
       }
     }
     info()?.currentSubsInfo = subtitles
-
     // add files to playlist
+    // mpv's playlist is (of course) not thread safe. Here
     var addedCurrentVideo = false
+    var needQuit = false
     for video in groups[.video]! {
       // add to playlist
       if video.url.path == info()?.currentURL!.path {
@@ -778,8 +777,11 @@ class PlayerCore: NSObject {
         let current = mpvController.getInt(MPVProperty.playlistPos)
         guard ticket == self.backgroundQueueTicket else { return }
         addToPlaylist(video.path)
-        playlistMove(count, to: current)
+        mpvController.command(.playlistMove, args: ["\(count)", "\(current)"], checkError: false) { err in
+          if err == -12 { needQuit = true }
+        }
       }
+      if needQuit { return }
     }
     for audio in groups[.audio]! {
       guard ticket == self.backgroundQueueTicket else { return }

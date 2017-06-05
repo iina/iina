@@ -18,6 +18,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   var pendingURL: String?
 
+  private var lastOpenFileTimestamp: Double?
+
   lazy var playerCore: PlayerCore = PlayerCore.shared
 
   lazy var aboutWindow: AboutWindowController = AboutWindowController()
@@ -135,6 +137,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
+    // When dragging multiple files to IINA icon, cocoa will simply call this method repeatedly.
+    // IINA (mpv) can't handle opening multiple files correctly, so I have to guard it here.
+    // It's a temperory solution, and the min time interval 0.3 might also be too arbitrary.
+    let c = CFAbsoluteTimeGetCurrent()
+    if let t = lastOpenFileTimestamp, c - t < 0.3 { return false }
+    lastOpenFileTimestamp = c
+
     if !isReady {
       UserDefaults.standard.register(defaults: Preference.defaultPreference)
       playerCore.startMPV()

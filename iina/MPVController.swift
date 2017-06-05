@@ -484,6 +484,7 @@ class MPVController: NSObject {
       break
 
     case MPV_EVENT_START_FILE:
+      guard getString(MPVProperty.path) != nil else { break }
       playerCore.fileStarted()
       playerCore.sendOSD(.fileStart(playerCore.info.currentURL?.lastPathComponent ?? "-"))
 
@@ -515,6 +516,8 @@ class MPVController: NSObject {
       // wait for idle
       if playerCore.info.fileLoading {
         receivedEndFileWhileLoading = true
+      } else {
+        playerCore.info.currentFileIsOpenedManually = false
       }
       break
 

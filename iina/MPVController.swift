@@ -153,7 +153,10 @@ class MPVController: NSObject {
     setUserOption(PK.videoThreads, type: .int, forName: MPVOption.Video.vdLavcThreads)
     setUserOption(PK.audioThreads, type: .int, forName: MPVOption.Audio.adLavcThreads)
 
-    setUserOption(PK.useHardwareDecoding, type: .bool, forName: MPVOption.Video.hwdec)
+    setUserOption(PK.hardwareDecoder, type: .other, forName: MPVOption.Video.hwdec) { key in
+      let value = UserDefaults.standard.integer(forKey: key)
+      return Preference.HardwareDecoderOption(rawValue: value)?.mpvString ?? "auto"
+    }
 
     setUserOption(PK.audioLanguage, type: .string, forName: MPVOption.TrackSelection.alang)
     setUserOption(PK.maxVolume, type: .int, forName: MPVOption.Audio.volumeMax)

@@ -38,6 +38,7 @@ class PrefCodecViewController: NSViewController {
   @IBOutlet weak var spdifAC3Btn: NSButton!
   @IBOutlet weak var spdifDTSBtn: NSButton!
   @IBOutlet weak var spdifDTSHDBtn: NSButton!
+  @IBOutlet weak var hwdecDescriptionTextField: NSTextField!
 
 
   override func viewDidLoad() {
@@ -47,6 +48,7 @@ class PrefCodecViewController: NSViewController {
     spdifAC3Btn.state = spdif.contains("ac3") ? NSOnState : NSOffState
     spdifDTSBtn.state = spdif.contains("dts") ? NSOnState : NSOffState
     spdifDTSHDBtn.state = spdif.contains("dts-hd") ? NSOnState : NSOffState
+    updateHwdecDescription()
   }
 
   @IBAction func spdifBtnAction(_ sender: AnyObject) {
@@ -55,6 +57,15 @@ class PrefCodecViewController: NSViewController {
     if spdifDTSBtn.state == NSOnState { spdif.append("dts") }
     if spdifDTSHDBtn.state == NSOnState { spdif.append("dts-hd") }
     PlayerCore.shared.mpvController.setString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","))
+  }
+
+  @IBAction func hwdecAction(_ sender: AnyObject) {
+    updateHwdecDescription()
+  }
+
+  private func updateHwdecDescription() {
+    let hwdec: Preference.HardwareDecoderOption = Preference.HardwareDecoderOption(rawValue: UserDefaults.standard.integer(forKey: Preference.Key.hardwareDecoder)) ?? .auto
+    hwdecDescriptionTextField.stringValue = hwdec.localizedDescription
   }
 
 }

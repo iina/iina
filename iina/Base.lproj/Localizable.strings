@@ -193,3 +193,7 @@
 
 "filter.video_filters" = "Video Filters";
 "filter.audio_filters" = "Audio Filters";
+
+"hwdec.no" = "Disable Hardware decoding.";
+"hwdec.auto" = "Enable hardware decoding. However, most video filters won't work properly.";
+"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but works with video filters.";

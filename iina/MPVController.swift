@@ -881,7 +881,8 @@ class MPVController: NSObject {
    Utility function for checking mpv api error
    */
   private func chkErr(_ status: Int32!) {
-    if status < 0 {
+    guard status < 0 else { return }
+    DispatchQueue.main.async {
       Utility.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
     }
   }

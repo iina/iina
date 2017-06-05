@@ -174,6 +174,11 @@
 "alert.delete_history.title" = "删除历史记录";
 "alert.delete_history.message" = "确定要删除所选的历史记录吗？";
 
+"alert.filter_hwdec.message" = "你正在添加视频滤镜。然而，当前的硬件解码器不能很好地支持视频滤镜。你可以禁用硬件解码，或使用支持「拷贝」的解码器 (将占用两倍内存)。\n你可能需要再操作一次（例如剪切）才能看到效果。";
+"alert.filter_hwdec.abort" = "放弃";
+"alert.filter_hwdec.turn_off" = "关闭硬件解码";
+"alert.filter_hwdec.use_copy" = "使用支持「拷贝」的解码器";
+
 "pl_menu.title_multi" = "%d 个项目";
 "pl_menu.play_next" = "接下来播放";
 "pl_menu.remove" = "移除";
@@ -198,4 +203,4 @@
 
 "hwdec.no" = "不启用硬件解码。";
 "hwdec.auto" = "启用硬件解码。但是，大多数视频滤镜不会正常工作。";
-"hwdec.auto-copy" = "启用硬件解码。它会占用两倍内存，但支持视频滤镜。";
+"hwdec.auto-copy" = "启用硬件解码。它会占用两倍左右的内存，但支持视频滤镜。";

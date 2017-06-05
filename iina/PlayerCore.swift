@@ -466,6 +466,41 @@ class PlayerCore: NSObject {
   }
 
   func addVideoFilter(_ filter: MPVFilter) -> Bool {
+    // check hwdec
+    let askHwdec: (() -> Bool) = {
+      let panel = NSAlert()
+      panel.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
+      panel.informativeText = NSLocalizedString("alert.filter_hwdec.message", comment: "")
+      panel.addButton(withTitle: NSLocalizedString("alert.filter_hwdec.turn_off", comment: "Turn off hardware decoding"))
+      panel.addButton(withTitle: NSLocalizedString("alert.filter_hwdec.use_copy", comment: "Switch to Auto(Copy)"))
+      panel.addButton(withTitle: NSLocalizedString("alert.filter_hwdec.abort", comment: "Abort"))
+      switch panel.runModal() {
+      case NSAlertFirstButtonReturn:  // turn off
+        self.mpvController.setString(MPVProperty.hwdec, "no")
+        self.ud.set(Preference.HardwareDecoderOption.disabled.rawValue, forKey: Preference.Key.hardwareDecoder)
+        return true
+      case NSAlertSecondButtonReturn:
+        self.mpvController.setString(MPVProperty.hwdec, "auto-copy")
+        self.ud.set(Preference.HardwareDecoderOption.autoCopy.rawValue, forKey: Preference.Key.hardwareDecoder)
+        return true
+      default:
+        return false
+      }
+    }
+    let hwdec = mpvController.getString(MPVProperty.hwdec)
+    if hwdec == "auto" {
+      // if not on main thread, post the alert in main thread
+      if Thread.isMainThread {
+        if !askHwdec() { return false }
+      } else {
+        var result = false
+        DispatchQueue.main.sync {
+          result = askHwdec()
+        }
+        if !result { return false }
+      }
+    }
+    // try apply filter
     var result = true
     mpvController.command(.vf, args: ["add", filter.stringFormat], checkError: false) { result = $0 >= 0 }
     return result

@@ -8,9 +8,6 @@
 
 import Foundation
 
-fileprivate let GroupPrefixMinLength = 7
-fileprivate let GroupFilenameMaxLength = 12
-
 fileprivate let charSetGroups: [CharacterSet] = [.decimalDigits, .letters]
 
 
@@ -148,10 +145,7 @@ class FileGroup {
           search(g)
         }
       } else {
-        let filenameMaxLength = group.contents.reduce(0, { max($0, $1.characters.count) })
-        if group.prefix.characters.count >= GroupPrefixMinLength && filenameMaxLength > GroupFilenameMaxLength {
-          result[group.prefix] = group.contents
-        }
+        result[group.prefix] = group.contents
       }
     }
     search(self)

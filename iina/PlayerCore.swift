@@ -917,17 +917,21 @@ class PlayerCore: NSObject {
         var minDistToVideo: UInt = .max
         for video in unmatchedVideos {
           guard ticket == self.backgroundQueueTicket else { return }
-          let dist = ObjcUtils.levDistance(video.prefix, and: sub.prefix) + ObjcUtils.levDistance(video.suffix, and: sub.suffix)
+          let threshold = UInt(Double(video.filename.characters.count + sub.filename.characters.count) * 0.8)
+          let rawDist = ObjcUtils.levDistance(video.prefix, and: sub.prefix) + ObjcUtils.levDistance(video.suffix, and: sub.suffix)
+          let dist: UInt = rawDist < threshold ? rawDist : UInt.max
           sub.dist[video] = dist
           video.dist[sub] = dist
           if dist < minDistToVideo { minDistToVideo = dist }
         }
+        guard minDistToVideo != .max else { continue }
         sub.minDist = groups[.video]!.filter { sub.dist[$0] == minDistToVideo }
       }
 
       // match them
       for video in unmatchedVideos {
         let minDistToSub = video.dist.reduce(UInt.max, { min($0.0, $0.1.value) })
+        guard minDistToSub != .max else { continue }
         unmatchedSubs
           .filter { video.dist[$0]! == minDistToSub && $0.minDist.contains(video) }
           .forEach {

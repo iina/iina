@@ -484,6 +484,7 @@ class MPVController: NSObject {
       break
 
     case MPV_EVENT_START_FILE:
+      guard getString(MPVProperty.path) != nil else { break }
       playerCore.fileStarted()
       playerCore.sendOSD(.fileStart(playerCore.info.currentURL?.lastPathComponent ?? "-"))
 
@@ -515,6 +516,8 @@ class MPVController: NSObject {
       // wait for idle
       if playerCore.info.fileLoading {
         receivedEndFileWhileLoading = true
+      } else {
+        playerCore.info.currentFileIsOpenedManually = false
       }
       break
 
@@ -881,7 +884,8 @@ class MPVController: NSObject {
    Utility function for checking mpv api error
    */
   private func chkErr(_ status: Int32!) {
-    if status < 0 {
+    guard status < 0 else { return }
+    DispatchQueue.main.async {
       Utility.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
     }
   }

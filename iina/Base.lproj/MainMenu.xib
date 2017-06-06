@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16G12b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
     </dependencies>
@@ -33,7 +33,7 @@
                             <menuItem title="Check Update..." id="gMo-qL-m08">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="checkUpdate:" target="Voe-Tx-rLC" id="CQ8-wR-EzN"/>
+                                    <action selector="checkForUpdates:" target="wTK-gz-aTs" id="MFD-wN-SXh"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
@@ -543,5 +543,6 @@
             </items>
             <point key="canvasLocation" x="18.5" y="678.5"/>
         </menu>
+        <customObject id="wTK-gz-aTs" customClass="SUUpdater"/>
     </objects>
 </document>

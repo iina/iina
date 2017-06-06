@@ -15,6 +15,7 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (4.1.0):
     - PromiseKit/CorePromise
+  - Sparkle (1.17.0)
 
 DEPENDENCIES:
   - AEXML
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - Just
   - MASPreferences
   - PromiseKit (~> 4.0)
+  - Sparkle
 
 SPEC CHECKSUMS:
   AEXML: 905e50474c0a261d335aa8be4ee32d22d69b6fd5
@@ -31,7 +33,8 @@ SPEC CHECKSUMS:
   Just: d19e769d86b965e39ae58cb3c0cbad07706634a8
   MASPreferences: 7bdcfe891d7840453cf48f95fa866c3e152ace7a
   PromiseKit: c98453ff78544c0ad5bb0ea980782e6875f47978
+  Sparkle: ccfb47699feea7b40b51cf3176f69404e5b1da6c
 
-PODFILE CHECKSUM: 7bc6111c191d1fa43fa2a156023797fa28b7e775
+PODFILE CHECKSUM: 15c30cbcecfa37659dc413435ae208a4184b3982
 
 COCOAPODS: 1.2.1

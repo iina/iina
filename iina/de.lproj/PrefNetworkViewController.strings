@@ -1,26 +1,15 @@
-/* Class = "NSTextFieldCell"; title = "Default: 153600"; ObjectID = "0bT-f6-rXb"; */
+
+/* Class = "NSTextFieldCell"; title = "Default: 75000"; ObjectID = "0bT-f6-rXb"; */
 "0bT-f6-rXb.title" = "Standard: 153600";
 
 /* Class = "NSTextFieldCell"; title = "Default cache size (KB):"; ObjectID = "0yu-5Q-363"; */
-"0yu-5Q-363.title" = "Standardgröße des Cache (KB):";
+"0yu-5Q-363.title" = "Standardgröße (KB):";
 
-/* Class = "NSTextFieldCell"; title = "youtube-dl:"; ObjectID = "1Ex-0X-pjo"; */
-"1Ex-0X-pjo.title" = "youtube-dl:";
-
-/* Class = "NSTextFieldCell"; title = "Custom youtube-dl path:"; ObjectID = "2qf-cC-Lfi"; */
-"2qf-cC-Lfi.title" = "Geänderter Pfad zu youtube-dl:";
-
-/* Class = "NSTextFieldCell"; title = "Default: 153600"; ObjectID = "3os-7u-lv8"; */
+/* Class = "NSTextFieldCell"; title = "Default: 75000"; ObjectID = "3os-7u-lv8"; */
 "3os-7u-lv8.title" = "Standard: 153600";
 
 /* Class = "NSMenuItem"; title = "TCP"; ObjectID = "6JF-48-aCE"; */
 "6JF-48-aCE.title" = "TCP";
-
-/* Class = "NSTextFieldCell"; title = "HTTP proxy:"; ObjectID = "9ut-ID-ffZ"; */
-"9ut-ID-ffZ.title" = "HTTP proxy:";
-
-/* Class = "NSTextFieldCell"; title = "Format: <key>=<value>[,<key>=<value>[,...]]"; ObjectID = "GBe-wd-tne"; */
-"GBe-wd-tne.title" = "Format: <key>=<value>[,<key>=<value>[,...]]";
 
 /* Class = "NSTextFieldCell"; title = "Seconds to prefech:"; ObjectID = "J96-32-M9A"; */
 "J96-32-M9A.title" = "Sekunden vorladen:";
@@ -31,20 +20,8 @@
 /* Class = "NSMenuItem"; title = "HTTP"; ObjectID = "NWQ-Bm-1mJ"; */
 "NWQ-Bm-1mJ.title" = "HTTP";
 
-/* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "RwW-JS-iTv"; */
-"RwW-JS-iTv.title" = "Neustart von IINA erforderlich.";
-
-/* Class = "NSTextFieldCell"; title = "http://"; ObjectID = "WTb-HK-6vU"; */
-"WTb-HK-6vU.title" = "http://";
-
-/* Class = "NSTextFieldCell"; title = "IINA will search youtube-dl in this folder. Restart needed."; ObjectID = "YqE-yV-BvQ"; */
-"YqE-yV-BvQ.title" = "IINA wird in diesem Ordner nach youtube-dl suchen. Neustart erforderlich";
-
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "aNr-lv-K0r"; */
 "aNr-lv-K0r.title" = "Auto";
-
-/* Class = "NSButtonCell"; title = "Enable youtube-dl"; ObjectID = "cyH-Md-FAD"; */
-"cyH-Md-FAD.title" = "youtube-dl aktivieren";
 
 /* Class = "NSTextFieldCell"; title = "Cache buffer size (KB):"; ObjectID = "dDD-g3-54w"; */
 "dDD-g3-54w.title" = "Puffergröße (KB):";
@@ -52,7 +29,7 @@
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
 "eN6-Sk-kUa.title" = "User Agent:";
 
-/* Class = "NSTextFieldCell"; title = "Default: 100"; ObjectID = "fab-7d-mMQ"; */
+/* Class = "NSTextFieldCell"; title = "Default: 10"; ObjectID = "fab-7d-mMQ"; */
 "fab-7d-mMQ.title" = "Standard: 100";
 
 /* Class = "NSButtonCell"; title = "Enable cache"; ObjectID = "fpV-al-bn7"; */
@@ -66,7 +43,3 @@
 
 /* Class = "NSTextFieldCell"; title = "Network:"; ObjectID = "yrh-Jm-Q4e"; */
 "yrh-Jm-Q4e.title" = "Netzwerk:";
-
-/* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
-"zCD-9d-ziV.title" = "Raw Einstellungen:";
-

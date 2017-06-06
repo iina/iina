@@ -14,9 +14,6 @@ struct Preference {
 
   // consider using RawRepresentable, but also need to extend UserDefaults
   struct Key {
-
-    static let lastCheckUpdateTime = "lastCheckUpdateTime"
-
     /** Record recent files */
     static let recordPlaybackHistory = "recordPlaybackHistory"
     static let recordRecentFiles = "recordRecentFiles"
@@ -375,7 +372,6 @@ struct Preference {
   // MARK: - Defaults
 
   static let defaultPreference:[String : Any] = [
-    Key.lastCheckUpdateTime: Date(timeIntervalSince1970: 1),
     Key.recordPlaybackHistory: true,
     Key.recordRecentFiles: true,
     Key.trackAllFilesInRecentOpenMenu: true,

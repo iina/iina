@@ -697,8 +697,7 @@ class PlayerCore: NSObject {
    */
   private func autoLoadFilesInCurrentFolder(ticket: Int) {
     let info: (() -> PlaybackInfo?) =  {
-      guard ticket == self.backgroundQueueTicket else { return nil }
-      return self.info
+      return ticket == self.backgroundQueueTicket ? self.info : nil
     }
     guard let folder = info()?.currentURL?.deletingLastPathComponent(), folder.isFileURL else { return }
 
@@ -778,7 +777,7 @@ class PlayerCore: NSObject {
         guard ticket == self.backgroundQueueTicket else { return }
         addToPlaylist(video.path)
         mpvController.command(.playlistMove, args: ["\(count)", "\(current)"], checkError: false) { err in
-          if err == -12 { needQuit = true }
+          if err == MPV_ERROR_COMMAND.rawValue { needQuit = true }
         }
       }
       if needQuit { return }

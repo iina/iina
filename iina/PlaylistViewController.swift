@@ -8,6 +8,9 @@
 
 import Cocoa
 
+fileprivate let PrefixMinLength = 7
+fileprivate let FilenameMinLength = 12
+
 class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSMenuDelegate, SidebarViewController {
 
   override var nibName: String {
@@ -395,7 +398,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         if let prefix = playerCore.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix,
           !prefix.isEmpty,
           prefix.characters.count <= filenameWithoutExt.characters.count,  // check whether prefix length > filename length
-          prefix.characters.count >= 5 {
+          prefix.characters.count >= PrefixMinLength,
+          filename.characters.count > FilenameMinLength {
           cellView.prefixBtn.hasPrefix = true
           cellView.prefixBtn.text = prefix
           cellView.textField?.stringValue = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))

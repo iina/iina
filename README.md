@@ -21,7 +21,7 @@
 - Aims to offer the best user experience
 - All the features you need for videos, audios, subtitles, playlist, chapters and so on
 - MPV config files and script system are available for advanced users
-- Written in Swift, followed up on new technologies like Touch Bar and Force Touch
+- Written in Swift, followed up on new technologies like Touch Bar, Force Touch, Picture-in-picture, etc.
 - Still in active development
 
 # Build
@@ -76,3 +76,7 @@ Theoretically no extra work is needed. _If you are unwilling to use the provided
 **Please ask for permission from the author before starting working on a pull request** to make sure that there's not someone else working on the same feature.
 
 Any feedback/contribution is appreciated!
+
+**Translation**
+
+Please check [Translation Status](https://github.com/lhc70000/iina/wiki/Translation-Status) first. If a language is labeled as "Need help", then please feel free to [update](https://github.com/lhc70000/iina/wiki/Translation#update-translations) the translation. If it doesn't contain your language, it will be awesome to [submit a new translation](https://github.com/lhc70000/iina/wiki/Translation). Please contact the author ([@lhc70000](https://github.com/lhc70000)) if you don't know how to submit translations using GitHub.

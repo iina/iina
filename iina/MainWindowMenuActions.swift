@@ -328,6 +328,7 @@ extension MainWindowController {
 
   @IBAction func menuSetSubEncoding(_ sender: NSMenuItem) {
     playerCore.setSubEncoding((sender.representedObject as? String) ?? "auto")
+    playerCore.reloadAllSubs()
   }
 
   @IBAction func menuSubFont(_ sender: NSMenuItem) {

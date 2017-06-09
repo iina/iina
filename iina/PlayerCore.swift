@@ -392,6 +392,14 @@ class PlayerCore: NSObject {
     }
   }
 
+  func reloadAllSubs() {
+    for subTrack in info.subTracks {
+      mpvController.command(.subReload, args: ["\(subTrack.id)"], checkError: false) { code in
+        Utility.log("Error code \(code) - Failed reloading subtitles")
+      }
+    }
+  }
+
   func setAudioDelay(_ delay: Double) {
     mpvController.setDouble(MPVOption.Audio.audioDelay, delay)
   }

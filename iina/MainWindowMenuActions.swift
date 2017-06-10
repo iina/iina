@@ -335,7 +335,6 @@ extension MainWindowController {
     Utility.quickFontPickerWindow() {
       self.playerCore.setSubFont($0 ?? "")
     }
-
   }
 
   @IBAction func menuFindOnlineSub(_ sender: NSMenuItem) {

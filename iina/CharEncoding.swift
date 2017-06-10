@@ -25,7 +25,7 @@ class CharEncoding {
     ("Cyrillic (ISO-8859-5)", "ISO-8859-5"),
     ("Cyrillic (WINDOWS-1251)", "WINDOWS-1251"),
     ("Eastern European (ISO-8859-2)", "ISO-8859-2"),
-    ("Eastern European (WINDOWS-1252)", "WINDOWS-1252"),
+    ("Western Languages (WINDOWS-1252)", "WINDOWS-1252"),
     ("Greek (ISO-8859-7)", "ISO-8859-7"),
     ("Greek (WINDOWS-1253)", "WINDOWS-1253"),
     ("Hebrew (ISO-8859-8)", "ISO-8859-8"),

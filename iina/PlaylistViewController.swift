@@ -307,15 +307,16 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   // MARK: - IBActions
 
   @IBAction func addToPlaylistBtnAction(_ sender: AnyObject) {
-    Utility.quickOpenPanel(title: "Add to playlist", isDir: false) { (url) in
-      if url.isFileURL {
-        self.playerCore.addToPlaylist(url.path)
-        self.reloadData(playlist: true, chapters: false)
-        self.mainWindow.displayOSD(.addToPlaylist(1))
+    Utility.quickMultipleOpenPanel(title: "Add to playlist") { urls in
+      for url in urls {
+        if url.isFileURL {
+          self.playerCore.addToPlaylist(url.path)
+          self.mainWindow.displayOSD(.addToPlaylist(1))
+        }
       }
+      self.reloadData(playlist: true, chapters: false)
     }
   }
-
 
   @IBAction func clearPlaylistBtnAction(_ sender: AnyObject) {
     playerCore.clearPlaylist()

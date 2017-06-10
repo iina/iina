@@ -21,6 +21,7 @@ class CharEncoding {
     ("Baltic (LATIN7)", "LATIN7"),
     ("Baltic (WINDOWS-1257)", "WINDOWS-1257"),
     ("Celtic (LATIN8)", "LATIN8"),
+    ("Central European (WINDOWS-1250)", "WINDOWS-1250"),
     ("Cyrillic (ISO-8859-5)", "ISO-8859-5"),
     ("Cyrillic (WINDOWS-1251)", "WINDOWS-1251"),
     ("Eastern European (ISO-8859-2)", "ISO-8859-2"),

@@ -140,5 +140,5 @@ class PlaybackInfo {
   var currentVideosInfo: [FileInfo] = []
 
   var thumbnailsReady = false
-  var thumbnails: [NSImage] = []
+  var thumbnails: [FFThumbnail] = []
 }

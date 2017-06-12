@@ -15,6 +15,7 @@
 #import <libavutil/imgutils.h>
 
 #define THUMB_COUNT_DEFAULT 40
+#define THUMB_WIDTH 240
 
 #define CHECK_NOTNULL(ptr,msg) if (ptr == NULL) {\
 NSLog(@"Error: %@", msg);\
@@ -26,13 +27,18 @@ NSLog(@"Error: %@ (%d)", msg, ret);\
 return -1;\
 }
 
+@implementation FFThumbnail
+
+@end
+
+
 @interface FFmpegController () {
-  NSMutableArray<NSImage *> *_thumbnails;
+  NSMutableArray<FFThumbnail *> *_thumbnails;
   NSOperationQueue *_queue;
 }
 
 - (int)getPeeksForFile:(NSString *)file;
-- (void)sameThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index;
+- (void)sameThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second;
 
 @end
 
@@ -116,43 +122,49 @@ return -1;\
 
   // Allocate the output frame
   // We need to convert the video frame to RGBA to satisfy CGImage's data format
+  int thumbWidth = THUMB_WIDTH;
+  int thumbHeight = THUMB_WIDTH / ((float)pCodecCtx->width / pCodecCtx->height);
+
   AVFrame *pFrameRGB = av_frame_alloc();
   CHECK_NOTNULL(pFrameRGB, @"Cannot alloc RGBA frame")
 
-  pFrameRGB->width = pCodecCtx->width;
-  pFrameRGB->height = pCodecCtx->height;
+  pFrameRGB->width = thumbWidth;
+  pFrameRGB->height = thumbHeight;
   pFrameRGB->format = AV_PIX_FMT_RGBA;
 
   // Determine required buffer size and allocate buffer
-  int size = av_image_get_buffer_size(pFrameRGB->format, pCodecCtx->width, pCodecCtx->height, 1);
+  int size = av_image_get_buffer_size(pFrameRGB->format, thumbWidth, thumbHeight, 1);
   uint8_t *pFrameRGBBuffer = (uint8_t *)av_malloc(size);
 
   // Assign appropriate parts of buffer to image planes in pFrameRGB
   ret = av_image_fill_arrays(pFrameRGB->data,
-                       pFrameRGB->linesize,
-                       pFrameRGBBuffer,
-                       pFrameRGB->format,
-                       pFrameRGB->width,
-                       pFrameRGB->height, 1);
+                             pFrameRGB->linesize,
+                             pFrameRGBBuffer,
+                             pFrameRGB->format,
+                             pFrameRGB->width,
+                             pFrameRGB->height, 1);
   CHECK_SUCCESS(ret, @"Cannot fill data for RGBA frame")
 
   // Create a sws context for converting color space and resizing
   struct SwsContext *sws_ctx = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt,
-                                              pCodecCtx->width, pCodecCtx->height, AV_PIX_FMT_RGBA,
+                                              pFrameRGB->width, pFrameRGB->height, pFrameRGB->format,
                                               SWS_BILINEAR,
                                               NULL, NULL, NULL);
 
   // Read frames and save first five frames to disk
 
-  int64_t duration = pFormatCtx->duration;
+  int64_t duration = av_rescale_q(pFormatCtx->duration, AV_TIME_BASE_Q, pVideoStream->time_base);
+  double interval = duration / (double)self.thumbnailCount;
+  double timebaseDouble = av_q2d(pVideoStream->time_base);
   AVPacket packet;
 
   // For each preview point
   for (i = 0; i <= self.thumbnailCount; i++) {
-    int64_t preview_pt = duration / self.thumbnailCount * i;
+    int64_t seek_pos = interval * i + pVideoStream->start_time;
 
     // Seek to time point
-    av_seek_frame(pFormatCtx, -1, preview_pt, AVSEEK_FLAG_BACKWARD);
+    av_seek_frame(pFormatCtx, videoStream, seek_pos, AVSEEK_FLAG_BACKWARD);
+    avcodec_flush_buffers(pCodecCtx);
 
     // Read and decode frame
     while(av_read_frame(pFormatCtx, &packet) >= 0) {
@@ -182,7 +194,11 @@ return -1;\
         CHECK_SUCCESS(ret, @"Cannot convert frame")
 
         // Save the frame to disk
-        [self sameThumbnail:pFrameRGB width:pFrameRGB->width height:pFrameRGB->height index:i];
+        [self sameThumbnail:pFrameRGB
+                      width:pFrameRGB->width
+                     height:pFrameRGB->height
+                      index:i
+                   realTime:(pFrame->best_effort_timestamp*timebaseDouble)];
         break;
       }
 
@@ -205,7 +221,7 @@ return -1;\
   return 0;
 }
 
-- (void)sameThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index
+- (void)sameThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second
 {
   // Create CGImage
   CGContextRef cgContext = CGBitmapContextCreate(pFrame->data[0],  // it's converted to RGBA so could be used directly
@@ -218,7 +234,11 @@ return -1;\
 
   // Create NSImage
   NSImage *image = [[NSImage alloc] initWithCGImage:cgImage size: NSZeroSize];
-  [_thumbnails addObject:image];
+  // Add to list
+  FFThumbnail *tb = [[FFThumbnail alloc] init];
+  tb.image = image;
+  tb.realTime = second;
+  [_thumbnails addObject:tb];
 }
 
 @end

@@ -1178,7 +1178,7 @@ class PlayerCore: NSObject {
 
 
 extension PlayerCore: FFmpegControllerDelegate {
-  func didGeneratedThumbnails(_ thumbnails: [NSImage]!, withSuccess success: Bool) {
+  func didGeneratedThumbnails(_ thumbnails: [FFThumbnail]!, withSuccess success: Bool) {
     if success {
       info.thumbnailsReady = true
       info.thumbnails = thumbnails

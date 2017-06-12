@@ -1481,18 +1481,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if percentage < 0 {
       percentage = 0
     }
-    if let duration = playerCore.info.videoDuration {
-      timePreviewWhenSeek.stringValue = (duration * percentage).stringRepresentation
-    }
 
-    if playerCore.info.thumbnailsReady {
-      let thumbCount = playerCore.ffmpegController.thumbnailCount
-      let i = Int(Double(thumbCount) * percentage).constrain(min: 0, max: thumbCount)
-      thumbnailPeekView.imageView.image = playerCore.info.thumbnails[i]
-      let height = 100 / thumbnailPeekView.imageView.image!.size.aspect
-      thumbnailPeekView.frame.size = NSSize(width: 100, height: height)
-      thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2),
-                                               y: sliderFrameInWindow.y + 32)
+    if let duration = playerCore.info.videoDuration {
+      let previewTime = duration * percentage
+      timePreviewWhenSeek.stringValue = previewTime.stringRepresentation
+
+      if playerCore.info.thumbnailsReady {
+        // find the earlist thumbnail with timestamp > current pos
+        for tb in playerCore.info.thumbnails {
+          if tb.realTime >= previewTime.second {
+            thumbnailPeekView.imageView.image = tb.image
+            let height = round(120 / thumbnailPeekView.imageView.image!.size.aspect)
+            thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
+            thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2),
+                                                     y: sliderFrameInWindow.y + 32)
+            break
+          }
+        }
+      }
     }
   }
 

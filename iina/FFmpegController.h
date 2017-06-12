@@ -8,17 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
+@interface FFThumbnail: NSObject
+
+@property(nonatomic) NSImage *image;
+@property(nonatomic) double realTime;
+
+@end
+
+
 @protocol FFmpegControllerDelegate <NSObject>
 
 /** 
  Did generated thumbnails for the video.
  */
-- (void)didGeneratedThumbnails:(NSArray<NSImage *> *)thumbnails withSuccess:(BOOL)success;
+- (void)didGeneratedThumbnails:(NSArray<FFThumbnail *> *)thumbnails withSuccess:(BOOL)success;
 
 @end
 
 
-@interface FFmpegController : NSObject
+@interface FFmpegController: NSObject
 
 @property(nonatomic, weak) id<FFmpegControllerDelegate> delegate;
 

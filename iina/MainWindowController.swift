@@ -257,6 +257,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bufferProgressLabel: NSTextField!
   @IBOutlet weak var bufferSpin: NSProgressIndicator!
   @IBOutlet weak var bufferDetailLabel: NSTextField!
+  @IBOutlet var thumbnailPeekView: ThumbnailPeekView!
 
   @IBOutlet weak var oscFloatingTopView: NSStackView!
   @IBOutlet weak var oscFloatingBottomView: NSView!
@@ -391,6 +392,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // buffer indicator view
     bufferIndicatorView.layer?.cornerRadius = 10
     updateBufferIndicatorView()
+
+    // thumbnail peek view
+    w.contentView?.addSubview(thumbnailPeekView)
+    thumbnailPeekView.isHidden = true
 
     // other initialization
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
@@ -823,9 +828,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isMouseInSlider = true
       if !controlBarFloating.isDragging {
         timePreviewWhenSeek.isHidden = false
+        thumbnailPeekView.isHidden = !playerCore.info.thumbnailsReady
       }
       let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-      updateTimeLabel(mousePos.x)
+      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
     }
   }
 
@@ -845,8 +851,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // slider
       isMouseInSlider = false
       timePreviewWhenSeek.isHidden = true
+      thumbnailPeekView.isHidden = true
       let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-      updateTimeLabel(mousePos.x)
+      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
     }
   }
 
@@ -854,7 +861,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard !isInInteractiveMode else { return }
     let mousePos = playSlider.convert(event.locationInWindow, from: nil)
     if isMouseInSlider {
-      updateTimeLabel(mousePos.x)
+      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
     }
     if isMouseInWindow && animationState == .hidden {
       showUI()
@@ -1464,16 +1471,28 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   /** Display time label when mouse over slider */
-  private func updateTimeLabel(_ mouseXPos: CGFloat) {
+  private func updateTimeLabel(_ mouseXPos: CGFloat, originalPos: NSPoint) {
     let timeLabelXPos = playSlider.frame.origin.y + 15
-    timePreviewWhenSeek.frame.origin = CGPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2), y: timeLabelXPos + 1)
+    timePreviewWhenSeek.frame.origin = NSPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2),
+                                               y: timeLabelXPos + 1)
     let sliderFrame = playSlider.bounds
+    let sliderFrameInWindow = playSlider.superview!.convert(playSlider.frame.origin, to: nil)
     var percentage = Double((mouseXPos - 3) / (sliderFrame.width - 6))
     if percentage < 0 {
       percentage = 0
     }
     if let duration = playerCore.info.videoDuration {
       timePreviewWhenSeek.stringValue = (duration * percentage).stringRepresentation
+    }
+
+    if playerCore.info.thumbnailsReady {
+      let thumbCount = playerCore.ffmpegController.thumbnailCount
+      let i = Int(Double(thumbCount) * percentage).constrain(min: 0, max: thumbCount)
+      thumbnailPeekView.imageView.image = playerCore.info.thumbnails[i]
+      let height = 100 / thumbnailPeekView.imageView.image!.size.aspect
+      thumbnailPeekView.frame.size = NSSize(width: 100, height: height)
+      thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2),
+                                               y: sliderFrameInWindow.y + 32)
     }
   }
 

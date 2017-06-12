@@ -13,15 +13,16 @@
 /** 
  Did generated thumbnails for the video.
  */
-- (void)didGeneratedThumbnailsWithSuccess:(BOOL)success;
+- (void)didGeneratedThumbnails:(NSArray<NSImage *> *)thumbnails withSuccess:(BOOL)success;
 
 @end
 
 
 @interface FFmpegController : NSObject
 
-@property (nonatomic) NSMutableArray *thumbnails;
-@property (nonatomic, weak) id<FFmpegControllerDelegate> delegate;
+@property(nonatomic, weak) id<FFmpegControllerDelegate> delegate;
+
+@property(nonatomic) NSInteger thumbnailCount;
 
 - (void)generateThumbnailForFile:(NSString *)file;
 

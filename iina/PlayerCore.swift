@@ -659,6 +659,7 @@ class PlayerCore: NSObject {
       }
     }
     // Generate thumbnails
+    info.thumbnailsReady = false
     ffmpegController.generateThumbnail(forFile: path)
   }
 
@@ -1177,9 +1178,10 @@ class PlayerCore: NSObject {
 
 
 extension PlayerCore: FFmpegControllerDelegate {
-  func didGeneratedThumbnails(withSuccess success: Bool) {
+  func didGeneratedThumbnails(_ thumbnails: [NSImage]!, withSuccess success: Bool) {
     if success {
-      print("success")
+      info.thumbnailsReady = true
+      info.thumbnails = thumbnails
     }
   }
 }

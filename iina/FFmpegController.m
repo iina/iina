@@ -13,9 +13,8 @@
 #import <libavformat/avformat.h>
 #import <libswscale/swscale.h>
 #import <libavutil/imgutils.h>
-#import <stdio.h>
 
-#define PREVIEW_NUM 40
+#define THUMB_COUNT_DEFAULT 40
 
 #define CHECK_NOTNULL(ptr,msg) if (ptr == NULL) {\
 NSLog(@"Error: %@", msg);\
@@ -28,6 +27,7 @@ return -1;\
 }
 
 @interface FFmpegController () {
+  NSMutableArray<NSImage *> *_thumbnails;
   NSOperationQueue *_queue;
 }
 
@@ -43,7 +43,8 @@ return -1;\
 {
   self = [super init];
   if (self) {
-    self.thumbnails = [[NSMutableArray alloc] init];
+    self.thumbnailCount = THUMB_COUNT_DEFAULT;
+    _thumbnails = [[NSMutableArray alloc] init];
     _queue = [[NSOperationQueue alloc] init];
   }
   return self;
@@ -56,7 +57,7 @@ return -1;\
   [_queue addOperationWithBlock: ^(){
     int success = [self getPeeksForFile:file];
     if (self.delegate) {
-      [self.delegate didGeneratedThumbnailsWithSuccess:(success < 0 ? NO : YES)];
+      [self.delegate didGeneratedThumbnails:[NSMutableArray arrayWithArray:_thumbnails] withSuccess:(success < 0 ? NO : YES)];
     }
   }];
 }
@@ -67,6 +68,7 @@ return -1;\
   int i, ret;
 
   const char *cFilename = strdup(file.UTF8String);
+  [_thumbnails removeAllObjects];
 
   NSLog(@"Getting thumbnails for video...");
 
@@ -146,8 +148,8 @@ return -1;\
   AVPacket packet;
 
   // For each preview point
-  for (i = 0; i <= PREVIEW_NUM; i++) {
-    int64_t preview_pt = duration / PREVIEW_NUM * i;
+  for (i = 0; i <= self.thumbnailCount; i++) {
+    int64_t preview_pt = duration / self.thumbnailCount * i;
 
     // Seek to time point
     av_seek_frame(pFormatCtx, -1, preview_pt, AVSEEK_FLAG_BACKWARD);
@@ -216,7 +218,7 @@ return -1;\
 
   // Create NSImage
   NSImage *image = [[NSImage alloc] initWithCGImage:cgImage size: NSZeroSize];
-  [self.thumbnails addObject:image];
+  [_thumbnails addObject:image];
 }
 
 @end

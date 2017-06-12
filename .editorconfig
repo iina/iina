@@ -13,5 +13,5 @@ indent_size = 2
 [iina/scripts/*]
 indent_size = 4
 
-[libmpv/include/mpv/*]
+[deps/include/mpv/*]
 indent_size = 4

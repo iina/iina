@@ -417,35 +417,35 @@
 		845E2F491E76CFC2002C6588 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		845FB0C61D39462E00C011E0 /* ControlBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
 		8460FBA71D6497490081841B /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
-		8461BA0F1E407DF7008BB852 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = libmpv/lib/libass.9.dylib; sourceTree = "<group>"; };
-		8461BA101E407DF7008BB852 /* libavcodec.57.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.57.dylib; path = libmpv/lib/libavcodec.57.dylib; sourceTree = "<group>"; };
-		8461BA111E407DF7008BB852 /* libavdevice.57.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavdevice.57.dylib; path = libmpv/lib/libavdevice.57.dylib; sourceTree = "<group>"; };
-		8461BA121E407DF7008BB852 /* libavfilter.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavfilter.6.dylib; path = libmpv/lib/libavfilter.6.dylib; sourceTree = "<group>"; };
-		8461BA131E407DF7008BB852 /* libavformat.57.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.57.dylib; path = libmpv/lib/libavformat.57.dylib; sourceTree = "<group>"; };
-		8461BA141E407DF7008BB852 /* libavresample.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavresample.3.dylib; path = libmpv/lib/libavresample.3.dylib; sourceTree = "<group>"; };
-		8461BA151E407DF7008BB852 /* libavutil.55.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.55.dylib; path = libmpv/lib/libavutil.55.dylib; sourceTree = "<group>"; };
-		8461BA161E407DF7008BB852 /* libbluray.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbluray.2.dylib; path = libmpv/lib/libbluray.2.dylib; sourceTree = "<group>"; };
-		8461BA171E407DF7008BB852 /* libfontconfig.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfontconfig.1.dylib; path = libmpv/lib/libfontconfig.1.dylib; sourceTree = "<group>"; };
-		8461BA181E407DF7008BB852 /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = libmpv/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
-		8461BA191E407DF7008BB852 /* libfribidi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfribidi.0.dylib; path = libmpv/lib/libfribidi.0.dylib; sourceTree = "<group>"; };
-		8461BA1A1E407DF7008BB852 /* libglib-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libglib-2.0.0.dylib"; path = "libmpv/lib/libglib-2.0.0.dylib"; sourceTree = "<group>"; };
-		8461BA1B1E407DF7008BB852 /* libharfbuzz.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libharfbuzz.0.dylib; path = libmpv/lib/libharfbuzz.0.dylib; sourceTree = "<group>"; };
-		8461BA1C1E407DF7008BB852 /* libintl.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libintl.8.dylib; path = libmpv/lib/libintl.8.dylib; sourceTree = "<group>"; };
-		8461BA1D1E407DF7008BB852 /* libjpeg.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjpeg.8.dylib; path = libmpv/lib/libjpeg.8.dylib; sourceTree = "<group>"; };
-		8461BA1E1E407DF7008BB852 /* liblcms2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblcms2.2.dylib; path = libmpv/lib/liblcms2.2.dylib; sourceTree = "<group>"; };
-		8461BA1F1E407DF7008BB852 /* liblua.5.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblua.5.2.dylib; path = libmpv/lib/liblua.5.2.dylib; sourceTree = "<group>"; };
-		8461BA201E407DF7008BB852 /* libmp3lame.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmp3lame.0.dylib; path = libmpv/lib/libmp3lame.0.dylib; sourceTree = "<group>"; };
-		8461BA211E407DF7008BB852 /* libmpv.1.24.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.24.0.dylib; path = libmpv/lib/libmpv.1.24.0.dylib; sourceTree = "<group>"; };
-		8461BA221E407DF7008BB852 /* libmpv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.dylib; path = libmpv/lib/libmpv.1.dylib; sourceTree = "<group>"; };
-		8461BA231E407DF7008BB852 /* libmpv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.dylib; path = libmpv/lib/libmpv.dylib; sourceTree = "<group>"; };
-		8461BA241E407DF7008BB852 /* libpcre.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcre.1.dylib; path = libmpv/lib/libpcre.1.dylib; sourceTree = "<group>"; };
-		8461BA251E407DF7008BB852 /* libpng16.16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.16.dylib; path = libmpv/lib/libpng16.16.dylib; sourceTree = "<group>"; };
-		8461BA261E407DF7008BB852 /* libpostproc.54.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpostproc.54.dylib; path = libmpv/lib/libpostproc.54.dylib; sourceTree = "<group>"; };
-		8461BA271E407DF7008BB852 /* libswresample.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswresample.2.dylib; path = libmpv/lib/libswresample.2.dylib; sourceTree = "<group>"; };
-		8461BA281E407DF7008BB852 /* libswscale.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.4.dylib; path = libmpv/lib/libswscale.4.dylib; sourceTree = "<group>"; };
-		8461BA291E407DF7008BB852 /* libuchardet.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuchardet.0.dylib; path = libmpv/lib/libuchardet.0.dylib; sourceTree = "<group>"; };
-		8461BA2A1E407DF7008BB852 /* libx264.148.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libx264.148.dylib; path = libmpv/lib/libx264.148.dylib; sourceTree = "<group>"; };
-		8461BA671E4237C2008BB852 /* youtube-dl */ = {isa = PBXFileReference; lastKnownFileType = file; name = "youtube-dl"; path = "libmpv/executable/youtube-dl"; sourceTree = SOURCE_ROOT; };
+		8461BA0F1E407DF7008BB852 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = deps/lib/libass.9.dylib; sourceTree = "<group>"; };
+		8461BA101E407DF7008BB852 /* libavcodec.57.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.57.dylib; path = deps/lib/libavcodec.57.dylib; sourceTree = "<group>"; };
+		8461BA111E407DF7008BB852 /* libavdevice.57.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavdevice.57.dylib; path = deps/lib/libavdevice.57.dylib; sourceTree = "<group>"; };
+		8461BA121E407DF7008BB852 /* libavfilter.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavfilter.6.dylib; path = deps/lib/libavfilter.6.dylib; sourceTree = "<group>"; };
+		8461BA131E407DF7008BB852 /* libavformat.57.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.57.dylib; path = deps/lib/libavformat.57.dylib; sourceTree = "<group>"; };
+		8461BA141E407DF7008BB852 /* libavresample.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavresample.3.dylib; path = deps/lib/libavresample.3.dylib; sourceTree = "<group>"; };
+		8461BA151E407DF7008BB852 /* libavutil.55.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.55.dylib; path = deps/lib/libavutil.55.dylib; sourceTree = "<group>"; };
+		8461BA161E407DF7008BB852 /* libbluray.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbluray.2.dylib; path = deps/lib/libbluray.2.dylib; sourceTree = "<group>"; };
+		8461BA171E407DF7008BB852 /* libfontconfig.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfontconfig.1.dylib; path = deps/lib/libfontconfig.1.dylib; sourceTree = "<group>"; };
+		8461BA181E407DF7008BB852 /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = deps/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
+		8461BA191E407DF7008BB852 /* libfribidi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfribidi.0.dylib; path = deps/lib/libfribidi.0.dylib; sourceTree = "<group>"; };
+		8461BA1A1E407DF7008BB852 /* libglib-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libglib-2.0.0.dylib"; path = "deps/lib/libglib-2.0.0.dylib"; sourceTree = "<group>"; };
+		8461BA1B1E407DF7008BB852 /* libharfbuzz.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libharfbuzz.0.dylib; path = deps/lib/libharfbuzz.0.dylib; sourceTree = "<group>"; };
+		8461BA1C1E407DF7008BB852 /* libintl.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libintl.8.dylib; path = deps/lib/libintl.8.dylib; sourceTree = "<group>"; };
+		8461BA1D1E407DF7008BB852 /* libjpeg.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjpeg.8.dylib; path = deps/lib/libjpeg.8.dylib; sourceTree = "<group>"; };
+		8461BA1E1E407DF7008BB852 /* liblcms2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblcms2.2.dylib; path = deps/lib/liblcms2.2.dylib; sourceTree = "<group>"; };
+		8461BA1F1E407DF7008BB852 /* liblua.5.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblua.5.2.dylib; path = deps/lib/liblua.5.2.dylib; sourceTree = "<group>"; };
+		8461BA201E407DF7008BB852 /* libmp3lame.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmp3lame.0.dylib; path = deps/lib/libmp3lame.0.dylib; sourceTree = "<group>"; };
+		8461BA211E407DF7008BB852 /* libmpv.1.24.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.24.0.dylib; path = deps/lib/libmpv.1.24.0.dylib; sourceTree = "<group>"; };
+		8461BA221E407DF7008BB852 /* libmpv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.dylib; path = deps/lib/libmpv.1.dylib; sourceTree = "<group>"; };
+		8461BA231E407DF7008BB852 /* libmpv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.dylib; path = deps/lib/libmpv.dylib; sourceTree = "<group>"; };
+		8461BA241E407DF7008BB852 /* libpcre.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcre.1.dylib; path = deps/lib/libpcre.1.dylib; sourceTree = "<group>"; };
+		8461BA251E407DF7008BB852 /* libpng16.16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.16.dylib; path = deps/lib/libpng16.16.dylib; sourceTree = "<group>"; };
+		8461BA261E407DF7008BB852 /* libpostproc.54.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpostproc.54.dylib; path = deps/lib/libpostproc.54.dylib; sourceTree = "<group>"; };
+		8461BA271E407DF7008BB852 /* libswresample.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswresample.2.dylib; path = deps/lib/libswresample.2.dylib; sourceTree = "<group>"; };
+		8461BA281E407DF7008BB852 /* libswscale.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.4.dylib; path = deps/lib/libswscale.4.dylib; sourceTree = "<group>"; };
+		8461BA291E407DF7008BB852 /* libuchardet.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuchardet.0.dylib; path = deps/lib/libuchardet.0.dylib; sourceTree = "<group>"; };
+		8461BA2A1E407DF7008BB852 /* libx264.148.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libx264.148.dylib; path = deps/lib/libx264.148.dylib; sourceTree = "<group>"; };
+		8461BA671E4237C2008BB852 /* youtube-dl */ = {isa = PBXFileReference; lastKnownFileType = file; name = "youtube-dl"; path = "deps/executable/youtube-dl"; sourceTree = SOURCE_ROOT; };
 		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
 		8461C52F1D462488006E91FF /* VideoTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTime.swift; sourceTree = "<group>"; };
 		846352571EEEE11A0043F0CC /* ThumbnailPeekView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailPeekView.swift; sourceTree = "<group>"; };
@@ -1247,7 +1247,7 @@
 		84EB1ED81D2F51D3004FA5A1 /* iina */ = {
 			isa = PBXGroup;
 			children = (
-				84FF846D1D2FF698001B318A /* libmpv */,
+				84FF846D1D2FF698001B318A /* deps */,
 				84A0BAA21D2FAE8200BC8DA1 /* Assets */,
 				84A0BAA71D2FAF9700BC8DA1 /* Controllers */,
 				84A0BAA81D2FAFCD00BC8DA1 /* Data */,
@@ -1261,12 +1261,12 @@
 			tabWidth = 2;
 			usesTabs = 0;
 		};
-		84FF846D1D2FF698001B318A /* libmpv */ = {
+		84FF846D1D2FF698001B318A /* deps */ = {
 			isa = PBXGroup;
 			children = (
 				84FF846E1D2FF698001B318A /* include */,
 			);
-			path = libmpv;
+			path = deps;
 			sourceTree = SOURCE_ROOT;
 		};
 		84FF846E1D2FF698001B318A /* include */ = {
@@ -2121,13 +2121,13 @@
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/libmpv/include";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/deps/include";
 				INFOPLIST_FILE = iina/Info.plist;
 				INSTALL_PATH = /Applications;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/libmpv/lib",
-					"$(PROJECT_DIR)/libmpv/lib",
+					"$(SRCROOT)/deps/lib",
+					"$(PROJECT_DIR)/deps/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = module.modulemap;
@@ -2155,13 +2155,13 @@
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/libmpv/include";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/deps/include";
 				INFOPLIST_FILE = iina/Info.plist;
 				INSTALL_PATH = /Applications;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/libmpv/lib",
-					"$(PROJECT_DIR)/libmpv/lib",
+					"$(SRCROOT)/deps/lib",
+					"$(PROJECT_DIR)/deps/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = module.modulemap;

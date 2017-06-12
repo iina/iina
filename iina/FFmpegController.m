@@ -1,0 +1,222 @@
+//
+//  FFmpegController.m
+//  iina
+//
+//  Created by lhc on 9/6/2017.
+//  Copyright © 2017 lhc. All rights reserved.
+//
+
+#import "FFmpegController.h"
+#import <Cocoa/Cocoa.h>
+
+#import <libavcodec/avcodec.h>
+#import <libavformat/avformat.h>
+#import <libswscale/swscale.h>
+#import <libavutil/imgutils.h>
+#import <stdio.h>
+
+#define PREVIEW_NUM 40
+
+#define CHECK_NOTNULL(ptr,msg) if (ptr == NULL) {\
+NSLog(@"Error: %@", msg);\
+return -1;\
+}
+
+#define CHECK_SUCCESS(ret,msg) if (ret < 0) {\
+NSLog(@"Error: %@ (%d)", msg, ret);\
+return -1;\
+}
+
+@interface FFmpegController () {
+  NSOperationQueue *_queue;
+}
+
+- (int)getPeeksForFile:(NSString *)file;
+- (void)sameThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index;
+
+@end
+
+
+@implementation FFmpegController
+
+- (instancetype)init
+{
+  self = [super init];
+  if (self) {
+    self.thumbnails = [[NSMutableArray alloc] init];
+    _queue = [[NSOperationQueue alloc] init];
+  }
+  return self;
+}
+
+
+- (void)generateThumbnailForFile:(NSString *)file
+{
+  [_queue cancelAllOperations];
+  [_queue addOperationWithBlock: ^(){
+    int success = [self getPeeksForFile:file];
+    if (self.delegate) {
+      [self.delegate didGeneratedThumbnailsWithSuccess:(success < 0 ? NO : YES)];
+    }
+  }];
+}
+
+
+- (int)getPeeksForFile:(NSString *)file
+{
+  int i, ret;
+
+  const char *cFilename = strdup(file.UTF8String);
+
+  NSLog(@"Getting thumbnails for video...");
+
+  // Register all formats and codecs
+  av_register_all();
+
+  // Open video file
+  AVFormatContext *pFormatCtx = NULL;
+  ret = avformat_open_input(&pFormatCtx, cFilename, NULL, NULL);
+  CHECK_SUCCESS(ret, @"Cannot open video")
+
+  // Find stream information
+  ret = avformat_find_stream_info(pFormatCtx, NULL);
+  CHECK_SUCCESS(ret, @"Cannot get stream info")
+
+  // Find the first video stream
+  int videoStream = -1;
+  for (i = 0; i < pFormatCtx->nb_streams; i++)
+    if (pFormatCtx->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {
+      videoStream = i;
+      break;
+    }
+  CHECK_SUCCESS(videoStream, @"No video stream")
+
+  // Get the codec context for the video stream
+  AVStream *pVideoStream = pFormatCtx->streams[videoStream];
+
+  // Find the decoder for the video stream
+  AVCodec *pCodec = avcodec_find_decoder(pVideoStream->codecpar->codec_id);
+  CHECK_NOTNULL(pCodec, @"Unsupported codec")
+
+  // Open codec
+  AVCodecContext *pCodecCtx = avcodec_alloc_context3(pCodec);
+  AVDictionary *optionsDict = NULL;
+
+  avcodec_parameters_to_context(pCodecCtx, pVideoStream->codecpar);
+  av_codec_set_pkt_timebase(pCodecCtx, pVideoStream->time_base);
+
+  ret = avcodec_open2(pCodecCtx, pCodec, &optionsDict);
+  CHECK_SUCCESS(ret, @"Cannot open codec")
+
+  // Allocate video frame
+  AVFrame *pFrame = av_frame_alloc();
+  CHECK_NOTNULL(pFrame, @"Cannot alloc video frame")
+
+  // Allocate the output frame
+  // We need to convert the video frame to RGBA to satisfy CGImage's data format
+  AVFrame *pFrameRGB = av_frame_alloc();
+  CHECK_NOTNULL(pFrameRGB, @"Cannot alloc RGBA frame")
+
+  pFrameRGB->width = pCodecCtx->width;
+  pFrameRGB->height = pCodecCtx->height;
+  pFrameRGB->format = AV_PIX_FMT_RGBA;
+
+  // Determine required buffer size and allocate buffer
+  int size = av_image_get_buffer_size(pFrameRGB->format, pCodecCtx->width, pCodecCtx->height, 1);
+  uint8_t *pFrameRGBBuffer = (uint8_t *)av_malloc(size);
+
+  // Assign appropriate parts of buffer to image planes in pFrameRGB
+  ret = av_image_fill_arrays(pFrameRGB->data,
+                       pFrameRGB->linesize,
+                       pFrameRGBBuffer,
+                       pFrameRGB->format,
+                       pFrameRGB->width,
+                       pFrameRGB->height, 1);
+  CHECK_SUCCESS(ret, @"Cannot fill data for RGBA frame")
+
+  // Create a sws context for converting color space and resizing
+  struct SwsContext *sws_ctx = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt,
+                                              pCodecCtx->width, pCodecCtx->height, AV_PIX_FMT_RGBA,
+                                              SWS_BILINEAR,
+                                              NULL, NULL, NULL);
+
+  // Read frames and save first five frames to disk
+
+  int64_t duration = pFormatCtx->duration;
+  AVPacket packet;
+
+  // For each preview point
+  for (i = 0; i <= PREVIEW_NUM; i++) {
+    int64_t preview_pt = duration / PREVIEW_NUM * i;
+
+    // Seek to time point
+    av_seek_frame(pFormatCtx, -1, preview_pt, AVSEEK_FLAG_BACKWARD);
+
+    // Read and decode frame
+    while(av_read_frame(pFormatCtx, &packet) >= 0) {
+      // Make sure it's video stream
+      if(packet.stream_index == videoStream) {
+
+        // Decode video frame
+        if (avcodec_send_packet(pCodecCtx, &packet) < 0)
+          break;
+
+        ret = avcodec_receive_frame(pCodecCtx, pFrame);
+        if (ret < 0) {  // something happened
+          if (ret == AVERROR(EAGAIN))  // input not ready, retry
+            continue;
+          else
+            break;
+        }
+
+        // Convert the frame to RGBA
+        ret = sws_scale(sws_ctx,
+                        (const uint8_t* const *)pFrame->data,
+                        pFrame->linesize,
+                        0,
+                        pCodecCtx->height,
+                        pFrameRGB->data,
+                        pFrameRGB->linesize);
+        CHECK_SUCCESS(ret, @"Cannot convert frame")
+
+        // Save the frame to disk
+        [self sameThumbnail:pFrameRGB width:pFrameRGB->width height:pFrameRGB->height index:i];
+        break;
+      }
+
+      // Free the packet
+      av_packet_unref(&packet);
+    }
+  }
+
+  // Free the RGB image
+  av_free(pFrameRGBBuffer);
+  av_free(pFrameRGB);
+  // Free the YUV frame
+  av_free(pFrame);
+
+  // Close the codec
+  avcodec_close(pCodecCtx);
+  // Close the video file
+  avformat_close_input(&pFormatCtx);
+
+  return 0;
+}
+
+- (void)sameThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index
+{
+  // Create CGImage
+  CGContextRef cgContext = CGBitmapContextCreate(pFrame->data[0],  // it's converted to RGBA so could be used directly
+                                                 width, height,
+                                                 8,  // 8 bit per components
+                                                 width * 4,  // 4 bytes(rgba) per pixel
+                                                 CGColorSpaceCreateDeviceRGB(),
+                                                 kCGImageAlphaPremultipliedLast);
+  CGImageRef cgImage = CGBitmapContextCreateImage(cgContext);
+
+  // Create NSImage
+  NSImage *image = [[NSImage alloc] initWithCGImage:cgImage size: NSZeroSize];
+  [self.thumbnails addObject:image];
+}
+
+@end

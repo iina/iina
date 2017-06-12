@@ -32,6 +32,12 @@ class PlayerCore: NSObject {
   var mainWindow: MainWindowController?
   lazy var mpvController: MPVController = MPVController()
 
+  lazy var ffmpegController: FFmpegController = {
+    let controller = FFmpegController()
+    controller.delegate = self
+    return controller
+  }()
+
   lazy var info: PlaybackInfo = PlaybackInfo()
 
   var syncPlayTimeTimer: Timer?
@@ -652,6 +658,8 @@ class PlayerCore: NSObject {
         self.setTrack(1, forType: .sub)
       }
     }
+    // Generate thumbnails
+    ffmpegController.generateThumbnail(forFile: path)
   }
 
   /** This function is called right after file loaded. Should load all meta info here. */
@@ -1165,4 +1173,13 @@ class PlayerCore: NSObject {
     }
   }
 
+}
+
+
+extension PlayerCore: FFmpegControllerDelegate {
+  func didGeneratedThumbnails(withSuccess success: Bool) {
+    if success {
+      print("success")
+    }
+  }
 }

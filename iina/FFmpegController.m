@@ -14,7 +14,7 @@
 #import <libswscale/swscale.h>
 #import <libavutil/imgutils.h>
 
-#define THUMB_COUNT_DEFAULT 40
+#define THUMB_COUNT_DEFAULT 100
 #define THUMB_WIDTH 240
 
 #define CHECK_NOTNULL(ptr,msg) if (ptr == NULL) {\
@@ -34,6 +34,7 @@ return -1;\
 
 @interface FFmpegController () {
   NSMutableArray<FFThumbnail *> *_thumbnails;
+  NSMutableSet *_addedTimestamps;
   NSOperationQueue *_queue;
 }
 
@@ -51,6 +52,7 @@ return -1;\
   if (self) {
     self.thumbnailCount = THUMB_COUNT_DEFAULT;
     _thumbnails = [[NSMutableArray alloc] init];
+    _addedTimestamps = [[NSMutableSet alloc] init];
     _queue = [[NSOperationQueue alloc] init];
   }
   return self;
@@ -75,6 +77,7 @@ return -1;\
 
   const char *cFilename = strdup(file.UTF8String);
   [_thumbnails removeAllObjects];
+  [_addedTimestamps removeAllObjects];
 
   NSLog(@"Getting thumbnails for video...");
 
@@ -166,7 +169,10 @@ return -1;\
   for (i = 0; i <= self.thumbnailCount; i++) {
     int64_t seek_pos = interval * i + pVideoStream->start_time;
 
+    avcodec_flush_buffers(pCodecCtx);
+
     // Seek to time point
+    // avformat_seek_file(pFormatCtx, videoStream, seek_pos-interval, seek_pos, seek_pos+interval, 0);
     av_seek_frame(pFormatCtx, videoStream, seek_pos, AVSEEK_FLAG_BACKWARD);
     CHECK_SUCCESS(ret, @"Cannot seek")
 
@@ -174,8 +180,9 @@ return -1;\
 
     // Read and decode frame
     while(av_read_frame(pFormatCtx, &packet) >= 0) {
+
       // Make sure it's video stream
-      if(packet.stream_index == videoStream) {
+      if (packet.stream_index == videoStream) {
 
         // Decode video frame
         if (avcodec_send_packet(pCodecCtx, &packet) < 0)
@@ -187,6 +194,14 @@ return -1;\
             continue;
           else
             break;
+        }
+
+        // Check if duplicated
+        NSNumber *currentTimeStamp = [[NSNumber alloc] initWithLongLong:pFrame->best_effort_timestamp];
+        if ([_addedTimestamps containsObject:currentTimeStamp]) {
+          break;
+        } else {
+          [_addedTimestamps addObject:currentTimeStamp];
         }
 
         // Convert the frame to RGBA

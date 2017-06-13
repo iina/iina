@@ -101,6 +101,10 @@ return -1;\
 
   // Get the codec context for the video stream
   AVStream *pVideoStream = pFormatCtx->streams[videoStream];
+  if (av_q2d(pVideoStream->avg_frame_rate) == 0) {
+    NSLog(@"Avg frame rate = 0, ignore");
+    return -1;
+  }
 
   // Find the decoder for the video stream
   AVCodec *pCodec = avcodec_find_decoder(pVideoStream->codecpar->codec_id);
@@ -220,6 +224,7 @@ return -1;\
   // Close the video file
   avformat_close_input(&pFormatCtx);
 
+  NSLog(@"Thumbnails generated.");
   return 0;
 }
 

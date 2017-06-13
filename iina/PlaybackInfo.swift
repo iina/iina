@@ -12,9 +12,14 @@ class PlaybackInfo {
 
   var fileLoading: Bool = false
 
-  var currentURL: URL?
+  var currentURL: URL? {
+    didSet {
+      mpvMd5 = Utility.mpvWatchLaterMd5(currentURL!.path)
+    }
+  }
   var currentFolder: URL?
   var isNetworkResource: Bool = false
+  var mpvMd5: String?
 
   var videoWidth: Int?
   var videoHeight: Int?

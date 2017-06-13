@@ -42,6 +42,7 @@ struct AppData {
   static let logFolder = "log"
   static let watchLaterFolder = "watch_later"
   static let historyFile = "history.plist"
+  static let thumbnailCacheFolder = "thumb_cache"
 
   static let githubLink = "https://github.com/lhc70000/iina"
   static let wikiLink = "https://github.com/lhc70000/iina/wiki"

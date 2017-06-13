@@ -851,9 +851,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // slider
       isMouseInSlider = false
       timePreviewWhenSeek.isHidden = true
-      thumbnailPeekView.isHidden = true
       let mousePos = playSlider.convert(event.locationInWindow, from: nil)
       updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
+      thumbnailPeekView.isHidden = true
     }
   }
 
@@ -1487,6 +1487,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       timePreviewWhenSeek.stringValue = previewTime.stringRepresentation
 
       if playerCore.info.thumbnailsReady {
+        thumbnailPeekView.isHidden = false
         // find the earlist thumbnail with timestamp > current pos
         for tb in playerCore.info.thumbnails {
           if tb.realTime >= previewTime.second {
@@ -1498,6 +1499,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
             break
           }
         }
+      } else {
+        thumbnailPeekView.isHidden = true
       }
     }
   }

@@ -18,12 +18,12 @@
 #define THUMB_WIDTH 240
 
 #define CHECK_NOTNULL(ptr,msg) if (ptr == NULL) {\
-NSLog(@"Error: %@", msg);\
+NSLog(@"Error when getting thumbnails: %@", msg);\
 return -1;\
 }
 
 #define CHECK_SUCCESS(ret,msg) if (ret < 0) {\
-NSLog(@"Error: %@ (%d)", msg, ret);\
+NSLog(@"Error when getting thumbnails: %@ (%d)", msg, ret);\
 return -1;\
 }
 
@@ -63,7 +63,7 @@ return -1;\
   [_queue addOperationWithBlock: ^(){
     int success = [self getPeeksForFile:file];
     if (self.delegate) {
-      [self.delegate didGeneratedThumbnails:[NSMutableArray arrayWithArray:_thumbnails] withSuccess:(success < 0 ? NO : YES)];
+      [self.delegate didGeneratedThumbnails:[NSArray arrayWithArray:_thumbnails] withSuccess:(success < 0 ? NO : YES)];
     }
   }];
 }
@@ -164,6 +164,8 @@ return -1;\
 
     // Seek to time point
     av_seek_frame(pFormatCtx, videoStream, seek_pos, AVSEEK_FLAG_BACKWARD);
+    CHECK_SUCCESS(ret, @"Cannot seek")
+
     avcodec_flush_buffers(pCodecCtx);
 
     // Read and decode frame
@@ -226,7 +228,7 @@ return -1;\
   // Create CGImage
   CGContextRef cgContext = CGBitmapContextCreate(pFrame->data[0],  // it's converted to RGBA so could be used directly
                                                  width, height,
-                                                 8,  // 8 bit per components
+                                                 8,  // 8 bit per component
                                                  width * 4,  // 4 bytes(rgba) per pixel
                                                  CGColorSpaceCreateDeviceRGB(),
                                                  kCGImageAlphaPremultipliedLast);

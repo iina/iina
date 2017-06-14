@@ -26,24 +26,25 @@ struct AppData {
   /** generate aspect and crop options in menu */
   static let aspects: [String] = ["4:3", "5:4", "16:9", "16:10", "1:1", "3:2", "2.21:1", "2.35:1", "2.39:1"]
 
+  static let aspectsInPanel: [String] = ["Default", "4:3", "16:9", "16:10", "5:4"]
+  static let cropsInPanel: [String] = ["None", "4:3", "16:9", "16:10", "5:4"]
+
   static let rotations: [Int] = [0, 90, 180, 270]
 
   /** Seek amount */
-  static let seekAmountMap: [Int: Double] = [
-    1: 0.001,
-    2: 0.01,
-    3: 0.1,
-    4: 0.5
-  ]
+  static let seekAmountMap = [0, 0.05, 0.1, 0.25, 0.5]
+  static let seekAmountMapMouse = [0, 0.5, 1, 2, 4]
+  static let volumeMap = [0, 0.25, 0.5, 0.75, 1]
 
   static let encodings = CharEncoding.list
 
   static let userInputConfFolder = "input_conf"
   static let logFolder = "log"
   static let watchLaterFolder = "watch_later"
+  static let historyFile = "history.plist"
 
   static let githubLink = "https://github.com/lhc70000/iina"
-  static let githubReleaseLink = "https://github.com/lhc70000/iina/releases"
+  static let wikiLink = "https://github.com/lhc70000/iina/wiki"
   static let websiteLink = "https://lhc70000.github.io/iina/"
   static let emailLink = "lhc199652@gmail.com"
 
@@ -66,12 +67,19 @@ struct Constants {
     static let degree = "°"
     static let dot = "●"
     static let play = "▶︎"
-    static let none = NSLocalizedString("track.none", comment: "<None>")
+    static let videoTimePlaceholder = "--:--:--"
+    static let trackNone = NSLocalizedString("track.none", comment: "<None>")
     static let chapter = "Chapter"
     static let fullScreen = NSLocalizedString("menu.fullscreen", comment: "Fullscreen")
     static let exitFullScreen = NSLocalizedString("menu.exit_fullscreen", comment: "Exit Fullscreen")
     static let pause = NSLocalizedString("menu.pause", comment: "Pause")
     static let resume = NSLocalizedString("menu.resume", comment: "Resume")
+    static let `default` = NSLocalizedString("quicksetting.item_default", comment: "Default")
+    static let none = NSLocalizedString("quicksetting.item_none", comment: "None")
+    static let audioDelay = "Audio Delay"
+    static let subDelay = "Subtitle Delay"
+    static let pip = NSLocalizedString("menu.pip", comment: "Enter Picture-in-Picture")
+    static let exitPIP = NSLocalizedString("menu.exit_pip", comment: "Exit Picture-in-Picture")
   }
   struct Noti {
     static let playlistChanged = Notification.Name("IINAPlaylistChanged")
@@ -79,6 +87,10 @@ struct Constants {
     static let vfChanged = Notification.Name("IINAVfChanged")
     static let afChanged = Notification.Name("IINAAfChanged")
     static let fsChanged = Notification.Name("IINAFullscreenChanged")
+    static let ontopChanged = Notification.Name("IINAOnTopChanged")
+    static let keyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
+    static let fileLoaded = Notification.Name("IINAFileLoaded")
+    static let historyUpdated = Notification.Name("IINAHistoryUpdated")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)

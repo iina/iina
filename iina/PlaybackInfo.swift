@@ -13,6 +13,7 @@ class PlaybackInfo {
   var fileLoading: Bool = false
 
   var currentURL: URL?
+  var currentFolder: URL?
   var isNetworkResource: Bool = false
 
   var videoWidth: Int?
@@ -21,18 +22,25 @@ class PlaybackInfo {
   var displayWidth: Int?
   var displayHeight: Int?
 
-  var isAlwaysOntop: Bool = false
-
   var rotation: Int = 0
 
-  var videoPosition: VideoTime?
+  var videoPosition: VideoTime? {
+    didSet {
+      guard let duration = videoDuration else { return }
+      if videoPosition!.second < 0 { videoPosition!.second = 0 }
+      if videoPosition!.second > duration.second { videoPosition!.second = duration.second }
+    }
+  }
 
   var videoDuration: VideoTime?
 
   var isSeeking: Bool = false
   var isPaused: Bool = false
 
-  var jumppedFromPlaylist: Bool = false
+  var justStartedFile: Bool = false
+  var justOpenedFile: Bool = false
+  var currentFileIsOpenedManually: Bool = false
+  var disableOSDForFileLoading: Bool = false
 
   /** The current applied aspect, used for find current aspect in menu, etc. Maybe not a good approach. */
   var unsureAspect: String = "Default"
@@ -51,12 +59,7 @@ class PlaybackInfo {
   var gamma: Int = 0
   var hue: Int = 0
 
-  var volume: Int = 50 {
-    didSet {
-      if volume < 0 { volume = 0 }
-      else if volume > 100 { volume = 100 }
-    }
-  }
+  var volume: Double = 50
 
   var isMuted: Bool = false
 
@@ -86,6 +89,8 @@ class PlaybackInfo {
   var secondSid: Int?
 
   var subEncoding: String?
+
+  var haveDownloadedSub: Bool = false
 
   func trackList(_ type: MPVTrack.TrackType) -> [MPVTrack] {
     switch type {
@@ -121,12 +126,7 @@ class PlaybackInfo {
       list = subTracks
     }
     if let id = id {
-      for i in list {
-        if i.id == id {
-          return i
-        }
-      }
-      return nil
+      return list.filter { $0.id == id }.at(0)
     } else {
       return nil
     }
@@ -135,4 +135,7 @@ class PlaybackInfo {
   var playlist: [MPVPlaylistItem] = []
   var chapters: [MPVChapter] = []
 
+  var matchedSubs: [String: [URL]] = [:]
+  var currentSubsInfo: [FileInfo] = []
+  var currentVideosInfo: [FileInfo] = []
 }

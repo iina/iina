@@ -47,9 +47,6 @@
 /* Class = "NSTextFieldCell"; title = "5s"; ObjectID = "C0t-gm-Tim"; */
 "C0t-gm-Tim.title" = "5s";
 
-/* Class = "NSButtonCell"; title = "Load Subtitle..."; ObjectID = "C97-zJ-O3Y"; */
-"C97-zJ-O3Y.title" = "加载字幕...";
-
 /* Class = "NSTextFieldCell"; title = "0"; ObjectID = "CAr-N0-j64"; */
 "CAr-N0-j64.title" = "0";
 
@@ -62,8 +59,8 @@
 /* Class = "NSMenuItem"; title = "0.25"; ObjectID = "DdO-VX-HCz"; */
 "DdO-VX-HCz.title" = "0.25";
 
-/* Class = "NSTextFieldCell"; title = "-5x"; ObjectID = "Ew1-N1-0Pi"; */
-"Ew1-N1-0Pi.title" = "-5x";
+/* Class = "NSTextFieldCell"; title = "-0.25x"; ObjectID = "Ew1-N1-0Pi"; */
+"Ew1-N1-0Pi.title" = "0.25x";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "GXH-iA-cJP"; */
 "GXH-iA-cJP.title" = "Text Cell";
@@ -104,8 +101,8 @@
 /* Class = "NSMenuItem"; title = "45"; ObjectID = "OVn-Oj-YAr"; */
 "OVn-Oj-YAr.title" = "45";
 
-/* Class = "NSTextFieldCell"; title = "5x"; ObjectID = "PLX-gY-e0h"; */
-"PLX-gY-e0h.title" = "5x";
+/* Class = "NSTextFieldCell"; title = "4x"; ObjectID = "PLX-gY-e0h"; */
+"PLX-gY-e0h.title" = "4x";
 
 /* Class = "NSTextFieldCell"; title = "External subtitles:"; ObjectID = "RA1-fF-OrB"; */
 "RA1-fF-OrB.title" = "外置字幕:";
@@ -165,7 +162,7 @@
 "bzk-c2-LH5.label" = "音频";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
-"cMu-YF-riv.ibShadowedLabels[0]" = "Default";
+"cMu-YF-riv.ibShadowedLabels[0]" = "默认";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[1] = "4:3"; ObjectID = "cMu-YF-riv"; */
 "cMu-YF-riv.ibShadowedLabels[1]" = "4:3";
@@ -222,7 +219,7 @@
 "iS4-Zr-9Ig.title" = "均衡器:";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
-"iuN-rN-jT7.ibShadowedLabels[0]" = "None";
+"iuN-rN-jT7.ibShadowedLabels[0]" = "无";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[1] = "4:3"; ObjectID = "iuN-rN-jT7"; */
 "iuN-rN-jT7.ibShadowedLabels[1]" = "4:3";
@@ -266,8 +263,8 @@
 /* Class = "NSMenuItem"; title = "1"; ObjectID = "nvA-Ae-4XS"; */
 "nvA-Ae-4XS.title" = "1";
 
-/* Class = "NSTextFieldCell"; title = "10x"; ObjectID = "p63-Nx-yJZ"; */
-"p63-Nx-yJZ.title" = "10x";
+/* Class = "NSTextFieldCell"; title = "16x"; ObjectID = "p63-Nx-yJZ"; */
+"p63-Nx-yJZ.title" = "16x";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "qpa-hD-ImC"; */
 "qpa-hD-ImC.title" = "Text Cell";
@@ -331,3 +328,9 @@
 
 /* Class = "NSMenuItem"; title = "35"; ObjectID = "zcb-7y-OVG"; */
 "zcb-7y-OVG.title" = "35";
+
+"t03-36-Zge.title" = "位置";
+
+"AB5-UZ-euc.ibShadowedLabels[0]" = "加载字幕…";
+
+"Rbb-wh-cLc.ibShadowedLabels[0]" = "在线查找…";

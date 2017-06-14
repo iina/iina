@@ -11,20 +11,32 @@ import Cocoa
 class MPVTrack: NSObject {
 
   /** For binding a none track object to menu, id = 0 */
-  static let noneVideoTrack = MPVTrack(id: 0, type: .video, isDefault: false, isForced: false, isSelected: false, isExternal: false)
+  static let noneVideoTrack: MPVTrack = {
+    let track = MPVTrack(id: 0, type: .video, isDefault: false, isForced: false, isSelected: false, isExternal: false)
+    track.title = NSLocalizedString("track.none", comment: "<None>")
+    return track
+  }()
   /** For binding a none track object to menu, id = 0 */
-  static let noneAudioTrack = MPVTrack(id: 0, type: .audio, isDefault: false, isForced: false, isSelected: false, isExternal: false)
+  static let noneAudioTrack: MPVTrack = {
+    let track = MPVTrack(id: 0, type: .audio, isDefault: false, isForced: false, isSelected: false, isExternal: false)
+    track.title = NSLocalizedString("track.none", comment: "<None>")
+    return track
+  }()
   /** For binding a none track object to menu, id = 0 */
-  static let noneSubTrack = MPVTrack(id: 0, type: .sub, isDefault: false, isForced: false, isSelected: false, isExternal: false)
+  static let noneSubTrack: MPVTrack = {
+    let track = MPVTrack(id: 0, type: .sub, isDefault: false, isForced: false, isSelected: false, isExternal: false)
+    track.title = NSLocalizedString("track.none", comment: "<None>")
+    return track
+  }()
   /** For binding a none track object to menu, id = 0 */
-  static let noneSecongSubTrack = MPVTrack(id: 0, type: .secondSub, isDefault: false, isForced: false, isSelected: false, isExternal: false)
+  static let noneSecondSubTrack = MPVTrack(id: 0, type: .secondSub, isDefault: false, isForced: false, isSelected: false, isExternal: false)
 
-  static func emptyTrack(_ type: TrackType) -> MPVTrack {
+  static func emptyTrack(for type: TrackType) -> MPVTrack {
     switch type {
     case .video: return noneVideoTrack
     case .audio: return noneAudioTrack
     case .sub: return noneSubTrack
-    case .secondSub: return noneSecongSubTrack
+    case .secondSub: return noneSecondSubTrack
     }
 
   }
@@ -54,7 +66,7 @@ class MPVTrack: NSObject {
       let title = self.title ?? ""
       let rawLang = self.lang ?? ""
       let lang = rawLang == "" ? "" : "[\(rawLang)]"
-      let def = self.isDefault ? "(Default)" : ""
+      let def = self.isDefault ? "(" + NSLocalizedString("quicksetting.item_default", comment: "Default") + ")" : ""
       return "#\(self.id) \(title) \(lang) \(def)"
     }
   }

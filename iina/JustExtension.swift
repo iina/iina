@@ -14,18 +14,10 @@ extension Just.HTTPResult {
   var fileName: String? {
     get {
       guard let field = self.headers["Content-Disposition"] else { return nil }
-      return Regex.httpFileName.captures(in: field).at(1)
+      let unicodeArray: [UInt8] = field.unicodeScalars.map { UInt8($0.value) }
+      let unicodeStr = String(bytes: unicodeArray, encoding: String.Encoding.utf8)!
+      return Regex.httpFileName.captures(in: unicodeStr).at(1)
     }
   }
 
-  func saveDataToFolder(_ url: URL, index: Int) -> URL {
-    let url = url.appendingPathComponent("\(index):\(fileName!)")
-    do {
-      try self.content?.write(to: url)
-    } catch {
-      Utility.showAlert(message: "Cannot write data to disk.")
-    }
-    return url
-  }
-  
 }

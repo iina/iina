@@ -1,0 +1,374 @@
+/* Class = "NSMenuItem"; title = "Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
+"0T7-Nu-SL7.title" = "재생목록 보기";
+
+/* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
+"0m7-3r-twH.title" = "URL 열기…";
+
+/* Class = "NSMenuItem"; title = "Normal Size"; ObjectID = "1UK-8n-QPP"; */
+"1UK-8n-QPP.title" = "원본 크기";
+
+/* Class = "NSMenuItem"; title = "IINA"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "IINA";
+
+/* Class = "NSMenu"; title = "Audio Device"; ObjectID = "2Dp-Ol-Zcf"; */
+"2Dp-Ol-Zcf.title" = "오디오 장치";
+
+/* Class = "NSMenuItem"; title = "Jump to beginning"; ObjectID = "2Ya-3g-1hy"; */
+"2Ya-3g-1hy.title" = "처음으로 가기";
+
+/* Class = "NSMenuItem"; title = "Jump to…"; ObjectID = "2id-wn-xsC"; */
+"2id-wn-xsC.title" = "위치로 가기…";
+
+/* Class = "NSMenuItem"; title = "Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
+"2t8-Ot-yoO.title" = "빠른 설정";
+
+/* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
+"4ae-MT-2L1.title" = "오디오 지연 + 0.5초";
+
+/* Class = "NSMenuItem"; title = "Quit IINA"; ObjectID = "4sb-4s-VLi"; */
+"4sb-4s-VLi.title" = "IINA 종료";
+
+/* Class = "NSMenuItem"; title = "About IINA"; ObjectID = "5kV-Vb-QxS"; */
+"5kV-Vb-QxS.title" = "IINA에 관하여";
+
+/* Class = "NSMenu"; title = "Rotation"; ObjectID = "5xN-ZB-VLI"; */
+"5xN-ZB-VLI.title" = "회전";
+
+/* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "6Eq-ni-6hG"; */
+"6Eq-ni-6hG.title" = "전체 화면 전환";
+
+/* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
+"6yE-op-DTS.title" = "5초 후로 가기";
+
+/* Class = "NSMenuItem"; title = "Audio Filters…"; ObjectID = "8Zh-hU-Cc4"; */
+"8Zh-hU-Cc4.title" = "오디오 필터…";
+
+/* Class = "NSMenuItem"; title = "Quick Settings Panel"; ObjectID = "8y7-Cy-lKT"; */
+"8y7-Cy-lKT.title" = "빠른 설정";
+
+/* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
+"9pa-9C-ueQ.title" = "<없음>";
+
+/* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
+"9zk-co-roT.title" = "다운로드한 자막 저장";
+
+/* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
+"16p-PA-x34.title" = "자막";
+
+/* Class = "NSMenuItem"; title = "Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
+"43n-Ed-5kT.title" = "빠른 설정";
+
+/* Class = "NSMenuItem"; title = "Github"; ObjectID = "A9w-iE-gVg"; */
+"A9w-iE-gVg.title" = "Github";
+
+/* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
+"AYu-sK-qS6.title" = "Main Menu";
+
+/* Class = "NSMenuItem"; title = "Screenshot"; ObjectID = "AoP-K6-Kb5"; */
+"AoP-K6-Kb5.title" = "스크린샷";
+
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
+"BOF-NM-1cW.title" = "환경설정…";
+
+/* Class = "NSMenuItem"; title = "Scale Down"; ObjectID = "Bli-YK-Rl0"; */
+"Bli-YK-Rl0.title" = "자막 작게";
+
+/* Class = "NSMenuItem"; title = "Share"; ObjectID = "BtY-iQ-6Pf"; */
+"BtY-iQ-6Pf.title" = "공유";
+
+/* Class = "NSMenuItem"; title = "Advanced Screenshot..."; ObjectID = "CKi-JE-yLT"; */
+"CKi-JE-yLT.title" = "고급 스크린샷…";
+
+/* Class = "NSMenuItem"; title = "File Loop"; ObjectID = "D1y-kv-85s"; */
+"D1y-kv-85s.title" = "파일 반복 재생";
+
+/* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
+"DRb-Y8-xir.title" = "오디오 트랙";
+
+/* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
+"DVo-aG-piG.title" = "닫기";
+
+/* Class = "NSMenuItem"; title = "Chapters Panel"; ObjectID = "DwM-3d-Eb9"; */
+"DwM-3d-Eb9.title" = "챕터 목록 보기";
+
+/* Class = "NSMenu"; title = "Subtitles"; ObjectID = "EKp-Qx-4Mn"; */
+"EKp-Qx-4Mn.title" = "자막";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
+"F2S-fz-NVQ.title" = "도움말";
+
+/* Class = "NSMenuItem"; title = "Documentation / Help"; ObjectID = "FKE-Sm-Kum"; */
+"FKE-Sm-Kum.title" = "설명서 / 도움말";
+
+/* Class = "NSMenu"; title = "Video Track"; ObjectID = "FTu-CF-O0R"; */
+"FTu-CF-O0R.title" = "비디오 트랙";
+
+/* Class = "NSMenuItem"; title = "Chapter"; ObjectID = "Fal-I4-PZk"; */
+"Fal-I4-PZk.title" = "챕터";
+
+/* Class = "NSMenu"; title = "Playback"; ObjectID = "GEO-Iw-cKr"; */
+"GEO-Iw-cKr.title" = "재생";
+
+/* Class = "NSMenuItem"; title = "Audio Track"; ObjectID = "GF1-xB-KcA"; */
+"GF1-xB-KcA.title" = "오디오 트랙";
+
+/* Class = "NSMenuItem"; title = "Playlist"; ObjectID = "Gi5-1S-RQB"; */
+"Gi5-1S-RQB.title" = "재생목록";
+
+/* Class = "NSMenuItem"; title = "Crop"; ObjectID = "Gqg-wU-RRo"; */
+"Gqg-wU-RRo.title" = "화면 자르기";
+
+/* Class = "NSMenuItem"; title = "Reset Audio Delay"; ObjectID = "H3d-jR-YCr"; */
+"H3d-jR-YCr.title" = "오디오 지연 원래대로";
+
+/* Class = "NSMenuItem"; title = "Video"; ObjectID = "H8h-7b-M4v"; */
+"H8h-7b-M4v.title" = "비디오";
+
+/* Class = "NSMenuItem"; title = "Double Size"; ObjectID = "Hal-18-Tnf"; */
+"Hal-18-Tnf.title" = "2배 크기";
+
+/* Class = "NSMenu"; title = "Video"; ObjectID = "HyV-fh-RgO"; */
+"HyV-fh-RgO.title" = "비디오";
+
+/* Class = "NSMenuItem"; title = "Open…"; ObjectID = "IAo-SY-fd9"; */
+"IAo-SY-fd9.title" = "열기…";
+
+/* Class = "NSMenuItem"; title = "Audio Device"; ObjectID = "IXq-yq-uDF"; */
+"IXq-yq-uDF.title" = "오디오 장치";
+
+/* Class = "NSMenuItem"; title = "Horizontal (Mirror)"; ObjectID = "JJq-qH-toq"; */
+"JJq-qH-toq.title" = "좌우 뒤집기";
+
+/* Class = "NSMenuItem"; title = "Open..."; ObjectID = "Kby-lQ-HCW"; */
+"Kby-lQ-HCW.title" = "열기…";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
+"Kd2-mp-pUS.title" = "모두 보이기";
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
+"LE2-aR-0XJ.title" = "모두 앞으로 가져오기";
+
+/* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
+"Lc4-4W-thE.title" = "오디오 지연 - 0.5초";
+
+/* Class = "NSMenuItem"; title = "Subtitle Delay - 0.5s"; ObjectID = "LsU-Qz-dax"; */
+"LsU-Qz-dax.title" = "자막 지연 - 0.5초";
+
+/* Class = "NSMenuItem"; title = "Find Online Subtitles…"; ObjectID = "Mg3-WB-gjZ"; */
+"Mg3-WB-gjZ.title" = "인터넷에서 자막 찾기…";
+
+/* Class = "NSMenuItem"; title = "Save Current Playlist..."; ObjectID = "Mjr-lL-oEt"; */
+"Mjr-lL-oEt.title" = "현재 재생목록 저장…";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
+"NMo-om-nkz.title" = "서비스";
+
+/* Class = "NSMenuItem"; title = "Vertical (Flip)"; ObjectID = "OIu-H0-Mht"; */
+"OIu-H0-Mht.title" = "상하 뒤집기";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "OY7-WF-poV"; */
+"OY7-WF-poV.title" = "최소화";
+
+/* Class = "NSMenuItem"; title = "Hide IINA"; ObjectID = "Olw-nP-bQN"; */
+"Olw-nP-bQN.title" = "IINA 가리기";
+
+/* Class = "NSMenuItem"; title = "Reset Subtitle Scale"; ObjectID = "P1a-ot-P31"; */
+"P1a-ot-P31.title" = "자막 크기 원래대로";
+
+/* Class = "NSMenuItem"; title = "Encoding"; ObjectID = "Pci-OQ-Vni"; */
+"Pci-OQ-Vni.title" = "인코딩";
+
+/* Class = "NSMenu"; title = "Encoding"; ObjectID = "Pf6-5i-B1E"; */
+"Pf6-5i-B1E.title" = "인코딩";
+
+/* Class = "NSMenuItem"; title = "Video Filters…"; ObjectID = "PyY-pR-jz7"; */
+"PyY-pR-jz7.title" = "비디오 필터…";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4"; */
+"R4o-n2-Eq4.title" = "확대/축소";
+
+/* Class = "NSMenuItem"; title = "Website"; ObjectID = "Rqg-VS-aIj"; */
+"Rqg-VS-aIj.title" = "웹사이트";
+
+/* Class = "NSMenuItem"; title = "Fit to Screen"; ObjectID = "SHd-63-Xoh"; */
+"SHd-63-Xoh.title" = "화면에 맞추기";
+
+/* Class = "NSMenuItem"; title = "Reset Subtitle Delay"; ObjectID = "SLr-6g-Mgh"; */
+"SLr-6g-Mgh.title" = "자막 지연 원래대로";
+
+/* Class = "NSMenuItem"; title = "Step Backward 5s"; ObjectID = "Sif-85-FF1"; */
+"Sif-85-FF1.title" = "5초 전으로 가기";
+
+/* Class = "NSMenuItem"; title = "Subtitle Delay: "; ObjectID = "THG-4o-U6A"; */
+"THG-4o-U6A.title" = "자막 지연: ";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
+"Td7-aD-5lo.title" = "윈도우";
+
+/* Class = "NSMenuItem"; title = "Pause"; ObjectID = "UOE-MJ-8ku"; */
+"UOE-MJ-8ku.title" = "일시 정지";
+
+/* Class = "NSMenu"; title = "Second Subtitle"; ObjectID = "UwY-P2-Xdb"; */
+"UwY-P2-Xdb.title" = "부자막";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
+"Vdr-fp-XzO.title" = "기타 가리기";
+
+/* Class = "NSMenuItem"; title = "Mute"; ObjectID = "WOL-Us-ByA"; */
+"WOL-Us-ByA.title" = "소리 끔";
+
+/* Class = "NSMenuItem"; title = "Volume + 5%"; ObjectID = "Wbq-vt-hzX"; */
+"Wbq-vt-hzX.title" = "음량 + 5%";
+
+/* Class = "NSMenuItem"; title = "Next Frame"; ObjectID = "XDC-Pc-rS1"; */
+"XDC-Pc-rS1.title" = "다음 프레임";
+
+/* Class = "NSMenuItem"; title = "Scale Up"; ObjectID = "XHu-Dl-Vq2"; */
+"XHu-Dl-Vq2.title" = "자막 크게";
+
+/* Class = "NSMenuItem"; title = "Smaller Size"; ObjectID = "ZOF-MG-6II"; */
+"ZOF-MG-6II.title" = "화면 작게";
+
+/* Class = "NSMenuItem"; title = "Volume - 1%"; ObjectID = "Zhv-Bz-I5V"; */
+"Zhv-Bz-I5V.title" = "음량 - 1%";
+
+/* Class = "NSMenuItem"; title = "Custom Touch Bar..."; ObjectID = "ZnF-yX-7jP"; */
+"ZnF-yX-7jP.title" = "터치바 사용자 설정…";
+
+/* Class = "NSMenuItem"; title = "Playlist Loop"; ObjectID = "aSc-P6-fiZ"; */
+"aSc-P6-fiZ.title" = "재생목록 반복 재생";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
+"aUF-d1-5bR.title" = "윈도우";
+
+/* Class = "NSMenu"; title = "Playlist"; ObjectID = "aXa-aM-Jaq"; */
+"aXa-aM-Jaq.title" = "재생목록";
+
+/* Class = "NSMenuItem"; title = "Rotation"; ObjectID = "ar5-3T-O9h"; */
+"ar5-3T-O9h.title" = "회전";
+
+/* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
+"bib-Uj-vzu.title" = "파일";
+
+/* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
+"bwz-r0-peR.title" = "재생 정보 보기";
+
+/* Class = "NSMenuItem"; title = "Normal Size Retina"; ObjectID = "c1x-bx-69F"; */
+"c1x-bx-69F.title" = "레티나 원본 크기";
+
+/* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
+"c6Y-0e-vgf.title" = "음량 + 1%";
+
+/* Class = "NSMenu"; title = "Chapter"; ObjectID = "d9c-me-L2H"; */
+"d9c-me-L2H.title" = "챕터";
+
+/* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
+"d15-8v-dXA.title" = "화면비";
+
+/* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
+"dMs-cI-mzQ.title" = "파일";
+
+/* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
+"deS-xK-iBb.title" = "재생 중단 후 재생목록 지우기";
+
+/* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
+"eo2-Tt-SLx.title" = "화면 자르기";
+
+/* Class = "NSMenuItem"; title = "Audio Delay:"; ObjectID = "foC-r3-8mp"; */
+"foC-r3-8mp.title" = "오디오 지연:";
+
+/* Class = "NSMenuItem"; title = "Check Update..."; ObjectID = "gMo-qL-m08"; */
+"gMo-qL-m08.title" = "업데이트 확인…";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
+"hz9-B4-Xy5.title" = "서비스";
+
+/* Class = "NSMenuItem"; title = "A-B Loop"; ObjectID = "i3P-Xw-8D7"; */
+"i3P-Xw-8D7.title" = "구간 반복";
+
+/* Class = "NSMenuItem"; title = "Volume:"; ObjectID = "iQF-1S-9EK"; */
+"iQF-1S-9EK.title" = "음량:";
+
+/* Class = "NSMenuItem"; title = "Video Track"; ObjectID = "j8P-Gb-HR7"; */
+"j8P-Gb-HR7.title" = "비디오 트랙";
+
+/* Class = "NSMenuItem"; title = "Playback"; ObjectID = "jxT-CU-nIS"; */
+"jxT-CU-nIS.title" = "재생";
+
+/* Class = "NSMenuItem"; title = "Load External Subtitle…"; ObjectID = "k6x-hf-ATi"; */
+"k6x-hf-ATi.title" = "외부 자막 불러오기…";
+
+/* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
+"lDC-IC-peP.title" = "화면 크게";
+
+/* Class = "NSMenuItem"; title = "Audio"; ObjectID = "lYN-0x-lzT"; */
+"lYN-0x-lzT.title" = "오디오";
+
+/* Class = "NSMenuItem"; title = "Go To Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
+"lj0-Oo-7nB.title" = "스크린샷 폴더로 가기";
+
+/* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
+"mGw-jm-5x2.title" = "부자막";
+
+/* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
+"mND-N8-z6o.title" = "화면 속 화면 들어가기";
+
+/* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
+"mT1-1m-HwN.title" = "뒤집기";
+
+/* Class = "NSMenu"; title = "Flip"; ObjectID = "n90-to-nRT"; */
+"n90-to-nRT.title" = "뒤집기";
+
+/* Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ"; */
+"oas-Oc-fiZ.title" = "최근 파일 열기";
+
+/* Class = "NSMenuItem"; title = "Previous Frame"; ObjectID = "oxF-BB-lBy"; */
+"oxF-BB-lBy.title" = "이전 프레임";
+
+/* Class = "NSMenuItem"; title = "Subtitle Delay +0.5s"; ObjectID = "pAo-L5-qTO"; */
+"pAo-L5-qTO.title" = "자막 지연 + 0.5초";
+
+/* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
+"pdj-9C-Fn1.title" = "음량 - 5%";
+
+/* Class = "NSMenuItem"; title = "Font..."; ObjectID = "rme-fr-5rr"; */
+"rme-fr-5rr.title" = "서체…";
+
+/* Class = "NSMenu"; title = "Audio"; ObjectID = "sW8-ri-eA5"; */
+"sW8-ri-eA5.title" = "오디오";
+
+/* Class = "NSMenuItem"; title = "Half Size"; ObjectID = "snW-S8-Cw5"; */
+"snW-S8-Cw5.title" = "절반 크기";
+
+/* Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "tXI-mr-wws"; */
+"tXI-mr-wws.title" = "최근 파일 열기";
+
+/* Class = "NSMenuItem"; title = "Subtitle"; ObjectID = "uGZ-lo-pJJ"; */
+"uGZ-lo-pJJ.title" = "자막";
+
+/* Class = "NSMenu"; title = "IINA"; ObjectID = "uQy-DD-JDr"; */
+"uQy-DD-JDr.title" = "IINA";
+
+/* Class = "NSMenuItem"; title = "Clear Menu"; ObjectID = "vNY-rz-j42"; */
+"vNY-rz-j42.title" = "메뉴 지우기";
+
+/* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
+"wex-rX-PcY.title" = "모든 윈도우 위에 두기";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
+"wpr-3q-Mcd.title" = "도움말";
+
+/* Class = "NSMenuItem"; title = "<None>"; ObjectID = "wrS-JG-jF6"; */
+"wrS-JG-jF6.title" = "<없음>";
+
+/* Class = "NSMenuItem"; title = "Subtitles"; ObjectID = "xDJ-GA-Gjs"; */
+"xDJ-GA-Gjs.title" = "자막";
+
+/* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
+"yHI-7D-OaI.title" = "디인터레이스";
+
+"npH-8B-XA4.title" = "현재 파일 삭제";
+
+"0os-i1-tJF.title" = "IINA를 기본 프로그램으로 설정…";
+
+"LND-1n-DU2.title" = "재생 기록 보기";

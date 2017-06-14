@@ -128,6 +128,14 @@ class KeyCodeHelper {
     0x7F: ("POWER", nil) // This should be KeyCode::PC_POWER.
   ]
 
+  static var reversedKeyMapForShift: [String: String] = keyMap.reduce([:]) { partial, keyMap in
+    var partial = partial
+    if let value = keyMap.value.1 {
+      partial[value] = keyMap.value.0
+    }
+    return partial
+  }
+
   static func canBeModifiedByShift(_ key: UInt16) -> Bool {
     return key != 0x24 && (key <= 0x2F || key == 0x32)
   }

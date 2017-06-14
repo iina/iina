@@ -1,37 +1,32 @@
-![IINA Icon](https://github.com/lhc70000/iina/raw/master/iina/Assets.xcassets/AppIcon.appiconset/256-1.png)
+<p align="center">
+<img src="https://github.com/lhc70000/iina/raw/master/iina/Assets.xcassets/AppIcon.appiconset/256-1.png" />
+</p>
 
-# IINA
+<h1 align="center">IINA</h1>
 
-IINA is a **modern** video player for macOS.  
-Published under [GPLv3](https://github.com/lhc70000/iina/blob/master/LICENSE).
+<p align="center">IINA is the <b>modern</b> video player for macOS.</p>
 
-Website: [https://lhc70000.github.io/iina/](https://lhc70000.github.io/iina/)
+<p align=center>
+<a href="https://lhc70000.github.io/iina/">Website</a> · 
+<a href="https://github.com/lhc70000/iina/releases">Releases</a> · 
+<a href="https://t.me/joinchat/AAAAAEBemW7dU8X7IHShwQ">Telegram Group</a>
+</p>
 
-Releases: [https://github.com/lhc70000/iina/releases](https://github.com/lhc70000/iina/releases)
-
-Telegram group: 
-[https://t.me/joinchat/AAAAAEBemW7dU8X7IHShwQ](https://t.me/joinchat/AAAAAEBemW7dU8X7IHShwQ)
-
----
-
-When raising an issue, please **use English** if possible.  
-
-在提 issue 时，请尽量使用**英文**！  
+***
 
 # Features
 
 - Based on [mpv](https://github.com/mpv-player/mpv), a powerful media player
 - Designed for modern macOS (10.10+)
-- User-friendly interface
-- All the features you need for videos, audios and subtitles
-- Supported basic playlist and chapters
+- Aims to offer the best user experience
+- All the features you need for videos, audios, subtitles, playlist, chapters and so on
 - MPV config files and script system are available for advanced users
-- Written in Swift, followed up on new technologies like Touch Bar
+- Written in Swift, followed up on new technologies like Touch Bar and Force Touch
 - Still in active development
 
 # Build
 
-## Use pre-compiled dylibs
+**Use pre-compiled dylibs**
 
 1. Please make sure CocoaPods is installed.
 
@@ -48,17 +43,22 @@ When raising an issue, please **use English** if possible.
   ```
   pod install
   ```
+  
+3. Open `.xcworkspace` file.
 
 Theoretically no extra work is needed. _If you are unwilling to use the provided dylibs, follow the instructions below._
 
-## Build with the lastest mpv
+**Build with the lastest mpv**
 
 * Install mpv
 
   ```
   brew install mpv --with-uchardet
   ```
-  Currently `ytdl` is not included when building, but will be considered in later versions.
+  
+  Feel free to include any other libraries if you like.
+  
+* Copy latest [header files](https://github.com/mpv-player/mpv/tree/master/libmpv) into `libmpv/include/mpv/`
 
 * other/parse_doc.rb
 
@@ -69,17 +69,10 @@ Theoretically no extra work is needed. _If you are unwilling to use the provided
   This script will deploy the depended libraries into `libmpv/libs`.
   Make sure you have a phase copying of all these dylibs in Xcode's build settings.
 
-## Contribute
+## Contributing
 
 **Please read [CONTRIBUTING.md](https://github.com/lhc70000/iina/blob/master/CONTRIBUTING.md) before opening an issue or pull request.**
 
-Any feedback is appreciated! You can
+**Please ask for permission from the author before starting working on a pull request** to make sure that there's not someone else working on the same feature.
 
-- Star it or fork it
-- Download and test it
-- Send bug reports
-- Send feature requests
-- Provide suggestions on code structures or UI designs
-- Provide localizatons
-- ...
-
+Any feedback/contribution is appreciated!

@@ -15,21 +15,36 @@ class SleepPreventer: NSObject {
 
   static private var assertionID = IOPMAssertionID()
 
+  static private var lock = 0
+
   static func preventSleep() {
+    if lock != 0 {
+      lock += 1
+      return
+    }
+    
     let success = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep as NSString,
                                               IOPMAssertionLevel(kIOPMAssertionLevelOn),
                                               reason,
                                               &assertionID)
-    if success != kIOReturnSuccess {
-      Utility.showAlert(message: "Cannot prevent display sleep")
+    if success == kIOReturnSuccess {
+      lock = 1
+    } else {
+      Utility.showAlert("sleep")
     }
   }
 
   static func allowSleep() {
-    let success = IOPMAssertionRelease(assertionID)
-    if success != kIOReturnSuccess {
-      // do not show alert here
-      Utility.log("Cannot allow display sleep")
+    if lock > 1 {
+      lock -= 1
+      return
+    } else {
+      let success = IOPMAssertionRelease(assertionID)
+      if success == kIOReturnSuccess {
+        lock = 0
+      } else {
+        Utility.log("Cannot allow display sleep")
+      }
     }
   }
 

@@ -1,4 +1,6 @@
-/* Permission to use, copy, modify, and/or distribute this software for any
+/* Copyright (C) 2017 the mpv developers
+ *
+ * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
  *
@@ -11,16 +13,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*
- * Note: the client API is licensed under ISC (see above) to ease
- * interoperability with other licenses. But keep in mind that the
- * mpv core is still mostly GPLv2+. It's up to lawyers to decide
- * whether applications using this API are affected by the GPL.
- * One argument against this is that proprietary applications
- * using mplayer in slave mode is apparently tolerated, and this
- * API is basically equivalent to slave mode.
- */
-
 #ifndef MPV_CLIENT_API_OPENGL_CB_H_
 #define MPV_CLIENT_API_OPENGL_CB_H_
 
@@ -31,21 +23,22 @@ extern "C" {
 #endif
 
 /**
- * Warning: this API is not stable yet.
  *
  * Overview
  * --------
  *
  * This API can be used to make mpv render into a foreign OpenGL context. It
- * can be used to handle video display. Be aware that using this API is not
- * required: you can embed the mpv window by setting the mpv "wid" option to
- * a native window handle (see "Embedding the video window" section in the
- * client.h header). In general, using the "wid" option is recommended over
- * the OpenGL API, because it's simpler and more flexible on the mpv side.
+ * can be used to handle video display.
  *
  * The renderer needs to be explicitly initialized with mpv_opengl_cb_init_gl(),
  * and then video can be drawn with mpv_opengl_cb_draw(). The user thread can
  * be notified by new frames with mpv_opengl_cb_set_update_callback().
+ *
+ * You can output and embed video without this API by setting the mpv "wid"
+ * option to a native window handle (see "Embedding the video window" section
+ * in the client.h header). In general, using the opengl-cb API is recommended,
+ * because window embedding can cause various issues, especially with GUI
+ * toolkits and certain platforms.
  *
  * OpenGL interop
  * --------------
@@ -117,15 +110,19 @@ extern "C" {
  *
  * While "normal" mpv loads the OpenGL hardware decoding interop on demand,
  * this can't be done with opengl_cb for internal technical reasons. Instead,
- * make it load the interop at load time by setting the "hwdec-preload"="auto"
- * option before calling mpv_opengl_cb_init_gl().
+ * make it load the interop at load time by setting the
+ * "opengl-hwdec-interop"="auto" option before calling mpv_opengl_cb_init_gl()
+ * ("hwdec-preload" in older mpv releases).
  *
  * There may be certain requirements on the OpenGL implementation:
  * - Windows: ANGLE is required (although in theory GL/DX interop could be used)
  * - Intel/Linux: EGL is required, and also a glMPGetNativeDisplay() callback
  *                must be provided (see sections below)
- * - nVidia/Linux: GLX is required
+ * - nVidia/Linux: GLX is required (if you force "cuda", it should work on EGL
+ *                 as well, if you have recent enough drivers and the
+ *                 "hwaccel" option is set to "cuda" as well)
  * - OSX: CGL is required (CGLGetCurrentContext() returning non-NULL)
+ * - iOS: EAGL is required (EAGLContext.currentContext returning non-nil)
  *
  * Once these things are setup, hardware decoding can be enabled/disabled at
  * any time by setting the "hwdec" property.
@@ -170,26 +167,9 @@ extern "C" {
  * Windowing system interop on MS win32
  * ------------------------------------
  *
- * Warning: the following is only required if native OpenGL instead of ANGLE
- *          is used. ANGLE is recommended, because it also allows direct
- *          hardware decoding interop without further setup by the libmpv
- *          API user, while the same with native OpenGL is either very hard
- *          to do (via GL/DX interop with D3D9), or not implemented.
- *
- * If OpenGL switches to fullscreen, most players give it access GPU access,
- * which means DXVA2 hardware decoding in mpv won't work. This can be worked
- * around by giving mpv access to Direct3D device, which it will then use to
- * create a decoder. The device can be either the real device used for display,
- * or a "blank" device created before switching to fullscreen.
- *
- * You can provide glMPGetNativeDisplay as described in the previous section.
- * If it is called with name set to "IDirect3DDevice9", it should return a
- * IDirect3DDevice9 pointer (or NULL if not available). libmpv will release
- * this interface when it is done with it.
- *
- * In previous libmpv releases, this used "GL_MP_D3D_interfaces" and
- * "glMPGetD3DInterface". This is deprecated; use glMPGetNativeDisplay instead
- * (the semantics are 100% compatible).
+ * You should use ANGLE, and make sure your application and libmpv are linked
+ * to the same ANGLE DLLs. libmpv will pick the device context (needed for
+ * hardware decoding) from the current ANGLE EGL context.
  *
  * Windowing system interop on RPI
  * -------------------------------
@@ -306,6 +286,7 @@ int mpv_opengl_cb_init_gl(mpv_opengl_cb_context *ctx, const char *exts,
  */
 int mpv_opengl_cb_draw(mpv_opengl_cb_context *ctx, int fbo, int w, int h);
 
+#if MPV_ENABLE_DEPRECATED
 /**
  * Deprecated. Use mpv_opengl_cb_draw(). This function is equivalent to:
  *
@@ -318,6 +299,7 @@ int mpv_opengl_cb_draw(mpv_opengl_cb_context *ctx, int fbo, int w, int h);
  * was never marked as stable).
  */
 int mpv_opengl_cb_render(mpv_opengl_cb_context *ctx, int fbo, int vp[4]);
+#endif
 
 /**
  * Tell the renderer that a frame was flipped at the given time. This is

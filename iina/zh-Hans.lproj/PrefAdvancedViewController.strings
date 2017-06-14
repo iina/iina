@@ -18,7 +18,7 @@
 "E3I-Q7-9t1.headerCell.title" = "选项";
 
 /* Class = "NSTextFieldCell"; title = "All following settings need restarting application to take effect."; ObjectID = "HMa-Vz-EUk"; */
-"HMa-Vz-EUk.title" = "以下所有设置需要重启软件才能生效。";
+"HMa-Vz-EUk.title" = "以下所有设置需要重启 IINA 才会生效。";
 
 /* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
 "JDA-g3-RNX.title" = "打开日志文件夹";
@@ -27,7 +27,7 @@
 "LCd-uY-Yze.title" = "记录日志";
 
 /* Class = "NSButtonCell"; title = "Choose directory"; ObjectID = "MRT-u8-xTX"; */
-"MRT-u8-xTX.title" = "选择目录";
+"MRT-u8-xTX.title" = "选择目录…";
 
 /* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "SX9-fy-bss"; */
 "SX9-fy-bss.headerCell.title" = "值";

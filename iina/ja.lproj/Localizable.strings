@@ -1,0 +1,202 @@
+/* 
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+// Common
+"general.on" = "オン";
+"general.off" = "オフ";
+"general.login" = "ログイン";
+"general.logout" = "ログアウト";
+"general.ok" = "OK";
+"general.cancel" = "キャンセル";
+"general.username" = "ユーザ名";
+"general.password" = "パスワード";
+
+// PlaylistViewController.swift
+"playlist.playlist_cap" = "プレイリスト";
+"playlist.chapter_cap" = "チャプタ";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "バッファ中... %d%%";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "デフォルト";
+"quicksetting.item_none" = "なし";
+
+// OSDMessage.swift
+"osd.pause" = "一時停止";
+"osd.resume" = "再開";
+"osd.volume" = "音量: %i";
+"osd.speed" = "速度: %.2fx";
+"osd.aspect" = "アスペクト比: %@";
+"osd.crop" = "クロップ: %@";
+"osd.rotate" = "回転: %i°";
+"osd.deinterlace" = "インターレース解除: %@";
+"osd.audio_delay.nodelay" = "オーディオディレイ: ディレイなし";
+"osd.audio_delay.later" = "オーディオディレイ: %.2f秒 遅く";
+"osd.audio_delay.earlier" = "オーディオディレイ: %.2f秒 早く";
+"osd.sub_delay.nodelay" = "字幕ディレイ: ディレイなし";
+"osd.sub_delay.later" = "字幕ディレイ: %.2f秒 遅く";
+"osd.sub_delay.earlier" = "字幕ディレイ: %.2f秒 早く";
+"osd.subtitle_pos" = "字幕の位置: %.1f";
+"osd.mute" = "ミュート";
+"osd.unmute" = "ミュート解除";
+"osd.screenshot" = "スクリーンショットを保存しました";
+"osd.abloop.a" = "AB-リピート: A";
+"osd.abloop.b" = "AB-リピート: B";
+"osd.abloop.clear" = "AB-リピート: クリア";
+"osd.stop" = "一時停止";
+"osd.chapter" = "チャプタ: %@";
+"osd.subtitle_scale" = "字幕の大きさ: %.2fx";
+"osd.add_to_playlist" = "%i個のファイルをプレイリストに追加しました";
+"osd.clear_playlist" = "プレイリストをクリア";
+"osd.video_eq.contrast" = "コントラスト: %i";
+"osd.video_eq.gamma" = "ガンマ値: %i";
+"osd.video_eq.hue" = "色調: %i";
+"osd.video_eq.saturation" = "彩度: %i";
+"osd.video_eq.brightness" = "明るさ: %i";
+"osd.find_online_sub" = "オンラインで字幕を探しています...";
+"osd.sub_not_found" = "字幕が見つかりませんでした";
+"osd.sub_found" = "%d個の字幕が見つかりました。ダウンロードしています...";
+"osd.sub_downloaded" = "字幕をダウンロードしました";
+"osd.sub_saved" = "字幕を保存しました";
+"osd.network_error" = "ネットワークエラー";
+"osd.file_error" = "ファイルの読み込みエラー";
+"osd.cannot_login" = "ログインできません";
+"osd.canceled" = "キャンセルされました";
+
+"update.title_update_found" = "アップデートがあります";
+"update.title_no_update" = "アップデートはありません";
+"update.title_error" = "エラー";
+"update.update_found" = "最新のバージョンが見つかりました! IINAは現在α版のため、最新のバージョンを推奨しています。WebサイトかGithubよりダウンロードしてください:";
+"update.no_update" = "最新のバージョンです。";
+"update.check_failed" = "アップデートが確認できませんでした。バージョンが古すぎる可能性があります。WebサイトまたはGithubをご確認ください。";
+"update.new_version" = "新たなバージョン:";
+"update.dl_from_website" = "Webサイトへ移動";
+"update.dl_from_github" = "Githubへ移動";
+
+"preference.title" = "環境設定";
+"preference.general" = "一般";
+"preference.ui" = "UI";
+"preference.codec" = "コーデック";
+"preference.subtitle" = "字幕";
+"preference.network" = "ネットワーク";
+"preference.control" = "コントロール";
+"preference.keybindings" = "キーの割り当て";
+"preference.advanced" = "拡張";
+"preference.scripts" = "スクリプト";
+"preference.not_logged_in" = "ログインしていません";
+"preference.logged_in_as" = "%@でログイン中";
+
+"menu.volume"= "音量: %d";
+"menu.audio_delay" = "オーディオディレイ: %.2fs";
+"menu.sub_delay" = "字幕ディレイ: %.2fs";
+"menu.fullscreen" = "フルスクリーン化";
+"menu.exit_fullscreen" = "フルスクリーンを解除";
+"menu.pip" = "Enter Picture-in-Picture";
+"menu.exit_pip" = "Exit Picture-in-Picture";
+"menu.pause" = "一時停止";
+"menu.resume" = "再生";
+
+"track.none" = "<なし>";
+
+// Alerts
+"alert.title_error" = "エラー";
+"alert.title_warning" = "警告";
+"alert.title_info" = "情報";
+
+"alert.fatal_error" = "致命的なエラー: %@ \nアプリケーションを終了します。";
+"alert.mpv_error" = "ユーザーオプション %@ 設定時にエラー %@ (%@)が発生しました。";
+"alert.sleep" = "ディスプレイのスリープを解除できません!";
+
+"alert.unsupported_audio" = "対応していない外部のオーディオファイルです。";
+"alert.unsupported_sub" = "対応していない外部の字幕ファイルです。";
+"alert.unsupported_url" = "対応していないURLです。";
+"alert.wrong_url_format" = "URLの形式が間違っています。";
+
+"alert.error_open" = "ファイルもしくはURLを開けません!";
+"alert.error_finding_file" = "%@ が見つかりません!";
+"alert.error_loading_script" = "スクリプトを読み込めません %@!";
+"alert.error_saving_file" = "保存時にエラーが起きました %@: %@";
+"alert.error_deleting_file" = "ファイルを削除できません。";
+
+"alert.config.new.title" = "設定の新規作成";
+"alert.config.new.message" = "新しい設定ファイルの名前を入力を入力してください。";
+"alert.config.duplicate.title" = "設定の複製";
+"alert.config.duplicate.message" = "複製する設定ファイルの名前を入力してください。";
+"alert.config.empty_name" = "名前を入力してください。";
+"alert.config.name_existing" = "すでに同名のファイルが存在しています。";
+"alert.config.file_existing.title" = "ファイルが既に存在しています";
+"alert.config.file_existing.message" = "上書きするにはOKを選択、Finderで表示するにはキャンセルを選択してください。";
+"alert.config.cannot_create" = "設定ファイルは作成できません!";
+"alert.config.cannot_write" = "設定ファイルには書き込めません!";
+
+"alert.filter.incorrect" = "フィルタの設定時にエラーが起きました。パラメータの形式を確認してください。";
+"alert.add_filter.title" = "フィルタの新規作成";
+"alert.add_filter.message" = "mpvの vf または af オプションの形式でフィルタ名を入力してください。";
+
+"alert.keybinding_config.error" = "キーバインディングの設定ファイル読み込み時にエラーが発生しました \"%@\"! IINAのデフォルト設定に戻します。設定を確認してください。";
+
+"alert.extra_option.cannot_read" = "mpvの追加オプションを読み込めません。";
+"alert.extra_option.empty" = "キーもしくは値を空にできません!";
+"alert.extra_option.error" = "オプションの設定 --%@=%@ 返り値 %d でエラーが発生しました。設定 > 拡張 より追加オプションの設定を確認してください。";
+"alert.extra_option.config_folder" = "設定ディレクトリの設定エラー\"%@\".";
+
+"alert.playlist.error_deleting" = "削除エラー: %@";
+
+"alert.sub.no_selected" = "最初にダウンロードした字幕を選択してください。";
+"alert.sub_lang_not_set" = "opensubtitlesを利用する前に、環境設定で字幕の優先言語を設定してください。英語(eng)が今回使用されます。";
+"alert.sub.cannot_save_passwd" = "パスワードをKeychainに保存できません: %@";
+"alert.sub.cannot_login" = "ログインできません。ユーザー名とパスワード、ネットワーク環境をご確認ください。\n\n%@";
+
+"alert.set_default.title" = "IINAをデフォルトのアプリケーションに設定";
+"alert.set_default.message" = "対応する形式のファイルすべてにIINAを設定します。";
+"alert.set_default.success" = "完了しました。(成功: %d件, 失敗: %d件)";
+
+"alert.add_watch.title" = "監視するmpvのプロパティを追加";
+"alert.add_watch.message" = "有効なmpvのプロパティ名を入力してください。";
+
+"alert.jump_to.title" = "時間の指定";
+"alert.jump_to.message" = "再生を開始する時間を入力してください。例: 20:35";
+
+"alert.opensub.login.title" = "Opensubtitlesにログイン";
+"alert.opensub.login.message" = "ユーザ名とパスワードを入力してください。";
+
+"alert.open_url.title" = "URLを開く";
+"alert.open_url.message" = "URLを入力してください:";
+"alert.choose_media_file.title" = "メディアファイルを選択";
+
+"alert.delete_history.title" = "再生履歴の削除";
+"alert.delete_history.message" = "選択した項目を削除しますか?";
+
+"pl_menu.title_multi" = "%d個のアイテム";
+"pl_menu.play_next" = "次を再生";
+"pl_menu.remove" = "削除";
+"pl_menu.remove_multi" = "選択して削除";
+"pl_menu.delete" = "ゴミ箱へ移動";
+"pl_menu.delete_multi" = "選択したファイルをゴミ箱へ移動";
+"pl_menu.delete_after_play" = "再生した後にゴミ箱へ移動";
+"pl_menu.delete_after_play_multi" = "再生した後に選択したファイルをゴミ箱へ移動";
+"pl_menu.reveal_in_finder" = "Finderで表示";
+"pl_menu.add_item" = "アイテムの追加…";
+"pl_menu.clear_playlist" = "プレイリストのクリア";
+
+"keymapping.title" = "キーマッピング";
+"keymapping.message" = "保存するには何かキーを押してください。";
+
+"filter.video_filters" = "ビデオフィルタ一覧";
+"filter.audio_filters" = "オーディオフィルタ一覧";
+
+
+// FIXME
+// Fall back to English
+"alert.delete_history.title" = "Delete Playback History";
+"alert.delete_history.message" = "Are you sure to delete select entries?";
+
+"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
+"pl_menu.add_sub" = "Add Subtitle…";
+"pl_menu.wrong_sub" = "Wrong Subtitle!";

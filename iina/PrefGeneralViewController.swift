@@ -53,12 +53,16 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
   // MARK: - IBAction
 
   @IBAction func chooseScreenshotPathAction(_ sender: AnyObject) {
-    let _ = Utility.quickOpenPanel(title: "Choose screenshot save path", isDir: true) {
-      url in
+    Utility.quickOpenPanel(title: "Choose screenshot save path", isDir: true) { url in
       UserDefaults.standard.set(url.path, forKey: Preference.Key.screenshotFolder)
       UserDefaults.standard.synchronize()
     }
   }
 
+  @IBAction func rememberRecentChanged(_ sender: NSButton) {
+    if sender.state == NSOffState {
+      NSDocumentController.shared().clearRecentDocuments(self)
+    }
+  }
 
 }

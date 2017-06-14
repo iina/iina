@@ -1,0 +1,172 @@
+/* (No Commment) */
+"absolute" = "s";
+
+/* (No Commment) */
+"absolute+keyframe" = "s (keyframe)";
+
+/* (No Commment) */
+"absolute-percent" = "%";
+
+/* (No Commment) */
+"absolute-percent+keyframe" = "% (keyframe)";
+
+/* (No Commment) */
+"add" = "dodaj";
+
+/* (No Commment) */
+"backward" = "do tyłu";
+
+/* (No Commment) */
+"by" = "by";
+
+/* (No Commment) */
+"cmd.ab-loop" = "A-B loop";
+
+/* (No Commment) */
+"cmd.add" = "Zmień";
+
+/* (No Commment) */
+"cmd.cycle" = "Powtarzaj";
+
+/* (No Commment) */
+"cmd.cycle-values" = "Powtarzaj w";
+
+/* (No Commment) */
+"cmd.frame-back-step" = "Poprzednia klatka";
+
+/* (No Commment) */
+"cmd.frame-step" = "Następna klatka";
+
+/* (No Commment) */
+"cmd.ignore" = "Ignoruj";
+
+/* (No Commment) */
+"cmd.multiply" = "Zwielokrotniać";
+
+/* (No Commment) */
+"cmd.playlist-clear" = "Wyczyść playliste";
+
+/* (No Commment) */
+"cmd.playlist-next" = "Następny plik";
+
+/* (No Commment) */
+"cmd.playlist-prev" = "Poprzedni plik";
+
+/* (No Commment) */
+"cmd.playlist-remove" = "Usuń obecny";
+
+/* (No Commment) */
+"cmd.playlist-shuffle" = "Pomieszaj";
+
+/* (No Commment) */
+"cmd.quit" = "Wyjdź";
+
+/* (No Commment) */
+"cmd.seek" = "Przeszukaj";
+
+/* (No Commment) */
+"cmd.set" = "Ustaw";
+
+/* (No Commment) */
+"cmd.stop" = "Zastopuj";
+
+/* (No Commment) */
+"cmd.write-watch-later-config" = "Nagraj historie odtwarzania";
+
+/* (No Commment) */
+"forward" = "dalej";
+
+/* (No Commment) */
+"in" = "w";
+
+/* (No Commment) */
+"minus" = "minus";
+
+/* (No Commment) */
+"no" = "Nie";
+
+/* (No Commment) */
+"opt.audio" = "Audio Track";
+
+/* (No Commment) */
+"opt.audio-delay" = "Opóźnienie dźwięku";
+
+/* (No Commment) */
+"opt.brightness" = "Jasność";
+
+/* (No Commment) */
+"opt.chapter" = "Rozdział";
+
+/* (No Commment) */
+"opt.contrast" = "Kontrast";
+
+/* (No Commment) */
+"opt.deinterlace" = "Usuwanie przeplotu";
+
+/* (No Commment) */
+"opt.fullscreen" = "Tryb pełnoekranowy";
+
+/* (No Commment) */
+"opt.gamma" = "Gamma";
+
+/* (No Commment) */
+"opt.mute" = "Wycisz";
+
+/* (No Commment) */
+"opt.pause" = "Pauza";
+
+/* (No Commment) */
+"opt.saturation" = "Nasycenie";
+
+/* (No Commment) */
+"opt.speed" = "Prędkość";
+
+/* (No Commment) */
+"opt.sub" = "Ścieżka napisów";
+
+/* (No Commment) */
+"opt.sub-delay" = "Opóźnienie napisów";
+
+/* (No Commment) */
+"opt.sub-pos" = "Pozycja napisów";
+
+/* (No Commment) */
+"opt.sub-scale" = "Rozmiar napisów";
+
+/* (No Commment) */
+"opt.sub-visibility" = "Widoczność napisów";
+
+/* (No Commment) */
+"opt.video" = "Video Track";
+
+/* (No Commment) */
+"opt.volume" = "Głośność";
+
+/* (No Commment) */
+"relative" = "s";
+
+/* (No Commment) */
+"relative+exact" = "s (exact)";
+
+/* (No Commment) */
+"relative-percent" = "%";
+
+/* (No Commment) */
+"relative-percent+exact" = "% (exact)";
+
+/* (No Commment) */
+"seek-to" = "to";
+
+/* (No Commment) */
+"to" = "to";
+
+/* (No Commment) */
+"yes" = "Tak";
+
+"read.set" = "Ustaw {{property}} na {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Pomnóż {{property}} przez {{factor}}x";
+"read.cycle" = "Cykl {{property}}{{#dir_down}} W dół {{/dir_down}}";
+"read.cycle-values" = "Cykl {{property}} w ({{{values}}})";
+"read.seek" = "Szukaj {{#fwd}}Do przodu{{/fwd}}{{#bwd}}Do dołu{{/bwd}}{{#abs}}do{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Szukaj w{{#skip_1}}następny{{/skip_1}}{{#skip_-1}}poprzedni{{/skip_-1}} napisy";

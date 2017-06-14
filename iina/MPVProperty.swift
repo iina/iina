@@ -37,10 +37,10 @@ struct MPVProperty {
   static let avsync = "avsync"
   /** total-avsync-change */
   static let totalAvsyncChange = "total-avsync-change"
-  /** drop-frame-count */
-  static let dropFrameCount = "drop-frame-count"
-  /** vo-drop-frame-count */
-  static let voDropFrameCount = "vo-drop-frame-count"
+  /** decoder-frame-drop-count */
+  static let decoderFrameDropCount = "decoder-frame-drop-count"
+  /** frame-drop-count */
+  static let frameDropCount = "frame-drop-count"
   /** mistimed-frame-count */
   static let mistimedFrameCount = "mistimed-frame-count"
   /** vsync-ratio */
@@ -137,6 +137,10 @@ struct MPVProperty {
   static let demuxerCacheTime = "demuxer-cache-time"
   /** demuxer-cache-idle */
   static let demuxerCacheIdle = "demuxer-cache-idle"
+  /** demuxer-via-network */
+  static let demuxerViaNetwork = "demuxer-via-network"
+  /** demuxer-start-time */
+  static let demuxerStartTime = "demuxer-start-time"
   /** paused-for-cache */
   static let pausedForCache = "paused-for-cache"
   /** cache-buffering-state */
@@ -269,8 +273,6 @@ struct MPVProperty {
   static let dvbChannelName = "dvb-channel-name"
   /** sub-text */
   static let subText = "sub-text"
-  /** stream-capture */
-  static let streamCapture = "stream-capture"
   /** tv-brightness */
   static let tvBrightness = "tv-brightness"
   /** tv-contrast */
@@ -287,6 +289,8 @@ struct MPVProperty {
   static let playlistCount = "playlist-count"
   /** playlist */
   static let playlist = "playlist"
+  /** playlist/count */
+  static let playlistCount2 = "playlist/count"
   /** playlist/N/filename */
   static func playlistNFilename(_ n: Int) -> String {
     return "playlist/\(n)/filename"

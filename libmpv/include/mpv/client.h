@@ -1,4 +1,6 @@
-/* Permission to use, copy, modify, and/or distribute this software for any
+/* Copyright (C) 2017 the mpv developers
+ *
+ * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
  *
@@ -12,13 +14,9 @@
  */
 
 /*
- * Note: the client API is licensed under ISC (see above) to ease
- * interoperability with other licenses. But keep in mind that the
- * mpv core is still mostly GPLv2+. It's up to lawyers to decide
- * whether applications using this API are affected by the GPL.
- * One argument against this is that proprietary applications
- * using mplayer in slave mode is apparently tolerated, and this
- * API is basically equivalent to slave mode.
+ * Note: the client API is licensed under ISC (see above) to enable
+ * other wrappers outside of mpv. But keep in mind that the
+ * mpv core is still mostly GPLv2+.
  */
 
 #ifndef MPV_CLIENT_API_H_
@@ -161,23 +159,19 @@ extern "C" {
  * Embedding the video window
  * --------------------------
  *
- * Currently you have to get the raw window handle, and set it as "wid" option.
- * This works on X11, win32, and OSX only. In addition, it works with a few VOs
- * only, and VOs which do not support this will just create a freestanding
- * window.
+ * Using the opengl-cb API (in opengl_cb.h) is recommended. This API requires
+ * you to create and maintain an OpenGL context, to which you can render
+ * video using a specific API call. This API does not include keyboard or mouse
+ * input directly.
  *
- * Both on X11 and win32, the player will fill the window referenced by the
- * "wid" option fully and letterbox the video (i.e. add black bars if the
- * aspect ratio of the window and the video mismatch).
+ * There is an older way to embed the native mpv window into your own. You have
+ * to get the raw window handle, and set it as "wid" option. This works on X11,
+ * win32, and OSX only. It's much easier to use than the opengl-cb API, but
+ * also has various problems.
  *
- * Setting the "input-vo-keyboard" may be required to get keyboard input
- * through the embedded window, if this is desired.
- *
- * For OpenGL integration (e.g. rendering video to a texture), a separate API
- * is available. Look at opengl_cb.h. This API does not include keyboard or
- * mouse input directly.
- *
- * Also see client API examples and the mpv manpage.
+ * Also see client API examples and the mpv manpage. There is an extensive
+ * discussion here:
+ * https://github.com/mpv-player/mpv-examples/tree/master/libmpv#methods-of-embedding-the-video-window
  *
  * Compatibility
  * -------------
@@ -211,7 +205,17 @@ extern "C" {
  * relational operators (<, >, <=, >=).
  */
 #define MPV_MAKE_VERSION(major, minor) (((major) << 16) | (minor) | 0UL)
-#define MPV_CLIENT_API_VERSION MPV_MAKE_VERSION(1, 23)
+#define MPV_CLIENT_API_VERSION MPV_MAKE_VERSION(1, 24)
+
+/**
+ * The API user is allowed to "#define MPV_ENABLE_DEPRECATED 0" before
+ * including any libmpv headers. Then deprecated symbols will be excluded
+ * from the headers. (Of course, deprecated properties and commands and
+ * other functionality will still work.)
+ */
+#ifndef MPV_ENABLE_DEPRECATED
+#define MPV_ENABLE_DEPRECATED 0
+#endif
 
 /**
  * Return the MPV_CLIENT_API_VERSION the mpv source has been compiled with.
@@ -505,7 +509,12 @@ mpv_handle *mpv_create_client(mpv_handle *ctx, const char *name);
  */
 int mpv_load_config_file(mpv_handle *ctx, const char *filename);
 
+#if MPV_ENABLE_DEPRECATED
+
 /**
+ * This does nothing since mpv 0.23.0 (API version 1.24). Below is the
+ * description of the old behavior.
+ *
  * Stop the playback thread. This means the core will stop doing anything, and
  * only run and answer to client API requests. This is sometimes useful; for
  * example, no new frame will be queued to the video output, so doing requests
@@ -534,6 +543,8 @@ void mpv_suspend(mpv_handle *ctx);
  * See mpv_suspend().
  */
 void mpv_resume(mpv_handle *ctx);
+
+#endif
 
 /**
  * Return the internal time in microseconds. This has an arbitrary start offset,
@@ -815,7 +826,7 @@ void mpv_free_node_contents(mpv_node *node);
  *              - deprecated options shadowed by properties:
  *                - chapter (option deprecated in 0.21.0)
  *                - playlist-pos (option deprecated in 0.21.0)
- *       The deprecated properties will be removed in mpv 0.22.0.
+ *       The deprecated properties were removed in mpv 0.23.0.
  *
  * @param name Option name. This is the same as on the mpv command line, but
  *             without the leading "--".
@@ -841,6 +852,9 @@ int mpv_set_option_string(mpv_handle *ctx, const char *name, const char *data);
  *
  * The commands and their parameters are documented in input.rst.
  *
+ * Does not use OSD and string expansion by default (unlike mpv_command_string()
+ * and input.conf).
+ *
  * @param[in] args NULL-terminated list of strings. Usually, the first item
  *                 is the command, and the following items are arguments.
  * @return error code
@@ -853,6 +867,8 @@ int mpv_command(mpv_handle *ctx, const char **args);
  * mpv_command_node() with the format set to MPV_FORMAT_NODE_ARRAY, and
  * every arg passed in order as MPV_FORMAT_STRING.
  *
+ * Does not use OSD and string expansion by default.
+ *
  * @param[in] args mpv_node with format set to MPV_FORMAT_NODE_ARRAY; each entry
  *                 is an argument using an arbitrary format (the format must be
  *                 compatible to the used command). Usually, the first item is
@@ -861,8 +877,7 @@ int mpv_command(mpv_handle *ctx, const char **args);
  *                    function succeeds, this is set to command-specific return
  *                    data. You must call mpv_free_node_contents() to free it
  *                    (again, only if the command actually succeeds).
- *                    Currently, no command uses this, but that can change in
- *                    the future.
+ *                    Not many commands actually use this at all.
  * @return error code (the result parameter is not set on error)
  */
 int mpv_command_node(mpv_handle *ctx, mpv_node *args, mpv_node *result);
@@ -871,6 +886,8 @@ int mpv_command_node(mpv_handle *ctx, mpv_node *args, mpv_node *result);
  * Same as mpv_command, but use input.conf parsing for splitting arguments.
  * This is slightly simpler, but also more error prone, since arguments may
  * need quoting/escaping.
+ *
+ * This also has OSD and string expansion enabled by default.
  */
 int mpv_command_string(mpv_handle *ctx, const char *args);
 
@@ -880,6 +897,10 @@ int mpv_command_string(mpv_handle *ctx, const char *args);
  * Commands are executed asynchronously. You will receive a
  * MPV_EVENT_COMMAND_REPLY event. (This event will also have an
  * error code set if running the command failed.)
+ *
+ * This has nothing to do with the "async" command prefix, although they might
+ * be unified in the future. For now, calling this API means that the command
+ * will be synchronously executed on the core, without blocking the API user.
  *
  * @param reply_userdata the value mpv_event.reply_userdata of the reply will
  *                       be set to (see section about asynchronous calls)
@@ -929,7 +950,7 @@ int mpv_command_node_async(mpv_handle *ctx, uint64_t reply_userdata,
  *       In some cases, properties and options still conflict. In these cases,
  *       mpv_set_property() accesses the options before mpv_initialize(), and
  *       the properties after mpv_initialize(). These conflicts will be removed
- *       in mpv 0.22.0. See mpv_set_option() for further remarks.
+ *       in mpv 0.23.0. See mpv_set_option() for further remarks.
  *
  * @param name The property name. See input.rst for a list of properties.
  * @param format see enum mpv_format.
@@ -1125,6 +1146,7 @@ typedef enum mpv_event_id {
      * decoding starts.
      */
     MPV_EVENT_FILE_LOADED       = 8,
+#if MPV_ENABLE_DEPRECATED
     /**
      * The list of video/audio/subtitle tracks was changed. (E.g. a new track
      * was found. This doesn't necessarily indicate a track switch; for this,
@@ -1143,6 +1165,7 @@ typedef enum mpv_event_id {
      *             and might be removed in the far future.
      */
     MPV_EVENT_TRACK_SWITCHED    = 10,
+#endif
     /**
      * Idle mode was entered. In this mode, no file is played, and the playback
      * core waits for new commands. (The command line player normally quits
@@ -1150,6 +1173,7 @@ typedef enum mpv_event_id {
      * was started with mpv_create(), idle mode is enabled by default.)
      */
     MPV_EVENT_IDLE              = 11,
+#if MPV_ENABLE_DEPRECATED
     /**
      * Playback was paused. This indicates the user pause state.
      *
@@ -1179,6 +1203,7 @@ typedef enum mpv_event_id {
      *             removed in the far future.
      */
     MPV_EVENT_UNPAUSE           = 13,
+#endif
     /**
      * Sent every time after a video frame is displayed. Note that currently,
      * this will be sent in lower frequency if there is no video, or playback
@@ -1186,6 +1211,7 @@ typedef enum mpv_event_id {
      * restricted to video frames only.
      */
     MPV_EVENT_TICK              = 14,
+#if MPV_ENABLE_DEPRECATED
     /**
      * @deprecated This was used internally with the internal "script_dispatch"
      *             command to dispatch keyboard and mouse input for the OSC.
@@ -1195,6 +1221,7 @@ typedef enum mpv_event_id {
      *             header only for compatibility.
      */
     MPV_EVENT_SCRIPT_INPUT_DISPATCH = 15,
+#endif
     /**
      * Triggered by the script-message input command. The command uses the
      * first argument of the command as client name (see mpv_client_name()) to
@@ -1219,6 +1246,7 @@ typedef enum mpv_event_id {
      * because there is no such thing as audio output embedding.
      */
     MPV_EVENT_AUDIO_RECONFIG    = 18,
+#if MPV_ENABLE_DEPRECATED
     /**
      * Happens when metadata (like file tags) is possibly updated. (It's left
      * unspecified whether this happens on file start or only when it changes
@@ -1229,6 +1257,7 @@ typedef enum mpv_event_id {
      *             be removed in the far future.
      */
     MPV_EVENT_METADATA_UPDATE   = 19,
+#endif
     /**
      * Happens when a seek was initiated. Playback stops. Usually it will
      * resume with MPV_EVENT_PLAYBACK_RESTART as soon as the seek is finished.
@@ -1246,6 +1275,7 @@ typedef enum mpv_event_id {
      * See also mpv_event and mpv_event_property.
      */
     MPV_EVENT_PROPERTY_CHANGE   = 22,
+#if MPV_ENABLE_DEPRECATED
     /**
      * Happens when the current chapter changes.
      *
@@ -1254,6 +1284,7 @@ typedef enum mpv_event_id {
      *             be removed in the far future.
      */
     MPV_EVENT_CHAPTER_CHANGE    = 23,
+#endif
     /**
      * Happens if the internal per-mpv_handle ringbuffer overflows, and at
      * least 1 event had to be dropped. This can happen if the client doesn't
@@ -1407,12 +1438,14 @@ typedef struct mpv_event_end_file {
     int error;
 } mpv_event_end_file;
 
+#if MPV_ENABLE_DEPRECATED
 /** @deprecated see MPV_EVENT_SCRIPT_INPUT_DISPATCH for remarks
  */
 typedef struct mpv_event_script_input_dispatch {
     int arg0;
     const char *type;
 } mpv_event_script_input_dispatch;
+#endif
 
 typedef struct mpv_event_client_message {
     /**

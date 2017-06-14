@@ -105,6 +105,7 @@ extension NSSize {
 
 }
 
+
 extension NSRect {
 
   func multiply(_ multiplier: CGFloat) -> NSRect {
@@ -162,8 +163,18 @@ extension Array {
   }
 }
 
+extension Dictionary {
+  mutating func safeAppend<T: Equatable>(_ value: T, for key: Key) where Value == Array<T> {
+    if self[key] == nil {
+      self[key] = Array<T>()
+    }
+    if self[key]!.contains(value) { return }
+    self[key]!.append(value)
+  }
+}
+
 extension NSMenu {
-  func addItem(withTitle string: String, action selector: Selector?, tag: Int?, obj: Any?, stateOn: Bool) {
+  func addItem(withTitle string: String, action selector: Selector? = nil, tag: Int? = nil, obj: Any? = nil, stateOn: Bool = false) {
     let menuItem = NSMenuItem(title: string, action: selector, keyEquivalent: "")
     menuItem.tag = tag ?? -1
     menuItem.representedObject = obj
@@ -201,8 +212,12 @@ extension CGFloat {
 }
 
 extension Double {
-  func toStr() -> String {
-    return "\(self)"
+  func toStr(format: String? = nil) -> String {
+    if let f = format {
+      return String(format: f, self)
+    } else {
+      return "\(self)"
+    }
   }
 
   func constrain(min: Double, max: Double) -> Double {
@@ -210,6 +225,14 @@ extension Double {
     if self < min { value = min }
     if self > max { value = max }
     return value
+  }
+
+  func prettyFormat() -> String {
+    if truncatingRemainder(dividingBy: 1) == 0 {
+      return "\(Int(self))"
+    } else {
+      return "\(self)"
+    }
   }
 }
 
@@ -285,4 +308,66 @@ extension Data {
       return (self as NSData).md5() as String
     }
   }
+
+  var chksum64: UInt64 {
+    get {
+      let count64 = self.count / MemoryLayout<UInt64>.size
+      return self.withUnsafeBytes{ (ptr: UnsafePointer<UInt64>) -> UInt64 in
+        let bufferPtr = UnsafeBufferPointer(start: ptr, count: count64)
+        return bufferPtr.reduce(UInt64(0), &+)
+      }
+    }
+  }
+
+  func saveToFolder(_ url: URL, filename: String) -> URL? {
+    let fileUrl = url.appendingPathComponent(filename)
+    do {
+      try self.write(to: fileUrl)
+    } catch {
+      Utility.showAlert("error_saving_file", arguments: ["data", filename])
+      return nil
+    }
+    return fileUrl
+  }
+}
+
+extension String {
+  var md5: String {
+    get {
+      return self.data(using: .utf8)!.md5
+    }
+  }
+
+  mutating func deleteLast(_ num: Int) {
+    guard num <= characters.count else { self = ""; return }
+    self = self.substring(to: self.index(endIndex, offsetBy: -num))
+  }
+
+  func countOccurances(of str: String, in range: Range<Index>?) -> Int {
+    if let firstRange = self.range(of: str, options: [], range: range, locale: nil) {
+      let nextRange = firstRange.upperBound..<self.endIndex
+      return 1 + countOccurances(of: str, in: nextRange)
+    } else {
+      return 0
+    }
+  }
+}
+
+
+extension CharacterSet {
+  static let urlAllowed: CharacterSet = {
+    var set = CharacterSet.urlHostAllowed
+      .union(.urlUserAllowed)
+      .union(.urlPasswordAllowed)
+      .union(.urlPathAllowed)
+      .union(.urlQueryAllowed)
+      .union(.urlFragmentAllowed)
+    set.insert(charactersIn: "%")
+    return set
+  }()
+}
+
+
+extension NSMenuItem {
+  static let dummy = NSMenuItem(title: "Dummy", action: nil, keyEquivalent: "")
 }

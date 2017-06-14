@@ -10,6 +10,10 @@ import Cocoa
 
 class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
 
+  struct FontInfo {
+    var name: String
+    var localizedName: String
+  }
 
   @IBOutlet weak var familyTableView: NSTableView!
   @IBOutlet weak var faceTableView: NSTableView!
@@ -17,11 +21,11 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
   @IBOutlet weak var searchField: NSTextField!
   @IBOutlet weak var otherField: NSTextField!
 
-  var fontNames: [String] = []
-  var filteredFontNames: [String] = []
+  var fontNames: [FontInfo] = []
+  var filteredFontNames: [FontInfo] = []
   var isSearching = false
   var chosenFontMembers: [[Any]]?
-  var chosenFamily: String?
+  var chosenFamily: FontInfo?
   var chosenFace: String?
 
   var finishedPicking: ((String?) -> Void)?
@@ -35,7 +39,12 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
   override func windowDidLoad() {
     super.windowDidLoad()
 
-    fontNames = NSFontManager.shared().availableFontFamilies.filter { !$0.hasPrefix(".") && !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+    let manager = NSFontManager.shared()
+
+    fontNames = manager.availableFontFamilies
+      .filter { !$0.hasPrefix(".") && !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+      .map { FontInfo(name: $0, localizedName: manager.localizedName(forFamily: $0, face: nil)) }
+      .sorted { $0.localizedName < $1.localizedName }
     withAllTableViews { tv in
       tv.dataSource = self
       tv.delegate = self
@@ -57,7 +66,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     if tableView == familyTableView {
-      return isSearching ? filteredFontNames[row] : fontNames[row]
+      return isSearching ? filteredFontNames[row].localizedName : fontNames[row].localizedName
     } else if tableView == faceTableView {
       let face = chosenFontMembers?[row]
       return face?[1]
@@ -72,7 +81,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
       guard familyTableView.selectedRow >= 0 else { return }
       chosenFamily = isSearching ? filteredFontNames[familyTableView.selectedRow] : fontNames[familyTableView.selectedRow]
       if chosenFamily != nil {
-        chosenFontMembers = FixedFontManager.typefaces(forFontFamily: chosenFamily!) as? [[Any]]
+        chosenFontMembers = FixedFontManager.typefaces(forFontFamily: chosenFamily!.name) as? [[Any]]
         faceTableView.reloadData()
         faceTableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
         updatePreview()
@@ -88,7 +97,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
       isSearching = false
     } else {
       isSearching = true
-      filteredFontNames = fontNames.filter { $0.lowercased() .contains(str.lowercased()) }
+      filteredFontNames = fontNames.filter { $0.localizedName.lowercased() .contains(str.lowercased()) }
       chosenFontMembers = nil
       familyTableView.reloadData()
       faceTableView.reloadData()

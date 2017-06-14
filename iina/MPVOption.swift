@@ -33,8 +33,6 @@ struct MPVOption {
     static let rebaseStartTime = "rebase-start-time"
     /** --speed=<0.01-100> */
     static let speed = "speed"
-    /** --loop=<N|inf|force|no> */
-    static let loop = "loop"
     /** --pause */
     static let pause = "pause"
     /** --shuffle */
@@ -59,6 +57,12 @@ struct MPVOption {
     static let index = "index"
     /** --load-unsafe-playlists */
     static let loadUnsafePlaylists = "load-unsafe-playlists"
+    /** --access-references=<yes|no> */
+    static let accessReferences = "access-references"
+    /** --loop-playlist=<N|inf|force|no> */
+    static let loopPlaylist = "loop-playlist"
+    /** --loop */
+    static let loop = "loop"
     /** --loop-file=<N|inf|no> */
     static let loopFile = "loop-file"
     /** --ab-loop-a=<time> */
@@ -143,7 +147,7 @@ struct MPVOption {
   struct Video {
     /** --vo=<driver> */
     static let vo = "vo"
-    /** --vd=<[+|-]family1:(*|decoder1) */
+    /** --vd=<...> */
     static let vd = "vd"
     /** --vf=<filter1[=parameter1:parameter2:...] */
     static let vf = "vf"
@@ -155,8 +159,8 @@ struct MPVOption {
     static let displayFps = "display-fps"
     /** --hwdec=<api> */
     static let hwdec = "hwdec"
-    /** --hwdec-preload=<api> */
-    static let hwdecPreload = "hwdec-preload"
+    /** --opengl-hwdec-interop=<name> */
+    static let openglHwdecInterop = "opengl-hwdec-interop"
     /** --videotoolbox-format=<name> */
     static let videotoolboxFormat = "videotoolbox-format"
     /** --panscan=<0.0-1.0> */
@@ -236,7 +240,7 @@ struct MPVOption {
     static let af = "af"
     /** --audio-spdif=<codecs> */
     static let audioSpdif = "audio-spdif"
-    /** --ad=<[+|-]family1:(*|decoder1) */
+    /** --ad=<decoder1 */
     static let ad = "ad"
     /** --volume=<value> */
     static let volume = "volume"
@@ -294,8 +298,6 @@ struct MPVOption {
     static let audioFilePaths = "audio-file-paths"
     /** --audio-client-name=<name> */
     static let audioClientName = "audio-client-name"
-    /** --volume-restore-data=<string> */
-    static let volumeRestoreData = "volume-restore-data"
     /** --audio-buffer=<seconds> */
     static let audioBuffer = "audio-buffer"
     /** --audio-stream-silence=<yes|no> */
@@ -355,6 +357,8 @@ struct MPVOption {
     static let stretchDvdSubs = "stretch-dvd-subs"
     /** --stretch-image-subs-to-screen=<yes|no> */
     static let stretchImageSubsToScreen = "stretch-image-subs-to-screen"
+    /** --image-subs-video-resolution=<yes|no> */
+    static let imageSubsVideoResolution = "image-subs-video-resolution"
     /** --sub-ass */
     static let subAss = "sub-ass"
     /** --no-sub-ass */
@@ -413,12 +417,20 @@ struct MPVOption {
     static let subAlignX = "sub-align-x"
     /** --sub-align-y=<top|center|bottom> */
     static let subAlignY = "sub-align-y"
+    /** --sub-justify=<auto|left|center|right> */
+    static let subJustify = "sub-justify"
+    /** --sub-ass-justify=<yes|no> */
+    static let subAssJustify = "sub-ass-justify"
     /** --sub-shadow-color=<color> */
     static let subShadowColor = "sub-shadow-color"
     /** --sub-shadow-offset=<size> */
     static let subShadowOffset = "sub-shadow-offset"
     /** --sub-spacing=<size> */
     static let subSpacing = "sub-spacing"
+    /** --sub-filter-sdh=<yes|no> */
+    static let subFilterSdh = "sub-filter-sdh"
+    /** --sub-filter-sdh-harder=<yes|no> */
+    static let subFilterSdhHarder = "sub-filter-sdh-harder"
   }
 
   struct Window {
@@ -434,6 +446,8 @@ struct MPVOption {
     static let fsScreen = "fs-screen"
     /** --keep-open=<yes|no|always> */
     static let keepOpen = "keep-open"
+    /** --keep-open-pause=<yes|no> */
+    static let keepOpenPause = "keep-open-pause"
     /** --image-display-duration=<seconds|inf> */
     static let imageDisplayDuration = "image-display-duration"
     /** --force-window=<yes|no|immediate> */
@@ -442,8 +456,12 @@ struct MPVOption {
     static let taskbarProgress = "taskbar-progress"
     /** --no-taskbar-progress */
     static let noTaskbarProgress = "no-taskbar-progress"
+    /** --snap-window */
+    static let snapWindow = "snap-window"
     /** --ontop */
     static let ontop = "ontop"
+    /** --ontop-level=<window|system|level> */
+    static let ontopLevel = "ontop-level"
     /** --border */
     static let border = "border"
     /** --no-border */
@@ -488,6 +506,10 @@ struct MPVOption {
     static let keepaspectWindow = "keepaspect-window"
     /** --monitoraspect=<ratio> */
     static let monitoraspect = "monitoraspect"
+    /** --hidpi-window-scale */
+    static let hidpiWindowScale = "hidpi-window-scale"
+    /** --no-hidpi-window-scale */
+    static let noHidpiWindowScale = "no-hidpi-window-scale"
     /** --monitorpixelaspect=<ratio> */
     static let monitorpixelaspect = "monitorpixelaspect"
     /** --stop-screensaver */
@@ -553,6 +575,8 @@ struct MPVOption {
     static let demuxer = "demuxer"
     /** --demuxer-lavf-analyzeduration=<value> */
     static let demuxerLavfAnalyzeduration = "demuxer-lavf-analyzeduration"
+    /** --demuxer-lavf-probe-info=<yes|no|auto> */
+    static let demuxerLavfProbeInfo = "demuxer-lavf-probe-info"
     /** --demuxer-lavf-probescore=<1-100> */
     static let demuxerLavfProbescore = "demuxer-lavf-probescore"
     /** --demuxer-lavf-allow-mimetype=<yes|no> */
@@ -601,14 +625,16 @@ struct MPVOption {
     static let demuxerRawvideoCodec = "demuxer-rawvideo-codec"
     /** --demuxer-rawvideo-size=<value> */
     static let demuxerRawvideoSize = "demuxer-rawvideo-size"
-    /** --demuxer-max-packets=<packets> */
-    static let demuxerMaxPackets = "demuxer-max-packets"
     /** --demuxer-max-bytes=<bytes> */
     static let demuxerMaxBytes = "demuxer-max-bytes"
+    /** --demuxer-max-packets=<packets> */
+    static let demuxerMaxPackets = "demuxer-max-packets"
     /** --demuxer-thread=<yes|no> */
     static let demuxerThread = "demuxer-thread"
     /** --demuxer-readahead-secs=<seconds> */
     static let demuxerReadaheadSecs = "demuxer-readahead-secs"
+    /** --prefetch-playlist=<yes|no> */
+    static let prefetchPlaylist = "prefetch-playlist"
     /** --force-seekable=<yes|no> */
     static let forceSeekable = "force-seekable"
   }
@@ -656,8 +682,6 @@ struct MPVOption {
     static let noInputRightAltGr = "no-input-right-alt-gr"
     /** --input-vo-keyboard=<yes|no> */
     static let inputVoKeyboard = "input-vo-keyboard"
-    /** --input-app-events=<yes|no> */
-    static let inputAppEvents = "input-app-events"
   }
 
   struct OSD {
@@ -885,26 +909,110 @@ struct MPVOption {
   }
 
   struct OpenGLRendererOptions {
-    /** --opengl-dumb-mode=<yes|no> */
-    static let openglDumbMode = "opengl-dumb-mode"
+    /** --cscale=<filter> */
+    static let cscale = "cscale"
+    /** --dscale=<filter> */
+    static let dscale = "dscale"
+    /** --tscale=<filter> */
+    static let tscale = "tscale"
     /** --scale-param1=<value> */
     static let scaleParam1 = "scale-param1"
     /** --scale-param2=<value> */
     static let scaleParam2 = "scale-param2"
+    /** --cscale-param1=<value> */
+    static let cscaleParam1 = "cscale-param1"
+    /** --cscale-param2=<value> */
+    static let cscaleParam2 = "cscale-param2"
+    /** --dscale-param1=<value> */
+    static let dscaleParam1 = "dscale-param1"
+    /** --dscale-param2=<value> */
+    static let dscaleParam2 = "dscale-param2"
+    /** --tscale-param1=<value> */
+    static let tscaleParam1 = "tscale-param1"
+    /** --tscale-param2=<value> */
+    static let tscaleParam2 = "tscale-param2"
     /** --scale-blur=<value> */
     static let scaleBlur = "scale-blur"
+    /** --scale-wblur=<value> */
+    static let scaleWblur = "scale-wblur"
+    /** --cscale-blur=<value> */
+    static let cscaleBlur = "cscale-blur"
+    /** --cscale-wblur=<value> */
+    static let cscaleWblur = "cscale-wblur"
+    /** --dscale-blur=<value> */
+    static let dscaleBlur = "dscale-blur"
+    /** --dscale-wblur=<value> */
+    static let dscaleWblur = "dscale-wblur"
+    /** --tscale-blur=<value> */
+    static let tscaleBlur = "tscale-blur"
+    /** --tscale-wblur=<value> */
+    static let tscaleWblur = "tscale-wblur"
+    /** --scale-clamp */
+    static let scaleClamp = "scale-clamp"
+    /** --cscale-clamp */
+    static let cscaleClamp = "cscale-clamp"
+    /** --dscale-clamp */
+    static let dscaleClamp = "dscale-clamp"
+    /** --tscale-clamp */
+    static let tscaleClamp = "tscale-clamp"
+    /** --scale-taper=<value> */
+    static let scaleTaper = "scale-taper"
+    /** --scale-wtaper=<value> */
+    static let scaleWtaper = "scale-wtaper"
+    /** --dscale-taper=<value> */
+    static let dscaleTaper = "dscale-taper"
+    /** --dscale-wtaper=<value> */
+    static let dscaleWtaper = "dscale-wtaper"
+    /** --cscale-taper=<value> */
+    static let cscaleTaper = "cscale-taper"
+    /** --cscale-wtaper=<value> */
+    static let cscaleWtaper = "cscale-wtaper"
+    /** --tscale-taper=<value> */
+    static let tscaleTaper = "tscale-taper"
+    /** --tscale-wtaper=<value> */
+    static let tscaleWtaper = "tscale-wtaper"
     /** --scale-radius=<value> */
     static let scaleRadius = "scale-radius"
+    /** --cscale-radius=<value> */
+    static let cscaleRadius = "cscale-radius"
+    /** --dscale-radius=<value> */
+    static let dscaleRadius = "dscale-radius"
+    /** --tscale-radius=<value> */
+    static let tscaleRadius = "tscale-radius"
     /** --scale-antiring=<value> */
     static let scaleAntiring = "scale-antiring"
+    /** --cscale-antiring=<value> */
+    static let cscaleAntiring = "cscale-antiring"
+    /** --dscale-antiring=<value> */
+    static let dscaleAntiring = "dscale-antiring"
+    /** --tscale-antiring=<value> */
+    static let tscaleAntiring = "tscale-antiring"
     /** --scale-window=<window> */
     static let scaleWindow = "scale-window"
+    /** --cscale-window=<window> */
+    static let cscaleWindow = "cscale-window"
+    /** --dscale-window=<window> */
+    static let dscaleWindow = "dscale-window"
+    /** --tscale-window=<window> */
+    static let tscaleWindow = "tscale-window"
     /** --scale-wparam=<window> */
     static let scaleWparam = "scale-wparam"
+    /** --cscale-wparam=<window> */
+    static let cscaleWparam = "cscale-wparam"
+    /** --tscale-wparam=<window> */
+    static let tscaleWparam = "tscale-wparam"
     /** --scaler-lut-size=<4..10> */
     static let scalerLutSize = "scaler-lut-size"
     /** --scaler-resizes-only */
     static let scalerResizesOnly = "scaler-resizes-only"
+    /** --linear-scaling */
+    static let linearScaling = "linear-scaling"
+    /** --correct-downscaling */
+    static let correctDownscaling = "correct-downscaling"
+    /** --interpolation */
+    static let interpolation = "interpolation"
+    /** --interpolation-threshold=<0..1 */
+    static let interpolationThreshold = "interpolation-threshold"
     /** --opengl-pbo */
     static let openglPbo = "opengl-pbo"
     /** --dither-depth=<N|no|auto> */
@@ -919,30 +1027,8 @@ struct MPVOption {
     static let temporalDitherPeriod = "temporal-dither-period"
     /** --opengl-debug */
     static let openglDebug = "opengl-debug"
-    /** --interpolation */
-    static let interpolation = "interpolation"
     /** --opengl-swapinterval=<n> */
     static let openglSwapinterval = "opengl-swapinterval"
-    /** --dscale=<filter> */
-    static let dscale = "dscale"
-    /** --cscale=<filter> */
-    static let cscale = "cscale"
-    /** --tscale=<filter> */
-    static let tscale = "tscale"
-    /** --tscale-clamp */
-    static let tscaleClamp = "tscale-clamp"
-    /** --interpolation-threshold=<0..1 */
-    static let interpolationThreshold = "interpolation-threshold"
-    /** --dscale-radius */
-    static let dscaleRadius = "dscale-radius"
-    /** --cscale-radius */
-    static let cscaleRadius = "cscale-radius"
-    /** --tscale-radius */
-    static let tscaleRadius = "tscale-radius"
-    /** --linear-scaling */
-    static let linearScaling = "linear-scaling"
-    /** --correct-downscaling */
-    static let correctDownscaling = "correct-downscaling"
     /** --opengl-shaders=<files> */
     static let openglShaders = "opengl-shaders"
     /** --deband */
@@ -971,8 +1057,22 @@ struct MPVOption {
     static let openglVsyncFences = "opengl-vsync-fences"
     /** --opengl-dwmflush=<no|windowed|yes|auto> */
     static let openglDwmflush = "opengl-dwmflush"
-    /** --opengl-dcomposition=<yes|no> */
-    static let openglDcomposition = "opengl-dcomposition"
+    /** --angle-d3d11-feature-level=<11_0|10_1|10_0|9_3> */
+    static let angleD3d11FeatureLevel = "angle-d3d11-feature-level"
+    /** --angle-d3d11-warp=<yes|no|auto> */
+    static let angleD3d11Warp = "angle-d3d11-warp"
+    /** --angle-egl-windowing=<yes|no|auto> */
+    static let angleEglWindowing = "angle-egl-windowing"
+    /** --angle-flip=<yes|no> */
+    static let angleFlip = "angle-flip"
+    /** --angle-max-frame-latency=<1-16> */
+    static let angleMaxFrameLatency = "angle-max-frame-latency"
+    /** --angle-renderer=<d3d9|d3d11|auto> */
+    static let angleRenderer = "angle-renderer"
+    /** --angle-swapchain-length=<2-16> */
+    static let angleSwapchainLength = "angle-swapchain-length"
+    /** --cocoa-force-dedicated-gpu=<yes|no> */
+    static let cocoaForceDedicatedGpu = "cocoa-force-dedicated-gpu"
     /** --opengl-sw */
     static let openglSw = "opengl-sw"
     /** --opengl-backend=<sys> */
@@ -1021,6 +1121,10 @@ struct MPVOption {
     static let openglTexPadY = "opengl-tex-pad-y"
     /** --opengl-early-flush=<yes|no|auto> */
     static let openglEarlyFlush = "opengl-early-flush"
+    /** --opengl-dumb-mode=<yes|no> */
+    static let openglDumbMode = "opengl-dumb-mode"
+    /** --opengl-shader-cache-dir=<dirname> */
+    static let openglShaderCacheDir = "opengl-shader-cache-dir"
   }
 
   struct Miscellaneous {
@@ -1042,9 +1146,7 @@ struct MPVOption {
     static let mfFps = "mf-fps"
     /** --mf-type=<value> */
     static let mfType = "mf-type"
-    /** --stream-capture=<filename> */
-    static let streamCapture = "stream-capture"
-    /** --stream-dump=<filename> */
+    /** --stream-dump=<destination-filename> */
     static let streamDump = "stream-dump"
     /** --stream-lavf-o=opt1=value1 */
     static let streamLavfO = "stream-lavf-o"
@@ -1058,6 +1160,8 @@ struct MPVOption {
     static let externalFile = "external-file"
     /** --autoload-files=<yes|no> */
     static let autoloadFiles = "autoload-files"
+    /** --record-file=<file> */
+    static let recordFile = "record-file"
     /** --lavfi-complex=<string> */
     static let lavfiComplex = "lavfi-complex"
   }

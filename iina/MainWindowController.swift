@@ -557,8 +557,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.alwaysFloatOnTop:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
-        self.isOntop = newValue
-        setWindowFloatingOnTop(newValue)
+        if !playerCore.info.isPaused {
+          self.isOntop = newValue
+          setWindowFloatingOnTop(newValue)
+        }
       }
 
     default:
@@ -1078,7 +1080,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       removeBlackWindow()
     }
     
-    setWindowFloatingOnTop(isOntop)
+    if !playerCore.info.isPaused {
+      setWindowFloatingOnTop(isOntop)
+    }
   }
 
   func windowDidResize(_ notification: Notification) {

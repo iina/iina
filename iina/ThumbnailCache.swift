@@ -17,13 +17,13 @@ class ThumbnailCache {
     NSImageCompressionFactor: 0.75
   ]
 
-  static func exists(name: String) -> Bool {
+  static func fileExists(forName name: String) -> Bool {
     return FileManager.default.fileExists(atPath: urlFor(name).path)
   }
 
   /// Write thumbnail cache to file. 
   /// This method is expected to be called when the file doesn't exist.
-  static func write(thumbnails: [FFThumbnail], to name: String) {
+  static func write(_ thumbnails: [FFThumbnail], forName name: String) {
     Utility.log("Writing thumbnail cache...")
 
     let pathURL = urlFor(name)
@@ -45,11 +45,11 @@ class ThumbnailCache {
     for tb in thumbnails {
       let timestampData = Data(bytes: &tb.realTime, count: sizeofDouble)
       guard let tiffData = tb.image.tiffRepresentation else {
-        Utility.log("Cannot geenerate tiff data.")
+        Utility.log("Cannot generate tiff data.")
         return
       }
       guard let jpegData = NSBitmapImageRep(data: tiffData)?.representation(using: .JPEG, properties: imageProperties) else {
-        Utility.log("Cannot geenerate jpeg data.")
+        Utility.log("Cannot generate jpeg data.")
         return
       }
       var blockLength = Int64(timestampData.count + jpegData.count)
@@ -64,7 +64,7 @@ class ThumbnailCache {
 
   /// Read thumbnail cache to file.
   /// This method is expected to be called when the file exists.
-  static func read(from name: String) -> [FFThumbnail]? {
+  static func read(forName name: String) -> [FFThumbnail]? {
     Utility.log("Reading thumbnail cache...")
 
     let pathURL = urlFor(name)

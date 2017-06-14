@@ -641,9 +641,9 @@ class PlayerCore: NSObject {
     info.currentURL = URL(fileURLWithPath: path)
     // Generate thumbnails
     info.thumbnailsReady = false
-    if let cacheName = info.mpvMd5, ThumbnailCache.exists(name: cacheName) {
+    if let cacheName = info.mpvMd5, ThumbnailCache.fileExists(forName: cacheName) {
       backgroundQueue.async {
-        if let thumbnails = ThumbnailCache.read(from: cacheName) {
+        if let thumbnails = ThumbnailCache.read(forName: cacheName) {
           self.info.thumbnails = thumbnails
           self.info.thumbnailsReady = true
         }
@@ -1189,13 +1189,13 @@ class PlayerCore: NSObject {
 
 
 extension PlayerCore: FFmpegControllerDelegate {
-  func didGeneratedThumbnails(_ thumbnails: [FFThumbnail]!, withSuccess success: Bool) {
-    if success {
+  func didGeneratedThumbnails(_ thumbnails: [FFThumbnail]!, succeeded: Bool) {
+    if succeeded {
       info.thumbnailsReady = true
       info.thumbnails = thumbnails
       if let cacheName = info.mpvMd5 {
         backgroundQueue.async {
-          ThumbnailCache.write(thumbnails: self.info.thumbnails, to: cacheName)
+          ThumbnailCache.write(self.info.thumbnails, forName: cacheName)
         }
       }
     }

@@ -39,7 +39,7 @@ return -1;\
 }
 
 - (int)getPeeksForFile:(NSString *)file;
-- (void)sameThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second;
+- (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second;
 
 @end
 
@@ -65,7 +65,7 @@ return -1;\
   [_queue addOperationWithBlock: ^(){
     int success = [self getPeeksForFile:file];
     if (self.delegate) {
-      [self.delegate didGeneratedThumbnails:[NSArray arrayWithArray:_thumbnails] withSuccess:(success < 0 ? NO : YES)];
+      [self.delegate didGeneratedThumbnails:[NSArray arrayWithArray:_thumbnails] succeeded:(success < 0 ? NO : YES)];
     }
   }];
 }
@@ -158,8 +158,7 @@ return -1;\
                                               SWS_BILINEAR,
                                               NULL, NULL, NULL);
 
-  // Read frames and save first five frames to disk
-
+  // Get duration and interval
   int64_t duration = av_rescale_q(pFormatCtx->duration, AV_TIME_BASE_Q, pVideoStream->time_base);
   double interval = duration / (double)self.thumbnailCount;
   double timebaseDouble = av_q2d(pVideoStream->time_base);
@@ -173,7 +172,7 @@ return -1;\
 
     // Seek to time point
     // avformat_seek_file(pFormatCtx, videoStream, seek_pos-interval, seek_pos, seek_pos+interval, 0);
-    av_seek_frame(pFormatCtx, videoStream, seek_pos, AVSEEK_FLAG_BACKWARD);
+    ret = av_seek_frame(pFormatCtx, videoStream, seek_pos, AVSEEK_FLAG_BACKWARD);
     CHECK_SUCCESS(ret, @"Cannot seek")
 
     avcodec_flush_buffers(pCodecCtx);
@@ -197,7 +196,7 @@ return -1;\
         }
 
         // Check if duplicated
-        NSNumber *currentTimeStamp = [[NSNumber alloc] initWithLongLong:pFrame->best_effort_timestamp];
+        NSNumber *currentTimeStamp = @(pFrame->best_effort_timestamp);
         if ([_addedTimestamps containsObject:currentTimeStamp]) {
           break;
         } else {
@@ -215,11 +214,11 @@ return -1;\
         CHECK_SUCCESS(ret, @"Cannot convert frame")
 
         // Save the frame to disk
-        [self sameThumbnail:pFrameRGB
+        [self saveThumbnail:pFrameRGB
                       width:pFrameRGB->width
                      height:pFrameRGB->height
                       index:i
-                   realTime:(pFrame->best_effort_timestamp*timebaseDouble)];
+                   realTime:(pFrame->best_effort_timestamp * timebaseDouble)];
         break;
       }
 
@@ -243,7 +242,7 @@ return -1;\
   return 0;
 }
 
-- (void)sameThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second
+- (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second
 {
   // Create CGImage
   CGContextRef cgContext = CGBitmapContextCreate(pFrame->data[0],  // it's converted to RGBA so could be used directly

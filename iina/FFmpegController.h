@@ -21,7 +21,7 @@
 /** 
  Did generated thumbnails for the video.
  */
-- (void)didGeneratedThumbnails:(NSArray<FFThumbnail *> *)thumbnails withSuccess:(BOOL)success;
+- (void)didGeneratedThumbnails:(NSArray<FFThumbnail *> *)thumbnails succeeded:(BOOL)succeeded;
 
 @end
 

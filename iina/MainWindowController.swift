@@ -20,6 +20,11 @@ fileprivate let OSCTopMainViewMarginTopInFullScreen: CGFloat = 6
 fileprivate let PlaylistMinWidth: CGFloat = 240
 fileprivate let PlaylistMaxWidth: CGFloat = 400
 
+fileprivate let UIAnimationDuration: TimeInterval = 0.25
+fileprivate let OSDAnimationDuration: TimeInterval = 0.5
+fileprivate let SideBarAnimationDuration: TimeInterval = 0.2
+fileprivate let CropAnimationDuration: TimeInterval = 0.2
+
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override var nextResponder: NSResponder? {
@@ -856,7 +861,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isMouseInSlider {
       updateTimeLabel(mousePos.x)
     }
-    if isMouseInWindow && animationState == .hidden {
+    if isMouseInWindow {
       showUI()
     }
     // check whether mouse is in osc
@@ -1179,13 +1184,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard !isInPIP || animationState == .hidden else {
       return
     }
-    fadeableViews.forEach { (v) in
-      v.alphaValue = 1
-      v.isHidden = false
-    }
+    
     animationState = .willHide
+    standardWindowButtons.forEach { $0.isEnabled = false }
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = 0.25
+      context.duration = UIAnimationDuration
       fadeableViews.forEach { (v) in
         v.animator().alphaValue = 0
       }
@@ -1195,9 +1198,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }) {
       // if no interrupt then hide animation
       if self.animationState == .willHide {
-        self.fadeableViews.forEach { (v) in
-          v.isHidden = true
-        }
         self.animationState = .hidden
       }
     }
@@ -1205,24 +1205,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   private func showUI() {
     animationState = .willShow
-    fadeableViews.forEach { (v) in
-      v.isHidden = false
-      v.alphaValue = 0
-    }
     standardWindowButtons.forEach { $0.isEnabled = true }
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = 0.5
+      context.duration = UIAnimationDuration
       fadeableViews.forEach { (v) in
-        // Set the fade animation duration
-        NSAnimationContext.current().duration = TimeInterval(0.25);
-
         v.animator().alphaValue = 1
-        if !isInFullScreen {
-          titleTextField?.animator().alphaValue = 1
-        }
+      }
+      if !isInFullScreen {
+        titleTextField?.animator().alphaValue = 1
       }
     }) {
-      self.animationState = .shown
+      // if no interrupt then hide animation
+      if self.animationState == .willShow {
+        self.animationState = .shown
+      }
     }
   }
 
@@ -1299,7 +1295,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @objc private func hideOSD() {
     NSAnimationContext.runAnimationGroup({ (context) in
       self.osdAnimationState = .willHide
-      context.duration = 0.5
+      context.duration = OSDAnimationDuration
       osdVisualEffectView.animator().alphaValue = 0
     }) {
       if self.osdAnimationState == .willHide {
@@ -1328,7 +1324,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     viewController.downShift = titleBarView.frame.height
     // show sidebar
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = 0.2
+      context.duration = SideBarAnimationDuration
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       sideBarRightConstraint.animator().constant = 0
     }) {
@@ -1341,7 +1337,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     sidebarAnimationState = .willHide
     let currWidth = sideBarWidthConstraint.constant
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = 0.2
+      context.duration = SideBarAnimationDuration
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       sideBarRightConstraint.animator().constant = -currWidth
     }) {
@@ -1434,7 +1430,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // show crop settings view
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = 0.2
+      context.duration = CropAnimationDuration
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       bottomBarBottomConstraint.animator().constant = 0
       videoView.animator().frame = videoViewFrame
@@ -1449,7 +1445,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isInInteractiveMode = false
     cropSettingsView.cropBoxView.isHidden = true
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = 0.2
+      context.duration = CropAnimationDuration
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       bottomBarBottomConstraint.animator().constant = -bottomViewHeight
       videoView.animator().frame = NSMakeRect(0, 0, window!.contentView!.frame.width, window!.contentView!.frame.height)

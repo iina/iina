@@ -144,6 +144,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   var wasPlayingWhenSeekBegan: Bool?
+  
+  var mouseExitEnterCount = 0
 
   // MARK: - Enums
 
@@ -770,6 +772,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           } else {
             // else start a timer
             singleClickTimer = Timer.scheduledTimer(timeInterval: NSEvent.doubleClickInterval(), target: self, selector: #selector(self.performMouseActionLater(_:)), userInfo: singleClickAction, repeats: false)
+            mouseExitEnterCount = 0
           }
         } else if event.clickCount == 2 {
           // double click
@@ -793,6 +796,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @objc private func performMouseActionLater(_ timer: Timer) {
     guard let action = timer.userInfo as? Preference.MouseClickAction else { return }
+    if mouseExitEnterCount >= 2 && action == .hideOSC {
+      // the counter being greater than or equal to 2 means that the mouse re-entered the window
+      // showUI() must be called due to the movement in the window, thus hideOSC action should be cancelled
+      return
+    }
     performMouseAction(action)
   }
 
@@ -818,6 +826,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       Utility.log("No data for tracking area")
       return
     }
+    mouseExitEnterCount += 1
     if obj == 0 {
       // main window
       isMouseInWindow = true
@@ -840,6 +849,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       Utility.log("No data for tracking area")
       return
     }
+    mouseExitEnterCount += 1
     if obj == 0 {
       // main window
       isMouseInWindow = false

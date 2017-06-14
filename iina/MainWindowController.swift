@@ -1196,6 +1196,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     
     animationState = .willHide
+    fadeableViews.forEach { (v) in
+      v.isHidden = false
+    }
     standardWindowButtons.forEach { $0.isEnabled = false }
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = UIAnimationDuration
@@ -1208,6 +1211,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }) {
       // if no interrupt then hide animation
       if self.animationState == .willHide {
+        self.fadeableViews.forEach { (v) in
+          v.isHidden = true
+        }
         self.animationState = .hidden
       }
     }
@@ -1215,6 +1221,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   private func showUI() {
     animationState = .willShow
+    fadeableViews.forEach { (v) in
+      v.isHidden = false
+    }
     standardWindowButtons.forEach { $0.isEnabled = true }
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = UIAnimationDuration

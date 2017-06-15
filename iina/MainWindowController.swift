@@ -20,10 +20,10 @@ fileprivate let OSCTopMainViewMarginTopInFullScreen: CGFloat = 6
 fileprivate let PlaylistMinWidth: CGFloat = 240
 fileprivate let PlaylistMaxWidth: CGFloat = 400
 
-fileprivate let UIAnimationDuration: TimeInterval = 0.25
-fileprivate let OSDAnimationDuration: TimeInterval = 0.5
-fileprivate let SideBarAnimationDuration: TimeInterval = 0.2
-fileprivate let CropAnimationDuration: TimeInterval = 0.2
+fileprivate let UIAnimationDuration = 0.25
+fileprivate let OSDAnimationDuration = 0.5
+fileprivate let SideBarAnimationDuration = 0.2
+fileprivate let CropAnimationDuration = 0.2
 
 class MainWindowController: NSWindowController, NSWindowDelegate {
 

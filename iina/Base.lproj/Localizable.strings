@@ -173,6 +173,11 @@
 "alert.delete_history.title" = "Delete Playback History";
 "alert.delete_history.message" = "Are you sure to delete select entries?";
 
+"alert.filter_hwdec.message" = "You are about to apply a video fliter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like, setting the crop) to get it working.";
+"alert.filter_hwdec.abort" = "Abort";
+"alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
+"alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
+
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.remove" = "Remove";
@@ -193,3 +198,7 @@
 
 "filter.video_filters" = "Video Filters";
 "filter.audio_filters" = "Audio Filters";
+
+"hwdec.no" = "Disable Hardware decoding.";
+"hwdec.auto" = "Enable hardware decoding. However, most video filters won't work properly.";
+"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but works with video filters.";

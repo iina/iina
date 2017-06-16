@@ -93,11 +93,9 @@ struct Preference {
     // Codec
 
     static let videoThreads = "videoThreads"
-
-    static let useHardwareDecoding = "useHardwareDecoding"
+    static let hardwareDecoder = "hardwareDecoder"
 
     static let audioThreads = "audioThreads"
-
     static let audioLanguage = "audioLanguage"
     static let maxVolume = "maxVolume"
 
@@ -369,6 +367,24 @@ struct Preference {
     }
   }
 
+  enum HardwareDecoderOption: Int {
+    case disabled = 0
+    case auto
+    case autoCopy
+
+    var mpvString: String {
+      switch self {
+      case .disabled: return "no"
+      case .auto: return "auto"
+      case .autoCopy: return "auto-copy"
+      }
+    }
+
+    var localizedDescription: String {
+      return NSLocalizedString("hwdec." + mpvString, comment: mpvString)
+    }
+  }
+
   // MARK: - Defaults
 
   static let defaultPreference:[String : Any] = [
@@ -404,7 +420,7 @@ struct Preference {
     Key.showRemainingTime: false,
 
     Key.videoThreads: 0,
-    Key.useHardwareDecoding: true,
+    Key.hardwareDecoder: HardwareDecoderOption.auto.rawValue,
     Key.audioThreads: 0,
     Key.audioLanguage: "",
     Key.maxVolume: 130,

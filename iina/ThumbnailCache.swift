@@ -69,7 +69,7 @@ class ThumbnailCache {
 
     let pathURL = urlFor(name)
     guard let file = try? FileHandle(forReadingFrom: pathURL) else {
-      Utility.log("Cannot write to file.")
+      Utility.log("Cannot open file.")
       return nil
     }
 
@@ -93,7 +93,10 @@ class ThumbnailCache {
       let timestamp: Double = timestampData.withUnsafeBytes { $0.pointee }
       // jpeg
       let jpegData = file.readData(ofLength: Int(blockLength) - sizeofDouble)
-      let image = NSImage(data: jpegData)
+      guard let image = NSImage(data: jpegData) else {
+        Utility.log("Cannot read image.")
+        return nil
+      }
       // construct
       let tb = FFThumbnail()
       tb.realTime = timestamp

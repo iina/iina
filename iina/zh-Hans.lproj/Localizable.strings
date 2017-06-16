@@ -179,6 +179,10 @@
 "alert.filter_hwdec.turn_off" = "关闭硬件解码";
 "alert.filter_hwdec.use_copy" = "使用支持「拷贝」的解码器";
 
+"alert.clear_cache.title" = "清除缩略图缓存";
+"alert.clear_cache.message" = "确定清除所有缩略图缓存吗?";
+"alert.clear_cache.success" = "缓存已清除。";
+
 "pl_menu.title_multi" = "%d 个项目";
 "pl_menu.play_next" = "接下来播放";
 "pl_menu.remove" = "移除";

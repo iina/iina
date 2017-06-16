@@ -178,6 +178,10 @@
 "alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
 "alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
 
+"alert.clear_cache.title" = "Clear Thumbnail Cache";
+"alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
+"alert.clear_cache.success" = "Cache cleared.";
+
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.remove" = "Remove";

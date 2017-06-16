@@ -44,7 +44,7 @@ class ThumbnailCache {
     // data blocks
     for tb in thumbnails {
       let timestampData = Data(bytes: &tb.realTime, count: sizeofDouble)
-      guard let tiffData = tb.image.tiffRepresentation else {
+      guard let tiffData = tb.image?.tiffRepresentation else {
         Utility.log("Cannot generate tiff data.")
         return
       }

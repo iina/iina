@@ -34,8 +34,10 @@ return -1;\
 
 @interface FFmpegController () {
   NSMutableArray<FFThumbnail *> *_thumbnails;
+  NSMutableArray<FFThumbnail *> *_thumbnailPartialResult;
   NSMutableSet *_addedTimestamps;
   NSOperationQueue *_queue;
+  double _timestamp;
 }
 
 - (int)getPeeksForFile:(NSString *)file;
@@ -52,6 +54,7 @@ return -1;\
   if (self) {
     self.thumbnailCount = THUMB_COUNT_DEFAULT;
     _thumbnails = [[NSMutableArray alloc] init];
+    _thumbnailPartialResult = [[NSMutableArray alloc] init];
     _addedTimestamps = [[NSMutableSet alloc] init];
     _queue = [[NSOperationQueue alloc] init];
   }
@@ -63,6 +66,7 @@ return -1;\
 {
   [_queue cancelAllOperations];
   [_queue addOperationWithBlock: ^(){
+    _timestamp = CACurrentMediaTime();
     int success = [self getPeeksForFile:file];
     if (self.delegate) {
       [self.delegate didGeneratedThumbnails:[NSArray arrayWithArray:_thumbnails] succeeded:(success < 0 ? NO : YES)];
@@ -77,6 +81,7 @@ return -1;\
 
   const char *cFilename = strdup(file.UTF8String);
   [_thumbnails removeAllObjects];
+  [_thumbnailPartialResult removeAllObjects];
   [_addedTimestamps removeAllObjects];
 
   NSLog(@"Getting thumbnails for video...");
@@ -198,6 +203,13 @@ return -1;\
         // Check if duplicated
         NSNumber *currentTimeStamp = @(pFrame->best_effort_timestamp);
         if ([_addedTimestamps containsObject:currentTimeStamp]) {
+          double currentTime = CACurrentMediaTime();
+          if (currentTime - _timestamp > 1) {
+            if (self.delegate) {
+              [self.delegate didUpdatedThumbnails:NULL withProgress: i];
+              _timestamp = currentTime;
+            }
+          }
           break;
         } else {
           [_addedTimestamps addObject:currentTimeStamp];
@@ -260,6 +272,16 @@ return -1;\
   tb.image = image;
   tb.realTime = second;
   [_thumbnails addObject:tb];
+  [_thumbnailPartialResult addObject:tb];
+  // Post update notification
+  double currentTime = CACurrentMediaTime();
+  if (_thumbnailPartialResult.count >= 10 || (currentTime - _timestamp >= 1 && _thumbnailPartialResult.count > 0)) {
+    if (self.delegate) {
+      [self.delegate didUpdatedThumbnails:[NSArray arrayWithArray:_thumbnailPartialResult] withProgress: index];
+    }
+    [_thumbnailPartialResult removeAllObjects];
+    _timestamp = currentTime;
+  }
 }
 
 @end

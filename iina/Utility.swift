@@ -288,8 +288,8 @@ class Utility {
     showAlert("set_default.success", arguments: [successCount, failedCount], style: .informational)
   }
 
-  private static func createDirIfNotExist(url: URL) {
-  let path = url.path
+  static func createDirIfNotExist(url: URL) {
+    let path = url.path
     // check exist
     if !FileManager.default.fileExists(atPath: path) {
       do {

@@ -67,6 +67,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   @IBAction func clearCacheBtnAction(_ sender: AnyObject) {
     if Utility.quickAskPanel("clear_cache") {
       try? FileManager.default.removeItem(atPath: Utility.thumbnailCacheURL.path)
+      Utility.createDirIfNotExist(url: Utility.thumbnailCacheURL)
       updateThumbnailCacheStat()
       Utility.showAlert("clear_cache.success", style: .informational)
     }

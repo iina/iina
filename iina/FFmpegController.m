@@ -275,12 +275,14 @@ return -1;\
   [_thumbnailPartialResult addObject:tb];
   // Post update notification
   double currentTime = CACurrentMediaTime();
-  if (_thumbnailPartialResult.count >= 10 || (currentTime - _timestamp >= 1 && _thumbnailPartialResult.count > 0)) {
-    if (self.delegate) {
-      [self.delegate didUpdatedThumbnails:[NSArray arrayWithArray:_thumbnailPartialResult] withProgress: index];
+  if (currentTime - _timestamp >= 0.2) {  // min notification interval: 0.2s
+    if (_thumbnailPartialResult.count >= 10 || (currentTime - _timestamp >= 1 && _thumbnailPartialResult.count > 0)) {
+      if (self.delegate) {
+        [self.delegate didUpdatedThumbnails:[NSArray arrayWithArray:_thumbnailPartialResult] withProgress: index];
+      }
+      [_thumbnailPartialResult removeAllObjects];
+      _timestamp = currentTime;
     }
-    [_thumbnailPartialResult removeAllObjects];
-    _timestamp = currentTime;
   }
 }
 

@@ -1191,7 +1191,7 @@ class PlayerCore: NSObject {
 extension PlayerCore: FFmpegControllerDelegate {
 
   func didUpdatedThumbnails(_ thumbnails: [FFThumbnail]?, withProgress progress: Int) {
-    
+
   }
 
   func didGeneratedThumbnails(_ thumbnails: [FFThumbnail], succeeded: Bool) {

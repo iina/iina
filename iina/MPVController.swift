@@ -167,6 +167,8 @@ class MPVController: NSObject {
     // - Sub
 
     chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subAuto, "no"))
+    chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subCodepage, UserDefaults.standard.string(forKey: PK.defaultEncoding)))
+    playerCore.info.subEncoding = UserDefaults.standard.string(forKey: PK.defaultEncoding)
 
     let subOverrideHandler: OptionObserverInfo.Transformer = { key in
       let v = UserDefaults.standard.bool(forKey: PK.ignoreAssStyles)

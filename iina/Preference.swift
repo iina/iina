@@ -134,6 +134,7 @@ struct Preference {
     static let displayInLetterBox = "displayInLetterBox"
     static let subScaleWithWindow = "subScaleWithWindow"
     static let openSubUsername = "openSubUsername"
+    static let defaultEncoding = "defaultEncoding"
 
     // Network
 
@@ -439,6 +440,7 @@ struct Preference {
     Key.displayInLetterBox: true,
     Key.subScaleWithWindow: true,
     Key.openSubUsername: "",
+    Key.defaultEncoding: "auto",
 
     Key.enableCache: true,
     Key.defaultCacheSize: 153600,

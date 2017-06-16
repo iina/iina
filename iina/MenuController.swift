@@ -343,6 +343,14 @@ class MenuController: NSObject, NSMenuDelegate {
   private func updateSubMenu() {
     let player = PlayerCore.shared
     subDelayIndicator.title = String(format: NSLocalizedString("menu.sub_delay", comment: "Subtitle Delay:"), player.info.subDelay)
+    
+    let encodingCode = player.info.subEncoding ?? "auto"
+    print(encodingCode)
+    for encoding in AppData.encodings {
+      if encoding.code == encodingCode {
+        encodingMenu.item(withTitle: encoding.title)?.state = NSOnState
+      }
+    }
   }
 
   /**

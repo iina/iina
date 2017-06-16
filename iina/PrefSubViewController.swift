@@ -39,12 +39,24 @@ class PrefSubViewController: NSViewController {
   @IBOutlet weak var scrollView: NSScrollView!
   @IBOutlet weak var subLangTokenView: NSTokenField!
   @IBOutlet weak var loginIndicator: NSProgressIndicator!
-
+  @IBOutlet weak var defaultEncodingList: NSPopUpButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 460))
+    
+    let defaultEncoding = UserDefaults.standard.string(forKey: Preference.Key.defaultEncoding)
+    for encoding in AppData.encodings {
+      defaultEncodingList.addItem(withTitle: encoding.title)
+      let lastItem = defaultEncodingList.lastItem!
+      lastItem.representedObject = encoding.code
+      if encoding.code == defaultEncoding ?? "auto" {
+        defaultEncodingList.select(lastItem)
+      }
+    }
+    
+    defaultEncodingList.menu?.insertItem(NSMenuItem.separator(), at: 1)
 
     subLangTokenView.delegate = self
     loginIndicator.isHidden = true
@@ -95,7 +107,11 @@ class PrefSubViewController: NSViewController {
       UserDefaults.standard.set("", forKey: Preference.Key.openSubUsername)
     }
   }
-
+  
+  @IBAction func changeDefaultEncoding(_ sender: NSPopUpButton) {
+    UserDefaults.standard.set(sender.selectedItem?.representedObject, forKey: Preference.Key.defaultEncoding)
+  }
+  
   @IBAction func OpenSubHelpBtnAction(_ sender: AnyObject) {
     NSWorkspace.shared().open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#opensubtitles"))!)
   }

@@ -227,11 +227,12 @@ class TouchBarPlaySliderCell: NSSliderCell {
   }
 
   override func barRect(flipped: Bool) -> NSRect {
+    self.controlView?.superview?.layer?.backgroundColor = .black
     let rect = super.barRect(flipped: flipped)
     return NSRect(x: rect.origin.x,
-                  y: 6,
+                  y: 0,
                   width: rect.width,
-                  height: self.controlView!.frame.height - 12)
+                  height: self.controlView!.frame.height)
   }
 
   override func knobRect(flipped: Bool) -> NSRect {
@@ -257,20 +258,20 @@ class TouchBarPlaySliderCell: NSSliderCell {
     let barRect = self.barRect(flipped: flipped)
     NSGraphicsContext.saveGraphicsState()
     NSBezierPath(roundedRect: barRect, xRadius: 2.5, yRadius: 2.5).setClip()
-    let step: CGFloat = 2
+    let step: CGFloat = 3
     let mid = barRect.origin.x + barRect.width * CGFloat(doubleValue/100)
     let end = barRect.origin.x + barRect.width
     var i: CGFloat = barRect.origin.x
     var j: CGFloat = 0
     while (i < mid) {
-      let rect = NSRect(x: i, y: barRect.origin.y, width: 1, height: barRect.height)
+      let rect = NSRect(x: i, y: barRect.origin.y, width: 2, height: barRect.height)
       gradient?.interpolatedColor(atLocation: CGFloat(j / barRect.width)).setFill()
       NSBezierPath(rect: rect).fill()
       i += step
       j += step
     }
     while (i < end) {
-      let rect = NSRect(x: i, y: barRect.origin.y, width: 1, height: barRect.height)
+      let rect = NSRect(x: i, y: barRect.origin.y, width: 2, height: barRect.height)
       solidColor.setFill()
       NSBezierPath(rect: rect).fill()
       i += step

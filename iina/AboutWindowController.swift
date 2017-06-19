@@ -41,7 +41,7 @@ class AboutWindowController: NSWindowController {
     versionLabel.stringValue = "\(version) Build \(build)"
     // let copyright = infoDic["NSHumanReadableCopyright"] as! String
 
-    mpvVersionLabel.stringValue = PlayerCore.shared.mpvController.mpvVersion
+    mpvVersionLabel.stringValue = PlayerCore.active.mpvController.mpvVersion
 
     let contrubutionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf")!
     detailTextView.readRTFD(fromFile: contrubutionFile)

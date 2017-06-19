@@ -338,10 +338,10 @@ class OpenSubSupport {
             switch err {
             case OpenSubError.loginFailed(let reason):
               Utility.log("OpenSub: (re-login) \(reason)")
-              PlayerCore.shared.sendOSD(.cannotLogin)
+              PlayerCore.active.sendOSD(.cannotLogin)
             case OpenSubError.xmlRpcError(let error):
               Utility.log("OpenSub: (re-login) \(error.readableDescription)")
-              PlayerCore.shared.sendOSD(.networkError)
+              PlayerCore.active.sendOSD(.networkError)
             default:
               Utility.log("OpenSub: (re-login) other error")
             }

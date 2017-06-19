@@ -109,7 +109,7 @@ class ShooterSupport {
   func request(_ info: FileInfo, callback: @escaping OnlineSubtitle.SubCallback) {
     Just.post(apiPath, params: info.dictionary, timeout: 10) { response in
       guard response.ok else {
-        PlayerCore.shared.sendOSD(.networkError)
+        PlayerCore.active.sendOSD(.networkError)
         return
       }
       guard let json = response.json as? ResponseData else {

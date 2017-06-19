@@ -51,7 +51,7 @@ class OnlineSubtitle: NSObject {
       source = userSource!
     }
 
-    PlayerCore.shared.sendOSD(.startFindingSub(source.name))
+    PlayerCore.active.sendOSD(.startFindingSub(source.name))
 
     switch source {
     case .shooter:
@@ -101,7 +101,7 @@ class OnlineSubtitle: NSObject {
         default:
           osdMessage = .networkError
         }
-        PlayerCore.shared.sendOSD(osdMessage)
+        PlayerCore.active.sendOSD(osdMessage)
       }
     }
   }

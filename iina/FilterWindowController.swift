@@ -28,7 +28,7 @@ class FilterWindowController: NSWindowController {
     // title
     window?.title = filterType == MPVProperty.af ? NSLocalizedString("filter.audio_filters", comment: "Audio Filters") : NSLocalizedString("filter.video_filters", comment: "Video Filters")
 
-    filters = PlayerCore.shared.mpvController.getFilters(filterType)
+    filters = PlayerCore.active.mpvController.getFilters(filterType)
     tableView.delegate = self
     tableView.dataSource = self
 
@@ -41,12 +41,12 @@ class FilterWindowController: NSWindowController {
   }
 
   func reloadTable() {
-    filters = PlayerCore.shared.mpvController.getFilters(filterType)
+    filters = PlayerCore.active.mpvController.getFilters(filterType)
     tableView.reloadData()
   }
 
   func setFilters() {
-    PlayerCore.shared.mpvController.setFilters(filterType, filters: filters)
+    PlayerCore.active.mpvController.setFilters(filterType, filters: filters)
   }
 
   deinit {

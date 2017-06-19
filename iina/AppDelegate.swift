@@ -20,8 +20,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private var lastOpenFileTimestamp: Double?
 
-  lazy var playerCore: PlayerCore = PlayerCore.shared
-
   lazy var aboutWindow: AboutWindowController = AboutWindowController()
 
   lazy var fontPicker: FontPickerWindowController = FontPickerWindowController()
@@ -69,7 +67,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     if !isReady {
       UserDefaults.standard.register(defaults: Preference.defaultPreference)
-      playerCore.startMPV()
+      let _ = PlayerCore.first
       menuController.bindMenuItems()
       isReady = true
 
@@ -105,12 +103,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-    guard let mw = playerCore.mainWindow, mw.isWindowLoaded else { return false }
+    guard PlayerCore.active.mainWindow.isWindowLoaded else { return false }
     return UserDefaults.standard.bool(forKey: Preference.Key.quitWhenNoOpenedWindow)
   }
 
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplicationTerminateReply {
-    playerCore.terminateMPV()
+    for pc in PlayerCore.playerCores {
+     pc.terminateMPV()
+    }
     return .terminateNow
   }
 
@@ -132,16 +132,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     if !isReady {
       UserDefaults.standard.register(defaults: Preference.defaultPreference)
-      playerCore.startMPV()
+      let _ = PlayerCore.first
       menuController.bindMenuItems()
       isReady = true
     }
 
     let url = URL(fileURLWithPath: filename)
-    if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) {
+    if UserDefaults.standard.bool(forKey: Preference.Key.recordRecentFiles) {
       NSDocumentController.shared().noteNewRecentDocumentURL(url)
     }
-    playerCore.openFile(url)
+    PlayerCore.active.openFile(url)
     return true
   }
 
@@ -150,7 +150,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func droppedText(_ pboard: NSPasteboard, userData:String, error: NSErrorPointer) {
     if let url = pboard.string(forType: NSStringPboardType) {
       handledDroppedText = true
-      playerCore.openURLString(url)
+      PlayerCore.first.openURLString(url)
     }
   }
 
@@ -184,7 +184,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // links
     if let host = parsed.host, host == "weblink" {
       guard let urlValue = (parsed.queryItems?.filter { $0.name == "url" }.at(0)?.value) else { return }
-      playerCore.openURLString(urlValue)
+      PlayerCore.active.openURLString(urlValue)
     }
   }
 
@@ -200,10 +200,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     panel.allowsMultipleSelection = false
     if panel.runModal() == NSFileHandlingPanelOKButton {
       if let url = panel.url {
-        if playerCore.ud.bool(forKey: Preference.Key.recordRecentFiles) {
+        if UserDefaults.standard.bool(forKey: Preference.Key.recordRecentFiles) {
           NSDocumentController.shared().noteNewRecentDocumentURL(url)
         }
-        playerCore.openFile(url)
+        PlayerCore.active.openFile(url)
       }
     }
   }
@@ -220,11 +220,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
       if let url = inputViewController.url {
-        playerCore.openURL(url)
+        PlayerCore.active.openURL(url)
       } else {
         Utility.showAlert("wrong_url_format")
       }
     }
+  }
+
+  @IBAction func menuNewWindow(_ sender: Any) {
+    let _ = PlayerCore.newPlayerCore()
   }
 
   @IBAction func menuOpenScreenshotFolder(_ sender: NSMenuItem) {
@@ -236,7 +240,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func menuSelectAudioDevice(_ sender: NSMenuItem) {
     if let name = sender.representedObject as? String {
-      PlayerCore.shared.setAudioDevice(name)
+      PlayerCore.active.setAudioDevice(name)
     }
   }
 

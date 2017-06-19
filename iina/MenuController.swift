@@ -165,20 +165,20 @@ class MenuController: NSObject, NSMenuDelegate {
     var aspectList = AppData.aspects
     aspectList.insert(Constants.String.default, at: 0)
     bind(menu: aspectMenu, withOptions: aspectList, objects: nil, objectMap: nil, action: #selector(MainWindowController.menuChangeAspect(_:))) {
-      PlayerCore.shared.info.unsureAspect == $0.representedObject as? String
+      PlayerCore.active.info.unsureAspect == $0.representedObject as? String
     }
 
     // -- crop
     var cropList = AppData.aspects
     cropList.insert(Constants.String.none, at: 0)
     bind(menu: cropMenu, withOptions: cropList, objects: nil, objectMap: nil, action: #selector(MainWindowController.menuChangeCrop(_:))) {
-      PlayerCore.shared.info.unsureCrop == $0.representedObject as? String
+      PlayerCore.active.info.unsureCrop == $0.representedObject as? String
     }
 
     // -- rotation
     let rotationTitles = AppData.rotations.map { "\($0)\(Constants.String.degree)" }
     bind(menu: rotationMenu, withOptions: rotationTitles, objects: AppData.rotations, objectMap: nil, action: #selector(MainWindowController.menuChangeRotation(_:))) {
-      PlayerCore.shared.info.rotation == $0.representedObject as? Int
+      PlayerCore.active.info.rotation == $0.representedObject as? Int
     }
 
     // -- flip and mirror
@@ -266,7 +266,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updatePlaylist() {
     playlistMenu.removeAllItems()
-    for (index, item) in PlayerCore.shared.info.playlist.enumerated() {
+    for (index, item) in PlayerCore.active.info.playlist.enumerated() {
       playlistMenu.addItem(withTitle: item.filenameForDisplay, action: #selector(MainWindowController.menuPlaylistItem(_:)),
                            tag: index, obj: nil, stateOn: item.isCurrent)
     }
@@ -274,7 +274,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateChapterList() {
     chapterMenu.removeAllItems()
-    let info = PlayerCore.shared.info
+    let info = PlayerCore.active.info
     for (index, chapter) in info.chapters.enumerated() {
       let menuTitle = "\(chapter.time.stringRepresentation) - \(chapter.title)"
       let nextChapterTime = info.chapters.at(index+1)?.time ?? Constants.Time.infinite
@@ -285,7 +285,7 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   private func updateTracks(forMenu menu: NSMenu, type: MPVTrack.TrackType) {
-    let info = PlayerCore.shared.info
+    let info = PlayerCore.active.info
     menu.removeAllItems()
     let noTrackMenuItem = NSMenuItem(title: Constants.String.trackNone, action: #selector(MainWindowController.menuChangeTrack(_:)), keyEquivalent: "")
     noTrackMenuItem.representedObject = MPVTrack.emptyTrack(for: type)
@@ -300,32 +300,32 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   private func updatePlaybackMenu() {
-    pause.title = PlayerCore.shared.info.isPaused ? Constants.String.resume : Constants.String.pause
-    let isLoop = PlayerCore.shared.mpvController.getFlag(MPVOption.PlaybackControl.loopFile)
+    pause.title = PlayerCore.active.info.isPaused ? Constants.String.resume : Constants.String.pause
+    let isLoop = PlayerCore.active.mpvController.getFlag(MPVOption.PlaybackControl.loopFile)
     fileLoop.state = isLoop ? NSOnState : NSOffState
-    let isPlaylistLoop = PlayerCore.shared.mpvController.getString(MPVOption.PlaybackControl.loopPlaylist)
+    let isPlaylistLoop = PlayerCore.active.mpvController.getString(MPVOption.PlaybackControl.loopPlaylist)
     playlistLoop.state = (isPlaylistLoop == "inf" || isPlaylistLoop == "force") ? NSOnState : NSOffState
   }
 
   private func updateVideoMenu() {
-    let isInFullScreen = PlayerCore.shared.mainWindow?.isInFullScreen ?? false
-    let isInPIP = PlayerCore.shared.mainWindow?.isInPIP ?? false
-    let isOntop = PlayerCore.shared.mainWindow?.isOntop ?? false
+    let isInFullScreen = PlayerCore.active.mainWindow.isInFullScreen
+    let isInPIP = PlayerCore.active.mainWindow.isInPIP
+    let isOntop = PlayerCore.active.mainWindow.isOntop
     alwaysOnTop.state = isOntop ? NSOnState : NSOffState
-    deinterlace.state = PlayerCore.shared.info.deinterlace ? NSOnState : NSOffState
+    deinterlace.state = PlayerCore.active.info.deinterlace ? NSOnState : NSOffState
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
   }
 
   private func updateAudioMenu() {
-    let player = PlayerCore.shared
+    let player = PlayerCore.active
     volumeIndicator.title = String(format: NSLocalizedString("menu.volume", comment: "Volume:"), player.info.volume)
     audioDelayIndicator.title = String(format: NSLocalizedString("menu.audio_delay", comment: "Audio Delay:"), player.info.audioDelay)
   }
 
   private func updateAudioDevice() {
-    let devices = PlayerCore.shared.getAudioDevices()
-    let currAudioDevice = PlayerCore.shared.mpvController.getString(MPVProperty.audioDevice)
+    let devices = PlayerCore.active.getAudioDevices()
+    let currAudioDevice = PlayerCore.active.mpvController.getString(MPVProperty.audioDevice)
     audioDeviceMenu.removeAllItems()
     devices.forEach { d in
       let name = d["name"]!
@@ -335,13 +335,13 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   private func updateFlipAndMirror() {
-    let info = PlayerCore.shared.info
+    let info = PlayerCore.active.info
     flip.state = info.flipFilter == nil ? NSOffState : NSOnState
     mirror.state = info.mirrorFilter == nil ? NSOffState : NSOnState
   }
 
   private func updateSubMenu() {
-    let player = PlayerCore.shared
+    let player = PlayerCore.active
     subDelayIndicator.title = String(format: NSLocalizedString("menu.sub_delay", comment: "Subtitle Delay:"), player.info.subDelay)
     
     let encodingCode = player.info.subEncoding ?? "auto"

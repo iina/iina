@@ -29,7 +29,7 @@ class MPVController: NSObject {
 
   lazy var queue: DispatchQueue! = DispatchQueue(label: "com.colliderli.iina.controller")
 
-  unowned let playerCore: PlayerCore = PlayerCore.shared
+  unowned let playerCore: PlayerCore
   unowned let ud: UserDefaults = UserDefaults.standard
 
   var needRecordSeekTime: Bool = false
@@ -65,6 +65,11 @@ class MPVController: NSObject {
     MPVOption.Window.fullscreen: MPV_FORMAT_FLAG,
     MPVOption.Window.ontop: MPV_FORMAT_FLAG
   ]
+
+  init(playerCore: PlayerCore) {
+    self.playerCore = playerCore
+    super.init()
+  }
 
   deinit {
     ObjcUtils.silenced {
@@ -624,7 +629,7 @@ class MPVController: NSObject {
           playerCore.sendOSD(data ? .pause : .resume)
           playerCore.info.isPaused = data
         }
-        if let mw = playerCore.mainWindow, mw.isWindowLoaded {
+        if playerCore.mainWindow.isWindowLoaded {
           if data {
             SleepPreventer.allowSleep()
           } else {
@@ -632,7 +637,7 @@ class MPVController: NSObject {
           }
           if ud.bool(forKey: PK.alwaysFloatOnTop) {
             DispatchQueue.main.async {
-              mw.setWindowFloatingOnTop(!data)
+              self.playerCore.mainWindow.setWindowFloatingOnTop(!data)
             }
           }
         }

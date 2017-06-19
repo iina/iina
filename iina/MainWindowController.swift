@@ -31,6 +31,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     return "MainWindowController"
   }
 
+  init(playerCore: PlayerCore) {
+    self.playerCore = playerCore
+    super.init(window: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
   // MARK: - Constants
 
   unowned let ud: UserDefaults = UserDefaults.standard
@@ -41,8 +50,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Objects, Views
 
-  unowned let playerCore: PlayerCore = PlayerCore.shared
+  unowned var playerCore: PlayerCore
+
   lazy var videoView: VideoView = self.initVideoView()
+
   lazy var sizingTouchBarTextField: NSTextField = {
     return NSTextField()
   }()
@@ -986,8 +997,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** A method being called when window open. Pretend to be a window delegate. */
   func windowDidOpen() {
-    window!.makeMain()
-    window!.makeKeyAndOrderFront(nil)
     window!.collectionBehavior = [.managed, .fullScreenPrimary]
     // update buffer indicator view
     updateBufferIndicatorView()

@@ -123,7 +123,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   func doubleAction() {
     if let selected = outlineView.item(atRow: outlineView.clickedRow) as? PlaybackHistory {
-      PlayerCore.shared.openFile(selected.url)
+      PlayerCore.active.openFile(selected.url)
     }
   }
 

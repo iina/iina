@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16G12b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -101,6 +101,12 @@
                                         </menuItem>
                                     </items>
                                 </menu>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="bEr-t9-Pyn"/>
+                            <menuItem title="New Window" keyEquivalent="n" id="Qv1-xd-wj5">
+                                <connections>
+                                    <action selector="menuNewWindow:" target="Voe-Tx-rLC" id="J5Q-v3-yX9"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m38-SL-vHw"/>
                             <menuItem title="Playback History" keyEquivalent="H" id="LND-1n-DU2">

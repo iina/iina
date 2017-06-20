@@ -149,7 +149,7 @@
 "alert.playlist.error_deleting" = "Fehler beim Löschen der Datei %@";
 
 "alert.sub.no_selected" = "Bitte zuerst eine heruntergeladene Untertiteldatei auswählen.";
-"alert.sub_lang_not_set" = "Bitte vor der Benutzung von Opensubtitles die beforzugte Untertitelsprache festlegen. Benutzte diesma English(eng).";
+"alert.sub_lang_not_set" = "Bitte vor der Benutzung von OpenSubtitles die beforzugte Untertitelsprache festlegen. Benutzte diesma English(eng).";
 "alert.sub.cannot_save_passwd" = "Passwort kann nicht in der Schlüsselbundverwaltung gespeichert werden: %@";
 "alert.sub.cannot_login" = "Anmelden nicht möglich. Bitte Benutzername, Passwort und Netzwerkverbindung überprüfen.\n\n%@";
 
@@ -163,7 +163,7 @@
 "alert.jump_to.title" = "Springe zu";
 "alert.jump_to.message" = "Bitte gib die Zeit ein zu der Du springen willst. Zum Beispiel: 20:35";
 
-"alert.opensub.login.title" = "Anmeldung bei Opensubtitles";
+"alert.opensub.login.title" = "Anmeldung bei OpenSubtitles";
 "alert.opensub.login.message" = "Bitte Benutzername und Passwort eingeben";
 
 "alert.open_url.title" = "URL öffnen";

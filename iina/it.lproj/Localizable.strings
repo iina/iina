@@ -68,12 +68,12 @@
 "update.title_update_found" = "Trovato aggiornamento";
 "update.title_no_update" = "Nessun aggiornamento";
 "update.title_error" = "Errore";
-"update.update_found" = "È disponibile una nuova versione! IINA è ancora in fase alpha, siete invitati ad utilizzare la versione più recente. Scaricatela dal sito internet o da github:";
+"update.update_found" = "È disponibile una nuova versione! IINA è ancora in fase alpha, siete invitati ad utilizzare la versione più recente. Scaricatela dal sito internet o da GitHub:";
 "update.no_update" = "State utilizzando la versione più recente.";
-"update.check_failed" = "Impossibile controllare gli aggiornamenti. Probabilmente state usando una versione troppo vecchia. Controllate il sito internet o github.";
+"update.check_failed" = "Impossibile controllare gli aggiornamenti. Probabilmente state usando una versione troppo vecchia. Controllate il sito internet o GitHub.";
 "update.new_version" = "Nuova versione:";
 "update.dl_from_website" = "Vai al sito internet";
-"update.dl_from_github" = "Vai su Github";
+"update.dl_from_github" = "Vai su GitHub";
 
 "preference.title" = "Preferenze";
 "preference.general" = "Generali";
@@ -147,7 +147,7 @@
 "alert.add_watch.message" = "Si prega di inserire un nome di proprietà MPV valido.";
 "alert.add_filter.title" = "Nuovo filtro";
 "alert.set_default.success" = "Terminato con %d di successo e %d di errore.";
-"alert.opensub.login.title" = "Login Opensubtitles";
+"alert.opensub.login.title" = "Login OpenSubtitles";
 "alert.config.duplicate.title" = "Configurazione del duplicato";
 "alert.set_default.message" = "IINA sarà impostata come applicazione predefinita per tutti i formati che supporta.";
 "general.username" = "Nome utente";

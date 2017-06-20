@@ -72,12 +72,12 @@
 "update.title_update_found" = "Güncelleme bulundu";
 "update.title_no_update" = "Güncelleme yok";
 "update.title_error" = "Hata";
-"update.update_found" = "Yeni sürüm tespit edildi! IINA hâlâ alfa aşamasındadır, bu nedenle en yeni sürümü kullanmanız önerilir. Lütfen web sitesinden veya github'dan indirin:";
+"update.update_found" = "Yeni sürüm tespit edildi! IINA hâlâ alfa aşamasındadır, bu nedenle en yeni sürümü kullanmanız önerilir. Lütfen web sitesinden veya GitHub'dan indirin:";
 "update.no_update" = "En son sürümü çalıştırıyorsunuz.";
-"update.check_failed" = "Güncellemeleri kontrol edemedi. Muhtemelen çok eski bir sürümü çalıştırıyorsun. Lütfen web sitesini veya github'ı kontrol edin.";
+"update.check_failed" = "Güncellemeleri kontrol edemedi. Muhtemelen çok eski bir sürümü çalıştırıyorsun. Lütfen web sitesini veya GitHub'ı kontrol edin.";
 "update.new_version" = "Yeni sürüm:";
 "update.dl_from_website" = "Web Sitesine Git";
-"update.dl_from_github" = "Github'a Git";
+"update.dl_from_github" = "GitHub'a Git";
 
 "preference.title" = "Tercihler";
 "preference.general" = "Genel";
@@ -149,7 +149,7 @@
 "alert.playlist.error_deleting" = "Silme hatası: %@";
 
 "alert.sub.no_selected" = "Lütfen önce indirdiğiniz altyazıyı seçin.";
-"alert.sub_lang_not_set" = "Lütfen opensubtitles'ı kullanmadan önce tercih ettiğiniz altyazı dilini tercihlerinize ekleyiniz. Bu sefer İngilizce (eng) kullanılacaktır.";
+"alert.sub_lang_not_set" = "Lütfen OpenSubtitles'ı kullanmadan önce tercih ettiğiniz altyazı dilini tercihlerinize ekleyiniz. Bu sefer İngilizce (eng) kullanılacaktır.";
 "alert.sub.cannot_save_passwd" = "Anahtarlığınıza şifrenizi kaydedemiyoruz: %@";
 "alert.sub.cannot_login" = "Giriş yapılamıyor. Lütfen kullanıcı adınızı, şifrenizi ve ağ durumunuzu kontrol edin.\n\n%@ ";
 
@@ -163,7 +163,7 @@
 "alert.jump_to.title" = "Atlama";
 "alert.jump_to.message" = "Lütfen atlamak istediğiniz zamanı girin. Örnek: 20:35";
 
-"alert.opensub.login.title" = "Opensubtitles Giriş";
+"alert.opensub.login.title" = "OpenSubtitles Giriş";
 "alert.opensub.login.message" = "Lütfen kullanıcı adınızı ve şifrenizi giriniz";
 
 "alert.open_url.title" = "URL açın";

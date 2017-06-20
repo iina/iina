@@ -72,12 +72,12 @@
 "update.title_update_found" = "检测到新版本";
 "update.title_no_update" = "没有新版本";
 "update.title_error" = "错误";
-"update.update_found" = "检测到更新。由于 IINA 仍处于 Alpha 测试中，我们建议您保持最新版本。请去网站或者 Github 下载：";
+"update.update_found" = "检测到更新。由于 IINA 仍处于 Alpha 测试中，我们建议您保持最新版本。请去网站或者 GitHub 下载：";
 "update.no_update" = "您正在运行的是最新版本。";
-"update.check_failed" = "检查更新失败。你的 IINA 版本很可能太老了，请去网站或者 Github 查看最新信息：";
+"update.check_failed" = "检查更新失败。你的 IINA 版本很可能太老了，请去网站或者 GitHub 查看最新信息：";
 "update.new_version" = "新版本：";
 "update.dl_from_website" = "前往网站";
-"update.dl_from_github" = "前往 Github";
+"update.dl_from_github" = "前往 GitHub";
 
 "preference.title" = "偏好设置";
 "preference.general" = "通用";
@@ -163,7 +163,7 @@
 "alert.jump_to.title" = "跳转至";
 "alert.jump_to.message" = "请输入希望跳转的时间。例: 20:35";
 
-"alert.opensub.login.title" = "Opensubtitles 登录";
+"alert.opensub.login.title" = "OpenSubtitles 登录";
 "alert.opensub.login.message" = "请输入用户名和密码。";
 
 "alert.open_url.title" = "打开 URL";

@@ -29,8 +29,8 @@
 /* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "Bjp-HJ-i7V"; */
 "Bjp-HJ-i7V.title" = "sans-serif";
 
-/* Class = "NSTextFieldCell"; title = "Opensubtitles account:"; ObjectID = "CKG-r9-NoN"; */
-"CKG-r9-NoN.title" = "Opensubtitlesアカウント:";
+/* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "CKG-r9-NoN"; */
+"CKG-r9-NoN.title" = "OpenSubtitlesアカウント:";
 
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "Chj-YP-eFV"; */
 "Chj-YP-eFV.title" = "優先言語:";
@@ -71,7 +71,7 @@
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "SLQ-wt-k6Y"; */
 "SLQ-wt-k6Y.title" = "背景:";
 
-/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Uj3-om-L26"; */
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and OpenSubtitles."; ObjectID = "Uj3-om-L26"; */
 "Uj3-om-L26.title" = "ISO639-2の言語コードをカンマで区切って使用してください。\nこの設定はmpvとopensubtitlesの両方に適用されます。";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "VBZ-bi-gTh"; */

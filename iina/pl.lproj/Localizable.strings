@@ -42,8 +42,8 @@
 /* Key Mapping */
 "keymapping.title" = "Mapowanie Klawiszy";
 
-/* Buffering... %s%% */
-"main.buffering_indicator" = "Buforowanie... %s%%";
+/* Buffering… %s%% */
+"main.buffering_indicator" = "Buforowanie… %s%%";
 
 /* Audio Delay: */
 "menu.audio_delay" = "Opóźnienie dźwięku:";
@@ -123,8 +123,8 @@
 /* Error reading file */
 "osd.file_error" = "Błąd przy odczytywaniu pliku";
 
-/* Finding online subtitles... */
-"osd.find_online_sub" = "Znajdowanie napisów online...";
+/* Finding online subtitles… */
+"osd.find_online_sub" = "Znajdowanie napisów online…";
 
 /* Mute */
 "osd.mute" = "Wycisz";
@@ -162,8 +162,8 @@
 /* Subtitle downloaded */
 "osd.sub_downloaded" = "Napisy pobrane!";
 
-/* %d subtitle(s) found. Downloading... */
-"osd.sub_found" = "%d napisy zostały znalezione. Pobieram...";
+/* %d subtitle(s) found. Downloading… */
+"osd.sub_found" = "%d napisy zostały znalezione. Pobieram…";
 
 /* No subtitle found. */
 "osd.sub_not_found" = "Nie znaleziono napisów!";

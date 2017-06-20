@@ -38,7 +38,7 @@ class CharEncoding {
     ("Nordic (LATIN6)", "LATIN6"),
     ("North European (LATIN4)", "LATIN4"),
     ("Russian (KOI8-R)", "KOI8-R"),
-    ("Simplified Chinese (GB2312)", "GB2312"),
+    ("Simplified Chinese (GBK)", "GBK"),
     ("Simplified Chinese (GB18030)", "GB18030"),
     ("Simplified Chinese (ISO-2022-CN-EXT)", "ISO-2022-CN-EXT"),
     ("South European (LATIN3)", "LATIN3"),
@@ -54,6 +54,6 @@ class CharEncoding {
     ("Vietnamese (WINDOWS-1258)", "WINDOWS-1258"),
     ("Vietnamese (VISCII)", "VISCII"),
     ("Western European (LATIN1)", "LATIN1"),
-    ("Western European", "LATIN-9")
+    ("Western European (LATIN-9)", "LATIN-9")
   ]
 }

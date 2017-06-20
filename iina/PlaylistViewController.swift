@@ -311,9 +311,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       for url in urls {
         if url.isFileURL {
           self.playerCore.addToPlaylist(url.path)
-          self.mainWindow.displayOSD(.addToPlaylist(1))
         }
       }
+      let fileUrlCount = urls.filter { return $0.isFileURL }.count
+      self.playerCore.sendOSD(.addToPlaylist(fileUrlCount))
       self.reloadData(playlist: true, chapters: false)
     }
   }

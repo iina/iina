@@ -21,7 +21,7 @@
 "playlist.chapter_cap" = "KAPITEL";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Puffern … %d%%";
+"main.buffering_indicator" = "Puffern… %d%%";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Standard";
@@ -59,9 +59,9 @@
 "osd.video_eq.hue" = "Farbton: %i";
 "osd.video_eq.saturation" = "Sättigung: %i";
 "osd.video_eq.brightness" = "Helligkeit: %i";
-"osd.find_online_sub" = "Suche online nach Untertiteln …";
+"osd.find_online_sub" = "Suche online nach Untertiteln…";
 "osd.sub_not_found" = "Keine Untertitel gefunden";
-"osd.sub_found" = "%d Untertitel gefunden. Lade herunter …";
+"osd.sub_found" = "%d Untertitel gefunden. Lade herunter…";
 "osd.sub_downloaded" = "Untertitel heruntergeladen";
 "osd.sub_saved" = "Untertitel gespeichert";
 "osd.network_error" = "Netzwerkfehler";
@@ -179,7 +179,7 @@
 "pl_menu.delete_after_play" = "Nach dem Abspielen in den Papierkorb legen.";
 "pl_menu.delete_after_play_multi" = "Ausgewählte Dateien nach dem Abspielen in den Papierkorb legen";
 "pl_menu.reveal_in_finder" = "Im Finder anzeigen";
-"pl_menu.add_item" = "Datei hinzufügen …";
+"pl_menu.add_item" = "Datei hinzufügen…";
 "pl_menu.clear_playlist" = "Wiedergabeliste leeren";
 
 "keymapping.title" = "Tastaturkürzel";

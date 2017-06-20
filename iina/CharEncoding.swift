@@ -55,5 +55,5 @@ class CharEncoding {
     ("Vietnamese (VISCII)", "VISCII"),
     ("Western European (LATIN1)", "LATIN1"),
     ("Western European", "LATIN-9")
-  ];
+  ]
 }

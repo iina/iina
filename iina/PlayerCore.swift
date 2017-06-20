@@ -400,6 +400,7 @@ class PlayerCore: NSObject {
         }
       }
     }
+    mainWindow?.quickSettingView.reloadSubtitlesData()
   }
 
   func setAudioDelay(_ delay: Double) {

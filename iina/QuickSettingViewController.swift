@@ -222,6 +222,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
 
+  func reloadSubtitlesData() {
+    guard isViewLoaded else {
+      return
+    }
+    subTableView.reloadData()
+    secSubTableView.reloadData()
+  }
+
   // MARK: - Switch tab
 
   /** Switch tab (call from other objects) */

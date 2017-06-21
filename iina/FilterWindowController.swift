@@ -18,8 +18,6 @@ class FilterWindowController: NSWindowController {
 
   var filters: [MPVFilter] = []
 
-  var observers: [NSObjectProtocol] = []
-
   @IBOutlet weak var tableView: NSTableView!
 
   override func windowDidLoad() {
@@ -34,12 +32,11 @@ class FilterWindowController: NSWindowController {
 
     // notifications
     let notiName = filterType == MPVProperty.af ? Constants.Noti.afChanged : Constants.Noti.vfChanged
-    let filterChangeObserver = NotificationCenter.default.addObserver(forName: notiName, object: nil, queue: OperationQueue.main) { _ in
-      self.reloadTable()
-    }
-    observers.append(filterChangeObserver)
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: notiName, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: Constants.Noti.mainWindowChanged, object: nil)
   }
 
+  @objc
   func reloadTable() {
     filters = PlayerCore.active.mpvController.getFilters(filterType)
     tableView.reloadData()
@@ -50,9 +47,7 @@ class FilterWindowController: NSWindowController {
   }
 
   deinit {
-    observers.forEach {
-      NotificationCenter.default.removeObserver($0)
-    }
+    NotificationCenter.default.removeObserver(self)
   }
 
   // MARK: - IBAction

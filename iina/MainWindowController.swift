@@ -1195,6 +1195,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     window!.makeFirstResponder(window!)
   }
 
+  func windowDidBecomeMain(_ notification: Notification) {
+    NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
+  }
+
+  func windowDidResignMain(_ notification: Notification) {
+    NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
+  }
+
   // MARK: - Control UI
 
   func hideUIAndCursor() {

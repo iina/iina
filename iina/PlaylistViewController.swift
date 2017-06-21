@@ -646,20 +646,24 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var playlistTableView: NSTableView!
 
+  lazy var playerCore: PlayerCore = {
+    return (self.playlistTableView.window!.windowController as! MainWindowController).playerCore
+  }()
+
   var filePath: String = ""
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    guard let matchedSubs = PlayerCore.active.info.matchedSubs[filePath] else { return nil }
+    guard let matchedSubs = playerCore.info.matchedSubs[filePath] else { return nil }
     return matchedSubs[row].lastPathComponent
   }
 
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return PlayerCore.active.info.matchedSubs[filePath]?.count ?? 0
+    return playerCore.info.matchedSubs[filePath]?.count ?? 0
   }
 
   @IBAction func wrongSubBtnAction(_ sender: AnyObject) {
-    PlayerCore.active.info.matchedSubs[filePath]?.removeAll()
-    if let row = PlayerCore.active.info.playlist.index(where: { $0.filename == filePath }) {
+    playerCore.info.matchedSubs[filePath]?.removeAll()
+    if let row = playerCore.info.playlist.index(where: { $0.filename == filePath }) {
       playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
     }
   }

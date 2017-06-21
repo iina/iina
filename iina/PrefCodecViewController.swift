@@ -43,11 +43,6 @@ class PrefCodecViewController: NSViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    let spdif = (PlayerCore.active.mpvController.getString(MPVOption.Audio.audioSpdif) ?? "").components(separatedBy: ",")
-    spdifAC3Btn.state = spdif.contains("ac3") ? NSOnState : NSOffState
-    spdifDTSBtn.state = spdif.contains("dts") ? NSOnState : NSOffState
-    spdifDTSHDBtn.state = spdif.contains("dts-hd") ? NSOnState : NSOffState
     updateHwdecDescription()
   }
 
@@ -56,7 +51,8 @@ class PrefCodecViewController: NSViewController {
     if spdifAC3Btn.state == NSOnState { spdif.append("ac3") }
     if spdifDTSBtn.state == NSOnState { spdif.append("dts") }
     if spdifDTSHDBtn.state == NSOnState { spdif.append("dts-hd") }
-    PlayerCore.active.mpvController.setString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","))
+    let spdifString = spdif.joined(separator: ",")
+    PlayerCore.playerCores.forEach { $0.mpvController.setString(MPVOption.Audio.audioSpdif, spdifString) }
   }
 
   @IBAction func hwdecAction(_ sender: AnyObject) {

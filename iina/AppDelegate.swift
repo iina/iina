@@ -67,14 +67,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     if !isReady {
       UserDefaults.standard.register(defaults: Preference.defaultPreference)
-      let _ = PlayerCore.first
+      let pc = PlayerCore.first
+      if UserDefaults.standard.bool(forKey: Preference.Key.showWelcomeWindow) {
+        pc.mainWindow.showWindow(nil)
+        pc.mainWindow.windowDidOpen()
+      }
       menuController.bindMenuItems()
       isReady = true
-
-      if UserDefaults.standard.bool(forKey: Preference.Key.openStartPanel) {
-        // invoke after 0.5s
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(self.checkServiceStartup), userInfo: nil, repeats: false)
-      }
     }
 
     // show alpha in color panels
@@ -114,10 +113,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return .terminateNow
   }
 
-  func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows
-    flag: Bool) -> Bool {
-    if !flag && UserDefaults.standard.bool(forKey: Preference.Key.openStartPanel) {
-      self.openFile(sender)
+  func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+    if !flag && UserDefaults.standard.bool(forKey: Preference.Key.showWelcomeWindow) {
+      PlayerCore.first.mainWindow.showWindow(nil)
+      PlayerCore.first.mainWindow.windowDidOpen()
     }
     return true
   }
@@ -132,7 +131,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     if !isReady {
       UserDefaults.standard.register(defaults: Preference.defaultPreference)
-      let _ = PlayerCore.first
+      let pc = PlayerCore.first
+      if UserDefaults.standard.bool(forKey: Preference.Key.showWelcomeWindow) {
+        pc.mainWindow.showWindow(nil)
+        pc.mainWindow.windowDidOpen()
+      }
       menuController.bindMenuItems()
       isReady = true
     }
@@ -228,7 +231,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func menuNewWindow(_ sender: Any) {
-    let _ = PlayerCore.newPlayerCore()
+    let pc = PlayerCore.newPlayerCore()
+    pc.mainWindow.showWindow(nil)
+    pc.mainWindow.windowDidOpen()
   }
 
   @IBAction func menuOpenScreenshotFolder(_ sender: NSMenuItem) {

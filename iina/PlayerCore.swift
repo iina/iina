@@ -28,8 +28,6 @@ class PlayerCore: NSObject {
     let pc = PlayerCore()
     playerCores.append(pc)
     pc.startMPV()
-    pc.mainWindow.showWindow(nil)
-    pc.mainWindow.windowDidOpen()
     return pc
   }
 
@@ -114,17 +112,15 @@ class PlayerCore: NSObject {
   }
 
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
-//    if !mainWindow.isWindowLoaded {
-//      mainWindow = nil
-//      mainWindow = MainWindowController()
-//    } else
-    if !mainWindow.window!.isVisible {
-      SleepPreventer.preventSleep()
-    }
     info.currentURL = url
     // clear currentFolder since playlist is cleared, so need to auto-load again in playerCore#fileStarted
     info.currentFolder = nil
     info.isNetworkResource = isNetwork
+    let _ = mainWindow.window
+    if !mainWindow.window!.isVisible {
+      SleepPreventer.preventSleep()
+    }
+    mainWindow.showWindow(nil)
     mainWindow.windowDidOpen()
     // Send load file command
     info.fileLoading = true

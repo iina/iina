@@ -204,3 +204,19 @@
 "hwdec.no" = "不启用硬件解码。";
 "hwdec.auto" = "启用硬件解码。但是，大多数视频滤镜不会正常工作。";
 "hwdec.auto-copy" = "启用硬件解码。它会占用两倍左右的内存，但支持视频滤镜。";
+
+// Touch bar
+
+"touchbar.ahead_15" = "前进 15 秒";
+"touchbar.ahead_30" = "前进 30 秒";
+"touchbar.back_15" = "后退 15 秒";
+"touchbar.back_30" = "后退 30 秒";
+"touchbar.next_video" = "下一个视频";
+"touchbar.prev_video" = "上一个视频";
+"touchbar.increase_volume" = "音量 +";
+"touchbar.decrease_volume" = "音量 -";
+"touchbar.rewind" = "快退";
+"touchbar.fast_forward" = "快进";
+"touchbar.play_pause" = "播放 / 暂停";
+"touchbar.seek" = "进度条";
+"touchbar.time" = "播放进度";

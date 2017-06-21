@@ -202,3 +202,19 @@
 "hwdec.no" = "Disable Hardware decoding.";
 "hwdec.auto" = "Enable hardware decoding. However, most video filters won't work properly.";
 "hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but works with video filters.";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15sec Ahead";
+"touchbar.ahead_30" = "30sec Ahead";
+"touchbar.back_15" = "-15sec Ahead";
+"touchbar.back_30" = "-30sec Ahead";
+"touchbar.next_video" = "Next Video";
+"touchbar.prev_video" = "Previous Video";
+"touchbar.increase_volume" = "Volume +";
+"touchbar.decrease_volume" = "Volume -";
+"touchbar.rewind" = "Rewind";
+"touchbar.fast_forward" = "Fast Forward";
+"touchbar.play_pause" = "Play / Pause";
+"touchbar.seek" = "Seek";
+"touchbar.time" = "Time Position";

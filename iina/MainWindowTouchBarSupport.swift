@@ -37,16 +37,16 @@ fileprivate extension NSTouchBarItemIdentifier {
 // Image name, tag, custom label
 @available(OSX 10.12.2, *)
 fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, String)] = [
-  .ahead15Sec: (NSImageNameTouchBarSkipAhead15SecondsTemplate, 15, "15sec Ahead"),
-  .ahead30Sec: (NSImageNameTouchBarSkipAhead30SecondsTemplate, 30, "30sec Ahead"),
-  .back15Sec: (NSImageNameTouchBarSkipBack15SecondsTemplate, -15, "-15sec Ahead"),
-  .back30Sec: (NSImageNameTouchBarSkipBack30SecondsTemplate, -30, "-30sec Ahead"),
-  .next: (NSImageNameTouchBarSkipAheadTemplate, 0, "Next video"),
-  .prev: (NSImageNameTouchBarSkipBackTemplate, 1, "Previous video"),
-  .volumeUp: (NSImageNameTouchBarVolumeUpTemplate, 0, "Volume +"),
-  .volumeDown: (NSImageNameTouchBarVolumeDownTemplate, 1, "Volume -"),
-  .rewind: (NSImageNameTouchBarRewindTemplate, 0, "Rewind"),
-  .fastForward: (NSImageNameTouchBarFastForwardTemplate, 1, "Fast forward")
+  .ahead15Sec: (NSImageNameTouchBarSkipAhead15SecondsTemplate, 15, NSLocalizedString("touchbar.ahead_15", comment: "15sec Ahead")),
+  .ahead30Sec: (NSImageNameTouchBarSkipAhead30SecondsTemplate, 30, NSLocalizedString("touchbar.ahead_30", comment: "30sec Ahead")),
+  .back15Sec: (NSImageNameTouchBarSkipBack15SecondsTemplate, -15, NSLocalizedString("touchbar.back_15", comment: "-15sec Ahead")),
+  .back30Sec: (NSImageNameTouchBarSkipBack30SecondsTemplate, -30, NSLocalizedString("touchbar.back_30", comment: "-30sec Ahead")),
+  .next: (NSImageNameTouchBarSkipAheadTemplate, 0, NSLocalizedString("touchbar.next_video", comment: "Next Video")),
+  .prev: (NSImageNameTouchBarSkipBackTemplate, 1, NSLocalizedString("touchbar.prev_video", comment: "Previous Video")),
+  .volumeUp: (NSImageNameTouchBarVolumeUpTemplate, 0, NSLocalizedString("touchbar.increase_volume", comment: "Volume +")),
+  .volumeDown: (NSImageNameTouchBarVolumeDownTemplate, 1, NSLocalizedString("touchbar.decrease_volume", comment: "Volume -")),
+  .rewind: (NSImageNameTouchBarRewindTemplate, 0, NSLocalizedString("touchbar.rewind", comment: "Rewind")),
+  .fastForward: (NSImageNameTouchBarFastForwardTemplate, 1, NSLocalizedString("touchbar.fast_forward", comment: "Fast Forward"))
 ]
 
 @available(OSX 10.12.2, *)
@@ -68,7 +68,7 @@ extension MainWindowController: NSTouchBarDelegate {
     case NSTouchBarItemIdentifier.playPause:
       let item = NSCustomTouchBarItem(identifier: identifier)
       item.view = NSButton(image: NSImage(named: NSImageNameTouchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
-      item.customizationLabel = "Play / Pause"
+      item.customizationLabel = NSLocalizedString("touchbar.play_pause", comment: "Play / Pause")
       self.touchBarPlayPauseBtn = item.view as? NSButton
       return item
 
@@ -80,7 +80,7 @@ extension MainWindowController: NSTouchBarDelegate {
       item.slider.maxValue = 100
       item.slider.target = self
       item.slider.action = #selector(self.touchBarSliderAction(_:))
-      item.customizationLabel = "Seek"
+      item.customizationLabel = NSLocalizedString("touchbar.seek", comment: "Seek")
       self.touchBarPlaySlider = item.slider as? TouchBarPlaySlider
       return item
 
@@ -101,7 +101,7 @@ extension MainWindowController: NSTouchBarDelegate {
       label.mode = ud.bool(forKey: Preference.Key.showRemainingTime) ? .remaining : .current
       self.touchBarCurrentPosLabel = label
       item.view = label
-      item.customizationLabel = "Time Position"
+      item.customizationLabel = NSLocalizedString("touchbar.time", comment: "Time Position")
       return item
 
     case NSTouchBarItemIdentifier.ahead15Sec,

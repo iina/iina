@@ -346,3 +346,12 @@
 
 /* Not logged in */
 "preference.not_logged_in" = "Déconnecté";
+
+"alert.filter_hwdec.message" = "Vous êtes sur le point d'activer un filtre vidéo. Cependant, votre décodeur hardware actuel peut ne pas bien supporter les filtres vidéos. Vous pouvez  désactiver le décodage hardware ou passer sur Auto(Copy), ce qui consommera le double en mémoire.\nVous aurez peut-être à répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne.";
+"alert.filter_hwdec.abort" = "Abandonner";
+"alert.filter_hwdec.turn_off" = "Désactiver le décodage hardware";
+"alert.filter_hwdec.use_copy" = "Passer sur Auto(Copy)";
+
+"hwdec.no" = "Désactiver le décodage hardware.";
+"hwdec.auto" = "Activer le décodage hardware. Cependant, la plupart des filtres vidéos ne fonctionneront pas correctement.";
+"hwdec.auto-copy" = "Activer le décodage hardware. Cela doublera la consommation mémoire, mais les filtres vidéos fonctionneront parfaitement.";

@@ -22,11 +22,6 @@ fileprivate let PlaylistMaxWidth: CGFloat = 400
 
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
-  override var nextResponder: NSResponder? {
-    get { return nil }
-    set { }
-  }
-
   override var windowNibName: String {
     return "MainWindowController"
   }
@@ -75,6 +70,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let cropView = CropSettingsViewController()
     cropView.mainWindow = self
     return cropView
+  }()
+
+  lazy var initialWindowView: InitialWindowView = {
+    let view = InitialWindowView()
+    view.mainWindow = self
+    return view
   }()
 
   private lazy var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = {
@@ -297,7 +298,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
-
   weak var touchBarPlaySlider: TouchBarPlaySlider?
   weak var touchBarPlayPauseBtn: NSButton?
   weak var touchBarCurrentPosLabel: DurationDisplayTextField?
@@ -353,7 +353,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // set background color to black
     w.backgroundColor = NSColor.black
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay
-    updateTitle()
+
+    w.title = ""
 
     // set material
     setMaterial(Preference.Theme(rawValue: ud.integer(forKey: PK.themeMaterial)))
@@ -363,6 +364,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if let wf = windowFrameFromGeometry() {
       w.setFrame(wf, display: false)
     }
+
+    w.contentView?.addSubview(initialWindowView.view, positioned: .below, relativeTo: nil)
+    quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": initialWindowView.view])
 
     // sidebar views
     sideBarView.isHidden = true
@@ -412,6 +416,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
       $0?.state = .active
     }
+    // hide ui when intial view is active
+    controlBarFloating.isHidden = true
+    controlBarBottom.isHidden = true
+    titleBarView.isHidden = true
+    // hide other views
     osdVisualEffectView.isHidden = true
     osdVisualEffectView.layer?.cornerRadius = 10
     leftArrowLabel.isHidden = true
@@ -586,10 +595,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func initVideoView() -> VideoView {
     let v = VideoView(frame: window!.contentView!.bounds)
+    v.playerCore = self.playerCore
     return v
   }
 
-  func setupOnScreenController(position newPosition: Preference.OSCPosition) {
+  private func setupOnScreenController(position newPosition: Preference.OSCPosition) {
 
     var isCurrentControlBarHidden = false
 
@@ -1192,6 +1202,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   private func hideUI() {
     // Don't hide UI when in PIP
+    guard initialWindowView.view.isHidden else { return }
     guard !isInPIP || animationState == .hidden else {
       return
     }
@@ -1220,6 +1231,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func showUI() {
+    guard initialWindowView.view.isHidden else { return }
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v.isHidden = false

@@ -17,8 +17,13 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     return "PlaylistViewController"
   }
 
-  var playerCore: PlayerCore = PlayerCore.active
-  weak var mainWindow: MainWindowController!
+  weak var mainWindow: MainWindowController! {
+    didSet {
+      self.playerCore = mainWindow.playerCore
+    }
+  }
+
+  weak var playerCore: PlayerCore!
   
   let IINAPlaylistItemType = "IINAPlaylistItemType"
 

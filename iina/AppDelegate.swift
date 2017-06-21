@@ -150,7 +150,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func droppedText(_ pboard: NSPasteboard, userData:String, error: NSErrorPointer) {
     if let url = pboard.string(forType: NSStringPboardType) {
       handledDroppedText = true
-      PlayerCore.first.openURLString(url)
+      PlayerCore.active.openURLString(url)
     }
   }
 

@@ -11,7 +11,7 @@ import Cocoa
 
 class VideoView: NSView {
 
-  lazy var playerCore = PlayerCore.active
+  weak var playerCore: PlayerCore!
 
   lazy var videoLayer: ViewLayer = {
     let layer = ViewLayer()

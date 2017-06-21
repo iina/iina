@@ -737,6 +737,7 @@ class PlayerCore: NSObject {
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     info.haveDownloadedSub = false
+    mainWindow.initialWindowView.view.isHidden = true
     DispatchQueue.main.sync {
       self.getTrackInfo()
       self.getSelectedTracks()

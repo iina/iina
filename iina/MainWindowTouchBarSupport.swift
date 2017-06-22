@@ -196,11 +196,13 @@ class TouchBarPlaySlider: NSSlider {
 
   override func touchesBegan(with event: NSEvent) {
     isTouching = true
+    PlayerCore.shared.togglePause(true)
     super.touchesBegan(with: event)
   }
 
   override func touchesEnded(with event: NSEvent) {
     isTouching = false
+    PlayerCore.shared.togglePause(false)
     super.touchesEnded(with: event)
   }
 
@@ -239,7 +241,9 @@ class TouchBarPlaySliderCell: NSSliderCell {
     if isTouching {
       if let thumbImage = info.thumbnails.first?.image {
         let imageKnobWidth = thumbImage.size.aspect * superKnob.height
-        return NSRect(x: superKnob.origin.x + (superKnob.width - imageKnobWidth) / 2,
+        let barWidth = barRect(flipped: flipped).width
+
+        return NSRect(x: superKnob.origin.x * (barWidth - (imageKnobWidth - superKnob.width)) / barWidth,
                       y: superKnob.origin.y,
                       width: imageKnobWidth,
                       height: superKnob.height)

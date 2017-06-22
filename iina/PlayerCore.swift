@@ -192,6 +192,7 @@ class PlayerCore: NSObject {
   }
 
   func seek(percent: Double, forceExact: Bool = false) {
+    let percent = percent.constrain(min: 0, max: 100)
     let useExact = forceExact ? true : ud.bool(forKey: Preference.Key.useExactSeek)
     let seekMode = useExact ? "absolute-percent+exact" : "absolute-percent"
     mpvController.command(.seek, args: ["\(percent)", seekMode], checkError: false)

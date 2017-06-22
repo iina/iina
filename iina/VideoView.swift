@@ -94,10 +94,12 @@ class VideoView: NSView {
   // MARK: Drag and drop
   
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+    if let _ = sender.draggingSource() { return [] }
     return .copy
   }
     
   override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
+    if let _ = sender.draggingSource() { return [] }
     return .copy
   }
   

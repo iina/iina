@@ -1486,16 +1486,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let previewTime = duration * percentage
       timePreviewWhenSeek.stringValue = previewTime.stringRepresentation
 
-      if playerCore.info.thumbnailsReady && !playerCore.info.thumbnails.isEmpty {
+      if playerCore.info.thumbnailsReady, let tb = playerCore.info.getThumbnail(forSecond: previewTime.second) {
         thumbnailPeekView.isHidden = false
-        // find the earlist thumbnail with timestamp > current pos
-        var tb = playerCore.info.thumbnails.last!
-        for i in 0..<playerCore.info.thumbnails.count {
-          if playerCore.info.thumbnails[i].realTime >= previewTime.second {
-            tb = playerCore.info.thumbnails[(i == 0 ? i : i - 1)]
-            break
-          }
-        }
         thumbnailPeekView.imageView.image = tb.image
         let height = round(120 / thumbnailPeekView.imageView.image!.size.aspect)
         let yPos = (oscPosition == .top || (oscPosition == .floating && sliderFrameInWindow.y + 120 >= window!.frame.height)) ?

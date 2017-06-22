@@ -230,15 +230,24 @@ class TouchBarPlaySliderCell: NSSliderCell {
     self.controlView?.superview?.layer?.backgroundColor = .black
     let rect = super.barRect(flipped: flipped)
     return NSRect(x: rect.origin.x,
-                  y: 0,
+                  y: 2,
                   width: rect.width,
-                  height: self.controlView!.frame.height)
+                  height: self.controlView!.frame.height - 4)
   }
 
   override func knobRect(flipped: Bool) -> NSRect {
+    let info = PlayerCore.shared.info
     let superKnob = super.knobRect(flipped: flipped)
     if isTouching {
-      return superKnob
+      if let thumbImage = info.thumbnails.first?.image {
+        let imageKnobWidth = thumbImage.size.aspect * superKnob.height
+        return NSRect(x: superKnob.origin.x + (superKnob.width - imageKnobWidth) / 2,
+                      y: superKnob.origin.y,
+                      width: imageKnobWidth,
+                      height: superKnob.height)
+      } else {
+        return superKnob
+      }
     } else {
       let remainingKnobWidth = superKnob.width - knobThickness
       return NSRect(x: superKnob.origin.x + remainingKnobWidth * CGFloat(doubleValue/100),
@@ -249,9 +258,21 @@ class TouchBarPlaySliderCell: NSSliderCell {
   }
 
   override func drawKnob(_ knobRect: NSRect) {
-    NSColor.labelColor.setFill()
-    let path = NSBezierPath(roundedRect: knobRect, xRadius: 2, yRadius: 2)
-    path.fill()
+    let info = PlayerCore.shared.info
+    if isTouching, let dur = info.videoDuration?.second, let tb = info.getThumbnail(forSecond: (doubleValue / 100) * dur) {
+      NSGraphicsContext.saveGraphicsState()
+      NSBezierPath(roundedRect: knobRect, xRadius: 3, yRadius: 3).setClip()
+      tb.image?.draw(in: knobRect)
+      NSColor.white.setStroke()
+      let border = NSBezierPath(roundedRect: knobRect.insetBy(dx: 1, dy: 1), xRadius: 3, yRadius: 3)
+      border.lineWidth = 1
+      border.stroke()
+      NSGraphicsContext.restoreGraphicsState()
+    } else {
+      NSColor.labelColor.setFill()
+      let path = NSBezierPath(roundedRect: knobRect, xRadius: 2, yRadius: 2)
+      path.fill()
+    }
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {

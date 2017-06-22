@@ -146,4 +146,16 @@ class PlaybackInfo {
 
   var thumbnailsReady = false
   var thumbnails: [FFThumbnail] = []
+
+  func getThumbnail(forSecond sec: Double) -> FFThumbnail? {
+    guard !thumbnails.isEmpty else { return nil }
+    var tb = thumbnails.last!
+    for i in 0..<thumbnails.count {
+      if thumbnails[i].realTime >= sec {
+        tb = thumbnails[(i == 0 ? i : i - 1)]
+        break
+      }
+    }
+    return tb
+  }
 }

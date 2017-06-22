@@ -214,12 +214,10 @@ class TouchBarPlaySlider: NSSlider {
 
 class TouchBarPlaySliderCell: NSSliderCell {
 
-  private let gradient = NSGradient(starting: NSColor(calibratedRed: 0.471, green: 0.8, blue: 0.929, alpha: 1),
-                            ending: NSColor(calibratedRed: 0.784, green: 0.471, blue: 0.929, alpha: 1))
   private let solidColor = NSColor.labelColor.withAlphaComponent(0.4)
 
   var isTouching: Bool {
-    return (self.controlView as? TouchBarPlaySlider)?.isTouching ?? false
+    return (self.controlView as! TouchBarPlaySlider).isTouching
   }
 
   override var knobThickness: CGFloat {
@@ -276,27 +274,26 @@ class TouchBarPlaySliderCell: NSSliderCell {
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
+    let info = PlayerCore.shared.info
     let barRect = self.barRect(flipped: flipped)
     NSGraphicsContext.saveGraphicsState()
     NSBezierPath(roundedRect: barRect, xRadius: 2.5, yRadius: 2.5).setClip()
     let step: CGFloat = 3
-    let mid = barRect.origin.x + barRect.width * CGFloat(doubleValue/100)
-    let end = barRect.origin.x + barRect.width
-    var i: CGFloat = barRect.origin.x
-    var j: CGFloat = 0
-    while (i < mid) {
-      let rect = NSRect(x: i, y: barRect.origin.y, width: 2, height: barRect.height)
-      gradient?.interpolatedColor(atLocation: CGFloat(j / barRect.width)).setFill()
-      NSBezierPath(rect: rect).fill()
+    let end = barRect.width
+    var i: CGFloat = 0
+    solidColor.setFill()
+    while (i < end + step) {
+      let percent = Double(i / end)
+      let dest = NSRect(x: barRect.origin.x + i, y: barRect.origin.y, width: 2, height: barRect.height)
+      if let dur = info.videoDuration?.second,
+        let image = info.getThumbnail(forSecond: percent * dur)?.image,
+        info.thumbnailsProgress >= percent {
+        let orig = NSRect(x: image.size.width / 2, y: 0, width: 2 * (image.size.height / barRect.height), height: barRect.height)
+        image.draw(in: dest, from: orig, operation: .copy, fraction: 1)
+      } else {
+        NSBezierPath(rect: dest).fill()
+      }
       i += step
-      j += step
-    }
-    while (i < end) {
-      let rect = NSRect(x: i, y: barRect.origin.y, width: 2, height: barRect.height)
-      solidColor.setFill()
-      NSBezierPath(rect: rect).fill()
-      i += step
-      j += step
     }
     NSGraphicsContext.restoreGraphicsState()
   }

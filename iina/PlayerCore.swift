@@ -640,12 +640,16 @@ class PlayerCore: NSObject {
     guard let path = mpvController.getString(MPVProperty.path) else { return }
     info.currentURL = URL(fileURLWithPath: path)
     // Generate thumbnails
+    info.thumbnails.removeAll(keepingCapacity: true)
+    info.thumbnailsProgress = 0
     info.thumbnailsReady = false
     if let cacheName = info.mpvMd5, ThumbnailCache.fileExists(forName: cacheName) {
       backgroundQueue.async {
         if let thumbnails = ThumbnailCache.read(forName: cacheName) {
           self.info.thumbnails = thumbnails
           self.info.thumbnailsReady = true
+          self.info.thumbnailsProgress = 1
+          self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
         }
       }
     } else {
@@ -1191,13 +1195,18 @@ class PlayerCore: NSObject {
 extension PlayerCore: FFmpegControllerDelegate {
 
   func didUpdatedThumbnails(_ thumbnails: [FFThumbnail]?, withProgress progress: Int) {
-
+    if let thumbnails = thumbnails {
+      info.thumbnails.append(contentsOf: thumbnails)
+    }
+    info.thumbnailsProgress = Double(progress) / Double(ffmpegController.thumbnailCount)
+    mainWindow?.touchBarPlaySlider?.needsDisplay = true
   }
 
   func didGeneratedThumbnails(_ thumbnails: [FFThumbnail], succeeded: Bool) {
     if succeeded {
-      info.thumbnailsReady = true
       info.thumbnails = thumbnails
+      info.thumbnailsReady = true
+      info.thumbnailsProgress = 1
       if let cacheName = info.mpvMd5 {
         backgroundQueue.async {
           ThumbnailCache.write(self.info.thumbnails, forName: cacheName)

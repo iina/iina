@@ -644,17 +644,19 @@ class PlayerCore: NSObject {
     info.thumbnails.removeAll(keepingCapacity: true)
     info.thumbnailsProgress = 0
     info.thumbnailsReady = false
-    if let cacheName = info.mpvMd5, ThumbnailCache.fileExists(forName: cacheName) {
-      backgroundQueue.async {
-        if let thumbnails = ThumbnailCache.read(forName: cacheName) {
-          self.info.thumbnails = thumbnails
-          self.info.thumbnailsReady = true
-          self.info.thumbnailsProgress = 1
-          self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
+    if UserDefaults.standard.bool(forKey: Preference.Key.enableThumbnailPreview) {
+      if let cacheName = info.mpvMd5, ThumbnailCache.fileExists(forName: cacheName) {
+        backgroundQueue.async {
+          if let thumbnails = ThumbnailCache.read(forName: cacheName) {
+            self.info.thumbnails = thumbnails
+            self.info.thumbnailsReady = true
+            self.info.thumbnailsProgress = 1
+            self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
+          }
         }
+      } else {
+        ffmpegController.generateThumbnail(forFile: path)
       }
-    } else {
-      ffmpegController.generateThumbnail(forFile: path)
     }
     // Auto load
     backgroundQueueTicket += 1

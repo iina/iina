@@ -810,7 +810,7 @@ class MPVController: NSObject {
       code = mpv_set_option_string(mpv, name, value)
       // Random error here (perhaps a Swift or mpv one), so set it twice
       // 「没有什么是 set 不了的；如果有，那就 set 两次」
-      if code < 0 {
+      while code < 0 {
         code = mpv_set_option_string(mpv, name, value)
       }
 

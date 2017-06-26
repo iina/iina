@@ -1028,7 +1028,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       setWindowFloatingOnTop(true)
     }
     // truncate middle for title
-    if let attrTitle = titleTextField?.attributedStringValue.mutableCopy() as? NSMutableAttributedString {
+    if let attrTitle = titleTextField?.attributedStringValue.mutableCopy() as? NSMutableAttributedString, attrTitle.length > 0 {
       let p = attrTitle.attribute(NSParagraphStyleAttributeName, at: 0, effectiveRange: nil) as! NSMutableParagraphStyle
       p.lineBreakMode = .byTruncatingMiddle
       attrTitle.addAttribute(NSParagraphStyleAttributeName, value: p, range: NSRange(location: 0, length: attrTitle.length))

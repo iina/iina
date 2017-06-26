@@ -494,6 +494,7 @@ class MPVController: NSObject {
       break
 
     case MPV_EVENT_START_FILE:
+      playerCore.info.isIdle = false
       guard getString(MPVProperty.path) != nil else { break }
       playerCore.fileStarted()
       playerCore.sendOSD(.fileStart(playerCore.info.currentURL?.lastPathComponent ?? "-"))
@@ -513,6 +514,7 @@ class MPVController: NSObject {
       playerCore.sendOSD(.seek(osdText, percentage))
 
     case MPV_EVENT_PLAYBACK_RESTART:
+      playerCore.info.isIdle = false
       playerCore.info.isSeeking = false
       if needRecordSeekTime {
         recordedSeekTimeListener?(CACurrentMediaTime() - recordedSeekStartTime)
@@ -538,7 +540,9 @@ class MPVController: NSObject {
         playerCore.info.currentURL = nil
         playerCore.info.isNetworkResource = false
       }
+      playerCore.info.isIdle = true
       if fileLoaded {
+        fileLoaded = false
         playerCore.closeMainWindow()
       }
       receivedEndFileWhileLoading = false

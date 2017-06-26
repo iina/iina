@@ -55,8 +55,10 @@ extension InitialWindowView: NSTableViewDelegate, NSTableViewDataSource {
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
+    guard recentFilesTableView.selectedRow >= 0 else { return }
     mainWindow.playerCore.openURL(recentDocuments[recentFilesTableView.selectedRow], isNetworkResource: false)
     mainWindow.initialWindowView.view.isHidden = true
+    recentFilesTableView.deselectAll(nil)
   }
 
 }

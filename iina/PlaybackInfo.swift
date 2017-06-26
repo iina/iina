@@ -10,6 +10,7 @@ import Foundation
 
 class PlaybackInfo {
 
+  var isIdle: Bool = true
   var fileLoading: Bool = false
 
   var currentURL: URL? {

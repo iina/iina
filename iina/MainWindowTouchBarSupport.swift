@@ -168,10 +168,7 @@ extension MainWindowController: NSTouchBarDelegate {
   // Set TouchBar Time Label
 
   func setupTouchBarUI() {
-    guard let duration = playerCore.info.videoDuration else {
-      Utility.fatal("video info not available")
-    }
-
+    let duration: VideoTime = playerCore.info.videoDuration ?? .zero
     let pad: CGFloat = 16.0
     sizingTouchBarTextField.stringValue = duration.stringRepresentation
     if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, let posLabel = touchBarCurrentPosLabel {
@@ -269,6 +266,7 @@ class TouchBarPlaySliderCell: NSSliderCell {
 
   override func drawKnob(_ knobRect: NSRect) {
     let info = playerCore.info
+    guard !info.isIdle else { return }
     if isTouching, let dur = info.videoDuration?.second, let tb = info.getThumbnail(forSecond: (doubleValue / 100) * dur) {
       NSGraphicsContext.saveGraphicsState()
       NSBezierPath(roundedRect: knobRect, xRadius: 3, yRadius: 3).setClip()
@@ -287,6 +285,7 @@ class TouchBarPlaySliderCell: NSSliderCell {
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
     let info = playerCore.info
+    guard !info.isIdle else { return }
     let barRect = self.barRect(flipped: flipped)
     NSGraphicsContext.saveGraphicsState()
     NSBezierPath(roundedRect: barRect, xRadius: 2.5, yRadius: 2.5).setClip()

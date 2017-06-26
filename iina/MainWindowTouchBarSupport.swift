@@ -194,15 +194,19 @@ class TouchBarPlaySlider: NSSlider {
 
   var isTouching = false
 
+  var playerCore: PlayerCore {
+    return (self.window?.windowController as? MainWindowController)?.playerCore ?? .active
+  }
+
   override func touchesBegan(with event: NSEvent) {
     isTouching = true
-    PlayerCore.shared.togglePause(true)
+    playerCore.togglePause(true)
     super.touchesBegan(with: event)
   }
 
   override func touchesEnded(with event: NSEvent) {
     isTouching = false
-    PlayerCore.shared.togglePause(false)
+    playerCore.togglePause(false)
     super.touchesEnded(with: event)
   }
 
@@ -222,6 +226,10 @@ class TouchBarPlaySliderCell: NSSliderCell {
     return (self.controlView as! TouchBarPlaySlider).isTouching
   }
 
+  var playerCore: PlayerCore {
+    return (self.controlView as! TouchBarPlaySlider).playerCore
+  }
+
   override var knobThickness: CGFloat {
     return 4
   }
@@ -236,7 +244,7 @@ class TouchBarPlaySliderCell: NSSliderCell {
   }
 
   override func knobRect(flipped: Bool) -> NSRect {
-    let info = PlayerCore.shared.info
+    let info = playerCore.info
     let superKnob = super.knobRect(flipped: flipped)
     if isTouching {
       if let thumbImage = info.thumbnails.first?.image {
@@ -260,7 +268,7 @@ class TouchBarPlaySliderCell: NSSliderCell {
   }
 
   override func drawKnob(_ knobRect: NSRect) {
-    let info = PlayerCore.shared.info
+    let info = playerCore.info
     if isTouching, let dur = info.videoDuration?.second, let tb = info.getThumbnail(forSecond: (doubleValue / 100) * dur) {
       NSGraphicsContext.saveGraphicsState()
       NSBezierPath(roundedRect: knobRect, xRadius: 3, yRadius: 3).setClip()
@@ -278,7 +286,7 @@ class TouchBarPlaySliderCell: NSSliderCell {
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
-    let info = PlayerCore.shared.info
+    let info = playerCore.info
     let barRect = self.barRect(flipped: flipped)
     NSGraphicsContext.saveGraphicsState()
     NSBezierPath(roundedRect: barRect, xRadius: 2.5, yRadius: 2.5).setClip()

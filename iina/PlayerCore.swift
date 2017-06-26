@@ -1254,6 +1254,7 @@ extension PlayerCore: FFmpegControllerDelegate {
       info.thumbnails = thumbnails
       info.thumbnailsReady = true
       info.thumbnailsProgress = 1
+      mainWindow?.touchBarPlaySlider?.needsDisplay = true
       if let cacheName = info.mpvMd5 {
         backgroundQueue.async {
           ThumbnailCache.write(self.info.thumbnails, forName: cacheName)

@@ -491,6 +491,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
   }
 
+  @IBAction func contextMenuPlayInNewWindow(_ sender: NSMenuItem) {
+    guard let firstRow = selectedRows?.first, firstRow >= 0 else { return }
+    let filename = playerCore.info.playlist[firstRow].filename
+    PlayerCore.newPlayerCore().openURL(URL(fileURLWithPath: filename))
+  }
+
   @IBAction func contextMenuRemove(_ sender: NSMenuItem) {
     guard let selectedRows = selectedRows else { return }
     var count = 0
@@ -571,6 +577,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       result.addItem(withTitle: title)
       result.addItem(NSMenuItem.separator())
       result.addItem(withTitle: NSLocalizedString("pl_menu.play_next", comment: "Play Next"), action: #selector(self.contextMenuPlayNext(_:)))
+      result.addItem(withTitle: NSLocalizedString("pl_menu.play_in_new_window", comment: "Play in New Window"), action: #selector(self.contextMenuPlayInNewWindow(_:)))
       result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.remove" : "pl_menu.remove_multi", comment: "Remove"), action: #selector(self.contextMenuRemove(_:)))
 
       result.addItem(NSMenuItem.separator())

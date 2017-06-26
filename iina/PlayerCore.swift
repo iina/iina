@@ -121,6 +121,7 @@ class PlayerCore: NSObject {
     if !mainWindow.window!.isVisible {
       SleepPreventer.preventSleep()
     }
+    mainWindow.initialWindowView.view.isHidden = true
     mainWindow.showWindow(nil)
     mainWindow.windowDidOpen()
     // Send load file command

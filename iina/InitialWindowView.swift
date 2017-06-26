@@ -19,6 +19,7 @@ class InitialWindowView: NSViewController {
   @IBOutlet weak var recentFilesTableView: NSTableView!
   @IBOutlet weak var appIcon: NSImageView!
   @IBOutlet weak var versionLabel: NSTextField!
+  @IBOutlet weak var visualEffectView: NSVisualEffectView!
 
   lazy var recentDocuments: [URL] = NSDocumentController.shared().recentDocumentURLs
 
@@ -35,6 +36,10 @@ class InitialWindowView: NSViewController {
 
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
+
+    if #available(OSX 10.11, *) {
+      visualEffectView.material = .ultraDark
+    }
   }
 
   @IBAction func openBtnAction(_ sender: NSButton) {

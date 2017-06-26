@@ -11,6 +11,7 @@
                 <outlet property="recentFilesTableView" destination="kmS-iE-dPR" id="CgT-YI-pZt"/>
                 <outlet property="versionLabel" destination="Vwg-oj-DP2" id="rIb-5K-UqG"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+                <outlet property="visualEffectView" destination="WPi-pi-0Ep" id="R8B-AZ-SLa"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -18,7 +19,7 @@
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="735" height="391"/>
             <subviews>
-                <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="behindWindow" material="ultraDark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="WPi-pi-0Ep">
+                <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="behindWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="WPi-pi-0Ep">
                     <rect key="frame" x="233" y="0.0" width="502" height="391"/>
                 </visualEffectView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="x67-Tq-kfc">

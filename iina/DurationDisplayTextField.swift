@@ -36,7 +36,7 @@ class DurationDisplayTextField: NSTextField {
     case .current:
       stringValue = current.stringRepresentation
     case .duration:
-      stringValue = duration.stringRepresentation
+      stringValue = " \(duration.stringRepresentation)"
     case .remaining:
       var remaining = (duration - current)
       if remaining.second < 0 {

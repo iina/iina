@@ -41,6 +41,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="openBtnAction:" target="-2" id="SIA-Cx-vOj"/>
+                            </connections>
                         </button>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihB-jw-CKQ">
                             <rect key="frame" x="202" y="306" width="47" height="17"/>
@@ -67,6 +70,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="openURLBtnAction:" target="-2" id="UC3-L0-XLa"/>
+                            </connections>
                         </button>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJT-Ng-4MY">
                             <rect key="frame" x="202" y="278" width="76" height="17"/>

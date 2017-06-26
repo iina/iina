@@ -218,7 +218,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if UserDefaults.standard.bool(forKey: Preference.Key.recordRecentFiles) {
           NSDocumentController.shared().noteNewRecentDocumentURL(url)
         }
-        PlayerCore.activeOrNew.openURL(url, isNetworkResource: false)
+        let playerCore: PlayerCore = (sender as? PlayerCore) ?? .activeOrNew
+        playerCore.openURL(url, isNetworkResource: false)
       }
     }
   }
@@ -235,7 +236,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
       if let url = inputViewController.url {
-        PlayerCore.active.openURL(url, isNetworkResource: true)
+        let playerCore: PlayerCore = (sender as? PlayerCore) ?? .activeOrNew
+        playerCore.openURL(url, isNetworkResource: true)
       } else {
         Utility.showAlert("wrong_url_format")
       }

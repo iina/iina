@@ -36,7 +36,16 @@ class InitialWindowView: NSViewController {
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
   }
-    
+
+  @IBAction func openBtnAction(_ sender: NSButton) {
+    (NSApp.delegate as! AppDelegate).openFile(mainWindow.playerCore)
+    sender.layer?.backgroundColor = CGColor(gray: 0, alpha: 0)
+  }
+
+  @IBAction func openURLBtnAction(_ sender: NSButton) {
+    (NSApp.delegate as! AppDelegate).openURL(mainWindow.playerCore)
+    sender.layer?.backgroundColor = CGColor(gray: 0, alpha: 0)
+  }
 }
 
 

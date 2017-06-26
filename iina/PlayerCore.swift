@@ -24,13 +24,17 @@ class PlayerCore: NSObject {
 
   static var activeOrNew: PlayerCore {
     if UserDefaults.standard.bool(forKey: Preference.Key.alwaysOpenInNewWindow) {
-      return newPlayerCore()
+      return findIdlePlayerCore() ?? newPlayerCore()
     } else {
       return active
     }
   }
 
   static var playerCores: [PlayerCore] = []
+
+  static private func findIdlePlayerCore() -> PlayerCore? {
+    return playerCores.first { $0.info.isIdle }
+  }
 
   static func newPlayerCore() -> PlayerCore {
     let pc = PlayerCore()

@@ -56,7 +56,7 @@ end
 
 mpv_files = Dir["#{`brew --prefix mpv`.chomp}/lib/*.dylib"]
 proj_path = File.expand_path(File.join(File.dirname(__FILE__), '../'))
-lib_folder = File.join(proj_path, "libmpv/lib/")
+lib_folder = File.join(proj_path, "deps/lib/")
 
 libs = []
 

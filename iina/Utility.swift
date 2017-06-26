@@ -288,8 +288,8 @@ class Utility {
     showAlert("set_default.success", arguments: [successCount, failedCount], style: .informational)
   }
 
-  private static func createDirIfNotExist(url: URL) {
-  let path = url.path
+  static func createDirIfNotExist(url: URL) {
+    let path = url.path
     // check exist
     if !FileManager.default.fileExists(atPath: path) {
       do {
@@ -339,6 +339,12 @@ class Utility {
 
   static let watchLaterURL: URL = {
     let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.watchLaterFolder, isDirectory: true)
+    createDirIfNotExist(url: url)
+    return url
+  }()
+
+  static let thumbnailCacheURL: URL = {
+    let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)
     createDirIfNotExist(url: url)
     return url
   }()
@@ -403,6 +409,16 @@ class Utility {
     // char
     keyString += keyChar
     return keyString
+  }
+
+  /// See `mp_get_playback_resume_config_filename` in mpv/configfiles.c
+  static func mpvWatchLaterMd5(_ filename: String) -> String {
+    // mp_is_url
+    // if(!Regex.mpvURL.matches(filename)) {
+      // ignore_path_in_watch_later_config
+    // }
+    // handle dvd:// and bd://
+    return filename.md5
   }
 
   // MARK: - Util classes

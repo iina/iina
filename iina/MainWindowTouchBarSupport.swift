@@ -196,11 +196,13 @@ class TouchBarPlaySlider: NSSlider {
 
   override func touchesBegan(with event: NSEvent) {
     isTouching = true
+    PlayerCore.shared.togglePause(true)
     super.touchesBegan(with: event)
   }
 
   override func touchesEnded(with event: NSEvent) {
     isTouching = false
+    PlayerCore.shared.togglePause(false)
     super.touchesEnded(with: event)
   }
 
@@ -214,12 +216,10 @@ class TouchBarPlaySlider: NSSlider {
 
 class TouchBarPlaySliderCell: NSSliderCell {
 
-  private let gradient = NSGradient(starting: NSColor(calibratedRed: 0.471, green: 0.8, blue: 0.929, alpha: 1),
-                            ending: NSColor(calibratedRed: 0.784, green: 0.471, blue: 0.929, alpha: 1))
   private let solidColor = NSColor.labelColor.withAlphaComponent(0.4)
 
   var isTouching: Bool {
-    return (self.controlView as? TouchBarPlaySlider)?.isTouching ?? false
+    return (self.controlView as! TouchBarPlaySlider).isTouching
   }
 
   override var knobThickness: CGFloat {
@@ -227,17 +227,29 @@ class TouchBarPlaySliderCell: NSSliderCell {
   }
 
   override func barRect(flipped: Bool) -> NSRect {
+    self.controlView?.superview?.layer?.backgroundColor = .black
     let rect = super.barRect(flipped: flipped)
     return NSRect(x: rect.origin.x,
-                  y: 6,
+                  y: 2,
                   width: rect.width,
-                  height: self.controlView!.frame.height - 12)
+                  height: self.controlView!.frame.height - 4)
   }
 
   override func knobRect(flipped: Bool) -> NSRect {
+    let info = PlayerCore.shared.info
     let superKnob = super.knobRect(flipped: flipped)
     if isTouching {
-      return superKnob
+      if let thumbImage = info.thumbnails.first?.image {
+        let imageKnobWidth = thumbImage.size.aspect * superKnob.height
+        let barWidth = barRect(flipped: flipped).width
+
+        return NSRect(x: superKnob.origin.x * (barWidth - (imageKnobWidth - superKnob.width)) / barWidth,
+                      y: superKnob.origin.y,
+                      width: imageKnobWidth,
+                      height: superKnob.height)
+      } else {
+        return superKnob
+      }
     } else {
       let remainingKnobWidth = superKnob.width - knobThickness
       return NSRect(x: superKnob.origin.x + remainingKnobWidth * CGFloat(doubleValue/100),
@@ -248,33 +260,44 @@ class TouchBarPlaySliderCell: NSSliderCell {
   }
 
   override func drawKnob(_ knobRect: NSRect) {
-    NSColor.labelColor.setFill()
-    let path = NSBezierPath(roundedRect: knobRect, xRadius: 2, yRadius: 2)
-    path.fill()
+    let info = PlayerCore.shared.info
+    if isTouching, let dur = info.videoDuration?.second, let tb = info.getThumbnail(forSecond: (doubleValue / 100) * dur) {
+      NSGraphicsContext.saveGraphicsState()
+      NSBezierPath(roundedRect: knobRect, xRadius: 3, yRadius: 3).setClip()
+      tb.image?.draw(in: knobRect)
+      NSColor.white.setStroke()
+      let border = NSBezierPath(roundedRect: knobRect.insetBy(dx: 1, dy: 1), xRadius: 3, yRadius: 3)
+      border.lineWidth = 1
+      border.stroke()
+      NSGraphicsContext.restoreGraphicsState()
+    } else {
+      NSColor.labelColor.setFill()
+      let path = NSBezierPath(roundedRect: knobRect, xRadius: 2, yRadius: 2)
+      path.fill()
+    }
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
+    let info = PlayerCore.shared.info
     let barRect = self.barRect(flipped: flipped)
     NSGraphicsContext.saveGraphicsState()
     NSBezierPath(roundedRect: barRect, xRadius: 2.5, yRadius: 2.5).setClip()
-    let step: CGFloat = 2
-    let mid = barRect.origin.x + barRect.width * CGFloat(doubleValue/100)
-    let end = barRect.origin.x + barRect.width
-    var i: CGFloat = barRect.origin.x
-    var j: CGFloat = 0
-    while (i < mid) {
-      let rect = NSRect(x: i, y: barRect.origin.y, width: 1, height: barRect.height)
-      gradient?.interpolatedColor(atLocation: CGFloat(j / barRect.width)).setFill()
-      NSBezierPath(rect: rect).fill()
+    let step: CGFloat = 3
+    let end = barRect.width
+    var i: CGFloat = 0
+    solidColor.setFill()
+    while (i < end + step) {
+      let percent = Double(i / end)
+      let dest = NSRect(x: barRect.origin.x + i, y: barRect.origin.y, width: 2, height: barRect.height)
+      if let dur = info.videoDuration?.second,
+        let image = info.getThumbnail(forSecond: percent * dur)?.image,
+        info.thumbnailsProgress >= percent {
+        let orig = NSRect(x: image.size.width / 2, y: 0, width: 2 * (image.size.height / barRect.height), height: barRect.height)
+        image.draw(in: dest, from: orig, operation: .copy, fraction: 1)
+      } else {
+        NSBezierPath(rect: dest).fill()
+      }
       i += step
-      j += step
-    }
-    while (i < end) {
-      let rect = NSRect(x: i, y: barRect.origin.y, width: 1, height: barRect.height)
-      solidColor.setFill()
-      NSBezierPath(rect: rect).fill()
-      i += step
-      j += step
     }
     NSGraphicsContext.restoreGraphicsState()
   }

@@ -12,9 +12,14 @@ class PlaybackInfo {
 
   var fileLoading: Bool = false
 
-  var currentURL: URL?
+  var currentURL: URL? {
+    didSet {
+      mpvMd5 = Utility.mpvWatchLaterMd5(currentURL!.path)
+    }
+  }
   var currentFolder: URL?
   var isNetworkResource: Bool = false
+  var mpvMd5: String?
 
   var videoWidth: Int?
   var videoHeight: Int?
@@ -138,4 +143,20 @@ class PlaybackInfo {
   var matchedSubs: [String: [URL]] = [:]
   var currentSubsInfo: [FileInfo] = []
   var currentVideosInfo: [FileInfo] = []
+
+  var thumbnailsReady = false
+  var thumbnailsProgress: Double = 0
+  var thumbnails: [FFThumbnail] = []
+
+  func getThumbnail(forSecond sec: Double) -> FFThumbnail? {
+    guard !thumbnails.isEmpty else { return nil }
+    var tb = thumbnails.last!
+    for i in 0..<thumbnails.count {
+      if thumbnails[i].realTime >= sec {
+        tb = thumbnails[(i == 0 ? i : i - 1)]
+        break
+      }
+    }
+    return tb
+  }
 }

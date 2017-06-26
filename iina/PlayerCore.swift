@@ -32,6 +32,12 @@ class PlayerCore: NSObject {
   var mainWindow: MainWindowController?
   lazy var mpvController: MPVController = MPVController()
 
+  lazy var ffmpegController: FFmpegController = {
+    let controller = FFmpegController()
+    controller.delegate = self
+    return controller
+  }()
+
   lazy var info: PlaybackInfo = PlaybackInfo()
 
   var syncPlayTimeTimer: Timer?
@@ -186,6 +192,7 @@ class PlayerCore: NSObject {
   }
 
   func seek(percent: Double, forceExact: Bool = false) {
+    let percent = percent.constrain(min: 0, max: 100)
     let useExact = forceExact ? true : ud.bool(forKey: Preference.Key.useExactSeek)
     let seekMode = useExact ? "absolute-percent+exact" : "absolute-percent"
     mpvController.command(.seek, args: ["\(percent)", seekMode], checkError: false)
@@ -633,6 +640,25 @@ class PlayerCore: NSObject {
     info.disableOSDForFileLoading = true
     guard let path = mpvController.getString(MPVProperty.path) else { return }
     info.currentURL = URL(fileURLWithPath: path)
+    // Generate thumbnails
+    info.thumbnails.removeAll(keepingCapacity: true)
+    info.thumbnailsProgress = 0
+    info.thumbnailsReady = false
+    if UserDefaults.standard.bool(forKey: Preference.Key.enableThumbnailPreview) {
+      if let cacheName = info.mpvMd5, ThumbnailCache.fileExists(forName: cacheName) {
+        backgroundQueue.async {
+          if let thumbnails = ThumbnailCache.read(forName: cacheName) {
+            self.info.thumbnails = thumbnails
+            self.info.thumbnailsReady = true
+            self.info.thumbnailsProgress = 1
+            self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
+          }
+        }
+      } else {
+        ffmpegController.generateThumbnail(forFile: path)
+      }
+    }
+    // Auto load
     backgroundQueueTicket += 1
     let currentFileIsOpenedManually = info.currentFileIsOpenedManually
     let currentTicket = backgroundQueueTicket
@@ -652,6 +678,7 @@ class PlayerCore: NSObject {
         self.setTrack(1, forType: .sub)
       }
     }
+
   }
 
   /** This function is called right after file loaded. Should load all meta info here. */
@@ -1165,4 +1192,29 @@ class PlayerCore: NSObject {
     }
   }
 
+}
+
+
+extension PlayerCore: FFmpegControllerDelegate {
+
+  func didUpdatedThumbnails(_ thumbnails: [FFThumbnail]?, withProgress progress: Int) {
+    if let thumbnails = thumbnails {
+      info.thumbnails.append(contentsOf: thumbnails)
+    }
+    info.thumbnailsProgress = Double(progress) / Double(ffmpegController.thumbnailCount)
+    mainWindow?.touchBarPlaySlider?.needsDisplay = true
+  }
+
+  func didGeneratedThumbnails(_ thumbnails: [FFThumbnail], succeeded: Bool) {
+    if succeeded {
+      info.thumbnails = thumbnails
+      info.thumbnailsReady = true
+      info.thumbnailsProgress = 1
+      if let cacheName = info.mpvMd5 {
+        backgroundQueue.async {
+          ThumbnailCache.write(self.info.thumbnails, forName: cacheName)
+        }
+      }
+    }
+  }
 }

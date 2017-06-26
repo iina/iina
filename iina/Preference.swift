@@ -90,6 +90,8 @@ struct Preference {
 
     static let playlistWidth = "playlistWidth"
 
+    static let enableThumbnailPreview = "enableThumbnailPreview"
+
     // Codec
 
     static let videoThreads = "videoThreads"
@@ -418,6 +420,7 @@ struct Preference {
     Key.usePhysicalResolution: true,
     Key.resizeOnlyWhenManuallyOpenFile: true,
     Key.showRemainingTime: false,
+    Key.enableThumbnailPreview: true,
 
     Key.videoThreads: 0,
     Key.hardwareDecoder: HardwareDecoderOption.auto.rawValue,

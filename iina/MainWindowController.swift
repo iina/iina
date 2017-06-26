@@ -257,6 +257,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bufferProgressLabel: NSTextField!
   @IBOutlet weak var bufferSpin: NSProgressIndicator!
   @IBOutlet weak var bufferDetailLabel: NSTextField!
+  @IBOutlet var thumbnailPeekView: ThumbnailPeekView!
 
   @IBOutlet weak var oscFloatingTopView: NSStackView!
   @IBOutlet weak var oscFloatingBottomView: NSView!
@@ -391,6 +392,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // buffer indicator view
     bufferIndicatorView.layer?.cornerRadius = 10
     updateBufferIndicatorView()
+
+    // thumbnail peek view
+    w.contentView?.addSubview(thumbnailPeekView)
+    thumbnailPeekView.isHidden = true
 
     // other initialization
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
@@ -823,9 +828,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isMouseInSlider = true
       if !controlBarFloating.isDragging {
         timePreviewWhenSeek.isHidden = false
+        thumbnailPeekView.isHidden = !playerCore.info.thumbnailsReady
       }
       let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-      updateTimeLabel(mousePos.x)
+      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
     }
   }
 
@@ -846,7 +852,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isMouseInSlider = false
       timePreviewWhenSeek.isHidden = true
       let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-      updateTimeLabel(mousePos.x)
+      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
+      thumbnailPeekView.isHidden = true
     }
   }
 
@@ -854,7 +861,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard !isInInteractiveMode else { return }
     let mousePos = playSlider.convert(event.locationInWindow, from: nil)
     if isMouseInSlider {
-      updateTimeLabel(mousePos.x)
+      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
     }
     if isMouseInWindow && animationState == .hidden {
       showUI()
@@ -1464,16 +1471,32 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   /** Display time label when mouse over slider */
-  private func updateTimeLabel(_ mouseXPos: CGFloat) {
+  private func updateTimeLabel(_ mouseXPos: CGFloat, originalPos: NSPoint) {
     let timeLabelXPos = playSlider.frame.origin.y + 15
-    timePreviewWhenSeek.frame.origin = CGPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2), y: timeLabelXPos + 1)
+    timePreviewWhenSeek.frame.origin = NSPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2),
+                                               y: timeLabelXPos + 1)
     let sliderFrame = playSlider.bounds
+    let sliderFrameInWindow = playSlider.superview!.convert(playSlider.frame.origin, to: nil)
     var percentage = Double((mouseXPos - 3) / (sliderFrame.width - 6))
     if percentage < 0 {
       percentage = 0
     }
+
     if let duration = playerCore.info.videoDuration {
-      timePreviewWhenSeek.stringValue = (duration * percentage).stringRepresentation
+      let previewTime = duration * percentage
+      timePreviewWhenSeek.stringValue = previewTime.stringRepresentation
+
+      if playerCore.info.thumbnailsReady, let tb = playerCore.info.getThumbnail(forSecond: previewTime.second) {
+        thumbnailPeekView.isHidden = false
+        thumbnailPeekView.imageView.image = tb.image
+        let height = round(120 / thumbnailPeekView.imageView.image!.size.aspect)
+        let yPos = (oscPosition == .top || (oscPosition == .floating && sliderFrameInWindow.y + 120 >= window!.frame.height)) ?
+          sliderFrameInWindow.y - 68 : sliderFrameInWindow.y + 32
+        thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
+        thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2), y: yPos)
+      } else {
+        thumbnailPeekView.isHidden = true
+      }
     }
   }
 

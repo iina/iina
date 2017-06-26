@@ -1290,6 +1290,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func updateTitle() {
     window?.representedURL = playerCore.info.currentURL
     window?.setTitleWithRepresentedFilename(playerCore.info.currentURL?.path ?? "")
+    removeStandardButtonsFromFadeableViews()
+    addBackStandardButtonsToFadeableViews()
   }
 
   func displayOSD(_ message: OSDMessage) {

@@ -9,8 +9,6 @@
 import Cocoa
 import MASPreferences
 
-fileprivate let intialWindowSize = NSSize(width: 640, height: 400)
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -117,16 +115,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
     if !flag, UserDefaults.standard.bool(forKey: Preference.Key.showWelcomeWindow), let mw = PlayerCore.first.mainWindow {
-      let newFrame = mw.window!.frame.centeredResize(to: intialWindowSize)
-      mw.window?.setFrame(newFrame, display: true)
-      mw.window?.center()
-      mw.window?.title = ""
-      if #available(OSX 10.12.2, *) {
-        mw.touchBarCurrentPosLabel?.stringValue = VideoTime.zero.stringRepresentation
-      }
-      mw.fadeableViews.forEach { $0.isHidden = true }
-      mw.osdVisualEffectView.isHidden = true
-      mw.initialWindowView.view.isHidden = false
+      mw.switchToInitialView()
       mw.showWindow(nil)
       mw.windowDidOpen()
     }

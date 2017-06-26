@@ -20,6 +20,8 @@ fileprivate let OSCTopMainViewMarginTopInFullScreen: CGFloat = 6
 fileprivate let PlaylistMinWidth: CGFloat = 240
 fileprivate let PlaylistMaxWidth: CGFloat = 400
 
+fileprivate let IntialWindowSize = NSSize(width: 640, height: 400)
+
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override var windowNibName: String {
@@ -367,6 +369,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     if playerCore.info.currentURL != nil {
       initialWindowView.view.isHidden = true
+    } else {
+      controlBarFloating.isHidden = true
+      controlBarBottom.isHidden = true
+      titleBarView.isHidden = true
     }
 
     w.contentView?.addSubview(initialWindowView.view, positioned: .below, relativeTo: nil)
@@ -419,12 +425,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // other initialization
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
       $0?.state = .active
-    }
-    // hide ui when initial view is active
-    if !initialWindowView.view.isHidden {
-      controlBarFloating.isHidden = true
-      controlBarBottom.isHidden = true
-      titleBarView.isHidden = true
     }
     // hide other views
     osdVisualEffectView.isHidden = true
@@ -905,7 +905,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func scrollWheel(with event: NSEvent) {
-    guard !isInInteractiveMode else { return }
+    guard !isInInteractiveMode && initialWindowView.view.isHidden else { return }
 
     let isMouse = event.phase.isEmpty
     let isTrackpadBegan = event.phase.contains(.began)
@@ -1204,6 +1204,25 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   // MARK: - Control UI
+
+  func switchToInitialView() {
+    guard let w = window else { return }
+    // center window
+    let newFrame = w.frame.centeredResize(to: IntialWindowSize)
+    w.setFrame(newFrame, display: true)
+    w.center()
+    // clear title
+    w.representedURL = nil
+    w.title = ""
+    // hide all views except traffic lights
+    if #available(OSX 10.12.2, *) {
+      touchBarCurrentPosLabel?.stringValue = VideoTime.zero.stringRepresentation
+    }
+    fadeableViews.forEach { $0.isHidden = true }
+    standardWindowButtons.forEach { $0.isHidden = false }
+    osdVisualEffectView.isHidden = true
+    initialWindowView.view.isHidden = false
+  }
 
   func hideUIAndCursor() {
     // don't hide UI when dragging control bar

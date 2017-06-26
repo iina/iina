@@ -87,7 +87,7 @@ class InitialWindowViewActionButton: NSButton {
   }
 
   override func mouseEntered(with event: NSEvent) {
-    self.layer?.backgroundColor = CGColor(gray: 0, alpha: 0.2)
+    self.layer?.backgroundColor = CGColor(gray: 0, alpha: 0.15)
   }
 
   override func mouseExited(with event: NSEvent) {

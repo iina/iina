@@ -55,7 +55,7 @@ extension InitialWindowView: NSTableViewDelegate, NSTableViewDataSource {
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    mainWindow.playerCore.openFile(recentDocuments[recentFilesTableView.selectedRow])
+    mainWindow.playerCore.openURL(recentDocuments[recentFilesTableView.selectedRow], isNetworkResource: false)
     mainWindow.initialWindowView.view.isHidden = true
   }
 

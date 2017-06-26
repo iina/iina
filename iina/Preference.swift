@@ -15,6 +15,7 @@ struct Preference {
   // consider using RawRepresentable, but also need to extend UserDefaults
   struct Key {
     static let showWelcomeWindow = "showWelcomeWindow"
+    static let alwaysOpenInNewWindow = "alwaysOpenInNewWindow"
 
     /** Record recent files */
     static let recordPlaybackHistory = "recordPlaybackHistory"
@@ -391,6 +392,7 @@ struct Preference {
 
   static let defaultPreference:[String : Any] = [
     Key.showWelcomeWindow: true,
+    Key.alwaysOpenInNewWindow: false,
     Key.recordPlaybackHistory: true,
     Key.recordRecentFiles: true,
     Key.trackAllFilesInRecentOpenMenu: true,

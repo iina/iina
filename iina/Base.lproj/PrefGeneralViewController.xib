@@ -13,7 +13,7 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="483"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="503"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="8Ql-ym-BvF">
                     <rect key="frame" x="118" y="386" width="352" height="18"/>
@@ -58,7 +58,7 @@
                     </buttonCell>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fcb-Fl-8d8">
-                    <rect key="frame" x="9" y="446" width="100" height="17"/>
+                    <rect key="frame" x="9" y="466" width="100" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="96" id="Rvn-pL-3se"/>
                     </constraints>
@@ -69,7 +69,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38y-2I-MGs">
-                    <rect key="frame" x="9" y="407" width="100" height="17"/>
+                    <rect key="frame" x="9" y="427" width="100" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="96" id="hfl-mn-0QS"/>
                     </constraints>
@@ -80,7 +80,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOy-i3-JWR">
-                    <rect key="frame" x="118" y="446" width="50" height="17"/>
+                    <rect key="frame" x="118" y="466" width="50" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="ffc-vB-BOa"/>
                     </constraints>
@@ -91,7 +91,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QNz-7p-k3k">
-                    <rect key="frame" x="172" y="440" width="125" height="26"/>
+                    <rect key="frame" x="172" y="460" width="125" height="26"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="PV0-1m-iGC"/>
                     </constraints>
@@ -115,7 +115,7 @@
                     </connections>
                 </popUpButton>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Obh-JS-axA">
-                    <rect key="frame" x="120" y="432" width="348" height="5"/>
+                    <rect key="frame" x="120" y="452" width="348" height="5"/>
                 </box>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Xi9-i5-9V4">
                     <rect key="frame" x="118" y="306" width="352" height="18"/>
@@ -374,7 +374,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="jZl-6D-3lP">
-                    <rect key="frame" x="118" y="406" width="352" height="18"/>
+                    <rect key="frame" x="118" y="426" width="352" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="UlI-lp-LbQ"/>
                     </constraints>
@@ -386,10 +386,26 @@
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.showWelcomeWindow" id="fbV-km-GAc"/>
                     </connections>
                 </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="DUm-O0-pdI">
+                    <rect key="frame" x="118" y="406" width="352" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="ShR-tm-AWJ"/>
+                    </constraints>
+                    <buttonCell key="cell" type="check" title="Always open media in new window" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="M0z-bI-88d">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="IBP-Mz-Maa" name="value" keyPath="values.alwaysOpenInNewWindow" id="pIG-7D-0J8"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="DUm-O0-pdI" secondAttribute="trailing" constant="12" id="0He-yE-0gj"/>
                 <constraint firstItem="pfH-CF-O2T" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="11" id="0lB-RU-4UH"/>
                 <constraint firstAttribute="trailing" secondItem="jZl-6D-3lP" secondAttribute="trailing" constant="12" id="1ta-4X-ntj"/>
+                <constraint firstItem="8Ql-ym-BvF" firstAttribute="top" secondItem="DUm-O0-pdI" secondAttribute="bottom" constant="6" id="26E-b5-CJE"/>
+                <constraint firstItem="DUm-O0-pdI" firstAttribute="top" secondItem="jZl-6D-3lP" secondAttribute="bottom" constant="6" id="2KY-l2-dZu"/>
                 <constraint firstAttribute="trailing" secondItem="tV0-X6-PhP" secondAttribute="trailing" constant="12" id="2ZH-xq-acW"/>
                 <constraint firstAttribute="trailing" secondItem="OVz-Nv-1WW" secondAttribute="trailing" constant="12" id="3YO-34-5pc"/>
                 <constraint firstItem="Nj3-EX-JeL" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="3ZU-bQ-LqL"/>
@@ -409,7 +425,6 @@
                 <constraint firstItem="6gO-wx-MWj" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="11" id="HBx-nm-pXG"/>
                 <constraint firstItem="gxK-Zo-PtQ" firstAttribute="top" secondItem="4zm-YX-iM8" secondAttribute="bottom" constant="6" id="HfR-ed-J74"/>
                 <constraint firstItem="ZA7-QS-FAH" firstAttribute="baseline" secondItem="Nj3-EX-JeL" secondAttribute="baseline" id="Hvx-H2-Gff"/>
-                <constraint firstItem="8Ql-ym-BvF" firstAttribute="top" secondItem="jZl-6D-3lP" secondAttribute="bottom" constant="6" id="If9-0f-PbY"/>
                 <constraint firstItem="AUU-c3-fW5" firstAttribute="leading" secondItem="pfH-CF-O2T" secondAttribute="trailing" constant="13" id="Je2-7k-Ppw"/>
                 <constraint firstItem="iLE-bn-UWS" firstAttribute="top" secondItem="KvZ-mf-rv4" secondAttribute="bottom" constant="9" id="K2S-eN-hcp"/>
                 <constraint firstItem="fMz-O7-X4u" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="KEH-Uc-oSm"/>
@@ -469,6 +484,7 @@
                 <constraint firstItem="QvG-Ma-br0" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="voa-iL-qQ8"/>
                 <constraint firstItem="HOy-i3-JWR" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="wHg-Rc-1Wf"/>
                 <constraint firstAttribute="trailing" secondItem="U8N-xw-dgL" secondAttribute="trailing" constant="12" id="wZB-Ak-IJm"/>
+                <constraint firstItem="DUm-O0-pdI" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="z9v-A2-GvW"/>
                 <constraint firstItem="ZA7-QS-FAH" firstAttribute="leading" secondItem="Nj3-EX-JeL" secondAttribute="trailing" constant="4" id="zb6-fR-Rwb"/>
                 <constraint firstItem="pfH-CF-O2T" firstAttribute="top" secondItem="MAK-Hg-Dfu" secondAttribute="bottom" constant="9" id="ziV-la-Et3"/>
             </constraints>

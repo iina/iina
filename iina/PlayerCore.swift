@@ -22,6 +22,14 @@ class PlayerCore: NSObject {
     }
   }
 
+  static var activeOrNew: PlayerCore {
+    if UserDefaults.standard.bool(forKey: Preference.Key.alwaysOpenInNewWindow) {
+      return newPlayerCore()
+    } else {
+      return active
+    }
+  }
+
   static var playerCores: [PlayerCore] = []
 
   static func newPlayerCore() -> PlayerCore {
@@ -29,10 +37,6 @@ class PlayerCore: NSObject {
     playerCores.append(pc)
     pc.startMPV()
     return pc
-  }
-
-  static func openFile() {
-
   }
 
   // MARK: - Fields
@@ -90,17 +94,14 @@ class PlayerCore: NSObject {
   // MARK: - Control commands
 
   // Open a file
-  func openFile(_ url: URL?) {
-    guard let path = url?.path else {
+  func openURL(_ url: URL?, isNetworkResource: Bool? = nil) {
+    guard let url = url else {
       Utility.log("Error: empty file path or url")
       return
     }
-    openMainWindow(path: path, url: url!, isNetwork: false)
-  }
-
-  func openURL(_ url: URL) {
-    let path = url.absoluteString
-    openMainWindow(path: path, url: url, isNetwork: true)
+    let isNetwork = isNetworkResource ?? !url.isFileURL
+    let path = isNetwork ? url.absoluteString : url.path
+    openMainWindow(path: path, url: url, isNetwork: isNetwork)
   }
 
   func openURLString(_ str: String) {

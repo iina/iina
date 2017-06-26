@@ -378,7 +378,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="UlI-lp-LbQ"/>
                     </constraints>
-                    <buttonCell key="cell" type="check" title="Show welcome window when launched" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="j2Z-cq-tVz">
+                    <buttonCell key="cell" type="check" title="Show an initial window when launched" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="j2Z-cq-tVz">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

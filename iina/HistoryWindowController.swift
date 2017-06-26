@@ -244,6 +244,16 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   // MARK: - IBActions
 
+  @IBAction func playAction(_ sender: AnyObject) {
+    guard let firstEntry = selectedEntries.first else { return }
+    PlayerCore.active.openURL(firstEntry.url, isNetworkResource: false)
+  }
+
+  @IBAction func playInNewWindowAction(_ sender: AnyObject) {
+    guard let firstEntry = selectedEntries.first else { return }
+    PlayerCore.newPlayerCore().openURL(firstEntry.url, isNetworkResource: false)
+  }
+
   @IBAction func groupByChangedAction(_ sender: NSPopUpButton) {
     groupBy = SortOption(rawValue: sender.selectedTag()) ?? .lastPlayed
     reloadData()

@@ -69,8 +69,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       UserDefaults.standard.register(defaults: Preference.defaultPreference)
       let pc = PlayerCore.first
       if UserDefaults.standard.bool(forKey: Preference.Key.showWelcomeWindow) {
-        pc.mainWindow.showWindow(nil)
-        pc.mainWindow.windowDidOpen()
+        pc.initialWindow.showWindow(nil)
       }
       menuController.bindMenuItems()
       isReady = true
@@ -114,10 +113,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-    if !flag, UserDefaults.standard.bool(forKey: Preference.Key.showWelcomeWindow), let mw = PlayerCore.first.mainWindow {
-      mw.switchToInitialView()
-      mw.showWindow(nil)
-      mw.windowDidOpen()
+    if !flag, UserDefaults.standard.bool(forKey: Preference.Key.showWelcomeWindow), let initialWindow = PlayerCore.first.initialWindow {
+      initialWindow.showWindow(nil)
     }
     return true
   }
@@ -132,11 +129,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     if !isReady {
       UserDefaults.standard.register(defaults: Preference.defaultPreference)
-      let pc = PlayerCore.first
-      if UserDefaults.standard.bool(forKey: Preference.Key.showWelcomeWindow) {
-        pc.mainWindow.showWindow(nil)
-        pc.mainWindow.windowDidOpen()
-      }
       menuController.bindMenuItems()
       isReady = true
     }
@@ -235,8 +227,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func menuNewWindow(_ sender: Any) {
     let pc = PlayerCore.newPlayerCore()
-    pc.mainWindow.showWindow(nil)
-    pc.mainWindow.windowDidOpen()
+    pc.initialWindow.showWindow(nil)
   }
 
   @IBAction func menuOpenScreenshotFolder(_ sender: NSMenuItem) {

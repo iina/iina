@@ -63,6 +63,7 @@ class PlayerCore: NSObject {
   var backgroundQueueTicket = 0
 
   var mainWindow: MainWindowController!
+  var initialWindow: InitialWindowController!
 
   var mpvController: MPVController!
 
@@ -93,6 +94,7 @@ class PlayerCore: NSObject {
     super.init()
     self.mpvController = MPVController(playerCore: self)
     self.mainWindow = MainWindowController(playerCore: self)
+    self.initialWindow = InitialWindowController(playerCore: self)
   }
 
   // MARK: - Control commands
@@ -125,7 +127,7 @@ class PlayerCore: NSObject {
     if !mainWindow.window!.isVisible {
       SleepPreventer.preventSleep()
     }
-    mainWindow.initialWindowView.view.isHidden = true
+    initialWindow.close()
     mainWindow.showWindow(nil)
     mainWindow.windowDidOpen()
     // Send load file command
@@ -739,7 +741,6 @@ class PlayerCore: NSObject {
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     info.haveDownloadedSub = false
-    mainWindow.initialWindowView.view.isHidden = true
     DispatchQueue.main.sync {
       self.getTrackInfo()
       self.getSelectedTracks()

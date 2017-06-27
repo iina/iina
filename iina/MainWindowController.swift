@@ -20,8 +20,6 @@ fileprivate let OSCTopMainViewMarginTopInFullScreen: CGFloat = 6
 fileprivate let PlaylistMinWidth: CGFloat = 240
 fileprivate let PlaylistMaxWidth: CGFloat = 400
 
-fileprivate let IntialWindowSize = NSSize(width: 640, height: 400)
-
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override var windowNibName: String {
@@ -72,12 +70,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let cropView = CropSettingsViewController()
     cropView.mainWindow = self
     return cropView
-  }()
-
-  lazy var initialWindowView: InitialWindowView = {
-    let view = InitialWindowView()
-    view.mainWindow = self
-    return view
   }()
 
   private lazy var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = {
@@ -356,7 +348,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     w.backgroundColor = NSColor.black
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay
 
-    w.title = ""
+    updateTitle()
 
     // set material
     setMaterial(Preference.Theme(rawValue: ud.integer(forKey: PK.themeMaterial)))
@@ -366,17 +358,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if let wf = windowFrameFromGeometry() {
       w.setFrame(wf, display: false)
     }
-
-    if playerCore.info.currentURL != nil {
-      initialWindowView.view.isHidden = true
-    } else {
-      controlBarFloating.isHidden = true
-      controlBarBottom.isHidden = true
-      titleBarView.isHidden = true
-    }
-
-    w.contentView?.addSubview(initialWindowView.view, positioned: .below, relativeTo: nil)
-    quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": initialWindowView.view])
 
     // sidebar views
     sideBarView.isHidden = true
@@ -607,7 +588,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   private func setupOnScreenController(position newPosition: Preference.OSCPosition) {
 
-    var isCurrentControlBarHidden = true
+    var isCurrentControlBarHidden = false
 
     let isSwitchingToTop = newPosition == .top
     let isSwitchingFromTop = oscPosition == .top
@@ -905,7 +886,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func scrollWheel(with event: NSEvent) {
-    guard !isInInteractiveMode && initialWindowView.view.isHidden else { return }
+    guard !isInInteractiveMode else { return }
 
     let isMouse = event.phase.isEmpty
     let isTrackpadBegan = event.phase.contains(.began)
@@ -1013,6 +994,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** A method being called when window open. Pretend to be a window delegate. */
   func windowDidOpen() {
+    window!.makeMain()
+    window!.makeKeyAndOrderFront(nil)
     window!.collectionBehavior = [.managed, .fullScreenPrimary]
     // update buffer indicator view
     updateBufferIndicatorView()
@@ -1205,25 +1188,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Control UI
 
-  func switchToInitialView() {
-    guard let w = window else { return }
-    // center window
-    let newFrame = w.frame.centeredResize(to: IntialWindowSize)
-    w.setFrame(newFrame, display: true)
-    w.center()
-    // clear title
-    w.representedURL = nil
-    w.title = ""
-    // hide all views except traffic lights
-    if #available(OSX 10.12.2, *) {
-      touchBarCurrentPosLabel?.stringValue = VideoTime.zero.stringRepresentation
-    }
-    fadeableViews.forEach { $0.isHidden = true }
-    standardWindowButtons.forEach { $0.isHidden = false }
-    osdVisualEffectView.isHidden = true
-    initialWindowView.view.isHidden = false
-  }
-
   func hideUIAndCursor() {
     // don't hide UI when dragging control bar
     if controlBarFloating.isDragging {
@@ -1235,7 +1199,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   private func hideUI() {
     // Don't hide UI when in PIP
-    guard initialWindowView.view.isHidden else { return }
     guard !isInPIP || animationState == .hidden else {
       return
     }
@@ -1264,7 +1227,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func showUI() {
-    guard initialWindowView.view.isHidden else { return }
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v.isHidden = false
@@ -1309,12 +1271,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func updateTitle() {
     window?.representedURL = playerCore.info.currentURL
     window?.setTitleWithRepresentedFilename(playerCore.info.currentURL?.path ?? "")
-    removeStandardButtonsFromFadeableViews()
-    addBackStandardButtonsToFadeableViews()
   }
 
   func displayOSD(_ message: OSDMessage) {
-    if !playerCore.displayOSD || !initialWindowView.view.isHidden { return }
+    if !playerCore.displayOSD { return }
 
     if hideOSDTimer != nil {
       hideOSDTimer!.invalidate()

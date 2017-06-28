@@ -111,7 +111,7 @@
 		8492C2861E771FB200CE5825 /* ISO639_2.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8492C2851E771FB200CE5825 /* ISO639_2.strings */; };
 		8492C2881E7721A600CE5825 /* ISO639_2Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8492C2871E7721A600CE5825 /* ISO639_2Helper.swift */; };
 		849581F11F02728700D3B359 /* InitialWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849581EF1F02728700D3B359 /* InitialWindowController.swift */; };
-		849581F21F02728700D3B359 /* InitialWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849581F01F02728700D3B359 /* InitialWindowController.xib */; };
+		849581F31F03D55A00D3B359 /* InitialWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849581F51F03D55A00D3B359 /* InitialWindowController.xib */; };
 		84996F901EC11CE6009A8A39 /* HistoryWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84996F921EC11CE6009A8A39 /* HistoryWindowController.xib */; };
 		84A0BA901D2F8D4100BC8DA1 /* IINAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA8F1D2F8D4100BC8DA1 /* IINAError.swift */; };
 		84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */; };
@@ -475,7 +475,8 @@
 		8492C2851E771FB200CE5825 /* ISO639_2.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ISO639_2.strings; sourceTree = "<group>"; };
 		8492C2871E7721A600CE5825 /* ISO639_2Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO639_2Helper.swift; sourceTree = "<group>"; };
 		849581EF1F02728700D3B359 /* InitialWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialWindowController.swift; sourceTree = "<group>"; };
-		849581F01F02728700D3B359 /* InitialWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitialWindowController.xib; sourceTree = "<group>"; };
+		849581F41F03D55A00D3B359 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InitialWindowController.xib; sourceTree = "<group>"; };
+		849581F71F03D55C00D3B359 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InitialWindowController.strings"; sourceTree = "<group>"; };
 		8497A4831D2FF573005F504F /* iina-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iina-Bridging-Header.h"; sourceTree = "<group>"; };
 		84996F911EC11CE6009A8A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HistoryWindowController.xib; sourceTree = "<group>"; };
 		84996F941EC11CEC009A8A39 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HistoryWindowController.strings"; sourceTree = "<group>"; };
@@ -939,7 +940,7 @@
 				84996F921EC11CE6009A8A39 /* HistoryWindowController.xib */,
 				846352571EEEE11A0043F0CC /* ThumbnailPeekView.swift */,
 				849581EF1F02728700D3B359 /* InitialWindowController.swift */,
-				849581F01F02728700D3B359 /* InitialWindowController.xib */,
+				849581F51F03D55A00D3B359 /* InitialWindowController.xib */,
 				84D377691D74163B007F7396 /* Video */,
 				84D377681D7413D8007F7396 /* Accessories */,
 				8452DD7F1D3A1F2A008A543A /* Preference */,
@@ -1419,7 +1420,7 @@
 				8400D5ED1E1AB33F006785F5 /* PrefAdvancedViewController.xib in Resources */,
 				8400D5CF1E1AB306006785F5 /* CropSettingsViewController.xib in Resources */,
 				6100FF2B1EDF9806002CF0FB /* dsa_pub.pem in Resources */,
-				849581F21F02728700D3B359 /* InitialWindowController.xib in Resources */,
+				849581F31F03D55A00D3B359 /* InitialWindowController.xib in Resources */,
 				845AC09C1E1AE6C10080B614 /* Localizable.strings in Resources */,
 				8400D5F61E1AB34D006785F5 /* PrefNetworkViewController.xib in Resources */,
 				8400D5D51E1AB317006785F5 /* FilterWindowController.xib in Resources */,
@@ -1904,6 +1905,15 @@
 				6CA50A931EBBA9DF0060D07A /* de */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		849581F51F03D55A00D3B359 /* InitialWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				849581F41F03D55A00D3B359 /* Base */,
+				849581F71F03D55C00D3B359 /* zh-Hans */,
+			);
+			name = InitialWindowController.xib;
 			sourceTree = "<group>";
 		};
 		84996F921EC11CE6009A8A39 /* HistoryWindowController.xib */ = {

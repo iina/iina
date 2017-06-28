@@ -38,6 +38,8 @@ class InitialWindowController: NSWindowController {
     super.windowDidLoad()
     window?.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
     window?.titlebarAppearsTransparent = true
+    window?.isMovableByWindowBackground = true
+
     mainView.wantsLayer = true
     mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
     appIcon.image = NSApp.applicationIconImage

@@ -83,10 +83,22 @@
                                     <action selector="openFile:" target="Voe-Tx-rLC" id="Aev-CZ-Gfe"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Open in New Window…" tag="1" alternate="YES" keyEquivalent="o" id="z9W-ga-j3b">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="openFile:" target="Voe-Tx-rLC" id="jeI-mz-AmY"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Open URL…" keyEquivalent="O" id="0m7-3r-twH">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>
                                     <action selector="openURL:" target="Voe-Tx-rLC" id="uUI-BF-zJu"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Open URL in New Window…" tag="1" alternate="YES" keyEquivalent="O" id="bfB-bn-KeM">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="openURL:" target="Voe-Tx-rLC" id="7MD-t2-mMA"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Open Recent" id="tXI-mr-wws">
@@ -506,6 +518,9 @@
                 <outlet property="normalSize" destination="1UK-8n-QPP" id="rpd-7S-IYd"/>
                 <outlet property="normalSizeRetina" destination="c1x-bx-69F" id="S22-F3-Ks9"/>
                 <outlet property="open" destination="IAo-SY-fd9" id="fW9-2A-V4F"/>
+                <outlet property="openAlternative" destination="z9W-ga-j3b" id="RRI-7o-x9o"/>
+                <outlet property="openURL" destination="0m7-3r-twH" id="BOj-Zv-hzW"/>
+                <outlet property="openURLAlternative" destination="bfB-bn-KeM" id="I7a-cV-JUC"/>
                 <outlet property="pause" destination="UOE-MJ-8ku" id="74t-ZU-dXD"/>
                 <outlet property="pictureInPicture" destination="mND-N8-z6o" id="mrn-ku-bqH"/>
                 <outlet property="playbackMenu" destination="GEO-Iw-cKr" id="Ji3-Wv-EE5"/>

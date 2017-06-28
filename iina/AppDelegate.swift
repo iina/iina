@@ -12,6 +12,9 @@ import MASPreferences
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+  private let normalMenuItemTag = 0
+  private let alternativeMenuItemTag = 1
+
   var isReady: Bool = false
   var handledDroppedText: Bool = false
   var handledURLEvent: Bool = false
@@ -199,7 +202,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if UserDefaults.standard.bool(forKey: Preference.Key.recordRecentFiles) {
           NSDocumentController.shared().noteNewRecentDocumentURL(url)
         }
-        let playerCore: PlayerCore = (sender as? PlayerCore) ?? .activeOrNew
+        let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: sender.tag == alternativeMenuItemTag)
         playerCore.openURL(url, isNetworkResource: false)
       }
     }
@@ -217,7 +220,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let response = panel.runModal()
     if response == NSAlertFirstButtonReturn {
       if let url = inputViewController.url {
-        let playerCore: PlayerCore = (sender as? PlayerCore) ?? .activeOrNew
+        let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: sender.tag == alternativeMenuItemTag)
         playerCore.openURL(url, isNetworkResource: true)
       } else {
         Utility.showAlert("wrong_url_format")

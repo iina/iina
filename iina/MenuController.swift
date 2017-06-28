@@ -13,9 +13,17 @@ class MenuController: NSObject, NSMenuDelegate {
   /** For convinent bindings. see `bind(...)` below. [menu: check state block] */
   private var menuBindingList: [NSMenu: (NSMenuItem) -> Bool] = [:]
 
+  private var stringForOpen: String!
+  private var stringForOpenAlternative: String!
+  private var stringForOpenURL: String!
+  private var stringForOpenURLAlternative: String!
+
   // File
   @IBOutlet weak var file: NSMenuItem!
   @IBOutlet weak var open: NSMenuItem!
+  @IBOutlet weak var openAlternative: NSMenuItem!
+  @IBOutlet weak var openURL: NSMenuItem!
+  @IBOutlet weak var openURLAlternative: NSMenuItem!
   @IBOutlet weak var savePlaylist: NSMenuItem!
   @IBOutlet weak var deleteCurrentFile: NSMenuItem!
   // Playback
@@ -109,6 +117,14 @@ class MenuController: NSObject, NSMenuDelegate {
     
     savePlaylist.action = #selector(MainWindowController.menuSavePlaylist(_:))
     deleteCurrentFile.action = #selector(MainWindowController.menuDeleteCurrentFile(_:))
+
+    stringForOpen = open.title
+    stringForOpenURL = openURL.title
+    stringForOpenAlternative = openAlternative.title
+    stringForOpenURLAlternative = openURLAlternative.title
+
+    updateOpenMenuItems()
+    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.alwaysOpenInNewWindow, options: [], context: nil)
     
     // Playback menu
 
@@ -262,6 +278,18 @@ class MenuController: NSObject, NSMenuDelegate {
     inspector.action = #selector(MainWindowController.menuShowInspector(_:))
   }
 
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
+    guard let keyPath = keyPath, let change = change else { return }
+
+    switch keyPath {
+    case Preference.Key.alwaysOpenInNewWindow:
+      updateOpenMenuItems()
+    default:
+      return
+    }
+
+  }
+
   // MARK: - Update Menus
 
   private func updatePlaylist() {
@@ -394,6 +422,20 @@ class MenuController: NSObject, NSMenuDelegate {
     // add to list
     menu.delegate = self
     menuBindingList.updateValue(block, forKey: menu)
+  }
+
+  private func updateOpenMenuItems() {
+    if UserDefaults.standard.bool(forKey: Preference.Key.alwaysOpenInNewWindow) {
+      open.title = stringForOpenAlternative
+      openAlternative.title = stringForOpen
+      openURL.title = stringForOpenURLAlternative
+      openURLAlternative.title = stringForOpenURL
+    } else {
+      open.title = stringForOpen
+      openAlternative.title = stringForOpenAlternative
+      openURL.title = stringForOpenURL
+      openURLAlternative.title = stringForOpenURLAlternative
+    }
   }
 
   // MARK: - Menu delegate

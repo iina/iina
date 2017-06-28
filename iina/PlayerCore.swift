@@ -47,6 +47,11 @@ class PlayerCore: NSObject {
     return pc
   }
 
+  static func activeOrNewForMenuAction(isAlternative: Bool) -> PlayerCore {
+    let useNew = UserDefaults.standard.bool(forKey: Preference.Key.alwaysOpenInNewWindow) != isAlternative
+    return useNew ? newPlayerCore : active
+  }
+
   // MARK: - Fields
 
   unowned let ud: UserDefaults = UserDefaults.standard

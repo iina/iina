@@ -40,6 +40,8 @@ class InitialWindowController: NSWindowController {
     window?.titlebarAppearsTransparent = true
     window?.isMovableByWindowBackground = true
 
+    window?.contentView?.register(forDraggedTypes: [NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeString])
+
     mainView.wantsLayer = true
     mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
     appIcon.image = NSApp.applicationIconImage
@@ -77,6 +79,83 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
     guard recentFilesTableView.selectedRow >= 0 else { return }
     playerCore.openURL(recentDocuments[recentFilesTableView.selectedRow], isNetworkResource: false)
     recentFilesTableView.deselectAll(nil)
+  }
+
+}
+
+
+class InitialWindowContentView: NSView {
+
+  var playerCore: PlayerCore {
+    return (window!.windowController as! InitialWindowController).playerCore
+  }
+
+  override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+    if let _ = sender.draggingSource() { return [] }
+    return .copy
+  }
+
+  override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
+    if let _ = sender.draggingSource() { return [] }
+    return .copy
+  }
+
+  override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
+    let pb = sender.draggingPasteboard()
+    guard let types = pb.types else { return false }
+    if types.contains(NSFilenamesPboardType) {
+      guard let fileNames = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else { return false }
+
+      var videoFiles: [String] = []
+      var subtitleFiles: [String] = []
+      fileNames.forEach({ (path) in
+        let ext = (path as NSString).pathExtension.lowercased()
+        if Utility.supportedFileExt[.sub]!.contains(ext) {
+          subtitleFiles.append(path)
+        } else {
+          videoFiles.append(path)
+        }
+      })
+
+      if videoFiles.count == 0 {
+        if subtitleFiles.count > 0 {
+          subtitleFiles.forEach { (subtitle) in
+            playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitle))
+          }
+        } else {
+          return false
+        }
+      } else if videoFiles.count == 1 {
+        playerCore.openURL(URL(fileURLWithPath: videoFiles[0]), isNetworkResource: false)
+        subtitleFiles.forEach { (subtitle) in
+          playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitle))
+        }
+      } else {
+        for path in videoFiles {
+          playerCore.addToPlaylist(path)
+        }
+        playerCore.sendOSD(.addToPlaylist(videoFiles.count))
+      }
+      NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+      return true
+    } else if types.contains(NSURLPboardType) {
+      guard let url = pb.propertyList(forType: NSURLPboardType) as? [String] else { return false }
+
+      playerCore.openURLString(url[0])
+      return true
+    } else if types.contains(NSPasteboardTypeString) {
+      guard let droppedString = pb.pasteboardItems![0].string(forType: "public.utf8-plain-text") else {
+        return false
+      }
+      if Regex.urlDetect.matches(droppedString) {
+        playerCore.openURLString(droppedString)
+        return true
+      } else {
+        Utility.showAlert("unsupported_url")
+        return false
+      }
+    }
+    return false
   }
 
 }

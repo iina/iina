@@ -26,6 +26,8 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var openURLAlternative: NSMenuItem!
   @IBOutlet weak var savePlaylist: NSMenuItem!
   @IBOutlet weak var deleteCurrentFile: NSMenuItem!
+  @IBOutlet weak var newWindow: NSMenuItem!
+  @IBOutlet weak var newWindowSeparator: NSMenuItem!
   // Playback
   @IBOutlet weak var playbackMenu: NSMenu!
   @IBOutlet weak var pause: NSMenuItem!
@@ -125,6 +127,11 @@ class MenuController: NSObject, NSMenuDelegate {
 
     updateOpenMenuItems()
     UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.alwaysOpenInNewWindow, options: [], context: nil)
+
+    if UserDefaults.standard.bool(forKey: Preference.Key.enableCmdN) {
+      newWindowSeparator.isHidden = false
+      newWindow.isHidden = false
+    }
     
     // Playback menu
 
@@ -279,7 +286,7 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath = keyPath, let change = change else { return }
+    guard let keyPath = keyPath else { return }
 
     switch keyPath {
     case Preference.Key.alwaysOpenInNewWindow:

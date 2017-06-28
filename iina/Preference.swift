@@ -16,6 +16,7 @@ struct Preference {
   struct Key {
     static let showWelcomeWindow = "showWelcomeWindow"
     static let alwaysOpenInNewWindow = "alwaysOpenInNewWindow"
+    static let enableCmdN = "enableCmdN"
 
     /** Record recent files */
     static let recordPlaybackHistory = "recordPlaybackHistory"
@@ -393,6 +394,7 @@ struct Preference {
   static let defaultPreference:[String : Any] = [
     Key.showWelcomeWindow: true,
     Key.alwaysOpenInNewWindow: false,
+    Key.enableCmdN: false,
     Key.recordPlaybackHistory: true,
     Key.recordRecentFiles: true,
     Key.trackAllFilesInRecentOpenMenu: true,

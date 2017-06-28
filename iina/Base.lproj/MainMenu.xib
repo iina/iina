@@ -114,8 +114,8 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="bEr-t9-Pyn"/>
-                            <menuItem title="New Window" keyEquivalent="n" id="Qv1-xd-wj5">
+                            <menuItem isSeparatorItem="YES" hidden="YES" id="bEr-t9-Pyn"/>
+                            <menuItem title="New Window" hidden="YES" keyEquivalent="n" id="Qv1-xd-wj5">
                                 <connections>
                                     <action selector="menuNewWindow:" target="Voe-Tx-rLC" id="J5Q-v3-yX9"/>
                                 </connections>
@@ -514,6 +514,8 @@
                 <outlet property="loadExternalSub" destination="k6x-hf-ATi" id="lVp-BV-A2C"/>
                 <outlet property="mirror" destination="JJq-qH-toq" id="EWI-VS-c7Q"/>
                 <outlet property="mute" destination="WOL-Us-ByA" id="Hry-sv-WhY"/>
+                <outlet property="newWindow" destination="Qv1-xd-wj5" id="ToZ-3i-Sb0"/>
+                <outlet property="newWindowSeparator" destination="bEr-t9-Pyn" id="Ao1-Bq-mMU"/>
                 <outlet property="nextFrame" destination="XDC-Pc-rS1" id="PGo-Nr-JQg"/>
                 <outlet property="normalSize" destination="1UK-8n-QPP" id="rpd-7S-IYd"/>
                 <outlet property="normalSizeRetina" destination="c1x-bx-69F" id="S22-F3-Ks9"/>

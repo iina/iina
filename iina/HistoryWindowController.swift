@@ -251,7 +251,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   @IBAction func playInNewWindowAction(_ sender: AnyObject) {
     guard let firstEntry = selectedEntries.first else { return }
-    PlayerCore.newPlayerCore().openURL(firstEntry.url, isNetworkResource: false)
+    PlayerCore.newPlayerCore.openURL(firstEntry.url, isNetworkResource: false)
   }
 
   @IBAction func groupByChangedAction(_ sender: NSPopUpButton) {

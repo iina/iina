@@ -226,8 +226,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func menuNewWindow(_ sender: Any) {
-    let pc = PlayerCore.newPlayerCore()
-    pc.initialWindow.showWindow(nil)
+    PlayerCore.newPlayerCore.initialWindow.showWindow(nil)
   }
 
   @IBAction func menuOpenScreenshotFolder(_ sender: NSMenuItem) {

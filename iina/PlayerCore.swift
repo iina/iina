@@ -12,7 +12,7 @@ class PlayerCore: NSObject {
 
   // MARK: - Multiple instances
 
-  static let first: PlayerCore = newPlayerCore()
+  static let first: PlayerCore = createPlayerCore()
 
   static var active: PlayerCore {
     if let wc = NSApp.mainWindow?.windowController as? MainWindowController {
@@ -22,9 +22,13 @@ class PlayerCore: NSObject {
     }
   }
 
+  static var newPlayerCore: PlayerCore {
+    return findIdlePlayerCore() ?? createPlayerCore()
+  }
+
   static var activeOrNew: PlayerCore {
     if UserDefaults.standard.bool(forKey: Preference.Key.alwaysOpenInNewWindow) {
-      return findIdlePlayerCore() ?? newPlayerCore()
+      return newPlayerCore
     } else {
       return active
     }
@@ -33,10 +37,10 @@ class PlayerCore: NSObject {
   static var playerCores: [PlayerCore] = []
 
   static private func findIdlePlayerCore() -> PlayerCore? {
-    return playerCores.first { $0.info.isIdle }
+    return playerCores.first { $0.info.isIdle && !($0.initialWindow.window?.isVisible ?? false) }
   }
 
-  static func newPlayerCore() -> PlayerCore {
+  static private func createPlayerCore() -> PlayerCore {
     let pc = PlayerCore()
     playerCores.append(pc)
     pc.startMPV()

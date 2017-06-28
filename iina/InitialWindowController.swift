@@ -54,16 +54,6 @@ class InitialWindowController: NSWindowController {
       visualEffectView.material = .ultraDark
     }
   }
-
-  @IBAction func openBtnAction(_ sender: NSButton) {
-    (NSApp.delegate as! AppDelegate).openFile(playerCore)
-    sender.layer?.backgroundColor = CGColor(gray: 0, alpha: 0)
-  }
-
-  @IBAction func openURLBtnAction(_ sender: NSButton) {
-    (NSApp.delegate as! AppDelegate).openURL(playerCore)
-    sender.layer?.backgroundColor = CGColor(gray: 0, alpha: 0)
-  }
 }
 
 
@@ -90,7 +80,16 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 }
 
 
-class InitialWindowViewActionButton: NSButton {
+class InitialWindowViewActionButton: NSView {
+
+  private let normalBackground = CGColor(gray: 0, alpha: 0)
+  private let hoverBackground = CGColor(gray: 0, alpha: 0.25)
+  private let pressedBackground = CGColor(gray: 0, alpha: 0.35)
+
+  private let openFileBtnID = "openFile"
+  private let openURLBtnID = "openURL"
+
+  var action: Selector?
 
   override func awakeFromNib() {
     self.wantsLayer = true
@@ -99,11 +98,24 @@ class InitialWindowViewActionButton: NSButton {
   }
 
   override func mouseEntered(with event: NSEvent) {
-    self.layer?.backgroundColor = CGColor(gray: 0, alpha: 0.15)
+    self.layer?.backgroundColor = hoverBackground
   }
 
   override func mouseExited(with event: NSEvent) {
-    self.layer?.backgroundColor = CGColor(gray: 0, alpha: 0)
+    self.layer?.backgroundColor = normalBackground
+  }
+
+  override func mouseDown(with event: NSEvent) {
+    self.layer?.backgroundColor = pressedBackground
+    if self.identifier == openFileBtnID {
+      (NSApp.delegate as! AppDelegate).openFile(self)
+    } else {
+      (NSApp.delegate as! AppDelegate).openURL(self)
+    }
+  }
+
+  override func mouseUp(with event: NSEvent) {
+    self.layer?.backgroundColor = hoverBackground
   }
   
 }

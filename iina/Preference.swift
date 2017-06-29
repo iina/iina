@@ -14,7 +14,7 @@ struct Preference {
 
   // consider using RawRepresentable, but also need to extend UserDefaults
   struct Key {
-    static let showWelcomeWindow = "showWelcomeWindow"
+    static let actionAfterLaunch = "actionAfterLaunch"
     static let alwaysOpenInNewWindow = "alwaysOpenInNewWindow"
     static let enableCmdN = "enableCmdN"
 
@@ -210,6 +210,12 @@ struct Preference {
 
   // MARK: - Enums
 
+  enum ActionAfterLaunch: Int {
+    case welcomeWindow = 0
+    case openPanel
+    case none
+  }
+
   enum ArrowButtonAction: Int {
     case speed = 0
     case playlist = 1
@@ -392,7 +398,7 @@ struct Preference {
   // MARK: - Defaults
 
   static let defaultPreference:[String : Any] = [
-    Key.showWelcomeWindow: true,
+    Key.actionAfterLaunch: ActionAfterLaunch.welcomeWindow.rawValue,
     Key.alwaysOpenInNewWindow: false,
     Key.enableCmdN: false,
     Key.recordPlaybackHistory: true,

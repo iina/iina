@@ -71,8 +71,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if !isReady {
       UserDefaults.standard.register(defaults: Preference.defaultPreference)
       let pc = PlayerCore.first
-      if UserDefaults.standard.bool(forKey: Preference.Key.showWelcomeWindow) {
+      let actionRawValue = UserDefaults.standard.integer(forKey: Preference.Key.actionAfterLaunch)
+      let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
+      switch action {
+      case .welcomeWindow:
         pc.initialWindow.showWindow(nil)
+      case .openPanel:
+        openFile(self)
+      default:
+        break
       }
       menuController.bindMenuItems()
       isReady = true
@@ -116,9 +123,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-    if !flag, UserDefaults.standard.bool(forKey: Preference.Key.showWelcomeWindow), let initialWindow = PlayerCore.first.initialWindow {
+    guard !flag, let initialWindow = PlayerCore.first.initialWindow else { return true }
+    let actionRawValue = UserDefaults.standard.integer(forKey: Preference.Key.actionAfterLaunch)
+    let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
+    switch action {
+    case .welcomeWindow:
       initialWindow.showWindow(nil)
+    case .openPanel:
+      openFile(self)
+    default:
+      break
     }
+
     return true
   }
 

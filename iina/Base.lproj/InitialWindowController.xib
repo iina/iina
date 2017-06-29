@@ -21,7 +21,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO" customClass="InitialWindowContentView" customModule="IINA" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -100,13 +100,13 @@
                                         </constraints>
                                     </customView>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="30" horizontalPageScroll="10" verticalLineScroll="30" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igO-NN-NsX">
-                                        <rect key="frame" x="204" y="58" width="392" height="234"/>
+                                        <rect key="frame" x="204" y="24" width="392" height="268"/>
                                         <clipView key="contentView" drawsBackground="NO" id="fmt-32-Icz">
-                                            <rect key="frame" x="0.0" y="0.0" width="392" height="234"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="392" height="268"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="28" rowSizeStyle="automatic" viewBased="YES" id="VeK-rB-yjt">
-                                                    <rect key="frame" x="0.0" y="0.0" width="392" height="234"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="392" height="268"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -194,16 +194,6 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="4Sg-TA-iuJ">
-                                        <rect key="frame" x="210" y="22" width="190" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Show this window at launch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="6Yl-OE-6nZ">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <binding destination="UsR-WV-ps3" name="value" keyPath="values.showWelcomeWindow" id="Bu1-OJ-SgR"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="8hV-gP-tZA" firstAttribute="top" secondItem="nrn-G9-P2A" secondAttribute="bottom" constant="20" id="1Oa-0T-iZV"/>
@@ -211,17 +201,15 @@
                                     <constraint firstAttribute="trailing" secondItem="ZGi-N7-Zv2" secondAttribute="trailing" constant="44" id="9ed-4L-5h2"/>
                                     <constraint firstAttribute="trailing" secondItem="hmC-XZ-bFe" secondAttribute="trailing" constant="44" id="B9z-QH-RTT"/>
                                     <constraint firstItem="hmC-XZ-bFe" firstAttribute="leading" secondItem="ZGi-N7-Zv2" secondAttribute="leading" id="Hpy-gh-hYn"/>
-                                    <constraint firstItem="4Sg-TA-iuJ" firstAttribute="top" secondItem="igO-NN-NsX" secondAttribute="bottom" constant="20" id="OYr-t2-QbA"/>
                                     <constraint firstItem="0eM-hv-Q2Z" firstAttribute="top" secondItem="8hV-gP-tZA" secondAttribute="bottom" constant="4" id="aNF-5h-ueC"/>
                                     <constraint firstItem="nrn-G9-P2A" firstAttribute="top" secondItem="qTo-HU-gie" secondAttribute="top" constant="32" id="aPX-ij-BCA"/>
                                     <constraint firstItem="ZGi-N7-Zv2" firstAttribute="top" secondItem="qTo-HU-gie" secondAttribute="top" constant="32" id="eTE-Jt-iHF"/>
-                                    <constraint firstItem="4Sg-TA-iuJ" firstAttribute="leading" secondItem="igO-NN-NsX" secondAttribute="leading" constant="8" id="eaJ-9v-mfV"/>
                                     <constraint firstItem="igO-NN-NsX" firstAttribute="top" secondItem="hmC-XZ-bFe" secondAttribute="bottom" constant="20" id="fUG-aR-h0p"/>
                                     <constraint firstItem="hmC-XZ-bFe" firstAttribute="top" secondItem="ZGi-N7-Zv2" secondAttribute="bottom" id="k4E-iS-gKl"/>
                                     <constraint firstItem="igO-NN-NsX" firstAttribute="leading" secondItem="hmC-XZ-bFe" secondAttribute="leading" id="lBk-KQ-3rb"/>
                                     <constraint firstItem="8hV-gP-tZA" firstAttribute="centerX" secondItem="nrn-G9-P2A" secondAttribute="centerX" id="nan-tF-2fo"/>
                                     <constraint firstItem="0eM-hv-Q2Z" firstAttribute="centerX" secondItem="nrn-G9-P2A" secondAttribute="centerX" id="nyF-1L-0hj"/>
-                                    <constraint firstAttribute="bottom" secondItem="4Sg-TA-iuJ" secondAttribute="bottom" constant="24" id="udQ-oQ-lX7"/>
+                                    <constraint firstAttribute="bottom" secondItem="igO-NN-NsX" secondAttribute="bottom" constant="24" id="urt-LL-XJ1"/>
                                     <constraint firstAttribute="trailing" secondItem="igO-NN-NsX" secondAttribute="trailing" constant="44" id="wTr-td-dhV"/>
                                     <constraint firstItem="ZGi-N7-Zv2" firstAttribute="leading" secondItem="nrn-G9-P2A" secondAttribute="trailing" constant="52" id="yiP-xG-2ca"/>
                                 </constraints>
@@ -251,6 +239,5 @@
             </connections>
             <point key="canvasLocation" x="135" y="275"/>
         </window>
-        <userDefaultsController representsSharedInstance="YES" id="UsR-WV-ps3"/>
     </objects>
 </document>

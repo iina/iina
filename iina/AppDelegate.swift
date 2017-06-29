@@ -16,8 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   private let alternativeMenuItemTag = 1
 
   var isReady: Bool = false
-  var handledDroppedText: Bool = false
-  var handledURLEvent: Bool = false
+  var handledOpenFile: Bool = false
 
   var pendingURL: String?
 
@@ -70,17 +69,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     if !isReady {
       UserDefaults.standard.register(defaults: Preference.defaultPreference)
-      let pc = PlayerCore.first
-      let actionRawValue = UserDefaults.standard.integer(forKey: Preference.Key.actionAfterLaunch)
-      let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
-      switch action {
-      case .welcomeWindow:
-        pc.initialWindow.showWindow(nil)
-      case .openPanel:
-        openFile(self)
-      default:
-        break
-      }
       menuController.bindMenuItems()
       isReady = true
     }
@@ -99,7 +87,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       parsePendingURL(url)
     }
 
+    Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(self.checkForShowingInitialWindow), userInfo: nil, repeats: false)
+
     NSApplication.shared().servicesProvider = self
+  }
+
+  @objc
+  func checkForShowingInitialWindow() {
+    if !handledOpenFile {
+      showWelcomeWindow()
+    }
+  }
+
+  private func showWelcomeWindow() {
+    let actionRawValue = UserDefaults.standard.integer(forKey: Preference.Key.actionAfterLaunch)
+    let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
+    switch action {
+    case .welcomeWindow:
+      PlayerCore.first.initialWindow.showWindow(nil)
+    case .openPanel:
+      openFile(self)
+    default:
+      break
+    }
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {
@@ -123,17 +133,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-    guard !flag, let initialWindow = PlayerCore.first.initialWindow else { return true }
-    let actionRawValue = UserDefaults.standard.integer(forKey: Preference.Key.actionAfterLaunch)
-    let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
-    switch action {
-    case .welcomeWindow:
-      initialWindow.showWindow(nil)
-    case .openPanel:
-      openFile(self)
-    default:
-      break
-    }
+    guard !flag else { return true }
+    showWelcomeWindow()
 
     return true
   }
@@ -142,6 +143,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // When dragging multiple files to IINA icon, cocoa will simply call this method repeatedly.
     // IINA (mpv) can't handle opening multiple files correctly, so I have to guard it here.
     // It's a temperory solution, and the min time interval 0.3 might also be too arbitrary.
+    handledOpenFile = true
     let c = CFAbsoluteTimeGetCurrent()
     if let t = lastOpenFileTimestamp, c - t < 0.3 { return false }
     lastOpenFileTimestamp = c
@@ -164,14 +166,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func droppedText(_ pboard: NSPasteboard, userData:String, error: NSErrorPointer) {
     if let url = pboard.string(forType: NSStringPboardType) {
-      handledDroppedText = true
+      handledOpenFile = true
       PlayerCore.active.openURLString(url)
-    }
-  }
-
-  func checkServiceStartup() {
-    if !handledDroppedText && !handledURLEvent {
-      openFile(self)
     }
   }
   
@@ -185,7 +181,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   // MARK: - URL Scheme
 
   func handleURLEvent(event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
-    handledURLEvent = true
+    handledOpenFile = true
     guard let url = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue else { return }
     if isReady {
       parsePendingURL(url)

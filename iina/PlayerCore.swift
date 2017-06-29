@@ -400,6 +400,7 @@ class PlayerCore: NSObject {
   }
 
   func reloadAllSubs() {
+    let currentSubName = info.currentTrack(.sub)?.externalFilename
     for subTrack in info.subTracks {
       mpvController.command(.subReload, args: ["\(subTrack.id)"], checkError: false) { code in
         if code < 0 {
@@ -408,6 +409,9 @@ class PlayerCore: NSObject {
       }
     }
     getTrackInfo()
+    if let currentSub = info.subTracks.first(where: {$0.externalFilename == currentSubName}) {
+      setTrack(currentSub.id, forType: .sub)
+    }
     mainWindow?.quickSettingView.reloadSubtitlesData()
   }
 

@@ -407,6 +407,7 @@ class PlayerCore: NSObject {
         }
       }
     }
+    getTrackInfo()
     mainWindow?.quickSettingView.reloadSubtitlesData()
   }
 

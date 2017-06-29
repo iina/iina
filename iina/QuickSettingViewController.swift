@@ -324,7 +324,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     withAllTableViews { (view, type) in
       if view.numberOfSelectedRows > 0 {
         // note that track ids start from 1
-        self.playerCore.setTrack(view.selectedRow, forType: type)
+        let subId = view.selectedRow > 0 ? playerCore.info.trackList(type)[view.selectedRow-1].id : 0
+        self.playerCore.setTrack(subId, forType: type)
         view.deselectAll(self)
         view.reloadData()
       }

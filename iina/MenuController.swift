@@ -242,10 +242,14 @@ class MenuController: NSObject, NSMenuDelegate {
     resetSubDelay.action = #selector(MainWindowController.menuResetSubDelay(_:))
 
     // encoding
-    bind(menu: encodingMenu, withOptions: nil, objects: nil, objectMap: AppData.encodings, action: #selector(MainWindowController.menuSetSubEncoding(_:))) {
+    let encodingTitles = AppData.encodings.map { $0.title }
+    let encodingObjects = AppData.encodings.map { $0.code }
+    bind(menu: encodingMenu, withOptions: encodingTitles, objects: encodingObjects, objectMap: nil, action: #selector(MainWindowController.menuSetSubEncoding(_:))) {
       PlayerCore.shared.info.subEncoding == $0.representedObject as? String
     }
     subFont.action = #selector(MainWindowController.menuSubFont(_:))
+    // Separate Auto from other encoding types
+    encodingMenu.insertItem(NSMenuItem.separator(), at: 1)
 
     // Window
 
@@ -256,7 +260,6 @@ class MenuController: NSObject, NSMenuDelegate {
     }
 
     inspector.action = #selector(MainWindowController.menuShowInspector(_:))
-
   }
 
   // MARK: - Update Menus
@@ -340,6 +343,13 @@ class MenuController: NSObject, NSMenuDelegate {
   private func updateSubMenu() {
     let player = PlayerCore.shared
     subDelayIndicator.title = String(format: NSLocalizedString("menu.sub_delay", comment: "Subtitle Delay:"), player.info.subDelay)
+    
+    let encodingCode = player.info.subEncoding ?? "auto"
+    for encoding in AppData.encodings {
+      if encoding.code == encodingCode {
+        encodingMenu.item(withTitle: encoding.title)?.state = NSOnState
+      }
+    }
   }
 
   /**

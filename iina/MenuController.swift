@@ -268,7 +268,7 @@ class MenuController: NSObject, NSMenuDelegate {
     let encodingTitles = AppData.encodings.map { $0.title }
     let encodingObjects = AppData.encodings.map { $0.code }
     bind(menu: encodingMenu, withOptions: encodingTitles, objects: encodingObjects, objectMap: nil, action: #selector(MainWindowController.menuSetSubEncoding(_:))) {
-      PlayerCore.shared.info.subEncoding == $0.representedObject as? String
+      PlayerCore.active.info.subEncoding == $0.representedObject as? String
     }
     subFont.action = #selector(MainWindowController.menuSubFont(_:))
     // Separate Auto from other encoding types

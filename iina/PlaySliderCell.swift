@@ -70,7 +70,7 @@ class PlaySliderCell: NSSliderCell {
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
-    let info = PlayerCore.shared.info
+    let info = (controlView!.window!.windowController as! MainWindowController).playerCore.info
     
     let slider = self.controlView as! NSSlider
     

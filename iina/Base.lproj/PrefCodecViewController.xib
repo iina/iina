@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -199,7 +199,6 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="spdifBtnAction:" target="-2" id="4CQ-cr-RgT"/>
                         <binding destination="pxc-7C-SGP" name="value" keyPath="values.spdifAC3" id="NBJ-cf-V6N"/>
                     </connections>
                 </button>
@@ -213,7 +212,6 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="spdifBtnAction:" target="-2" id="Tal-78-Sfq"/>
                         <binding destination="pxc-7C-SGP" name="value" keyPath="values.spdifDTS" id="Ohr-R8-Xo1"/>
                     </connections>
                 </button>
@@ -227,7 +225,6 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="spdifBtnAction:" target="-2" id="Vq6-VK-ja9"/>
                         <binding destination="pxc-7C-SGP" name="value" keyPath="values.spdifDTSHD" id="Yst-Bd-0SC"/>
                     </connections>
                 </button>

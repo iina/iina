@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -265,6 +265,19 @@
         </window>
         <menu title="Context Menu" identifier="ContextMenu" id="lR3-1E-Rwr" userLabel="Context Menu">
             <items>
+                <menuItem title="Play" id="oMR-4K-aR2">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="playAction:" target="-2" id="Fje-Oq-MI4"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Play in New Window" id="mXt-wb-fgT">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="playInNewWindowAction:" target="-2" id="kou-6P-1pI"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="Ray-7t-D5u"/>
                 <menuItem title="Reveal in Finder" tag="100" id="FPK-nx-hvF">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>

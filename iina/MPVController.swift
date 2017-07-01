@@ -29,7 +29,7 @@ class MPVController: NSObject {
 
   lazy var queue: DispatchQueue! = DispatchQueue(label: "com.colliderli.iina.controller")
 
-  unowned let playerCore: PlayerCore = PlayerCore.shared
+  unowned let playerCore: PlayerCore
   unowned let ud: UserDefaults = UserDefaults.standard
 
   var needRecordSeekTime: Bool = false
@@ -65,6 +65,11 @@ class MPVController: NSObject {
     MPVOption.Window.fullscreen: MPV_FORMAT_FLAG,
     MPVOption.Window.ontop: MPV_FORMAT_FLAG
   ]
+
+  init(playerCore: PlayerCore) {
+    self.playerCore = playerCore
+    super.init()
+  }
 
   deinit {
     ObjcUtils.silenced {
@@ -170,6 +175,8 @@ class MPVController: NSObject {
     // - Sub
 
     chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subAuto, "no"))
+    chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subCodepage, UserDefaults.standard.string(forKey: PK.defaultEncoding)))
+    playerCore.info.subEncoding = UserDefaults.standard.string(forKey: PK.defaultEncoding)
 
     let subOverrideHandler: OptionObserverInfo.Transformer = { key in
       let v = UserDefaults.standard.bool(forKey: PK.ignoreAssStyles)
@@ -487,6 +494,7 @@ class MPVController: NSObject {
       break
 
     case MPV_EVENT_START_FILE:
+      playerCore.info.isIdle = false
       guard getString(MPVProperty.path) != nil else { break }
       playerCore.fileStarted()
       playerCore.sendOSD(.fileStart(playerCore.info.currentURL?.lastPathComponent ?? "-"))
@@ -506,6 +514,7 @@ class MPVController: NSObject {
       playerCore.sendOSD(.seek(osdText, percentage))
 
     case MPV_EVENT_PLAYBACK_RESTART:
+      playerCore.info.isIdle = false
       playerCore.info.isSeeking = false
       if needRecordSeekTime {
         recordedSeekTimeListener?(CACurrentMediaTime() - recordedSeekStartTime)
@@ -531,7 +540,9 @@ class MPVController: NSObject {
         playerCore.info.currentURL = nil
         playerCore.info.isNetworkResource = false
       }
+      playerCore.info.isIdle = true
       if fileLoaded {
+        fileLoaded = false
         playerCore.closeMainWindow()
       }
       receivedEndFileWhileLoading = false
@@ -622,7 +633,7 @@ class MPVController: NSObject {
           playerCore.sendOSD(data ? .pause : .resume)
           playerCore.info.isPaused = data
         }
-        if let mw = playerCore.mainWindow, mw.isWindowLoaded {
+        if playerCore.mainWindow.isWindowLoaded {
           if data {
             SleepPreventer.allowSleep()
           } else {
@@ -630,7 +641,7 @@ class MPVController: NSObject {
           }
           if ud.bool(forKey: PK.alwaysFloatOnTop) {
             DispatchQueue.main.async {
-              mw.setWindowFloatingOnTop(!data)
+              self.playerCore.mainWindow.setWindowFloatingOnTop(!data)
             }
           }
         }

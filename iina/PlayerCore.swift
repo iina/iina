@@ -714,7 +714,9 @@ class PlayerCore: NSObject {
             self.info.thumbnails = thumbnails
             self.info.thumbnailsReady = true
             self.info.thumbnailsProgress = 1
-            self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
+            DispatchQueue.main.async {
+              self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
+            }
           }
         }
       } else {
@@ -1260,7 +1262,9 @@ extension PlayerCore: FFmpegControllerDelegate {
       info.thumbnails.append(contentsOf: thumbnails)
     }
     info.thumbnailsProgress = Double(progress) / Double(ffmpegController.thumbnailCount)
-    mainWindow?.touchBarPlaySlider?.needsDisplay = true
+    DispatchQueue.main.async {
+      self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
+    }
   }
 
   func didGeneratedThumbnails(_ thumbnails: [FFThumbnail], succeeded: Bool) {
@@ -1268,7 +1272,9 @@ extension PlayerCore: FFmpegControllerDelegate {
       info.thumbnails = thumbnails
       info.thumbnailsReady = true
       info.thumbnailsProgress = 1
-      mainWindow?.touchBarPlaySlider?.needsDisplay = true
+      DispatchQueue.main.async {
+        self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
+      }
       if let cacheName = info.mpvMd5 {
         backgroundQueue.async {
           ThumbnailCache.write(self.info.thumbnails, forName: cacheName)

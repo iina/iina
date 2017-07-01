@@ -10,7 +10,11 @@ import Foundation
 
 class PlaybackInfo {
 
-  var isIdle: Bool = true
+  var isIdle: Bool = true {
+    didSet {
+      PlayerCore.checkStatusForSleep()
+    }
+  }
   var fileLoading: Bool = false
 
   var currentURL: URL? {
@@ -41,7 +45,11 @@ class PlaybackInfo {
   var videoDuration: VideoTime?
 
   var isSeeking: Bool = false
-  var isPaused: Bool = false
+  var isPaused: Bool = false {
+    didSet {
+      PlayerCore.checkStatusForSleep()
+    }
+  }
 
   var justStartedFile: Bool = false
   var justOpenedFile: Bool = false

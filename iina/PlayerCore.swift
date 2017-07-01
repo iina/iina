@@ -1252,6 +1252,16 @@ class PlayerCore: NSObject {
     }
   }
 
+  static func checkStatusForSleep() {
+    for player in playerCores.filter({ !$0.info.isIdle }) {
+      if !player.info.isPaused {
+        SleepPreventer.preventSleep()
+        return
+      }
+    }
+    SleepPreventer.allowSleep()
+  }
+
 }
 
 

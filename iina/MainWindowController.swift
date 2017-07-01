@@ -330,9 +330,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     super.windowDidLoad()
 
     guard let w = self.window else { return }
-    
-    // enable sleep preventer
-    SleepPreventer.preventSleep()
 
     w.initialFirstResponder = nil
 
@@ -1032,10 +1029,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // videoView.stopDisplayLink()
     }
     playerCore.info.currentFolder = nil
-    // disable sleep preventer
-    if !playerCore.info.isPaused {
-      SleepPreventer.allowSleep()
-    }
     // stop tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)

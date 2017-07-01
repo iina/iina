@@ -22,13 +22,17 @@ fileprivate let PlaylistMaxWidth: CGFloat = 400
 
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
-  override var nextResponder: NSResponder? {
-    get { return nil }
-    set { }
-  }
-
   override var windowNibName: String {
     return "MainWindowController"
+  }
+
+  init(playerCore: PlayerCore) {
+    self.playerCore = playerCore
+    super.init(window: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 
   // MARK: - Constants
@@ -41,8 +45,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Objects, Views
 
-  unowned let playerCore: PlayerCore = PlayerCore.shared
+  unowned var playerCore: PlayerCore
+
   lazy var videoView: VideoView = self.initVideoView()
+
   lazy var sizingTouchBarTextField: NSTextField = {
     return NSTextField()
   }()
@@ -286,7 +292,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
-
   weak var touchBarPlaySlider: TouchBarPlaySlider?
   weak var touchBarPlayPauseBtn: NSButton?
   weak var touchBarCurrentPosLabel: DurationDisplayTextField?
@@ -342,6 +347,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // set background color to black
     w.backgroundColor = NSColor.black
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay
+
     updateTitle()
 
     // set material
@@ -401,6 +407,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
       $0?.state = .active
     }
+    // hide other views
     osdVisualEffectView.isHidden = true
     osdVisualEffectView.layer?.cornerRadius = 10
     leftArrowLabel.isHidden = true
@@ -575,10 +582,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func initVideoView() -> VideoView {
     let v = VideoView(frame: window!.contentView!.bounds)
+    v.playerCore = self.playerCore
     return v
   }
 
-  func setupOnScreenController(position newPosition: Preference.OSCPosition) {
+  private func setupOnScreenController(position newPosition: Preference.OSCPosition) {
 
     var isCurrentControlBarHidden = false
 
@@ -1003,7 +1011,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       setWindowFloatingOnTop(true)
     }
     // truncate middle for title
-    if let attrTitle = titleTextField?.attributedStringValue.mutableCopy() as? NSMutableAttributedString {
+    if let attrTitle = titleTextField?.attributedStringValue.mutableCopy() as? NSMutableAttributedString, attrTitle.length > 0 {
       let p = attrTitle.attribute(NSParagraphStyleAttributeName, at: 0, effectiveRange: nil) as! NSMutableParagraphStyle
       p.lineBreakMode = .byTruncatingMiddle
       attrTitle.addAttribute(NSParagraphStyleAttributeName, value: p, range: NSRange(location: 0, length: attrTitle.length))
@@ -1168,6 +1176,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidBecomeKey(_ notification: Notification) {
     window!.makeFirstResponder(window!)
+  }
+
+  func windowDidBecomeMain(_ notification: Notification) {
+    NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
+  }
+
+  func windowDidResignMain(_ notification: Notification) {
+    NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
   }
 
   // MARK: - Control UI

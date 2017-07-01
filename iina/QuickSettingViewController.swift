@@ -27,8 +27,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   /** Tab type. Use TrackType for now. Propobably not a good choice. */
   typealias TabViewType = MPVTrack.TrackType
 
-  weak var playerCore: PlayerCore! = PlayerCore.shared
-  weak var mainWindow: MainWindowController!
+  weak var playerCore: PlayerCore!
+
+  weak var mainWindow: MainWindowController! {
+    didSet {
+      self.playerCore = mainWindow.playerCore
+    }
+  }
 
   var currentTab: TabViewType = .video
 

@@ -11,7 +11,7 @@ import Cocoa
 
 class VideoView: NSView {
 
-  lazy var playerCore = PlayerCore.shared
+  weak var playerCore: PlayerCore!
 
   lazy var videoLayer: ViewLayer = {
     let layer = ViewLayer()
@@ -129,7 +129,7 @@ class VideoView: NSView {
           return false
         }
       } else if videoFiles.count == 1 {
-        playerCore.openFile(URL(fileURLWithPath: videoFiles[0]))
+        playerCore.openURL(URL(fileURLWithPath: videoFiles[0]), isNetworkResource: false)
         subtitleFiles.forEach { (subtitle) in
           playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitle))
         }

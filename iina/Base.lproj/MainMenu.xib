@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16G12b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -83,10 +83,22 @@
                                     <action selector="openFile:" target="Voe-Tx-rLC" id="Aev-CZ-Gfe"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Open in New Window…" tag="1" alternate="YES" keyEquivalent="o" id="z9W-ga-j3b">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="openFile:" target="Voe-Tx-rLC" id="jeI-mz-AmY"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Open URL…" keyEquivalent="O" id="0m7-3r-twH">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>
                                     <action selector="openURL:" target="Voe-Tx-rLC" id="uUI-BF-zJu"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Open URL in New Window…" tag="1" alternate="YES" keyEquivalent="O" id="bfB-bn-KeM">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="openURL:" target="Voe-Tx-rLC" id="7MD-t2-mMA"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Open Recent" id="tXI-mr-wws">
@@ -101,6 +113,12 @@
                                         </menuItem>
                                     </items>
                                 </menu>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" hidden="YES" id="bEr-t9-Pyn"/>
+                            <menuItem title="New Window" hidden="YES" keyEquivalent="n" id="Qv1-xd-wj5">
+                                <connections>
+                                    <action selector="menuNewWindow:" target="Voe-Tx-rLC" id="J5Q-v3-yX9"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m38-SL-vHw"/>
                             <menuItem title="Playback History" keyEquivalent="H" id="LND-1n-DU2">
@@ -496,10 +514,15 @@
                 <outlet property="loadExternalSub" destination="k6x-hf-ATi" id="lVp-BV-A2C"/>
                 <outlet property="mirror" destination="JJq-qH-toq" id="EWI-VS-c7Q"/>
                 <outlet property="mute" destination="WOL-Us-ByA" id="Hry-sv-WhY"/>
+                <outlet property="newWindow" destination="Qv1-xd-wj5" id="ToZ-3i-Sb0"/>
+                <outlet property="newWindowSeparator" destination="bEr-t9-Pyn" id="Ao1-Bq-mMU"/>
                 <outlet property="nextFrame" destination="XDC-Pc-rS1" id="PGo-Nr-JQg"/>
                 <outlet property="normalSize" destination="1UK-8n-QPP" id="rpd-7S-IYd"/>
                 <outlet property="normalSizeRetina" destination="c1x-bx-69F" id="S22-F3-Ks9"/>
                 <outlet property="open" destination="IAo-SY-fd9" id="fW9-2A-V4F"/>
+                <outlet property="openAlternative" destination="z9W-ga-j3b" id="RRI-7o-x9o"/>
+                <outlet property="openURL" destination="0m7-3r-twH" id="BOj-Zv-hzW"/>
+                <outlet property="openURLAlternative" destination="bfB-bn-KeM" id="I7a-cV-JUC"/>
                 <outlet property="pause" destination="UOE-MJ-8ku" id="74t-ZU-dXD"/>
                 <outlet property="pictureInPicture" destination="mND-N8-z6o" id="mrn-ku-bqH"/>
                 <outlet property="playbackMenu" destination="GEO-Iw-cKr" id="Ji3-Wv-EE5"/>

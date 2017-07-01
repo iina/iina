@@ -14,6 +14,10 @@ struct Preference {
 
   // consider using RawRepresentable, but also need to extend UserDefaults
   struct Key {
+    static let actionAfterLaunch = "actionAfterLaunch"
+    static let alwaysOpenInNewWindow = "alwaysOpenInNewWindow"
+    static let enableCmdN = "enableCmdN"
+
     /** Record recent files */
     static let recordPlaybackHistory = "recordPlaybackHistory"
     static let recordRecentFiles = "recordRecentFiles"
@@ -39,9 +43,6 @@ struct Preference {
 
     /** Keep player window open on end of file / playlist. (bool) */
     static let keepOpenOnFileEnd = "keepOpenOnFileEnd"
-    
-    /** Open a choose file panel after opening (bool) */
-    static let openStartPanel = "openStartPanel"
 
     /** Resume from last position */
     static let resumeLastPosition = "resumeLastPosition"
@@ -208,6 +209,12 @@ struct Preference {
   }
 
   // MARK: - Enums
+
+  enum ActionAfterLaunch: Int {
+    case welcomeWindow = 0
+    case openPanel
+    case none
+  }
 
   enum ArrowButtonAction: Int {
     case speed = 0
@@ -391,6 +398,9 @@ struct Preference {
   // MARK: - Defaults
 
   static let defaultPreference:[String : Any] = [
+    Key.actionAfterLaunch: ActionAfterLaunch.welcomeWindow.rawValue,
+    Key.alwaysOpenInNewWindow: false,
+    Key.enableCmdN: false,
     Key.recordPlaybackHistory: true,
     Key.recordRecentFiles: true,
     Key.trackAllFilesInRecentOpenMenu: true,
@@ -411,7 +421,6 @@ struct Preference {
     Key.resumeLastPosition: true,
     Key.useMediaKeys: true,
     Key.useAppleRemote: true,
-    Key.openStartPanel: false,
     Key.alwaysFloatOnTop: false,
     Key.blackOutMonitor: false,
 

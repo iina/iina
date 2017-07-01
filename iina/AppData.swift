@@ -83,6 +83,7 @@ struct Constants {
     static let exitPIP = NSLocalizedString("menu.exit_pip", comment: "Exit Picture-in-Picture")
   }
   struct Noti {
+    static let mainWindowChanged = Notification.Name("IINAMainWindowChanged")
     static let playlistChanged = Notification.Name("IINAPlaylistChanged")
     static let tracklistChanged = Notification.Name("IINATracklistChanged")
     static let vfChanged = Notification.Name("IINAVfChanged")

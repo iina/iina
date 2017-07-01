@@ -17,8 +17,13 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     return "PlaylistViewController"
   }
 
-  var playerCore: PlayerCore = PlayerCore.shared
-  weak var mainWindow: MainWindowController!
+  weak var mainWindow: MainWindowController! {
+    didSet {
+      self.playerCore = mainWindow.playerCore
+    }
+  }
+
+  weak var playerCore: PlayerCore!
   
   let IINAPlaylistItemType = "IINAPlaylistItemType"
 
@@ -486,6 +491,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
   }
 
+  @IBAction func contextMenuPlayInNewWindow(_ sender: NSMenuItem) {
+    guard let firstRow = selectedRows?.first, firstRow >= 0 else { return }
+    let filename = playerCore.info.playlist[firstRow].filename
+    PlayerCore.newPlayerCore.openURL(URL(fileURLWithPath: filename))
+  }
+
   @IBAction func contextMenuRemove(_ sender: NSMenuItem) {
     guard let selectedRows = selectedRows else { return }
     var count = 0
@@ -566,6 +577,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       result.addItem(withTitle: title)
       result.addItem(NSMenuItem.separator())
       result.addItem(withTitle: NSLocalizedString("pl_menu.play_next", comment: "Play Next"), action: #selector(self.contextMenuPlayNext(_:)))
+      result.addItem(withTitle: NSLocalizedString("pl_menu.play_in_new_window", comment: "Play in New Window"), action: #selector(self.contextMenuPlayInNewWindow(_:)))
       result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.remove" : "pl_menu.remove_multi", comment: "Remove"), action: #selector(self.contextMenuRemove(_:)))
 
       result.addItem(NSMenuItem.separator())
@@ -641,20 +653,24 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var playlistTableView: NSTableView!
 
+  lazy var playerCore: PlayerCore = {
+    return (self.playlistTableView.window!.windowController as! MainWindowController).playerCore
+  }()
+
   var filePath: String = ""
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    guard let matchedSubs = PlayerCore.shared.info.matchedSubs[filePath] else { return nil }
+    guard let matchedSubs = playerCore.info.matchedSubs[filePath] else { return nil }
     return matchedSubs[row].lastPathComponent
   }
 
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return PlayerCore.shared.info.matchedSubs[filePath]?.count ?? 0
+    return playerCore.info.matchedSubs[filePath]?.count ?? 0
   }
 
   @IBAction func wrongSubBtnAction(_ sender: AnyObject) {
-    PlayerCore.shared.info.matchedSubs[filePath]?.removeAll()
-    if let row = PlayerCore.shared.info.playlist.index(where: { $0.filename == filePath }) {
+    playerCore.info.matchedSubs[filePath]?.removeAll()
+    if let row = playerCore.info.playlist.index(where: { $0.filename == filePath }) {
       playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
     }
   }

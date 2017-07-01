@@ -41,6 +41,9 @@ class PrefSubViewController: NSViewController {
   @IBOutlet weak var loginIndicator: NSProgressIndicator!
   @IBOutlet weak var defaultEncodingList: NSPopUpButton!
 
+  @IBOutlet weak var autoSubSearchLabel1: NSTextField!
+  @IBOutlet weak var autoSubSearchLabel2: NSTextField!
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -60,6 +63,8 @@ class PrefSubViewController: NSViewController {
 
     subLangTokenView.delegate = self
     loginIndicator.isHidden = true
+    
+    changeSubAutoSearch(self)
   }
 
   @IBAction func chooseSubFontAction(_ sender: AnyObject) {
@@ -112,6 +117,12 @@ class PrefSubViewController: NSViewController {
     UserDefaults.standard.set(sender.selectedItem?.representedObject, forKey: Preference.Key.defaultEncoding)
     PlayerCore.active.setSubEncoding((sender.selectedItem?.representedObject as? String) ?? "auto")
     PlayerCore.active.reloadAllSubs()
+  }
+  
+  @IBAction func changeSubAutoSearch(_ sender: Any) {
+    let labelColor: NSColor = UserDefaults.standard.bool(forKey: Preference.Key.autoSearchOnlineSub) ? .labelColor : .disabledControlTextColor
+    autoSubSearchLabel1.textColor = labelColor
+    autoSubSearchLabel2.textColor = labelColor
   }
   
   @IBAction func OpenSubHelpBtnAction(_ sender: AnyObject) {

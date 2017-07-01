@@ -136,6 +136,8 @@ struct Preference {
     static let subScaleWithWindow = "subScaleWithWindow"
     static let openSubUsername = "openSubUsername"
     static let defaultEncoding = "defaultEncoding"
+    static let autoSearchOnlineSub = "autoSearchOnlineSub"
+    static let autoSearchThreshold = "autoSearchThreshold"
 
     // Network
 
@@ -469,6 +471,8 @@ struct Preference {
     Key.subScaleWithWindow: true,
     Key.openSubUsername: "",
     Key.defaultEncoding: "auto",
+    Key.autoSearchOnlineSub: false,
+    Key.autoSearchThreshold: 20,
 
     Key.enableCache: true,
     Key.defaultCacheSize: 153600,

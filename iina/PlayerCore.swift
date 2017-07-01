@@ -795,12 +795,20 @@ class PlayerCore: NSObject {
   func playbackRestarted() {
     DispatchQueue.main.async {
       Timer.scheduledTimer(timeInterval: TimeInterval(0.2), target: self, selector: #selector(self.reEnableOSDAfterFileLoading), userInfo: nil, repeats: false)
+      Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(self.autoSearchOnlineSub), userInfo: nil, repeats: false)
     }
   }
 
   @objc
   private func reEnableOSDAfterFileLoading() {
     info.disableOSDForFileLoading = false
+  }
+  
+  @objc
+  private func autoSearchOnlineSub() {
+    if ud.bool(forKey: Preference.Key.autoSearchOnlineSub) && info.videoDuration!.m >= ud.integer(forKey: Preference.Key.autoSearchThreshold) {
+      mainWindow.menuFindOnlineSub(.dummy)
+    }
   }
 
   /**

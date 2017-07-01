@@ -214,7 +214,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if UserDefaults.standard.bool(forKey: Preference.Key.recordRecentFiles) {
           NSDocumentController.shared().noteNewRecentDocumentURL(url)
         }
-        let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: sender.tag == alternativeMenuItemTag)
+        let isAlternative = (sender as? NSMenuItem)?.tag == alternativeMenuItemTag
+        let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternative)
         playerCore.openURL(url, isNetworkResource: false)
       }
     }

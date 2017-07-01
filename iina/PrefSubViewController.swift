@@ -63,7 +63,7 @@ class PrefSubViewController: NSViewController {
 
     subLangTokenView.delegate = self
     loginIndicator.isHidden = true
-    
+
     changeSubAutoSearch(self)
   }
 
@@ -124,7 +124,7 @@ class PrefSubViewController: NSViewController {
     autoSubSearchLabel1.textColor = labelColor
     autoSubSearchLabel2.textColor = labelColor
   }
-  
+
   @IBAction func OpenSubHelpBtnAction(_ sender: AnyObject) {
     NSWorkspace.shared().open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#opensubtitles"))!)
   }

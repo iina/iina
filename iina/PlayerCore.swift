@@ -803,11 +803,13 @@ class PlayerCore: NSObject {
   private func reEnableOSDAfterFileLoading() {
     info.disableOSDForFileLoading = false
   }
-  
+
   @objc
   private func autoSearchOnlineSub() {
-    if ud.bool(forKey: Preference.Key.autoSearchOnlineSub) && info.videoDuration!.m >= ud.integer(forKey: Preference.Key.autoSearchThreshold) {
-      mainWindow.menuFindOnlineSub(.dummy)
+    if ud.bool(forKey: Preference.Key.autoSearchOnlineSub) && info.videoDuration! >= VideoTime(Double(ud.integer(forKey: Preference.Key.autoSearchThreshold) * 60)) {
+      if info.subTracks.count == 0 {
+        mainWindow.menuFindOnlineSub(.dummy)
+      }
     }
   }
 

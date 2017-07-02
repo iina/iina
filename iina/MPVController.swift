@@ -634,11 +634,6 @@ class MPVController: NSObject {
           playerCore.info.isPaused = data
         }
         if playerCore.mainWindow.isWindowLoaded {
-          if data {
-            SleepPreventer.allowSleep()
-          } else {
-            SleepPreventer.preventSleep()
-          }
           if ud.bool(forKey: PK.alwaysFloatOnTop) {
             DispatchQueue.main.async {
               self.playerCore.mainWindow.setWindowFloatingOnTop(!data)

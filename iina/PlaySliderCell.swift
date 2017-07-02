@@ -10,6 +10,10 @@ import Cocoa
 
 class PlaySliderCell: NSSliderCell {
 
+  lazy var playerCore: PlayerCore = {
+    return (self.controlView!.window!.windowController as! MainWindowController).playerCore
+  }()
+
   override var knobThickness: CGFloat {
     return knobWidth
   }
@@ -36,6 +40,7 @@ class PlaySliderCell: NSSliderCell {
       self.chapterStrokeColor = isInDarkTheme ? PlaySliderCell.darkChapterStrokeColor : PlaySliderCell.lightChapterStrokeColor
     }
   }
+
   private var knobColor: NSColor = PlaySliderCell.darkColor
   private var barColorLeft: NSColor = PlaySliderCell.darkBarColorLeft
   private var barColorRight: NSColor = PlaySliderCell.darkBarColorRight
@@ -70,7 +75,7 @@ class PlaySliderCell: NSSliderCell {
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
-    let info = (controlView!.window!.windowController as! MainWindowController).playerCore.info
+    let info = playerCore.info
     
     let slider = self.controlView as! NSSlider
     
@@ -133,6 +138,21 @@ class PlaySliderCell: NSSliderCell {
   override func barRect(flipped: Bool) -> NSRect {
     let rect = super.barRect(flipped: flipped)
     return NSMakeRect(0, rect.origin.y, rect.width + rect.origin.x * 2, rect.height)
+  }
+
+
+  override func startTracking(at startPoint: NSPoint, in controlView: NSView) -> Bool {
+    let result = super.startTracking(at: startPoint, in: controlView)
+    if result {
+      playerCore.togglePause(true)
+      playerCore.mainWindow.thumbnailPeekView.isHidden = true
+    }
+    return result
+  }
+
+  override func stopTracking(last lastPoint: NSPoint, current stopPoint: NSPoint, in controlView: NSView, mouseIsUp flag: Bool) {
+    playerCore.togglePause(false)
+    super.stopTracking(last: lastPoint, current: stopPoint, in: controlView, mouseIsUp: flag)
   }
 
 }

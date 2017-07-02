@@ -97,11 +97,6 @@ class VideoView: NSView {
     if let _ = sender.draggingSource() { return [] }
     return .copy
   }
-    
-  override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
-    if let _ = sender.draggingSource() { return [] }
-    return .copy
-  }
   
   override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
     let pb = sender.draggingPasteboard()

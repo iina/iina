@@ -1262,8 +1262,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func updateTitle() {
-    window?.representedURL = playerCore.info.currentURL
-    window?.setTitleWithRepresentedFilename(playerCore.info.currentURL?.path ?? "")
+    if playerCore.info.isNetworkResource {
+      let mediaTitle = playerCore.mpvController.getString(MPVProperty.mediaTitle)
+      window?.title = mediaTitle ?? playerCore.info.currentURL?.path ?? ""
+    } else {
+      window?.representedURL = playerCore.info.currentURL
+      window?.setTitleWithRepresentedFilename(playerCore.info.currentURL?.path ?? "")
+    }
   }
 
   func displayOSD(_ message: OSDMessage) {

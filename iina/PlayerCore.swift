@@ -37,7 +37,7 @@ class PlayerCore: NSObject {
   static var playerCores: [PlayerCore] = []
 
   static private func findIdlePlayerCore() -> PlayerCore? {
-    return playerCores.first { $0.info.isIdle && !($0.initialWindow.window?.isVisible ?? false) }
+    return playerCores.first { $0.info.isIdle }
   }
 
   static private func createPlayerCore() -> PlayerCore {
@@ -239,7 +239,14 @@ class PlayerCore: NSObject {
   }
 
   func seek(percent: Double, forceExact: Bool = false) {
-    let percent = percent.constrain(min: 0, max: 100)
+    var percent = percent
+    // mpv will play next file automatically when seek to EOF.
+    // the following workaround will constrain the max seek position to (video length - 1) s.
+    // however, it still won't work for videos with large keyframe interval.
+    if let duration = info.videoDuration?.second {
+      let maxPercent = (duration - 1) / duration * 100
+      percent = percent.constrain(min: 0, max: maxPercent)
+    }
     let useExact = forceExact ? true : ud.bool(forKey: Preference.Key.useExactSeek)
     let seekMode = useExact ? "absolute-percent+exact" : "absolute-percent"
     mpvController.command(.seek, args: ["\(percent)", seekMode], checkError: false)

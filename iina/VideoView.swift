@@ -94,7 +94,7 @@ class VideoView: NSView {
   // MARK: Drag and drop
   
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-    if let _ = sender.draggingSource() { return [] }
+    if sender.draggingSource() as? NSTableView === playerCore.mainWindow.playlistView { return [] }
     return .copy
   }
   

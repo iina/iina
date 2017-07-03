@@ -175,25 +175,18 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableViewDropOperation) -> NSDragOperation {
     let pasteboard = info.draggingPasteboard()
 
+    playlistTableView.setDropRow(row, dropOperation: .above)
+    if info.draggingSource() as? NSTableView === tableView {
+      return .move
+    }
     if let fileNames = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
-      var hasItemToAdd: Bool = false
       for path in fileNames {
         let ext = (path as NSString).pathExtension.lowercased()
-        if !Utility.supportedFileExt[.sub]!.contains(ext) {
-          hasItemToAdd = true
-          break
+        if Utility.supportedFileExt[.video]!.contains(ext) || Utility.supportedFileExt[.audio]!.contains(ext) {
+          return .copy
         }
       }
-
-      if !hasItemToAdd {
-        return []
-      }
-      playlistTableView.setDropRow(row, dropOperation: .above)
-      return .copy
-    }
-    if let _ = pasteboard.propertyList(forType: IINAPlaylistIndexes) {
-      playlistTableView.setDropRow(row, dropOperation: .above)
-      return .move
+      return []
     }
     return []
   }
@@ -247,7 +240,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     } else if let fileNames = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
       let validMedia = fileNames.filter {
         let ext = ($0 as NSString).pathExtension.lowercased()
-        return !Utility.supportedFileExt[.sub]!.contains(ext)
+        return Utility.supportedFileExt[.video]!.contains(ext) || Utility.supportedFileExt[.audio]!.contains(ext)
       }
       let added = validMedia.count
       if added == 0 {

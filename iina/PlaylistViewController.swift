@@ -182,7 +182,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     if let fileNames = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
       for path in fileNames {
         let ext = (path as NSString).pathExtension.lowercased()
-        if Utility.supportedFileExt[.video]!.contains(ext) || Utility.supportedFileExt[.audio]!.contains(ext) {
+        if Utility.playableFileExt.contains(ext) {
           return .copy
         }
       }
@@ -240,7 +240,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     } else if let fileNames = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
       let validMedia = fileNames.filter {
         let ext = ($0 as NSString).pathExtension.lowercased()
-        return Utility.supportedFileExt[.video]!.contains(ext) || Utility.supportedFileExt[.audio]!.contains(ext)
+        return Utility.playableFileExt.contains(ext)
       }
       let added = validMedia.count
       if added == 0 {

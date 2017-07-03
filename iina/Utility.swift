@@ -18,6 +18,7 @@ class Utility {
     .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "m4a", "ac3", "opus", "wav", "wv"],
     .sub: ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc"]
   ]
+  static let playableFileExt = supportedFileExt[.video]! + supportedFileExt[.audio]!
 
   // MARK: - Logs, alerts
 

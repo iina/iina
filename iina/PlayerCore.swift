@@ -58,6 +58,7 @@ class PlayerCore: NSObject {
 
   /// A dispatch queue for auto load feature.
   let backgroundQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreTask")
+  let UIUpdateQueue: DispatchQueue = DispatchQueue(label: "IINAUIUpdateTask")
 
   /**
    This ticket will be increased each time before a new task being submitted to `backgroundQueue`.
@@ -771,13 +772,18 @@ class PlayerCore: NSObject {
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     info.haveDownloadedSub = false
+    UIUpdateQueue.async {
+      self.syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
+                                                    target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
+      RunLoop.current.add(self.syncPlayTimeTimer!, forMode: .commonModes)
+      RunLoop.current.run()
+    }
     DispatchQueue.main.sync {
       self.getTrackInfo()
       self.getSelectedTracks()
       self.getPlaylist()
       self.getChapters()
-      syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
-                                               target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
+
       mainWindow.updateTitle()
       if #available(OSX 10.12.2, *) {
         mainWindow.setupTouchBarUI()

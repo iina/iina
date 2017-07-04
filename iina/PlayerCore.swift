@@ -202,7 +202,9 @@ class PlayerCore: NSObject {
 
   // invalidate timer
   func invalidateTimer() {
-    self.syncPlayTimeTimer?.invalidate()
+    UIUpdateQueue.async {
+      self.syncPlayTimeTimer?.invalidate()
+    }
   }
 
   // MARK: - MPV commands

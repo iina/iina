@@ -140,7 +140,7 @@ class PlaybackInfo {
       list = subTracks
     }
     if let id = id {
-      return list.filter { $0.id == id }.at(0)
+      return list.first { $0.id == id }
     } else {
       return nil
     }

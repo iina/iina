@@ -60,7 +60,7 @@ class PrefCodecViewController: NSViewController {
   }
 
   private func updateHwdecDescription() {
-    let hwdec: Preference.HardwareDecoderOption = Preference.HardwareDecoderOption(rawValue: UserDefaults.standard.integer(forKey: Preference.Key.hardwareDecoder)) ?? .auto
+    let hwdec: Preference.HardwareDecoderOption = Preference.enum(for: .hardwareDecoder)
     hwdecDescriptionTextField.stringValue = hwdec.localizedDescription
   }
 

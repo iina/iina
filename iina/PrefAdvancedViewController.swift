@@ -50,7 +50,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
     super.viewDidLoad()
     updateControlStatus(self)
 
-    guard let op = UserDefaults.standard.value(forKey: Preference.Key.userOptions) as? [[String]] else {
+    guard let op = Preference.value(for: .userOptions) as? [[String]] else {
       Utility.showAlert("extra_option.cannot_read")
       return
     }
@@ -61,7 +61,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   }
 
   func saveToUserDefaults() {
-    UserDefaults.standard.set(options, forKey: Preference.Key.userOptions)
+    Preference.set(options, for: .userOptions)
     UserDefaults.standard.synchronize()
   }
 
@@ -97,7 +97,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
 
   @IBAction func chooseDirBtnAction(_ sender: AnyObject) {
     Utility.quickOpenPanel(title: "Choose config directory", isDir: true) { url in
-      UserDefaults.standard.set(url.path, forKey: Preference.Key.userDefinedConfDir)
+      Preference.set(url.path, for: .userDefinedConfDir)
       UserDefaults.standard.synchronize()
     }
   }

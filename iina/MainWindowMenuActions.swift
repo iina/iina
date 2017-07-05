@@ -89,7 +89,7 @@ extension MainWindowController {
     if vw == 0 { vw = AppData.widthWhenNoVideo }
     if vh == 0 { vh = AppData.heightWhenNoVideo }
 
-    let useRetinaSize = UserDefaults.standard.bool(forKey: Preference.Key.usePhysicalResolution)
+    let useRetinaSize = Preference.bool(for: .usePhysicalResolution)
     let logicalSize = NSRect(x: w.frame.origin.x, y: w.frame.origin.y, width: CGFloat(vw), height: CGFloat(vh))
     var retinaSize = useRetinaSize ? w.convertFromBacking(logicalSize) : logicalSize
     let screenFrame = NSScreen.main()!.visibleFrame

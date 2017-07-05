@@ -33,6 +33,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   init(playerCore: PlayerCore) {
     self.playerCore = playerCore
+
+    oscPosition = Preference.enum(for: .oscPosition)
+    relativeSeekAmount = Preference.integer(for: .relativeSeekAmount)
+    volumeScrollAmount = Preference.integer(for: .volumeScrollAmount)
+    horizontalScrollAction = Preference.enum(for: .horizontalScrollAction)
+    verticalScrollAction = Preference.enum(for: .verticalScrollAction)
+    useExtractSeek = Preference.enum(for: .useExactSeek)
+    arrowBtnFunction = Preference.enum(for: .arrowButtonAction)
+    singleClickAction = Preference.enum(for: .singleClickAction)
+    doubleClickAction = Preference.enum(for: .doubleClickAction)
+    rightClickAction = Preference.enum(for: .rightClickAction)
+    pinchAction = Preference.enum(for: .pinchAction)
+
     super.init(window: nil)
   }
   
@@ -187,7 +200,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       case .settings:
         return 360
       case .playlist:
-        return CGFloat(UserDefaults.standard.integer(forKey: PK.playlistWidth)).constrain(min: PlaylistMinWidth, max: PlaylistMaxWidth)
+        return CGFloat(Preference.integer(for: PK.playlistWidth)).constrain(min: PlaylistMinWidth, max: PlaylistMaxWidth)
       default:
         Utility.fatal("SideBarViewType.width shouldn't be called here")
       }
@@ -198,36 +211,36 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Observed user defaults
 
-  private var oscPosition: Preference.OSCPosition!
-  private var useExtractSeek: Preference.SeekOption!
+  private var oscPosition: Preference.OSCPosition
+  private var useExtractSeek: Preference.SeekOption
   private var relativeSeekAmount: Int = 3
   private var volumeScrollAmount: Int = 4
-  private var horizontalScrollAction: Preference.ScrollAction!
-  private var verticalScrollAction: Preference.ScrollAction!
-  private var arrowBtnFunction: Preference.ArrowButtonAction!
-  private var singleClickAction: Preference.MouseClickAction!
-  private var doubleClickAction: Preference.MouseClickAction!
-  private var rightClickAction: Preference.MouseClickAction!
-  private var pinchAction: Preference.PinchAction!
+  private var horizontalScrollAction: Preference.ScrollAction
+  private var verticalScrollAction: Preference.ScrollAction
+  private var arrowBtnFunction: Preference.ArrowButtonAction
+  private var singleClickAction: Preference.MouseClickAction
+  private var doubleClickAction: Preference.MouseClickAction
+  private var rightClickAction: Preference.MouseClickAction
+  private var pinchAction: Preference.PinchAction
 
   /** A list of observed preferences */
-  private let observedPrefKeys: [String] = [
-    PK.themeMaterial,
-    PK.oscPosition,
-    PK.showChapterPos,
-    PK.useExactSeek,
-    PK.relativeSeekAmount,
-    PK.volumeScrollAmount,
-    PK.horizontalScrollAction,
-    PK.verticalScrollAction,
-    PK.arrowButtonAction,
-    PK.singleClickAction,
-    PK.doubleClickAction,
-    PK.rightClickAction,
-    PK.pinchAction,
-    PK.showRemainingTime,
-    PK.blackOutMonitor,
-    PK.alwaysFloatOnTop
+  private let observedPrefKeys: [Preference.Key] = [
+    .themeMaterial,
+    .oscPosition,
+    .showChapterPos,
+    .useExactSeek,
+    .relativeSeekAmount,
+    .volumeScrollAmount,
+    .horizontalScrollAction,
+    .verticalScrollAction,
+    .arrowButtonAction,
+    .singleClickAction,
+    .doubleClickAction,
+    .rightClickAction,
+    .pinchAction,
+    .showRemainingTime,
+    .blackOutMonitor,
+    .alwaysFloatOnTop
   ]
 
   // MARK: - Outlets
@@ -321,21 +334,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Initialization
 
-
-  override func windowWillLoad() {
-    oscPosition = Preference.OSCPosition(rawValue: ud.integer(forKey: PK.oscPosition))
-    relativeSeekAmount = ud.integer(forKey: PK.relativeSeekAmount)
-    volumeScrollAmount = ud.integer(forKey: PK.volumeScrollAmount)
-    horizontalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.horizontalScrollAction))
-    verticalScrollAction = Preference.ScrollAction(rawValue: ud.integer(forKey: PK.verticalScrollAction))
-    useExtractSeek = Preference.SeekOption(rawValue: ud.integer(forKey: PK.useExactSeek))
-    arrowBtnFunction = Preference.ArrowButtonAction(rawValue: ud.integer(forKey: PK.arrowButtonAction))
-    singleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.singleClickAction))
-    doubleClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.doubleClickAction))
-    rightClickAction = Preference.MouseClickAction(rawValue: ud.integer(forKey: PK.rightClickAction))
-    pinchAction = Preference.PinchAction(rawValue: ud.integer(forKey: PK.pinchAction))
-  }
-
   override func windowDidLoad() {
 
     super.windowDidLoad()
@@ -351,7 +349,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     w.center()
 
-    w.styleMask.insert(NSFullSizeContentViewWindowMask)
+    w.styleMask.insert(.fullSizeContentView)
     w.titlebarAppearsTransparent = true
 
     // need to deal with control bar, so handle it manually
@@ -364,7 +362,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updateTitle()
 
     // set material
-    setMaterial(Preference.Theme(rawValue: ud.integer(forKey: PK.themeMaterial)))
+    setMaterial(Preference.enum(for: .themeMaterial))
 
     // size
     w.minSize = minSize
@@ -428,13 +426,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
     pipOverlayView.isHidden = true
-    rightLabel.mode = ud.bool(forKey: PK.showRemainingTime) ? .remaining : .duration
+    rightLabel.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .duration
 
     osdProgressBarWidthConstraint = NSLayoutConstraint(item: osdAccessoryProgress, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150)
 
     // add user default observers
     observedPrefKeys.forEach { key in
-      ud.addObserver(self, forKeyPath: key, options: .new, context: nil)
+      ud.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
     }
 
     // add notification observers
@@ -453,7 +451,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     let screenChangeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSApplicationDidChangeScreenParameters, object: nil, queue: .main) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
-      if self.isInFullScreen && self.ud.bool(forKey: PK.blackOutMonitor) {
+      if self.isInFullScreen && Preference.bool(for: .blackOutMonitor) {
         if NSScreen.screens()?.count ?? 0 != self.cachedScreenCount {
           self.removeBlackWindow()
           self.blackOutOtherMonitors()
@@ -461,7 +459,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     }
     let changeWorkspaceObserver = NSWorkspace.shared().notificationCenter.addObserver(forName: NSNotification.Name.NSWorkspaceActiveSpaceDidChange, object: nil, queue: .main) { [unowned self] _ in
-      if self.isInFullScreen && self.ud.bool(forKey: PK.blackOutMonitor) {
+      if self.isInFullScreen && Preference.bool(for: .blackOutMonitor) {
         if self.window?.isOnActiveSpace ?? false {
           self.removeBlackWindow()
           self.blackOutOtherMonitors()
@@ -480,7 +478,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   deinit {
     ObjcUtils.silenced {
       for key in self.observedPrefKeys {
-        self.ud.removeObserver(self, forKeyPath: key)
+        self.ud.removeObserver(self, forKeyPath: key.rawValue)
       }
       for observer in self.notificationObservers {
         NotificationCenter.default.removeObserver(observer)
@@ -493,83 +491,83 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     switch keyPath {
 
-    case PK.themeMaterial:
+    case PK.themeMaterial.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         setMaterial(Preference.Theme(rawValue: newValue))
       }
 
-    case PK.oscPosition:
+    case PK.oscPosition.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         setupOnScreenController(position: Preference.OSCPosition(rawValue: newValue) ?? .floating)
       }
 
-    case PK.showChapterPos:
+    case PK.showChapterPos.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
         (playSlider.cell as! PlaySliderCell).drawChapters = newValue
       }
 
-    case PK.useExactSeek:
+    case PK.useExactSeek.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        useExtractSeek = Preference.SeekOption(rawValue: newValue)
+        useExtractSeek = Preference.SeekOption(rawValue: newValue)!
       }
 
-    case PK.relativeSeekAmount:
+    case PK.relativeSeekAmount.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         relativeSeekAmount = newValue.constrain(min: 1, max: 5)
       }
 
-    case PK.volumeScrollAmount:
+    case PK.volumeScrollAmount.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
         volumeScrollAmount = newValue.constrain(min: 1, max: 4)
       }
 
-    case PK.verticalScrollAction:
+    case PK.verticalScrollAction.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        verticalScrollAction = Preference.ScrollAction(rawValue: newValue)
+        verticalScrollAction = Preference.ScrollAction(rawValue: newValue)!
       }
 
-    case PK.horizontalScrollAction:
+    case PK.horizontalScrollAction.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        horizontalScrollAction = Preference.ScrollAction(rawValue: newValue)
+        horizontalScrollAction = Preference.ScrollAction(rawValue: newValue)!
       }
 
-    case PK.arrowButtonAction:
+    case PK.arrowButtonAction.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)
+        arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)!
       }
 
-    case PK.arrowButtonAction:
+    case PK.arrowButtonAction.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)
+        arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)!
       }
 
-    case PK.singleClickAction:
+    case PK.singleClickAction.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        singleClickAction = Preference.MouseClickAction(rawValue: newValue)
+        singleClickAction = Preference.MouseClickAction(rawValue: newValue)!
       }
 
-    case PK.doubleClickAction:
+    case PK.doubleClickAction.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        doubleClickAction = Preference.MouseClickAction(rawValue: newValue)
+        doubleClickAction = Preference.MouseClickAction(rawValue: newValue)!
       }
 
-    case PK.rightClickAction:
+    case PK.rightClickAction.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        rightClickAction = Preference.MouseClickAction(rawValue: newValue)
+        rightClickAction = Preference.MouseClickAction(rawValue: newValue)!
       }
 
-    case PK.pinchAction:
+    case PK.pinchAction.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        pinchAction = Preference.PinchAction(rawValue: newValue)
+        pinchAction = Preference.PinchAction(rawValue: newValue)!
       }
 
-    case PK.showRemainingTime:
+    case PK.showRemainingTime.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
         rightLabel.mode = newValue ? .remaining : .duration
         touchBarCurrentPosLabel?.mode = newValue ? .remaining : .current
       }
     
-    case PK.blackOutMonitor:
+    case PK.blackOutMonitor.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
         if isInFullScreen {
           if newValue {
@@ -580,7 +578,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
       }
 
-    case PK.alwaysFloatOnTop:
+    case PK.alwaysFloatOnTop.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
         if !playerCore.info.isPaused {
           self.isOntop = newValue
@@ -643,7 +641,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     oscPosition = newPosition
 
     // add fragment views
-    switch oscPosition! {
+    switch oscPosition {
     case .floating:
       currentControlBar = controlBarFloating
       fragControlView.setVisibilityPriority(NSStackViewVisibilityPriorityMustHold, for: fragControlViewLeftView)
@@ -654,8 +652,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscFloatingBottomView.addSubview(fragSliderView)
       Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
       // center control bar
-      let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
-      let cpv = ud.float(forKey: PK.controlBarPositionVertical)
+      let cph = Preference.float(for: .controlBarPositionHorizontal)
+      let cpv = Preference.float(for: .controlBarPositionVertical)
       controlBarFloating.setFrameOrigin(NSMakePoint(
         (window!.frame.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5).constrain(min: 0, max: window!.frame.width),
         window!.frame.height * CGFloat(cpv)
@@ -774,7 +772,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isDragging = false
     } else if isResizingSidebar {
       isResizingSidebar = false
-      ud.set(Int(sideBarWidthConstraint.constant), forKey: PK.playlistWidth)
+      ud.set(Int(sideBarWidthConstraint.constant), forKey: PK.playlistWidth.rawValue)
     } else {
       // if it's a mouseup after clicking
       let mouseInSideBar = window!.contentView!.mouse(event.locationInWindow, in: sideBarView.frame)
@@ -785,7 +783,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         // handle mouse click
         if event.clickCount == 1 {
           // single click
-          if doubleClickAction! == .none {
+          if doubleClickAction == .none {
             // if double click action is none, it's safe to perform action immediately
             performMouseAction(singleClickAction)
           } else {
@@ -795,7 +793,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           }
         } else if event.clickCount == 2 {
           // double click
-          guard doubleClickAction! != .none else { return }
+          guard doubleClickAction != .none else { return }
           // if already scheduled a single click timer, invalidate it
           if let timer = singleClickTimer {
             timer.invalidate()
@@ -1029,7 +1027,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // update timer
     updateTimer()
     // always on top
-    if ud.bool(forKey: PK.alwaysFloatOnTop) {
+    if Preference.bool(for: .alwaysFloatOnTop) {
       isOntop = true
       setWindowFloatingOnTop(true)
     }
@@ -1068,7 +1066,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, true)
 
     // Set the appearance to match the theme so the titlebar matches the theme
-    switch(Preference.Theme(rawValue: ud.integer(forKey: PK.themeMaterial))!) {
+    switch(Preference.enum(for: .themeMaterial) as Preference.Theme) {
       case .dark, .ultraDark: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantDark);
       case .light, .mediumLight: window!.appearance = NSAppearance(named: NSAppearanceNameVibrantLight);
     }
@@ -1133,7 +1131,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowDidExitFullScreen(_ notification: Notification) {
-    if ud.bool(forKey: PK.blackOutMonitor) {
+    if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()
     }
     
@@ -1191,8 +1189,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     // update control bar position
     if oscPosition == .floating {
-      let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
-      let cpv = ud.float(forKey: PK.controlBarPositionVertical)
+      let cph = Preference.float(for: .controlBarPositionHorizontal)
+      let cpv = Preference.float(for: .controlBarPositionVertical)
       controlBarFloating.setFrameOrigin(NSMakePoint(
         (wSize.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5).constrain(min: 0, max: wSize.width),
         wSize.height * CGFloat(cpv)
@@ -1301,7 +1299,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   private func createTimer() {
     // create new timer
-    let timeout = ud.float(forKey: PK.controlBarAutoHideTimeout)
+    let timeout = Preference.float(for: .controlBarAutoHideTimeout)
     hideControlTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideUIAndCursor), userInfo: nil, repeats: false)
   }
 
@@ -1327,7 +1325,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     let (osdString, osdType) = message.message()
 
-    let osdTextSize = ud.float(forKey: PK.osdTextSize)
+    let osdTextSize = Preference.float(for: .osdTextSize)
     osdLabel.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
     osdLabel.stringValue = osdString
 
@@ -1357,7 +1355,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     osdVisualEffectView.alphaValue = 1
     osdVisualEffectView.isHidden = false
-    let timeout = ud.float(forKey: PK.osdAutoHideTimeout)
+    let timeout = Preference.float(for: .osdAutoHideTimeout)
     hideOSDTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideOSD), userInfo: nil, repeats: false)
   }
 
@@ -1726,12 +1724,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     } else {
 
       var rect: NSRect
-      let needResizeWindow = playerCore.info.justOpenedFile || !ud.bool(forKey: PK.resizeOnlyWhenManuallyOpenFile)
+      let needResizeWindow = playerCore.info.justOpenedFile || !Preference.bool(for: .resizeOnlyWhenManuallyOpenFile)
 
       if needResizeWindow {
         // get videoSize on screen
         var videoSize = originalVideoSize
-        if ud.bool(forKey: PK.usePhysicalResolution) {
+        if Preference.bool(for: .usePhysicalResolution) {
           videoSize = w.convertFromBacking(
             NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))).size
         }
@@ -1971,7 +1969,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** handle action of both left and right arrow button */
   func arrowButtonAction(left: Bool) {
-    switch arrowBtnFunction! {
+    switch arrowBtnFunction {
     case .speed:
       isFastforwarding = true
       let speedValue = AppData.availableSpeedValues[speedValueIndex]

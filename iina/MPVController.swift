@@ -43,7 +43,6 @@ class MPVController: NSObject {
   lazy var queue: DispatchQueue! = DispatchQueue(label: "com.colliderli.iina.controller")
 
   unowned let playerCore: PlayerCore
-  unowned let ud: UserDefaults = UserDefaults.standard
 
   var needRecordSeekTime: Bool = false
   var recordedSeekStartTime: CFTimeInterval = 0
@@ -87,7 +86,7 @@ class MPVController: NSObject {
   deinit {
     ObjcUtils.silenced {
       self.optionObservers.forEach { (k, v) in
-        self.ud.removeObserver(self, forKeyPath: k)
+        UserDefaults.standard.removeObserver(self, forKeyPath: k)
       }
     }
   }
@@ -109,7 +108,7 @@ class MPVController: NSObject {
     // - Advanced
 
     // disable internal OSD
-    let useMpvOsd = ud.bool(forKey: PK.useMpvOsd)
+    let useMpvOsd = Preference.bool(for: .useMpvOsd)
     if !useMpvOsd {
       chkErr(mpv_set_option_string(mpv, MPVOption.OSD.osdLevel, "0"))
     } else {
@@ -117,7 +116,7 @@ class MPVController: NSObject {
     }
 
     // log
-    let enableLog = ud.bool(forKey: PK.enableLogging)
+    let enableLog = Preference.bool(for: .enableLogging)
     if enableLog {
       let date = Date()
       let calendar = NSCalendar.current
@@ -136,12 +135,12 @@ class MPVController: NSObject {
     // - General
 
     setUserOption(PK.screenshotFolder, type: .other, forName: MPVOption.Screenshot.screenshotDirectory) { key in
-      let screenshotPath = UserDefaults.standard.string(forKey: key)!
+      let screenshotPath = Preference.string(for: key)!
       return NSString(string: screenshotPath).expandingTildeInPath
     }
 
     setUserOption(PK.screenshotFormat, type: .other, forName: MPVOption.Screenshot.screenshotFormat) { key in
-      let v = UserDefaults.standard.integer(forKey: key)
+      let v = Preference.integer(for: key)
       return Preference.ScreenshotFormat(rawValue: v)?.string
     }
 
@@ -151,14 +150,14 @@ class MPVController: NSObject {
     setUserOption(PK.useAppleRemote, type: .bool, forName: MPVOption.Input.inputAppleremote)
 
     setUserOption(PK.keepOpenOnFileEnd, type: .other, forName: MPVOption.Window.keepOpen) { key in
-      let keepOpen = UserDefaults.standard.bool(forKey: PK.keepOpenOnFileEnd)
-      let keepOpenPl = !UserDefaults.standard.bool(forKey: PK.playlistAutoPlayNext)
+      let keepOpen = Preference.bool(for: PK.keepOpenOnFileEnd)
+      let keepOpenPl = !Preference.bool(for: PK.playlistAutoPlayNext)
       return keepOpenPl ? "always" : (keepOpen ? "yes" : "no")
     }
 
     setUserOption(PK.playlistAutoPlayNext, type: .other, forName: MPVOption.Window.keepOpen) { key in
-      let keepOpen = UserDefaults.standard.bool(forKey: PK.keepOpenOnFileEnd)
-      let keepOpenPl = !UserDefaults.standard.bool(forKey: PK.playlistAutoPlayNext)
+      let keepOpen = Preference.bool(for: PK.keepOpenOnFileEnd)
+      let keepOpenPl = !Preference.bool(for: PK.playlistAutoPlayNext)
       return keepOpenPl ? "always" : (keepOpen ? "yes" : "no")
     }
 
@@ -172,7 +171,7 @@ class MPVController: NSObject {
     setUserOption(PK.audioThreads, type: .int, forName: MPVOption.Audio.adLavcThreads)
 
     setUserOption(PK.hardwareDecoder, type: .other, forName: MPVOption.Video.hwdec) { key in
-      let value = UserDefaults.standard.integer(forKey: key)
+      let value = Preference.integer(for: key)
       return Preference.HardwareDecoderOption(rawValue: value)?.mpvString ?? "auto"
     }
 
@@ -180,21 +179,21 @@ class MPVController: NSObject {
     setUserOption(PK.maxVolume, type: .int, forName: MPVOption.Audio.volumeMax)
 
     var spdif: [String] = []
-    if ud.bool(forKey: PK.spdifAC3) { spdif.append("ac3") }
-    if ud.bool(forKey: PK.spdifDTS){ spdif.append("dts") }
-    if ud.bool(forKey: PK.spdifDTSHD) { spdif.append("dts-hd") }
+    if Preference.bool(for: PK.spdifAC3) { spdif.append("ac3") }
+    if Preference.bool(for: PK.spdifDTS){ spdif.append("dts") }
+    if Preference.bool(for: PK.spdifDTSHD) { spdif.append("dts-hd") }
     setString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","))
 
     // - Sub
 
     chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subAuto, "no"))
-    chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subCodepage, UserDefaults.standard.string(forKey: PK.defaultEncoding)))
-    playerCore.info.subEncoding = UserDefaults.standard.string(forKey: PK.defaultEncoding)
+    chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subCodepage, Preference.string(for: .defaultEncoding)))
+    playerCore.info.subEncoding = Preference.string(for: .defaultEncoding)
 
     let subOverrideHandler: OptionObserverInfo.Transformer = { key in
-      let v = UserDefaults.standard.bool(forKey: PK.ignoreAssStyles)
-      let level = Preference.SubOverrideLevel(rawValue: UserDefaults.standard.integer(forKey: PK.subOverrideLevel))
-      return v ? level?.string : "yes"
+      let v = Preference.bool(for: .ignoreAssStyles)
+      let level: Preference.SubOverrideLevel = Preference.enum(for: .subOverrideLevel)
+      return v ? level.string : "yes"
     }
 
     setUserOption(PK.ignoreAssStyles, type: .other, forName: MPVOption.Subtitles.subAssStyleOverride, transformer: subOverrideHandler)
@@ -219,12 +218,12 @@ class MPVController: NSObject {
     setUserOption(PK.subShadowColor, type: .color, forName: MPVOption.Subtitles.subShadowColor)
 
     setUserOption(PK.subAlignX, type: .other, forName: MPVOption.Subtitles.subAlignX) { key in
-      let v = UserDefaults.standard.integer(forKey: key)
+      let v = Preference.integer(for: key)
       return Preference.SubAlign(rawValue: v)?.stringForX
     }
 
     setUserOption(PK.subAlignY, type: .other, forName: MPVOption.Subtitles.subAlignY) { key in
-      let v = UserDefaults.standard.integer(forKey: key)
+      let v = Preference.integer(for: key)
       return Preference.SubAlign(rawValue: v)?.stringForY
     }
 
@@ -243,8 +242,7 @@ class MPVController: NSObject {
     // - Network / cache settings
 
     setUserOption(PK.enableCache, type: .other, forName: MPVOption.Cache.cache) { key in
-      let v = UserDefaults.standard.bool(forKey: key)
-      return v ? nil : "no"
+      return Preference.bool(for: key) ? nil : "no"
     }
 
     setUserOption(PK.defaultCacheSize, type: .int, forName: MPVOption.Cache.cacheDefault)
@@ -252,21 +250,21 @@ class MPVController: NSObject {
     setUserOption(PK.secPrefech, type: .int, forName: MPVOption.Cache.cacheSecs)
 
     setUserOption(PK.userAgent, type: .other, forName: MPVOption.Network.userAgent) { key in
-      let ua = UserDefaults.standard.string(forKey: key)!
+      let ua = Preference.string(for: key)!
       return ua.isEmpty ? nil : ua
     }
 
     setUserOption(PK.transportRTSPThrough, type: .other, forName: MPVOption.Network.rtspTransport) { key in
-      let v = UserDefaults.standard.integer(forKey: key)
-      return Preference.RTSPTransportation(rawValue: v)!.string
+      let v: Preference.RTSPTransportation = Preference.enum(for: .transportRTSPThrough)
+      return v.string
     }
 
     setUserOption(PK.ytdlEnabled, type: .bool, forName: MPVOption.ProgramBehavior.ytdl)
     setUserOption(PK.ytdlRawOptions, type: .string, forName: MPVOption.ProgramBehavior.ytdlRawOptions)
 
     // Set user defined conf dir.
-    if ud.bool(forKey: PK.useUserDefinedConfDir) {
-      if var userConfDir = ud.string(forKey: PK.userDefinedConfDir) {
+    if Preference.bool(for: .useUserDefinedConfDir) {
+      if var userConfDir = Preference.string(for: .userDefinedConfDir) {
         userConfDir = NSString(string: userConfDir).standardizingPath
         mpv_set_option_string(mpv, "config", "yes")
         let status = mpv_set_option_string(mpv, MPVOption.ProgramBehavior.configDir, userConfDir)
@@ -277,7 +275,7 @@ class MPVController: NSObject {
     }
 
     // Set user defined options.
-    if let userOptions = ud.value(forKey: PK.userOptions) as? [[String]] {
+    if let userOptions = Preference.value(for: .userOptions) as? [[String]] {
       userOptions.forEach { op in
         let status = mpv_set_option_string(mpv, op[0], op[1])
         if status < 0 {
@@ -292,9 +290,9 @@ class MPVController: NSObject {
     // Load external scripts
 
     // Load keybindings. This is still required for mpv to handle media keys or apple remote.
-    let userConfigs = UserDefaults.standard.dictionary(forKey: PK.inputConfigs)
+    let userConfigs = Preference.dictionary(for: .inputConfigs)
     var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["IINA Default"]
-    if let confFromUd = UserDefaults.standard.string(forKey: PK.currentInputConfigName) {
+    if let confFromUd = Preference.string(for: .currentInputConfigName) {
       if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
         inputConfPath = currentConfigFilePath
       }
@@ -590,7 +588,7 @@ class MPVController: NSObject {
     playerCore.fileLoaded()
     fileLoaded = true
     // mpvResume()
-    if !ud.bool(forKey: PK.pauseWhenOpen) {
+    if !Preference.bool(for: .pauseWhenOpen) {
       setFlag(MPVOption.PlaybackControl.pause, false)
     }
     playerCore.syncUI(.playlist)
@@ -647,7 +645,7 @@ class MPVController: NSObject {
           playerCore.info.isPaused = data
         }
         if playerCore.mainWindow.isWindowLoaded {
-          if ud.bool(forKey: PK.alwaysFloatOnTop) {
+          if Preference.bool(for: .alwaysFloatOnTop) {
             DispatchQueue.main.async {
               self.playerCore.mainWindow.setWindowFloatingOnTop(!data)
             }
@@ -784,15 +782,15 @@ class MPVController: NSObject {
   }
 
   private struct OptionObserverInfo {
-    typealias Transformer = (String) -> String?
+    typealias Transformer = (Preference.Key) -> String?
 
-    var prefKey: String
+    var prefKey: Preference.Key
     var optionName: String
     var valueType: UserOptionType
     /** input a pref key and return the option value (as string) */
     var transformer: Transformer?
 
-    init(_ prefKey: String, _ optionName: String, _ valueType: UserOptionType, _ transformer: Transformer?) {
+    init(_ prefKey: Preference.Key, _ optionName: String, _ valueType: UserOptionType, _ transformer: Transformer?) {
       self.prefKey = prefKey
       self.optionName = optionName
       self.valueType = valueType
@@ -802,30 +800,32 @@ class MPVController: NSObject {
 
   private var optionObservers: [String: [OptionObserverInfo]] = [:]
 
-  private func setUserOption(_ key: String, type: UserOptionType, forName name: String, sync: Bool = true, transformer: OptionObserverInfo.Transformer? = nil) {
+  private func setUserOption(_ key: Preference.Key, type: UserOptionType, forName name: String, sync: Bool = true, transformer: OptionObserverInfo.Transformer? = nil) {
     var code: Int32 = 0
+
+    let keyRawValue = key.rawValue
 
     switch type {
     case .int:
-      let value = ud.integer(forKey: key)
+      let value = Preference.integer(for: key)
       var i = Int64(value)
       code = mpv_set_option(mpv, name, MPV_FORMAT_INT64, &i)
 
     case .float:
-      let value = ud.float(forKey: key)
+      let value = Preference.float(for: key)
       var d = Double(value)
       code = mpv_set_option(mpv, name, MPV_FORMAT_DOUBLE, &d)
 
     case .bool:
-      let value = ud.bool(forKey: key)
+      let value = Preference.bool(for: key)
       code = mpv_set_option_string(mpv, name, value ? yes_str : no_str)
 
     case .string:
-      let value = ud.string(forKey: key)
+      let value = Preference.string(for: key)
       code = mpv_set_option_string(mpv, name, value)
 
     case .color:
-      let value = ud.mpvColor(forKey: key)
+      let value = Preference.mpvColor(for: key)
       code = mpv_set_option_string(mpv, name, value)
       // Random error here (perhaps a Swift or mpv one), so set it twice
       // 「没有什么是 set 不了的；如果有，那就 set 两次」
@@ -850,11 +850,11 @@ class MPVController: NSObject {
     }
 
     if sync {
-      ud.addObserver(self, forKeyPath: key, options: [.new, .old], context: nil)
-      if optionObservers[key] == nil {
-        optionObservers[key] = []
+      UserDefaults.standard.addObserver(self, forKeyPath: keyRawValue, options: [.new, .old], context: nil)
+      if optionObservers[keyRawValue] == nil {
+        optionObservers[keyRawValue] = []
       }
-      optionObservers[key]!.append(OptionObserverInfo(key, name, type, transformer))
+      optionObservers[keyRawValue]!.append(OptionObserverInfo(key, name, type, transformer))
     }
   }
 
@@ -867,24 +867,24 @@ class MPVController: NSObject {
     for info in infos {
       switch info.valueType {
       case .int:
-        let value = ud.integer(forKey: info.prefKey)
+        let value = Preference.integer(for: info.prefKey)
         setInt(info.optionName, value)
 
       case .float:
-        let value = ud.float(forKey: info.prefKey)
+        let value = Preference.float(for: info.prefKey)
         setDouble(info.optionName, Double(value))
 
       case .bool:
-        let value = ud.bool(forKey: info.prefKey)
+        let value = Preference.bool(for: info.prefKey)
         setFlag(info.optionName, value)
 
       case .string:
-        if let value = ud.string(forKey: info.prefKey) {
+        if let value = Preference.string(for: info.prefKey) {
           setString(info.optionName, value)
         }
 
       case .color:
-        if let value = ud.mpvColor(forKey: info.prefKey) {
+        if let value = Preference.mpvColor(for: info.prefKey) {
           setString(info.optionName, value)
         }
 

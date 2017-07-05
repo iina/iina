@@ -47,7 +47,7 @@ class PlaySliderCell: NSSliderCell {
   private var barColorRight: NSColor = PlaySliderCell.darkBarColorRight
   private var chapterStrokeColor: NSColor = PlaySliderCell.darkChapterStrokeColor
 
-  var drawChapters = UserDefaults.standard.bool(forKey: Preference.Key.showChapterPos)
+  var drawChapters = Preference.bool(for: .showChapterPos)
 
   override func awakeFromNib() {
     minValue = 0

@@ -76,7 +76,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
       configSelectPopUp.addItem(withTitle: k)
     }
     // - user
-    guard let uc = UserDefaults.standard.dictionary(forKey: Preference.Key.inputConfigs)
+    guard let uc = Preference.dictionary(for: .inputConfigs)
     else  {
       Utility.fatal("Cannot get config file list!")
     }
@@ -87,7 +87,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
     var currentConf = ""
     var gotCurrentConf = false
-    if let confFromUd = UserDefaults.standard.string(forKey: Preference.Key.currentInputConfigName) {
+    if let confFromUd = Preference.string(for: .currentInputConfigName) {
       if getFilePath(forConfig: confFromUd, showAlert: false) != nil {
         currentConf = confFromUd
         gotCurrentConf = true
@@ -198,7 +198,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     }
     // save
     userConfigs[newName] = newFilePath
-    UserDefaults.standard.set(userConfigs, forKey: Preference.Key.inputConfigs)
+    Preference.set(userConfigs, for: .inputConfigs)
     // load
     currentConfName = newName
     currentConfFilePath = newFilePath
@@ -247,7 +247,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     }
     // save
     userConfigs[newName] = newFilePath
-    UserDefaults.standard.set(userConfigs, forKey: Preference.Key.inputConfigs)
+    Preference.set(userConfigs, for: .inputConfigs)
     // load
     currentConfName = newName
     currentConfFilePath = newFilePath
@@ -269,7 +269,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
       Utility.showAlert("error_deleting_file")
     }
     userConfigs.removeValue(forKey: currentConfName)
-    UserDefaults.standard.set(userConfigs, forKey: Preference.Key.inputConfigs)
+    Preference.set(userConfigs, for: Preference.Key.inputConfigs)
     // load
     configSelectPopUp.removeItem(withTitle: currentConfName)
     currentConfName = configSelectPopUp.itemTitles[0]
@@ -320,7 +320,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
       changeButtonEnabled()
       return
     }
-    UserDefaults.standard.set(currentConfName, forKey: Preference.Key.currentInputConfigName)
+    Preference.set(currentConfName, for: .currentInputConfigName)
     setKeybindingsForPlayerCore()
     kbTableView.reloadData()
   }

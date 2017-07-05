@@ -71,7 +71,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     super.windowDidLoad()
     window?.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
 
-    watchProperties = UserDefaults.standard.array(forKey: Preference.Key.watchProperties) as! [String]
+    watchProperties = Preference.array(for: .watchProperties) as! [String]
     watchTableView.delegate = self
     watchTableView.dataSource = self
 
@@ -278,7 +278,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   }
 
   private func saveWatchList() {
-    UserDefaults.standard.set(watchProperties, forKey: Preference.Key.watchProperties)
+    Preference.set(watchProperties, for: .watchProperties)
   }
 
 }

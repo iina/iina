@@ -98,7 +98,7 @@ extension MainWindowController: NSTouchBarDelegate {
       let item = NSCustomTouchBarItem(identifier: identifier)
       let label = DurationDisplayTextField(labelWithString: "00:00")
       label.alignment = .center
-      label.mode = ud.bool(forKey: Preference.Key.showRemainingTime) ? .remaining : .current
+      label.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .current
       self.touchBarCurrentPosLabel = label
       item.view = label
       item.customizationLabel = NSLocalizedString("touchbar.time", comment: "Time Position")

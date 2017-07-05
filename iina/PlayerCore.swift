@@ -41,7 +41,7 @@ class PlayerCore: NSObject {
     if playerCores.isEmpty {
       return first
     }
-    if UserDefaults.standard.bool(forKey: Preference.Key.alwaysOpenInNewWindow) {
+    if Preference.bool(for: .alwaysOpenInNewWindow) {
       return newPlayerCore
     } else {
       return active
@@ -62,7 +62,7 @@ class PlayerCore: NSObject {
   }
 
   static func activeOrNewForMenuAction(isAlternative: Bool) -> PlayerCore {
-    let useNew = UserDefaults.standard.bool(forKey: Preference.Key.alwaysOpenInNewWindow) != isAlternative
+    let useNew = Preference.bool(for: .alwaysOpenInNewWindow) != isAlternative
     return useNew ? newPlayerCore : active
   }
 
@@ -170,16 +170,16 @@ class PlayerCore: NSObject {
     // set path for youtube-dl
     let oldPath = String(cString: getenv("PATH")!)
     var path = Utility.exeDirURL.path + ":" + oldPath
-    if let customYtdlPath = ud.string(forKey: Preference.Key.ytdlSearchPath), !customYtdlPath.isEmpty {
+    if let customYtdlPath = Preference.string(for: .ytdlSearchPath), !customYtdlPath.isEmpty {
       path = customYtdlPath + ":" + path
     }
     setenv("PATH", path, 1)
 
     // load keybindings
-    let userConfigs = UserDefaults.standard.dictionary(forKey: Preference.Key.inputConfigs)
+    let userConfigs = Preference.dictionary(for: .inputConfigs)
     let iinaDefaultConfPath = PrefKeyBindingViewController.defaultConfigs["IINA Default"]!
     var inputConfPath = iinaDefaultConfPath
-    if let confFromUd = UserDefaults.standard.string(forKey: Preference.Key.currentInputConfigName) {
+    if let confFromUd = Preference.string(for: .currentInputConfigName) {
       if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
         inputConfPath = currentConfigFilePath
       }
@@ -189,7 +189,7 @@ class PlayerCore: NSObject {
     mapping.forEach { PlayerCore.keyBindings[$0.key] = $0 }
 
     // set http proxy
-    if let proxy = ud.string(forKey: Preference.Key.httpProxy), !proxy.isEmpty {
+    if let proxy = Preference.string(for: .httpProxy), !proxy.isEmpty {
       setenv("http_proxy", "http://" + proxy, 1)
     }
 
@@ -296,7 +296,7 @@ class PlayerCore: NSObject {
       let maxPercent = (duration - 1) / duration * 100
       percent = percent.constrain(min: 0, max: maxPercent)
     }
-    let useExact = forceExact ? true : ud.bool(forKey: Preference.Key.useExactSeek)
+    let useExact = forceExact ? true : Preference.bool(for: .useExactSeek)
     let seekMode = useExact ? "absolute-percent+exact" : "absolute-percent"
     mpvController.command(.seek, args: ["\(percent)", seekMode], checkError: false)
   }
@@ -339,7 +339,7 @@ class PlayerCore: NSObject {
   }
 
   func screenShot() {
-    let option = ud.bool(forKey: Preference.Key.screenshotIncludeSubtitle) ? "subtitles" : "video"
+    let option = Preference.bool(for: .screenshotIncludeSubtitle) ? "subtitles" : "video"
     mpvController.command(.screenshot, args: [option])
     sendOSD(.screenShot)
   }
@@ -380,7 +380,7 @@ class PlayerCore: NSObject {
     let appliedVolume = constrain ? constrainedVolume : volume
     info.volume = appliedVolume
     mpvController.setDouble(MPVOption.Audio.volume, appliedVolume)
-    ud.set(constrainedVolume, forKey: Preference.Key.softVolume)
+    Preference.set(constrainedVolume, for: .softVolume)
   }
 
   func setTrack(_ index: Int, forType: MPVTrack.TrackType) {
@@ -631,11 +631,11 @@ class PlayerCore: NSObject {
       switch panel.runModal() {
       case NSAlertFirstButtonReturn:  // turn off
         self.mpvController.setString(MPVProperty.hwdec, "no")
-        self.ud.set(Preference.HardwareDecoderOption.disabled.rawValue, forKey: Preference.Key.hardwareDecoder)
+        Preference.set(Preference.HardwareDecoderOption.disabled.rawValue, for: .hardwareDecoder)
         return true
       case NSAlertSecondButtonReturn:
         self.mpvController.setString(MPVProperty.hwdec, "auto-copy")
-        self.ud.set(Preference.HardwareDecoderOption.autoCopy.rawValue, forKey: Preference.Key.hardwareDecoder)
+        Preference.set(Preference.HardwareDecoderOption.autoCopy.rawValue, for: .hardwareDecoder)
         return true
       default:
         return false
@@ -817,14 +817,14 @@ class PlayerCore: NSObject {
       }
       // whether enter full screen
       if needEnterFullScreenForNextMedia {
-        if ud.bool(forKey: Preference.Key.fullScreenWhenOpen) && !mainWindow.isInFullScreen {
+        if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.isInFullScreen {
           mainWindow.toggleWindowFullScreen()
         }
         // only enter fullscreen for first file
         needEnterFullScreenForNextMedia = false
       }
       // if need to switch to music mode
-      if ud.bool(forKey: Preference.Key.autoSwitchToMusicMode) {
+      if Preference.bool(for: .autoSwitchToMusicMode) {
         if currentMediaIsAudio() {
           if !isInMiniPlayer { switchToMiniPlayer() }
         } else {
@@ -839,7 +839,7 @@ class PlayerCore: NSObject {
     if let url = info.currentURL {
       let duration = info.videoDuration ?? .zero
       HistoryController.shared.add(url, duration: duration.second)
-      if ud.bool(forKey: Preference.Key.recordRecentFiles) && ud.bool(forKey: Preference.Key.trackAllFilesInRecentOpenMenu) {
+      if Preference.bool(for: .recordRecentFiles) && Preference.bool(for: .trackAllFilesInRecentOpenMenu) {
         NSDocumentController.shared().noteNewRecentDocumentURL(url)
       }
     }
@@ -1008,7 +1008,7 @@ class PlayerCore: NSObject {
     info.thumbnails.removeAll(keepingCapacity: true)
     info.thumbnailsProgress = 0
     info.thumbnailsReady = false
-    if UserDefaults.standard.bool(forKey: Preference.Key.enableThumbnailPreview) {
+    if Preference.bool(for: .enableThumbnailPreview) {
       if let cacheName = info.mpvMd5, ThumbnailCache.fileExists(forName: cacheName) {
         thumbnailQueue.async {
           if let thumbnails = ThumbnailCache.read(forName: cacheName) {

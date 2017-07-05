@@ -399,7 +399,7 @@ struct Preference {
 
   static let defaultPreference:[String : Any] = [
     Key.actionAfterLaunch: ActionAfterLaunch.welcomeWindow.rawValue,
-    Key.alwaysOpenInNewWindow: false,
+    Key.alwaysOpenInNewWindow: true,
     Key.enableCmdN: false,
     Key.recordPlaybackHistory: true,
     Key.recordRecentFiles: true,

@@ -300,6 +300,12 @@ class Utility {
     }
   }
 
+  static private let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
+
+  static func mediaType(forExtension ext: String) -> MPVTrack.TrackType? {
+    return allTypes.first { supportedFileExt[$0]!.contains(ext.lowercased()) }
+  }
+
   static func getFilePath(Configs userConfigs: [String: Any]!, forConfig conf: String, showAlert: Bool = true) -> String? {
     
     // if is default config

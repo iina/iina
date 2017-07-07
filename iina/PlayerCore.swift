@@ -854,7 +854,7 @@ class PlayerCore: NSObject {
     // search subs
     let fm = FileManager.default
     let searchOptions: FileManager.DirectoryEnumerationOptions = [.skipsHiddenFiles, .skipsPackageDescendants, .skipsSubdirectoryDescendants]
-    let subExts = Utility.supportedFileExt[.sub]!
+    let subExts = AppData.supportedFileExt[.sub]!
     var subDirs: [URL] = []
 
     // search subs in current directory
@@ -895,7 +895,7 @@ class PlayerCore: NSObject {
     let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
     for file in files {
       let fileInfo = FileInfo(file)
-      guard let mediaType = allTypes.first(where: { Utility.supportedFileExt[$0]!.contains(fileInfo.ext.lowercased()) }) else { continue }
+      guard let mediaType = allTypes.first(where: { AppData.supportedFileExt[$0]!.contains(fileInfo.ext.lowercased()) }) else { continue }
       groups[mediaType]!.append(fileInfo)
     }
 

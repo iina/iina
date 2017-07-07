@@ -488,6 +488,18 @@ class PlayerCore: NSObject {
     mpvController.command(.playlistMove, args: ["\(from)", "\(to)"])
   }
 
+  func addToPlaylist(paths: [String], at index: Int) {
+    getPlaylist()
+    guard index <= info.playlist.count && index >= 0 else { return }
+    let previousCount = info.playlist.count
+    for path in paths {
+      addToPlaylist(path)
+    }
+    for i in 0..<paths.count {
+      playlistMove(previousCount + i, to: index + i)
+    }
+  }
+
   func playlistRemove(_ index: Int) {
     mpvController.command(.playlistRemove, args: [index.toStr()])
   }
@@ -504,12 +516,12 @@ class PlayerCore: NSObject {
     info.justOpenedFile = true
     info.currentFileIsOpenedManually = true
     mpvController.command(.loadfile, args: [path, "replace"])
-    getPLaylist()
+    getPlaylist()
   }
 
   func playFileInPlaylist(_ pos: Int) {
     mpvController.setInt(MPVProperty.playlistPos, pos)
-    getPLaylist()
+    getPlaylist()
   }
 
   func navigateInPlaylist(nextOrPrev: Bool) {
@@ -771,7 +783,7 @@ class PlayerCore: NSObject {
     DispatchQueue.main.sync {
       self.getTrackInfo()
       self.getSelectedTracks()
-      self.getPLaylist()
+      self.getPlaylist()
       self.getChapters()
 
       mainWindow.updateTitle()
@@ -1241,7 +1253,7 @@ class PlayerCore: NSObject {
     info.secondSid = mpvController.getInt(MPVOption.Subtitles.secondarySid)
   }
 
-  func getPLaylist() {
+  func getPlaylist() {
     info.playlist.removeAll()
     let playlistCount = mpvController.getInt(MPVProperty.playlistCount)
     for index in 0..<playlistCount {

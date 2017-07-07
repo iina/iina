@@ -754,13 +754,23 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if !mouseInSideBar && sideBarStatus != .hidden {
         hideSideBar()
       } else {
+        // disable click in sidebar
+        
+        let osc = currentControlBar ?? titleBarView
+        let mousePosInOSC = osc!.convert(event.locationInWindow, from: nil)
+        let isMouseInOSC = osc!.mouse(mousePosInOSC, in: osc!.bounds)
+        
+        let isMouseInTitleBar = window?.contentView?.mouse(event.locationInWindow, in: titleBarView.frame) ?? false
+        
         // handle mouse click
         if event.clickCount == 1 {
           // single click
           if doubleClickAction! == .none {
+            if mouseInSideBar || isMouseInOSC || isMouseInTitleBar { return }
             // if double click action is none, it's safe to perform action immediately
             performMouseAction(singleClickAction)
           } else {
+            if isMouseInOSC { return }
             // else start a timer
             singleClickTimer = Timer.scheduledTimer(timeInterval: NSEvent.doubleClickInterval(), target: self, selector: #selector(self.performMouseActionLater(_:)), userInfo: singleClickAction, repeats: false)
           }
@@ -781,6 +791,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func rightMouseUp(with event: NSEvent) {
+    // disable click in sidebar
+    let mouseInSideBar = window!.contentView!.mouse(event.locationInWindow, in: sideBarView.frame)
+    
+    let osc = currentControlBar ?? titleBarView
+    let mousePosInOSC = osc!.convert(event.locationInWindow, from: nil)
+    let isMouseInOSC = osc!.mouse(mousePosInOSC, in: osc!.bounds)
+    
+    let isMouseInTitleBar = window?.contentView?.mouse(event.locationInWindow, in: titleBarView.frame) ?? false
+    
+    if mouseInSideBar || isMouseInOSC || isMouseInTitleBar { return }
+    
     performMouseAction(rightClickAction)
   }
 

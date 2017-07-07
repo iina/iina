@@ -107,7 +107,7 @@ class AutoFileMatcher {
     var needQuit = false
 
     // add videos
-    for video in filesGroupedByMediaType[.video]! {
+    for video in filesGroupedByMediaType[.video]! + filesGroupedByMediaType[.audio]! {
       // add to playlist
       if video.url.path == player.info.currentURL?.path {
         addedCurrentVideo = true
@@ -124,12 +124,6 @@ class AutoFileMatcher {
         }
       }
       if needQuit { break }
-    }
-
-    // add audios
-    for audio in filesGroupedByMediaType[.audio]! {
-      try checkTicket()
-      player.addToPlaylist(audio.path)
     }
   }
 

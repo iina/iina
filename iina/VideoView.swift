@@ -94,12 +94,7 @@ class VideoView: NSView {
   // MARK: Drag and drop
   
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-    if let _ = sender.draggingSource() { return [] }
-    return .copy
-  }
-    
-  override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
-    if let _ = sender.draggingSource() { return [] }
+    if sender.draggingSource() as? NSTableView === playerCore.mainWindow.playlistView { return [] }
     return .copy
   }
   
@@ -111,14 +106,14 @@ class VideoView: NSView {
       
       var videoFiles: [String] = []
       var subtitleFiles: [String] = []
-      fileNames.forEach({ (path) in
+      fileNames.forEach { (path) in
         let ext = (path as NSString).pathExtension.lowercased()
         if Utility.supportedFileExt[.sub]!.contains(ext) {
           subtitleFiles.append(path)
-        } else {
+        } else if Utility.playableFileExt.contains(ext) {
           videoFiles.append(path)
         }
-      })
+      }
       
       if videoFiles.count == 0 {
         if subtitleFiles.count > 0 {

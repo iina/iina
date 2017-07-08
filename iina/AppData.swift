@@ -10,6 +10,14 @@ import Cocoa
 
 struct AppData {
 
+  static let supportedFileExt: [MPVTrack.TrackType: [String]] = [
+    .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "mts", "m2ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt"],
+    .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "oga", "mogg", "m4a", "ac3", "opus", "wav", "wv", "aiff", "ape", "tta", "tak"],
+    .sub: ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc"]
+  ]
+
+  static let playableFileExt = supportedFileExt[.video]! + supportedFileExt[.audio]!
+
   /** time interval to sync play pos */
   static let getTimeInterval: Double = 0.1
 

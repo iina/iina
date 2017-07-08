@@ -182,7 +182,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     if let fileNames = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
       for path in fileNames {
         let ext = (path as NSString).pathExtension.lowercased()
-        if Utility.playableFileExt.contains(ext) {
+        if AppData.playableFileExt.contains(ext) {
           return .copy
         }
       }
@@ -240,7 +240,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     } else if let fileNames = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
       let validMedia = fileNames.filter {
         let ext = ($0 as NSString).pathExtension.lowercased()
-        return Utility.playableFileExt.contains(ext)
+        return AppData.playableFileExt.contains(ext)
       }
       let added = validMedia.count
       if added == 0 {
@@ -499,7 +499,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let fileURL = URL(fileURLWithPath: filename).deletingLastPathComponent()
     Utility.quickMultipleOpenPanel(title: NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File"), dir: fileURL) { subURLs in
       for subURL in subURLs {
-        guard Utility.supportedFileExt[.sub]!.contains(subURL.pathExtension.lowercased()) else { return }
+        guard AppData.supportedFileExt[.sub]!.contains(subURL.pathExtension.lowercased()) else { return }
         self.playerCore.info.matchedSubs.safeAppend(subURL, for: filename)
       }
       self.playlistTableView.reloadData(forRowIndexes: selectedRows, columnIndexes: IndexSet(integersIn: 0...1))

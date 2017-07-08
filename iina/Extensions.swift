@@ -373,7 +373,7 @@ extension NSMenuItem {
 }
 
 extension NSTableView {
-  func selectedIndexsForMenu() -> IndexSet {
+  func selectedIndexesForMenu() -> IndexSet {
     let clickedRow = self.clickedRow
     let selectedRowIndexes = self.selectedRowIndexes
     if clickedRow != -1 {

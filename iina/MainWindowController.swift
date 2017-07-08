@@ -754,8 +754,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if !mouseInSideBar && sideBarStatus != .hidden {
         hideSideBar()
       } else {
-        // disable click in sidebar
-        
         let osc = currentControlBar ?? titleBarView
         let mousePosInOSC = osc!.convert(event.locationInWindow, from: nil)
         let isMouseInOSC = osc!.mouse(mousePosInOSC, in: osc!.bounds)
@@ -764,17 +762,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         
         // handle mouse click
         if event.clickCount == 1 {
+          // Disable singleClick for sideBar / OSC / titleBar
+          guard !mouseInSideBar && !isMouseInOSC && !isMouseInTitleBar else { return }
           // single click
           if doubleClickAction! == .none {
-            if mouseInSideBar || isMouseInOSC || isMouseInTitleBar { return }
             // if double click action is none, it's safe to perform action immediately
             performMouseAction(singleClickAction)
           } else {
-            if isMouseInOSC { return }
             // else start a timer
             singleClickTimer = Timer.scheduledTimer(timeInterval: NSEvent.doubleClickInterval(), target: self, selector: #selector(self.performMouseActionLater(_:)), userInfo: singleClickAction, repeats: false)
           }
         } else if event.clickCount == 2 {
+          // Disable doubleClick for sideBar / OSC
+          guard !mouseInSideBar && !isMouseInOSC else { return }
           // double click
           guard doubleClickAction! != .none else { return }
           // if already scheduled a single click timer, invalidate it
@@ -791,16 +791,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func rightMouseUp(with event: NSEvent) {
-    // disable click in sidebar
-    let mouseInSideBar = window!.contentView!.mouse(event.locationInWindow, in: sideBarView.frame)
-    
+    // Disable mouseUp for sideBar / OSC / titleBar
+    let mouseInSideBar = window?.contentView?.mouse(event.locationInWindow, in: sideBarView.frame) ?? false
     let osc = currentControlBar ?? titleBarView
     let mousePosInOSC = osc!.convert(event.locationInWindow, from: nil)
     let isMouseInOSC = osc!.mouse(mousePosInOSC, in: osc!.bounds)
     
     let isMouseInTitleBar = window?.contentView?.mouse(event.locationInWindow, in: titleBarView.frame) ?? false
-    
-    if mouseInSideBar || isMouseInOSC || isMouseInTitleBar { return }
+    guard !mouseInSideBar && !isMouseInOSC && !isMouseInTitleBar else { return }
     
     performMouseAction(rightClickAction)
   }

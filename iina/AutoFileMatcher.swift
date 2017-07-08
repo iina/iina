@@ -257,7 +257,7 @@ class AutoFileMatcher {
         var minDistToVideo: UInt = .max
         for video in unmatchedVideos {
           try checkTicket()
-          let threshold = UInt(Double(video.filename.characters.count + sub.filename.characters.count) * 0.8)
+          let threshold = UInt(Double(video.filename.characters.count + sub.filename.characters.count) * 0.6)
           let rawDist = ObjcUtils.levDistance(video.prefix, and: sub.prefix) + ObjcUtils.levDistance(video.suffix, and: sub.suffix)
           let dist: UInt = rawDist < threshold ? rawDist : UInt.max
           sub.dist[video] = dist
@@ -281,6 +281,9 @@ class AutoFileMatcher {
   }
 
   func startMatching() {
+
+    let shouldAutoLoad = UserDefaults.standard.bool(forKey: Preference.Key.playlistAutoAdd)
+
     do {
 
       guard let folder = player.info.currentURL?.deletingLastPathComponent(), folder.isFileURL else { return }
@@ -293,8 +296,10 @@ class AutoFileMatcher {
       player.info.currentSubsInfo = subtitles
 
       // add files to playlist
-      try addFilesToPlaylist()
-      NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
+      if shouldAutoLoad {
+        try addFilesToPlaylist()
+        NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
+      }
 
       // group video and sub files
       videosGroupedBySeries = FileGroup.group(files: filesGroupedByMediaType[.video]!).flatten()
@@ -308,8 +313,10 @@ class AutoFileMatcher {
       NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
 
       // match sub stage 2
-      try forceMatchUnmatchedVideos()
-      NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
+      if shouldAutoLoad {
+        try forceMatchUnmatchedVideos()
+        NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
+      }
 
     } catch {
       return

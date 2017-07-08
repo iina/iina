@@ -739,7 +739,7 @@ class PlayerCore: NSObject {
     let currentTicket = backgroundQueueTicket
     backgroundQueue.async {
       // add files in same folder
-      if self.ud.bool(forKey: Preference.Key.playlistAutoAdd) && currentFileIsOpenedManually {
+      if currentFileIsOpenedManually {
         self.autoLoadFilesInCurrentFolder(ticket: currentTicket)
       }
       // auto load matched subtitles

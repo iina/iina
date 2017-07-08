@@ -230,7 +230,6 @@
 
 /* General */
 "preference.general" = "Ogólne";
-
 /* Keybindings */
 "preference.keybindings" = "Skróty klawiszowe";
 
@@ -254,28 +253,3 @@
 
 /* <None> */
 "track.none" = "Brak ścieżki";
-
-/* Error */
-"update.check_failed" = "Błąd";
-
-/* GitHub */
-"update.dl_from_github" = "GitHub";
-
-/* Website */
-"update.dl_from_website" = "Strona";
-
-/* No update */
-"update.no_update" = "Brak aktualizacji";
-
-/* Title */
-"update.title_error" = "Tytuł";
-
-/* Title */
-"update.title_no_update" = "Tytuł";
-
-/* Title */
-"update.title_update_found" = "Tytuł";
-
-/* Update found */
-"update.update_found" = "Znaleziono aktualizacje";
-

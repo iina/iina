@@ -69,16 +69,6 @@
 "osd.cannot_login" = "Giriş yapılamıyor";
 "osd.canceled" = "İptal edildi";
 
-"update.title_update_found" = "Güncelleme bulundu";
-"update.title_no_update" = "Güncelleme yok";
-"update.title_error" = "Hata";
-"update.update_found" = "Yeni sürüm tespit edildi! IINA hâlâ alfa aşamasındadır, bu nedenle en yeni sürümü kullanmanız önerilir. Lütfen web sitesinden veya GitHub'dan indirin:";
-"update.no_update" = "En son sürümü çalıştırıyorsunuz.";
-"update.check_failed" = "Güncellemeleri kontrol edemedi. Muhtemelen çok eski bir sürümü çalıştırıyorsun. Lütfen web sitesini veya GitHub'ı kontrol edin.";
-"update.new_version" = "Yeni sürüm:";
-"update.dl_from_website" = "Web Sitesine Git";
-"update.dl_from_github" = "GitHub'a Git";
-
 "preference.title" = "Tercihler";
 "preference.general" = "Genel";
 "preference.ui" = "Arayüz";

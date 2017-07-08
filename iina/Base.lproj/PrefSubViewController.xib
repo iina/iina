@@ -611,7 +611,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="IMu-Go-Gmi"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="check" title="Display subtitles in a letter box while in full screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9kA-0S-Nl8">
+                                        <buttonCell key="cell" type="check" title="Display subtitles in letterboxes while in full screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9kA-0S-Nl8">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>

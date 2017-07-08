@@ -282,12 +282,12 @@
                             <menuItem title="Volume:" enabled="NO" id="iQF-1S-9EK">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Increase Volume 5%" tag="10" keyEquivalent="" id="Wbq-vt-hzX"/>
-                            <menuItem title="Increase Volume 1%" tag="1" alternate="YES" keyEquivalent="" id="c6Y-0e-vgf">
+                            <menuItem title="Volume + 5%" tag="10" keyEquivalent="" id="Wbq-vt-hzX"/>
+                            <menuItem title="Volume + 1%" tag="1" alternate="YES" keyEquivalent="" id="c6Y-0e-vgf">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Decrease Volume 5%" tag="10" alternate="YES" keyEquivalent="" id="pdj-9C-Fn1"/>
-                            <menuItem title="Decrease Volume 1%" tag="1" alternate="YES" keyEquivalent="" id="Zhv-Bz-I5V">
+                            <menuItem title="Volume - 5%" tag="10" alternate="YES" keyEquivalent="" id="pdj-9C-Fn1"/>
+                            <menuItem title="Volume - 1%" tag="1" alternate="YES" keyEquivalent="" id="Zhv-Bz-I5V">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
                             <menuItem title="Mute" id="WOL-Us-ByA">
@@ -297,10 +297,10 @@
                             <menuItem title="Audio Delay:" enabled="NO" id="foC-r3-8mp">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Increase Audio Delay 0.5s" id="4ae-MT-2L1">
+                            <menuItem title="Audio Delay + 0.5s" id="4ae-MT-2L1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Decrease Audio Delay 0.5s" id="Lc4-4W-thE">
+                            <menuItem title="Audio Delay - 0.5s" id="Lc4-4W-thE">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Reset Audio Delay" id="H3d-jR-YCr">
@@ -382,10 +382,10 @@
                             <menuItem title="Subtitle Delay: " enabled="NO" id="THG-4o-U6A">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Increase Subtitle Delay 0.5s" id="pAo-L5-qTO">
+                            <menuItem title="Subtitle Delay + 0.5s" id="pAo-L5-qTO">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Decrease Subtitle Delay 0.5s" id="LsU-Qz-dax">
+                            <menuItem title="Subtitle Delay - 0.5s" id="LsU-Qz-dax">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleToolbarShown:" target="-1" id="lSt-4f-ewa"/>

@@ -65,16 +65,6 @@
 "osd.cannot_login" = "Login non riuscito";
 "osd.canceled" = "Annullato";
 
-"update.title_update_found" = "Trovato aggiornamento";
-"update.title_no_update" = "Nessun aggiornamento";
-"update.title_error" = "Errore";
-"update.update_found" = "È disponibile una nuova versione! IINA è ancora in fase alpha, siete invitati ad utilizzare la versione più recente. Scaricatela dal sito internet o da GitHub:";
-"update.no_update" = "State utilizzando la versione più recente.";
-"update.check_failed" = "Impossibile controllare gli aggiornamenti. Probabilmente state usando una versione troppo vecchia. Controllate il sito internet o GitHub.";
-"update.new_version" = "Nuova versione:";
-"update.dl_from_website" = "Vai al sito internet";
-"update.dl_from_github" = "Vai su GitHub";
-
 "preference.title" = "Preferenze";
 "preference.general" = "Generali";
 "preference.ui" = "Interfaccia";

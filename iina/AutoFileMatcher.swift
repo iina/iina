@@ -160,7 +160,8 @@ class AutoFileMatcher {
           minSub = sp
         }
       }
-      if closestVideoForSub[minSub] == vp {
+      let threshold = UInt(Double(vp.characters.count + minSub.characters.count) * 0.6)
+      if closestVideoForSub[minSub] == vp && minDist < threshold {
         matchedPrefixes[vp] = minSub
       }
     }
@@ -251,6 +252,10 @@ class AutoFileMatcher {
 
   private func forceMatchUnmatchedVideos() throws {
     let unmatchedSubs = subtitles.filter { !$0.isMatched }
+    guard unmatchedVideos.count * unmatchedSubs.count < 200 * 200 else {
+      Utility.log("Stopped auto matching subs - too much files")
+      return
+    }
     if unmatchedSubs.count > 0 && unmatchedVideos.count > 0 {
       // calculate edit distance
       for sub in unmatchedSubs {

@@ -27,7 +27,7 @@ class MPVController: NSObject {
   var mpvClientName: UnsafePointer<Int8>!
   var mpvVersion: String!
 
-  lazy var queue: DispatchQueue! = DispatchQueue(label: "com.colliderli.iina.controller")
+  lazy var queue: DispatchQueue! = DispatchQueue(label: "com.colliderli.iina.controller", qos: DispatchQoS.userInitiated)
 
   unowned let playerCore: PlayerCore
   unowned let ud: UserDefaults = UserDefaults.standard

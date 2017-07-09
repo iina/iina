@@ -57,7 +57,7 @@ class PlayerCore: NSObject {
   unowned let ud: UserDefaults = UserDefaults.standard
 
   /// A dispatch queue for auto load feature.
-  let backgroundQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreTask")
+  let backgroundQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreTask", qos: DispatchQoS.background)
 
   /**
    This ticket will be increased each time before a new task being submitted to `backgroundQueue`.

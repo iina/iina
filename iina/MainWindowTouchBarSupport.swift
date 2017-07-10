@@ -299,7 +299,8 @@ class TouchBarPlaySliderCell: NSSliderCell {
       if let dur = info.videoDuration?.second,
         let image = info.getThumbnail(forSecond: percent * dur)?.image,
         info.thumbnailsProgress >= percent {
-        let orig = NSRect(x: image.size.width / 2, y: 0, width: 2 * (image.size.height / barRect.height), height: barRect.height)
+        let origHalfWidth = 2 * (image.size.height / barRect.height)
+        let orig = NSRect(x: image.size.width / 2 - origHalfWidth, y: 0, width: 2 * origHalfWidth, height: image.size.height)
         image.draw(in: dest, from: orig, operation: .copy, fraction: 1)
       } else {
         NSBezierPath(rect: dest).fill()

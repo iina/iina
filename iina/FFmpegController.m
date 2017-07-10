@@ -84,7 +84,7 @@ return -1;\
   [_thumbnailPartialResult removeAllObjects];
   [_addedTimestamps removeAllObjects];
 
-  NSLog(@"Getting thumbnails for video...");
+  // NSLog(@"Getting thumbnails for video...");
 
   // Register all formats and codecs. mpv should have already called it.
   // av_register_all();
@@ -250,7 +250,7 @@ return -1;\
   // Close the video file
   avformat_close_input(&pFormatCtx);
 
-  NSLog(@"Thumbnails generated.");
+  // NSLog(@"Thumbnails generated.");
   return 0;
 }
 

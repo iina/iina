@@ -30,7 +30,7 @@
                                     <action selector="showAboutWindow:" target="Voe-Tx-rLC" id="HGv-E1-lQH"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Check Update..." id="gMo-qL-m08">
+                            <menuItem title="Check for Updates…" id="gMo-qL-m08">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="checkForUpdates:" target="wTK-gz-aTs" id="MFD-wN-SXh"/>

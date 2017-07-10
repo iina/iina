@@ -113,6 +113,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var isInPIP: Bool = false
   var isInInteractiveMode: Bool = false
   var isEnteringFullScreen: Bool = false
+  var isVideoLoaded: Bool = false
 
   // might use another obj to handle slider?
   var isMouseInWindow: Bool = false
@@ -1727,6 +1728,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
       if (!window!.isVisible) {
         window!.setIsVisible(true)
+      }
+
+      // generate thumbnails after video loaded if it's the first time
+      if !isVideoLoaded {
+        playerCore.generateThumbnails()
+        isVideoLoaded = true
       }
 
       // maybe not a good position, consider putting these at playback-restart

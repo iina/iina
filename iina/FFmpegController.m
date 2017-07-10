@@ -86,8 +86,8 @@ return -1;\
 
   NSLog(@"Getting thumbnails for video...");
 
-  // Register all formats and codecs
-  av_register_all();
+  // Register all formats and codecs. mpv should have already called it.
+  // av_register_all();
 
   // Open video file
   AVFormatContext *pFormatCtx = NULL;

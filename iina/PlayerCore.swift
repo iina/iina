@@ -724,10 +724,6 @@ class PlayerCore: NSObject {
     info.disableOSDForFileLoading = true
     guard let path = mpvController.getString(MPVProperty.path) else { return }
     info.currentURL = URL(fileURLWithPath: path)
-    // Generate thumbnails if window has loaded video
-    if mainWindow.isVideoLoaded {
-      generateThumbnails()
-    }
     // Auto load
     backgroundQueueTicket += 1
     let currentFileIsOpenedManually = info.currentFileIsOpenedManually
@@ -757,6 +753,10 @@ class PlayerCore: NSObject {
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     info.haveDownloadedSub = false
+    // Generate thumbnails if window has loaded video
+    if mainWindow.isVideoLoaded {
+      generateThumbnails()
+    }
     DispatchQueue.main.sync {
       self.getTrackInfo()
       self.getSelectedTracks()

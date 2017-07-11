@@ -69,16 +69,6 @@
 "osd.cannot_login" = "로그인할 수 없음";
 "osd.canceled" = "취소됨";
 
-"update.title_update_found" = "업데이트를 찾았습니다";
-"update.title_no_update" = "업데이트가 없습니다";
-"update.title_error" = "오류";
-"update.update_found" = "새로운 버전이 있습니다. IINA는 아직 알파 단계이므로 최신버전으로 갱신하는 것이 좋습니다. 웹사이트나 Github에서 다운로드 하십시오:";
-"update.no_update" = "최신 버전을 사용중입니다.";
-"update.check_failed" = "업데이트를 확인하지 못했습니다. 너무 오래된 버전을 사용하고 있는 것 같습니다. 웹사이트 또는 Github에서 배포본을 확인해 주십시오.";
-"update.new_version" = "새로운 버전:";
-"update.dl_from_website" = "웹사이트로 가기";
-"update.dl_from_github" = "Github으로 가기";
-
 "preference.title" = "환경설정";
 "preference.general" = "일반";
 "preference.ui" = "화면";
@@ -163,7 +153,7 @@
 "alert.jump_to.title" = "위치로 가기";
 "alert.jump_to.message" = "재생할 위치의 시간을 입력하십시오. 예: 20:35";
 
-"alert.opensub.login.title" = "Opensubtitles 로그인";
+"alert.opensub.login.title" = "OpenSubtitles 로그인";
 "alert.opensub.login.message" = "사용자 계정과 비밀번호를 입력하십시오.";
 
 "alert.open_url.title" = "URL 열기";

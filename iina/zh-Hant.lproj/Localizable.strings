@@ -69,16 +69,6 @@
 "osd.cannot_login" = "登入失敗";
 "osd.canceled" = "已取消";
 
-"update.title_update_found" = "有更新";
-"update.title_no_update" = "無更新";
-"update.title_error" = "異常";
-"update.update_found" = "找到新版本！IINA 仍處於 alpha 階段，建議您更新到最新版本，請前往官網或 Github 下載：";
-"update.no_update" = "您所用的已是最新版本。";
-"update.check_failed" = "無法檢測更新，您所用版本可能過舊，請前往官網或 Github 手動下載。";
-"update.new_version" = "新版本:";
-"update.dl_from_website" = "前往官網";
-"update.dl_from_github" = "前往 Github";
-
 "preference.title" = "偏好";
 "preference.general" = "一般";
 "preference.ui" = "UI";
@@ -149,7 +139,7 @@
 "alert.playlist.error_deleting" = "無法刪除%@";
 
 "alert.sub.no_selected" = "請先選定一個已下載的字幕檔";
-"alert.sub_lang_not_set" = "在使用 opensubtitles 前請先在「偏好設定」中設定字幕的偏好語言，當前將使用英文（eng）。";
+"alert.sub_lang_not_set" = "在使用 OpenSubtitles 前請先在「偏好設定」中設定字幕的偏好語言，當前將使用英文（eng）。";
 "alert.sub.cannot_save_passwd" = "無法將您這個密鑰「%@」保存到鑰匙串";
 "alert.sub.cannot_login" = "登入失敗，請核對您的用戶名、密鑰、網路連接。\n\n%@";
 
@@ -163,7 +153,7 @@
 "alert.jump_to.title" = "跳轉至";
 "alert.jump_to.message" = "請輸入跳轉致的位置，例如：20:35";
 
-"alert.opensub.login.title" = "Opensubtitles 登入";
+"alert.opensub.login.title" = "OpenSubtitles 登入";
 "alert.opensub.login.message" = "請輸入用戶名和密鑰";
 
 "alert.open_url.title" = "打開 URL";

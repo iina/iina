@@ -153,7 +153,7 @@ extension MainWindowController: NSTouchBarDelegate {
 
   func touchBarSliderAction(_ sender: NSSlider) {
     let percentage = 100 * sender.doubleValue / sender.maxValue
-    playerCore.seek(percent: percentage)
+    playerCore.seek(percent: percentage, forceExact: true)
   }
 
   private func buttonTouchBarItem(withIdentifier identifier: NSTouchBarItemIdentifier, imageName: String, tag: Int, customLabel: String, action: Selector) -> NSCustomTouchBarItem {

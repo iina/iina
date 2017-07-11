@@ -23,6 +23,10 @@ class NowPlayingInfoManager {
     info.nowPlayingInfo = nowPlayingInfo
   }
 
+  static func updateState(_ state: MPNowPlayingPlaybackState) {
+    info.playbackState = state
+  }
+
 }
 
 

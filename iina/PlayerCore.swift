@@ -14,6 +14,17 @@ class PlayerCore: NSObject {
 
   static let first: PlayerCore = createPlayerCore()
 
+  static private var _lastActive: PlayerCore?
+
+  static var lastActive: PlayerCore {
+    get {
+      return _lastActive ?? active
+    }
+    set {
+      _lastActive = newValue
+    }
+  }
+
   static var active: PlayerCore {
     if let wc = NSApp.mainWindow?.windowController as? MainWindowController {
       return wc.playerCore

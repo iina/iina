@@ -207,6 +207,7 @@ extension MainWindowController {
     //  10: smaller size
     //  11: bigger size
     let size = sender.tag
+    guard !isInFullScreen else { return }
     guard let w = window, var vw = playerCore.info.displayWidth, var vh = playerCore.info.displayHeight else { return }
     if vw == 0 { vw = AppData.widthWhenNoVideo }
     if vh == 0 { vh = AppData.heightWhenNoVideo }

@@ -147,6 +147,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       remoteCommand.stopCommand.addTarget(handler: PlayerCore.handleStopCommand(_:))
       remoteCommand.nextTrackCommand.addTarget(handler: PlayerCore.handleNextTrackCommand(_:))
       remoteCommand.previousTrackCommand.addTarget(handler: PlayerCore.handlePreviousTrackCommand(_:))
+
+      NowPlayingInfoManager.updateState(.unknown)
     }
 
     // if have pending open request

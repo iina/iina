@@ -134,7 +134,7 @@
 "alert.extra_option.cannot_read" = "無法識別用戶自訂的 mpv 設定";
 "alert.extra_option.empty" = "鍵和值不可爲空！";
 "alert.extra_option.error" = "無法設定 --%@=%@（返回值：%d）。請於「偏好設定→高級」中核對您的額外選項設定。";
-"alert.extra_option.config_folder" = "設定檔檔案夾「%@\」無效";
+"alert.extra_option.config_folder" = "設定檔檔案夾「%@」無效";
 
 "alert.playlist.error_deleting" = "無法刪除%@";
 

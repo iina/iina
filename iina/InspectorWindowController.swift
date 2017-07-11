@@ -90,8 +90,8 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   }
 
   func updateInfo(dynamic: Bool = false) {
-    let controller = PlayerCore.active.mpvController!
-    let info = PlayerCore.active.info
+    let controller = PlayerCore.lastActive.mpvController!
+    let info = PlayerCore.lastActive.info
 
     if !dynamic {
 

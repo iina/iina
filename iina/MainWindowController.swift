@@ -1182,6 +1182,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowDidBecomeMain(_ notification: Notification) {
+    PlayerCore.lastActive = playerCore
     NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
   }
 

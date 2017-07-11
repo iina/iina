@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13122.19" systemVersion="17A291m" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.19"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -30,7 +30,7 @@
                                     <action selector="showAboutWindow:" target="Voe-Tx-rLC" id="HGv-E1-lQH"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Check Update..." id="gMo-qL-m08">
+                            <menuItem title="Check for Updates..." id="gMo-qL-m08">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="checkForUpdates:" target="wTK-gz-aTs" id="MFD-wN-SXh"/>
@@ -164,12 +164,12 @@
                             <menuItem title="Previous Frame" tag="1" alternate="YES" keyEquivalent="" id="oxF-BB-lBy">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Jump to beginning" id="2Ya-3g-1hy">
+                            <menuItem title="Jump to Beginning" id="2Ya-3g-1hy">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Jump to…" keyEquivalent="j" id="2id-wn-xsC"/>
                             <menuItem isSeparatorItem="YES" id="k1k-sG-1C3"/>
-                            <menuItem title="Screenshot" keyEquivalent="S" id="AoP-K6-Kb5">
+                            <menuItem title="Take a Screenshot" keyEquivalent="S" id="AoP-K6-Kb5">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             </menuItem>
                             <menuItem title="Go To Screenshot Folder" id="lj0-Oo-7nB">
@@ -184,7 +184,7 @@
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="EZg-oY-9Ip"/>
-                            <menuItem title="Playlist Panel" keyEquivalent="p" id="0T7-Nu-SL7"/>
+                            <menuItem title="Show Playlist Panel" keyEquivalent="p" id="0T7-Nu-SL7"/>
                             <menuItem title="Playlist Loop" id="aSc-P6-fiZ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
@@ -193,7 +193,7 @@
                                 <menu key="submenu" title="Playlist" systemMenu="font" id="aXa-aM-Jaq"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="KQu-z8-ZqI"/>
-                            <menuItem title="Chapters Panel" keyEquivalent="c" id="DwM-3d-Eb9"/>
+                            <menuItem title="Show Chapters Panel" keyEquivalent="c" id="DwM-3d-Eb9"/>
                             <menuItem title="Chapter" id="Fal-I4-PZk">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Chapter" id="d9c-me-L2H"/>
@@ -205,7 +205,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Video" id="HyV-fh-RgO">
                         <items>
-                            <menuItem title="Quick Settings Panel" keyEquivalent="v" id="2t8-Ot-yoO"/>
+                            <menuItem title="Show Quick Settings Panel" keyEquivalent="v" id="2t8-Ot-yoO"/>
                             <menuItem isSeparatorItem="YES" id="HGF-Qh-LZk"/>
                             <menuItem title="Video Track" id="j8P-Gb-HR7">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -214,7 +214,7 @@
                             <menuItem isSeparatorItem="YES" id="CHq-3f-f42"/>
                             <menuItem title="Half Size" keyEquivalent="0" id="snW-S8-Cw5"/>
                             <menuItem title="Normal Size" keyEquivalent="1" id="1UK-8n-QPP"/>
-                            <menuItem title="Normal Size Retina" alternate="YES" keyEquivalent="1" id="c1x-bx-69F">
+                            <menuItem title="Normal Size (Retina)" alternate="YES" keyEquivalent="1" id="c1x-bx-69F">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
                             <menuItem title="Double Size" keyEquivalent="2" id="Hal-18-Tnf"/>
@@ -272,7 +272,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Audio" id="sW8-ri-eA5">
                         <items>
-                            <menuItem title="Quick Settings Panel" keyEquivalent="a" id="43n-Ed-5kT"/>
+                            <menuItem title="Show Quick Settings Panel" keyEquivalent="a" id="43n-Ed-5kT"/>
                             <menuItem isSeparatorItem="YES" id="Fs0-R8-rnS"/>
                             <menuItem title="Audio Track" id="GF1-xB-KcA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -322,7 +322,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Subtitles" id="EKp-Qx-4Mn">
                         <items>
-                            <menuItem title="Quick Settings Panel" keyEquivalent="s" id="8y7-Cy-lKT"/>
+                            <menuItem title="Show Quick Settings Panel" keyEquivalent="s" id="8y7-Cy-lKT"/>
                             <menuItem isSeparatorItem="YES" id="EvW-J9-wqJ"/>
                             <menuItem title="Subtitle" id="uGZ-lo-pJJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -382,7 +382,7 @@
                             <menuItem title="Subtitle Delay: " enabled="NO" id="THG-4o-U6A">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Subtitle Delay +0.5s" id="pAo-L5-qTO">
+                            <menuItem title="Subtitle Delay + 0.5s" id="pAo-L5-qTO">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Subtitle Delay - 0.5s" id="LsU-Qz-dax">
@@ -436,20 +436,20 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                         <items>
-                            <menuItem title="Documentation / Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                            <menuItem title="IINA Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                 <connections>
                                     <action selector="helpAction:" target="Voe-Tx-rLC" id="aqh-p6-pB4"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="ZO8-wH-FBe"/>
-                            <menuItem title="Set IINA as The Default App…" id="0os-i1-tJF">
+                            <menuItem title="Set IINA as the Default App…" id="0os-i1-tJF">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="setSelfAsDefaultAction:" target="Voe-Tx-rLC" id="UiI-MJ-FxH"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="z2G-X1-rx3"/>
-                            <menuItem title="Github" id="A9w-iE-gVg">
+                            <menuItem title="GitHub" id="A9w-iE-gVg">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="githubAction:" target="Voe-Tx-rLC" id="Qaj-Kz-mRQ"/>

@@ -7,6 +7,23 @@
 //
 
 import Cocoa
+import MediaPlayer
+
+@available (macOS 10.12.2, *)
+class NowPlayingInfoManager {
+  static let info = MPNowPlayingInfoCenter.default()
+
+  static func updateInfo() {
+    var nowPlayingInfo = [String: Any]()
+    let duration = PlayerCore.lastActive.info.videoDuration?.second ?? 0
+    nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = duration
+    nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = PlayerCore.lastActive.info.videoPosition?.second ?? 0
+    nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = 1
+    nowPlayingInfo[MPNowPlayingInfoPropertyDefaultPlaybackRate] = 1
+    info.nowPlayingInfo = nowPlayingInfo
+  }
+
+}
 
 
 class PlayerCore: NSObject {
@@ -65,6 +82,44 @@ class PlayerCore: NSObject {
   static func activeOrNewForMenuAction(isAlternative: Bool) -> PlayerCore {
     let useNew = Preference.bool(for: .alwaysOpenInNewWindow) != isAlternative
     return useNew ? newPlayerCore : active
+  }
+
+  // MARK: - Handle Remote Commands
+
+  @available(macOS 10.12.2, *)
+  static func handlePlayCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+    PlayerCore.lastActive.togglePause(false)
+    return .success
+  }
+
+  @available(macOS 10.12.2, *)
+  static func handlePauseCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+    PlayerCore.lastActive.togglePause(true)
+    return .success
+  }
+
+  @available(macOS 10.12.2, *)
+  static func handleTogglePlayPauseCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+    PlayerCore.lastActive.togglePause(nil)
+    return .success
+  }
+
+  @available(macOS 10.12.2, *)
+  static func handleStopCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+    PlayerCore.lastActive.stop()
+    return .success
+  }
+
+  @available(macOS 10.12.2, *)
+  static func handleNextTrackCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+    PlayerCore.lastActive.navigateInPlaylist(nextOrPrev: true)
+    return .success
+  }
+
+  @available(macOS 10.12.2, *)
+  static func handlePreviousTrackCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+    PlayerCore.lastActive.navigateInPlaylist(nextOrPrev: false)
+    return .success
   }
 
   // MARK: - Fields
@@ -988,6 +1043,9 @@ class PlayerCore: NSObject {
   }
 
   @objc func syncUITime() {
+    if #available(macOS 10.12.2, *) {
+      NowPlayingInfoManager.updateInfo()
+    }
     if info.isNetworkResource {
       syncUI(.timeAndCache)
     } else {

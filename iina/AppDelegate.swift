@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import MediaPlayer
 import MASPreferences
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
@@ -138,6 +139,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if #available(macOS 10.12.2, *) {
       NSApp.isAutomaticCustomizeTouchBarMenuItemEnabled = false
       NSWindow.allowsAutomaticWindowTabbing = false
+
+      let remoteCommand = MPRemoteCommandCenter.shared()
+      remoteCommand.playCommand.addTarget(handler: PlayerCore.handlePlayCommand(_:))
+      remoteCommand.pauseCommand.addTarget(handler: PlayerCore.handlePauseCommand(_:))
+      remoteCommand.togglePlayPauseCommand.addTarget(handler: PlayerCore.handleTogglePlayPauseCommand(_:))
+      remoteCommand.stopCommand.addTarget(handler: PlayerCore.handleStopCommand(_:))
+      remoteCommand.nextTrackCommand.addTarget(handler: PlayerCore.handleNextTrackCommand(_:))
+      remoteCommand.previousTrackCommand.addTarget(handler: PlayerCore.handlePreviousTrackCommand(_:))
     }
 
     // if have pending open request

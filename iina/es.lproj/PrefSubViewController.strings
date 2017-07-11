@@ -18,7 +18,7 @@
 "99d-UG-eDD.title" = "Espaciado de la fuente:";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letter box in full screen"; ObjectID = "9kA-0S-Nl8"; */
-"9kA-0S-Nl8.title" = "Display subtitles in letter box in full screen";
+"9kA-0S-Nl8.title" = "Mostrar los subtítulos en formato cinematográfico cuando esta en pantalla completa"; //Display subtitles in letter box in full screen
 
 /* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "A1r-kr-uDi"; */
 "A1r-kr-uDi.title" = "Escalar los subtítulos al tamaño de la ventana";
@@ -30,7 +30,7 @@
 "Bjp-HJ-i7V.title" = "sans-serif";
 
 /* Class = "NSTextFieldCell"; title = "Opensubtitles account:"; ObjectID = "CKG-r9-NoN"; */
-"CKG-r9-NoN.title" = "Cuenta de Opensubtitles:";
+"CKG-r9-NoN.title" = "Cuenta de OpenSubtitles:";
 
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "Chj-YP-eFV"; */
 "Chj-YP-eFV.title" = "Idioma preferido:";
@@ -72,7 +72,7 @@
 "SLQ-wt-k6Y.title" = "Fondo:";
 
 /* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Uj3-om-L26"; */
-"Uj3-om-L26.title" = "Esta opción se almacenará como código de idioma ISO 639-2 y funcionará tanto para mpv como para opensubtitles.";
+"Uj3-om-L26.title" = "Esta opción se almacenará como código de idioma ISO 639-2 y funcionará tanto para MPV como para OpenSubtitles.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "VBZ-bi-gTh"; */
 "VBZ-bi-gTh.title" = "Y:";

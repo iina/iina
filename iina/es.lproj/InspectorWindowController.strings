@@ -78,13 +78,13 @@
 "Go3-bS-2ev.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "I2E-6Z-Gnn"; */
-"I2E-6Z-Gnn.title" = "Driver:";
+"I2E-6Z-Gnn.title" = "Controlador:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "IME-9M-YdQ"; */
 "IME-9M-YdQ.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
-"JN9-3E-OJp.title" = "Estimated Disp FPS";
+"JN9-3E-OJp.title" = "Estimado de FPS mostrados";
 
 /* Class = "NSTextFieldCell"; title = "Multiline Label"; ObjectID = "JkC-3s-Ela"; */
 "JkC-3s-Ela.title" = "Multiline Label";
@@ -105,7 +105,7 @@
 "MKd-dP-Mkb.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "MME-KZ-jrG"; */
-"MME-KZ-jrG.title" = "Driver:";
+"MME-KZ-jrG.title" = "Controlador:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "MTG-ez-V2R"; */
 "MTG-ez-V2R.title" = "Label";
@@ -204,13 +204,13 @@
 "g8p-Ec-awO.title" = "FPS de salida estimados:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
-"gDG-Eq-1Bc.title" = "VIDEO";
+"gDG-Eq-1Bc.title" = "VÍDEO";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "iMk-qU-kVv"; */
 "iMk-qU-kVv.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "A/V Sync Diff:"; ObjectID = "iVK-Ck-Lyq"; */
-"iVK-Ck-Lyq.title" = "A/V Sync Diff:";
+"iVK-Ck-Lyq.title" = "Diferencia de sincronización A/V:";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "it3-05-Pwu"; */
 "it3-05-Pwu.title" = "Canales:";
@@ -246,7 +246,7 @@
 "rcA-a7-rVn.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
-"sbO-Cn-gpI.title" = "Total A/V Sync:";
+"sbO-Cn-gpI.title" = "Sincronización A/V total:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "sgp-Kk-awA"; */
 "sgp-Kk-awA.title" = "Label";

@@ -24,7 +24,7 @@
 "cmd.playlist-clear" = "Borrar lista de reproducción";
 "cmd.playlist-remove" = "Eliminar actual";
 "cmd.playlist-shuffle" = "Aleatorio";
-"cmd.write-watch-later-config" = "Record play history";
+"cmd.write-watch-later-config" = "Guardar el historial de reproducción";
 "cmd.stop" = "Detener";
 "cmd.quit" = "Salir";
 "cmd.quit-watch-later" = "Salir (guardar progreso)";
@@ -37,10 +37,10 @@
 "iina.flip" = "Voltear";
 "iina.mirror" = "Reflejar";
 
-"iina.toggle-pip" = "Alternar Picture-in-Picture";
+"iina.toggle-pip" = "Alternar picture in picture";
 "iina.open-file" = "Abrir archivo";
 "iina.open-url" = "Abrir URL";
-"iina.video-panel" = "Panel de video";
+"iina.video-panel" = "Panel de vídeo";
 "iina.audio-panel" = "Panel de audio";
 "iina.sub-panel" = "Panel de subtítulos";
 "iina.playlist-panel" = "Panel de listas de reproducción";
@@ -75,8 +75,8 @@
 "opt.pause" = "Pausa";
 "opt.speed" = "Velocidad";
 
-"opt.video" = "Pista de video";
-"opt.video-aspect" = "Proporción del video";
+"opt.video" = "Pista de vídeo";
+"opt.video-aspect" = "Proporción del vídeo";
 "opt.contrast" = "Contraste";
 "opt.brightness" = "Brillo";
 "opt.gamma" = "Gama";

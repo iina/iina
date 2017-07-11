@@ -77,6 +77,10 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     outlineView.expandItem(nil, expandChildren: true)
   }
 
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+
   func reloadData() {
     prepareData()
     outlineView.reloadData()

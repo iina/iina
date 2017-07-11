@@ -69,6 +69,10 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     }
   }
 
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+
   func recordedKeyDown(with event: NSEvent) {
     keyLabel.stringValue = Utility.mpvKeyCode(from: event)
   }

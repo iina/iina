@@ -298,6 +298,8 @@ extension NSData {
       output.appendFormat("%02x", md5Buffer[i])
     }
 
+    md5Buffer.deallocate(capacity: digestLength)
+
     return NSString(format: output)
   }
 }

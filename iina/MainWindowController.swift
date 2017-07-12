@@ -832,6 +832,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       updateTimer()
     } else if obj == 1 {
       // slider
+      if controlBarFloating.isDragging { return }
       isMouseInSlider = true
       if !controlBarFloating.isDragging {
         timePreviewWhenSeek.isHidden = false
@@ -1201,9 +1202,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func hideUIAndCursor() {
     // don't hide UI when dragging control bar
-    if controlBarFloating.isDragging {
-      return
-    }
+    if controlBarFloating.isDragging { return }
     hideUI()
     NSCursor.setHiddenUntilMouseMoves(true)
   }

@@ -102,7 +102,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   deinit {
-    NotificationCenter.default.removeObserver(self.playlistChangeObserver!)
+    ObjcUtils.silenced {
+      NotificationCenter.default.removeObserver(self.playlistChangeObserver!)
+    }
   }
 
   func reloadData(playlist: Bool, chapters: Bool) {

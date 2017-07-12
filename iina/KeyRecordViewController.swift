@@ -70,7 +70,9 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
   }
 
   deinit {
-    NotificationCenter.default.removeObserver(self)
+    ObjcUtils.silenced {
+      NotificationCenter.default.removeObserver(self)
+    }
   }
 
   func recordedKeyDown(with event: NSEvent) {

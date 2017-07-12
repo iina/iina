@@ -147,8 +147,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   deinit {
-    observers.forEach {
-      NotificationCenter.default.removeObserver($0)
+    ObjcUtils.silenced {
+      self.observers.forEach {
+        NotificationCenter.default.removeObserver($0)
+      }
     }
   }
 

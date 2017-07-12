@@ -290,6 +290,9 @@ extension NSData {
   func md5() -> NSString {
     let digestLength = Int(CC_MD5_DIGEST_LENGTH)
     let md5Buffer = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLength)
+    defer {
+      md5Buffer.deallocate(capacity: digestLength)
+    }
 
     CC_MD5(bytes, CC_LONG(length), md5Buffer)
 
@@ -297,8 +300,6 @@ extension NSData {
     for i in 0..<digestLength {
       output.appendFormat("%02x", md5Buffer[i])
     }
-
-    md5Buffer.deallocate(capacity: digestLength)
 
     return NSString(format: output)
   }

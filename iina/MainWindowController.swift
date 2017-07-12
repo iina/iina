@@ -37,7 +37,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Constants
 
-  unowned let ud: UserDefaults = UserDefaults.standard
+  let ud: UserDefaults = UserDefaults.standard
 
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60

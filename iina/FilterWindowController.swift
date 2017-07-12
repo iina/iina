@@ -47,7 +47,9 @@ class FilterWindowController: NSWindowController {
   }
 
   deinit {
-    NotificationCenter.default.removeObserver(self)
+    ObjcUtils.silenced {
+      NotificationCenter.default.removeObserver(self)
+    }
   }
 
   // MARK: - IBAction

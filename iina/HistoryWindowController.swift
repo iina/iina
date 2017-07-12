@@ -78,7 +78,9 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   deinit {
-    NotificationCenter.default.removeObserver(self)
+    ObjcUtils.silenced {
+      NotificationCenter.default.removeObserver(self)
+    }
   }
 
   func reloadData() {

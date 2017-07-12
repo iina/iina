@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 8/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -299,6 +299,12 @@ class Utility {
         Utility.fatal("Cannot create folder in Application Support directory")
       }
     }
+  }
+
+  static private let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
+
+  static func mediaType(forExtension ext: String) -> MPVTrack.TrackType? {
+    return allTypes.first { supportedFileExt[$0]!.contains(ext.lowercased()) }
   }
 
   static func getFilePath(Configs userConfigs: [String: Any]!, forConfig conf: String, showAlert: Bool = true) -> String? {

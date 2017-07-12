@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 8/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -13,6 +13,17 @@ class PlayerCore: NSObject {
   // MARK: - Multiple instances
 
   static let first: PlayerCore = createPlayerCore()
+
+  static private var _lastActive: PlayerCore?
+
+  static var lastActive: PlayerCore {
+    get {
+      return _lastActive ?? active
+    }
+    set {
+      _lastActive = newValue
+    }
+  }
 
   static var active: PlayerCore {
     if let wc = NSApp.mainWindow?.windowController as? MainWindowController {
@@ -58,7 +69,6 @@ class PlayerCore: NSObject {
 
   /// A dispatch queue for auto load feature.
   let backgroundQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreTask")
-  let UIUpdateQueue: DispatchQueue = DispatchQueue(label: "IINAUIUpdateTask")
 
   /**
    This ticket will be increased each time before a new task being submitted to `backgroundQueue`.
@@ -202,9 +212,7 @@ class PlayerCore: NSObject {
 
   // invalidate timer
   func invalidateTimer() {
-    UIUpdateQueue.async {
-      self.syncPlayTimeTimer?.invalidate()
-    }
+    self.syncPlayTimeTimer?.invalidate()
   }
 
   // MARK: - MPV commands
@@ -751,7 +759,7 @@ class PlayerCore: NSObject {
     let currentTicket = backgroundQueueTicket
     backgroundQueue.async {
       // add files in same folder
-      if self.ud.bool(forKey: Preference.Key.playlistAutoAdd) && currentFileIsOpenedManually {
+      if currentFileIsOpenedManually {
         self.autoLoadFilesInCurrentFolder(ticket: currentTicket)
       }
       // auto load matched subtitles
@@ -774,18 +782,13 @@ class PlayerCore: NSObject {
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     info.haveDownloadedSub = false
-    UIUpdateQueue.async {
-      self.syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
-                                                    target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
-      RunLoop.current.add(self.syncPlayTimeTimer!, forMode: .commonModes)
-      RunLoop.current.run()
-    }
     DispatchQueue.main.sync {
       self.getTrackInfo()
       self.getSelectedTracks()
       self.getPlaylist()
       self.getChapters()
-
+      syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
+                                               target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
       mainWindow.updateTitle()
       if #available(OSX 10.12.2, *) {
         mainWindow.setupTouchBarUI()
@@ -846,251 +849,7 @@ class PlayerCore: NSObject {
    Therefore accesses to `self.info` and mpv playlist must be guarded.
    */
   private func autoLoadFilesInCurrentFolder(ticket: Int) {
-    let info: (() -> PlaybackInfo?) =  {
-      return ticket == self.backgroundQueueTicket ? self.info : nil
-    }
-    guard let folder = info()?.currentURL?.deletingLastPathComponent(), folder.isFileURL else { return }
-
-    // search subs
-    let fm = FileManager.default
-    let searchOptions: FileManager.DirectoryEnumerationOptions = [.skipsHiddenFiles, .skipsPackageDescendants, .skipsSubdirectoryDescendants]
-    let subExts = Utility.supportedFileExt[.sub]!
-    var subDirs: [URL] = []
-
-    // search subs in current directory
-    guard let files = try? fm.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil, options: searchOptions) else { return }
-
-    // search subs in other directories
-    let rawUserDefinedSearchPaths = ud.string(forKey: Preference.Key.subAutoLoadSearchPath) ?? "./*"
-    let userDefinedSearchPaths = rawUserDefinedSearchPaths.components(separatedBy: ":").filter { !$0.isEmpty }
-    for path in userDefinedSearchPaths {
-      var p = path
-      // handle `~`
-      if path.hasPrefix("~") {
-        p = NSString(string: path).expandingTildeInPath
-      }
-      if path.hasSuffix("/") { p.deleteLast(1) }
-      // only check wildcard at the end
-      let hasWildcard = path.hasSuffix("/*")
-      if hasWildcard { p.deleteLast(2) }
-      // handle absolute paths
-      let pathURL = path.hasPrefix("/") || path.hasPrefix("~") ? URL(fileURLWithPath: p, isDirectory: true) : folder.appendingPathComponent(p, isDirectory: true)
-      // handle wildcards
-      if hasWildcard {
-        // append all sub dirs
-        if let contents = try? fm.contentsOfDirectory(at: pathURL, includingPropertiesForKeys: [.isDirectoryKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
-          if #available(OSX 10.11, *) {
-            subDirs.append(contentsOf: contents.filter { $0.hasDirectoryPath })
-          } else {
-            subDirs.append(contentsOf: contents.filter { (try? $0.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false })
-          }
-        }
-      } else {
-        subDirs.append(pathURL)
-      }
-    }
-
-    // group by extension
-    var groups: [MPVTrack.TrackType: [FileInfo]] = [.video: [], .audio: [], .sub: []]
-    let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
-    for file in files {
-      let fileInfo = FileInfo(file)
-      guard let mediaType = allTypes.first(where: { Utility.supportedFileExt[$0]!.contains(fileInfo.ext.lowercased()) }) else { continue }
-      groups[mediaType]!.append(fileInfo)
-    }
-
-    // natural sort
-    groups[.video]!.sort { $0.filename.localizedStandardCompare($1.filename) == .orderedAscending }
-
-    // get all possible sub files
-    var subtitles = groups[.sub]!
-    for subDir in subDirs {
-      if let contents = try? fm.contentsOfDirectory(at: subDir, includingPropertiesForKeys: nil, options: searchOptions) {
-        subtitles.append(contentsOf: contents.flatMap { subExts.contains($0.pathExtension.lowercased()) ? FileInfo($0) : nil })
-      }
-    }
-    info()?.currentSubsInfo = subtitles
-    // add files to playlist
-    // mpv's playlist is (of course) not thread safe. Here
-    var addedCurrentVideo = false
-    var needQuit = false
-    for video in groups[.video]! {
-      // add to playlist
-      if video.url.path == info()?.currentURL!.path {
-        addedCurrentVideo = true
-      } else if addedCurrentVideo {
-        guard ticket == self.backgroundQueueTicket else { return }
-        addToPlaylist(video.path)
-      } else {
-        let count = mpvController.getInt(MPVProperty.playlistCount)
-        let current = mpvController.getInt(MPVProperty.playlistPos)
-        guard ticket == self.backgroundQueueTicket else { return }
-        addToPlaylist(video.path)
-        mpvController.command(.playlistMove, args: ["\(count)", "\(current)"], checkError: false) { err in
-          if err == MPV_ERROR_COMMAND.rawValue { needQuit = true }
-        }
-      }
-      if needQuit { return }
-    }
-    for audio in groups[.audio]! {
-      guard ticket == self.backgroundQueueTicket else { return }
-      addToPlaylist(audio.path)
-    }
-
-    guard ticket == self.backgroundQueueTicket else { return }
-    NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
-
-    // get auto load option
-    let subAutoLoadOption: Preference.IINAAutoLoadAction = Preference.IINAAutoLoadAction(rawValue: ud.integer(forKey: Preference.Key.subAutoLoadIINA)) ?? .iina
-    guard subAutoLoadOption != .disabled else { return }
-
-    // group video files
-    let series = FileGroup.group(files: groups[.video]!)
-    let videoPrefixes = series.flatten()
-
-    // group sub files
-    let subPrefiexes = FileGroup.group(files: subtitles).flatten()
-
-    // match video and sub groups (series)
-    var prefixDistance: [String: [String: UInt]] = [:]
-    var closestVideoForSub: [String: String] = [:]
-    for (sp, _) in subPrefiexes {
-      prefixDistance[sp] = [:]
-      var minDist = UInt.max
-      var minVideo = ""
-      for (vp, vl) in videoPrefixes {
-        guard vl.count > 2 else { continue }
-        let dist = ObjcUtils.levDistance(vp, and: sp)
-        prefixDistance[sp]![vp] = dist
-        if dist < minDist {
-          minDist = dist
-          minVideo = vp
-        }
-      }
-      closestVideoForSub[sp] = minVideo
-    }
-    var matchedPrefixes: [String: String] = [:]  // video: sub
-    for (vp, vl) in videoPrefixes {
-      guard vl.count > 2 else { continue }
-      var minDist = UInt.max
-      var minSub = ""
-      for (sp, _) in subPrefiexes {
-        let dist = prefixDistance[sp]![vp]!
-        if dist < minDist {
-          minDist = dist
-          minSub = sp
-        }
-      }
-      if closestVideoForSub[minSub] == vp {
-        matchedPrefixes[vp] = minSub
-      }
-    }
-
-    var unmatchedVideos: [FileInfo] = []
-
-    // match sub for video files
-    for video in groups[.video]! {
-      var matchedSubs = Set<FileInfo>()
-      // match video and sub if both are the closest one to each other
-      if subAutoLoadOption.shouldLoadSubsMatchedByIINA() {
-        // is in series
-        if !video.prefix.isEmpty, let matchedSubPrefix = matchedPrefixes[video.prefix] {
-          // find sub with same name
-          subtitles.forEach { sub in
-            guard let vn = video.nameInSeries, let sn = sub.nameInSeries else { return }
-            var nameMatched: Bool
-            if let vnInt = Int(vn), let snInt = Int(sn) {
-              nameMatched = vnInt == snInt
-            } else {
-              nameMatched = vn == sn
-            }
-            if nameMatched {
-              video.relatedSubs.append(sub)
-              if sub.prefix == matchedSubPrefix {
-                info()?.matchedSubs.safeAppend(sub.url, for: video.path)
-                sub.isMatched = true
-                matchedSubs.insert(sub)
-              }
-            }
-          }
-        }
-      }
-      // add subs that contains video name
-      if subAutoLoadOption.shouldLoadSubsContainingVideoName() {
-        subtitles
-          .filter { $0.filename.contains(video.filename) }
-          .forEach { sub in
-            info()?.matchedSubs.safeAppend(sub.url, for: video.path)
-            sub.isMatched = true
-            matchedSubs.insert(sub)
-          }
-      }
-      // if no match
-      if matchedSubs.isEmpty {
-        unmatchedVideos.append(video)
-      }
-      // move the sub to front if it contains priority strings
-      if let priorString = ud.string(forKey: Preference.Key.subAutoLoadPriorityString), !matchedSubs.isEmpty {
-        let stringList = priorString
-          .components(separatedBy: ",")
-          .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-          .filter { !$0.isEmpty }
-        // find the min occurance count first
-        var minOccurances = Int.max
-        matchedSubs.forEach { sub in
-          sub.priorityStringOccurances = stringList.reduce(0, { $0 + sub.filename.countOccurances(of: $1, in: nil) })
-          if sub.priorityStringOccurances < minOccurances {
-            minOccurances = sub.priorityStringOccurances
-          }
-        }
-        matchedSubs
-          .filter { $0.priorityStringOccurances > minOccurances }  // eliminate false positives in filenames
-          .flatMap { info()?.matchedSubs[video.path]!.index(of: $0.url) }  // get index
-          .forEach {  // move the sub with index to first
-            if let s = info()?.matchedSubs[video.path]?.remove(at: $0) {
-              info()?.matchedSubs[video.path]!.insert(s, at: 0)
-            }
-          }
-      }
-    }
-
-    guard ticket == self.backgroundQueueTicket else { return }
-    info()?.currentVideosInfo = groups[.video]!
-    NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
-
-    // match unmatched subs and videos
-    let unmatchedSubs = subtitles.filter { !$0.isMatched }
-    if unmatchedSubs.count > 0 && unmatchedVideos.count > 0 {
-      // calculate edit distance
-      for sub in unmatchedSubs {
-        var minDistToVideo: UInt = .max
-        for video in unmatchedVideos {
-          guard ticket == self.backgroundQueueTicket else { return }
-          let threshold = UInt(Double(video.filename.characters.count + sub.filename.characters.count) * 0.8)
-          let rawDist = ObjcUtils.levDistance(video.prefix, and: sub.prefix) + ObjcUtils.levDistance(video.suffix, and: sub.suffix)
-          let dist: UInt = rawDist < threshold ? rawDist : UInt.max
-          sub.dist[video] = dist
-          video.dist[sub] = dist
-          if dist < minDistToVideo { minDistToVideo = dist }
-        }
-        guard minDistToVideo != .max else { continue }
-        sub.minDist = groups[.video]!.filter { sub.dist[$0] == minDistToVideo }
-      }
-
-      // match them
-      for video in unmatchedVideos {
-        let minDistToSub = video.dist.reduce(UInt.max, { min($0.0, $0.1.value) })
-        guard minDistToSub != .max else { continue }
-        unmatchedSubs
-          .filter { video.dist[$0]! == minDistToSub && $0.minDist.contains(video) }
-          .forEach {
-            info()?.matchedSubs.safeAppend($0.url, for: video.path)
-          }
-      }
-
-      guard ticket == self.backgroundQueueTicket else { return }
-      NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
-    }
+    AutoFileMatcher(player: self, ticket: ticket).startMatching()
   }
 
   // MARK: - Sync with UI in MainWindow

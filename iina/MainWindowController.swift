@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 8/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -112,6 +112,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   var isInPIP: Bool = false
   var isInInteractiveMode: Bool = false
+  var isEnteringFullScreen: Bool = false
 
   // might use another obj to handle slider?
   var isMouseInWindow: Bool = false
@@ -378,7 +379,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     w.setIsVisible(true)
 
-    //videoView.translatesAutoresizingMaskIntoConstraints = false
+    videoView.translatesAutoresizingMaskIntoConstraints = true
     //quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": videoView])
 
     videoView.videoLayer.display()
@@ -1036,6 +1037,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {
+    isEnteringFullScreen = true
+
     playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, true)
 
     // Set the appearance to match the theme so the titlebar matches the theme
@@ -1060,6 +1063,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isInFullScreen = true
   }
 
+  func windowDidEnterFullScreen(_ notification: Notification) {
+    isEnteringFullScreen = false
+    // we must block the mpv rendering queue to do the following atomically
+    videoView.videoLayer.mpvGLQueue.async {
+      DispatchQueue.main.sync {
+        self.videoView.frame = NSRect(x: 0, y: 0, width: self.window!.frame.width, height: self.window!.frame.height)
+        self.videoView.videoLayer.display()
+      }
+    }
+  }
+
   func windowWillExitFullScreen(_ notification: Notification) {
     playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, false)
 
@@ -1079,7 +1093,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // set back frame of videoview, but only if not in PIP
     if !isInPIP {
-      videoView.frame = window!.contentView!.frame
+      videoView.videoLayer.mpvGLQueue.sync {
+        self.videoView.videoLayer.setNeedsDisplay()
+      }
     }
   }
 
@@ -1100,28 +1116,25 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if playerCore.info.isPaused || playerCore.mpvController.getDouble(MPVProperty.estimatedVfFps) < 1 {
       videoView.videoLayer.draw()
     }
-
     // update videoview size if in full screen, since aspect ratio may changed
     if (isInFullScreen && !isInPIP) {
-
-      // Let mpv decide where to draw
-      /*
-      let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
-      let tryHeight = wSize.width / aspectRatio
-      if tryHeight <= wSize.height {
-        // should have black bar above and below
-        let targetHeight = wSize.width / aspectRatio
-        let yOffset = (wSize.height - targetHeight) / 2
-        videoView.frame = NSMakeRect(0, yOffset, wSize.width, targetHeight)
-      } else if tryHeight > wSize.height {
-        // should have black bar left and right
-        let targetWidth = wSize.height * aspectRatio
-        let xOffset = (wSize.width - targetWidth) / 2
-        videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
+      if isEnteringFullScreen {
+        let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
+        let tryHeight = wSize.width / aspectRatio
+        if tryHeight <= wSize.height {
+          // should have black bar above and below
+          let targetHeight = wSize.width / aspectRatio
+          let yOffset = (wSize.height - targetHeight) / 2
+          videoView.frame = NSMakeRect(0, yOffset, wSize.width, targetHeight)
+        } else if tryHeight > wSize.height {
+          // should have black bar left and right
+          let targetWidth = wSize.height * aspectRatio
+          let xOffset = (wSize.width - targetWidth) / 2
+          videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
+        }
+      } else {
+        videoView.frame = NSRect(x: 0, y: 0, width: w.frame.width, height: w.frame.height)
       }
-      */
-
-      videoView.frame = NSRect(x: 0, y: 0, width: w.frame.width, height: w.frame.height)
 
     } else if (!isInPIP) {
 
@@ -1172,6 +1185,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowDidBecomeMain(_ notification: Notification) {
+    PlayerCore.lastActive = playerCore
     NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
   }
 

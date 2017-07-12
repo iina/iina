@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 17/8/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -265,15 +265,17 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   // MARK: - IBActions
 
   @IBAction func addToPlaylistBtnAction(_ sender: AnyObject) {
-    Utility.quickOpenPanel(title: "Add to playlist", isDir: false) { (url) in
-      if url.isFileURL {
-        self.playerCore.addToPlaylist(url.path)
-        self.reloadData(playlist: true, chapters: false)
-        self.mainWindow.displayOSD(.addToPlaylist(1))
+    Utility.quickMultipleOpenPanel(title: "Add to playlist") { urls in
+      for url in urls {
+        if url.isFileURL {
+          self.playerCore.addToPlaylist(url.path)
+        }
       }
+      let fileUrlCount = urls.filter { return $0.isFileURL }.count
+      self.playerCore.sendOSD(.addToPlaylist(fileUrlCount))
+      self.reloadData(playlist: true, chapters: false)
     }
   }
-
 
   @IBAction func clearPlaylistBtnAction(_ sender: AnyObject) {
     playerCore.clearPlaylist()

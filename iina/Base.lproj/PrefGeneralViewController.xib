@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="17A264c" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -49,7 +49,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="rT9-2o-ngA"/>
                     </constraints>
-                    <buttonCell key="cell" type="check" title="Quit when no window is opened" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="YLo-6E-tT7">
+                    <buttonCell key="cell" type="check" title="Quit after all windows are closed" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="YLo-6E-tT7">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -122,7 +122,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="ka4-eS-SOo"/>
                     </constraints>
-                    <buttonCell key="cell" type="check" title="Keep window open when playback finished" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2iM-j7-AzQ">
+                    <buttonCell key="cell" type="check" title="Keep window open after playback finishes" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2iM-j7-AzQ">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

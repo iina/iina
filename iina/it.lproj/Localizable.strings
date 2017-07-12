@@ -129,7 +129,7 @@
 "alert.add_filter.title" = "Nuovo filtro";
 "alert.add_filter.message" = "Si prega di inserire una stringa di filtro nel formato dei comandi vf o af di MPV.";
 
-"alert.keybinding_config_error" = "Errore nell'analisi del file di configurazione \"%@\"! Ripristino delle scorciatoie di tastiera di default di IINA. Controlla il tuo file di configurazione.";
+"alert.keybinding_config.error" = "Errore nell'analisi del file di configurazione \"%@\"! Ripristino delle scorciatoie di tastiera di default di IINA. Controlla il tuo file di configurazione.";
 
 "alert.extra_option.cannot_read" = "Impossibile leggere le opzioni MPV extra definiti dall'utente.";
 "alert.extra_option.empty" = "La chiave o il valore non può essere vuoto!";

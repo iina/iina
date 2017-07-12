@@ -24,7 +24,7 @@
 "main.buffering_indicator" = "Буферизація... %d%%";
 
 // QuickSettingViewController.swift
-"quicksetting.item_default" = "Стандартний";
+"quicksetting.item_default" = "Стандартне";
 "quicksetting.item_none" = "Нема";
 
 // OSDMessage.swift
@@ -35,7 +35,7 @@
 "osd.aspect" = "Співвідношення: %@";
 "osd.crop" = "Обрізати: %@";
 "osd.rotate" = "Обернути: %i°";
-"osd.deinterlace" = "Деінтерлейсингувати: %@";
+"osd.deinterlace" = "Деінтерлейсинг: %@";
 "osd.audio_delay.nodelay" = "Затримка Аудіо: Без Затримки";
 "osd.audio_delay.later" = "Затримка Аудіо: %.2fс Раніше";
 "osd.audio_delay.earlier" = "Затримка Аудіо: %.2fс Пізніше";
@@ -93,7 +93,7 @@
 "preference.logged_in_as" = "Зайшов як %@";
 
 "menu.volume"= "Гучність: %d";
-"menu.audio_delay" = "Аудіо Затримка: %.2fс";
+"menu.audio_delay" = "Затримка Аудіо: %.2fс";
 "menu.sub_delay" = "Затримка Субтитрів: %.2fс";
 "menu.fullscreen" = "Повноекранний режим";
 "menu.exit_fullscreen" = "Вийти з повноекранного";

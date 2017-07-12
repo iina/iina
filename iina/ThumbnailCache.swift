@@ -24,7 +24,7 @@ class ThumbnailCache {
   /// Write thumbnail cache to file. 
   /// This method is expected to be called when the file doesn't exist.
   static func write(_ thumbnails: [FFThumbnail], forName name: String) {
-    Utility.log("Writing thumbnail cache...")
+    // Utility.log("Writing thumbnail cache...")
 
     let pathURL = urlFor(name)
     guard FileManager.default.createFile(atPath: pathURL.path, contents: nil, attributes: nil) else {
@@ -59,13 +59,13 @@ class ThumbnailCache {
       file.write(jpegData)
     }
 
-    Utility.log("Finished writing thumbnail cache.")
+    // Utility.log("Finished writing thumbnail cache.")
   }
 
   /// Read thumbnail cache to file.
   /// This method is expected to be called when the file exists.
   static func read(forName name: String) -> [FFThumbnail]? {
-    Utility.log("Reading thumbnail cache...")
+    // Utility.log("Reading thumbnail cache...")
 
     let pathURL = urlFor(name)
     guard let file = try? FileHandle(forReadingFrom: pathURL) else {
@@ -94,7 +94,14 @@ class ThumbnailCache {
       // jpeg
       let jpegData = file.readData(ofLength: Int(blockLength) - sizeofDouble)
       guard let image = NSImage(data: jpegData) else {
-        Utility.log("Cannot read image.")
+        Utility.log("Cannot read image. Cache file will be deleted.")
+        file.closeFile()
+        // try deleting corrupted cache
+        do {
+          try FileManager.default.removeItem(at: pathURL)
+        } catch {
+          Utility.log("Cannot delete corrupted cache.")
+        }
         return nil
       }
       // construct
@@ -104,7 +111,8 @@ class ThumbnailCache {
       result.append(tb)
     }
 
-    Utility.log("Finished reading thumbnail cache...")
+    file.closeFile()
+    // Utility.log("Finished reading thumbnail cache...")
     return result
   }
 

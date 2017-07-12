@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13122.17" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13122.19" systemVersion="17A291m" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.19"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -607,11 +607,11 @@
                                         </textFieldCell>
                                     </textField>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="ATW-R6-yfQ">
-                                        <rect key="frame" x="118" y="217" width="345" height="18"/>
+                                        <rect key="frame" x="118" y="217" width="356" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="IMu-Go-Gmi"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="check" title="Display subtitles in letter box in full screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9kA-0S-Nl8">
+                                        <buttonCell key="cell" type="check" title="Display subtitles in letterboxes while in full screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9kA-0S-Nl8">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>

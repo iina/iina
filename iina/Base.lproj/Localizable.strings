@@ -69,16 +69,6 @@
 "osd.cannot_login" = "Cannot login";
 "osd.canceled" = "Canceled";
 
-"update.title_update_found" = "Update Found";
-"update.title_no_update" = "No Update";
-"update.title_error" = "Error";
-"update.update_found" = "New version detected! IINA is still in alpha, so you are recommended to stay with the latest version. Please download from website or github:";
-"update.no_update" = "You are running the latest version.";
-"update.check_failed" = "Failed to check updates. You are probably running a too old version. Please check the website or github.";
-"update.new_version" = "New version:";
-"update.dl_from_website" = "Go to Website";
-"update.dl_from_github" = "Go to Github";
-
 "preference.title" = "Preferences";
 "preference.general" = "General";
 "preference.ui" = "UI";
@@ -163,7 +153,7 @@
 "alert.jump_to.title" = "Jump to";
 "alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
 
-"alert.opensub.login.title" = "Opensubtitles Login";
+"alert.opensub.login.title" = "OpenSubtitles Login";
 "alert.opensub.login.message" = "Please enter your username and password";
 
 "alert.open_url.title" = "Open URL";
@@ -212,8 +202,8 @@
 
 "touchbar.ahead_15" = "15sec Ahead";
 "touchbar.ahead_30" = "30sec Ahead";
-"touchbar.back_15" = "-15sec Ahead";
-"touchbar.back_30" = "-30sec Ahead";
+"touchbar.back_15" = "15sec Back";
+"touchbar.back_30" = "30sec Back";
 "touchbar.next_video" = "Next Video";
 "touchbar.prev_video" = "Previous Video";
 "touchbar.increase_volume" = "Volume +";

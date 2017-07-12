@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 8/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -13,6 +13,17 @@ class PlayerCore: NSObject {
   // MARK: - Multiple instances
 
   static let first: PlayerCore = createPlayerCore()
+
+  static private var _lastActive: PlayerCore?
+
+  static var lastActive: PlayerCore {
+    get {
+      return _lastActive ?? active
+    }
+    set {
+      _lastActive = newValue
+    }
+  }
 
   static var active: PlayerCore {
     if let wc = NSApp.mainWindow?.windowController as? MainWindowController {
@@ -58,6 +69,8 @@ class PlayerCore: NSObject {
 
   /// A dispatch queue for auto load feature.
   let backgroundQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreTask")
+
+  let thumbnailQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreThumbnailTask")
 
   /**
    This ticket will be increased each time before a new task being submitted to `backgroundQueue`.
@@ -722,26 +735,6 @@ class PlayerCore: NSObject {
     info.disableOSDForFileLoading = true
     guard let path = mpvController.getString(MPVProperty.path) else { return }
     info.currentURL = URL(fileURLWithPath: path)
-    // Generate thumbnails
-    info.thumbnails.removeAll(keepingCapacity: true)
-    info.thumbnailsProgress = 0
-    info.thumbnailsReady = false
-    if UserDefaults.standard.bool(forKey: Preference.Key.enableThumbnailPreview) {
-      if let cacheName = info.mpvMd5, ThumbnailCache.fileExists(forName: cacheName) {
-        backgroundQueue.async {
-          if let thumbnails = ThumbnailCache.read(forName: cacheName) {
-            self.info.thumbnails = thumbnails
-            self.info.thumbnailsReady = true
-            self.info.thumbnailsProgress = 1
-            DispatchQueue.main.async {
-              self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
-            }
-          }
-        }
-      } else {
-        ffmpegController.generateThumbnail(forFile: path)
-      }
-    }
     // Auto load
     backgroundQueueTicket += 1
     let currentFileIsOpenedManually = info.currentFileIsOpenedManually
@@ -771,6 +764,10 @@ class PlayerCore: NSObject {
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     info.haveDownloadedSub = false
+    // Generate thumbnails if window has loaded video
+    if mainWindow.isVideoLoaded {
+      generateThumbnails()
+    }
     DispatchQueue.main.sync {
       self.getTrackInfo()
       self.getSelectedTracks()
@@ -950,6 +947,29 @@ class PlayerCore: NSObject {
   func closeMainWindow() {
     DispatchQueue.main.async {
       self.mainWindow.close()
+    }
+  }
+
+  func generateThumbnails() {
+    guard let path = info.currentURL?.path else { return }
+    info.thumbnails.removeAll(keepingCapacity: true)
+    info.thumbnailsProgress = 0
+    info.thumbnailsReady = false
+    if UserDefaults.standard.bool(forKey: Preference.Key.enableThumbnailPreview) {
+      if let cacheName = info.mpvMd5, ThumbnailCache.fileExists(forName: cacheName) {
+        thumbnailQueue.async {
+          if let thumbnails = ThumbnailCache.read(forName: cacheName) {
+            self.info.thumbnails = thumbnails
+            self.info.thumbnailsReady = true
+            self.info.thumbnailsProgress = 1
+            DispatchQueue.main.async {
+              self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
+            }
+          }
+        }
+      } else {
+        ffmpegController.generateThumbnail(forFile: path)
+      }
     }
   }
 

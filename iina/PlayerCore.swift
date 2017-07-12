@@ -9,7 +9,7 @@
 import Cocoa
 import MediaPlayer
 
-@available (macOS 10.12.2, *)
+@available (macOS 10.13, *)
 class NowPlayingInfoManager {
   static let info = MPNowPlayingInfoCenter.default()
 
@@ -90,37 +90,37 @@ class PlayerCore: NSObject {
 
   // MARK: - Handle Remote Commands
 
-  @available(macOS 10.12.2, *)
+  @available(macOS 10.13, *)
   static func handlePlayCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
     PlayerCore.lastActive.togglePause(false)
     return .success
   }
 
-  @available(macOS 10.12.2, *)
+  @available(macOS 10.13, *)
   static func handlePauseCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
     PlayerCore.lastActive.togglePause(true)
     return .success
   }
 
-  @available(macOS 10.12.2, *)
+  @available(macOS 10.13, *)
   static func handleTogglePlayPauseCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
     PlayerCore.lastActive.togglePause(nil)
     return .success
   }
 
-  @available(macOS 10.12.2, *)
+  @available(macOS 10.13, *)
   static func handleStopCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
     PlayerCore.lastActive.stop()
     return .success
   }
 
-  @available(macOS 10.12.2, *)
+  @available(macOS 10.13, *)
   static func handleNextTrackCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
     PlayerCore.lastActive.navigateInPlaylist(nextOrPrev: true)
     return .success
   }
 
-  @available(macOS 10.12.2, *)
+  @available(macOS 10.13, *)
   static func handlePreviousTrackCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
     PlayerCore.lastActive.navigateInPlaylist(nextOrPrev: false)
     return .success
@@ -1047,8 +1047,10 @@ class PlayerCore: NSObject {
   }
 
   @objc func syncUITime() {
-    if #available(macOS 10.12.2, *) {
-      NowPlayingInfoManager.updateInfo()
+    if #available(macOS 10.13, *) {
+      if RemoteCommandController.useSystemMediaControl {
+        NowPlayingInfoManager.updateInfo()
+      }
     }
     if info.isNetworkResource {
       syncUI(.timeAndCache)

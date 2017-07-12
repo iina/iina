@@ -11,13 +11,13 @@ import PromiseKit
 
 class PrefSubViewController: NSViewController {
 
-  override var nibName: String? {
-    return "PrefSubViewController"
+  override var nibName: NSNib.Name {
+    return NSNib.Name("PrefSubViewController")
   }
 
-  override var identifier: String? {
+  override var identifier: NSUserInterfaceItemIdentifier? {
     get {
-      return "sub"
+      return NSUserInterfaceItemIdentifier("sub")
     }
     set {
       super.identifier = newValue
@@ -25,7 +25,7 @@ class PrefSubViewController: NSViewController {
   }
 
   var toolbarItemImage: NSImage {
-    return NSImage(named: NSImageNameFontPanel)!
+    return NSImage(named: .fontPanel)!
   }
 
   var toolbarItemLabel: String {
@@ -79,7 +79,7 @@ class PrefSubViewController: NSViewController {
         loginIndicator.startAnimation(nil)
         firstly {
           OpenSubSupport().login(testUser: username, password: password)
-        }.then { () -> Void in
+        }.then { (_) -> Void in
           let status = OpenSubSupport.savePassword(username: username, passwd: password)
           if status == errSecSuccess {
             Preference.set(username, for: .openSubUsername)
@@ -109,20 +109,20 @@ class PrefSubViewController: NSViewController {
   }
   
   @IBAction func changeDefaultEncoding(_ sender: NSPopUpButton) {
-    Preference.set(sender.selectedItem?.representedObject!, for: .defaultEncoding)
+    Preference.set(sender.selectedItem!.representedObject!, for: .defaultEncoding)
     PlayerCore.active.setSubEncoding((sender.selectedItem?.representedObject as? String) ?? "auto")
     PlayerCore.active.reloadAllSubs()
   }
   
   @IBAction func OpenSubHelpBtnAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#opensubtitles"))!)
+    NSWorkspace.shared.open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#opensubtitles"))!)
   }
 }
 
 
 extension PrefSubViewController: NSTokenFieldDelegate {
 
-  func tokenField(_ tokenField: NSTokenField, styleForRepresentedObject representedObject: Any) -> NSTokenStyle {
+  func tokenField(_ tokenField: NSTokenField, styleForRepresentedObject representedObject: Any) -> NSTokenField.TokenStyle {
     return .rounded
   }
 
@@ -138,7 +138,7 @@ extension PrefSubViewController: NSTokenFieldDelegate {
     return matches.map { $0.description }
   }
 
-  func tokenField(_ tokenField: NSTokenField, representedObjectForEditing editingString: String) -> Any {
+  func tokenField(_ tokenField: NSTokenField, representedObjectForEditing editingString: String) -> Any? {
     if let code = Regex.iso639_2Desc.captures(in: editingString).at(1) {
       return SubLangToken(code)
     } else {

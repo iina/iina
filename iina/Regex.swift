@@ -39,9 +39,9 @@ class Regex {
     var result: [String] = []
     if let match = regex?.firstMatch(in: str, options: [], range: NSMakeRange(0, str.characters.count)) {
       for i in 0..<match.numberOfRanges {
-        let range = match.rangeAt(i)
+        let range = match.range(at: i)
         if range.length > 0 {
-          result.append((str as NSString).substring(with: match.rangeAt(i)))
+          result.append((str as NSString).substring(with: match.range(at: i)))
         } else {
           result.append("")
         }

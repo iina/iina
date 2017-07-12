@@ -88,7 +88,7 @@ class OnlineSubtitle: NSObject {
       }
       // - request
       subSupport.login()
-      .then {
+      .then { _ in
         subSupport.hash(url)
       }.then { info in
         subSupport.request(info)

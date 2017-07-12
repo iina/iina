@@ -11,24 +11,24 @@ import MASPreferences
 
 class PrefAdvancedViewController: NSViewController, MASPreferencesViewController {
 
-  override var nibName: String? {
-    return "PrefAdvancedViewController"
+  override var nibName: NSNib.Name {
+    return NSNib.Name("PrefAdvancedViewController")
   }
 
-  override var identifier: String? {
+  override var identifier: NSUserInterfaceItemIdentifier? {
     get {
-      return "advanced"
+      return NSUserInterfaceItemIdentifier("advanced")
     }
     set {
       super.identifier = newValue
     }
   }
 
-  var toolbarItemImage: NSImage {
-    return NSImage(named: NSImageNameAdvanced)!
+  var toolbarItemImage: NSImage? {
+    return NSImage(named: .advanced)!
   }
 
-  var toolbarItemLabel: String {
+  var toolbarItemLabel: String? {
     view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.advanced", comment: "Advanced")
   }
@@ -68,7 +68,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   // MARK: - IBAction
 
   @IBAction func updateControlStatus(_ sender: AnyObject) {
-    let enable = enableSettingsBtn.state == NSOnState
+    let enable = enableSettingsBtn.state == .on
     settingsView.subviews.forEach { view in
       if let control = view as? NSControl {
         control.isEnabled = enable
@@ -77,7 +77,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   }
 
   @IBAction func revealLogDir(_ sender: AnyObject) {
-    NSWorkspace.shared().open(Utility.logDirURL)
+    NSWorkspace.shared.open(Utility.logDirURL)
   }
 
   @IBAction func addOptionBtnAction(_ sender: AnyObject) {
@@ -103,7 +103,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   }
 
   @IBAction func helpBtnAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: AppData.websiteLink)!.appendingPathComponent("documentation"))
+    NSWorkspace.shared.open(URL(string: AppData.websiteLink)!.appendingPathComponent("documentation"))
   }
 }
 

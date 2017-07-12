@@ -8,8 +8,8 @@
 
 @interface ObjcUtils : NSObject
 
-+ (BOOL)catchException:(void(^)())tryBlock error:(__autoreleasing NSError **)error;
-+ (BOOL)silenced:(void(^)())tryBlock;
++ (BOOL)catchException:(void(^)(void))tryBlock error:(__autoreleasing NSError **)error;
++ (BOOL)silenced:(void(^)(void))tryBlock;
 
 + (NSUInteger)levDistance:(NSString *)str0 and:(NSString *)str1;
 

@@ -27,7 +27,7 @@ class FileInfo: Hashable {
   var prefix: String {  // prefix detected by FileGroup
     didSet {
       if prefix.characters.count < self.characters.count {
-        suffix = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
+        suffix = String(filename[filename.index(filename.startIndex, offsetBy: prefix.characters.count)...])
         getNameInSeries()
       } else {
         prefix = ""
@@ -134,7 +134,7 @@ class FileGroup {
     if stopGrouping(currChars) || maxSubGroupCount < 3 {
       contents.forEach { $0.prefix = self.prefix }
     } else {
-      groups = tempGroup.map { FileGroup(prefix: $0, contents: $1) }
+      groups = tempGroup.map { FileGroup(prefix: $0.0, contents: $0.1) }
       // continue
       for g in groups {
         g.tryGroupFiles()

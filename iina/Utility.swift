@@ -30,7 +30,7 @@ class Utility {
   }
 
   @available(*, deprecated, message: "showAlert(message:alertStyle:) is deprecated, use showAlert(_ key:comment:arguments:alertStyle:) instead")
-  static func showAlert(message: String, alertStyle: NSAlertStyle = .critical) {
+  static func showAlert(message: String, alertStyle: NSAlert.Style = .critical) {
     let alert = NSAlert()
     switch alertStyle {
     case .critical:
@@ -45,7 +45,7 @@ class Utility {
     alert.runModal()
   }
   
-  static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlertStyle = .critical) {
+  static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlert.Style = .critical) {
     let alert = NSAlert()
     switch style {
     case .critical:
@@ -113,7 +113,7 @@ class Utility {
     panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
-    return panel.runModal() == NSAlertFirstButtonReturn
+    return panel.runModal() == .alertFirstButtonReturn
   }
 
   /**
@@ -132,7 +132,7 @@ class Utility {
       panel.directoryURL = dir
     }
     panel.begin() { result in
-      if result == NSFileHandlingPanelOKButton, let url = panel.url {
+      if result == .OK, let url = panel.url {
         ok(url)
       }
     }
@@ -154,7 +154,7 @@ class Utility {
       panel.directoryURL = dir
     }
     panel.begin() { result in
-      if result == NSFileHandlingPanelOKButton {
+      if result == .OK {
         ok(panel.urls)
       }
     }
@@ -171,8 +171,8 @@ class Utility {
     panel.title = title
     panel.canCreateDirectories = true
     panel.allowedFileTypes = types
-    let handler: (NSModalResponse) -> Void = { result in
-      if result == NSFileHandlingPanelOKButton, let url = panel.url {
+    let handler: (NSApplication.ModalResponse) -> Void = { result in
+      if result == .OK, let url = panel.url {
         ok(url)
       }
     }
@@ -223,7 +223,7 @@ class Utility {
     switch mode {
     case .modal:
       let response = panel.runModal()
-      if response == NSAlertFirstButtonReturn {
+      if response == .alertFirstButtonReturn {
         ok(input.stringValue)
         return true
       } else {
@@ -234,7 +234,7 @@ class Utility {
         Utility.fatal("No sheet window")
       }
       panel.beginSheetModal(for: sheetWindow) { response in
-        if response == NSAlertFirstButtonReturn {
+        if response == .alertFirstButtonReturn {
           ok(input.stringValue)
         }
       }
@@ -256,7 +256,7 @@ class Utility {
   static func quickUsernamePasswordPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, ok: (String, String) -> Void) -> Bool {
     let quickLabel: (String, Int) -> NSTextField = { title, yPos in
       let label = NSTextField(frame: NSRect(x: 0, y: yPos, width: 240, height: 14))
-      label.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize())
+      label.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
       label.stringValue = title
       label.drawsBackground = false
       label.isBezeled = false
@@ -284,7 +284,7 @@ class Utility {
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
     let response = panel.runModal()
-    if response == NSAlertFirstButtonReturn {
+    if response == .alertFirstButtonReturn {
       ok(input.stringValue, pwField.stringValue)
       return true
     } else {
@@ -512,14 +512,14 @@ class Utility {
       self.align = align
     }
 
-    var value : [String : AnyObject]? {
+    var value : [NSAttributedStringKey : Any]? {
       get {
         let f: NSFont?
         let s: CGFloat
         let a = NSMutableParagraphStyle()
         switch self.size {
         case .system:
-          s = NSFont.systemFontSize()
+          s = NSFont.systemFontSize
         case .small:
           s = NSFont.systemFontSize(for: .small)
         case .mini:
@@ -544,10 +544,10 @@ class Utility {
           a.alignment = .right
         }
         if let f = f {
-          NSFont.systemFont(ofSize: NSFont.systemFontSize())
+          NSFont.systemFont(ofSize: NSFont.systemFontSize)
           return [
-            NSFontAttributeName: f,
-            NSParagraphStyleAttributeName: a
+            .font: f,
+            .paragraphStyle: a
           ]
         } else {
           return nil

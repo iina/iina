@@ -22,13 +22,13 @@ class MainMenuActionHandler: NSResponder {
     fatalError("init(coder:) has not been implemented")
   }
 
-  func menuShowInspector(_ sender: AnyObject) {
+  @objc func menuShowInspector(_ sender: AnyObject) {
     let inspector = (NSApp.delegate as! AppDelegate).inspector
     inspector.showWindow(self)
     inspector.updateInfo()
   }
   
-  func menuSavePlaylist(_ sender: NSMenuItem) {
+  @objc func menuSavePlaylist(_ sender: NSMenuItem) {
     Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"]) { (url) in
       if url.isFileURL {
         var playlist = ""
@@ -46,7 +46,7 @@ class MainMenuActionHandler: NSResponder {
     }
   }
 
-  func menuDeleteCurrentFile(_ sender: NSMenuItem) {
+  @objc func menuDeleteCurrentFile(_ sender: NSMenuItem) {
     guard let url = player.info.currentURL else { return }
     do {
       let index = player.mpv.getInt(MPVProperty.playlistPos)
@@ -62,17 +62,17 @@ class MainMenuActionHandler: NSResponder {
 // MARK: - Control
 
 extension MainMenuActionHandler {
-  func menuTogglePause(_ sender: NSMenuItem) {
+  @objc func menuTogglePause(_ sender: NSMenuItem) {
     player.togglePause(!player.info.isPaused)
   }
 
-  func menuStop(_ sender: NSMenuItem) {
+  @objc func menuStop(_ sender: NSMenuItem) {
     // FIXME: handle stop
     player.stop()
     player.sendOSD(.stop)
   }
 
-  func menuStep(_ sender: NSMenuItem) {
+  @objc func menuStep(_ sender: NSMenuItem) {
     if sender.tag == 0 { // -> 5s
       player.seek(relativeSecond: 5, option: .relative)
     } else if sender.tag == 1 { // <- 5s
@@ -80,7 +80,7 @@ extension MainMenuActionHandler {
     }
   }
 
-  func menuStepFrame(_ sender: NSMenuItem) {
+  @objc func menuStepFrame(_ sender: NSMenuItem) {
     if !player.info.isPaused {
       player.togglePause(true)
     }
@@ -91,11 +91,11 @@ extension MainMenuActionHandler {
     }
   }
 
-  func menuJumpToBegin(_ sender: NSMenuItem) {
+  @objc func menuJumpToBegin(_ sender: NSMenuItem) {
     player.seek(absoluteSecond: 0)
   }
 
-  func menuJumpTo(_ sender: NSMenuItem) {
+  @objc func menuJumpTo(_ sender: NSMenuItem) {
     let _ = Utility.quickPromptPanel("jump_to") { input in
       if let vt = VideoTime(input) {
         self.player.seek(absoluteSecond: Double(vt.second))
@@ -103,35 +103,35 @@ extension MainMenuActionHandler {
     }
   }
 
-  func menuSnapshot(_ sender: NSMenuItem) {
+  @objc func menuSnapshot(_ sender: NSMenuItem) {
     player.screenShot()
   }
 
-  func menuABLoop(_ sender: NSMenuItem) {
+  @objc func menuABLoop(_ sender: NSMenuItem) {
     player.abLoop()
   }
 
-  func menuFileLoop(_ sender: NSMenuItem) {
+  @objc func menuFileLoop(_ sender: NSMenuItem) {
     player.toggleFileLoop()
   }
 
-  func menuPlaylistLoop(_ sender: NSMenuItem) {
+  @objc func menuPlaylistLoop(_ sender: NSMenuItem) {
     player.togglePlaylistLoop()
   }
 
-  func menuPlaylistItem(_ sender: NSMenuItem) {
+  @objc func menuPlaylistItem(_ sender: NSMenuItem) {
     let index = sender.tag
     player.playFileInPlaylist(index)
   }
 
-  func menuChapterSwitch(_ sender: NSMenuItem) {
+  @objc func menuChapterSwitch(_ sender: NSMenuItem) {
     let index = sender.tag
     player.playChapter(index)
     let chapter = player.info.chapters[index]
     player.sendOSD(.chapter(chapter.title))
   }
 
-  func menuChangeTrack(_ sender: NSMenuItem) {
+  @objc func menuChangeTrack(_ sender: NSMenuItem) {
     if let trackObj = sender.representedObject as? (MPVTrack, MPVTrack.TrackType) {
       player.setTrack(trackObj.0.id, forType: trackObj.1)
     } else if let trackObj = sender.representedObject as? MPVTrack {
@@ -144,7 +144,7 @@ extension MainMenuActionHandler {
 // MARK: - Video
 
 extension MainMenuActionHandler {
-  func menuChangeAspect(_ sender: NSMenuItem) {
+  @objc func menuChangeAspect(_ sender: NSMenuItem) {
     if let aspectStr = sender.representedObject as? String {
       player.setVideoAspect(aspectStr)
       player.sendOSD(.aspect(aspectStr))
@@ -153,7 +153,7 @@ extension MainMenuActionHandler {
     }
   }
 
-  func menuChangeCrop(_ sender: NSMenuItem) {
+  @objc func menuChangeCrop(_ sender: NSMenuItem) {
     if let cropStr = sender.representedObject as? String {
       player.setCrop(fromString: cropStr)
     } else {
@@ -161,13 +161,13 @@ extension MainMenuActionHandler {
     }
   }
 
-  func menuChangeRotation(_ sender: NSMenuItem) {
+  @objc func menuChangeRotation(_ sender: NSMenuItem) {
     if let rotationInt = sender.representedObject as? Int {
       player.setVideoRotate(rotationInt)
     }
   }
 
-  func menuToggleFlip(_ sender: NSMenuItem) {
+  @objc func menuToggleFlip(_ sender: NSMenuItem) {
     if player.info.flipFilter == nil {
       player.setFlip(true)
     } else {
@@ -175,7 +175,7 @@ extension MainMenuActionHandler {
     }
   }
 
-  func menuToggleMirror(_ sender: NSMenuItem) {
+  @objc func menuToggleMirror(_ sender: NSMenuItem) {
     if player.info.mirrorFilter == nil {
       player.setMirror(true)
     } else {
@@ -183,15 +183,15 @@ extension MainMenuActionHandler {
     }
   }
 
-  func menuToggleDeinterlace(_ sender: NSMenuItem) {
-    player.toggleDeinterlace(sender.state != NSOnState)
+  @objc func menuToggleDeinterlace(_ sender: NSMenuItem) {
+    player.toggleDeinterlace(sender.state != .on)
   }
 }
 
 // MARK: - Audio
 
 extension MainMenuActionHandler {
-  func menuChangeVolume(_ sender: NSMenuItem) {
+  @objc func menuChangeVolume(_ sender: NSMenuItem) {
     if let volumeDelta = sender.representedObject as? Int {
       let newVolume = Double(volumeDelta) + player.info.volume
       player.setVolume(newVolume, constrain: false)
@@ -200,11 +200,11 @@ extension MainMenuActionHandler {
     }
   }
 
-  func menuToggleMute(_ sender: NSMenuItem) {
+  @objc func menuToggleMute(_ sender: NSMenuItem) {
     player.toogleMute(nil)
   }
 
-  func menuChangeAudioDelay(_ sender: NSMenuItem) {
+  @objc func menuChangeAudioDelay(_ sender: NSMenuItem) {
     if let delayDelta = sender.representedObject as? Double {
       let newDelay = player.info.audioDelay + delayDelta
       player.setAudioDelay(newDelay)
@@ -213,7 +213,7 @@ extension MainMenuActionHandler {
     }
   }
 
-  func menuResetAudioDelay(_ sender: NSMenuItem) {
+  @objc func menuResetAudioDelay(_ sender: NSMenuItem) {
     player.setAudioDelay(0)
   }
 }
@@ -221,13 +221,13 @@ extension MainMenuActionHandler {
 // MARK: - Sub
 
 extension MainMenuActionHandler {
-  func menuLoadExternalSub(_ sender: NSMenuItem) {
+  @objc func menuLoadExternalSub(_ sender: NSMenuItem) {
     Utility.quickOpenPanel(title: "Load external subtitle file", isDir: false) { url in
       self.player.loadExternalSubFile(url)
     }
   }
 
-  func menuChangeSubDelay(_ sender: NSMenuItem) {
+  @objc func menuChangeSubDelay(_ sender: NSMenuItem) {
     if let delayDelta = sender.representedObject as? Double {
       let newDelay = player.info.subDelay + delayDelta
       player.setSubDelay(newDelay)
@@ -236,7 +236,7 @@ extension MainMenuActionHandler {
     }
   }
 
-  func menuChangeSubScale(_ sender: NSMenuItem) {
+  @objc func menuChangeSubScale(_ sender: NSMenuItem) {
     if sender.tag == 0 {
       player.setSubScale(1)
       return
@@ -254,22 +254,22 @@ extension MainMenuActionHandler {
     player.setSubScale(abs(newTruncated > 0 ? newTruncated : 1 / newTruncated))
   }
 
-  func menuResetSubDelay(_ sender: NSMenuItem) {
+  @objc func menuResetSubDelay(_ sender: NSMenuItem) {
     player.setSubDelay(0)
   }
 
-  func menuSetSubEncoding(_ sender: NSMenuItem) {
+  @objc func menuSetSubEncoding(_ sender: NSMenuItem) {
     player.setSubEncoding((sender.representedObject as? String) ?? "auto")
     player.reloadAllSubs()
   }
 
-  func menuSubFont(_ sender: NSMenuItem) {
+  @objc func menuSubFont(_ sender: NSMenuItem) {
     Utility.quickFontPickerWindow() {
       self.player.setSubFont($0 ?? "")
     }
   }
 
-  func menuFindOnlineSub(_ sender: NSMenuItem) {
+  @objc func menuFindOnlineSub(_ sender: NSMenuItem) {
     guard let url = player.info.currentURL else { return }
     OnlineSubtitle.getSub(forFile: url, playerCore: player) { subtitles in
       // send osd in main thread
@@ -291,7 +291,7 @@ extension MainMenuActionHandler {
     }
   }
 
-  func saveDownloadedSub(_ sender: NSMenuItem) {
+  @objc func saveDownloadedSub(_ sender: NSMenuItem) {
     let selected = player.info.subTracks.filter { $0.id == player.info.sid }
     guard let currURL = player.info.currentURL else { return }
     guard selected.count > 0 else {

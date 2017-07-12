@@ -14,8 +14,8 @@ fileprivate let AnimationDurationShowControl: TimeInterval = 0.2
 
 class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
-  override var windowNibName: String {
-    return "MiniPlayerWindowController"
+  override var windowNibName: NSNib.Name {
+    return NSNib.Name("MiniPlayerWindowController")
   }
 
   unowned var player: PlayerCore
@@ -67,10 +67,10 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     } else {
       (window.contentView as? NSVisualEffectView)?.material = .dark
     }
-    window.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
+    window.appearance = NSAppearance(named: .vibrantDark)
     window.titlebarAppearsTransparent = true
     window.titleVisibility = .hidden
-    ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindowButton]).forEach {
+    ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).forEach {
       window.standardWindowButton($0)?.isHidden = true
     }
 
@@ -86,7 +86,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     backgroundView.state = .active
 
     // close button
-    closeButton.image = NSImage(named: NSImageNameStopProgressFreestandingTemplate)
+    closeButton.image = NSImage(named: .stopProgressFreestandingTemplate)
     closeButton.image?.isTemplate = true
     closeButton.action = #selector(self.close)
 
@@ -151,7 +151,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Sync UI with playback
 
-  func updatePlayButtonState(_ state: Int) {
+  func updatePlayButtonState(_ state: NSControl.StateValue) {
     guard isWindowLoaded else { return }
     playButton.state = state
   }
@@ -233,9 +233,9 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   func setWindowFloatingOnTop(_ onTop: Bool) {
     guard let window = window else { return }
     if onTop {
-      window.level = Int(CGWindowLevelForKey(.floatingWindow)) - 1
+      window.level = NSWindow.Level(Int(CGWindowLevelForKey(.floatingWindow)) - 1)
     } else {
-      window.level = Int(CGWindowLevelForKey(.normalWindow))
+      window.level = NSWindow.Level(Int(CGWindowLevelForKey(.normalWindow)))
     }
   }
 

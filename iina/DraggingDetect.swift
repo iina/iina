@@ -173,9 +173,9 @@ extension PlayerCore {
     } else if types.contains(NSURLPboardType) {
       // url
       return .copy
-    } else if types.contains(NSPasteboardTypeString) {
+    } else if types.contains(.string) {
       // string
-      guard let droppedString = pb.pasteboardItems?.first?.string(forType: "public.utf8-plain-text") else {
+      guard let droppedString = pb.pasteboardItems?.first?.string(forType: NSPasteboard.PasteboardType("public.utf8-plain-text")) else {
         return []
       }
       return Regex.urlDetect.matches(droppedString) ? .copy : []
@@ -225,9 +225,9 @@ extension PlayerCore {
       guard let url = pb.propertyList(forType: NSURLPboardType) as? [String] else { return false }
       openURLString(url[0])
       return true
-    } else if types.contains(NSPasteboardTypeString) {
+    } else if types.contains(.string) {
       // string
-      guard let droppedString = pb.pasteboardItems![0].string(forType: "public.utf8-plain-text") else {
+      guard let droppedString = pb.pasteboardItems![0].string(forType: NSPasteboard.PasteboardType("public.utf8-plain-text")) else {
         return false
       }
       if Regex.urlDetect.matches(droppedString) {

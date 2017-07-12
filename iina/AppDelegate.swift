@@ -87,7 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     // show alpha in color panels
-    NSColorPanel.shared().showsAlpha = true
+    NSColorPanel.shared.showsAlpha = true
 
     // other initializations at App level
     if #available(macOS 10.12.2, *) {
@@ -103,7 +103,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // check whether showing the welcome window after 0.1s
     Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(self.checkForShowingInitialWindow), userInfo: nil, repeats: false)
 
-    NSApplication.shared().servicesProvider = self
+    NSApplication.shared.servicesProvider = self
   }
 
   /** Show welcome window if `application(_:openFile:)` wasn't called, i.e. launched normally. */
@@ -141,7 +141,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return Preference.bool(for: .quitWhenNoOpenedWindow)
   }
 
-  func applicationShouldTerminate(_ sender: NSApplication) -> NSApplicationTerminateReply {
+  func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
     for pc in PlayerCore.playerCores {
      pc.terminateMPV()
     }
@@ -186,7 +186,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   // MARK: - Accept dropped string and URL
 
   func droppedText(_ pboard: NSPasteboard, userData:String, error: NSErrorPointer) {
-    if let url = pboard.string(forType: NSStringPboardType) {
+    if let url = pboard.string(forType: .string) {
       openFileCalled = true
       PlayerCore.active.openURLString(url)
     }
@@ -201,7 +201,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   // MARK: - URL Scheme
 
-  func handleURLEvent(event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
+  @objc func handleURLEvent(event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
     openFileCalled = true
     guard let url = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue else { return }
     if isReady {
@@ -229,10 +229,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     panel.canChooseFiles = true
     panel.canChooseDirectories = true
     panel.allowsMultipleSelection = true
-    if panel.runModal() == NSFileHandlingPanelOKButton {
+    if panel.runModal() == .OK {
       if Preference.bool(for: .recordRecentFiles) {
         for url in panel.urls {
-          NSDocumentController.shared().noteNewRecentDocumentURL(url)
+          NSDocumentController.shared.noteNewRecentDocumentURL(url)
         }
       }
       let isAlternative = (sender as? NSMenuItem)?.tag == AlternativeMenuItemTag
@@ -253,7 +253,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = inputViewController.urlField
     let response = panel.runModal()
-    if response == NSAlertFirstButtonReturn {
+    if response == .alertFirstButtonReturn {
       if let url = inputViewController.url {
         let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: sender.tag == AlternativeMenuItemTag)
         playerCore.openURL(url, isNetworkResource: true)
@@ -271,7 +271,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let screenshotPath = Preference.string(for: .screenshotFolder)!
     let absoluteScreenshotPath = NSString(string: screenshotPath).expandingTildeInPath
     let url = URL(fileURLWithPath: absoluteScreenshotPath, isDirectory: true)
-      NSWorkspace.shared().open(url)
+      NSWorkspace.shared.open(url)
   }
 
   @IBAction func menuSelectAudioDevice(_ sender: NSMenuItem) {
@@ -301,15 +301,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func helpAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: AppData.wikiLink)!)
+    NSWorkspace.shared.open(URL(string: AppData.wikiLink)!)
   }
 
   @IBAction func githubAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: AppData.githubLink)!)
+    NSWorkspace.shared.open(URL(string: AppData.githubLink)!)
   }
 
   @IBAction func websiteAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: AppData.websiteLink)!)
+    NSWorkspace.shared.open(URL(string: AppData.websiteLink)!)
   }
 
   @IBAction func setSelfAsDefaultAction(_ sender: AnyObject) {

@@ -10,8 +10,8 @@ import Cocoa
 
 class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource {
 
-  override var windowNibName: String {
-    return "InspectorWindowController"
+  override var windowNibName: NSNib.Name {
+    return NSNib.Name("InspectorWindowController")
   }
 
   var updateTimer: Timer?
@@ -69,7 +69,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    window?.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
+    window?.appearance = NSAppearance(named: .vibrantDark)
 
     watchProperties = Preference.array(for: .watchProperties) as! [String]
     watchTableView.delegate = self
@@ -180,11 +180,11 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
   }
 
-  func fileLoaded() {
+  @objc func fileLoaded() {
     updateInfo()
   }
 
-  func dynamicUpdate() {
+  @objc func dynamicUpdate() {
     updateInfo(dynamic: true)
     watchTableView.reloadData()
   }

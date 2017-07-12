@@ -1061,6 +1061,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     
     setWindowFloatingOnTop(false)
 
+    thumbnailPeekView.isHidden = true
+    timePreviewWhenSeek.isHidden = true
+    isMouseInSlider = false
+
     isInFullScreen = true
   }
 
@@ -1086,6 +1090,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     addBackStandardButtonsToFadeableViews()
 
+    thumbnailPeekView.isHidden = true
+    timePreviewWhenSeek.isHidden = true
+    isMouseInSlider = false
 
     isInFullScreen = false
 

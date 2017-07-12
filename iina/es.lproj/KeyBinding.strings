@@ -67,10 +67,10 @@
 "absolute" = "s";
 "absolute-percent" = "%";
 "relative-percent" = "%";
-"relative+exact" = "s (exact)";
-"relative-percent+exact" = "% (exact)";
-"absolute+keyframe" = "s (keyframe)";
-"absolute-percent+keyframe" = "% (keyframe)";
+"relative+exact" = "s (exacto)";
+"relative-percent+exact" = "% (exacto)";
+"absolute+keyframe" = "s (Fotograma)";
+"absolute-percent+keyframe" = "% (Fotograma)";
 
 "opt.pause" = "Pausa";
 "opt.speed" = "Velocidad";
@@ -88,12 +88,12 @@
 "opt.mute" = "Silenciar";
 "opt.audio-delay" = "Retrasar audio";
 
-"opt.sub" = "Sub track";
-"opt.sub-delay" = "Sub delay";
-"opt.sub-pos" = "Sub pos";
-"opt.sub-scale" = "Sub scale";
-"opt.sub-visibility" = "Sub visibility";
-"opt.sub-ass-style-override" = "ASS style override";
+"opt.sub" = "Pista de subtítulos";
+"opt.sub-delay" = "Retraso de subtítulos";
+"opt.sub-pos" = "Posición de subtítulos";
+"opt.sub-scale" = "Escala de subtítulos";
+"opt.sub-visibility" = "Visibilidad de subtítulos";
+"opt.sub-ass-style-override" = "Anulación de estilo ASS";
 
 "opt.fullscreen" = "Pantalla completa";
 "opt.ontop" = "Flotar por encima";

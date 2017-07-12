@@ -679,6 +679,7 @@
 		9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationDisplayTextField.swift; sourceTree = "<group>"; };
 		9E63CAB61E3F7D0E00EA66C9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.debug.xcconfig"; sourceTree = "<group>"; };
+		B3066F5F1F161538004D7559 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		B3860ED81E50F73A00FF012B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		B38F24181E44D09F00FFE600 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		B38F24191E44D09F00FFE600 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainWindowController.strings; sourceTree = "<group>"; };
@@ -1916,6 +1917,7 @@
 			children = (
 				849581F41F03D55A00D3B359 /* Base */,
 				849581F71F03D55C00D3B359 /* zh-Hans */,
+				B3066F5F1F161538004D7559 /* it */,
 			);
 			name = InitialWindowController.xib;
 			sourceTree = "<group>";

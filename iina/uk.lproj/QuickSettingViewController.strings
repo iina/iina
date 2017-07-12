@@ -33,10 +33,10 @@
 "8Ax-5X-osl.title" = "Вибрати Іншу Аудіо Доріжку...";
 
 /* Class = "NSSegmentedCell"; AB5-UZ-euc.ibShadowedLabels[0] = "Load Subtitle…"; ObjectID = "AB5-UZ-euc"; */
-"AB5-UZ-euc.ibShadowedLabels[0]" = "Завантажити Субтитри…";
+"AB5-UZ-euc.ibShadowedLabels[0]" = "Відкрити Субтитри…";
 
 /* Class = "NSTextFieldCell"; title = "Audio delay:"; ObjectID = "AKs-VQ-fKF"; */
-"AKs-VQ-fKF.title" = "Затримка аудіо:";
+"AKs-VQ-fKF.title" = "Затримка Аудіо:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "ANn-CR-JOV"; */
 "ANn-CR-JOV.title" = "Колір:";
@@ -87,7 +87,7 @@
 "LEZ-fv-buL.title" = "0с";
 
 /* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
-"Lnu-kz-cql.title" = "Зовнішнє аудіо:";
+"Lnu-kz-cql.title" = "Зовнішнє Аудіо:";
 
 /* Class = "NSTextFieldCell"; title = "-12 dB"; ObjectID = "Lpw-ws-Ezh"; */
 "Lpw-ws-Ezh.title" = "-12 dB";
@@ -126,7 +126,7 @@
 "TXm-bA-7y3.title" = "Деінтерлейсінг";
 
 /* Class = "NSTextFieldCell"; title = "Video track:"; ObjectID = "VzC-tM-KT7"; */
-"VzC-tM-KT7.title" = "Відео доріжка:";
+"VzC-tM-KT7.title" = "Відео Доріжка:";
 
 /* Class = "NSTextFieldCell"; title = "x"; ObjectID = "W7H-mU-v3D"; */
 "W7H-mU-v3D.title" = "x";
@@ -138,7 +138,7 @@
 "Wkz-wW-sOM.title" = "Затримка субтитрів:";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "Xez-sb-mfB"; */
-"Xez-sb-mfB.title" = "Аквалайзер";
+"Xez-sb-mfB.title" = "Еквалайзер";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "YCG-xK-eAs"; */
 "YCG-xK-eAs.title" = "-5с";
@@ -159,7 +159,7 @@
 "avJ-cW-Iws.title" = "0.5";
 
 /* Class = "NSTextFieldCell"; title = "Secondary subtitle:"; ObjectID = "bKb-pW-HnS"; */
-"bKb-pW-HnS.title" = "Другорядні субтитри:";
+"bKb-pW-HnS.title" = "Інші Субтитри:";
 
 /* Class = "NSTextFieldCell"; title = "0"; ObjectID = "bZu-Wx-06O"; */
 "bZu-Wx-06O.title" = "0";
@@ -171,7 +171,7 @@
 "bzk-c2-LH5.label" = "Аудіо";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
-"cMu-YF-riv.ibShadowedLabels[0]" = "Стандартний";
+"cMu-YF-riv.ibShadowedLabels[0]" = "Як є";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[1] = "4:3"; ObjectID = "cMu-YF-riv"; */
 "cMu-YF-riv.ibShadowedLabels[1]" = "4:3";
@@ -225,10 +225,10 @@
 "i0j-2a-vKD.title" = "4k";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "iS4-Zr-9Ig"; */
-"iS4-Zr-9Ig.title" = "Аквалайзер";
+"iS4-Zr-9Ig.title" = "Еквалайзер";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
-"iuN-rN-jT7.ibShadowedLabels[0]" = "Нема";
+"iuN-rN-jT7.ibShadowedLabels[0]" = "Як є";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[1] = "4:3"; ObjectID = "iuN-rN-jT7"; */
 "iuN-rN-jT7.ibShadowedLabels[1]" = "4:3";
@@ -318,7 +318,7 @@
 "wgA-op-JP4.title" = "0с";
 
 /* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
-"x39-62-7KC.title" = "Аудіо доріжка:";
+"x39-62-7KC.title" = "Аудіо Доріжка:";
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
 "xfX-wr-DTJ.title" = "+5с";

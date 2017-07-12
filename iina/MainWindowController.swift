@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 8/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -379,7 +379,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     w.setIsVisible(true)
 
-    videoView.translatesAutoresizingMaskIntoConstraints = false
+    videoView.translatesAutoresizingMaskIntoConstraints = true
     //quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": videoView])
 
     videoView.videoLayer.display()
@@ -1065,9 +1065,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidEnterFullScreen(_ notification: Notification) {
     isEnteringFullScreen = false
+    // we must block the mpv rendering queue to do the following atomically
     videoView.videoLayer.mpvGLQueue.async {
-      self.videoView.frame = NSRect(x: 0, y: 0, width: self.window!.frame.width, height: self.window!.frame.height)
-      self.videoView.videoLayer.setNeedsDisplay()
+      DispatchQueue.main.sync {
+        self.videoView.frame = NSRect(x: 0, y: 0, width: self.window!.frame.width, height: self.window!.frame.height)
+        self.videoView.videoLayer.display()
+      }
     }
   }
 

@@ -89,7 +89,7 @@ class OpenSubSupport {
 
   private let chunkSize: Int = 65536
   private let apiPath = "https://api.opensubtitles.org:443/xml-rpc"
-  private static let serviceName: NSString = "IINA Opensubtitles Account"
+  private static let serviceName: NSString = "IINA OpenSubtitles Account"
   private let xmlRpc: JustXMLRPC
 
   var language: String

@@ -69,16 +69,6 @@
 "osd.cannot_login" = "Не могу войти";
 "osd.canceled" = "Отменено";
 
-"update.title_update_found" = "Найдено обновление";
-"update.title_no_update" = "Обновлений нет";
-"update.title_error" = "Ошибка";
-"update.update_found" = "Найдена новая версия! IINA ещё в альфа-версии, поэтому рекомендуется обновиться. Скачайте с веб-сайта или Github:";
-"update.no_update" = "Вы используете последнюю версию.";
-"update.check_failed" = "Не удалось проверить обновления. Вероятно, вы используете старую версию. Пожалуйста, проверьте сайт или github.";
-"update.new_version" = "Новая версия:";
-"update.dl_from_website" = "Перейти на веб-сайт";
-"update.dl_from_github" = "Перейти на Github";
-
 "preference.title" = "Настройки";
 "preference.general" = "Основные";
 "preference.ui" = "Интерфейс";

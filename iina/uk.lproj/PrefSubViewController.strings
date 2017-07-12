@@ -1,4 +1,7 @@
 
+/* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "1vo-so-iaM"; */
+"1vo-so-iaM.title" = "Субтитри містять медіа файли";
+
 /* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "4EG-eE-S3y"; */
 "4EG-eE-S3y.title" = "Вертикальна позиція:";
 
@@ -65,6 +68,9 @@
 /* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "PZ2-pZ-hHa"; */
 "PZ2-pZ-hHa.title" = "Інший:";
 
+/* Class = "NSMenuItem"; title = "All subtitles in the same folder"; ObjectID = "Qcl-0x-3hh"; */
+"Qcl-0x-3hh.title" = "Усі субтитри в одній теці";
+
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "RiL-Rv-eke"; */
 "RiL-Rv-eke.title" = "Шрифт:";
 
@@ -100,6 +106,9 @@
 
 /* Class = "NSButtonCell"; title = "Choose..."; ObjectID = "cVp-yI-tMu"; */
 "cVp-yI-tMu.title" = "Обрати...";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "clt-eT-TMN"; */
+"clt-eT-TMN.title" = "Вимкнено";
 
 /* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "d5R-vH-0o0"; */
 "d5R-vH-0o0.title" = "Розумно виявити засобами IINA";
@@ -145,6 +154,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Margin"; ObjectID = "sVu-u3-QwW"; */
 "sVu-u3-QwW.title" = "Край";
+
+/* Class = "NSMenuItem"; title = "Subtitle with the exact same media filename"; ObjectID = "siy-Uq-tMP"; */
+"siy-Uq-tMP.title" = "Субтитри з одною і тою самою назвою файлу";
 
 /* Class = "NSTextFieldCell"; title = "Align"; ObjectID = "t3t-yJ-pM9"; */
 "t3t-yJ-pM9.title" = "Вирівняти";

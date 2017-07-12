@@ -2,6 +2,9 @@
 /* Class = "NSWindow"; title = "About"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Про";
 
+/* Class = "NSTextFieldCell"; title = "This is an alpha release and not recommended for daily use. Please check for updates frequently. For bug reports, feature requests or help, please create an issue on Github or email me."; ObjectID = "TI7-3V-nUn"; */
+"TI7-3V-nUn.title" = "Це все ще альфа реліз, і не дуже рекомендується для використання постійно. Будь-ласка поновлюйтеся часто. Для створення багів, додаткового функціоналу чи допомоги, будь-ласка створіть іш'ю на Github або напишіть мені на пошту..";
+
 /* Class = "NSTextFieldCell"; title = "mpv 0.0.0"; ObjectID = "ZAx-ah-fbZ"; */
 "ZAx-ah-fbZ.title" = "mpv 0.0.0";
 
@@ -11,5 +14,5 @@
 /* Class = "NSTextFieldCell"; title = "0.0.1"; ObjectID = "gZA-85-Zaw"; */
 "gZA-85-Zaw.title" = "0.0.1";
 
-/* Class = "NSButtonCell"; title = "Credits"; ObjectID = "zCH-uO-acx"; */
-"zCH-uO-acx.title" = "Подяка";
+/* Class = "NSBox"; title = "Box"; ObjectID = "igW-n0-W0W"; */
+"igW-n0-W0W.title" = "Box";

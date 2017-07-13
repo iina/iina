@@ -463,13 +463,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   deinit {
-    ObjcUtils.silenced {
-      for key in self.observedPrefKeys {
-        self.ud.removeObserver(self, forKeyPath: key)
+    guard #available(OSX 10.11, *) else {
+      ObjcUtils.silenced { [unowned self] in
+        for key in self.observedPrefKeys {
+          self.ud.removeObserver(self, forKeyPath: key)
+        }
+        for observer in self.notificationObservers {
+          NotificationCenter.default.removeObserver(observer)
+        }
       }
-      for observer in self.notificationObservers {
-        NotificationCenter.default.removeObserver(observer)
-      }
+      return
     }
   }
 

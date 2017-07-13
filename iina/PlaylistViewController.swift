@@ -102,8 +102,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   deinit {
-    ObjcUtils.silenced {
-      NotificationCenter.default.removeObserver(self.playlistChangeObserver!)
+    guard #available(OSX 10.11, *) else {
+      ObjcUtils.silenced { [unowned self] in
+        self.playlistChangeObserver.flatMap { NotificationCenter.default.removeObserver($0) }
+      }
+      return
     }
   }
 

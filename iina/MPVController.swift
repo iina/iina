@@ -72,7 +72,7 @@ class MPVController: NSObject {
   }
 
   deinit {
-    ObjcUtils.silenced {
+    ObjcUtils.silenced { [unowned self] in
       self.optionObservers.forEach { (k, v) in
         self.ud.removeObserver(self, forKeyPath: k)
       }
@@ -343,8 +343,8 @@ class MPVController: NSObject {
     strArgs.append(nil)
     var cargs = strArgs.map { $0.flatMap { UnsafePointer<Int8>(strdup($0)) } }
     defer {
-      cargs.forEach { (ptr) in
-        free(UnsafeMutablePointer<Int8>.init(mutating: ptr))
+      cargs.forEach {
+        free(UnsafeMutableRawPointer(mutating: $0))
       }
     }
 

@@ -78,8 +78,11 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   deinit {
-    ObjcUtils.silenced {
-      NotificationCenter.default.removeObserver(self)
+    guard #available(OSX 10.11, *) else {
+      ObjcUtils.silenced { [unowned self] in
+        NotificationCenter.default.removeObserver(self)
+      }
+      return
     }
   }
 

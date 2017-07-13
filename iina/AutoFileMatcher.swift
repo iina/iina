@@ -46,11 +46,9 @@ class AutoFileMatcher {
 
     // group by extension
     for file in files {
-      autoreleasepool{
-        let fileInfo = FileInfo(file)
-        if let mediaType = Utility.mediaType(forExtension: fileInfo.ext) {
-          filesGroupedByMediaType[mediaType]!.append(fileInfo)
-        }
+      let fileInfo = FileInfo(file)
+      if let mediaType = Utility.mediaType(forExtension: fileInfo.ext) {
+        filesGroupedByMediaType[mediaType]!.append(fileInfo)
       }
     }
 

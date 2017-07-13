@@ -734,7 +734,7 @@ class PlayerCore: NSObject {
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
     guard let path = mpvController.getString(MPVProperty.path) else { return }
-    info.currentURL = URL(fileURLWithPath: path)
+    info.currentURL = path.contains("://") ? URL(string: path) : URL(fileURLWithPath: path)
     // Auto load
     backgroundQueueTicket += 1
     let currentFileIsOpenedManually = info.currentFileIsOpenedManually

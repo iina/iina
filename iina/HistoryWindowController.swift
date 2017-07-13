@@ -123,7 +123,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   func doubleAction() {
     if let selected = outlineView.item(atRow: outlineView.clickedRow) as? PlaybackHistory {
-      PlayerCore.active.openURL(selected.url, isNetworkResource: false)
+      PlayerCore.active.openURL(selected.url)
     }
   }
 
@@ -170,8 +170,8 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
         // Filename cell
         let entry = item as! PlaybackHistory
         let filenameView = (view as! HistoryFilenameCellView)
-        let fileExists = FileManager.default.fileExists(atPath: entry.url.path)
-        filenameView.textField?.stringValue = entry.name
+        let fileExists = !entry.url.isFileURL || FileManager.default.fileExists(atPath: entry.url.path)
+        filenameView.textField?.stringValue = entry.url.isFileURL ? entry.name : entry.url.absoluteString
         filenameView.textField?.textColor = fileExists ? .controlTextColor : .disabledControlTextColor
         filenameView.docImage.image = NSWorkspace.shared().icon(forFileType: entry.url.pathExtension)
       } else if identifier == "Progress" {

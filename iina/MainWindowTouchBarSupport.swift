@@ -153,7 +153,7 @@ extension MainWindowController: NSTouchBarDelegate {
 
   func touchBarSliderAction(_ sender: NSSlider) {
     let percentage = 100 * sender.doubleValue / sender.maxValue
-    playerCore.seek(percent: percentage)
+    playerCore.seek(percent: percentage, forceExact: true)
   }
 
   private func buttonTouchBarItem(withIdentifier identifier: NSTouchBarItemIdentifier, imageName: String, tag: Int, customLabel: String, action: Selector) -> NSCustomTouchBarItem {
@@ -218,6 +218,7 @@ class TouchBarPlaySlider: NSSlider {
 class TouchBarPlaySliderCell: NSSliderCell {
 
   private let solidColor = NSColor.labelColor.withAlphaComponent(0.4)
+  private let knobWidthWithImage: CGFloat = 60
 
   var isTouching: Bool {
     return (self.controlView as! TouchBarPlaySlider).isTouching
@@ -244,8 +245,8 @@ class TouchBarPlaySliderCell: NSSliderCell {
     let info = playerCore.info
     let superKnob = super.knobRect(flipped: flipped)
     if isTouching {
-      if let thumbImage = info.thumbnails.first?.image {
-        let imageKnobWidth = thumbImage.size.aspect * superKnob.height
+      if info.thumbnails.count > 0 {
+        let imageKnobWidth = knobWidthWithImage
         let barWidth = barRect(flipped: flipped).width
 
         return NSRect(x: superKnob.origin.x * (barWidth - (imageKnobWidth - superKnob.width)) / barWidth,
@@ -267,14 +268,23 @@ class TouchBarPlaySliderCell: NSSliderCell {
   override func drawKnob(_ knobRect: NSRect) {
     let info = playerCore.info
     guard !info.isIdle else { return }
-    if isTouching, let dur = info.videoDuration?.second, let tb = info.getThumbnail(forSecond: (doubleValue / 100) * dur) {
+    if isTouching, let dur = info.videoDuration?.second, let tb = info.getThumbnail(forSecond: (doubleValue / 100) * dur), let image = tb.image {
       NSGraphicsContext.saveGraphicsState()
       NSBezierPath(roundedRect: knobRect, xRadius: 3, yRadius: 3).setClip()
-      tb.image?.draw(in: knobRect)
+      let origSize = image.size.crop(withAspect: Aspect(size: knobRect.size))
+      let origRect = NSRect(x: (image.size.width - origSize.width) / 2,
+                            y: (image.size.height - origSize.height) / 2,
+                            width: origSize.width,
+                            height: origSize.height)
+      image.draw(in: knobRect, from: origRect, operation: .copy, fraction: 1, respectFlipped: true, hints: nil)
       NSColor.white.setStroke()
-      let border = NSBezierPath(roundedRect: knobRect.insetBy(dx: 1, dy: 1), xRadius: 3, yRadius: 3)
-      border.lineWidth = 1
-      border.stroke()
+      let outerBorder = NSBezierPath(roundedRect: knobRect.insetBy(dx: 1, dy: 1), xRadius: 3, yRadius: 3)
+      outerBorder.lineWidth = 1
+      outerBorder.stroke()
+      NSColor.black.setStroke()
+      let innerBorder = NSBezierPath(roundedRect: knobRect.insetBy(dx: 2, dy: 2), xRadius: 2, yRadius: 2)
+      innerBorder.lineWidth = 1
+      innerBorder.stroke()
       NSGraphicsContext.restoreGraphicsState()
     } else {
       NSColor.labelColor.setFill()
@@ -299,8 +309,8 @@ class TouchBarPlaySliderCell: NSSliderCell {
       if let dur = info.videoDuration?.second,
         let image = info.getThumbnail(forSecond: percent * dur)?.image,
         info.thumbnailsProgress >= percent {
-        let orig = NSRect(x: image.size.width / 2, y: 0, width: 2 * (image.size.height / barRect.height), height: barRect.height)
-        image.draw(in: dest, from: orig, operation: .copy, fraction: 1)
+        let orig = NSRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        image.draw(in: dest, from: orig, operation: .copy, fraction: 1, respectFlipped: true, hints: nil)
       } else {
         NSBezierPath(rect: dest).fill()
       }

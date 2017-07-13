@@ -113,6 +113,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var isInPIP: Bool = false
   var isInInteractiveMode: Bool = false
   var isEnteringFullScreen: Bool = false
+  var isVideoLoaded: Bool = false
 
   // might use another obj to handle slider?
   var isMouseInWindow: Bool = false
@@ -831,6 +832,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       updateTimer()
     } else if obj == 1 {
       // slider
+      if controlBarFloating.isDragging { return }
       isMouseInSlider = true
       if !controlBarFloating.isDragging {
         timePreviewWhenSeek.isHidden = false
@@ -1060,6 +1062,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     
     setWindowFloatingOnTop(false)
 
+    thumbnailPeekView.isHidden = true
+    timePreviewWhenSeek.isHidden = true
+    isMouseInSlider = false
+
     isInFullScreen = true
   }
 
@@ -1088,6 +1094,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     addBackStandardButtonsToFadeableViews()
 
+    thumbnailPeekView.isHidden = true
+    timePreviewWhenSeek.isHidden = true
+    isMouseInSlider = false
 
     isInFullScreen = false
 
@@ -1197,9 +1206,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func hideUIAndCursor() {
     // don't hide UI when dragging control bar
-    if controlBarFloating.isDragging {
-      return
-    }
+    if controlBarFloating.isDragging { return }
     hideUI()
     NSCursor.setHiddenUntilMouseMoves(true)
   }
@@ -1731,6 +1738,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
       if (!window!.isVisible) {
         window!.setIsVisible(true)
+      }
+
+      // generate thumbnails after video loaded if it's the first time
+      if !isVideoLoaded {
+        playerCore.generateThumbnails()
+        isVideoLoaded = true
       }
 
       // maybe not a good position, consider putting these at playback-restart

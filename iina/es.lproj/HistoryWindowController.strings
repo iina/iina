@@ -1,39 +1,39 @@
 
 /* Class = "NSMenuItem"; title = "Clear Recents"; ObjectID = "07n-bk-3ma"; */
-"07n-bk-3ma.title" = "Elimina recenti";
+"07n-bk-3ma.title" = "Borrar Recientes";
 
 /* Class = "NSMenuItem"; title = "Full path"; ObjectID = "AZL-gY-Tob"; */
-"AZL-gY-Tob.title" = "Percorso completo";
+"AZL-gY-Tob.title" = "Ruta completa";
 
 /* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "CqL-By-26A"; */
-"CqL-By-26A.title" = "Cancella…";
+"CqL-By-26A.title" = "Eliminar…";
 
 /* Class = "NSTableColumn"; headerCell.title = "File"; ObjectID = "DIC-tR-R2F"; */
-"DIC-tR-R2F.headerCell.title" = "File";
+"DIC-tR-R2F.headerCell.title" = "Archivo";
 
 /* Class = "NSWindow"; title = "Playback History"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "Cronologia riproduzioni";
+"F0z-JX-Cv5.title" = "Historial de Reproducción";
 
 /* Class = "NSMenuItem"; title = "Reveal in Finder"; ObjectID = "FPK-nx-hvF"; */
-"FPK-nx-hvF.title" = "Mostra nel Finder";
+"FPK-nx-hvF.title" = "Mostrar en el Finder";
 
 /* Class = "NSMenuItem"; title = "Search in"; ObjectID = "Gx5-gP-rzr"; */
-"Gx5-gP-rzr.title" = "Cerca in";
+"Gx5-gP-rzr.title" = "Buscar en";
 
 /* Class = "NSTableColumn"; headerCell.title = "Played at"; ObjectID = "M7K-6H-OPw"; */
-"M7K-6H-OPw.headerCell.title" = "Data/Ora";
+"M7K-6H-OPw.headerCell.title" = "Última vez";
 
 /* Class = "NSTableColumn"; headerCell.title = "Progress"; ObjectID = "MJU-JY-7fx"; */
-"MJU-JY-7fx.headerCell.title" = "Avanzamento";
+"MJU-JY-7fx.headerCell.title" = "Progreso";
 
 /* Class = "NSMenuItem"; title = "Date"; ObjectID = "QBO-JS-dNV"; */
-"QBO-JS-dNV.title" = "Data";
+"QBO-JS-dNV.title" = "Fecha";
 
 /* Class = "NSMenuItem"; title = "Folder"; ObjectID = "VH5-en-8FR"; */
-"VH5-en-8FR.title" = "Cartella";
+"VH5-en-8FR.title" = "Carpeta";
 
 /* Class = "NSMenuItem"; title = "Filename"; ObjectID = "Wkp-Vn-JoJ"; */
-"Wkp-Vn-JoJ.title" = "Nome file";
+"Wkp-Vn-JoJ.title" = "Nombre del archivo";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "amS-Lf-wNT"; */
 "amS-Lf-wNT.title" = "Text Cell";
@@ -53,24 +53,26 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "lyw-91-dHG"; */
 "lyw-91-dHG.title" = "Text Cell";
 
+/* Class = "NSMenuItem"; title = "Play in New Window"; ObjectID = "mXt-wb-fgT"; */
+"mXt-wb-fgT.title" = "Abrir en una nueva ventana";
+
 /* Class = "NSMenuItem"; title = "No Recent Searches"; ObjectID = "ndC-eb-4GZ"; */
-"ndC-eb-4GZ.title" = "Nessuna ricerca recente";
+"ndC-eb-4GZ.title" = "No hay búsquedas recientes";
+
+/* Class = "NSMenuItem"; title = "Play"; ObjectID = "oMR-4K-aR2"; */
+"oMR-4K-aR2.title" = "Abrir";
 
 /* Class = "NSMenuItem"; title = "Item"; ObjectID = "tmr-oC-rNa"; */
-"tmr-oC-rNa.title" = "Item";
+"tmr-oC-rNa.title" = "Elemento";
 
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "vDR-ax-UJb"; */
 "vDR-ax-UJb.title" = "Table View Cell";
 
 /* Class = "NSTextFieldCell"; title = "Group by:"; ObjectID = "z6c-c4-dgd"; */
-"z6c-c4-dgd.title" = "Raggruppa per:";
+"z6c-c4-dgd.title" = "Agrupar por:";
 
 /* Class = "NSTextFieldCell"; title = "00:00 AM"; ObjectID = "z9u-td-fQW"; */
 "z9u-td-fQW.title" = "00:00 AM";
 
 /* Class = "NSMenuItem"; title = "Recent Searches"; ObjectID = "zhe-yr-CTO"; */
-"zhe-yr-CTO.title" = "Ricerche recenti";
-
-"oMR-4K-aR2.title" = "Apri";
-
-"mXt-wb-fgT.title" = "Apri in una nuova finestra";
+"zhe-yr-CTO.title" = "Búsquedas recientes";

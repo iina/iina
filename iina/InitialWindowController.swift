@@ -77,7 +77,7 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   func tableViewSelectionDidChange(_ notification: Notification) {
     guard recentFilesTableView.selectedRow >= 0 else { return }
-    playerCore.openURL(recentDocuments[recentFilesTableView.selectedRow], isNetworkResource: false)
+    playerCore.openURL(recentDocuments[recentFilesTableView.selectedRow])
     recentFilesTableView.deselectAll(nil)
   }
 

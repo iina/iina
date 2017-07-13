@@ -22,6 +22,7 @@ class OpenURLAccessoryViewController: NSViewController {
 
   var url: URL? {
     get {
+      guard !urlField.stringValue.isEmpty else { return nil }
       let username = usernameField.stringValue
       let password = passwordField.stringValue
       guard var urlValue = urlField.stringValue.addingPercentEncoding(withAllowedCharacters: .urlAllowed) else {

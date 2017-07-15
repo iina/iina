@@ -436,7 +436,7 @@ struct Preference {
     Key.hardwareDecoder: HardwareDecoderOption.auto.rawValue,
     Key.audioThreads: 0,
     Key.audioLanguage: "",
-    Key.maxVolume: 130,
+    Key.maxVolume: 100,
     Key.spdifAC3: false,
     Key.spdifDTS: false,
     Key.spdifDTSHD: false,

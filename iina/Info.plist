@@ -165,6 +165,8 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>ts</string>
+				<string>mts</string>
+				<string>m2ts</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>doc_ts.icns</string>
@@ -309,6 +311,7 @@
 				<string>xvid</string>
 				<string>yuv</string>
 				<string>dv</string>
+				<string>wv</string>
 				<string>*</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
@@ -336,6 +339,9 @@
 				<string>midi</string>
 				<string>pcm</string>
 				<string>vox</string>
+				<string>tta</string>
+				<string>tak</string>
+				<string>opus</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>doc_other_a.icns</string>

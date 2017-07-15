@@ -1737,10 +1737,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // animated `setFrame` can be inaccurate!
       w.setFrame(rect, display: true)
 
-      if (!window!.isVisible) {
-        window!.setIsVisible(true)
-      }
-
       // generate thumbnails after video loaded if it's the first time
       if !isVideoLoaded {
         playerCore.generateThumbnails()

@@ -1032,6 +1032,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // videoView.stopDisplayLink()
     }
     playerCore.info.currentFolder = nil
+    playerCore.info.matchedSubs.removeAll()
     // stop tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)

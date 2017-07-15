@@ -26,8 +26,14 @@
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "NUr-hY-gfo"; */
 "NUr-hY-gfo.title" = "Автоматически скрывать после:";
 
+/* Class = "NSButtonCell"; title = "Clear Cache…"; ObjectID = "OAh-HP-wST"; */
+"OAh-HP-wST.title" = "Очистить кэш...";
+
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "ObY-7B-NTO"; */
 "ObY-7B-NTO.title" = "с";
+
+/* Class = "NSTextFieldCell"; title = "Thumbnail cache:"; ObjectID = "R1l-SN-bG5"; */
+"R1l-SN-bG5.title" = "Кэш миниатюр:";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "S8H-Xr-uVa"; */
 "S8H-Xr-uVa.title" = "с";
@@ -35,8 +41,14 @@
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
 "SFX-ct-8MB.title" = "Поверх всех окон во время воспроизведения";
 
+/* Class = "NSButtonCell"; title = "Enable thumbnail preview"; ObjectID = "Xey-3m-f6G"; */
+"Xey-3m-f6G.title" = "Включить предварительный просмотр миниатюр";
+
 /* Class = "NSBox"; title = "Box"; ObjectID = "bYj-5g-zYO"; */
 "bYj-5g-zYO.title" = "Box";
+
+/* Class = "NSTextFieldCell"; title = "Calculating…"; ObjectID = "d60-w5-xXY"; */
+"d60-w5-xXY.title" = "Вычисление...";
 
 /* Class = "NSButtonCell"; title = "Use physical resolution on retina screens"; ObjectID = "fsj-YE-OB7"; */
 "fsj-YE-OB7.title" = "Использовать физическое разрешение на экранах Retina";

@@ -204,18 +204,6 @@
                                 <menuItem title="PNG" state="on" id="3XO-ks-TDg"/>
                                 <menuItem title="JPEG (.jpg)" tag="1" id="tmy-ty-8uK"/>
                                 <menuItem title="JPEG (.jpeg)" tag="2" id="NVh-C5-b9i"/>
-                                <menuItem title="PPM" tag="3" id="iSD-UA-cfL">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
-                                <menuItem title="PGM" tag="4" id="A5p-u9-lqJ">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
-                                <menuItem title="PGM (YV12)" tag="5" id="Kru-Ho-Wpv">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
-                                <menuItem title="TARGA" tag="6" id="q9X-X2-uGt">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
                             </items>
                         </menu>
                     </popUpButtonCell>

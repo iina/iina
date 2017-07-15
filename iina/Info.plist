@@ -352,6 +352,7 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>m3u8</string>
+				<string>m3u</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>doc_list.icns</string>

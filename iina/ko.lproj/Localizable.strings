@@ -163,8 +163,18 @@
 "alert.delete_history.title" = "최근에 재생한 기록 삭제";
 "alert.delete_history.message" = "선택한 재생 기록을 삭제하시겠습니까?";
 
+"alert.filter_hwdec.message" = "사용자 비디오 필터를 적용합니다. 그러나 현재 사용 중인 하드웨어 디코더가 비디오 필터를 제대로 지원하지 않을 수도 있습니다. 사용자 필터를 사용하지 않도록 설정하거나, 두 배의 메모리를 사용하는 자동(복사) 방식으로 전환하여 사용할 수 있습니다.\n이전에 설정했던 작업(예를 들어 화면 자르기 설정)이 동작하게 하려면 다시 설정해야 하는 경우도 있습니다.";
+"alert.filter_hwdec.abort" = "중단";
+"alert.filter_hwdec.turn_off" = "하드웨어 디코딩 끄기";
+"alert.filter_hwdec.use_copy" = "자동(복사)로 전환";
+
+"alert.clear_cache.title" = "썸네일 캐시 비우기";
+"alert.clear_cache.message" = "썸네일 캐시를 전부 비우겠습니까?";
+"alert.clear_cache.success" = "캐시를 전부 비웠습니다.";
+
 "pl_menu.title_multi" = "%d개의 항목";
 "pl_menu.play_next" = "다음 항목 재생";
+"pl_menu.play_in_new_window" = "새 윈도우에서 재생";
 "pl_menu.remove" = "제거";
 "pl_menu.remove_multi" = "선택 항목 제거";
 "pl_menu.delete" = "휴지통으로 이동";
@@ -183,3 +193,23 @@
 
 "filter.video_filters" = "비디오 필터";
 "filter.audio_filters" = "오디오 필터";
+
+"hwdec.no" = "하드웨어 디코딩을 사용하지 않습니다.";
+"hwdec.auto" = "하드웨어 디코딩을 사용합니다. 하지만 비디오 필터 대부분은 정상적으로 동작하지 않습니다.";
+"hwdec.auto-copy" = "하드웨어 디코딩을 사용합니다. 두 배의 메모리를 사용하지만, 비디오 필터를 적용할 수 있습니다.";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15초 후";
+"touchbar.ahead_30" = "30초 후";
+"touchbar.back_15" = "15초 전";
+"touchbar.back_30" = "30초 전";
+"touchbar.next_video" = "다음 영상";
+"touchbar.prev_video" = "이전 영상";
+"touchbar.increase_volume" = "음량 +";
+"touchbar.decrease_volume" = "음량 -";
+"touchbar.rewind" = "되감기";
+"touchbar.fast_forward" = "빨리 감기";
+"touchbar.play_pause" = "재생 / 일시 정지";
+"touchbar.seek" = "탐색";
+"touchbar.time" = "재생 위치";

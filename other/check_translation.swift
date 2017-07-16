@@ -47,6 +47,7 @@ let checkRedundantKey = false
 let languages = ["de", "fr", "it", "ja", "ko", "pl", "zh-Hans", "zh-Hant", "ru", "tr", "es", "uk"]
 var testLanguages: [String] = []
 
+let ignoredStrings = ["Label", "Multiline Label", "Text Cell", "Box", "Table View Cell", "Title", "Item", "Context Menu", "0:00:00", "00:00 AM", "9:99:99", "999:99"]
 
 var stat: [String: Int] = {
   var dic: [String: Int] = [:]
@@ -131,7 +132,7 @@ func makeSure(allKeysExistInFile file: String, basedOn base: BaseLang) {
     // for all keys in base dic
     for (key, baseValue) in baseDic {
       // check whether key exist
-      if ignorePlaceHolderTitle && (baseValue == "Label" || baseValue == "Text Cell") { continue }
+      if ignorePlaceHolderTitle && ignoredStrings.contains(baseValue) { continue }
       if let value = langDic[key] {
         // check whether has formatting problem
         if fmtRegexp.matches(baseValue) {

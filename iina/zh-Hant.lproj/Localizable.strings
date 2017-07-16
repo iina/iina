@@ -163,8 +163,18 @@
 "alert.delete_history.title" = "清空播放記錄";
 "alert.delete_history.message" = "確認要刪除當前選定記錄嗎？";
 
+"alert.filter_hwdec.message" = "你正在新增視訊濾鏡。然而，當前的硬體解碼器不能很好地支援視訊濾鏡。你可以禁用硬體解碼，或使用支援「拷貝」的解碼器 (將佔用兩倍記憶體)。\n你可能需要再操作一次（例如剪下）才能看到效果。";
+"alert.filter_hwdec.abort" = "放棄";
+"alert.filter_hwdec.turn_off" = "關閉硬體解碼";
+"alert.filter_hwdec.use_copy" = "使用支援「拷貝」的解碼器";
+
+"alert.clear_cache.title" = "清除縮圖快取";
+"alert.clear_cache.message" = "確定清除所有縮圖快取嗎?";
+"alert.clear_cache.success" = "快取已清除。";
+
 "pl_menu.title_multi" = "%d個檔案";
 "pl_menu.play_next" = "即將播放";
+"pl_menu.play_in_new_window" = "在新視窗中打開";
 "pl_menu.remove" = "移除";
 "pl_menu.remove_multi" = "批量移除";
 "pl_menu.delete" = "刪除";
@@ -184,3 +194,23 @@
 
 "filter.video_filters" = "視訊濾鏡";
 "filter.audio_filters" = "音訊濾鏡";
+
+"hwdec.no" = "不啟用硬體解碼。";
+"hwdec.auto" = "啟用硬體解碼。但是，大多數視訊濾鏡不會正常工作。";
+"hwdec.auto-copy" = "啟用硬體解碼。它會佔用兩倍左右的記憶體，但支援視訊濾鏡。";
+
+// Touch bar
+
+"touchbar.ahead_15" = "前進 15 秒";
+"touchbar.ahead_30" = "前進 30 秒";
+"touchbar.back_15" = "後退 15 秒";
+"touchbar.back_30" = "後退 30 秒";
+"touchbar.next_video" = "下一個視訊";
+"touchbar.prev_video" = "上一個視訊";
+"touchbar.increase_volume" = "音量 +";
+"touchbar.decrease_volume" = "音量 -";
+"touchbar.rewind" = "快退";
+"touchbar.fast_forward" = "快進";
+"touchbar.play_pause" = "播放 / 暫停";
+"touchbar.seek" = "進度條";
+"touchbar.time" = "播放進度";

@@ -190,3 +190,34 @@
 "pl_menu.matched_sub" = "Matched %d Subtitle(s)";
 "pl_menu.add_sub" = "Add Subtitle…";
 "pl_menu.wrong_sub" = "Wrong Subtitle!";
+
+// For 0.0.12 release
+"alert.filter_hwdec.message" = "You are about to apply a video fliter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like, setting the crop) to get it working.";
+"alert.filter_hwdec.abort" = "Abort";
+"alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
+"alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
+
+"alert.clear_cache.title" = "Clear Thumbnail Cache";
+"alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
+"alert.clear_cache.success" = "Cache cleared.";
+
+"pl_menu.play_in_new_window" = "Play in New Window";
+
+"hwdec.no" = "Disable Hardware decoding.";
+"hwdec.auto" = "Enable hardware decoding. However, most video filters won't work properly.";
+"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but works with video filters.";
+
+"touchbar.ahead_15" = "15sec Ahead";
+"touchbar.ahead_30" = "30sec Ahead";
+"touchbar.back_15" = "15sec Back";
+"touchbar.back_30" = "30sec Back";
+"touchbar.next_video" = "Next Video";
+"touchbar.prev_video" = "Previous Video";
+"touchbar.increase_volume" = "Volume +";
+"touchbar.decrease_volume" = "Volume -";
+"touchbar.rewind" = "Rewind";
+"touchbar.fast_forward" = "Fast Forward";
+"touchbar.play_pause" = "Play / Pause";
+"touchbar.seek" = "Seek";
+"touchbar.time" = "Time Position";
+

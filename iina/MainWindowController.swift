@@ -1032,6 +1032,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // videoView.stopDisplayLink()
     }
     playerCore.info.currentFolder = nil
+    playerCore.info.matchedSubs.removeAll()
     // stop tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
@@ -1735,10 +1736,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
       // animated `setFrame` can be inaccurate!
       w.setFrame(rect, display: true)
-
-      if (!window!.isVisible) {
-        window!.setIsVisible(true)
-      }
 
       // generate thumbnails after video loaded if it's the first time
       if !isVideoLoaded {

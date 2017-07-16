@@ -1,3 +1,7 @@
+
+/* Class = "NSMenuItem"; title = "Auto (Copy)"; ObjectID = "0DK-uZ-duj"; */
+"0DK-uZ-duj.title" = "Auto (Copy)";
+
 /* Class = "NSButtonCell"; title = "AC3"; ObjectID = "1uU-MC-7Yh"; */
 "1uU-MC-7Yh.title" = "AC3";
 
@@ -16,9 +20,6 @@
 /* Class = "NSButtonCell"; title = "DTS"; ObjectID = "Le8-wj-Pei"; */
 "Le8-wj-Pei.title" = "DTS";
 
-/* Class = "NSButtonCell"; title = "Use hardware decoding"; ObjectID = "WYE-SB-Ywe"; */
-"WYE-SB-Ywe.title" = "Использовать аппаратное декодирование";
-
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "По умолчанию: 0 (Авто)";
 
@@ -28,8 +29,17 @@
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Видео:";
 
+/* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
+"nwg-2K-G2G.title" = "Аппаратный декодер:";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
+"rFu-rL-EJC.title" = "Отключено";
+
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
 "sV5-dL-MUt.title" = "Аудио:";
+
+/* Class = "NSMenuItem"; title = "Auto"; ObjectID = "tAQ-oU-1AJ"; */
+"tAQ-oU-1AJ.title" = "Auto";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "tO4-pw-2W9"; */
 "tO4-pw-2W9.title" = "Количество потоков:";

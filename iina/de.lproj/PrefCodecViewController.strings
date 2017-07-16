@@ -1,3 +1,6 @@
+/* Class = "NSMenuItem"; title = "Auto (Copy)"; ObjectID = "0DK-uZ-duj"; */
+"0DK-uZ-duj.title" = "Autom. (Kopieren)";
+
 /* Class = "NSButtonCell"; title = "AC3"; ObjectID = "1uU-MC-7Yh"; */
 "1uU-MC-7Yh.title" = "AC3";
 
@@ -16,9 +19,6 @@
 /* Class = "NSButtonCell"; title = "DTS"; ObjectID = "Le8-wj-Pei"; */
 "Le8-wj-Pei.title" = "DTS";
 
-/* Class = "NSButtonCell"; title = "Use hardware decoding"; ObjectID = "WYE-SB-Ywe"; */
-"WYE-SB-Ywe.title" = "Hardware Dekodierung benutzen";
-
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "Standard: 0 (Automatisch)";
 
@@ -28,15 +28,26 @@
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Video:";
 
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "n3r-mP-f8V"; */
+"n3r-mP-f8V.title" = "Label";
+
+/* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
+"nwg-2K-G2G.title" = "Hardwaredecoder:";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
+"rFu-rL-EJC.title" = "Deaktiviert";
+
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
 "sV5-dL-MUt.title" = "Audio:";
+
+/* Class = "NSMenuItem"; title = "Auto"; ObjectID = "tAQ-oU-1AJ"; */
+"tAQ-oU-1AJ.title" = "Automatisch";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "tO4-pw-2W9"; */
 "tO4-pw-2W9.title" = "Anzahl der Threads:";
 
 /* Class = "NSTextFieldCell"; title = "S/PDIF output:"; ObjectID = "up6-6A-4sn"; */
-"up6-6A-4sn.title" = "S/PDIF Ausgabe:";
+"up6-6A-4sn.title" = "S/PDIF-Ausgabe:";
 
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "wjt-O6-KbC"; */
 "wjt-O6-KbC.title" = "Bevorzugte Sprache:";
-

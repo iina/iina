@@ -170,3 +170,34 @@
 "read.cycle-values" = "Cykl {{property}} w ({{{values}}})";
 "read.seek" = "Szukaj {{#fwd}}Do przodu{{/fwd}}{{#bwd}}Do dołu{{/bwd}}{{#abs}}do{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
 "read.sub-seek" = "Szukaj w{{#skip_1}}następny{{/skip_1}}{{#skip_-1}}poprzedni{{/skip_-1}} napisy";
+
+"iina.toggle-pip" = "Włącz Picture in Picture";
+"iina.find-online-subs" = "Znajdź napisy online";
+"iina.open-url" = "Otwórz URL";
+"iina.chapter-panel" = "Panel rozdziałów";
+"iina.video-panel" = "Panel wideo";
+"iina.toggle-mirror" = "Przełącz lustro";
+"iina.playlist-panel" = "Panel playlisty";
+"iina.open-file" = "Otwórz plik";
+"iina.save-downloaded-sub" = "Zapisz pobrane napisy";
+"iina.audio-panel" = "Panel ";
+"iina.save-playlist" = "Zapisz obecną playlistę";
+"iina.toggle-flip" = "Przełącz odwracanie";
+"iina.flip" = "Odwróć";
+"iina.delete-current-file" = "Usuń obecny plik";
+"iina.mirror" = "Lustro";
+"iina.sub-panel" = "Panel Napisów";
+
+"cmd.loadfile" = "Załaduj plik";
+"cmd.screenshot" = "Zrzut ekranu";
+"cmd.run" = "Run";
+"cmd.playlist-move" = "Przenieś przedmiot playlisty";
+"cmd.screenshot-to-file" = "Zrzut ekranu do pliku";
+"cmd.sub-seek" = "Szukanie napisów";
+"cmd.loadlist" = "Załaduj playlistę";
+"cmd.revert-seek" = "Przywróć wyszukiwania";
+"cmd.quit-watch-later" = "Wyjdź (zapisz postęp)";
+
+"opt.video-aspect" = "Aspekt wideo";
+"opt.ontop" = "Float on top";
+"opt.sub-ass-style-override" = "Nadpisz styl ASS";

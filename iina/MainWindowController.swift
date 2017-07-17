@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 8/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -22,13 +22,17 @@ fileprivate let PlaylistMaxWidth: CGFloat = 400
 
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
-  override var nextResponder: NSResponder? {
-    get { return nil }
-    set { }
-  }
-
   override var windowNibName: String {
     return "MainWindowController"
+  }
+
+  init(playerCore: PlayerCore) {
+    self.playerCore = playerCore
+    super.init(window: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 
   // MARK: - Constants
@@ -41,8 +45,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Objects, Views
 
-  unowned let playerCore: PlayerCore = PlayerCore.shared
+  unowned var playerCore: PlayerCore
+
   lazy var videoView: VideoView = self.initVideoView()
+
   lazy var sizingTouchBarTextField: NSTextField = {
     return NSTextField()
   }()
@@ -106,6 +112,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   var isInPIP: Bool = false
   var isInInteractiveMode: Bool = false
+  var isEnteringFullScreen: Bool = false
+  var isVideoLoaded: Bool = false
 
   // might use another obj to handle slider?
   var isMouseInWindow: Bool = false
@@ -257,6 +265,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bufferProgressLabel: NSTextField!
   @IBOutlet weak var bufferSpin: NSProgressIndicator!
   @IBOutlet weak var bufferDetailLabel: NSTextField!
+  @IBOutlet var thumbnailPeekView: ThumbnailPeekView!
 
   @IBOutlet weak var oscFloatingTopView: NSStackView!
   @IBOutlet weak var oscFloatingBottomView: NSView!
@@ -284,7 +293,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var osdAccessoryProgress: NSProgressIndicator!
 
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
-
 
   weak var touchBarPlaySlider: TouchBarPlaySlider?
   weak var touchBarPlayPauseBtn: NSButton?
@@ -324,9 +332,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     super.windowDidLoad()
 
     guard let w = self.window else { return }
-    
-    // enable sleep preventer
-    SleepPreventer.preventSleep()
 
     w.initialFirstResponder = nil
 
@@ -341,6 +346,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // set background color to black
     w.backgroundColor = NSColor.black
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay
+
     updateTitle()
 
     // set material
@@ -374,7 +380,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     w.setIsVisible(true)
 
-    //videoView.translatesAutoresizingMaskIntoConstraints = false
+    videoView.translatesAutoresizingMaskIntoConstraints = true
     //quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": videoView])
 
     videoView.videoLayer.display()
@@ -392,10 +398,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     bufferIndicatorView.layer?.cornerRadius = 10
     updateBufferIndicatorView()
 
+    // thumbnail peek view
+    w.contentView?.addSubview(thumbnailPeekView)
+    thumbnailPeekView.isHidden = true
+
     // other initialization
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
       $0?.state = .active
     }
+    // hide other views
     osdVisualEffectView.isHidden = true
     osdVisualEffectView.layer?.cornerRadius = 10
     leftArrowLabel.isHidden = true
@@ -557,8 +568,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.alwaysFloatOnTop:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
-        self.isOntop = newValue
-        setWindowFloatingOnTop(newValue)
+        if !playerCore.info.isPaused {
+          self.isOntop = newValue
+          setWindowFloatingOnTop(newValue)
+        }
       }
 
     default:
@@ -568,10 +581,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func initVideoView() -> VideoView {
     let v = VideoView(frame: window!.contentView!.bounds)
+    v.playerCore = self.playerCore
     return v
   }
 
-  func setupOnScreenController(position newPosition: Preference.OSCPosition) {
+  private func setupOnScreenController(position newPosition: Preference.OSCPosition) {
 
     var isCurrentControlBarHidden = false
 
@@ -818,12 +832,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       updateTimer()
     } else if obj == 1 {
       // slider
+      if controlBarFloating.isDragging { return }
       isMouseInSlider = true
       if !controlBarFloating.isDragging {
         timePreviewWhenSeek.isHidden = false
+        thumbnailPeekView.isHidden = !playerCore.info.thumbnailsReady
       }
       let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-      updateTimeLabel(mousePos.x)
+      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
     }
   }
 
@@ -844,7 +860,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isMouseInSlider = false
       timePreviewWhenSeek.isHidden = true
       let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-      updateTimeLabel(mousePos.x)
+      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
+      thumbnailPeekView.isHidden = true
     }
   }
 
@@ -852,7 +869,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard !isInInteractiveMode else { return }
     let mousePos = playSlider.convert(event.locationInWindow, from: nil)
     if isMouseInSlider {
-      updateTimeLabel(mousePos.x)
+      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
     }
     if isMouseInWindow && animationState == .hidden {
       showUI()
@@ -994,7 +1011,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       setWindowFloatingOnTop(true)
     }
     // truncate middle for title
-    if let attrTitle = titleTextField?.attributedStringValue.mutableCopy() as? NSMutableAttributedString {
+    if let attrTitle = titleTextField?.attributedStringValue.mutableCopy() as? NSMutableAttributedString, attrTitle.length > 0 {
       let p = attrTitle.attribute(NSParagraphStyleAttributeName, at: 0, effectiveRange: nil) as! NSMutableParagraphStyle
       p.lineBreakMode = .byTruncatingMiddle
       attrTitle.addAttribute(NSParagraphStyleAttributeName, value: p, range: NSRange(location: 0, length: attrTitle.length))
@@ -1015,10 +1032,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // videoView.stopDisplayLink()
     }
     playerCore.info.currentFolder = nil
-    // disable sleep preventer
-    if !playerCore.info.isPaused {
-      SleepPreventer.allowSleep()
-    }
+    playerCore.info.matchedSubs.removeAll()
     // stop tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
@@ -1026,6 +1040,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {
+    isEnteringFullScreen = true
+
     playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, true)
 
     // Set the appearance to match the theme so the titlebar matches the theme
@@ -1047,7 +1063,22 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     
     setWindowFloatingOnTop(false)
 
+    thumbnailPeekView.isHidden = true
+    timePreviewWhenSeek.isHidden = true
+    isMouseInSlider = false
+
     isInFullScreen = true
+  }
+
+  func windowDidEnterFullScreen(_ notification: Notification) {
+    isEnteringFullScreen = false
+    // we must block the mpv rendering queue to do the following atomically
+    videoView.videoLayer.mpvGLQueue.async {
+      DispatchQueue.main.sync {
+        self.videoView.frame = NSRect(x: 0, y: 0, width: self.window!.frame.width, height: self.window!.frame.height)
+        self.videoView.videoLayer.display()
+      }
+    }
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
@@ -1064,12 +1095,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     addBackStandardButtonsToFadeableViews()
 
+    thumbnailPeekView.isHidden = true
+    timePreviewWhenSeek.isHidden = true
+    isMouseInSlider = false
 
     isInFullScreen = false
 
     // set back frame of videoview, but only if not in PIP
     if !isInPIP {
-      videoView.frame = window!.contentView!.frame
+      videoView.videoLayer.mpvGLQueue.sync {
+        self.videoView.videoLayer.setNeedsDisplay()
+      }
     }
   }
 
@@ -1078,38 +1114,37 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       removeBlackWindow()
     }
     
-    setWindowFloatingOnTop(isOntop)
+    if !playerCore.info.isPaused {
+      setWindowFloatingOnTop(isOntop)
+    }
   }
 
   func windowDidResize(_ notification: Notification) {
     guard let w = window else { return }
     let wSize = w.frame.size
-    // is paused, draw new frame
-    if playerCore.info.isPaused {
+    // is paused or very low fps (assume audio file), draw new frame
+    if playerCore.info.isPaused || playerCore.mpvController.getDouble(MPVProperty.estimatedVfFps) < 1 {
       videoView.videoLayer.draw()
     }
-
     // update videoview size if in full screen, since aspect ratio may changed
     if (isInFullScreen && !isInPIP) {
-
-      // Let mpv decide where to draw
-      /*
-      let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
-      let tryHeight = wSize.width / aspectRatio
-      if tryHeight <= wSize.height {
-        // should have black bar above and below
-        let targetHeight = wSize.width / aspectRatio
-        let yOffset = (wSize.height - targetHeight) / 2
-        videoView.frame = NSMakeRect(0, yOffset, wSize.width, targetHeight)
-      } else if tryHeight > wSize.height {
-        // should have black bar left and right
-        let targetWidth = wSize.height * aspectRatio
-        let xOffset = (wSize.width - targetWidth) / 2
-        videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
+      if isEnteringFullScreen {
+        let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
+        let tryHeight = wSize.width / aspectRatio
+        if tryHeight <= wSize.height {
+          // should have black bar above and below
+          let targetHeight = wSize.width / aspectRatio
+          let yOffset = (wSize.height - targetHeight) / 2
+          videoView.frame = NSMakeRect(0, yOffset, wSize.width, targetHeight)
+        } else if tryHeight > wSize.height {
+          // should have black bar left and right
+          let targetWidth = wSize.height * aspectRatio
+          let xOffset = (wSize.width - targetWidth) / 2
+          videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
+        }
+      } else {
+        videoView.frame = NSRect(x: 0, y: 0, width: w.frame.width, height: w.frame.height)
       }
-      */
-
-      videoView.frame = NSRect(x: 0, y: 0, width: w.frame.width, height: w.frame.height)
 
     } else if (!isInPIP) {
 
@@ -1159,13 +1194,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     window!.makeFirstResponder(window!)
   }
 
+  func windowDidBecomeMain(_ notification: Notification) {
+    PlayerCore.lastActive = playerCore
+    NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
+  }
+
+  func windowDidResignMain(_ notification: Notification) {
+    NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
+  }
+
   // MARK: - Control UI
 
   func hideUIAndCursor() {
     // don't hide UI when dragging control bar
-    if controlBarFloating.isDragging {
-      return
-    }
+    if controlBarFloating.isDragging { return }
     hideUI()
     NSCursor.setHiddenUntilMouseMoves(true)
   }
@@ -1242,8 +1284,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func updateTitle() {
-    window?.representedURL = playerCore.info.currentURL
-    window?.setTitleWithRepresentedFilename(playerCore.info.currentURL?.path ?? "")
+    if playerCore.info.isNetworkResource {
+      let mediaTitle = playerCore.mpvController.getString(MPVProperty.mediaTitle)
+      window?.title = mediaTitle ?? playerCore.info.currentURL?.path ?? ""
+    } else {
+      window?.representedURL = playerCore.info.currentURL
+      window?.setTitleWithRepresentedFilename(playerCore.info.currentURL?.path ?? "")
+    }
   }
 
   func displayOSD(_ message: OSDMessage) {
@@ -1460,16 +1507,32 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   /** Display time label when mouse over slider */
-  private func updateTimeLabel(_ mouseXPos: CGFloat) {
+  private func updateTimeLabel(_ mouseXPos: CGFloat, originalPos: NSPoint) {
     let timeLabelXPos = playSlider.frame.origin.y + 15
-    timePreviewWhenSeek.frame.origin = CGPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2), y: timeLabelXPos + 1)
+    timePreviewWhenSeek.frame.origin = NSPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2),
+                                               y: timeLabelXPos + 1)
     let sliderFrame = playSlider.bounds
+    let sliderFrameInWindow = playSlider.superview!.convert(playSlider.frame.origin, to: nil)
     var percentage = Double((mouseXPos - 3) / (sliderFrame.width - 6))
     if percentage < 0 {
       percentage = 0
     }
+
     if let duration = playerCore.info.videoDuration {
-      timePreviewWhenSeek.stringValue = (duration * percentage).stringRepresentation
+      let previewTime = duration * percentage
+      timePreviewWhenSeek.stringValue = previewTime.stringRepresentation
+
+      if playerCore.info.thumbnailsReady, let tb = playerCore.info.getThumbnail(forSecond: previewTime.second) {
+        thumbnailPeekView.isHidden = false
+        thumbnailPeekView.imageView.image = tb.image
+        let height = round(120 / thumbnailPeekView.imageView.image!.size.aspect)
+        let yPos = (oscPosition == .top || (oscPosition == .floating && sliderFrameInWindow.y + 120 >= window!.frame.height)) ?
+          sliderFrameInWindow.y - 68 : sliderFrameInWindow.y + 32
+        thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
+        thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2), y: yPos)
+      } else {
+        thumbnailPeekView.isHidden = true
+      }
     }
   }
 
@@ -1674,8 +1737,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // animated `setFrame` can be inaccurate!
       w.setFrame(rect, display: true)
 
-      if (!window!.isVisible) {
-        window!.setIsVisible(true)
+      // generate thumbnails after video loaded if it's the first time
+      if !isVideoLoaded {
+        playerCore.generateThumbnails()
+        isVideoLoaded = true
       }
 
       // maybe not a good position, consider putting these at playback-restart

@@ -3,18 +3,32 @@
 //  iina
 //
 //  Created by lhc on 21/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Foundation
 
 class PlaybackInfo {
 
+  var isIdle: Bool = true {
+    didSet {
+      PlayerCore.checkStatusForSleep()
+    }
+  }
   var fileLoading: Bool = false
 
-  var currentURL: URL?
+  var currentURL: URL? {
+    didSet {
+      if let url = currentURL {
+        mpvMd5 = Utility.mpvWatchLaterMd5(url.path)
+      } else {
+        mpvMd5 = nil
+      }
+    }
+  }
   var currentFolder: URL?
   var isNetworkResource: Bool = false
+  var mpvMd5: String?
 
   var videoWidth: Int?
   var videoHeight: Int?
@@ -35,7 +49,11 @@ class PlaybackInfo {
   var videoDuration: VideoTime?
 
   var isSeeking: Bool = false
-  var isPaused: Bool = false
+  var isPaused: Bool = false {
+    didSet {
+      PlayerCore.checkStatusForSleep()
+    }
+  }
 
   var justStartedFile: Bool = false
   var justOpenedFile: Bool = false
@@ -126,7 +144,7 @@ class PlaybackInfo {
       list = subTracks
     }
     if let id = id {
-      return list.filter { $0.id == id }.at(0)
+      return list.first { $0.id == id }
     } else {
       return nil
     }
@@ -138,4 +156,20 @@ class PlaybackInfo {
   var matchedSubs: [String: [URL]] = [:]
   var currentSubsInfo: [FileInfo] = []
   var currentVideosInfo: [FileInfo] = []
+
+  var thumbnailsReady = false
+  var thumbnailsProgress: Double = 0
+  var thumbnails: [FFThumbnail] = []
+
+  func getThumbnail(forSecond sec: Double) -> FFThumbnail? {
+    guard !thumbnails.isEmpty else { return nil }
+    var tb = thumbnails.last!
+    for i in 0..<thumbnails.count {
+      if thumbnails[i].realTime >= sec {
+        tb = thumbnails[(i == 0 ? i : i - 1)]
+        break
+      }
+    }
+    return tb
+  }
 }

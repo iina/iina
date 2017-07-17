@@ -1,3 +1,7 @@
+
+/* Class = "NSMenuItem"; title = "Show open file panel"; ObjectID = "1ce-4b-kgG"; */
+"1ce-4b-kgG.title" = "Показать панель открытых файлов";
+
 /* Class = "NSTextFieldCell"; title = "Theme:"; ObjectID = "2Hu-qC-UMi"; */
 "2Hu-qC-UMi.title" = "Тема:";
 
@@ -34,8 +38,8 @@
 /* Class = "NSButtonCell"; title = "Pause when media is opened"; ObjectID = "FbF-jJ-W5a"; */
 "FbF-jJ-W5a.title" = "Ставить на паузу при открытии файла";
 
-/* Class = "NSButtonCell"; title = "Open a choose file panel after starting"; ObjectID = "IYU-9y-fBL"; */
-"IYU-9y-fBL.title" = "Открывать окно для выбора файла после запуска";
+/* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
+"JfZ-D8-aF2.title" = "Ничего не делать";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Выключить остальные мониторы в полноэкранном режиме";
@@ -45,6 +49,9 @@
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Автоматически воспроизводить следующий файл";
+
+/* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
+"M0z-bI-88d.title" = "Всегда открывать медиа в новом окне";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen when media is opened"; ObjectID = "MlG-hl-goA"; */
 "MlG-hl-goA.title" = "Войти в полноэкранный режим при открытии файла";
@@ -66,6 +73,9 @@
 
 /* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "bPK-Wy-OMI"; */
 "bPK-Wy-OMI.title" = "Умеренно светлая";
+
+/* Class = "NSTextFieldCell"; title = "When launched:"; ObjectID = "gqT-CB-Puw"; */
+"gqT-CB-Puw.title" = "При запуске:";
 
 /* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
 "iGS-qN-f5q.title" = "Включить историю воспроизведения";
@@ -102,3 +112,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
 "uQR-Fx-oEm.title" = "Поведение:";
+
+/* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
+"z9T-8h-1T0.title" = "Показать окно приветствия";

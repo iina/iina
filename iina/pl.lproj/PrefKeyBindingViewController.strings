@@ -8,13 +8,10 @@
 "4Bn-MF-dfY.headerCell.title" = "Akcja";
 
 /* Class = "NSButtonCell"; title = "New..."; ObjectID = "JYL-hr-KZT"; */
-"JYL-hr-KZT.title" = "Nowy...";
+"JYL-hr-KZT.title" = "Nowy…";
 
 /* Class = "NSTableColumn"; headerCell.title = "Key"; ObjectID = "JwC-60-7Hp"; */
 "JwC-60-7Hp.headerCell.title" = "Klucz";
-
-/* Class = "NSTextFieldCell"; title = "All following settings will require restarting IINA to take effect."; ObjectID = "Mxa-CP-JlM"; */
-"Mxa-CP-JlM.title" = "Program IINA musi zostać zrestartowany aby efekt został zastosowany.";
 
 /* Class = "NSButtonCell"; title = "Delete this config file"; ObjectID = "QAL-MQ-b0l"; */
 "QAL-MQ-b0l.title" = "Skasuj ten plik konfiguracyjny";
@@ -35,7 +32,7 @@
 "gDo-JL-a9k.title" = "Pokaż plik konfiguracyjny w Finderze";
 
 /* Class = "NSButtonCell"; title = "Duplicate..."; ObjectID = "gpZ-Rh-DMn"; */
-"gpZ-Rh-DMn.title" = "Duplikuj...";
+"gpZ-Rh-DMn.title" = "Duplikuj…";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "mLe-eI-lIk"; */
 "mLe-eI-lIk.title" = "Box";

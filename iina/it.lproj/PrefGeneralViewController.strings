@@ -27,7 +27,7 @@
 "FbF-jJ-W5a.title" = "Non riprodurre il video quando viene aperto";
 
 /* Class = "NSButtonCell"; title = "Open a choose file panel after starting"; ObjectID = "IYU-9y-fBL"; */
-"IYU-9y-fBL.title" = "Apri pannello apertura file all'avvio";
+/* "IYU-9y-fBL.title" = "Apri pannello apertura file all'avvio"; */
 
 /* Class = "NSMenuItem"; title = "PGM (YV12)"; ObjectID = "Kru-Ho-Wpv"; */
 "Kru-Ho-Wpv.title" = "PGM (YV12)";
@@ -96,4 +96,15 @@
 "Ci8-j2-QS3.title" = "Elenca nel menu \"Apri recenti\" tutti file riprodotti";
 
 "XFC-Lr-LmP.title" = "In caso contrario solo i file aperti manualmente verranno visualizzati in questo menu";
+
+/* Class = "NSButtonCell"; title = "Open a choose file panel after starting"; ObjectID = "IYU-9y-fBL"; */
+"gqT-CB-Puw.title" = "All'avvio:";
+
+"z9T-8h-1T0.title" = "Mostra finestra di benvenuto";
+
+"1ce-4b-kgG.title" = "Mostra pannello apertura file";
+
+"JfZ-D8-aF2.title" = "—";
+
+"M0z-bI-88d.title" = "Apri sempre il file in una nuova finestra";
 

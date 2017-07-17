@@ -28,10 +28,10 @@
 /* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "Bjp-HJ-i7V"; */
 "Bjp-HJ-i7V.title" = "sans-serif";
 
-"Uj3-om-L26.title" = "ISO 639-2의 언어 코드를 쉼표로 구분하여 사용하십시오. 이 설정은 mpv와 opensubtitles 모두에 적용됩니다.";
+"Uj3-om-L26.title" = "ISO 639-2의 언어 코드를 쉼표로 구분하여 사용하십시오. 이 설정은 mpv와 OpenSubtitles 모두에 적용됩니다.";
 
-/* Class = "NSTextFieldCell"; title = "Opensubtitles account:"; ObjectID = "CKG-r9-NoN"; */
-"CKG-r9-NoN.title" = "Opensubtitles 계정:";
+/* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "CKG-r9-NoN"; */
+"CKG-r9-NoN.title" = "OpenSubtitles 계정:";
 
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "Chj-YP-eFV"; */
 "Chj-YP-eFV.title" = "선호 언어:";
@@ -169,3 +169,5 @@
 "VZs-zv-0oM.title" = "아래의 디렉토리에서도 자막을 찾습니다:";
 
 "NHu-6z-rEm.title" = "디렉토리를 콜론(:)으로 구분하십시오. 상대경로와 경로문자열의 끝에 와일드카드(*)를 사용할 수 있습니다.";
+
+"jLe-gY-UdB.title" = "기본 인코딩:";

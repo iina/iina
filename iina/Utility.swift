@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 8/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -14,10 +14,11 @@ class Utility {
   static let tabTitleActiveFontAttributes = FontAttributes(font: .systemBold, size: .system, align: .center).value
 
   static let supportedFileExt: [MPVTrack.TrackType: [String]] = [
-    .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt"],
-    .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "m4a", "ac3", "opus", "wav", "wv"],
+    .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "mts", "m2ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt"],
+    .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "oga", "mogg", "m4a", "ac3", "opus", "wav", "wv", "aiff", "ape", "tta", "tak"],
     .sub: ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc"]
   ]
+  static let playableFileExt = supportedFileExt[.video]! + supportedFileExt[.audio]!
 
   // MARK: - Logs, alerts
 
@@ -288,8 +289,8 @@ class Utility {
     showAlert("set_default.success", arguments: [successCount, failedCount], style: .informational)
   }
 
-  private static func createDirIfNotExist(url: URL) {
-  let path = url.path
+  static func createDirIfNotExist(url: URL) {
+    let path = url.path
     // check exist
     if !FileManager.default.fileExists(atPath: path) {
       do {
@@ -298,6 +299,12 @@ class Utility {
         Utility.fatal("Cannot create folder in Application Support directory")
       }
     }
+  }
+
+  static private let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
+
+  static func mediaType(forExtension ext: String) -> MPVTrack.TrackType? {
+    return allTypes.first { supportedFileExt[$0]!.contains(ext.lowercased()) }
   }
 
   static func getFilePath(Configs userConfigs: [String: Any]!, forConfig conf: String, showAlert: Bool = true) -> String? {
@@ -339,6 +346,12 @@ class Utility {
 
   static let watchLaterURL: URL = {
     let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.watchLaterFolder, isDirectory: true)
+    createDirIfNotExist(url: url)
+    return url
+  }()
+
+  static let thumbnailCacheURL: URL = {
+    let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)
     createDirIfNotExist(url: url)
     return url
   }()
@@ -403,6 +416,16 @@ class Utility {
     // char
     keyString += keyChar
     return keyString
+  }
+
+  /// See `mp_get_playback_resume_config_filename` in mpv/configfiles.c
+  static func mpvWatchLaterMd5(_ filename: String) -> String {
+    // mp_is_url
+    // if(!Regex.mpvURL.matches(filename)) {
+      // ignore_path_in_watch_later_config
+    // }
+    // handle dvd:// and bd://
+    return filename.md5
   }
 
   // MARK: - Util classes

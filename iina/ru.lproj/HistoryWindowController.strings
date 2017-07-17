@@ -53,8 +53,14 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "lyw-91-dHG"; */
 "lyw-91-dHG.title" = "Text Cell";
 
+/* Class = "NSMenuItem"; title = "Play in New Window"; ObjectID = "mXt-wb-fgT"; */
+"mXt-wb-fgT.title" = "Воспроизвести в новом окне";
+
 /* Class = "NSMenuItem"; title = "No Recent Searches"; ObjectID = "ndC-eb-4GZ"; */
 "ndC-eb-4GZ.title" = "Нет недавних поисковых запросов";
+
+/* Class = "NSMenuItem"; title = "Play"; ObjectID = "oMR-4K-aR2"; */
+"oMR-4K-aR2.title" = "Воспроизвести";
 
 /* Class = "NSMenuItem"; title = "Item"; ObjectID = "tmr-oC-rNa"; */
 "tmr-oC-rNa.title" = "Пункт";

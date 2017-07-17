@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 2/9/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa

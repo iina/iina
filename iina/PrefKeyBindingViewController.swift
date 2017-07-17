@@ -267,7 +267,6 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
       try FileManager.default.removeItem(atPath: currentConfFilePath)
     } catch {
       Utility.showAlert("error_deleting_file")
-      return
     }
     userConfigs.removeValue(forKey: currentConfName)
     UserDefaults.standard.set(userConfigs, forKey: Preference.Key.inputConfigs)

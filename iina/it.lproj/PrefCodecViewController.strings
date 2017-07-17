@@ -18,7 +18,7 @@
 "Le8-wj-Pei.title" = "DTS";
 
 /* Class = "NSButtonCell"; title = "Use hardware decoding"; ObjectID = "WYE-SB-Ywe"; */
-"WYE-SB-Ywe.title" = "Usa decoding hardware ";
+/* "WYE-SB-Ywe.title" = "Usa decodifica hardware ";*/
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "Default: 0 (Auto)";
@@ -40,3 +40,8 @@
 
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "wjt-O6-KbC"; */
 "wjt-O6-KbC.title" = "Lingua preferita:";
+
+"nwg-2K-G2G.title" = "Decodifica hardware:";
+"rFu-rL-EJC.title" = "Disabilitata";
+"tAQ-oU-1AJ.title" = "Auto";
+"0DK-uZ-duj.title" = "Auto (Copy)";

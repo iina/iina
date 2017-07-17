@@ -1526,8 +1526,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         thumbnailPeekView.isHidden = false
         thumbnailPeekView.imageView.image = tb.image
         let height = round(120 / thumbnailPeekView.imageView.image!.size.aspect)
-        let yPos = (oscPosition == .top || (oscPosition == .floating && sliderFrameInWindow.y + 120 >= window!.frame.height)) ?
-          sliderFrameInWindow.y - 68 : sliderFrameInWindow.y + 32
+        let yPos = (oscPosition == .top || (oscPosition == .floating && sliderFrameInWindow.y + 52 + height >= window!.frame.height)) ?
+          sliderFrameInWindow.y - height : sliderFrameInWindow.y + 32
         thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
         thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2), y: yPos)
       } else {

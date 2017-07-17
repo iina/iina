@@ -1237,7 +1237,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fadeableViews.forEach { (v) in
       v.isHidden = false
     }
-    standardWindowButtons.forEach { $0.isEnabled = false }
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = UIAnimationDuration
       fadeableViews.forEach { (v) in

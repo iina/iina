@@ -378,6 +378,32 @@
 		6CA50ABD1EBD165C0060D07A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefNetworkViewController.strings; sourceTree = "<group>"; };
 		6CA50ABE1EBD18320060D07A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		6CA50AC01EBD1B190060D07A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/SubSelectWindowController.strings; sourceTree = "<group>"; };
+		6DC77D2D1F1439A600E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		6DC77D2E1F1439A600E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		6DC77D2F1F1439A600E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
+		6DC77D301F1439A600E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/PlaylistViewController.strings; sourceTree = "<group>"; };
+		6DC77D311F1439A600E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/CropSettingsViewController.strings; sourceTree = "<group>"; };
+		6DC77D321F1439A600E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InspectorWindowController.strings; sourceTree = "<group>"; };
+		6DC77D331F1439A600E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/FilterWindowController.strings; sourceTree = "<group>"; };
+		6DC77D341F1439A600E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/AboutWindowController.strings; sourceTree = "<group>"; };
+		6DC77D351F1439A600E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/OpenURLAccessoryViewController.strings; sourceTree = "<group>"; };
+		6DC77D361F1439A600E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
+		6DC77D371F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
+		6DC77D381F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
+		6DC77D391F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/PrefGeneralViewController.strings; sourceTree = "<group>"; };
+		6DC77D3A1F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/PrefUIViewController.strings; sourceTree = "<group>"; };
+		6DC77D3B1F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/PrefControlViewController.strings; sourceTree = "<group>"; };
+		6DC77D3C1F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/PrefKeyBindingViewController.strings; sourceTree = "<group>"; };
+		6DC77D3D1F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
+		6DC77D3E1F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/PrefAdvancedViewController.strings; sourceTree = "<group>"; };
+		6DC77D3F1F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/PrefCodecViewController.strings; sourceTree = "<group>"; };
+		6DC77D401F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/PrefSubViewController.strings; sourceTree = "<group>"; };
+		6DC77D411F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/PrefNetworkViewController.strings; sourceTree = "<group>"; };
+		6DC77D421F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/SubSelectWindowController.strings; sourceTree = "<group>"; };
+		6DC77D431F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6DC77D441F1439A800E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6DC77D451F1439A800E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = uk; path = uk.lproj/Contribution.rtf; sourceTree = "<group>"; };
+		6DC77D461F1439A800E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		72CAEE6D1E229EAE00B8C894 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefGeneralViewController.strings"; sourceTree = "<group>"; };
 		8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		8400D5C71E1AB2F1006785F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
@@ -430,6 +456,7 @@
 		843B97AA1E82D3C100D07261 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		843FFD4C1D5DAA01001F3A44 /* RoundedTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RoundedTextFieldCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		844DE1BE1D3E2B9900272589 /* MPVEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MPVEvent.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		844E2FD21F1C7C6000CB1170 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
 		8450403B1E0A9EE20079C194 /* InspectorWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorWindowController.swift; sourceTree = "<group>"; };
 		8450403F1E0ACADD0079C194 /* MPVNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVNode.swift; sourceTree = "<group>"; };
 		845040451E0B0F500079C194 /* CropSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropSettingsViewController.swift; sourceTree = "<group>"; };
@@ -665,6 +692,13 @@
 		84BC78C21EEECBE30068BF17 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		84BEEC3D1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefKeyBindingViewController.swift; sourceTree = "<group>"; };
 		84BEEC411DFEE46200F945CA /* StreamReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReader.swift; sourceTree = "<group>"; };
+		84BF6F5C1F1B8A9700D45798 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/OpenURLAccessoryViewController.strings; sourceTree = "<group>"; };
+		84BF6F5D1F1B8A9700D45798 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
+		84BF6F5E1F1B8A9800D45798 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
+		84BF6F601F1BB2CD00D45798 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InitialWindowController.strings"; sourceTree = "<group>"; };
+		84BF6F621F1BB3E900D45798 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
+		84BF6F661F1BB3ED00D45798 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
+		84BF6F671F1BB3F300D45798 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		84C3AB8A1E7BF22300FEFB7A /* MPVCommandFormat.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = MPVCommandFormat.strings; sourceTree = "<group>"; };
 		84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabelOverflowedView.swift; sourceTree = "<group>"; };
 		84C6D3611EAF8D63009BF721 /* HistoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
@@ -702,6 +736,8 @@
 		84FF84701D2FF698001B318A /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
 		84FF84711D2FF698001B318A /* opengl_cb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl_cb.h; sourceTree = "<group>"; };
 		867483705008F086E07B0A6B /* Pods_iina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F6F50541EC5E053002B47B4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
+		8F825CBD1F16280A0094B529 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationDisplayTextField.swift; sourceTree = "<group>"; };
 		9E63CAB61E3F7D0E00EA66C9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.debug.xcconfig"; sourceTree = "<group>"; };
@@ -782,6 +818,7 @@
 		D27E35E01E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D2B411421E5336AD002819E1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
 		D2B411431E5336AE002819E1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		E53BAB3F1F1692B700D2609F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		E53CCBA31EB7711200DFF4E1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/OpenURLAccessoryViewController.strings; sourceTree = "<group>"; };
 		E53CCBA51EB7717500DFF4E1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/SubSelectWindowController.strings; sourceTree = "<group>"; };
 		E5436AA61E844761005BEB5C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = fr; path = fr.lproj/Contribution.rtf; sourceTree = "<group>"; };
@@ -1408,6 +1445,7 @@
 				ja,
 				ru,
 				tr,
+				uk,
 				es,
 			);
 			mainGroup = 84EB1ECD1D2F51D3004FA5A1;
@@ -1630,6 +1668,7 @@
 				440DDE361E9010420063E211 /* ru */,
 				23C277B91EC33E8900227C3A /* tr */,
 				6CA50A9D1EBBC1300060D07A /* de */,
+				6DC77D2E1F1439A600E96176 /* uk */,
 				649AD3121F11B06D00244738 /* es */,
 			);
 			name = MainWindowController.xib;
@@ -1649,6 +1688,7 @@
 				440DDE371E9010420063E211 /* ru */,
 				23C277BA1EC33E8900227C3A /* tr */,
 				6CA50A991EBBB85A0060D07A /* de */,
+				6DC77D2F1F1439A600E96176 /* uk */,
 				649AD3131F11B06D00244738 /* es */,
 			);
 			name = QuickSettingViewController.xib;
@@ -1668,6 +1708,7 @@
 				440DDE381E9010420063E211 /* ru */,
 				23C277BB1EC33E8900227C3A /* tr */,
 				6CA50A971EBBB7CD0060D07A /* de */,
+				6DC77D301F1439A600E96176 /* uk */,
 				649AD3141F11B06D00244738 /* es */,
 			);
 			name = PlaylistViewController.xib;
@@ -1687,6 +1728,7 @@
 				440DDE391E9010420063E211 /* ru */,
 				23C277BC1EC33E8900227C3A /* tr */,
 				6CA50A9F1EBBC2910060D07A /* de */,
+				6DC77D311F1439A600E96176 /* uk */,
 				649AD3151F11B06E00244738 /* es */,
 			);
 			name = CropSettingsViewController.xib;
@@ -1706,6 +1748,7 @@
 				B3A6ED0B1EBBC9ED00BE4956 /* it */,
 				23C277BD1EC33E8900227C3A /* tr */,
 				6CA50AA31EBBC3860060D07A /* de */,
+				6DC77D321F1439A600E96176 /* uk */,
 				649AD3161F11B06E00244738 /* es */,
 			);
 			name = InspectorWindowController.xib;
@@ -1725,6 +1768,7 @@
 				440DDE3B1E9010420063E211 /* ru */,
 				23C277BE1EC33E8900227C3A /* tr */,
 				6CA50AA51EBBC5E50060D07A /* de */,
+				6DC77D331F1439A600E96176 /* uk */,
 				649AD3171F11B06E00244738 /* es */,
 			);
 			name = FilterWindowController.xib;
@@ -1744,6 +1788,7 @@
 				440DDE3C1E9010420063E211 /* ru */,
 				23C277BF1EC33E8900227C3A /* tr */,
 				6CA50A951EBBB6B30060D07A /* de */,
+				6DC77D341F1439A600E96176 /* uk */,
 				649AD3181F11B06E00244738 /* es */,
 			);
 			name = AboutWindowController.xib;
@@ -1763,6 +1808,7 @@
 				440DDE3E1E9010430063E211 /* ru */,
 				23C277C11EC33E8900227C3A /* tr */,
 				6CA50AAB1EBBC9FD0060D07A /* de */,
+				6DC77D381F1439A700E96176 /* uk */,
 				649AD31C1F11B06E00244738 /* es */,
 			);
 			name = FontPickerWindowController.xib;
@@ -1782,6 +1828,7 @@
 				440DDE3F1E9010430063E211 /* ru */,
 				23C277C21EC33E8900227C3A /* tr */,
 				6CA50AAD1EBBCB070060D07A /* de */,
+				6DC77D391F1439A700E96176 /* uk */,
 				649AD31D1F11B06E00244738 /* es */,
 			);
 			name = PrefGeneralViewController.xib;
@@ -1801,6 +1848,7 @@
 				1334001C1EB3831E007FE17E /* ja */,
 				440DDE401E9010430063E211 /* ru */,
 				23C277C31EC33E8900227C3A /* tr */,
+				6DC77D3A1F1439A700E96176 /* uk */,
 				649AD31E1F11B06E00244738 /* es */,
 			);
 			name = PrefUIViewController.xib;
@@ -1820,6 +1868,7 @@
 				B3A6ED0F1EBBD51F00BE4956 /* it */,
 				23C277C41EC33E8A00227C3A /* tr */,
 				6CA50AAF1EBD0C100060D07A /* de */,
+				6DC77D3B1F1439A700E96176 /* uk */,
 				649AD31F1F11B06E00244738 /* es */,
 			);
 			name = PrefControlViewController.xib;
@@ -1839,6 +1888,7 @@
 				440DDE421E9010430063E211 /* ru */,
 				23C277C51EC33E8A00227C3A /* tr */,
 				6CA50AB11EBD0F990060D07A /* de */,
+				6DC77D3C1F1439A700E96176 /* uk */,
 				649AD3201F11B06E00244738 /* es */,
 			);
 			name = PrefKeyBindingViewController.xib;
@@ -1858,6 +1908,7 @@
 				440DDE431E9010430063E211 /* ru */,
 				23C277C61EC33E8A00227C3A /* tr */,
 				6CA50AB71EBD11610060D07A /* de */,
+				6DC77D3D1F1439A700E96176 /* uk */,
 				649AD3211F11B06E00244738 /* es */,
 			);
 			name = KeyRecordViewController.xib;
@@ -1877,6 +1928,7 @@
 				440DDE441E9010430063E211 /* ru */,
 				23C277C71EC33E8A00227C3A /* tr */,
 				6CA50AB51EBD10E90060D07A /* de */,
+				6DC77D3E1F1439A700E96176 /* uk */,
 				649AD3221F11B06E00244738 /* es */,
 			);
 			name = PrefAdvancedViewController.xib;
@@ -1896,6 +1948,7 @@
 				440DDE451E9010430063E211 /* ru */,
 				23C277C81EC33E8A00227C3A /* tr */,
 				6CA50AB91EBD11B40060D07A /* de */,
+				6DC77D3F1F1439A700E96176 /* uk */,
 				649AD3231F11B06E00244738 /* es */,
 			);
 			name = PrefCodecViewController.xib;
@@ -1915,6 +1968,7 @@
 				440DDE461E9010430063E211 /* ru */,
 				23C277C91EC33E8A00227C3A /* tr */,
 				6CA50ABB1EBD126B0060D07A /* de */,
+				6DC77D401F1439A700E96176 /* uk */,
 				649AD3241F11B06E00244738 /* es */,
 			);
 			name = PrefSubViewController.xib;
@@ -1934,6 +1988,7 @@
 				440DDE471E9010430063E211 /* ru */,
 				23C277CA1EC33E8A00227C3A /* tr */,
 				6CA50ABD1EBD165C0060D07A /* de */,
+				6DC77D411F1439A700E96176 /* uk */,
 				649AD3251F11B06E00244738 /* es */,
 			);
 			name = PrefNetworkViewController.xib;
@@ -1953,6 +2008,7 @@
 				440DDE4A1E9010430063E211 /* ru */,
 				23C277CD1EC33E8A00227C3A /* tr */,
 				6CA50A931EBBA9DF0060D07A /* de */,
+				6DC77D441F1439A800E96176 /* uk */,
 				649AD3281F11B06F00244738 /* es */,
 			);
 			name = Localizable.strings;
@@ -1963,9 +2019,17 @@
 			children = (
 				849581F41F03D55A00D3B359 /* Base */,
 				849581F71F03D55C00D3B359 /* zh-Hans */,
+				6DC77D371F1439A700E96176 /* uk */,
 				C7DBA5EB1F07C5FD00C2B416 /* ko */,
 				649AD31B1F11B06E00244738 /* es */,
+				8F825CBD1F16280A0094B529 /* de */,
 				B3066F5F1F161538004D7559 /* it */,
+				E53BAB3F1F1692B700D2609F /* fr */,
+				84BF6F601F1BB2CD00D45798 /* zh-Hant */,
+				84BF6F621F1BB3E900D45798 /* ja */,
+				84BF6F661F1BB3ED00D45798 /* tr */,
+				84BF6F671F1BB3F300D45798 /* ru */,
+				84BF6F5E1F1B8A9800D45798 /* pl */,
 			);
 			name = InitialWindowController.xib;
 			sourceTree = "<group>";
@@ -1979,8 +2043,12 @@
 				B3B163411EC9A1AC000ED121 /* it */,
 				D27556FC1EC6E1C300CAB2A4 /* zh-Hant */,
 				C7DC79CE1EC63821002DE23B /* ko */,
+				8F6F50541EC5E053002B47B4 /* de */,
 				E568075F1EF975C0005A3ADD /* fr */,
+				6DC77D361F1439A600E96176 /* uk */,
 				649AD31A1F11B06E00244738 /* es */,
+				84BF6F5D1F1B8A9700D45798 /* pl */,
+				844E2FD21F1C7C6000CB1170 /* ru */,
 			);
 			name = HistoryWindowController.xib;
 			sourceTree = "<group>";
@@ -1999,6 +2067,7 @@
 				440DDE351E9010420063E211 /* ru */,
 				23C277B81EC33E8900227C3A /* tr */,
 				6CA50A9B1EBBBA830060D07A /* de */,
+				6DC77D2D1F1439A600E96176 /* uk */,
 				649AD3111F11B06D00244738 /* es */,
 			);
 			name = MainMenu.xib;
@@ -2017,7 +2086,9 @@
 				B3A6ED0D1EBBCE0700BE4956 /* it */,
 				23C277C01EC33E8900227C3A /* tr */,
 				6CA50AA71EBBC64B0060D07A /* de */,
+				6DC77D351F1439A600E96176 /* uk */,
 				649AD3191F11B06E00244738 /* es */,
+				84BF6F5C1F1B8A9700D45798 /* pl */,
 			);
 			name = OpenURLAccessoryViewController.xib;
 			sourceTree = "<group>";
@@ -2035,6 +2106,7 @@
 				440DDE4B1E9010440063E211 /* ru */,
 				23C277CE1EC33E8A00227C3A /* tr */,
 				6CA50AA91EBBC7EA0060D07A /* de */,
+				6DC77D451F1439A800E96176 /* uk */,
 				649AD3291F11B06F00244738 /* es */,
 			);
 			name = Contribution.rtf;
@@ -2054,6 +2126,7 @@
 				440DDE4C1E9010440063E211 /* ru */,
 				23C277CF1EC33E8A00227C3A /* tr */,
 				6CA50ABE1EBD18320060D07A /* de */,
+				6DC77D461F1439A800E96176 /* uk */,
 				649AD32A1F11B06F00244738 /* es */,
 			);
 			name = KeyBinding.strings;
@@ -2073,6 +2146,7 @@
 				440DDE481E9010430063E211 /* ru */,
 				23C277CB1EC33E8A00227C3A /* tr */,
 				6CA50AC01EBD1B190060D07A /* de */,
+				6DC77D421F1439A700E96176 /* uk */,
 				649AD3261F11B06E00244738 /* es */,
 			);
 			name = SubSelectWindowController.xib;
@@ -2092,6 +2166,7 @@
 				23C277CC1EC33E8A00227C3A /* tr */,
 				6CA50AA81EBBC7610060D07A /* de */,
 				E56807601EF97766005A3ADD /* fr */,
+				6DC77D431F1439A700E96176 /* uk */,
 				649AD3271F11B06E00244738 /* es */,
 			);
 			name = InfoPlist.strings;

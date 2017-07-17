@@ -1,40 +1,62 @@
-// FIXME: ! Not translated
-"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
-"alert.mpv_error" = "Error %@ (%@) when setting user option %@.";
-"alert.sleep" = "Cannot prevent display sleep!";
+/* No comment provided by engineer. */
+"alert." = "Brak komentarza dostarczonego przez inżyniera.";
 
-"alert.unsupported_audio" = "Unsupported external audio file.";
-"alert.unsupported_sub" = "Unsupported external subtitle.";
-"alert.unsupported_url" = "Unsupported URL.";
-"alert.wrong_url_format" = "Wrong URL format.";
+/* Choose Media File */
+"alert.choose_media_file.title" = "Wybierz plik multimedialny";
 
-"alert.error_open" = "Cannot open file or stream!";
-"alert.error_finding_file" = "Cannot find %@ file!";
-"alert.error_loading_script" = "Cannot load script %@!";
-"alert.error_saving_file" = "Error occured when saving %@: %@";
-"alert.error_deleting_file" = "Cannot delete the file.";
+/* Abort */
+"alert.filter_hwdec.abort" = "Przerwij";
 
-"alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "The name already exists.";
-"alert.config.cannot_create" = "Cannot create config file!";
-"alert.config.cannot_write" = "Cannot write to config file!";
+/* No comment provided by engineer. */
+"alert.filter_hwdec.message" = "Brak komentarza dostarczonego przez inżyniera.";
 
-"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+/* Turn off hardware decoding */
+"alert.filter_hwdec.turn_off" = "Wyłącz dekodowanie sprzętu";
 
-"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+/* Switch to Auto(Copy) */
+"alert.filter_hwdec.use_copy" = "Przełącz na automatyczne (Kopiowanie)";
 
-"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
-"alert.extra_option.empty" = "Key or value cannot be empty!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
-"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+/* Please enter the URL: */
+"alert.open_url.message" = "Wprowadź adres URL:";
 
-"alert.playlist.error_deleting" = "Error deleting: %@";
+/* Open URL */
+"alert.open_url.title" = "Otwórz URL";
 
-"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using OpenSubtitles. English(eng) will be used this time.";
-"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
-"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+/* Error */
+"alert.title_error" = "Błąd";
 
+/* Information */
+"alert.title_info" = "Informacja";
+
+/* Warning */
+"alert.title_warning" = "Ostrzeżenie";
+
+/* Audio Filters */
+"filter.audio_filters" = "Filtry Audio";
+
+/* Video Filters */
+"filter.video_filters" = "Filtry Wideo";
+
+/* Cancel */
+"general.cancel" = "Anuluj";
+
+/* Off */
+"general.off" = "Wyłącz";
+
+/* OK */
+"general.ok" = "Ok";
+
+/* On */
+"general.on" = "Włącz";
+
+/* Password */
+"general.password" = "Hasło";
+
+/* Username */
+"general.username" = "Nazwa użytkownika";
+
+/* No comment provided by engineer. */
+"hwdec." = "Brak komentarza dostarczonego przez inżyniera.";
 
 /* Press any key to record. */
 "keymapping.message" = "Naciśnij dowolny klawisz aby zapisać.";
@@ -42,11 +64,11 @@
 /* Key Mapping */
 "keymapping.title" = "Mapowanie Klawiszy";
 
-/* Buffering… %s%% */
-"main.buffering_indicator" = "Buforowanie… %s%%";
+/* Buffering... %d%% */
+"main.buffering_indicator" = "Buforowanie… %d%%";
 
 /* Audio Delay: */
-"menu.audio_delay" = "Opóźnienie dźwięku:";
+"menu.audio_delay" = "Opóźnienie dźwięku: %.2fs";
 
 /* Exit Fullscreen */
 "menu.exit_fullscreen" = "Wyjdź z trybu pełnoekranowego";
@@ -67,16 +89,10 @@
 "menu.resume" = "Wznów";
 
 /* Subtitle Delay: */
-"menu.sub_delay" = "Opóźnienie napisów:";
+"menu.sub_delay" = "Opóźnienie napisów: %.2fs";
 
 /* Volume: */
-"menu.volume" = "Głośność:";
-
-/* Off */
-"general.off" = "Wyłącz";
-
-/* On */
-"general.on" = "Włącz";
+"menu.volume" = "Głośność: %d";
 
 /* AB-Loop: A */
 "osd.abloop.a" = "Pętla-AB: A";
@@ -123,7 +139,7 @@
 /* Error reading file */
 "osd.file_error" = "Błąd przy odczytywaniu pliku";
 
-/* Finding online subtitles… */
+/* Finding online subtitles... */
 "osd.find_online_sub" = "Znajdowanie napisów online…";
 
 /* Mute */
@@ -162,7 +178,7 @@
 /* Subtitle downloaded */
 "osd.sub_downloaded" = "Napisy pobrane!";
 
-/* %d subtitle(s) found. Downloading… */
+/* %d subtitle(s) found. Downloading... */
 "osd.sub_found" = "%d napisy zostały znalezione. Pobieram…";
 
 /* No subtitle found. */
@@ -201,8 +217,17 @@
 /* Add Item */
 "pl_menu.add_item" = "Dodaj plik";
 
+/* Add Subtitle… */
+"pl_menu.add_sub" = "Dodaj Napisy...";
+
 /* Clear Playlist */
 "pl_menu.clear_playlist" = "Wyczyść Playlistę";
+
+/* Matched %d Subtitle(s) */
+"pl_menu.matched_sub" = "Dopasowane %d Napisy";
+
+/* Play in New Window */
+"pl_menu.play_in_new_window" = "Odtwarzaj w nowym oknie";
 
 /* Play Next */
 "pl_menu.play_next" = "Odtwórz następny";
@@ -212,6 +237,9 @@
 
 /* %d Items */
 "pl_menu.title_multi" = "%d Pliki";
+
+/* Wrong Subtitle */
+"pl_menu.wrong_sub" = "Nieodpowiednie Napisy";
 
 /* CHAPTERS */
 "playlist.chapter_cap" = "ROZDZIAŁY";
@@ -230,11 +258,12 @@
 
 /* General */
 "preference.general" = "Ogólne";
+
 /* Keybindings */
 "preference.keybindings" = "Skróty klawiszowe";
 
 /* Logged in as */
-"preference.logged_in_as" = "Zalogowano jako";
+"preference.logged_in_as" = "Zalogowano jako %@";
 
 /* Network */
 "preference.network" = "Sieć";
@@ -251,5 +280,112 @@
 /* UI */
 "preference.ui" = "UI";
 
+/* Default */
+"quicksetting.item_default" = "Domyślne";
+
+/* None */
+"quicksetting.item_none" = "Brak";
+
+/* 15sec Ahead */
+"touchbar.ahead_15" = "15 sek. do przodu";
+
+/* 30sec Ahead */
+"touchbar.ahead_30" = "30 sek. do przodu";
+
+/* -15sec Ahead */
+"touchbar.back_15" = "-15 sek. do tyłu";
+
+/* -30sec Ahead */
+"touchbar.back_30" = "-30 sek. do tyłu";
+
+/* Volume - */
+"touchbar.decrease_volume" = "Głośność -";
+
+/* Fast Forward */
+"touchbar.fast_forward" = "Szybkie przewijanie do przodu";
+
+/* Volume + */
+"touchbar.increase_volume" = "Głośność +";
+
+/* Next Video */
+"touchbar.next_video" = "Następne wideo";
+
+/* Play / Pause */
+"touchbar.play_pause" = "Odtwarzanie / Pauza";
+
+/* Previous Video */
+"touchbar.prev_video" = "Poprzednie wideo";
+
+/* Rewind */
+"touchbar.rewind" = "Przewijanie do tyłu";
+
+/* Seek */
+"touchbar.seek" = "Szukaj";
+
+/* Time Position */
+"touchbar.time" = "Pozycja czasowa";
+
 /* <None> */
 "track.none" = "Brak ścieżki";
+
+"alert.config.duplicate.message" = "Proszę wprowadzić nazwę duplikatu pliku konfiguracyjnego.";
+"alert.set_default.title" = "Ustaw IINA jako domyślą aplikację";
+"alert.config.cannot_write" = "Nie można zapisać do pliku konfiguracyjnego!";
+"alert.sub.no_selected" = "Proszę wybrać pobrane napisy.";
+"alert.error_loading_script" = "Nie można załadować skryptu %@!";
+"pl_menu.delete" = "Przenieś do kosza";
+"alert.clear_cache.message" = "Jesteś pewien, że chcesz wyczyścić pamięć miniaturek?";
+"alert.config.file_existing.title" = "Plik już istnieje";
+"alert.config.name_existing" = "Ta nazwa już istnieje.";
+"alert.extra_option.error" = "Błędu ustawienia opcji --%@=%@ z wartością zwrotu %d. Sprawdź ustawienia dodatkowych opcji w Preferencjach > Zaawansowane.";
+"alert.sub_lang_not_set" = "Przed użyciem OpenSubtitles ustaw preferowany język napisów w preferencjach. Tym razem zostanie użyty angielski.";
+"alert.config.empty_name" = "Nazwa nie może pozostać pusta.";
+"alert.error_deleting_file" = "Nie można usunąć pliku.";
+"alert.extra_option.cannot_read" = "Nie można odczytać zdefiniowanych przez użytkownika dodatkowych opcji mpv.";
+"alert.config.new.title" = "Nowa konfiguracja wejściowa";
+"alert.config.file_existing.message" = "To nie powinno się zdarzyć. Wybierz OK, aby zastąpić lub Anuluj, aby odsłonić plik w Finder.";
+"pl_menu.delete_after_play" = "Przenieś do kosza po zakończeniu odtwarzania";
+"alert.add_filter.message" = "Wpisz ciąg filtru w formacie vf lub af polecenia MPV.";
+"hwdec.no" = "Wyłącz dekodowanie sprzętu.";
+"alert.extra_option.config_folder" = "Błąd podczas ustawiania katalogu konfiguracyjnego \"%@\".";
+"alert.sleep" = "Nie można zapobiec wygaszeniu ekranu!";
+"alert.clear_cache.success" = "Pamięć podręczna wyczyszczona";
+"alert.error_finding_file" = "Nie można odnaleźć %@ pliku!";
+"alert.playlist.error_deleting" = "Błąd podczas usuwania: %@";
+"alert.add_watch.message" = "Wprowadź prawidłową nazwę właściwości MPV.";
+"hwdec.auto-copy" = "Włącz dekodowanie sprzętu. Zużyje to podwójną ilość pamięci, ale również zadziała z filtrami wideo.";
+"alert.error_open" = "Nie można otworzyć pliku lub strumienia!";
+"alert.unsupported_url" = "Niewspierane URL.";
+"alert.add_filter.title" = "Nowy filtr";
+"alert.error_saving_file" = "Podczas zapisywania wystąpił błąd %@: %@";
+"alert.set_default.success" = "Zakończono z %d sukcesem oraz %d porażką.";
+"alert.mpv_error" = "Błąd wewnętrzny %@ (%@) podczas ustawiania opcji %@.";
+"general.logout" = "Wyloguj";
+"alert.fatal_error" = "Błąd krytyczny: %@\n Aplikacja zostanie zamknięta.";
+"alert.unsupported_audio" = "Niewspierany zewnętrzny plik audio.";
+"preference.scripts" = "Skrypty";
+"hwdec.auto" = "Włącz dekodowanie sprzętu. Większość filtrów wideo nie zadziała prawidłowo.";
+"alert.delete_history.message" = "Czy na pewno usunąć wybrane wpisy?";
+"alert.opensub.login.title" = "Logowanie do OpenSubtitles";
+"pl_menu.remove" = "Usuń";
+"pl_menu.delete_after_play_multi" = "Przenieś wybrane pliki do kosza po odtwarzaniu";
+"alert.config.duplicate.title" = "Duplikowanie konfiguracji";
+"alert.set_default.message" = "IINA zostanie ustawiona jako domyślna aplikacja dla wszystkich obsługiwanych typów plików.";
+"pl_menu.delete_multi" = "Przenieś wybrane pliki do kosza";
+"alert.unsupported_sub" = "Niewspierane zewnętrzne napisy.";
+"alert.opensub.login.message" = "Wprowadź swoją nazwę użytkownika i hasło";
+"alert.sub.cannot_login" = "Nie możesz się zalogować. Sprawdź swoją nazwę użytkownika, hasło i stan sieci.\n\n%@";
+"alert.filter.incorrect" = "Podczas ustawiania filtrów wystąpił błąd. Proszę sprawdzić format parametru.";
+"pl_menu.remove_multi" = "Usuń zaznaczone";
+"alert.config.cannot_create" = "Nie można utworzyć pliku konfiguracyjnego!";
+"alert.add_watch.title" = "Dodaj obiekt do obejrzenia";
+"alert.wrong_url_format" = "Nieprawidłowy format adresu URL.";
+"general.login" = "Zaloguj się";
+"alert.jump_to.title" = "Przeskocz do";
+"alert.extra_option.empty" = "Klucz lub wartość nie może być pusta!";
+"alert.jump_to.message" = "Wprowadź czas, na który chcesz przeskoczyć. Przykład: 20:35";
+"alert.sub.cannot_save_passwd" = "Nie można zapisać hasła do Keychain: %@";
+"alert.delete_history.title" = "Usuń historię odtwarzania";
+"alert.clear_cache.title" = "Wyczyść pamięć podręczną miniatur";
+"alert.config.new.message" = "Wprowadź nazwę nowej konfiguracji.";
+"alert.keybinding_config.error" = "Wystąpił błąd podczas przetwarzania pliku konfiguracji klucza \"%@\"! Przekazane do IINA. Domyślne ustawienie blokady klawiszy. Proszę sprawdzić konfigurację.";

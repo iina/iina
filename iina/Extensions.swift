@@ -371,3 +371,19 @@ extension CharacterSet {
 extension NSMenuItem {
   static let dummy = NSMenuItem(title: "Dummy", action: nil, keyEquivalent: "")
 }
+
+extension NSTableView {
+  func selectedIndexesForMenu() -> IndexSet {
+    let clickedRow = self.clickedRow
+    let selectedRowIndexes = self.selectedRowIndexes
+    if clickedRow != -1 {
+      if selectedRowIndexes.contains(clickedRow) {
+        return selectedRowIndexes
+      } else {
+        return IndexSet(integer: clickedRow)
+      }
+    } else {
+      return selectedRowIndexes
+    }
+  }
+}

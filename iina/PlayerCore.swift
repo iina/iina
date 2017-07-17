@@ -38,6 +38,9 @@ class PlayerCore: NSObject {
   }
 
   static var activeOrNew: PlayerCore {
+    if playerCores.isEmpty {
+      return first
+    }
     if UserDefaults.standard.bool(forKey: Preference.Key.alwaysOpenInNewWindow) {
       return newPlayerCore
     } else {

@@ -456,6 +456,7 @@
 		843B97AA1E82D3C100D07261 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		843FFD4C1D5DAA01001F3A44 /* RoundedTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RoundedTextFieldCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		844DE1BE1D3E2B9900272589 /* MPVEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MPVEvent.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		844E2FD21F1C7C6000CB1170 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
 		8450403B1E0A9EE20079C194 /* InspectorWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorWindowController.swift; sourceTree = "<group>"; };
 		8450403F1E0ACADD0079C194 /* MPVNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVNode.swift; sourceTree = "<group>"; };
 		845040451E0B0F500079C194 /* CropSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropSettingsViewController.swift; sourceTree = "<group>"; };
@@ -691,13 +692,13 @@
 		84BC78C21EEECBE30068BF17 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		84BEEC3D1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefKeyBindingViewController.swift; sourceTree = "<group>"; };
 		84BEEC411DFEE46200F945CA /* StreamReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReader.swift; sourceTree = "<group>"; };
+		84BF6F5C1F1B8A9700D45798 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/OpenURLAccessoryViewController.strings; sourceTree = "<group>"; };
+		84BF6F5D1F1B8A9700D45798 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
+		84BF6F5E1F1B8A9800D45798 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		84BF6F601F1BB2CD00D45798 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InitialWindowController.strings"; sourceTree = "<group>"; };
 		84BF6F621F1BB3E900D45798 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		84BF6F661F1BB3ED00D45798 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		84BF6F671F1BB3F300D45798 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
-		84BF6F5C1F1B8A9700D45798 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/OpenURLAccessoryViewController.strings; sourceTree = "<group>"; };
-		84BF6F5D1F1B8A9700D45798 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
-		84BF6F5E1F1B8A9800D45798 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		84C3AB8A1E7BF22300FEFB7A /* MPVCommandFormat.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = MPVCommandFormat.strings; sourceTree = "<group>"; };
 		84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabelOverflowedView.swift; sourceTree = "<group>"; };
 		84C6D3611EAF8D63009BF721 /* HistoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
@@ -2047,6 +2048,7 @@
 				6DC77D361F1439A600E96176 /* uk */,
 				649AD31A1F11B06E00244738 /* es */,
 				84BF6F5D1F1B8A9700D45798 /* pl */,
+				844E2FD21F1C7C6000CB1170 /* ru */,
 			);
 			name = HistoryWindowController.xib;
 			sourceTree = "<group>";

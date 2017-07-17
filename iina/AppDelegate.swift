@@ -100,6 +100,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   private func showWelcomeWindow() {
+    let _ = PlayerCore.first
     let actionRawValue = UserDefaults.standard.integer(forKey: Preference.Key.actionAfterLaunch)
     let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
     switch action {
@@ -121,7 +122,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-    guard PlayerCore.active.mainWindow.isWindowLoaded else { return false }
+    guard PlayerCore.active.mainWindow.isWindowLoaded || PlayerCore.active.initialWindow.isWindowLoaded else { return false }
     return UserDefaults.standard.bool(forKey: Preference.Key.quitWhenNoOpenedWindow)
   }
 

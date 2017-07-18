@@ -181,43 +181,41 @@
 "filter.video_filters" = "ビデオフィルタ一覧";
 "filter.audio_filters" = "オーディオフィルタ一覧";
 
+"alert.delete_history.title" = "再生履歴の消去";
+"alert.delete_history.message" = "選択した項目を消去しますか?";
 
-// FIXME
-// Fall back to English
-"alert.delete_history.title" = "Delete Playback History";
-"alert.delete_history.message" = "Are you sure to delete select entries?";
+"pl_menu.matched_sub" = "該当する字幕 %d 件";
+"pl_menu.add_sub" = "字幕の追加…";
+"pl_menu.wrong_sub" = "字幕がおかしい!";
 
-"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
-"pl_menu.add_sub" = "Add Subtitle…";
-"pl_menu.wrong_sub" = "Wrong Subtitle!";
+"alert.filter_hwdec.message" = "ビデオフィルターが適用されますが、お使いのハードウェアデコーダが対応していない場合がございます。フィルタを使用しないように設定するか、二倍のメモリを使用する自動（コピー）方式に切り替えて使用することができます。\n以前に設定した操作（クロップの設定など）を適用するには、再設定する必要がある場合もあります。";
+"alert.filter_hwdec.abort" = "破棄";
+"alert.filter_hwdec.turn_off" = "ハードウェアデコーディングをオフにする";
+"alert.filter_hwdec.use_copy" = "自動（コピー）方式に切り替え";
 
-// For 0.0.12 release
-"alert.filter_hwdec.message" = "You are about to apply a video fliter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like, setting the crop) to get it working.";
-"alert.filter_hwdec.abort" = "Abort";
-"alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
-"alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
+"alert.clear_cache.title" = "サムネイルキャッシュをクリア";
+"alert.clear_cache.message" = "すべてのサムネイルキャッシュを消去しますか?";
+"alert.clear_cache.success" = "キャッシュをクリアしました。";
 
-"alert.clear_cache.title" = "Clear Thumbnail Cache";
-"alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
-"alert.clear_cache.success" = "Cache cleared.";
+"pl_menu.play_in_new_window" = "新しいウィンドウで再生";
 
-"pl_menu.play_in_new_window" = "Play in New Window";
+"hwdec.no" = "ハードウェアデコーディングをオフにします。";
+"hwdec.auto" = "ハードウェアデコーディングを使用しますが、多くのビデオでは正常に動作しません。";
+"hwdec.auto-copy" = "ハードウェアデコーディングを使用します。二倍のメモリを使用しますが、ビデオフィルタを適用することができます。";
 
-"hwdec.no" = "Disable Hardware decoding.";
-"hwdec.auto" = "Enable hardware decoding. However, most video filters won't work properly.";
-"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but works with video filters.";
+// Touch bar
 
-"touchbar.ahead_15" = "15sec Ahead";
-"touchbar.ahead_30" = "30sec Ahead";
-"touchbar.back_15" = "15sec Back";
-"touchbar.back_30" = "30sec Back";
-"touchbar.next_video" = "Next Video";
-"touchbar.prev_video" = "Previous Video";
-"touchbar.increase_volume" = "Volume +";
-"touchbar.decrease_volume" = "Volume -";
-"touchbar.rewind" = "Rewind";
-"touchbar.fast_forward" = "Fast Forward";
-"touchbar.play_pause" = "Play / Pause";
-"touchbar.seek" = "Seek";
-"touchbar.time" = "Time Position";
+"touchbar.ahead_15" = "15秒 進める";
+"touchbar.ahead_30" = "30秒 進める";
+"touchbar.back_15" = "15秒 戻す";
+"touchbar.back_30" = "30秒 戻す";
+"touchbar.next_video" = "次のビデオへ";
+"touchbar.prev_video" = "前のビデオへ";
+"touchbar.increase_volume" = "音量 +";
+"touchbar.decrease_volume" = "音量 -";
+"touchbar.rewind" = "巻き戻し";
+"touchbar.fast_forward" = "早送り";
+"touchbar.play_pause" = "再生 / 停止";
+"touchbar.seek" = "シーク";
+"touchbar.time" = "再生位置";
 

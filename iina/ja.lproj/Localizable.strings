@@ -163,31 +163,6 @@
 "alert.delete_history.title" = "再生履歴の削除";
 "alert.delete_history.message" = "選択した項目を削除しますか?";
 
-"pl_menu.title_multi" = "%d個のアイテム";
-"pl_menu.play_next" = "次を再生";
-"pl_menu.remove" = "削除";
-"pl_menu.remove_multi" = "選択して削除";
-"pl_menu.delete" = "ゴミ箱へ移動";
-"pl_menu.delete_multi" = "選択したファイルをゴミ箱へ移動";
-"pl_menu.delete_after_play" = "再生した後にゴミ箱へ移動";
-"pl_menu.delete_after_play_multi" = "再生した後に選択したファイルをゴミ箱へ移動";
-"pl_menu.reveal_in_finder" = "Finderで表示";
-"pl_menu.add_item" = "アイテムの追加…";
-"pl_menu.clear_playlist" = "プレイリストのクリア";
-
-"keymapping.title" = "キーマッピング";
-"keymapping.message" = "保存するには何かキーを押してください。";
-
-"filter.video_filters" = "ビデオフィルタ一覧";
-"filter.audio_filters" = "オーディオフィルタ一覧";
-
-"alert.delete_history.title" = "再生履歴の消去";
-"alert.delete_history.message" = "選択した項目を消去しますか?";
-
-"pl_menu.matched_sub" = "該当する字幕 %d 件";
-"pl_menu.add_sub" = "字幕の追加…";
-"pl_menu.wrong_sub" = "字幕がおかしい!";
-
 "alert.filter_hwdec.message" = "ビデオフィルターが適用されますが、お使いのハードウェアデコーダが対応していない場合がございます。フィルタを使用しないように設定するか、二倍のメモリを使用する自動（コピー）方式に切り替えて使用することができます。\n以前に設定した操作（クロップの設定など）を適用するには、再設定する必要がある場合もあります。";
 "alert.filter_hwdec.abort" = "破棄";
 "alert.filter_hwdec.turn_off" = "ハードウェアデコーディングをオフにする";
@@ -197,7 +172,27 @@
 "alert.clear_cache.message" = "すべてのサムネイルキャッシュを消去しますか?";
 "alert.clear_cache.success" = "キャッシュをクリアしました。";
 
+"pl_menu.title_multi" = "%d個のアイテム";
+"pl_menu.play_next" = "次を再生";
 "pl_menu.play_in_new_window" = "新しいウィンドウで再生";
+"pl_menu.remove" = "削除";
+"pl_menu.remove_multi" = "選択して削除";
+"pl_menu.delete" = "ゴミ箱へ移動";
+"pl_menu.delete_multi" = "選択したファイルをゴミ箱へ移動";
+"pl_menu.delete_after_play" = "再生した後にゴミ箱へ移動";
+"pl_menu.delete_after_play_multi" = "再生した後に選択したファイルをゴミ箱へ移動";
+"pl_menu.reveal_in_finder" = "Finderで表示";
+"pl_menu.add_item" = "アイテムの追加…";
+"pl_menu.clear_playlist" = "プレイリストのクリア";
+"pl_menu.matched_sub" = "該当する字幕 %d 件";
+"pl_menu.add_sub" = "字幕の追加…";
+"pl_menu.wrong_sub" = "字幕がおかしい!";
+
+"keymapping.title" = "キーマッピング";
+"keymapping.message" = "保存するには何かキーを押してください。";
+
+"filter.video_filters" = "ビデオフィルタ一覧";
+"filter.audio_filters" = "オーディオフィルタ一覧";
 
 "hwdec.no" = "ハードウェアデコーディングをオフにします。";
 "hwdec.auto" = "ハードウェアデコーディングを使用しますが、多くのビデオでは正常に動作しません。";
@@ -218,4 +213,3 @@
 "touchbar.play_pause" = "再生 / 停止";
 "touchbar.seek" = "シーク";
 "touchbar.time" = "再生位置";
-

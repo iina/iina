@@ -115,7 +115,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  var isInPIP: Bool = false
+  var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
   var isEnteringFullScreen: Bool = false
   var isVideoLoaded: Bool = false
@@ -193,6 +193,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   var sideBarStatus: SideBarViewType = .hidden
+  
+  enum PIPStatus {
+    case notInPIP
+    case inPIP
+    case intermediate
+  }
 
   // MARK: - Observed user defaults
 
@@ -312,10 +318,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     pip.delegate = self
     return pip
   }()
-  @available(macOS 10.12, *)
-  lazy var pipVideo: NSViewController = {
-    return NSViewController()
-  }()
+  var pipVideo: NSViewController!
 
   // MARK: - Initialization
 
@@ -1035,9 +1038,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowWillClose(_ notification: Notification) {
     // Close PIP
-    if isInPIP {
+    if pipStatus == .inPIP {
       if #available(macOS 10.12, *) {
-        exitPIP(manually: true)
+        exitPIP()
       }
     }
     // stop playing
@@ -1117,7 +1120,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isInFullScreen = false
 
     // set back frame of videoview, but only if not in PIP
-    if !isInPIP {
+    if pipStatus == .notInPIP {
       videoView.videoLayer.mpvGLQueue.sync {
         self.videoView.videoLayer.setNeedsDisplay()
       }
@@ -1142,7 +1145,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       videoView.videoLayer.draw()
     }
     // update videoview size if in full screen, since aspect ratio may changed
-    if (isInFullScreen && !isInPIP) {
+    if (isInFullScreen && pipStatus == .notInPIP) {
       if isEnteringFullScreen {
         let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
         let tryHeight = wSize.width / aspectRatio
@@ -1161,7 +1164,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         videoView.frame = NSRect(x: 0, y: 0, width: w.frame.width, height: w.frame.height)
       }
 
-    } else if (!isInPIP) {
+    } else if (pipStatus == .notInPIP) {
 
       let frame = NSRect(x: 0, y: 0, width: w.contentView!.frame.width, height: w.contentView!.frame.height)
 
@@ -1229,7 +1232,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   private func hideUI() {
     // Don't hide UI when in PIP
-    guard !isInPIP || animationState == .hidden else {
+    guard pipStatus == .notInPIP || animationState == .hidden else {
       return
     }
     
@@ -2120,47 +2123,49 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 extension MainWindowController: PIPViewControllerDelegate {
 
   func enterPIP() {
-    // FIXME: Internal PIP API
-    // Do not enter PIP if already "PIPing"  (in this case, in the PIP animation)
-    // Also do not enter if PIP state cannot be determined
-    let pipping = pip.value(forKey: "_pipping") as? Bool ?? true
-    guard !pipping else {
-      return
-    }
+    pipStatus = .inPIP
+    
+    pipVideo = NSViewController()
     pipVideo.view = videoView
     pip.aspectRatio = NSSize(width: playerCore.info.videoWidth!, height: playerCore.info.videoHeight!)
     pip.playing = !playerCore.info.isPaused
     pip.title = window?.title
+    
     pip.presentAsPicture(inPicture: pipVideo)
     pipOverlayView.isHidden = false
-    isInPIP = true
   }
-
-  func exitPIP(manually: Bool) {
-    isInPIP = false
-    if manually {
+  
+  func exitPIP() {
+    if pipShouldClose(pip) {
       pip.dismissViewController(pipVideo)
     }
+  }
+
+  func doneExitingPIP() {
+    pipStatus = .notInPIP
+    
     pipOverlayView.isHidden = true
     window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
     videoView.frame = window?.contentView?.frame ?? .zero
-
-    // Reset animation (disabling it if exitPIP is called manually)
-    // See WebKit issue 25096170 as well as the workaround:
-    // https://trac.webkit.org/browser/trunk/Source/WebCore/platform/mac/WebVideoFullscreenInterfaceMac.mm#L343
-    pip.replacementRect = .infinite
-    pip.replacementWindow = nil
   }
 
   func pipShouldClose(_ pip: PIPViewController) -> Bool {
+    // This is called right before we're about to close the PIP
+    pipStatus = .intermediate
+    
     // Set frame to animate back to
     pip.replacementRect = window?.contentView?.frame ?? .zero
     pip.replacementWindow = window
+    
+    // Bring the window to the front and deminiaturize it
+    NSApp.activate(ignoringOtherApps: true)
+    window?.deminiaturize(pip)
+    
     return true
   }
 
   func pipDidClose(_ pip: PIPViewController) {
-    exitPIP(manually: false)
+    doneExitingPIP()
   }
 
   func pipActionPlay(_ pip: PIPViewController) {
@@ -2172,7 +2177,8 @@ extension MainWindowController: PIPViewControllerDelegate {
   }
 
   func pipActionStop(_ pip: PIPViewController) {
-    exitPIP(manually: false)
+    // Stopping PIP pauses playback
+    playerCore.togglePause(true)
   }
 }
 

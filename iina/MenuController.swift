@@ -344,7 +344,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateVideoMenu() {
     let isInFullScreen = PlayerCore.active.mainWindow.isInFullScreen
-    let isInPIP = PlayerCore.active.mainWindow.isInPIP
+    let isInPIP = PlayerCore.active.mainWindow.pipStatus == .inPIP
     let isOntop = PlayerCore.active.mainWindow.isOntop
     alwaysOnTop.state = isOntop ? NSOnState : NSOffState
     deinterlace.state = PlayerCore.active.info.deinterlace ? NSOnState : NSOffState

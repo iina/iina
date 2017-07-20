@@ -69,16 +69,6 @@
 "osd.cannot_login" = "Не могу войти";
 "osd.canceled" = "Отменено";
 
-"update.title_update_found" = "Найдено обновление";
-"update.title_no_update" = "Обновлений нет";
-"update.title_error" = "Ошибка";
-"update.update_found" = "Найдена новая версия! IINA ещё в альфа-версии, поэтому рекомендуется обновиться. Скачайте с веб-сайта или Github:";
-"update.no_update" = "Вы используете последнюю версию.";
-"update.check_failed" = "Не удалось проверить обновления. Вероятно, вы используете старую версию. Пожалуйста, проверьте сайт или github.";
-"update.new_version" = "Новая версия:";
-"update.dl_from_website" = "Перейти на веб-сайт";
-"update.dl_from_github" = "Перейти на Github";
-
 "preference.title" = "Настройки";
 "preference.general" = "Основные";
 "preference.ui" = "Интерфейс";
@@ -173,8 +163,18 @@
 "alert.delete_history.title" = "Удалить историю воспроизведения";
 "alert.delete_history.message" = "Вы уверены, что хотите удалить выбранное?";
 
+"alert.filter_hwdec.message" = "Вы собираетесь применить видеофильтр. Однако ваш текущий аппаратный декодер может плохо поддерживать видеофильтры. Вы можете либо отключить аппаратное декодирование, либо переключиться на Auto(Copy), который будет потреблять в два раза больше памяти.\nВозможно, вам придется повторить предыдущую операцию (например, настройку обрезки), чтобы заставить ее работать.";
+"alert.filter_hwdec.abort" = "Прервать";
+"alert.filter_hwdec.turn_off" = "Отключить аппаратное декодирование";
+"alert.filter_hwdec.use_copy" = "Переключиться на Auto(Copy)";
+
+"alert.clear_cache.title" = "Очистить кеш миниатюр";
+"alert.clear_cache.message" = "Вы уверены, что хотите очистить кэш миниатюр?";
+"alert.clear_cache.success" = "Кэш очищен.";
+
 "pl_menu.title_multi" = "%d элементов";
 "pl_menu.play_next" = "Воспроизвести следующим";
+"pl_menu.play_in_new_window" = "Воспроизвести в новом окне";
 "pl_menu.remove" = "Удалить";
 "pl_menu.remove_multi" = "Удалить выбранные";
 "pl_menu.delete" = "Переместить в Корзину";
@@ -193,3 +193,23 @@
 
 "filter.video_filters" = "Видеофильтры";
 "filter.audio_filters" = "Аудиофильтры";
+
+"hwdec.no" = "Отключить аппаратное декодирование.";
+"hwdec.auto" = "Включить аппаратное декодирование. Однако большинство видеофильтров не будут работать должным образом.";
+"hwdec.auto-copy" = "Включить аппаратное декодирование. Он будет потреблять вдвое больше памяти, но работает с видеофильтрами.";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15сек Вперед";
+"touchbar.ahead_30" = "30сек Вперед";
+"touchbar.back_15" = "15сек Назад";
+"touchbar.back_30" = "30сек Назад";
+"touchbar.next_video" = "Следующее видео";
+"touchbar.prev_video" = "Предыдущее видео";
+"touchbar.increase_volume" = "Прибавить громкость";
+"touchbar.decrease_volume" = "Убавить громкость";
+"touchbar.rewind" = "Перемотка";
+"touchbar.fast_forward" = "Быстрая перемотка вперед";
+"touchbar.play_pause" = "Воспроизведение / Пауза";
+"touchbar.seek" = "Перемотка";
+"touchbar.time" = "Временная позиция";

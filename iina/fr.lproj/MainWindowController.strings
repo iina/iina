@@ -26,8 +26,11 @@
 /* Class = "NSTextFieldCell"; title = "-32x"; ObjectID = "eCe-SS-Wlj"; */
 "eCe-SS-Wlj.title" = "-32x";
 
-/* Class = "NSTextFieldCell"; title = "This video is playing in Picture in Picture"; ObjectID = "gdE-b5-kod"; */
-"gdE-b5-kod.title" = "Cette vidéo est en cours de lecture en Image dans l'image";
+/* Class = "NSTextFieldCell"; title = "This video is playing in picture in picture"; ObjectID = "gdE-b5-kod"; */
+"gdE-b5-kod.title" = "Cette vidéo est en cours de lecture en image dans l'image";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "7aL-lH-m8i"; */
 "7aL-lH-m8i.title" = "Label";
+
+/* Class = "NSTextFieldCell"; title = "Title"; ObjectID = "AOe-dk-iFa"; */
+"AOe-dk-iFa.title" = "Title";

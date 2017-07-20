@@ -68,8 +68,8 @@
 /* Class = "NSMenuItem"; title = "Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
 "43n-Ed-5kT.title" = "Панель быстрых настроек";
 
-/* Class = "NSMenuItem"; title = "Github"; ObjectID = "A9w-iE-gVg"; */
-"A9w-iE-gVg.title" = "Github";
+/* Class = "NSMenuItem"; title = "GitHub"; ObjectID = "A9w-iE-gVg"; */
+"A9w-iE-gVg.title" = "GitHub";
 
 /* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
 "AYu-sK-qS6.title" = "Главное меню";
@@ -197,6 +197,9 @@
 /* Class = "NSMenuItem"; title = "Video Filters…"; ObjectID = "PyY-pR-jz7"; */
 "PyY-pR-jz7.title" = "Фильтры видео…";
 
+/* Class = "NSMenuItem"; title = "New Window"; ObjectID = "Qv1-xd-wj5"; */
+"Qv1-xd-wj5.title" = "Новое окно";
+
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4"; */
 "R4o-n2-Eq4.title" = "Изменить масштаб";
 
@@ -259,6 +262,9 @@
 
 /* Class = "NSMenuItem"; title = "Rotation"; ObjectID = "ar5-3T-O9h"; */
 "ar5-3T-O9h.title" = "Повернуть";
+
+/* Class = "NSMenuItem"; title = "Open URL in New Window…"; ObjectID = "bfB-bn-KeM"; */
+"bfB-bn-KeM.title" = "Открыть URL в новом окне...";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
 "bib-Uj-vzu.title" = "Файл";
@@ -386,3 +392,5 @@
 /* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
 "yHI-7D-OaI.title" = "Деинтерлейсинг";
 
+/* Class = "NSMenuItem"; title = "Open in New Window…"; ObjectID = "z9W-ga-j3b"; */
+"z9W-ga-j3b.title" = "Открыть в новом окне...";

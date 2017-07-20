@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 8/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -42,6 +42,7 @@ struct AppData {
   static let logFolder = "log"
   static let watchLaterFolder = "watch_later"
   static let historyFile = "history.plist"
+  static let thumbnailCacheFolder = "thumb_cache"
 
   static let githubLink = "https://github.com/lhc70000/iina"
   static let wikiLink = "https://github.com/lhc70000/iina/wiki"
@@ -82,6 +83,7 @@ struct Constants {
     static let exitPIP = NSLocalizedString("menu.exit_pip", comment: "Exit Picture-in-Picture")
   }
   struct Noti {
+    static let mainWindowChanged = Notification.Name("IINAMainWindowChanged")
     static let playlistChanged = Notification.Name("IINAPlaylistChanged")
     static let tracklistChanged = Notification.Name("IINATracklistChanged")
     static let vfChanged = Notification.Name("IINAVfChanged")

@@ -42,6 +42,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
 
   @IBOutlet weak var oscPreviewImageView: NSImageView!
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!
+  @IBOutlet weak var thumbCacheSizeLabel: NSTextField!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -61,6 +62,32 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
       name = "osc_float"
     }
     oscPreviewImageView.image = NSImage(named: name)
+  }
+
+  @IBAction func clearCacheBtnAction(_ sender: AnyObject) {
+    if Utility.quickAskPanel("clear_cache") {
+      try? FileManager.default.removeItem(atPath: Utility.thumbnailCacheURL.path)
+      Utility.createDirIfNotExist(url: Utility.thumbnailCacheURL)
+      updateThumbnailCacheStat()
+      Utility.showAlert("clear_cache.success", style: .informational)
+    }
+  }
+
+  override func viewDidAppear() {
+    DispatchQueue.main.async {
+      self.updateThumbnailCacheStat()
+    }
+  }
+
+  private func updateThumbnailCacheStat() {
+    var totalSize = 0
+    if let contents = try? FileManager.default.contentsOfDirectory(at: Utility.thumbnailCacheURL, includingPropertiesForKeys: [.fileSizeKey], options: [.skipsHiddenFiles]) {
+      for url in contents {
+        guard let size = try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize else { return }
+        totalSize += size ?? 0
+      }
+    }
+    thumbCacheSizeLabel.stringValue = FileSize.format(totalSize, unit: .b)
   }
 
 }

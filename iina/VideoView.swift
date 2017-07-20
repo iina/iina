@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 8/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -11,7 +11,7 @@ import Cocoa
 
 class VideoView: NSView {
 
-  lazy var playerCore = PlayerCore.shared
+  weak var playerCore: PlayerCore!
 
   lazy var videoLayer: ViewLayer = {
     let layer = ViewLayer()
@@ -94,10 +94,7 @@ class VideoView: NSView {
   // MARK: Drag and drop
   
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-    return .copy
-  }
-    
-  override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
+    if sender.draggingSource() as? NSTableView === playerCore.mainWindow.playlistView { return [] }
     return .copy
   }
   
@@ -109,14 +106,14 @@ class VideoView: NSView {
       
       var videoFiles: [String] = []
       var subtitleFiles: [String] = []
-      fileNames.forEach({ (path) in
+      fileNames.forEach { (path) in
         let ext = (path as NSString).pathExtension.lowercased()
         if Utility.supportedFileExt[.sub]!.contains(ext) {
           subtitleFiles.append(path)
-        } else {
+        } else if Utility.playableFileExt.contains(ext) {
           videoFiles.append(path)
         }
-      })
+      }
       
       if videoFiles.count == 0 {
         if subtitleFiles.count > 0 {
@@ -127,7 +124,7 @@ class VideoView: NSView {
           return false
         }
       } else if videoFiles.count == 1 {
-        playerCore.openFile(URL(fileURLWithPath: videoFiles[0]))
+        playerCore.openURL(URL(fileURLWithPath: videoFiles[0]), isNetworkResource: false)
         subtitleFiles.forEach { (subtitle) in
           playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitle))
         }

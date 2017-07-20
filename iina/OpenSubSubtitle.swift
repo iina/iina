@@ -89,7 +89,7 @@ class OpenSubSupport {
 
   private let chunkSize: Int = 65536
   private let apiPath = "https://api.opensubtitles.org:443/xml-rpc"
-  private static let serviceName: NSString = "IINA Opensubtitles Account"
+  private static let serviceName: NSString = "IINA OpenSubtitles Account"
   private let xmlRpc: JustXMLRPC
 
   var language: String
@@ -112,7 +112,7 @@ class OpenSubSupport {
   }
 
   func login(testUser username: String? = nil, password: String? = nil) -> Promise<Void> {
-    return Promise { fullfill, reject in
+    return Promise { fulfill, reject in
       var finalUser = ""
       var finalPw = ""
       if let testUser = username, let testPw = password {
@@ -122,7 +122,7 @@ class OpenSubSupport {
       } else {
         // check logged in
         if self.loggedIn {
-          fullfill()
+          fulfill()
           return
         }
         // read password
@@ -149,7 +149,7 @@ class OpenSubSupport {
             self.token = parsed["token"] as! String
             Utility.log("OpenSub: logged in as user \(finalUser)")
             self.startHeartbeat()
-            fullfill()
+            fulfill()
           } else {
             Utility.log("OpenSub: login failed, \(pStatus)")
             reject(OpenSubError.loginFailed(pStatus))
@@ -166,7 +166,7 @@ class OpenSubSupport {
   }
 
   func hash(_ url: URL) -> Promise<FileInfo> {
-    return Promise { fullfill, reject in
+    return Promise { fulfill, reject in
       guard let file = try? FileHandle(forReadingFrom: url) else {
         Utility.log("OpenSub: cannot get file handle")
         reject(OpenSubError.cannotReadFile)
@@ -192,12 +192,12 @@ class OpenSubSupport {
 
       file.closeFile()
 
-      fullfill(FileInfo(hashValue: String(format: "%016qx", hash), fileSize: fileSize))
+      fulfill(FileInfo(hashValue: String(format: "%016qx", hash), fileSize: fileSize))
     }
   }
 
   func request(_ info: FileInfo) -> Promise<[OpenSubSubtitle]> {
-    return Promise { fullfill, reject in
+    return Promise { fulfill, reject in
       let limit = 100
       var requestInfo = info.dictionary
       requestInfo["sublanguageid"] = self.language
@@ -234,7 +234,7 @@ class OpenSubSupport {
                                       zipDlLink: subData["ZipDownloadLink"] as! String)
             result.append(sub)
           }
-          fullfill(result)
+          fulfill(result)
         case .failure(_):
           // Failure
           reject(OpenSubError.searchFailed("Failure"))
@@ -247,15 +247,15 @@ class OpenSubSupport {
   }
 
   func showSubSelectWindow(subs: [OpenSubSubtitle]) -> Promise<[OpenSubSubtitle]> {
-    return Promise { fullfill, reject in
+    return Promise { fulfill, reject in
       // return when found 0 or 1 sub
       if subs.count <= 1 {
-        fullfill(subs)
+        fulfill(subs)
         return
       }
       let subSelectWindow = (NSApp.delegate as! AppDelegate).subSelectWindow
       subSelectWindow.whenUserAction = { subs in
-        fullfill(subs)
+        fulfill(subs)
       }
       subSelectWindow.whenUserClosed = {
         reject(OpenSubError.userCanceled)
@@ -338,10 +338,8 @@ class OpenSubSupport {
             switch err {
             case OpenSubError.loginFailed(let reason):
               Utility.log("OpenSub: (re-login) \(reason)")
-              PlayerCore.shared.sendOSD(.cannotLogin)
             case OpenSubError.xmlRpcError(let error):
               Utility.log("OpenSub: (re-login) \(error.readableDescription)")
-              PlayerCore.shared.sendOSD(.networkError)
             default:
               Utility.log("OpenSub: (re-login) other error")
             }

@@ -69,16 +69,6 @@
 "osd.cannot_login" = "ログインできません";
 "osd.canceled" = "キャンセルされました";
 
-"update.title_update_found" = "アップデートがあります";
-"update.title_no_update" = "アップデートはありません";
-"update.title_error" = "エラー";
-"update.update_found" = "最新のバージョンが見つかりました! IINAは現在α版のため、最新のバージョンを推奨しています。WebサイトかGithubよりダウンロードしてください:";
-"update.no_update" = "最新のバージョンです。";
-"update.check_failed" = "アップデートが確認できませんでした。バージョンが古すぎる可能性があります。WebサイトまたはGithubをご確認ください。";
-"update.new_version" = "新たなバージョン:";
-"update.dl_from_website" = "Webサイトへ移動";
-"update.dl_from_github" = "Githubへ移動";
-
 "preference.title" = "環境設定";
 "preference.general" = "一般";
 "preference.ui" = "UI";
@@ -149,7 +139,7 @@
 "alert.playlist.error_deleting" = "削除エラー: %@";
 
 "alert.sub.no_selected" = "最初にダウンロードした字幕を選択してください。";
-"alert.sub_lang_not_set" = "opensubtitlesを利用する前に、環境設定で字幕の優先言語を設定してください。英語(eng)が今回使用されます。";
+"alert.sub_lang_not_set" = "OpenSubtitlesを利用する前に、環境設定で字幕の優先言語を設定してください。英語(eng)が今回使用されます。";
 "alert.sub.cannot_save_passwd" = "パスワードをKeychainに保存できません: %@";
 "alert.sub.cannot_login" = "ログインできません。ユーザー名とパスワード、ネットワーク環境をご確認ください。\n\n%@";
 
@@ -163,7 +153,7 @@
 "alert.jump_to.title" = "時間の指定";
 "alert.jump_to.message" = "再生を開始する時間を入力してください。例: 20:35";
 
-"alert.opensub.login.title" = "Opensubtitlesにログイン";
+"alert.opensub.login.title" = "OpenSubtitlesにログイン";
 "alert.opensub.login.message" = "ユーザ名とパスワードを入力してください。";
 
 "alert.open_url.title" = "URLを開く";
@@ -200,3 +190,34 @@
 "pl_menu.matched_sub" = "Matched %d Subtitle(s)";
 "pl_menu.add_sub" = "Add Subtitle…";
 "pl_menu.wrong_sub" = "Wrong Subtitle!";
+
+// For 0.0.12 release
+"alert.filter_hwdec.message" = "You are about to apply a video fliter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like, setting the crop) to get it working.";
+"alert.filter_hwdec.abort" = "Abort";
+"alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
+"alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
+
+"alert.clear_cache.title" = "Clear Thumbnail Cache";
+"alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
+"alert.clear_cache.success" = "Cache cleared.";
+
+"pl_menu.play_in_new_window" = "Play in New Window";
+
+"hwdec.no" = "Disable Hardware decoding.";
+"hwdec.auto" = "Enable hardware decoding. However, most video filters won't work properly.";
+"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but works with video filters.";
+
+"touchbar.ahead_15" = "15sec Ahead";
+"touchbar.ahead_30" = "30sec Ahead";
+"touchbar.back_15" = "15sec Back";
+"touchbar.back_30" = "30sec Back";
+"touchbar.next_video" = "Next Video";
+"touchbar.prev_video" = "Previous Video";
+"touchbar.increase_volume" = "Volume +";
+"touchbar.decrease_volume" = "Volume -";
+"touchbar.rewind" = "Rewind";
+"touchbar.fast_forward" = "Fast Forward";
+"touchbar.play_pause" = "Play / Pause";
+"touchbar.seek" = "Seek";
+"touchbar.time" = "Time Position";
+

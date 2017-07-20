@@ -3,12 +3,16 @@
 //  iina
 //
 //  Created by lhc on 25/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
 
 class PlaySliderCell: NSSliderCell {
+
+  lazy var playerCore: PlayerCore = {
+    return (self.controlView!.window!.windowController as! MainWindowController).playerCore
+  }()
 
   override var knobThickness: CGFloat {
     return knobWidth
@@ -17,6 +21,7 @@ class PlaySliderCell: NSSliderCell {
   let knobWidth: CGFloat = 3
   let knobHeight: CGFloat = 15
   let knobRadius: CGFloat = 1
+  let barRadius: CGFloat = 1.5
 
   static let darkColor = NSColor(red: 1, green: 1, blue: 1, alpha: 0.5)
   static let lightColor = NSColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
@@ -36,6 +41,7 @@ class PlaySliderCell: NSSliderCell {
       self.chapterStrokeColor = isInDarkTheme ? PlaySliderCell.darkChapterStrokeColor : PlaySliderCell.lightChapterStrokeColor
     }
   }
+
   private var knobColor: NSColor = PlaySliderCell.darkColor
   private var barColorLeft: NSColor = PlaySliderCell.darkBarColorLeft
   private var barColorRight: NSColor = PlaySliderCell.darkBarColorRight
@@ -70,7 +76,7 @@ class PlaySliderCell: NSSliderCell {
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
-    let info = PlayerCore.shared.info
+    let info = playerCore.info
     
     let slider = self.controlView as! NSSlider
     
@@ -88,7 +94,7 @@ class PlaySliderCell: NSSliderCell {
     }
     
     let rect = NSMakeRect(rect.origin.x, rect.origin.y + 1, rect.width, rect.height - 2)
-    let path = NSBezierPath(roundedRect: rect, xRadius: 3, yRadius: 3)
+    let path = NSBezierPath(roundedRect: rect, xRadius: barRadius, yRadius: barRadius)
 
     // draw left
     let pathLeftRect : NSRect = NSMakeRect(rect.origin.x, rect.origin.y, progress, rect.height)
@@ -133,6 +139,21 @@ class PlaySliderCell: NSSliderCell {
   override func barRect(flipped: Bool) -> NSRect {
     let rect = super.barRect(flipped: flipped)
     return NSMakeRect(0, rect.origin.y, rect.width + rect.origin.x * 2, rect.height)
+  }
+
+
+  override func startTracking(at startPoint: NSPoint, in controlView: NSView) -> Bool {
+    let result = super.startTracking(at: startPoint, in: controlView)
+    if result {
+      playerCore.togglePause(true)
+      playerCore.mainWindow.thumbnailPeekView.isHidden = true
+    }
+    return result
+  }
+
+  override func stopTracking(last lastPoint: NSPoint, current stopPoint: NSPoint, in controlView: NSView, mouseIsUp flag: Bool) {
+    playerCore.togglePause(false)
+    super.stopTracking(last: lastPoint, current: stopPoint, in: controlView, mouseIsUp: flag)
   }
 
 }

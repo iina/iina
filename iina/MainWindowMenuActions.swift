@@ -207,6 +207,7 @@ extension MainWindowController {
     //  10: smaller size
     //  11: bigger size
     let size = sender.tag
+    guard !isInFullScreen else { return }
     guard let w = window, var vw = playerCore.info.displayWidth, var vh = playerCore.info.displayHeight else { return }
     if vw == 0 { vw = AppData.widthWhenNoVideo }
     if vh == 0 { vh = AppData.heightWhenNoVideo }
@@ -328,18 +329,18 @@ extension MainWindowController {
 
   @IBAction func menuSetSubEncoding(_ sender: NSMenuItem) {
     playerCore.setSubEncoding((sender.representedObject as? String) ?? "auto")
+    playerCore.reloadAllSubs()
   }
 
   @IBAction func menuSubFont(_ sender: NSMenuItem) {
     Utility.quickFontPickerWindow() {
       self.playerCore.setSubFont($0 ?? "")
     }
-
   }
 
   @IBAction func menuFindOnlineSub(_ sender: NSMenuItem) {
     guard let url = playerCore.info.currentURL else { return }
-    OnlineSubtitle.getSub(forFile: url) { subtitles in
+    OnlineSubtitle.getSub(forFile: url, playerCore: playerCore) { subtitles in
       // send osd in main thread
       self.playerCore.sendOSD(.foundSub(subtitles.count))
       // download them

@@ -1,7 +1,4 @@
 
-/* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "1vo-so-iaM"; */
-"1vo-so-iaM.title" = "包含媒体文件名的字幕";
-
 /* Class = "NSBox"; title = "Border"; ObjectID = "5CZ-8l-KYJ"; */
 "5CZ-8l-KYJ.title" = "边框";
 
@@ -35,9 +32,6 @@
 /* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "PZ2-pZ-hHa"; */
 "PZ2-pZ-hHa.title" = "其他:";
 
-/* Class = "NSMenuItem"; title = "All subtitles in the same folder"; ObjectID = "Qcl-0x-3hh"; */
-"Qcl-0x-3hh.title" = "同一文件夹中的所有字幕";
-
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "RiL-Rv-eke"; */
 "RiL-Rv-eke.title" = "字体:";
 
@@ -62,11 +56,8 @@
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "bqN-gA-fs9"; */
 "bqN-gA-fs9.title" = "偏移:";
 
-/* Class = "NSButtonCell"; title = "Choose..."; ObjectID = "cVp-yI-tMu"; */
-"cVp-yI-tMu.title" = "选择...";
-
-/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "clt-eT-TMN"; */
-"clt-eT-TMN.title" = "禁用";
+/* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "cVp-yI-tMu"; */
+"cVp-yI-tMu.title" = "选择…";
 
 /* Class = "NSBox"; title = "Font"; ObjectID = "dsH-Ze-lj5"; */
 "dsH-Ze-lj5.title" = "字体";
@@ -91,9 +82,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Margin"; ObjectID = "sVu-u3-QwW"; */
 "sVu-u3-QwW.title" = "边距";
-
-/* Class = "NSMenuItem"; title = "Subtitle with the exact same media filename"; ObjectID = "siy-Uq-tMP"; */
-"siy-Uq-tMP.title" = "同名的字幕文件";
 
 /* Class = "NSTextFieldCell"; title = "Align"; ObjectID = "t3t-yJ-pM9"; */
 "t3t-yJ-pM9.title" = "对齐";

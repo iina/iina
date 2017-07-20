@@ -86,8 +86,8 @@
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "bqN-gA-fs9"; */
 "bqN-gA-fs9.title" = "Décalage:";
 
-/* Class = "NSButtonCell"; title = "Choose..."; ObjectID = "cVp-yI-tMu"; */
-"cVp-yI-tMu.title" = "Choisir...";
+/* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "cVp-yI-tMu"; */
+"cVp-yI-tMu.title" = "Choisir…";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "clt-eT-TMN"; */
 "clt-eT-TMN.title" = "Désactivé";
@@ -146,11 +146,11 @@
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "zLl-vV-p1h"; */
 "zLl-vV-p1h.title" = "À droite";
 
-/* Class = "NSTextFieldCell"; title = "Opensubtitles account:"; ObjectID = "CKG-r9-NoN"; */
+/* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "CKG-r9-NoN"; */
 "CKG-r9-NoN.title" = "Compte OpenSubtitles :";
 
-/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Uj3-om-L26"; */
-"Uj3-om-L26.title" = "Cette option doit être un code de langue ISO 639-2 (utilisé pour mpv et OpenSubtitles)";
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and OpenSubtitles."; ObjectID = "Uj3-om-L26"; */
+"Uj3-om-L26.title" = "Cette option doit être un code de langue ISO 639-2 (utilisé par mpv et OpenSubtitles)";
 
 /* Class = "NSMenuItem"; title = "OpenSubtitles.org"; ObjectID = "ZE6-eZ-zQy"; */
 "ZE6-eZ-zQy.title" = "OpenSubtitles.org";
@@ -160,3 +160,11 @@
 
 /* Class = "NSButtonCell"; title = "Login"; ObjectID = "l4s-EW-FkT"; */
 "l4s-EW-FkT.title" = "Connexion";
+
+"VZs-zv-0oM.title" = "Aussi rechercher des sous-titres dans le dossier suivant :";
+"xsH-Bm-ZPp.title" = "Désactivé";
+"5eA-EB-Hco.title" = "Merci de renseigner des chaînes de caractères séparées par des virgules.";
+"d5R-vH-0o0.title" = "Détection intelligente par IINA";
+"NHu-6z-rEm.title" = "Les chemins sont séparés par deux points (:). Accepte les chemins relatifs et les wildcards de fin (*).";
+"mVR-wA-nID.title" = "Précharger automatiquement les fichiers avec ce nom :";
+"ul7-yg-cCb.title" = "Le sous-titre qui contient le nom du fichier";

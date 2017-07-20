@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 12/8/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -27,8 +27,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   /** Tab type. Use TrackType for now. Propobably not a good choice. */
   typealias TabViewType = MPVTrack.TrackType
 
-  weak var playerCore: PlayerCore! = PlayerCore.shared
-  weak var mainWindow: MainWindowController!
+  weak var playerCore: PlayerCore!
+
+  weak var mainWindow: MainWindowController! {
+    didSet {
+      self.playerCore = mainWindow.playerCore
+    }
+  }
 
   var currentTab: TabViewType = .video
 
@@ -222,6 +227,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
 
+  func reloadSubtitlesData() {
+    guard isViewLoaded else {
+      return
+    }
+    subTableView.reloadData()
+    secSubTableView.reloadData()
+  }
+
   // MARK: - Switch tab
 
   /** Switch tab (call from other objects) */
@@ -316,7 +329,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     withAllTableViews { (view, type) in
       if view.numberOfSelectedRows > 0 {
         // note that track ids start from 1
-        self.playerCore.setTrack(view.selectedRow, forType: type)
+        let subId = view.selectedRow > 0 ? playerCore.info.trackList(type)[view.selectedRow-1].id : 0
+        self.playerCore.setTrack(subId, forType: type)
         view.deselectAll(self)
         view.reloadData()
       }

@@ -37,16 +37,16 @@ fileprivate extension NSTouchBarItemIdentifier {
 // Image name, tag, custom label
 @available(OSX 10.12.2, *)
 fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, String)] = [
-  .ahead15Sec: (NSImageNameTouchBarSkipAhead15SecondsTemplate, 15, "15sec Ahead"),
-  .ahead30Sec: (NSImageNameTouchBarSkipAhead30SecondsTemplate, 30, "30sec Ahead"),
-  .back15Sec: (NSImageNameTouchBarSkipBack15SecondsTemplate, -15, "-15sec Ahead"),
-  .back30Sec: (NSImageNameTouchBarSkipBack30SecondsTemplate, -30, "-30sec Ahead"),
-  .next: (NSImageNameTouchBarSkipAheadTemplate, 0, "Next video"),
-  .prev: (NSImageNameTouchBarSkipBackTemplate, 1, "Previous video"),
-  .volumeUp: (NSImageNameTouchBarVolumeUpTemplate, 0, "Volume +"),
-  .volumeDown: (NSImageNameTouchBarVolumeDownTemplate, 1, "Volume -"),
-  .rewind: (NSImageNameTouchBarRewindTemplate, 0, "Rewind"),
-  .fastForward: (NSImageNameTouchBarFastForwardTemplate, 1, "Fast forward")
+  .ahead15Sec: (NSImageNameTouchBarSkipAhead15SecondsTemplate, 15, NSLocalizedString("touchbar.ahead_15", comment: "15sec Ahead")),
+  .ahead30Sec: (NSImageNameTouchBarSkipAhead30SecondsTemplate, 30, NSLocalizedString("touchbar.ahead_30", comment: "30sec Ahead")),
+  .back15Sec: (NSImageNameTouchBarSkipBack15SecondsTemplate, -15, NSLocalizedString("touchbar.back_15", comment: "-15sec Ahead")),
+  .back30Sec: (NSImageNameTouchBarSkipBack30SecondsTemplate, -30, NSLocalizedString("touchbar.back_30", comment: "-30sec Ahead")),
+  .next: (NSImageNameTouchBarSkipAheadTemplate, 0, NSLocalizedString("touchbar.next_video", comment: "Next Video")),
+  .prev: (NSImageNameTouchBarSkipBackTemplate, 1, NSLocalizedString("touchbar.prev_video", comment: "Previous Video")),
+  .volumeUp: (NSImageNameTouchBarVolumeUpTemplate, 0, NSLocalizedString("touchbar.increase_volume", comment: "Volume +")),
+  .volumeDown: (NSImageNameTouchBarVolumeDownTemplate, 1, NSLocalizedString("touchbar.decrease_volume", comment: "Volume -")),
+  .rewind: (NSImageNameTouchBarRewindTemplate, 0, NSLocalizedString("touchbar.rewind", comment: "Rewind")),
+  .fastForward: (NSImageNameTouchBarFastForwardTemplate, 1, NSLocalizedString("touchbar.fast_forward", comment: "Fast Forward"))
 ]
 
 @available(OSX 10.12.2, *)
@@ -68,7 +68,7 @@ extension MainWindowController: NSTouchBarDelegate {
     case NSTouchBarItemIdentifier.playPause:
       let item = NSCustomTouchBarItem(identifier: identifier)
       item.view = NSButton(image: NSImage(named: NSImageNameTouchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
-      item.customizationLabel = "Play / Pause"
+      item.customizationLabel = NSLocalizedString("touchbar.play_pause", comment: "Play / Pause")
       self.touchBarPlayPauseBtn = item.view as? NSButton
       return item
 
@@ -80,7 +80,7 @@ extension MainWindowController: NSTouchBarDelegate {
       item.slider.maxValue = 100
       item.slider.target = self
       item.slider.action = #selector(self.touchBarSliderAction(_:))
-      item.customizationLabel = "Seek"
+      item.customizationLabel = NSLocalizedString("touchbar.seek", comment: "Seek")
       self.touchBarPlaySlider = item.slider as? TouchBarPlaySlider
       return item
 
@@ -101,7 +101,7 @@ extension MainWindowController: NSTouchBarDelegate {
       label.mode = ud.bool(forKey: Preference.Key.showRemainingTime) ? .remaining : .current
       self.touchBarCurrentPosLabel = label
       item.view = label
-      item.customizationLabel = "Time Position"
+      item.customizationLabel = NSLocalizedString("touchbar.time", comment: "Time Position")
       return item
 
     case NSTouchBarItemIdentifier.ahead15Sec,
@@ -153,7 +153,7 @@ extension MainWindowController: NSTouchBarDelegate {
 
   func touchBarSliderAction(_ sender: NSSlider) {
     let percentage = 100 * sender.doubleValue / sender.maxValue
-    playerCore.seek(percent: percentage)
+    playerCore.seek(percent: percentage, forceExact: true)
   }
 
   private func buttonTouchBarItem(withIdentifier identifier: NSTouchBarItemIdentifier, imageName: String, tag: Int, customLabel: String, action: Selector) -> NSCustomTouchBarItem {
@@ -168,10 +168,7 @@ extension MainWindowController: NSTouchBarDelegate {
   // Set TouchBar Time Label
 
   func setupTouchBarUI() {
-    guard let duration = playerCore.info.videoDuration else {
-      Utility.fatal("video info not available")
-    }
-
+    let duration: VideoTime = playerCore.info.videoDuration ?? .zero
     let pad: CGFloat = 16.0
     sizingTouchBarTextField.stringValue = duration.stringRepresentation
     if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, let posLabel = touchBarCurrentPosLabel {
@@ -194,13 +191,19 @@ class TouchBarPlaySlider: NSSlider {
 
   var isTouching = false
 
+  var playerCore: PlayerCore {
+    return (self.window?.windowController as? MainWindowController)?.playerCore ?? .active
+  }
+
   override func touchesBegan(with event: NSEvent) {
     isTouching = true
+    playerCore.togglePause(true)
     super.touchesBegan(with: event)
   }
 
   override func touchesEnded(with event: NSEvent) {
     isTouching = false
+    playerCore.togglePause(false)
     super.touchesEnded(with: event)
   }
 
@@ -214,12 +217,15 @@ class TouchBarPlaySlider: NSSlider {
 
 class TouchBarPlaySliderCell: NSSliderCell {
 
-  private let gradient = NSGradient(starting: NSColor(calibratedRed: 0.471, green: 0.8, blue: 0.929, alpha: 1),
-                            ending: NSColor(calibratedRed: 0.784, green: 0.471, blue: 0.929, alpha: 1))
   private let solidColor = NSColor.labelColor.withAlphaComponent(0.4)
+  private let knobWidthWithImage: CGFloat = 60
 
   var isTouching: Bool {
-    return (self.controlView as? TouchBarPlaySlider)?.isTouching ?? false
+    return (self.controlView as! TouchBarPlaySlider).isTouching
+  }
+
+  var playerCore: PlayerCore {
+    return (self.controlView as! TouchBarPlaySlider).playerCore
   }
 
   override var knobThickness: CGFloat {
@@ -227,17 +233,29 @@ class TouchBarPlaySliderCell: NSSliderCell {
   }
 
   override func barRect(flipped: Bool) -> NSRect {
+    self.controlView?.superview?.layer?.backgroundColor = .black
     let rect = super.barRect(flipped: flipped)
     return NSRect(x: rect.origin.x,
-                  y: 6,
+                  y: 2,
                   width: rect.width,
-                  height: self.controlView!.frame.height - 12)
+                  height: self.controlView!.frame.height - 4)
   }
 
   override func knobRect(flipped: Bool) -> NSRect {
+    let info = playerCore.info
     let superKnob = super.knobRect(flipped: flipped)
     if isTouching {
-      return superKnob
+      if info.thumbnails.count > 0 {
+        let imageKnobWidth = knobWidthWithImage
+        let barWidth = barRect(flipped: flipped).width
+
+        return NSRect(x: superKnob.origin.x * (barWidth - (imageKnobWidth - superKnob.width)) / barWidth,
+                      y: superKnob.origin.y,
+                      width: imageKnobWidth,
+                      height: superKnob.height)
+      } else {
+        return superKnob
+      }
     } else {
       let remainingKnobWidth = superKnob.width - knobThickness
       return NSRect(x: superKnob.origin.x + remainingKnobWidth * CGFloat(doubleValue/100),
@@ -248,33 +266,55 @@ class TouchBarPlaySliderCell: NSSliderCell {
   }
 
   override func drawKnob(_ knobRect: NSRect) {
-    NSColor.labelColor.setFill()
-    let path = NSBezierPath(roundedRect: knobRect, xRadius: 2, yRadius: 2)
-    path.fill()
+    let info = playerCore.info
+    guard !info.isIdle else { return }
+    if isTouching, let dur = info.videoDuration?.second, let tb = info.getThumbnail(forSecond: (doubleValue / 100) * dur), let image = tb.image {
+      NSGraphicsContext.saveGraphicsState()
+      NSBezierPath(roundedRect: knobRect, xRadius: 3, yRadius: 3).setClip()
+      let origSize = image.size.crop(withAspect: Aspect(size: knobRect.size))
+      let origRect = NSRect(x: (image.size.width - origSize.width) / 2,
+                            y: (image.size.height - origSize.height) / 2,
+                            width: origSize.width,
+                            height: origSize.height)
+      image.draw(in: knobRect, from: origRect, operation: .copy, fraction: 1, respectFlipped: true, hints: nil)
+      NSColor.white.setStroke()
+      let outerBorder = NSBezierPath(roundedRect: knobRect.insetBy(dx: 1, dy: 1), xRadius: 3, yRadius: 3)
+      outerBorder.lineWidth = 1
+      outerBorder.stroke()
+      NSColor.black.setStroke()
+      let innerBorder = NSBezierPath(roundedRect: knobRect.insetBy(dx: 2, dy: 2), xRadius: 2, yRadius: 2)
+      innerBorder.lineWidth = 1
+      innerBorder.stroke()
+      NSGraphicsContext.restoreGraphicsState()
+    } else {
+      NSColor.labelColor.setFill()
+      let path = NSBezierPath(roundedRect: knobRect, xRadius: 2, yRadius: 2)
+      path.fill()
+    }
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
+    let info = playerCore.info
+    guard !info.isIdle else { return }
     let barRect = self.barRect(flipped: flipped)
     NSGraphicsContext.saveGraphicsState()
     NSBezierPath(roundedRect: barRect, xRadius: 2.5, yRadius: 2.5).setClip()
-    let step: CGFloat = 2
-    let mid = barRect.origin.x + barRect.width * CGFloat(doubleValue/100)
-    let end = barRect.origin.x + barRect.width
-    var i: CGFloat = barRect.origin.x
-    var j: CGFloat = 0
-    while (i < mid) {
-      let rect = NSRect(x: i, y: barRect.origin.y, width: 1, height: barRect.height)
-      gradient?.interpolatedColor(atLocation: CGFloat(j / barRect.width)).setFill()
-      NSBezierPath(rect: rect).fill()
+    let step: CGFloat = 3
+    let end = barRect.width
+    var i: CGFloat = 0
+    solidColor.setFill()
+    while (i < end + step) {
+      let percent = Double(i / end)
+      let dest = NSRect(x: barRect.origin.x + i, y: barRect.origin.y, width: 2, height: barRect.height)
+      if let dur = info.videoDuration?.second,
+        let image = info.getThumbnail(forSecond: percent * dur)?.image,
+        info.thumbnailsProgress >= percent {
+        let orig = NSRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        image.draw(in: dest, from: orig, operation: .copy, fraction: 1, respectFlipped: true, hints: nil)
+      } else {
+        NSBezierPath(rect: dest).fill()
+      }
       i += step
-      j += step
-    }
-    while (i < end) {
-      let rect = NSRect(x: i, y: barRect.origin.y, width: 1, height: barRect.height)
-      solidColor.setFill()
-      NSBezierPath(rect: rect).fill()
-      i += step
-      j += step
     }
     NSGraphicsContext.restoreGraphicsState()
   }

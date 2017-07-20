@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 17/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -14,6 +14,10 @@ struct Preference {
 
   // consider using RawRepresentable, but also need to extend UserDefaults
   struct Key {
+    static let actionAfterLaunch = "actionAfterLaunch"
+    static let alwaysOpenInNewWindow = "alwaysOpenInNewWindow"
+    static let enableCmdN = "enableCmdN"
+
     /** Record recent files */
     static let recordPlaybackHistory = "recordPlaybackHistory"
     static let recordRecentFiles = "recordRecentFiles"
@@ -39,9 +43,6 @@ struct Preference {
 
     /** Keep player window open on end of file / playlist. (bool) */
     static let keepOpenOnFileEnd = "keepOpenOnFileEnd"
-    
-    /** Open a choose file panel after opening (bool) */
-    static let openStartPanel = "openStartPanel"
 
     /** Resume from last position */
     static let resumeLastPosition = "resumeLastPosition"
@@ -90,14 +91,14 @@ struct Preference {
 
     static let playlistWidth = "playlistWidth"
 
+    static let enableThumbnailPreview = "enableThumbnailPreview"
+
     // Codec
 
     static let videoThreads = "videoThreads"
-
-    static let useHardwareDecoding = "useHardwareDecoding"
+    static let hardwareDecoder = "hardwareDecoder"
 
     static let audioThreads = "audioThreads"
-
     static let audioLanguage = "audioLanguage"
     static let maxVolume = "maxVolume"
 
@@ -134,6 +135,7 @@ struct Preference {
     static let displayInLetterBox = "displayInLetterBox"
     static let subScaleWithWindow = "subScaleWithWindow"
     static let openSubUsername = "openSubUsername"
+    static let defaultEncoding = "defaultEncoding"
 
     // Network
 
@@ -207,6 +209,12 @@ struct Preference {
   }
 
   // MARK: - Enums
+
+  enum ActionAfterLaunch: Int {
+    case welcomeWindow = 0
+    case openPanel
+    case none
+  }
 
   enum ArrowButtonAction: Int {
     case speed = 0
@@ -369,9 +377,30 @@ struct Preference {
     }
   }
 
+  enum HardwareDecoderOption: Int {
+    case disabled = 0
+    case auto
+    case autoCopy
+
+    var mpvString: String {
+      switch self {
+      case .disabled: return "no"
+      case .auto: return "auto"
+      case .autoCopy: return "auto-copy"
+      }
+    }
+
+    var localizedDescription: String {
+      return NSLocalizedString("hwdec." + mpvString, comment: mpvString)
+    }
+  }
+
   // MARK: - Defaults
 
   static let defaultPreference:[String : Any] = [
+    Key.actionAfterLaunch: ActionAfterLaunch.welcomeWindow.rawValue,
+    Key.alwaysOpenInNewWindow: true,
+    Key.enableCmdN: false,
     Key.recordPlaybackHistory: true,
     Key.recordRecentFiles: true,
     Key.trackAllFilesInRecentOpenMenu: true,
@@ -392,7 +421,6 @@ struct Preference {
     Key.resumeLastPosition: true,
     Key.useMediaKeys: true,
     Key.useAppleRemote: true,
-    Key.openStartPanel: false,
     Key.alwaysFloatOnTop: false,
     Key.blackOutMonitor: false,
 
@@ -402,12 +430,13 @@ struct Preference {
     Key.usePhysicalResolution: true,
     Key.resizeOnlyWhenManuallyOpenFile: true,
     Key.showRemainingTime: false,
+    Key.enableThumbnailPreview: true,
 
     Key.videoThreads: 0,
-    Key.useHardwareDecoding: true,
+    Key.hardwareDecoder: HardwareDecoderOption.auto.rawValue,
     Key.audioThreads: 0,
     Key.audioLanguage: "",
-    Key.maxVolume: 130,
+    Key.maxVolume: 100,
     Key.spdifAC3: false,
     Key.spdifDTS: false,
     Key.spdifDTSHD: false,
@@ -439,6 +468,7 @@ struct Preference {
     Key.displayInLetterBox: true,
     Key.subScaleWithWindow: true,
     Key.openSubUsername: "",
+    Key.defaultEncoding: "auto",
 
     Key.enableCache: true,
     Key.defaultCacheSize: 153600,

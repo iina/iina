@@ -15,6 +15,7 @@ class Regex {
   static let urlDetect = Regex("^(https?|ftp)://[^\\s/$.?#].[^\\s]*$")
   static let iso639_2Desc = Regex("^.+?\\(([a-z]{3})\\)$")
   static let geometry = Regex("^((\\d+%?)?(x(\\d+%?))?)?((\\+|\\-)(\\d+%?)(\\+|\\-)(\\d+%?))?$")
+  static let mpvURL = Regex("^[A-z0-9_]+://")
 
   var regex: NSRegularExpression?
 

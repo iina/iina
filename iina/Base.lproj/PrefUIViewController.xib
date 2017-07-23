@@ -98,7 +98,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zyi-J3-lSp">
-                    <rect key="frame" x="10" y="29" width="100" height="34"/>
+                    <rect key="frame" x="10" y="20" width="100" height="43"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="96" id="YMo-0R-2UK"/>
                     </constraints>
@@ -358,6 +358,7 @@
                 <constraint firstItem="RRL-GG-R45" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="C7v-r5-ck5"/>
                 <constraint firstItem="bGH-kO-7Rd" firstAttribute="width" secondItem="6ml-Xj-nVX" secondAttribute="width" id="Cjr-lu-5fc"/>
                 <constraint firstItem="T4i-ea-ECA" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="120" id="DLT-BI-4jw"/>
+                <constraint firstAttribute="bottom" secondItem="zyi-J3-lSp" secondAttribute="bottom" constant="20" id="DU7-kp-u7P"/>
                 <constraint firstItem="qNv-Yk-nvp" firstAttribute="leading" secondItem="bGH-kO-7Rd" secondAttribute="trailing" constant="8" id="DV3-g4-WfD"/>
                 <constraint firstItem="1dx-xQ-FFL" firstAttribute="leading" secondItem="sOa-wy-qv2" secondAttribute="trailing" constant="4" id="G7I-y1-3U9"/>
                 <constraint firstItem="RFk-nU-SGL" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="12" id="GAe-B7-aMq"/>

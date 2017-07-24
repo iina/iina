@@ -8,6 +8,12 @@
 
 import Cocoa
 
+fileprivate let FilterLabelCrop = "iina_crop"
+fileprivate let FilterLabelFlip = "iina_flip"
+fileprivate let FilterLabelMirror = "iina_mirror"
+fileprivate let FilterLabelAudioEq = "iina_aeq"
+
+
 class PlayerCore: NSObject {
 
   // MARK: - Multiple instances
@@ -429,6 +435,7 @@ class PlayerCore: NSObject {
     if enable {
       if info.flipFilter == nil {
         let vf = MPVFilter.flip()
+        vf.label = FilterLabelFlip
         if addVideoFilter(vf) {
           info.flipFilter = vf
         }
@@ -445,6 +452,7 @@ class PlayerCore: NSObject {
     if enable {
       if info.mirrorFilter == nil {
         let vf = MPVFilter.mirror()
+        vf.label = FilterLabelMirror
         if addVideoFilter(vf) {
           info.mirrorFilter = vf
         }
@@ -589,6 +597,7 @@ class PlayerCore: NSObject {
     if let aspect = Aspect(string: str) {
       let cropped = NSMakeSize(CGFloat(vwidth), CGFloat(vheight)).crop(withAspect: aspect)
       let vf = MPVFilter.crop(w: Int(cropped.width), h: Int(cropped.height), x: nil, y: nil)
+      vf.label = FilterLabelCrop
       setCrop(fromFilter: vf)
       // warning! may should not update it here
       info.unsureCrop = str
@@ -602,14 +611,14 @@ class PlayerCore: NSObject {
   }
 
   func setCrop(fromFilter filter: MPVFilter) {
-    filter.label = "iina_crop"
+    filter.label = FilterLabelCrop
     if addVideoFilter(filter) {
       info.cropFilter = filter
     }
   }
 
   func setAudioEq(fromFilter filter: MPVFilter) {
-    filter.label = "iina_aeq"
+    filter.label = FilterLabelAudioEq
     addAudioFilter(filter)
     info.audioEqFilter = filter
   }
@@ -838,13 +847,8 @@ class PlayerCore: NSObject {
     NotificationCenter.default.post(Notification(name: Constants.Noti.fileLoaded))
   }
 
-  func notifyMainWindowVideoSizeChanged() {
-    DispatchQueue.main.sync {
-      self.mainWindow.adjustFrameByVideoSize()
-    }
-  }
-
   func playbackRestarted() {
+    reloadSavedIINAfilters()
     DispatchQueue.main.async {
       Timer.scheduledTimer(timeInterval: TimeInterval(0.2), target: self, selector: #selector(self.reEnableOSDAfterFileLoading), userInfo: nil, repeats: false)
     }
@@ -898,6 +902,12 @@ class PlayerCore: NSObject {
   }
 
   // MARK: - Sync with UI in MainWindow
+
+  func notifyMainWindowVideoSizeChanged() {
+    DispatchQueue.main.sync {
+      self.mainWindow.adjustFrameByVideoSize()
+    }
+  }
 
   // difficult to use option set
   enum SyncUIOption {
@@ -1146,6 +1156,37 @@ class PlayerCore: NSObject {
         swap(&width, &height)
       }
       return (width, height)
+    }
+  }
+
+  /** Check if there are IINA filters saved in watch_later file. */
+  func reloadSavedIINAfilters() {
+    // vf
+    let videoFilters = mpv.getFilters(MPVProperty.vf)
+    for filter in videoFilters {
+      guard let label = filter.label else { continue }
+      switch label {
+      case FilterLabelCrop:
+        info.cropFilter = filter
+        info.unsureCrop = ""
+      case FilterLabelFlip:
+        info.flipFilter = filter
+      case FilterLabelMirror:
+        info.mirrorFilter = filter
+      default:
+        break
+      }
+    }
+    // af
+    let audioFilters = mpv.getFilters(MPVProperty.af)
+    for filter in audioFilters {
+      guard let label = filter.label else { continue }
+      switch label {
+      case FilterLabelAudioEq:
+        info.audioEqFilter = filter
+      default:
+        break
+      }
     }
   }
 

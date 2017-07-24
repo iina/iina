@@ -391,12 +391,13 @@ class MenuController: NSObject, NSMenuDelegate {
 
   /**
    Bind a menu with a list of available options.
-   @param menu         the NSMenu
-   @param withOptions  option titles for each menu item, as an array
-   @param objects      objects that will be bind to each menu item, as an array
-   @param objectMap    alternatively, can pass a map like [title: object]
-   @action             the action for each menu item
-   @checkStateBlock    a block to set each menu item's state
+
+   - parameter menu:            the NSMenu
+   - parameter withOptions:     option titles for each menu item, as an array
+   - parameter objects:         objects that will be bind to each menu item, as an array
+   - parameter objectMap:       alternatively, can pass a map like [title: object]
+   - parameter action:          the action for each menu item
+   - parameter checkStateBlock: a block to set each menu item's state
    */
   private func bind(menu: NSMenu,
                     withOptions titles: [String]?, objects: [Any?]?,

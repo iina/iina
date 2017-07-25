@@ -742,6 +742,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let newWidth = window!.frame.width - currentLocation.x - 2
       sideBarWidthConstraint.constant = newWidth.constrain(min: PlaylistMinWidth, max: PlaylistMaxWidth)
     } else {
+      /* Current mechanism to differentiate between dragging event and clicking event is via isDragging parameter,
+       * It's necessary to filter out tiny movement to clicking rather than dragging.
+       */
+      //Requires minimum 1px movement to trigger dragging event.
+      if (abs(mousePosRelatedToWindow!.x - NSEvent.mouseLocation().x + window!.frame.origin.x) +
+          abs(mousePosRelatedToWindow!.y - NSEvent.mouseLocation().y + window!.frame.origin.y)) < 1.0 {
+          //consider as clicking event;
+          return
+      }
+      
       isDragging = true
       guard !controlBarFloating.isDragging else { return }
       if mousePosRelatedToWindow != nil {

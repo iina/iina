@@ -35,7 +35,7 @@ fileprivate extension NSTouchBarItemIdentifier {
 }
 
 // Image name, tag, custom label
-@available(OSX 10.12.2, *)
+@available(macOS 10.12.2, *)
 fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, String)] = [
   .ahead15Sec: (NSImageNameTouchBarSkipAhead15SecondsTemplate, 15, NSLocalizedString("touchbar.ahead_15", comment: "15sec Ahead")),
   .ahead30Sec: (NSImageNameTouchBarSkipAhead30SecondsTemplate, 30, NSLocalizedString("touchbar.ahead_30", comment: "30sec Ahead")),
@@ -49,7 +49,7 @@ fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, St
   .fastForward: (NSImageNameTouchBarFastForwardTemplate, 1, NSLocalizedString("touchbar.fast_forward", comment: "Fast Forward"))
 ]
 
-@available(OSX 10.12.2, *)
+@available(macOS 10.12.2, *)
 extension MainWindowController: NSTouchBarDelegate {
 
   override func makeTouchBar() -> NSTouchBar? {

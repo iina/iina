@@ -177,7 +177,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
-    if #available(OSX 10.12, *) {
+    if #available(macOS 10.12, *) {
       pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
     } else {
       videoMenu.removeItem(pictureInPicture)
@@ -276,7 +276,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // Window
 
-    if #available(OSX 10.12.2, *) {
+    if #available(macOS 10.12.2, *) {
       customTouchBar.action = #selector(NSApplication.toggleTouchBarCustomizationPalette(_:))
     } else {
       customTouchBar.isHidden = true

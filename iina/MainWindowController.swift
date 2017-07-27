@@ -1478,6 +1478,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let winFrameWithOrigVideoSize = NSRect(origin: winFrame.origin, size: NSMakeSize(scale * origWidth, scale * origHeight))
 
       window!.aspectRatio = winFrameWithOrigVideoSize.size
+      if #available(macOS 10.12, *) {
+        pip.aspectRatio = winFrameWithOrigVideoSize.size
+      }
       window!.setFrame(winFrameWithOrigVideoSize, display: true, animate: false)
       (videoRect, videoViewFrame) = videoViewSizeInInteractiveMode(winFrameWithOrigVideoSize, currentCrop: currentCrop, originalSize: origSize)
     } else {
@@ -1710,6 +1713,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // set aspect ratio
     let originalVideoSize = NSSize(width: width, height: height)
     w.aspectRatio = originalVideoSize
+    if #available(macOS 10.12, *) {
+      pip.aspectRatio = originalVideoSize
+    }
 
     videoView.videoSize = w.convertToBacking(videoView.frame).size
 
@@ -2087,7 +2093,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case .openURL:
       (NSApp.delegate! as! AppDelegate).openURL(self)
     case .togglePIP:
-      if #available(OSX 10.12, *) {
+      if #available(macOS 10.12, *) {
         self.menuTogglePIP(.dummy)
       }
     case .videoPanel:

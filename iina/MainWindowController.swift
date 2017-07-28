@@ -2133,7 +2133,6 @@ extension MainWindowController: PIPViewControllerDelegate {
     
     pipVideo = NSViewController()
     pipVideo.view = videoView
-    pip.aspectRatio = NSSize(width: playerCore.info.videoWidth!, height: playerCore.info.videoHeight!)
     pip.playing = !playerCore.info.isPaused
     pip.title = window?.title
     

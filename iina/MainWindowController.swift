@@ -314,7 +314,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @available(macOS 10.12, *)
   lazy var pip: PIPViewController = {
     let pip = PIPViewController()
-    pip.userCanResize = true
     pip.delegate = self
     return pip
   }()

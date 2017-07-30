@@ -428,4 +428,8 @@ extension MainWindowController {
     // FIXME: this line shouldn't be here
     playerCore.info.isNetworkResource = url.isFileURL
   }
+
+  @IBAction func menuSwitchToMiniPlayer(_ sender: NSMenuItem) {
+    playerCore.switchToMiniPlayer()
+  }
 }

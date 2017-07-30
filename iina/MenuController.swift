@@ -109,6 +109,7 @@ class MenuController: NSObject, NSMenuDelegate {
   // Window
   @IBOutlet weak var customTouchBar: NSMenuItem!
   @IBOutlet weak var inspector: NSMenuItem!
+  @IBOutlet weak var miniPlayer: NSMenuItem!
 
 
   // MARK: - Construct Menus
@@ -283,6 +284,7 @@ class MenuController: NSObject, NSMenuDelegate {
     }
 
     inspector.action = #selector(MainWindowController.menuShowInspector(_:))
+    miniPlayer.action = #selector(MainWindowController.menuSwitchToMiniPlayer(_:))
   }
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {

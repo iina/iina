@@ -89,6 +89,7 @@ class PlayerCore: NSObject {
 
   var mainWindow: MainWindowController!
   var initialWindow: InitialWindowController!
+  var miniPlayer: MiniPlayerWindowController!
 
   var mpvController: MPVController!
 
@@ -120,6 +121,7 @@ class PlayerCore: NSObject {
     self.mpvController = MPVController(playerCore: self)
     self.mainWindow = MainWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)
+    self.miniPlayer = MiniPlayerWindowController(player: self)
   }
 
   // MARK: - Control commands
@@ -218,6 +220,15 @@ class PlayerCore: NSObject {
   // invalidate timer
   func invalidateTimer() {
     self.syncPlayTimeTimer?.invalidate()
+  }
+
+  func switchToMiniPlayer() {
+    miniPlayer.showWindow(self)
+    mainWindow.window?.orderOut(self)
+  }
+
+  func switchBackFromMiniPlayer() {
+    mainWindow.window?.makeKeyAndOrderFront(self)
   }
 
   // MARK: - MPV commands

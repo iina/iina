@@ -8,6 +8,10 @@
 
 import Cocoa
 
+fileprivate let DefaultPlaylistHeight: CGFloat = 300
+fileprivate let AutoHidePlaylistThreshold: CGFloat = 72 + 200
+fileprivate let AnimationDurationShowControl: TimeInterval = 0.2
+
 class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
   override var windowNibName: String {
@@ -18,6 +22,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
   @IBOutlet weak var closeButton: NSButton!
   @IBOutlet weak var playlistWrapperView: NSView!
+  @IBOutlet weak var mediaInfoView: NSView!
+  @IBOutlet weak var controlView: NSView!
 
   private var isPlaylistVisible = false
   private var originalWindowFrame: NSRect!
@@ -51,9 +57,20 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
     window.setFrame(window.frame.rectWithoutPlaylistHeight(), display: false, animate: false)
 
+    // tracking area
+    let trackingView = NSView()
+    trackingView.translatesAutoresizingMaskIntoConstraints = false
+    window.contentView?.addSubview(trackingView, positioned: .above, relativeTo: nil)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v(==72)]"], ["v": trackingView])
+    trackingView.addTrackingArea(NSTrackingArea(rect: trackingView.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited], owner: self, userInfo: nil))
+
+    // close button
     closeButton.image = NSImage(named: NSImageNameStopProgressFreestandingTemplate)
     closeButton.image?.isTemplate = true
     closeButton.action = #selector(self.close)
+
+    // switching UI
+    controlView.alphaValue = 0
   }
 
   func windowWillClose(_ notification: Notification) {
@@ -64,23 +81,41 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     originalWindowFrame = window!.frame
   }
 
+  override func mouseEntered(with event: NSEvent) {
+    NSAnimationContext.runAnimationGroup({ context in
+      context.duration = AnimationDurationShowControl
+      controlView.animator().alphaValue = 1
+      mediaInfoView.animator().alphaValue = 0
+    }, completionHandler: {})
+  }
+
+  override func mouseExited(with event: NSEvent) {
+    NSAnimationContext.runAnimationGroup({ context in
+      context.duration = AnimationDurationShowControl
+      controlView.animator().alphaValue = 0
+      mediaInfoView.animator().alphaValue = 1
+    }, completionHandler: {})
+  }
+
   func windowDidEndLiveResize(_ notification: Notification) {
     guard let window = window else { return }
     if isPlaylistVisible {
       // hide
-      if window.frame.height < 72 + 200 {
+      if window.frame.height < AutoHidePlaylistThreshold {
         isPlaylistVisible = false
         window.setFrame(window.frame.rectWithoutPlaylistHeight(), display: true, animate: true)
       }
     } else {
       // show
-      if window.frame.height < 72 + 200 {
+      if window.frame.height < AutoHidePlaylistThreshold {
         window.setFrame(window.frame.rectWithoutPlaylistHeight(), display: true, animate: true)
       } else {
         isPlaylistVisible = true
       }
     }
   }
+
+  // MARK: - IBAction
 
   @IBAction func togglePlaylist(_ sender: Any) {
     guard let window = window else { return }
@@ -92,8 +127,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
       // show
       isPlaylistVisible = true
       var newFrame = window.frame
-      newFrame.origin.y -= 300
-      newFrame.size.height += 300
+      newFrame.origin.y -= DefaultPlaylistHeight
+      newFrame.size.height += DefaultPlaylistHeight
       window.setFrame(newFrame, display: true, animate: true)
     }
   }

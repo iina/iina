@@ -8,6 +8,8 @@
         <customObject id="-2" userLabel="File's Owner" customClass="MiniPlayerWindowController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="9Vr-ZV-fes" id="B82-0M-bTM"/>
+                <outlet property="controlView" destination="cDR-8J-QI7" id="B1L-ru-Mnc"/>
+                <outlet property="mediaInfoView" destination="Zv7-H8-iOq" id="LrZ-za-HpC"/>
                 <outlet property="playlistWrapperView" destination="dkl-qd-rae" id="XpW-Qe-rX8"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
@@ -21,7 +23,6 @@
             <rect key="contentRect" x="196" y="240" width="300" height="72"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <value key="minSize" type="size" width="300" height="72"/>
-            <value key="maxSize" type="size" width="300" height="640"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO" customClass="NSVisualEffectView">
                 <rect key="frame" x="0.0" y="0.0" width="300" height="72"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -52,10 +53,38 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Zv7-H8-iOq">
+                        <rect key="frame" x="0.0" y="24" width="300" height="48"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h25-bp-EvL">
+                                <rect key="frame" x="134" y="25" width="31" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Title" id="Rs9-6l-6vp">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcj-EY-i9R">
+                                <rect key="frame" x="111" y="7" width="78" height="14"/>
+                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Artist - Album" id="Nle-gv-CWY">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="kcj-EY-i9R" firstAttribute="centerX" secondItem="Zv7-H8-iOq" secondAttribute="centerX" id="DYZ-sc-L0I"/>
+                            <constraint firstItem="h25-bp-EvL" firstAttribute="top" secondItem="Zv7-H8-iOq" secondAttribute="top" constant="6" id="Qaf-SS-SCV"/>
+                            <constraint firstItem="kcj-EY-i9R" firstAttribute="top" secondItem="h25-bp-EvL" secondAttribute="bottom" constant="4" id="mbp-t7-SX2"/>
+                            <constraint firstAttribute="height" constant="48" id="uWg-wb-QM5"/>
+                            <constraint firstItem="h25-bp-EvL" firstAttribute="centerX" secondItem="Zv7-H8-iOq" secondAttribute="centerX" id="uob-1w-0x0"/>
+                        </constraints>
+                    </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cDR-8J-QI7">
                         <rect key="frame" x="0.0" y="24" width="300" height="48"/>
                         <subviews>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="9Vr-ZV-fes">
+                            <button toolTip="Close Mini Player" translatesAutoresizingMaskIntoConstraints="NO" id="9Vr-ZV-fes">
                                 <rect key="frame" x="8" y="28" width="12" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="1xG-V6-1tq"/>
@@ -142,15 +171,15 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="dkl-qd-rae">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
+                        <rect key="frame" x="0.0" y="-200" width="300" height="200"/>
                         <subviews>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="qN9-Wd-Ae5">
-                                <rect key="frame" x="0.0" y="-4" width="300" height="5"/>
+                                <rect key="frame" x="0.0" y="196" width="300" height="5"/>
                             </box>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="480" id="Hu3-nA-WZT"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" id="SB2-oa-OYU"/>
+                            <constraint firstAttribute="width" constant="300" id="7Iq-RW-lqo"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="SB2-oa-OYU"/>
                             <constraint firstItem="qN9-Wd-Ae5" firstAttribute="leading" secondItem="dkl-qd-rae" secondAttribute="leading" id="hBp-pv-9rw"/>
                             <constraint firstAttribute="trailing" secondItem="qN9-Wd-Ae5" secondAttribute="trailing" id="k5e-VP-pYu"/>
                             <constraint firstItem="qN9-Wd-Ae5" firstAttribute="top" secondItem="dkl-qd-rae" secondAttribute="top" constant="1" id="ykA-Bq-lAq"/>
@@ -161,17 +190,20 @@
                     <constraint firstItem="e3M-Ma-JJM" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="40" id="1o2-i6-eKu"/>
                     <constraint firstItem="e3M-Ma-JJM" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="48" id="7bq-RL-daw"/>
                     <constraint firstItem="9EY-2T-Ebf" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="6" id="9J5-Sd-rfo"/>
+                    <constraint firstItem="Zv7-H8-iOq" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="DAA-tb-Ipv"/>
                     <constraint firstAttribute="trailing" secondItem="e3M-Ma-JJM" secondAttribute="trailing" constant="40" id="EZe-yu-6e1"/>
                     <constraint firstItem="xAK-xc-Njn" firstAttribute="centerY" secondItem="e3M-Ma-JJM" secondAttribute="centerY" id="FIV-nq-apI"/>
+                    <constraint firstAttribute="trailing" secondItem="Zv7-H8-iOq" secondAttribute="trailing" id="Jqk-Pw-5C4"/>
                     <constraint firstAttribute="trailing" secondItem="cDR-8J-QI7" secondAttribute="trailing" id="LVR-2p-CEM"/>
                     <constraint firstAttribute="trailing" secondItem="dkl-qd-rae" secondAttribute="trailing" id="PWU-Dp-3l5"/>
                     <constraint firstItem="dkl-qd-rae" firstAttribute="top" secondItem="cDR-8J-QI7" secondAttribute="bottom" constant="24" id="Ubt-lS-Nt1"/>
                     <constraint firstAttribute="trailing" secondItem="xAK-xc-Njn" secondAttribute="trailing" constant="6" id="Uvb-3b-ZjM"/>
                     <constraint firstItem="cDR-8J-QI7" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="gj3-At-Bl1"/>
                     <constraint firstItem="9EY-2T-Ebf" firstAttribute="centerY" secondItem="e3M-Ma-JJM" secondAttribute="centerY" id="kFI-pX-FcJ"/>
-                    <constraint firstAttribute="bottom" secondItem="dkl-qd-rae" secondAttribute="bottom" id="njP-z0-G2a"/>
+                    <constraint firstAttribute="bottom" secondItem="dkl-qd-rae" secondAttribute="bottom" priority="250" id="njP-z0-G2a"/>
                     <constraint firstItem="dkl-qd-rae" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="q6y-Q2-hbp"/>
                     <constraint firstItem="cDR-8J-QI7" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="vgi-cE-wGi"/>
+                    <constraint firstItem="Zv7-H8-iOq" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="yJR-gz-Wjr"/>
                 </constraints>
             </view>
             <connections>

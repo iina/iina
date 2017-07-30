@@ -645,7 +645,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscFloatingTopView.addView(fragToolbarView, in: .trailing)
       oscFloatingTopView.addView(fragControlView, in: .center)
       oscFloatingBottomView.addSubview(fragSliderView)
-      quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
+      Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
       // center control bar
       let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
       let cpv = ud.float(forKey: PK.controlBarPositionVertical)
@@ -1445,7 +1445,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     hideUI()
     bottomView.isHidden = false
     bottomView.addSubview(cropSettingsView.view)
-    quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.view])
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.view])
 
     // get original frame
     let origWidth = CGFloat(playerCore.info.videoWidth!)
@@ -1488,7 +1488,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     cropSettingsView.cropBoxView.actualSize = origSize
     cropSettingsView.cropBoxView.resized(with: videoRect)
     cropSettingsView.cropBoxView.isHidden = true
-    quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.cropBoxView])
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.cropBoxView])
 
     // show crop settings view
     NSAnimationContext.runAnimationGroup({ (context) in
@@ -2052,13 +2052,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   // MARK: - Utility
-
-  private func quickConstraints(_ constrants: [String], _ views: [String: NSView]) {
-    constrants.forEach { c in
-      let cc = NSLayoutConstraint.constraints(withVisualFormat: c, options: [], metrics: nil, views: views)
-      NSLayoutConstraint.activate(cc)
-    }
-  }
 
   private func videoViewSizeInInteractiveMode(_ rect: NSRect, currentCrop: NSRect, originalSize: NSSize) -> (NSRect, NSRect) {
     // 60 for bottom bar and 24*2 for top and bottom margin

@@ -224,10 +224,15 @@ class PlayerCore: NSObject {
 
   func switchToMiniPlayer() {
     miniPlayer.showWindow(self)
+    let playlistView = mainWindow.playlistView.view
+    playlistView.removeFromSuperview()
+    miniPlayer.playlistWrapperView.addSubview(playlistView)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": playlistView])
     mainWindow.window?.orderOut(self)
   }
 
   func switchBackFromMiniPlayer() {
+    mainWindow.playlistView.view.removeFromSuperview()
     mainWindow.window?.makeKeyAndOrderFront(self)
   }
 

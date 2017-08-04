@@ -139,6 +139,43 @@ class PlayerCore: NSObject {
     openMainWindow(path: path, url: url, isNetwork: isNetwork)
   }
 
+  func openURLs(_ urls: [URL]) {
+    var foundPlayableFile = false
+    let fileManager = FileManager.default
+    for url in urls {
+      var isDir: ObjCBool = false
+      let path = url.path
+      if fileManager.fileExists(atPath: path, isDirectory: &isDir), !isDir.boolValue {
+        if Utility.playableFileExt.contains(url.pathExtension) {
+          if !foundPlayableFile {
+            foundPlayableFile = true
+            info.shouldAutoLoadFiles = false
+            openURL(url)
+          } else {
+            addToPlaylist(path)
+          }
+        }
+      } else {
+        let dirEnumerator = fileManager.enumerator(atPath: path)
+        while let fileName = dirEnumerator?.nextObject() as? NSString {
+          if Utility.playableFileExt.contains(fileName.pathExtension) {
+            let filePath = path + "/" + (fileName as String)
+            if !foundPlayableFile {
+              foundPlayableFile = true
+              info.shouldAutoLoadFiles = false
+              openURL(URL(fileURLWithPath: filePath, isDirectory: false))
+            } else {
+              addToPlaylist(filePath)
+            }
+          }
+        }
+      }
+    }
+    if !foundPlayableFile {
+      Utility.showAlert(message: "Nothing to play")
+    }
+  }
+
   func openURLString(_ str: String) {
     guard let str = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed),
       let url = URL(string: str) else {
@@ -225,7 +262,6 @@ class PlayerCore: NSObject {
     // Send load file command
     info.fileLoading = true
     info.justOpenedFile = true
-    info.currentFileIsOpenedManually = true
     mpv.command(.loadfile, args: [path])
   }
 
@@ -623,7 +659,7 @@ class PlayerCore: NSObject {
 
   func playFile(_ path: String) {
     info.justOpenedFile = true
-    info.currentFileIsOpenedManually = true
+    info.shouldAutoLoadFiles = true
     mpv.command(.loadfile, args: [path, "replace"])
     getPlaylist()
   }
@@ -837,11 +873,11 @@ class PlayerCore: NSObject {
     info.currentURL = path.contains("://") ? URL(string: path) : URL(fileURLWithPath: path)
     // Auto load
     backgroundQueueTicket += 1
-    let currentFileIsOpenedManually = info.currentFileIsOpenedManually
+    let shouldAutoLoadFiles = info.shouldAutoLoadFiles
     let currentTicket = backgroundQueueTicket
     backgroundQueue.async {
       // add files in same folder
-      if currentFileIsOpenedManually {
+      if shouldAutoLoadFiles {
         self.autoLoadFilesInCurrentFolder(ticket: currentTicket)
       }
       // auto load matched subtitles

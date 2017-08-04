@@ -207,18 +207,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     panel.title = NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File")
     panel.canCreateDirectories = false
     panel.canChooseFiles = true
-    panel.canChooseDirectories = false
-    panel.resolvesAliases = true
-    panel.allowsMultipleSelection = false
+    panel.canChooseDirectories = true
+    panel.allowsMultipleSelection = true
     if panel.runModal() == NSFileHandlingPanelOKButton {
-      if let url = panel.url {
-        if Preference.bool(for: .recordRecentFiles) {
+      if Preference.bool(for: .recordRecentFiles) {
+        for url in panel.urls {
           NSDocumentController.shared().noteNewRecentDocumentURL(url)
         }
-        let isAlternative = (sender as? NSMenuItem)?.tag == alternativeMenuItemTag
-        let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternative)
-        playerCore.openURL(url, isNetworkResource: false)
       }
+      let isAlternative = (sender as? NSMenuItem)?.tag == alternativeMenuItemTag
+      let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternative)
+      let fileManager = FileManager.default
+      let firstURL = panel.urls.first
+      if panel.urls.count == 1 {
+        var isDir: ObjCBool = false
+        let _ = fileManager.fileExists(atPath: firstURL!.path, isDirectory: &isDir)
+        if !isDir.boolValue {
+          playerCore.info.shouldAutoLoadFiles = true
+          playerCore.openURL(firstURL!)
+          return
+        }
+      }
+      playerCore.openURLs(panel.urls)
     }
   }
 

@@ -163,7 +163,7 @@
 "alert.delete_history.title" = "Wiedergabeverlauf löschen";
 "alert.delete_history.message" = "Möchtest du die ausgewählten Einträge wirklich löschen?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video fliter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like, setting the crop) to get it working.";
+"alert.filter_hwdec.message" = "Du bist dabei einen Videofilter anzuwenden. Es könnte sein, dass Dein aktueller Hardwaredecoder diese nicht richtig unterstützt. Du kannst entweder das Hardwaredecoding abschalten oder auf Auto(Copy) umschalten. Auto(Copy) benötigt zweimal soviel Arbeitsspeicher. \nUnter Umständen musst Du die zuvor gemachten Einstellungen (wie zum Beispiel die Crop-Einstellungen) erneut vornehmen, damit es funktioniert.";
 "alert.filter_hwdec.abort" = "Abbrechen";
 "alert.filter_hwdec.turn_off" = "Hardwaredecoding deaktivieren";
 "alert.filter_hwdec.use_copy" = "Zu Autom. (Kopieren) wechseln";

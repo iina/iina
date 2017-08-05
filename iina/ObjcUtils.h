@@ -13,4 +13,6 @@
 
 + (NSUInteger)levDistance:(NSString *)str0 and:(NSString *)str1;
 
++ (BOOL)isDirectory:(NSString *)filePath;
+
 @end

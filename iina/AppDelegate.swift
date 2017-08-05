@@ -217,18 +217,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
       let isAlternative = (sender as? NSMenuItem)?.tag == alternativeMenuItemTag
       let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternative)
-      let fileManager = FileManager.default
-      let firstURL = panel.urls.first
-      if panel.urls.count == 1 {
-        var isDir: ObjCBool = false
-        let _ = fileManager.fileExists(atPath: firstURL!.path, isDirectory: &isDir)
-        if !isDir.boolValue {
-          playerCore.info.shouldAutoLoadFiles = true
-          playerCore.openURL(firstURL!)
-          return
-        }
+      let openedFile = playerCore.openURLs(panel.urls)
+      if openedFile == 0 {
+        Utility.showAlert("Nothing to open")
       }
-      playerCore.openURLs(panel.urls)
     }
   }
 

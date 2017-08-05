@@ -139,112 +139,12 @@ class PlayerCore: NSObject {
     openMainWindow(path: path, url: url, isNetwork: isNetwork)
   }
 
-  func openURLs(_ urls: [URL]) {
-    var foundPlayableFile = false
-    let fileManager = FileManager.default
-    for url in urls {
-      var isDir: ObjCBool = false
-      let path = url.path
-      if fileManager.fileExists(atPath: path, isDirectory: &isDir), !isDir.boolValue {
-        if Utility.playableFileExt.contains(url.pathExtension) {
-          if !foundPlayableFile {
-            foundPlayableFile = true
-            info.shouldAutoLoadFiles = false
-            openURL(url)
-          } else {
-            addToPlaylist(path)
-          }
-        }
-      } else {
-        let dirEnumerator = fileManager.enumerator(atPath: path)
-        while let fileName = dirEnumerator?.nextObject() as? NSString {
-          if Utility.playableFileExt.contains(fileName.pathExtension) {
-            let filePath = path + "/" + (fileName as String)
-            if !foundPlayableFile {
-              foundPlayableFile = true
-              info.shouldAutoLoadFiles = false
-              openURL(URL(fileURLWithPath: filePath, isDirectory: false))
-            } else {
-              addToPlaylist(filePath)
-            }
-          }
-        }
-      }
-    }
-    if !foundPlayableFile {
-      Utility.showAlert(message: "Nothing to play")
-    }
-  }
-
   func openURLString(_ str: String) {
     guard let str = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed),
       let url = URL(string: str) else {
         return
     }
     openMainWindow(path: str, url: url, isNetwork: true)
-  }
-
-  func acceptFromPasteboard(_ sender: NSDraggingInfo) -> NSDragOperation {
-    if sender.draggingSource() as? NSTableView === mainWindow.playlistView { return [] }
-    return .copy
-  }
-
-  func openFilesFromPasteboard(_ sender: NSDraggingInfo) -> Bool {
-    let pb = sender.draggingPasteboard()
-    guard let types = pb.types else { return false }
-    if types.contains(NSFilenamesPboardType) {
-      guard let fileNames = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else { return false }
-
-      var videoFiles: [String] = []
-      var subtitleFiles: [String] = []
-      fileNames.forEach { (path) in
-        let ext = (path as NSString).pathExtension.lowercased()
-        if Utility.supportedFileExt[.sub]!.contains(ext) {
-          subtitleFiles.append(path)
-        } else if Utility.playableFileExt.contains(ext) {
-          videoFiles.append(path)
-        }
-      }
-
-      if videoFiles.count == 0 {
-        if subtitleFiles.count > 0 {
-          subtitleFiles.forEach { (subtitle) in
-            loadExternalSubFile(URL(fileURLWithPath: subtitle))
-          }
-        } else {
-          return false
-        }
-      } else if videoFiles.count == 1 {
-        openURL(URL(fileURLWithPath: videoFiles[0]), isNetworkResource: false)
-        subtitleFiles.forEach { (subtitle) in
-          loadExternalSubFile(URL(fileURLWithPath: subtitle))
-        }
-      } else {
-        for path in videoFiles {
-          addToPlaylist(path)
-        }
-        sendOSD(.addToPlaylist(videoFiles.count))
-      }
-      NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
-      return true
-    } else if types.contains(NSURLPboardType) {
-      guard let url = pb.propertyList(forType: NSURLPboardType) as? [String] else { return false }
-
-      openURLString(url[0])
-      return true
-    } else if types.contains(NSPasteboardTypeString) {
-      guard let droppedString = pb.pasteboardItems![0].string(forType: "public.utf8-plain-text") else {
-        return false
-      }
-      if Regex.urlDetect.matches(droppedString) {
-        openURLString(droppedString)
-        return true
-      } else {
-        Utility.showAlert("unsupported_url")
-        return false
-      }
-    }
-    return false
   }
 
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {

@@ -74,7 +74,9 @@ extension PlayerCore {
   }
 
   func acceptFromPasteboard(_ sender: NSDraggingInfo) -> NSDragOperation {
-    if sender.draggingSource() != nil { return [] }
+    guard let owner = sender.draggingSource() as? NSView, owner.window !== mainWindow.window else {
+      return []
+    }
     let pb = sender.draggingPasteboard()
     guard let types = pb.types else { return [] }
     if types.contains(NSFilenamesPboardType) {

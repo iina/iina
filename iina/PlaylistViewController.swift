@@ -176,11 +176,13 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
 
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableViewDropOperation) -> NSDragOperation {
-    if info.draggingSource() != nil { return [] }
     let pasteboard = info.draggingPasteboard()
     playlistTableView.setDropRow(row, dropOperation: .above)
     if info.draggingSource() as? NSTableView === tableView {
       return .move
+    }
+    guard let owner = info.draggingSource() as? NSView, owner.window !== mainWindow.window else {
+      return []
     }
     if let paths = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
       if player.checkPlayableFiles(paths).0 {

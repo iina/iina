@@ -11,23 +11,9 @@ import Foundation
 extension PlayerCore {
 
   func openURLs(_ urls: [URL]) -> Int {
-    var playableFiles: [URL] = []
-    for url in urls {
-      let path = url.path
-      if !ObjcUtils.isDirectory(path) {
-        if Utility.playableFileExt.contains(url.pathExtension.lowercased()) {
-          playableFiles.append(url)
-        }
-      } else {
-        let dirEnumerator = FileManager.default.enumerator(atPath: path)
-        while let fileName = dirEnumerator?.nextObject() as? NSString {
-          if Utility.playableFileExt.contains(fileName.pathExtension.lowercased()) {
-            let filePath = path + "/" + (fileName as String)
-            playableFiles.append(URL(fileURLWithPath: filePath, isDirectory: false))
-          }
-        }
-      }
-    }
+    let paths = urls.map{ $0.path }
+    let (_, playableFiles) = checkPlayableFiles(paths, returnPaths: true)
+
     let count = playableFiles.count
     if count == 0 {
       return 0
@@ -36,9 +22,9 @@ extension PlayerCore {
     } else {
       info.shouldAutoLoadFiles = false
     }
-    openURL(playableFiles[0])
+    openURL(URL(fileURLWithPath: playableFiles[0], isDirectory: false))
     for i in 1..<count {
-      addToPlaylist(playableFiles[i].path)
+      addToPlaylist(playableFiles[i])
     }
     if count != 0 {
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
@@ -49,22 +35,31 @@ extension PlayerCore {
     return count
   }
 
-  func checkPlayableFile(_ paths: [String]) -> Bool {
+  func checkPlayableFiles(_ paths: [String], returnPaths: Bool = false) -> (Bool, [String]) {
+    var playableFiles: [String] = []
     for path in paths {
       if !ObjcUtils.isDirectory(path) {
         if Utility.playableFileExt.contains((path as NSString).pathExtension.lowercased()) {
-          return true
+          if returnPaths {
+            playableFiles.append(path)
+          } else {
+            return (true, [])
+          }
         }
       } else {
         let dirEnumerator = FileManager.default.enumerator(atPath: path)
         while let fileName = dirEnumerator?.nextObject() as? NSString {
           if Utility.playableFileExt.contains(fileName.pathExtension.lowercased()) {
-            return true
+            if returnPaths {
+              playableFiles.append(path + "/" + (fileName as String))
+            } else {
+              return (true, [])
+            }
           }
         }
       }
     }
-    return false
+    return (!playableFiles.isEmpty, playableFiles)
   }
 
   func checkSubtitleFile(_ paths: [String]) -> Bool {
@@ -79,12 +74,12 @@ extension PlayerCore {
   }
 
   func acceptFromPasteboard(_ sender: NSDraggingInfo) -> NSDragOperation {
-    if sender.draggingSource() as? NSTableView === mainWindow.playlistView { return [] }
+    if sender.draggingSource() != nil { return [] }
     let pb = sender.draggingPasteboard()
     guard let types = pb.types else { return [] }
     if types.contains(NSFilenamesPboardType) {
       guard let paths = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else { return [] }
-      if checkPlayableFile(paths) {
+      if checkPlayableFiles(paths).0 {
         return .copy
       } else if checkSubtitleFile(paths) {
         return .copy
@@ -106,7 +101,7 @@ extension PlayerCore {
     return []
   }
 
-  func openFilesFromPasteboard(_ sender: NSDraggingInfo) -> Bool {
+  func openFromPasteboard(_ sender: NSDraggingInfo) -> Bool {
     let pb = sender.draggingPasteboard()
     guard let types = pb.types else { return false }
     if types.contains(NSFilenamesPboardType) {

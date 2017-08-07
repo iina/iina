@@ -8,10 +8,15 @@
 //
 
 import Cocoa
+import MASPreferences
 
 @objc(ShortcutAvailableApplication)
 class ShortcutAvailableApplication: NSApplication {
   override func sendEvent(_ event: NSEvent) {
+    let keyWindow = NSApp.keyWindow?.windowController
+    guard keyWindow is MASPreferencesWindowController || keyWindow is HistoryWindowController else {
+      return super.sendEvent(event)
+    }
     
     let commandKey = NSEvent.ModifierFlags.command.rawValue
     let commandShiftKey = NSEvent.ModifierFlags.command.rawValue | NSEvent.ModifierFlags.shift.rawValue
@@ -32,8 +37,7 @@ class ShortcutAvailableApplication: NSApplication {
         default:
           break
         }
-      }
-      else if (event.modifierFlags.rawValue & NSEvent.ModifierFlags.deviceIndependentFlagsMask.rawValue) == commandShiftKey {
+      } else if (event.modifierFlags.rawValue & NSEvent.ModifierFlags.deviceIndependentFlagsMask.rawValue) == commandShiftKey {
         if event.charactersIgnoringModifiers == "Z" {
           if NSApp.sendAction(Selector(("redo:")), to:nil, from:self) { return }
         }

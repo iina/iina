@@ -14,6 +14,19 @@ fileprivate typealias PK = Preference.Key
 fileprivate let yes_str = "yes"
 fileprivate let no_str = "no"
 
+// Change this variable to inform mpv how much it should log
+fileprivate let MPVLogLevel = "warn"
+/*
+  "no"    - disable absolutely all messages
+  "fatal" - critical/aborting errors
+  "error" - simple errors
+  "warn"  - possible problems
+  "info"  - informational message
+  "v"     - noisy informational message
+  "debug" - very noisy technical information
+  "trace" - extremely noisy
+ */
+
 // Global functions
 
 protocol MPVEventDelegate {
@@ -289,7 +302,7 @@ class MPVController: NSObject {
     chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputConf, inputConfPath))
 
     // Receive log messages at warn level.
-    chkErr(mpv_request_log_messages(mpv, "warn"))
+    chkErr(mpv_request_log_messages(mpv, MPVLogLevel))
 
     // Request tick event.
     // chkErr(mpv_request_event(mpv, MPV_EVENT_TICK, 1))

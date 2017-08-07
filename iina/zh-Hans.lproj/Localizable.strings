@@ -200,6 +200,8 @@
 "hwdec.auto" = "启用硬件解码。但是，大多数视频滤镜不会正常工作。";
 "hwdec.auto-copy" = "启用硬件解码。它会占用两倍左右的内存，但支持视频滤镜。";
 
+"subencoding.auto" = "自动识别";
+
 // Touch bar
 
 "touchbar.ahead_15" = "前进 15 秒";

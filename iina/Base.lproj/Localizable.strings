@@ -198,6 +198,8 @@
 "hwdec.auto" = "Enable hardware decoding. However, most video filters won't work properly.";
 "hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but works with video filters.";
 
+"subencoding.auto" = "Auto detect";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15sec Ahead";

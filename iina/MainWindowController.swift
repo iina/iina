@@ -969,10 +969,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
-    guard pinchAction != .none && !isInFullScreen else { return }
+    guard pinchAction != .none else { return }
     guard !isInInteractiveMode, let window = window, let screenFrame = NSScreen.main()?.visibleFrame else { return }
 
     if pinchAction == .windowSize {
+      if isInFullScreen { return }
       // adjust window size
       if recognizer.state == .began {
         // began
@@ -1699,7 +1700,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if height == 0 { height = AppData.heightWhenNoVideo }
 
     // if video has rotation
-    let rotate = playerCore.mpvController.getInt(MPVProperty.videoParamsRotate)
+    let netRotate = playerCore.mpvController.getInt(MPVProperty.videoParamsRotate) - playerCore.mpvController.getInt(MPVOption.Video.videoRotate)
+    let rotate = netRotate >= 0 ? netRotate : netRotate + 360
     if rotate == 90 || rotate == 270 {
       swap(&width, &height)
     }

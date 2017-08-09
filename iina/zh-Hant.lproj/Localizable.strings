@@ -1,216 +1,324 @@
-/*
- String_ui.strings
- iina
- 
- Created by lhc on 3/1/2017.
- Copyright © 2017 lhc. All rights reserved.
- */
-
-// Common
-"general.on" = "開";
-"general.off" = "關";
-"general.login" = "登入";
-"general.logout" = "登出";
-"general.ok" = "好";
-"general.cancel" = "取消";
-"general.username" = "用戶名";
-"general.password" = "密鑰";
-
-// PlaylistViewController.swift
-"playlist.playlist_cap" = "播放列表";
-"playlist.chapter_cap" = "章節";
-
-// MainWindowController.swift
-"main.buffering_indicator" = "緩衝中... %d%%";
-
-// QuickSettingViewController.swift
-"quicksetting.item_default" = "默認";
-"quicksetting.item_none" = "空";
-
-// OSDMessage.swift
-"osd.pause" = "暫停";
-"osd.resume" = "繼續";
-"osd.volume" = "音量: %i";
-"osd.speed" = "速度: %.2fx";
-"osd.aspect" = "長寬比: %@";
-"osd.crop" = "裁切: %@";
-"osd.rotate" = "轉過: %i°";
-"osd.deinterlace" = "抗交錯: %@";
-"osd.audio_delay.nodelay" = "音訊延遲: 無";
-"osd.audio_delay.later" = "音訊延遲: 向後%.2f秒";
-"osd.audio_delay.earlier" = "音訊延遲: 向前%.2f秒";
-"osd.sub_delay.nodelay" = "字幕延遲: 無";
-"osd.sub_delay.later" = "字幕延遲: 向後%.2f秒";
-"osd.sub_delay.earlier" = "字幕延遲: 向前%.2f秒";
-"osd.subtitle_pos" = "字幕位置: %.1f";
-"osd.mute" = "靜音";
-"osd.unmute" = "聲音開啟";
-"osd.screenshot" = "熒幕已截取";
-"osd.abloop.a" = "AB循環: A";
-"osd.abloop.b" = "AB循環: B";
-"osd.abloop.clear" = "AB循環: 復原";
-"osd.stop" = "停止";
-"osd.chapter" = "章節: %@";
-"osd.subtitle_scale" = "字幕大小: %.2f倍";
-"osd.add_to_playlist" = "已將 %i 加入播放列表";
-"osd.clear_playlist" = "已清空播放列表";
-"osd.video_eq.contrast" = "對比度: %i";
-"osd.video_eq.gamma" = "伽瑪: %i";
-"osd.video_eq.hue" = "色調: %i";
-"osd.video_eq.saturation" = "飽和度: %i";
-"osd.video_eq.brightness" = "明度: %i";
-"osd.find_online_sub" = "正在搜尋在線字幕...";
-"osd.sub_not_found" = "找不到字幕";
-"osd.sub_found" = "已找到%d個字幕，下載中...";
-"osd.sub_downloaded" = "已下載字幕";
-"osd.sub_saved" = "已儲存字幕";
-"osd.network_error" = "網路異常";
-"osd.file_error" = "無法讀取檔案";
-"osd.cannot_login" = "登入失敗";
-"osd.canceled" = "已取消";
-
-"preference.title" = "偏好";
-"preference.general" = "一般";
-"preference.ui" = "UI";
-"preference.codec" = "編碼";
-"preference.subtitle" = "字幕";
-"preference.network" = "網路";
-"preference.control" = "控制";
-"preference.keybindings" = "快速鍵";
-"preference.advanced" = "高級";
-"preference.scripts" = "腳本";
-"preference.not_logged_in" = "未登入";
-"preference.logged_in_as" = "以 %@ 登入";
-
-"menu.volume"= "音量: %d";
-"menu.audio_delay" = "音訊延遲: %.2f秒";
-"menu.sub_delay" = "字幕延遲: %.2f秒";
-"menu.fullscreen" = "進入全熒幕";
-"menu.exit_fullscreen" = "退出全熒幕";
-"menu.pip" = "進入畫中畫";
-"menu.exit_pip" = "退出畫中畫";
-"menu.pause" = "暫停";
-"menu.resume" = "繼續";
-
-"track.none" = "<無>";
-
-// Alerts
-"alert.title_error" = "異常";
-"alert.title_warning" = "當心";
-"alert.title_info" = "資訊";
-
-"alert.fatal_error" = "致命異常: %@ \n程序將關閉。";
-"alert.mpv_error" = "內部異常%@ (%@) ，當設定%@時";
-"alert.sleep" = "無法阻止熒幕進入睡眠";
-
-"alert.unsupported_audio" = "不支持這個加載的音訊檔";
-"alert.unsupported_sub" = "不支持這個加載的字幕檔";
-"alert.unsupported_url" = "不支持這個 URL";
-"alert.wrong_url_format" = "URL 格式有誤";
-
-"alert.error_open" = "打不開該檔案或 URL";
-"alert.error_finding_file" = "找不到%@";
-"alert.error_loading_script" = "無法加載腳本: %@";
-"alert.error_saving_file" = "保存%@時發生異常: %@";
-"alert.error_deleting_file" = "刪不掉這個檔案";
-
-"alert.config.new.title" = "新輸入設定";
-"alert.config.new.message" = "請爲新設定檔取名";
-"alert.config.duplicate.title" = "設定檔重複";
-"alert.config.duplicate.message" = "請爲重複的設定檔取名";
-"alert.config.empty_name" = "不能爲空";
-"alert.config.name_existing" = "名稱已存在";
-"alert.config.file_existing.title" = "檔案已存在";
-"alert.config.file_existing.message" = "這不該發生。點「好」覆蓋，點「取消」在 Finder 中查看檔案。";
-"alert.config.cannot_create" = "無法創建設定檔";
-"alert.config.cannot_write" = "無法寫入設定檔";
-
-"alert.filter.incorrect" = "設定濾鏡時出現異常，請核對參數格式";
-"alert.add_filter.title" = "新濾鏡";
-"alert.add_filter.message" = "請輸入 mpv 的 vf 或 af 指令串";
-
-"alert.keybinding_config.error" = "快速鍵設定檔「%@」無法解析，現將使用 IINA 默認快速鍵代替，請核對該設定檔。";
-
-"alert.extra_option.cannot_read" = "無法識別用戶自訂的 mpv 設定";
-"alert.extra_option.empty" = "鍵和值不可爲空！";
-"alert.extra_option.error" = "無法設定 --%@=%@（返回值：%d）。請於「偏好設定→高級」中核對您的額外選項設定。";
-"alert.extra_option.config_folder" = "設定檔檔案夾「%@」無效";
-
-"alert.playlist.error_deleting" = "無法刪除%@";
-
-"alert.sub.no_selected" = "請先選定一個已下載的字幕檔";
-"alert.sub_lang_not_set" = "在使用 OpenSubtitles 前請先在「偏好設定」中設定字幕的偏好語言，當前將使用英文（eng）。";
-"alert.sub.cannot_save_passwd" = "無法將您這個密鑰「%@」保存到鑰匙串";
-"alert.sub.cannot_login" = "登入失敗，請核對您的用戶名、密鑰、網路連接。\n\n%@";
-
-"alert.set_default.title" = "將 IINA 設爲默認 APP";
-"alert.set_default.message" = "即將把 IINA 設定爲其所支援的檔案格式的默認 APP";
-"alert.set_default.success" = "已成功%d個，失敗%d個";
-
-"alert.add_watch.title" = "添加監視屬性";
-"alert.add_watch.message" = "請輸入一個有效的 mpv 屬性";
-
-"alert.jump_to.title" = "跳轉至";
-"alert.jump_to.message" = "請輸入跳轉致的位置，例如：20:35";
-
-"alert.opensub.login.title" = "OpenSubtitles 登入";
-"alert.opensub.login.message" = "請輸入用戶名和密鑰";
-
-"alert.open_url.title" = "打開 URL";
-"alert.open_url.message" = "請輸入 URL:";
+/* Choose Media File */
 "alert.choose_media_file.title" = "選擇媒體檔";
 
-"alert.delete_history.title" = "清空播放記錄";
-"alert.delete_history.message" = "確認要刪除當前選定記錄嗎？";
-
-"alert.filter_hwdec.message" = "你正在新增視訊濾鏡。然而，當前的硬體解碼器不能很好地支援視訊濾鏡。你可以禁用硬體解碼，或使用支援「拷貝」的解碼器 (將佔用兩倍記憶體)。\n你可能需要再操作一次（例如剪下）才能看到效果。";
+/* Abort */
 "alert.filter_hwdec.abort" = "放棄";
+
+/* No comment provided by engineer. */
+"alert.filter_hwdec.message" = "你正在新增視訊濾鏡。然而，當前的硬體解碼器不能很好地支援視訊濾鏡。你可以禁用硬體解碼，或使用支援「拷貝」的解碼器 (將佔用兩倍記憶體)。\n你可能需要再操作一次（例如剪下）才能看到效果。";
+
+/* Turn off hardware decoding */
 "alert.filter_hwdec.turn_off" = "關閉硬體解碼";
+
+/* Switch to Auto(Copy) */
 "alert.filter_hwdec.use_copy" = "使用支援「拷貝」的解碼器";
 
-"alert.clear_cache.title" = "清除縮圖快取";
-"alert.clear_cache.message" = "確定清除所有縮圖快取嗎?";
-"alert.clear_cache.success" = "快取已清除。";
+/* Please enter the URL: */
+"alert.open_url.message" = "請輸入 URL:";
 
-"pl_menu.title_multi" = "%d個檔案";
-"pl_menu.play_next" = "即將播放";
-"pl_menu.play_in_new_window" = "在新視窗中打開";
-"pl_menu.remove" = "移除";
-"pl_menu.remove_multi" = "批量移除";
-"pl_menu.delete" = "刪除";
-"pl_menu.delete_multi" = "批量刪除";
-"pl_menu.delete_after_play" = "於播放完畢後刪除";
-"pl_menu.delete_after_play_multi" = "批量播放，並於播放完畢後刪除";
-"pl_menu.reveal_in_finder" = "在 Finder 中打開";
-"pl_menu.add_item" = "添加檔案...";
-"pl_menu.clear_playlist" = "清空播放列表";
-"pl_menu.matched_sub" = "已匹配 %d 個字幕";
-"pl_menu.add_sub" = "添加字幕…";
-"pl_menu.wrong_sub" = "錯誤的字幕!";
+/* Open URL */
+"alert.open_url.title" = "打開 URL";
 
+/* Error */
+"alert.title_error" = "異常";
 
-"keymapping.title" = "快速鍵";
-"keymapping.message" = "現在按鍵即可設定";
+/* Information */
+"alert.title_info" = "資訊";
 
-"filter.video_filters" = "視訊濾鏡";
+/* Warning */
+"alert.title_warning" = "警告";
+
+/* Audio Filters */
 "filter.audio_filters" = "音訊濾鏡";
 
-"hwdec.no" = "不啟用硬體解碼。";
-"hwdec.auto" = "啟用硬體解碼。但是，大多數視訊濾鏡不會正常工作。";
-"hwdec.auto-copy" = "啟用硬體解碼。它會佔用兩倍左右的記憶體，但支援視訊濾鏡。";
+/* Video Filters */
+"filter.video_filters" = "視訊濾鏡";
 
-// Touch bar
+/* Cancel */
+"general.cancel" = "取消";
 
+/* Off */
+"general.off" = "關";
+
+/* OK */
+"general.ok" = "好";
+
+/* On */
+"general.on" = "開";
+
+/* Password */
+"general.password" = "密鑰";
+
+/* Username */
+"general.username" = "用戶名";
+
+/* Press any key to record. */
+"keymapping.message" = "現在按鍵即可設定";
+
+/* Key Mapping */
+"keymapping.title" = "快速鍵";
+
+/* Buffering... %d%% */
+"main.buffering_indicator" = "緩衝中... %d%%";
+
+/* Audio Delay: */
+"menu.audio_delay" = "音訊延遲: %.2f秒";
+
+/* Exit Fullscreen */
+"menu.exit_fullscreen" = "退出全熒幕";
+
+/* Exit Picture-in-Picture */
+"menu.exit_pip" = "退出畫中畫";
+
+/* Fullscreen */
+"menu.fullscreen" = "進入全熒幕";
+
+/* Pause */
+"menu.pause" = "暫停";
+
+/* Enter Picture-in-Picture */
+"menu.pip" = "進入畫中畫";
+
+/* Resume */
+"menu.resume" = "繼續";
+
+/* Subtitle Delay: */
+"menu.sub_delay" = "字幕延遲: %.2f秒";
+
+/* Volume: */
+"menu.volume" = "音量: %d";
+
+/* AB-Loop: A */
+"osd.abloop.a" = "AB循環: A";
+
+/* AB-Loop: B */
+"osd.abloop.b" = "AB循環: B";
+
+/* AB-Loop: Cleared */
+"osd.abloop.clear" = "AB循環: 復原";
+
+/* Added %i Files to Playlist */
+"osd.add_to_playlist" = "已將 %i 加入播放列表";
+
+/* Aspect Ratio: %@ */
+"osd.aspect" = "長寬比: %@";
+
+/* Audio Delay: %fs Earlier */
+"osd.audio_delay.earlier" = "音訊延遲: 向前%.2f秒";
+
+/* Audio Delay: %fs Later */
+"osd.audio_delay.later" = "音訊延遲: 向後%.2f秒";
+
+/* Audio Delay: No Delay */
+"osd.audio_delay.nodelay" = "音訊延遲: 無";
+
+/* Canceled */
+"osd.canceled" = "已取消";
+
+/* Cannot login */
+"osd.cannot_login" = "登入失敗";
+
+/* Chapter: %@ */
+"osd.chapter" = "章節: %@";
+
+/* Cleared Playlist */
+"osd.clear_playlist" = "已清空播放列表";
+
+/* Crop: %@ */
+"osd.crop" = "裁切: %@";
+
+/* Deinterlace: %@ */
+"osd.deinterlace" = "抗交錯: %@";
+
+/* Error reading file */
+"osd.file_error" = "無法讀取檔案";
+
+/* Finding online subtitles... */
+"osd.find_online_sub" = "正在搜尋在線字幕...";
+
+/* Mute */
+"osd.mute" = "靜音";
+
+/* Network error */
+"osd.network_error" = "網路異常";
+
+/* Pause */
+"osd.pause" = "暫停";
+
+/* Resume */
+"osd.resume" = "繼續";
+
+/* Rotate: %i° */
+"osd.rotate" = "轉過: %i°";
+
+/* Screenshot Captured */
+"osd.screenshot" = "熒幕已截取";
+
+/* Speed: %.2fx */
+"osd.speed" = "速度: %.2fx";
+
+/* Stop */
+"osd.stop" = "停止";
+
+/* Subtitle Delay: %fs Earlier */
+"osd.sub_delay.earlier" = "字幕延遲: 向前%.2f秒";
+
+/* Subtitle Delay: %fs Later */
+"osd.sub_delay.later" = "字幕延遲: 向後%.2f秒";
+
+/* Subtitle Delay: No Delay */
+"osd.sub_delay.nodelay" = "字幕延遲: 無";
+
+/* Subtitle downloaded */
+"osd.sub_downloaded" = "已下載字幕";
+
+/* %d subtitle(s) found. Downloading... */
+"osd.sub_found" = "已找到%d個字幕，下載中...";
+
+/* No subtitle found. */
+"osd.sub_not_found" = "找不到字幕";
+
+/* Subtitle saved */
+"osd.sub_saved" = "已儲存字幕";
+
+/* Subtitle Position: %f */
+"osd.subtitle_pos" = "字幕位置: %.1f";
+
+/* Subtitle Scale: %.2fx */
+"osd.subtitle_scale" = "字幕大小: %.2f倍";
+
+/* Unmute */
+"osd.unmute" = "取消靜音";
+
+/* Brightness: %i */
+"osd.video_eq.brightness" = "明度: %i";
+
+/* Contrast: %i */
+"osd.video_eq.contrast" = "對比度: %i";
+
+/* Grama: %i */
+"osd.video_eq.gamma" = "伽瑪: %i";
+
+/* Hue: %i */
+"osd.video_eq.hue" = "色調: %i";
+
+/* Saturation: %i */
+"osd.video_eq.saturation" = "飽和度: %i";
+
+/* Volume: %i */
+"osd.volume" = "音量: %i";
+
+/* Add Item */
+"pl_menu.add_item" = "添加檔案...";
+
+/* Add Subtitle… */
+"pl_menu.add_sub" = "添加字幕…";
+
+/* Clear Playlist */
+"pl_menu.clear_playlist" = "清空播放列表";
+
+/* Matched %d Subtitle(s) */
+"pl_menu.matched_sub" = "已匹配 %d 個字幕";
+
+/* Play in New Window */
+"pl_menu.play_in_new_window" = "在新視窗中打開";
+
+/* Play Next */
+"pl_menu.play_next" = "即將播放";
+
+/* Reveal in Finder */
+"pl_menu.reveal_in_finder" = "在 Finder 中打開";
+
+/* %d Items */
+"pl_menu.title_multi" = "%d個檔案";
+
+/* Wrong Subtitle */
+"pl_menu.wrong_sub" = "錯誤的字幕!";
+
+/* CHAPTERS */
+"playlist.chapter_cap" = "章節";
+
+/* PLAYLIST */
+"playlist.playlist_cap" = "播放列表";
+
+/* Advanced */
+"preference.advanced" = "高級";
+
+/* Codec */
+"preference.codec" = "編碼";
+
+/* Control */
+"preference.control" = "控制";
+
+/* General */
+"preference.general" = "一般";
+
+/* Keybindings */
+"preference.keybindings" = "快速鍵";
+
+/* Logged in as */
+"preference.logged_in_as" = "以 %@ 登入";
+
+/* Network */
+"preference.network" = "網路";
+
+/* Not logged in */
+"preference.not_logged_in" = "未登入";
+
+/* Subtitles */
+"preference.subtitle" = "字幕";
+
+/* Preference */
+"preference.title" = "偏好";
+
+/* UI */
+"preference.ui" = "UI";
+
+/* Default */
+"quicksetting.item_default" = "默認";
+
+/* None */
+"quicksetting.item_none" = "空";
+
+/* 15sec Ahead */
 "touchbar.ahead_15" = "前進 15 秒";
+
+/* 30sec Ahead */
 "touchbar.ahead_30" = "前進 30 秒";
+
+/* -15sec Ahead */
 "touchbar.back_15" = "後退 15 秒";
+
+/* -30sec Ahead */
 "touchbar.back_30" = "後退 30 秒";
-"touchbar.next_video" = "下一個視訊";
-"touchbar.prev_video" = "上一個視訊";
-"touchbar.increase_volume" = "音量 +";
+
+/* Volume - */
 "touchbar.decrease_volume" = "音量 -";
-"touchbar.rewind" = "快退";
+
+/* Fast Forward */
 "touchbar.fast_forward" = "快進";
+
+/* Volume + */
+"touchbar.increase_volume" = "音量 +";
+
+/* Next Video */
+"touchbar.next_video" = "下一個視訊";
+
+/* Play / Pause */
 "touchbar.play_pause" = "播放 / 暫停";
+
+/* Previous Video */
+"touchbar.prev_video" = "上一個視訊";
+
+/* Rewind */
+"touchbar.rewind" = "快退";
+
+/* Seek */
 "touchbar.seek" = "進度條";
+
+/* Time Position */
 "touchbar.time" = "播放進度";
+
+/* <None> */
+"track.none" = "<無>";
+

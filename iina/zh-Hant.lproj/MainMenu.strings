@@ -1,10 +1,10 @@
-/* Class = "NSMenuItem"; title = "Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
+/* Class = "NSMenuItem"; title = "Show Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
 "0T7-Nu-SL7.title" = "展開播放列表";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "打開 URL...";
 
-/* Class = "NSMenuItem"; title = "Set IINA as The Default App…"; ObjectID = "0os-i1-tJF"; */
+/* Class = "NSMenuItem"; title = "Set IINA as the Default App…"; ObjectID = "0os-i1-tJF"; */
 "0os-i1-tJF.title" = "將 IINA 設爲預設APP…";
 
 /* Class = "NSMenuItem"; title = "Normal Size"; ObjectID = "1UK-8n-QPP"; */
@@ -16,13 +16,13 @@
 /* Class = "NSMenu"; title = "Audio Device"; ObjectID = "2Dp-Ol-Zcf"; */
 "2Dp-Ol-Zcf.title" = "音訊裝置";
 
-/* Class = "NSMenuItem"; title = "Jump to beginning"; ObjectID = "2Ya-3g-1hy"; */
+/* Class = "NSMenuItem"; title = "Jump to Beginning"; ObjectID = "2Ya-3g-1hy"; */
 "2Ya-3g-1hy.title" = "回到開頭";
 
 /* Class = "NSMenuItem"; title = "Jump to…"; ObjectID = "2id-wn-xsC"; */
 "2id-wn-xsC.title" = "跳轉至...";
 
-/* Class = "NSMenuItem"; title = "Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
+/* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
 "2t8-Ot-yoO.title" = "快速設定";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
@@ -46,7 +46,7 @@
 /* Class = "NSMenuItem"; title = "Audio Filters…"; ObjectID = "8Zh-hU-Cc4"; */
 "8Zh-hU-Cc4.title" = "音訊過濾...";
 
-/* Class = "NSMenuItem"; title = "Quick Settings Panel"; ObjectID = "8y7-Cy-lKT"; */
+/* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "8y7-Cy-lKT"; */
 "8y7-Cy-lKT.title" = "快速設定";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
@@ -58,13 +58,13 @@
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "字幕";
 
-/* Class = "NSMenuItem"; title = "Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
+/* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
 "43n-Ed-5kT.title" = "快速設定";
 
 /* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
 "AYu-sK-qS6.title" = "主菜單";
 
-/* Class = "NSMenuItem"; title = "Screenshot"; ObjectID = "AoP-K6-Kb5"; */
+/* Class = "NSMenuItem"; title = "Take a Screenshot"; ObjectID = "AoP-K6-Kb5"; */
 "AoP-K6-Kb5.title" = "截取畫面";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
@@ -88,7 +88,7 @@
 /* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
 "DVo-aG-piG.title" = "關閉";
 
-/* Class = "NSMenuItem"; title = "Chapters Panel"; ObjectID = "DwM-3d-Eb9"; */
+/* Class = "NSMenuItem"; title = "Show Chapters Panel"; ObjectID = "DwM-3d-Eb9"; */
 "DwM-3d-Eb9.title" = "展開章節列表";
 
 /* Class = "NSMenu"; title = "Subtitles"; ObjectID = "EKp-Qx-4Mn"; */
@@ -97,7 +97,7 @@
 /* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
 "F2S-fz-NVQ.title" = "幫助";
 
-/* Class = "NSMenuItem"; title = "Documentation / Help"; ObjectID = "FKE-Sm-Kum"; */
+/* Class = "NSMenuItem"; title = "IINA Help"; ObjectID = "FKE-Sm-Kum"; */
 "FKE-Sm-Kum.title" = "IINA 幫助";
 
 /* Class = "NSMenu"; title = "Video Track"; ObjectID = "FTu-CF-O0R"; */
@@ -187,6 +187,9 @@
 /* Class = "NSMenuItem"; title = "Video Filters…"; ObjectID = "PyY-pR-jz7"; */
 "PyY-pR-jz7.title" = "視訊濾鏡...";
 
+/* Class = "NSMenuItem"; title = "New Window"; ObjectID = "Qv1-xd-wj5"; */
+"Qv1-xd-wj5.title" = "新建視窗";
+
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4"; */
 "R4o-n2-Eq4.title" = "縮放";
 
@@ -250,13 +253,16 @@
 /* Class = "NSMenuItem"; title = "Rotation"; ObjectID = "ar5-3T-O9h"; */
 "ar5-3T-O9h.title" = "旋轉";
 
+/* Class = "NSMenuItem"; title = "Open URL in New Window…"; ObjectID = "bfB-bn-KeM"; */
+"bfB-bn-KeM.title" = "在新視窗中打開 URL…";
+
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
 "bib-Uj-vzu.title" = "檔案";
 
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
 "bwz-r0-peR.title" = "檢視器";
 
-/* Class = "NSMenuItem"; title = "Normal Size Retina"; ObjectID = "c1x-bx-69F"; */
+/* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
 "c1x-bx-69F.title" = "原始大小 (Retina)";
 
 /* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
@@ -280,7 +286,7 @@
 /* Class = "NSMenuItem"; title = "Audio Delay:"; ObjectID = "foC-r3-8mp"; */
 "foC-r3-8mp.title" = "音訊延遲:";
 
-/* Class = "NSMenuItem"; title = "Check Update..."; ObjectID = "gMo-qL-m08"; */
+/* Class = "NSMenuItem"; title = "Check for Updates..."; ObjectID = "gMo-qL-m08"; */
 "gMo-qL-m08.title" = "檢查更新...";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
@@ -331,7 +337,7 @@
 /* Class = "NSMenuItem"; title = "Previous Frame"; ObjectID = "oxF-BB-lBy"; */
 "oxF-BB-lBy.title" = "上一幀";
 
-/* Class = "NSMenuItem"; title = "Subtitle Delay +0.5s"; ObjectID = "pAo-L5-qTO"; */
+/* Class = "NSMenuItem"; title = "Subtitle Delay + 0.5s"; ObjectID = "pAo-L5-qTO"; */
 "pAo-L5-qTO.title" = "字幕延遲 + 0.5秒";
 
 /* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
@@ -373,8 +379,6 @@
 /* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
 "yHI-7D-OaI.title" = "抗交錯";
 
-"Qv1-xd-wj5.title" = "新建視窗";
-
+/* Class = "NSMenuItem"; title = "Open in New Window…"; ObjectID = "z9W-ga-j3b"; */
 "z9W-ga-j3b.title" = "在新視窗中打開…";
 
-"bfB-bn-KeM.title" = "在新視窗中打開 URL…";

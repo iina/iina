@@ -1,16 +1,16 @@
-/* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "1vo-so-iaM"; */
-"1vo-so-iaM.title" = "包含媒體檔案名的字幕";
-
 /* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "4EG-eE-S3y"; */
 "4EG-eE-S3y.title" = "豎直位置:";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "5CZ-8l-KYJ"; */
 "5CZ-8l-KYJ.title" = "邊框";
 
+/* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "5eA-EB-Hco"; */
+"5eA-EB-Hco.title" = "請輸入一系列逗號分隔的字符串。";
+
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "7NC-Ih-gMB"; */
 "7NC-Ih-gMB.title" = " X:";
 
-/* Class = "NSButtonCell"; title = "Display subtitles in letter box in full screen"; ObjectID = "9kA-0S-Nl8"; */
+/* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "9kA-0S-Nl8"; */
 "9kA-0S-Nl8.title" = "全熒幕時在方框內顯示字幕";
 
 /* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "99d-UG-eDD"; */
@@ -52,14 +52,14 @@
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "ND2-m7-ZET"; */
 "ND2-m7-ZET.title" = "底部";
 
+/* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "NHu-6z-rEm"; */
+"NHu-6z-rEm.title" = "路徑之間以:間隔。可使用通配符*取代路徑首尾。";
+
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "OL9-2M-Zb5"; */
 "OL9-2M-Zb5.title" = "字體大小:";
 
 /* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "PZ2-pZ-hHa"; */
 "PZ2-pZ-hHa.title" = "其他:";
-
-/* Class = "NSMenuItem"; title = "All subtitles in the same folder"; ObjectID = "Qcl-0x-3hh"; */
-"Qcl-0x-3hh.title" = "同一檔案夾中的全部字幕";
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "RiL-Rv-eke"; */
 "RiL-Rv-eke.title" = "字體:";
@@ -67,14 +67,17 @@
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "SLQ-wt-k6Y"; */
 "SLQ-wt-k6Y.title" = "背景:";
 
-/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and OpenSubtitles."; ObjectID = "Uj3-om-L26"; */
-"Uj3-om-L26.title" = "該設定將以ISO 639-2 字符集儲存，兼容於 mpv 和 OpenSubtitles";
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Uj3-om-L26"; */
+"Uj3-om-L26.title" = "該設定將以ISO 639-2 字符集儲存，與 mpv 和 OpenSubtitles 相容";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "VBZ-bi-gTh"; */
 "VBZ-bi-gTh.title" = "Y:";
 
 /* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "VKh-1E-Ey8"; */
 "VKh-1E-Ey8.title" = "忽略所有 ASS 樣式";
+
+/* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "VZs-zv-0oM"; */
+"VZs-zv-0oM.title" = "在以下目錄中也查找字幕:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "Waw-Pj-REg"; */
 "Waw-Pj-REg.title" = "顏色:";
@@ -89,10 +92,10 @@
 "bqN-gA-fs9.title" = "偏移:";
 
 /* Class = "NSButtonCell"; title = "Choose..."; ObjectID = "cVp-yI-tMu"; */
-"cVp-yI-tMu.title" = "選擇...";
+"cVp-yI-tMu.title" = "選取...";
 
-/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "clt-eT-TMN"; */
-"clt-eT-TMN.title" = "禁用";
+/* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "d5R-vH-0o0"; */
+"d5R-vH-0o0.title" = "由 IINA 智能選擇";
 
 /* Class = "NSBox"; title = "Font"; ObjectID = "dsH-Ze-lj5"; */
 "dsH-Ze-lj5.title" = "字體";
@@ -102,6 +105,9 @@
 
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "i94-zQ-hFA"; */
 "i94-zQ-hFA.title" = "這將導致 ASS 字幕使用以下設定渲染。";
+
+/* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "jLe-gY-UdB"; */
+"jLe-gY-UdB.title" = "字符編碼:";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "jTS-Yq-bvB"; */
 "jTS-Yq-bvB.title" = "Y:";
@@ -115,6 +121,9 @@
 /* Class = "NSButtonCell"; title = "Login"; ObjectID = "l4s-EW-FkT"; */
 "l4s-EW-FkT.title" = "登入";
 
+/* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "mVR-wA-nID"; */
+"mVR-wA-nID.title" = "優先加載文件名含有以下字符串的字幕:";
+
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "mxc-gq-Ct7"; */
 "mxc-gq-Ct7.title" = "顏色:";
 
@@ -127,14 +136,14 @@
 /* Class = "NSTextFieldCell"; title = "Margin"; ObjectID = "sVu-u3-QwW"; */
 "sVu-u3-QwW.title" = "邊距";
 
-/* Class = "NSMenuItem"; title = "Subtitle with the exact same media filename"; ObjectID = "siy-Uq-tMP"; */
-"siy-Uq-tMP.title" = "同名的字幕檔案";
-
 /* Class = "NSTextFieldCell"; title = "Align"; ObjectID = "t3t-yJ-pM9"; */
 "t3t-yJ-pM9.title" = "對齊";
 
 /* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "tL7-oR-LZ4"; */
 "tL7-oR-LZ4.title" = "ASS 字幕:";
+
+/* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "ul7-yg-cCb"; */
+"ul7-yg-cCb.title" = "包含媒體文件名的字幕";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "vHI-NX-bZ5"; */
 "vHI-NX-bZ5.title" = "頂端";
@@ -148,19 +157,9 @@
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "xNk-Uv-jYT"; */
 "xNk-Uv-jYT.title" = "大小:";
 
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "xsH-Bm-ZPp"; */
+"xsH-Bm-ZPp.title" = "禁用";
+
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "zLl-vV-p1h"; */
 "zLl-vV-p1h.title" = "右";
 
-"xsH-Bm-ZPp.title" = "禁用";
-
-"ul7-yg-cCb.title" = "包含媒體文件名的字幕";
-
-"d5R-vH-0o0.title" = "由 IINA 智能選擇";
-
-"mVR-wA-nID.title" = "優先加載文件名含有以下字符串的字幕:";
-
-"5eA-EB-Hco.title" = "請輸入一系列逗號分隔的字符串。";
-
-"VZs-zv-0oM.title" = "在以下目錄中也查找字幕:";
-
-"NHu-6z-rEm.title" = "各路徑由冒號 (:) 分隔。允許相對路徑和結尾的通配符 (*)。";

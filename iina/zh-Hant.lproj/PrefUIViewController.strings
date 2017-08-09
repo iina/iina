@@ -25,8 +25,14 @@
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "NUr-hY-gfo"; */
 "NUr-hY-gfo.title" = "自動隱藏:";
 
+/* Class = "NSButtonCell"; title = "Clear Cache…"; ObjectID = "OAh-HP-wST"; */
+"OAh-HP-wST.title" = "清除暫存…";
+
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "ObY-7B-NTO"; */
 "ObY-7B-NTO.title" = "s";
+
+/* Class = "NSTextFieldCell"; title = "Thumbnail cache:"; ObjectID = "R1l-SN-bG5"; */
+"R1l-SN-bG5.title" = "縮圖暫存:";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "S8H-Xr-uVa"; */
 "S8H-Xr-uVa.title" = "s";
@@ -34,7 +40,13 @@
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
 "SFX-ct-8MB.title" = "播放時保持置頂";
 
-/* Class = "NSButtonCell"; title = "Use physical resolution on retina screens"; ObjectID = "fsj-YE-OB7"; */
+/* Class = "NSButtonCell"; title = "Enable thumbnail preview"; ObjectID = "Xey-3m-f6G"; */
+"Xey-3m-f6G.title" = "啟用縮圖預覽";
+
+/* Class = "NSTextFieldCell"; title = "Calculating…"; ObjectID = "d60-w5-xXY"; */
+"d60-w5-xXY.title" = "計算中…";
+
+/* Class = "NSButtonCell"; title = "Use physical resolution on Retina displays"; ObjectID = "fsj-YE-OB7"; */
 "fsj-YE-OB7.title" = "於 Retina 熒幕上使用物理分辨率";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Controller:"; ObjectID = "g06-Ja-Ot8"; */
@@ -44,7 +56,7 @@
 "l54-63-V6n.title" = "樣式:";
 
 /* Class = "NSButtonCell"; title = "Snap to center when dragging"; ObjectID = "mdD-if-Wqw"; */
-"mdD-if-Wqw.title" = "拖動時吸附到窗口中心";
+"mdD-if-Wqw.title" = "拖動時固定至視窗正中";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "se2-DE-pJk"; */
 "se2-DE-pJk.title" = "位於頂部";
@@ -55,10 +67,3 @@
 /* Class = "NSButtonCell"; title = "Resize to video size only when opening files manually"; ObjectID = "uD1-HB-46y"; */
 "uD1-HB-46y.title" = "僅在手動打開檔案時調整視窗大小";
 
-"Xey-3m-f6G.title" = "啟用縮圖預覽";
-
-"R1l-SN-bG5.title" = "縮圖快取:";
-
-"d60-w5-xXY.title" = "計算中…";
-
-"OAh-HP-wST.title" = "清除快取…";

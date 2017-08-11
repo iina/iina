@@ -224,16 +224,19 @@ class PlayerCore: NSObject {
 
   func switchToMiniPlayer() {
     miniPlayer.showWindow(self)
+    miniPlayer.updateTrack()
     let playlistView = mainWindow.playlistView.view
     playlistView.removeFromSuperview()
     miniPlayer.playlistWrapperView.addSubview(playlistView)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": playlistView])
     mainWindow.window?.orderOut(self)
+    info.isInMiniPlayer = true
   }
 
   func switchBackFromMiniPlayer() {
     mainWindow.playlistView.view.removeFromSuperview()
     mainWindow.window?.makeKeyAndOrderFront(self)
+    info.isInMiniPlayer = false
   }
 
   // MARK: - MPV commands
@@ -888,7 +891,11 @@ class PlayerCore: NSObject {
       let time = mpvController.getDouble(MPVProperty.timePos)
       info.videoPosition = VideoTime(time)
       DispatchQueue.main.async {
-        self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
+        if self.info.isInMiniPlayer {
+          self.miniPlayer.updatePlayTime(withDuration: false, andProgressBar: true)
+        } else {
+          self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
+        }
       }
 
     case .timeAndCache:
@@ -910,6 +917,7 @@ class PlayerCore: NSObject {
       info.isPaused = pause
       DispatchQueue.main.async {
         self.mainWindow.updatePlayButtonState(pause ? NSOffState : NSOnState)
+        self.miniPlayer.updatePlayButtonState(pause ? NSOffState : NSOnState)
         if #available(OSX 10.12.2, *) {
           self.mainWindow.updateTouchBarPlayBtn()
         }
@@ -936,7 +944,7 @@ class PlayerCore: NSObject {
 
     case .playlist:
       DispatchQueue.main.async {
-        if self.mainWindow.sideBarStatus == .playlist {
+        if self.mainWindow.sideBarStatus == .playlist || self.info.isInMiniPlayer {
           self.mainWindow.playlistView.playlistTableView.reloadData()
         }
       }

@@ -24,6 +24,12 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var playlistWrapperView: NSView!
   @IBOutlet weak var mediaInfoView: NSView!
   @IBOutlet weak var controlView: NSView!
+  @IBOutlet weak var titleLabel: NSTextField!
+  @IBOutlet weak var artistAlbumLabel: NSTextField!
+  @IBOutlet weak var playButton: NSButton!
+  @IBOutlet weak var leftLabel: NSTextField!
+  @IBOutlet weak var rightLabel: DurationDisplayTextField!
+  @IBOutlet weak var playSlider: NSSlider!
 
   private var isPlaylistVisible = false
   private var originalWindowFrame: NSRect!
@@ -71,6 +77,9 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
     // switching UI
     controlView.alphaValue = 0
+
+    // notifications
+    NotificationCenter.default.addObserver(self, selector: #selector(updateTrack), name: Constants.Noti.fileLoaded, object: nil)
   }
 
   func windowWillClose(_ notification: Notification) {
@@ -115,6 +124,25 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  // MARK: - Sync UI with playback
+
+  func updatePlayButtonState(_ state: Int) {
+    playButton.state = state
+  }
+
+  func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
+    guard let duration = player.info.videoDuration, let pos = player.info.videoPosition else {
+      Utility.fatal("video info not available")
+    }
+    let percentage = (pos.second / duration.second) * 100
+    leftLabel.stringValue = pos.stringRepresentation
+    rightLabel.updateText(with: duration, given: pos)
+    if andProgressBar {
+      playSlider.doubleValue = percentage
+    }
+  }
+
+
   // MARK: - IBAction
 
   @IBAction func togglePlaylist(_ sender: Any) {
@@ -133,6 +161,42 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  @IBAction func playBtnAction(_ sender: NSButton) {
+    if player.info.isPaused {
+      player.togglePause(false)
+    } else {
+      player.togglePause(true)
+    }
+  }
+
+  @IBAction func nextBtnAction(_ sender: NSButton) {
+    player.navigateInPlaylist(nextOrPrev: true)
+  }
+
+  @IBAction func prevBtnAction(_ sender: NSButton) {
+    player.navigateInPlaylist(nextOrPrev: false)
+  }
+
+  @IBAction func volumeBtnAction(_ sender: NSButton) {
+
+  }
+
+  @IBAction func playSliderChanges(_ sender: NSSlider) {
+    let percentage = 100 * sender.doubleValue / sender.maxValue
+    player.seek(percent: percentage, forceExact: true)
+  }
+
+
+  // MARK: - Utils
+
+  @objc
+  func updateTrack() {
+    let mediaTitle = player.mpvController.getString(MPVProperty.mediaTitle) ?? ""
+    let mediaArtist = player.mpvController.getString("metadata/by-key/artist") ?? "Unknown Artist"
+    let mediaAlbum = player.mpvController.getString("metadata/by-key/album") ?? "Unknown Album"
+    titleLabel.stringValue = mediaTitle
+    artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
+  }
 }
 
 fileprivate extension NSRect {

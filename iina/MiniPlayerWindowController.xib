@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -7,10 +7,16 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MiniPlayerWindowController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="artistAlbumLabel" destination="kcj-EY-i9R" id="fp4-Kg-HYY"/>
                 <outlet property="closeButton" destination="9Vr-ZV-fes" id="B82-0M-bTM"/>
                 <outlet property="controlView" destination="cDR-8J-QI7" id="B1L-ru-Mnc"/>
+                <outlet property="leftLabel" destination="9EY-2T-Ebf" id="ICj-Tc-hjF"/>
                 <outlet property="mediaInfoView" destination="Zv7-H8-iOq" id="LrZ-za-HpC"/>
+                <outlet property="playButton" destination="aC9-OK-a4x" id="3Ej-3P-qnY"/>
+                <outlet property="playSlider" destination="e3M-Ma-JJM" id="hph-Mq-Yba"/>
                 <outlet property="playlistWrapperView" destination="dkl-qd-rae" id="XpW-Qe-rX8"/>
+                <outlet property="rightLabel" destination="xAK-xc-Njn" id="2II-PQ-Hu8"/>
+                <outlet property="titleLabel" destination="h25-bp-EvL" id="HbE-Ji-c4o"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -21,18 +27,21 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="300" height="72"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <value key="minSize" type="size" width="300" height="72"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO" customClass="NSVisualEffectView">
                 <rect key="frame" x="0.0" y="0.0" width="300" height="72"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="e3M-Ma-JJM">
-                        <rect key="frame" x="40" y="10" width="220" height="15"/>
-                        <sliderCell key="cell" controlSize="small" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="Y51-2C-Qcg"/>
+                        <rect key="frame" x="40" y="8" width="220" height="15"/>
+                        <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="Y51-2C-Qcg"/>
+                        <connections>
+                            <action selector="playSliderChanges:" target="-2" id="qdw-Jb-iyq"/>
+                        </connections>
                     </slider>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAK-xc-Njn">
-                        <rect key="frame" x="264" y="12" width="32" height="11"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAK-xc-Njn" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
+                        <rect key="frame" x="264" y="10" width="32" height="11"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="28" id="Dnz-rF-ikZ"/>
                         </constraints>
@@ -43,7 +52,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9EY-2T-Ebf">
-                        <rect key="frame" x="4" y="12" width="32" height="11"/>
+                        <rect key="frame" x="4" y="10" width="32" height="11"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="28" id="1iE-QR-s8H"/>
                         </constraints>
@@ -101,10 +110,13 @@
                                     <constraint firstAttribute="width" constant="28" id="6iH-cZ-Etd"/>
                                     <constraint firstAttribute="height" constant="28" id="8Q7-Km-TpD"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="F9X-N7-Uv0">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" alternateImage="pause" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="F9X-N7-Uv0">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="playBtnAction:" target="-2" id="7Hb-fd-gCC"/>
+                                </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="998-mn-oHJ">
                                 <rect key="frame" x="186" y="8" width="28" height="28"/>
@@ -116,6 +128,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="nextBtnAction:" target="-2" id="ivD-3f-1va"/>
+                                </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="nSh-lh-jim">
                                 <rect key="frame" x="86" y="8" width="28" height="28"/>
@@ -127,6 +142,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="prevBtnAction:" target="-2" id="BDa-Ku-caU"/>
+                                </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="a5L-QK-yog">
                                 <rect key="frame" x="242" y="16" width="12" height="12"/>
@@ -152,6 +170,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="volumeBtnAction:" target="-2" id="kCa-WS-9CL"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -188,7 +209,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="e3M-Ma-JJM" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="40" id="1o2-i6-eKu"/>
-                    <constraint firstItem="e3M-Ma-JJM" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="48" id="7bq-RL-daw"/>
+                    <constraint firstItem="e3M-Ma-JJM" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="50" id="7bq-RL-daw"/>
                     <constraint firstItem="9EY-2T-Ebf" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="6" id="9J5-Sd-rfo"/>
                     <constraint firstItem="Zv7-H8-iOq" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="DAA-tb-Ipv"/>
                     <constraint firstAttribute="trailing" secondItem="e3M-Ma-JJM" secondAttribute="trailing" constant="40" id="EZe-yu-6e1"/>
@@ -215,6 +236,7 @@
     <resources>
         <image name="nextl" width="24" height="24"/>
         <image name="nextr" width="24" height="24"/>
+        <image name="pause" width="24" height="24"/>
         <image name="play" width="24" height="24"/>
         <image name="playlist" width="14" height="14"/>
         <image name="volume" width="17" height="14"/>

@@ -1395,11 +1395,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  func hideSideBar(_ after: @escaping () -> Void = { }) {
+  func hideSideBar(animate: Bool = true, after: @escaping () -> Void = { }) {
     sidebarAnimationState = .willHide
     let currWidth = sideBarWidthConstraint.constant
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = SideBarAnimationDuration
+      context.duration = animate ? SideBarAnimationDuration : 0
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       sideBarRightConstraint.animator().constant = -currWidth
     }) {

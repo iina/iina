@@ -226,9 +226,17 @@ class PlayerCore: NSObject {
     miniPlayer.showWindow(self)
     miniPlayer.updateTrack()
     let playlistView = mainWindow.playlistView.view
+    // reset down shift for playlistView
+    mainWindow.playlistView.downShift = 0
+    // hide sidebar
+    if mainWindow.sideBarStatus != .hidden {
+      mainWindow.hideSideBar(animate: false)
+    }
+    // move playist view
     playlistView.removeFromSuperview()
     miniPlayer.playlistWrapperView.addSubview(playlistView)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": playlistView])
+    // hide main window
     mainWindow.window?.orderOut(self)
     info.isInMiniPlayer = true
   }
@@ -809,6 +817,15 @@ class PlayerCore: NSObject {
         // only enter fullscreen for first file
         needEnterFullScreenForNextMedia = false
       }
+      // if need to switch to music mode
+      if currentMediaIsAudio() {
+        if !info.isInMiniPlayer { switchToMiniPlayer() }
+      } else {
+        if info.isInMiniPlayer {
+          miniPlayer.close()
+          switchBackFromMiniPlayer()
+        }
+      }
     }
     // add to history
     if let url = info.currentURL {
@@ -1023,6 +1040,7 @@ class PlayerCore: NSObject {
       track.lang = mpvController.getString(MPVProperty.trackListNLang(index))
       track.codec = mpvController.getString(MPVProperty.trackListNCodec(index))
       track.externalFilename = mpvController.getString(MPVProperty.trackListNExternalFilename(index))
+      track.isAlbumart = mpvController.getString(MPVProperty.trackListNAlbumart(index)) == "yes"
       track.decoderDesc = mpvController.getString(MPVProperty.trackListNDecoderDesc(index))
       track.demuxFps = mpvController.getDouble(MPVProperty.trackListNDemuxFps(index))
       track.demuxChannels = mpvController.getString(MPVProperty.trackListNDemuxChannels(index))
@@ -1073,6 +1091,13 @@ class PlayerCore: NSObject {
                                index:     index)
       info.chapters.append(chapter)
     }
+  }
+
+  func currentMediaIsAudio() -> Bool {
+    guard !info.isNetworkResource else { return false }
+    let noVideoTrack = info.videoTracks.isEmpty
+    let theOnlyVideoTrackIsAlbumCover = info.videoTracks.count == 1 && info.videoTracks.first!.isAlbumart
+    return noVideoTrack || theOnlyVideoTrackIsAlbumCover
   }
 
   static func checkStatusForSleep() {

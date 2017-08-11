@@ -20,6 +20,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
   unowned var player: PlayerCore
 
+  @IBOutlet var volumePopover: NSPopover!
   @IBOutlet weak var closeButton: NSButton!
   @IBOutlet weak var playlistWrapperView: NSView!
   @IBOutlet weak var mediaInfoView: NSView!
@@ -30,6 +31,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var rightLabel: DurationDisplayTextField!
   @IBOutlet weak var playSlider: NSSlider!
+  @IBOutlet weak var volumeSlider: NSSlider!
+  @IBOutlet weak var volumeLabel: NSTextField!
 
   private var isPlaylistVisible = false
   private var originalWindowFrame: NSRect!
@@ -90,6 +93,14 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     originalWindowFrame = window!.frame
   }
 
+  override func mouseDown(with event: NSEvent) {
+    if volumePopover.isShown {
+      volumePopover.performClose(self)
+    } else {
+      super.mouseDown(with: event)
+    }
+  }
+
   override func mouseEntered(with event: NSEvent) {
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = AnimationDurationShowControl
@@ -142,6 +153,10 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  func updateVolume() {
+    volumeSlider.doubleValue = player.info.volume
+    volumeLabel.intValue = Int32(Int(player.info.volume))
+  }
 
   // MARK: - IBAction
 
@@ -161,6 +176,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  @IBAction func volumeSliderChanges(_ sender: NSSlider) {
+    let value = sender.doubleValue
+    player.setVolume(value)
+  }
+
   @IBAction func playBtnAction(_ sender: NSButton) {
     if player.info.isPaused {
       player.togglePause(false)
@@ -178,7 +198,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func volumeBtnAction(_ sender: NSButton) {
-
+    if volumePopover.isShown {
+      volumePopover.performClose(self)
+    } else {
+      volumePopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .minY)
+    }
   }
 
   @IBAction func playSliderChanges(_ sender: NSSlider) {

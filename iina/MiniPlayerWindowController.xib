@@ -17,6 +17,9 @@
                 <outlet property="playlistWrapperView" destination="dkl-qd-rae" id="XpW-Qe-rX8"/>
                 <outlet property="rightLabel" destination="xAK-xc-Njn" id="2II-PQ-Hu8"/>
                 <outlet property="titleLabel" destination="h25-bp-EvL" id="HbE-Ji-c4o"/>
+                <outlet property="volumeLabel" destination="MP6-sS-T7f" id="Ztm-8c-Zay"/>
+                <outlet property="volumePopover" destination="yea-QL-Hlq" id="ByH-tP-YzC"/>
+                <outlet property="volumeSlider" destination="Ene-VG-UYY" id="0cq-9R-Yk9"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -232,6 +235,49 @@
             </connections>
             <point key="canvasLocation" x="111" y="164"/>
         </window>
+        <viewController id="oqa-Md-uNZ" userLabel="Popover View Controller">
+            <connections>
+                <outlet property="view" destination="JoU-Y0-cxJ" id="hS6-FI-qsI"/>
+            </connections>
+        </viewController>
+        <customView id="JoU-Y0-cxJ">
+            <rect key="frame" x="0.0" y="0.0" width="163" height="21"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ene-VG-UYY">
+                    <rect key="frame" x="4" y="3" width="131" height="15"/>
+                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="rZ7-sj-3jn"/>
+                    <connections>
+                        <action selector="volumeSliderChanges:" target="-2" id="24x-7W-lsa"/>
+                    </connections>
+                </slider>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MP6-sS-T7f">
+                    <rect key="frame" x="137" y="4" width="24" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="UDC-wZ-xua"/>
+                    </constraints>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="50" id="aot-6J-Jp7">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="MP6-sS-T7f" firstAttribute="centerY" secondItem="JoU-Y0-cxJ" secondAttribute="centerY" id="IEM-58-wBy"/>
+                <constraint firstItem="Ene-VG-UYY" firstAttribute="top" secondItem="JoU-Y0-cxJ" secondAttribute="top" constant="4" id="JXq-kB-fdn"/>
+                <constraint firstItem="MP6-sS-T7f" firstAttribute="leading" secondItem="Ene-VG-UYY" secondAttribute="trailing" constant="4" id="Jfv-7v-xAE"/>
+                <constraint firstAttribute="trailing" secondItem="MP6-sS-T7f" secondAttribute="trailing" constant="4" id="Nkd-PC-I2B"/>
+                <constraint firstAttribute="bottom" secondItem="Ene-VG-UYY" secondAttribute="bottom" constant="4" id="Yba-0E-lbi"/>
+                <constraint firstItem="Ene-VG-UYY" firstAttribute="leading" secondItem="JoU-Y0-cxJ" secondAttribute="leading" constant="4" id="ykI-fq-Jd5"/>
+            </constraints>
+            <point key="canvasLocation" x="12.5" y="357.5"/>
+        </customView>
+        <popover id="yea-QL-Hlq">
+            <connections>
+                <outlet property="contentViewController" destination="oqa-Md-uNZ" id="7b5-aW-gXJ"/>
+            </connections>
+        </popover>
     </objects>
     <resources>
         <image name="nextl" width="24" height="24"/>

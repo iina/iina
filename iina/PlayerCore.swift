@@ -926,6 +926,7 @@ class PlayerCore: NSObject {
     case .volume:
       DispatchQueue.main.async {
         self.mainWindow.updateVolume()
+        self.miniPlayer.updateVolume()
       }
 
     case .muteButton:

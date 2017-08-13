@@ -83,6 +83,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
     // notifications
     NotificationCenter.default.addObserver(self, selector: #selector(updateTrack), name: Constants.Noti.fileLoaded, object: nil)
+
+    updateVolume()
   }
 
   func windowWillClose(_ notification: Notification) {
@@ -138,10 +140,12 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Sync UI with playback
 
   func updatePlayButtonState(_ state: Int) {
+    guard isWindowLoaded else { return }
     playButton.state = state
   }
 
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
+    guard isWindowLoaded else { return }
     guard let duration = player.info.videoDuration, let pos = player.info.videoPosition else {
       Utility.fatal("video info not available")
     }
@@ -154,6 +158,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func updateVolume() {
+    guard isWindowLoaded else { return }
     volumeSlider.doubleValue = player.info.volume
     volumeLabel.intValue = Int32(Int(player.info.volume))
   }

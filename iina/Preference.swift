@@ -93,6 +93,8 @@ struct Preference {
 
     static let enableThumbnailPreview = "enableThumbnailPreview"
 
+    static let autoSwitchToMusicMode = "autoSwitchToMusicMode"
+
     // Codec
 
     static let videoThreads = "videoThreads"
@@ -431,6 +433,7 @@ struct Preference {
     Key.resizeOnlyWhenManuallyOpenFile: true,
     Key.showRemainingTime: false,
     Key.enableThumbnailPreview: true,
+    Key.autoSwitchToMusicMode: true,
 
     Key.videoThreads: 0,
     Key.hardwareDecoder: HardwareDecoderOption.auto.rawValue,

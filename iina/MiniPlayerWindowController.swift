@@ -20,6 +20,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
   unowned var player: PlayerCore
 
+  var menuActionHandler: MainMenuActionHandler!
+
   @IBOutlet var volumePopover: NSPopover!
   @IBOutlet weak var closeButton: NSButton!
   @IBOutlet weak var playlistWrapperView: NSView!
@@ -34,6 +36,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var volumeSlider: NSSlider!
   @IBOutlet weak var volumeLabel: NSTextField!
 
+  var isOntop = false
   private var isPlaylistVisible = false
   private var originalWindowFrame: NSRect!
 
@@ -50,6 +53,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     super.windowDidLoad()
 
     guard let window = window else { return }
+
+    menuActionHandler = MainMenuActionHandler(playerCore: player)
+    let responder = window.nextResponder
+    window.nextResponder = menuActionHandler
+    menuActionHandler.nextResponder = responder
 
     window.isMovableByWindowBackground = true
     if #available(OSX 10.11, *) {
@@ -218,13 +226,24 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Utils
 
+  func setWindowFloatingOnTop(_ onTop: Bool) {
+    guard let window = window else { return }
+    if onTop {
+      window.level = Int(CGWindowLevelForKey(.floatingWindow)) - 1
+    } else {
+      window.level = Int(CGWindowLevelForKey(.normalWindow))
+    }
+  }
+
   @objc
   func updateTrack() {
-    let mediaTitle = player.mpvController.getString(MPVProperty.mediaTitle) ?? ""
-    let mediaArtist = player.mpvController.getString("metadata/by-key/artist") ?? "Unknown Artist"
-    let mediaAlbum = player.mpvController.getString("metadata/by-key/album") ?? "Unknown Album"
-    titleLabel.stringValue = mediaTitle
-    artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
+    DispatchQueue.main.async {
+      let mediaTitle = self.player.mpvController.getString(MPVProperty.mediaTitle) ?? ""
+      let mediaArtist = self.player.mpvController.getString("metadata/by-key/artist") ?? "Unknown Artist"
+      let mediaAlbum = self.player.mpvController.getString("metadata/by-key/album") ?? "Unknown Album"
+      self.titleLabel.stringValue = mediaTitle
+      self.artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
+    }
   }
 }
 

@@ -52,6 +52,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   unowned var playerCore: PlayerCore
 
+  var menuActionHandler: MainMenuActionHandler!
+
   lazy var videoView: VideoView = self.initVideoView()
 
   lazy var sizingTouchBarTextField: NSTextField = {
@@ -341,6 +343,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = self.window else { return }
 
     w.initialFirstResponder = nil
+
+    menuActionHandler = MainMenuActionHandler(playerCore: playerCore)
+    let responder = w.nextResponder
+    w.nextResponder = menuActionHandler
+    menuActionHandler.nextResponder = responder
 
     w.center()
 
@@ -2073,11 +2080,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func handleIINACommand(_ cmd: IINACommand) {
+    let appDeletate = (NSApp.delegate! as! AppDelegate)
     switch cmd {
     case .openFile:
-      (NSApp.delegate! as! AppDelegate).openFile(self)
+      appDeletate.openFile(self)
     case .openURL:
-      (NSApp.delegate! as! AppDelegate).openURL(self)
+      appDeletate.openURL(self)
     case .togglePIP:
       if #available(OSX 10.12, *) {
         self.menuTogglePIP(.dummy)
@@ -2093,17 +2101,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case .chapterPanel:
       self.menuShowChaptersPanel(.dummy)
     case .flip:
-      self.menuToggleFlip(.dummy)
+      self.menuActionHandler.menuToggleFlip(.dummy)
     case .mirror:
-      self.menuToggleMirror(.dummy)
+      self.menuActionHandler.menuToggleMirror(.dummy)
     case .saveCurrentPlaylist:
-      self.menuSavePlaylist(.dummy)
+      self.menuActionHandler.menuSavePlaylist(.dummy)
     case .deleteCurrentFile:
-      self.menuDeleteCurrentFile(.dummy)
+      self.menuActionHandler.menuDeleteCurrentFile(.dummy)
     case .findOnlineSubs:
-      self.menuFindOnlineSub(.dummy)
+      self.menuActionHandler.menuFindOnlineSub(.dummy)
     case .saveDownloadedSub:
-      self.saveDownloadedSub(.dummy)
+      self.menuActionHandler.saveDownloadedSub(.dummy)
     }
   }
 

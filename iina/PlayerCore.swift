@@ -824,12 +824,14 @@ class PlayerCore: NSObject {
         needEnterFullScreenForNextMedia = false
       }
       // if need to switch to music mode
-      if currentMediaIsAudio() {
-        if !isInMiniPlayer { switchToMiniPlayer() }
-      } else {
-        if isInMiniPlayer {
-          miniPlayer.close()
-          switchBackFromMiniPlayer()
+      if ud.bool(forKey: Preference.Key.autoSwitchToMusicMode) {
+        if currentMediaIsAudio() {
+          if !isInMiniPlayer { switchToMiniPlayer() }
+        } else {
+          if isInMiniPlayer {
+            miniPlayer.close()
+            switchBackFromMiniPlayer()
+          }
         }
       }
     }

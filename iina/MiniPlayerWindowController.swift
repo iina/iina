@@ -23,11 +23,13 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   var menuActionHandler: MainMenuActionHandler!
 
   @IBOutlet var volumePopover: NSPopover!
+  @IBOutlet weak var backgroundView: NSVisualEffectView!
   @IBOutlet weak var closeButton: NSButton!
   @IBOutlet weak var playlistWrapperView: NSView!
   @IBOutlet weak var mediaInfoView: NSView!
   @IBOutlet weak var controlView: NSView!
   @IBOutlet weak var titleLabel: NSTextField!
+  @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var artistAlbumLabel: NSTextField!
   @IBOutlet weak var playButton: NSButton!
   @IBOutlet weak var leftLabel: NSTextField!
@@ -80,6 +82,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     window.contentView?.addSubview(trackingView, positioned: .above, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|", "V:|[v(==72)]"], ["v": trackingView])
     trackingView.addTrackingArea(NSTrackingArea(rect: trackingView.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited], owner: self, userInfo: nil))
+
+    backgroundView.state = .active
 
     // close button
     closeButton.image = NSImage(named: NSImageNameStopProgressFreestandingTemplate)
@@ -239,10 +243,17 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   func updateTrack() {
     DispatchQueue.main.async {
       let mediaTitle = self.player.mpvController.getString(MPVProperty.mediaTitle) ?? ""
-      let mediaArtist = self.player.mpvController.getString("metadata/by-key/artist") ?? "Unknown Artist"
-      let mediaAlbum = self.player.mpvController.getString("metadata/by-key/album") ?? "Unknown Album"
+      let mediaArtist = self.player.mpvController.getString("metadata/by-key/artist")
+      let mediaAlbum = self.player.mpvController.getString("metadata/by-key/album")
       self.titleLabel.stringValue = mediaTitle
-      self.artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
+      // hide artist & album label when info not available
+      if mediaArtist == nil && mediaAlbum == nil {
+        self.titleLabelTopConstraint.constant = 6 + 10
+        self.artistAlbumLabel.stringValue = ""
+      } else {
+        self.titleLabelTopConstraint.constant = 6
+        self.artistAlbumLabel.stringValue = "\(mediaArtist ?? "Unknown Artist") - \(mediaAlbum ?? "Unknown Album")"
+      }
     }
   }
 }

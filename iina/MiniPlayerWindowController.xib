@@ -8,6 +8,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="MiniPlayerWindowController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="artistAlbumLabel" destination="kcj-EY-i9R" id="fp4-Kg-HYY"/>
+                <outlet property="backgroundView" destination="se5-gp-TjO" id="8bk-k3-egs"/>
                 <outlet property="closeButton" destination="9Vr-ZV-fes" id="B82-0M-bTM"/>
                 <outlet property="controlView" destination="cDR-8J-QI7" id="B1L-ru-Mnc"/>
                 <outlet property="leftLabel" destination="9EY-2T-Ebf" id="ICj-Tc-hjF"/>
@@ -17,6 +18,7 @@
                 <outlet property="playlistWrapperView" destination="dkl-qd-rae" id="XpW-Qe-rX8"/>
                 <outlet property="rightLabel" destination="xAK-xc-Njn" id="2II-PQ-Hu8"/>
                 <outlet property="titleLabel" destination="h25-bp-EvL" id="HbE-Ji-c4o"/>
+                <outlet property="titleLabelTopConstraint" destination="Qaf-SS-SCV" id="NcC-8F-DTU"/>
                 <outlet property="volumeLabel" destination="MP6-sS-T7f" id="Ztm-8c-Zay"/>
                 <outlet property="volumePopover" destination="yea-QL-Hlq" id="ByH-tP-YzC"/>
                 <outlet property="volumeSlider" destination="Ene-VG-UYY" id="0cq-9R-Yk9"/>
@@ -37,29 +39,29 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="e3M-Ma-JJM">
-                        <rect key="frame" x="40" y="8" width="220" height="15"/>
+                        <rect key="frame" x="44" y="8" width="212" height="15"/>
                         <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="Y51-2C-Qcg"/>
                         <connections>
                             <action selector="playSliderChanges:" target="-2" id="qdw-Jb-iyq"/>
                         </connections>
                     </slider>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAK-xc-Njn" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
-                        <rect key="frame" x="264" y="10" width="32" height="11"/>
+                        <rect key="frame" x="260" y="10" width="36" height="11"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="28" id="Dnz-rF-ikZ"/>
+                            <constraint firstAttribute="width" constant="32" id="Dnz-rF-ikZ"/>
                         </constraints>
-                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="99:99" id="V74-PQ-Yfr">
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="-:--:--" id="V74-PQ-Yfr">
                             <font key="font" metaFont="miniSystem"/>
                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9EY-2T-Ebf">
-                        <rect key="frame" x="4" y="10" width="32" height="11"/>
+                        <rect key="frame" x="4" y="10" width="36" height="11"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="28" id="1iE-QR-s8H"/>
+                            <constraint firstAttribute="width" constant="32" id="1iE-QR-s8H"/>
                         </constraints>
-                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="99:99" id="WnA-NE-3bG">
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="-:--:--" id="WnA-NE-3bG">
                             <font key="font" metaFont="miniSystem"/>
                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -69,16 +71,16 @@
                         <rect key="frame" x="0.0" y="24" width="300" height="48"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h25-bp-EvL">
-                                <rect key="frame" x="134" y="25" width="31" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Title" id="Rs9-6l-6vp">
+                                <rect key="frame" x="133" y="25" width="35" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="center" title="Title" id="Rs9-6l-6vp">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcj-EY-i9R">
-                                <rect key="frame" x="111" y="7" width="78" height="14"/>
-                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Artist - Album" id="Nle-gv-CWY">
+                                <rect key="frame" x="109" y="7" width="82" height="14"/>
+                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Artist - Album" id="Nle-gv-CWY">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -86,9 +88,13 @@
                             </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="h25-bp-EvL" secondAttribute="trailing" constant="8" id="4DV-b1-VzX"/>
                             <constraint firstItem="kcj-EY-i9R" firstAttribute="centerX" secondItem="Zv7-H8-iOq" secondAttribute="centerX" id="DYZ-sc-L0I"/>
                             <constraint firstItem="h25-bp-EvL" firstAttribute="top" secondItem="Zv7-H8-iOq" secondAttribute="top" constant="6" id="Qaf-SS-SCV"/>
+                            <constraint firstItem="kcj-EY-i9R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zv7-H8-iOq" secondAttribute="leading" constant="8" id="U84-tV-T8O"/>
+                            <constraint firstItem="h25-bp-EvL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zv7-H8-iOq" secondAttribute="leading" constant="8" id="gIX-TM-h4K"/>
                             <constraint firstItem="kcj-EY-i9R" firstAttribute="top" secondItem="h25-bp-EvL" secondAttribute="bottom" constant="4" id="mbp-t7-SX2"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kcj-EY-i9R" secondAttribute="trailing" constant="8" id="qt7-Ax-WS9"/>
                             <constraint firstAttribute="height" constant="48" id="uWg-wb-QM5"/>
                             <constraint firstItem="h25-bp-EvL" firstAttribute="centerX" secondItem="Zv7-H8-iOq" secondAttribute="centerX" id="uob-1w-0x0"/>
                         </constraints>
@@ -211,11 +217,11 @@
                     </customView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="e3M-Ma-JJM" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="40" id="1o2-i6-eKu"/>
+                    <constraint firstItem="e3M-Ma-JJM" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="44" id="1o2-i6-eKu"/>
                     <constraint firstItem="e3M-Ma-JJM" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="50" id="7bq-RL-daw"/>
                     <constraint firstItem="9EY-2T-Ebf" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="6" id="9J5-Sd-rfo"/>
                     <constraint firstItem="Zv7-H8-iOq" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="DAA-tb-Ipv"/>
-                    <constraint firstAttribute="trailing" secondItem="e3M-Ma-JJM" secondAttribute="trailing" constant="40" id="EZe-yu-6e1"/>
+                    <constraint firstAttribute="trailing" secondItem="e3M-Ma-JJM" secondAttribute="trailing" constant="44" id="EZe-yu-6e1"/>
                     <constraint firstItem="xAK-xc-Njn" firstAttribute="centerY" secondItem="e3M-Ma-JJM" secondAttribute="centerY" id="FIV-nq-apI"/>
                     <constraint firstAttribute="trailing" secondItem="Zv7-H8-iOq" secondAttribute="trailing" id="Jqk-Pw-5C4"/>
                     <constraint firstAttribute="trailing" secondItem="cDR-8J-QI7" secondAttribute="trailing" id="LVR-2p-CEM"/>

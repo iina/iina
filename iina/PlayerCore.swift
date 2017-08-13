@@ -107,6 +107,8 @@ class PlayerCore: NSObject {
 
   var isMpvTerminated: Bool = false
 
+  var isInMiniPlayer = false
+
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
@@ -238,7 +240,7 @@ class PlayerCore: NSObject {
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": playlistView])
     // hide main window
     mainWindow.window?.orderOut(self)
-    info.isInMiniPlayer = true
+    isInMiniPlayer = true
   }
 
   func switchBackFromMiniPlayer() {
@@ -248,7 +250,7 @@ class PlayerCore: NSObject {
     if mainWindow.window?.aspectRatio == nil {
       mainWindow.window?.aspectRatio = NSSize(width: AppData.widthWhenNoVideo, height: AppData.heightWhenNoVideo)
     }
-    info.isInMiniPlayer = false
+    isInMiniPlayer = false
   }
 
   // MARK: - MPV commands
@@ -823,9 +825,9 @@ class PlayerCore: NSObject {
       }
       // if need to switch to music mode
       if currentMediaIsAudio() {
-        if !info.isInMiniPlayer { switchToMiniPlayer() }
+        if !isInMiniPlayer { switchToMiniPlayer() }
       } else {
-        if info.isInMiniPlayer {
+        if isInMiniPlayer {
           miniPlayer.close()
           switchBackFromMiniPlayer()
         }
@@ -912,7 +914,7 @@ class PlayerCore: NSObject {
       let time = mpvController.getDouble(MPVProperty.timePos)
       info.videoPosition = VideoTime(time)
       DispatchQueue.main.async {
-        if self.info.isInMiniPlayer {
+        if self.isInMiniPlayer {
           self.miniPlayer.updatePlayTime(withDuration: false, andProgressBar: true)
         } else {
           self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
@@ -966,7 +968,7 @@ class PlayerCore: NSObject {
 
     case .playlist:
       DispatchQueue.main.async {
-        if self.mainWindow.sideBarStatus == .playlist || self.info.isInMiniPlayer {
+        if self.mainWindow.sideBarStatus == .playlist || self.isInMiniPlayer {
           self.mainWindow.playlistView.playlistTableView.reloadData()
         }
       }

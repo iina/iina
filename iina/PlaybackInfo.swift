@@ -157,8 +157,6 @@ class PlaybackInfo {
   var currentSubsInfo: [FileInfo] = []
   var currentVideosInfo: [FileInfo] = []
 
-  var isInMiniPlayer = false
-
   var thumbnailsReady = false
   var thumbnailsProgress: Double = 0
   var thumbnails: [FFThumbnail] = []

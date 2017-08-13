@@ -64,10 +64,6 @@ class MainMenuActionHandler: NSResponder {
     player.info.isNetworkResource = url.isFileURL
   }
 
-  func menuSwitchToMiniPlayer(_ sender: NSMenuItem) {
-    player.switchToMiniPlayer()
-  }
-
 }
 
 // MARK: - Control

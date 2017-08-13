@@ -16,4 +16,8 @@ extension MiniPlayerWindowController {
   }
 
 
+  func menuSwitchToMiniPlayer(_ sender: NSMenuItem) {
+    window?.close()
+    player.switchBackFromMiniPlayer()
+  }
 }

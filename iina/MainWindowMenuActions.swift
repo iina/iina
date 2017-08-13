@@ -141,5 +141,7 @@ extension MainWindowController {
     toggleWindowFullScreen()
   }
   
-  
+  func menuSwitchToMiniPlayer(_ sender: NSMenuItem) {
+    playerCore.switchToMiniPlayer()
+  }
 }

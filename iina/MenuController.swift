@@ -284,7 +284,7 @@ class MenuController: NSObject, NSMenuDelegate {
     }
 
     inspector.action = #selector(MainMenuActionHandler.menuShowInspector(_:))
-    miniPlayer.action = #selector(MainMenuActionHandler.menuSwitchToMiniPlayer(_:))
+    miniPlayer.action = #selector(MainWindowController.menuSwitchToMiniPlayer(_:))
   }
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {

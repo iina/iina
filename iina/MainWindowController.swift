@@ -32,7 +32,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   init(playerCore: PlayerCore) {
-    self.playerCore = playerCore
+    self.player = playerCore
 
     oscPosition = Preference.enum(for: .oscPosition)
     relativeSeekAmount = Preference.integer(for: .relativeSeekAmount)
@@ -63,7 +63,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Objects, Views
 
-  unowned var playerCore: PlayerCore
+  unowned var player: PlayerCore
 
   var menuActionHandler: MainMenuActionHandler!
 
@@ -120,13 +120,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   var isInFullScreen: Bool = false {
     didSet {
-      playerCore.mpvController.setFlag(MPVOption.Window.fullscreen, isInFullScreen)
+      player.mpvController.setFlag(MPVOption.Window.fullscreen, isInFullScreen)
     }
   }
 
   var isOntop: Bool = false {
     didSet {
-      playerCore.mpvController.setFlag(MPVOption.Window.ontop, isOntop)
+      player.mpvController.setFlag(MPVOption.Window.ontop, isOntop)
     }
   }
 
@@ -342,7 +342,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     w.initialFirstResponder = nil
 
-    menuActionHandler = MainMenuActionHandler(playerCore: playerCore)
+    menuActionHandler = MainMenuActionHandler(playerCore: player)
     let responder = w.nextResponder
     w.nextResponder = menuActionHandler
     menuActionHandler.nextResponder = responder
@@ -401,7 +401,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     cv.addGestureRecognizer(magnificationGestureRecognizer)
 
     // start mpv opengl_cb
-    playerCore.startMPVOpenGLCB(videoView)
+    player.startMPVOpenGLCB(videoView)
 
     // init quick setting view now
     let _ = quickSettingView
@@ -437,13 +437,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // add notification observers
     let fsObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.fsChanged, object: nil, queue: .main) { [unowned self] _ in
-      let fs = self.playerCore.mpvController.getFlag(MPVOption.Window.fullscreen)
+      let fs = self.player.mpvController.getFlag(MPVOption.Window.fullscreen)
       if fs != self.isInFullScreen {
         self.toggleWindowFullScreen()
       }
     }
     let ontopObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.ontopChanged, object: nil, queue: .main) { [unowned self] _ in
-      let ontop = self.playerCore.mpvController.getFlag(MPVOption.Window.ontop)
+      let ontop = self.player.mpvController.getFlag(MPVOption.Window.ontop)
       if ontop != self.isOntop {
         self.isOntop = ontop
         self.setWindowFloatingOnTop(ontop)
@@ -580,7 +580,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.alwaysFloatOnTop.rawValue:
       if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
-        if !playerCore.info.isPaused {
+        if !player.info.isPaused {
           self.isOntop = newValue
           setWindowFloatingOnTop(newValue)
         }
@@ -593,7 +593,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func initVideoView() -> VideoView {
     let v = VideoView(frame: window!.contentView!.bounds)
-    v.playerCore = self.playerCore
+    v.player = self.player
     return v
   }
 
@@ -706,10 +706,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           // execute the command
           switch kb.action[0] {
           case MPVCommand.abLoop.rawValue:
-            playerCore.abLoop()
+            player.abLoop()
             returnValue = 0
           default:
-            returnValue = playerCore.mpvController.command(rawString: kb.rawAction)
+            returnValue = player.mpvController.command(rawString: kb.rawAction)
           }
           // handle return value, display osd if needed
           if returnValue == 0 {
@@ -830,7 +830,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       toggleWindowFullScreen()
 
     case .pause:
-      playerCore.togglePause(nil)
+      player.togglePause(nil)
 
     case .hideOSC:
       hideUI()
@@ -855,7 +855,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isMouseInSlider = true
       if !controlBarFloating.isDragging {
         timePreviewWhenSeek.isHidden = false
-        thumbnailPeekView.isHidden = !playerCore.info.thumbnailsReady
+        thumbnailPeekView.isHidden = !player.info.thumbnailsReady
       }
       let mousePos = playSlider.convert(event.locationInWindow, from: nil)
       updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
@@ -930,16 +930,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     if scrollAction == .seek && isTrackpadBegan {
       // record pause status
-      wasPlayingWhenSeekBegan = !playerCore.info.isPaused
+      wasPlayingWhenSeekBegan = !player.info.isPaused
       if wasPlayingWhenSeekBegan! {
-        playerCore.togglePause(true)
+        player.togglePause(true)
       }
     }
 
     if isTrackpadEnd && wasPlayingWhenSeekBegan != nil {
       // only resume playback when it was playing when began
       if wasPlayingWhenSeekBegan! {
-        playerCore.togglePause(false)
+        player.togglePause(false)
       }
       wasPlayingWhenSeekBegan = nil
     }
@@ -964,11 +964,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     if scrollAction == .seek {
       let seekAmount = (isMouse ? AppData.seekAmountMapMouse : AppData.seekAmountMap)[relativeSeekAmount] * delta
-      playerCore.seek(relativeSecond: seekAmount, option: useExtractSeek)
+      player.seek(relativeSecond: seekAmount, option: useExtractSeek)
     } else if scrollAction == .volume {
       // don't use precised delta for mouse
-      let newVolume = playerCore.info.volume + (isMouse ? delta : AppData.volumeMap[volumeScrollAmount] * delta)
-      playerCore.setVolume(newVolume)
+      let newVolume = player.info.volume + (isMouse ? delta : AppData.volumeMap[volumeScrollAmount] * delta)
+      player.setVolume(newVolume)
       volumeSlider.doubleValue = newVolume
     }
   }
@@ -1047,13 +1047,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     }
     // stop playing
-    if !playerCore.isMpvTerminated {
-      playerCore.savePlaybackPosition()
-      playerCore.stop()
+    if !player.isMpvTerminated {
+      player.savePlaybackPosition()
+      player.stop()
       // videoView.stopDisplayLink()
     }
-    playerCore.info.currentFolder = nil
-    playerCore.info.matchedSubs.removeAll()
+    player.info.currentFolder = nil
+    player.info.matchedSubs.removeAll()
     // stop tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
@@ -1063,7 +1063,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowWillEnterFullScreen(_ notification: Notification) {
     isEnteringFullScreen = true
 
-    playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, true)
+    player.mpvController.setFlag(MPVOption.Window.keepaspect, true)
 
     // Set the appearance to match the theme so the titlebar matches the theme
     switch(Preference.enum(for: .themeMaterial) as Preference.Theme) {
@@ -1103,7 +1103,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
-    playerCore.mpvController.setFlag(MPVOption.Window.keepaspect, false)
+    player.mpvController.setFlag(MPVOption.Window.keepaspect, false)
 
     // show titleBarView
     if oscPosition == .top {
@@ -1135,7 +1135,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       removeBlackWindow()
     }
     
-    if !playerCore.info.isPaused {
+    if !player.info.isPaused {
       setWindowFloatingOnTop(isOntop)
     }
   }
@@ -1144,7 +1144,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = window else { return }
     let wSize = w.frame.size
     // is paused or very low fps (assume audio file), draw new frame
-    if playerCore.info.isPaused || playerCore.mpvController.getDouble(MPVProperty.estimatedVfFps) < 1 {
+    if player.info.isPaused || player.mpvController.getDouble(MPVProperty.estimatedVfFps) < 1 {
       videoView.videoLayer.draw()
     }
     // update videoview size if in full screen, since aspect ratio may changed
@@ -1173,8 +1173,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
       if isInInteractiveMode {
 
-        let origWidth = CGFloat(playerCore.info.videoWidth!)
-        let origHeight = CGFloat(playerCore.info.videoHeight!)
+        let origWidth = CGFloat(player.info.videoWidth!)
+        let origHeight = CGFloat(player.info.videoHeight!)
 
         // if is in interactive mode
         let videoRect: NSRect, interactiveModeFrame: NSRect
@@ -1216,7 +1216,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowDidBecomeMain(_ notification: Notification) {
-    PlayerCore.lastActive = playerCore
+    PlayerCore.lastActive = player
     NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
   }
 
@@ -1304,17 +1304,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func updateTitle() {
-    if playerCore.info.isNetworkResource {
-      let mediaTitle = playerCore.mpvController.getString(MPVProperty.mediaTitle)
-      window?.title = mediaTitle ?? playerCore.info.currentURL?.path ?? ""
+    if player.info.isNetworkResource {
+      let mediaTitle = player.mpvController.getString(MPVProperty.mediaTitle)
+      window?.title = mediaTitle ?? player.info.currentURL?.path ?? ""
     } else {
-      window?.representedURL = playerCore.info.currentURL
-      window?.setTitleWithRepresentedFilename(playerCore.info.currentURL?.path ?? "")
+      window?.representedURL = player.info.currentURL
+      window?.setTitleWithRepresentedFilename(player.info.currentURL?.path ?? "")
     }
   }
 
   func displayOSD(_ message: OSDMessage) {
-    if !playerCore.displayOSD { return }
+    if !player.displayOSD { return }
 
     if hideOSDTimer != nil {
       hideOSDTimer!.invalidate()
@@ -1342,10 +1342,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
       // data for mustache redering
       let osdData: [String: String] = [
-        "duration": playerCore.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
-        "position": playerCore.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
-        "currChapter": (playerCore.mpvController.getInt(MPVProperty.chapter) + 1).toStr(),
-        "chapterCount": playerCore.info.chapters.count.toStr()
+        "duration": player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
+        "position": player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
+        "currChapter": (player.mpvController.getInt(MPVProperty.chapter) + 1).toStr(),
+        "chapterCount": player.info.chapters.count.toStr()
       ]
 
       osdStackView.setVisibilityPriority(NSStackViewVisibilityPriorityMustHold, for: osdAccessoryView)
@@ -1445,7 +1445,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func enterInteractiveMode() {
-    playerCore.togglePause(true)
+    player.togglePause(true)
     isInInteractiveMode = true
     hideUI()
     bottomView.isHidden = false
@@ -1453,17 +1453,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.view])
 
     // get original frame
-    let origWidth = CGFloat(playerCore.info.videoWidth!)
-    let origHeight = CGFloat(playerCore.info.videoHeight!)
+    let origWidth = CGFloat(player.info.videoWidth!)
+    let origHeight = CGFloat(player.info.videoHeight!)
     let origSize = NSMakeSize(origWidth, origHeight)
-    let currWidth = CGFloat(playerCore.info.displayWidth!)
-    let currHeight = CGFloat(playerCore.info.displayHeight!)
+    let currWidth = CGFloat(player.info.displayWidth!)
+    let currHeight = CGFloat(player.info.displayHeight!)
     let winFrame = window!.frame
     let videoViewFrame: NSRect
     let videoRect: NSRect
 
     // get current cropped region
-    if let cropFilter = playerCore.info.cropFilter {
+    if let cropFilter = player.info.cropFilter {
       let params = cropFilter.cropParams(videoSize: origSize)
       let x = CGFloat(params["x"]!)
       let y = CGFloat(params["y"]!)
@@ -1508,7 +1508,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func exitInteractiveMode(_ then: @escaping () -> Void) {
-    playerCore.togglePause(false)
+    player.togglePause(false)
     isInInteractiveMode = false
     cropSettingsView.cropBoxView.isHidden = true
     NSAnimationContext.runAnimationGroup({ (context) in
@@ -1538,11 +1538,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       percentage = 0
     }
 
-    if let duration = playerCore.info.videoDuration {
+    if let duration = player.info.videoDuration {
       let previewTime = duration * percentage
       timePreviewWhenSeek.stringValue = previewTime.stringRepresentation
 
-      if playerCore.info.thumbnailsReady, let tb = playerCore.info.getThumbnail(forSecond: previewTime.second) {
+      if player.info.thumbnailsReady, let tb = player.info.getThumbnail(forSecond: previewTime.second) {
         thumbnailPeekView.isHidden = false
         thumbnailPeekView.imageView.image = tb.image
         let height = round(120 / thumbnailPeekView.imageView.image!.size.aspect)
@@ -1610,7 +1610,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func updateBufferIndicatorView() {
     guard isWindowLoaded else { return }
 
-    if playerCore.info.isNetworkResource {
+    if player.info.isNetworkResource {
       bufferIndicatorView.isHidden = false
       bufferSpin.startAnimation(nil)
       bufferProgressLabel.stringValue = "Opening stream..."
@@ -1624,7 +1624,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowFrameFromGeometry(newSize: NSSize? = nil) -> NSRect? {
     // set geometry. using `!` should be safe since it passed the regex.
-    if let geometry = cachedGeometry ?? playerCore.getGeometry(), let screenFrame = NSScreen.main()?.visibleFrame {
+    if let geometry = cachedGeometry ?? player.getGeometry(), let screenFrame = NSScreen.main()?.visibleFrame {
       cachedGeometry = geometry
       var winFrame = window!.frame
       if let ns = newSize {
@@ -1705,7 +1705,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if height == 0 { height = AppData.heightWhenNoVideo }
 
     // if video has rotation
-    let netRotate = playerCore.mpvController.getInt(MPVProperty.videoParamsRotate) - playerCore.mpvController.getInt(MPVOption.Video.videoRotate)
+    let netRotate = player.mpvController.getInt(MPVProperty.videoParamsRotate) - player.mpvController.getInt(MPVOption.Video.videoRotate)
     let rotate = netRotate >= 0 ? netRotate : netRotate + 360
     if rotate == 90 || rotate == 270 {
       swap(&width, &height)
@@ -1724,7 +1724,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     } else {
 
       var rect: NSRect
-      let needResizeWindow = playerCore.info.justOpenedFile || !Preference.bool(for: .resizeOnlyWhenManuallyOpenFile)
+      let needResizeWindow = player.info.justOpenedFile || !Preference.bool(for: .resizeOnlyWhenManuallyOpenFile)
 
       if needResizeWindow {
         // get videoSize on screen
@@ -1760,13 +1760,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
       // generate thumbnails after video loaded if it's the first time
       if !isVideoLoaded {
-        playerCore.generateThumbnails()
+        player.generateThumbnails()
         isVideoLoaded = true
       }
 
       // maybe not a good position, consider putting these at playback-restart
-      playerCore.info.justOpenedFile = false
-      playerCore.info.justStartedFile = false
+      player.info.justOpenedFile = false
+      player.info.justStartedFile = false
 
     }
 
@@ -1820,7 +1820,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Sync UI with playback
 
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
-    guard let duration = playerCore.info.videoDuration, let pos = playerCore.info.videoPosition else {
+    guard let duration = player.info.videoDuration, let pos = player.info.videoPosition else {
       Utility.fatal("video info not available")
     }
     let percentage = (pos.second / duration.second) * 100
@@ -1834,8 +1834,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func updateVolume() {
-    volumeSlider.doubleValue = playerCore.info.volume
-    muteButton.state = playerCore.info.isMuted ? NSOnState : NSOffState
+    volumeSlider.doubleValue = player.info.volume
+    muteButton.state = player.info.isMuted ? NSOnState : NSOffState
   }
 
   func updatePlayButtonState(_ state: Int) {
@@ -1848,13 +1848,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func updateNetworkState() {
-    let needShowIndicator = playerCore.info.pausedForCache || playerCore.info.isSeeking
+    let needShowIndicator = player.info.pausedForCache || player.info.isSeeking
 
     if needShowIndicator {
-      let sizeStr = FileSize.format(playerCore.info.cacheSize, unit: .kb)
-      let usedStr = FileSize.format(playerCore.info.cacheUsed, unit: .kb)
-      let speedStr = FileSize.format(playerCore.info.cacheSpeed, unit: .b)
-      let bufferingState = playerCore.info.bufferingState
+      let sizeStr = FileSize.format(player.info.cacheSize, unit: .kb)
+      let usedStr = FileSize.format(player.info.cacheUsed, unit: .kb)
+      let speedStr = FileSize.format(player.info.cacheSpeed, unit: .b)
+      let bufferingState = player.info.bufferingState
       bufferIndicatorView.isHidden = false
       bufferProgressLabel.stringValue = String(format: NSLocalizedString("main.buffering_indicator", comment:"Buffering... %d%%"), bufferingState)
       bufferDetailLabel.stringValue = "\(usedStr)/\(sizeStr) (\(speedStr)/s)"
@@ -1868,17 +1868,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Play button: pause & resume */
   @IBAction func playButtonAction(_ sender: NSButton) {
     if sender.state == NSOnState {
-      playerCore.togglePause(false)
+      player.togglePause(false)
     }
     if sender.state == NSOffState {
-      playerCore.togglePause(true)
+      player.togglePause(true)
       // speed is already reset by playerCore
       speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
       rightArrowLabel.isHidden = true
       // set speed to 0 if is fastforwarding
       if isFastforwarding {
-        playerCore.setSpeed(1)
+        player.setSpeed(1)
         isFastforwarding = false
       }
     }
@@ -1886,8 +1886,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** mute button */
   @IBAction func muteButtonAction(_ sender: NSButton) {
-    playerCore.toogleMute(nil)
-    if playerCore.info.isMuted {
+    player.toogleMute(nil)
+    if player.info.isMuted {
       displayOSD(.mute)
     } else {
       displayOSD(.unMute)
@@ -1973,7 +1973,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case .speed:
       isFastforwarding = true
       let speedValue = AppData.availableSpeedValues[speedValueIndex]
-      playerCore.setSpeed(speedValue)
+      player.setSpeed(speedValue)
       if speedValueIndex == 5 {
         leftArrowLabel.isHidden = true
         rightArrowLabel.isHidden = true
@@ -1989,14 +1989,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // if is paused
       if playButton.state == NSOffState {
         updatePlayButtonState(NSOnState)
-        playerCore.togglePause(false)
+        player.togglePause(false)
       }
 
     case .playlist:
-      playerCore.mpvController.command(left ? .playlistPrev : .playlistNext, checkError: false)
+      player.mpvController.command(left ? .playlistPrev : .playlistNext, checkError: false)
 
     case .seek:
-      playerCore.seek(relativeSecond: left ? -10 : 10, option: .relative)
+      player.seek(relativeSecond: left ? -10 : 10, option: .relative)
 
     }
   }
@@ -2046,14 +2046,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     timePreviewWhenSeek.frame.origin = CGPoint(
       x: round(sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2),
       y: playSlider.frame.origin.y + 16)
-    timePreviewWhenSeek.stringValue = (playerCore.info.videoDuration! * percentage * 0.01).stringRepresentation
-    playerCore.seek(percent: percentage, forceExact: true)
+    timePreviewWhenSeek.stringValue = (player.info.videoDuration! * percentage * 0.01).stringRepresentation
+    player.seek(percent: percentage, forceExact: true)
   }
 
 
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.doubleValue
-    playerCore.setVolume(value)
+    player.setVolume(value)
   }
 
   // MARK: - Utility
@@ -2129,8 +2129,8 @@ extension MainWindowController: PIPViewControllerDelegate {
       return
     }
     pipVideo.view = videoView
-    pip.aspectRatio = NSSize(width: playerCore.info.videoWidth!, height: playerCore.info.videoHeight!)
-    pip.playing = !playerCore.info.isPaused
+    pip.aspectRatio = NSSize(width: player.info.videoWidth!, height: player.info.videoHeight!)
+    pip.playing = !player.info.isPaused
     pip.title = window?.title
     pip.presentAsPicture(inPicture: pipVideo)
     pipOverlayView.isHidden = false
@@ -2165,11 +2165,11 @@ extension MainWindowController: PIPViewControllerDelegate {
   }
 
   func pipActionPlay(_ pip: PIPViewController) {
-    playerCore.togglePause(false)
+    player.togglePause(false)
   }
 
   func pipActionPause(_ pip: PIPViewController) {
-    playerCore.togglePause(true)
+    player.togglePause(true)
   }
 
   func pipActionStop(_ pip: PIPViewController) {

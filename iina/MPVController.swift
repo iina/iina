@@ -42,7 +42,7 @@ class MPVController: NSObject {
 
   lazy var queue: DispatchQueue! = DispatchQueue(label: "com.colliderli.iina.controller")
 
-  unowned let playerCore: PlayerCore
+  unowned let player: PlayerCore
 
   var needRecordSeekTime: Bool = false
   var recordedSeekStartTime: CFTimeInterval = 0
@@ -79,7 +79,7 @@ class MPVController: NSObject {
   ]
 
   init(playerCore: PlayerCore) {
-    self.playerCore = playerCore
+    self.player = playerCore
     super.init()
   }
 
@@ -112,7 +112,7 @@ class MPVController: NSObject {
     if !useMpvOsd {
       chkErr(mpv_set_option_string(mpv, MPVOption.OSD.osdLevel, "0"))
     } else {
-      playerCore.displayOSD = false
+      player.displayOSD = false
     }
 
     // log
@@ -188,7 +188,7 @@ class MPVController: NSObject {
 
     chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subAuto, "no"))
     chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subCodepage, Preference.string(for: .defaultEncoding)))
-    playerCore.info.subEncoding = Preference.string(for: .defaultEncoding)
+    player.info.subEncoding = Preference.string(for: .defaultEncoding)
 
     let subOverrideHandler: OptionObserverInfo.Transformer = { key in
       let v = Preference.bool(for: .ignoreAssStyles)
@@ -474,7 +474,7 @@ class MPVController: NSObject {
 
     switch eventId {
     case MPV_EVENT_SHUTDOWN:
-      let quitByMPV = !playerCore.isMpvTerminated
+      let quitByMPV = !player.isMpvTerminated
       if quitByMPV {
         NSApp.terminate(nil)
       } else {
@@ -505,56 +505,56 @@ class MPVController: NSObject {
       break
 
     case MPV_EVENT_START_FILE:
-      playerCore.info.isIdle = false
+      player.info.isIdle = false
       guard getString(MPVProperty.path) != nil else { break }
-      playerCore.fileStarted()
-      playerCore.sendOSD(.fileStart(playerCore.info.currentURL?.lastPathComponent ?? "-"))
+      player.fileStarted()
+      player.sendOSD(.fileStart(player.info.currentURL?.lastPathComponent ?? "-"))
 
     case MPV_EVENT_FILE_LOADED:
       onFileLoaded()
 
     case MPV_EVENT_SEEK:
-      playerCore.info.isSeeking = true
+      player.info.isSeeking = true
       if needRecordSeekTime {
         recordedSeekStartTime = CACurrentMediaTime()
       }
-      playerCore.syncUI(.time)
-      let osdText = (playerCore.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
-        (playerCore.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder)
-      let percentage = (playerCore.info.videoPosition / playerCore.info.videoDuration) ?? 1
-      playerCore.sendOSD(.seek(osdText, percentage))
+      player.syncUI(.time)
+      let osdText = (player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
+        (player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder)
+      let percentage = (player.info.videoPosition / player.info.videoDuration) ?? 1
+      player.sendOSD(.seek(osdText, percentage))
 
     case MPV_EVENT_PLAYBACK_RESTART:
-      playerCore.info.isIdle = false
-      playerCore.info.isSeeking = false
+      player.info.isIdle = false
+      player.info.isSeeking = false
       if needRecordSeekTime {
         recordedSeekTimeListener?(CACurrentMediaTime() - recordedSeekStartTime)
         recordedSeekTimeListener = nil
       }
-      playerCore.playbackRestarted()
-      playerCore.syncUI(.time)
+      player.playbackRestarted()
+      player.syncUI(.time)
 
     case MPV_EVENT_END_FILE:
       // if receive end-file when loading file, might be error
       // wait for idle
-      if playerCore.info.fileLoading {
+      if player.info.fileLoading {
         receivedEndFileWhileLoading = true
       } else {
-        playerCore.info.currentFileIsOpenedManually = false
+        player.info.currentFileIsOpenedManually = false
       }
       break
 
     case MPV_EVENT_IDLE:
-      if receivedEndFileWhileLoading && playerCore.info.fileLoading {
-        playerCore.errorOpeningFileAndCloseMainWindow()
-        playerCore.info.fileLoading = false
-        playerCore.info.currentURL = nil
-        playerCore.info.isNetworkResource = false
+      if receivedEndFileWhileLoading && player.info.fileLoading {
+        player.errorOpeningFileAndCloseMainWindow()
+        player.info.fileLoading = false
+        player.info.currentURL = nil
+        player.info.isNetworkResource = false
       }
-      playerCore.info.isIdle = true
+      player.info.isIdle = true
       if fileLoaded {
         fileLoaded = false
-        playerCore.closeMainWindow()
+        player.closeMainWindow()
       }
       receivedEndFileWhileLoading = false
       break
@@ -579,36 +579,36 @@ class MPVController: NSObject {
     let height = getInt(MPVProperty.height)
     let duration = getDouble(MPVProperty.duration)
     let pos = getDouble(MPVProperty.timePos)
-    playerCore.info.videoHeight = height
-    playerCore.info.videoWidth = width
-    playerCore.info.displayWidth = 0
-    playerCore.info.displayHeight = 0
-    playerCore.info.videoDuration = VideoTime(duration)
-    playerCore.info.videoPosition = VideoTime(pos)
-    playerCore.fileLoaded()
+    player.info.videoHeight = height
+    player.info.videoWidth = width
+    player.info.displayWidth = 0
+    player.info.displayHeight = 0
+    player.info.videoDuration = VideoTime(duration)
+    player.info.videoPosition = VideoTime(pos)
+    player.fileLoaded()
     fileLoaded = true
     // mpvResume()
     if !Preference.bool(for: .pauseWhenOpen) {
       setFlag(MPVOption.PlaybackControl.pause, false)
     }
-    playerCore.syncUI(.playlist)
+    player.syncUI(.playlist)
   }
 
   private func onVideoReconfig() {
     // If loading file, video reconfig can return 0 width and height
-    if playerCore.info.fileLoading {
+    if player.info.fileLoading {
       return
     }
     var dwidth = getInt(MPVProperty.dwidth)
     var dheight = getInt(MPVProperty.dheight)
-    if playerCore.info.rotation == 90 || playerCore.info.rotation == 270 {
+    if player.info.rotation == 90 || player.info.rotation == 270 {
       Utility.swap(&dwidth, &dheight)
     }
-    if dwidth != playerCore.info.displayWidth! || dheight != playerCore.info.displayHeight! {
+    if dwidth != player.info.displayWidth! || dheight != player.info.displayHeight! {
       // video size changed
-      playerCore.info.displayWidth = dwidth
-      playerCore.info.displayHeight = dheight
-      playerCore.notifyMainWindowVideoSizeChanged()
+      player.info.displayWidth = dwidth
+      player.info.displayHeight = dheight
+      player.notifyMainWindowVideoSizeChanged()
     }
   }
 
@@ -622,128 +622,128 @@ class MPVController: NSObject {
 
     case MPVOption.TrackSelection.vid:
       let data = getInt(MPVOption.TrackSelection.vid)
-      playerCore.info.vid = Int(data)
-      let currTrack = playerCore.info.currentTrack(.video) ?? .noneVideoTrack
-      playerCore.sendOSD(.track(currTrack))
+      player.info.vid = Int(data)
+      let currTrack = player.info.currentTrack(.video) ?? .noneVideoTrack
+      player.sendOSD(.track(currTrack))
 
     case MPVOption.TrackSelection.aid:
       let data = getInt(MPVOption.TrackSelection.aid)
-      playerCore.info.aid = Int(data)
-      let currTrack = playerCore.info.currentTrack(.audio) ?? .noneAudioTrack
-      playerCore.sendOSD(.track(currTrack))
+      player.info.aid = Int(data)
+      let currTrack = player.info.currentTrack(.audio) ?? .noneAudioTrack
+      player.sendOSD(.track(currTrack))
 
     case MPVOption.TrackSelection.sid:
       let data = getInt(MPVOption.TrackSelection.sid)
-      playerCore.info.sid = Int(data)
-      let currTrack = playerCore.info.currentTrack(.sub) ?? .noneSubTrack
-      playerCore.sendOSD(.track(currTrack))
+      player.info.sid = Int(data)
+      let currTrack = player.info.currentTrack(.sub) ?? .noneSubTrack
+      player.sendOSD(.track(currTrack))
 
     case MPVOption.PlaybackControl.pause:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
-        if playerCore.info.isPaused != data {
-          playerCore.sendOSD(data ? .pause : .resume)
-          playerCore.info.isPaused = data
+        if player.info.isPaused != data {
+          player.sendOSD(data ? .pause : .resume)
+          player.info.isPaused = data
         }
-        if playerCore.mainWindow.isWindowLoaded {
+        if player.mainWindow.isWindowLoaded {
           if Preference.bool(for: .alwaysFloatOnTop) {
             DispatchQueue.main.async {
-              self.playerCore.mainWindow.setWindowFloatingOnTop(!data)
+              self.player.mainWindow.setWindowFloatingOnTop(!data)
             }
           }
         }
       }
-      playerCore.syncUI(.playButton)
+      player.syncUI(.playButton)
 
     case MPVProperty.chapter:
-      playerCore.syncUI(.time)
-      playerCore.syncUI(.chapterList)
+      player.syncUI(.time)
+      player.syncUI(.chapterList)
 
 
     case MPVOption.Video.deinterlace:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
         // this property will fire a change event at file start
-        if playerCore.info.deinterlace != data {
-          playerCore.sendOSD(.deinterlace(data))
-          playerCore.info.deinterlace = data
+        if player.info.deinterlace != data {
+          player.sendOSD(.deinterlace(data))
+          player.info.deinterlace = data
         }
       }
 
     case MPVOption.Audio.mute:
-      playerCore.syncUI(.muteButton)
+      player.syncUI(.muteButton)
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
-        playerCore.info.isMuted = data
-        playerCore.sendOSD(data ? OSDMessage.mute : OSDMessage.unMute)
+        player.info.isMuted = data
+        player.sendOSD(data ? OSDMessage.mute : OSDMessage.unMute)
       }
 
     case MPVOption.Audio.volume:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        playerCore.info.volume = data
-        playerCore.syncUI(.volume)
-        playerCore.sendOSD(.volume(Int(data)))
+        player.info.volume = data
+        player.syncUI(.volume)
+        player.sendOSD(.volume(Int(data)))
       }
 
     case MPVOption.Audio.audioDelay:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        playerCore.info.audioDelay = data
-        playerCore.sendOSD(.audioDelay(data))
+        player.info.audioDelay = data
+        player.sendOSD(.audioDelay(data))
       }
 
     case MPVOption.Subtitles.subDelay:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        playerCore.info.subDelay = data
-        playerCore.sendOSD(.subDelay(data))
+        player.info.subDelay = data
+        player.sendOSD(.subDelay(data))
       }
 
     case MPVOption.Subtitles.subScale:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         let displayValue = data >= 1 ? data : -1/data
         let truncated = round(displayValue * 100) / 100
-        playerCore.sendOSD(.subScale(truncated))
+        player.sendOSD(.subScale(truncated))
       }
 
     case MPVOption.Subtitles.subPos:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        playerCore.sendOSD(.subPos(data))
+        player.sendOSD(.subPos(data))
       }
 
     case MPVOption.PlaybackControl.speed:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        playerCore.sendOSD(.speed(data))
+        player.sendOSD(.speed(data))
       }
 
     case MPVOption.Equalizer.contrast:
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
-        playerCore.info.contrast = intData
-        playerCore.sendOSD(.contrast(intData))
+        player.info.contrast = intData
+        player.sendOSD(.contrast(intData))
       }
 
     case MPVOption.Equalizer.hue:
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
-        playerCore.info.hue = intData
-        playerCore.sendOSD(.hue(intData))
+        player.info.hue = intData
+        player.sendOSD(.hue(intData))
       }
 
     case MPVOption.Equalizer.brightness:
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
-        playerCore.info.brightness = intData
-        playerCore.sendOSD(.brightness(intData))
+        player.info.brightness = intData
+        player.sendOSD(.brightness(intData))
       }
 
     case MPVOption.Equalizer.gamma:
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
-        playerCore.info.gamma = intData
-        playerCore.sendOSD(.gamma(intData))
+        player.info.gamma = intData
+        player.sendOSD(.gamma(intData))
       }
 
     case MPVOption.Equalizer.saturation:
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
-        playerCore.info.saturation = intData
-        playerCore.sendOSD(.saturation(intData))
+        player.info.saturation = intData
+        player.sendOSD(.saturation(intData))
       }
 
     // following properties may change before file loaded
@@ -752,8 +752,8 @@ class MPVController: NSObject {
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
 
     case MPVProperty.trackListCount:
-      playerCore.getTrackInfo()
-      playerCore.getSelectedTracks()
+      player.getTrackInfo()
+      player.getSelectedTracks()
       NotificationCenter.default.post(Notification(name: Constants.Noti.tracklistChanged))
 
     case MPVProperty.vf:

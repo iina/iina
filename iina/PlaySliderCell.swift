@@ -11,7 +11,7 @@ import Cocoa
 class PlaySliderCell: NSSliderCell {
 
   lazy var playerCore: PlayerCore = {
-    return (self.controlView!.window!.windowController as! MainWindowController).playerCore
+    return (self.controlView!.window!.windowController as! MainWindowController).player
   }()
 
   override var knobThickness: CGFloat {

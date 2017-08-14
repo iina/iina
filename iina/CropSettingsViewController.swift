@@ -29,7 +29,7 @@ class CropSettingsViewController: NSViewController {
   // cropy is in flipped coordinate
   private var actualCropy: Int {
     get {
-      return mainWindow.playerCore.info.videoHeight! - croph - cropy
+      return mainWindow.player.info.videoHeight! - croph - cropy
     }
   }
 
@@ -53,7 +53,7 @@ class CropSettingsViewController: NSViewController {
 
 
   @IBAction func doneBtnAction(_ sender: AnyObject) {
-    let playerCore = mainWindow.playerCore
+    let playerCore = mainWindow.player
 
     mainWindow.exitInteractiveMode {
       if self.cropx == 0 && self.cropy == 0 &&

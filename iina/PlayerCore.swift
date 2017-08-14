@@ -27,7 +27,7 @@ class PlayerCore: NSObject {
 
   static var active: PlayerCore {
     if let wc = NSApp.mainWindow?.windowController as? MainWindowController {
-      return wc.playerCore
+      return wc.player
     } else {
       return first
     }

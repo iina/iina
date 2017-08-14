@@ -30,6 +30,7 @@ static inline int min(int a, int b, int c) {
   }
   @catch (NSException *exception) {
     *error = [[NSError alloc] initWithDomain:exception.name code:0 userInfo:exception.userInfo];
+    return NO;
   }
 }
 
@@ -39,7 +40,7 @@ static inline int min(int a, int b, int c) {
     return YES;
   }
   @catch (NSException *exception) {
-    // do nothing
+    return NO;
   }
 }
 

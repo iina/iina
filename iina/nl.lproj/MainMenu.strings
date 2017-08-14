@@ -1,6 +1,6 @@
 
 /* Class = "NSMenuItem"; title = "Show Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
-"0T7-Nu-SL7.title" = "Laat afspeellijst paneel zien";
+"0T7-Nu-SL7.title" = "Toon afspeellijst paneel";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "Open URL…";
@@ -27,10 +27,10 @@
 "2id-wn-xsC.title" = "Spring naar…";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "Laat snelle instellingen zien";
+"2t8-Ot-yoO.title" = "Toon snelle instellingen";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
-"43n-Ed-5kT.title" = "Laat snelle instellingen zien";
+"43n-Ed-5kT.title" = "Toon snelle instellingen";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
 "4ae-MT-2L1.title" = "Audio vertraging + 0.5s";
@@ -54,7 +54,7 @@
 "8Zh-hU-Cc4.title" = "Audio filters…";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "Laat snelle instellingen zien";
+"8y7-Cy-lKT.title" = "Toon snelle instellingen";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
 "9pa-9C-ueQ.title" = "<Geen>";
@@ -93,7 +93,7 @@
 "DVo-aG-piG.title" = "Sluiten";
 
 /* Class = "NSMenuItem"; title = "Show Chapters Panel"; ObjectID = "DwM-3d-Eb9"; */
-"DwM-3d-Eb9.title" = "Laat hoofdstukken paneel zien";
+"DwM-3d-Eb9.title" = "Toon hoofdstukken paneel";
 
 /* Class = "NSMenu"; title = "Subtitles"; ObjectID = "EKp-Qx-4Mn"; */
 "EKp-Qx-4Mn.title" = "Ondertiteling";
@@ -105,10 +105,10 @@
 "FKE-Sm-Kum.title" = "IINA Help";
 
 /* Class = "NSMenu"; title = "Video Track"; ObjectID = "FTu-CF-O0R"; */
-"FTu-CF-O0R.title" = "Video bestand";
+"FTu-CF-O0R.title" = "Video spoor";
 
 /* Class = "NSMenuItem"; title = "Chapter"; ObjectID = "Fal-I4-PZk"; */
-"Fal-I4-PZk.title" = "Hoofdstuk";
+"Fal-I4-PZk.title" = "Hoofdstukken";
 
 /* Class = "NSMenu"; title = "Playback"; ObjectID = "GEO-Iw-cKr"; */
 "GEO-Iw-cKr.title" = "Afspelen";
@@ -147,7 +147,7 @@
 "Kby-lQ-HCW.title" = "Open bestand...";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
-"Kd2-mp-pUS.title" = "Laat alles zien";
+"Kd2-mp-pUS.title" = "Toon alles";
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
 "LE2-aR-0XJ.title" = "Breng alles naar voorgrond";
@@ -162,7 +162,7 @@
 "LsU-Qz-dax.title" = "Ondertitel vertraging - 0.5s";
 
 /* Class = "NSMenuItem"; title = "Find Online Subtitles…"; ObjectID = "Mg3-WB-gjZ"; */
-"Mg3-WB-gjZ.title" = "Zoek online naar ondertiteling…";
+"Mg3-WB-gjZ.title" = "Zoek online naar ondertitelingen…";
 
 /* Class = "NSMenuItem"; title = "Save Current Playlist..."; ObjectID = "Mjr-lL-oEt"; */
 "Mjr-lL-oEt.title" = "Sla huidige afspeellijst op...";
@@ -180,7 +180,7 @@
 "Olw-nP-bQN.title" = "Verberg IINA";
 
 /* Class = "NSMenuItem"; title = "Reset Subtitle Scale"; ObjectID = "P1a-ot-P31"; */
-"P1a-ot-P31.title" = "Reset grootte ondertiteling";
+"P1a-ot-P31.title" = "Reset grootte";
 
 /* Class = "NSMenuItem"; title = "Encoding"; ObjectID = "Pci-OQ-Vni"; */
 "Pci-OQ-Vni.title" = "Codering";
@@ -204,7 +204,7 @@
 "SHd-63-Xoh.title" = "Pas aan naar schermgrootte";
 
 /* Class = "NSMenuItem"; title = "Reset Subtitle Delay"; ObjectID = "SLr-6g-Mgh"; */
-"SLr-6g-Mgh.title" = "Reset ondertitel vertraging";
+"SLr-6g-Mgh.title" = "Reset vertraging";
 
 /* Class = "NSMenuItem"; title = "Step Backward 5s"; ObjectID = "Sif-85-FF1"; */
 "Sif-85-FF1.title" = "Ga 5s terug";
@@ -225,7 +225,7 @@
 "Vdr-fp-XzO.title" = "Verberg andere";
 
 /* Class = "NSMenuItem"; title = "Mute"; ObjectID = "WOL-Us-ByA"; */
-"WOL-Us-ByA.title" = "Dempen";
+"WOL-Us-ByA.title" = "Geluid aan/uit";
 
 /* Class = "NSMenuItem"; title = "Volume + 5%"; ObjectID = "Wbq-vt-hzX"; */
 "Wbq-vt-hzX.title" = "Volume + 5%";

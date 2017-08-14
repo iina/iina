@@ -243,16 +243,21 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   func updateTrack() {
     DispatchQueue.main.async {
       let mediaTitle = self.player.mpvController.getString(MPVProperty.mediaTitle) ?? ""
-      let mediaArtist = self.player.mpvController.getString("metadata/by-key/artist")
-      let mediaAlbum = self.player.mpvController.getString("metadata/by-key/album")
+      let mediaArtist = self.player.mpvController.getString("metadata/by-key/artist") ?? ""
+      let mediaAlbum = self.player.mpvController.getString("metadata/by-key/album") ?? ""
       self.titleLabel.stringValue = mediaTitle
+      self.window?.title = mediaTitle
       // hide artist & album label when info not available
-      if mediaArtist == nil && mediaAlbum == nil {
+      if mediaArtist.isEmpty && mediaAlbum.isEmpty {
         self.titleLabelTopConstraint.constant = 6 + 10
         self.artistAlbumLabel.stringValue = ""
       } else {
         self.titleLabelTopConstraint.constant = 6
-        self.artistAlbumLabel.stringValue = "\(mediaArtist ?? "Unknown Artist") - \(mediaAlbum ?? "Unknown Album")"
+        if mediaArtist.isEmpty || mediaAlbum.isEmpty {
+          self.artistAlbumLabel.stringValue = "\(mediaArtist)\(mediaAlbum)"
+        } else {
+          self.artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
+        }
       }
     }
   }

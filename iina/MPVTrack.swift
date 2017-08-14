@@ -71,9 +71,9 @@ class MPVTrack: NSObject {
     }
   }
 
-  // unimplemented
+  var isAlbumart: Bool = false
 
-  var isAlbumart: Bool?
+  // unimplemented
 
   var ffIndex: Int?
   var decoderDesc: String?

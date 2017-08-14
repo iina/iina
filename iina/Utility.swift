@@ -381,6 +381,13 @@ class Utility {
     return realScale >= 1 ? realScale : -1 / realScale
   }
 
+  static func quickConstraints(_ constrants: [String], _ views: [String: NSView]) {
+    constrants.forEach { c in
+      let cc = NSLayoutConstraint.constraints(withVisualFormat: c, options: [], metrics: nil, views: views)
+      NSLayoutConstraint.activate(cc)
+    }
+  }
+
   static func mpvKeyCode(from event: NSEvent) -> String {
     var keyString = ""
     let keyChar: String

@@ -52,6 +52,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   unowned var playerCore: PlayerCore
 
+  var menuActionHandler: MainMenuActionHandler!
+
   lazy var videoView: VideoView = self.initVideoView()
 
   lazy var sizingTouchBarTextField: NSTextField = {
@@ -341,6 +343,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = self.window else { return }
 
     w.initialFirstResponder = nil
+
+    menuActionHandler = MainMenuActionHandler(playerCore: playerCore)
+    let responder = w.nextResponder
+    w.nextResponder = menuActionHandler
+    menuActionHandler.nextResponder = responder
 
     w.center()
 
@@ -645,7 +652,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscFloatingTopView.addView(fragToolbarView, in: .trailing)
       oscFloatingTopView.addView(fragControlView, in: .center)
       oscFloatingBottomView.addSubview(fragSliderView)
-      quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
+      Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
       // center control bar
       let cph = ud.float(forKey: PK.controlBarPositionHorizontal)
       let cpv = ud.float(forKey: PK.controlBarPositionVertical)
@@ -1395,11 +1402,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  func hideSideBar(_ after: @escaping () -> Void = { }) {
+  func hideSideBar(animate: Bool = true, after: @escaping () -> Void = { }) {
     sidebarAnimationState = .willHide
     let currWidth = sideBarWidthConstraint.constant
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = SideBarAnimationDuration
+      context.duration = animate ? SideBarAnimationDuration : 0
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       sideBarRightConstraint.animator().constant = -currWidth
     }) {
@@ -1445,7 +1452,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     hideUI()
     bottomView.isHidden = false
     bottomView.addSubview(cropSettingsView.view)
-    quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.view])
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.view])
 
     // get original frame
     let origWidth = CGFloat(playerCore.info.videoWidth!)
@@ -1488,7 +1495,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     cropSettingsView.cropBoxView.actualSize = origSize
     cropSettingsView.cropBoxView.resized(with: videoRect)
     cropSettingsView.cropBoxView.isHidden = true
-    quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.cropBoxView])
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.cropBoxView])
 
     // show crop settings view
     NSAnimationContext.runAnimationGroup({ (context) in
@@ -2053,13 +2060,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Utility
 
-  private func quickConstraints(_ constrants: [String], _ views: [String: NSView]) {
-    constrants.forEach { c in
-      let cc = NSLayoutConstraint.constraints(withVisualFormat: c, options: [], metrics: nil, views: views)
-      NSLayoutConstraint.activate(cc)
-    }
-  }
-
   private func videoViewSizeInInteractiveMode(_ rect: NSRect, currentCrop: NSRect, originalSize: NSSize) -> (NSRect, NSRect) {
     // 60 for bottom bar and 24*2 for top and bottom margin
 
@@ -2080,11 +2080,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func handleIINACommand(_ cmd: IINACommand) {
+    let appDeletate = (NSApp.delegate! as! AppDelegate)
     switch cmd {
     case .openFile:
-      (NSApp.delegate! as! AppDelegate).openFile(self)
+      appDeletate.openFile(self)
     case .openURL:
-      (NSApp.delegate! as! AppDelegate).openURL(self)
+      appDeletate.openURL(self)
     case .togglePIP:
       if #available(OSX 10.12, *) {
         self.menuTogglePIP(.dummy)
@@ -2100,17 +2101,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case .chapterPanel:
       self.menuShowChaptersPanel(.dummy)
     case .flip:
-      self.menuToggleFlip(.dummy)
+      self.menuActionHandler.menuToggleFlip(.dummy)
     case .mirror:
-      self.menuToggleMirror(.dummy)
+      self.menuActionHandler.menuToggleMirror(.dummy)
     case .saveCurrentPlaylist:
-      self.menuSavePlaylist(.dummy)
+      self.menuActionHandler.menuSavePlaylist(.dummy)
     case .deleteCurrentFile:
-      self.menuDeleteCurrentFile(.dummy)
+      self.menuActionHandler.menuDeleteCurrentFile(.dummy)
     case .findOnlineSubs:
-      self.menuFindOnlineSub(.dummy)
+      self.menuActionHandler.menuFindOnlineSub(.dummy)
     case .saveDownloadedSub:
-      self.saveDownloadedSub(.dummy)
+      self.menuActionHandler.saveDownloadedSub(.dummy)
     }
   }
 

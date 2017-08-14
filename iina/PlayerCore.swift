@@ -89,6 +89,7 @@ class PlayerCore: NSObject {
 
   var mainWindow: MainWindowController!
   var initialWindow: InitialWindowController!
+  var miniPlayer: MiniPlayerWindowController!
 
   var mpvController: MPVController!
 
@@ -106,6 +107,8 @@ class PlayerCore: NSObject {
 
   var isMpvTerminated: Bool = false
 
+  var isInMiniPlayer = false
+
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
@@ -120,6 +123,7 @@ class PlayerCore: NSObject {
     self.mpvController = MPVController(playerCore: self)
     self.mainWindow = MainWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)
+    self.miniPlayer = MiniPlayerWindowController(player: self)
   }
 
   // MARK: - Control commands
@@ -218,6 +222,35 @@ class PlayerCore: NSObject {
   // invalidate timer
   func invalidateTimer() {
     self.syncPlayTimeTimer?.invalidate()
+  }
+
+  func switchToMiniPlayer() {
+    miniPlayer.showWindow(self)
+    miniPlayer.updateTrack()
+    let playlistView = mainWindow.playlistView.view
+    // reset down shift for playlistView
+    mainWindow.playlistView.downShift = 0
+    // hide sidebar
+    if mainWindow.sideBarStatus != .hidden {
+      mainWindow.hideSideBar(animate: false)
+    }
+    // move playist view
+    playlistView.removeFromSuperview()
+    miniPlayer.playlistWrapperView.addSubview(playlistView)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": playlistView])
+    // hide main window
+    mainWindow.window?.orderOut(self)
+    isInMiniPlayer = true
+  }
+
+  func switchBackFromMiniPlayer() {
+    mainWindow.playlistView.view.removeFromSuperview()
+    mainWindow.window?.makeKeyAndOrderFront(self)
+    // if aspect ratio is not set
+    if mainWindow.window?.aspectRatio == nil {
+      mainWindow.window?.aspectRatio = NSSize(width: AppData.widthWhenNoVideo, height: AppData.heightWhenNoVideo)
+    }
+    isInMiniPlayer = false
   }
 
   // MARK: - MPV commands
@@ -790,6 +823,17 @@ class PlayerCore: NSObject {
         // only enter fullscreen for first file
         needEnterFullScreenForNextMedia = false
       }
+      // if need to switch to music mode
+      if ud.bool(forKey: Preference.Key.autoSwitchToMusicMode) {
+        if currentMediaIsAudio() {
+          if !isInMiniPlayer { switchToMiniPlayer() }
+        } else {
+          if isInMiniPlayer {
+            miniPlayer.close()
+            switchBackFromMiniPlayer()
+          }
+        }
+      }
     }
     // add to history
     if let url = info.currentURL {
@@ -872,7 +916,11 @@ class PlayerCore: NSObject {
       let time = mpvController.getDouble(MPVProperty.timePos)
       info.videoPosition = VideoTime(time)
       DispatchQueue.main.async {
-        self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
+        if self.isInMiniPlayer {
+          self.miniPlayer.updatePlayTime(withDuration: false, andProgressBar: true)
+        } else {
+          self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
+        }
       }
 
     case .timeAndCache:
@@ -894,6 +942,7 @@ class PlayerCore: NSObject {
       info.isPaused = pause
       DispatchQueue.main.async {
         self.mainWindow.updatePlayButtonState(pause ? NSOffState : NSOnState)
+        self.miniPlayer.updatePlayButtonState(pause ? NSOffState : NSOnState)
         if #available(OSX 10.12.2, *) {
           self.mainWindow.updateTouchBarPlayBtn()
         }
@@ -902,6 +951,7 @@ class PlayerCore: NSObject {
     case .volume:
       DispatchQueue.main.async {
         self.mainWindow.updateVolume()
+        self.miniPlayer.updateVolume()
       }
 
     case .muteButton:
@@ -920,7 +970,7 @@ class PlayerCore: NSObject {
 
     case .playlist:
       DispatchQueue.main.async {
-        if self.mainWindow.sideBarStatus == .playlist {
+        if self.mainWindow.sideBarStatus == .playlist || self.isInMiniPlayer {
           self.mainWindow.playlistView.playlistTableView.reloadData()
         }
       }
@@ -998,6 +1048,7 @@ class PlayerCore: NSObject {
       track.lang = mpvController.getString(MPVProperty.trackListNLang(index))
       track.codec = mpvController.getString(MPVProperty.trackListNCodec(index))
       track.externalFilename = mpvController.getString(MPVProperty.trackListNExternalFilename(index))
+      track.isAlbumart = mpvController.getString(MPVProperty.trackListNAlbumart(index)) == "yes"
       track.decoderDesc = mpvController.getString(MPVProperty.trackListNDecoderDesc(index))
       track.demuxFps = mpvController.getDouble(MPVProperty.trackListNDemuxFps(index))
       track.demuxChannels = mpvController.getString(MPVProperty.trackListNDemuxChannels(index))
@@ -1048,6 +1099,13 @@ class PlayerCore: NSObject {
                                index:     index)
       info.chapters.append(chapter)
     }
+  }
+
+  func currentMediaIsAudio() -> Bool {
+    guard !info.isNetworkResource else { return false }
+    let noVideoTrack = info.videoTracks.isEmpty
+    let theOnlyVideoTrackIsAlbumCover = info.videoTracks.count == 1 && info.videoTracks.first!.isAlbumart
+    return noVideoTrack || theOnlyVideoTrackIsAlbumCover
   }
 
   static func checkStatusForSleep() {

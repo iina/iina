@@ -804,6 +804,9 @@ class PlayerCore: NSObject {
     if mainWindow.isVideoLoaded {
       generateThumbnails()
     }
+    // Check whether current media is audio
+    currentMediaIsAudio = checkCurrentMediaIsAudio()
+    // Main thread stuff
     DispatchQueue.main.sync {
       self.getTrackInfo()
       self.getSelectedTracks()
@@ -825,7 +828,7 @@ class PlayerCore: NSObject {
       }
       // if need to switch to music mode
       if Preference.bool(for: .autoSwitchToMusicMode) {
-        if currentMediaIsAudio() {
+        if currentMediaIsAudio {
           if !isInMiniPlayer { switchToMiniPlayer() }
         } else {
           if isInMiniPlayer {
@@ -1101,7 +1104,9 @@ class PlayerCore: NSObject {
     }
   }
 
-  func currentMediaIsAudio() -> Bool {
+  var currentMediaIsAudio = false
+
+  func checkCurrentMediaIsAudio() -> Bool {
     guard !info.isNetworkResource else { return false }
     let noVideoTrack = info.videoTracks.isEmpty
     let theOnlyVideoTrackIsAlbumCover = info.videoTracks.count == 1 && info.videoTracks.first!.isAlbumart

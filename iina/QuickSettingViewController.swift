@@ -162,14 +162,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
     rotateSegment.selectSegment(withTag: AppData.rotations.index(of: player.info.rotation) ?? -1)
     deinterlaceCheckBtn.state = player.info.deinterlace ? NSOnState : NSOffState
-    let speed = player.mpvController.getDouble(MPVOption.PlaybackControl.speed)
+    let speed = player.mpv.getDouble(MPVOption.PlaybackControl.speed)
     customSpeedTextField.doubleValue = speed
     let sliderValue = log(speed / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
     speedSlider.doubleValue = sliderValue
     redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(customSpeedTextField.stringValue)x")
 
     // Audio
-    let audioDelay = player.mpvController.getDouble(MPVOption.Audio.audioDelay)
+    let audioDelay = player.mpv.getDouble(MPVOption.Audio.audioDelay)
     audioDelaySlider.doubleValue = audioDelay
     customAudioDelayTextField.doubleValue = audioDelay
     redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(customAudioDelayTextField.stringValue)s")
@@ -182,21 +182,21 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       [subTextColorWell, subTextSizePopUp, subTextBgColorWell, subTextBorderColorWell, subTextBorderWidthPopUp, subTextFontBtn].forEach { $0.isEnabled = enableTextSettings }
     }
 
-    let currSubScale = player.mpvController.getDouble(MPVOption.Subtitles.subScale).constrain(min: 0.1, max: 10)
+    let currSubScale = player.mpv.getDouble(MPVOption.Subtitles.subScale).constrain(min: 0.1, max: 10)
     let displaySubScale = Utility.toDisplaySubScale(fromRealSubScale: currSubScale)
     subScaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
-    let subDelay = player.mpvController.getDouble(MPVOption.Subtitles.subDelay)
+    let subDelay = player.mpv.getDouble(MPVOption.Subtitles.subDelay)
     subDelaySlider.doubleValue = subDelay
     customSubDelayTextField.doubleValue = subDelay
     redraw(indicator: subDelaySliderIndicator, constraint: subDelaySliderConstraint, slider: subDelaySlider, value: "\(customSubDelayTextField.stringValue)s")
 
-    let currSubPos = player.mpvController.getInt(MPVOption.Subtitles.subPos)
+    let currSubPos = player.mpv.getInt(MPVOption.Subtitles.subPos)
     subPosSlider.intValue = Int32(currSubPos)
 
-    let fontSize = player.mpvController.getInt(MPVOption.Subtitles.subFontSize)
+    let fontSize = player.mpv.getInt(MPVOption.Subtitles.subFontSize)
     subTextSizePopUp.selectItem(withTitle: fontSize.toStr())
 
-    let borderWidth = player.mpvController.getDouble(MPVOption.Subtitles.subBorderSize)
+    let borderWidth = player.mpv.getDouble(MPVOption.Subtitles.subBorderSize)
     subTextBorderWidthPopUp.selectItem(at: -1)
     subTextBorderWidthPopUp.itemArray.forEach { item in
       if borderWidth == Double(item.title) {

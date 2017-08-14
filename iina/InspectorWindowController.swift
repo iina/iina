@@ -90,7 +90,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   }
 
   func updateInfo(dynamic: Bool = false) {
-    let controller = PlayerCore.lastActive.mpvController!
+    let controller = PlayerCore.lastActive.mpv!
     let info = PlayerCore.lastActive.info
 
     if !dynamic {
@@ -229,7 +229,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     if identifier == Constants.Identifier.key {
       return property
     } else if identifier == Constants.Identifier.value {
-      return PlayerCore.active.mpvController.getString(property) ?? "<Error>"
+      return PlayerCore.active.mpv.getString(property) ?? "<Error>"
     }
     return ""
   }

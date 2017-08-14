@@ -97,7 +97,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   override func viewDidAppear() {
     reloadData(playlist: true, chapters: true)
 
-    let loopStatus = player.mpvController.getString(MPVOption.PlaybackControl.loopPlaylist)
+    let loopStatus = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     loopBtn.state = (loopStatus == "inf" || loopStatus == "force") ? NSOnState : NSOffState
   }
 
@@ -429,7 +429,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   @IBAction func contextMenuPlayNext(_ sender: NSMenuItem) {
     guard let selectedRows = selectedRows else { return }
-    let current = player.mpvController.getInt(MPVProperty.playlistPos)
+    let current = player.mpv.getInt(MPVProperty.playlistPos)
     var ob = 0  // index offset before current playing item
     var mc = 1  // moved item count, +1 because move to next item of current played one
     for item in selectedRows {

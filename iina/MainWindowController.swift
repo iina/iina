@@ -120,13 +120,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   var isInFullScreen: Bool = false {
     didSet {
-      player.mpvController.setFlag(MPVOption.Window.fullscreen, isInFullScreen)
+      player.mpv.setFlag(MPVOption.Window.fullscreen, isInFullScreen)
     }
   }
 
   var isOntop: Bool = false {
     didSet {
-      player.mpvController.setFlag(MPVOption.Window.ontop, isOntop)
+      player.mpv.setFlag(MPVOption.Window.ontop, isOntop)
     }
   }
 
@@ -437,13 +437,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // add notification observers
     let fsObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.fsChanged, object: nil, queue: .main) { [unowned self] _ in
-      let fs = self.player.mpvController.getFlag(MPVOption.Window.fullscreen)
+      let fs = self.player.mpv.getFlag(MPVOption.Window.fullscreen)
       if fs != self.isInFullScreen {
         self.toggleWindowFullScreen()
       }
     }
     let ontopObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.ontopChanged, object: nil, queue: .main) { [unowned self] _ in
-      let ontop = self.player.mpvController.getFlag(MPVOption.Window.ontop)
+      let ontop = self.player.mpv.getFlag(MPVOption.Window.ontop)
       if ontop != self.isOntop {
         self.isOntop = ontop
         self.setWindowFloatingOnTop(ontop)
@@ -709,7 +709,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
             player.abLoop()
             returnValue = 0
           default:
-            returnValue = player.mpvController.command(rawString: kb.rawAction)
+            returnValue = player.mpv.command(rawString: kb.rawAction)
           }
           // handle return value, display osd if needed
           if returnValue == 0 {
@@ -1063,7 +1063,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowWillEnterFullScreen(_ notification: Notification) {
     isEnteringFullScreen = true
 
-    player.mpvController.setFlag(MPVOption.Window.keepaspect, true)
+    player.mpv.setFlag(MPVOption.Window.keepaspect, true)
 
     // Set the appearance to match the theme so the titlebar matches the theme
     switch(Preference.enum(for: .themeMaterial) as Preference.Theme) {
@@ -1103,7 +1103,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
-    player.mpvController.setFlag(MPVOption.Window.keepaspect, false)
+    player.mpv.setFlag(MPVOption.Window.keepaspect, false)
 
     // show titleBarView
     if oscPosition == .top {
@@ -1144,7 +1144,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = window else { return }
     let wSize = w.frame.size
     // is paused or very low fps (assume audio file), draw new frame
-    if player.info.isPaused || player.mpvController.getDouble(MPVProperty.estimatedVfFps) < 1 {
+    if player.info.isPaused || player.mpv.getDouble(MPVProperty.estimatedVfFps) < 1 {
       videoView.videoLayer.draw()
     }
     // update videoview size if in full screen, since aspect ratio may changed
@@ -1305,7 +1305,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func updateTitle() {
     if player.info.isNetworkResource {
-      let mediaTitle = player.mpvController.getString(MPVProperty.mediaTitle)
+      let mediaTitle = player.mpv.getString(MPVProperty.mediaTitle)
       window?.title = mediaTitle ?? player.info.currentURL?.path ?? ""
     } else {
       window?.representedURL = player.info.currentURL
@@ -1344,7 +1344,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let osdData: [String: String] = [
         "duration": player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
         "position": player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
-        "currChapter": (player.mpvController.getInt(MPVProperty.chapter) + 1).toStr(),
+        "currChapter": (player.mpv.getInt(MPVProperty.chapter) + 1).toStr(),
         "chapterCount": player.info.chapters.count.toStr()
       ]
 
@@ -1705,7 +1705,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if height == 0 { height = AppData.heightWhenNoVideo }
 
     // if video has rotation
-    let netRotate = player.mpvController.getInt(MPVProperty.videoParamsRotate) - player.mpvController.getInt(MPVOption.Video.videoRotate)
+    let netRotate = player.mpv.getInt(MPVProperty.videoParamsRotate) - player.mpv.getInt(MPVOption.Video.videoRotate)
     let rotate = netRotate >= 0 ? netRotate : netRotate + 360
     if rotate == 90 || rotate == 270 {
       swap(&width, &height)
@@ -1993,7 +1993,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
 
     case .playlist:
-      player.mpvController.command(left ? .playlistPrev : .playlistNext, checkError: false)
+      player.mpv.command(left ? .playlistPrev : .playlistNext, checkError: false)
 
     case .seek:
       player.seek(relativeSecond: left ? -10 : 10, option: .relative)

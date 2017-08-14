@@ -49,7 +49,7 @@ class MainMenuActionHandler: NSResponder {
   func menuDeleteCurrentFile(_ sender: NSMenuItem) {
     guard let url = player.info.currentURL else { return }
     do {
-      let index = player.mpvController.getInt(MPVProperty.playlistPos)
+      let index = player.mpv.getInt(MPVProperty.playlistPos)
       player.playlistRemove(index)
       try FileManager.default.trashItem(at: url, resultingItemURL: nil)
     } catch let error {
@@ -250,7 +250,7 @@ extension MainMenuActionHandler {
     }
     // FIXME: better refactor this part
     let amount = sender.tag > 0 ? 0.1 : -0.1
-    let currentScale = player.mpvController.getDouble(MPVOption.Subtitles.subScale)
+    let currentScale = player.mpv.getDouble(MPVOption.Subtitles.subScale)
     let displayValue = currentScale >= 1 ? currentScale : -1/currentScale
     let truncated = round(displayValue * 100) / 100
     var newTruncated = truncated + amount

@@ -115,11 +115,11 @@ class AutoFileMatcher {
         try checkTicket()
         player.addToPlaylist(video.path)
       } else {
-        let count = player.mpvController.getInt(MPVProperty.playlistCount)
-        let current = player.mpvController.getInt(MPVProperty.playlistPos)
+        let count = player.mpv.getInt(MPVProperty.playlistCount)
+        let current = player.mpv.getInt(MPVProperty.playlistPos)
         try checkTicket()
         player.addToPlaylist(video.path)
-        player.mpvController.command(.playlistMove, args: ["\(count)", "\(current)"], checkError: false) { err in
+        player.mpv.command(.playlistMove, args: ["\(count)", "\(current)"], checkError: false) { err in
           if err == MPV_ERROR_COMMAND.rawValue { needQuit = true }
         }
       }

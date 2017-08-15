@@ -1760,16 +1760,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // animated `setFrame` can be inaccurate!
       w.setFrame(rect, display: true)
 
-      // generate thumbnails after video loaded if it's the first time
-      if !isVideoLoaded {
-        playerCore.generateThumbnails()
-        isVideoLoaded = true
-      }
-
       // maybe not a good position, consider putting these at playback-restart
       playerCore.info.justOpenedFile = false
       playerCore.info.justStartedFile = false
 
+    }
+
+    // generate thumbnails after video loaded if it's the first time
+    if !isVideoLoaded {
+      playerCore.generateThumbnails()
+      isVideoLoaded = true
     }
 
     // UI and slider

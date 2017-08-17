@@ -17,7 +17,6 @@ class FileInfo: Hashable {
   var filename: String
   var ext: String
   var nameInSeries: String?
-  var characters: [Character]
   var dist: [FileInfo: UInt] = [:]
   var minDist: [FileInfo] = []
   var relatedSubs: [FileInfo] = []
@@ -26,7 +25,7 @@ class FileInfo: Hashable {
 
   var prefix: String {  // prefix detected by FileGroup
     didSet {
-      if prefix.characters.count < self.characters.count {
+      if prefix.characters.count < self.filename.characters.count {
         suffix = filename.substring(from: filename.index(filename.startIndex, offsetBy: prefix.characters.count))
         getNameInSeries()
       } else {
@@ -42,7 +41,6 @@ class FileInfo: Hashable {
     self.path = url.path
     self.ext = url.pathExtension
     self.filename = url.deletingPathExtension().lastPathComponent
-    self.characters = [Character](self.filename.characters)
     self.prefix = ""
     self.suffix = self.filename
   }
@@ -106,12 +104,13 @@ class FileGroup {
       var lastPrefix = ""
       for finfo in contents {
         // if reached string end
-        if i >= finfo.characters.count {
+        if i >= finfo.filename.characters.count {
           tempGroup.safeAppend(finfo, for: prefix)
           currChars.append(("/", prefix))
           continue
         }
-        let c = finfo.characters[i]
+        let index = finfo.filename.index(finfo.filename.startIndex, offsetBy: i)
+        let c = finfo.filename.characters[index]
         var p = prefix
         p.append(c)
         lastPrefix = p
@@ -144,8 +143,7 @@ class FileGroup {
 
   func flatten() -> [String: [FileInfo]] {
     var result: [String: [FileInfo]] = [:]
-    var search: ((FileGroup) -> Void)!
-    search = { group in
+    func search(_ group: FileGroup) {
       if group.groups.count > 0 {
         for g in group.groups {
           search(g)

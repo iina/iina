@@ -69,6 +69,15 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     }
   }
 
+  deinit {
+    guard #available(OSX 10.11, *) else {
+      ObjcUtils.silenced { [unowned self] in
+        NotificationCenter.default.removeObserver(self)
+      }
+      return
+    }
+  }
+
   func recordedKeyDown(with event: NSEvent) {
     keyLabel.stringValue = Utility.mpvKeyCode(from: event)
   }

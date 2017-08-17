@@ -43,7 +43,7 @@ class MPVController: NSObject {
   lazy var queue: DispatchQueue! = DispatchQueue(label: "com.colliderli.iina.controller")
 
   unowned let playerCore: PlayerCore
-  unowned let ud: UserDefaults = UserDefaults.standard
+  let ud: UserDefaults = UserDefaults.standard
 
   var needRecordSeekTime: Bool = false
   var recordedSeekStartTime: CFTimeInterval = 0
@@ -85,7 +85,7 @@ class MPVController: NSObject {
   }
 
   deinit {
-    ObjcUtils.silenced {
+    ObjcUtils.silenced { [unowned self] in
       self.optionObservers.forEach { (k, v) in
         self.ud.removeObserver(self, forKeyPath: k)
       }
@@ -355,8 +355,13 @@ class MPVController: NSObject {
     strArgs.insert(command.rawValue, at: 0)
     strArgs.append(nil)
     var cargs = strArgs.map { $0.flatMap { UnsafePointer<Int8>(strdup($0)) } }
+    defer {
+      cargs.forEach {
+        free(UnsafeMutableRawPointer(mutating: $0))
+      }
+    }
+
     let returnValue = mpv_command(self.mpv, &cargs)
-    for ptr in cargs { free(UnsafeMutablePointer(mutating: ptr)) }
     if checkError {
       chkErr(returnValue)
     } else if let cb = returnValueCallback {

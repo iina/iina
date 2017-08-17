@@ -42,7 +42,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Constants
 
-  unowned let ud: UserDefaults = UserDefaults.standard
+  let ud: UserDefaults = UserDefaults.standard
 
   let minSize = NSMakeSize(500, 300)
   let bottomViewHeight: CGFloat = 60
@@ -478,13 +478,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   deinit {
-    ObjcUtils.silenced {
-      for key in self.observedPrefKeys {
-        self.ud.removeObserver(self, forKeyPath: key)
+    guard #available(OSX 10.11, *) else {
+      ObjcUtils.silenced { [unowned self] in
+        for key in self.observedPrefKeys {
+          self.ud.removeObserver(self, forKeyPath: key)
+        }
+        for observer in self.notificationObservers {
+          NotificationCenter.default.removeObserver(observer)
+        }
       }
-      for observer in self.notificationObservers {
-        NotificationCenter.default.removeObserver(observer)
-      }
+      return
     }
   }
 

@@ -14,7 +14,8 @@ class AutoFileMatcher {
     case ticketExpired
   }
 
-  weak private var player: PlayerCore!
+  private unowned var player: PlayerCore
+
   var ticket: Int
 
   private let fm = FileManager.default

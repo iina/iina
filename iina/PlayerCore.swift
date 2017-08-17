@@ -68,7 +68,7 @@ class PlayerCore: NSObject {
 
   // MARK: - Fields
 
-  unowned let ud: UserDefaults = UserDefaults.standard
+  let ud: UserDefaults = UserDefaults.standard
 
   /// A dispatch queue for auto load feature.
   let backgroundQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreTask")
@@ -152,7 +152,6 @@ class PlayerCore: NSObject {
     // clear currentFolder since playlist is cleared, so need to auto-load again in playerCore#fileStarted
     info.currentFolder = nil
     info.isNetworkResource = isNetwork
-    let _ = mainWindow.window
     if !mainWindow.window!.isVisible {
       SleepPreventer.preventSleep()
     }

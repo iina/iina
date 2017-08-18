@@ -178,7 +178,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
-    if #available(OSX 10.12, *) {
+    if #available(macOS 10.12, *) {
       pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
     } else {
       videoMenu.removeItem(pictureInPicture)
@@ -277,7 +277,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // Window
 
-    if #available(OSX 10.12.2, *) {
+    if #available(macOS 10.12.2, *) {
       customTouchBar.action = #selector(NSApplication.toggleTouchBarCustomizationPalette(_:))
     } else {
       customTouchBar.isHidden = true
@@ -346,7 +346,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateVideoMenu() {
     let isInFullScreen = PlayerCore.active.mainWindow.isInFullScreen
-    let isInPIP = PlayerCore.active.mainWindow.isInPIP
+    let isInPIP = PlayerCore.active.mainWindow.pipStatus == .inPIP
     let isOntop = PlayerCore.active.isInMiniPlayer ? PlayerCore.active.miniPlayer.isOntop : PlayerCore.active.mainWindow.isOntop
     alwaysOnTop.state = isOntop ? NSOnState : NSOffState
     deinterlace.state = PlayerCore.active.info.deinterlace ? NSOnState : NSOffState

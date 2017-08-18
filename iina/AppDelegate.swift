@@ -217,8 +217,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
       let isAlternative = (sender as? NSMenuItem)?.tag == alternativeMenuItemTag
       let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternative)
-      let openedFile = playerCore.openURLs(panel.urls)
-      if openedFile == 0 {
+      if let openedFile = playerCore.openURLs(panel.urls), openedFile == 0 {
         Utility.showAlert("Nothing to open")
       }
     }

@@ -10,8 +10,14 @@ import Foundation
 
 extension PlayerCore {
 
-  func openURLs(_ urls: [URL]) -> Int {
+  func openURLs(_ urls: [URL]) -> Int? {
     let paths = urls.map{ $0.path }
+    if paths.count == 1 && ObjcUtils.isDirectory(paths[0]) {
+      if checkBDFolder(paths[0]) {
+        openURL(urls[0])
+        return nil
+      }
+    }
     let (_, playableFiles) = checkPlayableFiles(paths, returnPaths: true)
 
     let count = playableFiles.count
@@ -73,6 +79,20 @@ extension PlayerCore {
     return false
   }
 
+  func checkBDFolder(_ folderPath: String) -> Bool {
+    do {
+      let BDMVFolderPath = folderPath + "/BDMV"
+      if !ObjcUtils.isDirectory(BDMVFolderPath) { return false }
+      let files = try FileManager.default.contentsOfDirectory(atPath: BDMVFolderPath)
+      if files.contains("MovieObject.bdmv") && files.contains("index.bdmv") {
+        return true
+      }
+    } catch _ {
+      return false
+    }
+    return false
+  }
+
   func acceptFromPasteboard(_ sender: NSDraggingInfo) -> NSDragOperation {
     guard let owner = sender.draggingSource() as? NSView, owner.window !== mainWindow.window else {
       return []
@@ -109,7 +129,7 @@ extension PlayerCore {
     if types.contains(NSFilenamesPboardType) {
       guard let paths = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else { return false }
       let urls = paths.map{ URL.init(fileURLWithPath: $0) }
-      let loadedFile = openURLs(urls)
+      guard let loadedFile = openURLs(urls) else { return true }
       if loadedFile == 0 {
         var loadedSubtitle = 0
         for path in paths {

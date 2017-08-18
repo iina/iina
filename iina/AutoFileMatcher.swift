@@ -62,7 +62,7 @@ class AutoFileMatcher {
     var subDirs: [URL] = []
 
     // search subs in other directories
-    let rawUserDefinedSearchPaths = UserDefaults.standard.string(forKey: Preference.Key.subAutoLoadSearchPath) ?? "./*"
+    let rawUserDefinedSearchPaths = Preference.string(for: .subAutoLoadSearchPath) ?? "./*"
     let userDefinedSearchPaths = rawUserDefinedSearchPaths.components(separatedBy: ":").filter { !$0.isEmpty }
     for path in userDefinedSearchPaths {
       var p = path
@@ -115,11 +115,11 @@ class AutoFileMatcher {
         try checkTicket()
         player.addToPlaylist(video.path)
       } else {
-        let count = player.mpvController.getInt(MPVProperty.playlistCount)
-        let current = player.mpvController.getInt(MPVProperty.playlistPos)
+        let count = player.mpv.getInt(MPVProperty.playlistCount)
+        let current = player.mpv.getInt(MPVProperty.playlistPos)
         try checkTicket()
         player.addToPlaylist(video.path)
-        player.mpvController.command(.playlistMove, args: ["\(count)", "\(current)"], checkError: false) { err in
+        player.mpv.command(.playlistMove, args: ["\(count)", "\(current)"], checkError: false) { err in
           if err == MPV_ERROR_COMMAND.rawValue { needQuit = true }
         }
       }
@@ -171,7 +171,7 @@ class AutoFileMatcher {
 
   private func matchSubs(withMatchedSeries matchedPrefixes: [String: String]) throws {
     // get auto load option
-    let subAutoLoadOption: Preference.IINAAutoLoadAction = Preference.IINAAutoLoadAction(rawValue: UserDefaults.standard.integer(forKey: Preference.Key.subAutoLoadIINA)) ?? .iina
+    let subAutoLoadOption: Preference.IINAAutoLoadAction = Preference.enum(for: .subAutoLoadIINA)
     guard subAutoLoadOption != .disabled else { return }
 
     for video in filesGroupedByMediaType[.video]! {
@@ -221,7 +221,7 @@ class AutoFileMatcher {
       }
 
       // move the sub to front if it contains priority strings
-      if let priorString = UserDefaults.standard.string(forKey: Preference.Key.subAutoLoadPriorityString), !matchedSubs.isEmpty {
+      if let priorString = Preference.string(for: .subAutoLoadPriorityString), !matchedSubs.isEmpty {
         let stringList = priorString
           .components(separatedBy: ",")
           .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -287,7 +287,7 @@ class AutoFileMatcher {
 
   func startMatching() {
 
-    let shouldAutoLoad = UserDefaults.standard.bool(forKey: Preference.Key.playlistAutoAdd)
+    let shouldAutoLoad = Preference.bool(for: .playlistAutoAdd)
 
     do {
 

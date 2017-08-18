@@ -11,7 +11,7 @@ import Cocoa
 class PlaySliderCell: NSSliderCell {
 
   lazy var playerCore: PlayerCore = {
-    return (self.controlView!.window!.windowController as! MainWindowController).playerCore
+    return (self.controlView!.window!.windowController as! MainWindowController).player
   }()
 
   override var knobThickness: CGFloat {
@@ -47,7 +47,7 @@ class PlaySliderCell: NSSliderCell {
   private var barColorRight: NSColor = PlaySliderCell.darkBarColorRight
   private var chapterStrokeColor: NSColor = PlaySliderCell.darkChapterStrokeColor
 
-  var drawChapters = UserDefaults.standard.bool(forKey: Preference.Key.showChapterPos)
+  var drawChapters = Preference.bool(for: .showChapterPos)
 
   override func awakeFromNib() {
     minValue = 0

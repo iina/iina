@@ -127,9 +127,9 @@ class MenuController: NSObject, NSMenuDelegate {
     stringForOpenURLAlternative = openURLAlternative.title
 
     updateOpenMenuItems()
-    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.alwaysOpenInNewWindow, options: [], context: nil)
+    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.alwaysOpenInNewWindow.rawValue, options: [], context: nil)
 
-    if UserDefaults.standard.bool(forKey: Preference.Key.enableCmdN) {
+    if Preference.bool(for: .enableCmdN) {
       newWindowSeparator.isHidden = false
       newWindow.isHidden = false
     }
@@ -291,7 +291,7 @@ class MenuController: NSObject, NSMenuDelegate {
     guard let keyPath = keyPath else { return }
 
     switch keyPath {
-    case Preference.Key.alwaysOpenInNewWindow:
+    case Preference.Key.alwaysOpenInNewWindow.rawValue:
       updateOpenMenuItems()
     default:
       return
@@ -338,9 +338,9 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updatePlaybackMenu() {
     pause.title = PlayerCore.active.info.isPaused ? Constants.String.resume : Constants.String.pause
-    let isLoop = PlayerCore.active.mpvController.getFlag(MPVOption.PlaybackControl.loopFile)
+    let isLoop = PlayerCore.active.mpv.getFlag(MPVOption.PlaybackControl.loopFile)
     fileLoop.state = isLoop ? NSOnState : NSOffState
-    let isPlaylistLoop = PlayerCore.active.mpvController.getString(MPVOption.PlaybackControl.loopPlaylist)
+    let isPlaylistLoop = PlayerCore.active.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     playlistLoop.state = (isPlaylistLoop == "inf" || isPlaylistLoop == "force") ? NSOnState : NSOffState
   }
 
@@ -362,7 +362,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateAudioDevice() {
     let devices = PlayerCore.active.getAudioDevices()
-    let currAudioDevice = PlayerCore.active.mpvController.getString(MPVProperty.audioDevice)
+    let currAudioDevice = PlayerCore.active.mpv.getString(MPVProperty.audioDevice)
     audioDeviceMenu.removeAllItems()
     devices.forEach { d in
       let name = d["name"]!
@@ -434,7 +434,7 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   private func updateOpenMenuItems() {
-    if UserDefaults.standard.bool(forKey: Preference.Key.alwaysOpenInNewWindow) {
+    if Preference.bool(for: .alwaysOpenInNewWindow) {
       open.title = stringForOpenAlternative
       openAlternative.title = stringForOpen
       openURL.title = stringForOpenURLAlternative

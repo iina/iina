@@ -71,7 +71,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     super.windowDidLoad()
     window?.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
 
-    watchProperties = UserDefaults.standard.array(forKey: Preference.Key.watchProperties) as! [String]
+    watchProperties = Preference.array(for: .watchProperties) as! [String]
     watchTableView.delegate = self
     watchTableView.dataSource = self
 
@@ -90,7 +90,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   }
 
   func updateInfo(dynamic: Bool = false) {
-    let controller = PlayerCore.lastActive.mpvController!
+    let controller = PlayerCore.lastActive.mpv!
     let info = PlayerCore.lastActive.info
 
     if !dynamic {
@@ -229,7 +229,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     if identifier == Constants.Identifier.key {
       return property
     } else if identifier == Constants.Identifier.value {
-      return PlayerCore.active.mpvController.getString(property) ?? "<Error>"
+      return PlayerCore.active.mpv.getString(property) ?? "<Error>"
     }
     return ""
   }
@@ -278,7 +278,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   }
 
   private func saveWatchList() {
-    UserDefaults.standard.set(watchProperties, forKey: Preference.Key.watchProperties)
+    Preference.set(watchProperties, for: .watchProperties)
   }
 
 }

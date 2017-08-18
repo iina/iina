@@ -85,11 +85,11 @@ extension MainWindowController {
     //  11: bigger size
     let size = sender.tag
     guard !isInFullScreen else { return }
-    guard let w = window, var vw = playerCore.info.displayWidth, var vh = playerCore.info.displayHeight else { return }
+    guard let w = window, var vw = player.info.displayWidth, var vh = player.info.displayHeight else { return }
     if vw == 0 { vw = AppData.widthWhenNoVideo }
     if vh == 0 { vh = AppData.heightWhenNoVideo }
 
-    let useRetinaSize = UserDefaults.standard.bool(forKey: Preference.Key.usePhysicalResolution)
+    let useRetinaSize = Preference.bool(for: .usePhysicalResolution)
     let logicalSize = NSRect(x: w.frame.origin.x, y: w.frame.origin.y, width: CGFloat(vw), height: CGFloat(vh))
     var retinaSize = useRetinaSize ? w.convertFromBacking(logicalSize) : logicalSize
     let screenFrame = NSScreen.main()!.visibleFrame
@@ -142,6 +142,6 @@ extension MainWindowController {
   }
   
   func menuSwitchToMiniPlayer(_ sender: NSMenuItem) {
-    playerCore.switchToMiniPlayer()
+    player.switchToMiniPlayer()
   }
 }

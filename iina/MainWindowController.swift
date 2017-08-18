@@ -1881,13 +1881,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         NSApp.presentationOptions.remove(.autoHideMenuBar)
         NSApp.presentationOptions.remove(.autoHideDock)
         // restore window frame ans aspect ratio
+        // firstly resize to a big frame with same aspect ratio for better visual experience
+        let aspectRatio = NSSize(width: player.info.videoWidth ?? AppData.widthWhenNoVideo,
+                                 height: player.info.videoHeight ?? AppData.heightWhenNoVideo)
+        let aspectSize = aspectRatio.shrink(toSize: window.frame.size)
+        let aspectFrame = aspectSize.centeredRect(in: window.frame)
+        window.setFrame(aspectFrame, display: true, animate: false)
+        // then animate to the original frame
         if let frame = windowFrameBeforeEnteringFullScreen {
           window.setFrame(frame, display: true, animate: true)
         } else {
           player.notifyMainWindowVideoSizeChanged()
         }
-        window.aspectRatio = NSSize(width: player.info.videoWidth ?? AppData.widthWhenNoVideo,
-                                    height: player.info.videoHeight ?? AppData.heightWhenNoVideo)
+        window.aspectRatio = aspectRatio
         windowFrameBeforeEnteringFullScreen = nil
         // call delegate
         windowDidExitFullScreen(Notification(name: Constants.Noti.legacyFullScreen))

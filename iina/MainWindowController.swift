@@ -118,6 +118,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var isEnteringFullScreen: Bool = false
   /** For legacy full screen */
   var windowFrameBeforeEnteringFullScreen: NSRect?
+  /** Prevent unexpected behavior when user switchs full screen mode during full screen*/
+  var currentFullScreenIsLegacy = false
 
   var isOntop: Bool = false {
     didSet {
@@ -1865,8 +1867,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func toggleWindowFullScreen() {
     guard let window = window else { return }
-    if Preference.bool(for: .useLegacyFullScreen) {
-      if (isInFullScreen) {
+
+    if (isInFullScreen) {
+      // exit full screen
+      if currentFullScreenIsLegacy {
         // exit legacy full screen
         // call delegate
         windowWillExitFullScreen(Notification(name: Constants.Noti.legacyFullScreen))
@@ -1888,8 +1892,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         // call delegate
         windowDidExitFullScreen(Notification(name: Constants.Noti.legacyFullScreen))
       } else {
+        // system full screen
+        window.toggleFullScreen(self)
+      }
+    } else {
+      // enter full screen
+      if Preference.bool(for: .useLegacyFullScreen) {
         // enter legacy full screen
         // cache current window frame
+        currentFullScreenIsLegacy = true
         windowFrameBeforeEnteringFullScreen = window.frame
         // call delegate
         windowWillEnterFullScreen(Notification(name: Constants.Noti.legacyFullScreen))
@@ -1906,11 +1917,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         window.setFrame(NSRect(origin: NSZeroPoint, size: screen.frame.size), display: true, animate: true)
         // call delegate
         windowDidEnterFullScreen(Notification(name: Constants.Noti.legacyFullScreen))
+      } else {
+        // system full screen
+        currentFullScreenIsLegacy = false
+        window.toggleFullScreen(self)
       }
-    } else {
-      // system full screen
-      window.toggleFullScreen(self)
     }
+
   }
 
   /** This method will not set `isOntop`! */

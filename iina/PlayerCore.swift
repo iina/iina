@@ -853,10 +853,8 @@ class PlayerCore: NSObject {
     guard let dwidth = info.displayWidth, let dheight = info.displayHeight else {
       Utility.fatal("Cannot get video width and height")
     }
-    if dwidth != 0 && dheight != 0 {
-      DispatchQueue.main.sync {
-        self.mainWindow.adjustFrameByVideoSize(dwidth, dheight)
-      }
+    DispatchQueue.main.sync {
+      self.mainWindow.adjustFrameByVideoSize(dwidth, dheight)
     }
   }
 

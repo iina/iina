@@ -130,10 +130,13 @@ extension MainWindowController {
 
   @available(macOS 10.12, *)
   func menuTogglePIP(_ sender: NSMenuItem) {
-    if !isInPIP {
+    switch pipStatus {
+    case .notInPIP:
       enterPIP()
-    } else {
-      exitPIP(manually: true)
+    case .inPIP:
+      exitPIP()
+    default:
+      return
     }
   }
 

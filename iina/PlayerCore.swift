@@ -815,7 +815,7 @@ class PlayerCore: NSObject {
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
       mainWindow.updateTitle()
-      if #available(OSX 10.12.2, *) {
+      if #available(macOS 10.12.2, *) {
         mainWindow.setupTouchBarUI()
       }
       // whether enter full screen
@@ -944,7 +944,7 @@ class PlayerCore: NSObject {
       DispatchQueue.main.async {
         self.mainWindow.updatePlayButtonState(pause ? NSOffState : NSOnState)
         self.miniPlayer.updatePlayButtonState(pause ? NSOffState : NSOnState)
-        if #available(OSX 10.12.2, *) {
+        if #available(macOS 10.12.2, *) {
           self.mainWindow.updateTouchBarPlayBtn()
         }
       }

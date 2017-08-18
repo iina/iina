@@ -181,7 +181,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     if info.draggingSource() as? NSTableView === tableView {
       return .move
     }
-    guard let owner = info.draggingSource() as? NSView, owner.window !== mainWindow.window else {
+    if (info.draggingSource() as? NSView)?.window === mainWindow.window {
       return []
     }
     if let paths = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {

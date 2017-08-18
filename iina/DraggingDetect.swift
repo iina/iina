@@ -94,13 +94,18 @@ extension PlayerCore {
   }
 
   func acceptFromPasteboard(_ sender: NSDraggingInfo) -> NSDragOperation {
-    guard let owner = sender.draggingSource() as? NSView, owner.window !== mainWindow.window else {
+    if (sender.draggingSource() as? NSView)?.window === mainWindow.window {
       return []
     }
     let pb = sender.draggingPasteboard()
     guard let types = pb.types else { return [] }
     if types.contains(NSFilenamesPboardType) {
       guard let paths = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else { return [] }
+      if paths.count == 1 && ObjcUtils.isDirectory(paths[0]) {
+        if checkBDFolder(paths[0]) {
+          return .copy
+        }
+      }
       if checkPlayableFiles(paths).0 {
         return .copy
       } else if checkSubtitleFile(paths) {
@@ -131,16 +136,16 @@ extension PlayerCore {
       let urls = paths.map{ URL.init(fileURLWithPath: $0) }
       guard let loadedFile = openURLs(urls) else { return true }
       if loadedFile == 0 {
-        var loadedSubtitle = 0
+        var loadedSubtitle = false
         for path in paths {
           if !ObjcUtils.isDirectory(path) {
             if Utility.supportedFileExt[.sub]!.contains((path as NSString).pathExtension.lowercased()) {
               loadExternalSubFile(URL.init(fileURLWithPath: path))
-              loadedSubtitle += 1
+              loadedSubtitle = true
             }
           }
         }
-        if loadedSubtitle != 0 {
+        if loadedSubtitle {
           return true
         } else {
           return false

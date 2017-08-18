@@ -769,6 +769,7 @@ class PlayerCore: NSObject {
   func fileStarted() {
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
+    currentMediaIsAudio = .unknown
     guard let path = mpv.getString(MPVProperty.path) else { return }
     info.currentURL = path.contains("://") ? URL(string: path) : URL(fileURLWithPath: path)
     // Auto load
@@ -791,7 +792,6 @@ class PlayerCore: NSObject {
         self.setTrack(1, forType: .sub)
       }
     }
-
   }
 
   /** This function is called right after file loaded. Should load all meta info here. */
@@ -804,8 +804,6 @@ class PlayerCore: NSObject {
     if mainWindow.isVideoLoaded {
       generateThumbnails()
     }
-    // Check whether current media is audio
-    currentMediaIsAudio = checkCurrentMediaIsAudio()
     // Main thread stuff
     DispatchQueue.main.sync {
       self.getTrackInfo()
@@ -825,17 +823,6 @@ class PlayerCore: NSObject {
         }
         // only enter fullscreen for first file
         needEnterFullScreenForNextMedia = false
-      }
-      // if need to switch to music mode
-      if Preference.bool(for: .autoSwitchToMusicMode) {
-        if currentMediaIsAudio {
-          if !isInMiniPlayer { switchToMiniPlayer() }
-        } else {
-          if isInMiniPlayer {
-            miniPlayer.close()
-            switchBackFromMiniPlayer()
-          }
-        }
       }
     }
     // add to history
@@ -861,6 +848,31 @@ class PlayerCore: NSObject {
   func playbackRestarted() {
     DispatchQueue.main.async {
       Timer.scheduledTimer(timeInterval: TimeInterval(0.2), target: self, selector: #selector(self.reEnableOSDAfterFileLoading), userInfo: nil, repeats: false)
+    }
+  }
+
+  func trackListChanged() {
+    getTrackInfo()
+    getSelectedTracks()
+    let audioStatusWasUnkownBefore = currentMediaIsAudio == .unknown
+    currentMediaIsAudio = checkCurrentMediaIsAudio()
+    let audioStatusIsAvailableNow = currentMediaIsAudio != .unknown && audioStatusWasUnkownBefore
+    // if need to switch to music mode
+    if audioStatusIsAvailableNow && Preference.bool(for: .autoSwitchToMusicMode) {
+      if currentMediaIsAudio == .isAudio {
+        if !isInMiniPlayer {
+          DispatchQueue.main.sync {
+            switchToMiniPlayer()
+          }
+        }
+      } else {
+        if isInMiniPlayer {
+          DispatchQueue.main.sync {
+            miniPlayer.close()
+            switchBackFromMiniPlayer()
+          }
+        }
+      }
     }
   }
 
@@ -1102,13 +1114,23 @@ class PlayerCore: NSObject {
     }
   }
 
-  var currentMediaIsAudio = false
+  enum CurrentMediaIsAudioStatus {
+    case unknown
+    case isAudio
+    case notAudio
+  }
 
-  func checkCurrentMediaIsAudio() -> Bool {
-    guard !info.isNetworkResource else { return false }
+  var currentMediaIsAudio = CurrentMediaIsAudioStatus.unknown
+
+  func checkCurrentMediaIsAudio() -> CurrentMediaIsAudioStatus {
+    guard !info.isNetworkResource else { return .notAudio }
     let noVideoTrack = info.videoTracks.isEmpty
+    let noAudioTrack = info.audioTracks.isEmpty
+    if noVideoTrack && noAudioTrack {
+      return .unknown
+    }
     let theOnlyVideoTrackIsAlbumCover = info.videoTracks.count == 1 && info.videoTracks.first!.isAlbumart
-    return noVideoTrack || theOnlyVideoTrackIsAlbumCover
+    return (noVideoTrack || theOnlyVideoTrackIsAlbumCover) ? .isAudio : .notAudio
   }
 
   static func checkStatusForSleep() {

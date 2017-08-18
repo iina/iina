@@ -752,8 +752,7 @@ class MPVController: NSObject {
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
 
     case MPVProperty.trackListCount:
-      player.getTrackInfo()
-      player.getSelectedTracks()
+      player.trackListChanged()
       NotificationCenter.default.post(Notification(name: Constants.Noti.tracklistChanged))
 
     case MPVProperty.vf:

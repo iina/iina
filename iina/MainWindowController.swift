@@ -2213,7 +2213,7 @@ extension MainWindowController: PIPViewControllerDelegate {
 
   func pipActionStop(_ pip: PIPViewController) {
     // Stopping PIP pauses playback
-    playerCore.togglePause(true)
+    player.togglePause(true)
   }
 }
 

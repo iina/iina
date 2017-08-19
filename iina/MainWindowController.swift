@@ -221,7 +221,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Observed user defaults
 
   /** Observers added to `UserDefauts.standard`. */
-  private var notificationObservers: [NSObjectProtocol] = []
+  private var notificationObservers: [NotificationCenter: [NSObjectProtocol]] = [:]
 
   /** Cached user default values */
   private var oscPosition: Preference.OSCPosition
@@ -472,24 +472,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // add notification observers
-    let fsObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.fsChanged, object: nil, queue: .main) { [unowned self] _ in
+    notificationCenter(.default, addObserverfor: Constants.Noti.fsChanged) { [unowned self] _ in
       let fs = self.player.mpv.getFlag(MPVOption.Window.fullscreen)
       if fs != self.isInFullScreen {
         self.toggleWindowFullScreen()
       }
     }
-    let ontopObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.ontopChanged, object: nil, queue: .main) { [unowned self] _ in
+    notificationCenter(.default, addObserverfor: Constants.Noti.ontopChanged) { [unowned self] _ in
       let ontop = self.player.mpv.getFlag(MPVOption.Window.ontop)
       if ontop != self.isOntop {
         self.isOntop = ontop
         self.setWindowFloatingOnTop(ontop)
       }
     }
-    let windowScaleObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.windowScaleChanged, object: nil, queue: .main) { [unowned self] _ in
+    notificationCenter(.default, addObserverfor: Constants.Noti.windowScaleChanged) { [unowned self] _ in
       let windowScale = self.player.mpv.getDouble(MPVOption.Window.windowScale)
       self.setWindowScale(windowScale)
     }
-    let screenChangeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSApplicationDidChangeScreenParameters, object: nil, queue: .main) { [unowned self] _ in
+    notificationCenter(.default, addObserverfor: .NSApplicationDidChangeScreenParameters) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
       if self.isInFullScreen && Preference.bool(for: .blackOutMonitor) {
         if NSScreen.screens()?.count ?? 0 != self.cachedScreenCount {
@@ -498,7 +498,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
       }
     }
-    let changeWorkspaceObserver = NSWorkspace.shared().notificationCenter.addObserver(forName: NSNotification.Name.NSWorkspaceActiveSpaceDidChange, object: nil, queue: .main) { [unowned self] _ in
+    notificationCenter(NSWorkspace.shared().notificationCenter, addObserverfor: .NSWorkspaceActiveSpaceDidChange) { [unowned self] _ in
       if self.isInFullScreen && Preference.bool(for: .blackOutMonitor) {
         if self.window?.isOnActiveSpace ?? false {
           self.removeBlackWindow()
@@ -509,11 +509,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     }
 
-    notificationObservers.append(fsObserver)
-    notificationObservers.append(ontopObserver)
-    notificationObservers.append(screenChangeObserver)
-    notificationObservers.append(windowScaleObserver)
-    notificationObservers.append(changeWorkspaceObserver)
   }
 
   deinit {
@@ -521,10 +516,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       for key in self.observedPrefKeys {
         UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
       }
-      for observer in self.notificationObservers {
-        NotificationCenter.default.removeObserver(observer)
+      for (center, observers) in self.notificationObservers {
+        for observer in observers {
+          center.removeObserver(observer)
+        }
       }
     }
+  }
+
+  private func notificationCenter(_ center: NotificationCenter, addObserverfor name: NSNotification.Name, object: Any? = nil, using block: @escaping (Notification) -> Void) {
+    let observer = center.addObserver(forName: name, object: object, queue: .main, using: block)
+    if notificationObservers[center] == nil {
+      notificationObservers[center] = []
+    }
+    notificationObservers[center]!.append(observer)
   }
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {

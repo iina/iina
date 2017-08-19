@@ -35,7 +35,7 @@ fileprivate extension NSTouchBarItemIdentifier {
 }
 
 // Image name, tag, custom label
-@available(OSX 10.12.2, *)
+@available(macOS 10.12.2, *)
 fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, String)] = [
   .ahead15Sec: (NSImageNameTouchBarSkipAhead15SecondsTemplate, 15, NSLocalizedString("touchbar.ahead_15", comment: "15sec Ahead")),
   .ahead30Sec: (NSImageNameTouchBarSkipAhead30SecondsTemplate, 30, NSLocalizedString("touchbar.ahead_30", comment: "30sec Ahead")),
@@ -49,7 +49,7 @@ fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, St
   .fastForward: (NSImageNameTouchBarFastForwardTemplate, 1, NSLocalizedString("touchbar.fast_forward", comment: "Fast Forward"))
 ]
 
-@available(OSX 10.12.2, *)
+@available(macOS 10.12.2, *)
 extension MainWindowController: NSTouchBarDelegate {
 
   override func makeTouchBar() -> NSTouchBar? {
@@ -98,7 +98,7 @@ extension MainWindowController: NSTouchBarDelegate {
       let item = NSCustomTouchBarItem(identifier: identifier)
       let label = DurationDisplayTextField(labelWithString: "00:00")
       label.alignment = .center
-      label.mode = ud.bool(forKey: Preference.Key.showRemainingTime) ? .remaining : .current
+      label.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .current
       self.touchBarCurrentPosLabel = label
       item.view = label
       item.customizationLabel = NSLocalizedString("touchbar.time", comment: "Time Position")
@@ -122,7 +122,7 @@ extension MainWindowController: NSTouchBarDelegate {
   }
 
   func updateTouchBarPlayBtn() {
-    if playerCore.info.isPaused {
+    if player.info.isPaused {
       touchBarPlayPauseBtn?.image = NSImage(named: NSImageNameTouchBarPlayTemplate)
     } else {
       touchBarPlayPauseBtn?.image = NSImage(named: NSImageNameTouchBarPauseTemplate)
@@ -130,12 +130,12 @@ extension MainWindowController: NSTouchBarDelegate {
   }
 
   func touchBarPlayBtnAction(_ sender: NSButton) {
-    playerCore.togglePause(nil)
+    player.togglePause(nil)
   }
 
   func touchBarVolumeAction(_ sender: NSButton) {
-    let currVolume = playerCore.info.volume
-    playerCore.setVolume(currVolume + (sender.tag == 0 ? 5 : -5))
+    let currVolume = player.info.volume
+    player.setVolume(currVolume + (sender.tag == 0 ? 5 : -5))
   }
 
   func touchBarRewindAction(_ sender: NSButton) {
@@ -144,16 +144,16 @@ extension MainWindowController: NSTouchBarDelegate {
 
   func touchBarSeekAction(_ sender: NSButton) {
     let sec = sender.tag
-    playerCore.seek(relativeSecond: Double(sec), option: .relative)
+    player.seek(relativeSecond: Double(sec), option: .relative)
   }
 
   func touchBarSkipAction(_ sender: NSButton) {
-    playerCore.navigateInPlaylist(nextOrPrev: sender.tag == 0)
+    player.navigateInPlaylist(nextOrPrev: sender.tag == 0)
   }
 
   func touchBarSliderAction(_ sender: NSSlider) {
     let percentage = 100 * sender.doubleValue / sender.maxValue
-    playerCore.seek(percent: percentage, forceExact: true)
+    player.seek(percent: percentage, forceExact: true)
   }
 
   private func buttonTouchBarItem(withIdentifier identifier: NSTouchBarItemIdentifier, imageName: String, tag: Int, customLabel: String, action: Selector) -> NSCustomTouchBarItem {
@@ -168,7 +168,7 @@ extension MainWindowController: NSTouchBarDelegate {
   // Set TouchBar Time Label
 
   func setupTouchBarUI() {
-    let duration: VideoTime = playerCore.info.videoDuration ?? .zero
+    let duration: VideoTime = player.info.videoDuration ?? .zero
     let pad: CGFloat = 16.0
     sizingTouchBarTextField.stringValue = duration.stringRepresentation
     if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, let posLabel = touchBarCurrentPosLabel {
@@ -192,7 +192,7 @@ class TouchBarPlaySlider: NSSlider {
   var isTouching = false
 
   var playerCore: PlayerCore {
-    return (self.window?.windowController as? MainWindowController)?.playerCore ?? .active
+    return (self.window?.windowController as? MainWindowController)?.player ?? .active
   }
 
   override func touchesBegan(with event: NSEvent) {

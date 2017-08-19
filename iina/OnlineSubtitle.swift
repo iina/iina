@@ -46,7 +46,7 @@ class OnlineSubtitle: NSObject {
     var source: Source
 
     if userSource == nil {
-      source = Source(rawValue: UserDefaults.standard.integer(forKey: Preference.Key.onlineSubSource)) ?? .openSub
+      source = Source(rawValue: Preference.integer(for: .onlineSubSource)) ?? .openSub
     } else {
       source = userSource!
     }
@@ -79,7 +79,7 @@ class OnlineSubtitle: NSObject {
       // opensubtitles
       let subSupport = OpenSubSupport.shared
       // - language
-      let userLang = UserDefaults.standard.string(forKey: Preference.Key.subLang) ?? ""
+      let userLang = Preference.string(for: .subLang) ?? ""
       if userLang.isEmpty {
         Utility.showAlert("sub_lang_not_set")
         subSupport.language = "eng"

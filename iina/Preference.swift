@@ -8,263 +8,337 @@
 
 import Cocoa
 
+protocol InitializingFromKey {
+
+  static var defaultValue: Self { get }
+
+  init?(key: Preference.Key)
+
+}
+
 struct Preference {
 
   // MARK: - Keys
 
   // consider using RawRepresentable, but also need to extend UserDefaults
-  struct Key {
-    static let actionAfterLaunch = "actionAfterLaunch"
-    static let alwaysOpenInNewWindow = "alwaysOpenInNewWindow"
-    static let enableCmdN = "enableCmdN"
+  struct Key: RawRepresentable {
+
+    typealias RawValue = String
+
+    var rawValue: RawValue
+
+    init(_ string: String) { self.rawValue = string }
+
+    init?(rawValue: RawValue) { self.rawValue = rawValue }
+
+
+    static let actionAfterLaunch = Key("actionAfterLaunch")
+    static let alwaysOpenInNewWindow = Key("alwaysOpenInNewWindow")
+    static let enableCmdN = Key("enableCmdN")
 
     /** Record recent files */
-    static let recordPlaybackHistory = "recordPlaybackHistory"
-    static let recordRecentFiles = "recordRecentFiles"
-    static let trackAllFilesInRecentOpenMenu = "trackAllFilesInRecentOpenMenu"
+    static let recordPlaybackHistory = Key("recordPlaybackHistory")
+    static let recordRecentFiles = Key("recordRecentFiles")
+    static let trackAllFilesInRecentOpenMenu = Key("trackAllFilesInRecentOpenMenu")
 
     /** Material for OSC and title bar (Theme(int)) */
-    static let themeMaterial = "themeMaterial"
+    static let themeMaterial = Key("themeMaterial")
 
     /** Soft volume (int, 0 - 100)*/
-    static let softVolume = "softVolume"
+    static let softVolume = Key("softVolume")
 
     /** Pause st first (pause) (bool) */
-    static let pauseWhenOpen = "pauseWhenOpen"
+    static let pauseWhenOpen = Key("pauseWhenOpen")
 
     /** Enter fill screen when open (bool) */
-    static let fullScreenWhenOpen = "fullScreenWhenOpen"
-    
+    static let fullScreenWhenOpen = Key("fullScreenWhenOpen")
+
     /** Black out other monitors while fullscreen (bool) */
-    static let blackOutMonitor = "blackOutMonitor"
+    static let blackOutMonitor = Key("blackOutMonitor")
 
     /** Quit when no open window (bool) */
-    static let quitWhenNoOpenedWindow = "quitWhenNoOpenedWindow"
+    static let quitWhenNoOpenedWindow = Key("quitWhenNoOpenedWindow")
 
     /** Keep player window open on end of file / playlist. (bool) */
-    static let keepOpenOnFileEnd = "keepOpenOnFileEnd"
+    static let keepOpenOnFileEnd = Key("keepOpenOnFileEnd")
 
     /** Resume from last position */
-    static let resumeLastPosition = "resumeLastPosition"
+    static let resumeLastPosition = Key("resumeLastPosition")
 
-    static let alwaysFloatOnTop = "alwaysFloatOnTop"
+    static let alwaysFloatOnTop = Key("alwaysFloatOnTop")
 
     /** Show chapter pos in progress bar (bool) */
-    static let showChapterPos = "showChapterPos"
+    static let showChapterPos = Key("showChapterPos")
 
-    static let screenshotFolder = "screenShotFolder"
-    static let screenshotIncludeSubtitle = "screenShotIncludeSubtitle"
-    static let screenshotFormat = "screenShotFormat"
-    static let screenshotTemplate = "screenShotTemplate"
+    static let screenshotFolder = Key("screenShotFolder")
+    static let screenshotIncludeSubtitle = Key("screenShotIncludeSubtitle")
+    static let screenshotFormat = Key("screenShotFormat")
+    static let screenshotTemplate = Key("screenShotTemplate")
 
-    static let playlistAutoAdd = "playlistAutoAdd"
-    static let playlistAutoPlayNext = "playlistAutoPlayNext"
+    static let playlistAutoAdd = Key("playlistAutoAdd")
+    static let playlistAutoPlayNext = Key("playlistAutoPlayNext")
 
     // UI
 
     /** Horizontal positon of control bar. (float, 0 - 1) */
-    static let controlBarPositionHorizontal = "controlBarPositionHorizontal"
+    static let controlBarPositionHorizontal = Key("controlBarPositionHorizontal")
 
     /** Horizontal positon of control bar. In percentage from bottom. (float, 0 - 1) */
-    static let controlBarPositionVertical = "controlBarPositionVertical"
+    static let controlBarPositionVertical = Key("controlBarPositionVertical")
 
     /** Whether control bar stick to center when dragging. (bool) */
-    static let controlBarStickToCenter = "controlBarStickToCenter"
+    static let controlBarStickToCenter = Key("controlBarStickToCenter")
 
     /** Timeout for auto hiding control bar (float) */
-    static let controlBarAutoHideTimeout  = "controlBarAutoHideTimeout"
+    static let controlBarAutoHideTimeout  = Key("controlBarAutoHideTimeout")
 
     /** OSD auto hide timeout (float) */
-    static let osdAutoHideTimeout = "osdAutoHideTimeout"
+    static let osdAutoHideTimeout = Key("osdAutoHideTimeout")
 
     /** OSD text size (float) */
-    static let osdTextSize = "osdTextSize"
+    static let osdTextSize = Key("osdTextSize")
 
-    static let usePhysicalResolution = "usePhysicalResolution"
+    static let usePhysicalResolution = Key("usePhysicalResolution")
 
     /** IINA will adjust window size according to video size,
      but if the file is not opened by user manually (File > Open),
      e.g. jumping to next item in playlist, window size will remoain the same. */
-    static let resizeOnlyWhenManuallyOpenFile = "resizeOnlyWhenManuallyOpenFile"
+    static let resizeOnlyWhenManuallyOpenFile = Key("resizeOnlyWhenManuallyOpenFile")
 
-    static let oscPosition = "oscPosition"
+    static let oscPosition = Key("oscPosition")
 
-    static let playlistWidth = "playlistWidth"
+    static let playlistWidth = Key("playlistWidth")
 
-    static let enableThumbnailPreview = "enableThumbnailPreview"
+    static let enableThumbnailPreview = Key("enableThumbnailPreview")
+
+    static let autoSwitchToMusicMode = Key("autoSwitchToMusicMode")
 
     // Codec
 
-    static let videoThreads = "videoThreads"
-    static let hardwareDecoder = "hardwareDecoder"
+    static let videoThreads = Key("videoThreads")
+    static let hardwareDecoder = Key("hardwareDecoder")
 
-    static let audioThreads = "audioThreads"
-    static let audioLanguage = "audioLanguage"
-    static let maxVolume = "maxVolume"
+    static let audioThreads = Key("audioThreads")
+    static let audioLanguage = Key("audioLanguage")
+    static let maxVolume = Key("maxVolume")
 
-    static let spdifAC3 = "spdifAC3"
-    static let spdifDTS = "spdifDTS"
-    static let spdifDTSHD = "spdifDTSHD"
+    static let spdifAC3 = Key("spdifAC3")
+    static let spdifDTS = Key("spdifDTS")
+    static let spdifDTSHD = Key("spdifDTSHD")
 
     // Subtitle
 
-    static let subAutoLoadIINA = "subAutoLoadIINA"
-    static let subAutoLoadPriorityString = "subAutoLoadPriorityString"
-    static let subAutoLoadSearchPath = "subAutoLoadSearchPath"
-    static let ignoreAssStyles = "ignoreAssStyles"
-    static let subOverrideLevel = "subOverrideLevel"
-    static let subTextFont = "subTextFont"
-    static let subTextSize = "subTextSize"
-    static let subTextColor = "subTextColor"
-    static let subBgColor = "subBgColor"
-    static let subBold = "subBold"
-    static let subItalic = "subItalic"
-    static let subBlur = "subBlur"
-    static let subSpacing = "subSpacing"
-    static let subBorderSize = "subBorderSize"
-    static let subBorderColor = "subBorderColor"
-    static let subShadowSize = "subShadowSize"
-    static let subShadowColor = "subShadowColor"
-    static let subAlignX = "subAlignX"
-    static let subAlignY = "subAlignY"
-    static let subMarginX = "subMarginX"
-    static let subMarginY = "subMarginY"
-    static let subPos = "subPos"
-    static let subLang = "subLang"
-    static let onlineSubSource = "onlineSubSource"
-    static let displayInLetterBox = "displayInLetterBox"
-    static let subScaleWithWindow = "subScaleWithWindow"
-    static let openSubUsername = "openSubUsername"
-    static let defaultEncoding = "defaultEncoding"
+    static let subAutoLoadIINA = Key("subAutoLoadIINA")
+    static let subAutoLoadPriorityString = Key("subAutoLoadPriorityString")
+    static let subAutoLoadSearchPath = Key("subAutoLoadSearchPath")
+    static let ignoreAssStyles = Key("ignoreAssStyles")
+    static let subOverrideLevel = Key("subOverrideLevel")
+    static let subTextFont = Key("subTextFont")
+    static let subTextSize = Key("subTextSize")
+    static let subTextColor = Key("subTextColor")
+    static let subBgColor = Key("subBgColor")
+    static let subBold = Key("subBold")
+    static let subItalic = Key("subItalic")
+    static let subBlur = Key("subBlur")
+    static let subSpacing = Key("subSpacing")
+    static let subBorderSize = Key("subBorderSize")
+    static let subBorderColor = Key("subBorderColor")
+    static let subShadowSize = Key("subShadowSize")
+    static let subShadowColor = Key("subShadowColor")
+    static let subAlignX = Key("subAlignX")
+    static let subAlignY = Key("subAlignY")
+    static let subMarginX = Key("subMarginX")
+    static let subMarginY = Key("subMarginY")
+    static let subPos = Key("subPos")
+    static let subLang = Key("subLang")
+    static let onlineSubSource = Key("onlineSubSource")
+    static let displayInLetterBox = Key("displayInLetterBox")
+    static let subScaleWithWindow = Key("subScaleWithWindow")
+    static let openSubUsername = Key("openSubUsername")
+    static let defaultEncoding = Key("defaultEncoding")
 
     // Network
 
-    static let enableCache = "enableCache"
-    static let defaultCacheSize = "defaultCacheSize"
-    static let cacheBufferSize = "cacheBufferSize"
-    static let secPrefech = "secPrefech"
-    static let userAgent = "userAgent"
-    static let transportRTSPThrough = "transportRTSPThrough"
-    static let ytdlEnabled = "ytdlEnabled"
-    static let ytdlSearchPath = "ytdlSearchPath"
-    static let ytdlRawOptions = "ytdlRawOptions"
-    static let httpProxy = "httpProxy"
+    static let enableCache = Key("enableCache")
+    static let defaultCacheSize = Key("defaultCacheSize")
+    static let cacheBufferSize = Key("cacheBufferSize")
+    static let secPrefech = Key("secPrefech")
+    static let userAgent = Key("userAgent")
+    static let transportRTSPThrough = Key("transportRTSPThrough")
+    static let ytdlEnabled = Key("ytdlEnabled")
+    static let ytdlSearchPath = Key("ytdlSearchPath")
+    static let ytdlRawOptions = Key("ytdlRawOptions")
+    static let httpProxy = Key("httpProxy")
 
     // Control
 
     /** Seek option */
-    static let useExactSeek = "useExactSeek"
+    static let useExactSeek = Key("useExactSeek")
 
     /** Seek speed for non-exact relative seek (Int, 1~5) */
-    static let relativeSeekAmount = "relativeSeekAmount"
+    static let relativeSeekAmount = Key("relativeSeekAmount")
 
-    static let arrowButtonAction = "arrowBtnAction"
+    static let arrowButtonAction = Key("arrowBtnAction")
     /** (1~4) */
-    static let volumeScrollAmount = "volumeScrollAmount"
-    static let verticalScrollAction = "verticalScrollAction"
-    static let horizontalScrollAction = "horizontalScrollAction"
+    static let volumeScrollAmount = Key("volumeScrollAmount")
+    static let verticalScrollAction = Key("verticalScrollAction")
+    static let horizontalScrollAction = Key("horizontalScrollAction")
 
-    static let singleClickAction = "singleClickAction"
-    static let doubleClickAction = "doubleClickAction"
-    static let rightClickAction = "rightClickAction"
-    static let pinchAction = "pinchAction"
+    static let singleClickAction = Key("singleClickAction")
+    static let doubleClickAction = Key("doubleClickAction")
+    static let rightClickAction = Key("rightClickAction")
+    static let pinchAction = Key("pinchAction")
 
-    static let showRemainingTime = "showRemainingTime"
+    static let showRemainingTime = Key("showRemainingTime")
 
     // Input
 
     /** Whether catch media keys event (bool) */
-    static let useMediaKeys = "useMediaKeys"
-    static let useAppleRemote = "useAppleRemote"
+    static let useMediaKeys = Key("useMediaKeys")
+    static let useAppleRemote = Key("useAppleRemote")
 
     /** User created input config list (dic) */
-    static let inputConfigs = "inputConfigs"
+    static let inputConfigs = Key("inputConfigs")
 
     /** Current input config name */
-    static let currentInputConfigName = "currentInputConfigName"
+    static let currentInputConfigName = Key("currentInputConfigName")
 
     // Advanced
 
     /** Enable advanced settings */
-    static let enableAdvancedSettings = "enableAdvancedSettings"
+    static let enableAdvancedSettings = Key("enableAdvancedSettings")
 
     /** Use mpv's OSD (bool) */
-    static let useMpvOsd = "useMpvOsd"
+    static let useMpvOsd = Key("useMpvOsd")
 
     /** Log to log folder (bool) */
-    static let enableLogging = "enableLogging"
+    static let enableLogging = Key("enableLogging")
 
     /** unused */
-    // static let resizeFrameBuffer = "resizeFrameBuffer"
+    // static let resizeFrameBuffer = Key("resizeFrameBuffer")
 
     /** User defined options ([string, string]) */
-    static let userOptions = "userOptions"
+    static let userOptions = Key("userOptions")
 
     /** User defined conf directory */
-    static let useUserDefinedConfDir = "useUserDefinedConfDir"
-    static let userDefinedConfDir = "userDefinedConfDir"
+    static let useUserDefinedConfDir = Key("useUserDefinedConfDir")
+    static let userDefinedConfDir = Key("userDefinedConfDir")
 
-    static let watchProperties = "watchProperties"
+    static let watchProperties = Key("watchProperties")
 
   }
 
   // MARK: - Enums
 
-  enum ActionAfterLaunch: Int {
+  enum ActionAfterLaunch: Int, InitializingFromKey {
     case welcomeWindow = 0
     case openPanel
     case none
+
+    static var defaultValue = ActionAfterLaunch.welcomeWindow
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
   }
 
-  enum ArrowButtonAction: Int {
+  enum ArrowButtonAction: Int, InitializingFromKey {
     case speed = 0
     case playlist = 1
     case seek = 2
+
+    static var defaultValue = ArrowButtonAction.speed
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
   }
 
-  enum Theme: Int {
+  enum Theme: Int, InitializingFromKey {
     case dark = 0
     case ultraDark
     case light
     case mediumLight
+
+    static var defaultValue = Theme.dark
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
   }
 
-  enum OSCPosition: Int {
+  enum OSCPosition: Int, InitializingFromKey {
     case floating = 0
     case top
     case bottom
+
+    static var defaultValue = OSCPosition.floating
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
   }
 
-  enum SeekOption: Int {
+  enum SeekOption: Int, InitializingFromKey {
     case relative = 0
     case extract
     case auto
+
+    static var defaultValue = SeekOption.relative
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
   }
 
-  enum MouseClickAction: Int {
+  enum MouseClickAction: Int, InitializingFromKey {
     case none = 0
     case fullscreen
     case pause
     case hideOSC
+
+    static var defaultValue = MouseClickAction.none
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
   }
 
-  enum ScrollAction: Int {
+  enum ScrollAction: Int, InitializingFromKey {
     case volume = 0
     case seek
     case none
     case passToMpv
+
+    static var defaultValue = ScrollAction.volume
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
   }
 
-  enum PinchAction: Int {
+  enum PinchAction: Int, InitializingFromKey {
     case windowSize = 0
     case fullscreen
     case none
+
+    static var defaultValue = PinchAction.windowSize
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
   }
 
-  enum IINAAutoLoadAction: Int {
+  enum IINAAutoLoadAction: Int, InitializingFromKey {
     case disabled = 0
     case mpvFuzzy
     case iina
+
+    static var defaultValue = IINAAutoLoadAction.iina
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
 
     func shouldLoadSubsContainingVideoName() -> Bool {
       return self != .disabled
@@ -275,11 +349,17 @@ struct Preference {
     }
   }
 
-  enum AutoLoadAction: Int {
+  enum AutoLoadAction: Int, InitializingFromKey {
     case no = 0
     case exact
     case fuzzy
     case all
+
+    static var defaultValue = AutoLoadAction.fuzzy
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
 
     var string: String {
       get {
@@ -293,10 +373,16 @@ struct Preference {
     }
   }
 
-  enum SubOverrideLevel: Int {
+  enum SubOverrideLevel: Int, InitializingFromKey {
     case yes = 0
     case force
     case strip
+
+    static var defaultValue = SubOverrideLevel.yes
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
 
     var string: String {
       get {
@@ -309,10 +395,16 @@ struct Preference {
     }
   }
 
-  enum SubAlign: Int {
+  enum SubAlign: Int, InitializingFromKey {
     case top = 0  // left
     case center
     case bottom  // right
+
+    static var defaultValue = SubAlign.center
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
 
     var stringForX: String {
       get {
@@ -335,11 +427,17 @@ struct Preference {
     }
   }
 
-  enum RTSPTransportation: Int {
+  enum RTSPTransportation: Int, InitializingFromKey {
     case lavf = 0
     case tcp
     case udp
     case http
+
+    static var defaultValue = RTSPTransportation.tcp
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
 
     var string: String {
       get {
@@ -353,7 +451,7 @@ struct Preference {
     }
   }
 
-  enum ScreenshotFormat: Int {
+  enum ScreenshotFormat: Int, InitializingFromKey {
     case png = 0
     case jpg
     case jpeg
@@ -361,6 +459,12 @@ struct Preference {
     case pgm
     case pgmyuv
     case tga
+
+    static var defaultValue = ScreenshotFormat.png
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
 
     var string: String {
       get {
@@ -377,10 +481,16 @@ struct Preference {
     }
   }
 
-  enum HardwareDecoderOption: Int {
+  enum HardwareDecoderOption: Int, InitializingFromKey {
     case disabled = 0
     case auto
     case autoCopy
+
+    static var defaultValue = HardwareDecoderOption.auto
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
 
     var mpvString: String {
       switch self {
@@ -397,118 +507,201 @@ struct Preference {
 
   // MARK: - Defaults
 
-  static let defaultPreference:[String : Any] = [
-    Key.actionAfterLaunch: ActionAfterLaunch.welcomeWindow.rawValue,
-    Key.alwaysOpenInNewWindow: true,
-    Key.enableCmdN: false,
-    Key.recordPlaybackHistory: true,
-    Key.recordRecentFiles: true,
-    Key.trackAllFilesInRecentOpenMenu: true,
-    Key.controlBarPositionHorizontal: Float(0.5),
-    Key.controlBarPositionVertical: Float(0.1),
-    Key.controlBarStickToCenter: true,
-    Key.controlBarAutoHideTimeout: Float(2.5),
-    Key.oscPosition: OSCPosition.floating.rawValue,
-    Key.playlistWidth: 270,
-    Key.themeMaterial: Theme.dark.rawValue,
-    Key.osdAutoHideTimeout: Float(1),
-    Key.osdTextSize: Float(20),
-    Key.softVolume: 50,
-    Key.arrowButtonAction: ArrowButtonAction.speed.rawValue,
-    Key.pauseWhenOpen: false,
-    Key.fullScreenWhenOpen: false,
-    Key.showChapterPos: false,
-    Key.resumeLastPosition: true,
-    Key.useMediaKeys: true,
-    Key.useAppleRemote: true,
-    Key.alwaysFloatOnTop: false,
-    Key.blackOutMonitor: false,
+  static let defaultPreference:[String: Any] = [
+    Key.actionAfterLaunch.rawValue: ActionAfterLaunch.welcomeWindow.rawValue,
+    Key.alwaysOpenInNewWindow.rawValue: true,
+    Key.enableCmdN.rawValue: false,
+    Key.recordPlaybackHistory.rawValue: true,
+    Key.recordRecentFiles.rawValue: true,
+    Key.trackAllFilesInRecentOpenMenu.rawValue: true,
+    Key.controlBarPositionHorizontal.rawValue: Float(0.5),
+    Key.controlBarPositionVertical.rawValue: Float(0.1),
+    Key.controlBarStickToCenter.rawValue: true,
+    Key.controlBarAutoHideTimeout.rawValue: Float(2.5),
+    Key.oscPosition.rawValue: OSCPosition.floating.rawValue,
+    Key.playlistWidth.rawValue: 270,
+    Key.themeMaterial.rawValue: Theme.dark.rawValue,
+    Key.osdAutoHideTimeout.rawValue: Float(1),
+    Key.osdTextSize.rawValue: Float(20),
+    Key.softVolume.rawValue: 50,
+    Key.arrowButtonAction.rawValue: ArrowButtonAction.speed.rawValue,
+    Key.pauseWhenOpen.rawValue: false,
+    Key.fullScreenWhenOpen.rawValue: false,
+    Key.showChapterPos.rawValue: false,
+    Key.resumeLastPosition.rawValue: true,
+    Key.useMediaKeys.rawValue: true,
+    Key.useAppleRemote.rawValue: true,
+    Key.alwaysFloatOnTop.rawValue: false,
+    Key.blackOutMonitor.rawValue: false,
 
-    Key.playlistAutoAdd: true,
-    Key.playlistAutoPlayNext: true,
+    Key.playlistAutoAdd.rawValue: true,
+    Key.playlistAutoPlayNext.rawValue: true,
 
-    Key.usePhysicalResolution: true,
-    Key.resizeOnlyWhenManuallyOpenFile: true,
-    Key.showRemainingTime: false,
-    Key.enableThumbnailPreview: true,
+    Key.usePhysicalResolution.rawValue: true,
+    Key.resizeOnlyWhenManuallyOpenFile.rawValue: true,
+    Key.showRemainingTime.rawValue: false,
+    Key.enableThumbnailPreview.rawValue: true,
+    Key.autoSwitchToMusicMode.rawValue: true,
 
-    Key.videoThreads: 0,
-    Key.hardwareDecoder: HardwareDecoderOption.auto.rawValue,
-    Key.audioThreads: 0,
-    Key.audioLanguage: "",
-    Key.maxVolume: 100,
-    Key.spdifAC3: false,
-    Key.spdifDTS: false,
-    Key.spdifDTSHD: false,
+    Key.videoThreads.rawValue: 0,
+    Key.hardwareDecoder.rawValue: HardwareDecoderOption.auto.rawValue,
+    Key.audioThreads.rawValue: 0,
+    Key.audioLanguage.rawValue: "",
+    Key.maxVolume.rawValue: 100,
+    Key.spdifAC3.rawValue: false,
+    Key.spdifDTS.rawValue: false,
+    Key.spdifDTSHD.rawValue: false,
 
-    Key.subAutoLoadIINA: IINAAutoLoadAction.iina.rawValue,
-    Key.subAutoLoadPriorityString: "",
-    Key.subAutoLoadSearchPath: "./*",
-    Key.ignoreAssStyles: false,
-    Key.subOverrideLevel: SubOverrideLevel.strip.rawValue,
-    Key.subTextFont: "sans-serif",
-    Key.subTextSize: Float(55),
-    Key.subTextColor: NSArchiver.archivedData(withRootObject: NSColor.white),
-    Key.subBgColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
-    Key.subBold: false,
-    Key.subItalic: false,
-    Key.subBlur: Float(0),
-    Key.subSpacing: Float(0),
-    Key.subBorderSize: Float(3),
-    Key.subBorderColor: NSArchiver.archivedData(withRootObject: NSColor.black),
-    Key.subShadowSize: Float(0),
-    Key.subShadowColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
-    Key.subAlignX: SubAlign.center.rawValue,
-    Key.subAlignY: SubAlign.bottom.rawValue,
-    Key.subMarginX: Float(25),
-    Key.subMarginY: Float(22),
-    Key.subPos: Float(100),
-    Key.subLang: "",
-    Key.onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
-    Key.displayInLetterBox: true,
-    Key.subScaleWithWindow: true,
-    Key.openSubUsername: "",
-    Key.defaultEncoding: "auto",
+    Key.subAutoLoadIINA.rawValue: IINAAutoLoadAction.iina.rawValue,
+    Key.subAutoLoadPriorityString.rawValue: "",
+    Key.subAutoLoadSearchPath.rawValue: "./*",
+    Key.ignoreAssStyles.rawValue: false,
+    Key.subOverrideLevel.rawValue: SubOverrideLevel.strip.rawValue,
+    Key.subTextFont.rawValue: "sans-serif",
+    Key.subTextSize.rawValue: Float(55),
+    Key.subTextColor.rawValue: NSArchiver.archivedData(withRootObject: NSColor.white),
+    Key.subBgColor.rawValue: NSArchiver.archivedData(withRootObject: NSColor.clear),
+    Key.subBold.rawValue: false,
+    Key.subItalic.rawValue: false,
+    Key.subBlur.rawValue: Float(0),
+    Key.subSpacing.rawValue: Float(0),
+    Key.subBorderSize.rawValue: Float(3),
+    Key.subBorderColor.rawValue: NSArchiver.archivedData(withRootObject: NSColor.black),
+    Key.subShadowSize.rawValue: Float(0),
+    Key.subShadowColor.rawValue: NSArchiver.archivedData(withRootObject: NSColor.clear),
+    Key.subAlignX.rawValue: SubAlign.center.rawValue,
+    Key.subAlignY.rawValue: SubAlign.bottom.rawValue,
+    Key.subMarginX.rawValue: Float(25),
+    Key.subMarginY.rawValue: Float(22),
+    Key.subPos.rawValue: Float(100),
+    Key.subLang.rawValue: "",
+    Key.onlineSubSource.rawValue: OnlineSubtitle.Source.shooter.rawValue,
+    Key.displayInLetterBox.rawValue: true,
+    Key.subScaleWithWindow.rawValue: true,
+    Key.openSubUsername.rawValue: "",
+    Key.defaultEncoding.rawValue: "auto",
 
-    Key.enableCache: true,
-    Key.defaultCacheSize: 153600,
-    Key.cacheBufferSize: 153600,
-    Key.secPrefech: 100,
-    Key.userAgent: "",
-    Key.transportRTSPThrough: RTSPTransportation.tcp.rawValue,
-    Key.ytdlEnabled: true,
-    Key.ytdlSearchPath: "",
-    Key.ytdlRawOptions: "",
-    Key.httpProxy: "",
+    Key.enableCache.rawValue: true,
+    Key.defaultCacheSize.rawValue: 153600,
+    Key.cacheBufferSize.rawValue: 153600,
+    Key.secPrefech.rawValue: 100,
+    Key.userAgent.rawValue: "",
+    Key.transportRTSPThrough.rawValue: RTSPTransportation.tcp.rawValue,
+    Key.ytdlEnabled.rawValue: true,
+    Key.ytdlSearchPath.rawValue: "",
+    Key.ytdlRawOptions.rawValue: "",
+    Key.httpProxy.rawValue: "",
 
-    Key.inputConfigs: [:],
-    Key.currentInputConfigName: "IINA Default",
+    Key.inputConfigs.rawValue: [:],
+    Key.currentInputConfigName.rawValue: "IINA Default",
 
-    Key.enableAdvancedSettings: false,
-    Key.useMpvOsd: false,
-    Key.enableLogging: false,
-    Key.userOptions: [],
-    Key.useUserDefinedConfDir: false,
-    Key.userDefinedConfDir: "~/.config/mpv/",
+    Key.enableAdvancedSettings.rawValue: false,
+    Key.useMpvOsd.rawValue: false,
+    Key.enableLogging.rawValue: false,
+    Key.userOptions.rawValue: [],
+    Key.useUserDefinedConfDir.rawValue: false,
+    Key.userDefinedConfDir.rawValue: "~/.config/mpv/",
 
-    Key.keepOpenOnFileEnd: true,
-    Key.quitWhenNoOpenedWindow: false,
-    Key.useExactSeek: SeekOption.relative.rawValue,
-    Key.relativeSeekAmount: 3,
-    Key.volumeScrollAmount: 3,
-    Key.verticalScrollAction: ScrollAction.volume.rawValue,
-    Key.horizontalScrollAction: ScrollAction.seek.rawValue,
-    Key.singleClickAction: MouseClickAction.hideOSC.rawValue,
-    Key.doubleClickAction: MouseClickAction.fullscreen.rawValue,
-    Key.rightClickAction: MouseClickAction.pause.rawValue,
-    Key.pinchAction: PinchAction.windowSize.rawValue,
+    Key.keepOpenOnFileEnd.rawValue: true,
+    Key.quitWhenNoOpenedWindow.rawValue: false,
+    Key.useExactSeek.rawValue: SeekOption.relative.rawValue,
+    Key.relativeSeekAmount.rawValue: 3,
+    Key.volumeScrollAmount.rawValue: 3,
+    Key.verticalScrollAction.rawValue: ScrollAction.volume.rawValue,
+    Key.horizontalScrollAction.rawValue: ScrollAction.seek.rawValue,
+    Key.singleClickAction.rawValue: MouseClickAction.hideOSC.rawValue,
+    Key.doubleClickAction.rawValue: MouseClickAction.fullscreen.rawValue,
+    Key.rightClickAction.rawValue: MouseClickAction.pause.rawValue,
+    Key.pinchAction.rawValue: PinchAction.windowSize.rawValue,
 
-    Key.screenshotFolder: "~/Pictures/Screenshots",
-    Key.screenshotIncludeSubtitle: true,
-    Key.screenshotFormat: ScreenshotFormat.png.rawValue,
-    Key.screenshotTemplate: "%F-%n",
+    Key.screenshotFolder.rawValue: "~/Pictures/Screenshots",
+    Key.screenshotIncludeSubtitle.rawValue: true,
+    Key.screenshotFormat.rawValue: ScreenshotFormat.png.rawValue,
+    Key.screenshotTemplate.rawValue: "%F-%n",
 
-    Key.watchProperties: []
+    Key.watchProperties.rawValue: []
   ]
 
+  static private let ud = UserDefaults.standard
+
+  static func object(for key: Key) -> Any? {
+    return ud.object(forKey: key.rawValue)
+  }
+
+  static func array(for key: Key) -> [Any]? {
+    return ud.array(forKey: key.rawValue)
+  }
+
+  static func url(for key: Key) -> URL? {
+    return ud.url(forKey: key.rawValue)
+  }
+
+  static func dictionary(for key: Key) -> [String : Any]? {
+    return ud.dictionary(forKey: key.rawValue)
+  }
+
+  static func string(for key: Key) -> String? {
+    return ud.string(forKey: key.rawValue)
+  }
+
+  static func stringArray(for key: Key) -> [String]? {
+    return ud.stringArray(forKey: key.rawValue)
+  }
+
+  static func data(for key: Key) -> Data? {
+    return ud.data(forKey: key.rawValue)
+  }
+
+  static func bool(for key: Key) -> Bool {
+    return ud.bool(forKey: key.rawValue)
+  }
+
+  static func integer(for key: Key) -> Int {
+    return ud.integer(forKey: key.rawValue)
+  }
+
+  static func float(for key: Key) -> Float {
+    return ud.float(forKey: key.rawValue)
+  }
+
+  static func double(for key: Key) -> Double {
+    return ud.double(forKey: key.rawValue)
+  }
+
+  static func value(for key: Key) -> Any? {
+    return ud.value(forKey: key.rawValue)
+  }
+
+  static func mpvColor(for key: Key) -> String? {
+    return ud.mpvColor(forKey: key.rawValue)
+  }
+
+  static func set(_ value: Bool, for key: Key) {
+    ud.set(value, forKey: key.rawValue)
+  }
+
+  static func set(_ value: Int, for key: Key) {
+    ud.set(value, forKey: key.rawValue)
+  }
+
+  static func set(_ value: String, for key: Key) {
+    ud.set(value, forKey: key.rawValue)
+  }
+
+  static func set(_ value: Float, for key: Key) {
+    ud.set(value, forKey: key.rawValue)
+  }
+
+  static func set(_ value: Double, for key: Key) {
+    ud.set(value, forKey: key.rawValue)
+  }
+
+  static func set(_ value: Any, for key: Key) {
+    ud.set(value, forKey: key.rawValue)
+  }
+
+  static func `enum`<T: InitializingFromKey>(for key: Key) -> T {
+    return T.init(key: key) ?? T.defaultValue
+  }
+  
 }

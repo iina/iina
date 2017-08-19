@@ -485,6 +485,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         self.setWindowFloatingOnTop(ontop)
       }
     }
+    let windowScaleObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.windowScaleChanged, object: nil, queue: .main) { [unowned self] _ in
+      let windowScale = self.player.mpv.getDouble(MPVOption.Window.windowScale)
+      self.setWindowScale(windowScale)
+    }
     let screenChangeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSApplicationDidChangeScreenParameters, object: nil, queue: .main) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
       if self.isInFullScreen && Preference.bool(for: .blackOutMonitor) {
@@ -508,6 +512,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     notificationObservers.append(fsObserver)
     notificationObservers.append(ontopObserver)
     notificationObservers.append(screenChangeObserver)
+    notificationObservers.append(windowScaleObserver)
     notificationObservers.append(changeWorkspaceObserver)
   }
 
@@ -1812,7 +1817,35 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updatePlayTime(withDuration: true, andProgressBar: true)
     updateVolume()
   }
-  
+
+  func setWindowScale(_ scale: Double) {
+    guard let window = window, !isInFullScreen else { return }
+    let screenFrame = (window.screen ?? NSScreen.main()!).visibleFrame
+    let videoWidth = player.info.videoWidth == nil || player.info.videoWidth == 0 ? AppData.widthWhenNoVideo : player.info.videoWidth!
+    let videoHeight = player.info.videoHeight == nil || player.info.videoHeight == 0 ? AppData.heightWhenNoVideo : player.info.videoHeight!
+    let newFrame: NSRect
+    // calculate 1x size
+    let useRetinaSize = Preference.bool(for: .usePhysicalResolution)
+    let logicalFrame = NSRect(x: window.frame.origin.x,
+                             y: window.frame.origin.y,
+                             width: CGFloat(videoWidth),
+                             height: CGFloat(videoHeight))
+    var finalSize = (useRetinaSize ? window.convertFromBacking(logicalFrame) : logicalFrame).size
+    // calculate scaled size
+    let scalef = CGFloat(scale)
+    finalSize.width *= scalef
+    finalSize.height *= scalef
+    // set size
+    if finalSize.width > screenFrame.size.width || finalSize.height > screenFrame.size.height {
+      // if final size is bigger than screen
+      newFrame = window.frame.centeredResize(to: window.frame.size.shrink(toSize: screenFrame.size)).constrain(in: screenFrame)
+    } else {
+      // otherwise, resize the window normally
+      newFrame = window.frame.centeredResize(to: finalSize.satisfyMinSizeWithSameAspectRatio(minSize)).constrain(in: screenFrame)
+    }
+    window.setFrame(newFrame, display: true, animate: true)
+  }
+
   func blackOutOtherMonitors() {
     screens = (NSScreen.screens()?.filter() { $0 != window?.screen }) ?? []
     cachedScreenCount = screens.count + 1

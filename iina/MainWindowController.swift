@@ -1740,21 +1740,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   /** Set window size when info available, or video size changed. */
-  func adjustFrameByVideoSize(_ videoWidth: Int, _ videoHeight: Int) {
+  func adjustFrameByVideoSize() {
     guard let w = window else { return }
 
-    // if no video track
-    var width = videoWidth
-    var height = videoHeight
-    if width == 0 { width = AppData.widthWhenNoVideo }
-    if height == 0 { height = AppData.heightWhenNoVideo }
-
-    // if video has rotation
-    let netRotate = player.mpv.getInt(MPVProperty.videoParamsRotate) - player.mpv.getInt(MPVOption.Video.videoRotate)
-    let rotate = netRotate >= 0 ? netRotate : netRotate + 360
-    if rotate == 90 || rotate == 270 {
-      swap(&width, &height)
-    }
+    let (width, height) = player.videoSizeForDisplay
 
     // set aspect ratio
     let originalVideoSize = NSSize(width: width, height: height)
@@ -1826,8 +1815,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func setWindowScale(_ scale: Double) {
     guard let window = window, !isInFullScreen else { return }
     let screenFrame = (window.screen ?? NSScreen.main()!).visibleFrame
-    let videoWidth = player.info.videoWidth == nil || player.info.videoWidth == 0 ? AppData.widthWhenNoVideo : player.info.videoWidth!
-    let videoHeight = player.info.videoHeight == nil || player.info.videoHeight == 0 ? AppData.heightWhenNoVideo : player.info.videoHeight!
+    let (videoWidth, videoHeight) = player.videoSizeForDisplay
     let newFrame: NSRect
     // calculate 1x size
     let useRetinaSize = Preference.bool(for: .usePhysicalResolution)

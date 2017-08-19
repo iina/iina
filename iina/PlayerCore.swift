@@ -837,11 +837,8 @@ class PlayerCore: NSObject {
   }
 
   func notifyMainWindowVideoSizeChanged() {
-    guard let dwidth = info.displayWidth, let dheight = info.displayHeight else {
-      Utility.fatal("Cannot get video width and height")
-    }
     DispatchQueue.main.sync {
-      self.mainWindow.adjustFrameByVideoSize(dwidth, dheight)
+      self.mainWindow.adjustFrameByVideoSize()
     }
   }
 
@@ -1111,6 +1108,39 @@ class PlayerCore: NSObject {
                                startTime: mpv.getDouble(MPVProperty.chapterListNTime(index)),
                                index:     index)
       info.chapters.append(chapter)
+    }
+  }
+
+  // MARK: - Utils
+
+  /**
+   Non-nil and non-zero width/height value calculated for video window, from current `dwidth`
+   and `dheight` while taking pure audio files and video rotations into consideration.
+   */
+  var videoSizeForDisplay: (Int, Int) {
+    get {
+      var width: Int
+      var height: Int
+
+      if let w = info.displayWidth, let h = info.displayHeight {
+        // when width and height == 0 there's no video track
+        width = w == 0 ? AppData.widthWhenNoVideo : w
+        height = h == 0 ? AppData.heightWhenNoVideo : h
+      } else {
+        // we cannot get dwidth and dheight, which is unexpected. This block should never be executed
+        // but just in case, let's log the error.
+        Utility.log("videoSizeForDisplay: Cannot get dwidth and dheight")
+        width = AppData.widthWhenNoVideo
+        height = AppData.heightWhenNoVideo
+      }
+
+      // if video has rotation
+      let netRotate = mpv.getInt(MPVProperty.videoParamsRotate) - mpv.getInt(MPVOption.Video.videoRotate)
+      let rotate = netRotate >= 0 ? netRotate : netRotate + 360
+      if rotate == 90 || rotate == 270 {
+        swap(&width, &height)
+      }
+      return (width, height)
     }
   }
 

@@ -39,7 +39,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var volumeLabel: NSTextField!
 
   var isOntop = false
-  private var isPlaylistVisible = false
+  var isPlaylistVisible = false
   private var originalWindowFrame: NSRect!
 
   init(player: PlayerCore) {

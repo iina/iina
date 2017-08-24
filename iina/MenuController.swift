@@ -187,16 +187,22 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- aspect
     var aspectList = AppData.aspects
+    // we need to set the represented object separately, since `Constants.String.default` may be localized.
+    var aspectListObject = AppData.aspects
     aspectList.insert(Constants.String.default, at: 0)
-    bind(menu: aspectMenu, withOptions: aspectList, objects: nil, objectMap: nil, action: #selector(MainMenuActionHandler.menuChangeAspect(_:))) {
+    aspectListObject.insert("Default", at: 0)
+    bind(menu: aspectMenu, withOptions: aspectList, objects: aspectListObject, objectMap: nil, action: #selector(MainMenuActionHandler.menuChangeAspect(_:))) {
       PlayerCore.active.info.unsureAspect == $0.representedObject as? String
     }
 
     // -- crop
     var cropList = AppData.aspects
+    // same as aspectList above.
+    var cropListForObject = AppData.aspects
     cropList.insert(Constants.String.none, at: 0)
-    bind(menu: cropMenu, withOptions: cropList, objects: nil, objectMap: nil, action: #selector(MainMenuActionHandler.menuChangeCrop(_:))) {
-      PlayerCore.active.info.unsureCrop == $0.representedObject as? String
+    cropListForObject.insert("None", at: 0)
+    bind(menu: cropMenu, withOptions: cropList, objects: cropListForObject, objectMap: nil, action: #selector(MainMenuActionHandler.menuChangeCrop(_:))) {
+      return PlayerCore.active.info.unsureCrop == $0.representedObject as? String
     }
 
     // -- rotation

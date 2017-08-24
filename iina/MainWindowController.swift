@@ -221,7 +221,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Observed user defaults
 
   /** Observers added to `UserDefauts.standard`. */
-  private var notificationObservers: [NSObjectProtocol] = []
+  private var notificationObservers: [NotificationCenter: [NSObjectProtocol]] = [:]
 
   /** Cached user default values */
   private var oscPosition: Preference.OSCPosition
@@ -472,20 +472,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // add notification observers
-    let fsObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.fsChanged, object: nil, queue: .main) { [unowned self] _ in
+    notificationCenter(.default, addObserverfor: Constants.Noti.fsChanged) { [unowned self] _ in
       let fs = self.player.mpv.getFlag(MPVOption.Window.fullscreen)
       if fs != self.isInFullScreen {
         self.toggleWindowFullScreen()
       }
     }
-    let ontopObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.ontopChanged, object: nil, queue: .main) { [unowned self] _ in
+    notificationCenter(.default, addObserverfor: Constants.Noti.ontopChanged) { [unowned self] _ in
       let ontop = self.player.mpv.getFlag(MPVOption.Window.ontop)
       if ontop != self.isOntop {
         self.isOntop = ontop
         self.setWindowFloatingOnTop(ontop)
       }
     }
-    let screenChangeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSApplicationDidChangeScreenParameters, object: nil, queue: .main) { [unowned self] _ in
+    notificationCenter(.default, addObserverfor: Constants.Noti.windowScaleChanged) { [unowned self] _ in
+      let windowScale = self.player.mpv.getDouble(MPVOption.Window.windowScale)
+      self.setWindowScale(windowScale)
+    }
+    notificationCenter(.default, addObserverfor: .NSApplicationDidChangeScreenParameters) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
       if self.isInFullScreen && Preference.bool(for: .blackOutMonitor) {
         if NSScreen.screens()?.count ?? 0 != self.cachedScreenCount {
@@ -494,7 +498,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
       }
     }
-    let changeWorkspaceObserver = NSWorkspace.shared().notificationCenter.addObserver(forName: NSNotification.Name.NSWorkspaceActiveSpaceDidChange, object: nil, queue: .main) { [unowned self] _ in
+    notificationCenter(NSWorkspace.shared().notificationCenter, addObserverfor: .NSWorkspaceActiveSpaceDidChange) { [unowned self] _ in
       if self.isInFullScreen && Preference.bool(for: .blackOutMonitor) {
         if self.window?.isOnActiveSpace ?? false {
           self.removeBlackWindow()
@@ -505,10 +509,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     }
 
-    notificationObservers.append(fsObserver)
-    notificationObservers.append(ontopObserver)
-    notificationObservers.append(screenChangeObserver)
-    notificationObservers.append(changeWorkspaceObserver)
   }
 
   deinit {
@@ -516,10 +516,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       for key in self.observedPrefKeys {
         UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
       }
-      for observer in self.notificationObservers {
-        NotificationCenter.default.removeObserver(observer)
+      for (center, observers) in self.notificationObservers {
+        for observer in observers {
+          center.removeObserver(observer)
+        }
       }
     }
+  }
+
+  private func notificationCenter(_ center: NotificationCenter, addObserverfor name: NSNotification.Name, object: Any? = nil, using block: @escaping (Notification) -> Void) {
+    let observer = center.addObserver(forName: name, object: object, queue: .main, using: block)
+    if notificationObservers[center] == nil {
+      notificationObservers[center] = []
+    }
+    notificationObservers[center]!.append(observer)
   }
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
@@ -1729,21 +1739,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   /** Set window size when info available, or video size changed. */
-  func adjustFrameByVideoSize(_ videoWidth: Int, _ videoHeight: Int) {
+  func adjustFrameByVideoSize() {
     guard let w = window else { return }
 
-    // if no video track
-    var width = videoWidth
-    var height = videoHeight
-    if width == 0 { width = AppData.widthWhenNoVideo }
-    if height == 0 { height = AppData.heightWhenNoVideo }
-
-    // if video has rotation
-    let netRotate = player.mpv.getInt(MPVProperty.videoParamsRotate) - player.mpv.getInt(MPVOption.Video.videoRotate)
-    let rotate = netRotate >= 0 ? netRotate : netRotate + 360
-    if rotate == 90 || rotate == 270 {
-      swap(&width, &height)
-    }
+    let (width, height) = player.videoSizeForDisplay
 
     // set aspect ratio
     let originalVideoSize = NSSize(width: width, height: height)
@@ -1811,7 +1810,34 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updatePlayTime(withDuration: true, andProgressBar: true)
     updateVolume()
   }
-  
+
+  func setWindowScale(_ scale: Double) {
+    guard let window = window, !isInFullScreen else { return }
+    let screenFrame = (window.screen ?? NSScreen.main()!).visibleFrame
+    let (videoWidth, videoHeight) = player.videoSizeForDisplay
+    let newFrame: NSRect
+    // calculate 1x size
+    let useRetinaSize = Preference.bool(for: .usePhysicalResolution)
+    let logicalFrame = NSRect(x: window.frame.origin.x,
+                             y: window.frame.origin.y,
+                             width: CGFloat(videoWidth),
+                             height: CGFloat(videoHeight))
+    var finalSize = (useRetinaSize ? window.convertFromBacking(logicalFrame) : logicalFrame).size
+    // calculate scaled size
+    let scalef = CGFloat(scale)
+    finalSize.width *= scalef
+    finalSize.height *= scalef
+    // set size
+    if finalSize.width > screenFrame.size.width || finalSize.height > screenFrame.size.height {
+      // if final size is bigger than screen
+      newFrame = window.frame.centeredResize(to: window.frame.size.shrink(toSize: screenFrame.size)).constrain(in: screenFrame)
+    } else {
+      // otherwise, resize the window normally
+      newFrame = window.frame.centeredResize(to: finalSize.satisfyMinSizeWithSameAspectRatio(minSize)).constrain(in: screenFrame)
+    }
+    window.setFrame(newFrame, display: true, animate: true)
+  }
+
   func blackOutOtherMonitors() {
     screens = (NSScreen.screens()?.filter() { $0 != window?.screen }) ?? []
     cachedScreenCount = screens.count + 1

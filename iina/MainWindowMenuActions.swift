@@ -84,43 +84,32 @@ extension MainWindowController {
     //  10: smaller size
     //  11: bigger size
     let size = sender.tag
-    guard !isInFullScreen else { return }
-    guard let w = window, var vw = player.info.displayWidth, var vh = player.info.displayHeight else { return }
-    if vw == 0 { vw = AppData.widthWhenNoVideo }
-    if vh == 0 { vh = AppData.heightWhenNoVideo }
-
-    let useRetinaSize = Preference.bool(for: .usePhysicalResolution)
-    let logicalSize = NSRect(x: w.frame.origin.x, y: w.frame.origin.y, width: CGFloat(vw), height: CGFloat(vh))
-    var retinaSize = useRetinaSize ? w.convertFromBacking(logicalSize) : logicalSize
-    let screenFrame = NSScreen.main()!.visibleFrame
+    guard let window = window, !isInFullScreen else { return }
+    
+    let screenFrame = (window.screen ?? NSScreen.main()!).visibleFrame
     let newFrame: NSRect
-    let sizeMap: [CGFloat] = [0.5, 1, 2]
+    let sizeMap: [Double] = [0.5, 1, 2]
     let scaleStep: CGFloat = 25
 
     switch size {
     // scale
     case 0, 1, 2:
-      retinaSize.size.width *= sizeMap[size]
-      retinaSize.size.height *= sizeMap[size]
-      if retinaSize.size.width > screenFrame.size.width || retinaSize.size.height > screenFrame.size.height {
-        newFrame = w.frame.centeredResize(to: w.frame.size.shrink(toSize: screenFrame.size)).constrain(in: screenFrame)
-      } else {
-        newFrame = w.frame.centeredResize(to: retinaSize.size.satisfyMinSizeWithSameAspectRatio(minSize)).constrain(in: screenFrame)
-      }
+      setWindowScale(sizeMap[size])
+      return
     // fit screen
     case 3:
-      w.center()
-      newFrame = w.frame.centeredResize(to: w.frame.size.shrink(toSize: screenFrame.size))
+      window.center()
+      newFrame = window.frame.centeredResize(to: window.frame.size.shrink(toSize: screenFrame.size))
     // bigger size
     case 10, 11:
-      let newWidth = w.frame.width + scaleStep * (size == 10 ? -1 : 1)
-      let newHeight = newWidth / (w.aspectRatio.width / w.aspectRatio.height)
-      newFrame = w.frame.centeredResize(to: NSSize(width: newWidth, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize))
+      let newWidth = window.frame.width + scaleStep * (size == 10 ? -1 : 1)
+      let newHeight = newWidth / (window.aspectRatio.width / window.aspectRatio.height)
+      newFrame = window.frame.centeredResize(to: NSSize(width: newWidth, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize))
     default:
       return
     }
 
-    w.setFrame(newFrame, display: true, animate: true)
+    window.setFrame(newFrame, display: true, animate: true)
   }
 
   func menuAlwaysOnTop(_ sender: AnyObject) {

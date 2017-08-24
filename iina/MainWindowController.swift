@@ -1260,7 +1260,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowDidBecomeMain(_ notification: Notification) {
-    print("became main")
     PlayerCore.lastActive = player
     NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
   }
@@ -1881,15 +1880,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         NSApp.presentationOptions.remove(.autoHideMenuBar)
         NSApp.presentationOptions.remove(.autoHideDock)
         // restore window frame ans aspect ratio
-        // firstly resize to a big frame with same aspect ratio for better visual experience
-        let aspectRatio = NSSize(width: player.info.videoWidth ?? AppData.widthWhenNoVideo,
-                                 height: player.info.videoHeight ?? AppData.heightWhenNoVideo)
-        let aspectSize = aspectRatio.shrink(toSize: window.frame.size)
-        let aspectFrame = aspectSize.centeredRect(in: window.frame)
-        window.setFrame(aspectFrame, display: true, animate: false)
+        let videoSize = player.videoSizeForDisplay
+        let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)
+        let useAnimation = Preference.bool(for: .legacyFullScreenAnimation)
+        if useAnimation {
+          // firstly resize to a big frame with same aspect ratio for better visual experience
+          let aspectSize = aspectRatio.shrink(toSize: window.frame.size)
+          let aspectFrame = aspectSize.centeredRect(in: window.frame)
+          window.setFrame(aspectFrame, display: true, animate: false)
+        }
         // then animate to the original frame
         if let frame = windowFrameBeforeEnteringFullScreen {
-          window.setFrame(frame, display: true, animate: true)
+          window.setFrame(frame, display: true, animate: useAnimation)
         } else {
           player.notifyMainWindowVideoSizeChanged()
         }
@@ -1920,7 +1922,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         NSApp.presentationOptions.insert(.autoHideDock)
         // set frame
         let screen = window.screen ?? NSScreen.main()!
-        window.setFrame(NSRect(origin: NSZeroPoint, size: screen.frame.size), display: true, animate: true)
+        window.setFrame(NSRect(origin: .zero, size: screen.frame.size), display: true, animate: true)
         // call delegate
         windowDidEnterFullScreen(Notification(name: Constants.Noti.legacyFullScreen))
       } else {

@@ -163,30 +163,35 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   
   
   func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
-    let indexesData = NSKeyedArchiver.archivedData(withRootObject: rowIndexes)
-    let filePaths = rowIndexes.map { player.info.playlist[$0].filename }
-    pboard.declareTypes([IINAPlaylistIndexes, NSFilenamesPboardType], owner: tableView)
-    pboard.setData(indexesData, forType: IINAPlaylistIndexes)
-    pboard.setPropertyList(filePaths, forType: NSFilenamesPboardType)
-    return true
+    if tableView == playlistTableView {
+      let indexesData = NSKeyedArchiver.archivedData(withRootObject: rowIndexes)
+      let filePaths = rowIndexes.map { player.info.playlist[$0].filename }
+      pboard.declareTypes([IINAPlaylistIndexes, NSFilenamesPboardType], owner: tableView)
+      pboard.setData(indexesData, forType: IINAPlaylistIndexes)
+      pboard.setPropertyList(filePaths, forType: NSFilenamesPboardType)
+      return true
+    }
+    return false
   }
 
 
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableViewDropOperation) -> NSDragOperation {
-    let pasteboard = info.draggingPasteboard()
+    if tableView == playlistTableView {
+      let pasteboard = info.draggingPasteboard()
 
-    playlistTableView.setDropRow(row, dropOperation: .above)
-    if info.draggingSource() as? NSTableView === tableView {
-      return .move
-    }
-    if let fileNames = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
-      for path in fileNames {
-        let ext = (path as NSString).pathExtension.lowercased()
-        if Utility.playableFileExt.contains(ext) {
-          return .copy
-        }
+      playlistTableView.setDropRow(row, dropOperation: .above)
+      if info.draggingSource() as? NSTableView === tableView {
+        return .move
       }
-      return []
+      if let fileNames = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
+        for path in fileNames {
+          let ext = (path as NSString).pathExtension.lowercased()
+          if Utility.playableFileExt.contains(ext) {
+            return .copy
+          }
+        }
+        return []
+      }
     }
     return []
   }

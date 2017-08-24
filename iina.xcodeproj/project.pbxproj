@@ -90,6 +90,7 @@
 		8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */; };
 		8461C5301D462488006E91FF /* VideoTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52F1D462488006E91FF /* VideoTime.swift */; };
 		846352581EEEE11A0043F0CC /* ThumbnailPeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846352571EEEE11A0043F0CC /* ThumbnailPeekView.swift */; };
+		846654941F4EEBE300C91B8C /* vlc-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = 846654921F4EEA5500C91B8C /* vlc-default-input.conf */; };
 		8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */; };
 		847557141F405F8C0006B0FF /* MainWindowMenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847557131F405F8C0006B0FF /* MainWindowMenuActions.swift */; };
 		847557161F406D360006B0FF /* MiniPlayerWindowMenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847557151F406D360006B0FF /* MiniPlayerWindowMenuActions.swift */; };
@@ -128,7 +129,6 @@
 		84A886E41E24F37D008755BB /* ShooterSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886E31E24F37D008755BB /* ShooterSubtitle.swift */; };
 		84A886E61E24F3BD008755BB /* OnlineSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886E51E24F3BD008755BB /* OnlineSubtitle.swift */; };
 		84A886EC1E2573A5008755BB /* JustExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886EB1E2573A5008755BB /* JustExtension.swift */; };
-		84A886EE1E269A2A008755BB /* iina-default-input.conf in Resources */ = {isa = PBXBuildFile; fileRef = 84A886ED1E269A2A008755BB /* iina-default-input.conf */; };
 		84A886EF1E269E67008755BB /* iina-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = 84A886ED1E269A2A008755BB /* iina-default-input.conf */; };
 		84A886F31E26CA24008755BB /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F21E26CA24008755BB /* Regex.swift */; };
 		84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AABE8A1DBF634600D138FD /* CharEncoding.swift */; };
@@ -248,6 +248,7 @@
 			dstPath = config;
 			dstSubfolderSpec = 7;
 			files = (
+				846654941F4EEBE300C91B8C /* vlc-default-input.conf in Copy Configs */,
 				84A886EF1E269E67008755BB /* iina-default-input.conf in Copy Configs */,
 				844D72EF1E056E1400522E5E /* input.conf in Copy Configs */,
 			);
@@ -511,6 +512,7 @@
 		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
 		8461C52F1D462488006E91FF /* VideoTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTime.swift; sourceTree = "<group>"; };
 		846352571EEEE11A0043F0CC /* ThumbnailPeekView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailPeekView.swift; sourceTree = "<group>"; };
+		846654921F4EEA5500C91B8C /* vlc-default-input.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "vlc-default-input.conf"; sourceTree = "<group>"; };
 		8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSettingViewController.swift; sourceTree = "<group>"; };
 		847557131F405F8C0006B0FF /* MainWindowMenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowMenuActions.swift; sourceTree = "<group>"; };
 		847557151F406D360006B0FF /* MiniPlayerWindowMenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniPlayerWindowMenuActions.swift; sourceTree = "<group>"; };
@@ -1318,6 +1320,7 @@
 			children = (
 				84A886ED1E269A2A008755BB /* iina-default-input.conf */,
 				84E745D81DFDE8C100588DED /* input.conf */,
+				846654921F4EEA5500C91B8C /* vlc-default-input.conf */,
 			);
 			name = config;
 			path = iina/config;
@@ -1497,7 +1500,6 @@
 				84AC62211E87C6CF002D6F92 /* OpenURLAccessoryViewController.xib in Resources */,
 				8492C2861E771FB200CE5825 /* ISO639_2.strings in Resources */,
 				84A09A0F1F2DF596000FF343 /* MiniPlayerWindowController.xib in Resources */,
-				84A886EE1E269A2A008755BB /* iina-default-input.conf in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8400D5D81E1AB31B006785F5 /* AboutWindowController.xib in Resources */,
 				8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */,

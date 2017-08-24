@@ -439,7 +439,7 @@ class MPVController: NSObject {
     let str = filters.map { $0.stringFormat }.joined(separator: ",")
     command(cmd, args: ["set", str], checkError: false) { returnValue in
       if returnValue < 0 {
-        Utility.showAlert("alert.filter.incorrect")
+        Utility.showAlert("filter.incorrect")
         // reload data in filter setting window
         NotificationCenter.default.post(Notification(name: Constants.Noti.vfChanged))
       }

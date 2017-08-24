@@ -22,6 +22,13 @@ class Utility {
 
   // MARK: - Logs, alerts
 
+  enum AlertMode {
+    case modal
+    case nonModal
+    case sheet
+    case sheetModal
+  }
+
   @available(*, deprecated, message: "showAlert(message:alertStyle:) is deprecated, use showAlert(_ key:comment:arguments:alertStyle:) instead")
   static func showAlert(message: String, alertStyle: NSAlertStyle = .critical) {
     let alert = NSAlert()
@@ -157,15 +164,31 @@ class Utility {
    Pop up a save panel.
    - Returns: Whether user dismissed the panel by clicking OK.
    */
-  static func quickSavePanel(title: String, types: [String], ok: @escaping (URL) -> Void) {
+  static func quickSavePanel(title: String, types: [String],
+                             mode: AlertMode = .nonModal, sheetWindow: NSWindow? = nil,
+                             ok: @escaping (URL) -> Void) {
     let panel = NSSavePanel()
     panel.title = title
     panel.canCreateDirectories = true
     panel.allowedFileTypes = types
-    panel.begin() { result in
+    let handler: (NSModalResponse) -> Void = { result in
       if result == NSFileHandlingPanelOKButton, let url = panel.url {
         ok(url)
       }
+    }
+    switch mode {
+    case .modal:
+      let response = panel.runModal()
+      handler(response)
+    case .nonModal:
+      panel.begin(completionHandler: handler)
+    case .sheet:
+      guard let sheetWindow = sheetWindow else {
+        Utility.fatal("No sheet window")
+      }
+      panel.beginSheet(sheetWindow, completionHandler: handler)
+    default:
+      Utility.log("quickSavePanel: Unsupported mode")
     }
   }
 
@@ -175,9 +198,14 @@ class Utility {
      - key: A localization key. "alert.`key`.title" will be used as alert title, and "alert.`key`.message" will be the informative text.
      - titleComment: (Optional) Comment for title key.
      - messageComment: (Optional) Comment for message key.
-   - Returns: Whether user dismissed the panel by clicking OK.
+     - mode: A `AlertMode`, `.modal` (default) or `.sheetModal`.
+     - sheetWindow: Must present if mode is `.sheetModal`.
+   - Returns: Whether user dismissed the panel by clicking OK. Only works when using `.modal` mode.
    */
-  static func quickPromptPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, ok: (String) -> Void) -> Bool {
+  static func quickPromptPanel(_ key: String,
+                               titleComment: String? = nil, messageComment: String? = nil,
+                               mode: AlertMode = .modal, sheetWindow: NSWindow? = nil,
+                               ok: @escaping (String) -> Void) -> Bool {
     let panel = NSAlert()
     let titleKey = "alert." + key + ".title"
     let messageKey = "alert." + key + ".message"
@@ -191,12 +219,29 @@ class Utility {
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
-    let response = panel.runModal()
-    if response == NSAlertFirstButtonReturn {
-      ok(input.stringValue)
-      return true
-    } else {
+    // handler
+    switch mode {
+    case .modal:
+      let response = panel.runModal()
+      if response == NSAlertFirstButtonReturn {
+        ok(input.stringValue)
+        return true
+      } else {
+        return false
+      }
+    case .sheetModal:
+      guard let sheetWindow = sheetWindow else {
+        Utility.fatal("No sheet window")
+      }
+      panel.beginSheetModal(for: sheetWindow) { response in
+        if response == NSAlertFirstButtonReturn {
+          ok(input.stringValue)
+        }
+      }
       return false
+    default:
+      Utility.log("quickPromptPanel: Unsupported mode")
+      return true
     }
   }
 

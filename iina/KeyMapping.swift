@@ -70,9 +70,10 @@ class KeyMapping {
 
   var prettyKey: String {
     get {
-      return key
-        .components(separatedBy: "+")
-        .map { token -> String in
+      return key.characters
+        .split(separator: "+", maxSplits: 1, omittingEmptySubsequences: false)
+        .map { tokenCharView -> String in
+          let token = String(tokenCharView)
           let uppercasedToken = token.uppercased()
           if let symbol = KeyMapping.prettyKeySymbol[uppercasedToken] {
             return symbol
@@ -90,7 +91,12 @@ class KeyMapping {
   }
 
   init(key: String, rawAction: String, isIINACommand: Bool = false, comment: String? = nil) {
-    self.key = key
+    // normalize different letter cases for modifier keys
+    var normalizedKey = key
+    ["Ctrl", "Meta", "Alt"].forEach { keyword in
+      normalizedKey = normalizedKey.replacingOccurrences(of: keyword, with: keyword, options: .caseInsensitive)
+    }
+    self.key = normalizedKey
     self.privateRawAction = rawAction
     self.action = rawAction.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
     self.isIINACommand = isIINACommand

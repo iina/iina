@@ -91,6 +91,7 @@ struct Constants {
     static let fsChanged = Notification.Name("IINAFullscreenChanged")
     static let ontopChanged = Notification.Name("IINAOnTopChanged")
     static let keyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
+    static let windowScaleChanged = Notification.Name("IINAWindowScaleChanged")
     static let fileLoaded = Notification.Name("IINAFileLoaded")
     static let historyUpdated = Notification.Name("IINAHistoryUpdated")
   }

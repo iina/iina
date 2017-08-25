@@ -77,6 +77,23 @@ extension NSSize {
     }
   }
 
+  /** 
+   Given another size S, returns a size that:
+
+   - maintains the same aspect ratio;
+   - has same height or/and width as S;
+   - always bigger than S.
+   
+   - parameter toSize: The given size S.
+
+   ```
+   +--+------+--+
+   |  |      |  |
+   |  |  S   |  |<-- The result size
+   |  |      |  |
+   +--+------+--+
+   ```
+   */
   func grow(toSize size: NSSize) -> NSSize {
     let sizeAspect = size.aspect
     if aspect > sizeAspect {  // self is wider, grow to meet height
@@ -86,6 +103,23 @@ extension NSSize {
     }
   }
 
+  /**
+   Given another size S, returns a size that:
+
+   - maintains the same aspect ratio;
+   - has same height or/and width as S;
+   - always smaller than S.
+   
+   - parameter toSize: The given size S.
+
+   ```
+   +--+------+--+
+   |  |The   |  |
+   |  |result|  |<-- S
+   |  |size  |  |
+   +--+------+--+
+   ```
+   */
   func shrink(toSize size: NSSize) -> NSSize {
     let  sizeAspect = size.aspect
     if aspect < sizeAspect { // self is taller, shrink to meet height

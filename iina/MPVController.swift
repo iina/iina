@@ -75,7 +75,8 @@ class MPVController: NSObject {
     MPVOption.Equalizer.hue: MPV_FORMAT_INT64,
     MPVOption.Equalizer.saturation: MPV_FORMAT_INT64,
     MPVOption.Window.fullscreen: MPV_FORMAT_FLAG,
-    MPVOption.Window.ontop: MPV_FORMAT_FLAG
+    MPVOption.Window.ontop: MPV_FORMAT_FLAG,
+    MPVOption.Window.windowScale: MPV_FORMAT_DOUBLE
   ]
 
   init(playerCore: PlayerCore) {
@@ -766,6 +767,9 @@ class MPVController: NSObject {
 
     case MPVOption.Window.ontop:
       NotificationCenter.default.post(Notification(name: Constants.Noti.ontopChanged))
+
+    case MPVOption.Window.windowScale:
+      NotificationCenter.default.post(Notification(name: Constants.Noti.windowScaleChanged))
 
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")

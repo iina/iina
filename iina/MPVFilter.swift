@@ -8,7 +8,9 @@
 
 import Cocoa
 
-// FIXME: can refactor using RawRepresent
+/**
+ Represents a mpv filter. It can be either created by user or loaded from mpv.
+ */
 class MPVFilter: NSObject {
 
   enum FilterType: String {
@@ -27,10 +29,12 @@ class MPVFilter: NSObject {
     return f
   }
 
+  // FIXME: use lavfi vflip
   static func flip() -> MPVFilter {
     return MPVFilter(name: "flip", label: nil, params: nil)
   }
 
+  // FIXME: use lavfi hflip
   static func mirror() -> MPVFilter {
     return MPVFilter(name: "mirror", label: nil, params: nil)
   }
@@ -56,6 +60,7 @@ class MPVFilter: NSObject {
   var params: [String: String]?
   var rawParamString: String?
 
+  /** Convert the filter to a valid mpv filter string. */
   var stringFormat: String {
     get {
       var str = ""
@@ -143,6 +148,7 @@ class MPVFilter: NSObject {
 
   // MARK: - Others
 
+  /** The parameter order when omitting their names. */
   static let formats: [FilterType: String] = [
     .crop: "w:h:x:y",
     .expand: "w:h:x:y:aspect:round"

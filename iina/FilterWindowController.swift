@@ -133,6 +133,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     showSettings(for: preset)
   }
 
+  /** Render parameter controls at right side when selected a filter in the table. */
   func showSettings(for preset: FilterPreset) {
     currentPreset = preset
     currentBindings.removeAll()
@@ -170,6 +171,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     return label
   }
 
+  /** Create the control from a `FilterParameter` definition. */
   private func quickInput(yPos: inout CGFloat, param: FilterParameter) -> NSControl {
     switch param.type {
     case .text:
@@ -217,6 +219,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
   @IBAction func sheetAddBtnAction(_ sender: Any) {
     filterWindow.window!.endSheet(filterWindow.newFilterSheet, returnCode: NSModalResponseOK)
     guard let preset = currentPreset else { return }
+    // create instance
     let instance = FilterPresetInstance(from: preset)
     for (name, control) in currentBindings {
       switch preset.params[name]!.type {
@@ -228,6 +231,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
         instance.params[name] = FilterParamaterValue(float: control.floatValue)
       }
     }
+    // create filter
     filterWindow.addFilter(preset.transformer(instance))
   }
 

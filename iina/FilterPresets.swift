@@ -10,6 +10,9 @@ import Foundation
 
 fileprivate typealias PM = FilterParameter
 
+/** 
+ A fliter preset or tamplate, which contains the filter name and definitions of all parameters.
+ */
 class FilterPreset {
   typealias Transformer = (FilterPresetInstance) -> MPVFilter
 
@@ -20,6 +23,7 @@ class FilterPreset {
   var name: String
   var params: [String: FilterParameter]
   var paramOrder: [String]?
+  /** Given an instance, create the corresponding `MPVFilter`. */
   var transformer: Transformer
 
   var localizedName: String {
@@ -41,6 +45,9 @@ class FilterPreset {
   }
 }
 
+/**
+ An instance of a filter preset, with concrete values for each parameter.
+ */
 class FilterPresetInstance {
   var preset: FilterPreset
   var params: [String: FilterParamaterValue] = [:]
@@ -54,15 +61,22 @@ class FilterPresetInstance {
   }
 }
 
+/**
+ Definition of a filter parameter. It can be one of several types:
+ - `text`: A generic string value.
+ - `int`: An int value with range. It will be rendered as a slider.
+ - `float`: A float value with range. It will be rendered as a slider.
+ */
 class FilterParameter {
   enum ParamType {
     case text, int, float
   }
   var type: ParamType
   var defaultValue: FilterParamaterValue
-
+  // for float
   var min: Float?
   var max: Float?
+  // for int
   var minInt: Int?
   var maxInt: Int?
   var step: Int?
@@ -86,13 +100,15 @@ class FilterParameter {
     return pm
   }
 
-
   private init(_ type: ParamType, defaultValue: FilterParamaterValue) {
     self.type = type
     self.defaultValue = defaultValue
   }
 }
 
+/**
+ The structure to store values of different param types.
+ */
 struct FilterParamaterValue {
   private var _stringValue: String?
   private var _intValue: Int?
@@ -123,8 +139,10 @@ struct FilterParamaterValue {
   }
 }
 
+/** Related data. */
 
 extension FilterPreset {
+  /** Preloaded localization. */
   static let l10nDic: [String: String] = {
     guard let filePath = Bundle.main.path(forResource: "FilterPresets", ofType: "strings"),
       let dic = NSDictionary(contentsOfFile: filePath) as? [String : String] else {
@@ -133,6 +151,7 @@ extension FilterPreset {
     return dic
   }()
 
+  /** All filter presets. */
   static let presets: [FilterPreset] = [
     // crop
     FilterPreset("crop", params: [

@@ -125,7 +125,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    return FilterPreset.presets.at(row)?.name
+    return FilterPreset.presets.at(row)?.localizedName
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
@@ -138,12 +138,21 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     currentBindings.removeAll()
     scrollContentView.subviews.forEach { $0.removeFromSuperview() }
     var maxY: CGFloat = 0
-    for (name, param) in preset.params {
-      scrollContentView.addSubview(quickLabel(yPos: maxY, title: name))
+    let generateInputs: (String, FilterParameter) -> Void = { (name, param) in
+      self.scrollContentView.addSubview(self.quickLabel(yPos: maxY, title: preset.localizedParamName(name)))
       maxY += 21
-      let input = quickInput(yPos: &maxY, param: param)
-      scrollContentView.addSubview(input)
-      currentBindings[name] = input
+      let input = self.quickInput(yPos: &maxY, param: param)
+      self.scrollContentView.addSubview(input)
+      self.currentBindings[name] = input
+    }
+    if let paramOrder = preset.paramOrder {
+      for name in paramOrder {
+        generateInputs(name, preset.params[name]!)
+      }
+    } else {
+      for (name, param) in preset.params {
+        generateInputs(name, param)
+      }
     }
     scrollContentView.frame.size.height = maxY
   }
@@ -166,7 +175,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     case .text:
       // Text field
       let label = ShortcutAvailableTextField(frame: NSRect(x: 4, y: yPos,
-                                            width: scrollContentView.frame.width / 2,
+                                            width: scrollContentView.frame.width - 8,
                                             height: 22))
       label.stringValue = param.defaultValue.stringValue
       label.isSelectable = false

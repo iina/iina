@@ -13,6 +13,7 @@ class MPVFilter: NSObject {
 
   enum FilterType: String {
     case crop = "crop"
+    case expand = "expand"
     case flip = "flip"
     case mirror = "mirror"
     case lavfi = "lavfi"
@@ -103,27 +104,28 @@ class MPVFilter: NSObject {
     self.rawParamString = splitted.at(1)
   }
 
-  init(lavfiName: String, label: String?, params: [String]) {
-    self.name = "lavfi"
+  init(name: String, label: String?, paramString: String) {
+    self.name = name
     self.type = FilterType(rawValue: name)
     self.label = label
+    self.rawParamString = paramString
+  }
+
+  convenience init(lavfiName: String, label: String?, params: [String]) {
     var ffmpegGraph = "[\(lavfiName)="
     ffmpegGraph += params.joined(separator: ":")
     ffmpegGraph += "]"
-    self.rawParamString = ffmpegGraph
+    self.init(name: "lavfi", label: label, paramString: ffmpegGraph)
   }
 
-  init(lavfiName: String, label: String?, paramDict: [String: String]) {
-    self.name = "lavfi"
-    self.type = FilterType(rawValue: name)
-    self.label = label
+  convenience init(lavfiName: String, label: String?, paramDict: [String: String]) {
     var ffmpegGraph = "[\(lavfiName)="
     ffmpegGraph += paramDict.map { "\($0)=\($1)" }.joined(separator: ":")
     ffmpegGraph += "]"
-    self.rawParamString = ffmpegGraph
+    self.init(name: "lavfi", label: label, paramString: ffmpegGraph)
   }
 
-  convenience init(fromPresetInstance instance: FilterPresetInstance) {
+  convenience init(lavfiFilterFromPresetInstance instance: FilterPresetInstance) {
     var dict: [String: String] = [:]
     instance.params.forEach { (k, v) in
       dict[k] = v.stringValue
@@ -131,10 +133,19 @@ class MPVFilter: NSObject {
     self.init(lavfiName: instance.preset.name, label: nil, paramDict: dict)
   }
 
+  convenience init(mpvFilterFromPresetInstance instance: FilterPresetInstance) {
+    var dict: [String: String] = [:]
+    instance.params.forEach { (k, v) in
+      dict[k] = v.stringValue
+    }
+    self.init(name: instance.preset.name, label: nil, params: dict)
+  }
+
   // MARK: - Others
 
   static let formats: [FilterType: String] = [
-    .crop: "w:h:x:y"
+    .crop: "w:h:x:y",
+    .expand: "w:h:x:y:aspect:round"
   ]
 
   // MARK: - Param getter

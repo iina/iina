@@ -169,6 +169,7 @@
 		84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F041D2F5C5B004FA5A1 /* AppData.swift */; };
 		84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F061D2F5E76004FA5A1 /* Utility.swift */; };
 		84EC12831F4F939000137C1E /* FilterPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC12821F4F939000137C1E /* FilterPresets.swift */; };
+		84EC12861F504D2500137C1E /* FilterPresets.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84EC12881F504D2500137C1E /* FilterPresets.strings */; };
 		84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED99FD1E009C8100A5159B /* PrefAdvancedViewController.swift */; };
 		84F5D4951E44D5230060A838 /* KeyBindingCriterion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D4941E44D5230060A838 /* KeyBindingCriterion.swift */; };
 		84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D4981E44E8AC0060A838 /* KeyBindingDataLoader.swift */; };
@@ -735,6 +736,8 @@
 		84EB1F041D2F5C5B004FA5A1 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		84EB1F061D2F5E76004FA5A1 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		84EC12821F4F939000137C1E /* FilterPresets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterPresets.swift; sourceTree = "<group>"; };
+		84EC12871F504D2500137C1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/FilterPresets.strings; sourceTree = "<group>"; };
+		84EC12891F504D3B00137C1E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FilterPresets.strings"; sourceTree = "<group>"; };
 		84ED99FD1E009C8100A5159B /* PrefAdvancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefAdvancedViewController.swift; sourceTree = "<group>"; };
 		84F5D4941E44D5230060A838 /* KeyBindingCriterion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingCriterion.swift; sourceTree = "<group>"; };
 		84F5D4981E44E8AC0060A838 /* KeyBindingDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingDataLoader.swift; sourceTree = "<group>"; };
@@ -925,6 +928,7 @@
 				84D377661D737F58007F7396 /* MPVChapter.swift */,
 				84C8D58E1D794CE600D98A0E /* MPVFilter.swift */,
 				84EC12821F4F939000137C1E /* FilterPresets.swift */,
+				84EC12881F504D2500137C1E /* FilterPresets.strings */,
 				845404AB1E43980900B02B12 /* LuaScript.swift */,
 				84C6D3631EB276E9009BF721 /* PlaybackHistory.swift */,
 			);
@@ -1498,6 +1502,7 @@
 				8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */,
 				8400D5EA1E1AB33B006785F5 /* KeyRecordViewController.xib in Resources */,
 				C75540751E7886FE00C13D4A /* SubSelectWindowController.xib in Resources */,
+				84EC12861F504D2500137C1E /* FilterPresets.strings in Resources */,
 				8400D5F01E1AB344006785F5 /* PrefCodecViewController.xib in Resources */,
 				84C3AB8B1E7BF22300FEFB7A /* MPVCommandFormat.strings in Resources */,
 				8400D5C91E1AB2F9006785F5 /* QuickSettingViewController.xib in Resources */,
@@ -2144,6 +2149,15 @@
 				649AD3291F11B06F00244738 /* es */,
 			);
 			name = Contribution.rtf;
+			sourceTree = "<group>";
+		};
+		84EC12881F504D2500137C1E /* FilterPresets.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84EC12871F504D2500137C1E /* Base */,
+				84EC12891F504D3B00137C1E /* zh-Hans */,
+			);
+			name = FilterPresets.strings;
 			sourceTree = "<group>";
 		};
 		84F5D49C1E44E9A50060A838 /* KeyBinding.strings */ = {

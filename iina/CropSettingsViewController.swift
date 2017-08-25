@@ -61,7 +61,7 @@ class CropSettingsViewController: NSViewController {
         self.croph == playerCore.info.videoHeight {
         // if no crop, remove the crop filter
         if let vf = playerCore.info.cropFilter {
-          playerCore.removeVideoFiler(vf)
+          let _ = playerCore.removeVideoFiler(vf)
           playerCore.info.unsureCrop = "None"
           return
         }

@@ -14,17 +14,30 @@ class FilterPreset {
   typealias Transformer = (FilterPresetInstance) -> MPVFilter
 
   private static let defaultTransformer: Transformer = { instance in
-    return MPVFilter(fromPresetInstance: instance)
+    return MPVFilter(lavfiFilterFromPresetInstance: instance)
   }
 
   var name: String
   var params: [String: FilterParameter]
+  var paramOrder: [String]?
   var transformer: Transformer
 
-  init(_ name: String, params: [String: FilterParameter], transformer: @escaping Transformer = FilterPreset.defaultTransformer) {
+  var localizedName: String {
+    return FilterPreset.l10nDic[name] ?? name
+  }
+
+  init(_ name: String,
+       params: [String: FilterParameter],
+       paramOrder: String? = nil,
+       transformer: @escaping Transformer = FilterPreset.defaultTransformer) {
     self.name = name
     self.params = params
+    self.paramOrder = paramOrder?.components(separatedBy: ":")
     self.transformer = transformer
+  }
+
+  func localizedParamName(_ param: String) -> String {
+    return FilterPreset.l10nDic["\(name).\(param)"] ?? param
   }
 }
 
@@ -112,7 +125,31 @@ struct FilterParamaterValue {
 
 
 extension FilterPreset {
+  static let l10nDic: [String: String] = {
+    guard let filePath = Bundle.main.path(forResource: "FilterPresets", ofType: "strings"),
+      let dic = NSDictionary(contentsOfFile: filePath) as? [String : String] else {
+        return [:]
+    }
+    return dic
+  }()
+
   static let presets: [FilterPreset] = [
+    // crop
+    FilterPreset("crop", params: [
+      "x": PM.text(), "y": PM.text(),
+      "w": PM.text(), "h": PM.text()
+    ], paramOrder: "w:h:x:y") { instance in
+      return MPVFilter(mpvFilterFromPresetInstance: instance)
+    },
+    // expand
+    FilterPreset("expand", params: [
+      "x": PM.text(), "y": PM.text(),
+      "w": PM.text(), "h": PM.text(),
+      "aspect": PM.text(defaultValue: "0"),
+      "round": PM.text(defaultValue: "1")
+    ], paramOrder: "w:h:x:y:aspect:round") { instance in
+      return MPVFilter(mpvFilterFromPresetInstance: instance)
+    },
     // sharpen
     FilterPreset("sharpen", params: [
       "amount": PM.float(min: 0, max: 1.5),
@@ -131,12 +168,39 @@ extension FilterPreset {
     },
     // delogo
     FilterPreset("delogo", params: [
-      "x": PM.text(defaultValue: "0"),
-      "y": PM.text(defaultValue: "0"),
-      "w": PM.text(defaultValue: "0"),
-      "h": PM.text(defaultValue: "0")
-    ]),
-    // vflip
-    FilterPreset("vflip", params: [:])
+      "x": PM.text(defaultValue: "1"),
+      "y": PM.text(defaultValue: "1"),
+      "w": PM.text(defaultValue: "1"),
+      "h": PM.text(defaultValue: "1")
+    ], paramOrder: "x:y:w:h"),
+    // invert color
+    FilterPreset("negative", params: [:]) { instance in
+      return MPVFilter(lavfiName: "lutrgb", label: nil, paramDict: [
+          "r": "negval", "g": "negval", "b": "negval"
+        ])
+    },
+    // flip
+    FilterPreset("vflip", params: [:]) { instance in
+      return MPVFilter(mpvFilterFromPresetInstance: instance)
+    },
+    // mirror
+    FilterPreset("hflip", params: [:]) { instance in
+      return MPVFilter(mpvFilterFromPresetInstance: instance)
+    },
+    // custom mpv
+    FilterPreset("custom_mpv", params: [
+      "name": PM.text(defaultValue: ""),
+      "string": PM.text(defaultValue: "")
+    ]) { instance in
+      return MPVFilter(rawString: instance.value(for: "name").stringValue + "=" + instance.value(for: "string").stringValue)!
+    },
+    // custom ffmpeg
+    FilterPreset("custom_ffmpeg", params: [
+      "name": PM.text(defaultValue: ""),
+      "string": PM.text(defaultValue: "")
+    ]) { instance in
+      return MPVFilter(name: "lavfi", label: nil,
+                       paramString: "[\(instance.value(for: "name").stringValue)=\(instance.value(for: "string").stringValue)]")
+    },
   ]
 }

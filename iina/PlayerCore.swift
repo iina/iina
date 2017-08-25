@@ -442,7 +442,7 @@ class PlayerCore: NSObject {
       }
     } else {
       if let vf = info.flipFilter {
-        removeVideoFiler(vf)
+        let _ = removeVideoFiler(vf)
         info.flipFilter = nil
       }
     }
@@ -459,7 +459,7 @@ class PlayerCore: NSObject {
       }
     } else {
       if let vf = info.mirrorFilter {
-        removeVideoFiler(vf)
+        let _ = removeVideoFiler(vf)
         info.mirrorFilter = nil
       }
     }
@@ -604,7 +604,7 @@ class PlayerCore: NSObject {
       info.cropFilter = vf
     } else {
       if let filter = info.cropFilter {
-        removeVideoFiler(filter)
+        let _ = removeVideoFiler(filter)
         info.unsureCrop = "None"
       }
     }

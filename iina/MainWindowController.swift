@@ -1838,7 +1838,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     window.setFrame(newFrame, display: true, animate: true)
   }
 
-  func blackOutOtherMonitors() {
+  private func blackOutOtherMonitors() {
     screens = (NSScreen.screens()?.filter() { $0 != window?.screen }) ?? []
     cachedScreenCount = screens.count + 1
 
@@ -1856,7 +1856,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
-  func removeBlackWindow() {
+  private func removeBlackWindow() {
     blackWindows = []
   }
 

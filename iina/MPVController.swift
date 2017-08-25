@@ -626,18 +626,27 @@ class MPVController: NSObject {
       player.info.vid = Int(data)
       let currTrack = player.info.currentTrack(.video) ?? .noneVideoTrack
       player.sendOSD(.track(currTrack))
+      DispatchQueue.main.async {
+        self.player.mainWindow.quickSettingView.reloadVideoData()
+      }
 
     case MPVOption.TrackSelection.aid:
       let data = getInt(MPVOption.TrackSelection.aid)
       player.info.aid = Int(data)
       let currTrack = player.info.currentTrack(.audio) ?? .noneAudioTrack
       player.sendOSD(.track(currTrack))
+      DispatchQueue.main.async {
+        self.player.mainWindow.quickSettingView.reloadAudioData()
+      }
 
     case MPVOption.TrackSelection.sid:
       let data = getInt(MPVOption.TrackSelection.sid)
       player.info.sid = Int(data)
       let currTrack = player.info.currentTrack(.sub) ?? .noneSubTrack
       player.sendOSD(.track(currTrack))
+      DispatchQueue.main.async {
+        self.player.mainWindow.quickSettingView.reloadSubtitleData()
+      }
 
     case MPVOption.PlaybackControl.pause:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {

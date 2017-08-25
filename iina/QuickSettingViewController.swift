@@ -227,10 +227,18 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
 
-  func reloadSubtitlesData() {
-    guard isViewLoaded else {
-      return
-    }
+  func reloadVideoData() {
+    guard isViewLoaded else { return }
+    videoTableView.reloadData()
+  }
+
+  func reloadAudioData() {
+    guard isViewLoaded else { return }
+    audioTableView.reloadData()
+  }
+
+  func reloadSubtitleData() {
+    guard isViewLoaded else { return }
     subTableView.reloadData()
     secSubTableView.reloadData()
   }

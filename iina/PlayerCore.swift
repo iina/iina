@@ -515,7 +515,7 @@ class PlayerCore: NSObject {
     if let currentSub = info.subTracks.first(where: {$0.externalFilename == currentSubName}) {
       setTrack(currentSub.id, forType: .sub)
     }
-    mainWindow?.quickSettingView.reloadSubtitlesData()
+    mainWindow?.quickSettingView.reloadSubtitleData()
   }
 
   func setAudioDelay(_ delay: Double) {

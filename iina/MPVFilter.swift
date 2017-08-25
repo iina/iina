@@ -15,6 +15,7 @@ class MPVFilter: NSObject {
     case crop = "crop"
     case flip = "flip"
     case mirror = "mirror"
+    case lavfi = "lavfi"
   }
 
   // MARK: - Static filters
@@ -31,6 +32,17 @@ class MPVFilter: NSObject {
 
   static func mirror() -> MPVFilter {
     return MPVFilter(name: "mirror", label: nil, params: nil)
+  }
+
+  /** 
+   A ffmpeg `unsharp` filter.
+   Args: l(uma)x, ly, la, c(hroma)x, xy, ca; default 5:5:0:5:5:0.
+   We only change la and ca here.
+   - parameter amount: Anount for la and ca. Should be in [-1.5, 1.5].
+   */
+  static func unsharp(amount: Float) -> MPVFilter {
+    let amoutStr = "\(amount)"
+    return MPVFilter(lavfiName: "unsharp", label: nil, params: ["5", "5", amoutStr, "5", "5", amoutStr])
   }
 
   // MARK: - Members
@@ -80,6 +92,26 @@ class MPVFilter: NSObject {
     self.rawParamString = splitted.at(1)
   }
 
+  init(lavfiName: String, label: String?, params: [String]) {
+    self.name = "lavfi"
+    self.type = FilterType(rawValue: name)
+    self.label = label
+    var ffmpegGraph = "[\(lavfiName)="
+    ffmpegGraph += params.joined(separator: ":")
+    ffmpegGraph += "]"
+    self.rawParamString = ffmpegGraph
+  }
+
+  init(lavfiName: String, label: String?, parmDict: [String: String]) {
+    self.name = "lavfi"
+    self.type = FilterType(rawValue: name)
+    self.label = label
+    var ffmpegGraph = "[\(lavfiName)="
+    ffmpegGraph += parmDict.map { "\($0)=\($1)" }.joined(separator: ":")
+    ffmpegGraph += "]"
+    self.rawParamString = ffmpegGraph
+  }
+
   // MARK: - Others
 
   static let formats: [FilterType: String] = [
@@ -112,3 +144,4 @@ class MPVFilter: NSObject {
   }
 
 }
+

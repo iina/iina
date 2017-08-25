@@ -168,6 +168,7 @@
 		84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */; };
 		84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F041D2F5C5B004FA5A1 /* AppData.swift */; };
 		84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1F061D2F5E76004FA5A1 /* Utility.swift */; };
+		84EC12831F4F939000137C1E /* FilterPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC12821F4F939000137C1E /* FilterPresets.swift */; };
 		84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED99FD1E009C8100A5159B /* PrefAdvancedViewController.swift */; };
 		84F5D4951E44D5230060A838 /* KeyBindingCriterion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D4941E44D5230060A838 /* KeyBindingCriterion.swift */; };
 		84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D4981E44E8AC0060A838 /* KeyBindingDataLoader.swift */; };
@@ -733,6 +734,7 @@
 		84EB1EE01D2F51D3004FA5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84EB1F041D2F5C5B004FA5A1 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		84EB1F061D2F5E76004FA5A1 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		84EC12821F4F939000137C1E /* FilterPresets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterPresets.swift; sourceTree = "<group>"; };
 		84ED99FD1E009C8100A5159B /* PrefAdvancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefAdvancedViewController.swift; sourceTree = "<group>"; };
 		84F5D4941E44D5230060A838 /* KeyBindingCriterion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingCriterion.swift; sourceTree = "<group>"; };
 		84F5D4981E44E8AC0060A838 /* KeyBindingDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingDataLoader.swift; sourceTree = "<group>"; };
@@ -922,6 +924,7 @@
 				84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */,
 				84D377661D737F58007F7396 /* MPVChapter.swift */,
 				84C8D58E1D794CE600D98A0E /* MPVFilter.swift */,
+				84EC12821F4F939000137C1E /* FilterPresets.swift */,
 				845404AB1E43980900B02B12 /* LuaScript.swift */,
 				84C6D3631EB276E9009BF721 /* PlaybackHistory.swift */,
 			);
@@ -1608,6 +1611,7 @@
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
 				8492C2881E7721A600CE5825 /* ISO639_2Helper.swift in Sources */,
 				84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */,
+				84EC12831F4F939000137C1E /* FilterPresets.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
 				84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */,
 				84AC621F1E87A4F3002D6F92 /* OpenURLAccessoryViewController.swift in Sources */,

@@ -19,6 +19,7 @@ class FilterWindowController: NSWindowController {
   var filters: [MPVFilter] = []
 
   @IBOutlet weak var tableView: NSTableView!
+  @IBOutlet var newFilterSheet: NSWindow!
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -53,13 +54,17 @@ class FilterWindowController: NSWindowController {
   // MARK: - IBAction
 
   @IBAction func addFilterAction(_ sender: AnyObject) {
-    let _ = Utility.quickPromptPanel("add_filter", mode: .sheetModal, sheetWindow: window) { str in
-      if let newFilter = MPVFilter(rawString: str) {
-        self.filters.append(newFilter)
-        self.setFilters()
-      } else {
-        Utility.showAlert("filter.incorrect")
-      }
+//    let _ = Utility.quickPromptPanel("add_filter", mode: .sheetModal, sheetWindow: window) { str in
+//      if let newFilter = MPVFilter(rawString: str) {
+//        self.filters.append(newFilter)
+//        self.setFilters()
+//      } else {
+//        Utility.showAlert("filter.incorrect")
+//      }
+//    }
+
+    window!.beginSheet(newFilterSheet) { response in
+      print(response)
     }
   }
 
@@ -70,7 +75,13 @@ class FilterWindowController: NSWindowController {
     }
   }
 
+  @IBAction func sheetAddBtnAction(_ sender: Any) {
+    window!.endSheet(newFilterSheet, returnCode: NSModalResponseOK)
+  }
 
+  @IBAction func sheetCancelBtnAction(_ sender: Any) {
+    window!.endSheet(newFilterSheet, returnCode: NSModalResponseCancel)
+  }
 }
 
 extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
@@ -100,4 +111,24 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
     }
   }
 
+}
+
+
+class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+
+  @IBOutlet weak var filterWindow: NSWindowController!
+  @IBOutlet weak var tableView: NSTableView!
+
+  override func awakeFromNib() {
+    tableView.dataSource = self
+    tableView.delegate = self
+  }
+
+  func numberOfRows(in tableView: NSTableView) -> Int {
+    return FilterPreset.presets.count
+  }
+
+  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+    return FilterPreset.presets.at(row)?.name
+  }
 }

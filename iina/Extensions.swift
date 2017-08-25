@@ -237,6 +237,12 @@ extension Int {
   }
 }
 
+extension Float {
+  func toStr() -> String {
+    return "\(self)"
+  }
+}
+
 extension CGFloat {
   func constrain(min: CGFloat, max: CGFloat) -> CGFloat {
     var value = self

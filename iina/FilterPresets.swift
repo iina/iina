@@ -13,11 +13,15 @@ fileprivate typealias PM = FilterParameter
 class FilterPreset {
   typealias Transformer = (FilterPresetInstance) -> MPVFilter
 
+  private static let defaultTransformer: Transformer = { instance in
+    return MPVFilter(fromPresetInstance: instance)
+  }
+
   var name: String
   var params: [String: FilterParameter]
   var transformer: Transformer
 
-  init(_ name: String, params: [String: FilterParameter], transformer: @escaping Transformer) {
+  init(_ name: String, params: [String: FilterParameter], transformer: @escaping Transformer = FilterPreset.defaultTransformer) {
     self.name = name
     self.params = params
     self.transformer = transformer
@@ -28,7 +32,7 @@ class FilterPresetInstance {
   var preset: FilterPreset
   var params: [String: FilterParamaterValue] = [:]
 
-  init(preset: FilterPreset) {
+  init(from preset: FilterPreset) {
     self.preset = preset
   }
 
@@ -82,7 +86,7 @@ struct FilterParamaterValue {
   private var _floatValue: Float?
 
   var stringValue: String {
-    return _stringValue ?? ""
+    return _stringValue ?? _intValue?.toStr() ?? _floatValue?.toStr() ?? ""
   }
 
   var intValue: Int {
@@ -109,12 +113,30 @@ struct FilterParamaterValue {
 
 extension FilterPreset {
   static let presets: [FilterPreset] = [
-    // unsharpen
-    FilterPreset("unsharpen", params: [
-      "amount": PM.float(min: 0, max: 1.5)
+    // sharpen
+    FilterPreset("sharpen", params: [
+      "amount": PM.float(min: 0, max: 1.5),
+      "msize": PM.int(min: 3, max: 23, step: 2, defaultValue: 5)
     ]) { instance in
-      let rawValue = instance.value(for: "amount").floatValue
-      return MPVFilter.unsharp(amount: rawValue)
-    }
+      return MPVFilter.unsharp(amount: instance.value(for: "amount").floatValue,
+                               msize: instance.value(for: "msize").intValue)
+    },
+    // blur
+    FilterPreset("blur", params: [
+      "amount": PM.float(min: 0, max: 1.5),
+      "msize": PM.int(min: 3, max: 23, step: 2, defaultValue: 5)
+    ]) { instance in
+      return MPVFilter.unsharp(amount: -instance.value(for: "amount").floatValue,
+                               msize: instance.value(for: "msize").intValue)
+    },
+    // delogo
+    FilterPreset("delogo", params: [
+      "x": PM.text(defaultValue: "0"),
+      "y": PM.text(defaultValue: "0"),
+      "w": PM.text(defaultValue: "0"),
+      "h": PM.text(defaultValue: "0")
+    ]),
+    // vflip
+    FilterPreset("vflip", params: [:])
   ]
 }

@@ -671,8 +671,14 @@ class PlayerCore: NSObject {
     return result
   }
 
-  func removeVideoFiler(_ filter: MPVFilter) {
-    mpv.command(.vf, args: ["del", filter.stringFormat], checkError: false)
+  func removeVideoFiler(_ filter: MPVFilter) -> Bool {
+    var result = true
+    if let label = filter.label {
+      mpv.command(.vf, args: ["del", "@" + label], checkError: false) { result = $0 >= 0 }
+    } else {
+      mpv.command(.vf, args: ["del", filter.stringFormat], checkError: false) { result = $0 >= 0 }
+    }
+    return result
   }
 
   func addAudioFilter(_ filter: MPVFilter) {

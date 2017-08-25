@@ -38,11 +38,13 @@ class MPVFilter: NSObject {
    A ffmpeg `unsharp` filter.
    Args: l(uma)x, ly, la, c(hroma)x, xy, ca; default 5:5:0:5:5:0.
    We only change la and ca here.
+   - parameter msize: Value for lx, ly, cx and cy. Should be an odd integer in [3, 23].
    - parameter amount: Anount for la and ca. Should be in [-1.5, 1.5].
    */
-  static func unsharp(amount: Float) -> MPVFilter {
-    let amoutStr = "\(amount)"
-    return MPVFilter(lavfiName: "unsharp", label: nil, params: ["5", "5", amoutStr, "5", "5", amoutStr])
+  static func unsharp(amount: Float, msize: Int = 5) -> MPVFilter {
+    let amoutStr = amount.toStr()
+    let msizeStr = msize.toStr()
+    return MPVFilter(lavfiName: "unsharp", label: nil, params: [msizeStr, msizeStr, amoutStr, msizeStr, msizeStr, amoutStr])
   }
 
   // MARK: - Members
@@ -56,9 +58,13 @@ class MPVFilter: NSObject {
   var stringFormat: String {
     get {
       var str = ""
+      // label
       if let label = label { str += "@\(label):" }
+      // name
       str += name
+      // params
       if let rpstr = rawParamString {
+        // if is set by user
         str += "="
         str += rpstr
       } else if params != nil && params!.count > 0 {
@@ -69,7 +75,12 @@ class MPVFilter: NSObject {
         // else print param names
         } else {
           str += "="
-          str += params!.map({ (k, v) -> String in return "\(k)=\(v)" }).joined(separator: ":")
+          // special tweak for lavfi filters
+          if name == "lavfi" {
+            str += "[\(params!["graph"]!)]"
+          } else {
+            str += params!.map({ (k, v) -> String in return "\(k)=\(v)" }).joined(separator: ":")
+          }
         }
       }
       return str
@@ -102,14 +113,22 @@ class MPVFilter: NSObject {
     self.rawParamString = ffmpegGraph
   }
 
-  init(lavfiName: String, label: String?, parmDict: [String: String]) {
+  init(lavfiName: String, label: String?, paramDict: [String: String]) {
     self.name = "lavfi"
     self.type = FilterType(rawValue: name)
     self.label = label
     var ffmpegGraph = "[\(lavfiName)="
-    ffmpegGraph += parmDict.map { "\($0)=\($1)" }.joined(separator: ":")
+    ffmpegGraph += paramDict.map { "\($0)=\($1)" }.joined(separator: ":")
     ffmpegGraph += "]"
     self.rawParamString = ffmpegGraph
+  }
+
+  convenience init(fromPresetInstance instance: FilterPresetInstance) {
+    var dict: [String: String] = [:]
+    instance.params.forEach { (k, v) in
+      dict[k] = v.stringValue
+    }
+    self.init(lavfiName: instance.preset.name, label: nil, paramDict: dict)
   }
 
   // MARK: - Others

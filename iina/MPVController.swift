@@ -606,6 +606,8 @@ class MPVController: NSObject {
       Utility.swap(&dwidth, &dheight)
     }
     if dwidth != player.info.displayWidth! || dheight != player.info.displayHeight! {
+      // filter the last video-reconfig event before quit
+      if dwidth == 0 && dheight == 0 && getFlag(MPVProperty.coreIdle) { return }
       // video size changed
       player.info.displayWidth = dwidth
       player.info.displayHeight = dheight

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12118"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -233,6 +233,16 @@
                         <binding destination="XM5-Sj-lhw" name="value" keyPath="values.useAppleRemote" id="9GR-lt-edl"/>
                     </connections>
                 </button>
+                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bm5-rb-Qjb">
+                    <rect key="frame" x="437" y="427" width="25" height="25"/>
+                    <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vf9-A9-dKA">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="openKeyBindingsHelpAction:" target="-2" id="93w-3u-sJP"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="KZA-hu-vhZ" firstAttribute="top" secondItem="0le-1T-r5f" secondAttribute="bottom" constant="14" id="2Pk-ll-iUo"/>
@@ -253,6 +263,7 @@
                 <constraint firstItem="KAE-fE-Nmc" firstAttribute="leading" secondItem="ZWR-gT-S2p" secondAttribute="trailing" constant="8" id="V4B-px-QHB"/>
                 <constraint firstAttribute="trailing" secondItem="ER0-iU-7fy" secondAttribute="trailing" constant="20" id="Y4g-9e-aDt"/>
                 <constraint firstItem="ZWR-gT-S2p" firstAttribute="top" secondItem="ER0-iU-7fy" secondAttribute="bottom" constant="10" id="ZX7-1F-af0"/>
+                <constraint firstItem="bm5-rb-Qjb" firstAttribute="centerY" secondItem="LU9-QU-BFL" secondAttribute="centerY" id="dVn-Pj-vDl"/>
                 <constraint firstItem="LU9-QU-BFL" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="eIu-AE-LI1"/>
                 <constraint firstItem="LAx-AE-9wU" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="eNV-g7-qgN"/>
                 <constraint firstItem="ZWR-gT-S2p" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="22" id="eyA-gW-IBL"/>
@@ -264,6 +275,7 @@
                 <constraint firstAttribute="trailing" secondItem="2pX-29-I87" secondAttribute="trailing" constant="20" id="tl2-El-aGp"/>
                 <constraint firstItem="LU9-QU-BFL" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="uzh-oa-t27"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WaC-bo-VFm" secondAttribute="trailing" constant="20" id="yTm-NM-YBM"/>
+                <constraint firstAttribute="trailing" secondItem="bm5-rb-Qjb" secondAttribute="trailing" constant="20" id="yu6-lr-z6o"/>
                 <constraint firstItem="WaC-bo-VFm" firstAttribute="leading" secondItem="KZA-hu-vhZ" secondAttribute="trailing" constant="10" id="zo8-8S-Ces"/>
             </constraints>
             <point key="canvasLocation" x="82" y="242"/>

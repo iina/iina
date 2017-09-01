@@ -285,6 +285,10 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     kbTableView.reloadData()
   }
 
+  @IBAction func openKeyBindingsHelpAction(_ sender: AnyObject) {
+    NSWorkspace.shared().open(URL(string: AppData.wikiLink.appending("/Manage-Key-Bindings"))!)
+  }
+
   // MARK: - UI
 
   private func changeButtonEnabled() {

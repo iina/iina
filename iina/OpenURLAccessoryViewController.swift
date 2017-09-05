@@ -10,7 +10,7 @@ import Cocoa
 
 class OpenURLAccessoryViewController: NSViewController {
 
-  @IBOutlet weak var urlField: ShortcutAvailableTextField!
+  @IBOutlet weak var urlField: NSTextField!
 
   @IBOutlet weak var safariLinkBtn: NSButton!
   @IBOutlet weak var chromeLinkBtn: NSButton!

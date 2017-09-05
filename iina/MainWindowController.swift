@@ -824,13 +824,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       Preference.set(Int(sideBarWidthConstraint.constant), for: .playlistWidth)
     } else {
       // if it's a mouseup after clicking
-      let mouseInSideBar = window!.contentView!.mouse(event.locationInWindow, in: sideBarView.frame)
-      // if sidebar is shown, hide it first
-      if !mouseInSideBar && sideBarStatus != .hidden {
+      if !isMouseEvent(event, inAnyOf: [sideBarView]) && sideBarStatus != .hidden {
+        // if sidebar is shown, hide it first
         hideSideBar()
       } else {
         // handle mouse click
         if event.clickCount == 1 {
+          // Disable singleClick for sideBar / OSC / titleBar
+          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
           // single click
           if doubleClickAction == .none {
             // if double click action is none, it's safe to perform action immediately
@@ -841,6 +842,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
             mouseExitEnterCount = 0
           }
         } else if event.clickCount == 2 {
+          // Disable doubleClick for sideBar / OSC
+          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar]) else { return }
           // double click
           guard doubleClickAction != .none else { return }
           // if already scheduled a single click timer, invalidate it
@@ -857,6 +860,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func rightMouseUp(with event: NSEvent) {
+    // Disable mouseUp for sideBar / OSC / titleBar
+    guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
+    
     performMouseAction(rightClickAction)
   }
 
@@ -947,10 +953,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       showUI()
     }
     // check whether mouse is in osc
-    let osc = currentControlBar ?? titleBarView
-    let mousePosInOSC = osc!.convert(event.locationInWindow, from: nil)
-    let isMouseInOSC = osc!.mouse(mousePosInOSC, in: osc!.bounds)
-    if isMouseInOSC {
+    if isMouseEvent(event, inAnyOf: [currentControlBar]) {
       destroyTimer()
     } else {
       updateTimer()
@@ -2257,7 +2260,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       window?.collectionBehavior = [.managed, .fullScreenPrimary]
     }
   }
-
+  
+  func isMouseEvent(_ event: NSEvent, inAnyOf views: [NSView?]) -> Bool {
+    return views.filter { $0 != nil }.reduce(false, { (result, view) in
+      return result || view!.mouse(view!.convert(event.locationInWindow, from: nil), in: view!.bounds)
+    })
+  }
+  
 }
 
 // MARK: - Picture in Picture

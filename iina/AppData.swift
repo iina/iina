@@ -94,6 +94,7 @@ struct Constants {
     static let windowScaleChanged = Notification.Name("IINAWindowScaleChanged")
     static let fileLoaded = Notification.Name("IINAFileLoaded")
     static let historyUpdated = Notification.Name("IINAHistoryUpdated")
+    static let legacyFullScreen = Notification.Name("IINALegacyFullScreen")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)

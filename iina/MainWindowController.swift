@@ -116,6 +116,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   var isEnteringFullScreen: Bool = false
+  /** For legacy full screen */
+  var windowFrameBeforeEnteringFullScreen: NSRect?
+  /** Prevent unexpected behavior when user switchs full screen mode during full screen*/
+  var currentFullScreenIsLegacy = false
 
   var isOntop: Bool = false {
     didSet {
@@ -253,7 +257,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     .pinchAction,
     .showRemainingTime,
     .blackOutMonitor,
-    .alwaysFloatOnTop
+    .alwaysFloatOnTop,
+    .useLegacyFullScreen
   ]
 
   // MARK: - Outlets
@@ -632,6 +637,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
       }
 
+    case PK.useLegacyFullScreen.rawValue:
+      resetCollectionBehavior()
+
     default:
       return
     }
@@ -786,7 +794,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let currentLocation = event.locationInWindow
       let newWidth = window!.frame.width - currentLocation.x - 2
       sideBarWidthConstraint.constant = newWidth.constrain(min: PlaylistMinWidth, max: PlaylistMaxWidth)
-    } else {
+    } else if !isInFullScreen {
       // move the window by dragging
       isDragging = true
       guard !controlBarFloating.isDragging else { return }
@@ -816,13 +824,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       Preference.set(Int(sideBarWidthConstraint.constant), for: .playlistWidth)
     } else {
       // if it's a mouseup after clicking
-      let mouseInSideBar = window!.contentView!.mouse(event.locationInWindow, in: sideBarView.frame)
-      // if sidebar is shown, hide it first
-      if !mouseInSideBar && sideBarStatus != .hidden {
+      if !isMouseEvent(event, inAnyOf: [sideBarView]) && sideBarStatus != .hidden {
+        // if sidebar is shown, hide it first
         hideSideBar()
       } else {
         // handle mouse click
         if event.clickCount == 1 {
+          // Disable singleClick for sideBar / OSC / titleBar
+          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
           // single click
           if doubleClickAction == .none {
             // if double click action is none, it's safe to perform action immediately
@@ -833,6 +842,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
             mouseExitEnterCount = 0
           }
         } else if event.clickCount == 2 {
+          // Disable doubleClick for sideBar / OSC
+          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar]) else { return }
           // double click
           guard doubleClickAction != .none else { return }
           // if already scheduled a single click timer, invalidate it
@@ -849,6 +860,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func rightMouseUp(with event: NSEvent) {
+    // Disable mouseUp for sideBar / OSC / titleBar
+    guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
+    
     performMouseAction(rightClickAction)
   }
 
@@ -939,10 +953,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       showUI()
     }
     // check whether mouse is in osc
-    let osc = currentControlBar ?? titleBarView
-    let mousePosInOSC = osc!.convert(event.locationInWindow, from: nil)
-    let isMouseInOSC = osc!.mouse(mousePosInOSC, in: osc!.bounds)
-    if isMouseInOSC {
+    if isMouseEvent(event, inAnyOf: [currentControlBar]) {
       destroyTimer()
     } else {
       updateTimer()
@@ -1061,7 +1072,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowDidOpen() {
     window!.makeMain()
     window!.makeKeyAndOrderFront(nil)
-    window!.collectionBehavior = [.managed, .fullScreenPrimary]
+    resetCollectionBehavior()
     // update buffer indicator view
     updateBufferIndicatorView()
     // start tracking mouse event
@@ -1861,7 +1872,73 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func toggleWindowFullScreen() {
-    window?.toggleFullScreen(self)
+    guard let window = window else { return }
+
+    if (isInFullScreen) {
+      // exit full screen
+      if currentFullScreenIsLegacy {
+        // exit legacy full screen
+        // call delegate
+        windowWillExitFullScreen(Notification(name: Constants.Noti.legacyFullScreen))
+        // stylemask
+        window.styleMask.remove(.borderless)
+        window.styleMask.remove(.fullScreen)
+        // cancel auto hide for menu and dock
+        NSApp.presentationOptions.remove(.autoHideMenuBar)
+        NSApp.presentationOptions.remove(.autoHideDock)
+        // restore window frame ans aspect ratio
+        let videoSize = player.videoSizeForDisplay
+        let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)
+        let useAnimation = Preference.bool(for: .legacyFullScreenAnimation)
+        if useAnimation {
+          // firstly resize to a big frame with same aspect ratio for better visual experience
+          let aspectSize = aspectRatio.shrink(toSize: window.frame.size)
+          let aspectFrame = aspectSize.centeredRect(in: window.frame)
+          window.setFrame(aspectFrame, display: true, animate: false)
+        }
+        // then animate to the original frame
+        if let frame = windowFrameBeforeEnteringFullScreen {
+          window.setFrame(frame, display: true, animate: useAnimation)
+        } else {
+          player.notifyMainWindowVideoSizeChanged()
+        }
+        window.aspectRatio = aspectRatio
+        windowFrameBeforeEnteringFullScreen = nil
+        // call delegate
+        windowDidExitFullScreen(Notification(name: Constants.Noti.legacyFullScreen))
+      } else {
+        // system full screen
+        window.toggleFullScreen(self)
+      }
+    } else {
+      // enter full screen
+      if Preference.bool(for: .useLegacyFullScreen) {
+        // enter legacy full screen
+        // cache current window frame
+        currentFullScreenIsLegacy = true
+        windowFrameBeforeEnteringFullScreen = window.frame
+        // call delegate
+        windowWillEnterFullScreen(Notification(name: Constants.Noti.legacyFullScreen))
+        // stylemask
+        window.styleMask.insert(.borderless)
+        window.styleMask.insert(.fullScreen)
+        // cancel aspect ratio
+        window.resizeIncrements = NSSize(width: 1, height: 1)
+        // auto hide menubar and dock
+        NSApp.presentationOptions.insert(.autoHideMenuBar)
+        NSApp.presentationOptions.insert(.autoHideDock)
+        // set frame
+        let screen = window.screen ?? NSScreen.main()!
+        window.setFrame(NSRect(origin: .zero, size: screen.frame.size), display: true, animate: true)
+        // call delegate
+        windowDidEnterFullScreen(Notification(name: Constants.Noti.legacyFullScreen))
+      } else {
+        // system full screen
+        currentFullScreenIsLegacy = false
+        window.toggleFullScreen(self)
+      }
+    }
+
   }
 
   /** This method will not set `isOntop`! */
@@ -1874,7 +1951,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       window.level = Int(CGWindowLevelForKey(.normalWindow))
     }
 
-    window.collectionBehavior = [.managed, .fullScreenPrimary]
+    resetCollectionBehavior()
 
     // don't know why they will be disabled
     standardWindowButtons.forEach { $0.isEnabled = true }
@@ -2176,6 +2253,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  private func resetCollectionBehavior() {
+    if Preference.bool(for: .useLegacyFullScreen) {
+      window?.collectionBehavior = [.managed, .fullScreenAuxiliary]
+    } else {
+      window?.collectionBehavior = [.managed, .fullScreenPrimary]
+    }
+  }
+  
+  func isMouseEvent(_ event: NSEvent, inAnyOf views: [NSView?]) -> Bool {
+    return views.filter { $0 != nil }.reduce(false, { (result, view) in
+      return result || view!.mouse(view!.convert(event.locationInWindow, from: nil), in: view!.bounds)
+    })
+  }
+  
 }
 
 // MARK: - Picture in Picture

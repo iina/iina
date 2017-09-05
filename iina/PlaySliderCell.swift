@@ -49,6 +49,8 @@ class PlaySliderCell: NSSliderCell {
 
   var drawChapters = Preference.bool(for: .showChapterPos)
 
+  var isPausedBeforeSeeking = false
+
   override func awakeFromNib() {
     minValue = 0
     maxValue = 100
@@ -143,6 +145,7 @@ class PlaySliderCell: NSSliderCell {
 
 
   override func startTracking(at startPoint: NSPoint, in controlView: NSView) -> Bool {
+    isPausedBeforeSeeking = playerCore.info.isPaused
     let result = super.startTracking(at: startPoint, in: controlView)
     if result {
       playerCore.togglePause(true)
@@ -152,7 +155,9 @@ class PlaySliderCell: NSSliderCell {
   }
 
   override func stopTracking(last lastPoint: NSPoint, current stopPoint: NSPoint, in controlView: NSView, mouseIsUp flag: Bool) {
-    playerCore.togglePause(false)
+    if !isPausedBeforeSeeking {
+      playerCore.togglePause(false)
+    }
     super.stopTracking(last: lastPoint, current: stopPoint, in: controlView, mouseIsUp: flag)
   }
 

@@ -53,6 +53,9 @@ struct Preference {
     /** Enter fill screen when open (bool) */
     static let fullScreenWhenOpen = Key("fullScreenWhenOpen")
 
+    static let useLegacyFullScreen = Key("useLegacyFullScreen")
+    static let legacyFullScreenAnimation = Key("legacyFullScreenAnimation")
+
     /** Black out other monitors while fullscreen (bool) */
     static let blackOutMonitor = Key("blackOutMonitor")
 
@@ -527,6 +530,8 @@ struct Preference {
     Key.arrowButtonAction.rawValue: ArrowButtonAction.speed.rawValue,
     Key.pauseWhenOpen.rawValue: false,
     Key.fullScreenWhenOpen.rawValue: false,
+    Key.useLegacyFullScreen.rawValue: false,
+    Key.legacyFullScreenAnimation.rawValue: false,
     Key.showChapterPos.rawValue: false,
     Key.resumeLastPosition.rawValue: true,
     Key.useMediaKeys.rawValue: true,

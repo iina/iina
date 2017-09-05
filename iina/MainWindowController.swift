@@ -441,10 +441,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     cv.autoresizesSubviews = false
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
     videoView.translatesAutoresizingMaskIntoConstraints = false
-    ([.top, .bottom, .left, .right] as [NSLayoutAttribute]).forEach { attr in
-      videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
-      videoViewConstraints[attr]!.isActive = true
-    }
+    addConstraintsForVideoView()
 
     w.setIsVisible(true)
     videoView.videoLayer.display()
@@ -1127,8 +1124,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {
-    isEnteringFullScreen = true
+    // If not using legacy full screen, we must do some tricks to avoid awkward animation when entering full screen
+    // (see `windowDidResize(_:)`). Therefore, Auto Layout is required to be disabled here.
+    if !currentFullScreenIsLegacy {
+      for (_, v) in videoViewConstraints {
+        videoView.superview?.removeConstraint(v)
+      }
+    }
 
+    isEnteringFullScreen = true
+    // Let mpv decide the correct render region in full screen
     player.mpv.setFlag(MPVOption.Window.keepaspect, true)
 
     // Set the appearance to match the theme so the titlebar matches the theme
@@ -1175,6 +1180,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
+    // reset `keepaspect`
     player.mpv.setFlag(MPVOption.Window.keepaspect, false)
 
     // show titleBarView
@@ -1206,9 +1212,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()
     }
-    
+    // restore ontop status
     if !player.info.isPaused {
       setWindowFloatingOnTop(isOntop)
+    }
+    // switch back to constraint-based layout
+    if !currentFullScreenIsLegacy {
+      addConstraintsForVideoView()
     }
   }
 
@@ -1221,9 +1231,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       videoView.videoLayer.draw()
     }
 
-    // update videoview size if in full screen, since aspect ratio may changed
     if (isInFullScreen && pipStatus == .notInPIP) {
       if isEnteringFullScreen {
+        // The `videoView` is not updated during full screen animation (unless using a custom one, however it could be
+        // unbearably laggy under current render meahcanism). Thus when entering full screen, we should keep `videoView`'s 
+        // aspect ratio. Otherwise, when entered full screen, there will be an awkward animation that looks like
+        // `videoView` "resized" to screen size suddenly when mpv redraws the video content in correct aspect ratio.
         let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
         let tryHeight = wSize.width / aspectRatio
         if tryHeight <= wSize.height {
@@ -1238,6 +1251,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
         }
       } else {
+        // update videoview size if in full screen, since aspect ratio may changed under certain cases, like split screen
         videoView.frame = NSRect(x: 0, y: 0, width: w.frame.width, height: w.frame.height)
       }
     }
@@ -1502,6 +1516,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   private func addBackTitlebarViewToFadeableViews() {
     self.fadeableViews.append(titleBarView)
+  }
+
+  private func addConstraintsForVideoView() {
+    guard let cv = window?.contentView else { return }
+    ([.top, .bottom, .left, .right] as [NSLayoutAttribute]).forEach { attr in
+      videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
+      videoViewConstraints[attr]!.isActive = true
+    }
   }
 
   func enterInteractiveMode(_ mode: InteractiveMode, selectWholeVideoByDefault: Bool = false) {

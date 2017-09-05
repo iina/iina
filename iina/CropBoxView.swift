@@ -13,7 +13,7 @@ class CropBoxView: NSView {
   private let boxStrokeColor = NSColor(calibratedRed: 0.4, green: 0.6, blue: 1, alpha: 1)
   private let boxFillColor = NSColor(calibratedWhite: 0.5, alpha: 0.3)
 
-  weak var settingsViewController: CropSettingsViewController!
+  weak var settingsViewController: CropBoxViewController!
 
   /** Original video size. */
   var actualSize: NSSize = NSSize()

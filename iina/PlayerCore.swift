@@ -8,11 +8,6 @@
 
 import Cocoa
 
-fileprivate let FilterLabelCrop = "iina_crop"
-fileprivate let FilterLabelFlip = "iina_flip"
-fileprivate let FilterLabelMirror = "iina_mirror"
-fileprivate let FilterLabelAudioEq = "iina_aeq"
-
 
 class PlayerCore: NSObject {
 
@@ -435,7 +430,7 @@ class PlayerCore: NSObject {
     if enable {
       if info.flipFilter == nil {
         let vf = MPVFilter.flip()
-        vf.label = FilterLabelFlip
+        vf.label = Constants.FilterName.flip
         if addVideoFilter(vf) {
           info.flipFilter = vf
         }
@@ -452,7 +447,7 @@ class PlayerCore: NSObject {
     if enable {
       if info.mirrorFilter == nil {
         let vf = MPVFilter.mirror()
-        vf.label = FilterLabelMirror
+        vf.label = Constants.FilterName.mirror
         if addVideoFilter(vf) {
           info.mirrorFilter = vf
         }
@@ -597,7 +592,7 @@ class PlayerCore: NSObject {
     if let aspect = Aspect(string: str) {
       let cropped = NSMakeSize(CGFloat(vwidth), CGFloat(vheight)).crop(withAspect: aspect)
       let vf = MPVFilter.crop(w: Int(cropped.width), h: Int(cropped.height), x: nil, y: nil)
-      vf.label = FilterLabelCrop
+      vf.label = Constants.FilterName.crop
       setCrop(fromFilter: vf)
       // warning! may should not update it here
       info.unsureCrop = str
@@ -611,14 +606,14 @@ class PlayerCore: NSObject {
   }
 
   func setCrop(fromFilter filter: MPVFilter) {
-    filter.label = FilterLabelCrop
+    filter.label = Constants.FilterName.crop
     if addVideoFilter(filter) {
       info.cropFilter = filter
     }
   }
 
   func setAudioEq(fromFilter filter: MPVFilter) {
-    filter.label = FilterLabelAudioEq
+    filter.label = Constants.FilterName.audioEq
     addAudioFilter(filter)
     info.audioEqFilter = filter
   }
@@ -1188,13 +1183,15 @@ class PlayerCore: NSObject {
     for filter in videoFilters {
       guard let label = filter.label else { continue }
       switch label {
-      case FilterLabelCrop:
+      case Constants.FilterName.crop:
         info.cropFilter = filter
         info.unsureCrop = ""
-      case FilterLabelFlip:
+      case Constants.FilterName.flip:
         info.flipFilter = filter
-      case FilterLabelMirror:
+      case Constants.FilterName.mirror:
         info.mirrorFilter = filter
+      case Constants.FilterName.delogo:
+        info.delogoFiter = filter
       default:
         break
       }
@@ -1204,7 +1201,7 @@ class PlayerCore: NSObject {
     for filter in audioFilters {
       guard let label = filter.label else { continue }
       switch label {
-      case FilterLabelAudioEq:
+      case Constants.FilterName.audioEq:
         info.audioEqFilter = filter
       default:
         break

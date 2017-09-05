@@ -70,12 +70,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     return playListView
   }()
 
-  /** The view for interactive cropping. */
-  lazy var cropSettingsView: CropSettingsViewController = {
-    let cropView = CropSettingsViewController()
-    cropView.mainWindow = self
-    return cropView
-  }()
+  /** The control view for interactive mode. */
+  var cropSettingsView: CropBoxViewController?
 
   /** The current/remaining time label in Touch Bar. */
   lazy var sizingTouchBarTextField: NSTextField = {
@@ -217,6 +213,22 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case notInPIP
     case inPIP
     case intermediate
+  }
+
+  enum InteractiveMode {
+    case crop
+    case freeSelecting
+
+    func viewController() -> CropBoxViewController {
+      var vc: CropBoxViewController
+      switch self {
+      case .crop:
+        vc = CropSettingsViewController()
+      case .freeSelecting:
+        vc = FreeSelectingViewController()
+      }
+      return vc
+    }
   }
 
   // MARK: - Observed user defaults
@@ -1232,7 +1244,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // interactive mode
     if (isInInteractiveMode) {
-      cropSettingsView.cropBoxView.resized(with: videoView.frame)
+      cropSettingsView?.cropBoxView.resized(with: videoView.frame)
     }
 
     // update control bar position
@@ -1492,7 +1504,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     self.fadeableViews.append(titleBarView)
   }
 
-  func enterInteractiveMode(selectWholeVideoByDefault: Bool) {
+  func enterInteractiveMode(_ mode: InteractiveMode, selectWholeVideoByDefault: Bool = false) {
     // prerequisites
     guard let window = window else { return }
 
@@ -1505,9 +1517,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     player.togglePause(true)
     isInInteractiveMode = true
     hideUI()
+
+    let controlView = mode.viewController()
+    controlView.mainWindow = self
     bottomView.isHidden = false
-    bottomView.addSubview(cropSettingsView.view)
-    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.view])
+    bottomView.addSubview(controlView.view)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": controlView.view])
 
     let origVideoSize = NSSize(width: ow, height: oh)
     // the max region that the video view can occupy
@@ -1525,12 +1540,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let selectedRect: NSRect = selectWholeVideoByDefault ? NSRect(origin: .zero, size: origVideoSize) : .zero
 
     // add crop setting view
-    window.contentView!.addSubview(cropSettingsView.cropBoxView)
-    cropSettingsView.cropBoxView.selectedRect = selectedRect
-    cropSettingsView.cropBoxView.actualSize = origVideoSize
-    cropSettingsView.cropBoxView.resized(with: newVideoViewFrame)
-    cropSettingsView.cropBoxView.isHidden = true
-    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.cropBoxView])
+    window.contentView!.addSubview(controlView.cropBoxView)
+    controlView.cropBoxView.selectedRect = selectedRect
+    controlView.cropBoxView.actualSize = origVideoSize
+    controlView.cropBoxView.resized(with: newVideoViewFrame)
+    controlView.cropBoxView.isHidden = true
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": controlView.cropBoxView])
+
+    self.cropSettingsView = controlView
 
     // show crop settings view
     NSAnimationContext.runAnimationGroup({ (context) in
@@ -1541,19 +1558,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         videoViewConstraints[attr]!.animator().constant = newConstants[attr]!
       }
     }) {
-      self.cropSettingsView.cropBoxView.isHidden = false
+      self.cropSettingsView?.cropBoxView.isHidden = false
       self.videoView.layer?.shadowColor = .black
       self.videoView.layer?.shadowOpacity = 1
       self.videoView.layer?.shadowOffset = .zero
       self.videoView.layer?.shadowRadius = 3
     }
-
   }
 
   func exitInteractiveMode(_ then: @escaping () -> Void) {
     player.togglePause(false)
     isInInteractiveMode = false
-    cropSettingsView.cropBoxView.isHidden = true
+    cropSettingsView?.cropBoxView.isHidden = true
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = CropAnimationDuration
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
@@ -1562,7 +1578,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         videoViewConstraints[attr]!.animator().constant = 0
       }
     }) {
-      self.cropSettingsView.cropBoxView.removeFromSuperview()
+      self.cropSettingsView?.cropBoxView.removeFromSuperview()
       self.sideBarStatus = .hidden
       self.bottomView.subviews.removeAll()
       self.bottomView.isHidden = true

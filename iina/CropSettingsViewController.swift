@@ -8,28 +8,10 @@
 
 import Cocoa
 
-class CropSettingsViewController: NSViewController {
-
-  weak var mainWindow: MainWindowController!
-
-  lazy var cropBoxView: CropBoxView = {
-    let view = CropBoxView()
-    view.settingsViewController = self
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
+class CropSettingsViewController: CropBoxViewController {
 
   @IBOutlet weak var cropRectLabel: NSTextField!
   @IBOutlet weak var predefinedAspectSegment: NSSegmentedControl!
-
-  private var cropx: Int = 0
-  private var cropy: Int = 0  // in flipped coord
-  private var cropw: Int = 0
-  private var croph: Int = 0
-
-  var readableCropString: String {
-    return "(\(cropx), \(cropy)) (\(cropw)\u{d7}\(croph))"
-  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,13 +21,10 @@ class CropSettingsViewController: NSViewController {
     predefinedAspectSegment.selectedSegment = -1
   }
 
-  func selectedRectUpdated() {
-    guard mainWindow.isInInteractiveMode else { return }
-    let rect = cropBoxView.selectedRect
-    updateCropValues(from: rect)
+  override func selectedRectUpdated() {
+    super.selectedRectUpdated()
     cropRectLabel.stringValue = readableCropString
   }
-
 
   @IBAction func doneBtnAction(_ sender: AnyObject) {
     let playerCore = mainWindow.player
@@ -88,14 +67,6 @@ class CropSettingsViewController: NSViewController {
                              croppedSize.height)
 
     cropBoxView.setSelectedRect(to: cropped)
-  }
-
-
-  private func updateCropValues(from rect: NSRect) {
-    cropx = Int(rect.x)
-    cropy = Int(CGFloat(mainWindow.player.info.videoHeight!) - rect.height - rect.y)
-    cropw = Int(rect.width)
-    croph = Int(rect.height)
   }
 
 }

@@ -72,6 +72,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var mirror: NSMenuItem!
   @IBOutlet weak var flip: NSMenuItem!
   @IBOutlet weak var deinterlace: NSMenuItem!
+  @IBOutlet weak var delogo: NSMenuItem!
   @IBOutlet weak var videoFilters: NSMenuItem!
   //Audio
   @IBOutlet weak var audioMenu: NSMenu!
@@ -219,6 +220,9 @@ class MenuController: NSObject, NSMenuDelegate {
     // -- deinterlace
     deinterlace.action = #selector(MainMenuActionHandler.menuToggleDeinterlace(_:))
 
+    // -- delogo
+    delogo.action = #selector(MainWindowController.menuSetDelogo(_:))
+
     // -- filter
     videoFilters.action = #selector(AppDelegate.showVideoFilterWindow(_:))
 
@@ -354,10 +358,12 @@ class MenuController: NSObject, NSMenuDelegate {
     let isInFullScreen = PlayerCore.active.mainWindow.isInFullScreen
     let isInPIP = PlayerCore.active.mainWindow.pipStatus == .inPIP
     let isOntop = PlayerCore.active.isInMiniPlayer ? PlayerCore.active.miniPlayer.isOntop : PlayerCore.active.mainWindow.isOntop
+    let isDelogo = PlayerCore.active.info.delogoFiter != nil
     alwaysOnTop.state = isOntop ? NSOnState : NSOffState
     deinterlace.state = PlayerCore.active.info.deinterlace ? NSOnState : NSOffState
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
+    delogo.state = isDelogo ? NSOnState : NSOffState
   }
 
   private func updateAudioMenu() {

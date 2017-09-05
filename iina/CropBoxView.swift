@@ -28,8 +28,10 @@ class CropBoxView: NSView {
     }
   }
 
-  private var isDragging: Bool = false
+  private var isDragging = false
   private var dragSide: DragSide = .top
+  private var isFreeSelecting = false
+  private var lastMousePos: NSPoint?
 
   private enum DragSide {
     case top, bottom, left, right
@@ -40,8 +42,6 @@ class CropBoxView: NSView {
   private var rectBottom: NSRect!
   private var rectLeft: NSRect!
   private var rectRight: NSRect!
-
-  private var lastMousePos: NSPoint?
 
   // MARK: - Rect size settings
 
@@ -116,16 +116,21 @@ class CropBoxView: NSView {
     } else if rectRight.contains(mousePos) {
       isDragging = true
       dragSide = .right
+    } else if videoRect.contains(mousePos) {
+      // free select
+      isFreeSelecting = true
+      window?.invalidateCursorRects(for: self)
     } else {
       super.mouseDown(with: event)
     }
   }
 
   override func mouseDragged(with event: NSEvent) {
-    if isDragging {
-      let mousePos = convert(event.locationInWindow, from: nil).constrain(in: videoRect)
-      var newBoxRect = boxRect
+    let mousePos = convert(event.locationInWindow, from: nil).constrain(in: videoRect)
 
+    if isDragging {
+      // resizing selected box
+      var newBoxRect = boxRect
       switch dragSide {
       case .top:
         let diff = mousePos.y - lastMousePos!.y
@@ -150,6 +155,11 @@ class CropBoxView: NSView {
       needsDisplay = true
       updateCursorRects()
       lastMousePos = mousePos
+    } else if isFreeSelecting {
+      // free selecting
+      let newBoxRect = NSRect(vertexPoint: lastMousePos!, and: mousePos)
+      boxRectchanged(to: newBoxRect)
+      needsDisplay = true
     } else {
       super.mouseDragged(with: event)
     }
@@ -158,6 +168,9 @@ class CropBoxView: NSView {
   override func mouseUp(with event: NSEvent) {
     if isDragging {
       isDragging = false
+    } else if isFreeSelecting {
+      isFreeSelecting = false
+      updateCursorRects()
     } else {
       super.mouseUp(with: event)
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="17A315i" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -189,7 +189,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ljl-w6-gIf">
-                                                                    <rect key="frame" x="18" y="497" width="256" height="24"/>
+                                                                    <rect key="frame" x="18" y="497" width="277" height="24"/>
                                                                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="cMu-YF-riv">
                                                                         <font key="font" metaFont="system"/>
                                                                         <segments>
@@ -213,9 +213,9 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAI-y0-tcy">
-                                                                    <rect key="frame" x="282" y="499" width="58" height="22"/>
+                                                                    <rect key="frame" x="300" y="499" width="40" height="22"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="58" id="6bj-r1-RIj"/>
+                                                                        <constraint firstAttribute="width" constant="40" id="6bj-r1-RIj"/>
                                                                     </constraints>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="jR7-Mt-N0T" customClass="RoundedTextFieldCell" customModule="IINA" customModuleProvider="target">
                                                                         <font key="font" metaFont="system"/>
@@ -235,7 +235,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="720" translatesAutoresizingMaskIntoConstraints="NO" id="ItN-JT-puN">
-                                                                    <rect key="frame" x="260" y="424" width="86" height="32"/>
+                                                                    <rect key="frame" x="266" y="424" width="80" height="32"/>
                                                                     <buttonCell key="cell" type="push" title="Custom..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vFD-HU-RVz">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -245,7 +245,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kUi-hW-BR6">
-                                                                    <rect key="frame" x="18" y="429" width="242" height="24"/>
+                                                                    <rect key="frame" x="18" y="429" width="248" height="24"/>
                                                                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="iuN-rN-jT7">
                                                                         <font key="font" metaFont="system"/>
                                                                         <segments>
@@ -269,7 +269,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bza-SA-tXE">
-                                                                    <rect key="frame" x="18" y="361" width="182" height="24"/>
+                                                                    <rect key="frame" x="18" y="361" width="199" height="24"/>
                                                                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="z1L-0N-dfK">
                                                                         <font key="font" metaFont="system"/>
                                                                         <segments>
@@ -605,7 +605,7 @@
                                                                 <constraint firstItem="0Ww-YT-a8e" firstAttribute="leading" secondItem="8Uj-eX-hSm" secondAttribute="trailing" constant="1" id="NiE-Dm-ChB"/>
                                                                 <constraint firstAttribute="trailing" secondItem="RVg-iv-SLo" secondAttribute="trailing" constant="20" id="Nod-gk-WVf"/>
                                                                 <constraint firstItem="Ng5-FC-tts" firstAttribute="leading" secondItem="5v4-Te-950" secondAttribute="leading" constant="19" id="Omp-b4-73b"/>
-                                                                <constraint firstItem="XAI-y0-tcy" firstAttribute="baseline" secondItem="Ljl-w6-gIf" secondAttribute="baseline" id="Otj-Oc-O3m"/>
+                                                                <constraint firstItem="XAI-y0-tcy" firstAttribute="baseline" secondItem="Ljl-w6-gIf" secondAttribute="baseline" constant="2" id="Otj-Oc-O3m"/>
                                                                 <constraint firstItem="C7W-xd-6OE" firstAttribute="leading" secondItem="sIs-a1-rGR" secondAttribute="trailing" constant="5" id="OwJ-38-Pvv"/>
                                                                 <constraint firstItem="7vv-En-VYY" firstAttribute="leading" secondItem="5v4-Te-950" secondAttribute="leading" constant="19" id="Pdo-MY-Ipv"/>
                                                                 <constraint firstItem="wBg-Dk-cUX" firstAttribute="top" secondItem="UWh-M9-5Nw" secondAttribute="bottom" constant="1" id="Q6G-Fz-CGT"/>
@@ -622,7 +622,7 @@
                                                                 <constraint firstItem="SL7-DZ-5ff" firstAttribute="centerY" secondItem="kYz-ZC-58W" secondAttribute="centerY" constant="-1" id="V50-WA-XT5"/>
                                                                 <constraint firstItem="kYz-ZC-58W" firstAttribute="leading" secondItem="5v4-Te-950" secondAttribute="leading" constant="20" id="WaX-of-cel"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Cs3-ib-x4Y" secondAttribute="trailing" constant="20" id="Ws1-7P-jpF"/>
-                                                                <constraint firstItem="ItN-JT-puN" firstAttribute="baseline" secondItem="kUi-hW-BR6" secondAttribute="baseline" id="XEr-4T-4bB"/>
+                                                                <constraint firstItem="ItN-JT-puN" firstAttribute="baseline" secondItem="kUi-hW-BR6" secondAttribute="baseline" constant="2" id="XEr-4T-4bB"/>
                                                                 <constraint firstItem="N1k-37-4OP" firstAttribute="centerY" secondItem="qeO-tk-I0D" secondAttribute="centerY" id="XJ5-f1-XrE"/>
                                                                 <constraint firstItem="d4r-sL-0Vo" firstAttribute="leading" secondItem="5v4-Te-950" secondAttribute="leading" constant="19" id="YXU-bO-7fz"/>
                                                                 <constraint firstItem="MuS-g5-hvY" firstAttribute="top" secondItem="UWh-M9-5Nw" secondAttribute="bottom" constant="40" id="Ze7-u3-xCF"/>
@@ -1384,7 +1384,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zQu-u6-goi">
-                                                                    <rect key="frame" x="18" y="119" width="144" height="24"/>
+                                                                    <rect key="frame" x="18" y="119" width="149" height="24"/>
                                                                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="AB5-UZ-euc">
                                                                         <font key="font" metaFont="system"/>
                                                                         <segments>
@@ -1399,7 +1399,7 @@
                                                                     </connections>
                                                                 </segmentedControl>
                                                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YIE-pv-gCK">
-                                                                    <rect key="frame" x="166" y="119" width="121" height="24"/>
+                                                                    <rect key="frame" x="171" y="119" width="126" height="24"/>
                                                                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="Rbb-wh-cLc">
                                                                         <font key="font" metaFont="system"/>
                                                                         <segments>

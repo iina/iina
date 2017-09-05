@@ -1144,6 +1144,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isMouseInSlider = false
 
     isInFullScreen = true
+    
+    // Exit PIP if necessary
+    if pipStatus == .inPIP,
+      #available(macOS 10.12, *) {
+      exitPIP()
+    }
   }
 
   func windowDidEnterFullScreen(_ notification: Notification) {
@@ -2275,6 +2281,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 extension MainWindowController: PIPViewControllerDelegate {
 
   func enterPIP() {
+    // Exit fullscreen if necessary
+    if isInFullScreen {
+      toggleWindowFullScreen()
+    }
+    
     pipStatus = .inPIP
     
     pipVideo = NSViewController()

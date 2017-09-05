@@ -257,7 +257,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     .pinchAction,
     .showRemainingTime,
     .blackOutMonitor,
-    .alwaysFloatOnTop
+    .alwaysFloatOnTop,
+    .useLegacyFullScreen
   ]
 
   // MARK: - Outlets
@@ -635,6 +636,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           setWindowFloatingOnTop(newValue)
         }
       }
+
+    case PK.useLegacyFullScreen.rawValue:
+      resetCollectionBehavior()
 
     default:
       return

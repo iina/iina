@@ -1162,7 +1162,7 @@ class PlayerCore: NSObject {
 
   var originalVideoSize: (Int, Int) {
     get {
-      if let w = info.displayWidth, let h = info.displayHeight {
+      if let w = info.videoWidth, let h = info.videoHeight {
         let netRotate = mpv.getInt(MPVProperty.videoParamsRotate) - mpv.getInt(MPVOption.Video.videoRotate)
         let rotate = netRotate >= 0 ? netRotate : netRotate + 360
         if rotate == 90 || rotate == 270 {

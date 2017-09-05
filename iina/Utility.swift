@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 8/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -14,10 +14,11 @@ class Utility {
   static let tabTitleActiveFontAttributes = FontAttributes(font: .systemBold, size: .system, align: .center).value
 
   static let supportedFileExt: [MPVTrack.TrackType: [String]] = [
-    .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt"],
-    .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "m4a", "ac3", "opus", "wav", "wv"],
+    .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "mts", "m2ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt", "dv", "mpg", "mpeg"],
+    .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "oga", "mogg", "m4a", "ac3", "opus", "wav", "wv", "aiff", "ape", "tta", "tak"],
     .sub: ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc"]
   ]
+  static let playableFileExt = supportedFileExt[.video]! + supportedFileExt[.audio]!
 
   // MARK: - Logs, alerts
 
@@ -300,6 +301,12 @@ class Utility {
     }
   }
 
+  static private let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
+
+  static func mediaType(forExtension ext: String) -> MPVTrack.TrackType? {
+    return allTypes.first { supportedFileExt[$0]!.contains(ext.lowercased()) }
+  }
+
   static func getFilePath(Configs userConfigs: [String: Any]!, forConfig conf: String, showAlert: Bool = true) -> String? {
     
     // if is default config
@@ -372,6 +379,13 @@ class Utility {
 
   static func toDisplaySubScale(fromRealSubScale realScale: Double) -> Double {
     return realScale >= 1 ? realScale : -1 / realScale
+  }
+
+  static func quickConstraints(_ constrants: [String], _ views: [String: NSView]) {
+    constrants.forEach { c in
+      let cc = NSLayoutConstraint.constraints(withVisualFormat: c, options: [], metrics: nil, views: views)
+      NSLayoutConstraint.activate(cc)
+    }
   }
 
   static func mpvKeyCode(from event: NSEvent) -> String {

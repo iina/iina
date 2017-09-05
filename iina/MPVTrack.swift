@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 31/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -71,9 +71,9 @@ class MPVTrack: NSObject {
     }
   }
 
-  // unimplemented
+  var isAlbumart: Bool = false
 
-  var isAlbumart: Bool?
+  // unimplemented
 
   var ffIndex: Int?
   var decoderDesc: String?

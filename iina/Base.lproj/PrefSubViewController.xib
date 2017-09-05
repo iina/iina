@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13122.17" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13122.19" systemVersion="17A291m" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.19"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,7 +11,6 @@
             <connections>
                 <outlet property="autoSubSearchLabel1" destination="L3O-GE-CEY" id="hwz-cv-lAP"/>
                 <outlet property="autoSubSearchLabel2" destination="YTb-Cc-obc" id="X8D-qd-F1I"/>
-                <outlet property="changeSubAutoSearch" destination="Q4v-dL-GZD" id="NHv-ys-obt"/>
                 <outlet property="defaultEncodingList" destination="ddI-Cm-dKP" id="KBo-TN-S0M"/>
                 <outlet property="loginIndicator" destination="Rt1-vy-xTy" id="pKn-JU-EIa"/>
                 <outlet property="scrollView" destination="alK-5O-zTG" id="bBw-gU-5ei"/>
@@ -610,11 +609,11 @@
                                         </textFieldCell>
                                     </textField>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="ATW-R6-yfQ">
-                                        <rect key="frame" x="118" y="264" width="368" height="18"/>
+                                        <rect key="frame" x="118" y="217" width="356" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="IMu-Go-Gmi"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="check" title="Display subtitles in letter box in full screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9kA-0S-Nl8">
+                                        <buttonCell key="cell" type="check" title="Display subtitles in letterboxes while in full screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9kA-0S-Nl8">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -781,7 +780,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="MGo-15-stG"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Opensubtitles account:" id="CKG-r9-NoN">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="OpenSubtitles account:" id="CKG-r9-NoN">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

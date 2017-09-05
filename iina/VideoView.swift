@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 8/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -11,7 +11,7 @@ import Cocoa
 
 class VideoView: NSView {
 
-  weak var playerCore: PlayerCore!
+  weak var player: PlayerCore!
 
   lazy var videoLayer: ViewLayer = {
     let layer = ViewLayer()
@@ -94,12 +94,7 @@ class VideoView: NSView {
   // MARK: Drag and drop
   
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-    if let _ = sender.draggingSource() { return [] }
-    return .copy
-  }
-    
-  override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
-    if let _ = sender.draggingSource() { return [] }
+    if sender.draggingSource() as? NSTableView === player.mainWindow.playlistView { return [] }
     return .copy
   }
   
@@ -111,47 +106,47 @@ class VideoView: NSView {
       
       var videoFiles: [String] = []
       var subtitleFiles: [String] = []
-      fileNames.forEach({ (path) in
+      fileNames.forEach { (path) in
         let ext = (path as NSString).pathExtension.lowercased()
         if Utility.supportedFileExt[.sub]!.contains(ext) {
           subtitleFiles.append(path)
-        } else {
+        } else if Utility.playableFileExt.contains(ext) {
           videoFiles.append(path)
         }
-      })
+      }
       
       if videoFiles.count == 0 {
         if subtitleFiles.count > 0 {
           subtitleFiles.forEach { (subtitle) in
-            playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitle))
+            player.loadExternalSubFile(URL(fileURLWithPath: subtitle))
           }
         } else {
           return false
         }
       } else if videoFiles.count == 1 {
-        playerCore.openURL(URL(fileURLWithPath: videoFiles[0]), isNetworkResource: false)
+        player.openURL(URL(fileURLWithPath: videoFiles[0]), isNetworkResource: false)
         subtitleFiles.forEach { (subtitle) in
-          playerCore.loadExternalSubFile(URL(fileURLWithPath: subtitle))
+          player.loadExternalSubFile(URL(fileURLWithPath: subtitle))
         }
       } else {
         for path in videoFiles {
-          playerCore.addToPlaylist(path)
+          player.addToPlaylist(path)
         }
-        playerCore.sendOSD(.addToPlaylist(videoFiles.count))
+        player.sendOSD(.addToPlaylist(videoFiles.count))
       }
       NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
       return true
     } else if types.contains(NSURLPboardType) {
       guard let url = pb.propertyList(forType: NSURLPboardType) as? [String] else { return false }
 
-      playerCore.openURLString(url[0])
+      player.openURLString(url[0])
       return true
     } else if types.contains(NSPasteboardTypeString) {
       guard let droppedString = pb.pasteboardItems![0].string(forType: "public.utf8-plain-text") else {
         return false
       }
       if Regex.urlDetect.matches(droppedString) {
-        playerCore.openURLString(droppedString)
+        player.openURLString(droppedString)
         return true
       } else {
         Utility.showAlert("unsupported_url")

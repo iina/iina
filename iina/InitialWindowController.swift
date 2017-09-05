@@ -14,7 +14,7 @@ class InitialWindowController: NSWindowController {
     return "InitialWindowController"
   }
 
-  weak var playerCore: PlayerCore!
+  weak var player: PlayerCore!
 
 
   @IBOutlet weak var recentFilesTableView: NSTableView!
@@ -26,7 +26,7 @@ class InitialWindowController: NSWindowController {
   lazy var recentDocuments: [URL] = NSDocumentController.shared().recentDocumentURLs
 
   init(playerCore: PlayerCore) {
-    self.playerCore = playerCore
+    self.player = playerCore
     super.init(window: nil)
   }
 
@@ -77,7 +77,7 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   func tableViewSelectionDidChange(_ notification: Notification) {
     guard recentFilesTableView.selectedRow >= 0 else { return }
-    playerCore.openURL(recentDocuments[recentFilesTableView.selectedRow], isNetworkResource: false)
+    player.openURL(recentDocuments[recentFilesTableView.selectedRow])
     recentFilesTableView.deselectAll(nil)
   }
 
@@ -87,7 +87,7 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 class InitialWindowContentView: NSView {
 
   var playerCore: PlayerCore {
-    return (window!.windowController as! InitialWindowController).playerCore
+    return (window!.windowController as! InitialWindowController).player
   }
 
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {

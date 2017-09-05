@@ -48,15 +48,21 @@ class FileInfo: Hashable {
   }
 
   private func getNameInSeries() {
-    // check word bound
-    guard let firstChar = suffix.unicodeScalars.first,
-      let firstCharGroup = charSetGroups.first(where: { $0.contains(firstChar) }) else { return }
-    var name: String = ""
-    for c in suffix.unicodeScalars {
-      guard firstCharGroup.contains(c) else { break }
-      name.append(String(c))
+    // e.g. "abc_" "ch01_xxx" -> "ch01"
+    var firstDigit = false
+    let name = suffix.unicodeScalars.prefix {
+      if CharacterSet.decimalDigits.contains($0) {
+        if !firstDigit {
+          firstDigit = true
+        }
+      } else {
+        if firstDigit {
+          return false
+        }
+      }
+      return true
     }
-    self.nameInSeries = name
+    self.nameInSeries = String(name)
   }
 
   var hashValue: Int {

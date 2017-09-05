@@ -3,19 +3,27 @@
 //  iina
 //
 //  Created by lhc on 21/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Foundation
 
 class PlaybackInfo {
 
-  var isIdle: Bool = true
+  var isIdle: Bool = true {
+    didSet {
+      PlayerCore.checkStatusForSleep()
+    }
+  }
   var fileLoading: Bool = false
 
   var currentURL: URL? {
     didSet {
-      mpvMd5 = Utility.mpvWatchLaterMd5(currentURL!.path)
+      if let url = currentURL {
+        mpvMd5 = Utility.mpvWatchLaterMd5(url.path)
+      } else {
+        mpvMd5 = nil
+      }
     }
   }
   var currentFolder: URL?
@@ -41,7 +49,11 @@ class PlaybackInfo {
   var videoDuration: VideoTime?
 
   var isSeeking: Bool = false
-  var isPaused: Bool = false
+  var isPaused: Bool = false {
+    didSet {
+      PlayerCore.checkStatusForSleep()
+    }
+  }
 
   var justStartedFile: Bool = false
   var justOpenedFile: Bool = false
@@ -132,7 +144,7 @@ class PlaybackInfo {
       list = subTracks
     }
     if let id = id {
-      return list.filter { $0.id == id }.at(0)
+      return list.first { $0.id == id }
     } else {
       return nil
     }

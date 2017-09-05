@@ -54,7 +54,7 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
 
   @IBAction func chooseScreenshotPathAction(_ sender: AnyObject) {
     Utility.quickOpenPanel(title: "Choose screenshot save path", isDir: true) { url in
-      UserDefaults.standard.set(url.path, forKey: Preference.Key.screenshotFolder)
+      Preference.set(url.path, for: .screenshotFolder)
       UserDefaults.standard.synchronize()
     }
   }

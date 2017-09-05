@@ -49,7 +49,7 @@ class PrefSubViewController: NSViewController {
 
     scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 460))
     
-    let defaultEncoding = UserDefaults.standard.string(forKey: Preference.Key.defaultEncoding)
+    let defaultEncoding = Preference.string(for: .defaultEncoding)
     for encoding in AppData.encodings {
       defaultEncodingList.addItem(withTitle: encoding.title)
       let lastItem = defaultEncodingList.lastItem!
@@ -69,13 +69,13 @@ class PrefSubViewController: NSViewController {
 
   @IBAction func chooseSubFontAction(_ sender: AnyObject) {
     Utility.quickFontPickerWindow { font in
-      UserDefaults.standard.set(font ?? "sans-serif", forKey: Preference.Key.subTextFont)
+      Preference.set(font ?? "sans-serif", for: .subTextFont)
       UserDefaults.standard.synchronize()
     }
   }
 
   @IBAction func openSubLoginAction(_ sender: AnyObject) {
-    let currUsername = UserDefaults.standard.string(forKey: Preference.Key.openSubUsername) ?? ""
+    let currUsername = Preference.string(for: .openSubUsername) ?? ""
     if currUsername.isEmpty {
       // if current username is empty, login
       let _ = Utility.quickUsernamePasswordPanel("opensub.login") {
@@ -87,7 +87,7 @@ class PrefSubViewController: NSViewController {
         }.then { () -> Void in
           let status = OpenSubSupport.savePassword(username: username, passwd: password)
           if status == errSecSuccess {
-            UserDefaults.standard.set(username, forKey: Preference.Key.openSubUsername)
+            Preference.set(username, for: .openSubUsername)
           } else {
             Utility.showAlert("sub.cannot_save_passwd", arguments: [SecCopyErrorMessageString(status, nil) as! CVarArg])
           }
@@ -109,18 +109,18 @@ class PrefSubViewController: NSViewController {
       }
     } else {
       // else, logout
-      UserDefaults.standard.set("", forKey: Preference.Key.openSubUsername)
+      Preference.set("", for: .openSubUsername)
     }
   }
   
   @IBAction func changeDefaultEncoding(_ sender: NSPopUpButton) {
-    UserDefaults.standard.set(sender.selectedItem?.representedObject, forKey: Preference.Key.defaultEncoding)
+    Preference.set(sender.selectedItem?.representedObject!, for: .defaultEncoding)
     PlayerCore.active.setSubEncoding((sender.selectedItem?.representedObject as? String) ?? "auto")
     PlayerCore.active.reloadAllSubs()
   }
   
   @IBAction func changeSubAutoSearch(_ sender: Any) {
-    let labelColor: NSColor = UserDefaults.standard.bool(forKey: Preference.Key.autoSearchOnlineSub) ? .labelColor : .disabledControlTextColor
+    let labelColor: NSColor = Preference.bool(for: .autoSearchOnlineSub) ? .labelColor : .disabledControlTextColor
     autoSubSearchLabel1.textColor = labelColor
     autoSubSearchLabel2.textColor = labelColor
   }

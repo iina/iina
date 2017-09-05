@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 8/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -91,8 +91,10 @@ struct Constants {
     static let fsChanged = Notification.Name("IINAFullscreenChanged")
     static let ontopChanged = Notification.Name("IINAOnTopChanged")
     static let keyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
+    static let windowScaleChanged = Notification.Name("IINAWindowScaleChanged")
     static let fileLoaded = Notification.Name("IINAFileLoaded")
     static let historyUpdated = Notification.Name("IINAHistoryUpdated")
+    static let legacyFullScreen = Notification.Name("IINALegacyFullScreen")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)

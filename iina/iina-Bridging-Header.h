@@ -25,21 +25,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) NSWindow *replacementWindow;
 @property (nonatomic) NSRect replacementRect;
 @property (nonatomic) bool playing;
-@property (nonatomic) bool userCanResize;
 @property (nonatomic) NSSize aspectRatio;
 
-- (void)presentViewControllerAsPictureInPicture:(NSViewController * _Nonnull)viewController;
+- (void)presentViewControllerAsPictureInPicture:(NSViewController *)viewController;
 
 @end
 
 @protocol PIPViewControllerDelegate <NSObject>
 
 @optional
-- (BOOL)pipShouldClose:(PIPViewController * _Nonnull)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
-- (void)pipDidClose:(PIPViewController * _Nonnull)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
-- (void)pipActionPlay:(PIPViewController * _Nonnull)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
-- (void)pipActionPause:(PIPViewController * _Nonnull)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
-- (void)pipActionStop:(PIPViewController * _Nonnull)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
+- (BOOL)pipShouldClose:(PIPViewController *)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
+- (void)pipDidClose:(PIPViewController *)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
+- (void)pipActionPlay:(PIPViewController *)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
+- (void)pipActionPause:(PIPViewController *)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
+- (void)pipActionStop:(PIPViewController *)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
 @end
 
 NS_ASSUME_NONNULL_END

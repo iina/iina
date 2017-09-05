@@ -129,6 +129,13 @@ extension NSSize {
     }
   }
 
+  func centeredRect(in rect: NSRect) -> NSRect {
+    return NSRect(x: (rect.width - width) / 2,
+                  y: (rect.height - height) / 2,
+                  width: width,
+                  height: height)
+  }
+
   func multiply(_ multiplier: CGFloat) -> NSSize {
     return NSSize(width: width * multiplier, height: height * multiplier)
   }

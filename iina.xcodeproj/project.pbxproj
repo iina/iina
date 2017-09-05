@@ -158,8 +158,8 @@
 		84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D58E1D794CE600D98A0E /* MPVFilter.swift */; };
 		84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D5901D796F9700D98A0E /* Aspect.swift */; };
 		84D0FB7E1F5E519300C6A6A7 /* FreeSelectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D0FB7C1F5E519300C6A6A7 /* FreeSelectingViewController.swift */; };
-		84D0FB7F1F5E519300C6A6A7 /* FreeSelectingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D0FB7D1F5E519300C6A6A7 /* FreeSelectingViewController.xib */; };
 		84D0FB811F5E5A4000C6A6A7 /* CropBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D0FB801F5E5A4000C6A6A7 /* CropBoxViewController.swift */; };
+		84D0FB821F5E6A3800C6A6A7 /* FreeSelectingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D0FB841F5E6A3800C6A6A7 /* FreeSelectingViewController.xib */; };
 		84D123B41ECAA405004E0D53 /* MainWindowTouchBarSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D123B31ECAA405004E0D53 /* MainWindowTouchBarSupport.swift */; };
 		84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */; };
 		84D377651D7370EE007F7396 /* ChapterTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377641D7370EE007F7396 /* ChapterTableCellView.swift */; };
@@ -724,8 +724,9 @@
 		84C8D58E1D794CE600D98A0E /* MPVFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVFilter.swift; sourceTree = "<group>"; };
 		84C8D5901D796F9700D98A0E /* Aspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aspect.swift; sourceTree = "<group>"; };
 		84D0FB7C1F5E519300C6A6A7 /* FreeSelectingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeSelectingViewController.swift; sourceTree = "<group>"; };
-		84D0FB7D1F5E519300C6A6A7 /* FreeSelectingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeSelectingViewController.xib; sourceTree = "<group>"; };
 		84D0FB801F5E5A4000C6A6A7 /* CropBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropBoxViewController.swift; sourceTree = "<group>"; };
+		84D0FB831F5E6A3800C6A6A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FreeSelectingViewController.xib; sourceTree = "<group>"; };
+		84D0FB861F5E6A3A00C6A6A7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FreeSelectingViewController.strings"; sourceTree = "<group>"; };
 		84D123B31ECAA405004E0D53 /* MainWindowTouchBarSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowTouchBarSupport.swift; sourceTree = "<group>"; };
 		84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MPVPlaylistItem.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84D377641D7370EE007F7396 /* ChapterTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChapterTableCellView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -1306,7 +1307,7 @@
 				8400D5D11E1AB306006785F5 /* CropSettingsViewController.xib */,
 				845040491E0B13230079C194 /* CropBoxView.swift */,
 				84D0FB7C1F5E519300C6A6A7 /* FreeSelectingViewController.swift */,
-				84D0FB7D1F5E519300C6A6A7 /* FreeSelectingViewController.xib */,
+				84D0FB841F5E6A3800C6A6A7 /* FreeSelectingViewController.xib */,
 			);
 			name = "Interactive Mode";
 			sourceTree = "<group>";
@@ -1532,7 +1533,7 @@
 				8400D5D81E1AB31B006785F5 /* AboutWindowController.xib in Resources */,
 				8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */,
 				8400D5F31E1AB348006785F5 /* PrefSubViewController.xib in Resources */,
-				84D0FB7F1F5E519300C6A6A7 /* FreeSelectingViewController.xib in Resources */,
+				84D0FB821F5E6A3800C6A6A7 /* FreeSelectingViewController.xib in Resources */,
 				8400D5E11E1AB32F006785F5 /* PrefUIViewController.xib in Resources */,
 				8483FB001EDFF325000F55D6 /* Credits.rtf in Resources */,
 				84F5D49A1E44E9A50060A838 /* KeyBinding.strings in Resources */,
@@ -2169,6 +2170,15 @@
 				649AD3291F11B06F00244738 /* es */,
 			);
 			name = Contribution.rtf;
+			sourceTree = "<group>";
+		};
+		84D0FB841F5E6A3800C6A6A7 /* FreeSelectingViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84D0FB831F5E6A3800C6A6A7 /* Base */,
+				84D0FB861F5E6A3A00C6A6A7 /* zh-Hans */,
+			);
+			name = FreeSelectingViewController.xib;
 			sourceTree = "<group>";
 		};
 		84EC12881F504D2500137C1E /* FilterPresets.strings */ = {

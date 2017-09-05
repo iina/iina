@@ -142,9 +142,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Views that will show/hide when cursor moving in/out the window. */
   var fadeableViews: [NSView] = []
 
-  /** Cache current crop applied to video. */
-  var currentCrop: NSRect = NSRect()
-
   // Left and right arrow buttons
 
   /** The maximum pressure recorded when clicking on the arrow buttons. */
@@ -302,7 +299,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var settingsButton: NSButton!
   @IBOutlet weak var playlistButton: NSButton!
   @IBOutlet weak var sideBarView: NSVisualEffectView!
-  @IBOutlet weak var bottomView: NSVisualEffectView!
+  @IBOutlet weak var bottomView: NSView!
   @IBOutlet weak var bufferIndicatorView: NSVisualEffectView!
   @IBOutlet weak var bufferProgressLabel: NSTextField!
   @IBOutlet weak var bufferSpin: NSProgressIndicator!
@@ -339,6 +336,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   weak var touchBarPlaySlider: TouchBarPlaySlider?
   weak var touchBarPlayPauseBtn: NSButton?
   weak var touchBarCurrentPosLabel: DurationDisplayTextField?
+
+  var videoViewConstraints: [NSLayoutAttribute: NSLayoutConstraint] = [:]
 
   // MARK: - PIP
 
@@ -396,7 +395,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // w.isMovableByWindowBackground  = true
 
     // set background color to black
-    w.backgroundColor = NSColor.black
+    w.backgroundColor = NSColor(calibratedWhite: 0.1, alpha: 1)
 
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay
 
@@ -427,15 +426,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let cv = w.contentView else { return }
 
     // video view
-    // note that don't use auto resize for it (handle in windowDidResize)
     cv.autoresizesSubviews = false
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
+    videoView.translatesAutoresizingMaskIntoConstraints = false
+    ([.top, .bottom, .left, .right] as [NSLayoutAttribute]).forEach { attr in
+      videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
+      videoViewConstraints[attr]!.isActive = true
+    }
 
     w.setIsVisible(true)
-
-    videoView.translatesAutoresizingMaskIntoConstraints = true
-    //quickConstrants(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": videoView])
-
     videoView.videoLayer.display()
 
     // gesture recognizer
@@ -1229,21 +1228,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       } else {
         videoView.frame = NSRect(x: 0, y: 0, width: w.frame.width, height: w.frame.height)
       }
-    } else if (pipStatus == .notInPIP) {
-      let frame = NSRect(x: 0, y: 0, width: w.contentView!.frame.width, height: w.contentView!.frame.height)
-
-      if isInInteractiveMode {
-        let origWidth = CGFloat(player.info.videoWidth!)
-        let origHeight = CGFloat(player.info.videoHeight!)
-        let videoRect: NSRect, interactiveModeFrame: NSRect
-        (videoRect, interactiveModeFrame) = videoViewSizeInInteractiveMode(frame, currentCrop: currentCrop, originalSize: NSMakeSize(origWidth, origHeight))
-        cropSettingsView.cropBoxView.resized(with: videoRect)
-        videoView.frame = interactiveModeFrame
-      } else {
-        videoView.frame = frame
-      }
-
     }
+
+    // interactive mode
+    if (isInInteractiveMode) {
+      cropSettingsView.cropBoxView.resized(with: videoView.frame)
+    }
+
     // update control bar position
     if oscPosition == .floating {
       let cph = Preference.float(for: .controlBarPositionHorizontal)
@@ -1501,7 +1492,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     self.fadeableViews.append(titleBarView)
   }
 
-  func enterInteractiveMode() {
+  func enterInteractiveMode(selectWholeVideoByDefault: Bool) {
+    // prerequisites
+    guard let window = window else { return }
+
+    let (ow, oh) = player.originalVideoSize
+    guard ow != 0 && oh != 0 else {
+      Utility.showAlert("no_video_track")
+      return
+    }
+
     player.togglePause(true)
     isInInteractiveMode = true
     hideUI()
@@ -1509,49 +1509,26 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     bottomView.addSubview(cropSettingsView.view)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.view])
 
-    // get original frame
-    let origWidth = CGFloat(player.info.videoWidth!)
-    let origHeight = CGFloat(player.info.videoHeight!)
-    let origSize = NSMakeSize(origWidth, origHeight)
-    let currWidth = CGFloat(player.info.displayWidth!)
-    let currHeight = CGFloat(player.info.displayHeight!)
-    let winFrame = window!.frame
-    let videoViewFrame: NSRect
-    let videoRect: NSRect
+    let origVideoSize = NSSize(width: ow, height: oh)
+    // the max region that the video view can occupy
+    let newVideoViewBounds = NSRect(x: 20, y: 20 + 60, width: window.frame.width - 40, height: window.frame.height - 104)
+    let newVideoViewSize = origVideoSize.satisfyMaxSizeWithSameAspectRatio(newVideoViewBounds.size)
+    let newVideoViewFrame = newVideoViewBounds.centeredResize(to: newVideoViewSize)
 
-    // get current cropped region
-    if let cropFilter = player.info.cropFilter {
-      let params = cropFilter.cropParams(videoSize: origSize)
-      let x = CGFloat(params["x"]!)
-      let y = CGFloat(params["y"]!)
-      let w = CGFloat(params["w"]!)
-      let h = CGFloat(params["h"]!)
-      // coord of cropBoxView is flipped
-      currentCrop = NSMakeRect(x, origHeight - h - y, w, h)
-    } else {
-      currentCrop = NSMakeRect(0, 0, origWidth, origHeight)
-    }
+    let newConstants: [NSLayoutAttribute: CGFloat] = [
+      .left: newVideoViewFrame.x,
+      .right: newVideoViewFrame.xMax - window.frame.width,
+      .bottom: -newVideoViewFrame.y,
+      .top: window.frame.height - newVideoViewFrame.yMax
+    ]
 
-    // if cropped, try get real window size
-    if origWidth != currWidth || origHeight != currHeight {
-      let scale = origWidth == currWidth ? winFrame.width / currWidth : winFrame.height / currHeight
-      let winFrameWithOrigVideoSize = NSRect(origin: winFrame.origin, size: NSMakeSize(scale * origWidth, scale * origHeight))
-
-      window!.aspectRatio = winFrameWithOrigVideoSize.size
-      if #available(macOS 10.12, *) {
-        pip.aspectRatio = winFrameWithOrigVideoSize.size
-      }
-      window!.setFrame(winFrameWithOrigVideoSize, display: true, animate: false)
-      (videoRect, videoViewFrame) = videoViewSizeInInteractiveMode(winFrameWithOrigVideoSize, currentCrop: currentCrop, originalSize: origSize)
-    } else {
-      (videoRect, videoViewFrame) = videoViewSizeInInteractiveMode(videoView.frame, currentCrop: currentCrop, originalSize: origSize)
-    }
+    let selectedRect: NSRect = selectWholeVideoByDefault ? NSRect(origin: .zero, size: origVideoSize) : .zero
 
     // add crop setting view
-    window!.contentView!.addSubview(cropSettingsView.cropBoxView)
-    cropSettingsView.cropBoxView.selectedRect = currentCrop
-    cropSettingsView.cropBoxView.actualSize = origSize
-    cropSettingsView.cropBoxView.resized(with: videoRect)
+    window.contentView!.addSubview(cropSettingsView.cropBoxView)
+    cropSettingsView.cropBoxView.selectedRect = selectedRect
+    cropSettingsView.cropBoxView.actualSize = origVideoSize
+    cropSettingsView.cropBoxView.resized(with: newVideoViewFrame)
     cropSettingsView.cropBoxView.isHidden = true
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": cropSettingsView.cropBoxView])
 
@@ -1560,9 +1537,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       context.duration = CropAnimationDuration
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       bottomBarBottomConstraint.animator().constant = 0
-      videoView.animator().frame = videoViewFrame
+      ([.top, .bottom, .left, .right] as [NSLayoutAttribute]).forEach { attr in
+        videoViewConstraints[attr]!.animator().constant = newConstants[attr]!
+      }
     }) {
       self.cropSettingsView.cropBoxView.isHidden = false
+      self.videoView.layer?.shadowColor = .black
+      self.videoView.layer?.shadowOpacity = 1
+      self.videoView.layer?.shadowOffset = .zero
+      self.videoView.layer?.shadowRadius = 3
     }
 
   }
@@ -1575,7 +1558,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       context.duration = CropAnimationDuration
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
       bottomBarBottomConstraint.animator().constant = -InteractiveModeBottomViewHeight
-      videoView.animator().frame = NSMakeRect(0, 0, window!.contentView!.frame.width, window!.contentView!.frame.height)
+      ([.top, .bottom, .left, .right] as [NSLayoutAttribute]).forEach { attr in
+        videoViewConstraints[attr]!.animator().constant = 0
+      }
     }) {
       self.cropSettingsView.cropBoxView.removeFromSuperview()
       self.sideBarStatus = .hidden
@@ -2203,25 +2188,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   // MARK: - Utility
-
-  private func videoViewSizeInInteractiveMode(_ rect: NSRect, currentCrop: NSRect, originalSize: NSSize) -> (NSRect, NSRect) {
-    // 60 for bottom bar and 24*2 for top and bottom margin
-
-    // size if no crop
-    let nh = rect.height - 108
-    let nw = nh * rect.width / rect.height
-    let nx = (rect.width - nw) / 2
-    let ny: CGFloat = 84
-
-    // cropped size, originalSize should have same aspect as rect
-
-    let cw = nw * (currentCrop.width / originalSize.width)
-    let ch = nh * (currentCrop.height / originalSize.height)
-    let cx = nx + nw * (currentCrop.origin.x / originalSize.width)
-    let cy = ny + nh * (currentCrop.origin.y / originalSize.height)
-
-    return (NSMakeRect(nx, ny, nw, nh), NSMakeRect(cx, cy, cw, ch))
-  }
 
   func handleIINACommand(_ cmd: IINACommand) {
     let appDeletate = (NSApp.delegate! as! AppDelegate)

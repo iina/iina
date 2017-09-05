@@ -10,15 +10,16 @@ import Cocoa
 
 class CropBoxView: NSView {
 
-  private let boxStrokeColor = NSColor(calibratedRed: 0.4, green: 0.8, blue: 1, alpha: 1)
+  private let boxStrokeColor = NSColor(calibratedRed: 0.4, green: 0.6, blue: 1, alpha: 1)
   private let boxFillColor = NSColor(calibratedWhite: 0.5, alpha: 0.3)
 
   weak var settingsViewController: CropSettingsViewController!
 
+  /** Original video size. */
   var actualSize: NSSize = NSSize()
-
+  /** VideoView's frame. */
   var videoRect: NSRect = NSRect()
-
+  /** Crop box's frame. */
   var boxRect: NSRect = NSRect()
 
   var selectedRect: NSRect = NSRect() {
@@ -89,8 +90,8 @@ class CropBoxView: NSView {
     let xScale =  videoRect.width / actualSize.width
     let yScale =  videoRect.height / actualSize.height
 
-    let ix = selectedRect.origin.x * xScale + videoRect.origin.x
-    let iy = selectedRect.origin.y * xScale + videoRect.origin.y
+    let ix = selectedRect.x * xScale + videoRect.x
+    let iy = selectedRect.y * xScale + videoRect.y
     let iw = selectedRect.width * xScale
     let ih = selectedRect.height * yScale
 

@@ -23,14 +23,12 @@ class CropSettingsViewController: NSViewController {
   @IBOutlet weak var predefinedAspectSegment: NSSegmentedControl!
 
   private var cropx: Int = 0
-  private var cropy: Int = 0
+  private var cropy: Int = 0  // in flipped coord
   private var cropw: Int = 0
   private var croph: Int = 0
-  // cropy is in flipped coordinate
-  private var actualCropy: Int {
-    get {
-      return mainWindow.player.info.videoHeight! - croph - cropy
-    }
+
+  var readableCropString: String {
+    return "(\(cropx), \(cropy)) (\(cropw)\u{d7}\(croph))"
   }
 
   override func viewDidLoad() {
@@ -44,11 +42,8 @@ class CropSettingsViewController: NSViewController {
   func selectedRectUpdated() {
     guard mainWindow.isInInteractiveMode else { return }
     let rect = cropBoxView.selectedRect
-    cropx = Int(rect.origin.x)
-    cropy = Int(rect.origin.y)
-    cropw = Int(rect.width)
-    croph = Int(rect.height)
-    cropRectLabel.stringValue = "Origin(\(cropx), \(actualCropy))  Size(\(cropw) \u{d7} \(croph))"
+    updateCropValues(from: rect)
+    cropRectLabel.stringValue = readableCropString
   }
 
 
@@ -67,11 +62,11 @@ class CropSettingsViewController: NSViewController {
         }
       }
       // else, set the filter
-      let filter = MPVFilter.crop(w: self.cropw, h: self.croph, x: self.cropx, y: self.actualCropy)
+      let filter = MPVFilter.crop(w: self.cropw, h: self.croph, x: self.cropx, y: self.cropy)
       playerCore.setCrop(fromFilter: filter)
       // custom crop has no corresponding menu entry
       playerCore.info.unsureCrop = ""
-      self.mainWindow.displayOSD(.crop("\(self.cropx),\(self.actualCropy) \(self.cropw)x\(self.croph)"))
+      self.mainWindow.displayOSD(.crop(self.readableCropString))
     }
   }
 
@@ -95,5 +90,12 @@ class CropSettingsViewController: NSViewController {
     cropBoxView.setSelectedRect(to: cropped)
   }
 
+
+  private func updateCropValues(from rect: NSRect) {
+    cropx = Int(rect.x)
+    cropy = Int(CGFloat(mainWindow.player.info.videoHeight!) - rect.height - rect.y)
+    cropw = Int(rect.width)
+    croph = Int(rect.height)
+  }
 
 }

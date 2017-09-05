@@ -149,6 +149,30 @@ extension NSSize {
 
 extension NSRect {
 
+  var x: CGFloat {
+    get {
+      return self.origin.x
+    }
+  }
+
+  var xMax: CGFloat {
+    get {
+      return self.origin.x + self.size.width
+    }
+  }
+
+  var y: CGFloat {
+    get {
+      return self.origin.y
+    }
+  }
+
+  var yMax: CGFloat {
+    get {
+      return self.origin.y + self.size.height
+    }
+  }
+
   func multiply(_ multiplier: CGFloat) -> NSRect {
     return NSRect(x: origin.x, y: origin.y, width: width * multiplier, height: height * multiplier)
   }

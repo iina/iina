@@ -1165,6 +1165,22 @@ class PlayerCore: NSObject {
     }
   }
 
+  var originalVideoSize: (Int, Int) {
+    get {
+      if let w = info.displayWidth, let h = info.displayHeight {
+        let netRotate = mpv.getInt(MPVProperty.videoParamsRotate) - mpv.getInt(MPVOption.Video.videoRotate)
+        let rotate = netRotate >= 0 ? netRotate : netRotate + 360
+        if rotate == 90 || rotate == 270 {
+          return (h, w)
+        } else {
+          return (w, h)
+        }
+      } else {
+        return (0, 0)
+      }
+    }
+  }
+
   /** Check if there are IINA filters saved in watch_later file. */
   func reloadSavedIINAfilters() {
     // vf

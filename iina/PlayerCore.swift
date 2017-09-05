@@ -1060,7 +1060,10 @@ class PlayerCore: NSObject {
       track.externalFilename = mpv.getString(MPVProperty.trackListNExternalFilename(index))
       track.isAlbumart = mpv.getString(MPVProperty.trackListNAlbumart(index)) == "yes"
       track.decoderDesc = mpv.getString(MPVProperty.trackListNDecoderDesc(index))
+      track.demuxW = mpv.getInt(MPVProperty.trackListNDemuxW(index))
+      track.demuxH = mpv.getInt(MPVProperty.trackListNDemuxH(index))
       track.demuxFps = mpv.getDouble(MPVProperty.trackListNDemuxFps(index))
+      track.demuxChannelCount = mpv.getInt(MPVProperty.trackListNDemuxChannelCount(index))
       track.demuxChannels = mpv.getString(MPVProperty.trackListNDemuxChannels(index))
       track.demuxSamplerate = mpv.getInt(MPVProperty.trackListNDemuxSamplerate(index))
 

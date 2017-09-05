@@ -60,14 +60,44 @@ class MPVTrack: NSObject {
   var isExternal: Bool
   var externalFilename: String?
   var codec: String?
+  var demuxW: Int?
+  var demuxH: Int?
+  var demuxChannelCount: Int?
+  var demuxChannels: String?
+  var demuxSamplerate: Int?
+  var demuxFps: Double?
+
 
   var readableTitle: String {
     get {
+      // title
       let title = self.title ?? ""
-      let rawLang = self.lang ?? ""
-      let lang = rawLang == "" ? "" : "[\(rawLang)]"
-      let def = self.isDefault ? "(" + NSLocalizedString("quicksetting.item_default", comment: "Default") + ")" : ""
-      return "#\(self.id) \(title) \(lang) \(def)"
+      // lang
+      let language: String
+      if let lang = self.lang, lang != "und", let rawLang = ISO639_2Helper.dictionary[lang] {
+        language = "[\(rawLang)]"
+      } else {
+        language = ""
+      }
+      // info
+      var info = ""
+      switch self.type {
+      case .video:
+        if let w = self.demuxW, let h = self.demuxH, let fps = self.demuxFps {
+          info = "\(w)\u{d7}\(h), \(fps.prettyFormat())fps"
+        }
+      case .audio:
+        if let ch = self.demuxChannelCount, let sr = self.demuxSamplerate {
+          info = "\(ch)ch, \((Double(sr)/1000).prettyFormat())kHz"
+        }
+
+      default:
+        break
+      }
+      // default
+      let isDefault = self.isDefault ? "(" + NSLocalizedString("quicksetting.item_default", comment: "Default") + ")" : ""
+      // final string
+      return ["#\(self.id)", title, language, info, isDefault].filter { !$0.isEmpty }.joined(separator: " ")
     }
   }
 
@@ -77,12 +107,6 @@ class MPVTrack: NSObject {
 
   var ffIndex: Int?
   var decoderDesc: String?
-  var demuxW: Int?
-  var demuxH: Int?
-  var demuxChannelCount: Int?
-  var demuxChannels: String?
-  var demuxSamplerate: Int?
-  var demuxFps: Double?
 
   init(id: Int, type: TrackType, isDefault: Bool, isForced: Bool, isSelected: Bool, isExternal: Bool) {
     self.id = id

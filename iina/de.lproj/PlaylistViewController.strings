@@ -1,27 +1,38 @@
+/* Class = "NSTextFieldCell"; title = "▶︎"; ObjectID = "4yj-cg-fli"; */
+"4yj-cg-fli.title" = "▶︎";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "HJk-g1-sOy"; */
-"HJk-g1-sOy.title" = "Text Cell";
+/* Class = "NSButtonCell"; title = "…"; ObjectID = "CVl-Xv-m3u"; */
+"CVl-Xv-m3u.title" = "…";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "QFT-Lq-egc"; */
-"QFT-Lq-egc.title" = "Text Cell";
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "M5s-Bm-l3O"; */
+"M5s-Bm-l3O.title" = "Table View Cell";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Folded common prefix"; ObjectID = "U4W-Xv-hkh"; */
+"U4W-Xv-hkh.ibShadowedToolTip" = "Folded common prefix";
 
 /* Class = "NSTabViewItem"; label = "Chapters"; ObjectID = "aaR-kR-im0"; */
 "aaR-kR-im0.label" = "Kapitel";
 
 /* Class = "NSButtonCell"; title = "PLAYLIST"; ObjectID = "fAq-Pq-ThP"; */
-"fAq-Pq-ThP.title" = "PLAYLIST";
+"fAq-Pq-ThP.title" = "WIEDERGABELISTE";
 
 /* Class = "NSTextFieldCell"; title = "▶︎"; ObjectID = "iCm-bC-upL"; */
 "iCm-bC-upL.title" = "▶︎";
+
+/* Class = "NSTextFieldCell"; title = "Matched subtitles"; ObjectID = "j2t-mO-cpo"; */
+"j2t-mO-cpo.title" = "Passende Untertitel";
 
 /* Class = "NSButtonCell"; title = "CHAPTERS"; ObjectID = "jUF-xa-uRI"; */
 "jUF-xa-uRI.title" = "KAPITEL";
 
 /* Class = "NSTabViewItem"; label = "Playlist"; ObjectID = "rjs-Qf-mT6"; */
-"rjs-Qf-mT6.label" = "Playlist";
+"rjs-Qf-mT6.label" = "Wiedergabeliste";
 
 /* Class = "NSTextFieldCell"; title = "00:00 -> 00:00"; ObjectID = "v6p-4g-BZw"; */
 "v6p-4g-BZw.title" = "00:00 -> 00:00";
 
 /* Class = "NSTextFieldCell"; title = "Chapter Title"; ObjectID = "vmJ-Ry-xgK"; */
-"vmJ-Ry-xgK.title" = "Chapter Title";
+"vmJ-Ry-xgK.title" = "Kapitelname";
+
+/* Class = "NSButtonCell"; title = "Wrong Subtitle!"; ObjectID = "zod-Ch-cOH"; */
+"zod-Ch-cOH.title" = "Falscher Untertitel!";

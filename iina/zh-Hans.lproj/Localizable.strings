@@ -7,10 +7,14 @@
  */
 
 // Common
-"on" = "On";
-"off" = "Off";
-"login" = "登录";
-"logout" = "退出";
+"general.on" = "On";
+"general.off" = "Off";
+"general.login" = "登录";
+"general.logout" = "退出";
+"general.ok" = "好";
+"general.cancel" = "取消";
+"general.username" = "用户名";
+"general.password" = "密码";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "播放列表";
@@ -20,8 +24,8 @@
 "main.buffering_indicator" = "缓冲中... %d%%";
 
 // QuickSettingViewController.swift
-"quicksetting.aspect_item.Default" = "默认";
-"quicksetting.crop_item.None" = "关闭";
+"quicksetting.item_default" = "默认";
+"quicksetting.item_none" = "无";
 
 // OSDMessage.swift
 "osd.pause" = "暂停";
@@ -41,7 +45,7 @@
 "osd.subtitle_pos" = "字幕位置：%.1f";
 "osd.mute" = "静音";
 "osd.unmute" = "取消静音";
-"osd.screenshot" = "快照已截取";
+"osd.screenshot" = "已保存截图";
 "osd.abloop.a" = "AB循环：A";
 "osd.abloop.b" = "AB循环：B";
 "osd.abloop.clear" = "AB循环：清除";
@@ -64,16 +68,6 @@
 "osd.file_error" = "读取文件错误";
 "osd.cannot_login" = "无法登录";
 "osd.canceled" = "已取消";
-
-"update.title_update_found" = "检测到新版本";
-"update.title_no_update" = "没有新版本";
-"update.title_error" = "错误";
-"update.update_found" = "检测到更新。由于 IINA 仍处于 Alpha 测试中，我们建议您保持最新版本。请去网站或者 Github 下载：";
-"update.no_update" = "您正在运行的是最新版本。";
-"update.check_failed" = "检查更新失败。你的 IINA 版本很可能太老了，请去网站或者 Github 查看最新信息：";
-"update.new_version" = "新版本：";
-"update.dl_from_website" = "前往网站";
-"update.dl_from_github" = "前往 Github";
 
 "preference.title" = "偏好设置";
 "preference.general" = "通用";
@@ -101,13 +95,18 @@
 "track.none" = "<无>";
 
 // Alerts
+"alert.title_error" = "错误";
+"alert.title_warning" = "警告";
+"alert.title_info" = "提示";
+
 "alert.fatal_error" = "严重错误：%@ \n程序将立刻结束。";
-"alert.mpv_error" = "在设置用户选项时出现错误 %@ (%@)。";
+"alert.mpv_error" = "出现内部错误 %@ (%@) (设定选项 %@ 时)。";
 "alert.sleep" = "无法阻止系统睡眠。";
 
 "alert.unsupported_audio" = "不支持的外部音频文件。";
 "alert.unsupported_sub" = "不支持的外部字幕。";
 "alert.unsupported_url" = "不支持的 URL。";
+"alert.wrong_url_format" = "URL 格式错误。";
 
 "alert.error_open" = "无法打开文件或流！";
 "alert.error_finding_file" = "无法找到文件 %@ ！";
@@ -115,18 +114,26 @@
 "alert.error_saving_file" = "保存文件 %@ 时出现错误 %@";
 "alert.error_deleting_file" = "无法删除文件。";
 
+"alert.config.new.title" = "新建快捷键配置";
+"alert.config.new.message" = "请输入配置名。";
+"alert.config.duplicate.title" = "复制快捷键配置";
+"alert.config.duplicate.message" = "请输入复制后的配置文件名。";
 "alert.config.empty_name" = "名称不能为空。";
-"alert.config.name_exsisting" = "此配置名称已存在。";
+"alert.config.name_existing" = "此配置名称已存在。";
+"alert.config.file_existing.title" = "同名文件已存在";
+"alert.config.file_existing.message" = "选择「好」来覆盖，选择「取消」来在 Finder 中查看该文件。";
 "alert.config.cannot_create" = "无法创建配置文件！";
 "alert.config.cannot_write" = "无法写入配置文件！";
 
 "alert.filter.incorrect" = "设置滤镜时出现错误。请检查你的参数格式。";
+"alert.add_filter.title" = "添加滤镜";
+"alert.add_filter.message" = "请输入符合 mpv 的 vf 或 af 选项格式的滤镜字符串。";
 
-"alert.keybinding_config_error" = "无法设置快捷键「%@」！已回退到 IINA 默认配置。请检查你的快捷键文件是否正确。";
+"alert.keybinding_config.error" = "无法设置快捷键「%@」！已回退到 IINA 默认配置。请检查你的快捷键文件是否正确。";
 
 "alert.extra_option.cannot_read" = "无法读取自定义的 mpv 额外选项。";
 "alert.extra_option.empty" = "键或值不能为空！";
-"alert.extra_option_error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";
+"alert.extra_option.error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";
 "alert.extra_option.config_folder" = "设置配置文件目录 \"%@\" 时出现错误。";
 
 "alert.playlist.error_deleting" = "删除 %@ 时出现错误。";
@@ -136,9 +143,39 @@
 "alert.sub.cannot_save_passwd" = "无法将密码保存到钥匙串：%@";
 "alert.sub.cannot_login" = "无法登录。请检查你的用户名、密码及网络状态。\n\n%@";
 
+"alert.set_default.title" = "将 IINA 设为默认播放器";
+"alert.set_default.message" = "IINA 将会被关联至所有支持的文件格式。";
+"alert.set_default.success" = "操作已完成。%d 成功，%d 失败。";
+
+"alert.add_watch.title" = "监视 mpv 属性";
+"alert.add_watch.message" = "请输入一个有效的 mpv 属性名。";
+
+"alert.jump_to.title" = "跳转至";
+"alert.jump_to.message" = "请输入希望跳转的时间。例: 20:35";
+
+"alert.opensub.login.title" = "OpenSubtitles 登录";
+"alert.opensub.login.message" = "请输入用户名和密码。";
+
+"alert.open_url.title" = "打开 URL";
+"alert.open_url.message" = "请输入 URL:";
+"alert.choose_media_file.title" = "选择媒体文件";
+
+
+"alert.delete_history.title" = "删除历史记录";
+"alert.delete_history.message" = "确定要删除所选的历史记录吗？";
+
+"alert.filter_hwdec.message" = "你正在添加视频滤镜。然而，当前的硬件解码器不能很好地支持视频滤镜。你可以禁用硬件解码，或使用支持「拷贝」的解码器 (将占用两倍内存)。\n你可能需要再操作一次（例如剪切）才能看到效果。";
+"alert.filter_hwdec.abort" = "放弃";
+"alert.filter_hwdec.turn_off" = "关闭硬件解码";
+"alert.filter_hwdec.use_copy" = "使用支持「拷贝」的解码器";
+
+"alert.clear_cache.title" = "清除缩略图缓存";
+"alert.clear_cache.message" = "确定清除所有缩略图缓存吗?";
+"alert.clear_cache.success" = "缓存已清除。";
 
 "pl_menu.title_multi" = "%d 个项目";
 "pl_menu.play_next" = "接下来播放";
+"pl_menu.play_in_new_window" = "在新窗口中打开";
 "pl_menu.remove" = "移除";
 "pl_menu.remove_multi" = "移除选中项";
 "pl_menu.delete" = "移到垃圾桶";
@@ -148,6 +185,35 @@
 "pl_menu.reveal_in_finder" = "在 Finder 中显示";
 "pl_menu.add_item" = "添加项目…";
 "pl_menu.clear_playlist" = "清除播放列表";
+"pl_menu.matched_sub" = "已匹配 %d 个字幕";
+"pl_menu.add_sub" = "添加字幕…";
+"pl_menu.wrong_sub" = "错误的字幕!";
 
 "keymapping.title" = "快捷键";
 "keymapping.message" = "请按任意键来开始录制。";
+
+
+"filter.video_filters" = "视频滤镜";
+"filter.audio_filters" = "音频滤镜";
+
+"hwdec.no" = "不启用硬件解码。";
+"hwdec.auto" = "启用硬件解码。但是，大多数视频滤镜不会正常工作。";
+"hwdec.auto-copy" = "启用硬件解码。它会占用两倍左右的内存，但支持视频滤镜。";
+
+"subencoding.auto" = "自动识别";
+
+// Touch bar
+
+"touchbar.ahead_15" = "前进 15 秒";
+"touchbar.ahead_30" = "前进 30 秒";
+"touchbar.back_15" = "后退 15 秒";
+"touchbar.back_30" = "后退 30 秒";
+"touchbar.next_video" = "下一个视频";
+"touchbar.prev_video" = "上一个视频";
+"touchbar.increase_volume" = "音量 +";
+"touchbar.decrease_volume" = "音量 -";
+"touchbar.rewind" = "快退";
+"touchbar.fast_forward" = "快进";
+"touchbar.play_pause" = "播放 / 暂停";
+"touchbar.seek" = "进度条";
+"touchbar.time" = "播放进度";

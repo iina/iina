@@ -46,7 +46,20 @@
 
 "cyH-Md-FAD.title" = "Abilita youtube-dl";
 
+"GBe-wd-tne.title" = "Formato: <key>=<value>[,<key>=<value>[,…]]";
+
+"9ut-ID-ffZ.title" = "Proxy HTTP:";
+
+/* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
 "zCD-9d-ziV.title" = "Altri parametri:";
 
-"GBe-wd-tne.title" = "Formato: <key>=<value>[,<key>=<value>[,...]]";
+/* Class = "NSTextFieldCell"; title = "Custom youtube-dl path:"; ObjectID = "2qf-cC-Lfi"; */
+"2qf-cC-Lfi.title" = "Cartella di youtube-dl:";
+
+/* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "RwW-JS-iTv"; */
+"RwW-JS-iTv.title" = "Richiede il riavvio di IINA per avere effetto.";
+
+/* Class = "NSTextFieldCell"; title = "IINA will search youtube-dl in this folder. Restart needed."; ObjectID = "YqE-yV-BvQ"; */
+"YqE-yV-BvQ.title" = "IINA cercherà youtube-dl in questa cartella. Richiede il riavvio.";
+
 

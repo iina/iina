@@ -1,369 +1,387 @@
 
 /* Class = "NSMenuItem"; title = "Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
-"0T7-Nu-SL7.title" = "Playlist Panel";
+"0T7-Nu-SL7.title" = "Панель Плейлісту";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
-"0m7-3r-twH.title" = "Open URL…";
+"0m7-3r-twH.title" = "Відкрити URL…";
+
+/* Class = "NSMenuItem"; title = "Set IINA as The Default App…"; ObjectID = "0os-i1-tJF"; */
+"0os-i1-tJF.title" = "Встановити IINA стандартною програмою…";
 
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
-"16p-PA-x34.title" = "Subtitle";
+"16p-PA-x34.title" = "Субтитри";
 
 /* Class = "NSMenuItem"; title = "Normal Size"; ObjectID = "1UK-8n-QPP"; */
-"1UK-8n-QPP.title" = "Normal Size";
+"1UK-8n-QPP.title" = "Нормальний";
 
 /* Class = "NSMenuItem"; title = "IINA"; ObjectID = "1Xt-HY-uBw"; */
 "1Xt-HY-uBw.title" = "IINA";
 
 /* Class = "NSMenu"; title = "Audio Device"; ObjectID = "2Dp-Ol-Zcf"; */
-"2Dp-Ol-Zcf.title" = "Audio Device";
+"2Dp-Ol-Zcf.title" = "Пристрій Аудіо";
 
 /* Class = "NSMenuItem"; title = "Jump to beginning"; ObjectID = "2Ya-3g-1hy"; */
-"2Ya-3g-1hy.title" = "Jump to beginning";
+"2Ya-3g-1hy.title" = "На початок";
 
 /* Class = "NSMenuItem"; title = "Jump to…"; ObjectID = "2id-wn-xsC"; */
-"2id-wn-xsC.title" = "Jump to…";
+"2id-wn-xsC.title" = "Перемотати до…";
 
 /* Class = "NSMenuItem"; title = "Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "Quick Settings Panel";
+"2t8-Ot-yoO.title" = "Швидкі Налаштунки";
 
 /* Class = "NSMenuItem"; title = "Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
-"43n-Ed-5kT.title" = "Quick Settings Panel";
+"43n-Ed-5kT.title" = "Швидкі Налаштунки";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
-"4ae-MT-2L1.title" = "Audio Delay + 0.5s";
+"4ae-MT-2L1.title" = "Затримка Аудіо + 0.5с";
 
 /* Class = "NSMenuItem"; title = "Quit IINA"; ObjectID = "4sb-4s-VLi"; */
-"4sb-4s-VLi.title" = "Quit IINA";
+"4sb-4s-VLi.title" = "Закрити IINA";
 
 /* Class = "NSMenuItem"; title = "About IINA"; ObjectID = "5kV-Vb-QxS"; */
-"5kV-Vb-QxS.title" = "About IINA";
+"5kV-Vb-QxS.title" = "Про IINA";
 
 /* Class = "NSMenu"; title = "Rotation"; ObjectID = "5xN-ZB-VLI"; */
-"5xN-ZB-VLI.title" = "Rotation";
+"5xN-ZB-VLI.title" = "Обертання";
 
 /* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "6Eq-ni-6hG"; */
-"6Eq-ni-6hG.title" = "Enter Full Screen";
+"6Eq-ni-6hG.title" = "Повноекранний режим";
 
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
-"6yE-op-DTS.title" = "Step Forward 5s";
+"6yE-op-DTS.title" = "Вперед 5с";
 
 /* Class = "NSMenuItem"; title = "Audio Filters…"; ObjectID = "8Zh-hU-Cc4"; */
-"8Zh-hU-Cc4.title" = "Audio Filters…";
+"8Zh-hU-Cc4.title" = "Аудіо Фільтри…";
 
 /* Class = "NSMenuItem"; title = "Quick Settings Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "Quick Settings Panel";
+"8y7-Cy-lKT.title" = "Швидкі Налаштунки";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
-"9pa-9C-ueQ.title" = "<None>";
+"9pa-9C-ueQ.title" = "<Нема>";
 
 /* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
-"9zk-co-roT.title" = "Save Downloaded Subtitle";
+"9zk-co-roT.title" = "Зберегти Завантажені субтитри";
 
 /* Class = "NSMenuItem"; title = "Github"; ObjectID = "A9w-iE-gVg"; */
 "A9w-iE-gVg.title" = "Github";
 
 /* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
-"AYu-sK-qS6.title" = "Main Menu";
+"AYu-sK-qS6.title" = "Головне Меню";
 
 /* Class = "NSMenuItem"; title = "Screenshot"; ObjectID = "AoP-K6-Kb5"; */
-"AoP-K6-Kb5.title" = "Screenshot";
+"AoP-K6-Kb5.title" = "Знімок Екрану";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
-"BOF-NM-1cW.title" = "Preferences…";
+"BOF-NM-1cW.title" = "Налаштування…";
 
 /* Class = "NSMenuItem"; title = "Scale Down"; ObjectID = "Bli-YK-Rl0"; */
-"Bli-YK-Rl0.title" = "Scale Down";
+"Bli-YK-Rl0.title" = "Зменшити розмір";
 
 /* Class = "NSMenuItem"; title = "Share"; ObjectID = "BtY-iQ-6Pf"; */
-"BtY-iQ-6Pf.title" = "Share";
+"BtY-iQ-6Pf.title" = "Поширити";
 
 /* Class = "NSMenuItem"; title = "Advanced Screenshot..."; ObjectID = "CKi-JE-yLT"; */
-"CKi-JE-yLT.title" = "Advanced Screenshot...";
+"CKi-JE-yLT.title" = "Просунутий знімок екрану...";
 
 /* Class = "NSMenuItem"; title = "File Loop"; ObjectID = "D1y-kv-85s"; */
-"D1y-kv-85s.title" = "File Loop";
+"D1y-kv-85s.title" = "Грати Файл Постійно";
 
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
-"DRb-Y8-xir.title" = "Audio Track";
+"DRb-Y8-xir.title" = "Аудіо Доріжка";
 
 /* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
-"DVo-aG-piG.title" = "Close";
+"DVo-aG-piG.title" = "Закрити";
 
 /* Class = "NSMenuItem"; title = "Chapters Panel"; ObjectID = "DwM-3d-Eb9"; */
-"DwM-3d-Eb9.title" = "Chapters Panel";
+"DwM-3d-Eb9.title" = "Панель Розділів";
 
 /* Class = "NSMenu"; title = "Subtitles"; ObjectID = "EKp-Qx-4Mn"; */
-"EKp-Qx-4Mn.title" = "Subtitles";
+"EKp-Qx-4Mn.title" = "Субтитри";
 
 /* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
-"F2S-fz-NVQ.title" = "Help";
+"F2S-fz-NVQ.title" = "Допомога";
 
 /* Class = "NSMenuItem"; title = "Documentation / Help"; ObjectID = "FKE-Sm-Kum"; */
-"FKE-Sm-Kum.title" = "Documentation / Help";
+"FKE-Sm-Kum.title" = "Документація / Допомога";
 
 /* Class = "NSMenu"; title = "Video Track"; ObjectID = "FTu-CF-O0R"; */
-"FTu-CF-O0R.title" = "Video Track";
+"FTu-CF-O0R.title" = "Відео Доріжка";
 
 /* Class = "NSMenuItem"; title = "Chapter"; ObjectID = "Fal-I4-PZk"; */
-"Fal-I4-PZk.title" = "Chapter";
+"Fal-I4-PZk.title" = "Розділ";
 
 /* Class = "NSMenu"; title = "Playback"; ObjectID = "GEO-Iw-cKr"; */
-"GEO-Iw-cKr.title" = "Playback";
+"GEO-Iw-cKr.title" = "Відтворення";
 
 /* Class = "NSMenuItem"; title = "Audio Track"; ObjectID = "GF1-xB-KcA"; */
-"GF1-xB-KcA.title" = "Audio Track";
+"GF1-xB-KcA.title" = "Аудіо Доріжка";
 
 /* Class = "NSMenuItem"; title = "Playlist"; ObjectID = "Gi5-1S-RQB"; */
-"Gi5-1S-RQB.title" = "Playlist";
+"Gi5-1S-RQB.title" = "Плейліст";
 
 /* Class = "NSMenuItem"; title = "Crop"; ObjectID = "Gqg-wU-RRo"; */
-"Gqg-wU-RRo.title" = "Crop";
+"Gqg-wU-RRo.title" = "Обрізати";
 
 /* Class = "NSMenuItem"; title = "Reset Audio Delay"; ObjectID = "H3d-jR-YCr"; */
-"H3d-jR-YCr.title" = "Reset Audio Delay";
+"H3d-jR-YCr.title" = "Без Затримки Аудіо";
 
 /* Class = "NSMenuItem"; title = "Video"; ObjectID = "H8h-7b-M4v"; */
-"H8h-7b-M4v.title" = "Video";
+"H8h-7b-M4v.title" = "Відео";
 
 /* Class = "NSMenuItem"; title = "Double Size"; ObjectID = "Hal-18-Tnf"; */
-"Hal-18-Tnf.title" = "Double Size";
+"Hal-18-Tnf.title" = "Подвійний";
 
 /* Class = "NSMenu"; title = "Video"; ObjectID = "HyV-fh-RgO"; */
-"HyV-fh-RgO.title" = "Video";
+"HyV-fh-RgO.title" = "Відео";
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "IAo-SY-fd9"; */
-"IAo-SY-fd9.title" = "Open…";
+"IAo-SY-fd9.title" = "Відкрити…";
 
 /* Class = "NSMenuItem"; title = "Audio Device"; ObjectID = "IXq-yq-uDF"; */
-"IXq-yq-uDF.title" = "Audio Device";
+"IXq-yq-uDF.title" = "Аудіо Пристрій";
 
 /* Class = "NSMenuItem"; title = "Horizontal (Mirror)"; ObjectID = "JJq-qH-toq"; */
-"JJq-qH-toq.title" = "Horizontal (Mirror)";
+"JJq-qH-toq.title" = "Горизонтально";
 
 /* Class = "NSMenuItem"; title = "Open..."; ObjectID = "Kby-lQ-HCW"; */
-"Kby-lQ-HCW.title" = "Open...";
+"Kby-lQ-HCW.title" = "Відкрити...";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
-"Kd2-mp-pUS.title" = "Show All";
+"Kd2-mp-pUS.title" = "Показати Усі";
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
-"LE2-aR-0XJ.title" = "Bring All to Front";
+"LE2-aR-0XJ.title" = "На Передній План";
+
+/* Class = "NSMenuItem"; title = "Playback History"; ObjectID = "LND-1n-DU2"; */
+"LND-1n-DU2.title" = "Історія Відтвореннь";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
-"Lc4-4W-thE.title" = "Audio Delay - 0.5s";
+"Lc4-4W-thE.title" = "Затримка Аудіо - 0.5с";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.5s"; ObjectID = "LsU-Qz-dax"; */
-"LsU-Qz-dax.title" = "Subtitle Delay - 0.5s";
+"LsU-Qz-dax.title" = "Затримка Субтитрів - 0.5с";
 
 /* Class = "NSMenuItem"; title = "Find Online Subtitles…"; ObjectID = "Mg3-WB-gjZ"; */
-"Mg3-WB-gjZ.title" = "Find Online Subtitles…";
+"Mg3-WB-gjZ.title" = "Знайти Субтитри Онлайн…";
 
 /* Class = "NSMenuItem"; title = "Save Current Playlist..."; ObjectID = "Mjr-lL-oEt"; */
-"Mjr-lL-oEt.title" = "Save Current Playlist...";
+"Mjr-lL-oEt.title" = "Зберегти Плейліст...";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
-"NMo-om-nkz.title" = "Services";
+"NMo-om-nkz.title" = "Сервіси";
 
 /* Class = "NSMenuItem"; title = "Vertical (Flip)"; ObjectID = "OIu-H0-Mht"; */
-"OIu-H0-Mht.title" = "Vertical (Flip)";
+"OIu-H0-Mht.title" = "Вертикально";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "OY7-WF-poV"; */
-"OY7-WF-poV.title" = "Minimize";
+"OY7-WF-poV.title" = "Сховати";
 
 /* Class = "NSMenuItem"; title = "Hide IINA"; ObjectID = "Olw-nP-bQN"; */
-"Olw-nP-bQN.title" = "Hide IINA";
+"Olw-nP-bQN.title" = "Сховати IINA";
 
 /* Class = "NSMenuItem"; title = "Reset Subtitle Scale"; ObjectID = "P1a-ot-P31"; */
-"P1a-ot-P31.title" = "Reset Subtitle Scale";
+"P1a-ot-P31.title" = "Без Масштабування Субтитрів";
 
 /* Class = "NSMenuItem"; title = "Encoding"; ObjectID = "Pci-OQ-Vni"; */
-"Pci-OQ-Vni.title" = "Encoding";
+"Pci-OQ-Vni.title" = "Кодування";
 
 /* Class = "NSMenu"; title = "Encoding"; ObjectID = "Pf6-5i-B1E"; */
-"Pf6-5i-B1E.title" = "Encoding";
+"Pf6-5i-B1E.title" = "Кодування";
 
 /* Class = "NSMenuItem"; title = "Video Filters…"; ObjectID = "PyY-pR-jz7"; */
-"PyY-pR-jz7.title" = "Video Filters…";
+"PyY-pR-jz7.title" = "Відео Фільтри…";
+
+/* Class = "NSMenuItem"; title = "New Window"; ObjectID = "Qv1-xd-wj5"; */
+"Qv1-xd-wj5.title" = "Нове Вікно";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4"; */
-"R4o-n2-Eq4.title" = "Zoom";
+"R4o-n2-Eq4.title" = "Збільшити";
 
 /* Class = "NSMenuItem"; title = "Website"; ObjectID = "Rqg-VS-aIj"; */
-"Rqg-VS-aIj.title" = "Website";
+"Rqg-VS-aIj.title" = "Сайт";
 
 /* Class = "NSMenuItem"; title = "Fit to Screen"; ObjectID = "SHd-63-Xoh"; */
-"SHd-63-Xoh.title" = "Fit to Screen";
+"SHd-63-Xoh.title" = "На Весь Екран";
 
 /* Class = "NSMenuItem"; title = "Reset Subtitle Delay"; ObjectID = "SLr-6g-Mgh"; */
-"SLr-6g-Mgh.title" = "Reset Subtitle Delay";
+"SLr-6g-Mgh.title" = "Без Затримки Субтитрів";
 
 /* Class = "NSMenuItem"; title = "Step Backward 5s"; ObjectID = "Sif-85-FF1"; */
-"Sif-85-FF1.title" = "Step Backward 5s";
+"Sif-85-FF1.title" = "Назад 5с";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay: "; ObjectID = "THG-4o-U6A"; */
-"THG-4o-U6A.title" = "Subtitle Delay: ";
+"THG-4o-U6A.title" = "Затримка Субтитрів: ";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
-"Td7-aD-5lo.title" = "Window";
+"Td7-aD-5lo.title" = "Вікно";
 
 /* Class = "NSMenuItem"; title = "Pause"; ObjectID = "UOE-MJ-8ku"; */
-"UOE-MJ-8ku.title" = "Pause";
+"UOE-MJ-8ku.title" = "Пауза";
 
 /* Class = "NSMenu"; title = "Second Subtitle"; ObjectID = "UwY-P2-Xdb"; */
-"UwY-P2-Xdb.title" = "Second Subtitle";
+"UwY-P2-Xdb.title" = "Інші Субтитри";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
-"Vdr-fp-XzO.title" = "Hide Others";
+"Vdr-fp-XzO.title" = "Сховати Інші";
 
 /* Class = "NSMenuItem"; title = "Mute"; ObjectID = "WOL-Us-ByA"; */
-"WOL-Us-ByA.title" = "Mute";
+"WOL-Us-ByA.title" = "Приглушити";
 
 /* Class = "NSMenuItem"; title = "Volume + 5%"; ObjectID = "Wbq-vt-hzX"; */
-"Wbq-vt-hzX.title" = "Volume + 5%";
+"Wbq-vt-hzX.title" = "Гучність + 5%";
 
 /* Class = "NSMenuItem"; title = "Next Frame"; ObjectID = "XDC-Pc-rS1"; */
-"XDC-Pc-rS1.title" = "Next Frame";
+"XDC-Pc-rS1.title" = "Наступний Кадр";
 
 /* Class = "NSMenuItem"; title = "Scale Up"; ObjectID = "XHu-Dl-Vq2"; */
-"XHu-Dl-Vq2.title" = "Scale Up";
+"XHu-Dl-Vq2.title" = "Збільшити";
 
 /* Class = "NSMenuItem"; title = "Smaller Size"; ObjectID = "ZOF-MG-6II"; */
-"ZOF-MG-6II.title" = "Smaller Size";
+"ZOF-MG-6II.title" = "Зменшити";
 
 /* Class = "NSMenuItem"; title = "Volume - 1%"; ObjectID = "Zhv-Bz-I5V"; */
-"Zhv-Bz-I5V.title" = "Volume - 1%";
+"Zhv-Bz-I5V.title" = "Гучність - 1%";
 
 /* Class = "NSMenuItem"; title = "Custom Touch Bar..."; ObjectID = "ZnF-yX-7jP"; */
-"ZnF-yX-7jP.title" = "Custom Touch Bar...";
+"ZnF-yX-7jP.title" = "Свій Touch Bar...";
 
 /* Class = "NSMenuItem"; title = "Playlist Loop"; ObjectID = "aSc-P6-fiZ"; */
-"aSc-P6-fiZ.title" = "Playlist Loop";
+"aSc-P6-fiZ.title" = "Програвати Плейліст Постійно";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
-"aUF-d1-5bR.title" = "Window";
+"aUF-d1-5bR.title" = "Вікно";
 
 /* Class = "NSMenu"; title = "Playlist"; ObjectID = "aXa-aM-Jaq"; */
-"aXa-aM-Jaq.title" = "Playlist";
+"aXa-aM-Jaq.title" = "Плейліст";
 
 /* Class = "NSMenuItem"; title = "Rotation"; ObjectID = "ar5-3T-O9h"; */
-"ar5-3T-O9h.title" = "Rotation";
+"ar5-3T-O9h.title" = "Обертання";
+
+/* Class = "NSMenuItem"; title = "Open URL in New Window…"; ObjectID = "bfB-bn-KeM"; */
+"bfB-bn-KeM.title" = "Відкрити URL у Новому Вікні…";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
-"bib-Uj-vzu.title" = "File";
+"bib-Uj-vzu.title" = "Файл";
 
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
-"bwz-r0-peR.title" = "Inspector";
+"bwz-r0-peR.title" = "Інспектор";
 
 /* Class = "NSMenuItem"; title = "Normal Size Retina"; ObjectID = "c1x-bx-69F"; */
-"c1x-bx-69F.title" = "Normal Size Retina";
+"c1x-bx-69F.title" = "Нормальний Розмір Retina";
 
 /* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
-"c6Y-0e-vgf.title" = "Volume + 1%";
+"c6Y-0e-vgf.title" = "Гучність + 1%";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
-"d15-8v-dXA.title" = "Aspect Ratio";
+"d15-8v-dXA.title" = "Співвідношення";
 
 /* Class = "NSMenu"; title = "Chapter"; ObjectID = "d9c-me-L2H"; */
-"d9c-me-L2H.title" = "Chapter";
+"d9c-me-L2H.title" = "Розділ";
 
 /* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
-"dMs-cI-mzQ.title" = "File";
+"dMs-cI-mzQ.title" = "Файл";
 
 /* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
-"deS-xK-iBb.title" = "Stop and Clear Playlists";
+"deS-xK-iBb.title" = "Зупинити та Очистити Плейлісти";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
-"eo2-Tt-SLx.title" = "Crop";
+"eo2-Tt-SLx.title" = "Обрізати";
 
 /* Class = "NSMenuItem"; title = "Audio Delay:"; ObjectID = "foC-r3-8mp"; */
-"foC-r3-8mp.title" = "Audio Delay:";
+"foC-r3-8mp.title" = "Затримка Аудіо:";
 
 /* Class = "NSMenuItem"; title = "Check Update..."; ObjectID = "gMo-qL-m08"; */
-"gMo-qL-m08.title" = "Check Update...";
+"gMo-qL-m08.title" = "Оновлення...";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
-"hz9-B4-Xy5.title" = "Services";
+"hz9-B4-Xy5.title" = "Сервіси";
 
 /* Class = "NSMenuItem"; title = "A-B Loop"; ObjectID = "i3P-Xw-8D7"; */
-"i3P-Xw-8D7.title" = "A-B Loop";
+"i3P-Xw-8D7.title" = "Цикл A-B";
 
 /* Class = "NSMenuItem"; title = "Volume:"; ObjectID = "iQF-1S-9EK"; */
-"iQF-1S-9EK.title" = "Volume:";
+"iQF-1S-9EK.title" = "Гучність:";
 
 /* Class = "NSMenuItem"; title = "Video Track"; ObjectID = "j8P-Gb-HR7"; */
-"j8P-Gb-HR7.title" = "Video Track";
+"j8P-Gb-HR7.title" = "Відео Доріжка";
 
 /* Class = "NSMenuItem"; title = "Playback"; ObjectID = "jxT-CU-nIS"; */
-"jxT-CU-nIS.title" = "Playback";
+"jxT-CU-nIS.title" = "Відтворення";
 
 /* Class = "NSMenuItem"; title = "Load External Subtitle…"; ObjectID = "k6x-hf-ATi"; */
-"k6x-hf-ATi.title" = "Load External Subtitle…";
+"k6x-hf-ATi.title" = "Завантажити Субтитри…";
 
 /* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
-"lDC-IC-peP.title" = "Bigger Size";
+"lDC-IC-peP.title" = "Збільшити";
 
 /* Class = "NSMenuItem"; title = "Audio"; ObjectID = "lYN-0x-lzT"; */
-"lYN-0x-lzT.title" = "Audio";
+"lYN-0x-lzT.title" = "Аудіо";
 
 /* Class = "NSMenuItem"; title = "Go To Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
-"lj0-Oo-7nB.title" = "Go To Screenshot Folder";
+"lj0-Oo-7nB.title" = "До Теки з Скріншотами";
 
 /* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
-"mGw-jm-5x2.title" = "Second Subtitle";
+"mGw-jm-5x2.title" = "Інші Субтитри";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
-"mND-N8-z6o.title" = "Enter Picture in Picture";
+"mND-N8-z6o.title" = "Увійти в Picture in Picture";
 
 /* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
-"mT1-1m-HwN.title" = "Flip";
+"mT1-1m-HwN.title" = "Перевернути";
 
 /* Class = "NSMenu"; title = "Flip"; ObjectID = "n90-to-nRT"; */
-"n90-to-nRT.title" = "Flip";
+"n90-to-nRT.title" = "Перевернути";
+
+/* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
+"npH-8B-XA4.title" = "Видалити Файл";
 
 /* Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ"; */
-"oas-Oc-fiZ.title" = "Open Recent";
+"oas-Oc-fiZ.title" = "Відкрити Останні";
 
 /* Class = "NSMenuItem"; title = "Previous Frame"; ObjectID = "oxF-BB-lBy"; */
-"oxF-BB-lBy.title" = "Previous Frame";
+"oxF-BB-lBy.title" = "Попередній Кадр";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay +0.5s"; ObjectID = "pAo-L5-qTO"; */
-"pAo-L5-qTO.title" = "Subtitle Delay +0.5s";
+"pAo-L5-qTO.title" = "Затримка субтитрів +0.5с";
 
 /* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
-"pdj-9C-Fn1.title" = "Volume - 5%";
+"pdj-9C-Fn1.title" = "Гучність - 5%";
 
 /* Class = "NSMenuItem"; title = "Font..."; ObjectID = "rme-fr-5rr"; */
-"rme-fr-5rr.title" = "Font...";
+"rme-fr-5rr.title" = "Шрифт...";
 
 /* Class = "NSMenu"; title = "Audio"; ObjectID = "sW8-ri-eA5"; */
-"sW8-ri-eA5.title" = "Audio";
+"sW8-ri-eA5.title" = "Аудіо";
 
 /* Class = "NSMenuItem"; title = "Half Size"; ObjectID = "snW-S8-Cw5"; */
-"snW-S8-Cw5.title" = "Half Size";
+"snW-S8-Cw5.title" = "Половина";
 
 /* Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "tXI-mr-wws"; */
-"tXI-mr-wws.title" = "Open Recent";
+"tXI-mr-wws.title" = "Відкрити Останні";
 
 /* Class = "NSMenuItem"; title = "Subtitle"; ObjectID = "uGZ-lo-pJJ"; */
-"uGZ-lo-pJJ.title" = "Subtitle";
+"uGZ-lo-pJJ.title" = "Субтитри";
 
 /* Class = "NSMenu"; title = "IINA"; ObjectID = "uQy-DD-JDr"; */
 "uQy-DD-JDr.title" = "IINA";
 
 /* Class = "NSMenuItem"; title = "Clear Menu"; ObjectID = "vNY-rz-j42"; */
-"vNY-rz-j42.title" = "Clear Menu";
+"vNY-rz-j42.title" = "Очистити Меню";
 
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
-"wex-rX-PcY.title" = "Float on Top";
+"wex-rX-PcY.title" = "Поміж усіх вікон";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
-"wpr-3q-Mcd.title" = "Help";
+"wpr-3q-Mcd.title" = "Допомога";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "wrS-JG-jF6"; */
-"wrS-JG-jF6.title" = "<None>";
+"wrS-JG-jF6.title" = "<Нема>";
 
 /* Class = "NSMenuItem"; title = "Subtitles"; ObjectID = "xDJ-GA-Gjs"; */
-"xDJ-GA-Gjs.title" = "Subtitles";
+"xDJ-GA-Gjs.title" = "Субтитри";
 
 /* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
-"yHI-7D-OaI.title" = "Deinterlace";
+"yHI-7D-OaI.title" = "Деінтерлейсинг";
+
+/* Class = "NSMenuItem"; title = "Open in New Window…"; ObjectID = "z9W-ga-j3b"; */
+"z9W-ga-j3b.title" = "Відкрити в Новому Вікні…";

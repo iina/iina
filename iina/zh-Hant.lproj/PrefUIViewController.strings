@@ -1,3 +1,9 @@
+/* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "0Gp-vj-UzY"; */
+"0Gp-vj-UzY.title" = "位於底部";
+
+/* Class = "NSMenuItem"; title = "Floating"; ObjectID = "7Dv-q2-5TV"; */
+"7Dv-q2-5TV.title" = "懸浮";
+
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "82A-XQ-BvS"; */
 "82A-XQ-BvS.title" = "自動隱藏:";
 
@@ -34,8 +40,14 @@
 /* Class = "NSTextFieldCell"; title = "On Screen Controller:"; ObjectID = "g06-Ja-Ot8"; */
 "g06-Ja-Ot8.title" = "播放控制:";
 
+/* Class = "NSTextFieldCell"; title = "Layout:"; ObjectID = "l54-63-V6n"; */
+"l54-63-V6n.title" = "樣式:";
+
 /* Class = "NSButtonCell"; title = "Snap to center when dragging"; ObjectID = "mdD-if-Wqw"; */
 "mdD-if-Wqw.title" = "拖動時吸附到窗口中心";
+
+/* Class = "NSMenuItem"; title = "Top"; ObjectID = "se2-DE-pJk"; */
+"se2-DE-pJk.title" = "位於頂部";
 
 /* Class = "NSTextFieldCell"; title = "Text size:"; ObjectID = "suy-e8-j4i"; */
 "suy-e8-j4i.title" = "字體大小:";
@@ -43,3 +55,10 @@
 /* Class = "NSButtonCell"; title = "Resize to video size only when opening files manually"; ObjectID = "uD1-HB-46y"; */
 "uD1-HB-46y.title" = "僅在手動打開檔案時調整視窗大小";
 
+"Xey-3m-f6G.title" = "啟用縮圖預覽";
+
+"R1l-SN-bG5.title" = "縮圖快取:";
+
+"d60-w5-xXY.title" = "計算中…";
+
+"OAh-HP-wST.title" = "清除快取…";

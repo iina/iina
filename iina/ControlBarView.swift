@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 16/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -35,7 +35,7 @@ class ControlBarView: NSVisualEffectView {
       )
       // stick to center
       let windowFrame = window!.frame
-      if UserDefaults.standard.bool(forKey: Preference.Key.controlBarStickToCenter) {
+      if Preference.bool(for: .controlBarStickToCenter) {
         let xPosWhenCenter = (windowFrame.width - frame.width) / 2
         if  abs(newOrigin.x - xPosWhenCenter) <= 25 {
           newOrigin.x = xPosWhenCenter
@@ -57,6 +57,11 @@ class ControlBarView: NSVisualEffectView {
         newOrigin.y = 0
       }
       self.setFrameOrigin(newOrigin)
+      // save position
+      let xPos = (newOrigin.x + frame.width / 2) / windowFrame.width
+      let yPos = (newOrigin.y) / windowFrame.height
+      Preference.set(xPos, for: .controlBarPositionHorizontal)
+      Preference.set(yPos, for: .controlBarPositionVertical)
     }
   }
   override func mouseUp(with event: NSEvent) {

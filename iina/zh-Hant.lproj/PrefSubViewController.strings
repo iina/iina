@@ -25,8 +25,8 @@
 /* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "Bjp-HJ-i7V"; */
 "Bjp-HJ-i7V.title" = "無襯線";
 
-/* Class = "NSTextFieldCell"; title = "Opensubtitles account:"; ObjectID = "CKG-r9-NoN"; */
-"CKG-r9-NoN.title" = "Opensubtitles 帳戶:";
+/* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "CKG-r9-NoN"; */
+"CKG-r9-NoN.title" = "OpenSubtitles 帳戶:";
 
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "Chj-YP-eFV"; */
 "Chj-YP-eFV.title" = "偏好語言:";
@@ -67,8 +67,8 @@
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "SLQ-wt-k6Y"; */
 "SLQ-wt-k6Y.title" = "背景:";
 
-/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Uj3-om-L26"; */
-"Uj3-om-L26.title" = "該設定將以ISO 639-2 字符集儲存，兼容於 mpv 和 opensubtitles";
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and OpenSubtitles."; ObjectID = "Uj3-om-L26"; */
+"Uj3-om-L26.title" = "該設定將以ISO 639-2 字符集儲存，兼容於 mpv 和 OpenSubtitles";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "VBZ-bi-gTh"; */
 "VBZ-bi-gTh.title" = "Y:";
@@ -151,3 +151,16 @@
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "zLl-vV-p1h"; */
 "zLl-vV-p1h.title" = "右";
 
+"xsH-Bm-ZPp.title" = "禁用";
+
+"ul7-yg-cCb.title" = "包含媒體文件名的字幕";
+
+"d5R-vH-0o0.title" = "由 IINA 智能選擇";
+
+"mVR-wA-nID.title" = "優先加載文件名含有以下字符串的字幕:";
+
+"5eA-EB-Hco.title" = "請輸入一系列逗號分隔的字符串。";
+
+"VZs-zv-0oM.title" = "在以下目錄中也查找字幕:";
+
+"NHu-6z-rEm.title" = "各路徑由冒號 (:) 分隔。允許相對路徑和結尾的通配符 (*)。";

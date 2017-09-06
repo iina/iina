@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 25/7/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Foundation
@@ -93,6 +93,14 @@ func ==(lhs: VideoTime, rhs: VideoTime) -> Bool {
 
 func *(lhs: VideoTime, rhs: Double) -> VideoTime {
   return VideoTime(lhs.second * rhs)
+}
+
+func /(lhs: VideoTime?, rhs: VideoTime?) -> Double? {
+  if let lhs = lhs, let rhs = rhs {
+    return lhs.second / rhs.second
+  } else {
+    return nil
+  }
 }
 
 func -(lhs: VideoTime, rhs: VideoTime) -> VideoTime {

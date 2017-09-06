@@ -33,8 +33,6 @@ struct MPVOption {
     static let rebaseStartTime = "rebase-start-time"
     /** --speed=<0.01-100> */
     static let speed = "speed"
-    /** --loop=<N|inf|force|no> */
-    static let loop = "loop"
     /** --pause */
     static let pause = "pause"
     /** --shuffle */
@@ -61,6 +59,10 @@ struct MPVOption {
     static let loadUnsafePlaylists = "load-unsafe-playlists"
     /** --access-references=<yes|no> */
     static let accessReferences = "access-references"
+    /** --loop-playlist=<N|inf|force|no> */
+    static let loopPlaylist = "loop-playlist"
+    /** --loop */
+    static let loop = "loop"
     /** --loop-file=<N|inf|no> */
     static let loopFile = "loop-file"
     /** --ab-loop-a=<time> */
@@ -425,6 +427,10 @@ struct MPVOption {
     static let subShadowOffset = "sub-shadow-offset"
     /** --sub-spacing=<size> */
     static let subSpacing = "sub-spacing"
+    /** --sub-filter-sdh=<yes|no> */
+    static let subFilterSdh = "sub-filter-sdh"
+    /** --sub-filter-sdh-harder=<yes|no> */
+    static let subFilterSdhHarder = "sub-filter-sdh-harder"
   }
 
   struct Window {
@@ -440,6 +446,8 @@ struct MPVOption {
     static let fsScreen = "fs-screen"
     /** --keep-open=<yes|no|always> */
     static let keepOpen = "keep-open"
+    /** --keep-open-pause=<yes|no> */
+    static let keepOpenPause = "keep-open-pause"
     /** --image-display-duration=<seconds|inf> */
     static let imageDisplayDuration = "image-display-duration"
     /** --force-window=<yes|no|immediate> */
@@ -567,6 +575,8 @@ struct MPVOption {
     static let demuxer = "demuxer"
     /** --demuxer-lavf-analyzeduration=<value> */
     static let demuxerLavfAnalyzeduration = "demuxer-lavf-analyzeduration"
+    /** --demuxer-lavf-probe-info=<yes|no|auto> */
+    static let demuxerLavfProbeInfo = "demuxer-lavf-probe-info"
     /** --demuxer-lavf-probescore=<1-100> */
     static let demuxerLavfProbescore = "demuxer-lavf-probescore"
     /** --demuxer-lavf-allow-mimetype=<yes|no> */
@@ -615,10 +625,10 @@ struct MPVOption {
     static let demuxerRawvideoCodec = "demuxer-rawvideo-codec"
     /** --demuxer-rawvideo-size=<value> */
     static let demuxerRawvideoSize = "demuxer-rawvideo-size"
-    /** --demuxer-max-packets=<packets> */
-    static let demuxerMaxPackets = "demuxer-max-packets"
     /** --demuxer-max-bytes=<bytes> */
     static let demuxerMaxBytes = "demuxer-max-bytes"
+    /** --demuxer-max-packets=<packets> */
+    static let demuxerMaxPackets = "demuxer-max-packets"
     /** --demuxer-thread=<yes|no> */
     static let demuxerThread = "demuxer-thread"
     /** --demuxer-readahead-secs=<seconds> */
@@ -672,8 +682,6 @@ struct MPVOption {
     static let noInputRightAltGr = "no-input-right-alt-gr"
     /** --input-vo-keyboard=<yes|no> */
     static let inputVoKeyboard = "input-vo-keyboard"
-    /** --input-app-events=<yes|no> */
-    static let inputAppEvents = "input-app-events"
   }
 
   struct OSD {
@@ -1055,12 +1063,16 @@ struct MPVOption {
     static let angleD3d11Warp = "angle-d3d11-warp"
     /** --angle-egl-windowing=<yes|no|auto> */
     static let angleEglWindowing = "angle-egl-windowing"
+    /** --angle-flip=<yes|no> */
+    static let angleFlip = "angle-flip"
     /** --angle-max-frame-latency=<1-16> */
     static let angleMaxFrameLatency = "angle-max-frame-latency"
     /** --angle-renderer=<d3d9|d3d11|auto> */
     static let angleRenderer = "angle-renderer"
     /** --angle-swapchain-length=<2-16> */
     static let angleSwapchainLength = "angle-swapchain-length"
+    /** --cocoa-force-dedicated-gpu=<yes|no> */
+    static let cocoaForceDedicatedGpu = "cocoa-force-dedicated-gpu"
     /** --opengl-sw */
     static let openglSw = "opengl-sw"
     /** --opengl-backend=<sys> */
@@ -1111,6 +1123,8 @@ struct MPVOption {
     static let openglEarlyFlush = "opengl-early-flush"
     /** --opengl-dumb-mode=<yes|no> */
     static let openglDumbMode = "opengl-dumb-mode"
+    /** --opengl-shader-cache-dir=<dirname> */
+    static let openglShaderCacheDir = "opengl-shader-cache-dir"
   }
 
   struct Miscellaneous {

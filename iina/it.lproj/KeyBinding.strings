@@ -17,14 +17,14 @@
 "cmd.frame-step" = "Frame successivo";
 "cmd.frame-back-step" = "Frame precedente";
 "cmd.ab-loop" = "A-B loop";
-"cmd.sub-seek" = "Sub seek";
+"cmd.sub-seek" = "Scorri sottotitoli";
 "cmd.playlist-next" = "Media successivo";
 "cmd.playlist-prev" = "Media precedente";
 "cmd.playlist-move" = "Muovi elementi della playlist";
 "cmd.playlist-clear" = "Cancella playlist";
 "cmd.playlist-remove" = "Rimuovi";
 "cmd.playlist-shuffle" = "Mescola";
-"cmd.write-watch-later-config" = "Registra storia delle riproduzioni";
+"cmd.write-watch-later-config" = "Salva momento di riproduzione";
 "cmd.stop" = "Stop";
 "cmd.quit" = "Esci";
 "cmd.quit-watch-later" = "Esci (salva stato attuale)";
@@ -34,6 +34,23 @@
 "cmd.loadlist" = "Carica playlist";
 "cmd.run" = "Run";
 
+"iina.flip" = "Capovolgi";
+"iina.mirror" = "Specchia";
+
+"iina.toggle-pip" = "Inverti Picture-in-Picture";
+"iina.open-file" = "Apri file";
+"iina.open-url" = "Apri URL";
+"iina.video-panel" = "Pannello video";
+"iina.audio-panel" = "Pannello audio";
+"iina.sub-panel" = "Pannello sottotitoli";
+"iina.playlist-panel" = "Pannello playlist";
+"iina.chapter-panel" = "Pannello capitoli";
+"iina.toggle-flip" = "Inverti capovolgi";
+"iina.toggle-mirror" = "Inverti specchia";
+"iina.save-playlist" = "Salva playlist corrente";
+"iina.delete-current-file" = "Sposta nel cestino file corrente";
+"iina.find-online-subs" = "Trova sottotitoli online";
+"iina.save-downloaded-sub" = "Salva i sottotitoli scaricati";
 
 "yes" = "Si";
 "no" = "No";
@@ -44,7 +61,7 @@
 "minus" = "meno";
 "forward" = "avanti";
 "backward" = "indietro";
-"seek-to" = "a";
+"seek-to" = "scorri a";
 
 "relative" = "i";
 "absolute" = "i";
@@ -59,6 +76,7 @@
 "opt.speed" = "Velocità";
 
 "opt.video" = "Traccia video";
+"opt.video-aspect" = "Aspetto video";
 "opt.contrast" = "Contrasto";
 "opt.brightness" = "Luminosità";
 "opt.gamma" = "Gamma";
@@ -68,15 +86,17 @@
 "opt.audio" = "Traccia audio";
 "opt.volume" = "Volume";
 "opt.mute" = "Silenzio";
-"opt.audio-delay" = "Tirtardo audio";
+"opt.audio-delay" = "Rirtardo audio";
 
 "opt.sub" = "Traccia sottotitoli";
 "opt.sub-delay" = "Ritardo sottotitoli";
 "opt.sub-pos" = "Posizione sottotitotli";
 "opt.sub-scale" = "Dimensione sottotitotli";
 "opt.sub-visibility" = "Visibilità sottotitotli";
+"opt.sub-ass-style-override" = "Sovrascrivi stili ASS";
 
 "opt.fullscreen" = "Schermo intero";
+"opt.ontop" = "Mostra in primo piano";
 
 "opt.chapter" = "Capitolo";
 
@@ -88,5 +108,5 @@
 "read.cycle" = "Cicla {{property}}{{#dir_down}} Verso{{/dir_down}}";
 "read.cycle-values" = "Cicla {{property}} in ({{{values}}})";
 "read.seek" = "Scorri {{#fwd}}avanti{{/fwd}}{{#bwd}}indietro{{/bwd}}{{#abs}}a{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
-"read.sub-seek" = "Scorri al {{#skip_1}}successivo{{/skip_1}}{{#skip_-1}}precedente{{/skip_-1}} sottotitolo";
+"read.sub-seek" = "Scorri al {{#skip_1}}successivo{{/skip_1}}{{#skip_-1}}precedente{{/skip_-1}}sottotitolo";
 

@@ -39,12 +39,24 @@ class PrefSubViewController: NSViewController {
   @IBOutlet weak var scrollView: NSScrollView!
   @IBOutlet weak var subLangTokenView: NSTokenField!
   @IBOutlet weak var loginIndicator: NSProgressIndicator!
-
+  @IBOutlet weak var defaultEncodingList: NSPopUpButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 460))
+    
+    let defaultEncoding = Preference.string(for: .defaultEncoding)
+    for encoding in AppData.encodings {
+      defaultEncodingList.addItem(withTitle: encoding.title)
+      let lastItem = defaultEncodingList.lastItem!
+      lastItem.representedObject = encoding.code
+      if encoding.code == defaultEncoding ?? "auto" {
+        defaultEncodingList.select(lastItem)
+      }
+    }
+    
+    defaultEncodingList.menu?.insertItem(NSMenuItem.separator(), at: 1)
 
     subLangTokenView.delegate = self
     loginIndicator.isHidden = true
@@ -52,16 +64,16 @@ class PrefSubViewController: NSViewController {
 
   @IBAction func chooseSubFontAction(_ sender: AnyObject) {
     Utility.quickFontPickerWindow { font in
-      UserDefaults.standard.set(font ?? "sans-serif", forKey: Preference.Key.subTextFont)
+      Preference.set(font ?? "sans-serif", for: .subTextFont)
       UserDefaults.standard.synchronize()
     }
   }
 
   @IBAction func openSubLoginAction(_ sender: AnyObject) {
-    let currUsername = UserDefaults.standard.string(forKey: Preference.Key.openSubUsername) ?? ""
+    let currUsername = Preference.string(for: .openSubUsername) ?? ""
     if currUsername.isEmpty {
       // if current username is empty, login
-      let _ = Utility.quickUsernamePasswordPanel(messageText: "Opensubtitles Login", informativeText: "Please enter your username and password") {
+      let _ = Utility.quickUsernamePasswordPanel("opensub.login") {
         (username, password) in
         loginIndicator.isHidden = false
         loginIndicator.startAnimation(nil)
@@ -70,7 +82,7 @@ class PrefSubViewController: NSViewController {
         }.then { () -> Void in
           let status = OpenSubSupport.savePassword(username: username, passwd: password)
           if status == errSecSuccess {
-            UserDefaults.standard.set(username, forKey: Preference.Key.openSubUsername)
+            Preference.set(username, for: .openSubUsername)
           } else {
             Utility.showAlert("sub.cannot_save_passwd", arguments: [SecCopyErrorMessageString(status, nil) as! CVarArg])
           }
@@ -92,10 +104,16 @@ class PrefSubViewController: NSViewController {
       }
     } else {
       // else, logout
-      UserDefaults.standard.set("", forKey: Preference.Key.openSubUsername)
+      Preference.set("", for: .openSubUsername)
     }
   }
-
+  
+  @IBAction func changeDefaultEncoding(_ sender: NSPopUpButton) {
+    Preference.set(sender.selectedItem?.representedObject!, for: .defaultEncoding)
+    PlayerCore.active.setSubEncoding((sender.selectedItem?.representedObject as? String) ?? "auto")
+    PlayerCore.active.reloadAllSubs()
+  }
+  
   @IBAction func OpenSubHelpBtnAction(_ sender: AnyObject) {
     NSWorkspace.shared().open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#opensubtitles"))!)
   }
@@ -225,7 +243,7 @@ class SubLangToken: NSObject {
 
   override func transformedValue(_ value: Any?) -> Any? {
     let username = value as? NSString ?? ""
-    return NSLocalizedString((username.length == 0 ? "login" : "logout"), comment: "")
+    return NSLocalizedString((username.length == 0 ? "general.login" : "general.logout"), comment: "")
   }
   
 }

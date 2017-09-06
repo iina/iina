@@ -31,6 +31,9 @@ class AboutWindowController: NSWindowController {
   override func windowDidLoad() {
     super.windowDidLoad()
 
+    window?.titlebarAppearsTransparent = true
+    window?.backgroundColor = .white
+
     let infoDic = Bundle.main.infoDictionary!
     iconImageView.image = NSApp.applicationIconImage
     let version = infoDic["CFBundleShortVersionString"] as! String
@@ -38,11 +41,15 @@ class AboutWindowController: NSWindowController {
     versionLabel.stringValue = "\(version) Build \(build)"
     // let copyright = infoDic["NSHumanReadableCopyright"] as! String
 
-    mpvVersionLabel.stringValue = PlayerCore.shared.mpvController.mpvVersion
+    mpvVersionLabel.stringValue = PlayerCore.active.mpv.mpvVersion
 
     let contrubutionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf")!
     detailTextView.readRTFD(fromFile: contrubutionFile)
+  }
 
+  @IBAction func creditsBtnAction(_ sender: Any) {
+    guard let path = Bundle.main.path(forResource: "Credits", ofType: "rtf") else { return }
+    NSWorkspace.shared().openFile(path)
   }
 
 }

@@ -71,7 +71,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     super.windowDidLoad()
     window?.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
 
-    watchProperties = UserDefaults.standard.array(forKey: Preference.Key.watchProperties) as! [String]
+    watchProperties = Preference.array(for: .watchProperties) as! [String]
     watchTableView.delegate = self
     watchTableView.dataSource = self
 
@@ -80,6 +80,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
 
     NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: Constants.Noti.fileLoaded, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: Constants.Noti.mainWindowChanged, object: nil)
   }
 
   deinit {
@@ -89,8 +90,8 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   }
 
   func updateInfo(dynamic: Bool = false) {
-    let controller = PlayerCore.shared.mpvController
-    let info = PlayerCore.shared.info
+    let controller = PlayerCore.lastActive.mpv!
+    let info = PlayerCore.lastActive.info
 
     if !dynamic {
 
@@ -228,7 +229,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     if identifier == Constants.Identifier.key {
       return property
     } else if identifier == Constants.Identifier.value {
-      return PlayerCore.shared.mpvController.getString(property) ?? "<Error>"
+      return PlayerCore.active.mpv.getString(property) ?? "<Error>"
     }
     return ""
   }
@@ -243,7 +244,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   }
 
   @IBAction func addWatchAction(_ sender: AnyObject) {
-    let _ = Utility.quickPromptPanel(messageText: "Add watch property", informativeText: "Please enter a valid MPV property name.") { str in
+    let _ = Utility.quickPromptPanel("add_watch") { str in
       watchProperties.append(str)
       watchTableView.reloadData()
       saveWatchList()
@@ -277,7 +278,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   }
 
   private func saveWatchList() {
-    UserDefaults.standard.set(watchProperties, forKey: Preference.Key.watchProperties)
+    Preference.set(watchProperties, for: .watchProperties)
   }
 
 }

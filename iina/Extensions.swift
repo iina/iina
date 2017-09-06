@@ -3,7 +3,7 @@
 //  iina
 //
 //  Created by lhc on 12/8/16.
-//  Copyright © 2016年 lhc. All rights reserved.
+//  Copyright © 2016 lhc. All rights reserved.
 //
 
 import Cocoa
@@ -77,6 +77,23 @@ extension NSSize {
     }
   }
 
+  /** 
+   Given another size S, returns a size that:
+
+   - maintains the same aspect ratio;
+   - has same height or/and width as S;
+   - always bigger than S.
+   
+   - parameter toSize: The given size S.
+
+   ```
+   +--+------+--+
+   |  |      |  |
+   |  |  S   |  |<-- The result size
+   |  |      |  |
+   +--+------+--+
+   ```
+   */
   func grow(toSize size: NSSize) -> NSSize {
     let sizeAspect = size.aspect
     if aspect > sizeAspect {  // self is wider, grow to meet height
@@ -86,6 +103,23 @@ extension NSSize {
     }
   }
 
+  /**
+   Given another size S, returns a size that:
+
+   - maintains the same aspect ratio;
+   - has same height or/and width as S;
+   - always smaller than S.
+   
+   - parameter toSize: The given size S.
+
+   ```
+   +--+------+--+
+   |  |The   |  |
+   |  |result|  |<-- S
+   |  |size  |  |
+   +--+------+--+
+   ```
+   */
   func shrink(toSize size: NSSize) -> NSSize {
     let  sizeAspect = size.aspect
     if aspect < sizeAspect { // self is taller, shrink to meet height
@@ -93,6 +127,13 @@ extension NSSize {
     } else {
       return NSSize(width: size.width, height: size.width / aspect)
     }
+  }
+
+  func centeredRect(in rect: NSRect) -> NSRect {
+    return NSRect(x: (rect.width - width) / 2,
+                  y: (rect.height - height) / 2,
+                  width: width,
+                  height: height)
   }
 
   func multiply(_ multiplier: CGFloat) -> NSSize {
@@ -163,6 +204,16 @@ extension Array {
   }
 }
 
+extension Dictionary {
+  mutating func safeAppend<T: Equatable>(_ value: T, for key: Key) where Value == Array<T> {
+    if self[key] == nil {
+      self[key] = Array<T>()
+    }
+    if self[key]!.contains(value) { return }
+    self[key]!.append(value)
+  }
+}
+
 extension NSMenu {
   func addItem(withTitle string: String, action selector: Selector? = nil, tag: Int? = nil, obj: Any? = nil, stateOn: Bool = false) {
     let menuItem = NSMenuItem(title: string, action: selector, keyEquivalent: "")
@@ -202,8 +253,12 @@ extension CGFloat {
 }
 
 extension Double {
-  func toStr() -> String {
-    return "\(self)"
+  func toStr(format: String? = nil) -> String {
+    if let f = format {
+      return String(format: f, self)
+    } else {
+      return "\(self)"
+    }
   }
 
   func constrain(min: Double, max: Double) -> Double {
@@ -317,12 +372,43 @@ extension Data {
   }
 }
 
+extension String {
+  var md5: String {
+    get {
+      return self.data(using: .utf8)!.md5
+    }
+  }
+
+  mutating func deleteLast(_ num: Int) {
+    guard num <= characters.count else { self = ""; return }
+    self = self.substring(to: self.index(endIndex, offsetBy: -num))
+  }
+
+  func countOccurances(of str: String, in range: Range<Index>?) -> Int {
+    if let firstRange = self.range(of: str, options: [], range: range, locale: nil) {
+      let nextRange = firstRange.upperBound..<self.endIndex
+      return 1 + countOccurances(of: str, in: nextRange)
+    } else {
+      return 0
+    }
+  }
+}
+
 
 extension CharacterSet {
-  static let urlAllowed = CharacterSet.urlHostAllowed
-    .union(.urlUserAllowed)
-    .union(.urlPasswordAllowed)
-    .union(.urlPathAllowed)
-    .union(.urlQueryAllowed)
-    .union(.urlFragmentAllowed)
+  static let urlAllowed: CharacterSet = {
+    var set = CharacterSet.urlHostAllowed
+      .union(.urlUserAllowed)
+      .union(.urlPasswordAllowed)
+      .union(.urlPathAllowed)
+      .union(.urlQueryAllowed)
+      .union(.urlFragmentAllowed)
+    set.insert(charactersIn: "%")
+    return set
+  }()
+}
+
+
+extension NSMenuItem {
+  static let dummy = NSMenuItem(title: "Dummy", action: nil, keyEquivalent: "")
 }

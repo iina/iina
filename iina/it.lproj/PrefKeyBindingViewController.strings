@@ -5,7 +5,7 @@
 /* Class = "NSTableColumn"; headerCell.title = "Action"; ObjectID = "4Bn-MF-dfY"; */
 "4Bn-MF-dfY.headerCell.title" = "Azione";
 
-/* Class = "NSButtonCell"; title = "New..."; ObjectID = "JYL-hr-KZT"; */
+/* Class = "NSButtonCell"; title = "New…"; ObjectID = "JYL-hr-KZT"; */
 "JYL-hr-KZT.title" = "Nuovo…";
 
 /* Class = "NSTableColumn"; headerCell.title = "Key"; ObjectID = "JwC-60-7Hp"; */
@@ -26,8 +26,12 @@
 /* Class = "NSButtonCell"; title = "Reveal config file in Finder"; ObjectID = "gDo-JL-a9k"; */
 "gDo-JL-a9k.title" = "Mostra il file di configurazione nel Finder";
 
-/* Class = "NSButtonCell"; title = "Duplicate..."; ObjectID = "gpZ-Rh-DMn"; */
+/* Class = "NSButtonCell"; title = "Duplicate…"; ObjectID = "gpZ-Rh-DMn"; */
 "gpZ-Rh-DMn.title" = "Duplica…";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "mLe-eI-lIk"; */
 "mLe-eI-lIk.title" = "Box";
+
+"e70-25-5E4.title" = "Abilita il supporto per Apple Remote";
+
+"3RK-1k-otl.title" = "Mostra i valori originali";

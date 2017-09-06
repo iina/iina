@@ -7,10 +7,14 @@
  */
 
 // Common
-"on" = "On";
-"off" = "Off";
-"login" = "Login";
-"logout" = "Logout";
+"general.on" = "On";
+"general.off" = "Off";
+"general.login" = "Login";
+"general.logout" = "Logout";
+"general.ok" = "OK";
+"general.cancel" = "Annulla";
+"general.username" = "Nome utente";
+"general.password" = "Password";
 
 // PlaylistViewController.swift
 "playlist.playlist_cap" = "PLAYLIST";
@@ -20,8 +24,8 @@
 "main.buffering_indicator" = "Buffer… %d%%";
 
 // QuickSettingViewController.swift
-"quicksetting.aspect_item.Default" = "Default";
-"quicksetting.crop_item.None" = "Nessuno";
+"quicksetting.item_default" = "Default";
+"quicksetting.item_none" = "Nessuno";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
@@ -65,16 +69,6 @@
 "osd.cannot_login" = "Login non riuscito";
 "osd.canceled" = "Annullato";
 
-"update.title_update_found" = "Trovato aggiornamento";
-"update.title_no_update" = "Nessun aggiornamento";
-"update.title_error" = "Errore";
-"update.update_found" = "È disponibile una nuova versione! IINA è ancora in fase alpha, siete invitati ad utilizzare la versione più recente. Scaricatela dal sito internet o da github:";
-"update.no_update" = "State utilizzando la versione più recente.";
-"update.check_failed" = "Impossibile controllare gli aggiornamenti. Probabilmente state usando una versione troppo vecchia. Controllate il sito internet o github.";
-"update.new_version" = "Nuova versione:";
-"update.dl_from_website" = "Vai al sito internet";
-"update.dl_from_github" = "Vai su Github";
-
 "preference.title" = "Preferenze";
 "preference.general" = "Generali";
 "preference.ui" = "Interfaccia";
@@ -82,7 +76,7 @@
 "preference.subtitle" = "Sottotitoli";
 "preference.network" = "Network";
 "preference.control" = "Controlli";
-"preference.keybindings" = "Scorciatoie di tastiera";
+"preference.keybindings" = "Abbreviazioni";
 "preference.advanced" = "Avanzate";
 "preference.scripts" = "Script";
 "preference.not_logged_in" = "Accesso non effettuato";
@@ -101,13 +95,18 @@
 "track.none" = "<Nessuno>";
 
 // Alerts
-"alert.fatal_error" = "Fatal error: %@ \nL'appicazione will exit now.";
+"alert.title_error" = "Errore";
+"alert.title_warning" = "Attenzione";
+"alert.title_info" = "Informazione";
+
+"alert.fatal_error" = "Fatal error: %@ \nL'appicazione verrà subito chiusa.";
 "alert.mpv_error" = "Errore %@ (%@) nell'impostazioni dell'utente %@.";
 "alert.sleep" = "Impossibile impedire lo stop dello schermo!";
 
 "alert.unsupported_audio" = "File audo esterno non supportato.";
 "alert.unsupported_sub" = "Sottotitoli esterni non supportati.";
 "alert.unsupported_url" = "URL non supportato.";
+"alert.wrong_url_format" = "Formato URL errato.";
 
 "alert.error_open" = "Impossibile aprire il file o lo stream!";
 "alert.error_finding_file" = "Impossibile trovare il %@ file!";
@@ -115,14 +114,22 @@
 "alert.error_saving_file" = "Si è verificato un errore durante il salvataggio %@: %@";
 "alert.error_deleting_file" = "Impossibile eliminare il file.";
 
+"alert.config.new.title" = "Nuova configurazione di input";
+"alert.config.new.message" = "Si prega di inserire un nome per la nuova configurazione.";
+"alert.config.duplicate.title" = "Configurazione del duplicato";
+"alert.config.duplicate.message" = "Si prega di inserire il nome per il duplicato del file di configurazione.";
 "alert.config.empty_name" = "Il nome non può essere vuoto.";
-"alert.config.name_exsisting" = "Il nome esite già.";
+"alert.config.name_existing" = "Il nome esite già.";
+"alert.config.file_existing.title" = "Il file è già esistente";
+"alert.config.file_existing.message" = "Questo non sarebbe dovuto succedere. Scegli OK per sovrascrivere, Annulla per mostrere il file nel Finder.";
 "alert.config.cannot_create" = "Impossibile creare il file di configurazione!";
 "alert.config.cannot_write" = "Impossibile scrivere il file di configurazione!";
 
 "alert.filter.incorrect" = "Si è verificato un errore durante l'impostazione dei filtri. Si prega di verificare il formato dei parametri.";
+"alert.add_filter.title" = "Nuovo filtro";
+"alert.add_filter.message" = "Si prega di inserire una stringa di filtro nel formato dei comandi vf o af di MPV.";
 
-"alert.keybinding_config_error" = "Errore nell'analisi del file di configurazione \"%@\"! Ripristino delle scorciatoie di tastiera di default di IINA. Controlla il tuo file di configurazione.";
+"alert.keybinding_config.error" = "Errore nell'analisi del file di configurazione \"%@\"! Ripristino delle scorciatoie di tastiera di default di IINA. Controlla il tuo file di configurazione.";
 
 "alert.extra_option.cannot_read" = "Impossibile leggere le opzioni MPV extra definiti dall'utente.";
 "alert.extra_option.empty" = "La chiave o il valore non può essere vuoto!";
@@ -136,9 +143,38 @@
 "alert.sub.cannot_save_passwd" = "Impossibile salvare la password nel portachiavi: %@";
 "alert.sub.cannot_login" = "Impossibile accedere. Si prega di controllare il vostro nome utente, la password e la connessione di rete.\n\n%@";
 
+"alert.set_default.title" = "Imposta IINA come applicazione predefinita";
+"alert.set_default.message" = "IINA sarà impostata come applicazione predefinita per tutti i formati che supporta.";
+"alert.set_default.success" = "Terminato con %d di successo e %d di errore.";
+
+"alert.add_watch.title" = "Aggiungi proprietà di riproduzione";
+"alert.add_watch.message" = "Si prega di inserire un nome di proprietà MPV valido.";
+
+"alert.jump_to.title" = "Salta a";
+"alert.jump_to.message" = "Si prega di inserire il tempo a cui vuoi saltare. Esempio: 35:20";
+
+"alert.opensub.login.title" = "Login OpenSubtitles";
+"alert.opensub.login.message" = "Si prega di inserire il vostro nome utente e password";
+
+"alert.open_url.title" = "Apri URL";
+"alert.open_url.message" = "Si prega di inserire l'URL:";
+"alert.choose_media_file.title" = "Scegli file media";
+
+"alert.delete_history.title" = "Cancella cronologia riproduzioni";
+"alert.delete_history.message" = "Sei sicuro di cancellare le voci selezionate?";
+
+"alert.filter_hwdec.message" = "Stai per applicare un filtro video. Tuttavia, il decoder hardware attuale potrebbe non supportare in modo corretto i filtri video. Puoi disabilitare la decodifica hardware o passare a Auto(Copia), che consumerà il doppio della memoria.\nPotresti dover ripetere le operazioni precedenti (ad es. reimpostare il ritaglio) per applicarle in modo corretto.";
+"alert.filter_hwdec.abort" = "Interrompi";
+"alert.filter_hwdec.turn_off" = "Disattiva la decodifica hardware";
+"alert.filter_hwdec.use_copy" = "Passa a Auto(Copy)";
+
+"alert.clear_cache.title" = "Elimina la cache delle miniature";
+"alert.clear_cache.message" = "Sei sicuro di eliminare tutta la cache delle miniature?";
+"alert.clear_cache.success" = "Cache eliminata.";
 
 "pl_menu.title_multi" = "%d Elementi";
 "pl_menu.play_next" = "Riproduci il successivo";
+"pl_menu.play_in_new_window" = "Riproduci in una nuova finestra";
 "pl_menu.remove" = "Rimuovi";
 "pl_menu.remove_multi" = "Rimuovi gli elementi selezionati";
 "pl_menu.delete" = "Sposta nel cestino";
@@ -148,3 +184,32 @@
 "pl_menu.reveal_in_finder" = "Mostra nel Finder";
 "pl_menu.add_item" = "Aggiungi elementi…";
 "pl_menu.clear_playlist" = "Cancella la playlist";
+"pl_menu.matched_sub" = "Sottotitoli %d corrispondenti";
+"pl_menu.add_sub" = "Aggiungi sottotitoli…";
+"pl_menu.wrong_sub" = "Sotttotioli errati!";
+
+"keymapping.title" = "Abbreviazioni";
+"keymapping.message" = "Premi i nuovi tasti per aggiungere o modficare le abbreviazioni.";
+
+"filter.video_filters" = "Filtri Video";
+"filter.audio_filters" = "Filtri Audio";
+
+"hwdec.no" = "Disabilita la decodifica hardware.";
+"hwdec.auto" = "Abilita la decodifica hardware. Tuttavia, la maggior parte dei filtri video non funzioneranno in modo corretto.";
+"hwdec.auto-copy" = "Abilita la decodifica hardware. In questo modo verrà utilizzata il doppio della memoria ma i filtri video funzioneranno in modo corretto.";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15sec avanti";
+"touchbar.ahead_30" = "30sec avanti";
+"touchbar.back_15" = "-15sec indietro";
+"touchbar.back_30" = "-30sec indietro";
+"touchbar.next_video" = "Prossimo video";
+"touchbar.prev_video" = "Video precedente";
+"touchbar.increase_volume" = "Volume +";
+"touchbar.decrease_volume" = "Volume -";
+"touchbar.rewind" = "Indietro";
+"touchbar.fast_forward" = "Avanti veloce";
+"touchbar.play_pause" = "Pausa / Riprendi";
+"touchbar.seek" = "Ricerca";
+"touchbar.time" = "Time Position";

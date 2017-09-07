@@ -1,0 +1,51 @@
+/* 
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+
+/* It's optional to localize descriptions for each parameter! */
+
+"crop" = "화면 자르기";
+"crop.w" = "가로 (기본값: 영상의 가로 해상도)";
+"crop.h" = "세로 (기본값: 영상의 세로 해상도)";
+"crop.x" = "기준점 X (기본값: 중앙)";
+"crop.y" = "기준점 Y (기본값: 중앙)";
+
+"expand" = "화면 늘이기";
+"expand.w" = "가로 (기본값: 영상의 가로 해상도)";
+"expand.h" = "세로 (기본값: 영상의 세로 해상도)";
+"expand.x" = "기준점 X (기본값: 중앙)";
+"expand.y" = "기준점 Y (기본값: 중앙)";
+"expand.aspect" = "화면 비율에 맞게 화면 늘이기";
+"expand.round" = "지정 값으로 나누어지도록 반올림함";
+
+"sharpen" = "선명하게";
+"sharpen.msize" = "매트릭스 크기";
+"sharpen.amount" = "강도";
+
+"blur" = "흐리게";
+"blur.msize" = "매트릭스 크기";
+"blur.amount" = "강도";
+
+"delogo" = "로고 제거";
+"delogo.w" = "가로";
+"delogo.h" = "세로";
+"delogo.x" = "기준점 X";
+"delogo.y" = "기준점 Y";
+
+"negative" = "색상 반전";
+
+"vflip" = "상하 뒤집기";
+"hflip" = "좌우 뒤집기";
+
+"custom_mpv" = "사용자 설정 필터 (MPV)";
+"custom_mpv.name" = "필터 항목";
+"custom_mpv.string" = "필터 값";
+
+"custom_ffmpeg" = "사용자 설정 필터 (FFmpeg)";
+"custom_ffmpeg.name" = "필터 항목";
+"custom_ffmpeg.string" = "필터 값";

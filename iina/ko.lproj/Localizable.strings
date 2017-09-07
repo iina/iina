@@ -172,6 +172,10 @@
 "alert.clear_cache.message" = "썸네일 캐시를 전부 비우겠습니까?";
 "alert.clear_cache.success" = "캐시를 전부 비웠습니다.";
 
+"alert.nothing_to_open" = "열 수 있는 파일이 없습니다.";
+
+"alert.no_video_track" = "비디오 트랙이 없습니다.";
+
 "pl_menu.title_multi" = "%d개의 항목";
 "pl_menu.play_next" = "다음 항목 재생";
 "pl_menu.play_in_new_window" = "새 윈도우에서 재생";

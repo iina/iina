@@ -1041,7 +1041,6 @@
 		84A0BAA61D2FAF8400BC8DA1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				846121BC1F35FCA500ABB39C /* DraggingDetect.swift */,
 				84A886E21E24F2D3008755BB /* Sub */,
 				8497A4831D2FF573005F504F /* iina-Bridging-Header.h */,
 				84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */,
@@ -1079,6 +1078,7 @@
 				84FBCB361EEACDDD0076C77C /* FFmpegController.h */,
 				84FBCB371EEACDDD0076C77C /* FFmpegController.m */,
 				842904E11F0EC01600478376 /* AutoFileMatcher.swift */,
+				846121BC1F35FCA500ABB39C /* DraggingDetect.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

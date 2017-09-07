@@ -162,7 +162,6 @@ class PlayerCore: NSObject {
     // Send load file command
     info.fileLoading = true
     info.justOpenedFile = true
-    info.currentFileIsOpenedManually = true
     mpv.command(.loadfile, args: [path])
   }
 
@@ -560,7 +559,7 @@ class PlayerCore: NSObject {
 
   func playFile(_ path: String) {
     info.justOpenedFile = true
-    info.currentFileIsOpenedManually = true
+    info.shouldAutoLoadFiles = true
     mpv.command(.loadfile, args: [path, "replace"])
     getPlaylist()
   }
@@ -774,11 +773,11 @@ class PlayerCore: NSObject {
     info.currentURL = path.contains("://") ? URL(string: path) : URL(fileURLWithPath: path)
     // Auto load
     backgroundQueueTicket += 1
-    let currentFileIsOpenedManually = info.currentFileIsOpenedManually
+    let shouldAutoLoadFiles = info.shouldAutoLoadFiles
     let currentTicket = backgroundQueueTicket
     backgroundQueue.async {
       // add files in same folder
-      if currentFileIsOpenedManually {
+      if shouldAutoLoadFiles {
         self.autoLoadFilesInCurrentFolder(ticket: currentTicket)
       }
       // auto load matched subtitles

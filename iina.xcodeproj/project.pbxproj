@@ -58,6 +58,7 @@
 		845E2F441E76B641002C6588 /* SubSelectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E2F421E76B641002C6588 /* SubSelectWindowController.swift */; };
 		845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB0C61D39462E00C011E0 /* ControlBarView.swift */; };
 		8460FBA91D6497490081841B /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460FBA71D6497490081841B /* PlaylistViewController.swift */; };
+		846121BD1F35FCA500ABB39C /* DraggingDetect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846121BC1F35FCA500ABB39C /* DraggingDetect.swift */; };
 		8461BA3D1E407DF7008BB852 /* libmpv.1.24.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8461BA211E407DF7008BB852 /* libmpv.1.24.0.dylib */; };
 		8461BA471E407E24008BB852 /* libass.9.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA0F1E407DF7008BB852 /* libass.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8461BA481E407E24008BB852 /* libavcodec.57.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA101E407DF7008BB852 /* libavcodec.57.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -480,6 +481,7 @@
 		845E2F491E76CFC2002C6588 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		845FB0C61D39462E00C011E0 /* ControlBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
 		8460FBA71D6497490081841B /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
+		846121BC1F35FCA500ABB39C /* DraggingDetect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggingDetect.swift; sourceTree = "<group>"; };
 		8461BA0F1E407DF7008BB852 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = deps/lib/libass.9.dylib; sourceTree = "<group>"; };
 		8461BA101E407DF7008BB852 /* libavcodec.57.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.57.dylib; path = deps/lib/libavcodec.57.dylib; sourceTree = "<group>"; };
 		8461BA111E407DF7008BB852 /* libavdevice.57.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavdevice.57.dylib; path = deps/lib/libavdevice.57.dylib; sourceTree = "<group>"; };
@@ -1076,6 +1078,7 @@
 				84FBCB361EEACDDD0076C77C /* FFmpegController.h */,
 				84FBCB371EEACDDD0076C77C /* FFmpegController.m */,
 				842904E11F0EC01600478376 /* AutoFileMatcher.swift */,
+				846121BC1F35FCA500ABB39C /* DraggingDetect.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1587,6 +1590,7 @@
 				84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */,
 				840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */,
 				84F5D4951E44D5230060A838 /* KeyBindingCriterion.swift in Sources */,
+				846121BD1F35FCA500ABB39C /* DraggingDetect.swift in Sources */,
 				84A886EC1E2573A5008755BB /* JustExtension.swift in Sources */,
 				84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */,
 				84E295C01E2CF9F5006388F7 /* ObjcUtils.m in Sources */,

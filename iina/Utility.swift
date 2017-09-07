@@ -135,12 +135,12 @@ class Utility {
    Pop up an open panel.
    - Returns: Whether user dismissed the panel by clicking OK.
    */
-  static func quickMultipleOpenPanel(title: String, dir: URL? = nil, ok: @escaping ([URL]) -> Void) {
+  static func quickMultipleOpenPanel(title: String, dir: URL? = nil, canChooseDir: Bool, ok: @escaping ([URL]) -> Void) {
     let panel = NSOpenPanel()
     panel.title = title
     panel.canCreateDirectories = false
     panel.canChooseFiles = true
-    panel.canChooseDirectories = false
+    panel.canChooseDirectories = canChooseDir
     panel.resolvesAliases = true
     panel.allowsMultipleSelection = true
     if let dir = dir {

@@ -380,6 +380,18 @@ extension String {
     }
   }
 
+  var isDirectoryAsPath: Bool {
+    get {
+      var re = ObjCBool(false)
+      FileManager.default.fileExists(atPath: self, isDirectory: &re)
+      return re.boolValue
+    }
+  }
+
+  var lowercasedPathExtension: String {
+    return (self as NSString).pathExtension.lowercased()
+  }
+
   mutating func deleteLast(_ num: Int) {
     guard num <= characters.count else { self = ""; return }
     self = self.substring(to: self.index(endIndex, offsetBy: -num))
@@ -412,4 +424,24 @@ extension CharacterSet {
 
 extension NSMenuItem {
   static let dummy = NSMenuItem(title: "Dummy", action: nil, keyEquivalent: "")
+}
+
+
+extension URL {
+  /**
+   Whether the URL represents a directory.
+   
+   - Attention: For 10.10-, it only checks if `path` ends with "/".
+   */
+  var representsDirectory: Bool {
+    if #available(OSX 10.11, *) {
+      return hasDirectoryPath
+    } else {
+      return path.hasSuffix("/")
+    }
+  }
+
+  var isExistingDirectory: Bool {
+    return (try? self.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
+  }
 }

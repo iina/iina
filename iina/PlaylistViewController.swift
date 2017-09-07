@@ -185,7 +185,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       return []
     }
     if let paths = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
-      if player.checkPlayableFiles(paths).0 {
+      if player.hasPlayableFiles(in: paths) {
         return .copy
       }
     }
@@ -239,11 +239,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         player.addToPlaylist(paths: before, at: 0)
       }
     } else if let paths = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
-      let (_, playableFiles) = player.checkPlayableFiles(paths, returnPaths: true)
+      let playableFiles = player.getPlayableFiles(in: paths.map{ URL(fileURLWithPath: $0) })
       if playableFiles.count == 0 {
         return false
       }
-      player.addToPlaylist(paths: playableFiles, at: row)
+      player.addToPlaylist(paths: playableFiles.map { $0.path }, at: row)
     } else {
       return false
     }
@@ -262,10 +262,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   @IBAction func addToPlaylistBtnAction(_ sender: AnyObject) {
     Utility.quickMultipleOpenPanel(title: "Add to playlist", canChooseDir: true) { urls in
-      let paths = urls.map { $0.path }
-      let (_, playableFiles) = self.player.checkPlayableFiles(paths, returnPaths: true)
+      let playableFiles = self.player.getPlayableFiles(in: urls)
       if playableFiles.count != 0 {
-        self.player.addToPlaylist(paths: playableFiles, at: self.player.info.playlist.count)
+        self.player.addToPlaylist(paths: playableFiles.map { $0.path }, at: self.player.info.playlist.count)
         self.player.mainWindow.playlistView.reloadData(playlist: true, chapters: false)
         self.player.sendOSD(.addToPlaylist(playableFiles.count))
       }

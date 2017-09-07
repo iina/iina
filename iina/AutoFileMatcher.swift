@@ -80,11 +80,7 @@ class AutoFileMatcher {
       if hasWildcard {
         // append all sub dirs
         if let contents = try? fm.contentsOfDirectory(at: pathURL, includingPropertiesForKeys: [.isDirectoryKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
-          if #available(OSX 10.11, *) {
-            subDirs.append(contentsOf: contents.filter { $0.hasDirectoryPath })
-          } else {
-            subDirs.append(contentsOf: contents.filter { (try? $0.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false })
-          }
+          subDirs.append(contentsOf: contents.filter { $0.isExistingDirectory })
         }
       } else {
         subDirs.append(pathURL)

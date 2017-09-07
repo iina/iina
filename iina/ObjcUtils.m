@@ -76,12 +76,4 @@ static inline int min(int a, int b, int c) {
   return dist[len0][len1];
 }
 
-+ (BOOL)isDirectory:(NSString *)filePath {
-  BOOL re;
-  NSFileManager *fileManager = [[NSFileManager alloc] init];
-  if (![fileManager fileExistsAtPath:filePath isDirectory:&re])
-    return false;
-  return re;
-}
-
 @end

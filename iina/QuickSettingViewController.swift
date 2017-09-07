@@ -327,10 +327,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       let isChosen = track == nil ? (activeId == 0) : (track!.id == activeId)
       return isChosen ? Constants.String.dot : ""
     } else if columnName == Constants.Identifier.trackName {
-      return track?.readableTitle ?? Constants.String.trackNone
-    } else {
-      return nil
+      return track?.infoString ?? Constants.String.trackNone
+    } else if columnName == Constants.Identifier.trackId {
+      return track?.idString
     }
+    return nil
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {

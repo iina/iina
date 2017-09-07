@@ -86,16 +86,16 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
 class InitialWindowContentView: NSView {
 
-  var playerCore: PlayerCore {
+  var player: PlayerCore {
     return (window!.windowController as! InitialWindowController).player
   }
 
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-    return playerCore.acceptFromPasteboard(sender)
+    return player.acceptFromPasteboard(sender)
   }
 
   override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-    return playerCore.openFromPasteboard(sender)
+    return player.openFromPasteboard(sender)
   }
 
 }

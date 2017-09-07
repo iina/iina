@@ -261,6 +261,9 @@
                             <menuItem title="Deinterlace" id="yHI-7D-OaI">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
+                            <menuItem title="Delogo" id="ArE-2s-JIV">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="kNp-jq-01c"/>
                             <menuItem title="Video Filters…" id="PyY-pR-jz7">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -494,6 +497,7 @@
                 <outlet property="decreaseVolumeSlightly" destination="Zhv-Bz-I5V" id="M7D-Ni-nLm"/>
                 <outlet property="deinterlace" destination="yHI-7D-OaI" id="Z8n-z4-52B"/>
                 <outlet property="deleteCurrentFile" destination="npH-8B-XA4" id="23t-fO-TbK"/>
+                <outlet property="delogo" destination="ArE-2s-JIV" id="zzg-gr-TsG"/>
                 <outlet property="doubleSize" destination="Hal-18-Tnf" id="vnl-Rb-Y3o"/>
                 <outlet property="encodingMenu" destination="Pf6-5i-B1E" id="Gat-gG-pkT"/>
                 <outlet property="file" destination="dMs-cI-mzQ" id="upe-AE-Gf6"/>

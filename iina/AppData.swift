@@ -100,4 +100,11 @@ struct Constants {
   struct Time {
     static let infinite = VideoTime(999, 0, 0)
   }
+  struct FilterName {
+    static let crop = "iina_crop"
+    static let flip = "iina_flip"
+    static let mirror = "iina_mirror"
+    static let audioEq = "iina_aeq"
+    static let delogo = "iina_delogo"
+  }
 }

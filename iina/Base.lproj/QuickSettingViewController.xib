@@ -323,7 +323,7 @@
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
                                                                     <connections>
-                                                                        <action selector="cropBtnAcction:" target="-2" id="8QV-5z-Jse"/>
+                                                                        <action selector="cropBtnAction:" target="-2" id="5b5-dQ-OPB"/>
                                                                     </connections>
                                                                 </button>
                                                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kUi-hW-BR6">

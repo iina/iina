@@ -8,13 +8,17 @@
 
 import Cocoa
 
-// FIXME: can refactor using RawRepresent
+/**
+ Represents a mpv filter. It can be either created by user or loaded from mpv.
+ */
 class MPVFilter: NSObject {
 
   enum FilterType: String {
     case crop = "crop"
+    case expand = "expand"
     case flip = "flip"
     case mirror = "mirror"
+    case lavfi = "lavfi"
   }
 
   // MARK: - Static filters
@@ -25,12 +29,27 @@ class MPVFilter: NSObject {
     return f
   }
 
+  // FIXME: use lavfi vflip
   static func flip() -> MPVFilter {
     return MPVFilter(name: "flip", label: nil, params: nil)
   }
 
+  // FIXME: use lavfi hflip
   static func mirror() -> MPVFilter {
     return MPVFilter(name: "mirror", label: nil, params: nil)
+  }
+
+  /** 
+   A ffmpeg `unsharp` filter.
+   Args: l(uma)x, ly, la, c(hroma)x, xy, ca; default 5:5:0:5:5:0.
+   We only change la and ca here.
+   - parameter msize: Value for lx, ly, cx and cy. Should be an odd integer in [3, 23].
+   - parameter amount: Anount for la and ca. Should be in [-1.5, 1.5].
+   */
+  static func unsharp(amount: Float, msize: Int = 5) -> MPVFilter {
+    let amoutStr = amount.toStr()
+    let msizeStr = msize.toStr()
+    return MPVFilter(lavfiName: "unsharp", label: nil, params: [msizeStr, msizeStr, amoutStr, msizeStr, msizeStr, amoutStr])
   }
 
   // MARK: - Members
@@ -41,12 +60,17 @@ class MPVFilter: NSObject {
   var params: [String: String]?
   var rawParamString: String?
 
+  /** Convert the filter to a valid mpv filter string. */
   var stringFormat: String {
     get {
       var str = ""
+      // label
       if let label = label { str += "@\(label):" }
+      // name
       str += name
+      // params
       if let rpstr = rawParamString {
+        // if is set by user
         str += "="
         str += rpstr
       } else if params != nil && params!.count > 0 {
@@ -57,7 +81,12 @@ class MPVFilter: NSObject {
         // else print param names
         } else {
           str += "="
-          str += params!.map({ (k, v) -> String in return "\(k)=\(v)" }).joined(separator: ":")
+          // special tweak for lavfi filters
+          if name == "lavfi" {
+            str += "[\(params!["graph"]!)]"
+          } else {
+            str += params!.map({ (k, v) -> String in return "\(k)=\(v)" }).joined(separator: ":")
+          }
         }
       }
       return str
@@ -80,10 +109,49 @@ class MPVFilter: NSObject {
     self.rawParamString = splitted.at(1)
   }
 
+  init(name: String, label: String?, paramString: String) {
+    self.name = name
+    self.type = FilterType(rawValue: name)
+    self.label = label
+    self.rawParamString = paramString
+  }
+
+  convenience init(lavfiName: String, label: String?, params: [String]) {
+    var ffmpegGraph = "[\(lavfiName)="
+    ffmpegGraph += params.joined(separator: ":")
+    ffmpegGraph += "]"
+    self.init(name: "lavfi", label: label, paramString: ffmpegGraph)
+  }
+
+  convenience init(lavfiName: String, label: String?, paramDict: [String: String]) {
+    var ffmpegGraph = "[\(lavfiName)="
+    ffmpegGraph += paramDict.map { "\($0)=\($1)" }.joined(separator: ":")
+    ffmpegGraph += "]"
+    self.init(name: "lavfi", label: label, paramString: ffmpegGraph)
+  }
+
+  convenience init(lavfiFilterFromPresetInstance instance: FilterPresetInstance) {
+    var dict: [String: String] = [:]
+    instance.params.forEach { (k, v) in
+      dict[k] = v.stringValue
+    }
+    self.init(lavfiName: instance.preset.name, label: nil, paramDict: dict)
+  }
+
+  convenience init(mpvFilterFromPresetInstance instance: FilterPresetInstance) {
+    var dict: [String: String] = [:]
+    instance.params.forEach { (k, v) in
+      dict[k] = v.stringValue
+    }
+    self.init(name: instance.preset.name, label: nil, params: dict)
+  }
+
   // MARK: - Others
 
+  /** The parameter order when omitting their names. */
   static let formats: [FilterType: String] = [
-    .crop: "w:h:x:y"
+    .crop: "w:h:x:y",
+    .expand: "w:h:x:y:aspect:round"
   ]
 
   // MARK: - Param getter
@@ -112,3 +180,4 @@ class MPVFilter: NSObject {
   }
 
 }
+

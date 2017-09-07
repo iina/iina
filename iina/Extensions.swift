@@ -149,6 +149,37 @@ extension NSSize {
 
 extension NSRect {
 
+  init(vertexPoint pt1: NSPoint, and pt2: NSPoint) {
+    self.init(x: min(pt1.x, pt2.x),
+              y: min(pt1.y, pt2.y),
+              width: fabs(pt1.x - pt2.x),
+              height: fabs(pt1.y - pt2.y))
+  }
+
+  var x: CGFloat {
+    get {
+      return self.origin.x
+    }
+  }
+
+  var xMax: CGFloat {
+    get {
+      return self.origin.x + self.size.width
+    }
+  }
+
+  var y: CGFloat {
+    get {
+      return self.origin.y
+    }
+  }
+
+  var yMax: CGFloat {
+    get {
+      return self.origin.y + self.size.height
+    }
+  }
+
   func multiply(_ multiplier: CGFloat) -> NSRect {
     return NSRect(x: origin.x, y: origin.y, width: width * multiplier, height: height * multiplier)
   }
@@ -196,7 +227,7 @@ extension NSPoint {
 
 extension Array {
   func at(_ pos: Int) -> Element? {
-    if pos < count {
+    if pos >= 0 && pos < count {
       return self[pos]
     } else {
       return nil
@@ -234,6 +265,12 @@ extension Int {
     if self < min { value = min }
     if self > max { value = max }
     return value
+  }
+}
+
+extension Float {
+  func toStr() -> String {
+    return "\(self)"
   }
 }
 
@@ -380,6 +417,18 @@ extension String {
     }
   }
 
+  var isDirectoryAsPath: Bool {
+    get {
+      var re = ObjCBool(false)
+      FileManager.default.fileExists(atPath: self, isDirectory: &re)
+      return re.boolValue
+    }
+  }
+
+  var lowercasedPathExtension: String {
+    return (self as NSString).pathExtension.lowercased()
+  }
+
   mutating func deleteLast(_ num: Int) {
     guard num <= characters.count else { self = ""; return }
     self = self.substring(to: self.index(endIndex, offsetBy: -num))
@@ -412,4 +461,24 @@ extension CharacterSet {
 
 extension NSMenuItem {
   static let dummy = NSMenuItem(title: "Dummy", action: nil, keyEquivalent: "")
+}
+
+
+extension URL {
+  /**
+   Whether the URL represents a directory.
+   
+   - Attention: For 10.10-, it only checks if `path` ends with "/".
+   */
+  var representsDirectory: Bool {
+    if #available(OSX 10.11, *) {
+      return hasDirectoryPath
+    } else {
+      return path.hasSuffix("/")
+    }
+  }
+
+  var isExistingDirectory: Bool {
+    return (try? self.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
+  }
 }

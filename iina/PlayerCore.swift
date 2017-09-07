@@ -8,6 +8,7 @@
 
 import Cocoa
 
+
 class PlayerCore: NSObject {
 
   // MARK: - Multiple instances
@@ -129,12 +130,15 @@ class PlayerCore: NSObject {
   // MARK: - Control commands
 
   // Open a file
-  func openURL(_ url: URL?, isNetworkResource: Bool? = nil) {
+  func openURL(_ url: URL?, isNetworkResource: Bool? = nil, shouldAutoLoad: Bool = false) {
     guard let url = url else {
       Utility.log("Error: empty file path or url")
       return
     }
     let isNetwork = isNetworkResource ?? !url.isFileURL
+    if shouldAutoLoad {
+      info.shouldAutoLoadFiles = true
+    }
     let path = isNetwork ? url.absoluteString : url.path
     openMainWindow(path: path, url: url, isNetwork: isNetwork)
   }
@@ -162,7 +166,6 @@ class PlayerCore: NSObject {
     // Send load file command
     info.fileLoading = true
     info.justOpenedFile = true
-    info.currentFileIsOpenedManually = true
     mpv.command(.loadfile, args: [path])
   }
 
@@ -427,13 +430,14 @@ class PlayerCore: NSObject {
     if enable {
       if info.flipFilter == nil {
         let vf = MPVFilter.flip()
+        vf.label = Constants.FilterName.flip
         if addVideoFilter(vf) {
           info.flipFilter = vf
         }
       }
     } else {
       if let vf = info.flipFilter {
-        removeVideoFiler(vf)
+        let _ = removeVideoFiler(vf)
         info.flipFilter = nil
       }
     }
@@ -443,13 +447,14 @@ class PlayerCore: NSObject {
     if enable {
       if info.mirrorFilter == nil {
         let vf = MPVFilter.mirror()
+        vf.label = Constants.FilterName.mirror
         if addVideoFilter(vf) {
           info.mirrorFilter = vf
         }
       }
     } else {
       if let vf = info.mirrorFilter {
-        removeVideoFiler(vf)
+        let _ = removeVideoFiler(vf)
         info.mirrorFilter = nil
       }
     }
@@ -560,7 +565,7 @@ class PlayerCore: NSObject {
 
   func playFile(_ path: String) {
     info.justOpenedFile = true
-    info.currentFileIsOpenedManually = true
+    info.shouldAutoLoadFiles = true
     mpv.command(.loadfile, args: [path, "replace"])
     getPlaylist()
   }
@@ -587,27 +592,28 @@ class PlayerCore: NSObject {
     if let aspect = Aspect(string: str) {
       let cropped = NSMakeSize(CGFloat(vwidth), CGFloat(vheight)).crop(withAspect: aspect)
       let vf = MPVFilter.crop(w: Int(cropped.width), h: Int(cropped.height), x: nil, y: nil)
+      vf.label = Constants.FilterName.crop
       setCrop(fromFilter: vf)
       // warning! may should not update it here
       info.unsureCrop = str
       info.cropFilter = vf
     } else {
       if let filter = info.cropFilter {
-        removeVideoFiler(filter)
+        let _ = removeVideoFiler(filter)
         info.unsureCrop = "None"
       }
     }
   }
 
   func setCrop(fromFilter filter: MPVFilter) {
-    filter.label = "iina_crop"
+    filter.label = Constants.FilterName.crop
     if addVideoFilter(filter) {
       info.cropFilter = filter
     }
   }
 
   func setAudioEq(fromFilter filter: MPVFilter) {
-    filter.label = "iina_aeq"
+    filter.label = Constants.FilterName.audioEq
     addAudioFilter(filter)
     info.audioEqFilter = filter
   }
@@ -660,8 +666,14 @@ class PlayerCore: NSObject {
     return result
   }
 
-  func removeVideoFiler(_ filter: MPVFilter) {
-    mpv.command(.vf, args: ["del", filter.stringFormat], checkError: false)
+  func removeVideoFiler(_ filter: MPVFilter) -> Bool {
+    var result = true
+    if let label = filter.label {
+      mpv.command(.vf, args: ["del", "@" + label], checkError: false) { result = $0 >= 0 }
+    } else {
+      mpv.command(.vf, args: ["del", filter.stringFormat], checkError: false) { result = $0 >= 0 }
+    }
+    return result
   }
 
   func addAudioFilter(_ filter: MPVFilter) {
@@ -774,11 +786,11 @@ class PlayerCore: NSObject {
     info.currentURL = path.contains("://") ? URL(string: path) : URL(fileURLWithPath: path)
     // Auto load
     backgroundQueueTicket += 1
-    let currentFileIsOpenedManually = info.currentFileIsOpenedManually
+    let shouldAutoLoadFiles = info.shouldAutoLoadFiles
     let currentTicket = backgroundQueueTicket
     backgroundQueue.async {
       // add files in same folder
-      if currentFileIsOpenedManually {
+      if shouldAutoLoadFiles {
         self.autoLoadFilesInCurrentFolder(ticket: currentTicket)
       }
       // auto load matched subtitles
@@ -836,13 +848,8 @@ class PlayerCore: NSObject {
     NotificationCenter.default.post(Notification(name: Constants.Noti.fileLoaded))
   }
 
-  func notifyMainWindowVideoSizeChanged() {
-    DispatchQueue.main.sync {
-      self.mainWindow.adjustFrameByVideoSize()
-    }
-  }
-
   func playbackRestarted() {
+    reloadSavedIINAfilters()
     DispatchQueue.main.async {
       Timer.scheduledTimer(timeInterval: TimeInterval(0.2), target: self, selector: #selector(self.reEnableOSDAfterFileLoading), userInfo: nil, repeats: false)
     }
@@ -896,6 +903,12 @@ class PlayerCore: NSObject {
   }
 
   // MARK: - Sync with UI in MainWindow
+
+  func notifyMainWindowVideoSizeChanged() {
+    DispatchQueue.main.sync {
+      self.mainWindow.adjustFrameByVideoSize()
+    }
+  }
 
   // difficult to use option set
   enum SyncUIOption {
@@ -1144,6 +1157,55 @@ class PlayerCore: NSObject {
         swap(&width, &height)
       }
       return (width, height)
+    }
+  }
+
+  var originalVideoSize: (Int, Int) {
+    get {
+      if let w = info.videoWidth, let h = info.videoHeight {
+        let netRotate = mpv.getInt(MPVProperty.videoParamsRotate) - mpv.getInt(MPVOption.Video.videoRotate)
+        let rotate = netRotate >= 0 ? netRotate : netRotate + 360
+        if rotate == 90 || rotate == 270 {
+          return (h, w)
+        } else {
+          return (w, h)
+        }
+      } else {
+        return (0, 0)
+      }
+    }
+  }
+
+  /** Check if there are IINA filters saved in watch_later file. */
+  func reloadSavedIINAfilters() {
+    // vf
+    let videoFilters = mpv.getFilters(MPVProperty.vf)
+    for filter in videoFilters {
+      guard let label = filter.label else { continue }
+      switch label {
+      case Constants.FilterName.crop:
+        info.cropFilter = filter
+        info.unsureCrop = ""
+      case Constants.FilterName.flip:
+        info.flipFilter = filter
+      case Constants.FilterName.mirror:
+        info.mirrorFilter = filter
+      case Constants.FilterName.delogo:
+        info.delogoFiter = filter
+      default:
+        break
+      }
+    }
+    // af
+    let audioFilters = mpv.getFilters(MPVProperty.af)
+    for filter in audioFilters {
+      guard let label = filter.label else { continue }
+      switch label {
+      case Constants.FilterName.audioEq:
+        info.audioEqFilter = filter
+      default:
+        break
+      }
     }
   }
 

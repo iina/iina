@@ -57,13 +57,6 @@ class MainMenuActionHandler: NSResponder {
     }
   }
 
-  func menuOpenHistory(_ sender: NSMenuItem) {
-    guard let url = sender.representedObject as? URL else { return }
-    player.playFile(url.path)
-    // FIXME: this line shouldn't be here
-    player.info.isNetworkResource = url.isFileURL
-  }
-
 }
 
 // MARK: - Control

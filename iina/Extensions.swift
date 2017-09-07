@@ -269,10 +269,11 @@ extension Double {
   }
 
   func prettyFormat() -> String {
-    if truncatingRemainder(dividingBy: 1) == 0 {
-      return "\(Int(self))"
+    let rounded = (self * 1000).rounded() / 1000
+    if rounded.truncatingRemainder(dividingBy: 1) == 0 {
+      return "\(Int(rounded))"
     } else {
-      return "\(self)"
+      return "\(rounded)"
     }
   }
 }

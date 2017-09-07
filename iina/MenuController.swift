@@ -72,6 +72,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var mirror: NSMenuItem!
   @IBOutlet weak var flip: NSMenuItem!
   @IBOutlet weak var deinterlace: NSMenuItem!
+  @IBOutlet weak var delogo: NSMenuItem!
   @IBOutlet weak var videoFilters: NSMenuItem!
   //Audio
   @IBOutlet weak var audioMenu: NSMenu!
@@ -187,16 +188,22 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- aspect
     var aspectList = AppData.aspects
+    // we need to set the represented object separately, since `Constants.String.default` may be localized.
+    var aspectListObject = AppData.aspects
     aspectList.insert(Constants.String.default, at: 0)
-    bind(menu: aspectMenu, withOptions: aspectList, objects: nil, objectMap: nil, action: #selector(MainMenuActionHandler.menuChangeAspect(_:))) {
+    aspectListObject.insert("Default", at: 0)
+    bind(menu: aspectMenu, withOptions: aspectList, objects: aspectListObject, objectMap: nil, action: #selector(MainMenuActionHandler.menuChangeAspect(_:))) {
       PlayerCore.active.info.unsureAspect == $0.representedObject as? String
     }
 
     // -- crop
     var cropList = AppData.aspects
+    // same as aspectList above.
+    var cropListForObject = AppData.aspects
     cropList.insert(Constants.String.none, at: 0)
-    bind(menu: cropMenu, withOptions: cropList, objects: nil, objectMap: nil, action: #selector(MainMenuActionHandler.menuChangeCrop(_:))) {
-      PlayerCore.active.info.unsureCrop == $0.representedObject as? String
+    cropListForObject.insert("None", at: 0)
+    bind(menu: cropMenu, withOptions: cropList, objects: cropListForObject, objectMap: nil, action: #selector(MainMenuActionHandler.menuChangeCrop(_:))) {
+      return PlayerCore.active.info.unsureCrop == $0.representedObject as? String
     }
 
     // -- rotation
@@ -212,6 +219,9 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- deinterlace
     deinterlace.action = #selector(MainMenuActionHandler.menuToggleDeinterlace(_:))
+
+    // -- delogo
+    delogo.action = #selector(MainWindowController.menuSetDelogo(_:))
 
     // -- filter
     videoFilters.action = #selector(AppDelegate.showVideoFilterWindow(_:))
@@ -348,10 +358,12 @@ class MenuController: NSObject, NSMenuDelegate {
     let isInFullScreen = PlayerCore.active.mainWindow.isInFullScreen
     let isInPIP = PlayerCore.active.mainWindow.pipStatus == .inPIP
     let isOntop = PlayerCore.active.isInMiniPlayer ? PlayerCore.active.miniPlayer.isOntop : PlayerCore.active.mainWindow.isOntop
+    let isDelogo = PlayerCore.active.info.delogoFiter != nil
     alwaysOnTop.state = isOntop ? NSOnState : NSOffState
     deinterlace.state = PlayerCore.active.info.deinterlace ? NSOnState : NSOffState
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
+    delogo.state = isDelogo ? NSOnState : NSOffState
   }
 
   private func updateAudioMenu() {
@@ -391,12 +403,13 @@ class MenuController: NSObject, NSMenuDelegate {
 
   /**
    Bind a menu with a list of available options.
-   @param menu         the NSMenu
-   @param withOptions  option titles for each menu item, as an array
-   @param objects      objects that will be bind to each menu item, as an array
-   @param objectMap    alternatively, can pass a map like [title: object]
-   @action             the action for each menu item
-   @checkStateBlock    a block to set each menu item's state
+
+   - parameter menu:            the NSMenu
+   - parameter withOptions:     option titles for each menu item, as an array
+   - parameter objects:         objects that will be bind to each menu item, as an array
+   - parameter objectMap:       alternatively, can pass a map like [title: object]
+   - parameter action:          the action for each menu item
+   - parameter checkStateBlock: a block to set each menu item's state
    */
   private func bind(menu: NSMenu,
                     withOptions titles: [String]?, objects: [Any?]?,

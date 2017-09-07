@@ -14,18 +14,19 @@ fileprivate typealias PK = Preference.Key
 fileprivate let yes_str = "yes"
 fileprivate let no_str = "no"
 
-// Change this variable to inform mpv how much it should log
-fileprivate let MPVLogLevel = "warn"
+/** Change this variable to adjust mpv log level */
 /*
-  "no"    - disable absolutely all messages
-  "fatal" - critical/aborting errors
-  "error" - simple errors
-  "warn"  - possible problems
-  "info"  - informational message
-  "v"     - noisy informational message
-  "debug" - very noisy technical information
-  "trace" - extremely noisy
+ "no"    - disable absolutely all messages
+ "fatal" - critical/aborting errors
+ "error" - simple errors
+ "warn"  - possible problems
+ "info"  - informational message
+ "v"     - noisy informational message
+ "debug" - very noisy technical information
+ "trace" - extremely noisy
  */
+fileprivate let MPVLogLevel = "warn"
+
 
 // Global functions
 
@@ -438,7 +439,7 @@ class MPVController: NSObject {
     let str = filters.map { $0.stringFormat }.joined(separator: ",")
     command(cmd, args: ["set", str], checkError: false) { returnValue in
       if returnValue < 0 {
-        Utility.showAlert("alert.filter.incorrect")
+        Utility.showAlert("filter.incorrect")
         // reload data in filter setting window
         NotificationCenter.default.post(Notification(name: Constants.Noti.vfChanged))
       }

@@ -136,4 +136,17 @@ extension MainWindowController {
   func menuSwitchToMiniPlayer(_ sender: NSMenuItem) {
     player.switchToMiniPlayer()
   }
+
+  func menuSetDelogo(_ sender: NSMenuItem) {
+    if sender.state == NSOnState {
+      if let filter = player.info.delogoFiter {
+        let _ = player.removeVideoFiler(filter)
+        player.info.delogoFiter = nil
+      }
+    } else {
+      self.hideSideBar {
+        self.enterInteractiveMode(.freeSelecting)
+      }
+    }
+  }
 }

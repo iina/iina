@@ -20,8 +20,8 @@
 "expand.h" = "세로 (기본값: 영상의 세로 해상도)";
 "expand.x" = "기준점 X (기본값: 중앙)";
 "expand.y" = "기준점 Y (기본값: 중앙)";
-"expand.aspect" = "화면 비율에 맞게 화면 늘이기";
-"expand.round" = "지정 값으로 나누어지도록 반올림함";
+"expand.aspect" = "화면비에 맞게 늘이기";
+"expand.round" = "아래 값으로 나누어지게 길이 반올림";
 
 "sharpen" = "선명하게";
 "sharpen.msize" = "매트릭스 크기";

@@ -283,7 +283,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Get the `NSTextField` of widow's title. */
   var titleTextField: NSTextField? {
     get {
-      return window?.standardWindowButton(.documentIconButton)?.superview?.subviews.flatMap({ $0 as? NSTextField }).first
+      return window?.standardWindowButton(.closeButton)?.superview?.subviews.flatMap({ $0 as? NSTextField }).first
     }
   }
 
@@ -1306,7 +1306,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard pipStatus == .notInPIP || animationState == .hidden else {
       return
     }
-    
+
     animationState = .willHide
     fadeableViews.forEach { (v) in
       v.isHidden = false
@@ -1379,6 +1379,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       window?.representedURL = player.info.currentURL
       window?.setTitleWithRepresentedFilename(player.info.currentURL?.path ?? "")
     }
+    addDocIconToFadeableViews()
   }
 
   func displayOSD(_ message: OSDMessage) {
@@ -1511,7 +1512,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func addBackTitlebarViewToFadeableViews() {
-    self.fadeableViews.append(titleBarView)
+    fadeableViews.append(titleBarView)
+  }
+
+  // Sometimes the doc icon may not be available, eg. when opened an online video.
+  // We should try to add it everytime when window title changed.
+  private func addDocIconToFadeableViews() {
+    if let docIcon = window?.standardWindowButton(.documentIconButton), !fadeableViews.contains(docIcon) {
+      fadeableViews.append(docIcon)
+    }
   }
 
   private func addConstraintsForVideoView(_ constants: [NSLayoutAttribute: CGFloat] = [:]) {

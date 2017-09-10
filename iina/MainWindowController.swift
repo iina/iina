@@ -476,6 +476,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     bottomView.isHidden = true
     pipOverlayView.isHidden = true
     rightLabel.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .duration
+    
+    if #available(OSX 10.11, *) {
+      leftLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize(), weight: NSFontWeightRegular)
+      rightLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize(), weight: NSFontWeightRegular)
+    }
 
     osdProgressBarWidthConstraint = NSLayoutConstraint(item: osdAccessoryProgress, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150)
 
@@ -1404,7 +1409,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let (osdString, osdType) = message.message()
 
     let osdTextSize = Preference.float(for: .osdTextSize)
-    osdLabel.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
+    if #available(OSX 10.11, *) {
+      osdLabel.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize), weight: NSFontWeightRegular)
+    }
+    else {
+      osdLabel.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
+    }
     osdLabel.stringValue = osdString
 
     switch osdType {

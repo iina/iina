@@ -1085,8 +1085,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     updateBufferIndicatorView()
     // start tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
-    cv.addTrackingArea(NSTrackingArea(rect: cv.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 0]))
-    playSlider.addTrackingArea(NSTrackingArea(rect: playSlider.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved], owner: self, userInfo: ["obj": 1]))
+    if cv.trackingAreas.isEmpty {
+      cv.addTrackingArea(NSTrackingArea(rect: cv.bounds,
+                                        options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved],
+                                        owner: self, userInfo: ["obj": 0]))
+    }
+    if playSlider.trackingAreas.isEmpty {
+      playSlider.addTrackingArea(NSTrackingArea(rect: playSlider.bounds,
+                                                options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved],
+                                                owner: self, userInfo: ["obj": 1]))
+    }
+
     // update timer
     updateTimer()
     // always on top

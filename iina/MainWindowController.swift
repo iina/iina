@@ -1124,12 +1124,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {
+    if isInInteractiveMode {
+      exitInteractiveMode(immediately: true)
+    }
+
     // If not using legacy full screen, we must do some tricks to avoid awkward animation when entering full screen
     // (see `windowDidResize(_:)`). Therefore, Auto Layout is required to be disabled here.
     if !currentFullScreenIsLegacy {
-      for (_, v) in videoViewConstraints {
-        videoView.superview?.removeConstraint(v)
-      }
+      removeConstraintsForVideoView()
     }
 
     isEnteringFullScreen = true
@@ -1180,6 +1182,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
+    if isInInteractiveMode {
+      exitInteractiveMode(immediately: true)
+    }
+
     // reset `keepaspect`
     player.mpv.setFlag(MPVOption.Window.keepaspect, false)
 
@@ -1223,8 +1229,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowDidResize(_ notification: Notification) {
-    guard let w = window else { return }
-    let wSize = w.frame.size
+    guard let window = window else { return }
 
     // is paused or very low fps (assume audio file), draw new frame
     if player.info.isPaused || player.currentMediaIsAudio == .isAudio {
@@ -1237,22 +1242,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         // unbearably laggy under current render meahcanism). Thus when entering full screen, we should keep `videoView`'s 
         // aspect ratio. Otherwise, when entered full screen, there will be an awkward animation that looks like
         // `videoView` "resized" to screen size suddenly when mpv redraws the video content in correct aspect ratio.
-        let aspectRatio = w.aspectRatio.width / w.aspectRatio.height
-        let tryHeight = wSize.width / aspectRatio
-        if tryHeight <= wSize.height {
-          // should have black bar above and below
-          let targetHeight = wSize.width / aspectRatio
-          let yOffset = (wSize.height - targetHeight) / 2
-          videoView.frame = NSMakeRect(0, yOffset, wSize.width, targetHeight)
-        } else if tryHeight > wSize.height {
-          // should have black bar left and right
-          let targetWidth = wSize.height * aspectRatio
-          let xOffset = (wSize.width - targetWidth) / 2
-          videoView.frame = NSMakeRect(xOffset, 0, targetWidth, wSize.height)
-        }
+        // `window.frame` is full screen size now
+        videoView.frame = window.aspectRatio.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
       } else {
         // update videoview size if in full screen, since aspect ratio may changed under certain cases, like split screen
-        videoView.frame = NSRect(x: 0, y: 0, width: w.frame.width, height: w.frame.height)
+        videoView.frame = NSRect(x: 0, y: 0, width: window.frame.width, height: window.frame.height)
       }
     }
 
@@ -1265,9 +1259,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if oscPosition == .floating {
       let cph = Preference.float(for: .controlBarPositionHorizontal)
       let cpv = Preference.float(for: .controlBarPositionVertical)
-      controlBarFloating.setFrameOrigin(NSMakePoint(
-        (wSize.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5).constrain(min: 0, max: wSize.width),
-        wSize.height * CGFloat(cpv)
+      controlBarFloating.setFrameOrigin(NSPoint(
+        x: (window.frame.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5).constrain(min: 0, max: window.frame.width),
+        y: window.frame.height * CGFloat(cpv)
       ))
     }
   }
@@ -1446,6 +1440,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func showSideBar(viewController: SidebarViewController, type: SideBarViewType) {
+    guard !isInInteractiveMode else { return }
+
     // adjust sidebar width
     guard let view = (viewController as? NSViewController)?.view else {
         Utility.fatal("viewController is not a NSViewController")
@@ -1518,12 +1514,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     self.fadeableViews.append(titleBarView)
   }
 
-  private func addConstraintsForVideoView() {
+  private func addConstraintsForVideoView(_ constants: [NSLayoutAttribute: CGFloat] = [:]) {
     guard let cv = window?.contentView else { return }
     ([.top, .bottom, .left, .right] as [NSLayoutAttribute]).forEach { attr in
-      videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
+      videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal, toItem: cv,
+                                                      attribute: attr, multiplier: 1, constant: constants[attr] ?? 0)
       videoViewConstraints[attr]!.isActive = true
     }
+  }
+
+  private func removeConstraintsForVideoView() {
+    for (_, v) in videoViewConstraints {
+      videoView.superview?.removeConstraint(v)
+    }
+    videoViewConstraints.removeAll()
   }
 
   func enterInteractiveMode(_ mode: InteractiveMode, selectWholeVideoByDefault: Bool = false) {
@@ -1540,6 +1544,26 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isInInteractiveMode = true
     hideUI()
 
+    // `videoView` doesn't use constraint-based layout in full screen. Therefore we must add constraints first.
+    if (isInFullScreen) {
+      let frame = window.aspectRatio.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
+      let fsConstants: [NSLayoutAttribute: CGFloat] = [
+        .left: frame.x,
+        .right: window.frame.width - frame.maxX,  // `frame.x` should also work
+        .bottom: -frame.y,
+        .top: window.frame.height - frame.yMax  // `frame.y` should also work
+      ]
+      addConstraintsForVideoView(fsConstants)
+      videoView.needsLayout = true
+      videoView.layoutSubtreeIfNeeded()
+      // force rerender a frame
+      videoView.videoLayer.mpvGLQueue.async {
+        DispatchQueue.main.sync {
+          self.videoView.videoLayer.display()
+        }
+      }
+    }
+
     let controlView = mode.viewController()
     controlView.mainWindow = self
     bottomView.isHidden = false
@@ -1549,7 +1573,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let origVideoSize = NSSize(width: ow, height: oh)
     // the max region that the video view can occupy
     let newVideoViewBounds = NSRect(x: 20, y: 20 + 60, width: window.frame.width - 40, height: window.frame.height - 104)
-    let newVideoViewSize = origVideoSize.satisfyMaxSizeWithSameAspectRatio(newVideoViewBounds.size)
+    let newVideoViewSize = origVideoSize.shrink(toSize: newVideoViewBounds.size)
     let newVideoViewFrame = newVideoViewBounds.centeredResize(to: newVideoViewSize)
 
     let newConstants: [NSLayoutAttribute: CGFloat] = [
@@ -1588,10 +1612,29 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  func exitInteractiveMode(_ then: @escaping () -> Void) {
+  func exitInteractiveMode(immediately: Bool = false, then: @escaping () -> Void = {}) {
     player.togglePause(false)
     isInInteractiveMode = false
     cropSettingsView?.cropBoxView.isHidden = true
+
+    // if exit without animation
+    if immediately {
+      bottomBarBottomConstraint.constant = -InteractiveModeBottomViewHeight
+      if self.isInFullScreen {
+        self.removeConstraintsForVideoView()
+      } else {
+        ([.top, .bottom, .left, .right] as [NSLayoutAttribute]).forEach { attr in
+          videoViewConstraints[attr]!.constant = 0
+        }
+      }
+      self.cropSettingsView?.cropBoxView.removeFromSuperview()
+      self.sideBarStatus = .hidden
+      self.bottomView.subviews.removeAll()
+      self.bottomView.isHidden = true
+      return
+    }
+
+    // if with animation
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = CropAnimationDuration
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
@@ -1604,6 +1647,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.sideBarStatus = .hidden
       self.bottomView.subviews.removeAll()
       self.bottomView.isHidden = true
+      if self.isInFullScreen {
+        self.removeConstraintsForVideoView()
+      }
       self.showUI()
       then()
     }

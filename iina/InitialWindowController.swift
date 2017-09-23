@@ -8,6 +8,11 @@
 
 import Cocoa
 
+fileprivate extension NSUserInterfaceItemIdentifier {
+  static let openFile = NSUserInterfaceItemIdentifier("openFile")
+  static let openURL = NSUserInterfaceItemIdentifier("openURL")
+}
+
 class InitialWindowController: NSWindowController {
 
   override var windowNibName: NSNib.Name {
@@ -111,9 +116,6 @@ class InitialWindowViewActionButton: NSView {
   private let hoverBackground = CGColor(gray: 0, alpha: 0.25)
   private let pressedBackground = CGColor(gray: 0, alpha: 0.35)
 
-  private let openFileBtnID = NSUserInterfaceItemIdentifier("openFile")
-  private let openURLBtnID = "openURL"
-
   var action: Selector?
 
   override func awakeFromNib() {
@@ -132,7 +134,7 @@ class InitialWindowViewActionButton: NSView {
 
   override func mouseDown(with event: NSEvent) {
     self.layer?.backgroundColor = pressedBackground
-    if self.identifier == openFileBtnID {
+    if self.identifier == .openFile {
       (NSApp.delegate as! AppDelegate).openFile(self)
     } else {
       (NSApp.delegate as! AppDelegate).openURL(self)

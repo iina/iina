@@ -368,9 +368,9 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
     guard let identifier = tableColumn?.identifier else { return nil }
 
     guard let mapping = currentMapping.at(row) else { return nil }
-    if identifier == Constants.Identifier.key {
+    if identifier == .key {
       return displayRawValues ? mapping.key : mapping.prettyKey
-    } else if identifier == Constants.Identifier.action {
+    } else if identifier == .action {
       return displayRawValues ? mapping.readableAction : mapping.prettyCommand
     }
     return ""
@@ -379,9 +379,9 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
   func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
     guard let value = object as? String,
       let identifier = tableColumn?.identifier else { return }
-    if identifier == Constants.Identifier.key {
+    if identifier == .key {
       currentMapping[row].key = value
-    } else if identifier == Constants.Identifier.action {
+    } else if identifier == .action {
       currentMapping[row].rawAction = value
     }
     saveToConfFile()

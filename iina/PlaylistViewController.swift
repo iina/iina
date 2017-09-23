@@ -340,9 +340,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       guard row < info.playlist.count else { return nil }
       let item = info.playlist[row]
 
-      if identifier == Constants.Identifier.isChosen {
+      if identifier == .isChosen {
         v.textField?.stringValue = item.isPlaying ? Constants.String.play : ""
-      } else if identifier == Constants.Identifier.trackName {
+      } else if identifier == .trackName {
         let cellView = v as! PlaylistTrackCellView
         // file name
         let filename = item.filenameForDisplay
@@ -377,7 +377,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       let nextChapterTime = chapters.at(row+1)?.time ?? Constants.Time.infinite
       // construct view
 
-      if identifier == Constants.Identifier.isChosen {
+      if identifier == .isChosen {
         // left column
         let currentPos = info.videoPosition!
         if currentPos.between(chapter.time, nextChapterTime) {
@@ -386,7 +386,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           v.textField?.stringValue = ""
         }
         return v
-      } else if identifier == Constants.Identifier.trackName {
+      } else if identifier == .trackName {
         // right column
         let cellView = v as! ChapterTableCellView
         cellView.textField?.stringValue = chapter.title.isEmpty ? "Chapter \(row)" : chapter.title

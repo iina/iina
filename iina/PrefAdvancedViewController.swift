@@ -119,9 +119,9 @@ extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     guard options.count > row else { return nil }
-    if tableColumn?.identifier == Constants.Identifier.key {
+    if tableColumn?.identifier == .key {
       return options[row][0]
-    } else if tableColumn?.identifier == Constants.Identifier.value {
+    } else if tableColumn?.identifier == .value {
       return options[row][1]
     }
     return nil
@@ -135,9 +135,9 @@ extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource
       return
     }
     guard options.count > row else { return }
-    if identifier == Constants.Identifier.key {
+    if identifier == .key {
       options[row][0] = value
-    } else if identifier == Constants.Identifier.value {
+    } else if identifier == .value {
       options[row][1] = value
     }
     saveToUserDefaults()

@@ -226,9 +226,9 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     guard let identifier = tableColumn?.identifier else { return nil }
 
     guard let property = watchProperties.at(row) else { return nil }
-    if identifier == Constants.Identifier.key {
+    if identifier == .key {
       return property
-    } else if identifier == Constants.Identifier.value {
+    } else if identifier == .value {
       return PlayerCore.active.mpv.getString(property) ?? "<Error>"
     }
     return ""
@@ -237,7 +237,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
     guard let value = object as? String,
       let identifier = tableColumn?.identifier else { return }
-    if identifier == Constants.Identifier.key {
+    if identifier == .key {
       watchProperties[row] = value
     }
     saveWatchList()

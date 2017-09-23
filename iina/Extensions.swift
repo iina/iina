@@ -494,3 +494,14 @@ extension NSWindow.Level {
   static let iinaFloating = NSWindow.Level(NSWindow.Level.floating.rawValue - 1)
   static let iinaBlackScreen = NSWindow.Level(NSWindow.Level.mainMenu.rawValue + 1)
 }
+
+extension NSUserInterfaceItemIdentifier {
+  static let isChosen = NSUserInterfaceItemIdentifier("IsChosen")
+  static let trackId = NSUserInterfaceItemIdentifier("TrackId")
+  static let trackName = NSUserInterfaceItemIdentifier("TrackName")
+  static let isPlayingCell = NSUserInterfaceItemIdentifier("IsPlayingCell")
+  static let trackNameCell = NSUserInterfaceItemIdentifier("TrackNameCell")
+  static let key = NSUserInterfaceItemIdentifier("Key")
+  static let value = NSUserInterfaceItemIdentifier("Value")
+  static let action = NSUserInterfaceItemIdentifier("Action")
+}

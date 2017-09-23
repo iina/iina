@@ -84,16 +84,16 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     guard let filter = filters.at(row) else { return nil }
-    if tableColumn?.identifier == Constants.Identifier.key {
+    if tableColumn?.identifier == .key {
       return row.toStr()
-    } else if tableColumn?.identifier == Constants.Identifier.value {
+    } else if tableColumn?.identifier == .value {
       return filter.stringFormat
     }
     return ""
   }
 
   func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
-    guard let value = object as? String, tableColumn?.identifier == Constants.Identifier.value else { return }
+    guard let value = object as? String, tableColumn?.identifier == .value else { return }
 
     if let newFilter = MPVFilter(rawString: value) {
       filters[row] = newFilter

@@ -327,12 +327,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       return nil
     }
     // return track data
-    if columnName == Constants.Identifier.isChosen {
+    if columnName == .isChosen {
       let isChosen = track == nil ? (activeId == 0) : (track!.id == activeId)
       return isChosen ? Constants.String.dot : ""
-    } else if columnName == Constants.Identifier.trackName {
+    } else if columnName == .trackName {
       return track?.infoString ?? Constants.String.trackNone
-    } else if columnName == Constants.Identifier.trackId {
+    } else if columnName == .trackId {
       return track?.idString
     }
     return nil

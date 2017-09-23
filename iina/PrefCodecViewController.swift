@@ -24,7 +24,7 @@ class PrefCodecViewController: NSViewController {
   }
 
   var toolbarItemImage: NSImage {
-    return NSImage(named: NSImage.Name(rawValue: "toolbar_codec"))!
+    return #imageLiteral(resourceName: "toolbar_codec")
   }
 
   var toolbarItemLabel: String {

@@ -28,7 +28,7 @@ class PrefControlViewController: NSViewController, MASPreferencesViewController 
 
   var toolbarItemImage: NSImage? {
     get {
-      return NSImage(named: NSImage.Name(rawValue: "toolbar_control"))!
+      return #imageLiteral(resourceName: "toolbar_control")
     }
   }
 

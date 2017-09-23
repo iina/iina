@@ -26,7 +26,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
 
   var toolbarItemImage: NSImage? {
     get {
-      return NSImage(named: NSImage.Name(rawValue: "toolbar_play"))!
+      return #imageLiteral(resourceName: "toolbar_play")
     }
   }
 

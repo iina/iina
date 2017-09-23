@@ -25,7 +25,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   }
 
   var toolbarItemImage: NSImage? {
-    return NSImage(named: NSImage.Name(rawValue: "toolbar_key"))!
+    return #imageLiteral(resourceName: "toolbar_key")
   }
 
   var toolbarItemLabel: String? {

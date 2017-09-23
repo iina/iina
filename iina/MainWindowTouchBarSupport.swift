@@ -69,7 +69,7 @@ extension MainWindowController: NSTouchBarDelegate {
 
     case .playPause:
       let item = NSCustomTouchBarItem(identifier: identifier)
-      item.view = NSButton(image: NSImage(named: NSImage.Name.touchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
+      item.view = NSButton(image: NSImage(named: .touchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
       item.customizationLabel = NSLocalizedString("touchbar.play_pause", comment: "Play / Pause")
       self.touchBarPlayPauseBtn = item.view as? NSButton
       return item
@@ -125,9 +125,9 @@ extension MainWindowController: NSTouchBarDelegate {
 
   func updateTouchBarPlayBtn() {
     if player.info.isPaused {
-      touchBarPlayPauseBtn?.image = NSImage(named: NSImage.Name.touchBarPlayTemplate)
+      touchBarPlayPauseBtn?.image = NSImage(named: .touchBarPlayTemplate)
     } else {
-      touchBarPlayPauseBtn?.image = NSImage(named: NSImage.Name.touchBarPauseTemplate)
+      touchBarPlayPauseBtn?.image = NSImage(named: .touchBarPauseTemplate)
     }
   }
 

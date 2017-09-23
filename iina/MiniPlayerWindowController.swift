@@ -233,9 +233,9 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   func setWindowFloatingOnTop(_ onTop: Bool) {
     guard let window = window else { return }
     if onTop {
-      window.level = NSWindow.Level(Int(CGWindowLevelForKey(.floatingWindow)) - 1)
+      window.level = .iinaFloating
     } else {
-      window.level = NSWindow.Level(Int(CGWindowLevelForKey(.normalWindow)))
+      window.level = .normal
     }
   }
 

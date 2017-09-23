@@ -1954,7 +1954,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       screenRect.origin = CGPoint(x: 0, y: 0)
       let blackWindow = NSWindow(contentRect: screenRect, styleMask: [], backing: .buffered, defer: false, screen: screen)
       blackWindow.backgroundColor = .black
-      blackWindow.level = NSWindow.Level(Int(CGWindowLevelForKey(.mainMenuWindow)) + 1)
+      blackWindow.level = .iinaBlackScreen
       
       blackWindows.append(blackWindow)
       blackWindow.makeKeyAndOrderFront(nil)
@@ -2040,9 +2040,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let window = window else { return }
     if isInFullScreen { return }
     if onTop {
-      window.level = NSWindow.Level(Int(CGWindowLevelForKey(.floatingWindow)) - 1)
+      window.level = .iinaFloating
     } else {
-      window.level = NSWindow.Level(Int(CGWindowLevelForKey(.normalWindow)))
+      window.level = .normal
     }
 
     resetCollectionBehavior()

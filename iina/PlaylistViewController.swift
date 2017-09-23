@@ -24,8 +24,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   weak var player: PlayerCore!
-  
-  let IINAPlaylistIndexes = "IINAPlaylistIndexes"
 
   /** Similiar to the one in `QuickSettingViewController`.
    Since IBOutlet is `nil` when the view is not loaded at first time,
@@ -91,7 +89,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     playlistTableView.target = self
     
     // register for drag and drop
-    playlistTableView.registerForDraggedTypes([NSPasteboard.PasteboardType(IINAPlaylistIndexes), .nsFilenames])
+    playlistTableView.registerForDraggedTypes([.iinaPlaylistItem, .nsFilenames])
   }
 
   override func viewDidAppear() {
@@ -166,8 +164,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     if tableView == playlistTableView {
       let indexesData = NSKeyedArchiver.archivedData(withRootObject: rowIndexes)
       let filePaths = rowIndexes.map { player.info.playlist[$0].filename }
-      pboard.declareTypes([NSPasteboard.PasteboardType(IINAPlaylistIndexes), .nsFilenames], owner: tableView)
-      pboard.setData(indexesData, forType: NSPasteboard.PasteboardType(IINAPlaylistIndexes))
+      pboard.declareTypes([.iinaPlaylistItem, .nsFilenames], owner: tableView)
+      pboard.setData(indexesData, forType: .iinaPlaylistItem)
       pboard.setPropertyList(filePaths, forType: .nsFilenames)
       return true
     }
@@ -196,7 +194,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let pasteboard = info.draggingPasteboard()
 
     if info.draggingSource() as? NSTableView === tableView {
-      if let rowData = pasteboard.data(forType: NSPasteboard.PasteboardType(IINAPlaylistIndexes)) {
+      if let rowData = pasteboard.data(forType: .iinaPlaylistItem) {
         let indexSet = NSKeyedUnarchiver.unarchiveObject(with: rowData) as! IndexSet
 
         let playlistCount = player.info.playlist.count

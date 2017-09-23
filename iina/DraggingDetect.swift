@@ -163,19 +163,19 @@ extension PlayerCore {
     let pb = sender.draggingPasteboard()
     guard let types = pb.types else { return [] }
 
-    if types.contains(NSFilenamesPboardType) {
+    if types.contains(.nsFilenames) {
       // filenames
-      guard let paths = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else { return [] }
+      guard let paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return [] }
       let theOnlyPathIsBDFolder = paths.count == 1 && isBDFolder(URL(fileURLWithPath: paths[0]))
       return theOnlyPathIsBDFolder ||
         hasPlayableFiles(in: paths) ||
         hasSubtitleFile(in: paths) ? .copy : []
-    } else if types.contains(NSURLPboardType) {
+    } else if types.contains(.nsURL) {
       // url
       return .copy
     } else if types.contains(.string) {
       // string
-      guard let droppedString = pb.pasteboardItems?.first?.string(forType: NSPasteboard.PasteboardType("public.utf8-plain-text")) else {
+      guard let droppedString = pb.string(forType: .string) else {
         return []
       }
       return Regex.urlDetect.matches(droppedString) ? .copy : []
@@ -195,9 +195,9 @@ extension PlayerCore {
     let pb = sender.draggingPasteboard()
     guard let types = pb.types else { return false }
 
-    if types.contains(NSFilenamesPboardType) {
+    if types.contains(.nsFilenames) {
       // filenames
-      guard let paths = pb.propertyList(forType: NSFilenamesPboardType) as? [String] else { return false }
+      guard let paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return false }
       let urls = paths.map{ URL(fileURLWithPath: $0) }
       // try open files
       guard let loadedFileCount = openURLs(urls) else { return true }
@@ -220,14 +220,14 @@ extension PlayerCore {
         sendOSD(.addToPlaylist(loadedFileCount))
         return true
       }
-    } else if types.contains(NSURLPboardType) {
+    } else if types.contains(.nsURL) {
       // url
-      guard let url = pb.propertyList(forType: NSURLPboardType) as? [String] else { return false }
+      guard let url = pb.propertyList(forType: .nsURL) as? [String] else { return false }
       openURLString(url[0])
       return true
     } else if types.contains(.string) {
       // string
-      guard let droppedString = pb.pasteboardItems![0].string(forType: NSPasteboard.PasteboardType("public.utf8-plain-text")) else {
+      guard let droppedString = pb.string(forType: .string) else {
         return false
       }
       if Regex.urlDetect.matches(droppedString) {

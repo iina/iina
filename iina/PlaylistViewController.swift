@@ -91,7 +91,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     playlistTableView.target = self
     
     // register for drag and drop
-    playlistTableView.registerForDraggedTypes([NSPasteboard.PasteboardType(IINAPlaylistIndexes), NSFilenamesPboardType])
+    playlistTableView.registerForDraggedTypes([NSPasteboard.PasteboardType(IINAPlaylistIndexes), .nsFilenames])
   }
 
   override func viewDidAppear() {
@@ -166,9 +166,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     if tableView == playlistTableView {
       let indexesData = NSKeyedArchiver.archivedData(withRootObject: rowIndexes)
       let filePaths = rowIndexes.map { player.info.playlist[$0].filename }
-      pboard.declareTypes([NSPasteboard.PasteboardType(IINAPlaylistIndexes), NSFilenamesPboardType], owner: tableView)
+      pboard.declareTypes([NSPasteboard.PasteboardType(IINAPlaylistIndexes), .nsFilenames], owner: tableView)
       pboard.setData(indexesData, forType: NSPasteboard.PasteboardType(IINAPlaylistIndexes))
-      pboard.setPropertyList(filePaths, forType: NSFilenamesPboardType)
+      pboard.setPropertyList(filePaths, forType: .nsFilenames)
       return true
     }
     return false
@@ -184,7 +184,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     if (info.draggingSource() as? NSView)?.window === mainWindow.window {
       return []
     }
-    if let paths = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
+    if let paths = pasteboard.propertyList(forType: .nsFilenames) as? [String] {
       if player.hasPlayableFiles(in: paths) {
         return .copy
       }
@@ -238,7 +238,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         player.addToPlaylist(paths: after, at: 1)
         player.addToPlaylist(paths: before, at: 0)
       }
-    } else if let paths = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] {
+    } else if let paths = pasteboard.propertyList(forType: .nsFilenames) as? [String] {
       let playableFiles = player.getPlayableFiles(in: paths.map{ URL(fileURLWithPath: $0) })
       if playableFiles.count == 0 {
         return false

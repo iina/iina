@@ -58,7 +58,7 @@ class VideoView: NSView {
     wantsBestResolutionOpenGLSurface = true
   
     // dragging init
-    registerForDraggedTypes([NSFilenamesPboardType, NSURLPboardType, .string])
+    registerForDraggedTypes([.nsFilenames, .nsURL, .string])
   }
 
   required init?(coder: NSCoder) {

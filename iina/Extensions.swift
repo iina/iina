@@ -482,3 +482,9 @@ extension URL {
     return (try? self.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
   }
 }
+
+extension NSPasteboard.PasteboardType {
+  static let nsURL = NSPasteboard.PasteboardType("NSURL")
+  static let nsFilenames = NSPasteboard.PasteboardType("NSFilenamesPboardType")
+}
+

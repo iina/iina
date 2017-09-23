@@ -40,7 +40,7 @@ class InitialWindowController: NSWindowController {
     window?.titlebarAppearsTransparent = true
     window?.isMovableByWindowBackground = true
 
-    window?.contentView?.registerForDraggedTypes([NSFilenamesPboardType, NSURLPboardType, .string])
+    window?.contentView?.registerForDraggedTypes([.nsFilenames, .nsURL, .string])
 
     mainView.wantsLayer = true
     mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)

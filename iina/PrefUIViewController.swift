@@ -9,6 +9,7 @@
 import Cocoa
 import MASPreferences
 
+@objcMembers
 class PrefUIViewController: NSViewController, MASPreferencesViewController {
 
   override var nibName: NSNib.Name {

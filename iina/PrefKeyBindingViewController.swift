@@ -9,6 +9,7 @@
 import Cocoa
 import MASPreferences
 
+@objcMembers
 class PrefKeyBindingViewController: NSViewController, MASPreferencesViewController {
 
   override var nibName: NSNib.Name {

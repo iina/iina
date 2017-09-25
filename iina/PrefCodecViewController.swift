@@ -8,6 +8,7 @@
 
 import Cocoa
 
+@objcMembers
 class PrefCodecViewController: NSViewController {
 
   override var nibName: NSNib.Name {

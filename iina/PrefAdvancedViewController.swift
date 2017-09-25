@@ -9,6 +9,7 @@
 import Cocoa
 import MASPreferences
 
+@objcMembers
 class PrefAdvancedViewController: NSViewController, MASPreferencesViewController {
 
   override var nibName: NSNib.Name {

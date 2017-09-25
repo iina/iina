@@ -9,7 +9,7 @@
 import Cocoa
 import MASPreferences
 
-
+@objcMembers
 class PrefGeneralViewController: NSViewController, MASPreferencesViewController {
 
   override var nibName: NSNib.Name {

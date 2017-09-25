@@ -8,6 +8,7 @@
 
 import Cocoa
 
+@objcMembers
 class PrefNetworkViewController: NSViewController {
 
   override var nibName: NSNib.Name {

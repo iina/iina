@@ -9,6 +9,7 @@
 import Cocoa
 import PromiseKit
 
+@objcMembers
 class PrefSubViewController: NSViewController {
 
   override var nibName: NSNib.Name {

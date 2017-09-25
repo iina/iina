@@ -31,6 +31,9 @@
 /* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
 "22j-ra-GAY.title" = "寬度:";
 
+/* Class = "NSSegmentedCell"; AB5-UZ-euc.ibShadowedLabels[0] = "Load Subtitle…"; ObjectID = "AB5-UZ-euc"; */
+"AB5-UZ-euc.ibShadowedLabels[0]" = "加載字幕…";
+
 /* Class = "NSTextFieldCell"; title = "Audio delay:"; ObjectID = "AKs-VQ-fKF"; */
 "AKs-VQ-fKF.title" = "音訊延遲:";
 
@@ -105,6 +108,9 @@
 
 /* Class = "NSTextFieldCell"; title = "External subtitles:"; ObjectID = "RA1-fF-OrB"; */
 "RA1-fF-OrB.title" = "外置字幕:";
+
+/* Class = "NSSegmentedCell"; Rbb-wh-cLc.ibShadowedLabels[0] = "Search Online…"; ObjectID = "Rbb-wh-cLc"; */
+"Rbb-wh-cLc.ibShadowedLabels[0]" = "在網路上尋找…";
 
 /* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "Rky-lo-Buu"; */
 "Rky-lo-Buu.title" = "飽和度:";
@@ -331,6 +337,3 @@
 /* Class = "NSMenuItem"; title = "35"; ObjectID = "zcb-7y-OVG"; */
 "zcb-7y-OVG.title" = "35";
 
-"AB5-UZ-euc.ibShadowedLabels[0]" = "加載字幕…";
-
-"Rbb-wh-cLc.ibShadowedLabels[0]" = "在線查找…";

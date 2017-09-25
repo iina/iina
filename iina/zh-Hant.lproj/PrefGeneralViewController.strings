@@ -1,7 +1,10 @@
+/* Class = "NSMenuItem"; title = "Show open file panel"; ObjectID = "1ce-4b-kgG"; */
+"1ce-4b-kgG.title" = "打開檔案選取器";
+
 /* Class = "NSTextFieldCell"; title = "Theme:"; ObjectID = "2Hu-qC-UMi"; */
 "2Hu-qC-UMi.title" = "主題:";
 
-/* Class = "NSButtonCell"; title = "Keep window open when playback finished"; ObjectID = "2iM-j7-AzQ"; */
+/* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
 "2iM-j7-AzQ.title" = "播放完畢後保持視窗打開";
 
 /* Class = "NSTextFieldCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
@@ -28,8 +31,8 @@
 /* Class = "NSButtonCell"; title = "Pause when media is opened"; ObjectID = "FbF-jJ-W5a"; */
 "FbF-jJ-W5a.title" = "打開媒體後暫停";
 
-/* Class = "NSButtonCell"; title = "Open a choose file panel after starting"; ObjectID = "IYU-9y-fBL"; */
-"IYU-9y-fBL.title" = "啟動後顯示檔案選擇介面";
+/* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
+"JfZ-D8-aF2.title" = "無";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "當全熒幕播放時關熄其餘熒幕";
@@ -37,8 +40,11 @@
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "自動播放下一個";
 
+/* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
+"M0z-bI-88d.title" = "始終於新視窗打開檔案";
+
 /* Class = "NSButtonCell"; title = "Enter fullscreen when media is opened"; ObjectID = "MlG-hl-goA"; */
-"MlG-hl-goA.title" = "打開媒體後進入全熒幕";
+"MlG-hl-goA.title" = "打開檔案後進入全熒幕";
 
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
 "QJq-fO-hhK.title" = "自動添加檔案至當前檔案夾";
@@ -46,7 +52,7 @@
 /* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu"; ObjectID = "XFC-Lr-LmP"; */
 "XFC-Lr-LmP.title" = "若否，則僅手動打開的檔案會顯示於此菜單中";
 
-/* Class = "NSButtonCell"; title = "Quit when no window is opened"; ObjectID = "YLo-6E-tT7"; */
+/* Class = "NSButtonCell"; title = "Quit after all windows are closed"; ObjectID = "YLo-6E-tT7"; */
 "YLo-6E-tT7.title" = "沒有打開的視窗時退出";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
@@ -54,6 +60,9 @@
 
 /* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "bPK-Wy-OMI"; */
 "bPK-Wy-OMI.title" = "半淺色";
+
+/* Class = "NSTextFieldCell"; title = "When launched:"; ObjectID = "gqT-CB-Puw"; */
+"gqT-CB-Puw.title" = "啟動後:";
 
 /* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
 "iGS-qN-f5q.title" = "啟用播放記錄";
@@ -82,12 +91,6 @@
 /* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
 "uQR-Fx-oEm.title" = "行爲:";
 
-"gqT-CB-Puw.title" = "啟動後:";
+/* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
+"z9T-8h-1T0.title" = "顯示歡迎頁";
 
-"z9T-8h-1T0.title" = "顯示歡迎視窗";
-
-"1ce-4b-kgG.title" = "顯示開啟檔案對話方塊";
-
-"JfZ-D8-aF2.title" = "無";
-
-"M0z-bI-88d.title" = "總是在新視窗開啟檔案";

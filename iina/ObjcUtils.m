@@ -23,7 +23,7 @@ static inline int min(int a, int b, int c) {
 
 @implementation ObjcUtils
 
-+ (BOOL)catchException:(void(^)())tryBlock error:(__autoreleasing NSError **)error {
++ (BOOL)catchException:(void(^)(void))tryBlock error:(__autoreleasing NSError **)error {
   @try {
     tryBlock();
     return YES;
@@ -34,7 +34,7 @@ static inline int min(int a, int b, int c) {
   }
 }
 
-+ (BOOL)silenced:(void(^)())tryBlock {
++ (BOOL)silenced:(void(^)(void))tryBlock {
   @try {
     tryBlock();
     return YES;

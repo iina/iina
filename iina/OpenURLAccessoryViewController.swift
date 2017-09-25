@@ -46,16 +46,16 @@ class OpenURLAccessoryViewController: NSViewController {
     super.viewDidLoad()
 
     [safariLinkBtn, chromeLinkBtn].forEach {
-      $0!.image = NSImage(named: NSImageNameFollowLinkFreestandingTemplate)
+      $0!.image = NSImage(named: .followLinkFreestandingTemplate)
     }
   }
     
   @IBAction func safariLinkBtnAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: safariExtensionLink)!)
+    NSWorkspace.shared.open(URL(string: safariExtensionLink)!)
   }
 
   @IBAction func chromeLinkBtnAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: chromeExtensionLink)!)
+    NSWorkspace.shared.open(URL(string: chromeExtensionLink)!)
   }
 
 }

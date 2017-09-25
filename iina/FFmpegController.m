@@ -79,7 +79,7 @@ return -1;\
 {
   int i, ret;
 
-  const char *cFilename = strdup(file.UTF8String);
+  char *cFilename = strdup(file.UTF8String);
   [_thumbnails removeAllObjects];
   [_thumbnailPartialResult removeAllObjects];
   [_addedTimestamps removeAllObjects];
@@ -92,6 +92,7 @@ return -1;\
   // Open video file
   AVFormatContext *pFormatCtx = NULL;
   ret = avformat_open_input(&pFormatCtx, cFilename, NULL, NULL);
+  free(cFilename);
   CHECK_SUCCESS(ret, @"Cannot open video")
 
   // Find stream information
@@ -257,16 +258,24 @@ return -1;\
 - (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second
 {
   // Create CGImage
+  CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
+  
   CGContextRef cgContext = CGBitmapContextCreate(pFrame->data[0],  // it's converted to RGBA so could be used directly
                                                  width, height,
                                                  8,  // 8 bit per component
                                                  width * 4,  // 4 bytes(rgba) per pixel
-                                                 CGColorSpaceCreateDeviceRGB(),
+                                                 rgb,
                                                  kCGImageAlphaPremultipliedLast);
   CGImageRef cgImage = CGBitmapContextCreateImage(cgContext);
 
   // Create NSImage
   NSImage *image = [[NSImage alloc] initWithCGImage:cgImage size: NSZeroSize];
+  
+  // Free resources
+  CFRelease(rgb);
+  CFRelease(cgContext);
+  CFRelease(cgImage);
+  
   // Add to list
   FFThumbnail *tb = [[FFThumbnail alloc] init];
   tb.image = image;

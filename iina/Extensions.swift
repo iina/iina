@@ -250,7 +250,7 @@ extension NSMenu {
     let menuItem = NSMenuItem(title: string, action: selector, keyEquivalent: "")
     menuItem.tag = tag ?? -1
     menuItem.representedObject = obj
-    menuItem.state = stateOn ? NSOnState : NSOffState
+    menuItem.state = stateOn ? .on : .off
     self.addItem(menuItem)
   }
 }
@@ -348,8 +348,8 @@ extension NSMutableAttributedString {
     let range = NSRange(location: 0, length: self.length)
     let nsurl = NSURL(string: url)!
     self.beginEditing()
-    self.addAttribute(NSLinkAttributeName, value: nsurl, range: range)
-    self.addAttribute(NSFontAttributeName, value: font, range: range)
+    self.addAttribute(.link, value: nsurl, range: range)
+    self.addAttribute(.font, value: font, range: range)
     self.endEditing()
   }
 }
@@ -431,7 +431,7 @@ extension String {
 
   mutating func deleteLast(_ num: Int) {
     guard num <= characters.count else { self = ""; return }
-    self = self.substring(to: self.index(endIndex, offsetBy: -num))
+    self = String(self[...self.index(endIndex, offsetBy: -num)])
   }
 
   func countOccurances(of str: String, in range: Range<Index>?) -> Int {
@@ -481,4 +481,27 @@ extension URL {
   var isExistingDirectory: Bool {
     return (try? self.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
   }
+}
+
+extension NSPasteboard.PasteboardType {
+  static let nsURL = NSPasteboard.PasteboardType("NSURL")
+  static let nsFilenames = NSPasteboard.PasteboardType("NSFilenamesPboardType")
+  static let iinaPlaylistItem = NSPasteboard.PasteboardType("IINAPlaylistItem")
+}
+
+
+extension NSWindow.Level {
+  static let iinaFloating = NSWindow.Level(NSWindow.Level.floating.rawValue - 1)
+  static let iinaBlackScreen = NSWindow.Level(NSWindow.Level.mainMenu.rawValue + 1)
+}
+
+extension NSUserInterfaceItemIdentifier {
+  static let isChosen = NSUserInterfaceItemIdentifier("IsChosen")
+  static let trackId = NSUserInterfaceItemIdentifier("TrackId")
+  static let trackName = NSUserInterfaceItemIdentifier("TrackName")
+  static let isPlayingCell = NSUserInterfaceItemIdentifier("IsPlayingCell")
+  static let trackNameCell = NSUserInterfaceItemIdentifier("TrackNameCell")
+  static let key = NSUserInterfaceItemIdentifier("Key")
+  static let value = NSUserInterfaceItemIdentifier("Value")
+  static let action = NSUserInterfaceItemIdentifier("Action")
 }

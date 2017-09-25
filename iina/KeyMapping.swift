@@ -45,7 +45,7 @@ class KeyMapping {
   var rawAction: String {
     set {
       if newValue.hasPrefix("@iina") {
-        privateRawAction = newValue.substring(from: newValue.index(newValue.startIndex, offsetBy: "@iina".characters.count)).trimmingCharacters(in: .whitespaces)
+        privateRawAction = newValue[newValue.index(newValue.startIndex, offsetBy: "@iina".characters.count)...].trimmingCharacters(in: .whitespaces)
         action = rawAction.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
         isIINACommand = true
       } else {
@@ -112,14 +112,14 @@ class KeyMapping {
       if line.hasPrefix("#@iina") {
         // extended syntax
         isIINACommand = true
-        line = line.substring(from: line.index(line.startIndex, offsetBy: "#@iina".characters.count))
+        line = String(line[line.index(line.startIndex, offsetBy: "#@iina".characters.count)...])
       } else if line.hasPrefix("#") {
         // igore comment
         continue
       }
       // remove inline comment
       if let sharpIndex = line.characters.index(of: "#") {
-        line = line.substring(to: sharpIndex)
+        line = String(line[...sharpIndex])
       }
       // split
       let splitted = line.characters.split(maxSplits: 1, whereSeparator: { $0 == " " || $0 == "\t"})

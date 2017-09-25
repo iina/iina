@@ -8,15 +8,16 @@
 
 import Cocoa
 
+@objcMembers
 class PrefNetworkViewController: NSViewController {
 
-  override var nibName: String? {
-    return "PrefNetworkViewController"
+  override var nibName: NSNib.Name {
+    return NSNib.Name("PrefNetworkViewController")
   }
 
-  override var identifier: String? {
+  override var identifier: NSUserInterfaceItemIdentifier? {
     get {
-      return "network"
+      return NSUserInterfaceItemIdentifier("network")
     }
     set {
       super.identifier = newValue
@@ -24,7 +25,7 @@ class PrefNetworkViewController: NSViewController {
   }
 
   var toolbarItemImage: NSImage {
-    return NSImage(named: NSImageNameNetwork)!
+    return NSImage(named: .network)!
   }
 
   var toolbarItemLabel: String {

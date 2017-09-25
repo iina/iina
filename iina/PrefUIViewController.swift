@@ -9,28 +9,29 @@
 import Cocoa
 import MASPreferences
 
+@objcMembers
 class PrefUIViewController: NSViewController, MASPreferencesViewController {
 
-  override var nibName: String {
-    return "PrefUIViewController"
+  override var nibName: NSNib.Name {
+    return NSNib.Name("PrefUIViewController")
   }
 
-  override var identifier: String? {
+  override var identifier: NSUserInterfaceItemIdentifier? {
     get {
-      return "ui"
+      return NSUserInterfaceItemIdentifier("ui")
     }
     set {
       super.identifier = newValue
     }
   }
 
-  var toolbarItemImage: NSImage {
+  var toolbarItemImage: NSImage? {
     get {
-      return NSImage(named: "toolbar_play")!
+      return #imageLiteral(resourceName: "toolbar_play")
     }
   }
 
-  var toolbarItemLabel: String {
+  var toolbarItemLabel: String? {
     get {
       view.layoutSubtreeIfNeeded()
       return NSLocalizedString("preference.ui", comment: "UI")
@@ -61,7 +62,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
     default:
       name = "osc_float"
     }
-    oscPreviewImageView.image = NSImage(named: name)
+    oscPreviewImageView.image = NSImage(named: NSImage.Name(rawValue: name))
   }
 
   @IBAction func clearCacheBtnAction(_ sender: AnyObject) {

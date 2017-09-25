@@ -13,8 +13,8 @@ class ThumbnailCache {
   static private let sizeofDouble = MemoryLayout<Double>.size
   static private let sizeofInt64 = MemoryLayout<Int64>.size
 
-  static private let imageProperties: [String: Any] = [
-    NSImageCompressionFactor: 0.75
+  static private let imageProperties: [NSBitmapImageRep.PropertyKey: Any] = [
+    .compressionFactor: 0.75
   ]
 
   static func fileExists(forName name: String) -> Bool {
@@ -48,7 +48,7 @@ class ThumbnailCache {
         Utility.log("Cannot generate tiff data.")
         return
       }
-      guard let jpegData = NSBitmapImageRep(data: tiffData)?.representation(using: .JPEG, properties: imageProperties) else {
+      guard let jpegData = NSBitmapImageRep(data: tiffData)?.representation(using: .jpeg, properties: imageProperties) else {
         Utility.log("Cannot generate jpeg data.")
         return
       }

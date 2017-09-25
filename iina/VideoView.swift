@@ -50,15 +50,15 @@ class VideoView: NSView {
 
     // set up layer
     layer = videoLayer
-    videoLayer.contentsScale = NSScreen.main()!.backingScaleFactor
+    videoLayer.contentsScale = NSScreen.main!.backingScaleFactor
     wantsLayer = true
 
     // other settings
-    autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
+    autoresizingMask = [.width, .height]
     wantsBestResolutionOpenGLSurface = true
   
     // dragging init
-    register(forDraggedTypes: [NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeString])
+    registerForDraggedTypes([.nsFilenames, .nsURL, .string])
   }
 
   required init?(coder: NSCoder) {

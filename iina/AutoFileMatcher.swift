@@ -271,7 +271,7 @@ class AutoFileMatcher {
 
       // match them
       for video in unmatchedVideos {
-        let minDistToSub = video.dist.reduce(UInt.max, { min($0.0, $0.1.value) })
+        let minDistToSub = video.dist.reduce(UInt.max, { min($0, $1.value) })
         guard minDistToSub != .max else { continue }
         try checkTicket()
         unmatchedSubs

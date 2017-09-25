@@ -8,15 +8,16 @@
 
 import Cocoa
 
+@objcMembers
 class PrefCodecViewController: NSViewController {
 
-  override var nibName: String? {
-    return "PrefCodecViewController"
+  override var nibName: NSNib.Name {
+    return NSNib.Name("PrefCodecViewController")
   }
 
-  override var identifier: String? {
+  override var identifier: NSUserInterfaceItemIdentifier? {
     get {
-      return "codec"
+      return NSUserInterfaceItemIdentifier("codec")
     }
     set {
       super.identifier = newValue
@@ -24,7 +25,7 @@ class PrefCodecViewController: NSViewController {
   }
 
   var toolbarItemImage: NSImage {
-    return NSImage(named: "toolbar_codec")!
+    return #imageLiteral(resourceName: "toolbar_codec")
   }
 
   var toolbarItemLabel: String {
@@ -48,9 +49,9 @@ class PrefCodecViewController: NSViewController {
 
   @IBAction func spdifBtnAction(_ sender: AnyObject) {
     var spdif: [String] = []
-    if spdifAC3Btn.state == NSOnState { spdif.append("ac3") }
-    if spdifDTSBtn.state == NSOnState { spdif.append("dts") }
-    if spdifDTSHDBtn.state == NSOnState { spdif.append("dts-hd") }
+    if spdifAC3Btn.state == .on { spdif.append("ac3") }
+    if spdifDTSBtn.state == .on { spdif.append("dts") }
+    if spdifDTSHDBtn.state == .on { spdif.append("dts-hd") }
     let spdifString = spdif.joined(separator: ",")
     PlayerCore.playerCores.forEach { $0.mpv.setString(MPVOption.Audio.audioSpdif, spdifString) }
   }

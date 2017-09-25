@@ -55,16 +55,6 @@ struct AppData {
 
 
 struct Constants {
-  struct Identifier {
-    static let isChosen = "IsChosen"
-    static let trackId = "TrackId"
-    static let trackName = "TrackName"
-    static let isPlayingCell = "IsPlayingCell"
-    static let trackNameCell = "TrackNameCell"
-    static let key = "Key"
-    static let value = "Value"
-    static let action = "Action"
-  }
   struct String {
     static let degree = "°"
     static let dot = "●"

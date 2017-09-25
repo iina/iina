@@ -33,9 +33,7 @@ class FreeSelectingViewController: CropBoxViewController {
   }
 
   @IBAction func cancelBtnAction(_ sender: AnyObject) {
-    mainWindow.exitInteractiveMode{
-      return
-    }
+    mainWindow.exitInteractiveMode()
   }
 
 }

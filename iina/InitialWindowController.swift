@@ -8,10 +8,15 @@
 
 import Cocoa
 
+fileprivate extension NSUserInterfaceItemIdentifier {
+  static let openFile = NSUserInterfaceItemIdentifier("openFile")
+  static let openURL = NSUserInterfaceItemIdentifier("openURL")
+}
+
 class InitialWindowController: NSWindowController {
 
-  override var windowNibName: String {
-    return "InitialWindowController"
+  override var windowNibName: NSNib.Name {
+    return NSNib.Name("InitialWindowController")
   }
 
   weak var player: PlayerCore!
@@ -23,7 +28,7 @@ class InitialWindowController: NSWindowController {
   @IBOutlet weak var visualEffectView: NSVisualEffectView!
   @IBOutlet weak var mainView: NSView!
 
-  lazy var recentDocuments: [URL] = NSDocumentController.shared().recentDocumentURLs
+  lazy var recentDocuments: [URL] = NSDocumentController.shared.recentDocumentURLs
 
   init(playerCore: PlayerCore) {
     self.player = playerCore
@@ -36,11 +41,11 @@ class InitialWindowController: NSWindowController {
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    window?.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
+    window?.appearance = NSAppearance(named: .vibrantDark)
     window?.titlebarAppearsTransparent = true
     window?.isMovableByWindowBackground = true
 
-    window?.contentView?.register(forDraggedTypes: [NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeString])
+    window?.contentView?.registerForDraggedTypes([.nsFilenames, .nsURL, .string])
 
     mainView.wantsLayer = true
     mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
@@ -71,7 +76,7 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
     let url = recentDocuments[row]
     return [
       "filename": url.lastPathComponent,
-      "docIcon": NSWorkspace.shared().icon(forFile: url.path)
+      "docIcon": NSWorkspace.shared.icon(forFile: url.path)
     ]
   }
 
@@ -111,9 +116,6 @@ class InitialWindowViewActionButton: NSView {
   private let hoverBackground = CGColor(gray: 0, alpha: 0.25)
   private let pressedBackground = CGColor(gray: 0, alpha: 0.35)
 
-  private let openFileBtnID = "openFile"
-  private let openURLBtnID = "openURL"
-
   var action: Selector?
 
   override func awakeFromNib() {
@@ -132,7 +134,7 @@ class InitialWindowViewActionButton: NSView {
 
   override func mouseDown(with event: NSEvent) {
     self.layer?.backgroundColor = pressedBackground
-    if self.identifier == openFileBtnID {
+    if self.identifier == .openFile {
       (NSApp.delegate as! AppDelegate).openFile(self)
     } else {
       (NSApp.delegate as! AppDelegate).openURL(self)

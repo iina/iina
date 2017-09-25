@@ -78,7 +78,7 @@ class MPVFilter: NSObject {
         if type != nil, let format = MPVFilter.formats[type!] {
           str += "="
           str += format.components(separatedBy: ":").map { params![$0] ?? "" }.joined(separator: ":")
-        // else print param names
+          // else print param names
         } else {
           str += "="
           // special tweak for lavfi filters

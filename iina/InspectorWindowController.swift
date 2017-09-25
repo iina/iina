@@ -10,8 +10,8 @@ import Cocoa
 
 class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource {
 
-  override var windowNibName: String {
-    return "InspectorWindowController"
+  override var windowNibName: NSNib.Name {
+    return NSNib.Name("InspectorWindowController")
   }
 
   var updateTimer: Timer?
@@ -69,7 +69,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    window?.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
+    window?.appearance = NSAppearance(named: .vibrantDark)
 
     watchProperties = Preference.array(for: .watchProperties) as! [String]
     watchTableView.delegate = self
@@ -180,11 +180,11 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
   }
 
-  func fileLoaded() {
+  @objc func fileLoaded() {
     updateInfo()
   }
 
-  func dynamicUpdate() {
+  @objc func dynamicUpdate() {
     updateInfo(dynamic: true)
     watchTableView.reloadData()
   }
@@ -226,9 +226,9 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     guard let identifier = tableColumn?.identifier else { return nil }
 
     guard let property = watchProperties.at(row) else { return nil }
-    if identifier == Constants.Identifier.key {
+    if identifier == .key {
       return property
-    } else if identifier == Constants.Identifier.value {
+    } else if identifier == .value {
       return PlayerCore.active.mpv.getString(property) ?? "<Error>"
     }
     return ""
@@ -237,7 +237,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
     guard let value = object as? String,
       let identifier = tableColumn?.identifier else { return }
-    if identifier == Constants.Identifier.key {
+    if identifier == .key {
       watchProperties[row] = value
     }
     saveWatchList()

@@ -10,43 +10,45 @@ import Cocoa
 
 // MARK: - Touch bar
 
-fileprivate extension NSTouchBarCustomizationIdentifier {
+@available(OSX 10.12.2, *)
+fileprivate extension NSTouchBar.CustomizationIdentifier {
 
-  static let windowBar = NSTouchBarCustomizationIdentifier("\(Bundle.main.bundleIdentifier!).windowTouchBar")
+  static let windowBar = NSTouchBar.CustomizationIdentifier("\(Bundle.main.bundleIdentifier!).windowTouchBar")
 
 }
 
-fileprivate extension NSTouchBarItemIdentifier {
+@available(OSX 10.12.2, *)
+fileprivate extension NSTouchBarItem.Identifier {
 
-  static let playPause = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.playPause")
-  static let slider = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.slider")
-  static let volumeUp = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.voUp")
-  static let volumeDown = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.voDn")
-  static let rewind = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.rewind")
-  static let fastForward = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.forward")
-  static let time = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.time")
-  static let ahead15Sec = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead15Sec")
-  static let back15Sec = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.back15Sec")
-  static let ahead30Sec = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead30Sec")
-  static let back30Sec = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.back30Sec")
-  static let next = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.next")
-  static let prev = NSTouchBarItemIdentifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.prev")
+  static let playPause = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.playPause")
+  static let slider = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.slider")
+  static let volumeUp = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.voUp")
+  static let volumeDown = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.voDn")
+  static let rewind = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.rewind")
+  static let fastForward = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.forward")
+  static let time = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.time")
+  static let ahead15Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead15Sec")
+  static let back15Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.back15Sec")
+  static let ahead30Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead30Sec")
+  static let back30Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.back30Sec")
+  static let next = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.next")
+  static let prev = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.prev")
 
 }
 
 // Image name, tag, custom label
 @available(macOS 10.12.2, *)
-fileprivate let touchBarItemBinding: [NSTouchBarItemIdentifier: (String, Int, String)] = [
-  .ahead15Sec: (NSImageNameTouchBarSkipAhead15SecondsTemplate, 15, NSLocalizedString("touchbar.ahead_15", comment: "15sec Ahead")),
-  .ahead30Sec: (NSImageNameTouchBarSkipAhead30SecondsTemplate, 30, NSLocalizedString("touchbar.ahead_30", comment: "30sec Ahead")),
-  .back15Sec: (NSImageNameTouchBarSkipBack15SecondsTemplate, -15, NSLocalizedString("touchbar.back_15", comment: "-15sec Ahead")),
-  .back30Sec: (NSImageNameTouchBarSkipBack30SecondsTemplate, -30, NSLocalizedString("touchbar.back_30", comment: "-30sec Ahead")),
-  .next: (NSImageNameTouchBarSkipAheadTemplate, 0, NSLocalizedString("touchbar.next_video", comment: "Next Video")),
-  .prev: (NSImageNameTouchBarSkipBackTemplate, 1, NSLocalizedString("touchbar.prev_video", comment: "Previous Video")),
-  .volumeUp: (NSImageNameTouchBarVolumeUpTemplate, 0, NSLocalizedString("touchbar.increase_volume", comment: "Volume +")),
-  .volumeDown: (NSImageNameTouchBarVolumeDownTemplate, 1, NSLocalizedString("touchbar.decrease_volume", comment: "Volume -")),
-  .rewind: (NSImageNameTouchBarRewindTemplate, 0, NSLocalizedString("touchbar.rewind", comment: "Rewind")),
-  .fastForward: (NSImageNameTouchBarFastForwardTemplate, 1, NSLocalizedString("touchbar.fast_forward", comment: "Fast Forward"))
+fileprivate let touchBarItemBinding: [NSTouchBarItem.Identifier: (NSImage.Name, Int, String)] = [
+  .ahead15Sec: (.touchBarSkipAhead15SecondsTemplate, 15, NSLocalizedString("touchbar.ahead_15", comment: "15sec Ahead")),
+  .ahead30Sec: (.touchBarSkipAhead30SecondsTemplate, 30, NSLocalizedString("touchbar.ahead_30", comment: "30sec Ahead")),
+  .back15Sec: (.touchBarSkipBack15SecondsTemplate, -15, NSLocalizedString("touchbar.back_15", comment: "-15sec Ahead")),
+  .back30Sec: (.touchBarSkipBack30SecondsTemplate, -30, NSLocalizedString("touchbar.back_30", comment: "-30sec Ahead")),
+  .next: (.touchBarSkipAheadTemplate, 0, NSLocalizedString("touchbar.next_video", comment: "Next Video")),
+  .prev: (.touchBarSkipBackTemplate, 1, NSLocalizedString("touchbar.prev_video", comment: "Previous Video")),
+  .volumeUp: (.touchBarVolumeUpTemplate, 0, NSLocalizedString("touchbar.increase_volume", comment: "Volume +")),
+  .volumeDown: (.touchBarVolumeDownTemplate, 1, NSLocalizedString("touchbar.decrease_volume", comment: "Volume -")),
+  .rewind: (.touchBarRewindTemplate, 0, NSLocalizedString("touchbar.rewind", comment: "Rewind")),
+  .fastForward: (.touchBarFastForwardTemplate, 1, NSLocalizedString("touchbar.fast_forward", comment: "Fast Forward"))
 ]
 
 @available(macOS 10.12.2, *)
@@ -61,18 +63,18 @@ extension MainWindowController: NSTouchBarDelegate {
     return touchBar
   }
 
-  func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItemIdentifier) -> NSTouchBarItem? {
+  func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
 
     switch identifier {
 
-    case NSTouchBarItemIdentifier.playPause:
+    case .playPause:
       let item = NSCustomTouchBarItem(identifier: identifier)
-      item.view = NSButton(image: NSImage(named: NSImageNameTouchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
+      item.view = NSButton(image: NSImage(named: .touchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
       item.customizationLabel = NSLocalizedString("touchbar.play_pause", comment: "Play / Pause")
       self.touchBarPlayPauseBtn = item.view as? NSButton
       return item
 
-    case NSTouchBarItemIdentifier.slider:
+    case .slider:
       let item = NSSliderTouchBarItem(identifier: identifier)
       item.slider = TouchBarPlaySlider()
       item.slider.cell = TouchBarPlaySliderCell()
@@ -84,17 +86,17 @@ extension MainWindowController: NSTouchBarDelegate {
       self.touchBarPlaySlider = item.slider as? TouchBarPlaySlider
       return item
 
-    case NSTouchBarItemIdentifier.volumeUp,
-         NSTouchBarItemIdentifier.volumeDown:
+    case .volumeUp,
+         .volumeDown:
       guard let data = touchBarItemBinding[identifier] else { return nil }
       return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarVolumeAction(_:)))
 
-    case NSTouchBarItemIdentifier.rewind,
-         NSTouchBarItemIdentifier.fastForward:
+    case .rewind,
+         .fastForward:
       guard let data = touchBarItemBinding[identifier] else { return nil }
       return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarRewindAction(_:)))
 
-    case NSTouchBarItemIdentifier.time:
+    case .time:
       let item = NSCustomTouchBarItem(identifier: identifier)
       let label = DurationDisplayTextField(labelWithString: "00:00")
       label.alignment = .center
@@ -104,15 +106,15 @@ extension MainWindowController: NSTouchBarDelegate {
       item.customizationLabel = NSLocalizedString("touchbar.time", comment: "Time Position")
       return item
 
-    case NSTouchBarItemIdentifier.ahead15Sec,
-         NSTouchBarItemIdentifier.back15Sec,
-         NSTouchBarItemIdentifier.ahead30Sec,
-         NSTouchBarItemIdentifier.back30Sec:
+    case .ahead15Sec,
+         .back15Sec,
+         .ahead30Sec,
+         .back30Sec:
       guard let data = touchBarItemBinding[identifier] else { return nil }
       return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSeekAction(_:)))
 
-    case NSTouchBarItemIdentifier.next,
-         NSTouchBarItemIdentifier.prev:
+    case .next,
+         .prev:
       guard let data = touchBarItemBinding[identifier] else { return nil }
       return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSkipAction(_:)))
 
@@ -123,40 +125,40 @@ extension MainWindowController: NSTouchBarDelegate {
 
   func updateTouchBarPlayBtn() {
     if player.info.isPaused {
-      touchBarPlayPauseBtn?.image = NSImage(named: NSImageNameTouchBarPlayTemplate)
+      touchBarPlayPauseBtn?.image = NSImage(named: .touchBarPlayTemplate)
     } else {
-      touchBarPlayPauseBtn?.image = NSImage(named: NSImageNameTouchBarPauseTemplate)
+      touchBarPlayPauseBtn?.image = NSImage(named: .touchBarPauseTemplate)
     }
   }
 
-  func touchBarPlayBtnAction(_ sender: NSButton) {
+  @objc func touchBarPlayBtnAction(_ sender: NSButton) {
     player.togglePause(nil)
   }
 
-  func touchBarVolumeAction(_ sender: NSButton) {
+  @objc func touchBarVolumeAction(_ sender: NSButton) {
     let currVolume = player.info.volume
     player.setVolume(currVolume + (sender.tag == 0 ? 5 : -5))
   }
 
-  func touchBarRewindAction(_ sender: NSButton) {
+  @objc func touchBarRewindAction(_ sender: NSButton) {
     arrowButtonAction(left: sender.tag == 0)
   }
 
-  func touchBarSeekAction(_ sender: NSButton) {
+  @objc func touchBarSeekAction(_ sender: NSButton) {
     let sec = sender.tag
     player.seek(relativeSecond: Double(sec), option: .relative)
   }
 
-  func touchBarSkipAction(_ sender: NSButton) {
+  @objc func touchBarSkipAction(_ sender: NSButton) {
     player.navigateInPlaylist(nextOrPrev: sender.tag == 0)
   }
 
-  func touchBarSliderAction(_ sender: NSSlider) {
+  @objc func touchBarSliderAction(_ sender: NSSlider) {
     let percentage = 100 * sender.doubleValue / sender.maxValue
     player.seek(percent: percentage, forceExact: true)
   }
 
-  private func buttonTouchBarItem(withIdentifier identifier: NSTouchBarItemIdentifier, imageName: String, tag: Int, customLabel: String, action: Selector) -> NSCustomTouchBarItem {
+  private func buttonTouchBarItem(withIdentifier identifier: NSTouchBarItem.Identifier, imageName: NSImage.Name, tag: Int, customLabel: String, action: Selector) -> NSCustomTouchBarItem {
     let item = NSCustomTouchBarItem(identifier: identifier)
     let button = NSButton(image: NSImage(named: imageName)!, target: self, action: action)
     button.tag = tag

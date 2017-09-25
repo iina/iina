@@ -10,8 +10,8 @@ import Cocoa
 
 class FilterWindowController: NSWindowController {
 
-  override var windowNibName: String {
-    return "FilterWindowController"
+  override var windowNibName: NSNib.Name {
+    return NSNib.Name("FilterWindowController")
   }
 
   var filterType: String!
@@ -84,16 +84,16 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     guard let filter = filters.at(row) else { return nil }
-    if tableColumn?.identifier == Constants.Identifier.key {
+    if tableColumn?.identifier == .key {
       return row.toStr()
-    } else if tableColumn?.identifier == Constants.Identifier.value {
+    } else if tableColumn?.identifier == .value {
       return filter.stringFormat
     }
     return ""
   }
 
   func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
-    guard let value = object as? String, tableColumn?.identifier == Constants.Identifier.value else { return }
+    guard let value = object as? String, tableColumn?.identifier == .value else { return }
 
     if let newFilter = MPVFilter(rawString: value) {
       filters[row] = newFilter
@@ -162,7 +162,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     let label = NSTextField(frame: NSRect(x: 0, y: yPos,
                                           width: scrollContentView.frame.width,
                                           height: 17))
-    label.font = NSFont.boldSystemFont(ofSize: NSFont.systemFontSize())
+    label.font = NSFont.boldSystemFont(ofSize: NSFont.systemFontSize)
     label.stringValue = title
     label.drawsBackground = false
     label.isBezeled = false
@@ -217,7 +217,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
   }
 
   @IBAction func sheetAddBtnAction(_ sender: Any) {
-    filterWindow.window!.endSheet(filterWindow.newFilterSheet, returnCode: NSModalResponseOK)
+    filterWindow.window!.endSheet(filterWindow.newFilterSheet, returnCode: .OK)
     guard let preset = currentPreset else { return }
     // create instance
     let instance = FilterPresetInstance(from: preset)
@@ -236,7 +236,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
   }
 
   @IBAction func sheetCancelBtnAction(_ sender: Any) {
-    filterWindow.window!.endSheet(filterWindow.newFilterSheet, returnCode: NSModalResponseCancel)
+    filterWindow.window!.endSheet(filterWindow.newFilterSheet, returnCode: .cancel)
   }
 
 }

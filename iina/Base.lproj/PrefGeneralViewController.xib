@@ -192,7 +192,7 @@
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="8Ql-ym-BvF">
                                         <rect key="frame" x="5" y="5" width="54" height="22"/>
-                                        <buttonCell key="cell" type="check" title="Pause" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="FbF-jJ-W5a">
+                                        <buttonCell key="cell" type="check" title="Pause" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="FbF-jJ-W5b">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                             <connections>
@@ -205,7 +205,7 @@
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="U8N-xw-dgL">
                                         <rect key="frame" x="62" y="7" width="105" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Enter fullscreen" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="MlG-hl-goA">
+                                        <buttonCell key="cell" type="check" title="Enter fullscreen" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="MlG-hl-goB">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
@@ -309,8 +309,8 @@
                             </connections>
                         </button>
                         <textField autoresizesSubviews="NO" horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="da1-EI-Ny1">
-                            <rect key="frame" x="16" y="4" width="358" height="14"/>
-                            <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Otherwise only files that opened manually will show up in this menu" id="XFC-Lr-LmP">
+                            <rect key="frame" x="16" y="4" width="628" height="14"/>
+                            <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Otherwise only files that opened manually will show up in this menu." id="XFC-Lr-LmP">
                                 <font key="font" metaFont="smallSystem"/>
                                 <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -319,7 +319,6 @@
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AUU-c3-fW5" secondAttribute="trailing" id="Ac0-Im-2ue"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="da1-EI-Ny1" secondAttribute="trailing" id="BQS-pT-Udk"/>
                         <constraint firstItem="AUU-c3-fW5" firstAttribute="top" secondItem="pfH-CF-O2T" secondAttribute="bottom" constant="8" id="Ncz-P1-OD7"/>
                         <constraint firstItem="da1-EI-Ny1" firstAttribute="leading" secondItem="gxK-Zo-PtQ" secondAttribute="leading" constant="18" id="Vgd-16-VLR"/>
                         <constraint firstItem="da1-EI-Ny1" firstAttribute="top" secondItem="gxK-Zo-PtQ" secondAttribute="bottom" constant="4" id="X9d-Gp-Gd2"/>
@@ -332,6 +331,7 @@
                         <constraint firstItem="pfH-CF-O2T" firstAttribute="top" secondItem="Kmu-J1-cbE" secondAttribute="top" id="di6-Om-iYm"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gxK-Zo-PtQ" secondAttribute="trailing" id="eWv-bL-SZ2"/>
                         <constraint firstItem="gxK-Zo-PtQ" firstAttribute="leading" secondItem="Kmu-J1-cbE" secondAttribute="leading" id="kFq-9q-rRs"/>
+                        <constraint firstAttribute="trailing" secondItem="da1-EI-Ny1" secondAttribute="trailing" id="l2x-XY-er0"/>
                         <constraint firstItem="gxK-Zo-PtQ" firstAttribute="top" secondItem="4zm-YX-iM8" secondAttribute="bottom" constant="6" id="lnd-OY-DqJ"/>
                         <constraint firstItem="4zm-YX-iM8" firstAttribute="top" secondItem="AUU-c3-fW5" secondAttribute="bottom" constant="6" id="loj-lX-llR"/>
                     </constraints>
@@ -368,7 +368,7 @@
                             </connections>
                         </button>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OVz-Nv-1WW">
-                            <rect key="frame" x="16" y="24" width="206" height="14"/>
+                            <rect key="frame" x="16" y="24" width="628" height="14"/>
                             <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Requires restarting IINA to take effect." id="8kU-8g-VgX">
                                 <font key="font" metaFont="smallSystem"/>
                                 <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -378,10 +378,10 @@
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="UHf-eK-ba5" secondAttribute="bottom" constant="4" id="3R0-8Q-vKh"/>
+                        <constraint firstAttribute="trailing" secondItem="OVz-Nv-1WW" secondAttribute="trailing" id="9pX-b8-Q44"/>
                         <constraint firstItem="6gO-wx-MWj" firstAttribute="leading" secondItem="y7O-rd-dnT" secondAttribute="leading" id="HHh-Ci-kWH"/>
                         <constraint firstItem="OVz-Nv-1WW" firstAttribute="leading" secondItem="xmd-ef-R8e" secondAttribute="leading" constant="18" id="PV1-DS-RhV"/>
                         <constraint firstItem="6gO-wx-MWj" firstAttribute="top" secondItem="y7O-rd-dnT" secondAttribute="top" id="R9Q-BW-yNL"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OVz-Nv-1WW" secondAttribute="trailing" id="ZrL-o2-ecU"/>
                         <constraint firstItem="UHf-eK-ba5" firstAttribute="top" secondItem="OVz-Nv-1WW" secondAttribute="bottom" constant="6" id="dae-1Y-8Qp"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6gO-wx-MWj" secondAttribute="trailing" id="hMc-8k-u0x"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xmd-ef-R8e" secondAttribute="trailing" id="j2a-dy-kzM"/>
@@ -544,7 +544,7 @@
                 <constraint firstAttribute="trailing" secondItem="6zR-96-iKB" secondAttribute="trailing" constant="28" id="xi9-wv-U4I"/>
                 <constraint firstItem="2Od-u1-4x3" firstAttribute="top" secondItem="Kmu-J1-cbE" secondAttribute="bottom" constant="8" id="ze1-KA-xWf"/>
             </constraints>
-            <point key="canvasLocation" x="-820" y="269"/>
+            <point key="canvasLocation" x="-820" y="253"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="IBP-Mz-Maa"/>
     </objects>

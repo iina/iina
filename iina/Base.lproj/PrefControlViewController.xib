@@ -14,7 +14,7 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="369"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="369"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zSQ-pa-Urx">
                     <rect key="frame" x="64" y="268" width="168" height="17"/>
@@ -53,7 +53,7 @@
                     </connections>
                 </popUpButton>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LN0-rs-jJB">
-                    <rect key="frame" x="64" y="246" width="406" height="14"/>
+                    <rect key="frame" x="64" y="246" width="526" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="jRo-EH-zOV"/>
                     </constraints>
@@ -223,7 +223,7 @@
                     </connections>
                 </slider>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="mXt-T0-PtY">
-                    <rect key="frame" x="66" y="89" width="402" height="5"/>
+                    <rect key="frame" x="66" y="89" width="522" height="5"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nio-Fb-YPK">
                     <rect key="frame" x="235" y="56" width="172" height="26"/>
@@ -254,7 +254,7 @@
                     </textFieldCell>
                 </textField>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="v5y-XQ-mF4">
-                    <rect key="frame" x="66" y="47" width="402" height="5"/>
+                    <rect key="frame" x="66" y="47" width="522" height="5"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mdI-b4-54O">
                     <rect key="frame" x="236" y="101" width="171" height="26"/>

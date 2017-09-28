@@ -18,11 +18,10 @@
 "55O-ik-ql6.title" = "启用「最近打开」菜单";
 
 /* Class = "NSButtonCell"; title = "Pause when media opened"; ObjectID = "FbF-jJ-W5a"; */
-"FbF-jJ-W5a.title" = "打开媒体后暂停";
-
+"FbF-jJ-W5b.title" = "暂停";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen when media opened"; ObjectID = "MlG-hl-goA"; */
-"MlG-hl-goA.title" = "打开媒体后进入全屏";
+"MlG-hl-goB.title" = "进入全屏";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
@@ -92,3 +91,9 @@
 "XFC-Lr-LmP.title" = "否则该菜单只记录手动打开的文件";
 
 "TvB-UM-FrS.title" = "使用 10.6 前的旧式全屏模式";
+
+"GNV-VA-NBW.title" = "打开媒体时:";
+
+"FbF-jJ-W5b.title" = "暂停";
+
+"MlG-hl-goB.title" = "进入全屏";

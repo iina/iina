@@ -37,15 +37,12 @@ class PrefSubViewController: NSViewController {
   var hasResizableWidth: Bool = false
   var hasResizableHeight: Bool = false
 
-  @IBOutlet weak var scrollView: NSScrollView!
   @IBOutlet weak var subLangTokenView: NSTokenField!
   @IBOutlet weak var loginIndicator: NSProgressIndicator!
   @IBOutlet weak var defaultEncodingList: NSPopUpButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 460))
     
     let defaultEncoding = Preference.string(for: .defaultEncoding)
     for encoding in AppData.encodings {

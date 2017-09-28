@@ -246,7 +246,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private var arrowBtnFunction: Preference.ArrowButtonAction
   private var singleClickAction: Preference.MouseClickAction
   private var doubleClickAction: Preference.MouseClickAction
-  private var rightClickAction: Preference.MouseClickAction
   private var pinchAction: Preference.PinchAction
 
   /** A list of observed preference keys. */
@@ -262,12 +261,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     .arrowButtonAction,
     .singleClickAction,
     .doubleClickAction,
-    .rightClickAction,
     .pinchAction,
     .showRemainingTime,
     .blackOutMonitor,
     .alwaysFloatOnTop,
-    .useLegacyFullScreen
+    .useLegacyFullScreen,
+    .maxVolume
   ]
 
   // MARK: - Outlets
@@ -376,7 +375,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     arrowBtnFunction = Preference.enum(for: .arrowButtonAction)
     singleClickAction = Preference.enum(for: .singleClickAction)
     doubleClickAction = Preference.enum(for: .doubleClickAction)
-    rightClickAction = Preference.enum(for: .rightClickAction)
     pinchAction = Preference.enum(for: .pinchAction)
 
     super.init(window: nil)
@@ -551,83 +549,78 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     switch keyPath {
 
     case PK.themeMaterial.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         setMaterial(Preference.Theme(rawValue: newValue))
       }
 
     case PK.oscPosition.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         setupOnScreenController(position: Preference.OSCPosition(rawValue: newValue) ?? .floating)
       }
 
     case PK.showChapterPos.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+      if let newValue = change[.newKey] as? Bool {
         (playSlider.cell as! PlaySliderCell).drawChapters = newValue
       }
 
     case PK.useExactSeek.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         useExtractSeek = Preference.SeekOption(rawValue: newValue)!
       }
 
     case PK.relativeSeekAmount.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         relativeSeekAmount = newValue.constrain(min: 1, max: 5)
       }
 
     case PK.volumeScrollAmount.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         volumeScrollAmount = newValue.constrain(min: 1, max: 4)
       }
 
     case PK.verticalScrollAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         verticalScrollAction = Preference.ScrollAction(rawValue: newValue)!
       }
 
     case PK.horizontalScrollAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         horizontalScrollAction = Preference.ScrollAction(rawValue: newValue)!
       }
 
     case PK.arrowButtonAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)!
       }
 
     case PK.arrowButtonAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)!
       }
 
     case PK.singleClickAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         singleClickAction = Preference.MouseClickAction(rawValue: newValue)!
       }
 
     case PK.doubleClickAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         doubleClickAction = Preference.MouseClickAction(rawValue: newValue)!
       }
 
-    case PK.rightClickAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
-        rightClickAction = Preference.MouseClickAction(rawValue: newValue)!
-      }
-
     case PK.pinchAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         pinchAction = Preference.PinchAction(rawValue: newValue)!
       }
 
     case PK.showRemainingTime.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+      if let newValue = change[.newKey] as? Bool {
         rightLabel.mode = newValue ? .remaining : .duration
         touchBarCurrentPosLabel?.mode = newValue ? .remaining : .current
       }
     
     case PK.blackOutMonitor.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+      if let newValue = change[.newKey] as? Bool {
         if isInFullScreen {
           if newValue {
             blackOutOtherMonitors()
@@ -638,7 +631,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
 
     case PK.alwaysFloatOnTop.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+      if let newValue = change[.newKey] as? Bool {
         if !player.info.isPaused {
           self.isOntop = newValue
           setWindowFloatingOnTop(newValue)
@@ -647,6 +640,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.useLegacyFullScreen.rawValue:
       resetCollectionBehavior()
+
+    case PK.maxVolume.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        volumeSlider.maxValue = Double(newValue)
+      }
 
     default:
       return
@@ -836,9 +834,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         // if sidebar is shown, hide it first
         hideSideBar()
       } else {
-        // handle mouse click
-        if event.clickCount == 1 {
-          // Disable singleClick for sideBar / OSC / titleBar
+        if event.pressure > 0 {
+          // force touch
+          performMouseAction(Preference.enum(for: .forceTouchAction))
+        } else if event.clickCount == 1 {
+          // single click or first click of a double click
+          // disable single click for sideBar / OSC / titleBar
           guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
           // single click
           if doubleClickAction == .none {
@@ -850,7 +851,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
             mouseExitEnterCount = 0
           }
         } else if event.clickCount == 2 {
-          // Disable doubleClick for sideBar / OSC
+          // double click
+          // disable double click for sideBar / OSC
           guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar]) else { return }
           // double click
           guard doubleClickAction != .none else { return }
@@ -871,7 +873,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // Disable mouseUp for sideBar / OSC / titleBar
     guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
     
-    performMouseAction(rightClickAction)
+    performMouseAction(Preference.enum(for: .rightClickAction))
+  }
+
+  override func otherMouseUp(with event: NSEvent) {
+    if event.buttonNumber == 2 {
+      performMouseAction(Preference.enum(for: .middleClickAction))
+    } else {
+      super.otherMouseUp(with: event)
+    }
   }
 
   /**
@@ -1715,6 +1725,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     var material: NSVisualEffectView.Material
     var isDarkTheme: Bool
     let sliderCell = playSlider.cell as? PlaySliderCell
+    let volumeCell = volumeSlider.cell as? VolumeSliderCell
 
     switch theme {
 
@@ -1741,6 +1752,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     sliderCell?.isInDarkTheme = isDarkTheme
+    volumeCell?.isInDarkTheme = isDarkTheme
 
     [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView].forEach {
       $0?.material = material

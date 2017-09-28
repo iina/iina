@@ -113,6 +113,7 @@ struct Preference {
     static let playlistWidth = Key("playlistWidth")
 
     static let enableThumbnailPreview = Key("enableThumbnailPreview")
+    static let maxThumbnailPreviewCacheSize = Key("maxThumbnailPreviewCacheSize")
 
     static let autoSwitchToMusicMode = Key("autoSwitchToMusicMode")
 
@@ -190,7 +191,9 @@ struct Preference {
     static let singleClickAction = Key("singleClickAction")
     static let doubleClickAction = Key("doubleClickAction")
     static let rightClickAction = Key("rightClickAction")
+    static let middleClickAction = Key("middleClickAction")
     static let pinchAction = Key("pinchAction")
+    static let forceTouchAction = Key("forceTouchAction")
 
     static let showRemainingTime = Key("showRemainingTime")
 
@@ -526,7 +529,7 @@ struct Preference {
     Key.themeMaterial.rawValue: Theme.dark.rawValue,
     Key.osdAutoHideTimeout.rawValue: Float(1),
     Key.osdTextSize.rawValue: Float(20),
-    Key.softVolume.rawValue: 50,
+    Key.softVolume.rawValue: 100,
     Key.arrowButtonAction.rawValue: ArrowButtonAction.speed.rawValue,
     Key.pauseWhenOpen.rawValue: false,
     Key.fullScreenWhenOpen.rawValue: false,
@@ -546,6 +549,7 @@ struct Preference {
     Key.resizeOnlyWhenManuallyOpenFile.rawValue: true,
     Key.showRemainingTime.rawValue: false,
     Key.enableThumbnailPreview.rawValue: true,
+    Key.maxThumbnailPreviewCacheSize.rawValue: 500,
     Key.autoSwitchToMusicMode.rawValue: true,
 
     Key.videoThreads.rawValue: 0,
@@ -617,7 +621,9 @@ struct Preference {
     Key.singleClickAction.rawValue: MouseClickAction.hideOSC.rawValue,
     Key.doubleClickAction.rawValue: MouseClickAction.fullscreen.rawValue,
     Key.rightClickAction.rawValue: MouseClickAction.pause.rawValue,
+    Key.middleClickAction.rawValue: MouseClickAction.none.rawValue,
     Key.pinchAction.rawValue: PinchAction.windowSize.rawValue,
+    Key.forceTouchAction.rawValue: MouseClickAction.none.rawValue,
 
     Key.screenshotFolder.rawValue: "~/Pictures/Screenshots",
     Key.screenshotIncludeSubtitle.rawValue: true,

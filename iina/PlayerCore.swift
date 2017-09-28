@@ -379,7 +379,8 @@ class PlayerCore: NSObject {
   }
 
   func setVolume(_ volume: Double, constrain: Bool = true) {
-    let constrainedVolume = volume.constrain(min: 0, max: 100)
+    let maxVolume = Preference.integer(for: .maxVolume)
+    let constrainedVolume = volume.constrain(min: 0, max: Double(maxVolume))
     let appliedVolume = constrain ? constrainedVolume : volume
     info.volume = appliedVolume
     mpv.setDouble(MPVOption.Audio.volume, appliedVolume)

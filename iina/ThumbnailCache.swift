@@ -26,6 +26,13 @@ class ThumbnailCache {
   static func write(_ thumbnails: [FFThumbnail], forName name: String) {
     // Utility.log("Writing thumbnail cache...")
 
+    let maxCacheSize = Preference.integer(for: .maxThumbnailPreviewCacheSize) * FileSize.Unit.mb.rawValue
+    if maxCacheSize == 0 {
+      return
+    } else if CacheManager.shared.getCacheSize() > maxCacheSize {
+      CacheManager.shared.clearOldCache()
+    }
+
     let pathURL = urlFor(name)
     guard FileManager.default.createFile(atPath: pathURL.path, contents: nil, attributes: nil) else {
       Utility.log("Cannot create file.")
@@ -59,6 +66,7 @@ class ThumbnailCache {
       file.write(jpegData)
     }
 
+    CacheManager.shared.needsRefresh = true
     // Utility.log("Finished writing thumbnail cache.")
   }
 

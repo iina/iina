@@ -81,14 +81,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   }
 
   private func updateThumbnailCacheStat() {
-    var totalSize = 0
-    if let contents = try? FileManager.default.contentsOfDirectory(at: Utility.thumbnailCacheURL, includingPropertiesForKeys: [.fileSizeKey], options: [.skipsHiddenFiles]) {
-      for url in contents {
-        guard let size = try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize else { return }
-        totalSize += size ?? 0
-      }
-    }
-    thumbCacheSizeLabel.stringValue = FileSize.format(totalSize, unit: .b)
+    thumbCacheSizeLabel.stringValue = FileSize.format(CacheManager.shared.getCacheSize(), unit: .b)
   }
 
 }

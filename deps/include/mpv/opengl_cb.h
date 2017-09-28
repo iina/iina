@@ -68,14 +68,20 @@ extern "C" {
  * defaults. Likewise, mpv will attempt to leave the OpenGL context with
  * standard defaults. The following state is excluded from this:
  *
- *      - the current viewport (can have/is set to an arbitrary value)
+ *      - the glViewport state
+ *      - the glScissor state (but GL_SCISSOR_TEST is in its default value)
+ *      - glBlendFuncSeparate() state (but GL_BLEND is in its default value)
+ *      - glClearColor() state
+ *      - mpv may overwrite the callback set with glDebugMessageCallback()
+ *      - mpv always disables GL_DITHER at init
  *
  * Messing with the state could be avoided by creating shared OpenGL contexts,
  * but this is avoided for the sake of compatibility and interoperability.
  *
  * On OpenGL 2.1, mpv will strictly call functions like glGenTextures() to
  * create OpenGL objects. You will have to do the same. This ensures that
- * objects created by mpv and the API users don't clash.
+ * objects created by mpv and the API users don't clash. Also, legacy state
+ * must be either in its defaults, or not interfere with core state.
  *
  * Threading
  * ---------
@@ -176,7 +182,7 @@ extern "C" {
  *
  * The RPI uses no proper interop, but hardware overlays instead. To place the
  * overlay correctly, you can communicate the window parameters as follows to
- * libmpv. gl->MPGetNativeDisplay("MPV_RPI_WINDOW") return an array of type int
+ * libmpv. glMPGetNativeDisplay("MPV_RPI_WINDOW") returns an array of type int
  * with the following 4 elements:
  *      0: display number (default 0)
  *      1: layer number of the GL layer - video will be placed in the layer

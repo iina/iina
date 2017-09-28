@@ -527,7 +527,7 @@ struct Preference {
     Key.themeMaterial.rawValue: Theme.dark.rawValue,
     Key.osdAutoHideTimeout.rawValue: Float(1),
     Key.osdTextSize.rawValue: Float(20),
-    Key.softVolume.rawValue: 50,
+    Key.softVolume.rawValue: 100,
     Key.arrowButtonAction.rawValue: ArrowButtonAction.speed.rawValue,
     Key.pauseWhenOpen.rawValue: false,
     Key.fullScreenWhenOpen.rawValue: false,

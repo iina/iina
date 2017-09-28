@@ -267,7 +267,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     .showRemainingTime,
     .blackOutMonitor,
     .alwaysFloatOnTop,
-    .useLegacyFullScreen
+    .useLegacyFullScreen,
+    .maxVolume
   ]
 
   // MARK: - Outlets
@@ -551,83 +552,83 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     switch keyPath {
 
     case PK.themeMaterial.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         setMaterial(Preference.Theme(rawValue: newValue))
       }
 
     case PK.oscPosition.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         setupOnScreenController(position: Preference.OSCPosition(rawValue: newValue) ?? .floating)
       }
 
     case PK.showChapterPos.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+      if let newValue = change[.newKey] as? Bool {
         (playSlider.cell as! PlaySliderCell).drawChapters = newValue
       }
 
     case PK.useExactSeek.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         useExtractSeek = Preference.SeekOption(rawValue: newValue)!
       }
 
     case PK.relativeSeekAmount.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         relativeSeekAmount = newValue.constrain(min: 1, max: 5)
       }
 
     case PK.volumeScrollAmount.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         volumeScrollAmount = newValue.constrain(min: 1, max: 4)
       }
 
     case PK.verticalScrollAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         verticalScrollAction = Preference.ScrollAction(rawValue: newValue)!
       }
 
     case PK.horizontalScrollAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         horizontalScrollAction = Preference.ScrollAction(rawValue: newValue)!
       }
 
     case PK.arrowButtonAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)!
       }
 
     case PK.arrowButtonAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)!
       }
 
     case PK.singleClickAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         singleClickAction = Preference.MouseClickAction(rawValue: newValue)!
       }
 
     case PK.doubleClickAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         doubleClickAction = Preference.MouseClickAction(rawValue: newValue)!
       }
 
     case PK.rightClickAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         rightClickAction = Preference.MouseClickAction(rawValue: newValue)!
       }
 
     case PK.pinchAction.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Int {
+      if let newValue = change[.newKey] as? Int {
         pinchAction = Preference.PinchAction(rawValue: newValue)!
       }
 
     case PK.showRemainingTime.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+      if let newValue = change[.newKey] as? Bool {
         rightLabel.mode = newValue ? .remaining : .duration
         touchBarCurrentPosLabel?.mode = newValue ? .remaining : .current
       }
     
     case PK.blackOutMonitor.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+      if let newValue = change[.newKey] as? Bool {
         if isInFullScreen {
           if newValue {
             blackOutOtherMonitors()
@@ -638,7 +639,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
 
     case PK.alwaysFloatOnTop.rawValue:
-      if let newValue = change[NSKeyValueChangeKey.newKey] as? Bool {
+      if let newValue = change[.newKey] as? Bool {
         if !player.info.isPaused {
           self.isOntop = newValue
           setWindowFloatingOnTop(newValue)
@@ -647,6 +648,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.useLegacyFullScreen.rawValue:
       resetCollectionBehavior()
+
+    case PK.maxVolume.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        volumeSlider.maxValue = Double(newValue)
+      }
 
     default:
       return
@@ -1715,6 +1721,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     var material: NSVisualEffectView.Material
     var isDarkTheme: Bool
     let sliderCell = playSlider.cell as? PlaySliderCell
+    let volumeCell = volumeSlider.cell as? VolumeSliderCell
 
     switch theme {
 
@@ -1741,6 +1748,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     sliderCell?.isInDarkTheme = isDarkTheme
+    volumeCell?.isInDarkTheme = isDarkTheme
 
     [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView].forEach {
       $0?.material = material

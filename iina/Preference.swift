@@ -191,7 +191,9 @@ struct Preference {
     static let singleClickAction = Key("singleClickAction")
     static let doubleClickAction = Key("doubleClickAction")
     static let rightClickAction = Key("rightClickAction")
+    static let middleClickAction = Key("middleClickAction")
     static let pinchAction = Key("pinchAction")
+    static let forceTouchAction = Key("forceTouchAction")
 
     static let showRemainingTime = Key("showRemainingTime")
 
@@ -619,7 +621,9 @@ struct Preference {
     Key.singleClickAction.rawValue: MouseClickAction.hideOSC.rawValue,
     Key.doubleClickAction.rawValue: MouseClickAction.fullscreen.rawValue,
     Key.rightClickAction.rawValue: MouseClickAction.pause.rawValue,
+    Key.middleClickAction.rawValue: MouseClickAction.none.rawValue,
     Key.pinchAction.rawValue: PinchAction.windowSize.rawValue,
+    Key.forceTouchAction.rawValue: MouseClickAction.none.rawValue,
 
     Key.screenshotFolder.rawValue: "~/Pictures/Screenshots",
     Key.screenshotIncludeSubtitle.rawValue: true,

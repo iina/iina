@@ -246,7 +246,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private var arrowBtnFunction: Preference.ArrowButtonAction
   private var singleClickAction: Preference.MouseClickAction
   private var doubleClickAction: Preference.MouseClickAction
-  private var rightClickAction: Preference.MouseClickAction
   private var pinchAction: Preference.PinchAction
 
   /** A list of observed preference keys. */
@@ -262,7 +261,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     .arrowButtonAction,
     .singleClickAction,
     .doubleClickAction,
-    .rightClickAction,
     .pinchAction,
     .showRemainingTime,
     .blackOutMonitor,
@@ -377,7 +375,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     arrowBtnFunction = Preference.enum(for: .arrowButtonAction)
     singleClickAction = Preference.enum(for: .singleClickAction)
     doubleClickAction = Preference.enum(for: .doubleClickAction)
-    rightClickAction = Preference.enum(for: .rightClickAction)
     pinchAction = Preference.enum(for: .pinchAction)
 
     super.init(window: nil)
@@ -611,11 +608,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         doubleClickAction = Preference.MouseClickAction(rawValue: newValue)!
       }
 
-    case PK.rightClickAction.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        rightClickAction = Preference.MouseClickAction(rawValue: newValue)!
-      }
-
     case PK.pinchAction.rawValue:
       if let newValue = change[.newKey] as? Int {
         pinchAction = Preference.PinchAction(rawValue: newValue)!
@@ -842,9 +834,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         // if sidebar is shown, hide it first
         hideSideBar()
       } else {
-        // handle mouse click
-        if event.clickCount == 1 {
-          // Disable singleClick for sideBar / OSC / titleBar
+        if event.pressure > 0 {
+          // force touch
+          performMouseAction(Preference.enum(for: .forceTouchAction))
+        } else if event.clickCount == 1 {
+          // single click or first click of a double click
+          // disable single click for sideBar / OSC / titleBar
           guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
           // single click
           if doubleClickAction == .none {
@@ -856,7 +851,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
             mouseExitEnterCount = 0
           }
         } else if event.clickCount == 2 {
-          // Disable doubleClick for sideBar / OSC
+          // double click
+          // disable double click for sideBar / OSC
           guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar]) else { return }
           // double click
           guard doubleClickAction != .none else { return }
@@ -877,7 +873,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // Disable mouseUp for sideBar / OSC / titleBar
     guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
     
-    performMouseAction(rightClickAction)
+    performMouseAction(Preference.enum(for: .rightClickAction))
+  }
+
+  override func otherMouseUp(with event: NSEvent) {
+    if event.buttonNumber == 2 {
+      performMouseAction(Preference.enum(for: .middleClickAction))
+    } else {
+      super.otherMouseUp(with: event)
+    }
   }
 
   /**

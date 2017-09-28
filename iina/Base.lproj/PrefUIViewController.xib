@@ -19,10 +19,10 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="475"/>
+            <rect key="frame" x="0.0" y="0.0" width="592" height="475"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="D77-Iw-nrY">
-                    <rect key="frame" x="28" y="352" width="544" height="103"/>
+                    <rect key="frame" x="28" y="352" width="536" height="103"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RFk-nU-SGL">
                             <rect key="frame" x="-2" y="86" width="61" height="17"/>
@@ -99,7 +99,7 @@
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="gjB-It-iFS">
-                    <rect key="frame" x="28" y="184" width="544" height="152"/>
+                    <rect key="frame" x="28" y="184" width="536" height="152"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4XH-GU-VhV">
                             <rect key="frame" x="-2" y="135" width="144" height="17"/>
@@ -151,7 +151,7 @@
                             </constraints>
                         </box>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ml-Xj-nVX">
-                            <rect key="frame" x="270" y="85" width="98" height="17"/>
+                            <rect key="frame" x="266" y="85" width="98" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Auto hide after:" id="82A-XQ-BvS">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -159,7 +159,7 @@
                             </textFieldCell>
                         </textField>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="nDu-Yq-tPI">
-                            <rect key="frame" x="270" y="57" width="205" height="18"/>
+                            <rect key="frame" x="266" y="57" width="205" height="18"/>
                             <buttonCell key="cell" type="check" title="Snap to center when dragging" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="mdD-if-Wqw">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -169,7 +169,7 @@
                             </connections>
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="OMM-mG-Uts">
-                            <rect key="frame" x="270" y="37" width="252" height="18"/>
+                            <rect key="frame" x="266" y="37" width="252" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="KMa-ph-9mO"/>
                             </constraints>
@@ -182,7 +182,7 @@
                             </buttonCell>
                         </button>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hkU-0W-pJb">
-                            <rect key="frame" x="438" y="85" width="11" height="17"/>
+                            <rect key="frame" x="434" y="85" width="11" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="s" id="S8H-Xr-uVa">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -190,7 +190,7 @@
                             </textFieldCell>
                         </textField>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="rft-T0-lds">
-                            <rect key="frame" x="270" y="17" width="149" height="18"/>
+                            <rect key="frame" x="266" y="17" width="149" height="18"/>
                             <buttonCell key="cell" type="check" title="Show remaining time" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="EAa-gN-8dL">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -208,7 +208,7 @@
                             </textFieldCell>
                         </textField>
                         <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Abq-vA-BcZ">
-                            <rect key="frame" x="374" y="82" width="58" height="22"/>
+                            <rect key="frame" x="370" y="82" width="58" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="58" id="asW-La-UC2"/>
                             </constraints>
@@ -257,7 +257,7 @@
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="c8m-G4-or8">
-                    <rect key="frame" x="28" y="20" width="544" height="48"/>
+                    <rect key="frame" x="28" y="20" width="536" height="48"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zyi-J3-lSp">
                             <rect key="frame" x="-2" y="31" width="127" height="17"/>
@@ -293,7 +293,7 @@
                             </textFieldCell>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="63o-gu-DxA">
-                            <rect key="frame" x="270" y="4" width="61" height="17"/>
+                            <rect key="frame" x="266" y="4" width="61" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Text size:" id="suy-e8-j4i">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -309,7 +309,7 @@
                             </textFieldCell>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HcO-CN-3qi">
-                            <rect key="frame" x="401" y="4" width="17" height="17"/>
+                            <rect key="frame" x="397" y="4" width="17" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="pt" id="I8t-ey-016">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -317,7 +317,7 @@
                             </textFieldCell>
                         </textField>
                         <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDT-XM-dyY">
-                            <rect key="frame" x="337" y="1" width="58" height="22"/>
+                            <rect key="frame" x="333" y="1" width="58" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="58" id="rtB-DT-Hgf"/>
                             </constraints>
@@ -357,13 +357,13 @@
                     </constraints>
                 </customView>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="sUf-jd-akr">
-                    <rect key="frame" x="28" y="341" width="544" height="5"/>
+                    <rect key="frame" x="28" y="341" width="536" height="5"/>
                 </box>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="k01-VH-tli">
-                    <rect key="frame" x="28" y="173" width="544" height="5"/>
+                    <rect key="frame" x="28" y="173" width="536" height="5"/>
                 </box>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="3uJ-UU-1zw">
-                    <rect key="frame" x="28" y="84" width="544" height="84"/>
+                    <rect key="frame" x="28" y="84" width="536" height="84"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="maZ-e8-1vw">
                             <rect key="frame" x="-2" y="67" width="132" height="17"/>
@@ -423,7 +423,7 @@
                             </connections>
                         </textField>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Ek-Aa-tIU">
-                            <rect key="frame" x="266" y="34" width="125" height="32"/>
+                            <rect key="frame" x="262" y="34" width="125" height="32"/>
                             <buttonCell key="cell" type="push" title="Clear Cache…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OAh-HP-wST">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -467,7 +467,7 @@
                     </constraints>
                 </customView>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Ets-Dn-z2C">
-                    <rect key="frame" x="28" y="73" width="544" height="5"/>
+                    <rect key="frame" x="28" y="73" width="536" height="5"/>
                 </box>
             </subviews>
             <constraints>

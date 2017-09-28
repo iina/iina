@@ -113,6 +113,7 @@ struct Preference {
     static let playlistWidth = Key("playlistWidth")
 
     static let enableThumbnailPreview = Key("enableThumbnailPreview")
+    static let maxThumbnailPreviewCacheSize = Key("maxThumbnailPreviewCacheSize")
 
     static let autoSwitchToMusicMode = Key("autoSwitchToMusicMode")
 
@@ -546,6 +547,7 @@ struct Preference {
     Key.resizeOnlyWhenManuallyOpenFile.rawValue: true,
     Key.showRemainingTime.rawValue: false,
     Key.enableThumbnailPreview.rawValue: true,
+    Key.maxThumbnailPreviewCacheSize.rawValue: 500,
     Key.autoSwitchToMusicMode.rawValue: true,
 
     Key.videoThreads.rawValue: 0,

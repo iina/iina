@@ -165,6 +165,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   var mouseExitEnterCount = 0
 
+  var isInSecondStage = false
+
   // MARK: - Enums
 
   // Animation state
@@ -780,6 +782,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  override func pressureChange(with event: NSEvent) {
+    if #available(OSX 10.10.3, *) {
+      if isInSecondStage == false && event.stage == 2 {
+        performMouseAction(Preference.enum(for: .forceTouchAction))
+        isInSecondStage = true
+      } else if event.stage == 1 {
+        isInSecondStage = false
+      }
+    }
+  }
+
   override func mouseDown(with event: NSEvent) {
     // do nothing if it's related to floating OSC
     guard !controlBarFloating.isDragging else { return }
@@ -834,10 +847,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         // if sidebar is shown, hide it first
         hideSideBar()
       } else {
-        if event.pressure > 0 {
-          // force touch
-          performMouseAction(Preference.enum(for: .forceTouchAction))
-        } else if event.clickCount == 1 {
+        if event.clickCount == 1 {
           // single click or first click of a double click
           // disable single click for sideBar / OSC / titleBar
           guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }

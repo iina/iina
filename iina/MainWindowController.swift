@@ -1272,7 +1272,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         // aspect ratio. Otherwise, when entered full screen, there will be an awkward animation that looks like
         // `videoView` "resized" to screen size suddenly when mpv redraws the video content in correct aspect ratio.
         // `window.frame` is full screen size now
-        videoView.frame = window.aspectRatio.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
+        let aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
+        videoView.frame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
       } else {
         // update videoview size if in full screen, since aspect ratio may changed under certain cases, like split screen
         videoView.frame = NSRect(x: 0, y: 0, width: window.frame.width, height: window.frame.height)

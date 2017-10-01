@@ -160,7 +160,6 @@
 "alert.open_url.message" = "请输入 URL:";
 "alert.choose_media_file.title" = "选择媒体文件";
 
-
 "alert.delete_history.title" = "删除历史记录";
 "alert.delete_history.message" = "确定要删除所选的历史记录吗？";
 
@@ -172,6 +171,10 @@
 "alert.clear_cache.title" = "清除缩略图缓存";
 "alert.clear_cache.message" = "确定清除所有缩略图缓存吗?";
 "alert.clear_cache.success" = "缓存已清除。";
+
+"alert.nothing_to_open" = "没有可打开的文件。";
+
+"alert.no_video_track" = "没有可用的视频轨道。";
 
 "pl_menu.title_multi" = "%d 个项目";
 "pl_menu.play_next" = "接下来播放";

@@ -9,26 +9,27 @@
 import Cocoa
 import MASPreferences
 
+@objcMembers
 class PrefKeyBindingViewController: NSViewController, MASPreferencesViewController {
 
-  override var nibName: String? {
-    return "PrefKeyBindingViewController"
+  override var nibName: NSNib.Name {
+    return NSNib.Name("PrefKeyBindingViewController")
   }
 
-  override var identifier: String? {
+  override var identifier: NSUserInterfaceItemIdentifier? {
     get {
-      return "keybinding"
+      return NSUserInterfaceItemIdentifier("keybinding")
     }
     set {
       super.identifier = newValue
     }
   }
 
-  var toolbarItemImage: NSImage {
-    return NSImage(named: "toolbar_key")!
+  var toolbarItemImage: NSImage? {
+    return #imageLiteral(resourceName: "toolbar_key")
   }
 
-  var toolbarItemLabel: String {
+  var toolbarItemLabel: String? {
     view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.keybindings", comment: "Keybindings")
   }
@@ -37,7 +38,8 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
   static let defaultConfigs: [String: String] = [
     "IINA Default": Bundle.main.path(forResource: "iina-default-input", ofType: "conf", inDirectory: "config")!,
-    "MPV Default": Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!
+    "MPV Default": Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!,
+    "VLC Default": Bundle.main.path(forResource: "vlc-default-input", ofType: "conf", inDirectory: "config")!
   ]
 
   var userConfigs: [String: Any]!
@@ -72,22 +74,22 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
     // config files
     // - default
-    PrefKeyBindingViewController.defaultConfigs.forEach { (k, v) in
-      configSelectPopUp.addItem(withTitle: k)
+    PrefKeyBindingViewController.defaultConfigs.forEach {
+      configSelectPopUp.addItem(withTitle: $0.key)
     }
     // - user
-    guard let uc = UserDefaults.standard.dictionary(forKey: Preference.Key.inputConfigs)
+    guard let uc = Preference.dictionary(for: .inputConfigs)
     else  {
       Utility.fatal("Cannot get config file list!")
     }
     userConfigs = uc
-    userConfigs.forEach { (k, v) in
-      configSelectPopUp.addItem(withTitle: k)
+    userConfigs.forEach {
+      configSelectPopUp.addItem(withTitle: $0.key)
     }
 
     var currentConf = ""
     var gotCurrentConf = false
-    if let confFromUd = UserDefaults.standard.string(forKey: Preference.Key.currentInputConfigName) {
+    if let confFromUd = Preference.string(for: .currentInputConfigName) {
       if getFilePath(forConfig: confFromUd, showAlert: false) != nil {
         currentConf = confFromUd
         gotCurrentConf = true
@@ -119,7 +121,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     panel.window.initialFirstResponder = keyRecordViewController.keyRecordView
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
-    if panel.runModal() == NSAlertFirstButtonReturn {
+    if panel.runModal() == .alertFirstButtonReturn {
       ok(keyRecordViewController.keyCode, keyRecordViewController.action)
     }
   }
@@ -136,7 +138,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     showKeyBindingPanel { key, action in
       guard !key.isEmpty && !action.isEmpty else { return }
       if action.hasPrefix("@iina") {
-        let trimmedAction = action.substring(from: action.index(action.startIndex, offsetBy: "@iina".characters.count)).trimmingCharacters(in: .whitespaces)
+        let trimmedAction = action[action.index(action.startIndex, offsetBy: "@iina".characters.count)...].trimmingCharacters(in: .whitespaces)
         currentMapping.append(KeyMapping(key: key,
                                          rawAction: trimmedAction,
                                          isIINACommand: true))
@@ -187,7 +189,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
           return
         }
       } else {
-        NSWorkspace.shared().activateFileViewerSelecting([URL(fileURLWithPath: newFilePath)])
+        NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: newFilePath)])
         return
       }
     }
@@ -198,7 +200,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     }
     // save
     userConfigs[newName] = newFilePath
-    UserDefaults.standard.set(userConfigs, forKey: Preference.Key.inputConfigs)
+    Preference.set(userConfigs, for: .inputConfigs)
     // load
     currentConfName = newName
     currentConfFilePath = newFilePath
@@ -234,7 +236,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
           return
         }
       } else {
-        NSWorkspace.shared().activateFileViewerSelecting([URL(fileURLWithPath: newFilePath)])
+        NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: newFilePath)])
         return
       }
     }
@@ -247,7 +249,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     }
     // save
     userConfigs[newName] = newFilePath
-    UserDefaults.standard.set(userConfigs, forKey: Preference.Key.inputConfigs)
+    Preference.set(userConfigs, for: .inputConfigs)
     // load
     currentConfName = newName
     currentConfFilePath = newFilePath
@@ -259,7 +261,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
   @IBAction func revealConfFileAction(_ sender: AnyObject) {
     let url = URL(fileURLWithPath: currentConfFilePath)
-    NSWorkspace.shared().activateFileViewerSelecting([url])
+    NSWorkspace.shared.activateFileViewerSelecting([url])
   }
 
   @IBAction func deleteConfFileAction(_ sender: AnyObject) {
@@ -269,7 +271,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
       Utility.showAlert("error_deleting_file")
     }
     userConfigs.removeValue(forKey: currentConfName)
-    UserDefaults.standard.set(userConfigs, forKey: Preference.Key.inputConfigs)
+    Preference.set(userConfigs, for: Preference.Key.inputConfigs)
     // load
     configSelectPopUp.removeItem(withTitle: currentConfName)
     currentConfName = configSelectPopUp.itemTitles[0]
@@ -279,9 +281,13 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   }
 
   @IBAction func displayRawValueAction(_ sender: NSButton) {
-    displayRawValues = sender.state == NSOnState
+    displayRawValues = sender.state == .on
     kbTableView.doubleAction = displayRawValues ? nil : #selector(editRow)
     kbTableView.reloadData()
+  }
+
+  @IBAction func openKeyBindingsHelpAction(_ sender: AnyObject) {
+    NSWorkspace.shared.open(URL(string: AppData.wikiLink.appending("/Manage-Key-Bindings"))!)
   }
 
   // MARK: - UI
@@ -320,7 +326,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
       changeButtonEnabled()
       return
     }
-    UserDefaults.standard.set(currentConfName, forKey: Preference.Key.currentInputConfigName)
+    Preference.set(currentConfName, for: .currentInputConfigName)
     setKeybindingsForPlayerCore()
     kbTableView.reloadData()
   }
@@ -363,9 +369,9 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
     guard let identifier = tableColumn?.identifier else { return nil }
 
     guard let mapping = currentMapping.at(row) else { return nil }
-    if identifier == Constants.Identifier.key {
+    if identifier == .key {
       return displayRawValues ? mapping.key : mapping.prettyKey
-    } else if identifier == Constants.Identifier.action {
+    } else if identifier == .action {
       return displayRawValues ? mapping.readableAction : mapping.prettyCommand
     }
     return ""
@@ -374,9 +380,9 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
   func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
     guard let value = object as? String,
       let identifier = tableColumn?.identifier else { return }
-    if identifier == Constants.Identifier.key {
+    if identifier == .key {
       currentMapping[row].key = value
-    } else if identifier == Constants.Identifier.action {
+    } else if identifier == .action {
       currentMapping[row].rawAction = value
     }
     saveToConfFile()
@@ -386,7 +392,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
     return displayRawValues
   }
 
-  func editRow() {
+  @objc func editRow() {
     guard shouldEnableEdit else { return }
     let selectedData = currentMapping[kbTableView.selectedRow]
     showKeyBindingPanel(key: selectedData.key, action: selectedData.readableAction) { key, action in

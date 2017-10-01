@@ -12,9 +12,9 @@ class FileSize {
 
   enum Unit: Int {
     case b = 1
-    case kb = 1000
-    case mb = 1000000
-    case gb = 1000000000
+    case kb = 1024
+    case mb = 1048576
+    case gb = 1073741824
 
     var string: String {
       get {

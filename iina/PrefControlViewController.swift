@@ -9,30 +9,31 @@
 import Cocoa
 import MASPreferences
 
+@objcMembers
 class PrefControlViewController: NSViewController, MASPreferencesViewController {
 
-  override var nibName: String? {
+  override var nibName: NSNib.Name {
     get {
-      return "PrefControlViewController"
+      return NSNib.Name("PrefControlViewController")
     }
   }
 
-  override var identifier: String? {
+  override var identifier: NSUserInterfaceItemIdentifier? {
     get {
-      return "control"
+      return NSUserInterfaceItemIdentifier("control")
     }
     set {
       super.identifier = newValue
     }
   }
 
-  var toolbarItemImage: NSImage {
+  var toolbarItemImage: NSImage? {
     get {
-      return NSImage(named: "toolbar_control")!
+      return #imageLiteral(resourceName: "toolbar_control")
     }
   }
 
-  var toolbarItemLabel: String {
+  var toolbarItemLabel: String? {
     get {
       view.layoutSubtreeIfNeeded()
       return NSLocalizedString("preference.control", comment: "Control")

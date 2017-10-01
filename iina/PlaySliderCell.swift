@@ -11,7 +11,7 @@ import Cocoa
 class PlaySliderCell: NSSliderCell {
 
   lazy var playerCore: PlayerCore = {
-    return (self.controlView!.window!.windowController as! MainWindowController).playerCore
+    return (self.controlView!.window!.windowController as! MainWindowController).player
   }()
 
   override var knobThickness: CGFloat {
@@ -47,7 +47,9 @@ class PlaySliderCell: NSSliderCell {
   private var barColorRight: NSColor = PlaySliderCell.darkBarColorRight
   private var chapterStrokeColor: NSColor = PlaySliderCell.darkChapterStrokeColor
 
-  var drawChapters = UserDefaults.standard.bool(forKey: Preference.Key.showChapterPos)
+  var drawChapters = Preference.bool(for: .showChapterPos)
+
+  var isPausedBeforeSeeking = false
 
   override func awakeFromNib() {
     minValue = 0
@@ -143,6 +145,7 @@ class PlaySliderCell: NSSliderCell {
 
 
   override func startTracking(at startPoint: NSPoint, in controlView: NSView) -> Bool {
+    isPausedBeforeSeeking = playerCore.info.isPaused
     let result = super.startTracking(at: startPoint, in: controlView)
     if result {
       playerCore.togglePause(true)
@@ -152,7 +155,9 @@ class PlaySliderCell: NSSliderCell {
   }
 
   override func stopTracking(last lastPoint: NSPoint, current stopPoint: NSPoint, in controlView: NSView, mouseIsUp flag: Bool) {
-    playerCore.togglePause(false)
+    if !isPausedBeforeSeeking {
+      playerCore.togglePause(false)
+    }
     super.stopTracking(last: lastPoint, current: stopPoint, in: controlView, mouseIsUp: flag)
   }
 

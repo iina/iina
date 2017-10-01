@@ -10,8 +10,8 @@ import Cocoa
 
 class AboutWindowController: NSWindowController {
 
-  override var windowNibName: String {
-    return "AboutWindowController"
+  override var windowNibName: NSNib.Name {
+    return NSNib.Name("AboutWindowController")
   }
 
 
@@ -19,7 +19,7 @@ class AboutWindowController: NSWindowController {
   @IBOutlet weak var iinaLabel: NSTextField! {
     didSet {
       if #available(OSX 10.11, *) {
-        iinaLabel.font = NSFont.systemFont(ofSize: 24, weight: NSFontWeightLight)
+        iinaLabel.font = NSFont.systemFont(ofSize: 24, weight: .light)
       }
     }
   }
@@ -41,7 +41,7 @@ class AboutWindowController: NSWindowController {
     versionLabel.stringValue = "\(version) Build \(build)"
     // let copyright = infoDic["NSHumanReadableCopyright"] as! String
 
-    mpvVersionLabel.stringValue = PlayerCore.active.mpvController.mpvVersion
+    mpvVersionLabel.stringValue = PlayerCore.active.mpv.mpvVersion
 
     let contrubutionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf")!
     detailTextView.readRTFD(fromFile: contrubutionFile)
@@ -49,7 +49,7 @@ class AboutWindowController: NSWindowController {
 
   @IBAction func creditsBtnAction(_ sender: Any) {
     guard let path = Bundle.main.path(forResource: "Credits", ofType: "rtf") else { return }
-    NSWorkspace.shared().openFile(path)
+    NSWorkspace.shared.openFile(path)
   }
 
 }

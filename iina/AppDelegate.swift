@@ -9,27 +9,38 @@
 import Cocoa
 import MASPreferences
 
+/** Max time interval for repeated `application(_:openFile:)` calls. */
+fileprivate let OpenFileRepeatTime = TimeInterval(0.2)
+/** Tags for "Open File/URL" menu item when "ALways open file in new windows" is off. Vice versa. */
+fileprivate let NormalMenuItemTag = 0
+/** Tags for "Open File/URL in New Window" when "Always open URL" when "Open file in new windows" is off. Vice versa. */
+fileprivate let AlternativeMenuItemTag = 1
+
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-  private let normalMenuItemTag = 0
-  private let alternativeMenuItemTag = 1
-
-  var isReady: Bool = false
-  var handledOpenFile: Bool = false
-
+  /** Whether performed some basic initialization, like bind menu items. */
+  var isReady = false
+  /** 
+   Becomes true once `application(_:openFile:)` or `droppedText()` is called.
+   Mainly used to distinguish normal launches from others triggered by drag-and-dropping files.
+   */
+  var openFileCalled = false
+  /** Cached URL when launching from URL scheme. */
   var pendingURL: String?
 
-  private var lastOpenFileTimestamp: Double?
+  /** Cached file paths received in `application(_:openFile:)`. */
+  private var pendingFilesForOpenFile: [String] = []
+  /** The timer for `OpenFileRepeatTime` and `application(_:openFile:)`. */
+  private var openFileTimer: Timer?
+
+  // Windows
 
   lazy var aboutWindow: AboutWindowController = AboutWindowController()
-
   lazy var fontPicker: FontPickerWindowController = FontPickerWindowController()
-
   lazy var inspector: InspectorWindowController = InspectorWindowController()
-
   lazy var subSelectWindow: SubSelectWindowController = SubSelectWindowController()
-
   lazy var historyWindow: HistoryWindowController = HistoryWindowController()
 
   lazy var vfWindow: FilterWindowController = {
@@ -61,6 +72,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBOutlet weak var dockMenu: NSMenu!
 
+  // MARK: - App Delegate
+
   func applicationWillFinishLaunching(_ notification: Notification) {
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
@@ -74,34 +87,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     // show alpha in color panels
-    NSColorPanel.shared().showsAlpha = true
+    NSColorPanel.shared.showsAlpha = true
 
-    // other
-    if #available(OSX 10.12.2, *) {
+    // other initializations at App level
+    if #available(macOS 10.12.2, *) {
       NSApp.isAutomaticCustomizeTouchBarMenuItemEnabled = false
       NSWindow.allowsAutomaticWindowTabbing = false
     }
 
-    // pending open request
+    // if have pending open request
     if let url = pendingURL {
       parsePendingURL(url)
     }
 
+    // check whether showing the welcome window after 0.1s
     Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(self.checkForShowingInitialWindow), userInfo: nil, repeats: false)
 
-    NSApplication.shared().servicesProvider = self
+    NSApplication.shared.servicesProvider = self
   }
 
+  /** Show welcome window if `application(_:openFile:)` wasn't called, i.e. launched normally. */
   @objc
   func checkForShowingInitialWindow() {
-    if !handledOpenFile {
+    if !openFileCalled {
       showWelcomeWindow()
     }
   }
 
   private func showWelcomeWindow() {
     let _ = PlayerCore.first
-    let actionRawValue = UserDefaults.standard.integer(forKey: Preference.Key.actionAfterLaunch)
+    let actionRawValue = Preference.integer(for: .actionAfterLaunch)
     let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
     switch action {
     case .welcomeWindow:
@@ -123,10 +138,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
     guard PlayerCore.active.mainWindow.isWindowLoaded || PlayerCore.active.initialWindow.isWindowLoaded else { return false }
-    return UserDefaults.standard.bool(forKey: Preference.Key.quitWhenNoOpenedWindow)
+    return Preference.bool(for: .quitWhenNoOpenedWindow)
   }
 
-  func applicationShouldTerminate(_ sender: NSApplication) -> NSApplicationTerminateReply {
+  func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
     for pc in PlayerCore.playerCores {
      pc.terminateMPV()
     }
@@ -140,34 +155,39 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return true
   }
 
+  /**
+   When dragging multiple files to App icon, cocoa will simply call this method repeatedly.
+   Therefore we must cache all possible calls and handle them together.
+   */
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
-    // When dragging multiple files to IINA icon, cocoa will simply call this method repeatedly.
-    // IINA (mpv) can't handle opening multiple files correctly, so I have to guard it here.
-    // It's a temperory solution, and the min time interval 0.3 might also be too arbitrary.
-    handledOpenFile = true
-    let c = CFAbsoluteTimeGetCurrent()
-    if let t = lastOpenFileTimestamp, c - t < 0.3 { return false }
-    lastOpenFileTimestamp = c
+    openFileCalled = true
+    openFileTimer?.invalidate()
+    pendingFilesForOpenFile.append(filename)
+    openFileTimer = Timer.scheduledTimer(timeInterval: OpenFileRepeatTime, target: self, selector: #selector(handleOpenFile), userInfo: nil, repeats: false)
+    return true
+  }
 
+  /** Handle pending file paths if `application(_:openFile:)` not being called again in `OpenFileRepeatTime`. */
+  @objc
+  func handleOpenFile() {
     if !isReady {
       UserDefaults.standard.register(defaults: Preference.defaultPreference)
       menuController.bindMenuItems()
       isReady = true
     }
-
-    let url = URL(fileURLWithPath: filename)
-    if UserDefaults.standard.bool(forKey: Preference.Key.recordRecentFiles) {
-      NSDocumentController.shared().noteNewRecentDocumentURL(url)
+    // open pending files
+    let urls = pendingFilesForOpenFile.map { URL(fileURLWithPath: $0) }
+    pendingFilesForOpenFile.removeAll()
+    if let openedFileCount = PlayerCore.activeOrNew.openURLs(urls), openedFileCount == 0 {
+      Utility.showAlert("nothing_to_open")
     }
-    PlayerCore.activeOrNew.openURL(url, isNetworkResource: false)
-    return true
   }
 
   // MARK: - Accept dropped string and URL
 
   func droppedText(_ pboard: NSPasteboard, userData:String, error: NSErrorPointer) {
-    if let url = pboard.string(forType: NSStringPboardType) {
-      handledOpenFile = true
+    if let url = pboard.string(forType: .string) {
+      openFileCalled = true
       PlayerCore.active.openURLString(url)
     }
   }
@@ -181,8 +201,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   // MARK: - URL Scheme
 
-  func handleURLEvent(event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
-    handledOpenFile = true
+  @objc func handleURLEvent(event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
+    openFileCalled = true
     guard let url = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue else { return }
     if isReady {
       parsePendingURL(url)
@@ -191,7 +211,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  func parsePendingURL(_ url: String) {
+  private func parsePendingURL(_ url: String) {
     guard let parsed = NSURLComponents(string: url) else { return }
     // links
     if let host = parsed.host, host == "weblink" {
@@ -207,17 +227,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     panel.title = NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File")
     panel.canCreateDirectories = false
     panel.canChooseFiles = true
-    panel.canChooseDirectories = false
-    panel.resolvesAliases = true
-    panel.allowsMultipleSelection = false
-    if panel.runModal() == NSFileHandlingPanelOKButton {
-      if let url = panel.url {
-        if UserDefaults.standard.bool(forKey: Preference.Key.recordRecentFiles) {
-          NSDocumentController.shared().noteNewRecentDocumentURL(url)
+    panel.canChooseDirectories = true
+    panel.allowsMultipleSelection = true
+    if panel.runModal() == .OK {
+      if Preference.bool(for: .recordRecentFiles) {
+        for url in panel.urls {
+          NSDocumentController.shared.noteNewRecentDocumentURL(url)
         }
-        let isAlternative = (sender as? NSMenuItem)?.tag == alternativeMenuItemTag
-        let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternative)
-        playerCore.openURL(url, isNetworkResource: false)
+      }
+      let isAlternative = (sender as? NSMenuItem)?.tag == AlternativeMenuItemTag
+      let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternative)
+      if let openedFileCount = playerCore.openURLs(panel.urls), openedFileCount == 0 {
+        Utility.showAlert("nothing_to_open")
       }
     }
   }
@@ -232,9 +253,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = inputViewController.urlField
     let response = panel.runModal()
-    if response == NSAlertFirstButtonReturn {
+    if response == .alertFirstButtonReturn {
       if let url = inputViewController.url {
-        let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: sender.tag == alternativeMenuItemTag)
+        let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: sender.tag == AlternativeMenuItemTag)
         playerCore.openURL(url, isNetworkResource: true)
       } else {
         Utility.showAlert("wrong_url_format")
@@ -247,10 +268,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func menuOpenScreenshotFolder(_ sender: NSMenuItem) {
-    let screenshotPath = UserDefaults.standard.string(forKey: Preference.Key.screenshotFolder)!
+    let screenshotPath = Preference.string(for: .screenshotFolder)!
     let absoluteScreenshotPath = NSString(string: screenshotPath).expandingTildeInPath
     let url = URL(fileURLWithPath: absoluteScreenshotPath, isDirectory: true)
-      NSWorkspace.shared().open(url)
+      NSWorkspace.shared.open(url)
   }
 
   @IBAction func menuSelectAudioDevice(_ sender: NSMenuItem) {
@@ -280,15 +301,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func helpAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: AppData.wikiLink)!)
+    NSWorkspace.shared.open(URL(string: AppData.wikiLink)!)
   }
 
   @IBAction func githubAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: AppData.githubLink)!)
+    NSWorkspace.shared.open(URL(string: AppData.githubLink)!)
   }
 
   @IBAction func websiteAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: AppData.websiteLink)!)
+    NSWorkspace.shared.open(URL(string: AppData.websiteLink)!)
   }
 
   @IBAction func setSelfAsDefaultAction(_ sender: AnyObject) {

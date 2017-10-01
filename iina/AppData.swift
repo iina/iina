@@ -55,15 +55,6 @@ struct AppData {
 
 
 struct Constants {
-  struct Identifier {
-    static let isChosen = "IsChosen"
-    static let trackName = "TrackName"
-    static let isPlayingCell = "IsPlayingCell"
-    static let trackNameCell = "TrackNameCell"
-    static let key = "Key"
-    static let value = "Value"
-    static let action = "Action"
-  }
   struct String {
     static let degree = "°"
     static let dot = "●"
@@ -91,10 +82,19 @@ struct Constants {
     static let fsChanged = Notification.Name("IINAFullscreenChanged")
     static let ontopChanged = Notification.Name("IINAOnTopChanged")
     static let keyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
+    static let windowScaleChanged = Notification.Name("IINAWindowScaleChanged")
     static let fileLoaded = Notification.Name("IINAFileLoaded")
     static let historyUpdated = Notification.Name("IINAHistoryUpdated")
+    static let legacyFullScreen = Notification.Name("IINALegacyFullScreen")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)
+  }
+  struct FilterName {
+    static let crop = "iina_crop"
+    static let flip = "iina_flip"
+    static let mirror = "iina_mirror"
+    static let audioEq = "iina_aeq"
+    static let delogo = "iina_delogo"
   }
 }

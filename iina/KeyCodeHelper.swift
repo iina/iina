@@ -11,6 +11,64 @@ import Foundation
 
 class KeyCodeHelper {
 
+  static let shiftLookupMap: [String: String] = [
+    "a": "A",
+    "s": "S",
+    "d": "D",
+    "f": "F",
+    "h": "H",
+    "g": "G",
+    "z": "Z",
+    "x": "X",
+    "c": "C",
+    "v": "V",
+    "b": "B",
+    "q": "Q",
+    "w": "W",
+    "e": "E",
+    "r": "R",
+    "y": "Y",
+    "t": "T",
+    "1": "!",
+    "2": "@",
+    "3": "SHARP",
+    "4": "$",
+    "6": "^",
+    "5": "%",
+    "=": "+",
+    "9": "(",
+    "7": "&",
+    "-": "_",
+    "8": "*",
+    "0": ")",
+    "]": "}",
+    "o": "O",
+    "u": "U",
+    "[": "{",
+    "i": "I",
+    "p": "P",
+    "l": "L",
+    "j": "J",
+    "'": "\"\"\"",
+    "k": "K",
+    ";": ":",
+    "\"\\\"": "|",
+    ",": "<",
+    "/": "?",
+    "n": "N",
+    "m": "M",
+    ".": ">",
+    "`": "~",
+  ]
+
+  static let reversedShiftLookupMap: [String: String] = {
+    var dict: [String: String] = [:]
+    for (k, v) in shiftLookupMap {
+      dict[v] = k
+    }
+    return dict
+  }()
+
   static let keyMap: [UInt16 : (String, String?)] = [
     0x00: ("a", "A"),
     0x01: ("s", "S"),
@@ -77,7 +135,7 @@ class KeyCodeHelper {
     0x59: ("KP7", nil),
     0x5B: ("KP8", nil),
     0x5C: ("KP9", nil),
-
+    
     0x24: ("ENTER", nil),
     0x30: ("TAB", nil),
     0x31: ("SPACE", nil),
@@ -138,6 +196,54 @@ class KeyCodeHelper {
 
   static func canBeModifiedByShift(_ key: UInt16) -> Bool {
     return key != 0x24 && (key <= 0x2F || key == 0x32)
+  }
+
+  static func mpvKeyCode(from event: NSEvent) -> String {
+    var keyString = ""
+    let keyChar: String
+    let keyCode = event.keyCode
+    let modifiers = event.modifierFlags
+
+    // shift
+
+    if let char = event.charactersIgnoringModifiers, let shiftChar = shiftLookupMap[char] {
+      // normal cases
+      keyChar = modifiers.contains(.shift) ? shiftChar : char
+    } else if let char = event.charactersIgnoringModifiers, let _ = reversedShiftLookupMap[char] {
+      // for some reason, the character is already a shift modified character. use the character directly.
+      keyChar = char
+    } else {
+      // find the key from key code
+      guard let keyName = KeyCodeHelper.keyMap[keyCode] else {
+        Utility.log("Undefined key code?")
+        return ""
+      }
+      if modifiers.contains(.shift) {
+        if KeyCodeHelper.canBeModifiedByShift(keyCode) {
+          keyChar = keyName.1!
+        } else {
+          keyChar = keyName.0
+          keyString += "Shift+"
+        }
+      } else {
+        keyChar = keyName.0
+      }
+    }
+    // control
+    if modifiers.contains(.control) {
+      keyString += "Ctrl+"
+    }
+    // alt
+    if modifiers.contains(.option) {
+      keyString += "Alt+"
+    }
+    // meta
+    if modifiers.contains(.command) {
+      keyString += "Meta+"
+    }
+    // char
+    keyString += keyChar
+    return keyString
   }
 
 }

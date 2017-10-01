@@ -300,6 +300,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var osdProgressBarWidthConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
+  @IBOutlet weak var titleBarBottomBorder: NSBox!
 
   @IBOutlet weak var controlBarFloating: ControlBarView!
   @IBOutlet weak var controlBarBottom: NSVisualEffectView!
@@ -686,6 +687,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
         titleBarHeightConstraint.constant = TitleBarHeightWithOSC
       }
+      titleBarBottomBorder.isHidden = true
+    } else {
+      titleBarBottomBorder.isHidden = false
     }
 
     if isSwitchingFromTop {

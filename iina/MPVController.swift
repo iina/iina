@@ -105,7 +105,11 @@ class MPVController: NSObject {
 
     // User default settings
 
-    setUserOption(PK.softVolume, type: .int, forName: MPVOption.Audio.volume, sync: false)
+    if Preference.bool(for: .enableInitialVolume) {
+      setUserOption(PK.initialVolume, type: .int, forName: MPVOption.Audio.volume, sync: false)
+    } else {
+      setUserOption(PK.softVolume, type: .int, forName: MPVOption.Audio.volume, sync: false)
+    }
 
     // - Advanced
 

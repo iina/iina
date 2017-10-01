@@ -114,9 +114,6 @@ class PlayerCore: NSObject {
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
 
-  // need enter fullscreen for nect file
-  var needEnterFullScreenForNextMedia: Bool = true
-
   static var keyBindings: [String: KeyMapping] = [:]
 
   override init() {
@@ -829,13 +826,12 @@ class PlayerCore: NSObject {
       if #available(macOS 10.12.2, *) {
         mainWindow.setupTouchBarUI()
       }
-      // whether enter full screen
-      if needEnterFullScreenForNextMedia {
+      // only set some initial properties for the first file
+      if info.justLaunched {
         if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.isInFullScreen {
           mainWindow.toggleWindowFullScreen()
         }
-        // only enter fullscreen for first file
-        needEnterFullScreenForNextMedia = false
+        info.justLaunched = false
       }
     }
     // add to history

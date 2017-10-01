@@ -22,6 +22,7 @@ extension PlayerCore {
 
     // handle BD folders and m3u / m3u8 files first
     if urls.count == 1 && (isBDFolder(urls[0]) || ["m3u", "m3u8"].contains(urls[0].absoluteString.lowercasedPathExtension)) {
+      info.shouldAutoLoadFiles = false
       openURL(urls[0])
       return nil
     }

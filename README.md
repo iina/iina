@@ -48,7 +48,7 @@
 
 Theoretically no extra work is needed. _If you are unwilling to use the provided dylibs, follow the instructions below._
 
-**Build with the lastest mpv**
+**Build with the latest mpv**
 
 * Install mpv
 
@@ -62,7 +62,7 @@ Theoretically no extra work is needed. _If you are unwilling to use the provided
 
 * other/parse_doc.rb
 
-  This script will fetch the *lastest* mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. This is only needed when updating libmpv. Note that if the API changes, the player source code may also need to be changed.
+  This script will fetch the *latest* mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. This is only needed when updating libmpv. Note that if the API changes, the player source code may also need to be changed.
 
 * other/change_lib_dependencies.rb
 

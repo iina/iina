@@ -9,15 +9,16 @@
 import Cocoa
 import PromiseKit
 
+@objcMembers
 class PrefSubViewController: NSViewController {
 
-  override var nibName: String? {
-    return "PrefSubViewController"
+  override var nibName: NSNib.Name {
+    return NSNib.Name("PrefSubViewController")
   }
 
-  override var identifier: String? {
+  override var identifier: NSUserInterfaceItemIdentifier? {
     get {
-      return "sub"
+      return NSUserInterfaceItemIdentifier("sub")
     }
     set {
       super.identifier = newValue
@@ -25,7 +26,7 @@ class PrefSubViewController: NSViewController {
   }
 
   var toolbarItemImage: NSImage {
-    return NSImage(named: NSImageNameFontPanel)!
+    return NSImage(named: .fontPanel)!
   }
 
   var toolbarItemLabel: String {
@@ -36,17 +37,14 @@ class PrefSubViewController: NSViewController {
   var hasResizableWidth: Bool = false
   var hasResizableHeight: Bool = false
 
-  @IBOutlet weak var scrollView: NSScrollView!
   @IBOutlet weak var subLangTokenView: NSTokenField!
   @IBOutlet weak var loginIndicator: NSProgressIndicator!
   @IBOutlet weak var defaultEncodingList: NSPopUpButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 460))
     
-    let defaultEncoding = UserDefaults.standard.string(forKey: Preference.Key.defaultEncoding)
+    let defaultEncoding = Preference.string(for: .defaultEncoding)
     for encoding in AppData.encodings {
       defaultEncodingList.addItem(withTitle: encoding.title)
       let lastItem = defaultEncodingList.lastItem!
@@ -64,13 +62,13 @@ class PrefSubViewController: NSViewController {
 
   @IBAction func chooseSubFontAction(_ sender: AnyObject) {
     Utility.quickFontPickerWindow { font in
-      UserDefaults.standard.set(font ?? "sans-serif", forKey: Preference.Key.subTextFont)
+      Preference.set(font ?? "sans-serif", for: .subTextFont)
       UserDefaults.standard.synchronize()
     }
   }
 
   @IBAction func openSubLoginAction(_ sender: AnyObject) {
-    let currUsername = UserDefaults.standard.string(forKey: Preference.Key.openSubUsername) ?? ""
+    let currUsername = Preference.string(for: .openSubUsername) ?? ""
     if currUsername.isEmpty {
       // if current username is empty, login
       let _ = Utility.quickUsernamePasswordPanel("opensub.login") {
@@ -79,10 +77,10 @@ class PrefSubViewController: NSViewController {
         loginIndicator.startAnimation(nil)
         firstly {
           OpenSubSupport().login(testUser: username, password: password)
-        }.then { () -> Void in
+        }.then { (_) -> Void in
           let status = OpenSubSupport.savePassword(username: username, passwd: password)
           if status == errSecSuccess {
-            UserDefaults.standard.set(username, forKey: Preference.Key.openSubUsername)
+            Preference.set(username, for: .openSubUsername)
           } else {
             Utility.showAlert("sub.cannot_save_passwd", arguments: [SecCopyErrorMessageString(status, nil) as! CVarArg])
           }
@@ -104,25 +102,25 @@ class PrefSubViewController: NSViewController {
       }
     } else {
       // else, logout
-      UserDefaults.standard.set("", forKey: Preference.Key.openSubUsername)
+      Preference.set("", for: .openSubUsername)
     }
   }
   
   @IBAction func changeDefaultEncoding(_ sender: NSPopUpButton) {
-    UserDefaults.standard.set(sender.selectedItem?.representedObject, forKey: Preference.Key.defaultEncoding)
+    Preference.set(sender.selectedItem!.representedObject!, for: .defaultEncoding)
     PlayerCore.active.setSubEncoding((sender.selectedItem?.representedObject as? String) ?? "auto")
     PlayerCore.active.reloadAllSubs()
   }
   
   @IBAction func OpenSubHelpBtnAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#opensubtitles"))!)
+    NSWorkspace.shared.open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#opensubtitles"))!)
   }
 }
 
 
 extension PrefSubViewController: NSTokenFieldDelegate {
 
-  func tokenField(_ tokenField: NSTokenField, styleForRepresentedObject representedObject: Any) -> NSTokenStyle {
+  func tokenField(_ tokenField: NSTokenField, styleForRepresentedObject representedObject: Any) -> NSTokenField.TokenStyle {
     return .rounded
   }
 
@@ -138,7 +136,7 @@ extension PrefSubViewController: NSTokenFieldDelegate {
     return matches.map { $0.description }
   }
 
-  func tokenField(_ tokenField: NSTokenField, representedObjectForEditing editingString: String) -> Any {
+  func tokenField(_ tokenField: NSTokenField, representedObjectForEditing editingString: String) -> Any? {
     if let code = Regex.iso639_2Desc.captures(in: editingString).at(1) {
       return SubLangToken(code)
     } else {

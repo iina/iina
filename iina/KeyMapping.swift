@@ -45,7 +45,7 @@ class KeyMapping {
   var rawAction: String {
     set {
       if newValue.hasPrefix("@iina") {
-        privateRawAction = newValue.substring(from: newValue.index(newValue.startIndex, offsetBy: "@iina".characters.count)).trimmingCharacters(in: .whitespaces)
+        privateRawAction = newValue[newValue.index(newValue.startIndex, offsetBy: "@iina".characters.count)...].trimmingCharacters(in: .whitespaces)
         action = rawAction.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
         isIINACommand = true
       } else {
@@ -70,9 +70,10 @@ class KeyMapping {
 
   var prettyKey: String {
     get {
-      return key
-        .components(separatedBy: "+")
-        .map { token -> String in
+      return key.characters
+        .split(separator: "+", maxSplits: 1, omittingEmptySubsequences: false)
+        .map { tokenCharView -> String in
+          let token = String(tokenCharView)
           let uppercasedToken = token.uppercased()
           if let symbol = KeyMapping.prettyKeySymbol[uppercasedToken] {
             return symbol
@@ -90,7 +91,12 @@ class KeyMapping {
   }
 
   init(key: String, rawAction: String, isIINACommand: Bool = false, comment: String? = nil) {
-    self.key = key
+    // normalize different letter cases for modifier keys
+    var normalizedKey = key
+    ["Ctrl", "Meta", "Alt"].forEach { keyword in
+      normalizedKey = normalizedKey.replacingOccurrences(of: keyword, with: keyword, options: .caseInsensitive)
+    }
+    self.key = normalizedKey
     self.privateRawAction = rawAction
     self.action = rawAction.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
     self.isIINACommand = isIINACommand
@@ -106,14 +112,14 @@ class KeyMapping {
       if line.hasPrefix("#@iina") {
         // extended syntax
         isIINACommand = true
-        line = line.substring(from: line.index(line.startIndex, offsetBy: "#@iina".characters.count))
+        line = String(line[line.index(line.startIndex, offsetBy: "#@iina".characters.count)...])
       } else if line.hasPrefix("#") {
         // igore comment
         continue
       }
       // remove inline comment
       if let sharpIndex = line.characters.index(of: "#") {
-        line = line.substring(to: sharpIndex)
+        line = String(line[...sharpIndex])
       }
       // split
       let splitted = line.characters.split(maxSplits: 1, whereSeparator: { $0 == " " || $0 == "\t"})

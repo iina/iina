@@ -23,23 +23,24 @@ static inline int min(int a, int b, int c) {
 
 @implementation ObjcUtils
 
-+ (BOOL)catchException:(void(^)())tryBlock error:(__autoreleasing NSError **)error {
++ (BOOL)catchException:(void(^)(void))tryBlock error:(__autoreleasing NSError **)error {
   @try {
     tryBlock();
     return YES;
   }
   @catch (NSException *exception) {
     *error = [[NSError alloc] initWithDomain:exception.name code:0 userInfo:exception.userInfo];
+    return NO;
   }
 }
 
-+ (BOOL)silenced:(void(^)())tryBlock {
++ (BOOL)silenced:(void(^)(void))tryBlock {
   @try {
     tryBlock();
     return YES;
   }
   @catch (NSException *exception) {
-    // do nothing
+    return NO;
   }
 }
 

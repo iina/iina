@@ -125,11 +125,11 @@ class JustXMLRPC {
     let eNode = node.children.first!
     switch eNode.name {
     case "boolean":
-      return eNode.bool
+      return eNode.bool as Any
     case "int", "i4":
-      return eNode.int
+      return eNode.int as Any
     case "double":
-      return eNode.double
+      return eNode.double as Any
     case "string":
       return eNode.value ?? ""
     case "dateTime.iso8601":

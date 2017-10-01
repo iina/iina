@@ -14,7 +14,7 @@ class Utility {
   static let tabTitleActiveFontAttributes = FontAttributes(font: .systemBold, size: .system, align: .center).value
 
   static let supportedFileExt: [MPVTrack.TrackType: [String]] = [
-    .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "mts", "m2ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt"],
+    .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "mts", "m2ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt", "dv", "mpg", "mpeg"],
     .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "oga", "mogg", "m4a", "ac3", "opus", "wav", "wv", "aiff", "ape", "tta", "tak"],
     .sub: ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc"]
   ]
@@ -22,8 +22,15 @@ class Utility {
 
   // MARK: - Logs, alerts
 
+  enum AlertMode {
+    case modal
+    case nonModal
+    case sheet
+    case sheetModal
+  }
+
   @available(*, deprecated, message: "showAlert(message:alertStyle:) is deprecated, use showAlert(_ key:comment:arguments:alertStyle:) instead")
-  static func showAlert(message: String, alertStyle: NSAlertStyle = .critical) {
+  static func showAlert(message: String, alertStyle: NSAlert.Style = .critical) {
     let alert = NSAlert()
     switch alertStyle {
     case .critical:
@@ -38,7 +45,7 @@ class Utility {
     alert.runModal()
   }
   
-  static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlertStyle = .critical) {
+  static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlert.Style = .critical) {
     let alert = NSAlert()
     switch style {
     case .critical:
@@ -106,7 +113,7 @@ class Utility {
     panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
-    return panel.runModal() == NSAlertFirstButtonReturn
+    return panel.runModal() == .alertFirstButtonReturn
   }
 
   /**
@@ -125,7 +132,7 @@ class Utility {
       panel.directoryURL = dir
     }
     panel.begin() { result in
-      if result == NSFileHandlingPanelOKButton, let url = panel.url {
+      if result == .OK, let url = panel.url {
         ok(url)
       }
     }
@@ -135,19 +142,19 @@ class Utility {
    Pop up an open panel.
    - Returns: Whether user dismissed the panel by clicking OK.
    */
-  static func quickMultipleOpenPanel(title: String, dir: URL? = nil, ok: @escaping ([URL]) -> Void) {
+  static func quickMultipleOpenPanel(title: String, dir: URL? = nil, canChooseDir: Bool, ok: @escaping ([URL]) -> Void) {
     let panel = NSOpenPanel()
     panel.title = title
     panel.canCreateDirectories = false
     panel.canChooseFiles = true
-    panel.canChooseDirectories = false
+    panel.canChooseDirectories = canChooseDir
     panel.resolvesAliases = true
     panel.allowsMultipleSelection = true
     if let dir = dir {
       panel.directoryURL = dir
     }
     panel.begin() { result in
-      if result == NSFileHandlingPanelOKButton {
+      if result == .OK {
         ok(panel.urls)
       }
     }
@@ -157,15 +164,31 @@ class Utility {
    Pop up a save panel.
    - Returns: Whether user dismissed the panel by clicking OK.
    */
-  static func quickSavePanel(title: String, types: [String], ok: @escaping (URL) -> Void) {
+  static func quickSavePanel(title: String, types: [String],
+                             mode: AlertMode = .nonModal, sheetWindow: NSWindow? = nil,
+                             ok: @escaping (URL) -> Void) {
     let panel = NSSavePanel()
     panel.title = title
     panel.canCreateDirectories = true
     panel.allowedFileTypes = types
-    panel.begin() { result in
-      if result == NSFileHandlingPanelOKButton, let url = panel.url {
+    let handler: (NSApplication.ModalResponse) -> Void = { result in
+      if result == .OK, let url = panel.url {
         ok(url)
       }
+    }
+    switch mode {
+    case .modal:
+      let response = panel.runModal()
+      handler(response)
+    case .nonModal:
+      panel.begin(completionHandler: handler)
+    case .sheet:
+      guard let sheetWindow = sheetWindow else {
+        Utility.fatal("No sheet window")
+      }
+      panel.beginSheet(sheetWindow, completionHandler: handler)
+    default:
+      Utility.log("quickSavePanel: Unsupported mode")
     }
   }
 
@@ -175,9 +198,14 @@ class Utility {
      - key: A localization key. "alert.`key`.title" will be used as alert title, and "alert.`key`.message" will be the informative text.
      - titleComment: (Optional) Comment for title key.
      - messageComment: (Optional) Comment for message key.
-   - Returns: Whether user dismissed the panel by clicking OK.
+     - mode: A `AlertMode`, `.modal` (default) or `.sheetModal`.
+     - sheetWindow: Must present if mode is `.sheetModal`.
+   - Returns: Whether user dismissed the panel by clicking OK. Only works when using `.modal` mode.
    */
-  static func quickPromptPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, ok: (String) -> Void) -> Bool {
+  static func quickPromptPanel(_ key: String,
+                               titleComment: String? = nil, messageComment: String? = nil,
+                               mode: AlertMode = .modal, sheetWindow: NSWindow? = nil,
+                               ok: @escaping (String) -> Void) -> Bool {
     let panel = NSAlert()
     let titleKey = "alert." + key + ".title"
     let messageKey = "alert." + key + ".message"
@@ -191,12 +219,29 @@ class Utility {
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
-    let response = panel.runModal()
-    if response == NSAlertFirstButtonReturn {
-      ok(input.stringValue)
-      return true
-    } else {
+    // handler
+    switch mode {
+    case .modal:
+      let response = panel.runModal()
+      if response == .alertFirstButtonReturn {
+        ok(input.stringValue)
+        return true
+      } else {
+        return false
+      }
+    case .sheetModal:
+      guard let sheetWindow = sheetWindow else {
+        Utility.fatal("No sheet window")
+      }
+      panel.beginSheetModal(for: sheetWindow) { response in
+        if response == .alertFirstButtonReturn {
+          ok(input.stringValue)
+        }
+      }
       return false
+    default:
+      Utility.log("quickPromptPanel: Unsupported mode")
+      return true
     }
   }
 
@@ -211,7 +256,7 @@ class Utility {
   static func quickUsernamePasswordPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, ok: (String, String) -> Void) -> Bool {
     let quickLabel: (String, Int) -> NSTextField = { title, yPos in
       let label = NSTextField(frame: NSRect(x: 0, y: yPos, width: 240, height: 14))
-      label.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize())
+      label.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
       label.stringValue = title
       label.drawsBackground = false
       label.isBezeled = false
@@ -239,7 +284,7 @@ class Utility {
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
     let response = panel.runModal()
-    if response == NSAlertFirstButtonReturn {
+    if response == .alertFirstButtonReturn {
       ok(input.stringValue, pwField.stringValue)
       return true
     } else {
@@ -381,6 +426,13 @@ class Utility {
     return realScale >= 1 ? realScale : -1 / realScale
   }
 
+  static func quickConstraints(_ constrants: [String], _ views: [String: NSView]) {
+    constrants.forEach { c in
+      let cc = NSLayoutConstraint.constraints(withVisualFormat: c, options: [], metrics: nil, views: views)
+      NSLayoutConstraint.activate(cc)
+    }
+  }
+
   static func mpvKeyCode(from event: NSEvent) -> String {
     var keyString = ""
     let keyChar: String
@@ -460,14 +512,14 @@ class Utility {
       self.align = align
     }
 
-    var value : [String : AnyObject]? {
+    var value : [NSAttributedStringKey : Any]? {
       get {
         let f: NSFont?
         let s: CGFloat
         let a = NSMutableParagraphStyle()
         switch self.size {
         case .system:
-          s = NSFont.systemFontSize()
+          s = NSFont.systemFontSize
         case .small:
           s = NSFont.systemFontSize(for: .small)
         case .mini:
@@ -492,10 +544,10 @@ class Utility {
           a.alignment = .right
         }
         if let f = f {
-          NSFont.systemFont(ofSize: NSFont.systemFontSize())
+          NSFont.systemFont(ofSize: NSFont.systemFontSize)
           return [
-            NSFontAttributeName: f,
-            NSParagraphStyleAttributeName: a
+            .font: f,
+            .paragraphStyle: a
           ]
         } else {
           return nil

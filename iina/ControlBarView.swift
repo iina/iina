@@ -20,7 +20,7 @@ class ControlBarView: NSVisualEffectView {
   }
 
   override func mouseDown(with event: NSEvent) {
-    mousePosRelatedToView = NSEvent.mouseLocation()
+    mousePosRelatedToView = NSEvent.mouseLocation
     mousePosRelatedToView!.x -= self.frame.origin.x
     mousePosRelatedToView!.y -= self.frame.origin.y
     isDragging = true
@@ -28,14 +28,14 @@ class ControlBarView: NSVisualEffectView {
 
   override func mouseDragged(with event: NSEvent) {
     if mousePosRelatedToView != nil {
-      let currentLocation = NSEvent.mouseLocation()
+      let currentLocation = NSEvent.mouseLocation
       var newOrigin = CGPoint(
         x: currentLocation.x - mousePosRelatedToView!.x,
         y: currentLocation.y - mousePosRelatedToView!.y
       )
       // stick to center
       let windowFrame = window!.frame
-      if UserDefaults.standard.bool(forKey: Preference.Key.controlBarStickToCenter) {
+      if Preference.bool(for: .controlBarStickToCenter) {
         let xPosWhenCenter = (windowFrame.width - frame.width) / 2
         if  abs(newOrigin.x - xPosWhenCenter) <= 25 {
           newOrigin.x = xPosWhenCenter
@@ -60,8 +60,8 @@ class ControlBarView: NSVisualEffectView {
       // save position
       let xPos = (newOrigin.x + frame.width / 2) / windowFrame.width
       let yPos = (newOrigin.y) / windowFrame.height
-      UserDefaults.standard.set(xPos, forKey: Preference.Key.controlBarPositionHorizontal)
-      UserDefaults.standard.set(yPos, forKey: Preference.Key.controlBarPositionVertical)
+      Preference.set(xPos, for: .controlBarPositionHorizontal)
+      Preference.set(yPos, for: .controlBarPositionVertical)
     }
   }
   override func mouseUp(with event: NSEvent) {

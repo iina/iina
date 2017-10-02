@@ -111,8 +111,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       player.mpv.setFlag(MPVOption.Window.fullscreen, isInFullScreen)
     }
   }
-  var isEnteringFullScreen: Bool = false
-  var isExitingFullScreen: Bool = false
+  var isInFullScreenAnimation: Bool = false
   /** For legacy full screen */
   var windowFrameBeforeEnteringFullScreen: NSRect?
   /** Prevent unexpected behavior when user switchs full screen mode during full screen*/
@@ -1192,7 +1191,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       exitInteractiveMode(immediately: true)
     }
 
-    isEnteringFullScreen = true
     // Let mpv decide the correct render region in full screen
     player.mpv.setFlag(MPVOption.Window.keepaspect, true)
 
@@ -1219,6 +1217,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     timePreviewWhenSeek.isHidden = true
     isMouseInSlider = false
 
+    isInFullScreenAnimation = true
     isInFullScreen = true
     
     // Exit PIP if necessary
@@ -1229,7 +1228,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowDidEnterFullScreen(_ notification: Notification) {
-    isEnteringFullScreen = false
+    isInFullScreenAnimation = false
 
     // we must block the mpv rendering queue to do the following atomically
     videoView.videoLayer.mpvGLQueue.async {
@@ -1266,12 +1265,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     isInFullScreen = false
 
-    isExitingFullScreen = true
+    isInFullScreenAnimation = true
   }
 
   func windowDidExitFullScreen(_ notification: Notification) {
     // reset `keepaspect`
-
     videoView.videoLayer.mpvGLQueue.async {
       self.player.mpv.setFlag(MPVOption.Window.keepaspect, false)
       DispatchQueue.main.sync {
@@ -1283,7 +1281,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         self.videoView.videoLayer.display()
       }
     }
-    isExitingFullScreen = false
+
+    isInFullScreenAnimation = false
 
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()
@@ -1301,21 +1300,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // unbearably laggy under current render meahcanism). Thus when entering full screen, we should keep `videoView`'s
     // aspect ratio. Otherwise, when entered full screen, there will be an awkward animation that looks like
     // `videoView` "resized" to screen size suddenly when mpv redraws the video content in correct aspect ratio.
-    if isEnteringFullScreen {
+    if isInFullScreenAnimation {
       let aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
       let targetFrame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
       setConstraintsForVideoView([
         .left: targetFrame.x,
         .right:  targetFrame.xMax - window.frame.width,
-        .bottom: -targetFrame.y,
-        .top: window.frame.height - targetFrame.yMax
-      ])
-    } else if isExitingFullScreen {
-      let screenSize = window.screen!.frame.size
-      let targetFrame = screenSize.grow(toSize: window.frame.size).centeredRect(in: window.frame)
-      setConstraintsForVideoView([
-        .left: targetFrame.x,
-        .right: targetFrame.xMax - window.frame.width,
         .bottom: -targetFrame.y,
         .top: window.frame.height - targetFrame.yMax
       ])
@@ -1924,51 +1914,47 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     videoView.videoSize = w.convertToBacking(videoView.frame).size
 
-    if isInFullScreen {
+    var rect: NSRect
+    let needResizeWindow = player.info.justOpenedFile || !Preference.bool(for: .resizeOnlyWhenManuallyOpenFile)
 
-      self.windowDidResize(Notification(name: NSWindow.didResizeNotification))
-
-    } else {
-
-      var rect: NSRect
-      let needResizeWindow = player.info.justOpenedFile || !Preference.bool(for: .resizeOnlyWhenManuallyOpenFile)
-
-      if needResizeWindow {
-        // get videoSize on screen
-        var videoSize = originalVideoSize
-        if Preference.bool(for: .usePhysicalResolution) {
-          videoSize = w.convertFromBacking(
-            NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))).size
-        }
-        // check screen size
-        if let screenSize = NSScreen.main?.visibleFrame.size {
-          videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
-        }
-        // guard min size
-        videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize)
-        // check if have geometry set
-        if let wfg = windowFrameFromGeometry(newSize: videoSize) {
-          rect = wfg
-        } else {
-          rect = w.frame.centeredResize(to: videoSize)
-        }
-        w.setFrame(rect, display: true, animate: true)
-
+    if needResizeWindow {
+      // get videoSize on screen
+      var videoSize = originalVideoSize
+      if Preference.bool(for: .usePhysicalResolution) {
+        videoSize = w.convertFromBacking(
+          NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))).size
+      }
+      // check screen size
+      if let screenSize = NSScreen.main?.visibleFrame.size {
+        videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
+      }
+      // guard min size
+      videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize)
+      // check if have geometry set
+      if let wfg = windowFrameFromGeometry(newSize: videoSize) {
+        rect = wfg
       } else {
-        // user is navigating in playlist. remain same window width.
-        let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
-        let newSize = NSSize(width: w.frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
-        rect = NSRect(origin: w.frame.origin, size: newSize)
-        w.setFrame(rect, display: true, animate: true)
+        rect = w.frame.centeredResize(to: videoSize)
       }
 
+    } else {
+      // user is navigating in playlist. remain same window width.
+      let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
+      let newSize = NSSize(width: w.frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
+      rect = NSRect(origin: w.frame.origin, size: newSize)
+
+    }
+
+    // maybe not a good position, consider putting these at playback-restart
+    player.info.justOpenedFile = false
+    player.info.justStartedFile = false
+
+    if isInFullScreen {
+      windowFrameBeforeEnteringFullScreen = rect
+    } else {
       // animated `setFrame` can be inaccurate!
+      w.setFrame(rect, display: true, animate: true)
       w.setFrame(rect, display: true)
-
-      // maybe not a good position, consider putting these at playback-restart
-      player.info.justOpenedFile = false
-      player.info.justStartedFile = false
-
     }
 
     // generate thumbnails after video loaded if it's the first time

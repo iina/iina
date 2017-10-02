@@ -13,15 +13,15 @@ import Gzip
 
 final class OpenSubSubtitle: OnlineSubtitle {
 
-  var filename: String = ""
-  var langID: String
-  var authorComment: String
-  var addDate: String
-  var rating: String
-  var dlCount: String
-  var movieFPS: String
-  var subDlLink: String
-  var zipDlLink: String
+  @objc var filename: String = ""
+  @objc var langID: String
+  @objc var authorComment: String
+  @objc var addDate: String
+  @objc var rating: String
+  @objc var dlCount: String
+  @objc var movieFPS: String
+  @objc var subDlLink: String
+  @objc var zipDlLink: String
 
   init(index: Int, filename: String, langID: String, authorComment: String, addDate: String, rating: String, dlCount: String, movieFPS: String, subDlLink: String, zipDlLink: String) {
     self.filename = filename

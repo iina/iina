@@ -433,43 +433,6 @@ class Utility {
     }
   }
 
-  static func mpvKeyCode(from event: NSEvent) -> String {
-    var keyString = ""
-    let keyChar: String
-    let keyCode = event.keyCode
-    let modifiers = event.modifierFlags
-    // shift
-    guard let keyName = KeyCodeHelper.keyMap[keyCode] else {
-      Utility.log("Undefined key code?")
-      return ""
-    }
-    if modifiers.contains(.shift) {
-      if KeyCodeHelper.canBeModifiedByShift(keyCode) {
-        keyChar = keyName.1!
-      } else {
-        keyChar = keyName.0
-        keyString += "Shift+"
-      }
-    } else {
-      keyChar = keyName.0
-    }
-    // control
-    if modifiers.contains(.control) {
-      keyString += "Ctrl+"
-    }
-    // alt
-    if modifiers.contains(.option) {
-      keyString += "Alt+"
-    }
-    // meta
-    if modifiers.contains(.command) {
-      keyString += "Meta+"
-    }
-    // char
-    keyString += keyChar
-    return keyString
-  }
-
   /// See `mp_get_playback_resume_config_filename` in mpv/configfiles.c
   static func mpvWatchLaterMd5(_ filename: String) -> String {
     // mp_is_url

@@ -130,6 +130,9 @@ struct Preference {
     static let spdifDTS = Key("spdifDTS")
     static let spdifDTSHD = Key("spdifDTSHD")
 
+    static let enableInitialVolume = Key("enableInitialVolume")
+    static let initialVolume = Key("initialVolume")
+
     // Subtitle
 
     static let subAutoLoadIINA = Key("subAutoLoadIINA")
@@ -560,6 +563,8 @@ struct Preference {
     Key.spdifAC3.rawValue: false,
     Key.spdifDTS.rawValue: false,
     Key.spdifDTSHD.rawValue: false,
+    Key.enableInitialVolume.rawValue: false,
+    Key.initialVolume.rawValue: 100,
 
     Key.subAutoLoadIINA.rawValue: IINAAutoLoadAction.iina.rawValue,
     Key.subAutoLoadPriorityString.rawValue: "",

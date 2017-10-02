@@ -165,6 +165,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   var mouseExitEnterCount = 0
 
+  /** For force touch action */
+  var isCurrentPressInSecondStage = false
+
   // MARK: - Enums
 
   // Animation state
@@ -297,6 +300,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var osdProgressBarWidthConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
+  @IBOutlet weak var titleBarBottomBorder: NSBox!
 
   @IBOutlet weak var controlBarFloating: ControlBarView!
   @IBOutlet weak var controlBarBottom: NSVisualEffectView!
@@ -683,6 +687,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
         titleBarHeightConstraint.constant = TitleBarHeightWithOSC
       }
+      titleBarBottomBorder.isHidden = true
+    } else {
+      titleBarBottomBorder.isHidden = false
     }
 
     if isSwitchingFromTop {
@@ -745,7 +752,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override func keyDown(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
-    let keyCode = Utility.mpvKeyCode(from: event)
+    let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
     if let kb = PlayerCore.keyBindings[keyCode] {
       if kb.isIINACommand {
         // - IINA command
@@ -777,6 +784,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     } else {
       super.keyDown(with: event)
+    }
+  }
+
+  override func pressureChange(with event: NSEvent) {
+    if #available(OSX 10.10.3, *) {
+      if isCurrentPressInSecondStage == false && event.stage == 2 {
+        performMouseAction(Preference.enum(for: .forceTouchAction))
+        isCurrentPressInSecondStage = true
+      } else if event.stage == 1 {
+        isCurrentPressInSecondStage = false
+      }
     }
   }
 
@@ -834,10 +852,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         // if sidebar is shown, hide it first
         hideSideBar()
       } else {
-        if event.pressure > 0 {
-          // force touch
-          performMouseAction(Preference.enum(for: .forceTouchAction))
-        } else if event.clickCount == 1 {
+        if event.clickCount == 1 {
           // single click or first click of a double click
           // disable single click for sideBar / OSC / titleBar
           guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
@@ -1262,7 +1277,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         // aspect ratio. Otherwise, when entered full screen, there will be an awkward animation that looks like
         // `videoView` "resized" to screen size suddenly when mpv redraws the video content in correct aspect ratio.
         // `window.frame` is full screen size now
-        videoView.frame = window.aspectRatio.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
+        let aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
+        videoView.frame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
       } else {
         // update videoview size if in full screen, since aspect ratio may changed under certain cases, like split screen
         videoView.frame = NSRect(x: 0, y: 0, width: window.frame.width, height: window.frame.height)

@@ -40,7 +40,9 @@ class FilterWindowController: NSWindowController {
   @objc
   func reloadTable() {
     filters = PlayerCore.active.mpv.getFilters(filterType)
-    tableView.reloadData()
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
+    }
   }
 
   func setFilters() {

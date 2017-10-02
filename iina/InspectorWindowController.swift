@@ -93,91 +93,93 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     let controller = PlayerCore.lastActive.mpv!
     let info = PlayerCore.lastActive.info
 
-    if !dynamic {
+    DispatchQueue.main.async {
 
-      // string properties
+      if !dynamic {
 
-      let strProperties: [String: NSTextField] = [
-        MPVProperty.path: pathField,
-        MPVProperty.fileFormat: fileFormatField,
-        MPVProperty.chapters: chaptersField,
-        MPVProperty.editions: editionsField,
+        // string properties
 
-        MPVProperty.videoFormat: vformatField,
-        MPVProperty.videoCodec: vcodecField,
-        MPVProperty.hwdecCurrent: vdecoderField,
-        MPVProperty.containerFps: vfpsField,
-        MPVProperty.currentVo: voField,
-        MPVProperty.audioCodec: acodecField,
-        MPVProperty.currentAo: aoField,
-        MPVProperty.audioParamsFormat: aformatField,
-        MPVProperty.audioParamsChannels: achannelsField,
-        MPVProperty.audioBitrate: abitrateField,
-        MPVProperty.audioParamsSamplerate: asamplerateField
+        let strProperties: [String: NSTextField] = [
+          MPVProperty.path: self.pathField,
+          MPVProperty.fileFormat: self.fileFormatField,
+          MPVProperty.chapters: self.chaptersField,
+          MPVProperty.editions: self.editionsField,
+
+          MPVProperty.videoFormat: self.vformatField,
+          MPVProperty.videoCodec: self.vcodecField,
+          MPVProperty.hwdecCurrent: self.vdecoderField,
+          MPVProperty.containerFps: self.vfpsField,
+          MPVProperty.currentVo: self.voField,
+          MPVProperty.audioCodec: self.acodecField,
+          MPVProperty.currentAo: self.aoField,
+          MPVProperty.audioParamsFormat: self.aformatField,
+          MPVProperty.audioParamsChannels: self.achannelsField,
+          MPVProperty.audioBitrate: self.abitrateField,
+          MPVProperty.audioParamsSamplerate: self.asamplerateField
+        ]
+
+        for (k, v) in strProperties {
+          let value = controller.getString(k)
+          v.stringValue = value ?? "N/A"
+          self.setLabelColor(v, by: value != nil)
+        }
+
+        // other properties
+
+        let duration = controller.getDouble(MPVProperty.duration)
+        self.durationField.stringValue = VideoTime(duration).stringRepresentation
+
+        let vwidth = controller.getInt(MPVProperty.width)
+        let vheight = controller.getInt(MPVProperty.height)
+        self.vsizeField.stringValue = "\(vwidth)\u{d7}\(vheight)"
+
+        let fileSize = controller.getInt(MPVProperty.fileSize)
+        self.fileSizeField.stringValue = FileSize.format(fileSize, unit: .b)
+
+        // track list
+
+        self.trackPopup.removeAllItems()
+        for track in info.videoTracks {
+          self.trackPopup.menu?.addItem(withTitle: "Video" + track.readableTitle,
+                                   action: nil, tag: nil, obj: track, stateOn: false)
+        }
+        self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        for track in info.audioTracks {
+          self.trackPopup.menu?.addItem(withTitle: "Audio" + track.readableTitle,
+                                   action: nil, tag: nil, obj: track, stateOn: false)
+        }
+        self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        for track in info.subTracks {
+          self.trackPopup.menu?.addItem(withTitle: "Sub" + track.readableTitle,
+                                   action: nil, tag: nil, obj: track, stateOn: false)
+        }
+        self.trackPopup.selectItem(at: 0)
+        self.updateTrack()
+
+      }
+
+      let vbitrate = controller.getInt(MPVProperty.videoBitrate)
+      self.vbitrateField.stringValue = FileSize.format(vbitrate, unit: .b) + "bps"
+
+      let abitrate = controller.getInt(MPVProperty.audioBitrate)
+      self.abitrateField.stringValue = FileSize.format(abitrate, unit: .b) + "bps"
+
+      let dynamicStrProperties: [String: NSTextField] = [
+        MPVProperty.avsync: self.avsyncField,
+        MPVProperty.totalAvsyncChange: self.totalAvsyncField,
+        MPVProperty.frameDropCount: self.droppedFramesField,
+        MPVProperty.mistimedFrameCount: self.mistimedFramesField,
+        MPVProperty.displayFps: self.displayFPSField,
+        MPVProperty.estimatedVfFps: self.voFPSField,
+        MPVProperty.estimatedDisplayFps: self.edispFPSField
       ]
 
-      for (k, v) in strProperties {
+      for (k, v) in dynamicStrProperties {
         let value = controller.getString(k)
         v.stringValue = value ?? "N/A"
-        setLabelColor(v, by: value != nil)
+        self.setLabelColor(v, by: value != nil)
       }
-
-      // other properties
-
-      let duration = controller.getDouble(MPVProperty.duration)
-      durationField.stringValue = VideoTime(duration).stringRepresentation
-
-      let vwidth = controller.getInt(MPVProperty.width)
-      let vheight = controller.getInt(MPVProperty.height)
-      vsizeField.stringValue = "\(vwidth)\u{d7}\(vheight)"
-
-      let fileSize = controller.getInt(MPVProperty.fileSize)
-      fileSizeField.stringValue = FileSize.format(fileSize, unit: .b)
-
-      // track list
-
-      trackPopup.removeAllItems()
-      for track in info.videoTracks {
-        trackPopup.menu?.addItem(withTitle: "Video" + track.readableTitle,
-                                 action: nil, tag: nil, obj: track, stateOn: false)
-      }
-      trackPopup.menu?.addItem(NSMenuItem.separator())
-      for track in info.audioTracks {
-        trackPopup.menu?.addItem(withTitle: "Audio" + track.readableTitle,
-                                 action: nil, tag: nil, obj: track, stateOn: false)
-      }
-      trackPopup.menu?.addItem(NSMenuItem.separator())
-      for track in info.subTracks {
-        trackPopup.menu?.addItem(withTitle: "Sub" + track.readableTitle,
-                                 action: nil, tag: nil, obj: track, stateOn: false)
-      }
-      trackPopup.selectItem(at: 0)
-      updateTrack()
-
     }
-
-    let vbitrate = controller.getInt(MPVProperty.videoBitrate)
-    vbitrateField.stringValue = FileSize.format(vbitrate, unit: .b) + "bps"
-
-    let abitrate = controller.getInt(MPVProperty.audioBitrate)
-    abitrateField.stringValue = FileSize.format(abitrate, unit: .b) + "bps"
-
-    let dynamicStrProperties: [String: NSTextField] = [
-      MPVProperty.avsync: avsyncField,
-      MPVProperty.totalAvsyncChange: totalAvsyncField,
-      MPVProperty.frameDropCount: droppedFramesField,
-      MPVProperty.mistimedFrameCount: mistimedFramesField,
-      MPVProperty.displayFps: displayFPSField,
-      MPVProperty.estimatedVfFps: voFPSField,
-      MPVProperty.estimatedDisplayFps: edispFPSField
-    ]
-
-    for (k, v) in dynamicStrProperties {
-      let value = controller.getString(k)
-      v.stringValue = value ?? "N/A"
-      setLabelColor(v, by: value != nil)
-    }
-
   }
 
   @objc func fileLoaded() {

@@ -28,9 +28,6 @@
 /* Class = "NSMenuItem"; title = "PGM"; ObjectID = "A5p-u9-lqJ"; */
 "A5p-u9-lqJ.title" = "PGM";
 
-/* Class = "NSButtonCell"; title = "Pause when media is opened"; ObjectID = "FbF-jJ-W5a"; */
-"FbF-jJ-W5a.title" = "파일을 열 때 일시 정지 상태로 두기";
-
 /* Class = "NSButtonCell"; title = "Open a choose file panel after starting"; ObjectID = "IYU-9y-fBL"; */
 "IYU-9y-fBL.title" = "앱을 실행하면 파일 선택 상자 열기";
 
@@ -39,9 +36,6 @@
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "다음 항목 자동 재생";
-
-/* Class = "NSButtonCell"; title = "Enter fullscreen when media is opened"; ObjectID = "MlG-hl-goA"; */
-"MlG-hl-goA.title" = "파일을 열 때 전체 화면으로 전환";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";

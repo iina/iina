@@ -27,7 +27,7 @@
 "NUr-hY-gfo.title" = "Automatisch verbergen na:";
 
 /* Class = "NSButtonCell"; title = "Clear Cache…"; ObjectID = "OAh-HP-wST"; */
-"OAh-HP-wST.title" = "Leeg…";
+"OAh-HP-wST.title" = "Legen…";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "ObY-7B-NTO"; */
 "ObY-7B-NTO.title" = "s";
@@ -42,7 +42,7 @@
 "SFX-ct-8MB.title" = "On-Screen-Controller altijd laten zweven boven de video";
 
 /* Class = "NSButtonCell"; title = "Enable thumbnail preview"; ObjectID = "Xey-3m-f6G"; */
-"Xey-3m-f6G.title" = "Miniaturen";
+"Xey-3m-f6G.title" = "Miniaturen genereren";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "bYj-5g-zYO"; */
 "bYj-5g-zYO.title" = "Box";
@@ -70,3 +70,12 @@
 
 /* Class = "NSButtonCell"; title = "Resize to video size only when opening files manually"; ObjectID = "uD1-HB-46y"; */
 "uD1-HB-46y.title" = "Verander alleen videogrootte wanneer bestanden handmatig worden geopend";
+
+
+// nieuw in 0.0.13
+
+"t6s-yV-fdc.title" = "Wissel automatisch naar muziek modus";
+
+"kYu-0l-jQQ.title" = "Miniaturen:";
+
+"GYe-Y3-bOR.title" = "Limiet map grootte:";

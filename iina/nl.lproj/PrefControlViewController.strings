@@ -36,7 +36,7 @@
 "K9H-w9-wmT.title" = "Automatisch";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "NjV-fH-YgN"; */
-"NjV-fH-YgN.title" = "Geen";
+"NjV-fH-YgN.title" = "Niets";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "OOM-jo-N4V"; */
 "OOM-jo-N4V.title" = "Verberg OSC";
@@ -60,10 +60,10 @@
 "YQH-1a-WcM.title" = "Gevoeligheid volume:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "chS-d2-TG1"; */
-"chS-d2-TG1.title" = "Geen";
+"chS-d2-TG1.title" = "Niets";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "guu-dK-YfL"; */
-"guu-dK-YfL.title" = "Geen";
+"guu-dK-YfL.title" = "Niets";
 
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "hIG-5X-2Pm"; */
 "hIG-5X-2Pm.title" = "Snelheid";
@@ -78,7 +78,7 @@
 "mOX-Fi-oTv.title" = "Pauzeer / Hervat";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "oOk-y6-lek"; */
-"oOk-y6-lek.title" = "Geen";
+"oOk-y6-lek.title" = "Niets";
 
 /* Class = "NSTextFieldCell"; title = "Sensitivity for normal seek:"; ObjectID = "of2-ec-OkC"; */
 "of2-ec-OkC.title" = "Gevoeligheid door- of terugspoelen:";
@@ -90,7 +90,7 @@
 "w1Y-jy-vNc.title" = "Scroll horizontaal voor:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "w54-7I-QfW"; */
-"w54-7I-QfW.title" = "Geen";
+"w54-7I-QfW.title" = "Niets";
 
 /* Class = "NSMenuItem"; title = "Keyframe seek"; ObjectID = "wBB-fx-Mao"; */
 "wBB-fx-Mao.title" = "Keyframe";
@@ -99,4 +99,25 @@
 "wcS-tP-wav.title" = "Door- of terugspoelen";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
-"wkV-Gq-B0T.title" = "Geen";
+"wkV-Gq-B0T.title" = "Niets";
+
+// nieuw in 0.0.13
+"Gyd-Qt-FEo.title" = "Middel klik voor:";
+
+"iFF-Gq-tVx.title" = "Verberg OSC";
+
+"uqM-UM-Xvb.title" = "Pauzeer / Hervat";
+
+"7wy-xt-c8Z.title" = "Schermvullende weergave";
+
+"unj-zt-RyU.title" = "Niets";
+
+"dpH-PO-WKt.title" = "Force Touch voor:";
+
+"M6K-ME-cve.title" = "Verberg OSC";
+
+"Ba4-eT-rTv.title" = "Pauzeer / Hervat";
+
+"hDh-Lk-FJe.title" = "Schermvullende weergave";
+
+"jnR-2I-4x4.title" = "Niets";

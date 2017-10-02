@@ -215,3 +215,9 @@
 "touchbar.play_pause" = "Hervatten / Pauzeren";
 "touchbar.seek" = "Door- of terugspoelen";
 "touchbar.time" = "Tijd";
+
+// nieuw in 0.0.13
+
+"alert.nothing_to_open" = "Niets om te openen.";
+"alert.no_video_track" = "Er is geen video spoor.";
+"subencoding.auto" = "Automatisch detecteren.";

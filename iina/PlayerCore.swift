@@ -88,44 +88,6 @@ class PlayerCore: NSObject {
     return useNew ? newPlayerCore : active
   }
 
-  // MARK: - Handle Remote Commands
-
-  @available(macOS 10.13, *)
-  static func handlePlayCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
-    PlayerCore.lastActive.togglePause(false)
-    return .success
-  }
-
-  @available(macOS 10.13, *)
-  static func handlePauseCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
-    PlayerCore.lastActive.togglePause(true)
-    return .success
-  }
-
-  @available(macOS 10.13, *)
-  static func handleTogglePlayPauseCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
-    PlayerCore.lastActive.togglePause(nil)
-    return .success
-  }
-
-  @available(macOS 10.13, *)
-  static func handleStopCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
-    PlayerCore.lastActive.stop()
-    return .success
-  }
-
-  @available(macOS 10.13, *)
-  static func handleNextTrackCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
-    PlayerCore.lastActive.navigateInPlaylist(nextOrPrev: true)
-    return .success
-  }
-
-  @available(macOS 10.13, *)
-  static func handlePreviousTrackCommand(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
-    PlayerCore.lastActive.navigateInPlaylist(nextOrPrev: false)
-    return .success
-  }
-
   // MARK: - Fields
 
   @available(macOS 10.12.2, *)
@@ -432,7 +394,7 @@ class PlayerCore: NSObject {
     case .relative:
       mpv.command(.seek, args: ["\(relativeSecond)", "relative"], checkError: false)
 
-    case .extract:
+    case .exact:
       mpv.command(.seek, args: ["\(relativeSecond)", "relative+exact"], checkError: false)
 
     case .auto:

@@ -409,7 +409,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // w.isMovableByWindowBackground  = true
 
     // set background color to black
-    w.backgroundColor = NSColor(calibratedWhite: 0.1, alpha: 1)
+    w.backgroundColor = .black
 
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay
 
@@ -1578,6 +1578,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // prerequisites
     guard let window = window else { return }
 
+    window.backgroundColor = NSColor(calibratedWhite: 0.1, alpha: 1)
+
     let (ow, oh) = player.originalVideoSize
     guard ow != 0 && oh != 0 else {
       Utility.showAlert("no_video_track")
@@ -1657,6 +1659,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func exitInteractiveMode(immediately: Bool = false, then: @escaping () -> Void = {}) {
+    window?.backgroundColor = .black
+
     player.togglePause(false)
     isInInteractiveMode = false
     cropSettingsView?.cropBoxView.isHidden = true

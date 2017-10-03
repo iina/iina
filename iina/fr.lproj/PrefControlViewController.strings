@@ -8,8 +8,8 @@
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "6F4-gm-oBg"; */
 "6F4-gm-oBg.title" = "Basculer en plein écran";
 
-/* Class = "NSTextFieldCell"; title = "Exact seek is more precise but can cause lag and high CPU usage."; ObjectID = "6FZ-Qm-0k0"; */
-"6FZ-Qm-0k0.title" = "La recherche exacte est plus précise mais peut causer du lag et une grande utilisation du CPU.";
+/* Class = "NSTextFieldCell"; title = "Exact seek is more precise but can cause lag and higher CPU usage."; ObjectID = "6FZ-Qm-0k0"; */
+"6FZ-Qm-0k0.title" = "La recherche exacte est plus précise mais peut causer du lag et une plus grande utilisation du processeur.";
 
 /* Class = "NSMenuItem"; title = "Exact seek"; ObjectID = "70P-6t-4jC"; */
 "70P-6t-4jC.title" = "Recherche exacte";
@@ -100,3 +100,33 @@
 
 /* Class = "NSMenuItem"; title = "Seek"; ObjectID = "wcS-tP-wav"; */
 "wcS-tP-wav.title" = "Recherche de frame";
+
+/* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "7wy-xt-c8Z"; */
+"7wy-xt-c8Z.title" = "Basculer en plein écran";
+
+/* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "Ba4-eT-rTv"; */
+"Ba4-eT-rTv.title" = "Pause / Lecture";
+
+/* Class = "NSTextFieldCell"; title = "Middle click to:"; ObjectID = "Gyd-Qt-FEo"; */
+"Gyd-Qt-FEo.title" = "Clic du milieu pour :";
+
+/* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "M6K-ME-cve"; */
+"M6K-ME-cve.title" = "Cacher l'OSC";
+
+/* Class = "NSTextFieldCell"; title = "Force Touch to:"; ObjectID = "dpH-PO-WKt"; */
+"dpH-PO-WKt.title" = "Force Touch pour :";
+
+/* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "hDh-Lk-FJe"; */
+"hDh-Lk-FJe.title" = "Basculer en plein écran";
+
+/* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "iFF-Gq-tVx"; */
+"iFF-Gq-tVx.title" = "Cacher l'OSC";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "jnR-2I-4x4"; */
+"jnR-2I-4x4.title" = "Aucun";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "unj-zt-RyU"; */
+"unj-zt-RyU.title" = "Aucun";
+
+/* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "uqM-UM-Xvb"; */
+"uqM-UM-Xvb.title" = "Pause / Lecture";

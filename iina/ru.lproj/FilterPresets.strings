@@ -25,17 +25,17 @@
 
 "sharpen" = "Усиление резкости";
 "sharpen.msize" = "Размер матрицы";
-"sharpen.amount" = "Amount";
+"sharpen.amount" = "Сумма";
 
 "blur" = "Размытие";
 "blur.msize" = "Размер матрицы";
-"blur.amount" = "Amount";
+"blur.amount" = "Сумма";
 
 "delogo" = "Уделение лого";
 "delogo.w" = "Ширина";
 "delogo.h" = "Высота";
-"delogo.x" = "Origin X";
-"delogo.y" = "Origin Y";
+"delogo.x" = "Позиция X";
+"delogo.y" = "Позиция Y";
 
 "negative" = "Negative";
 

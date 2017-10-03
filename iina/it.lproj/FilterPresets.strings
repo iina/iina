@@ -11,20 +11,20 @@
 
 "crop" = "Ritaglio";
 "crop.w" = "Larghezza (default: larghezza video)";
-"crop.h" = "Altezza (default: altezza video )";
+"crop.h" = "Altezza (default: altezza video)";
 "crop.x" = "Origine X (default: centro)";
 "crop.y" = "Origine Y (default: centro)";
 
 "expand" = "Espansione";
 "expand.w" = "Larghezza (default: larghezza video)";
-"expand.h" = "Height (default: altezza video)";
+"expand.h" = "Altezza (default: altezza video)";
 "expand.x" = "Origine X (default: centro)";
-"expand.y" = "Origin eY (default: centro)";
+"expand.y" = "Origine Y (default: centro)";
 "expand.aspect" = "Espandi per adattarsi ad una dimensione (e.g: 4/3)";
 "expand.round" = "Arrotonda per rendere divisibile per questo valore";
 
 "sharpen" = "Nitidezza";
-"sharpen.msize" = "Dimensine matrice";
+"sharpen.msize" = "Dimensione matrice";
 "sharpen.amount" = "Quantità";
 
 "blur" = "Sfocatura";

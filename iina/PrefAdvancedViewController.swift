@@ -11,6 +11,8 @@ import MASPreferences
 
 @objcMembers
 class PrefAdvancedViewController: NSViewController, MASPreferencesViewController {
+  var viewIdentifier: String = "PrefAdvancedViewController"
+  
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefAdvancedViewController")

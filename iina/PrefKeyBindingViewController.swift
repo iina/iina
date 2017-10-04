@@ -11,6 +11,8 @@ import MASPreferences
 
 @objcMembers
 class PrefKeyBindingViewController: NSViewController, MASPreferencesViewController {
+  var viewIdentifier: String = "PrefKeyBindingViewController"
+  
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefKeyBindingViewController")

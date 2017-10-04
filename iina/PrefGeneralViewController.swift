@@ -11,6 +11,8 @@ import MASPreferences
 
 @objcMembers
 class PrefGeneralViewController: NSViewController, MASPreferencesViewController {
+  var viewIdentifier: String = "PrefGeneralViewController"
+  
 
   override var nibName: NSNib.Name {
     get {

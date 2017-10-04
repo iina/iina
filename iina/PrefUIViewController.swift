@@ -11,6 +11,8 @@ import MASPreferences
 
 @objcMembers
 class PrefUIViewController: NSViewController, MASPreferencesViewController {
+  var viewIdentifier: String = "PrefUIViewController"
+  
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefUIViewController")

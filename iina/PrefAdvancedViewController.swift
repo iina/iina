@@ -11,21 +11,12 @@ import MASPreferences
 
 @objcMembers
 class PrefAdvancedViewController: NSViewController, MASPreferencesViewController {
-  var viewIdentifier: String = "PrefAdvancedViewController"
-  
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefAdvancedViewController")
   }
 
-  override var identifier: NSUserInterfaceItemIdentifier? {
-    get {
-      return NSUserInterfaceItemIdentifier("advanced")
-    }
-    set {
-      super.identifier = newValue
-    }
-  }
+  var viewIdentifier: String = "PrefAdvancedViewController"
 
   var toolbarItemImage: NSImage? {
     return NSImage(named: .advanced)!

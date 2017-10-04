@@ -11,8 +11,6 @@ import MASPreferences
 
 @objcMembers
 class PrefControlViewController: NSViewController, MASPreferencesViewController {
-  var viewIdentifier: String = "PrefControlViewController"
-  
 
   override var nibName: NSNib.Name {
     get {
@@ -20,14 +18,7 @@ class PrefControlViewController: NSViewController, MASPreferencesViewController 
     }
   }
 
-  override var identifier: NSUserInterfaceItemIdentifier? {
-    get {
-      return NSUserInterfaceItemIdentifier("control")
-    }
-    set {
-      super.identifier = newValue
-    }
-  }
+  var viewIdentifier: String = "PrefControlViewController"
 
   var toolbarItemImage: NSImage? {
     get {

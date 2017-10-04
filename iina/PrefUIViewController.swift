@@ -11,21 +11,12 @@ import MASPreferences
 
 @objcMembers
 class PrefUIViewController: NSViewController, MASPreferencesViewController {
-  var viewIdentifier: String = "PrefUIViewController"
-  
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefUIViewController")
   }
 
-  override var identifier: NSUserInterfaceItemIdentifier? {
-    get {
-      return NSUserInterfaceItemIdentifier("ui")
-    }
-    set {
-      super.identifier = newValue
-    }
-  }
+  var viewIdentifier: String = "PrefUIViewController"
 
   var toolbarItemImage: NSImage? {
     get {

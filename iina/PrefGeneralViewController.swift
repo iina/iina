@@ -1,5 +1,5 @@
 //
-//  PreferenceGeneralViewController.swift
+//  PrefGeneralViewController.swift
 //  iina
 //
 //  Created by lhc on 27/10/2016.
@@ -11,8 +11,6 @@ import MASPreferences
 
 @objcMembers
 class PrefGeneralViewController: NSViewController, MASPreferencesViewController {
-  var viewIdentifier: String = "PrefGeneralViewController"
-  
 
   override var nibName: NSNib.Name {
     get {
@@ -20,14 +18,7 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
     }
   }
 
-  override var identifier: NSUserInterfaceItemIdentifier? {
-    get {
-      return NSUserInterfaceItemIdentifier("general")
-    }
-    set {
-      super.identifier = newValue
-    }
-  }
+  var viewIdentifier: String = "PrefGeneralViewController"
 
   var toolbarItemImage: NSImage? {
     get {

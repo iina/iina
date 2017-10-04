@@ -16,14 +16,7 @@ class PrefSubViewController: NSViewController {
     return NSNib.Name("PrefSubViewController")
   }
 
-  override var identifier: NSUserInterfaceItemIdentifier? {
-    get {
-      return NSUserInterfaceItemIdentifier("sub")
-    }
-    set {
-      super.identifier = newValue
-    }
-  }
+  var viewIdentifier: String = "PrefSubViewController"
 
   var toolbarItemImage: NSImage {
     return NSImage(named: .fontPanel)!

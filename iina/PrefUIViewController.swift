@@ -16,14 +16,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
     return NSNib.Name("PrefUIViewController")
   }
 
-  override var identifier: NSUserInterfaceItemIdentifier? {
-    get {
-      return NSUserInterfaceItemIdentifier("ui")
-    }
-    set {
-      super.identifier = newValue
-    }
-  }
+  var viewIdentifier: String = "PrefUIViewController"
 
   var toolbarItemImage: NSImage? {
     get {

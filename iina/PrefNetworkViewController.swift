@@ -15,14 +15,7 @@ class PrefNetworkViewController: NSViewController {
     return NSNib.Name("PrefNetworkViewController")
   }
 
-  override var identifier: NSUserInterfaceItemIdentifier? {
-    get {
-      return NSUserInterfaceItemIdentifier("network")
-    }
-    set {
-      super.identifier = newValue
-    }
-  }
+  var viewIdentifier: String = "PrefNetworkViewController"
 
   var toolbarItemImage: NSImage {
     return NSImage(named: .network)!

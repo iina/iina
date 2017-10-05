@@ -292,6 +292,7 @@
 		133400271EB3831F007FE17E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ja; path = ja.lproj/Contribution.rtf; sourceTree = "<group>"; };
 		133400281EB3831F007FE17E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		13D511921ED0396D0072D1C0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
+		13D77DE01F85A2980076990A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		23C277B81EC33E8900227C3A /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		23C277B91EC33E8900227C3A /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		23C277BA1EC33E8900227C3A /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
@@ -2214,6 +2215,7 @@
 			children = (
 				84EC12871F504D2500137C1E /* Base */,
 				84EC12891F504D3B00137C1E /* zh-Hans */,
+				13D77DE01F85A2980076990A /* ja */,
 			);
 			name = FilterPresets.strings;
 			sourceTree = "<group>";

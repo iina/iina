@@ -21,7 +21,7 @@
 - Aims to offer the best user experience
 - All the features you need for videos, audios, subtitles, playlist, chapters and so on
 - MPV config files and script system are available for advanced users
-- Written in Swift, followed up on new technologies like Touch Bar, Force Touch, Picture-in-picture, etc.
+- Written in [Swift](https://github.com/apple/swift), followed up on new technologies like Touch Bar, Force Touch trackpad, Picture in Picture, etc.
 - Still in active development
 
 # Build

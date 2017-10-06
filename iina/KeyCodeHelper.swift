@@ -11,64 +11,6 @@ import Foundation
 
 class KeyCodeHelper {
 
-  static let shiftLookupMap: [String: String] = [
-    "a": "A",
-    "s": "S",
-    "d": "D",
-    "f": "F",
-    "h": "H",
-    "g": "G",
-    "z": "Z",
-    "x": "X",
-    "c": "C",
-    "v": "V",
-    "b": "B",
-    "q": "Q",
-    "w": "W",
-    "e": "E",
-    "r": "R",
-    "y": "Y",
-    "t": "T",
-    "1": "!",
-    "2": "@",
-    "3": "SHARP",
-    "4": "$",
-    "6": "^",
-    "5": "%",
-    "=": "+",
-    "9": "(",
-    "7": "&",
-    "-": "_",
-    "8": "*",
-    "0": ")",
-    "]": "}",
-    "o": "O",
-    "u": "U",
-    "[": "{",
-    "i": "I",
-    "p": "P",
-    "l": "L",
-    "j": "J",
-    "'": "\"\"\"",
-    "k": "K",
-    ";": ":",
-    "\"\\\"": "|",
-    ",": "<",
-    "/": "?",
-    "n": "N",
-    "m": "M",
-    ".": ">",
-    "`": "~",
-  ]
-
-  static let reversedShiftLookupMap: [String: String] = {
-    var dict: [String: String] = [:]
-    for (k, v) in shiftLookupMap {
-      dict[v] = k
-    }
-    return dict
-  }()
-
   static let keyMap: [UInt16 : (String, String?)] = [
     0x00: ("a", "A"),
     0x01: ("s", "S"),
@@ -198,6 +140,11 @@ class KeyCodeHelper {
     return key != 0x24 && (key <= 0x2F || key == 0x32)
   }
 
+  static func isPrintable(_ char: String) -> Bool {
+    let utf8View = char.utf8
+    return utf8View.count == 1 && utf8View.first! > 32 && utf8View.first! < 127
+  }
+
   static func mpvKeyCode(from event: NSEvent) -> String {
     var keyString = ""
     let keyChar: String
@@ -206,11 +153,7 @@ class KeyCodeHelper {
 
     // shift
 
-    if let char = event.charactersIgnoringModifiers, let shiftChar = shiftLookupMap[char] {
-      // normal cases
-      keyChar = modifiers.contains(.shift) ? shiftChar : char
-    } else if let char = event.charactersIgnoringModifiers, let _ = reversedShiftLookupMap[char] {
-      // for some reason, the character is already a shift modified character. use the character directly.
+    if let char = event.charactersIgnoringModifiers, isPrintable(char) {
       keyChar = char
     } else {
       // find the key from key code

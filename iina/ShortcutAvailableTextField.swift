@@ -11,13 +11,14 @@ import Cocoa
 
 class ShortcutAvailableTextField: NSTextField {
 
-  private let commandKey = NSEvent.ModifierFlags.command
+  private let commandKey: NSEvent.ModifierFlags = .command
   
-  private let commandShiftKey = [NSEvent.ModifierFlags.command, NSEvent.ModifierFlags.shift]
+  private let commandShiftKey: NSEvent.ModifierFlags = [.command, .shift]
 
   override func performKeyEquivalent(with event: NSEvent) -> Bool {
     if event.type == .keyDown {
-      if [event.modifierFlags, NSEvent.ModifierFlags.deviceIndependentFlagsMask] == commandKey {
+      let flags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+      if flags == commandKey {
         switch event.charactersIgnoringModifiers! {
         case "x":
           if NSApp.sendAction(#selector(NSText.cut(_:)), to:nil, from:self) { return true }
@@ -33,7 +34,7 @@ class ShortcutAvailableTextField: NSTextField {
           break
         }
       }
-      else if [event.modifierFlags, NSEvent.ModifierFlags.deviceIndependentFlagsMask] == commandShiftKey {
+      else if flags == commandShiftKey {
         if event.charactersIgnoringModifiers == "Z" {
           if NSApp.sendAction(Selector(("redo:")), to:nil, from:self) { return true }
         }

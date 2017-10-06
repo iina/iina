@@ -18,14 +18,7 @@ class PrefControlViewController: NSViewController, MASPreferencesViewController 
     }
   }
 
-  override var identifier: NSUserInterfaceItemIdentifier? {
-    get {
-      return NSUserInterfaceItemIdentifier("control")
-    }
-    set {
-      super.identifier = newValue
-    }
-  }
+  var viewIdentifier: String = "PrefControlViewController"
 
   var toolbarItemImage: NSImage? {
     get {

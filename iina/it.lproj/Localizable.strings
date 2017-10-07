@@ -172,6 +172,10 @@
 "alert.clear_cache.message" = "Sei sicuro di eliminare tutta la cache delle miniature?";
 "alert.clear_cache.success" = "Cache eliminata.";
 
+"alert.nothing_to_open" = "Niente da aprire.";
+
+"alert.no_video_track" = "Traccia video assente.";
+
 "pl_menu.title_multi" = "%d Elementi";
 "pl_menu.play_next" = "Riproduci il successivo";
 "pl_menu.play_in_new_window" = "Riproduci in una nuova finestra";
@@ -198,6 +202,8 @@
 "hwdec.auto" = "Abilita la decodifica hardware. Tuttavia, la maggior parte dei filtri video non funzioneranno in modo corretto.";
 "hwdec.auto-copy" = "Abilita la decodifica hardware. In questo modo verrà utilizzata il doppio della memoria ma i filtri video funzioneranno in modo corretto.";
 
+"subencoding.auto" = "Rilevamento automatico";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15sec avanti";
@@ -213,3 +219,4 @@
 "touchbar.play_pause" = "Pausa / Riprendi";
 "touchbar.seek" = "Ricerca";
 "touchbar.time" = "Time Position";
+

@@ -1,0 +1,51 @@
+/* 
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+
+/* It's optional to localize descriptions for each parameter! */
+
+"crop" = "Bijsnijden";
+"crop.w" = "Breedte (standaard: video breedte)";
+"crop.h" = "Hoogte (standaard: video hoogte)";
+"crop.x" = "Beginpunt X (standaard: gecentreerd)";
+"crop.y" = "Beginpunt Y (standaard: gecentreerd)";
+
+"expand" = "Expand";
+"expand.w" = "Width (default: video width)";
+"expand.h" = "Height (default: video height)";
+"expand.x" = "Origin X (default: center)";
+"expand.y" = "Origin Y (default: center)";
+"expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
+"expand.round" = "Rounds up to make divisible by this value";
+
+"sharpen" = "Verscherpen";
+"sharpen.msize" = "Matrix grootte";
+"sharpen.amount" = "Hoeveelheid";
+
+"blur" = "Vervagen";
+"blur.msize" = "Matrix grootte";
+"blur.amount" = "Hoeveelheid";
+
+"delogo" = "Delogo";
+"delogo.w" = "Breedte";
+"delogo.h" = "Hoogte";
+"delogo.x" = "Beginpunt X";
+"delogo.y" = "Beginpunt Y";
+
+"negative" = "Negatief";
+
+"vflip" = "Omdraaien";
+"hflip" = "Spiegelen";
+
+"custom_mpv" = "Aangepast (MPV)";
+"custom_mpv.name" = "Filter naam";
+"custom_mpv.string" = "Filter waarde";
+
+"custom_ffmpeg" = "Aangepast (FFmpeg)";
+"custom_ffmpeg.name" = "Filter naam";
+"custom_ffmpeg.string" = "Filter waarde";

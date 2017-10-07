@@ -114,7 +114,7 @@ func makeSure(fileExists file: String, withExtension ext: String, basedOn base: 
   for lang in testLanguages {
     if base == .zhHans && lang == "zh-Hans" { continue }
     guard lang.directory.file(fullname).exists else {
-      print("  [x][\(lang)] File \"\(fullname)\" doesn't extst")
+      print("  [x][\(lang)] File \"\(fullname)\" doesn't exist")
       stat[lang]! += 1
       continue
     }

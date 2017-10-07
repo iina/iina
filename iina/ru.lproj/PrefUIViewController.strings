@@ -70,3 +70,13 @@
 
 /* Class = "NSButtonCell"; title = "Resize to video size only when opening files manually"; ObjectID = "uD1-HB-46y"; */
 "uD1-HB-46y.title" = "Подстраивать размер только при открытии файлов вручную";
+
+/* Class = "NSButtonCell"; title = "Switch to music mode automatically"; ObjectID = "t6s-yV-fdc"; */
+"t6s-yV-fdc.title" = "Автоматическое переключение в музыкальный режим";
+
+/* Class = "NSTextFieldCell"; title = "Thumbnail Preview:"; ObjectID = "kYu-0l-jQQ"; */
+"kYu-0l-jQQ.title" = "Предварительный просмотр миниатюр:";
+
+/* Class = "NSTextFieldCell"; title = "Maximum cache size:"; ObjectID = "GYe-Y3-bOR"; */
+"GYe-Y3-bOR.title" = "Максимальный размер кеша:";
+

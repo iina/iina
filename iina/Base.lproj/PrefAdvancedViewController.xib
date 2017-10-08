@@ -207,16 +207,17 @@
                                 <action selector="chooseDirBtnAction:" target="-2" id="wqF-DD-4eM"/>
                             </connections>
                         </button>
-                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-pn-h6s">
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-pn-h6s" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                             <rect key="frame" x="38" y="18" width="442" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="XEU-L9-uIM"/>
                             </constraints>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="gWN-ya-xRD">
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="~/.config/mpv/" drawsBackground="YES" id="gWN-ya-xRD">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
+                            <accessibility description="~/.config/mpv/"/>
                             <connections>
                                 <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="tsm-NE-EV2"/>
                             </connections>

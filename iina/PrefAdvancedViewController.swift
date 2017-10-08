@@ -16,14 +16,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
     return NSNib.Name("PrefAdvancedViewController")
   }
 
-  override var identifier: NSUserInterfaceItemIdentifier? {
-    get {
-      return NSUserInterfaceItemIdentifier("advanced")
-    }
-    set {
-      super.identifier = newValue
-    }
-  }
+  var viewIdentifier: String = "PrefAdvancedViewController"
 
   var toolbarItemImage: NSImage? {
     return NSImage(named: .advanced)!

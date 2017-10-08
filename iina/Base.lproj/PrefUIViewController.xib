@@ -207,7 +207,7 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Abq-vA-BcZ">
+                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Abq-vA-BcZ" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                             <rect key="frame" x="370" y="82" width="58" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="58" id="asW-La-UC2"/>
@@ -267,7 +267,7 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qNv-Yk-nvp">
+                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qNv-Yk-nvp" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                             <rect key="frame" x="102" y="1" width="58" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="58" id="J5e-Bd-2ub"/>
@@ -316,7 +316,7 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDT-XM-dyY">
+                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDT-XM-dyY" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                             <rect key="frame" x="333" y="1" width="58" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="58" id="rtB-DT-Hgf"/>
@@ -407,7 +407,7 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bWp-lc-kLe">
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bWp-lc-kLe" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                             <rect key="frame" x="138" y="1" width="58" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="58" id="WV2-4O-FJK"/>

@@ -36,7 +36,13 @@
 "Ci8-j2-QS3.title" = "Показывать все открытые файлы в меню «Открыть недавние»";
 
 /* Class = "NSButtonCell"; title = "Pause when media is opened"; ObjectID = "FbF-jJ-W5a"; */
-"FbF-jJ-W5a.title" = "Ставить на паузу при открытии файла";
+"FbF-jJ-W5b.title" = "Ставить на паузу при открытии файла";
+
+/* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
+"FbF-jJ-W5b.title" = "Пауза";
+
+/* Class = "NSTextFieldCell"; title = "When media opened:"; ObjectID = "GNV-VA-NBW"; */
+"GNV-VA-NBW.title" = "Когда медиа открыто:";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
 "JfZ-D8-aF2.title" = "Ничего не делать";
@@ -53,14 +59,17 @@
 /* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
 "M0z-bI-88d.title" = "Всегда открывать медиа в новом окне";
 
-/* Class = "NSButtonCell"; title = "Enter fullscreen when media is opened"; ObjectID = "MlG-hl-goA"; */
-"MlG-hl-goA.title" = "Войти в полноэкранный режим при открытии файла";
+/* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
+"MlG-hl-goB.title" = "Полноэкранный режим";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
 
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
 "QJq-fO-hhK.title" = "Автоматически добавлять файлы из той же папки";
+
+/* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
+"TvB-UM-FrS.title" = "Использовать устаревший полноэкранный режим";
 
 /* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu"; ObjectID = "XFC-Lr-LmP"; */
 "XFC-Lr-LmP.title" = "Иначе там будут отображены только файлы, запущенные вручную";

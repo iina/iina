@@ -16,14 +16,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     return NSNib.Name("PrefKeyBindingViewController")
   }
 
-  override var identifier: NSUserInterfaceItemIdentifier? {
-    get {
-      return NSUserInterfaceItemIdentifier("keybinding")
-    }
-    set {
-      super.identifier = newValue
-    }
-  }
+  var viewIdentifier: String = "PrefKeyBindingViewController"
 
   var toolbarItemImage: NSImage? {
     return #imageLiteral(resourceName: "toolbar_key")

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,7 +24,7 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="LZ8-DJ-i0e" customClass="KeyRecordView" customModule="IINA" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="114" width="480" height="46"/>
                     <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jqj-WM-ez4">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jqj-WM-ez4">
                             <rect key="frame" x="-2" y="7" width="484" height="31"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="xhl-U2-M3Q">
                                 <font key="font" size="22" name="Menlo-Regular"/>
@@ -40,7 +41,7 @@
                         <constraint firstAttribute="bottom" secondItem="Jqj-WM-ez4" secondAttribute="bottom" constant="7" id="vYA-uX-gzK"/>
                     </constraints>
                 </customView>
-                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="24G-a7-cRM">
+                <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="24G-a7-cRM" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="7" width="480" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="gEe-Ws-Den"/>
@@ -51,7 +52,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q4h-ui-SRm">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q4h-ui-SRm">
                     <rect key="frame" x="-2" y="55" width="484" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="ZDG-bn-YIl"/>
@@ -107,7 +108,7 @@
                         <action selector="ChooseMediaKeyAction:" target="-2" id="lcy-rG-UYB"/>
                     </connections>
                 </popUpButton>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyu-uZ-u4y">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uyu-uZ-u4y">
                     <rect key="frame" x="-2" y="92" width="108" height="14"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You need to choose" id="5ka-4N-rOs">
                         <font key="font" metaFont="smallSystem"/>
@@ -115,7 +116,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XC5-O1-Yq2">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XC5-O1-Yq2">
                     <rect key="frame" x="212" y="92" width="54" height="14"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="manually." id="oLU-uj-hjt">
                         <font key="font" metaFont="smallSystem"/>

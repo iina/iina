@@ -223,6 +223,7 @@ class MPVController: NSObject {
 
     setUserOption(PK.subBlur, type: .float, forName: MPVOption.Subtitles.subBlur)
     setUserOption(PK.subSpacing, type: .float, forName: MPVOption.Subtitles.subSpacing)
+    setUserOption(PK.subLineSpacing, type: .float, forName: MPVOption.Subtitles.subAssLineSpacing)
 
     setUserOption(PK.subBorderSize, type: .int, forName: MPVOption.Subtitles.subBorderSize)
     setUserOption(PK.subBorderColor, type: .color, forName: MPVOption.Subtitles.subBorderColor)

@@ -908,6 +908,8 @@
 		E5A935661E34B38A00ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefNetworkViewController.strings; sourceTree = "<group>"; };
 		E5A935671E34B38B00ABD3F5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5A9E1841E50F1E200950BD5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		E5C57C1E1F82A1ED00488ABA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
+		E5C57C1F1F82A20600488ABA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		F4C61DFA1E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefUIViewController.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2265,6 +2267,7 @@
 			children = (
 				84D0FB831F5E6A3800C6A6A7 /* Base */,
 				84D0FB861F5E6A3A00C6A6A7 /* zh-Hans */,
+				E5C57C1E1F82A1ED00488ABA /* fr */,
 				C7513B4C1F61C5A300C14561 /* ko */,
 				13D77DE21F8656FC0076990A /* ja */,
 				84C21A561F89932500AD5B64 /* ru */,
@@ -2279,6 +2282,7 @@
 			children = (
 				84EC12871F504D2500137C1E /* Base */,
 				84EC12891F504D3B00137C1E /* zh-Hans */,
+				E5C57C1F1F82A20600488ABA /* fr */,
 				C7513B4A1F61C05D00C14561 /* ko */,
 				13D77DE01F85A2980076990A /* ja */,
 				87E813251F83C05E00AA8D0C /* ru */,

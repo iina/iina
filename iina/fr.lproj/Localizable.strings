@@ -401,6 +401,8 @@
 "hwdec.auto-copy" = "Activer le décodage matériel. Cela va consommer 2x plus de ressources, mais les filtres vidéos fonctionneront.";
 "hwdec.auto" = "Activer le décodage matériel. Cependant, la plupart des filtres vidéos ne fonctionneront pas correctement.";
 
+"subencoding.auto" = "Détection automatique";
+
 /* Delete After Playback */
 "pl_menu.delete_after_play" = "Supprimer après lecture";
 

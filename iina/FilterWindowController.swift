@@ -164,7 +164,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     let label = NSTextField(frame: NSRect(x: 0, y: yPos,
                                           width: scrollContentView.frame.width,
                                           height: 17))
-    label.font = NSFont.boldSystemFont(ofSize: NSFont.systemFontSize)
+    label.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
     label.stringValue = title
     label.drawsBackground = false
     label.isBezeled = false

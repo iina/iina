@@ -9,7 +9,10 @@
 
 /* It's optional to localize descriptions for each parameter! */
 
-"crop" = "Обрезка";
+// Commented lines are more accurate translations, which unfortunately do not fit into window
+// Закомментированные строки — более точные переводы, которые, к сожалению, сейчас не влезают в окно
+
+"crop" = "Кадрирование";
 "crop.w" = "Ширина (по умолчанию: ширина видео)";
 "crop.h" = "Высота (по умолчанию: высота видео)";
 "crop.x" = "Позиция X (по умолчанию: центр)";
@@ -20,32 +23,37 @@
 "expand.h" = "Высота (по умолчанию: высота видео)";
 "expand.x" = "Позиция X (по умолчанию: центр)";
 "expand.y" = "Позиция Y (по умолчанию: центр)";
-"expand.aspect" = "Расширение, сохраняя пропорции (например: 4/3)";
-"expand.round" = "Округляет, чтобы сделать делимым на это значение";
+"expand.aspect" = "Сохранять пропорции (например, 4/3)";
+"expand.round" = "Округлять, чтобы делилось на это значение";
 
 "sharpen" = "Усиление резкости";
 "sharpen.msize" = "Размер матрицы";
-"sharpen.amount" = "Сумма";
+"sharpen.amount" = "Эффект";
 
 "blur" = "Размытие";
 "blur.msize" = "Размер матрицы";
-"blur.amount" = "Сумма";
+"blur.amount" = "Эффект";
 
-"delogo" = "Уделение лого";
+"delogo" = "Удаление логотипа";
 "delogo.w" = "Ширина";
 "delogo.h" = "Высота";
 "delogo.x" = "Позиция X";
 "delogo.y" = "Позиция Y";
 
-"negative" = "Negative";
+"negative" = "Инвертировать";
 
-"vflip" = "Вертикальный поворот";
-"hflip" = "Горизонтальный поворот";
+//"vflip" = "Отразить по вертикали (вверх ногами)";
+"vflip" = "Вверх ногами";
+//"hflip" = "Отразить по горизонтали (зеркально)";
+"hflip" = "Зеркально";
 
-"custom_mpv" = "Пользовательский (MPV)";
+//"custom_mpv" = "Пользовательский (MPV)";
+"custom_mpv" = "Свой (MPV)";
+
 "custom_mpv.name" = "Фильтр";
 "custom_mpv.string" = "Значение";
 
-"custom_ffmpeg" = "Пользовательский (FFmpeg)";
+//"custom_ffmpeg" = "Пользовательский (FFmpeg)";
+"custom_ffmpeg" = "Свой (FFmpeg)";
 "custom_ffmpeg.name" = "Фильтр";
 "custom_ffmpeg.string" = "Значение";

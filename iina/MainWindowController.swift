@@ -2089,8 +2089,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
-    touchBarCurrentPosLabel?.updateText(with: duration, given: pos)
-    rightLabel.updateText(with: duration, given: pos)
+    touchBarCurrentPosLabel?.updateText(with: duration, given: pos, speed: player.info.playSpeed)
+    rightLabel.updateText(with: duration, given: pos, speed: player.info.playSpeed)
     if andProgressBar {
       playSlider.doubleValue = percentage
       touchBarPlaySlider?.setDoubleValueSafely(percentage)

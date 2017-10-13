@@ -29,7 +29,7 @@ class DurationDisplayTextField: NSTextField {
   }
   
   
-  func updateText(with duration: VideoTime, given current: VideoTime) {
+  func updateText(with duration: VideoTime, given current: VideoTime, speed of: Double) {
     
     let stringValue: String
     switch mode {
@@ -42,6 +42,7 @@ class DurationDisplayTextField: NSTextField {
       if remaining.second < 0 {
         remaining = VideoTime.zero
       }
+      if of > 1 { remaining.second /= of }
       stringValue = "-\(remaining.stringRepresentation)"
     }
     self.stringValue = stringValue

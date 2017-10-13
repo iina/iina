@@ -163,7 +163,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     }
     let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
-    rightLabel.updateText(with: duration, given: pos)
+    rightLabel.updateText(with: duration, given: pos, speed: player.info.playSpeed)
     if andProgressBar {
       playSlider.doubleValue = percentage
     }

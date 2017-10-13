@@ -730,7 +730,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscTopMainView.addView(fragSliderView, in: .leading)
       oscTopMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       oscTopMainView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
-    case .bottom:
+    case .bottom: fallthrough case .always:
       currentControlBar = controlBarBottom
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewRightView)
@@ -965,7 +965,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isMouseInWindow = false
       if controlBarFloating.isDragging { return }
       destroyTimer()
-      hideUI()
+      if oscPosition != .always { hideUI() }
     } else if obj == 1 {
       // slider
       isMouseInSlider = false
@@ -1331,7 +1331,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @objc func hideUIAndCursor() {
     // don't hide UI when dragging control bar
-    if controlBarFloating.isDragging { return }
+    if controlBarFloating.isDragging || oscPosition == .always { return }
     hideUI()
     NSCursor.setHiddenUntilMouseMoves(true)
   }

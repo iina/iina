@@ -333,7 +333,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet var fragControlViewMiddleView: NSView!
   @IBOutlet var fragControlViewLeftView: NSView!
   @IBOutlet var fragControlViewRightView: NSView!
-
+  @IBOutlet var fragControlViewSimplifiedView: NSView!
+  
   @IBOutlet weak var rightLabel: DurationDisplayTextField!
   @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var leftArrowLabel: NSTextField!
@@ -676,7 +677,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     controlBarFloating.isDragging = false
 
     // detach all fragment views
-    [fragSliderView, fragControlView, fragToolbarView, fragVolumeView].forEach { $0?.removeFromSuperview() }
+    [fragSliderView, fragControlView, fragControlViewSimplifiedView, fragToolbarView, fragVolumeView].forEach { $0?.removeFromSuperview() }
 
     if isSwitchingToTop {
       if isInFullScreen {
@@ -736,7 +737,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewRightView)
       oscBottomMainView.addView(fragVolumeView, in: .trailing)
       oscBottomMainView.addView(fragToolbarView, in: .trailing)
-      oscBottomMainView.addView(fragControlView, in: .leading)
+      oscBottomMainView.addView(oscPosition != .always ? fragControlView : fragControlViewSimplifiedView, in: .leading)
       oscBottomMainView.addView(fragSliderView, in: .leading)
       oscBottomMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       oscBottomMainView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)

@@ -21,6 +21,7 @@
                 <outlet property="fragControlViewLeftView" destination="8Ej-eH-OR9" id="Grg-cg-qxF"/>
                 <outlet property="fragControlViewMiddleView" destination="Yv6-0K-6E4" id="8vA-vh-qiH"/>
                 <outlet property="fragControlViewRightView" destination="Xts-Pc-T8d" id="yhF-yH-Cdh"/>
+                <outlet property="fragControlViewSimplifiedView" destination="cfa-gO-hmZ" id="l7T-Y3-mVY"/>
                 <outlet property="fragSliderView" destination="BE1-yC-oJL" id="KXu-MZ-mx8"/>
                 <outlet property="fragToolbarView" destination="KAy-Mz-nap" id="55b-K9-k1n"/>
                 <outlet property="fragVolumeView" destination="N3B-DL-XOA" id="4VW-Wa-AD7"/>
@@ -70,18 +71,18 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="DFb-1L-U9o">
-                        <rect key="frame" x="0.0" y="0.0" width="640" height="40"/>
+                        <rect key="frame" x="0.0" y="0.0" width="640" height="26"/>
                         <subviews>
                             <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="Qmi-hb-0aM" customClass="TimeLabelOverflowedStackView" customModule="IINA" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="8" width="640" height="24"/>
+                                <rect key="frame" x="0.0" y="1" width="640" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="4rp-3T-TCc"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Qmi-hb-0aM" secondAttribute="bottom" constant="8" id="84H-65-Ego"/>
-                            <constraint firstItem="Qmi-hb-0aM" firstAttribute="top" secondItem="DFb-1L-U9o" secondAttribute="top" constant="8" id="ANy-8g-kkb"/>
+                            <constraint firstAttribute="bottom" secondItem="Qmi-hb-0aM" secondAttribute="bottom" constant="1" id="84H-65-Ego"/>
+                            <constraint firstItem="Qmi-hb-0aM" firstAttribute="top" secondItem="DFb-1L-U9o" secondAttribute="top" constant="1" id="ANy-8g-kkb"/>
                             <constraint firstAttribute="trailing" secondItem="Qmi-hb-0aM" secondAttribute="trailing" id="bOW-iG-HNY"/>
                             <constraint firstItem="Qmi-hb-0aM" firstAttribute="leading" secondItem="DFb-1L-U9o" secondAttribute="leading" id="c3E-rA-tSH"/>
                         </constraints>
@@ -565,6 +566,32 @@
                 <outlet property="imageView" destination="HHm-A9-jIP" id="KtN-I3-vJb"/>
             </connections>
             <point key="canvasLocation" x="40" y="549"/>
+        </customView>
+        <customView placeholderIntrinsicWidth="184" placeholderIntrinsicHeight="24" translatesAutoresizingMaskIntoConstraints="NO" id="cfa-gO-hmZ">
+            <rect key="frame" x="0.0" y="0.0" width="40" height="24"/>
+            <subviews>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="4l6-2A-vTL">
+                    <rect key="frame" x="21" y="3" width="18" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="4l6-2A-vTL" secondAttribute="height" multiplier="1:1" id="uB1-jb-mDJ"/>
+                        <constraint firstAttribute="width" constant="18" id="yWh-Nk-cUz"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" alternateImage="pause" refusesFirstResponder="YES" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="HdI-Ar-HnQ">
+                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="playButtonAction:" target="-2" id="u5j-HN-oB4"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="width" constant="40" id="6qL-n8-yk5"/>
+                <constraint firstItem="4l6-2A-vTL" firstAttribute="centerY" secondItem="cfa-gO-hmZ" secondAttribute="centerY" id="NJV-jy-uVt"/>
+                <constraint firstAttribute="height" constant="24" id="ppb-sa-azW"/>
+                <constraint firstItem="4l6-2A-vTL" firstAttribute="trailing" secondItem="cfa-gO-hmZ" secondAttribute="trailing" constant="-1" id="tuI-RQ-F3e"/>
+            </constraints>
+            <point key="canvasLocation" x="69.5" y="830"/>
         </customView>
     </objects>
     <resources>

@@ -1332,7 +1332,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @objc func hideUIAndCursor() {
     // don't hide UI when dragging control bar
-    if controlBarFloating.isDragging || oscPosition == .always { return }
+    if oscPosition == .always || controlBarFloating.isDragging { return }
     hideUI()
     NSCursor.setHiddenUntilMouseMoves(true)
   }

@@ -1706,9 +1706,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** Display time label when mouse over slider */
   private func updateTimeLabel(_ mouseXPos: CGFloat, originalPos: NSPoint) {
-    let timeLabelXPos = playSlider.frame.origin.y + 15
-    timePreviewWhenSeek.frame.origin = NSPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2),
-                                               y: timeLabelXPos + 1)
     let sliderFrame = playSlider.bounds
     let sliderFrameInWindow = playSlider.superview!.convert(playSlider.frame.origin, to: nil)
     var percentage = Double((mouseXPos - 3) / (sliderFrame.width - 6))
@@ -1725,7 +1722,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         thumbnailPeekView.imageView.image = tb.image
         let height = round(120 / thumbnailPeekView.imageView.image!.size.aspect)
         let yPos = (oscPosition == .top || (oscPosition == .floating && sliderFrameInWindow.y + 52 + height >= window!.frame.height)) ?
-          sliderFrameInWindow.y - height : sliderFrameInWindow.y + 32
+          sliderFrameInWindow.y - height : sliderFrameInWindow.y + 32 - 8
         thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
         thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2), y: yPos)
       } else {
@@ -2309,10 +2306,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // seek and update time
     let percentage = 100 * sender.doubleValue / sender.maxValue
-    // label
-    timePreviewWhenSeek.frame.origin = CGPoint(
-      x: round(sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2),
-      y: playSlider.frame.origin.y + 16)
     timePreviewWhenSeek.stringValue = (player.info.videoDuration! * percentage * 0.01).stringRepresentation
     player.seek(percent: percentage, forceExact: true)
   }

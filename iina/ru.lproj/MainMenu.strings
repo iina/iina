@@ -33,7 +33,7 @@
 "43n-Ed-5kT.title" = "Панель быстрых настроек";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
-"4ae-MT-2L1.title" = "Задержка аудио + 0.5с";
+"4ae-MT-2L1.title" = "Задержка аудио +0.5 с";
 
 /* Class = "NSMenuItem"; title = "Quit IINA"; ObjectID = "4sb-4s-VLi"; */
 "4sb-4s-VLi.title" = "Завершить IINA";
@@ -48,7 +48,7 @@
 "6Eq-ni-6hG.title" = "Перейти в полноэкранный режим";
 
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
-"6yE-op-DTS.title" = "Вперёд на 5с";
+"6yE-op-DTS.title" = "Вперёд на 5 с";
 
 /* Class = "NSMenuItem"; title = "Audio Filters…"; ObjectID = "8Zh-hU-Cc4"; */
 "8Zh-hU-Cc4.title" = "Аудиофильтры…";
@@ -162,10 +162,10 @@
 "LND-1n-DU2.title" = "История воспроизведения";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
-"Lc4-4W-thE.title" = "Задержка аудио − 0.5с";
+"Lc4-4W-thE.title" = "Задержка аудио −0.5 с";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.5s"; ObjectID = "LsU-Qz-dax"; */
-"LsU-Qz-dax.title" = "Задержка субтитров − 0.5с";
+"LsU-Qz-dax.title" = "Задержка субтитров −0.5 с";
 
 /* Class = "NSMenuItem"; title = "Find Online Subtitles…"; ObjectID = "Mg3-WB-gjZ"; */
 "Mg3-WB-gjZ.title" = "Найти субтитры онлайн…";
@@ -213,7 +213,7 @@
 "SLr-6g-Mgh.title" = "Сбросить задержу субтитров";
 
 /* Class = "NSMenuItem"; title = "Step Backward 5s"; ObjectID = "Sif-85-FF1"; */
-"Sif-85-FF1.title" = "Назад на 5с";
+"Sif-85-FF1.title" = "Назад на 5 с";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay: "; ObjectID = "THG-4o-U6A"; */
 "THG-4o-U6A.title" = "Задержка субтитров: ";
@@ -234,7 +234,7 @@
 "WOL-Us-ByA.title" = "Без звука";
 
 /* Class = "NSMenuItem"; title = "Volume + 5%"; ObjectID = "Wbq-vt-hzX"; */
-"Wbq-vt-hzX.title" = "Громкость + 5%";
+"Wbq-vt-hzX.title" = "Громкость +5 %";
 
 /* Class = "NSMenuItem"; title = "Next Frame"; ObjectID = "XDC-Pc-rS1"; */
 "XDC-Pc-rS1.title" = "Следующий кадр";
@@ -246,7 +246,7 @@
 "ZOF-MG-6II.title" = "Уменьшить размер";
 
 /* Class = "NSMenuItem"; title = "Volume - 1%"; ObjectID = "Zhv-Bz-I5V"; */
-"Zhv-Bz-I5V.title" = "Громкость − 1%";
+"Zhv-Bz-I5V.title" = "Громкость −1 %";
 
 /* Class = "NSMenuItem"; title = "Custom Touch Bar..."; ObjectID = "ZnF-yX-7jP"; */
 "ZnF-yX-7jP.title" = "Настроить Touch Bar…";
@@ -264,7 +264,7 @@
 "ar5-3T-O9h.title" = "Повернуть";
 
 /* Class = "NSMenuItem"; title = "Open URL in New Window…"; ObjectID = "bfB-bn-KeM"; */
-"bfB-bn-KeM.title" = "Открыть URL в новом окне...";
+"bfB-bn-KeM.title" = "Открыть URL в новом окне…";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
 "bib-Uj-vzu.title" = "Файл";
@@ -276,7 +276,7 @@
 "c1x-bx-69F.title" = "Реальный размер Retina";
 
 /* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
-"c6Y-0e-vgf.title" = "Громкость + 1%";
+"c6Y-0e-vgf.title" = "Громкость +1 %";
 
 /* Class = "NSMenu"; title = "Chapter"; ObjectID = "d9c-me-L2H"; */
 "d9c-me-L2H.title" = "Глава";
@@ -351,10 +351,10 @@
 "oxF-BB-lBy.title" = "Предыдущий кадр";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay +0.5s"; ObjectID = "pAo-L5-qTO"; */
-"pAo-L5-qTO.title" = "Задержка субтитров + 0.5с";
+"pAo-L5-qTO.title" = "Задержка субтитров +0.5 с";
 
 /* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
-"pdj-9C-Fn1.title" = "Громкость − 5%";
+"pdj-9C-Fn1.title" = "Громкость −5 %";
 
 /* Class = "NSMenuItem"; title = "Font..."; ObjectID = "rme-fr-5rr"; */
 "rme-fr-5rr.title" = "Шрифт…";
@@ -393,9 +393,11 @@
 "yHI-7D-OaI.title" = "Деинтерлейсинг";
 
 /* Class = "NSMenuItem"; title = "Open in New Window…"; ObjectID = "z9W-ga-j3b"; */
-"z9W-ga-j3b.title" = "Открыть в новом окне...";
+"z9W-ga-j3b.title" = "Открыть в новом окне…";
 
+/* Class = "NSMenuItem"; title = "Music Mode"; ObjectID = "bGN-E4-V5A"; */
 "bGN-E4-V5A.title" = "Mузыкальный режим";
 
-"ArE-2s-JIV.title" = "Обычный";
+/* Class = "NSMenuItem"; title = "Delogo"; ObjectID = "ArE-2s-JIV"; */
+"ArE-2s-JIV.title" = "Убрать логотип";
 

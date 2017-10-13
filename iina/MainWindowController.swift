@@ -1737,7 +1737,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       Utility.log("Nil material in setMaterial()")
       return
     }
-    guard #available(OSX 10.11, *) else { return }
 
     var appearance: NSAppearance? = nil
     var material: NSVisualEffectView.Material
@@ -1754,7 +1753,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case .ultraDark:
       appearance = NSAppearance(named: .vibrantDark)
-      material = .ultraDark
+      if #available(OSX 10.11, *) { material = .ultraDark } else { material = .dark }
       isDarkTheme = true
 
     case .light:
@@ -1764,7 +1763,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case .mediumLight:
       appearance = NSAppearance(named: .vibrantLight)
-      material = .mediumLight
+      if #available(OSX 10.11, *) { material = .mediumLight } else { material = .light }
       isDarkTheme = false
 
     }

@@ -50,7 +50,8 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
       name = "osc_float"
     case 1:
       name = "osc_top"
-    case 2: fallthrough case 3:
+    case 2: fallthrough
+    case 3:
       name = "osc_bottom"
     default:
       name = "osc_float"

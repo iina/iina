@@ -731,7 +731,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscTopMainView.addView(fragSliderView, in: .leading)
       oscTopMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       oscTopMainView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
-    case .bottom: fallthrough case .always:
+    case .bottom:
+      fallthrough
+    case .always:
       currentControlBar = controlBarBottom
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewRightView)
@@ -966,7 +968,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isMouseInWindow = false
       if controlBarFloating.isDragging { return }
       destroyTimer()
-      if oscPosition != .always { hideUI() }
+      if oscPosition != .always {
+        hideUI()
+      }
     } else if obj == 1 {
       // slider
       isMouseInSlider = false
@@ -1753,7 +1757,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case .ultraDark:
       appearance = NSAppearance(named: .vibrantDark)
-      if #available(OSX 10.11, *) { material = .ultraDark } else { material = .dark }
+      if #available(OSX 10.11, *) {
+        material = .ultraDark
+      } else {
+        material = .dark
+      }
       isDarkTheme = true
 
     case .light:
@@ -1763,7 +1771,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case .mediumLight:
       appearance = NSAppearance(named: .vibrantLight)
-      if #available(OSX 10.11, *) { material = .mediumLight } else { material = .light }
+      if #available(OSX 10.11, *) {
+        material = .mediumLight
+      } else {
+        material = .light
+      }
       isDarkTheme = false
 
     }
@@ -2089,8 +2101,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
     let speed = oscPosition != .always ? 0 : player.info.playSpeed
-    touchBarCurrentPosLabel?.updateText(with: duration, given: pos, speed: speed)
-    rightLabel.updateText(with: duration, given: pos, speed: speed)
+    touchBarCurrentPosLabel?.updateText(with: duration, given: pos, and: speed)
+    rightLabel.updateText(with: duration, given: pos, and: speed)
     if andProgressBar {
       playSlider.doubleValue = percentage
       touchBarPlaySlider?.setDoubleValueSafely(percentage)

@@ -250,6 +250,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private var singleClickAction: Preference.MouseClickAction
   private var doubleClickAction: Preference.MouseClickAction
   private var pinchAction: Preference.PinchAction
+  private var followGlobalSeekTypeWhenAdjustSlider: Bool
 
   /** A list of observed preference keys. */
   private let observedPrefKeys: [Preference.Key] = [
@@ -380,6 +381,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     singleClickAction = Preference.enum(for: .singleClickAction)
     doubleClickAction = Preference.enum(for: .doubleClickAction)
     pinchAction = Preference.enum(for: .pinchAction)
+    followGlobalSeekTypeWhenAdjustSlider = Preference.bool(for: .followGlobalSeekTypeWhenAdjustSlider)
 
     super.init(window: nil)
   }
@@ -2313,7 +2315,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       x: round(sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2),
       y: playSlider.frame.origin.y + 16)
     timePreviewWhenSeek.stringValue = (player.info.videoDuration! * percentage * 0.01).stringRepresentation
-    player.seek(percent: percentage, forceExact: true)
+    player.seek(percent: percentage, forceExact: !followGlobalSeekTypeWhenAdjustSlider)
   }
 
 

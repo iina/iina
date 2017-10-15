@@ -200,6 +200,8 @@ struct Preference {
 
     static let showRemainingTime = Key("showRemainingTime")
 
+    static let followGlobalSeekTypeWhenAdjustSlider = Key("followGlobalSeekTypeWhenAdjustSlider")
+
     // Input
 
     /** Whether catch media keys event (bool) */
@@ -619,6 +621,7 @@ struct Preference {
     Key.keepOpenOnFileEnd.rawValue: true,
     Key.quitWhenNoOpenedWindow.rawValue: false,
     Key.useExactSeek.rawValue: SeekOption.relative.rawValue,
+    Key.followGlobalSeekTypeWhenAdjustSlider.rawValue: false,
     Key.relativeSeekAmount.rawValue: 3,
     Key.volumeScrollAmount.rawValue: 3,
     Key.verticalScrollAction.rawValue: ScrollAction.volume.rawValue,

@@ -128,6 +128,7 @@ class Utility {
     panel.canChooseDirectories = isDir
     panel.resolvesAliases = true
     panel.allowsMultipleSelection = false
+    panel.level = .modalPanel
     if let dir = dir {
       panel.directoryURL = dir
     }

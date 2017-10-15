@@ -221,10 +221,10 @@ struct MPVProperty {
   static let videoParamsPrimaries = "video-params/primaries"
   /** video-params/gamma */
   static let videoParamsGamma = "video-params/gamma"
-  /** video-params/nom-peak */
-  static let videoParamsNomPeak = "video-params/nom-peak"
   /** video-params/sig-peak */
   static let videoParamsSigPeak = "video-params/sig-peak"
+  /** video-params/light */
+  static let videoParamsLight = "video-params/light"
   /** video-params/chroma-location */
   static let videoParamsChromaLocation = "video-params/chroma-location"
   /** video-params/rotate */
@@ -290,7 +290,7 @@ struct MPVProperty {
   /** playlist */
   static let playlist = "playlist"
   /** playlist/count */
-  static let playlistCount2 = "playlist/count"
+  static let playlistCount_ = "playlist/count"
   /** playlist/N/filename */
   static func playlistNFilename(_ n: Int) -> String {
     return "playlist/\(n)/filename"
@@ -441,20 +441,34 @@ struct MPVProperty {
   static let osdAssCc = "osd-ass-cc"
   /** vo-configured */
   static let voConfigured = "vo-configured"
-  /** vo-performance */
-  static let voPerformance = "vo-performance"
-  /** upload */
-  static let upload = "upload"
-  /** render */
-  static let render = "render"
-  /** present */
-  static let present = "present"
-  /** last */
-  static let last = "last"
-  /** avg */
-  static let avg = "avg"
-  /** peak */
-  static let peak = "peak"
+  /** vo-passes */
+  static let voPasses = "vo-passes"
+  /** vo-passes/TYPE/count */
+  static let voPassesTYPECount = "vo-passes/TYPE/count"
+  /** vo-passes/TYPE/N/desc */
+  static func voPassesTYPENDesc(_ n: Int) -> String {
+    return "vo-passes/TYPE/\(n)/desc"
+  }
+  /** vo-passes/TYPE/N/last */
+  static func voPassesTYPENLast(_ n: Int) -> String {
+    return "vo-passes/TYPE/\(n)/last"
+  }
+  /** vo-passes/TYPE/N/avg */
+  static func voPassesTYPENAvg(_ n: Int) -> String {
+    return "vo-passes/TYPE/\(n)/avg"
+  }
+  /** vo-passes/TYPE/N/peak */
+  static func voPassesTYPENPeak(_ n: Int) -> String {
+    return "vo-passes/TYPE/\(n)/peak"
+  }
+  /** vo-passes/TYPE/N/count */
+  static func voPassesTYPENCount(_ n: Int) -> String {
+    return "vo-passes/TYPE/\(n)/count"
+  }
+  /** vo-passes/TYPE/N/samples/M */
+  static func voPassesTYPENSamplesM(_ n: Int) -> String {
+    return "vo-passes/TYPE/\(n)/samples/M"
+  }
   /** video-bitrate */
   static let videoBitrate = "video-bitrate"
   /** audio-bitrate */

@@ -28,12 +28,27 @@
 "alert.playlist.error_deleting" = "Erreur lors de la suppression de : %@";
 
 "alert.sub.no_selected" = "Veuillez d'abord sélectionner un sous-titre téléchargé.";
-"alert.sub_lang_not_set" = "Veuillez configurer une langue préférée de sous-titres dans les préférences avant d'utiliser OpenSubtitles. La langue Anglais(eng) sera utilisée cette fois-ci.";
+"alert.sub_lang_not_set" = "Veuillez configurer une langue de sous-titres dans les préférences avant d'utiliser OpenSubtitles. L'anglais (eng) sera utilisé cette fois-ci.";
 "alert.sub.cannot_save_passwd" = "Impossible de sauvegarder le mot de passe dans votre trousseau d'accès : %@";
-"alert.sub.cannot_login" = "Impossible de se connecter. Veuillez vérifier votre nom d'utilisateur, votre mot de passe et votre réseau Internet.\n\n%@";
+"alert.sub.cannot_login" = "Impossible de se connecter. Veuillez vérifier votre nom d'utilisateur, votre mot de passe et votre connexion Internet.\n\n%@";
 "alert.config.duplicate.message" = "Veuillez entrer un nom pour le fichier de configuration dupliqué.";
 "alert.config.file_existing.title" = "Le fichier existe déjà";
-"alert.open_url.title" = "Ouvrir une URL";
+
+"alert.clear_cache.message" = "Voulez-vous vraiment supprimer le cache des vignettes ?";
+"alert.clear_cache.success" = "Cache vidé";
+"alert.clear_cache.title" = "Vider le cache des vignettes";
+"alert.nothing_to_open" = "Aucun fichier à ouvrir.";
+"alert.no_video_track" = "Il n'y a pas de piste vidéo.";
+
+"general.login" = "Connexion";
+"general.logout" = "Déconnexion";
+"alert.opensub.login.title" = "Connexion à OpenSubtitles";
+"alert.opensub.login.message" = "Veuillez renseigner votre nom d'utilisateur et mot de passe.";
+"alert.add_watch.title" = "Nouvelle propriété Watch";
+
+"alert.config.new.message" = "Veuillez entrer le nom de la nouvelle configuration.";
+"alert.set_default.title" = "Définir IINA comme application par défaut";
+
 "alert.config.file_existing.message" = "Ceci n'est pas censé arriver. Cliquez OK pour écraser ou Annuler pour révéler le fichier dans le Finder.";
 "alert.config.new.title" = "Nouvelle configuration des touches";
 "alert.add_filter.message" = "Veuillez renseigner une chaîne de caractères au format de la commande vf ou af de MPV.";
@@ -45,38 +60,61 @@
 "alert.config.duplicate.title" = "Dupliquer la configuration";
 "alert.set_default.message" = "Tous les fichiers supportés par IINA seront dorénavant ouverts par défaut avec IINA.";
 "alert.opensub.login.message" = "Veuillez renseigner votre nom d'utilisateur et mot de passe";
-
-"alert.title_info" = "Information";
-"alert.add_watch.title" = "Nouvelle propriété Watch";
-"alert.choose_media_file.title" = "Choisir un fichier média";
-"alert.title_error" = "Erreur";
 "alert.jump_to.title" = "Sauter à";
 "alert.jump_to.message" = "Veuillez renseigner le timestamp où vous voulez sauter. Exemple : 20:35";
 "alert.delete_history.title" = "Supprimer l'historique de lecture";
-"alert.open_url.message" = "Veuillez entrer l'URL :";
-"alert.title_warning" = "Attention";
-"alert.config.new.message" = "Veuillez entrer le nom de la nouvelle configuration.";
-"alert.set_default.title" = "Définir IINA comme application par défaut";
 
+
+/* Open URL */
+"alert.open_url.title" = "Ouvrir une URL";
+
+/* Information */
+"alert.title_info" = "Information";
+
+/* Choose Media File */
+"alert.choose_media_file.title" = "Choisir un fichier média";
+
+/* Error */
+"alert.title_error" = "Erreur";
+
+/* Please enter the URL: */
+"alert.open_url.message" = "Veuillez entrer l'URL :";
+
+/* Warning */
+"alert.title_warning" = "Attention";
+
+/* None */
 "quicksetting.item_none" = "Aucun";
+
+/* Default */
 "quicksetting.item_default" = "Défaut";
 
+/* Video Filters */
 "filter.video_filters" = "Filtres vidéo";
+
+/* Audio Filters */
 "filter.audio_filters" = "Filtres audio";
 
+/* OK */
 "general.ok" = "OK";
+
+/* Username */
 "general.username" = "Nom d'utilisateur";
+
+/* Password */
 "general.password" = "Mot de passe";
+
+/* Cancel */
 "general.cancel" = "Annuler";
 
-"preference.scripts" = "Scripts";
-
+/* Wrong Subtitle */
 "pl_menu.wrong_sub" = "Mauvais sous-titre !";
+
+/* Add Subtitle… */
 "pl_menu.add_sub" = "Ajouter un sous-titre…";
+
+/* Matched %d Subtitle(s) */
 "pl_menu.matched_sub" = "Trouvé %d sous-titre(s)";
-
-"update.new_version" = "Nouvelle version :";
-
 
 /* On */
 "general.on" = "On";
@@ -285,11 +323,6 @@
 /* Key Mapping */
 "keymapping.title" = "Paramétrage des touches";
 
-/* No comment provided by engineer. */
-"general.login" = "Login";
-
-"general.logout" = "Logout";
-
 /* Canceled */
 "osd.canceled" = "Annulé";
 
@@ -298,6 +331,77 @@
 
 /* Error reading file */
 "osd.file_error" = "Erreur lors de la lecture du fichier";
+
+/* Logged in as */
+"preference.logged_in_as" = "Connecté en tant que %@";
+
+/* Not logged in */
+"preference.not_logged_in" = "Déconnecté";
+
+/* No comment provided by engineer. */
+"alert.filter_hwdec.message" = "Vous êtes sur le point d'activer un filtre vidéo. Cependant, votre décodeur hardware actuel peut ne pas bien supporter les filtres vidéos. Vous pouvez  désactiver le décodage hardware ou passer sur Auto(Copy), ce qui consommera le double en mémoire.\nVous aurez peut-être à répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne.";
+
+/* Abort */
+"alert.filter_hwdec.abort" = "Abandonner";
+
+/* Turn off hardware decoding */
+"alert.filter_hwdec.turn_off" = "Désactiver le décodage hardware";
+
+/* Switch to Auto(Copy) */
+"alert.filter_hwdec.use_copy" = "Passer sur Auto(Copy)";
+
+/* 30sec Ahead */
+"touchbar.ahead_30" = "30sec en avant";
+
+/* Previous Video */
+"touchbar.prev_video" = "Vidéo précédente";
+
+/* -30sec Ahead */
+"touchbar.back_30" = "30sec en arrière";
+
+/* Next Video */
+"touchbar.next_video" = "Vidéo suivante";
+
+/* Play / Pause */
+"touchbar.play_pause" = "Lecture/Pause";
+
+/* Play in New Window */
+"pl_menu.play_in_new_window" = "Ouvrir dans une nouvelle fenêtre";
+
+/* Seek */
+"touchbar.seek" = "Chercher";
+
+/* 15sec Ahead */
+"touchbar.ahead_15" = "15sec en avant";
+
+/* -15sec Ahead */
+"touchbar.back_15" = "15sec en arrière";
+
+/* Rewind */
+"touchbar.rewind" = "Rembobiner";
+
+/* Volume - */
+"touchbar.decrease_volume" = "Volume -";
+
+/* Time Position */
+"touchbar.time" = "Position horaire";
+
+/* Fast Forward */
+"touchbar.fast_forward" = "Avance rapide";
+
+/* Volume + */
+"touchbar.increase_volume" = "Augmenter le volume";
+
+/* No comment provided by engineer. */
+"alert." = "";
+
+/* No comment provided by engineer. */
+"hwdec." = "";
+"hwdec.no" = "Désactiver le décodage matériel";
+"hwdec.auto-copy" = "Activer le décodage matériel. Cela va consommer 2x plus de ressources, mais les filtres vidéos fonctionneront.";
+"hwdec.auto" = "Activer le décodage matériel. Cependant, la plupart des filtres vidéos ne fonctionneront pas correctement.";
+
+"subencoding.auto" = "Détection automatique";
 
 /* Delete After Playback */
 "pl_menu.delete_after_play" = "Supprimer après lecture";
@@ -314,35 +418,7 @@
 
 "pl_menu.remove_multi" = "Enlever";
 
-/* Logged in as */
-"preference.logged_in_as" = "Connecté en tant que %@";
+/* Auto detect */
+"subencoding.auto" = "";
 
-/* Not logged in */
-"preference.not_logged_in" = "Déconnecté";
-
-"alert.filter_hwdec.message" = "Vous êtes sur le point d'activer un filtre vidéo. Cependant, votre décodeur hardware actuel peut ne pas bien supporter les filtres vidéos. Vous pouvez  désactiver le décodage hardware ou passer sur Auto(Copy), ce qui consommera le double en mémoire.\nVous aurez peut-être à répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne.";
-"alert.filter_hwdec.abort" = "Abandonner";
-"alert.filter_hwdec.turn_off" = "Désactiver le décodage hardware";
-"alert.filter_hwdec.use_copy" = "Passer sur Auto(Copy)";
-
-"hwdec.no" = "Désactiver le décodage hardware.";
-"hwdec.auto" = "Activer le décodage hardware. Cependant, la plupart des filtres vidéos ne fonctionneront pas correctement.";
-"hwdec.auto-copy" = "Activer le décodage hardware. Cela doublera la consommation mémoire, mais les filtres vidéos fonctionneront parfaitement.";
-
-"touchbar.ahead_30" = "30sec en avant";
-"alert.clear_cache.message" = "Voulez-vous vraiment supprimer le cache des vignettes ?";
-"touchbar.prev_video" = "Vidéo précédente";
-"touchbar.back_30" = "30sec en arrière";
-"touchbar.next_video" = "Vidéo suivante";
-"alert.clear_cache.success" = "Cache vidé";
-"touchbar.play_pause" = "Lecture/Pause";
-"pl_menu.play_in_new_window" = "Ouvrir dans une nouvelle fenêtre";
-"touchbar.seek" = "Chercher";
-"touchbar.ahead_15" = "15sec en avant";
-"touchbar.back_15" = "15sec en arrière";
-"touchbar.rewind" = "Rembobiner";
-"touchbar.decrease_volume" = "Volume -";
-"touchbar.time" = "Position horaire";
-"touchbar.fast_forward" = "Avance rapide";
-"alert.clear_cache.title" = "Vider le cache des vignettes";
-"touchbar.increase_volume" = "Augmenter le volume";
+"preference.scripts" = "Scripts";

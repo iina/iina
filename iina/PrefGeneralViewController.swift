@@ -1,5 +1,5 @@
 //
-//  PreferenceGeneralViewController.swift
+//  PrefGeneralViewController.swift
 //  iina
 //
 //  Created by lhc on 27/10/2016.
@@ -9,31 +9,24 @@
 import Cocoa
 import MASPreferences
 
-
+@objcMembers
 class PrefGeneralViewController: NSViewController, MASPreferencesViewController {
 
-  override var nibName: String? {
+  override var nibName: NSNib.Name {
     get {
-      return "PrefGeneralViewController"
+      return NSNib.Name("PrefGeneralViewController")
     }
   }
 
-  override var identifier: String? {
+  var viewIdentifier: String = "PrefGeneralViewController"
+
+  var toolbarItemImage: NSImage? {
     get {
-      return "general"
-    }
-    set {
-      super.identifier = newValue
+      return NSImage(named: .preferencesGeneral)!
     }
   }
 
-  var toolbarItemImage: NSImage {
-    get {
-      return NSImage(named: NSImageNamePreferencesGeneral)!
-    }
-  }
-
-  var toolbarItemLabel: String {
+  var toolbarItemLabel: String? {
     get {
       // dirty hack here: layout the view before `MASPreferencesWIndowController` getting `bounds`.
       view.layoutSubtreeIfNeeded()
@@ -54,14 +47,14 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
 
   @IBAction func chooseScreenshotPathAction(_ sender: AnyObject) {
     Utility.quickOpenPanel(title: "Choose screenshot save path", isDir: true) { url in
-      UserDefaults.standard.set(url.path, forKey: Preference.Key.screenshotFolder)
+      Preference.set(url.path, for: .screenshotFolder)
       UserDefaults.standard.synchronize()
     }
   }
 
   @IBAction func rememberRecentChanged(_ sender: NSButton) {
-    if sender.state == NSOffState {
-      NSDocumentController.shared().clearRecentDocuments(self)
+    if sender.state == .off {
+      NSDocumentController.shared.clearRecentDocuments(self)
     }
   }
 

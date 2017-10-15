@@ -8,30 +8,10 @@
 
 import Cocoa
 
-class CropSettingsViewController: NSViewController {
-
-  weak var mainWindow: MainWindowController!
-
-  lazy var cropBoxView: CropBoxView = {
-    let view = CropBoxView()
-    view.settingsViewController = self
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
+class CropSettingsViewController: CropBoxViewController {
 
   @IBOutlet weak var cropRectLabel: NSTextField!
   @IBOutlet weak var predefinedAspectSegment: NSSegmentedControl!
-
-  private var cropx: Int = 0
-  private var cropy: Int = 0
-  private var cropw: Int = 0
-  private var croph: Int = 0
-  // cropy is in flipped coordinate
-  private var actualCropy: Int {
-    get {
-      return mainWindow.playerCore.info.videoHeight! - croph - cropy
-    }
-  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -41,19 +21,13 @@ class CropSettingsViewController: NSViewController {
     predefinedAspectSegment.selectedSegment = -1
   }
 
-  func selectedRectUpdated() {
-    guard mainWindow.isInInteractiveMode else { return }
-    let rect = cropBoxView.selectedRect
-    cropx = Int(rect.origin.x)
-    cropy = Int(rect.origin.y)
-    cropw = Int(rect.width)
-    croph = Int(rect.height)
-    cropRectLabel.stringValue = "Origin(\(cropx), \(actualCropy))  Size(\(cropw) \u{d7} \(croph))"
+  override func selectedRectUpdated() {
+    super.selectedRectUpdated()
+    cropRectLabel.stringValue = readableCropString
   }
 
-
   @IBAction func doneBtnAction(_ sender: AnyObject) {
-    let playerCore = mainWindow.playerCore
+    let playerCore = mainWindow.player
 
     mainWindow.exitInteractiveMode {
       if self.cropx == 0 && self.cropy == 0 &&
@@ -61,24 +35,22 @@ class CropSettingsViewController: NSViewController {
         self.croph == playerCore.info.videoHeight {
         // if no crop, remove the crop filter
         if let vf = playerCore.info.cropFilter {
-          playerCore.removeVideoFiler(vf)
+          let _ = playerCore.removeVideoFiler(vf)
           playerCore.info.unsureCrop = "None"
           return
         }
       }
       // else, set the filter
-      let filter = MPVFilter.crop(w: self.cropw, h: self.croph, x: self.cropx, y: self.actualCropy)
+      let filter = MPVFilter.crop(w: self.cropw, h: self.croph, x: self.cropx, y: self.cropy)
       playerCore.setCrop(fromFilter: filter)
       // custom crop has no corresponding menu entry
       playerCore.info.unsureCrop = ""
-      self.mainWindow.displayOSD(.crop("\(self.cropx),\(self.actualCropy) \(self.cropw)x\(self.croph)"))
+      self.mainWindow.displayOSD(.crop(self.readableCropString))
     }
   }
 
   @IBAction func cancelBtnAction(_ sender: AnyObject) {
-    mainWindow.exitInteractiveMode{
-      return
-    }
+    mainWindow.exitInteractiveMode()
   }
 
   @IBAction func predefinedAspectValueAction(_ sender: NSSegmentedControl) {
@@ -94,6 +66,5 @@ class CropSettingsViewController: NSViewController {
 
     cropBoxView.setSelectedRect(to: cropped)
   }
-
 
 }

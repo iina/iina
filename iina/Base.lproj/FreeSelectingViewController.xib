@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="FreeSelectingViewController" customModule="IINA" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="500" height="60"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSG-A8-VRD">
+                    <rect key="frame" x="24" y="43" width="88" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Select Region" id="mCM-Di-cvS">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8U-s6-Lbm">
+                    <rect key="frame" x="24" y="18" width="207" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Drag to select the desired region." id="XyF-Qa-CSn">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="j0T-oc-CRW">
+                    <rect key="frame" x="410" y="8" width="72" height="32"/>
+                    <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SFp-iy-h4f">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="doneBtnAction:" target="-2" id="PaS-Uk-PCh"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="12d-gG-rlD">
+                    <rect key="frame" x="332" y="8" width="82" height="32"/>
+                    <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="I8a-rb-zex">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                    </buttonCell>
+                    <connections>
+                        <action selector="cancelBtnAction:" target="-2" id="Mcf-sM-Sb4"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="TSG-A8-VRD" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="0Ef-5Z-LSO"/>
+                <constraint firstItem="U8U-s6-Lbm" firstAttribute="leading" secondItem="TSG-A8-VRD" secondAttribute="leading" id="6II-hO-3ro"/>
+                <constraint firstItem="j0T-oc-CRW" firstAttribute="baseline" secondItem="U8U-s6-Lbm" secondAttribute="baseline" id="AnD-nw-nvw"/>
+                <constraint firstItem="j0T-oc-CRW" firstAttribute="leading" secondItem="12d-gG-rlD" secondAttribute="trailing" constant="8" id="Les-1m-0FI"/>
+                <constraint firstAttribute="trailing" secondItem="j0T-oc-CRW" secondAttribute="trailing" constant="24" id="QfA-jg-JRJ"/>
+                <constraint firstItem="12d-gG-rlD" firstAttribute="centerY" secondItem="j0T-oc-CRW" secondAttribute="centerY" id="keQ-Yc-yXB"/>
+                <constraint firstItem="U8U-s6-Lbm" firstAttribute="top" secondItem="TSG-A8-VRD" secondAttribute="bottom" constant="8" id="unS-1a-0w5"/>
+                <constraint firstItem="TSG-A8-VRD" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="26" id="vQ9-oL-IuD"/>
+            </constraints>
+        </customView>
+    </objects>
+</document>

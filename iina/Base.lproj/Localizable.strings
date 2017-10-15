@@ -76,7 +76,7 @@
 "preference.subtitle" = "Subtitle";
 "preference.network" = "Network";
 "preference.control" = "Control";
-"preference.keybindings" = "Keybindings";
+"preference.keybindings" = "Key Bindings";
 "preference.advanced" = "Advanced";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Not logged in";
@@ -172,6 +172,10 @@
 "alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
 "alert.clear_cache.success" = "Cache cleared.";
 
+"alert.nothing_to_open" = "Nothing to open.";
+
+"alert.no_video_track" = "There is no video track.";
+
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.play_in_new_window" = "Play in New Window";
@@ -197,6 +201,8 @@
 "hwdec.no" = "Disable Hardware decoding.";
 "hwdec.auto" = "Enable hardware decoding. However, most video filters won't work properly.";
 "hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but works with video filters.";
+
+"subencoding.auto" = "Auto detect";
 
 // Touch bar
 

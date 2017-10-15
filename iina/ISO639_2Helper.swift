@@ -22,13 +22,16 @@ class ISO639_2Helper {
 
   static let languages: [Language] = {
     var result: [Language] = []
-    let filePath = Bundle.main.path(forResource: "ISO639_2", ofType: "strings")!
-    let dic = NSDictionary(contentsOfFile: filePath) as! [String : String]
-    for (k, v) in dic {
+    for (k, v) in dictionary {
       let names = v.characters.split(separator: ";").map { String($0) }
       result.append(Language(code: k, name: names))
     }
     return result
+  }()
+
+  static let dictionary: [String: String] = {
+    let filePath = Bundle.main.path(forResource: "ISO639_2", ofType: "strings")!
+    return NSDictionary(contentsOfFile: filePath) as! [String : String]
   }()
 
 }

@@ -26,7 +26,7 @@
 "Ci8-j2-QS3.title" = "在「最近打開」菜單中查看所有播放過的檔案";
 
 /* Class = "NSButtonCell"; title = "Pause when media is opened"; ObjectID = "FbF-jJ-W5a"; */
-"FbF-jJ-W5a.title" = "打開媒體後暫停";
+"FbF-jJ-W5b.title" = "暫停";
 
 /* Class = "NSButtonCell"; title = "Open a choose file panel after starting"; ObjectID = "IYU-9y-fBL"; */
 "IYU-9y-fBL.title" = "啟動後顯示檔案選擇介面";
@@ -38,7 +38,7 @@
 "Lac-Ol-g6E.title" = "自動播放下一個";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen when media is opened"; ObjectID = "MlG-hl-goA"; */
-"MlG-hl-goA.title" = "打開媒體後進入全熒幕";
+"MlG-hl-goB.title" = "進入全熒幕";
 
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
 "QJq-fO-hhK.title" = "自動添加檔案至當前檔案夾";

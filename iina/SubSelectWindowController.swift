@@ -10,8 +10,8 @@ import Cocoa
 
 class SubSelectWindowController: NSWindowController, NSWindowDelegate {
 
-  override var windowNibName: String {
-    return "SubSelectWindowController"
+  override var windowNibName: NSNib.Name {
+    return NSNib.Name("SubSelectWindowController")
   }
 
   @IBOutlet var arrayController: NSArrayController!
@@ -23,7 +23,7 @@ class SubSelectWindowController: NSWindowController, NSWindowDelegate {
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    window?.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
+    window?.appearance = NSAppearance(named: .vibrantDark)
   }
 
   func windowWillClose(_ notification: Notification) {

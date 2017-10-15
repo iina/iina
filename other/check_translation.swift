@@ -1,4 +1,4 @@
-#!/usr/bin/swift
+#/usr/bin/swift
 
 import Cocoa
 
@@ -27,9 +27,9 @@ class Regex {
     if let matches = regex?.matches(in: str, options: [], range: NSMakeRange(0, str.characters.count)) {
       matches.forEach { match in
         for i in 0..<match.numberOfRanges {
-          let range = match.rangeAt(i)
+          let range = match.range(at: i)
           if range.length > 0 {
-            result.append((str as NSString).substring(with: match.rangeAt(i)))
+            result.append((str as NSString).substring(with: match.range(at: i)))
           } else {
             result.append("")
           }
@@ -44,7 +44,7 @@ class Regex {
 let ignorePlaceHolderTitle = true
 let checkRedundantKey = false
 
-let languages = ["de", "fr", "it", "ja", "ko", "pl", "zh-Hans", "zh-Hant", "ru", "tr", "es", "uk"]
+let languages = ["de", "fr", "it", "ja", "ko", "pl", "zh-Hans", "zh-Hant", "ru", "tr", "es", "uk", "nl"]
 var testLanguages: [String] = []
 
 let ignoredStrings = ["Label", "Multiline Label", "Text Cell", "Box", "Table View Cell", "Title", "Item", "Context Menu", "0:00:00", "00:00 AM", "9:99:99", "999:99"]

@@ -77,6 +77,23 @@ extension NSSize {
     }
   }
 
+  /** 
+   Given another size S, returns a size that:
+
+   - maintains the same aspect ratio;
+   - has same height or/and width as S;
+   - always bigger than S.
+   
+   - parameter toSize: The given size S.
+
+   ```
+   +--+------+--+
+   |  |      |  |
+   |  |  S   |  |<-- The result size
+   |  |      |  |
+   +--+------+--+
+   ```
+   */
   func grow(toSize size: NSSize) -> NSSize {
     let sizeAspect = size.aspect
     if aspect > sizeAspect {  // self is wider, grow to meet height
@@ -86,6 +103,23 @@ extension NSSize {
     }
   }
 
+  /**
+   Given another size S, returns a size that:
+
+   - maintains the same aspect ratio;
+   - has same height or/and width as S;
+   - always smaller than S.
+   
+   - parameter toSize: The given size S.
+
+   ```
+   +--+------+--+
+   |  |The   |  |
+   |  |result|  |<-- S
+   |  |size  |  |
+   +--+------+--+
+   ```
+   */
   func shrink(toSize size: NSSize) -> NSSize {
     let  sizeAspect = size.aspect
     if aspect < sizeAspect { // self is taller, shrink to meet height
@@ -93,6 +127,13 @@ extension NSSize {
     } else {
       return NSSize(width: size.width, height: size.width / aspect)
     }
+  }
+
+  func centeredRect(in rect: NSRect) -> NSRect {
+    return NSRect(x: (rect.width - width) / 2,
+                  y: (rect.height - height) / 2,
+                  width: width,
+                  height: height)
   }
 
   func multiply(_ multiplier: CGFloat) -> NSSize {
@@ -107,6 +148,37 @@ extension NSSize {
 
 
 extension NSRect {
+
+  init(vertexPoint pt1: NSPoint, and pt2: NSPoint) {
+    self.init(x: min(pt1.x, pt2.x),
+              y: min(pt1.y, pt2.y),
+              width: fabs(pt1.x - pt2.x),
+              height: fabs(pt1.y - pt2.y))
+  }
+
+  var x: CGFloat {
+    get {
+      return self.origin.x
+    }
+  }
+
+  var xMax: CGFloat {
+    get {
+      return self.origin.x + self.size.width
+    }
+  }
+
+  var y: CGFloat {
+    get {
+      return self.origin.y
+    }
+  }
+
+  var yMax: CGFloat {
+    get {
+      return self.origin.y + self.size.height
+    }
+  }
 
   func multiply(_ multiplier: CGFloat) -> NSRect {
     return NSRect(x: origin.x, y: origin.y, width: width * multiplier, height: height * multiplier)
@@ -155,7 +227,7 @@ extension NSPoint {
 
 extension Array {
   func at(_ pos: Int) -> Element? {
-    if pos < count {
+    if pos >= 0 && pos < count {
       return self[pos]
     } else {
       return nil
@@ -178,7 +250,7 @@ extension NSMenu {
     let menuItem = NSMenuItem(title: string, action: selector, keyEquivalent: "")
     menuItem.tag = tag ?? -1
     menuItem.representedObject = obj
-    menuItem.state = stateOn ? NSOnState : NSOffState
+    menuItem.state = stateOn ? .on : .off
     self.addItem(menuItem)
   }
 }
@@ -193,6 +265,12 @@ extension Int {
     if self < min { value = min }
     if self > max { value = max }
     return value
+  }
+}
+
+extension Float {
+  func toStr() -> String {
+    return "\(self)"
   }
 }
 
@@ -228,10 +306,11 @@ extension Double {
   }
 
   func prettyFormat() -> String {
-    if truncatingRemainder(dividingBy: 1) == 0 {
-      return "\(Int(self))"
+    let rounded = (self * 1000).rounded() / 1000
+    if rounded.truncatingRemainder(dividingBy: 1) == 0 {
+      return "\(Int(rounded))"
     } else {
-      return "\(self)"
+      return "\(rounded)"
     }
   }
 }
@@ -269,8 +348,8 @@ extension NSMutableAttributedString {
     let range = NSRange(location: 0, length: self.length)
     let nsurl = NSURL(string: url)!
     self.beginEditing()
-    self.addAttribute(NSLinkAttributeName, value: nsurl, range: range)
-    self.addAttribute(NSFontAttributeName, value: font, range: range)
+    self.addAttribute(.link, value: nsurl, range: range)
+    self.addAttribute(.font, value: font, range: range)
     self.endEditing()
   }
 }
@@ -338,9 +417,21 @@ extension String {
     }
   }
 
+  var isDirectoryAsPath: Bool {
+    get {
+      var re = ObjCBool(false)
+      FileManager.default.fileExists(atPath: self, isDirectory: &re)
+      return re.boolValue
+    }
+  }
+
+  var lowercasedPathExtension: String {
+    return (self as NSString).pathExtension.lowercased()
+  }
+
   mutating func deleteLast(_ num: Int) {
     guard num <= characters.count else { self = ""; return }
-    self = self.substring(to: self.index(endIndex, offsetBy: -num))
+    self = String(self[...self.index(endIndex, offsetBy: -num)])
   }
 
   func countOccurances(of str: String, in range: Range<Index>?) -> Int {
@@ -370,4 +461,47 @@ extension CharacterSet {
 
 extension NSMenuItem {
   static let dummy = NSMenuItem(title: "Dummy", action: nil, keyEquivalent: "")
+}
+
+
+extension URL {
+  /**
+   Whether the URL represents a directory.
+   
+   - Attention: For 10.10-, it only checks if `path` ends with "/".
+   */
+  var representsDirectory: Bool {
+    if #available(OSX 10.11, *) {
+      return hasDirectoryPath
+    } else {
+      return path.hasSuffix("/")
+    }
+  }
+
+  var isExistingDirectory: Bool {
+    return (try? self.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
+  }
+}
+
+extension NSPasteboard.PasteboardType {
+  static let nsURL = NSPasteboard.PasteboardType("NSURL")
+  static let nsFilenames = NSPasteboard.PasteboardType("NSFilenamesPboardType")
+  static let iinaPlaylistItem = NSPasteboard.PasteboardType("IINAPlaylistItem")
+}
+
+
+extension NSWindow.Level {
+  static let iinaFloating = NSWindow.Level(NSWindow.Level.floating.rawValue - 1)
+  static let iinaBlackScreen = NSWindow.Level(NSWindow.Level.mainMenu.rawValue + 1)
+}
+
+extension NSUserInterfaceItemIdentifier {
+  static let isChosen = NSUserInterfaceItemIdentifier("IsChosen")
+  static let trackId = NSUserInterfaceItemIdentifier("TrackId")
+  static let trackName = NSUserInterfaceItemIdentifier("TrackName")
+  static let isPlayingCell = NSUserInterfaceItemIdentifier("IsPlayingCell")
+  static let trackNameCell = NSUserInterfaceItemIdentifier("TrackNameCell")
+  static let key = NSUserInterfaceItemIdentifier("Key")
+  static let value = NSUserInterfaceItemIdentifier("Value")
+  static let action = NSUserInterfaceItemIdentifier("Action")
 }

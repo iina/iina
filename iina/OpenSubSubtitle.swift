@@ -13,15 +13,15 @@ import Gzip
 
 final class OpenSubSubtitle: OnlineSubtitle {
 
-  var filename: String = ""
-  var langID: String
-  var authorComment: String
-  var addDate: String
-  var rating: String
-  var dlCount: String
-  var movieFPS: String
-  var subDlLink: String
-  var zipDlLink: String
+  @objc var filename: String = ""
+  @objc var langID: String
+  @objc var authorComment: String
+  @objc var addDate: String
+  @objc var rating: String
+  @objc var dlCount: String
+  @objc var movieFPS: String
+  @objc var subDlLink: String
+  @objc var zipDlLink: String
 
   init(index: Int, filename: String, langID: String, authorComment: String, addDate: String, rating: String, dlCount: String, movieFPS: String, subDlLink: String, zipDlLink: String) {
     self.filename = filename
@@ -122,11 +122,11 @@ class OpenSubSupport {
       } else {
         // check logged in
         if self.loggedIn {
-          fulfill()
+          fulfill(())
           return
         }
         // read password
-        if let udUsername = UserDefaults.standard.string(forKey: Preference.Key.openSubUsername), !udUsername.isEmpty {
+        if let udUsername = Preference.string(for: .openSubUsername), !udUsername.isEmpty {
           let (readResult, readPassword, _) = OpenSubSupport.findPassword(username: udUsername)
           if readResult == errSecSuccess {
             finalUser = udUsername
@@ -149,7 +149,7 @@ class OpenSubSupport {
             self.token = parsed["token"] as! String
             Utility.log("OpenSub: logged in as user \(finalUser)")
             self.startHeartbeat()
-            fulfill()
+            fulfill(())
           } else {
             Utility.log("OpenSub: login failed, \(pStatus)")
             reject(OpenSubError.loginFailed(pStatus))

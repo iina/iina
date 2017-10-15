@@ -13,8 +13,8 @@ class ThumbnailCache {
   static private let sizeofDouble = MemoryLayout<Double>.size
   static private let sizeofInt64 = MemoryLayout<Int64>.size
 
-  static private let imageProperties: [String: Any] = [
-    NSImageCompressionFactor: 0.75
+  static private let imageProperties: [NSBitmapImageRep.PropertyKey: Any] = [
+    .compressionFactor: 0.75
   ]
 
   static func fileExists(forName name: String) -> Bool {
@@ -25,6 +25,13 @@ class ThumbnailCache {
   /// This method is expected to be called when the file doesn't exist.
   static func write(_ thumbnails: [FFThumbnail], forName name: String) {
     // Utility.log("Writing thumbnail cache...")
+
+    let maxCacheSize = Preference.integer(for: .maxThumbnailPreviewCacheSize) * FileSize.Unit.mb.rawValue
+    if maxCacheSize == 0 {
+      return
+    } else if CacheManager.shared.getCacheSize() > maxCacheSize {
+      CacheManager.shared.clearOldCache()
+    }
 
     let pathURL = urlFor(name)
     guard FileManager.default.createFile(atPath: pathURL.path, contents: nil, attributes: nil) else {
@@ -48,7 +55,7 @@ class ThumbnailCache {
         Utility.log("Cannot generate tiff data.")
         return
       }
-      guard let jpegData = NSBitmapImageRep(data: tiffData)?.representation(using: .JPEG, properties: imageProperties) else {
+      guard let jpegData = NSBitmapImageRep(data: tiffData)?.representation(using: .jpeg, properties: imageProperties) else {
         Utility.log("Cannot generate jpeg data.")
         return
       }
@@ -59,6 +66,7 @@ class ThumbnailCache {
       file.write(jpegData)
     }
 
+    CacheManager.shared.needsRefresh = true
     // Utility.log("Finished writing thumbnail cache.")
   }
 

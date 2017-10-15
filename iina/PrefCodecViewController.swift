@@ -8,23 +8,17 @@
 
 import Cocoa
 
+@objcMembers
 class PrefCodecViewController: NSViewController {
 
-  override var nibName: String? {
-    return "PrefCodecViewController"
+  override var nibName: NSNib.Name {
+    return NSNib.Name("PrefCodecViewController")
   }
 
-  override var identifier: String? {
-    get {
-      return "codec"
-    }
-    set {
-      super.identifier = newValue
-    }
-  }
+  var viewIdentifier: String = "PrefCodecViewController"
 
   var toolbarItemImage: NSImage {
-    return NSImage(named: "toolbar_codec")!
+    return #imageLiteral(resourceName: "toolbar_codec")
   }
 
   var toolbarItemLabel: String {
@@ -48,11 +42,11 @@ class PrefCodecViewController: NSViewController {
 
   @IBAction func spdifBtnAction(_ sender: AnyObject) {
     var spdif: [String] = []
-    if spdifAC3Btn.state == NSOnState { spdif.append("ac3") }
-    if spdifDTSBtn.state == NSOnState { spdif.append("dts") }
-    if spdifDTSHDBtn.state == NSOnState { spdif.append("dts-hd") }
+    if spdifAC3Btn.state == .on { spdif.append("ac3") }
+    if spdifDTSBtn.state == .on { spdif.append("dts") }
+    if spdifDTSHDBtn.state == .on { spdif.append("dts-hd") }
     let spdifString = spdif.joined(separator: ",")
-    PlayerCore.playerCores.forEach { $0.mpvController.setString(MPVOption.Audio.audioSpdif, spdifString) }
+    PlayerCore.playerCores.forEach { $0.mpv.setString(MPVOption.Audio.audioSpdif, spdifString) }
   }
 
   @IBAction func hwdecAction(_ sender: AnyObject) {
@@ -60,7 +54,7 @@ class PrefCodecViewController: NSViewController {
   }
 
   private func updateHwdecDescription() {
-    let hwdec: Preference.HardwareDecoderOption = Preference.HardwareDecoderOption(rawValue: UserDefaults.standard.integer(forKey: Preference.Key.hardwareDecoder)) ?? .auto
+    let hwdec: Preference.HardwareDecoderOption = Preference.enum(for: .hardwareDecoder)
     hwdecDescriptionTextField.stringValue = hwdec.localizedDescription
   }
 

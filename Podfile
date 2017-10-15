@@ -6,11 +6,11 @@ target 'iina' do
 
   # Pods for iina
   pod 'MASPreferences'
-  pod 'Just'
+  pod 'Just', :git => 'https://github.com/JustHTTP/Just.git', :branch => 'swift-4'
   pod 'AEXML'
-  pod "PromiseKit", "~> 4.0"
-  pod 'GzipSwift'
-  pod 'GRMustache.swift'
+  pod 'PromiseKit'
+  pod 'GzipSwift', :git => 'https://github.com/1024jp/GzipSwift.git', :branch => 'swift4'
+  pod 'GRMustache.swift', :git => 'https://github.com/saagarjha/GRMustache.swift.git'
   pod 'Sparkle'
 
 #  target 'iinaTests' do

@@ -30,16 +30,16 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
 
   var finishedPicking: ((String?) -> Void)?
 
-  override var windowNibName: String {
+  override var windowNibName: NSNib.Name {
     get {
-      return "FontPickerWindowController"
+      return NSNib.Name("FontPickerWindowController")
     }
   }
 
   override func windowDidLoad() {
     super.windowDidLoad()
 
-    let manager = NSFontManager.shared()
+    let manager = NSFontManager.shared
 
     fontNames = manager.availableFontFamilies
       .filter { !$0.hasPrefix(".") && !$0.trimmingCharacters(in: .whitespaces).isEmpty }

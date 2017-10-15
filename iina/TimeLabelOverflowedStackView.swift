@@ -10,8 +10,8 @@ import Cocoa
 
 class TimeLabelOverflowedStackView: NSStackView {
 
-  override var alignmentRectInsets: EdgeInsets {
-    return EdgeInsets(top: 6, left: 0, bottom: 0, right: 0)
+  override var alignmentRectInsets: NSEdgeInsets {
+    return NSEdgeInsets(top: 6, left: 0, bottom: 0, right: 0)
   }
     
 }

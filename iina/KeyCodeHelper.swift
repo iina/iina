@@ -77,7 +77,7 @@ class KeyCodeHelper {
     0x59: ("KP7", nil),
     0x5B: ("KP8", nil),
     0x5C: ("KP9", nil),
-
+    
     0x24: ("ENTER", nil),
     0x30: ("TAB", nil),
     0x31: ("SPACE", nil),
@@ -138,6 +138,55 @@ class KeyCodeHelper {
 
   static func canBeModifiedByShift(_ key: UInt16) -> Bool {
     return key != 0x24 && (key <= 0x2F || key == 0x32)
+  }
+
+  static func isPrintable(_ char: String) -> Bool {
+    let utf8View = char.utf8
+    return utf8View.count == 1 && utf8View.first! > 32 && utf8View.first! < 127
+  }
+
+  static func mpvKeyCode(from event: NSEvent) -> String {
+    var keyString = ""
+    let keyChar: String
+    let keyCode = event.keyCode
+    let modifiers = event.modifierFlags
+
+    // shift
+
+    if let char = event.charactersIgnoringModifiers, isPrintable(char) {
+      keyChar = char
+    } else {
+      // find the key from key code
+      guard let keyName = KeyCodeHelper.keyMap[keyCode] else {
+        Utility.log("Undefined key code?")
+        return ""
+      }
+      if modifiers.contains(.shift) {
+        if KeyCodeHelper.canBeModifiedByShift(keyCode) {
+          keyChar = keyName.1!
+        } else {
+          keyChar = keyName.0
+          keyString += "Shift+"
+        }
+      } else {
+        keyChar = keyName.0
+      }
+    }
+    // control
+    if modifiers.contains(.control) {
+      keyString += "Ctrl+"
+    }
+    // alt
+    if modifiers.contains(.option) {
+      keyString += "Alt+"
+    }
+    // meta
+    if modifiers.contains(.command) {
+      keyString += "Meta+"
+    }
+    // char
+    keyString += keyChar
+    return keyString
   }
 
 }

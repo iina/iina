@@ -1,12 +1,9 @@
 
-/* Class = "NSMenuItem"; title = "Auto (Copy)"; ObjectID = "0DK-uZ-duj"; */
-"0DK-uZ-duj.title" = "Auto (Copy)";
-
 /* Class = "NSButtonCell"; title = "AC3"; ObjectID = "1uU-MC-7Yh"; */
 "1uU-MC-7Yh.title" = "AC3";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "2yO-To-el7"; */
-"2yO-To-el7.title" = "По умолчанию: 0 (Авто)";
+"2yO-To-el7.title" = "По умолчанию: 0 (автоматически)";
 
 /* Class = "NSTextFieldCell"; title = "Maximum volume:"; ObjectID = "44m-ge-naq"; */
 "44m-ge-naq.title" = "Максимальная громкость:";
@@ -21,10 +18,13 @@
 "Le8-wj-Pei.title" = "DTS";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
-"bxW-np-SGm.title" = "По умолчанию: 0 (Авто)";
+"bxW-np-SGm.title" = "По умолчанию: 0 (автоматически)";
 
 /* Class = "NSTextFieldCell"; title = "(100-1000)"; ObjectID = "cJP-ep-847"; */
 "cJP-ep-847.title" = "(100-1000)";
+
+/* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
+"g4c-vG-URh.title" = "Громкость при запуске:";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Видео:";
@@ -33,13 +33,16 @@
 "nwg-2K-G2G.title" = "Аппаратный декодер:";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
-"rFu-rL-EJC.title" = "Отключено";
+"rFu-rL-EJC.title" = "Отключён";
+
+/* Class = "NSMenuItem"; title = "Auto"; ObjectID = "tAQ-oU-1AJ"; */
+"tAQ-oU-1AJ.title" = "Автоматически";
+
+/* Class = "NSMenuItem"; title = "Auto (Copy)"; ObjectID = "0DK-uZ-duj"; */
+"0DK-uZ-duj.title" = "Автоматически (с копированием)";
 
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
 "sV5-dL-MUt.title" = "Аудио:";
-
-/* Class = "NSMenuItem"; title = "Auto"; ObjectID = "tAQ-oU-1AJ"; */
-"tAQ-oU-1AJ.title" = "Auto";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "tO4-pw-2W9"; */
 "tO4-pw-2W9.title" = "Количество потоков:";

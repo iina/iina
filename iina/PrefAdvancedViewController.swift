@@ -9,26 +9,20 @@
 import Cocoa
 import MASPreferences
 
+@objcMembers
 class PrefAdvancedViewController: NSViewController, MASPreferencesViewController {
 
-  override var nibName: String? {
-    return "PrefAdvancedViewController"
+  override var nibName: NSNib.Name {
+    return NSNib.Name("PrefAdvancedViewController")
   }
 
-  override var identifier: String? {
-    get {
-      return "advanced"
-    }
-    set {
-      super.identifier = newValue
-    }
+  var viewIdentifier: String = "PrefAdvancedViewController"
+
+  var toolbarItemImage: NSImage? {
+    return NSImage(named: .advanced)!
   }
 
-  var toolbarItemImage: NSImage {
-    return NSImage(named: NSImageNameAdvanced)!
-  }
-
-  var toolbarItemLabel: String {
+  var toolbarItemLabel: String? {
     view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.advanced", comment: "Advanced")
   }
@@ -50,7 +44,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
     super.viewDidLoad()
     updateControlStatus(self)
 
-    guard let op = UserDefaults.standard.value(forKey: Preference.Key.userOptions) as? [[String]] else {
+    guard let op = Preference.value(for: .userOptions) as? [[String]] else {
       Utility.showAlert("extra_option.cannot_read")
       return
     }
@@ -61,14 +55,14 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   }
 
   func saveToUserDefaults() {
-    UserDefaults.standard.set(options, forKey: Preference.Key.userOptions)
+    Preference.set(options, for: .userOptions)
     UserDefaults.standard.synchronize()
   }
 
   // MARK: - IBAction
 
   @IBAction func updateControlStatus(_ sender: AnyObject) {
-    let enable = enableSettingsBtn.state == NSOnState
+    let enable = enableSettingsBtn.state == .on
     settingsView.subviews.forEach { view in
       if let control = view as? NSControl {
         control.isEnabled = enable
@@ -77,7 +71,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   }
 
   @IBAction func revealLogDir(_ sender: AnyObject) {
-    NSWorkspace.shared().open(Utility.logDirURL)
+    NSWorkspace.shared.open(Utility.logDirURL)
   }
 
   @IBAction func addOptionBtnAction(_ sender: AnyObject) {
@@ -97,13 +91,13 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
 
   @IBAction func chooseDirBtnAction(_ sender: AnyObject) {
     Utility.quickOpenPanel(title: "Choose config directory", isDir: true) { url in
-      UserDefaults.standard.set(url.path, forKey: Preference.Key.userDefinedConfDir)
+      Preference.set(url.path, for: .userDefinedConfDir)
       UserDefaults.standard.synchronize()
     }
   }
 
   @IBAction func helpBtnAction(_ sender: AnyObject) {
-    NSWorkspace.shared().open(URL(string: AppData.websiteLink)!.appendingPathComponent("documentation"))
+    NSWorkspace.shared.open(URL(string: AppData.websiteLink)!.appendingPathComponent("documentation"))
   }
 }
 
@@ -119,9 +113,9 @@ extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     guard options.count > row else { return nil }
-    if tableColumn?.identifier == Constants.Identifier.key {
+    if tableColumn?.identifier == .key {
       return options[row][0]
-    } else if tableColumn?.identifier == Constants.Identifier.value {
+    } else if tableColumn?.identifier == .value {
       return options[row][1]
     }
     return nil
@@ -135,9 +129,9 @@ extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource
       return
     }
     guard options.count > row else { return }
-    if identifier == Constants.Identifier.key {
+    if identifier == .key {
       options[row][0] = value
-    } else if identifier == Constants.Identifier.value {
+    } else if identifier == .value {
       options[row][1] = value
     }
     saveToUserDefaults()

@@ -9,28 +9,22 @@
 import Cocoa
 import MASPreferences
 
+@objcMembers
 class PrefUIViewController: NSViewController, MASPreferencesViewController {
 
-  override var nibName: String {
-    return "PrefUIViewController"
+  override var nibName: NSNib.Name {
+    return NSNib.Name("PrefUIViewController")
   }
 
-  override var identifier: String? {
+  var viewIdentifier: String = "PrefUIViewController"
+
+  var toolbarItemImage: NSImage? {
     get {
-      return "ui"
-    }
-    set {
-      super.identifier = newValue
+      return #imageLiteral(resourceName: "toolbar_play")
     }
   }
 
-  var toolbarItemImage: NSImage {
-    get {
-      return NSImage(named: "toolbar_play")!
-    }
-  }
-
-  var toolbarItemLabel: String {
+  var toolbarItemLabel: String? {
     get {
       view.layoutSubtreeIfNeeded()
       return NSLocalizedString("preference.ui", comment: "UI")
@@ -61,7 +55,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
     default:
       name = "osc_float"
     }
-    oscPreviewImageView.image = NSImage(named: name)
+    oscPreviewImageView.image = NSImage(named: NSImage.Name(rawValue: name))
   }
 
   @IBAction func clearCacheBtnAction(_ sender: AnyObject) {
@@ -80,14 +74,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   }
 
   private func updateThumbnailCacheStat() {
-    var totalSize = 0
-    if let contents = try? FileManager.default.contentsOfDirectory(at: Utility.thumbnailCacheURL, includingPropertiesForKeys: [.fileSizeKey], options: [.skipsHiddenFiles]) {
-      for url in contents {
-        guard let size = try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize else { return }
-        totalSize += size ?? 0
-      }
-    }
-    thumbCacheSizeLabel.stringValue = FileSize.format(totalSize, unit: .b)
+    thumbCacheSizeLabel.stringValue = FileSize.format(CacheManager.shared.getCacheSize(), unit: .b)
   }
 
 }

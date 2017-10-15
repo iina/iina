@@ -70,12 +70,12 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
   }
 
   func recordedKeyDown(with event: NSEvent) {
-    keyLabel.stringValue = Utility.mpvKeyCode(from: event)
+    keyLabel.stringValue = KeyCodeHelper.mpvKeyCode(from: event)
   }
 
   // MARK: - NSRuleEditorDelegate
 
-  func ruleEditor(_ editor: NSRuleEditor, child index: Int, forCriterion criterion: Any?, with rowType: NSRuleEditorRowType) -> Any {
+  func ruleEditor(_ editor: NSRuleEditor, child index: Int, forCriterion criterion: Any?, with rowType: NSRuleEditor.RowType) -> Any {
     if criterion == nil {
       return criterions[index]
     } else {
@@ -83,7 +83,7 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     }
   }
 
-  func ruleEditor(_ editor: NSRuleEditor, numberOfChildrenForCriterion criterion: Any?, with rowType: NSRuleEditorRowType) -> Int {
+  func ruleEditor(_ editor: NSRuleEditor, numberOfChildrenForCriterion criterion: Any?, with rowType: NSRuleEditor.RowType) -> Int {
     if criterion == nil {
       return criterions.count
     } else {

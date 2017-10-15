@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,11 +18,10 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" frameAutosaveName="IINAWelcomeWindow" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" fullSizeContentView="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="contentRect" x="931" y="455" width="640" height="400"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO" customClass="InitialWindowContentView" customModule="IINA" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -46,7 +46,7 @@
                                     <customView identifier="openFile" translatesAutoresizingMaskIntoConstraints="NO" id="ZGi-N7-Zv2" customClass="InitialWindowViewActionButton" customModule="IINA" customModuleProvider="target">
                                         <rect key="frame" x="204" y="340" width="392" height="28"/>
                                         <subviews>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="1" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fw-9s-a6m">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="4fw-9s-a6m">
                                                 <rect key="frame" x="359" y="6" width="27" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="⌘O" id="FKk-kb-jEw">
                                                     <font key="font" metaFont="system"/>
@@ -54,7 +54,7 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="otz-1h-7O6">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="otz-1h-7O6">
                                                 <rect key="frame" x="6" y="6" width="47" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Open…" id="qsU-lZ-WQq">
                                                     <font key="font" metaFont="system"/>
@@ -68,13 +68,14 @@
                                             <constraint firstItem="otz-1h-7O6" firstAttribute="centerY" secondItem="ZGi-N7-Zv2" secondAttribute="centerY" id="Fr1-up-4dB"/>
                                             <constraint firstAttribute="height" constant="28" id="SY8-ab-01d"/>
                                             <constraint firstAttribute="trailing" secondItem="4fw-9s-a6m" secondAttribute="trailing" constant="8" id="dea-Xd-ZW7"/>
+                                            <constraint firstItem="4fw-9s-a6m" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="otz-1h-7O6" secondAttribute="trailing" constant="8" id="pFv-5j-dhN"/>
                                             <constraint firstItem="otz-1h-7O6" firstAttribute="leading" secondItem="ZGi-N7-Zv2" secondAttribute="leading" constant="8" id="zYz-oQ-i9N"/>
                                         </constraints>
                                     </customView>
                                     <customView identifier="openURL" translatesAutoresizingMaskIntoConstraints="NO" id="hmC-XZ-bFe" customClass="InitialWindowViewActionButton" customModule="IINA" customModuleProvider="target">
                                         <rect key="frame" x="204" y="312" width="392" height="28"/>
                                         <subviews>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6nX-pp-BEb">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6nX-pp-BEb">
                                                 <rect key="frame" x="6" y="6" width="76" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Open URL…" id="FKG-Tz-TCV">
                                                     <font key="font" metaFont="system"/>
@@ -82,7 +83,7 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAL-UM-I0A">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mAL-UM-I0A">
                                                 <rect key="frame" x="346" y="6" width="40" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="⇧⌘O" id="kBV-5X-8Bp">
                                                     <font key="font" metaFont="system"/>
@@ -93,6 +94,7 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="6nX-pp-BEb" firstAttribute="centerY" secondItem="hmC-XZ-bFe" secondAttribute="centerY" id="JIj-aW-woH"/>
+                                            <constraint firstItem="mAL-UM-I0A" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6nX-pp-BEb" secondAttribute="trailing" constant="8" id="JpC-gf-SIa"/>
                                             <constraint firstItem="mAL-UM-I0A" firstAttribute="centerY" secondItem="hmC-XZ-bFe" secondAttribute="centerY" id="Wdo-eQ-vIt"/>
                                             <constraint firstAttribute="trailing" secondItem="mAL-UM-I0A" secondAttribute="trailing" constant="8" id="iqd-ZU-wCk"/>
                                             <constraint firstAttribute="height" constant="28" id="kbB-gE-oHT"/>
@@ -129,7 +131,7 @@
                                                                     <rect key="frame" x="1" y="1" width="389" height="28"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
-                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVz-nY-2cv">
+                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="iVz-nY-2cv">
                                                                             <rect key="frame" x="23" y="7" width="366" height="17"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="VLQ-Oo-gK9">
                                                                                 <font key="font" metaFont="system"/>
@@ -178,7 +180,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eM-hv-Q2Z">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0eM-hv-Q2Z">
                                         <rect key="frame" x="70" y="180" width="37" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="ejb-iU-Lro">
                                             <font key="font" metaFont="system"/>
@@ -186,7 +188,7 @@
                                             <color key="backgroundColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hV-gP-tZA">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8hV-gP-tZA">
                                         <rect key="frame" x="70" y="201" width="37" height="19"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="IINA" id="n70-xD-8He">
                                             <font key="font" metaFont="systemBold" size="16"/>

@@ -47,7 +47,7 @@ If you believe the code structures can be improved, please raise an issue.
 3. Open `iina.xcworkspace`.
 4. Commit changes, test, push, and submit a pull request.
 
-If you want to build libmpv and other depended dylibs on your own, please refer to [the guide in README.md](README.md#build-with-the-lastest-mpv).
+If you want to build libmpv and other depended dylibs on your own, please refer to [the guide in README.md](README.md#build-with-the-latest-mpv).
 
 **Pull requests**
 

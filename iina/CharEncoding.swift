@@ -11,7 +11,7 @@ import Foundation
 class CharEncoding {
 
   static let list: [(title: String, code: String)] = [
-    ("Auto", "auto"),
+    (NSLocalizedString("subencoding.auto", comment: "Auto detect"), "auto"),
     ("Universal (UTF-8)", "UTF-8"),
     ("Universal (UTF-16)", "UTF-16"),
     ("Universal (UTF-16BE)", "UTF-16BE"),

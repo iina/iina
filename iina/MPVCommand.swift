@@ -64,8 +64,6 @@ struct MPVCommand: RawRepresentable {
   static let subStep = MPVCommand("sub-step")
   /** sub-seek <skip> */
   static let subSeek = MPVCommand("sub-seek")
-  /** osd [<level>] */
-  static let osd = MPVCommand("osd")
   /** print-text "<string>" */
   static let printText = MPVCommand("print-text")
   /** show-text "<string>" [<duration>|- [<level>]] */

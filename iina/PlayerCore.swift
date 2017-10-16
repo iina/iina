@@ -828,7 +828,7 @@ class PlayerCore: NSObject {
       }
       // only set some initial properties for the first file
       if info.justLaunched {
-        if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.isInFullScreen {
+        if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.isInFullScreen && !isInMiniPlayer {
           mainWindow.toggleWindowFullScreen()
         }
         info.justLaunched = false

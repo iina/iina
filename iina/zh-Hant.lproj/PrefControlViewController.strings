@@ -7,11 +7,14 @@
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "6F4-gm-oBg"; */
 "6F4-gm-oBg.title" = "切換至全熒幕";
 
-/* Class = "NSTextFieldCell"; title = "Exact seek is more precise but can cause lag and high CPU usage."; ObjectID = "6FZ-Qm-0k0"; */
+/* Class = "NSTextFieldCell"; title = "Exact seek is more precise but can cause lag and higher CPU usage."; ObjectID = "6FZ-Qm-0k0"; */
 "6FZ-Qm-0k0.title" = "精確查找過大檔案將十分耗費 CPU 並導致卡頓";
 
+/* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "7wy-xt-c8Z"; */
+"7wy-xt-c8Z.title" = "切換全熒幕";
+
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "9qx-ao-oxE"; */
-"9qx-ao-oxE.title" = "隱藏播放控制";
+"9qx-ao-oxE.title" = "隱藏播放控制欄";
 
 /* Class = "NSMenuItem"; title = "Exact seek"; ObjectID = "70P-6t-4jC"; */
 "70P-6t-4jC.title" = "精確查找";
@@ -28,11 +31,17 @@
 /* Class = "NSTextFieldCell"; title = "Double click to:"; ObjectID = "GPH-fM-XHN"; */
 "GPH-fM-XHN.title" = "雙擊滑鼠:";
 
+/* Class = "NSTextFieldCell"; title = "Middle click to:"; ObjectID = "Gyd-Qt-FEo"; */
+"Gyd-Qt-FEo.title" = "滑鼠中鍵:";
+
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
 "Hm3-dh-jgb.title" = "全熒幕";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "K9H-w9-wmT"; */
 "K9H-w9-wmT.title" = "自動";
+
+/* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "M6K-ME-cve"; */
+"M6K-ME-cve.title" = "隱藏播放控制欄";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "NjV-fH-YgN"; */
 "NjV-fH-YgN.title" = "無";
@@ -61,14 +70,26 @@
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "chS-d2-TG1"; */
 "chS-d2-TG1.title" = "無";
 
+/* Class = "NSTextFieldCell"; title = "Force Touch to:"; ObjectID = "dpH-PO-WKt"; */
+"dpH-PO-WKt.title" = "Force Touch:";
+
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "guu-dK-YfL"; */
 "guu-dK-YfL.title" = "無";
+
+/* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "hDh-Lk-FJe"; */
+"hDh-Lk-FJe.title" = "切換全熒幕";
 
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "hIG-5X-2Pm"; */
 "hIG-5X-2Pm.title" = "速度";
 
 /* Class = "NSTextFieldCell"; title = "Scroll vertically to:"; ObjectID = "hNU-dJ-5Cj"; */
 "hNU-dJ-5Cj.title" = "豎直捲動:";
+
+/* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "iFF-Gq-tVx"; */
+"iFF-Gq-tVx.title" = "隱藏播放控制欄";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "jnR-2I-4x4"; */
+"jnR-2I-4x4.title" = "無";
 
 /* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "kEB-gk-wuI"; */
 "kEB-gk-wuI.title" = "點擊左/右鍵時";
@@ -85,6 +106,12 @@
 /* Class = "NSMenuItem"; title = "Fastforward / Rewind"; ObjectID = "q50-Po-JYO"; */
 "q50-Po-JYO.title" = "前進 / 後退";
 
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "unj-zt-RyU"; */
+"unj-zt-RyU.title" = "無";
+
+/* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "uqM-UM-Xvb"; */
+"uqM-UM-Xvb.title" = "暫停 / 繼續";
+
 /* Class = "NSTextFieldCell"; title = "Scroll horizontally to:"; ObjectID = "w1Y-jy-vNc"; */
 "w1Y-jy-vNc.title" = "水平捲動:";
 
@@ -99,3 +126,4 @@
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "無";
+

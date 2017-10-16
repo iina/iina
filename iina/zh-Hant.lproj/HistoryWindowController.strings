@@ -37,8 +37,14 @@
 /* Class = "NSMenu"; title = "Context Menu"; ObjectID = "lR3-1E-Rwr"; */
 "lR3-1E-Rwr.title" = "Context Menu";
 
+/* Class = "NSMenuItem"; title = "Play in New Window"; ObjectID = "mXt-wb-fgT"; */
+"mXt-wb-fgT.title" = "在新視窗中播放";
+
 /* Class = "NSMenuItem"; title = "No Recent Searches"; ObjectID = "ndC-eb-4GZ"; */
 "ndC-eb-4GZ.title" = "無搜尋記錄";
+
+/* Class = "NSMenuItem"; title = "Play"; ObjectID = "oMR-4K-aR2"; */
+"oMR-4K-aR2.title" = "播放";
 
 /* Class = "NSTextFieldCell"; title = "Group by:"; ObjectID = "z6c-c4-dgd"; */
 "z6c-c4-dgd.title" = "瀏覽方式:";
@@ -46,6 +52,3 @@
 /* Class = "NSMenuItem"; title = "Recent Searches"; ObjectID = "zhe-yr-CTO"; */
 "zhe-yr-CTO.title" = "搜尋記錄";
 
-"oMR-4K-aR2.title" = "播放";
-
-"mXt-wb-fgT.title" = "在新視窗中播放";

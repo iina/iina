@@ -1105,7 +1105,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  // MARK: - Window delegate
+  // MARK: - Window delegate: Open / Close
 
   /** A method being called when window open. Pretend to be a window delegate. */
   func windowDidOpen() {
@@ -1162,6 +1162,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
   }
+
+  // MARK: - Window delegate: Full screen
 
   func customWindowsToEnterFullScreen(for window: NSWindow) -> [NSWindow]? {
     return [window]
@@ -1302,6 +1304,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  // MARK: - Window delegate: Size
+
   func windowDidResize(_ notification: Notification) {
     guard let window = window else { return }
 
@@ -1361,6 +1365,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
   }
+
+  // MARK: - Window delegate: Active status
 
   func windowDidBecomeKey(_ notification: Notification) {
     window!.makeFirstResponder(window!)
@@ -1640,9 +1646,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isInInteractiveMode = true
     hideUI()
 
-    // `videoView` doesn't use constraint-based layout in full screen. Therefore we must add constraints first.
     if (isInFullScreen) {
-      let frame = window.aspectRatio.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
+      let aspect: NSSize
+      if window.aspectRatio == .zero {
+        let dsize = player.videoSizeForDisplay
+        aspect = NSSize(width: dsize.0, height: dsize.1)
+      } else {
+        aspect = window.aspectRatio
+      }
+      let frame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
       setConstraintsForVideoView([
         .left: frame.x,
         .right: window.frame.width - frame.maxX,  // `frame.x` should also work

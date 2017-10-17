@@ -111,7 +111,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       player.mpv.setFlag(MPVOption.Window.fullscreen, isInFullScreen)
     }
   }
-  var isEnteringFullScreen: Bool = false
+  var isInFullScreenAnimation: Bool = false
   /** For legacy full screen */
   var windowFrameBeforeEnteringFullScreen: NSRect?
   /** Prevent unexpected behavior when user switchs full screen mode during full screen*/
@@ -445,7 +445,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     cv.autoresizesSubviews = false
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
     videoView.translatesAutoresizingMaskIntoConstraints = false
-    addConstraintsForVideoView()
+    // add constraints
+    ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
+      videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
+      videoViewConstraints[attr]!.isActive = true
+    }
 
     w.setIsVisible(true)
     videoView.videoLayer.display()
@@ -1159,18 +1163,36 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
   }
 
+  func customWindowsToEnterFullScreen(for window: NSWindow) -> [NSWindow]? {
+    return [window]
+  }
+
+  func customWindowsToExitFullScreen(for window: NSWindow) -> [NSWindow]? {
+    return [window]
+  }
+
+  func window(_ window: NSWindow, startCustomAnimationToEnterFullScreenOn screen: NSScreen, withDuration duration: TimeInterval) {
+    windowFrameBeforeEnteringFullScreen = window.frame
+    NSAnimationContext.runAnimationGroup({ context in
+      context.duration = duration
+      window.animator().setFrame(screen.frame, display: true)
+    }, completionHandler: nil)
+
+  }
+
+  func window(_ window: NSWindow, startCustomAnimationToExitFullScreenWithDuration duration: TimeInterval) {
+    NSAnimationContext.runAnimationGroup({ context in
+      context.duration = duration
+      window.animator().setFrame(windowFrameBeforeEnteringFullScreen!, display: true)
+    }, completionHandler: nil)
+
+  }
+
   func windowWillEnterFullScreen(_ notification: Notification) {
     if isInInteractiveMode {
       exitInteractiveMode(immediately: true)
     }
 
-    // If not using legacy full screen, we must do some tricks to avoid awkward animation when entering full screen
-    // (see `windowDidResize(_:)`). Therefore, Auto Layout is required to be disabled here.
-    if !currentFullScreenIsLegacy {
-      removeConstraintsForVideoView()
-    }
-
-    isEnteringFullScreen = true
     // Let mpv decide the correct render region in full screen
     player.mpv.setFlag(MPVOption.Window.keepaspect, true)
 
@@ -1197,6 +1219,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     timePreviewWhenSeek.isHidden = true
     isMouseInSlider = false
 
+    isInFullScreenAnimation = true
     isInFullScreen = true
     
     // Exit PIP if necessary
@@ -1204,14 +1227,23 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       #available(macOS 10.12, *) {
       exitPIP()
     }
+
+    videoView.videoLayer.mpvGLQueue.suspend()
   }
 
   func windowDidEnterFullScreen(_ notification: Notification) {
-    isEnteringFullScreen = false
+    isInFullScreenAnimation = false
+
+    videoView.videoLayer.mpvGLQueue.resume()
+
     // we must block the mpv rendering queue to do the following atomically
     videoView.videoLayer.mpvGLQueue.async {
       DispatchQueue.main.sync {
-        self.videoView.frame = NSRect(x: 0, y: 0, width: self.window!.frame.width, height: self.window!.frame.height)
+        for (_, constraint) in self.videoViewConstraints {
+          constraint.constant = 0
+        }
+        self.videoView.needsLayout = true
+        self.videoView.layoutSubtreeIfNeeded()
         self.videoView.videoLayer.display()
       }
     }
@@ -1221,9 +1253,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isInInteractiveMode {
       exitInteractiveMode(immediately: true)
     }
-
-    // reset `keepaspect`
-    player.mpv.setFlag(MPVOption.Window.keepaspect, false)
 
     // show titleBarView
     if oscPosition == .top {
@@ -1241,16 +1270,29 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isMouseInSlider = false
 
     isInFullScreen = false
+    isInFullScreenAnimation = true
 
-    // set back frame of videoview, but only if not in PIP
-    if pipStatus == .notInPIP {
-      videoView.videoLayer.mpvGLQueue.sync {
-        self.videoView.videoLayer.setNeedsDisplay()
-      }
-    }
+    videoView.videoLayer.mpvGLQueue.suspend()
   }
 
   func windowDidExitFullScreen(_ notification: Notification) {
+    videoView.videoLayer.mpvGLQueue.resume()
+
+    videoView.videoLayer.mpvGLQueue.async {
+      // reset `keepaspect`
+      self.player.mpv.setFlag(MPVOption.Window.keepaspect, true)
+      DispatchQueue.main.sync {
+        for (_, constraint) in self.videoViewConstraints {
+          constraint.constant = 0
+        }
+        self.videoView.needsLayout = true
+        self.videoView.layoutSubtreeIfNeeded()
+        self.videoView.videoLayer.display()
+      }
+    }
+
+    isInFullScreenAnimation = false
+
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()
     }
@@ -1258,33 +1300,37 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if !player.info.isPaused {
       setWindowFloatingOnTop(isOntop)
     }
-    // switch back to constraint-based layout
-    if !currentFullScreenIsLegacy {
-      addConstraintsForVideoView()
-    }
   }
 
   func windowDidResize(_ notification: Notification) {
     guard let window = window else { return }
 
+    // The `videoView` is not updated during full screen animation (unless using a custom one, however it could be
+    // unbearably laggy under current render meahcanism). Thus when entering full screen, we should keep `videoView`'s
+    // aspect ratio. Otherwise, when entered full screen, there will be an awkward animation that looks like
+    // `videoView` "resized" to screen size suddenly when mpv redraws the video content in correct aspect ratio.
+    if isInFullScreenAnimation {
+      let aspect: NSSize
+      let targetFrame: NSRect
+      if isInFullScreen {
+        aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
+        targetFrame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
+      } else {
+        aspect = window.screen!.frame.size
+        targetFrame = aspect.grow(toSize: window.frame.size).centeredRect(in: window.frame)
+      }
+
+      setConstraintsForVideoView([
+        .left: targetFrame.x,
+        .right:  targetFrame.xMax - window.frame.width,
+        .bottom: -targetFrame.y,
+        .top: window.frame.height - targetFrame.yMax
+      ])
+    }
+
     // is paused or very low fps (assume audio file), draw new frame
     if player.info.isPaused || player.currentMediaIsAudio == .isAudio {
       videoView.videoLayer.draw()
-    }
-
-    if (isInFullScreen && pipStatus == .notInPIP) {
-      if isEnteringFullScreen {
-        // The `videoView` is not updated during full screen animation (unless using a custom one, however it could be
-        // unbearably laggy under current render meahcanism). Thus when entering full screen, we should keep `videoView`'s 
-        // aspect ratio. Otherwise, when entered full screen, there will be an awkward animation that looks like
-        // `videoView` "resized" to screen size suddenly when mpv redraws the video content in correct aspect ratio.
-        // `window.frame` is full screen size now
-        let aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
-        videoView.frame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
-      } else {
-        // update videoview size if in full screen, since aspect ratio may changed under certain cases, like split screen
-        videoView.frame = NSRect(x: 0, y: 0, width: window.frame.width, height: window.frame.height)
-      }
     }
 
     // interactive mode
@@ -1329,7 +1375,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
   }
 
-  // MARK: - Control UI
+  // MARK: - UI: Show / Hide
 
   @objc func hideUIAndCursor() {
     // don't hide UI when dragging control bar
@@ -1389,6 +1435,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  // MARK: - UI: Show / Hide Timer
+
   private func updateTimer() {
     destroyTimer()
     createTimer()
@@ -1408,6 +1456,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     hideControlTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideUIAndCursor), userInfo: nil, repeats: false)
   }
 
+  // MARK: - UI: Title
+
   func updateTitle() {
     if player.info.isNetworkResource {
       let mediaTitle = player.mpv.getString(MPVProperty.mediaTitle)
@@ -1418,6 +1468,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     addDocIconToFadeableViews()
   }
+
+  // MARK: - UI: OSD
 
   func displayOSD(_ message: OSDMessage) {
     if !player.displayOSD { return }
@@ -1477,6 +1529,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  // MARK: - UI: Side bar
+
   private func showSideBar(viewController: SidebarViewController, type: SideBarViewType) {
     guard !isInInteractiveMode else { return }
 
@@ -1526,6 +1580,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  private func setConstraintsForVideoView(_ constraints: [NSLayoutConstraint.Attribute: CGFloat]) {
+    for (attr, value) in constraints {
+      videoViewConstraints[attr]?.constant = value
+    }
+  }
+
+  // MARK: - UI: "Fadeable" views
+
   private func removeStandardButtonsFromFadeableViews() {
     fadeableViews = fadeableViews.filter { view in
       !standardWindowButtons.contains {
@@ -1560,21 +1622,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  private func addConstraintsForVideoView(_ constants: [NSLayoutConstraint.Attribute: CGFloat] = [:]) {
-    guard let cv = window?.contentView else { return }
-    ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
-      videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal, toItem: cv,
-                                                      attribute: attr, multiplier: 1, constant: constants[attr] ?? 0)
-      videoViewConstraints[attr]!.isActive = true
-    }
-  }
-
-  private func removeConstraintsForVideoView() {
-    for (_, v) in videoViewConstraints {
-      videoView.superview?.removeConstraint(v)
-    }
-    videoViewConstraints.removeAll()
-  }
+  // MARK: - UI: Interactive mode
 
   func enterInteractiveMode(_ mode: InteractiveMode, selectWholeVideoByDefault: Bool = false) {
     // prerequisites
@@ -1595,13 +1643,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // `videoView` doesn't use constraint-based layout in full screen. Therefore we must add constraints first.
     if (isInFullScreen) {
       let frame = window.aspectRatio.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
-      let fsConstants: [NSLayoutConstraint.Attribute: CGFloat] = [
+      setConstraintsForVideoView([
         .left: frame.x,
         .right: window.frame.width - frame.maxX,  // `frame.x` should also work
         .bottom: -frame.y,
         .top: window.frame.height - frame.yMax  // `frame.y` should also work
-      ]
-      addConstraintsForVideoView(fsConstants)
+      ])
       videoView.needsLayout = true
       videoView.layoutSubtreeIfNeeded()
       // force rerender a frame
@@ -1670,12 +1717,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // if exit without animation
     if immediately {
       bottomBarBottomConstraint.constant = -InteractiveModeBottomViewHeight
-      if self.isInFullScreen {
-        self.removeConstraintsForVideoView()
-      } else {
-        ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
-          videoViewConstraints[attr]!.constant = 0
-        }
+      ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
+        videoViewConstraints[attr]!.constant = 0
       }
       self.cropSettingsView?.cropBoxView.removeFromSuperview()
       self.sideBarStatus = .hidden
@@ -1697,9 +1740,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.sideBarStatus = .hidden
       self.bottomView.subviews.removeAll()
       self.bottomView.isHidden = true
-      if self.isInFullScreen {
-        self.removeConstraintsForVideoView()
-      }
       self.showUI()
       then()
     }
@@ -1891,51 +1931,47 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     videoView.videoSize = w.convertToBacking(videoView.frame).size
 
-    if isInFullScreen {
+    var rect: NSRect
+    let needResizeWindow = player.info.justOpenedFile || !Preference.bool(for: .resizeOnlyWhenManuallyOpenFile)
 
-      self.windowDidResize(Notification(name: NSWindow.didResizeNotification))
-
-    } else {
-
-      var rect: NSRect
-      let needResizeWindow = player.info.justOpenedFile || !Preference.bool(for: .resizeOnlyWhenManuallyOpenFile)
-
-      if needResizeWindow {
-        // get videoSize on screen
-        var videoSize = originalVideoSize
-        if Preference.bool(for: .usePhysicalResolution) {
-          videoSize = w.convertFromBacking(
-            NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))).size
-        }
-        // check screen size
-        if let screenSize = NSScreen.main?.visibleFrame.size {
-          videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
-        }
-        // guard min size
-        videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize)
-        // check if have geometry set
-        if let wfg = windowFrameFromGeometry(newSize: videoSize) {
-          rect = wfg
-        } else {
-          rect = w.frame.centeredResize(to: videoSize)
-        }
-        w.setFrame(rect, display: true, animate: true)
-
+    if needResizeWindow {
+      // get videoSize on screen
+      var videoSize = originalVideoSize
+      if Preference.bool(for: .usePhysicalResolution) {
+        videoSize = w.convertFromBacking(
+          NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))).size
+      }
+      // check screen size
+      if let screenSize = NSScreen.main?.visibleFrame.size {
+        videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
+      }
+      // guard min size
+      videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize)
+      // check if have geometry set
+      if let wfg = windowFrameFromGeometry(newSize: videoSize) {
+        rect = wfg
       } else {
-        // user is navigating in playlist. remain same window width.
-        let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
-        let newSize = NSSize(width: w.frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
-        rect = NSRect(origin: w.frame.origin, size: newSize)
-        w.setFrame(rect, display: true, animate: true)
+        rect = w.frame.centeredResize(to: videoSize)
       }
 
+    } else {
+      // user is navigating in playlist. remain same window width.
+      let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
+      let newSize = NSSize(width: w.frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
+      rect = NSRect(origin: w.frame.origin, size: newSize)
+
+    }
+
+    // maybe not a good position, consider putting these at playback-restart
+    player.info.justOpenedFile = false
+    player.info.justStartedFile = false
+
+    if isInFullScreen {
+      windowFrameBeforeEnteringFullScreen = rect
+    } else {
       // animated `setFrame` can be inaccurate!
+      w.setFrame(rect, display: true, animate: true)
       w.setFrame(rect, display: true)
-
-      // maybe not a good position, consider putting these at playback-restart
-      player.info.justOpenedFile = false
-      player.info.justStartedFile = false
-
     }
 
     // generate thumbnails after video loaded if it's the first time

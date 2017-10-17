@@ -1227,10 +1227,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       #available(macOS 10.12, *) {
       exitPIP()
     }
+
+    videoView.videoLayer.mpvGLQueue.suspend()
   }
 
   func windowDidEnterFullScreen(_ notification: Notification) {
     isInFullScreenAnimation = false
+
+    videoView.videoLayer.mpvGLQueue.resume()
 
     // we must block the mpv rendering queue to do the following atomically
     videoView.videoLayer.mpvGLQueue.async {
@@ -1266,14 +1270,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isMouseInSlider = false
 
     isInFullScreen = false
-
     isInFullScreenAnimation = true
+
+    videoView.videoLayer.mpvGLQueue.suspend()
   }
 
   func windowDidExitFullScreen(_ notification: Notification) {
-    // reset `keepaspect`
+    videoView.videoLayer.mpvGLQueue.resume()
+
     videoView.videoLayer.mpvGLQueue.async {
-      self.player.mpv.setFlag(MPVOption.Window.keepaspect, false)
+      // reset `keepaspect`
+      self.player.mpv.setFlag(MPVOption.Window.keepaspect, true)
       DispatchQueue.main.sync {
         for (_, constraint) in self.videoViewConstraints {
           constraint.constant = 0
@@ -1303,8 +1310,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // aspect ratio. Otherwise, when entered full screen, there will be an awkward animation that looks like
     // `videoView` "resized" to screen size suddenly when mpv redraws the video content in correct aspect ratio.
     if isInFullScreenAnimation {
-      let aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
-      let targetFrame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
+      let aspect: NSSize
+      let targetFrame: NSRect
+      if isInFullScreen {
+        aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
+        targetFrame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
+      } else {
+        aspect = window.screen!.frame.size
+        targetFrame = aspect.grow(toSize: window.frame.size).centeredRect(in: window.frame)
+      }
+
       setConstraintsForVideoView([
         .left: targetFrame.x,
         .right:  targetFrame.xMax - window.frame.width,

@@ -1488,6 +1488,7 @@
 				84EB1ED31D2F51D3004FA5A1 /* Frameworks */,
 				84EB1ED41D2F51D3004FA5A1 /* Resources */,
 				84817C991DBDF57C00CC2279 /* Copy Dylibs */,
+				84B1CE561F98CAE300994D63 /* Copy Dylib Symlinks */,
 				84817CE81DBE2E3200CC2279 /* Copy Lua Scripts */,
 				84E745DA1DFDE9C600588DED /* Copy Configs */,
 				8461BA631E423423008BB852 /* Copy Executables */,
@@ -1615,6 +1616,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		84B1CE561F98CAE300994D63 /* Copy Dylib Symlinks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Dylib Symlinks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "echo \"Copy symlinks:\"\n\nfor file in \"${SRCROOT}/deps/lib/\"*.dylib; do\n    if [[ -h \"$file\" ]]; then\n        cp -R $file \"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/$(basename $file)\"\n    fi\ndone";
 		};
 		A0E37C793B5311ABDB5D863A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

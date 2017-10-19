@@ -60,31 +60,6 @@
 		845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB0C61D39462E00C011E0 /* ControlBarView.swift */; };
 		8460FBA91D6497490081841B /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460FBA71D6497490081841B /* PlaylistViewController.swift */; };
 		846121BD1F35FCA500ABB39C /* DraggingDetect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846121BC1F35FCA500ABB39C /* DraggingDetect.swift */; };
-		8461BA471E407E24008BB852 /* libass.9.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA0F1E407DF7008BB852 /* libass.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA481E407E24008BB852 /* libavcodec.57.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA101E407DF7008BB852 /* libavcodec.57.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA491E407E24008BB852 /* libavdevice.57.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA111E407DF7008BB852 /* libavdevice.57.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA4A1E407E24008BB852 /* libavfilter.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA121E407DF7008BB852 /* libavfilter.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA4B1E407E24008BB852 /* libavformat.57.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA131E407DF7008BB852 /* libavformat.57.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA4C1E407E24008BB852 /* libavresample.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA141E407DF7008BB852 /* libavresample.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA4D1E407E24008BB852 /* libavutil.55.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA151E407DF7008BB852 /* libavutil.55.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA4F1E407E24008BB852 /* libfontconfig.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA171E407DF7008BB852 /* libfontconfig.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA501E407E24008BB852 /* libfreetype.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA181E407DF7008BB852 /* libfreetype.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA511E407E24008BB852 /* libfribidi.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA191E407DF7008BB852 /* libfribidi.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA521E407E24008BB852 /* libglib-2.0.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA1A1E407DF7008BB852 /* libglib-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA531E407E24008BB852 /* libharfbuzz.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA1B1E407DF7008BB852 /* libharfbuzz.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA541E407E24008BB852 /* libintl.8.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA1C1E407DF7008BB852 /* libintl.8.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA561E407E24008BB852 /* liblcms2.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA1E1E407DF7008BB852 /* liblcms2.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA571E407E24008BB852 /* liblua.5.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA1F1E407DF7008BB852 /* liblua.5.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA581E407E24008BB852 /* libmp3lame.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA201E407DF7008BB852 /* libmp3lame.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA5A1E407E24008BB852 /* libmpv.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA221E407DF7008BB852 /* libmpv.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA5B1E407E24008BB852 /* libmpv.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA231E407DF7008BB852 /* libmpv.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA5C1E407E24008BB852 /* libpcre.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA241E407DF7008BB852 /* libpcre.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA5D1E407E24008BB852 /* libpng16.16.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA251E407DF7008BB852 /* libpng16.16.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA5E1E407E24008BB852 /* libpostproc.54.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA261E407DF7008BB852 /* libpostproc.54.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA5F1E407E24008BB852 /* libswresample.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA271E407DF7008BB852 /* libswresample.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA601E407E24008BB852 /* libswscale.4.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA281E407DF7008BB852 /* libswscale.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA611E407E24008BB852 /* libuchardet.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA291E407DF7008BB852 /* libuchardet.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8461BA621E407E24008BB852 /* libx264.148.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA2A1E407DF7008BB852 /* libx264.148.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8461BA681E4237C7008BB852 /* youtube-dl in Copy Executables */ = {isa = PBXBuildFile; fileRef = 8461BA671E4237C2008BB852 /* youtube-dl */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */; };
 		8461C5301D462488006E91FF /* VideoTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52F1D462488006E91FF /* VideoTime.swift */; };
@@ -137,23 +112,47 @@
 		84AC62211E87C6CF002D6F92 /* OpenURLAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84AC62231E87C6CF002D6F92 /* OpenURLAccessoryViewController.xib */; };
 		84AE59491E0FD65800771B7E /* MainMenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE59481E0FD65800771B7E /* MainMenuActions.swift */; };
 		84AF03D21E67492C003E3753 /* Contribution.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 84AF03D41E67492C003E3753 /* Contribution.rtf */; };
-		84BC78401EEE7E1A0068BF17 /* libavcodec.57.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8461BA101E407DF7008BB852 /* libavcodec.57.dylib */; };
-		84BC78411EEE7E1A0068BF17 /* libavdevice.57.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8461BA111E407DF7008BB852 /* libavdevice.57.dylib */; };
-		84BC78421EEE7E1A0068BF17 /* libavfilter.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8461BA121E407DF7008BB852 /* libavfilter.6.dylib */; };
-		84BC78431EEE7E1A0068BF17 /* libavformat.57.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8461BA131E407DF7008BB852 /* libavformat.57.dylib */; };
-		84BC78441EEE7E1A0068BF17 /* libavresample.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8461BA141E407DF7008BB852 /* libavresample.3.dylib */; };
-		84BC78451EEE7E1A0068BF17 /* libavutil.55.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8461BA151E407DF7008BB852 /* libavutil.55.dylib */; };
-		84BC78461EEE7EEA0068BF17 /* libswresample.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8461BA271E407DF7008BB852 /* libswresample.2.dylib */; };
-		84BC78471EEE7EEA0068BF17 /* libswscale.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8461BA281E407DF7008BB852 /* libswscale.4.dylib */; };
+		84B1CE301F98BE2A00994D63 /* libavcodec.57.107.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B1CE0A1F98BDEF00994D63 /* libavcodec.57.107.100.dylib */; };
+		84B1CE311F98BE2A00994D63 /* libavdevice.57.10.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B1CDFE1F98BDEE00994D63 /* libavdevice.57.10.100.dylib */; };
+		84B1CE321F98BE2A00994D63 /* libavfilter.6.107.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B1CE0D1F98BDF000994D63 /* libavfilter.6.107.100.dylib */; };
+		84B1CE331F98BE2A00994D63 /* libavformat.57.83.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B1CE131F98BDF000994D63 /* libavformat.57.83.100.dylib */; };
+		84B1CE341F98BE2A00994D63 /* libavresample.3.7.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B1CDFA1F98BDEE00994D63 /* libavresample.3.7.0.dylib */; };
+		84B1CE351F98BE2A00994D63 /* libavutil.55.78.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B1CE061F98BDEF00994D63 /* libavutil.55.78.100.dylib */; };
+		84B1CE361F98BE2A00994D63 /* libmpv.1.25.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B1CE041F98BDEF00994D63 /* libmpv.1.25.0.dylib */; };
+		84B1CE371F98BE2A00994D63 /* libswresample.2.9.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B1CE021F98BDEE00994D63 /* libswresample.2.9.100.dylib */; };
+		84B1CE381F98BE2A00994D63 /* libswscale.4.8.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B1CE001F98BDEE00994D63 /* libswscale.4.8.100.dylib */; };
+		84B1CE391F98BE3C00994D63 /* libass.9.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE0B1F98BDEF00994D63 /* libass.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE3A1F98BE3C00994D63 /* libavcodec.57.107.100.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE0A1F98BDEF00994D63 /* libavcodec.57.107.100.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE3B1F98BE3C00994D63 /* libavdevice.57.10.100.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CDFE1F98BDEE00994D63 /* libavdevice.57.10.100.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE3C1F98BE3C00994D63 /* libavfilter.6.107.100.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE0D1F98BDF000994D63 /* libavfilter.6.107.100.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE3D1F98BE3C00994D63 /* libavformat.57.83.100.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE131F98BDF000994D63 /* libavformat.57.83.100.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE3E1F98BE3C00994D63 /* libavresample.3.7.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CDFA1F98BDEE00994D63 /* libavresample.3.7.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE3F1F98BE3C00994D63 /* libavutil.55.78.100.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE061F98BDEF00994D63 /* libavutil.55.78.100.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE401F98BE3C00994D63 /* libbluray.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE051F98BDEF00994D63 /* libbluray.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE411F98BE3C00994D63 /* libdvdcss.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE0E1F98BDF000994D63 /* libdvdcss.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE421F98BE3C00994D63 /* libdvdnav.4.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE0F1F98BDF000994D63 /* libdvdnav.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE431F98BE3C00994D63 /* libdvdread.4.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CDF81F98BDED00994D63 /* libdvdread.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE441F98BE3C00994D63 /* libfontconfig.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE031F98BDEF00994D63 /* libfontconfig.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE451F98BE3C00994D63 /* libfreetype.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE071F98BDEF00994D63 /* libfreetype.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE461F98BE3C00994D63 /* libfribidi.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE091F98BDEF00994D63 /* libfribidi.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE471F98BE3C00994D63 /* libglib-2.0.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE121F98BDF000994D63 /* libglib-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE481F98BE3C00994D63 /* libgraphite2.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CDFB1F98BDEE00994D63 /* libgraphite2.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE491F98BE3C00994D63 /* libharfbuzz.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE101F98BDF000994D63 /* libharfbuzz.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE4A1F98BE3C00994D63 /* libintl.8.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CDFF1F98BDEE00994D63 /* libintl.8.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE4B1F98BE3C00994D63 /* libjpeg.9.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE081F98BDEF00994D63 /* libjpeg.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE4C1F98BE3C00994D63 /* liblcms2.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE011F98BDEE00994D63 /* liblcms2.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE4D1F98BE3C00994D63 /* liblua.5.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CDFC1F98BDEE00994D63 /* liblua.5.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE4E1F98BE3C00994D63 /* libmpv.1.25.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE041F98BDEF00994D63 /* libmpv.1.25.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE4F1F98BE3C00994D63 /* libpcre.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CDFD1F98BDEE00994D63 /* libpcre.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE501F98BE3C00994D63 /* libpng16.16.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE0C1F98BDF000994D63 /* libpng16.16.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE511F98BE3C00994D63 /* libpostproc.54.7.100.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE111F98BDF000994D63 /* libpostproc.54.7.100.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE521F98BE3C00994D63 /* libswresample.2.9.100.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE021F98BDEE00994D63 /* libswresample.2.9.100.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE531F98BE3C00994D63 /* libswscale.4.8.100.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CE001F98BDEE00994D63 /* libswscale.4.8.100.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84B1CE541F98BE3C00994D63 /* libuchardet.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84B1CDF91F98BDED00994D63 /* libuchardet.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84BEEC3F1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEEC3D1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift */; };
 		84BEEC421DFEE46200F945CA /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEEC411DFEE46200F945CA /* StreamReader.swift */; };
 		84C3AB8B1E7BF22300FEFB7A /* MPVCommandFormat.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84C3AB8A1E7BF22300FEFB7A /* MPVCommandFormat.strings */; };
-		84C3BC5F1F7CEB6E008C0F95 /* libmpv.1.25.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C3BC5D1F7CEB41008C0F95 /* libmpv.1.25.0.dylib */; };
-		84C3BC601F7CEB7F008C0F95 /* libjpeg.9.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84C3BC5E1F7CEB4B008C0F95 /* libjpeg.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		84C3BC611F7CEB7F008C0F95 /* libmpv.1.25.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84C3BC5D1F7CEB41008C0F95 /* libmpv.1.25.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		84C3BC631F7CF805008C0F95 /* libgraphite2.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84C3BC621F7CF7F8008C0F95 /* libgraphite2.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84C644601E92BA2700B1410B /* TimeLabelOverflowedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */; };
-		84C6D3601EAF69DC009BF721 /* libbluray.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8461BA161E407DF7008BB852 /* libbluray.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84C6D3621EAF8D63009BF721 /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6D3611EAF8D63009BF721 /* HistoryController.swift */; };
 		84C6D3641EB276E9009BF721 /* PlaybackHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6D3631EB276E9009BF721 /* PlaybackHistory.swift */; };
 		84C6D3671EB2A427009BF721 /* HistoryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6D3651EB2A427009BF721 /* HistoryWindowController.swift */; };
@@ -208,35 +207,34 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				84C3BC631F7CF805008C0F95 /* libgraphite2.3.dylib in Copy Dylibs */,
-				84C3BC601F7CEB7F008C0F95 /* libjpeg.9.dylib in Copy Dylibs */,
-				84C3BC611F7CEB7F008C0F95 /* libmpv.1.25.0.dylib in Copy Dylibs */,
-				84C6D3601EAF69DC009BF721 /* libbluray.2.dylib in Copy Dylibs */,
-				8461BA471E407E24008BB852 /* libass.9.dylib in Copy Dylibs */,
-				8461BA481E407E24008BB852 /* libavcodec.57.dylib in Copy Dylibs */,
-				8461BA491E407E24008BB852 /* libavdevice.57.dylib in Copy Dylibs */,
-				8461BA4A1E407E24008BB852 /* libavfilter.6.dylib in Copy Dylibs */,
-				8461BA4B1E407E24008BB852 /* libavformat.57.dylib in Copy Dylibs */,
-				8461BA4C1E407E24008BB852 /* libavresample.3.dylib in Copy Dylibs */,
-				8461BA4D1E407E24008BB852 /* libavutil.55.dylib in Copy Dylibs */,
-				8461BA4F1E407E24008BB852 /* libfontconfig.1.dylib in Copy Dylibs */,
-				8461BA501E407E24008BB852 /* libfreetype.6.dylib in Copy Dylibs */,
-				8461BA511E407E24008BB852 /* libfribidi.0.dylib in Copy Dylibs */,
-				8461BA521E407E24008BB852 /* libglib-2.0.0.dylib in Copy Dylibs */,
-				8461BA531E407E24008BB852 /* libharfbuzz.0.dylib in Copy Dylibs */,
-				8461BA541E407E24008BB852 /* libintl.8.dylib in Copy Dylibs */,
-				8461BA561E407E24008BB852 /* liblcms2.2.dylib in Copy Dylibs */,
-				8461BA571E407E24008BB852 /* liblua.5.2.dylib in Copy Dylibs */,
-				8461BA581E407E24008BB852 /* libmp3lame.0.dylib in Copy Dylibs */,
-				8461BA5A1E407E24008BB852 /* libmpv.1.dylib in Copy Dylibs */,
-				8461BA5B1E407E24008BB852 /* libmpv.dylib in Copy Dylibs */,
-				8461BA5C1E407E24008BB852 /* libpcre.1.dylib in Copy Dylibs */,
-				8461BA5D1E407E24008BB852 /* libpng16.16.dylib in Copy Dylibs */,
-				8461BA5E1E407E24008BB852 /* libpostproc.54.dylib in Copy Dylibs */,
-				8461BA5F1E407E24008BB852 /* libswresample.2.dylib in Copy Dylibs */,
-				8461BA601E407E24008BB852 /* libswscale.4.dylib in Copy Dylibs */,
-				8461BA611E407E24008BB852 /* libuchardet.0.dylib in Copy Dylibs */,
-				8461BA621E407E24008BB852 /* libx264.148.dylib in Copy Dylibs */,
+				84B1CE391F98BE3C00994D63 /* libass.9.dylib in Copy Dylibs */,
+				84B1CE3A1F98BE3C00994D63 /* libavcodec.57.107.100.dylib in Copy Dylibs */,
+				84B1CE3B1F98BE3C00994D63 /* libavdevice.57.10.100.dylib in Copy Dylibs */,
+				84B1CE3C1F98BE3C00994D63 /* libavfilter.6.107.100.dylib in Copy Dylibs */,
+				84B1CE3D1F98BE3C00994D63 /* libavformat.57.83.100.dylib in Copy Dylibs */,
+				84B1CE3E1F98BE3C00994D63 /* libavresample.3.7.0.dylib in Copy Dylibs */,
+				84B1CE3F1F98BE3C00994D63 /* libavutil.55.78.100.dylib in Copy Dylibs */,
+				84B1CE401F98BE3C00994D63 /* libbluray.2.dylib in Copy Dylibs */,
+				84B1CE411F98BE3C00994D63 /* libdvdcss.2.dylib in Copy Dylibs */,
+				84B1CE421F98BE3C00994D63 /* libdvdnav.4.dylib in Copy Dylibs */,
+				84B1CE431F98BE3C00994D63 /* libdvdread.4.dylib in Copy Dylibs */,
+				84B1CE441F98BE3C00994D63 /* libfontconfig.1.dylib in Copy Dylibs */,
+				84B1CE451F98BE3C00994D63 /* libfreetype.6.dylib in Copy Dylibs */,
+				84B1CE461F98BE3C00994D63 /* libfribidi.0.dylib in Copy Dylibs */,
+				84B1CE471F98BE3C00994D63 /* libglib-2.0.0.dylib in Copy Dylibs */,
+				84B1CE481F98BE3C00994D63 /* libgraphite2.3.dylib in Copy Dylibs */,
+				84B1CE491F98BE3C00994D63 /* libharfbuzz.0.dylib in Copy Dylibs */,
+				84B1CE4A1F98BE3C00994D63 /* libintl.8.dylib in Copy Dylibs */,
+				84B1CE4B1F98BE3C00994D63 /* libjpeg.9.dylib in Copy Dylibs */,
+				84B1CE4C1F98BE3C00994D63 /* liblcms2.2.dylib in Copy Dylibs */,
+				84B1CE4D1F98BE3C00994D63 /* liblua.5.2.dylib in Copy Dylibs */,
+				84B1CE4E1F98BE3C00994D63 /* libmpv.1.25.0.dylib in Copy Dylibs */,
+				84B1CE4F1F98BE3C00994D63 /* libpcre.1.dylib in Copy Dylibs */,
+				84B1CE501F98BE3C00994D63 /* libpng16.16.dylib in Copy Dylibs */,
+				84B1CE511F98BE3C00994D63 /* libpostproc.54.7.100.dylib in Copy Dylibs */,
+				84B1CE521F98BE3C00994D63 /* libswresample.2.9.100.dylib in Copy Dylibs */,
+				84B1CE531F98BE3C00994D63 /* libswscale.4.8.100.dylib in Copy Dylibs */,
+				84B1CE541F98BE3C00994D63 /* libuchardet.0.dylib in Copy Dylibs */,
 			);
 			name = "Copy Dylibs";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,32 +491,6 @@
 		845FB0C61D39462E00C011E0 /* ControlBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
 		8460FBA71D6497490081841B /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		846121BC1F35FCA500ABB39C /* DraggingDetect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggingDetect.swift; sourceTree = "<group>"; };
-		8461BA0F1E407DF7008BB852 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = deps/lib/libass.9.dylib; sourceTree = "<group>"; };
-		8461BA101E407DF7008BB852 /* libavcodec.57.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.57.dylib; path = deps/lib/libavcodec.57.dylib; sourceTree = "<group>"; };
-		8461BA111E407DF7008BB852 /* libavdevice.57.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavdevice.57.dylib; path = deps/lib/libavdevice.57.dylib; sourceTree = "<group>"; };
-		8461BA121E407DF7008BB852 /* libavfilter.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavfilter.6.dylib; path = deps/lib/libavfilter.6.dylib; sourceTree = "<group>"; };
-		8461BA131E407DF7008BB852 /* libavformat.57.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.57.dylib; path = deps/lib/libavformat.57.dylib; sourceTree = "<group>"; };
-		8461BA141E407DF7008BB852 /* libavresample.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavresample.3.dylib; path = deps/lib/libavresample.3.dylib; sourceTree = "<group>"; };
-		8461BA151E407DF7008BB852 /* libavutil.55.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.55.dylib; path = deps/lib/libavutil.55.dylib; sourceTree = "<group>"; };
-		8461BA161E407DF7008BB852 /* libbluray.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbluray.2.dylib; path = deps/lib/libbluray.2.dylib; sourceTree = "<group>"; };
-		8461BA171E407DF7008BB852 /* libfontconfig.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfontconfig.1.dylib; path = deps/lib/libfontconfig.1.dylib; sourceTree = "<group>"; };
-		8461BA181E407DF7008BB852 /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = deps/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
-		8461BA191E407DF7008BB852 /* libfribidi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfribidi.0.dylib; path = deps/lib/libfribidi.0.dylib; sourceTree = "<group>"; };
-		8461BA1A1E407DF7008BB852 /* libglib-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libglib-2.0.0.dylib"; path = "deps/lib/libglib-2.0.0.dylib"; sourceTree = "<group>"; };
-		8461BA1B1E407DF7008BB852 /* libharfbuzz.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libharfbuzz.0.dylib; path = deps/lib/libharfbuzz.0.dylib; sourceTree = "<group>"; };
-		8461BA1C1E407DF7008BB852 /* libintl.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libintl.8.dylib; path = deps/lib/libintl.8.dylib; sourceTree = "<group>"; };
-		8461BA1E1E407DF7008BB852 /* liblcms2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblcms2.2.dylib; path = deps/lib/liblcms2.2.dylib; sourceTree = "<group>"; };
-		8461BA1F1E407DF7008BB852 /* liblua.5.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblua.5.2.dylib; path = deps/lib/liblua.5.2.dylib; sourceTree = "<group>"; };
-		8461BA201E407DF7008BB852 /* libmp3lame.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmp3lame.0.dylib; path = deps/lib/libmp3lame.0.dylib; sourceTree = "<group>"; };
-		8461BA221E407DF7008BB852 /* libmpv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.dylib; path = deps/lib/libmpv.1.dylib; sourceTree = "<group>"; };
-		8461BA231E407DF7008BB852 /* libmpv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.dylib; path = deps/lib/libmpv.dylib; sourceTree = "<group>"; };
-		8461BA241E407DF7008BB852 /* libpcre.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcre.1.dylib; path = deps/lib/libpcre.1.dylib; sourceTree = "<group>"; };
-		8461BA251E407DF7008BB852 /* libpng16.16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.16.dylib; path = deps/lib/libpng16.16.dylib; sourceTree = "<group>"; };
-		8461BA261E407DF7008BB852 /* libpostproc.54.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpostproc.54.dylib; path = deps/lib/libpostproc.54.dylib; sourceTree = "<group>"; };
-		8461BA271E407DF7008BB852 /* libswresample.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswresample.2.dylib; path = deps/lib/libswresample.2.dylib; sourceTree = "<group>"; };
-		8461BA281E407DF7008BB852 /* libswscale.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.4.dylib; path = deps/lib/libswscale.4.dylib; sourceTree = "<group>"; };
-		8461BA291E407DF7008BB852 /* libuchardet.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuchardet.0.dylib; path = deps/lib/libuchardet.0.dylib; sourceTree = "<group>"; };
-		8461BA2A1E407DF7008BB852 /* libx264.148.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libx264.148.dylib; path = deps/lib/libx264.148.dylib; sourceTree = "<group>"; };
 		8461BA671E4237C2008BB852 /* youtube-dl */ = {isa = PBXFileReference; lastKnownFileType = file; name = "youtube-dl"; path = "deps/executable/youtube-dl"; sourceTree = SOURCE_ROOT; };
 		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
 		8461C52F1D462488006E91FF /* VideoTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTime.swift; sourceTree = "<group>"; };
@@ -600,6 +572,34 @@
 		84AF03CE1E6725A2003E3753 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/AboutWindowController.strings; sourceTree = "<group>"; };
 		84AF03CF1E6725A2003E3753 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
 		84AF03D51E674930003E3753 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Contribution.rtf"; sourceTree = "<group>"; };
+		84B1CDF81F98BDED00994D63 /* libdvdread.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdvdread.4.dylib; path = deps/lib/libdvdread.4.dylib; sourceTree = "<group>"; };
+		84B1CDF91F98BDED00994D63 /* libuchardet.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuchardet.0.dylib; path = deps/lib/libuchardet.0.dylib; sourceTree = "<group>"; };
+		84B1CDFA1F98BDEE00994D63 /* libavresample.3.7.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavresample.3.7.0.dylib; path = deps/lib/libavresample.3.7.0.dylib; sourceTree = "<group>"; };
+		84B1CDFB1F98BDEE00994D63 /* libgraphite2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgraphite2.3.dylib; path = deps/lib/libgraphite2.3.dylib; sourceTree = "<group>"; };
+		84B1CDFC1F98BDEE00994D63 /* liblua.5.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblua.5.2.dylib; path = deps/lib/liblua.5.2.dylib; sourceTree = "<group>"; };
+		84B1CDFD1F98BDEE00994D63 /* libpcre.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcre.1.dylib; path = deps/lib/libpcre.1.dylib; sourceTree = "<group>"; };
+		84B1CDFE1F98BDEE00994D63 /* libavdevice.57.10.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavdevice.57.10.100.dylib; path = deps/lib/libavdevice.57.10.100.dylib; sourceTree = "<group>"; };
+		84B1CDFF1F98BDEE00994D63 /* libintl.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libintl.8.dylib; path = deps/lib/libintl.8.dylib; sourceTree = "<group>"; };
+		84B1CE001F98BDEE00994D63 /* libswscale.4.8.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.4.8.100.dylib; path = deps/lib/libswscale.4.8.100.dylib; sourceTree = "<group>"; };
+		84B1CE011F98BDEE00994D63 /* liblcms2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblcms2.2.dylib; path = deps/lib/liblcms2.2.dylib; sourceTree = "<group>"; };
+		84B1CE021F98BDEE00994D63 /* libswresample.2.9.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswresample.2.9.100.dylib; path = deps/lib/libswresample.2.9.100.dylib; sourceTree = "<group>"; };
+		84B1CE031F98BDEF00994D63 /* libfontconfig.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfontconfig.1.dylib; path = deps/lib/libfontconfig.1.dylib; sourceTree = "<group>"; };
+		84B1CE041F98BDEF00994D63 /* libmpv.1.25.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.25.0.dylib; path = deps/lib/libmpv.1.25.0.dylib; sourceTree = "<group>"; };
+		84B1CE051F98BDEF00994D63 /* libbluray.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbluray.2.dylib; path = deps/lib/libbluray.2.dylib; sourceTree = "<group>"; };
+		84B1CE061F98BDEF00994D63 /* libavutil.55.78.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.55.78.100.dylib; path = deps/lib/libavutil.55.78.100.dylib; sourceTree = "<group>"; };
+		84B1CE071F98BDEF00994D63 /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = deps/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
+		84B1CE081F98BDEF00994D63 /* libjpeg.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjpeg.9.dylib; path = deps/lib/libjpeg.9.dylib; sourceTree = "<group>"; };
+		84B1CE091F98BDEF00994D63 /* libfribidi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfribidi.0.dylib; path = deps/lib/libfribidi.0.dylib; sourceTree = "<group>"; };
+		84B1CE0A1F98BDEF00994D63 /* libavcodec.57.107.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.57.107.100.dylib; path = deps/lib/libavcodec.57.107.100.dylib; sourceTree = "<group>"; };
+		84B1CE0B1F98BDEF00994D63 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = deps/lib/libass.9.dylib; sourceTree = "<group>"; };
+		84B1CE0C1F98BDF000994D63 /* libpng16.16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.16.dylib; path = deps/lib/libpng16.16.dylib; sourceTree = "<group>"; };
+		84B1CE0D1F98BDF000994D63 /* libavfilter.6.107.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavfilter.6.107.100.dylib; path = deps/lib/libavfilter.6.107.100.dylib; sourceTree = "<group>"; };
+		84B1CE0E1F98BDF000994D63 /* libdvdcss.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdvdcss.2.dylib; path = deps/lib/libdvdcss.2.dylib; sourceTree = "<group>"; };
+		84B1CE0F1F98BDF000994D63 /* libdvdnav.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdvdnav.4.dylib; path = deps/lib/libdvdnav.4.dylib; sourceTree = "<group>"; };
+		84B1CE101F98BDF000994D63 /* libharfbuzz.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libharfbuzz.0.dylib; path = deps/lib/libharfbuzz.0.dylib; sourceTree = "<group>"; };
+		84B1CE111F98BDF000994D63 /* libpostproc.54.7.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpostproc.54.7.100.dylib; path = deps/lib/libpostproc.54.7.100.dylib; sourceTree = "<group>"; };
+		84B1CE121F98BDF000994D63 /* libglib-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libglib-2.0.0.dylib"; path = "deps/lib/libglib-2.0.0.dylib"; sourceTree = "<group>"; };
+		84B1CE131F98BDF000994D63 /* libavformat.57.83.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.57.83.100.dylib; path = deps/lib/libavformat.57.83.100.dylib; sourceTree = "<group>"; };
 		84BC784C1EEECBE30068BF17 /* avcodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avcodec.h; sourceTree = "<group>"; };
 		84BC784D1EEECBE30068BF17 /* avdct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avdct.h; sourceTree = "<group>"; };
 		84BC784E1EEECBE30068BF17 /* avfft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avfft.h; sourceTree = "<group>"; };
@@ -752,9 +752,6 @@
 		84C21A891F8996F000AD5B64 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		84C21A8A1F8996F000AD5B64 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		84C3AB8A1E7BF22300FEFB7A /* MPVCommandFormat.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = MPVCommandFormat.strings; sourceTree = "<group>"; };
-		84C3BC5D1F7CEB41008C0F95 /* libmpv.1.25.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.25.0.dylib; path = deps/lib/libmpv.1.25.0.dylib; sourceTree = "<group>"; };
-		84C3BC5E1F7CEB4B008C0F95 /* libjpeg.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjpeg.9.dylib; path = deps/lib/libjpeg.9.dylib; sourceTree = "<group>"; };
-		84C3BC621F7CF7F8008C0F95 /* libgraphite2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgraphite2.3.dylib; path = deps/lib/libgraphite2.3.dylib; sourceTree = "<group>"; };
 		84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabelOverflowedView.swift; sourceTree = "<group>"; };
 		84C6D3611EAF8D63009BF721 /* HistoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
 		84C6D3631EB276E9009BF721 /* PlaybackHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackHistory.swift; sourceTree = "<group>"; };
@@ -918,15 +915,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84C3BC5F1F7CEB6E008C0F95 /* libmpv.1.25.0.dylib in Frameworks */,
-				84BC78461EEE7EEA0068BF17 /* libswresample.2.dylib in Frameworks */,
-				84BC78471EEE7EEA0068BF17 /* libswscale.4.dylib in Frameworks */,
-				84BC78401EEE7E1A0068BF17 /* libavcodec.57.dylib in Frameworks */,
-				84BC78411EEE7E1A0068BF17 /* libavdevice.57.dylib in Frameworks */,
-				84BC78421EEE7E1A0068BF17 /* libavfilter.6.dylib in Frameworks */,
-				84BC78431EEE7E1A0068BF17 /* libavformat.57.dylib in Frameworks */,
-				84BC78441EEE7E1A0068BF17 /* libavresample.3.dylib in Frameworks */,
-				84BC78451EEE7E1A0068BF17 /* libavutil.55.dylib in Frameworks */,
+				84B1CE301F98BE2A00994D63 /* libavcodec.57.107.100.dylib in Frameworks */,
+				84B1CE311F98BE2A00994D63 /* libavdevice.57.10.100.dylib in Frameworks */,
+				84B1CE321F98BE2A00994D63 /* libavfilter.6.107.100.dylib in Frameworks */,
+				84B1CE331F98BE2A00994D63 /* libavformat.57.83.100.dylib in Frameworks */,
+				84B1CE341F98BE2A00994D63 /* libavresample.3.7.0.dylib in Frameworks */,
+				84B1CE351F98BE2A00994D63 /* libavutil.55.78.100.dylib in Frameworks */,
+				84B1CE361F98BE2A00994D63 /* libmpv.1.25.0.dylib in Frameworks */,
+				84B1CE371F98BE2A00994D63 /* libswresample.2.9.100.dylib in Frameworks */,
+				84B1CE381F98BE2A00994D63 /* libswscale.4.8.100.dylib in Frameworks */,
 				496B19921E2968530035AF10 /* PIP.framework in Frameworks */,
 				5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */,
 			);
@@ -1008,36 +1005,35 @@
 		848290731D95978100C3C76C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84B1CE0B1F98BDEF00994D63 /* libass.9.dylib */,
+				84B1CE0A1F98BDEF00994D63 /* libavcodec.57.107.100.dylib */,
+				84B1CDFE1F98BDEE00994D63 /* libavdevice.57.10.100.dylib */,
+				84B1CE0D1F98BDF000994D63 /* libavfilter.6.107.100.dylib */,
+				84B1CE131F98BDF000994D63 /* libavformat.57.83.100.dylib */,
+				84B1CDFA1F98BDEE00994D63 /* libavresample.3.7.0.dylib */,
+				84B1CE061F98BDEF00994D63 /* libavutil.55.78.100.dylib */,
+				84B1CE051F98BDEF00994D63 /* libbluray.2.dylib */,
+				84B1CE0E1F98BDF000994D63 /* libdvdcss.2.dylib */,
+				84B1CE0F1F98BDF000994D63 /* libdvdnav.4.dylib */,
+				84B1CDF81F98BDED00994D63 /* libdvdread.4.dylib */,
+				84B1CE031F98BDEF00994D63 /* libfontconfig.1.dylib */,
+				84B1CE071F98BDEF00994D63 /* libfreetype.6.dylib */,
+				84B1CE091F98BDEF00994D63 /* libfribidi.0.dylib */,
+				84B1CE121F98BDF000994D63 /* libglib-2.0.0.dylib */,
+				84B1CDFB1F98BDEE00994D63 /* libgraphite2.3.dylib */,
+				84B1CE101F98BDF000994D63 /* libharfbuzz.0.dylib */,
+				84B1CDFF1F98BDEE00994D63 /* libintl.8.dylib */,
+				84B1CE081F98BDEF00994D63 /* libjpeg.9.dylib */,
+				84B1CE011F98BDEE00994D63 /* liblcms2.2.dylib */,
+				84B1CDFC1F98BDEE00994D63 /* liblua.5.2.dylib */,
+				84B1CE041F98BDEF00994D63 /* libmpv.1.25.0.dylib */,
+				84B1CDFD1F98BDEE00994D63 /* libpcre.1.dylib */,
+				84B1CE0C1F98BDF000994D63 /* libpng16.16.dylib */,
+				84B1CE111F98BDF000994D63 /* libpostproc.54.7.100.dylib */,
+				84B1CE021F98BDEE00994D63 /* libswresample.2.9.100.dylib */,
+				84B1CE001F98BDEE00994D63 /* libswscale.4.8.100.dylib */,
+				84B1CDF91F98BDED00994D63 /* libuchardet.0.dylib */,
 				845E2F491E76CFC2002C6588 /* libz.tbd */,
-				8461BA0F1E407DF7008BB852 /* libass.9.dylib */,
-				8461BA101E407DF7008BB852 /* libavcodec.57.dylib */,
-				8461BA111E407DF7008BB852 /* libavdevice.57.dylib */,
-				8461BA121E407DF7008BB852 /* libavfilter.6.dylib */,
-				8461BA131E407DF7008BB852 /* libavformat.57.dylib */,
-				8461BA141E407DF7008BB852 /* libavresample.3.dylib */,
-				8461BA151E407DF7008BB852 /* libavutil.55.dylib */,
-				8461BA161E407DF7008BB852 /* libbluray.2.dylib */,
-				8461BA171E407DF7008BB852 /* libfontconfig.1.dylib */,
-				8461BA181E407DF7008BB852 /* libfreetype.6.dylib */,
-				8461BA191E407DF7008BB852 /* libfribidi.0.dylib */,
-				8461BA1A1E407DF7008BB852 /* libglib-2.0.0.dylib */,
-				84C3BC621F7CF7F8008C0F95 /* libgraphite2.3.dylib */,
-				8461BA1B1E407DF7008BB852 /* libharfbuzz.0.dylib */,
-				8461BA1C1E407DF7008BB852 /* libintl.8.dylib */,
-				84C3BC5E1F7CEB4B008C0F95 /* libjpeg.9.dylib */,
-				8461BA1E1E407DF7008BB852 /* liblcms2.2.dylib */,
-				8461BA1F1E407DF7008BB852 /* liblua.5.2.dylib */,
-				8461BA201E407DF7008BB852 /* libmp3lame.0.dylib */,
-				84C3BC5D1F7CEB41008C0F95 /* libmpv.1.25.0.dylib */,
-				8461BA221E407DF7008BB852 /* libmpv.1.dylib */,
-				8461BA231E407DF7008BB852 /* libmpv.dylib */,
-				8461BA241E407DF7008BB852 /* libpcre.1.dylib */,
-				8461BA251E407DF7008BB852 /* libpng16.16.dylib */,
-				8461BA261E407DF7008BB852 /* libpostproc.54.dylib */,
-				8461BA271E407DF7008BB852 /* libswresample.2.dylib */,
-				8461BA281E407DF7008BB852 /* libswscale.4.dylib */,
-				8461BA291E407DF7008BB852 /* libuchardet.0.dylib */,
-				8461BA2A1E407DF7008BB852 /* libx264.148.dylib */,
 				496B19911E2968530035AF10 /* PIP.framework */,
 				867483705008F086E07B0A6B /* Pods_iina.framework */,
 			);

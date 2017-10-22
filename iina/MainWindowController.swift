@@ -519,16 +519,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
       }
     }
-    notificationCenter(NSWorkspace.shared.notificationCenter, addObserverfor: NSWorkspace.activeSpaceDidChangeNotification) { [unowned self] _ in
-      if self.isInFullScreen && Preference.bool(for: .blackOutMonitor) {
-        if self.window?.isOnActiveSpace ?? false {
-          self.removeBlackWindow()
-          self.blackOutOtherMonitors()
-        } else {
-          self.removeBlackWindow()
-        }
-      }
-    }
 
   }
 
@@ -1249,6 +1239,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         self.videoView.videoLayer.display()
       }
     }
+
+    if Preference.bool(for: .blackOutMonitor) {
+      blackOutOtherMonitors()
+    }
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
@@ -1374,10 +1368,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidBecomeMain(_ notification: Notification) {
     PlayerCore.lastActive = player
+    if isInFullScreen && Preference.bool(for: .blackOutMonitor) {
+      blackOutOtherMonitors()
+    }
     NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
   }
 
   func windowDidResignMain(_ notification: Notification) {
+    if Preference.bool(for: .blackOutMonitor) {
+      removeBlackWindow()
+    }
     NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
   }
 
@@ -2044,6 +2044,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   private func removeBlackWindow() {
+    for window in blackWindows {
+      window.orderOut(self)
+    }
     blackWindows = []
   }
 

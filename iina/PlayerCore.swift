@@ -934,7 +934,8 @@ class PlayerCore: NSObject {
 
     case .time:
       let time = mpv.getDouble(MPVProperty.timePos)
-      info.videoPosition = VideoTime(time)
+      info.videoPosition?.second = time
+      info.constrainVideoPosition()
       DispatchQueue.main.async {
         if self.isInMiniPlayer {
           self.miniPlayer.updatePlayTime(withDuration: false, andProgressBar: true)
@@ -945,7 +946,8 @@ class PlayerCore: NSObject {
 
     case .timeAndCache:
       let time = mpv.getDouble(MPVProperty.timePos)
-      info.videoPosition = VideoTime(time)
+      info.videoPosition?.second = time
+      info.constrainVideoPosition()
       info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)
       info.cacheSize = mpv.getInt(MPVProperty.cacheSize)
       info.cacheUsed = mpv.getInt(MPVProperty.cacheUsed)

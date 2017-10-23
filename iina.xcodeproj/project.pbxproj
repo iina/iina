@@ -185,6 +185,7 @@
 		84FBCB381EEACDDD0076C77C /* FFmpegController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FBCB371EEACDDD0076C77C /* FFmpegController.m */; };
 		84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */; };
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
+		B72199F31F9A755800E2E774 /* MiniPlayerWindowTouchBarSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72199F21F9A755800E2E774 /* MiniPlayerWindowTouchBarSupport.swift */; };
 		C75540751E7886FE00C13D4A /* SubSelectWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C75540771E7886FE00C13D4A /* SubSelectWindowController.xib */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
@@ -827,6 +828,7 @@
 		B3B24B621E831068008393CE /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/SubSelectWindowController.strings; sourceTree = "<group>"; };
 		B3D578841EBCE6B200757AAA /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B3DB9C081E82CE2B00CFB888 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = it; path = it.lproj/Contribution.rtf; sourceTree = "<group>"; };
+		B72199F21F9A755800E2E774 /* MiniPlayerWindowTouchBarSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerWindowTouchBarSupport.swift; sourceTree = "<group>"; };
 		C70BC05C1E511D1000D8CB79 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		C7513B4A1F61C05D00C14561 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		C7513B4C1F61C5A300C14561 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
@@ -1082,6 +1084,7 @@
 				849581EF1F02728700D3B359 /* InitialWindowController.swift */,
 				849581F51F03D55A00D3B359 /* InitialWindowController.xib */,
 				84A09A0C1F2DF596000FF343 /* MiniPlayerWindowController.swift */,
+				B72199F21F9A755800E2E774 /* MiniPlayerWindowTouchBarSupport.swift */,
 				84A09A0D1F2DF596000FF343 /* MiniPlayerWindowController.xib */,
 				84D0FB7B1F5E510C00C6A6A7 /* Interactive Mode */,
 				84D377691D74163B007F7396 /* Video */,
@@ -1726,6 +1729,7 @@
 				84AE59491E0FD65800771B7E /* MainMenuActions.swift in Sources */,
 				84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */,
 				845040401E0ACADD0079C194 /* MPVNode.swift in Sources */,
+				B72199F31F9A755800E2E774 /* MiniPlayerWindowTouchBarSupport.swift in Sources */,
 				84795C3A1E083EE30059A648 /* PrefControlViewController.swift in Sources */,
 				8488D6DF1E11791300D5B952 /* PrefCodecViewController.swift in Sources */,
 				8487BEC11D744FA800FD17B0 /* FlippedView.swift in Sources */,

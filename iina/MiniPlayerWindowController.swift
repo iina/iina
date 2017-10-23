@@ -37,6 +37,10 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var playSlider: NSSlider!
   @IBOutlet weak var volumeSlider: NSSlider!
   @IBOutlet weak var volumeLabel: NSTextField!
+  
+  // touch bar views
+  weak var touchBarPlayPauseBtn: NSButton?
+  weak var touchBarCurrentPosLabel: DurationDisplayTextField?
 
   var isOntop = false
   var isPlaylistVisible = false
@@ -164,6 +168,10 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
     rightLabel.updateText(with: duration, given: pos)
+    
+    // update touch bar label
+    touchBarCurrentPosLabel?.updateText(with: duration, given: pos)
+    
     if andProgressBar {
       playSlider.doubleValue = percentage
     }

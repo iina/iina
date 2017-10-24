@@ -1242,7 +1242,8 @@ class PlayerCore: NSObject {
 
 extension PlayerCore: FFmpegControllerDelegate {
 
-  func didUpdatedThumbnails(_ thumbnails: [FFThumbnail]?, withProgress progress: Int) {
+  func didUpdate(_ thumbnails: [FFThumbnail]?, forFile filename: String, withProgress progress: Int) {
+    guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
     if let thumbnails = thumbnails {
       info.thumbnails.append(contentsOf: thumbnails)
     }
@@ -1252,7 +1253,8 @@ extension PlayerCore: FFmpegControllerDelegate {
     }
   }
 
-  func didGeneratedThumbnails(_ thumbnails: [FFThumbnail], succeeded: Bool) {
+  func didGenerate(_ thumbnails: [FFThumbnail], forFile filename: String, succeeded: Bool) {
+    guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
     if succeeded {
       info.thumbnails = thumbnails
       info.thumbnailsReady = true

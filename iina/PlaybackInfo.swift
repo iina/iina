@@ -38,15 +38,14 @@ class PlaybackInfo {
 
   var rotation: Int = 0
 
-  var videoPosition: VideoTime? {
-    didSet {
-      guard let duration = videoDuration else { return }
-      if videoPosition!.second < 0 { videoPosition!.second = 0 }
-      if videoPosition!.second > duration.second { videoPosition!.second = duration.second }
-    }
-  }
-
+  var videoPosition: VideoTime?
   var videoDuration: VideoTime?
+
+  func constrainVideoPosition() {
+    guard let duration = videoDuration else { return }
+    if videoPosition!.second < 0 { videoPosition!.second = 0 }
+    if videoPosition!.second > duration.second { videoPosition!.second = duration.second }
+  }
 
   var isSeeking: Bool = false
   var isPaused: Bool = false {

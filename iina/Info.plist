@@ -359,6 +359,7 @@
 			<array>
 				<string>m3u8</string>
 				<string>m3u</string>
+				<string>pls</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>doc_list.icns</string>
@@ -385,7 +386,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.13</string>
+	<string>0.0.14.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -400,7 +401,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>44</string>
+	<string>55</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.video</string>
 	<key>LSMinimumSystemVersion</key>

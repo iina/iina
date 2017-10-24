@@ -21,7 +21,8 @@ extension PlayerCore {
     guard !urls.isEmpty else { return 0 }
 
     // handle BD folders and m3u / m3u8 files first
-    if urls.count == 1 && (isBDFolder(urls[0]) || ["m3u", "m3u8"].contains(urls[0].absoluteString.lowercasedPathExtension)) {
+    if urls.count == 1 && (isBDFolder(urls[0]) ||
+       Utility.playlistFileExt.contains(urls[0].absoluteString.lowercasedPathExtension)) {
       info.shouldAutoLoadFiles = false
       openURL(urls[0])
       return nil
@@ -69,7 +70,7 @@ extension PlayerCore {
         guard let dirEnumerator = FileManager.default.enumerator(atPath: path) else { return false }
         while let fileName = dirEnumerator.nextObject() as? String {
           // ignore hidden files
-          guard !fileName.hasSuffix(".") else { continue }
+          guard !fileName.hasPrefix(".") else { continue }
           // check extension
           if Utility.playableFileExt.contains(fileName.lowercasedPathExtension) {
             return true
@@ -77,7 +78,7 @@ extension PlayerCore {
         }
       } else {
         // is file, check extension
-        if Utility.playableFileExt.contains(path.lowercasedPathExtension) {
+        if !Utility.blacklistExt.contains(path.lowercasedPathExtension) {
           return true
         }
       }
@@ -100,14 +101,14 @@ extension PlayerCore {
         // `enumerator(at:includingPropertiesForKeys:)` doesn't work :(
         guard let dirEnumerator = FileManager.default.enumerator(atPath: url.path) else { return [] }
         while let fileName = dirEnumerator.nextObject() as? String {
-          guard !fileName.hasSuffix(".") else { continue }
+          guard !fileName.hasPrefix(".") else { continue }
           if Utility.playableFileExt.contains(fileName.lowercasedPathExtension) {
             playableFiles.append(url.appendingPathComponent(fileName))
           }
         }
       } else {
         // is file
-        if Utility.playableFileExt.contains(url.pathExtension.lowercased()) {
+        if !Utility.blacklistExt.contains(url.pathExtension.lowercased()) {
           playableFiles.append(url)
         }
       }

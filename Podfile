@@ -1,4 +1,4 @@
-platform :osx, '10.11'
+platform :osx, '10.10'
 
 target 'iina' do
   

@@ -543,7 +543,7 @@ struct Preference {
     Key.showChapterPos.rawValue: false,
     Key.resumeLastPosition.rawValue: true,
     Key.useMediaKeys.rawValue: true,
-    Key.useAppleRemote.rawValue: true,
+    Key.useAppleRemote.rawValue: false,
     Key.alwaysFloatOnTop.rawValue: false,
     Key.blackOutMonitor.rawValue: false,
 

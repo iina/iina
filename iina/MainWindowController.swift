@@ -472,6 +472,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     thumbnailPeekView.isHidden = true
 
     // other initialization
+    cachedScreenCount = NSScreen.screens.count
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
       $0?.state = .active
     }
@@ -512,12 +513,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     notificationCenter(.default, addObserverfor: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
+      let screenCount = NSScreen.screens.count
       if self.isInFullScreen && Preference.bool(for: .blackOutMonitor) {
-        if NSScreen.screens.count != self.cachedScreenCount {
+        if screenCount != self.cachedScreenCount {
           self.removeBlackWindow()
           self.blackOutOtherMonitors()
         }
       }
+      self.cachedScreenCount = screenCount
     }
 
   }
@@ -2025,9 +2028,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func blackOutOtherMonitors() {
-    screens = NSScreen.screens.filter() { $0 != window?.screen }
-
-    cachedScreenCount = screens.count + 1
+    screens = NSScreen.screens.filter { $0 != window?.screen }
 
     blackWindows = []
     

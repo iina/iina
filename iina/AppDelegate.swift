@@ -34,7 +34,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   private var pendingFilesForOpenFile: [String] = []
   /** The timer for `OpenFileRepeatTime` and `application(_:openFile:)`. */
   private var openFileTimer: Timer?
-
+  
+  private var windowShouldOrderFront: NSWindow?
+  
   // Windows
 
   lazy var aboutWindow: AboutWindowController = AboutWindowController()
@@ -131,9 +133,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationWillTerminate(_ aNotification: Notification) {
     // Insert code here to tear down your application
   }
+  
+  func applicationWillBecomeActive(_ notification: Notification) {
 
+  }
+  
+  func applicationDidBecomeActive(_ notification: Notification) {
+    if NSApp.keyWindow == nil {
+      windowShouldOrderFront?.makeKeyAndOrderFront(nil)
+    }
+    windowShouldOrderFront = nil
+  }
+  
+  func applicationWillResignActive(_ notification: Notification) {
+    windowShouldOrderFront = NSApp.keyWindow
+  }
+  
   func applicationDidResignActive(_ notification: Notification) {
-
+    
   }
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

@@ -334,7 +334,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet var fragControlViewMiddleView: NSView!
   @IBOutlet var fragControlViewLeftView: NSView!
   @IBOutlet var fragControlViewRightView: NSView!
-
+  @IBOutlet var fragControlViewSimplifiedView: NSView!
+  
   @IBOutlet weak var rightLabel: DurationDisplayTextField!
   @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var leftArrowLabel: NSTextField!
@@ -675,7 +676,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     controlBarFloating.isDragging = false
 
     // detach all fragment views
-    [fragSliderView, fragControlView, fragToolbarView, fragVolumeView].forEach { $0?.removeFromSuperview() }
+    [fragSliderView, fragControlView, fragControlViewSimplifiedView, fragToolbarView, fragVolumeView].forEach { $0?.removeFromSuperview() }
 
     if isSwitchingToTop {
       if isInFullScreen {
@@ -730,12 +731,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscTopMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       oscTopMainView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
     case .bottom:
+      fallthrough
+    case .always:
       currentControlBar = controlBarBottom
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewRightView)
       oscBottomMainView.addView(fragVolumeView, in: .trailing)
       oscBottomMainView.addView(fragToolbarView, in: .trailing)
-      oscBottomMainView.addView(fragControlView, in: .leading)
+      oscBottomMainView.addView(oscPosition != .always ? fragControlView : fragControlViewSimplifiedView, in: .leading)
       oscBottomMainView.addView(fragSliderView, in: .leading)
       oscBottomMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       oscBottomMainView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
@@ -964,7 +967,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isMouseInWindow = false
       if controlBarFloating.isDragging { return }
       destroyTimer()
-      hideUI()
+      if oscPosition != .always {
+        hideUI()
+      }
     } else if obj == 1 {
       // slider
       isMouseInSlider = false
@@ -1388,7 +1393,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @objc func hideUIAndCursor() {
     // don't hide UI when dragging control bar
-    if controlBarFloating.isDragging { return }
+    if oscPosition == .always || controlBarFloating.isDragging { return }
     hideUI()
     NSCursor.setHiddenUntilMouseMoves(true)
   }
@@ -1762,9 +1767,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** Display time label when mouse over slider */
   private func updateTimeLabel(_ mouseXPos: CGFloat, originalPos: NSPoint) {
-    let timeLabelXPos = playSlider.frame.origin.y + 15
-    timePreviewWhenSeek.frame.origin = NSPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2),
-                                               y: timeLabelXPos + 1)
     let sliderFrame = playSlider.bounds
     let sliderFrameInWindow = playSlider.superview!.convert(playSlider.frame.origin, to: nil)
     var percentage = Double((mouseXPos - 3) / (sliderFrame.width - 6))
@@ -1781,7 +1783,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         thumbnailPeekView.imageView.image = tb.image
         let height = round(120 / thumbnailPeekView.imageView.image!.size.aspect)
         let yPos = (oscPosition == .top || (oscPosition == .floating && sliderFrameInWindow.y + 52 + height >= window!.frame.height)) ?
-          sliderFrameInWindow.y - height : sliderFrameInWindow.y + 32
+          sliderFrameInWindow.y - height : sliderFrameInWindow.y + 32 - 8
         thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
         thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2), y: yPos)
       } else {
@@ -1796,7 +1798,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       Utility.log("Nil material in setMaterial()")
       return
     }
-    guard #available(OSX 10.11, *) else { return }
 
     var appearance: NSAppearance? = nil
     var material: NSVisualEffectView.Material
@@ -1813,7 +1814,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case .ultraDark:
       appearance = NSAppearance(named: .vibrantDark)
-      material = .ultraDark
+      if #available(OSX 10.11, *) {
+        material = .ultraDark
+      } else {
+        material = .dark
+      }
       isDarkTheme = true
 
     case .light:
@@ -1823,7 +1828,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case .mediumLight:
       appearance = NSAppearance(named: .vibrantLight)
-      material = .mediumLight
+      if #available(OSX 10.11, *) {
+        material = .mediumLight
+      } else {
+        material = .light
+      }
       isDarkTheme = false
 
     }
@@ -2145,8 +2154,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
-    touchBarCurrentPosLabel?.updateText(with: duration, given: pos)
-    rightLabel.updateText(with: duration, given: pos)
+    let speed = oscPosition != .always ? 0 : player.info.playSpeed
+    touchBarCurrentPosLabel?.updateText(with: duration, given: pos, and: speed)
+    rightLabel.updateText(with: duration, given: pos, and: speed)
     if andProgressBar {
       playSlider.doubleValue = percentage
       touchBarPlaySlider?.setDoubleValueSafely(percentage)
@@ -2362,10 +2372,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // seek and update time
     let percentage = 100 * sender.doubleValue / sender.maxValue
-    // label
-    timePreviewWhenSeek.frame.origin = CGPoint(
-      x: round(sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2),
-      y: playSlider.frame.origin.y + 16)
     timePreviewWhenSeek.stringValue = (player.info.videoDuration! * percentage * 0.01).stringRepresentation
     player.seek(percent: percentage, forceExact: !followGlobalSeekTypeWhenAdjustSlider)
   }

@@ -179,7 +179,7 @@ extension PlayerCore {
       guard let droppedString = pb.string(forType: .string) else {
         return []
       }
-      return Regex.urlDetect.matches(droppedString) ? .copy : []
+      return Regex.url.matches(droppedString) || Regex.filePath.matches(droppedString) ? .copy : []
     }
     return []
   }
@@ -231,7 +231,7 @@ extension PlayerCore {
       guard let droppedString = pb.string(forType: .string) else {
         return false
       }
-      if Regex.urlDetect.matches(droppedString) {
+      if Regex.url.matches(droppedString) || Regex.filePath.matches(droppedString) {
         openURLString(droppedString)
         return true
       } else {

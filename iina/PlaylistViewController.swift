@@ -601,7 +601,8 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
   @IBOutlet weak var playlistTableView: NSTableView!
 
   lazy var playerCore: PlayerCore = {
-    return (self.playlistTableView.window!.windowController as! MainWindowController).player
+    let windowController = self.playlistTableView.window!.windowController
+    return (windowController as? MainWindowController)?.player ?? (windowController as! MiniPlayerWindowController).player
   }()
 
   var filePath: String = ""

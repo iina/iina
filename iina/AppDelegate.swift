@@ -27,6 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
    Mainly used to distinguish normal launches from others triggered by drag-and-dropping files.
    */
   var openFileCalled = false
+  var shouldIgnoreOpenFile = false
   /** Cached URL when launching from URL scheme. */
   var pendingURL: String?
 
@@ -80,14 +81,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
 
-    // Check arguments
+    // handle arguments
     let arguments = ProcessInfo.processInfo.arguments.dropFirst()
     guard arguments.count > 0 else { return }
+
     var iinaArgs: [String] = []
     var iinaArgFilename = ""
     var dropNextArg = false
+
     for arg in arguments {
-      if dropNextArg { continue }
+      if dropNextArg {
+        dropNextArg = false
+        continue
+      }
       if arg.first == "-" {
         if arg[arg.index(after: arg.startIndex)] == "-" {
           // args starting with --
@@ -97,15 +103,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           dropNextArg = true
         }
       } else {
-        // assume args start with nothing is a filename
+        // assume args starting with nothing is a filename
         iinaArgFilename = arg
       }
     }
+
     commandLineStatus.parseArguments(iinaArgs)
+
+    let (version, build) = Utility.iinaVersion()
+    print("IINA \(version) Build \(build)\n")
+
     guard !iinaArgFilename.isEmpty || commandLineStatus.isStdin else {
-      print("\nNo file specified. If you wish to play from stdin, use --stdin.")
+      print("No file/URL specified.\n")
+      print("You can use all mpv options with --mpv- prefix, e.g. --mpv-volume=20. If you wish to play from stdin, use --stdin.\n")
+      print("Please ignore this message if you are running in a debug environment.\n")
       return
     }
+
+    shouldIgnoreOpenFile = true
     commandLineStatus.isCommandLine = true
     commandLineStatus.filename = iinaArgFilename
   }
@@ -209,8 +224,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       menuController.bindMenuItems()
       isReady = true
     }
+    // if launched from command line, should ignore openFile once
+    if shouldIgnoreOpenFile {
+      shouldIgnoreOpenFile = false
+      return
+    }
     // open pending files
     let urls = pendingFilesForOpenFile.map { URL(fileURLWithPath: $0) }
+
     pendingFilesForOpenFile.removeAll()
     if let openedFileCount = PlayerCore.activeOrNew.openURLs(urls), openedFileCount == 0 {
       Utility.showAlert("nothing_to_open")
@@ -389,7 +410,6 @@ struct CommandLineStatus {
 
   func assignMPVArguments(to playerCore: PlayerCore) {
     for arg in mpvArguments {
-      print("MPV Argument: \(arg)")
       playerCore.mpv.setString(arg.0, arg.1)
     }
   }

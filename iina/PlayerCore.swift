@@ -141,11 +141,18 @@ class PlayerCore: NSObject {
   }
 
   func openURLString(_ str: String) {
-    guard let str = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed),
-      let url = URL(string: str) else {
-        return
+    if str == "-" {
+      openMainWindow(path: str, url: URL(string: "stdin")!, isNetwork: false)
+    } else if str.first == "/" {
+      let url = URL(fileURLWithPath: str)
+      openMainWindow(path: str, url: url, isNetwork: false)
+    } else {
+      guard let str = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed),
+        let url = URL(string: str) else {
+          return
+      }
+      openMainWindow(path: str, url: url, isNetwork: true)
     }
-    openMainWindow(path: str, url: url, isNetwork: true)
   }
 
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {

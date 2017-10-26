@@ -35,6 +35,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   /** The timer for `OpenFileRepeatTime` and `application(_:openFile:)`. */
   private var openFileTimer: Timer?
 
+  private var commandLineStatus = CommandLineStatus()
+
   // Windows
 
   lazy var aboutWindow: AboutWindowController = AboutWindowController()
@@ -77,6 +79,35 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationWillFinishLaunching(_ notification: Notification) {
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
+
+    // Check arguments
+    let arguments = ProcessInfo.processInfo.arguments.dropFirst()
+    guard arguments.count > 0 else { return }
+    var iinaArgs: [String] = []
+    var iinaArgFilename = ""
+    var dropNextArg = false
+    for arg in arguments {
+      if dropNextArg { continue }
+      if arg.first == "-" {
+        if arg[arg.index(after: arg.startIndex)] == "-" {
+          // args starting with --
+          iinaArgs.append(arg)
+        } else {
+          // args starting with -
+          dropNextArg = true
+        }
+      } else {
+        // assume args start with nothing is a filename
+        iinaArgFilename = arg
+      }
+    }
+    commandLineStatus.parseArguments(iinaArgs)
+    guard !iinaArgFilename.isEmpty || commandLineStatus.isStdin else {
+      print("\nNo file specified. If you wish to play from stdin, use --stdin.")
+      return
+    }
+    commandLineStatus.isCommandLine = true
+    commandLineStatus.filename = iinaArgFilename
   }
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -100,8 +131,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       parsePendingURL(url)
     }
 
-    // check whether showing the welcome window after 0.1s
-    Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(self.checkForShowingInitialWindow), userInfo: nil, repeats: false)
+    let _ = PlayerCore.first
+
+    if !commandLineStatus.isCommandLine {
+      // check whether showing the welcome window after 0.1s
+      Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(self.checkForShowingInitialWindow), userInfo: nil, repeats: false)
+    } else {
+      let pc = PlayerCore.activeOrNew
+      commandLineStatus.assignMPVArguments(to: pc)
+      if commandLineStatus.isStdin {
+        pc.openURLString("-")
+      } else {
+        pc.openURLString(commandLineStatus.filename)
+      }
+    }
 
     NSApplication.shared.servicesProvider = self
   }
@@ -115,7 +158,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   private func showWelcomeWindow() {
-    let _ = PlayerCore.first
     let actionRawValue = Preference.integer(for: .actionAfterLaunch)
     let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
     switch action {
@@ -126,14 +168,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     default:
       break
     }
-  }
-
-  func applicationWillTerminate(_ aNotification: Notification) {
-    // Insert code here to tear down your application
-  }
-
-  func applicationDidResignActive(_ notification: Notification) {
-
   }
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -316,4 +350,47 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     Utility.setSelfAsDefaultForAllFileTypes()
   }
 
+}
+
+
+struct CommandLineStatus {
+  var isCommandLine = false
+  var isStdin = false
+  var mpvArguments: [(String, String)] = []
+  var iinaArguments: [(String, String)] = []
+  var filename = ""
+
+  mutating func parseArguments(_ args: [String]) {
+    mpvArguments.removeAll()
+    iinaArguments.removeAll()
+    for arg in args {
+      let splitted = arg.dropFirst(2).split(separator: "=", maxSplits: 2)
+      let name = String(splitted[0])
+      if (name.hasPrefix("mpv-")) {
+        // mpv args
+        if splitted.count <= 1 {
+          mpvArguments.append((String(name.dropFirst(4)), "yes"))
+        } else {
+          mpvArguments.append((String(name.dropFirst(4)), String(splitted[1])))
+        }
+      } else {
+        // other args
+        if splitted.count <= 1 {
+          iinaArguments.append((name, "yes"))
+        } else {
+          iinaArguments.append((name, String(splitted[1])))
+        }
+        if name == "stdin" {
+          isStdin = true
+        }
+      }
+    }
+  }
+
+  func assignMPVArguments(to playerCore: PlayerCore) {
+    for arg in mpvArguments {
+      print("MPV Argument: \(arg)")
+      playerCore.mpv.setString(arg.0, arg.1)
+    }
+  }
 }

@@ -308,6 +308,13 @@ class Utility {
 
   // MARK: - App functions
 
+  static func iinaVersion() -> (String, String) {
+    let infoDic = Bundle.main.infoDictionary!
+    let version = infoDic["CFBundleShortVersionString"] as! String
+    let build = infoDic["CFBundleVersion"] as! String
+    return (version, build)
+  }
+
   static func setSelfAsDefaultForAllFileTypes() {
     guard
     let docTypes = Bundle.main.infoDictionary?["CFBundleDocumentTypes"] as? [[String: Any]],

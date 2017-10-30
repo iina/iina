@@ -1,6 +1,9 @@
 /* Class = "NSTableColumn"; headerCell.title = "Filter String"; ObjectID = "4g6-LW-373"; */
 "4g6-LW-373.headerCell.title" = "濾鏡（指令串）";
 
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "9Au-ZV-KXN"; */
+"9Au-ZV-KXN.title" = "取消";
+
 /* Class = "NSWindow"; title = "Filters"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "濾鏡";
 
@@ -15,4 +18,7 @@
 
 /* Class = "NSTableColumn"; headerCell.title = "#"; ObjectID = "amK-Iz-lu8"; */
 "amK-Iz-lu8.headerCell.title" = "#";
+
+/* Class = "NSButtonCell"; title = "Add"; ObjectID = "w2g-wR-hPu"; */
+"w2g-wR-hPu.title" = "添加";
 

@@ -1874,7 +1874,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if let strw = geometry.w, strw != "0" {
         let w: CGFloat
         if strw.hasSuffix("%") {
-          w = CGFloat(Double(String(strw.characters.dropLast()))! * 0.01 * Double(screenFrame.width))
+          w = CGFloat(Double(String(strw.dropLast()))! * 0.01 * Double(screenFrame.width))
         } else {
           w = CGFloat(Int(strw)!)
         }
@@ -1884,7 +1884,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       } else if let strh = geometry.h, strh != "0" {
         let h: CGFloat
         if strh.hasSuffix("%") {
-          h = CGFloat(Double(String(strh.characters.dropLast()))! * 0.01 * Double(screenFrame.height))
+          h = CGFloat(Double(String(strh.dropLast()))! * 0.01 * Double(screenFrame.height))
         } else {
           h = CGFloat(Int(strh)!)
         }
@@ -1896,7 +1896,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if let strx = geometry.x, let xSign = geometry.xSign {
         let x: CGFloat
         if strx.hasSuffix("%") {
-          x = CGFloat(Double(String(strx.characters.dropLast()))! * 0.01 * Double(screenFrame.width)) - winFrame.width / 2
+          x = CGFloat(Double(String(strx.dropLast()))! * 0.01 * Double(screenFrame.width)) - winFrame.width / 2
         } else {
           x = CGFloat(Int(strx)!)
         }
@@ -1910,7 +1910,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if let stry = geometry.y, let ySign = geometry.ySign {
         let y: CGFloat
         if stry.hasSuffix("%") {
-          y = CGFloat(Double(String(stry.characters.dropLast()))! * 0.01 * Double(screenFrame.height)) - winFrame.height / 2
+          y = CGFloat(Double(String(stry.dropLast()))! * 0.01 * Double(screenFrame.height)) - winFrame.height / 2
         } else {
           y = CGFloat(Int(stry)!)
         }

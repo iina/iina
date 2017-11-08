@@ -527,7 +527,7 @@ class Utility {
 
   struct ShortCodeGenerator {
 
-    private static let base62chars = [Character]("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".characters)
+    private static let base62chars = [Character]("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
     private static let maxBase : UInt32 = 62
 
     static func getCode(withBase base: UInt32 = maxBase, length: Int) -> String {

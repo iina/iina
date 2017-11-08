@@ -323,7 +323,7 @@ extension NSColor {
   }
 
   convenience init?(mpvColorString: String) {
-    let splitted = mpvColorString.characters.split(separator: "/").map { (seq) -> Double? in
+    let splitted = mpvColorString.split(separator: "/").map { (seq) -> Double? in
       return Double(String(seq))
     }
     // check nil
@@ -430,7 +430,7 @@ extension String {
   }
 
   mutating func deleteLast(_ num: Int) {
-    guard num <= characters.count else { self = ""; return }
+    guard num <= count else { self = ""; return }
     self = String(self[...self.index(endIndex, offsetBy: -num)])
   }
 

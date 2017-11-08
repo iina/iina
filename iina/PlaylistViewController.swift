@@ -349,12 +349,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         let filenameWithoutExt: String = NSString(string: filename).deletingPathExtension
         if let prefix = player.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix,
           !prefix.isEmpty,
-          prefix.characters.count <= filenameWithoutExt.characters.count,  // check whether prefix length > filename length
-          prefix.characters.count >= PrefixMinLength,
-          filename.characters.count > FilenameMinLength {
+          prefix.count <= filenameWithoutExt.count,  // check whether prefix length > filename length
+          prefix.count >= PrefixMinLength,
+          filename.count > FilenameMinLength {
           cellView.prefixBtn.hasPrefix = true
           cellView.prefixBtn.text = prefix
-          cellView.textField?.stringValue = String(filename[filename.index(filename.startIndex, offsetBy: prefix.characters.count)...])
+          cellView.textField?.stringValue = String(filename[filename.index(filename.startIndex, offsetBy: prefix.count)...])
         } else {
           cellView.prefixBtn.hasPrefix = false
           cellView.textField?.stringValue = filename

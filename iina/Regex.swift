@@ -28,7 +28,7 @@ class Regex {
   }
 
   func matches(_ str: String) -> Bool {
-    if let matches = regex?.numberOfMatches(in: str, options: [], range: NSMakeRange(0, str.characters.count)) {
+    if let matches = regex?.numberOfMatches(in: str, options: [], range: NSMakeRange(0, str.count)) {
       return matches > 0
     } else {
       return false
@@ -37,7 +37,7 @@ class Regex {
 
   func captures(in str: String) -> [String] {
     var result: [String] = []
-    if let match = regex?.firstMatch(in: str, options: [], range: NSMakeRange(0, str.characters.count)) {
+    if let match = regex?.firstMatch(in: str, options: [], range: NSMakeRange(0, str.count)) {
       for i in 0..<match.numberOfRanges {
         let range = match.range(at: i)
         if range.length > 0 {

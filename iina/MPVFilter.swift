@@ -103,7 +103,7 @@ class MPVFilter: NSObject {
   }
 
   init?(rawString: String) {
-    let splitted = rawString.characters.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: true).map { String($0) }
+    let splitted = rawString.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: true).map { String($0) }
     guard splitted.count == 1 || splitted.count == 2 else { return nil }
     self.name = splitted[0]
     self.rawParamString = splitted.at(1)

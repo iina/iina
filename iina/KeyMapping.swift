@@ -45,7 +45,7 @@ class KeyMapping {
   var rawAction: String {
     set {
       if newValue.hasPrefix("@iina") {
-        privateRawAction = newValue[newValue.index(newValue.startIndex, offsetBy: "@iina".characters.count)...].trimmingCharacters(in: .whitespaces)
+        privateRawAction = newValue[newValue.index(newValue.startIndex, offsetBy: "@iina".count)...].trimmingCharacters(in: .whitespaces)
         action = rawAction.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
         isIINACommand = true
       } else {
@@ -70,7 +70,7 @@ class KeyMapping {
 
   var prettyKey: String {
     get {
-      return key.characters
+      return key
         .split(separator: "+", maxSplits: 1, omittingEmptySubsequences: false)
         .map { tokenCharView -> String in
           let token = String(tokenCharView)
@@ -112,17 +112,17 @@ class KeyMapping {
       if line.hasPrefix("#@iina") {
         // extended syntax
         isIINACommand = true
-        line = String(line[line.index(line.startIndex, offsetBy: "#@iina".characters.count)...])
+        line = String(line[line.index(line.startIndex, offsetBy: "#@iina".count)...])
       } else if line.hasPrefix("#") {
         // igore comment
         continue
       }
       // remove inline comment
-      if let sharpIndex = line.characters.index(of: "#") {
+      if let sharpIndex = line.index(of: "#") {
         line = String(line[...sharpIndex])
       }
       // split
-      let splitted = line.characters.split(maxSplits: 1, whereSeparator: { $0 == " " || $0 == "\t"})
+      let splitted = line.split(maxSplits: 1, whereSeparator: { $0 == " " || $0 == "\t"})
       if splitted.count < 2 {
         Utility.log("Skipped corrupted line in input.conf: \(line)")
         continue  // no command, wrong format

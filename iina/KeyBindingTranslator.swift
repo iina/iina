@@ -63,7 +63,7 @@ class KeyBindingTranslator {
           data[key] = commands.at(index)
         } else if part.hasSuffix("...") {
           var mPart = part
-          mPart.characters.removeLast(3)
+          mPart.removeLast(3)
           data[mPart] = commands[index..<commands.count].joined(separator: " ")
         } else {
           data[part] = commands.at(index)
@@ -88,7 +88,7 @@ class KeyBindingTranslator {
             data["abs"] = "true"
           } else if value.hasPrefix("-") {
             data["bwd"] = "true"
-            data["value"]!.characters.removeFirst()
+            data["value"]!.removeFirst()
           } else {
             data["fwd"] = "true"
           }

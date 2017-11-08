@@ -66,6 +66,7 @@
 		846352581EEEE11A0043F0CC /* ThumbnailPeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846352571EEEE11A0043F0CC /* ThumbnailPeekView.swift */; };
 		846654941F4EEBE300C91B8C /* vlc-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = 846654921F4EEA5500C91B8C /* vlc-default-input.conf */; };
 		8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */; };
+		846DD8CA1FB39B2500991A81 /* movist-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = 846DD8C81FB39A9800991A81 /* movist-default-input.conf */; };
 		847557141F405F8C0006B0FF /* MainWindowMenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847557131F405F8C0006B0FF /* MainWindowMenuActions.swift */; };
 		847557161F406D360006B0FF /* MiniPlayerWindowMenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847557151F406D360006B0FF /* MiniPlayerWindowMenuActions.swift */; };
 		847644081D48B413004F6DF5 /* MPVOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847644071D48B413004F6DF5 /* MPVOption.swift */; };
@@ -255,6 +256,7 @@
 			dstPath = config;
 			dstSubfolderSpec = 7;
 			files = (
+				846DD8CA1FB39B2500991A81 /* movist-default-input.conf in Copy Configs */,
 				846654941F4EEBE300C91B8C /* vlc-default-input.conf in Copy Configs */,
 				84A886EF1E269E67008755BB /* iina-default-input.conf in Copy Configs */,
 				844D72EF1E056E1400522E5E /* input.conf in Copy Configs */,
@@ -523,8 +525,9 @@
 		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
 		8461C52F1D462488006E91FF /* VideoTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTime.swift; sourceTree = "<group>"; };
 		846352571EEEE11A0043F0CC /* ThumbnailPeekView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailPeekView.swift; sourceTree = "<group>"; };
-		846654921F4EEA5500C91B8C /* vlc-default-input.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "vlc-default-input.conf"; sourceTree = "<group>"; };
+		846654921F4EEA5500C91B8C /* vlc-default-input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "vlc-default-input.conf"; sourceTree = "<group>"; };
 		8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSettingViewController.swift; sourceTree = "<group>"; };
+		846DD8C81FB39A9800991A81 /* movist-default-input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "movist-default-input.conf"; sourceTree = "<group>"; };
 		847557131F405F8C0006B0FF /* MainWindowMenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowMenuActions.swift; sourceTree = "<group>"; };
 		847557151F406D360006B0FF /* MiniPlayerWindowMenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniPlayerWindowMenuActions.swift; sourceTree = "<group>"; };
 		847644071D48B413004F6DF5 /* MPVOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVOption.swift; sourceTree = "<group>"; };
@@ -1418,6 +1421,7 @@
 				84A886ED1E269A2A008755BB /* iina-default-input.conf */,
 				84E745D81DFDE8C100588DED /* input.conf */,
 				846654921F4EEA5500C91B8C /* vlc-default-input.conf */,
+				846DD8C81FB39A9800991A81 /* movist-default-input.conf */,
 			);
 			name = config;
 			path = iina/config;

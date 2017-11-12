@@ -240,6 +240,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   // MARK: - Accept dropped string and URL
 
+  @objc
   func droppedText(_ pboard: NSPasteboard, userData:String, error: NSErrorPointer) {
     if let url = pboard.string(forType: .string) {
       openFileCalled = true

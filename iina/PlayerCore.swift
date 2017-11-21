@@ -235,6 +235,7 @@ class PlayerCore: NSObject {
     miniPlayer.showWindow(self)
     miniPlayer.updateTrack()
     let playlistView = mainWindow.playlistView.view
+    let videoView = mainWindow.videoView
     // reset down shift for playlistView
     mainWindow.playlistView.downShift = 0
     // hide sidebar
@@ -243,8 +244,17 @@ class PlayerCore: NSObject {
     }
     // move playist view
     playlistView.removeFromSuperview()
+    mainWindow.playlistView.useCompactTabHeight = true
     miniPlayer.playlistWrapperView.addSubview(playlistView)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": playlistView])
+    // move video view
+    videoView.removeFromSuperview()
+    miniPlayer.videoWrapperView.addSubview(videoView)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
+    let (dw, dh) = videoSizeForDisplay
+    miniPlayer.videoViewAspectConstraint = NSLayoutConstraint(item: videoView, attribute: .width, relatedBy: .equal,
+                                                              toItem: videoView, attribute: .height, multiplier: CGFloat(dw) / CGFloat(dh), constant: 0)
+    miniPlayer.videoViewAspectConstraint?.isActive = true
     // hide main window
     mainWindow.window?.orderOut(self)
     isInMiniPlayer = true
@@ -252,6 +262,19 @@ class PlayerCore: NSObject {
 
   func switchBackFromMiniPlayer() {
     mainWindow.playlistView.view.removeFromSuperview()
+    mainWindow.playlistView.useCompactTabHeight = false
+    // add back video view
+    let mainWindowContentView = mainWindow.window!.contentView
+    miniPlayer.videoViewAspectConstraint?.isActive = false
+    miniPlayer.videoViewAspectConstraint = nil
+    mainWindow.videoView.removeFromSuperview()
+    mainWindowContentView?.addSubview(mainWindow.videoView, positioned: .below, relativeTo: nil)
+    ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
+      mainWindow.videoViewConstraints[attr] = NSLayoutConstraint(item: mainWindow.videoView, attribute: attr, relatedBy: .equal,
+                                                                 toItem: mainWindowContentView, attribute: attr, multiplier: 1, constant: 0)
+      mainWindow.videoViewConstraints[attr]!.isActive = true
+    }
+    // show main window
     mainWindow.window?.makeKeyAndOrderFront(self)
     // if aspect ratio is not set
     if mainWindow.window?.aspectRatio == nil {

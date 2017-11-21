@@ -9,7 +9,7 @@
 import Cocoa
 
 fileprivate let DefaultPlaylistHeight: CGFloat = 300
-fileprivate let AutoHidePlaylistThreshold: CGFloat = 72 + 200
+fileprivate let AutoHidePlaylistThreshold: CGFloat = 200
 fileprivate let AnimationDurationShowControl: TimeInterval = 0.2
 
 class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
@@ -24,8 +24,12 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
   @IBOutlet var volumePopover: NSPopover!
   @IBOutlet weak var backgroundView: NSVisualEffectView!
-  @IBOutlet weak var closeButton: NSButton!
-  @IBOutlet weak var playlistWrapperView: NSView!
+  @IBOutlet weak var windowCloseButton: NSButton!
+  @IBOutlet weak var controlCloseButton: NSButton!
+  @IBOutlet weak var videoWrapperView: NSView!
+  @IBOutlet var videoWrapperViewBottomConstraint: NSLayoutConstraint!
+  @IBOutlet var controlViewTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var playlistWrapperView: NSVisualEffectView!
   @IBOutlet weak var mediaInfoView: NSView!
   @IBOutlet weak var controlView: NSView!
   @IBOutlet weak var titleLabel: NSTextField!
@@ -40,6 +44,10 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
   var isOntop = false
   var isPlaylistVisible = false
+  var isVideoVisible = true
+
+  var videoViewAspectConstraint: NSLayoutConstraint?
+
   private var originalWindowFrame: NSRect!
 
   init(player: PlayerCore) {
@@ -61,12 +69,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     window.nextResponder = menuActionHandler
     menuActionHandler.nextResponder = responder
 
+    window.styleMask = [.fullSizeContentView, .titled, .resizable]
     window.isMovableByWindowBackground = true
-    if #available(OSX 10.11, *) {
-      (window.contentView as? NSVisualEffectView)?.material = .ultraDark
-    } else {
-      (window.contentView as? NSVisualEffectView)?.material = .dark
-    }
     window.appearance = NSAppearance(named: .vibrantDark)
     window.titlebarAppearsTransparent = true
     window.titleVisibility = .hidden
@@ -74,21 +78,36 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
       window.standardWindowButton($0)?.isHidden = true
     }
 
-    window.setFrame(window.frame.rectWithoutPlaylistHeight(), display: false, animate: false)
+    window.setFrame(window.frame.rectWithoutPlaylistHeight(providedWindowHeight: normalWindowHeight()), display: false, animate: false)
+    
+    controlViewTopConstraint.isActive = false
 
     // tracking area
     let trackingView = NSView()
     trackingView.translatesAutoresizingMaskIntoConstraints = false
     window.contentView?.addSubview(trackingView, positioned: .above, relativeTo: nil)
-    Utility.quickConstraints(["H:|[v]|", "V:|[v(==72)]"], ["v": trackingView])
+    Utility.quickConstraints(["H:|[v]|"], ["v": trackingView])
+    NSLayoutConstraint.activate([
+      NSLayoutConstraint(item: trackingView, attribute: .bottom, relatedBy: .equal, toItem: backgroundView, attribute: .bottom, multiplier: 1, constant: 0),
+      NSLayoutConstraint(item: trackingView, attribute: .top, relatedBy: .equal, toItem: videoWrapperView, attribute: .top, multiplier: 1, constant: 0)
+    ])
     trackingView.addTrackingArea(NSTrackingArea(rect: trackingView.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited], owner: self, userInfo: nil))
 
     backgroundView.state = .active
+    [backgroundView, playlistWrapperView].forEach { view in
+      if #available(OSX 10.11, *) {
+        view?.material = .ultraDark
+      } else {
+        view?.material = .dark
+      }
+    }
 
     // close button
-    closeButton.image = NSImage(named: .stopProgressFreestandingTemplate)
-    closeButton.image?.isTemplate = true
-    closeButton.action = #selector(self.close)
+    [windowCloseButton, controlCloseButton].forEach { btn in
+      btn?.image?.isTemplate = true
+      btn?.action = #selector(self.close)
+      btn?.alphaValue = 0
+    }
 
     // switching UI
     controlView.alphaValue = 0
@@ -116,16 +135,20 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func mouseEntered(with event: NSEvent) {
+    let closeButton = currentCloseButton()
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = AnimationDurationShowControl
+      closeButton.animator().alphaValue = 1
       controlView.animator().alphaValue = 1
       mediaInfoView.animator().alphaValue = 0
     }, completionHandler: {})
   }
 
   override func mouseExited(with event: NSEvent) {
+    let closeButton = currentCloseButton()
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = AnimationDurationShowControl
+      closeButton.animator().alphaValue = 0
       controlView.animator().alphaValue = 0
       mediaInfoView.animator().alphaValue = 1
     }, completionHandler: {})
@@ -133,16 +156,17 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidEndLiveResize(_ notification: Notification) {
     guard let window = window else { return }
+    let windowHeight = normalWindowHeight()
     if isPlaylistVisible {
       // hide
-      if window.frame.height < AutoHidePlaylistThreshold {
+      if window.frame.height < windowHeight + AutoHidePlaylistThreshold {
         isPlaylistVisible = false
-        window.setFrame(window.frame.rectWithoutPlaylistHeight(), display: true, animate: true)
+        window.setFrame(window.frame.rectWithoutPlaylistHeight(providedWindowHeight: windowHeight), display: true, animate: true)
       }
     } else {
       // show
-      if window.frame.height < AutoHidePlaylistThreshold {
-        window.setFrame(window.frame.rectWithoutPlaylistHeight(), display: true, animate: true)
+      if window.frame.height < windowHeight + AutoHidePlaylistThreshold {
+        window.setFrame(window.frame.rectWithoutPlaylistHeight(providedWindowHeight: windowHeight), display: true, animate: true)
       } else {
         isPlaylistVisible = true
       }
@@ -182,7 +206,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     if isPlaylistVisible {
       // hide
       isPlaylistVisible = false
-      window.setFrame(window.frame.rectWithoutPlaylistHeight(), display: true, animate: true)
+      window.setFrame(window.frame.rectWithoutPlaylistHeight(providedWindowHeight: normalWindowHeight()), display: true, animate: true)
     } else {
       // show
       isPlaylistVisible = true
@@ -192,6 +216,25 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
       newFrame.origin.y -= DefaultPlaylistHeight
       newFrame.size.height += DefaultPlaylistHeight
       window.setFrame(newFrame, display: true, animate: true)
+    }
+  }
+
+  @IBAction func toogleVideoView(_ sender: Any) {
+    guard let window = window else { return }
+    isVideoVisible = !isVideoVisible
+    videoWrapperViewBottomConstraint.isActive = isVideoVisible
+    controlViewTopConstraint.isActive = !isVideoVisible
+    controlCloseButton.isHidden = isVideoVisible
+    windowCloseButton.isHidden = !isVideoVisible
+    let videoViewHeight = round(player.mainWindow.videoView.frame.height)
+    if isVideoVisible {
+      var frame = window.frame
+      frame.size.height += videoViewHeight
+      window.setFrame(frame, display: true, animate: false)
+    } else {
+      var frame = window.frame
+      frame.size.height -= videoViewHeight
+      window.setFrame(frame, display: true, animate: false)
     }
   }
 
@@ -263,13 +306,21 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
       }
     }
   }
+  
+  private func normalWindowHeight() -> CGFloat {
+    return 72 + (isVideoVisible ? videoWrapperView.frame.height : 0)
+  }
+  
+  private func currentCloseButton() -> NSButton {
+    return isVideoVisible ? windowCloseButton : controlCloseButton
+  }
 }
 
 fileprivate extension NSRect {
-  func rectWithoutPlaylistHeight() -> NSRect {
+  func rectWithoutPlaylistHeight(providedWindowHeight windowHeight: CGFloat) -> NSRect {
     var newRect = self
-    newRect.origin.y += (newRect.height - 72)
-    newRect.size.height = 72
+    newRect.origin.y += (newRect.height - windowHeight)
+    newRect.size.height = windowHeight
     return newRect
   }
 }

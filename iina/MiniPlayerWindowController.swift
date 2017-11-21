@@ -199,6 +199,21 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     volumeLabel.intValue = Int32(Int(player.info.volume))
   }
 
+  func updateVideoSize() {
+    let (width, height) = player.videoSizeForDisplay
+    updateVideoViewAspectConstraint(withAspect: CGFloat(width) / CGFloat(height))
+  }
+
+  func updateVideoViewAspectConstraint(withAspect aspect: CGFloat) {
+    if let constraint = videoViewAspectConstraint {
+      constraint.isActive = false
+    }
+    let videoView = player.mainWindow.videoView
+    videoViewAspectConstraint = NSLayoutConstraint(item: videoView, attribute: .width, relatedBy: .equal,
+                                                   toItem: videoView, attribute: .height, multiplier: aspect, constant: 0)
+    videoViewAspectConstraint?.isActive = true
+  }
+
   // MARK: - IBAction
 
   @IBAction func togglePlaylist(_ sender: Any) {

@@ -109,6 +109,8 @@ class PlayerCore: NSObject {
   var isMpvTerminated: Bool = false
 
   var isInMiniPlayer = false
+  var switchedToMiniPlayerManually = false
+  var switchedBackFromMiniPlayerManually = false
 
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
@@ -231,7 +233,11 @@ class PlayerCore: NSObject {
     self.syncPlayTimeTimer?.invalidate()
   }
 
-  func switchToMiniPlayer() {
+  func switchToMiniPlayer(automatically: Bool = false) {
+    if !automatically {
+      switchedToMiniPlayerManually = true
+    }
+    switchedBackFromMiniPlayerManually = false
     miniPlayer.showWindow(self)
     miniPlayer.updateTrack()
     let playlistView = mainWindow.playlistView.view
@@ -252,15 +258,17 @@ class PlayerCore: NSObject {
     miniPlayer.videoWrapperView.addSubview(videoView)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
     let (dw, dh) = videoSizeForDisplay
-    miniPlayer.videoViewAspectConstraint = NSLayoutConstraint(item: videoView, attribute: .width, relatedBy: .equal,
-                                                              toItem: videoView, attribute: .height, multiplier: CGFloat(dw) / CGFloat(dh), constant: 0)
-    miniPlayer.videoViewAspectConstraint?.isActive = true
+    miniPlayer.updateVideoViewAspectConstraint(withAspect: CGFloat(dw) / CGFloat(dh))
     // hide main window
     mainWindow.window?.orderOut(self)
     isInMiniPlayer = true
   }
 
-  func switchBackFromMiniPlayer() {
+  func switchBackFromMiniPlayer(automatically: Bool = false) {
+    if !automatically {
+      switchedBackFromMiniPlayerManually = true
+    }
+    switchedToMiniPlayerManually = true
     mainWindow.playlistView.view.removeFromSuperview()
     mainWindow.playlistView.useCompactTabHeight = false
     // add back video view
@@ -891,16 +899,16 @@ class PlayerCore: NSObject {
     // if need to switch to music mode
     if audioStatusIsAvailableNow && Preference.bool(for: .autoSwitchToMusicMode) {
       if currentMediaIsAudio == .isAudio {
-        if !isInMiniPlayer {
+        if !isInMiniPlayer && !switchedBackFromMiniPlayerManually {
           DispatchQueue.main.sync {
-            switchToMiniPlayer()
+            switchToMiniPlayer(automatically: false)
           }
         }
       } else {
-        if isInMiniPlayer {
+        if isInMiniPlayer && !switchedToMiniPlayerManually {
           DispatchQueue.main.sync {
             miniPlayer.close()
-            switchBackFromMiniPlayer()
+            switchBackFromMiniPlayer(automatically: true)
           }
         }
       }
@@ -934,6 +942,9 @@ class PlayerCore: NSObject {
   func notifyMainWindowVideoSizeChanged() {
     DispatchQueue.main.sync {
       self.mainWindow.adjustFrameByVideoSize()
+      if self.isInMiniPlayer {
+        self.miniPlayer.updateVideoSize()
+      }
     }
   }
 

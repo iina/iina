@@ -48,6 +48,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBOutlet weak var chaptersBtn: NSButton!
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var tabHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var deleteBtn: NSButton!
   @IBOutlet weak var loopBtn: NSButton!
   @IBOutlet weak var shuffleBtn: NSButton!
@@ -56,6 +57,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   var downShift: CGFloat = 0 {
     didSet {
       buttonTopConstraint.constant = downShift
+    }
+  }
+
+  var useCompactTabHeight = false {
+    didSet {
+      tabHeightConstraint.constant = useCompactTabHeight ? 32 : 48
     }
   }
 

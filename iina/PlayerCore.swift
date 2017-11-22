@@ -259,6 +259,7 @@ class PlayerCore: NSObject {
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
     let (dw, dh) = videoSizeForDisplay
     miniPlayer.updateVideoViewAspectConstraint(withAspect: CGFloat(dw) / CGFloat(dh))
+    videoView.videoLayer.draw()
     // hide main window
     mainWindow.window?.orderOut(self)
     isInMiniPlayer = true

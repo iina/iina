@@ -173,6 +173,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  func windowDidResize(_ notification: Notification) {
+    guard let window = window, !window.inLiveResize else { return }
+    self.player.mainWindow.videoView.videoLayer.draw()
+  }
+
   // MARK: - Sync UI with playback
 
   func updatePlayButtonState(_ state: NSControl.StateValue) {
@@ -200,8 +205,16 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func updateVideoSize() {
+    guard let window = window else { return }
+    let videoView = player.mainWindow.videoView
     let (width, height) = player.videoSizeForDisplay
-    updateVideoViewAspectConstraint(withAspect: CGFloat(width) / CGFloat(height))
+    let aspect = CGFloat(width) / CGFloat(height)
+    let currentHeight = videoView.frame.height
+    let newHeight = videoView.frame.width / aspect
+    updateVideoViewAspectConstraint(withAspect: aspect)
+    var frame = window.frame
+    frame.size.height += newHeight - currentHeight
+    window.setFrame(frame, display: true, animate: false)
   }
 
   func updateVideoViewAspectConstraint(withAspect aspect: CGFloat) {

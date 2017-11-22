@@ -696,7 +696,7 @@ class MPVController: NSObject {
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         player.info.volume = data
         player.syncUI(.volume)
-        player.sendOSD(.volume(Int(data)))
+        player.sendOSD(.volume(Int(round(data))))
       }
 
     case MPVOption.Audio.audioDelay:

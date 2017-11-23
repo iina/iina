@@ -126,7 +126,39 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     originalWindowFrame = window!.frame
   }
 
+  override func keyDown(with event: NSEvent) {
+    let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
+    if let kb = PlayerCore.keyBindings[keyCode] {
+      if kb.isIINACommand {
+        // - IINA command
+        if let iinaCommand = IINACommand(rawValue: kb.rawAction) {
+          handleIINACommand(iinaCommand)
+        } else {
+          Utility.log("Unknown iina command \(kb.rawAction)")
+        }
+      } else {
+        // - MPV command
+        let returnValue: Int32
+        // execute the command
+        switch kb.action[0] {
+        case MPVCommand.abLoop.rawValue:
+          player.abLoop()
+          returnValue = 0
+        default:
+          returnValue = player.mpv.command(rawString: kb.rawAction)
+        }
+        // handle return value
+        if returnValue != 0 {
+          Utility.log("Return value \(returnValue) when executing key command \(kb.rawAction)")
+        }
+      }
+    } else {
+      super.keyDown(with: event)
+    }
+  }
+
   override func mouseDown(with event: NSEvent) {
+    window?.makeFirstResponder(window)
     if volumePopover.isShown {
       volumePopover.performClose(self)
     } else {
@@ -342,6 +374,31 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   private func currentCloseButton() -> NSButton {
     return isVideoVisible ? windowCloseButton : controlCloseButton
   }
+
+  private func handleIINACommand(_ cmd: IINACommand) {
+    let appDeletate = (NSApp.delegate! as! AppDelegate)
+    switch cmd {
+    case .openFile:
+      appDeletate.openFile(self)
+    case .openURL:
+      appDeletate.openURL(self)
+    case .flip:
+      self.menuActionHandler.menuToggleFlip(.dummy)
+    case .mirror:
+      self.menuActionHandler.menuToggleMirror(.dummy)
+    case .saveCurrentPlaylist:
+      self.menuActionHandler.menuSavePlaylist(.dummy)
+    case .deleteCurrentFile:
+      self.menuActionHandler.menuDeleteCurrentFile(.dummy)
+    case .findOnlineSubs:
+      self.menuActionHandler.menuFindOnlineSub(.dummy)
+    case .saveDownloadedSub:
+      self.menuActionHandler.saveDownloadedSub(.dummy)
+    default:
+      break
+    }
+  }
+
 }
 
 fileprivate extension NSRect {

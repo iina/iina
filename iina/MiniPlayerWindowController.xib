@@ -167,7 +167,7 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="a5L-QK-yog">
-                                        <rect key="frame" x="242" y="16" width="12" height="12"/>
+                                        <rect key="frame" x="234" y="16" width="12" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="0Bh-cC-tiD"/>
                                             <constraint firstAttribute="width" constant="12" id="vh6-yD-26J"/>
@@ -195,12 +195,12 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="KFz-Kp-RxC">
-                                        <rect key="frame" x="262" y="16" width="12" height="12"/>
+                                        <rect key="frame" x="258" y="15" width="14" height="14"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="12" id="RQO-ze-QL9"/>
-                                            <constraint firstAttribute="height" constant="12" id="owN-AQ-620"/>
+                                            <constraint firstAttribute="width" constant="14" id="RQO-ze-QL9"/>
+                                            <constraint firstAttribute="height" constant="14" id="owN-AQ-620"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="shuffle" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="VB3-JD-dpR">
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="toggle-album-art" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="VB3-JD-dpR">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -215,14 +215,14 @@
                                     <constraint firstItem="nSh-lh-jim" firstAttribute="leading" secondItem="fUy-ap-8fj" secondAttribute="trailing" constant="28" id="KpH-Aw-b5M"/>
                                     <constraint firstItem="aC9-OK-a4x" firstAttribute="top" secondItem="cDR-8J-QI7" secondAttribute="top" constant="12" id="Kzm-iJ-Vkp"/>
                                     <constraint firstItem="KFz-Kp-RxC" firstAttribute="centerY" secondItem="a5L-QK-yog" secondAttribute="centerY" id="LaN-Gb-lL9"/>
-                                    <constraint firstItem="KFz-Kp-RxC" firstAttribute="leading" secondItem="a5L-QK-yog" secondAttribute="trailing" constant="8" id="PpO-ZM-V3M"/>
+                                    <constraint firstItem="KFz-Kp-RxC" firstAttribute="leading" secondItem="a5L-QK-yog" secondAttribute="trailing" constant="12" id="PpO-ZM-V3M"/>
                                     <constraint firstItem="fUy-ap-8fj" firstAttribute="centerY" secondItem="aC9-OK-a4x" secondAttribute="centerY" id="PvJ-Gl-h60"/>
                                     <constraint firstAttribute="height" constant="48" id="fao-NR-5SG"/>
                                     <constraint firstItem="F4P-Wj-5qw" firstAttribute="leading" secondItem="cDR-8J-QI7" secondAttribute="leading" constant="8" id="fm2-UN-gO5"/>
                                     <constraint firstItem="aC9-OK-a4x" firstAttribute="leading" secondItem="nSh-lh-jim" secondAttribute="trailing" constant="24" id="kCv-eh-zx2"/>
                                     <constraint firstItem="998-mn-oHJ" firstAttribute="centerY" secondItem="aC9-OK-a4x" secondAttribute="centerY" id="ldG-Yz-2vC"/>
                                     <constraint firstItem="aC9-OK-a4x" firstAttribute="centerX" secondItem="cDR-8J-QI7" secondAttribute="centerX" constant="2" id="pI1-nE-AtV"/>
-                                    <constraint firstItem="a5L-QK-yog" firstAttribute="leading" secondItem="998-mn-oHJ" secondAttribute="trailing" constant="28" id="uSD-MR-I8x"/>
+                                    <constraint firstItem="a5L-QK-yog" firstAttribute="leading" secondItem="998-mn-oHJ" secondAttribute="trailing" constant="20" id="uSD-MR-I8x"/>
                                     <constraint firstItem="a5L-QK-yog" firstAttribute="centerY" secondItem="aC9-OK-a4x" secondAttribute="centerY" id="vwZ-Gt-F5N"/>
                                     <constraint firstItem="998-mn-oHJ" firstAttribute="leading" secondItem="aC9-OK-a4x" secondAttribute="trailing" constant="20" id="yL9-7r-6VR"/>
                                 </constraints>
@@ -341,13 +341,13 @@
         </popover>
     </objects>
     <resources>
-        <image name="NSStopProgressFreestandingTemplate" width="14" height="14"/>
+        <image name="NSStopProgressFreestandingTemplate" width="11" height="11"/>
         <image name="nextl" width="24" height="24"/>
         <image name="nextr" width="24" height="24"/>
         <image name="pause" width="24" height="24"/>
         <image name="play" width="24" height="24"/>
         <image name="playlist" width="14" height="14"/>
-        <image name="shuffle" width="15" height="15"/>
+        <image name="toggle-album-art" width="14" height="14"/>
         <image name="volume" width="17" height="14"/>
     </resources>
 </document>

@@ -647,6 +647,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case PK.maxVolume.rawValue:
       if let newValue = change[.newKey] as? Int {
         volumeSlider.maxValue = Double(newValue)
+        if self.player.mpv.getDouble(MPVOption.Audio.volume) > Double(newValue) {
+          self.player.mpv.setDouble(MPVOption.Audio.volume, Double(newValue))
+        }
       }
 
     default:

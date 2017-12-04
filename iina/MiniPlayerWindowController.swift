@@ -23,10 +23,12 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   var menuActionHandler: MainMenuActionHandler!
 
   @IBOutlet weak var muteButton: NSButton!
+  @IBOutlet weak var volumeButton: NSButton!
   @IBOutlet var volumePopover: NSPopover!
   @IBOutlet weak var backgroundView: NSVisualEffectView!
-  @IBOutlet weak var windowCloseButton: NSButton!
-  @IBOutlet weak var controlCloseButton: NSButton!
+  @IBOutlet weak var closeButtonView: NSView!
+  @IBOutlet weak var closeButton: NSButton!
+  @IBOutlet weak var backButton: NSButton!
   @IBOutlet weak var videoWrapperView: NSView!
   @IBOutlet var videoWrapperViewBottomConstraint: NSLayoutConstraint!
   @IBOutlet var controlViewTopConstraint: NSLayoutConstraint!
@@ -70,7 +72,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     window.nextResponder = menuActionHandler
     menuActionHandler.nextResponder = responder
 
-    window.styleMask = [.fullSizeContentView, .titled, .resizable]
+    window.initialFirstResponder = nil
+    window.styleMask = [.fullSizeContentView, .titled, .resizable, .closable]
     window.isMovableByWindowBackground = true
     window.appearance = NSAppearance(named: .vibrantDark)
     window.titlebarAppearsTransparent = true
@@ -104,11 +107,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // close button
-    [windowCloseButton, controlCloseButton].forEach { btn in
-      btn?.image?.isTemplate = true
-      btn?.action = #selector(self.close)
-      btn?.alphaValue = 0
-    }
+    closeButton.action = #selector(self.close)
+    closeButtonView.alphaValue = 0
 
     // switching UI
     controlView.alphaValue = 0
@@ -120,7 +120,10 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillClose(_ notification: Notification) {
-    player.switchBackFromMiniPlayer()
+    player.switchedToMiniPlayerManually = false
+    player.switchedBackFromMiniPlayerManually = false
+    player.switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
+    player.mainWindow.close()
   }
 
   func windowWillStartLiveResize(_ notification: Notification) {
@@ -168,20 +171,18 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func mouseEntered(with event: NSEvent) {
-    let closeButton = currentCloseButton()
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = AnimationDurationShowControl
-      closeButton.animator().alphaValue = 1
+      closeButtonView.animator().alphaValue = 1
       controlView.animator().alphaValue = 1
       mediaInfoView.animator().alphaValue = 0
     }, completionHandler: {})
   }
 
   override func mouseExited(with event: NSEvent) {
-    let closeButton = currentCloseButton()
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = AnimationDurationShowControl
-      closeButton.animator().alphaValue = 0
+      closeButtonView.animator().alphaValue = 0
       controlView.animator().alphaValue = 0
       mediaInfoView.animator().alphaValue = 1
     }, completionHandler: {})
@@ -235,6 +236,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     guard isWindowLoaded else { return }
     volumeSlider.doubleValue = player.info.volume
     volumeLabel.intValue = Int32(Int(player.info.volume))
+    volumeButton.title = "\(Int(player.info.volume))"
   }
 
   func updateVideoSize() {
@@ -246,7 +248,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     let newHeight = videoView.frame.width / aspect
     updateVideoViewAspectConstraint(withAspect: aspect)
     var frame = window.frame
-    frame.size.height += newHeight - currentHeight
+    frame.size.height += newHeight - currentHeight - 0.5
     window.setFrame(frame, display: true, animate: false)
   }
 
@@ -285,8 +287,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     isVideoVisible = !isVideoVisible
     videoWrapperViewBottomConstraint.isActive = isVideoVisible
     controlViewTopConstraint.isActive = !isVideoVisible
-    controlCloseButton.isHidden = isVideoVisible
-    windowCloseButton.isHidden = !isVideoVisible
     let videoViewHeight = round(player.mainWindow.videoView.frame.height)
     if isVideoVisible {
       var frame = window.frame
@@ -302,6 +302,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.doubleValue
     player.setVolume(value)
+  }
+
+  @IBAction func backBtnAction(_ sender: NSButton) {
+    window?.orderOut(self)
+    player.switchBackFromMiniPlayer(automatically: false)
   }
 
   @IBAction func playBtnAction(_ sender: NSButton) {
@@ -374,10 +379,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   
   private func normalWindowHeight() -> CGFloat {
     return 72 + (isVideoVisible ? videoWrapperView.frame.height : 0)
-  }
-  
-  private func currentCloseButton() -> NSButton {
-    return isVideoVisible ? windowCloseButton : controlCloseButton
   }
 
   private func handleIINACommand(_ cmd: IINACommand) {

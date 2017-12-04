@@ -27,8 +27,12 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet var volumePopover: NSPopover!
   @IBOutlet weak var backgroundView: NSVisualEffectView!
   @IBOutlet weak var closeButtonView: NSView!
-  @IBOutlet weak var closeButton: NSButton!
-  @IBOutlet weak var backButton: NSButton!
+  @IBOutlet weak var closeButtonBackgroundViewVE: NSVisualEffectView!
+  @IBOutlet weak var closeButtonBackgroundViewBox: NSBox!
+  @IBOutlet weak var closeButtonVE: NSButton!
+  @IBOutlet weak var backButtonVE: NSButton!
+  @IBOutlet weak var closeButtonBox: NSButton!
+  @IBOutlet weak var backButtonBox: NSButton!
   @IBOutlet weak var videoWrapperView: NSView!
   @IBOutlet var videoWrapperViewBottomConstraint: NSLayoutConstraint!
   @IBOutlet var controlViewTopConstraint: NSLayoutConstraint!
@@ -107,8 +111,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // close button
-    closeButton.action = #selector(self.close)
+    closeButtonVE.action = #selector(self.close)
+    closeButtonBox.action = #selector(self.close)
     closeButtonView.alphaValue = 0
+    closeButtonBackgroundViewVE.layer?.cornerRadius = 8
+    closeButtonBackgroundViewBox.isHidden = true
 
     // switching UI
     controlView.alphaValue = 0
@@ -287,6 +294,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     isVideoVisible = !isVideoVisible
     videoWrapperViewBottomConstraint.isActive = isVideoVisible
     controlViewTopConstraint.isActive = !isVideoVisible
+    closeButtonBackgroundViewVE.isHidden = !isVideoVisible
+    closeButtonBackgroundViewBox.isHidden = isVideoVisible
     let videoViewHeight = round(player.mainWindow.videoView.frame.height)
     if isVideoVisible {
       var frame = window.frame

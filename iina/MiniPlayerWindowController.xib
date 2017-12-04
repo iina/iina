@@ -3,15 +3,20 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MiniPlayerWindowController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="artistAlbumLabel" destination="kcj-EY-i9R" id="fp4-Kg-HYY"/>
-                <outlet property="backButton" destination="WS6-ix-uBJ" id="TKd-CS-m3P"/>
+                <outlet property="backButtonBox" destination="K7j-vB-FlK" id="c7f-eR-HVi"/>
+                <outlet property="backButtonVE" destination="WS6-ix-uBJ" id="heD-iT-6XC"/>
                 <outlet property="backgroundView" destination="HdA-I9-dRJ" id="miJ-0n-Psw"/>
-                <outlet property="closeButton" destination="F4P-Wj-5qw" id="e8c-b5-PKf"/>
+                <outlet property="closeButtonBackgroundViewBox" destination="NWy-Hm-vxL" id="DUk-UO-PeD"/>
+                <outlet property="closeButtonBackgroundViewVE" destination="3Xd-pn-agj" id="n9a-zJ-2zy"/>
+                <outlet property="closeButtonBox" destination="hZH-NM-Lst" id="KXG-pY-jGa"/>
+                <outlet property="closeButtonVE" destination="F4P-Wj-5qw" id="82z-Jr-BcJ"/>
                 <outlet property="closeButtonView" destination="ejt-zy-gzd" id="5Eg-ME-Qle"/>
                 <outlet property="controlView" destination="cDR-8J-QI7" id="B1L-ru-Mnc"/>
                 <outlet property="controlViewTopConstraint" destination="sJO-Qa-tUh" id="iXu-0b-vwV"/>
@@ -207,7 +212,7 @@
                                         </constraints>
                                         <buttonCell key="cell" type="bevel" title="100" bezelStyle="rounded" alignment="right" controlSize="small" imageScaling="proportionallyUpOrDown" inset="2" id="zfK-2J-XH9">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system" size="12"/>
+                                            <font key="font" metaFont="cellTitle"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="volumeBtnAction:" target="-2" id="c6e-B1-UHz"/>
@@ -267,56 +272,107 @@
                         </constraints>
                     </visualEffectView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="ejt-zy-gzd">
-                        <rect key="frame" x="8" y="38" width="11" height="26"/>
+                        <rect key="frame" x="4" y="34" width="19" height="34"/>
                         <subviews>
-                            <button toolTip="Close Mini Player" translatesAutoresizingMaskIntoConstraints="NO" id="F4P-Wj-5qw">
-                                <rect key="frame" x="0.0" y="15" width="11" height="11"/>
+                            <visualEffectView wantsLayer="YES" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="3Xd-pn-agj">
+                                <rect key="frame" x="0.0" y="0.0" width="19" height="34"/>
+                                <subviews>
+                                    <button toolTip="Close Mini Player" translatesAutoresizingMaskIntoConstraints="NO" id="F4P-Wj-5qw">
+                                        <rect key="frame" x="4" y="19" width="11" height="11"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="11" id="NZV-D4-mqS"/>
+                                            <constraint firstAttribute="height" constant="11" id="woL-CQ-7tN"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="A3f-Go-Xss">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <button toolTip="Back to video mode" translatesAutoresizingMaskIntoConstraints="NO" id="WS6-ix-uBJ">
+                                        <rect key="frame" x="4" y="4" width="11" height="11"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="11" id="9uR-hA-I1D"/>
+                                            <constraint firstAttribute="width" constant="11" id="md9-Kw-q6R"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="back" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="FaS-tJ-QNE">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="backBtnAction:" target="-2" id="wwC-Mg-w9P"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="11" id="NZV-D4-mqS"/>
-                                    <constraint firstAttribute="height" constant="11" id="woL-CQ-7tN"/>
+                                    <constraint firstItem="F4P-Wj-5qw" firstAttribute="top" secondItem="3Xd-pn-agj" secondAttribute="top" constant="4" id="0Kx-Wp-2pp"/>
+                                    <constraint firstItem="WS6-ix-uBJ" firstAttribute="leading" secondItem="3Xd-pn-agj" secondAttribute="leading" constant="4" id="Cqz-DA-JXl"/>
+                                    <constraint firstItem="WS6-ix-uBJ" firstAttribute="top" secondItem="F4P-Wj-5qw" secondAttribute="bottom" constant="4" id="bvH-ge-Min"/>
+                                    <constraint firstAttribute="trailing" secondItem="F4P-Wj-5qw" secondAttribute="trailing" constant="4" id="ol9-hq-Xto"/>
+                                    <constraint firstAttribute="bottom" secondItem="WS6-ix-uBJ" secondAttribute="bottom" constant="4" id="opd-Nl-Ero"/>
+                                    <constraint firstItem="F4P-Wj-5qw" firstAttribute="leading" secondItem="3Xd-pn-agj" secondAttribute="leading" constant="4" id="tXg-Qy-KTt"/>
+                                    <constraint firstAttribute="trailing" secondItem="WS6-ix-uBJ" secondAttribute="trailing" constant="4" id="tcm-kc-gnR"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="A3f-Go-Xss">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <button toolTip="Back to video mode" translatesAutoresizingMaskIntoConstraints="NO" id="WS6-ix-uBJ">
-                                <rect key="frame" x="0.0" y="0.0" width="11" height="11"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="11" id="9uR-hA-I1D"/>
-                                    <constraint firstAttribute="width" constant="11" id="md9-Kw-q6R"/>
-                                </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="back" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="FaS-tJ-QNE">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="backBtnAction:" target="-2" id="wwC-Mg-w9P"/>
-                                </connections>
-                            </button>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sQw-Wu-l0c">
-                                <rect key="frame" x="10" y="-95" width="163" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </customView>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fzM-Ua-KGg">
-                                <rect key="frame" x="20" y="-105" width="163" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </customView>
+                            </visualEffectView>
+                            <box boxType="custom" borderWidth="0.0" cornerRadius="6" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="NWy-Hm-vxL">
+                                <rect key="frame" x="2" y="2" width="15" height="30"/>
+                                <view key="contentView" id="SH0-Bg-0kB">
+                                    <rect key="frame" x="0.0" y="0.0" width="15" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button toolTip="Close Mini Player" translatesAutoresizingMaskIntoConstraints="NO" id="hZH-NM-Lst">
+                                            <rect key="frame" x="2" y="17" width="11" height="11"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="11" id="RKA-bS-WrY"/>
+                                                <constraint firstAttribute="width" constant="11" id="UDU-ua-dI8"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="T9Y-J8-Nj6">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
+                                        <button toolTip="Back to video mode" translatesAutoresizingMaskIntoConstraints="NO" id="K7j-vB-FlK">
+                                            <rect key="frame" x="2" y="2" width="11" height="11"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="11" id="UQA-yh-8vO"/>
+                                                <constraint firstAttribute="width" constant="11" id="zdF-vz-7a5"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="back" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="wd8-60-NJn">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="backBtnAction:" target="-2" id="At6-dB-7qN"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="hZH-NM-Lst" firstAttribute="leading" secondItem="SH0-Bg-0kB" secondAttribute="leading" constant="2" id="Ip8-5t-gjg"/>
+                                        <constraint firstItem="K7j-vB-FlK" firstAttribute="leading" secondItem="SH0-Bg-0kB" secondAttribute="leading" constant="2" id="bJa-Sa-08N"/>
+                                        <constraint firstAttribute="trailing" secondItem="K7j-vB-FlK" secondAttribute="trailing" constant="2" id="fdC-Wd-9nR"/>
+                                        <constraint firstAttribute="bottom" secondItem="K7j-vB-FlK" secondAttribute="bottom" constant="2" id="tmm-eQ-1Rk"/>
+                                        <constraint firstItem="hZH-NM-Lst" firstAttribute="top" secondItem="SH0-Bg-0kB" secondAttribute="top" constant="2" id="yYT-xC-lWj"/>
+                                        <constraint firstAttribute="trailing" secondItem="hZH-NM-Lst" secondAttribute="trailing" constant="2" id="ytQ-fk-OSa"/>
+                                    </constraints>
+                                </view>
+                                <color key="borderColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="fillColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                            </box>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="F4P-Wj-5qw" firstAttribute="top" secondItem="ejt-zy-gzd" secondAttribute="top" id="JWb-uQ-LrG"/>
-                            <constraint firstAttribute="trailing" secondItem="WS6-ix-uBJ" secondAttribute="trailing" id="U8Q-RA-Gna"/>
-                            <constraint firstItem="WS6-ix-uBJ" firstAttribute="leading" secondItem="ejt-zy-gzd" secondAttribute="leading" id="d9S-cD-mcR"/>
-                            <constraint firstItem="F4P-Wj-5qw" firstAttribute="leading" secondItem="ejt-zy-gzd" secondAttribute="leading" id="gzG-BY-rxK"/>
-                            <constraint firstItem="WS6-ix-uBJ" firstAttribute="top" secondItem="F4P-Wj-5qw" secondAttribute="bottom" constant="4" id="jNB-uZ-wzE"/>
-                            <constraint firstAttribute="bottom" secondItem="WS6-ix-uBJ" secondAttribute="bottom" id="soT-Fc-bHB"/>
-                            <constraint firstAttribute="trailing" secondItem="F4P-Wj-5qw" secondAttribute="trailing" id="z2Y-ER-kqf"/>
+                            <constraint firstItem="3Xd-pn-agj" firstAttribute="top" secondItem="ejt-zy-gzd" secondAttribute="top" id="GQa-ix-jZJ"/>
+                            <constraint firstAttribute="trailing" secondItem="3Xd-pn-agj" secondAttribute="trailing" id="KS8-De-1L8"/>
+                            <constraint firstItem="3Xd-pn-agj" firstAttribute="leading" secondItem="ejt-zy-gzd" secondAttribute="leading" id="QXF-Wm-77W"/>
+                            <constraint firstAttribute="trailing" secondItem="NWy-Hm-vxL" secondAttribute="trailing" constant="2" id="iZb-RF-3j2"/>
+                            <constraint firstItem="NWy-Hm-vxL" firstAttribute="leading" secondItem="ejt-zy-gzd" secondAttribute="leading" constant="2" id="jb3-TF-GBZ"/>
+                            <constraint firstItem="NWy-Hm-vxL" firstAttribute="top" secondItem="ejt-zy-gzd" secondAttribute="top" constant="2" id="u91-uV-8Mj"/>
+                            <constraint firstAttribute="bottom" secondItem="3Xd-pn-agj" secondAttribute="bottom" id="wVu-Un-7Lg"/>
+                            <constraint firstAttribute="bottom" secondItem="NWy-Hm-vxL" secondAttribute="bottom" constant="2" id="ypc-jd-KLx"/>
                         </constraints>
                     </customView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="dkl-qd-rae" firstAttribute="top" secondItem="HdA-I9-dRJ" secondAttribute="bottom" id="0W4-FN-tBa"/>
-                    <constraint firstItem="ejt-zy-gzd" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="8" id="6rW-3W-21z"/>
+                    <constraint firstItem="ejt-zy-gzd" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="4" id="6rW-3W-21z"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="HdA-I9-dRJ" secondAttribute="bottom" id="CJ6-Xd-Pyo"/>
                     <constraint firstItem="HdA-I9-dRJ" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="EdS-0d-ohu"/>
                     <constraint firstAttribute="trailing" secondItem="HdA-I9-dRJ" secondAttribute="trailing" id="HP4-5D-1Fa"/>
@@ -324,7 +380,7 @@
                     <constraint firstItem="HdA-I9-dRJ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="se5-gp-TjO" secondAttribute="top" id="KWN-bK-Z8C"/>
                     <constraint firstAttribute="bottom" secondItem="dkl-qd-rae" secondAttribute="bottom" priority="250" id="TgY-LJ-TLI"/>
                     <constraint firstAttribute="trailing" secondItem="WD9-DD-LNj" secondAttribute="trailing" id="U5V-IX-6UZ"/>
-                    <constraint firstItem="ejt-zy-gzd" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="8" id="VJK-N0-ZMG"/>
+                    <constraint firstItem="ejt-zy-gzd" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="4" id="VJK-N0-ZMG"/>
                     <constraint firstItem="WD9-DD-LNj" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" priority="750" id="Vve-4d-4UK"/>
                     <constraint firstItem="HdA-I9-dRJ" firstAttribute="top" secondItem="WD9-DD-LNj" secondAttribute="bottom" id="m9y-eT-GRX"/>
                     <constraint firstItem="HdA-I9-dRJ" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="sJO-Qa-tUh"/>
@@ -380,6 +436,14 @@
                 <outlet property="contentViewController" destination="oqa-Md-uNZ" id="7b5-aW-gXJ"/>
             </connections>
         </popover>
+        <button id="rU1-XT-MA9">
+            <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="RuJ-5s-dDN">
+                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                <font key="font" metaFont="system"/>
+            </buttonCell>
+        </button>
     </objects>
     <resources>
         <image name="NSStopProgressFreestandingTemplate" width="11" height="11"/>

@@ -265,7 +265,7 @@ class PlayerCore: NSObject {
     isInMiniPlayer = true
   }
 
-  func switchBackFromMiniPlayer(automatically: Bool = false) {
+  func switchBackFromMiniPlayer(automatically: Bool, showMainWindow: Bool = true) {
     if !automatically {
       switchedBackFromMiniPlayerManually = true
     }
@@ -284,7 +284,9 @@ class PlayerCore: NSObject {
       mainWindow.videoViewConstraints[attr]!.isActive = true
     }
     // show main window
-    mainWindow.window?.makeKeyAndOrderFront(self)
+    if showMainWindow {
+      mainWindow.window?.makeKeyAndOrderFront(self)
+    }
     // if aspect ratio is not set
     if mainWindow.window?.aspectRatio == nil {
       mainWindow.window?.aspectRatio = NSSize(width: AppData.widthWhenNoVideo, height: AppData.heightWhenNoVideo)
@@ -1021,8 +1023,11 @@ class PlayerCore: NSObject {
     case .muteButton:
       let mute = mpv.getFlag(MPVOption.Audio.mute)
       DispatchQueue.main.async {
-        self.mainWindow.muteButton.state = mute ? .on : .off
-        self.miniPlayer.muteButton.state = mute ? .on : .off
+        if self.isInMiniPlayer {
+           self.miniPlayer.muteButton.state = mute ? .on : .off
+        } else {
+          self.mainWindow.muteButton.state = mute ? .on : .off
+        }
       }
 
     case .chapterList:

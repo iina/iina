@@ -321,7 +321,7 @@ class PlayerCore: NSObject {
     invalidateTimer()
   }
 
-  func toogleMute(_ set: Bool?) {
+  func toogleMute(_ set: Bool? = nil) {
     let newState = set ?? !mpv.getFlag(MPVOption.Audio.mute)
     mpv.setFlag(MPVOption.Audio.mute, newState)
   }
@@ -1022,6 +1022,7 @@ class PlayerCore: NSObject {
       let mute = mpv.getFlag(MPVOption.Audio.mute)
       DispatchQueue.main.async {
         self.mainWindow.muteButton.state = mute ? .on : .off
+        self.miniPlayer.muteButton.state = mute ? .on : .off
       }
 
     case .chapterList:

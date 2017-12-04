@@ -22,6 +22,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
   var menuActionHandler: MainMenuActionHandler!
 
+  @IBOutlet weak var muteButton: NSButton!
   @IBOutlet var volumePopover: NSPopover!
   @IBOutlet weak var backgroundView: NSVisualEffectView!
   @IBOutlet weak var windowCloseButton: NSButton!
@@ -325,6 +326,10 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     } else {
       volumePopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .minY)
     }
+  }
+
+  @IBAction func muteBtnAction(_ sender: NSButton) {
+    player.toogleMute()
   }
 
   @IBAction func playSliderChanges(_ sender: NSSlider) {

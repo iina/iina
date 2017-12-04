@@ -15,6 +15,7 @@
                 <outlet property="controlViewTopConstraint" destination="sJO-Qa-tUh" id="iXu-0b-vwV"/>
                 <outlet property="leftLabel" destination="9EY-2T-Ebf" id="ICj-Tc-hjF"/>
                 <outlet property="mediaInfoView" destination="Zv7-H8-iOq" id="LrZ-za-HpC"/>
+                <outlet property="muteButton" destination="fUy-ap-8fj" id="G5I-fx-fYx"/>
                 <outlet property="playButton" destination="aC9-OK-a4x" id="3Ej-3P-qnY"/>
                 <outlet property="playSlider" destination="e3M-Ma-JJM" id="hph-Mq-Yba"/>
                 <outlet property="playlistWrapperView" destination="dkl-qd-rae" id="XpW-Qe-rX8"/>
@@ -181,17 +182,17 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="fUy-ap-8fj">
-                                        <rect key="frame" x="44" y="15" width="14" height="14"/>
+                                        <rect key="frame" x="26" y="15" width="14" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="14" id="baK-JN-ndI"/>
                                             <constraint firstAttribute="height" constant="14" id="o7f-KV-JoD"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="9bz-eY-31X">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" imageScaling="proportionallyUpOrDown" inset="2" id="9bz-eY-31X">
+                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="volumeBtnAction:" target="-2" id="kCa-WS-9CL"/>
+                                            <action selector="muteBtnAction:" target="-2" id="r0T-az-XCF"/>
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="KFz-Kp-RxC">
@@ -208,15 +209,30 @@
                                             <action selector="toogleVideoView:" target="-2" id="Q4b-pa-4UM"/>
                                         </connections>
                                     </button>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Grd-Ot-j0o">
+                                        <rect key="frame" x="50" y="16" width="18" height="12"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="i99-tF-Vwi"/>
+                                            <constraint firstAttribute="width" constant="18" id="me4-jx-uzB"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="slider" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="zfK-2J-XH9">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="volumeBtnAction:" target="-2" id="c6e-B1-UHz"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="F4P-Wj-5qw" firstAttribute="top" secondItem="cDR-8J-QI7" secondAttribute="top" constant="8" id="3eN-Vl-fax"/>
                                     <constraint firstItem="nSh-lh-jim" firstAttribute="centerY" secondItem="aC9-OK-a4x" secondAttribute="centerY" id="9tz-su-lQa"/>
-                                    <constraint firstItem="nSh-lh-jim" firstAttribute="leading" secondItem="fUy-ap-8fj" secondAttribute="trailing" constant="28" id="KpH-Aw-b5M"/>
+                                    <constraint firstItem="nSh-lh-jim" firstAttribute="leading" secondItem="Grd-Ot-j0o" secondAttribute="trailing" constant="18" id="I3K-2I-55x"/>
                                     <constraint firstItem="aC9-OK-a4x" firstAttribute="top" secondItem="cDR-8J-QI7" secondAttribute="top" constant="12" id="Kzm-iJ-Vkp"/>
                                     <constraint firstItem="KFz-Kp-RxC" firstAttribute="centerY" secondItem="a5L-QK-yog" secondAttribute="centerY" id="LaN-Gb-lL9"/>
                                     <constraint firstItem="KFz-Kp-RxC" firstAttribute="leading" secondItem="a5L-QK-yog" secondAttribute="trailing" constant="12" id="PpO-ZM-V3M"/>
                                     <constraint firstItem="fUy-ap-8fj" firstAttribute="centerY" secondItem="aC9-OK-a4x" secondAttribute="centerY" id="PvJ-Gl-h60"/>
+                                    <constraint firstItem="Grd-Ot-j0o" firstAttribute="leading" secondItem="fUy-ap-8fj" secondAttribute="trailing" constant="10" id="RWY-uN-H6g"/>
                                     <constraint firstAttribute="height" constant="48" id="fao-NR-5SG"/>
                                     <constraint firstItem="F4P-Wj-5qw" firstAttribute="leading" secondItem="cDR-8J-QI7" secondAttribute="leading" constant="8" id="fm2-UN-gO5"/>
                                     <constraint firstItem="aC9-OK-a4x" firstAttribute="leading" secondItem="nSh-lh-jim" secondAttribute="trailing" constant="24" id="kCv-eh-zx2"/>
@@ -224,6 +240,7 @@
                                     <constraint firstItem="aC9-OK-a4x" firstAttribute="centerX" secondItem="cDR-8J-QI7" secondAttribute="centerX" constant="2" id="pI1-nE-AtV"/>
                                     <constraint firstItem="a5L-QK-yog" firstAttribute="leading" secondItem="998-mn-oHJ" secondAttribute="trailing" constant="20" id="uSD-MR-I8x"/>
                                     <constraint firstItem="a5L-QK-yog" firstAttribute="centerY" secondItem="aC9-OK-a4x" secondAttribute="centerY" id="vwZ-Gt-F5N"/>
+                                    <constraint firstItem="Grd-Ot-j0o" firstAttribute="centerY" secondItem="nSh-lh-jim" secondAttribute="centerY" id="w1q-nd-mKa"/>
                                     <constraint firstItem="998-mn-oHJ" firstAttribute="leading" secondItem="aC9-OK-a4x" secondAttribute="trailing" constant="20" id="yL9-7r-6VR"/>
                                 </constraints>
                             </customView>
@@ -342,11 +359,13 @@
     </objects>
     <resources>
         <image name="NSStopProgressFreestandingTemplate" width="11" height="11"/>
+        <image name="mute" width="17" height="14"/>
         <image name="nextl" width="24" height="24"/>
         <image name="nextr" width="24" height="24"/>
         <image name="pause" width="24" height="24"/>
         <image name="play" width="24" height="24"/>
         <image name="playlist" width="14" height="14"/>
+        <image name="slider" width="18" height="12"/>
         <image name="toggle-album-art" width="14" height="14"/>
         <image name="volume" width="17" height="14"/>
     </resources>

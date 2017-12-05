@@ -49,8 +49,8 @@ struct AppData {
   static let websiteLink = "https://lhc70000.github.io/iina/"
   static let emailLink = "lhc199652@gmail.com"
 
-  static let widthWhenNoVideo = 640
-  static let heightWhenNoVideo = 360
+  static let widthWhenNoVideo = 480
+  static let heightWhenNoVideo = 480
 }
 
 

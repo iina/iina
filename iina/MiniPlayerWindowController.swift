@@ -48,6 +48,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var playSlider: NSSlider!
   @IBOutlet weak var volumeSlider: NSSlider!
   @IBOutlet weak var volumeLabel: NSTextField!
+  @IBOutlet weak var defaultAlbumArt: NSView!
 
   var isOntop = false
   var isPlaylistVisible = false
@@ -109,6 +110,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
         view?.material = .dark
       }
     }
+
+    // default album art
+    defaultAlbumArt.isHidden = false
+    defaultAlbumArt.wantsLayer = true
+    defaultAlbumArt.layer?.contents = #imageLiteral(resourceName: "default-album-art")
 
     // close button
     closeButtonVE.action = #selector(self.close)
@@ -254,6 +260,9 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     let currentHeight = videoView.frame.height
     let newHeight = videoView.frame.width / aspect
     updateVideoViewAspectConstraint(withAspect: aspect)
+    // default album art
+    defaultAlbumArt.isHidden = !player.info.videoTracks.isEmpty
+    // resize window
     var frame = window.frame
     frame.size.height += newHeight - currentHeight - 0.5
     window.setFrame(frame, display: true, animate: false)

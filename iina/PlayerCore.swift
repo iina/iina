@@ -255,10 +255,18 @@ class PlayerCore: NSObject {
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": playlistView])
     // move video view
     videoView.removeFromSuperview()
-    miniPlayer.videoWrapperView.addSubview(videoView)
+    miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
     let (dw, dh) = videoSizeForDisplay
     miniPlayer.updateVideoViewAspectConstraint(withAspect: CGFloat(dw) / CGFloat(dh))
+    if let mw = mainWindow.window, mw.aspectRatio == .zero {
+      let size = NSSize(width: dw, height: dh)
+      mw.setFrame(NSRect(origin: mw.frame.origin, size: size), display: false)
+      mw.aspectRatio = size
+    }
+    if !info.videoTracks.isEmpty {
+      miniPlayer.defaultAlbumArt.isHidden = true
+    }
     videoView.videoLayer.draw()
     // hide main window
     mainWindow.window?.orderOut(self)

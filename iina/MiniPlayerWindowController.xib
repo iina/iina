@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,6 +21,7 @@
                 <outlet property="closeButtonView" destination="ejt-zy-gzd" id="5Eg-ME-Qle"/>
                 <outlet property="controlView" destination="cDR-8J-QI7" id="B1L-ru-Mnc"/>
                 <outlet property="controlViewTopConstraint" destination="sJO-Qa-tUh" id="iXu-0b-vwV"/>
+                <outlet property="defaultAlbumArt" destination="Psi-wJ-2SC" id="oeb-1Z-2ho"/>
                 <outlet property="leftLabel" destination="9EY-2T-Ebf" id="ICj-Tc-hjF"/>
                 <outlet property="mediaInfoView" destination="Zv7-H8-iOq" id="LrZ-za-HpC"/>
                 <outlet property="muteButton" destination="fUy-ap-8fj" id="G5I-fx-fYx"/>
@@ -53,6 +55,20 @@
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="WD9-DD-LNj">
                         <rect key="frame" x="0.0" y="72" width="300" height="0.0"/>
+                        <subviews>
+                            <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Psi-wJ-2SC">
+                                <rect key="frame" x="0.0" y="-300" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Psi-wJ-2SC" secondAttribute="height" multiplier="1:1" id="aXc-tY-3t0"/>
+                                </constraints>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Psi-wJ-2SC" firstAttribute="top" secondItem="WD9-DD-LNj" secondAttribute="top" id="DJV-iQ-nTl"/>
+                            <constraint firstItem="Psi-wJ-2SC" firstAttribute="leading" secondItem="WD9-DD-LNj" secondAttribute="leading" id="tB1-L1-Bci"/>
+                            <constraint firstAttribute="bottom" secondItem="Psi-wJ-2SC" secondAttribute="bottom" priority="250" id="vT3-vV-rhO"/>
+                            <constraint firstAttribute="trailing" secondItem="Psi-wJ-2SC" secondAttribute="trailing" id="xov-sj-bTG"/>
+                        </constraints>
                     </customView>
                     <visualEffectView wantsLayer="YES" blendingMode="behindWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="HdA-I9-dRJ">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="72"/>
@@ -313,14 +329,14 @@
                                     <constraint firstAttribute="trailing" secondItem="WS6-ix-uBJ" secondAttribute="trailing" constant="4" id="tcm-kc-gnR"/>
                                 </constraints>
                             </visualEffectView>
-                            <box boxType="custom" borderWidth="0.0" cornerRadius="6" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="NWy-Hm-vxL">
+                            <box boxType="custom" cornerRadius="6" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="NWy-Hm-vxL">
                                 <rect key="frame" x="2" y="2" width="15" height="30"/>
                                 <view key="contentView" id="SH0-Bg-0kB">
-                                    <rect key="frame" x="0.0" y="0.0" width="15" height="30"/>
+                                    <rect key="frame" x="1" y="1" width="13" height="28"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button toolTip="Close Mini Player" translatesAutoresizingMaskIntoConstraints="NO" id="hZH-NM-Lst">
-                                            <rect key="frame" x="2" y="17" width="11" height="11"/>
+                                            <rect key="frame" x="2" y="15" width="11" height="11"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="11" id="RKA-bS-WrY"/>
                                                 <constraint firstAttribute="width" constant="11" id="UDU-ua-dI8"/>
@@ -354,8 +370,8 @@
                                         <constraint firstAttribute="trailing" secondItem="hZH-NM-Lst" secondAttribute="trailing" constant="2" id="ytQ-fk-OSa"/>
                                     </constraints>
                                 </view>
-                                <color key="borderColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                <color key="fillColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                <color key="borderColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="fillColor" red="0.85688321572269888" green="0.85688321572269888" blue="0.85688321572269888" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                             </box>
                         </subviews>
                         <constraints>
@@ -436,14 +452,6 @@
                 <outlet property="contentViewController" destination="oqa-Md-uNZ" id="7b5-aW-gXJ"/>
             </connections>
         </popover>
-        <button id="rU1-XT-MA9">
-            <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="RuJ-5s-dDN">
-                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                <font key="font" metaFont="system"/>
-            </buttonCell>
-        </button>
     </objects>
     <resources>
         <image name="NSStopProgressFreestandingTemplate" width="11" height="11"/>

@@ -51,6 +51,7 @@ class DurationDisplayTextField: NSTextField {
     super.mouseDown(with: event)
     
     self.switchMode()
+    Preference.set(mode == .remaining, for: .showRemainingTime)
   }
   
 }

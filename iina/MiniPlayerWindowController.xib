@@ -447,7 +447,7 @@
             </constraints>
             <point key="canvasLocation" x="12.5" y="357.5"/>
         </customView>
-        <popover id="yea-QL-Hlq">
+        <popover behavior="t" id="yea-QL-Hlq">
             <connections>
                 <outlet property="contentViewController" destination="oqa-Md-uNZ" id="7b5-aW-gXJ"/>
             </connections>

@@ -259,13 +259,19 @@ class PlayerCore: NSObject {
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
     let (dw, dh) = videoSizeForDisplay
     miniPlayer.updateVideoViewAspectConstraint(withAspect: CGFloat(dw) / CGFloat(dh))
+    // if no video track (or video info is still not available now), set aspect ratio for main window
     if let mw = mainWindow.window, mw.aspectRatio == .zero {
       let size = NSSize(width: dw, height: dh)
       mw.setFrame(NSRect(origin: mw.frame.origin, size: size), display: false)
       mw.aspectRatio = size
     }
+    // if received video size before switching to music mode, hide default album art
     if !info.videoTracks.isEmpty {
       miniPlayer.defaultAlbumArt.isHidden = true
+    }
+    // in case of video size changed, reset mini player window size if playlist is folded
+    if !miniPlayer.isPlaylistVisible {
+      miniPlayer.setToInitialWindowSize(display: true, animate: false)
     }
     videoView.videoLayer.draw()
     // hide main window

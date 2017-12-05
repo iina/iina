@@ -69,6 +69,14 @@ class PlayerCore: NSObject {
 
   // MARK: - Fields
 
+  @available(macOS 10.12.2, *)
+  var touchBarSupport: TouchBarSupport {
+    get {
+      return self._touchBarSupport as! TouchBarSupport
+    }
+  }
+  private var _touchBarSupport: Any?
+
   unowned let ud: UserDefaults = UserDefaults.standard
 
   /// A dispatch queue for auto load feature.
@@ -124,6 +132,9 @@ class PlayerCore: NSObject {
     self.mainWindow = MainWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(player: self)
+    if #available(OSX 10.12.2, *) {
+      self._touchBarSupport = TouchBarSupport(playerCore: self)
+    }
   }
 
   // MARK: - Control commands
@@ -879,7 +890,7 @@ class PlayerCore: NSObject {
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
       mainWindow.updateTitle()
       if #available(macOS 10.12.2, *) {
-        mainWindow.setupTouchBarUI()
+        touchBarSupport.setupTouchBarUI()
       }
       // only set some initial properties for the first file
       if info.justLaunched {
@@ -1024,7 +1035,7 @@ class PlayerCore: NSObject {
         self.mainWindow.updatePlayButtonState(pause ? .off : .on)
         self.miniPlayer.updatePlayButtonState(pause ? .off : .on)
         if #available(macOS 10.12.2, *) {
-          self.mainWindow.updateTouchBarPlayBtn()
+          self.touchBarSupport.updateTouchBarPlayBtn()
         }
       }
 
@@ -1099,9 +1110,7 @@ class PlayerCore: NSObject {
             self.info.thumbnails = thumbnails
             self.info.thumbnailsReady = true
             self.info.thumbnailsProgress = 1
-            DispatchQueue.main.async {
-              self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
-            }
+            self.refreshTouchBarSlider()
           }
         }
       } else {
@@ -1110,6 +1119,13 @@ class PlayerCore: NSObject {
     }
   }
 
+  func refreshTouchBarSlider() {
+    if #available(OSX 10.12.2, *) {
+      DispatchQueue.main.async {
+        self.touchBarSupport.touchBarPlaySlider?.needsDisplay = true
+      }
+    }
+  }
 
   // MARK: - Getting info
 
@@ -1310,9 +1326,7 @@ extension PlayerCore: FFmpegControllerDelegate {
       info.thumbnails.append(contentsOf: thumbnails)
     }
     info.thumbnailsProgress = Double(progress) / Double(ffmpegController.thumbnailCount)
-    DispatchQueue.main.async {
-      self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
-    }
+    refreshTouchBarSlider()
   }
 
   func didGenerate(_ thumbnails: [FFThumbnail], forFile filename: String, succeeded: Bool) {
@@ -1321,9 +1335,7 @@ extension PlayerCore: FFmpegControllerDelegate {
       info.thumbnails = thumbnails
       info.thumbnailsReady = true
       info.thumbnailsProgress = 1
-      DispatchQueue.main.async {
-        self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
-      }
+      refreshTouchBarSlider()
       if let cacheName = info.mpvMd5 {
         backgroundQueue.async {
           ThumbnailCache.write(self.info.thumbnails, forName: cacheName)

@@ -73,11 +73,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** The control view for interactive mode. */
   var cropSettingsView: CropBoxViewController?
 
-  /** The current/remaining time label in Touch Bar. */
-  lazy var sizingTouchBarTextField: NSTextField = {
-    return NSTextField()
-  }()
-
   private lazy var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = {
     return NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
   }()
@@ -99,8 +94,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** For mpv's `geometry` option. We cache the parsed structure
    so never need to parse it every time. */
   var cachedGeometry: PlayerCore.GeometryDef?
-
-  var touchBarPosLabelWidthLayout: NSLayoutConstraint?
 
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
@@ -348,10 +341,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var osdAccessoryProgress: NSProgressIndicator!
 
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
-
-  weak var touchBarPlaySlider: TouchBarPlaySlider?
-  weak var touchBarPlayPauseBtn: NSButton?
-  weak var touchBarCurrentPosLabel: DurationDisplayTextField?
 
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
 
@@ -619,7 +608,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case PK.showRemainingTime.rawValue:
       if let newValue = change[.newKey] as? Bool {
         rightLabel.mode = newValue ? .remaining : .duration
-        touchBarCurrentPosLabel?.mode = newValue ? .remaining : .current
+        if #available(OSX 10.12.2, *) {
+          player.touchBarSupport.touchBarCurrentPosLabel?.mode = newValue ? .remaining : .current
+        }
       }
     
     case PK.blackOutMonitor.rawValue:
@@ -2148,11 +2139,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
-    touchBarCurrentPosLabel?.updateText(with: duration, given: pos)
+    if #available(OSX 10.12.2, *) {
+      player.touchBarSupport.touchBarCurrentPosLabel?.updateText(with: duration, given: pos)
+    }
     rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {
       playSlider.doubleValue = percentage
-      touchBarPlaySlider?.setDoubleValueSafely(percentage)
+      if #available(OSX 10.12.2, *) {
+        player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
+      }
     }
   }
 

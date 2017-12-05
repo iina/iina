@@ -87,7 +87,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
       window.standardWindowButton($0)?.isHidden = true
     }
 
-    window.setFrame(window.frame.rectWithoutPlaylistHeight(providedWindowHeight: normalWindowHeight()), display: false, animate: false)
+    setToInitialWindowSize(display: false, animate: false)
     
     controlViewTopConstraint.isActive = false
 
@@ -176,11 +176,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
 
   override func mouseDown(with event: NSEvent) {
     window?.makeFirstResponder(window)
-    if volumePopover.isShown {
-      volumePopover.performClose(self)
-    } else {
-      super.mouseDown(with: event)
-    }
+    super.mouseDown(with: event)
   }
 
   override func mouseEntered(with event: NSEvent) {
@@ -208,12 +204,12 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
       // hide
       if window.frame.height < windowHeight + AutoHidePlaylistThreshold {
         isPlaylistVisible = false
-        window.setFrame(window.frame.rectWithoutPlaylistHeight(providedWindowHeight: windowHeight), display: true, animate: true)
+        setToInitialWindowSize()
       }
     } else {
       // show
       if window.frame.height < windowHeight + AutoHidePlaylistThreshold {
-        window.setFrame(window.frame.rectWithoutPlaylistHeight(providedWindowHeight: windowHeight), display: true, animate: true)
+        setToInitialWindowSize()
       } else {
         isPlaylistVisible = true
       }
@@ -278,6 +274,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     videoViewAspectConstraint?.isActive = true
   }
 
+  func setToInitialWindowSize(display: Bool = true, animate: Bool = true) {
+    guard let window = window else { return }
+    window.setFrame(window.frame.rectWithoutPlaylistHeight(providedWindowHeight: normalWindowHeight()), display: display, animate: animate)
+  }
+
   // MARK: - IBAction
 
   @IBAction func togglePlaylist(_ sender: Any) {
@@ -285,7 +286,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     if isPlaylistVisible {
       // hide
       isPlaylistVisible = false
-      window.setFrame(window.frame.rectWithoutPlaylistHeight(providedWindowHeight: normalWindowHeight()), display: true, animate: true)
+      setToInitialWindowSize()
     } else {
       // show
       isPlaylistVisible = true

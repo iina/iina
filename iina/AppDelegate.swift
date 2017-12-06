@@ -111,12 +111,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     commandLineStatus.parseArguments(iinaArgs)
 
     let (version, build) = Utility.iinaVersion()
-    print("IINA \(version) Build \(build)\n")
+    print("IINA \(version) Build \(build)")
 
     guard !iinaArgFilename.isEmpty || commandLineStatus.isStdin else {
-      print("No file/URL specified.\n")
-      print("You can use all mpv options with --mpv- prefix, e.g. --mpv-volume=20. If you wish to play from stdin, use --stdin.\n")
-      print("Please ignore this message if you are running in a debug environment.\n")
+      print("This binary is not intended for being used as a command line tool. Please use the bundled iina-cli.")
+      print("Please ignore this message if you are running in a debug environment.")
       return
     }
 

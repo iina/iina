@@ -33,23 +33,40 @@ stdin.open()
 
 let isStdin = stdin.hasBytesAvailable
 
+// Check arguments
+
 var userArgs = Array(processInfo.arguments.dropFirst())
 
-guard isStdin || (userArgs.count > 0 && userArgs.contains(where: { arg in !arg.hasPrefix("-") })) else {
+if userArgs.contains("--help") || userArgs.contains("-h") {
   print(
     """
-    No file/URL specified.
+    Usage: iina-cli [arguments] [FILE] [-- mpv_option [...]]
 
-    Usage:
-    iina-cli [--mpv-*] FILE
+    Arguments:
+    --mpv-*:     All mpv options are supported here, except those starting with "--no-".
+                 Example: --mpv-volume=20 --mpv-resume-playback=no
+    --help | -h: Print this message.
 
-    --mpv-*: All mpv options are supported here, except those starting with "--no-".
-             Example: --mpv-volume=20 --mpv-resume-playback=no
+    MPV Option:
+    Raw mpv options without --mpv- prefix.
+    Example: --volume=20
 
     You may also pipe to stdin directly.
     """)
   exit(0)
 }
+
+if let dashIndex = userArgs.index(of: "--") {
+  userArgs.remove(at: dashIndex)
+  for i in dashIndex..<userArgs.count {
+    let arg = userArgs[i]
+    if arg.hasPrefix("--") {
+      userArgs[i] = "--mpv-\(arg.dropFirst(2))"
+    }
+  }
+}
+
+// Handle stdin
 
 if isStdin {
   task.standardInput = FileHandle.standardInput

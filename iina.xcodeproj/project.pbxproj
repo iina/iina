@@ -188,6 +188,8 @@
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
 		C75540751E7886FE00C13D4A /* SubSelectWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C75540771E7886FE00C13D4A /* SubSelectWindowController.xib */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
+		E3DE8DCD1FD8166A0021921C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DE8DCC1FD8166A0021921C /* main.swift */; };
+		E3DE8DD31FD848BA0021921C /* iina-cli in Copy Executables */ = {isa = PBXBuildFile; fileRef = E3DE8DCA1FD8166A0021921C /* iina-cli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -197,6 +199,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				E3DE8DD31FD848BA0021921C /* iina-cli in Copy Executables */,
 				8461BA681E4237C7008BB852 /* youtube-dl in Copy Executables */,
 			);
 			name = "Copy Executables";
@@ -263,6 +266,15 @@
 			);
 			name = "Copy Configs";
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3DE8DC81FD8166A0021921C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -911,6 +923,8 @@
 		D27E35E01E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D2B411421E5336AD002819E1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
 		D2B411431E5336AE002819E1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		E3DE8DCA1FD8166A0021921C /* iina-cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "iina-cli"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3DE8DCC1FD8166A0021921C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E53BAB3F1F1692B700D2609F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		E53CCBA31EB7711200DFF4E1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/OpenURLAccessoryViewController.strings; sourceTree = "<group>"; };
 		E53CCBA51EB7717500DFF4E1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/SubSelectWindowController.strings; sourceTree = "<group>"; };
@@ -957,6 +971,13 @@
 				84B1CE381F98BE2A00994D63 /* libswscale.4.8.100.dylib in Frameworks */,
 				496B19921E2968530035AF10 /* PIP.framework in Frameworks */,
 				5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3DE8DC71FD8166A0021921C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1431,6 +1452,7 @@
 			isa = PBXGroup;
 			children = (
 				84EB1ED81D2F51D3004FA5A1 /* iina */,
+				E3DE8DCB1FD8166A0021921C /* iina-cli */,
 				84EB1ED71D2F51D3004FA5A1 /* Products */,
 				8461BA641E42344D008BB852 /* Executables */,
 				848290731D95978100C3C76C /* Frameworks */,
@@ -1442,6 +1464,7 @@
 			isa = PBXGroup;
 			children = (
 				84EB1ED61D2F51D3004FA5A1 /* IINA.app */,
+				E3DE8DCA1FD8166A0021921C /* iina-cli */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1508,6 +1531,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E3DE8DCB1FD8166A0021921C /* iina-cli */ = {
+			isa = PBXGroup;
+			children = (
+				E3DE8DCC1FD8166A0021921C /* main.swift */,
+			);
+			path = "iina-cli";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1536,13 +1567,30 @@
 			productReference = 84EB1ED61D2F51D3004FA5A1 /* IINA.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E3DE8DC91FD8166A0021921C /* iina-cli */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E3DE8DD01FD8166A0021921C /* Build configuration list for PBXNativeTarget "iina-cli" */;
+			buildPhases = (
+				E3DE8DC61FD8166A0021921C /* Sources */,
+				E3DE8DC71FD8166A0021921C /* Frameworks */,
+				E3DE8DC81FD8166A0021921C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iina-cli";
+			productName = "iina-cli";
+			productReference = E3DE8DCA1FD8166A0021921C /* iina-cli */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		84EB1ECE1D2F51D3004FA5A1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = lhc;
 				TargetAttributes = {
@@ -1550,6 +1598,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 67CQ77V27R;
 						LastSwiftMigration = 0900;
+					};
+					E3DE8DC91FD8166A0021921C = {
+						CreatedOnToolsVersion = 9.1;
+						DevelopmentTeam = 67CQ77V27R;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -1581,6 +1634,7 @@
 			projectRoot = "";
 			targets = (
 				84EB1ED51D2F51D3004FA5A1 /* iina */,
+				E3DE8DC91FD8166A0021921C /* iina-cli */,
 			);
 		};
 /* End PBXProject section */
@@ -1819,6 +1873,14 @@
 				8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */,
 				840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */,
 				84BEEC3F1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3DE8DC61FD8166A0021921C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3DE8DCD1FD8166A0021921C /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2610,6 +2672,42 @@
 			};
 			name = Release;
 		};
+		E3DE8DCE1FD8166A0021921C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 67CQ77V27R;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		E3DE8DCF1FD8166A0021921C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 67CQ77V27R;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2627,6 +2725,15 @@
 			buildConfigurations = (
 				84EB1EFA1D2F51D3004FA5A1 /* Debug */,
 				84EB1EFB1D2F51D3004FA5A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E3DE8DD01FD8166A0021921C /* Build configuration list for PBXNativeTarget "iina-cli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3DE8DCE1FD8166A0021921C /* Debug */,
+				E3DE8DCF1FD8166A0021921C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

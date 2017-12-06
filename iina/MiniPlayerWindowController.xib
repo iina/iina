@@ -329,10 +329,10 @@
                                     <constraint firstAttribute="trailing" secondItem="WS6-ix-uBJ" secondAttribute="trailing" constant="4" id="tcm-kc-gnR"/>
                                 </constraints>
                             </visualEffectView>
-                            <box boxType="custom" cornerRadius="6" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="NWy-Hm-vxL">
-                                <rect key="frame" x="2" y="2" width="15" height="30"/>
+                            <box boxType="custom" cornerRadius="8" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="NWy-Hm-vxL">
+                                <rect key="frame" x="2" y="2" width="17" height="30"/>
                                 <view key="contentView" id="SH0-Bg-0kB">
-                                    <rect key="frame" x="1" y="1" width="13" height="28"/>
+                                    <rect key="frame" x="1" y="1" width="15" height="28"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button toolTip="Close Mini Player" translatesAutoresizingMaskIntoConstraints="NO" id="hZH-NM-Lst">
@@ -378,7 +378,6 @@
                             <constraint firstItem="3Xd-pn-agj" firstAttribute="top" secondItem="ejt-zy-gzd" secondAttribute="top" id="GQa-ix-jZJ"/>
                             <constraint firstAttribute="trailing" secondItem="3Xd-pn-agj" secondAttribute="trailing" id="KS8-De-1L8"/>
                             <constraint firstItem="3Xd-pn-agj" firstAttribute="leading" secondItem="ejt-zy-gzd" secondAttribute="leading" id="QXF-Wm-77W"/>
-                            <constraint firstAttribute="trailing" secondItem="NWy-Hm-vxL" secondAttribute="trailing" constant="2" id="iZb-RF-3j2"/>
                             <constraint firstItem="NWy-Hm-vxL" firstAttribute="leading" secondItem="ejt-zy-gzd" secondAttribute="leading" constant="2" id="jb3-TF-GBZ"/>
                             <constraint firstItem="NWy-Hm-vxL" firstAttribute="top" secondItem="ejt-zy-gzd" secondAttribute="top" constant="2" id="u91-uV-8Mj"/>
                             <constraint firstAttribute="bottom" secondItem="3Xd-pn-agj" secondAttribute="bottom" id="wVu-Un-7Lg"/>

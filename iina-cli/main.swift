@@ -8,10 +8,12 @@
 
 import Cocoa
 
-guard let execURL = Bundle.main.executableURL else {
+guard var execURL = Bundle.main.executableURL else {
   print("Cannot get executable path.")
   exit(1)
 }
+
+execURL.resolveSymlinksInPath()
 
 let processInfo = ProcessInfo.processInfo
 

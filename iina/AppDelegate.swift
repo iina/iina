@@ -142,7 +142,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     if #available(macOS 10.13, *) {
-      RemoteCommandController.useSystemMediaControl = Preference.bool(for: .useMediaKeys)
       if RemoteCommandController.useSystemMediaControl {
         RemoteCommandController.setup()
         NowPlayingInfoManager.updateState(.unknown)
@@ -448,7 +447,7 @@ struct CommandLineStatus {
 class RemoteCommandController {
   static let remoteCommand = MPRemoteCommandCenter.shared()
 
-  static var useSystemMediaControl: Bool = false
+  static var useSystemMediaControl: Bool = Preference.bool(for: .useMediaKeys)
 
   static func setup() {
     remoteCommand.playCommand.addTarget { _ in

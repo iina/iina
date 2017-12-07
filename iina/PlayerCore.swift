@@ -9,38 +9,6 @@
 import Cocoa
 import MediaPlayer
 
-@available (macOS 10.13, *)
-class NowPlayingInfoManager {
-  static let info = MPNowPlayingInfoCenter.default()
-
-  static func updateInfo() {
-    var nowPlayingInfo = [String: Any]()
-    let activePlayer = PlayerCore.lastActive
-
-    let isAudio = activePlayer.currentMediaIsAudio == .isAudio
-    nowPlayingInfo[MPMediaItemPropertyMediaType] = isAudio ? MPNowPlayingInfoMediaType.audio : MPNowPlayingInfoMediaType.video
-    let (title, album, artist) = activePlayer.getMusicMetadata()
-    nowPlayingInfo[MPMediaItemPropertyTitle] = title
-    if isAudio {
-      nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = album
-      nowPlayingInfo[MPMediaItemPropertyArtist] = artist
-    }
-
-
-    let duration = PlayerCore.lastActive.info.videoDuration?.second ?? 0
-    nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = duration
-    nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = PlayerCore.lastActive.info.videoPosition?.second ?? 0
-    nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = 1
-    nowPlayingInfo[MPNowPlayingInfoPropertyDefaultPlaybackRate] = 1
-    info.nowPlayingInfo = nowPlayingInfo
-  }
-
-  static func updateState(_ state: MPNowPlayingPlaybackState) {
-    info.playbackState = state
-  }
-
-}
-
 
 class PlayerCore: NSObject {
 
@@ -1242,13 +1210,6 @@ class PlayerCore: NSObject {
     }
   }
 
-  func getMusicMetadata() -> (title: String, album: String, artist: String) {
-    let title = mpv.getString(MPVProperty.mediaTitle) ?? ""
-    let album = mpv.getString("metadata/by-key/album") ?? ""
-    let artist = mpv.getString("metadata/by-key/artist") ?? ""
-    return (title, album, artist)
-  }
-
   // MARK: - Utils
 
   /**
@@ -1296,6 +1257,19 @@ class PlayerCore: NSObject {
         return (0, 0)
       }
     }
+  }
+
+  func getMediaTitle(withExtension: Bool = true) -> String {
+    let mediaTitle = mpv.getString(MPVProperty.mediaTitle)
+    let mediaPath = withExtension ? info.currentURL?.path : info.currentURL?.deletingPathExtension().path
+    return mediaTitle ?? mediaPath ?? ""
+  }
+
+  func getMusicMetadata() -> (title: String, album: String, artist: String) {
+    let title = mpv.getString(MPVProperty.mediaTitle) ?? ""
+    let album = mpv.getString("metadata/by-key/album") ?? ""
+    let artist = mpv.getString("metadata/by-key/artist") ?? ""
+    return (title, album, artist)
   }
 
   /** Check if there are IINA filters saved in watch_later file. */
@@ -1388,4 +1362,44 @@ extension PlayerCore: FFmpegControllerDelegate {
       }
     }
   }
+}
+
+
+@available (macOS 10.13, *)
+class NowPlayingInfoManager {
+  static let info = MPNowPlayingInfoCenter.default()
+
+  static func updateInfo() {
+    var nowPlayingInfo = [String: Any]()
+    let activePlayer = PlayerCore.lastActive
+
+    if activePlayer.currentMediaIsAudio == .isAudio {
+      nowPlayingInfo[MPMediaItemPropertyMediaType] = MPNowPlayingInfoMediaType.audio.rawValue
+      let (title, album, artist) = activePlayer.getMusicMetadata()
+      nowPlayingInfo[MPMediaItemPropertyTitle] = title
+      nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = album
+      nowPlayingInfo[MPMediaItemPropertyArtist] = artist
+    } else {
+      nowPlayingInfo[MPMediaItemPropertyMediaType] = MPNowPlayingInfoMediaType.video.rawValue
+      nowPlayingInfo[MPMediaItemPropertyTitle] = activePlayer.getMediaTitle(withExtension: false)
+    }
+
+    let duration = PlayerCore.lastActive.info.videoDuration?.second ?? 0
+    nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = duration
+    nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = activePlayer.info.videoPosition?.second ?? 0
+    nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = activePlayer.info.playSpeed
+    nowPlayingInfo[MPNowPlayingInfoPropertyDefaultPlaybackRate] = 1
+    /*
+    nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackQueueCount] = activePlayer.mpv.getInt(MPVProperty.playlistCount)
+    nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackQueueIndex] = activePlayer.mpv.getInt(MPVProperty.playlistPos)
+    nowPlayingInfo[MPNowPlayingInfoPropertyChapterCount] = activePlayer.mpv.getInt(MPVProperty.chapterListCount)
+    nowPlayingInfo[MPNowPlayingInfoPropertyChapterNumber] = activePlayer.mpv.getInt(MPVProperty.chapter)
+    */
+    info.nowPlayingInfo = nowPlayingInfo
+  }
+
+  static func updateState(_ state: MPNowPlayingPlaybackState) {
+    info.playbackState = state
+  }
+
 }

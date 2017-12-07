@@ -117,7 +117,14 @@ extension PlayerCore {
         }
       }
     }
-    return playableFiles
+    return Array(Set(playableFiles)).sorted { url1, url2 in
+      let folder1 = url1.deletingLastPathComponent(), folder2 = url2.deletingLastPathComponent()
+      if folder1.absoluteString == folder2.absoluteString {
+        return url1.lastPathComponent.localizedStandardCompare(url2.lastPathComponent) == .orderedAscending
+      } else {
+        return folder1.absoluteString < folder2.absoluteString
+      }
+    }
   }
 
   /**

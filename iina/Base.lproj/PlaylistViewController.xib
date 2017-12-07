@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,6 +18,7 @@
                 <outlet property="playlistTableView" destination="xIa-sI-0Xn" id="JVO-9u-NdG"/>
                 <outlet property="shuffleBtn" destination="xhU-qn-3aa" id="Zof-fw-Jg4"/>
                 <outlet property="subPopover" destination="nSf-Kp-eDQ" id="PUs-AK-r1c"/>
+                <outlet property="tabHeightConstraint" destination="aPN-VC-eZR" id="Vuo-Yl-46m"/>
                 <outlet property="tabView" destination="Yym-Zw-Hd8" id="xXL-Ne-hHh"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -65,7 +67,7 @@
                                                                     <rect key="frame" x="1" y="1" width="16" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
-                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZG-xB-blk">
+                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="eZG-xB-blk">
                                                                             <rect key="frame" x="0.0" y="0.0" width="18" height="17"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="▶︎" id="4yj-cg-fli">
                                                                                 <font key="font" metaFont="system"/>
@@ -118,7 +120,7 @@
                                                                                 <action selector="prefixBtnAction:" target="-2" id="wWr-Uf-zah"/>
                                                                             </connections>
                                                                         </button>
-                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzW-2W-iPg">
+                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="mzW-2W-iPg">
                                                                             <rect key="frame" x="13" y="0.0" width="183" height="17"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="Table View Cell" id="M5s-Bm-l3O">
                                                                                 <font key="font" metaFont="system"/>
@@ -486,7 +488,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KT6-lD-Wq7">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KT6-lD-Wq7">
                     <rect key="frame" x="6" y="74" width="228" height="14"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Matched subtitles" id="j2t-mO-cpo">
                         <font key="font" metaFont="smallSystemBold"/>
@@ -515,6 +517,7 @@
                 <constraint firstItem="KT6-lD-Wq7" firstAttribute="leading" secondItem="3YN-KY-vJP" secondAttribute="leading" constant="8" id="rik-Xf-oqg"/>
                 <constraint firstItem="hPw-DF-M14" firstAttribute="leading" secondItem="3YN-KY-vJP" secondAttribute="leading" constant="8" id="vVX-X7-M8h"/>
                 <constraint firstAttribute="trailing" secondItem="KT6-lD-Wq7" secondAttribute="trailing" constant="8" id="xTf-W9-ypT"/>
+                <constraint firstItem="caG-VQ-czp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3YN-KY-vJP" secondAttribute="leading" constant="20" symbolic="YES" id="y2I-oI-XmN"/>
             </constraints>
             <point key="canvasLocation" x="46.5" y="647"/>
         </customView>

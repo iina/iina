@@ -86,7 +86,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     guard arguments.count > 0 else { return }
 
     var iinaArgs: [String] = []
-    var iinaArgFilename = ""
+    var iinaArgFilenames: [String] = []
     var dropNextArg = false
 
     for arg in arguments {
@@ -104,7 +104,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
       } else {
         // assume args starting with nothing is a filename
-        iinaArgFilename = arg
+        iinaArgFilenames.append(arg)
       }
     }
 
@@ -113,7 +113,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let (version, build) = Utility.iinaVersion()
     print("IINA \(version) Build \(build)")
 
-    guard !iinaArgFilename.isEmpty || commandLineStatus.isStdin else {
+    guard !iinaArgFilenames.isEmpty || commandLineStatus.isStdin else {
       print("This binary is not intended for being used as a command line tool. Please use the bundled iina-cli.")
       print("Please ignore this message if you are running in a debug environment.")
       return
@@ -121,7 +121,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     shouldIgnoreOpenFile = true
     commandLineStatus.isCommandLine = true
-    commandLineStatus.filename = iinaArgFilename
+    commandLineStatus.filenames = iinaArgFilenames
   }
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -151,12 +151,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       // check whether showing the welcome window after 0.1s
       Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(self.checkForShowingInitialWindow), userInfo: nil, repeats: false)
     } else {
-      let pc = PlayerCore.activeOrNew
-      commandLineStatus.assignMPVArguments(to: pc)
+      let getNewPlayerCore = { () -> PlayerCore in
+        let pc = PlayerCore.newPlayerCore
+        self.commandLineStatus.assignMPVArguments(to: pc)
+        return pc
+      }
       if commandLineStatus.isStdin {
-        pc.openURLString("-")
+        getNewPlayerCore().openURLString("-")
       } else {
-        pc.openURLString(commandLineStatus.filename)
+        let validFileURLs: [URL] = commandLineStatus.filenames.flatMap { filename in
+          if Regex.url.matches(filename) {
+            return URL(string: filename)
+          } else {
+            return FileManager.default.fileExists(atPath: filename) ? URL(fileURLWithPath: filename) : nil
+          }
+        }
+        if commandLineStatus.openSeparateWindows {
+          validFileURLs.forEach { url in
+            let _ = getNewPlayerCore().openURLs([url])
+          }
+        } else {
+          let _ = getNewPlayerCore().openURLs(validFileURLs)
+        }
       }
     }
 
@@ -377,9 +393,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 struct CommandLineStatus {
   var isCommandLine = false
   var isStdin = false
+  var openSeparateWindows = false
   var mpvArguments: [(String, String)] = []
   var iinaArguments: [(String, String)] = []
-  var filename = ""
+  var filenames: [String] = []
 
   mutating func parseArguments(_ args: [String]) {
     mpvArguments.removeAll()
@@ -403,6 +420,9 @@ struct CommandLineStatus {
         }
         if name == "stdin" {
           isStdin = true
+        }
+        if name == "separate-windows" {
+          openSeparateWindows = true
         }
       }
     }

@@ -24,7 +24,7 @@ class Regex {
     if let exp = try? NSRegularExpression(pattern: pattern, options: []) {
       self.regex = exp
     } else {
-      Utility.fatal("Cannot create regex \(pattern)")
+      fatalError("Cannot create regex \(pattern)")
     }
   }
 

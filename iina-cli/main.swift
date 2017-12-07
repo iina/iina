@@ -13,6 +13,8 @@ guard var execURL = Bundle.main.executableURL else {
   exit(1)
 }
 
+let currentDirURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+
 execURL.resolveSymlinksInPath()
 
 let processInfo = ProcessInfo.processInfo
@@ -39,19 +41,23 @@ let isStdin = stdin.hasBytesAvailable
 
 var userArgs = Array(processInfo.arguments.dropFirst())
 
-if userArgs.contains("--help") || userArgs.contains("-h") {
+if userArgs.contains(where: { $0 == "--help" || $0 == "-h" }) {
   print(
     """
-    Usage: iina-cli [arguments] [FILE] [-- mpv_option [...]]
+    Usage: iina-cli [arguments] [files] [-- mpv_option [...]]
 
     Arguments:
-    --mpv-*:     All mpv options are supported here, except those starting with "--no-".
-                 Example: --mpv-volume=20 --mpv-resume-playback=no
-    --help | -h: Print this message.
+    --mpv-*:
+            All mpv options are supported here, except those starting with "--no-".
+            Example: --mpv-volume=20 --mpv-resume-playback=no
+    --separate-windows | -w:
+            Open all files in separate windows.
+    --help | -h:
+            Print this message.
 
     MPV Option:
-    Raw mpv options without --mpv- prefix.
-    Example: --volume=20
+    Raw mpv options without --mpv- prefix. All mpv options are supported here.
+    Example: --volume=20 --no-resume-playback
 
     You may also pipe to stdin directly.
     """)
@@ -63,8 +69,26 @@ if let dashIndex = userArgs.index(of: "--") {
   for i in dashIndex..<userArgs.count {
     let arg = userArgs[i]
     if arg.hasPrefix("--") {
-      userArgs[i] = "--mpv-\(arg.dropFirst(2))"
+      if arg.hasPrefix("--no-") {
+        userArgs[i] = "--mpv-\(arg.dropFirst(5))=no"
+      } else {
+        userArgs[i] = "--mpv-\(arg.dropFirst(2))"
+      }
     }
+  }
+}
+
+userArgs = userArgs.map { arg in
+  if !arg.hasPrefix("-"),
+    !Regex.url.matches(arg),
+    let encodedFilePath = arg.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
+    let fileURL = URL(string: encodedFilePath, relativeTo: currentDirURL),
+    FileManager.default.fileExists(atPath: fileURL.path) {
+    return fileURL.path
+  } else if arg == "-w" {
+    return "--separate-windows"
+  } else {
+    return arg
   }
 }
 
@@ -76,6 +100,7 @@ if isStdin {
   userArgs.insert("--stdin", at: 0)
 } else {
   task.standardOutput = nil
+  task.standardError = nil
 }
 
 task.arguments = userArgs

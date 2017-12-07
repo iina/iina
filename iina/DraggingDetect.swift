@@ -57,7 +57,7 @@ extension PlayerCore {
   }
 
   /**
-   Checks whether the path list contains playable file and performs early return if so.
+   Checks whether the path list contains playable file and performs early return if so. Don't use this method for a non-file URL.
    
    - Parameters:
      - paths: The list as an array of `String`.
@@ -87,7 +87,7 @@ extension PlayerCore {
   }
 
   /**
-   Returns playable files contained in a URL list.
+   Returns playable files contained in a URL list. Any non-file URL will be counted directly without further checking.
 
    - Parameters:
      - urls: The list as an array of `URL`.
@@ -96,6 +96,10 @@ extension PlayerCore {
   func getPlayableFiles(in urls: [URL]) -> [URL] {
     var playableFiles: [URL] = []
     for url in urls {
+      if !url.isFileURL {
+        playableFiles.append(url)
+        continue
+      }
       if url.representsDirectory {
         // is directory
         // `enumerator(at:includingPropertiesForKeys:)` doesn't work :(

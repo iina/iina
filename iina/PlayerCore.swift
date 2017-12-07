@@ -52,7 +52,7 @@ class PlayerCore: NSObject {
   static var playerCores: [PlayerCore] = []
 
   static private func findIdlePlayerCore() -> PlayerCore? {
-    return playerCores.first { $0.info.isIdle }
+    return playerCores.first { $0.info.isIdle && !$0.info.fileLoading }
   }
 
   static private func createPlayerCore() -> PlayerCore {

@@ -2372,6 +2372,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.doubleValue
     player.setVolume(value)
+
+    Swift.print(value)
+    if #available(OSX 10.11, *), abs(value - 100) < 0.5 && Preference.double(for: .maxVolume) > 100 {
+      NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .default)
+    }
   }
 
   // MARK: - Utility

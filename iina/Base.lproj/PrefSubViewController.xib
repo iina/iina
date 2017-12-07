@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -61,7 +61,7 @@
                                                 </connections>
                                             </popUpButton>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C4b-sm-2kc">
-                                                <rect key="frame" x="-2" y="104" width="260" height="14"/>
+                                                <rect key="frame" x="-2" y="104" width="259" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Subtitles have priority when filename containing:" id="7pf-Kb-TNr">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -454,10 +454,10 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="LnO-CD-ImJ">
-                                                            <rect key="frame" x="141" y="38" width="27" height="19"/>
+                                                            <rect key="frame" x="141" y="38" width="29" height="18"/>
                                                             <buttonCell key="cell" type="check" title="𝐼" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pNF-Fw-QtY">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" size="13" name="CambriaMath"/>
+                                                                <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
                                                                 <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subItalic" id="Led-lG-OWd"/>
@@ -487,10 +487,10 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="EV7-O7-x1O">
-                                                            <rect key="frame" x="102" y="38" width="31" height="19"/>
+                                                            <rect key="frame" x="102" y="38" width="31" height="18"/>
                                                             <buttonCell key="cell" type="check" title="𝐁" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="hEk-7E-10q">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" size="13" name="CambriaMath"/>
+                                                                <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
                                                                 <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subBold" id="Fe4-vz-ZMk"/>

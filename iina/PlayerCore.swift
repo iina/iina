@@ -52,7 +52,7 @@ class PlayerCore: NSObject {
   static var playerCores: [PlayerCore] = []
 
   static private func findIdlePlayerCore() -> PlayerCore? {
-    return playerCores.first { $0.info.isIdle }
+    return playerCores.first { $0.info.isIdle && !$0.info.fileLoading }
   }
 
   static private func createPlayerCore() -> PlayerCore {
@@ -68,6 +68,14 @@ class PlayerCore: NSObject {
   }
 
   // MARK: - Fields
+
+  @available(macOS 10.12.2, *)
+  var touchBarSupport: TouchBarSupport {
+    get {
+      return self._touchBarSupport as! TouchBarSupport
+    }
+  }
+  private var _touchBarSupport: Any?
 
   unowned let ud: UserDefaults = UserDefaults.standard
 
@@ -109,6 +117,8 @@ class PlayerCore: NSObject {
   var isMpvTerminated: Bool = false
 
   var isInMiniPlayer = false
+  var switchedToMiniPlayerManually = false
+  var switchedBackFromMiniPlayerManually = false
 
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
@@ -122,6 +132,9 @@ class PlayerCore: NSObject {
     self.mainWindow = MainWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(player: self)
+    if #available(OSX 10.12.2, *) {
+      self._touchBarSupport = TouchBarSupport(playerCore: self)
+    }
   }
 
   // MARK: - Control commands
@@ -141,11 +154,18 @@ class PlayerCore: NSObject {
   }
 
   func openURLString(_ str: String) {
-    guard let str = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed),
-      let url = URL(string: str) else {
-        return
+    if str == "-" {
+      openMainWindow(path: str, url: URL(string: "stdin")!, isNetwork: false)
+    } else if str.first == "/" {
+      let url = URL(fileURLWithPath: str)
+      openMainWindow(path: str, url: url, isNetwork: false)
+    } else {
+      guard let str = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed),
+        let url = URL(string: str) else {
+          return
+      }
+      openMainWindow(path: str, url: url, isNetwork: true)
     }
-    openMainWindow(path: str, url: url, isNetwork: true)
   }
 
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
@@ -224,10 +244,15 @@ class PlayerCore: NSObject {
     self.syncPlayTimeTimer?.invalidate()
   }
 
-  func switchToMiniPlayer() {
+  func switchToMiniPlayer(automatically: Bool = false) {
+    if !automatically {
+      switchedToMiniPlayerManually = true
+    }
+    switchedBackFromMiniPlayerManually = false
     miniPlayer.showWindow(self)
     miniPlayer.updateTrack()
     let playlistView = mainWindow.playlistView.view
+    let videoView = mainWindow.videoView
     // reset down shift for playlistView
     mainWindow.playlistView.downShift = 0
     // hide sidebar
@@ -236,16 +261,57 @@ class PlayerCore: NSObject {
     }
     // move playist view
     playlistView.removeFromSuperview()
+    mainWindow.playlistView.useCompactTabHeight = true
     miniPlayer.playlistWrapperView.addSubview(playlistView)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": playlistView])
+    // move video view
+    videoView.removeFromSuperview()
+    miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
+    let (dw, dh) = videoSizeForDisplay
+    miniPlayer.updateVideoViewAspectConstraint(withAspect: CGFloat(dw) / CGFloat(dh))
+    // if no video track (or video info is still not available now), set aspect ratio for main window
+    if let mw = mainWindow.window, mw.aspectRatio == .zero {
+      let size = NSSize(width: dw, height: dh)
+      mw.setFrame(NSRect(origin: mw.frame.origin, size: size), display: false)
+      mw.aspectRatio = size
+    }
+    // if received video size before switching to music mode, hide default album art
+    if !info.videoTracks.isEmpty {
+      miniPlayer.defaultAlbumArt.isHidden = true
+    }
+    // in case of video size changed, reset mini player window size if playlist is folded
+    if !miniPlayer.isPlaylistVisible {
+      miniPlayer.setToInitialWindowSize(display: true, animate: false)
+    }
+    videoView.videoLayer.draw()
     // hide main window
     mainWindow.window?.orderOut(self)
     isInMiniPlayer = true
   }
 
-  func switchBackFromMiniPlayer() {
+  func switchBackFromMiniPlayer(automatically: Bool, showMainWindow: Bool = true) {
+    if !automatically {
+      switchedBackFromMiniPlayerManually = true
+    }
+    switchedToMiniPlayerManually = true
     mainWindow.playlistView.view.removeFromSuperview()
-    mainWindow.window?.makeKeyAndOrderFront(self)
+    mainWindow.playlistView.useCompactTabHeight = false
+    // add back video view
+    let mainWindowContentView = mainWindow.window!.contentView
+    miniPlayer.videoViewAspectConstraint?.isActive = false
+    miniPlayer.videoViewAspectConstraint = nil
+    mainWindow.videoView.removeFromSuperview()
+    mainWindowContentView?.addSubview(mainWindow.videoView, positioned: .below, relativeTo: nil)
+    ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
+      mainWindow.videoViewConstraints[attr] = NSLayoutConstraint(item: mainWindow.videoView, attribute: attr, relatedBy: .equal,
+                                                                 toItem: mainWindowContentView, attribute: attr, multiplier: 1, constant: 0)
+      mainWindow.videoViewConstraints[attr]!.isActive = true
+    }
+    // show main window
+    if showMainWindow {
+      mainWindow.window?.makeKeyAndOrderFront(self)
+    }
     // if aspect ratio is not set
     if mainWindow.window?.aspectRatio == nil {
       mainWindow.window?.aspectRatio = NSSize(width: AppData.widthWhenNoVideo, height: AppData.heightWhenNoVideo)
@@ -282,7 +348,7 @@ class PlayerCore: NSObject {
     invalidateTimer()
   }
 
-  func toogleMute(_ set: Bool?) {
+  func toogleMute(_ set: Bool? = nil) {
     let newState = set ?? !mpv.getFlag(MPVOption.Audio.mute)
     mpv.setFlag(MPVOption.Audio.mute, newState)
   }
@@ -824,7 +890,7 @@ class PlayerCore: NSObject {
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
       mainWindow.updateTitle()
       if #available(macOS 10.12.2, *) {
-        mainWindow.setupTouchBarUI()
+        touchBarSupport.setupTouchBarUI()
       }
       // only set some initial properties for the first file
       if info.justLaunched {
@@ -861,16 +927,16 @@ class PlayerCore: NSObject {
     // if need to switch to music mode
     if audioStatusIsAvailableNow && Preference.bool(for: .autoSwitchToMusicMode) {
       if currentMediaIsAudio == .isAudio {
-        if !isInMiniPlayer {
+        if !isInMiniPlayer && !switchedBackFromMiniPlayerManually {
           DispatchQueue.main.sync {
-            switchToMiniPlayer()
+            switchToMiniPlayer(automatically: false)
           }
         }
       } else {
-        if isInMiniPlayer {
+        if isInMiniPlayer && !switchedToMiniPlayerManually {
           DispatchQueue.main.sync {
             miniPlayer.close()
-            switchBackFromMiniPlayer()
+            switchBackFromMiniPlayer(automatically: true)
           }
         }
       }
@@ -904,6 +970,9 @@ class PlayerCore: NSObject {
   func notifyMainWindowVideoSizeChanged() {
     DispatchQueue.main.sync {
       self.mainWindow.adjustFrameByVideoSize()
+      if self.isInMiniPlayer {
+        self.miniPlayer.updateVideoSize()
+      }
     }
   }
 
@@ -966,7 +1035,7 @@ class PlayerCore: NSObject {
         self.mainWindow.updatePlayButtonState(pause ? .off : .on)
         self.miniPlayer.updatePlayButtonState(pause ? .off : .on)
         if #available(macOS 10.12.2, *) {
-          self.mainWindow.updateTouchBarPlayBtn()
+          self.touchBarSupport.updateTouchBarPlayBtn()
         }
       }
 
@@ -979,7 +1048,11 @@ class PlayerCore: NSObject {
     case .muteButton:
       let mute = mpv.getFlag(MPVOption.Audio.mute)
       DispatchQueue.main.async {
-        self.mainWindow.muteButton.state = mute ? .on : .off
+        if self.isInMiniPlayer {
+           self.miniPlayer.muteButton.state = mute ? .on : .off
+        } else {
+          self.mainWindow.muteButton.state = mute ? .on : .off
+        }
       }
 
     case .chapterList:
@@ -1037,9 +1110,7 @@ class PlayerCore: NSObject {
             self.info.thumbnails = thumbnails
             self.info.thumbnailsReady = true
             self.info.thumbnailsProgress = 1
-            DispatchQueue.main.async {
-              self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
-            }
+            self.refreshTouchBarSlider()
           }
         }
       } else {
@@ -1048,6 +1119,13 @@ class PlayerCore: NSObject {
     }
   }
 
+  func refreshTouchBarSlider() {
+    if #available(OSX 10.12.2, *) {
+      DispatchQueue.main.async {
+        self.touchBarSupport.touchBarPlaySlider?.needsDisplay = true
+      }
+    }
+  }
 
   // MARK: - Getting info
 
@@ -1248,9 +1326,7 @@ extension PlayerCore: FFmpegControllerDelegate {
       info.thumbnails.append(contentsOf: thumbnails)
     }
     info.thumbnailsProgress = Double(progress) / Double(ffmpegController.thumbnailCount)
-    DispatchQueue.main.async {
-      self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
-    }
+    refreshTouchBarSlider()
   }
 
   func didGenerate(_ thumbnails: [FFThumbnail], forFile filename: String, succeeded: Bool) {
@@ -1259,9 +1335,7 @@ extension PlayerCore: FFmpegControllerDelegate {
       info.thumbnails = thumbnails
       info.thumbnailsReady = true
       info.thumbnailsProgress = 1
-      DispatchQueue.main.async {
-        self.mainWindow?.touchBarPlaySlider?.needsDisplay = true
-      }
+      refreshTouchBarSlider()
       if let cacheName = info.mpvMd5 {
         backgroundQueue.async {
           ThumbnailCache.write(self.info.thumbnails, forName: cacheName)

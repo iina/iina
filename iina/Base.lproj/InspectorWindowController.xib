@@ -326,7 +326,7 @@
                                         <constraint firstItem="4PF-1d-gZO" firstAttribute="top" secondItem="Hmg-bS-UMv" secondAttribute="bottom" constant="6" id="DiR-e9-8Yv"/>
                                         <constraint firstItem="v4j-fa-olc" firstAttribute="leading" secondItem="GSF-Y5-FGJ" secondAttribute="trailing" constant="8" id="Dyx-ec-SEg"/>
                                         <constraint firstItem="apr-sq-JIb" firstAttribute="leading" secondItem="mRY-yK-FeT" secondAttribute="leading" constant="12" id="EDW-pS-WKA"/>
-                                        <constraint firstAttribute="bottom" secondItem="Ghr-q6-WAW" secondAttribute="bottom" constant="16" id="FXY-TE-UkS"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ghr-q6-WAW" secondAttribute="bottom" constant="16" id="FXY-TE-UkS"/>
                                         <constraint firstAttribute="trailing" secondItem="hBf-Sx-lbf" secondAttribute="trailing" constant="12" id="Hb2-Jx-92q"/>
                                         <constraint firstItem="a3w-YC-7oN" firstAttribute="top" secondItem="6EL-aj-Hjq" secondAttribute="top" id="Hla-Px-41r"/>
                                         <constraint firstItem="6EL-aj-Hjq" firstAttribute="leading" secondItem="mRY-yK-FeT" secondAttribute="leading" constant="12" id="IVp-gv-R6l"/>
@@ -1023,7 +1023,7 @@
                                                 </subviews>
                                             </clipView>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="132" id="lgJ-2t-4Av"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="132" id="lgJ-2t-4Av"/>
                                             </constraints>
                                             <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Xmy-WZ-mQX">
                                                 <rect key="frame" x="1" y="118" width="366" height="16"/>

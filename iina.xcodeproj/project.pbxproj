@@ -66,6 +66,7 @@
 		846352581EEEE11A0043F0CC /* ThumbnailPeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846352571EEEE11A0043F0CC /* ThumbnailPeekView.swift */; };
 		846654941F4EEBE300C91B8C /* vlc-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = 846654921F4EEA5500C91B8C /* vlc-default-input.conf */; };
 		8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */; };
+		846DD8CA1FB39B2500991A81 /* movist-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = 846DD8C81FB39A9800991A81 /* movist-default-input.conf */; };
 		847557141F405F8C0006B0FF /* MainWindowMenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847557131F405F8C0006B0FF /* MainWindowMenuActions.swift */; };
 		847557161F406D360006B0FF /* MiniPlayerWindowMenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847557151F406D360006B0FF /* MiniPlayerWindowMenuActions.swift */; };
 		847644081D48B413004F6DF5 /* MPVOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847644071D48B413004F6DF5 /* MPVOption.swift */; };
@@ -161,7 +162,7 @@
 		84D0FB7E1F5E519300C6A6A7 /* FreeSelectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D0FB7C1F5E519300C6A6A7 /* FreeSelectingViewController.swift */; };
 		84D0FB811F5E5A4000C6A6A7 /* CropBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D0FB801F5E5A4000C6A6A7 /* CropBoxViewController.swift */; };
 		84D0FB821F5E6A3800C6A6A7 /* FreeSelectingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D0FB841F5E6A3800C6A6A7 /* FreeSelectingViewController.xib */; };
-		84D123B41ECAA405004E0D53 /* MainWindowTouchBarSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D123B31ECAA405004E0D53 /* MainWindowTouchBarSupport.swift */; };
+		84D123B41ECAA405004E0D53 /* TouchBarSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D123B31ECAA405004E0D53 /* TouchBarSupport.swift */; };
 		84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */; };
 		84D377651D7370EE007F7396 /* ChapterTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377641D7370EE007F7396 /* ChapterTableCellView.swift */; };
 		84D377671D737F58007F7396 /* MPVChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377661D737F58007F7396 /* MPVChapter.swift */; };
@@ -187,6 +188,9 @@
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
 		C75540751E7886FE00C13D4A /* SubSelectWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C75540771E7886FE00C13D4A /* SubSelectWindowController.xib */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
+		E3CB75BB1FD998F5004DB10A /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F21E26CA24008755BB /* Regex.swift */; };
+		E3DE8DCD1FD8166A0021921C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DE8DCC1FD8166A0021921C /* main.swift */; };
+		E3DE8DD31FD848BA0021921C /* iina-cli in Copy Executables */ = {isa = PBXBuildFile; fileRef = E3DE8DCA1FD8166A0021921C /* iina-cli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -196,6 +200,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				E3DE8DD31FD848BA0021921C /* iina-cli in Copy Executables */,
 				8461BA681E4237C7008BB852 /* youtube-dl in Copy Executables */,
 			);
 			name = "Copy Executables";
@@ -255,12 +260,22 @@
 			dstPath = config;
 			dstSubfolderSpec = 7;
 			files = (
+				846DD8CA1FB39B2500991A81 /* movist-default-input.conf in Copy Configs */,
 				846654941F4EEBE300C91B8C /* vlc-default-input.conf in Copy Configs */,
 				84A886EF1E269E67008755BB /* iina-default-input.conf in Copy Configs */,
 				844D72EF1E056E1400522E5E /* input.conf in Copy Configs */,
 			);
 			name = "Copy Configs";
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3DE8DC81FD8166A0021921C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -523,8 +538,9 @@
 		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
 		8461C52F1D462488006E91FF /* VideoTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTime.swift; sourceTree = "<group>"; };
 		846352571EEEE11A0043F0CC /* ThumbnailPeekView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailPeekView.swift; sourceTree = "<group>"; };
-		846654921F4EEA5500C91B8C /* vlc-default-input.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "vlc-default-input.conf"; sourceTree = "<group>"; };
+		846654921F4EEA5500C91B8C /* vlc-default-input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "vlc-default-input.conf"; sourceTree = "<group>"; };
 		8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSettingViewController.swift; sourceTree = "<group>"; };
+		846DD8C81FB39A9800991A81 /* movist-default-input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "movist-default-input.conf"; sourceTree = "<group>"; };
 		847557131F405F8C0006B0FF /* MainWindowMenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowMenuActions.swift; sourceTree = "<group>"; };
 		847557151F406D360006B0FF /* MiniPlayerWindowMenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniPlayerWindowMenuActions.swift; sourceTree = "<group>"; };
 		847644071D48B413004F6DF5 /* MPVOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVOption.swift; sourceTree = "<group>"; };
@@ -790,7 +806,7 @@
 		84D0FB801F5E5A4000C6A6A7 /* CropBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropBoxViewController.swift; sourceTree = "<group>"; };
 		84D0FB831F5E6A3800C6A6A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FreeSelectingViewController.xib; sourceTree = "<group>"; };
 		84D0FB861F5E6A3A00C6A6A7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FreeSelectingViewController.strings"; sourceTree = "<group>"; };
-		84D123B31ECAA405004E0D53 /* MainWindowTouchBarSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowTouchBarSupport.swift; sourceTree = "<group>"; };
+		84D123B31ECAA405004E0D53 /* TouchBarSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchBarSupport.swift; sourceTree = "<group>"; };
 		84D377621D6B66DE007F7396 /* MPVPlaylistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MPVPlaylistItem.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84D377641D7370EE007F7396 /* ChapterTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChapterTableCellView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84D377661D737F58007F7396 /* MPVChapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVChapter.swift; sourceTree = "<group>"; };
@@ -908,6 +924,8 @@
 		D27E35E01E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D2B411421E5336AD002819E1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
 		D2B411431E5336AE002819E1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		E3DE8DCA1FD8166A0021921C /* iina-cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "iina-cli"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3DE8DCC1FD8166A0021921C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E53BAB3F1F1692B700D2609F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		E53CCBA31EB7711200DFF4E1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/OpenURLAccessoryViewController.strings; sourceTree = "<group>"; };
 		E53CCBA51EB7717500DFF4E1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/SubSelectWindowController.strings; sourceTree = "<group>"; };
@@ -954,6 +972,13 @@
 				84B1CE381F98BE2A00994D63 /* libswscale.4.8.100.dylib in Frameworks */,
 				496B19921E2968530035AF10 /* PIP.framework in Frameworks */,
 				5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3DE8DC71FD8166A0021921C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1088,7 +1113,7 @@
 			children = (
 				84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */,
 				84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */,
-				84D123B31ECAA405004E0D53 /* MainWindowTouchBarSupport.swift */,
+				84D123B31ECAA405004E0D53 /* TouchBarSupport.swift */,
 				8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */,
 				8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */,
 				8400D5CB1E1AB2F9006785F5 /* QuickSettingViewController.xib */,
@@ -1418,6 +1443,7 @@
 				84A886ED1E269A2A008755BB /* iina-default-input.conf */,
 				84E745D81DFDE8C100588DED /* input.conf */,
 				846654921F4EEA5500C91B8C /* vlc-default-input.conf */,
+				846DD8C81FB39A9800991A81 /* movist-default-input.conf */,
 			);
 			name = config;
 			path = iina/config;
@@ -1427,6 +1453,7 @@
 			isa = PBXGroup;
 			children = (
 				84EB1ED81D2F51D3004FA5A1 /* iina */,
+				E3DE8DCB1FD8166A0021921C /* iina-cli */,
 				84EB1ED71D2F51D3004FA5A1 /* Products */,
 				8461BA641E42344D008BB852 /* Executables */,
 				848290731D95978100C3C76C /* Frameworks */,
@@ -1438,6 +1465,7 @@
 			isa = PBXGroup;
 			children = (
 				84EB1ED61D2F51D3004FA5A1 /* IINA.app */,
+				E3DE8DCA1FD8166A0021921C /* iina-cli */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1504,6 +1532,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E3DE8DCB1FD8166A0021921C /* iina-cli */ = {
+			isa = PBXGroup;
+			children = (
+				E3DE8DCC1FD8166A0021921C /* main.swift */,
+			);
+			path = "iina-cli";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1532,13 +1568,30 @@
 			productReference = 84EB1ED61D2F51D3004FA5A1 /* IINA.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E3DE8DC91FD8166A0021921C /* iina-cli */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E3DE8DD01FD8166A0021921C /* Build configuration list for PBXNativeTarget "iina-cli" */;
+			buildPhases = (
+				E3DE8DC61FD8166A0021921C /* Sources */,
+				E3DE8DC71FD8166A0021921C /* Frameworks */,
+				E3DE8DC81FD8166A0021921C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iina-cli";
+			productName = "iina-cli";
+			productReference = E3DE8DCA1FD8166A0021921C /* iina-cli */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		84EB1ECE1D2F51D3004FA5A1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = lhc;
 				TargetAttributes = {
@@ -1546,6 +1599,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 67CQ77V27R;
 						LastSwiftMigration = 0900;
+					};
+					E3DE8DC91FD8166A0021921C = {
+						CreatedOnToolsVersion = 9.1;
+						DevelopmentTeam = 67CQ77V27R;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1577,6 +1635,7 @@
 			projectRoot = "";
 			targets = (
 				84EB1ED51D2F51D3004FA5A1 /* iina */,
+				E3DE8DC91FD8166A0021921C /* iina-cli */,
 			);
 		};
 /* End PBXProject section */
@@ -1738,7 +1797,7 @@
 				84D0FB7E1F5E519300C6A6A7 /* FreeSelectingViewController.swift in Sources */,
 				840D47A01DFEFC49000D9A64 /* KeyRecordView.swift in Sources */,
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
-				84D123B41ECAA405004E0D53 /* MainWindowTouchBarSupport.swift in Sources */,
+				84D123B41ECAA405004E0D53 /* TouchBarSupport.swift in Sources */,
 				84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */,
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
 				8492C2881E7721A600CE5825 /* ISO639_2Helper.swift in Sources */,
@@ -1815,6 +1874,15 @@
 				8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */,
 				840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */,
 				84BEEC3F1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3DE8DC61FD8166A0021921C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3DE8DCD1FD8166A0021921C /* main.swift in Sources */,
+				E3CB75BB1FD998F5004DB10A /* Regex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2606,6 +2674,44 @@
 			};
 			name = Release;
 		};
+		E3DE8DCE1FD8166A0021921C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 67CQ77V27R;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		E3DE8DCF1FD8166A0021921C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 67CQ77V27R;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2623,6 +2729,15 @@
 			buildConfigurations = (
 				84EB1EFA1D2F51D3004FA5A1 /* Debug */,
 				84EB1EFB1D2F51D3004FA5A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E3DE8DD01FD8166A0021921C /* Build configuration list for PBXNativeTarget "iina-cli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3DE8DCE1FD8166A0021921C /* Debug */,
+				E3DE8DCF1FD8166A0021921C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

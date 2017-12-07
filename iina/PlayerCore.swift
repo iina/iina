@@ -15,6 +15,18 @@ class NowPlayingInfoManager {
 
   static func updateInfo() {
     var nowPlayingInfo = [String: Any]()
+    let activePlayer = PlayerCore.lastActive
+
+    let isAudio = activePlayer.currentMediaIsAudio == .isAudio
+    nowPlayingInfo[MPMediaItemPropertyMediaType] = isAudio ? MPNowPlayingInfoMediaType.audio : MPNowPlayingInfoMediaType.video
+    let (title, album, artist) = activePlayer.getMusicMetadata()
+    nowPlayingInfo[MPMediaItemPropertyTitle] = title
+    if isAudio {
+      nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = album
+      nowPlayingInfo[MPMediaItemPropertyArtist] = artist
+    }
+
+
     let duration = PlayerCore.lastActive.info.videoDuration?.second ?? 0
     nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = duration
     nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = PlayerCore.lastActive.info.videoPosition?.second ?? 0
@@ -1228,6 +1240,13 @@ class PlayerCore: NSObject {
                                index:     index)
       info.chapters.append(chapter)
     }
+  }
+
+  func getMusicMetadata() -> (title: String, album: String, artist: String) {
+    let title = mpv.getString(MPVProperty.mediaTitle) ?? ""
+    let album = mpv.getString("metadata/by-key/album") ?? ""
+    let artist = mpv.getString("metadata/by-key/artist") ?? ""
+    return (title, album, artist)
   }
 
   // MARK: - Utils

@@ -22,6 +22,11 @@ class FilterWindowController: NSWindowController {
     }
   }()
 
+  @IBOutlet weak var splitView: NSSplitView!
+  @IBOutlet weak var splitViewUpperView: NSView!
+  @IBOutlet weak var splitViewLowerView: NSView!
+  @IBOutlet var upperView: NSView!
+  @IBOutlet var lowerView: NSView!
   @IBOutlet weak var currentFiltersTableView: NSTableView!
   @IBOutlet weak var savedFiltersTableView: NSTableView!
   @IBOutlet var newFilterSheet: NSWindow!
@@ -43,6 +48,11 @@ class FilterWindowController: NSWindowController {
 
     // title
     window?.title = filterType == MPVProperty.af ? NSLocalizedString("filter.audio_filters", comment: "Audio Filters") : NSLocalizedString("filter.video_filters", comment: "Video Filters")
+
+    splitViewUpperView.addSubview(upperView)
+    splitViewLowerView.addSubview(lowerView)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|", "H:|[w]|", "V:|[w]|"], ["v": upperView, "w": lowerView])
+    splitView.setPosition(splitView.frame.height - 140, ofDividerAt: 0)
 
     savedFilters = (Preference.array(for: filterType == MPVProperty.af ? .savedAudioFilters : .savedVideoFilters) ?? []).flatMap(SavedFilter.init(dict:))
     filters = PlayerCore.active.mpv.getFilters(filterType)

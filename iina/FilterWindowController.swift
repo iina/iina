@@ -14,6 +14,14 @@ class FilterWindowController: NSWindowController {
     return NSNib.Name("FilterWindowController")
   }
 
+  @objc let monospacedFont: NSFont = {
+    if #available(OSX 10.11, *) {
+      return NSFont.monospacedDigitSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)
+    } else {
+      return NSFont.systemFont(ofSize: NSFont.systemFontSize)
+    }
+  }()
+
   @IBOutlet weak var currentFiltersTableView: NSTableView!
   @IBOutlet weak var savedFiltersTableView: NSTableView!
   @IBOutlet var newFilterSheet: NSWindow!
@@ -26,6 +34,7 @@ class FilterWindowController: NSWindowController {
 
   var filters: [MPVFilter] = []
   var savedFilters: [SavedFilter] = []
+  private var filterIsSaved: [Bool] = []
 
   private var currentFilter: MPVFilter?
 
@@ -35,9 +44,9 @@ class FilterWindowController: NSWindowController {
     // title
     window?.title = filterType == MPVProperty.af ? NSLocalizedString("filter.audio_filters", comment: "Audio Filters") : NSLocalizedString("filter.video_filters", comment: "Video Filters")
 
+    savedFilters = (Preference.array(for: filterType == MPVProperty.af ? .savedAudioFilters : .savedVideoFilters) ?? []).flatMap(SavedFilter.init(dict:))
     filters = PlayerCore.active.mpv.getFilters(filterType)
     currentFiltersTableView.reloadData()
-    savedFilters = (Preference.array(for: filterType == MPVProperty.af ? .savedAudioFilters : .savedVideoFilters) ?? []).flatMap(SavedFilter.init(dict:))
     savedFiltersTableView.reloadData()
 
     keyRecordView.delegate = self
@@ -51,8 +60,20 @@ class FilterWindowController: NSWindowController {
   @objc
   func reloadTable() {
     filters = PlayerCore.active.mpv.getFilters(filterType)
+    filterIsSaved = [Bool](repeatElement(false, count: filters.count))
+    savedFilters.forEach { savedFilter in
+      savedFilter.isEnabled = false
+      for (index, filter) in filters.enumerated() {
+        if filter.stringFormat == savedFilter.filterString {
+          filterIsSaved[index] = true
+          savedFilter.isEnabled = true
+          break
+        }
+      }
+    }
     DispatchQueue.main.async {
       self.currentFiltersTableView.reloadData()
+      self.savedFiltersTableView.reloadData()
     }
   }
 
@@ -86,12 +107,14 @@ class FilterWindowController: NSWindowController {
   // MARK: - IBAction
 
   @IBAction func addFilterAction(_ sender: Any) {
+    saveFilterNameTextField.stringValue = ""
+    keyRecordViewLabel.stringValue = ""
     window!.beginSheet(newFilterSheet)
   }
 
   @IBAction func removeFilterAction(_ sender: Any) {
     if currentFiltersTableView.selectedRow >= 0 {
-      if PlayerCore.active.removeVideoFiler(filters[currentFiltersTableView.selectedRow]) {
+      if PlayerCore.active.removeVideoFilter(filters[currentFiltersTableView.selectedRow]) {
         reloadTable()
       }
     }
@@ -110,7 +133,7 @@ class FilterWindowController: NSWindowController {
                                modifiers: keyRecordView.currentKeyModifiers,
                                readableFormat: keyRecordViewLabel.stringValue)
       savedFilters.append(filter)
-      savedFiltersTableView.reloadData()
+      reloadTable()
       syncSavedFilter()
     }
     window!.endSheet(saveFilterSheet)
@@ -118,6 +141,23 @@ class FilterWindowController: NSWindowController {
 
   @IBAction func cancelSavingFilterAction(_ sender: Any) {
     window!.endSheet(saveFilterSheet)
+  }
+
+  @IBAction func toggleSavedFilterAction(_ sender: NSButton) {
+    let row = savedFiltersTableView.row(for: sender)
+    if sender.state == .on {
+      let _ = PlayerCore.active.addVideoFilter(MPVFilter(rawString: savedFilters[row].filterString)!)
+    } else {
+      let _ = PlayerCore.active.removeVideoFilter(MPVFilter(rawString: savedFilters[row].filterString)!)
+    }
+    reloadTable()
+  }
+
+  @IBAction func deleteSavedFilterAction(_ sender: NSButton) {
+    let row = savedFiltersTableView.row(for: sender)
+    savedFilters.remove(at: row)
+    reloadTable()
+    syncSavedFilter()
   }
 }
 
@@ -138,8 +178,9 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
         return row.toStr()
       } else if tableColumn?.identifier == .value {
         return filter.stringFormat
+      } else {
+        return filterIsSaved[row]
       }
-      return ""
     } else {
       return savedFilters.at(row)
     }

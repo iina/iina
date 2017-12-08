@@ -144,7 +144,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if #available(macOS 10.13, *) {
       if RemoteCommandController.useSystemMediaControl {
         RemoteCommandController.setup()
-        NowPlayingInfoManager.updateState(.unknown)
+        NowPlayingInfoManager.updateState(.playing)
       }
     }
 

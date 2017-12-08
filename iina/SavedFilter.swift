@@ -21,6 +21,7 @@ class SavedFilter: NSObject {
   @objc var name: String
   @objc var filterString: String
   @objc var readableShortCutKey: String
+  @objc var isEnabled = false
   var shortcutKey: String
   var shortcutKeyModifiers: NSEvent.ModifierFlags
 

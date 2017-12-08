@@ -81,6 +81,7 @@
 "preference.scripts" = "스크립트";
 "preference.not_logged_in" = "로그인되지 않음";
 "preference.logged_in_as" = "%@(으)로 로그인됨";
+"preference.system_media_control" = "시스템 미디어 컨트롤 사용";
 
 "menu.volume" = "음량: %d";
 "menu.audio_delay" = "오디오 지연: %.2f초";

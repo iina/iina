@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Carbon
 
 class KeyCodeHelper {
 
@@ -189,4 +189,103 @@ class KeyCodeHelper {
     return keyString
   }
 
+}
+
+
+fileprivate let NSEventKeyCodeMapping: [Int: String] = [
+  kVK_F1: "F1",
+  kVK_F2: "F2",
+  kVK_F3: "F3",
+  kVK_F4: "F4",
+  kVK_F5: "F5",
+  kVK_F6: "F6",
+  kVK_F7: "F7",
+  kVK_F8: "F8",
+  kVK_F9: "F9",
+  kVK_F10: "F10",
+  kVK_F11: "F11",
+  kVK_F12: "F12",
+  kVK_F13: "F13",
+  kVK_F14: "F14",
+  kVK_F15: "F15",
+  kVK_F16: "F16",
+  kVK_F17: "F17",
+  kVK_F18: "F18",
+  kVK_F19: "F19",
+  kVK_Space: "␣",
+  kVK_Escape: "⎋",
+  kVK_Delete: "⌦",
+  kVK_ForwardDelete: "⌫",
+  kVK_LeftArrow: "←",
+  kVK_RightArrow: "→",
+  kVK_UpArrow: "↑",
+  kVK_DownArrow: "↓",
+  kVK_Help: "",
+  kVK_PageUp: "⇞",
+  kVK_PageDown: "⇟",
+  kVK_Tab: "⇥",
+  kVK_Return: "⏎",
+  kVK_ANSI_Keypad0: "0",
+  kVK_ANSI_Keypad1: "1",
+  kVK_ANSI_Keypad2: "2",
+  kVK_ANSI_Keypad3: "3",
+  kVK_ANSI_Keypad4: "4",
+  kVK_ANSI_Keypad5: "5",
+  kVK_ANSI_Keypad6: "6",
+  kVK_ANSI_Keypad7: "7",
+  kVK_ANSI_Keypad8: "8",
+  kVK_ANSI_Keypad9: "9",
+  kVK_ANSI_KeypadDecimal: ".",
+  kVK_ANSI_KeypadMultiply: "*",
+  kVK_ANSI_KeypadPlus: "+",
+  kVK_ANSI_KeypadClear: "Clear",
+  kVK_ANSI_KeypadDivide: "/",
+  kVK_ANSI_KeypadEnter: "↩︎",
+  kVK_ANSI_KeypadMinus: "-",
+  kVK_ANSI_KeypadEquals: "="
+]
+
+extension NSEvent {
+  var readableKeyDescription: String {
+    get {
+
+      let rawKeyCharacter: String
+      if let char = NSEventKeyCodeMapping[Int(self.keyCode)] {
+        rawKeyCharacter = char
+      } else {
+        let inputSource = TISCopyCurrentASCIICapableKeyboardLayoutInputSource().takeUnretainedValue()
+        if let layoutData = TISGetInputSourceProperty(inputSource, kTISPropertyUnicodeKeyLayoutData) {
+          let dataRef = unsafeBitCast(layoutData, to: CFData.self)
+          let keyLayout = unsafeBitCast(CFDataGetBytePtr(dataRef), to: UnsafePointer<UCKeyboardLayout>.self)
+          var deadKeyState = UInt32(0)
+          let maxLength = 4
+          var actualLength = 0
+          var actualString = [UniChar](repeating: 0, count: maxLength)
+          let error = UCKeyTranslate(keyLayout,
+                                     UInt16(self.keyCode),
+                                     UInt16(kUCKeyActionDisplay),
+                                     UInt32((0 >> 8) & 0xFF),
+                                     UInt32(LMGetKbdType()),
+                                     OptionBits(kUCKeyTranslateNoDeadKeysBit),
+                                     &deadKeyState,
+                                     maxLength,
+                                     &actualLength,
+                                     &actualString)
+          if error == 0 {
+            rawKeyCharacter = String(utf16CodeUnits: &actualString, count: maxLength).uppercased()
+
+          } else {
+            rawKeyCharacter = KeyCodeHelper.keyMap[self.keyCode]?.0 ?? ""
+          }
+        } else {
+          rawKeyCharacter = KeyCodeHelper.keyMap[self.keyCode]?.0 ?? ""
+        }
+      }
+
+      return ([(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")] as [(NSEvent.ModifierFlags, String)])
+        .map { self.modifierFlags.contains($0.0) ? $0.1 : "" }
+        .joined()
+        .appending(rawKeyCharacter)
+    }
+  }
 }

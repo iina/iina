@@ -16,6 +16,9 @@ class KeyRecordView: NSView {
 
   var delegate: KeyRecordViewDelegate!
 
+  var currentKey: String = ""
+  var currentKeyModifiers: NSEvent.ModifierFlags = []
+
   override func awakeFromNib() {
     wantsLayer = true
     layer?.backgroundColor = NSColor.lightGray.cgColor
@@ -27,6 +30,8 @@ class KeyRecordView: NSView {
   }
 
   override func keyDown(with event: NSEvent) {
+    currentKey = event.charactersIgnoringModifiers ?? ""
+    currentKeyModifiers = event.modifierFlags
     delegate.recordedKeyDown(with: event)
   }
 

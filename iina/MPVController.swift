@@ -152,7 +152,11 @@ class MPVController: NSObject {
 
     setUserOption(PK.screenshotTemplate, type: .string, forName: MPVOption.Screenshot.screenshotTemplate)
 
-    setUserOption(PK.useMediaKeys, type: .bool, forName: MPVOption.Input.inputMediaKeys)
+    if #available(macOS 10.13, *) {
+      chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, no_str))
+    } else {
+      setUserOption(PK.useMediaKeys, type: .bool, forName: MPVOption.Input.inputMediaKeys)
+    }
     setUserOption(PK.useAppleRemote, type: .bool, forName: MPVOption.Input.inputAppleremote)
 
     setUserOption(PK.keepOpenOnFileEnd, type: .other, forName: MPVOption.Window.keepOpen) { key in

@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import MediaPlayer
 import MASPreferences
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
@@ -138,6 +139,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if #available(macOS 10.12.2, *) {
       NSApp.isAutomaticCustomizeTouchBarMenuItemEnabled = false
       NSWindow.allowsAutomaticWindowTabbing = false
+    }
+
+    if #available(macOS 10.13, *) {
+      if RemoteCommandController.useSystemMediaControl {
+        RemoteCommandController.setup()
+        NowPlayingInfoManager.updateState(.playing)
+      }
     }
 
     // if have pending open request
@@ -433,4 +441,64 @@ struct CommandLineStatus {
       playerCore.mpv.setString(arg.0, arg.1)
     }
   }
+}
+
+@available(OSX 10.13, *)
+class RemoteCommandController {
+  static let remoteCommand = MPRemoteCommandCenter.shared()
+
+  static var useSystemMediaControl: Bool = Preference.bool(for: .useMediaKeys)
+
+  static func setup() {
+    remoteCommand.playCommand.addTarget { _ in
+      PlayerCore.lastActive.togglePause(false)
+      return .success
+    }
+    remoteCommand.pauseCommand.addTarget { _ in
+      PlayerCore.lastActive.togglePause(true)
+      return .success
+    }
+    remoteCommand.togglePlayPauseCommand.addTarget { _ in
+      PlayerCore.lastActive.togglePause(nil)
+      return .success
+    }
+    remoteCommand.stopCommand.addTarget { _ in
+      PlayerCore.lastActive.stop()
+      return .success
+    }
+    remoteCommand.nextTrackCommand.addTarget { _ in
+      PlayerCore.lastActive.navigateInPlaylist(nextOrPrev: true)
+      return .success
+    }
+    remoteCommand.previousTrackCommand.addTarget { _ in
+      PlayerCore.lastActive.navigateInPlaylist(nextOrPrev: false)
+      return .success
+    }
+    remoteCommand.changeRepeatModeCommand.addTarget { _ in
+      PlayerCore.lastActive.togglePlaylistLoop()
+      return .success
+    }
+    remoteCommand.changeShuffleModeCommand.isEnabled = false
+    // remoteCommand.changeShuffleModeCommand.addTarget {})
+    remoteCommand.changePlaybackRateCommand.supportedPlaybackRates = [0.5, 1, 1.5, 2]
+    remoteCommand.changePlaybackRateCommand.addTarget { event in
+      PlayerCore.lastActive.setSpeed(Double((event as! MPChangePlaybackRateCommandEvent).playbackRate))
+      return .success
+    }
+    remoteCommand.skipForwardCommand.preferredIntervals = [15]
+    remoteCommand.skipForwardCommand.addTarget { event in
+      PlayerCore.lastActive.seek(relativeSecond: (event as! MPSkipIntervalCommandEvent).interval, option: .exact)
+      return .success
+    }
+    remoteCommand.skipBackwardCommand.preferredIntervals = [15]
+    remoteCommand.skipBackwardCommand.addTarget { event in
+      PlayerCore.lastActive.seek(relativeSecond: -(event as! MPSkipIntervalCommandEvent).interval, option: .exact)
+      return .success
+    }
+    remoteCommand.changePlaybackPositionCommand.addTarget { event in
+      PlayerCore.lastActive.seek(absoluteSecond: (event as! MPChangePlaybackPositionCommandEvent).positionTime)
+      return .success
+    }
+  }
+
 }

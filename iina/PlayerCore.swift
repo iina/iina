@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import MediaPlayer
 
 
 class PlayerCore: NSObject {
@@ -373,7 +374,7 @@ class PlayerCore: NSObject {
     case .relative:
       mpv.command(.seek, args: ["\(relativeSecond)", "relative"], checkError: false)
 
-    case .extract:
+    case .exact:
       mpv.command(.seek, args: ["\(relativeSecond)", "relative+exact"], checkError: false)
 
     case .auto:
@@ -988,6 +989,11 @@ class PlayerCore: NSObject {
   }
 
   @objc func syncUITime() {
+    if #available(macOS 10.13, *) {
+      if RemoteCommandController.useSystemMediaControl {
+        NowPlayingInfoManager.updateInfo()
+      }
+    }
     if info.isNetworkResource {
       syncUI(.timeAndCache)
     } else {
@@ -1253,6 +1259,19 @@ class PlayerCore: NSObject {
     }
   }
 
+  func getMediaTitle(withExtension: Bool = true) -> String {
+    let mediaTitle = mpv.getString(MPVProperty.mediaTitle)
+    let mediaPath = withExtension ? info.currentURL?.path : info.currentURL?.deletingPathExtension().path
+    return mediaTitle ?? mediaPath ?? ""
+  }
+
+  func getMusicMetadata() -> (title: String, album: String, artist: String) {
+    let title = mpv.getString(MPVProperty.mediaTitle) ?? ""
+    let album = mpv.getString("metadata/by-key/album") ?? ""
+    let artist = mpv.getString("metadata/by-key/artist") ?? ""
+    return (title, album, artist)
+  }
+
   /** Check if there are IINA filters saved in watch_later file. */
   func reloadSavedIINAfilters() {
     // vf
@@ -1343,4 +1362,44 @@ extension PlayerCore: FFmpegControllerDelegate {
       }
     }
   }
+}
+
+
+@available (macOS 10.13, *)
+class NowPlayingInfoManager {
+  static let info = MPNowPlayingInfoCenter.default()
+
+  static func updateInfo() {
+    var nowPlayingInfo = [String: Any]()
+    let activePlayer = PlayerCore.lastActive
+
+    if activePlayer.currentMediaIsAudio == .isAudio {
+      nowPlayingInfo[MPMediaItemPropertyMediaType] = MPNowPlayingInfoMediaType.audio.rawValue
+      let (title, album, artist) = activePlayer.getMusicMetadata()
+      nowPlayingInfo[MPMediaItemPropertyTitle] = title
+      nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = album
+      nowPlayingInfo[MPMediaItemPropertyArtist] = artist
+    } else {
+      nowPlayingInfo[MPMediaItemPropertyMediaType] = MPNowPlayingInfoMediaType.video.rawValue
+      nowPlayingInfo[MPMediaItemPropertyTitle] = activePlayer.getMediaTitle(withExtension: false)
+    }
+
+    let duration = PlayerCore.lastActive.info.videoDuration?.second ?? 0
+    nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = duration
+    nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = activePlayer.info.videoPosition?.second ?? 0
+    nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = activePlayer.info.playSpeed
+    nowPlayingInfo[MPNowPlayingInfoPropertyDefaultPlaybackRate] = 1
+    /*
+    nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackQueueCount] = activePlayer.mpv.getInt(MPVProperty.playlistCount)
+    nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackQueueIndex] = activePlayer.mpv.getInt(MPVProperty.playlistPos)
+    nowPlayingInfo[MPNowPlayingInfoPropertyChapterCount] = activePlayer.mpv.getInt(MPVProperty.chapterListCount)
+    nowPlayingInfo[MPNowPlayingInfoPropertyChapterNumber] = activePlayer.mpv.getInt(MPVProperty.chapter)
+    */
+    info.nowPlayingInfo = nowPlayingInfo
+  }
+
+  static func updateState(_ state: MPNowPlayingPlaybackState) {
+    info.playbackState = state
+  }
+
 }

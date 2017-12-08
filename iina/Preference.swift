@@ -292,7 +292,7 @@ struct Preference {
 
   enum SeekOption: Int, InitializingFromKey {
     case relative = 0
-    case extract
+    case exact
     case auto
 
     static var defaultValue = SeekOption.relative

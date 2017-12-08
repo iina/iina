@@ -51,6 +51,11 @@ class PlaybackInfo {
   var isPaused: Bool = false {
     didSet {
       PlayerCore.checkStatusForSleep()
+      if #available(macOS 10.13, *) {
+        if RemoteCommandController.useSystemMediaControl {
+          NowPlayingInfoManager.updateState(isPaused ? .paused : .playing)
+        }
+      }
     }
   }
 

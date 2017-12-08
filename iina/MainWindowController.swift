@@ -1463,8 +1463,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func updateTitle() {
     if player.info.isNetworkResource {
-      let mediaTitle = player.mpv.getString(MPVProperty.mediaTitle)
-      window?.title = mediaTitle ?? player.info.currentURL?.path ?? ""
+      window?.title = player.getMediaTitle()
     } else {
       window?.representedURL = player.info.currentURL
       window?.setTitleWithRepresentedFilename(player.info.currentURL?.path ?? "")

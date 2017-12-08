@@ -17,6 +17,7 @@
                 <outlet property="newConfigBtn" destination="Akd-0e-FKG" id="2CW-ho-HL1"/>
                 <outlet property="removeKmBtn" destination="uFG-OF-DJ5" id="XWN-Lt-tmc"/>
                 <outlet property="revealConfFileBtn" destination="KZA-hu-vhZ" id="lVg-3j-Qgp"/>
+                <outlet property="useMediaKeysButton" destination="LU9-QU-BFL" id="b9B-LC-pyM"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>

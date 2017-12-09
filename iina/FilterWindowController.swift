@@ -274,22 +274,24 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
 
   private var currentPreset: FilterPreset?
   private var currentBindings: [String: NSControl] = [:]
+  private var presets: [FilterPreset] = []
 
   override func awakeFromNib() {
     tableView.dataSource = self
     tableView.delegate = self
+    presets = filterWindow.filterType == MPVProperty.vf ? FilterPreset.vfPresets : FilterPreset.afPresets
   }
 
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return FilterPreset.presets.count
+    return presets.count
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    return FilterPreset.presets.at(row)?.localizedName
+    return presets.at(row)?.localizedName
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    guard let preset = FilterPreset.presets.at(tableView.selectedRow) else { return }
+    guard let preset = presets.at(tableView.selectedRow) else { return }
     showSettings(for: preset)
   }
 

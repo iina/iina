@@ -160,8 +160,16 @@ extension FilterPreset {
     return dic
   }()
 
+  static private let customMPVFilterPreset = FilterPreset("custom_mpv", params: ["name": PM.text(defaultValue: ""), "string": PM.text(defaultValue: "")]) { instance in
+      return MPVFilter(rawString: instance.value(for: "name").stringValue + "=" + instance.value(for: "string").stringValue)!
+  }
+  // custom ffmpeg
+  static private let customFFmpegFilterPreset = FilterPreset("custom_ffmpeg", params: [ "name": PM.text(defaultValue: ""), "string": PM.text(defaultValue: "") ]) { instance in
+    return MPVFilter(name: "lavfi", label: nil, paramString: "[\(instance.value(for: "name").stringValue)=\(instance.value(for: "string").stringValue)]")
+  }
+
   /** All filter presets. */
-  static let presets: [FilterPreset] = [
+  static let vfPresets: [FilterPreset] = [
     // crop
     FilterPreset("crop", params: [
       "x": PM.text(), "y": PM.text(),
@@ -225,20 +233,13 @@ extension FilterPreset {
         "interp": instance.value(for: "interp").stringValue,
         ])
     },
-    // custom mpv
-    FilterPreset("custom_mpv", params: [
-      "name": PM.text(defaultValue: ""),
-      "string": PM.text(defaultValue: "")
-    ]) { instance in
-      return MPVFilter(rawString: instance.value(for: "name").stringValue + "=" + instance.value(for: "string").stringValue)!
-    },
-    // custom ffmpeg
-    FilterPreset("custom_ffmpeg", params: [
-      "name": PM.text(defaultValue: ""),
-      "string": PM.text(defaultValue: "")
-    ]) { instance in
-      return MPVFilter(name: "lavfi", label: nil,
-                       paramString: "[\(instance.value(for: "name").stringValue)=\(instance.value(for: "string").stringValue)]")
-    },
+    // custom
+    customMPVFilterPreset,
+    customFFmpegFilterPreset
+  ]
+
+  static let afPresets: [FilterPreset] = [
+    customMPVFilterPreset,
+    customFFmpegFilterPreset
   ]
 }

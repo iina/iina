@@ -31,9 +31,14 @@ class FilterWindowController: NSWindowController {
   @IBOutlet weak var savedFiltersTableView: NSTableView!
   @IBOutlet var newFilterSheet: NSWindow!
   @IBOutlet var saveFilterSheet: NSWindow!
+  @IBOutlet var editFilterSheet: NSWindow!
   @IBOutlet weak var saveFilterNameTextField: NSTextField!
   @IBOutlet weak var keyRecordView: KeyRecordView!
   @IBOutlet weak var keyRecordViewLabel: NSTextField!
+  @IBOutlet weak var editFilterNameTextField: NSTextField!
+  @IBOutlet weak var editFilterStringTextField: NSTextField!
+  @IBOutlet weak var editFilterKeyRecordView: KeyRecordView!
+  @IBOutlet weak var editFilterKeyRecordViewLabel: NSTextField!
 
   var filterType: String!
 
@@ -42,6 +47,7 @@ class FilterWindowController: NSWindowController {
   private var filterIsSaved: [Bool] = []
 
   private var currentFilter: MPVFilter?
+  private var currentSavedFilter: SavedFilter?
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -60,6 +66,7 @@ class FilterWindowController: NSWindowController {
     savedFiltersTableView.reloadData()
 
     keyRecordView.delegate = self
+    editFilterKeyRecordView.delegate = self
 
     // notifications
     let notiName = filterType == MPVProperty.af ? Constants.Noti.afChanged : Constants.Noti.vfChanged
@@ -136,23 +143,6 @@ class FilterWindowController: NSWindowController {
     saveFilter(filters[row])
   }
 
-  @IBAction func addSavedFilterAction(_ sender: Any) {
-    if let currentFilter = currentFilter {
-      let filter = SavedFilter(name: saveFilterNameTextField.stringValue,
-                               filterString: currentFilter.stringFormat,
-                               shortcutKey: keyRecordView.currentRawKey,
-                               modifiers: keyRecordView.currentKeyModifiers)
-      savedFilters.append(filter)
-      reloadTable()
-      syncSavedFilter()
-    }
-    window!.endSheet(saveFilterSheet)
-  }
-
-  @IBAction func cancelSavingFilterAction(_ sender: Any) {
-    window!.endSheet(saveFilterSheet)
-  }
-
   @IBAction func toggleSavedFilterAction(_ sender: NSButton) {
     let row = savedFiltersTableView.row(for: sender)
     if sender.state == .on {
@@ -168,6 +158,17 @@ class FilterWindowController: NSWindowController {
     savedFilters.remove(at: row)
     reloadTable()
     syncSavedFilter()
+  }
+
+  @IBAction func editSavedFilterAction(_ sender: NSButton) {
+    let row = savedFiltersTableView.row(for: sender)
+    currentSavedFilter = savedFilters[row]
+    editFilterNameTextField.stringValue = currentSavedFilter!.name
+    editFilterStringTextField.stringValue = currentSavedFilter!.filterString
+    editFilterKeyRecordView.currentRawKey = currentSavedFilter!.shortcutKey
+    editFilterKeyRecordView.currentKeyModifiers = currentSavedFilter!.shortcutKeyModifiers
+    editFilterKeyRecordViewLabel.stringValue = currentSavedFilter!.readableShortCutKey
+    window!.beginSheet(editFilterSheet)
   }
 }
 
@@ -213,10 +214,47 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
 extension FilterWindowController: KeyRecordViewDelegate {
 
-  func recordedKeyDown(with event: NSEvent) {
-    keyRecordViewLabel.stringValue = event.charactersIgnoringModifiers != nil ? event.readableKeyDescription.0 : ""
+  func keyRecordView(_ view: KeyRecordView, recordedKeyDownWith event: NSEvent) {
+    (view == keyRecordView ? keyRecordViewLabel : editFilterKeyRecordViewLabel).stringValue = event.charactersIgnoringModifiers != nil ? event.readableKeyDescription.0 : ""
   }
 
+}
+
+
+extension FilterWindowController {
+
+  @IBAction func addSavedFilterAction(_ sender: Any) {
+    if let currentFilter = currentFilter {
+      let filter = SavedFilter(name: saveFilterNameTextField.stringValue,
+                               filterString: currentFilter.stringFormat,
+                               shortcutKey: keyRecordView.currentRawKey,
+                               modifiers: keyRecordView.currentKeyModifiers)
+      savedFilters.append(filter)
+      reloadTable()
+      syncSavedFilter()
+    }
+    window!.endSheet(saveFilterSheet)
+  }
+
+  @IBAction func cancelSavingFilterAction(_ sender: Any) {
+    window!.endSheet(saveFilterSheet)
+  }
+
+  @IBAction func saveEditedFilterAction(_ sender: Any) {
+    if let currentFilter = currentSavedFilter {
+      currentFilter.name = editFilterNameTextField.stringValue
+      currentFilter.filterString = editFilterStringTextField.stringValue
+      currentFilter.shortcutKey = editFilterKeyRecordView.currentRawKey
+      currentFilter.shortcutKeyModifiers = editFilterKeyRecordView.currentKeyModifiers
+      reloadTable()
+      syncSavedFilter()
+    }
+    window!.endSheet(editFilterSheet)
+  }
+
+  @IBAction func cancelEditingFilterAction(_ sender: Any) {
+    window!.endSheet(editFilterSheet)
+  }
 }
 
 

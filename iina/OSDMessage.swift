@@ -59,6 +59,9 @@ enum OSDMessage {
   case brightness(Int)
   case gamma(Int)
 
+  case addFilter(String)
+  case removeFilter
+
   case startFindingSub(String)  // sub source
   case foundSub(Int)
   case downloadedSub(String)  // filename
@@ -233,6 +236,18 @@ enum OSDMessage {
       return (
         String(format: NSLocalizedString("osd.video_eq.brightness", comment: "Brightness: %i"), value),
         .withProgress(toPercent(Double(value), 100))
+      )
+
+    case .addFilter(let name):
+      return (
+        String(format: NSLocalizedString("osd.filter_added", comment: "Added Filter: %@"), name),
+        .normal
+      )
+
+    case .removeFilter:
+      return (
+        NSLocalizedString("osd.filter_removed", comment: "Removed Filter"),
+        .normal
       )
 
     case .startFindingSub(let source):

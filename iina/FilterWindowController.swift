@@ -131,9 +131,11 @@ class FilterWindowController: NSWindowController {
   }
 
   @IBAction func removeFilterAction(_ sender: Any) {
+    let pc = PlayerCore.active
     if currentFiltersTableView.selectedRow >= 0 {
-      if PlayerCore.active.removeVideoFilter(filters[currentFiltersTableView.selectedRow]) {
+      if pc.removeVideoFilter(filters[currentFiltersTableView.selectedRow]) {
         reloadTable()
+        pc.sendOSD(.removeFilter)
       }
     }
   }
@@ -145,10 +147,16 @@ class FilterWindowController: NSWindowController {
 
   @IBAction func toggleSavedFilterAction(_ sender: NSButton) {
     let row = savedFiltersTableView.row(for: sender)
+    let filter = savedFilters[row]
+    let pc = PlayerCore.active
     if sender.state == .on {
-      let _ = PlayerCore.active.addVideoFilter(MPVFilter(rawString: savedFilters[row].filterString)!)
+      if pc.addVideoFilter(MPVFilter(rawString: filter.filterString)!) {
+        pc.sendOSD(.addFilter(filter.name))
+      }
     } else {
-      let _ = PlayerCore.active.removeVideoFilter(MPVFilter(rawString: savedFilters[row].filterString)!)
+      if pc.removeVideoFilter(MPVFilter(rawString: filter.filterString)!) {
+        pc.sendOSD(.removeFilter)
+      }
     }
     reloadTable()
   }
@@ -395,6 +403,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     }
     // create filter
     filterWindow.addFilter(preset.transformer(instance))
+    PlayerCore.active.sendOSD(.addFilter(preset.localizedName))
   }
 
   @IBAction func sheetCancelBtnAction(_ sender: Any) {

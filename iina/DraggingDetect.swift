@@ -178,6 +178,11 @@ extension PlayerCore {
     if types.contains(.nsFilenames) {
       // filenames
       guard let paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return [] }
+      // check 3d lut files
+      if paths.count == 1 && Utility.lut3dExt.contains(paths[0].lowercasedPathExtension) {
+        return .copy
+      }
+      // other files
       let theOnlyPathIsBDFolder = paths.count == 1 && isBDFolder(URL(fileURLWithPath: paths[0]))
       return theOnlyPathIsBDFolder ||
         hasPlayableFiles(in: paths) ||
@@ -210,6 +215,18 @@ extension PlayerCore {
     if types.contains(.nsFilenames) {
       // filenames
       guard let paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return false }
+      // check 3d lut files
+      if paths.count == 1 && Utility.lut3dExt.contains(paths[0].lowercasedPathExtension) {
+        let result = addVideoFilter(MPVFilter(lavfiName: "lut3d", label: nil, paramDict: [
+          "file": paths[0],
+          "interp": "nearest"
+          ]))
+        if result {
+          sendOSD(.addFilter("3D LUT"))
+        }
+        return result
+      }
+      // other files
       let urls = paths.map{ URL(fileURLWithPath: $0) }
       // try open files
       guard let loadedFileCount = openURLs(urls) else { return true }

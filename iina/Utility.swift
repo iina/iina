@@ -21,6 +21,7 @@ class Utility {
   static let playableFileExt = supportedFileExt[.video]! + supportedFileExt[.audio]!
   static let playlistFileExt = ["m3u", "m3u8", "pls", "cue"]
   static let blacklistExt = supportedFileExt[.sub]! + playlistFileExt
+  static let lut3dExt = ["3dl", "cube", "dat", "m3d"]
 
   // MARK: - Logs, alerts
 

@@ -1049,9 +1049,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     } else if scrollAction == .volume {
       // don't use precised delta for mouse
       let newVolume = player.info.volume + (isMouse ? delta : AppData.volumeMap[volumeScrollAmount] * delta)
-      if #available(macOS 10.11, *), player.info.volume <= 100, newVolume > 100 {
-        NSHapticFeedbackManager.defaultPerformer.perform(.generic, performanceTime: .default)
-      }
       player.setVolume(newVolume)
       volumeSlider.doubleValue = newVolume
     }
@@ -2373,6 +2370,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.doubleValue
+    if #available(macOS 10.11, *), Preference.double(for: .maxVolume) > 100, abs(value - 100) < 0.5 {
+      NSHapticFeedbackManager.defaultPerformer.perform(.generic, performanceTime: .default)
+    }
     player.setVolume(value)
   }
 

@@ -126,6 +126,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   var isFastforwarding: Bool = false
 
+  var isPausedDueToInactive: Bool = false
+
   var lastMagnification: CGFloat = 0.0
 
   /** Views that will show/hide when cursor moving in/out the window. */
@@ -1361,6 +1363,22 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidBecomeKey(_ notification: Notification) {
     window!.makeFirstResponder(window!)
+    if Preference.bool(for: .pauseWhenInactive) && isPausedDueToInactive {
+      player.togglePause(false)
+    }
+  }
+
+  func windowDidResignKey(_ notification: Notification) {
+    // keyWindow is nil: The whole app is inactive
+    // keyWindow is another MainWindow: Switched to another video window
+    if NSApp.keyWindow == nil ||
+      (NSApp.keyWindow?.windowController is MainWindowController ||
+        (NSApp.keyWindow?.windowController is MiniPlayerWindowController && NSApp.keyWindow?.windowController != player.miniPlayer)) {
+      if Preference.bool(for: .pauseWhenInactive) {
+        player.togglePause(true)
+        isPausedDueToInactive = true
+      }
+    }
   }
 
   func windowDidBecomeMain(_ notification: Notification) {
@@ -1376,6 +1394,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       removeBlackWindow()
     }
     NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
+  }
+
+  func windowWillMiniaturize(_ notification: Notification) {
+    if Preference.bool(for: .pauseWhenMinimized) {
+      player.togglePause(true)
+    }
+  }
+
+  func windowDidDeminiaturize(_ notification: Notification) {
+    if Preference.bool(for: .pauseWhenMinimized) {
+      player.togglePause(false)
+    }
   }
 
   // MARK: - UI: Show / Hide

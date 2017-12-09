@@ -30,12 +30,12 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="608" y="562" width="480" height="382"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="382"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <splitView arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="cMp-LA-Nma">
+                    <splitView dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="cMp-LA-Nma">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="382"/>
                         <subviews>
                             <customView fixedFrame="YES" id="ICv-pW-MWK">

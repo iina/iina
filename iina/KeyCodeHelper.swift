@@ -246,7 +246,7 @@ fileprivate let NSEventKeyCodeMapping: [Int: String] = [
 ]
 
 extension NSEvent {
-  var readableKeyDescription: String {
+  var readableKeyDescription: (String, String) {
     get {
 
       let rawKeyCharacter: String
@@ -282,10 +282,10 @@ extension NSEvent {
         }
       }
 
-      return ([(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")] as [(NSEvent.ModifierFlags, String)])
+      return (([(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")] as [(NSEvent.ModifierFlags, String)])
         .map { self.modifierFlags.contains($0.0) ? $0.1 : "" }
         .joined()
-        .appending(rawKeyCharacter)
+        .appending(rawKeyCharacter), rawKeyCharacter)
     }
   }
 }

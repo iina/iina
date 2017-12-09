@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol KeyRecordViewDelegate {
-  func recordedKeyDown(with event: NSEvent)
+  func keyRecordView(_ view: KeyRecordView, recordedKeyDownWith event: NSEvent)
 }
 
 class KeyRecordView: NSView {
@@ -35,7 +35,7 @@ class KeyRecordView: NSView {
     currentKey = event.charactersIgnoringModifiers ?? ""
     currentKeyModifiers = event.modifierFlags
     (currentKeyInReadableFormat, currentRawKey) = event.readableKeyDescription
-    delegate.recordedKeyDown(with: event)
+    delegate.keyRecordView(self, recordedKeyDownWith: event)
   }
 
   override func mouseDown(with event: NSEvent) {

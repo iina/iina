@@ -69,7 +69,7 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     }
   }
 
-  func recordedKeyDown(with event: NSEvent) {
+  func keyRecordView(_ view: KeyRecordView, recordedKeyDownWith event: NSEvent) {
     keyLabel.stringValue = KeyCodeHelper.mpvKeyCode(from: event)
   }
 

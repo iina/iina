@@ -111,6 +111,7 @@ class FilterWindowController: NSWindowController {
 
   private func syncSavedFilter() {
     Preference.set(savedFilters.map { $0.toDict() }, for: filterType == MPVProperty.af ? .savedAudioFilters : .savedVideoFilters)
+    (NSApp.delegate as? AppDelegate)?.menuController?.updateSavedFilters(forType: filterType, from: savedFilters)
     UserDefaults.standard.synchronize()
   }
 
@@ -139,9 +140,8 @@ class FilterWindowController: NSWindowController {
     if let currentFilter = currentFilter {
       let filter = SavedFilter(name: saveFilterNameTextField.stringValue,
                                filterString: currentFilter.stringFormat,
-                               shortcutKey: keyRecordView.currentKey,
-                               modifiers: keyRecordView.currentKeyModifiers,
-                               readableFormat: keyRecordViewLabel.stringValue)
+                               shortcutKey: keyRecordView.currentRawKey,
+                               modifiers: keyRecordView.currentKeyModifiers)
       savedFilters.append(filter)
       reloadTable()
       syncSavedFilter()
@@ -214,7 +214,7 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
 extension FilterWindowController: KeyRecordViewDelegate {
 
   func recordedKeyDown(with event: NSEvent) {
-    keyRecordViewLabel.stringValue = event.charactersIgnoringModifiers != nil ? event.readableKeyDescription : ""
+    keyRecordViewLabel.stringValue = event.charactersIgnoringModifiers != nil ? event.readableKeyDescription.0 : ""
   }
 
 }

@@ -70,6 +70,9 @@ struct Preference {
 
     static let alwaysFloatOnTop = Key("alwaysFloatOnTop")
 
+    static let pauseWhenMinimized = Key("pauseWhenMinimized")
+    static let pauseWhenInactive = Key("pauseWhenInactive")
+
     /** Show chapter pos in progress bar (bool) */
     static let showChapterPos = Key("showChapterPos")
 
@@ -546,6 +549,8 @@ struct Preference {
     Key.useAppleRemote.rawValue: false,
     Key.alwaysFloatOnTop.rawValue: false,
     Key.blackOutMonitor.rawValue: false,
+    Key.pauseWhenMinimized.rawValue: false,
+    Key.pauseWhenInactive.rawValue: false,
 
     Key.playlistAutoAdd.rawValue: true,
     Key.playlistAutoPlayNext.rawValue: true,

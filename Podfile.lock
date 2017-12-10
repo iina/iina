@@ -1,7 +1,7 @@
 PODS:
-  - AEXML (4.1.0)
+  - AEXML (4.2.2)
   - GRMustache.swift (2.0.0)
-  - GzipSwift (4.0.0-beta.2)
+  - GzipSwift (4.0.4)
   - Just (0.6.0)
   - MASPreferences (1.3)
   - PromiseKit (4.4.0):
@@ -20,7 +20,7 @@ PODS:
 DEPENDENCIES:
   - AEXML
   - GRMustache.swift (from `https://github.com/saagarjha/GRMustache.swift.git`)
-  - GzipSwift (from `https://github.com/1024jp/GzipSwift.git`, branch `swift4`)
+  - GzipSwift
   - Just (from `https://github.com/JustHTTP/Just.git`, branch `swift-4`)
   - MASPreferences
   - PromiseKit
@@ -29,33 +29,27 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   GRMustache.swift:
     :git: https://github.com/saagarjha/GRMustache.swift.git
-  GzipSwift:
-    :branch: swift4
-    :git: https://github.com/1024jp/GzipSwift.git
   Just:
     :branch: swift-4
     :git: https://github.com/JustHTTP/Just.git
 
 CHECKOUT OPTIONS:
   GRMustache.swift:
-    :commit: efe20d10edc7af2ab9d60a42e94e1142cdef6535
+    :commit: 49e92fcb62b29a2d23e4015a91ac8b2cf0141475
     :git: https://github.com/saagarjha/GRMustache.swift.git
-  GzipSwift:
-    :commit: 72e16b884600b98ac77a871daecaea34aec87f8e
-    :git: https://github.com/1024jp/GzipSwift.git
   Just:
-    :commit: 86fc30e7cd4383259f602e76cf2b5137d4007b5b
+    :commit: 93fc04992243fb459af37963797ef5ac5224b242
     :git: https://github.com/JustHTTP/Just.git
 
 SPEC CHECKSUMS:
-  AEXML: 647fbb051280f3fb38a1a7caa62b0344055a851c
+  AEXML: 5ebafc1b75e0bcf0f1b09b8ca8fed2d5a199479b
   GRMustache.swift: 53405b02c374520f9193cf41bfa677f03a6d70aa
-  GzipSwift: 502e99b339a441575d762ba234e10250bc491d29
+  GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
   Just: 72e8a6e01ec5adba1aa0f7996ff4459aa6a3d710
   MASPreferences: c08b8622dd17b47da87669e741efd7c92e970e8c
   PromiseKit: ecf5fe92275d57ee77c9ede858af47a162e9b97e
   Sparkle: 06ea33170007c5937ee54da481b4481af98fac79
 
-PODFILE CHECKSUM: 6b12d63dd852cba3974d7bd9dce8554975ae69f5
+PODFILE CHECKSUM: f12d8d9506167ba0fd787904893c60c6ae833bbf
 
 COCOAPODS: 1.3.1

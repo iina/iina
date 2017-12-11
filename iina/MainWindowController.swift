@@ -127,6 +127,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var isFastforwarding: Bool = false
 
   var isPausedDueToInactive: Bool = false
+  var isPausedDueToMiniaturization: Bool = false
 
   var lastMagnification: CGFloat = 0.0
 
@@ -1374,7 +1375,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if NSApp.keyWindow == nil ||
       (NSApp.keyWindow?.windowController is MainWindowController ||
         (NSApp.keyWindow?.windowController is MiniPlayerWindowController && NSApp.keyWindow?.windowController != player.miniPlayer)) {
-      if Preference.bool(for: .pauseWhenInactive) {
+      if Preference.bool(for: .pauseWhenInactive), !player.info.isPaused {
         player.togglePause(true)
         isPausedDueToInactive = true
       }
@@ -1397,13 +1398,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillMiniaturize(_ notification: Notification) {
-    if Preference.bool(for: .pauseWhenMinimized) {
+    if Preference.bool(for: .pauseWhenMinimized), !player.info.isPaused {
+      isPausedDueToMiniaturization = true
       player.togglePause(true)
     }
   }
 
   func windowDidDeminiaturize(_ notification: Notification) {
-    if Preference.bool(for: .pauseWhenMinimized) {
+    if Preference.bool(for: .pauseWhenMinimized), isPausedDueToMiniaturization {
       player.togglePause(false)
     }
   }

@@ -561,7 +561,10 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalSubFile(_ url: URL) {
-    guard !(info.subTracks.contains { $0.externalFilename == url.path }) else { return }
+    if let track = info.subTracks.first(where: { $0.externalFilename == url.path }) {
+      mpv.command(.subReload, args: [String(track.id)], checkError: false)
+      return
+    }
 
     mpv.command(.subAdd, args: [url.path], checkError: false) { code in
       if code < 0 {

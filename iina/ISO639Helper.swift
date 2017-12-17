@@ -9,7 +9,7 @@
 import Foundation
 
 
-class ISO639_2Helper {
+class ISO639Helper {
 
   struct Language {
     var code: String
@@ -30,7 +30,7 @@ class ISO639_2Helper {
   }()
 
   static let dictionary: [String: String] = {
-    let filePath = Bundle.main.path(forResource: "ISO639_2", ofType: "strings")!
+    let filePath = Bundle.main.path(forResource: "ISO639", ofType: "strings")!
     return NSDictionary(contentsOfFile: filePath) as! [String : String]
   }()
 

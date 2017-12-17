@@ -123,7 +123,7 @@ extension PrefSubViewController: NSTokenFieldDelegate {
 
   func tokenField(_ tokenField: NSTokenField, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>?) -> [Any]? {
     let lowSubString = substring.lowercased()
-    let matches = ISO639_2Helper.languages.filter { lang in
+    let matches = ISO639Helper.languages.filter { lang in
       return lang.name.reduce(false) { $1.lowercased().hasPrefix(lowSubString) || $0 }
     }
     return matches.map { $0.description }

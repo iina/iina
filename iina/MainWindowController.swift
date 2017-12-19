@@ -1927,22 +1927,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       var widthOrHeightIsSet = false
       // w and h can't take effect at same time
       if let strw = geometry.w, strw != "0" {
-        let w: CGFloat
+        var w: CGFloat
         if strw.hasSuffix("%") {
           w = CGFloat(Double(String(strw.dropLast()))! * 0.01 * Double(screenFrame.width))
         } else {
           w = CGFloat(Int(strw)!)
         }
+        w = min(minSize.width, w)
         winFrame.size.width = w
         winFrame.size.height = w / winAspect
         widthOrHeightIsSet = true
       } else if let strh = geometry.h, strh != "0" {
-        let h: CGFloat
+        var h: CGFloat
         if strh.hasSuffix("%") {
           h = CGFloat(Double(String(strh.dropLast()))! * 0.01 * Double(screenFrame.height))
         } else {
           h = CGFloat(Int(strh)!)
         }
+        h = min(minSize.height, h)
         winFrame.size.height = h
         winFrame.size.width = h * winAspect
         widthOrHeightIsSet = true

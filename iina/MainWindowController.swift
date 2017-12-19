@@ -93,7 +93,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** For mpv's `geometry` option. We cache the parsed structure
    so never need to parse it every time. */
-  var cachedGeometry: PlayerCore.GeometryDef?
+  var cachedGeometry: GeometryDef?
 
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
@@ -2004,7 +2004,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     videoView.videoSize = w.convertToBacking(videoView.frame).size
 
     var rect: NSRect
-    let needResizeWindow = player.info.justOpenedFile || !Preference.bool(for: .resizeOnlyWhenManuallyOpenFile)
+    let needResizeWindow = player.info.justOpenedFile //|| !Preference.bool(for: .resizeOnlyWhenManuallyOpenFile)
 
     if needResizeWindow {
       // get videoSize on screen

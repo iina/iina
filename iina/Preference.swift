@@ -110,10 +110,7 @@ struct Preference {
 
     static let usePhysicalResolution = Key("usePhysicalResolution")
 
-    /** IINA will adjust window size according to video size,
-     but if the file is not opened by user manually (File > Open),
-     e.g. jumping to next item in playlist, window size will remoain the same. */
-    static let resizeOnlyWhenManuallyOpenFile = Key("resizeOnlyWhenManuallyOpenFile")
+    static let initialWindowSizePosition = Key("initialWindowSizePosition")
 
     static let oscPosition = Key("oscPosition")
 
@@ -562,7 +559,7 @@ struct Preference {
     .playlistAutoPlayNext: true,
 
     .usePhysicalResolution: true,
-    .resizeOnlyWhenManuallyOpenFile: true,
+    .initialWindowSizePosition: "",
     .showRemainingTime: false,
     .enableThumbnailPreview: true,
     .maxThumbnailPreviewCacheSize: 500,

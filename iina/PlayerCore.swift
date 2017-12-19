@@ -78,8 +78,6 @@ class PlayerCore: NSObject {
   }
   private var _touchBarSupport: Any?
 
-  unowned let ud: UserDefaults = UserDefaults.standard
-
   /// A dispatch queue for auto load feature.
   let backgroundQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreTask", qos: DispatchQoS.background)
 
@@ -124,6 +122,12 @@ class PlayerCore: NSObject {
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
+
+  private let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm"
+    return formatter
+  }()
 
   static var keyBindings: [String: KeyMapping] = [:]
 
@@ -989,6 +993,7 @@ class PlayerCore: NSObject {
     case muteButton
     case chapterList
     case playlist
+    case additionalInfo
   }
 
   @objc func syncUITime() {
@@ -1001,6 +1006,11 @@ class PlayerCore: NSObject {
       syncUI(.timeAndCache)
     } else {
       syncUI(.time)
+    }
+    if !isInMiniPlayer &&
+      mainWindow.isInFullScreen && mainWindow.displayTimeAndBatteryInFullScreen &&
+      !mainWindow.additionalInfoView.isHidden {
+      syncUI(.additionalInfo)
     }
   }
 
@@ -1076,6 +1086,16 @@ class PlayerCore: NSObject {
       DispatchQueue.main.async {
         if self.isInMiniPlayer ? self.miniPlayer.isPlaylistVisible : self.mainWindow.sideBarStatus == .playlist {
           self.mainWindow.playlistView.playlistTableView.reloadData()
+        }
+      }
+
+    case .additionalInfo:
+      DispatchQueue.main.async {
+        let timeString = self.dateFormatter.string(from: Date())
+        if let capacity = PowerSource.getList().filter({ $0.type == "InternalBattery" }).first?.currentCapacity {
+          self.mainWindow.additionalInfoLabel.stringValue = "\(timeString) | \(capacity)%"
+        } else {
+          self.mainWindow.additionalInfoLabel.stringValue = "\(timeString)"
         }
       }
     }

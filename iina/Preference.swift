@@ -120,6 +120,8 @@ struct Preference {
 
     static let autoSwitchToMusicMode = Key("autoSwitchToMusicMode")
 
+    static let displayTimeAndBatteryInFullScreen = Key("displayTimeAndBatteryInFullScreen")
+
     // Codec
 
     static let videoThreads = Key("videoThreads")
@@ -561,6 +563,7 @@ struct Preference {
     Key.enableThumbnailPreview.rawValue: true,
     Key.maxThumbnailPreviewCacheSize.rawValue: 500,
     Key.autoSwitchToMusicMode.rawValue: true,
+    Key.displayTimeAndBatteryInFullScreen.rawValue: false,
 
     Key.videoThreads.rawValue: 0,
     Key.hardwareDecoder.rawValue: HardwareDecoderOption.auto.rawValue,

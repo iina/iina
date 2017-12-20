@@ -65,7 +65,6 @@ class VideoTime {
 
   init(_ second: Double) {
     self.second = second
-
   }
 
   init(_ hour: Int, _ minute: Int, _ second: Int) {

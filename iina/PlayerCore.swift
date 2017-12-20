@@ -183,8 +183,12 @@ class PlayerCore: NSObject {
       SleepPreventer.preventSleep()
     }
     initialWindow.close()
-    mainWindow.showWindow(nil)
-    mainWindow.windowDidOpen()
+    if isInMiniPlayer {
+      miniPlayer.showWindow(nil)
+    } else {
+      mainWindow.showWindow(nil)
+      mainWindow.windowDidOpen()
+    }
     // Send load file command
     info.fileLoading = true
     info.justOpenedFile = true

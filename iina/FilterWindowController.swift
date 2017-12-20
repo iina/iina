@@ -192,11 +192,10 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     if tableView == currentFiltersTableView {
-      guard let filter = filters.at(row) else { return nil }
       if tableColumn?.identifier == .key {
         return row.toStr()
       } else if tableColumn?.identifier == .value {
-        return filter.stringFormat
+        return filters.at(row)?.stringFormat
       } else {
         return filterIsSaved[row]
       }

@@ -103,7 +103,7 @@ class FilterParameter {
   }
 
   static func choose(from choices: [String], defaultChoiceIndex: Int = 0) -> FilterParameter {
-    guard !choices.isEmpty else { fatalError("FilterParameter: Choices annot be empty") }
+    guard !choices.isEmpty else { fatalError("FilterParameter: Choices cannot be empty") }
     let pm = FilterParameter(.choose, defaultValue: FilterParameterValue(string: choices[defaultChoiceIndex]))
     pm.choices = choices
     return pm

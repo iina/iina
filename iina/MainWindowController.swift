@@ -2004,8 +2004,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     videoView.videoSize = w.convertToBacking(videoView.frame).size
 
     var rect: NSRect
-    let needResizeWindow = player.info.justOpenedFile //|| !Preference.bool(for: .resizeOnlyWhenManuallyOpenFile)
+    let needResizeWindow: Bool
 
+    let resizeOption = Preference.enum(for: .resizeWindowOption) as Preference.ResizeWidowOption
+    switch resizeOption {
+    case .always:
+      needResizeWindow = true
+    case .onlyWhenOpen:
+      needResizeWindow = player.info.justOpenedFile
+    case .never:
+      needResizeWindow = false
+    }
+    
     if needResizeWindow {
       // get videoSize on screen
       var videoSize = originalVideoSize

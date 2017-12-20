@@ -22,6 +22,9 @@
                 <outlet property="windowPosYAnchorPopUpButton" destination="Y9m-YR-TwG" id="w4y-hS-KD8"/>
                 <outlet property="windowPosYOffsetTextField" destination="HjX-1c-epS" id="J3k-j8-40K"/>
                 <outlet property="windowPosYUnitPopUpButton" destination="bnT-bC-1GM" id="cPM-xN-8h9"/>
+                <outlet property="windowResizeAlwaysButton" destination="z5X-oj-MdV" id="zHW-nm-HHS"/>
+                <outlet property="windowResizeNeverButton" destination="UhD-Lf-aPQ" id="icC-Rx-cG6"/>
+                <outlet property="windowResizeOnlyWhenOpenButton" destination="Wn6-zz-utQ" id="V4M-aL-L6F"/>
                 <outlet property="windowSizeBox" destination="L5c-uf-ged" id="vh3-9g-Gdq"/>
                 <outlet property="windowSizeCheckBox" destination="dvv-kN-b5O" id="qs5-JH-mwB"/>
                 <outlet property="windowSizeTypePopUpButton" destination="sCc-NR-e8c" id="UeM-td-b85"/>
@@ -364,20 +367,29 @@
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="setupResizingRelatedControls:" target="-2" id="xp6-wX-Fjk"/>
+                                        </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wn6-zz-utQ">
+                                    <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Wn6-zz-utQ">
                                         <rect key="frame" x="70" y="7" width="158" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Media is opened manually" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="CJE-ap-IH8">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="setupResizingRelatedControls:" target="-2" id="BU5-9V-BNk"/>
+                                        </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UhD-Lf-aPQ">
+                                    <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="UhD-Lf-aPQ">
                                         <rect key="frame" x="234" y="7" width="53" height="18"/>
                                         <buttonCell key="cell" type="radio" title="Never" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="duf-3s-3bL">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="setupResizingRelatedControls:" target="-2" id="4kb-UJ-74P"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

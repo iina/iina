@@ -111,6 +111,7 @@ struct Preference {
     static let usePhysicalResolution = Key("usePhysicalResolution")
 
     static let initialWindowSizePosition = Key("initialWindowSizePosition")
+    static let resizeWindowOption = Key("resizeWindowOption")
 
     static let oscPosition = Key("oscPosition")
 
@@ -522,6 +523,18 @@ struct Preference {
     }
   }
 
+  enum ResizeWidowOption: Int, InitializingFromKey {
+    case always = 0
+    case onlyWhenOpen
+    case never
+
+    static var defaultValue = ResizeWidowOption.onlyWhenOpen
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+  }
+
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [
@@ -560,6 +573,7 @@ struct Preference {
 
     .usePhysicalResolution: true,
     .initialWindowSizePosition: "",
+    .resizeWindowOption: ResizeWidowOption.onlyWhenOpen.rawValue,
     .showRemainingTime: false,
     .enableThumbnailPreview: true,
     .maxThumbnailPreviewCacheSize: 500,

@@ -61,11 +61,16 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   @IBOutlet weak var windowPosYAnchorPopUpButton: NSPopUpButton!
   @IBOutlet weak var windowPosBox: NSBox!
 
+  @IBOutlet weak var windowResizeAlwaysButton: NSButton!
+  @IBOutlet weak var windowResizeOnlyWhenOpenButton: NSButton!
+  @IBOutlet weak var windowResizeNeverButton: NSButton!
+
 
   override func viewDidLoad() {
     super.viewDidLoad()
     oscPositionPopupBtnAction(oscPositionPopupButton)
     setupGeometryRelatedControls()
+    setupResizingRelatedControls()
   }
 
   @IBAction func oscPositionPopupBtnAction(_ sender: NSPopUpButton) {
@@ -116,6 +121,10 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
       setSubViews(of: windowPosBox, enabled: false)
     }
     Preference.set(geometry, for: .initialWindowSizePosition)
+  }
+
+  @IBAction func setupResizingRelatedControls(_ sender: NSButton) {
+    Preference.set(sender.tag, for: .resizeWindowOption)
   }
 
   override func viewDidAppear() {
@@ -172,6 +181,12 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
       setSubViews(of: windowPosBox, enabled: false)
       setSubViews(of: windowSizeBox, enabled: false)
     }
+  }
+
+  private func setupResizingRelatedControls() {
+    let resizeOption = Preference.enum(for: .resizeWindowOption) as Preference.ResizeWidowOption
+    ([windowResizeNeverButton, windowResizeOnlyWhenOpenButton, windowResizeAlwaysButton] as [NSButton])
+      .first { $0.tag == resizeOption.rawValue }?.state = .on
   }
 
   private func setSubViews(of view: NSBox, enabled: Bool) {

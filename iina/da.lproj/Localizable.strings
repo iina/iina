@@ -130,80 +130,80 @@
 "alert.add_filter.title" = "Nyt filter";
 "alert.add_filter.message" = "Please enter a filter string in format of MPV's vf or af command.";
 
-"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+"alert.keybinding_config.error" = "Fejl under opsætning af tastegenveje \"%@\"! Går tilbage til standart IINA opsætning. Venligst tjek konfigurationen.";
 
-"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
+"alert.extra_option.cannot_read" = "Kan ikke læse brugerdefinerede ekstra mpv indstillinger.";
 "alert.extra_option.empty" = "Nøgle eller værdi må ikke være tom!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
-"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+"alert.extra_option.error" = "Fejl under indstilling af --%@=%@ med værdi %d. Venligst tjek dine ekstra indstilliger i preferancer > avanceret.";
+"alert.extra_option.config_folder" = "Fejl under konfiguration af config mappen \"%@\".";
 
-"alert.playlist.error_deleting" = "Error deleting: %@";
+"alert.playlist.error_deleting" = "Fejl under sletning af: %@";
 
-"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using opensubtitles. English(eng) will be used this time.";
-"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
-"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+"alert.sub.no_selected" = "Venligst vælg downloadet undertekst først.";
+"alert.sub_lang_not_set" = "Venligst vælgt det fortrukne undertekstsprog i preferancer før du bruger opensubtitles. Engelsk vil blive brugt denne gang.";
+"alert.sub.cannot_save_passwd" = "Kan ikke gemme dit kodeord til nøglering: %@";
+"alert.sub.cannot_login" = "Kan ikke logge ind. Venligst tjek dit brugernavn, kodeord og netværksstatus.\n\n%@";
 
-"alert.set_default.title" = "Setting IINA as Default App";
-"alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
-"alert.set_default.success" = "Finished with %d success and %d failed.";
+"alert.set_default.title" = "Sætter IINA som statndart program";
+"alert.set_default.message" = "IINA vil være standart programmet for alle de filtyper som supporteres.";
+"alert.set_default.success" = "Færdig med %d succes og %d fejlet.";
 
 "alert.add_watch.title" = "Add Watch Property";
-"alert.add_watch.message" = "Please enter a valid MPV property name.";
+"alert.add_watch.message" = "Venligst indrtast et gyldigt MPV egenskabsnavn.";
 
-"alert.jump_to.title" = "Jump to";
-"alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
+"alert.jump_to.title" = "Gå til";
+"alert.jump_to.message" = "Venligst indtast tiden du ønsker at gå til: 20:35";
 
-"alert.opensub.login.title" = "OpenSubtitles Login";
-"alert.opensub.login.message" = "Please enter your username and password";
+"alert.opensub.login.title" = "OpenSubtitles Logind";
+"alert.opensub.login.message" = "Venligst indtast dit brugernavn og kodeord";
 
-"alert.open_url.title" = "Open URL";
-"alert.open_url.message" = "Please enter the URL:";
-"alert.choose_media_file.title" = "Choose Media File";
+"alert.open_url.title" = "Åben URL";
+"alert.open_url.message" = "Venligst indtast URL:";
+"alert.choose_media_file.title" = "Vælge mediefil";
 
-"alert.delete_history.title" = "Delete Playback History";
-"alert.delete_history.message" = "Are you sure to delete select entries?";
+"alert.delete_history.title" = "Slet Playback Historik";
+"alert.delete_history.message" = "Er du sikker på du ønsker at slette det valgte?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video fliter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like, setting the crop) to get it working.";
-"alert.filter_hwdec.abort" = "Abort";
-"alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
-"alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
+"alert.filter_hwdec.message" = "Du er ved at aktivere et videofilter. Men din nuværende hardware encoder supportere mulighvis ikke videofiltre. Du kan enten deaktivere hardware decoding eller skifte til auto(kopi), hvilket optager dobbelt hukommelse.";
+"alert.filter_hwdec.abort" = "Afbryd";
+"alert.filter_hwdec.turn_off" = "Sluk for hardware decoding";
+"alert.filter_hwdec.use_copy" = "Skift til auto(kopi)";
 
-"alert.clear_cache.title" = "Clear Thumbnail Cache";
-"alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
-"alert.clear_cache.success" = "Cache cleared.";
+"alert.clear_cache.title" = "Tøm Thumbnail Cache";
+"alert.clear_cache.message" = "Er du sikker på du vil tømme alle thumbnail Cache?";
+"alert.clear_cache.success" = "Cache tømt.";
 
-"alert.nothing_to_open" = "Nothing to open.";
+"alert.nothing_to_open" = "Intet at åbne.";
 
-"alert.no_video_track" = "There is no video track.";
+"alert.no_video_track" = "Der er ingen videofil.";
 
-"pl_menu.title_multi" = "%d Items";
-"pl_menu.play_next" = "Play Next";
-"pl_menu.play_in_new_window" = "Play in New Window";
-"pl_menu.remove" = "Remove";
-"pl_menu.remove_multi" = "Remove Selected";
-"pl_menu.delete" = "Move to Trash";
-"pl_menu.delete_multi" = "Move Selected Files to Trash";
-"pl_menu.delete_after_play" = "Move to Trash After Playback";
-"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
-"pl_menu.reveal_in_finder" = "Reveal in Finder";
-"pl_menu.add_item" = "Add Item…";
-"pl_menu.clear_playlist" = "Clear Playlist";
-"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
-"pl_menu.add_sub" = "Add Subtitle…";
-"pl_menu.wrong_sub" = "Wrong Subtitle!";
+"pl_menu.title_multi" = "%d Emner";
+"pl_menu.play_next" = "Afspil næste";
+"pl_menu.play_in_new_window" = "Afspil i nyt vindue";
+"pl_menu.remove" = "Fjern";
+"pl_menu.remove_multi" = "Fjern valgte";
+"pl_menu.delete" = "Flyt til papirkurven";
+"pl_menu.delete_multi" = "Flyt valgte filer til papirkurven";
+"pl_menu.delete_after_play" = "Flyt til papirkurven efter afspilning";
+"pl_menu.delete_after_play_multi" = "Flyt valgte filer til papirkurven efter afspilning";
+"pl_menu.reveal_in_finder" = "Vis i finder";
+"pl_menu.add_item" = "Tilføj emne…";
+"pl_menu.clear_playlist" = "Tøm Playlist";
+"pl_menu.matched_sub" = "Matchede %d Undertekster";
+"pl_menu.add_sub" = "Tilføj underteskter…";
+"pl_menu.wrong_sub" = "Forkert undertekst!";
 
-"keymapping.title" = "Key Mapping";
-"keymapping.message" = "Press any key to record.";
+"keymapping.title" = "Taste kortlægning";
+"keymapping.message" = "Tryk på en vilkårlig tast for at optage.";
 
-"filter.video_filters" = "Video Filters";
-"filter.audio_filters" = "Audio Filters";
+"filter.video_filters" = "Videofiltre";
+"filter.audio_filters" = "Lydfiltre";
 
-"hwdec.no" = "Disable Hardware decoding.";
-"hwdec.auto" = "Enable hardware decoding. However, most video filters won't work properly.";
-"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but works with video filters.";
+"hwdec.no" = "Deaktiver Hardware decoding.";
+"hwdec.auto" = "Aktiver hardware decoding. De fleste videofiltre vil ikke virker korrekt.";
+"hwdec.auto-copy" = "Aktiver hardware decoding. Det kræver dobbelt så meget hukommelse, men virker med videofiltre.";
 
-"subencoding.auto" = "Auto detect";
+"subencoding.auto" = "Find pr. automatik";
 
 // Touch bar
 
@@ -218,5 +218,5 @@
 "touchbar.rewind" = "Spol tilbage";
 "touchbar.fast_forward" = "Spol frem";
 "touchbar.play_pause" = "Play / Pause";
-"touchbar.seek" = "Spool";
+"touchbar.seek" = "Spol";
 "touchbar.time" = "Tids Position";

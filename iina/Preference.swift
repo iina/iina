@@ -76,6 +76,8 @@ struct Preference {
 
     static let pauseWhenMinimized = Key("pauseWhenMinimized")
     static let pauseWhenInactive = Key("pauseWhenInactive")
+    static let playWhenEnteringFullScreen = Key("playWhenEnteringFullScreen")
+    static let pauseWhenLeavingFullScreen = Key("pauseWhenLeavingFullScreen")
 
     /** Show chapter pos in progress bar (bool) */
     static let showChapterPos = Key("showChapterPos")
@@ -592,6 +594,8 @@ struct Preference {
     .blackOutMonitor: false,
     .pauseWhenMinimized: false,
     .pauseWhenInactive: false,
+    .pauseWhenLeavingFullScreen: false,
+    .playWhenEnteringFullScreen: false,
 
     .playlistAutoAdd: true,
     .playlistAutoPlayNext: true,

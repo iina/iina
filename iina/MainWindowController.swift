@@ -1261,6 +1261,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if Preference.bool(for: .displayTimeAndBatteryInFullScreen) {
       fadeableViews.append(additionalInfoView)
     }
+
+    if Preference.bool(for: .playWhenEnteringFullScreen) && player.info.isPaused {
+      player.togglePause(false)
+    }
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
@@ -1311,6 +1315,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()
     }
+
+    if Preference.bool(for: .pauseWhenLeavingFullScreen) && !player.info.isPaused {
+      player.togglePause(true)
+    }
+
     // restore ontop status
     if !player.info.isPaused {
       setWindowFloatingOnTop(isOntop)

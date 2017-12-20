@@ -68,6 +68,8 @@
 "osd.file_error" = "Error reading file";
 "osd.cannot_login" = "Cannot login";
 "osd.canceled" = "Canceled";
+"osd.filter_added" = "Added Filter: %@";
+"osd.filter_removed" = "Removed Filter";
 
 "preference.title" = "Preferences";
 "preference.general" = "General";

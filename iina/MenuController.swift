@@ -74,6 +74,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var deinterlace: NSMenuItem!
   @IBOutlet weak var delogo: NSMenuItem!
   @IBOutlet weak var videoFilters: NSMenuItem!
+  @IBOutlet weak var savedVideoFiltersMenu: NSMenu!
   //Audio
   @IBOutlet weak var audioMenu: NSMenu!
   @IBOutlet weak var quickSettingsAudio: NSMenuItem!
@@ -90,6 +91,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var resetAudioDelay: NSMenuItem!
   @IBOutlet weak var audioFilters: NSMenuItem!
   @IBOutlet weak var audioDeviceMenu: NSMenu!
+  @IBOutlet weak var savedAudioFiltersMenu: NSMenu!
   // Subtitle
   @IBOutlet weak var subMenu: NSMenu!
   @IBOutlet weak var quickSettingsSub: NSMenuItem!
@@ -226,6 +228,10 @@ class MenuController: NSObject, NSMenuDelegate {
     // -- filter
     videoFilters.action = #selector(AppDelegate.showVideoFilterWindow(_:))
 
+    savedVideoFiltersMenu.delegate = self
+    updateSavedFilters(forType: MPVProperty.vf,
+                       from: Preference.array(for: .savedVideoFilters)?.flatMap(SavedFilter.init(dict:)) ?? [])
+
     // Audio menu
 
     audioMenu.delegate = self
@@ -251,6 +257,10 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // - filters
     audioFilters.action = #selector(AppDelegate.showAudioFilterWindow(_:))
+
+    savedAudioFiltersMenu.delegate = self
+    updateSavedFilters(forType: MPVProperty.af,
+                       from: Preference.array(for: .savedAudioFilters)?.flatMap(SavedFilter.init(dict:)) ?? [])
 
     // Subtitle
 
@@ -401,6 +411,16 @@ class MenuController: NSObject, NSMenuDelegate {
     }
   }
 
+  func updateSavedFiltersMenu(type: String) {
+    let filters = PlayerCore.active.mpv.getFilters(type)
+    let menu: NSMenu! = type == MPVProperty.vf ? savedVideoFiltersMenu : savedAudioFiltersMenu
+    for item in menu.items {
+      if let string = (item.representedObject as? String) {
+        item.state = filters.contains { $0.stringFormat == string } ? .on : .off
+      }
+    }
+  }
+
   /**
    Bind a menu with a list of available options.
 
@@ -487,6 +507,10 @@ class MenuController: NSObject, NSMenuDelegate {
       updateTracks(forMenu: menu, type: .sub)
     } else if menu == secondSubTrackMenu {
       updateTracks(forMenu: menu, type: .secondSub)
+    } else if menu == savedVideoFiltersMenu {
+      updateSavedFiltersMenu(type: MPVProperty.vf)
+    } else if menu == savedAudioFiltersMenu {
+      updateSavedFiltersMenu(type: MPVProperty.af)
     }
     // check convinently binded menus
     if let checkEnableBlock = menuBindingList[menu] {
@@ -496,4 +520,20 @@ class MenuController: NSObject, NSMenuDelegate {
     }
   }
 
+  // MARK: - Others
+
+  func updateSavedFilters(forType type: String, from filters: [SavedFilter]) {
+    let isVideo = type == MPVProperty.vf
+    let menu: NSMenu! = isVideo ? savedVideoFiltersMenu : savedAudioFiltersMenu
+    menu.removeAllItems()
+    for filter in filters {
+      let menuItem = NSMenuItem()
+      menuItem.title = filter.name
+      menuItem.action = isVideo ? #selector(MainWindowController.menuToggleVideoFilterString(_:)) : #selector(MainWindowController.menuToggleAudioFilterString(_:))
+      menuItem.keyEquivalent = filter.shortcutKey
+      menuItem.keyEquivalentModifierMask = filter.shortcutKeyModifiers
+      menuItem.representedObject = filter.filterString
+      menu.addItem(menuItem)
+    }
+  }
 }

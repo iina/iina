@@ -390,19 +390,22 @@
                                     </textField>
                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PxB-We-0Hu">
                                         <rect key="frame" x="108" y="3" width="112" height="22"/>
-                                        <popUpButtonCell key="cell" type="push" title="0.5x video size" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="0eK-kv-btH" id="l3o-Df-DQv">
+                                        <popUpButtonCell key="cell" type="push" title="0.5x video size" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1" imageScaling="proportionallyDown" inset="2" selectedItem="0eK-kv-btH" id="l3o-Df-DQv">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                             <menu key="menu" id="Axr-k5-84a">
                                                 <items>
-                                                    <menuItem title="0.5x video size" state="on" id="0eK-kv-btH"/>
-                                                    <menuItem title="1x video size" id="MR7-Ac-SAO"/>
-                                                    <menuItem title="1.5x video size" id="Goh-X4-4f1"/>
-                                                    <menuItem title="2x video size" id="dUG-QD-CXL"/>
+                                                    <menuItem title="0.5x video size" state="on" tag="1" id="0eK-kv-btH"/>
+                                                    <menuItem title="1x video size" tag="2" id="MR7-Ac-SAO"/>
+                                                    <menuItem title="1.5x video size" tag="3" id="Goh-X4-4f1"/>
+                                                    <menuItem title="2x video size" tag="4" id="dUG-QD-CXL"/>
                                                     <menuItem title="fit the screen" id="vdi-lO-q6e"/>
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>
+                                        <connections>
+                                            <binding destination="lH7-Vv-0M1" name="selectedTag" keyPath="values.resizeWindowOption" id="WWj-rB-vKG"/>
+                                        </connections>
                                     </popUpButton>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z5X-oj-MdV">
                                         <rect key="frame" x="48" y="64" width="59" height="18"/>

@@ -111,6 +111,7 @@ struct Preference {
     static let usePhysicalResolution = Key("usePhysicalResolution")
 
     static let initialWindowSizePosition = Key("initialWindowSizePosition")
+    static let resizeWindowTiming = Key("resizeWindowTiming")
     static let resizeWindowOption = Key("resizeWindowOption")
 
     static let oscPosition = Key("oscPosition")
@@ -523,15 +524,39 @@ struct Preference {
     }
   }
 
-  enum ResizeWidowOption: Int, InitializingFromKey {
+  enum ResizeWindowTiming: Int, InitializingFromKey {
     case always = 0
     case onlyWhenOpen
     case never
 
-    static var defaultValue = ResizeWidowOption.onlyWhenOpen
+    static var defaultValue = ResizeWindowTiming.onlyWhenOpen
 
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
+    }
+  }
+
+  enum ResizeWindowOption: Int, InitializingFromKey {
+    case fitScreen = 0
+    case videoSize05
+    case videoSize10
+    case videoSize15
+    case videoSize20
+
+    static var defaultValue = ResizeWindowOption.videoSize10
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var ratio: Double {
+      switch self {
+      case .fitScreen: return -1
+      case .videoSize05: return 0.5
+      case .videoSize10: return 1
+      case .videoSize15: return 1.5
+      case .videoSize20: return 2
+      }
     }
   }
 
@@ -573,7 +598,8 @@ struct Preference {
 
     .usePhysicalResolution: true,
     .initialWindowSizePosition: "",
-    .resizeWindowOption: ResizeWidowOption.onlyWhenOpen.rawValue,
+    .resizeWindowTiming: ResizeWindowTiming.onlyWhenOpen.rawValue,
+    .resizeWindowOption: ResizeWindowOption.videoSize10.rawValue,
     .showRemainingTime: false,
     .enableThumbnailPreview: true,
     .maxThumbnailPreviewCacheSize: 500,

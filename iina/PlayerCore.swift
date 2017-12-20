@@ -78,8 +78,6 @@ class PlayerCore: NSObject {
   }
   private var _touchBarSupport: Any?
 
-  unowned let ud: UserDefaults = UserDefaults.standard
-
   /// A dispatch queue for auto load feature.
   let backgroundQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreTask")
 
@@ -124,6 +122,12 @@ class PlayerCore: NSObject {
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
+
+  private let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm"
+    return formatter
+  }()
 
   static var keyBindings: [String: KeyMapping] = [:]
 
@@ -179,8 +183,12 @@ class PlayerCore: NSObject {
       SleepPreventer.preventSleep()
     }
     initialWindow.close()
-    mainWindow.showWindow(nil)
-    mainWindow.windowDidOpen()
+    if isInMiniPlayer {
+      miniPlayer.showWindow(nil)
+    } else {
+      mainWindow.showWindow(nil)
+      mainWindow.windowDidOpen()
+    }
     // Send load file command
     info.fileLoading = true
     info.justOpenedFile = true
@@ -823,26 +831,11 @@ class PlayerCore: NSObject {
     mpv.command(.writeWatchLaterConfig)
   }
 
-  struct GeometryDef {
-    var x: String?, y: String?, w: String?, h: String?, xSign: String?, ySign: String?
-  }
-
   func getGeometry() -> GeometryDef? {
     let geometry = mpv.getString(MPVOption.Window.geometry) ?? ""
-    // guard option value
-    guard !geometry.isEmpty else { return nil }
-    // match the string, replace empty group by nil
-    let captures: [String?] = Regex.geometry.captures(in: geometry).map { $0.isEmpty ? nil : $0 }
-    // guard matches
-    guard captures.count == 10 else { return nil }
-    // return struct
-    return GeometryDef(x: captures[7],
-                       y: captures[9],
-                       w: captures[2],
-                       h: captures[4],
-                       xSign: captures[6],
-                       ySign: captures[8])
+    return GeometryDef.parse(geometry)
   }
+
 
   // MARK: - Listeners
 
@@ -989,6 +982,7 @@ class PlayerCore: NSObject {
     case muteButton
     case chapterList
     case playlist
+    case additionalInfo
   }
 
   @objc func syncUITime() {
@@ -1001,6 +995,11 @@ class PlayerCore: NSObject {
       syncUI(.timeAndCache)
     } else {
       syncUI(.time)
+    }
+    if !isInMiniPlayer &&
+      mainWindow.isInFullScreen && mainWindow.displayTimeAndBatteryInFullScreen &&
+      !mainWindow.additionalInfoView.isHidden {
+      syncUI(.additionalInfo)
     }
   }
 
@@ -1076,6 +1075,16 @@ class PlayerCore: NSObject {
       DispatchQueue.main.async {
         if self.isInMiniPlayer ? self.miniPlayer.isPlaylistVisible : self.mainWindow.sideBarStatus == .playlist {
           self.mainWindow.playlistView.playlistTableView.reloadData()
+        }
+      }
+
+    case .additionalInfo:
+      DispatchQueue.main.async {
+        let timeString = self.dateFormatter.string(from: Date())
+        if let capacity = PowerSource.getList().filter({ $0.type == "InternalBattery" }).first?.currentCapacity {
+          self.mainWindow.additionalInfoLabel.stringValue = "\(timeString) | \(capacity)%"
+        } else {
+          self.mainWindow.additionalInfoLabel.stringValue = "\(timeString)"
         }
       }
     }

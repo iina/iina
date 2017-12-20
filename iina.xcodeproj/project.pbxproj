@@ -191,6 +191,8 @@
 		E3CB75BB1FD998F5004DB10A /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F21E26CA24008755BB /* Regex.swift */; };
 		E3DE8DCD1FD8166A0021921C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DE8DCC1FD8166A0021921C /* main.swift */; };
 		E3DE8DD31FD848BA0021921C /* iina-cli in Copy Executables */ = {isa = PBXBuildFile; fileRef = E3DE8DCA1FD8166A0021921C /* iina-cli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E3ECC89E1FE9A6D900BED8C7 /* GeometryDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */; };
+		E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC31451FE1501E00B9B86F /* PowerSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -926,6 +928,8 @@
 		D2B411431E5336AE002819E1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		E3DE8DCA1FD8166A0021921C /* iina-cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "iina-cli"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3DE8DCC1FD8166A0021921C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryDef.swift; sourceTree = "<group>"; };
+		E3FC31451FE1501E00B9B86F /* PowerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSource.swift; sourceTree = "<group>"; };
 		E53BAB3F1F1692B700D2609F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		E53CCBA31EB7711200DFF4E1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/OpenURLAccessoryViewController.strings; sourceTree = "<group>"; };
 		E53CCBA51EB7717500DFF4E1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/SubSelectWindowController.strings; sourceTree = "<group>"; };
@@ -1169,6 +1173,8 @@
 				840820101ECF6C1800361416 /* FileGroup.swift */,
 				84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */,
 				844C59E61F7C143D008D1B00 /* CacheManager.swift */,
+				E3FC31451FE1501E00B9B86F /* PowerSource.swift */,
+				E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1786,6 +1792,7 @@
 				84A886EC1E2573A5008755BB /* JustExtension.swift in Sources */,
 				84D0FB811F5E5A4000C6A6A7 /* CropBoxViewController.swift in Sources */,
 				84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */,
+				E3ECC89E1FE9A6D900BED8C7 /* GeometryDef.swift in Sources */,
 				84E295C01E2CF9F5006388F7 /* ObjcUtils.m in Sources */,
 				8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */,
 				84A886E41E24F37D008755BB /* ShooterSubtitle.swift in Sources */,
@@ -1803,6 +1810,7 @@
 				8492C2881E7721A600CE5825 /* ISO639Helper.swift in Sources */,
 				84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */,
 				84EC12831F4F939000137C1E /* FilterPresets.swift in Sources */,
+				E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
 				84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */,
 				84AC621F1E87A4F3002D6F92 /* OpenURLAccessoryViewController.swift in Sources */,

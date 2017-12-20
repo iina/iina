@@ -175,6 +175,8 @@ class MPVController: NSObject {
     setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.ProgramBehavior.savePositionOnQuit)
     setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback")
 
+    setUserOption(.initialWindowSizePosition, type: .string, forName: MPVOption.Window.geometry)
+
     // - Codec
 
     setUserOption(PK.videoThreads, type: .int, forName: MPVOption.Video.vdLavcThreads)

@@ -86,7 +86,7 @@ class MPVTrack: NSObject {
       let title = self.title ?? ""
       // lang
       let language: String
-      if let lang = self.lang, lang != "und", let rawLang = ISO639_2Helper.dictionary[lang] {
+      if let lang = self.lang, lang != "und", let rawLang = ISO639Helper.dictionary[lang] {
         language = "[\(rawLang)]"
       } else {
         language = ""

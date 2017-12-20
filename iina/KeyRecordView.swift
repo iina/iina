@@ -9,12 +9,17 @@
 import Cocoa
 
 protocol KeyRecordViewDelegate {
-  func recordedKeyDown(with event: NSEvent)
+  func keyRecordView(_ view: KeyRecordView, recordedKeyDownWith event: NSEvent)
 }
 
 class KeyRecordView: NSView {
 
   var delegate: KeyRecordViewDelegate!
+
+  var currentRawKey: String = ""
+  var currentKeyInReadableFormat: String = ""
+  var currentKey: String = ""
+  var currentKeyModifiers: NSEvent.ModifierFlags = []
 
   override func awakeFromNib() {
     wantsLayer = true
@@ -27,7 +32,10 @@ class KeyRecordView: NSView {
   }
 
   override func keyDown(with event: NSEvent) {
-    delegate.recordedKeyDown(with: event)
+    currentKey = event.charactersIgnoringModifiers ?? ""
+    currentKeyModifiers = event.modifierFlags
+    (currentKeyInReadableFormat, currentRawKey) = event.readableKeyDescription
+    delegate.keyRecordView(self, recordedKeyDownWith: event)
   }
 
   override func mouseDown(with event: NSEvent) {

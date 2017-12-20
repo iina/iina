@@ -127,7 +127,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     if !isReady {
-      UserDefaults.standard.register(defaults: Preference.defaultPreference)
+      registerUserDefaultValues()
       menuController.bindMenuItems()
       isReady = true
     }
@@ -243,7 +243,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @objc
   func handleOpenFile() {
     if !isReady {
-      UserDefaults.standard.register(defaults: Preference.defaultPreference)
+      registerUserDefaultValues()
       menuController.bindMenuItems()
       isReady = true
     }
@@ -393,6 +393,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func setSelfAsDefaultAction(_ sender: AnyObject) {
     Utility.setSelfAsDefaultForAllFileTypes()
+  }
+
+  private func registerUserDefaultValues() {
+    UserDefaults.standard.register(defaults: [String: Any](uniqueKeysWithValues: Preference.defaultPreference.map { ($0.0.rawValue, $0.1) }))
   }
 
 }

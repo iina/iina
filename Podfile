@@ -9,7 +9,7 @@ target 'iina' do
   pod 'Just', :git => 'https://github.com/JustHTTP/Just.git', :branch => 'swift-4'
   pod 'AEXML'
   pod 'PromiseKit'
-  pod 'GzipSwift', :git => 'https://github.com/1024jp/GzipSwift.git', :branch => 'swift4'
+  pod 'GzipSwift'
   pod 'GRMustache.swift', :git => 'https://github.com/saagarjha/GRMustache.swift.git'
   pod 'Sparkle'
 

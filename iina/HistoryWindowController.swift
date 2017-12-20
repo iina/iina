@@ -131,7 +131,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   @objc func doubleAction() {
     if let selected = outlineView.item(atRow: outlineView.clickedRow) as? PlaybackHistory {
-      PlayerCore.active.openURL(selected.url, shouldAutoLoad: true)
+      PlayerCore.activeOrNew.openURL(selected.url, shouldAutoLoad: true)
     }
   }
 

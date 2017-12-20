@@ -318,10 +318,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       track = row == 0 ? nil : player.info.audioTracks[row-1]
       activeId = player.info.aid!
     } else if tableView == subTableView {
-      track = row == 0 ? nil : player.info.subTracks[row-1]
+      track = row == 0 ? nil : player.info.subTracks.at(row-1)
       activeId = player.info.sid!
     } else if tableView == secSubTableView {
-      track = row == 0 ? nil : player.info.subTracks[row-1]
+      track = row == 0 ? nil : player.info.subTracks.at(row-1)
       activeId = player.info.secondSid!
     } else {
       return nil

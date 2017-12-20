@@ -2006,8 +2006,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     var rect: NSRect
     let needResizeWindow: Bool
 
-    let resizeOption = Preference.enum(for: .resizeWindowOption) as Preference.ResizeWidowOption
-    switch resizeOption {
+    let resizeTiming = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
+    switch resizeTiming {
     case .always:
       needResizeWindow = true
     case .onlyWhenOpen:
@@ -2017,11 +2017,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     
     if needResizeWindow {
+      let resizeRatio = (Preference.enum(for: .resizeWindowOption) as Preference.ResizeWindowOption).ratio
       // get videoSize on screen
       var videoSize = originalVideoSize
       if Preference.bool(for: .usePhysicalResolution) {
         videoSize = w.convertFromBacking(
           NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))).size
+      }
+      if resizeRatio < 0 {
+        if let screenSize = NSScreen.main?.visibleFrame.size {
+          videoSize = videoSize.shrink(toSize: screenSize)
+        }
+      } else {
+        videoSize = videoSize.multiply(CGFloat(resizeRatio))
       }
       // check screen size
       if let screenSize = NSScreen.main?.visibleFrame.size {
@@ -2033,7 +2041,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if let wfg = windowFrameFromGeometry(newSize: videoSize) {
         rect = wfg
       } else {
-        rect = w.frame.centeredResize(to: videoSize)
+        if resizeRatio < 0, let screenRect = NSScreen.main?.visibleFrame {
+          rect = screenRect.centeredResize(to: videoSize)
+        } else {
+          rect = w.frame.centeredResize(to: videoSize)
+        }
       }
 
     } else {

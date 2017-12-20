@@ -1299,7 +1299,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     videoView.videoLayer.mpvGLQueue.async {
       // reset `keepaspect`
-      self.player.mpv.setFlag(MPVOption.Window.keepaspect, true)
+      self.player.mpv.setFlag(MPVOption.Window.keepaspect, false)
       DispatchQueue.main.sync {
         for (_, constraint) in self.videoViewConstraints {
           constraint.constant = 0

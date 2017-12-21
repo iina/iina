@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="additionalInfoLabel" destination="4mb-jy-Y1w" id="rgV-hQ-MH2"/>
+                <outlet property="additionalInfoView" destination="Qbi-jx-9pO" id="bdV-ZH-SkC"/>
                 <outlet property="bottomBarBottomConstraint" destination="vP1-IE-sbB" id="G77-vL-Wf8"/>
                 <outlet property="bottomView" destination="Tdb-EA-alw" id="5Xv-Ja-j4G"/>
                 <outlet property="bufferDetailLabel" destination="hlZ-5D-Wag" id="3Ld-2C-wGO"/>
@@ -64,11 +66,30 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="IINAMainWindow" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
+                    <visualEffectView hidden="YES" wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Qbi-jx-9pO">
+                        <rect key="frame" x="547" y="330" width="85" height="40"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4mb-jy-Y1w">
+                                <rect key="frame" x="14" y="8" width="57" height="24"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="99:99" id="IyU-0H-hyV">
+                                    <font key="font" metaFont="system" size="20"/>
+                                    <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="4mb-jy-Y1w" firstAttribute="leading" secondItem="Qbi-jx-9pO" secondAttribute="leading" constant="16" id="Lhe-Hg-64E"/>
+                            <constraint firstAttribute="bottom" secondItem="4mb-jy-Y1w" secondAttribute="bottom" constant="8" id="NjN-MA-sTC"/>
+                            <constraint firstItem="4mb-jy-Y1w" firstAttribute="top" secondItem="Qbi-jx-9pO" secondAttribute="top" constant="8" id="pw4-vy-Dd6"/>
+                            <constraint firstAttribute="trailing" secondItem="4mb-jy-Y1w" secondAttribute="trailing" constant="16" id="yDT-j2-yYq"/>
+                        </constraints>
+                    </visualEffectView>
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="DFb-1L-U9o">
                         <rect key="frame" x="0.0" y="0.0" width="640" height="40"/>
                         <subviews>
@@ -167,7 +188,7 @@
                                 <rect key="frame" x="16" y="8" width="165" height="40"/>
                                 <beginningViews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="499" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofw-1d-N4T" userLabel="OSD">
-                                        <rect key="frame" x="-2" y="16" width="169" height="24"/>
+                                        <rect key="frame" x="-2" y="16" width="164" height="24"/>
                                         <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="left" title="On Screen Display" usesSingleLineMode="YES" id="JAn-Yu-XA2">
                                             <font key="font" size="20" name=".AppleSystemUIFont"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -275,6 +296,7 @@
                     <constraint firstAttribute="trailing" secondItem="Tdb-EA-alw" secondAttribute="trailing" id="Mqd-Wb-vqq"/>
                     <constraint firstAttribute="trailing" secondItem="epo-S6-QVB" secondAttribute="trailing" constant="-240" id="PAj-s6-32e"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="RFd-ZJ-29u"/>
+                    <constraint firstItem="Qbi-jx-9pO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="se5-gp-TjO" secondAttribute="leading" constant="8" id="RUl-l8-s3i"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="Vtd-0f-x7p"/>
                     <constraint firstItem="oX4-0N-but" firstAttribute="centerY" secondItem="se5-gp-TjO" secondAttribute="centerY" id="XlV-7n-jPb"/>
                     <constraint firstItem="g0O-v5-RQj" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="8" id="a6R-6Y-zu3"/>
@@ -287,12 +309,14 @@
                     <constraint firstAttribute="bottom" secondItem="OiF-pA-8Sd" secondAttribute="bottom" constant="40" placeholder="YES" id="lUL-XK-HxW"/>
                     <constraint firstAttribute="trailing" secondItem="Nrz-jZ-Luf" secondAttribute="trailing" id="mJs-PF-Ex5"/>
                     <constraint firstItem="TRx-2V-Gr3" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="ofB-WP-9dW"/>
+                    <constraint firstItem="Qbi-jx-9pO" firstAttribute="top" secondItem="TRx-2V-Gr3" secondAttribute="bottom" constant="8" id="r5V-EL-YbE"/>
                     <constraint firstAttribute="trailing" secondItem="TRx-2V-Gr3" secondAttribute="trailing" id="te1-wi-BbH"/>
                     <constraint firstAttribute="bottom" secondItem="Tdb-EA-alw" secondAttribute="bottom" constant="-60" id="vP1-IE-sbB"/>
                     <constraint firstItem="TRx-2V-Gr3" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="wGB-mn-a6f"/>
                     <constraint firstItem="Tdb-EA-alw" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="wYH-h6-46f"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="g0O-v5-RQj" secondAttribute="trailing" constant="8" id="yKZ-no-kD6"/>
                     <constraint firstAttribute="bottom" secondItem="epo-S6-QVB" secondAttribute="bottom" id="zBx-AY-VlK"/>
+                    <constraint firstItem="epo-S6-QVB" firstAttribute="leading" secondItem="Qbi-jx-9pO" secondAttribute="trailing" constant="8" id="zbm-D9-epN"/>
                 </constraints>
             </view>
             <connections>

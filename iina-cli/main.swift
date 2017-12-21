@@ -6,7 +6,7 @@
 //  Copyright © 2017 lhc. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 
 guard var execURL = Bundle.main.executableURL else {
   print("Cannot get executable path.")

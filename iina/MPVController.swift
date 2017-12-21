@@ -175,6 +175,8 @@ class MPVController: NSObject {
     setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.ProgramBehavior.savePositionOnQuit)
     setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback")
 
+    setUserOption(.initialWindowSizePosition, type: .string, forName: MPVOption.Window.geometry)
+
     // - Codec
 
     setUserOption(PK.videoThreads, type: .int, forName: MPVOption.Video.vdLavcThreads)
@@ -332,7 +334,7 @@ class MPVController: NSObject {
     // Set options that can be override by user's config. mpv will log user config when initialize,
     // so we put them here.
     chkErr(mpv_set_property_string(mpv, MPVOption.Video.vo, "opengl-cb"))
-    chkErr(mpv_set_property_string(mpv, MPVOption.Window.keepaspect, "yes"))
+    chkErr(mpv_set_property_string(mpv, MPVOption.Window.keepaspect, "no"))
     chkErr(mpv_set_property_string(mpv, MPVOption.Video.openglHwdecInterop, "auto"))
 
     // get version

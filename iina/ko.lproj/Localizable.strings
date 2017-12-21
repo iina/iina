@@ -68,6 +68,8 @@
 "osd.file_error" = "파일 읽기 오류";
 "osd.cannot_login" = "로그인할 수 없음";
 "osd.canceled" = "취소됨";
+"osd.filter_added" = "필터 추가됨: %@";
+"osd.filter_removed" = "필터 제거됨";
 
 "preference.title" = "환경설정";
 "preference.general" = "일반";

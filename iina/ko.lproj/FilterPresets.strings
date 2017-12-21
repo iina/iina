@@ -44,7 +44,7 @@
 
 "lut3d" = "3D LUT";
 "lut3d.file" = "파일";
-"lut3d.interp" = "선형보간 모드";
+"lut3d.interp" = "보간법 모드";
 
 "custom_mpv" = "사용자 설정 필터 (MPV)";
 "custom_mpv.name" = "필터 항목";

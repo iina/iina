@@ -1,0 +1,30 @@
+{
+    "update_url": "https://clients2.google.com/service/update2/crx",
+    "manifest_version": 2,
+    "name": "Open In IINA",
+    "description": "Open current media in IINA",
+    "version": "1.0.0",
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_title": "Open In IINA"
+    },
+    "permissions": [
+        "tabs",
+        "activeTab"
+    ],
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
+    "applications": {
+        "gecko": {
+            "id": "pdnojahnhpgmdhjdhgphgdcecehkbhfo@chrome-store-foxified--221730360"
+        }
+    }
+}

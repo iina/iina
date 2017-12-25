@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,10 +14,10 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="500" height="442"/>
+            <rect key="frame" x="0.0" y="0.0" width="500" height="385"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Wmg-PT-BGO">
-                    <rect key="frame" x="20" y="147" width="452" height="275"/>
+                    <rect key="frame" x="20" y="90" width="452" height="275"/>
                     <subviews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h4p-a3-cku">
                             <rect key="frame" x="0.0" y="232" width="38" height="43"/>
@@ -335,7 +335,7 @@
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="VSf-E0-Btw">
-                    <rect key="frame" x="20" y="77" width="452" height="54"/>
+                    <rect key="frame" x="20" y="20" width="452" height="54"/>
                     <subviews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MJc-ye-l1u">
                             <rect key="frame" x="4" y="11" width="32" height="43"/>
@@ -418,94 +418,24 @@
                         <constraint firstItem="V5B-tS-TPW" firstAttribute="width" secondItem="nio-Fb-YPK" secondAttribute="width" id="kBT-CW-4tO"/>
                     </constraints>
                 </customView>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="RV8-I6-IeT">
-                    <rect key="frame" x="20" y="20" width="452" height="41"/>
-                    <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XY1-Z2-fmc">
-                            <rect key="frame" x="46" y="12" width="168" height="17"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Use left/right button for:" id="kEB-gk-wuI">
-                                <font key="font" metaFont="system"/>
-                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                            </textFieldCell>
-                        </textField>
-                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mHM-Hf-MsN">
-                            <rect key="frame" x="14" y="3" width="24" height="24"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="24" id="lxL-Az-bYA"/>
-                                <constraint firstAttribute="width" constant="24" id="orf-mt-ZNg"/>
-                            </constraints>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="speed-dark" id="L9h-H0-nFX"/>
-                        </imageView>
-                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LqA-Aj-cY4">
-                            <rect key="frame" x="1" y="15" width="24" height="24"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="24" id="a9y-A3-RcN"/>
-                                <constraint firstAttribute="width" constant="24" id="nk5-E9-JND"/>
-                            </constraints>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="speedl-dark" id="AFw-FC-dgo"/>
-                        </imageView>
-                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZLx-tu-rJt">
-                            <rect key="frame" x="218" y="6" width="225" height="26"/>
-                            <popUpButtonCell key="cell" type="push" title="Speed" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="hIG-5X-2Pm" id="w65-zr-l0v">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="menu"/>
-                                <menu key="menu" id="Jqg-LN-SsW">
-                                    <items>
-                                        <menuItem title="Speed" state="on" id="hIG-5X-2Pm"/>
-                                        <menuItem title="Previous / Next Media" tag="1" id="2Ig-fw-UvW"/>
-                                        <menuItem title="Fastforward / Rewind" tag="2" id="q50-Po-JYO"/>
-                                    </items>
-                                </menu>
-                            </popUpButtonCell>
-                            <connections>
-                                <binding destination="Yrj-d0-KaY" name="selectedTag" keyPath="values.arrowBtnAction" id="3iw-Yg-l6Q"/>
-                            </connections>
-                        </popUpButton>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="mHM-Hf-MsN" firstAttribute="leading" secondItem="LqA-Aj-cY4" secondAttribute="trailing" constant="-11" id="D9F-AH-Czd"/>
-                        <constraint firstItem="ZLx-tu-rJt" firstAttribute="baseline" secondItem="XY1-Z2-fmc" secondAttribute="baseline" id="Fk0-pb-SrT"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZLx-tu-rJt" secondAttribute="trailing" constant="4" id="R80-Jv-wsR"/>
-                        <constraint firstItem="ZLx-tu-rJt" firstAttribute="leading" secondItem="XY1-Z2-fmc" secondAttribute="trailing" constant="8" id="Sax-X9-cc3"/>
-                        <constraint firstAttribute="bottom" secondItem="XY1-Z2-fmc" secondAttribute="bottom" constant="12" id="UMW-eZ-567"/>
-                        <constraint firstItem="LqA-Aj-cY4" firstAttribute="leading" secondItem="RV8-I6-IeT" secondAttribute="leading" constant="1" id="UqX-rS-cL4"/>
-                        <constraint firstItem="XY1-Z2-fmc" firstAttribute="top" secondItem="RV8-I6-IeT" secondAttribute="top" constant="12" id="X8y-nV-DvV"/>
-                        <constraint firstItem="LqA-Aj-cY4" firstAttribute="top" secondItem="RV8-I6-IeT" secondAttribute="top" constant="2" id="bae-Ks-dQc"/>
-                        <constraint firstItem="mHM-Hf-MsN" firstAttribute="top" secondItem="LqA-Aj-cY4" secondAttribute="bottom" constant="-12" id="uHW-Iv-rXr"/>
-                    </constraints>
-                </customView>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="mXt-T0-PtY">
-                    <rect key="frame" x="20" y="136" width="452" height="5"/>
-                </box>
-                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="v5y-XQ-mF4">
-                    <rect key="frame" x="20" y="66" width="452" height="5"/>
+                    <rect key="frame" x="20" y="79" width="452" height="5"/>
                 </box>
             </subviews>
             <constraints>
-                <constraint firstItem="RV8-I6-IeT" firstAttribute="top" secondItem="VSf-E0-Btw" secondAttribute="bottom" constant="16" id="6qs-9t-KBv"/>
                 <constraint firstItem="XJb-x1-5LL" firstAttribute="leading" secondItem="2rD-uu-WVu" secondAttribute="leading" id="EHZ-lj-52b"/>
                 <constraint firstItem="XJb-x1-5LL" firstAttribute="width" secondItem="2rD-uu-WVu" secondAttribute="width" id="GxV-gd-RaE"/>
-                <constraint firstAttribute="trailing" secondItem="v5y-XQ-mF4" secondAttribute="trailing" constant="28" id="JbQ-PA-SpP"/>
-                <constraint firstAttribute="bottom" secondItem="RV8-I6-IeT" secondAttribute="bottom" constant="20" id="KsR-Lv-JWw"/>
                 <constraint firstAttribute="trailing" secondItem="Wmg-PT-BGO" secondAttribute="trailing" constant="28" id="MWw-9e-HAd"/>
                 <constraint firstAttribute="trailing" secondItem="mXt-T0-PtY" secondAttribute="trailing" constant="28" id="Mag-g9-0Jl"/>
-                <constraint firstItem="RV8-I6-IeT" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="MtB-Op-cJX"/>
                 <constraint firstItem="mXt-T0-PtY" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="OoO-Rt-OqK"/>
                 <constraint firstAttribute="trailing" secondItem="VSf-E0-Btw" secondAttribute="trailing" constant="28" id="SDI-mv-OoP"/>
-                <constraint firstItem="v5y-XQ-mF4" firstAttribute="top" secondItem="VSf-E0-Btw" secondAttribute="bottom" constant="8" id="WW1-pC-P6U"/>
-                <constraint firstItem="XY1-Z2-fmc" firstAttribute="leading" secondItem="XJb-x1-5LL" secondAttribute="leading" id="YzB-PJ-CYW"/>
-                <constraint firstItem="XY1-Z2-fmc" firstAttribute="width" secondItem="XJb-x1-5LL" secondAttribute="width" id="a8y-cH-OgY"/>
                 <constraint firstItem="VSf-E0-Btw" firstAttribute="top" secondItem="mXt-T0-PtY" secondAttribute="bottom" constant="7" id="aqd-lp-d1T"/>
                 <constraint firstItem="Wmg-PT-BGO" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="cI5-lZ-cCW"/>
                 <constraint firstItem="Wmg-PT-BGO" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="eJX-R9-9N4"/>
-                <constraint firstAttribute="trailing" secondItem="RV8-I6-IeT" secondAttribute="trailing" constant="28" id="esa-ip-RDF"/>
+                <constraint firstAttribute="bottom" secondItem="VSf-E0-Btw" secondAttribute="bottom" constant="20" id="eje-5D-Nad"/>
                 <constraint firstItem="nio-Fb-YPK" firstAttribute="width" secondItem="mdI-b4-54O" secondAttribute="width" id="evu-rs-wIC"/>
-                <constraint firstItem="ZLx-tu-rJt" firstAttribute="width" secondItem="nio-Fb-YPK" secondAttribute="width" id="fJJ-5S-rgQ"/>
-                <constraint firstItem="RV8-I6-IeT" firstAttribute="top" secondItem="v5y-XQ-mF4" secondAttribute="bottom" constant="7" id="fd1-lY-eFI"/>
                 <constraint firstItem="VSf-E0-Btw" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="jaZ-Rr-cQz"/>
                 <constraint firstItem="VSf-E0-Btw" firstAttribute="top" secondItem="Wmg-PT-BGO" secondAttribute="bottom" constant="16" id="ndE-0B-777"/>
-                <constraint firstItem="v5y-XQ-mF4" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="qNb-ld-FQw"/>
                 <constraint firstItem="mXt-T0-PtY" firstAttribute="top" secondItem="Wmg-PT-BGO" secondAttribute="bottom" constant="8" id="qad-4b-CrA"/>
             </constraints>
             <point key="canvasLocation" x="251" y="425"/>
@@ -513,8 +443,6 @@
         <userDefaultsController representsSharedInstance="YES" id="Yrj-d0-KaY"/>
     </objects>
     <resources>
-        <image name="speed-dark" width="720" height="600"/>
-        <image name="speedl-dark" width="720" height="600"/>
         <image name="toolbar_control" width="500" height="500"/>
         <image name="trackpad" width="500" height="500"/>
     </resources>

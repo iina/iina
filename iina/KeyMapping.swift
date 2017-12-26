@@ -119,7 +119,7 @@ class KeyMapping {
       }
       // remove inline comment
       if let sharpIndex = line.index(of: "#") {
-        line = String(line[...sharpIndex])
+        line = String(line[...line.index(before: sharpIndex)])
       }
       // split
       let splitted = line.split(maxSplits: 1, whereSeparator: { $0 == " " || $0 == "\t"})

@@ -87,7 +87,7 @@ class PlaybackInfo {
 
   var isMuted: Bool = false
 
-  var playSpeed: Double = 0
+  var playSpeed: Double = 1
 
   var audioDelay: Double = 0
   var subDelay: Double = 0

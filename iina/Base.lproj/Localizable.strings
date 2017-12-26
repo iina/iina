@@ -94,6 +94,18 @@
 "menu.exit_pip" = "Exit Picture-in-Picture";
 "menu.pause" = "Pause";
 "menu.resume" = "Resume";
+"menu.speed" = "Speed: %.2fx";
+
+"menu.seek_forward" = "Step Forward %.0fs";
+"menu.seek_backward" = "Step Backward %.0fs";
+"menu.speed_up" = "Speed Up to %.1fx";
+"menu.speed_down" = "Speed Down to %.1fx";
+"menu.volume_up" = "Volume + %.0f%";
+"menu.volume_down" = "Volume - %.0f%";
+"menu.audio_delay_up" = "Audio Delay + %.1fs";
+"menu.audio_delay_down" = "Audio Delay - %.1fs";
+"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
+"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
 
 "track.none" = "<None>";
 

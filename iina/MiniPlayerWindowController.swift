@@ -337,11 +337,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func nextBtnAction(_ sender: NSButton) {
-    player.navigateInPlaylist(nextOrPrev: true)
+    player.navigateInPlaylist(nextMedia: true)
   }
 
   @IBAction func prevBtnAction(_ sender: NSButton) {
-    player.navigateInPlaylist(nextOrPrev: false)
+    player.navigateInPlaylist(nextMedia: false)
   }
 
   @IBAction func volumeBtnAction(_ sender: NSButton) {

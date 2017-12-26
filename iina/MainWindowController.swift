@@ -1326,6 +1326,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if let index = fadeableViews.index(of: additionalInfoView) {
       fadeableViews.remove(at: index)
     }
+
+    resetCollectionBehavior()
   }
 
   // MARK: - Window delegate: Size
@@ -2522,6 +2524,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func resetCollectionBehavior() {
+    if isInFullScreen {
+      return
+    }
     if Preference.bool(for: .useLegacyFullScreen) {
       window?.collectionBehavior = [.managed, .fullScreenAuxiliary]
     } else {

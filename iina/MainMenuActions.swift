@@ -91,6 +91,21 @@ extension MainMenuActionHandler {
     }
   }
 
+  @objc func menuChangeSpeed(_ sender: NSMenuItem) {
+    if sender.tag == 5 {
+      player.setSpeed(1)
+      return
+    }
+    let multiplier: Double
+    switch sender.tag {
+    case 1: multiplier = 0.5
+    case 2: multiplier = 1.1
+    case 3: multiplier = 0.9
+    default: multiplier = 2
+    }
+    player.setSpeed(player.info.playSpeed * multiplier)
+  }
+
   @objc func menuJumpToBegin(_ sender: NSMenuItem) {
     player.seek(absoluteSecond: 0)
   }
@@ -139,6 +154,13 @@ extension MainMenuActionHandler {
     }
   }
 
+  @objc func menuNextMedia(_ sender: NSMenuItem) {
+    player.navigateInPlaylist(nextMedia: true)
+  }
+
+  @objc func menuPreviousMedia(_ sender: NSMenuItem) {
+    player.navigateInPlaylist(nextMedia: false)
+  }
 }
 
 // MARK: - Video

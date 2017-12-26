@@ -128,6 +128,60 @@ class KeyCodeHelper {
     0x7F: ("POWER", nil) // This should be KeyCode::PC_POWER.
   ]
 
+  static let mpvSymbolicNames: [String: String] = {
+
+    return [
+      "LEFT": NSLeftArrowFunctionKey,
+      "RIGHT": NSRightArrowFunctionKey,
+      "UP": NSUpArrowFunctionKey,
+      "DOWN": NSDownArrowFunctionKey,
+      "BS": NSBackspaceCharacter,
+      "KP_DEL": NSDeleteCharacter,
+      "DEL": NSDeleteCharacter,
+      "KP_INS": NSInsertFunctionKey,
+      "INS": NSInsertFunctionKey,
+      "HOME": NSHomeFunctionKey,
+      "END": NSEndFunctionKey,
+      "PGUP": NSPageUpFunctionKey,
+      "PGDWN": NSPageDownFunctionKey,
+      "PRINT": NSPrintFunctionKey,
+      "F1": NSF1FunctionKey,
+      "F2": NSF2FunctionKey,
+      "F3": NSF3FunctionKey,
+      "F4": NSF4FunctionKey,
+      "F5": NSF5FunctionKey,
+      "F6": NSF6FunctionKey,
+      "F7": NSF7FunctionKey,
+      "F8": NSF8FunctionKey,
+      "F9": NSF9FunctionKey,
+      "F10": NSF10FunctionKey,
+      "F11": NSF11FunctionKey,
+      "F12": NSF12FunctionKey
+    ]
+    .mapValues { String(Character(UnicodeScalar($0)!)) }
+    .merging([
+      "SPACE": " ",
+      "IDEOGRAPHIC_SPACE": "\u{3000}",
+      "SHARP": "#",
+      "ENTER": "\r",
+      "ESC": "\u{1b}",
+      "KP_DEC": ".",
+      "KP_ENTER": "\r",
+      "KP0": "0",
+      "KP1": "1",
+      "KP2": "2",
+      "KP3": "3",
+      "KP4": "4",
+      "KP5": "5",
+      "KP6": "6",
+      "KP7": "7",
+      "KP8": "8",
+      "KP9": "9",
+      "PLUS": "+"
+    ]) { (v0, v1) in return v1 }
+    
+  }()
+
   static var reversedKeyMapForShift: [String: String] = keyMap.reduce([:]) { partial, keyMap in
     var partial = partial
     if let value = keyMap.value.1 {
@@ -189,6 +243,30 @@ class KeyCodeHelper {
     return keyString
   }
 
+  static func macOSKeyEquivalent(from mpvKeyCode: String) -> (key: String, modifiers: NSEvent.ModifierFlags)? {
+    if mpvKeyCode == "+" {
+      return ("+", [])
+    }
+    let splitted = mpvKeyCode.replacingOccurrences(of: "++", with: "+PLUS").components(separatedBy: "+")
+    var key: String
+    var modifiers: NSEvent.ModifierFlags = []
+    guard !splitted.isEmpty else { return nil }
+    key = splitted.last!
+    splitted.dropLast().forEach { k in
+      switch k {
+      case "Meta": modifiers.insert(.command)
+      case "Ctrl": modifiers.insert(.control)
+      case "Alt": modifiers.insert(.option)
+      case "Shift": modifiers.insert(.shift)
+      default: break
+      }
+    }
+    if let realKey = mpvSymbolicNames[key] {
+      key = realKey
+    }
+    guard key.count == 1 else { return nil }
+    return (key, modifiers)
+  }
 }
 
 

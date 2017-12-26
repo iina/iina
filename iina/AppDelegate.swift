@@ -76,6 +76,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBOutlet weak var dockMenu: NSMenu!
 
+  private func getReady() {
+    registerUserDefaultValues()
+    menuController.bindMenuItems()
+    PlayerCore.loadKeyBindings()
+    isReady = true
+  }
+
   // MARK: - App Delegate
 
   func applicationWillFinishLaunching(_ notification: Notification) {
@@ -127,9 +134,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     if !isReady {
-      registerUserDefaultValues()
-      menuController.bindMenuItems()
-      isReady = true
+      getReady()
     }
 
     // show alpha in color panels
@@ -243,9 +248,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @objc
   func handleOpenFile() {
     if !isReady {
-      registerUserDefaultValues()
-      menuController.bindMenuItems()
-      isReady = true
+      getReady()
     }
     // if launched from command line, should ignore openFile once
     if shouldIgnoreOpenFile {
@@ -471,11 +474,11 @@ class RemoteCommandController {
       return .success
     }
     remoteCommand.nextTrackCommand.addTarget { _ in
-      PlayerCore.lastActive.navigateInPlaylist(nextOrPrev: true)
+      PlayerCore.lastActive.navigateInPlaylist(nextMedia: true)
       return .success
     }
     remoteCommand.previousTrackCommand.addTarget { _ in
-      PlayerCore.lastActive.navigateInPlaylist(nextOrPrev: false)
+      PlayerCore.lastActive.navigateInPlaylist(nextMedia: false)
       return .success
     }
     remoteCommand.changeRepeatModeCommand.addTarget { _ in

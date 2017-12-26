@@ -348,9 +348,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
   }
 
   private func setKeybindingsForPlayerCore() {
-    var result: [String: KeyMapping] = [:]
-    currentMapping.forEach { result[$0.key] = $0 }
-    PlayerCore.keyBindings = result
+    PlayerCore.setKeyBindings(currentMapping)
   }
 
 }

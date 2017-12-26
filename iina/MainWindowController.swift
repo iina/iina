@@ -2068,7 +2068,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     player.info.justStartedFile = false
 
     if isInFullScreen {
-      windowFrameBeforeEnteringFullScreen = rect
+      if currentFullScreenIsLegacy {
+        windowFrameBeforeEnteringFullScreen = rect
+      } else {
+        w.setFrame(rect, display: false)
+      }
     } else {
       // animated `setFrame` can be inaccurate!
       w.setFrame(rect, display: true, animate: true)

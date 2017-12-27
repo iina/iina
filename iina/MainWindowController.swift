@@ -1326,6 +1326,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if let index = fadeableViews.index(of: additionalInfoView) {
       fadeableViews.remove(at: index)
     }
+
+    resetCollectionBehavior()
   }
 
   // MARK: - Window delegate: Size
@@ -2068,7 +2070,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     player.info.justStartedFile = false
 
     if isInFullScreen {
-      windowFrameBeforeEnteringFullScreen = rect
+      if currentFullScreenIsLegacy {
+        windowFrameBeforeEnteringFullScreen = rect
+      } else {
+        w.setFrame(rect, display: false)
+      }
     } else {
       // animated `setFrame` can be inaccurate!
       w.setFrame(rect, display: true, animate: true)
@@ -2518,6 +2524,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func resetCollectionBehavior() {
+    if isInFullScreen {
+      return
+    }
     if Preference.bool(for: .useLegacyFullScreen) {
       window?.collectionBehavior = [.managed, .fullScreenAuxiliary]
     } else {

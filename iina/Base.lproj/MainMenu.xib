@@ -265,14 +265,18 @@
                             <menuItem isSeparatorItem="YES" id="CHq-3f-f42"/>
                             <menuItem title="Half Size" keyEquivalent="0" id="snW-S8-Cw5"/>
                             <menuItem title="Normal Size" keyEquivalent="1" id="1UK-8n-QPP"/>
-                            <menuItem title="Normal Size (Retina)" alternate="YES" keyEquivalent="1" id="c1x-bx-69F">
+                            <menuItem title="Normal Size (Retina)" hidden="YES" alternate="YES" keyEquivalent="1" id="c1x-bx-69F">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
                             <menuItem title="Double Size" keyEquivalent="2" id="Hal-18-Tnf"/>
                             <menuItem title="Fit to Screen" keyEquivalent="3" id="SHd-63-Xoh"/>
                             <menuItem isSeparatorItem="YES" id="Ap4-Sw-qOT"/>
-                            <menuItem title="Bigger Size" tag="11" keyEquivalent="=" id="lDC-IC-peP"/>
-                            <menuItem title="Smaller Size" tag="10" keyEquivalent="-" id="ZOF-MG-6II"/>
+                            <menuItem title="Bigger Size" tag="11" id="lDC-IC-peP">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Smaller Size" tag="10" id="ZOF-MG-6II">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="F7U-cD-2ou"/>
                             <menuItem title="Enter Full Screen" keyEquivalent="f" id="6Eq-ni-6hG">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
@@ -349,13 +353,17 @@
                             <menuItem title="Volume:" enabled="NO" id="iQF-1S-9EK">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Volume + 5%" tag="10" keyEquivalent="" id="Wbq-vt-hzX"/>
-                            <menuItem title="Volume + 1%" tag="1" alternate="YES" keyEquivalent="" id="c6Y-0e-vgf">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                            <menuItem title="Volume + 5%" tag="10" id="Wbq-vt-hzX">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Volume - 5%" tag="10" keyEquivalent="" id="pdj-9C-Fn1"/>
-                            <menuItem title="Volume - 1%" tag="1" alternate="YES" keyEquivalent="" id="Zhv-Bz-I5V">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                            <menuItem title="Volume + 1%" tag="1" alternate="YES" id="c6Y-0e-vgf">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Volume - 5%" tag="10" id="pdj-9C-Fn1">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Volume - 1%" tag="1" alternate="YES" id="Zhv-Bz-I5V">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Mute" id="WOL-Us-ByA">
                                 <modifierMask key="keyEquivalentModifierMask"/>

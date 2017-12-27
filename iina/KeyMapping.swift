@@ -10,30 +10,6 @@ import Foundation
 
 class KeyMapping {
 
-  static let prettyKeySymbol = [
-    "META": "⌘",
-    "ENTER": "↩︎",
-    "SHIFT": "⇧",
-    "ALT": "⌥",
-    "CTRL":"⌃",
-    "SPACE": "␣",
-    "BS": "⌫",
-    "DEL": "⌦",
-    "TAB": "⇥",
-    "ESC": "⎋",
-    "UP": "↑",
-    "DOWN": "↓",
-    "LEFT": "←",
-    "RIGHT" : "→",
-    "PGUP": "⇞",
-    "PGDWN": "⇟",
-    "HOME": "↖︎",
-    "END": "↘︎",
-    "PLAY": "▶︎\u{2006}❙\u{200A}❙",
-    "PREV": "◀︎◀︎",
-    "NEXT": "▶︎▶︎"
-  ]
-
   var isIINACommand: Bool
 
   var key: String
@@ -70,19 +46,11 @@ class KeyMapping {
 
   var prettyKey: String {
     get {
-      return key
-        .split(separator: "+", maxSplits: 1, omittingEmptySubsequences: false)
-        .map { tokenCharView -> String in
-          let token = String(tokenCharView)
-          let uppercasedToken = token.uppercased()
-          if let symbol = KeyMapping.prettyKeySymbol[uppercasedToken] {
-            return symbol
-          } else if let origToken = KeyCodeHelper.reversedKeyMapForShift[token] {
-            return KeyMapping.prettyKeySymbol["SHIFT"]! + origToken.uppercased()
-          } else {
-            return uppercasedToken
-          }
-        }.joined(separator: "")
+      if let (keyChar, modifiers) = KeyCodeHelper.macOSKeyEquivalent(from: self.key, usePrintableKeyName: true) {
+        return KeyCodeHelper.readableString(fromKey: keyChar, modifiers: modifiers)
+      } else {
+        return key
+      }
     }
   }
 

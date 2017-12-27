@@ -9,6 +9,8 @@
 import Foundation
 import Carbon
 
+fileprivate let modifierSymbols: [(NSEvent.ModifierFlags, String)] = [(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")]
+
 class KeyCodeHelper {
 
   static let keyMap: [UInt16 : (String, String?)] = [
@@ -128,7 +130,7 @@ class KeyCodeHelper {
     0x7F: ("POWER", nil) // This should be KeyCode::PC_POWER.
   ]
 
-  static let mpvSymbolicNames: [String: String] = {
+  static let mpvSymbolToKeyChar: [String: String] = {
 
     return [
       "LEFT": NSLeftArrowFunctionKey,
@@ -181,6 +183,47 @@ class KeyCodeHelper {
     ]) { (v0, v1) in return v1 }
     
   }()
+
+  static let mpvSymbolToKeyName: [String: String] = [
+    "META": "⌘",
+    "SHIFT": "⇧",
+    "ALT": "⌥",
+    "CTRL":"⌃",
+    "SHARP": "#",
+    "ENTER": "↩︎",
+    "KP_ENTER": "↩︎",
+    "SPACE": "␣",
+    "IDEOGRAPHIC_SPACE": "␣",
+    "BS": "⌫",
+    "DEL": "⌦",
+    "KP_DEL": "⌦",
+    "INS": "Ins",
+    "KP_INS": "Ins",
+    "TAB": "⇥",
+    "ESC": "⎋",
+    "UP": "↑",
+    "DOWN": "↓",
+    "LEFT": "←",
+    "RIGHT" : "→",
+    "PGUP": "⇞",
+    "PGDWN": "⇟",
+    "HOME": "↖︎",
+    "END": "↘︎",
+    "PLAY": "▶︎\u{2006}❙\u{200A}❙",
+    "PREV": "◀︎◀︎",
+    "NEXT": "▶︎▶︎",
+    "PLUS": "+",
+    "KP0": "0",
+    "KP1": "1",
+    "KP2": "2",
+    "KP3": "3",
+    "KP4": "4",
+    "KP5": "5",
+    "KP6": "6",
+    "KP7": "7",
+    "KP8": "8",
+    "KP9": "9",
+  ]
 
   static var reversedKeyMapForShift: [String: String] = keyMap.reduce([:]) { partial, keyMap in
     var partial = partial
@@ -243,7 +286,7 @@ class KeyCodeHelper {
     return keyString
   }
 
-  static func macOSKeyEquivalent(from mpvKeyCode: String) -> (key: String, modifiers: NSEvent.ModifierFlags)? {
+  static func macOSKeyEquivalent(from mpvKeyCode: String, usePrintableKeyName: Bool = false) -> (key: String, modifiers: NSEvent.ModifierFlags)? {
     if mpvKeyCode == "+" {
       return ("+", [])
     }
@@ -261,11 +304,23 @@ class KeyCodeHelper {
       default: break
       }
     }
-    if let realKey = mpvSymbolicNames[key] {
+    if let realKey = (usePrintableKeyName ? mpvSymbolToKeyName : mpvSymbolToKeyChar)[key] {
       key = realKey
     }
     guard key.count == 1 else { return nil }
     return (key, modifiers)
+  }
+
+  static func readableString(fromKey key: String, modifiers: NSEvent.ModifierFlags) -> String {
+    var key = key
+    var modifiers = modifiers
+    if let uScalar = key.first?.unicodeScalars.first, NSCharacterSet.uppercaseLetters.contains(uScalar) {
+      modifiers.insert(.shift)
+    }
+    key = key.uppercased()
+    return modifierSymbols.map { modifiers.contains($0.0) ? $0.1 : "" }
+      .joined()
+      .appending(key)
   }
 }
 

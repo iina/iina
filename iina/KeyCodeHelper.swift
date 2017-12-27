@@ -246,38 +246,33 @@ class KeyCodeHelper {
     var keyString = ""
     let keyChar: String
     let keyCode = event.keyCode
-    let modifiers = event.modifierFlags
-
-    // shift
+    var modifiers = event.modifierFlags
 
     if let char = event.charactersIgnoringModifiers, isPrintable(char) {
       keyChar = char
+      let (_, rawKeyChar) = event.readableKeyDescription
+      if rawKeyChar != char {
+        modifiers.remove(.shift)
+      }
     } else {
       // find the key from key code
       guard let keyName = KeyCodeHelper.keyMap[keyCode] else {
         Utility.log("Undefined key code?")
         return ""
       }
-      if modifiers.contains(.shift) {
-        if KeyCodeHelper.canBeModifiedByShift(keyCode) {
-          keyChar = keyName.1!
-        } else {
-          keyChar = keyName.0
-          keyString += "Shift+"
-        }
-      } else {
-        keyChar = keyName.0
-      }
+      keyChar = keyName.0
     }
-    // control
+    // modifiers
+    // the same order as `KeyMapping.modifierOrder`
     if modifiers.contains(.control) {
       keyString += "Ctrl+"
     }
-    // alt
     if modifiers.contains(.option) {
       keyString += "Alt+"
     }
-    // meta
+    if modifiers.contains(.shift) {
+      keyString += "Shift+"
+    }
     if modifiers.contains(.command) {
       keyString += "Meta+"
     }

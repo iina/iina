@@ -10,6 +10,13 @@ import Foundation
 
 class KeyMapping {
 
+  static private let modifierOrder: [String: Int] = [
+    "Ctrl": 0,
+    "Alt": 1,
+    "Shift": 2,
+    "Meta": 3
+  ]
+
   var isIINACommand: Bool
 
   var key: String
@@ -61,8 +68,19 @@ class KeyMapping {
   init(key: String, rawAction: String, isIINACommand: Bool = false, comment: String? = nil) {
     // normalize different letter cases for modifier keys
     var normalizedKey = key
-    ["Ctrl", "Meta", "Alt"].forEach { keyword in
+    ["Ctrl", "Meta", "Alt", "Shift"].forEach { keyword in
       normalizedKey = normalizedKey.replacingOccurrences(of: keyword, with: keyword, options: .caseInsensitive)
+    }
+    var keyIsPlus = false
+    if normalizedKey.hasSuffix("+") {
+      keyIsPlus = true
+      normalizedKey = String(normalizedKey.dropLast())
+    }
+    normalizedKey = normalizedKey.components(separatedBy: "+")
+      .sorted { KeyMapping.modifierOrder[$0, default: 9] < KeyMapping.modifierOrder[$1, default: 9] }
+      .joined(separator: "+")
+    if keyIsPlus {
+      normalizedKey += "+"
     }
     self.key = normalizedKey
     self.privateRawAction = rawAction

@@ -23,6 +23,9 @@ enum IINACommand: String {
   case flip = "toggle-flip"
   case mirror = "toggle-mirror"
 
+  case biggerWindow = "bigger-window"
+  case smallerWindow = "smaller-window"
+
   case saveCurrentPlaylist = "save-playlist"
   case deleteCurrentFile = "delete-current-file"
 

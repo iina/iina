@@ -2520,6 +2520,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.menuActionHandler.menuFindOnlineSub(.dummy)
     case .saveDownloadedSub:
       self.menuActionHandler.saveDownloadedSub(.dummy)
+    case .biggerWindow:
+      let item = NSMenuItem()
+      item.tag = 11
+      self.menuChangeWindowSize(item)
+    case .smallerWindow:
+      let item = NSMenuItem()
+      item.tag = 10
+      self.menuChangeWindowSize(item)
     }
   }
 

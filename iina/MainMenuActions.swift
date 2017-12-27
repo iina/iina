@@ -96,14 +96,9 @@ extension MainMenuActionHandler {
       player.setSpeed(1)
       return
     }
-    let multiplier: Double
-    switch sender.tag {
-    case 1: multiplier = 0.5
-    case 2: multiplier = 1.1
-    case 3: multiplier = 0.9
-    default: multiplier = 2
+    if let multiplier = sender.representedObject as? Double {
+      player.setSpeed(player.info.playSpeed * multiplier)
     }
-    player.setSpeed(player.info.playSpeed * multiplier)
   }
 
   @objc func menuJumpToBegin(_ sender: NSMenuItem) {
@@ -160,6 +155,14 @@ extension MainMenuActionHandler {
 
   @objc func menuPreviousMedia(_ sender: NSMenuItem) {
     player.navigateInPlaylist(nextMedia: false)
+  }
+
+  @objc func menuNextChapter(_ sender: NSMenuItem) {
+    player.mpv.command(.add, args: ["chapter", "1"])
+  }
+
+  @objc func menuPreviousChapter(_ sender: NSMenuItem) {
+    player.mpv.command(.add, args: ["chapter", "-1"])
   }
 }
 
@@ -336,6 +339,15 @@ extension MainMenuActionHandler {
     } catch let error as NSError {
       Utility.showAlert("error_saving_file", arguments: ["subtitle",
                                                          error.localizedDescription])
+    }
+  }
+
+  @objc func menuCycleTrack(_ sender: NSMenuItem) {
+    switch sender.tag {
+    case 0: player.mpv.command(.cycle, args: ["video"])
+    case 1: player.mpv.command(.cycle, args: ["audio"])
+    case 2: player.mpv.command(.cycle, args: ["sub"])
+    default: break
     }
   }
 }

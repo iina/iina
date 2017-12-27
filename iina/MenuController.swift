@@ -84,11 +84,14 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var nextMedia: NSMenuItem!
   @IBOutlet weak var previousMedia: NSMenuItem!
   @IBOutlet weak var chapterPanel: NSMenuItem!
+  @IBOutlet weak var nextChapter: NSMenuItem!
+  @IBOutlet weak var previousChapter: NSMenuItem!
   @IBOutlet weak var chapter: NSMenuItem!
   @IBOutlet weak var chapterMenu: NSMenu!
   // Video
   @IBOutlet weak var videoMenu: NSMenu!
   @IBOutlet weak var quickSettingsVideo: NSMenuItem!
+  @IBOutlet weak var cycleVideoTracks: NSMenuItem!
   @IBOutlet weak var videoTrack: NSMenuItem!
   @IBOutlet weak var videoTrackMenu: NSMenu!
   @IBOutlet weak var halfSize: NSMenuItem!
@@ -114,6 +117,7 @@ class MenuController: NSObject, NSMenuDelegate {
   //Audio
   @IBOutlet weak var audioMenu: NSMenu!
   @IBOutlet weak var quickSettingsAudio: NSMenuItem!
+  @IBOutlet weak var cycleAudioTracks: NSMenuItem!
   @IBOutlet weak var audioTrackMenu: NSMenu!
   @IBOutlet weak var volumeIndicator: NSMenuItem!
   @IBOutlet weak var increaseVolume: NSMenuItem!
@@ -133,6 +137,7 @@ class MenuController: NSObject, NSMenuDelegate {
   // Subtitle
   @IBOutlet weak var subMenu: NSMenu!
   @IBOutlet weak var quickSettingsSub: NSMenuItem!
+  @IBOutlet weak var cycleSubtitles: NSMenuItem!
   @IBOutlet weak var subTrackMenu: NSMenu!
   @IBOutlet weak var secondSubTrackMenu: NSMenu!
   @IBOutlet weak var loadExternalSub: NSMenuItem!
@@ -158,6 +163,10 @@ class MenuController: NSObject, NSMenuDelegate {
   // MARK: - Construct Menus
 
   func bindMenuItems() {
+
+    [cycleSubtitles, cycleAudioTracks, cycleVideoTracks].forEach { item in
+      item?.action = #selector(MainMenuActionHandler.menuCycleTrack(_:))
+    }
 
     // File menu
     
@@ -193,6 +202,10 @@ class MenuController: NSObject, NSMenuDelegate {
     jumpTo.action = #selector(MainMenuActionHandler.menuJumpTo(_:))
 
     // -- speed
+    (speedUp.representedObject,
+     speedUpSlightly.representedObject,
+     speedDown.representedObject,
+     speedDownSlightly.representedObject) = (2.0, 1.1, 0.5, 0.9)
     [speedUp, speedDown, speedUpSlightly, speedDownSlightly, speedReset].forEach { item in
       item?.action = #selector(MainMenuActionHandler.menuChangeSpeed(_:))
     }
@@ -213,6 +226,9 @@ class MenuController: NSObject, NSMenuDelegate {
 
     nextMedia.action = #selector(MainMenuActionHandler.menuNextMedia(_:))
     previousMedia.action = #selector(MainMenuActionHandler.menuPreviousMedia(_:))
+
+    nextChapter.action = #selector(MainMenuActionHandler.menuNextChapter(_:))
+    previousChapter.action = #selector(MainMenuActionHandler.menuPreviousChapter(_:))
 
     // Video menu
 
@@ -599,6 +615,19 @@ class MenuController: NSObject, NSMenuDelegate {
   func updateKeyEquivalentsFrom(_ keyBindings: [KeyMapping]) {
     let settings: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
       (deleteCurrentFile, true, ["delete-current-file"], false, nil, nil),
+      (savePlaylist, true, ["save-playlist"], false, nil, nil),
+      (quickSettingsVideo, true, ["video-panel"], false, nil, nil),
+      (quickSettingsAudio, true, ["audio-panel"], false, nil, nil),
+      (quickSettingsSub, true, ["sub-panel"], false, nil, nil),
+      (playlistPanel, true, ["playlist-panel"], false, nil, nil),
+      (chapterPanel, true, ["chapter-panel"], false, nil, nil),
+      (findOnlineSub, true, ["find-online-subs"], false, nil, nil),
+      (saveDownloadedSub, true, ["save-downloaded-sub"], false, nil, nil),
+      (cycleVideoTracks, false, ["cycle", "video"], false, nil, nil),
+      (cycleAudioTracks, false, ["cycle", "audio"], false, nil, nil),
+      (cycleSubtitles, false, ["cycle", "sub"], false, nil, nil),
+      (nextChapter, false, ["add", "chapter", "1"], false, nil, nil),
+      (previousChapter, false, ["add", "chapter", "-1"], false, nil, nil),
       (pause, false, ["cycle", "pause"], false, nil, nil),
       (stop, false, ["stop"], false, nil, nil),
       (forward, false, ["seek", "5"], true, 5.0...10.0, "seek_forward"),
@@ -608,12 +637,12 @@ class MenuController: NSObject, NSMenuDelegate {
       (nextMedia, false, ["playlist-next"], false, nil, nil),
       (previousMedia, false, ["playlist-prev"], false, nil, nil),
       (speedUp, false, ["multiply", "speed", "2.0"], true, nil, "speed_up"),
-      (speedUpSlightly, false, ["multiply", "speed", "1.1"], true, 1.1...1.5, "speed_up"),
+      (speedUpSlightly, false, ["multiply", "speed", "1.1"], true, 1.01...1.5, "speed_up"),
       (speedDown, false, ["multiply", "speed", "0.5"], true, nil, "speed_down"),
       (speedDownSlightly, false, ["multiply", "speed", "0.9"], true, 0.75...0.99, "speed_down"),
       (speedReset, false, ["set", "speed", "1.0"], true, nil, nil),
       (abLoop, false, ["ab-loop"], false, nil, nil),
-      (fileLoop, false, ["cycle-values", "loop", "inf", "no"], false, nil, nil),
+      (fileLoop, false, ["cycle-values", "loop", "\"inf\"", "\"no\""], false, nil, nil),
       (screenShot, false, ["screenshot"], false, nil, nil),
       (mute, false, ["cycle", "mute"], false, nil, nil),
       (increaseVolume, false, ["add", "volume", "5"], true, 5.0...10.0, "volume_up"),

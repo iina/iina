@@ -737,17 +737,16 @@
                                                                 <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subSpacing" id="JHP-Qg-X29"/>
                                                             </connections>
                                                         </textField>
-                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Nb-Zc-tUF" userLabel="Line spacing:">
-                                                            <rect key="frame" x="257" y="12" width="75" height="14"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Nb-Zc-tUF" userLabel="Line spacing:">
+                                                            <rect key="frame" x="255" y="12" width="74" height="14"/>
                                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Line spacing:" id="u8b-nR-FOQ" userLabel="Line spacing:">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
-                                                        <textField verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4hw-54-OAO" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
-                                                            <rect key="frame" x="346" y="9" width="38" height="19"/>
+                                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4hw-54-OAO" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
+                                                            <rect key="frame" x="335" y="9" width="38" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="38" id="bQx-bd-voa"/>
                                                             </constraints>
@@ -768,11 +767,15 @@
                                                         <constraint firstItem="Isx-yj-hf3" firstAttribute="leading" secondItem="P8c-Nb-ONs" secondAttribute="leading" constant="12" id="DP8-k0-AuO"/>
                                                         <constraint firstAttribute="bottom" secondItem="Isx-yj-hf3" secondAttribute="bottom" constant="12" id="GPb-uq-FAs"/>
                                                         <constraint firstItem="owJ-Ny-vZ8" firstAttribute="baseline" secondItem="Isx-yj-hf3" secondAttribute="baseline" id="LG0-rz-558"/>
+                                                        <constraint firstItem="4hw-54-OAO" firstAttribute="baseline" secondItem="7Nb-Zc-tUF" secondAttribute="baseline" id="T4M-x8-gcV"/>
+                                                        <constraint firstItem="7Nb-Zc-tUF" firstAttribute="leading" secondItem="kdB-R4-fML" secondAttribute="trailing" constant="24" id="deP-gG-RdS"/>
                                                         <constraint firstItem="owJ-Ny-vZ8" firstAttribute="baseline" secondItem="u2l-jt-Ehx" secondAttribute="baseline" id="fSZ-7m-KgL"/>
                                                         <constraint firstItem="kdB-R4-fML" firstAttribute="leading" secondItem="owJ-Ny-vZ8" secondAttribute="trailing" constant="8" id="fsr-8V-aYk"/>
                                                         <constraint firstItem="u2l-jt-Ehx" firstAttribute="leading" secondItem="Isx-yj-hf3" secondAttribute="trailing" constant="12" id="iEf-a7-OXE"/>
+                                                        <constraint firstItem="4hw-54-OAO" firstAttribute="leading" secondItem="7Nb-Zc-tUF" secondAttribute="trailing" constant="8" id="iNv-Yw-eDn"/>
                                                         <constraint firstItem="Isx-yj-hf3" firstAttribute="top" secondItem="P8c-Nb-ONs" secondAttribute="top" constant="8" id="luw-ZB-5wo"/>
                                                         <constraint firstItem="kdB-R4-fML" firstAttribute="baseline" secondItem="owJ-Ny-vZ8" secondAttribute="baseline" id="vNS-nt-GBa"/>
+                                                        <constraint firstItem="7Nb-Zc-tUF" firstAttribute="baseline" secondItem="kdB-R4-fML" secondAttribute="baseline" id="yju-Dk-LXc"/>
                                                     </constraints>
                                                 </view>
                                             </box>

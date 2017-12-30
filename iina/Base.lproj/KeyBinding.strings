@@ -17,7 +17,7 @@
 "cmd.frame-step" = "Next frame";
 "cmd.frame-back-step" = "Previous frame";
 "cmd.ab-loop" = "A-B loop";
-"cmd.sub-seek" = "Sub seek";
+"cmd.sub-seek" = "Subtitle seek";
 "cmd.playlist-next" = "Next media";
 "cmd.playlist-prev" = "Previous media";
 "cmd.playlist-move" = "Move playlist item";
@@ -88,11 +88,11 @@
 "opt.mute" = "Mute";
 "opt.audio-delay" = "Audio delay";
 
-"opt.sub" = "Sub track";
-"opt.sub-delay" = "Sub delay";
-"opt.sub-pos" = "Sub pos";
-"opt.sub-scale" = "Sub scale";
-"opt.sub-visibility" = "Sub visibility";
+"opt.sub" = "Subtitle track";
+"opt.sub-delay" = "Subtitle delay";
+"opt.sub-pos" = "Subtitle pos";
+"opt.sub-scale" = "Subtitle scale";
+"opt.sub-visibility" = "Subtitle visibility";
 "opt.sub-ass-style-override" = "ASS style override";
 
 "opt.fullscreen" = "Fullscreen";

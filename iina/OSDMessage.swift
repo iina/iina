@@ -189,7 +189,7 @@ enum OSDMessage {
       case .video: trackTypeStr = "Video"
       case .audio: trackTypeStr = "Audio"
       case .sub: trackTypeStr = "Subtitle"
-      case .secondSub: trackTypeStr = "Second Sub"
+      case .secondSub: trackTypeStr = "Second Subtitle"
       }
       return (trackTypeStr + ": " + track.readableTitle, .normal)
 

@@ -191,6 +191,8 @@
 
 "alert.no_video_track" = "There is no video track.";
 
+"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate it before editing.";
+
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.play_in_new_window" = "Play in New Window";

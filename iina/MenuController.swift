@@ -660,7 +660,12 @@ class MenuController: NSObject, NSMenuDelegate {
       (decreaseSubDelaySlightly, false, ["add", "sub-delay", "-0.1"], true, nil, "sub_delay_down"),
       (increaseSubDelay, false, ["add", "sub-delay", "0.5"], true, nil, "sub_delay_up"),
       (increaseSubDelaySlightly, false, ["add", "sub-delay", "0.1"], true, nil, "sub_delay_up"),
-      (resetSubDelay, false, ["set", "sub-delay", "0"], true, nil, nil)
+      (resetSubDelay, false, ["set", "sub-delay", "0"], true, nil, nil),
+      (increaseTextSize, false, ["multiply", "sub-scale", "1.1"], true, 1.01...1.49, nil),
+      (decreaseTextSize, false, ["multiply", "sub-scale", "0.9"], true, 0.71...0.99, nil),
+      (resetTextSize, false, ["set", "sub-scale", "1"], true, nil, nil),
+      (alwaysOnTop, false, ["cycle", "ontop"], false, nil, nil),
+      (fullScreen, false, ["cycle", "fullscreen"], false, nil, nil)
     ]
     settings.forEach { (menuItem, isIINACmd, actions, normalizeLastNum, numRange, l10nKey) in
       var bound = false

@@ -2530,6 +2530,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let item = NSMenuItem()
       item.tag = 10
       self.menuChangeWindowSize(item)
+    case .fitToScreen:
+      let item = NSMenuItem()
+      item.tag = 3
+      self.menuChangeWindowSize(item)
     }
   }
 

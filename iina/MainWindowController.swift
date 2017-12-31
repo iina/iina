@@ -1332,6 +1332,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Window delegate: Size
 
+  func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
+    if frameSize.height < minSize.height || frameSize.width < minSize.width {
+      return sender.frame.size
+    }
+    return frameSize
+  }
+
   func windowDidResize(_ notification: Notification) {
     guard let window = window else { return }
 

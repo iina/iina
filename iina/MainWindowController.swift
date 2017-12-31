@@ -2508,6 +2508,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.menuShowPlaylistPanel(.dummy)
     case .chapterPanel:
       self.menuShowChaptersPanel(.dummy)
+    case .toggleMusicMode:
+      self.menuSwitchToMiniPlayer(.dummy)
     case .flip:
       self.menuActionHandler.menuToggleFlip(.dummy)
     case .mirror:

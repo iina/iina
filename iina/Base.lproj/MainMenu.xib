@@ -263,13 +263,21 @@
                                 <menu key="submenu" title="Video Track" systemMenu="font" id="FTu-CF-O0R"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="CHq-3f-f42"/>
-                            <menuItem title="Half Size" keyEquivalent="0" id="snW-S8-Cw5"/>
-                            <menuItem title="Normal Size" keyEquivalent="1" id="1UK-8n-QPP"/>
+                            <menuItem title="Half Size" id="snW-S8-Cw5">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Normal Size" id="1UK-8n-QPP">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem title="Normal Size (Retina)" hidden="YES" alternate="YES" keyEquivalent="1" id="c1x-bx-69F">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Double Size" keyEquivalent="2" id="Hal-18-Tnf"/>
-                            <menuItem title="Fit to Screen" keyEquivalent="3" id="SHd-63-Xoh"/>
+                            <menuItem title="Double Size" id="Hal-18-Tnf">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Fit to Screen" id="SHd-63-Xoh">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="Ap4-Sw-qOT"/>
                             <menuItem title="Bigger Size" tag="11" id="lDC-IC-peP">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -278,18 +286,18 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="F7U-cD-2ou"/>
-                            <menuItem title="Enter Full Screen" keyEquivalent="f" id="6Eq-ni-6hG">
-                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                            <menuItem title="Enter Picture in Picture" id="mND-N8-z6o">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Enter Picture in Picture" keyEquivalent="p" id="mND-N8-z6o">
-                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                            <menuItem title="Enter Full Screen" id="6Eq-ni-6hG">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Float on Top" keyEquivalent="t" id="wex-rX-PcY">
-                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                            <menuItem title="Float on Top" id="wex-rX-PcY">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="xpM-h7-A4R"/>
-                            <menuItem title="Music Mode" keyEquivalent="m" id="bGN-E4-V5A">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                            <menuItem title="Music Mode" id="bGN-E4-V5A">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="4J5-eU-sei"/>
                             <menuItem title="Aspect Ratio" id="d15-8v-dXA">

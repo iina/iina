@@ -405,6 +405,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
       appDeletate.openFile(self)
     case .openURL:
       appDeletate.openURL(self)
+    case .toggleMusicMode:
+      self.menuSwitchToMiniPlayer(.dummy)
     case .flip:
       self.menuActionHandler.menuToggleFlip(.dummy)
     case .mirror:

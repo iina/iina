@@ -38,6 +38,7 @@
 "iina.mirror" = "Mirror";
 
 "iina.toggle-pip" = "Toggle Picture-in-Picture";
+"iina.toggle-music-mode" = "Toggle Music Mode";
 "iina.open-file" = "Open file";
 "iina.open-url" = "Open URL";
 "iina.video-panel" = "Video panel";
@@ -45,6 +46,9 @@
 "iina.sub-panel" = "Subtitle panel";
 "iina.playlist-panel" = "Playlist panel";
 "iina.chapter-panel" = "Chapter panel";
+"iina.bigger-window" = "Bigger Window";
+"iina.smaller-window" = "Smaller Window";
+"iina.fit-to-screen" = "Fit to Screen";
 "iina.toggle-flip" = "Toggle flip";
 "iina.toggle-mirror" = "Toggle mirror";
 "iina.save-playlist" = "Save current playlist";
@@ -74,6 +78,8 @@
 
 "opt.pause" = "Pause";
 "opt.speed" = "Speed";
+
+"opt.window-scale" = "Window scale";
 
 "opt.video" = "Video track";
 "opt.video-aspect" = "Video aspect";

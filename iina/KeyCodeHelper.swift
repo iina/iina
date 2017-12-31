@@ -9,6 +9,8 @@
 import Foundation
 import Carbon
 
+fileprivate let modifierSymbols: [(NSEvent.ModifierFlags, String)] = [(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")]
+
 class KeyCodeHelper {
 
   static let keyMap: [UInt16 : (String, String?)] = [
@@ -128,6 +130,101 @@ class KeyCodeHelper {
     0x7F: ("POWER", nil) // This should be KeyCode::PC_POWER.
   ]
 
+  static let mpvSymbolToKeyChar: [String: String] = {
+
+    return [
+      "LEFT": NSLeftArrowFunctionKey,
+      "RIGHT": NSRightArrowFunctionKey,
+      "UP": NSUpArrowFunctionKey,
+      "DOWN": NSDownArrowFunctionKey,
+      "BS": NSBackspaceCharacter,
+      "KP_DEL": NSDeleteCharacter,
+      "DEL": NSDeleteCharacter,
+      "KP_INS": NSInsertFunctionKey,
+      "INS": NSInsertFunctionKey,
+      "HOME": NSHomeFunctionKey,
+      "END": NSEndFunctionKey,
+      "PGUP": NSPageUpFunctionKey,
+      "PGDWN": NSPageDownFunctionKey,
+      "PRINT": NSPrintFunctionKey,
+      "F1": NSF1FunctionKey,
+      "F2": NSF2FunctionKey,
+      "F3": NSF3FunctionKey,
+      "F4": NSF4FunctionKey,
+      "F5": NSF5FunctionKey,
+      "F6": NSF6FunctionKey,
+      "F7": NSF7FunctionKey,
+      "F8": NSF8FunctionKey,
+      "F9": NSF9FunctionKey,
+      "F10": NSF10FunctionKey,
+      "F11": NSF11FunctionKey,
+      "F12": NSF12FunctionKey
+    ]
+    .mapValues { String(Character(UnicodeScalar($0)!)) }
+    .merging([
+      "SPACE": " ",
+      "IDEOGRAPHIC_SPACE": "\u{3000}",
+      "SHARP": "#",
+      "ENTER": "\r",
+      "ESC": "\u{1b}",
+      "KP_DEC": ".",
+      "KP_ENTER": "\r",
+      "KP0": "0",
+      "KP1": "1",
+      "KP2": "2",
+      "KP3": "3",
+      "KP4": "4",
+      "KP5": "5",
+      "KP6": "6",
+      "KP7": "7",
+      "KP8": "8",
+      "KP9": "9",
+      "PLUS": "+"
+    ]) { (v0, v1) in return v1 }
+    
+  }()
+
+  static let mpvSymbolToKeyName: [String: String] = [
+    "META": "⌘",
+    "SHIFT": "⇧",
+    "ALT": "⌥",
+    "CTRL":"⌃",
+    "SHARP": "#",
+    "ENTER": "↩︎",
+    "KP_ENTER": "↩︎",
+    "SPACE": "␣",
+    "IDEOGRAPHIC_SPACE": "␣",
+    "BS": "⌫",
+    "DEL": "⌦",
+    "KP_DEL": "⌦",
+    "INS": "Ins",
+    "KP_INS": "Ins",
+    "TAB": "⇥",
+    "ESC": "⎋",
+    "UP": "↑",
+    "DOWN": "↓",
+    "LEFT": "←",
+    "RIGHT" : "→",
+    "PGUP": "⇞",
+    "PGDWN": "⇟",
+    "HOME": "↖︎",
+    "END": "↘︎",
+    "PLAY": "▶︎\u{2006}❙\u{200A}❙",
+    "PREV": "◀︎◀︎",
+    "NEXT": "▶︎▶︎",
+    "PLUS": "+",
+    "KP0": "0",
+    "KP1": "1",
+    "KP2": "2",
+    "KP3": "3",
+    "KP4": "4",
+    "KP5": "5",
+    "KP6": "6",
+    "KP7": "7",
+    "KP8": "8",
+    "KP9": "9",
+  ]
+
   static var reversedKeyMapForShift: [String: String] = keyMap.reduce([:]) { partial, keyMap in
     var partial = partial
     if let value = keyMap.value.1 {
@@ -149,38 +246,33 @@ class KeyCodeHelper {
     var keyString = ""
     let keyChar: String
     let keyCode = event.keyCode
-    let modifiers = event.modifierFlags
-
-    // shift
+    var modifiers = event.modifierFlags
 
     if let char = event.charactersIgnoringModifiers, isPrintable(char) {
       keyChar = char
+      let (_, rawKeyChar) = event.readableKeyDescription
+      if rawKeyChar != char {
+        modifiers.remove(.shift)
+      }
     } else {
       // find the key from key code
       guard let keyName = KeyCodeHelper.keyMap[keyCode] else {
         Utility.log("Undefined key code?")
         return ""
       }
-      if modifiers.contains(.shift) {
-        if KeyCodeHelper.canBeModifiedByShift(keyCode) {
-          keyChar = keyName.1!
-        } else {
-          keyChar = keyName.0
-          keyString += "Shift+"
-        }
-      } else {
-        keyChar = keyName.0
-      }
+      keyChar = keyName.0
     }
-    // control
+    // modifiers
+    // the same order as `KeyMapping.modifierOrder`
     if modifiers.contains(.control) {
       keyString += "Ctrl+"
     }
-    // alt
     if modifiers.contains(.option) {
       keyString += "Alt+"
     }
-    // meta
+    if modifiers.contains(.shift) {
+      keyString += "Shift+"
+    }
     if modifiers.contains(.command) {
       keyString += "Meta+"
     }
@@ -189,6 +281,42 @@ class KeyCodeHelper {
     return keyString
   }
 
+  static func macOSKeyEquivalent(from mpvKeyCode: String, usePrintableKeyName: Bool = false) -> (key: String, modifiers: NSEvent.ModifierFlags)? {
+    if mpvKeyCode == "+" {
+      return ("+", [])
+    }
+    let splitted = mpvKeyCode.replacingOccurrences(of: "++", with: "+PLUS").components(separatedBy: "+")
+    var key: String
+    var modifiers: NSEvent.ModifierFlags = []
+    guard !splitted.isEmpty else { return nil }
+    key = splitted.last!
+    splitted.dropLast().forEach { k in
+      switch k {
+      case "Meta": modifiers.insert(.command)
+      case "Ctrl": modifiers.insert(.control)
+      case "Alt": modifiers.insert(.option)
+      case "Shift": modifiers.insert(.shift)
+      default: break
+      }
+    }
+    if let realKey = (usePrintableKeyName ? mpvSymbolToKeyName : mpvSymbolToKeyChar)[key] {
+      key = realKey
+    }
+    guard key.count == 1 else { return nil }
+    return (key, modifiers)
+  }
+
+  static func readableString(fromKey key: String, modifiers: NSEvent.ModifierFlags) -> String {
+    var key = key
+    var modifiers = modifiers
+    if let uScalar = key.first?.unicodeScalars.first, NSCharacterSet.uppercaseLetters.contains(uScalar) {
+      modifiers.insert(.shift)
+    }
+    key = key.uppercased()
+    return modifierSymbols.map { modifiers.contains($0.0) ? $0.1 : "" }
+      .joined()
+      .appending(key)
+  }
 }
 
 

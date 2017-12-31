@@ -165,7 +165,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
   }
 
   @objc func touchBarSkipAction(_ sender: NSButton) {
-    player.navigateInPlaylist(nextOrPrev: sender.tag == 0)
+    player.navigateInPlaylist(nextMedia: sender.tag == 0)
   }
 
   @objc func touchBarSliderAction(_ sender: NSSlider) {

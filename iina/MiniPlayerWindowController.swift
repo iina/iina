@@ -337,11 +337,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func nextBtnAction(_ sender: NSButton) {
-    player.navigateInPlaylist(nextOrPrev: true)
+    player.navigateInPlaylist(nextMedia: true)
   }
 
   @IBAction func prevBtnAction(_ sender: NSButton) {
-    player.navigateInPlaylist(nextOrPrev: false)
+    player.navigateInPlaylist(nextMedia: false)
   }
 
   @IBAction func volumeBtnAction(_ sender: NSButton) {
@@ -405,6 +405,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
       appDeletate.openFile(self)
     case .openURL:
       appDeletate.openURL(self)
+    case .toggleMusicMode:
+      self.menuSwitchToMiniPlayer(.dummy)
     case .flip:
       self.menuActionHandler.menuToggleFlip(.dummy)
     case .mirror:

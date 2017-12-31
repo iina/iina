@@ -8,6 +8,38 @@
 
 import Cocoa
 
+fileprivate func sameKeyAction(_ lhs: [String], _ rhs: [String], _ normalizeLastNum: Bool, _ numRange: ClosedRange<Double>?) -> (Bool, Double?) {
+  var lhs = lhs
+  if lhs.first == "seek" && (lhs.last == "exact" || lhs.last == "keyframe") {
+    lhs = [String](lhs.dropLast())
+  }
+  guard lhs.count > 0 && lhs.count == rhs.count else {
+    return (false, nil)
+  }
+  if normalizeLastNum {
+    for i in 0..<lhs.count-1 {
+      if lhs[i] != rhs[i] {
+        return (false, nil)
+      }
+    }
+    guard let ld = Double(lhs.last!), let rd = Double(rhs.last!) else {
+      return (false, nil)
+    }
+    if let range = numRange {
+      return (range.contains(ld), ld)
+    } else {
+      return (ld == rd, ld)
+    }
+  } else {
+    for i in 0..<lhs.count {
+      if lhs[i] != rhs[i] {
+        return (false, nil)
+      }
+    }
+  }
+  return (true, nil)
+}
+
 class MenuController: NSObject, NSMenuDelegate {
 
   /** For convinent bindings. see `bind(...)` below. [menu: check state block] */
@@ -38,6 +70,12 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var previousFrame: NSMenuItem!
   @IBOutlet weak var jumpToBegin: NSMenuItem!
   @IBOutlet weak var jumpTo: NSMenuItem!
+  @IBOutlet weak var speedIndicator: NSMenuItem!
+  @IBOutlet weak var speedUp: NSMenuItem!
+  @IBOutlet weak var speedUpSlightly: NSMenuItem!
+  @IBOutlet weak var speedDown: NSMenuItem!
+  @IBOutlet weak var speedDownSlightly: NSMenuItem!
+  @IBOutlet weak var speedReset: NSMenuItem!
   @IBOutlet weak var screenShot: NSMenuItem!
   @IBOutlet weak var gotoScreenshotFolder: NSMenuItem!
   @IBOutlet weak var advancedScreenShot: NSMenuItem!
@@ -47,12 +85,17 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var playlist: NSMenuItem!
   @IBOutlet weak var playlistLoop: NSMenuItem!
   @IBOutlet weak var playlistMenu: NSMenu!
+  @IBOutlet weak var nextMedia: NSMenuItem!
+  @IBOutlet weak var previousMedia: NSMenuItem!
   @IBOutlet weak var chapterPanel: NSMenuItem!
+  @IBOutlet weak var nextChapter: NSMenuItem!
+  @IBOutlet weak var previousChapter: NSMenuItem!
   @IBOutlet weak var chapter: NSMenuItem!
   @IBOutlet weak var chapterMenu: NSMenu!
   // Video
   @IBOutlet weak var videoMenu: NSMenu!
   @IBOutlet weak var quickSettingsVideo: NSMenuItem!
+  @IBOutlet weak var cycleVideoTracks: NSMenuItem!
   @IBOutlet weak var videoTrack: NSMenuItem!
   @IBOutlet weak var videoTrackMenu: NSMenu!
   @IBOutlet weak var halfSize: NSMenuItem!
@@ -78,6 +121,7 @@ class MenuController: NSObject, NSMenuDelegate {
   //Audio
   @IBOutlet weak var audioMenu: NSMenu!
   @IBOutlet weak var quickSettingsAudio: NSMenuItem!
+  @IBOutlet weak var cycleAudioTracks: NSMenuItem!
   @IBOutlet weak var audioTrackMenu: NSMenu!
   @IBOutlet weak var volumeIndicator: NSMenuItem!
   @IBOutlet weak var increaseVolume: NSMenuItem!
@@ -87,7 +131,9 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var mute: NSMenuItem!
   @IBOutlet weak var audioDelayIndicator: NSMenuItem!
   @IBOutlet weak var increaseAudioDelay: NSMenuItem!
+  @IBOutlet weak var increaseAudioDelaySlightly: NSMenuItem!
   @IBOutlet weak var decreaseAudioDelay: NSMenuItem!
+  @IBOutlet weak var decreaseAudioDelaySlightly: NSMenuItem!
   @IBOutlet weak var resetAudioDelay: NSMenuItem!
   @IBOutlet weak var audioFilters: NSMenuItem!
   @IBOutlet weak var audioDeviceMenu: NSMenu!
@@ -95,6 +141,7 @@ class MenuController: NSObject, NSMenuDelegate {
   // Subtitle
   @IBOutlet weak var subMenu: NSMenu!
   @IBOutlet weak var quickSettingsSub: NSMenuItem!
+  @IBOutlet weak var cycleSubtitles: NSMenuItem!
   @IBOutlet weak var subTrackMenu: NSMenu!
   @IBOutlet weak var secondSubTrackMenu: NSMenu!
   @IBOutlet weak var loadExternalSub: NSMenuItem!
@@ -103,7 +150,9 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var resetTextSize: NSMenuItem!
   @IBOutlet weak var subDelayIndicator: NSMenuItem!
   @IBOutlet weak var increaseSubDelay: NSMenuItem!
+  @IBOutlet weak var increaseSubDelaySlightly: NSMenuItem!
   @IBOutlet weak var decreaseSubDelay: NSMenuItem!
+  @IBOutlet weak var decreaseSubDelaySlightly: NSMenuItem!
   @IBOutlet weak var resetSubDelay: NSMenuItem!
   @IBOutlet weak var encodingMenu: NSMenu!
   @IBOutlet weak var subFont: NSMenuItem!
@@ -118,6 +167,10 @@ class MenuController: NSObject, NSMenuDelegate {
   // MARK: - Construct Menus
 
   func bindMenuItems() {
+
+    [cycleSubtitles, cycleAudioTracks, cycleVideoTracks].forEach { item in
+      item?.action = #selector(MainMenuActionHandler.menuCycleTrack(_:))
+    }
 
     // File menu
     
@@ -152,10 +205,19 @@ class MenuController: NSObject, NSMenuDelegate {
     jumpToBegin.action = #selector(MainMenuActionHandler.menuJumpToBegin(_:))
     jumpTo.action = #selector(MainMenuActionHandler.menuJumpTo(_:))
 
+    // -- speed
+    (speedUp.representedObject,
+     speedUpSlightly.representedObject,
+     speedDown.representedObject,
+     speedDownSlightly.representedObject) = (2.0, 1.1, 0.5, 0.9)
+    [speedUp, speedDown, speedUpSlightly, speedDownSlightly, speedReset].forEach { item in
+      item?.action = #selector(MainMenuActionHandler.menuChangeSpeed(_:))
+    }
+
     // -- screenshot
     screenShot.action = #selector(MainMenuActionHandler.menuSnapshot(_:))
     gotoScreenshotFolder.action = #selector(AppDelegate.menuOpenScreenshotFolder(_:))
-//    advancedScreenShot
+    // advancedScreenShot
 
     // -- list and chapter
     abLoop.action = #selector(MainMenuActionHandler.menuABLoop(_:))
@@ -165,6 +227,12 @@ class MenuController: NSObject, NSMenuDelegate {
     playlistLoop.action = #selector(MainMenuActionHandler.menuPlaylistLoop(_:))
     playlistPanel.action = #selector(MainWindowController.menuShowPlaylistPanel(_:))
     chapterPanel.action = #selector(MainWindowController.menuShowChaptersPanel(_:))
+
+    nextMedia.action = #selector(MainMenuActionHandler.menuNextMedia(_:))
+    previousMedia.action = #selector(MainMenuActionHandler.menuPreviousMedia(_:))
+
+    nextChapter.action = #selector(MainMenuActionHandler.menuNextChapter(_:))
+    previousChapter.action = #selector(MainMenuActionHandler.menuPreviousChapter(_:))
 
     // Video menu
 
@@ -239,15 +307,21 @@ class MenuController: NSObject, NSMenuDelegate {
     audioTrackMenu.delegate = self
 
     // - volume
-    (increaseVolume.representedObject, decreaseVolume.representedObject, increaseVolumeSlightly.representedObject, decreaseVolumeSlightly.representedObject) = (5, -5, 1, -1)
-    for item in [increaseVolume, decreaseVolume, increaseVolumeSlightly, decreaseVolumeSlightly] {
+    (increaseVolume.representedObject,
+     decreaseVolume.representedObject,
+     increaseVolumeSlightly.representedObject,
+     decreaseVolumeSlightly.representedObject) = (5, -5, 1, -1)
+    [increaseVolume, decreaseVolume, increaseVolumeSlightly, decreaseVolumeSlightly].forEach { item in
       item?.action = #selector(MainMenuActionHandler.menuChangeVolume(_:))
     }
     mute.action = #selector(MainMenuActionHandler.menuToggleMute(_:))
 
     // - audio delay
-    (increaseAudioDelay.representedObject, decreaseAudioDelay.representedObject) = (0.5, -0.5)
-    for item in [increaseAudioDelay, decreaseAudioDelay] {
+    (increaseAudioDelay.representedObject,
+     increaseAudioDelaySlightly.representedObject,
+     decreaseAudioDelay.representedObject,
+     decreaseAudioDelaySlightly.representedObject) = (0.5, 0.1, -0.5, -0.1)
+    [increaseAudioDelay, decreaseAudioDelay, increaseAudioDelaySlightly, decreaseAudioDelaySlightly].forEach { item in
       item?.action = #selector(MainMenuActionHandler.menuChangeAudioDelay(_:))
     }
     resetAudioDelay.action = #selector(MainMenuActionHandler.menuResetAudioDelay(_:))
@@ -279,8 +353,11 @@ class MenuController: NSObject, NSMenuDelegate {
     }
 
     // - delay
-    (increaseSubDelay.representedObject, decreaseSubDelay.representedObject) = (0.5, -0.5)
-    for item in [increaseSubDelay, decreaseSubDelay] {
+    (increaseSubDelay.representedObject,
+     increaseSubDelaySlightly.representedObject,
+     decreaseSubDelay.representedObject,
+     decreaseSubDelaySlightly.representedObject) = (0.5, 0.1, -0.5, -0.1)
+    [increaseSubDelay, decreaseSubDelay, increaseSubDelaySlightly, decreaseSubDelaySlightly].forEach { item in
       item?.action = #selector(MainMenuActionHandler.menuChangeSubDelay(_:))
     }
     resetSubDelay.action = #selector(MainMenuActionHandler.menuResetSubDelay(_:))
@@ -357,11 +434,13 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   private func updatePlaybackMenu() {
-    pause.title = PlayerCore.active.info.isPaused ? Constants.String.resume : Constants.String.pause
-    let isLoop = PlayerCore.active.mpv.getFlag(MPVOption.PlaybackControl.loopFile)
+    let player = PlayerCore.active
+    pause.title = player.info.isPaused ? Constants.String.resume : Constants.String.pause
+    let isLoop = player.mpv.getFlag(MPVOption.PlaybackControl.loopFile)
     fileLoop.state = isLoop ? .on : .off
-    let isPlaylistLoop = PlayerCore.active.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
+    let isPlaylistLoop = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     playlistLoop.state = (isPlaylistLoop == "inf" || isPlaylistLoop == "force") ? .on : .off
+    speedIndicator.title = String(format: NSLocalizedString("menu.speed", comment: "Speed:"), player.info.playSpeed)
   }
 
   private func updateVideoMenu() {
@@ -534,6 +613,92 @@ class MenuController: NSObject, NSMenuDelegate {
       menuItem.keyEquivalentModifierMask = filter.shortcutKeyModifiers
       menuItem.representedObject = filter.filterString
       menu.addItem(menuItem)
+    }
+  }
+
+  func updateKeyEquivalentsFrom(_ keyBindings: [KeyMapping]) {
+    let settings: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
+      (deleteCurrentFile, true, ["delete-current-file"], false, nil, nil),
+      (savePlaylist, true, ["save-playlist"], false, nil, nil),
+      (quickSettingsVideo, true, ["video-panel"], false, nil, nil),
+      (quickSettingsAudio, true, ["audio-panel"], false, nil, nil),
+      (quickSettingsSub, true, ["sub-panel"], false, nil, nil),
+      (playlistPanel, true, ["playlist-panel"], false, nil, nil),
+      (chapterPanel, true, ["chapter-panel"], false, nil, nil),
+      (findOnlineSub, true, ["find-online-subs"], false, nil, nil),
+      (saveDownloadedSub, true, ["save-downloaded-sub"], false, nil, nil),
+      (biggerSize, true, ["bigger-window"], false, nil, nil),
+      (smallerSize, true, ["smaller-window"], false, nil, nil),
+      (fitToScreen, true, ["fit-to-screen"], false, nil, nil),
+      (pictureInPicture, true, ["toggle-pip"], false, nil, nil),
+      (miniPlayer, true, ["toggle-music-mode"], false, nil, nil),
+      (cycleVideoTracks, false, ["cycle", "video"], false, nil, nil),
+      (cycleAudioTracks, false, ["cycle", "audio"], false, nil, nil),
+      (cycleSubtitles, false, ["cycle", "sub"], false, nil, nil),
+      (nextChapter, false, ["add", "chapter", "1"], false, nil, nil),
+      (previousChapter, false, ["add", "chapter", "-1"], false, nil, nil),
+      (pause, false, ["cycle", "pause"], false, nil, nil),
+      (stop, false, ["stop"], false, nil, nil),
+      (forward, false, ["seek", "5"], true, 5.0...10.0, "seek_forward"),
+      (backward, false, ["seek", "-5"], true, -10.0...(-5.0), "seek_backward"),
+      (nextFrame, false, ["frame-step"], false, nil, nil),
+      (previousFrame, false, ["frame-back-step"], false, nil, nil),
+      (nextMedia, false, ["playlist-next"], false, nil, nil),
+      (previousMedia, false, ["playlist-prev"], false, nil, nil),
+      (speedUp, false, ["multiply", "speed", "2.0"], true, 1.5...3.0, "speed_up"),
+      (speedUpSlightly, false, ["multiply", "speed", "1.1"], true, 1.01...1.49, "speed_up"),
+      (speedDown, false, ["multiply", "speed", "0.5"], true, 0...0.7, "speed_down"),
+      (speedDownSlightly, false, ["multiply", "speed", "0.9"], true, 0.71...0.99, "speed_down"),
+      (speedReset, false, ["set", "speed", "1.0"], true, nil, nil),
+      (abLoop, false, ["ab-loop"], false, nil, nil),
+      (fileLoop, false, ["cycle-values", "loop", "\"inf\"", "\"no\""], false, nil, nil),
+      (screenShot, false, ["screenshot"], false, nil, nil),
+      (halfSize, false, ["set", "window-scale", "0.5"], true, nil, nil),
+      (normalSize, false, ["set", "window-scale", "1"], true, nil, nil),
+      (doubleSize, false, ["set", "window-scale", "2"], true, nil, nil),
+      (fullScreen, false, ["cycle", "fullscreen"], false, nil, nil),
+      (alwaysOnTop, false, ["cycle", "ontop"], false, nil, nil),
+      (mute, false, ["cycle", "mute"], false, nil, nil),
+      (increaseVolume, false, ["add", "volume", "5"], true, 5.0...10.0, "volume_up"),
+      (decreaseVolume, false, ["add", "volume", "-5"], true, -10.0...(-5.0), "volume_down"),
+      (increaseVolumeSlightly, false, ["add", "volume", "1"], true, 1.0...2.0, "volume_up"),
+      (decreaseVolumeSlightly, false, ["add", "volume", "-1"], true, -2.0...(-1.0), "volume_down"),
+      (decreaseAudioDelay, false, ["add", "audio-delay", "-0.5"], true, nil, "audio_delay_down"),
+      (decreaseAudioDelaySlightly, false, ["add", "audio-delay", "-0.1"], true, nil, "audio_delay_down"),
+      (increaseAudioDelay, false, ["add", "audio-delay", "0.5"], true, nil, "audio_delay_up"),
+      (increaseAudioDelaySlightly, false, ["add", "audio-delay", "0.1"], true, nil, "audio_delay_up"),
+      (resetAudioDelay, false, ["set", "audio-delay", "0"], true, nil, nil),
+      (decreaseSubDelay, false, ["add", "sub-delay", "-0.5"], true, nil, "sub_delay_down"),
+      (decreaseSubDelaySlightly, false, ["add", "sub-delay", "-0.1"], true, nil, "sub_delay_down"),
+      (increaseSubDelay, false, ["add", "sub-delay", "0.5"], true, nil, "sub_delay_up"),
+      (increaseSubDelaySlightly, false, ["add", "sub-delay", "0.1"], true, nil, "sub_delay_up"),
+      (resetSubDelay, false, ["set", "sub-delay", "0"], true, nil, nil),
+      (increaseTextSize, false, ["multiply", "sub-scale", "1.1"], true, 1.01...1.49, nil),
+      (decreaseTextSize, false, ["multiply", "sub-scale", "0.9"], true, 0.71...0.99, nil),
+      (resetTextSize, false, ["set", "sub-scale", "1"], true, nil, nil),
+      (alwaysOnTop, false, ["cycle", "ontop"], false, nil, nil),
+      (fullScreen, false, ["cycle", "fullscreen"], false, nil, nil)
+    ]
+    settings.forEach { (menuItem, isIINACmd, actions, normalizeLastNum, numRange, l10nKey) in
+      var bound = false
+      for kb in keyBindings {
+        guard kb.isIINACommand == isIINACmd else { continue }
+        let (sameAction, value) = sameKeyAction(kb.action, actions, normalizeLastNum, numRange)
+        if sameAction, let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: kb.key) {
+          menuItem.keyEquivalent = kEqv
+          menuItem.keyEquivalentModifierMask = kMdf
+          if let value = value, let l10nKey = l10nKey {
+            menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), abs(value))
+            menuItem.representedObject = value
+          }
+          bound = true
+          break
+        }
+      }
+      if !bound {
+        menuItem.keyEquivalent = ""
+        menuItem.keyEquivalentModifierMask = []
+      }
     }
   }
 }

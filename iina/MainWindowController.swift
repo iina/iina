@@ -2508,6 +2508,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.menuShowPlaylistPanel(.dummy)
     case .chapterPanel:
       self.menuShowChaptersPanel(.dummy)
+    case .toggleMusicMode:
+      self.menuSwitchToMiniPlayer(.dummy)
     case .flip:
       self.menuActionHandler.menuToggleFlip(.dummy)
     case .mirror:
@@ -2520,6 +2522,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.menuActionHandler.menuFindOnlineSub(.dummy)
     case .saveDownloadedSub:
       self.menuActionHandler.saveDownloadedSub(.dummy)
+    case .biggerWindow:
+      let item = NSMenuItem()
+      item.tag = 11
+      self.menuChangeWindowSize(item)
+    case .smallerWindow:
+      let item = NSMenuItem()
+      item.tag = 10
+      self.menuChangeWindowSize(item)
+    case .fitToScreen:
+      let item = NSMenuItem()
+      item.tag = 3
+      self.menuChangeWindowSize(item)
     }
   }
 

@@ -601,7 +601,7 @@ class PlayerCore: NSObject {
     if let currentSub = info.subTracks.first(where: {$0.externalFilename == currentSubName}) {
       setTrack(currentSub.id, forType: .sub)
     }
-    mainWindow?.quickSettingView.reloadSubtitleData()
+    mainWindow?.quickSettingView.reload()
   }
 
   func setAudioDelay(_ delay: Double) {
@@ -901,6 +901,7 @@ class PlayerCore: NSObject {
         }
         info.justLaunched = false
       }
+      mainWindow.quickSettingView.reload()
     }
     // add to history
     if let url = info.currentURL {

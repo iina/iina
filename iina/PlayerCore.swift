@@ -419,10 +419,10 @@ class PlayerCore: NSObject {
     }
   }
 
-  func screenShot() {
+  func screenshot() {
     let option = Preference.bool(for: .screenshotIncludeSubtitle) ? "subtitles" : "video"
     mpv.command(.screenshot, args: [option])
-    sendOSD(.screenShot)
+    sendOSD(.screenshot)
   }
 
   func abLoop() {

@@ -45,7 +45,7 @@ enum OSDMessage {
   case subPos(Double)
   case mute
   case unMute
-  case screenShot
+  case screenshot
   case abLoop(Int)
   case stop
   case chapter(String)
@@ -162,7 +162,7 @@ enum OSDMessage {
     case .unMute:
       return (NSLocalizedString("osd.unmute", comment: "Unmute"), .normal)
 
-    case .screenShot:
+    case .screenshot:
       return (NSLocalizedString("osd.screenshot", comment: "Screenshot Captured"), .normal)
 
     case .abLoop(let value):

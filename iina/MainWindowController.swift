@@ -784,7 +784,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         if returnValue == 0 {
           // screenshot
           if kb.action[0] == MPVCommand.screenshot.rawValue {
-            displayOSD(.screenShot)
+            displayOSD(.screenshot)
           }
         } else {
           Utility.log("Return value \(returnValue) when executing key command \(kb.rawAction)")

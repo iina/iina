@@ -576,7 +576,7 @@
         <customObject id="cyK-tE-xgA" customClass="MenuController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="abLoop" destination="i3P-Xw-8D7" id="cBJ-XW-MJ0"/>
-                <outlet property="advancedScreenShot" destination="CKi-JE-yLT" id="qJL-1i-PHe"/>
+                <outlet property="advancedScreenshot" destination="CKi-JE-yLT" id="pRb-CI-7g9"/>
                 <outlet property="alwaysOnTop" destination="wex-rX-PcY" id="3UN-lm-CVf"/>
                 <outlet property="aspectMenu" destination="KIb-Ix-D8J" id="hQ4-Bb-Rdu"/>
                 <outlet property="audioDelayIndicator" destination="foC-r3-8mp" id="FhX-cJ-FaB"/>
@@ -662,7 +662,7 @@
                 <outlet property="savePlaylist" destination="Mjr-lL-oEt" id="ftc-bn-4Qi"/>
                 <outlet property="savedAudioFiltersMenu" destination="vuV-uP-CAD" id="7DB-am-PUD"/>
                 <outlet property="savedVideoFiltersMenu" destination="xhY-fF-oio" id="MDx-8r-ENg"/>
-                <outlet property="screenShot" destination="AoP-K6-Kb5" id="vTV-d5-sag"/>
+                <outlet property="screenshot" destination="AoP-K6-Kb5" id="dhl-4W-7yS"/>
                 <outlet property="secondSubTrackMenu" destination="UwY-P2-Xdb" id="D3B-WW-bAk"/>
                 <outlet property="smallerSize" destination="ZOF-MG-6II" id="0jA-m5-Qy7"/>
                 <outlet property="speedDown" destination="HsE-LN-Nd6" id="0ZB-lc-ngV"/>

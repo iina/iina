@@ -114,7 +114,7 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuSnapshot(_ sender: NSMenuItem) {
-    player.screenShot()
+    player.screenshot()
   }
 
   @objc func menuABLoop(_ sender: NSMenuItem) {

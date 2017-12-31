@@ -76,9 +76,9 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var speedDown: NSMenuItem!
   @IBOutlet weak var speedDownSlightly: NSMenuItem!
   @IBOutlet weak var speedReset: NSMenuItem!
-  @IBOutlet weak var screenShot: NSMenuItem!
+  @IBOutlet weak var screenshot: NSMenuItem!
   @IBOutlet weak var gotoScreenshotFolder: NSMenuItem!
-  @IBOutlet weak var advancedScreenShot: NSMenuItem!
+  @IBOutlet weak var advancedScreenshot: NSMenuItem!
   @IBOutlet weak var abLoop: NSMenuItem!
   @IBOutlet weak var fileLoop: NSMenuItem!
   @IBOutlet weak var playlistPanel: NSMenuItem!
@@ -215,7 +215,7 @@ class MenuController: NSObject, NSMenuDelegate {
     }
 
     // -- screenshot
-    screenShot.action = #selector(MainMenuActionHandler.menuSnapshot(_:))
+    screenshot.action = #selector(MainMenuActionHandler.menuSnapshot(_:))
     gotoScreenshotFolder.action = #selector(AppDelegate.menuOpenScreenshotFolder(_:))
     // advancedScreenShot
 
@@ -652,7 +652,7 @@ class MenuController: NSObject, NSMenuDelegate {
       (speedReset, false, ["set", "speed", "1.0"], true, nil, nil),
       (abLoop, false, ["ab-loop"], false, nil, nil),
       (fileLoop, false, ["cycle-values", "loop", "\"inf\"", "\"no\""], false, nil, nil),
-      (screenShot, false, ["screenshot"], false, nil, nil),
+      (screenshot, false, ["screenshot"], false, nil, nil),
       (halfSize, false, ["set", "window-scale", "0.5"], true, nil, nil),
       (normalSize, false, ["set", "window-scale", "1"], true, nil, nil),
       (doubleSize, false, ["set", "window-scale", "2"], true, nil, nil),

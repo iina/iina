@@ -9,6 +9,10 @@
 import Cocoa
 
 fileprivate func sameKeyAction(_ lhs: [String], _ rhs: [String], _ normalizeLastNum: Bool, _ numRange: ClosedRange<Double>?) -> (Bool, Double?) {
+  var lhs = lhs
+  if lhs.first == "seek" && (lhs.last == "exact" || lhs.last == "keyframe") {
+    lhs = [String](lhs.dropLast())
+  }
   guard lhs.count > 0 && lhs.count == rhs.count else {
     return (false, nil)
   }

@@ -1942,7 +1942,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         } else {
           w = CGFloat(Int(strw)!)
         }
-        w = min(minSize.width, w)
+        w = max(minSize.width, w)
         winFrame.size.width = w
         winFrame.size.height = w / winAspect
         widthOrHeightIsSet = true
@@ -1953,7 +1953,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         } else {
           h = CGFloat(Int(strh)!)
         }
-        h = min(minSize.height, h)
+        h = max(minSize.height, h)
         winFrame.size.height = h
         winFrame.size.width = h * winAspect
         widthOrHeightIsSet = true

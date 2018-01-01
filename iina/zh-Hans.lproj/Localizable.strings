@@ -102,8 +102,8 @@
 "menu.sub_delay_down" = "字幕延迟 - %.1fs";
 "menu.sub_delay_up" = "字幕延迟 + %.1fs";
 "menu.volume" = "音量: %d";
-"menu.volume_down" = "音量 - %.0f%";
-"menu.volume_up" = "音量 + %.0f%";
+"menu.volume_down" = "音量 - %.0f%%";
+"menu.volume_up" = "音量 + %.0f%%";
 "osd.abloop.a" = "AB循环：A";
 "osd.abloop.b" = "AB循环：B";
 "osd.abloop.clear" = "AB循环：清除";

@@ -24,6 +24,7 @@
 "cmd.seek" = "탐색";
 "cmd.set" = "설정";
 "cmd.show-progress" = "진행 상황 보이기";
+"cmd.show-text" = "텍스트 보이기";
 "cmd.stop" = "재생 중단";
 "cmd.sub-seek" = "자막 탐색";
 "cmd.write-watch-later-config" = "현재 재생 정보 기록";
@@ -55,19 +56,26 @@
 "opt.chapter" = "챕터";
 "opt.contrast" = "대비";
 "opt.deinterlace" = "디인터레이스";
+"opt.dvb-channel-name" = "DVB 채널명";
+"opt.edition" = "에디션";
 "opt.fullscreen" = "전체 화면";
 "opt.gamma" = "감마";
+"opt.loop" = "반복";
 "opt.mute" = "소리 끔";
 "opt.ontop" = "모든 윈도우 위에 두기";
+"opt.osd-level" = "OSD 모드";
+"opt.panscan" = "팬앤스캔";
 "opt.pause" = "일시 정지";
 "opt.saturation" = "채도";
 "opt.speed" = "재생속도";
 "opt.sub" = "자막 트랙";
-"opt.sub-ass-style-override" = "ASS 스타일 덮어쓰기";
+"opt.sub-ass-style-override" = "ASS 자막 스타일 게";
+"opt.sub-ass-vsfilter-aspect-compat" = "아나모픽 화면에 맞게 ASS 자막 늘이기";
 "opt.sub-delay" = "자막 지연";
 "opt.sub-pos" = "자막 위치";
 "opt.sub-scale" = "자막 크기";
 "opt.sub-visibility" = "자막 보이기";
+"opt.tv-channel" = "TV 채널";
 "opt.video" = "비디오 트랙";
 "opt.video-aspect" = "비디오 화면비";
 "opt.volume" = "음량";
@@ -101,3 +109,4 @@
 "seek-to" = "위치로";
 "to" = "(을)를";
 "yes" = "예";
+

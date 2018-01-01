@@ -681,6 +681,11 @@ class MPVController: NSObject {
       player.syncUI(.time)
       player.syncUI(.chapterList)
 
+    case MPVOption.PlaybackControl.speed:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        player.info.playSpeed = data
+        player.sendOSD(.speed(data))
+      }
 
     case MPVOption.Video.deinterlace:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
@@ -727,11 +732,6 @@ class MPVController: NSObject {
     case MPVOption.Subtitles.subPos:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         player.sendOSD(.subPos(data))
-      }
-
-    case MPVOption.PlaybackControl.speed:
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        player.sendOSD(.speed(data))
       }
 
     case MPVOption.Equalizer.contrast:

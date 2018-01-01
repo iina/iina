@@ -195,16 +195,7 @@ class PlayerCore: NSObject {
     mpv.command(.loadfile, args: [path])
   }
 
-  func startMPV() {
-    // set path for youtube-dl
-    let oldPath = String(cString: getenv("PATH")!)
-    var path = Utility.exeDirURL.path + ":" + oldPath
-    if let customYtdlPath = Preference.string(for: .ytdlSearchPath), !customYtdlPath.isEmpty {
-      path = customYtdlPath + ":" + path
-    }
-    setenv("PATH", path, 1)
-
-    // load keybindings
+  static func loadKeyBindings() {
     let userConfigs = Preference.dictionary(for: .inputConfigs)
     let iinaDefaultConfPath = PrefKeyBindingViewController.defaultConfigs["IINA Default"]!
     var inputConfPath = iinaDefaultConfPath
@@ -213,9 +204,24 @@ class PlayerCore: NSObject {
         inputConfPath = currentConfigFilePath
       }
     }
-    let mapping = KeyMapping.parseInputConf(at: inputConfPath) ?? KeyMapping.parseInputConf(at: iinaDefaultConfPath)!
-    PlayerCore.keyBindings = [:]
-    mapping.forEach { PlayerCore.keyBindings[$0.key] = $0 }
+    setKeyBindings(KeyMapping.parseInputConf(at: inputConfPath) ?? KeyMapping.parseInputConf(at: iinaDefaultConfPath)!)
+  }
+
+  static func setKeyBindings(_ keyMappings: [KeyMapping]) {
+    var keyBindings: [String: KeyMapping] = [:]
+    keyMappings.forEach { keyBindings[$0.key] = $0 }
+    PlayerCore.keyBindings = keyBindings
+    (NSApp.delegate as? AppDelegate)?.menuController.updateKeyEquivalentsFrom(keyMappings)
+  }
+
+  func startMPV() {
+    // set path for youtube-dl
+    let oldPath = String(cString: getenv("PATH")!)
+    var path = Utility.exeDirURL.path + ":" + oldPath
+    if let customYtdlPath = Preference.string(for: .ytdlSearchPath), !customYtdlPath.isEmpty {
+      path = customYtdlPath + ":" + path
+    }
+    setenv("PATH", path, 1)
 
     // set http proxy
     if let proxy = Preference.string(for: .httpProxy), !proxy.isEmpty {
@@ -413,10 +419,10 @@ class PlayerCore: NSObject {
     }
   }
 
-  func screenShot() {
+  func screenshot() {
     let option = Preference.bool(for: .screenshotIncludeSubtitle) ? "subtitles" : "video"
     mpv.command(.screenshot, args: [option])
-    sendOSD(.screenShot)
+    sendOSD(.screenshot)
   }
 
   func abLoop() {
@@ -478,7 +484,6 @@ class PlayerCore: NSObject {
   /** Set speed. */
   func setSpeed(_ speed: Double) {
     mpv.setDouble(MPVOption.PlaybackControl.speed, speed)
-    info.playSpeed = speed
   }
 
   func setVideoAspect(_ aspect: String) {
@@ -651,8 +656,8 @@ class PlayerCore: NSObject {
     getPlaylist()
   }
 
-  func navigateInPlaylist(nextOrPrev: Bool) {
-    mpv.command(nextOrPrev ? .playlistNext : .playlistPrev, checkError: false)
+  func navigateInPlaylist(nextMedia: Bool) {
+    mpv.command(nextMedia ? .playlistNext : .playlistPrev, checkError: false)
   }
 
   func playChapter(_ pos: Int) {
@@ -1345,7 +1350,6 @@ class PlayerCore: NSObject {
     }
     SleepPreventer.allowSleep()
   }
-
 }
 
 

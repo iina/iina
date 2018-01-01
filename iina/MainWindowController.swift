@@ -784,7 +784,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         if returnValue == 0 {
           // screenshot
           if kb.action[0] == MPVCommand.screenshot.rawValue {
-            displayOSD(.screenShot)
+            displayOSD(.screenshot)
           }
         } else {
           Utility.log("Return value \(returnValue) when executing key command \(kb.rawAction)")
@@ -1331,6 +1331,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   // MARK: - Window delegate: Size
+
+  func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
+    if frameSize.height < minSize.height || frameSize.width < minSize.width {
+      return sender.frame.size
+    }
+    return frameSize
+  }
 
   func windowDidResize(_ notification: Notification) {
     guard let window = window else { return }
@@ -1942,7 +1949,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         } else {
           w = CGFloat(Int(strw)!)
         }
-        w = min(minSize.width, w)
+        w = max(minSize.width, w)
         winFrame.size.width = w
         winFrame.size.height = w / winAspect
         widthOrHeightIsSet = true
@@ -1953,7 +1960,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         } else {
           h = CGFloat(Int(strh)!)
         }
-        h = min(minSize.height, h)
+        h = max(minSize.height, h)
         winFrame.size.height = h
         winFrame.size.width = h * winAspect
         widthOrHeightIsSet = true
@@ -2508,6 +2515,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.menuShowPlaylistPanel(.dummy)
     case .chapterPanel:
       self.menuShowChaptersPanel(.dummy)
+    case .toggleMusicMode:
+      self.menuSwitchToMiniPlayer(.dummy)
     case .flip:
       self.menuActionHandler.menuToggleFlip(.dummy)
     case .mirror:
@@ -2520,6 +2529,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.menuActionHandler.menuFindOnlineSub(.dummy)
     case .saveDownloadedSub:
       self.menuActionHandler.saveDownloadedSub(.dummy)
+    case .biggerWindow:
+      let item = NSMenuItem()
+      item.tag = 11
+      self.menuChangeWindowSize(item)
+    case .smallerWindow:
+      let item = NSMenuItem()
+      item.tag = 10
+      self.menuChangeWindowSize(item)
+    case .fitToScreen:
+      let item = NSMenuItem()
+      item.tag = 3
+      self.menuChangeWindowSize(item)
     }
   }
 

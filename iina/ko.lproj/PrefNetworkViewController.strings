@@ -43,6 +43,9 @@
 /* Class = "NSButtonCell"; title = "Enable youtube-dl"; ObjectID = "cyH-Md-FAD"; */
 "cyH-Md-FAD.title" = "youtube-dl 사용";
 
+/* Class = "NSTextFieldCell"; placeholderString = "/usr/local/bin"; ObjectID = "Smc-bL-Dvq"; */
+"Smc-bL-Dvq.placeholderString" = "/usr/local/bin";
+
 /* Class = "NSTextFieldCell"; title = "Cache buffer size (KB):"; ObjectID = "dDD-g3-54w"; */
 "dDD-g3-54w.title" = "캐시 버퍼 크기 (KB):";
 
@@ -63,6 +66,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Network:"; ObjectID = "yrh-Jm-Q4e"; */
 "yrh-Jm-Q4e.title" = "네트워크:";
+
+/* Class = "NSTextFieldCell"; title = "http://"; ObjectID = "WTb-HK-6vU"; */
+"WTb-HK-6vU.title" = "http://";
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
 "zCD-9d-ziV.title" = "추가 옵션";

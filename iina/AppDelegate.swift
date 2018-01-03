@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import MediaPlayer
 import MASPreferences
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
@@ -27,6 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
    Mainly used to distinguish normal launches from others triggered by drag-and-dropping files.
    */
   var openFileCalled = false
+  var shouldIgnoreOpenFile = false
   /** Cached URL when launching from URL scheme. */
   var pendingURL: String?
 
@@ -34,6 +36,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   private var pendingFilesForOpenFile: [String] = []
   /** The timer for `OpenFileRepeatTime` and `application(_:openFile:)`. */
   private var openFileTimer: Timer?
+
+  private var commandLineStatus = CommandLineStatus()
 
   // Windows
 
@@ -72,18 +76,65 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBOutlet weak var dockMenu: NSMenu!
 
+  private func getReady() {
+    registerUserDefaultValues()
+    menuController.bindMenuItems()
+    PlayerCore.loadKeyBindings()
+    isReady = true
+  }
+
   // MARK: - App Delegate
 
   func applicationWillFinishLaunching(_ notification: Notification) {
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
+
+    // handle arguments
+    let arguments = ProcessInfo.processInfo.arguments.dropFirst()
+    guard arguments.count > 0 else { return }
+
+    var iinaArgs: [String] = []
+    var iinaArgFilenames: [String] = []
+    var dropNextArg = false
+
+    for arg in arguments {
+      if dropNextArg {
+        dropNextArg = false
+        continue
+      }
+      if arg.first == "-" {
+        if arg[arg.index(after: arg.startIndex)] == "-" {
+          // args starting with --
+          iinaArgs.append(arg)
+        } else {
+          // args starting with -
+          dropNextArg = true
+        }
+      } else {
+        // assume args starting with nothing is a filename
+        iinaArgFilenames.append(arg)
+      }
+    }
+
+    commandLineStatus.parseArguments(iinaArgs)
+
+    let (version, build) = Utility.iinaVersion()
+    print("IINA \(version) Build \(build)")
+
+    guard !iinaArgFilenames.isEmpty || commandLineStatus.isStdin else {
+      print("This binary is not intended for being used as a command line tool. Please use the bundled iina-cli.")
+      print("Please ignore this message if you are running in a debug environment.")
+      return
+    }
+
+    shouldIgnoreOpenFile = true
+    commandLineStatus.isCommandLine = true
+    commandLineStatus.filenames = iinaArgFilenames
   }
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     if !isReady {
-      UserDefaults.standard.register(defaults: Preference.defaultPreference)
-      menuController.bindMenuItems()
-      isReady = true
+      getReady()
     }
 
     // show alpha in color panels
@@ -95,13 +146,48 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       NSWindow.allowsAutomaticWindowTabbing = false
     }
 
+    if #available(macOS 10.13, *) {
+      if RemoteCommandController.useSystemMediaControl {
+        RemoteCommandController.setup()
+        NowPlayingInfoManager.updateState(.playing)
+      }
+    }
+
     // if have pending open request
     if let url = pendingURL {
       parsePendingURL(url)
     }
 
-    // check whether showing the welcome window after 0.1s
-    Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(self.checkForShowingInitialWindow), userInfo: nil, repeats: false)
+    let _ = PlayerCore.first
+
+    if !commandLineStatus.isCommandLine {
+      // check whether showing the welcome window after 0.1s
+      Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(self.checkForShowingInitialWindow), userInfo: nil, repeats: false)
+    } else {
+      let getNewPlayerCore = { () -> PlayerCore in
+        let pc = PlayerCore.newPlayerCore
+        self.commandLineStatus.assignMPVArguments(to: pc)
+        return pc
+      }
+      if commandLineStatus.isStdin {
+        getNewPlayerCore().openURLString("-")
+      } else {
+        let validFileURLs: [URL] = commandLineStatus.filenames.flatMap { filename in
+          if Regex.url.matches(filename) {
+            return URL(string: filename)
+          } else {
+            return FileManager.default.fileExists(atPath: filename) ? URL(fileURLWithPath: filename) : nil
+          }
+        }
+        if commandLineStatus.openSeparateWindows {
+          validFileURLs.forEach { url in
+            let _ = getNewPlayerCore().openURLs([url])
+          }
+        } else {
+          let _ = getNewPlayerCore().openURLs(validFileURLs)
+        }
+      }
+    }
 
     NSApplication.shared.servicesProvider = self
   }
@@ -115,7 +201,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   private func showWelcomeWindow() {
-    let _ = PlayerCore.first
     let actionRawValue = Preference.integer(for: .actionAfterLaunch)
     let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
     switch action {
@@ -126,14 +211,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     default:
       break
     }
-  }
-
-  func applicationWillTerminate(_ aNotification: Notification) {
-    // Insert code here to tear down your application
-  }
-
-  func applicationDidResignActive(_ notification: Notification) {
-
   }
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -171,12 +248,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @objc
   func handleOpenFile() {
     if !isReady {
-      UserDefaults.standard.register(defaults: Preference.defaultPreference)
-      menuController.bindMenuItems()
-      isReady = true
+      getReady()
+    }
+    // if launched from command line, should ignore openFile once
+    if shouldIgnoreOpenFile {
+      shouldIgnoreOpenFile = false
+      return
     }
     // open pending files
     let urls = pendingFilesForOpenFile.map { URL(fileURLWithPath: $0) }
+
     pendingFilesForOpenFile.removeAll()
     if let openedFileCount = PlayerCore.activeOrNew.openURLs(urls), openedFileCount == 0 {
       Utility.showAlert("nothing_to_open")
@@ -185,6 +266,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   // MARK: - Accept dropped string and URL
 
+  @objc
   func droppedText(_ pboard: NSPasteboard, userData:String, error: NSErrorPointer) {
     if let url = pboard.string(forType: .string) {
       openFileCalled = true
@@ -314,6 +396,116 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func setSelfAsDefaultAction(_ sender: AnyObject) {
     Utility.setSelfAsDefaultForAllFileTypes()
+  }
+
+  private func registerUserDefaultValues() {
+    UserDefaults.standard.register(defaults: [String: Any](uniqueKeysWithValues: Preference.defaultPreference.map { ($0.0.rawValue, $0.1) }))
+  }
+
+}
+
+
+struct CommandLineStatus {
+  var isCommandLine = false
+  var isStdin = false
+  var openSeparateWindows = false
+  var mpvArguments: [(String, String)] = []
+  var iinaArguments: [(String, String)] = []
+  var filenames: [String] = []
+
+  mutating func parseArguments(_ args: [String]) {
+    mpvArguments.removeAll()
+    iinaArguments.removeAll()
+    for arg in args {
+      let splitted = arg.dropFirst(2).split(separator: "=", maxSplits: 2)
+      let name = String(splitted[0])
+      if (name.hasPrefix("mpv-")) {
+        // mpv args
+        if splitted.count <= 1 {
+          mpvArguments.append((String(name.dropFirst(4)), "yes"))
+        } else {
+          mpvArguments.append((String(name.dropFirst(4)), String(splitted[1])))
+        }
+      } else {
+        // other args
+        if splitted.count <= 1 {
+          iinaArguments.append((name, "yes"))
+        } else {
+          iinaArguments.append((name, String(splitted[1])))
+        }
+        if name == "stdin" {
+          isStdin = true
+        }
+        if name == "separate-windows" {
+          openSeparateWindows = true
+        }
+      }
+    }
+  }
+
+  func assignMPVArguments(to playerCore: PlayerCore) {
+    for arg in mpvArguments {
+      playerCore.mpv.setString(arg.0, arg.1)
+    }
+  }
+}
+
+@available(OSX 10.13, *)
+class RemoteCommandController {
+  static let remoteCommand = MPRemoteCommandCenter.shared()
+
+  static var useSystemMediaControl: Bool = Preference.bool(for: .useMediaKeys)
+
+  static func setup() {
+    remoteCommand.playCommand.addTarget { _ in
+      PlayerCore.lastActive.togglePause(false)
+      return .success
+    }
+    remoteCommand.pauseCommand.addTarget { _ in
+      PlayerCore.lastActive.togglePause(true)
+      return .success
+    }
+    remoteCommand.togglePlayPauseCommand.addTarget { _ in
+      PlayerCore.lastActive.togglePause(nil)
+      return .success
+    }
+    remoteCommand.stopCommand.addTarget { _ in
+      PlayerCore.lastActive.stop()
+      return .success
+    }
+    remoteCommand.nextTrackCommand.addTarget { _ in
+      PlayerCore.lastActive.navigateInPlaylist(nextMedia: true)
+      return .success
+    }
+    remoteCommand.previousTrackCommand.addTarget { _ in
+      PlayerCore.lastActive.navigateInPlaylist(nextMedia: false)
+      return .success
+    }
+    remoteCommand.changeRepeatModeCommand.addTarget { _ in
+      PlayerCore.lastActive.togglePlaylistLoop()
+      return .success
+    }
+    remoteCommand.changeShuffleModeCommand.isEnabled = false
+    // remoteCommand.changeShuffleModeCommand.addTarget {})
+    remoteCommand.changePlaybackRateCommand.supportedPlaybackRates = [0.5, 1, 1.5, 2]
+    remoteCommand.changePlaybackRateCommand.addTarget { event in
+      PlayerCore.lastActive.setSpeed(Double((event as! MPChangePlaybackRateCommandEvent).playbackRate))
+      return .success
+    }
+    remoteCommand.skipForwardCommand.preferredIntervals = [15]
+    remoteCommand.skipForwardCommand.addTarget { event in
+      PlayerCore.lastActive.seek(relativeSecond: (event as! MPSkipIntervalCommandEvent).interval, option: .exact)
+      return .success
+    }
+    remoteCommand.skipBackwardCommand.preferredIntervals = [15]
+    remoteCommand.skipBackwardCommand.addTarget { event in
+      PlayerCore.lastActive.seek(relativeSecond: -(event as! MPSkipIntervalCommandEvent).interval, option: .exact)
+      return .success
+    }
+    remoteCommand.changePlaybackPositionCommand.addTarget { event in
+      PlayerCore.lastActive.seek(absoluteSecond: (event as! MPChangePlaybackPositionCommandEvent).positionTime)
+      return .success
+    }
   }
 
 }

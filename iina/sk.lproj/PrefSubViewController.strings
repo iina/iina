@@ -1,0 +1,186 @@
+
+/* Class = "NSTextFieldCell"; title = "Online Subtitles:"; ObjectID = "0fB-es-DmV"; */
+"0fB-es-DmV.title" = "Online Titulky:";
+
+/* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
+"1Tq-5k-o6R.title" = "Hore";
+
+/* Class = "NSTabViewItem"; label = "General"; ObjectID = "29W-lw-0pD"; */
+"29W-lw-0pD.label" = "Všeobecné";
+
+/* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
+"2XY-Un-0Fg.title" = "Zobraziť titulky v čiernych pruhoch pri prehrávaní na celej obrazovke";
+
+/* Class = "NSMenuItem"; title = "OpenSubtitles.org"; ObjectID = "39k-VH-tOz"; */
+"39k-VH-tOz.title" = "OpenSubtitles.org";
+
+/* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
+"3H8-Ei-cTm.title" = "strip";
+
+/* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
+"4Tb-Yh-PdP.title" = "Pozícia:";
+
+/* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
+"6i0-Sx-V7F.title" = "Dole";
+
+/* Class = "NSMenuItem"; title = "Shooter.cn"; ObjectID = "7YD-rw-eCZ"; */
+"7YD-rw-eCZ.title" = "Shooter.cn";
+
+/* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
+"7pf-Kb-TNr.title" = "Titulky majú prednosť ak názov súboru obsahuje:";
+
+/* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "8hj-ki-R0h"; */
+"8hj-ki-R0h.title" = "Veľkosť tituliek prispôsobiť veľkosti okna";
+
+/* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "9EP-XB-lyO"; */
+"9EP-XB-lyO.title" = "Rozmiestnenie písma:";
+
+/* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "9N4-Zg-M7m"; */
+"9N4-Zg-M7m.title" = "Vertikálna pozícia:";
+
+/* Class = "NSBox"; title = "Font"; ObjectID = "9pv-1r-nuH"; */
+"9pv-1r-nuH.title" = "Font";
+
+/* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "ALz-LB-8sf"; */
+"ALz-LB-8sf.title" = "Y:";
+
+/* Class = "NSBox"; title = "Shadow"; ObjectID = "BgE-Kk-MXC"; */
+"BgE-Kk-MXC.title" = "Tieň";
+
+/* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
+"C4C-XP-i2S.title" = "Font:";
+
+/* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "CdS-9J-f2h"; */
+"CdS-9J-f2h.title" = " X:";
+
+/* Class = "NSMenuItem"; title = "Right"; ObjectID = "Gie-38-Kk4"; */
+"Gie-38-Kk4.title" = "Vpravo";
+
+/* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "Iax-cc-YIO"; */
+"Iax-cc-YIO.title" = "OpenSubtitles účet:";
+
+/* Class = "NSTextFieldCell"; title = "%"; ObjectID = "JZo-4H-owW"; */
+"JZo-4H-owW.title" = "%";
+
+/* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "LiG-iV-AQK"; */
+"LiG-iV-AQK.title" = "Ostatné:";
+
+/* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
+"Luv-2B-9v8.title" = "Adresáre sú oddelené dvojbodkou (:). Relatívne cesty a \"wildcards\" (*) sú povolené.";
+
+/* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
+"Mk1-sv-QB8.title" = "Slová oddeľte čiarkov.";
+
+/* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
+"OcF-0z-7qe.title" = "Ak povolené, všetky ASS titulky budú vykreslené pomocou nasledujúcich štýlou.";
+
+/* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
+"Qda-dp-nhg.title" = "Titulky:";
+
+/* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
+"QsS-wD-2hY.title" = "Taktiež hľadať titulky v nasledujúcich adresároch:";
+
+/* Class = "NSTabViewItem"; label = "Style and Position"; ObjectID = "R5q-Xd-PPr"; */
+"R5q-Xd-PPr.label" = "Vzhľad a Pozícia";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
+"SIh-Sv-6XI.title" = "Farba:";
+
+/* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "TPK-CJ-HX7"; */
+"TPK-CJ-HX7.title" = "Stiahnuť titulky z:";
+
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "Vbl-Im-3UI"; */
+"Vbl-Im-3UI.title" = "Veľkosť:";
+
+/* Class = "NSButtonCell"; title = "Login"; ObjectID = "WHk-sk-gmK"; */
+"WHk-sk-gmK.title" = "Prihlásenie";
+
+/* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "XiL-eE-jah"; */
+"XiL-eE-jah.title" = "Titulky nájsť automaticky";
+
+/* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "Y75-4k-2Du"; */
+"Y75-4k-2Du.title" = "Predvolené kódovanie:";
+
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
+"Z2M-dh-eq1.title" = "Nastavenie bude uložené ako ISO 639-2 jazokový kód a bude fungovať s mpv a opensubtitles.";
+
+/* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
+"aO9-D6-KG8.title" = "Rozmazanie:";
+
+/* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "azJ-oz-BKZ"; */
+"azJ-oz-BKZ.title" = "Sans-Serif";
+
+/* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "cov-Uy-wnc"; */
+"cov-Uy-wnc.title" = "Neprihlásený";
+
+/* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "dtP-9o-yhy"; */
+"dtP-9o-yhy.title" = "Offset:";
+
+/* Class = "NSMenuItem"; title = "Center"; ObjectID = "e0e-dB-Ir6"; */
+"e0e-dB-Ir6.title" = "Stred";
+
+/* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "eYO-c0-Rjp"; */
+"eYO-c0-Rjp.title" = "Pozadie:";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "egf-g3-b7a"; */
+"egf-g3-b7a.title" = "Box";
+
+/* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
+"gAq-Vr-hRY.title" = "Úroveň prepísania:";
+
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "gkc-qt-sD9"; */
+"gkc-qt-sD9.title" = "Veľkosť:";
+
+/* Class = "NSButtonCell"; title = "𝐁"; ObjectID = "hEk-7E-10q"; */
+"hEk-7E-10q.title" = "𝐁";
+
+/* Class = "NSBox"; title = "Align"; ObjectID = "kvJ-Tj-KMb"; */
+"kvJ-Tj-KMb.title" = "Zarovnať";
+
+/* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "l7l-ZO-W79"; */
+"l7l-ZO-W79.title" = " X:";
+
+/* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "mFm-Q6-aja"; */
+"mFm-Q6-aja.title" = "ASS titulky:";
+
+/* Class = "NSButtonCell"; title = "Choose..."; ObjectID = "nH7-kO-S15"; */
+"nH7-kO-S15.title" = "Vybrať si...";
+
+/* Class = "NSButtonCell"; title = "𝐼"; ObjectID = "pNF-Fw-QtY"; */
+"pNF-Fw-QtY.title" = "𝐼";
+
+/* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
+"pRe-wv-VVi.title" = "Okraje";
+
+/* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "rZf-bj-qbV"; */
+"rZf-bj-qbV.title" = "Ignorovať ASS štýly";
+
+/* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
+"raf-Yu-ck0.title" = "Automaticky nahrať:";
+
+/* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
+"slU-Ox-aeF.title" = "Stred";
+
+/* Class = "NSBox"; title = "Border"; ObjectID = "t5n-mc-dss"; */
+"t5n-mc-dss.title" = "Okraj";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
+"u31-eV-Arr.title" = "Vypnuté";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
+"vDc-dw-liI.title" = "Farba:";
+
+/* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
+"xGf-fF-4Hx.title" = "Y:";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "xid-E9-FC9"; */
+"xid-E9-FC9.title" = "Farba:";
+
+/* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
+"y1E-JR-KRI.title" = "Titulky obsahujú názov súboru";
+
+/* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "zaE-bH-XfT"; */
+"zaE-bH-XfT.title" = "Preferovaný jazyk:";
+
+/* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
+"zml-kt-LN8.title" = "Vľavo";

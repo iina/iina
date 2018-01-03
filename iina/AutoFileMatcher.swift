@@ -156,7 +156,7 @@ class AutoFileMatcher {
           minSub = sp
         }
       }
-      let threshold = UInt(Double(vp.characters.count + minSub.characters.count) * 0.6)
+      let threshold = UInt(Double(vp.count + minSub.count) * 0.6)
       if closestVideoForSub[minSub] == vp && minDist < threshold {
         matchedPrefixes[vp] = minSub
       }
@@ -258,7 +258,7 @@ class AutoFileMatcher {
         var minDistToVideo: UInt = .max
         for video in unmatchedVideos {
           try checkTicket()
-          let threshold = UInt(Double(video.filename.characters.count + sub.filename.characters.count) * 0.6)
+          let threshold = UInt(Double(video.filename.count + sub.filename.count) * 0.6)
           let rawDist = ObjcUtils.levDistance(video.prefix, and: sub.prefix) + ObjcUtils.levDistance(video.suffix, and: sub.suffix)
           let dist: UInt = rawDist < threshold ? rawDist : UInt.max
           sub.dist[video] = dist

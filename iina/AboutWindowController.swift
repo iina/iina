@@ -34,10 +34,9 @@ class AboutWindowController: NSWindowController {
     window?.titlebarAppearsTransparent = true
     window?.backgroundColor = .white
 
-    let infoDic = Bundle.main.infoDictionary!
     iconImageView.image = NSApp.applicationIconImage
-    let version = infoDic["CFBundleShortVersionString"] as! String
-    let build = infoDic["CFBundleVersion"] as! String
+
+    let (version, build) = Utility.iinaVersion()
     versionLabel.stringValue = "\(version) Build \(build)"
     // let copyright = infoDic["NSHumanReadableCopyright"] as! String
 

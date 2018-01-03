@@ -152,7 +152,11 @@ class MPVController: NSObject {
 
     setUserOption(PK.screenshotTemplate, type: .string, forName: MPVOption.Screenshot.screenshotTemplate)
 
-    setUserOption(PK.useMediaKeys, type: .bool, forName: MPVOption.Input.inputMediaKeys)
+    if #available(macOS 10.13, *) {
+      chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, no_str))
+    } else {
+      setUserOption(PK.useMediaKeys, type: .bool, forName: MPVOption.Input.inputMediaKeys)
+    }
     setUserOption(PK.useAppleRemote, type: .bool, forName: MPVOption.Input.inputAppleremote)
 
     setUserOption(PK.keepOpenOnFileEnd, type: .other, forName: MPVOption.Window.keepOpen) { key in
@@ -170,6 +174,8 @@ class MPVController: NSObject {
     chkErr(mpv_set_option_string(mpv, "watch-later-directory", Utility.watchLaterURL.path))
     setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.ProgramBehavior.savePositionOnQuit)
     setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback")
+
+    setUserOption(.initialWindowSizePosition, type: .string, forName: MPVOption.Window.geometry)
 
     // - Codec
 
@@ -202,8 +208,8 @@ class MPVController: NSObject {
       return v ? level.string : "yes"
     }
 
-    setUserOption(PK.ignoreAssStyles, type: .other, forName: MPVOption.Subtitles.subAssStyleOverride, transformer: subOverrideHandler)
-    setUserOption(PK.subOverrideLevel, type: .other, forName: MPVOption.Subtitles.subAssStyleOverride, transformer: subOverrideHandler)
+    setUserOption(PK.ignoreAssStyles, type: .other, forName: MPVOption.Subtitles.subAssOverride, transformer: subOverrideHandler)
+    setUserOption(PK.subOverrideLevel, type: .other, forName: MPVOption.Subtitles.subAssOverride, transformer: subOverrideHandler)
 
     setUserOption(PK.subTextFont, type: .string, forName: MPVOption.Subtitles.subFont)
     setUserOption(PK.subTextSize, type: .int, forName: MPVOption.Subtitles.subFontSize)
@@ -675,6 +681,11 @@ class MPVController: NSObject {
       player.syncUI(.time)
       player.syncUI(.chapterList)
 
+    case MPVOption.PlaybackControl.speed:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        player.info.playSpeed = data
+        player.sendOSD(.speed(data))
+      }
 
     case MPVOption.Video.deinterlace:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
@@ -721,11 +732,6 @@ class MPVController: NSObject {
     case MPVOption.Subtitles.subPos:
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         player.sendOSD(.subPos(data))
-      }
-
-    case MPVOption.PlaybackControl.speed:
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        player.sendOSD(.speed(data))
       }
 
     case MPVOption.Equalizer.contrast:

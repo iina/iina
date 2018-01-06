@@ -1,4 +1,4 @@
-#/usr/bin/swift
+#!/usr/bin/xcrun swift
 
 import Cocoa
 
@@ -44,7 +44,7 @@ class Regex {
 let ignorePlaceHolderTitle = true
 let checkRedundantKey = false
 
-let languages = ["de", "fr", "it", "ja", "ko", "pl", "zh-Hans", "zh-Hant", "ru", "tr", "es", "uk", "nl"]
+let languages = ["de", "fr", "it", "ja", "ko", "pl", "zh-Hans", "zh-Hant", "ru", "tr", "es", "uk", "nl", "sk", "da"]
 var testLanguages: [String] = []
 
 let ignoredStrings = ["Label", "Multiline Label", "Text Cell", "Box", "Table View Cell", "Title", "Item", "Context Menu", "0:00:00", "00:00 AM", "9:99:99", "999:99"]
@@ -114,7 +114,7 @@ func makeSure(fileExists file: String, withExtension ext: String, basedOn base: 
   for lang in testLanguages {
     if base == .zhHans && lang == "zh-Hans" { continue }
     guard lang.directory.file(fullname).exists else {
-      print("  [x][\(lang)] File \"\(fullname)\" doesn't extst")
+      print("  [x][\(lang)] File \"\(fullname)\" doesn't exist")
       stat[lang]! += 1
       continue
     }

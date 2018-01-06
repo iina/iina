@@ -73,11 +73,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** The control view for interactive mode. */
   var cropSettingsView: CropBoxViewController?
 
-  /** The current/remaining time label in Touch Bar. */
-  lazy var sizingTouchBarTextField: NSTextField = {
-    return NSTextField()
-  }()
-
   private lazy var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = {
     return NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
   }()
@@ -98,9 +93,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** For mpv's `geometry` option. We cache the parsed structure
    so never need to parse it every time. */
-  var cachedGeometry: PlayerCore.GeometryDef?
-
-  var touchBarPosLabelWidthLayout: NSLayoutConstraint?
+  var cachedGeometry: GeometryDef?
 
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
@@ -132,6 +125,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var isMouseInSlider: Bool = false
 
   var isFastforwarding: Bool = false
+
+  var isPausedDueToInactive: Bool = false
+  var isPausedDueToMiniaturization: Bool = false
 
   var lastMagnification: CGFloat = 0.0
 
@@ -251,6 +247,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private var doubleClickAction: Preference.MouseClickAction
   private var pinchAction: Preference.PinchAction
   private var followGlobalSeekTypeWhenAdjustSlider: Bool
+  var displayTimeAndBatteryInFullScreen: Bool
 
   /** A list of observed preference keys. */
   private let observedPrefKeys: [Preference.Key] = [
@@ -270,8 +267,126 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     .blackOutMonitor,
     .alwaysFloatOnTop,
     .useLegacyFullScreen,
-    .maxVolume
+    .maxVolume,
+    .displayTimeAndBatteryInFullScreen
   ]
+
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
+    guard let keyPath = keyPath, let change = change else { return }
+
+    switch keyPath {
+
+    case PK.themeMaterial.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        setMaterial(Preference.Theme(rawValue: newValue))
+      }
+
+    case PK.oscPosition.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        setupOnScreenController(position: Preference.OSCPosition(rawValue: newValue) ?? .floating)
+      }
+
+    case PK.showChapterPos.rawValue:
+      if let newValue = change[.newKey] as? Bool {
+        (playSlider.cell as! PlaySliderCell).drawChapters = newValue
+      }
+
+    case PK.useExactSeek.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        useExtractSeek = Preference.SeekOption(rawValue: newValue)!
+      }
+
+    case PK.relativeSeekAmount.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        relativeSeekAmount = newValue.constrain(min: 1, max: 5)
+      }
+
+    case PK.volumeScrollAmount.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        volumeScrollAmount = newValue.constrain(min: 1, max: 4)
+      }
+
+    case PK.verticalScrollAction.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        verticalScrollAction = Preference.ScrollAction(rawValue: newValue)!
+      }
+
+    case PK.horizontalScrollAction.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        horizontalScrollAction = Preference.ScrollAction(rawValue: newValue)!
+      }
+
+    case PK.arrowButtonAction.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)!
+        updateArrowButtonImage()
+      }
+
+    case PK.singleClickAction.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        singleClickAction = Preference.MouseClickAction(rawValue: newValue)!
+      }
+
+    case PK.doubleClickAction.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        doubleClickAction = Preference.MouseClickAction(rawValue: newValue)!
+      }
+
+    case PK.pinchAction.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        pinchAction = Preference.PinchAction(rawValue: newValue)!
+      }
+
+    case PK.showRemainingTime.rawValue:
+      if let newValue = change[.newKey] as? Bool {
+        rightLabel.mode = newValue ? .remaining : .duration
+        if #available(OSX 10.12.2, *) {
+          player.touchBarSupport.touchBarCurrentPosLabel?.mode = newValue ? .remaining : .current
+        }
+      }
+
+    case PK.blackOutMonitor.rawValue:
+      if let newValue = change[.newKey] as? Bool {
+        if isInFullScreen {
+          if newValue {
+            blackOutOtherMonitors()
+          } else {
+            removeBlackWindow()
+          }
+        }
+      }
+
+    case PK.alwaysFloatOnTop.rawValue:
+      if let newValue = change[.newKey] as? Bool {
+        if !player.info.isPaused {
+          self.isOntop = newValue
+          setWindowFloatingOnTop(newValue)
+        }
+      }
+
+    case PK.useLegacyFullScreen.rawValue:
+      resetCollectionBehavior()
+
+    case PK.maxVolume.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        volumeSlider.maxValue = Double(newValue)
+        if self.player.mpv.getDouble(MPVOption.Audio.volume) > Double(newValue) {
+          self.player.mpv.setDouble(MPVOption.Audio.volume, Double(newValue))
+        }
+      }
+
+    case PK.displayTimeAndBatteryInFullScreen.rawValue:
+      if let newValue = change[.newKey] as? Bool {
+        displayTimeAndBatteryInFullScreen = newValue
+        if !newValue {
+          additionalInfoView.isHidden = true
+        }
+      }
+
+    default:
+      return
+    }
+  }
 
   // MARK: - Outlets
 
@@ -321,6 +436,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bufferSpin: NSProgressIndicator!
   @IBOutlet weak var bufferDetailLabel: NSTextField!
   @IBOutlet var thumbnailPeekView: ThumbnailPeekView!
+  @IBOutlet weak var additionalInfoView: NSVisualEffectView!
+  @IBOutlet weak var additionalInfoLabel: NSTextField!
 
   @IBOutlet weak var oscFloatingTopView: NSStackView!
   @IBOutlet weak var oscFloatingBottomView: NSView!
@@ -348,10 +465,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var osdAccessoryProgress: NSProgressIndicator!
 
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
-
-  weak var touchBarPlaySlider: TouchBarPlaySlider?
-  weak var touchBarPlayPauseBtn: NSButton?
-  weak var touchBarCurrentPosLabel: DurationDisplayTextField?
 
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
 
@@ -382,6 +495,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     doubleClickAction = Preference.enum(for: .doubleClickAction)
     pinchAction = Preference.enum(for: .pinchAction)
     followGlobalSeekTypeWhenAdjustSlider = Preference.bool(for: .followGlobalSeekTypeWhenAdjustSlider)
+    displayTimeAndBatteryInFullScreen = Preference.bool(for: .displayTimeAndBatteryInFullScreen)
 
     super.init(window: nil)
   }
@@ -435,6 +549,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fragControlView.addView(fragControlViewRightView, in: .center)
     setupOnScreenController(position: oscPosition)
 
+    updateArrowButtonImage()
+
     // fade-able views
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
     fadeableViews.append(titleBarView)
@@ -472,12 +588,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     thumbnailPeekView.isHidden = true
 
     // other initialization
+    cachedScreenCount = NSScreen.screens.count
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
       $0?.state = .active
     }
     // hide other views
     osdVisualEffectView.isHidden = true
     osdVisualEffectView.layer?.cornerRadius = 10
+    additionalInfoView.layer?.cornerRadius = 10
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
     timePreviewWhenSeek.isHidden = true
@@ -512,22 +630,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     notificationCenter(.default, addObserverfor: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
+      let screenCount = NSScreen.screens.count
       if self.isInFullScreen && Preference.bool(for: .blackOutMonitor) {
-        if NSScreen.screens.count != self.cachedScreenCount {
+        if screenCount != self.cachedScreenCount {
           self.removeBlackWindow()
           self.blackOutOtherMonitors()
         }
       }
-    }
-    notificationCenter(NSWorkspace.shared.notificationCenter, addObserverfor: NSWorkspace.activeSpaceDidChangeNotification) { [unowned self] _ in
-      if self.isInFullScreen && Preference.bool(for: .blackOutMonitor) {
-        if self.window?.isOnActiveSpace ?? false {
-          self.removeBlackWindow()
-          self.blackOutOtherMonitors()
-        } else {
-          self.removeBlackWindow()
-        }
-      }
+      self.cachedScreenCount = screenCount
     }
 
   }
@@ -551,114 +661,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       notificationObservers[center] = []
     }
     notificationObservers[center]!.append(observer)
-  }
-
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath = keyPath, let change = change else { return }
-
-    switch keyPath {
-
-    case PK.themeMaterial.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        setMaterial(Preference.Theme(rawValue: newValue))
-      }
-
-    case PK.oscPosition.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        setupOnScreenController(position: Preference.OSCPosition(rawValue: newValue) ?? .floating)
-      }
-
-    case PK.showChapterPos.rawValue:
-      if let newValue = change[.newKey] as? Bool {
-        (playSlider.cell as! PlaySliderCell).drawChapters = newValue
-      }
-
-    case PK.useExactSeek.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        useExtractSeek = Preference.SeekOption(rawValue: newValue)!
-      }
-
-    case PK.relativeSeekAmount.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        relativeSeekAmount = newValue.constrain(min: 1, max: 5)
-      }
-
-    case PK.volumeScrollAmount.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        volumeScrollAmount = newValue.constrain(min: 1, max: 4)
-      }
-
-    case PK.verticalScrollAction.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        verticalScrollAction = Preference.ScrollAction(rawValue: newValue)!
-      }
-
-    case PK.horizontalScrollAction.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        horizontalScrollAction = Preference.ScrollAction(rawValue: newValue)!
-      }
-
-    case PK.arrowButtonAction.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)!
-      }
-
-    case PK.arrowButtonAction.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)!
-      }
-
-    case PK.singleClickAction.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        singleClickAction = Preference.MouseClickAction(rawValue: newValue)!
-      }
-
-    case PK.doubleClickAction.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        doubleClickAction = Preference.MouseClickAction(rawValue: newValue)!
-      }
-
-    case PK.pinchAction.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        pinchAction = Preference.PinchAction(rawValue: newValue)!
-      }
-
-    case PK.showRemainingTime.rawValue:
-      if let newValue = change[.newKey] as? Bool {
-        rightLabel.mode = newValue ? .remaining : .duration
-        touchBarCurrentPosLabel?.mode = newValue ? .remaining : .current
-      }
-    
-    case PK.blackOutMonitor.rawValue:
-      if let newValue = change[.newKey] as? Bool {
-        if isInFullScreen {
-          if newValue {
-            blackOutOtherMonitors()
-          } else {
-            removeBlackWindow()
-          }
-        }
-      }
-
-    case PK.alwaysFloatOnTop.rawValue:
-      if let newValue = change[.newKey] as? Bool {
-        if !player.info.isPaused {
-          self.isOntop = newValue
-          setWindowFloatingOnTop(newValue)
-        }
-      }
-
-    case PK.useLegacyFullScreen.rawValue:
-      resetCollectionBehavior()
-
-    case PK.maxVolume.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        volumeSlider.maxValue = Double(newValue)
-      }
-
-    default:
-      return
-    }
   }
 
   private func setupOnScreenController(position newPosition: Preference.OSCPosition) {
@@ -782,7 +784,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         if returnValue == 0 {
           // screenshot
           if kb.action[0] == MPVCommand.screenshot.rawValue {
-            displayOSD(.screenShot)
+            displayOSD(.screenshot)
           }
         } else {
           Utility.log("Return value \(returnValue) when executing key command \(kb.rawAction)")
@@ -1249,6 +1251,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         self.videoView.videoLayer.display()
       }
     }
+
+    if Preference.bool(for: .blackOutMonitor) {
+      blackOutOtherMonitors()
+    }
+
+    if Preference.bool(for: .displayTimeAndBatteryInFullScreen) {
+      fadeableViews.append(additionalInfoView)
+    }
+
+    if Preference.bool(for: .playWhenEnteringFullScreen) && player.info.isPaused {
+      player.togglePause(false)
+    }
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
@@ -1269,6 +1283,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     thumbnailPeekView.isHidden = true
     timePreviewWhenSeek.isHidden = true
+    additionalInfoView.isHidden = true
     isMouseInSlider = false
 
     isInFullScreen = false
@@ -1282,7 +1297,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     videoView.videoLayer.mpvGLQueue.async {
       // reset `keepaspect`
-      self.player.mpv.setFlag(MPVOption.Window.keepaspect, true)
+      self.player.mpv.setFlag(MPVOption.Window.keepaspect, false)
       DispatchQueue.main.sync {
         for (_, constraint) in self.videoViewConstraints {
           constraint.constant = 0
@@ -1298,13 +1313,31 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()
     }
+
+    if Preference.bool(for: .pauseWhenLeavingFullScreen) && !player.info.isPaused {
+      player.togglePause(true)
+    }
+
     // restore ontop status
     if !player.info.isPaused {
       setWindowFloatingOnTop(isOntop)
     }
+
+    if let index = fadeableViews.index(of: additionalInfoView) {
+      fadeableViews.remove(at: index)
+    }
+
+    resetCollectionBehavior()
   }
 
   // MARK: - Window delegate: Size
+
+  func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
+    if frameSize.height < minSize.height || frameSize.width < minSize.width {
+      return sender.frame.size
+    }
+    return frameSize
+  }
 
   func windowDidResize(_ notification: Notification) {
     guard let window = window else { return }
@@ -1370,15 +1403,50 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidBecomeKey(_ notification: Notification) {
     window!.makeFirstResponder(window!)
+    if Preference.bool(for: .pauseWhenInactive) && isPausedDueToInactive {
+      player.togglePause(false)
+    }
+  }
+
+  func windowDidResignKey(_ notification: Notification) {
+    // keyWindow is nil: The whole app is inactive
+    // keyWindow is another MainWindow: Switched to another video window
+    if NSApp.keyWindow == nil ||
+      (NSApp.keyWindow?.windowController is MainWindowController ||
+        (NSApp.keyWindow?.windowController is MiniPlayerWindowController && NSApp.keyWindow?.windowController != player.miniPlayer)) {
+      if Preference.bool(for: .pauseWhenInactive), !player.info.isPaused {
+        player.togglePause(true)
+        isPausedDueToInactive = true
+      }
+    }
   }
 
   func windowDidBecomeMain(_ notification: Notification) {
     PlayerCore.lastActive = player
+    if isInFullScreen && Preference.bool(for: .blackOutMonitor) {
+      blackOutOtherMonitors()
+    }
     NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
   }
 
   func windowDidResignMain(_ notification: Notification) {
+    if Preference.bool(for: .blackOutMonitor) {
+      removeBlackWindow()
+    }
     NotificationCenter.default.post(name: Constants.Noti.mainWindowChanged, object: nil)
+  }
+
+  func windowWillMiniaturize(_ notification: Notification) {
+    if Preference.bool(for: .pauseWhenMinimized), !player.info.isPaused {
+      isPausedDueToMiniaturization = true
+      player.togglePause(true)
+    }
+  }
+
+  func windowDidDeminiaturize(_ notification: Notification) {
+    if Preference.bool(for: .pauseWhenMinimized), isPausedDueToMiniaturization {
+      player.togglePause(false)
+    }
   }
 
   // MARK: - UI: Show / Hide
@@ -1424,6 +1492,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fadeableViews.forEach { (v) in
       v.isHidden = false
     }
+    if !player.isInMiniPlayer && isInFullScreen && displayTimeAndBatteryInFullScreen {
+      player.syncUI(.additionalInfo)
+    }
     standardWindowButtons.forEach { $0.isEnabled = true }
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = UIAnimationDuration
@@ -1466,8 +1537,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func updateTitle() {
     if player.info.isNetworkResource {
-      let mediaTitle = player.mpv.getString(MPVProperty.mediaTitle)
-      window?.title = mediaTitle ?? player.info.currentURL?.path ?? ""
+      window?.title = player.getMediaTitle()
     } else {
       window?.representedURL = player.info.currentURL
       window?.setTitleWithRepresentedFilename(player.info.currentURL?.path ?? "")
@@ -1490,7 +1560,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let (osdString, osdType) = message.message()
 
     let osdTextSize = Preference.float(for: .osdTextSize)
-    osdLabel.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
+    if #available(OSX 10.11, *) {
+      osdLabel.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize), weight: .regular)
+    } else {
+      osdLabel.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
+    }
     osdLabel.stringValue = osdString
 
     switch osdType {
@@ -1869,22 +1943,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       var widthOrHeightIsSet = false
       // w and h can't take effect at same time
       if let strw = geometry.w, strw != "0" {
-        let w: CGFloat
+        var w: CGFloat
         if strw.hasSuffix("%") {
-          w = CGFloat(Double(String(strw.characters.dropLast()))! * 0.01 * Double(screenFrame.width))
+          w = CGFloat(Double(String(strw.dropLast()))! * 0.01 * Double(screenFrame.width))
         } else {
           w = CGFloat(Int(strw)!)
         }
+        w = max(minSize.width, w)
         winFrame.size.width = w
         winFrame.size.height = w / winAspect
         widthOrHeightIsSet = true
       } else if let strh = geometry.h, strh != "0" {
-        let h: CGFloat
+        var h: CGFloat
         if strh.hasSuffix("%") {
-          h = CGFloat(Double(String(strh.characters.dropLast()))! * 0.01 * Double(screenFrame.height))
+          h = CGFloat(Double(String(strh.dropLast()))! * 0.01 * Double(screenFrame.height))
         } else {
           h = CGFloat(Int(strh)!)
         }
+        h = max(minSize.height, h)
         winFrame.size.height = h
         winFrame.size.width = h * winAspect
         widthOrHeightIsSet = true
@@ -1893,7 +1969,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if let strx = geometry.x, let xSign = geometry.xSign {
         let x: CGFloat
         if strx.hasSuffix("%") {
-          x = CGFloat(Double(String(strx.characters.dropLast()))! * 0.01 * Double(screenFrame.width)) - winFrame.width / 2
+          x = CGFloat(Double(String(strx.dropLast()))! * 0.01 * Double(screenFrame.width)) - winFrame.width / 2
         } else {
           x = CGFloat(Int(strx)!)
         }
@@ -1907,7 +1983,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if let stry = geometry.y, let ySign = geometry.ySign {
         let y: CGFloat
         if stry.hasSuffix("%") {
-          y = CGFloat(Double(String(stry.characters.dropLast()))! * 0.01 * Double(screenFrame.height)) - winFrame.height / 2
+          y = CGFloat(Double(String(stry.dropLast()))! * 0.01 * Double(screenFrame.height)) - winFrame.height / 2
         } else {
           y = CGFloat(Int(stry)!)
         }
@@ -1944,14 +2020,32 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     videoView.videoSize = w.convertToBacking(videoView.frame).size
 
     var rect: NSRect
-    let needResizeWindow = player.info.justOpenedFile || !Preference.bool(for: .resizeOnlyWhenManuallyOpenFile)
+    let needResizeWindow: Bool
 
+    let resizeTiming = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
+    switch resizeTiming {
+    case .always:
+      needResizeWindow = true
+    case .onlyWhenOpen:
+      needResizeWindow = player.info.justOpenedFile
+    case .never:
+      needResizeWindow = false
+    }
+    
     if needResizeWindow {
+      let resizeRatio = (Preference.enum(for: .resizeWindowOption) as Preference.ResizeWindowOption).ratio
       // get videoSize on screen
       var videoSize = originalVideoSize
       if Preference.bool(for: .usePhysicalResolution) {
         videoSize = w.convertFromBacking(
           NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))).size
+      }
+      if resizeRatio < 0 {
+        if let screenSize = NSScreen.main?.visibleFrame.size {
+          videoSize = videoSize.shrink(toSize: screenSize)
+        }
+      } else {
+        videoSize = videoSize.multiply(CGFloat(resizeRatio))
       }
       // check screen size
       if let screenSize = NSScreen.main?.visibleFrame.size {
@@ -1963,7 +2057,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if let wfg = windowFrameFromGeometry(newSize: videoSize) {
         rect = wfg
       } else {
-        rect = w.frame.centeredResize(to: videoSize)
+        if resizeRatio < 0, let screenRect = NSScreen.main?.visibleFrame {
+          rect = screenRect.centeredResize(to: videoSize)
+        } else {
+          rect = w.frame.centeredResize(to: videoSize)
+        }
       }
 
     } else {
@@ -1979,7 +2077,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     player.info.justStartedFile = false
 
     if isInFullScreen {
-      windowFrameBeforeEnteringFullScreen = rect
+      if currentFullScreenIsLegacy {
+        windowFrameBeforeEnteringFullScreen = rect
+      } else {
+        w.setFrame(rect, display: false)
+      }
     } else {
       // animated `setFrame` can be inaccurate!
       w.setFrame(rect, display: true, animate: true)
@@ -2025,9 +2127,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func blackOutOtherMonitors() {
-    screens = NSScreen.screens.filter() { $0 != window?.screen }
-
-    cachedScreenCount = screens.count + 1
+    screens = NSScreen.screens.filter { $0 != window?.screen }
 
     blackWindows = []
     
@@ -2044,6 +2144,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
   
   private func removeBlackWindow() {
+    for window in blackWindows {
+      window.orderOut(self)
+    }
     blackWindows = []
   }
 
@@ -2141,11 +2244,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
-    touchBarCurrentPosLabel?.updateText(with: duration, given: pos)
+    if #available(OSX 10.12.2, *) {
+      player.touchBarSupport.touchBarCurrentPosLabel?.updateText(with: duration, given: pos)
+    }
     rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {
       playSlider.doubleValue = percentage
-      touchBarPlaySlider?.setDoubleValueSafely(percentage)
+      if #available(OSX 10.12.2, *) {
+        player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
+      }
     }
   }
 
@@ -2176,6 +2283,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       bufferDetailLabel.stringValue = "\(usedStr)/\(sizeStr) (\(speedStr)/s)"
     } else {
       bufferIndicatorView.isHidden = true
+    }
+  }
+
+  func updateArrowButtonImage() {
+    if arrowBtnFunction == .playlist {
+      leftArrowButton.image = #imageLiteral(resourceName: "nextl")
+      rightArrowButton.image = #imageLiteral(resourceName: "nextr")
+    } else {
+      leftArrowButton.image = #imageLiteral(resourceName: "speedl")
+      rightArrowButton.image = #imageLiteral(resourceName: "speed")
     }
   }
 
@@ -2369,6 +2486,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.doubleValue
+    if #available(macOS 10.11, *), Preference.double(for: .maxVolume) > 100, abs(value - 100) < 0.5 {
+      NSHapticFeedbackManager.defaultPerformer.perform(.generic, performanceTime: .default)
+    }
     player.setVolume(value)
   }
 
@@ -2395,6 +2515,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.menuShowPlaylistPanel(.dummy)
     case .chapterPanel:
       self.menuShowChaptersPanel(.dummy)
+    case .toggleMusicMode:
+      self.menuSwitchToMiniPlayer(.dummy)
     case .flip:
       self.menuActionHandler.menuToggleFlip(.dummy)
     case .mirror:
@@ -2407,10 +2529,25 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.menuActionHandler.menuFindOnlineSub(.dummy)
     case .saveDownloadedSub:
       self.menuActionHandler.saveDownloadedSub(.dummy)
+    case .biggerWindow:
+      let item = NSMenuItem()
+      item.tag = 11
+      self.menuChangeWindowSize(item)
+    case .smallerWindow:
+      let item = NSMenuItem()
+      item.tag = 10
+      self.menuChangeWindowSize(item)
+    case .fitToScreen:
+      let item = NSMenuItem()
+      item.tag = 3
+      self.menuChangeWindowSize(item)
     }
   }
 
   private func resetCollectionBehavior() {
+    if isInFullScreen {
+      return
+    }
     if Preference.bool(for: .useLegacyFullScreen) {
       window?.collectionBehavior = [.managed, .fullScreenAuxiliary]
     } else {

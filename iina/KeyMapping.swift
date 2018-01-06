@@ -10,28 +10,11 @@ import Foundation
 
 class KeyMapping {
 
-  static let prettyKeySymbol = [
-    "META": "⌘",
-    "ENTER": "↩︎",
-    "SHIFT": "⇧",
-    "ALT": "⌥",
-    "CTRL":"⌃",
-    "SPACE": "␣",
-    "BS": "⌫",
-    "DEL": "⌦",
-    "TAB": "⇥",
-    "ESC": "⎋",
-    "UP": "↑",
-    "DOWN": "↓",
-    "LEFT": "←",
-    "RIGHT" : "→",
-    "PGUP": "⇞",
-    "PGDWN": "⇟",
-    "HOME": "↖︎",
-    "END": "↘︎",
-    "PLAY": "▶︎\u{2006}❙\u{200A}❙",
-    "PREV": "◀︎◀︎",
-    "NEXT": "▶︎▶︎"
+  static private let modifierOrder: [String: Int] = [
+    "Ctrl": 0,
+    "Alt": 1,
+    "Shift": 2,
+    "Meta": 3
   ]
 
   var isIINACommand: Bool
@@ -45,7 +28,7 @@ class KeyMapping {
   var rawAction: String {
     set {
       if newValue.hasPrefix("@iina") {
-        privateRawAction = newValue[newValue.index(newValue.startIndex, offsetBy: "@iina".characters.count)...].trimmingCharacters(in: .whitespaces)
+        privateRawAction = newValue[newValue.index(newValue.startIndex, offsetBy: "@iina".count)...].trimmingCharacters(in: .whitespaces)
         action = rawAction.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
         isIINACommand = true
       } else {
@@ -70,19 +53,11 @@ class KeyMapping {
 
   var prettyKey: String {
     get {
-      return key.characters
-        .split(separator: "+", maxSplits: 1, omittingEmptySubsequences: false)
-        .map { tokenCharView -> String in
-          let token = String(tokenCharView)
-          let uppercasedToken = token.uppercased()
-          if let symbol = KeyMapping.prettyKeySymbol[uppercasedToken] {
-            return symbol
-          } else if let origToken = KeyCodeHelper.reversedKeyMapForShift[token] {
-            return KeyMapping.prettyKeySymbol["SHIFT"]! + origToken.uppercased()
-          } else {
-            return uppercasedToken
-          }
-        }.joined(separator: "")
+      if let (keyChar, modifiers) = KeyCodeHelper.macOSKeyEquivalent(from: self.key, usePrintableKeyName: true) {
+        return KeyCodeHelper.readableString(fromKey: keyChar, modifiers: modifiers)
+      } else {
+        return key
+      }
     }
   }
 
@@ -93,8 +68,19 @@ class KeyMapping {
   init(key: String, rawAction: String, isIINACommand: Bool = false, comment: String? = nil) {
     // normalize different letter cases for modifier keys
     var normalizedKey = key
-    ["Ctrl", "Meta", "Alt"].forEach { keyword in
+    ["Ctrl", "Meta", "Alt", "Shift"].forEach { keyword in
       normalizedKey = normalizedKey.replacingOccurrences(of: keyword, with: keyword, options: .caseInsensitive)
+    }
+    var keyIsPlus = false
+    if normalizedKey.hasSuffix("+") {
+      keyIsPlus = true
+      normalizedKey = String(normalizedKey.dropLast())
+    }
+    normalizedKey = normalizedKey.components(separatedBy: "+")
+      .sorted { KeyMapping.modifierOrder[$0, default: 9] < KeyMapping.modifierOrder[$1, default: 9] }
+      .joined(separator: "+")
+    if keyIsPlus {
+      normalizedKey += "+"
     }
     self.key = normalizedKey
     self.privateRawAction = rawAction
@@ -112,17 +98,17 @@ class KeyMapping {
       if line.hasPrefix("#@iina") {
         // extended syntax
         isIINACommand = true
-        line = String(line[line.index(line.startIndex, offsetBy: "#@iina".characters.count)...])
+        line = String(line[line.index(line.startIndex, offsetBy: "#@iina".count)...])
       } else if line.hasPrefix("#") {
         // igore comment
         continue
       }
       // remove inline comment
-      if let sharpIndex = line.characters.index(of: "#") {
-        line = String(line[...sharpIndex])
+      if let sharpIndex = line.index(of: "#") {
+        line = String(line[...line.index(before: sharpIndex)])
       }
       // split
-      let splitted = line.characters.split(maxSplits: 1, whereSeparator: { $0 == " " || $0 == "\t"})
+      let splitted = line.split(maxSplits: 1, whereSeparator: { $0 == " " || $0 == "\t"})
       if splitted.count < 2 {
         Utility.log("Skipped corrupted line in input.conf: \(line)")
         continue  // no command, wrong format

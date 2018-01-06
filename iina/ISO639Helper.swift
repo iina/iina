@@ -9,7 +9,7 @@
 import Foundation
 
 
-class ISO639_2Helper {
+class ISO639Helper {
 
   struct Language {
     var code: String
@@ -23,14 +23,14 @@ class ISO639_2Helper {
   static let languages: [Language] = {
     var result: [Language] = []
     for (k, v) in dictionary {
-      let names = v.characters.split(separator: ";").map { String($0) }
+      let names = v.split(separator: ";").map { String($0) }
       result.append(Language(code: k, name: names))
     }
     return result
   }()
 
   static let dictionary: [String: String] = {
-    let filePath = Bundle.main.path(forResource: "ISO639_2", ofType: "strings")!
+    let filePath = Bundle.main.path(forResource: "ISO639", ofType: "strings")!
     return NSDictionary(contentsOfFile: filePath) as! [String : String]
   }()
 

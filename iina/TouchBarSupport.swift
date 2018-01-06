@@ -52,15 +52,30 @@ fileprivate let touchBarItemBinding: [NSTouchBarItem.Identifier: (NSImage.Name, 
 ]
 
 @available(macOS 10.12.2, *)
-extension MainWindowController: NSTouchBarDelegate {
+class TouchBarSupport: NSObject, NSTouchBarDelegate {
 
-  override func makeTouchBar() -> NSTouchBar? {
+  private var player: PlayerCore
+
+  lazy var touchBar: NSTouchBar = {
     let touchBar = NSTouchBar()
     touchBar.delegate = self
     touchBar.customizationIdentifier = .windowBar
     touchBar.defaultItemIdentifiers = [.playPause, .slider, .time]
     touchBar.customizationAllowedItemIdentifiers = [.playPause, .slider, .volumeUp, .volumeDown, .rewind, .fastForward, .time, .ahead15Sec, .ahead30Sec, .back15Sec, .back30Sec, .next, .prev, .fixedSpaceLarge]
     return touchBar
+  }()
+
+  weak var touchBarPlaySlider: TouchBarPlaySlider?
+  weak var touchBarPlayPauseBtn: NSButton?
+  weak var touchBarCurrentPosLabel: DurationDisplayTextField?
+  var touchBarPosLabelWidthLayout: NSLayoutConstraint?
+  /** The current/remaining time label in Touch Bar. */
+  lazy var sizingTouchBarTextField: NSTextField = {
+    return NSTextField()
+  }()
+
+  init(playerCore: PlayerCore) {
+    self.player = playerCore
   }
 
   func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
@@ -141,7 +156,7 @@ extension MainWindowController: NSTouchBarDelegate {
   }
 
   @objc func touchBarRewindAction(_ sender: NSButton) {
-    arrowButtonAction(left: sender.tag == 0)
+    player.mainWindow.arrowButtonAction(left: sender.tag == 0)
   }
 
   @objc func touchBarSeekAction(_ sender: NSButton) {
@@ -150,7 +165,7 @@ extension MainWindowController: NSTouchBarDelegate {
   }
 
   @objc func touchBarSkipAction(_ sender: NSButton) {
-    player.navigateInPlaylist(nextOrPrev: sender.tag == 0)
+    player.navigateInPlaylist(nextMedia: sender.tag == 0)
   }
 
   @objc func touchBarSliderAction(_ sender: NSSlider) {
@@ -167,8 +182,6 @@ extension MainWindowController: NSTouchBarDelegate {
     return item
   }
 
-  // Set TouchBar Time Label
-
   func setupTouchBarUI() {
     let duration: VideoTime = player.info.videoDuration ?? .zero
     let pad: CGFloat = 16.0
@@ -183,8 +196,26 @@ extension MainWindowController: NSTouchBarDelegate {
         touchBarPosLabelWidthLayout = posConstraint
       }
     }
-    
+
   }
+}
+
+@available(macOS 10.12.2, *)
+extension MainWindowController {
+
+  override func makeTouchBar() -> NSTouchBar? {
+    return player.touchBarSupport.touchBar
+  }
+
+}
+
+@available(macOS 10.12.2, *)
+extension MiniPlayerWindowController {
+
+  override func makeTouchBar() -> NSTouchBar? {
+    return player.touchBarSupport.touchBar
+  }
+
 }
 
 // MARK: - Slider

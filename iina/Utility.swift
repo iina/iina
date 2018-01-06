@@ -14,11 +14,14 @@ class Utility {
   static let tabTitleActiveFontAttributes = FontAttributes(font: .systemBold, size: .system, align: .center).value
 
   static let supportedFileExt: [MPVTrack.TrackType: [String]] = [
-    .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "mts", "m2ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt", "dv", "mpg", "mpeg"],
+    .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "mts", "m2ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt", "dv", "mpg", "mpeg", "mxf", "vob", "gif"],
     .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "oga", "mogg", "m4a", "ac3", "opus", "wav", "wv", "aiff", "ape", "tta", "tak"],
     .sub: ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc"]
   ]
   static let playableFileExt = supportedFileExt[.video]! + supportedFileExt[.audio]!
+  static let playlistFileExt = ["m3u", "m3u8", "pls", "cue"]
+  static let blacklistExt = supportedFileExt[.sub]! + playlistFileExt
+  static let lut3dExt = ["3dl", "cube", "dat", "m3d"]
 
   // MARK: - Logs, alerts
 
@@ -306,6 +309,13 @@ class Utility {
 
   // MARK: - App functions
 
+  static func iinaVersion() -> (String, String) {
+    let infoDic = Bundle.main.infoDictionary!
+    let version = infoDic["CFBundleShortVersionString"] as! String
+    let build = infoDic["CFBundleVersion"] as! String
+    return (version, build)
+  }
+
   static func setSelfAsDefaultForAllFileTypes() {
     guard
     let docTypes = Bundle.main.infoDictionary?["CFBundleDocumentTypes"] as? [[String: Any]],
@@ -525,7 +535,7 @@ class Utility {
 
   struct ShortCodeGenerator {
 
-    private static let base62chars = [Character]("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".characters)
+    private static let base62chars = [Character]("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
     private static let maxBase : UInt32 = 62
 
     static func getCode(withBase base: UInt32 = maxBase, length: Int) -> String {

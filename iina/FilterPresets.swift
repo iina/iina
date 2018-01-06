@@ -50,13 +50,13 @@ class FilterPreset {
  */
 class FilterPresetInstance {
   var preset: FilterPreset
-  var params: [String: FilterParamaterValue] = [:]
+  var params: [String: FilterParameterValue] = [:]
 
   init(from preset: FilterPreset) {
     self.preset = preset
   }
 
-  func value(for name: String) -> FilterParamaterValue {
+  func value(for name: String) -> FilterParameterValue {
     return params[name] ?? preset.params[name]!.defaultValue
   }
 }
@@ -69,10 +69,10 @@ class FilterPresetInstance {
  */
 class FilterParameter {
   enum ParamType {
-    case text, int, float
+    case text, int, float, choose
   }
   var type: ParamType
-  var defaultValue: FilterParamaterValue
+  var defaultValue: FilterParameterValue
   // for float
   var min: Float?
   var max: Float?
@@ -80,13 +80,15 @@ class FilterParameter {
   var minInt: Int?
   var maxInt: Int?
   var step: Int?
+  // for choose
+  var choices: [String] = []
 
   static func text(defaultValue: String = "") -> FilterParameter {
-    return FilterParameter(.text, defaultValue: FilterParamaterValue(string: defaultValue))
+    return FilterParameter(.text, defaultValue: FilterParameterValue(string: defaultValue))
   }
 
   static func int(min: Int, max: Int, step: Int = 1, defaultValue: Int = 0) -> FilterParameter {
-    let pm = FilterParameter(.int, defaultValue: FilterParamaterValue(int: defaultValue))
+    let pm = FilterParameter(.int, defaultValue: FilterParameterValue(int: defaultValue))
     pm.minInt = min
     pm.maxInt = max
     pm.step = step
@@ -94,13 +96,20 @@ class FilterParameter {
   }
 
   static func float(min: Float, max: Float, defaultValue: Float = 0) -> FilterParameter {
-    let pm = FilterParameter(.float, defaultValue: FilterParamaterValue(float: defaultValue))
+    let pm = FilterParameter(.float, defaultValue: FilterParameterValue(float: defaultValue))
     pm.min = min
     pm.max = max
     return pm
   }
 
-  private init(_ type: ParamType, defaultValue: FilterParamaterValue) {
+  static func choose(from choices: [String], defaultChoiceIndex: Int = 0) -> FilterParameter {
+    guard !choices.isEmpty else { fatalError("FilterParameter: Choices cannot be empty") }
+    let pm = FilterParameter(.choose, defaultValue: FilterParameterValue(string: choices[defaultChoiceIndex]))
+    pm.choices = choices
+    return pm
+  }
+
+  private init(_ type: ParamType, defaultValue: FilterParameterValue) {
     self.type = type
     self.defaultValue = defaultValue
   }
@@ -109,7 +118,7 @@ class FilterParameter {
 /**
  The structure to store values of different param types.
  */
-struct FilterParamaterValue {
+struct FilterParameterValue {
   private var _stringValue: String?
   private var _intValue: Int?
   private var _floatValue: Float?
@@ -151,8 +160,16 @@ extension FilterPreset {
     return dic
   }()
 
+  static private let customMPVFilterPreset = FilterPreset("custom_mpv", params: ["name": PM.text(defaultValue: ""), "string": PM.text(defaultValue: "")]) { instance in
+      return MPVFilter(rawString: instance.value(for: "name").stringValue + "=" + instance.value(for: "string").stringValue)!
+  }
+  // custom ffmpeg
+  static private let customFFmpegFilterPreset = FilterPreset("custom_ffmpeg", params: [ "name": PM.text(defaultValue: ""), "string": PM.text(defaultValue: "") ]) { instance in
+    return MPVFilter(name: "lavfi", label: nil, paramString: "[\(instance.value(for: "name").stringValue)=\(instance.value(for: "string").stringValue)]")
+  }
+
   /** All filter presets. */
-  static let presets: [FilterPreset] = [
+  static let vfPresets: [FilterPreset] = [
     // crop
     FilterPreset("crop", params: [
       "x": PM.text(), "y": PM.text(),
@@ -206,20 +223,23 @@ extension FilterPreset {
     FilterPreset("hflip", params: [:]) { instance in
       return MPVFilter(mpvFilterFromPresetInstance: instance)
     },
-    // custom mpv
-    FilterPreset("custom_mpv", params: [
-      "name": PM.text(defaultValue: ""),
-      "string": PM.text(defaultValue: "")
+    // 3d lut
+    FilterPreset("lut3d", params: [
+      "file": PM.text(),
+      "interp": PM.choose(from: ["nearest", "trilinear", "tetrahedral"], defaultChoiceIndex: 0)
     ]) { instance in
-      return MPVFilter(rawString: instance.value(for: "name").stringValue + "=" + instance.value(for: "string").stringValue)!
+      return MPVFilter(lavfiName: "lut3d", label: nil, paramDict: [
+        "file": instance.value(for: "file").stringValue,
+        "interp": instance.value(for: "interp").stringValue,
+        ])
     },
-    // custom ffmpeg
-    FilterPreset("custom_ffmpeg", params: [
-      "name": PM.text(defaultValue: ""),
-      "string": PM.text(defaultValue: "")
-    ]) { instance in
-      return MPVFilter(name: "lavfi", label: nil,
-                       paramString: "[\(instance.value(for: "name").stringValue)=\(instance.value(for: "string").stringValue)]")
-    },
+    // custom
+    customMPVFilterPreset,
+    customFFmpegFilterPreset
+  ]
+
+  static let afPresets: [FilterPreset] = [
+    customMPVFilterPreset,
+    customFFmpegFilterPreset
   ]
 }

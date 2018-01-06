@@ -10,7 +10,7 @@ target 'iina' do
   pod 'AEXML'
   pod 'PromiseKit'
   pod 'GzipSwift'
-  pod 'GRMustache.swift', :git => 'https://github.com/saagarjha/GRMustache.swift.git'
+  pod 'GRMustache.swift', :git => 'https://github.com/iina/GRMustache.swift.git'
   pod 'Sparkle'
 
 #  target 'iinaTests' do

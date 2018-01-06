@@ -19,7 +19,7 @@ PODS:
 
 DEPENDENCIES:
   - AEXML
-  - GRMustache.swift (from `https://github.com/saagarjha/GRMustache.swift.git`)
+  - GRMustache.swift (from `https://github.com/iina/GRMustache.swift.git`)
   - GzipSwift
   - Just (from `https://github.com/JustHTTP/Just.git`, branch `swift-4`)
   - MASPreferences
@@ -28,15 +28,15 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   GRMustache.swift:
-    :git: https://github.com/saagarjha/GRMustache.swift.git
+    :git: https://github.com/iina/GRMustache.swift.git
   Just:
     :branch: swift-4
     :git: https://github.com/JustHTTP/Just.git
 
 CHECKOUT OPTIONS:
   GRMustache.swift:
-    :commit: 49e92fcb62b29a2d23e4015a91ac8b2cf0141475
-    :git: https://github.com/saagarjha/GRMustache.swift.git
+    :commit: c2e858e5bd7f2e4faf13ae4cc34e9966382e2ff8
+    :git: https://github.com/iina/GRMustache.swift.git
   Just:
     :commit: 93fc04992243fb459af37963797ef5ac5224b242
     :git: https://github.com/JustHTTP/Just.git
@@ -50,6 +50,6 @@ SPEC CHECKSUMS:
   PromiseKit: ecf5fe92275d57ee77c9ede858af47a162e9b97e
   Sparkle: 06ea33170007c5937ee54da481b4481af98fac79
 
-PODFILE CHECKSUM: f12d8d9506167ba0fd787904893c60c6ae833bbf
+PODFILE CHECKSUM: a64ce7e4133a69b8578df97545c13d6a3edec3ff
 
 COCOAPODS: 1.3.1

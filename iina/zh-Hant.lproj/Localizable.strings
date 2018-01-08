@@ -45,7 +45,7 @@
 "osd.subtitle_pos" = "字幕位置: %.1f";
 "osd.mute" = "靜音";
 "osd.unmute" = "聲音開啟";
-"osd.screenshot" = "熒幕已截取";
+"osd.screenshot" = "螢幕已截取";
 "osd.abloop.a" = "AB循環: A";
 "osd.abloop.b" = "AB循環: B";
 "osd.abloop.clear" = "AB循環: 復原";
@@ -85,8 +85,8 @@
 "menu.volume"= "音量: %d";
 "menu.audio_delay" = "音訊延遲: %.2f秒";
 "menu.sub_delay" = "字幕延遲: %.2f秒";
-"menu.fullscreen" = "進入全熒幕";
-"menu.exit_fullscreen" = "退出全熒幕";
+"menu.fullscreen" = "進入全螢幕";
+"menu.exit_fullscreen" = "退出全螢幕";
 "menu.pip" = "進入畫中畫";
 "menu.exit_pip" = "退出畫中畫";
 "menu.pause" = "暫停";
@@ -101,7 +101,7 @@
 
 "alert.fatal_error" = "致命異常: %@ \n程序將關閉。";
 "alert.mpv_error" = "內部異常%@ (%@) ，當設定%@時";
-"alert.sleep" = "無法阻止熒幕進入睡眠";
+"alert.sleep" = "無法阻止螢幕進入睡眠";
 
 "alert.unsupported_audio" = "不支持這個加載的音訊檔";
 "alert.unsupported_sub" = "不支持這個加載的字幕檔";

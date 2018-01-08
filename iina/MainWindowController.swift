@@ -2022,6 +2022,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     var rect: NSRect
     let needResizeWindow: Bool
 
+    let frame = windowFrameBeforeEnteringFullScreen ?? w.frame
+
     let resizeTiming = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
     switch resizeTiming {
     case .always:
@@ -2060,19 +2062,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         if resizeRatio < 0, let screenRect = NSScreen.main?.visibleFrame {
           rect = screenRect.centeredResize(to: videoSize)
         } else {
-          if let frame = windowFrameBeforeEnteringFullScreen {
-            rect = frame.centeredResize(to: videoSize)
-          } else {
-            rect = w.frame.centeredResize(to: videoSize)
-          }
+          rect = frame.centeredResize(to: videoSize)
         }
       }
 
     } else {
       // user is navigating in playlist. remain same window width.
-      let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
-      let newSize = NSSize(width: w.frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
-      rect = NSRect(origin: w.frame.origin, size: newSize)
+      let newHeight = frame.width / CGFloat(width) * CGFloat(height)
+      let newSize = NSSize(width: frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
+      rect = NSRect(origin: frame.origin, size: newSize)
 
     }
 

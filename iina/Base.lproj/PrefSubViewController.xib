@@ -60,7 +60,7 @@
                                                     <binding destination="5Up-Ab-aAm" name="selectedTag" keyPath="values.subAutoLoadIINA" id="Pi3-G7-Eho"/>
                                                 </connections>
                                             </popUpButton>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C4b-sm-2kc">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C4b-sm-2kc">
                                                 <rect key="frame" x="-2" y="104" width="259" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Subtitles have priority when filename containing:" id="7pf-Kb-TNr">
                                                     <font key="font" metaFont="smallSystem"/>
@@ -72,7 +72,7 @@
                                                 <rect key="frame" x="0.0" y="81" width="254" height="19"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="19" id="5Qw-dU-xAc"/>
-                                                    <constraint firstAttribute="width" constant="254" id="Pyv-pb-QQr"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="254" id="Pyv-pb-QQr"/>
                                                 </constraints>
                                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="fri-sR-psZ">
                                                     <font key="font" metaFont="smallSystem"/>
@@ -91,7 +91,7 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qkw-vv-CeA">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qkw-vv-CeA">
                                                 <rect key="frame" x="-2" y="43" width="239" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Also search subtitles in following directories:" id="QsS-wD-2hY">
                                                     <font key="font" metaFont="smallSystem"/>
@@ -102,7 +102,7 @@
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="83N-r3-wZ6" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="20" width="254" height="19"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="254" id="ugO-N7-hfG"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="254" id="ugO-N7-hfG"/>
                                                 </constraints>
                                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Mbv-Nx-tdp">
                                                     <font key="font" metaFont="smallSystem"/>
@@ -113,7 +113,7 @@
                                                     <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subAutoLoadSearchPath" id="6tD-Cb-lzX"/>
                                                 </connections>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T4U-Ii-SK6">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T4U-Ii-SK6">
                                                 <rect key="frame" x="-2" y="4" width="550" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed." id="Luv-2B-9v8">
                                                     <font key="font" metaFont="smallSystem"/>
@@ -140,10 +140,12 @@
                                             <constraint firstAttribute="trailing" secondItem="T4U-Ii-SK6" secondAttribute="trailing" id="jbd-rW-l9b"/>
                                             <constraint firstItem="S8g-xi-5Ez" firstAttribute="top" secondItem="C4b-sm-2kc" secondAttribute="bottom" constant="4" id="lto-cf-VJo"/>
                                             <constraint firstAttribute="bottom" secondItem="T4U-Ii-SK6" secondAttribute="bottom" constant="4" id="mHn-WM-b4L"/>
+                                            <constraint firstItem="S8g-xi-5Ez" firstAttribute="width" secondItem="if4-Ls-9s6" secondAttribute="width" id="mKB-3t-lWN"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Tej-f2-5d5" secondAttribute="trailing" constant="20" symbolic="YES" id="o8G-bb-tes"/>
                                             <constraint firstItem="T4U-Ii-SK6" firstAttribute="top" secondItem="83N-r3-wZ6" secondAttribute="bottom" constant="2" id="p6C-De-Odo"/>
                                             <constraint firstItem="83N-r3-wZ6" firstAttribute="leading" secondItem="n8c-of-fDQ" secondAttribute="leading" id="plZ-FG-Ce2"/>
                                             <constraint firstItem="S8g-xi-5Ez" firstAttribute="leading" secondItem="n8c-of-fDQ" secondAttribute="leading" id="pxc-Be-k6C"/>
+                                            <constraint firstItem="83N-r3-wZ6" firstAttribute="width" secondItem="if4-Ls-9s6" secondAttribute="width" id="raR-h1-O59"/>
                                             <constraint firstItem="aJd-if-ImI" firstAttribute="top" secondItem="S8g-xi-5Ez" secondAttribute="bottom" constant="2" id="tOd-TK-BMM"/>
                                             <constraint firstItem="Tej-f2-5d5" firstAttribute="leading" secondItem="n8c-of-fDQ" secondAttribute="leading" id="xHQ-K2-9l0"/>
                                         </constraints>
@@ -167,7 +169,7 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zR-BO-yhX">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6zR-BO-yhX">
                                                 <rect key="frame" x="-2" y="29" width="550" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles." id="Z2M-dh-eq1">
                                                     <font key="font" metaFont="smallSystem"/>

@@ -2060,7 +2060,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         if resizeRatio < 0, let screenRect = NSScreen.main?.visibleFrame {
           rect = screenRect.centeredResize(to: videoSize)
         } else {
-          rect = w.frame.centeredResize(to: videoSize)
+          if let frame = windowFrameBeforeEnteringFullScreen {
+            rect = frame.centeredResize(to: videoSize)
+          } else {
+            rect = w.frame.centeredResize(to: videoSize)
+          }
         }
       }
 
@@ -2077,11 +2081,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     player.info.justStartedFile = false
 
     if isInFullScreen {
-      if currentFullScreenIsLegacy {
-        windowFrameBeforeEnteringFullScreen = rect
-      } else {
-        w.setFrame(rect, display: false)
-      }
+      windowFrameBeforeEnteringFullScreen = rect
     } else {
       // animated `setFrame` can be inaccurate!
       w.setFrame(rect, display: true, animate: true)

@@ -4,7 +4,7 @@
 "0Gp-vj-UzY.title" = "Sotto";
 
 /* Class = "NSMenuItem"; title = "0.5x video size"; ObjectID = "0eK-kv-btH"; */
-"0eK-kv-btH.title" = "Dimensione video 0.5x";
+"0eK-kv-btH.title" = "Dimensione 0.5x";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "0kj-QC-B9P"; */
 "0kj-QC-B9P.title" = "Box";
@@ -13,7 +13,7 @@
 "2YJ-bg-OdR.title" = "% dello schermo";
 
 /* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "3CY-YS-rG6"; */
-"3CY-YS-rG6.title" = "usa il pulsante sinistro/destro per:";
+"3CY-YS-rG6.title" = "usa il pulsante sinistro / destro per:";
 
 /* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "3jK-z5-NDH"; */
 "3jK-z5-NDH.title" = "MB";
@@ -52,28 +52,28 @@
 "GKy-3g-4MB.title" = "Finestra:";
 
 /* Class = "NSTextFieldCell"; title = "side of the screen"; ObjectID = "GXO-iT-BIr"; */
-"GXO-iT-BIr.title" = "lato dello schermo";
+"GXO-iT-BIr.title" = "dello schermo";
 
 /* Class = "NSTextFieldCell"; title = "Maximum cache size:"; ObjectID = "GYe-Y3-bOR"; */
 "GYe-Y3-bOR.title" = "Dimensione massima della cache:";
 
 /* Class = "NSMenuItem"; title = "1.5x video size"; ObjectID = "Goh-X4-4f1"; */
-"Goh-X4-4f1.title" = "Dimensione video 1.5x";
+"Goh-X4-4f1.title" = "Dimensione 1.5x";
 
 /* Class = "NSTextFieldCell"; title = "pt"; ObjectID = "I8t-ey-016"; */
-"I8t-ey-016.title" = "pt";
+"I8t-ey-016.title" = "pt.";
 
 /* Class = "NSTextFieldCell"; title = "Y offset:"; ObjectID = "KCL-Ki-A0p"; */
 "KCL-Ki-A0p.title" = "Offset Y:";
 
 /* Class = "NSMenuItem"; title = "Fastforward / Rewind"; ObjectID = "KJT-iG-2xc"; */
-"KJT-iG-2xc.title" = "Avanzamento veloce/Riavvolgimento";
+"KJT-iG-2xc.title" = "Avanti / Indietro veloce";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "L5c-uf-ged"; */
 "L5c-uf-ged.title" = "Box";
 
 /* Class = "NSMenuItem"; title = "1x video size"; ObjectID = "MR7-Ac-SAO"; */
-"MR7-Ac-SAO.title" = "Dimensione video 1x";
+"MR7-Ac-SAO.title" = "Dimensione 1x";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Mye-uz-WUr"; */
 "Mye-uz-WUr.title" = "Box";
@@ -82,13 +82,13 @@
 "NUr-hY-gfo.title" = "Nascondi dopo:";
 
 /* Class = "NSMenuItem"; title = "right"; ObjectID = "NYG-e9-DV0"; */
-"NYG-e9-DV0.title" = "destra";
+"NYG-e9-DV0.title" = "destro";
 
 /* Class = "NSButtonCell"; title = "Clear Cache…"; ObjectID = "OAh-HP-wST"; */
 "OAh-HP-wST.title" = "Elimina cache…";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "ObY-7B-NTO"; */
-"ObY-7B-NTO.title" = "s";
+"ObY-7B-NTO.title" = "sec.";
 
 /* Class = "NSButtonCell"; title = "Initial window position:"; ObjectID = "Ofm-qE-RgQ"; */
 "Ofm-qE-RgQ.title" = "Posizione iniziale della finestra:";
@@ -97,7 +97,7 @@
 "R1l-SN-bG5.title" = "Cache delle miniature:";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "S8H-Xr-uVa"; */
-"S8H-Xr-uVa.title" = "s";
+"S8H-Xr-uVa.title" = "sec.";
 
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
 "SFX-ct-8MB.title" = "Sempre in primo piano durante la riproduzione";
@@ -109,19 +109,19 @@
 "Uc9-An-930.title" = "Altezza:";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "UhG-bZ-2zY"; */
-"UhG-bZ-2zY.title" = "punto";
+"UhG-bZ-2zY.title" = "pixel";
 
 /* Class = "NSTextFieldCell"; title = "20"; ObjectID = "WPh-0F-JGL"; */
 "WPh-0F-JGL.title" = "20";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "X5B-TZ-ISz"; */
-"X5B-TZ-ISz.title" = "punto";
+"X5B-TZ-ISz.title" = "pixel";
 
 /* Class = "NSButtonCell"; title = "Enable thumbnail preview"; ObjectID = "Xey-3m-f6G"; */
 "Xey-3m-f6G.title" = "Attiva anteprima miniature";
 
 /* Class = "NSTextFieldCell"; title = "to the"; ObjectID = "Ydi-yB-FMe"; */
-"Ydi-yB-FMe.title" = "al";
+"Ydi-yB-FMe.title" = "da";
 
 /* Class = "NSTextFieldCell"; title = "X offset:"; ObjectID = "Ymw-tr-6rw"; */
 "Ymw-tr-6rw.title" = "Offset X:";
@@ -136,7 +136,7 @@
 "d60-w5-xXY.title" = "Calcolo…";
 
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
-"dUG-QD-CXL.title" = "Dimensione video 2x";
+"dUG-QD-CXL.title" = "Dimensione 2x";
 
 /* Class = "NSButtonCell"; title = "Disabled"; ObjectID = "duf-3s-3bL"; */
 "duf-3s-3bL.title" = "Disabilitato";
@@ -148,10 +148,10 @@
 "g06-Ja-Ot8.title" = "Controlli nello schermo:";
 
 /* Class = "NSTextFieldCell"; title = "of the screen"; ObjectID = "iRn-3s-oQH"; */
-"iRn-3s-oQH.title" = "dello schermo";
+"iRn-3s-oQH.title" = "lo schermo";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
-"kOT-8q-E57.title" = "Visualizza il tempo e le informazioni sulla batteria quando a schermo intero";
+"kOT-8q-E57.title" = "Visualizza ora e % batteria quando a tutto schermo";
 
 /* Class = "NSTextFieldCell"; title = "Thumbnail Preview:"; ObjectID = "kYu-0l-jQQ"; */
 "kYu-0l-jQQ.title" = "Anteprima miniature:";
@@ -163,7 +163,7 @@
 "mdD-if-Wqw.title" = "Tieni al centro quando trascini";
 
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "oJ8-74-L3z"; */
-"oJ8-74-L3z.title" = "File precedente/successivo";
+"oJ8-74-L3z.title" = "File precedente / successivo";
 
 /* Class = "NSMenuItem"; title = "top"; ObjectID = "oYc-L7-qQd"; */
 "oYc-L7-qQd.title" = "sopra";
@@ -172,13 +172,13 @@
 "pNX-QN-Rpm.title" = "1280";
 
 /* Class = "NSTextFieldCell"; title = "to the"; ObjectID = "qbc-CY-bdK"; */
-"qbc-CY-bdK.title" = "al";
+"qbc-CY-bdK.title" = "dal lato";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "s2E-9N-K86"; */
-"s2E-9N-K86.title" = "punto";
+"s2E-9N-K86.title" = "pixel";
 
 /* Class = "NSMenuItem"; title = "left"; ObjectID = "sJe-bK-eHi"; */
-"sJe-bK-eHi.title" = "sinistra";
+"sJe-bK-eHi.title" = "sinistro";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "se2-DE-pJk"; */
 "se2-DE-pJk.title" = "Sopra";
@@ -193,7 +193,7 @@
 "t7H-9k-P9a.title" = "20";
 
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
-"vdi-lO-q6e.title" = "adatta allo schermo";
+"vdi-lO-q6e.title" = "Adatta allo schermo";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "xrJ-Um-BrJ"; */
 "xrJ-Um-BrJ.title" = "% dello schermo";

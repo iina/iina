@@ -38,20 +38,24 @@ class PlaybackInfo {
 
   var rotation: Int = 0
 
-  var videoPosition: VideoTime? {
-    didSet {
-      guard let duration = videoDuration else { return }
-      if videoPosition!.second < 0 { videoPosition!.second = 0 }
-      if videoPosition!.second > duration.second { videoPosition!.second = duration.second }
-    }
-  }
-
+  var videoPosition: VideoTime?
   var videoDuration: VideoTime?
+
+  func constrainVideoPosition() {
+    guard let duration = videoDuration else { return }
+    if videoPosition!.second < 0 { videoPosition!.second = 0 }
+    if videoPosition!.second > duration.second { videoPosition!.second = duration.second }
+  }
 
   var isSeeking: Bool = false
   var isPaused: Bool = false {
     didSet {
       PlayerCore.checkStatusForSleep()
+      if #available(macOS 10.13, *) {
+        if RemoteCommandController.useSystemMediaControl {
+          NowPlayingInfoManager.updateState(isPaused ? .paused : .playing)
+        }
+      }
     }
   }
 
@@ -83,7 +87,7 @@ class PlaybackInfo {
 
   var isMuted: Bool = false
 
-  var playSpeed: Double = 0
+  var playSpeed: Double = 1
 
   var audioDelay: Double = 0
   var subDelay: Double = 0

@@ -6,7 +6,7 @@
 "2Ig-fw-UvW.title" = "前 / 次 のメディア";
 
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "6F4-gm-oBg"; */
-"6F4-gm-oBg.title" = "フルスクリーンの切り替え";
+"6F4-gm-oBg.title" = "フルスクリーン切り替え";
 
 /* Class = "NSTextFieldCell"; title = "Exact seek is more precise but can cause lag and high CPU usage."; ObjectID = "6FZ-Qm-0k0"; */
 "6FZ-Qm-0k0.title" = "精密なシークは高精度ですが、タイムラグの発生やCPUに高い負荷がかかる恐れがあります。";
@@ -30,7 +30,7 @@
 "GPH-fM-XHN.title" = "ダブルクリック:";
 
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
-"Hm3-dh-jgb.title" = "フルスクリーン";
+"Hm3-dh-jgb.title" = "フルスクリーンにする";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "K9H-w9-wmT"; */
 "K9H-w9-wmT.title" = "自動";
@@ -100,3 +100,15 @@
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "なし";
+
+"Gyd-Qt-FEo.title" = "ミドルクリック:";
+"iFF-Gq-tVx.title" = "OSCを隠す";
+"uqM-UM-Xvb.title" = "一時停止 / 再生";
+"7wy-xt-c8Z.title" = "フルスクリーン切り替え";
+"unj-zt-RyU.title" = "なし";
+
+"dpH-PO-WKt.title" = "フォースタッチ:";
+"M6K-ME-cve.title" = "OSCを隠す";
+"Ba4-eT-rTv.title" = "一時停止 / 再生";
+"hDh-Lk-FJe.title" = "フルスクリーン切り替え";
+"jnR-2I-4x4.title" = "なし";

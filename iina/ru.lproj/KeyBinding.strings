@@ -1,112 +1,113 @@
-/* 
-  KeyBinding.strings
-  iina
+/*
+ KeyBinding.strings
+ iina
+ 
+ Created by lhc on 4/2/2017.
+ Copyright © 2017 lhc. All rights reserved.
+ */
 
-  Created by lhc on 4/2/2017.
-  Copyright © 2017 lhc. All rights reserved.
-*/
-
-"cmd.ignore" = "Ignore";
-"cmd.seek" = "Seek";
-"cmd.revert-seek" = "Revert seek";
-"cmd.set" = "Set";
-"cmd.cycle" = "Cycle";
-"cmd.cycle-values" = "Cycle in";
-"cmd.add" = "Change";
-"cmd.multiply" = "Multiply";
-"cmd.frame-step" = "Next frame";
-"cmd.frame-back-step" = "Previous frame";
-"cmd.ab-loop" = "A-B loop";
-"cmd.sub-seek" = "Sub seek";
-"cmd.playlist-next" = "Next media";
-"cmd.playlist-prev" = "Previous media";
+"cmd.ignore" = "Ничего не делать";
+"cmd.seek" = "Промотать";
+"cmd.revert-seek" = "Промотать назад";
+"cmd.set" = "Установить";
+"cmd.cycle" = "Переключить";
+"cmd.cycle-values" = "Переключить между";
+"cmd.add" = "Изменить";
+"cmd.multiply" = "Умножить";
+"cmd.frame-step" = "Следующий кадр";
+"cmd.frame-back-step" = "Предыдущий кадр";
+"cmd.ab-loop" = "Цикл А-Б";
+"cmd.sub-seek" = "Поиск субтитров";
+"cmd.playlist-next" = "Следующий файл";
+"cmd.playlist-prev" = "Предыдущий файл";
 "cmd.playlist-move" = "Move playlist item";
-"cmd.playlist-clear" = "Clear playlist";
-"cmd.playlist-remove" = "Remove current";
-"cmd.playlist-shuffle" = "Shuffle";
-"cmd.write-watch-later-config" = "Record play history";
-"cmd.stop" = "Stop";
-"cmd.quit" = "Quit";
-"cmd.quit-watch-later" = "Quit (save progress)";
-"cmd.screenshot" = "Screenshot";
-"cmd.screenshot-to-file" = "Screenshot to file";
-"cmd.loadfile" = "Load file";
-"cmd.loadlist" = "Load playlist";
-"cmd.run" = "Run";
+"cmd.playlist-clear" = "Очистить плейлист";
+"cmd.playlist-remove" = "Убрать текущий файл";
+"cmd.playlist-shuffle" = "Перемешать";
+"cmd.write-watch-later-config" = "Сохранять историю воспроизведения"; //  ?
+"cmd.stop" = "Стоп";
+"cmd.quit" = "Завершить";
+"cmd.quit-watch-later" = "Завершить (запомнить место)";
+"cmd.screenshot" = "Снимок экрана";
+"cmd.screenshot-to-file" = "Снимок экрана в файл";
+"cmd.loadfile" = "Загрузить файл";
+"cmd.loadlist" = "Загрузить плейлист";
+"cmd.run" = "Запустить";
 
-"iina.flip" = "Flip";
-"iina.mirror" = "Mirror";
+"iina.flip" = "Вверх ногами";
+"iina.mirror" = "Зеркально";
 
-"iina.toggle-pip" = "Toggle Picture-in-Picture";
-"iina.open-file" = "Open file";
-"iina.open-url" = "Open URL";
-"iina.video-panel" = "Video panel";
-"iina.audio-panel" = "Audio panel";
-"iina.sub-panel" = "Subtitle panel";
-"iina.playlist-panel" = "Playlist panel";
-"iina.chapter-panel" = "Chapter panel";
-"iina.toggle-flip" = "Toggle flip";
-"iina.toggle-mirror" = "Toggle mirror";
-"iina.save-playlist" = "Save current playlist";
-"iina.delete-current-file" = "Delete current file";
-"iina.find-online-subs" = "Find online subtitles";
-"iina.save-downloaded-sub" = "Save downloaded subtitle";
+"iina.toggle-pip" = "Режим «Картинка в картинке»";
+"iina.open-file" = "Открыть файл";
+"iina.open-url" = "Открыть URL";
+"iina.video-panel" = "Панель видео";
+"iina.audio-panel" = "Панель аудио";
+"iina.sub-panel" = "Панель субтитров";
+"iina.playlist-panel" = "Панель плейлистов";
+"iina.chapter-panel" = "Панель глав";
+"iina.toggle-flip" = "Отразить по вертикали (вверх ногами)";
+"iina.toggle-mirror" = "Отразить по горизонтали (зеркально)";
+"iina.save-playlist" = "Сохранить текущий плейлист";
+"iina.delete-current-file" = "Удалить текущий файл";
+"iina.find-online-subs" = "Найти субтитры онлайн";
+"iina.save-downloaded-sub" = "Сохранить загруженные субтитры";
 
-"yes" = "Yes";
-"no" = "No";
-"to" = "to";
-"by" = "by";
-"in" = "in";
-"add" = "add";
-"minus" = "minus";
-"add" = "increase";
-"minus" = "decrease";
-"forward" = "forward";
-"backward" = "backward";
-"seek-to" = "to";
+"yes" = "вкл.";
+"no" = "выкл.";
+"to" = "на";
+"by" = "на";
+"in" = "в";
+"add" = "увеличить на";
+"minus" = "уменьшить на";
+"forward" = "вперёд на";
+"backward" = "назад на";
+"seek-to" = "от начала на";
 
-"relative" = "s";
-"absolute" = "s";
+"relative" = "с";
+"absolute" = "с";
 "absolute-percent" = "%";
 "relative-percent" = "%";
-"relative+exact" = "s (exact)";
-"relative-percent+exact" = "% (exact)";
-"absolute+keyframe" = "s (keyframe)";
-"absolute-percent+keyframe" = "% (keyframe)";
+"relative+exact" = "с (точно)";
+"relative-percent+exact" = "% (точно)";
+"absolute+keyframe" = "с (по кадрам)";
+"absolute-percent+keyframe" = "% (по кадрам)";
 
-"opt.pause" = "Pause";
-"opt.speed" = "Speed";
+"opt.pause" = "паузу";
+"opt.speed" = "скорость";
 
-"opt.video" = "Video track";
-"opt.video-aspect" = "Video aspect";
-"opt.contrast" = "Contrast";
-"opt.brightness" = "Brightness";
-"opt.gamma" = "Gamma";
-"opt.saturation" = "Saturation";
-"opt.deinterlace" = "Deinterlace";
+"opt.video" = "видеодорожку";
+"opt.video-aspect" = "соотношение сторон";
+"opt.contrast" = "Контраст";
+"opt.brightness" = "Яркость";
+"opt.gamma" = "Гамма";
+"opt.saturation" = "Насыщенность";
+"opt.deinterlace" = "деинтерлейсинг";
 
-"opt.audio" = "Audio track";
-"opt.volume" = "Volume";
-"opt.mute" = "Mute";
-"opt.audio-delay" = "Audio delay";
+"opt.audio" = "аудиодорожку";
+"opt.volume" = "Громкость";
+"opt.mute" = "режим «Без звука»";
+"opt.audio-delay" = "Задержка аудио";
 
-"opt.sub" = "Sub track";
-"opt.sub-delay" = "Sub delay";
-"opt.sub-pos" = "Sub pos";
-"opt.sub-scale" = "Sub scale";
-"opt.sub-visibility" = "Sub visibility";
-"opt.sub-ass-style-override" = "ASS style override";
+"opt.sub" = "субтитры";
+"opt.sub-delay" = "Задержка субтитров";
+"opt.sub-pos" = "Позиция субтитров";
+"opt.sub-scale" = "масштаб субтитров";
+"opt.sub-visibility" = "видимость субтитров";
+"opt.sub-ass-style-override" = "переопределение стиля ASS";
 
-"opt.fullscreen" = "Fullscreen";
-"opt.ontop" = "Float on top";
+"opt.fullscreen" = "полноэкранный режим";
+"opt.ontop" = "режим «Поверх всех окон»";
 
-"opt.chapter" = "Chapter";
+"opt.chapter" = "Глава";
 
 
-"read.set" = "Set {{property}} to {{value}}";
+"read.set" = "Установить {{property}} на {{value}}";
 "read.add" = "{{property}} {{value}}";
-"read.multiply" = "Multiply {{property}} by {{factor}}x";
-"read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
-"read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
-"read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
-"read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";
+"read.multiply" = "Увеличить {{property}} в {{factor}}x раз";
+
+
+"read.cycle" = "Переключить {{property}}{{#dir_down}} в обратном порядке{{/dir_down}}";
+"read.cycle-values" = "Переключить {{property}} между ({{{values}}})";
+"read.seek" = "Промотать {{#fwd}}вперёд на{{/fwd}}{{#bwd}}назад на{{/bwd}}{{#abs}}от начала на{{/abs}} {{value}}{{#sec}} с{{/sec}}{{#per}}%{{/per}} {{#exact}}(точно){{/exact}}{{#kf}}(по кадрам){{/kf}}";
+"read.sub-seek" = "Переключить на {{#skip_1}}следующие{{/skip_1}}{{#skip_-1}}предыдущие{{/skip_-1}} субтитры";
+

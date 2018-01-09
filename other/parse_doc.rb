@@ -3,7 +3,7 @@
 require 'nokogiri'
 require 'open-uri'
 
-DOC_URL = "https://mpv.io/manual/master/"
+DOC_URL = "https://mpv.io/manual/stable/"
 
 class String
   def to_camel

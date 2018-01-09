@@ -21,11 +21,15 @@ struct Preference {
   // MARK: - Keys
 
   // consider using RawRepresentable, but also need to extend UserDefaults
-  struct Key: RawRepresentable {
+  struct Key: RawRepresentable, Hashable {
 
     typealias RawValue = String
 
     var rawValue: RawValue
+
+    var hashValue: Int {
+      return rawValue.hashValue
+    }
 
     init(_ string: String) { self.rawValue = string }
 
@@ -70,6 +74,11 @@ struct Preference {
 
     static let alwaysFloatOnTop = Key("alwaysFloatOnTop")
 
+    static let pauseWhenMinimized = Key("pauseWhenMinimized")
+    static let pauseWhenInactive = Key("pauseWhenInactive")
+    static let playWhenEnteringFullScreen = Key("playWhenEnteringFullScreen")
+    static let pauseWhenLeavingFullScreen = Key("pauseWhenLeavingFullScreen")
+
     /** Show chapter pos in progress bar (bool) */
     static let showChapterPos = Key("showChapterPos")
 
@@ -103,10 +112,9 @@ struct Preference {
 
     static let usePhysicalResolution = Key("usePhysicalResolution")
 
-    /** IINA will adjust window size according to video size,
-     but if the file is not opened by user manually (File > Open),
-     e.g. jumping to next item in playlist, window size will remoain the same. */
-    static let resizeOnlyWhenManuallyOpenFile = Key("resizeOnlyWhenManuallyOpenFile")
+    static let initialWindowSizePosition = Key("initialWindowSizePosition")
+    static let resizeWindowTiming = Key("resizeWindowTiming")
+    static let resizeWindowOption = Key("resizeWindowOption")
 
     static let oscPosition = Key("oscPosition")
 
@@ -116,6 +124,8 @@ struct Preference {
     static let maxThumbnailPreviewCacheSize = Key("maxThumbnailPreviewCacheSize")
 
     static let autoSwitchToMusicMode = Key("autoSwitchToMusicMode")
+
+    static let displayTimeAndBatteryInFullScreen = Key("displayTimeAndBatteryInFullScreen")
 
     // Codec
 
@@ -200,6 +210,8 @@ struct Preference {
 
     static let showRemainingTime = Key("showRemainingTime")
 
+    static let followGlobalSeekTypeWhenAdjustSlider = Key("followGlobalSeekTypeWhenAdjustSlider")
+
     // Input
 
     /** Whether catch media keys event (bool) */
@@ -235,6 +247,8 @@ struct Preference {
 
     static let watchProperties = Key("watchProperties")
 
+    static let savedVideoFilters = Key("savedVideoFilters")
+    static let savedAudioFilters = Key("savedAudioFilters")
   }
 
   // MARK: - Enums
@@ -290,7 +304,7 @@ struct Preference {
 
   enum SeekOption: Int, InitializingFromKey {
     case relative = 0
-    case extract
+    case exact
     case auto
 
     static var defaultValue = SeekOption.relative
@@ -514,129 +528,176 @@ struct Preference {
     }
   }
 
+  enum ResizeWindowTiming: Int, InitializingFromKey {
+    case always = 0
+    case onlyWhenOpen
+    case never
+
+    static var defaultValue = ResizeWindowTiming.onlyWhenOpen
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+  }
+
+  enum ResizeWindowOption: Int, InitializingFromKey {
+    case fitScreen = 0
+    case videoSize05
+    case videoSize10
+    case videoSize15
+    case videoSize20
+
+    static var defaultValue = ResizeWindowOption.videoSize10
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var ratio: Double {
+      switch self {
+      case .fitScreen: return -1
+      case .videoSize05: return 0.5
+      case .videoSize10: return 1
+      case .videoSize15: return 1.5
+      case .videoSize20: return 2
+      }
+    }
+  }
+
   // MARK: - Defaults
 
-  static let defaultPreference:[String: Any] = [
-    Key.actionAfterLaunch.rawValue: ActionAfterLaunch.welcomeWindow.rawValue,
-    Key.alwaysOpenInNewWindow.rawValue: true,
-    Key.enableCmdN.rawValue: false,
-    Key.recordPlaybackHistory.rawValue: true,
-    Key.recordRecentFiles.rawValue: true,
-    Key.trackAllFilesInRecentOpenMenu.rawValue: true,
-    Key.controlBarPositionHorizontal.rawValue: Float(0.5),
-    Key.controlBarPositionVertical.rawValue: Float(0.1),
-    Key.controlBarStickToCenter.rawValue: true,
-    Key.controlBarAutoHideTimeout.rawValue: Float(2.5),
-    Key.oscPosition.rawValue: OSCPosition.floating.rawValue,
-    Key.playlistWidth.rawValue: 270,
-    Key.themeMaterial.rawValue: Theme.dark.rawValue,
-    Key.osdAutoHideTimeout.rawValue: Float(1),
-    Key.osdTextSize.rawValue: Float(20),
-    Key.softVolume.rawValue: 100,
-    Key.arrowButtonAction.rawValue: ArrowButtonAction.speed.rawValue,
-    Key.pauseWhenOpen.rawValue: false,
-    Key.fullScreenWhenOpen.rawValue: false,
-    Key.useLegacyFullScreen.rawValue: false,
-    Key.legacyFullScreenAnimation.rawValue: false,
-    Key.showChapterPos.rawValue: false,
-    Key.resumeLastPosition.rawValue: true,
-    Key.useMediaKeys.rawValue: true,
-    Key.useAppleRemote.rawValue: true,
-    Key.alwaysFloatOnTop.rawValue: false,
-    Key.blackOutMonitor.rawValue: false,
+  static let defaultPreference: [Preference.Key: Any] = [
+    .actionAfterLaunch: ActionAfterLaunch.welcomeWindow.rawValue,
+    .alwaysOpenInNewWindow: true,
+    .enableCmdN: false,
+    .recordPlaybackHistory: true,
+    .recordRecentFiles: true,
+    .trackAllFilesInRecentOpenMenu: true,
+    .controlBarPositionHorizontal: Float(0.5),
+    .controlBarPositionVertical: Float(0.1),
+    .controlBarStickToCenter: true,
+    .controlBarAutoHideTimeout: Float(2.5),
+    .oscPosition: OSCPosition.floating.rawValue,
+    .playlistWidth: 270,
+    .themeMaterial: Theme.dark.rawValue,
+    .osdAutoHideTimeout: Float(1),
+    .osdTextSize: Float(20),
+    .softVolume: 100,
+    .arrowButtonAction: ArrowButtonAction.speed.rawValue,
+    .pauseWhenOpen: false,
+    .fullScreenWhenOpen: false,
+    .useLegacyFullScreen: false,
+    .legacyFullScreenAnimation: false,
+    .showChapterPos: false,
+    .resumeLastPosition: true,
+    .useMediaKeys: true,
+    .useAppleRemote: false,
+    .alwaysFloatOnTop: false,
+    .blackOutMonitor: false,
+    .pauseWhenMinimized: false,
+    .pauseWhenInactive: false,
+    .pauseWhenLeavingFullScreen: false,
+    .playWhenEnteringFullScreen: false,
 
-    Key.playlistAutoAdd.rawValue: true,
-    Key.playlistAutoPlayNext.rawValue: true,
+    .playlistAutoAdd: true,
+    .playlistAutoPlayNext: true,
 
-    Key.usePhysicalResolution.rawValue: true,
-    Key.resizeOnlyWhenManuallyOpenFile.rawValue: true,
-    Key.showRemainingTime.rawValue: false,
-    Key.enableThumbnailPreview.rawValue: true,
-    Key.maxThumbnailPreviewCacheSize.rawValue: 500,
-    Key.autoSwitchToMusicMode.rawValue: true,
+    .usePhysicalResolution: true,
+    .initialWindowSizePosition: "",
+    .resizeWindowTiming: ResizeWindowTiming.onlyWhenOpen.rawValue,
+    .resizeWindowOption: ResizeWindowOption.videoSize10.rawValue,
+    .showRemainingTime: false,
+    .enableThumbnailPreview: true,
+    .maxThumbnailPreviewCacheSize: 500,
+    .autoSwitchToMusicMode: true,
+    .displayTimeAndBatteryInFullScreen: false,
 
-    Key.videoThreads.rawValue: 0,
-    Key.hardwareDecoder.rawValue: HardwareDecoderOption.auto.rawValue,
-    Key.audioThreads.rawValue: 0,
-    Key.audioLanguage.rawValue: "",
-    Key.maxVolume.rawValue: 100,
-    Key.spdifAC3.rawValue: false,
-    Key.spdifDTS.rawValue: false,
-    Key.spdifDTSHD.rawValue: false,
-    Key.enableInitialVolume.rawValue: false,
-    Key.initialVolume.rawValue: 100,
+    .videoThreads: 0,
+    .hardwareDecoder: HardwareDecoderOption.auto.rawValue,
+    .audioThreads: 0,
+    .audioLanguage: "",
+    .maxVolume: 100,
+    .spdifAC3: false,
+    .spdifDTS: false,
+    .spdifDTSHD: false,
+    .enableInitialVolume: false,
+    .initialVolume: 100,
 
-    Key.subAutoLoadIINA.rawValue: IINAAutoLoadAction.iina.rawValue,
-    Key.subAutoLoadPriorityString.rawValue: "",
-    Key.subAutoLoadSearchPath.rawValue: "./*",
-    Key.ignoreAssStyles.rawValue: false,
-    Key.subOverrideLevel.rawValue: SubOverrideLevel.strip.rawValue,
-    Key.subTextFont.rawValue: "sans-serif",
-    Key.subTextSize.rawValue: Float(55),
-    Key.subTextColor.rawValue: NSArchiver.archivedData(withRootObject: NSColor.white),
-    Key.subBgColor.rawValue: NSArchiver.archivedData(withRootObject: NSColor.clear),
-    Key.subBold.rawValue: false,
-    Key.subItalic.rawValue: false,
-    Key.subBlur.rawValue: Float(0),
-    Key.subSpacing.rawValue: Float(0),
-    Key.subBorderSize.rawValue: Float(3),
-    Key.subBorderColor.rawValue: NSArchiver.archivedData(withRootObject: NSColor.black),
-    Key.subShadowSize.rawValue: Float(0),
-    Key.subShadowColor.rawValue: NSArchiver.archivedData(withRootObject: NSColor.clear),
-    Key.subAlignX.rawValue: SubAlign.center.rawValue,
-    Key.subAlignY.rawValue: SubAlign.bottom.rawValue,
-    Key.subMarginX.rawValue: Float(25),
-    Key.subMarginY.rawValue: Float(22),
-    Key.subPos.rawValue: Float(100),
-    Key.subLang.rawValue: "",
-    Key.onlineSubSource.rawValue: OnlineSubtitle.Source.shooter.rawValue,
-    Key.displayInLetterBox.rawValue: true,
-    Key.subScaleWithWindow.rawValue: true,
-    Key.openSubUsername.rawValue: "",
-    Key.defaultEncoding.rawValue: "auto",
+    .subAutoLoadIINA: IINAAutoLoadAction.iina.rawValue,
+    .subAutoLoadPriorityString: "",
+    .subAutoLoadSearchPath: "./*",
+    .ignoreAssStyles: false,
+    .subOverrideLevel: SubOverrideLevel.strip.rawValue,
+    .subTextFont: "sans-serif",
+    .subTextSize: Float(55),
+    .subTextColor: NSArchiver.archivedData(withRootObject: NSColor.white),
+    .subBgColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
+    .subBold: false,
+    .subItalic: false,
+    .subBlur: Float(0),
+    .subSpacing: Float(0),
+    .subBorderSize: Float(3),
+    .subBorderColor: NSArchiver.archivedData(withRootObject: NSColor.black),
+    .subShadowSize: Float(0),
+    .subShadowColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
+    .subAlignX: SubAlign.center.rawValue,
+    .subAlignY: SubAlign.bottom.rawValue,
+    .subMarginX: Float(25),
+    .subMarginY: Float(22),
+    .subPos: Float(100),
+    .subLang: "",
+    .onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
+    .displayInLetterBox: true,
+    .subScaleWithWindow: true,
+    .openSubUsername: "",
+    .defaultEncoding: "auto",
 
-    Key.enableCache.rawValue: true,
-    Key.defaultCacheSize.rawValue: 153600,
-    Key.cacheBufferSize.rawValue: 153600,
-    Key.secPrefech.rawValue: 100,
-    Key.userAgent.rawValue: "",
-    Key.transportRTSPThrough.rawValue: RTSPTransportation.tcp.rawValue,
-    Key.ytdlEnabled.rawValue: true,
-    Key.ytdlSearchPath.rawValue: "",
-    Key.ytdlRawOptions.rawValue: "",
-    Key.httpProxy.rawValue: "",
+    .enableCache: true,
+    .defaultCacheSize: 153600,
+    .cacheBufferSize: 153600,
+    .secPrefech: 100,
+    .userAgent: "",
+    .transportRTSPThrough: RTSPTransportation.tcp.rawValue,
+    .ytdlEnabled: true,
+    .ytdlSearchPath: "",
+    .ytdlRawOptions: "",
+    .httpProxy: "",
 
-    Key.inputConfigs.rawValue: [:],
-    Key.currentInputConfigName.rawValue: "IINA Default",
+    .inputConfigs: [:],
+    .currentInputConfigName: "IINA Default",
 
-    Key.enableAdvancedSettings.rawValue: false,
-    Key.useMpvOsd.rawValue: false,
-    Key.enableLogging.rawValue: false,
-    Key.userOptions.rawValue: [],
-    Key.useUserDefinedConfDir.rawValue: false,
-    Key.userDefinedConfDir.rawValue: "~/.config/mpv/",
+    .enableAdvancedSettings: false,
+    .useMpvOsd: false,
+    .enableLogging: false,
+    .userOptions: [],
+    .useUserDefinedConfDir: false,
+    .userDefinedConfDir: "~/.config/mpv/",
 
-    Key.keepOpenOnFileEnd.rawValue: true,
-    Key.quitWhenNoOpenedWindow.rawValue: false,
-    Key.useExactSeek.rawValue: SeekOption.relative.rawValue,
-    Key.relativeSeekAmount.rawValue: 3,
-    Key.volumeScrollAmount.rawValue: 3,
-    Key.verticalScrollAction.rawValue: ScrollAction.volume.rawValue,
-    Key.horizontalScrollAction.rawValue: ScrollAction.seek.rawValue,
-    Key.singleClickAction.rawValue: MouseClickAction.hideOSC.rawValue,
-    Key.doubleClickAction.rawValue: MouseClickAction.fullscreen.rawValue,
-    Key.rightClickAction.rawValue: MouseClickAction.pause.rawValue,
-    Key.middleClickAction.rawValue: MouseClickAction.none.rawValue,
-    Key.pinchAction.rawValue: PinchAction.windowSize.rawValue,
-    Key.forceTouchAction.rawValue: MouseClickAction.none.rawValue,
+    .keepOpenOnFileEnd: true,
+    .quitWhenNoOpenedWindow: false,
+    .useExactSeek: SeekOption.relative.rawValue,
+    .followGlobalSeekTypeWhenAdjustSlider: false,
+    .relativeSeekAmount: 3,
+    .volumeScrollAmount: 3,
+    .verticalScrollAction: ScrollAction.volume.rawValue,
+    .horizontalScrollAction: ScrollAction.seek.rawValue,
+    .singleClickAction: MouseClickAction.hideOSC.rawValue,
+    .doubleClickAction: MouseClickAction.fullscreen.rawValue,
+    .rightClickAction: MouseClickAction.pause.rawValue,
+    .middleClickAction: MouseClickAction.none.rawValue,
+    .pinchAction: PinchAction.windowSize.rawValue,
+    .forceTouchAction: MouseClickAction.none.rawValue,
 
-    Key.screenshotFolder.rawValue: "~/Pictures/Screenshots",
-    Key.screenshotIncludeSubtitle.rawValue: true,
-    Key.screenshotFormat.rawValue: ScreenshotFormat.png.rawValue,
-    Key.screenshotTemplate.rawValue: "%F-%n",
+    .screenshotFolder: "~/Pictures/Screenshots",
+    .screenshotIncludeSubtitle: true,
+    .screenshotFormat: ScreenshotFormat.png.rawValue,
+    .screenshotTemplate: "%F-%n",
 
-    Key.watchProperties.rawValue: []
+    .watchProperties: [],
+    .savedVideoFilters: [],
+    .savedAudioFilters: []
   ]
+
 
   static private let ud = UserDefaults.standard
 

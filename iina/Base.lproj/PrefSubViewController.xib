@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -60,19 +60,19 @@
                                                     <binding destination="5Up-Ab-aAm" name="selectedTag" keyPath="values.subAutoLoadIINA" id="Pi3-G7-Eho"/>
                                                 </connections>
                                             </popUpButton>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C4b-sm-2kc">
-                                                <rect key="frame" x="-2" y="104" width="260" height="14"/>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C4b-sm-2kc">
+                                                <rect key="frame" x="-2" y="104" width="259" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Subtitles have priority when filename containing:" id="7pf-Kb-TNr">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S8g-xi-5Ez">
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S8g-xi-5Ez" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="81" width="254" height="19"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="19" id="5Qw-dU-xAc"/>
-                                                    <constraint firstAttribute="width" constant="254" id="Pyv-pb-QQr"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="254" id="Pyv-pb-QQr"/>
                                                 </constraints>
                                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="fri-sR-psZ">
                                                     <font key="font" metaFont="smallSystem"/>
@@ -91,7 +91,7 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qkw-vv-CeA">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qkw-vv-CeA">
                                                 <rect key="frame" x="-2" y="43" width="239" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Also search subtitles in following directories:" id="QsS-wD-2hY">
                                                     <font key="font" metaFont="smallSystem"/>
@@ -99,10 +99,10 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="83N-r3-wZ6">
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="83N-r3-wZ6" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="20" width="254" height="19"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="254" id="ugO-N7-hfG"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="254" id="ugO-N7-hfG"/>
                                                 </constraints>
                                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Mbv-Nx-tdp">
                                                     <font key="font" metaFont="smallSystem"/>
@@ -113,7 +113,7 @@
                                                     <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subAutoLoadSearchPath" id="6tD-Cb-lzX"/>
                                                 </connections>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T4U-Ii-SK6">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T4U-Ii-SK6">
                                                 <rect key="frame" x="-2" y="4" width="550" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed." id="Luv-2B-9v8">
                                                     <font key="font" metaFont="smallSystem"/>
@@ -140,10 +140,12 @@
                                             <constraint firstAttribute="trailing" secondItem="T4U-Ii-SK6" secondAttribute="trailing" id="jbd-rW-l9b"/>
                                             <constraint firstItem="S8g-xi-5Ez" firstAttribute="top" secondItem="C4b-sm-2kc" secondAttribute="bottom" constant="4" id="lto-cf-VJo"/>
                                             <constraint firstAttribute="bottom" secondItem="T4U-Ii-SK6" secondAttribute="bottom" constant="4" id="mHn-WM-b4L"/>
+                                            <constraint firstItem="S8g-xi-5Ez" firstAttribute="width" secondItem="if4-Ls-9s6" secondAttribute="width" id="mKB-3t-lWN"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Tej-f2-5d5" secondAttribute="trailing" constant="20" symbolic="YES" id="o8G-bb-tes"/>
                                             <constraint firstItem="T4U-Ii-SK6" firstAttribute="top" secondItem="83N-r3-wZ6" secondAttribute="bottom" constant="2" id="p6C-De-Odo"/>
                                             <constraint firstItem="83N-r3-wZ6" firstAttribute="leading" secondItem="n8c-of-fDQ" secondAttribute="leading" id="plZ-FG-Ce2"/>
                                             <constraint firstItem="S8g-xi-5Ez" firstAttribute="leading" secondItem="n8c-of-fDQ" secondAttribute="leading" id="pxc-Be-k6C"/>
+                                            <constraint firstItem="83N-r3-wZ6" firstAttribute="width" secondItem="if4-Ls-9s6" secondAttribute="width" id="raR-h1-O59"/>
                                             <constraint firstItem="aJd-if-ImI" firstAttribute="top" secondItem="S8g-xi-5Ez" secondAttribute="bottom" constant="2" id="tOd-TK-BMM"/>
                                             <constraint firstItem="Tej-f2-5d5" firstAttribute="leading" secondItem="n8c-of-fDQ" secondAttribute="leading" id="xHQ-K2-9l0"/>
                                         </constraints>
@@ -167,7 +169,7 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zR-BO-yhX">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6zR-BO-yhX">
                                                 <rect key="frame" x="-2" y="29" width="550" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles." id="Z2M-dh-eq1">
                                                     <font key="font" metaFont="smallSystem"/>
@@ -413,7 +415,7 @@
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
-                                                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LYh-2j-Fsx">
+                                                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LYh-2j-Fsx" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                                                             <rect key="frame" x="54" y="37" width="38" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="38" id="tS9-vz-vnj"/>
@@ -454,10 +456,10 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="LnO-CD-ImJ">
-                                                            <rect key="frame" x="141" y="38" width="27" height="19"/>
+                                                            <rect key="frame" x="141" y="38" width="29" height="18"/>
                                                             <buttonCell key="cell" type="check" title="𝐼" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pNF-Fw-QtY">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" size="13" name="CambriaMath"/>
+                                                                <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
                                                                 <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subItalic" id="Led-lG-OWd"/>
@@ -487,10 +489,10 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="EV7-O7-x1O">
-                                                            <rect key="frame" x="102" y="38" width="31" height="19"/>
+                                                            <rect key="frame" x="102" y="38" width="31" height="18"/>
                                                             <buttonCell key="cell" type="check" title="𝐁" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="hEk-7E-10q">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" size="13" name="CambriaMath"/>
+                                                                <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
                                                                 <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subBold" id="Fe4-vz-ZMk"/>
@@ -561,7 +563,7 @@
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
-                                                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TbV-3r-Wuz">
+                                                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TbV-3r-Wuz" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                                                             <rect key="frame" x="54" y="10" width="38" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="38" id="hBa-tc-QBi"/>
@@ -652,7 +654,7 @@
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
-                                                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fR-L1-2nd">
+                                                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fR-L1-2nd" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                                                             <rect key="frame" x="54" y="10" width="38" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="38" id="POm-8d-RuI"/>
@@ -697,7 +699,7 @@
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
-                                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u2l-jt-Ehx">
+                                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u2l-jt-Ehx" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                                                             <rect key="frame" x="54" y="9" width="38" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="38" id="tsX-H8-Pbg"/>
@@ -723,7 +725,7 @@
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
-                                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kdB-R4-fML">
+                                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kdB-R4-fML" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                                                             <rect key="frame" x="195" y="9" width="38" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="38" id="fox-p7-16v"/>
@@ -879,7 +881,7 @@
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
-                                                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zNH-bp-deO">
+                                                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zNH-bp-deO" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                                                             <rect key="frame" x="31" y="9" width="80" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="80" id="kOy-xc-RoW"/>
@@ -894,7 +896,7 @@
                                                                 <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subMarginX" id="bFJ-mc-gMI"/>
                                                             </connections>
                                                         </textField>
-                                                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B8V-e4-91a">
+                                                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B8V-e4-91a" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                                                             <rect key="frame" x="149" y="9" width="80" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="80" id="Gnp-hS-a93"/>
@@ -939,7 +941,7 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HKD-K0-lsV">
+                                            <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HKD-K0-lsV" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
                                                 <rect key="frame" x="110" y="43" width="80" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="80" id="4Sv-7x-c6d"/>

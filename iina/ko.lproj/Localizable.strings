@@ -31,7 +31,7 @@
 "osd.pause" = "일시 정지됨";
 "osd.resume" = "재생 복원됨";
 "osd.volume" = "음량: %i";
-"osd.speed" = "재생 속도: %.2f배속";
+"osd.speed" = "재생속도: %.2f배속";
 "osd.aspect" = "화면비: %@";
 "osd.crop" = "화면 자르기: %@";
 "osd.rotate" = "회전: %i°";
@@ -68,6 +68,8 @@
 "osd.file_error" = "파일 읽기 오류";
 "osd.cannot_login" = "로그인할 수 없음";
 "osd.canceled" = "취소됨";
+"osd.filter_added" = "필터 추가됨: %@";
+"osd.filter_removed" = "필터 제거됨";
 
 "preference.title" = "환경설정";
 "preference.general" = "일반";
@@ -81,6 +83,7 @@
 "preference.scripts" = "스크립트";
 "preference.not_logged_in" = "로그인되지 않음";
 "preference.logged_in_as" = "%@(으)로 로그인됨";
+"preference.system_media_control" = "시스템 미디어 컨트롤 사용";
 
 "menu.volume" = "음량: %d";
 "menu.audio_delay" = "오디오 지연: %.2f초";
@@ -91,6 +94,19 @@
 "menu.exit_pip" = "화면 속 화면에서 나가기";
 "menu.pause" = "일시 정지";
 "menu.resume" = "재생";
+
+"menu.speed" = "재생속도: %.2fx"; //
+
+"menu.seek_forward" = "앞으로 탐색 %.0f초"; //
+"menu.seek_backward" = "뒤로 탐색 %.0f초"; //
+"menu.speed_up" = "빠르게 재생 %.1f배"; //
+"menu.speed_down" = "느리게 재생 %.1f배"; //
+"menu.volume_up" = "음량 증가 %.0f%%"; //
+"menu.volume_down" = "음량 감소 %.0f%%"; //
+"menu.audio_delay_up" = "오디오 지연 + %.1f초"; //
+"menu.audio_delay_down" = "오디오 지연 - %.1f초"; //
+"menu.sub_delay_up" = "자막 지연 + %.1f초"; //
+"menu.sub_delay_down" = "자막 지연 - %.1f초"; //
 
 "track.none" = "<없음>";
 
@@ -124,6 +140,7 @@
 "alert.config.file_existing.message" = "파일을 덮어 쓰려면 승인을, 파인더에서 파일을 확인하려면 취소를 누르십시오.";
 "alert.config.cannot_create" = "설정 파일을 만들 수 없습니다!";
 "alert.config.cannot_write" = "설정 파일에 저장할 수 없습니다!";
+"alert.duplicate_config" = "기본 설정은 수정할 수 없습니다. 설정을 복제한 다음 수정하십시오.";
 
 "alert.filter.incorrect" = "필터를 설정하는 도중 오류가 발생했습니다. 매개변수 형식을 확인하십시오.";
 "alert.add_filter.title" = "새 필터";
@@ -172,6 +189,10 @@
 "alert.clear_cache.message" = "썸네일 캐시를 전부 비우겠습니까?";
 "alert.clear_cache.success" = "캐시를 전부 비웠습니다.";
 
+"alert.nothing_to_open" = "열 수 있는 파일이 없습니다.";
+
+"alert.no_video_track" = "비디오 트랙이 없습니다.";
+
 "pl_menu.title_multi" = "%d개의 항목";
 "pl_menu.play_next" = "다음 항목 재생";
 "pl_menu.play_in_new_window" = "새 윈도우에서 재생";
@@ -189,7 +210,7 @@
 "pl_menu.wrong_sub" = "일치되지 않은 자막!";
 
 "keymapping.title" = "단축키 지정";
-"keymapping.message" = "기록할 키를 누르십시오.";
+"keymapping.message" = "단축키로 사용할 키를 누르십시오.";
 
 "filter.video_filters" = "비디오 필터";
 "filter.audio_filters" = "오디오 필터";
@@ -197,6 +218,8 @@
 "hwdec.no" = "하드웨어 디코딩을 사용하지 않습니다.";
 "hwdec.auto" = "하드웨어 디코딩을 사용합니다. 하지만 비디오 필터 대부분은 정상적으로 동작하지 않습니다.";
 "hwdec.auto-copy" = "하드웨어 디코딩을 사용합니다. 두 배의 메모리를 사용하지만, 비디오 필터를 적용할 수 있습니다.";
+
+"subencoding.auto" = "자동 감지";
 
 // Touch bar
 

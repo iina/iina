@@ -4,6 +4,12 @@
 /* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "9N4-Zg-M7m"; */
 "9N4-Zg-M7m.title" = "상하 위치";
 
+/* Class = "NSMenuItem"; title = "OpenSubtitles.org"; ObjectID = "39k-VH-tOz"; */
+"39k-VH-tOz.title" = "OpenSubtitles.org";
+
+/* Class = "NSMenuItem"; title = "Shooter.cn"; ObjectID = "7YD-rw-eCZ"; */
+"7YD-rw-eCZ.title" = "Shooter.cn";
+
 /* Class = "NSMenuItem"; title = "Shooter.cn"; ObjectID = "5Bo-HI-z0D"; */
 "5Bo-HI-z0D.title" = "Shooter.cn";
 
@@ -33,6 +39,9 @@
 /* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "Iax-cc-YIO"; */
 "Iax-cc-YIO.title" = "OpenSubtitles 계정:";
 
+/* Class = "NSTextFieldCell"; title = "%"; ObjectID = "JZo-4H-owW"; */
+"JZo-4H-owW.title" = "%";
+
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "zaE-bH-XfT"; */
 "zaE-bH-XfT.title" = "선호 언어:";
 
@@ -44,6 +53,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
 "gAq-Vr-hRY.title" = "설정 무시 정도";
+
+/* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
+"3H8-Ei-cTm.title" = "strip";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "l7l-ZO-W79"; */
 "l7l-ZO-W79.title" = " X:";
@@ -102,6 +114,9 @@
 /* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "fUB-ll-Nvz"; */
 "fUB-ll-Nvz.title" = "로그인되지 않음";
 
+/* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "cov-Uy-wnc"; */
+"cov-Uy-wnc.title" = "로그인되지 않음";
+
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
 "OcF-0z-7qe.title" = "선택하면 모든 ASS 자막은 아래 설정에 따라 표시됩니다.";
 
@@ -119,6 +134,9 @@
 
 /* Class = "NSButtonCell"; title = "Login"; ObjectID = "l4s-EW-FkT"; */
 "l4s-EW-FkT.title" = "로그인";
+
+/* Class = "NSButtonCell"; title = "Login"; ObjectID = "WHk-sk-gmK"; */
+"WHk-sk-gmK.title" = "로그인";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
 "vDc-dw-liI.title" = "색상:";
@@ -147,8 +165,14 @@
 /* Class = "NSButtonCell"; title = "Italic"; ObjectID = "vc5-ZJ-ozS"; */
 "vc5-ZJ-ozS.title" = "기울임꼴";
 
+/* Class = "NSButtonCell"; title = "𝐼"; ObjectID = "pNF-Fw-QtY"; */
+"pNF-Fw-QtY.title" = "𝐼";
+
 /* Class = "NSButtonCell"; title = "Bold"; ObjectID = "wbU-ip-uCp"; */
 "wbU-ip-uCp.title" = "굵게";
+
+/* Class = "NSButtonCell"; title = "𝐁"; ObjectID = "hEk-7E-10q"; */
+"hEk-7E-10q.title" = "𝐁";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "gkc-qt-sD9"; */
 "gkc-qt-sD9.title" = "두께:";
@@ -171,3 +195,11 @@
 "Luv-2B-9v8.title" = "디렉토리를 콜론(:)으로 구분하십시오. 상대경로와 경로문자열의 끝에 와일드카드(*)를 사용할 수 있습니다.";
 
 "Y75-4k-2Du.title" = "기본 인코딩:";
+
+"0fB-es-DmV.title" = "온라인 자막:";
+
+"29W-lw-0pD.label" = "일반";
+
+"R5q-Xd-PPr.label" = "스타일 및 위치";
+
+"9pv-1r-nuH.title" = "서체";

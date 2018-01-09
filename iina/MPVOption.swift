@@ -20,6 +20,8 @@ struct MPVOption {
     static let ffVid = "ff-vid"
     /** --edition=<ID|auto> */
     static let edition = "edition"
+    /** --track-auto-selection=<yes|no> */
+    static let trackAutoSelection = "track-auto-selection"
   }
 
   struct PlaybackControl {
@@ -61,10 +63,10 @@ struct MPVOption {
     static let accessReferences = "access-references"
     /** --loop-playlist=<N|inf|force|no> */
     static let loopPlaylist = "loop-playlist"
-    /** --loop */
-    static let loop = "loop"
     /** --loop-file=<N|inf|no> */
     static let loopFile = "loop-file"
+    /** --loop=<N|inf|no> */
+    static let loop = "loop"
     /** --ab-loop-a=<time> */
     static let abLoopA = "ab-loop-a"
     /** --ab-loop-b=<time> */
@@ -167,7 +169,7 @@ struct MPVOption {
     static let panscan = "panscan"
     /** --video-aspect=<ratio|no> */
     static let videoAspect = "video-aspect"
-    /** --video-aspect-method=<hybrid|bitstream|container> */
+    /** --video-aspect-method=<bitstream|container> */
     static let videoAspectMethod = "video-aspect-method"
     /** --video-unscaled=<no|yes|downscale-big> */
     static let videoUnscaled = "video-unscaled"
@@ -191,10 +193,8 @@ struct MPVOption {
     static let noCorrectPts = "no-correct-pts"
     /** --fps=<float> */
     static let fps = "fps"
-    /** --deinterlace=<yes|no|auto> */
+    /** --deinterlace=<yes|no> */
     static let deinterlace = "deinterlace"
-    /** --field-dominance=<auto|top|bottom> */
-    static let fieldDominance = "field-dominance"
     /** --frames=<number> */
     static let frames = "frames"
     /** --video-output-levels=<outputlevels> */
@@ -205,6 +205,8 @@ struct MPVOption {
     static let vdLavcCheckHwProfile = "vd-lavc-check-hw-profile"
     /** --vd-lavc-software-fallback=<yes|no|N> */
     static let vdLavcSoftwareFallback = "vd-lavc-software-fallback"
+    /** --vd-lavc-dr=<yes|no> */
+    static let vdLavcDr = "vd-lavc-dr"
     /** --vd-lavc-bitexact */
     static let vdLavcBitexact = "vd-lavc-bitexact"
     /** --vd-lavc-fast */
@@ -244,6 +246,14 @@ struct MPVOption {
     static let ad = "ad"
     /** --volume=<value> */
     static let volume = "volume"
+    /** --replaygain=<no|track|album> */
+    static let replaygain = "replaygain"
+    /** --replaygain-preamp=<db> */
+    static let replaygainPreamp = "replaygain-preamp"
+    /** --replaygain-clip=<yes|no> */
+    static let replaygainClip = "replaygain-clip"
+    /** --replaygain-fallback=<db> */
+    static let replaygainFallback = "replaygain-fallback"
     /** --balance=<value> */
     static let balance = "balance"
     /** --audio-delay=<sec> */
@@ -274,7 +284,9 @@ struct MPVOption {
     static let audioNormalizeDownmix = "audio-normalize-downmix"
     /** --audio-display=<no|attachment> */
     static let audioDisplay = "audio-display"
-    /** --audio-file=<filename> */
+    /** --audio-files=<files> */
+    static let audioFiles = "audio-files"
+    /** --audio-file=<file> */
     static let audioFile = "audio-file"
     /** --audio-format=<format> */
     static let audioFormat = "audio-format"
@@ -311,8 +323,8 @@ struct MPVOption {
     static let subDemuxer = "sub-demuxer"
     /** --sub-delay=<sec> */
     static let subDelay = "sub-delay"
-    /** --sub-file=subtitlefile */
-    static let subFile = "sub-file"
+    /** --sub-files=<file-list> */
+    static let subFiles = "sub-files"
     /** --secondary-sid=<ID|auto|no> */
     static let secondarySid = "secondary-sid"
     /** --sub-scale=<0-100> */
@@ -341,8 +353,8 @@ struct MPVOption {
     static let subAssShaper = "sub-ass-shaper"
     /** --sub-ass-styles=<filename> */
     static let subAssStyles = "sub-ass-styles"
-    /** --sub-ass-style-override=<yes|no|force|signfs|strip> */
-    static let subAssStyleOverride = "sub-ass-style-override"
+    /** --sub-ass-override=<yes|no|force|scale|strip> */
+    static let subAssOverride = "sub-ass-override"
     /** --sub-ass-force-margins */
     static let subAssForceMargins = "sub-ass-force-margins"
     /** --sub-use-margins */
@@ -369,10 +381,8 @@ struct MPVOption {
     static let noSubAuto = "no-sub-auto"
     /** --sub-codepage=<codepage> */
     static let subCodepage = "sub-codepage"
-    /** --sub-fix-timing */
+    /** --sub-fix-timing=<yes|no> */
     static let subFixTiming = "sub-fix-timing"
-    /** --no-sub-fix-timing */
-    static let noSubFixTiming = "no-sub-fix-timing"
     /** --sub-forced-only */
     static let subForcedOnly = "sub-forced-only"
     /** --sub-fps=<rate> */
@@ -383,6 +393,8 @@ struct MPVOption {
     static let subGray = "sub-gray"
     /** --sub-paths=<path1:path2:...> */
     static let subPaths = "sub-paths"
+    /** --sub-file-paths=<path-list> */
+    static let subFilePaths = "sub-file-paths"
     /** --sub-visibility */
     static let subVisibility = "sub-visibility"
     /** --no-sub-visibility */
@@ -510,6 +522,10 @@ struct MPVOption {
     static let hidpiWindowScale = "hidpi-window-scale"
     /** --no-hidpi-window-scale */
     static let noHidpiWindowScale = "no-hidpi-window-scale"
+    /** --native-fs */
+    static let nativeFs = "native-fs"
+    /** --no-native-fs */
+    static let noNativeFs = "no-native-fs"
     /** --monitorpixelaspect=<ratio> */
     static let monitorpixelaspect = "monitorpixelaspect"
     /** --stop-screensaver */
@@ -593,8 +609,6 @@ struct MPVOption {
     static let demuxerLavfProbesize = "demuxer-lavf-probesize"
     /** --demuxer-lavf-buffersize=<value> */
     static let demuxerLavfBuffersize = "demuxer-lavf-buffersize"
-    /** --demuxer-lavf-cryptokey=<hexstring> */
-    static let demuxerLavfCryptokey = "demuxer-lavf-cryptokey"
     /** --demuxer-mkv-subtitle-preroll=<yes|index|no> */
     static let demuxerMkvSubtitlePreroll = "demuxer-mkv-subtitle-preroll"
     /** --mkv-subtitle-preroll */
@@ -909,6 +923,8 @@ struct MPVOption {
   }
 
   struct OpenGLRendererOptions {
+    /** --scale=<filter> */
+    static let scale = "scale"
     /** --cscale=<filter> */
     static let cscale = "cscale"
     /** --dscale=<filter> */
@@ -947,7 +963,7 @@ struct MPVOption {
     static let tscaleBlur = "tscale-blur"
     /** --tscale-wblur=<value> */
     static let tscaleWblur = "tscale-wblur"
-    /** --scale-clamp */
+    /** --scale-clamp=<0.0-1.0> */
     static let scaleClamp = "scale-clamp"
     /** --cscale-clamp */
     static let cscaleClamp = "cscale-clamp"
@@ -955,6 +971,12 @@ struct MPVOption {
     static let dscaleClamp = "dscale-clamp"
     /** --tscale-clamp */
     static let tscaleClamp = "tscale-clamp"
+    /** --scale-cutoff=<value> */
+    static let scaleCutoff = "scale-cutoff"
+    /** --cscale-cutoff=<value> */
+    static let cscaleCutoff = "cscale-cutoff"
+    /** --dscale-cutoff=<value> */
+    static let dscaleCutoff = "dscale-cutoff"
     /** --scale-taper=<value> */
     static let scaleTaper = "scale-taper"
     /** --scale-wtaper=<value> */
@@ -1029,8 +1051,10 @@ struct MPVOption {
     static let openglDebug = "opengl-debug"
     /** --opengl-swapinterval=<n> */
     static let openglSwapinterval = "opengl-swapinterval"
-    /** --opengl-shaders=<files> */
+    /** --opengl-shaders=<file-list> */
     static let openglShaders = "opengl-shaders"
+    /** --opengl-shader=<file> */
+    static let openglShader = "opengl-shader"
     /** --deband */
     static let deband = "deband"
     /** --deband-iterations=<1..16> */
@@ -1089,12 +1113,18 @@ struct MPVOption {
     static let targetPrim = "target-prim"
     /** --target-trc=<value> */
     static let targetTrc = "target-trc"
-    /** --target-brightness=<1..100000> */
-    static let targetBrightness = "target-brightness"
-    /** --hdr-tone-mapping=<value> */
-    static let hdrToneMapping = "hdr-tone-mapping"
+    /** --tone-mapping=<value> */
+    static let toneMapping = "tone-mapping"
     /** --tone-mapping-param=<value> */
     static let toneMappingParam = "tone-mapping-param"
+    /** --hdr-compute-peak */
+    static let hdrComputePeak = "hdr-compute-peak"
+    /** --tone-mapping-desaturate=<value> */
+    static let toneMappingDesaturate = "tone-mapping-desaturate"
+    /** --gamut-warning */
+    static let gamutWarning = "gamut-warning"
+    /** --use-embedded-icc-profile */
+    static let useEmbeddedIccProfile = "use-embedded-icc-profile"
     /** --icc-profile=<file> */
     static let iccProfile = "icc-profile"
     /** --icc-profile-auto */
@@ -1121,10 +1151,12 @@ struct MPVOption {
     static let openglTexPadY = "opengl-tex-pad-y"
     /** --opengl-early-flush=<yes|no|auto> */
     static let openglEarlyFlush = "opengl-early-flush"
-    /** --opengl-dumb-mode=<yes|no> */
+    /** --opengl-dumb-mode=<yes|no|auto> */
     static let openglDumbMode = "opengl-dumb-mode"
     /** --opengl-shader-cache-dir=<dirname> */
     static let openglShaderCacheDir = "opengl-shader-cache-dir"
+    /** --cuda-decode-device=<auto|0..> */
+    static let cudaDecodeDevice = "cuda-decode-device"
   }
 
   struct Miscellaneous {
@@ -1156,7 +1188,9 @@ struct MPVOption {
     static let priority = "priority"
     /** --force-media-title=<string> */
     static let forceMediaTitle = "force-media-title"
-    /** --external-file=<filename> */
+    /** --external-files=<file-list> */
+    static let externalFiles = "external-files"
+    /** --external-file=<file> */
     static let externalFile = "external-file"
     /** --autoload-files=<yes|no> */
     static let autoloadFiles = "autoload-files"

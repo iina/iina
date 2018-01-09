@@ -85,7 +85,7 @@
 "menu.volume"= "音量: %d";
 "menu.audio_delay" = "オーディオディレイ: %.2fs";
 "menu.sub_delay" = "字幕ディレイ: %.2fs";
-"menu.fullscreen" = "フルスクリーン化";
+"menu.fullscreen" = "フルスクリーンにする";
 "menu.exit_fullscreen" = "フルスクリーンを解除";
 "menu.pip" = "Picture-in-Pictureを使用";
 "menu.exit_pip" = "Picture-in-Pictureをオフ";
@@ -172,6 +172,10 @@
 "alert.clear_cache.message" = "すべてのサムネイルキャッシュを消去しますか?";
 "alert.clear_cache.success" = "キャッシュをクリアしました。";
 
+"alert.nothing_to_open" = "開くファイルがありません。";
+
+"alert.no_video_track" = "ビデオトラックがありません。";
+
 "pl_menu.title_multi" = "%d個のアイテム";
 "pl_menu.play_next" = "次を再生";
 "pl_menu.play_in_new_window" = "新しいウィンドウで再生";
@@ -197,6 +201,8 @@
 "hwdec.no" = "ハードウェアデコーディングをオフにします。";
 "hwdec.auto" = "ハードウェアデコーディングを使用しますが、多くのビデオでは正常に動作しません。";
 "hwdec.auto-copy" = "ハードウェアデコーディングを使用します。二倍のメモリを使用しますが、ビデオフィルタを適用することができます。";
+
+"subencoding.auto" = "自動検出";
 
 // Touch bar
 

@@ -1327,6 +1327,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       fadeableViews.remove(at: index)
     }
 
+    windowFrameBeforeEnteringFullScreen = nil
+
     resetCollectionBehavior()
   }
 
@@ -2180,7 +2182,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           player.notifyMainWindowVideoSizeChanged()
         }
         window.aspectRatio = aspectRatio
-        windowFrameBeforeEnteringFullScreen = nil
         // call delegate
         windowDidExitFullScreen(Notification(name: Constants.Noti.legacyFullScreen))
       } else {

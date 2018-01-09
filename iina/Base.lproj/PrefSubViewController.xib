@@ -32,7 +32,7 @@
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="n8c-of-fDQ">
                                         <rect key="frame" x="8" y="269" width="546" height="172"/>
                                         <subviews>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tej-f2-5d5">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tej-f2-5d5">
                                                 <rect key="frame" x="-2" y="155" width="70" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Auto load:" id="raf-Yu-ck0">
                                                     <font key="font" metaFont="systemBold"/>
@@ -41,10 +41,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="if4-Ls-9s6">
-                                                <rect key="frame" x="-2" y="123" width="253" height="26"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="Px2-oE-DXB"/>
-                                                </constraints>
+                                                <rect key="frame" x="-2" y="123" width="259" height="26"/>
                                                 <popUpButtonCell key="cell" type="push" title="Disabled" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="u31-eV-Arr" id="cQ9-BU-DYg">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
@@ -83,9 +80,9 @@
                                                     <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subAutoLoadPriorityString" id="j9p-VW-H0s"/>
                                                 </connections>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aJd-if-ImI">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aJd-if-ImI">
                                                 <rect key="frame" x="-2" y="65" width="550" height="14"/>
-                                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please enter a comma-separated list of strings." id="Mk1-sv-QB8">
+                                                <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Please enter a comma-separated list of strings." id="Mk1-sv-QB8">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -113,7 +110,7 @@
                                                     <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subAutoLoadSearchPath" id="6tD-Cb-lzX"/>
                                                 </connections>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T4U-Ii-SK6">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T4U-Ii-SK6">
                                                 <rect key="frame" x="-2" y="4" width="550" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed." id="Luv-2B-9v8">
                                                     <font key="font" metaFont="smallSystem"/>
@@ -133,7 +130,7 @@
                                             <constraint firstItem="if4-Ls-9s6" firstAttribute="leading" secondItem="n8c-of-fDQ" secondAttribute="leading" id="HiO-JT-7cl"/>
                                             <constraint firstItem="Qkw-vv-CeA" firstAttribute="top" secondItem="aJd-if-ImI" secondAttribute="bottom" constant="8" id="LKx-eg-0hR"/>
                                             <constraint firstItem="T4U-Ii-SK6" firstAttribute="leading" secondItem="n8c-of-fDQ" secondAttribute="leading" id="OcO-Px-6Og"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="if4-Ls-9s6" secondAttribute="trailing" constant="72" id="PSY-MF-Z7U"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="if4-Ls-9s6" secondAttribute="trailing" id="PSY-MF-Z7U"/>
                                             <constraint firstAttribute="trailing" secondItem="aJd-if-ImI" secondAttribute="trailing" id="RZq-Tp-T28"/>
                                             <constraint firstItem="Qkw-vv-CeA" firstAttribute="leading" secondItem="n8c-of-fDQ" secondAttribute="leading" id="TKP-fd-xeA"/>
                                             <constraint firstItem="C4b-sm-2kc" firstAttribute="leading" secondItem="n8c-of-fDQ" secondAttribute="leading" id="iya-fb-rx8"/>
@@ -169,7 +166,7 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6zR-BO-yhX">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zR-BO-yhX">
                                                 <rect key="frame" x="-2" y="29" width="550" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles." id="Z2M-dh-eq1">
                                                     <font key="font" metaFont="smallSystem"/>
@@ -385,7 +382,7 @@
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="ffZ-rE-7Zz">
                                         <rect key="frame" x="8" y="173" width="546" height="169"/>
                                         <subviews>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yw3-tf-Rka">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yw3-tf-Rka">
                                                 <rect key="frame" x="-2" y="152" width="97" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Text subtitles:" id="Qda-dp-nhg">
                                                     <font key="font" metaFont="systemBold"/>

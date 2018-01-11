@@ -36,9 +36,11 @@
 "cmd.write-watch-later-config" = "記錄播放進度";
 "forward" = "向前";
 "iina.audio-panel" = "音頻設置面板";
+"iina.bigger-window" = "大一些";
 "iina.chapter-panel" = "章節面板";
 "iina.delete-current-file" = "刪除當前文件";
 "iina.find-online-subs" = "查找在線字幕";
+"iina.fit-to-screen" = "適應螢幕";
 "iina.flip" = "翻轉";
 "iina.mirror" = "鏡像";
 "iina.open-file" = "打開文件";
@@ -46,9 +48,11 @@
 "iina.playlist-panel" = "播放列表面板";
 "iina.save-downloaded-sub" = "保存已下載的字幕";
 "iina.save-playlist" = "保存當前播放列表";
+"iina.smaller-window" = "小一些";
 "iina.sub-panel" = "字幕設置面板";
 "iina.toggle-flip" = "切換 翻轉";
 "iina.toggle-mirror" = "切換 鏡像";
+"iina.toggle-music-mode" = "切換音樂模式";
 "iina.toggle-pip" = "切換「畫中畫」模式";
 "iina.video-panel" = "視頻設置面板";
 "in" = "值";
@@ -76,6 +80,7 @@
 "opt.video" = "視頻軌道";
 "opt.video-aspect" = "長寬比";
 "opt.volume" = "音量";
+"opt.window-scale" = "視窗縮放";
 "read.add" = "{{property}} {{value}}";
 "read.cycle" = "{{#dir_down}}反向{{/dir_down}}循環 {{property}}";
 "read.cycle-values" = "在 ({{{values}}}) 中循環 {{property}}";

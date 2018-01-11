@@ -42,10 +42,11 @@ class CropSettingsViewController: CropBoxViewController {
       }
       // else, set the filter
       let filter = MPVFilter.crop(w: self.cropw, h: self.croph, x: self.cropx, y: self.cropy)
-      playerCore.setCrop(fromFilter: filter)
-      // custom crop has no corresponding menu entry
-      playerCore.info.unsureCrop = ""
-      self.mainWindow.displayOSD(.crop(self.readableCropString))
+      if playerCore.setCrop(fromFilter: filter) {
+        // custom crop has no corresponding menu entry
+        playerCore.info.unsureCrop = ""
+        self.mainWindow.displayOSD(.crop(self.readableCropString))
+      }
     }
   }
 

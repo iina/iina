@@ -401,8 +401,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func cropChangedAction(_ sender: NSSegmentedControl) {
     let cropStr = AppData.cropsInPanel[sender.selectedSegment]
-    player.setCrop(fromString: cropStr)
-    mainWindow.displayOSD(.crop(cropStr))
+    if let success = player.setCrop(fromString: cropStr), !success {
+      sender.selectedSegment = 0
+    } else {
+      mainWindow.displayOSD(.crop(cropStr))
+    }
   }
 
   @IBAction func rotationChangedAction(_ sender: NSSegmentedControl) {

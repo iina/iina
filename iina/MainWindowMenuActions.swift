@@ -177,7 +177,7 @@ extension MainWindowController {
       } else {
         // add
         if isVideo {
-          if !player.addVideoFilter(filter) {
+          if let success = player.addVideoFilter(filter), !success {
             Utility.showAlert("filter.incorrect")
           }
         } else {

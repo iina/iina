@@ -509,7 +509,7 @@ class PlayerCore: NSObject {
       if info.flipFilter == nil {
         let vf = MPVFilter.flip()
         vf.label = Constants.FilterName.flip
-        if addVideoFilter(vf) {
+        if let success = addVideoFilter(vf), success {
           info.flipFilter = vf
         }
       }
@@ -526,7 +526,7 @@ class PlayerCore: NSObject {
       if info.mirrorFilter == nil {
         let vf = MPVFilter.mirror()
         vf.label = Constants.FilterName.mirror
-        if addVideoFilter(vf) {
+        if let success = addVideoFilter(vf), success {
           info.mirrorFilter = vf
         }
       }
@@ -667,30 +667,40 @@ class PlayerCore: NSObject {
     syncUITime()
   }
 
-  func setCrop(fromString str: String) {
+  func setCrop(fromString str: String) -> Bool? {
     let vwidth = info.videoWidth!
     let vheight = info.videoHeight!
     if let aspect = Aspect(string: str) {
       let cropped = NSMakeSize(CGFloat(vwidth), CGFloat(vheight)).crop(withAspect: aspect)
       let vf = MPVFilter.crop(w: Int(cropped.width), h: Int(cropped.height), x: nil, y: nil)
       vf.label = Constants.FilterName.crop
-      setCrop(fromFilter: vf)
+      if !setCrop(fromFilter: vf) {
+        return false
+      }
       // warning! may should not update it here
       info.unsureCrop = str
       info.cropFilter = vf
+      return true
     } else {
       if let filter = info.cropFilter {
         let _ = removeVideoFilter(filter)
         info.unsureCrop = "None"
       }
     }
+    return nil
   }
 
-  func setCrop(fromFilter filter: MPVFilter) {
+  func setCrop(fromFilter filter: MPVFilter) -> Bool {
     filter.label = Constants.FilterName.crop
-    if addVideoFilter(filter) {
-      info.cropFilter = filter
+    if let success = addVideoFilter(filter) {
+      if success {
+        info.cropFilter = filter
+        return true
+      } else {
+        return false
+      }
     }
+    return false
   }
 
   func setAudioEq(fromFilter filter: MPVFilter) {
@@ -706,7 +716,12 @@ class PlayerCore: NSObject {
     }
   }
 
-  func addVideoFilter(_ filter: MPVFilter) -> Bool {
+  /**
+   Try to add a video filter.
+
+   - Returns: `true` for success; `false` for user abort; `nil` for a failure from mpv.
+   */
+  func addVideoFilter(_ filter: MPVFilter) -> Bool? {
     // check hwdec
     let askHwdec: (() -> Bool) = {
       let panel = NSAlert()
@@ -744,7 +759,7 @@ class PlayerCore: NSObject {
     // try apply filter
     var result = true
     mpv.command(.vf, args: ["add", filter.stringFormat], checkError: false) { result = $0 >= 0 }
-    return result
+    return result ? true : nil
   }
 
   func removeVideoFilter(_ filter: MPVFilter) -> Bool {

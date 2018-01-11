@@ -221,10 +221,10 @@ extension PlayerCore {
           "file": paths[0],
           "interp": "nearest"
           ]))
-        if result {
+        if result ?? false {
           sendOSD(.addFilter("3D LUT"))
         }
-        return result
+        return result ?? false
       }
       // other files
       let urls = paths.map{ URL(fileURLWithPath: $0) }

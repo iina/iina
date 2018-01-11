@@ -104,10 +104,6 @@ class FilterWindowController: NSWindowController {
 
   func addFilter(_ filter: MPVFilter) {
     filters.append(filter)
-    guard PlayerCore.active.addVideoFilter(filter) else {
-      Utility.showAlert("filter.incorrect")
-      return
-    }
     reloadTable()
   }
 
@@ -150,7 +146,7 @@ class FilterWindowController: NSWindowController {
     let filter = savedFilters[row]
     let pc = PlayerCore.active
     if sender.state == .on {
-      if pc.addVideoFilter(MPVFilter(rawString: filter.filterString)!) {
+      if let success = pc.addVideoFilter(MPVFilter(rawString: filter.filterString)!), success {
         pc.sendOSD(.addFilter(filter.name))
       }
     } else {
@@ -403,8 +399,15 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
       }
     }
     // create filter
-    filterWindow.addFilter(preset.transformer(instance))
-    PlayerCore.active.sendOSD(.addFilter(preset.localizedName))
+    let filter = preset.transformer(instance)
+    if let success = PlayerCore.active.addVideoFilter(filter) {
+      if success {
+        filterWindow.addFilter(filter)
+        PlayerCore.active.sendOSD(.addFilter(preset.localizedName))
+      }
+    } else {
+      Utility.showAlert("filter.incorrect")
+    }
   }
 
   @IBAction func sheetCancelBtnAction(_ sender: Any) {

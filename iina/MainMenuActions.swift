@@ -180,7 +180,7 @@ extension MainMenuActionHandler {
 
   @objc func menuChangeCrop(_ sender: NSMenuItem) {
     if let cropStr = sender.representedObject as? String {
-      player.setCrop(fromString: cropStr)
+      let _ = player.setCrop(fromString: cropStr)
     } else {
       Utility.log("sender.representedObject is not a string in menuChangeCrop()")
     }

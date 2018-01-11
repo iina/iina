@@ -1185,11 +1185,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func window(_ window: NSWindow, startCustomAnimationToExitFullScreenWithDuration duration: TimeInterval) {
+    if NSMenu.menuBarVisible() {
+      NSMenu.setMenuBarVisible(false)
+    }
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
       window.animator().setFrame(windowFrameBeforeEnteringFullScreen!, display: true)
     }, completionHandler: nil)
 
+    NSMenu.setMenuBarVisible(true)
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {

@@ -22,10 +22,10 @@
 "9ut-ID-ffZ.title" = "Proxy HTTP:";
 
 /* Class = "NSTextFieldCell"; title = "Format: <key>=<value>[,<key>=<value>[,...]]"; ObjectID = "GBe-wd-tne"; */
-"GBe-wd-tne.title" = "Formato: <key>=<value>[,<key>=<value>[,...]]";
+"GBe-wd-tne.title" = "Formato: <clave>=<valor>[,<clave>=<valor>[,...]]";
 
 /* Class = "NSTextFieldCell"; title = "Seconds to prefech:"; ObjectID = "J96-32-M9A"; */
-"J96-32-M9A.title" = "Seconds to prefech:";
+"J96-32-M9A.title" = "Segundos para precargar:";
 
 /* Class = "NSTextFieldCell"; title = "Cache:"; ObjectID = "LNk-io-MM7"; */
 "LNk-io-MM7.title" = "Caché:";
@@ -55,7 +55,7 @@
 "dDD-g3-54w.title" = "Tamaño del búfer de caché (KB):";
 
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
-"eN6-Sk-kUa.title" = "User agent:";
+"eN6-Sk-kUa.title" = "Agente de usuario:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 100"; ObjectID = "fab-7d-mMQ"; */
 "fab-7d-mMQ.title" = "Predeterminado: 100";

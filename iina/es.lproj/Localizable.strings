@@ -3,7 +3,7 @@
 "alert.add_filter.message" = "Por favor ingrese el filtro usando el formato de comando vf o af de MPV.";
 "alert.add_filter.title" = "Nuevo filtro";
 "alert.add_watch.message" = "Por favor, ingrese un nombre válido de propiedad de MPV.";
-"alert.add_watch.title" = "Add Watch Property";
+"alert.add_watch.title" = "Añadir propiedad de monitoreo";
 "alert.choose_media_file.title" = "Seleccione el archivo multimedia";
 "alert.clear_cache.message" = "¿Está seguro de borrar toda la caché de miniaturas?";
 "alert.clear_cache.success" = "Caché borrada.";
@@ -30,8 +30,7 @@
 "alert.extra_option.config_folder" = "Error al configurar el directorio de configuración \"%@\".";
 "alert.extra_option.empty" = "¡La clave o el valor no pueden estar vacíos!";
 "alert.extra_option.error" = "Error al configurar la opción --%@=%@ con valor de retorno %d. Por favor, compruebe la configuración de opciones adicionales en Preferencias >  Avanzado.";
-"alert.fatal_error" = "Error fatal: %@ 
-La aplicación se cerrará ahora.";
+"alert.fatal_error" = "Error fatal: %@ \nLa aplicación se cerrará ahora.";
 "alert.filter.incorrect" = "Se produjo un error al configurar los filtros. Por favor, compruebe el formato de los parámetros.";
 "alert.filter_hwdec.abort" = "Abortar";
 "alert.filter_hwdec.message" = "Estás a punto de aplicar un filtro de vídeo. Sin embargo, su descodificador actual puede no soportar bien los filtros de vídeo. Puede desactivar la descodificación por hardware o cambiar a Auto(Copia), que consumirá el doble de memoria.  N Puede que tenga que repetir la operación anterior (como, recortar) para que funcione.";
@@ -52,9 +51,7 @@ La aplicación se cerrará ahora.";
 "alert.set_default.success" = "Se terminó con %d éxito y %d fallo.";
 "alert.set_default.title" = "Establecer IINA como aplicación predeterminada";
 "alert.sleep" = "¡No se puede evitar que la pantalla entre en reposo!";
-"alert.sub.cannot_login" = "No se puede iniciar sesión. Compruebe su nombre de usuario, contraseña, y el estado de la red.
-
-%@";
+"alert.sub.cannot_login" = "No se puede iniciar sesión. Compruebe su nombre de usuario, contraseña, y el estado de la red.\n\n%@";
 "alert.sub.cannot_save_passwd" = "No se puede guardar la contraseña en Llavero: %@";
 "alert.sub.no_selected" = "Por favor, seleccione primero un subtítulo descargado.";
 "alert.sub_lang_not_set" = "Por favor, configure el idioma predeterminado de los subtítulos en las preferencias antes de usar OpenSubtitles. Inglés(eng) se utilizará esta vez.";

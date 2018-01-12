@@ -471,7 +471,7 @@
                                 <binding destination="IBP-Mz-Maa" name="value" keyPath="values.playlistAutoAdd" id="k4S-Nc-sCO"/>
                             </connections>
                         </button>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OVz-Nv-1WW">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OVz-Nv-1WW">
                             <rect key="frame" x="16" y="0.0" width="206" height="14"/>
                             <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Requires restarting IINA to take effect." id="8kU-8g-VgX">
                                 <font key="font" metaFont="smallSystem"/>
@@ -499,7 +499,7 @@
                         <constraint firstItem="OVz-Nv-1WW" firstAttribute="leading" secondItem="xmd-ef-R8e" secondAttribute="leading" constant="18" id="PV1-DS-RhV"/>
                         <constraint firstItem="6gO-wx-MWj" firstAttribute="top" secondItem="y7O-rd-dnT" secondAttribute="top" id="R9Q-BW-yNL"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6gO-wx-MWj" secondAttribute="trailing" id="hMc-8k-u0x"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xmd-ef-R8e" secondAttribute="trailing" id="j2a-dy-kzM"/>
+                        <constraint firstAttribute="centerX" relation="greaterThanOrEqual" secondItem="xmd-ef-R8e" secondAttribute="trailing" id="j2a-dy-kzM"/>
                         <constraint firstItem="OVz-Nv-1WW" firstAttribute="top" secondItem="xmd-ef-R8e" secondAttribute="bottom" constant="4" id="knP-0X-jJU"/>
                         <constraint firstItem="xmd-ef-R8e" firstAttribute="leading" secondItem="y7O-rd-dnT" secondAttribute="leading" id="mJc-GS-fW3"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UHf-eK-ba5" secondAttribute="trailing" id="z5V-cR-cmi"/>

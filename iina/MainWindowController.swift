@@ -1185,11 +1185,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func window(_ window: NSWindow, startCustomAnimationToExitFullScreenWithDuration duration: TimeInterval) {
+    if NSMenu.menuBarVisible() {
+      NSMenu.setMenuBarVisible(false)
+    }
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
       window.animator().setFrame(windowFrameBeforeEnteringFullScreen!, display: true)
     }, completionHandler: nil)
 
+    NSMenu.setMenuBarVisible(true)
   }
 
   func windowWillEnterFullScreen(_ notification: Notification) {
@@ -1326,6 +1330,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if let index = fadeableViews.index(of: additionalInfoView) {
       fadeableViews.remove(at: index)
     }
+
+    windowFrameBeforeEnteringFullScreen = nil
 
     resetCollectionBehavior()
   }
@@ -2022,6 +2028,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     var rect: NSRect
     let needResizeWindow: Bool
 
+    let frame = windowFrameBeforeEnteringFullScreen ?? w.frame
+
     let resizeTiming = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
     switch resizeTiming {
     case .always:
@@ -2060,15 +2068,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         if resizeRatio < 0, let screenRect = NSScreen.main?.visibleFrame {
           rect = screenRect.centeredResize(to: videoSize)
         } else {
-          rect = w.frame.centeredResize(to: videoSize)
+          rect = frame.centeredResize(to: videoSize)
         }
       }
 
     } else {
       // user is navigating in playlist. remain same window width.
-      let newHeight = w.frame.width / CGFloat(width) * CGFloat(height)
-      let newSize = NSSize(width: w.frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
-      rect = NSRect(origin: w.frame.origin, size: newSize)
+      let newHeight = frame.width / CGFloat(width) * CGFloat(height)
+      let newSize = NSSize(width: frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
+      rect = NSRect(origin: frame.origin, size: newSize)
 
     }
 
@@ -2077,11 +2085,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     player.info.justStartedFile = false
 
     if isInFullScreen {
-      if currentFullScreenIsLegacy {
-        windowFrameBeforeEnteringFullScreen = rect
-      } else {
-        w.setFrame(rect, display: false)
-      }
+      windowFrameBeforeEnteringFullScreen = rect
     } else {
       // animated `setFrame` can be inaccurate!
       w.setFrame(rect, display: true, animate: true)
@@ -2182,7 +2186,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           player.notifyMainWindowVideoSizeChanged()
         }
         window.aspectRatio = aspectRatio
-        windowFrameBeforeEnteringFullScreen = nil
         // call delegate
         windowDidExitFullScreen(Notification(name: Constants.Noti.legacyFullScreen))
       } else {

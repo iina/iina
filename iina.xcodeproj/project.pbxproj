@@ -28,6 +28,7 @@
 		8400D5F01E1AB344006785F5 /* PrefCodecViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5F21E1AB344006785F5 /* PrefCodecViewController.xib */; };
 		8400D5F31E1AB348006785F5 /* PrefSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5F51E1AB348006785F5 /* PrefSubViewController.xib */; };
 		8400D5F61E1AB34D006785F5 /* PrefNetworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5F81E1AB34D006785F5 /* PrefNetworkViewController.xib */; };
+		8403CEA72007CBD400645516 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8403CEA62007CBD300645516 /* MediaPlayer.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8407D1401E3A684C0043895D /* ViewLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407D13F1E3A684C0043895D /* ViewLayer.swift */; };
 		840820111ECF6C1800361416 /* FileGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840820101ECF6C1800361416 /* FileGroup.swift */; };
 		840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AF5811E732C8F00F4AF92 /* JustXMLRPC.swift */; };
@@ -188,6 +189,7 @@
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
 		C75540751E7886FE00C13D4A /* SubSelectWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C75540771E7886FE00C13D4A /* SubSelectWindowController.xib */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
+		E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BD4AE20054BD9007635FC /* MainWindow.swift */; };
 		E3CB75BB1FD998F5004DB10A /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F21E26CA24008755BB /* Regex.swift */; };
 		E3CB75BD1FDACB82004DB10A /* SavedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */; };
 		E3DE8DCD1FD8166A0021921C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DE8DCC1FD8166A0021921C /* main.swift */; };
@@ -499,6 +501,7 @@
 		8400D6081E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefCodecViewController.strings"; sourceTree = "<group>"; };
 		8400D6091E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefSubViewController.strings"; sourceTree = "<group>"; };
 		8400D60A1E1AB412006785F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefNetworkViewController.strings"; sourceTree = "<group>"; };
+		8403CEA62007CBD300645516 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		8407D13F1E3A684C0043895D /* ViewLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewLayer.swift; sourceTree = "<group>"; };
 		840820101ECF6C1800361416 /* FileGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileGroup.swift; sourceTree = "<group>"; };
 		840AF5811E732C8F00F4AF92 /* JustXMLRPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustXMLRPC.swift; sourceTree = "<group>"; };
@@ -927,6 +930,8 @@
 		D27E35E01E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D2B411421E5336AD002819E1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
 		D2B411431E5336AE002819E1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		E34E0ADF2007E23600BDC8BA /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/FreeSelectingViewController.strings"; sourceTree = "<group>"; };
+		E38BD4AE20054BD9007635FC /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFilter.swift; sourceTree = "<group>"; };
 		E3DE8DCA1FD8166A0021921C /* iina-cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "iina-cli"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3DE8DCC1FD8166A0021921C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -1005,6 +1010,7 @@
 				84B1CE371F98BE2A00994D63 /* libswresample.2.9.100.dylib in Frameworks */,
 				84B1CE381F98BE2A00994D63 /* libswscale.4.8.100.dylib in Frameworks */,
 				496B19921E2968530035AF10 /* PIP.framework in Frameworks */,
+				8403CEA72007CBD400645516 /* MediaPlayer.framework in Frameworks */,
 				5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1092,6 +1098,7 @@
 		848290731D95978100C3C76C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8403CEA62007CBD300645516 /* MediaPlayer.framework */,
 				84B1CE0B1F98BDEF00994D63 /* libass.9.dylib */,
 				84B1CE0A1F98BDEF00994D63 /* libavcodec.57.107.100.dylib */,
 				84B1CDFE1F98BDEE00994D63 /* libavdevice.57.10.100.dylib */,
@@ -1146,6 +1153,7 @@
 			isa = PBXGroup;
 			children = (
 				84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */,
+				E38BD4AE20054BD9007635FC /* MainWindow.swift */,
 				84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */,
 				84D123B31ECAA405004E0D53 /* TouchBarSupport.swift */,
 				8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */,
@@ -1908,6 +1916,7 @@
 				847C62CA1DC13CDA00E1EF16 /* PrefGeneralViewController.swift in Sources */,
 				84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */,
 				845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */,
+				E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */,
 				84F5D4A01E44F9DB0060A838 /* KeyBindingItem.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,
 				847557161F406D360006B0FF /* MiniPlayerWindowMenuActions.swift in Sources */,
@@ -2470,6 +2479,7 @@
 				84C21A7A1F8996EE00AD5B64 /* nl */,
 				2FE1FCA11F98D3D9004C4D6B /* sk */,
 				E92D618A1FE93B9C00ACC463 /* da */,
+				E34E0ADF2007E23600BDC8BA /* zh-Hant */,
 			);
 			name = FreeSelectingViewController.xib;
 			sourceTree = "<group>";

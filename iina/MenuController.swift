@@ -617,7 +617,7 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   func updateKeyEquivalentsFrom(_ keyBindings: [KeyMapping]) {
-    let settings: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
+    var settings: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
       (deleteCurrentFile, true, ["delete-current-file"], false, nil, nil),
       (savePlaylist, true, ["save-playlist"], false, nil, nil),
       (quickSettingsVideo, true, ["video-panel"], false, nil, nil),
@@ -630,7 +630,6 @@ class MenuController: NSObject, NSMenuDelegate {
       (biggerSize, true, ["bigger-window"], false, nil, nil),
       (smallerSize, true, ["smaller-window"], false, nil, nil),
       (fitToScreen, true, ["fit-to-screen"], false, nil, nil),
-      (pictureInPicture, true, ["toggle-pip"], false, nil, nil),
       (miniPlayer, true, ["toggle-music-mode"], false, nil, nil),
       (cycleVideoTracks, false, ["cycle", "video"], false, nil, nil),
       (cycleAudioTracks, false, ["cycle", "audio"], false, nil, nil),
@@ -679,6 +678,11 @@ class MenuController: NSObject, NSMenuDelegate {
       (alwaysOnTop, false, ["cycle", "ontop"], false, nil, nil),
       (fullScreen, false, ["cycle", "fullscreen"], false, nil, nil)
     ]
+
+    if #available(macOS 10.12, *) {
+      settings.append((pictureInPicture, true, ["toggle-pip"], false, nil, nil))
+    }
+
     settings.forEach { (menuItem, isIINACmd, actions, normalizeLastNum, numRange, l10nKey) in
       var bound = false
       for kb in keyBindings {

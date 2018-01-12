@@ -21,15 +21,11 @@ class FreeSelectingViewController: CropBoxViewController {
         "w": String(self.cropw),
         "h": String(self.croph)
         ])
-      if let existingFilter = player.info.delogoFiter {
+      if let existingFilter = player.info.delogoFilter {
         let _ = player.removeVideoFilter(existingFilter)
       }
-      if let success = player.addVideoFilter(filter) {
-        if success {
-          player.info.delogoFiter = filter
-        } else {
-          Utility.showAlert("filter.incorrect")
-        }
+      if player.addVideoFilter(filter) {
+        player.info.delogoFilter = filter
       }
     }
   }

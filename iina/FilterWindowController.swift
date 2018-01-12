@@ -146,7 +146,7 @@ class FilterWindowController: NSWindowController {
     let filter = savedFilters[row]
     let pc = PlayerCore.active
     if sender.state == .on {
-      if let success = pc.addVideoFilter(MPVFilter(rawString: filter.filterString)!), success {
+      if pc.addVideoFilter(MPVFilter(rawString: filter.filterString)!) {
         pc.sendOSD(.addFilter(filter.name))
       }
     } else {
@@ -400,13 +400,9 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     }
     // create filter
     let filter = preset.transformer(instance)
-    if let success = PlayerCore.active.addVideoFilter(filter) {
-      if success {
-        filterWindow.addFilter(filter)
-        PlayerCore.active.sendOSD(.addFilter(preset.localizedName))
-      }
-    } else {
-      Utility.showAlert("filter.incorrect")
+    if PlayerCore.active.addVideoFilter(filter) {
+      filterWindow.addFilter(filter)
+      PlayerCore.active.sendOSD(.addFilter(preset.localizedName))
     }
   }
 

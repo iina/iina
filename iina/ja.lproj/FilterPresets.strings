@@ -42,6 +42,10 @@
 "vflip" = "上下反転";
 "hflip" = "左右反転";
 
+"lut3d" = "3D LUT";
+"lut3d.file" = "ファイル";
+"lut3d.interp" = "補間モード";
+
 "custom_mpv" = "カスタム (MPV)";
 "custom_mpv.name" = "フィルタ名";
 "custom_mpv.string" = "フィルタの値";

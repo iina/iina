@@ -251,7 +251,8 @@ extension FilterWindowController {
     if let currentFilter = currentSavedFilter {
       currentFilter.name = editFilterNameTextField.stringValue
       currentFilter.filterString = editFilterStringTextField.stringValue
-      currentFilter.shortcutKey = editFilterKeyRecordView.currentRawKey
+      // FIXME: shouldn't be shift-modified; should examine this carefully
+      currentFilter.shortcutKey = editFilterKeyRecordView.currentRawKey.lowercased()
       currentFilter.shortcutKeyModifiers = editFilterKeyRecordView.currentKeyModifiers
       reloadTable()
       syncSavedFilter()

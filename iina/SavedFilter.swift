@@ -25,7 +25,7 @@ class SavedFilter: NSObject {
       return ([(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")] as [(NSEvent.ModifierFlags, String)])
         .map { shortcutKeyModifiers.contains($0.0) ? $0.1 : "" }
         .joined()
-        .appending(shortcutKey)
+        .appending(shortcutKey.uppercased())
     }
   }
   @objc var isEnabled = false

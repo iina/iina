@@ -16,7 +16,7 @@
 "39k-VH-tOz.title" = "OpenSubtitles.org";
 
 /* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "ストリップ";
+"3H8-Ei-cTm.title" = "strip";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
 "4Tb-Yh-PdP.title" = "配置:";
@@ -94,7 +94,7 @@
 "Vbl-Im-3UI.title" = "サイズ:";
 
 /* Class = "NSButtonCell"; title = "Login"; ObjectID = "WHk-sk-gmK"; */
-"WHk-sk-gmK.title" = "ログイン";
+"WHk-sk-gmK.title" = "Login";
 
 /* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "XiL-eE-jah"; */
 "XiL-eE-jah.title" = "IINAによる自動選択";
@@ -103,87 +103,86 @@
 "Y75-4k-2Du.title" = "デフォルトエンコーディング:";
 
 /* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
-"Z2M-dh-eq1.title" = "ISO639-2の言語コードをカンマで区切って使用してください。
-この設定はmpvとopensubtitlesの両方に適用されます。";
+"Z2M-dh-eq1.title" = "ISO639-2の言語コードをカンマで区切って使用してください。\nこの設定はmpvとopensubtitlesの両方に適用されます。";
 
 /* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
-"aO9-D6-KG8.title" = "OpenSubtitles.org";
+"aO9-D6-KG8.title" = "ブラー:";
 
 /* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "azJ-oz-BKZ"; */
-"azJ-oz-BKZ.title" = "OpenSubtitles.org";
+"azJ-oz-BKZ.title" = "sans-serif";
 
 /* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "cov-Uy-wnc"; */
-"cov-Uy-wnc.title" = "OpenSubtitles.org";
+"cov-Uy-wnc.title" = "Not logged in";
 
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "dtP-9o-yhy"; */
-"dtP-9o-yhy.title" = "OpenSubtitles.org";
+"dtP-9o-yhy.title" = "オフセット:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "e0e-dB-Ir6"; */
-"e0e-dB-Ir6.title" = "OpenSubtitles.org";
+"e0e-dB-Ir6.title" = "中央";
 
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "eYO-c0-Rjp"; */
-"eYO-c0-Rjp.title" = "OpenSubtitles.org";
+"eYO-c0-Rjp.title" = "背景:";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "egf-g3-b7a"; */
-"egf-g3-b7a.title" = "OpenSubtitles.org";
+"egf-g3-b7a.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
-"gAq-Vr-hRY.title" = "OpenSubtitles.org";
+"gAq-Vr-hRY.title" = "無視の度合い:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "gkc-qt-sD9"; */
-"gkc-qt-sD9.title" = "OpenSubtitles.org";
+"gkc-qt-sD9.title" = "サイズ:";
 
 /* Class = "NSButtonCell"; title = "𝐁"; ObjectID = "hEk-7E-10q"; */
-"hEk-7E-10q.title" = "OpenSubtitles.org";
+"hEk-7E-10q.title" = "𝐁";
 
 /* Class = "NSBox"; title = "Align"; ObjectID = "kvJ-Tj-KMb"; */
-"kvJ-Tj-KMb.title" = "OpenSubtitles.org";
+"kvJ-Tj-KMb.title" = "整列";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "l7l-ZO-W79"; */
-"l7l-ZO-W79.title" = "OpenSubtitles.org";
+"l7l-ZO-W79.title" = " X:";
 
 /* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "mFm-Q6-aja"; */
-"mFm-Q6-aja.title" = "OpenSubtitles.org";
+"mFm-Q6-aja.title" = "ASS字幕:";
 
 /* Class = "NSButtonCell"; title = "Choose..."; ObjectID = "nH7-kO-S15"; */
-"nH7-kO-S15.title" = "OpenSubtitles.org";
+"nH7-kO-S15.title" = "選択…";
 
 /* Class = "NSButtonCell"; title = "𝐼"; ObjectID = "pNF-Fw-QtY"; */
-"pNF-Fw-QtY.title" = "OpenSubtitles.org";
+"pNF-Fw-QtY.title" = "𝐼";
 
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
-"pRe-wv-VVi.title" = "OpenSubtitles.org";
+"pRe-wv-VVi.title" = "マージン";
 
 /* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "rZf-bj-qbV"; */
-"rZf-bj-qbV.title" = "OpenSubtitles.org";
+"rZf-bj-qbV.title" = "ASSの書体を無視";
 
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
-"raf-Yu-ck0.title" = "OpenSubtitles.org";
+"raf-Yu-ck0.title" = "自動読み込み:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
-"slU-Ox-aeF.title" = "OpenSubtitles.org";
+"slU-Ox-aeF.title" = "中央";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "t5n-mc-dss"; */
-"t5n-mc-dss.title" = "OpenSubtitles.org";
+"t5n-mc-dss.title" = "枠";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
-"u31-eV-Arr.title" = "OpenSubtitles.org";
+"u31-eV-Arr.title" = "無効";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
-"vDc-dw-liI.title" = "OpenSubtitles.org";
+"vDc-dw-liI.title" = "色:";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
-"xGf-fF-4Hx.title" = "OpenSubtitles.org";
+"xGf-fF-4Hx.title" = "Y:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "xid-E9-FC9"; */
-"xid-E9-FC9.title" = "OpenSubtitles.org";
+"xid-E9-FC9.title" = "色:";
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
-"y1E-JR-KRI.title" = "OpenSubtitles.org";
+"y1E-JR-KRI.title" = "メディアファイル名の字幕を含む";
 
 /* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "zaE-bH-XfT"; */
-"zaE-bH-XfT.title" = "OpenSubtitles.org";
+"zaE-bH-XfT.title" = "優先言語:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
-"zml-kt-LN8.title" = "OpenSubtitles.org";
+"zml-kt-LN8.title" = "左";
 

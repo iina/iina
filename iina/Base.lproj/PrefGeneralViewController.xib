@@ -301,8 +301,8 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DX0-mO-Ick">
-                                        <rect key="frame" x="5" y="5" width="180" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Pause when leaved full screen" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="g2A-Kf-vct">
+                                        <rect key="frame" x="5" y="5" width="164" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Pause when left full screen" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="g2A-Kf-vct">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>

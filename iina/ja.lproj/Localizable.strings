@@ -93,9 +93,9 @@
 "menu.resume" = "再生";
 "menu.seek_backward" = "%.0f秒戻る";
 "menu.seek_forward" = "%.0f秒進む";
-"menu.speed" = "速度: %.2f倍";
-"menu.speed_down" = "速度を%.1f倍下げる";
-"menu.speed_up" = "速度を%.1f倍上げる";
+"menu.speed" = "再生速度: %.2f倍";
+"menu.speed_down" = "再生速度を%.1f倍";
+"menu.speed_up" = "再生速度を%.1f倍";
 "menu.sub_delay" = "字幕ディレイ: %.2fs";
 "menu.sub_delay_down" = "字幕ディレイ - %.1f秒";
 "menu.sub_delay_up" = "字幕ディレイ + %.1f秒";
@@ -126,7 +126,7 @@
 "osd.resume" = "再開";
 "osd.rotate" = "回転: %i°";
 "osd.screenshot" = "スクリーンショットを保存しました";
-"osd.speed" = "速度: %.2fx";
+"osd.speed" = "再生速度: %.2fx";
 "osd.stop" = "一時停止";
 "osd.sub_delay.earlier" = "字幕ディレイ: %.2f秒 早く";
 "osd.sub_delay.later" = "字幕ディレイ: %.2f秒 遅く";

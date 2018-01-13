@@ -1,4 +1,101 @@
-<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>Changelog | Project IINA</title><link href="/iina/stylesheets/lato.css" rel="stylesheet" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body><nav class="navbar navbar-fixed-top navbar-light bg-faded navbar-toggleable-md"><button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#nav_c" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><div class="collapse navbar-collapse" id="nav_c"><ul class="navbar-nav mr-auto"><li class="nav-item"><a href="/iina" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/features/" class="nav-link">Features</a></li><li class="nav-item"><a href="/iina/documentation/" class="nav-link">Documentation</a></li><li class="nav-item"><a href="/iina/changelog/" class="nav-link">Changelog</a></li><li class="nav-item"><a href="/iina/about/" class="nav-link">About</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></div></nav><div class="main"><div class="changelog"><div class="container"><h1>Changelog</h1><div class="clog"><h2 id="v00141-oct-25-2017">v0.0.14.1 <em>Oct. 25, 2017</em></h2>
+<!DOCTYPE html><html><head><meta content="IE=edge" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" /><title>Changelog | Project IINA</title><link href="/iina/stylesheets/lato.css" rel="stylesheet" /><link href="/iina/stylesheets/site.css" rel="stylesheet" /><script src="/iina/javascripts/all.js"></script></head><body><nav class="navbar navbar-fixed-top navbar-light bg-faded navbar-toggleable-md"><button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#nav_c" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><a href="." class="navbar-brand"><img src="/iina/images/iina_icon_60.png" height="30" width="30" alt="Project IINA" class="d-inline-block align-top" /></a><div class="collapse navbar-collapse" id="nav_c"><ul class="navbar-nav mr-auto"><li class="nav-item"><a href="/iina" class="nav-link">IINA</a></li><li class="nav-item"><a href="/iina/features/" class="nav-link">Features</a></li><li class="nav-item"><a href="/iina/documentation/" class="nav-link">Documentation</a></li><li class="nav-item"><a href="/iina/changelog/" class="nav-link">Changelog</a></li><li class="nav-item"><a href="/iina/about/" class="nav-link">About</a></li></ul><ul class="nav navbar-nav float-xs-right"><li class="nav-item lang-nav-item"><a href="/iina" class="nav-link">English</a></li><li class="nav-item lang-nav-item"><a href="/iina/zh-cn" class="nav-link">简体中文</a></li></ul></div></nav><div class="main"><div class="changelog"><div class="container"><h1>Changelog</h1><div class="clog"><h2 id="v0015-jan-13-2018">v0.0.15 <em>Jan. 13, 2018</em></h2>
+
+<p><strong>Improved Music Mode</strong></p>
+
+<p>The music mode has been redesigned to:</p>
+
+<ul>
+  <li>Be able to toggle display of album arts.</li>
+  <li>Support key bindings.</li>
+  <li>Have separate buttons to close window or return to normal mode.</li>
+</ul>
+
+<p>A lot of bugs related to Music Mode have been fixed.</p>
+
+<p><strong>Command Line Tool</strong></p>
+
+<p>Finally, the command line tool for IINA is here. To enable it, simply add a symlink to<code>/Applications/IINA.app/Contents/MacOS/iina-cli</code> in your <code>PATH</code>:</p>
+
+<p><code>shell
+ln -s /Applications/IINA.app/Contents/MacOS/iina-cli ~/bin/iina
+</code></p>
+
+<p>Run <code>iina --help</code> for usage.</p>
+
+<p><strong>MediaPlayer Framework</strong></p>
+
+<p>IINA now uses the modern MediaPlayer Framework for system-wide media control. This includes:</p>
+
+<ul>
+  <li>Fix of all media key related bugs in previous versions.</li>
+  <li>Support for other media control commands, such as AirPods and Bluetooth headsets.</li>
+  <li>Media control will presist in the Touch Bar Control Strip.</li>
+  <li>Support for the Now Playing widget.</li>
+</ul>
+
+<p>The MediaPlayer Framework only works in macOS 10.13+. On earlier system versions, it will fallback to the old mpv media key handling mechanism.</p>
+
+<p><strong>New Settings</strong></p>
+
+<ul>
+  <li>Added options to pause/resume the media when:
+    <ul>
+      <li>Minimized/un-minimized window</li>
+      <li>Window became inactive/active</li>
+      <li>Left/entered full screen.</li>
+    </ul>
+  </li>
+  <li>Added an option to display time and battery information in full screen.</li>
+  <li>Added options to control the initial window size and position.</li>
+  <li>Added options to control when and how to resize window to fit the video</li>
+</ul>
+
+<p><strong>Saved Filters and New Filter Presets</strong></p>
+
+<ul>
+  <li>Now users are able to save added filters for later use.</li>
+  <li>Users can now assign shortcut keys to a saved filter, to toggle a filter on/off quickly.</li>
+  <li>Added 3D LUT as a video filter preset; when a 3D LUT file is drag&amp;dropped into the window, will be loaded automatically.</li>
+</ul>
+
+<p><strong>Revised Key Binding System</strong></p>
+
+<p>All menu items are now linked to (mpvdkey bindings (Preferences - Key Bindings). Therefore, users are given full control of menu shortcuts. To change the shortcut for a menu item, just edit the corresponding key binding in Preferences. If there are more than one corresponding key bindings, the first one will be used.</p>
+
+<ul>
+  <li><strong>We changed and removed some default key bindings.</strong> If you prefer the previous key bindings, edit them in Preferences.</li>
+  <li>Updated VLC and Movist key bindings.</li>
+  <li>Redesigned the Key Binding tab of Preferences.</li>
+</ul>
+
+<p><strong>Safari Extension</strong></p>
+
+<ul>
+  <li>Added "Open in IINA" in context menu when right-clicked a link.</li>
+</ul>
+
+<p><strong>Other Improvements</strong></p>
+
+<ul>
+  <li>Added haptic feedback when dragging OSC for Force Touch enabled trackpads.</li>
+  <li>Accept ISO639-1 codes for settings that requires language codes.</li>
+  <li>Other minor improvements are not documented.</li>
+</ul>
+
+<p><strong>Bug Fixes</strong></p>
+
+<ul>
+  <li>Fixed ESC key not working in legacy full screen.</li>
+  <li>Fixed animation missing when exiting full screen by clicking the traffic light button.</li>
+  <li>Fixed wrong window size when switched media in full screen.</li>
+  <li>Fixed controls in sidebar not being updated under some circumstances.</li>
+  <li>Fixed a bug where the window could be resized to small size and crops OSC.</li>
+  <li>Fixed a bug where subtitles cannot be reloaded.</li>
+  <li>Fixed a crash when loading online subtitles.</li>
+  <li>Other minor fixes are not documented.</li>
+</ul>
+
+<h2 id="v00141-oct-25-2017">v0.0.14.1 <em>Oct. 25, 2017</em></h2>
 
 <p>This build fixed some critical issues in previous versions. All users are recommended to upgrade to this version.</p>
 

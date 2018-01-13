@@ -4,8 +4,8 @@
 <!-- Change these to match your system. If you're using a version compiled from source, please mention so here along with the commit you're using. -->
 **System and IINA version:**
 
-- macOS 10.13
-- IINA 0.0.14.1
+- macOS 10.13.2
+- IINA 0.0.15
 
 **Expected behavior:**
 

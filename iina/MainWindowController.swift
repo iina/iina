@@ -38,7 +38,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Constants
 
   /** Minimum window size. */
-  let minSize = NSMakeSize(500, 300)
+  let minSize = NSMakeSize(440, 300)
 
   /** For Force Touch. */
   let minimumPressDuration: TimeInterval = 0.5
@@ -1339,9 +1339,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Window delegate: Size
 
   func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
-    if frameSize.height < minSize.height || frameSize.width < minSize.width {
-      return sender.frame.size
-    }
+//    if frameSize.height < minSize.height || frameSize.width < minSize.width {
+//      return sender.frame.size
+//    }
     return frameSize
   }
 
@@ -2030,14 +2030,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     let frame = windowFrameBeforeEnteringFullScreen ?? w.frame
 
-    let resizeTiming = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
-    switch resizeTiming {
-    case .always:
+    if player.info.justStartedFile {
+      // resize option applies
+      let resizeTiming = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
+      switch resizeTiming {
+      case .always:
+        needResizeWindow = true
+      case .onlyWhenOpen:
+        needResizeWindow = player.info.justOpenedFile
+      case .never:
+        needResizeWindow = false
+      }
+    } else {
+      // video size changed during playback
       needResizeWindow = true
-    case .onlyWhenOpen:
-      needResizeWindow = player.info.justOpenedFile
-    case .never:
-      needResizeWindow = false
     }
     
     if needResizeWindow {
@@ -2048,12 +2054,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         videoSize = w.convertFromBacking(
           NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))).size
       }
-      if resizeRatio < 0 {
-        if let screenSize = NSScreen.main?.visibleFrame.size {
-          videoSize = videoSize.shrink(toSize: screenSize)
+      if player.info.justStartedFile {
+        if resizeRatio < 0 {
+          if let screenSize = NSScreen.main?.visibleFrame.size {
+            videoSize = videoSize.shrink(toSize: screenSize)
+          }
+        } else {
+          videoSize = videoSize.multiply(CGFloat(resizeRatio))
         }
-      } else {
-        videoSize = videoSize.multiply(CGFloat(resizeRatio))
       }
       // check screen size
       if let screenSize = NSScreen.main?.visibleFrame.size {
@@ -2065,7 +2073,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if let wfg = windowFrameFromGeometry(newSize: videoSize) {
         rect = wfg
       } else {
-        if resizeRatio < 0, let screenRect = NSScreen.main?.visibleFrame {
+        if player.info.justStartedFile, resizeRatio < 0, let screenRect = NSScreen.main?.visibleFrame {
           rect = screenRect.centeredResize(to: videoSize)
         } else {
           rect = frame.centeredResize(to: videoSize)

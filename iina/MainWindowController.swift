@@ -762,36 +762,40 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard !isInInteractiveMode else { return }
     let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
     if let kb = PlayerCore.keyBindings[keyCode] {
-      if kb.isIINACommand {
-        // - IINA command
-        if let iinaCommand = IINACommand(rawValue: kb.rawAction) {
-          handleIINACommand(iinaCommand)
-        } else {
-          Utility.log("Unknown iina command \(kb.rawAction)")
-        }
-      } else {
-        // - MPV command
-        let returnValue: Int32
-        // execute the command
-        switch kb.action[0] {
-        case MPVCommand.abLoop.rawValue:
-          player.abLoop()
-          returnValue = 0
-        default:
-          returnValue = player.mpv.command(rawString: kb.rawAction)
-        }
-        // handle return value, display osd if needed
-        if returnValue == 0 {
-          // screenshot
-          if kb.action[0] == MPVCommand.screenshot.rawValue {
-            displayOSD(.screenshot)
-          }
-        } else {
-          Utility.log("Return value \(returnValue) when executing key command \(kb.rawAction)")
-        }
-      }
+      handleKeyBinding(kb)
     } else {
       super.keyDown(with: event)
+    }
+  }
+
+  func handleKeyBinding(_ keyBinding: KeyMapping) {
+    if keyBinding.isIINACommand {
+      // - IINA command
+      if let iinaCommand = IINACommand(rawValue: keyBinding.rawAction) {
+        handleIINACommand(iinaCommand)
+      } else {
+        Utility.log("Unknown iina command \(keyBinding.rawAction)")
+      }
+    } else {
+      // - MPV command
+      let returnValue: Int32
+      // execute the command
+      switch keyBinding.action[0] {
+      case MPVCommand.abLoop.rawValue:
+        player.abLoop()
+        returnValue = 0
+      default:
+        returnValue = player.mpv.command(rawString: keyBinding.rawAction)
+      }
+      // handle return value, display osd if needed
+      if returnValue == 0 {
+        // screenshot
+        if keyBinding.action[0] == MPVCommand.screenshot.rawValue {
+          displayOSD(.screenshot)
+        }
+      } else {
+        Utility.log("Return value \(returnValue) when executing key command \(keyBinding.rawAction)")
+      }
     }
   }
 

@@ -38,7 +38,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Constants
 
   /** Minimum window size. */
-  let minSize = NSMakeSize(100, 30)
+  let minSize = NSMakeSize(220, 100)
 
   /** For Force Touch. */
   let minimumPressDuration: TimeInterval = 0.5
@@ -1350,9 +1350,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Window delegate: Size
 
   func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
-//    if frameSize.height < minSize.height || frameSize.width < minSize.width {
-//      return sender.frame.size
-//    }
+    guard let window = window else { return frameSize }
+    if frameSize.height <= minSize.height || frameSize.width <= minSize.width {
+      return window.aspectRatio.grow(toSize: minSize)
+    }
     return frameSize
   }
 
@@ -1396,12 +1397,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if oscPosition == .floating {
       let cph = Preference.float(for: .controlBarPositionHorizontal)
       let cpv = Preference.float(for: .controlBarPositionVertical)
-      let oscHalfWidth = controlBarFloating.frame.width / 2
-      var xPos = window.frame.width * CGFloat(cph)
-      if xPos - oscHalfWidth < 10 {
-        xPos = oscHalfWidth + 10
-      } else if xPos + oscHalfWidth + 10 > window.frame.width {
-        xPos = window.frame.width - oscHalfWidth - 10
+
+      let windowWidth = window.frame.width
+      let margin: CGFloat = 10
+      let minWindowWidth: CGFloat = 480 // 460 + 20 margin
+      var xPos: CGFloat
+
+      if windowWidth < minWindowWidth {
+        // osc is compressed
+        xPos = windowWidth / 2
+      } else {
+        // osc has full width
+        let oscHalfWidth: CGFloat = 230
+        xPos = windowWidth * CGFloat(cph)
+        if xPos - oscHalfWidth < margin {
+          xPos = oscHalfWidth + margin
+        } else if xPos + oscHalfWidth + margin > windowWidth {
+          xPos = windowWidth - oscHalfWidth - margin
+        }
       }
       let yPos = window.frame.height * CGFloat(cpv)
       controlBarFloating.xConstraint.constant = xPos

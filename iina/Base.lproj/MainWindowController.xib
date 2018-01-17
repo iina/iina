@@ -456,7 +456,7 @@
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="E6z-SF-UDn"/>
+                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="E6z-SF-UDn"/>
                 <constraint firstAttribute="bottom" secondItem="eBP-6g-bAT" secondAttribute="bottom" constant="4.5" id="GNu-nJ-qPy"/>
                 <constraint firstItem="GgV-Cc-sk0" firstAttribute="centerY" secondItem="NBD-MV-OuG" secondAttribute="centerY" id="N3P-Qk-arP"/>
                 <constraint firstItem="eBP-6g-bAT" firstAttribute="centerX" secondItem="BE1-yC-oJL" secondAttribute="centerX" id="VDD-aU-mmP"/>

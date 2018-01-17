@@ -38,7 +38,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Constants
 
   /** Minimum window size. */
-  let minSize = NSMakeSize(440, 300)
+  let minSize = NSMakeSize(100, 30)
 
   /** For Force Touch. */
   let minimumPressDuration: TimeInterval = 0.5
@@ -711,15 +711,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscFloatingTopView.addView(fragVolumeView, in: .leading)
       oscFloatingTopView.addView(fragToolbarView, in: .trailing)
       oscFloatingTopView.addView(fragControlView, in: .center)
+      oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
+      oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragToolbarView)
+      oscFloatingTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       oscFloatingBottomView.addSubview(fragSliderView)
       Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
       // center control bar
       let cph = Preference.float(for: .controlBarPositionHorizontal)
       let cpv = Preference.float(for: .controlBarPositionVertical)
-      controlBarFloating.setFrameOrigin(NSMakePoint(
-        (window!.frame.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5).constrain(min: 0, max: window!.frame.width),
-        window!.frame.height * CGFloat(cpv)
-      ))
+      controlBarFloating.xConstraint.constant = window!.frame.width * CGFloat(cph)
+      controlBarFloating.yConstraint.constant = window!.frame.height * CGFloat(cpv)
     case .top:
       oscTopMainView.isHidden = false
       currentControlBar = nil
@@ -1395,10 +1396,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if oscPosition == .floating {
       let cph = Preference.float(for: .controlBarPositionHorizontal)
       let cpv = Preference.float(for: .controlBarPositionVertical)
-      controlBarFloating.setFrameOrigin(NSPoint(
-        x: (window.frame.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5).constrain(min: 0, max: window.frame.width),
-        y: window.frame.height * CGFloat(cpv)
-      ))
+      let oscHalfWidth = controlBarFloating.frame.width / 2
+      var xPos = window.frame.width * CGFloat(cph)
+      if xPos - oscHalfWidth < 10 {
+        xPos = oscHalfWidth + 10
+      } else if xPos + oscHalfWidth + 10 > window.frame.width {
+        xPos = window.frame.width - oscHalfWidth - 10
+      }
+      let yPos = window.frame.height * CGFloat(cpv)
+      controlBarFloating.xConstraint.constant = xPos
+      controlBarFloating.yConstraint.constant = yPos
     }
   }
 

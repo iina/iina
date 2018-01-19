@@ -566,6 +566,24 @@ struct Preference {
     }
   }
 
+  enum ToolBarButton: Int {
+    case settings = 0
+    case playlist
+    case pip
+    case fullScreen
+    case musicMode
+
+    func image() -> NSImage {
+      switch self {
+      case .settings: return NSImage(named: .actionTemplate)!
+      case .playlist: return #imageLiteral(resourceName: "playlist")
+      case .pip: return #imageLiteral(resourceName: "pip")
+      case .fullScreen: return #imageLiteral(resourceName: "fullscreen")
+      case .musicMode: return #imageLiteral(resourceName: "toggle-album-art")
+      }
+    }
+  }
+
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [

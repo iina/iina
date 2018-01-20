@@ -27,6 +27,7 @@ fileprivate extension NSTouchBarItem.Identifier {
   static let rewind = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.rewind")
   static let fastForward = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.forward")
   static let time = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.time")
+  static let remainingTime = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.remainingTime")
   static let ahead15Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead15Sec")
   static let back15Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.back15Sec")
   static let ahead30Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead30Sec")
@@ -60,14 +61,15 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
     let touchBar = NSTouchBar()
     touchBar.delegate = self
     touchBar.customizationIdentifier = .windowBar
-    touchBar.defaultItemIdentifiers = [.playPause, .slider, .time]
-    touchBar.customizationAllowedItemIdentifiers = [.playPause, .slider, .volumeUp, .volumeDown, .rewind, .fastForward, .time, .ahead15Sec, .ahead30Sec, .back15Sec, .back30Sec, .next, .prev, .fixedSpaceLarge]
+    touchBar.defaultItemIdentifiers = [.playPause, .time, .slider, .remainingTime]
+    touchBar.customizationAllowedItemIdentifiers = [.playPause, .slider, .volumeUp, .volumeDown, .rewind, .fastForward, .time, .remainingTime, .ahead15Sec, .ahead30Sec, .back15Sec, .back30Sec, .next, .prev, .fixedSpaceLarge]
     return touchBar
   }()
 
   weak var touchBarPlaySlider: TouchBarPlaySlider?
   weak var touchBarPlayPauseBtn: NSButton?
   weak var touchBarCurrentPosLabel: DurationDisplayTextField?
+  weak var touchBarRemainingPosLabel: DurationDisplayTextField?
   var touchBarPosLabelWidthLayout: NSLayoutConstraint?
   /** The current/remaining time label in Touch Bar. */
   lazy var sizingTouchBarTextField: NSTextField = {
@@ -115,10 +117,20 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       let item = NSCustomTouchBarItem(identifier: identifier)
       let label = DurationDisplayTextField(labelWithString: "00:00")
       label.alignment = .center
-      label.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .current
+      label.mode = .current
       self.touchBarCurrentPosLabel = label
       item.view = label
       item.customizationLabel = NSLocalizedString("touchbar.time", comment: "Time Position")
+      return item
+    
+    case .remainingTime:
+      let item = NSCustomTouchBarItem(identifier: identifier)
+      let label = DurationDisplayTextField(labelWithString: "00:00")
+      label.alignment = .center
+      label.mode = .remaining
+      self.touchBarRemainingPosLabel = label
+      item.view = label
+      item.customizationLabel = NSLocalizedString("touchbar.remainingTime", comment: "Remaining Time Position")
       return item
 
     case .ahead15Sec,
@@ -186,14 +198,22 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
     let duration: VideoTime = player.info.videoDuration ?? .zero
     let pad: CGFloat = 16.0
     sizingTouchBarTextField.stringValue = duration.stringRepresentation
-    if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, let posLabel = touchBarCurrentPosLabel {
+    if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, touchBarCurrentPosLabel != nil || touchBarRemainingPosLabel != nil {
       if let posConstraint = touchBarPosLabelWidthLayout {
         posConstraint.constant = widthConstant + pad
-        posLabel.setNeedsDisplay()
+        touchBarCurrentPosLabel?.setNeedsDisplay()
+        touchBarRemainingPosLabel?.setNeedsDisplay()
       } else {
-        let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + pad)
-        posLabel.addConstraint(posConstraint)
-        touchBarPosLabelWidthLayout = posConstraint
+        if let posLabel = touchBarCurrentPosLabel {
+          let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + pad)
+          posLabel.addConstraint(posConstraint)
+          touchBarPosLabelWidthLayout = posConstraint
+        }
+        if let posLabel = touchBarRemainingPosLabel {
+          let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + pad)
+          posLabel.addConstraint(posConstraint)
+          touchBarPosLabelWidthLayout = posConstraint
+        }
       }
     }
 

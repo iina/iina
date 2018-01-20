@@ -16,12 +16,19 @@
 
 # Features
 
-- Based on [mpv](https://github.com/mpv-player/mpv), a powerful media player
-- Designed for modern macOS (10.10+)
-- Aims to offer the best user experience
+- Based on [mpv](https://github.com/mpv-player/mpv), which provides the best decoding capacity on macOS
+- Designed for modern macOS (10.10+), aims to offer the best user experience
 - All the features you need for videos, audios, subtitles, playlist, chapters and so on
+- Force Touch, Picture-in-picture and (advanced) Touch Bar support
+- Customizable user interface including color schemes and on screen controller (OSC) layout
+- Standalone Music Mode designed for audio files
+- Thumbnail preview for the whole timeline like YouTube
+- Online subtitle searching and intelligent local subtitle matching
+- Unlimited playback history
+- Convenient and interactive settings for video/audio filters
+- Fully customizable keyboard, mouse and trackpad gesture control
 - MPV config files and script system are available for advanced users
-- Written in Swift, followed up on new technologies like Touch Bar, Force Touch, Picture-in-picture, etc.
+- Command Line Tool and browser extensions provided
 - Still in active development
 
 # Build

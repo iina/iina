@@ -68,8 +68,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
 
   weak var touchBarPlaySlider: TouchBarPlaySlider?
   weak var touchBarPlayPauseBtn: NSButton?
-  weak var touchBarCurrentPosLabel: DurationDisplayTextField?
-  weak var touchBarRemainingPosLabel: DurationDisplayTextField?
+  var touchBarPosLabels: [DurationDisplayTextField] = []
   var touchBarPosLabelWidthLayout: NSLayoutConstraint?
   /** The current/remaining time label in Touch Bar. */
   lazy var sizingTouchBarTextField: NSTextField = {
@@ -118,7 +117,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       let label = DurationDisplayTextField(labelWithString: "00:00")
       label.alignment = .center
       label.mode = .current
-      self.touchBarCurrentPosLabel = label
+      self.touchBarPosLabels.append(label)
       item.view = label
       item.customizationLabel = NSLocalizedString("touchbar.time", comment: "Time Position")
       return item
@@ -128,7 +127,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       let label = DurationDisplayTextField(labelWithString: "00:00")
       label.alignment = .center
       label.mode = .remaining
-      self.touchBarRemainingPosLabel = label
+      self.touchBarPosLabels.append(label)
       item.view = label
       item.customizationLabel = NSLocalizedString("touchbar.remainingTime", comment: "Remaining Time Position")
       return item
@@ -198,18 +197,12 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
     let duration: VideoTime = player.info.videoDuration ?? .zero
     let pad: CGFloat = 16.0
     sizingTouchBarTextField.stringValue = duration.stringRepresentation
-    if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, touchBarCurrentPosLabel != nil || touchBarRemainingPosLabel != nil {
+    if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, !touchBarPosLabels.isEmpty {
       if let posConstraint = touchBarPosLabelWidthLayout {
         posConstraint.constant = widthConstant + pad
-        touchBarCurrentPosLabel?.setNeedsDisplay()
-        touchBarRemainingPosLabel?.setNeedsDisplay()
+        touchBarPosLabels.forEach { $0.setNeedsDisplay() }
       } else {
-        if let posLabel = touchBarCurrentPosLabel {
-          let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + pad)
-          posLabel.addConstraint(posConstraint)
-          touchBarPosLabelWidthLayout = posConstraint
-        }
-        if let posLabel = touchBarRemainingPosLabel {
+        for posLabel in touchBarPosLabels {
           let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + pad)
           posLabel.addConstraint(posConstraint)
           touchBarPosLabelWidthLayout = posConstraint

@@ -2257,8 +2257,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
     if #available(OSX 10.12.2, *) {
-      player.touchBarSupport.touchBarCurrentPosLabel?.updateText(with: duration, given: pos)
-      player.touchBarSupport.touchBarRemainingPosLabel?.updateText(with: duration, given: pos)
+      player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
     }
     rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {

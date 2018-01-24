@@ -65,7 +65,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="IINAMainWindow" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5" customClass="MainWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -516,7 +516,6 @@
             <constraints>
                 <constraint firstItem="10x-bg-xlj" firstAttribute="centerY" secondItem="Yv6-0K-6E4" secondAttribute="centerY" id="4a0-xW-jtL"/>
                 <constraint firstItem="10x-bg-xlj" firstAttribute="leading" secondItem="Yv6-0K-6E4" secondAttribute="leading" constant="14" id="8Hx-gQ-ez7"/>
-                <constraint firstAttribute="width" constant="148" id="DBE-LW-hiO"/>
                 <constraint firstItem="EIi-qd-glM" firstAttribute="centerY" secondItem="Yv6-0K-6E4" secondAttribute="centerY" id="MRS-GF-0U6"/>
                 <constraint firstItem="gxw-pJ-Lcg" firstAttribute="centerX" secondItem="Yv6-0K-6E4" secondAttribute="centerX" id="PrE-1U-klM"/>
                 <constraint firstItem="EIi-qd-glM" firstAttribute="leading" secondItem="gxw-pJ-Lcg" secondAttribute="trailing" constant="24" id="WtE-JF-0m3"/>
@@ -527,9 +526,8 @@
             </constraints>
             <point key="canvasLocation" x="377" y="703"/>
         </customView>
-        <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" id="hDm-KI-3o4">
+        <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalClippingResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="hDm-KI-3o4">
             <rect key="frame" x="0.0" y="0.0" width="200" height="24"/>
-            <autoresizingMask key="autoresizingMask"/>
             <point key="canvasLocation" x="133" y="703"/>
         </stackView>
         <customView wantsLayer="YES" id="vej-bg-g6C" customClass="ThumbnailPeekView" customModule="IINA" customModuleProvider="target">

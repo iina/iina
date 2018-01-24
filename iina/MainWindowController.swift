@@ -413,6 +413,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bottomBarBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var titleBarHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var oscTopMainViewTopConstraint: NSLayoutConstraint!
+
   var osdProgressBarWidthConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
@@ -730,6 +731,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscFloatingTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       oscFloatingBottomView.addSubview(fragSliderView)
       Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
+      Utility.quickConstraints(["H:|-(>=0)-[v]-(>=0)-|"], ["v": fragControlView])
       // center control bar
       let cph = Preference.float(for: .controlBarPositionHorizontal)
       let cpv = Preference.float(for: .controlBarPositionVertical)

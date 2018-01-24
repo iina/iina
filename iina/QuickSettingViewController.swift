@@ -584,7 +584,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if sender.selectedSegment == 0 {
       let currentDir = player.info.currentURL?.deletingLastPathComponent()
       Utility.quickOpenPanel(title: "Load external subtitle", isDir: false, dir: currentDir) { url in
-        self.player.loadExternalSubFile(url)
+        // set a delay
+        self.player.loadExternalSubFile(url, delay: true)
         self.subTableView.reloadData()
         self.secSubTableView.reloadData()
       }

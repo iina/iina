@@ -573,7 +573,7 @@ class PlayerCore: NSObject {
     }
   }
 
-  func loadExternalSubFile(_ url: URL) {
+  func loadExternalSubFile(_ url: URL, delay: Bool = false) {
     if let track = info.subTracks.first(where: { $0.externalFilename == url.path }) {
       mpv.command(.subReload, args: [String(track.id)], checkError: false)
       return
@@ -581,8 +581,15 @@ class PlayerCore: NSObject {
 
     mpv.command(.subAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
-        DispatchQueue.main.async {
-          Utility.showAlert("unsupported_sub")
+        // if another modal panel is shown, popping up an alert now will cause some infinite loop.
+        if delay {
+          DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            Utility.showAlert("unsupported_sub")
+          }
+        } else {
+          DispatchQueue.main.async {
+            Utility.showAlert("unsupported_sub")
+          }
         }
       }
     }

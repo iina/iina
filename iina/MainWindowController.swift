@@ -29,6 +29,13 @@ fileprivate let SideBarAnimationDuration = 0.2
 fileprivate let CropAnimationDuration = 0.2
 
 
+fileprivate extension NSStackView.VisibilityPriority {
+  static let detachEarly = NSStackView.VisibilityPriority(rawValue: 850)
+  static let detachEarlier = NSStackView.VisibilityPriority(rawValue: 800)
+  static let detachEarliest = NSStackView.VisibilityPriority(rawValue: 750)
+}
+
+
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override var windowNibName: NSNib.Name {
@@ -38,7 +45,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Constants
 
   /** Minimum window size. */
-  let minSize = NSMakeSize(220, 100)
+  let minSize = NSMakeSize(240, 120)
 
   /** For Force Touch. */
   let minimumPressDuration: TimeInterval = 0.5
@@ -240,6 +247,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** Cached user default values */
   private var oscPosition: Preference.OSCPosition
+  private var oscIsInitialized = false
   private var useExtractSeek: Preference.SeekOption
   private var relativeSeekAmount: Int = 3
   private var volumeScrollAmount: Int = 4
@@ -468,6 +476,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
+  private var oscFloatingLeadingTrailingConstraint: [NSLayoutConstraint]?
 
   // MARK: - PIP
 
@@ -673,10 +682,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   private func setupOnScreenController(position newPosition: Preference.OSCPosition) {
 
+    guard !oscIsInitialized || oscPosition != newPosition else { return }
+    oscIsInitialized = true
+
     var isCurrentControlBarHidden = false
 
     let isSwitchingToTop = newPosition == .top
     let isSwitchingFromTop = oscPosition == .top
+    let isFloating = newPosition == .floating
 
     if let cb = currentControlBar {
       // remove current osc view from fadeable views
@@ -692,7 +705,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     controlBarFloating.isDragging = false
 
     // detach all fragment views
-    [fragSliderView, fragControlView, fragToolbarView, fragVolumeView].forEach { $0?.removeFromSuperview() }
+    [oscFloatingTopView, oscTopMainView, oscBottomMainView].forEach { stackView in
+      stackView!.views.forEach {
+        stackView!.removeView($0)
+      }
+    }
+    [fragSliderView, fragControlView, fragToolbarView, fragVolumeView].forEach {
+        $0!.removeFromSuperview()
+    }
 
     if isSwitchingToTop {
       if isInFullScreen {
@@ -758,13 +778,23 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscBottomMainView.addView(fragControlView, in: .leading)
       oscBottomMainView.addView(fragSliderView, in: .leading)
       oscBottomMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscBottomMainView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
-      oscBottomMainView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragToolbarView)
+      oscBottomMainView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragSliderView)
+      oscBottomMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
+      oscBottomMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     }
 
     if currentControlBar != nil {
       fadeableViews.append(currentControlBar!)
       currentControlBar!.isHidden = isCurrentControlBarHidden
+    }
+
+    if isFloating {
+      oscFloatingLeadingTrailingConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=10)-[v]-(>=10)-|",
+                                                                            options: [], metrics: nil, views: ["v": controlBarFloating])
+      NSLayoutConstraint.activate(oscFloatingLeadingTrailingConstraint!)
+    } else if let constraints = oscFloatingLeadingTrailingConstraint {
+      controlBarFloating.superview?.removeConstraints(constraints)
+      oscFloatingLeadingTrailingConstraint = nil
     }
   }
 

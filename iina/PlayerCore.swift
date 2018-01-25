@@ -674,30 +674,34 @@ class PlayerCore: NSObject {
     syncUITime()
   }
 
-  func setCrop(fromString str: String) {
+  func setCrop(fromString str: String) -> Bool {
     let vwidth = info.videoWidth!
     let vheight = info.videoHeight!
     if let aspect = Aspect(string: str) {
       let cropped = NSMakeSize(CGFloat(vwidth), CGFloat(vheight)).crop(withAspect: aspect)
       let vf = MPVFilter.crop(w: Int(cropped.width), h: Int(cropped.height), x: nil, y: nil)
       vf.label = Constants.FilterName.crop
-      setCrop(fromFilter: vf)
+      guard setCrop(fromFilter: vf) else { return false }
       // warning! may should not update it here
       info.unsureCrop = str
       info.cropFilter = vf
+      return true
     } else {
       if let filter = info.cropFilter {
         let _ = removeVideoFilter(filter)
         info.unsureCrop = "None"
       }
     }
+    return false
   }
 
-  func setCrop(fromFilter filter: MPVFilter) {
+  func setCrop(fromFilter filter: MPVFilter) -> Bool {
     filter.label = Constants.FilterName.crop
     if addVideoFilter(filter) {
       info.cropFilter = filter
+      return true
     }
+    return false
   }
 
   func setAudioEq(fromFilter filter: MPVFilter) {
@@ -713,6 +717,11 @@ class PlayerCore: NSObject {
     }
   }
 
+  /**
+   Try to add a video filter.
+
+   - Returns: `true` for success; `false` for a user abort or a mpv failure
+   */
   func addVideoFilter(_ filter: MPVFilter) -> Bool {
     // check hwdec
     let askHwdec: (() -> Bool) = {
@@ -751,6 +760,9 @@ class PlayerCore: NSObject {
     // try apply filter
     var result = true
     mpv.command(.vf, args: ["add", filter.stringFormat], checkError: false) { result = $0 >= 0 }
+    if !result {
+      Utility.showAlert("filter.incorrect")
+    }
     return result
   }
 
@@ -1312,7 +1324,7 @@ class PlayerCore: NSObject {
       case Constants.FilterName.mirror:
         info.mirrorFilter = filter
       case Constants.FilterName.delogo:
-        info.delogoFiter = filter
+        info.delogoFilter = filter
       default:
         break
       }

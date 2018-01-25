@@ -217,14 +217,14 @@ extension PlayerCore {
       guard let paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return false }
       // check 3d lut files
       if paths.count == 1 && Utility.lut3dExt.contains(paths[0].lowercasedPathExtension) {
-        let result = addVideoFilter(MPVFilter(lavfiName: "lut3d", label: "iina_quickl3d", paramDict: [
+        if addVideoFilter(MPVFilter(lavfiName: "lut3d", label: "iina_quickl3d", paramDict: [
           "file": paths[0],
           "interp": "nearest"
-          ]))
-        if result {
+          ])) {
           sendOSD(.addFilter("3D LUT"))
+          return true
         }
-        return result
+        return false
       }
       // other files
       let urls = paths.map{ URL(fileURLWithPath: $0) }

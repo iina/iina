@@ -447,7 +447,7 @@ class MenuController: NSObject, NSMenuDelegate {
     let isInFullScreen = PlayerCore.active.mainWindow.isInFullScreen
     let isInPIP = PlayerCore.active.mainWindow.pipStatus == .inPIP
     let isOntop = PlayerCore.active.isInMiniPlayer ? PlayerCore.active.miniPlayer.isOntop : PlayerCore.active.mainWindow.isOntop
-    let isDelogo = PlayerCore.active.info.delogoFiter != nil
+    let isDelogo = PlayerCore.active.info.delogoFilter != nil
     alwaysOnTop.state = isOntop ? .on : .off
     deinterlace.state = PlayerCore.active.info.deinterlace ? .on : .off
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen

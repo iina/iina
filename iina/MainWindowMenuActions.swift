@@ -139,9 +139,9 @@ extension MainWindowController {
 
   @objc func menuSetDelogo(_ sender: NSMenuItem) {
     if sender.state == .on {
-      if let filter = player.info.delogoFiter {
+      if let filter = player.info.delogoFilter {
         let _ = player.removeVideoFilter(filter)
-        player.info.delogoFiter = nil
+        player.info.delogoFilter = nil
       }
     } else {
       self.hideSideBar {
@@ -177,9 +177,7 @@ extension MainWindowController {
       } else {
         // add
         if isVideo {
-          if !player.addVideoFilter(filter) {
-            Utility.showAlert("filter.incorrect")
-          }
+          let _ = player.addVideoFilter(filter)
         } else {
           player.addAudioFilter(filter)
         }

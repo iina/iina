@@ -611,25 +611,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // add notification observers
-    notificationCenter(.default, addObserverfor: .iinaFSChanged, object: player) { [unowned self] _ in
-      let fs = self.player.mpv.getFlag(MPVOption.Window.fullscreen)
-      if fs != self.isInFullScreen {
-        self.toggleWindowFullScreen()
-      }
-    }
-    notificationCenter(.default, addObserverfor: .iinaOntopChanged, object: player) { [unowned self] _ in
-      let ontop = self.player.mpv.getFlag(MPVOption.Window.ontop)
-      if ontop != self.isOntop {
-        self.isOntop = ontop
-        self.setWindowFloatingOnTop(ontop)
-      }
-    }
-    notificationCenter(.default, addObserverfor: .iinaWindowScaleChanged, object: player) { [unowned self] _ in
-      let windowScale = self.player.mpv.getDouble(MPVOption.Window.windowScale)
-      if fabs(windowScale - self.player.info.cachedWindowScale) > 10e-10 {
-        self.setWindowScale(windowScale)
-      }
-    }
     notificationCenter(.default, addObserverfor: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
       let screenCount = NSScreen.screens.count

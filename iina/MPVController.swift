@@ -805,6 +805,13 @@ class MPVController: NSObject {
     case MPVOption.Window.windowScale:
       player.postNotification(.iinaWindowScaleChanged)
 
+    case MPVProperty.mediaTitle:
+      if player.mainWindow.isWindowLoaded {
+        DispatchQueue.main.async {
+          self.player.mainWindow.updateTitle()
+        }
+      }
+
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")
       break

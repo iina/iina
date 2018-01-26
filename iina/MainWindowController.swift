@@ -45,7 +45,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Constants
 
   /** Minimum window size. */
-  let minSize = NSMakeSize(240, 120)
+  let minSize = NSMakeSize(250, 120)
 
   /** For Force Touch. */
   let minimumPressDuration: TimeInterval = 0.5
@@ -421,6 +421,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bottomBarBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var titleBarHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var oscTopMainViewTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var fragControlViewMiddleButtons1Constraint: NSLayoutConstraint!
+  @IBOutlet weak var fragControlViewMiddleButtons2Constraint: NSLayoutConstraint!
 
   var osdProgressBarWidthConstraint: NSLayoutConstraint!
 
@@ -778,8 +780,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscBottomMainView.addView(fragControlView, in: .leading)
       oscBottomMainView.addView(fragSliderView, in: .leading)
       oscBottomMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscBottomMainView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragSliderView)
-      oscBottomMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
+      oscBottomMainView.setVisibilityPriority(.detachEarly, for: fragSliderView)
+      oscBottomMainView.setVisibilityPriority(.mustHold, for: fragVolumeView)
       oscBottomMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     }
 
@@ -789,12 +791,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     if isFloating {
+      fragControlViewMiddleButtons1Constraint.constant = 24
+      fragControlViewMiddleButtons2Constraint.constant = 24
       oscFloatingLeadingTrailingConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=10)-[v]-(>=10)-|",
                                                                             options: [], metrics: nil, views: ["v": controlBarFloating])
       NSLayoutConstraint.activate(oscFloatingLeadingTrailingConstraint!)
-    } else if let constraints = oscFloatingLeadingTrailingConstraint {
-      controlBarFloating.superview?.removeConstraints(constraints)
-      oscFloatingLeadingTrailingConstraint = nil
+    } else {
+      fragControlViewMiddleButtons1Constraint.constant = 16
+      fragControlViewMiddleButtons2Constraint.constant = 16
+      if let constraints = oscFloatingLeadingTrailingConstraint {
+        controlBarFloating.superview?.removeConstraints(constraints)
+        oscFloatingLeadingTrailingConstraint = nil
+      }
     }
   }
 

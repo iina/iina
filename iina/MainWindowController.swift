@@ -611,6 +611,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // add notification observers
+
+    notificationCenter(.default, addObserverfor: .iinaMediaTitleChanged, object: player) { [unowned self] _ in
+      self.updateTitle()
+    }
+
     notificationCenter(.default, addObserverfor: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
       let screenCount = NSScreen.screens.count

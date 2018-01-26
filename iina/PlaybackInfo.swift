@@ -41,6 +41,8 @@ class PlaybackInfo {
   var videoPosition: VideoTime?
   var videoDuration: VideoTime?
 
+  var cachedWindowScale: Double = 1.0
+
   func constrainVideoPosition() {
     guard let duration = videoDuration else { return }
     if videoPosition!.second < 0 { videoPosition!.second = 0 }

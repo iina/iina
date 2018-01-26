@@ -394,6 +394,21 @@ class MPVController: NSObject {
     mpv_set_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
   }
 
+  func setFlagAsync(_ name: String, _ flag: Bool) {
+    var data: Int = flag ? 1 : 0
+    mpv_set_property_async(mpv, 0, name, MPV_FORMAT_FLAG, &data)
+  }
+
+  func setIntAsync(_ name: String, _ value: Int) {
+    var data = Int64(value)
+    mpv_set_property_async(mpv, 0, name, MPV_FORMAT_INT64, &data)
+  }
+
+  func setDoubleAsync(_ name: String, _ value: Double) {
+    var data = value
+    mpv_set_property_async(mpv, 0, name, MPV_FORMAT_DOUBLE, &data)
+  }
+
   func setString(_ name: String, _ value: String) {
     mpv_set_property_string(mpv, name, value)
   }

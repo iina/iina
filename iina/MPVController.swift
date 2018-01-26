@@ -797,19 +797,37 @@ class MPVController: NSObject {
       player.postNotification(.iinaAFChanged)
 
     case MPVOption.Window.fullscreen:
-      player.postNotification(.iinaFSChanged)
+      guard player.mainWindow.isWindowLoaded else { break }
+      let fs = getFlag(MPVOption.Window.fullscreen)
+      if fs != player.mainWindow.isInFullScreen {
+        DispatchQueue.main.async {
+          self.player.mainWindow.toggleWindowFullScreen()
+        }
+      }
 
     case MPVOption.Window.ontop:
-      player.postNotification(.iinaOntopChanged)
+      guard player.mainWindow.isWindowLoaded else { break }
+      let ontop = getFlag(MPVOption.Window.ontop)
+      if ontop != player.mainWindow.isOntop {
+        DispatchQueue.main.async {
+          self.player.mainWindow.isOntop = ontop
+          self.player.mainWindow.setWindowFloatingOnTop(ontop)
+        }
+      }
 
     case MPVOption.Window.windowScale:
-      player.postNotification(.iinaWindowScaleChanged)
+      guard player.mainWindow.isWindowLoaded else { break }
+      let windowScale = getDouble(MPVOption.Window.windowScale)
+      if fabs(windowScale - player.info.cachedWindowScale) > 10e-10 {
+        DispatchQueue.main.async {
+          self.player.mainWindow.setWindowScale(windowScale)
+        }
+      }
 
     case MPVProperty.mediaTitle:
-      if player.mainWindow.isWindowLoaded {
-        DispatchQueue.main.async {
-          self.player.mainWindow.updateTitle()
-        }
+      guard player.mainWindow.isWindowLoaded else { break }
+      DispatchQueue.main.async {
+        self.player.mainWindow.updateTitle()
       }
 
     default:

@@ -626,7 +626,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     notificationCenter(.default, addObserverfor: Constants.Noti.windowScaleChanged) { [unowned self] _ in
       let windowScale = self.player.mpv.getDouble(MPVOption.Window.windowScale)
-      self.setWindowScale(windowScale)
+      if fabs(windowScale - self.player.info.cachedWindowScale) > 10e-10 {
+        self.setWindowScale(windowScale)
+      }
     }
     notificationCenter(.default, addObserverfor: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
@@ -1096,6 +1098,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
 
         lastMagnification = recognizer.magnification
+      } else if recognizer.state == .ended {
+        updateWindowParametersForMPV()
       }
 
     } else if pinchAction == .fullscreen{
@@ -1271,6 +1275,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if Preference.bool(for: .playWhenEnteringFullScreen) && player.info.isPaused {
       player.togglePause(false)
     }
+
+    updateWindowParametersForMPV()
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
@@ -1338,6 +1344,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     windowFrameBeforeEnteringFullScreen = nil
 
     resetCollectionBehavior()
+    updateWindowParametersForMPV()
   }
 
   // MARK: - Window delegate: Size
@@ -1399,6 +1406,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // resize framebuffer in videoView after resizing.
   func windowDidEndLiveResize(_ notification: Notification) {
     videoView.videoSize = window!.convertToBacking(videoView.bounds).size
+    updateWindowParametersForMPV()
   }
 
   func windowDidChangeBackingProperties(_ notification: Notification) {
@@ -2102,6 +2110,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // animated `setFrame` can be inaccurate!
       w.setFrame(rect, display: true, animate: true)
       w.setFrame(rect, display: true)
+      updateWindowParametersForMPV(withFrame: rect)
     }
 
     // generate thumbnails after video loaded if it's the first time
@@ -2113,6 +2122,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)
     updateVolume()
+  }
+
+  func updateWindowParametersForMPV(withFrame frame: NSRect? = nil) {
+    guard let window = window else { return }
+    if let videoWidth = player.info.videoWidth {
+      let windowScale = Double((frame ?? window.frame).width) / Double(videoWidth)
+      player.info.cachedWindowScale = windowScale
+      player.mpv.setDouble(MPVProperty.windowScale, windowScale)
+    }
   }
 
   func setWindowScale(_ scale: Double) {

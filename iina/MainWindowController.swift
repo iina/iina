@@ -2168,7 +2168,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func toggleWindowFullScreen() {
     guard let window = window else { return }
-    
+
     if (isInFullScreen) {
       // exit full screen
       if currentFullScreenIsLegacy {

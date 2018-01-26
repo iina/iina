@@ -769,8 +769,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscTopMainView.addView(fragControlView, in: .leading)
       oscTopMainView.addView(fragSliderView, in: .leading)
       oscTopMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscTopMainView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
-      oscTopMainView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragToolbarView)
+      oscTopMainView.setVisibilityPriority(.detachEarly, for: fragSliderView)
+      oscTopMainView.setVisibilityPriority(.mustHold, for: fragVolumeView)
+      oscTopMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     case .bottom:
       currentControlBar = controlBarBottom
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)

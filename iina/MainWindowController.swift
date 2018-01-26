@@ -2168,7 +2168,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func toggleWindowFullScreen() {
     guard let window = window else { return }
-
+    
     if (isInFullScreen) {
       // exit full screen
       if currentFullScreenIsLegacy {
@@ -2206,6 +2206,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     } else {
       // enter full screen
+      if player.isInMiniPlayer { return }
       if Preference.bool(for: .useLegacyFullScreen) {
         // enter legacy full screen
         // cache current window frame

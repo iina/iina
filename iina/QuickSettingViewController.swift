@@ -126,12 +126,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     subLoadSementedControl.image(forSegment: 1)?.isTemplate = true
 
     // notifications
-    let tracklistChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.tracklistChanged, object: nil, queue: OperationQueue.main) { _ in
+    let tracklistChangeObserver = NotificationCenter.default.addObserver(forName: .iinaTracklistChanged, object: player, queue: OperationQueue.main) { _ in
       self.player.getTrackInfo()
       self.withAllTableViews { tableView, _ in tableView.reloadData() }
     }
     observers.append(tracklistChangeObserver)
-    let afChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.afChanged, object: nil, queue: OperationQueue.main) { _ in
+    let afChangeObserver = NotificationCenter.default.addObserver(forName: .iinaAFChanged, object: player, queue: OperationQueue.main) { _ in
       self.updateAudioEqState()
     }
     observers.append(afChangeObserver)

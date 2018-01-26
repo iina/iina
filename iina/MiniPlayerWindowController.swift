@@ -127,7 +127,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     controlView.alphaValue = 0
 
     // notifications
-    NotificationCenter.default.addObserver(self, selector: #selector(updateTrack), name: Constants.Noti.fileLoaded, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(updateTrack), name: .iinaFileLoaded, object: player)
 
     updateVolume()
   }

@@ -453,7 +453,7 @@ class PlayerCore: NSObject {
 
   func toggleShuffle() {
     mpv.command(.playlistShuffle)
-    NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+    postNotification(.iinaPlaylistChanged)
   }
 
   func setVolume(_ volume: Double, constrain: Bool = true) {
@@ -918,7 +918,7 @@ class PlayerCore: NSObject {
         NSDocumentController.shared.noteNewRecentDocumentURL(url)
       }
     }
-    NotificationCenter.default.post(Notification(name: Constants.Noti.fileLoaded))
+    postNotification(.iinaFileLoaded)
   }
 
   func playbackRestarted() {
@@ -1233,6 +1233,12 @@ class PlayerCore: NSObject {
                                index:     index)
       info.chapters.append(chapter)
     }
+  }
+
+  // MARK: - Notifications
+
+  func postNotification(_ name: Notification.Name) {
+    NotificationCenter.default.post(Notification(name: name, object: self))
   }
 
   // MARK: - Utils

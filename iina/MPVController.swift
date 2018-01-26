@@ -77,7 +77,8 @@ class MPVController: NSObject {
     MPVOption.Equalizer.saturation: MPV_FORMAT_INT64,
     MPVOption.Window.fullscreen: MPV_FORMAT_FLAG,
     MPVOption.Window.ontop: MPV_FORMAT_FLAG,
-    MPVOption.Window.windowScale: MPV_FORMAT_DOUBLE
+    MPVOption.Window.windowScale: MPV_FORMAT_DOUBLE,
+    MPVProperty.mediaTitle: MPV_FORMAT_STRING
   ]
 
   init(playerCore: PlayerCore) {
@@ -466,7 +467,7 @@ class MPVController: NSObject {
       if returnValue < 0 {
         Utility.showAlert("filter.incorrect")
         // reload data in filter setting window
-        NotificationCenter.default.post(Notification(name: Constants.Noti.vfChanged))
+        self.player.postNotification(.iinaVFChanged)
       }
     }
   }
@@ -783,26 +784,26 @@ class MPVController: NSObject {
     // following properties may change before file loaded
 
     case MPVProperty.playlistCount:
-      NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+      player.postNotification(.iinaPlaylistChanged)
 
     case MPVProperty.trackListCount:
       player.trackListChanged()
-      NotificationCenter.default.post(Notification(name: Constants.Noti.tracklistChanged))
+      player.postNotification(.iinaTracklistChanged)
 
     case MPVProperty.vf:
-      NotificationCenter.default.post(Notification(name: Constants.Noti.vfChanged))
+      player.postNotification(.iinaVFChanged)
 
     case MPVProperty.af:
-      NotificationCenter.default.post(Notification(name: Constants.Noti.afChanged))
+      player.postNotification(.iinaAFChanged)
 
     case MPVOption.Window.fullscreen:
-      NotificationCenter.default.post(Notification(name: Constants.Noti.fsChanged))
+      player.postNotification(.iinaFSChanged)
 
     case MPVOption.Window.ontop:
-      NotificationCenter.default.post(Notification(name: Constants.Noti.ontopChanged))
+      player.postNotification(.iinaOntopChanged)
 
     case MPVOption.Window.windowScale:
-      NotificationCenter.default.post(Notification(name: Constants.Noti.windowScaleChanged))
+      player.postNotification(.iinaWindowScaleChanged)
 
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")

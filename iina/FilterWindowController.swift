@@ -69,9 +69,9 @@ class FilterWindowController: NSWindowController {
     editFilterKeyRecordView.delegate = self
 
     // notifications
-    let notiName = filterType == MPVProperty.af ? Constants.Noti.afChanged : Constants.Noti.vfChanged
+    let notiName: Notification.Name = filterType == MPVProperty.af ? .iinaAFChanged : .iinaVFChanged
     NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: notiName, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: Constants.Noti.mainWindowChanged, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: .iinaMainWindowChanged, object: nil)
   }
 
   @objc

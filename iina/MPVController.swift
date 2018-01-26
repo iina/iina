@@ -825,10 +825,7 @@ class MPVController: NSObject {
       }
 
     case MPVProperty.mediaTitle:
-      guard player.mainWindow.isWindowLoaded else { break }
-      DispatchQueue.main.async {
-        self.player.mainWindow.updateTitle()
-      }
+      player.postNotification(.iinaMediaTitleChanged)
 
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")

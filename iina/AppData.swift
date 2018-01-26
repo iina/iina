@@ -73,20 +73,6 @@ struct Constants {
     static let pip = NSLocalizedString("menu.pip", comment: "Enter Picture-in-Picture")
     static let exitPIP = NSLocalizedString("menu.exit_pip", comment: "Exit Picture-in-Picture")
   }
-  struct Noti {
-    static let mainWindowChanged = Notification.Name("IINAMainWindowChanged")
-    static let playlistChanged = Notification.Name("IINAPlaylistChanged")
-    static let tracklistChanged = Notification.Name("IINATracklistChanged")
-    static let vfChanged = Notification.Name("IINAVfChanged")
-    static let afChanged = Notification.Name("IINAAfChanged")
-    static let fsChanged = Notification.Name("IINAFullscreenChanged")
-    static let ontopChanged = Notification.Name("IINAOnTopChanged")
-    static let keyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
-    static let windowScaleChanged = Notification.Name("IINAWindowScaleChanged")
-    static let fileLoaded = Notification.Name("IINAFileLoaded")
-    static let historyUpdated = Notification.Name("IINAHistoryUpdated")
-    static let legacyFullScreen = Notification.Name("IINALegacyFullScreen")
-  }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)
   }
@@ -97,4 +83,19 @@ struct Constants {
     static let audioEq = "iina_aeq"
     static let delogo = "iina_delogo"
   }
+}
+
+extension Notification.Name {
+  static let iinaMainWindowChanged = Notification.Name("IINAMainWindowChanged")
+  static let iinaPlaylistChanged = Notification.Name("IINAPlaylistChanged")
+  static let iinaTracklistChanged = Notification.Name("IINATracklistChanged")
+  static let iinaVFChanged = Notification.Name("IINAVfChanged")
+  static let iinaAFChanged = Notification.Name("IINAAfChanged")
+  static let iinaFSChanged = Notification.Name("IINAFullscreenChanged")
+  static let iinaOntopChanged = Notification.Name("IINAOnTopChanged")
+  static let iinaKeyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
+  static let iinaWindowScaleChanged = Notification.Name("IINAWindowScaleChanged")
+  static let iinaFileLoaded = Notification.Name("IINAFileLoaded")
+  static let iinaHistoryUpdated = Notification.Name("IINAHistoryUpdated")
+  static let iinaLegacyFullScreen = Notification.Name("IINALegacyFullScreen")
 }

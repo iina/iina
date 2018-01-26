@@ -299,7 +299,7 @@ class AutoFileMatcher {
       // add files to playlist
       if shouldAutoLoad {
         try addFilesToPlaylist()
-        NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
+        player.postNotification(.iinaPlaylistChanged)
       }
 
       // group video and sub files
@@ -311,12 +311,12 @@ class AutoFileMatcher {
 
       // match sub stage 1
       try matchSubs(withMatchedSeries: matchedPrefixes)
-      NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
+      player.postNotification(.iinaPlaylistChanged)
 
       // match sub stage 2
       if shouldAutoLoad {
         try forceMatchUnmatchedVideos()
-        NotificationCenter.default.post(name: Constants.Noti.playlistChanged, object: nil)
+        player.postNotification(.iinaPlaylistChanged)
       }
 
     } catch {

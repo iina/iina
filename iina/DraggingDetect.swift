@@ -48,7 +48,7 @@ extension PlayerCore {
     }
 
     // refresh playlist
-    NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+    postNotification(.iinaPlaylistChanged)
     // send OSD
     if count > 1 {
       sendOSD(.addToPlaylist(count))

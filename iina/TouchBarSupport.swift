@@ -253,6 +253,9 @@ class TouchBarPlaySliderCell: NSSliderCell {
   private let solidColor = NSColor.labelColor.withAlphaComponent(0.4)
   private let knobWidthWithImage: CGFloat = 60
 
+  private var backgroundImage: NSImage?
+  private var cachedThumbnailProgress: Double = -1
+
   var isTouching: Bool {
     return (self.controlView as! TouchBarPlaySlider).isTouching
   }
@@ -330,26 +333,39 @@ class TouchBarPlaySliderCell: NSSliderCell {
     let info = playerCore.info
     guard !info.isIdle else { return }
     let barRect = self.barRect(flipped: flipped)
-    NSGraphicsContext.saveGraphicsState()
-    NSBezierPath(roundedRect: barRect, xRadius: 2.5, yRadius: 2.5).setClip()
-    let step: CGFloat = 3
-    let end = barRect.width
-    var i: CGFloat = 0
-    solidColor.setFill()
-    while (i < end + step) {
-      let percent = Double(i / end)
-      let dest = NSRect(x: barRect.origin.x + i, y: barRect.origin.y, width: 2, height: barRect.height)
-      if let dur = info.videoDuration?.second,
-        let image = info.getThumbnail(forSecond: percent * dur)?.image,
-        info.thumbnailsProgress >= percent {
-        let orig = NSRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
-        image.draw(in: dest, from: orig, operation: .copy, fraction: 1, respectFlipped: true, hints: nil)
-      } else {
-        NSBezierPath(rect: dest).fill()
+    if let image = backgroundImage, info.thumbnailsProgress == cachedThumbnailProgress {
+      // draw cached background image
+      image.draw(in: barRect)
+    } else {
+      // draw the background image
+      let imageRect = NSRect(origin: .zero, size: barRect.size)
+      let image = NSImage(size: barRect.size)
+      image.lockFocus()
+      NSGraphicsContext.saveGraphicsState()
+      NSBezierPath(roundedRect: imageRect, xRadius: 2.5, yRadius: 2.5).setClip()
+      let step: CGFloat = 3
+      let end = imageRect.width
+      var i: CGFloat = 0
+      solidColor.setFill()
+      while (i < end + step) {
+        let percent = Double(i / end)
+        let dest = NSRect(x: i, y: 0, width: 2, height: imageRect.height)
+        if let dur = info.videoDuration?.second,
+          let image = info.getThumbnail(forSecond: percent * dur)?.image,
+          info.thumbnailsProgress >= percent {
+          let orig = NSRect(origin: .zero, size: image.size)
+          image.draw(in: dest, from: orig, operation: .copy, fraction: 1, respectFlipped: true, hints: nil)
+        } else {
+          NSBezierPath(rect: dest).fill()
+        }
+        i += step
       }
-      i += step
+      NSGraphicsContext.restoreGraphicsState()
+      image.unlockFocus()
+      backgroundImage = image
+      cachedThumbnailProgress = info.thumbnailsProgress
+      image.draw(in: barRect)
     }
-    NSGraphicsContext.restoreGraphicsState()
   }
 
 }

@@ -885,30 +885,30 @@ class PlayerCore: NSObject {
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     info.haveDownloadedSub = false
-    // Generate thumbnails if window has loaded video
+    // generate thumbnails if window has loaded video
     if mainWindow.isVideoLoaded {
       generateThumbnails()
     }
-    // Main thread stuff
+    // main thread stuff
+    getTrackInfo()
+    getSelectedTracks()
+    getPlaylist()
+    getChapters()
     DispatchQueue.main.sync {
-      self.getTrackInfo()
-      self.getSelectedTracks()
-      self.getPlaylist()
-      self.getChapters()
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
-      mainWindow.updateTitle()
       if #available(macOS 10.12.2, *) {
         touchBarSupport.setupTouchBarUI()
       }
-      // only set some initial properties for the first file
-      if info.justLaunched {
-        if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.isInFullScreen && !isInMiniPlayer {
-          mainWindow.toggleWindowFullScreen()
+    }
+    // set initial properties for the first file
+    if info.justLaunched {
+      if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.isInFullScreen && !isInMiniPlayer {
+        DispatchQueue.main.async {
+          self.mainWindow.toggleWindowFullScreen()
         }
-        info.justLaunched = false
       }
-      mainWindow.quickSettingView.reload()
+      info.justLaunched = false
     }
     // add to history
     if let url = info.currentURL {

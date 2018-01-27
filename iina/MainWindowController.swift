@@ -612,6 +612,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // add notification observers
 
+    notificationCenter(.default, addObserverfor: .iinaFileLoaded, object: player) { [unowned self] _ in
+      self.updateTitle()
+      self.quickSettingView.reload()
+    }
+
     notificationCenter(.default, addObserverfor: .iinaMediaTitleChanged, object: player) { [unowned self] _ in
       self.updateTitle()
     }

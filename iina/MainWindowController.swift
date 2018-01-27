@@ -340,9 +340,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case PK.showRemainingTime.rawValue:
       if let newValue = change[.newKey] as? Bool {
         rightLabel.mode = newValue ? .remaining : .duration
-        if #available(OSX 10.12.2, *) {
-          player.touchBarSupport.touchBarCurrentPosLabel?.mode = newValue ? .remaining : .current
-        }
       }
 
     case PK.blackOutMonitor.rawValue:
@@ -2265,7 +2262,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
     if #available(OSX 10.12.2, *) {
-      player.touchBarSupport.touchBarCurrentPosLabel?.updateText(with: duration, given: pos)
+      player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
     }
     rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {

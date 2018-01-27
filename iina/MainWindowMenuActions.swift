@@ -170,9 +170,9 @@ extension MainWindowController {
       if player.mpv.getFilters(type).contains(where: { $0.stringFormat == string }) {
         // remove
         if isVideo {
-          let _ = player.removeVideoFilter(filter)
+          _ = player.removeVideoFilter(filter)
         } else {
-          player.removeAudioFilter(filter)
+          _ = player.removeAudioFilter(filter)
         }
       } else {
         // add
@@ -181,7 +181,9 @@ extension MainWindowController {
             Utility.showAlert("filter.incorrect")
           }
         } else {
-          player.addAudioFilter(filter)
+          if !player.addAudioFilter(filter) {
+            Utility.showAlert("filter.incorrect")
+          }
         }
       }
     }

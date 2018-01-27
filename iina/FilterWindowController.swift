@@ -104,9 +104,16 @@ class FilterWindowController: NSWindowController {
 
   func addFilter(_ filter: MPVFilter) {
     filters.append(filter)
-    guard PlayerCore.active.addVideoFilter(filter) else {
-      Utility.showAlert("filter.incorrect")
-      return
+    if filterType == MPVProperty.vf {
+      guard PlayerCore.active.addVideoFilter(filter) else {
+        Utility.showAlert("filter.incorrect")
+        return
+      }
+    } else {
+      guard PlayerCore.active.addAudioFilter(filter) else {
+        Utility.showAlert("filter.incorrect")
+        return
+      }
     }
     reloadTable()
   }
@@ -133,7 +140,13 @@ class FilterWindowController: NSWindowController {
   @IBAction func removeFilterAction(_ sender: Any) {
     let pc = PlayerCore.active
     if currentFiltersTableView.selectedRow >= 0 {
-      if pc.removeVideoFilter(filters[currentFiltersTableView.selectedRow]) {
+      let success: Bool
+      if filterType == MPVProperty.vf {
+        success = pc.removeVideoFilter(filters[currentFiltersTableView.selectedRow])
+      } else {
+        success = pc.removeAudioFilter(filters[currentFiltersTableView.selectedRow])
+      }
+      if success {
         reloadTable()
         pc.sendOSD(.removeFilter)
       }

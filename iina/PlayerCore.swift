@@ -702,13 +702,13 @@ class PlayerCore: NSObject {
 
   func setAudioEq(fromFilter filter: MPVFilter) {
     filter.label = Constants.FilterName.audioEq
-    addAudioFilter(filter)
+    _ = addAudioFilter(filter)
     info.audioEqFilter = filter
   }
 
   func removeAudioEqFilter() {
     if let prevFilter = info.audioEqFilter {
-      removeAudioFilter(prevFilter)
+      _ = removeAudioFilter(prevFilter)
       info.audioEqFilter = nil
     }
   }
@@ -764,12 +764,16 @@ class PlayerCore: NSObject {
     return result
   }
 
-  func addAudioFilter(_ filter: MPVFilter) {
-    mpv.command(.af, args: ["add", filter.stringFormat], checkError: false)
+  func addAudioFilter(_ filter: MPVFilter) -> Bool {
+    var result = true
+    mpv.command(.af, args: ["add", filter.stringFormat], checkError: false) { result = $0 >= 0 }
+    return result
   }
 
-  func removeAudioFilter(_ filter: MPVFilter) {
-    mpv.command(.af, args: ["del", filter.stringFormat], checkError: false)
+  func removeAudioFilter(_ filter: MPVFilter) -> Bool {
+    var result = true
+    mpv.command(.af, args: ["del", filter.stringFormat], checkError: false)  { result = $0 >= 0 }
+    return result
   }
 
   func getAudioDevices() -> [[String: String]] {

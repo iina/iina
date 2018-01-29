@@ -7,8 +7,8 @@
 */
 
 // Common
-"general.on" = "Ativar(on)";
-"general.off" = "Desativar(Off)";
+"general.on" = "Ligar";
+"general.off" = "Desligar";
 "general.login" = "Logar";
 "general.logout" = "Deslogar";
 "general.ok" = "OK";
@@ -29,14 +29,14 @@
 
 
 // OSDMessage.swift
-"osd.pause" = "Pausa";
-"osd.resume" = "Resumir";
+"osd.pause" = "Em Pausa";
+"osd.resume" = "Reproduzindo";
 "osd.volume" = "Volume: %i";
 "osd.speed" = "Velocidade: %.2fx";
 "osd.aspect" = "Proporção: %@";
 "osd.crop" = "Cortar: %@";
 "osd.rotate" = "Rotacionar: %i°";
-"osd.deinterlace" = "Desintrelaçar: %@";
+"osd.deinterlace" = "Desentrelaçar: %@";
 "osd.audio_delay.nodelay" = "Atraso de Audio: Sem Atraso";
 "osd.audio_delay.later" = "Atraso de Audio: %.2fs Atrasado";
 "osd.audio_delay.earlier" = "Atraso de Audio: %.2fs Antecipado";
@@ -44,13 +44,13 @@
 "osd.sub_delay.later" = "Atraso de Legenda: %.2fs Atrasada";
 "osd.sub_delay.earlier" = "Atraso de Legenda: %.2fs Antecipada";
 "osd.subtitle_pos" = "Posição da Legenda: %.1f";
-"osd.mute" = "Mudo";
-"osd.unmute" = "Não Mudo";
+"osd.mute" = "Sem Audio";
+"osd.unmute" = "Audio Ligado";
 "osd.screenshot" = "Imagem Capturada";
 "osd.abloop.a" = "AB-Loop: A";
 "osd.abloop.b" = "AB-Loop: B";
 "osd.abloop.clear" = "AB-Loop: Desfeito";
-"osd.stop" = "Parar";
+"osd.stop" = "Parado";
 "osd.chapter" = "Capítulo: %@";
 "osd.subtitle_scale" = "Escala da Legenda: %.2fx";
 "osd.add_to_playlist" = "Adicionada %i Arquivos na Playlist";
@@ -93,8 +93,8 @@
 "menu.exit_fullscreen" = "Sair da Tela Cheia";
 "menu.pip" = "Entrar em Picture-in-Picture";
 "menu.exit_pip" = "Sair de Picture-in-Picture";
-"menu.pause" = "Pausa";
-"menu.resume" = "Resume CHECKK?????";
+"menu.pause" = "Pausar";
+"menu.resume" = "Reproduzirr";
 "menu.speed" = "Velocidae: %.2fx";
 
 "menu.seek_forward" = "Ir adiante %.0fs";
@@ -162,7 +162,7 @@
 
 "alert.set_default.title" = "Ajustando INNA como App padrão";
 "alert.set_default.message" = "IINA vai ser usado como player padrão para todos os tipos de arquivos que suporta.";
-"alert.set_default.success" = "Terminado com %d sucessos e %d falhas.";
+"alert.set_default.success" = "Realizado com %d sucessos e %d falhas.";
 
 "alert.add_watch.title" = "Add Watch Property";
 "alert.add_watch.message" = "Entre com um nome de propriedade MPV válida.";

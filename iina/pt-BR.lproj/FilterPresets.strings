@@ -9,47 +9,47 @@
 
 /* It's optional to localize descriptions for each parameter! */
 
-"crop" = "Crop";
-"crop.w" = "Width (default: video width)";
-"crop.h" = "Height (default: video height)";
-"crop.x" = "Origin X (default: center)";
-"crop.y" = "Origin Y (default: center)";
+"crop" = "Corte";
+"crop.w" = "Largura (padrão: largura do video)";
+"crop.h" = "Altura (padrão: altura do video)";
+"crop.x" = "Origem X (padrão: center)";
+"crop.y" = "Origem Y (padrão: center)";
 
 "expand" = "Expand";
-"expand.w" = "Width (default: video width)";
-"expand.h" = "Height (default: video height)";
-"expand.x" = "Origin X (default: center)";
-"expand.y" = "Origin Y (default: center)";
-"expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
-"expand.round" = "Rounds up to make divisible by this value";
+"expand.w" = "Width (padrão: largura do video)";
+"expand.h" = "Height (padrão: altura do video)";
+"expand.x" = "Origin X (padrão: centro)";
+"expand.y" = "Origin Y (padrão: centro)";
+"expand.aspect" = "Expande até adequar no aspecto (ex: 4/3)";
+"expand.round" = "Arredonda pra ser divisível por este valor";
 
-"sharpen" = "Sharpen";
-"sharpen.msize" = "Matrix size";
-"sharpen.amount" = "Amount";
+"sharpen" = "+Nitidez";
+"sharpen.msize" = "tamanho da matriz";
+"sharpen.amount" = "Quantidade";
 
-"blur" = "Blur";
-"blur.msize" = "Matrix size";
-"blur.amount" = "Amount";
+"blur" = "+Enbaçado";
+"blur.msize" = "tamanho da matriz";
+"blur.amount" = "Quantidade";
 
-"delogo" = "Delogo";
-"delogo.w" = "Width";
-"delogo.h" = "Height";
-"delogo.x" = "Origin X";
-"delogo.y" = "Origin Y";
+"delogo" = "RemoverLogo";
+"delogo.w" = "Largura";
+"delogo.h" = "Altura";
+"delogo.x" = "Origem X";
+"delogo.y" = "Origem Y";
 
-"negative" = "Negative";
+"negative" = "Negativo";
 
-"vflip" = "Flip";
-"hflip" = "Mirror";
+"vflip" = "Inverter";
+"hflip" = "Espelhar";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "File";
-"lut3d.interp" = "Interpolation mode";
+"lut3d.file" = "Arquivo";
+"lut3d.interp" = "Modo de interpolação";
 
-"custom_mpv" = "Custom (MPV)";
-"custom_mpv.name" = "Filter name";
-"custom_mpv.string" = "Filter value";
+"custom_mpv" = "Customizado (MPV)";
+"custom_mpv.name" = "Nome do Filtro";
+"custom_mpv.string" = "Valor do Filtro";
 
-"custom_ffmpeg" = "Custom (FFmpeg)";
-"custom_ffmpeg.name" = "Filter name";
-"custom_ffmpeg.string" = "Filter value";
+"custom_ffmpeg" = "Customizado (FFmpeg)";
+"custom_ffmpeg.name" = "Nome do Filtro";
+"custom_ffmpeg.string" = "Valor do Filtro";

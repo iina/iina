@@ -48,6 +48,8 @@ struct AppData {
   static let wikiLink = "https://github.com/lhc70000/iina/wiki"
   static let websiteLink = "https://lhc70000.github.io/iina/"
   static let emailLink = "developers@iina.io"
+  static let appcastLink = "https://www.iina.io/appcast.xml"
+  static let appcastBetaLink = "https://www.iina.io/appcast-beta.xml"
 
   static let widthWhenNoVideo = 480
   static let heightWhenNoVideo = 480

@@ -9,6 +9,7 @@
 import Cocoa
 import MediaPlayer
 import MASPreferences
+import Sparkle
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
 fileprivate let OpenFileRepeatTime = TimeInterval(0.2)
@@ -88,6 +89,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationWillFinishLaunching(_ notification: Notification) {
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
+
+    // beta channel
+    SUUpdater.shared().feedURL = Preference.bool(for: .receiveBetaUpdate) ? AppData.appcastBetaLink : AppData.appcastLink
 
     // handle arguments
     let arguments = ProcessInfo.processInfo.arguments.dropFirst()

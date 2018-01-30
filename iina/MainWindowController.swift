@@ -1264,6 +1264,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       player.togglePause(false)
     }
 
+    if #available(macOS 10.12.2, *) {
+      player.touchBarSupport.toggleTouchBarEsc(enteringFullScr: true)
+    }
+    
     updateWindowParametersForMPV()
   }
 
@@ -1318,6 +1322,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     if Preference.bool(for: .pauseWhenLeavingFullScreen) && !player.info.isPaused {
       player.togglePause(true)
+    }
+
+    if #available(macOS 10.12.2, *) {
+      player.touchBarSupport.toggleTouchBarEsc(enteringFullScr: false)
     }
 
     // restore ontop status

@@ -1,0 +1,186 @@
+
+/* Class = "NSTextFieldCell"; title = "Online Subtitles:"; ObjectID = "0fB-es-DmV"; */
+"0fB-es-DmV.title" = "Legendas Online:";
+
+/* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
+"1Tq-5k-o6R.title" = "Topo";
+
+/* Class = "NSTabViewItem"; label = "General"; ObjectID = "29W-lw-0pD"; */
+"29W-lw-0pD.label" = "Geral";
+
+/* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
+"2XY-Un-0Fg.title" = "Mostrar legendas em caixa quando em tela cheia";
+
+/* Class = "NSMenuItem"; title = "OpenSubtitles.org"; ObjectID = "39k-VH-tOz"; */
+"39k-VH-tOz.title" = "OpenSubtitles.org";
+
+/* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
+"3H8-Ei-cTm.title" = "cortar";
+
+/* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
+"4Tb-Yh-PdP.title" = "Posição:";
+
+/* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
+"6i0-Sx-V7F.title" = "Embaixo";
+
+/* Class = "NSMenuItem"; title = "Shooter.cn"; ObjectID = "7YD-rw-eCZ"; */
+"7YD-rw-eCZ.title" = "Shooter.cn";
+
+/* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
+"7pf-Kb-TNr.title" = "Legendas possuem prioridade quando nome do arquivo contem:";
+
+/* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "8hj-ki-R0h"; */
+"8hj-ki-R0h.title" = "Dimensionar legendas junto com a tela";
+
+/* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "9EP-XB-lyO"; */
+"9EP-XB-lyO.title" = "Espaçamento:";
+
+/* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "9N4-Zg-M7m"; */
+"9N4-Zg-M7m.title" = "Posição Vertical:";
+
+/* Class = "NSBox"; title = "Font"; ObjectID = "9pv-1r-nuH"; */
+"9pv-1r-nuH.title" = "Fonte";
+
+/* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "ALz-LB-8sf"; */
+"ALz-LB-8sf.title" = "Y:";
+
+/* Class = "NSBox"; title = "Shadow"; ObjectID = "BgE-Kk-MXC"; */
+"BgE-Kk-MXC.title" = "Sombra";
+
+/* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
+"C4C-XP-i2S.title" = "Fonte:";
+
+/* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "CdS-9J-f2h"; */
+"CdS-9J-f2h.title" = " X:";
+
+/* Class = "NSMenuItem"; title = "Right"; ObjectID = "Gie-38-Kk4"; */
+"Gie-38-Kk4.title" = "Direita";
+
+/* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "Iax-cc-YIO"; */
+"Iax-cc-YIO.title" = "OpenSubtitles account:";
+
+/* Class = "NSTextFieldCell"; title = "%"; ObjectID = "JZo-4H-owW"; */
+"JZo-4H-owW.title" = "%";
+
+/* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "LiG-iV-AQK"; */
+"LiG-iV-AQK.title" = "Outro:";
+
+/* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
+"Luv-2B-9v8.title" = "Diratorios são separados por doispontos (:). Caminhos relativos e curingas (*) sao permitidos no final.";
+
+/* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
+"Mk1-sv-QB8.title" = "Digite uma lista separadas por virgulas.";
+
+/* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
+"OcF-0z-7qe.title" = "Se habilitado, todas leganda ASS serão feitas no estilo abaixo.";
+
+/* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
+"Qda-dp-nhg.title" = "Legandas Texto:";
+
+/* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
+"QsS-wD-2hY.title" = "Também procurar nos diretórios:";
+
+/* Class = "NSTabViewItem"; label = "Style and Position"; ObjectID = "R5q-Xd-PPr"; */
+"R5q-Xd-PPr.label" = "Stilo and Posição";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
+"SIh-Sv-6XI.title" = "Cor:";
+
+/* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "TPK-CJ-HX7"; */
+"TPK-CJ-HX7.title" = "Baixar legendas de:";
+
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "Vbl-Im-3UI"; */
+"Vbl-Im-3UI.title" = "Tamanho:";
+
+/* Class = "NSButtonCell"; title = "Login"; ObjectID = "WHk-sk-gmK"; */
+"WHk-sk-gmK.title" = "Login";
+
+/* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "XiL-eE-jah"; */
+"XiL-eE-jah.title" = "Detecção inteligente do IINA";
+
+/* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "Y75-4k-2Du"; */
+"Y75-4k-2Du.title" = "Codificação padrão:";
+
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
+"Z2M-dh-eq1.title" = "Esta opção será armazenada como linguagem ISO 639-2 e funcionará para ambos mpv e opensubtitles.";
+
+/* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
+"aO9-D6-KG8.title" = "Borrar:";
+
+/* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "azJ-oz-BKZ"; */
+"azJ-oz-BKZ.title" = "sans-serif";
+
+/* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "cov-Uy-wnc"; */
+"cov-Uy-wnc.title" = "Nao logado";
+
+/* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "dtP-9o-yhy"; */
+"dtP-9o-yhy.title" = "Offset:";
+
+/* Class = "NSMenuItem"; title = "Center"; ObjectID = "e0e-dB-Ir6"; */
+"e0e-dB-Ir6.title" = "Centro";
+
+/* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "eYO-c0-Rjp"; */
+"eYO-c0-Rjp.title" = "Fundo:";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "egf-g3-b7a"; */
+"egf-g3-b7a.title" = "Box";
+
+/* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
+"gAq-Vr-hRY.title" = "Override level:";
+
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "gkc-qt-sD9"; */
+"gkc-qt-sD9.title" = "Tamanho:";
+
+/* Class = "NSButtonCell"; title = "𝐁"; ObjectID = "hEk-7E-10q"; */
+"hEk-7E-10q.title" = "𝐁";
+
+/* Class = "NSBox"; title = "Align"; ObjectID = "kvJ-Tj-KMb"; */
+"kvJ-Tj-KMb.title" = "Alinhamento";
+
+/* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "l7l-ZO-W79"; */
+"l7l-ZO-W79.title" = " X:";
+
+/* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "mFm-Q6-aja"; */
+"mFm-Q6-aja.title" = "Legandas ASS:";
+
+/* Class = "NSButtonCell"; title = "Choose..."; ObjectID = "nH7-kO-S15"; */
+"nH7-kO-S15.title" = "Escolha...";
+
+/* Class = "NSButtonCell"; title = "𝐼"; ObjectID = "pNF-Fw-QtY"; */
+"pNF-Fw-QtY.title" = "𝐼";
+
+/* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
+"pRe-wv-VVi.title" = "Margem";
+
+/* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "rZf-bj-qbV"; */
+"rZf-bj-qbV.title" = "Ignorar estilos ASS";
+
+/* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
+"raf-Yu-ck0.title" = "Auto carregar:";
+
+/* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
+"slU-Ox-aeF.title" = "Centro";
+
+/* Class = "NSBox"; title = "Border"; ObjectID = "t5n-mc-dss"; */
+"t5n-mc-dss.title" = "Borda";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
+"u31-eV-Arr.title" = "Desabilitado";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
+"vDc-dw-liI.title" = "Cor:";
+
+/* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
+"xGf-fF-4Hx.title" = "Y:";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "xid-E9-FC9"; */
+"xid-E9-FC9.title" = "Cor:";
+
+/* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
+"y1E-JR-KRI.title" = "Legendas contendo nome do arquivo de mídia";
+
+/* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "zaE-bH-XfT"; */
+"zaE-bH-XfT.title" = "Linguagem preferida:";
+
+/* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
+"zml-kt-LN8.title" = "Esquerda";

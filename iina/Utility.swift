@@ -206,10 +206,10 @@ class Utility {
      - sheetWindow: Must present if mode is `.sheetModal`.
    - Returns: Whether user dismissed the panel by clicking OK. Only works when using `.modal` mode.
    */
-  static func quickPromptPanel(_ key: String,
-                               titleComment: String? = nil, messageComment: String? = nil,
-                               mode: AlertMode = .modal, sheetWindow: NSWindow? = nil,
-                               ok: @escaping (String) -> Void) -> Bool {
+  @discardableResult static func quickPromptPanel(_ key: String,
+                                                  titleComment: String? = nil, messageComment: String? = nil,
+                                                  mode: AlertMode = .modal, sheetWindow: NSWindow? = nil,
+                                                  ok: @escaping (String) -> Void) -> Bool {
     let panel = NSAlert()
     let titleKey = "alert." + key + ".title"
     let messageKey = "alert." + key + ".message"
@@ -245,7 +245,7 @@ class Utility {
       return false
     default:
       Utility.log("quickPromptPanel: Unsupported mode")
-      return true
+      return false
     }
   }
 

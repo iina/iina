@@ -340,9 +340,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case PK.showRemainingTime.rawValue:
       if let newValue = change[.newKey] as? Bool {
         rightLabel.mode = newValue ? .remaining : .duration
-        if #available(OSX 10.12.2, *) {
-          player.touchBarSupport.touchBarCurrentPosLabel?.mode = newValue ? .remaining : .current
-        }
       }
 
     case PK.blackOutMonitor.rawValue:
@@ -2274,7 +2271,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       playSlider.doubleValue = percentage
       if #available(OSX 10.12.2, *) {
         player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
-        player.touchBarSupport.touchBarCurrentPosLabel?.updateText(with: duration, given: pos)
+        player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
       }
     }
   }

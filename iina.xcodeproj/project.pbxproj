@@ -876,6 +876,7 @@
 		84FF84711D2FF698001B318A /* opengl_cb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl_cb.h; sourceTree = "<group>"; };
 		867483705008F086E07B0A6B /* Pods_iina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87E813251F83C05E00AA8D0C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/FilterPresets.strings; sourceTree = "<group>"; };
+		8F17B8FA2013956E0048FB5D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
 		8F6F50541EC5E053002B47B4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
 		8F825CBD1F16280A0094B529 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationDisplayTextField.swift; sourceTree = "<group>"; };
@@ -2536,6 +2537,7 @@
 				E34E0ADF2007E23600BDC8BA /* zh-Hant */,
 				64D04D5320083B840031EE2F /* es */,
 				4CA6B421201E85B9008F3FBA /* pt-BR */,
+				8F17B8FA2013956E0048FB5D /* de */,
 			);
 			name = FreeSelectingViewController.xib;
 			sourceTree = "<group>";

@@ -4,6 +4,8 @@
 "alert.add_filter.title" = "添加滤镜";
 "alert.add_watch.message" = "请输入一个有效的 mpv 属性名。";
 "alert.add_watch.title" = "监视 mpv 属性";
+"alert.beta_channel.message" = "在发布 IINA 1.0 之前，你愿意帮助我们测试 beta 版本吗？\n\n你可以在「偏好设置-通用」中随时修改此行为。";
+"alert.beta_channel.title" = "接受 beta 版本的更新";
 "alert.choose_media_file.title" = "选择媒体文件";
 "alert.clear_cache.message" = "确定清除所有缩略图缓存吗?";
 "alert.clear_cache.success" = "缓存已清除。";
@@ -30,12 +32,10 @@
 "alert.extra_option.config_folder" = "设置配置文件目录 \"%@\" 时出现错误。";
 "alert.extra_option.empty" = "键或值不能为空！";
 "alert.extra_option.error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";
-"alert.fatal_error" = "严重错误：%@ 
-程序将立刻结束。";
+"alert.fatal_error" = "严重错误：%@ \n程序将立刻结束。";
 "alert.filter.incorrect" = "设置滤镜时出现错误。请检查你的参数格式。";
 "alert.filter_hwdec.abort" = "放弃";
-"alert.filter_hwdec.message" = "你正在添加视频滤镜。然而，当前的硬件解码器不能很好地支持视频滤镜。你可以禁用硬件解码，或使用支持「拷贝」的解码器 (将占用两倍内存)。
-你可能需要再操作一次（例如剪切）才能看到效果。";
+"alert.filter_hwdec.message" = "你正在添加视频滤镜。然而，当前的硬件解码器不能很好地支持视频滤镜。你可以禁用硬件解码，或使用支持「拷贝」的解码器 (将占用两倍内存)。\n你可能需要再操作一次（例如剪切）才能看到效果。";
 "alert.filter_hwdec.turn_off" = "关闭硬件解码";
 "alert.filter_hwdec.use_copy" = "使用支持「拷贝」的解码器";
 "alert.jump_to.message" = "请输入希望跳转的时间。例: 20:35";
@@ -53,14 +53,10 @@
 "alert.set_default.success" = "操作已完成。%d 成功，%d 失败。";
 "alert.set_default.title" = "将 IINA 设为默认播放器";
 "alert.sleep" = "无法阻止系统睡眠。";
-"alert.sub.cannot_login" = "无法登录。请检查你的用户名、密码及网络状态。
-
-%@";
+"alert.sub.cannot_login" = "无法登录。请检查你的用户名、密码及网络状态。\n\n%@";
 "alert.sub.cannot_save_passwd" = "无法将密码保存到钥匙串：%@";
 "alert.sub.no_selected" = "请先启用一个下载的字幕。";
-"alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。
-
-0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";
+"alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。\n\n0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";
 "alert.title_error" = "错误";
 "alert.title_info" = "提示";
 "alert.title_warning" = "警告";

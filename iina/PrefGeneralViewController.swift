@@ -8,6 +8,7 @@
 
 import Cocoa
 import MASPreferences
+import Sparkle
 
 @objcMembers
 class PrefGeneralViewController: NSViewController, MASPreferencesViewController {
@@ -56,6 +57,10 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
     if sender.state == .off {
       NSDocumentController.shared.clearRecentDocuments(self)
     }
+  }
+
+  @IBAction func receiveBetaUpdatesChanged(_ sender: NSButton) {
+    SUUpdater.shared().feedURL = URL(string: sender.state == .on ? AppData.appcastBetaLink : AppData.appcastLink)!
   }
 
 }

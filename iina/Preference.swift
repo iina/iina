@@ -35,6 +35,7 @@ struct Preference {
 
     init?(rawValue: RawValue) { self.rawValue = rawValue }
 
+    static let receiveBetaUpdate = Key("receiveBetaUpdate")
 
     static let actionAfterLaunch = Key("actionAfterLaunch")
     static let alwaysOpenInNewWindow = Key("alwaysOpenInNewWindow")
@@ -567,6 +568,7 @@ struct Preference {
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [
+    .receiveBetaUpdate: false,
     .actionAfterLaunch: ActionAfterLaunch.welcomeWindow.rawValue,
     .alwaysOpenInNewWindow: true,
     .enableCmdN: false,

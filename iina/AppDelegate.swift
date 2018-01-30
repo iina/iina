@@ -91,7 +91,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
 
     // beta channel
-    SUUpdater.shared().feedURL = Preference.bool(for: .receiveBetaUpdate) ? AppData.appcastBetaLink : AppData.appcastLink
+    if FirstRunManager.isFirstRun(for: .joinBetaChannel) {
+      let result = Utility.quickAskPanel("beta_channel")
+      Preference.set(result, for: .receiveBetaUpdate)
+    }
+    SUUpdater.shared().feedURL = URL(string: Preference.bool(for: .receiveBetaUpdate) ? AppData.appcastBetaLink : AppData.appcastLink)!
 
     // handle arguments
     let arguments = ProcessInfo.processInfo.arguments.dropFirst()

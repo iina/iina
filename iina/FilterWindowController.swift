@@ -103,7 +103,6 @@ class FilterWindowController: NSWindowController {
   }
 
   func addFilter(_ filter: MPVFilter) {
-    filters.append(filter)
     if filterType == MPVProperty.vf {
       guard PlayerCore.active.addVideoFilter(filter) else {
         Utility.showAlert("filter.incorrect")
@@ -115,6 +114,7 @@ class FilterWindowController: NSWindowController {
         return
       }
     }
+    filters.append(filter)
     reloadTable()
   }
 

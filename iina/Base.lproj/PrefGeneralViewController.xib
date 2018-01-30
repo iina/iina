@@ -335,6 +335,7 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
+                                <action selector="receiveBetaUpdatesChanged:" target="-2" id="aNq-Cs-Eva"/>
                                 <binding destination="IBP-Mz-Maa" name="value" keyPath="values.receiveBetaUpdate" id="hup-g9-DSv"/>
                             </connections>
                         </button>

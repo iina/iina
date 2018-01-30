@@ -1419,6 +1419,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     window!.makeFirstResponder(window!)
     if Preference.bool(for: .pauseWhenInactive) && isPausedDueToInactive {
       player.togglePause(false)
+      isPausedDueToInactive = false
     }
   }
 
@@ -1458,8 +1459,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowDidDeminiaturize(_ notification: Notification) {
-    if Preference.bool(for: .pauseWhenMinimized), isPausedDueToMiniaturization {
+    if Preference.bool(for: .pauseWhenMinimized) && isPausedDueToMiniaturization {
       player.togglePause(false)
+      isPausedDueToMiniaturization = false
     }
   }
 

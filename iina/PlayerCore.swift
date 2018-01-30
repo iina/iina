@@ -1322,7 +1322,7 @@ class PlayerCore: NSObject {
       case Constants.FilterName.mirror:
         info.mirrorFilter = filter
       case Constants.FilterName.delogo:
-        info.delogoFiter = filter
+        info.delogoFilter = filter
       default:
         break
       }

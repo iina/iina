@@ -318,10 +318,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let activeId: Int
     let columnName = tableColumn?.identifier
     if tableView == videoTableView {
-      track = row == 0 ? nil : player.info.videoTracks[row-1]
+      track = row == 0 ? nil : player.info.videoTracks.at(row-1)
       activeId = player.info.vid!
     } else if tableView == audioTableView {
-      track = row == 0 ? nil : player.info.audioTracks[row-1]
+      track = row == 0 ? nil : player.info.audioTracks.at(row-1)
       activeId = player.info.aid!
     } else if tableView == subTableView {
       track = row == 0 ? nil : player.info.subTracks.at(row-1)

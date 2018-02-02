@@ -670,7 +670,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func setupOSCToolbarButtons() {
-    let buttons: [Preference.ToolBarButton] = [.fullScreen, .pip, .playlist, .settings]
+    let buttons: [Preference.ToolBarButton] = [.subTrack, .pip, .playlist, .settings]
     for buttonType in buttons {
       let button = NSButton()
       button.bezelStyle = .regularSquare

@@ -572,6 +572,7 @@ struct Preference {
     case pip
     case fullScreen
     case musicMode
+    case subTrack
 
     func image() -> NSImage {
       switch self {
@@ -580,6 +581,7 @@ struct Preference {
       case .pip: return #imageLiteral(resourceName: "pip")
       case .fullScreen: return #imageLiteral(resourceName: "fullscreen")
       case .musicMode: return #imageLiteral(resourceName: "toggle-album-art")
+      case .subTrack: return #imageLiteral(resourceName: "sub-track")
       }
     }
   }

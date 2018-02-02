@@ -1134,6 +1134,11 @@ class PlayerCore: NSObject {
   }
 
   func generateThumbnails() {
+    if #available(OSX 10.12.2, *) {
+      DispatchQueue.main.async {
+        self.touchBarSupport.touchBarPlaySlider?.resetCachedThumbnails()
+      }
+    }
     guard let path = info.currentURL?.path else { return }
     info.thumbnails.removeAll(keepingCapacity: true)
     info.thumbnailsProgress = 0

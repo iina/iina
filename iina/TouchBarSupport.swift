@@ -272,6 +272,10 @@ class TouchBarPlaySlider: NSSlider {
     super.touchesEnded(with: event)
   }
 
+  func resetCachedThumbnails() {
+    (cell as! TouchBarPlaySliderCell).cachedThumbnailProgress = -1
+  }
+
   func setDoubleValueSafely(_ value: Double) {
     guard !isTouching else { return }
     doubleValue = value
@@ -282,11 +286,12 @@ class TouchBarPlaySlider: NSSlider {
 
 class TouchBarPlaySliderCell: NSSliderCell {
 
+  var cachedThumbnailProgress: Double = -1
+
   private let solidColor = NSColor.labelColor.withAlphaComponent(0.4)
   private let knobWidthWithImage: CGFloat = 60
 
   private var backgroundImage: NSImage?
-  private var cachedThumbnailProgress: Double = -1
 
   var isTouching: Bool {
     return (self.controlView as! TouchBarPlaySlider).isTouching

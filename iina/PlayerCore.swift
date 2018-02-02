@@ -941,7 +941,7 @@ class PlayerCore: NSObject {
     // if need to switch to music mode
     if audioStatusIsAvailableNow && Preference.bool(for: .autoSwitchToMusicMode) {
       if currentMediaIsAudio == .isAudio {
-        if !isInMiniPlayer && !switchedBackFromMiniPlayerManually {
+        if !isInMiniPlayer && !mainWindow.isInFullScreen && !switchedBackFromMiniPlayerManually {
           DispatchQueue.main.sync {
             switchToMiniPlayer(automatically: false)
           }

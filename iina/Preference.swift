@@ -586,6 +586,17 @@ struct Preference {
       case .subTrack: return #imageLiteral(resourceName: "sub-track")
       }
     }
+
+    func description() -> String {
+      switch self {
+      case .settings: return "Quick settings"
+      case .playlist: return "Playlist and chapters"
+      case .pip: return "Toggle Picture-in-Picture"
+      case .fullScreen: return "Toggle full screen"
+      case .musicMode: return "Enter music mode"
+      case .subTrack: return "Choose subtitle track"
+      }
+    }
   }
 
   // MARK: - Defaults

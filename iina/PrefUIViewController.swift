@@ -43,6 +43,8 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   var hasResizableWidth: Bool = false
   var hasResizableHeight: Bool = false
 
+  private let toolbarSettingsSheetController = PrefOSCToolbarSettingsSheetController()
+
   @IBOutlet weak var oscPreviewImageView: NSImageView!
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!
   @IBOutlet weak var oscToolbarStackView: NSStackView!
@@ -130,6 +132,12 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
 
   @IBAction func setupResizingRelatedControls(_ sender: NSButton) {
     Preference.set(sender.tag, for: .resizeWindowTiming)
+  }
+
+  @IBAction func customizeOSCToolbarAction(_ sender: Any) {
+    view.window?.beginSheet(toolbarSettingsSheetController.window!) { response in
+      return
+    }
   }
 
   override func viewDidAppear() {

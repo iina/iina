@@ -135,8 +135,11 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   }
 
   @IBAction func customizeOSCToolbarAction(_ sender: Any) {
-    view.window?.beginSheet(toolbarSettingsSheetController.window!) { response in
-      return
+    view.window?.beginSheet(toolbarSettingsSheetController.window!) { _ in
+      let newItems = self.toolbarSettingsSheetController.currentButtonTypes
+      let array = newItems.map { $0.rawValue }
+      Preference.set(array, for: .controlBarToolbarButtons)
+      self.updateOSCToolbarButtons()
     }
   }
 
@@ -147,15 +150,16 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   }
 
   private func updateOSCToolbarButtons() {
+    oscToolbarStackView.views.forEach { oscToolbarStackView.removeView($0) }
     let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).flatMap(Preference.ToolBarButton.init(rawValue:))
     for buttonType in buttons {
       let button = NSImageView()
       button.image = buttonType.image()
-      let buttonWidth = buttons.count == 5 ? "20" : "24"
       oscToolbarStackView.addView(button, in: .trailing)
-      Utility.quickConstraints(["H:[btn(\(buttonWidth))]", "V:[btn(24)]"], ["btn": button])
+      Utility.quickConstraints(["H:[btn(24)]", "V:[btn(24)]"], ["btn": button])
     }
 
+    toolbarSettingsSheetController.currentButtonTypes = buttons
   }
 
   private func updateThumbnailCacheStat() {

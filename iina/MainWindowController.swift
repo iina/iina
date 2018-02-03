@@ -279,7 +279,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     .alwaysFloatOnTop,
     .useLegacyFullScreen,
     .maxVolume,
-    .displayTimeAndBatteryInFullScreen
+    .displayTimeAndBatteryInFullScreen,
+    .controlBarToolbarButtons
   ]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
@@ -389,6 +390,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         if !newValue {
           additionalInfoView.isHidden = true
         }
+      }
+
+    case PK.controlBarToolbarButtons.rawValue:
+      if let newValue = change[.newKey] as? [Int] {
+        setupOSCToolbarButtons(newValue.flatMap(Preference.ToolBarButton.init(rawValue:)))
       }
 
     default:
@@ -560,7 +566,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fragControlView.addView(fragControlViewMiddleView, in: .center)
     fragControlView.addView(fragControlViewRightView, in: .center)
     setupOnScreenController(position: oscPosition)
-    setupOSCToolbarButtons()
+    let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).flatMap(Preference.ToolBarButton.init(rawValue:))
+    setupOSCToolbarButtons(buttons)
 
     updateArrowButtonImage()
 
@@ -669,8 +676,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     notificationObservers[center]!.append(observer)
   }
 
-  private func setupOSCToolbarButtons() {
-    let buttons: [Preference.ToolBarButton] = [.subTrack, .pip, .musicMode, .settings]
+  private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
+    fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
     for buttonType in buttons {
       let button = NSButton()
       button.bezelStyle = .regularSquare

@@ -618,7 +618,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gVR-so-xgt">
-                                        <rect key="frame" x="141" y="7" width="79" height="17"/>
+                                        <rect key="frame" x="136" y="7" width="79" height="17"/>
                                         <buttonCell key="cell" type="roundRect" title="Customize…" bezelStyle="roundedRect" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1nM-AX-Ozm">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
@@ -628,9 +628,9 @@
                                         </connections>
                                     </button>
                                     <stackView wantsLayer="YES" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="8jY-9m-q4O">
-                                        <rect key="frame" x="8" y="5" width="125" height="24"/>
+                                        <rect key="frame" x="8" y="5" width="120" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="125" id="98o-o5-JIx"/>
+                                            <constraint firstAttribute="width" constant="120" id="98o-o5-JIx"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>

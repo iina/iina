@@ -190,6 +190,10 @@
 		E33BA5C4204315740069A0F6 /* AssrtSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33BA5C3204315740069A0F6 /* AssrtSubtitle.swift */; };
 		E33BA5C7204BD9FE0069A0F6 /* SubChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33BA5C5204BD9FE0069A0F6 /* SubChooseViewController.swift */; };
 		E33BA5C8204BD9FE0069A0F6 /* SubChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E33BA5C6204BD9FE0069A0F6 /* SubChooseViewController.xib */; };
+		E33836852026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33836832026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift */; };
+		E33836862026223800ABC812 /* PrefOSCToolbarSettingsSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E33836842026223800ABC812 /* PrefOSCToolbarSettingsSheetController.xib */; };
+		E3383689202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3383687202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift */; };
+		E338368A202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3383688202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib */; };
 		E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BD4AE20054BD9007635FC /* MainWindow.swift */; };
 		E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C12F6A201F281F00297964 /* FirstRunManager.swift */; };
 		E3CB75BB1FD998F5004DB10A /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F21E26CA24008755BB /* Regex.swift */; };
@@ -950,6 +954,10 @@
 		E33BA5C3204315740069A0F6 /* AssrtSubtitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssrtSubtitle.swift; sourceTree = "<group>"; };
 		E33BA5C5204BD9FE0069A0F6 /* SubChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubChooseViewController.swift; sourceTree = "<group>"; };
 		E33BA5C6204BD9FE0069A0F6 /* SubChooseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubChooseViewController.xib; sourceTree = "<group>"; };
+		E33836832026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefOSCToolbarSettingsSheetController.swift; sourceTree = "<group>"; };
+		E33836842026223800ABC812 /* PrefOSCToolbarSettingsSheetController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefOSCToolbarSettingsSheetController.xib; sourceTree = "<group>"; };
+		E3383687202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefOSCToolbarDraggingItemViewController.swift; sourceTree = "<group>"; };
+		E3383688202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefOSCToolbarDraggingItemViewController.xib; sourceTree = "<group>"; };
 		E34E0ADF2007E23600BDC8BA /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/FreeSelectingViewController.strings"; sourceTree = "<group>"; };
 		E38BD4AE20054BD9007635FC /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		E3C12F6A201F281F00297964 /* FirstRunManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunManager.swift; sourceTree = "<group>"; };
@@ -1052,6 +1060,10 @@
 				8400D5E01E1AB32A006785F5 /* PrefGeneralViewController.xib */,
 				84879A961E0FFC7E0004F894 /* PrefUIViewController.swift */,
 				8400D5E31E1AB32F006785F5 /* PrefUIViewController.xib */,
+				E33836832026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift */,
+				E33836842026223800ABC812 /* PrefOSCToolbarSettingsSheetController.xib */,
+				E3383687202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift */,
+				E3383688202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib */,
 				84795C381E083EE30059A648 /* PrefControlViewController.swift */,
 				8400D5E61E1AB333006785F5 /* PrefControlViewController.xib */,
 				84BEEC3D1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift */,
@@ -1735,8 +1747,10 @@
 				8400D5F31E1AB348006785F5 /* PrefSubViewController.xib in Resources */,
 				84D0FB821F5E6A3800C6A6A7 /* FreeSelectingViewController.xib in Resources */,
 				8400D5E11E1AB32F006785F5 /* PrefUIViewController.xib in Resources */,
+				E338368A202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib in Resources */,
 				8483FB001EDFF325000F55D6 /* Credits.rtf in Resources */,
 				84F5D49A1E44E9A50060A838 /* KeyBinding.strings in Resources */,
+				E33836862026223800ABC812 /* PrefOSCToolbarSettingsSheetController.xib in Resources */,
 				84AF03D21E67492C003E3753 /* Contribution.rtf in Resources */,
 				8400D5D21E1AB312006785F5 /* InspectorWindowController.xib in Resources */,
 				8400D5CC1E1AB2FF006785F5 /* PlaylistViewController.xib in Resources */,
@@ -1892,6 +1906,7 @@
 				E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
 				84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */,
+				E3383689202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift in Sources */,
 				84AC621F1E87A4F3002D6F92 /* OpenURLAccessoryViewController.swift in Sources */,
 				842904E21F0EC01600478376 /* AutoFileMatcher.swift in Sources */,
 				8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */,
@@ -1942,6 +1957,7 @@
 				E33BA5C4204315740069A0F6 /* AssrtSubtitle.swift in Sources */,
 				844DE1BF1D3E2B9900272589 /* MPVEvent.swift in Sources */,
 				845040471E0B0F500079C194 /* CropSettingsViewController.swift in Sources */,
+				E33836852026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift in Sources */,
 				8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */,
 				845404AC1E43980900B02B12 /* LuaScript.swift in Sources */,
 				847557141F405F8C0006B0FF /* MainWindowMenuActions.swift in Sources */,

@@ -7,13 +7,13 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefUIViewController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="oscPositionPopupButton" destination="GbG-nw-ict" id="Dd0-cC-7Rk"/>
                 <outlet property="oscPreviewImageView" destination="yaR-pw-wfD" id="18Z-EN-2f2"/>
+                <outlet property="oscToolbarStackView" destination="8jY-9m-q4O" id="J9u-Ui-dUT"/>
                 <outlet property="thumbCacheSizeLabel" destination="1dx-xQ-FFL" id="3Vh-9j-mFn"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
                 <outlet property="windowPosBox" destination="Mye-uz-WUr" id="lyj-Yi-EMu"/>
@@ -618,14 +618,14 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gVR-so-xgt">
-                                        <rect key="frame" x="227" y="1" width="91" height="28"/>
-                                        <buttonCell key="cell" type="push" title="Customize…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1nM-AX-Ozm">
+                                        <rect key="frame" x="136" y="7" width="79" height="17"/>
+                                        <buttonCell key="cell" type="roundRect" title="Customize…" bezelStyle="roundedRect" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1nM-AX-Ozm">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
                                     </button>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8jY-9m-q4O">
-                                        <rect key="frame" x="8" y="4" width="120" height="24"/>
+                                    <stackView wantsLayer="YES" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="8jY-9m-q4O">
+                                        <rect key="frame" x="8" y="5" width="120" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="98o-o5-JIx"/>
                                             <constraint firstAttribute="height" constant="24" id="hG7-sC-0Pt"/>
@@ -633,10 +633,10 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="8jY-9m-q4O" firstAttribute="centerY" secondItem="tFz-0n-ggD" secondAttribute="centerY" id="Biy-kb-uPy"/>
-                                    <constraint firstItem="gVR-so-xgt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8jY-9m-q4O" secondAttribute="trailing" constant="8" id="XQb-PZ-QI0"/>
+                                    <constraint firstItem="8jY-9m-q4O" firstAttribute="centerY" secondItem="tFz-0n-ggD" secondAttribute="centerY" constant="-1" id="Biy-kb-uPy"/>
+                                    <constraint firstItem="gVR-so-xgt" firstAttribute="leading" secondItem="8jY-9m-q4O" secondAttribute="trailing" constant="8" id="XQb-PZ-QI0"/>
                                     <constraint firstItem="8jY-9m-q4O" firstAttribute="leading" secondItem="tFz-0n-ggD" secondAttribute="leading" constant="8" id="ZkW-SX-OE0"/>
-                                    <constraint firstAttribute="trailing" secondItem="gVR-so-xgt" secondAttribute="trailing" constant="8" id="jSW-AH-caY"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gVR-so-xgt" secondAttribute="trailing" constant="8" id="jSW-AH-caY"/>
                                     <constraint firstItem="gVR-so-xgt" firstAttribute="centerY" secondItem="tFz-0n-ggD" secondAttribute="centerY" id="vvW-a5-FHv"/>
                                 </constraints>
                             </view>

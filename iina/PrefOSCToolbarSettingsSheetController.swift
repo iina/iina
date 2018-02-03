@@ -9,7 +9,8 @@
 import Cocoa
 
 extension NSPasteboard.PasteboardType {
-  static let iinaOSCToolbarButtonType = NSPasteboard.PasteboardType("com.collider.iina.oscToolbarButtonType")
+  static let iinaOSCAvailableToolbarButtonType = NSPasteboard.PasteboardType("com.collider.iina.iinaOSCAvailableToolbarButtonType")
+  static let iinaOSCCurrentToolbarButtonType = NSPasteboard.PasteboardType("com.collider.iina.iinaOSCCurrentToolbarButtonType")
 }
 
 class PrefOSCToolbarSettingsSheetController: NSWindowController {
@@ -29,7 +30,7 @@ class PrefOSCToolbarSettingsSheetController: NSWindowController {
     currentItemsView.wantsLayer = true
     currentItemsView.layer?.backgroundColor = NSColor.secondarySelectedControlColor.cgColor
     currentItemsView.layer?.cornerRadius = 4
-    currentItemsView.registerForDraggedTypes([.iinaOSCToolbarButtonType])
+    currentItemsView.registerForDraggedTypes([.iinaOSCAvailableToolbarButtonType, .iinaOSCCurrentToolbarButtonType])
     currentItemsView.updateItems()
 
     let allButtonTypes: [Preference.ToolBarButton] = [.settings, .playlist, .pip, .fullScreen, .musicMode, .subTrack]
@@ -48,9 +49,55 @@ class PrefOSCToolbarSettingsSheetController: NSWindowController {
 }
 
 
+class PrefOSCToolbarCurrentItem: NSImageView, NSPasteboardWriting {
+
+  var buttonType: Preference.ToolBarButton
+
+  init(buttonType: Preference.ToolBarButton) {
+    self.buttonType = buttonType
+    super.init(frame: .zero)
+    self.image = buttonType.image()
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+    return [.iinaOSCCurrentToolbarButtonType]
+  }
+
+  func pasteboardPropertyList(forType type: NSPasteboard.PasteboardType) -> Any? {
+    if type == .iinaOSCCurrentToolbarButtonType {
+      return buttonType.rawValue
+    }
+    return nil
+  }
+
+  override func mouseDown(with event: NSEvent) {
+    let dragItem = NSDraggingItem(pasteboardWriter: self)
+    dragItem.draggingFrame = NSRect(origin: convert(event.locationInWindow, from: nil),
+                                    size: NSSize(width: 24, height: 24))
+    dragItem.imageComponentsProvider = {
+      let imageComponent = NSDraggingImageComponent(key: .icon)
+      imageComponent.contents = self.buttonType.image()
+      imageComponent.frame = NSRect(origin: .zero, size: NSSize(width: 14, height: 14))
+      return [imageComponent]
+    }
+
+    let currentItemsView = superview as! PrefOSCToolbarCurrentItemsView
+    currentItemsView.itemBeingDragged = self
+    beginDraggingSession(with: [dragItem], event: event, source: currentItemsView)
+  }
+
+}
+
+
 class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
 
   var items: [Preference.ToolBarButton] = [.settings, .playlist, .pip]
+
+  var itemBeingDragged: PrefOSCToolbarCurrentItem?
 
   private let placeholderView: NSView = NSView()
   private var dragDestIndex: Int = 0
@@ -58,43 +105,87 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
   func updateItems() {
     views.forEach { self.removeView($0) }
     for buttonType in items {
-      let button = NSImageView()
-      button.image = buttonType.image()
-      self.addView(button, in: .trailing)
-      Utility.quickConstraints(["H:[btn(24)]", "V:[btn(24)]"], ["btn": button])
+      let item = PrefOSCToolbarCurrentItem(buttonType: buttonType)
+      self.addView(item, in: .trailing)
+      Utility.quickConstraints(["H:[btn(24)]", "V:[btn(24)]"], ["btn": item])
     }
   }
 
+  // Dragging source
+
   func draggingSession(_ session: NSDraggingSession, sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation {
-    return .delete
+    return [.delete, .move]
+  }
+
+  func draggingSession(_ session: NSDraggingSession, willBeginAt screenPoint: NSPoint) {
+    if let itemBeingDragged = itemBeingDragged {
+      // remove the dragged view and insert a placeholder at its position.
+      let index = views.index(of: itemBeingDragged)!
+      removeView(itemBeingDragged)
+      Utility.quickConstraints(["H:[v(24)]", "V:[v(24)]"], ["v": placeholderView])
+      insertView(placeholderView, at: index, in: .trailing)
+    }
+  }
+
+  func draggingSession(_ session: NSDraggingSession, movedTo screenPoint: NSPoint) {
+    guard let window = window else { return }
+    let windowPoint = window.convertFromScreen(NSRect(origin: screenPoint, size: .zero)).origin
+    let inView = frame.contains(windowPoint)
+    session.animatesToStartingPositionsOnCancelOrFail = inView
   }
 
   func draggingSession(_ session: NSDraggingSession, endedAt screenPoint: NSPoint, operation: NSDragOperation) {
-    print(screenPoint, operation)
+    if operation == .delete,
+      let rawButtonType = session.draggingPasteboard.propertyList(forType: .iinaOSCCurrentToolbarButtonType) as? Int,
+      let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
+      let index = items.index(of: buttonType) {
+      items.remove(at: index)
+    }
   }
 
+  // Dragging destination
+
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-    // don't accept existing items
-    guard let rawButtonType = sender.draggingPasteboard().propertyList(forType: .iinaOSCToolbarButtonType) as? Int,
-      let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
-      !items.contains(buttonType) else {
-      return []
+    let pboard = sender.draggingPasteboard()
+
+    if let _ = pboard.availableType(from: [.iinaOSCAvailableToolbarButtonType]) {
+      // dragging available item in; don't accept existing items
+      guard let rawButtonType = sender.draggingPasteboard().propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
+        let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
+        !items.contains(buttonType) else {
+        return []
+      }
+      return .copy
+    } else if let _ = pboard.availableType(from: [.iinaOSCCurrentToolbarButtonType]) {
+      // rearranging current items
+      return .move
     }
-    return .copy
+
+    return []
   }
 
   override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
-    // don't accept existing items
-    guard let rawButtonType = sender.draggingPasteboard().propertyList(forType: .iinaOSCToolbarButtonType) as? Int,
-      let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
-      !items.contains(buttonType) else {
-        return []
+    let pboard = sender.draggingPasteboard()
+
+    let isAvailableItem = pboard.availableType(from: [.iinaOSCAvailableToolbarButtonType]) != nil
+    let isCurrentItem = pboard.availableType(from: [.iinaOSCCurrentToolbarButtonType]) != nil
+    guard isAvailableItem || isCurrentItem else { return [] }
+
+    if isAvailableItem {
+      // dragging available item in; don't accept existing items
+      guard let rawButtonType = sender.draggingPasteboard().propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
+        let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
+        !items.contains(buttonType) else {
+          return []
+      }
     }
 
     // get the expected drag destination position and index
     let pos = convert(sender.draggingLocation(), from: nil)
-    let index = views.count - Int(floor((frame.width - pos.x) / 24)) - 1
+    var index = views.count - Int(floor((frame.width - pos.x) / 24)) - 1
+    if index < 0 { index = 0 }
     dragDestIndex = index
+
     // add placeholder view at expected index
     if views.contains(placeholderView) {
       removeView(placeholderView)
@@ -108,7 +199,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
       self.layoutSubtreeIfNeeded()
     }, completionHandler: nil)
 
-    return .copy
+    return isAvailableItem ? .copy : .move
   }
 
   override func draggingEnded(_ sender: NSDraggingInfo) {
@@ -116,17 +207,30 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
     if views.contains(placeholderView) {
       removeView(placeholderView)
     }
+    itemBeingDragged = nil
   }
 
   override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-    if let rawButtonType = sender.draggingPasteboard().propertyList(forType: .iinaOSCToolbarButtonType) as? Int,
-      let buttonType = Preference.ToolBarButton(rawValue: rawButtonType) {
-      let button = NSImageView()
-      button.image = buttonType.image()
-      Utility.quickConstraints(["H:[btn(24)]", "V:[btn(24)]"], ["btn": button])
-      insertView(button, at: dragDestIndex, in: .trailing)
+    let pboard = sender.draggingPasteboard()
+
+    if let _ = pboard.availableType(from: [.iinaOSCAvailableToolbarButtonType]) {
+      // dragging available item in; don't accept existing items
+      if let rawButtonType = sender.draggingPasteboard().propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
+        let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
+        dragDestIndex >= 0, dragDestIndex < views.count {
+        let item = PrefOSCToolbarCurrentItem(buttonType: buttonType)
+        item.image = buttonType.image()
+        Utility.quickConstraints(["H:[btn(24)]", "V:[btn(24)]"], ["btn": item])
+        insertView(item, at: dragDestIndex, in: .trailing)
+        return true
+      }
+      return false
+    } else if let _ = pboard.availableType(from: [.iinaOSCCurrentToolbarButtonType]) {
+      // rearranging current items
+      insertView(itemBeingDragged!, at: dragDestIndex, in: .trailing)
       return true
     }
+
     return false
   }
 
@@ -137,10 +241,6 @@ class PrefOSCToolbarAvailableItemsView: NSStackView, NSDraggingSource {
 
   func draggingSession(_ session: NSDraggingSession, sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation {
     return .copy
-  }
-
-  func draggingSession(_ session: NSDraggingSession, endedAt screenPoint: NSPoint, operation: NSDragOperation) {
-    print(screenPoint, operation)
   }
 
 }

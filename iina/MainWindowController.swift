@@ -670,12 +670,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func setupOSCToolbarButtons() {
-    let buttons: [Preference.ToolBarButton] = [.subTrack, .pip, .playlist, .settings]
+    let buttons: [Preference.ToolBarButton] = [.subTrack, .pip, .musicMode, .settings]
     for buttonType in buttons {
       let button = NSButton()
       button.bezelStyle = .regularSquare
       button.isBordered = false
       button.image = buttonType.image()
+      button.action = #selector(self.toolBarButtonAction(_:))
+      button.tag = buttonType.rawValue
       let buttonWidth = buttons.count == 5 ? "20" : "24"
       Utility.quickConstraints(["H:[btn(\(buttonWidth))]", "V:[btn(24)]"], ["btn": button])
       fragToolbarView.addView(button, in: .trailing)
@@ -1555,7 +1557,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func hideUI() {
-    return
     // Don't hide UI when in PIP
     guard pipStatus == .notInPIP || animationState == .hidden else {
       return
@@ -2577,7 +2578,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  @IBAction func settingsButtonAction(_ sender: AnyObject) {
+  /// Legacy IBAction, but still in use.
+  func settingsButtonAction(_ sender: AnyObject) {
     if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
       return  // do not interrput other actions while it is animating
     }
@@ -2594,7 +2596,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  @IBAction func playlistButtonAction(_ sender: AnyObject) {
+  /// Legacy IBAction, but still in use.
+  func playlistButtonAction(_ sender: AnyObject) {
     if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
       return  // do not interrput other actions while it is animating
     }
@@ -2633,6 +2636,30 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       NSHapticFeedbackManager.defaultPerformer.perform(.generic, performanceTime: .default)
     }
     player.setVolume(value)
+  }
+
+  @objc func toolBarButtonAction(_ sender: NSButton) {
+    guard let buttonType = Preference.ToolBarButton(rawValue: sender.tag) else { return }
+    switch buttonType {
+    case .fullScreen:
+      toggleWindowFullScreen()
+    case .musicMode:
+      player.switchToMiniPlayer()
+    case .pip:
+      if #available(OSX 10.12, *) {
+        if pipStatus == .inPIP {
+          exitPIP()
+        } else if pipStatus == .notInPIP {
+          enterPIP()
+        }
+      }
+    case .playlist:
+      playlistButtonAction(sender)
+    case .settings:
+      settingsButtonAction(sender)
+    case .subTrack:
+      quickSettingView.showSubChooseMenu(forView: sender, showLoadedSubs: true)
+    }
   }
 
   // MARK: - Utility

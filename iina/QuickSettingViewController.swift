@@ -590,35 +590,63 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         self.secSubTableView.reloadData()
       }
     } else if sender.selectedSegment == 1 {
-      let activeSubs = player.info.trackList(.sub) + player.info.trackList(.secondSub)
-      let menu = NSMenu()
-      menu.autoenablesItems = false
-      if player.info.currentSubsInfo.isEmpty {
-        menu.addItem(withTitle: NSLocalizedString("track.none", comment: "<None>"))
-      } else {
-        if let videoInfo = player.info.currentVideosInfo.first(where: { $0.url == player.info.currentURL }),
-          !videoInfo.relatedSubs.isEmpty {
-          videoInfo.relatedSubs.forEach { sub in
-            let isActive = activeSubs.contains { $0.externalFilename == sub.path }
-            menu.addItem(withTitle: "\(sub.filename).\(sub.ext)", action: #selector(self.chosenSubFromMenu(_:)), tag: nil, obj: sub, stateOn: isActive)
-          }
-          menu.addItem(NSMenuItem.separator())
-        }
-        player.info.currentSubsInfo.sorted { (f1, f2) in
-          return f1.filename.localizedStandardCompare(f2.filename) == .orderedAscending
-        }.forEach { sub in
-          let isActive = activeSubs.contains { $0.externalFilename == sub.path }
-          menu.addItem(withTitle: "\(sub.filename).\(sub.ext)", action: #selector(self.chosenSubFromMenu(_:)), tag: nil, obj: sub, stateOn: isActive)
-        }
-      }
-      NSMenu.popUpContextMenu(menu, with: NSApp.currentEvent!, for: sender)
+      showSubChooseMenu(forView: sender)
     }
   }
 
-  @objc
-  private func chosenSubFromMenu(_ sender: NSMenuItem) {
-    guard let fileInfo = sender.representedObject as? FileInfo else { return }
-    player.loadExternalSubFile(fileInfo.url)
+  func showSubChooseMenu(forView view: NSView, showLoadedSubs: Bool = false) {
+    let activeSubs = player.info.trackList(.sub) + player.info.trackList(.secondSub)
+    let menu = NSMenu()
+    menu.autoenablesItems = false
+    // loaded subtitles
+    if showLoadedSubs {
+      if player.info.subTracks.isEmpty {
+        menu.addItem(withTitle: NSLocalizedString("track.none", comment: "<None>"))
+      } else {
+        for sub in player.info.subTracks {
+          let item = NSMenuItem()
+          item.title = sub.readableTitle
+          item.target = self
+          item.action = #selector(self.chosenSubFromMenu(_:))
+          item.representedObject = sub
+          item.state = sub.id == player.info.sid ? .on : .off
+          menu.addItem(item)
+        }
+      }
+      menu.addItem(NSMenuItem.separator())
+    }
+    // external subtitles
+    let addMenuItem = { (sub: FileInfo) -> Void in
+      let isActive = !showLoadedSubs && activeSubs.contains { $0.externalFilename == sub.path }
+      let item = NSMenuItem()
+      item.title = "\(sub.filename).\(sub.ext)"
+      item.target = self
+      item.action = #selector(self.chosenSubFromMenu(_:))
+      item.representedObject = sub
+      item.state = isActive ? .on : .off
+      menu.addItem(item)
+    }
+    if player.info.currentSubsInfo.isEmpty {
+      menu.addItem(withTitle: NSLocalizedString("track.none", comment: "<None>"))
+    } else {
+      if let videoInfo = player.info.currentVideosInfo.first(where: { $0.url == player.info.currentURL }),
+        !videoInfo.relatedSubs.isEmpty {
+        videoInfo.relatedSubs.forEach(addMenuItem)
+        menu.addItem(NSMenuItem.separator())
+      }
+      player.info.currentSubsInfo.sorted { (f1, f2) in
+        return f1.filename.localizedStandardCompare(f2.filename) == .orderedAscending
+      }.forEach(addMenuItem)
+    }
+    NSMenu.popUpContextMenu(menu, with: NSApp.currentEvent!, for: view)
+  }
+
+  @objc func chosenSubFromMenu(_ sender: NSMenuItem) {
+    if let fileInfo = sender.representedObject as? FileInfo {
+      player.loadExternalSubFile(fileInfo.url)
+    } else if let sub = sender.representedObject as? MPVTrack {
+      player.setTrack(sub.id, forType: .sub)
+    }
   }
 
   @IBAction func searchOnlineAction(_ sender: AnyObject) {

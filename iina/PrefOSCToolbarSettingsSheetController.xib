@@ -25,10 +25,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hAj-RR-fLd">
-                        <rect key="frame" x="330" y="13" width="81" height="32"/>
-                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0wJ-C7-Gds">
+                        <rect key="frame" x="339" y="13" width="72" height="32"/>
+                        <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0wJ-C7-Gds">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                         </buttonCell>
                         <connections>
                             <action selector="okButtonAction:" target="-2" id="3Hy-Wj-kLg"/>
@@ -42,7 +45,7 @@
                         </constraints>
                     </stackView>
                     <stackView orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="63i-B1-8o0" customClass="PrefOSCToolbarCurrentItemsView" customModule="IINA" customModuleProvider="target">
-                        <rect key="frame" x="151" y="267" width="125" height="24"/>
+                        <rect key="frame" x="150" y="267" width="125" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="125" id="e8f-dK-93K"/>
                             <constraint firstAttribute="height" constant="24" id="x5d-3J-ObU"/>

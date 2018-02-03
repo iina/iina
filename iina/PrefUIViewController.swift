@@ -45,6 +45,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
 
   @IBOutlet weak var oscPreviewImageView: NSImageView!
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!
+  @IBOutlet weak var oscToolbarStackView: NSStackView!
   @IBOutlet weak var thumbCacheSizeLabel: NSTextField!
   
   @IBOutlet weak var windowSizeCheckBox: NSButton!
@@ -69,6 +70,10 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     oscPositionPopupBtnAction(oscPositionPopupButton)
+    oscToolbarStackView.wantsLayer = true
+    oscToolbarStackView.layer?.backgroundColor = NSColor(calibratedWhite: 0.5, alpha: 0.2).cgColor
+    oscToolbarStackView.layer?.cornerRadius = 4
+    updateOSCToolbarButtons()
     setupGeometryRelatedControls()
     setupResizingRelatedControls()
   }
@@ -131,6 +136,18 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
     DispatchQueue.main.async {
       self.updateThumbnailCacheStat()
     }
+  }
+
+  private func updateOSCToolbarButtons() {
+    let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).flatMap(Preference.ToolBarButton.init(rawValue:))
+    for buttonType in buttons {
+      let button = NSImageView()
+      button.image = buttonType.image()
+      let buttonWidth = buttons.count == 5 ? "20" : "24"
+      oscToolbarStackView.addView(button, in: .trailing)
+      Utility.quickConstraints(["H:[btn(\(buttonWidth))]", "V:[btn(24)]"], ["btn": button])
+    }
+
   }
 
   private func updateThumbnailCacheStat() {

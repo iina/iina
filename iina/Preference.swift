@@ -103,7 +103,9 @@ struct Preference {
     static let controlBarStickToCenter = Key("controlBarStickToCenter")
 
     /** Timeout for auto hiding control bar (float) */
-    static let controlBarAutoHideTimeout  = Key("controlBarAutoHideTimeout")
+    static let controlBarAutoHideTimeout = Key("controlBarAutoHideTimeout")
+
+    static let controlBarToolbarButtons = Key("controlBarToolbarButtons")
 
     /** OSD auto hide timeout (float) */
     static let osdAutoHideTimeout = Key("osdAutoHideTimeout")
@@ -600,6 +602,7 @@ struct Preference {
     .controlBarPositionVertical: Float(0.1),
     .controlBarStickToCenter: true,
     .controlBarAutoHideTimeout: Float(2.5),
+    .controlBarToolbarButtons: [ToolBarButton.pip.rawValue, ToolBarButton.playlist.rawValue, ToolBarButton.settings.rawValue],
     .oscPosition: OSCPosition.floating.rawValue,
     .playlistWidth: 270,
     .themeMaterial: Theme.dark.rawValue,

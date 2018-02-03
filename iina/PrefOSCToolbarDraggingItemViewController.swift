@@ -41,11 +41,11 @@ class PrefOSCToolbarDraggingItemViewController: NSViewController, NSPasteboardWr
   }
 
   func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
-    return [.iinaOSCToolbarButtonType]
+    return [.iinaOSCAvailableToolbarButtonType]
   }
 
   func pasteboardPropertyList(forType type: NSPasteboard.PasteboardType) -> Any? {
-    if type == .iinaOSCToolbarButtonType {
+    if type == .iinaOSCAvailableToolbarButtonType {
       return buttonType.rawValue
     }
     return nil

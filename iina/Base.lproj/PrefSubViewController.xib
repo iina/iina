@@ -148,10 +148,10 @@
                                         </constraints>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Iur-Ka-beI">
-                                        <rect key="frame" x="8" y="53" width="546" height="91"/>
+                                        <rect key="frame" x="8" y="27" width="546" height="117"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MEh-II-li7">
-                                                <rect key="frame" x="-2" y="74" width="46" height="17"/>
+                                                <rect key="frame" x="-2" y="100" width="46" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Other:" id="LiG-iV-AQK">
                                                     <font key="font" metaFont="systemBold"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -159,7 +159,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ahb-ha-Bd8">
-                                                <rect key="frame" x="-2" y="49" width="119" height="17"/>
+                                                <rect key="frame" x="-2" y="75" width="119" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Prefered language:" id="zaE-bH-XfT">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -167,7 +167,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zR-BO-yhX">
-                                                <rect key="frame" x="-2" y="29" width="550" height="14"/>
+                                                <rect key="frame" x="-2" y="55" width="550" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles." id="Z2M-dh-eq1">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -175,7 +175,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <tokenField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bhV-Cx-zgK">
-                                                <rect key="frame" x="123" y="46" width="423" height="21"/>
+                                                <rect key="frame" x="123" y="72" width="423" height="21"/>
                                                 <tokenFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" drawsBackground="YES" allowsEditingTextAttributes="YES" id="MPJ-dp-jsH">
                                                     <font key="font" metaFont="cellTitle"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -190,7 +190,7 @@
                                                 </connections>
                                             </tokenField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dOC-a0-BI4">
-                                                <rect key="frame" x="-2" y="4" width="112" height="17"/>
+                                                <rect key="frame" x="-2" y="30" width="112" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default encoding:" id="Y75-4k-2Du">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -198,7 +198,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1L9-wU-gfj">
-                                                <rect key="frame" x="114" y="-3" width="125" height="26"/>
+                                                <rect key="frame" x="114" y="23" width="125" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="pOY-9e-lvC"/>
                                                 </constraints>
@@ -211,16 +211,29 @@
                                                     <action selector="changeDefaultEncoding:" target="-2" id="jIO-eq-6So"/>
                                                 </connections>
                                             </popUpButton>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eOl-SX-CeI">
+                                                <rect key="frame" x="-2" y="2" width="168" height="18"/>
+                                                <buttonCell key="cell" type="check" title="Show only while paused" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="4hY-P7-TME">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subShowOnlyWhilePaused" id="21E-nR-gEI"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="eOl-SX-CeI" firstAttribute="leading" secondItem="Iur-Ka-beI" secondAttribute="leading" id="0Dz-kL-h8k"/>
                                             <constraint firstItem="bhV-Cx-zgK" firstAttribute="baseline" secondItem="ahb-ha-Bd8" secondAttribute="baseline" id="4e1-FJ-t5K"/>
                                             <constraint firstItem="dOC-a0-BI4" firstAttribute="baseline" secondItem="1L9-wU-gfj" secondAttribute="baseline" id="5M9-qK-fjf"/>
+                                            <constraint firstAttribute="bottom" secondItem="eOl-SX-CeI" secondAttribute="bottom" constant="4" id="Bz3-ht-ZSj"/>
                                             <constraint firstItem="dOC-a0-BI4" firstAttribute="top" secondItem="6zR-BO-yhX" secondAttribute="bottom" constant="8" id="D4x-Hk-XX7"/>
                                             <constraint firstItem="ahb-ha-Bd8" firstAttribute="leading" secondItem="Iur-Ka-beI" secondAttribute="leading" id="DLa-Hu-Hsu"/>
                                             <constraint firstItem="bhV-Cx-zgK" firstAttribute="leading" secondItem="ahb-ha-Bd8" secondAttribute="trailing" constant="8" id="H00-EI-iem"/>
                                             <constraint firstAttribute="trailing" secondItem="bhV-Cx-zgK" secondAttribute="trailing" id="PF2-Wf-LtR"/>
                                             <constraint firstAttribute="trailing" secondItem="6zR-BO-yhX" secondAttribute="trailing" id="Q22-5Z-DYd"/>
-                                            <constraint firstAttribute="bottom" secondItem="dOC-a0-BI4" secondAttribute="bottom" constant="4" id="VTK-Vf-cBi"/>
+                                            <constraint firstItem="eOl-SX-CeI" firstAttribute="top" secondItem="dOC-a0-BI4" secondAttribute="bottom" constant="12" id="V9D-1l-PQ8"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eOl-SX-CeI" secondAttribute="trailing" id="VgX-cz-XNR"/>
                                             <constraint firstItem="6zR-BO-yhX" firstAttribute="top" secondItem="ahb-ha-Bd8" secondAttribute="bottom" constant="6" id="c9L-vJ-3S9"/>
                                             <constraint firstItem="MEh-II-li7" firstAttribute="leading" secondItem="Iur-Ka-beI" secondAttribute="leading" id="dms-Ko-OqB"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MEh-II-li7" secondAttribute="trailing" constant="20" symbolic="YES" id="dxI-On-Voh"/>

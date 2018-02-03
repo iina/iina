@@ -174,6 +174,7 @@ struct Preference {
     static let subScaleWithWindow = Key("subScaleWithWindow")
     static let openSubUsername = Key("openSubUsername")
     static let defaultEncoding = Key("defaultEncoding")
+    static let subShowOnlyWhilePaused = Key("subShowOnlyWhilePaused")
 
     // Network
 
@@ -653,6 +654,7 @@ struct Preference {
     .subScaleWithWindow: true,
     .openSubUsername: "",
     .defaultEncoding: "auto",
+    .subShowOnlyWhilePaused: false,
 
     .enableCache: true,
     .defaultCacheSize: 153600,

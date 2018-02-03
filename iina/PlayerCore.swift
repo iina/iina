@@ -834,6 +834,10 @@ class PlayerCore: NSObject {
   func setSubFont(_ font: String) {
     mpv.setString(MPVOption.Subtitles.subFont, font)
   }
+  
+  func setSubVisibility(_ visibility: Bool) {
+    mpv.setFlag(MPVOption.Subtitles.subVisibility, visibility)
+  }
 
   func execKeyCode(_ code: String) {
     mpv.command(.keypress, args: [code], checkError: false) { errCode in

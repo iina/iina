@@ -692,19 +692,19 @@
                             </constraints>
                         </box>
                         <box fixedFrame="YES" boxType="custom" borderWidth="0.0" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="82U-9B-wjf">
-                            <rect key="frame" x="293" y="58" width="29" height="1"/>
+                            <rect key="frame" x="292" y="58" width="30" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <view key="contentView" ambiguous="YES" id="W24-Tv-pyN">
-                                <rect key="frame" x="0.0" y="0.0" width="29" height="1"/>
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="1"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                             <color key="fillColor" red="0.22745098039215686" green="0.49019607843137253" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
                         </box>
                         <box fixedFrame="YES" boxType="custom" borderWidth="0.0" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="V62-0N-Fvu">
-                            <rect key="frame" x="293" y="21" width="29" height="1"/>
+                            <rect key="frame" x="292" y="21" width="30" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <view key="contentView" ambiguous="YES" id="Z4K-dL-yE0">
-                                <rect key="frame" x="0.0" y="0.0" width="29" height="1"/>
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="1"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                             <color key="fillColor" red="0.2274509804" green="0.49019607840000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>

@@ -29,6 +29,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   weak var player: PlayerCore!
 
+  lazy var syncManager: SyncManager = {
+    let syncManager = SyncManager()
+    syncManager.delegate = self
+    return syncManager
+  }()
+  
   weak var mainWindow: MainWindowController! {
     didSet {
       self.player = mainWindow.player
@@ -75,6 +81,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var audioDelaySliderIndicator: NSTextField!
   @IBOutlet weak var audioDelaySliderConstraint: NSLayoutConstraint!
   @IBOutlet weak var customAudioDelayTextField: NSTextField!
+  @IBOutlet weak var audioSyncButton: NSButton!
   
   
   @IBOutlet weak var subLoadSementedControl: NSSegmentedControl!
@@ -82,7 +89,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subDelaySliderIndicator: NSTextField!
   @IBOutlet weak var subDelaySliderConstraint: NSLayoutConstraint!
   @IBOutlet weak var customSubDelayTextField: NSTextField!
-  
+  @IBOutlet weak var subSyncButton: NSButton!
+    
   @IBOutlet weak var audioEqSlider1: NSSlider!
   @IBOutlet weak var audioEqSlider2: NSSlider!
   @IBOutlet weak var audioEqSlider3: NSSlider!
@@ -555,6 +563,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     audioDelaySlider.doubleValue = value
     redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(sender.stringValue)s")
   }
+  
+  @IBAction func audioSyncAction(_ sender: NSButton) {
+    guard let pos = player.info.videoPosition?.second else {
+      return
+    }
+    syncManager.step(source: .audio, position: pos)
+  }
 
   @IBAction func audioEqSliderAction(_ sender: NSSlider) {
     let params: [String: String] = [
@@ -652,6 +667,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     subDelaySlider.doubleValue = value
     redraw(indicator: subDelaySliderIndicator, constraint: subDelaySliderConstraint, slider: subDelaySlider, value: "\(sender.stringValue)s")
   }
+    
+  @IBAction func subSyncAction(_ sender: NSButton) {
+    guard let pos = player.info.videoPosition?.second else {
+      return
+    }
+    syncManager.step(source: .subs, position: pos)
+  }
 
   @IBAction func subScaleReset(_ sender: AnyObject) {
     player.setSubScale(1)
@@ -707,6 +729,61 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       self.player.setSubFont($0 ?? "")
     }
   }
+    
+}
 
-
+extension QuickSettingViewController: SyncManagerDelegate {
+  
+  func didSync(source: SyncManager.Source, delay: Double) {
+    switch source {
+      
+    case .subs:
+      player.setSubDelay(delay)
+      updateSubTabControl()
+      
+    case .audio:
+      player.setAudioDelay(delay)
+      updateAudioTabControl()
+      break
+    }
+  }
+  
+  func didChange(state: SyncManager.State, source: SyncManager.Source) {
+    switch source {
+      
+    case .subs:
+      
+      switch state {
+        
+      case .idle:
+        subSyncButton.title = NSLocalizedString("quicksetting.sub.syncButton.idle", comment: "")
+        
+      case .presync:
+        subSyncButton.title = NSLocalizedString("quicksetting.sub.syncButton.presync", comment: "")
+        
+      case .sync:
+        subSyncButton.title = NSLocalizedString("quicksetting.sub.syncButton.sync", comment: "")
+      }
+      
+    audioSyncButton.title = NSLocalizedString("quicksetting.audio.syncButton.idle", comment: "")
+    
+    case .audio:
+      
+      switch state {
+        
+      case .idle:
+        audioSyncButton.title = NSLocalizedString("quicksetting.audio.syncButton.idle", comment: "")
+        
+      case .presync:
+        audioSyncButton.title = NSLocalizedString("quicksetting.audio.syncButton.presync", comment: "")
+        
+      case .sync:
+        audioSyncButton.title = NSLocalizedString("quicksetting.audio.syncButton.sync", comment: "")
+      }
+      
+    subSyncButton.title = NSLocalizedString("quicksetting.sub.syncButton.idle", comment: "")
+      
+    }
+  }
+  
 }

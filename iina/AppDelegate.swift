@@ -9,6 +9,7 @@
 import Cocoa
 import MediaPlayer
 import MASPreferences
+import Sparkle
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
 fileprivate let OpenFileRepeatTime = TimeInterval(0.2)
@@ -76,11 +77,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBOutlet weak var dockMenu: NSMenu!
 
+  private func getReady() {
+    registerUserDefaultValues()
+    menuController.bindMenuItems()
+    PlayerCore.loadKeyBindings()
+    isReady = true
+  }
+
   // MARK: - App Delegate
 
   func applicationWillFinishLaunching(_ notification: Notification) {
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
+
+    // beta channel
+    if FirstRunManager.isFirstRun(for: .joinBetaChannel) {
+      let result = Utility.quickAskPanel("beta_channel")
+      Preference.set(result, for: .receiveBetaUpdate)
+    }
+    SUUpdater.shared().feedURL = URL(string: Preference.bool(for: .receiveBetaUpdate) ? AppData.appcastBetaLink : AppData.appcastLink)!
 
     // handle arguments
     let arguments = ProcessInfo.processInfo.arguments.dropFirst()
@@ -127,9 +142,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     if !isReady {
-      registerUserDefaultValues()
-      menuController.bindMenuItems()
-      isReady = true
+      getReady()
     }
 
     // show alpha in color panels
@@ -243,9 +256,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @objc
   func handleOpenFile() {
     if !isReady {
-      registerUserDefaultValues()
-      menuController.bindMenuItems()
-      isReady = true
+      getReady()
     }
     // if launched from command line, should ignore openFile once
     if shouldIgnoreOpenFile {
@@ -471,11 +482,11 @@ class RemoteCommandController {
       return .success
     }
     remoteCommand.nextTrackCommand.addTarget { _ in
-      PlayerCore.lastActive.navigateInPlaylist(nextOrPrev: true)
+      PlayerCore.lastActive.navigateInPlaylist(nextMedia: true)
       return .success
     }
     remoteCommand.previousTrackCommand.addTarget { _ in
-      PlayerCore.lastActive.navigateInPlaylist(nextOrPrev: false)
+      PlayerCore.lastActive.navigateInPlaylist(nextMedia: false)
       return .success
     }
     remoteCommand.changeRepeatModeCommand.addTarget { _ in

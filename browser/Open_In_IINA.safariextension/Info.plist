@@ -5,7 +5,7 @@
 	<key>Author</key>
 	<string>Collider LI</string>
 	<key>Builder Version</key>
-	<string>12602.4.8</string>
+	<string>13604.5.5</string>
 	<key>CFBundleDisplayName</key>
 	<string>Open in IINA</string>
 	<key>CFBundleIdentifier</key>
@@ -28,6 +28,14 @@
 				<key>Title</key>
 				<string>Open Current Page in IINA</string>
 			</dict>
+			<dict>
+				<key>Command</key>
+				<string>open_link_in_iina_menu_cmd</string>
+				<key>Identifier</key>
+				<string>open_link_in_iina</string>
+				<key>Title</key>
+				<string>Open Link in IINA</string>
+			</dict>
 		</array>
 		<key>Global Page</key>
 		<string>global.html</string>
@@ -48,6 +56,16 @@
 				<string>Open current webpage in IINA</string>
 			</dict>
 		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>Start</key>
+			<array>
+				<string>injected.js</string>
+			</array>
+		</dict>
 	</dict>
 	<key>Description</key>
 	<string>Open current webpage in IINA</string>

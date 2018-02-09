@@ -184,7 +184,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   }
 
   private func setupResizingRelatedControls() {
-    let resizeOption = Preference.enum(for: .resizeWindowOption) as Preference.ResizeWindowTiming
+    let resizeOption = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
     ([windowResizeNeverButton, windowResizeOnlyWhenOpenButton, windowResizeAlwaysButton] as [NSButton])
       .first { $0.tag == resizeOption.rawValue }?.state = .on
   }

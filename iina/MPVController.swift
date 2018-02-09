@@ -77,7 +77,8 @@ class MPVController: NSObject {
     MPVOption.Equalizer.saturation: MPV_FORMAT_INT64,
     MPVOption.Window.fullscreen: MPV_FORMAT_FLAG,
     MPVOption.Window.ontop: MPV_FORMAT_FLAG,
-    MPVOption.Window.windowScale: MPV_FORMAT_DOUBLE
+    MPVOption.Window.windowScale: MPV_FORMAT_DOUBLE,
+    MPVProperty.mediaTitle: MPV_FORMAT_STRING
   ]
 
   init(playerCore: PlayerCore) {
@@ -334,7 +335,7 @@ class MPVController: NSObject {
     // Set options that can be override by user's config. mpv will log user config when initialize,
     // so we put them here.
     chkErr(mpv_set_property_string(mpv, MPVOption.Video.vo, "opengl-cb"))
-    chkErr(mpv_set_property_string(mpv, MPVOption.Window.keepaspect, "yes"))
+    chkErr(mpv_set_property_string(mpv, MPVOption.Window.keepaspect, "no"))
     chkErr(mpv_set_property_string(mpv, MPVOption.Video.openglHwdecInterop, "auto"))
 
     // get version
@@ -394,6 +395,21 @@ class MPVController: NSObject {
     mpv_set_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
   }
 
+  func setFlagAsync(_ name: String, _ flag: Bool) {
+    var data: Int = flag ? 1 : 0
+    mpv_set_property_async(mpv, 0, name, MPV_FORMAT_FLAG, &data)
+  }
+
+  func setIntAsync(_ name: String, _ value: Int) {
+    var data = Int64(value)
+    mpv_set_property_async(mpv, 0, name, MPV_FORMAT_INT64, &data)
+  }
+
+  func setDoubleAsync(_ name: String, _ value: Double) {
+    var data = value
+    mpv_set_property_async(mpv, 0, name, MPV_FORMAT_DOUBLE, &data)
+  }
+
   func setString(_ name: String, _ value: String) {
     mpv_set_property_string(mpv, name, value)
   }
@@ -451,7 +467,7 @@ class MPVController: NSObject {
       if returnValue < 0 {
         Utility.showAlert("filter.incorrect")
         // reload data in filter setting window
-        NotificationCenter.default.post(Notification(name: Constants.Noti.vfChanged))
+        self.player.postNotification(.iinaVFChanged)
       }
     }
   }
@@ -629,6 +645,11 @@ class MPVController: NSObject {
   // MARK: - Property listeners
 
   private func handlePropertyChange(_ name: String, _ property: mpv_event_property) {
+
+    DispatchQueue.main.async {
+      self.player.mainWindow.quickSettingView.reload()
+    }
+
     switch name {
 
     case MPVProperty.videoParams:
@@ -639,27 +660,18 @@ class MPVController: NSObject {
       player.info.vid = Int(data)
       let currTrack = player.info.currentTrack(.video) ?? .noneVideoTrack
       player.sendOSD(.track(currTrack))
-      DispatchQueue.main.async {
-        self.player.mainWindow.quickSettingView.reloadVideoData()
-      }
 
     case MPVOption.TrackSelection.aid:
       let data = getInt(MPVOption.TrackSelection.aid)
       player.info.aid = Int(data)
       let currTrack = player.info.currentTrack(.audio) ?? .noneAudioTrack
       player.sendOSD(.track(currTrack))
-      DispatchQueue.main.async {
-        self.player.mainWindow.quickSettingView.reloadAudioData()
-      }
 
     case MPVOption.TrackSelection.sid:
       let data = getInt(MPVOption.TrackSelection.sid)
       player.info.sid = Int(data)
       let currTrack = player.info.currentTrack(.sub) ?? .noneSubTrack
       player.sendOSD(.track(currTrack))
-      DispatchQueue.main.async {
-        self.player.mainWindow.quickSettingView.reloadSubtitleData()
-      }
 
     case MPVOption.PlaybackControl.pause:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
@@ -681,6 +693,11 @@ class MPVController: NSObject {
       player.syncUI(.time)
       player.syncUI(.chapterList)
 
+    case MPVOption.PlaybackControl.speed:
+      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+        player.info.playSpeed = data
+        player.sendOSD(.speed(data))
+      }
 
     case MPVOption.Video.deinterlace:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
@@ -729,11 +746,6 @@ class MPVController: NSObject {
         player.sendOSD(.subPos(data))
       }
 
-    case MPVOption.PlaybackControl.speed:
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        player.sendOSD(.speed(data))
-      }
-
     case MPVOption.Equalizer.contrast:
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
@@ -772,26 +784,48 @@ class MPVController: NSObject {
     // following properties may change before file loaded
 
     case MPVProperty.playlistCount:
-      NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+      player.postNotification(.iinaPlaylistChanged)
 
     case MPVProperty.trackListCount:
       player.trackListChanged()
-      NotificationCenter.default.post(Notification(name: Constants.Noti.tracklistChanged))
+      player.postNotification(.iinaTracklistChanged)
 
     case MPVProperty.vf:
-      NotificationCenter.default.post(Notification(name: Constants.Noti.vfChanged))
+      player.postNotification(.iinaVFChanged)
 
     case MPVProperty.af:
-      NotificationCenter.default.post(Notification(name: Constants.Noti.afChanged))
+      player.postNotification(.iinaAFChanged)
 
     case MPVOption.Window.fullscreen:
-      NotificationCenter.default.post(Notification(name: Constants.Noti.fsChanged))
+      guard player.mainWindow.isWindowLoaded else { break }
+      let fs = getFlag(MPVOption.Window.fullscreen)
+      if fs != player.mainWindow.isInFullScreen {
+        DispatchQueue.main.async {
+          self.player.mainWindow.toggleWindowFullScreen()
+        }
+      }
 
     case MPVOption.Window.ontop:
-      NotificationCenter.default.post(Notification(name: Constants.Noti.ontopChanged))
+      guard player.mainWindow.isWindowLoaded else { break }
+      let ontop = getFlag(MPVOption.Window.ontop)
+      if ontop != player.mainWindow.isOntop {
+        DispatchQueue.main.async {
+          self.player.mainWindow.isOntop = ontop
+          self.player.mainWindow.setWindowFloatingOnTop(ontop)
+        }
+      }
 
     case MPVOption.Window.windowScale:
-      NotificationCenter.default.post(Notification(name: Constants.Noti.windowScaleChanged))
+      guard player.mainWindow.isWindowLoaded else { break }
+      let windowScale = getDouble(MPVOption.Window.windowScale)
+      if fabs(windowScale - player.info.cachedWindowScale) > 10e-10 {
+        DispatchQueue.main.async {
+          self.player.mainWindow.setWindowScale(windowScale)
+        }
+      }
+
+    case MPVProperty.mediaTitle:
+      player.postNotification(.iinaMediaTitleChanged)
 
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")

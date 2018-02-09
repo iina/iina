@@ -34,6 +34,9 @@
 /* Class = "NSButtonCell"; title = "Use config directory:"; ObjectID = "ehL-8Y-G8h"; */
 "ehL-8Y-G8h.title" = "config 디렉토리 사용:";
 
+/* Class = "NSTextFieldCell"; placeholderString = "~/.config/mpv/"; ObjectID = "gWN-ya-xRD"; */
+"gWN-ya-xRD.placeholderString" = "~/.config/mpv/";
+
 /* Class = "NSButtonCell"; title = "Use MPV's OSD"; ObjectID = "phK-g9-Vbg"; */
 "phK-g9-Vbg.title" = "MPV의 OSD 사용";
 

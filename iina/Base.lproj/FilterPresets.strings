@@ -42,6 +42,10 @@
 "vflip" = "Flip";
 "hflip" = "Mirror";
 
+"lut3d" = "3D LUT";
+"lut3d.file" = "File";
+"lut3d.interp" = "Interpolation mode";
+
 "custom_mpv" = "Custom (MPV)";
 "custom_mpv.name" = "Filter name";
 "custom_mpv.string" = "Filter value";

@@ -176,7 +176,10 @@
 "cMu-YF-riv.ibShadowedLabels[3]" = "16:10";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[4] = "5:4"; ObjectID = "cMu-YF-riv"; */
-"cMu-YF-riv.ibShadowedLabels[4]" = "5:4";
+"cMu-YF-riv.ibShadowedLabels[4]" = "21:9";
+
+/* Class = "NSSegmentedCell"; ibShadowedLabels[5] = "5:4"; ObjectID = "cMu-YF-riv"; */
+"cMu-YF-riv.ibShadowedLabels[5]" = "5:4";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "cdR-uY-riN"; */
 "cdR-uY-riN.title" = "밝기:";
@@ -233,8 +236,10 @@
 "iuN-rN-jT7.ibShadowedLabels[3]" = "16:10";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[4] = "5:4"; ObjectID = "iuN-rN-jT7"; */
-"iuN-rN-jT7.ibShadowedLabels[4]" = "5:4";
+"iuN-rN-jT7.ibShadowedLabels[4]" = "21:9";
 
+/* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[5] = "5:4"; ObjectID = "iuN-rN-jT7"; */
+"iuN-rN-jT7.ibShadowedLabels[5]" = "5:4";
 /* Class = "NSTextFieldCell"; title = "2k"; ObjectID = "j9w-YU-EcC"; */
 "j9w-YU-EcC.title" = "2k";
 

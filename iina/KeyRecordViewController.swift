@@ -64,12 +64,12 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
       pendingAction = nil
     }
 
-    NotificationCenter.default.addObserver(forName: Constants.Noti.keyBindingInputChanged, object: nil, queue: .main) { _ in
+    NotificationCenter.default.addObserver(forName: .iinaKeyBindingInputChanged, object: nil, queue: .main) { _ in
       self.updateCommandField()
     }
   }
 
-  func recordedKeyDown(with event: NSEvent) {
+  func keyRecordView(_ view: KeyRecordView, recordedKeyDownWith event: NSEvent) {
     keyLabel.stringValue = KeyCodeHelper.mpvKeyCode(from: event)
   }
 

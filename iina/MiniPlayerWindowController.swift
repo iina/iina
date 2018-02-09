@@ -127,7 +127,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     controlView.alphaValue = 0
 
     // notifications
-    NotificationCenter.default.addObserver(self, selector: #selector(updateTrack), name: Constants.Noti.fileLoaded, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(updateTrack), name: .iinaMediaTitleChanged, object: player)
 
     updateVolume()
   }
@@ -238,6 +238,31 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {
       playSlider.doubleValue = percentage
+      if #available(OSX 10.12.2, *) {
+        player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
+        player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
+      }
+    }
+  }
+
+  @objc
+  func updateTrack() {
+    DispatchQueue.main.async {
+      let (mediaTitle, mediaArtist, mediaAlbum) = self.player.getMusicMetadata()
+      self.titleLabel.stringValue = mediaTitle
+      self.window?.title = mediaTitle
+      // hide artist & album label when info not available
+      if mediaArtist.isEmpty && mediaAlbum.isEmpty {
+        self.titleLabelTopConstraint.constant = 6 + 10
+        self.artistAlbumLabel.stringValue = ""
+      } else {
+        self.titleLabelTopConstraint.constant = 6
+        if mediaArtist.isEmpty || mediaAlbum.isEmpty {
+          self.artistAlbumLabel.stringValue = "\(mediaArtist)\(mediaAlbum)"
+        } else {
+          self.artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
+        }
+      }
     }
   }
 
@@ -337,11 +362,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func nextBtnAction(_ sender: NSButton) {
-    player.navigateInPlaylist(nextOrPrev: true)
+    player.navigateInPlaylist(nextMedia: true)
   }
 
   @IBAction func prevBtnAction(_ sender: NSButton) {
-    player.navigateInPlaylist(nextOrPrev: false)
+    player.navigateInPlaylist(nextMedia: false)
   }
 
   @IBAction func volumeBtnAction(_ sender: NSButton) {
@@ -372,27 +397,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
       window.level = .normal
     }
   }
-
-  @objc
-  func updateTrack() {
-    DispatchQueue.main.async {
-      let (mediaTitle, mediaArtist, mediaAlbum) = self.player.getMusicMetadata()
-      self.titleLabel.stringValue = mediaTitle
-      self.window?.title = mediaTitle
-      // hide artist & album label when info not available
-      if mediaArtist.isEmpty && mediaAlbum.isEmpty {
-        self.titleLabelTopConstraint.constant = 6 + 10
-        self.artistAlbumLabel.stringValue = ""
-      } else {
-        self.titleLabelTopConstraint.constant = 6
-        if mediaArtist.isEmpty || mediaAlbum.isEmpty {
-          self.artistAlbumLabel.stringValue = "\(mediaArtist)\(mediaAlbum)"
-        } else {
-          self.artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
-        }
-      }
-    }
-  }
   
   private func normalWindowHeight() -> CGFloat {
     return 72 + (isVideoVisible ? videoWrapperView.frame.height : 0)
@@ -405,6 +409,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
       appDeletate.openFile(self)
     case .openURL:
       appDeletate.openURL(self)
+    case .toggleMusicMode:
+      self.menuSwitchToMiniPlayer(.dummy)
     case .flip:
       self.menuActionHandler.menuToggleFlip(.dummy)
     case .mirror:

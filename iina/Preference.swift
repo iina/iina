@@ -35,6 +35,7 @@ struct Preference {
 
     init?(rawValue: RawValue) { self.rawValue = rawValue }
 
+    static let receiveBetaUpdate = Key("receiveBetaUpdate")
 
     static let actionAfterLaunch = Key("actionAfterLaunch")
     static let alwaysOpenInNewWindow = Key("alwaysOpenInNewWindow")
@@ -76,6 +77,8 @@ struct Preference {
 
     static let pauseWhenMinimized = Key("pauseWhenMinimized")
     static let pauseWhenInactive = Key("pauseWhenInactive")
+    static let playWhenEnteringFullScreen = Key("playWhenEnteringFullScreen")
+    static let pauseWhenLeavingFullScreen = Key("pauseWhenLeavingFullScreen")
 
     /** Show chapter pos in progress bar (bool) */
     static let showChapterPos = Key("showChapterPos")
@@ -245,6 +248,8 @@ struct Preference {
 
     static let watchProperties = Key("watchProperties")
 
+    static let savedVideoFilters = Key("savedVideoFilters")
+    static let savedAudioFilters = Key("savedAudioFilters")
   }
 
   // MARK: - Enums
@@ -563,6 +568,7 @@ struct Preference {
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [
+    .receiveBetaUpdate: false,
     .actionAfterLaunch: ActionAfterLaunch.welcomeWindow.rawValue,
     .alwaysOpenInNewWindow: true,
     .enableCmdN: false,
@@ -592,6 +598,8 @@ struct Preference {
     .blackOutMonitor: false,
     .pauseWhenMinimized: false,
     .pauseWhenInactive: false,
+    .pauseWhenLeavingFullScreen: false,
+    .playWhenEnteringFullScreen: false,
 
     .playlistAutoAdd: true,
     .playlistAutoPlayNext: true,
@@ -687,7 +695,9 @@ struct Preference {
     .screenshotFormat: ScreenshotFormat.png.rawValue,
     .screenshotTemplate: "%F-%n",
 
-    .watchProperties: []
+    .watchProperties: [],
+    .savedVideoFilters: [],
+    .savedAudioFilters: []
   ]
 
 

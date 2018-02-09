@@ -21,6 +21,7 @@ class Utility {
   static let playableFileExt = supportedFileExt[.video]! + supportedFileExt[.audio]!
   static let playlistFileExt = ["m3u", "m3u8", "pls", "cue"]
   static let blacklistExt = supportedFileExt[.sub]! + playlistFileExt
+  static let lut3dExt = ["3dl", "cube", "dat", "m3d"]
 
   // MARK: - Logs, alerts
 
@@ -205,10 +206,10 @@ class Utility {
      - sheetWindow: Must present if mode is `.sheetModal`.
    - Returns: Whether user dismissed the panel by clicking OK. Only works when using `.modal` mode.
    */
-  static func quickPromptPanel(_ key: String,
-                               titleComment: String? = nil, messageComment: String? = nil,
-                               mode: AlertMode = .modal, sheetWindow: NSWindow? = nil,
-                               ok: @escaping (String) -> Void) -> Bool {
+  @discardableResult static func quickPromptPanel(_ key: String,
+                                                  titleComment: String? = nil, messageComment: String? = nil,
+                                                  mode: AlertMode = .modal, sheetWindow: NSWindow? = nil,
+                                                  ok: @escaping (String) -> Void) -> Bool {
     let panel = NSAlert()
     let titleKey = "alert." + key + ".title"
     let messageKey = "alert." + key + ".message"
@@ -244,7 +245,7 @@ class Utility {
       return false
     default:
       Utility.log("quickPromptPanel: Unsupported mode")
-      return true
+      return false
     }
   }
 

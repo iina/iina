@@ -41,6 +41,8 @@ class PlaybackInfo {
   var videoPosition: VideoTime?
   var videoDuration: VideoTime?
 
+  var cachedWindowScale: Double = 1.0
+
   func constrainVideoPosition() {
     guard let duration = videoDuration else { return }
     if videoPosition!.second < 0 { videoPosition!.second = 0 }
@@ -72,7 +74,7 @@ class PlaybackInfo {
   var flipFilter: MPVFilter?
   var mirrorFilter: MPVFilter?
   var audioEqFilter: MPVFilter?
-  var delogoFiter: MPVFilter?
+  var delogoFilter: MPVFilter?
 
   var deinterlace: Bool = false
 
@@ -87,7 +89,7 @@ class PlaybackInfo {
 
   var isMuted: Bool = false
 
-  var playSpeed: Double = 0
+  var playSpeed: Double = 1
 
   var audioDelay: Double = 0
   var subDelay: Double = 0

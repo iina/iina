@@ -47,7 +47,9 @@ struct AppData {
   static let githubLink = "https://github.com/lhc70000/iina"
   static let wikiLink = "https://github.com/lhc70000/iina/wiki"
   static let websiteLink = "https://lhc70000.github.io/iina/"
-  static let emailLink = "lhc199652@gmail.com"
+  static let emailLink = "developers@iina.io"
+  static let appcastLink = "https://www.iina.io/appcast.xml"
+  static let appcastBetaLink = "https://www.iina.io/appcast-beta.xml"
 
   static let widthWhenNoVideo = 480
   static let heightWhenNoVideo = 480
@@ -73,20 +75,6 @@ struct Constants {
     static let pip = NSLocalizedString("menu.pip", comment: "Enter Picture-in-Picture")
     static let exitPIP = NSLocalizedString("menu.exit_pip", comment: "Exit Picture-in-Picture")
   }
-  struct Noti {
-    static let mainWindowChanged = Notification.Name("IINAMainWindowChanged")
-    static let playlistChanged = Notification.Name("IINAPlaylistChanged")
-    static let tracklistChanged = Notification.Name("IINATracklistChanged")
-    static let vfChanged = Notification.Name("IINAVfChanged")
-    static let afChanged = Notification.Name("IINAAfChanged")
-    static let fsChanged = Notification.Name("IINAFullscreenChanged")
-    static let ontopChanged = Notification.Name("IINAOnTopChanged")
-    static let keyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
-    static let windowScaleChanged = Notification.Name("IINAWindowScaleChanged")
-    static let fileLoaded = Notification.Name("IINAFileLoaded")
-    static let historyUpdated = Notification.Name("IINAHistoryUpdated")
-    static let legacyFullScreen = Notification.Name("IINALegacyFullScreen")
-  }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)
   }
@@ -97,4 +85,17 @@ struct Constants {
     static let audioEq = "iina_aeq"
     static let delogo = "iina_delogo"
   }
+}
+
+extension Notification.Name {
+  static let iinaMainWindowChanged = Notification.Name("IINAMainWindowChanged")
+  static let iinaPlaylistChanged = Notification.Name("IINAPlaylistChanged")
+  static let iinaTracklistChanged = Notification.Name("IINATracklistChanged")
+  static let iinaMediaTitleChanged = Notification.Name("IINAMediaTitleChanged")
+  static let iinaVFChanged = Notification.Name("IINAVfChanged")
+  static let iinaAFChanged = Notification.Name("IINAAfChanged")
+  static let iinaKeyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
+  static let iinaFileLoaded = Notification.Name("IINAFileLoaded")
+  static let iinaHistoryUpdated = Notification.Name("IINAHistoryUpdated")
+  static let iinaLegacyFullScreen = Notification.Name("IINALegacyFullScreen")
 }

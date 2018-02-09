@@ -92,7 +92,7 @@ class TextFieldCriterion: Criterion, NSTextFieldDelegate {
   }
 
   override func controlTextDidChange(_ obj: Notification) {
-    NotificationCenter.default.post(Notification(name: Constants.Noti.keyBindingInputChanged))
+    NotificationCenter.default.post(Notification(name: .iinaKeyBindingInputChanged))
   }
 
 }

@@ -79,8 +79,8 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
     updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
 
-    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: Constants.Noti.fileLoaded, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: Constants.Noti.mainWindowChanged, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaFileLoaded, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaMainWindowChanged, object: nil)
   }
 
   deinit {
@@ -150,7 +150,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
         }
         self.trackPopup.menu?.addItem(NSMenuItem.separator())
         for track in info.subTracks {
-          self.trackPopup.menu?.addItem(withTitle: "Sub" + track.readableTitle,
+          self.trackPopup.menu?.addItem(withTitle: "Subtitle" + track.readableTitle,
                                    action: nil, tag: nil, obj: track, stateOn: false)
         }
         self.trackPopup.selectItem(at: 0)

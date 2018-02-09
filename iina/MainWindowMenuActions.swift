@@ -139,14 +139,56 @@ extension MainWindowController {
 
   @objc func menuSetDelogo(_ sender: NSMenuItem) {
     if sender.state == .on {
-      if let filter = player.info.delogoFiter {
-        let _ = player.removeVideoFiler(filter)
-        player.info.delogoFiter = nil
+      if let filter = player.info.delogoFilter {
+        let _ = player.removeVideoFilter(filter)
+        player.info.delogoFilter = nil
       }
     } else {
       self.hideSideBar {
         self.enterInteractiveMode(.freeSelecting)
       }
+    }
+  }
+
+  @objc
+  func menuToggleVideoFilterString(_ sender: NSMenuItem) {
+    if let string = (sender.representedObject as? String) {
+      menuToggleFilterString(string, forType: MPVProperty.vf)
+    }
+  }
+
+  @objc
+  func menuToggleAudioFilterString(_ sender: NSMenuItem) {
+    if let string = (sender.representedObject as? String) {
+      menuToggleFilterString(string, forType: MPVProperty.af)
+    }
+  }
+
+  private func menuToggleFilterString(_ string: String, forType type: String) {
+    let isVideo = type == MPVProperty.vf
+    if let filter = MPVFilter(rawString: string) {
+      if player.mpv.getFilters(type).contains(where: { $0.stringFormat == string }) {
+        // remove
+        if isVideo {
+          _ = player.removeVideoFilter(filter)
+        } else {
+          _ = player.removeAudioFilter(filter)
+        }
+      } else {
+        // add
+        if isVideo {
+          if !player.addVideoFilter(filter) {
+            Utility.showAlert("filter.incorrect")
+          }
+        } else {
+          if !player.addAudioFilter(filter) {
+            Utility.showAlert("filter.incorrect")
+          }
+        }
+      }
+    }
+    if let vfWindow = (NSApp.delegate as? AppDelegate)?.vfWindow, vfWindow.isWindowLoaded {
+      vfWindow.reloadTable()
     }
   }
 }

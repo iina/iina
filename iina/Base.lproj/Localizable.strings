@@ -68,6 +68,8 @@
 "osd.file_error" = "Error reading file";
 "osd.cannot_login" = "Cannot login";
 "osd.canceled" = "Canceled";
+"osd.filter_added" = "Added Filter: %@";
+"osd.filter_removed" = "Removed Filter";
 
 "preference.title" = "Preferences";
 "preference.general" = "General";
@@ -92,10 +94,25 @@
 "menu.exit_pip" = "Exit Picture-in-Picture";
 "menu.pause" = "Pause";
 "menu.resume" = "Resume";
+"menu.speed" = "Speed: %.2fx";
+
+"menu.seek_forward" = "Step Forward %.0fs";
+"menu.seek_backward" = "Step Backward %.0fs";
+"menu.speed_up" = "Speed Up to %.1fx";
+"menu.speed_down" = "Speed Down to %.1fx";
+"menu.volume_up" = "Volume + %.0f%%";
+"menu.volume_down" = "Volume - %.0f%%";
+"menu.audio_delay_up" = "Audio Delay + %.1fs";
+"menu.audio_delay_down" = "Audio Delay - %.1fs";
+"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
+"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
 
 "track.none" = "<None>";
 
 // Alerts
+"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+"alert.beta_channel.message" = "IINA v1.0 is comming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
+
 "alert.title_error" = "Error";
 "alert.title_warning" = "Warning";
 "alert.title_info" = "Information";
@@ -177,6 +194,8 @@
 
 "alert.no_video_track" = "There is no video track.";
 
+"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate it before editing.";
+
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.play_in_new_window" = "Play in New Window";
@@ -220,3 +239,4 @@
 "touchbar.play_pause" = "Play / Pause";
 "touchbar.seek" = "Seek";
 "touchbar.time" = "Time Position";
+"touchbar.remainingTime" = "Remaining Time";

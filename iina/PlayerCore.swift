@@ -195,16 +195,7 @@ class PlayerCore: NSObject {
     mpv.command(.loadfile, args: [path])
   }
 
-  func startMPV() {
-    // set path for youtube-dl
-    let oldPath = String(cString: getenv("PATH")!)
-    var path = Utility.exeDirURL.path + ":" + oldPath
-    if let customYtdlPath = Preference.string(for: .ytdlSearchPath), !customYtdlPath.isEmpty {
-      path = customYtdlPath + ":" + path
-    }
-    setenv("PATH", path, 1)
-
-    // load keybindings
+  static func loadKeyBindings() {
     let userConfigs = Preference.dictionary(for: .inputConfigs)
     let iinaDefaultConfPath = PrefKeyBindingViewController.defaultConfigs["IINA Default"]!
     var inputConfPath = iinaDefaultConfPath
@@ -213,9 +204,24 @@ class PlayerCore: NSObject {
         inputConfPath = currentConfigFilePath
       }
     }
-    let mapping = KeyMapping.parseInputConf(at: inputConfPath) ?? KeyMapping.parseInputConf(at: iinaDefaultConfPath)!
-    PlayerCore.keyBindings = [:]
-    mapping.forEach { PlayerCore.keyBindings[$0.key] = $0 }
+    setKeyBindings(KeyMapping.parseInputConf(at: inputConfPath) ?? KeyMapping.parseInputConf(at: iinaDefaultConfPath)!)
+  }
+
+  static func setKeyBindings(_ keyMappings: [KeyMapping]) {
+    var keyBindings: [String: KeyMapping] = [:]
+    keyMappings.forEach { keyBindings[$0.key] = $0 }
+    PlayerCore.keyBindings = keyBindings
+    (NSApp.delegate as? AppDelegate)?.menuController.updateKeyEquivalentsFrom(keyMappings)
+  }
+
+  func startMPV() {
+    // set path for youtube-dl
+    let oldPath = String(cString: getenv("PATH")!)
+    var path = Utility.exeDirURL.path + ":" + oldPath
+    if let customYtdlPath = Preference.string(for: .ytdlSearchPath), !customYtdlPath.isEmpty {
+      path = customYtdlPath + ":" + path
+    }
+    setenv("PATH", path, 1)
 
     // set http proxy
     if let proxy = Preference.string(for: .httpProxy), !proxy.isEmpty {
@@ -413,10 +419,10 @@ class PlayerCore: NSObject {
     }
   }
 
-  func screenShot() {
+  func screenshot() {
     let option = Preference.bool(for: .screenshotIncludeSubtitle) ? "subtitles" : "video"
     mpv.command(.screenshot, args: [option])
-    sendOSD(.screenShot)
+    sendOSD(.screenshot)
   }
 
   func abLoop() {
@@ -447,7 +453,7 @@ class PlayerCore: NSObject {
 
   func toggleShuffle() {
     mpv.command(.playlistShuffle)
-    NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+    postNotification(.iinaPlaylistChanged)
   }
 
   func setVolume(_ volume: Double, constrain: Bool = true) {
@@ -478,7 +484,6 @@ class PlayerCore: NSObject {
   /** Set speed. */
   func setSpeed(_ speed: Double) {
     mpv.setDouble(MPVOption.PlaybackControl.speed, speed)
-    info.playSpeed = speed
   }
 
   func setVideoAspect(_ aspect: String) {
@@ -510,7 +515,7 @@ class PlayerCore: NSObject {
       }
     } else {
       if let vf = info.flipFilter {
-        let _ = removeVideoFiler(vf)
+        let _ = removeVideoFilter(vf)
         info.flipFilter = nil
       }
     }
@@ -527,7 +532,7 @@ class PlayerCore: NSObject {
       }
     } else {
       if let vf = info.mirrorFilter {
-        let _ = removeVideoFiler(vf)
+        let _ = removeVideoFilter(vf)
         info.mirrorFilter = nil
       }
     }
@@ -568,7 +573,7 @@ class PlayerCore: NSObject {
     }
   }
 
-  func loadExternalSubFile(_ url: URL) {
+  func loadExternalSubFile(_ url: URL, delay: Bool = false) {
     if let track = info.subTracks.first(where: { $0.externalFilename == url.path }) {
       mpv.command(.subReload, args: [String(track.id)], checkError: false)
       return
@@ -576,8 +581,15 @@ class PlayerCore: NSObject {
 
     mpv.command(.subAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
-        DispatchQueue.main.async {
-          Utility.showAlert("unsupported_sub")
+        // if another modal panel is shown, popping up an alert now will cause some infinite loop.
+        if delay {
+          DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            Utility.showAlert("unsupported_sub")
+          }
+        } else {
+          DispatchQueue.main.async {
+            Utility.showAlert("unsupported_sub")
+          }
         }
       }
     }
@@ -596,7 +608,7 @@ class PlayerCore: NSObject {
     if let currentSub = info.subTracks.first(where: {$0.externalFilename == currentSubName}) {
       setTrack(currentSub.id, forType: .sub)
     }
-    mainWindow?.quickSettingView.reloadSubtitleData()
+    mainWindow?.quickSettingView.reload()
   }
 
   func setAudioDelay(_ delay: Double) {
@@ -651,8 +663,8 @@ class PlayerCore: NSObject {
     getPlaylist()
   }
 
-  func navigateInPlaylist(nextOrPrev: Bool) {
-    mpv.command(nextOrPrev ? .playlistNext : .playlistPrev, checkError: false)
+  func navigateInPlaylist(nextMedia: Bool) {
+    mpv.command(nextMedia ? .playlistNext : .playlistPrev, checkError: false)
   }
 
   func playChapter(_ pos: Int) {
@@ -675,7 +687,7 @@ class PlayerCore: NSObject {
       info.cropFilter = vf
     } else {
       if let filter = info.cropFilter {
-        let _ = removeVideoFiler(filter)
+        let _ = removeVideoFilter(filter)
         info.unsureCrop = "None"
       }
     }
@@ -690,13 +702,13 @@ class PlayerCore: NSObject {
 
   func setAudioEq(fromFilter filter: MPVFilter) {
     filter.label = Constants.FilterName.audioEq
-    addAudioFilter(filter)
+    _ = addAudioFilter(filter)
     info.audioEqFilter = filter
   }
 
   func removeAudioEqFilter() {
     if let prevFilter = info.audioEqFilter {
-      removeAudioFilter(prevFilter)
+      _ = removeAudioFilter(prevFilter)
       info.audioEqFilter = nil
     }
   }
@@ -742,7 +754,7 @@ class PlayerCore: NSObject {
     return result
   }
 
-  func removeVideoFiler(_ filter: MPVFilter) -> Bool {
+  func removeVideoFilter(_ filter: MPVFilter) -> Bool {
     var result = true
     if let label = filter.label {
       mpv.command(.vf, args: ["del", "@" + label], checkError: false) { result = $0 >= 0 }
@@ -752,12 +764,16 @@ class PlayerCore: NSObject {
     return result
   }
 
-  func addAudioFilter(_ filter: MPVFilter) {
-    mpv.command(.af, args: ["add", filter.stringFormat], checkError: false)
+  func addAudioFilter(_ filter: MPVFilter) -> Bool {
+    var result = true
+    mpv.command(.af, args: ["add", filter.stringFormat], checkError: false) { result = $0 >= 0 }
+    return result
   }
 
-  func removeAudioFilter(_ filter: MPVFilter) {
-    mpv.command(.af, args: ["del", filter.stringFormat], checkError: false)
+  func removeAudioFilter(_ filter: MPVFilter) -> Bool {
+    var result = true
+    mpv.command(.af, args: ["del", filter.stringFormat], checkError: false)  { result = $0 >= 0 }
+    return result
   }
 
   func getAudioDevices() -> [[String: String]] {
@@ -873,29 +889,30 @@ class PlayerCore: NSObject {
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     info.haveDownloadedSub = false
-    // Generate thumbnails if window has loaded video
+    // generate thumbnails if window has loaded video
     if mainWindow.isVideoLoaded {
       generateThumbnails()
     }
-    // Main thread stuff
+    // main thread stuff
+    getTrackInfo()
+    getSelectedTracks()
+    getPlaylist()
+    getChapters()
     DispatchQueue.main.sync {
-      self.getTrackInfo()
-      self.getSelectedTracks()
-      self.getPlaylist()
-      self.getChapters()
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
-      mainWindow.updateTitle()
       if #available(macOS 10.12.2, *) {
         touchBarSupport.setupTouchBarUI()
       }
-      // only set some initial properties for the first file
-      if info.justLaunched {
-        if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.isInFullScreen && !isInMiniPlayer {
-          mainWindow.toggleWindowFullScreen()
+    }
+    // set initial properties for the first file
+    if info.justLaunched {
+      if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.isInFullScreen && !isInMiniPlayer {
+        DispatchQueue.main.async {
+          self.mainWindow.toggleWindowFullScreen()
         }
-        info.justLaunched = false
       }
+      info.justLaunched = false
     }
     // add to history
     if let url = info.currentURL {
@@ -905,7 +922,7 @@ class PlayerCore: NSObject {
         NSDocumentController.shared.noteNewRecentDocumentURL(url)
       }
     }
-    NotificationCenter.default.post(Notification(name: Constants.Noti.fileLoaded))
+    postNotification(.iinaFileLoaded)
   }
 
   func playbackRestarted() {
@@ -924,7 +941,7 @@ class PlayerCore: NSObject {
     // if need to switch to music mode
     if audioStatusIsAvailableNow && Preference.bool(for: .autoSwitchToMusicMode) {
       if currentMediaIsAudio == .isAudio {
-        if !isInMiniPlayer && !switchedBackFromMiniPlayerManually {
+        if !isInMiniPlayer && !mainWindow.isInFullScreen && !switchedBackFromMiniPlayerManually {
           DispatchQueue.main.sync {
             switchToMiniPlayer(automatically: false)
           }
@@ -1117,6 +1134,11 @@ class PlayerCore: NSObject {
   }
 
   func generateThumbnails() {
+    if #available(OSX 10.12.2, *) {
+      DispatchQueue.main.async {
+        self.touchBarSupport.touchBarPlaySlider?.resetCachedThumbnails()
+      }
+    }
     guard let path = info.currentURL?.path else { return }
     info.thumbnails.removeAll(keepingCapacity: true)
     info.thumbnailsProgress = 0
@@ -1222,6 +1244,12 @@ class PlayerCore: NSObject {
     }
   }
 
+  // MARK: - Notifications
+
+  func postNotification(_ name: Notification.Name) {
+    NotificationCenter.default.post(Notification(name: name, object: self))
+  }
+
   // MARK: - Utils
 
   /**
@@ -1299,7 +1327,7 @@ class PlayerCore: NSObject {
       case Constants.FilterName.mirror:
         info.mirrorFilter = filter
       case Constants.FilterName.delogo:
-        info.delogoFiter = filter
+        info.delogoFilter = filter
       default:
         break
       }
@@ -1345,7 +1373,6 @@ class PlayerCore: NSObject {
     }
     SleepPreventer.allowSleep()
   }
-
 }
 
 

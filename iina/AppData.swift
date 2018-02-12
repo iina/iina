@@ -39,7 +39,6 @@ struct AppData {
   static let encodings = CharEncoding.list
 
   static let userInputConfFolder = "input_conf"
-  static let logFolder = "log"
   static let watchLaterFolder = "watch_later"
   static let historyFile = "history.plist"
   static let thumbnailCacheFolder = "thumb_cache"

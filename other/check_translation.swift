@@ -7,7 +7,7 @@ class Regex {
   var regex: NSRegularExpression?
 
   init (_ pattern: String) {
-    if let exp = try? NSRegularExpression(pattern: pattern, options: []) {
+    if let exp = try? NSRegularExpression(pattern: pattern) {
       self.regex = exp
     } else {
       print("Cannot create regex \(pattern)")
@@ -15,21 +15,27 @@ class Regex {
   }
 
   func matches(_ str: String) -> Bool {
-    if let matches = regex?.numberOfMatches(in: str, options: [], range: NSMakeRange(0, str.characters.count)) {
+    // Don't depend on a string's length for functions that take NSRange.
+    // The proper way to do this is to use `Range(_:in:)`, but getting the UTF-16 count
+    // is similar enough to how Foundation NSStrings count characters.
+    if let matches = regex?.numberOfMatches(in: str, range: NSMakeRange(0, str.utf16.count)) {
       return matches > 0
     } else {
       return false
     }
   }
 
-  func captures(in str: String) -> [String] {
-    var result: [String] = []
-    if let matches = regex?.matches(in: str, options: [], range: NSMakeRange(0, str.characters.count)) {
+  func captures(in str: String) -> [Substring] {
+    var result: [Substring] = []
+    // Don't depend on a string's length for functions that take NSRange.
+    // The proper way to do this is to use `Range(_:in:)`, but getting the UTF-16 count
+    // is similar enough to how Foundation NSStrings count characters.
+    if let matches = regex?.matches(in: str, range: NSMakeRange(0, str.utf16.count)) {
       matches.forEach { match in
         for i in 0..<match.numberOfRanges {
           let range = match.range(at: i)
-          if range.length > 0 {
-            result.append((str as NSString).substring(with: match.range(at: i)))
+          if range.length > 0, let swiftRange = Range(range, in: str) {
+            result.append(str[swiftRange])
           } else {
             result.append("")
           }
@@ -101,7 +107,7 @@ enum BaseLang {
   }
 }
 
-func sameArray(_ a: [String], _ b: [String]) -> Bool {
+func sameArray(_ a: [Substring], _ b: [Substring]) -> Bool {
   guard a.count == b.count else { return false }
   for i in 0..<a.count {
     guard a[i] == b[i] else { return false }

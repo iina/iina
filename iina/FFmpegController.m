@@ -88,7 +88,7 @@ return -1;\
 {
   int i, ret;
 
-  char *cFilename = strdup(file.UTF8String);
+  char *cFilename = strdup(file.fileSystemRepresentation);
   [_thumbnails removeAllObjects];
   [_thumbnailPartialResult removeAllObjects];
   [_addedTimestamps removeAllObjects];

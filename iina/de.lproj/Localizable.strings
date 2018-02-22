@@ -192,3 +192,12 @@ Beispiel: 20:35";
 "touchbar.seek" = "Verlauf";
 "touchbar.time" = "Position";
 "track.none" = "<Leer>";
+
+/* FIXME: Using English localization instead */
+"touchbar.remainingTime" = "Remaining Time";
+
+/* FIXME: Using English localization instead */
+"alert.beta_channel.message" = "IINA v1.0 is comming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
+
+/* FIXME: Using English localization instead */
+"alert.beta_channel.title" = "Receive Updates for Beta Versions";

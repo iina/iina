@@ -191,3 +191,12 @@ Potresti dover ripetere le operazioni precedenti (ad es. reimpostare il ritaglio
 "touchbar.seek" = "Ricerca";
 "touchbar.time" = "Time Position";
 "track.none" = "<Nessuno>";
+
+/* FIXME: Using English localization instead */
+"touchbar.remainingTime" = "Remaining Time";
+
+/* FIXME: Using English localization instead */
+"alert.beta_channel.message" = "IINA v1.0 is comming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
+
+/* FIXME: Using English localization instead */
+"alert.beta_channel.title" = "Receive Updates for Beta Versions";

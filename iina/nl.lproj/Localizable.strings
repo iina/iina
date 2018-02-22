@@ -221,3 +221,57 @@
 "alert.nothing_to_open" = "Niets om te openen.";
 "alert.no_video_track" = "Er is geen video spoor.";
 "subencoding.auto" = "Automatisch detecteren.";
+
+/* FIXME: Using English localization instead */
+"menu.speed_down" = "Speed Down to %.1fx";
+
+/* FIXME: Using English localization instead */
+"menu.audio_delay_up" = "Audio Delay + %.1fs";
+
+/* FIXME: Using English localization instead */
+"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
+
+/* FIXME: Using English localization instead */
+"menu.speed" = "Speed: %.2fx";
+
+/* FIXME: Using English localization instead */
+"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
+
+/* FIXME: Using English localization instead */
+"menu.volume_up" = "Volume + %.0f%%";
+
+/* FIXME: Using English localization instead */
+"osd.filter_added" = "Added Filter: %@";
+
+/* FIXME: Using English localization instead */
+"touchbar.remainingTime" = "Remaining Time";
+
+/* FIXME: Using English localization instead */
+"menu.seek_backward" = "Step Backward %.0fs";
+
+/* FIXME: Using English localization instead */
+"alert.beta_channel.message" = "IINA v1.0 is comming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
+
+/* FIXME: Using English localization instead */
+"menu.seek_forward" = "Step Forward %.0fs";
+
+/* FIXME: Using English localization instead */
+"menu.volume_down" = "Volume - %.0f%%";
+
+/* FIXME: Using English localization instead */
+"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate it before editing.";
+
+/* FIXME: Using English localization instead */
+"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+
+/* FIXME: Using English localization instead */
+"menu.speed_up" = "Speed Up to %.1fx";
+
+/* FIXME: Using English localization instead */
+"preference.system_media_control" = "Use system media control";
+
+/* FIXME: Using English localization instead */
+"osd.filter_removed" = "Removed Filter";
+
+/* FIXME: Using English localization instead */
+"menu.audio_delay_down" = "Audio Delay - %.1fs";

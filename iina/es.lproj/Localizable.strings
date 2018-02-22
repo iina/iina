@@ -187,3 +187,12 @@
 "touchbar.seek" = "Buscar";
 "touchbar.time" = "Posición en el tiempo";
 "track.none" = "<Ninguno>";
+
+/* FIXME: Using English localization instead */
+"touchbar.remainingTime" = "Remaining Time";
+
+/* FIXME: Using English localization instead */
+"alert.beta_channel.message" = "IINA v1.0 is comming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
+
+/* FIXME: Using English localization instead */
+"alert.beta_channel.title" = "Receive Updates for Beta Versions";

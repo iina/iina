@@ -189,6 +189,7 @@
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
 		C75540751E7886FE00C13D4A /* SubSelectWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C75540771E7886FE00C13D4A /* SubSelectWindowController.xib */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
+		E33BA5C4204315740069A0F6 /* AssrtSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33BA5C3204315740069A0F6 /* AssrtSubtitle.swift */; };
 		E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BD4AE20054BD9007635FC /* MainWindow.swift */; };
 		E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C12F6A201F281F00297964 /* FirstRunManager.swift */; };
 		E3CB75BB1FD998F5004DB10A /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F21E26CA24008755BB /* Regex.swift */; };
@@ -962,6 +963,7 @@
 		D27E35E01E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D2B411421E5336AD002819E1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
 		D2B411431E5336AE002819E1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		E33BA5C3204315740069A0F6 /* AssrtSubtitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssrtSubtitle.swift; sourceTree = "<group>"; };
 		E34E0ADF2007E23600BDC8BA /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/FreeSelectingViewController.strings"; sourceTree = "<group>"; };
 		E38BD4AE20054BD9007635FC /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		E3C12F6A201F281F00297964 /* FirstRunManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunManager.swift; sourceTree = "<group>"; };
@@ -1288,6 +1290,7 @@
 			children = (
 				84A886E31E24F37D008755BB /* ShooterSubtitle.swift */,
 				840AF5831E73CE3900F4AF92 /* OpenSubSubtitle.swift */,
+				E33BA5C3204315740069A0F6 /* AssrtSubtitle.swift */,
 				84A886E51E24F3BD008755BB /* OnlineSubtitle.swift */,
 				84A886EB1E2573A5008755BB /* JustExtension.swift */,
 				840AF5811E732C8F00F4AF92 /* JustXMLRPC.swift */,
@@ -1953,6 +1956,7 @@
 				84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */,
 				845404AA1E4396F500B02B12 /* ScriptLoader.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,
+				E33BA5C4204315740069A0F6 /* AssrtSubtitle.swift in Sources */,
 				844DE1BF1D3E2B9900272589 /* MPVEvent.swift in Sources */,
 				845040471E0B0F500079C194 /* CropSettingsViewController.swift in Sources */,
 				8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */,

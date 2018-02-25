@@ -23,6 +23,7 @@ class OnlineSubtitle: NSObject {
   enum Source: Int {
     case shooter = 0
     case openSub
+    case assrt
 
     var name: String {
       switch self {
@@ -30,6 +31,8 @@ class OnlineSubtitle: NSObject {
         return "shooter.cn"
       case .openSub:
         return "opensubtitles.org"
+      case .assrt:
+        return "assrt.net"
       }
     }
   }
@@ -114,6 +117,12 @@ class OnlineSubtitle: NSObject {
           osdMessage = .networkError
         }
         playerCore.sendOSD(osdMessage)
+      }
+    case .assrt:
+      let subSupport = AssrtSupport.shared
+      subSupport.search(url.deletingPathExtension().lastPathComponent)
+      .then { subs -> Void in
+        print(subs)
       }
     }
   }

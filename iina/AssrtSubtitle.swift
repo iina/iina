@@ -12,21 +12,28 @@ import PromiseKit
 
 final class AssrtSubtitle: OnlineSubtitle {
 
-  var id: Int
-  var nativeName: String
-  var uploadTime: String
-  var subType: String
+  @objc var id: Int
+  @objc var nativeName: String
+  @objc var uploadTime: String
 
-  var title: String?
-  var filename: String?
-  var size: String?
-  var url: URL?
+  @objc var subType: String
+  @objc var title: String?
+  @objc var filename: String?
+  @objc var size: String?
+  @objc var url: URL?
 
-  init(index: Int, id: Int, nativeName: String, uploadTime: String, subType: String) {
+  init(index: Int, id: Int, nativeName: String, uploadTime: String, subType: String?) {
     self.id = id
     self.nativeName = nativeName
+    if self.nativeName.isEmpty {
+      self.nativeName = "[No title]"
+    }
     self.uploadTime = uploadTime
-    self.subType = subType
+    if let subType = subType {
+      self.subType = subType
+    } else {
+      self.subType = "Unknown"
+    }
     super.init(index: index)
   }
 
@@ -70,6 +77,8 @@ class AssrtSupport {
   private let detailApi = "https://api.assrt.net/v1/sub/detail"
 
   var token: String
+
+  private let subChooseViewController = SubChooseViewController(source: .assrt)
 
   static let shared = AssrtSupport()
 
@@ -118,7 +127,7 @@ class AssrtSupport {
                                          id: sub["id"] as! Int,
                                          nativeName: sub["native_name"] as! String,
                                          uploadTime: sub["upload_time"] as! String,
-                                         subType: sub["subtype"] as! String))
+                                         subType: sub["subtype"] as? String))
           index += 1
         }
         fulfill(subtitles)
@@ -127,8 +136,22 @@ class AssrtSupport {
   }
 
   func showSubSelectWindow(subs: [AssrtSubtitle]) -> Promise<[AssrtSubtitle]> {
-    return Promise { fulfull, reject in
+    return Promise { fulfill, reject in
+      // return when found 0 or 1 sub
+      if subs.count <= 1 {
+        fulfill(subs)
+        return
+      }
+      subChooseViewController.subtitles = subs
 
+      subChooseViewController.userDoneAction = { subs in
+        fulfill(subs as! [AssrtSubtitle])
+      }
+      subChooseViewController.userCanceledAction = {
+        reject(AssrtError.userCanceled)
+      }
+      PlayerCore.active.sendOSD(.foundSub(subs.count), autoHide: false, accessoryView: subChooseViewController.view)
+      subChooseViewController.tableView.reloadData()
     }
   }
 

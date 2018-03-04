@@ -92,6 +92,8 @@ class OpenSubSupport {
   private static let serviceName: NSString = "IINA OpenSubtitles Account"
   private let xmlRpc: JustXMLRPC
 
+  private let subChooseViewController = SubChooseViewController()
+
   var language: String
   var username: String = ""
 
@@ -253,18 +255,16 @@ class OpenSubSupport {
         fulfill(subs)
         return
       }
-      let subSelectWindow = (NSApp.delegate as! AppDelegate).subSelectWindow
-      subSelectWindow.whenUserAction = { subs in
-        fulfill(subs)
+      subChooseViewController.subtitles = subs
+
+      subChooseViewController.userDoneAction = { subs in
+        fulfill(subs as! [OpenSubSubtitle])
       }
-      subSelectWindow.whenUserClosed = {
+      subChooseViewController.userCanceledAction = {
         reject(OpenSubError.userCanceled)
       }
-      DispatchQueue.main.async {
-        subSelectWindow.showWindow(self)
-        subSelectWindow.arrayController.content = nil
-        subSelectWindow.arrayController.add(contentsOf: subs)
-      }
+      PlayerCore.active.sendOSD(.foundSub(subs.count), autoHide: false, accessoryView: subChooseViewController.view)
+      subChooseViewController.tableView.reloadData()
     }
   }
 

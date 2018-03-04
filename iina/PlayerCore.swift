@@ -1107,7 +1107,7 @@ class PlayerCore: NSObject {
     }
   }
 
-  func sendOSD(_ osd: OSDMessage) {
+  func sendOSD(_ osd: OSDMessage, autoHide: Bool = true, accessoryView: NSView? = nil) {
     // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
     guard mainWindow.isWindowLoaded else { return }
     if info.disableOSDForFileLoading {
@@ -1116,7 +1116,13 @@ class PlayerCore: NSObject {
       }
     }
     DispatchQueue.main.async {
-      self.mainWindow.displayOSD(osd)
+      self.mainWindow.displayOSD(osd, autoHide: autoHide, accessoryView: accessoryView)
+    }
+  }
+
+  func hideOSD() {
+    DispatchQueue.main.async {
+      self.mainWindow.hideOSD()
     }
   }
 

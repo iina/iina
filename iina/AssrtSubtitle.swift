@@ -126,6 +126,12 @@ class AssrtSupport {
     }
   }
 
+  func showSubSelectWindow(subs: [AssrtSubtitle]) -> Promise<[AssrtSubtitle]> {
+    return Promise { fulfull, reject in
+
+    }
+  }
+
   private var header: [String: String] {
     return ["Authorization": "Bearer \(token)"]
   }

@@ -10,12 +10,34 @@ import Cocoa
 
 class SubChooseViewController: NSViewController {
 
+  override var nibName: NSNib.Name {
+    return NSNib.Name("SubChooseViewController")
+  }
+
   @IBOutlet weak var tableView: NSTableView!
 
   var subtitles: [OnlineSubtitle] = []
 
   var userDoneAction: (([OnlineSubtitle]) -> Void)?
   var userCanceledAction: (() -> Void)?
+
+  private var cellIdentifier: NSUserInterfaceItemIdentifier
+
+  init(source: OnlineSubtitle.Source) {
+    switch source {
+    case .assrt:
+      self.cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "AssrtCell")
+    case .openSub:
+      self.cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "OpenSubCell")
+    default:
+      fatalError("Unsupported subtitle source.")
+    }
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -49,7 +71,7 @@ extension SubChooseViewController: NSTableViewDelegate, NSTableViewDataSource {
   }
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-    return tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "OpenSubCell"), owner: self)
+    return tableView.makeView(withIdentifier: cellIdentifier, owner: self)
   }
 
 }

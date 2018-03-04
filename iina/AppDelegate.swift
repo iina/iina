@@ -45,7 +45,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   lazy var aboutWindow: AboutWindowController = AboutWindowController()
   lazy var fontPicker: FontPickerWindowController = FontPickerWindowController()
   lazy var inspector: InspectorWindowController = InspectorWindowController()
-  lazy var subSelectWindow: SubSelectWindowController = SubSelectWindowController()
   lazy var historyWindow: HistoryWindowController = HistoryWindowController()
 
   lazy var vfWindow: FilterWindowController = {

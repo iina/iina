@@ -92,7 +92,7 @@ class OpenSubSupport {
   private static let serviceName: NSString = "IINA OpenSubtitles Account"
   private let xmlRpc: JustXMLRPC
 
-  private let subChooseViewController = SubChooseViewController()
+  private let subChooseViewController = SubChooseViewController(source: .openSub)
 
   var language: String
   var username: String = ""

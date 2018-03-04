@@ -54,7 +54,7 @@ class OnlineSubtitle: NSObject {
       source = userSource!
     }
 
-    playerCore.sendOSD(.startFindingSub(source.name))
+    playerCore.sendOSD(.startFindingSub(source.name), autoHide: false)
 
     switch source {
     case .shooter:
@@ -77,6 +77,8 @@ class OnlineSubtitle: NSObject {
           osdMessage = .networkError
           playerCore.sendOSD(osdMessage)
         }
+      }.always {
+        playerCore.hideOSD()
       }
     case .openSub:
       // opensubtitles
@@ -117,12 +119,16 @@ class OnlineSubtitle: NSObject {
           osdMessage = .networkError
         }
         playerCore.sendOSD(osdMessage)
+      }.always {
+        playerCore.hideOSD()
       }
     case .assrt:
       let subSupport = AssrtSupport.shared
       subSupport.search(url.deletingPathExtension().lastPathComponent)
       .then { subs -> Void in
-        print(subs)
+        subSupport.showSubSelectWindow(subs: subs)
+      }.always {
+        //playerCore.hideOSD()
       }
     }
   }

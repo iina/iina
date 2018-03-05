@@ -653,6 +653,7 @@ struct Preference {
     .displayInLetterBox: true,
     .subScaleWithWindow: true,
     .openSubUsername: "",
+    .assrtToken: "",
     .defaultEncoding: "auto",
 
     .enableCache: true,

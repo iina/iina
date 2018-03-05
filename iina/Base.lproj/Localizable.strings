@@ -196,6 +196,13 @@
 
 "alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate it before editing.";
 
+"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
+"alert.assrt_register.register" = "Register Now";
+"alert.assrt_register.try" = "Try First";
+"alert.assrt_token_prompt.title" = "Enter your API token";
+"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
+"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.play_in_new_window" = "Play in New Window";

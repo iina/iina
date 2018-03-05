@@ -119,11 +119,38 @@ class AssrtSupport {
 
   init() {
     let userToken = Preference.string(for: .assrtToken)
-    if let token = userToken, !token.isEmpty {
+    if let token = userToken, token.count == 32 {
       self.token = token
     } else {
       self.token = "5IzWrb2J099vmA96ECQXwdRSe9xdoBUv"
     }
+  }
+
+  func checkToken() -> Bool {
+    // show alert for unregistered users
+    let alert = NSAlert()
+    alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
+    alert.informativeText = String(format: NSLocalizedString("alert.assrt_register", comment: "alert.assrt_register"))
+    alert.alertStyle = .warning
+    alert.addButton(withTitle: NSLocalizedString("alert.assrt_register.register", comment: "alert.assrt_register.register"))
+    alert.addButton(withTitle: NSLocalizedString("alert.assrt_register.try", comment: "alert.assrt_register.try"))
+    let result = alert.runModal()
+    if result == .alertFirstButtonReturn {
+      // if user chose register
+      NSWorkspace.shared.open(URL(string: AppData.assrtRegisterLink)!)
+      var newToken = ""
+      if Utility.quickPromptPanel("assrt_token_prompt", ok: { newToken = $0 }) {
+        if newToken.count == 32 {
+          Preference.set(newToken, for: .assrtToken)
+          self.token = newToken
+          return true
+        } else {
+          Utility.showAlert("assrt_token_invalid")
+        }
+      }
+      return false
+    }
+    return true
   }
 
   func search(_ query: String) -> Promise<[AssrtSubtitle]> {

@@ -125,7 +125,10 @@ class OnlineSubtitle: NSObject {
     case .assrt:
       let subSupport = AssrtSupport.shared
       firstly {
-        subSupport.search(url.deletingPathExtension().lastPathComponent)
+        if !subSupport.checkToken() {
+          throw AssrtSupport.AssrtError.userCanceled
+        }
+        return subSupport.search(url.deletingPathExtension().lastPathComponent)
       }.then { subs in
         subSupport.showSubSelectWindow(with: subs)
       }.then { selectedSubs in

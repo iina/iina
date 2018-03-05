@@ -14,7 +14,7 @@ class OnlineSubtitle: NSObject {
   typealias SubCallback = ([OnlineSubtitle]) -> Void
 
   enum DownloadResult {
-    case ok(URL)
+    case ok([URL])
     case failed
   }
 
@@ -98,7 +98,7 @@ class OnlineSubtitle: NSObject {
       }.then { info in
         subSupport.request(info)
       }.then { subs in
-        subSupport.showSubSelectWindow(subs: subs)
+        subSupport.showSubSelectWindow(with: subs)
       }.then { selectedSubs -> Void in
         callback(selectedSubs)
       }.catch { err in
@@ -124,11 +124,26 @@ class OnlineSubtitle: NSObject {
       }
     case .assrt:
       let subSupport = AssrtSupport.shared
-      subSupport.search(url.deletingPathExtension().lastPathComponent)
-      .then { subs -> Void in
-        subSupport.showSubSelectWindow(subs: subs)
+      firstly {
+        subSupport.search(url.deletingPathExtension().lastPathComponent)
+      }.then { subs in
+        subSupport.showSubSelectWindow(with: subs)
+      }.then { selectedSubs in
+        when(fulfilled: selectedSubs.map({ subSupport.loadDetails(forSub: $0) }))
+      }.then { loadedSubs in
+        callback(loadedSubs)
+      }.catch { err in
+        let osdMessage: OSDMessage
+        switch err {
+        case AssrtSupport.AssrtError.userCanceled:
+          osdMessage = .canceled
+        default:
+          Utility.log("Assrt: \(err.localizedDescription)")
+          osdMessage = .networkError
+        }
+        playerCore.sendOSD(osdMessage)
       }.always {
-        //playerCore.hideOSD()
+        playerCore.hideOSD()
       }
     }
   }

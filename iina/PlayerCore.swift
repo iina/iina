@@ -119,6 +119,8 @@ class PlayerCore: NSObject {
   var switchedToMiniPlayerManually = false
   var switchedBackFromMiniPlayerManually = false
 
+  var isSearchingOnlineSubtitle = false
+
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true

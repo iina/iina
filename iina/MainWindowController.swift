@@ -165,7 +165,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var isCurrentPressInSecondStage = false
 
   /** Whether current osd needs user interaction to be dismissed */
-  var isShowingFixedOSD = false
+  var isShowingPersistentOSD = false
 
   // MARK: - Enums
 
@@ -1567,7 +1567,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - UI: OSD
 
   func displayOSD(_ message: OSDMessage, autoHide: Bool = true, accessoryView: NSView? = nil) {
-    if !player.displayOSD { return }
+    guard player.displayOSD && !isShowingPersistentOSD else { return }
 
     if hideOSDTimer != nil {
       hideOSDTimer!.invalidate()
@@ -1618,6 +1618,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       osdStackView.removeView($0)
     }
     if let accessoryView = accessoryView {
+      isShowingPersistentOSD = true
+      
       accessoryView.appearance = NSAppearance(named: .vibrantDark)
       let heightConstraint = NSLayoutConstraint(item: accessoryView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300)
       heightConstraint.isActive = true
@@ -1654,6 +1656,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         self.osdAnimationState = .hidden
       }
     }
+    isShowingPersistentOSD = false
   }
 
   // MARK: - UI: Side bar

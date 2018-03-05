@@ -12,6 +12,11 @@ import PromiseKit
 
 final class AssrtSubtitle: OnlineSubtitle {
 
+  struct File {
+    var url: URL
+    var filename: String
+  }
+
   @objc var id: Int
   @objc var nativeName: String
   @objc var uploadTime: String
@@ -21,6 +26,7 @@ final class AssrtSubtitle: OnlineSubtitle {
   @objc var filename: String?
   @objc var size: String?
   @objc var url: URL?
+  var fileList: [File]?
 
   init(index: Int, id: Int, nativeName: String, uploadTime: String, subType: String?) {
     self.id = id
@@ -38,12 +44,41 @@ final class AssrtSubtitle: OnlineSubtitle {
   }
 
   override func download(callback: @escaping DownloadCallback) {
-    Just.get("") { response in
-      guard response.ok, let data = response.content else {
+    if let fileList = fileList {
+      // download from file list
+      when(fulfilled: fileList.map { file -> Promise<URL> in
+        Promise { fulfill, reject in
+          Just.get(file.url) { response in
+            guard response.ok, let data = response.content else {
+              reject(AssrtSupport.AssrtError.networkError)
+              return
+            }
+            let subFilename = "[\(self.index)]\(file.filename)"
+            if let url = data.saveToFolder(Utility.tempDirURL, filename: subFilename) {
+              fulfill(url)
+            }
+          }
+        }
+      }).then { urls in
+        callback(.ok(urls))
+      }.catch { err in
         callback(.failed)
-        return
       }
-      
+    } else if let url = url, let filename = filename {
+      // download from url
+      Just.get(url) { response in
+        guard response.ok, let data = response.content else {
+          callback(.failed)
+          return
+        }
+        let subFilename = "[\(self.index)]\(filename)"
+        if let url = data.saveToFolder(Utility.tempDirURL, filename: subFilename) {
+          callback(.ok([url]))
+        }
+      }
+    } else {
+      callback(.failed)
+      return
     }
   }
 
@@ -135,7 +170,7 @@ class AssrtSupport {
     }
   }
 
-  func showSubSelectWindow(subs: [AssrtSubtitle]) -> Promise<[AssrtSubtitle]> {
+  func showSubSelectWindow(with subs: [AssrtSubtitle]) -> Promise<[AssrtSubtitle]> {
     return Promise { fulfill, reject in
       // return when found 0 or 1 sub
       if subs.count <= 1 {
@@ -152,6 +187,45 @@ class AssrtSupport {
       }
       PlayerCore.active.sendOSD(.foundSub(subs.count), autoHide: false, accessoryView: subChooseViewController.view)
       subChooseViewController.tableView.reloadData()
+    }
+  }
+
+  func loadDetails(forSub sub: AssrtSubtitle) -> Promise<AssrtSubtitle> {
+    return Promise { fulfill, reject in
+      Just.post(detailApi, params: ["id": sub.id], headers: header) { result in
+        guard let json = result.jsonIgnoringError as? [String: Any] else {
+          reject(AssrtError.networkError)
+          return
+        }
+        guard let status = json["status"] as? Int else {
+          reject(AssrtError.wrongResponseFormat)
+          return
+        }
+        if let error = AssrtError(rawValue: status) {
+          reject(error)
+          return
+        }
+        guard let subDict = json["sub"] as? [String: Any] else {
+          reject(AssrtError.wrongResponseFormat)
+          return
+        }
+        guard let subArray = subDict["subs"] as? [[String: Any]], subArray.count == 1 else {
+          reject(AssrtError.wrongResponseFormat)
+          return
+        }
+
+        sub.url = URL(string: subArray[0]["url"] as! String)
+        sub.filename = subArray[0]["filename"] as? String
+
+        if let fileList = subArray[0]["filelist"] as? [[String: String]] {
+          sub.fileList = fileList.map { info in
+            AssrtSubtitle.File(url: URL(string: info["url"]!)!,
+                               filename: info["f"]!)
+          }
+        }
+
+        fulfill(sub)
+      }
     }
   }
 

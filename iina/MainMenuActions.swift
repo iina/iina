@@ -303,10 +303,14 @@ extension MainMenuActionHandler {
       for sub in subtitles {
         sub.download { result in
           switch result {
-          case .ok(let url):
-            Utility.log("Saved subtitle to \(url.path)")
-            self.player.loadExternalSubFile(url)
-            self.player.sendOSD(.downloadedSub(url.lastPathComponent))
+          case .ok(let urls):
+            for url in urls {
+              Utility.log("Saved subtitle to \(url.path)")
+              self.player.loadExternalSubFile(url)
+            }
+            self.player.sendOSD(.downloadedSub(
+              urls.map({ $0.lastPathComponent }).joined(separator: "\n")
+            ))
             self.player.info.haveDownloadedSub = true
           case .failed:
             self.player.sendOSD(.networkError)

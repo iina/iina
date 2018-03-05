@@ -351,9 +351,9 @@ class Utility {
     // check exist
     if !FileManager.default.fileExists(atPath: path) {
       do {
-      try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false, attributes: nil)
+      try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
       } catch {
-        Utility.fatal("Cannot create folder in Application Support directory")
+        Utility.fatal("Cannot create directory: \(url)")
       }
     }
   }

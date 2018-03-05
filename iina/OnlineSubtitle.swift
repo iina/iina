@@ -44,7 +44,7 @@ class OnlineSubtitle: NSObject {
     self.index = index
   }
 
-  static func getSub(forFile url: URL, from userSource: Source? = nil, playerCore: PlayerCore, callback: @escaping SubCallback) {
+  static func getSubtitle(forFile url: URL, from userSource: Source? = nil, playerCore: PlayerCore, callback: @escaping SubCallback) {
 
     var source: Source
 

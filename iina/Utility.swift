@@ -408,9 +408,14 @@ class Utility {
   }()
 
   static let thumbnailCacheURL: URL = {
-    let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)
-    createDirIfNotExist(url: url)
-    return url
+    // get path
+    let cachesPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
+    Utility.assert(cachesPath.count >= 1, "Cannot get path to Caches directory")
+    let bundleID = Bundle.main.bundleIdentifier!
+    let appCachesUrl = cachesPath.first!.appendingPathComponent(bundleID, isDirectory: true)
+    let appThumbnailCacheUrl = appCachesUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)
+    createDirIfNotExist(url: appThumbnailCacheUrl)
+    return appThumbnailCacheUrl
   }()
 
   static let playbackHistoryURL: URL = {

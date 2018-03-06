@@ -291,6 +291,7 @@
                     </visualEffectView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="g0O-v5-RQj" secondAttribute="bottom" constant="8" id="0pt-vB-Ycm"/>
                     <constraint firstAttribute="trailing" secondItem="DFb-1L-U9o" secondAttribute="trailing" id="3qV-vK-qlg"/>
                     <constraint firstItem="OiF-pA-8Sd" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" placeholder="YES" id="9z2-rX-b7C"/>
                     <constraint firstAttribute="trailing" secondItem="Tdb-EA-alw" secondAttribute="trailing" id="Mqd-Wb-vqq"/>

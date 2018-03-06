@@ -1627,6 +1627,7 @@
 			buildConfigurationList = 84EB1EF91D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "iina" */;
 			buildPhases = (
 				36C8205F8EFBC756D3D0BD69 /* [CP] Check Pods Manifest.lock */,
+				E364D521203F339A0066215D /* Check Localizable.strings */,
 				84EB1ED21D2F51D3004FA5A1 /* Sources */,
 				84EB1ED31D2F51D3004FA5A1 /* Frameworks */,
 				84EB1ED41D2F51D3004FA5A1 /* Resources */,
@@ -1845,6 +1846,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iina/Pods-iina-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E364D521203F339A0066215D /* Check Localizable.strings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Localizable.strings";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = $PROJECT_DIR/other/check_localizable.swift;
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

@@ -20,15 +20,16 @@ final class AssrtSubtitle: OnlineSubtitle {
   @objc var id: Int
   @objc var nativeName: String
   @objc var uploadTime: String
-
   @objc var subType: String
+
+  @objc var subLang: String?
   @objc var title: String?
   @objc var filename: String?
   @objc var size: String?
   @objc var url: URL?
   var fileList: [File]?
 
-  init(index: Int, id: Int, nativeName: String, uploadTime: String, subType: String?) {
+  init(index: Int, id: Int, nativeName: String, uploadTime: String, subType: String?, subLang: String?) {
     self.id = id
     self.nativeName = nativeName
     if self.nativeName.isEmpty {
@@ -40,6 +41,7 @@ final class AssrtSubtitle: OnlineSubtitle {
     } else {
       self.subType = "Unknown"
     }
+    self.subLang = subLang
     super.init(index: index)
   }
 
@@ -185,11 +187,16 @@ class AssrtSupport {
         var subtitles: [AssrtSubtitle] = []
         var index = 0
         for sub in subArray {
+          var subLang: String? = nil
+          if let lang = sub["lang"] as? [String: Any], let desc = lang["desc"] as? String {
+            subLang = desc
+          }
           subtitles.append(AssrtSubtitle(index: index,
                                          id: sub["id"] as! Int,
                                          nativeName: sub["native_name"] as! String,
                                          uploadTime: sub["upload_time"] as! String,
-                                         subType: sub["subtype"] as? String))
+                                         subType: sub["subtype"] as? String,
+                                         subLang: subLang))
           index += 1
         }
         fulfill(subtitles)

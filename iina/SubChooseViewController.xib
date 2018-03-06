@@ -174,12 +174,25 @@
                                                             <binding destination="fwD-VW-Fio" name="value" keyPath="objectValue.nativeName" id="dVv-IY-Yme"/>
                                                         </connections>
                                                     </textField>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D4V-pD-Cc1">
+                                                        <rect key="frame" x="23" y="20" width="28" height="11"/>
+                                                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="h4M-vo-VLI">
+                                                            <font key="font" metaFont="miniSystem"/>
+                                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                        <connections>
+                                                            <binding destination="fwD-VW-Fio" name="value" keyPath="objectValue.subLang" id="Uei-13-kC5"/>
+                                                        </connections>
+                                                    </textField>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="lCf-qb-VJN" firstAttribute="top" secondItem="fwD-VW-Fio" secondAttribute="top" constant="4" id="2iX-gj-TmL"/>
+                                                    <constraint firstItem="D4V-pD-Cc1" firstAttribute="leading" secondItem="hVc-Nb-4ba" secondAttribute="trailing" constant="8" id="Qm8-xE-TyL"/>
                                                     <constraint firstAttribute="bottom" secondItem="dVi-md-2zd" secondAttribute="bottom" constant="4" id="V4Q-1V-GuL"/>
                                                     <constraint firstItem="dVi-md-2zd" firstAttribute="top" secondItem="hVc-Nb-4ba" secondAttribute="bottom" constant="2" id="WO9-Kb-kOe"/>
                                                     <constraint firstAttribute="trailing" secondItem="dVi-md-2zd" secondAttribute="trailing" constant="4" id="b2p-8c-2uB"/>
+                                                    <constraint firstItem="D4V-pD-Cc1" firstAttribute="baseline" secondItem="hVc-Nb-4ba" secondAttribute="baseline" id="cAB-Sa-eNa"/>
                                                     <constraint firstItem="dVi-md-2zd" firstAttribute="leading" secondItem="fwD-VW-Fio" secondAttribute="leading" constant="4" id="fhk-1R-dha"/>
                                                     <constraint firstItem="hVc-Nb-4ba" firstAttribute="top" secondItem="fwD-VW-Fio" secondAttribute="top" constant="4" id="gXK-tO-xQu"/>
                                                     <constraint firstItem="hVc-Nb-4ba" firstAttribute="leading" secondItem="fwD-VW-Fio" secondAttribute="leading" constant="4" id="lef-ak-9V5"/>

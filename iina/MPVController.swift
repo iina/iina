@@ -252,6 +252,12 @@ class MPVController: NSObject {
 
     setUserOption(PK.subScaleWithWindow, type: .bool, forName: MPVOption.Subtitles.subScaleByWindow)
 
+    setUserOption(PK.subShowOnlyWhilePaused, type: .other, forName: MPVOption.Subtitles.subVisibility) { key in
+      let v = Preference.bool(for: key)
+      let paused = self.player.info.isPaused
+      return v && !paused ? no_str : yes_str
+    }
+
     // - Network / cache settings
 
     setUserOption(PK.enableCache, type: .other, forName: MPVOption.Cache.cache) { key in
@@ -675,6 +681,9 @@ class MPVController: NSObject {
 
     case MPVOption.PlaybackControl.pause:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
+        if Preference.bool(for: .subShowOnlyWhilePaused) {
+          player.setSubVisibility(data)
+        }
         if player.info.isPaused != data {
           player.sendOSD(data ? .pause : .resume)
           player.info.isPaused = data

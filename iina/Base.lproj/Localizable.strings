@@ -27,6 +27,14 @@
 "quicksetting.item_default" = "Default";
 "quicksetting.item_none" = "None";
 
+"quicksetting.sub.syncButton.idle" = "Synchronize";
+"quicksetting.sub.syncButton.presync" = "Step 1: Video sync point";
+"quicksetting.sub.syncButton.sync" = "Step 2: Subtiles sync point";
+
+"quicksetting.audio.syncButton.idle" = "Synchronize";
+"quicksetting.audio.syncButton.presync" = "Step 1: Video sync point";
+"quicksetting.audio.syncButton.sync" = "Step 2: Audio sync point";
+
 // OSDMessage.swift
 "osd.pause" = "Pause";
 "osd.resume" = "Resume";

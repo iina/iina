@@ -490,7 +490,7 @@ extension NSTextField {
     let font = self.font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
     let color = self.textColor ?? NSColor.labelColor
     let style = String(format: "<style>body{font-family: '%@'; font-size:%fpx;}</style>", font.fontName, font.pointSize)
-    if let data = (style + html).data(using: .utf8), let string = NSMutableAttributedString(html: data, options: [:], documentAttributes: nil) {
+    if let data = (style + html).data(using: .utf8), let string = NSMutableAttributedString(html: data, options: [.textEncodingName: "utf8"], documentAttributes: nil) {
       string.enumerateAttributes(in: NSMakeRange(0, string.length) , options: []) { attrs, range, _ in
         if attrs[.link] == nil {
           string.setAttributes([.foregroundColor: color], range: range)

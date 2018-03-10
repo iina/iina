@@ -231,6 +231,13 @@
 
 "subencoding.auto" = "Auto detect";
 
+"osc_toolbar.settings" = "Quick Settings";
+"osc_toolbar.playlist" = "Playlist and chapters";
+"osc_toolbar.pip" = "Toggle Picture-in-Picture";
+"osc_toolbar.full_screen" = "Toggle full screen";
+"osc_toolbar.music_mode" = "Enter music mode";
+"osc_toolbar.sub_track" = "Choose subtitle track";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15sec Ahead";

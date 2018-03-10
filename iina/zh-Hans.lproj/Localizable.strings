@@ -8,8 +8,8 @@
 "alert.assrt_register.register" = "去射手网(伪)注册";
 "alert.assrt_register.try" = "先试用一下";
 "alert.assrt_token_invalid" = "你的射手网(伪) API token 格式错误。";
-"alert.assrt_token_prompt.title" = "输入你在射手网(伪)的 API token";
 "alert.assrt_token_prompt.message" = "请在弹出的网页中注册帐号，然后进入用户首页查看 API token 并在下方输入:";
+"alert.assrt_token_prompt.title" = "输入你在射手网(伪)的 API token";
 "alert.beta_channel.message" = "在发布 IINA 1.0 之前，你愿意帮助我们测试 beta 版本吗？\n\n你可以在「偏好设置-通用」中随时修改此行为。";
 "alert.beta_channel.title" = "接受 beta 版本的更新";
 "alert.choose_media_file.title" = "选择媒体文件";
@@ -106,6 +106,12 @@
 "menu.volume" = "音量: %d";
 "menu.volume_down" = "音量 - %.0f%%";
 "menu.volume_up" = "音量 + %.0f%%";
+"osc_toolbar.full_screen" = "切换全屏";
+"osc_toolbar.music_mode" = "进入音乐模式";
+"osc_toolbar.pip" = "切换「画中画」模式";
+"osc_toolbar.playlist" = "播放列表和章节";
+"osc_toolbar.settings" = "快速设置";
+"osc_toolbar.sub_track" = "选择字幕轨道";
 "osd.abloop.a" = "AB循环：A";
 "osd.abloop.b" = "AB循环：B";
 "osd.abloop.clear" = "AB循环：清除";

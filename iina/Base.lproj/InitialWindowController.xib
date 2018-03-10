@@ -23,7 +23,7 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" frameAutosaveName="IINAWelcomeWindow" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="931" y="455" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO" customClass="InitialWindowContentView" customModule="IINA" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -281,11 +281,11 @@
             </connections>
         </popover>
         <customView id="eOd-9p-Doi">
-            <rect key="frame" x="0.0" y="0.0" width="318" height="211"/>
+            <rect key="frame" x="0.0" y="0.0" width="318" height="215"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JeM-En-IT9">
-                    <rect key="frame" x="10" y="182" width="232" height="17"/>
+                    <rect key="frame" x="10" y="186" width="232" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You are using a beta version of IINA" id="H7D-2H-wQn">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -338,7 +338,7 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JeM-En-IT9" secondAttribute="trailing" constant="12" id="dfG-Eq-CxM"/>
                 <constraint firstItem="x0E-Rq-FzQ" firstAttribute="leading" secondItem="eOd-9p-Doi" secondAttribute="leading" constant="12" id="gGd-bD-g13"/>
                 <constraint firstAttribute="bottom" secondItem="J6H-Zq-l1r" secondAttribute="bottom" constant="12" id="ldh-4r-Apj"/>
-                <constraint firstItem="x0E-Rq-FzQ" firstAttribute="top" secondItem="JeM-En-IT9" secondAttribute="bottom" constant="8" id="mdC-nG-JPh"/>
+                <constraint firstItem="x0E-Rq-FzQ" firstAttribute="top" secondItem="JeM-En-IT9" secondAttribute="bottom" constant="12" id="mdC-nG-JPh"/>
                 <constraint firstAttribute="trailing" secondItem="bfI-Zo-NmI" secondAttribute="trailing" constant="12" id="pMt-Y6-W4r"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oJG-p5-OcL" secondAttribute="trailing" constant="12" id="rPR-0o-Jkw"/>
                 <constraint firstItem="JeM-En-IT9" firstAttribute="top" secondItem="eOd-9p-Doi" secondAttribute="top" constant="12" id="sl1-Fu-eSl"/>

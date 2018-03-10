@@ -44,7 +44,7 @@ final class OpenSubSubtitle: OnlineSubtitle {
       }
       let subFilename = "[\(self.index)]\(self.filename)"
       if let url = unzipped.saveToFolder(Utility.tempDirURL, filename: subFilename) {
-        callback(.ok(url))
+        callback(.ok([url]))
       }
     }
   }
@@ -91,6 +91,8 @@ class OpenSubSupport {
   private let apiPath = "https://api.opensubtitles.org:443/xml-rpc"
   private static let serviceName: NSString = "IINA OpenSubtitles Account"
   private let xmlRpc: JustXMLRPC
+
+  private let subChooseViewController = SubChooseViewController(source: .openSub)
 
   var language: String
   var username: String = ""
@@ -246,25 +248,23 @@ class OpenSubSupport {
     }
   }
 
-  func showSubSelectWindow(subs: [OpenSubSubtitle]) -> Promise<[OpenSubSubtitle]> {
+  func showSubSelectWindow(with subs: [OpenSubSubtitle]) -> Promise<[OpenSubSubtitle]> {
     return Promise { fulfill, reject in
       // return when found 0 or 1 sub
       if subs.count <= 1 {
         fulfill(subs)
         return
       }
-      let subSelectWindow = (NSApp.delegate as! AppDelegate).subSelectWindow
-      subSelectWindow.whenUserAction = { subs in
-        fulfill(subs)
+      subChooseViewController.subtitles = subs
+
+      subChooseViewController.userDoneAction = { subs in
+        fulfill(subs as! [OpenSubSubtitle])
       }
-      subSelectWindow.whenUserClosed = {
+      subChooseViewController.userCanceledAction = {
         reject(OpenSubError.userCanceled)
       }
-      DispatchQueue.main.async {
-        subSelectWindow.showWindow(self)
-        subSelectWindow.arrayController.content = nil
-        subSelectWindow.arrayController.add(contentsOf: subs)
-      }
+      PlayerCore.active.sendOSD(.foundSub(subs.count), autoHide: false, accessoryView: subChooseViewController.view)
+      subChooseViewController.tableView.reloadData()
     }
   }
 

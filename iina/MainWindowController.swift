@@ -164,6 +164,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** For force touch action */
   var isCurrentPressInSecondStage = false
 
+  /** Whether current osd needs user interaction to be dismissed */
+  var isShowingPersistentOSD = false
+
   // MARK: - Enums
 
   // Animation state
@@ -1563,8 +1566,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - UI: OSD
 
-  func displayOSD(_ message: OSDMessage) {
-    if !player.displayOSD { return }
+  func displayOSD(_ message: OSDMessage, autoHide: Bool = true, accessoryView: NSView? = nil) {
+    guard player.displayOSD && !isShowingPersistentOSD else { return }
 
     if hideOSDTimer != nil {
       hideOSDTimer!.invalidate()
@@ -1609,11 +1612,42 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     osdVisualEffectView.alphaValue = 1
     osdVisualEffectView.isHidden = false
-    let timeout = Preference.float(for: .osdAutoHideTimeout)
-    hideOSDTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideOSD), userInfo: nil, repeats: false)
+    osdVisualEffectView.layoutSubtreeIfNeeded()
+
+    osdStackView.views(in: .bottom).forEach {
+      osdStackView.removeView($0)
+    }
+    if let accessoryView = accessoryView {
+      isShowingPersistentOSD = true
+      
+      accessoryView.appearance = NSAppearance(named: .vibrantDark)
+      let heightConstraint = NSLayoutConstraint(item: accessoryView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300)
+      heightConstraint.priority = .defaultLow
+      heightConstraint.isActive = true
+
+      osdStackView.addView(accessoryView, in: .bottom)
+      Utility.quickConstraints(["H:|-0-[v(>=240)]-0-|"], ["v": accessoryView])
+
+      accessoryView.wantsLayer = true
+      accessoryView.layer?.opacity = 0
+
+      NSAnimationContext.runAnimationGroup({ context in
+        context.duration = 0.3
+        context.allowsImplicitAnimation = true
+        osdVisualEffectView.layoutSubtreeIfNeeded()
+      }, completionHandler: {
+        accessoryView.layer?.opacity = 1
+      })
+    }
+
+    if autoHide {
+      let timeout = Preference.float(for: .osdAutoHideTimeout)
+      hideOSDTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideOSD), userInfo: nil, repeats: false)
+    }
   }
 
-  @objc private func hideOSD() {
+  @objc
+  func hideOSD() {
     NSAnimationContext.runAnimationGroup({ (context) in
       self.osdAnimationState = .willHide
       context.duration = OSDAnimationDuration
@@ -1623,6 +1657,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         self.osdAnimationState = .hidden
       }
     }
+    isShowingPersistentOSD = false
   }
 
   // MARK: - UI: Side bar

@@ -4,6 +4,12 @@
 "alert.add_filter.title" = "添加滤镜";
 "alert.add_watch.message" = "请输入一个有效的 mpv 属性名。";
 "alert.add_watch.title" = "监视 mpv 属性";
+"alert.assrt_register" = "由于射手网(伪)的 API 请求数量限制，请务必在射手网（伪）注册账户后使用自己的 API token。自带 API token 仅用于测试用途，并且可能由于 API 使用超出限额而请求失败。";
+"alert.assrt_register.register" = "去射手网(伪)注册";
+"alert.assrt_register.try" = "先试用一下";
+"alert.assrt_token_invalid" = "你的射手网(伪) API token 格式错误。";
+"alert.assrt_token_prompt.title" = "输入你在射手网(伪)的 API token";
+"alert.assrt_token_prompt.message" = "请在弹出的网页中注册帐号，然后进入用户首页查看 API token 并在下方输入:";
 "alert.beta_channel.message" = "在发布 IINA 1.0 之前，你愿意帮助我们测试 beta 版本吗？\n\n你可以在「偏好设置-通用」中随时修改此行为。";
 "alert.beta_channel.title" = "接受 beta 版本的更新";
 "alert.choose_media_file.title" = "选择媒体文件";

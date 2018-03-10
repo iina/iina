@@ -53,11 +53,12 @@ class InitialWindowController: NSWindowController {
     appIcon.image = NSApp.applicationIconImage
 
     let (version, build) = Utility.iinaVersion()
-    versionLabel.stringValue = "\(version) Build \(build)"
+    let isStableRelease = !version.contains("-")
+    versionLabel.stringValue = isStableRelease ? version : "\(version) (\(build))"
+    betaIndicatorView.isHidden = isStableRelease
 
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
-    
 
     if #available(OSX 10.11, *) {
       visualEffectView.material = .ultraDark

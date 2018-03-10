@@ -241,7 +241,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
       // dragging available item in; don't accept existing items
       if let rawButtonType = sender.draggingPasteboard().propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
         let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
-        dragDestIndex >= 0, dragDestIndex < views.count {
+        dragDestIndex >= 0, dragDestIndex <= views.count {
         let item = PrefOSCToolbarCurrentItem(buttonType: buttonType)
         item.image = buttonType.image()
         Utility.quickConstraints(["H:[btn(24)]", "V:[btn(24)]"], ["btn": item])

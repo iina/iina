@@ -76,6 +76,7 @@ class OnlineSubtitle: NSObject {
         default:
           osdMessage = .networkError
           playerCore.sendOSD(osdMessage)
+          playerCore.isSearchingOnlineSubtitle = false
         }
       }.always {
         playerCore.hideOSD()
@@ -119,6 +120,7 @@ class OnlineSubtitle: NSObject {
           osdMessage = .networkError
         }
         playerCore.sendOSD(osdMessage)
+        playerCore.isSearchingOnlineSubtitle = false
       }.always {
         playerCore.hideOSD()
       }
@@ -145,6 +147,7 @@ class OnlineSubtitle: NSObject {
           osdMessage = .networkError
         }
         playerCore.sendOSD(osdMessage)
+        playerCore.isSearchingOnlineSubtitle = false
       }.always {
         playerCore.hideOSD()
       }

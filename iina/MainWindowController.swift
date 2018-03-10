@@ -1714,12 +1714,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       osdStackView.addView(accessoryView, in: .bottom)
       Utility.quickConstraints(["H:|-0-[v(>=240)]-0-|"], ["v": accessoryView])
 
+      // enlarge window if too small
+      let winFrame = window!.frame
+      var newFrame = winFrame
+      if (winFrame.height < 300) {
+        newFrame = winFrame.centeredResize(to: winFrame.size.satisfyMinSizeWithSameAspectRatio(NSSize(width: 500, height: 300)))
+      }
+
       accessoryView.wantsLayer = true
       accessoryView.layer?.opacity = 0
 
       NSAnimationContext.runAnimationGroup({ context in
         context.duration = 0.3
         context.allowsImplicitAnimation = true
+        window!.setFrame(newFrame, display: true)
         osdVisualEffectView.layoutSubtreeIfNeeded()
       }, completionHandler: {
         accessoryView.layer?.opacity = 1

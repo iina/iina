@@ -588,14 +588,16 @@ struct Preference {
     }
 
     func description() -> String {
+      let key: String
       switch self {
-      case .settings: return "Quick settings"
-      case .playlist: return "Playlist and chapters"
-      case .pip: return "Toggle Picture-in-Picture"
-      case .fullScreen: return "Toggle full screen"
-      case .musicMode: return "Enter music mode"
-      case .subTrack: return "Choose subtitle track"
+      case .settings: key = "settings"
+      case .playlist: key = "playlist"
+      case .pip: key = "pip"
+      case .fullScreen: key = "full_screen"
+      case .musicMode: key = "music_mode"
+      case .subTrack: key = "sub_track"
       }
+      return NSLocalizedString("osc_toolbar.\(key)", comment: key)
     }
   }
 

@@ -161,6 +161,7 @@ struct Preference {
     static let subItalic = Key("subItalic")
     static let subBlur = Key("subBlur")
     static let subSpacing = Key("subSpacing")
+    static let subLineSpacing = Key("subLineSpacing")
     static let subBorderSize = Key("subBorderSize")
     static let subBorderColor = Key("subBorderColor")
     static let subShadowSize = Key("subShadowSize")
@@ -675,6 +676,7 @@ struct Preference {
     .subItalic: false,
     .subBlur: Float(0),
     .subSpacing: Float(0),
+    .subLineSpacing: Float(0),
     .subBorderSize: Float(3),
     .subBorderColor: NSArchiver.archivedData(withRootObject: NSColor.black),
     .subShadowSize: Float(0),

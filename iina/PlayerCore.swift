@@ -130,6 +130,8 @@ class PlayerCore: NSObject {
   var switchedBackFromMiniPlayerManually = false
 
   var isSearchingOnlineSubtitle = false
+  var isFloatingPlaylist = false
+  var playlistWindow: NSWindow?
 
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
@@ -406,6 +408,63 @@ class PlayerCore: NSObject {
     }
     isInMiniPlayer = false
     mainWindow.updateTitle()
+  }
+
+  func enableFloatingPlaylist() {
+    // get playlist view reference
+    let playlistView = mainWindow.playlistView.view
+
+    // reset down shift for playlistView
+    mainWindow.playlistView.downShift = 22
+
+    // hide sidebar
+    if mainWindow.sideBarStatus != .hidden {
+      mainWindow.hideSideBar(animate: false)
+    }
+  
+    // create window
+    let rect = NSMakeRect(0, 0, playlistView.bounds.width, playlistView.bounds.height)
+    playlistWindow = PlaylistWindow(contentRect: rect)
+
+    // create wrapper view
+    let wrapperView = NSVisualEffectView(frame: rect)
+    wrapperView.material = .dark
+    wrapperView.blendingMode = .behindWindow
+    wrapperView.state = .active
+    playlistWindow?.contentView = wrapperView
+
+    // move playlist view to wrapper view
+    playlistView.removeFromSuperview()
+    wrapperView.addSubview(playlistView)
+
+    // update playlist view constraints
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": playlistView])
+
+    isFloatingPlaylist = true
+  }
+
+  func disableFloatingPlaylist() {
+    // get playlist view reference
+    let playlistView = mainWindow.playlistView.view
+
+    // remove playlist view
+    playlistView.removeFromSuperview()
+
+    // hide window
+    playlistWindow?.orderOut(self)
+
+    // show sidebar
+    mainWindow.playlistButtonAction(self)
+
+    isFloatingPlaylist = false
+  }
+
+  func toggleFloatingPlaylist() {
+    if (isFloatingPlaylist) {
+      disableFloatingPlaylist()
+    } else {
+      enableFloatingPlaylist()
+    }
   }
 
   // MARK: - MPV commands
@@ -1203,14 +1262,14 @@ class PlayerCore: NSObject {
     case .chapterList:
       DispatchQueue.main.async {
         // this should avoid sending reload when table view is not ready
-        if self.isInMiniPlayer ? self.miniPlayer.isPlaylistVisible : self.mainWindow.sideBarStatus == .playlist {
+        if self.isInMiniPlayer ? self.miniPlayer.isPlaylistVisible : self.mainWindow.sideBarStatus == .playlist || self.isFloatingPlaylist {
           self.mainWindow.playlistView.chapterTableView.reloadData()
         }
       }
 
     case .playlist:
       DispatchQueue.main.async {
-        if self.isInMiniPlayer ? self.miniPlayer.isPlaylistVisible : self.mainWindow.sideBarStatus == .playlist {
+        if self.isInMiniPlayer ? self.miniPlayer.isPlaylistVisible : self.mainWindow.sideBarStatus == .playlist || self.isFloatingPlaylist {
           self.mainWindow.playlistView.playlistTableView.reloadData()
         }
       }

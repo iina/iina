@@ -304,6 +304,9 @@
                             <menuItem title="Show Playlist Panel" id="0T7-Nu-SL7">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
+                            <menuItem title="Floating Playlist" id="FYt-JL-X1a">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem title="Playlist Loop" id="aSc-P6-fiZ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
@@ -694,6 +697,7 @@
                 <outlet property="fitToScreen" destination="SHd-63-Xoh" id="nzE-bA-wmk"/>
                 <outlet property="flip" destination="OIu-H0-Mht" id="fYJ-Fq-hak"/>
                 <outlet property="flipMenu" destination="n90-to-nRT" id="Zpp-Q8-NiJ"/>
+                <outlet property="floatingPlaylist" destination="FYt-JL-X1a" id="JjK-BN-Ybi"/>
                 <outlet property="forward" destination="6yE-op-DTS" id="ruO-zd-BjG"/>
                 <outlet property="fullScreen" destination="6Eq-ni-6hG" id="y11-Q1-drn"/>
                 <outlet property="gotoScreenshotFolder" destination="lj0-Oo-7nB" id="Jlj-kX-fv0"/>

@@ -49,6 +49,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var tabHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var floatBtn: NSButton!
   @IBOutlet weak var deleteBtn: NSButton!
   @IBOutlet weak var loopBtn: NSButton!
   @IBOutlet weak var shuffleBtn: NSButton!
@@ -319,7 +320,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     player.toggleShuffle()
   }
 
-  
+  @IBAction func floatBtnAction(_ sender: AnyObject) {
+    player.toggleFloatingPlaylist()
+  }
+
   @objc func performDoubleAction(sender: AnyObject) {
     let tv = sender as! NSTableView
     if tv.numberOfSelectedRows > 0 {

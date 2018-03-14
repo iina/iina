@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="InitialWindowController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="appIcon" destination="nrn-G9-P2A" id="2hO-5g-HzS"/>
+                <outlet property="betaIndicatorView" destination="7SF-fn-3LF" id="uST-Lq-V3d"/>
+                <outlet property="betaPopover" destination="PNC-fD-zO6" id="thY-ub-wrI"/>
                 <outlet property="mainView" destination="Nb0-VN-ptD" id="VxT-6r-gb2"/>
                 <outlet property="recentFilesTableView" destination="VeK-rB-yjt" id="JGx-gh-DaC"/>
                 <outlet property="versionLabel" destination="0eM-hv-Q2Z" id="e5h-lT-TDr"/>
@@ -114,7 +116,7 @@
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn width="389" minWidth="40" maxWidth="1000" id="F4F-w2-NPf">
+                                                        <tableColumn identifier="" width="389" minWidth="40" maxWidth="1000" id="F4F-w2-NPf">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -196,6 +198,30 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7SF-fn-3LF" customClass="BetaIndicatorView" customModule="IINA" customModuleProvider="target">
+                                        <rect key="frame" x="67" y="147" width="44" height="18"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aUL-kg-QKC">
+                                                <rect key="frame" x="4" y="1" width="36" height="16"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BETA" id="g2g-dy-qBH">
+                                                    <font key="font" metaFont="systemBold" size="12"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="aUL-kg-QKC" firstAttribute="top" secondItem="7SF-fn-3LF" secondAttribute="top" constant="1" id="Eb1-F2-FXJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="aUL-kg-QKC" secondAttribute="trailing" constant="6" id="oSv-Lx-2jy"/>
+                                            <constraint firstAttribute="bottom" secondItem="aUL-kg-QKC" secondAttribute="bottom" constant="1" id="tZI-E3-SfQ"/>
+                                            <constraint firstItem="aUL-kg-QKC" firstAttribute="leading" secondItem="7SF-fn-3LF" secondAttribute="leading" constant="6" id="vl2-LH-gVe"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="betaPopover" destination="PNC-fD-zO6" id="Yxv-YS-O92"/>
+                                            <outlet property="text1" destination="bfI-Zo-NmI" id="TCc-2g-O5Z"/>
+                                            <outlet property="text2" destination="J6H-Zq-l1r" id="eLL-LH-Gh4"/>
+                                        </connections>
+                                    </customView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="8hV-gP-tZA" firstAttribute="top" secondItem="nrn-G9-P2A" secondAttribute="bottom" constant="20" id="1Oa-0T-iZV"/>
@@ -203,12 +229,14 @@
                                     <constraint firstAttribute="trailing" secondItem="ZGi-N7-Zv2" secondAttribute="trailing" constant="44" id="9ed-4L-5h2"/>
                                     <constraint firstAttribute="trailing" secondItem="hmC-XZ-bFe" secondAttribute="trailing" constant="44" id="B9z-QH-RTT"/>
                                     <constraint firstItem="hmC-XZ-bFe" firstAttribute="leading" secondItem="ZGi-N7-Zv2" secondAttribute="leading" id="Hpy-gh-hYn"/>
+                                    <constraint firstItem="7SF-fn-3LF" firstAttribute="centerX" secondItem="0eM-hv-Q2Z" secondAttribute="centerX" id="MbE-hX-CPC"/>
                                     <constraint firstItem="0eM-hv-Q2Z" firstAttribute="top" secondItem="8hV-gP-tZA" secondAttribute="bottom" constant="4" id="aNF-5h-ueC"/>
                                     <constraint firstItem="nrn-G9-P2A" firstAttribute="top" secondItem="qTo-HU-gie" secondAttribute="top" constant="32" id="aPX-ij-BCA"/>
                                     <constraint firstItem="ZGi-N7-Zv2" firstAttribute="top" secondItem="qTo-HU-gie" secondAttribute="top" constant="32" id="eTE-Jt-iHF"/>
                                     <constraint firstItem="igO-NN-NsX" firstAttribute="top" secondItem="hmC-XZ-bFe" secondAttribute="bottom" constant="20" id="fUG-aR-h0p"/>
                                     <constraint firstItem="hmC-XZ-bFe" firstAttribute="top" secondItem="ZGi-N7-Zv2" secondAttribute="bottom" id="k4E-iS-gKl"/>
                                     <constraint firstItem="igO-NN-NsX" firstAttribute="leading" secondItem="hmC-XZ-bFe" secondAttribute="leading" id="lBk-KQ-3rb"/>
+                                    <constraint firstItem="7SF-fn-3LF" firstAttribute="top" secondItem="0eM-hv-Q2Z" secondAttribute="bottom" constant="15" id="le2-KN-An9"/>
                                     <constraint firstItem="8hV-gP-tZA" firstAttribute="centerX" secondItem="nrn-G9-P2A" secondAttribute="centerX" id="nan-tF-2fo"/>
                                     <constraint firstItem="0eM-hv-Q2Z" firstAttribute="centerX" secondItem="nrn-G9-P2A" secondAttribute="centerX" id="nyF-1L-0hj"/>
                                     <constraint firstAttribute="bottom" secondItem="igO-NN-NsX" secondAttribute="bottom" constant="24" id="urt-LL-XJ1"/>
@@ -241,5 +269,83 @@
             </connections>
             <point key="canvasLocation" x="135" y="275"/>
         </window>
+        <viewController id="lbU-lU-KMm" userLabel="Popover View Controller">
+            <connections>
+                <outlet property="sourceItemView" destination="7SF-fn-3LF" id="b4w-oM-QTu"/>
+                <outlet property="view" destination="eOd-9p-Doi" id="But-47-H3K"/>
+            </connections>
+        </viewController>
+        <popover id="PNC-fD-zO6">
+            <connections>
+                <outlet property="contentViewController" destination="lbU-lU-KMm" id="ohp-zi-klj"/>
+            </connections>
+        </popover>
+        <customView id="eOd-9p-Doi">
+            <rect key="frame" x="0.0" y="0.0" width="318" height="215"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JeM-En-IT9">
+                    <rect key="frame" x="10" y="186" width="232" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You are using a beta version of IINA" id="H7D-2H-wQn">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="x0E-Rq-FzQ">
+                    <rect key="frame" x="10" y="157" width="109" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Want to rollback?" id="s3U-4u-gYp">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="bfI-Zo-NmI">
+                    <rect key="frame" x="10" y="97" width="298" height="56"/>
+                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" allowsEditingTextAttributes="YES" id="3aN-Hg-GkT">
+                        <font key="font" metaFont="smallSystem"/>
+                        <string key="title">Uncheck "receive beta updates" from Preferences - General, and install a stable release from our &lt;a href="https://lhc70000.github.io/iina/"&gt;official website&lt;/a&gt;.</string>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oJG-p5-OcL">
+                    <rect key="frame" x="10" y="72" width="87" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Found a bug?" id="I6R-Jl-2Jk">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="J6H-Zq-l1r">
+                    <rect key="frame" x="10" y="12" width="298" height="56"/>
+                    <textFieldCell key="cell" controlSize="small" selectable="YES" sendsActionOnEndEditing="YES" allowsEditingTextAttributes="YES" id="BIz-NQ-0qD">
+                        <font key="font" metaFont="smallSystem"/>
+                        <string key="title">Report to us via &lt;a href="mailto:developers@iina.io"&gt;email&lt;/a&gt; or &lt;a href="https://github.com/lhc70000/iina/issues"&gt;GitHub issue&lt;/a&gt;.</string>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="JeM-En-IT9" firstAttribute="leading" secondItem="eOd-9p-Doi" secondAttribute="leading" constant="12" id="AY4-Km-u1t"/>
+                <constraint firstItem="bfI-Zo-NmI" firstAttribute="top" secondItem="x0E-Rq-FzQ" secondAttribute="bottom" constant="4" id="IaP-C3-eUq"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="x0E-Rq-FzQ" secondAttribute="trailing" constant="12" id="Ld7-Q1-O3h"/>
+                <constraint firstItem="oJG-p5-OcL" firstAttribute="top" secondItem="bfI-Zo-NmI" secondAttribute="bottom" constant="8" id="OKZ-Do-iv6"/>
+                <constraint firstAttribute="trailing" secondItem="J6H-Zq-l1r" secondAttribute="trailing" constant="12" id="X3n-7S-kpI"/>
+                <constraint firstItem="oJG-p5-OcL" firstAttribute="leading" secondItem="eOd-9p-Doi" secondAttribute="leading" constant="12" id="amp-nD-I6M"/>
+                <constraint firstItem="J6H-Zq-l1r" firstAttribute="leading" secondItem="eOd-9p-Doi" secondAttribute="leading" constant="12" id="bbx-Q0-icq"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JeM-En-IT9" secondAttribute="trailing" constant="12" id="dfG-Eq-CxM"/>
+                <constraint firstItem="x0E-Rq-FzQ" firstAttribute="leading" secondItem="eOd-9p-Doi" secondAttribute="leading" constant="12" id="gGd-bD-g13"/>
+                <constraint firstAttribute="bottom" secondItem="J6H-Zq-l1r" secondAttribute="bottom" constant="12" id="ldh-4r-Apj"/>
+                <constraint firstItem="x0E-Rq-FzQ" firstAttribute="top" secondItem="JeM-En-IT9" secondAttribute="bottom" constant="12" id="mdC-nG-JPh"/>
+                <constraint firstAttribute="trailing" secondItem="bfI-Zo-NmI" secondAttribute="trailing" constant="12" id="pMt-Y6-W4r"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oJG-p5-OcL" secondAttribute="trailing" constant="12" id="rPR-0o-Jkw"/>
+                <constraint firstItem="JeM-En-IT9" firstAttribute="top" secondItem="eOd-9p-Doi" secondAttribute="top" constant="12" id="sl1-Fu-eSl"/>
+                <constraint firstItem="J6H-Zq-l1r" firstAttribute="top" secondItem="oJG-p5-OcL" secondAttribute="bottom" constant="4" id="zW7-GS-fBm"/>
+                <constraint firstItem="bfI-Zo-NmI" firstAttribute="leading" secondItem="eOd-9p-Doi" secondAttribute="leading" constant="12" id="zWg-IR-ee3"/>
+            </constraints>
+            <point key="canvasLocation" x="200" y="635"/>
+        </customView>
     </objects>
 </document>

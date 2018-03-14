@@ -2630,6 +2630,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /// Legacy IBAction, but still in use.
   func playlistButtonAction(_ sender: AnyObject) {
+    if player.isFloatingPlaylist {
+      player.disableFloatingPlaylist()
+    }
     if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
       return  // do not interrput other actions while it is animating
     }

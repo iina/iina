@@ -42,8 +42,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   var currentTab: TabViewType = .playlist
 
-  @IBOutlet weak var playlistTableView: NSTableView!
-  @IBOutlet weak var chapterTableView: NSTableView!
+  @IBOutlet weak var playlistTableView: DraggableTableView!
+  @IBOutlet weak var chapterTableView: DraggableTableView!
   @IBOutlet weak var playlistBtn: NSButton!
   @IBOutlet weak var chaptersBtn: NSButton!
   @IBOutlet weak var tabView: NSTabView!

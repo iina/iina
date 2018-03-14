@@ -130,6 +130,7 @@ class PlayerCore: NSObject {
   var switchedBackFromMiniPlayerManually = false
 
   var isSearchingOnlineSubtitle = false
+
   var isFloatingPlaylist = false
   var playlistWindow: NSWindow?
 
@@ -421,50 +422,49 @@ class PlayerCore: NSObject {
     if mainWindow.sideBarStatus != .hidden {
       mainWindow.hideSideBar(animate: false)
     }
-  
+
     // create window
-    let rect = NSMakeRect(0, 0, playlistView.bounds.width, playlistView.bounds.height)
-    playlistWindow = PlaylistWindow(contentRect: rect)
+    let window = PlaylistWindow(playlistView: playlistView)
 
-    // create wrapper view
-    let wrapperView = NSVisualEffectView(frame: rect)
-    wrapperView.material = .dark
-    wrapperView.blendingMode = .behindWindow
-    wrapperView.state = .active
-    playlistWindow?.contentView = wrapperView
-
-    // move playlist view to wrapper view
+    // move playlist view to window
     playlistView.removeFromSuperview()
-    wrapperView.addSubview(playlistView)
+    window.contentView?.addSubview(playlistView)
 
     // update playlist view constraints
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": playlistView])
 
-    isFloatingPlaylist = true
+    // persist window
+    self.playlistWindow = window
+
+    // update state
+    self.isFloatingPlaylist = true
+  
+    Utility.log("Floating Playlist enabled.")
   }
 
   func disableFloatingPlaylist() {
-    // get playlist view reference
-    let playlistView = mainWindow.playlistView.view
+    // remove window
+    self.playlistWindow?.orderOut(self)
+    self.playlistWindow = nil
 
-    // remove playlist view
-    playlistView.removeFromSuperview()
+    // update state
+    self.isFloatingPlaylist = false
 
-    // hide window
-    playlistWindow?.orderOut(self)
-
-    // show sidebar
-    mainWindow.playlistButtonAction(self)
-
-    isFloatingPlaylist = false
+    Utility.log("Floating Playlist disabled.")
   }
 
-  func toggleFloatingPlaylist() {
-    if (isFloatingPlaylist) {
+  func toggleFloatingPlaylist() -> Bool {
+    if (self.isFloatingPlaylist) {
       disableFloatingPlaylist()
+      // show sidebar
+      if mainWindow.sideBarStatus == .hidden {
+        mainWindow.playlistButtonAction(self)
+      }
     } else {
       enableFloatingPlaylist()
     }
+
+    return self.isFloatingPlaylist
   }
 
   // MARK: - MPV commands

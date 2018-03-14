@@ -103,7 +103,9 @@ struct Preference {
     static let controlBarStickToCenter = Key("controlBarStickToCenter")
 
     /** Timeout for auto hiding control bar (float) */
-    static let controlBarAutoHideTimeout  = Key("controlBarAutoHideTimeout")
+    static let controlBarAutoHideTimeout = Key("controlBarAutoHideTimeout")
+
+    static let controlBarToolbarButtons = Key("controlBarToolbarButtons")
 
     /** OSD auto hide timeout (float) */
     static let osdAutoHideTimeout = Key("osdAutoHideTimeout")
@@ -566,6 +568,39 @@ struct Preference {
     }
   }
 
+  enum ToolBarButton: Int {
+    case settings = 0
+    case playlist
+    case pip
+    case fullScreen
+    case musicMode
+    case subTrack
+
+    func image() -> NSImage {
+      switch self {
+      case .settings: return NSImage(named: .actionTemplate)!
+      case .playlist: return #imageLiteral(resourceName: "playlist")
+      case .pip: return #imageLiteral(resourceName: "pip")
+      case .fullScreen: return #imageLiteral(resourceName: "fullscreen")
+      case .musicMode: return #imageLiteral(resourceName: "toggle-album-art")
+      case .subTrack: return #imageLiteral(resourceName: "sub-track")
+      }
+    }
+
+    func description() -> String {
+      let key: String
+      switch self {
+      case .settings: key = "settings"
+      case .playlist: key = "playlist"
+      case .pip: key = "pip"
+      case .fullScreen: key = "full_screen"
+      case .musicMode: key = "music_mode"
+      case .subTrack: key = "sub_track"
+      }
+      return NSLocalizedString("osc_toolbar.\(key)", comment: key)
+    }
+  }
+
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [
@@ -580,6 +615,7 @@ struct Preference {
     .controlBarPositionVertical: Float(0.1),
     .controlBarStickToCenter: true,
     .controlBarAutoHideTimeout: Float(2.5),
+    .controlBarToolbarButtons: [ToolBarButton.pip.rawValue, ToolBarButton.playlist.rawValue, ToolBarButton.settings.rawValue],
     .oscPosition: OSCPosition.floating.rawValue,
     .playlistWidth: 270,
     .themeMaterial: Theme.dark.rawValue,

@@ -29,6 +29,13 @@ fileprivate let SideBarAnimationDuration = 0.2
 fileprivate let CropAnimationDuration = 0.2
 
 
+fileprivate extension NSStackView.VisibilityPriority {
+  static let detachEarly = NSStackView.VisibilityPriority(rawValue: 850)
+  static let detachEarlier = NSStackView.VisibilityPriority(rawValue: 800)
+  static let detachEarliest = NSStackView.VisibilityPriority(rawValue: 750)
+}
+
+
 class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override var windowNibName: NSNib.Name {
@@ -38,7 +45,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Constants
 
   /** Minimum window size. */
-  let minSize = NSMakeSize(440, 300)
+  let minSize = NSMakeSize(250, 120)
 
   /** For Force Touch. */
   let minimumPressDuration: TimeInterval = 0.5
@@ -240,6 +247,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** Cached user default values */
   private var oscPosition: Preference.OSCPosition
+  private var oscIsInitialized = false
   private var useExtractSeek: Preference.SeekOption
   private var relativeSeekAmount: Int = 3
   private var volumeScrollAmount: Int = 4
@@ -271,7 +279,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     .alwaysFloatOnTop,
     .useLegacyFullScreen,
     .maxVolume,
-    .displayTimeAndBatteryInFullScreen
+    .displayTimeAndBatteryInFullScreen,
+    .controlBarToolbarButtons
   ]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
@@ -383,6 +392,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
       }
 
+    case PK.controlBarToolbarButtons.rawValue:
+      if let newValue = change[.newKey] as? [Int] {
+        setupOSCToolbarButtons(newValue.flatMap(Preference.ToolBarButton.init(rawValue:)))
+      }
+
     default:
       return
     }
@@ -413,6 +427,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var bottomBarBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var titleBarHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var oscTopMainViewTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var fragControlViewMiddleButtons1Constraint: NSLayoutConstraint!
+  @IBOutlet weak var fragControlViewMiddleButtons2Constraint: NSLayoutConstraint!
+
   var osdProgressBarWidthConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
@@ -445,7 +462,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var oscTopMainView: NSStackView!
 
   @IBOutlet var fragControlView: NSStackView!
-  @IBOutlet var fragToolbarView: NSView!
+  @IBOutlet var fragToolbarView: NSStackView!
   @IBOutlet var fragVolumeView: NSView!
   @IBOutlet var fragSliderView: NSView!
   @IBOutlet var fragControlViewMiddleView: NSView!
@@ -467,6 +484,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
+  private var oscFloatingLeadingTrailingConstraint: [NSLayoutConstraint]?
 
   // MARK: - PIP
 
@@ -548,6 +566,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fragControlView.addView(fragControlViewMiddleView, in: .center)
     fragControlView.addView(fragControlViewRightView, in: .center)
     setupOnScreenController(position: oscPosition)
+    let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).flatMap(Preference.ToolBarButton.init(rawValue:))
+    setupOSCToolbarButtons(buttons)
 
     updateArrowButtonImage()
 
@@ -656,12 +676,31 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     notificationObservers[center]!.append(observer)
   }
 
+  private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
+    fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
+    for buttonType in buttons {
+      let button = NSButton()
+      button.bezelStyle = .regularSquare
+      button.isBordered = false
+      button.image = buttonType.image()
+      button.action = #selector(self.toolBarButtonAction(_:))
+      button.tag = buttonType.rawValue
+      let buttonWidth = buttons.count == 5 ? "20" : "24"
+      Utility.quickConstraints(["H:[btn(\(buttonWidth))]", "V:[btn(24)]"], ["btn": button])
+      fragToolbarView.addView(button, in: .trailing)
+    }
+  }
+
   private func setupOnScreenController(position newPosition: Preference.OSCPosition) {
+
+    guard !oscIsInitialized || oscPosition != newPosition else { return }
+    oscIsInitialized = true
 
     var isCurrentControlBarHidden = false
 
     let isSwitchingToTop = newPosition == .top
     let isSwitchingFromTop = oscPosition == .top
+    let isFloating = newPosition == .floating
 
     if let cb = currentControlBar {
       // remove current osc view from fadeable views
@@ -677,7 +716,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     controlBarFloating.isDragging = false
 
     // detach all fragment views
-    [fragSliderView, fragControlView, fragToolbarView, fragVolumeView].forEach { $0?.removeFromSuperview() }
+    [oscFloatingTopView, oscTopMainView, oscBottomMainView].forEach { stackView in
+      stackView!.views.forEach {
+        stackView!.removeView($0)
+      }
+    }
+    [fragSliderView, fragControlView, fragToolbarView, fragVolumeView].forEach {
+        $0!.removeFromSuperview()
+    }
 
     if isSwitchingToTop {
       if isInFullScreen {
@@ -706,20 +752,22 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     switch oscPosition {
     case .floating:
       currentControlBar = controlBarFloating
-      fragControlView.setVisibilityPriority(.mustHold, for: fragControlViewLeftView)
-      fragControlView.setVisibilityPriority(.mustHold, for: fragControlViewRightView)
+      fragControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragControlViewLeftView)
+      fragControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragControlViewRightView)
       oscFloatingTopView.addView(fragVolumeView, in: .leading)
       oscFloatingTopView.addView(fragToolbarView, in: .trailing)
       oscFloatingTopView.addView(fragControlView, in: .center)
+      oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
+      oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragToolbarView)
+      oscFloatingTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       oscFloatingBottomView.addSubview(fragSliderView)
       Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
+      Utility.quickConstraints(["H:|-(>=0)-[v]-(>=0)-|"], ["v": fragControlView])
       // center control bar
       let cph = Preference.float(for: .controlBarPositionHorizontal)
       let cpv = Preference.float(for: .controlBarPositionVertical)
-      controlBarFloating.setFrameOrigin(NSMakePoint(
-        (window!.frame.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5).constrain(min: 0, max: window!.frame.width),
-        window!.frame.height * CGFloat(cpv)
-      ))
+      controlBarFloating.xConstraint.constant = window!.frame.width * CGFloat(cph)
+      controlBarFloating.yConstraint.constant = window!.frame.height * CGFloat(cpv)
     case .top:
       oscTopMainView.isHidden = false
       currentControlBar = nil
@@ -730,7 +778,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscTopMainView.addView(fragControlView, in: .leading)
       oscTopMainView.addView(fragSliderView, in: .leading)
       oscTopMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscTopMainView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
+      oscTopMainView.setVisibilityPriority(.detachEarly, for: fragSliderView)
+      oscTopMainView.setVisibilityPriority(.mustHold, for: fragVolumeView)
+      oscTopMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     case .bottom:
       currentControlBar = controlBarBottom
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)
@@ -740,12 +790,29 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscBottomMainView.addView(fragControlView, in: .leading)
       oscBottomMainView.addView(fragSliderView, in: .leading)
       oscBottomMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscBottomMainView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
+      oscBottomMainView.setVisibilityPriority(.detachEarly, for: fragSliderView)
+      oscBottomMainView.setVisibilityPriority(.mustHold, for: fragVolumeView)
+      oscBottomMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     }
 
     if currentControlBar != nil {
       fadeableViews.append(currentControlBar!)
       currentControlBar!.isHidden = isCurrentControlBarHidden
+    }
+
+    if isFloating {
+      fragControlViewMiddleButtons1Constraint.constant = 24
+      fragControlViewMiddleButtons2Constraint.constant = 24
+      oscFloatingLeadingTrailingConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=10)-[v]-(>=10)-|",
+                                                                            options: [], metrics: nil, views: ["v": controlBarFloating])
+      NSLayoutConstraint.activate(oscFloatingLeadingTrailingConstraint!)
+    } else {
+      fragControlViewMiddleButtons1Constraint.constant = 16
+      fragControlViewMiddleButtons2Constraint.constant = 16
+      if let constraints = oscFloatingLeadingTrailingConstraint {
+        controlBarFloating.superview?.removeConstraints(constraints)
+        oscFloatingLeadingTrailingConstraint = nil
+      }
     }
   }
 
@@ -1349,9 +1416,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Window delegate: Size
 
   func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
-//    if frameSize.height < minSize.height || frameSize.width < minSize.width {
-//      return sender.frame.size
-//    }
+    guard let window = window else { return frameSize }
+    if frameSize.height <= minSize.height || frameSize.width <= minSize.width {
+      return window.aspectRatio.grow(toSize: minSize)
+    }
     return frameSize
   }
 
@@ -1395,10 +1463,28 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if oscPosition == .floating {
       let cph = Preference.float(for: .controlBarPositionHorizontal)
       let cpv = Preference.float(for: .controlBarPositionVertical)
-      controlBarFloating.setFrameOrigin(NSPoint(
-        x: (window.frame.width * CGFloat(cph) - controlBarFloating.frame.width * 0.5).constrain(min: 0, max: window.frame.width),
-        y: window.frame.height * CGFloat(cpv)
-      ))
+
+      let windowWidth = window.frame.width
+      let margin: CGFloat = 10
+      let minWindowWidth: CGFloat = 480 // 460 + 20 margin
+      var xPos: CGFloat
+
+      if windowWidth < minWindowWidth {
+        // osc is compressed
+        xPos = windowWidth / 2
+      } else {
+        // osc has full width
+        let oscHalfWidth: CGFloat = 230
+        xPos = windowWidth * CGFloat(cph)
+        if xPos - oscHalfWidth < margin {
+          xPos = oscHalfWidth + margin
+        } else if xPos + oscHalfWidth + margin > windowWidth {
+          xPos = windowWidth - oscHalfWidth - margin
+        }
+      }
+      let yPos = window.frame.height * CGFloat(cpv)
+      controlBarFloating.xConstraint.constant = xPos
+      controlBarFloating.yConstraint.constant = yPos
     }
   }
 
@@ -1628,12 +1714,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       osdStackView.addView(accessoryView, in: .bottom)
       Utility.quickConstraints(["H:|-0-[v(>=240)]-0-|"], ["v": accessoryView])
 
+      // enlarge window if too small
+      let winFrame = window!.frame
+      var newFrame = winFrame
+      if (winFrame.height < 300) {
+        newFrame = winFrame.centeredResize(to: winFrame.size.satisfyMinSizeWithSameAspectRatio(NSSize(width: 500, height: 300)))
+      }
+
       accessoryView.wantsLayer = true
       accessoryView.layer?.opacity = 0
 
       NSAnimationContext.runAnimationGroup({ context in
         context.duration = 0.3
         context.allowsImplicitAnimation = true
+        window!.setFrame(newFrame, display: true)
         osdVisualEffectView.layoutSubtreeIfNeeded()
       }, completionHandler: {
         accessoryView.layer?.opacity = 1
@@ -2499,7 +2593,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  @IBAction func settingsButtonAction(_ sender: AnyObject) {
+  /// Legacy IBAction, but still in use.
+  func settingsButtonAction(_ sender: AnyObject) {
     if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
       return  // do not interrput other actions while it is animating
     }
@@ -2516,7 +2611,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  @IBAction func playlistButtonAction(_ sender: AnyObject) {
+  /// Legacy IBAction, but still in use.
+  func playlistButtonAction(_ sender: AnyObject) {
     if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
       return  // do not interrput other actions while it is animating
     }
@@ -2555,6 +2651,30 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       NSHapticFeedbackManager.defaultPerformer.perform(.generic, performanceTime: .default)
     }
     player.setVolume(value)
+  }
+
+  @objc func toolBarButtonAction(_ sender: NSButton) {
+    guard let buttonType = Preference.ToolBarButton(rawValue: sender.tag) else { return }
+    switch buttonType {
+    case .fullScreen:
+      toggleWindowFullScreen()
+    case .musicMode:
+      player.switchToMiniPlayer()
+    case .pip:
+      if #available(OSX 10.12, *) {
+        if pipStatus == .inPIP {
+          exitPIP()
+        } else if pipStatus == .notInPIP {
+          enterPIP()
+        }
+      }
+    case .playlist:
+      playlistButtonAction(sender)
+    case .settings:
+      settingsButtonAction(sender)
+    case .subTrack:
+      quickSettingView.showSubChooseMenu(forView: sender, showLoadedSubs: true)
+    }
   }
 
   // MARK: - Utility

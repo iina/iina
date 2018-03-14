@@ -9,6 +9,9 @@
 /* Class = "NSBox"; title = "Box"; ObjectID = "0kj-QC-B9P"; */
 "0kj-QC-B9P.title" = "Box";
 
+/* Class = "NSButtonCell"; title = "Customize…"; ObjectID = "1nM-AX-Ozm"; */
+"1nM-AX-Ozm.title" = "自定义…";
+
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "2YJ-bg-OdR"; */
 "2YJ-bg-OdR.title" = "% 屏幕大小";
 
@@ -26,6 +29,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "82A-XQ-BvS"; */
 "82A-XQ-BvS.title" = "自动隐藏:";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "82U-9B-wjf"; */
+"82U-9B-wjf.title" = "Box";
 
 /* Class = "NSMenuItem"; title = "bottom"; ObjectID = "92n-Uq-o4G"; */
 "92n-Uq-o4G.title" = "底";
@@ -111,6 +117,9 @@
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "UhG-bZ-2zY"; */
 "UhG-bZ-2zY.title" = "像素";
 
+/* Class = "NSBox"; title = "Box"; ObjectID = "V62-0N-Fvu"; */
+"V62-0N-Fvu.title" = "Box";
+
 /* Class = "NSTextFieldCell"; title = "20"; ObjectID = "WPh-0F-JGL"; */
 "WPh-0F-JGL.title" = "20";
 
@@ -132,6 +141,9 @@
 /* Class = "NSBox"; title = "Box"; ObjectID = "bYj-5g-zYO"; */
 "bYj-5g-zYO.title" = "Box";
 
+/* Class = "NSBox"; title = "Box"; ObjectID = "cA4-zr-tIZ"; */
+"cA4-zr-tIZ.title" = "Box";
+
 /* Class = "NSTextFieldCell"; title = "Calculating…"; ObjectID = "d60-w5-xXY"; */
 "d60-w5-xXY.title" = "计算中…";
 
@@ -140,6 +152,9 @@
 
 /* Class = "NSButtonCell"; title = "Disabled"; ObjectID = "duf-3s-3bL"; */
 "duf-3s-3bL.title" = "不启用";
+
+/* Class = "NSBox"; title = "On Screen Controller Toolbar:"; ObjectID = "fZh-cN-8FM"; */
+"fZh-cN-8FM.title" = "播放控制工具栏";
 
 /* Class = "NSButtonCell"; title = "Use physical resolution on Retina displays"; ObjectID = "fsj-YE-OB7"; */
 "fsj-YE-OB7.title" = "在 Retina 屏幕上使用物理分辨率";

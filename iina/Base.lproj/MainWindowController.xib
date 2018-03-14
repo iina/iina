@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,10 +22,12 @@
                 <outlet property="controlBarFloating" destination="OiF-pA-8Sd" id="7C1-6a-ZK6"/>
                 <outlet property="fragControlView" destination="hDm-KI-3o4" id="ITm-fa-cWL"/>
                 <outlet property="fragControlViewLeftView" destination="8Ej-eH-OR9" id="Grg-cg-qxF"/>
+                <outlet property="fragControlViewMiddleButtons1Constraint" destination="aEy-x5-Ctd" id="FYr-la-rQm"/>
+                <outlet property="fragControlViewMiddleButtons2Constraint" destination="WtE-JF-0m3" id="hWF-bV-ifN"/>
                 <outlet property="fragControlViewMiddleView" destination="Yv6-0K-6E4" id="8vA-vh-qiH"/>
                 <outlet property="fragControlViewRightView" destination="Xts-Pc-T8d" id="yhF-yH-Cdh"/>
                 <outlet property="fragSliderView" destination="BE1-yC-oJL" id="KXu-MZ-mx8"/>
-                <outlet property="fragToolbarView" destination="KAy-Mz-nap" id="55b-K9-k1n"/>
+                <outlet property="fragToolbarView" destination="KfP-G9-8pD" id="R84-gZ-D93"/>
                 <outlet property="fragVolumeView" destination="N3B-DL-XOA" id="4VW-Wa-AD7"/>
                 <outlet property="leftArrowButton" destination="10x-bg-xlj" id="HOT-Yl-7aO"/>
                 <outlet property="leftArrowLabel" destination="Yg9-Sd-sWy" id="fps-VD-ZgC"/>
@@ -44,11 +47,9 @@
                 <outlet property="pipOverlayView" destination="Nrz-jZ-Luf" id="EU7-oY-Bwp"/>
                 <outlet property="playButton" destination="gxw-pJ-Lcg" id="t9H-xd-uqj"/>
                 <outlet property="playSlider" destination="eBP-6g-bAT" id="lGv-18-YeQ"/>
-                <outlet property="playlistButton" destination="wy6-h4-fsN" id="bMV-xq-L13"/>
                 <outlet property="rightArrowButton" destination="EIi-qd-glM" id="U46-Gl-e8D"/>
                 <outlet property="rightArrowLabel" destination="QTI-wi-oyB" id="icX-KI-Muj"/>
                 <outlet property="rightLabel" destination="GgV-Cc-sk0" id="fnx-gO-YPl"/>
-                <outlet property="settingsButton" destination="YvW-zG-QiW" id="jNo-7C-1PP"/>
                 <outlet property="sideBarRightConstraint" destination="PAj-s6-32e" id="DOs-2k-JEG"/>
                 <outlet property="sideBarView" destination="epo-S6-QVB" id="5eE-aM-VUd"/>
                 <outlet property="sideBarWidthConstraint" destination="1BL-aP-tHS" id="Qbw-L4-DAp"/>
@@ -66,7 +67,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="IINAMainWindow" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5" customClass="MainWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -94,7 +95,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="640" height="40"/>
                         <subviews>
                             <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="Qmi-hb-0aM" customClass="TimeLabelOverflowedStackView" customModule="IINA" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="8" width="640" height="24"/>
+                                <rect key="frame" x="0.0" y="8" width="632" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="4rp-3T-TCc"/>
                                 </constraints>
@@ -103,7 +104,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Qmi-hb-0aM" secondAttribute="bottom" constant="8" id="84H-65-Ego"/>
                             <constraint firstItem="Qmi-hb-0aM" firstAttribute="top" secondItem="DFb-1L-U9o" secondAttribute="top" constant="8" id="ANy-8g-kkb"/>
-                            <constraint firstAttribute="trailing" secondItem="Qmi-hb-0aM" secondAttribute="trailing" id="bOW-iG-HNY"/>
+                            <constraint firstAttribute="trailing" secondItem="Qmi-hb-0aM" secondAttribute="trailing" constant="8" id="bOW-iG-HNY"/>
                             <constraint firstItem="Qmi-hb-0aM" firstAttribute="leading" secondItem="DFb-1L-U9o" secondAttribute="leading" id="c3E-rA-tSH"/>
                         </constraints>
                     </visualEffectView>
@@ -125,10 +126,10 @@
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
-                        <rect key="frame" x="100" y="40" width="440" height="67"/>
+                        <rect key="frame" x="110" y="50" width="440" height="67"/>
                         <subviews>
                             <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="Unr-Y6-JoM">
-                                <rect key="frame" x="0.0" y="33" width="440" height="24"/>
+                                <rect key="frame" x="12" y="33" width="416" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="fYl-UZ-clS"/>
                                 </constraints>
@@ -138,16 +139,21 @@
                             </customView>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="3yd-Pv-Hhe"/>
                             <constraint firstAttribute="bottom" secondItem="hb6-oe-rHm" secondAttribute="bottom" constant="4.5" id="BX8-BF-zpJ"/>
                             <constraint firstAttribute="trailing" secondItem="hb6-oe-rHm" secondAttribute="trailing" constant="8" id="Fdb-QI-Ew7"/>
-                            <constraint firstItem="Unr-Y6-JoM" firstAttribute="leading" secondItem="OiF-pA-8Sd" secondAttribute="leading" id="PoI-cy-R6t"/>
+                            <constraint firstItem="Unr-Y6-JoM" firstAttribute="leading" secondItem="OiF-pA-8Sd" secondAttribute="leading" constant="12" id="PoI-cy-R6t"/>
                             <constraint firstItem="Unr-Y6-JoM" firstAttribute="top" secondItem="OiF-pA-8Sd" secondAttribute="top" constant="10" id="YVl-fg-zzl"/>
-                            <constraint firstAttribute="trailing" secondItem="Unr-Y6-JoM" secondAttribute="trailing" id="c0X-tF-D2k"/>
-                            <constraint firstAttribute="width" constant="440" id="g1S-BA-95v"/>
+                            <constraint firstAttribute="trailing" secondItem="Unr-Y6-JoM" secondAttribute="trailing" constant="12" id="c0X-tF-D2k"/>
+                            <constraint firstAttribute="width" priority="250" constant="440" id="g1S-BA-95v"/>
                             <constraint firstAttribute="height" constant="67" id="g84-xP-093"/>
                             <constraint firstItem="hb6-oe-rHm" firstAttribute="leading" secondItem="OiF-pA-8Sd" secondAttribute="leading" constant="8" id="h8j-ny-dSf"/>
                             <constraint firstItem="hb6-oe-rHm" firstAttribute="top" secondItem="Unr-Y6-JoM" secondAttribute="bottom" constant="4.5" id="hmP-6A-a3W"/>
                         </constraints>
+                        <connections>
+                            <outlet property="xConstraint" destination="9z2-rX-b7C" id="y3R-d7-oTm"/>
+                            <outlet property="yConstraint" destination="cRP-R4-zYY" id="kxT-61-1SZ"/>
+                        </connections>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="epo-S6-QVB" userLabel="SideBar">
                         <rect key="frame" x="640" y="0.0" width="240" height="400"/>
@@ -162,7 +168,7 @@
                         <rect key="frame" x="0.0" y="378" width="640" height="22"/>
                         <subviews>
                             <stackView orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="fDY-vk-Ylv" customClass="TimeLabelOverflowedStackView" customModule="IINA" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="-28" width="640" height="24"/>
+                                <rect key="frame" x="0.0" y="-28" width="632" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="lFl-7d-z9u"/>
                                 </constraints>
@@ -174,7 +180,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="1Dw-Bg-FRS"/>
                             <constraint firstItem="fDY-vk-Ylv" firstAttribute="top" secondItem="iA3-pt-6Jm" secondAttribute="bottom" constant="4" id="Efs-6t-pXy"/>
-                            <constraint firstAttribute="trailing" secondItem="fDY-vk-Ylv" secondAttribute="trailing" id="J3u-Qd-3qz"/>
+                            <constraint firstAttribute="trailing" secondItem="fDY-vk-Ylv" secondAttribute="trailing" constant="8" id="J3u-Qd-3qz"/>
                             <constraint firstItem="fDY-vk-Ylv" firstAttribute="leading" secondItem="TRx-2V-Gr3" secondAttribute="leading" id="L25-c7-hER"/>
                             <constraint firstItem="fDY-vk-Ylv" firstAttribute="top" secondItem="TRx-2V-Gr3" secondAttribute="top" constant="26" id="dAZ-xc-uEC"/>
                             <constraint firstAttribute="trailing" secondItem="iA3-pt-6Jm" secondAttribute="trailing" id="e9D-au-sdb"/>
@@ -293,7 +299,7 @@
                 <constraints>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="g0O-v5-RQj" secondAttribute="bottom" constant="8" id="0pt-vB-Ycm"/>
                     <constraint firstAttribute="trailing" secondItem="DFb-1L-U9o" secondAttribute="trailing" id="3qV-vK-qlg"/>
-                    <constraint firstItem="OiF-pA-8Sd" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" placeholder="YES" id="9z2-rX-b7C"/>
+                    <constraint firstItem="OiF-pA-8Sd" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="leading" priority="750" constant="330" id="9z2-rX-b7C"/>
                     <constraint firstAttribute="trailing" secondItem="Tdb-EA-alw" secondAttribute="trailing" id="Mqd-Wb-vqq"/>
                     <constraint firstAttribute="trailing" secondItem="epo-S6-QVB" secondAttribute="trailing" constant="-240" id="PAj-s6-32e"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="RFd-ZJ-29u"/>
@@ -301,13 +307,13 @@
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="Vtd-0f-x7p"/>
                     <constraint firstItem="oX4-0N-but" firstAttribute="centerY" secondItem="se5-gp-TjO" secondAttribute="centerY" id="XlV-7n-jPb"/>
                     <constraint firstItem="g0O-v5-RQj" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="8" id="a6R-6Y-zu3"/>
+                    <constraint firstAttribute="bottom" secondItem="OiF-pA-8Sd" secondAttribute="bottom" priority="750" constant="50" id="cRP-R4-zYY"/>
                     <constraint firstAttribute="bottom" secondItem="DFb-1L-U9o" secondAttribute="bottom" id="eLf-C3-GlT"/>
                     <constraint firstItem="DFb-1L-U9o" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="gbo-9y-nvn"/>
                     <constraint firstItem="g0O-v5-RQj" firstAttribute="top" secondItem="TRx-2V-Gr3" secondAttribute="bottom" constant="8" id="hAe-Tn-76i"/>
                     <constraint firstItem="epo-S6-QVB" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="jpv-dz-Kql"/>
                     <constraint firstAttribute="bottom" secondItem="Nrz-jZ-Luf" secondAttribute="bottom" id="kHE-py-RY5"/>
                     <constraint firstItem="oX4-0N-but" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="kfR-hG-8ee"/>
-                    <constraint firstAttribute="bottom" secondItem="OiF-pA-8Sd" secondAttribute="bottom" constant="40" placeholder="YES" id="lUL-XK-HxW"/>
                     <constraint firstAttribute="trailing" secondItem="Nrz-jZ-Luf" secondAttribute="trailing" id="mJs-PF-Ex5"/>
                     <constraint firstItem="TRx-2V-Gr3" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="ofB-WP-9dW"/>
                     <constraint firstItem="Qbi-jx-9pO" firstAttribute="top" secondItem="TRx-2V-Gr3" secondAttribute="bottom" constant="8" id="r5V-EL-YbE"/>
@@ -326,10 +332,10 @@
             <point key="canvasLocation" x="207" y="109.5"/>
         </window>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="N3B-DL-XOA">
-            <rect key="frame" x="0.0" y="0.0" width="118" height="24"/>
+            <rect key="frame" x="0.0" y="0.0" width="106" height="24"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="2py-h1-0km">
-                    <rect key="frame" x="12" y="0.0" width="24" height="24"/>
+                    <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="MPG-2q-w6a"/>
                         <constraint firstAttribute="width" constant="24" id="vBo-ma-Dnu"/>
@@ -343,9 +349,9 @@
                     </connections>
                 </button>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-kc-FAt" userLabel="Volume Slider">
-                    <rect key="frame" x="42" y="5" width="70" height="15"/>
+                    <rect key="frame" x="30" y="5" width="70" height="15"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="70" id="5EN-dK-jOP"/>
+                        <constraint firstAttribute="width" constant="70" id="P2L-LI-jT7"/>
                     </constraints>
                     <sliderCell key="cell" controlSize="small" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="ncp-01-dCG" customClass="VolumeSliderCell" customModule="IINA" customModuleProvider="target"/>
                     <connections>
@@ -357,53 +363,11 @@
                 <constraint firstItem="SAG-kc-FAt" firstAttribute="leading" secondItem="2py-h1-0km" secondAttribute="trailing" constant="6" id="Wxb-Os-BRF"/>
                 <constraint firstAttribute="trailing" secondItem="SAG-kc-FAt" secondAttribute="trailing" constant="6" id="X07-5M-FbM"/>
                 <constraint firstItem="SAG-kc-FAt" firstAttribute="centerY" secondItem="2py-h1-0km" secondAttribute="centerY" id="snd-ST-z3J"/>
-                <constraint firstItem="2py-h1-0km" firstAttribute="leading" secondItem="N3B-DL-XOA" secondAttribute="leading" constant="12" id="vCy-sT-v1s"/>
+                <constraint firstItem="2py-h1-0km" firstAttribute="leading" secondItem="N3B-DL-XOA" secondAttribute="leading" id="vCy-sT-v1s"/>
                 <constraint firstAttribute="bottom" secondItem="2py-h1-0km" secondAttribute="bottom" id="wqB-gH-wXf"/>
                 <constraint firstItem="2py-h1-0km" firstAttribute="top" secondItem="N3B-DL-XOA" secondAttribute="top" id="zDt-kW-Co2"/>
             </constraints>
             <point key="canvasLocation" x="318" y="584"/>
-        </customView>
-        <customView translatesAutoresizingMaskIntoConstraints="NO" id="KAy-Mz-nap">
-            <rect key="frame" x="0.0" y="0.0" width="74" height="24"/>
-            <subviews>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YvW-zG-QiW" userLabel="Settings Button">
-                    <rect key="frame" x="12" y="0.0" width="24" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="24" id="FBK-0C-gcn"/>
-                        <constraint firstAttribute="width" secondItem="YvW-zG-QiW" secondAttribute="height" multiplier="1:1" id="aob-OL-eIh"/>
-                    </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSActionTemplate" imagePosition="only" alignment="center" alternateImage="NSActionTemplate" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="tPP-JA-L7s">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="settingsButtonAction:" target="-2" id="2Yu-Jn-GXF"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wy6-h4-fsN">
-                    <rect key="frame" x="38" y="0.0" width="24" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="wy6-h4-fsN" secondAttribute="height" multiplier="1:1" id="q4R-Lz-Nkb"/>
-                        <constraint firstAttribute="width" constant="24" id="yzN-B1-5gA"/>
-                    </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="playlist" imagePosition="only" alignment="center" alternateImage="playlist" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="ZPD-PJ-11g">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="playlistButtonAction:" target="-2" id="eI6-wE-TKG"/>
-                    </connections>
-                </button>
-            </subviews>
-            <constraints>
-                <constraint firstItem="YvW-zG-QiW" firstAttribute="leading" secondItem="KAy-Mz-nap" secondAttribute="leading" constant="12" id="J0X-ra-thj"/>
-                <constraint firstItem="wy6-h4-fsN" firstAttribute="centerY" secondItem="YvW-zG-QiW" secondAttribute="centerY" id="Ma4-yQ-RJf"/>
-                <constraint firstItem="wy6-h4-fsN" firstAttribute="leading" secondItem="YvW-zG-QiW" secondAttribute="trailing" constant="2" id="TVd-0e-yT9"/>
-                <constraint firstItem="YvW-zG-QiW" firstAttribute="top" secondItem="KAy-Mz-nap" secondAttribute="top" id="dsi-a0-gcX"/>
-                <constraint firstAttribute="trailing" secondItem="wy6-h4-fsN" secondAttribute="trailing" constant="12" id="vEC-69-mwQ"/>
-                <constraint firstAttribute="bottom" secondItem="YvW-zG-QiW" secondAttribute="bottom" id="yaQ-UR-oX9"/>
-            </constraints>
-            <point key="canvasLocation" x="510" y="584"/>
         </customView>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="BE1-yC-oJL" customClass="TimeLabelOverflowedView" customModule="IINA" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="500" height="24"/>
@@ -448,7 +412,7 @@
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="E6z-SF-UDn"/>
+                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="E6z-SF-UDn"/>
                 <constraint firstAttribute="bottom" secondItem="eBP-6g-bAT" secondAttribute="bottom" constant="4.5" id="GNu-nJ-qPy"/>
                 <constraint firstItem="GgV-Cc-sk0" firstAttribute="centerY" secondItem="NBD-MV-OuG" secondAttribute="centerY" id="N3P-Qk-arP"/>
                 <constraint firstItem="eBP-6g-bAT" firstAttribute="centerX" secondItem="BE1-yC-oJL" secondAttribute="centerX" id="VDD-aU-mmP"/>
@@ -552,7 +516,6 @@
             <constraints>
                 <constraint firstItem="10x-bg-xlj" firstAttribute="centerY" secondItem="Yv6-0K-6E4" secondAttribute="centerY" id="4a0-xW-jtL"/>
                 <constraint firstItem="10x-bg-xlj" firstAttribute="leading" secondItem="Yv6-0K-6E4" secondAttribute="leading" constant="14" id="8Hx-gQ-ez7"/>
-                <constraint firstAttribute="width" constant="148" id="DBE-LW-hiO"/>
                 <constraint firstItem="EIi-qd-glM" firstAttribute="centerY" secondItem="Yv6-0K-6E4" secondAttribute="centerY" id="MRS-GF-0U6"/>
                 <constraint firstItem="gxw-pJ-Lcg" firstAttribute="centerX" secondItem="Yv6-0K-6E4" secondAttribute="centerX" id="PrE-1U-klM"/>
                 <constraint firstItem="EIi-qd-glM" firstAttribute="leading" secondItem="gxw-pJ-Lcg" secondAttribute="trailing" constant="24" id="WtE-JF-0m3"/>
@@ -563,9 +526,8 @@
             </constraints>
             <point key="canvasLocation" x="377" y="703"/>
         </customView>
-        <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" id="hDm-KI-3o4">
+        <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalClippingResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="hDm-KI-3o4">
             <rect key="frame" x="0.0" y="0.0" width="200" height="24"/>
-            <autoresizingMask key="autoresizingMask"/>
             <point key="canvasLocation" x="133" y="703"/>
         </stackView>
         <customView wantsLayer="YES" id="vej-bg-g6C" customClass="ThumbnailPeekView" customModule="IINA" customModuleProvider="target">
@@ -591,13 +553,16 @@
             </connections>
             <point key="canvasLocation" x="40" y="549"/>
         </customView>
+        <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" id="KfP-G9-8pD">
+            <rect key="frame" x="0.0" y="0.0" width="106" height="24"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <point key="canvasLocation" x="591" y="676"/>
+        </stackView>
     </objects>
     <resources>
-        <image name="NSActionTemplate" width="14" height="14"/>
         <image name="mute" width="17" height="14"/>
         <image name="pause" width="24" height="24"/>
         <image name="play" width="24" height="24"/>
-        <image name="playlist" width="14" height="14"/>
         <image name="speed" width="24" height="24"/>
         <image name="speedl" width="24" height="24"/>
         <image name="volume" width="17" height="14"/>

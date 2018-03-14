@@ -1775,8 +1775,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     sidebarAnimationState = .willShow
     let width = type.width()
-    sideBarWidthConstraint.constant = width
-    sideBarRightConstraint.constant = -width
+    if (sideBarWidthConstraint != nil) {
+      sideBarWidthConstraint.constant = width
+    }
+    if (sideBarRightConstraint != nil) {
+      sideBarRightConstraint.constant = -width
+    }
     sideBarView.isHidden = false
     // add view and constraints
     sideBarView.addSubview(view)
@@ -1790,7 +1794,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = SideBarAnimationDuration
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-      sideBarRightConstraint.animator().constant = 0
+      if (sideBarRightConstraint != nil) {
+        sideBarRightConstraint.animator().constant = 0
+      }
     }) {
       self.sidebarAnimationState = .shown
       self.sideBarStatus = type
@@ -1803,7 +1809,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = animate ? SideBarAnimationDuration : 0
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-      sideBarRightConstraint.animator().constant = -currWidth
+      if (sideBarRightConstraint != nil) {
+        sideBarRightConstraint.animator().constant = -currWidth
+      }
     }) {
       if self.sidebarAnimationState == .willHide {
         self.sideBarStatus = .hidden

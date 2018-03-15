@@ -28,7 +28,7 @@
 "5RN-PV-pOZ.title" = "Box";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
-"5Y9-bX-K0f.title" = "Minimisé/dé-minimisé";
+"5Y9-bX-K0f.title" = "La fenêtre est minimisée/agrandie";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
 "6TV-DG-503.title" = "Playlist :";
@@ -96,8 +96,11 @@
 /* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "bPK-Wy-OMI"; */
 "bPK-Wy-OMI.title" = "Moyennement clair";
 
-/* Class = "NSButtonCell"; title = "Pause when leaved full screen"; ObjectID = "g2A-Kf-vct"; */
-"g2A-Kf-vct.title" = "Pause quand le plein écran est désactivé";
+/* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
+"f0j-Dn-cxt.title" = "Recevoir les mises à jour beta";
+
+/* Class = "NSButtonCell"; title = "Pause when left full screen"; ObjectID = "g2A-Kf-vct"; */
+"g2A-Kf-vct.title" = "Pause quand le mode plein écran est désactivé";
 
 /* Class = "NSTextFieldCell"; title = "When launched:"; ObjectID = "gqT-CB-Puw"; */
 "gqT-CB-Puw.title" = "Au démarrage :";

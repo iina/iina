@@ -969,6 +969,7 @@
 		E3FC31451FE1501E00B9B86F /* PowerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSource.swift; sourceTree = "<group>"; };
 		E53BAB3F1F1692B700D2609F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		E53CCBA31EB7711200DFF4E1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/OpenURLAccessoryViewController.strings; sourceTree = "<group>"; };
+		E53EB2A7205A865D003F34A0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		E5436AA61E844761005BEB5C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = fr; path = fr.lproj/Contribution.rtf; sourceTree = "<group>"; };
 		E568075F1EF975C0005A3ADD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
 		E56807601EF97766005A3ADD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -2639,6 +2640,7 @@
 			children = (
 				E34A0E022053F93A00B50097 /* Base */,
 				E34A0E052053F93E00B50097 /* zh-Hans */,
+				E53EB2A7205A865D003F34A0 /* fr */,
 			);
 			name = PrefOSCToolbarSettingsSheetController.xib;
 			sourceTree = "<group>";

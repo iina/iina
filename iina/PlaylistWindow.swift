@@ -9,26 +9,27 @@
 import Cocoa
 
 class PlaylistWindow: NSWindow {
+  
+  weak private var player: PlayerCore!
 
-  init(playlistView: NSView) {
+  init(player: PlayerCore, playlistView: NSView) {
+    // retain player reference
+    self.player = player
+
     // MARK: Position & Size
-    // Get playlist views' container window (fallback to
-    let window = playlistView.window ?? NSApplication.shared.mainWindow
+    // get playlist views' container window
+    let window = self.player.mainWindow.window
 
-    if playlistView.window == nil {
-      Utility.log("Playlist views not fully loaded yet. Using fallback positioning.")
-    }
-
-    // Get views' relative coordinates
+    // get views' relative coordinates and derive its absolute coordinates
     let relativeRectangle = window?.convertFromScreen(playlistView.frame)
 
-    // Calculate absolute coordinates for window
+    // calculate target coordinates on top of old window
     let x = ((relativeRectangle?.origin.x)! * -1) + (window?.frame.size.width)! - playlistView.frame.size.width
     let y = (relativeRectangle?.origin.y)! * -1
     let width = playlistView.bounds.width
     let height = playlistView.bounds.height
 
-    // Generate target coordinates
+    // generate target coordinates
     let targetRectangle = NSRect(x: x, y:y, width: width, height: height)
 
     // MARK: Super
@@ -45,11 +46,17 @@ class PlaylistWindow: NSWindow {
     self.isOpaque = true
     self.makeKeyAndOrderFront(nil)
 
-    // MARK: Content View (NSVisualEffectView Wrapper)
+    // MARK: Setup Content View
     let view = NSVisualEffectView(frame: targetRectangle)
     view.material = .dark
     view.blendingMode = .behindWindow
     view.state = .active
     self.contentView = view
+
+    // MARK: Notifications
+    // close window when mainWindow closes
+    NotificationCenter.default.addObserver(forName: .iinaMainWindowClosed, object: player, queue: .main) { _ in
+      self.orderOut(self)
+    }
   }
 }

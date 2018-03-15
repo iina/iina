@@ -1231,6 +1231,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
+
+    NotificationCenter.default.post(name: .iinaMainWindowClosed, object: player)
   }
 
   // MARK: - Window delegate: Full screen

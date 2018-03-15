@@ -411,6 +411,9 @@ class PlayerCore: NSObject {
     mainWindow.updateTitle()
   }
 
+
+  // MARK: Floating Playlist
+
   func enableFloatingPlaylist() {
     // get playlist view reference
     let playlistView = mainWindow.playlistView.view
@@ -424,7 +427,7 @@ class PlayerCore: NSObject {
     }
 
     // create window
-    let window = PlaylistWindow(playlistView: playlistView)
+    let window = PlaylistWindow(player: self, playlistView: playlistView)
 
     // move playlist view to window
     playlistView.removeFromSuperview()
@@ -466,6 +469,7 @@ class PlayerCore: NSObject {
 
     return self.isFloatingPlaylist
   }
+
 
   // MARK: - MPV commands
 

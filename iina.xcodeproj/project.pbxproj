@@ -447,6 +447,9 @@
 		649AD32A1F11B06F00244738 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		64D04D5120083B6F0031EE2F /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		64D04D5320083B840031EE2F /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
+		6C9C253F205B8C070092D7B0 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
+		6C9C2541205B8D9C0092D7B0 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
+		6C9C2542205B93CF0092D7B0 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		6CA50A931EBBA9DF0060D07A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6CA50A951EBBB6B30060D07A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AboutWindowController.strings; sourceTree = "<group>"; };
 		6CA50A971EBBB7CD0060D07A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PlaylistViewController.strings; sourceTree = "<group>"; };
@@ -2563,6 +2566,7 @@
 				64D04D5320083B840031EE2F /* es */,
 				4CA6B421201E85B9008F3FBA /* pt-BR */,
 				8F17B8FA2013956E0048FB5D /* de */,
+				6C9C2541205B8D9C0092D7B0 /* pl */,
 			);
 			name = FreeSelectingViewController.xib;
 			sourceTree = "<group>";
@@ -2582,6 +2586,7 @@
 				E92D61991FE93B9E00ACC463 /* da */,
 				64D04D5120083B6F0031EE2F /* es */,
 				4CA6B430201E85BB008F3FBA /* pt-BR */,
+				6C9C2542205B93CF0092D7B0 /* pl */,
 			);
 			name = FilterPresets.strings;
 			sourceTree = "<group>";
@@ -2639,6 +2644,7 @@
 			children = (
 				E34A0E022053F93A00B50097 /* Base */,
 				E34A0E052053F93E00B50097 /* zh-Hans */,
+				6C9C253F205B8C070092D7B0 /* pl */,
 			);
 			name = PrefOSCToolbarSettingsSheetController.xib;
 			sourceTree = "<group>";

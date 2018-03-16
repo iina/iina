@@ -4,6 +4,14 @@
 "alert.add_filter.title" = "Nuevo filtro";
 "alert.add_watch.message" = "Por favor, ingrese un nombre válido de propiedad de MPV.";
 "alert.add_watch.title" = "Añadir propiedad de monitoreo";
+"alert.assrt_register" = "Debido a la cuota limitada de la API, se recomienda el uso de su propio token de  laAPI. El token predeterminado es solo para uso demostrativo, y puede presentar errores de red.";
+"alert.assrt_register.register" = "Registrarse ahora";
+"alert.assrt_register.try" = "Probar primero";
+"alert.assrt_token_invalid" = "Parece que tu token de la API Assrt no es válido.";
+"alert.assrt_token_prompt.message" = "Por favor, regístrese en la página web. Obtenga su token en la página de inicio de usuario e ingréselo a continuación:";
+"alert.assrt_token_prompt.title" = "Ingresa tu token de la API";
+"alert.beta_channel.message" = "IINA v1.0 esta cerca! ¿Le gustaría ayudarnos a probar las versiones beta?\nPuede cambiar este comportamiento en cualquier momento desde Preferencias - General.";
+"alert.beta_channel.title" = "Recibir actualizaciones para las versiones Beta";
 "alert.choose_media_file.title" = "Seleccione el archivo multimedia";
 "alert.clear_cache.message" = "¿Está seguro de borrar toda la caché de miniaturas?";
 "alert.clear_cache.success" = "Caché borrada.";
@@ -98,6 +106,12 @@
 "menu.volume" = "Volumen: %d";
 "menu.volume_down" = "Volumen - %.0f%%";
 "menu.volume_up" = "Volumen + %.0f%%";
+"osc_toolbar.full_screen" = "Alternar pantalla completa";
+"osc_toolbar.music_mode" = "Entrar en modo música";
+"osc_toolbar.pip" = "Alternar Picture-in-Picture";
+"osc_toolbar.playlist" = "Lista de reproducción y capítulos";
+"osc_toolbar.settings" = "Ajustes rápidos";
+"osc_toolbar.sub_track" = "Elejir la pista de subtítulos";
 "osd.abloop.a" = "Bucle-AB: A";
 "osd.abloop.b" = "Bucle-AB: B";
 "osd.abloop.clear" = "Bucle-AB: Borrado";
@@ -183,52 +197,8 @@
 "touchbar.next_video" = "Siguiente vídeo";
 "touchbar.play_pause" = "Reproducir / Pausar";
 "touchbar.prev_video" = "Vídeo anterior";
+"touchbar.remainingTime" = "Tiempo restante";
 "touchbar.rewind" = "Rebobinar";
 "touchbar.seek" = "Buscar";
 "touchbar.time" = "Posición en el tiempo";
 "track.none" = "<Ninguno>";
-
-/* FIXME: Using English localization instead */
-"touchbar.remainingTime" = "Remaining Time";
-
-/* FIXME: Using English localization instead */
-"alert.beta_channel.message" = "IINA v1.0 is comming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
-
-/* FIXME: Using English localization instead */
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register.try" = "Try First";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_prompt.title" = "Enter your API token";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register.register" = "Register Now";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.sub_track" = "Choose subtitle track";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.playlist" = "Playlist and chapters";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.music_mode" = "Enter music mode";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.settings" = "Quick Settings";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.full_screen" = "Toggle full screen";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.pip" = "Toggle Picture-in-Picture";

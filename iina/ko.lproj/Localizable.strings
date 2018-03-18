@@ -94,7 +94,6 @@
 "menu.exit_pip" = "화면 속 화면에서 나가기";
 "menu.pause" = "일시 정지";
 "menu.resume" = "재생";
-
 "menu.speed" = "재생속도: %.2fx"; //
 
 "menu.seek_forward" = "앞으로 탐색 %.0f초"; //
@@ -196,6 +195,13 @@
 
 "alert.no_video_track" = "비디오 트랙이 없습니다.";
 
+"alert.assrt_register" = "API 사용량 제한이 있으므로, 사용자가 개별 API 토큰을 만들어 사용하는 것이 좋습니다. 기본 제공되는 토큰은 시범 용도로 사용되는 것이므로 네트워크 오류가 발생할 수 있습니다.";
+"alert.assrt_register.register" = "지금 등록하기";
+"alert.assrt_register.try" = "사용해 보기";
+"alert.assrt_token_prompt.title" = "API 토큰을 입력하십시오";
+"alert.assrt_token_prompt.message" = "보이는 웹페이지에서 등록해 주십시오. 사용자 홈페이지에서 토큰을 발급받아 아래에 입력하십시오:";
+"alert.assrt_token_invalid" = "입력한 Assrt API 토큰이 유효하지 않은 것 같습니다.";
+
 "pl_menu.title_multi" = "%d개의 항목";
 "pl_menu.play_next" = "다음 항목 재생";
 "pl_menu.play_in_new_window" = "새 윈도우에서 재생";
@@ -224,6 +230,13 @@
 
 "subencoding.auto" = "자동 감지";
 
+"osc_toolbar.settings" = "빠른 설정";
+"osc_toolbar.playlist" = "재생목록 및 챕터";
+"osc_toolbar.pip" = "화면 속 화면 전환/복귀";
+"osc_toolbar.full_screen" = "전체 화면 전환/복귀";
+"osc_toolbar.music_mode" = "음악 모드 전환";
+"osc_toolbar.sub_track" = "자막 선택";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15초 후";
@@ -241,38 +254,3 @@
 "touchbar.time" = "재생 위치";
 "touchbar.remainingTime" = "남은 시간";
 
-/* FIXME: Using English localization instead */
-"alert.assrt_register.try" = "Try First";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_prompt.title" = "Enter your API token";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register.register" = "Register Now";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.sub_track" = "Choose subtitle track";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.playlist" = "Playlist and chapters";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.music_mode" = "Enter music mode";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.settings" = "Quick Settings";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.full_screen" = "Toggle full screen";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.pip" = "Toggle Picture-in-Picture";

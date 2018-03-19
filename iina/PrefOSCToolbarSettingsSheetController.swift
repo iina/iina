@@ -169,10 +169,12 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
     let pboard = sender.draggingPasteboard()
 
     if let _ = pboard.availableType(from: [.iinaOSCAvailableToolbarButtonType]) {
-      // dragging available item in; don't accept existing items
+      // dragging available item in:
+      // don't accept existing items, don't accept new items when already have 5 icons
       guard let rawButtonType = sender.draggingPasteboard().propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
         let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
-        !items.contains(buttonType) else {
+        !items.contains(buttonType),
+        items.count < 5 else {
         return []
       }
       return .copy
@@ -192,10 +194,12 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
     guard isAvailableItem || isCurrentItem else { return [] }
 
     if isAvailableItem {
-      // dragging available item in; don't accept existing items
+      // dragging available item in:
+      // don't accept existing items, don't accept new items when already have 5 icons
       guard let rawButtonType = sender.draggingPasteboard().propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
         let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
-        !items.contains(buttonType) else {
+        !items.contains(buttonType),
+        items.count < 5 else {
           return []
       }
     }
@@ -241,7 +245,9 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
       // dragging available item in; don't accept existing items
       if let rawButtonType = sender.draggingPasteboard().propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
         let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
-        dragDestIndex >= 0, dragDestIndex <= views.count {
+        items.count < 5,
+        dragDestIndex >= 0,
+        dragDestIndex <= views.count {
         let item = PrefOSCToolbarCurrentItem(buttonType: buttonType)
         item.image = buttonType.image()
         Utility.quickConstraints(["H:[btn(24)]", "V:[btn(24)]"], ["btn": item])

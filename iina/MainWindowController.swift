@@ -103,7 +103,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   /** Floating Playlist */
   var isFloatingPlaylist = false
-  var playlistWindow: NSWindow?
+  var playlistWindow: PlaylistWindow?
 
   // MARK: - Status
 
@@ -2070,13 +2070,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     sliderCell?.isInDarkTheme = isDarkTheme
     volumeCell?.isInDarkTheme = isDarkTheme
 
-    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView].forEach {
+    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView, sideBarView].forEach {
       $0?.material = material
       $0?.appearance = appearance
     }
 
     if isInFullScreen {
       window!.appearance = appearance;
+    }
+
+    if isFloatingPlaylist {
+      playlistWindow?.appearance = appearance;
+      playlistWindow?.wrapperView?.material = material
+      playlistWindow?.wrapperView?.appearance = appearance
     }
 
     window?.appearance = appearance

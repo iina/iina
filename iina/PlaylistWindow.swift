@@ -12,6 +12,8 @@ class PlaylistWindow: NSWindow {
   
   weak private var player: PlayerCore!
 
+  var wrapperView: NSVisualEffectView?
+
   init(player: PlayerCore, view: NSView) {
     // retain player reference
     self.player = player
@@ -48,11 +50,13 @@ class PlaylistWindow: NSWindow {
     self.makeKeyAndOrderFront(nil)
 
     // MARK: Setup Content View
-    let view = NSVisualEffectView(frame: targetRectangle)
-    view.material = .dark
-    view.blendingMode = .behindWindow
-    view.state = .active
-    self.contentView = view
+    // create wrapper view
+    wrapperView = NSVisualEffectView(frame: targetRectangle)
+    wrapperView?.material = player.mainWindow.sideBarView.material
+    wrapperView?.appearance = player.mainWindow.sideBarView.appearance
+    wrapperView?.blendingMode = .behindWindow
+    wrapperView?.state = .active
+    self.contentView = wrapperView
 
     // MARK: Notifications
     // close playlist window when mainWindow closes

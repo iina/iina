@@ -138,7 +138,7 @@ extension MainWindowController {
   }
 
   @objc func menuToggleFloatingPlaylist(_ sender: NSMenuItem) {
-    player.toggleFloatingPlaylist()
+    toggleFloatingPlaylist()
   }
 
   @objc func menuSetDelogo(_ sender: NSMenuItem) {

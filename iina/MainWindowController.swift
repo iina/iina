@@ -101,6 +101,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var cachedScreenCount = 0
   var blackWindows: [NSWindow] = []
   
+  /** Floating Playlist */
+  var isFloatingPlaylist = false
+  var playlistWindow: NSWindow?
+
   // MARK: - Status
 
   /** For mpv's `geometry` option. We cache the parsed structure
@@ -2632,8 +2636,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /// Legacy IBAction, but still in use.
   func playlistButtonAction(_ sender: AnyObject) {
-    if player.isFloatingPlaylist {
-      player.disableFloatingPlaylist()
+    if isFloatingPlaylist {
+      disableFloatingPlaylist()
     }
     if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
       return  // do not interrput other actions while it is animating
@@ -2769,6 +2773,61 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     })
   }
   
+  // MARK: Floating Playlist
+
+  func enableFloatingPlaylist() {
+    // get playlist view reference
+    let view = playlistView.view
+
+    // reset down shift for playlistView
+    playlistView.downShift = 22
+
+    // hide sidebar
+    if sideBarStatus != .hidden {
+      hideSideBar(animate: false)
+    }
+
+    // create window
+    let window = PlaylistWindow(player: player, view: view)
+
+    // move playlist view to window
+    view.removeFromSuperview()
+    window.contentView?.addSubview(view)
+
+    // update playlist view constraints
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": view])
+
+    // persist window
+    playlistWindow = window
+
+    // update state
+    isFloatingPlaylist = true
+
+    Utility.log("Floating Playlist enabled.")
+  }
+
+  func disableFloatingPlaylist() {
+    // remove window
+    playlistWindow?.orderOut(self)
+    playlistWindow = nil
+
+    // update state
+    isFloatingPlaylist = false
+
+    Utility.log("Floating Playlist disabled.")
+  }
+
+  func toggleFloatingPlaylist() {
+    if (self.isFloatingPlaylist) {
+      disableFloatingPlaylist()
+      // show sidebar
+      if sideBarStatus == .hidden {
+        playlistButtonAction(self)
+      }
+    } else {
+      enableFloatingPlaylist()
+    }
+  }
 }
 
 // MARK: - Picture in Picture

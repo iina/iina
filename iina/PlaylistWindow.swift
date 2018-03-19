@@ -12,7 +12,7 @@ class PlaylistWindow: NSWindow {
   
   weak private var player: PlayerCore!
 
-  init(player: PlayerCore, playlistView: NSView) {
+  init(player: PlayerCore, view: NSView) {
     // retain player reference
     self.player = player
 
@@ -21,13 +21,13 @@ class PlaylistWindow: NSWindow {
     let window = self.player.mainWindow.window
 
     // get views' relative coordinates and derive its absolute coordinates
-    let relativeRectangle = window?.convertFromScreen(playlistView.frame)
+    let relativeRectangle = window?.convertFromScreen(view.frame)
 
     // calculate target coordinates on top of old window
-    let x = ((relativeRectangle?.origin.x)! * -1) + (window?.frame.size.width)! - playlistView.frame.size.width
+    let x = ((relativeRectangle?.origin.x)! * -1) + (window?.frame.size.width)! - view.frame.size.width
     let y = (relativeRectangle?.origin.y)! * -1
-    let width = playlistView.bounds.width
-    let height = playlistView.bounds.height
+    let width = view.bounds.width
+    let height = view.bounds.height
 
     // generate target coordinates
     let targetRectangle = NSRect(x: x, y:y, width: width, height: height)
@@ -38,8 +38,9 @@ class PlaylistWindow: NSWindow {
     // MARK: Appearance
     self.styleMask = [.fullSizeContentView, .titled, .resizable]
     self.initialFirstResponder = nil
+    self.level = (window?.level)!
     self.isMovableByWindowBackground = true
-    self.appearance = NSAppearance(named: .vibrantDark)
+    self.appearance = window?.appearance
     self.titlebarAppearsTransparent = true
     self.titleVisibility = .visible
     self.title = "Playlist"
@@ -54,7 +55,7 @@ class PlaylistWindow: NSWindow {
     self.contentView = view
 
     // MARK: Notifications
-    // close window when mainWindow closes
+    // close playlist window when mainWindow closes
     NotificationCenter.default.addObserver(forName: .iinaMainWindowClosed, object: player, queue: .main) { _ in
       self.orderOut(self)
     }

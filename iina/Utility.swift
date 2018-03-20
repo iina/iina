@@ -283,6 +283,7 @@ class Utility {
     view.addSubview(quickLabel(NSLocalizedString("general.password", comment: "Password") + ":", 26))
     let pwField = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
     view.addSubview(pwField)
+    input.nextKeyView = pwField
     panel.accessoryView = view
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))

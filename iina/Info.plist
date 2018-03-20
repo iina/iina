@@ -386,7 +386,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.15</string>
+	<string>1.0.0-beta1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -401,7 +401,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>68</string>
+	<string>70</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.video</string>
 	<key>LSMinimumSystemVersion</key>

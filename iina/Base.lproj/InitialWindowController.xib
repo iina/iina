@@ -302,7 +302,7 @@
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="bfI-Zo-NmI">
                     <rect key="frame" x="10" y="97" width="298" height="56"/>
-                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" allowsEditingTextAttributes="YES" id="3aN-Hg-GkT">
+                    <textFieldCell key="cell" controlSize="small" selectable="YES" sendsActionOnEndEditing="YES" allowsEditingTextAttributes="YES" id="3aN-Hg-GkT">
                         <font key="font" metaFont="smallSystem"/>
                         <string key="title">Uncheck "receive beta updates" from Preferences - General, and install a stable release from our &lt;a href="https://lhc70000.github.io/iina/"&gt;official website&lt;/a&gt;.</string>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>

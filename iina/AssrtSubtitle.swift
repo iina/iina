@@ -114,6 +114,7 @@ class AssrtSupport {
   private let detailApi = "https://api.assrt.net/v1/sub/detail"
 
   var token: String
+  var usesUserToken = false
 
   private let subChooseViewController = SubChooseViewController(source: .assrt)
 
@@ -123,12 +124,16 @@ class AssrtSupport {
     let userToken = Preference.string(for: .assrtToken)
     if let token = userToken, token.count == 32 {
       self.token = token
+      usesUserToken = true
     } else {
       self.token = "5IzWrb2J099vmA96ECQXwdRSe9xdoBUv"
     }
   }
 
   func checkToken() -> Bool {
+    if usesUserToken {
+      return true
+    }
     // show alert for unregistered users
     let alert = NSAlert()
     alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")

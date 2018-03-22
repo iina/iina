@@ -97,7 +97,7 @@ class OnlineSubtitle: NSObject {
       .then { _ in
         subSupport.hash(url)
       }.then { info in
-        subSupport.request(info)
+        subSupport.request(info.dictionary)
       }.then { subs in
         subSupport.showSubSelectWindow(with: subs)
       }.then { selectedSubs -> Void in
@@ -109,12 +109,12 @@ class OnlineSubtitle: NSObject {
              OpenSubSupport.OpenSubError.fileTooSmall:
           osdMessage = .fileError
         case OpenSubSupport.OpenSubError.loginFailed(let reason):
-          Utility.log("OpenSub: \(reason)")
+          Utility.log("OpenSubtitles: \(reason)")
           osdMessage = .cannotLogin
         case OpenSubSupport.OpenSubError.userCanceled:
           osdMessage = .canceled
         case OpenSubSupport.OpenSubError.xmlRpcError(let error):
-          Utility.log("OpenSub: \(error.readableDescription)")
+          Utility.log("OpenSubtitles: \(error.readableDescription)")
           osdMessage = .networkError
         default:
           osdMessage = .networkError

@@ -198,10 +198,37 @@ class OpenSubSupport {
     }
   }
 
-  func request(_ info: FileInfo) -> Promise<[OpenSubSubtitle]> {
+  func requestIMDB(_ info: FileInfo, _ fileURL: URL) -> Promise<[String: String]> {
+    return Promise { fulfill, reject in
+      let filename = fileURL.lastPathComponent
+      xmlRpc.call("GuessMovieFromString", [token, [filename]]) { status in
+        switch status {
+        case .ok(let reponse):
+          guard let parsed = reponse as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
+          let parsedStatus = parsed["status"] as! String
+          guard parsedStatus.hasPrefix("200") else { reject(OpenSubError.wrongResponseFormat); return }
+          guard let parsedData = parsed["data"] as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
+          guard let data1 = parsedData[filename] as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
+          guard let data2 = data1["BestGuess"] as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
+          guard let IMDB = data2["IDMovieIMDB"] as? String else { reject(OpenSubError.wrongResponseFormat); return }
+          var requestInfo = info.dictionary
+          if !IMDB.isEmpty {
+            requestInfo["imdbid"] = IMDB
+          }
+          fulfill(requestInfo)
+        case .failure(_):
+          reject(OpenSubError.searchFailed("Failure"))
+        case .error(let error):
+          reject(OpenSubError.xmlRpcError(error))
+        }
+      }
+    }
+  }
+
+  func request(_ info: [String: String]) -> Promise<[OpenSubSubtitle]> {
     return Promise { fulfill, reject in
       let limit = 100
-      var requestInfo = info.dictionary
+      var requestInfo = info
       requestInfo["sublanguageid"] = self.language
       xmlRpc.call("SearchSubtitles", [token, [requestInfo], ["limit": limit]]) { status in
         switch status {

@@ -98,21 +98,10 @@ class OnlineSubtitle: NSObject {
         subSupport.hash(url)
       }.then { info in
         subSupport.request(info.dictionary)
-      }.then { subs -> Promise<[OpenSubSubtitle]> in
-        if subs.isEmpty {
-          subSupport.requestIMDB(url)
-          .then { IMDB -> Promise<[OpenSubSubtitle]> in
-            let requestInfo = ["imdbid": IMDB]
-            return subSupport.request(requestInfo)
-          }.then { newSubs -> Promise<[OpenSubSubtitle]> in
-            return subSupport.showSubSelectWindow(with: newSubs)
-          }.then { selectedSubs -> Void in
-            callback(selectedSubs)
-          }.catch { err in
-            return err
-          }
-        }
-        return subSupport.showSubSelectWindow(with: subs)
+      }.then { subs in
+        subSupport.requestByName(url, subs)
+      }.then { subs in
+        subSupport.showSubSelectWindow(with: subs)
       }.then { selectedSubs -> Void in
         callback(selectedSubs)
       }.catch { err in

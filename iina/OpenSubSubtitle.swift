@@ -198,6 +198,17 @@ class OpenSubSupport {
     }
   }
 
+  func requestByName(_ fileURL: URL, _ subs: [OpenSubSubtitle]) -> Promise<[OpenSubSubtitle]> {
+    guard subs.isEmpty else {
+      return Promise { fulfill, reject in fulfill(subs) }
+    }
+    return requestIMDB(fileURL).then { IMDB in
+      let info = ["imdbid": IMDB]
+      return self.request(info)
+    }
+  }
+
+
   func requestIMDB(_ fileURL: URL) -> Promise<String> {
     return Promise { fulfill, reject in
       let filename = fileURL.lastPathComponent
@@ -241,17 +252,12 @@ class OpenSubSupport {
             return
           }
           // get data
-          if let _ = parsed["data"] as? [Any] {
-            fulfill([])
-            return
-          }
-          guard let rawData = (parsed["data"] as? [String: Any]) else {
+          guard let pData = (parsed["data"] as? ResponseFilesData) else {
             reject(OpenSubError.wrongResponseFormat)
             return
           }
           var result: [OpenSubSubtitle] = []
-          var index = 0
-          while let subData = rawData[index.toStr()] as? [String: Any] {
+          for (index, subData) in pData.enumerated() {
             let sub = OpenSubSubtitle(index: index,
                                       filename: subData["SubFileName"] as! String,
                                       langID: subData["SubLanguageID"] as! String,
@@ -263,7 +269,6 @@ class OpenSubSupport {
                                       subDlLink: subData["SubDownloadLink"] as! String,
                                       zipDlLink: subData["ZipDownloadLink"] as! String)
             result.append(sub)
-            index = index + 1
           }
           fulfill(result)
         case .failure(_):

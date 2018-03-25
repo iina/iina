@@ -198,7 +198,7 @@ class OpenSubSupport {
     }
   }
 
-  func requestIMDB(_ info: FileInfo, _ fileURL: URL) -> Promise<[String: String]> {
+  func requestIMDB(_ fileURL: URL) -> Promise<String> {
     return Promise { fulfill, reject in
       let filename = fileURL.lastPathComponent
       xmlRpc.call("GuessMovieFromString", [token, [filename]]) { status in
@@ -211,11 +211,7 @@ class OpenSubSupport {
           guard let data1 = parsedData[filename] as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
           guard let data2 = data1["BestGuess"] as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
           guard let IMDB = data2["IDMovieIMDB"] as? String else { reject(OpenSubError.wrongResponseFormat); return }
-          var requestInfo = info.dictionary
-          if !IMDB.isEmpty {
-            requestInfo["imdbid"] = IMDB
-          }
-          fulfill(requestInfo)
+          fulfill(IMDB)
         case .failure(_):
           reject(OpenSubError.searchFailed("Failure"))
         case .error(let error):
@@ -245,12 +241,17 @@ class OpenSubSupport {
             return
           }
           // get data
-          guard let pData = (parsed["data"] as? ResponseFilesData) else {
+          if let _ = parsed["data"] as? [Any] {
+            fulfill([])
+            return
+          }
+          guard let rawData = (parsed["data"] as? [String: Any]) else {
             reject(OpenSubError.wrongResponseFormat)
             return
           }
           var result: [OpenSubSubtitle] = []
-          for (index, subData) in pData.enumerated() {
+          var index = 0
+          while let subData = rawData[index.toStr()] as? [String: Any] {
             let sub = OpenSubSubtitle(index: index,
                                       filename: subData["SubFileName"] as! String,
                                       langID: subData["SubLanguageID"] as! String,
@@ -262,6 +263,7 @@ class OpenSubSupport {
                                       subDlLink: subData["SubDownloadLink"] as! String,
                                       zipDlLink: subData["ZipDownloadLink"] as! String)
             result.append(sub)
+            index = index + 1
           }
           fulfill(result)
         case .failure(_):

@@ -172,21 +172,21 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
       // size
       if let h = geometry.h {
         windowSizeCheckBox.state = .on
-        setSubViews(of: windowPosBox, enabled: true)
+        setSubViews(of: windowSizeBox, enabled: true)
         windowSizeTypePopUpButton.selectItem(withTag: SizeHeightTag)
         let isPercent = h.hasSuffix("%")
         windowSizeUnitPopUpButton.selectItem(withTag: isPercent ? UnitPercentTag : UnitPointTag)
         windowSizeValueTextField.stringValue = isPercent ? String(h.dropLast()) : h
       } else if let w = geometry.w {
         windowSizeCheckBox.state = .on
-        setSubViews(of: windowPosBox, enabled: true)
+        setSubViews(of: windowSizeBox, enabled: true)
         windowSizeTypePopUpButton.selectItem(withTag: SizeWidthTag)
         let isPercent = w.hasSuffix("%")
         windowSizeUnitPopUpButton.selectItem(withTag: isPercent ? UnitPercentTag : UnitPointTag)
         windowSizeValueTextField.stringValue = isPercent ? String(w.dropLast()) : w
       } else {
         windowSizeCheckBox.state = .off
-        setSubViews(of: windowPosBox, enabled: false)
+        setSubViews(of: windowSizeBox, enabled: false)
       }
       // position
       if let x = geometry.x, let xSign = geometry.xSign, let y = geometry.y, let ySign = geometry.ySign {

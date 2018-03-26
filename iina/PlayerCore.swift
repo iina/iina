@@ -1368,8 +1368,8 @@ class PlayerCore: NSObject {
     if noVideoTrack && noAudioTrack {
       return .unknown
     }
-    let theOnlyVideoTrackIsAlbumCover = info.videoTracks.count == 1 && info.videoTracks.first!.isAlbumart
-    return (noVideoTrack || theOnlyVideoTrackIsAlbumCover) ? .isAudio : .notAudio
+    let allVideoTracksAreAlbumCover = !info.videoTracks.contains { !$0.isAlbumart }
+    return (noVideoTrack || allVideoTracksAreAlbumCover) ? .isAudio : .notAudio
   }
 
   static func checkStatusForSleep() {

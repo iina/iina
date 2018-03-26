@@ -37,6 +37,7 @@ class PrefOSCToolbarDraggingItemViewController: NSViewController, NSPasteboardWr
     view.layer?.cornerRadius = 4
 
     iconImageView.image = buttonType.image()
+    iconImageView.translatesAutoresizingMaskIntoConstraints = false
     descriptionLabel.stringValue = buttonType.description()
   }
 

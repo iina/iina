@@ -877,6 +877,7 @@
 		8F17B8FA2013956E0048FB5D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
 		8F6F50541EC5E053002B47B4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
 		8F825CBD1F16280A0094B529 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
+		9D1C033A2067C24600919F84 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationDisplayTextField.swift; sourceTree = "<group>"; };
 		9E63CAB61E3F7D0E00EA66C9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2651,6 +2652,7 @@
 				E53EB2A7205A865D003F34A0 /* fr */,
 				C77164E12058D45C009E41DA /* ko */,
 				134C1370205FB181002C7BE4 /* ja */,
+				9D1C033A2067C24600919F84 /* nl */,
 			);
 			name = PrefOSCToolbarSettingsSheetController.xib;
 			sourceTree = "<group>";

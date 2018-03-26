@@ -248,7 +248,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   @objc
   func updateTrack() {
     DispatchQueue.main.async {
-      let (mediaTitle, mediaArtist, mediaAlbum) = self.player.getMusicMetadata()
+      let (mediaTitle, mediaAlbum, mediaArtist) = self.player.getMusicMetadata()
       self.titleLabel.stringValue = mediaTitle
       self.window?.title = mediaTitle
       // hide artist & album label when info not available

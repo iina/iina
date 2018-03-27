@@ -4,6 +4,14 @@
 "alert.add_filter.title" = "Neuer Filter";
 "alert.add_watch.message" = "Bitte gib einen gültigen mpv-Parameter ein.";
 "alert.add_watch.title" = "Zu beobachtenden Wert hinzufügen";
+"alert.assrt_register" = "Bitte erstelle Dir ein eigenes API-Token. Das hier voreingestellte Token ist nur für Testzwecke und kann zu Netzwerfehlern führen.";
+"alert.assrt_register.register" = "Jetzt Registrieren";
+"alert.assrt_register.try" = "Testen";
+"alert.assrt_token_invalid" = "Dein Assrt API token schein ungültig zu sein.";
+"alert.assrt_token_prompt.message" = "Bitte auf der jetzt geöffneten Website registrieren. Das Token kannst Du auf deiner User-Seite finden. Bitte hier eingeben:";
+"alert.assrt_token_prompt.title" = "Bitte API token hier eingeben.";
+"alert.beta_channel.message" = "IINA Version 1.0 kommt! Willst Du uns helfen die Beta Versionen zu testen? Du kannst diese Einstellungen jederzeit unter \"Einstellungen - Allgemein\" wieder ändern.";
+"alert.beta_channel.title" = "Updates für Beta-Versionen erhalten";
 "alert.choose_media_file.title" = "Datei auswählen";
 "alert.clear_cache.message" = "Möchtest du den Cache der Vorschaubilder wirklich leeren?";
 "alert.clear_cache.success" = "Cache geleert.";
@@ -30,16 +38,13 @@
 "alert.extra_option.config_folder" = "Konnte Konfigurationsordner nicht setzen \"%@\".";
 "alert.extra_option.empty" = "Schlüssel oder Wert dürfen nicht leer sein.";
 "alert.extra_option.error" = "Fehler beim Setzen der Option --%@=%@ mit Fehlercode %d. Bitte überprüfe die Zusatzoptionen unter Einstellungen > Erweitert.";
-"alert.fatal_error" = "Schwerwiegender Fehler: %@ 
-Programm wird beendet.";
+"alert.fatal_error" = "Schwerwiegender Fehler: %@ \nProgramm wird beendet.";
 "alert.filter.incorrect" = "Fehler beim Setzen der Filter. Bitte überprüfe die Parameter.";
 "alert.filter_hwdec.abort" = "Abbrechen";
-"alert.filter_hwdec.message" = "Du bist dabei einen Videofilter anzuwenden. Es könnte sein, dass Dein aktueller Hardwaredecoder diese nicht richtig unterstützt. Du kannst entweder das Hardwaredecoding abschalten oder auf Auto(Copy) umschalten. Auto(Copy) benötigt zweimal soviel Arbeitsspeicher. 
-Unter Umständen musst Du die zuvor gemachten Einstellungen (wie zum Beispiel die Crop-Einstellungen) erneut vornehmen, damit es funktioniert.";
+"alert.filter_hwdec.message" = "Du bist dabei einen Videofilter anzuwenden. Es könnte sein, dass Dein aktueller Hardwaredecoder diese nicht richtig unterstützt. Du kannst entweder das Hardwaredecoding abschalten oder auf Auto(Copy) umschalten. Auto(Copy) benötigt zweimal soviel Arbeitsspeicher. \nUnter Umständen musst Du die zuvor gemachten Einstellungen (wie zum Beispiel die Crop-Einstellungen) erneut vornehmen, damit es funktioniert.";
 "alert.filter_hwdec.turn_off" = "Hardwaredecoding deaktivieren";
 "alert.filter_hwdec.use_copy" = "Zu Autom. (Kopieren) wechseln";
-"alert.jump_to.message" = "Bitte gib die Zeit ein, zu der du springen willst.
-Beispiel: 20:35";
+"alert.jump_to.message" = "Bitte gib die Zeit ein, zu der du springen willst.\nBeispiel: 20:35";
 "alert.jump_to.title" = "Springe zu";
 "alert.keybinding_config.error" = "Fehler beim Einlesen der Kurzbefehl-Konfiguration \"%@\"! Standard-Kurzbefehle von IINA werden benutzt. Bitte überprüfe die Einstellungen.";
 "alert.mpv_error" = "Interner Fehler %@ (%@) beim Setzen der Einstellung %@.";
@@ -54,9 +59,7 @@ Beispiel: 20:35";
 "alert.set_default.success" = "Abgeschlossen. %d erfolgreich, %d gescheitert.";
 "alert.set_default.title" = "IINA als Standardprogramm setzten";
 "alert.sleep" = "Ruhezustand des Monitors konnte nicht verhindert werden.";
-"alert.sub.cannot_login" = "Anmelden nicht möglich. Bitte überprüfe Benutzername, Passwort und Netzwerkverbindung.
-
-%@";
+"alert.sub.cannot_login" = "Anmelden nicht möglich. Bitte überprüfe Benutzername, Passwort und Netzwerkverbindung.\n\n%@";
 "alert.sub.cannot_save_passwd" = "Passwort konnte nicht im Schlüsselbund gesichert werden: %@.";
 "alert.sub.no_selected" = "Bitte wähle zuerst eine heruntergeladene Untertiteldatei aus.";
 "alert.sub_lang_not_set" = "Bitte lege vor der Benutzung von OpenSubtitles die bevorzugte Untertitelsprache fest. Benutzte diesmal English(eng).";
@@ -103,6 +106,12 @@ Beispiel: 20:35";
 "menu.volume" = "Lautstärke: %d";
 "menu.volume_down" = "Lautstärke − %.0f%%";
 "menu.volume_up" = "Lautstärke + %.0f%%";
+"osc_toolbar.full_screen" = "Vollbild ein-/ausschalten";
+"osc_toolbar.music_mode" = "Musikmodus";
+"osc_toolbar.pip" = "Bild-in-Bild ein-/ausschalten";
+"osc_toolbar.playlist" = "Kapitel und Playlists";
+"osc_toolbar.settings" = "Schnelleinstellungen";
+"osc_toolbar.sub_track" = "Untertitelspur auswählen";
 "osd.abloop.a" = "A-B-Schleife: A";
 "osd.abloop.b" = "A-B-Schleife: B";
 "osd.abloop.clear" = "A-B-Schleife: Aus";
@@ -188,52 +197,8 @@ Beispiel: 20:35";
 "touchbar.next_video" = "Nächstes Video";
 "touchbar.play_pause" = "Wiedergabe / Pause";
 "touchbar.prev_video" = "Vorheriges Video";
+"touchbar.remainingTime" = "Verbleibende Zeit";
 "touchbar.rewind" = "Zurückspulen";
 "touchbar.seek" = "Verlauf";
 "touchbar.time" = "Position";
-"track.none" = "<Leer>";
-
-/* FIXME: Using English localization instead */
-"touchbar.remainingTime" = "Remaining Time";
-
-/* FIXME: Using English localization instead */
-"alert.beta_channel.message" = "IINA v1.0 is comming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
-
-/* FIXME: Using English localization instead */
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register.try" = "Try First";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_prompt.title" = "Enter your API token";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register.register" = "Register Now";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.sub_track" = "Choose subtitle track";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.playlist" = "Playlist and chapters";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.music_mode" = "Enter music mode";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.settings" = "Quick Settings";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.full_screen" = "Toggle full screen";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.pip" = "Toggle Picture-in-Picture";
+"track.none" = "<Keine>";

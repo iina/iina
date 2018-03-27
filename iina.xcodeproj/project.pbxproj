@@ -451,6 +451,8 @@
 		6C9C253F205B8C070092D7B0 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		6C9C2541205B8D9C0092D7B0 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
 		6C9C2542205B93CF0092D7B0 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/FilterPresets.strings; sourceTree = "<group>"; };
+		6CA1B160206AC7F100F9A8EE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/FilterPresets.strings; sourceTree = "<group>"; };
+		6CA1B162206AC83D00F9A8EE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		6CA50A931EBBA9DF0060D07A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6CA50A951EBBB6B30060D07A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AboutWindowController.strings; sourceTree = "<group>"; };
 		6CA50A971EBBB7CD0060D07A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PlaylistViewController.strings; sourceTree = "<group>"; };
@@ -2591,6 +2593,7 @@
 				64D04D5120083B6F0031EE2F /* es */,
 				4CA6B430201E85BB008F3FBA /* pt-BR */,
 				6C9C2542205B93CF0092D7B0 /* pl */,
+				6CA1B160206AC7F100F9A8EE /* de */,
 			);
 			name = FilterPresets.strings;
 			sourceTree = "<group>";
@@ -2653,6 +2656,7 @@
 				C77164E12058D45C009E41DA /* ko */,
 				134C1370205FB181002C7BE4 /* ja */,
 				9D1C033A2067C24600919F84 /* nl */,
+				6CA1B162206AC83D00F9A8EE /* de */,
 			);
 			name = PrefOSCToolbarSettingsSheetController.xib;
 			sourceTree = "<group>";

@@ -254,3 +254,9 @@
 "touchbar.time" = "재생 위치";
 "touchbar.remainingTime" = "남은 시간";
 
+
+/* FIXME: Using English localization instead */
+"alert.add_url.title" = "Add URL";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.message" = "Please enter the URL:";

@@ -156,8 +156,9 @@
 "osd.video_eq.hue" = "色调：%i";
 "osd.video_eq.saturation" = "饱和度：%i";
 "osd.volume" = "音量：%i";
-"pl_menu.add_item" = "添加项目…";
+"pl_menu.add_file" = "添加文件…";
 "pl_menu.add_sub" = "添加字幕…";
+"pl_menu.add_url" = "添加 URL…";
 "pl_menu.clear_playlist" = "清除播放列表";
 "pl_menu.delete" = "移到垃圾桶";
 "pl_menu.delete_after_play" = "播放后移到垃圾桶";

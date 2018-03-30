@@ -216,7 +216,8 @@
 "pl_menu.delete_after_play" = "Move to Trash After Playback";
 "pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
 "pl_menu.reveal_in_finder" = "Reveal in Finder";
-"pl_menu.add_item" = "Add Item…";
+"pl_menu.add_file" = "Add File…";
+"pl_menu.add_url" = "Add URL…";
 "pl_menu.clear_playlist" = "Clear Playlist";
 "pl_menu.matched_sub" = "Matched %d Subtitle(s)";
 "pl_menu.add_sub" = "Add Subtitle…";

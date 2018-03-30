@@ -351,9 +351,9 @@ class Utility {
     // check exist
     if !FileManager.default.fileExists(atPath: path) {
       do {
-      try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false, attributes: nil)
+      try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
       } catch {
-        Utility.fatal("Cannot create folder in Application Support directory")
+        Utility.fatal("Cannot create directory: \(url)")
       }
     }
   }
@@ -396,9 +396,14 @@ class Utility {
   }()
 
   static let logDirURL: URL = {
-    let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.logFolder, isDirectory: true)
-    createDirIfNotExist(url: url)
-    return url
+    // get path
+    let libraryPath = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)
+    Utility.assert(libraryPath.count >= 1, "Cannot get path to Logs directory")
+    let logsUrl = libraryPath.first!.appendingPathComponent("Logs", isDirectory: true)
+    let bundleID = Bundle.main.bundleIdentifier!
+    let appLogsUrl = logsUrl.appendingPathComponent(bundleID, isDirectory: true)
+    createDirIfNotExist(url: appLogsUrl)
+    return appLogsUrl
   }()
 
   static let watchLaterURL: URL = {
@@ -408,9 +413,14 @@ class Utility {
   }()
 
   static let thumbnailCacheURL: URL = {
-    let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)
-    createDirIfNotExist(url: url)
-    return url
+    // get path
+    let cachesPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
+    Utility.assert(cachesPath.count >= 1, "Cannot get path to Caches directory")
+    let bundleID = Bundle.main.bundleIdentifier!
+    let appCachesUrl = cachesPath.first!.appendingPathComponent(bundleID, isDirectory: true)
+    let appThumbnailCacheUrl = appCachesUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)
+    createDirIfNotExist(url: appThumbnailCacheUrl)
+    return appThumbnailCacheUrl
   }()
 
   static let playbackHistoryURL: URL = {

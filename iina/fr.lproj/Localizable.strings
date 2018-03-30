@@ -202,3 +202,9 @@
 "touchbar.seek" = "Chercher";
 "touchbar.time" = "Position horaire";
 "track.none" = "<Aucun>";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.title" = "Add URL";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.message" = "Please enter the URL:";

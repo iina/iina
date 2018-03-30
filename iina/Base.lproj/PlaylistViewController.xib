@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PlaylistViewController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="addFileMenu" destination="WJF-Uz-W4x" id="r2E-07-2v4"/>
                 <outlet property="buttonTopConstraint" destination="hLh-Or-ZUd" id="wDU-9e-scd"/>
                 <outlet property="chapterTableView" destination="BvG-MR-6LX" id="WoF-Wg-fqX"/>
                 <outlet property="chaptersBtn" destination="SOR-3l-PFj" id="W2q-tm-TA0"/>
@@ -193,7 +194,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="addToPlaylistBtnAction:" target="-2" id="Jtx-UI-zuc"/>
+                                                    <action selector="addToPlaylistBtnAction:" target="-2" id="glx-Rv-Iri"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7my-AM-8Ts">
@@ -449,7 +450,7 @@
                     <rect key="frame" x="8" y="28" width="224" height="42"/>
                     <clipView key="contentView" drawsBackground="NO" id="6rI-3b-JZo">
                         <rect key="frame" x="0.0" y="0.0" width="224" height="42"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="14" id="puj-Kl-qOI">
                                 <rect key="frame" x="0.0" y="0.0" width="403" height="42"/>
@@ -521,6 +522,23 @@
             </constraints>
             <point key="canvasLocation" x="46.5" y="647"/>
         </customView>
+        <menu id="WJF-Uz-W4x">
+            <items>
+                <menuItem title="Add File…" id="CI2-Gm-j4o">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="addFileAction:" target="-2" id="Jxt-2n-xTT"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Add URL…" id="zeJ-cr-tRg">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="addURLAction:" target="-2" id="v21-ty-a2p"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="294" y="497"/>
+        </menu>
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>

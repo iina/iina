@@ -202,3 +202,9 @@
 "touchbar.seek" = "シーク";
 "touchbar.time" = "再生位置";
 "track.none" = "<なし>";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.title" = "Add URL";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.message" = "Please enter the URL:";

@@ -202,3 +202,9 @@
 "touchbar.seek" = "Szukaj";
 "touchbar.time" = "Pozycja czasowa";
 "track.none" = "Brak ścieżki";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.title" = "Add URL";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.message" = "Please enter the URL:";

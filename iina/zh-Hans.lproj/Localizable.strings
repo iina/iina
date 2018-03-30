@@ -2,6 +2,8 @@
 
 "alert.add_filter.message" = "请输入符合 mpv 的 vf 或 af 选项格式的滤镜字符串。";
 "alert.add_filter.title" = "添加滤镜";
+"alert.add_url.message" = "请输入 URL:";
+"alert.add_url.title" = "添加 URL";
 "alert.add_watch.message" = "请输入一个有效的 mpv 属性名。";
 "alert.add_watch.title" = "监视 mpv 属性";
 "alert.assrt_register" = "由于射手网(伪)的 API 请求数量限制，请务必在射手网（伪）注册账户后使用自己的 API token。自带 API token 仅用于测试用途，并且可能由于 API 使用超出限额而请求失败。";

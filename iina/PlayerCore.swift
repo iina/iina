@@ -334,6 +334,7 @@ class PlayerCore: NSObject {
       mainWindow.window?.aspectRatio = NSSize(width: AppData.widthWhenNoVideo, height: AppData.heightWhenNoVideo)
     }
     isInMiniPlayer = false
+    mainWindow.updateTitle()
   }
 
   // MARK: - MPV commands
@@ -863,6 +864,7 @@ class PlayerCore: NSObject {
     currentMediaIsAudio = .unknown
     guard let path = mpv.getString(MPVProperty.path) else { return }
     info.currentURL = path.contains("://") ? URL(string: path) : URL(fileURLWithPath: path)
+    info.isNetworkResource = !info.currentURL!.isFileURL
     // Auto load
     backgroundQueueTicket += 1
     let shouldAutoLoadFiles = info.shouldAutoLoadFiles

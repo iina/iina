@@ -98,8 +98,12 @@ class OnlineSubtitle: NSObject {
         subSupport.hash(url)
       }.then { info in
         subSupport.request(info.dictionary)
-      }.then { subs in
-        subSupport.requestByName(url, subs)
+      }.recover { error -> Promise<[OpenSubSubtitle]> in
+        if case OpenSubSupport.OpenSubError.noResult = error {
+          return subSupport.requestByName(url)
+        } else {
+          throw error
+        }
       }.then { subs in
         subSupport.showSubSelectWindow(with: subs)
       }.then { selectedSubs -> Void in
@@ -118,13 +122,14 @@ class OnlineSubtitle: NSObject {
         case OpenSubSupport.OpenSubError.xmlRpcError(let error):
           Utility.log("OpenSubtitles: \(error.readableDescription)")
           osdMessage = .networkError
+        case OpenSubSupport.OpenSubError.noResult:
+          callback([])
+          return
         default:
           osdMessage = .networkError
         }
         playerCore.sendOSD(osdMessage)
         playerCore.isSearchingOnlineSubtitle = false
-      }.always {
-        playerCore.hideOSD()
       }
     case .assrt:
       let subSupport = AssrtSupport.shared

@@ -57,6 +57,7 @@ class OpenSubSupport {
   typealias Subtitle = OpenSubSubtitle
 
   enum OpenSubError: Error {
+    case noResult
     // login failed (reason)
     case loginFailed(String)
     // file error
@@ -198,10 +199,7 @@ class OpenSubSupport {
     }
   }
 
-  func requestByName(_ fileURL: URL, _ subs: [OpenSubSubtitle]) -> Promise<[OpenSubSubtitle]> {
-    guard subs.isEmpty else {
-      return Promise { fulfill, reject in fulfill(subs) }
-    }
+  func requestByName(_ fileURL: URL) -> Promise<[OpenSubSubtitle]> {
     return requestIMDB(fileURL).then { IMDB in
       let info = ["imdbid": IMDB]
       return self.request(info)
@@ -270,7 +268,11 @@ class OpenSubSupport {
                                       zipDlLink: subData["ZipDownloadLink"] as! String)
             result.append(sub)
           }
-          fulfill(result)
+          if result.isEmpty {
+            reject(OpenSubError.noResult)
+          } else {
+            fulfill(result)
+          }
         case .failure(_):
           // Failure
           reject(OpenSubError.searchFailed("Failure"))

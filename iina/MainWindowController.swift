@@ -106,16 +106,90 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var isDragging: Bool = false
   var isResizingSidebar: Bool = false
 
-  var isInFullScreen: Bool = false {
-    didSet {
-      player.mpv.setFlag(MPVOption.Window.fullscreen, isInFullScreen)
+  enum ScreenState: Equatable {
+    case windowed
+    case animating(toFullscreen: Bool, legacy: Bool, priorWindowedFrame: NSRect)
+    case fullscreen(legacy: Bool, priorWindowedFrame: NSRect)
+
+    var isFullscreen: Bool {
+      switch self {
+      case .fullscreen: return true
+      case .windowed, .animating: return false
+      }
+    }
+
+    static func ==(lhs: ScreenState, rhs: ScreenState) -> Bool {
+      switch (lhs, rhs) {
+      case (.windowed, .windowed):
+        return true
+      case (let .animating(rF, rL, rP), let .animating(lF, lL, lP)):
+        return rF == lF && rL == lL && rP == lP
+      case (let .fullscreen(rL, rP), let .fullscreen(lL, lP)):
+        return rL == lL && rP == lP
+      default:
+        return false
+      }
+    }
+
+    var priorWindowedFrame: NSRect? {
+      get {
+        switch self {
+        case .windowed: return .none
+        case .animating(_, _, let p): return p
+        case .fullscreen(_, let p): return p
+        }
+      }
+      set {
+        guard let newRect = newValue else { return }
+        switch self {
+        case .windowed:
+          fatalError("too much caching. Lets be more efficient and only write to this when necessary")
+        case let .animating(toFullscreen, legacy, _):
+          self = .animating(toFullscreen: toFullscreen, legacy: legacy, priorWindowedFrame: newRect)
+        case let .fullscreen(legacy, _):
+          self = .fullscreen(legacy: legacy, priorWindowedFrame: newRect)
+        }
+      }
+    }
+
+    mutating func startAnimating(to screenState: ScreenState) {
+      switch screenState {
+      case .windowed:
+        switch self {
+        case .fullscreen(let legacy , let priorWindowedFrame):
+          self = .animating(toFullscreen: false, legacy: legacy, priorWindowedFrame: priorWindowedFrame)
+        default:
+          fatalError("something went wrong with the state of the world. Can't go from \(self) to windowed")
+        }
+      case .animating:
+        fatalError("something went wrong with the state of the world. Can't go from \(self) to windowed")
+      case .fullscreen(let legacy, let priorWindowedFrame):
+        assert(self == .windowed)
+        self = .animating(toFullscreen: true, legacy: legacy, priorWindowedFrame: priorWindowedFrame)
+      }
+    }
+
+    mutating func finishAnimating() {
+      switch self {
+      case .windowed, .fullscreen: assertionFailure("something went wrong with the state of the world. One must be .animating to finishAnimating. Not \(self)")
+      case .animating(let toFullScreen, let legacy, let prior):
+        switch toFullScreen {
+        case true:  self = .fullscreen(legacy: legacy, priorWindowedFrame: prior)
+        case false: self = .windowed
+        }
+      }
     }
   }
-  var isInFullScreenAnimation: Bool = false
-  /** For legacy full screen */
-  var windowFrameBeforeEnteringFullScreen: NSRect?
-  /** Prevent unexpected behavior when user switchs full screen mode during full screen*/
-  var currentFullScreenIsLegacy = false
+
+  var fullscreen: ScreenState = .windowed {
+    didSet {
+      switch fullscreen {
+      case .fullscreen: player.mpv.setFlag(MPVOption.Window.fullscreen, true)
+      case .animating:  break
+      case .windowed:   player.mpv.setFlag(MPVOption.Window.fullscreen, false)
+      }
+    }
+  }
 
   var isOntop: Bool = false {
     didSet {
@@ -356,12 +430,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.blackOutMonitor.rawValue:
       if let newValue = change[.newKey] as? Bool {
-        if isInFullScreen {
-          if newValue {
-            blackOutOtherMonitors()
-          } else {
-            removeBlackWindow()
-          }
+        switch self.fullscreen {
+        case .fullscreen:
+          newValue ? blackOutOtherMonitors() : removeBlackWindow()
+        case .animating, .windowed:
+          break
         }
       }
 
@@ -643,14 +716,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     notificationCenter(.default, addObserverfor: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
-      let screenCount = NSScreen.screens.count
-      if self.isInFullScreen && Preference.bool(for: .blackOutMonitor) {
-        if screenCount != self.cachedScreenCount {
+      switch self.fullscreen {
+      case .windowed, .animating(false, _, _):
+        break // the new screen doesnt impact windowed mode
+      case .fullscreen, .animating(true, _, _):
+        if self.cachedScreenCount != NSScreen.screens.count && Preference.bool(for: .blackOutMonitor) {
           self.removeBlackWindow()
           self.blackOutOtherMonitors()
         }
       }
-      self.cachedScreenCount = screenCount
+
+      // Update the cached value
+      self.cachedScreenCount = NSScreen.screens.count
     }
 
   }
@@ -727,24 +804,23 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     if isSwitchingToTop {
-      if isInFullScreen {
+      switch self.fullscreen {
+      case .fullscreen:
         addBackTitlebarViewToFadeableViews()
         oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTopInFullScreen
         titleBarHeightConstraint.constant = TitleBarHeightWithOSCInFullScreen
-      } else {
+
+        titleBarView.isHidden = true
+        removeTitlebarViewFromFadeableViews()
+      case .animating:
+        fatalError("potential inconsistency")
+      case .windowed:
         oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
         titleBarHeightConstraint.constant = TitleBarHeightWithOSC
       }
       titleBarBottomBorder.isHidden = true
     } else {
       titleBarBottomBorder.isHidden = false
-    }
-
-    if isSwitchingFromTop {
-      if isInFullScreen {
-        titleBarView.isHidden = true
-        removeTitlebarViewFromFadeableViews()
-      }
     }
 
     oscPosition = newPosition
@@ -891,7 +967,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let currentLocation = event.locationInWindow
       let newWidth = window!.frame.width - currentLocation.x - 2
       sideBarWidthConstraint.constant = newWidth.constrain(min: PlaylistMinWidth, max: PlaylistMaxWidth)
-    } else if !isInFullScreen {
+    } else if !self.fullscreen.isFullscreen {
       // move the window by dragging
       isDragging = true
       guard !controlBarFloating.isDragging else { return }
@@ -1138,8 +1214,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard pinchAction != .none else { return }
     guard !isInInteractiveMode, let window = window, let screenFrame = NSScreen.main?.visibleFrame else { return }
 
-    if pinchAction == .windowSize {
-      if isInFullScreen { return }
+    switch pinchAction {
+    case .none:
+      return
+    case .fullscreen:
+      // enter/exit fullscreen
+      if recognizer.state == .began {
+        let isEnlarge = recognizer.magnification > 0
+        if !isEnlarge {
+          recognizer.state = .recognized
+          self.toggleWindowFullScreen()
+        }
+      }
+    case .windowSize:
+      if case .fullscreen(_,_) = self.fullscreen { return }
+
       // adjust window size
       if recognizer.state == .began {
         // began
@@ -1159,17 +1248,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         lastMagnification = recognizer.magnification
       } else if recognizer.state == .ended {
         updateWindowParametersForMPV()
-      }
-
-    } else if pinchAction == .fullscreen{
-      // enter/exit fullscreen
-      if recognizer.state == .began {
-        let isEnlarge = recognizer.magnification > 0
-        // xor
-        if isEnlarge != isInFullScreen {
-          recognizer.state = .recognized
-          self.toggleWindowFullScreen()
-        }
       }
     }
   }
@@ -1243,11 +1321,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func window(_ window: NSWindow, startCustomAnimationToEnterFullScreenOn screen: NSScreen, withDuration duration: TimeInterval) {
-    windowFrameBeforeEnteringFullScreen = window.frame
+    self.fullscreen.priorWindowedFrame = window.frame
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
       window.animator().setFrame(screen.frame, display: true)
-    }, completionHandler: nil)
+    }, completionHandler: .none)
 
   }
 
@@ -1255,9 +1333,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if NSMenu.menuBarVisible() {
       NSMenu.setMenuBarVisible(false)
     }
+    let priorWindowedFrame: NSRect = {
+      switch self.fullscreen {
+      case .windowed:
+        fatalError("cant start exiting fullscreen whilst already windowed")
+      case .animating(_, _, let priorWindowedFrame):
+        return priorWindowedFrame
+      case .fullscreen(_, let priorWindowedFrame):
+        return priorWindowedFrame
+      }
+    }()
+
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
-      window.animator().setFrame(windowFrameBeforeEnteringFullScreen!, display: true)
+      window.animator().setFrame(priorWindowedFrame, display: true)
     }, completionHandler: nil)
 
     NSMenu.setMenuBarVisible(true)
@@ -1294,9 +1383,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     timePreviewWhenSeek.isHidden = true
     isMouseInSlider = false
 
-    isInFullScreenAnimation = true
-    isInFullScreen = true
-    
+    self.fullscreen = .fullscreen(legacy: false, priorWindowedFrame: self.window!.frame)
+
     // Exit PIP if necessary
     if pipStatus == .inPIP,
       #available(macOS 10.12, *) {
@@ -1307,7 +1395,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowDidEnterFullScreen(_ notification: Notification) {
-    isInFullScreenAnimation = false
+    guard case .fullscreen = self.fullscreen else { fatalError("maybe uncomment finishAnimating?") }
+//    self.fullscreen.finishAnimating()
 
     videoView.videoLayer.mpvGLQueue.resume()
 
@@ -1363,8 +1452,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     additionalInfoView.isHidden = true
     isMouseInSlider = false
 
-    isInFullScreen = false
-    isInFullScreenAnimation = true
+    self.fullscreen.startAnimating(to: .windowed)
 
     videoView.videoLayer.mpvGLQueue.suspend()
   }
@@ -1385,7 +1473,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
     }
 
-    isInFullScreenAnimation = false
+    self.fullscreen.finishAnimating()
 
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()
@@ -1408,8 +1496,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       fadeableViews.remove(at: index)
     }
 
-    windowFrameBeforeEnteringFullScreen = nil
-
     resetCollectionBehavior()
     updateWindowParametersForMPV()
   }
@@ -1431,15 +1517,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // unbearably laggy under current render meahcanism). Thus when entering full screen, we should keep `videoView`'s
     // aspect ratio. Otherwise, when entered full screen, there will be an awkward animation that looks like
     // `videoView` "resized" to screen size suddenly when mpv redraws the video content in correct aspect ratio.
-    if isInFullScreenAnimation {
+    if case let .animating(toFullScreen, _, _) = self.fullscreen {
       let aspect: NSSize
       let targetFrame: NSRect
-      if isInFullScreen {
-        aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
-        targetFrame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
-      } else {
+      if toFullScreen {
         aspect = window.screen!.frame.size
         targetFrame = aspect.grow(toSize: window.frame.size).centeredRect(in: window.frame)
+      } else {
+        aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
+        targetFrame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
       }
 
       setConstraintsForVideoView([
@@ -1528,7 +1614,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidBecomeMain(_ notification: Notification) {
     PlayerCore.lastActive = player
-    if isInFullScreen && Preference.bool(for: .blackOutMonitor) {
+    if self.fullscreen.isFullscreen && Preference.bool(for: .blackOutMonitor) {
       blackOutOtherMonitors()
     }
     NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
@@ -1579,7 +1665,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       fadeableViews.forEach { (v) in
         v.animator().alphaValue = 0
       }
-      if !isInFullScreen {
+      if !self.fullscreen.isFullscreen {
         titleTextField?.animator().alphaValue = 0
       }
     }) {
@@ -1598,7 +1684,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fadeableViews.forEach { (v) in
       v.isHidden = false
     }
-    if !player.isInMiniPlayer && isInFullScreen && displayTimeAndBatteryInFullScreen {
+    if !player.isInMiniPlayer && self.fullscreen.isFullscreen && displayTimeAndBatteryInFullScreen {
       player.syncUI(.additionalInfo)
     }
     standardWindowButtons.forEach { $0.isEnabled = true }
@@ -1607,8 +1693,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       fadeableViews.forEach { (v) in
         v.animator().alphaValue = 1
       }
-      if !isInFullScreen {
-        titleTextField?.animator().alphaValue = 1
+      switch self.fullscreen {
+      case .fullscreen, .animating: break
+      case .windowed: titleTextField?.animator().alphaValue = 1
       }
     }) {
       // if no interrupt then hide animation
@@ -1866,7 +1953,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isInInteractiveMode = true
     hideUI()
 
-    if (isInFullScreen) {
+    if self.fullscreen.isFullscreen {
       let aspect: NSSize
       if window.aspectRatio == .zero {
         let dsize = player.videoSizeForDisplay
@@ -2053,10 +2140,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       $0?.appearance = appearance
     }
 
-    if isInFullScreen {
-      window!.appearance = appearance;
-    }
-
     window?.appearance = appearance
   }
 
@@ -2152,23 +2235,30 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** Set window size when info available, or video size changed. */
   func adjustFrameByVideoSize() {
-    guard let w = window else { return }
+    guard let window = self.window else { return }
 
     let (width, height) = player.videoSizeForDisplay
 
     // set aspect ratio
     let originalVideoSize = NSSize(width: width, height: height)
-    w.aspectRatio = originalVideoSize
+    window.aspectRatio = originalVideoSize
     if #available(macOS 10.12, *) {
       pip.aspectRatio = originalVideoSize
     }
 
-    videoView.videoSize = w.convertToBacking(videoView.frame).size
+    videoView.videoSize = window.convertToBacking(videoView.frame).size
 
     var rect: NSRect
     let needResizeWindow: Bool
 
-    let frame = windowFrameBeforeEnteringFullScreen ?? w.frame
+    let frameBeforeEnteringFullScreen: NSRect? = {
+      switch self.fullscreen {
+      case .windowed:           return .none
+      case .animating(_, _, let f): return f
+      case .fullscreen(_, let f):   return f
+      }
+    }()
+    let frame = frameBeforeEnteringFullScreen ?? window.frame
 
     if player.info.justStartedFile {
       // resize option applies
@@ -2191,8 +2281,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // get videoSize on screen
       var videoSize = originalVideoSize
       if Preference.bool(for: .usePhysicalResolution) {
-        videoSize = w.convertFromBacking(
-          NSMakeRect(w.frame.origin.x, w.frame.origin.y, CGFloat(width), CGFloat(height))).size
+        videoSize = window.convertFromBacking(
+          NSMakeRect(window.frame.origin.x, window.frame.origin.y, CGFloat(width), CGFloat(height))).size
       }
       if player.info.justStartedFile {
         if resizeRatio < 0 {
@@ -2232,13 +2322,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     player.info.justOpenedFile = false
     player.info.justStartedFile = false
 
-    if isInFullScreen {
-      windowFrameBeforeEnteringFullScreen = rect
-    } else {
+    switch self.fullscreen {
+    case .windowed:
       // animated `setFrame` can be inaccurate!
-      w.setFrame(rect, display: true, animate: true)
-      w.setFrame(rect, display: true)
+      window.setFrame(rect, display: true, animate: true)
+      window.setFrame(rect, display: true)
       updateWindowParametersForMPV(withFrame: rect)
+    case .animating, .fullscreen:
+      self.fullscreen.priorWindowedFrame = rect
     }
 
     // generate thumbnails after video loaded if it's the first time
@@ -2253,7 +2344,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func updateWindowParametersForMPV(withFrame frame: NSRect? = nil) {
-    guard let window = window else { return }
+    guard let window = self.window else { return }
     if let videoWidth = player.info.videoWidth {
       let windowScale = Double((frame ?? window.frame).width) / Double(videoWidth)
       player.info.cachedWindowScale = windowScale
@@ -2262,7 +2353,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func setWindowScale(_ scale: Double) {
-    guard let window = window, !isInFullScreen else { return }
+    guard let window = window, self.fullscreen == .windowed else { return }
     let screenFrame = (window.screen ?? NSScreen.main!).visibleFrame
     let (videoWidth, videoHeight) = player.videoSizeForDisplay
     let newFrame: NSRect
@@ -2313,79 +2404,82 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func toggleWindowFullScreen() {
-    guard let window = window else { return }
+    guard let window = self.window else { fatalError("make sure the window exists before animating") }
 
-    if (isInFullScreen) {
-      // exit full screen
-      if currentFullScreenIsLegacy {
-        // exit legacy full screen
-        // call delegate
-        windowWillExitFullScreen(Notification(name: .iinaLegacyFullScreen))
-        // stylemask
-        window.styleMask.remove(.borderless)
-        window.styleMask.remove(.fullScreen)
-        // cancel auto hide for menu and dock
-        NSApp.presentationOptions.remove(.autoHideMenuBar)
-        NSApp.presentationOptions.remove(.autoHideDock)
-        // restore window frame ans aspect ratio
-        let videoSize = player.videoSizeForDisplay
-        let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)
-        let useAnimation = Preference.bool(for: .legacyFullScreenAnimation)
-        if useAnimation {
-          // firstly resize to a big frame with same aspect ratio for better visual experience
-          let aspectSize = aspectRatio.shrink(toSize: window.frame.size)
-          let aspectFrame = aspectSize.centeredRect(in: window.frame)
-          window.setFrame(aspectFrame, display: true, animate: false)
-        }
-        // then animate to the original frame
-        if let frame = windowFrameBeforeEnteringFullScreen {
-          window.setFrame(frame, display: true, animate: useAnimation)
-        } else {
-          player.notifyMainWindowVideoSizeChanged()
-        }
-        window.aspectRatio = aspectRatio
-        // call delegate
-        windowDidExitFullScreen(Notification(name: .iinaLegacyFullScreen))
+    switch self.fullscreen {
+    case .windowed:
+      guard !player.isInMiniPlayer else { return } // Maybe the miniplayer state should be brought into the ScreenState?
+      if Preference.bool(for: .useLegacyFullScreen) {
+        self.legacyAnimateToFullscreen()
       } else {
-        // system full screen
         window.toggleFullScreen(self)
       }
-    } else {
-      // enter full screen
-      if player.isInMiniPlayer { return }
+    case let .animating:
+      fatalError("unsure how to toggle while in the middle of an animation. Maybe this should no-op?")
+    case let .fullscreen(_, oldFrame):
       if Preference.bool(for: .useLegacyFullScreen) {
-        // enter legacy full screen
-        // cache current window frame
-        currentFullScreenIsLegacy = true
-        windowFrameBeforeEnteringFullScreen = window.frame
-        // call delegate
-        windowWillEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
-        // stylemask
-        window.styleMask.insert(.borderless)
-        window.styleMask.insert(.fullScreen)
-        // cancel aspect ratio
-        window.resizeIncrements = NSSize(width: 1, height: 1)
-        // auto hide menubar and dock
-        NSApp.presentationOptions.insert(.autoHideMenuBar)
-        NSApp.presentationOptions.insert(.autoHideDock)
-        // set frame
-        let screen = window.screen ?? NSScreen.main!
-        window.setFrame(NSRect(origin: .zero, size: screen.frame.size), display: true, animate: true)
-        // call delegate
-        windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
+        self.legacyAnimateToWindowed(framePriorToBeingInFullscreen: oldFrame)
       } else {
-        // system full screen
-        currentFullScreenIsLegacy = false
         window.toggleFullScreen(self)
       }
     }
+  }
 
+  private func legacyAnimateToWindowed(framePriorToBeingInFullscreen: NSRect) {
+    guard let window = self.window else { fatalError("make sure the window exists before animating") }
+
+    // call delegate
+    windowWillExitFullScreen(Notification(name: .iinaLegacyFullScreen))
+    // stylemask
+    window.styleMask.remove(.borderless)
+    window.styleMask.remove(.fullScreen)
+    // cancel auto hide for menu and dock
+    NSApp.presentationOptions.remove(.autoHideMenuBar)
+    NSApp.presentationOptions.remove(.autoHideDock)
+    // restore window frame ans aspect ratio
+    let videoSize = player.videoSizeForDisplay
+    let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)
+    let useAnimation = Preference.bool(for: .legacyFullScreenAnimation)
+    if useAnimation {
+      // firstly resize to a big frame with same aspect ratio for better visual experience
+      let aspectSize = aspectRatio.shrink(toSize: window.frame.size)
+      let aspectFrame = aspectSize.centeredRect(in: window.frame)
+      window.setFrame(aspectFrame, display: true, animate: false)
+    }
+    // then animate to the original frame
+    window.setFrame(framePriorToBeingInFullscreen, display: true, animate: useAnimation)
+    window.aspectRatio = aspectRatio
+    // call delegate
+    windowDidExitFullScreen(Notification(name: .iinaLegacyFullScreen))
+  }
+  private func legacyAnimateToFullscreen() {
+    guard let window = self.window else { fatalError("make sure the window exists before animating") }
+
+
+    // enter legacy full screen
+    // cache current window frame
+    self.fullscreen.startAnimating(to: .fullscreen(legacy: true, priorWindowedFrame: window.frame))
+    // call delegate
+    windowWillEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
+    // stylemask
+    window.styleMask.insert(.borderless)
+    window.styleMask.insert(.fullScreen)
+    // cancel aspect ratio
+    window.resizeIncrements = NSSize(width: 1, height: 1)
+    // auto hide menubar and dock
+    NSApp.presentationOptions.insert(.autoHideMenuBar)
+    NSApp.presentationOptions.insert(.autoHideDock)
+    // set frame
+    let screen = window.screen ?? NSScreen.main!
+    window.setFrame(NSRect(origin: .zero, size: screen.frame.size), display: true, animate: true)
+    // call delegate
+    windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
   }
 
   /** This method will not set `isOntop`! */
   func setWindowFloatingOnTop(_ onTop: Bool) {
     guard let window = window else { return }
-    if isInFullScreen { return }
+    guard self.fullscreen == .windowed else { return }
     if onTop {
       window.level = .iinaFloating
     } else {
@@ -2731,9 +2825,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func resetCollectionBehavior() {
-    if isInFullScreen {
-      return
-    }
+    guard self.fullscreen == .windowed else { return }
     if Preference.bool(for: .useLegacyFullScreen) {
       window?.collectionBehavior = [.managed, .fullScreenAuxiliary]
     } else {
@@ -2756,7 +2848,14 @@ extension MainWindowController: PIPViewControllerDelegate {
 
   func enterPIP() {
     // Exit fullscreen if necessary
-    if isInFullScreen {
+    switch self.fullscreen {
+    case .windowed:
+      break
+    case .animating(let toFullscreen, _, _) where toFullscreen:
+      toggleWindowFullScreen()
+    case .animating:
+      break
+    case .fullscreen:
       toggleWindowFullScreen()
     }
     

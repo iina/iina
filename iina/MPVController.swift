@@ -799,10 +799,15 @@ class MPVController: NSObject {
     case MPVOption.Window.fullscreen:
       guard player.mainWindow.isWindowLoaded else { break }
       let fs = getFlag(MPVOption.Window.fullscreen)
-      if fs != player.mainWindow.isInFullScreen {
-        DispatchQueue.main.async {
-          self.player.mainWindow.toggleWindowFullScreen()
-        }
+      switch (fs, player.mainWindow.fullscreen) {
+      case (true, .windowed):
+        DispatchQueue.main.async(execute: self.player.mainWindow.toggleWindowFullScreen)
+      case (_, .animating):
+        fatalError("inconsistency. We shouldn't be animating right now") // Not sure
+      case (false, .fullscreen):
+        DispatchQueue.main.async(execute: self.player.mainWindow.toggleWindowFullScreen)
+      default:
+        break
       }
 
     case MPVOption.Window.ontop:

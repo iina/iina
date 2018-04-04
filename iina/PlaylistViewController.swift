@@ -53,7 +53,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBOutlet weak var loopBtn: NSButton!
   @IBOutlet weak var shuffleBtn: NSButton!
   @IBOutlet var subPopover: NSPopover!
-  
+  @IBOutlet var addFileMenu: NSMenu!
+
   var downShift: CGFloat = 0 {
     didSet {
       buttonTopConstraint.constant = downShift
@@ -265,13 +266,29 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   // MARK: - IBActions
 
-  @IBAction func addToPlaylistBtnAction(_ sender: AnyObject) {
+  @IBAction func addToPlaylistBtnAction(_ sender: NSButton) {
+    addFileMenu.popUp(positioning: nil, at: .zero, in: sender)
+  }
+
+  @IBAction func addFileAction(_ sender: AnyObject) {
     Utility.quickMultipleOpenPanel(title: "Add to playlist", canChooseDir: true) { urls in
       let playableFiles = self.player.getPlayableFiles(in: urls)
       if playableFiles.count != 0 {
         self.player.addToPlaylist(paths: playableFiles.map { $0.path }, at: self.player.info.playlist.count)
         self.player.mainWindow.playlistView.reloadData(playlist: true, chapters: false)
         self.player.sendOSD(.addToPlaylist(playableFiles.count))
+      }
+    }
+  }
+
+  @IBAction func addURLAction(_ sender: AnyObject) {
+    Utility.quickPromptPanel("add_url") { url in
+      if Regex.url.matches(url) {
+        self.player.addToPlaylist(url)
+        self.player.mainWindow.playlistView.reloadData(playlist: true, chapters: false)
+        self.player.sendOSD(.addToPlaylist(1))
+      } else {
+        Utility.showAlert("wrong_url_format")
       }
     }
   }
@@ -549,7 +566,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       result.addItem(withTitle: NSLocalizedString("pl_menu.reveal_in_finder", comment: "Reveal in Finder"), action: #selector(self.contextMenuRevealInFinder(_:)))
       result.addItem(NSMenuItem.separator())
     }
-    result.addItem(withTitle: NSLocalizedString("pl_menu.add_item", comment: "Add Item"), action: #selector(self.addToPlaylistBtnAction(_:)))
+    result.addItem(withTitle: NSLocalizedString("pl_menu.add_item", comment: "Add Item"), action: #selector(self.addFileAction(_:)))
+    result.addItem(withTitle: NSLocalizedString("pl_menu.add_url", comment: "Add URL"), action: #selector(self.addURLAction(_:)))
     result.addItem(withTitle: NSLocalizedString("pl_menu.clear_playlist", comment: "Clear Playlist"), action: #selector(self.clearPlaylistBtnAction(_:)))
     return result
   }

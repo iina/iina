@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="PrefOSCToolbarDraggingItemViewController" customModule="IINA" customModuleProvider="target">
+            <connections>
+                <outlet property="descriptionLabel" destination="STZ-wb-l3E" id="RR1-Wd-fcz"/>
+                <outlet property="iconImageView" destination="K6f-VH-I1k" id="3GC-nA-ohN"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="304" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K6f-VH-I1k">
+                    <rect key="frame" x="4" y="3" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="8hu-73-FcW"/>
+                        <constraint firstAttribute="width" constant="24" id="Lsz-6M-e4p"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="24D-9A-XWQ"/>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="STZ-wb-l3E">
+                    <rect key="frame" x="34" y="6" width="37" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="ebp-YW-3qF">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="STZ-wb-l3E" secondAttribute="trailing" constant="8" id="Kwc-uI-FaW"/>
+                <constraint firstItem="K6f-VH-I1k" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="4" id="ZrY-qh-nGt"/>
+                <constraint firstItem="STZ-wb-l3E" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="eE7-qh-hfp"/>
+                <constraint firstItem="K6f-VH-I1k" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="jV0-dq-SXf"/>
+                <constraint firstItem="STZ-wb-l3E" firstAttribute="leading" secondItem="K6f-VH-I1k" secondAttribute="trailing" constant="8" id="rA6-qd-vfg"/>
+            </constraints>
+            <point key="canvasLocation" x="51" y="76"/>
+        </customView>
+    </objects>
+</document>

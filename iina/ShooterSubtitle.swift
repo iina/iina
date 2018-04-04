@@ -36,7 +36,7 @@ final class ShooterSubtitle: OnlineSubtitle {
       }
       let fileName = "[\(self.index)]\(response.fileName ?? "")"
       if let url = data.saveToFolder(Utility.tempDirURL, filename: fileName) {
-        callback(.ok(url))
+        callback(.ok([url]))
       }
     }
   }

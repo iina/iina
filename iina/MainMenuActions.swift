@@ -295,22 +295,30 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuFindOnlineSub(_ sender: NSMenuItem) {
-    guard let url = player.info.currentURL else { return }
-    OnlineSubtitle.getSub(forFile: url, playerCore: player) { subtitles in
+    // return if last search is undone
+    guard let url = player.info.currentURL, !player.isSearchingOnlineSubtitle else { return }
+
+    player.isSearchingOnlineSubtitle = true
+    OnlineSubtitle.getSubtitle(forFile: url, playerCore: player) { subtitles in
       // send osd in main thread
       self.player.sendOSD(.foundSub(subtitles.count))
       // download them
       for sub in subtitles {
         sub.download { result in
           switch result {
-          case .ok(let url):
-            Utility.log("Saved subtitle to \(url.path)")
-            self.player.loadExternalSubFile(url)
-            self.player.sendOSD(.downloadedSub(url.lastPathComponent))
+          case .ok(let urls):
+            for url in urls {
+              Utility.log("Saved subtitle to \(url.path)")
+              self.player.loadExternalSubFile(url)
+            }
+            self.player.sendOSD(.downloadedSub(
+              urls.map({ $0.lastPathComponent }).joined(separator: "\n")
+            ))
             self.player.info.haveDownloadedSub = true
           case .failed:
             self.player.sendOSD(.networkError)
           }
+          self.player.isSearchingOnlineSubtitle = false
         }
       }
     }

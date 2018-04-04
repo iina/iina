@@ -20,4 +20,16 @@ extension Just.HTTPResult {
     }
   }
 
+  var jsonIgnoringError: Any? {
+    get {
+      guard let content = content else { return nil }
+      var bytes = content.map { $0 }
+      bytes.append(0)
+      let string = String(cString: &bytes).replacingOccurrences(of: "\u{FFFD}", with: "?")
+      guard let data = string.data(using: .utf8) else { return nil }
+      return try? JSONSerialization.jsonObject(with: data, options: JSONReadingOptions)
+    }
+  }
+
 }
+

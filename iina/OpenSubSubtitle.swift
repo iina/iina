@@ -44,7 +44,7 @@ final class OpenSubSubtitle: OnlineSubtitle {
       }
       let subFilename = "[\(self.index)]\(self.filename)"
       if let url = unzipped.saveToFolder(Utility.tempDirURL, filename: subFilename) {
-        callback(.ok(url))
+        callback(.ok([url]))
       }
     }
   }
@@ -57,6 +57,7 @@ class OpenSubSupport {
   typealias Subtitle = OpenSubSubtitle
 
   enum OpenSubError: Error {
+    case noResult
     // login failed (reason)
     case loginFailed(String)
     // file error
@@ -91,6 +92,8 @@ class OpenSubSupport {
   private let apiPath = "https://api.opensubtitles.org:443/xml-rpc"
   private static let serviceName: NSString = "IINA OpenSubtitles Account"
   private let xmlRpc: JustXMLRPC
+
+  private let subChooseViewController = SubChooseViewController(source: .openSub)
 
   var language: String
   var username: String = ""
@@ -196,10 +199,41 @@ class OpenSubSupport {
     }
   }
 
-  func request(_ info: FileInfo) -> Promise<[OpenSubSubtitle]> {
+  func requestByName(_ fileURL: URL) -> Promise<[OpenSubSubtitle]> {
+    return requestIMDB(fileURL).then { IMDB in
+      let info = ["imdbid": IMDB]
+      return self.request(info)
+    }
+  }
+
+
+  func requestIMDB(_ fileURL: URL) -> Promise<String> {
+    return Promise { fulfill, reject in
+      let filename = fileURL.lastPathComponent
+      xmlRpc.call("GuessMovieFromString", [token, [filename]]) { status in
+        switch status {
+        case .ok(let reponse):
+          guard let parsed = reponse as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
+          let parsedStatus = parsed["status"] as! String
+          guard parsedStatus.hasPrefix("200") else { reject(OpenSubError.wrongResponseFormat); return }
+          guard let parsedData = parsed["data"] as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
+          guard let data1 = parsedData[filename] as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
+          guard let data2 = data1["BestGuess"] as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
+          guard let IMDB = data2["IDMovieIMDB"] as? String else { reject(OpenSubError.wrongResponseFormat); return }
+          fulfill(IMDB)
+        case .failure(_):
+          reject(OpenSubError.searchFailed("Failure"))
+        case .error(let error):
+          reject(OpenSubError.xmlRpcError(error))
+        }
+      }
+    }
+  }
+
+  func request(_ info: [String: String]) -> Promise<[OpenSubSubtitle]> {
     return Promise { fulfill, reject in
       let limit = 100
-      var requestInfo = info.dictionary
+      var requestInfo = info
       requestInfo["sublanguageid"] = self.language
       xmlRpc.call("SearchSubtitles", [token, [requestInfo], ["limit": limit]]) { status in
         switch status {
@@ -234,7 +268,11 @@ class OpenSubSupport {
                                       zipDlLink: subData["ZipDownloadLink"] as! String)
             result.append(sub)
           }
-          fulfill(result)
+          if result.isEmpty {
+            reject(OpenSubError.noResult)
+          } else {
+            fulfill(result)
+          }
         case .failure(_):
           // Failure
           reject(OpenSubError.searchFailed("Failure"))
@@ -246,25 +284,23 @@ class OpenSubSupport {
     }
   }
 
-  func showSubSelectWindow(subs: [OpenSubSubtitle]) -> Promise<[OpenSubSubtitle]> {
+  func showSubSelectWindow(with subs: [OpenSubSubtitle]) -> Promise<[OpenSubSubtitle]> {
     return Promise { fulfill, reject in
       // return when found 0 or 1 sub
       if subs.count <= 1 {
         fulfill(subs)
         return
       }
-      let subSelectWindow = (NSApp.delegate as! AppDelegate).subSelectWindow
-      subSelectWindow.whenUserAction = { subs in
-        fulfill(subs)
+      subChooseViewController.subtitles = subs
+
+      subChooseViewController.userDoneAction = { subs in
+        fulfill(subs as! [OpenSubSubtitle])
       }
-      subSelectWindow.whenUserClosed = {
+      subChooseViewController.userCanceledAction = {
         reject(OpenSubError.userCanceled)
       }
-      DispatchQueue.main.async {
-        subSelectWindow.showWindow(self)
-        subSelectWindow.arrayController.content = nil
-        subSelectWindow.arrayController.add(contentsOf: subs)
-      }
+      PlayerCore.active.sendOSD(.foundSub(subs.count), autoHide: false, accessoryView: subChooseViewController.view)
+      subChooseViewController.tableView.reloadData()
     }
   }
 

@@ -2,9 +2,6 @@
 /* Class = "NSTextFieldCell"; title = "Seek type:"; ObjectID = "1yb-m4-1sK"; */
 "1yb-m4-1sK.title" = "Sarma tarzı:";
 
-/* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "2Ig-fw-UvW"; */
-"2Ig-fw-UvW.title" = "Önceki / Sonraki Medya";
-
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "6F4-gm-oBg"; */
 "6F4-gm-oBg.title" = "Tam ekrana geç";
 
@@ -65,14 +62,8 @@
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "guu-dK-YfL"; */
 "guu-dK-YfL.title" = "Hiçbiri";
 
-/* Class = "NSMenuItem"; title = "Speed"; ObjectID = "hIG-5X-2Pm"; */
-"hIG-5X-2Pm.title" = "Hız";
-
 /* Class = "NSTextFieldCell"; title = "Scroll vertically to:"; ObjectID = "hNU-dJ-5Cj"; */
 "hNU-dJ-5Cj.title" = "Dikey kaydırma:";
-
-/* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "kEB-gk-wuI"; */
-"kEB-gk-wuI.title" = "Sol/sağ tuşlarını kullan için:";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "mOX-Fi-oTv"; */
 "mOX-Fi-oTv.title" = "Duraklat / Devam Et";
@@ -82,9 +73,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Sensitivity for normal seek:"; ObjectID = "of2-ec-OkC"; */
 "of2-ec-OkC.title" = "Normal sarma için hassasiyet:";
-
-/* Class = "NSMenuItem"; title = "Fastforward / Rewind"; ObjectID = "q50-Po-JYO"; */
-"q50-Po-JYO.title" = "Hızlı İleri / Geri Sar";
 
 /* Class = "NSTextFieldCell"; title = "Scroll horizontally to:"; ObjectID = "w1Y-jy-vNc"; */
 "w1Y-jy-vNc.title" = "Yatay kaydırma:";

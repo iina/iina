@@ -16,7 +16,7 @@ class Utility {
   static let supportedFileExt: [MPVTrack.TrackType: [String]] = [
     .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "mts", "m2ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt", "dv", "mpg", "mpeg", "mxf", "vob", "gif"],
     .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "oga", "mogg", "m4a", "ac3", "opus", "wav", "wv", "aiff", "ape", "tta", "tak"],
-    .sub: ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc"]
+    .sub: ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc", "txt"]
   ]
   static let playableFileExt = supportedFileExt[.video]! + supportedFileExt[.audio]!
   static let playlistFileExt = ["m3u", "m3u8", "pls", "cue"]
@@ -283,6 +283,7 @@ class Utility {
     view.addSubview(quickLabel(NSLocalizedString("general.password", comment: "Password") + ":", 26))
     let pwField = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
     view.addSubview(pwField)
+    input.nextKeyView = pwField
     panel.accessoryView = view
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
@@ -350,9 +351,9 @@ class Utility {
     // check exist
     if !FileManager.default.fileExists(atPath: path) {
       do {
-      try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false, attributes: nil)
+      try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
       } catch {
-        Utility.fatal("Cannot create folder in Application Support directory")
+        Utility.fatal("Cannot create directory: \(url)")
       }
     }
   }
@@ -395,9 +396,14 @@ class Utility {
   }()
 
   static let logDirURL: URL = {
-    let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.logFolder, isDirectory: true)
-    createDirIfNotExist(url: url)
-    return url
+    // get path
+    let libraryPath = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)
+    Utility.assert(libraryPath.count >= 1, "Cannot get path to Logs directory")
+    let logsUrl = libraryPath.first!.appendingPathComponent("Logs", isDirectory: true)
+    let bundleID = Bundle.main.bundleIdentifier!
+    let appLogsUrl = logsUrl.appendingPathComponent(bundleID, isDirectory: true)
+    createDirIfNotExist(url: appLogsUrl)
+    return appLogsUrl
   }()
 
   static let watchLaterURL: URL = {
@@ -407,9 +413,14 @@ class Utility {
   }()
 
   static let thumbnailCacheURL: URL = {
-    let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)
-    createDirIfNotExist(url: url)
-    return url
+    // get path
+    let cachesPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
+    Utility.assert(cachesPath.count >= 1, "Cannot get path to Caches directory")
+    let bundleID = Bundle.main.bundleIdentifier!
+    let appCachesUrl = cachesPath.first!.appendingPathComponent(bundleID, isDirectory: true)
+    let appThumbnailCacheUrl = appCachesUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)
+    createDirIfNotExist(url: appThumbnailCacheUrl)
+    return appThumbnailCacheUrl
   }()
 
   static let playbackHistoryURL: URL = {
@@ -437,8 +448,8 @@ class Utility {
     return realScale >= 1 ? realScale : -1 / realScale
   }
 
-  static func quickConstraints(_ constrants: [String], _ views: [String: NSView]) {
-    constrants.forEach { c in
+  static func quickConstraints(_ constraints: [String], _ views: [String: NSView]) {
+    constraints.forEach { c in
       let cc = NSLayoutConstraint.constraints(withVisualFormat: c, options: [], metrics: nil, views: views)
       NSLayoutConstraint.activate(cc)
     }

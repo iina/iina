@@ -191,3 +191,60 @@
 "touchbar.seek" = "Перемотка";
 "touchbar.time" = "Временная позиция";
 "track.none" = "<Нет>";
+
+/* FIXME: Using English localization instead */
+"touchbar.remainingTime" = "Remaining Time";
+
+/* FIXME: Using English localization instead */
+"alert.beta_channel.message" = "IINA v1.0 is comming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
+
+/* FIXME: Using English localization instead */
+"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+
+/* FIXME: Using English localization instead */
+"alert.assrt_register.try" = "Try First";
+
+/* FIXME: Using English localization instead */
+"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
+
+/* FIXME: Using English localization instead */
+"alert.assrt_token_prompt.title" = "Enter your API token";
+
+/* FIXME: Using English localization instead */
+"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+
+/* FIXME: Using English localization instead */
+"alert.assrt_register.register" = "Register Now";
+
+/* FIXME: Using English localization instead */
+"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
+
+/* FIXME: Using English localization instead */
+"osc_toolbar.sub_track" = "Choose subtitle track";
+
+/* FIXME: Using English localization instead */
+"osc_toolbar.playlist" = "Playlist and chapters";
+
+/* FIXME: Using English localization instead */
+"osc_toolbar.music_mode" = "Enter music mode";
+
+/* FIXME: Using English localization instead */
+"osc_toolbar.settings" = "Quick Settings";
+
+/* FIXME: Using English localization instead */
+"osc_toolbar.full_screen" = "Toggle full screen";
+
+/* FIXME: Using English localization instead */
+"osc_toolbar.pip" = "Toggle Picture-in-Picture";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.title" = "Add URL";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.message" = "Please enter the URL:";
+
+/* FIXME: Using English localization instead */
+"pl_menu.add_file" = "Add File…";
+
+/* FIXME: Using English localization instead */
+"pl_menu.add_url" = "Add URL…";

@@ -95,6 +95,8 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     let str = searchField.stringValue
     if str.isEmpty {
       isSearching = false
+      familyTableView.reloadData()
+      faceTableView.reloadData()
     } else {
       isSearching = true
       filteredFontNames = fontNames.filter { $0.localizedName.lowercased() .contains(str.lowercased()) }

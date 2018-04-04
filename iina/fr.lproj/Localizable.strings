@@ -4,6 +4,14 @@
 "alert.add_filter.title" = "Nouveau filtre";
 "alert.add_watch.message" = "Veuillez renseigner un nom de propriété MPV valide.";
 "alert.add_watch.title" = "Nouvelle propriété Watch";
+"alert.assrt_register" = "À cause du quota limité sur l'API d'Assrt, nous vous recommendons fortement d'utiliser votre propre token d'API. Le token par défaut est seulement disponible à des fins de démonstration, et vous risquez de rencontrer une erreur réseau en l'utilisant.";
+"alert.assrt_register.register" = "S'inscrire";
+"alert.assrt_register.try" = "Essayer sans token";
+"alert.assrt_token_invalid" = "Votre token d'API Assrt semble être invalide.";
+"alert.assrt_token_prompt.message" = "Veuillez vous inscrire sur la page web ouverte. Récupérez votre token sur votre espace client et saisissez-le ci-dessous :";
+"alert.assrt_token_prompt.title" = "Saisissez votre token d'API";
+"alert.beta_channel.message" = "IINA v1.0 arrive bientôt ! Souhaitez-vous nous aider à tester les versions beta ?\n\nVous pouvez changer cette option à n'importe quel moment dans les Préférences (Général).";
+"alert.beta_channel.title" = "Recevoir des mises à jour pour les versions beta";
 "alert.choose_media_file.title" = "Choisir un fichier média";
 "alert.clear_cache.message" = "Voulez-vous vraiment supprimer le cache des miniatures ?";
 "alert.clear_cache.success" = "Cache supprimé";
@@ -30,12 +38,10 @@
 "alert.extra_option.config_folder" = "Erreur lors de la configuration du dossier de config : \"%@\".";
 "alert.extra_option.empty" = "La clé et/ou la valeur ne peuvent pas être vides !";
 "alert.extra_option.error" = "Erreur de la configuration de l'option --%@=%@ avec le code retour %d. Veuillez vérifier votre configuration des options extra dans Préferences > Avancé.";
-"alert.fatal_error" = "Erreur fatale : %@ 
-L'application va maintenant quitter.";
+"alert.fatal_error" = "Erreur fatale : %@ \nL'application va maintenant quitter.";
 "alert.filter.incorrect" = "Une erreur est survenue lors de la configuration des filtres. Veuillez vérifier le format de votre paramètre.";
 "alert.filter_hwdec.abort" = "Abandonner";
-"alert.filter_hwdec.message" = "Vous êtes sur le point d'activer un filtre vidéo. Cependant, votre décodeur hardware actuel peut ne pas bien supporter les filtres vidéos. Vous pouvez  désactiver le décodage hardware ou passer sur Auto(Copy), ce qui consommera le double en mémoire.
-Vous aurez peut-être à répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne.";
+"alert.filter_hwdec.message" = "Vous êtes sur le point d'activer un filtre vidéo. Cependant, votre décodeur hardware actuel peut ne pas bien supporter les filtres vidéos. Vous pouvez  désactiver le décodage hardware ou passer sur Auto(Copy), ce qui consommera le double en mémoire.\nVous aurez peut-être à répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne.";
 "alert.filter_hwdec.turn_off" = "Désactiver le décodage hardware";
 "alert.filter_hwdec.use_copy" = "Passer sur Auto(Copy)";
 "alert.jump_to.message" = "Veuillez renseigner le timestamp où vous voulez sauter. Exemple : 20:35";
@@ -53,9 +59,7 @@ Vous aurez peut-être à répéter l'opération précédente (par exemple, activ
 "alert.set_default.success" = "Terminé avec %d succès et %d erreurs.";
 "alert.set_default.title" = "Définir IINA comme application par défaut";
 "alert.sleep" = "Impossible d'empêcher la veille de l'écran !";
-"alert.sub.cannot_login" = "Impossible de se connecter. Veuillez vérifier votre nom d'utilisateur, votre mot de passe et votre connexion Internet.
-
-%@";
+"alert.sub.cannot_login" = "Impossible de se connecter. Veuillez vérifier votre nom d'utilisateur, votre mot de passe et votre connexion Internet.\n\n%@";
 "alert.sub.cannot_save_passwd" = "Impossible de sauvegarder le mot de passe dans votre trousseau d'accès : %@";
 "alert.sub.no_selected" = "Veuillez d'abord sélectionner un sous-titre téléchargé.";
 "alert.sub_lang_not_set" = "Veuillez configurer une langue de sous-titres dans les préférences avant d'utiliser OpenSubtitles. L'anglais (eng) sera utilisé cette fois-ci.";
@@ -102,6 +106,12 @@ Vous aurez peut-être à répéter l'opération précédente (par exemple, activ
 "menu.volume" = "Volume : %d";
 "menu.volume_down" = "Volume -%.0f%%";
 "menu.volume_up" = "Volume +%.0f%%";
+"osc_toolbar.full_screen" = "Mode plein écran";
+"osc_toolbar.music_mode" = "Mode musique";
+"osc_toolbar.pip" = "Image dans l'Image";
+"osc_toolbar.playlist" = "Playlist et chapitres";
+"osc_toolbar.settings" = "Réglages rapides";
+"osc_toolbar.sub_track" = "Choisir une piste de sous-titres";
 "osd.abloop.a" = "Boucle AB : A";
 "osd.abloop.b" = "Boucle AB : B";
 "osd.abloop.clear" = "Boucle AB: vidé";
@@ -187,7 +197,20 @@ Vous aurez peut-être à répéter l'opération précédente (par exemple, activ
 "touchbar.next_video" = "Vidéo suivante";
 "touchbar.play_pause" = "Lecture/Pause";
 "touchbar.prev_video" = "Vidéo précédente";
+"touchbar.remainingTime" = "Temps restant";
 "touchbar.rewind" = "Rembobiner";
 "touchbar.seek" = "Chercher";
 "touchbar.time" = "Position horaire";
 "track.none" = "<Aucun>";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.title" = "Add URL";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.message" = "Please enter the URL:";
+
+/* FIXME: Using English localization instead */
+"pl_menu.add_file" = "Add File…";
+
+/* FIXME: Using English localization instead */
+"pl_menu.add_url" = "Add URL…";

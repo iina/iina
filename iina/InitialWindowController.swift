@@ -27,6 +27,7 @@ class InitialWindowController: NSWindowController {
   @IBOutlet weak var versionLabel: NSTextField!
   @IBOutlet weak var visualEffectView: NSVisualEffectView!
   @IBOutlet weak var mainView: NSView!
+  @IBOutlet weak var betaIndicatorView: BetaIndicatorView!
 
   lazy var recentDocuments: [URL] = NSDocumentController.shared.recentDocumentURLs
 
@@ -52,7 +53,9 @@ class InitialWindowController: NSWindowController {
     appIcon.image = NSApp.applicationIconImage
 
     let (version, build) = Utility.iinaVersion()
-    versionLabel.stringValue = "\(version) Build \(build)"
+    let isStableRelease = !version.contains("-")
+    versionLabel.stringValue = isStableRelease ? version : "\(version) (\(build))"
+    betaIndicatorView.isHidden = isStableRelease
 
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
@@ -143,4 +146,38 @@ class InitialWindowViewActionButton: NSView {
     self.layer?.backgroundColor = hoverBackground
   }
   
+}
+
+
+class BetaIndicatorView: NSView {
+
+  @IBOutlet var betaPopover: NSPopover!
+  @IBOutlet var text1: NSTextField!
+  @IBOutlet var text2: NSTextField!
+
+  override func awakeFromNib() {
+    self.layer?.backgroundColor = CGColor(red: 1, green: 0.6, blue: 0.2, alpha: 1)
+    self.layer?.cornerRadius = 4
+    self.addTrackingArea(NSTrackingArea(rect: self.bounds, options: [.activeInKeyWindow, .mouseEnteredAndExited], owner: self, userInfo: nil))
+
+    text1.setHTMLValue(text1.stringValue)
+    text2.setHTMLValue(text2.stringValue)
+  }
+
+  override func mouseEntered(with event: NSEvent) {
+    NSCursor.pointingHand.push()
+  }
+
+  override func mouseExited(with event: NSEvent) {
+    NSCursor.pop()
+  }
+
+  override func mouseUp(with event: NSEvent) {
+    if betaPopover.isShown {
+      betaPopover.close()
+    } else {
+      betaPopover.show(relativeTo: self.bounds, of: self, preferredEdge: .maxX)
+    }
+  }
+
 }

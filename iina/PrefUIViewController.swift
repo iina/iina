@@ -43,8 +43,11 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   var hasResizableWidth: Bool = false
   var hasResizableHeight: Bool = false
 
+  private let toolbarSettingsSheetController = PrefOSCToolbarSettingsSheetController()
+
   @IBOutlet weak var oscPreviewImageView: NSImageView!
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!
+  @IBOutlet weak var oscToolbarStackView: NSStackView!
   @IBOutlet weak var thumbCacheSizeLabel: NSTextField!
   
   @IBOutlet weak var windowSizeCheckBox: NSButton!
@@ -69,6 +72,10 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     oscPositionPopupBtnAction(oscPositionPopupButton)
+    oscToolbarStackView.wantsLayer = true
+    oscToolbarStackView.layer?.backgroundColor = NSColor(calibratedWhite: 0.5, alpha: 0.2).cgColor
+    oscToolbarStackView.layer?.cornerRadius = 4
+    updateOSCToolbarButtons()
     setupGeometryRelatedControls()
     setupResizingRelatedControls()
   }
@@ -127,10 +134,32 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
     Preference.set(sender.tag, for: .resizeWindowTiming)
   }
 
+  @IBAction func customizeOSCToolbarAction(_ sender: Any) {
+    view.window?.beginSheet(toolbarSettingsSheetController.window!) { _ in
+      let newItems = self.toolbarSettingsSheetController.currentButtonTypes
+      let array = newItems.map { $0.rawValue }
+      Preference.set(array, for: .controlBarToolbarButtons)
+      self.updateOSCToolbarButtons()
+    }
+  }
+
   override func viewDidAppear() {
     DispatchQueue.main.async {
       self.updateThumbnailCacheStat()
     }
+  }
+
+  private func updateOSCToolbarButtons() {
+    oscToolbarStackView.views.forEach { oscToolbarStackView.removeView($0) }
+    let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).flatMap(Preference.ToolBarButton.init(rawValue:))
+    for buttonType in buttons {
+      let button = NSImageView()
+      button.image = buttonType.image()
+      oscToolbarStackView.addView(button, in: .trailing)
+      Utility.quickConstraints(["H:[btn(24)]", "V:[btn(24)]"], ["btn": button])
+    }
+
+    toolbarSettingsSheetController.currentButtonTypes = buttons
   }
 
   private func updateThumbnailCacheStat() {
@@ -143,21 +172,21 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
       // size
       if let h = geometry.h {
         windowSizeCheckBox.state = .on
-        setSubViews(of: windowPosBox, enabled: true)
+        setSubViews(of: windowSizeBox, enabled: true)
         windowSizeTypePopUpButton.selectItem(withTag: SizeHeightTag)
         let isPercent = h.hasSuffix("%")
         windowSizeUnitPopUpButton.selectItem(withTag: isPercent ? UnitPercentTag : UnitPointTag)
         windowSizeValueTextField.stringValue = isPercent ? String(h.dropLast()) : h
       } else if let w = geometry.w {
         windowSizeCheckBox.state = .on
-        setSubViews(of: windowPosBox, enabled: true)
+        setSubViews(of: windowSizeBox, enabled: true)
         windowSizeTypePopUpButton.selectItem(withTag: SizeWidthTag)
         let isPercent = w.hasSuffix("%")
         windowSizeUnitPopUpButton.selectItem(withTag: isPercent ? UnitPercentTag : UnitPointTag)
         windowSizeValueTextField.stringValue = isPercent ? String(w.dropLast()) : w
       } else {
         windowSizeCheckBox.state = .off
-        setSubViews(of: windowPosBox, enabled: false)
+        setSubViews(of: windowSizeBox, enabled: false)
       }
       // position
       if let x = geometry.x, let xSign = geometry.xSign, let y = geometry.y, let ySign = geometry.ySign {

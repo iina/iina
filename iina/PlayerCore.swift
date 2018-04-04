@@ -119,6 +119,8 @@ class PlayerCore: NSObject {
   var switchedToMiniPlayerManually = false
   var switchedBackFromMiniPlayerManually = false
 
+  var isSearchingOnlineSubtitle = false
+
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
@@ -332,6 +334,7 @@ class PlayerCore: NSObject {
       mainWindow.window?.aspectRatio = NSSize(width: AppData.widthWhenNoVideo, height: AppData.heightWhenNoVideo)
     }
     isInMiniPlayer = false
+    mainWindow.updateTitle()
   }
 
   // MARK: - MPV commands
@@ -861,6 +864,7 @@ class PlayerCore: NSObject {
     currentMediaIsAudio = .unknown
     guard let path = mpv.getString(MPVProperty.path) else { return }
     info.currentURL = path.contains("://") ? URL(string: path) : URL(fileURLWithPath: path)
+    info.isNetworkResource = !info.currentURL!.isFileURL
     // Auto load
     backgroundQueueTicket += 1
     let shouldAutoLoadFiles = info.shouldAutoLoadFiles
@@ -1107,7 +1111,7 @@ class PlayerCore: NSObject {
     }
   }
 
-  func sendOSD(_ osd: OSDMessage) {
+  func sendOSD(_ osd: OSDMessage, autoHide: Bool = true, accessoryView: NSView? = nil) {
     // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
     guard mainWindow.isWindowLoaded else { return }
     if info.disableOSDForFileLoading {
@@ -1116,7 +1120,13 @@ class PlayerCore: NSObject {
       }
     }
     DispatchQueue.main.async {
-      self.mainWindow.displayOSD(osd)
+      self.mainWindow.displayOSD(osd, autoHide: autoHide, accessoryView: accessoryView)
+    }
+  }
+
+  func hideOSD() {
+    DispatchQueue.main.async {
+      self.mainWindow.hideOSD()
     }
   }
 
@@ -1144,7 +1154,7 @@ class PlayerCore: NSObject {
     info.thumbnailsProgress = 0
     info.thumbnailsReady = false
     if Preference.bool(for: .enableThumbnailPreview) {
-      if let cacheName = info.mpvMd5, ThumbnailCache.fileExists(forName: cacheName) {
+      if let cacheName = info.mpvMd5, ThumbnailCache.fileIsCached(forName: cacheName, forVideo: info.currentURL) {
         thumbnailQueue.async {
           if let thumbnails = ThumbnailCache.read(forName: cacheName) {
             self.info.thumbnails = thumbnails
@@ -1360,8 +1370,8 @@ class PlayerCore: NSObject {
     if noVideoTrack && noAudioTrack {
       return .unknown
     }
-    let theOnlyVideoTrackIsAlbumCover = info.videoTracks.count == 1 && info.videoTracks.first!.isAlbumart
-    return (noVideoTrack || theOnlyVideoTrackIsAlbumCover) ? .isAudio : .notAudio
+    let allVideoTracksAreAlbumCover = !info.videoTracks.contains { !$0.isAlbumart }
+    return (noVideoTrack || allVideoTracksAreAlbumCover) ? .isAudio : .notAudio
   }
 
   static func checkStatusForSleep() {
@@ -1396,7 +1406,7 @@ extension PlayerCore: FFmpegControllerDelegate {
       refreshTouchBarSlider()
       if let cacheName = info.mpvMd5 {
         backgroundQueue.async {
-          ThumbnailCache.write(self.info.thumbnails, forName: cacheName)
+          ThumbnailCache.write(self.info.thumbnails, forName: cacheName, forVideo: self.info.currentURL)
         }
       }
     }

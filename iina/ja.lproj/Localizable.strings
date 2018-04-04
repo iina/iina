@@ -4,6 +4,14 @@
 "alert.add_filter.title" = "フィルタの新規作成";
 "alert.add_watch.message" = "有効なmpvのプロパティ名を入力してください。";
 "alert.add_watch.title" = "監視するmpvのプロパティを追加";
+"alert.assrt_register" = "APIリクエスト数が制限されているため、自身で発行したAPIトークンを使用することを推奨しております。元から設定されているトークンは試用であり、ネットワークエラーが発生する恐れがあります。";
+"alert.assrt_register.register" = "今すぐ登録する";
+"alert.assrt_register.try" = "使ってみる";
+"alert.assrt_token_invalid" = "Assrt APIトークンが有効でないようです。";
+"alert.assrt_token_prompt.message" = "開かれたWebページで登録してください。ホーム画面でトークンを取得し、以下に入力してください:";
+"alert.assrt_token_prompt.title" = "APIトークンを入力";
+"alert.beta_channel.message" = "もうすぐIINA v1.0リリースされます！ ベータ版のテストを手伝っていただけますか？\n\nこの設定は 環境設定 > 一般 からいつでも変更することができます。";
+"alert.beta_channel.title" = "ベータ版のアップデート通知を受け取る";
 "alert.choose_media_file.title" = "メディアファイルを選択";
 "alert.clear_cache.message" = "すべてのサムネイルキャッシュを消去しますか?";
 "alert.clear_cache.success" = "キャッシュをクリアしました。";
@@ -30,12 +38,10 @@
 "alert.extra_option.config_folder" = "設定ディレクトリの設定エラー\"%@\".";
 "alert.extra_option.empty" = "キーもしくは値を空にできません!";
 "alert.extra_option.error" = "オプションの設定 --%@=%@ 返り値 %d でエラーが発生しました。設定 > 拡張 より追加オプションの設定を確認してください。";
-"alert.fatal_error" = "致命的なエラー: %@ 
-アプリケーションを終了します。";
+"alert.fatal_error" = "致命的なエラー: %@ \nアプリケーションを終了します。";
 "alert.filter.incorrect" = "フィルタの設定時にエラーが起きました。パラメータの形式を確認してください。";
 "alert.filter_hwdec.abort" = "破棄";
-"alert.filter_hwdec.message" = "ビデオフィルターが適用されますが、お使いのハードウェアデコーダが対応していない場合がございます。フィルタを使用しないように設定するか、二倍のメモリを使用する自動（コピー）方式に切り替えて使用することができます。
-以前に設定した操作（クロップの設定など）を適用するには、再設定する必要がある場合もあります。";
+"alert.filter_hwdec.message" = "ビデオフィルターが適用されますが、お使いのハードウェアデコーダが対応していない場合がございます。フィルタを使用しないように設定するか、二倍のメモリを使用する自動（コピー）方式に切り替えて使用することができます。\n以前に設定した操作（クロップの設定など）を適用するには、再設定する必要がある場合もあります。";
 "alert.filter_hwdec.turn_off" = "ハードウェアデコーディングをオフにする";
 "alert.filter_hwdec.use_copy" = "自動（コピー）方式に切り替え";
 "alert.jump_to.message" = "再生を開始する時間を入力してください。例: 20:35";
@@ -53,9 +59,7 @@
 "alert.set_default.success" = "完了しました。(成功: %d件, 失敗: %d件)";
 "alert.set_default.title" = "IINAをデフォルトのアプリケーションに設定";
 "alert.sleep" = "ディスプレイのスリープを解除できません!";
-"alert.sub.cannot_login" = "ログインできません。ユーザー名とパスワード、ネットワーク環境をご確認ください。
-
-%@";
+"alert.sub.cannot_login" = "ログインできません。ユーザー名とパスワード、ネットワーク環境をご確認ください。\n\n%@";
 "alert.sub.cannot_save_passwd" = "パスワードをKeychainに保存できません: %@";
 "alert.sub.no_selected" = "最初にダウンロードした字幕を選択してください。";
 "alert.sub_lang_not_set" = "OpenSubtitlesを利用する前に、環境設定で字幕の優先言語を設定してください。英語(eng)が今回使用されます。";
@@ -102,6 +106,12 @@
 "menu.volume" = "音量: %d";
 "menu.volume_down" = "音量 - %.0f%%";
 "menu.volume_up" = "音量 + %.0f%%";
+"osc_toolbar.full_screen" = "フルスクリーン切り替え";
+"osc_toolbar.music_mode" = "ミュージックモード切り替え";
+"osc_toolbar.pip" = "Picture-in-Picture切り替え";
+"osc_toolbar.playlist" = "プレイリストとチャプター";
+"osc_toolbar.settings" = "クイック設定";
+"osc_toolbar.sub_track" = "字幕トラックを選択";
 "osd.abloop.a" = "AB-リピート: A";
 "osd.abloop.b" = "AB-リピート: B";
 "osd.abloop.clear" = "AB-リピート: クリア";
@@ -187,7 +197,20 @@
 "touchbar.next_video" = "次のビデオへ";
 "touchbar.play_pause" = "再生 / 停止";
 "touchbar.prev_video" = "前のビデオへ";
+"touchbar.remainingTime" = "残り時間";
 "touchbar.rewind" = "巻き戻し";
 "touchbar.seek" = "シーク";
 "touchbar.time" = "再生位置";
 "track.none" = "<なし>";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.title" = "Add URL";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.message" = "Please enter the URL:";
+
+/* FIXME: Using English localization instead */
+"pl_menu.add_file" = "Add File…";
+
+/* FIXME: Using English localization instead */
+"pl_menu.add_url" = "Add URL…";

@@ -2,8 +2,16 @@
 
 "alert.add_filter.message" = "请输入符合 mpv 的 vf 或 af 选项格式的滤镜字符串。";
 "alert.add_filter.title" = "添加滤镜";
+"alert.add_url.message" = "请输入 URL:";
+"alert.add_url.title" = "添加 URL";
 "alert.add_watch.message" = "请输入一个有效的 mpv 属性名。";
 "alert.add_watch.title" = "监视 mpv 属性";
+"alert.assrt_register" = "由于射手网(伪)的 API 请求数量限制，请务必在射手网（伪）注册账户后使用自己的 API token。自带 API token 仅用于测试用途，并且可能由于 API 使用超出限额而请求失败。";
+"alert.assrt_register.register" = "去射手网(伪)注册";
+"alert.assrt_register.try" = "先试用一下";
+"alert.assrt_token_invalid" = "你的射手网(伪) API token 格式错误。";
+"alert.assrt_token_prompt.message" = "请在弹出的网页中注册帐号，然后进入用户首页查看 API token 并在下方输入:";
+"alert.assrt_token_prompt.title" = "输入你在射手网(伪)的 API token";
 "alert.beta_channel.message" = "在发布 IINA 1.0 之前，你愿意帮助我们测试 beta 版本吗？\n\n你可以在「偏好设置-通用」中随时修改此行为。";
 "alert.beta_channel.title" = "接受 beta 版本的更新";
 "alert.choose_media_file.title" = "选择媒体文件";
@@ -100,6 +108,12 @@
 "menu.volume" = "音量: %d";
 "menu.volume_down" = "音量 - %.0f%%";
 "menu.volume_up" = "音量 + %.0f%%";
+"osc_toolbar.full_screen" = "切换全屏";
+"osc_toolbar.music_mode" = "进入音乐模式";
+"osc_toolbar.pip" = "切换「画中画」模式";
+"osc_toolbar.playlist" = "播放列表和章节";
+"osc_toolbar.settings" = "快速设置";
+"osc_toolbar.sub_track" = "选择字幕轨道";
 "osd.abloop.a" = "AB循环：A";
 "osd.abloop.b" = "AB循环：B";
 "osd.abloop.clear" = "AB循环：清除";
@@ -142,8 +156,9 @@
 "osd.video_eq.hue" = "色调：%i";
 "osd.video_eq.saturation" = "饱和度：%i";
 "osd.volume" = "音量：%i";
-"pl_menu.add_item" = "添加项目…";
+"pl_menu.add_file" = "添加文件…";
 "pl_menu.add_sub" = "添加字幕…";
+"pl_menu.add_url" = "添加 URL…";
 "pl_menu.clear_playlist" = "清除播放列表";
 "pl_menu.delete" = "移到垃圾桶";
 "pl_menu.delete_after_play" = "播放后移到垃圾桶";

@@ -39,7 +39,6 @@ struct AppData {
   static let encodings = CharEncoding.list
 
   static let userInputConfFolder = "input_conf"
-  static let logFolder = "log"
   static let watchLaterFolder = "watch_later"
   static let historyFile = "history.plist"
   static let thumbnailCacheFolder = "thumb_cache"
@@ -50,6 +49,7 @@ struct AppData {
   static let emailLink = "developers@iina.io"
   static let appcastLink = "https://www.iina.io/appcast.xml"
   static let appcastBetaLink = "https://www.iina.io/appcast-beta.xml"
+  static let assrtRegisterLink = "https://secure.assrt.net/user/register.xml?redir=http%3A%2F%2Fassrt.net%2Fusercp.php"
 
   static let widthWhenNoVideo = 480
   static let heightWhenNoVideo = 480

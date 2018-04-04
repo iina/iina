@@ -54,12 +54,12 @@ if userArgs.contains(where: { $0 == "--help" || $0 == "-h" }) {
             Open all files in separate windows.
     --help | -h:
             Print this message.
-
+    --stdin:
+            You may also pipe to stdin directly.
+    
     MPV Option:
     Raw mpv options without --mpv- prefix. All mpv options are supported here.
     Example: --volume=20 --no-resume-playback
-
-    You may also pipe to stdin directly.
     """)
   exit(0)
 }

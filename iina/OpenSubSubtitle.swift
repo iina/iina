@@ -57,6 +57,7 @@ class OpenSubSupport {
   typealias Subtitle = OpenSubSubtitle
 
   enum OpenSubError: Error {
+    case noResult
     // login failed (reason)
     case loginFailed(String)
     // file error
@@ -198,10 +199,41 @@ class OpenSubSupport {
     }
   }
 
-  func request(_ info: FileInfo) -> Promise<[OpenSubSubtitle]> {
+  func requestByName(_ fileURL: URL) -> Promise<[OpenSubSubtitle]> {
+    return requestIMDB(fileURL).then { IMDB in
+      let info = ["imdbid": IMDB]
+      return self.request(info)
+    }
+  }
+
+
+  func requestIMDB(_ fileURL: URL) -> Promise<String> {
+    return Promise { fulfill, reject in
+      let filename = fileURL.lastPathComponent
+      xmlRpc.call("GuessMovieFromString", [token, [filename]]) { status in
+        switch status {
+        case .ok(let reponse):
+          guard let parsed = reponse as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
+          let parsedStatus = parsed["status"] as! String
+          guard parsedStatus.hasPrefix("200") else { reject(OpenSubError.wrongResponseFormat); return }
+          guard let parsedData = parsed["data"] as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
+          guard let data1 = parsedData[filename] as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
+          guard let data2 = data1["BestGuess"] as? [String: Any] else { reject(OpenSubError.wrongResponseFormat); return }
+          guard let IMDB = data2["IDMovieIMDB"] as? String else { reject(OpenSubError.wrongResponseFormat); return }
+          fulfill(IMDB)
+        case .failure(_):
+          reject(OpenSubError.searchFailed("Failure"))
+        case .error(let error):
+          reject(OpenSubError.xmlRpcError(error))
+        }
+      }
+    }
+  }
+
+  func request(_ info: [String: String]) -> Promise<[OpenSubSubtitle]> {
     return Promise { fulfill, reject in
       let limit = 100
-      var requestInfo = info.dictionary
+      var requestInfo = info
       requestInfo["sublanguageid"] = self.language
       xmlRpc.call("SearchSubtitles", [token, [requestInfo], ["limit": limit]]) { status in
         switch status {
@@ -236,7 +268,11 @@ class OpenSubSupport {
                                       zipDlLink: subData["ZipDownloadLink"] as! String)
             result.append(sub)
           }
-          fulfill(result)
+          if result.isEmpty {
+            reject(OpenSubError.noResult)
+          } else {
+            fulfill(result)
+          }
         case .failure(_):
           // Failure
           reject(OpenSubError.searchFailed("Failure"))

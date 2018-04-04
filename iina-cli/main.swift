@@ -56,14 +56,16 @@ if userArgs.contains(where: { $0 == "--help" || $0 == "-h" }) {
             Example: --mpv-volume=20 --mpv-resume-playback=no
     --separate-windows | -w:
             Open all files in separate windows.
+    --stdin:
+            You may also pipe to stdin directly. Sometimes iina-cli can detect whether
+            stdin has file, but sometimes not. Therefore it's recommended to always
+            supply this argument when piping to iina.
     --help | -h:
             Print this message.
-
+    
     MPV Option:
     Raw mpv options without --mpv- prefix. All mpv options are supported here.
     Example: --volume=20 --no-resume-playback
-
-    You may also pipe to stdin directly.
     """)
   exit(0)
 }

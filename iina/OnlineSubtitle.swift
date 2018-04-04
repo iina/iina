@@ -97,7 +97,13 @@ class OnlineSubtitle: NSObject {
       .then { _ in
         subSupport.hash(url)
       }.then { info in
-        subSupport.request(info)
+        subSupport.request(info.dictionary)
+      }.recover { error -> Promise<[OpenSubSubtitle]> in
+        if case OpenSubSupport.OpenSubError.noResult = error {
+          return subSupport.requestByName(url)
+        } else {
+          throw error
+        }
       }.then { subs in
         subSupport.showSubSelectWindow(with: subs)
       }.then { selectedSubs -> Void in
@@ -109,20 +115,21 @@ class OnlineSubtitle: NSObject {
              OpenSubSupport.OpenSubError.fileTooSmall:
           osdMessage = .fileError
         case OpenSubSupport.OpenSubError.loginFailed(let reason):
-          Utility.log("OpenSub: \(reason)")
+          Utility.log("OpenSubtitles: \(reason)")
           osdMessage = .cannotLogin
         case OpenSubSupport.OpenSubError.userCanceled:
           osdMessage = .canceled
         case OpenSubSupport.OpenSubError.xmlRpcError(let error):
-          Utility.log("OpenSub: \(error.readableDescription)")
+          Utility.log("OpenSubtitles: \(error.readableDescription)")
           osdMessage = .networkError
+        case OpenSubSupport.OpenSubError.noResult:
+          callback([])
+          return
         default:
           osdMessage = .networkError
         }
         playerCore.sendOSD(osdMessage)
         playerCore.isSearchingOnlineSubtitle = false
-      }.always {
-        playerCore.hideOSD()
       }
     case .assrt:
       let subSupport = AssrtSupport.shared

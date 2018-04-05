@@ -26,6 +26,14 @@ DEPENDENCIES:
   - PromiseKit
   - Sparkle
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AEXML
+    - GzipSwift
+    - MASPreferences
+    - PromiseKit
+    - Sparkle
+
 EXTERNAL SOURCES:
   GRMustache.swift:
     :git: https://github.com/iina/GRMustache.swift.git
@@ -52,4 +60,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a64ce7e4133a69b8578df97545c13d6a3edec3ff
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

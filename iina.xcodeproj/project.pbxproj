@@ -1646,7 +1646,6 @@
 				84E745DA1DFDE9C600588DED /* Copy Configs */,
 				8461BA631E423423008BB852 /* Copy Executables */,
 				DFB4E0114268BBFB043A6097 /* [CP] Embed Pods Frameworks */,
-				A0E37C793B5311ABDB5D863A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1812,21 +1811,6 @@
 			shellPath = /bin/bash;
 			shellScript = "echo \"Copy symlinks:\"\n\nfor file in \"${SRCROOT}/deps/lib/\"*.dylib; do\n    if [[ -h \"$file\" ]]; then\n        cp -R $file \"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/$(basename $file)\"\n    fi\ndone";
 		};
-		A0E37C793B5311ABDB5D863A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iina/Pods-iina-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DFB4E0114268BBFB043A6097 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1871,7 +1855,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $PROJECT_DIR/other/check_localizable.swift;
+			shellScript = "$PROJECT_DIR/other/check_localizable.swift";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

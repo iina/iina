@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -110,11 +110,11 @@
                     <tabViewItems>
                         <tabViewItem label="Video" identifier="1" id="CYP-el-A6A">
                             <view key="view" id="NRI-ba-KMd">
-                                <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="823"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="SHU-hX-9MT">
-                                        <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="823"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="8Es-YX-dNf">
                                             <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -837,7 +837,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Vtu-Wx-ydk">
-                                            <rect key="frame" x="344" y="0.0" width="16" height="823"/>
+                                            <rect key="frame" x="360" y="0.0" width="15" height="823"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
@@ -851,18 +851,18 @@
                             </view>
                         </tabViewItem>
                         <tabViewItem label="Audio" identifier="2" id="bzk-c2-LH5">
-                            <view key="view" id="Dxl-wa-zgc">
+                            <view key="view" misplaced="YES" id="Dxl-wa-zgc">
                                 <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXn-sV-AmG">
-                                        <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="823"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oVx-Sp-Lhl">
-                                            <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="360" height="808"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="NZU-RD-Dm3" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="311" width="360" height="512"/>
+                                                    <rect key="frame" x="0.0" y="296" width="360" height="512"/>
                                                     <subviews>
                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="my2-5o-bNb">
                                                             <rect key="frame" x="0.0" y="0.0" width="360" height="512"/>
@@ -1392,11 +1392,11 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="klo-Db-oQE">
-                                            <rect key="frame" x="0.0" y="807" width="360" height="16"/>
+                                            <rect key="frame" x="0.0" y="808" width="360" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="17z-n6-rH9">
-                                            <rect key="frame" x="344" y="0.0" width="16" height="823"/>
+                                            <rect key="frame" x="360" y="0.0" width="15" height="808"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
@@ -1410,12 +1410,12 @@
                             </view>
                         </tabViewItem>
                         <tabViewItem label="Subtitle" identifier="" id="jND-MZ-sKB">
-                            <view key="view" id="MrM-2b-7ob">
+                            <view key="view" misplaced="YES" id="MrM-2b-7ob">
                                 <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kA-IY-poi">
-                                        <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="823"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="epy-wp-Ja5">
                                             <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
                                             <autoresizingMask key="autoresizingMask"/>
@@ -2190,7 +2190,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="3ZS-ug-kkq">
-                                            <rect key="frame" x="344" y="0.0" width="16" height="823"/>
+                                            <rect key="frame" x="360" y="0.0" width="15" height="823"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>

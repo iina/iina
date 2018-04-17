@@ -605,6 +605,7 @@
 		8488D6DD1E11791300D5B952 /* PrefCodecViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefCodecViewController.swift; sourceTree = "<group>"; };
 		8488D6E11E1183D300D5B952 /* PrefSubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefSubViewController.swift; sourceTree = "<group>"; };
 		8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefNetworkViewController.swift; sourceTree = "<group>"; };
+		848F50902085A99500E998FD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SubChooseViewController.strings"; sourceTree = "<group>"; };
 		8492C2851E771FB200CE5825 /* ISO639.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ISO639.strings; sourceTree = "<group>"; };
 		8492C2871E7721A600CE5825 /* ISO639Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO639Helper.swift; sourceTree = "<group>"; };
 		849581EF1F02728700D3B359 /* InitialWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialWindowController.swift; sourceTree = "<group>"; };
@@ -1859,7 +1860,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PROJECT_DIR/other/check_localizable.swift";
+			shellScript = $PROJECT_DIR/other/check_localizable.swift;
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1998,6 +1999,7 @@
 			children = (
 				1326717F20852D0D000FA7E2 /* Base */,
 				1326718120852D16000FA7E2 /* tr */,
+				848F50902085A99500E998FD /* zh-Hans */,
 			);
 			name = SubChooseViewController.xib;
 			sourceTree = "<group>";

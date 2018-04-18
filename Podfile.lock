@@ -1,5 +1,4 @@
 PODS:
-  - AEXML (4.2.2)
   - GRMustache.swift (2.0.0)
   - GzipSwift (4.0.4)
   - Just (0.6.0)
@@ -18,7 +17,6 @@ PODS:
   - Sparkle (1.18.1)
 
 DEPENDENCIES:
-  - AEXML
   - GRMustache.swift (from `https://github.com/iina/GRMustache.swift.git`)
   - GzipSwift
   - Just (from `https://github.com/JustHTTP/Just.git`, branch `swift-4`)
@@ -28,7 +26,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - AEXML
     - GzipSwift
     - MASPreferences
     - PromiseKit
@@ -50,7 +47,6 @@ CHECKOUT OPTIONS:
     :git: https://github.com/JustHTTP/Just.git
 
 SPEC CHECKSUMS:
-  AEXML: 5ebafc1b75e0bcf0f1b09b8ca8fed2d5a199479b
   GRMustache.swift: 53405b02c374520f9193cf41bfa677f03a6d70aa
   GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
   Just: 72e8a6e01ec5adba1aa0f7996ff4459aa6a3d710
@@ -58,6 +54,6 @@ SPEC CHECKSUMS:
   PromiseKit: ecf5fe92275d57ee77c9ede858af47a162e9b97e
   Sparkle: 06ea33170007c5937ee54da481b4481af98fac79
 
-PODFILE CHECKSUM: a64ce7e4133a69b8578df97545c13d6a3edec3ff
+PODFILE CHECKSUM: 298263a8b9b462089f9ac5649337f73e4919ee0a
 
 COCOAPODS: 1.5.0

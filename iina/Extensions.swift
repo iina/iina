@@ -525,3 +525,13 @@ extension NSUserInterfaceItemIdentifier {
   static let value = NSUserInterfaceItemIdentifier("Value")
   static let action = NSUserInterfaceItemIdentifier("Action")
 }
+
+extension XMLNode {
+  func findChildren(_ name: String) -> [XMLElement]? {
+    return self.children?.filter { $0.name == name } as? [XMLElement]
+  }
+
+  func findChild(_ name: String) -> XMLElement? {
+    return self.findChildren(name)?.first
+  }
+}

@@ -174,7 +174,7 @@ class OpenSubSupport {
             Utility.log("OpenSub: login failed, \(pStatus)")
             reject(OpenSubError.loginFailed(pStatus))
           }
-        case .failure(_):
+        case .failure:
           // Failure
           reject(OpenSubError.loginFailed("Failure"))
         case .error(let error):
@@ -237,7 +237,7 @@ class OpenSubSupport {
             reject(error)
             return
           }
-        case .failure(_):
+        case .failure:
           reject(OpenSubError.searchFailed("Failure"))
         case .error(let error):
           reject(OpenSubError.xmlRpcError(error))
@@ -278,7 +278,7 @@ class OpenSubSupport {
           } else {
             fulfill(result)
           }
-        case .failure(_):
+        case .failure:
           // Failure
           reject(OpenSubError.searchFailed("Failure"))
         case .error(let error):

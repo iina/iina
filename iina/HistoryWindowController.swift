@@ -229,7 +229,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
       if outlineView.clickedRow >= 0 {
         indexSet.insert(outlineView.clickedRow)
       }
-      selectedEntries = indexSet.flatMap { outlineView.item(atRow: $0) as? PlaybackHistory }
+      selectedEntries = indexSet.compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
     }
   }
 
@@ -268,7 +268,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   @IBAction func revealInFinderAction(_ sender: AnyObject) {
-    let urls = selectedEntries.flatMap { FileManager.default.fileExists(atPath: $0.url.path) ? $0.url: nil }
+    let urls = selectedEntries.compactMap { FileManager.default.fileExists(atPath: $0.url.path) ? $0.url: nil }
     NSWorkspace.shared.activateFileViewerSelecting(urls)
   }
 

@@ -179,7 +179,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       if commandLineStatus.isStdin {
         getNewPlayerCore().openURLString("-")
       } else {
-        let validFileURLs: [URL] = commandLineStatus.filenames.flatMap { filename in
+        let validFileURLs: [URL] = commandLineStatus.filenames.compactMap { filename in
           if Regex.url.matches(filename) {
             return URL(string: filename)
           } else {

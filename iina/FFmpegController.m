@@ -72,10 +72,10 @@ return -1;\
     if ([weakOp isCancelled]) {
       return;
     }
-    _timestamp = CACurrentMediaTime();
+    self->_timestamp = CACurrentMediaTime();
     int success = [self getPeeksForFile:file];
     if (self.delegate) {
-      [self.delegate didGenerateThumbnails:[NSArray arrayWithArray:_thumbnails]
+      [self.delegate didGenerateThumbnails:[NSArray arrayWithArray:self->_thumbnails]
                                    forFile: file
                                  succeeded:(success < 0 ? NO : YES)];
     }

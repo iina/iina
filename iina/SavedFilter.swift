@@ -48,7 +48,7 @@ class SavedFilter: NSObject {
     self.name = name
     self.filterString = filterString
     self.shortcutKey = shortcutKey
-    self.shortcutKeyModifiers = shortcutKeyModifiers.flatMap { ModifierMap[$0] }.reduce([]) { $0.union($1) }
+    self.shortcutKeyModifiers = shortcutKeyModifiers.compactMap { ModifierMap[$0] }.reduce([]) { $0.union($1) }
   }
 
   func toDict() -> [String: String] {
@@ -56,7 +56,7 @@ class SavedFilter: NSObject {
       "name": name,
       "filterString": filterString,
       "shortcutKey": shortcutKey,
-      "shortcutKeyModifiers": String(ModifierMap.enumerated().flatMap { shortcutKeyModifiers.contains($0.element.value) ? $0.element.key : nil })
+      "shortcutKeyModifiers": String(ModifierMap.enumerated().compactMap { shortcutKeyModifiers.contains($0.element.value) ? $0.element.key : nil })
     ]
   }
 }

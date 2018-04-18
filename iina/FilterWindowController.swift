@@ -60,7 +60,7 @@ class FilterWindowController: NSWindowController {
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|", "H:|[w]|", "V:|[w]|"], ["v": upperView, "w": lowerView])
     splitView.setPosition(splitView.frame.height - 140, ofDividerAt: 0)
 
-    savedFilters = (Preference.array(for: filterType == MPVProperty.af ? .savedAudioFilters : .savedVideoFilters) ?? []).flatMap(SavedFilter.init(dict:))
+    savedFilters = (Preference.array(for: filterType == MPVProperty.af ? .savedAudioFilters : .savedVideoFilters) ?? []).compactMap(SavedFilter.init(dict:))
     filters = PlayerCore.active.mpv.getFilters(filterType)
     currentFiltersTableView.reloadData()
     savedFiltersTableView.reloadData()

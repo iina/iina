@@ -91,7 +91,7 @@ class AutoFileMatcher {
     var subtitles = filesGroupedByMediaType[.sub]!
     for subDir in subDirs {
       if let contents = try? fm.contentsOfDirectory(at: subDir, includingPropertiesForKeys: nil, options: searchOptions) {
-        subtitles.append(contentsOf: contents.flatMap { subExts.contains($0.pathExtension.lowercased()) ? FileInfo($0) : nil })
+        subtitles.append(contentsOf: contents.compactMap { subExts.contains($0.pathExtension.lowercased()) ? FileInfo($0) : nil })
       }
     }
 
@@ -232,7 +232,7 @@ class AutoFileMatcher {
         }
         try matchedSubs
           .filter { $0.priorityStringOccurances > minOccurances }  // eliminate false positives in filenames
-          .flatMap { player.info.matchedSubs[video.path]!.index(of: $0.url) }  // get index
+          .compactMap { player.info.matchedSubs[video.path]!.index(of: $0.url) }  // get index
           .forEach {  // move the sub with index to first
             try checkTicket()
             if let s = player.info.matchedSubs[video.path]?.remove(at: $0) {

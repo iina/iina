@@ -151,7 +151,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
 
   private func updateOSCToolbarButtons() {
     oscToolbarStackView.views.forEach { oscToolbarStackView.removeView($0) }
-    let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).flatMap(Preference.ToolBarButton.init(rawValue:))
+    let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
     for buttonType in buttons {
       let button = NSImageView()
       button.image = buttonType.image()

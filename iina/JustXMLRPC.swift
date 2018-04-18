@@ -63,9 +63,9 @@ class JustXMLRPC {
     Just.post(location, requestBody: reqXML.xmlData) { response in
       if response.ok, let content = response.content, let responseDoc = try? XMLDocument(data: content) {
         let rootElement = responseDoc.rootElement()
-        if let _ = rootElement?.findChild("fault") {
+        if let _ = rootElement?.child("fault") {
           callback(.failure)
-        } else if let params = rootElement?.findChild("params")?.findChild("param")?.children,
+        } else if let params = rootElement?.child("params")?.child("param")?.children,
           params.count == 1 {
           callback(.ok(JustXMLRPC.value(fromValueElement: params[0] as! XMLElement)))
         } else {
@@ -137,15 +137,15 @@ class JustXMLRPC {
       return Data(base64Encoded: s) ?? Data()
     case "array":
       var resultArray: [Any] = []
-      for child in valueElement.findChild("data")?.findChildren("value") ?? [] {
+      for child in valueElement.child("data")?.findChildren("value") ?? [] {
         resultArray.append(JustXMLRPC.value(fromValueElement: child))
       }
       return resultArray
     case "struct":
       var resultDict: [String: Any] = [:]
       for child in valueElement.findChildren("member") ?? [] {
-        let key = child.findChild("name")!.stringValue!
-        let value = JustXMLRPC.value(fromValueElement: child.findChild("value")!)
+        let key = child.child("name")!.stringValue!
+        let value = JustXMLRPC.value(fromValueElement: child.child("value")!)
         resultDict[key] = value
       }
       return resultDict
@@ -155,4 +155,14 @@ class JustXMLRPC {
     }
   }
 
+}
+
+extension XMLNode {
+  func findChildren(_ name: String) -> [XMLElement]? {
+    return self.children?.filter { $0.name == name } as? [XMLElement]
+  }
+
+  func child(_ name: String) -> XMLElement? {
+    return self.findChildren(name)?.first
+  }
 }

@@ -157,7 +157,7 @@
 
 "alert.playlist.error_deleting" = "삭제 오류: %@";
 
-"alert.sub.no_selected" = "다운로드한 자막을 선택하십시오.";
+"alert.sub.no_selected" = "다운로드된 자막을 선택하십시오.";
 "alert.sub_lang_not_set" = "OpenSubtitles를 사용하기 전에 자막의 선호 언어를 설정하십시오. 지금은 영어(eng)를 사용합니다.";
 "alert.sub.cannot_save_passwd" = "키체인에 암호를 저장할 수 없습니다: %@";
 "alert.sub.cannot_login" = "로그인할 수 없습니다. 계정 이름과 암호, 네트워크 상태를 확인하십시오.\n\n%@";
@@ -179,6 +179,9 @@
 "alert.open_url.message" = "URL을 입력하십시오.";
 "alert.choose_media_file.title" = "재생할 파일 선택";
 
+"alert.add_url.title" = "URL 추가";
+"alert.add_url.message" = "URL을 입력하십시오:";
+
 "alert.delete_history.title" = "최근에 재생한 기록 삭제";
 "alert.delete_history.message" = "선택한 재생 기록을 삭제하시겠습니까?";
 
@@ -195,28 +198,30 @@
 
 "alert.no_video_track" = "비디오 트랙이 없습니다.";
 
-"alert.assrt_register" = "API 사용량 제한이 있으므로, 사용자가 개별 API 토큰을 만들어 사용하는 것이 좋습니다. 기본 제공되는 토큰은 시범 용도로 사용되는 것이므로 네트워크 오류가 발생할 수 있습니다.";
+"alert.assrt_register" = "API 사용량 제한이 있으므로, 사용자가 개별 API 토큰을 만들어 사용하는 것이 좋습니다. 기본 제공되는 토큰은 시험용이므로 네트워크 오류가 발생할 수 있습니다.";
 "alert.assrt_register.register" = "지금 등록하기";
 "alert.assrt_register.try" = "사용해 보기";
 "alert.assrt_token_prompt.title" = "API 토큰을 입력하십시오";
-"alert.assrt_token_prompt.message" = "보이는 웹페이지에서 등록해 주십시오. 사용자 홈페이지에서 토큰을 발급받아 아래에 입력하십시오:";
-"alert.assrt_token_invalid" = "입력한 Assrt API 토큰이 유효하지 않은 것 같습니다.";
+"alert.assrt_token_prompt.message" = "웹페이지에서 등록해 주십시오. 홈페이지의 사용자 설정에서 토큰을 발급받아 아래에 입력하십시오:";
+"alert.assrt_token_invalid" = "Assrt API 토큰을 잘못 입력한 것 같습니다.";
 
 "pl_menu.title_multi" = "%d개의 항목";
 "pl_menu.play_next" = "다음 항목 재생";
 "pl_menu.play_in_new_window" = "새 윈도우에서 재생";
 "pl_menu.remove" = "제거";
 "pl_menu.remove_multi" = "선택 항목 제거";
-"pl_menu.delete" = "휴지통으로 이동";
-"pl_menu.delete_multi" = "선택한 파일을 휴지통으로 이동";
-"pl_menu.delete_after_play" = "재생 후 휴지통으로 이동";
-"pl_menu.delete_after_play_multi" = "선택항목 재생 후 휴지통으로 이동";
+"pl_menu.delete" = "휴지통에 버리기";
+"pl_menu.delete_multi" = "선택한 파일을 휴지통에 버리기";
+"pl_menu.delete_after_play" = "재생 후 휴지통에 버리기";
+"pl_menu.delete_after_play_multi" = "선택항목 재생 후 휴지통에 버리기";
 "pl_menu.reveal_in_finder" = "파인더에서 보기";
+"pl_menu.add_file" = "파일 추가…";
+"pl_menu.add_url" = "URL 추가…";
 "pl_menu.add_item" = "항목 추가…";
 "pl_menu.clear_playlist" = "재생목록 지움";
 "pl_menu.matched_sub" = "%d개의 자막 일치";
 "pl_menu.add_sub" = "자막 추가…";
-"pl_menu.wrong_sub" = "일치되지 않은 자막!";
+"pl_menu.wrong_sub" = "잘못된 자막!";
 
 "keymapping.title" = "단축키 지정";
 "keymapping.message" = "단축키로 사용할 키를 누르십시오.";
@@ -253,4 +258,3 @@
 "touchbar.seek" = "탐색";
 "touchbar.time" = "재생 위치";
 "touchbar.remainingTime" = "남은 시간";
-

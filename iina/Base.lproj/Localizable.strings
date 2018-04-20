@@ -178,6 +178,9 @@
 "alert.open_url.message" = "Please enter the URL:";
 "alert.choose_media_file.title" = "Choose Media File";
 
+"alert.add_url.title" = "Add URL";
+"alert.add_url.message" = "Please enter the URL:";
+
 "alert.delete_history.title" = "Delete Playback History";
 "alert.delete_history.message" = "Are you sure to delete select entries?";
 
@@ -213,7 +216,8 @@
 "pl_menu.delete_after_play" = "Move to Trash After Playback";
 "pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
 "pl_menu.reveal_in_finder" = "Reveal in Finder";
-"pl_menu.add_item" = "Add Item…";
+"pl_menu.add_file" = "Add File…";
+"pl_menu.add_url" = "Add URL…";
 "pl_menu.clear_playlist" = "Clear Playlist";
 "pl_menu.matched_sub" = "Matched %d Subtitle(s)";
 "pl_menu.add_sub" = "Add Subtitle…";

@@ -3,6 +3,9 @@
 /* Class = "NSTextFieldCell"; title = "▶︎"; ObjectID = "4yj-cg-fli"; */
 "4yj-cg-fli.title" = "▶︎";
 
+/* Class = "NSMenuItem"; title = "Add File…"; ObjectID = "CI2-Gm-j4o"; */
+"CI2-Gm-j4o.title" = "添加文件…";
+
 /* Class = "NSButtonCell"; title = "…"; ObjectID = "CVl-Xv-m3u"; */
 "CVl-Xv-m3u.title" = "…";
 
@@ -41,6 +44,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Chapter Title"; ObjectID = "vmJ-Ry-xgK"; */
 "vmJ-Ry-xgK.title" = "Chapter Title";
+
+/* Class = "NSMenuItem"; title = "Add URL…"; ObjectID = "zeJ-cr-tRg"; */
+"zeJ-cr-tRg.title" = "添加 URL…";
 
 /* Class = "NSButtonCell"; title = "Wrong Subtitle!"; ObjectID = "zod-Ch-cOH"; */
 "zod-Ch-cOH.title" = "错误的字幕!";

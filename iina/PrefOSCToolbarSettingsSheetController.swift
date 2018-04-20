@@ -127,7 +127,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
   }
 
   private func updateItems() {
-    items = views.flatMap { ($0 as? PrefOSCToolbarCurrentItem)?.buttonType }
+    items = views.compactMap { ($0 as? PrefOSCToolbarCurrentItem)?.buttonType }
 
     if let delegate = currentItemsViewDelegate {
       delegate.currentItemsView(self, updatedItems: items)

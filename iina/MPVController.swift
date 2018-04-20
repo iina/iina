@@ -658,18 +658,21 @@ class MPVController: NSObject {
     case MPVOption.TrackSelection.vid:
       let data = getInt(MPVOption.TrackSelection.vid)
       player.info.vid = Int(data)
+      player.getTrackInfo()
       let currTrack = player.info.currentTrack(.video) ?? .noneVideoTrack
       player.sendOSD(.track(currTrack))
 
     case MPVOption.TrackSelection.aid:
       let data = getInt(MPVOption.TrackSelection.aid)
       player.info.aid = Int(data)
+      player.getTrackInfo()
       let currTrack = player.info.currentTrack(.audio) ?? .noneAudioTrack
       player.sendOSD(.track(currTrack))
 
     case MPVOption.TrackSelection.sid:
       let data = getInt(MPVOption.TrackSelection.sid)
       player.info.sid = Int(data)
+      player.getTrackInfo()
       let currTrack = player.info.currentTrack(.sub) ?? .noneSubTrack
       player.sendOSD(.track(currTrack))
 

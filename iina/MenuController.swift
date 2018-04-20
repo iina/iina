@@ -298,7 +298,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     savedVideoFiltersMenu.delegate = self
     updateSavedFilters(forType: MPVProperty.vf,
-                       from: Preference.array(for: .savedVideoFilters)?.flatMap(SavedFilter.init(dict:)) ?? [])
+                       from: Preference.array(for: .savedVideoFilters)?.compactMap(SavedFilter.init(dict:)) ?? [])
 
     // Audio menu
 
@@ -334,7 +334,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     savedAudioFiltersMenu.delegate = self
     updateSavedFilters(forType: MPVProperty.af,
-                       from: Preference.array(for: .savedAudioFilters)?.flatMap(SavedFilter.init(dict:)) ?? [])
+                       from: Preference.array(for: .savedAudioFilters)?.compactMap(SavedFilter.init(dict:)) ?? [])
 
     // Subtitle
 

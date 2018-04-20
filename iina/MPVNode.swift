@@ -163,7 +163,7 @@ class MPVNode {
         iptr = iptr.successor()
       }
       ptr.deinitialize(count: num)
-      ptr.deallocate(capacity: num)
+      ptr.deallocate()
 
     case MPV_FORMAT_NODE_MAP:
       let map = node.u.list!.pointee
@@ -180,9 +180,9 @@ class MPVNode {
         ivptr = vptr.successor()
       }
       kptr.deinitialize(count: num)
-      kptr.deallocate(capacity: num)
+      kptr.deallocate()
       vptr.deinitialize(count: num)
-      vptr.deallocate(capacity: num)
+      vptr.deallocate()
 
     default:
       break
@@ -205,7 +205,7 @@ class MPVNode {
     let str = String(cString: ptr)
     let len = str.cString(using: .utf8)!.count
     ptr.deinitialize(count: len)
-    ptr.deallocate(capacity: len)
+    ptr.deallocate()
   }
 
 }

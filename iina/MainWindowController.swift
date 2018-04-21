@@ -1243,7 +1243,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func window(_ window: NSWindow, startCustomAnimationToEnterFullScreenOn screen: NSScreen, withDuration duration: TimeInterval) {
-    windowFrameBeforeEnteringFullScreen = window.frame
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
       window.animator().setFrame(screen.frame, display: true)
@@ -1296,6 +1295,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     isInFullScreenAnimation = true
     isInFullScreen = true
+
+    windowFrameBeforeEnteringFullScreen = window!.frame
     
     // Exit PIP if necessary
     if pipStatus == .inPIP,

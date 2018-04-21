@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SubChooseViewController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="downloadBtn" destination="i9Z-jA-8gU" id="gkd-Uo-bnt"/>
                 <outlet property="tableView" destination="Hut-pu-9Tv" id="0sm-qw-Sap"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -216,7 +217,7 @@
                 </scrollView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i9Z-jA-8gU">
                     <rect key="frame" x="389" y="8" width="83" height="17"/>
-                    <buttonCell key="cell" type="square" title="DOWNLOAD" bezelStyle="shadowlessSquare" alignment="center" inset="2" id="y68-ot-NOl">
+                    <buttonCell key="cell" type="square" title="DOWNLOAD" bezelStyle="shadowlessSquare" alignment="center" enabled="NO" inset="2" id="y68-ot-NOl">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="systemBold"/>
                     </buttonCell>

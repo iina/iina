@@ -467,7 +467,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.controlBarToolbarButtons.rawValue:
       if let newValue = change[.newKey] as? [Int] {
-        setupOSCToolbarButtons(newValue.flatMap(Preference.ToolBarButton.init(rawValue:)))
+        setupOSCToolbarButtons(newValue.compactMap(Preference.ToolBarButton.init(rawValue:)))
       }
 
     default:
@@ -479,7 +479,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   var standardWindowButtons: [NSButton] {
     get {
-      return ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).flatMap {
+      return ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).compactMap {
         window?.standardWindowButton($0)
       }
     }
@@ -488,7 +488,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Get the `NSTextField` of widow's title. */
   var titleTextField: NSTextField? {
     get {
-      return window?.standardWindowButton(.closeButton)?.superview?.subviews.flatMap({ $0 as? NSTextField }).first
+      return window?.standardWindowButton(.closeButton)?.superview?.subviews.compactMap({ $0 as? NSTextField }).first
     }
   }
 
@@ -639,7 +639,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fragControlView.addView(fragControlViewMiddleView, in: .center)
     fragControlView.addView(fragControlViewRightView, in: .center)
     setupOnScreenController(position: oscPosition)
-    let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).flatMap(Preference.ToolBarButton.init(rawValue:))
+    let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
     setupOSCToolbarButtons(buttons)
 
     updateArrowButtonImage()
@@ -1321,7 +1321,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func window(_ window: NSWindow, startCustomAnimationToEnterFullScreenOn screen: NSScreen, withDuration duration: TimeInterval) {
-    self.fullscreen.priorWindowedFrame = window.frame
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
       window.animator().setFrame(screen.frame, display: true)
@@ -1384,6 +1383,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isMouseInSlider = false
 
     self.fullscreen = .fullscreen(legacy: false, priorWindowedFrame: self.window!.frame)
+
+    windowFrameBeforeEnteringFullScreen = window!.frame
 
     // Exit PIP if necessary
     if pipStatus == .inPIP,

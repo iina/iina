@@ -15,6 +15,7 @@ class SubChooseViewController: NSViewController {
   }
 
   @IBOutlet weak var tableView: NSTableView!
+  @IBOutlet weak var downloadBtn: NSButton!
 
   var subtitles: [OnlineSubtitle] = []
 
@@ -72,6 +73,14 @@ extension SubChooseViewController: NSTableViewDelegate, NSTableViewDataSource {
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     return tableView.makeView(withIdentifier: cellIdentifier, owner: self)
+  }
+
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    if tableView.selectedRow != -1 {
+      downloadBtn.isEnabled = true
+    } else {
+      downloadBtn.isEnabled = false
+    }
   }
 
 }

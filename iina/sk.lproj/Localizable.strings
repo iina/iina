@@ -2,8 +2,18 @@
 
 "alert.add_filter.message" = "Vyhľadávajte vo formáte MPV vf alebo af príkazov.";
 "alert.add_filter.title" = "Nový Filter";
+"alert.add_url.message" = "Zadaj URL:";
+"alert.add_url.title" = "Pridať URL";
 "alert.add_watch.message" = "Zadať platnú MPV vlastnosť.";
 "alert.add_watch.title" = "Pridať Sledovanú Vlastnosť";
+"alert.assrt_register" = "Kvôli API limitom vám odporúčame použiť váš vlastný API token. Prednastavený token slúži iba na demo účeli a nemusí fungovať správne.";
+"alert.assrt_register.register" = "Zaregistrovať sa";
+"alert.assrt_register.try" = "Najprv Vyskúšajte";
+"alert.assrt_token_invalid" = "Váš Assrt API token je neplatný.";
+"alert.assrt_token_prompt.message" = "Zaregistrujte sa na otvorenej webstránke. Váš token z domovskej stránky vložte sem:";
+"alert.assrt_token_prompt.title" = "Zadaj tvoj API token";
+"alert.beta_channel.message" = "IINA v1.0 prichádza! Chcete nám pomôcť s testovaním?\n\nToto rozhodnutie môžete neskôr zmeniť v Nastaveniach - Všeobecné.";
+"alert.beta_channel.title" = "Sťahovať Aktualizácie Beta Verzií";
 "alert.choose_media_file.title" = "Vyber Multimediálny Súbor";
 "alert.clear_cache.message" = "Naozaj Chceš Vyčistiť Cache s Náhľadmi?";
 "alert.clear_cache.success" = "Cache vyčistená.";
@@ -30,12 +40,10 @@
 "alert.extra_option.config_folder" = "Chyba pri nastavovaní konfiguračného adresára \"%@\".";
 "alert.extra_option.empty" = "Názov alebo hodnota nemôžu byť prázdne!";
 "alert.extra_option.error" = "Chyba pri nastavovaní --%@=%@ so vrátenou hodnotou %d. Skontrolujte vaše nastavenia v Nastavenia > Pokročilé.";
-"alert.fatal_error" = "Fatálna chyba: %@ 
-Aplikácia sa teraz ukončí.";
+"alert.fatal_error" = "Fatálna chyba: %@ Aplikácia sa teraz ukončí.";
 "alert.filter.incorrect" = "Vyskytla sa chyba pri aplikovaní filtra. Skontrolujte parametre.";
 "alert.filter_hwdec.abort" = "Zrušiť";
-"alert.filter_hwdec.message" = "Práve chcete použiť video filter. Avšak, aktuálny hardvéroví dekodér nemusí podporovať video filtre. Môžete vypnúť hardvéroví dekodér alebo ho prepnúť na Auto(Kópia), ktoré dvojnásobne zaťaží pamäť.
-Môžete zopakovať predchádzajúcu úpravu (napr. orezanie), aby všetko fungovalo.";
+"alert.filter_hwdec.message" = "Práve chcete použiť video filter. Avšak, aktuálny hardvéroví dekodér nemusí podporovať video filtre. Môžete vypnúť hardvéroví dekodér alebo ho prepnúť na Auto(Kópia), ktoré dvojnásobne zaťaží pamäť. Môžete zopakovať predchádzajúcu úpravu (napr. orezanie), aby všetko fungovalo.";
 "alert.filter_hwdec.turn_off" = "Vypnúť hardvérové dekódovanie";
 "alert.filter_hwdec.use_copy" = "Zmeniť na Auto(Kópia)";
 "alert.jump_to.message" = "Zadajte čas, na ktorý chcete preskočiť. Napr.: 20:35";
@@ -53,9 +61,7 @@ Môžete zopakovať predchádzajúcu úpravu (napr. orezanie), aby všetko fungo
 "alert.set_default.success" = "Dokončené s %d úspechom a %d chybami.";
 "alert.set_default.title" = "Nastaviť IINA Ako Predvolenú Aplikáciu";
 "alert.sleep" = "Nedá sa zabrániť spánku displeja!";
-"alert.sub.cannot_login" = "Nedá sa prihlásiť. Skontrolujte vaše meno, heslo a stav siete.
-
-%@";
+"alert.sub.cannot_login" = "Nedá sa prihlásiť. Skontrolujte vaše meno, heslo a stav siete. %@";
 "alert.sub.cannot_save_passwd" = "Heslo sa nedá uložiť do Kľúčenky: %@";
 "alert.sub.no_selected" = "Najprv zvoľte stiahnuté titulky.";
 "alert.sub_lang_not_set" = "Nastavte preferovaný jazyk tituliek v nastaveniach pred vyhľadávaním na opensubtitles. Teraz bude ako jazyk použitá English(eng).";
@@ -102,6 +108,12 @@ Môžete zopakovať predchádzajúcu úpravu (napr. orezanie), aby všetko fungo
 "menu.volume" = "Hlasitosť: %d";
 "menu.volume_down" = "Hlasitosť - %.0f%%";
 "menu.volume_up" = "Hlasitosť + %.0f%%";
+"osc_toolbar.full_screen" = "Prepnúť zobrazenie na celú obrazovku";
+"osc_toolbar.music_mode" = "Zapnúť režim pre hudbu";
+"osc_toolbar.pip" = "Prepnúť Picture-in-Picture";
+"osc_toolbar.playlist" = "Playlist and kapitoly";
+"osc_toolbar.settings" = "Rýchle Nastavenia";
+"osc_toolbar.sub_track" = "Vyber titulky";
 "osd.abloop.a" = "AB-Opakovanie: A";
 "osd.abloop.b" = "AB-Opakovanie: B";
 "osd.abloop.clear" = "AB-Opakovanie: Vyčistená";
@@ -144,8 +156,9 @@ Môžete zopakovať predchádzajúcu úpravu (napr. orezanie), aby všetko fungo
 "osd.video_eq.hue" = "Farba: %i";
 "osd.video_eq.saturation" = "Saturácia: %i";
 "osd.volume" = "Hlasitosť: %i";
-"pl_menu.add_item" = "Pridať Položku…";
+"pl_menu.add_file" = "Pridať Súbor…";
 "pl_menu.add_sub" = "Pridať Titulky…";
+"pl_menu.add_url" = "Pridať URL…";
 "pl_menu.clear_playlist" = "Vyčistiť Playlist";
 "pl_menu.delete" = "Presunúť do Koša";
 "pl_menu.delete_after_play" = "Presunúť do Koša po Prehraní";
@@ -187,64 +200,8 @@ Môžete zopakovať predchádzajúcu úpravu (napr. orezanie), aby všetko fungo
 "touchbar.next_video" = "Ďalšie Video";
 "touchbar.play_pause" = "Spustiť / Zastaviť";
 "touchbar.prev_video" = "Predchádzajúce Video";
+"touchbar.remainingTime" = "Zostávajúci Čas";
 "touchbar.rewind" = "Pretočiť";
 "touchbar.seek" = "Vyhľadať";
 "touchbar.time" = "Pozícia";
 "track.none" = "<Prázdne>";
-
-/* FIXME: Using English localization instead */
-"touchbar.remainingTime" = "Remaining Time";
-
-/* FIXME: Using English localization instead */
-"alert.beta_channel.message" = "IINA v1.0 is comming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
-
-/* FIXME: Using English localization instead */
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register.try" = "Try First";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_prompt.title" = "Enter your API token";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register.register" = "Register Now";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.sub_track" = "Choose subtitle track";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.playlist" = "Playlist and chapters";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.music_mode" = "Enter music mode";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.settings" = "Quick Settings";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.full_screen" = "Toggle full screen";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.pip" = "Toggle Picture-in-Picture";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.title" = "Add URL";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.message" = "Please enter the URL:";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_file" = "Add File…";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_url" = "Add URL…";

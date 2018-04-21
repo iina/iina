@@ -911,10 +911,8 @@ class PlayerCore: NSObject {
     }
     // set initial properties for the first file
     if info.justLaunched {
-      if Preference.bool(for: .fullScreenWhenOpen) {
-        if mainWindow.fullscreen == MainWindowController.ScreenState.windowed && !isInMiniPlayer {
-          DispatchQueue.main.async(execute: self.mainWindow.toggleWindowFullScreen)
-        }
+      if Preference.bool(for: .fullScreenWhenOpen) && mainWindow.screenState.isFullscreen && !isInMiniPlayer {
+        DispatchQueue.main.async(execute: self.mainWindow.toggleWindowFullScreen)
       }
       info.justLaunched = false
     }
@@ -945,7 +943,7 @@ class PlayerCore: NSObject {
     // if need to switch to music mode
     if audioStatusIsAvailableNow && Preference.bool(for: .autoSwitchToMusicMode) {
       if currentMediaIsAudio == .isAudio {
-        if !isInMiniPlayer && mainWindow.fullscreen != .windowed && !switchedBackFromMiniPlayerManually {
+        if !isInMiniPlayer && !mainWindow.screenState.isFullscreen && !switchedBackFromMiniPlayerManually {
           DispatchQueue.main.sync {
             switchToMiniPlayer(automatically: false)
           }
@@ -1017,10 +1015,10 @@ class PlayerCore: NSObject {
     } else {
       syncUI(.time)
     }
-    if !isInMiniPlayer && mainWindow.displayTimeAndBatteryInFullScreen && !mainWindow.additionalInfoView.isHidden {
-      if case .fullscreen(_, _) = mainWindow.fullscreen {
+    if !isInMiniPlayer &&
+      mainWindow.screenState.isFullscreen && mainWindow.displayTimeAndBatteryInFullScreen &&
+      !mainWindow.additionalInfoView.isHidden {
         syncUI(.additionalInfo)
-      }
     }
   }
 

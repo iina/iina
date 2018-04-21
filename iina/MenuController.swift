@@ -444,7 +444,7 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   private func updateVideoMenu() {
-    let isInFullScreen: Bool = { if case .fullscreen(_, _) = PlayerCore.active.mainWindow.fullscreen { return true } else { return false } }()
+    let isInFullScreen = PlayerCore.active.mainWindow.screenState.isFullscreen
     let isInPIP = PlayerCore.active.mainWindow.pipStatus == .inPIP
     let isOntop = PlayerCore.active.isInMiniPlayer ? PlayerCore.active.miniPlayer.isOntop : PlayerCore.active.mainWindow.isOntop
     let isDelogo = PlayerCore.active.info.delogoFilter != nil

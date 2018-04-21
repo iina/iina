@@ -30,6 +30,9 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
 
   var finishedPicking: ((String?) -> Void)?
 
+  let fontNameQueue: DispatchQueue = DispatchQueue(label: "IINAFontTask")
+  let fontNameTask = DispatchGroup()
+
   override var windowNibName: NSNib.Name {
     get {
       return NSNib.Name("FontPickerWindowController")
@@ -38,6 +41,8 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
 
   override func windowDidLoad() {
     super.windowDidLoad()
+
+    fontNameTask.wait()
 
     withAllTableViews { tv in
       tv.dataSource = self

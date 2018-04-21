@@ -91,7 +91,9 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     }
   }
 
-  override func keyUp(with event: NSEvent) {
+  // - MARK: NSTextField delegate
+
+  override func controlTextDidChange(_ obj: Notification) {
     let str = searchField.stringValue
     if str.isEmpty {
       isSearching = false

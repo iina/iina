@@ -39,12 +39,6 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
   override func windowDidLoad() {
     super.windowDidLoad()
 
-    let manager = NSFontManager.shared
-
-    fontNames = manager.availableFontFamilies
-      .filter { !$0.hasPrefix(".") && !$0.trimmingCharacters(in: .whitespaces).isEmpty }
-      .map { FontInfo(name: $0, localizedName: manager.localizedName(forFamily: $0, face: nil)) }
-      .sorted { $0.localizedName < $1.localizedName }
     withAllTableViews { tv in
       tv.dataSource = self
       tv.delegate = self

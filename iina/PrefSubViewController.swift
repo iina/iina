@@ -34,6 +34,8 @@ class PrefSubViewController: NSViewController {
   @IBOutlet weak var loginIndicator: NSProgressIndicator!
   @IBOutlet weak var defaultEncodingList: NSPopUpButton!
 
+  let fontNameQueue: DispatchQueue = DispatchQueue(label: "IINAFontTask")
+
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -48,6 +50,15 @@ class PrefSubViewController: NSViewController {
     }
     
     defaultEncodingList.menu?.insertItem(NSMenuItem.separator(), at: 1)
+
+    fontNameQueue.async {
+      let manager = NSFontManager.shared
+
+      (NSApp.delegate as! AppDelegate).fontPicker.fontNames = manager.availableFontFamilies
+        .filter { !$0.hasPrefix(".") && !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+        .map { FontPickerWindowController.FontInfo(name: $0, localizedName: manager.localizedName(forFamily: $0, face: nil)) }
+        .sorted { $0.localizedName < $1.localizedName }
+    }
 
     subLangTokenView.delegate = self
     loginIndicator.isHidden = true

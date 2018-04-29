@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1326717E20852D0D000FA7E2 /* SubChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1326718020852D0D000FA7E2 /* SubChooseViewController.xib */; };
 		496B19921E2968530035AF10 /* PIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B19911E2968530035AF10 /* PIP.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		4C30559E2032ECCE005D5873 /* libx264.152.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C30559D2032ECCD005D5873 /* libx264.152.dylib */; };
+		4C30559F2032ECEA005D5873 /* libx264.152.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 4C30559D2032ECCD005D5873 /* libx264.152.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867483705008F086E07B0A6B /* Pods_iina.framework */; };
 		6100FF2B1EDF9806002CF0FB /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */; };
 		8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */; };
@@ -226,6 +228,7 @@
 				84B1CE391F98BE3C00994D63 /* libass.9.dylib in Copy Dylibs */,
 				84B1CE3A1F98BE3C00994D63 /* libavcodec.57.107.100.dylib in Copy Dylibs */,
 				84B1CE3B1F98BE3C00994D63 /* libavdevice.57.10.100.dylib in Copy Dylibs */,
+				4C30559F2032ECEA005D5873 /* libx264.152.dylib in Copy Dylibs */,
 				84B1CE3C1F98BE3C00994D63 /* libavfilter.6.107.100.dylib in Copy Dylibs */,
 				84B1CE3D1F98BE3C00994D63 /* libavformat.57.83.100.dylib in Copy Dylibs */,
 				84B1CE3E1F98BE3C00994D63 /* libavresample.3.7.0.dylib in Copy Dylibs */,
@@ -397,6 +400,7 @@
 		440DDE4B1E9010440063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ru; path = ru.lproj/Contribution.rtf; sourceTree = "<group>"; };
 		440DDE4C1E9010440063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		496B19911E2968530035AF10 /* PIP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIP.framework; path = ../../../../System/Library/PrivateFrameworks/PIP.framework; sourceTree = "<group>"; };
+		4C30559D2032ECCD005D5873 /* libx264.152.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libx264.152.dylib; path = deps/lib/libx264.152.dylib; sourceTree = "<group>"; };
 		4CA6B416201E85B7008F3FBA /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		4CA6B417201E85B7008F3FBA /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
 		4CA6B418201E85B7008F3FBA /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/QuickSettingViewController.strings"; sourceTree = "<group>"; };
@@ -1048,6 +1052,7 @@
 				84B1CE301F98BE2A00994D63 /* libavcodec.57.107.100.dylib in Frameworks */,
 				84B1CE311F98BE2A00994D63 /* libavdevice.57.10.100.dylib in Frameworks */,
 				84B1CE321F98BE2A00994D63 /* libavfilter.6.107.100.dylib in Frameworks */,
+				4C30559E2032ECCE005D5873 /* libx264.152.dylib in Frameworks */,
 				84B1CE331F98BE2A00994D63 /* libavformat.57.83.100.dylib in Frameworks */,
 				84B1CE341F98BE2A00994D63 /* libavresample.3.7.0.dylib in Frameworks */,
 				84B1CE351F98BE2A00994D63 /* libavutil.55.78.100.dylib in Frameworks */,
@@ -1160,6 +1165,7 @@
 				84B1CE0F1F98BDF000994D63 /* libdvdnav.4.dylib */,
 				84B1CDF81F98BDED00994D63 /* libdvdread.4.dylib */,
 				84B1CE031F98BDEF00994D63 /* libfontconfig.1.dylib */,
+				4C30559D2032ECCD005D5873 /* libx264.152.dylib */,
 				84B1CE071F98BDEF00994D63 /* libfreetype.6.dylib */,
 				84B1CE091F98BDEF00994D63 /* libfribidi.0.dylib */,
 				84B1CE121F98BDF000994D63 /* libglib-2.0.0.dylib */,
@@ -2804,6 +2810,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/deps/lib",
 					"$(PROJECT_DIR)/deps/lib",
+					"$(PROJECT_DIR)/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = module.modulemap;
@@ -2841,6 +2848,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/deps/lib",
 					"$(PROJECT_DIR)/deps/lib",
+					"$(PROJECT_DIR)/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = module.modulemap;

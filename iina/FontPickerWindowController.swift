@@ -30,6 +30,9 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
 
   var finishedPicking: ((String?) -> Void)?
 
+  let fontNameQueue: DispatchQueue = DispatchQueue(label: "IINAFontTask")
+  let fontNameTask = DispatchGroup()
+
   override var windowNibName: NSNib.Name {
     get {
       return NSNib.Name("FontPickerWindowController")
@@ -39,12 +42,8 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
   override func windowDidLoad() {
     super.windowDidLoad()
 
-    let manager = NSFontManager.shared
+    fontNameTask.wait()
 
-    fontNames = manager.availableFontFamilies
-      .filter { !$0.hasPrefix(".") && !$0.trimmingCharacters(in: .whitespaces).isEmpty }
-      .map { FontInfo(name: $0, localizedName: manager.localizedName(forFamily: $0, face: nil)) }
-      .sorted { $0.localizedName < $1.localizedName }
     withAllTableViews { tv in
       tv.dataSource = self
       tv.delegate = self

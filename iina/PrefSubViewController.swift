@@ -49,6 +49,20 @@ class PrefSubViewController: NSViewController {
     
     defaultEncodingList.menu?.insertItem(NSMenuItem.separator(), at: 1)
 
+    let fontPicker = (NSApp.delegate as! AppDelegate).fontPicker
+
+    fontPicker.fontNameTask.enter()
+    fontPicker.fontNameQueue.async {
+      let manager = NSFontManager.shared
+
+      fontPicker.fontNames = manager.availableFontFamilies
+        .filter { !$0.hasPrefix(".") && !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+        .map { FontPickerWindowController.FontInfo(name: $0, localizedName: manager.localizedName(forFamily: $0, face: nil)) }
+        .sorted { $0.localizedName < $1.localizedName }
+
+      fontPicker.fontNameTask.leave()
+    }
+
     subLangTokenView.delegate = self
     loginIndicator.isHidden = true
   }

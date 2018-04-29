@@ -205,3 +205,9 @@
 "touchbar.seek" = "Sar";
 "touchbar.time" = "Zaman Pozisyonu";
 "track.none" = "<Hiçbiri>";
+
+/* FIXME: Using English localization instead */
+"subtrack.no_external" = "No external subtitle found";
+
+/* FIXME: Using English localization instead */
+"subtrack.no_loaded" = "No subtitle loaded";

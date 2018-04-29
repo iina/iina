@@ -258,3 +258,9 @@
 "touchbar.seek" = "탐색";
 "touchbar.time" = "재생 위치";
 "touchbar.remainingTime" = "남은 시간";
+
+/* FIXME: Using English localization instead */
+"subtrack.no_external" = "No external subtitle found";
+
+/* FIXME: Using English localization instead */
+"subtrack.no_loaded" = "No subtitle loaded";

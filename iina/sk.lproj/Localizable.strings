@@ -205,3 +205,9 @@
 "touchbar.seek" = "Vyhľadať";
 "touchbar.time" = "Pozícia";
 "track.none" = "<Prázdne>";
+
+/* FIXME: Using English localization instead */
+"subtrack.no_external" = "No external subtitle found";
+
+/* FIXME: Using English localization instead */
+"subtrack.no_loaded" = "No subtitle loaded";

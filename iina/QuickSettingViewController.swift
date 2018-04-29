@@ -601,8 +601,18 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     // loaded subtitles
     if showLoadedSubs {
       if player.info.subTracks.isEmpty {
-        menu.addItem(withTitle: NSLocalizedString("track.none", comment: "<None>"))
+        let item = NSMenuItem()
+        item.title = NSLocalizedString("subtrack.no_loaded", comment: "No subtitle loaded")
+        item.isEnabled = false
+        menu.addItem(item)
       } else {
+        let empty = NSMenuItem()
+        empty.title = NSLocalizedString("track.none", comment: "<None>")
+        empty.target = self
+        empty.action = #selector(self.chosenSubFromMenu(_:))
+        empty.representedObject = nil
+        empty.state = player.info.sid == 0 ? .on : .off
+        menu.addItem(empty)
         for sub in player.info.subTracks {
           let item = NSMenuItem()
           item.title = sub.readableTitle
@@ -627,7 +637,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       menu.addItem(item)
     }
     if player.info.currentSubsInfo.isEmpty {
-      menu.addItem(withTitle: NSLocalizedString("track.none", comment: "<None>"))
+      let item = NSMenuItem()
+      item.title = NSLocalizedString("subtrack.no_external", comment: "No external subtitle found")
+      item.isEnabled = false
+      menu.addItem(item)
     } else {
       if let videoInfo = player.info.currentVideosInfo.first(where: { $0.url == player.info.currentURL }),
         !videoInfo.relatedSubs.isEmpty {
@@ -646,6 +659,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       player.loadExternalSubFile(fileInfo.url)
     } else if let sub = sender.representedObject as? MPVTrack {
       player.setTrack(sub.id, forType: .sub)
+    } else {
+      player.setTrack(0, forType: .sub)
     }
   }
 

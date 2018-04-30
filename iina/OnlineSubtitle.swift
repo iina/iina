@@ -63,7 +63,7 @@ class OnlineSubtitle: NSObject {
       subSupport.hash(url)
       .then { info in
         subSupport.request(info)
-      }.then { subs in
+      }.map { subs in
         callback(subs)
       }.catch { error in
         let osdMessage: OSDMessage
@@ -78,7 +78,7 @@ class OnlineSubtitle: NSObject {
           playerCore.sendOSD(osdMessage)
           playerCore.isSearchingOnlineSubtitle = false
         }
-      }.always {
+      }.finally {
         playerCore.hideOSD()
       }
     case .openSub:
@@ -106,7 +106,7 @@ class OnlineSubtitle: NSObject {
         }
       }.then { subs in
         subSupport.showSubSelectWindow(with: subs)
-      }.then { selectedSubs -> Void in
+      }.map { selectedSubs in
         callback(selectedSubs)
       }.catch { err in
         let osdMessage: OSDMessage
@@ -142,7 +142,7 @@ class OnlineSubtitle: NSObject {
         subSupport.showSubSelectWindow(with: subs)
       }.then { selectedSubs in
         when(fulfilled: selectedSubs.map({ subSupport.loadDetails(forSub: $0) }))
-      }.then { loadedSubs in
+      }.map { loadedSubs in
         callback(loadedSubs)
       }.catch { err in
         let osdMessage: OSDMessage
@@ -155,7 +155,7 @@ class OnlineSubtitle: NSObject {
         }
         playerCore.sendOSD(osdMessage)
         playerCore.isSearchingOnlineSubtitle = false
-      }.always {
+      }.finally {
         playerCore.hideOSD()
       }
     }

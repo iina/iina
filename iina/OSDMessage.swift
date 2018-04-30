@@ -258,7 +258,7 @@ enum OSDMessage {
 
     case .foundSub(let count):
       let str = count == 0 ?
-        NSLocalizedString("osd.sub_not_found", comment: "No subtitle found.") :
+        NSLocalizedString("osd.sub_not_found", comment: "No subtitles found.") :
         String(format: NSLocalizedString("osd.sub_found", comment: "%d subtitle(s) found. Downloading..."), count)
       return (str, .normal)
 

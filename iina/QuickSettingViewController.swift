@@ -602,7 +602,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if showLoadedSubs {
       if player.info.subTracks.isEmpty {
         let item = NSMenuItem()
-        item.title = NSLocalizedString("subtrack.no_loaded", comment: "No subtitle loaded")
+        item.title = NSLocalizedString("subtrack.no_loaded", comment: "No subtitles loaded")
         item.isEnabled = false
         menu.addItem(item)
       } else {
@@ -638,7 +638,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
     if player.info.currentSubsInfo.isEmpty {
       let item = NSMenuItem()
-      item.title = NSLocalizedString("subtrack.no_external", comment: "No external subtitle found")
+      item.title = NSLocalizedString("subtrack.no_external", comment: "No external subtitles found")
       item.isEnabled = false
       menu.addItem(item)
     } else {

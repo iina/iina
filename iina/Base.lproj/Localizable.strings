@@ -60,7 +60,7 @@
 "osd.video_eq.saturation" = "Saturation: %i";
 "osd.video_eq.brightness" = "Brightness: %i";
 "osd.find_online_sub" = "Finding online subtitles...";
-"osd.sub_not_found" = "No subtitle found";
+"osd.sub_not_found" = "No subtitles found";
 "osd.sub_found" = "%d subtitle(s) found. Downloading...";
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
@@ -109,8 +109,8 @@
 
 "track.none" = "<None>";
 
-"subtrack.no_loaded" = "No subtitle loaded";
-"subtrack.no_external" = "No external subtitle found";
+"subtrack.no_loaded" = "No Subtitles Loaded";
+"subtrack.no_external" = "No External Subtitles Found";
 
 // Alerts
 "alert.beta_channel.title" = "Receive Updates for Beta Versions";
@@ -160,7 +160,7 @@
 "alert.playlist.error_deleting" = "Error deleting: %@";
 
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using opensubtitles. English(eng) will be used this time.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 

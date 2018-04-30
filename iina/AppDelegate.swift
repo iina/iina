@@ -457,7 +457,7 @@ struct CommandLineStatus {
   }
 }
 
-@available(OSX 10.13, *)
+@available(macOS 10.13, *)
 class RemoteCommandController {
   static let remoteCommand = MPRemoteCommandCenter.shared()
 

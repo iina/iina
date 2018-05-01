@@ -12,6 +12,7 @@ import Cocoa
 class VideoView: NSView {
 
   weak var player: PlayerCore!
+  var link: CVDisplayLink?
 
   lazy var videoLayer: ViewLayer = {
     let layer = ViewLayer()
@@ -22,7 +23,6 @@ class VideoView: NSView {
   var videoSize: NSSize?
 
   var isUninited = false
-
   var uninitLock = NSLock()
 
   var draggingTimer: Timer?
@@ -70,12 +70,12 @@ class VideoView: NSView {
 
   func uninit() {
     uninitLock.lock()
-    
+
     guard !isUninited else {
       uninitLock.unlock()
       return
     }
-    
+
     player.mpv.mpvUninitRendering()
     isUninited = true
     uninitLock.unlock()
@@ -88,13 +88,13 @@ class VideoView: NSView {
   override func draw(_ dirtyRect: NSRect) {
     // do nothing
   }
-  
+
   override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
     return true
   }
 
   // MARK: Drag and drop
-  
+
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
     hasPlayableFiles = (player.acceptFromPasteboard(sender, isPlaylist: true) == .copy)
     return player.acceptFromPasteboard(sender)
@@ -144,7 +144,7 @@ class VideoView: NSView {
   override func draggingExited(_ sender: NSDraggingInfo?) {
     destroyTimer()
   }
-  
+
   override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
     return player.openFromPasteboard(sender)
   }
@@ -156,5 +156,42 @@ class VideoView: NSView {
     playlistShown = false
     lastMousePosition = nil
   }
-  
+
+  // MARK: Display link
+
+  func startDisplayLink() {
+    guard let window = window else { return }
+    let displayId = UInt32(window.screen!.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! Int)
+    CVDisplayLinkCreateWithActiveCGDisplays(&link)
+    guard let link = link else {
+      Logger.fatal("Cannot Create display link!")
+    }
+    CVDisplayLinkSetCurrentCGDisplay(link, displayId)
+    CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: player.mpv))
+    CVDisplayLinkStart(link)
+  }
+
+  func stopDisplaylink() {
+    guard let link = link, CVDisplayLinkIsRunning(link) else { return }
+    CVDisplayLinkStop(link)
+  }
+
+  func updateDisplaylink() {
+    guard let window = window, let link = link else { return }
+    let displayId = UInt32(window.screen!.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! Int)
+    CVDisplayLinkSetCurrentCGDisplay(link, displayId)
+  }
+
 }
+
+fileprivate func displayLinkCallback(
+  _ displayLink: CVDisplayLink, _ inNow: UnsafePointer<CVTimeStamp>,
+  _ inOutputTime: UnsafePointer<CVTimeStamp>,
+  _ flagsIn: CVOptionFlags,
+  _ flagsOut: UnsafeMutablePointer<CVOptionFlags>,
+  _ context: UnsafeMutableRawPointer?) -> CVReturn {
+  let mpv = unsafeBitCast(context, to: MPVController.self)
+  mpv.mpvReportSwap()
+  return kCVReturnSuccess
+}
+

@@ -359,6 +359,11 @@ class MPVController: NSObject {
     mpv_render_context_free(mpvRenderContext)
   }
 
+  func mpvReportSwap() {
+    guard let mpvRenderContext = mpvRenderContext else { return }
+    mpv_render_context_report_swap(mpvRenderContext)
+  }
+
   // Basically send quit to mpv
   func mpvQuit() {
     command(.quit)

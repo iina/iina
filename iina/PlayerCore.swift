@@ -302,9 +302,18 @@ class PlayerCore: NSObject {
     }
   }
 
+  func initVideo() {
+    // init mpv render context.
+    // The video layer must be displayed once to get the OpenGL context initialized.
+    mainWindow.videoView.videoLayer.display()
+    mpv.mpvInitRendering()
+    mainWindow.videoView.startDisplayLink()
+  }
+
   // unload main window video view
-  func unloadVideo() {
+  func uninitVideo() {
     guard mainWindow.isWindowLoaded else { return }
+    mainWindow.videoView.stopDisplaylink()
     mainWindow.videoView.uninit()
   }
 
@@ -313,7 +322,7 @@ class PlayerCore: NSObject {
     guard !isMpvTerminated else { return }
     savePlaybackPosition()
     invalidateTimer()
-    unloadVideo()
+    uninitVideo()
     if sendQuit {
       mpv.mpvQuit()
     }

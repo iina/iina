@@ -79,9 +79,9 @@ class PlayerCore: NSObject {
   private var _touchBarSupport: Any?
 
   /// A dispatch queue for auto load feature.
-  let backgroundQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreTask", qos: DispatchQoS.background)
+  let backgroundQueue = DispatchQueue(label: "IINAPlayerCoreTask", qos: .background)
 
-  let thumbnailQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreThumbnailTask")
+  let thumbnailQueue = DispatchQueue(label: "IINAPlayerCoreThumbnailTask")
 
   /**
    This ticket will be increased each time before a new task being submitted to `backgroundQueue`.

@@ -32,7 +32,7 @@ class ViewLayer: CAOpenGLLayer {
 
   weak var videoView: VideoView!
 
-  lazy var mpvGLQueue: DispatchQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: DispatchQoS.userInteractive)
+  lazy var mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
 
   override init() {
     super.init()

@@ -81,7 +81,7 @@ class PlayerCore: NSObject {
   /// A dispatch queue for auto load feature.
   let backgroundQueue = DispatchQueue(label: "IINAPlayerCoreTask", qos: .background)
 
-  let thumbnailQueue = DispatchQueue(label: "IINAPlayerCoreThumbnailTask")
+  let thumbnailQueue = DispatchQueue(label: "IINAPlayerCoreThumbnailTask", qos: .utility)
 
   /**
    This ticket will be increased each time before a new task being submitted to `backgroundQueue`.

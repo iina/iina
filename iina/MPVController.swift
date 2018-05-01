@@ -38,7 +38,7 @@ class MPVController: NSObject {
   // The mpv_handle
   var mpv: OpaquePointer!
 
-  var mpvClientName: UnsafePointer<Int8>!
+  var mpvClientName: UnsafePointer<CChar>!
   var mpvVersion: String!
 
   lazy var queue = DispatchQueue(label: "com.colliderli.iina.controller", qos: .userInitiated)
@@ -365,7 +365,7 @@ class MPVController: NSObject {
     var strArgs = args
     strArgs.insert(command.rawValue, at: 0)
     strArgs.append(nil)
-    var cargs = strArgs.map { $0.flatMap { UnsafePointer<Int8>(strdup($0)) } }
+    var cargs = strArgs.map { $0.flatMap { UnsafePointer<CChar>(strdup($0)) } }
     let returnValue = mpv_command(self.mpv, &cargs)
     for ptr in cargs { free(UnsafeMutablePointer(mutating: ptr)) }
     if checkError {

@@ -942,7 +942,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         } else if event.clickCount == 2 {
           // double click
           // disable double click for sideBar / OSC
-          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar]) else { return }
+          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
           // double click
           guard doubleClickAction != .none else { return }
           // if already scheduled a single click timer, invalidate it

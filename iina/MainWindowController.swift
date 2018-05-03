@@ -1060,7 +1060,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       showUI()
     }
     // check whether mouse is in osc
-    if isMouseEvent(event, inAnyOf: [currentControlBar]) {
+    if isMouseEvent(event, inAnyOf: [currentControlBar, titleBarView]) {
       destroyTimer()
     } else {
       updateTimer()

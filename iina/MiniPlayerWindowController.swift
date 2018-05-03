@@ -12,7 +12,7 @@ fileprivate let DefaultPlaylistHeight: CGFloat = 300
 fileprivate let AutoHidePlaylistThreshold: CGFloat = 200
 fileprivate let AnimationDurationShowControl: TimeInterval = 0.2
 
-class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
+class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopoverDelegate {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("MiniPlayerWindowController")
@@ -130,6 +130,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     NotificationCenter.default.addObserver(self, selector: #selector(updateTrack), name: .iinaMediaTitleChanged, object: player)
 
     updateVolume()
+
+    volumePopover.delegate = self
   }
 
   func windowWillClose(_ notification: Notification) {
@@ -179,7 +181,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     super.mouseDown(with: event)
   }
 
-  override func mouseEntered(with event: NSEvent) {
+  private func showControl() {
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = AnimationDurationShowControl
       closeButtonView.animator().alphaValue = 1
@@ -188,13 +190,22 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     }, completionHandler: {})
   }
 
-  override func mouseExited(with event: NSEvent) {
+  private func hideControl() {
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = AnimationDurationShowControl
       closeButtonView.animator().alphaValue = 0
       controlView.animator().alphaValue = 0
       mediaInfoView.animator().alphaValue = 1
     }, completionHandler: {})
+  }
+
+  override func mouseEntered(with event: NSEvent) {
+    showControl()
+  }
+
+  override func mouseExited(with event: NSEvent) {
+    guard !volumePopover.isShown else { return }
+    hideControl()
   }
 
   func windowDidEndLiveResize(_ notification: Notification) {
@@ -219,6 +230,14 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   func windowDidResize(_ notification: Notification) {
     guard let window = window, !window.inLiveResize else { return }
     self.player.mainWindow.videoView.videoLayer.draw()
+  }
+
+  // MARK: - NSPopoverDelegate
+
+  func popoverWillClose(_ notification: Notification) {
+    if NSWindow.windowNumber(at: NSEvent.mouseLocation, belowWindowWithWindowNumber: 0) != window!.windowNumber {
+      hideControl()
+    }
   }
 
   // MARK: - Sync UI with playback

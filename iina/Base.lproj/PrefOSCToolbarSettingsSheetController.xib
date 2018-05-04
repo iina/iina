@@ -21,7 +21,7 @@
             <rect key="contentRect" x="196" y="240" width="425" height="354"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1058"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="425" height="354"/>
+                <rect key="frame" x="0.0" y="0.0" width="425" height="355"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hAj-RR-fLd">
@@ -38,21 +38,21 @@ DQ
                         </connections>
                     </button>
                     <stackView orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="Sdu-Jk-G6t" customClass="PrefOSCToolbarAvailableItemsView" customModule="IINA" customModuleProvider="target">
-                        <rect key="frame" x="93" y="48" width="240" height="168"/>
+                        <rect key="frame" x="93" y="49" width="240" height="168"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="168" id="Pd1-rx-3py"/>
                             <constraint firstAttribute="width" constant="240" id="WzW-Sh-d8e"/>
                         </constraints>
                     </stackView>
                     <stackView orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="63i-B1-8o0" customClass="PrefOSCToolbarCurrentItemsView" customModule="IINA" customModuleProvider="target">
-                        <rect key="frame" x="150" y="267" width="125" height="24"/>
+                        <rect key="frame" x="150" y="268" width="125" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="125" id="e8f-dK-93K"/>
                             <constraint firstAttribute="height" constant="24" id="x5d-3J-ObU"/>
                         </constraints>
                     </stackView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pX0-I5-dea">
-                        <rect key="frame" x="18" y="317" width="91" height="17"/>
+                        <rect key="frame" x="18" y="318" width="91" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Current Items:" id="rNU-8V-iQt">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -60,7 +60,7 @@ DQ
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xw0-SN-fkf">
-                        <rect key="frame" x="18" y="299" width="389" height="14"/>
+                        <rect key="frame" x="18" y="300" width="389" height="14"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Drag an item out of the box to delete it." id="jlb-xc-k6x">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -68,7 +68,7 @@ DQ
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Neb-Rz-hK4">
-                        <rect key="frame" x="18" y="242" width="99" height="17"/>
+                        <rect key="frame" x="18" y="243" width="99" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Available Items:" id="DeE-Yj-Q4D">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -76,7 +76,7 @@ DQ
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BJG-7U-eKu">
-                        <rect key="frame" x="18" y="224" width="389" height="14"/>
+                        <rect key="frame" x="18" y="225" width="389" height="14"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Drag an item and drop it to the above box to add it." id="VCG-VX-E3M">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -96,6 +96,16 @@ Gw
                             <action selector="cancelButtonAction:" target="-2" id="7Lz-iX-ZkA"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="I7y-Aj-ui3">
+                        <rect key="frame" x="14" y="13" width="134" height="32"/>
+                        <buttonCell key="cell" type="push" title="Restore Default" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SmC-AI-FG6">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="restoreDefaultButtonAction:" target="-2" id="05Y-Tv-fJS"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Sdu-Jk-G6t" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="0hT-YS-F2c"/>
@@ -106,7 +116,7 @@ Gw
                     <constraint firstItem="hAj-RR-fLd" firstAttribute="leading" secondItem="LGR-5z-wrd" secondAttribute="trailing" constant="12" id="KSJ-SA-3h7"/>
                     <constraint firstItem="xw0-SN-fkf" firstAttribute="top" secondItem="pX0-I5-dea" secondAttribute="bottom" constant="4" id="MpI-2v-sfe"/>
                     <constraint firstAttribute="bottom" secondItem="hAj-RR-fLd" secondAttribute="bottom" constant="20" id="P4Z-ak-6Hv"/>
-                    <constraint firstAttribute="bottom" secondItem="Sdu-Jk-G6t" secondAttribute="bottom" constant="48" id="PkV-wT-xCK"/>
+                    <constraint firstItem="hAj-RR-fLd" firstAttribute="top" secondItem="Sdu-Jk-G6t" secondAttribute="bottom" constant="8" id="PkV-wT-xCK"/>
                     <constraint firstItem="Neb-Rz-hK4" firstAttribute="top" secondItem="63i-B1-8o0" secondAttribute="bottom" constant="8" id="R6y-Va-h3Q"/>
                     <constraint firstItem="Neb-Rz-hK4" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="VVv-wy-PI3"/>
                     <constraint firstAttribute="trailing" secondItem="xw0-SN-fkf" secondAttribute="trailing" constant="20" id="ZlJ-U9-bfM"/>
@@ -115,6 +125,8 @@ Gw
                     <constraint firstAttribute="trailing" secondItem="hAj-RR-fLd" secondAttribute="trailing" constant="20" id="kLu-pI-ClL"/>
                     <constraint firstItem="hAj-RR-fLd" firstAttribute="baseline" secondItem="LGR-5z-wrd" secondAttribute="baseline" id="kMp-PZ-4dC"/>
                     <constraint firstItem="BJG-7U-eKu" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="kR1-Hn-h6A"/>
+                    <constraint firstItem="LGR-5z-wrd" firstAttribute="baseline" secondItem="I7y-Aj-ui3" secondAttribute="baseline" id="tKZ-Iv-sVv"/>
+                    <constraint firstItem="I7y-Aj-ui3" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="ths-An-brV"/>
                     <constraint firstItem="pX0-I5-dea" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="u6e-oW-SO5"/>
                     <constraint firstItem="63i-B1-8o0" firstAttribute="top" secondItem="xw0-SN-fkf" secondAttribute="bottom" constant="8" id="ufE-z7-fyv"/>
                     <constraint firstItem="xw0-SN-fkf" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="v0Z-Lg-a6s"/>

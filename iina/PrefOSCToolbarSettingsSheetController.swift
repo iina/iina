@@ -33,7 +33,7 @@ class PrefOSCToolbarSettingsSheetController: NSWindowController, PrefOSCToolbarC
     currentItemsView.layer?.cornerRadius = 4
     currentItemsView.registerForDraggedTypes([.iinaOSCAvailableToolbarButtonType, .iinaOSCCurrentToolbarButtonType])
     currentItemsView.currentItemsViewDelegate = self
-    currentItemsView.initItems(fromItems: currentButtonTypes)
+    currentItemsView.initItems(fromItems: PrefUIViewController.oscToolbarButtons)
 
     let allButtonTypes: [Preference.ToolBarButton] = [.settings, .playlist, .pip, .fullScreen, .musicMode, .subTrack]
     for type in allButtonTypes {
@@ -49,7 +49,11 @@ class PrefOSCToolbarSettingsSheetController: NSWindowController, PrefOSCToolbarC
   }
 
   @IBAction func okButtonAction(_ sender: Any) {
-    window!.sheetParent!.endSheet(window!)
+    window!.sheetParent!.endSheet(window!, returnCode: .OK)
+  }
+
+  @IBAction func cancelButtonAction(_ sender: Any) {
+    window!.sheetParent!.endSheet(window!, returnCode: .cancel)
   }
 }
 

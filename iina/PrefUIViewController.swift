@@ -222,3 +222,20 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
     view.contentView?.subviews.forEach { ($0 as? NSControl)?.isEnabled = enabled }
   }
 }
+
+@objc(ResizeTimingTransformer) class ResizeTimingTransformer: ValueTransformer {
+
+  static override func allowsReverseTransformation() -> Bool {
+    return false
+  }
+
+  static override func transformedValueClass() -> AnyClass {
+    return NSNumber.self
+  }
+
+  override func transformedValue(_ value: Any?) -> Any? {
+    guard let timing = value as? NSNumber else { return nil }
+    return timing != 2
+  }
+}
+

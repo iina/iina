@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="box content view" minToolsVersion="7.0"/>
@@ -397,6 +397,11 @@
                                             </menu>
                                         </popUpButtonCell>
                                         <connections>
+                                            <binding destination="lH7-Vv-0M1" name="enabled" keyPath="values.resizeWindowTiming" id="JyV-HW-vxG">
+                                                <dictionary key="options">
+                                                    <string key="NSValueTransformerName">ResizeTimingTransformer</string>
+                                                </dictionary>
+                                            </binding>
                                             <binding destination="lH7-Vv-0M1" name="selectedTag" keyPath="values.resizeWindowOption" id="WWj-rB-vKG"/>
                                         </connections>
                                     </popUpButton>

@@ -55,6 +55,11 @@ class PrefOSCToolbarSettingsSheetController: NSWindowController, PrefOSCToolbarC
   @IBAction func cancelButtonAction(_ sender: Any) {
     window!.sheetParent!.endSheet(window!, returnCode: .cancel)
   }
+
+  @IBAction func restoreDefaultButtonAction(_ sender: Any) {
+    currentButtonTypes = (Preference.defaultPreference[.controlBarToolbarButtons] as! [Int]).compactMap(Preference.ToolBarButton.init(rawValue:))
+    currentItemsView.initItems(fromItems: currentButtonTypes)
+  }
 }
 
 

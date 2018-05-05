@@ -47,7 +47,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="300" height="72"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <value key="minSize" type="size" width="300" height="72"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="300" height="72"/>
@@ -140,8 +140,8 @@
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="aC9-OK-a4x">
                                         <rect key="frame" x="138" y="8" width="28" height="28"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="28" id="6iH-cZ-Etd"/>
                                             <constraint firstAttribute="height" constant="28" id="8Q7-Km-TpD"/>
+                                            <constraint firstAttribute="width" secondItem="aC9-OK-a4x" secondAttribute="height" multiplier="1:1" id="PbK-hg-vA0"/>
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" alternateImage="pause" refusesFirstResponder="YES" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="F9X-N7-Uv0">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -154,7 +154,7 @@
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="998-mn-oHJ">
                                         <rect key="frame" x="186" y="8" width="28" height="28"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="28" id="Ik3-IQ-UAr"/>
+                                            <constraint firstAttribute="width" secondItem="998-mn-oHJ" secondAttribute="height" multiplier="1:1" id="pWX-4v-Q2E"/>
                                             <constraint firstAttribute="height" constant="28" id="uZt-EE-yyu"/>
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="nextr" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="DPp-zB-KXR">
@@ -168,7 +168,7 @@
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="nSh-lh-jim">
                                         <rect key="frame" x="86" y="8" width="28" height="28"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="28" id="LPH-AH-7Ho"/>
+                                            <constraint firstAttribute="width" secondItem="nSh-lh-jim" secondAttribute="height" multiplier="1:1" id="pei-u3-qXH"/>
                                             <constraint firstAttribute="height" constant="28" id="vgp-bk-9d7"/>
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="nextl" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="bti-JU-2h9">
@@ -180,10 +180,10 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="a5L-QK-yog">
-                                        <rect key="frame" x="234" y="16" width="12" height="12"/>
+                                        <rect key="frame" x="234" y="15" width="14" height="14"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="0Bh-cC-tiD"/>
-                                            <constraint firstAttribute="width" constant="12" id="vh6-yD-26J"/>
+                                            <constraint firstAttribute="height" constant="14" id="0Bh-cC-tiD"/>
+                                            <constraint firstAttribute="width" secondItem="a5L-QK-yog" secondAttribute="height" multiplier="1:1" id="EP9-Dl-Hbh"/>
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="playlist" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="9be-Tw-9hy">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -194,10 +194,10 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="fUy-ap-8fj">
-                                        <rect key="frame" x="32" y="15" width="14" height="14"/>
+                                        <rect key="frame" x="29" y="15" width="17" height="14"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="14" id="baK-JN-ndI"/>
                                             <constraint firstAttribute="height" constant="14" id="o7f-KV-JoD"/>
+                                            <constraint firstAttribute="width" secondItem="fUy-ap-8fj" secondAttribute="height" multiplier="17:14" id="tjj-et-8gi"/>
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="9bz-eY-31X">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -208,9 +208,9 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="KFz-Kp-RxC">
-                                        <rect key="frame" x="258" y="15" width="14" height="14"/>
+                                        <rect key="frame" x="260" y="15" width="14" height="14"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="14" id="RQO-ze-QL9"/>
+                                            <constraint firstAttribute="width" secondItem="KFz-Kp-RxC" secondAttribute="height" multiplier="1:1" id="gIv-1I-vU2"/>
                                             <constraint firstAttribute="height" constant="14" id="owN-AQ-620"/>
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="toggle-album-art" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="VB3-JD-dpR">
@@ -338,8 +338,8 @@
                                         <button toolTip="Close Mini Player" translatesAutoresizingMaskIntoConstraints="NO" id="hZH-NM-Lst">
                                             <rect key="frame" x="2" y="15" width="11" height="11"/>
                                             <constraints>
+                                                <constraint firstAttribute="width" secondItem="hZH-NM-Lst" secondAttribute="height" multiplier="1:1" id="LSx-9r-gMd"/>
                                                 <constraint firstAttribute="height" constant="11" id="RKA-bS-WrY"/>
-                                                <constraint firstAttribute="width" constant="11" id="UDU-ua-dI8"/>
                                             </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="T9Y-J8-Nj6">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -349,8 +349,8 @@
                                         <button toolTip="Back to video mode" translatesAutoresizingMaskIntoConstraints="NO" id="K7j-vB-FlK">
                                             <rect key="frame" x="2" y="2" width="11" height="11"/>
                                             <constraints>
+                                                <constraint firstAttribute="width" secondItem="K7j-vB-FlK" secondAttribute="height" multiplier="1:1" id="JQU-aZ-9ka"/>
                                                 <constraint firstAttribute="height" constant="11" id="UQA-yh-8vO"/>
-                                                <constraint firstAttribute="width" constant="11" id="zdF-vz-7a5"/>
                                             </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="back" imagePosition="overlaps" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="wd8-60-NJn">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

@@ -257,7 +257,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {
       playSlider.doubleValue = percentage
-      if #available(OSX 10.12.2, *) {
+      if #available(macOS 10.12.2, *) {
         player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
         player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
       }

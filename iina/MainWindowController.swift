@@ -2411,7 +2411,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {
       playSlider.doubleValue = percentage
-      if #available(OSX 10.12.2, *) {
+      if #available(macOS 10.12.2, *) {
         player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
         player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
       }
@@ -2650,7 +2650,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.doubleValue
-    if #available(macOS 10.11, *), Preference.double(for: .maxVolume) > 100, abs(value - 100) < 0.5 {
+    if #available(OSX 10.11, *), Preference.double(for: .maxVolume) > 100, abs(value - 100) < 0.5 {
       NSHapticFeedbackManager.defaultPerformer.perform(.generic, performanceTime: .default)
     }
     player.setVolume(value)
@@ -2664,7 +2664,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case .musicMode:
       player.switchToMiniPlayer()
     case .pip:
-      if #available(OSX 10.12, *) {
+      if #available(macOS 10.12, *) {
         if pipStatus == .inPIP {
           exitPIP()
         } else if pipStatus == .notInPIP {

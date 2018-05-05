@@ -209,7 +209,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       case .settings:
         return SettingsWidth
       case .playlist:
-        return CGFloat(Preference.integer(for: .playlistWidth)).constrain(min: PlaylistMinWidth, max: PlaylistMaxWidth)
+        return CGFloat(Preference.integer(for: .playlistWidth)).clamped(to: PlaylistMinWidth...PlaylistMaxWidth)
       default:
         Utility.fatal("SideBarViewType.width shouldn't be called here")
       }
@@ -310,12 +310,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.relativeSeekAmount.rawValue:
       if let newValue = change[.newKey] as? Int {
-        relativeSeekAmount = newValue.constrain(min: 1, max: 5)
+        relativeSeekAmount = newValue.clamped(to: 1...5)
       }
 
     case PK.volumeScrollAmount.rawValue:
       if let newValue = change[.newKey] as? Int {
-        volumeScrollAmount = newValue.constrain(min: 1, max: 4)
+        volumeScrollAmount = newValue.clamped(to: 1...4)
       }
 
     case PK.verticalScrollAction.rawValue:
@@ -891,7 +891,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // resize sidebar
       let currentLocation = event.locationInWindow
       let newWidth = window!.frame.width - currentLocation.x - 2
-      sideBarWidthConstraint.constant = newWidth.constrain(min: PlaylistMinWidth, max: PlaylistMaxWidth)
+      sideBarWidthConstraint.constant = newWidth.clamped(to: PlaylistMinWidth...PlaylistMaxWidth)
     } else if !isInFullScreen {
       // move the window by dragging
       isDragging = true
@@ -1445,10 +1445,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
 
       setConstraintsForVideoView([
-        .left: targetFrame.x,
-        .right:  targetFrame.xMax - window.frame.width,
-        .bottom: -targetFrame.y,
-        .top: window.frame.height - targetFrame.yMax
+        .left: targetFrame.minX,
+        .right:  targetFrame.maxX - window.frame.width,
+        .bottom: -targetFrame.minY,
+        .top: window.frame.height - targetFrame.maxY
       ])
     }
 
@@ -1690,8 +1690,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let osdData: [String: String] = [
         "duration": player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
         "position": player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
-        "currChapter": (player.mpv.getInt(MPVProperty.chapter) + 1).toStr(),
-        "chapterCount": player.info.chapters.count.toStr()
+        "currChapter": (player.mpv.getInt(MPVProperty.chapter) + 1).description,
+        "chapterCount": player.info.chapters.count.description
       ]
 
       osdStackView.setVisibilityPriority(.mustHold, for: osdAccessoryView)
@@ -1878,10 +1878,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
       let frame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
       setConstraintsForVideoView([
-        .left: frame.x,
+        .left: frame.minX,
         .right: window.frame.width - frame.maxX,  // `frame.x` should also work
-        .bottom: -frame.y,
-        .top: window.frame.height - frame.yMax  // `frame.y` should also work
+        .bottom: -frame.minY,
+        .top: window.frame.height - frame.maxY  // `frame.y` should also work
       ])
       videoView.needsLayout = true
       videoView.layoutSubtreeIfNeeded()
@@ -1906,10 +1906,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let newVideoViewFrame = newVideoViewBounds.centeredResize(to: newVideoViewSize)
 
     let newConstants: [NSLayoutConstraint.Attribute: CGFloat] = [
-      .left: newVideoViewFrame.x,
-      .right: newVideoViewFrame.xMax - window.frame.width,
-      .bottom: -newVideoViewFrame.y,
-      .top: window.frame.height - newVideoViewFrame.yMax
+      .left: newVideoViewFrame.minX,
+      .right: newVideoViewFrame.maxX - window.frame.width,
+      .bottom: -newVideoViewFrame.minY,
+      .top: window.frame.height - newVideoViewFrame.maxY
     ]
 
     let selectedRect: NSRect = selectWholeVideoByDefault ? NSRect(origin: .zero, size: origVideoSize) : .zero

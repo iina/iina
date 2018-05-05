@@ -374,12 +374,11 @@ class PlayerCore: NSObject {
   func seek(percent: Double, forceExact: Bool = false) {
     var percent = percent
     // mpv will play next file automatically when seek to EOF.
-    // the following workaround will constrain the max seek position to (video length - 1) s.
+    // We clamp to a Range to ensure that we don't try to seek to 100%.
     // however, it still won't work for videos with large keyframe interval.
     if let duration = info.videoDuration?.second,
       duration > 0 {
-      let maxPercent = (duration - 1) / duration * 100
-      percent = percent.constrain(min: 0, max: maxPercent)
+      percent = percent.clamped(to: 0..<100)
     }
     let useExact = forceExact ? true : Preference.bool(for: .useExactSeek)
     let seekMode = useExact ? "absolute-percent+exact" : "absolute-percent"
@@ -462,7 +461,7 @@ class PlayerCore: NSObject {
 
   func setVolume(_ volume: Double, constrain: Bool = true) {
     let maxVolume = Preference.integer(for: .maxVolume)
-    let constrainedVolume = volume.constrain(min: 0, max: Double(maxVolume))
+    let constrainedVolume = volume.clamped(to: 0...Double(maxVolume))
     let appliedVolume = constrain ? constrainedVolume : volume
     info.volume = appliedVolume
     mpv.setDouble(MPVOption.Audio.volume, appliedVolume)
@@ -564,7 +563,7 @@ class PlayerCore: NSObject {
     case .hue:
       optionName = MPVOption.Equalizer.hue
     }
-    mpv.command(.set, args: [optionName, value.toStr()])
+    mpv.command(.set, args: [optionName, value.description])
   }
 
   func loadExternalAudioFile(_ url: URL) {
@@ -644,7 +643,7 @@ class PlayerCore: NSObject {
   }
 
   func playlistRemove(_ index: Int) {
-    mpv.command(.playlistRemove, args: [index.toStr()])
+    mpv.command(.playlistRemove, args: [index.description])
   }
 
   func clearPlaylist() {

@@ -201,15 +201,15 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     setLabelColor(trackExternalField, by: track.isExternal)
 
     let strProperties: [(String?, NSTextField)] = [
-      (track.srcId?.toStr(), trackSourceIdField),
+      (track.srcId?.description, trackSourceIdField),
       (track.title, trackTitleField),
       (track.lang, trackLangField),
       (track.externalFilename, trackFilePathField),
       (track.codec, trackCodecField),
       (track.decoderDesc, trackDecoderField),
-      (track.demuxFps?.toStr(), trackFPSField),
+      (track.demuxFps?.description, trackFPSField),
       (track.demuxChannels, trackChannelsField),
-      (track.demuxSamplerate?.toStr(), trackSampleRateField)
+      (track.demuxSamplerate?.description, trackSampleRateField)
     ]
 
     for (str, field) in strProperties {
@@ -227,7 +227,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     guard let identifier = tableColumn?.identifier else { return nil }
 
-    guard let property = watchProperties.at(row) else { return nil }
+    guard let property = watchProperties[at: row] else { return nil }
     if identifier == .key {
       return property
     } else if identifier == .value {

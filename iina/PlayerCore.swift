@@ -1149,7 +1149,8 @@ class PlayerCore: NSObject {
         self.touchBarSupport.touchBarPlaySlider?.resetCachedThumbnails()
       }
     }
-    guard let path = info.currentURL?.path else { return }
+    guard !info.isNetworkResource,
+      let path = info.currentURL?.path else { return }
     info.thumbnails.removeAll(keepingCapacity: true)
     info.thumbnailsProgress = 0
     info.thumbnailsReady = false

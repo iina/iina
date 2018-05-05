@@ -1485,7 +1485,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           xPos = windowWidth - oscHalfWidth - margin
         }
       }
-      let yPos = window.frame.height * CGFloat(cpv)
+
+      let windowHeight = window.frame.height
+      var yPos = windowHeight * CGFloat(cpv)
+      let oscHeight: CGFloat = 67
+      let yMargin: CGFloat = 25
+
+      if yPos - oscHeight < 0.0 {
+        yPos = oscHeight
+      } else if yPos + oscHeight + yMargin > windowHeight {
+        yPos = windowHeight - oscHeight - yMargin
+      }
+
       controlBarFloating.xConstraint.constant = xPos
       controlBarFloating.yConstraint.constant = yPos
     }

@@ -88,7 +88,10 @@ class PlaySliderCell: NSSliderCell {
     /// How far progressed the current video is, used for drawing the bar background
     var progress : CGFloat = 0;
     
-    if info.isNetworkResource, info.cacheTime != 0, let duration = info.videoDuration {
+    if info.isNetworkResource,
+      info.cacheTime != 0,
+      let duration = info.videoDuration,
+      duration.second != 0 {
       let pos = Double(info.cacheTime) / Double(duration.second) * 100
       progress = round(rect.width * CGFloat(pos / (slider.maxValue - slider.minValue))) + 2;
     } else {

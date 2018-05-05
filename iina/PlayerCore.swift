@@ -376,7 +376,8 @@ class PlayerCore: NSObject {
     // mpv will play next file automatically when seek to EOF.
     // the following workaround will constrain the max seek position to (video length - 1) s.
     // however, it still won't work for videos with large keyframe interval.
-    if let duration = info.videoDuration?.second {
+    if let duration = info.videoDuration?.second,
+      duration > 0 {
       let maxPercent = (duration - 1) / duration * 100
       percent = percent.constrain(min: 0, max: maxPercent)
     }

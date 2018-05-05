@@ -55,7 +55,7 @@ class ControlBarView: NSVisualEffectView {
     // bound to parent
     var updateX = true, updateY = true
     let xMax = windowFrame.width - frame.width - 10
-    let yMax = windowFrame.height - frame.height
+    let yMax = windowFrame.height - frame.height - 25
     if newOrigin.x > xMax {
       newOrigin.x = xMax
       updateX = false

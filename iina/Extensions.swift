@@ -156,30 +156,6 @@ extension NSRect {
               height: fabs(pt1.y - pt2.y))
   }
 
-  var x: CGFloat {
-    get {
-      return self.origin.x
-    }
-  }
-
-  var xMax: CGFloat {
-    get {
-      return self.origin.x + self.size.width
-    }
-  }
-
-  var y: CGFloat {
-    get {
-      return self.origin.y
-    }
-  }
-
-  var yMax: CGFloat {
-    get {
-      return self.origin.y + self.size.height
-    }
-  }
-
   func multiply(_ multiplier: CGFloat) -> NSRect {
     return NSRect(x: origin.x, y: origin.y, width: width * multiplier, height: height * multiplier)
   }
@@ -216,32 +192,18 @@ extension NSRect {
 }
 
 extension NSPoint {
-  func constrain(in rect: NSRect) -> NSPoint {
-    let l = rect.origin.x
-    let r = l + rect.width
-    let t = rect.origin.y
-    let b = t + rect.height
-    return NSMakePoint(x.constrain(min: l, max: r), y.constrain(min: t, max: b))
+  func constrained(to rect: NSRect) -> NSPoint {
+    return NSMakePoint(x.clamped(to: rect.minX...rect.maxX), y.clamped(to: rect.minY...rect.maxY))
   }
 }
 
 extension Array {
-  func at(_ pos: Int) -> Element? {
-    if pos >= 0 && pos < count {
-      return self[pos]
+  subscript(at index: Index) -> Element? {
+    if indices.contains(index) {
+      return self[index]
     } else {
       return nil
     }
-  }
-}
-
-extension Dictionary {
-  mutating func safeAppend<T: Equatable>(_ value: T, for key: Key) where Value == Array<T> {
-    if self[key] == nil {
-      self[key] = Array<T>()
-    }
-    if self[key]!.contains(value) { return }
-    self[key]!.append(value)
   }
 }
 
@@ -255,62 +217,57 @@ extension NSMenu {
   }
 }
 
-extension Int {
-  func toStr() -> String {
-    return "\(self)"
-  }
-
-  func constrain(min: Int, max: Int) -> Int {
-    var value = self
-    if self < min { value = min }
-    if self > max { value = max }
-    return value
-  }
-}
-
-extension Float {
-  func toStr() -> String {
-    return "\(self)"
-  }
-}
-
 extension CGFloat {
-  func constrain(min: CGFloat, max: CGFloat) -> CGFloat {
-    var value = self
-    if self < min { value = min }
-    if self > max { value = max }
-    return value
-  }
-
   var unifiedDouble: Double {
     get {
-      return self == 0 ? 0 : (self > 0 ? 1 : -1)
+      return Double(copysign(1, self))
     }
   }
 }
 
 extension Double {
-  func toStr(format: String? = nil) -> String {
-    if let f = format {
-      return String(format: f, self)
-    } else {
-      return "\(self)"
-    }
-  }
-
-  func constrain(min: Double, max: Double) -> Double {
-    var value = self
-    if self < min { value = min }
-    if self > max { value = max }
-    return value
-  }
-
   func prettyFormat() -> String {
     let rounded = (self * 1000).rounded() / 1000
     if rounded.truncatingRemainder(dividingBy: 1) == 0 {
       return "\(Int(rounded))"
     } else {
       return "\(rounded)"
+    }
+  }
+}
+
+extension Comparable {
+  func clamped(to range: ClosedRange<Self>) -> Self {
+    if self < range.lowerBound {
+      return range.lowerBound
+    } else if self > range.upperBound {
+      return range.upperBound
+    } else {
+      return self
+    }
+  }
+}
+
+extension BinaryInteger {
+  func clamped(to range: Range<Self>) -> Self {
+    if self < range.lowerBound {
+      return range.lowerBound
+    } else if self >= range.upperBound {
+      return range.upperBound.advanced(by: -1)
+    } else {
+      return self
+    }
+  }
+}
+
+extension FloatingPoint {
+  func clamped(to range: Range<Self>) -> Self {
+    if self < range.lowerBound {
+      return range.lowerBound
+    } else if self >= range.upperBound {
+      return range.upperBound.nextDown
+    } else {
+      return self
     }
   }
 }
@@ -430,8 +387,7 @@ extension String {
   }
 
   mutating func deleteLast(_ num: Int) {
-    guard num <= count else { self = ""; return }
-    self = String(self[...self.index(endIndex, offsetBy: -num)])
+    removeLast(Swift.min(num, count))
   }
 
   func countOccurances(of str: String, in range: Range<Index>?) -> Int {

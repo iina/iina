@@ -32,7 +32,7 @@ class VolumeSliderCell: NSSliderCell {
     if maxValue > 100 {
       NSGraphicsContext.saveGraphicsState()
       strokeColor.setStroke()
-      let x = rect.x + rect.width * CGFloat(100 / maxValue)
+      let x = rect.minX + rect.width * CGFloat(100 / maxValue)
       let y0 = (flipped ? rect.height : 0) + 1
       let y1 = y0 + rect.height - 2
       let linePath = NSBezierPath()

@@ -373,7 +373,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
     if tableView == kbTableView {
       guard let identifier = tableColumn?.identifier else { return nil }
 
-      guard let mapping = currentMapping.at(row) else { return nil }
+      guard let mapping = currentMapping[at: row] else { return nil }
       if identifier == .key {
         return displayRawValues ? mapping.key : mapping.prettyKey
       } else if identifier == .action {
@@ -426,7 +426,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
 
   func tableViewSelectionDidChange(_ notification: Notification) {
     guard let tableView = notification.object as? NSTableView, tableView == confTableView else { return }
-    guard let title = userConfigNames.at(confTableView.selectedRow) else { return }
+    guard let title = userConfigNames[at: confTableView.selectedRow] else { return }
     currentConfName = title
     currentConfFilePath = getFilePath(forConfig: title)!
     loadConfigFile()

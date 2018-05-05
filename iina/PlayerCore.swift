@@ -139,7 +139,7 @@ class PlayerCore: NSObject {
     self.mainWindow = MainWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(player: self)
-    if #available(OSX 10.12.2, *) {
+    if #available(macOS 10.12.2, *) {
       self._touchBarSupport = TouchBarSupport(playerCore: self)
     }
   }
@@ -1145,7 +1145,7 @@ class PlayerCore: NSObject {
   }
 
   func generateThumbnails() {
-    if #available(OSX 10.12.2, *) {
+    if #available(macOS 10.12.2, *) {
       DispatchQueue.main.async {
         self.touchBarSupport.touchBarPlaySlider?.resetCachedThumbnails()
       }
@@ -1172,7 +1172,7 @@ class PlayerCore: NSObject {
   }
 
   func refreshTouchBarSlider() {
-    if #available(OSX 10.12.2, *) {
+    if #available(macOS 10.12.2, *) {
       DispatchQueue.main.async {
         self.touchBarSupport.touchBarPlaySlider?.needsDisplay = true
       }

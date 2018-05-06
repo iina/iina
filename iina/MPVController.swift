@@ -630,7 +630,7 @@ class MPVController: NSObject {
     var dwidth = getInt(MPVProperty.dwidth)
     var dheight = getInt(MPVProperty.dheight)
     if player.info.rotation == 90 || player.info.rotation == 270 {
-      Utility.swap(&dwidth, &dheight)
+      swap(&dwidth, &dheight)
     }
     if dwidth != player.info.displayWidth! || dheight != player.info.displayHeight! {
       // filter the last video-reconfig event before quit

@@ -177,6 +177,8 @@ struct Preference {
     static let openSubUsername = Key("openSubUsername")
     static let assrtToken = Key("assrtToken")
     static let defaultEncoding = Key("defaultEncoding")
+    static let autoSearchOnlineSub = Key("autoSearchOnlineSub")
+    static let autoSearchThreshold = Key("autoSearchThreshold")
 
     // Network
 
@@ -691,6 +693,8 @@ struct Preference {
     .openSubUsername: "",
     .assrtToken: "",
     .defaultEncoding: "auto",
+    .autoSearchOnlineSub: false,
+    .autoSearchThreshold: 20,
 
     .enableCache: true,
     .defaultCacheSize: 153600,

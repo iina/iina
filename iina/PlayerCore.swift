@@ -884,6 +884,7 @@ class PlayerCore: NSObject {
         guard currentTicket == self.backgroundQueueTicket, self.mpv.mpv != nil else { return }
         self.setTrack(1, forType: .sub)
       }
+      self.autoSearchOnlineSub()
     }
   }
 
@@ -964,6 +965,14 @@ class PlayerCore: NSObject {
   @objc
   private func reEnableOSDAfterFileLoading() {
     info.disableOSDForFileLoading = false
+  }
+
+  private func autoSearchOnlineSub() {
+    Thread.sleep(forTimeInterval: 0.5)
+    if Preference.bool(for: .autoSearchOnlineSub) && info.subTracks.isEmpty &&
+      info.videoDuration!.second >= Preference.double(for: .autoSearchThreshold) * 60 {
+      mainWindow.menuActionHandler.menuFindOnlineSub(.dummy)
+    }
   }
 
   /**

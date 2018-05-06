@@ -434,12 +434,6 @@ class Utility {
 
   // MARK: - Util functions
 
-  static func swap<T>(_ a: inout T, _ b: inout T) {
-    let temp = a
-    a = b
-    b = temp
-  }
-
   static func toRealSubScale(fromDisplaySubScale scale: Double) -> Double {
     return scale > 0 ? scale : -1 / scale
   }

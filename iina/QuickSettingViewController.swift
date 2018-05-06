@@ -601,26 +601,18 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     // loaded subtitles
     if showLoadedSubs {
       if player.info.subTracks.isEmpty {
-        let item = NSMenuItem()
-        item.title = NSLocalizedString("subtrack.no_loaded", comment: "No subtitles loaded")
-        item.isEnabled = false
-        menu.addItem(item)
+        menu.addItem(withTitle: NSLocalizedString("subtrack.no_loaded", comment: "No subtitles loaded"), enabled: false)
       } else {
-        let empty = NSMenuItem()
-        empty.title = NSLocalizedString("track.none", comment: "<None>")
-        empty.target = self
-        empty.action = #selector(self.chosenSubFromMenu(_:))
-        empty.representedObject = nil
-        empty.state = player.info.sid == 0 ? .on : .off
-        menu.addItem(empty)
+        menu.addItem(withTitle: NSLocalizedString("track.none", comment: "<None>"),
+                     action: #selector(self.chosenSubFromMenu(_:)), target: self,
+                     stateOn: player.info.sid == 0 ? true : false)
+
         for sub in player.info.subTracks {
-          let item = NSMenuItem()
-          item.title = sub.readableTitle
-          item.target = self
-          item.action = #selector(self.chosenSubFromMenu(_:))
-          item.representedObject = sub
-          item.state = sub.id == player.info.sid ? .on : .off
-          menu.addItem(item)
+          menu.addItem(withTitle: sub.readableTitle,
+                       action: #selector(self.chosenSubFromMenu(_:)),
+                       target: self,
+                       obj: sub,
+                       stateOn: sub.id == player.info.sid ? true : false)
         }
       }
       menu.addItem(NSMenuItem.separator())
@@ -628,19 +620,16 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     // external subtitles
     let addMenuItem = { (sub: FileInfo) -> Void in
       let isActive = !showLoadedSubs && activeSubs.contains { $0.externalFilename == sub.path }
-      let item = NSMenuItem()
-      item.title = "\(sub.filename).\(sub.ext)"
-      item.target = self
-      item.action = #selector(self.chosenSubFromMenu(_:))
-      item.representedObject = sub
-      item.state = isActive ? .on : .off
-      menu.addItem(item)
+      menu.addItem(withTitle: "\(sub.filename).\(sub.ext)",
+                   action: #selector(self.chosenSubFromMenu(_:)),
+                   target: self,
+                   obj: sub,
+                   stateOn: isActive ? true : false)
+
     }
     if player.info.currentSubsInfo.isEmpty {
-      let item = NSMenuItem()
-      item.title = NSLocalizedString("subtrack.no_external", comment: "No external subtitles found")
-      item.isEnabled = false
-      menu.addItem(item)
+      menu.addItem(withTitle: NSLocalizedString("subtrack.no_external", comment: "No external subtitles found"),
+                   enabled: false)
     } else {
       if let videoInfo = player.info.currentVideosInfo.first(where: { $0.url == player.info.currentURL }),
         !videoInfo.relatedSubs.isEmpty {

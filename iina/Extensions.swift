@@ -208,11 +208,14 @@ extension Array {
 }
 
 extension NSMenu {
-  func addItem(withTitle string: String, action selector: Selector? = nil, tag: Int? = nil, obj: Any? = nil, stateOn: Bool = false) {
+  func addItem(withTitle string: String, action selector: Selector? = nil, target: AnyObject? = nil,
+               tag: Int? = nil, obj: Any? = nil, stateOn: Bool = false, enabled: Bool = true) {
     let menuItem = NSMenuItem(title: string, action: selector, keyEquivalent: "")
     menuItem.tag = tag ?? -1
     menuItem.representedObject = obj
+    menuItem.target = target
     menuItem.state = stateOn ? .on : .off
+    menuItem.isEnabled = enabled
     self.addItem(menuItem)
   }
 }

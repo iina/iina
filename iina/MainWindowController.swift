@@ -1491,8 +1491,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let oscHeight: CGFloat = 67
       let yMargin: CGFloat = 25
 
-      if yPos - oscHeight < 0.0 {
-        yPos = oscHeight
+      if yPos < 0 {
+        yPos = 0
       } else if yPos + oscHeight + yMargin > windowHeight {
         yPos = windowHeight - oscHeight - yMargin
       }

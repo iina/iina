@@ -195,7 +195,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       [subTextColorWell, subTextSizePopUp, subTextBgColorWell, subTextBorderColorWell, subTextBorderWidthPopUp, subTextFontBtn].forEach { $0.isEnabled = enableTextSettings }
     }
 
-    let currSubScale = player.mpv.getDouble(MPVOption.Subtitles.subScale).constrain(min: 0.1, max: 10)
+    let currSubScale = player.mpv.getDouble(MPVOption.Subtitles.subScale).clamped(to: 0.1...10)
     let displaySubScale = Utility.toDisplaySubScale(fromRealSubScale: currSubScale)
     subScaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
     let subDelay = player.mpv.getDouble(MPVOption.Subtitles.subDelay)
@@ -207,7 +207,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     subPosSlider.intValue = Int32(currSubPos)
 
     let fontSize = player.mpv.getInt(MPVOption.Subtitles.subFontSize)
-    subTextSizePopUp.selectItem(withTitle: fontSize.toStr())
+    subTextSizePopUp.selectItem(withTitle: fontSize.description)
 
     let borderWidth = player.mpv.getDouble(MPVOption.Subtitles.subBorderSize)
     subTextBorderWidthPopUp.selectItem(at: -1)
@@ -318,16 +318,16 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let activeId: Int
     let columnName = tableColumn?.identifier
     if tableView == videoTableView {
-      track = row == 0 ? nil : player.info.videoTracks.at(row-1)
+      track = row == 0 ? nil : player.info.videoTracks[at: row-1]
       activeId = player.info.vid!
     } else if tableView == audioTableView {
-      track = row == 0 ? nil : player.info.audioTracks.at(row-1)
+      track = row == 0 ? nil : player.info.audioTracks[at: row-1]
       activeId = player.info.aid!
     } else if tableView == subTableView {
-      track = row == 0 ? nil : player.info.subTracks.at(row-1)
+      track = row == 0 ? nil : player.info.subTracks[at: row-1]
       activeId = player.info.sid!
     } else if tableView == secSubTableView {
-      track = row == 0 ? nil : player.info.subTracks.at(row-1)
+      track = row == 0 ? nil : player.info.subTracks[at: row-1]
       activeId = player.info.secondSid!
     } else {
       return nil

@@ -82,7 +82,7 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    guard let url = recentDocuments.at(recentFilesTableView.selectedRow) else { return }
+    guard let url = recentDocuments[at: recentFilesTableView.selectedRow] else { return }
     if url.isExistingDirectory {
       let _ = player.openURLs([url])
     } else {

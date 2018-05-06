@@ -190,7 +190,7 @@ class AutoFileMatcher {
               video.relatedSubs.append(sub)
               if sub.prefix == matchedSubPrefix {
                 try checkTicket()
-                player.info.matchedSubs.safeAppend(sub.url, for: video.path)
+                player.info.matchedSubs[video.path, default: []].append(sub.url)
                 sub.isMatched = true
                 matchedSubs.insert(sub)
               }
@@ -205,7 +205,7 @@ class AutoFileMatcher {
           return $0.filename.contains(video.filename)
         }.forEach { sub in
           try checkTicket()
-          player.info.matchedSubs.safeAppend(sub.url, for: video.path)
+          player.info.matchedSubs[video.path, default: []].append(sub.url)
           sub.isMatched = true
           matchedSubs.insert(sub)
         }
@@ -276,7 +276,7 @@ class AutoFileMatcher {
         try checkTicket()
         unmatchedSubs
           .filter { video.dist[$0]! == minDistToSub && $0.minDist.contains(video) }
-          .forEach { player.info.matchedSubs.safeAppend($0.url, for: video.path) }
+          .forEach { player.info.matchedSubs[video.path, default: []].append($0.url) }
       }
     }
   }

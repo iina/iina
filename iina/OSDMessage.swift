@@ -17,7 +17,7 @@
 import Foundation
 
 fileprivate func toPercent(_ value: Double, _ bound: Double) -> Double {
-  return (value + bound).constrain(min: 0, max: bound * 2) / (bound * 2)
+  return (value + bound).clamped(to: 0...(bound * 2)) / (bound * 2)
 }
 
 enum OSDType {

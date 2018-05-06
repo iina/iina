@@ -398,7 +398,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       let chapters = info.chapters
       let chapter = chapters[row]
       // next chapter time
-      let nextChapterTime = chapters.at(row+1)?.time ?? Constants.Time.infinite
+      let nextChapterTime = chapters[at: row+1]?.time ?? .infinite
       // construct view
 
       if identifier == .isChosen {
@@ -518,7 +518,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     Utility.quickMultipleOpenPanel(title: NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File"), dir: fileURL, canChooseDir: true) { subURLs in
       for subURL in subURLs {
         guard Utility.supportedFileExt[.sub]!.contains(subURL.pathExtension.lowercased()) else { return }
-        self.player.info.matchedSubs.safeAppend(subURL, for: filename)
+        self.player.info.matchedSubs[filename, default: []].append(subURL)
       }
       self.playlistTableView.reloadData(forRowIndexes: selectedRows, columnIndexes: IndexSet(integersIn: 0...1))
     }

@@ -908,6 +908,11 @@ class PlayerCore: NSObject {
       if #available(macOS 10.12.2, *) {
         touchBarSupport.setupTouchBarUI()
       }
+
+      if info.aid == 0 {
+        mainWindow.muteButton.isHidden = true
+        mainWindow.volumeSlider.isHidden = true
+      }
     }
     // set initial properties for the first file
     if info.justLaunched {

@@ -253,6 +253,9 @@ struct Preference {
 
     static let savedVideoFilters = Key("savedVideoFilters")
     static let savedAudioFilters = Key("savedAudioFilters")
+
+    static let iinaLastPlayedFilePath = Key("iinaLastPlayedFilePath")
+    static let iinaLastPlayedFilePosition = Key("iinaLastPlayedFilePosition")
   }
 
   // MARK: - Enums
@@ -810,6 +813,10 @@ struct Preference {
   }
 
   static func set(_ value: Double, for key: Key) {
+    ud.set(value, forKey: key.rawValue)
+  }
+
+  static func set(_ value: URL, for key: Key) {
     ud.set(value, forKey: key.rawValue)
   }
 

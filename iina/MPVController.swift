@@ -670,6 +670,10 @@ class MPVController: NSObject {
       player.info.aid = Int(data)
       player.getTrackInfo()
       let currTrack = player.info.currentTrack(.audio) ?? .noneAudioTrack
+      DispatchQueue.main.sync {
+        player.mainWindow?.muteButton.isEnabled = (player.info.aid != 0)
+        player.mainWindow?.volumeSlider.isEnabled = (player.info.aid != 0)
+      }
       player.sendOSD(.track(currTrack))
 
     case MPVOption.TrackSelection.sid:

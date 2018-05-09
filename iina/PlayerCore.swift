@@ -147,12 +147,12 @@ class PlayerCore: NSObject {
   // MARK: - Control commands
 
   // Open a file
-  func openURL(_ url: URL?, isNetworkResource: Bool? = nil, shouldAutoLoad: Bool = false) {
+  func openURL(_ url: URL?, isNetworkResource: Bool = false, shouldAutoLoad: Bool = false) {
     guard let url = url else {
       Utility.log("Error: empty file path or url")
       return
     }
-    let isNetwork = isNetworkResource ?? !url.isFileURL
+    let isNetwork = isNetworkResource && !url.isFileURL
     if shouldAutoLoad {
       info.shouldAutoLoadFiles = true
     }

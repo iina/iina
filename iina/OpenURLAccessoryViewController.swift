@@ -28,7 +28,8 @@ class OpenURLAccessoryViewController: NSViewController {
       guard var urlValue = urlField.stringValue.addingPercentEncoding(withAllowedCharacters: .urlAllowed) else {
         return nil
       }
-      if URL(string: urlValue)?.host == nil {
+      if let url = URL(string: urlValue),
+        url.scheme == nil {
         urlValue = "http://" + urlValue
       }
       guard let nsurl = NSURL(string: urlValue)?.standardized, let urlComponents = NSURLComponents(url: nsurl, resolvingAgainstBaseURL: false) else { return nil }

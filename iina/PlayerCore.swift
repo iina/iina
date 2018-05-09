@@ -848,6 +848,12 @@ class PlayerCore: NSObject {
 
   func savePlaybackPosition() {
     mpv.command(.writeWatchLaterConfig)
+    if let url = info.currentURL {
+      Preference.set(url, for: .iinaLastPlayedFilePath)
+    }
+    if let position = info.videoPosition?.second {
+      Preference.set(position, for: .iinaLastPlayedFilePosition)
+    }
   }
 
   func getGeometry() -> GeometryDef? {

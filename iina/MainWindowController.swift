@@ -698,7 +698,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.cachedScreenCount = screenCount
       self.videoView.updateDisplaylink()
     }
-
   }
 
   deinit {

@@ -683,7 +683,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       button.bezelStyle = .regularSquare
       button.isBordered = false
       button.image = buttonType.image()
-      button.action = #selector(self.toolBarButtonAction(_:))
+      button.action = #selector(self.toolBarButtonAction)
       button.tag = buttonType.rawValue
       button.translatesAutoresizingMaskIntoConstraints = false
       button.refusesFirstResponder = true
@@ -936,7 +936,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
             performMouseAction(singleClickAction)
           } else {
             // else start a timer to check for double clicking
-            singleClickTimer = Timer.scheduledTimer(timeInterval: NSEvent.doubleClickInterval, target: self, selector: #selector(self.performMouseActionLater(_:)), userInfo: singleClickAction, repeats: false)
+            singleClickTimer = Timer.scheduledTimer(timeInterval: NSEvent.doubleClickInterval, target: self, selector: #selector(self.performMouseActionLater), userInfo: singleClickAction, repeats: false)
             mouseExitEnterCount = 0
           }
         } else if event.clickCount == 2 {

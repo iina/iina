@@ -87,7 +87,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
 
     case .playPause:
       let item = NSCustomTouchBarItem(identifier: identifier)
-      item.view = NSButton(image: NSImage(named: .touchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
+      item.view = NSButton(image: NSImage(named: .touchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction))
       item.customizationLabel = NSLocalizedString("touchbar.play_pause", comment: "Play / Pause")
       self.touchBarPlayPauseBtn = item.view as? NSButton
       return item
@@ -99,7 +99,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       item.slider.minValue = 0
       item.slider.maxValue = 100
       item.slider.target = self
-      item.slider.action = #selector(self.touchBarSliderAction(_:))
+      item.slider.action = #selector(self.touchBarSliderAction)
       item.customizationLabel = NSLocalizedString("touchbar.seek", comment: "Seek")
       self.touchBarPlaySlider = item.slider as? TouchBarPlaySlider
       return item
@@ -107,12 +107,12 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
     case .volumeUp,
          .volumeDown:
       guard let data = touchBarItemBinding[identifier] else { return nil }
-      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarVolumeAction(_:)))
+      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarVolumeAction))
 
     case .rewind,
          .fastForward:
       guard let data = touchBarItemBinding[identifier] else { return nil }
-      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarRewindAction(_:)))
+      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarRewindAction))
 
     case .time:
       let item = NSCustomTouchBarItem(identifier: identifier)
@@ -139,16 +139,16 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
          .ahead30Sec,
          .back30Sec:
       guard let data = touchBarItemBinding[identifier] else { return nil }
-      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSeekAction(_:)))
+      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSeekAction))
 
     case .next,
          .prev:
       guard let data = touchBarItemBinding[identifier] else { return nil }
-      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSkipAction(_:)))
+      return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSkipAction))
 
     case .exitFullScr:
       let item = NSCustomTouchBarItem(identifier: identifier)
-      item.view = NSButton(image: NSImage(named: .touchBarExitFullScreenTemplate)!, target: self, action: #selector(self.touchBarExitFullScrAction(_:)))
+      item.view = NSButton(image: NSImage(named: .touchBarExitFullScreenTemplate)!, target: self, action: #selector(self.touchBarExitFullScrAction))
       self.touchBarExitFullScr = item.view as? NSButton
       return item
 

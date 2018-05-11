@@ -158,10 +158,10 @@ extension PlayerCore {
   }
 
   /**
-   Get called for all drag-and-drop enabled window/views in their `draggingEntered(_:)`.
+   Get called for all drag-and-drop enabled window/views in their `draggingEntered`.
 
    - Parameters:
-     - sender: The `NSDraggingInfo` object received in `draggingEntered(_:)`.
+     - sender: The `NSDraggingInfo` object received in `draggingEntered`.
    - Returns: The `NSDragOperation`.
    */
   func acceptFromPasteboard(_ sender: NSDraggingInfo) -> NSDragOperation {
@@ -201,11 +201,11 @@ extension PlayerCore {
   }
 
   /**
-   Get called for all drag-and-drop enabled window/views in their `performDragOperation(_:)`.
+   Get called for all drag-and-drop enabled window/views in their `performDragOperation`.
 
    - Parameters:
-     - sender: The `NSDraggingInfo` object received in `performDragOperation(_:)`.
-   - Returns: The result for `performDragOperation(_:)`.
+     - sender: The `NSDraggingInfo` object received in `performDragOperation`.
+   - Returns: The result for `performDragOperation`.
    */
   func openFromPasteboard(_ sender: NSDraggingInfo) -> Bool {
     // get info

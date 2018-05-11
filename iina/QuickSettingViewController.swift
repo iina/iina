@@ -604,12 +604,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         menu.addItem(withTitle: NSLocalizedString("subtrack.no_loaded", comment: "No subtitles loaded"), enabled: false)
       } else {
         menu.addItem(withTitle: NSLocalizedString("track.none", comment: "<None>"),
-                     action: #selector(self.chosenSubFromMenu(_:)), target: self,
+                     action: #selector(self.chosenSubFromMenu), target: self,
                      stateOn: player.info.sid == 0 ? true : false)
 
         for sub in player.info.subTracks {
           menu.addItem(withTitle: sub.readableTitle,
-                       action: #selector(self.chosenSubFromMenu(_:)),
+                       action: #selector(self.chosenSubFromMenu),
                        target: self,
                        obj: sub,
                        stateOn: sub.id == player.info.sid ? true : false)
@@ -621,7 +621,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let addMenuItem = { (sub: FileInfo) -> Void in
       let isActive = !showLoadedSubs && activeSubs.contains { $0.externalFilename == sub.path }
       menu.addItem(withTitle: "\(sub.filename).\(sub.ext)",
-                   action: #selector(self.chosenSubFromMenu(_:)),
+                   action: #selector(self.chosenSubFromMenu),
                    target: self,
                    obj: sub,
                    stateOn: isActive ? true : false)

@@ -19,11 +19,7 @@ class PlaybackInfo {
 
   var currentURL: URL? {
     didSet {
-      if let url = currentURL {
-        mpvMd5 = Utility.mpvWatchLaterMd5(url.path)
-      } else {
-        mpvMd5 = nil
-      }
+      mpvMd5 = currentURL?.path.md5
     }
   }
   var currentFolder: URL?

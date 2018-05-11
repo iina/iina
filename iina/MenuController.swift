@@ -524,11 +524,7 @@ class MenuController: NSObject, NSMenuDelegate {
       // add menu items
       for (index, title) in titles.enumerated() {
         let menuItem = NSMenuItem(title: title, action: action, keyEquivalent: "")
-        if let object = objects?[index] {
-          menuItem.representedObject = object
-        } else {
-          menuItem.representedObject = title
-        }
+        menuItem.representedObject = objects?[index] ?? title
         menu.addItem(menuItem)
       }
     }
@@ -562,33 +558,34 @@ class MenuController: NSObject, NSMenuDelegate {
   // MARK: - Menu delegate
 
   func menuWillOpen(_ menu: NSMenu) {
-    if menu == playlistMenu {
+    switch menu {
+    case playlistMenu:
       updatePlaylist()
-    } else if menu == chapterMenu {
+    case chapterMenu:
       updateChapterList()
-    } else if menu == playbackMenu {
+    case playbackMenu:
       updatePlaybackMenu()
-    } else if menu == videoMenu {
+    case videoMenu:
       updateVideoMenu()
-    } else if menu == videoTrackMenu {
+    case videoTrackMenu:
       updateTracks(forMenu: menu, type: .video)
-    } else if menu == flipMenu {
+    case flipMenu:
       updateFlipAndMirror()
-    } else if menu == audioMenu {
+    case audioMenu:
       updateAudioMenu()
-    } else if menu == audioTrackMenu {
+    case audioTrackMenu:
       updateTracks(forMenu: menu, type: .audio)
-    } else if menu == audioDeviceMenu {
+    case audioDeviceMenu:
       updateAudioDevice()
-    } else if menu == subMenu {
+    case subMenu:
       updateSubMenu()
-    } else if menu == subTrackMenu {
+    case subTrackMenu:
       updateTracks(forMenu: menu, type: .sub)
-    } else if menu == secondSubTrackMenu {
+    case secondSubTrackMenu:
       updateTracks(forMenu: menu, type: .secondSub)
-    } else if menu == savedVideoFiltersMenu {
+    case savedVideoFiltersMenu:
       updateSavedFiltersMenu(type: MPVProperty.vf)
-    } else if menu == savedAudioFiltersMenu {
+    case savedAudioFiltersMenu:
       updateSavedFiltersMenu(type: MPVProperty.af)
     }
     // check convinently binded menus

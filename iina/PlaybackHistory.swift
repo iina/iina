@@ -63,7 +63,7 @@ class PlaybackHistory: NSObject, NSCoding {
   init(url: URL, duration: Double, name: String? = nil) {
     self.url = url
     self.name = name ?? url.lastPathComponent
-    self.mpvMd5 = Utility.mpvWatchLaterMd5(url.path)
+    self.mpvMd5 = url.path.md5
     self.played = true
     self.addedDate = Date()
     self.duration = VideoTime(duration)

@@ -126,12 +126,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     subLoadSementedControl.image(forSegment: 1)?.isTemplate = true
 
     // notifications
-    let tracklistChangeObserver = NotificationCenter.default.addObserver(forName: .iinaTracklistChanged, object: player, queue: OperationQueue.main) { _ in
+    let tracklistChangeObserver = NotificationCenter.default.addObserver(forName: .iinaTracklistChanged, object: player, queue: .main) { _ in
       self.player.getTrackInfo()
       self.withAllTableViews { tableView, _ in tableView.reloadData() }
     }
     observers.append(tracklistChangeObserver)
-    let afChangeObserver = NotificationCenter.default.addObserver(forName: .iinaAFChanged, object: player, queue: OperationQueue.main) { _ in
+    let afChangeObserver = NotificationCenter.default.addObserver(forName: .iinaAFChanged, object: player, queue: .main) { _ in
       self.updateAudioEqState()
     }
     observers.append(afChangeObserver)
@@ -615,7 +615,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
                        stateOn: sub.id == player.info.sid ? true : false)
         }
       }
-      menu.addItem(NSMenuItem.separator())
+      menu.addItem(.separator())
     }
     // external subtitles
     let addMenuItem = { (sub: FileInfo) -> Void in

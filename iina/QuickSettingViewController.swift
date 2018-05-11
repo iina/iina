@@ -634,7 +634,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       if let videoInfo = player.info.currentVideosInfo.first(where: { $0.url == player.info.currentURL }),
         !videoInfo.relatedSubs.isEmpty {
         videoInfo.relatedSubs.forEach(addMenuItem)
-        menu.addItem(NSMenuItem.separator())
+        menu.addItem(.separator())
       }
       player.info.currentSubsInfo.sorted { (f1, f2) in
         return f1.filename.localizedStandardCompare(f2.filename) == .orderedAscending

@@ -370,7 +370,7 @@ class MenuController: NSObject, NSMenuDelegate {
     }
     subFont.action = #selector(MainMenuActionHandler.menuSubFont(_:))
     // Separate Auto from other encoding types
-    encodingMenu.insertItem(NSMenuItem.separator(), at: 1)
+    encodingMenu.insertItem(.separator(), at: 1)
 
     // Window
 

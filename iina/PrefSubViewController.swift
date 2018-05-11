@@ -47,7 +47,7 @@ class PrefSubViewController: NSViewController {
       }
     }
     
-    defaultEncodingList.menu?.insertItem(NSMenuItem.separator(), at: 1)
+    defaultEncodingList.menu?.insertItem(.separator(), at: 1)
 
     subLangTokenView.delegate = self
     loginIndicator.isHidden = true

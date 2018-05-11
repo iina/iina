@@ -276,7 +276,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   // MARK: Utils
 
   private func setLabelColor(_ label: NSTextField, by state: Bool) {
-    label.textColor = state ? NSColor.textColor : NSColor.disabledControlTextColor
+    label.textColor = state ? .textColor : .disabledControlTextColor
   }
 
   private func saveWatchList() {

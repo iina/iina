@@ -145,7 +145,7 @@ class InitialWindowViewActionButton: NSView {
   override func mouseUp(with event: NSEvent) {
     self.layer?.backgroundColor = hoverBackground
   }
-  
+
 }
 
 

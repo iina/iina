@@ -39,7 +39,7 @@ class MPVFilter: NSObject {
     return MPVFilter(name: "mirror", label: nil, params: nil)
   }
 
-  /** 
+  /**
    A ffmpeg `unsharp` filter.
    Args: l(uma)x, ly, la, c(hroma)x, xy, ca; default 5:5:0:5:5:0.
    We only change la and ca here.

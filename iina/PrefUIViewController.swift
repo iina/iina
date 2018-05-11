@@ -55,7 +55,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!
   @IBOutlet weak var oscToolbarStackView: NSStackView!
   @IBOutlet weak var thumbCacheSizeLabel: NSTextField!
-  
+
   @IBOutlet weak var windowSizeCheckBox: NSButton!
   @IBOutlet weak var windowSizeTypePopUpButton: NSPopUpButton!
   @IBOutlet weak var windowSizeValueTextField: NSTextField!

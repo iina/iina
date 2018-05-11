@@ -79,7 +79,7 @@ class KeyCodeHelper {
     0x59: ("KP7", nil),
     0x5B: ("KP8", nil),
     0x5C: ("KP9", nil),
-    
+
     0x24: ("ENTER", nil),
     0x30: ("TAB", nil),
     0x31: ("SPACE", nil),
@@ -181,7 +181,7 @@ class KeyCodeHelper {
       "KP9": "9",
       "PLUS": "+"
     ]) { (v0, v1) in return v1 }
-    
+
   }()
 
   static let mpvSymbolToKeyName: [String: String] = [

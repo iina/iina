@@ -62,7 +62,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     self.player = player
     super.init(window: nil)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -88,7 +88,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     }
 
     setToInitialWindowSize(display: false, animate: false)
-    
+
     controlViewTopConstraint.isActive = false
 
     // tracking area
@@ -416,7 +416,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
       window.level = .normal
     }
   }
-  
+
   private func normalWindowHeight() -> CGFloat {
     return 72 + (isVideoVisible ? videoWrapperView.frame.height : 0)
   }

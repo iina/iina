@@ -56,7 +56,7 @@ class VideoView: NSView {
     // other settings
     autoresizingMask = [.width, .height]
     wantsBestResolutionOpenGLSurface = true
-  
+
     // dragging init
     registerForDraggedTypes([.nsFilenames, .nsURL, .string])
   }
@@ -67,12 +67,12 @@ class VideoView: NSView {
 
   func uninit() {
     uninitLock.lock()
-    
+
     guard !isUninited else {
       uninitLock.unlock()
       return
     }
-    
+
     mpv_opengl_cb_set_update_callback(mpvGLContext, nil, nil)
     mpv_opengl_cb_uninit_gl(mpvGLContext)
     isUninited = true
@@ -86,19 +86,19 @@ class VideoView: NSView {
   override func draw(_ dirtyRect: NSRect) {
     // do nothing
   }
-  
+
   override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
     return true
   }
 
   // MARK: Drag and drop
-  
+
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
     return player.acceptFromPasteboard(sender)
   }
-  
+
   override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
     return player.openFromPasteboard(sender)
   }
-  
+
 }

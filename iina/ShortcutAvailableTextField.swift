@@ -12,7 +12,7 @@ import Cocoa
 class ShortcutAvailableTextField: NSTextField {
 
   private let commandKey: NSEvent.ModifierFlags = .command
-  
+
   private let commandShiftKey: NSEvent.ModifierFlags = [.command, .shift]
 
   override func performKeyEquivalent(with event: NSEvent) -> Bool {

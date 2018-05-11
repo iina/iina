@@ -127,7 +127,7 @@ enum OSDMessage {
         String(format: NSLocalizedString("osd.deinterlace", comment: "Deinterlace: %@"), enable ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
         .normal
       )
-     
+
     case .audioDelay(let value):
       if value == 0 {
         return (

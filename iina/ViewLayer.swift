@@ -55,7 +55,7 @@ class ViewLayer: CAOpenGLLayer {
     autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
 
   }
-  
+
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -129,12 +129,12 @@ class ViewLayer: CAOpenGLLayer {
 
   override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
     videoView.uninitLock.lock()
-    
+
     guard !videoView.isUninited else {
       videoView.uninitLock.unlock()
       return
     }
-    
+
     CGLLockContext(ctx)
     CGLSetCurrentContext(ctx)
 

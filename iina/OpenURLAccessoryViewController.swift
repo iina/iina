@@ -50,7 +50,7 @@ class OpenURLAccessoryViewController: NSViewController {
       $0!.image = NSImage(named: .followLinkFreestandingTemplate)
     }
   }
-    
+
   @IBAction func safariLinkBtnAction(_ sender: AnyObject) {
     NSWorkspace.shared.open(URL(string: safariExtensionLink)!)
   }

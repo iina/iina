@@ -78,13 +78,13 @@ extension NSSize {
     }
   }
 
-  /** 
+  /**
    Given another size S, returns a size that:
 
    - maintains the same aspect ratio;
    - has same height or/and width as S;
    - always bigger than S.
-   
+
    - parameter toSize: The given size S.
 
    ```
@@ -110,7 +110,7 @@ extension NSSize {
    - maintains the same aspect ratio;
    - has same height or/and width as S;
    - always smaller than S.
-   
+
    - parameter toSize: The given size S.
 
    ```
@@ -431,7 +431,7 @@ extension NSMenuItem {
 extension URL {
   /**
    Whether the URL represents a directory.
-   
+
    - Attention: For 10.10-, it only checks if `path` ends with "/".
    */
   var representsDirectory: Bool {

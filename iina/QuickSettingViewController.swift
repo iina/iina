@@ -13,9 +13,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   override var nibName: NSNib.Name {
     return NSNib.Name("QuickSettingViewController")
   }
-  
+
   let sliderSteps = 24.0
-  
+
   /**
    Similiar to the one in `PlaylistViewController`.
    Since IBOutlet is `nil` when the view is not loaded at first time,
@@ -46,7 +46,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var tabView: NSTabView!
 
   @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
-  
+
   @IBOutlet weak var videoTableView: NSTableView!
   @IBOutlet weak var audioTableView: NSTableView!
   @IBOutlet weak var subTableView: NSTableView!
@@ -75,14 +75,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var audioDelaySliderIndicator: NSTextField!
   @IBOutlet weak var audioDelaySliderConstraint: NSLayoutConstraint!
   @IBOutlet weak var customAudioDelayTextField: NSTextField!
-  
-  
+
+
   @IBOutlet weak var subLoadSementedControl: NSSegmentedControl!
   @IBOutlet weak var subDelaySlider: NSSlider!
   @IBOutlet weak var subDelaySliderIndicator: NSTextField!
   @IBOutlet weak var subDelaySliderConstraint: NSLayoutConstraint!
   @IBOutlet weak var customSubDelayTextField: NSTextField!
-  
+
   @IBOutlet weak var audioEqSlider1: NSSlider!
   @IBOutlet weak var audioEqSlider2: NSSlider!
   @IBOutlet weak var audioEqSlider3: NSSlider!

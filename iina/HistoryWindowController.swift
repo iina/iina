@@ -302,5 +302,5 @@ class HistoryFilenameCellView: NSTableCellView {
 class HistoryProgressCellView: NSTableCellView {
 
   @IBOutlet var indicator: NSProgressIndicator!
-  
+
 }

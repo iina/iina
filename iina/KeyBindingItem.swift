@@ -98,8 +98,8 @@ class KeyBindingItem {
         criterion.addChild(child.toCriterion())
       }
     }
-    
+
     return criterion
   }
-  
+
 }

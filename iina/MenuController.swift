@@ -173,7 +173,7 @@ class MenuController: NSObject, NSMenuDelegate {
     }
 
     // File menu
-    
+
     savePlaylist.action = #selector(MainMenuActionHandler.menuSavePlaylist(_:))
     deleteCurrentFile.action = #selector(MainMenuActionHandler.menuDeleteCurrentFile(_:))
 
@@ -189,7 +189,7 @@ class MenuController: NSObject, NSMenuDelegate {
       newWindowSeparator.isHidden = false
       newWindow.isHidden = false
     }
-    
+
     // Playback menu
 
     playbackMenu.delegate = self
@@ -481,7 +481,7 @@ class MenuController: NSObject, NSMenuDelegate {
   private func updateSubMenu() {
     let player = PlayerCore.active
     subDelayIndicator.title = String(format: NSLocalizedString("menu.sub_delay", comment: "Subtitle Delay:"), player.info.subDelay)
-    
+
     let encodingCode = player.info.subEncoding ?? "auto"
     for encoding in AppData.encodings {
       if encoding.code == encodingCode {

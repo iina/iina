@@ -95,7 +95,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var screens: [NSScreen] = []
   var cachedScreenCount = 0
   var blackWindows: [NSWindow] = []
-  
+
   // MARK: - Status
 
   /** For mpv's `geometry` option. We cache the parsed structure
@@ -165,7 +165,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
    This property records whether the video is paused initially so we can
    recover the status when scrolling finished. */
   var wasPlayingWhenSeekBegan: Bool?
-  
+
   var mouseExitEnterCount = 0
 
   /** For force touch action */
@@ -217,7 +217,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   var sideBarStatus: SideBarViewType = .hidden
-  
+
   enum PIPStatus {
     case notInPIP
     case inPIP
@@ -961,7 +961,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   override func rightMouseUp(with event: NSEvent) {
     // Disable mouseUp for sideBar / OSC / titleBar
     guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
-    
+
     performMouseAction(Preference.enum(for: .rightClickAction))
   }
 
@@ -1287,10 +1287,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       titleBarView.isHidden = true
     }
     removeStandardButtonsFromFadeableViews()
-    
+
     setWindowFloatingOnTop(false)
 
     thumbnailPeekView.isHidden = true
+
     timePreviewWhenSeek.isHidden = true
     isMouseInSlider = false
 
@@ -1298,7 +1299,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     isInFullScreen = true
 
     windowFrameBeforeEnteringFullScreen = window!.frame
-    
+
     // Exit PIP if necessary
     if pipStatus == .inPIP,
       #available(macOS 10.12, *) {
@@ -1340,7 +1341,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if #available(macOS 10.12.2, *) {
       player.touchBarSupport.toggleTouchBarEsc(enteringFullScr: true)
     }
-    
+
     updateWindowParametersForMPV()
   }
 
@@ -1719,7 +1720,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     if let accessoryView = accessoryView {
       isShowingPersistentOSD = true
-      
+
       accessoryView.appearance = NSAppearance(named: .vibrantDark)
       let heightConstraint = NSLayoutConstraint(item: accessoryView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300)
       heightConstraint.priority = .defaultLow
@@ -2198,7 +2199,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // video size changed during playback
       needResizeWindow = true
     }
-    
+
     if needResizeWindow {
       let resizeRatio = (Preference.enum(for: .resizeWindowOption) as Preference.ResizeWindowOption).ratio
       // get videoSize on screen
@@ -2305,19 +2306,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     screens = NSScreen.screens.filter { $0 != window?.screen }
 
     blackWindows = []
-    
+
     for screen in screens {
       var screenRect = screen.frame
       screenRect.origin = CGPoint(x: 0, y: 0)
       let blackWindow = NSWindow(contentRect: screenRect, styleMask: [], backing: .buffered, defer: false, screen: screen)
       blackWindow.backgroundColor = .black
       blackWindow.level = .iinaBlackScreen
-      
+
       blackWindows.append(blackWindow)
       blackWindow.makeKeyAndOrderFront(nil)
     }
   }
-  
+
   private func removeBlackWindow() {
     for window in blackWindows {
       window.orderOut(self)
@@ -2753,13 +2754,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       window?.collectionBehavior = [.managed, .fullScreenPrimary]
     }
   }
-  
+
   func isMouseEvent(_ event: NSEvent, inAnyOf views: [NSView?]) -> Bool {
     return views.filter { $0 != nil }.reduce(false, { (result, view) in
       return result || view!.mouse(view!.convert(event.locationInWindow, from: nil), in: view!.bounds)
     })
   }
-  
+
 }
 
 // MARK: - Picture in Picture
@@ -2772,18 +2773,18 @@ extension MainWindowController: PIPViewControllerDelegate {
     if isInFullScreen {
       toggleWindowFullScreen()
     }
-    
+
     pipStatus = .inPIP
-    
+
     pipVideo = NSViewController()
     pipVideo.view = videoView
     pip.playing = !player.info.isPaused
     pip.title = window?.title
-    
+
     pip.presentAsPicture(inPicture: pipVideo)
     pipOverlayView.isHidden = false
   }
-  
+
   func exitPIP() {
     if pipShouldClose(pip) {
       pip.dismissViewController(pipVideo)
@@ -2792,7 +2793,7 @@ extension MainWindowController: PIPViewControllerDelegate {
 
   func doneExitingPIP() {
     pipStatus = .notInPIP
-    
+
     pipOverlayView.isHidden = true
     window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
     videoView.frame = window?.contentView?.frame ?? .zero
@@ -2801,15 +2802,15 @@ extension MainWindowController: PIPViewControllerDelegate {
   func pipShouldClose(_ pip: PIPViewController) -> Bool {
     // This is called right before we're about to close the PIP
     pipStatus = .intermediate
-    
+
     // Set frame to animate back to
     pip.replacementRect = window?.contentView?.frame ?? .zero
     pip.replacementWindow = window
-    
+
     // Bring the window to the front and deminiaturize it
     NSApp.activate(ignoringOtherApps: true)
     window?.deminiaturize(pip)
-    
+
     return true
   }
 

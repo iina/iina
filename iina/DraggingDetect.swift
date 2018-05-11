@@ -58,7 +58,7 @@ extension PlayerCore {
 
   /**
    Checks whether the path list contains playable file and performs early return if so. Don't use this method for a non-file URL.
-   
+
    - Parameters:
      - paths: The list as an array of `String`.
    - Returns: Whether the path list contains playable file.

@@ -89,8 +89,8 @@ class PlayerCore: NSObject {
    Each task holds a copy of ticket value at creation, so that a previous task will perceive and
    quit early if new tasks is awaiting.
 
-   **See also**: 
-   
+   **See also**:
+
    `autoLoadFilesInCurrentFolder(ticket:)`
    */
   var backgroundQueueTicket = 0
@@ -974,8 +974,8 @@ class PlayerCore: NSObject {
    - Try match videos and subs by series and filename.
    - For unmatched videos and subs, perform fuzzy (but slow, O(n^2)) match for them.
 
-   **Remark**: 
-   
+   **Remark**:
+
    This method is expected to be executed in `backgroundQueue` (see `backgroundQueueTicket`).
    Therefore accesses to `self.info` and mpv playlist must be guarded.
    */

@@ -90,12 +90,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     playlistChangeObserver = NotificationCenter.default.addObserver(forName: .iinaPlaylistChanged, object: player, queue: .main) { _ in
       self.reloadData(playlist: true, chapters: false)
     }
-    
+
     // register for double click action
     let action = #selector(performDoubleAction(sender:))
     playlistTableView.doubleAction = action
     playlistTableView.target = self
-    
+
     // register for drag and drop
     playlistTableView.registerForDraggedTypes([.iinaPlaylistItem, .nsFilenames])
   }
@@ -164,10 +164,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       return 0
     }
   }
-  
+
   // MARK: - Drag and Drop
-  
-  
+
+
   func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
     if tableView == playlistTableView {
       let indexesData = NSKeyedArchiver.archivedData(withRootObject: rowIndexes)
@@ -317,7 +317,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     player.toggleShuffle()
   }
 
-  
+
   @objc func performDoubleAction(sender: AnyObject) {
     let tv = sender as! NSTableView
     if tv.numberOfSelectedRows > 0 {

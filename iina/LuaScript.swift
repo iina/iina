@@ -18,17 +18,13 @@ class LuaScript {
   var type: ScriptType
 
   init?(defaultName name: String) {
-    if let path = Bundle.main.path(forResource: name, ofType: "lua", inDirectory: "scripts") {
-      self.filePath = path
-      self.type = .iina
-    } else {
-      return nil
-    }
+    guard let path = Bundle.main.path(forResource: name, ofType: "lua", inDirectory: "scripts") else { return nil }
+    self.filePath = path
+    self.type = .iina
   }
 
   init(filePath: String) {
     self.filePath = filePath
     self.type = .custom
   }
-
 }

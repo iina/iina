@@ -1923,7 +1923,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       .top: window.frame.height - newVideoViewFrame.maxY
     ]
 
-    let selectedRect: NSRect = selectWholeVideoByDefault ? NSRect(origin: .zero, size: origVideoSize) : .zero
+    let selectedRect: NSRect = selectWholeVideoByDefault ? NSRect(size: origVideoSize) : .zero
 
     // add crop setting view
     window.contentView!.addSubview(controlView.cropBoxView)
@@ -2383,7 +2383,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         NSApp.presentationOptions.insert(.autoHideDock)
         // set frame
         let screen = window.screen ?? NSScreen.main!
-        window.setFrame(NSRect(origin: .zero, size: screen.frame.size), display: true, animate: true)
+        window.setFrame(NSRect(size: screen.frame.size), display: true, animate: true)
         // call delegate
         windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
       } else {

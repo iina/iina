@@ -95,7 +95,7 @@ class PrefOSCToolbarCurrentItem: NSImageView, NSPasteboardWriting {
     dragItem.imageComponentsProvider = {
       let imageComponent = NSDraggingImageComponent(key: .icon)
       imageComponent.contents = self.buttonType.image()
-      imageComponent.frame = NSRect(origin: .zero, size: NSSize(width: 14, height: 14))
+      imageComponent.frame = NSRect(size: NSSize(width: 14, height: 14))
       return [imageComponent]
     }
 

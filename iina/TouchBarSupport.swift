@@ -375,7 +375,7 @@ class TouchBarPlaySliderCell: NSSliderCell {
       image.draw(in: barRect)
     } else {
       // draw the background image
-      let imageRect = NSRect(origin: .zero, size: barRect.size)
+      let imageRect = NSRect(size: barRect.size)
       let image = NSImage(size: barRect.size)
       image.lockFocus()
       NSGraphicsContext.saveGraphicsState()

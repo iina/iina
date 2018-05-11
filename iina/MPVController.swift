@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import Foundation
 
 fileprivate typealias PK = Preference.Key
 

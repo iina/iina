@@ -29,12 +29,13 @@ extension NSSegmentedControl {
   }
 }
 
-func - (lhs: NSPoint, rhs: NSPoint) -> NSPoint {
-  return NSMakePoint(lhs.x - rhs.x, lhs.y - rhs.y)
+extension NSPoint {
+  static func - (lhs: NSPoint, rhs: NSPoint) -> NSPoint {
+    return NSPoit(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+  }
 }
 
 extension NSSize {
-
   var aspect: CGFloat {
     get {
       return width / height
@@ -148,6 +149,10 @@ extension NSSize {
 
 
 extension NSRect {
+
+  init(size: NSSize) {
+    self.init(origin: .zero, size: size)
+  }
 
   init(vertexPoint pt1: NSPoint, and pt2: NSPoint) {
     self.init(x: min(pt1.x, pt2.x),

@@ -320,7 +320,7 @@ return -1;\
   if (ret < 0) return -1;
 
   duration = pFormatCtx->duration;
-  if (duration == 0) {
+  if (duration <= 0) {
     ret = avformat_find_stream_info(pFormatCtx, NULL);
     if (ret < 0) return -1;
     duration = pFormatCtx->duration;

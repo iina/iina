@@ -456,7 +456,7 @@ class PlayerCore: NSObject {
 
   func toggleShuffle() {
     mpv.command(.playlistShuffle)
-    postNotification(.iinaPlaylistChanged)
+    postNotification(.PlaylistChanged)
   }
 
   func setVolume(_ volume: Double, constrain: Bool = true) {
@@ -926,7 +926,7 @@ class PlayerCore: NSObject {
         NSDocumentController.shared.noteNewRecentDocumentURL(url)
       }
     }
-    postNotification(.iinaFileLoaded)
+    postNotification(.FileLoaded)
   }
 
   func playbackRestarted() {

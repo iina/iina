@@ -632,12 +632,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // add notification observers
 
-    notificationCenter(.default, addObserverfor: .iinaFileLoaded, object: player) { [unowned self] _ in
+    notificationCenter(.default, addObserverfor: .FileLoaded, object: player) { [unowned self] _ in
       self.updateTitle()
       self.quickSettingView.reload()
     }
 
-    notificationCenter(.default, addObserverfor: .iinaMediaTitleChanged, object: player) { [unowned self] _ in
+    notificationCenter(.default, addObserverfor: .MediaTitleChanged, object: player) { [unowned self] _ in
       self.updateTitle()
     }
 
@@ -1545,14 +1545,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isInFullScreen && Preference.bool(for: .blackOutMonitor) {
       blackOutOtherMonitors()
     }
-    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
+    NotificationCenter.default.post(name: .MainWindowChanged, object: nil)
   }
 
   func windowDidResignMain(_ notification: Notification) {
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()
     }
-    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
+    NotificationCenter.default.post(name: .MainWindowChanged, object: nil)
   }
 
   func windowWillMiniaturize(_ notification: Notification) {
@@ -2334,7 +2334,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if currentFullScreenIsLegacy {
         // exit legacy full screen
         // call delegate
-        windowWillExitFullScreen(Notification(name: .iinaLegacyFullScreen))
+        windowWillExitFullScreen(Notification(name: .LegacyFullScreen))
         // stylemask
         window.styleMask.remove(.borderless)
         window.styleMask.remove(.fullScreen)
@@ -2359,7 +2359,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         window.aspectRatio = aspectRatio
         // call delegate
-        windowDidExitFullScreen(Notification(name: .iinaLegacyFullScreen))
+        windowDidExitFullScreen(Notification(name: .LegacyFullScreen))
       } else {
         // system full screen
         window.toggleFullScreen(self)
@@ -2373,7 +2373,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         currentFullScreenIsLegacy = true
         windowFrameBeforeEnteringFullScreen = window.frame
         // call delegate
-        windowWillEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
+        windowWillEnterFullScreen(Notification(name: .LegacyFullScreen))
         // stylemask
         window.styleMask.insert(.borderless)
         window.styleMask.insert(.fullScreen)
@@ -2386,7 +2386,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         let screen = window.screen ?? NSScreen.main!
         window.setFrame(NSRect(size: screen.frame.size), display: true, animate: true)
         // call delegate
-        windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
+        windowDidEnterFullScreen(Notification(name: .LegacyFullScreen))
       } else {
         // system full screen
         currentFullScreenIsLegacy = false

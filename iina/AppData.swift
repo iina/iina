@@ -88,14 +88,14 @@ struct Constants {
 }
 
 extension Notification.Name {
-  static let iinaMainWindowChanged = Notification.Name("IINAMainWindowChanged")
-  static let iinaPlaylistChanged = Notification.Name("IINAPlaylistChanged")
-  static let iinaTracklistChanged = Notification.Name("IINATracklistChanged")
-  static let iinaMediaTitleChanged = Notification.Name("IINAMediaTitleChanged")
-  static let iinaVFChanged = Notification.Name("IINAVfChanged")
-  static let iinaAFChanged = Notification.Name("IINAAfChanged")
-  static let iinaKeyBindingInputChanged = Notification.Name("IINAkeyBindingInputChanged")
-  static let iinaFileLoaded = Notification.Name("IINAFileLoaded")
-  static let iinaHistoryUpdated = Notification.Name("IINAHistoryUpdated")
-  static let iinaLegacyFullScreen = Notification.Name("IINALegacyFullScreen")
+  static let MainWindowChanged = Notification.Name("IINAMainWindowChanged")
+  static let PlaylistChanged = Notification.Name("PlaylistChanged")
+  static let TracklistChanged = Notification.Name("TracklistChanged")
+  static let MediaTitleChanged = Notification.Name("MediaTitleChanged")
+  static let VFChanged = Notification.Name("VFChanged")
+  static let AFChanged = Notification.Name("AFChanged")
+  static let KeyBindingInputChanged = Notification.Name("KeyBindingInputChanged")
+  static let FileLoaded = Notification.Name("FileLoaded")
+  static let HistoryUpdated = Notification.Name("HistoryUpdated")
+  static let LegacyFullScreen = Notification.Name("LegacyFullScreen")
 }

@@ -79,8 +79,8 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
     updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
 
-    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaFileLoaded, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaMainWindowChanged, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .FileLoaded, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .MainWindowChanged, object: nil)
   }
 
   deinit {

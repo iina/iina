@@ -127,7 +127,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     controlView.alphaValue = 0
 
     // notifications
-    NotificationCenter.default.addObserver(self, selector: #selector(updateTrack), name: .iinaMediaTitleChanged, object: player)
+    NotificationCenter.default.addObserver(self, selector: #selector(updateTrack), name: .MediaTitleChanged, object: player)
 
     updateVolume()
 

@@ -466,7 +466,7 @@ class MPVController: NSObject {
       if returnValue < 0 {
         Utility.showAlert("filter.incorrect")
         // reload data in filter setting window
-        self.player.postNotification(.iinaVFChanged)
+        self.player.postNotification(.VFChanged)
       }
     }
   }
@@ -786,17 +786,17 @@ class MPVController: NSObject {
     // following properties may change before file loaded
 
     case MPVProperty.playlistCount:
-      player.postNotification(.iinaPlaylistChanged)
+      player.postNotification(.PlaylistChanged)
 
     case MPVProperty.trackListCount:
       player.trackListChanged()
-      player.postNotification(.iinaTracklistChanged)
+      player.postNotification(.TracklistChanged)
 
     case MPVProperty.vf:
-      player.postNotification(.iinaVFChanged)
+      player.postNotification(.VFChanged)
 
     case MPVProperty.af:
-      player.postNotification(.iinaAFChanged)
+      player.postNotification(.AFChanged)
 
     case MPVOption.Window.fullscreen:
       guard player.mainWindow.isWindowLoaded else { break }
@@ -827,7 +827,7 @@ class MPVController: NSObject {
       }
 
     case MPVProperty.mediaTitle:
-      player.postNotification(.iinaMediaTitleChanged)
+      player.postNotification(.MediaTitleChanged)
 
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")

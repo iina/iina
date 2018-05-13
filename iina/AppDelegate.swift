@@ -207,12 +207,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  private func showWelcomeWindow() {
+  private func showWelcomeWindow(shouldRefresh: Bool = false) {
     let actionRawValue = Preference.integer(for: .actionAfterLaunch)
     let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
     switch action {
     case .welcomeWindow:
-      PlayerCore.first.initialWindow.showWindow(nil)
+      let window = PlayerCore.first.initialWindow!
+      window.showWindow(nil)
+      if (shouldRefresh) {
+        window.reloadData()
+      }
     case .openPanel:
       openFile(self)
     default:

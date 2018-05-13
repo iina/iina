@@ -80,7 +80,7 @@ class PlayerCore: NSObject {
 
   /// A dispatch queue for auto load feature.
   let backgroundQueue = DispatchQueue(label: "IINAPlayerCoreTask", qos: .background)
-
+  let playlistQueue = DispatchQueue(label: "IINAPlaylistTask", qos: .utility)
   let thumbnailQueue = DispatchQueue(label: "IINAPlayerCoreThumbnailTask", qos: .utility)
 
   /**
@@ -850,6 +850,9 @@ class PlayerCore: NSObject {
     mpv.command(.writeWatchLaterConfig)
     if let url = info.currentURL {
       Preference.set(url, for: .iinaLastPlayedFilePath)
+      // Write to cache directly (rather than calling `refreshCachedVideoProgress`).
+      // If user only closed the window but didn't quit the app, this can make sure playlist displays the correct progress.
+      info.cachedVideoDurationAndProgress[url.path] = (duration: info.videoDuration?.second, progress: info.videoPosition?.second)
     }
     if let position = info.videoPosition?.second {
       Preference.set(position, for: .iinaLastPlayedFilePosition)
@@ -1360,6 +1363,19 @@ class PlayerCore: NSObject {
         break
       }
     }
+  }
+
+  /**
+   Get video duration and playback progress, then save it to info.
+   It may take some time to run this method, so it should be used in background.
+   */
+  func refreshCachedVideoProgress(forVideoPath path: String) {
+    let duration = FFmpegController.probeVideoDuration(forFile: path)
+    let progress = Utility.playbackProgressFromWatchLater(path.md5)
+    info.cachedVideoDurationAndProgress[path] = (
+      duration: (duration > 0 ? duration : nil),
+      progress: progress?.second
+    )
   }
 
   enum CurrentMediaIsAudioStatus {

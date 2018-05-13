@@ -383,7 +383,26 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           cellView.prefixBtn.hasPrefix = false
           cellView.textField?.stringValue = filename
         }
-        cellView.durationLabel.stringValue = info.cachedVideoDuration[item.filename] ?? ""
+        // playback progress and duration
+        if let cached = player.info.cachedVideoDurationAndProgress[item.filename],
+          let duration = cached.duration {
+          // if it's cached
+          cellView.durationLabel.stringValue = VideoTime(duration).stringRepresentation
+          if let progress = cached.progress {
+            cellView.playbackProgressView.percentage = progress / duration
+            cellView.playbackProgressView.needsDisplay = true
+          }
+        } else {
+          // get related data and schedule a reload
+          cellView.durationLabel.stringValue = ""
+          cellView.playbackProgressView.percentage = 0
+          player.playlistQueue.async {
+            self.player.refreshCachedVideoProgress(forVideoPath: item.filename)
+            DispatchQueue.main.async {
+              self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
+            }
+          }
+        }
         // sub button
         if let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
           cellView.subBtn.isHidden = false
@@ -590,6 +609,7 @@ class PlaylistTrackCellView: NSTableCellView {
   @IBOutlet weak var subBtn: NSButton!
   @IBOutlet weak var prefixBtn: PlaylistPrefixButton!
   @IBOutlet weak var durationLabel: NSTextField!
+  @IBOutlet weak var playbackProgressView: PlaylistPlaybackProgressView!
 
 }
 

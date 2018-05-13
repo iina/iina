@@ -133,15 +133,15 @@
                                                                             </connections>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yEn-uv-K8Z">
-                                                                            <rect key="frame" x="167" y="2" width="33" height="14"/>
+                                                                            <rect key="frame" x="183" y="2" width="33" height="14"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="zbw-ad-lgl">
-                                                                                <font key="font" metaFont="smallSystem"/>
+                                                                                <font key="font" metaFont="system" size="11"/>
                                                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="MbV-7g-8Gm">
-                                                                            <rect key="frame" x="202" y="3" width="12" height="12"/>
+                                                                            <rect key="frame" x="169" y="3" width="12" height="12"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="12" id="PKT-tg-lPD"/>
                                                                                 <constraint firstAttribute="height" constant="12" id="aG1-SY-pnl"/>
@@ -155,31 +155,32 @@
                                                                             </connections>
                                                                         </button>
                                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="K4f-mB-ja8" customClass="PlaylistPlaybackProgressView" customModule="IINA" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="198" height="1"/>
+                                                                            <rect key="frame" x="4" y="0.0" width="210" height="1"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="1" id="07t-ih-NtZ"/>
                                                                             </constraints>
                                                                         </customView>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="MbV-7g-8Gm" firstAttribute="leading" secondItem="K4f-mB-ja8" secondAttribute="trailing" constant="4" id="3CE-Jm-uRD"/>
-                                                                        <constraint firstItem="K4f-mB-ja8" firstAttribute="leading" secondItem="yTp-yO-UE2" secondAttribute="leading" id="7Fe-BD-Ad9"/>
+                                                                        <constraint firstItem="K4f-mB-ja8" firstAttribute="leading" secondItem="yTp-yO-UE2" secondAttribute="leading" constant="4" id="7Fe-BD-Ad9"/>
                                                                         <constraint firstItem="MbV-7g-8Gm" firstAttribute="centerY" secondItem="yTp-yO-UE2" secondAttribute="centerY" id="CoT-xg-AvY"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="MbV-7g-8Gm" secondAttribute="trailing" constant="4" id="WBC-vQ-swm"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="yEn-uv-K8Z" secondAttribute="trailing" constant="4" id="G6G-5M-gSa"/>
+                                                                        <constraint firstItem="yEn-uv-K8Z" firstAttribute="leading" secondItem="MbV-7g-8Gm" secondAttribute="trailing" constant="4" id="IXf-e2-j8t"/>
+                                                                        <constraint firstItem="MbV-7g-8Gm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mzW-2W-iPg" secondAttribute="trailing" constant="4" id="Qgz-CT-EnQ"/>
                                                                         <constraint firstAttribute="bottom" secondItem="K4f-mB-ja8" secondAttribute="bottom" id="XZo-GL-gZh"/>
                                                                         <constraint firstItem="mzW-2W-iPg" firstAttribute="leading" secondItem="U4W-Xv-hkh" secondAttribute="trailing" id="XeG-0c-05U"/>
                                                                         <constraint firstItem="U4W-Xv-hkh" firstAttribute="centerY" secondItem="yTp-yO-UE2" secondAttribute="centerY" id="g5U-ZA-Kco"/>
-                                                                        <constraint firstItem="yEn-uv-K8Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mzW-2W-iPg" secondAttribute="trailing" constant="4" id="glW-XU-6PK"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="K4f-mB-ja8" secondAttribute="trailing" constant="4" id="mSL-zL-ggu"/>
                                                                         <constraint firstItem="yEn-uv-K8Z" firstAttribute="centerY" secondItem="yTp-yO-UE2" secondAttribute="centerY" id="oc3-Vu-aJb"/>
                                                                         <constraint firstItem="U4W-Xv-hkh" firstAttribute="leading" secondItem="yTp-yO-UE2" secondAttribute="leading" id="pTq-Bj-ICm"/>
                                                                         <constraint firstItem="mzW-2W-iPg" firstAttribute="centerY" secondItem="yTp-yO-UE2" secondAttribute="centerY" id="qW6-QF-Yl2"/>
-                                                                        <constraint firstItem="MbV-7g-8Gm" firstAttribute="leading" secondItem="yEn-uv-K8Z" secondAttribute="trailing" constant="4" id="tQL-zE-4JW"/>
                                                                     </constraints>
                                                                     <connections>
                                                                         <outlet property="durationLabel" destination="yEn-uv-K8Z" id="TSc-nq-rtt"/>
                                                                         <outlet property="playbackProgressView" destination="K4f-mB-ja8" id="z9u-40-9K7"/>
                                                                         <outlet property="prefixBtn" destination="U4W-Xv-hkh" id="Uyd-uy-W5S"/>
                                                                         <outlet property="subBtn" destination="MbV-7g-8Gm" id="5Ob-Et-XBK"/>
+                                                                        <outlet property="subBtnWidthConstraint" destination="PKT-tg-lPD" id="rLl-ai-sHp"/>
                                                                         <outlet property="textField" destination="mzW-2W-iPg" id="WVu-Av-omY"/>
                                                                     </connections>
                                                                 </tableCellView>
@@ -295,7 +296,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="6tr-hz-bdD">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="31" rowSizeStyle="automatic" viewBased="YES" id="BvG-MR-6LX">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>

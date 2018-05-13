@@ -384,6 +384,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           cellView.textField?.stringValue = filename
         }
         // playback progress and duration
+        if #available(OSX 10.11, *) {
+          cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
+        }
         if let cached = player.info.cachedVideoDurationAndProgress[item.filename],
           let duration = cached.duration {
           // if it's cached
@@ -406,8 +409,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         // sub button
         if let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
           cellView.subBtn.isHidden = false
+          cellView.subBtnWidthConstraint.constant = 12
         } else {
           cellView.subBtn.isHidden = true
+          cellView.subBtnWidthConstraint.constant = 0
         }
         cellView.subBtn.image?.isTemplate = true
       }
@@ -598,6 +603,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 class PlaylistTrackCellView: NSTableCellView {
 
   @IBOutlet weak var subBtn: NSButton!
+  @IBOutlet weak var subBtnWidthConstraint: NSLayoutConstraint!
   @IBOutlet weak var prefixBtn: PlaylistPrefixButton!
   @IBOutlet weak var durationLabel: NSTextField!
   @IBOutlet weak var playbackProgressView: PlaylistPlaybackProgressView!

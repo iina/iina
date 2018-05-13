@@ -164,6 +164,7 @@ class PlaybackInfo {
   var matchedSubs: [String: [URL]] = [:]
   var currentSubsInfo: [FileInfo] = []
   var currentVideosInfo: [FileInfo] = []
+  var cachedVideoDuration: [String: String] = [:]
 
   var thumbnailsReady = false
   var thumbnailsProgress: Double = 0

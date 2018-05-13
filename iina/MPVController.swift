@@ -612,6 +612,9 @@ class MPVController: NSObject {
     player.info.displayWidth = 0
     player.info.displayHeight = 0
     player.info.videoDuration = VideoTime(duration)
+    if let filename = getString(MPVProperty.path) {
+      player.info.cachedVideoDuration[filename] = player.info.videoDuration!.stringRepresentation
+    }
     player.info.videoPosition = VideoTime(pos)
     player.fileLoaded()
     fileLoaded = true

@@ -383,6 +383,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           cellView.prefixBtn.hasPrefix = false
           cellView.textField?.stringValue = filename
         }
+        cellView.durationLabel.stringValue = info.cachedVideoDuration[item.filename] ?? ""
         // sub button
         if let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
           cellView.subBtn.isHidden = false
@@ -588,6 +589,7 @@ class PlaylistTrackCellView: NSTableCellView {
 
   @IBOutlet weak var subBtn: NSButton!
   @IBOutlet weak var prefixBtn: PlaylistPrefixButton!
+  @IBOutlet weak var durationLabel: NSTextField!
 
 }
 

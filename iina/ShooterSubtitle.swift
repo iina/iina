@@ -51,13 +51,11 @@ class ShooterSupport {
     var path: String
 
     var dictionary: [String: Any] {
-      get {
-        return [
-          "filehash": hashValue,
-          "pathinfo": path,
-          "format": "json"
-        ]
-      }
+      return [
+        "filehash": hashValue,
+        "pathinfo": path,
+        "format": "json"
+      ]
     }
   }
 

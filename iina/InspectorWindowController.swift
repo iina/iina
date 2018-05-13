@@ -77,10 +77,10 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
     updateInfo()
 
-    updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
+    updateTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
 
-    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .FileLoaded, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .MainWindowChanged, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .FileLoaded)
+    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .MainWindowChanged)
   }
 
   deinit {
@@ -143,12 +143,12 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
           self.trackPopup.menu?.addItem(withTitle: "Video" + track.readableTitle,
                                    action: nil, tag: nil, obj: track, stateOn: false)
         }
-        self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        self.trackPopup.menu?.addItem(.separator())
         for track in info.audioTracks {
           self.trackPopup.menu?.addItem(withTitle: "Audio" + track.readableTitle,
                                    action: nil, tag: nil, obj: track, stateOn: false)
         }
-        self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        self.trackPopup.menu?.addItem(.separator())
         for track in info.subTracks {
           self.trackPopup.menu?.addItem(withTitle: "Subtitle" + track.readableTitle,
                                    action: nil, tag: nil, obj: track, stateOn: false)

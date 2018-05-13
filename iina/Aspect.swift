@@ -31,9 +31,7 @@ class Aspect: NSObject {
   }
 
   var value: CGFloat {
-    get {
-      return size.width / size.height
-    }
+    return size.width / size.height
   }
 
   init(size: NSSize) {
@@ -50,9 +48,8 @@ class Aspect: NSObject {
       if let cropW = Float(wh[0]), let cropH = Float(wh[1]) {
         self.size = NSMakeSize(CGFloat(cropW), CGFloat(cropH))
       }
-    } else {
-      return nil
     }
+    return nil
   }
 
 }

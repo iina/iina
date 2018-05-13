@@ -492,45 +492,43 @@ class Utility {
     }
 
     var value : [NSAttributedStringKey : Any]? {
-      get {
-        let f: NSFont?
-        let s: CGFloat
-        let a = NSMutableParagraphStyle()
-        switch self.size {
-        case .system:
-          s = NSFont.systemFontSize
-        case .small:
-          s = NSFont.systemFontSize(for: .small)
-        case .mini:
-          s = NSFont.systemFontSize(for: .mini)
-        case .pt(let point):
-          s = CGFloat(point)
-        }
-        switch self.font {
-        case .system:
-          f = NSFont.systemFont(ofSize: s)
-        case .systemBold:
-          f = NSFont.boldSystemFont(ofSize: s)
-        case .name(let n):
-          f = NSFont(name: n, size: s)
-        }
-        switch self.align {
-        case .left:
-          a.alignment = .left
-        case .center:
-          a.alignment = .center
-        case .right:
-          a.alignment = .right
-        }
-        if let f = f {
-          NSFont.systemFont(ofSize: NSFont.systemFontSize)
-          return [
-            .font: f,
-            .paragraphStyle: a
-          ]
-        } else {
-          return nil
-        }
+      let f: NSFont?
+      let s: CGFloat
+      let a = NSMutableParagraphStyle()
+      switch self.size {
+      case .system:
+        s = NSFont.systemFontSize
+      case .small:
+        s = NSFont.systemFontSize(for: .small)
+      case .mini:
+        s = NSFont.systemFontSize(for: .mini)
+      case .pt(let point):
+        s = CGFloat(point)
+      }
+      switch self.font {
+      case .system:
+        f = NSFont.systemFont(ofSize: s)
+      case .systemBold:
+        f = NSFont.boldSystemFont(ofSize: s)
+      case .name(let n):
+        f = NSFont(name: n, size: s)
+      }
+      switch self.align {
+      case .left:
+        a.alignment = .left
+      case .center:
+        a.alignment = .center
+      case .right:
+        a.alignment = .right
+      }
+      if let f = f {
+        NSFont.systemFont(ofSize: NSFont.systemFontSize)
+        return [
+          .font: f,
+          .paragraphStyle: a
+        ]
+      } else {
+        return nil
       }
     }
   }

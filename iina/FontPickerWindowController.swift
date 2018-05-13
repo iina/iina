@@ -31,9 +31,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
   var finishedPicking: ((String?) -> Void)?
 
   override var windowNibName: NSNib.Name {
-    get {
-      return NSNib.Name("FontPickerWindowController")
-    }
+    return NSNib.Name("FontPickerWindowController")
   }
 
   override func windowDidLoad() {

@@ -45,9 +45,7 @@ class TextCriterion: Criterion {
   var localizedName: String
 
   override var mpvCommandValue: String {
-    get {
-      return name
-    }
+    return name
   }
 
   init(name: String, localizedName: String) {
@@ -69,18 +67,14 @@ class TextCriterion: Criterion {
   override func displayValue() -> Any {
     return localizedName
   }
-
 }
-
 
 class TextFieldCriterion: Criterion, NSTextFieldDelegate {
 
   private lazy var field = NSTextField(frame: NSRect(x: 0, y: 0, width: 50, height: 18))
 
   override var mpvCommandValue: String {
-    get {
       return field.stringValue
-    }
   }
 
   override func displayValue() -> Any {
@@ -92,9 +86,8 @@ class TextFieldCriterion: Criterion, NSTextFieldDelegate {
   }
 
   override func controlTextDidChange(_ obj: Notification) {
-    NotificationCenter.default.post(Notification(name: .KeyBindingInputChanged))
+    NotificationCenter.default.post(name: .KeyBindingInputChanged)
   }
-
 }
 
 class SeparatorCriterion: Criterion {

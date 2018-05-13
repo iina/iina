@@ -45,20 +45,15 @@ class KeyMapping {
   var comment: String?
 
   var readableAction: String {
-    get {
-      let joined = action.joined(separator: " ")
-      return isIINACommand ? ("@iina " + joined) : joined
-    }
+    let joined = action.joined(separator: " ")
+    return isIINACommand ? ("@iina " + joined) : joined
   }
 
   var prettyKey: String {
-    get {
-      if let (keyChar, modifiers) = KeyCodeHelper.macOSKeyEquivalent(from: self.key, usePrintableKeyName: true) {
-        return KeyCodeHelper.readableString(fromKey: keyChar, modifiers: modifiers)
-      } else {
-        return key
-      }
+    if let (keyChar, modifiers) = KeyCodeHelper.macOSKeyEquivalent(from: self.key, usePrintableKeyName: true) {
+      return KeyCodeHelper.readableString(fromKey: keyChar, modifiers: modifiers)
     }
+    return key
   }
 
   var prettyCommand: String {

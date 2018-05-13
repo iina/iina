@@ -37,45 +37,39 @@ extension NSPoint {
 
 extension NSSize {
   var aspect: CGFloat {
-    get {
       return width / height
-    }
   }
 
   /** Resize to no smaller than a min size while keeping same aspect */
   func satisfyMinSizeWithSameAspectRatio(_ minSize: NSSize) -> NSSize {
     if width >= minSize.width && height >= minSize.height {  // no need to resize if larger
       return self
-    } else {
-      return grow(toSize: minSize)
     }
+    return grow(toSize: minSize)
   }
 
   /** Resize to no larger than a max size while keeping same aspect */
   func satisfyMaxSizeWithSameAspectRatio(_ maxSize: NSSize) -> NSSize {
     if width <= maxSize.width && height <= maxSize.height {  // no need to resize if smaller
       return self
-    } else {
-      return shrink(toSize: maxSize)
     }
+    return shrink(toSize: maxSize)
   }
 
   func crop(withAspect aspectRect: Aspect) -> NSSize {
     let targetAspect = aspectRect.value
     if aspect > targetAspect {  // self is wider, crop width, use same height
       return NSSize(width: height * targetAspect, height: height)
-    } else {
-      return NSSize(width: width, height: width / targetAspect)
     }
+    return NSSize(width: width, height: width / targetAspect)
   }
 
   func expand(withAspect aspectRect: Aspect) -> NSSize {
     let targetAspect = aspectRect.value
     if aspect < targetAspect {  // self is taller, expand width, use same height
       return NSSize(width: height * targetAspect, height: height)
-    } else {
-      return NSSize(width: width, height: width / targetAspect)
     }
+    return NSSize(width: width, height: width / targetAspect)
   }
 
   /**
@@ -99,9 +93,8 @@ extension NSSize {
     let sizeAspect = size.aspect
     if aspect > sizeAspect {  // self is wider, grow to meet height
       return NSSize(width: size.height * aspect, height: size.height)
-    } else {
-      return NSSize(width: size.width, height: size.width / aspect)
     }
+    return NSSize(width: size.width, height: size.width / aspect)
   }
 
   /**
@@ -125,9 +118,8 @@ extension NSSize {
     let  sizeAspect = size.aspect
     if aspect < sizeAspect { // self is taller, shrink to meet height
       return NSSize(width: size.height * aspect, height: size.height)
-    } else {
-      return NSSize(width: size.width, height: size.width / aspect)
     }
+    return NSSize(width: size.width, height: size.width / aspect)
   }
 
   func centeredRect(in rect: NSRect) -> NSRect {
@@ -206,9 +198,8 @@ extension Array {
   subscript(at index: Index) -> Element? {
     if indices.contains(index) {
       return self[index]
-    } else {
-      return nil
     }
+    return nil
   }
 }
 
@@ -227,9 +218,7 @@ extension NSMenu {
 
 extension CGFloat {
   var unifiedDouble: Double {
-    get {
-      return Double(copysign(1, self))
-    }
+    return Double(copysign(1, self))
   }
 }
 
@@ -282,9 +271,7 @@ extension FloatingPoint {
 
 extension NSColor {
   var mpvColorString: String {
-    get {
-      return "\(self.redComponent)/\(self.greenComponent)/\(self.blueComponent)/\(self.alphaComponent)"
-    }
+    return "\(self.redComponent)/\(self.greenComponent)/\(self.blueComponent)/\(self.alphaComponent)"
   }
 
   convenience init?(mpvColorString: String) {
@@ -297,12 +284,9 @@ extension NSColor {
         self.init(red: CGFloat(splitted[0]!), green: CGFloat(splitted[1]!), blue: CGFloat(splitted[2]!), alpha: CGFloat(1))
       } else if splitted.count == 4 {  // if has alpha value
         self.init(red: CGFloat(splitted[0]!), green: CGFloat(splitted[1]!), blue: CGFloat(splitted[2]!), alpha: CGFloat(splitted[3]!))
-      } else {
-        return nil
       }
-    } else {
-      return nil
     }
+    return nil
   }
 }
 
@@ -348,19 +332,16 @@ extension NSData {
 
 extension Data {
   var md5: String {
-    get {
-      return (self as NSData).md5() as String
-    }
+    return (self as NSData).md5() as String
   }
 
   var chksum64: UInt64 {
-    get {
-      let count64 = self.count / MemoryLayout<UInt64>.size
-      return self.withUnsafeBytes{ (ptr: UnsafePointer<UInt64>) -> UInt64 in
-        let bufferPtr = UnsafeBufferPointer(start: ptr, count: count64)
-        return bufferPtr.reduce(UInt64(0), &+)
-      }
+    let count64 = self.count / MemoryLayout<UInt64>.size
+    return self.withUnsafeBytes{ (ptr: UnsafePointer<UInt64>) -> UInt64 in
+      let bufferPtr = UnsafeBufferPointer(start: ptr, count: count64)
+      return bufferPtr.reduce(UInt64(0), &+)
     }
+
   }
 
   func saveToFolder(_ url: URL, filename: String) -> URL? {
@@ -377,17 +358,13 @@ extension Data {
 
 extension String {
   var md5: String {
-    get {
-      return self.data(using: .utf8)!.md5
-    }
+    return self.data(using: .utf8)!.md5
   }
 
   var isDirectoryAsPath: Bool {
-    get {
-      var re = ObjCBool(false)
-      FileManager.default.fileExists(atPath: self, isDirectory: &re)
-      return re.boolValue
-    }
+    var re = ObjCBool(false)
+    FileManager.default.fileExists(atPath: self, isDirectory: &re)
+    return re.boolValue
   }
 
   var lowercasedPathExtension: String {
@@ -402,9 +379,8 @@ extension String {
     if let firstRange = self.range(of: str, options: [], range: range, locale: nil) {
       let nextRange = firstRange.upperBound..<self.endIndex
       return 1 + countOccurances(of: str, in: nextRange)
-    } else {
-      return 0
     }
+    return 0
   }
 }
 

@@ -69,58 +69,51 @@ class MPVTrack: NSObject {
 
 
   var readableTitle: String {
-    get {
-      return "\(self.idString) \(self.infoString)"
-    }
+    return "\(self.idString) \(self.infoString)"
   }
 
   var idString: String {
-    get {
-      return "#\(self.id)"
-    }
+    return "#\(self.id)"
   }
 
   var infoString: String {
-    get {
-      // title
-      let title = self.title ?? ""
-      // lang
-      let language: String
-      if let lang = self.lang, lang != "und", let rawLang = ISO639Helper.dictionary[lang] {
-        language = "[\(rawLang)]"
-      } else {
-        language = ""
-      }
-      // info
-      var components: [String] = []
-      if let ds = self.decoderDesc, let shortDs = ds.components(separatedBy: "(")[at: 0] {
-        components.append("\(shortDs.replacingOccurrences(of: " ", with: ""))")
-      }
-      switch self.type {
-      case .video:
-        if let w = self.demuxW, let h = self.demuxH {
-          components.append("\(w)\u{d7}\(h)")
-        }
-        if let fps = self.demuxFps {
-          components.append("\(fps.prettyFormat())fps")
-        }
-      case .audio:
-        if let ch = self.demuxChannelCount {
-          components.append("\(ch)ch")
-        }
-        if let sr = self.demuxSamplerate {
-          components.append("\((Double(sr)/1000).prettyFormat())kHz")
-        }
-      default:
-        break
-      }
-      let info = components.joined(separator: ", ")
-      // default
-      let isDefault = self.isDefault ? "(" + NSLocalizedString("quicksetting.item_default", comment: "Default") + ")" : ""
-      // final string
-      return [language, title, info, isDefault].filter { !$0.isEmpty }.joined(separator: " ")
+    // title
+    let title = self.title ?? ""
+    // lang
+    let language: String
+    if let lang = self.lang, lang != "und", let rawLang = ISO639Helper.dictionary[lang] {
+      language = "[\(rawLang)]"
+    } else {
+      language = ""
     }
-
+    // info
+    var components: [String] = []
+    if let ds = self.decoderDesc, let shortDs = ds.components(separatedBy: "(")[at: 0] {
+      components.append("\(shortDs.replacingOccurrences(of: " ", with: ""))")
+    }
+    switch self.type {
+    case .video:
+      if let w = self.demuxW, let h = self.demuxH {
+        components.append("\(w)\u{d7}\(h)")
+      }
+      if let fps = self.demuxFps {
+        components.append("\(fps.prettyFormat())fps")
+      }
+    case .audio:
+      if let ch = self.demuxChannelCount {
+        components.append("\(ch)ch")
+      }
+      if let sr = self.demuxSamplerate {
+        components.append("\((Double(sr)/1000).prettyFormat())kHz")
+      }
+    default:
+      break
+    }
+    let info = components.joined(separator: ", ")
+    // default
+    let isDefault = self.isDefault ? "(" + NSLocalizedString("quicksetting.item_default", comment: "Default") + ")" : ""
+    // final string
+    return [language, title, info, isDefault].filter { !$0.isEmpty }.joined(separator: " ")
   }
 
   var isAlbumart: Bool = false
@@ -142,18 +135,14 @@ class MPVTrack: NSObject {
   // Utils
 
   var isImageSub: Bool {
-    get {
-      if type == .video || type == .audio { return false }
-      // demux/demux_mkv.c:1727
-      return codec == "hdmv_pgs_subtitle" || codec == "dvb_subtitle"
-    }
+    if type == .video || type == .audio { return false }
+    // demux/demux_mkv.c:1727
+    return codec == "hdmv_pgs_subtitle" || codec == "dvb_subtitle"
   }
 
   var isAssSub: Bool {
-    get {
-      if type == .video || type == .audio { return false }
-      // demux/demux_mkv.c:1727
-      return codec == "ass"
-    }
+    if type == .video || type == .audio { return false }
+    // demux/demux_mkv.c:1727
+    return codec == "ass"
   }
 }

@@ -375,45 +375,42 @@ fileprivate let NSEventKeyCodeMapping: [Int: String] = [
 
 extension NSEvent {
   var readableKeyDescription: (String, String) {
-    get {
-
-      let rawKeyCharacter: String
-      if let char = NSEventKeyCodeMapping[Int(self.keyCode)] {
-        rawKeyCharacter = char
-      } else {
-        let inputSource = TISCopyCurrentASCIICapableKeyboardLayoutInputSource().takeUnretainedValue()
-        if let layoutData = TISGetInputSourceProperty(inputSource, kTISPropertyUnicodeKeyLayoutData) {
-          let dataRef = unsafeBitCast(layoutData, to: CFData.self)
-          let keyLayout = unsafeBitCast(CFDataGetBytePtr(dataRef), to: UnsafePointer<UCKeyboardLayout>.self)
-          var deadKeyState = UInt32(0)
-          let maxLength = 4
-          var actualLength = 0
-          var actualString = [UniChar](repeating: 0, count: maxLength)
-          let error = UCKeyTranslate(keyLayout,
-                                     UInt16(self.keyCode),
-                                     UInt16(kUCKeyActionDisplay),
-                                     UInt32((0 >> 8) & 0xFF),
-                                     UInt32(LMGetKbdType()),
-                                     OptionBits(kUCKeyTranslateNoDeadKeysBit),
-                                     &deadKeyState,
-                                     maxLength,
-                                     &actualLength,
-                                     &actualString)
-          if error == 0 {
-            rawKeyCharacter = String(utf16CodeUnits: &actualString, count: maxLength).uppercased()
-
-          } else {
-            rawKeyCharacter = KeyCodeHelper.keyMap[self.keyCode]?.0 ?? ""
-          }
+    let rawKeyCharacter: String
+    if let char = NSEventKeyCodeMapping[Int(self.keyCode)] {
+      rawKeyCharacter = char
+    } else {
+      let inputSource = TISCopyCurrentASCIICapableKeyboardLayoutInputSource().takeUnretainedValue()
+      if let layoutData = TISGetInputSourceProperty(inputSource, kTISPropertyUnicodeKeyLayoutData) {
+        let dataRef = unsafeBitCast(layoutData, to: CFData.self)
+        let keyLayout = unsafeBitCast(CFDataGetBytePtr(dataRef), to: UnsafePointer<UCKeyboardLayout>.self)
+        var deadKeyState = UInt32(0)
+        let maxLength = 4
+        var actualLength = 0
+        var actualString = [UniChar](repeating: 0, count: maxLength)
+        let error = UCKeyTranslate(keyLayout,
+                                   UInt16(self.keyCode),
+                                   UInt16(kUCKeyActionDisplay),
+                                   UInt32((0 >> 8) & 0xFF),
+                                   UInt32(LMGetKbdType()),
+                                   OptionBits(kUCKeyTranslateNoDeadKeysBit),
+                                   &deadKeyState,
+                                   maxLength,
+                                   &actualLength,
+                                   &actualString)
+        if error == 0 {
+          rawKeyCharacter = String(utf16CodeUnits: &actualString, count: maxLength).uppercased()
+          
         } else {
           rawKeyCharacter = KeyCodeHelper.keyMap[self.keyCode]?.0 ?? ""
         }
+      } else {
+        rawKeyCharacter = KeyCodeHelper.keyMap[self.keyCode]?.0 ?? ""
       }
-
-      return (([(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")] as [(NSEvent.ModifierFlags, String)])
-        .map { self.modifierFlags.contains($0.0) ? $0.1 : "" }
-        .joined()
-        .appending(rawKeyCharacter), rawKeyCharacter)
     }
+    
+    return (([(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")] as [(NSEvent.ModifierFlags, String)])
+      .map { self.modifierFlags.contains($0.0) ? $0.1 : "" }
+      .joined()
+      .appending(rawKeyCharacter), rawKeyCharacter)
   }
 }

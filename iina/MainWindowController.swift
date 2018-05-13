@@ -405,18 +405,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Outlets
 
   var standardWindowButtons: [NSButton] {
-    get {
-      return ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).compactMap {
-        window?.standardWindowButton($0)
-      }
+    return ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).compactMap {
+      window?.standardWindowButton($0)
     }
   }
 
   /** Get the `NSTextField` of widow's title. */
   var titleTextField: NSTextField? {
-    get {
-      return window?.standardWindowButton(.closeButton)?.superview?.subviews.compactMap({ $0 as? NSTextField }).first
-    }
+    return window?.standardWindowButton(.closeButton)?.superview?.subviews.compactMap({ $0 as? NSTextField }).first
   }
 
   /** Current OSC view. */
@@ -1545,14 +1541,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if isInFullScreen && Preference.bool(for: .blackOutMonitor) {
       blackOutOtherMonitors()
     }
-    NotificationCenter.default.post(name: .MainWindowChanged, object: nil)
+    NotificationCenter.default.post(name: .MainWindowChanged)
   }
 
   func windowDidResignMain(_ notification: Notification) {
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()
     }
-    NotificationCenter.default.post(name: .MainWindowChanged, object: nil)
+    NotificationCenter.default.post(name: .MainWindowChanged)
   }
 
   func windowWillMiniaturize(_ notification: Notification) {
@@ -1681,9 +1677,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     let osdTextSize = Preference.float(for: .osdTextSize)
     if #available(OSX 10.11, *) {
-      osdLabel.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize), weight: .regular)
+      osdLabel.font = .monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize), weight: .regular)
     } else {
-      osdLabel.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
+      osdLabel.font = .systemFont(ofSize: CGFloat(osdTextSize))
     }
     osdLabel.stringValue = osdString
 

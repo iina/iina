@@ -72,9 +72,7 @@ class PlayerCore: NSObject {
 
   @available(macOS 10.12.2, *)
   var touchBarSupport: TouchBarSupport {
-    get {
       return self._touchBarSupport as! TouchBarSupport
-    }
   }
   private var _touchBarSupport: Any?
 
@@ -1268,7 +1266,6 @@ class PlayerCore: NSObject {
    and `dheight` while taking pure audio files and video rotations into consideration.
    */
   var videoSizeForDisplay: (Int, Int) {
-    get {
       var width: Int
       var height: Int
 
@@ -1291,11 +1288,9 @@ class PlayerCore: NSObject {
         swap(&width, &height)
       }
       return (width, height)
-    }
   }
 
   var originalVideoSize: (Int, Int) {
-    get {
       if let w = info.videoWidth, let h = info.videoHeight {
         let netRotate = mpv.getInt(MPVProperty.videoParamsRotate) - mpv.getInt(MPVOption.Video.videoRotate)
         let rotate = netRotate >= 0 ? netRotate : netRotate + 360
@@ -1307,7 +1302,6 @@ class PlayerCore: NSObject {
       } else {
         return (0, 0)
       }
-    }
   }
 
   func getMediaTitle(withExtension: Bool = true) -> String {

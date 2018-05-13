@@ -13,24 +13,18 @@ import MASPreferences
 class PrefControlViewController: NSViewController, MASPreferencesViewController {
 
   override var nibName: NSNib.Name {
-    get {
-      return NSNib.Name("PrefControlViewController")
-    }
+    return NSNib.Name("PrefControlViewController")
   }
 
   var viewIdentifier: String = "PrefControlViewController"
 
   var toolbarItemImage: NSImage? {
-    get {
-      return #imageLiteral(resourceName: "toolbar_control")
-    }
+    return #imageLiteral(resourceName: "toolbar_control")
   }
 
   var toolbarItemLabel: String? {
-    get {
-      view.layoutSubtreeIfNeeded()
-      return NSLocalizedString("preference.control", comment: "Control")
-    }
+    view.layoutSubtreeIfNeeded()
+    return NSLocalizedString("preference.control", comment: "Control")
   }
 
   var hasResizableWidth: Bool = false

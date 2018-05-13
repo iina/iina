@@ -21,26 +21,24 @@ class OpenURLAccessoryViewController: NSViewController {
   private let chromeExtensionLink = "https://chrome.google.com/webstore/detail/open-in-iina/pdnojahnhpgmdhjdhgphgdcecehkbhfo"
 
   var url: URL? {
-    get {
-      guard !urlField.stringValue.isEmpty else { return nil }
-      let username = usernameField.stringValue
-      let password = passwordField.stringValue
-      guard var urlValue = urlField.stringValue.addingPercentEncoding(withAllowedCharacters: .urlAllowed) else {
-        return nil
-      }
-      if let url = URL(string: urlValue),
-        url.scheme == nil {
-        urlValue = "http://" + urlValue
-      }
-      guard let nsurl = NSURL(string: urlValue)?.standardized, let urlComponents = NSURLComponents(url: nsurl, resolvingAgainstBaseURL: false) else { return nil }
-      if !username.isEmpty {
-        urlComponents.user = username
-        if !password.isEmpty {
-          urlComponents.password = password
-        }
-      }
-      return urlComponents.url
+    guard !urlField.stringValue.isEmpty else { return nil }
+    let username = usernameField.stringValue
+    let password = passwordField.stringValue
+    guard var urlValue = urlField.stringValue.addingPercentEncoding(withAllowedCharacters: .urlAllowed) else {
+      return nil
     }
+    if let url = URL(string: urlValue),
+      url.scheme == nil {
+      urlValue = "http://" + urlValue
+    }
+    guard let nsurl = NSURL(string: urlValue)?.standardized, let urlComponents = NSURLComponents(url: nsurl, resolvingAgainstBaseURL: false) else { return nil }
+    if !username.isEmpty {
+      urlComponents.user = username
+      if !password.isEmpty {
+        urlComponents.password = password
+      }
+    }
+    return urlComponents.url
   }
 
   override func viewDidLoad() {

@@ -77,12 +77,10 @@ class OpenSubSupport {
     var fileSize: UInt64
 
     var dictionary: [String: String] {
-      get {
-        return [
-          "moviehash": hashValue,
-          "moviebytesize": "\(fileSize)"
-        ]
-      }
+      return [
+        "moviehash": hashValue,
+        "moviebytesize": "\(fileSize)"
+      ]
     }
   }
 

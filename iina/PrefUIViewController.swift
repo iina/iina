@@ -28,22 +28,16 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   var viewIdentifier: String = "PrefUIViewController"
 
   var toolbarItemImage: NSImage? {
-    get {
-      return #imageLiteral(resourceName: "toolbar_play")
-    }
+    return #imageLiteral(resourceName: "toolbar_play")
   }
 
   var toolbarItemLabel: String? {
-    get {
-      view.layoutSubtreeIfNeeded()
-      return NSLocalizedString("preference.ui", comment: "UI")
-    }
+    view.layoutSubtreeIfNeeded()
+    return NSLocalizedString("preference.ui", comment: "UI")
   }
 
   static var oscToolbarButtons: [Preference.ToolBarButton] {
-    get {
       return (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
-    }
   }
 
   var hasResizableWidth: Bool = false

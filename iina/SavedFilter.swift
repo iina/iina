@@ -21,13 +21,12 @@ class SavedFilter: NSObject {
   @objc var name: String
   @objc var filterString: String
   @objc var readableShortCutKey: String {
-    get {
-      return ([(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")] as [(NSEvent.ModifierFlags, String)])
-        .map { shortcutKeyModifiers.contains($0.0) ? $0.1 : "" }
-        .joined()
-        .appending(shortcutKey.uppercased())
-    }
+    return ([(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")] as [(NSEvent.ModifierFlags, String)])
+      .map { shortcutKeyModifiers.contains($0.0) ? $0.1 : "" }
+      .joined()
+      .appending(shortcutKey.uppercased())
   }
+
   @objc var isEnabled = false
   var shortcutKey: String
   var shortcutKeyModifiers: NSEvent.ModifierFlags

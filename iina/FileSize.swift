@@ -17,13 +17,11 @@ class FileSize {
     case gb = 1073741824
 
     var string: String {
-      get {
-        switch self {
-        case .b: return "B"
-        case .kb: return "K"
-        case .mb: return "M"
-        case .gb: return "G"
-        }
+      switch self {
+      case .b: return "B"
+      case .kb: return "K"
+      case .mb: return "M"
+      case .gb: return "G"
       }
     }
   }

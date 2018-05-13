@@ -15,9 +15,7 @@ class SettingsListCellView: NSView {
   }
 
   override var wantsUpdateLayer: Bool {
-    get {
-      return true
-    }
+    return true
   }
 
   override func updateLayer() {

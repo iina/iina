@@ -14,25 +14,19 @@ import Sparkle
 class PrefGeneralViewController: NSViewController, MASPreferencesViewController {
 
   override var nibName: NSNib.Name {
-    get {
-      return NSNib.Name("PrefGeneralViewController")
-    }
+    return NSNib.Name("PrefGeneralViewController")
   }
 
   var viewIdentifier: String = "PrefGeneralViewController"
 
   var toolbarItemImage: NSImage? {
-    get {
-      return NSImage(named: .preferencesGeneral)!
-    }
+    return NSImage(named: .preferencesGeneral)!
   }
 
   var toolbarItemLabel: String? {
-    get {
-      // dirty hack here: layout the view before `MASPreferencesWIndowController` getting `bounds`.
-      view.layoutSubtreeIfNeeded()
-      return NSLocalizedString("preference.general", comment: "General")
-    }
+    // dirty hack here: layout the view before `MASPreferencesWIndowController` getting `bounds`.
+    view.layoutSubtreeIfNeeded()
+    return NSLocalizedString("preference.general", comment: "General")
   }
 
   // view size is handled by AutoLayout, so it's not resizable

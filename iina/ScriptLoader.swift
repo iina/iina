@@ -13,9 +13,7 @@ class ScriptLoader {
   private var list: [LuaScript] = []
 
   var stringForOption: String {
-    get {
       return list.map { $0.filePath }.joined(separator: ",")
-    }
   }
 
   func add(defaultScript name: String) {

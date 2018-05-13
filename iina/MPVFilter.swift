@@ -62,35 +62,33 @@ class MPVFilter: NSObject {
 
   /** Convert the filter to a valid mpv filter string. */
   var stringFormat: String {
-    get {
-      var str = ""
-      // label
-      if let label = label { str += "@\(label):" }
-      // name
-      str += name
-      // params
-      if let rpstr = rawParamString {
-        // if is set by user
+    var str = ""
+    // label
+    if let label = label { str += "@\(label):" }
+    // name
+    str += name
+    // params
+    if let rpstr = rawParamString {
+      // if is set by user
+      str += "="
+      str += rpstr
+    } else if params != nil && params!.count > 0 {
+      // if have format info, print using the format
+      if type != nil, let format = MPVFilter.formats[type!] {
         str += "="
-        str += rpstr
-      } else if params != nil && params!.count > 0 {
-        // if have format info, print using the format
-        if type != nil, let format = MPVFilter.formats[type!] {
-          str += "="
-          str += format.components(separatedBy: ":").map { params![$0] ?? "" }.joined(separator: ":")
-          // else print param names
+        str += format.components(separatedBy: ":").map { params![$0] ?? "" }.joined(separator: ":")
+        // else print param names
+      } else {
+        str += "="
+        // special tweak for lavfi filters
+        if name == "lavfi" {
+          str += "[\(params!["graph"]!)]"
         } else {
-          str += "="
-          // special tweak for lavfi filters
-          if name == "lavfi" {
-            str += "[\(params!["graph"]!)]"
-          } else {
-            str += params!.map({ (k, v) -> String in return "\(k)=\(v)" }).joined(separator: ":")
-          }
+          str += params!.map({ (k, v) -> String in return "\(k)=\(v)" }).joined(separator: ":")
         }
       }
-      return str
     }
+    return str
   }
 
   // MARK: - Initializers

@@ -389,13 +389,11 @@ struct Preference {
     }
 
     var string: String {
-      get {
         switch self {
         case .no: return "no"
         case .exact: return "exact"
         case .fuzzy: return "fuzzy"
         case .all: return "all"
-        }
       }
     }
   }
@@ -412,12 +410,10 @@ struct Preference {
     }
 
     var string: String {
-      get {
-        switch self {
-        case .yes: return "yes"
-        case .force : return "force"
-        case .strip: return "strip"
-        }
+      switch self {
+      case .yes: return "yes"
+      case .force : return "force"
+      case .strip: return "strip"
       }
     }
   }
@@ -434,22 +430,18 @@ struct Preference {
     }
 
     var stringForX: String {
-      get {
-        switch self {
-        case .top: return "left"
-        case .center: return "center"
-        case .bottom: return "right"
-        }
+      switch self {
+      case .top: return "left"
+      case .center: return "center"
+      case .bottom: return "right"
       }
     }
 
     var stringForY: String {
-      get {
-        switch self {
-        case .top: return "top"
-        case .center: return "center"
-        case .bottom: return "bottom"
-        }
+      switch self {
+      case .top: return "top"
+      case .center: return "center"
+      case .bottom: return "bottom"
       }
     }
   }
@@ -467,13 +459,11 @@ struct Preference {
     }
 
     var string: String {
-      get {
-        switch self {
-        case .lavf: return "lavf"
-        case .tcp: return "tcp"
-        case .udp: return "udp"
-        case .http: return "http"
-        }
+      switch self {
+      case .lavf: return "lavf"
+      case .tcp: return "tcp"
+      case .udp: return "udp"
+      case .http: return "http"
       }
     }
   }
@@ -494,16 +484,14 @@ struct Preference {
     }
 
     var string: String {
-      get {
-        switch self {
-        case .png: return "png"
-        case .jpg: return "jpg"
-        case .jpeg: return "jpeg"
-        case .ppm: return "ppm"
-        case .pgm: return "pgm"
-        case .pgmyuv: return "pgmyuv"
-        case .tga: return "tga"
-        }
+      switch self {
+      case .png: return "png"
+      case .jpg: return "jpg"
+      case .jpeg: return "jpeg"
+      case .ppm: return "ppm"
+      case .pgm: return "pgm"
+      case .pgmyuv: return "pgmyuv"
+      case .tga: return "tga"
       }
     }
   }

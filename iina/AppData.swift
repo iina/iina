@@ -99,3 +99,9 @@ extension Notification.Name {
   static let HistoryUpdated = Notification.Name("HistoryUpdated")
   static let LegacyFullScreen = Notification.Name("LegacyFullScreen")
 }
+
+extension NotificationCenter {
+  func post(name: Notification.Name) {
+    post(name: name, object: nil)
+  }
+}

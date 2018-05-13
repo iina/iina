@@ -35,7 +35,10 @@ class InitialWindowController: NSWindowController {
   @IBOutlet weak var lastPositionLabel: NSTextField!
   @IBOutlet weak var recentFilesTableTopConstraint: NSLayoutConstraint!
 
-  lazy var recentDocuments: [URL] = NSDocumentController.shared.recentDocumentURLs
+  lazy var recentDocuments: [URL] = {
+    NSDocumentController.shared.recentDocumentURLs.filter { $0 != lastPlaybackURL }
+  }()
+  private var lastPlaybackURL: URL?
 
   init(playerCore: PlayerCore) {
     self.player = playerCore
@@ -77,6 +80,7 @@ class InitialWindowController: NSWindowController {
     if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
       FileManager.default.fileExists(atPath: lastFile.path) {
       // if last file exists
+      lastPlaybackURL = lastFile
       lastFileContainerView.isHidden = false
       lastFileContainerView.normalBackground = CGColor(gray: 1, alpha: 0.1)
       lastFileContainerView.hoverBackground = CGColor(gray: 0.5, alpha: 0.1)
@@ -94,6 +98,7 @@ class InitialWindowController: NSWindowController {
 
   func reloadData() {
     loadLastPlaybackInfo()
+    recentDocuments = NSDocumentController.shared.recentDocumentURLs.filter { $0 == lastPlaybackURL }
     recentFilesTableView.reloadData()
   }
 }

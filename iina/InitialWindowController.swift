@@ -179,7 +179,7 @@ class InitialWindowViewActionButton: NSView {
     } else {
       if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
         let windowController = window?.windowController as? InitialWindowController {
-        windowController.player.openURL(lastFile)
+        windowController.player.openURL(lastFile, shouldAutoLoad: true)
       }
     }
   }

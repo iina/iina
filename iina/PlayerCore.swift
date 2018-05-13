@@ -447,9 +447,6 @@ class PlayerCore: NSObject {
     let a = mpv.getDouble(MPVOption.PlaybackControl.abLoopA)
     let b = mpv.getDouble(MPVOption.PlaybackControl.abLoopB)
     if a != 0 || b != 0 {
-      mpv.setDouble(MPVOption.PlaybackControl.abLoopA, 0)
-      mpv.setDouble(MPVOption.PlaybackControl.abLoopB, 0)
-      mpv.command(.abLoop)
       info.abLoopStatus = 0
     }
   }

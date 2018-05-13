@@ -274,6 +274,7 @@ class MPVController: NSObject {
 
     setUserOption(PK.ytdlEnabled, type: .bool, forName: MPVOption.ProgramBehavior.ytdl)
     setUserOption(PK.ytdlRawOptions, type: .string, forName: MPVOption.ProgramBehavior.ytdlRawOptions)
+    chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.resetOnNextFile, "ab-loop-a,ab-loop-b"))
 
     // Set user defined conf dir.
     if Preference.bool(for: .useUserDefinedConfDir) {

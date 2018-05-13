@@ -63,6 +63,17 @@ class InitialWindowController: NSWindowController {
     versionLabel.stringValue = isStableRelease ? version : "\(version) (\(build))"
     betaIndicatorView.isHidden = isStableRelease
 
+    loadLastPlaybackInfo()
+
+    recentFilesTableView.delegate = self
+    recentFilesTableView.dataSource = self
+
+    if #available(OSX 10.11, *) {
+      visualEffectView.material = .ultraDark
+    }
+  }
+
+  func loadLastPlaybackInfo() {
     if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
       FileManager.default.fileExists(atPath: lastFile.path) {
       // if last file exists
@@ -79,13 +90,11 @@ class InitialWindowController: NSWindowController {
       lastFileContainerView.isHidden = true
       recentFilesTableTopConstraint.constant = 24
     }
+  }
 
-    recentFilesTableView.delegate = self
-    recentFilesTableView.dataSource = self
-
-    if #available(OSX 10.11, *) {
-      visualEffectView.material = .ultraDark
-    }
+  func reloadData() {
+    loadLastPlaybackInfo()
+    recentFilesTableView.reloadData()
   }
 }
 

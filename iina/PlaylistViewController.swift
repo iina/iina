@@ -399,10 +399,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           // get related data and schedule a reload
           cellView.durationLabel.stringValue = ""
           cellView.playbackProgressView.percentage = 0
-          player.playlistQueue.async {
-            self.player.refreshCachedVideoProgress(forVideoPath: item.filename)
-            DispatchQueue.main.async {
-              self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
+          if Preference.bool(for: .prefetchPlaylistVideoDuration) {
+            player.playlistQueue.async {
+              self.player.refreshCachedVideoProgress(forVideoPath: item.filename)
+              DispatchQueue.main.async {
+                self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
+              }
             }
           }
         }

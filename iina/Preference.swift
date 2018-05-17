@@ -122,6 +122,7 @@ struct Preference {
     static let oscPosition = Key("oscPosition")
 
     static let playlistWidth = Key("playlistWidth")
+    static let prefetchPlaylistVideoDuration = Key("prefetchPlaylistVideoDuration")
 
     static let enableThumbnailPreview = Key("enableThumbnailPreview")
     static let maxThumbnailPreviewCacheSize = Key("maxThumbnailPreviewCacheSize")
@@ -621,6 +622,7 @@ struct Preference {
     .controlBarToolbarButtons: [ToolBarButton.pip.rawValue, ToolBarButton.playlist.rawValue, ToolBarButton.settings.rawValue],
     .oscPosition: OSCPosition.floating.rawValue,
     .playlistWidth: 270,
+    .prefetchPlaylistVideoDuration: true,
     .themeMaterial: Theme.dark.rawValue,
     .osdAutoHideTimeout: Float(1),
     .osdTextSize: Float(20),

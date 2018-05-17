@@ -459,6 +459,19 @@ class Utility {
     return filename.md5
   }
 
+  static func playbackProgressFromWatchLater(_ mpvMd5: String) -> VideoTime? {
+    let fileURL = Utility.watchLaterURL.appendingPathComponent(mpvMd5)
+    if let reader = StreamReader(path: fileURL.path),
+      let firstLine = reader.nextLine(),
+      firstLine.hasPrefix("start="),
+      let progressString = firstLine.components(separatedBy: "=").last,
+      let progress = Double(progressString) {
+      return VideoTime(progress)
+    } else {
+      return nil
+    }
+  }
+
   // MARK: - Util classes
 
   class FontAttributes {

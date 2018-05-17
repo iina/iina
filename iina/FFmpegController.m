@@ -307,4 +307,29 @@ return -1;\
   }
 }
 
++ (double)probeVideoDurationForFile:(nonnull NSString *)file
+{
+  int ret;
+  int64_t duration;
+
+  char *cFilename = strdup(file.fileSystemRepresentation);
+
+  AVFormatContext *pFormatCtx = NULL;
+  ret = avformat_open_input(&pFormatCtx, cFilename, NULL, NULL);
+  free(cFilename);
+  if (ret < 0) return -1;
+
+  duration = pFormatCtx->duration;
+  if (duration <= 0) {
+    ret = avformat_find_stream_info(pFormatCtx, NULL);
+    if (ret < 0) return -1;
+    duration = pFormatCtx->duration;
+  }
+
+  avformat_close_input(&pFormatCtx);
+  avformat_free_context(pFormatCtx);
+
+  return (double)duration / AV_TIME_BASE;
+}
+
 @end

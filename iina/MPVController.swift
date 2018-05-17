@@ -173,8 +173,8 @@ class MPVController: NSObject {
     }
 
     chkErr(mpv_set_option_string(mpv, "watch-later-directory", Utility.watchLaterURL.path))
-    setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.ProgramBehavior.savePositionOnQuit)
-    setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback")
+    chkErr(mpv_set_option_string(mpv, "resume-playback", "yes"))
+    chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.savePositionOnQuit, "no"))
 
     setUserOption(.initialWindowSizePosition, type: .string, forName: MPVOption.Window.geometry)
 
@@ -612,6 +612,9 @@ class MPVController: NSObject {
     player.info.displayWidth = 0
     player.info.displayHeight = 0
     player.info.videoDuration = VideoTime(duration)
+    if let filename = getString(MPVProperty.path) {
+      player.info.cachedVideoDurationAndProgress[filename]?.duration = duration
+    }
     player.info.videoPosition = VideoTime(pos)
     player.fileLoaded()
     fileLoaded = true

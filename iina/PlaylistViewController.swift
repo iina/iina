@@ -383,11 +383,38 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           cellView.prefixBtn.hasPrefix = false
           cellView.textField?.stringValue = filename
         }
+        // playback progress and duration
+        if #available(OSX 10.11, *) {
+          cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
+        }
+        if let cached = player.info.cachedVideoDurationAndProgress[item.filename],
+          let duration = cached.duration {
+          // if it's cached
+          cellView.durationLabel.stringValue = VideoTime(duration).stringRepresentation
+          if let progress = cached.progress {
+            cellView.playbackProgressView.percentage = progress / duration
+            cellView.playbackProgressView.needsDisplay = true
+          }
+        } else {
+          // get related data and schedule a reload
+          cellView.durationLabel.stringValue = ""
+          cellView.playbackProgressView.percentage = 0
+          if Preference.bool(for: .prefetchPlaylistVideoDuration) {
+            player.playlistQueue.async {
+              self.player.refreshCachedVideoProgress(forVideoPath: item.filename)
+              DispatchQueue.main.async {
+                self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
+              }
+            }
+          }
+        }
         // sub button
         if let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
           cellView.subBtn.isHidden = false
+          cellView.subBtnWidthConstraint.constant = 12
         } else {
           cellView.subBtn.isHidden = true
+          cellView.subBtnWidthConstraint.constant = 0
         }
         cellView.subBtn.image?.isTemplate = true
       }
@@ -587,7 +614,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 class PlaylistTrackCellView: NSTableCellView {
 
   @IBOutlet weak var subBtn: NSButton!
+  @IBOutlet weak var subBtnWidthConstraint: NSLayoutConstraint!
   @IBOutlet weak var prefixBtn: PlaylistPrefixButton!
+  @IBOutlet weak var durationLabel: NSTextField!
+  @IBOutlet weak var playbackProgressView: PlaylistPlaybackProgressView!
 
 }
 

@@ -47,17 +47,7 @@ class PlaybackHistory: NSObject, NSCoding {
     self.addedDate = date
     self.duration = VideoTime(duration)
 
-    // try read mpv watch_later file
-
-    let fileURL = Utility.watchLaterURL.appendingPathComponent(mpvMd5)
-    if let reader = StreamReader(path: fileURL.path) {
-      if let firstLine = reader.nextLine(),
-        firstLine.hasPrefix("start="),
-        let progressString = firstLine.components(separatedBy: "=").last,
-        let progress = Double(progressString) {
-        self.mpvProgress = VideoTime(progress)
-      }
-    }
+    self.mpvProgress = Utility.playbackProgressFromWatchLater(mpvMd5)
   }
 
   init(url: URL, duration: Double, name: String? = nil) {

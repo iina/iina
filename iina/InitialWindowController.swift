@@ -11,6 +11,7 @@ import Cocoa
 fileprivate extension NSUserInterfaceItemIdentifier {
   static let openFile = NSUserInterfaceItemIdentifier("openFile")
   static let openURL = NSUserInterfaceItemIdentifier("openURL")
+  static let resumeLast = NSUserInterfaceItemIdentifier("resumeLast")
 }
 
 class InitialWindowController: NSWindowController {
@@ -28,8 +29,16 @@ class InitialWindowController: NSWindowController {
   @IBOutlet weak var visualEffectView: NSVisualEffectView!
   @IBOutlet weak var mainView: NSView!
   @IBOutlet weak var betaIndicatorView: BetaIndicatorView!
+  @IBOutlet weak var lastFileContainerView: InitialWindowViewActionButton!
+  @IBOutlet weak var lastFileIcon: NSImageView!
+  @IBOutlet weak var lastFileNameLabel: NSTextField!
+  @IBOutlet weak var lastPositionLabel: NSTextField!
+  @IBOutlet weak var recentFilesTableTopConstraint: NSLayoutConstraint!
 
-  lazy var recentDocuments: [URL] = NSDocumentController.shared.recentDocumentURLs
+  lazy var recentDocuments: [URL] = {
+    NSDocumentController.shared.recentDocumentURLs.filter { $0 != lastPlaybackURL }
+  }()
+  private var lastPlaybackURL: URL?
 
   init(playerCore: PlayerCore) {
     self.player = playerCore
@@ -57,12 +66,40 @@ class InitialWindowController: NSWindowController {
     versionLabel.stringValue = isStableRelease ? version : "\(version) (\(build))"
     betaIndicatorView.isHidden = isStableRelease
 
+    loadLastPlaybackInfo()
+
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
 
     if #available(OSX 10.11, *) {
       visualEffectView.material = .ultraDark
     }
+  }
+
+  func loadLastPlaybackInfo() {
+    if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
+      FileManager.default.fileExists(atPath: lastFile.path) {
+      // if last file exists
+      lastPlaybackURL = lastFile
+      lastFileContainerView.isHidden = false
+      lastFileContainerView.normalBackground = CGColor(gray: 1, alpha: 0.1)
+      lastFileContainerView.hoverBackground = CGColor(gray: 0.5, alpha: 0.1)
+      lastFileContainerView.pressedBackground = CGColor(gray: 0, alpha: 0.1)
+      lastFileIcon.image = #imageLiteral(resourceName: "history").tinted(.white)
+      lastFileNameLabel.stringValue = lastFile.lastPathComponent
+      let lastPosition = Preference.double(for: .iinaLastPlayedFilePosition)
+      lastPositionLabel.stringValue = VideoTime(lastPosition).stringRepresentation
+      recentFilesTableTopConstraint.constant = 42
+    } else {
+      lastFileContainerView.isHidden = true
+      recentFilesTableTopConstraint.constant = 24
+    }
+  }
+
+  func reloadData() {
+    loadLastPlaybackInfo()
+    recentDocuments = NSDocumentController.shared.recentDocumentURLs.filter { $0 == lastPlaybackURL }
+    recentFilesTableView.reloadData()
   }
 }
 
@@ -113,15 +150,20 @@ class InitialWindowContentView: NSView {
 
 class InitialWindowViewActionButton: NSView {
 
-  private let normalBackground = CGColor(gray: 0, alpha: 0)
-  private let hoverBackground = CGColor(gray: 0, alpha: 0.25)
-  private let pressedBackground = CGColor(gray: 0, alpha: 0.35)
+  var normalBackground = CGColor(gray: 0, alpha: 0) {
+    didSet {
+      self.layer?.backgroundColor = normalBackground
+    }
+  }
+  var hoverBackground = CGColor(gray: 0, alpha: 0.25)
+  var pressedBackground = CGColor(gray: 0, alpha: 0.35)
 
   var action: Selector?
 
   override func awakeFromNib() {
     self.wantsLayer = true
     self.layer?.cornerRadius = 4
+    self.layer?.backgroundColor = normalBackground
     self.addTrackingArea(NSTrackingArea(rect: self.bounds, options: [.activeInKeyWindow, .mouseEnteredAndExited], owner: self, userInfo: nil))
   }
 
@@ -137,8 +179,13 @@ class InitialWindowViewActionButton: NSView {
     self.layer?.backgroundColor = pressedBackground
     if self.identifier == .openFile {
       (NSApp.delegate as! AppDelegate).openFile(self)
-    } else {
+    } else if self.identifier == .openURL {
       (NSApp.delegate as! AppDelegate).openURL(self)
+    } else {
+      if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
+        let windowController = window?.windowController as? InitialWindowController {
+        windowController.player.openURL(lastFile, shouldAutoLoad: true)
+      }
     }
   }
 

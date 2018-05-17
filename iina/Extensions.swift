@@ -461,6 +461,23 @@ extension NSTextField {
 
 }
 
+extension NSImage {
+  func tinted(_ tintColor: NSColor) -> NSImage {
+    guard self.isTemplate else { return self }
+
+    let image = self.copy() as! NSImage
+    image.lockFocus()
+
+    tintColor.set()
+    NSRect(origin: .zero, size: image.size).fill(using: .sourceAtop)
+
+    image.unlockFocus()
+    image.isTemplate = false
+
+    return image
+  }
+}
+
 
 extension NSPasteboard.PasteboardType {
   static let nsURL = NSPasteboard.PasteboardType("NSURL")

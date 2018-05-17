@@ -188,6 +188,7 @@
 		84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */; };
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
+		E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */; };
 		E33836852026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33836832026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift */; };
 		E3383689202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3383687202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift */; };
 		E338368A202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3383688202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib */; };
@@ -978,6 +979,7 @@
 		D27E35E01E379B700064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D2B411421E5336AD002819E1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
 		D2B411431E5336AE002819E1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistPlaybackProgressView.swift; sourceTree = "<group>"; };
 		E33836832026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefOSCToolbarSettingsSheetController.swift; sourceTree = "<group>"; };
 		E3383687202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefOSCToolbarDraggingItemViewController.swift; sourceTree = "<group>"; };
 		E3383688202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefOSCToolbarDraggingItemViewController.xib; sourceTree = "<group>"; };
@@ -1528,6 +1530,7 @@
 				84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */,
 				841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */,
 				840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */,
+				E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */,
 			);
 			name = Accessories;
 			sourceTree = "<group>";
@@ -1908,6 +1911,7 @@
 				84D0FB7E1F5E519300C6A6A7 /* FreeSelectingViewController.swift in Sources */,
 				840D47A01DFEFC49000D9A64 /* KeyRecordView.swift in Sources */,
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
+				E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */,
 				84D123B41ECAA405004E0D53 /* TouchBarSupport.swift in Sources */,
 				84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */,
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,

@@ -85,7 +85,7 @@ class InitialWindowController: NSWindowController {
       lastFileContainerView.normalBackground = CGColor(gray: 1, alpha: 0.1)
       lastFileContainerView.hoverBackground = CGColor(gray: 0.5, alpha: 0.1)
       lastFileContainerView.pressedBackground = CGColor(gray: 0, alpha: 0.1)
-      lastFileIcon.image = NSImage(named: NSImage.Name("history"))?.tinted(withColor: .white)
+      lastFileIcon.image = #imageLiteral(resourceName: "history").tinted(.white)
       lastFileNameLabel.stringValue = lastFile.lastPathComponent
       let lastPosition = Preference.double(for: .iinaLastPlayedFilePosition)
       lastPositionLabel.stringValue = VideoTime(lastPosition).stringRepresentation

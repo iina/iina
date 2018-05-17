@@ -462,14 +462,14 @@ extension NSTextField {
 }
 
 extension NSImage {
-  func tinted(withColor tintColor: NSColor) -> NSImage {
+  func tinted(_ tintColor: NSColor) -> NSImage {
     guard self.isTemplate else { return self }
 
     let image = self.copy() as! NSImage
     image.lockFocus()
 
     tintColor.set()
-    NSMakeRect(0, 0, image.size.width, image.size.height).fill(using: .sourceAtop)
+    NSRect(origin: .zero, size: image.size).fill(using: .sourceAtop)
 
     image.unlockFocus()
     image.isTemplate = false

@@ -249,8 +249,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private var oscPosition: Preference.OSCPosition
   private var oscIsInitialized = false
   private var useExtractSeek: Preference.SeekOption
-  private var relativeSeekAmount: Int = 3
-  private var volumeScrollAmount: Int = 4
+  private var relativeSeekAmount: Int
+  private var volumeScrollAmount: Int
   private var horizontalScrollAction: Preference.ScrollAction
   private var verticalScrollAction: Preference.ScrollAction
   private var arrowBtnFunction: Preference.ArrowButtonAction
@@ -379,8 +379,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case PK.maxVolume.rawValue:
       if let newValue = change[.newKey] as? Int {
         volumeSlider.maxValue = Double(newValue)
-        if self.player.mpv.getDouble(MPVOption.Audio.volume) > Double(newValue) {
-          self.player.mpv.setDouble(MPVOption.Audio.volume, Double(newValue))
+        if player.mpv.getDouble(MPVOption.Audio.volume) > Double(newValue) {
+          player.mpv.setDouble(MPVOption.Audio.volume, Double(newValue))
         }
       }
 
@@ -508,6 +508,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     horizontalScrollAction = Preference.enum(for: .horizontalScrollAction)
     verticalScrollAction = Preference.enum(for: .verticalScrollAction)
     useExtractSeek = Preference.enum(for: .useExactSeek)
+    relativeSeekAmount = Preference.integer(for: .relativeSeekAmount)
+    volumeScrollAmount = Preference.integer(for: .volumeScrollAmount)
     arrowBtnFunction = Preference.enum(for: .arrowButtonAction)
     singleClickAction = Preference.enum(for: .singleClickAction)
     doubleClickAction = Preference.enum(for: .doubleClickAction)

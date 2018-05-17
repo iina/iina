@@ -8,6 +8,8 @@
 
 import Cocoa
 
+fileprivate typealias PK = Preference.Key
+
 fileprivate let DefaultPlaylistHeight: CGFloat = 300
 fileprivate let AutoHidePlaylistThreshold: CGFloat = 200
 fileprivate let AnimationDurationShowControl: TimeInterval = 0.2
@@ -21,6 +23,44 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   unowned var player: PlayerCore
 
   var menuActionHandler: MainMenuActionHandler!
+
+  // MARK: - Observed user defaults
+
+  private let observedPrefKeys: [Preference.Key] = [
+    .showRemainingTime,
+    .alwaysFloatOnTop,
+    .maxVolume
+  ]
+
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+
+    guard let keyPath = keyPath, let change = change else { return }
+
+    switch keyPath {
+
+    case PK.showRemainingTime.rawValue:
+      if let newValue = change[.newKey] as? Bool {
+        rightLabel.mode = newValue ? .remaining : .duration
+      }
+
+    case PK.alwaysFloatOnTop.rawValue:
+      if let newValue = change[.newKey] as? Bool {
+        self.isOntop = newValue
+        setWindowFloatingOnTop(newValue)
+      }
+
+    case PK.maxVolume.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        volumeSlider.maxValue = Double(newValue)
+        if player.mpv.getDouble(MPVOption.Audio.volume) > Double(newValue) {
+          player.mpv.setDouble(MPVOption.Audio.volume, Double(newValue))
+        }
+      }
+
+    default:
+      return
+    }
+  }
 
   @IBOutlet weak var muteButton: NSButton!
   @IBOutlet weak var volumeButton: NSButton!
@@ -131,7 +171,24 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
 
     updateVolume()
 
+    if Preference.bool(for: .alwaysFloatOnTop) {
+      setWindowFloatingOnTop(true)
+    }
+    volumeSlider.maxValue = Double(Preference.integer(for: .maxVolume))
     volumePopover.delegate = self
+
+    // add use default observers
+    observedPrefKeys.forEach { key in
+      UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
+    }
+  }
+
+  deinit {
+    ObjcUtils.silenced {
+      for key in self.observedPrefKeys {
+        UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
+      }
+    }
   }
 
   func windowWillClose(_ notification: Notification) {

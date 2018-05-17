@@ -249,7 +249,7 @@ class AutoFileMatcher {
   private func forceMatchUnmatchedVideos() throws {
     let unmatchedSubs = subtitles.filter { !$0.isMatched }
     guard unmatchedVideos.count * unmatchedSubs.count < 200 * 200 else {
-      Utility.log("Stopped auto matching subs - too much files")
+      Utility.log("Stopped auto matching subs - too many files")
       return
     }
     if unmatchedSubs.count > 0 && unmatchedVideos.count > 0 {

@@ -207,14 +207,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  private func showWelcomeWindow(shouldRefresh: Bool = false) {
+  private func showWelcomeWindow(checkingForUpdatedData: Bool = false) {
     let actionRawValue = Preference.integer(for: .actionAfterLaunch)
     let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
     switch action {
     case .welcomeWindow:
       let window = PlayerCore.first.initialWindow!
       window.showWindow(nil)
-      if (shouldRefresh) {
+      if checkingForUpdatedData {
         window.reloadData()
       }
     case .openPanel:

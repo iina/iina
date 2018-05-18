@@ -656,6 +656,8 @@ class PlaylistView: NSView {
     addCursorRect(rect, cursor: .resizeLeftRight)
   }
 
+  override var allowsVibrancy: Bool { return true }
+
 }
 
 

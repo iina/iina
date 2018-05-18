@@ -77,7 +77,8 @@ class InitialWindowController: NSWindowController {
   }
 
   func loadLastPlaybackInfo() {
-    if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
+    if Preference.bool(for: .recordRecentFiles),
+      let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
       FileManager.default.fileExists(atPath: lastFile.path) {
       // if last file exists
       lastPlaybackURL = lastFile

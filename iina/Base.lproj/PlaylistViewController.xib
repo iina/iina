@@ -135,7 +135,7 @@
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yEn-uv-K8Z">
                                                                             <rect key="frame" x="183" y="2" width="33" height="14"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="zbw-ad-lgl">
-                                                                                <font key="font" metaFont="system" size="11"/>
+                                                                                <font key="font" metaFont="smallSystem"/>
                                                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -296,7 +296,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="6tr-hz-bdD">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="31" rowSizeStyle="automatic" viewBased="YES" id="BvG-MR-6LX">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
@@ -454,6 +454,7 @@
         </menu>
         <viewController id="Eqp-Cu-P2E" userLabel="Popover View Controller" customClass="SubPopoverViewController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="heightConstraint" destination="m6T-24-BAu" id="tMH-lb-fgO"/>
                 <outlet property="playlistTableView" destination="xIa-sI-0Xn" id="oWV-LD-2Mc"/>
                 <outlet property="tableView" destination="puj-Kl-qOI" id="arp-qx-T18"/>
                 <outlet property="view" destination="3YN-KY-vJP" id="mUs-lU-VoR"/>
@@ -468,13 +469,13 @@
             <rect key="frame" x="0.0" y="0.0" width="240" height="96"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="hPw-DF-M14">
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="hPw-DF-M14">
                     <rect key="frame" x="8" y="28" width="224" height="42"/>
                     <clipView key="contentView" drawsBackground="NO" id="6rI-3b-JZo">
                         <rect key="frame" x="0.0" y="0.0" width="224" height="42"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="14" id="puj-Kl-qOI">
+                            <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="16" id="puj-Kl-qOI">
                                 <rect key="frame" x="0.0" y="0.0" width="403" height="42"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -502,6 +503,9 @@
                             </tableView>
                         </subviews>
                     </clipView>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="m6T-24-BAu"/>
+                    </constraints>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="UfV-aK-DSE">
                         <rect key="frame" x="-100" y="-100" width="224" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -532,7 +536,7 @@
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="caG-VQ-czp" secondAttribute="bottom" constant="8" id="4eE-dY-YGi"/>
-                <constraint firstAttribute="bottom" secondItem="hPw-DF-M14" secondAttribute="bottom" constant="28" id="N8C-cA-cdS"/>
+                <constraint firstItem="caG-VQ-czp" firstAttribute="top" secondItem="hPw-DF-M14" secondAttribute="bottom" constant="4" id="N8C-cA-cdS"/>
                 <constraint firstItem="hPw-DF-M14" firstAttribute="top" secondItem="KT6-lD-Wq7" secondAttribute="bottom" constant="4" id="Q2F-IQ-keH"/>
                 <constraint firstAttribute="trailing" secondItem="caG-VQ-czp" secondAttribute="trailing" constant="8" id="Rvu-JH-7u1"/>
                 <constraint firstAttribute="trailing" secondItem="hPw-DF-M14" secondAttribute="trailing" constant="8" id="ool-fU-tIz"/>

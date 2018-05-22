@@ -98,6 +98,13 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     
     // register for drag and drop
     playlistTableView.registerForDraggedTypes([.iinaPlaylistItem, .nsFilenames])
+
+    if let popoverView = subPopover.contentViewController?.view,
+      popoverView.trackingAreas.isEmpty {
+      popoverView.addTrackingArea(NSTrackingArea(rect: popoverView.bounds,
+                                                 options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved],
+                                                 owner: mainWindow, userInfo: ["obj": 0]))
+    }
   }
 
   override func viewDidAppear() {

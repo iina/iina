@@ -483,6 +483,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
+  lazy var subPopoverView = playlistView.subPopover.contentViewController?.view
+
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
   private var oscFloatingLeadingTrailingConstraint: [NSLayoutConstraint]?
 
@@ -931,7 +933,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         if event.clickCount == 1 {
           // single click or first click of a double click
           // disable single click for sideBar / OSC / titleBar
-          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
+          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
           // single click
           if doubleClickAction == .none {
             // if double click action is none, it's safe to perform action immediately
@@ -944,7 +946,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         } else if event.clickCount == 2 {
           // double click
           // disable double click for sideBar / OSC
-          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
+          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
           // double click
           guard doubleClickAction != .none else { return }
           // if already scheduled a single click timer, invalidate it
@@ -962,7 +964,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override func rightMouseUp(with event: NSEvent) {
     // Disable mouseUp for sideBar / OSC / titleBar
-    guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
+    guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
     
     performMouseAction(Preference.enum(for: .rightClickAction))
   }

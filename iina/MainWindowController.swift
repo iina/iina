@@ -483,7 +483,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
-  lazy var subPopoverView = playlistView.subPopover.contentViewController?.view
+  lazy var subPopoverView = playlistView.subPopover?.contentViewController?.view
 
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
   private var oscFloatingLeadingTrailingConstraint: [NSLayoutConstraint]?
@@ -926,7 +926,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       Preference.set(Int(sideBarWidthConstraint.constant), for: .playlistWidth)
     } else {
       // if it's a mouseup after clicking
-      if !isMouseEvent(event, inAnyOf: [sideBarView]) && sideBarStatus != .hidden {
+      if !isMouseEvent(event, inAnyOf: [sideBarView, subPopoverView]) && sideBarStatus != .hidden {
         // if sidebar is shown, hide it first
         hideSideBar()
       } else {
@@ -1073,6 +1073,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override func scrollWheel(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
+    guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
 
     let isMouse = event.phase.isEmpty
     let isTrackpadBegan = event.phase.contains(.began)

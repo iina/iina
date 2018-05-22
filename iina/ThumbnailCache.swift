@@ -16,7 +16,7 @@ class ThumbnailCache {
   static private let sizeofUInt64 = MemoryLayout<UInt64>.size
   static private let sizeofUInt8 = MemoryLayout<UInt8>.size
   
-  static private let sizeofMetadata = sizeofInt64 + sizeofUInt64 + sizeofInt64
+  static private let sizeofMetadata = sizeofUInt8 + sizeofUInt64 + sizeofInt64
 
   
   static private let imageProperties: [NSBitmapImageRep.PropertyKey: Any] = [

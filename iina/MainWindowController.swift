@@ -45,7 +45,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Constants
 
   /** Minimum window size. */
-  let minSize = NSMakeSize(250, 120)
+  let minSize = NSMakeSize(285, 120)
 
   /** For Force Touch. */
   let minimumPressDuration: TimeInterval = 0.5
@@ -295,7 +295,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.oscPosition.rawValue:
       if let newValue = change[.newKey] as? Int {
-        setupOnScreenController(position: Preference.OSCPosition(rawValue: newValue) ?? .floating)
+        setupOnScreenController(withPosition: Preference.OSCPosition(rawValue: newValue) ?? .floating)
       }
 
     case PK.showChapterPos.rawValue:
@@ -569,7 +569,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fragControlView.addView(fragControlViewLeftView, in: .center)
     fragControlView.addView(fragControlViewMiddleView, in: .center)
     fragControlView.addView(fragControlViewRightView, in: .center)
-    setupOnScreenController(position: oscPosition)
+    setupOnScreenController(withPosition: oscPosition)
     let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
     setupOSCToolbarButtons(buttons)
 
@@ -697,7 +697,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  private func setupOnScreenController(position newPosition: Preference.OSCPosition) {
+  private func setupOnScreenController(withPosition newPosition: Preference.OSCPosition) {
 
     guard !oscIsInitialized || oscPosition != newPosition else { return }
     oscIsInitialized = true
@@ -784,8 +784,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscTopMainView.addView(fragControlView, in: .leading)
       oscTopMainView.addView(fragSliderView, in: .leading)
       oscTopMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscTopMainView.setVisibilityPriority(.detachEarly, for: fragSliderView)
-      oscTopMainView.setVisibilityPriority(.mustHold, for: fragVolumeView)
+      oscTopMainView.setVisibilityPriority(.mustHold, for: fragSliderView)
+      oscTopMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
       oscTopMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     case .bottom:
       currentControlBar = controlBarBottom
@@ -796,8 +796,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscBottomMainView.addView(fragControlView, in: .leading)
       oscBottomMainView.addView(fragSliderView, in: .leading)
       oscBottomMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscBottomMainView.setVisibilityPriority(.detachEarly, for: fragSliderView)
-      oscBottomMainView.setVisibilityPriority(.mustHold, for: fragVolumeView)
+      oscBottomMainView.setVisibilityPriority(.mustHold, for: fragSliderView)
+      oscBottomMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
       oscBottomMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     }
 

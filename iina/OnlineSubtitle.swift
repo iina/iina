@@ -63,8 +63,10 @@ class OnlineSubtitle: NSObject {
       subSupport.hash(url)
       .then { info in
         subSupport.request(info)
-      }.map { subs in
+      }.done { subs in
         callback(subs)
+      }.ensure {
+        playerCore.hideOSD()
       }.catch { error in
         let osdMessage: OSDMessage
         switch error {
@@ -78,8 +80,6 @@ class OnlineSubtitle: NSObject {
           playerCore.sendOSD(osdMessage)
           playerCore.isSearchingOnlineSubtitle = false
         }
-      }.finally {
-        playerCore.hideOSD()
       }
     case .openSub:
       // opensubtitles
@@ -106,7 +106,7 @@ class OnlineSubtitle: NSObject {
         }
       }.then { subs in
         subSupport.showSubSelectWindow(with: subs)
-      }.map { selectedSubs in
+      }.done { selectedSubs in
         callback(selectedSubs)
       }.catch { err in
         let osdMessage: OSDMessage
@@ -133,17 +133,19 @@ class OnlineSubtitle: NSObject {
       }
     case .assrt:
       let subSupport = AssrtSupport.shared
-      firstly {
+      firstly { () -> Promise<[AssrtSubtitle]> in
         if !subSupport.checkToken() {
           throw AssrtSupport.AssrtError.userCanceled
         }
         return subSupport.search(url.deletingPathExtension().lastPathComponent)
       }.then { subs in
         subSupport.showSubSelectWindow(with: subs)
-      }.then { selectedSubs in
-        when(fulfilled: selectedSubs.map({ subSupport.loadDetails(forSub: $0) }))
-      }.map { loadedSubs in
-        callback(loadedSubs)
+      }.then { selectedSubs -> Promise<[AssrtSubtitle]> in
+        return when(fulfilled: selectedSubs.map({ subSupport.loadDetails(forSub: $0) }))
+      }.done { loadedSubs in
+        callback(loadedSubs as [OnlineSubtitle])
+      }.ensure {
+        playerCore.hideOSD()
       }.catch { err in
         let osdMessage: OSDMessage
         switch err {
@@ -155,8 +157,6 @@ class OnlineSubtitle: NSObject {
         }
         playerCore.sendOSD(osdMessage)
         playerCore.isSearchingOnlineSubtitle = false
-      }.finally {
-        playerCore.hideOSD()
       }
     }
   }

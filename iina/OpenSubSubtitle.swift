@@ -217,8 +217,8 @@ class OpenSubSupport {
   }
 
   func requestByName(_ fileURL: URL) -> Promise<[OpenSubSubtitle]> {
-    return requestIMDB(fileURL).then { IMDB in
-      let info = ["imdbid": IMDB]
+    return requestIMDB(fileURL).then { imdb -> Promise<[OpenSubSubtitle]> in
+      let info = ["imdbid": imdb]
       return self.request(info)
     }
   }

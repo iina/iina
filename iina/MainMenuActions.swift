@@ -302,6 +302,10 @@ extension MainMenuActionHandler {
     OnlineSubtitle.getSubtitle(forFile: url, playerCore: player) { subtitles in
       // send osd in main thread
       self.player.sendOSD(.foundSub(subtitles.count))
+      guard !subtitles.isEmpty else {
+        self.player.isSearchingOnlineSubtitle = false
+        return
+      }
       // download them
       for sub in subtitles {
         sub.download { result in
@@ -318,7 +322,6 @@ extension MainMenuActionHandler {
           case .failed:
             self.player.sendOSD(.networkError)
           }
-          self.player.isSearchingOnlineSubtitle = false
         }
       }
     }

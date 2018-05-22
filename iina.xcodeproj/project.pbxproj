@@ -1872,7 +1872,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $PROJECT_DIR/other/check_localizable.swift;
+			shellScript = "$PROJECT_DIR/other/check_localizable.swift";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

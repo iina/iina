@@ -132,7 +132,7 @@ class OpenSubSupport {
   }
 
   func login(testUser username: String? = nil, password: String? = nil) -> Promise<Void> {
-    return Promise { fulfill, reject in
+    return Promise { resolver in
       var finalUser = ""
       var finalPw = ""
       if let testUser = username, let testPw = password {
@@ -142,7 +142,7 @@ class OpenSubSupport {
       } else {
         // check logged in
         if self.loggedIn {
-          fulfill(())
+          resolver.fulfill(())
           return
         }
         // read password
@@ -160,7 +160,7 @@ class OpenSubSupport {
         case .ok(let response):
           // OK
           guard let parsed = (response as? [String: Any]) else {
-            reject(OpenSubError.wrongResponseFormat)
+            resolver.reject(OpenSubError.wrongResponseFormat)
             return
           }
           // check status
@@ -169,27 +169,27 @@ class OpenSubSupport {
             self.token = parsed["token"] as! String
             Utility.log("OpenSub: logged in as user \(finalUser)")
             self.startHeartbeat()
-            fulfill(())
+            resolver.fulfill(())
           } else {
             Utility.log("OpenSub: login failed, \(pStatus)")
-            reject(OpenSubError.loginFailed(pStatus))
+            resolver.reject(OpenSubError.loginFailed(pStatus))
           }
         case .failure:
           // Failure
-          reject(OpenSubError.loginFailed("Failure"))
+          resolver.reject(OpenSubError.loginFailed("Failure"))
         case .error(let error):
           // Error
-          reject(OpenSubError.xmlRpcError(error))
+          resolver.reject(OpenSubError.xmlRpcError(error))
         }
       }
     }
   }
 
   func hash(_ url: URL) -> Promise<FileInfo> {
-    return Promise { fulfill, reject in
+    return Promise { resolver in
       guard let file = try? FileHandle(forReadingFrom: url) else {
         Utility.log("OpenSub: cannot get file handle")
-        reject(OpenSubError.cannotReadFile)
+        resolver.reject(OpenSubError.cannotReadFile)
         return
       }
 
@@ -198,7 +198,7 @@ class OpenSubSupport {
 
       if fileSize < 131072 {
         Utility.log("File length less than 131072, skipped")
-        reject(OpenSubError.fileTooSmall)
+        resolver.reject(OpenSubError.fileTooSmall)
       }
 
       let offsets: [UInt64] = [0, fileSize - UInt64(chunkSize)]
@@ -212,19 +212,19 @@ class OpenSubSupport {
 
       file.closeFile()
 
-      fulfill(FileInfo(hashValue: String(format: "%016qx", hash), fileSize: fileSize))
+      resolver.fulfill(FileInfo(hashValue: String(format: "%016qx", hash), fileSize: fileSize))
     }
   }
 
   func requestByName(_ fileURL: URL) -> Promise<[OpenSubSubtitle]> {
-    return requestIMDB(fileURL).then { IMDB in
-      let info = ["imdbid": IMDB]
+    return requestIMDB(fileURL).then { imdb -> Promise<[OpenSubSubtitle]> in
+      let info = ["imdbid": imdb]
       return self.request(info)
     }
   }
 
   func requestIMDB(_ fileURL: URL) -> Promise<String> {
-    return Promise { fulfill, reject in
+    return Promise { resolver in
       let filename = fileURL.lastPathComponent
       xmlRpc.call("GuessMovieFromString", [token, [filename]]) { status in
         switch status {
@@ -232,31 +232,31 @@ class OpenSubSupport {
           do {
             guard self.checkStatus(response) else { throw OpenSubError.wrongResponseFormat }
             let IMDB = try self.findPath(["data", filename, "BestGuess", "IDMovieIMDB"], in: response)
-            fulfill(IMDB as? String ?? "")
+            resolver.fulfill(IMDB as? String ?? "")
           } catch let (error) {
-            reject(error)
+            resolver.reject(error)
             return
           }
         case .failure:
-          reject(OpenSubError.searchFailed("Failure"))
+          resolver.reject(OpenSubError.searchFailed("Failure"))
         case .error(let error):
-          reject(OpenSubError.xmlRpcError(error))
+          resolver.reject(OpenSubError.xmlRpcError(error))
         }
       }
     }
   }
 
   func request(_ info: [String: String]) -> Promise<[OpenSubSubtitle]> {
-    return Promise { fulfill, reject in
+    return Promise { resolver in
       let limit = 100
       var requestInfo = info
       requestInfo["sublanguageid"] = self.language
       xmlRpc.call("SearchSubtitles", [token, [requestInfo], ["limit": limit]]) { status in
         switch status {
         case .ok(let response):
-          guard self.checkStatus(response) else { reject(OpenSubError.wrongResponseFormat); return }
+          guard self.checkStatus(response) else { resolver.reject(OpenSubError.wrongResponseFormat); return }
           guard let pData = try? self.findPath(["data"], in: response) as? ResponseFilesData else {
-            reject(OpenSubError.wrongResponseFormat)
+            resolver.reject(OpenSubError.wrongResponseFormat)
             return
           }
           var result: [OpenSubSubtitle] = []
@@ -274,35 +274,35 @@ class OpenSubSupport {
             result.append(sub)
           }
           if result.isEmpty {
-            reject(OpenSubError.noResult)
+            resolver.reject(OpenSubError.noResult)
           } else {
-            fulfill(result)
+            resolver.fulfill(result)
           }
         case .failure:
           // Failure
-          reject(OpenSubError.searchFailed("Failure"))
+          resolver.reject(OpenSubError.searchFailed("Failure"))
         case .error(let error):
           // Error
-          reject(OpenSubError.xmlRpcError(error))
+          resolver.reject(OpenSubError.xmlRpcError(error))
         }
       }
     }
   }
 
   func showSubSelectWindow(with subs: [OpenSubSubtitle]) -> Promise<[OpenSubSubtitle]> {
-    return Promise { fulfill, reject in
+    return Promise { resolver in
       // return when found 0 or 1 sub
       if subs.count <= 1 {
-        fulfill(subs)
+        resolver.fulfill(subs)
         return
       }
       subChooseViewController.subtitles = subs
 
       subChooseViewController.userDoneAction = { subs in
-        fulfill(subs as! [OpenSubSubtitle])
+        resolver.fulfill(subs as! [OpenSubSubtitle])
       }
       subChooseViewController.userCanceledAction = {
-        reject(OpenSubError.userCanceled)
+        resolver.reject(OpenSubError.userCanceled)
       }
       PlayerCore.active.sendOSD(.foundSub(subs.count), autoHide: false, accessoryView: subChooseViewController.view)
       subChooseViewController.tableView.reloadData()

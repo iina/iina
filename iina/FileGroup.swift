@@ -107,7 +107,7 @@ class FileGroup {
       for finfo in contents {
         // if reached string end
         if i >= finfo.characters.count {
-          tempGroup.safeAppend(finfo, for: prefix)
+          tempGroup[prefix, default: []].append(finfo)
           currChars.append(("/", prefix))
           continue
         }

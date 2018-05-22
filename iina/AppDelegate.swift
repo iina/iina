@@ -207,12 +207,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  private func showWelcomeWindow() {
+  private func showWelcomeWindow(checkingForUpdatedData: Bool = false) {
     let actionRawValue = Preference.integer(for: .actionAfterLaunch)
     let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
     switch action {
     case .welcomeWindow:
-      PlayerCore.first.initialWindow.showWindow(nil)
+      let window = PlayerCore.first.initialWindow!
+      window.showWindow(nil)
+      if checkingForUpdatedData {
+        window.reloadData()
+      }
     case .openPanel:
       openFile(self)
     default:
@@ -457,7 +461,7 @@ struct CommandLineStatus {
   }
 }
 
-@available(OSX 10.13, *)
+@available(macOS 10.13, *)
 class RemoteCommandController {
   static let remoteCommand = MPRemoteCommandCenter.shared()
 

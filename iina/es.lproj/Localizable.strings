@@ -4,20 +4,20 @@
 "alert.add_filter.title" = "Nuevo filtro";
 "alert.add_watch.message" = "Por favor, ingrese un nombre válido de propiedad de MPV.";
 "alert.add_watch.title" = "Añadir propiedad de monitoreo";
-"alert.assrt_register" = "Debido a la cuota limitada de la API, se recomienda el uso de su propio token de  laAPI. El token predeterminado es solo para uso demostrativo, y puede presentar errores de red.";
+"alert.assrt_register" = "Debido a la cuota limitada de la API, se recomienda el uso de su propio token de la API. El token predeterminado es solo para uso demostrativo, y puede presentar errores de red.";
 "alert.assrt_register.register" = "Registrarse ahora";
 "alert.assrt_register.try" = "Probar primero";
 "alert.assrt_token_invalid" = "Parece que tu token de la API Assrt no es válido.";
 "alert.assrt_token_prompt.message" = "Por favor, regístrese en la página web. Obtenga su token en la página de inicio de usuario e ingréselo a continuación:";
 "alert.assrt_token_prompt.title" = "Ingresa tu token de la API";
-"alert.beta_channel.message" = "IINA v1.0 esta cerca! ¿Le gustaría ayudarnos a probar las versiones beta?\nPuede cambiar este comportamiento en cualquier momento desde Preferencias - General.";
+"alert.beta_channel.message" = "IINA v1.0 está cerca! ¿Le gustaría ayudarnos a probar las versiones beta?\nPuede cambiar este comportamiento en cualquier momento desde Preferencias - General.";
 "alert.beta_channel.title" = "Recibir actualizaciones para las versiones Beta";
 "alert.choose_media_file.title" = "Seleccione el archivo multimedia";
 "alert.clear_cache.message" = "¿Está seguro de borrar toda la caché de miniaturas?";
 "alert.clear_cache.success" = "Caché borrada.";
 "alert.clear_cache.title" = "Borrar caché de miniaturas";
 "alert.config.cannot_create" = "¡No se puede crear el archivo de configuración!";
-"alert.config.cannot_write" = "!No se puede escribir en el archivo de configuración!";
+"alert.config.cannot_write" = "¡No se puede escribir en el archivo de configuración!";
 "alert.config.duplicate.message" = "Por favor, introduzca el nombre para el archivo de configuración duplicado.";
 "alert.config.duplicate.title" = "Configuración duplicada";
 "alert.config.empty_name" = "El nombre no puede estar vacío.";
@@ -37,11 +37,11 @@
 "alert.extra_option.cannot_read" = "No se pueden leer las opciones de mpv adicionales definidas por el usuario.";
 "alert.extra_option.config_folder" = "Error al configurar el directorio de configuración \"%@\".";
 "alert.extra_option.empty" = "¡La clave o el valor no pueden estar vacíos!";
-"alert.extra_option.error" = "Error al configurar la opción --%@=%@ con valor de retorno %d. Por favor, compruebe la configuración de opciones adicionales en Preferencias >  Avanzado.";
+"alert.extra_option.error" = "Error al configurar la opción --%@=%@ con valor de retorno %d. Por favor, compruebe la configuración de opciones adicionales en Preferencias > Avanzado.";
 "alert.fatal_error" = "Error fatal: %@ \nLa aplicación se cerrará ahora.";
 "alert.filter.incorrect" = "Se produjo un error al configurar los filtros. Por favor, compruebe el formato de los parámetros.";
 "alert.filter_hwdec.abort" = "Abortar";
-"alert.filter_hwdec.message" = "Estás a punto de aplicar un filtro de vídeo. Sin embargo, su descodificador actual puede no soportar bien los filtros de vídeo. Puede desactivar la descodificación por hardware o cambiar a Auto(Copia), que consumirá el doble de memoria.  N Puede que tenga que repetir la operación anterior (como, recortar) para que funcione.";
+"alert.filter_hwdec.message" = "Estás a punto de aplicar un filtro de vídeo. Sin embargo, su descodificador actual puede no soportar bien los filtros de vídeo. Puede desactivar la descodificación por hardware o cambiar a Auto(Copia), que consumirá el doble de memoria. \nPuede que tenga que repetir la operación anterior (como, recortar) para que funcione.";
 "alert.filter_hwdec.turn_off" = "Desactivar la descodificación por hardware";
 "alert.filter_hwdec.use_copy" = "Cambiar a Auto(Copiar)";
 "alert.jump_to.message" = "Por favor, ingrese el tiempo al que desea saltar. Ejemplo: 20:35";
@@ -80,9 +80,9 @@
 "general.on" = "Encendido";
 "general.password" = "Contraseña";
 "general.username" = "Nombre de usuario";
-"hwdec.auto" = "Activar la decodificación por hardware. Sin embargo, la mayoría de los filtros de vídeo no funcionarán correctamente.";
-"hwdec.auto-copy" = "Activar la decodificación por hardware. Consumirá el doble de memoria, pero funciona con filtros de vídeo.";
-"hwdec.no" = "Desactivar la decodificación por hardware.";
+"hwdec.auto" = "Activar la descodificación por hardware. Sin embargo, la mayoría de los filtros de vídeo no funcionarán correctamente.";
+"hwdec.auto-copy" = "Activar la descodificación por hardware. Consumirá el doble de memoria, pero funciona con filtros de vídeo.";
+"hwdec.no" = "Desactivar la descodificación por hardware.";
 "keymapping.message" = "Pulse cualquier tecla para grabar.";
 "keymapping.title" = "Asignación de teclas";
 "main.buffering_indicator" = "Cargando... %d%%";
@@ -111,7 +111,7 @@
 "osc_toolbar.pip" = "Alternar Picture-in-Picture";
 "osc_toolbar.playlist" = "Lista de reproducción y capítulos";
 "osc_toolbar.settings" = "Ajustes rápidos";
-"osc_toolbar.sub_track" = "Elejir la pista de subtítulos";
+"osc_toolbar.sub_track" = "Elegir la pista de subtítulos";
 "osd.abloop.a" = "Bucle-AB: A";
 "osd.abloop.b" = "Bucle-AB: B";
 "osd.abloop.clear" = "Bucle-AB: Borrado";
@@ -214,3 +214,9 @@
 
 /* FIXME: Using English localization instead */
 "pl_menu.add_url" = "Add URL…";
+
+/* FIXME: Using English localization instead */
+"subtrack.no_external" = "No External Subtitles Found";
+
+/* FIXME: Using English localization instead */
+"subtrack.no_loaded" = "No Subtitles Loaded";

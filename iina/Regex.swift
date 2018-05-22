@@ -12,11 +12,10 @@ class Regex {
 
   static let aspect = Regex("\\A\\d+(\\.\\d+)?:\\d+(\\.\\d+)?\\Z")
   static let httpFileName = Regex("attachment; filename=(.+?)\\Z")
-  static let url = Regex("^(https?|ftp)://[^\\s/$.?#].[^\\s]*$")
+  static let url = Regex("^(([^:\\/?#]+):)(\\/\\/([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?")
   static let filePath = Regex("^(/[^/]+)+$")
   static let iso639_2Desc = Regex("^.+?\\(([a-z]{3})\\)$")
   static let geometry = Regex("^((\\d+%?)?(x(\\d+%?))?)?((\\+|\\-)(\\d+%?)(\\+|\\-)(\\d+%?))?$")
-  static let mpvURL = Regex("^[A-z0-9_]+://")
 
   var regex: NSRegularExpression?
 

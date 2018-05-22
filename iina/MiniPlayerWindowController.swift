@@ -8,11 +8,13 @@
 
 import Cocoa
 
+fileprivate typealias PK = Preference.Key
+
 fileprivate let DefaultPlaylistHeight: CGFloat = 300
 fileprivate let AutoHidePlaylistThreshold: CGFloat = 200
 fileprivate let AnimationDurationShowControl: TimeInterval = 0.2
 
-class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
+class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopoverDelegate {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("MiniPlayerWindowController")
@@ -21,6 +23,44 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
   unowned var player: PlayerCore
 
   var menuActionHandler: MainMenuActionHandler!
+
+  // MARK: - Observed user defaults
+
+  private let observedPrefKeys: [Preference.Key] = [
+    .showRemainingTime,
+    .alwaysFloatOnTop,
+    .maxVolume
+  ]
+
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+
+    guard let keyPath = keyPath, let change = change else { return }
+
+    switch keyPath {
+
+    case PK.showRemainingTime.rawValue:
+      if let newValue = change[.newKey] as? Bool {
+        rightLabel.mode = newValue ? .remaining : .duration
+      }
+
+    case PK.alwaysFloatOnTop.rawValue:
+      if let newValue = change[.newKey] as? Bool {
+        self.isOntop = newValue
+        setWindowFloatingOnTop(newValue)
+      }
+
+    case PK.maxVolume.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        volumeSlider.maxValue = Double(newValue)
+        if player.mpv.getDouble(MPVOption.Audio.volume) > Double(newValue) {
+          player.mpv.setDouble(MPVOption.Audio.volume, Double(newValue))
+        }
+      }
+
+    default:
+      return
+    }
+  }
 
   @IBOutlet weak var muteButton: NSButton!
   @IBOutlet weak var volumeButton: NSButton!
@@ -130,6 +170,25 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     NotificationCenter.default.addObserver(self, selector: #selector(updateTrack), name: .iinaMediaTitleChanged, object: player)
 
     updateVolume()
+
+    if Preference.bool(for: .alwaysFloatOnTop) {
+      setWindowFloatingOnTop(true)
+    }
+    volumeSlider.maxValue = Double(Preference.integer(for: .maxVolume))
+    volumePopover.delegate = self
+
+    // add use default observers
+    observedPrefKeys.forEach { key in
+      UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
+    }
+  }
+
+  deinit {
+    ObjcUtils.silenced {
+      for key in self.observedPrefKeys {
+        UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
+      }
+    }
   }
 
   func windowWillClose(_ notification: Notification) {
@@ -179,7 +238,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     super.mouseDown(with: event)
   }
 
-  override func mouseEntered(with event: NSEvent) {
+  private func showControl() {
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = AnimationDurationShowControl
       closeButtonView.animator().alphaValue = 1
@@ -188,13 +247,22 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     }, completionHandler: {})
   }
 
-  override func mouseExited(with event: NSEvent) {
+  private func hideControl() {
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = AnimationDurationShowControl
       closeButtonView.animator().alphaValue = 0
       controlView.animator().alphaValue = 0
       mediaInfoView.animator().alphaValue = 1
     }, completionHandler: {})
+  }
+
+  override func mouseEntered(with event: NSEvent) {
+    showControl()
+  }
+
+  override func mouseExited(with event: NSEvent) {
+    guard !volumePopover.isShown else { return }
+    hideControl()
   }
 
   func windowDidEndLiveResize(_ notification: Notification) {
@@ -221,6 +289,14 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     self.player.mainWindow.videoView.videoLayer.draw()
   }
 
+  // MARK: - NSPopoverDelegate
+
+  func popoverWillClose(_ notification: Notification) {
+    if NSWindow.windowNumber(at: NSEvent.mouseLocation, belowWindowWithWindowNumber: 0) != window!.windowNumber {
+      hideControl()
+    }
+  }
+
   // MARK: - Sync UI with playback
 
   func updatePlayButtonState(_ state: NSControl.StateValue) {
@@ -238,7 +314,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate {
     rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {
       playSlider.doubleValue = percentage
-      if #available(OSX 10.12.2, *) {
+      if #available(macOS 10.12.2, *) {
         player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
         player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
       }

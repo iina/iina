@@ -154,6 +154,14 @@ typedef struct AVPixFmtDescriptor {
  * in some cases be simpler. Or the data can be interpreted purely based on
  * the pixel format without using the palette.
  * An example of a pseudo-paletted format is AV_PIX_FMT_GRAY8
+ *
+ * @deprecated This flag is deprecated, and will be removed. When it is removed,
+ * the extra palette allocation in AVFrame.data[1] is removed as well. Only
+ * actual paletted formats (as indicated by AV_PIX_FMT_FLAG_PAL) will have a
+ * palette. Starting with FFmpeg versions which have this flag deprecated, the
+ * extra "pseudo" palette is already ignored, and API users are not required to
+ * allocate a palette for AV_PIX_FMT_FLAG_PSEUDOPAL formats (it was required
+ * before the deprecation, though).
  */
 #define AV_PIX_FMT_FLAG_PSEUDOPAL    (1 << 6)
 
@@ -176,6 +184,12 @@ typedef struct AVPixFmtDescriptor {
  * The pixel format is following a Bayer pattern
  */
 #define AV_PIX_FMT_FLAG_BAYER        (1 << 8)
+
+/**
+ * The pixel format contains IEEE-754 floating point values. Precision (double,
+ * single, or half) should be determined by the pixel size (64, 32, or 16 bits).
+ */
+#define AV_PIX_FMT_FLAG_FLOAT        (1 << 9)
 
 /**
  * Return the number of bits per pixel used by the pixel format
@@ -219,11 +233,6 @@ enum AVPixelFormat av_pix_fmt_desc_get_id(const AVPixFmtDescriptor *desc);
  * Utility function to access log2_chroma_w log2_chroma_h from
  * the pixel format AVPixFmtDescriptor.
  *
- * See av_get_chroma_sub_sample() for a function that asserts a
- * valid pixel format instead of returning an error code.
- * Its recommended that you use avcodec_get_chroma_sub_sample unless
- * you do check the return code!
- *
  * @param[in]  pix_fmt the pixel format
  * @param[out] h_shift store log2_chroma_w (horizontal/width shift)
  * @param[out] v_shift store log2_chroma_h (vertical/height shift)
@@ -245,9 +254,19 @@ int av_pix_fmt_count_planes(enum AVPixelFormat pix_fmt);
 const char *av_color_range_name(enum AVColorRange range);
 
 /**
+ * @return the AVColorRange value for name or an AVError if not found.
+ */
+int av_color_range_from_name(const char *name);
+
+/**
  * @return the name for provided color primaries or NULL if unknown.
  */
 const char *av_color_primaries_name(enum AVColorPrimaries primaries);
+
+/**
+ * @return the AVColorPrimaries value for name or an AVError if not found.
+ */
+int av_color_primaries_from_name(const char *name);
 
 /**
  * @return the name for provided color transfer or NULL if unknown.
@@ -255,14 +274,29 @@ const char *av_color_primaries_name(enum AVColorPrimaries primaries);
 const char *av_color_transfer_name(enum AVColorTransferCharacteristic transfer);
 
 /**
+ * @return the AVColorTransferCharacteristic value for name or an AVError if not found.
+ */
+int av_color_transfer_from_name(const char *name);
+
+/**
  * @return the name for provided color space or NULL if unknown.
  */
 const char *av_color_space_name(enum AVColorSpace space);
 
 /**
+ * @return the AVColorSpace value for name or an AVError if not found.
+ */
+int av_color_space_from_name(const char *name);
+
+/**
  * @return the name for provided chroma location or NULL if unknown.
  */
 const char *av_chroma_location_name(enum AVChromaLocation location);
+
+/**
+ * @return the AVChromaLocation value for name or an AVError if not found.
+ */
+int av_chroma_location_from_name(const char *name);
 
 /**
  * Return the pixel format corresponding to name.

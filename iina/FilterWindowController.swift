@@ -206,14 +206,14 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     if tableView == currentFiltersTableView {
       if tableColumn?.identifier == .key {
-        return row.toStr()
+        return row.description
       } else if tableColumn?.identifier == .value {
-        return filters.at(row)?.stringFormat
+        return filters[at: row]?.stringFormat
       } else {
         return filterIsSaved[row]
       }
     } else {
-      return savedFilters.at(row)
+      return savedFilters[at: row]
     }
   }
 
@@ -300,11 +300,11 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    return presets.at(row)?.localizedName
+    return presets[at: row]?.localizedName
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    guard let preset = presets.at(tableView.selectedRow) else { return }
+    guard let preset = presets[at: tableView.selectedRow] else { return }
     showSettings(for: preset)
   }
 

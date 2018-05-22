@@ -40,6 +40,12 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
     }
   }
 
+  static var oscToolbarButtons: [Preference.ToolBarButton] {
+    get {
+      return (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
+    }
+  }
+
   var hasResizableWidth: Bool = false
   var hasResizableHeight: Bool = false
 
@@ -135,7 +141,10 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   }
 
   @IBAction func customizeOSCToolbarAction(_ sender: Any) {
-    view.window?.beginSheet(toolbarSettingsSheetController.window!) { _ in
+    toolbarSettingsSheetController.currentItemsView?.initItems(fromItems: PrefUIViewController.oscToolbarButtons)
+    toolbarSettingsSheetController.currentButtonTypes = PrefUIViewController.oscToolbarButtons
+    view.window?.beginSheet(toolbarSettingsSheetController.window!) { response in
+      guard response == .OK else { return }
       let newItems = self.toolbarSettingsSheetController.currentButtonTypes
       let array = newItems.map { $0.rawValue }
       Preference.set(array, for: .controlBarToolbarButtons)
@@ -151,15 +160,12 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
 
   private func updateOSCToolbarButtons() {
     oscToolbarStackView.views.forEach { oscToolbarStackView.removeView($0) }
-    let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
-    for buttonType in buttons {
+    for buttonType in PrefUIViewController.oscToolbarButtons {
       let button = NSImageView()
       button.image = buttonType.image()
       oscToolbarStackView.addView(button, in: .trailing)
       Utility.quickConstraints(["H:[btn(24)]", "V:[btn(24)]"], ["btn": button])
     }
-
-    toolbarSettingsSheetController.currentButtonTypes = buttons
   }
 
   private func updateThumbnailCacheStat() {
@@ -222,3 +228,20 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
     view.contentView?.subviews.forEach { ($0 as? NSControl)?.isEnabled = enabled }
   }
 }
+
+@objc(ResizeTimingTransformer) class ResizeTimingTransformer: ValueTransformer {
+
+  static override func allowsReverseTransformation() -> Bool {
+    return false
+  }
+
+  static override func transformedValueClass() -> AnyClass {
+    return NSNumber.self
+  }
+
+  override func transformedValue(_ value: Any?) -> Any? {
+    guard let timing = value as? NSNumber else { return nil }
+    return timing != 2
+  }
+}
+

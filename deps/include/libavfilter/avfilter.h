@@ -195,6 +195,21 @@ typedef struct AVFilter {
      */
 
     /**
+     * Filter pre-initialization function
+     *
+     * This callback will be called immediately after the filter context is
+     * allocated, to allow allocating and initing sub-objects.
+     *
+     * If this callback is not NULL, the uninit callback will be called on
+     * allocation failure.
+     *
+     * @return 0 on success,
+     *         AVERROR code on failure (but the code will be
+     *           dropped and treated as ENOMEM by the calling code)
+     */
+    int (*preinit)(AVFilterContext *ctx);
+
+    /**
      * Filter initialization function.
      *
      * This callback will be called only once during the filter lifetime, after
@@ -391,6 +406,22 @@ struct AVFilterContext {
      * a higher value suggests a more urgent activation.
      */
     unsigned ready;
+
+    /**
+     * Sets the number of extra hardware frames which the filter will
+     * allocate on its output links for use in following filters or by
+     * the caller.
+     *
+     * Some hardware filters require all frames that they will use for
+     * output to be defined in advance before filtering starts.  For such
+     * filters, any hardware frame pools used for output must therefore be
+     * of fixed size.  The extra frames set here are on top of any number
+     * that the filter needs internally in order to operate normally.
+     *
+     * This field must be set before the graph containing this filter is
+     * configured.
+     */
+    int extra_hw_frames;
 };
 
 /**
@@ -632,10 +663,14 @@ int avfilter_link(AVFilterContext *src, unsigned srcpad,
  */
 void avfilter_link_free(AVFilterLink **link);
 
+#if FF_API_FILTER_GET_SET
 /**
  * Get the number of channels of a link.
+ * @deprecated Use av_buffersink_get_channels()
  */
+attribute_deprecated
 int avfilter_link_get_channels(AVFilterLink *link);
+#endif
 
 /**
  * Set the closed field of a link.
@@ -662,14 +697,21 @@ int avfilter_config_links(AVFilterContext *filter);
  */
 int avfilter_process_command(AVFilterContext *filter, const char *cmd, const char *arg, char *res, int res_len, int flags);
 
-/** Initialize the filter system. Register all builtin filters. */
-void avfilter_register_all(void);
+/**
+ * Iterate over all registered filters.
+ *
+ * @param opaque a pointer where libavfilter will store the iteration state. Must
+ *               point to NULL to start the iteration.
+ *
+ * @return the next registered filter or NULL when the iteration is
+ *         finished
+ */
+const AVFilter *av_filter_iterate(void **opaque);
 
-#if FF_API_OLD_FILTER_REGISTER
-/** Uninitialize the filter system. Unregister all filters. */
+#if FF_API_NEXT
+/** Initialize the filter system. Register all builtin filters. */
 attribute_deprecated
-void avfilter_uninit(void);
-#endif
+void avfilter_register_all(void);
 
 /**
  * Register a filter. This is only needed if you plan to use
@@ -681,7 +723,17 @@ void avfilter_uninit(void);
  * @return 0 if the registration was successful, a negative value
  * otherwise
  */
+attribute_deprecated
 int avfilter_register(AVFilter *filter);
+
+/**
+ * Iterate over all registered filters.
+ * @return If prev is non-NULL, next registered filter after prev or NULL if
+ * prev is the last filter. If prev is NULL, return the first registered filter.
+ */
+attribute_deprecated
+const AVFilter *avfilter_next(const AVFilter *prev);
+#endif
 
 /**
  * Get a filter definition matching the given name.
@@ -690,60 +742,8 @@ int avfilter_register(AVFilter *filter);
  * @return     the filter definition, if any matching one is registered.
  *             NULL if none found.
  */
-#if !FF_API_NOCONST_GET_NAME
-const
-#endif
-AVFilter *avfilter_get_by_name(const char *name);
+const AVFilter *avfilter_get_by_name(const char *name);
 
-/**
- * Iterate over all registered filters.
- * @return If prev is non-NULL, next registered filter after prev or NULL if
- * prev is the last filter. If prev is NULL, return the first registered filter.
- */
-const AVFilter *avfilter_next(const AVFilter *prev);
-
-#if FF_API_OLD_FILTER_REGISTER
-/**
- * If filter is NULL, returns a pointer to the first registered filter pointer,
- * if filter is non-NULL, returns the next pointer after filter.
- * If the returned pointer points to NULL, the last registered filter
- * was already reached.
- * @deprecated use avfilter_next()
- */
-attribute_deprecated
-AVFilter **av_filter_next(AVFilter **filter);
-#endif
-
-#if FF_API_AVFILTER_OPEN
-/**
- * Create a filter instance.
- *
- * @param filter_ctx put here a pointer to the created filter context
- * on success, NULL on failure
- * @param filter    the filter to create an instance of
- * @param inst_name Name to give to the new instance. Can be NULL for none.
- * @return >= 0 in case of success, a negative error code otherwise
- * @deprecated use avfilter_graph_alloc_filter() instead
- */
-attribute_deprecated
-int avfilter_open(AVFilterContext **filter_ctx, AVFilter *filter, const char *inst_name);
-#endif
-
-
-#if FF_API_AVFILTER_INIT_FILTER
-/**
- * Initialize a filter.
- *
- * @param filter the filter to initialize
- * @param args   A string of parameters to use when initializing the filter.
- *               The format and meaning of this string varies by filter.
- * @param opaque Any extra non-string data needed by the filter. The meaning
- *               of this parameter varies by filter.
- * @return       zero on success
- */
-attribute_deprecated
-int avfilter_init_filter(AVFilterContext *filter, const char *args, void *opaque);
-#endif
 
 /**
  * Initialize a filter with the supplied parameters.
@@ -943,20 +943,6 @@ AVFilterContext *avfilter_graph_alloc_filter(AVFilterGraph *graph,
  * cannot be found.
  */
 AVFilterContext *avfilter_graph_get_filter(AVFilterGraph *graph, const char *name);
-
-#if FF_API_AVFILTER_OPEN
-/**
- * Add an existing filter instance to a filter graph.
- *
- * @param graphctx  the filter graph
- * @param filter the filter to be added
- *
- * @deprecated use avfilter_graph_alloc_filter() to allocate a filter in a
- * filter graph
- */
-attribute_deprecated
-int avfilter_graph_add_filter(AVFilterGraph *graphctx, AVFilterContext *filter);
-#endif
 
 /**
  * Create and add a filter instance into an existing graph.

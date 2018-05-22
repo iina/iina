@@ -124,7 +124,7 @@ struct FilterParameterValue {
   private var _floatValue: Float?
 
   var stringValue: String {
-    return _stringValue ?? _intValue?.toStr() ?? _floatValue?.toStr() ?? ""
+    return _stringValue ?? _intValue?.description ?? _floatValue?.description ?? ""
   }
 
   var intValue: Int {

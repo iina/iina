@@ -79,9 +79,9 @@ class PlayerCore: NSObject {
   private var _touchBarSupport: Any?
 
   /// A dispatch queue for auto load feature.
-  let backgroundQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreTask")
-
-  let thumbnailQueue: DispatchQueue = DispatchQueue(label: "IINAPlayerCoreThumbnailTask")
+  let backgroundQueue = DispatchQueue(label: "IINAPlayerCoreTask", qos: .background)
+  let playlistQueue = DispatchQueue(label: "IINAPlaylistTask", qos: .utility)
+  let thumbnailQueue = DispatchQueue(label: "IINAPlayerCoreThumbnailTask", qos: .utility)
 
   /**
    This ticket will be increased each time before a new task being submitted to `backgroundQueue`.
@@ -139,7 +139,7 @@ class PlayerCore: NSObject {
     self.mainWindow = MainWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(player: self)
-    if #available(OSX 10.12.2, *) {
+    if #available(macOS 10.12.2, *) {
       self._touchBarSupport = TouchBarSupport(playerCore: self)
     }
   }
@@ -147,12 +147,12 @@ class PlayerCore: NSObject {
   // MARK: - Control commands
 
   // Open a file
-  func openURL(_ url: URL?, isNetworkResource: Bool? = nil, shouldAutoLoad: Bool = false) {
+  func openURL(_ url: URL?, isNetworkResource: Bool = false, shouldAutoLoad: Bool = false) {
     guard let url = url else {
       Utility.log("Error: empty file path or url")
       return
     }
-    let isNetwork = isNetworkResource ?? !url.isFileURL
+    let isNetwork = isNetworkResource && !url.isFileURL
     if shouldAutoLoad {
       info.shouldAutoLoadFiles = true
     }
@@ -374,11 +374,11 @@ class PlayerCore: NSObject {
   func seek(percent: Double, forceExact: Bool = false) {
     var percent = percent
     // mpv will play next file automatically when seek to EOF.
-    // the following workaround will constrain the max seek position to (video length - 1) s.
+    // We clamp to a Range to ensure that we don't try to seek to 100%.
     // however, it still won't work for videos with large keyframe interval.
-    if let duration = info.videoDuration?.second {
-      let maxPercent = (duration - 1) / duration * 100
-      percent = percent.constrain(min: 0, max: maxPercent)
+    if let duration = info.videoDuration?.second,
+      duration > 0 {
+      percent = percent.clamped(to: 0..<100)
     }
     let useExact = forceExact ? true : Preference.bool(for: .useExactSeek)
     let seekMode = useExact ? "absolute-percent+exact" : "absolute-percent"
@@ -461,7 +461,7 @@ class PlayerCore: NSObject {
 
   func setVolume(_ volume: Double, constrain: Bool = true) {
     let maxVolume = Preference.integer(for: .maxVolume)
-    let constrainedVolume = volume.constrain(min: 0, max: Double(maxVolume))
+    let constrainedVolume = volume.clamped(to: 0...Double(maxVolume))
     let appliedVolume = constrain ? constrainedVolume : volume
     info.volume = appliedVolume
     mpv.setDouble(MPVOption.Audio.volume, appliedVolume)
@@ -563,7 +563,7 @@ class PlayerCore: NSObject {
     case .hue:
       optionName = MPVOption.Equalizer.hue
     }
-    mpv.command(.set, args: [optionName, value.toStr()])
+    mpv.command(.set, args: [optionName, value.description])
   }
 
   func loadExternalAudioFile(_ url: URL) {
@@ -643,7 +643,7 @@ class PlayerCore: NSObject {
   }
 
   func playlistRemove(_ index: Int) {
-    mpv.command(.playlistRemove, args: [index.toStr()])
+    mpv.command(.playlistRemove, args: [index.description])
   }
 
   func clearPlaylist() {
@@ -848,6 +848,15 @@ class PlayerCore: NSObject {
 
   func savePlaybackPosition() {
     mpv.command(.writeWatchLaterConfig)
+    if let url = info.currentURL {
+      Preference.set(url, for: .iinaLastPlayedFilePath)
+      // Write to cache directly (rather than calling `refreshCachedVideoProgress`).
+      // If user only closed the window but didn't quit the app, this can make sure playlist displays the correct progress.
+      info.cachedVideoDurationAndProgress[url.path] = (duration: info.videoDuration?.second, progress: info.videoPosition?.second)
+    }
+    if let position = info.videoPosition?.second {
+      Preference.set(position, for: .iinaLastPlayedFilePosition)
+    }
   }
 
   func getGeometry() -> GeometryDef? {
@@ -884,6 +893,7 @@ class PlayerCore: NSObject {
         guard currentTicket == self.backgroundQueueTicket, self.mpv.mpv != nil else { return }
         self.setTrack(1, forType: .sub)
       }
+      self.autoSearchOnlineSub()
     }
   }
 
@@ -907,6 +917,11 @@ class PlayerCore: NSObject {
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
       if #available(macOS 10.12.2, *) {
         touchBarSupport.setupTouchBarUI()
+      }
+
+      if info.aid == 0 {
+        mainWindow.muteButton.isEnabled = false
+        mainWindow.volumeSlider.isEnabled = false
       }
     }
     // set initial properties for the first file
@@ -962,6 +977,14 @@ class PlayerCore: NSObject {
   @objc
   private func reEnableOSDAfterFileLoading() {
     info.disableOSDForFileLoading = false
+  }
+
+  private func autoSearchOnlineSub() {
+    Thread.sleep(forTimeInterval: 0.5)
+    if Preference.bool(for: .autoSearchOnlineSub) && info.subTracks.isEmpty &&
+      info.videoDuration!.second >= Preference.double(for: .autoSearchThreshold) * 60 {
+      mainWindow.menuActionHandler.menuFindOnlineSub(.dummy)
+    }
   }
 
   /**
@@ -1142,12 +1165,13 @@ class PlayerCore: NSObject {
   }
 
   func generateThumbnails() {
-    if #available(OSX 10.12.2, *) {
+    if #available(macOS 10.12.2, *) {
       DispatchQueue.main.async {
         self.touchBarSupport.touchBarPlaySlider?.resetCachedThumbnails()
       }
     }
-    guard let path = info.currentURL?.path else { return }
+    guard !info.isNetworkResource,
+      let path = info.currentURL?.path else { return }
     info.thumbnails.removeAll(keepingCapacity: true)
     info.thumbnailsProgress = 0
     info.thumbnailsReady = false
@@ -1168,7 +1192,7 @@ class PlayerCore: NSObject {
   }
 
   func refreshTouchBarSlider() {
-    if #available(OSX 10.12.2, *) {
+    if #available(macOS 10.12.2, *) {
       DispatchQueue.main.async {
         self.touchBarSupport.touchBarPlaySlider?.needsDisplay = true
       }
@@ -1351,6 +1375,19 @@ class PlayerCore: NSObject {
         break
       }
     }
+  }
+
+  /**
+   Get video duration and playback progress, then save it to info.
+   It may take some time to run this method, so it should be used in background.
+   */
+  func refreshCachedVideoProgress(forVideoPath path: String) {
+    let duration = FFmpegController.probeVideoDuration(forFile: path)
+    let progress = Utility.playbackProgressFromWatchLater(path.md5)
+    info.cachedVideoDurationAndProgress[path] = (
+      duration: (duration > 0 ? duration : nil),
+      progress: progress?.second
+    )
   }
 
   enum CurrentMediaIsAudioStatus {

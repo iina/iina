@@ -49,19 +49,19 @@ final class AssrtSubtitle: OnlineSubtitle {
     if let fileList = fileList {
       // download from file list
       when(fulfilled: fileList.map { file -> Promise<URL> in
-        Promise { fulfill, reject in
+        Promise { resolver in
           Just.get(file.url) { response in
             guard response.ok, let data = response.content else {
-              reject(AssrtSupport.AssrtError.networkError)
+              resolver.reject(AssrtSupport.AssrtError.networkError)
               return
             }
             let subFilename = "[\(self.index)]\(file.filename)"
             if let url = data.saveToFolder(Utility.tempDirURL, filename: subFilename) {
-              fulfill(url)
+              resolver.fulfill(url)
             }
           }
         }
-      }).then { urls in
+      }).map { urls in
         callback(.ok(urls))
       }.catch { err in
         callback(.failed)
@@ -161,32 +161,32 @@ class AssrtSupport {
   }
 
   func search(_ query: String) -> Promise<[AssrtSubtitle]> {
-    return Promise { fulfill, reject in
+    return Promise { resolver in
       Just.post(searchApi, params: ["q": query], headers: header) { result in
         guard let json = result.json as? [String: Any] else {
-          reject(AssrtError.networkError)
+          resolver.reject(AssrtError.networkError)
           return
         }
         guard let status = json["status"] as? Int else {
-          reject(AssrtError.wrongResponseFormat)
+          resolver.reject(AssrtError.wrongResponseFormat)
           return
         }
         if let error = AssrtError(rawValue: status) {
-          reject(error)
+          resolver.reject(error)
           return
         }
         // handle result
         guard let subDict = json["sub"] as? [String: Any] else {
-          reject(AssrtError.wrongResponseFormat)
+          resolver.reject(AssrtError.wrongResponseFormat)
           return
         }
         // assrt will return `sub: {}` when no result
         if let _ = subDict["subs"] as? [String: Any] {
-          fulfill([])
+          resolver.fulfill([])
           return
         }
         guard let subArray = subDict["subs"] as? [[String: Any]] else {
-          reject(AssrtError.wrongResponseFormat)
+          resolver.reject(AssrtError.wrongResponseFormat)
           return
         }
         var subtitles: [AssrtSubtitle] = []
@@ -204,25 +204,25 @@ class AssrtSupport {
                                          subLang: subLang))
           index += 1
         }
-        fulfill(subtitles)
+        resolver.fulfill(subtitles)
       }
     }
   }
 
   func showSubSelectWindow(with subs: [AssrtSubtitle]) -> Promise<[AssrtSubtitle]> {
-    return Promise { fulfill, reject in
+    return Promise { resolver in
       // return when found 0 or 1 sub
       if subs.count <= 1 {
-        fulfill(subs)
+        resolver.fulfill(subs)
         return
       }
       subChooseViewController.subtitles = subs
 
       subChooseViewController.userDoneAction = { subs in
-        fulfill(subs as! [AssrtSubtitle])
+        resolver.fulfill(subs as! [AssrtSubtitle])
       }
       subChooseViewController.userCanceledAction = {
-        reject(AssrtError.userCanceled)
+        resolver.reject(AssrtError.userCanceled)
       }
       PlayerCore.active.sendOSD(.foundSub(subs.count), autoHide: false, accessoryView: subChooseViewController.view)
       subChooseViewController.tableView.reloadData()
@@ -230,26 +230,26 @@ class AssrtSupport {
   }
 
   func loadDetails(forSub sub: AssrtSubtitle) -> Promise<AssrtSubtitle> {
-    return Promise { fulfill, reject in
+    return Promise { resolver in
       Just.post(detailApi, params: ["id": sub.id], headers: header) { result in
         guard let json = result.jsonIgnoringError as? [String: Any] else {
-          reject(AssrtError.networkError)
+          resolver.reject(AssrtError.networkError)
           return
         }
         guard let status = json["status"] as? Int else {
-          reject(AssrtError.wrongResponseFormat)
+          resolver.reject(AssrtError.wrongResponseFormat)
           return
         }
         if let error = AssrtError(rawValue: status) {
-          reject(error)
+          resolver.reject(error)
           return
         }
         guard let subDict = json["sub"] as? [String: Any] else {
-          reject(AssrtError.wrongResponseFormat)
+          resolver.reject(AssrtError.wrongResponseFormat)
           return
         }
         guard let subArray = subDict["subs"] as? [[String: Any]], subArray.count == 1 else {
-          reject(AssrtError.wrongResponseFormat)
+          resolver.reject(AssrtError.wrongResponseFormat)
           return
         }
 
@@ -263,7 +263,7 @@ class AssrtSupport {
           }
         }
 
-        fulfill(sub)
+        resolver.fulfill(sub)
       }
     }
   }

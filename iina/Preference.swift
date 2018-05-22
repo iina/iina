@@ -122,6 +122,7 @@ struct Preference {
     static let oscPosition = Key("oscPosition")
 
     static let playlistWidth = Key("playlistWidth")
+    static let prefetchPlaylistVideoDuration = Key("prefetchPlaylistVideoDuration")
 
     static let enableThumbnailPreview = Key("enableThumbnailPreview")
     static let maxThumbnailPreviewCacheSize = Key("maxThumbnailPreviewCacheSize")
@@ -177,6 +178,8 @@ struct Preference {
     static let openSubUsername = Key("openSubUsername")
     static let assrtToken = Key("assrtToken")
     static let defaultEncoding = Key("defaultEncoding")
+    static let autoSearchOnlineSub = Key("autoSearchOnlineSub")
+    static let autoSearchThreshold = Key("autoSearchThreshold")
 
     // Network
 
@@ -253,6 +256,9 @@ struct Preference {
 
     static let savedVideoFilters = Key("savedVideoFilters")
     static let savedAudioFilters = Key("savedAudioFilters")
+
+    static let iinaLastPlayedFilePath = Key("iinaLastPlayedFilePath")
+    static let iinaLastPlayedFilePosition = Key("iinaLastPlayedFilePosition")
   }
 
   // MARK: - Enums
@@ -618,6 +624,7 @@ struct Preference {
     .controlBarToolbarButtons: [ToolBarButton.pip.rawValue, ToolBarButton.playlist.rawValue, ToolBarButton.settings.rawValue],
     .oscPosition: OSCPosition.floating.rawValue,
     .playlistWidth: 270,
+    .prefetchPlaylistVideoDuration: true,
     .themeMaterial: Theme.dark.rawValue,
     .osdAutoHideTimeout: Float(1),
     .osdTextSize: Float(20),
@@ -691,6 +698,8 @@ struct Preference {
     .openSubUsername: "",
     .assrtToken: "",
     .defaultEncoding: "auto",
+    .autoSearchOnlineSub: false,
+    .autoSearchThreshold: 20,
 
     .enableCache: true,
     .defaultCacheSize: 153600,
@@ -810,6 +819,10 @@ struct Preference {
   }
 
   static func set(_ value: Double, for key: Key) {
+    ud.set(value, forKey: key.rawValue)
+  }
+
+  static func set(_ value: URL, for key: Key) {
     ud.set(value, forKey: key.rawValue)
   }
 

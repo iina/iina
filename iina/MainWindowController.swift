@@ -45,7 +45,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Constants
 
   /** Minimum window size. */
-  let minSize = NSMakeSize(250, 120)
+  let minSize = NSMakeSize(285, 120)
 
   /** For Force Touch. */
   let minimumPressDuration: TimeInterval = 0.5
@@ -263,7 +263,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       case .settings:
         return SettingsWidth
       case .playlist:
-        return CGFloat(Preference.integer(for: .playlistWidth)).constrain(min: PlaylistMinWidth, max: PlaylistMaxWidth)
+        return CGFloat(Preference.integer(for: .playlistWidth)).clamped(to: PlaylistMinWidth...PlaylistMaxWidth)
       default:
         Utility.fatal("SideBarViewType.width shouldn't be called here")
       }
@@ -303,8 +303,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private var oscPosition: Preference.OSCPosition
   private var oscIsInitialized = false
   private var useExtractSeek: Preference.SeekOption
-  private var relativeSeekAmount: Int = 3
-  private var volumeScrollAmount: Int = 4
+  private var relativeSeekAmount: Int
+  private var volumeScrollAmount: Int
   private var horizontalScrollAction: Preference.ScrollAction
   private var verticalScrollAction: Preference.ScrollAction
   private var arrowBtnFunction: Preference.ArrowButtonAction
@@ -349,7 +349,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.oscPosition.rawValue:
       if let newValue = change[.newKey] as? Int {
-        setupOnScreenController(position: Preference.OSCPosition(rawValue: newValue) ?? .floating)
+        setupOnScreenController(withPosition: Preference.OSCPosition(rawValue: newValue) ?? .floating)
       }
 
     case PK.showChapterPos.rawValue:
@@ -364,12 +364,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.relativeSeekAmount.rawValue:
       if let newValue = change[.newKey] as? Int {
-        relativeSeekAmount = newValue.constrain(min: 1, max: 5)
+        relativeSeekAmount = newValue.clamped(to: 1...5)
       }
 
     case PK.volumeScrollAmount.rawValue:
       if let newValue = change[.newKey] as? Int {
-        volumeScrollAmount = newValue.constrain(min: 1, max: 4)
+        volumeScrollAmount = newValue.clamped(to: 1...4)
       }
 
     case PK.verticalScrollAction.rawValue:
@@ -429,8 +429,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case PK.maxVolume.rawValue:
       if let newValue = change[.newKey] as? Int {
         volumeSlider.maxValue = Double(newValue)
-        if self.player.mpv.getDouble(MPVOption.Audio.volume) > Double(newValue) {
-          self.player.mpv.setDouble(MPVOption.Audio.volume, Double(newValue))
+        if player.mpv.getDouble(MPVOption.Audio.volume) > Double(newValue) {
+          player.mpv.setDouble(MPVOption.Audio.volume, Double(newValue))
         }
       }
 
@@ -533,6 +533,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
+  lazy var subPopoverView = playlistView.subPopover?.contentViewController?.view
+
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
   private var oscFloatingLeadingTrailingConstraint: [NSLayoutConstraint]?
 
@@ -558,6 +560,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     horizontalScrollAction = Preference.enum(for: .horizontalScrollAction)
     verticalScrollAction = Preference.enum(for: .verticalScrollAction)
     useExtractSeek = Preference.enum(for: .useExactSeek)
+    relativeSeekAmount = Preference.integer(for: .relativeSeekAmount)
+    volumeScrollAmount = Preference.integer(for: .volumeScrollAmount)
     arrowBtnFunction = Preference.enum(for: .arrowButtonAction)
     singleClickAction = Preference.enum(for: .singleClickAction)
     doubleClickAction = Preference.enum(for: .doubleClickAction)
@@ -615,7 +619,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fragControlView.addView(fragControlViewLeftView, in: .center)
     fragControlView.addView(fragControlViewMiddleView, in: .center)
     fragControlView.addView(fragControlViewRightView, in: .center)
-    setupOnScreenController(position: oscPosition)
+    setupOnScreenController(withPosition: oscPosition)
     let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
     setupOSCToolbarButtons(buttons)
 
@@ -735,13 +739,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       button.action = #selector(self.toolBarButtonAction(_:))
       button.tag = buttonType.rawValue
       button.translatesAutoresizingMaskIntoConstraints = false
+      button.refusesFirstResponder = true
       let buttonWidth = buttons.count == 5 ? "20" : "24"
       Utility.quickConstraints(["H:[btn(\(buttonWidth))]", "V:[btn(24)]"], ["btn": button])
       fragToolbarView.addView(button, in: .trailing)
     }
   }
 
-  private func setupOnScreenController(position newPosition: Preference.OSCPosition) {
+  private func setupOnScreenController(withPosition newPosition: Preference.OSCPosition) {
 
     guard !oscIsInitialized || oscPosition != newPosition else { return }
     oscIsInitialized = true
@@ -830,8 +835,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscTopMainView.addView(fragControlView, in: .leading)
       oscTopMainView.addView(fragSliderView, in: .leading)
       oscTopMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscTopMainView.setVisibilityPriority(.detachEarly, for: fragSliderView)
-      oscTopMainView.setVisibilityPriority(.mustHold, for: fragVolumeView)
+      oscTopMainView.setVisibilityPriority(.mustHold, for: fragSliderView)
+      oscTopMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
       oscTopMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     case .bottom:
       currentControlBar = controlBarBottom
@@ -842,8 +847,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscBottomMainView.addView(fragControlView, in: .leading)
       oscBottomMainView.addView(fragSliderView, in: .leading)
       oscBottomMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscBottomMainView.setVisibilityPriority(.detachEarly, for: fragSliderView)
-      oscBottomMainView.setVisibilityPriority(.mustHold, for: fragVolumeView)
+      oscBottomMainView.setVisibilityPriority(.mustHold, for: fragSliderView)
+      oscBottomMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
       oscBottomMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     }
 
@@ -941,7 +946,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // resize sidebar
       let currentLocation = event.locationInWindow
       let newWidth = window!.frame.width - currentLocation.x - 2
-      sideBarWidthConstraint.constant = newWidth.constrain(min: PlaylistMinWidth, max: PlaylistMaxWidth)
+      sideBarWidthConstraint.constant = newWidth.clamped(to: PlaylistMinWidth...PlaylistMaxWidth)
     } else if !screenState.isFullscreen {
       // move the window by dragging
       isDragging = true
@@ -972,14 +977,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       Preference.set(Int(sideBarWidthConstraint.constant), for: .playlistWidth)
     } else {
       // if it's a mouseup after clicking
-      if !isMouseEvent(event, inAnyOf: [sideBarView]) && sideBarStatus != .hidden {
+      if !isMouseEvent(event, inAnyOf: [sideBarView, subPopoverView]) && sideBarStatus != .hidden {
         // if sidebar is shown, hide it first
         hideSideBar()
       } else {
         if event.clickCount == 1 {
           // single click or first click of a double click
           // disable single click for sideBar / OSC / titleBar
-          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
+          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
           // single click
           if doubleClickAction == .none {
             // if double click action is none, it's safe to perform action immediately
@@ -992,7 +997,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         } else if event.clickCount == 2 {
           // double click
           // disable double click for sideBar / OSC
-          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar]) else { return }
+          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
           // double click
           guard doubleClickAction != .none else { return }
           // if already scheduled a single click timer, invalidate it
@@ -1010,7 +1015,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override func rightMouseUp(with event: NSEvent) {
     // Disable mouseUp for sideBar / OSC / titleBar
-    guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView]) else { return }
+    guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
     
     performMouseAction(Preference.enum(for: .rightClickAction))
   }
@@ -1110,7 +1115,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       showUI()
     }
     // check whether mouse is in osc
-    if isMouseEvent(event, inAnyOf: [currentControlBar]) {
+    if isMouseEvent(event, inAnyOf: [currentControlBar, titleBarView]) {
       destroyTimer()
     } else {
       updateTimer()
@@ -1119,6 +1124,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override func scrollWheel(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
+    guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
 
     let isMouse = event.phase.isEmpty
     let isTrackpadBegan = event.phase.contains(.began)
@@ -1494,10 +1500,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
 
       setConstraintsForVideoView([
-        .left: targetFrame.x,
-        .right:  targetFrame.xMax - window.frame.width,
-        .bottom: -targetFrame.y,
-        .top: window.frame.height - targetFrame.yMax
+        .left: targetFrame.minX,
+        .right:  targetFrame.maxX - window.frame.width,
+        .bottom: -targetFrame.minY,
+        .top: window.frame.height - targetFrame.maxY
       ])
     }
 
@@ -1534,7 +1540,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           xPos = windowWidth - oscHalfWidth - margin
         }
       }
-      let yPos = window.frame.height * CGFloat(cpv)
+
+      let windowHeight = window.frame.height
+      var yPos = windowHeight * CGFloat(cpv)
+      let oscHeight: CGFloat = 67
+      let yMargin: CGFloat = 25
+
+      if yPos < 0 {
+        yPos = 0
+      } else if yPos + oscHeight + yMargin > windowHeight {
+        yPos = windowHeight - oscHeight - yMargin
+      }
+
       controlBarFloating.xConstraint.constant = xPos
       controlBarFloating.yConstraint.constant = yPos
     }
@@ -1739,8 +1756,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let osdData: [String: String] = [
         "duration": player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
         "position": player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
-        "currChapter": (player.mpv.getInt(MPVProperty.chapter) + 1).toStr(),
-        "chapterCount": player.info.chapters.count.toStr()
+        "currChapter": (player.mpv.getInt(MPVProperty.chapter) + 1).description,
+        "chapterCount": player.info.chapters.count.description
       ]
 
       osdStackView.setVisibilityPriority(.mustHold, for: osdAccessoryView)
@@ -1927,10 +1944,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
       let frame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
       setConstraintsForVideoView([
-        .left: frame.x,
+        .left: frame.minX,
         .right: window.frame.width - frame.maxX,  // `frame.x` should also work
-        .bottom: -frame.y,
-        .top: window.frame.height - frame.yMax  // `frame.y` should also work
+        .bottom: -frame.minY,
+        .top: window.frame.height - frame.maxY  // `frame.y` should also work
       ])
       videoView.needsLayout = true
       videoView.layoutSubtreeIfNeeded()
@@ -1955,10 +1972,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let newVideoViewFrame = newVideoViewBounds.centeredResize(to: newVideoViewSize)
 
     let newConstants: [NSLayoutConstraint.Attribute: CGFloat] = [
-      .left: newVideoViewFrame.x,
-      .right: newVideoViewFrame.xMax - window.frame.width,
-      .bottom: -newVideoViewFrame.y,
-      .top: window.frame.height - newVideoViewFrame.yMax
+      .left: newVideoViewFrame.minX,
+      .right: newVideoViewFrame.maxX - window.frame.width,
+      .bottom: -newVideoViewFrame.minY,
+      .top: window.frame.height - newVideoViewFrame.maxY
     ]
 
     let selectedRect: NSRect = selectWholeVideoByDefault ? NSRect(origin: .zero, size: origVideoSize) : .zero
@@ -2454,7 +2471,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     rightLabel.updateText(with: duration, given: pos)
     if andProgressBar {
       playSlider.doubleValue = percentage
-      if #available(OSX 10.12.2, *) {
+      if #available(macOS 10.12.2, *) {
         player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
         player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
       }
@@ -2693,7 +2710,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.doubleValue
-    if #available(macOS 10.11, *), Preference.double(for: .maxVolume) > 100, abs(value - 100) < 0.5 {
+    if #available(OSX 10.11, *), Preference.double(for: .maxVolume) > 100, abs(value - 100) < 0.5 {
       NSHapticFeedbackManager.defaultPerformer.perform(.generic, performanceTime: .default)
     }
     player.setVolume(value)
@@ -2707,7 +2724,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case .musicMode:
       player.switchToMiniPlayer()
     case .pip:
-      if #available(OSX 10.12, *) {
+      if #available(macOS 10.12, *) {
         if pipStatus == .inPIP {
           exitPIP()
         } else if pipStatus == .notInPIP {

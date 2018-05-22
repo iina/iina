@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -67,7 +67,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="IINAMainWindow" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5" customClass="MainWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,6 +123,46 @@
                         <constraints>
                             <constraint firstItem="pxV-jX-kfL" firstAttribute="centerX" secondItem="Nrz-jZ-Luf" secondAttribute="centerX" id="1zk-hi-hE0"/>
                             <constraint firstItem="pxV-jX-kfL" firstAttribute="centerY" secondItem="Nrz-jZ-Luf" secondAttribute="centerY" id="GGt-bx-91X"/>
+                        </constraints>
+                    </visualEffectView>
+                    <visualEffectView hidden="YES" wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="oX4-0N-but">
+                        <rect key="frame" x="240" y="152" width="160" height="97"/>
+                        <subviews>
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="uZe-PA-1Id">
+                                <rect key="frame" x="64" y="45" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="uZe-PA-1Id" secondAttribute="height" multiplier="1:1" id="2KD-iY-Rbo"/>
+                                    <constraint firstAttribute="width" constant="32" id="7BK-Wc-K9S"/>
+                                </constraints>
+                            </progressIndicator>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2gH-wF-EpI">
+                                <rect key="frame" x="24" y="20" width="112" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Buffering... 100%" id="3fe-fP-yMB">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hlZ-5D-Wag">
+                                <rect key="frame" x="64" y="8" width="32" height="11"/>
+                                <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="WOE-SX-krh">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" priority="250" constant="160" id="CKq-QQ-TvO"/>
+                            <constraint firstAttribute="bottom" secondItem="hlZ-5D-Wag" secondAttribute="bottom" constant="8" id="DDG-Yw-RfA"/>
+                            <constraint firstItem="2gH-wF-EpI" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="Nfu-GM-Wcw"/>
+                            <constraint firstItem="uZe-PA-1Id" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="Qfn-MA-rHy"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2gH-wF-EpI" secondAttribute="trailing" id="TQS-Yy-cH6"/>
+                            <constraint firstItem="hlZ-5D-Wag" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="bOz-TB-YLY"/>
+                            <constraint firstAttribute="bottom" secondItem="2gH-wF-EpI" secondAttribute="bottom" constant="20" id="ddz-PD-RB3"/>
+                            <constraint firstItem="uZe-PA-1Id" firstAttribute="top" secondItem="oX4-0N-but" secondAttribute="top" constant="20" id="sio-TN-E1P"/>
+                            <constraint firstItem="2gH-wF-EpI" firstAttribute="top" secondItem="uZe-PA-1Id" secondAttribute="bottom" constant="8" id="swz-Rz-9Hv"/>
+                            <constraint firstItem="2gH-wF-EpI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oX4-0N-but" secondAttribute="leading" id="ufO-Jb-vdH"/>
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
@@ -255,46 +295,6 @@
                             <constraint firstAttribute="height" constant="60" id="sUc-WO-8kQ"/>
                         </constraints>
                     </customView>
-                    <visualEffectView hidden="YES" wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="oX4-0N-but">
-                        <rect key="frame" x="240" y="152" width="160" height="97"/>
-                        <subviews>
-                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="uZe-PA-1Id">
-                                <rect key="frame" x="64" y="45" width="32" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="uZe-PA-1Id" secondAttribute="height" multiplier="1:1" id="2KD-iY-Rbo"/>
-                                    <constraint firstAttribute="width" constant="32" id="7BK-Wc-K9S"/>
-                                </constraints>
-                            </progressIndicator>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2gH-wF-EpI">
-                                <rect key="frame" x="24" y="20" width="112" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Buffering... 100%" id="3fe-fP-yMB">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hlZ-5D-Wag">
-                                <rect key="frame" x="64" y="8" width="32" height="11"/>
-                                <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="WOE-SX-krh">
-                                    <font key="font" metaFont="miniSystem"/>
-                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="width" priority="250" constant="160" id="CKq-QQ-TvO"/>
-                            <constraint firstAttribute="bottom" secondItem="hlZ-5D-Wag" secondAttribute="bottom" constant="8" id="DDG-Yw-RfA"/>
-                            <constraint firstItem="2gH-wF-EpI" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="Nfu-GM-Wcw"/>
-                            <constraint firstItem="uZe-PA-1Id" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="Qfn-MA-rHy"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2gH-wF-EpI" secondAttribute="trailing" id="TQS-Yy-cH6"/>
-                            <constraint firstItem="hlZ-5D-Wag" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="bOz-TB-YLY"/>
-                            <constraint firstAttribute="bottom" secondItem="2gH-wF-EpI" secondAttribute="bottom" constant="20" id="ddz-PD-RB3"/>
-                            <constraint firstItem="uZe-PA-1Id" firstAttribute="top" secondItem="oX4-0N-but" secondAttribute="top" constant="20" id="sio-TN-E1P"/>
-                            <constraint firstItem="2gH-wF-EpI" firstAttribute="top" secondItem="uZe-PA-1Id" secondAttribute="bottom" constant="8" id="swz-Rz-9Hv"/>
-                            <constraint firstItem="2gH-wF-EpI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oX4-0N-but" secondAttribute="leading" id="ufO-Jb-vdH"/>
-                        </constraints>
-                    </visualEffectView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="g0O-v5-RQj" secondAttribute="bottom" constant="8" id="0pt-vB-Ycm"/>

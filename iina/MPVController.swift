@@ -38,10 +38,10 @@ class MPVController: NSObject {
   // The mpv_handle
   var mpv: OpaquePointer!
 
-  var mpvClientName: UnsafePointer<Int8>!
+  var mpvClientName: UnsafePointer<CChar>!
   var mpvVersion: String!
 
-  lazy var queue: DispatchQueue! = DispatchQueue(label: "com.colliderli.iina.controller")
+  lazy var queue = DispatchQueue(label: "com.colliderli.iina.controller", qos: .userInitiated)
 
   unowned let player: PlayerCore
 
@@ -173,8 +173,8 @@ class MPVController: NSObject {
     }
 
     chkErr(mpv_set_option_string(mpv, "watch-later-directory", Utility.watchLaterURL.path))
-    setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.ProgramBehavior.savePositionOnQuit)
-    setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback")
+    chkErr(mpv_set_option_string(mpv, "resume-playback", "yes"))
+    chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.savePositionOnQuit, "no"))
 
     setUserOption(.initialWindowSizePosition, type: .string, forName: MPVOption.Window.geometry)
 
@@ -365,7 +365,7 @@ class MPVController: NSObject {
     var strArgs = args
     strArgs.insert(command.rawValue, at: 0)
     strArgs.append(nil)
-    var cargs = strArgs.map { $0.flatMap { UnsafePointer<Int8>(strdup($0)) } }
+    var cargs = strArgs.map { $0.flatMap { UnsafePointer<CChar>(strdup($0)) } }
     let returnValue = mpv_command(self.mpv, &cargs)
     for ptr in cargs { free(UnsafeMutablePointer(mutating: ptr)) }
     if checkError {
@@ -612,6 +612,9 @@ class MPVController: NSObject {
     player.info.displayWidth = 0
     player.info.displayHeight = 0
     player.info.videoDuration = VideoTime(duration)
+    if let filename = getString(MPVProperty.path) {
+      player.info.cachedVideoDurationAndProgress[filename]?.duration = duration
+    }
     player.info.videoPosition = VideoTime(pos)
     player.fileLoaded()
     fileLoaded = true
@@ -630,7 +633,7 @@ class MPVController: NSObject {
     var dwidth = getInt(MPVProperty.dwidth)
     var dheight = getInt(MPVProperty.dheight)
     if player.info.rotation == 90 || player.info.rotation == 270 {
-      Utility.swap(&dwidth, &dheight)
+      swap(&dwidth, &dheight)
     }
     if dwidth != player.info.displayWidth! || dheight != player.info.displayHeight! {
       // filter the last video-reconfig event before quit
@@ -667,6 +670,10 @@ class MPVController: NSObject {
       player.info.aid = Int(data)
       player.getTrackInfo()
       let currTrack = player.info.currentTrack(.audio) ?? .noneAudioTrack
+      DispatchQueue.main.sync {
+        player.mainWindow?.muteButton.isEnabled = (player.info.aid != 0)
+        player.mainWindow?.volumeSlider.isEnabled = (player.info.aid != 0)
+      }
       player.sendOSD(.track(currTrack))
 
     case MPVOption.TrackSelection.sid:

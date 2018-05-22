@@ -44,7 +44,7 @@ class ControlBarView: NSVisualEffectView {
       let xPosWhenCenter = (windowFrame.width - frame.width) / 2
       if abs(newOrigin.x - xPosWhenCenter) <= 5 {
         newOrigin.x = xPosWhenCenter
-        if #available(macOS 10.11, *), !isAlignFeedbackSent {
+        if #available(OSX 10.11, *), !isAlignFeedbackSent {
           NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .default)
           isAlignFeedbackSent = true
         }
@@ -55,7 +55,7 @@ class ControlBarView: NSVisualEffectView {
     // bound to parent
     var updateX = true, updateY = true
     let xMax = windowFrame.width - frame.width - 10
-    let yMax = windowFrame.height - frame.height
+    let yMax = windowFrame.height - frame.height - 25
     if newOrigin.x > xMax {
       newOrigin.x = xMax
       updateX = false

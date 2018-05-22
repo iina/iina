@@ -411,7 +411,7 @@ class MenuController: NSObject, NSMenuDelegate {
     let info = PlayerCore.active.info
     for (index, chapter) in info.chapters.enumerated() {
       let menuTitle = "\(chapter.time.stringRepresentation) - \(chapter.title)"
-      let nextChapterTime = info.chapters.at(index+1)?.time ?? Constants.Time.infinite
+      let nextChapterTime = info.chapters[at: index+1]?.time ?? Constants.Time.infinite
       let isPlaying = info.videoPosition?.between(chapter.time, nextChapterTime) ?? false
       chapterMenu.addItem(withTitle: menuTitle, action: #selector(MainMenuActionHandler.menuChapterSwitch(_:)),
                           tag: index, obj: nil, stateOn: isPlaying)

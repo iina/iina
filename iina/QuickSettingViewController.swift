@@ -195,7 +195,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       [subTextColorWell, subTextSizePopUp, subTextBgColorWell, subTextBorderColorWell, subTextBorderWidthPopUp, subTextFontBtn].forEach { $0.isEnabled = enableTextSettings }
     }
 
-    let currSubScale = player.mpv.getDouble(MPVOption.Subtitles.subScale).constrain(min: 0.1, max: 10)
+    let currSubScale = player.mpv.getDouble(MPVOption.Subtitles.subScale).clamped(to: 0.1...10)
     let displaySubScale = Utility.toDisplaySubScale(fromRealSubScale: currSubScale)
     subScaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
     let subDelay = player.mpv.getDouble(MPVOption.Subtitles.subDelay)
@@ -207,7 +207,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     subPosSlider.intValue = Int32(currSubPos)
 
     let fontSize = player.mpv.getInt(MPVOption.Subtitles.subFontSize)
-    subTextSizePopUp.selectItem(withTitle: fontSize.toStr())
+    subTextSizePopUp.selectItem(withTitle: fontSize.description)
 
     let borderWidth = player.mpv.getDouble(MPVOption.Subtitles.subBorderSize)
     subTextBorderWidthPopUp.selectItem(at: -1)
@@ -318,16 +318,16 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let activeId: Int
     let columnName = tableColumn?.identifier
     if tableView == videoTableView {
-      track = row == 0 ? nil : player.info.videoTracks.at(row-1)
+      track = row == 0 ? nil : player.info.videoTracks[at: row-1]
       activeId = player.info.vid!
     } else if tableView == audioTableView {
-      track = row == 0 ? nil : player.info.audioTracks.at(row-1)
+      track = row == 0 ? nil : player.info.audioTracks[at: row-1]
       activeId = player.info.aid!
     } else if tableView == subTableView {
-      track = row == 0 ? nil : player.info.subTracks.at(row-1)
+      track = row == 0 ? nil : player.info.subTracks[at: row-1]
       activeId = player.info.sid!
     } else if tableView == secSubTableView {
-      track = row == 0 ? nil : player.info.subTracks.at(row-1)
+      track = row == 0 ? nil : player.info.subTracks[at: row-1]
       activeId = player.info.secondSid!
     } else {
       return nil
@@ -601,16 +601,18 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     // loaded subtitles
     if showLoadedSubs {
       if player.info.subTracks.isEmpty {
-        menu.addItem(withTitle: NSLocalizedString("track.none", comment: "<None>"))
+        menu.addItem(withTitle: NSLocalizedString("subtrack.no_loaded", comment: "No subtitles loaded"), enabled: false)
       } else {
+        menu.addItem(withTitle: NSLocalizedString("track.none", comment: "<None>"),
+                     action: #selector(self.chosenSubFromMenu(_:)), target: self,
+                     stateOn: player.info.sid == 0 ? true : false)
+
         for sub in player.info.subTracks {
-          let item = NSMenuItem()
-          item.title = sub.readableTitle
-          item.target = self
-          item.action = #selector(self.chosenSubFromMenu(_:))
-          item.representedObject = sub
-          item.state = sub.id == player.info.sid ? .on : .off
-          menu.addItem(item)
+          menu.addItem(withTitle: sub.readableTitle,
+                       action: #selector(self.chosenSubFromMenu(_:)),
+                       target: self,
+                       obj: sub,
+                       stateOn: sub.id == player.info.sid ? true : false)
         }
       }
       menu.addItem(NSMenuItem.separator())
@@ -618,16 +620,16 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     // external subtitles
     let addMenuItem = { (sub: FileInfo) -> Void in
       let isActive = !showLoadedSubs && activeSubs.contains { $0.externalFilename == sub.path }
-      let item = NSMenuItem()
-      item.title = "\(sub.filename).\(sub.ext)"
-      item.target = self
-      item.action = #selector(self.chosenSubFromMenu(_:))
-      item.representedObject = sub
-      item.state = isActive ? .on : .off
-      menu.addItem(item)
+      menu.addItem(withTitle: "\(sub.filename).\(sub.ext)",
+                   action: #selector(self.chosenSubFromMenu(_:)),
+                   target: self,
+                   obj: sub,
+                   stateOn: isActive ? true : false)
+
     }
     if player.info.currentSubsInfo.isEmpty {
-      menu.addItem(withTitle: NSLocalizedString("track.none", comment: "<None>"))
+      menu.addItem(withTitle: NSLocalizedString("subtrack.no_external", comment: "No external subtitles found"),
+                   enabled: false)
     } else {
       if let videoInfo = player.info.currentVideosInfo.first(where: { $0.url == player.info.currentURL }),
         !videoInfo.relatedSubs.isEmpty {
@@ -646,6 +648,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       player.loadExternalSubFile(fileInfo.url)
     } else if let sub = sender.representedObject as? MPVTrack {
       player.setTrack(sub.id, forType: .sub)
+    } else {
+      player.setTrack(0, forType: .sub)
     }
   }
 

@@ -16,7 +16,7 @@ class Utility {
   static let supportedFileExt: [MPVTrack.TrackType: [String]] = [
     .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "mts", "m2ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt", "dv", "mpg", "mpeg", "mxf", "vob", "gif"],
     .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "oga", "mogg", "m4a", "ac3", "opus", "wav", "wv", "aiff", "ape", "tta", "tak"],
-    .sub: ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc", "txt"]
+    .sub: ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc"]
   ]
   static let playableFileExt = supportedFileExt[.video]! + supportedFileExt[.audio]!
   static let playlistFileExt = ["m3u", "m3u8", "pls", "cue"]
@@ -434,12 +434,6 @@ class Utility {
 
   // MARK: - Util functions
 
-  static func swap<T>(_ a: inout T, _ b: inout T) {
-    let temp = a
-    a = b
-    b = temp
-  }
-
   static func toRealSubScale(fromDisplaySubScale scale: Double) -> Double {
     return scale > 0 ? scale : -1 / scale
   }
@@ -463,6 +457,19 @@ class Utility {
     // }
     // handle dvd:// and bd://
     return filename.md5
+  }
+
+  static func playbackProgressFromWatchLater(_ mpvMd5: String) -> VideoTime? {
+    let fileURL = Utility.watchLaterURL.appendingPathComponent(mpvMd5)
+    if let reader = StreamReader(path: fileURL.path),
+      let firstLine = reader.nextLine(),
+      firstLine.hasPrefix("start="),
+      let progressString = firstLine.components(separatedBy: "=").last,
+      let progress = Double(progressString) {
+      return VideoTime(progress)
+    } else {
+      return nil
+    }
   }
 
   // MARK: - Util classes

@@ -70,7 +70,7 @@ class PrefSubViewController: NSViewController {
         loginIndicator.startAnimation(nil)
         firstly {
           OpenSubSupport().login(testUser: username, password: password)
-        }.then { (_) -> Void in
+        }.map { _ in
           let status = OpenSubSupport.savePassword(username: username, passwd: password)
           if status == errSecSuccess {
             Preference.set(username, for: .openSubUsername)
@@ -130,7 +130,7 @@ extension PrefSubViewController: NSTokenFieldDelegate {
   }
 
   func tokenField(_ tokenField: NSTokenField, representedObjectForEditing editingString: String) -> Any? {
-    if let code = Regex.iso639_2Desc.captures(in: editingString).at(1) {
+    if let code = Regex.iso639_2Desc.captures(in: editingString)[at: 1] {
       return SubLangToken(code)
     } else {
       return SubLangToken(editingString)

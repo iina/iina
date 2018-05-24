@@ -238,7 +238,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
     guard !flag else { return true }
-    showWelcomeWindow()
+    showWelcomeWindow(checkingForUpdatedData: true)
 
     return true
   }

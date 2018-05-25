@@ -123,19 +123,8 @@ class MPVController: NSObject {
     }
 
     // log
-    let enableLog = Preference.bool(for: .enableLogging)
-    if enableLog {
-      let date = Date()
-      let calendar = NSCalendar.current
-      let y = calendar.component(.year, from: date)
-      let m = calendar.component(.month, from: date)
-      let d = calendar.component(.day, from: date)
-      let h = calendar.component(.hour, from: date)
-      let mm = calendar.component(.minute, from: date)
-      let s = calendar.component(.second, from: date)
-      let token = Utility.ShortCodeGenerator.getCode(length: 6)
-      let logFileName = "\(y)-\(m)-\(d)-\(h)-\(mm)-\(s)_\(token).log"
-      let path = Utility.logDirURL.appendingPathComponent(logFileName).path
+    if Logger.enabled {
+      let path = Logger.logDirectory.appendingPathComponent("mpv.log").path
       chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.logFile, path))
     }
 
@@ -360,7 +349,7 @@ class MPVController: NSObject {
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {
     guard mpv != nil else { return }
     if args.count > 0 && args.last == nil {
-      Utility.fatal("Command do not need a nil suffix")
+      Logger.general.fatal("Command do not need a nil suffix")
     }
     var strArgs = args
     strArgs.insert(command.rawValue, at: 0)
@@ -441,7 +430,7 @@ class MPVController: NSObject {
 
   /** Get filter. only "af" or "vf" is supported for name */
   func getFilters(_ name: String) -> [MPVFilter] {
-    Utility.assert(name == MPVProperty.vf || name == MPVProperty.af, "getFilters() do not support \(name)!")
+    Logger.general.assert(name == MPVProperty.vf || name == MPVProperty.af, "getFilters() do not support \(name)!")
 
     var result: [MPVFilter] = []
     var node = mpv_node()
@@ -459,7 +448,7 @@ class MPVController: NSObject {
 
   /** Set filter. only "af" or "vf" is supported for name */
   func setFilters(_ name: String, filters: [MPVFilter]) {
-    Utility.assert(name == MPVProperty.vf || name == MPVProperty.af, "setFilters() do not support \(name)!")
+    Logger.general.assert(name == MPVProperty.vf || name == MPVProperty.af, "setFilters() do not support \(name)!")
     let cmd = name == MPVProperty.vf ? MPVCommand.vf : MPVCommand.af
 
     let str = filters.map { $0.stringFormat }.joined(separator: ",")
@@ -516,7 +505,7 @@ class MPVController: NSObject {
       let prefix = String(cString: (msg?.pointee.prefix)!)
       let level = String(cString: (msg?.pointee.level)!)
       let text = String(cString: (msg?.pointee.text)!)
-      Utility.log("MPV log: [\(prefix)] \(level): \(text)")
+      Logger.general.debug("MPV log: [\(prefix)] \(level): \(text)")
 
     case MPV_EVENT_PROPERTY_CHANGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
@@ -904,7 +893,7 @@ class MPVController: NSObject {
 
     case .other:
       guard let tr = transformer else {
-        Utility.log("setUserOption: no transformer!")
+        Logger.general.error("setUserOption: no transformer!")
         return
       }
       if let value = tr(key) {
@@ -959,7 +948,7 @@ class MPVController: NSObject {
 
       case .other:
         guard let tr = info.transformer else {
-          Utility.log("setUserOption: no transformer!")
+          Logger.general.error("setUserOption: no transformer!")
           return
         }
         if let value = tr(info.prefKey) {
@@ -977,7 +966,7 @@ class MPVController: NSObject {
   private func chkErr(_ status: Int32!) {
     guard status < 0 else { return }
     DispatchQueue.main.async {
-      Utility.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
+      Logger.general.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
     }
   }
 

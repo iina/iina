@@ -149,7 +149,7 @@ class PlayerCore: NSObject {
   // Open a file
   func openURL(_ url: URL?, isNetworkResource: Bool = false, shouldAutoLoad: Bool = false) {
     guard let url = url else {
-      Utility.log("Error: empty file path or url")
+      Logger.general.error("empty file path or url")
       return
     }
     let isNetwork = isNetworkResource && !url.isFileURL
@@ -603,7 +603,7 @@ class PlayerCore: NSObject {
     for subTrack in info.subTracks {
       mpv.command(.subReload, args: ["\(subTrack.id)"], checkError: false) { code in
         if code < 0 {
-          Utility.log("Error code \(code) - Failed reloading subtitles")
+          Logger.general.error("Failed reloading subtitles: error code \(code)")
         }
       }
     }
@@ -841,7 +841,7 @@ class PlayerCore: NSObject {
   func execKeyCode(_ code: String) {
     mpv.command(.keypress, args: [code], checkError: false) { errCode in
       if errCode < 0 {
-        Utility.log("Error when executing key code (\(errCode))")
+        Logger.general.error("Error when executing key code (\(errCode))")
       }
     }
   }
@@ -1302,7 +1302,7 @@ class PlayerCore: NSObject {
       } else {
         // we cannot get dwidth and dheight, which is unexpected. This block should never be executed
         // but just in case, let's log the error.
-        Utility.log("videoSizeForDisplay: Cannot get dwidth and dheight")
+        Logger.general.warning("videoSizeForDisplay: Cannot get dwidth and dheight")
         width = AppData.widthWhenNoVideo
         height = AppData.heightWhenNoVideo
       }

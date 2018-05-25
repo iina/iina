@@ -110,7 +110,7 @@ class KeyMapping {
       // split
       let splitted = line.split(maxSplits: 1, whereSeparator: { $0 == " " || $0 == "\t"})
       if splitted.count < 2 {
-        Utility.log("Skipped corrupted line in input.conf: \(line)")
+        Logger.general.warning("Skipped corrupted line in input.conf: \(line)")
         continue  // no command, wrong format
       }
       let key = String(splitted[0]).trimmingCharacters(in: .whitespaces)

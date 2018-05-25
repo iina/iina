@@ -14,7 +14,7 @@ import OpenGL.GL3
 fileprivate func mpvGetOpenGL(_ ctx: UnsafeMutableRawPointer?, _ name: UnsafePointer<CChar>?) -> UnsafeMutableRawPointer? {
   let symbolName: CFString = CFStringCreateWithCString(kCFAllocatorDefault, name, kCFStringEncodingASCII);
   guard let addr = CFBundleGetFunctionPointerForName(CFBundleGetBundleWithIdentifier(CFStringCreateCopy(kCFAllocatorDefault, "com.apple.opengl" as CFString)), symbolName) else {
-    Utility.fatal("Cannot get OpenGL function pointer!")
+    Logger.general.fatal("Cannot get OpenGL function pointer!")
   }
   return addr
 }
@@ -103,7 +103,7 @@ class ViewLayer: CAOpenGLLayer {
       CGLChoosePixelFormat(attributes2, &pix, &npix)
     }
 
-    Utility.assert(pix != nil, "Cannot create OpenGL pixel format!")
+    Logger.general.assert(pix != nil, "Cannot create OpenGL pixel format!")
 
     return pix!
   }

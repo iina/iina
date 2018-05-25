@@ -210,7 +210,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
         if let iinaCommand = IINACommand(rawValue: kb.rawAction) {
           handleIINACommand(iinaCommand)
         } else {
-          Utility.log("Unknown iina command \(kb.rawAction)")
+          Logger.general.error("Unknown iina command \(kb.rawAction)")
         }
       } else {
         // - MPV command
@@ -225,7 +225,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
         }
         // handle return value
         if returnValue != 0 {
-          Utility.log("Return value \(returnValue) when executing key command \(kb.rawAction)")
+          Logger.general.warning("Return value \(returnValue) when executing key command \(kb.rawAction)")
         }
       }
     } else {
@@ -307,7 +307,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
     guard isWindowLoaded else { return }
     guard let duration = player.info.videoDuration, let pos = player.info.videoPosition else {
-      Utility.fatal("video info not available")
+      Logger.general.fatal("video info not available")
     }
     let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation

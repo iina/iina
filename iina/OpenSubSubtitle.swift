@@ -11,6 +11,8 @@ import Just
 import PromiseKit
 import Gzip
 
+fileprivate let logger = Logger.getLogger("opensub")
+
 final class OpenSubSubtitle: OnlineSubtitle {
 
   @objc var filename: String = ""
@@ -167,11 +169,11 @@ class OpenSubSupport {
           let pStatus = parsed["status"] as! String
           if pStatus.hasPrefix("200") {
             self.token = parsed["token"] as! String
-            Utility.log("OpenSub: logged in as user \(finalUser)")
+            logger?.debug("OpenSub: logged in as user \(finalUser)")
             self.startHeartbeat()
             resolver.fulfill(())
           } else {
-            Utility.log("OpenSub: login failed, \(pStatus)")
+            logger?.error("OpenSub: login failed, \(pStatus)")
             resolver.reject(OpenSubError.loginFailed(pStatus))
           }
         case .failure:
@@ -188,7 +190,7 @@ class OpenSubSupport {
   func hash(_ url: URL) -> Promise<FileInfo> {
     return Promise { resolver in
       guard let file = try? FileHandle(forReadingFrom: url) else {
-        Utility.log("OpenSub: cannot get file handle")
+        logger?.error("OpenSub: cannot get file handle")
         resolver.reject(OpenSubError.cannotReadFile)
         return
       }
@@ -197,7 +199,7 @@ class OpenSubSupport {
       let fileSize = file.offsetInFile
 
       if fileSize < 131072 {
-        Utility.log("File length less than 131072, skipped")
+        logger?.warning("File length less than 131072, skipped")
         resolver.reject(OpenSubError.fileTooSmall)
       }
 
@@ -373,23 +375,23 @@ class OpenSubSupport {
       case .ok(let value):
         // 406 No session
         if let pValue = value as? [String: Any], (pValue["status"] as? String ?? "").hasPrefix("406") {
-          Utility.log("OpenSub: heartbeat no session")
+          logger?.warning("heartbeat: no session")
           self.token = nil
           self.login().catch { err in
             switch err {
             case OpenSubError.loginFailed(let reason):
-              Utility.log("OpenSub: (re-login) \(reason)")
+              logger?.error("(re-login) \(reason)")
             case OpenSubError.xmlRpcError(let error):
-              Utility.log("OpenSub: (re-login) \(error.readableDescription)")
+              logger?.error("(re-login) \(error.readableDescription)")
             default:
-              Utility.log("OpenSub: (re-login) other error")
+              logger?.error("(re-login) \(err.localizedDescription)")
             }
           }
         } else {
-          Utility.log("OpenSub: heartbeat ok")
+          logger?.debug("OpenSub: heartbeat ok")
         }
       default:
-        Utility.log("OpenSub: heartbeat failed")
+        logger?.error("OpenSub: heartbeat failed")
         self.token = nil
       }
     }

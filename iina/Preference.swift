@@ -107,10 +107,8 @@ struct Preference {
 
     static let controlBarToolbarButtons = Key("controlBarToolbarButtons")
 
-    /** OSD auto hide timeout (float) */
+    static let enableOSD = Key("enableOSD")
     static let osdAutoHideTimeout = Key("osdAutoHideTimeout")
-
-    /** OSD text size (float) */
     static let osdTextSize = Key("osdTextSize")
 
     static let usePhysicalResolution = Key("usePhysicalResolution")
@@ -627,6 +625,7 @@ struct Preference {
     .playlistWidth: 270,
     .prefetchPlaylistVideoDuration: true,
     .themeMaterial: Theme.dark.rawValue,
+    .enableOSD: true,
     .osdAutoHideTimeout: Float(1),
     .osdTextSize: Float(20),
     .softVolume: 100,

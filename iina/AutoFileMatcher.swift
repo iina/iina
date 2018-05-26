@@ -202,7 +202,6 @@ class AutoFileMatcher {
           // find sub with same name
           for sub in subtitles {
             guard let vn = video.nameInSeries, let sn = sub.nameInSeries else { continue }
-            logger?.verbose("Matching \(video.filename)(\(vn)) and \(sub.filename)(\(sn)) ...")
             var nameMatched: Bool
             if let vnInt = Int(vn), let snInt = Int(sn) {
               nameMatched = vnInt == snInt
@@ -210,7 +209,7 @@ class AutoFileMatcher {
               nameMatched = vn == sn
             }
             if nameMatched {
-              logger?.verbose("Matched")
+              logger?.verbose("Matched \(video.filename)(\(vn)) and \(sub.filename)(\(sn)) ...")
               video.relatedSubs.append(sub)
               if sub.prefix == matchedSubPrefix {
                 try checkTicket()
@@ -292,10 +291,10 @@ class AutoFileMatcher {
       // calculate edit distance
       logger?.debug("Calculating edit didtance...")
       for sub in unmatchedSubs {
+        logger?.verbose("Calculating edit didtance for \(sub.filename)")
         var minDistToVideo: UInt = .max
         for video in unmatchedVideos {
           try checkTicket()
-          logger?.verbose("Calculating edit didtance for \(sub.filename) and \(video.filename)...")
           let threshold = UInt(Double(video.filename.count + sub.filename.count) * 0.6)
           let rawDist = ObjcUtils.levDistance(video.prefix, and: sub.prefix) + ObjcUtils.levDistance(video.suffix, and: sub.suffix)
           let dist: UInt = rawDist < threshold ? rawDist : UInt.max

@@ -321,8 +321,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private func parsePendingURL(_ url: String) {
     Logger.general?.debug("Parsing URL \(url)")
-    guard let parsed = NSURLComponents(string: url) else {
-      Logger.general?.warning("Cannot parse URL using NSURLComponents")
+    guard let parsed = URLComponents(string: url) else {
+      Logger.general?.warning("Cannot parse URL using URLComponents")
       return
     }
     // links

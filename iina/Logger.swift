@@ -10,18 +10,21 @@ import Foundation
 
 class Logger {
 
-  enum LogLevel: Int, Comparable {
-
+  enum LogLevel: Int, Comparable, CustomStringConvertible {
     static func < (lhs: LogLevel, rhs: LogLevel) -> Bool {
       return lhs.rawValue < rhs.rawValue
     }
 
-    case verbose = 0
+    case verbose
     case debug
     case warning
     case error
 
-    var stringValue: String {
+    static var preferred: LogLevel {
+      return LogLevel(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
+    }
+
+    var description: String {
       switch self {
       case .verbose: return "v"
       case .debug: return "d"
@@ -33,20 +36,15 @@ class Logger {
 
   var label: String
   var level: LogLevel
-  var useNSLog = false
+  var logToConsole = false
 
   static let enabled = Preference.bool(for: .enableLogging)
   static let logDirectory: URL = {
-    let date = Date()
-    let calendar = NSCalendar.current
-    let y = calendar.component(.year, from: date)
-    let m = calendar.component(.month, from: date)
-    let d = calendar.component(.day, from: date)
-    let h = calendar.component(.hour, from: date)
-    let mm = calendar.component(.minute, from: date)
-    let s = calendar.component(.second, from: date)
+    let formatter = DateFormatter()
+    formatter.dateFormat = "YYYY-MM-dd-HH-mm-ss"
+    let timeString  = formatter.string(from: Date())
     let token = Utility.ShortCodeGenerator.getCode(length: 6)
-    let sessionDirName = "\(y)-\(m)-\(d)-\(h)-\(mm)-\(s)_\(token)"
+    let sessionDirName = "\(timeString)_\(token)"
     let sessionDir = Utility.logDirURL.appendingPathComponent(sessionDirName, isDirectory: true)
     Utility.createDirIfNotExist(url: sessionDir)
     return sessionDir
@@ -73,17 +71,17 @@ class Logger {
     logFileHandle.closeFile()
   }
 
-  private static func log(_ message: String, label: String, level: LogLevel, useNSLog: Bool, appendNewlineAtTheEnd: Bool) {
+  private static func log(_ message: String, label: String, level: LogLevel, logToConsole: Bool, appendNewlineAtTheEnd: Bool) {
     let time = dateFormatter.string(from: Date())
-    if useNSLog {
-      NSLog("[%@][%@] %@", label, level.stringValue, message)
+    let string = "\(time) [\(label)][\(level.description)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
+    if logToConsole {
+      print("\(time) [\(label)][\(level.description)] \(message)")
       return
     }
-    let string = "\(time) [\(label)][\(level.stringValue)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
     if let data = string.data(using: .utf8) {
       logFileHandle.write(data)
     } else {
-      NSLog("%@", "Cannot encode log string!")
+      NSLog("Cannot encode log string!")
     }
   }
 
@@ -91,7 +89,7 @@ class Logger {
     #if DEBUG
       let logger = Logger(label: "iina")
       if !Logger.enabled {
-        logger.useNSLog = true
+        logger.logToConsole = true
       }
       return logger
     #else
@@ -99,33 +97,29 @@ class Logger {
     #endif
   }()
 
-  private init(label: String, logLevel: LogLevel? = nil) {
+  private init(label: String, logLevel: LogLevel = .preferred) {
     self.label = label
-    if let level = logLevel {
-      self.level = level
-    } else {
-      self.level = LogLevel(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
-    }
+    self.level = logLevel
   }
 
   func verbose(_ message: String, appendNewline: Bool = true) {
     guard level <= .verbose else { return }
-    Logger.log(message, label: label, level: .verbose, useNSLog: useNSLog, appendNewlineAtTheEnd: appendNewline)
+    Logger.log(message, label: label, level: .verbose, logToConsole: logToConsole, appendNewlineAtTheEnd: appendNewline)
   }
 
   func debug(_ message: String, appendNewline: Bool = true) {
     guard level <= .debug else { return }
-    Logger.log(message, label: label, level: .debug, useNSLog: useNSLog, appendNewlineAtTheEnd: appendNewline)
+    Logger.log(message, label: label, level: .debug, logToConsole: logToConsole, appendNewlineAtTheEnd: appendNewline)
   }
 
   func warning(_ message: String, appendNewline: Bool = true) {
     guard level <= .warning else { return }
-    Logger.log(message, label: label, level: .warning, useNSLog: useNSLog, appendNewlineAtTheEnd: appendNewline)
+    Logger.log(message, label: label, level: .warning, logToConsole: logToConsole, appendNewlineAtTheEnd: appendNewline)
   }
 
   func error(_ message: String, appendNewline: Bool = true) {
     guard level <= .error else { return }
-    Logger.log(message, label: label, level: .error, useNSLog: useNSLog, appendNewlineAtTheEnd: appendNewline)
+    Logger.log(message, label: label, level: .error, logToConsole: logToConsole, appendNewlineAtTheEnd: appendNewline)
   }
 
   static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {

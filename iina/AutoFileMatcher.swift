@@ -289,9 +289,9 @@ class AutoFileMatcher {
     logger?.debug("Force matching unmatched videos, video=\(unmatchedVideos.count), sub=\(unmatchedSubs.count)...")
     if unmatchedSubs.count > 0 && unmatchedVideos.count > 0 {
       // calculate edit distance
-      logger?.debug("Calculating edit didtance...")
+      logger?.debug("Calculating edit distance...")
       for sub in unmatchedSubs {
-        logger?.verbose("Calculating edit didtance for \(sub.filename)")
+        logger?.verbose("Calculating edit distance for \(sub.filename)")
         var minDistToVideo: UInt = .max
         for video in unmatchedVideos {
           try checkTicket()

@@ -75,11 +75,11 @@ class Logger {
 
   private static func log(_ message: String, label: String, level: LogLevel, useNSLog: Bool, appendNewlineAtTheEnd: Bool) {
     let time = dateFormatter.string(from: Date())
-    let string = "\(time) [\(label)][\(level.stringValue)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
     if useNSLog {
-      NSLog("%@", string)
+      NSLog("[%@][%@] %@", label, level.stringValue, message)
       return
     }
+    let string = "\(time) [\(label)][\(level.stringValue)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
     if let data = string.data(using: .utf8) {
       logFileHandle.write(data)
     } else {

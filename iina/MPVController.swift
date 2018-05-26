@@ -349,7 +349,7 @@ class MPVController: NSObject {
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {
     guard mpv != nil else { return }
     if args.count > 0 && args.last == nil {
-      Logger.general.fatal("Command do not need a nil suffix")
+      Logger.fatal("Command do not need a nil suffix")
     }
     var strArgs = args
     strArgs.insert(command.rawValue, at: 0)
@@ -430,7 +430,7 @@ class MPVController: NSObject {
 
   /** Get filter. only "af" or "vf" is supported for name */
   func getFilters(_ name: String) -> [MPVFilter] {
-    Logger.general.assert(name == MPVProperty.vf || name == MPVProperty.af, "getFilters() do not support \(name)!")
+    Logger.assert(name == MPVProperty.vf || name == MPVProperty.af, "getFilters() do not support \(name)!")
 
     var result: [MPVFilter] = []
     var node = mpv_node()
@@ -448,7 +448,7 @@ class MPVController: NSObject {
 
   /** Set filter. only "af" or "vf" is supported for name */
   func setFilters(_ name: String, filters: [MPVFilter]) {
-    Logger.general.assert(name == MPVProperty.vf || name == MPVProperty.af, "setFilters() do not support \(name)!")
+    Logger.assert(name == MPVProperty.vf || name == MPVProperty.af, "setFilters() do not support \(name)!")
     let cmd = name == MPVProperty.vf ? MPVCommand.vf : MPVCommand.af
 
     let str = filters.map { $0.stringFormat }.joined(separator: ",")
@@ -505,7 +505,7 @@ class MPVController: NSObject {
       let prefix = String(cString: (msg?.pointee.prefix)!)
       let level = String(cString: (msg?.pointee.level)!)
       let text = String(cString: (msg?.pointee.text)!)
-      Logger.general.debug("MPV log: [\(prefix)] \(level): \(text)")
+      Logger.general?.debug("MPV log: [\(prefix)] \(level): \(text)", appendNewline: false)
 
     case MPV_EVENT_PROPERTY_CHANGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
@@ -893,7 +893,7 @@ class MPVController: NSObject {
 
     case .other:
       guard let tr = transformer else {
-        Logger.general.error("setUserOption: no transformer!")
+        Logger.general?.error("setUserOption: no transformer!")
         return
       }
       if let value = tr(key) {
@@ -948,7 +948,7 @@ class MPVController: NSObject {
 
       case .other:
         guard let tr = info.transformer else {
-          Logger.general.error("setUserOption: no transformer!")
+          Logger.general?.error("setUserOption: no transformer!")
           return
         }
         if let value = tr(info.prefKey) {
@@ -966,7 +966,7 @@ class MPVController: NSObject {
   private func chkErr(_ status: Int32!) {
     guard status < 0 else { return }
     DispatchQueue.main.async {
-      Logger.general.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
+      Logger.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
     }
   }
 

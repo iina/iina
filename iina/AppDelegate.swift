@@ -86,6 +86,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   // MARK: - App Delegate
 
   func applicationWillFinishLaunching(_ notification: Notification) {
+    Logger.general?.debug("App will launch")
+
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
 
@@ -104,6 +106,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var iinaArgFilenames: [String] = []
     var dropNextArg = false
 
+    Logger.general?.debug("Got arguments \(arguments)")
     for arg in arguments {
       if dropNextArg {
         dropNextArg = false
@@ -123,6 +126,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
     }
 
+    Logger.general?.debug("IINA arguments: \(iinaArgs)")
+    Logger.general?.debug("Filenames from arguments: \(iinaArgFilenames)")
     commandLineStatus.parseArguments(iinaArgs)
 
     let (version, build) = Utility.iinaVersion()
@@ -140,6 +145,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
+    Logger.general?.debug("App launched")
+
     if !isReady {
       getReady()
     }
@@ -155,6 +162,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     if #available(macOS 10.13, *) {
       if RemoteCommandController.useSystemMediaControl {
+        Logger.general?.debug("Setting up MediaPlayer integration")
         RemoteCommandController.setup()
         NowPlayingInfoManager.updateState(.playing)
       }
@@ -230,6 +238,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+    Logger.general?.debug("App should terminate")
     for pc in PlayerCore.playerCores {
      pc.terminateMPV()
     }
@@ -238,9 +247,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
     guard !flag else { return true }
+    Logger.general?.debug("Handle reopen")
     showWelcomeWindow(checkingForUpdatedData: true)
-
     return true
+  }
+
+  func applicationWillTerminate(_ notification: Notification) {
+    Logger.general?.debug("App will terminate")
+    Logger.closeLogFile()
   }
 
   /**
@@ -297,6 +311,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @objc func handleURLEvent(event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
     openFileCalled = true
     guard let url = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue else { return }
+    Logger.general?.debug("URL event: \(url)")
     if isReady {
       parsePendingURL(url)
     } else {
@@ -305,10 +320,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   private func parsePendingURL(_ url: String) {
-    guard let parsed = NSURLComponents(string: url) else { return }
+    Logger.general?.debug("Parsing URL \(url)")
+    guard let parsed = NSURLComponents(string: url) else {
+      Logger.general?.warning("Cannot parse URL using NSURLComponents")
+      return
+    }
     // links
     if let host = parsed.host, host == "weblink" {
-      guard let urlValue = (parsed.queryItems?.first { $0.name == "url" }?.value) else { return }
+
+      guard let urlValue = (parsed.queryItems?.first { $0.name == "url" }?.value) else {
+        Logger.general?.debug("No parameter \"url\" for weblink")
+        return
+      }
+      Logger.general?.debug("Got weblink, url=\(urlValue)")
       PlayerCore.active.openURLString(urlValue)
     }
   }
@@ -316,6 +340,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   // MARK: - Menu actions
 
   @IBAction func openFile(_ sender: AnyObject) {
+    Logger.general?.debug("Menu - Open file")
     let panel = NSOpenPanel()
     panel.title = NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File")
     panel.canCreateDirectories = false
@@ -337,6 +362,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func openURL(_ sender: AnyObject) {
+    Logger.general?.debug("Menu - Open URL")
     let panel = NSAlert()
     panel.messageText = NSLocalizedString("alert.open_url.title", comment: "Open URL")
     panel.informativeText = NSLocalizedString("alert.open_url.message", comment: "Please enter the URL:")

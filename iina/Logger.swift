@@ -16,7 +16,7 @@ class Logger {
       return lhs.rawValue < rhs.rawValue
     }
 
-    case verbose
+    case verbose = 0
     case debug
     case warning
     case error
@@ -99,9 +99,13 @@ class Logger {
     #endif
   }()
 
-  private init(label: String, logLevel: LogLevel = .debug) {
+  private init(label: String, logLevel: LogLevel? = nil) {
     self.label = label
-    self.level = logLevel
+    if let level = logLevel {
+      self.level = level
+    } else {
+      self.level = LogLevel(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
+    }
   }
 
   func verbose(_ message: String, appendNewline: Bool = true) {

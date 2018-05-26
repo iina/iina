@@ -241,6 +241,7 @@ struct Preference {
 
     /** Log to log folder (bool) */
     static let enableLogging = Key("enableLogging")
+    static let logLevel = Key("logLevel")
 
     /** unused */
     // static let resizeFrameBuffer = Key("resizeFrameBuffer")
@@ -718,6 +719,7 @@ struct Preference {
     .enableAdvancedSettings: false,
     .useMpvOsd: false,
     .enableLogging: false,
+    .logLevel: Logger.LogLevel.debug.rawValue,
     .userOptions: [],
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",

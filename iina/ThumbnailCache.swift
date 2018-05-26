@@ -145,6 +145,7 @@ class ThumbnailCache {
       logger?.error("Cannot open file.")
       return nil
     }
+    logger?.debug("Reading from \(pathURL.path)")
 
     var result: [FFThumbnail] = []
 
@@ -184,7 +185,7 @@ class ThumbnailCache {
     }
 
     file.closeFile()
-    logger?.debug("Finished reading thumbnail cache...")
+    logger?.debug("Finished reading thumbnail cache, \(result.count) in total")
     return result
   }
 

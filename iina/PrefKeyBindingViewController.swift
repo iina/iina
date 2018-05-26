@@ -81,7 +81,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     // - user
     guard let uc = Preference.dictionary(for: .inputConfigs)
     else  {
-      Logger.general.fatal("Cannot get config file list!")
+      Logger.fatal("Cannot get config file list!")
     }
     userConfigs = uc
     userConfigs.forEach {

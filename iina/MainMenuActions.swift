@@ -174,7 +174,7 @@ extension MainMenuActionHandler {
       player.setVideoAspect(aspectStr)
       player.sendOSD(.aspect(aspectStr))
     } else {
-      Logger.general.error("Unknown aspect in menuChangeAspect(): \(sender.representedObject.debugDescription)")
+      Logger.general?.error("Unknown aspect in menuChangeAspect(): \(sender.representedObject.debugDescription)")
     }
   }
 
@@ -182,7 +182,7 @@ extension MainMenuActionHandler {
     if let cropStr = sender.representedObject as? String {
       player.setCrop(fromString: cropStr)
     } else {
-      Logger.general.error("sender.representedObject is not a string in menuChangeCrop()")
+      Logger.general?.error("sender.representedObject is not a string in menuChangeCrop()")
     }
   }
 
@@ -221,7 +221,7 @@ extension MainMenuActionHandler {
       let newVolume = Double(volumeDelta) + player.info.volume
       player.setVolume(newVolume)
     } else {
-      Logger.general.error("sender.representedObject is not int in menuChangeVolume()")
+      Logger.general?.error("sender.representedObject is not int in menuChangeVolume()")
     }
   }
 
@@ -234,7 +234,7 @@ extension MainMenuActionHandler {
       let newDelay = player.info.audioDelay + delayDelta
       player.setAudioDelay(newDelay)
     } else {
-      Logger.general.error("sender.representedObject is not Double in menuChangeAudioDelay()")
+      Logger.general?.error("sender.representedObject is not Double in menuChangeAudioDelay()")
     }
   }
 
@@ -257,7 +257,7 @@ extension MainMenuActionHandler {
       let newDelay = player.info.subDelay + delayDelta
       player.setSubDelay(newDelay)
     } else {
-      Logger.general.error("sender.representedObject is not Double in menuChangeSubDelay()")
+      Logger.general?.error("sender.representedObject is not Double in menuChangeSubDelay()")
     }
   }
 
@@ -312,7 +312,7 @@ extension MainMenuActionHandler {
           switch result {
           case .ok(let urls):
             for url in urls {
-              Logger.general.debug("Saved subtitle to \(url.path)")
+              Logger.general?.debug("Saved subtitle to \(url.path)")
               self.player.loadExternalSubFile(url)
             }
             self.player.sendOSD(.downloadedSub(

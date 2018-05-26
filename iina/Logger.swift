@@ -10,7 +10,12 @@ import Foundation
 
 class Logger {
 
-  enum LogLevel: Int {
+  enum LogLevel: Int, Comparable {
+
+    static func < (lhs: LogLevel, rhs: LogLevel) -> Bool {
+      return lhs.rawValue < rhs.rawValue
+    }
+
     case verbose
     case debug
     case warning
@@ -53,16 +58,24 @@ class Logger {
     return try! FileHandle(forWritingTo: logFileURL)
   }()
 
+  private static var dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "dd HH:mm:ss.SSS"
+    return formatter
+  }()
+
   static func getLogger(_ label: String) -> Logger? {
     return enabled ? Logger(label: label) : nil
   }
 
   static func closeLogFile() {
+    guard Logger.enabled else { return }
     logFileHandle.closeFile()
   }
 
-  private static func log(_ message: String, label: String, level: LogLevel, useNSLog: Bool) {
-    let string = "[\(label)][\(level.stringValue)] \(message)\n"
+  private static func log(_ message: String, label: String, level: LogLevel, useNSLog: Bool, appendNewlineAtTheEnd: Bool) {
+    let time = dateFormatter.string(from: Date())
+    let string = "\(time) [\(label)][\(level.stringValue)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
     if useNSLog {
       NSLog("%@", string)
       return
@@ -74,17 +87,16 @@ class Logger {
     }
   }
 
-  static let general: Logger = {
-    let logger = Logger(label: "iina")
-    if !Logger.enabled {
-      #if DEBUG
-        logger.level = .debug
-      #else
-        logger.level = .warning
-      #endif
-      logger.useNSLog = true
-    }
-    return logger
+  static let general: Logger? = {
+    #if DEBUG
+      let logger = Logger(label: "iina")
+      if !Logger.enabled {
+        logger.useNSLog = true
+      }
+      return logger
+    #else
+      return Logger.getLogger("iina")
+    #endif
   }()
 
   private init(label: String, logLevel: LogLevel = .debug) {
@@ -92,34 +104,38 @@ class Logger {
     self.level = logLevel
   }
 
-  func verbose(_ message: String) {
-    Logger.log(message, label: label, level: .verbose, useNSLog: useNSLog)
+  func verbose(_ message: String, appendNewline: Bool = true) {
+    guard level <= .verbose else { return }
+    Logger.log(message, label: label, level: .verbose, useNSLog: useNSLog, appendNewlineAtTheEnd: appendNewline)
   }
 
-  func debug(_ message: String) {
-    Logger.log(message, label: label, level: .debug, useNSLog: useNSLog)
+  func debug(_ message: String, appendNewline: Bool = true) {
+    guard level <= .debug else { return }
+    Logger.log(message, label: label, level: .debug, useNSLog: useNSLog, appendNewlineAtTheEnd: appendNewline)
   }
 
-  func warning(_ message: String) {
-    Logger.log(message, label: label, level: .warning, useNSLog: useNSLog)
+  func warning(_ message: String, appendNewline: Bool = true) {
+    guard level <= .warning else { return }
+    Logger.log(message, label: label, level: .warning, useNSLog: useNSLog, appendNewlineAtTheEnd: appendNewline)
   }
 
-  func error(_ message: String) {
-    Logger.log(message, label: label, level: .error, useNSLog: useNSLog)
+  func error(_ message: String, appendNewline: Bool = true) {
+    guard level <= .error else { return }
+    Logger.log(message, label: label, level: .error, useNSLog: useNSLog, appendNewlineAtTheEnd: appendNewline)
   }
 
-  func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
+  static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
     if !expr {
-      self.error(errorMessage)
+      general?.error(errorMessage)
       Utility.showAlert("fatal_error", arguments: [errorMessage])
       block()
       exit(1)
     }
   }
 
-  func fatal(_ message: String, _ block: () -> Void = {}) -> Never {
-    self.error(message)
-    self.debug(Thread.callStackSymbols.joined(separator: "\n"))
+  static func fatal(_ message: String, _ block: () -> Void = {}) -> Never {
+    general?.error(message)
+    general?.debug(Thread.callStackSymbols.joined(separator: "\n"))
     Utility.showAlert("fatal_error", arguments: [message])
     block()
     // Exit without crash since it's not uncatched/unhandled

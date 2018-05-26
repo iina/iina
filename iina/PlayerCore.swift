@@ -131,12 +131,6 @@ class PlayerCore: NSObject {
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
 
-  private let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm"
-    return formatter
-  }()
-
   static var keyBindings: [String: KeyMapping] = [:]
 
   override init() {
@@ -1151,7 +1145,7 @@ class PlayerCore: NSObject {
 
     case .additionalInfo:
       DispatchQueue.main.async {
-        let timeString = self.dateFormatter.string(from: Date())
+        let timeString = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .short)
         if let capacity = PowerSource.getList().filter({ $0.type == "InternalBattery" }).first?.currentCapacity {
           self.mainWindow.additionalInfoLabel.stringValue = "\(timeString) | \(capacity)%"
         } else {

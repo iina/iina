@@ -34,7 +34,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   private let getKey: [SortOption: (PlaybackHistory) -> String] = [
-    .lastPlayed: { HistoryWindowController.dateFormatterDate.string(from: $0.addedDate) },
+    .lastPlayed: { DateFormatter.localizedString(from: $0.addedDate, dateStyle: .none, timeStyle: .short) },
     .fileLocation: { $0.url.deletingLastPathComponent().path }
   ]
 
@@ -44,24 +44,6 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   @IBOutlet weak var outlineView: NSOutlineView!
   @IBOutlet weak var historySearchField: NSSearchField!
-
-  private static let dateFormatterDate: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "MM-dd"
-    return formatter
-  }()
-
-  private static let dateFormatterTime: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm"
-    return formatter
-  }()
-
-  private static let dateFormatterDateAndTime: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "MM-dd HH:mm"
-    return formatter
-  }()
 
   var groupBy: SortOption = .lastPlayed
   var searchOption: SearchOption = .fullPath
@@ -162,8 +144,9 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
     if let entry = item as? PlaybackHistory {
       if tableColumn?.identifier == .time {
-        let formatter = groupBy == .lastPlayed ? HistoryWindowController.dateFormatterTime : HistoryWindowController.dateFormatterDateAndTime
-        return formatter.string(from: entry.addedDate)
+        return groupBy == .lastPlayed ?
+          DateFormatter.localizedString(from: entry.addedDate, dateStyle: .none, timeStyle: .short) :
+          DateFormatter.localizedString(from: entry.addedDate, dateStyle: .short, timeStyle: .short)
       } else if tableColumn?.identifier == .progress {
         return entry.duration.stringRepresentation
       }

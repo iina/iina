@@ -63,6 +63,13 @@ class Logger {
   }()
 
   static func getLogger(_ label: String) -> Logger? {
+    #if DEBUG
+    if !enabled {
+      let logger = Logger(label: label, logLevel: .warning)
+      logger.logToConsole = true
+      return logger
+    }
+    #endif
     return enabled ? Logger(label: label) : nil
   }
 
@@ -86,15 +93,7 @@ class Logger {
   }
 
   static let general: Logger? = {
-    #if DEBUG
-      let logger = Logger(label: "iina")
-      if !Logger.enabled {
-        logger.logToConsole = true
-      }
-      return logger
-    #else
-      return Logger.getLogger("iina")
-    #endif
+    return Logger.getLogger("iina")
   }()
 
   private init(label: String, logLevel: LogLevel = .preferred) {

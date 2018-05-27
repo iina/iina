@@ -14,6 +14,7 @@ class PrefOSCToolbarDraggingItemViewController: NSViewController, NSPasteboardWr
     return NSNib.Name("PrefOSCToolbarDraggingItemViewController")
   }
 
+  var availableItemsView: PrefOSCToolbarAvailableItemsView?
   var buttonType: Preference.ToolBarButton
 
   @IBOutlet weak var iconImageView: NSImageView!
@@ -62,7 +63,9 @@ class PrefOSCToolbarDraggingItemViewController: NSViewController, NSPasteboardWr
       imageComponent.frame = NSRect(origin: .zero, size: NSSize(width: 14, height: 14))
       return [imageComponent]
     }
-    view.beginDraggingSession(with: [dragItem], event: event, source: view.superview as! PrefOSCToolbarAvailableItemsView)
+    if let availableItemsView = availableItemsView {
+      view.beginDraggingSession(with: [dragItem], event: event, source: availableItemsView)
+    }
   }
 
 }

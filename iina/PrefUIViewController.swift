@@ -160,11 +160,14 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
 
   private func updateOSCToolbarButtons() {
     oscToolbarStackView.views.forEach { oscToolbarStackView.removeView($0) }
-    for buttonType in PrefUIViewController.oscToolbarButtons {
+    let buttons = PrefUIViewController.oscToolbarButtons
+    for buttonType in buttons {
       let button = NSImageView()
       button.image = buttonType.image()
+      button.translatesAutoresizingMaskIntoConstraints = false
+      let buttonWidth = buttons.count == 5 ? "20" : "24"
+      Utility.quickConstraints(["H:[btn(\(buttonWidth))]", "V:[btn(24)]"], ["btn": button])
       oscToolbarStackView.addView(button, in: .trailing)
-      Utility.quickConstraints(["H:[btn(24)]", "V:[btn(24)]"], ["btn": button])
     }
   }
 

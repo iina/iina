@@ -57,11 +57,11 @@ class PlayerCore: NSObject {
   }
 
   static private func createPlayerCore() -> PlayerCore {
-    playerCoreCounter += 1
     let pc = PlayerCore()
     pc.label = "\(playerCoreCounter)"
     playerCores.append(pc)
     pc.startMPV()
+    playerCoreCounter += 1
     return pc
   }
 

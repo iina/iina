@@ -133,7 +133,7 @@ return -1;\
   AVDictionary *optionsDict = NULL;
 
   avcodec_parameters_to_context(pCodecCtx, pVideoStream->codecpar);
-  av_codec_set_pkt_timebase(pCodecCtx, pVideoStream->time_base);
+  pCodecCtx->time_base = pVideoStream->time_base;
 
   ret = avcodec_open2(pCodecCtx, pCodec, &optionsDict);
   CHECK_SUCCESS(ret, @"Cannot open codec")
@@ -199,8 +199,11 @@ return -1;\
       if (packet.stream_index == videoStream) {
 
         // Decode video frame
-        if (avcodec_send_packet(pCodecCtx, &packet) < 0)
+        ret = avcodec_send_packet(pCodecCtx, &packet) < 0;
+        av_packet_unref(&packet);
+        if (ret) {
           break;
+        }
 
         ret = avcodec_receive_frame(pCodecCtx, pFrame);
         if (ret < 0) {  // something happened
@@ -252,9 +255,12 @@ return -1;\
 
   // Free the RGB image
   av_free(pFrameRGBBuffer);
-  av_free(pFrameRGB);
+  av_frame_free(&pFrameRGB);
   // Free the YUV frame
-  av_free(pFrame);
+  av_frame_free(&pFrame);
+  
+  // Free the SWS Context
+  sws_freeContext(sws_ctx);
 
   // Close the codec
   avcodec_close(pCodecCtx);

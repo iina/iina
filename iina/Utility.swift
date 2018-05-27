@@ -76,28 +76,6 @@ class Utility {
     alert.runModal()
   }
 
-  static func log(_ message: String) {
-    NSLog("%@", message)
-  }
-
-  static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
-    if !expr {
-      NSLog("%@", errorMessage)
-      showAlert("fatal_error", arguments: [errorMessage])
-      block()
-      exit(1)
-    }
-  }
-
-  static func fatal(_ message: String, _ block: () -> Void = {}) -> Never {
-    NSLog("%@\n", message)
-    NSLog(Thread.callStackSymbols.joined(separator: "\n"))
-    showAlert("fatal_error", arguments: [message])
-    block()
-    // Exit without crash since it's not uncatched/unhandled
-    exit(1)
-  }
-
   // MARK: - Panels, Alerts
 
   /** 
@@ -188,11 +166,11 @@ class Utility {
       panel.begin(completionHandler: handler)
     case .sheet:
       guard let sheetWindow = sheetWindow else {
-        Utility.fatal("No sheet window")
+        Logger.fatal("No sheet window")
       }
       panel.beginSheet(sheetWindow, completionHandler: handler)
     default:
-      Utility.log("quickSavePanel: Unsupported mode")
+      Logger.general?.error("quickSavePanel: Unsupported mode")
     }
   }
 
@@ -235,7 +213,7 @@ class Utility {
       }
     case .sheetModal:
       guard let sheetWindow = sheetWindow else {
-        Utility.fatal("No sheet window")
+        Logger.fatal("No sheet window")
       }
       panel.beginSheetModal(for: sheetWindow) { response in
         if response == .alertFirstButtonReturn {
@@ -244,7 +222,7 @@ class Utility {
       }
       return false
     default:
-      Utility.log("quickPromptPanel: Unsupported mode")
+      Logger.general?.error("quickPromptPanel: Unsupported mode")
       return false
     }
   }
@@ -327,7 +305,7 @@ class Utility {
 
     var successCount = 0
     var failedCount = 0
-    Utility.log("Set self as default...")
+    Logger.general?.debug("Set self as default")
     for docType in docTypes {
       if let exts = docType["CFBundleTypeExtensions"] as? [String] {
         for ext in exts {
@@ -336,7 +314,7 @@ class Utility {
           if status == kOSReturnSuccess {
             successCount += 1
           } else {
-            Utility.log("failed for \(ext): return value \(status)")
+            Logger.general?.error("failed for \(ext): return value \(status)")
             failedCount += 1
           }
         }
@@ -353,7 +331,7 @@ class Utility {
       do {
       try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
       } catch {
-        Utility.fatal("Cannot create directory: \(url)")
+        Logger.fatal("Cannot create directory: \(url)")
       }
     }
   }
@@ -382,7 +360,7 @@ class Utility {
   static let appSupportDirUrl: URL = {
     // get path
     let asPath = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-    Utility.assert(asPath.count >= 1, "Cannot get path to Application Support directory")
+    Logger.assert(asPath.count >= 1, "Cannot get path to Application Support directory")
     let bundleID = Bundle.main.bundleIdentifier!
     let appAsUrl = asPath.first!.appendingPathComponent(bundleID)
     createDirIfNotExist(url: appAsUrl)
@@ -398,7 +376,7 @@ class Utility {
   static let logDirURL: URL = {
     // get path
     let libraryPath = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)
-    Utility.assert(libraryPath.count >= 1, "Cannot get path to Logs directory")
+    Logger.assert(libraryPath.count >= 1, "Cannot get path to Logs directory")
     let logsUrl = libraryPath.first!.appendingPathComponent("Logs", isDirectory: true)
     let bundleID = Bundle.main.bundleIdentifier!
     let appLogsUrl = logsUrl.appendingPathComponent(bundleID, isDirectory: true)
@@ -415,7 +393,7 @@ class Utility {
   static let thumbnailCacheURL: URL = {
     // get path
     let cachesPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
-    Utility.assert(cachesPath.count >= 1, "Cannot get path to Caches directory")
+    Logger.assert(cachesPath.count >= 1, "Cannot get path to Caches directory")
     let bundleID = Bundle.main.bundleIdentifier!
     let appCachesUrl = cachesPath.first!.appendingPathComponent(bundleID, isDirectory: true)
     let appThumbnailCacheUrl = appCachesUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)

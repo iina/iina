@@ -8,6 +8,8 @@
 
 import Cocoa
 
+fileprivate let logger = Logger.getLogger("thumbcache")
+
 class ThumbnailCache {
   static private var version = 2
 
@@ -29,19 +31,19 @@ class ThumbnailCache {
   
   static func fileIsCached(forName name: String, forVideo videoPath: URL?) -> Bool {
     guard let fileAttr = try? FileManager.default.attributesOfItem(atPath: videoPath!.path) else {
-      Utility.log("Cannot get video file attributes")
+      logger?.error("Cannot get video file attributes")
       return false
     }
     
     // file size
     guard let fileSize = fileAttr[.size] as? UInt64 else {
-      Utility.log("Cannot get video file size")
+      logger?.error("Cannot get video file size")
       return false
     }
     
     // modified date
     guard let fileModifiedDate = fileAttr[.modificationDate] as? Date else {
-      Utility.log("Cannot get video file modification date")
+      logger?.error("Cannot get video file modification date")
       return false
     }
     let fileTimestamp = Int64(fileModifiedDate.timeIntervalSince1970)
@@ -49,7 +51,7 @@ class ThumbnailCache {
     // Check metadate in the cache
     if self.fileExists(forName: name) {
       guard let file = try? FileHandle(forReadingFrom: urlFor(name)) else {
-        Utility.log("Cannot open cache file.")
+        logger?.error("Cannot open cache file.")
         return false
       }
       
@@ -66,7 +68,7 @@ class ThumbnailCache {
   /// Write thumbnail cache to file. 
   /// This method is expected to be called when the file doesn't exist.
   static func write(_ thumbnails: [FFThumbnail], forName name: String, forVideo videoPath: URL?) {
-    // Utility.log("Writing thumbnail cache...")
+    logger?.debug("Writing thumbnail cache...")
 
     let maxCacheSize = Preference.integer(for: .maxThumbnailPreviewCacheSize) * FileSize.Unit.mb.rawValue
     if maxCacheSize == 0 {
@@ -77,11 +79,11 @@ class ThumbnailCache {
 
     let pathURL = urlFor(name)
     guard FileManager.default.createFile(atPath: pathURL.path, contents: nil, attributes: nil) else {
-      Utility.log("Cannot create file.")
+      logger?.error("Cannot create file.")
       return
     }
     guard let file = try? FileHandle(forWritingTo: pathURL) else {
-      Utility.log("Cannot write to file.")
+      logger?.error("Cannot write to file.")
       return
     }
 
@@ -90,13 +92,13 @@ class ThumbnailCache {
     file.write(versionData)
     
     guard let fileAttr = try? FileManager.default.attributesOfItem(atPath: videoPath!.path) else {
-      Utility.log("Cannot get video file attributes")
+      logger?.error("Cannot get video file attributes")
       return
     }
     
     // file size
     guard var fileSize = fileAttr[.size] as? UInt64 else {
-      Utility.log("Cannot get video file size")
+      logger?.error("Cannot get video file size")
       return
     }
     let fileSizeData = Data(bytes: &fileSize, count: sizeofUInt64)
@@ -104,7 +106,7 @@ class ThumbnailCache {
     
     // modified date
     guard let fileModifiedDate = fileAttr[.modificationDate] as? Date else {
-      Utility.log("Cannot get video file modification date")
+      logger?.error("Cannot get video file modification date")
       return
     }
     var fileTimestamp = Int64(fileModifiedDate.timeIntervalSince1970)
@@ -115,11 +117,11 @@ class ThumbnailCache {
     for tb in thumbnails {
       let timestampData = Data(bytes: &tb.realTime, count: sizeofDouble)
       guard let tiffData = tb.image?.tiffRepresentation else {
-        Utility.log("Cannot generate tiff data.")
+        logger?.error("Cannot generate tiff data.")
         return
       }
       guard let jpegData = NSBitmapImageRep(data: tiffData)?.representation(using: .jpeg, properties: imageProperties) else {
-        Utility.log("Cannot generate jpeg data.")
+        logger?.error("Cannot generate jpeg data.")
         return
       }
       var blockLength = Int64(timestampData.count + jpegData.count)
@@ -130,19 +132,20 @@ class ThumbnailCache {
     }
 
     CacheManager.shared.needsRefresh = true
-    // Utility.log("Finished writing thumbnail cache.")
+    logger?.debug("Finished writing thumbnail cache.")
   }
 
   /// Read thumbnail cache to file.
   /// This method is expected to be called when the file exists.
   static func read(forName name: String) -> [FFThumbnail]? {
-    // Utility.log("Reading thumbnail cache...")
+    logger?.debug("Reading thumbnail cache...")
 
     let pathURL = urlFor(name)
     guard let file = try? FileHandle(forReadingFrom: pathURL) else {
-      Utility.log("Cannot open file.")
+      logger?.error("Cannot open file.")
       return nil
     }
+    logger?.debug("Reading from \(pathURL.path)")
 
     var result: [FFThumbnail] = []
 
@@ -164,13 +167,13 @@ class ThumbnailCache {
       // jpeg
       let jpegData = file.readData(ofLength: Int(blockLength) - sizeofDouble)
       guard let image = NSImage(data: jpegData) else {
-        Utility.log("Cannot read image. Cache file will be deleted.")
+        logger?.warning("Cannot read image. Cache file will be deleted.")
         file.closeFile()
         // try deleting corrupted cache
         do {
           try FileManager.default.removeItem(at: pathURL)
         } catch {
-          Utility.log("Cannot delete corrupted cache.")
+          logger?.error("Cannot delete corrupted cache.")
         }
         return nil
       }
@@ -182,7 +185,7 @@ class ThumbnailCache {
     }
 
     file.closeFile()
-    // Utility.log("Finished reading thumbnail cache...")
+    logger?.debug("Finished reading thumbnail cache, \(result.count) in total")
     return result
   }
 

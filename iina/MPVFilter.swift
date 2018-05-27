@@ -158,7 +158,7 @@ class MPVFilter: NSObject {
 
   func cropParams(videoSize: NSSize) -> [String: Double] {
     guard type == .crop else {
-      Utility.fatal("Trying to get crop params from a non-crop filter!")
+      Logger.fatal("Trying to get crop params from a non-crop filter!")
     }
     guard let params = params else { return [:] }
     // w and h should always valid

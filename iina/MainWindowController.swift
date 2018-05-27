@@ -211,7 +211,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       case .playlist:
         return CGFloat(Preference.integer(for: .playlistWidth)).clamped(to: PlaylistMinWidth...PlaylistMaxWidth)
       default:
-        Utility.fatal("SideBarViewType.width shouldn't be called here")
+        Logger.fatal("SideBarViewType.width shouldn't be called here")
       }
     }
   }
@@ -840,7 +840,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if let iinaCommand = IINACommand(rawValue: keyBinding.rawAction) {
         handleIINACommand(iinaCommand)
       } else {
-        Utility.log("Unknown iina command \(keyBinding.rawAction)")
+        Logger.general?.error("Unknown iina command \(keyBinding.rawAction)")
       }
     } else {
       // - MPV command
@@ -860,7 +860,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           displayOSD(.screenshot)
         }
       } else {
-        Utility.log("Return value \(returnValue) when executing key command \(keyBinding.rawAction)")
+        Logger.general?.error("Return value \(returnValue) when executing key command \(keyBinding.rawAction)")
       }
     }
   }
@@ -1009,7 +1009,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   override func mouseEntered(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
-      Utility.log("No data for tracking area")
+      Logger.general?.warning("No data for tracking area")
       return
     }
     mouseExitEnterCount += 1
@@ -1034,7 +1034,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   override func mouseExited(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
-      Utility.log("No data for tracking area")
+      Logger.general?.warning("No data for tracking area")
       return
     }
     mouseExitEnterCount += 1
@@ -1780,7 +1780,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // adjust sidebar width
     guard let view = (viewController as? NSViewController)?.view else {
-        Utility.fatal("viewController is not a NSViewController")
+        Logger.fatal("viewController is not a NSViewController")
     }
     sidebarAnimationState = .willShow
     let width = type.width()
@@ -2028,7 +2028,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Set material for OSC and title bar */
   private func setMaterial(_ theme: Preference.Theme?) {
     guard let theme = theme else {
-      Utility.log("Nil material in setMaterial()")
+      Logger.general?.warning("Nil material in setMaterial()")
       return
     }
     guard #available(OSX 10.11, *) else { return }
@@ -2420,7 +2420,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
     guard let duration = player.info.videoDuration, let pos = player.info.videoPosition else {
-      Utility.fatal("video info not available")
+      Logger.fatal("video info not available")
     }
     let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation

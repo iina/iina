@@ -77,7 +77,7 @@ class PrefSubViewController: NSViewController {
           } else {
             Utility.showAlert("sub.cannot_save_passwd", arguments: [SecCopyErrorMessageString(status, nil) as! CVarArg])
           }
-        }.always {
+        }.ensure {
           self.loginIndicator.isHidden = true
           self.loginIndicator.stopAnimation(nil)
         }.catch { err in

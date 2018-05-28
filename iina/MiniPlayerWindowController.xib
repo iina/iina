@@ -399,13 +399,13 @@
             </connections>
         </viewController>
         <customView id="JoU-Y0-cxJ">
-            <rect key="frame" x="0.0" y="0.0" width="194" height="21"/>
+            <rect key="frame" x="0.0" y="0.0" width="183" height="29"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ene-VG-UYY">
-                    <rect key="frame" x="25" y="3" width="131" height="15"/>
+                    <rect key="frame" x="37" y="7" width="100" height="15"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="131" id="22P-mK-lYF"/>
+                        <constraint firstAttribute="width" constant="100" id="22P-mK-lYF"/>
                     </constraints>
                     <sliderCell key="cell" controlSize="small" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="rZ7-sj-3jn" customClass="VolumeSliderCell" customModule="IINA" customModuleProvider="target"/>
                     <connections>
@@ -413,7 +413,7 @@
                     </connections>
                 </slider>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MP6-sS-T7f">
-                    <rect key="frame" x="158" y="4" width="34" height="14"/>
+                    <rect key="frame" x="143" y="8" width="34" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="UDC-wZ-xua"/>
                     </constraints>
@@ -424,7 +424,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="5Og-lg-qvH">
-                    <rect key="frame" x="4" y="4" width="17" height="14"/>
+                    <rect key="frame" x="12" y="8" width="17" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="cUj-wp-dxX"/>
                     </constraints>
@@ -438,14 +438,14 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="5Og-lg-qvH" firstAttribute="leading" secondItem="JoU-Y0-cxJ" secondAttribute="leading" constant="4" id="21L-XX-pZ8"/>
+                <constraint firstItem="5Og-lg-qvH" firstAttribute="leading" secondItem="JoU-Y0-cxJ" secondAttribute="leading" constant="12" id="21L-XX-pZ8"/>
                 <constraint firstItem="MP6-sS-T7f" firstAttribute="centerY" secondItem="JoU-Y0-cxJ" secondAttribute="centerY" id="IEM-58-wBy"/>
-                <constraint firstItem="Ene-VG-UYY" firstAttribute="top" secondItem="JoU-Y0-cxJ" secondAttribute="top" constant="4" id="JXq-kB-fdn"/>
-                <constraint firstItem="MP6-sS-T7f" firstAttribute="leading" secondItem="Ene-VG-UYY" secondAttribute="trailing" constant="4" id="Jfv-7v-xAE"/>
-                <constraint firstAttribute="trailing" secondItem="MP6-sS-T7f" secondAttribute="trailing" constant="4" id="Nkd-PC-I2B"/>
+                <constraint firstItem="Ene-VG-UYY" firstAttribute="top" secondItem="JoU-Y0-cxJ" secondAttribute="top" constant="8" id="JXq-kB-fdn"/>
+                <constraint firstItem="MP6-sS-T7f" firstAttribute="leading" secondItem="Ene-VG-UYY" secondAttribute="trailing" constant="8" id="Jfv-7v-xAE"/>
+                <constraint firstAttribute="trailing" secondItem="MP6-sS-T7f" secondAttribute="trailing" constant="8" id="Nkd-PC-I2B"/>
                 <constraint firstItem="5Og-lg-qvH" firstAttribute="width" secondItem="5Og-lg-qvH" secondAttribute="height" multiplier="17:14" id="Sh7-eY-TU8"/>
-                <constraint firstAttribute="bottom" secondItem="Ene-VG-UYY" secondAttribute="bottom" constant="4" id="Yba-0E-lbi"/>
-                <constraint firstItem="Ene-VG-UYY" firstAttribute="leading" secondItem="5Og-lg-qvH" secondAttribute="trailing" constant="4" id="agK-tV-GdH"/>
+                <constraint firstAttribute="bottom" secondItem="Ene-VG-UYY" secondAttribute="bottom" constant="8" id="Yba-0E-lbi"/>
+                <constraint firstItem="Ene-VG-UYY" firstAttribute="leading" secondItem="5Og-lg-qvH" secondAttribute="trailing" constant="8" id="agK-tV-GdH"/>
                 <constraint firstItem="Ene-VG-UYY" firstAttribute="baseline" secondItem="5Og-lg-qvH" secondAttribute="baseline" id="n1M-hG-maU"/>
             </constraints>
             <point key="canvasLocation" x="63.5" y="349.5"/>

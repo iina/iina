@@ -1112,20 +1112,10 @@ class PlayerCore: NSObject {
         }
       }
 
-    case .volume:
+    case .volume, .muteButton:
       DispatchQueue.main.async {
         self.mainWindow.updateVolume()
         self.miniPlayer.updateVolume()
-      }
-
-    case .muteButton:
-      let mute = mpv.getFlag(MPVOption.Audio.mute)
-      DispatchQueue.main.async {
-        if self.isInMiniPlayer {
-           self.miniPlayer.muteButton.state = mute ? .on : .off
-        } else {
-          self.mainWindow.muteButton.state = mute ? .on : .off
-        }
       }
 
     case .chapterList:

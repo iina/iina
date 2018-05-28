@@ -346,8 +346,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   func updateVolume() {
     guard isWindowLoaded else { return }
     volumeSlider.doubleValue = player.info.volume
-    volumeLabel.intValue = Int32(Int(player.info.volume))
-    volumeButton.title = "\(Int(player.info.volume))"
+    volumeLabel.intValue = Int32(player.info.volume)
+    muteButton.state = player.info.isMuted ? .on : .off
   }
 
   func updateVideoSize() {

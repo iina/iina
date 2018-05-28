@@ -170,6 +170,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     NotificationCenter.default.addObserver(self, selector: #selector(updateTrack), name: .iinaMediaTitleChanged, object: player)
 
     updateVolume()
+    updatePlayButtonState(player.info.isPaused ? .off : .on)
 
     if Preference.bool(for: .alwaysFloatOnTop) {
       setWindowFloatingOnTop(true)

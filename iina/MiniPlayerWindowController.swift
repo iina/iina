@@ -421,8 +421,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   }
 
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
-    let value = sender.doubleValue
-    player.setVolume(value)
+    player.mainWindow.volumeSliderChanges(sender)
   }
 
   @IBAction func backBtnAction(_ sender: NSButton) {

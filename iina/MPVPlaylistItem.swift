@@ -15,10 +15,7 @@ class MPVPlaylistItem: NSObject {
 
   /** Title or the real filename */
   var filenameForDisplay: String {
-    get {
-      if isNetworkResource { return filename }
-      return title ?? NSString(string: filename).lastPathComponent
-    }
+    return title ?? (isNetworkResource ? filename : NSString(string: filename).lastPathComponent)
   }
 
   var isCurrent: Bool

@@ -24,7 +24,7 @@
                 <outlet property="defaultAlbumArt" destination="Psi-wJ-2SC" id="oeb-1Z-2ho"/>
                 <outlet property="leftLabel" destination="9EY-2T-Ebf" id="ICj-Tc-hjF"/>
                 <outlet property="mediaInfoView" destination="Zv7-H8-iOq" id="LrZ-za-HpC"/>
-                <outlet property="muteButton" destination="fUy-ap-8fj" id="G5I-fx-fYx"/>
+                <outlet property="muteButton" destination="5Og-lg-qvH" id="9dA-7h-PGA"/>
                 <outlet property="playButton" destination="aC9-OK-a4x" id="3Ej-3P-qnY"/>
                 <outlet property="playSlider" destination="e3M-Ma-JJM" id="hph-Mq-Yba"/>
                 <outlet property="playlistWrapperView" destination="dkl-qd-rae" id="XpW-Qe-rX8"/>
@@ -33,7 +33,7 @@
                 <outlet property="titleLabelTopConstraint" destination="Qaf-SS-SCV" id="NcC-8F-DTU"/>
                 <outlet property="videoWrapperView" destination="WD9-DD-LNj" id="Hfa-UA-t9H"/>
                 <outlet property="videoWrapperViewBottomConstraint" destination="m9y-eT-GRX" id="adV-UC-yzq"/>
-                <outlet property="volumeButton" destination="Grd-Ot-j0o" id="kNO-uR-uBa"/>
+                <outlet property="volumeButton" destination="fUy-ap-8fj" id="VKB-Zt-Jdx"/>
                 <outlet property="volumeLabel" destination="MP6-sS-T7f" id="Ztm-8c-Zay"/>
                 <outlet property="volumePopover" destination="yea-QL-Hlq" id="ByH-tP-YzC"/>
                 <outlet property="volumeSlider" destination="Ene-VG-UYY" id="0cq-9R-Yk9"/>
@@ -47,7 +47,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="300" height="72"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3840" height="1058"/>
             <value key="minSize" type="size" width="300" height="72"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="300" height="72"/>
@@ -194,17 +194,17 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="fUy-ap-8fj">
-                                        <rect key="frame" x="29" y="15" width="17" height="14"/>
+                                        <rect key="frame" x="49" y="15" width="17" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="o7f-KV-JoD"/>
                                             <constraint firstAttribute="width" secondItem="fUy-ap-8fj" secondAttribute="height" multiplier="17:14" id="tjj-et-8gi"/>
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="9bz-eY-31X">
-                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="muteBtnAction:" target="-2" id="r0T-az-XCF"/>
+                                            <action selector="volumeBtnAction:" target="-2" id="ynf-E4-jte"/>
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="KFz-Kp-RxC">
@@ -221,35 +221,20 @@
                                             <action selector="toogleVideoView:" target="-2" id="Q4b-pa-4UM"/>
                                         </connections>
                                     </button>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Grd-Ot-j0o">
-                                        <rect key="frame" x="46" y="9" width="26" height="28"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="26" id="me4-jx-uzB"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="bevel" title="100" bezelStyle="rounded" alignment="right" controlSize="small" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="zfK-2J-XH9">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="cellTitle"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="volumeBtnAction:" target="-2" id="c6e-B1-UHz"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="nSh-lh-jim" firstAttribute="centerY" secondItem="aC9-OK-a4x" secondAttribute="centerY" id="9tz-su-lQa"/>
-                                    <constraint firstItem="nSh-lh-jim" firstAttribute="leading" secondItem="Grd-Ot-j0o" secondAttribute="trailing" constant="14" id="I3K-2I-55x"/>
                                     <constraint firstItem="aC9-OK-a4x" firstAttribute="top" secondItem="cDR-8J-QI7" secondAttribute="top" constant="12" id="Kzm-iJ-Vkp"/>
                                     <constraint firstItem="KFz-Kp-RxC" firstAttribute="centerY" secondItem="a5L-QK-yog" secondAttribute="centerY" id="LaN-Gb-lL9"/>
                                     <constraint firstItem="KFz-Kp-RxC" firstAttribute="leading" secondItem="a5L-QK-yog" secondAttribute="trailing" constant="12" id="PpO-ZM-V3M"/>
                                     <constraint firstItem="fUy-ap-8fj" firstAttribute="centerY" secondItem="aC9-OK-a4x" secondAttribute="centerY" id="PvJ-Gl-h60"/>
-                                    <constraint firstItem="Grd-Ot-j0o" firstAttribute="leading" secondItem="fUy-ap-8fj" secondAttribute="trailing" id="RWY-uN-H6g"/>
+                                    <constraint firstItem="nSh-lh-jim" firstAttribute="leading" secondItem="fUy-ap-8fj" secondAttribute="trailing" constant="20" id="SGi-ju-KtN"/>
                                     <constraint firstAttribute="height" constant="48" id="fao-NR-5SG"/>
                                     <constraint firstItem="aC9-OK-a4x" firstAttribute="leading" secondItem="nSh-lh-jim" secondAttribute="trailing" constant="24" id="kCv-eh-zx2"/>
                                     <constraint firstItem="998-mn-oHJ" firstAttribute="centerY" secondItem="aC9-OK-a4x" secondAttribute="centerY" id="ldG-Yz-2vC"/>
                                     <constraint firstItem="aC9-OK-a4x" firstAttribute="centerX" secondItem="cDR-8J-QI7" secondAttribute="centerX" constant="2" id="pI1-nE-AtV"/>
                                     <constraint firstItem="a5L-QK-yog" firstAttribute="leading" secondItem="998-mn-oHJ" secondAttribute="trailing" constant="20" id="uSD-MR-I8x"/>
                                     <constraint firstItem="a5L-QK-yog" firstAttribute="centerY" secondItem="aC9-OK-a4x" secondAttribute="centerY" id="vwZ-Gt-F5N"/>
-                                    <constraint firstItem="Grd-Ot-j0o" firstAttribute="centerY" secondItem="nSh-lh-jim" secondAttribute="centerY" constant="-0.5" id="w1q-nd-mKa"/>
                                     <constraint firstItem="998-mn-oHJ" firstAttribute="leading" secondItem="aC9-OK-a4x" secondAttribute="trailing" constant="20" id="yL9-7r-6VR"/>
                                 </constraints>
                             </customView>
@@ -414,20 +399,23 @@
             </connections>
         </viewController>
         <customView id="JoU-Y0-cxJ">
-            <rect key="frame" x="0.0" y="0.0" width="163" height="21"/>
+            <rect key="frame" x="0.0" y="0.0" width="183" height="29"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ene-VG-UYY">
-                    <rect key="frame" x="4" y="3" width="131" height="15"/>
-                    <sliderCell key="cell" controlSize="small" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="rZ7-sj-3jn"/>
+                    <rect key="frame" x="37" y="7" width="100" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="22P-mK-lYF"/>
+                    </constraints>
+                    <sliderCell key="cell" controlSize="small" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="rZ7-sj-3jn" customClass="VolumeSliderCell" customModule="IINA" customModuleProvider="target"/>
                     <connections>
                         <action selector="volumeSliderChanges:" target="-2" id="24x-7W-lsa"/>
                     </connections>
                 </slider>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MP6-sS-T7f">
-                    <rect key="frame" x="137" y="4" width="24" height="14"/>
+                    <rect key="frame" x="143" y="8" width="34" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="20" id="UDC-wZ-xua"/>
+                        <constraint firstAttribute="width" constant="30" id="UDC-wZ-xua"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="50" id="aot-6J-Jp7">
                         <font key="font" metaFont="smallSystem"/>
@@ -435,16 +423,32 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="5Og-lg-qvH">
+                    <rect key="frame" x="12" y="8" width="17" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="cUj-wp-dxX"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="6jy-7B-dv6">
+                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="muteBtnAction:" target="-2" id="MJ5-9y-y2w"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstItem="5Og-lg-qvH" firstAttribute="leading" secondItem="JoU-Y0-cxJ" secondAttribute="leading" constant="12" id="21L-XX-pZ8"/>
                 <constraint firstItem="MP6-sS-T7f" firstAttribute="centerY" secondItem="JoU-Y0-cxJ" secondAttribute="centerY" id="IEM-58-wBy"/>
-                <constraint firstItem="Ene-VG-UYY" firstAttribute="top" secondItem="JoU-Y0-cxJ" secondAttribute="top" constant="4" id="JXq-kB-fdn"/>
-                <constraint firstItem="MP6-sS-T7f" firstAttribute="leading" secondItem="Ene-VG-UYY" secondAttribute="trailing" constant="4" id="Jfv-7v-xAE"/>
-                <constraint firstAttribute="trailing" secondItem="MP6-sS-T7f" secondAttribute="trailing" constant="4" id="Nkd-PC-I2B"/>
-                <constraint firstAttribute="bottom" secondItem="Ene-VG-UYY" secondAttribute="bottom" constant="4" id="Yba-0E-lbi"/>
-                <constraint firstItem="Ene-VG-UYY" firstAttribute="leading" secondItem="JoU-Y0-cxJ" secondAttribute="leading" constant="4" id="ykI-fq-Jd5"/>
+                <constraint firstItem="Ene-VG-UYY" firstAttribute="top" secondItem="JoU-Y0-cxJ" secondAttribute="top" constant="8" id="JXq-kB-fdn"/>
+                <constraint firstItem="MP6-sS-T7f" firstAttribute="leading" secondItem="Ene-VG-UYY" secondAttribute="trailing" constant="8" id="Jfv-7v-xAE"/>
+                <constraint firstAttribute="trailing" secondItem="MP6-sS-T7f" secondAttribute="trailing" constant="8" id="Nkd-PC-I2B"/>
+                <constraint firstItem="5Og-lg-qvH" firstAttribute="width" secondItem="5Og-lg-qvH" secondAttribute="height" multiplier="17:14" id="Sh7-eY-TU8"/>
+                <constraint firstAttribute="bottom" secondItem="Ene-VG-UYY" secondAttribute="bottom" constant="8" id="Yba-0E-lbi"/>
+                <constraint firstItem="Ene-VG-UYY" firstAttribute="leading" secondItem="5Og-lg-qvH" secondAttribute="trailing" constant="8" id="agK-tV-GdH"/>
+                <constraint firstItem="Ene-VG-UYY" firstAttribute="baseline" secondItem="5Og-lg-qvH" secondAttribute="baseline" id="n1M-hG-maU"/>
             </constraints>
-            <point key="canvasLocation" x="12.5" y="357.5"/>
+            <point key="canvasLocation" x="63.5" y="349.5"/>
         </customView>
         <popover behavior="t" id="yea-QL-Hlq">
             <connections>

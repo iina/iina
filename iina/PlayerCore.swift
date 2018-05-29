@@ -1003,12 +1003,12 @@ class PlayerCore: NSObject {
 
   private func autoSearchOnlineSub() {
     Thread.sleep(forTimeInterval: 0.5)
-    if Preference.bool(for: .autoSearchOnlineSub) && info.subTracks.isEmpty &&
-      info.videoDuration!.second >= Preference.double(for: .autoSearchThreshold) * 60 {
+    if Preference.bool(for: .autoSearchOnlineSub) &&
+      !info.isNetworkResource && info.subTracks.isEmpty &&
+      (info.videoDuration?.second ?? 0.0) >= Preference.double(for: .autoSearchThreshold) * 60 {
       mainWindow.menuActionHandler.menuFindOnlineSub(.dummy)
     }
   }
-
   /**
    Add files in the same folder to playlist.
    It basically follows the following steps:

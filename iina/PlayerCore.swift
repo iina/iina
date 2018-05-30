@@ -858,6 +858,7 @@ class PlayerCore: NSObject {
   }
 
   func savePlaybackPosition() {
+    guard Preference.bool(for: .resumeLastPosition) else { return }
     logger?.debug("Write watch later config")
     mpv.command(.writeWatchLaterConfig)
     if let url = info.currentURL {

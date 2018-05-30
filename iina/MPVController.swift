@@ -162,8 +162,8 @@ class MPVController: NSObject {
     }
 
     chkErr(mpv_set_option_string(mpv, "watch-later-directory", Utility.watchLaterURL.path))
-    chkErr(mpv_set_option_string(mpv, "resume-playback", "yes"))
     chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.savePositionOnQuit, "no"))
+    setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback")
 
     setUserOption(.initialWindowSizePosition, type: .string, forName: MPVOption.Window.geometry)
 

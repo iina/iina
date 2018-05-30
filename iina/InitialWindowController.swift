@@ -78,6 +78,7 @@ class InitialWindowController: NSWindowController {
 
   func loadLastPlaybackInfo() {
     if Preference.bool(for: .recordRecentFiles),
+      Preference.bool(for: .resumeLastPosition),
       let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
       FileManager.default.fileExists(atPath: lastFile.path) {
       // if last file exists
@@ -92,6 +93,7 @@ class InitialWindowController: NSWindowController {
       lastPositionLabel.stringValue = VideoTime(lastPosition).stringRepresentation
       recentFilesTableTopConstraint.constant = 42
     } else {
+      lastPlaybackURL = nil
       lastFileContainerView.isHidden = true
       recentFilesTableTopConstraint.constant = 24
     }
@@ -99,7 +101,7 @@ class InitialWindowController: NSWindowController {
 
   func reloadData() {
     loadLastPlaybackInfo()
-    recentDocuments = NSDocumentController.shared.recentDocumentURLs.filter { $0 == lastPlaybackURL }
+    recentDocuments = NSDocumentController.shared.recentDocumentURLs.filter { $0 != lastPlaybackURL }
     recentFilesTableView.reloadData()
   }
 }

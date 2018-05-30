@@ -223,6 +223,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       let window = PlayerCore.first.initialWindow!
       window.showWindow(nil)
       if checkingForUpdatedData {
+        window.loadLastPlaybackInfo()
         window.reloadData()
       }
     case .openPanel:

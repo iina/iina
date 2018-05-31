@@ -2809,7 +2809,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // update state
     isFloatingPlaylist = true
 
-    Utility.log("Floating Playlist enabled.")
+    Logger.log("Floating Playlist enabled.")
   }
 
   func disableFloatingPlaylist() {
@@ -2820,7 +2820,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // update state
     isFloatingPlaylist = false
 
-    Utility.log("Floating Playlist disabled.")
+    Logger.log("Floating Playlist disabled.")
   }
 
   func toggleFloatingPlaylist() {

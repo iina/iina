@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -112,7 +112,6 @@ Gw
                     <constraint firstItem="pX0-I5-dea" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="5lb-UZ-zQ3"/>
                     <constraint firstItem="63i-B1-8o0" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="8Tk-4X-TvX"/>
                     <constraint firstItem="BJG-7U-eKu" firstAttribute="top" secondItem="Neb-Rz-hK4" secondAttribute="bottom" constant="4" id="9zj-Zy-yuf"/>
-                    <constraint firstItem="LGR-5z-wrd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="I7y-Aj-ui3" secondAttribute="trailing" constant="12" symbolic="YES" id="ANN-XP-ESJ"/>
                     <constraint firstItem="Sdu-Jk-G6t" firstAttribute="top" secondItem="BJG-7U-eKu" secondAttribute="bottom" constant="8" id="FHp-0Q-24y"/>
                     <constraint firstItem="hAj-RR-fLd" firstAttribute="leading" secondItem="LGR-5z-wrd" secondAttribute="trailing" constant="12" id="KSJ-SA-3h7"/>
                     <constraint firstItem="xw0-SN-fkf" firstAttribute="top" secondItem="pX0-I5-dea" secondAttribute="bottom" constant="4" id="MpI-2v-sfe"/>

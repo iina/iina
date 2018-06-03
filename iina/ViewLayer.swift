@@ -103,7 +103,7 @@ class ViewLayer: CAOpenGLLayer {
       CGLChoosePixelFormat(attributes2, &pix, &npix)
     }
 
-    Logger.assert(pix != nil, "Cannot create OpenGL pixel format!")
+    Logger.ensure(pix != nil, "Cannot create OpenGL pixel format!")
 
     return pix!
   }

@@ -360,7 +360,7 @@ class Utility {
   static let appSupportDirUrl: URL = {
     // get path
     let asPath = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-    Logger.assert(asPath.count >= 1, "Cannot get path to Application Support directory")
+    Logger.ensure(asPath.count >= 1, "Cannot get path to Application Support directory")
     let bundleID = Bundle.main.bundleIdentifier!
     let appAsUrl = asPath.first!.appendingPathComponent(bundleID)
     createDirIfNotExist(url: appAsUrl)
@@ -376,7 +376,7 @@ class Utility {
   static let logDirURL: URL = {
     // get path
     let libraryPath = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)
-    Logger.assert(libraryPath.count >= 1, "Cannot get path to Logs directory")
+    Logger.ensure(libraryPath.count >= 1, "Cannot get path to Logs directory")
     let logsUrl = libraryPath.first!.appendingPathComponent("Logs", isDirectory: true)
     let bundleID = Bundle.main.bundleIdentifier!
     let appLogsUrl = logsUrl.appendingPathComponent(bundleID, isDirectory: true)
@@ -393,7 +393,7 @@ class Utility {
   static let thumbnailCacheURL: URL = {
     // get path
     let cachesPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
-    Logger.assert(cachesPath.count >= 1, "Cannot get path to Caches directory")
+    Logger.ensure(cachesPath.count >= 1, "Cannot get path to Caches directory")
     let bundleID = Bundle.main.bundleIdentifier!
     let appCachesUrl = cachesPath.first!.appendingPathComponent(bundleID, isDirectory: true)
     let appThumbnailCacheUrl = appCachesUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)

@@ -89,21 +89,20 @@ struct Logger {
     }
   }
 
-  static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
-    if !expr {
+  static func ensure(_ condition: @autoclosure () -> Bool, _ errorMessage: String = "Assertion failed in \(#line):\(#file)", _ cleanup: () -> Void = {}) {
+    if !condition() {
       log(errorMessage, level: .error)
       Utility.showAlert("fatal_error", arguments: [errorMessage])
-      block()
+      cleanup()
       exit(1)
     }
   }
 
-  static func fatal(_ message: String, _ block: () -> Void = {}) -> Never {
+  static func fatal(_ message: String, _ cleanup: () -> Void = {}) -> Never {
     log(message, level: .error)
     log(Thread.callStackSymbols.joined(separator: "\n"))
     Utility.showAlert("fatal_error", arguments: [message])
-    block()
-    // Exit without crash since it's not uncatched/unhandled
+    cleanup()
     exit(1)
   }
 }

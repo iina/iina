@@ -10,7 +10,7 @@ import Foundation
 import Just
 import PromiseKit
 
-fileprivate let logger = Logger.getLogger("assrt")
+fileprivate let subsystem = Logger.Subsystem(rawValue: "assrt")
 
 final class AssrtSubtitle: OnlineSubtitle {
 

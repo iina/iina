@@ -718,7 +718,7 @@ struct Preference {
     .enableAdvancedSettings: false,
     .useMpvOsd: false,
     .enableLogging: false,
-    .logLevel: Logger.LogLevel.debug.rawValue,
+    .logLevel: Logger.Level.debug.rawValue,
     .userOptions: [],
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",

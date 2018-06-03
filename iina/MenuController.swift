@@ -518,7 +518,7 @@ class MenuController: NSObject, NSMenuDelegate {
     if let titles = titles {
       // options and objects must be same
       guard objects == nil || titles.count == objects?.count else {
-        Logger.general?.error("different object count when binding menu")
+        Logger.log("different object count when binding menu", level: .error)
         return
       }
       // add menu items

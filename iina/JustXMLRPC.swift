@@ -114,7 +114,7 @@ class JustXMLRPC {
       }
       valueElement.addChild(structElement)
     default:
-      Logger.general?.warning("XMLRPC: Value type not supported")
+      Logger.log("XMLRPC: Value type not supported", level: .warning)
     }
     return valueElement
   }
@@ -150,7 +150,7 @@ class JustXMLRPC {
       }
       return resultDict
     default:
-      Logger.general?.error("XMLRPC: Unexpected value type: \(valueElement.name ?? "")")
+      Logger.log("XMLRPC: Unexpected value type: \(valueElement.name ?? "")", level: .error)
       return 0
     }
   }

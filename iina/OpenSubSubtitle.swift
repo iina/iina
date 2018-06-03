@@ -11,7 +11,7 @@ import Just
 import PromiseKit
 import Gzip
 
-fileprivate let logger = Logger.getLogger("opensub")
+fileprivate let subsystem = Logger.Subsystem(rawValue: "opensub")
 
 final class OpenSubSubtitle: OnlineSubtitle {
 
@@ -169,11 +169,11 @@ class OpenSubSupport {
           let pStatus = parsed["status"] as! String
           if pStatus.hasPrefix("200") {
             self.token = parsed["token"] as! String
-            logger?.debug("OpenSub: logged in as user \(finalUser)")
+            Logger.log("OpenSub: logged in as user \(finalUser)", subsystem: subsystem)
             self.startHeartbeat()
             resolver.fulfill(())
           } else {
-            logger?.error("OpenSub: login failed, \(pStatus)")
+            Logger.log("OpenSub: login failed, \(pStatus)", level: .error, subsystem: subsystem)
             resolver.reject(OpenSubError.loginFailed(pStatus))
           }
         case .failure:
@@ -190,7 +190,7 @@ class OpenSubSupport {
   func hash(_ url: URL) -> Promise<FileInfo> {
     return Promise { resolver in
       guard let file = try? FileHandle(forReadingFrom: url) else {
-        logger?.error("OpenSub: cannot get file handle")
+        Logger.log("OpenSub: cannot get file handle", level: .error, subsystem: subsystem)
         resolver.reject(OpenSubError.cannotReadFile)
         return
       }
@@ -199,7 +199,7 @@ class OpenSubSupport {
       let fileSize = file.offsetInFile
 
       if fileSize < 131072 {
-        logger?.warning("File length less than 131072, skipped")
+        Logger.log("File length less than 131072, skipped", level: .warning, subsystem: subsystem)
         resolver.reject(OpenSubError.fileTooSmall)
       }
 
@@ -375,23 +375,23 @@ class OpenSubSupport {
       case .ok(let value):
         // 406 No session
         if let pValue = value as? [String: Any], (pValue["status"] as? String ?? "").hasPrefix("406") {
-          logger?.warning("heartbeat: no session")
+          Logger.log("heartbeat: no session", level: .warning, subsystem: subsystem)
           self.token = nil
           self.login().catch { err in
             switch err {
             case OpenSubError.loginFailed(let reason):
-              logger?.error("(re-login) \(reason)")
+              Logger.log("(re-login) \(reason)", level: .error, subsystem: subsystem)
             case OpenSubError.xmlRpcError(let error):
-              logger?.error("(re-login) \(error.readableDescription)")
+              Logger.log("(re-login) \(error.readableDescription)", level: .error, subsystem: subsystem)
             default:
-              logger?.error("(re-login) \(err.localizedDescription)")
+              Logger.log("(re-login) \(err.localizedDescription)", level: .error, subsystem: subsystem)
             }
           }
         } else {
-          logger?.debug("OpenSub: heartbeat ok")
+          Logger.log("OpenSub: heartbeat ok", subsystem: subsystem)
         }
       default:
-        logger?.error("OpenSub: heartbeat failed")
+        Logger.log("OpenSub: heartbeat failed", level: .error, subsystem: subsystem)
         self.token = nil
       }
     }

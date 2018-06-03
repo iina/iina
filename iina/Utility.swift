@@ -170,7 +170,7 @@ class Utility {
       }
       panel.beginSheet(sheetWindow, completionHandler: handler)
     default:
-      Logger.general?.error("quickSavePanel: Unsupported mode")
+      Logger.log("quickSavePanel: Unsupported mode", level: .error)
     }
   }
 
@@ -222,7 +222,7 @@ class Utility {
       }
       return false
     default:
-      Logger.general?.error("quickPromptPanel: Unsupported mode")
+      Logger.log("quickPromptPanel: Unsupported mode", level: .error)
       return false
     }
   }
@@ -305,7 +305,7 @@ class Utility {
 
     var successCount = 0
     var failedCount = 0
-    Logger.general?.debug("Set self as default")
+    Logger.log("Set self as default")
     for docType in docTypes {
       if let exts = docType["CFBundleTypeExtensions"] as? [String] {
         for ext in exts {
@@ -314,7 +314,7 @@ class Utility {
           if status == kOSReturnSuccess {
             successCount += 1
           } else {
-            Logger.general?.error("failed for \(ext): return value \(status)")
+            Logger.log("failed for \(ext): return value \(status)", level: .error)
             failedCount += 1
           }
         }

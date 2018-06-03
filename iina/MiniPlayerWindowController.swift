@@ -211,7 +211,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
         if let iinaCommand = IINACommand(rawValue: kb.rawAction) {
           handleIINACommand(iinaCommand)
         } else {
-          Logger.general?.error("Unknown iina command \(kb.rawAction)")
+          Logger.log("Unknown iina command \(kb.rawAction)", level: .error)
         }
       } else {
         // - MPV command
@@ -226,7 +226,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
         }
         // handle return value
         if returnValue != 0 {
-          Logger.general?.warning("Return value \(returnValue) when executing key command \(kb.rawAction)")
+          Logger.log("Return value \(returnValue) when executing key command \(kb.rawAction)", level: .warning)
         }
       }
     } else {

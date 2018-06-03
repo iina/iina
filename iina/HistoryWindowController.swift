@@ -34,7 +34,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   private let getKey: [SortOption: (PlaybackHistory) -> String] = [
-    .lastPlayed: { DateFormatter.localizedString(from: $0.addedDate, dateStyle: .none, timeStyle: .short) },
+    .lastPlayed: { DateFormatter.localizedString(from: $0.addedDate, dateStyle: .medium, timeStyle: .none) },
     .fileLocation: { $0.url.deletingLastPathComponent().path }
   ]
 

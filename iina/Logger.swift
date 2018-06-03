@@ -8,10 +8,20 @@
 
 import Foundation
 
-class Logger {
+struct Logger {
 
-  enum LogLevel: Int, Comparable, CustomStringConvertible {
-    static func < (lhs: LogLevel, rhs: LogLevel) -> Bool {
+  struct Subsystem: RawRepresentable {
+    var rawValue: String
+
+    static let general = Subsystem(rawValue: "iina")
+
+    init(rawValue: String) {
+      self.rawValue = rawValue
+    }
+  }
+
+  enum Level: Int, Comparable, CustomStringConvertible {
+    static func < (lhs: Logger.Level, rhs: Logger.Level) -> Bool {
       return lhs.rawValue < rhs.rawValue
     }
 
@@ -20,9 +30,7 @@ class Logger {
     case warning
     case error
 
-    static var preferred: LogLevel {
-      return LogLevel(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
-    }
+    static var preferred: Level = Level(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
 
     var description: String {
       switch self {
@@ -34,11 +42,8 @@ class Logger {
     }
   }
 
-  var label: String
-  var level: LogLevel
-  var logToConsole = false
-
   static let enabled = Preference.bool(for: .enableLogging)
+
   static let logDirectory: URL = {
     let formatter = DateFormatter()
     formatter.dateFormat = "YYYY-MM-dd-HH-mm-ss"
@@ -58,33 +63,25 @@ class Logger {
 
   private static var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateFormat = "dd HH:mm:ss.SSS"
+    formatter.dateFormat = "HH:mm:ss.SSS"
     return formatter
   }()
 
-  static func getLogger(_ label: String) -> Logger? {
-    #if DEBUG
-    if !enabled {
-      let logger = Logger(label: label, logLevel: .warning)
-      logger.logToConsole = true
-      return logger
-    }
-    #endif
-    return enabled ? Logger(label: label) : nil
-  }
-
   static func closeLogFile() {
-    guard Logger.enabled else { return }
+    guard enabled else { return }
     logFileHandle.closeFile()
   }
 
-  private static func log(_ message: String, label: String, level: LogLevel, logToConsole: Bool, appendNewlineAtTheEnd: Bool) {
+  @inline(__always)
+  static func log(_ message: String, level: Level = .debug, subsystem: Subsystem = .general, appendNewlineAtTheEnd: Bool = true) {
+    #if !DEBUG
+    guard enabled else { return }
+    #endif
+    guard level >= .preferred else { return }
     let time = dateFormatter.string(from: Date())
-    let string = "\(time) [\(label)][\(level.description)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
-    if logToConsole {
-      print("\(time) [\(label)][\(level.description)] \(message)")
-      return
-    }
+    let string = "\(time) [\(subsystem.rawValue)][\(level.description)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
+    print(string, terminator: "")
+
     if let data = string.data(using: .utf8) {
       logFileHandle.write(data)
     } else {
@@ -92,38 +89,9 @@ class Logger {
     }
   }
 
-  static let general: Logger? = {
-    return Logger.getLogger("iina")
-  }()
-
-  private init(label: String, logLevel: LogLevel = .preferred) {
-    self.label = label
-    self.level = logLevel
-  }
-
-  func verbose(_ message: String, appendNewline: Bool = true) {
-    guard level <= .verbose else { return }
-    Logger.log(message, label: label, level: .verbose, logToConsole: logToConsole, appendNewlineAtTheEnd: appendNewline)
-  }
-
-  func debug(_ message: String, appendNewline: Bool = true) {
-    guard level <= .debug else { return }
-    Logger.log(message, label: label, level: .debug, logToConsole: logToConsole, appendNewlineAtTheEnd: appendNewline)
-  }
-
-  func warning(_ message: String, appendNewline: Bool = true) {
-    guard level <= .warning else { return }
-    Logger.log(message, label: label, level: .warning, logToConsole: logToConsole, appendNewlineAtTheEnd: appendNewline)
-  }
-
-  func error(_ message: String, appendNewline: Bool = true) {
-    guard level <= .error else { return }
-    Logger.log(message, label: label, level: .error, logToConsole: logToConsole, appendNewlineAtTheEnd: appendNewline)
-  }
-
   static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
     if !expr {
-      general?.error(errorMessage)
+      log(errorMessage, level: .error)
       Utility.showAlert("fatal_error", arguments: [errorMessage])
       block()
       exit(1)
@@ -131,8 +99,8 @@ class Logger {
   }
 
   static func fatal(_ message: String, _ block: () -> Void = {}) -> Never {
-    general?.error(message)
-    general?.debug(Thread.callStackSymbols.joined(separator: "\n"))
+    log(message, level: .error)
+    log(Thread.callStackSymbols.joined(separator: "\n"))
     Utility.showAlert("fatal_error", arguments: [message])
     block()
     // Exit without crash since it's not uncatched/unhandled

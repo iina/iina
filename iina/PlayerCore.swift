@@ -1205,7 +1205,7 @@ class PlayerCore: NSObject {
         }
       } else {
         logger?.debug("Request new thumbnails")
-        ffmpegController.generateThumbnail(forFile: path)
+        ffmpegController.generateThumbnailsForFile(atPath: path)
       }
     }
   }
@@ -1401,7 +1401,7 @@ class PlayerCore: NSObject {
    It may take some time to run this method, so it should be used in background.
    */
   func refreshCachedVideoProgress(forVideoPath path: String) {
-    let duration = FFmpegController.probeVideoDuration(forFile: path)
+    let duration = FFmpegController.videoDuration(forFileAtPath: path)
     let progress = Utility.playbackProgressFromWatchLater(path.md5)
     info.cachedVideoDurationAndProgress[path] = (
       duration: (duration > 0 ? duration : nil),
@@ -1441,9 +1441,8 @@ class PlayerCore: NSObject {
 
 
 extension PlayerCore: FFmpegControllerDelegate {
-
-  func didUpdate(_ thumbnails: [FFThumbnail]?, forFile filename: String, withProgress progress: Int) {
-    guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
+  func didUpdateThumbnails(_ thumbnails: [FFmpegThumbnail]?, forFileAtPath path: String, withProgress progress: Int) {
+    guard let currentFilePath = info.currentURL?.path, currentFilePath == path else { return }
     logger?.debug("Got new thumbnails, progress \(progress)")
     if let thumbnails = thumbnails {
       info.thumbnails.append(contentsOf: thumbnails)
@@ -1452,10 +1451,10 @@ extension PlayerCore: FFmpegControllerDelegate {
     refreshTouchBarSlider()
   }
 
-  func didGenerate(_ thumbnails: [FFThumbnail], forFile filename: String, succeeded: Bool) {
-    guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
-    logger?.debug("Got all thumbnails, succeeded=\(succeeded)")
-    if succeeded {
+  func didGenerateThumbnails(_ thumbnails: [FFmpegThumbnail]?, forFileAtPath path: String) {
+    guard let currentFilePath = info.currentURL?.path, currentFilePath == path else { return }
+    logger?.debug("Got all thumbnails, succeeded=\(thumbnails != nil)")
+    if let thumbnails = thumbnails {
       info.thumbnails = thumbnails
       info.thumbnailsReady = true
       info.thumbnailsProgress = 1

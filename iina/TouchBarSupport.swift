@@ -341,7 +341,8 @@ class TouchBarPlaySliderCell: NSSliderCell {
   override func drawKnob(_ knobRect: NSRect) {
     let info = playerCore.info
     guard !info.isIdle else { return }
-    if isTouching, let dur = info.videoDuration?.second, let tb = info.getThumbnail(forSecond: (doubleValue / 100) * dur), let image = tb.image {
+    if isTouching, let dur = info.videoDuration?.second, let tb = info.getThumbnail(forSecond: (doubleValue / 100) * dur) {
+      let image = tb.image
       NSGraphicsContext.saveGraphicsState()
       NSBezierPath(roundedRect: knobRect, xRadius: 3, yRadius: 3).setClip()
       let origSize = image.size.crop(withAspect: Aspect(size: knobRect.size))

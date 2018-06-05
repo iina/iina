@@ -21,7 +21,7 @@ struct Logger {
   }
 
   enum Level: Int, Comparable, CustomStringConvertible {
-    static func < (lhs: Logger.Level, rhs: Logger.Level) -> Bool {
+    static func < (lhs: Level, rhs: Level) -> Bool {
       return lhs.rawValue < rhs.rawValue
     }
 
@@ -77,10 +77,15 @@ struct Logger {
     #if !DEBUG
     guard enabled else { return }
     #endif
+
     guard level >= .preferred else { return }
     let time = dateFormatter.string(from: Date())
     let string = "\(time) [\(subsystem.rawValue)][\(level.description)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
     print(string, terminator: "")
+
+    #if DEBUG
+    guard enabled else { return }
+    #endif
 
     if let data = string.data(using: .utf8) {
       logFileHandle.write(data)
@@ -90,7 +95,7 @@ struct Logger {
   }
 
   static func ensure(_ condition: @autoclosure () -> Bool, _ errorMessage: String = "Assertion failed in \(#line):\(#file)", _ cleanup: () -> Void = {}) {
-    if !condition() {
+    guard condition() else {
       log(errorMessage, level: .error)
       Utility.showAlert("fatal_error", arguments: [errorMessage])
       cleanup()

@@ -430,7 +430,7 @@ class MPVController: NSObject {
 
   /** Get filter. only "af" or "vf" is supported for name */
   func getFilters(_ name: String) -> [MPVFilter] {
-    Logger.assert(name == MPVProperty.vf || name == MPVProperty.af, "getFilters() do not support \(name)!")
+    Logger.ensure(name == MPVProperty.vf || name == MPVProperty.af, "getFilters() do not support \(name)!")
 
     var result: [MPVFilter] = []
     var node = mpv_node()
@@ -448,7 +448,7 @@ class MPVController: NSObject {
 
   /** Set filter. only "af" or "vf" is supported for name */
   func setFilters(_ name: String, filters: [MPVFilter]) {
-    Logger.assert(name == MPVProperty.vf || name == MPVProperty.af, "setFilters() do not support \(name)!")
+    Logger.ensure(name == MPVProperty.vf || name == MPVProperty.af, "setFilters() do not support \(name)!")
     let cmd = name == MPVProperty.vf ? MPVCommand.vf : MPVCommand.af
 
     let str = filters.map { $0.stringFormat }.joined(separator: ",")
@@ -505,7 +505,7 @@ class MPVController: NSObject {
       let prefix = String(cString: (msg?.pointee.prefix)!)
       let level = String(cString: (msg?.pointee.level)!)
       let text = String(cString: (msg?.pointee.text)!)
-      Logger.general?.warning("MPV log: [\(prefix)] \(level): \(text)", appendNewline: false)
+      Logger.log("MPV log: [\(prefix)] \(level): \(text)", level: .warning, subsystem: .general, appendNewlineAtTheEnd: false)
 
     case MPV_EVENT_PROPERTY_CHANGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
@@ -893,7 +893,7 @@ class MPVController: NSObject {
 
     case .other:
       guard let tr = transformer else {
-        Logger.general?.error("setUserOption: no transformer!")
+        Logger.log("setUserOption: no transformer!", level: .error)
         return
       }
       if let value = tr(key) {
@@ -948,7 +948,7 @@ class MPVController: NSObject {
 
       case .other:
         guard let tr = info.transformer else {
-          Logger.general?.error("setUserOption: no transformer!")
+          Logger.log("setUserOption: no transformer!", level: .error)
           return
         }
         if let value = tr(info.prefKey) {

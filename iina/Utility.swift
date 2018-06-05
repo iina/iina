@@ -170,7 +170,7 @@ class Utility {
       }
       panel.beginSheet(sheetWindow, completionHandler: handler)
     default:
-      Logger.general?.error("quickSavePanel: Unsupported mode")
+      Logger.log("quickSavePanel: Unsupported mode", level: .error)
     }
   }
 
@@ -222,7 +222,7 @@ class Utility {
       }
       return false
     default:
-      Logger.general?.error("quickPromptPanel: Unsupported mode")
+      Logger.log("quickPromptPanel: Unsupported mode", level: .error)
       return false
     }
   }
@@ -305,7 +305,7 @@ class Utility {
 
     var successCount = 0
     var failedCount = 0
-    Logger.general?.debug("Set self as default")
+    Logger.log("Set self as default")
     for docType in docTypes {
       if let exts = docType["CFBundleTypeExtensions"] as? [String] {
         for ext in exts {
@@ -314,7 +314,7 @@ class Utility {
           if status == kOSReturnSuccess {
             successCount += 1
           } else {
-            Logger.general?.error("failed for \(ext): return value \(status)")
+            Logger.log("failed for \(ext): return value \(status)", level: .error)
             failedCount += 1
           }
         }
@@ -360,7 +360,7 @@ class Utility {
   static let appSupportDirUrl: URL = {
     // get path
     let asPath = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-    Logger.assert(asPath.count >= 1, "Cannot get path to Application Support directory")
+    Logger.ensure(asPath.count >= 1, "Cannot get path to Application Support directory")
     let bundleID = Bundle.main.bundleIdentifier!
     let appAsUrl = asPath.first!.appendingPathComponent(bundleID)
     createDirIfNotExist(url: appAsUrl)
@@ -376,7 +376,7 @@ class Utility {
   static let logDirURL: URL = {
     // get path
     let libraryPath = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)
-    Logger.assert(libraryPath.count >= 1, "Cannot get path to Logs directory")
+    Logger.ensure(libraryPath.count >= 1, "Cannot get path to Logs directory")
     let logsUrl = libraryPath.first!.appendingPathComponent("Logs", isDirectory: true)
     let bundleID = Bundle.main.bundleIdentifier!
     let appLogsUrl = logsUrl.appendingPathComponent(bundleID, isDirectory: true)
@@ -393,7 +393,7 @@ class Utility {
   static let thumbnailCacheURL: URL = {
     // get path
     let cachesPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
-    Logger.assert(cachesPath.count >= 1, "Cannot get path to Caches directory")
+    Logger.ensure(cachesPath.count >= 1, "Cannot get path to Caches directory")
     let bundleID = Bundle.main.bundleIdentifier!
     let appCachesUrl = cachesPath.first!.appendingPathComponent(bundleID, isDirectory: true)
     let appThumbnailCacheUrl = appCachesUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)

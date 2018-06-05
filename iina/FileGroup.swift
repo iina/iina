@@ -9,7 +9,7 @@
 import Foundation
 
 fileprivate let charSetGroups: [CharacterSet] = [.decimalDigits, .letters]
-fileprivate let logger = Logger.getLogger("fgroup")
+fileprivate let subsystem = Logger.Subsystem(rawValue: "fgroup")
 
 class FileInfo: Hashable {
   var url: URL
@@ -84,7 +84,7 @@ class FileGroup {
   private let chineseNumbers: [Character] = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"]
 
   static func group(files: [FileInfo]) -> FileGroup {
-    logger?.debug("Start grouping \(files.count) files")
+    Logger.log("Start grouping \(files.count) files", subsystem: subsystem)
     let group = FileGroup(prefix: "", contents: files)
     group.tryGroupFiles()
     return group
@@ -97,9 +97,9 @@ class FileGroup {
   }
 
   private func tryGroupFiles() {
-    logger?.verbose("Try group files, prefix=\(prefix), count=\(contents.count)")
+    Logger.log("Try group files, prefix=\(prefix), count=\(contents.count)", level: .verbose, subsystem: subsystem)
     guard contents.count >= 3 else {
-      logger?.verbose("Contents count < 3, skipped")
+      Logger.log("Contents count < 3, skipped", level: .verbose, subsystem: subsystem)
       return
     }
 
@@ -137,10 +137,10 @@ class FileGroup {
 
     let maxSubGroupCount = tempGroup.reduce(0, { max($0, $1.value.count) })
     if stopGrouping(currChars) || maxSubGroupCount < 3 {
-      logger?.verbose("Stop groupping, maxSubGroup=\(maxSubGroupCount)")
+      Logger.log("Stop groupping, maxSubGroup=\(maxSubGroupCount)", level: .verbose, subsystem: subsystem)
       contents.forEach { $0.prefix = self.prefix }
     } else {
-      logger?.verbose("Continue grouping, groups=\(tempGroup.count), chars=\(currChars)")
+      Logger.log("Continue grouping, groups=\(tempGroup.count), chars=\(currChars)", level: .verbose, subsystem: subsystem)
       groups = tempGroup.map { FileGroup(prefix: $0.0, contents: $0.1) }
       // continue
       for g in groups {

@@ -41,7 +41,7 @@ class SleepPreventer: NSObject {
       if success == kIOReturnSuccess {
         preventedSleep = false
       } else {
-        Logger.general?.warning("Cannot allow display sleep")
+        Logger.log("Cannot allow display sleep", level: .warning)
       }
     }
   }

@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-fileprivate let logger = Logger.getLogger("onlinesub")
+fileprivate let subsystem = Logger.Subsystem(rawValue: "onlinesub")
 
 class OnlineSubtitle: NSObject {
 
@@ -56,7 +56,7 @@ class OnlineSubtitle: NSObject {
       source = userSource!
     }
 
-    logger?.debug("Search subtitle from \(source.name)...")
+    Logger.log("Search subtitle from \(source.name)...", subsystem: subsystem)
 
     playerCore.sendOSD(.startFindingSub(source.name), autoHide: false)
 
@@ -154,7 +154,7 @@ class OnlineSubtitle: NSObject {
         case AssrtSupport.AssrtError.userCanceled:
           osdMessage = .canceled
         default:
-          logger?.error(err.localizedDescription)
+          Logger.log(err.localizedDescription, level: .error)
           osdMessage = .networkError
         }
         playerCore.sendOSD(osdMessage)

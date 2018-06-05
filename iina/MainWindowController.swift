@@ -840,7 +840,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if let iinaCommand = IINACommand(rawValue: keyBinding.rawAction) {
         handleIINACommand(iinaCommand)
       } else {
-        Logger.general?.error("Unknown iina command \(keyBinding.rawAction)")
+        Logger.log("Unknown iina command \(keyBinding.rawAction)", level: .error)
       }
     } else {
       // - MPV command
@@ -860,7 +860,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           displayOSD(.screenshot)
         }
       } else {
-        Logger.general?.error("Return value \(returnValue) when executing key command \(keyBinding.rawAction)")
+        Logger.log("Return value \(returnValue) when executing key command \(keyBinding.rawAction)", level: .error)
       }
     }
   }
@@ -1009,7 +1009,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   override func mouseEntered(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
-      Logger.general?.warning("No data for tracking area")
+      Logger.log("No data for tracking area", level: .warning)
       return
     }
     mouseExitEnterCount += 1
@@ -1034,7 +1034,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   override func mouseExited(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
-      Logger.general?.warning("No data for tracking area")
+      Logger.log("No data for tracking area", level: .warning)
       return
     }
     mouseExitEnterCount += 1
@@ -2028,7 +2028,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Set material for OSC and title bar */
   private func setMaterial(_ theme: Preference.Theme?) {
     guard let theme = theme else {
-      Logger.general?.warning("Nil material in setMaterial()")
+      Logger.log("Nil material in setMaterial()", level: .warning)
       return
     }
     guard #available(OSX 10.11, *) else { return }

@@ -171,6 +171,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
 
     updateVolume()
     updatePlayButtonState(player.info.isPaused ? .off : .on)
+    rightLabel.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .duration
 
     if Preference.bool(for: .alwaysFloatOnTop) {
       setWindowFloatingOnTop(true)

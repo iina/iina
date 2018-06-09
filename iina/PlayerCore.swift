@@ -498,6 +498,16 @@ class PlayerCore: NSObject {
     sendOSD(.abLoop(info.abLoopStatus))
   }
 
+  func clearAbLoop() {
+    if let resetOption = mpv.getString(MPVOption.ProgramBehavior.resetOnNextFile) {
+        if resetOption.contains(MPVOption.PlaybackControl.abLoopA) &&
+                   resetOption.contains(MPVOption.PlaybackControl.abLoopB) {
+          info.abLoopStatus = 0
+          sendOSD(.abLoop(info.abLoopStatus))
+      }
+    }
+  }
+
   func toggleFileLoop() {
     let isLoop = mpv.getFlag(MPVOption.PlaybackControl.loopFile)
     mpv.setFlag(MPVOption.PlaybackControl.loopFile, !isLoop)
@@ -977,6 +987,7 @@ class PlayerCore: NSObject {
     getSelectedTracks()
     getPlaylist()
     getChapters()
+    clearAbLoop()
     DispatchQueue.main.sync {
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)

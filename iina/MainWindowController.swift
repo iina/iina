@@ -42,6 +42,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     return NSNib.Name("MainWindowController")
   }
 
+  @objc let monospacedFont: NSFont = {
+    if #available(OSX 10.11, *) {
+      return NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
+    } else {
+      return NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
+    }
+  }()
+
   // MARK: - Constants
 
   /** Minimum window size. */

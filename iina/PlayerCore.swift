@@ -499,12 +499,14 @@ class PlayerCore: NSObject {
   }
 
   func clearAbLoop() {
-    if let resetOption = mpv.getString(MPVOption.ProgramBehavior.resetOnNextFile) {
-        if resetOption.contains(MPVOption.PlaybackControl.abLoopA) &&
-                   resetOption.contains(MPVOption.PlaybackControl.abLoopB) {
-          info.abLoopStatus = 0
-          sendOSD(.abLoop(info.abLoopStatus))
+    if mpv.getFlag(MPVOption.PlaybackControl.abLoopA) {
+      if mpv.getFlag(MPVOption.PlaybackControl.abLoopB) {
+        info.abLoopStatus = 2
+      } else {
+        info.abLoopStatus = 1
       }
+    } else {
+      info.abLoopStatus = 0
     }
   }
 

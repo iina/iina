@@ -20,6 +20,14 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     return NSNib.Name("MiniPlayerWindowController")
   }
 
+  @objc let monospacedFont: NSFont = {
+    if #available(OSX 10.11, *) {
+      return NSFont.monospacedDigitSystemFont(ofSize: 9, weight: .regular)
+    } else {
+      return NSFont.systemFont(ofSize: 9)
+    }
+  }()
+
   unowned var player: PlayerCore
 
   var menuActionHandler: MainMenuActionHandler!

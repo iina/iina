@@ -11,52 +11,6 @@ import Foundation
 extension PlayerCore {
 
   /**
-   Open a list of urls. If there are more than one urls, add the remaining ones to
-   playlist and disable auto loading.
-
-   - Returns: `nil` if no futher action is needed, like opened a BD Folder; otherwise the
-     count of playable files.
-   */
-  func openURLs(_ urls: [URL]) -> Int? {
-    guard !urls.isEmpty else { return 0 }
-
-    // handle BD folders and m3u / m3u8 files first
-    if urls.count == 1 && (isBDFolder(urls[0]) ||
-       Utility.playlistFileExt.contains(urls[0].absoluteString.lowercasedPathExtension)) {
-      info.shouldAutoLoadFiles = false
-      openURL(urls[0])
-      return nil
-    }
-
-    let playableFiles = getPlayableFiles(in: urls)
-    let count = playableFiles.count
-
-    // check playable files count
-    if count == 0 {
-      return 0
-    } else if count == 1 {
-      info.shouldAutoLoadFiles = true
-    } else {
-      info.shouldAutoLoadFiles = false
-    }
-
-    // open the first file
-    openURL(playableFiles[0])
-    // add the remaining to playlist
-    for i in 1..<count {
-      addToPlaylist(playableFiles[i].path)
-    }
-
-    // refresh playlist
-    postNotification(.iinaPlaylistChanged)
-    // send OSD
-    if count > 1 {
-      sendOSD(.addToPlaylist(count))
-    }
-    return count
-  }
-
-  /**
    Checks whether the path list contains playable file and performs early return if so. Don't use this method for a non-file URL.
    
    - Parameters:

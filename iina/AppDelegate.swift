@@ -376,7 +376,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if response == .alertFirstButtonReturn {
       if let url = inputViewController.url {
         let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: sender.tag == AlternativeMenuItemTag)
-        playerCore.openURL(url, isNetworkResource: true)
+        playerCore.openURL(url)
       } else {
         Utility.showAlert("wrong_url_format")
       }

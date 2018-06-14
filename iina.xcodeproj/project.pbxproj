@@ -211,12 +211,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6115155520A34F9C00EA6548 /* PBXContainerItemProxy */ = {
+		497747ED20D287C1004B243A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84EB1ECE1D2F51D3004FA5A1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 84EB1ED51D2F51D3004FA5A1;
-			remoteInfo = iina;
+			remoteGlobalIDString = E3DE8DC91FD8166A0021921C;
+			remoteInfo = "iina-cli";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1702,6 +1702,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				497747EE20D287C1004B243A /* PBXTargetDependency */,
 			);
 			name = iina;
 			productName = mpvx;
@@ -1719,7 +1720,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6115155620A34F9C00EA6548 /* PBXTargetDependency */,
 			);
 			name = "iina-cli";
 			productName = "iina-cli";
@@ -2042,10 +2042,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6115155620A34F9C00EA6548 /* PBXTargetDependency */ = {
+		497747EE20D287C1004B243A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 84EB1ED51D2F51D3004FA5A1 /* iina */;
-			targetProxy = 6115155520A34F9C00EA6548 /* PBXContainerItemProxy */;
+			target = E3DE8DC91FD8166A0021921C /* iina-cli */;
+			targetProxy = 497747ED20D287C1004B243A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

@@ -121,11 +121,12 @@ extension PlayerCore {
   func acceptFromPasteboard(_ sender: NSDraggingInfo, isPlaylist: Bool = false) -> NSDragOperation {
     // ignore events from this window
     // must check `mainWindow.isWindowLoaded` otherwise window will be lazy-loaded unexpectedly
-    if mainWindow.isWindowLoaded && (sender.draggingSource() as? NSView)?.window === mainWindow.window {
+    if mainWindow.isWindowLoaded && (sender.draggingSource as? NSView)?.window === mainWindow.window {
       return []
     }
 
-    let pb = sender.draggingPasteboard()
+    // get info
+    let pb = sender.draggingPasteboard
     guard let types = pb.types else { return [] }
 
     if types.contains(.nsFilenames) {
@@ -160,7 +161,8 @@ extension PlayerCore {
    - Returns: The result for `performDragOperation(_:)`.
    */
   func openFromPasteboard(_ sender: NSDraggingInfo) -> Bool {
-    let pb = sender.draggingPasteboard()
+    // get info
+    let pb = sender.draggingPasteboard
     guard let types = pb.types else { return false }
 
     if types.contains(.nsFilenames) {

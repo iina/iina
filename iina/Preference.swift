@@ -586,7 +586,7 @@ struct Preference {
 
     func image() -> NSImage {
       switch self {
-      case .settings: return NSImage(named: .actionTemplate)!
+      case .settings: return NSImage(named: NSImage.actionTemplateName)!
       case .playlist: return #imageLiteral(resourceName: "playlist")
       case .pip: return #imageLiteral(resourceName: "pip")
       case .fullScreen: return #imageLiteral(resourceName: "fullscreen")

@@ -83,7 +83,7 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   }
 
   @IBAction func oscPositionPopupBtnAction(_ sender: NSPopUpButton) {
-    var name: String
+    var name: NSImage.Name
     switch sender.selectedTag() {
     case 0:
       name = "osc_float"
@@ -94,7 +94,7 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     default:
       name = "osc_float"
     }
-    oscPreviewImageView.image = NSImage(named: NSImage.Name(rawValue: name))
+    oscPreviewImageView.image = NSImage(named: name)
   }
 
   @IBAction func updateGeometryValue(_ sender: AnyObject) {

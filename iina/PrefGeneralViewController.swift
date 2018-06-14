@@ -23,7 +23,7 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
 
   var toolbarItemImage: NSImage? {
     get {
-      return NSImage(named: .preferencesGeneral)!
+      return NSImage(named: NSImage.preferencesGeneralName)!
     }
   }
 

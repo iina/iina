@@ -189,12 +189,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
 
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
-    let pasteboard = info.draggingPasteboard()
+    let pasteboard = info.draggingPasteboard
     playlistTableView.setDropRow(row, dropOperation: .above)
-    if info.draggingSource() as? NSTableView === tableView {
+    if info.draggingSource as? NSTableView === tableView {
       return .move
     }
-    if (info.draggingSource() as? NSView)?.window === mainWindow.window {
+    if (info.draggingSource as? NSView)?.window === mainWindow.window {
       return []
     }
     if let paths = pasteboard.propertyList(forType: .nsFilenames) as? [String] {
@@ -206,9 +206,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
-    let pasteboard = info.draggingPasteboard()
+    let pasteboard = info.draggingPasteboard
 
-    if info.draggingSource() as? NSTableView === tableView {
+    if info.draggingSource as? NSTableView === tableView {
       if let rowData = pasteboard.data(forType: .iinaPlaylistItem) {
         let indexSet = NSKeyedUnarchiver.unarchiveObject(with: rowData) as! IndexSet
 

@@ -47,7 +47,7 @@ class OpenURLAccessoryViewController: NSViewController {
     super.viewDidLoad()
 
     [safariLinkBtn, chromeLinkBtn].forEach {
-      $0!.image = NSImage(named: .followLinkFreestandingTemplate)
+      $0!.image = NSImage(named: NSImage.followLinkFreestandingTemplateName)
     }
   }
     

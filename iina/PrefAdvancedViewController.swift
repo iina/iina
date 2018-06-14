@@ -19,7 +19,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   var viewIdentifier: String = "PrefAdvancedViewController"
 
   var toolbarItemImage: NSImage? {
-    return NSImage(named: .advanced)!
+    return NSImage(named: NSImage.advancedName)!
   }
 
   var toolbarItemLabel: String? {

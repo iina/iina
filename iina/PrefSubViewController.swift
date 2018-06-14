@@ -19,7 +19,7 @@ class PrefSubViewController: NSViewController {
   var viewIdentifier: String = "PrefSubViewController"
 
   var toolbarItemImage: NSImage {
-    return NSImage(named: .fontPanel)!
+    return NSImage(named: NSImage.fontPanelName)!
   }
 
   var toolbarItemLabel: String {

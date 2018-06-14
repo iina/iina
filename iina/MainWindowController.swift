@@ -1798,7 +1798,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // show sidebar
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = SideBarAnimationDuration
-      context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+      context.timingFunction = CAMediaTimingFunction(name: .easeIn)
       sideBarRightConstraint.animator().constant = 0
     }) {
       self.sidebarAnimationState = .shown
@@ -1811,7 +1811,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let currWidth = sideBarWidthConstraint.constant
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = animate ? SideBarAnimationDuration : 0
-      context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+      context.timingFunction = CAMediaTimingFunction(name: .easeIn)
       sideBarRightConstraint.animator().constant = -currWidth
     }) {
       if self.sidebarAnimationState == .willHide {
@@ -1943,7 +1943,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // show crop settings view
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = CropAnimationDuration
-      context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+      context.timingFunction = CAMediaTimingFunction(name: .easeIn)
       bottomBarBottomConstraint.animator().constant = 0
       ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
         videoViewConstraints[attr]!.animator().constant = newConstants[attr]!
@@ -1980,7 +1980,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // if with animation
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = CropAnimationDuration
-      context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+      context.timingFunction = CAMediaTimingFunction(name: .easeIn)
       bottomBarBottomConstraint.animator().constant = -InteractiveModeBottomViewHeight
       ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
         videoViewConstraints[attr]!.animator().constant = 0
@@ -2761,7 +2761,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   func isMouseEvent(_ event: NSEvent, inAnyOf views: [NSView?]) -> Bool {
     return views.filter { $0 != nil }.reduce(false, { (result, view) in
-      return result || view!.mouse(view!.convert(event.locationInWindow, from: nil), in: view!.bounds)
+      return result || view!.isMousePoint(view!.convert(event.locationInWindow, from: nil), in: view!.bounds)
     })
   }
   
@@ -2791,7 +2791,7 @@ extension MainWindowController: PIPViewControllerDelegate {
   
   func exitPIP() {
     if pipShouldClose(pip) {
-      pip.dismissViewController(pipVideo)
+      pip.dismiss(pipVideo)
     }
   }
 

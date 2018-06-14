@@ -482,7 +482,7 @@ class Utility {
       self.align = align
     }
 
-    var value : [NSAttributedStringKey : Any]? {
+    var value : [NSAttributedString.Key : Any]? {
       get {
         let f: NSFont?
         let s: CGFloat

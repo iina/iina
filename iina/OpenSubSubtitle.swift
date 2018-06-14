@@ -168,7 +168,7 @@ class OpenSubSupport {
           // check status
           let pStatus = parsed["status"] as! String
           if pStatus.hasPrefix("200") {
-            self.token = parsed["token"] as! String
+            self.token = parsed["token"] as? String
             Logger.log("OpenSub: logged in as user \(finalUser)", subsystem: subsystem)
             self.startHeartbeat()
             resolver.fulfill(())

@@ -87,7 +87,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
   }
 
   @IBAction func oscPositionPopupBtnAction(_ sender: NSPopUpButton) {
-    var name: String
+    var name: NSImage.Name
     switch sender.selectedTag() {
     case 0:
       name = "osc_float"
@@ -98,7 +98,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
     default:
       name = "osc_float"
     }
-    oscPreviewImageView.image = NSImage(named: NSImage.Name(rawValue: name))
+    oscPreviewImageView.image = NSImage(named: name)
   }
 
   @IBAction func clearCacheBtnAction(_ sender: AnyObject) {

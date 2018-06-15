@@ -1202,13 +1202,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // update buffer indicator view
     updateBufferIndicatorView()
     // start tracking mouse event
-    guard let w = self.window, let cv = w.contentView else { return }
-    if cv.trackingAreas.isEmpty {
+    guard let w = self.window, let cv = w.contentView?.superview else { return }
+    if cv.trackingAreas.filter ({ $0.owner === self as AnyObject }).isEmpty {
       cv.addTrackingArea(NSTrackingArea(rect: cv.bounds,
                                         options: [.activeAlways, .mouseEnteredAndExited, .mouseMoved],
                                         owner: self, userInfo: ["obj": 0]))
     }
-    if playSlider.trackingAreas.isEmpty {
+    if playSlider.trackingAreas.filter ({ $0.owner === self as AnyObject }).isEmpty {
       playSlider.addTrackingArea(NSTrackingArea(rect: playSlider.bounds,
                                                 options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved],
                                                 owner: self, userInfo: ["obj": 1]))
@@ -1245,9 +1245,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     player.info.currentFolder = nil
     player.info.matchedSubs.removeAll()
     // stop tracking mouse event
-    guard let w = self.window, let cv = w.contentView else { return }
-    cv.trackingAreas.forEach(cv.removeTrackingArea)
-    playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
+    guard let w = self.window, let cv = w.contentView?.superview else { return }
+    cv.trackingAreas.filter { $0.owner === self as AnyObject }.forEach { cv.removeTrackingArea($0) }
+    playSlider.trackingAreas.filter { $0.owner === self as AnyObject }.forEach { playSlider.removeTrackingArea($0) }
   }
 
   // MARK: - Window delegate: Full screen

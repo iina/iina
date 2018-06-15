@@ -501,3 +501,21 @@ extension NSUserInterfaceItemIdentifier {
   static let value = NSUserInterfaceItemIdentifier("Value")
   static let action = NSUserInterfaceItemIdentifier("Action")
 }
+
+extension NSAppearance {
+  convenience init?(_ theme: Preference.Theme) {
+    switch theme {
+    case .dark:
+      self.init(named: .darkAqua)
+    case .light:
+      self.init(named: .aqua)
+    case .system:
+      return nil
+    }
+  }
+}
+
+extension NSAppearance.Name {
+  @available(macOS, obsoleted: 10.14)
+  static let darkAqua = NSAppearance.Name.init("NSAppearanceNameDarkAqua")
+}

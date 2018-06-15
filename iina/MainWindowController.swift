@@ -446,7 +446,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var rightArrowButton: NSButton!
   @IBOutlet weak var settingsButton: NSButton!
   @IBOutlet weak var playlistButton: NSButton!
-  @IBOutlet weak var sideBarView: NSVisualEffectView!
+	@IBOutlet weak var sideBarView: NSVisualEffectView! {
+		didSet {
+      if #available(OSX 10.11, *) {
+        sideBarView.material = .sidebar
+      }
+		}
+	}
   @IBOutlet weak var bottomView: NSView!
   @IBOutlet weak var bufferIndicatorView: NSVisualEffectView!
   @IBOutlet weak var bufferProgressLabel: NSTextField!
@@ -481,7 +487,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var osdAccessoryText: NSTextField!
   @IBOutlet weak var osdAccessoryProgress: NSProgressIndicator!
 
-  @IBOutlet weak var pipOverlayView: NSVisualEffectView!
+  @IBOutlet weak var pipOverlayView: NSVisualEffectView! {
+    didSet {
+      if #available(macOS 10.14, *) {
+        pipOverlayView.material = .windowBackground
+      }
+    }
+  }
 
   lazy var subPopoverView = playlistView.subPopover?.contentViewController?.view
 
@@ -1277,10 +1289,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     player.mpv.setFlag(MPVOption.Window.keepaspect, true)
 
     // Set the appearance to match the theme so the titlebar matches the theme
-    switch(Preference.enum(for: .themeMaterial) as Preference.Theme) {
-    case .dark, .ultraDark: window!.appearance = NSAppearance(named: .vibrantDark)
-    case .light, .mediumLight: window!.appearance = NSAppearance(named: .vibrantLight)
-    }
+    window?.appearance = NSAppearance(Preference.enum(for: .themeMaterial) as Preference.Theme)
 
     // show titlebar
     if oscPosition == .top {
@@ -2031,51 +2040,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       Logger.log("Nil material in setMaterial()", level: .warning)
       return
     }
-    guard #available(OSX 10.11, *) else { return }
-
-    var appearance: NSAppearance? = nil
-    var material: NSVisualEffectView.Material
-    var isDarkTheme: Bool
-    let sliderCell = playSlider.cell as? PlaySliderCell
-    let volumeCell = volumeSlider.cell as? VolumeSliderCell
-
-    switch theme {
-
-    case .dark:
-      appearance = NSAppearance(named: .vibrantDark)
-      material = .dark
-      isDarkTheme = true
-
-    case .ultraDark:
-      appearance = NSAppearance(named: .vibrantDark)
-      material = .ultraDark
-      isDarkTheme = true
-
-    case .light:
-      appearance = NSAppearance(named: .vibrantLight)
-      material = .light
-      isDarkTheme = false
-
-    case .mediumLight:
-      appearance = NSAppearance(named: .vibrantLight)
-      material = .mediumLight
-      isDarkTheme = false
-
-    }
-
-    sliderCell?.isInDarkTheme = isDarkTheme
-    volumeCell?.isInDarkTheme = isDarkTheme
-
-    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView].forEach {
-      $0?.material = material
-      $0?.appearance = appearance
-    }
-
-    if isInFullScreen {
-      window!.appearance = appearance;
-    }
-
-    window?.appearance = appearance
+    window?.appearance = NSAppearance(theme)
   }
 
   func updateBufferIndicatorView() {

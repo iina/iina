@@ -51,15 +51,11 @@ class InitialWindowController: NSWindowController {
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    window?.appearance = NSAppearance(named: .vibrantDark)
-    window?.titlebarAppearsTransparent = true
     window?.isMovableByWindowBackground = true
 
     window?.contentView?.registerForDraggedTypes([.nsFilenames, .nsURL, .string])
 
     mainView.wantsLayer = true
-    mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
-    appIcon.image = NSApp.applicationIconImage
 
     let (version, build) = Utility.iinaVersion()
     let isStableRelease = !version.contains("-")
@@ -70,9 +66,9 @@ class InitialWindowController: NSWindowController {
 
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
-
-    if #available(OSX 10.11, *) {
-      visualEffectView.material = .ultraDark
+    
+    if #available(macOS 10.14, *) {
+      visualEffectView.material = .underWindowBackground
     }
   }
 

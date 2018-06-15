@@ -1193,7 +1193,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = self.window, let cv = w.contentView else { return }
     if cv.trackingAreas.isEmpty {
       cv.addTrackingArea(NSTrackingArea(rect: cv.bounds,
-                                        options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved],
+                                        options: [.activeAlways, .mouseEnteredAndExited, .mouseMoved],
                                         owner: self, userInfo: ["obj": 0]))
     }
     if playSlider.trackingAreas.isEmpty {

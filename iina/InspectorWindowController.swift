@@ -69,7 +69,6 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    window?.appearance = NSAppearance(named: .vibrantDark)
 
     watchProperties = Preference.array(for: .watchProperties) as! [String]
     watchTableView.delegate = self

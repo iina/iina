@@ -51,15 +51,11 @@ class InitialWindowController: NSWindowController {
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    window?.appearance = NSAppearance(named: .vibrantDark)
-    window?.titlebarAppearsTransparent = true
     window?.isMovableByWindowBackground = true
 
     window?.contentView?.registerForDraggedTypes([.nsFilenames, .nsURL, .string])
 
     mainView.wantsLayer = true
-    mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
-    appIcon.image = NSApp.applicationIconImage
 
     let (version, build) = Utility.iinaVersion()
     let isStableRelease = !version.contains("-")
@@ -71,7 +67,9 @@ class InitialWindowController: NSWindowController {
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
 
-    visualEffectView.material = .ultraDark
+    if #available(macOS 10.14, *) {
+      visualEffectView.material = .underWindowBackground
+    }
   }
 
   func loadLastPlaybackInfo() {
@@ -189,7 +187,7 @@ class InitialWindowViewActionButton: NSView {
   override func mouseUp(with event: NSEvent) {
     self.layer?.backgroundColor = hoverBackground
   }
-  
+
 }
 
 

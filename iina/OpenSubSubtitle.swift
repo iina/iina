@@ -233,8 +233,9 @@ class OpenSubSupport {
         case .ok(let response):
           do {
             guard self.checkStatus(response) else { throw OpenSubError.wrongResponseFormat }
-            let IMDB = try self.findPath(["data", filename, "BestGuess", "IDMovieIMDB"], in: response)
-            resolver.fulfill(IMDB as? String ?? "")
+            let bestGuess = try self.findPath(["data", filename, "BestGuess"], in: response) as? [String: Any]
+            let IMDB = (bestGuess?["IDMovieIMDB"] as? String) ?? ""
+            resolver.fulfill(IMDB)
           } catch let (error) {
             resolver.reject(error)
             return

@@ -118,6 +118,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       let item = NSCustomTouchBarItem(identifier: identifier)
       let label = DurationDisplayTextField(labelWithString: "00:00")
       label.alignment = .center
+      label.font = .monospacedDigitSystemFont(ofSize: 0, weight: .regular)
       label.mode = .current
       self.touchBarPosLabels.append(label)
       item.view = label
@@ -128,6 +129,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       let item = NSCustomTouchBarItem(identifier: identifier)
       let label = DurationDisplayTextField(labelWithString: "00:00")
       label.alignment = .center
+      label.font = .monospacedDigitSystemFont(ofSize: 0, weight: .regular)
       label.mode = .remaining
       self.touchBarPosLabels.append(label)
       item.view = label

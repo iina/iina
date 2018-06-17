@@ -83,6 +83,9 @@
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <binding destination="-2" name="font" keyPath="monospacedFont" id="TM3-Ri-L7h"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9EY-2T-Ebf">
                                 <rect key="frame" x="4" y="10" width="36" height="11"/>
@@ -94,6 +97,9 @@
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <binding destination="-2" name="font" keyPath="monospacedFont" id="ivC-kT-hEO"/>
+                                </connections>
                             </textField>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="e3M-Ma-JJM">
                                 <rect key="frame" x="44" y="8" width="212" height="15"/>

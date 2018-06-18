@@ -505,7 +505,7 @@ class MPVController: NSObject {
       let prefix = String(cString: (msg?.pointee.prefix)!)
       let level = String(cString: (msg?.pointee.level)!)
       let text = String(cString: (msg?.pointee.text)!)
-      Logger.log("MPV log: [\(prefix)] \(level): \(text)", level: .warning, subsystem: .general, appendNewlineAtTheEnd: false)
+      Logger.log("mpv log: [\(prefix)] \(level): \(text)", level: .warning, subsystem: .general, appendNewlineAtTheEnd: false)
 
     case MPV_EVENT_PROPERTY_CHANGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
@@ -578,7 +578,7 @@ class MPVController: NSObject {
 
     default:
       // let eventName = String(cString: mpv_event_name(eventId))
-      // Utility.log("MPV event (unhandled): \(eventName)")
+      // Utility.log("mpv event (unhandled): \(eventName)")
       break
     }
   }
@@ -966,7 +966,7 @@ class MPVController: NSObject {
   private func chkErr(_ status: Int32!) {
     guard status < 0 else { return }
     DispatchQueue.main.async {
-      Logger.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
+      Logger.fatal("mpv API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
     }
   }
 

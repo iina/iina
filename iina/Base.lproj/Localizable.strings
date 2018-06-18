@@ -148,7 +148,7 @@
 
 "alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "New Filter";
-"alert.add_filter.message" = "Please enter a filter string in format of MPV's vf or af command.";
+"alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
 
 "alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
 
@@ -169,7 +169,7 @@
 "alert.set_default.success" = "Finished with %d success and %d failed.";
 
 "alert.add_watch.title" = "Add Watch Property";
-"alert.add_watch.message" = "Please enter a valid MPV property name.";
+"alert.add_watch.message" = "Please enter a valid mpv property name.";
 
 "alert.jump_to.title" = "Jump to";
 "alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";

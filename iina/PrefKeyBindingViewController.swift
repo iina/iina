@@ -31,7 +31,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
 
   static let defaultConfigs: [String: String] = [
     "IINA Default": Bundle.main.path(forResource: "iina-default-input", ofType: "conf", inDirectory: "config")!,
-    "MPV Default": Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!,
+    "mpv Default": Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!,
     "VLC Default": Bundle.main.path(forResource: "vlc-default-input", ofType: "conf", inDirectory: "config")!,
     "Movist Default": Bundle.main.path(forResource: "movist-default-input", ofType: "conf", inDirectory: "config")!
   ]

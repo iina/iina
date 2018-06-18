@@ -224,7 +224,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
           Logger.log("Unknown iina command \(kb.rawAction)", level: .error)
         }
       } else {
-        // - MPV command
+        // - mpv command
         let returnValue: Int32
         // execute the command
         switch kb.action[0] {

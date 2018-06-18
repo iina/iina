@@ -146,7 +146,7 @@
 
 "alert.filter.incorrect" = "필터를 설정하는 도중 오류가 발생했습니다. 매개변수 형식을 확인하십시오.";
 "alert.add_filter.title" = "새 필터";
-"alert.add_filter.message" = "MPV 플레이어의 vf 또는 af 명령의 형식으로 필터 설정 문자열을 입력하십시오.";
+"alert.add_filter.message" = "mpv 플레이어의 vf 또는 af 명령의 형식으로 필터 설정 문자열을 입력하십시오.";
 
 "alert.keybinding_config.error" = "단축키 설정 파일 \"%@\"를 읽어올 때 오류가 발생했습니다! IINA 기본값을 사용하도록 설정됩니다. 사용자가 지정한 단축키 설정 내용을 점검하십시오.";
 
@@ -167,7 +167,7 @@
 "alert.set_default.success" = "설정을 마쳤습니다: %d개 성공, %d개 실패";
 
 "alert.add_watch.title" = "상태 보기 항목 추가";
-"alert.add_watch.message" = "추가할 MPV 속성을 입력하십시오.";
+"alert.add_watch.message" = "추가할 mpv 속성을 입력하십시오.";
 
 "alert.jump_to.title" = "위치로 가기";
 "alert.jump_to.message" = "재생할 위치의 시간을 입력하십시오. 예: 20:35";

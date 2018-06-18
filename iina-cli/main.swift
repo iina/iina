@@ -63,7 +63,7 @@ if userArgs.contains(where: { $0 == "--help" || $0 == "-h" }) {
     --help | -h:
             Print this message.
 
-    MPV Option:
+    mpv Option:
     Raw mpv options without --mpv- prefix. All mpv options are supported here.
     Example: --volume=20 --no-resume-playback
     """)

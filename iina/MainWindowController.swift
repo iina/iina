@@ -852,7 +852,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         Logger.log("Unknown iina command \(keyBinding.rawAction)", level: .error)
       }
     } else {
-      // - MPV command
+      // - mpv command
       let returnValue: Int32
       // execute the command
       switch keyBinding.action[0] {

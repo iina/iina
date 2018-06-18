@@ -3,6 +3,9 @@
 /* Class = "NSTextFieldCell"; title = "▶︎"; ObjectID = "4yj-cg-fli"; */
 "4yj-cg-fli.title" = "▶︎";
 
+/* Class = "NSMenuItem"; title = "Add File…"; ObjectID = "CI2-Gm-j4o"; */
+"CI2-Gm-j4o.title" = "Dodaj plik…";
+
 /* Class = "NSButtonCell"; title = "…"; ObjectID = "CVl-Xv-m3u"; */
 "CVl-Xv-m3u.title" = "…";
 
@@ -41,6 +44,12 @@
 
 /* Class = "NSTextFieldCell"; title = "Chapter Title"; ObjectID = "vmJ-Ry-xgK"; */
 "vmJ-Ry-xgK.title" = "Tytuł rozdziału";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "zbw-ad-lgl"; */
+"zbw-ad-lgl.title" = "Label";
+
+/* Class = "NSMenuItem"; title = "Add URL…"; ObjectID = "zeJ-cr-tRg"; */
+"zeJ-cr-tRg.title" = "Dodaj URL…";
 
 /* Class = "NSButtonCell"; title = "Wrong Subtitle!"; ObjectID = "zod-Ch-cOH"; */
 "zod-Ch-cOH.title" = "Złe napisy!";

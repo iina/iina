@@ -82,7 +82,7 @@
 "opt.volume" = "Głośność";
 "opt.window-scale" = "Rozmiar okna";
 "read.add" = "{{property}} {{value}}";
-"read.cycle" = "Przeszukiwanie kolejnych {{property}}{{#dir_down}} od końca{{/dir_down}}";
+"read.cycle" = "Cykl {{property}}{{#dir_down}} od końca{{/dir_down}}";
 "read.cycle-values" = "Wybieranie kolejnej wartości {{property}} w ({{{values}}})";
 "read.multiply" = "Pomnóż {{property}} {{factor}}x";
 "read.seek" = "Przewiń {{#fwd}}w przód{{/fwd}}{{#bwd}}w tył{{/bwd}}{{#abs}}do{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(dokładnie){{/exact}}{{#kf}}{{/kf}}";

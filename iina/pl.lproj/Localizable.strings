@@ -2,7 +2,9 @@
 
 "alert.add_filter.message" = "Wprowadź filtry w formacie zgodnym ze specyfikacją mpv.";
 "alert.add_filter.title" = "Nowy filtr";
-"alert.add_watch.message" = "Wprowadź poprawną nazwę parametru mpv.";
+"alert.add_url.message" = "Wprowadź adres URL:";
+"alert.add_url.title" = "Dodaj URL";
+"alert.add_watch.message" = "Wprowadź poprawną nazwę parametru MPV.";
 "alert.add_watch.title" = "Dodaj obiekt do obejrzenia";
 "alert.assrt_register" = "Z powodu limitu zapytań do API, zalecamy korzystanie z własnego tokenu API. Domyślny token jest przeznaczony wyłącznie do celów demonstracyjnych.";
 "alert.assrt_register.register" = "Zarejestruj się";
@@ -71,7 +73,7 @@
 "alert.unsupported_url" = "Nieobsługiwany adres URL.";
 "alert.wrong_url_format" = "Nieprawidłowy format adresu URL.";
 "filter.audio_filters" = "Filtry audio";
-"filter.video_filters" = "Filtry obrazu";
+"filter.video_filters" = "Filtry video";
 "general.cancel" = "Anuluj";
 "general.login" = "Zaloguj się";
 "general.logout" = "Wyloguj";
@@ -86,23 +88,23 @@
 "keymapping.message" = "Naciśnij dowolny klawisz, aby zapisać.";
 "keymapping.title" = "Mapowanie klawiszy";
 "main.buffering_indicator" = "Buforowanie… %d%%";
-"menu.audio_delay" = "Opóźnienie: %.2fs";
-"menu.audio_delay_down" = "Opóźnienie -%.1fs";
-"menu.audio_delay_up" = "Opóźnienie +%.1fs";
-"menu.exit_fullscreen" = "Wyjdź z trybu pełnoekranowego";
-"menu.exit_pip" = "Wyłącz tryb Obraz-w-obrazie";
+"menu.audio_delay" = "Opóźnienie audio: %.2fs";
+"menu.audio_delay_down" = "Opóźnienie audio -%.1fs";
+"menu.audio_delay_up" = "Opóźnienie audio +%.1fs";
+"menu.exit_fullscreen" = "Opuść tryb pełnoekranowy";
+"menu.exit_pip" = "Wyłącz Obraz-w-obrazie";
 "menu.fullscreen" = "Pełny ekran";
 "menu.pause" = "Pauza";
 "menu.pip" = "Tryb Obraz-w-obrazie";
 "menu.resume" = "Wznów";
 "menu.seek_backward" = "Przewiń w tył o %.0fs";
 "menu.seek_forward" = "Przewiń w przód o %.0fs";
-"menu.speed" = "Prędkość %.2fx";
+"menu.speed" = "Prędkość: %.2fx";
 "menu.speed_down" = "Spowolnij %.1fx";
 "menu.speed_up" = "Przyspiesz %.1fx";
-"menu.sub_delay" = "Opóźnienie: %.2fs";
-"menu.sub_delay_down" = "Opóźnienie -%.1fs";
-"menu.sub_delay_up" = "Opóźnienie +%.1fs";
+"menu.sub_delay" = "Opóźnienie napisów: %.2fs";
+"menu.sub_delay_down" = "Opóźnienie napisów -%.1fs";
+"menu.sub_delay_up" = "Opóźnienie napisów +%.1fs";
 "menu.volume" = "Głośność: %d";
 "menu.volume_down" = "Głośność -%.0f%%";
 "menu.volume_up" = "Głośność +%.0f%%";
@@ -115,11 +117,11 @@
 "osd.abloop.a" = "Pętla-AB: A";
 "osd.abloop.b" = "Pętla-AB: B";
 "osd.abloop.clear" = "Pętla-AB: wyzeruj";
-"osd.add_to_playlist" = "Dodano plików do playlisty: %i";
+"osd.add_to_playlist" = "Dodano %i plików do playlisty";
 "osd.aspect" = "Proporcje obrazu: %@";
 "osd.audio_delay.earlier" = "Opóźnienie dźwięku: -%.2fs";
 "osd.audio_delay.later" = "Opóźnienie dźwięku: %.2fs";
-"osd.audio_delay.nodelay" = "Wyrównanie opóźnienie dźwięku";
+"osd.audio_delay.nodelay" = "Brak opóźnienia dźwięku";
 "osd.canceled" = "Anulowane";
 "osd.cannot_login" = "Nie można się zalogować";
 "osd.chapter" = "Rozdział: %@";
@@ -140,8 +142,8 @@
 "osd.stop" = "Stop";
 "osd.sub_delay.earlier" = "Opóźnienie napisów: -%.2fs";
 "osd.sub_delay.later" = "Opóźnienie napisów: +%.2fs";
-"osd.sub_delay.nodelay" = "Wyrównanie opóźnienie napisów";
-"osd.sub_downloaded" = "Pobrano napisy!";
+"osd.sub_delay.nodelay" = "Brak opóźnienia napisów";
+"osd.sub_downloaded" = "Pobrano napisy";
 "osd.sub_found" = "Znaleziono %d napisów. Pobieranie…";
 "osd.sub_not_found" = "Nie znaleziono pasujących napisów!";
 "osd.sub_saved" = "Zapisano napisy";
@@ -154,8 +156,9 @@
 "osd.video_eq.hue" = "Odcień: %i";
 "osd.video_eq.saturation" = "Nasycenie: %i";
 "osd.volume" = "Głośność: %i";
-"pl_menu.add_item" = "Dodaj plik";
-"pl_menu.add_sub" = "Dodaj napisy...";
+"pl_menu.add_file" = "Dodaj plik…";
+"pl_menu.add_sub" = "Dodaj napisy…";
+"pl_menu.add_url" = "Dodaj URL…";
 "pl_menu.clear_playlist" = "Wyczyść playlistę";
 "pl_menu.delete" = "Przenieś plik do kosza";
 "pl_menu.delete_after_play" = "Przenieś plik do kosza po zakończeniu odtwarzania";
@@ -187,6 +190,8 @@
 "quicksetting.item_default" = "Domyślne";
 "quicksetting.item_none" = "Brak";
 "subencoding.auto" = "Auto detekcja";
+"subtrack.no_external" = "Nie znaleziono zewnętrznych napisów";
+"subtrack.no_loaded" = "Brak wczytanych napisów";
 "touchbar.ahead_15" = "15 sek. do przodu";
 "touchbar.ahead_30" = "30 sek. do przodu";
 "touchbar.back_15" = "-15 sek. do tyłu";
@@ -194,29 +199,11 @@
 "touchbar.decrease_volume" = "Głośność -";
 "touchbar.fast_forward" = "Szybkie przewijanie do przodu";
 "touchbar.increase_volume" = "Głośność +";
-"touchbar.next_video" = "Następne wideo";
+"touchbar.next_video" = "Następne video";
 "touchbar.play_pause" = "Odtwarzanie / Pauza";
-"touchbar.prev_video" = "Poprzednie wideo";
+"touchbar.prev_video" = "Poprzednie video";
 "touchbar.remainingTime" = "Pozostały czas";
 "touchbar.rewind" = "Przewijanie do tyłu";
 "touchbar.seek" = "Szukaj";
 "touchbar.time" = "Pozycja czasowa";
-"track.none" = "Brak ścieżki";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.title" = "Add URL";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.message" = "Please enter the URL:";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_file" = "Add File…";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_url" = "Add URL…";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_external" = "No External Subtitles Found";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_loaded" = "No Subtitles Loaded";
+"track.none" = "<Brak>";

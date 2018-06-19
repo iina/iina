@@ -6,7 +6,7 @@
 "alert.add_url.title" = "添加 URL";
 "alert.add_watch.message" = "请输入一个有效的 mpv 属性名。";
 "alert.add_watch.title" = "监视 mpv 属性";
-"alert.assrt_register" = "由于射手网(伪)的 API 请求数量限制，请务必在射手网（伪）注册账户后使用自己的 API token。自带 API token 仅用于测试用途，并且可能由于 API 使用超出限额而请求失败。";
+"alert.assrt_register" = "由于射手网(伪)的 API 请求数量限制，请务必在射手网(伪)注册账户后使用自己的 API token。自带 API token 仅用于测试用途，并且可能由于 API 使用超出限额而请求失败。";
 "alert.assrt_register.register" = "去射手网(伪)注册";
 "alert.assrt_register.try" = "先试用一下";
 "alert.assrt_token_invalid" = "你的射手网(伪) API token 格式错误。";
@@ -32,7 +32,7 @@
 "alert.delete_history.title" = "删除历史记录";
 "alert.duplicate_config" = "默认配置不能被编辑。请先复制后再编辑。";
 "alert.error_deleting_file" = "无法删除文件。";
-"alert.error_finding_file" = "无法找到文件 %@ ！";
+"alert.error_finding_file" = "无法找到文件 %@!";
 "alert.error_loading_script" = "无法加载脚本 %@！";
 "alert.error_open" = "无法打开文件或流！";
 "alert.error_saving_file" = "保存文件 %@ 时出现错误 %@";
@@ -48,7 +48,7 @@
 "alert.filter_hwdec.use_copy" = "使用支持「拷贝」的解码器";
 "alert.jump_to.message" = "请输入希望跳转的时间。例: 20:35";
 "alert.jump_to.title" = "跳转至";
-"alert.keybinding_config.error" = "无法设置快捷键「%@」！已回退到 IINA 默认配置。请检查你的快捷键文件是否正确。";
+"alert.keybinding_config.error" = "无法设置快捷键「%@」! 已回退到 IINA 默认配置。请检查你的快捷键文件是否正确。";
 "alert.mpv_error" = "出现内部错误 %@ (%@) (设定选项 %@ 时)。";
 "alert.no_video_track" = "没有可用的视频轨道。";
 "alert.nothing_to_open" = "没有可打开的文件。";
@@ -190,6 +190,8 @@
 "quicksetting.item_default" = "默认";
 "quicksetting.item_none" = "无";
 "subencoding.auto" = "自动识别";
+"subtrack.no_external" = "没有找到外部字幕";
+"subtrack.no_loaded" = "没有已加载的字幕";
 "touchbar.ahead_15" = "前进 15 秒";
 "touchbar.ahead_30" = "前进 30 秒";
 "touchbar.back_15" = "后退 15 秒";
@@ -205,5 +207,3 @@
 "touchbar.seek" = "进度条";
 "touchbar.time" = "播放进度";
 "track.none" = "<无>";
-"subtrack.no_loaded" = "没有已加载的字幕";
-"subtrack.no_external" = "没有找到外部字幕";

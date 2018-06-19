@@ -67,7 +67,7 @@
 "CI9-tC-NBv.title" = "Text Cell";
 
 /* Class = "NSTabViewItem"; label = "Video"; ObjectID = "CYP-el-A6A"; */
-"CYP-el-A6A.label" = "Obraz";
+"CYP-el-A6A.label" = "Video";
 
 /* Class = "NSMenuItem"; title = "0.25"; ObjectID = "DdO-VX-HCz"; */
 "DdO-VX-HCz.title" = "0.25";
@@ -82,7 +82,7 @@
 "GXH-iA-cJP.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "BORDER"; ObjectID = "GlZ-YU-dNm"; */
-"GlZ-YU-dNm.title" = "GRANICA";
+"GlZ-YU-dNm.title" = "RAMKA";
 
 /* Class = "NSTextFieldCell"; title = "31.25"; ObjectID = "HBF-J7-Tie"; */
 "HBF-J7-Tie.title" = "31.25";
@@ -160,7 +160,7 @@
 "TXm-bA-7y3.title" = "Usuwanie przeplotu";
 
 /* Class = "NSTextFieldCell"; title = "Video track:"; ObjectID = "VzC-tM-KT7"; */
-"VzC-tM-KT7.title" = "Ścieżka obrazu:";
+"VzC-tM-KT7.title" = "Ścieżka video:";
 
 /* Class = "NSTextFieldCell"; title = "x"; ObjectID = "W7H-mU-v3D"; */
 "W7H-mU-v3D.title" = "x";
@@ -205,10 +205,10 @@
 "bxa-ha-AXL.title" = "2";
 
 /* Class = "NSTabViewItem"; label = "Audio"; ObjectID = "bzk-c2-LH5"; */
-"bzk-c2-LH5.label" = "Dźwięk";
+"bzk-c2-LH5.label" = "Audio";
 
 /* Class = "NSSegmentedCell"; ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
-"cMu-YF-riv.ibShadowedLabels[0]" = "Domyślnie";
+"cMu-YF-riv.ibShadowedLabels[0]" = "Domyślne";
 
 /* Class = "NSSegmentedCell"; ibShadowedLabels[1] = "4:3"; ObjectID = "cMu-YF-riv"; */
 "cMu-YF-riv.ibShadowedLabels[1]" = "4:3";
@@ -229,7 +229,7 @@
 "cdR-uY-riN.title" = "Jasność:";
 
 /* Class = "NSButtonCell"; title = "AUDIO"; ObjectID = "cpm-5o-a2c"; */
-"cpm-5o-a2c.title" = "DŹWIĘK";
+"cpm-5o-a2c.title" = "AUDIO";
 
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "dlX-H5-BCo"; */
 "dlX-H5-BCo.title" = "Table View Cell";
@@ -304,7 +304,7 @@
 "lBn-YS-jL7.title" = "0 dB";
 
 /* Class = "NSButtonCell"; title = "VIDEO"; ObjectID = "lQt-I0-jHO"; */
-"lQt-I0-jHO.title" = "OBRAZ";
+"lQt-I0-jHO.title" = "VIDEO";
 
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "ldQ-YL-IEp"; */
 "ldQ-YL-IEp.title" = "1x";
@@ -373,7 +373,7 @@
 "wgA-op-JP4.title" = "0s";
 
 /* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
-"x39-62-7KC.title" = "Ścieżka:";
+"x39-62-7KC.title" = "Ścieżka audio:";
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
 "xfX-wr-DTJ.title" = "+5s";

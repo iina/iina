@@ -201,6 +201,7 @@ class OpenSubSupport {
       if fileSize < 131072 {
         Logger.log("File length less than 131072, skipped", level: .warning, subsystem: subsystem)
         resolver.reject(OpenSubError.fileTooSmall)
+        return
       }
 
       let offsets: [UInt64] = [0, fileSize - UInt64(chunkSize)]

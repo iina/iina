@@ -395,18 +395,20 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         if #available(OSX 10.11, *) {
           cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
         }
+        cellView.durationLabel.stringValue = ""
         if let cached = player.info.cachedVideoDurationAndProgress[item.filename],
           let duration = cached.duration {
           // if it's cached
-          cellView.durationLabel.stringValue = VideoTime(duration).stringRepresentation
-          if let progress = cached.progress {
-            cellView.playbackProgressView.percentage = progress / duration
-            cellView.playbackProgressView.needsDisplay = true
+          if duration > 0 {
+            // if FFmpeg got the duration succcessfully
+            cellView.durationLabel.stringValue = VideoTime(duration).stringRepresentation
+            if let progress = cached.progress {
+              cellView.playbackProgressView.percentage = progress / duration
+              cellView.playbackProgressView.needsDisplay = true
+            }
           }
         } else {
           // get related data and schedule a reload
-          cellView.durationLabel.stringValue = ""
-          cellView.playbackProgressView.percentage = 0
           if Preference.bool(for: .prefetchPlaylistVideoDuration) {
             player.playlistQueue.async {
               self.player.refreshCachedVideoProgress(forVideoPath: item.filename)

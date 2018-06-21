@@ -139,16 +139,23 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
         // track list
 
         self.trackPopup.removeAllItems()
+        var needSeparator = false
         for track in info.videoTracks {
           self.trackPopup.menu?.addItem(withTitle: "Video" + track.readableTitle,
                                    action: nil, tag: nil, obj: track, stateOn: false)
+          needSeparator = true
         }
-        self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        if needSeparator && !info.audioTracks.isEmpty {
+          self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        }
         for track in info.audioTracks {
           self.trackPopup.menu?.addItem(withTitle: "Audio" + track.readableTitle,
                                    action: nil, tag: nil, obj: track, stateOn: false)
+          needSeparator = true
         }
-        self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        if needSeparator && !info.subTracks.isEmpty {
+          self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        }
         for track in info.subTracks {
           self.trackPopup.menu?.addItem(withTitle: "Subtitle" + track.readableTitle,
                                    action: nil, tag: nil, obj: track, stateOn: false)

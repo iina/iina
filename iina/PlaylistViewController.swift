@@ -507,9 +507,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   @IBAction func contextMenuPlayInNewWindow(_ sender: NSMenuItem) {
-    guard let firstRow = selectedRows?.first, firstRow >= 0 else { return }
-    let filename = player.info.playlist[firstRow].filename
-    PlayerCore.newPlayerCore.openURL(URL(fileURLWithPath: filename))
+    let files = selectedRows!.enumerated().map { (_, i) in
+      URL(fileURLWithPath: player.info.playlist[i].filename)
+    }
+    let _ = PlayerCore.newPlayerCore.openURLs(files, shouldAutoLoad: false)
   }
 
   @IBAction func contextMenuRemove(_ sender: NSMenuItem) {

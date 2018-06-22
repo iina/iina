@@ -182,7 +182,7 @@ class PlayerCore: NSObject {
    - Returns: `nil` if no futher action is needed, like opened a BD Folder; otherwise the
    count of playable files.
    */
-  func openURLs(_ urls: [URL]) -> Int? {
+  func openURLs(_ urls: [URL], shouldAutoLoad autoLoad: Bool = true) -> Int? {
     guard !urls.isEmpty else { return 0 }
     
     // handle BD folders and m3u / m3u8 files first
@@ -199,10 +199,12 @@ class PlayerCore: NSObject {
     // check playable files count
     if count == 0 {
       return 0
-    } else if count == 1 {
-      info.shouldAutoLoadFiles = true
-    } else {
+    }
+
+    if !autoLoad {
       info.shouldAutoLoadFiles = false
+    } else {
+      info.shouldAutoLoadFiles = (count == 1)
     }
     
     // open the first file

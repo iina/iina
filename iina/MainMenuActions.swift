@@ -295,7 +295,7 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuFindOnlineSub(_ sender: NSMenuItem) {
-    // return if last search is undone
+    // return if last search is not finished
     guard let url = player.info.currentURL, !player.isSearchingOnlineSubtitle else { return }
 
     player.isSearchingOnlineSubtitle = true
@@ -324,6 +324,7 @@ extension MainMenuActionHandler {
           }
         }
       }
+      self.player.isSearchingOnlineSubtitle = false
     }
   }
 

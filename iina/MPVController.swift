@@ -525,7 +525,9 @@ class MPVController: NSObject {
       player.info.isIdle = false
       guard getString(MPVProperty.path) != nil else { break }
       player.fileStarted()
-      player.sendOSD(.fileStart(player.info.currentURL?.lastPathComponent ?? "-"))
+      let url = player.info.currentURL
+      let message = player.info.isNetworkResource ? url?.absoluteString : url?.lastPathComponent
+      player.sendOSD(.fileStart(message ?? "-"))
 
     case MPV_EVENT_FILE_LOADED:
       onFileLoaded()

@@ -1455,7 +1455,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
         targetFrame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
       } else {
-        aspect = window.screen!.frame.size
+        aspect = window.screen?.frame.size ?? NSScreen.main!.frame.size
         targetFrame = aspect.grow(toSize: window.frame.size).centeredRect(in: window.frame)
       }
 

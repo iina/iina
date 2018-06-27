@@ -988,6 +988,10 @@ class PlayerCore: NSObject {
         mainWindow.muteButton.isEnabled = false
         mainWindow.volumeSlider.isEnabled = false
       }
+
+      if self.isInMiniPlayer {
+        miniPlayer.defaultAlbumArt.isHidden = !self.info.videoTracks.isEmpty
+      }
     }
     // set initial properties for the first file
     if info.justLaunched {

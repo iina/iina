@@ -368,8 +368,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     let currentHeight = videoView.frame.height
     let newHeight = videoView.frame.width / aspect
     updateVideoViewAspectConstraint(withAspect: aspect)
-    // default album art
-    defaultAlbumArt.isHidden = !player.info.videoTracks.isEmpty
     // resize window
     var frame = window.frame
     frame.size.height += newHeight - currentHeight - 0.5

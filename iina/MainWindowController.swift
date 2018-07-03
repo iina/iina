@@ -2662,6 +2662,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** When slider changes */
   @IBAction func playSliderChanges(_ sender: NSSlider) {
     // guard let event = NSApp.currentEvent else { return }
+    guard !player.info.fileLoading else { return }
 
     // seek and update time
     let percentage = 100 * sender.doubleValue / sender.maxValue

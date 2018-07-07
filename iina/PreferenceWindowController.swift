@@ -45,6 +45,7 @@ class PreferenceWindowController: NSWindowController {
   }
 
   private func loadTab(at index: Int) {
+    contentView.subviews.forEach { $0.removeFromSuperview() }
     guard let vc = viewControllers[at: index] else { return }
     contentView.addSubview(vc.view)
     Utility.quickConstraints(["H:|-20-[v]-20-|", "V:|-24-[v]-24-|"], ["v": vc.view])
@@ -60,6 +61,10 @@ extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     return viewControllers[at: row]?.preferenceTabTitle
+  }
+
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    loadTab(at: tableView.selectedRow)
   }
 
 }

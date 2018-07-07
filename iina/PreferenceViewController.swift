@@ -10,7 +10,7 @@ import Cocoa
 
 class PreferenceViewController: NSViewController {
 
-  @IBOutlet weak var stackView: NSStackView!
+  var stackView: NSStackView!
 
   var sectionViews: [NSView] {
     return []
@@ -19,12 +19,18 @@ class PreferenceViewController: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    for (index, section) in sectionViews.enumerated() {
-      stackView.addView(section, in: .top)
-      if index != sectionViews.count - 1 {
-        stackView.addView(NSBox.horizontalLine(), in: .top)
-      }
+    let views = sectionViews.flatMap { [$0, NSBox.horizontalLine()] }.dropLast()
+
+    stackView = NSStackView(views: Array(views))
+    stackView.orientation = .vertical
+    stackView.alignment = .leading
+    stackView.spacing = 16
+    if #available(OSX 10.11, *) {
+      stackView.distribution = .fill
     }
+
+    view.addSubview(stackView)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": stackView])
   }
 
 }

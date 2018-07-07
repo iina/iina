@@ -10,7 +10,7 @@ import Cocoa
 import MASPreferences
 
 @objcMembers
-class PrefAdvancedViewController: NSViewController, MASPreferencesViewController {
+class PrefAdvancedViewController: NSViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefAdvancedViewController")
@@ -22,7 +22,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
     return NSImage(named: .advanced)!
   }
 
-  var toolbarItemLabel: String? {
+  var preferenceTabTitle: String {
     view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.advanced", comment: "Advanced")
   }

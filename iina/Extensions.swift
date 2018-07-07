@@ -479,6 +479,15 @@ extension NSImage {
 }
 
 
+extension NSBox {
+  static func horizontalLine() -> NSBox {
+    let box = NSBox(frame: NSRect(origin: .zero, size: NSSize(width: 100, height: 1)))
+    box.boxType = .separator
+    return box
+  }
+}
+
+
 extension NSPasteboard.PasteboardType {
   static let nsURL = NSPasteboard.PasteboardType("NSURL")
   static let nsFilenames = NSPasteboard.PasteboardType("NSFilenamesPboardType")

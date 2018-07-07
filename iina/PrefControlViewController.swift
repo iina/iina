@@ -10,7 +10,7 @@ import Cocoa
 import MASPreferences
 
 @objcMembers
-class PrefControlViewController: NSViewController, MASPreferencesViewController {
+class PrefControlViewController: NSViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     get {
@@ -26,7 +26,7 @@ class PrefControlViewController: NSViewController, MASPreferencesViewController 
     }
   }
 
-  var toolbarItemLabel: String? {
+  var preferenceTabTitle: String {
     get {
       view.layoutSubtreeIfNeeded()
       return NSLocalizedString("preference.control", comment: "Control")

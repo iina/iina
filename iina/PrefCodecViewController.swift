@@ -9,7 +9,7 @@
 import Cocoa
 
 @objcMembers
-class PrefCodecViewController: NSViewController {
+class PrefCodecViewController: NSViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefCodecViewController")
@@ -21,7 +21,7 @@ class PrefCodecViewController: NSViewController {
     return #imageLiteral(resourceName: "toolbar_codec")
   }
 
-  var toolbarItemLabel: String {
+  var preferenceTabTitle: String {
     view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.codec", comment: "Codec")
   }

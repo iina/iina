@@ -60,7 +60,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }()
 
   lazy var preferenceWindowController: NSWindowController = {
-    return MASPreferencesWindowController(viewControllers: [
+    return PreferenceWindowController(viewControllers: [
       PrefGeneralViewController(),
       PrefUIViewController(),
       PrefCodecViewController(),
@@ -69,7 +69,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       PrefControlViewController(),
       PrefKeyBindingViewController(),
       PrefAdvancedViewController(),
-    ], title: NSLocalizedString("preference.title", comment: "Preference"))
+    ])
   }()
 
   @IBOutlet weak var menuController: MenuController!

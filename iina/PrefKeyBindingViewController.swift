@@ -10,7 +10,7 @@ import Cocoa
 import MASPreferences
 
 @objcMembers
-class PrefKeyBindingViewController: NSViewController, MASPreferencesViewController {
+class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefKeyBindingViewController")
@@ -22,7 +22,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     return #imageLiteral(resourceName: "toolbar_key")
   }
 
-  var toolbarItemLabel: String? {
+  var preferenceTabTitle: String {
     view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.keybindings", comment: "Keybindings")
   }

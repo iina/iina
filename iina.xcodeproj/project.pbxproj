@@ -197,6 +197,9 @@
 		E33BA5C7204BD9FE0069A0F6 /* SubChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33BA5C5204BD9FE0069A0F6 /* SubChooseViewController.swift */; };
 		E342832F20B7149800139865 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E342832E20B7149800139865 /* Logger.swift */; };
 		E34A0E012053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E34A0E032053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib */; };
+		E3513AF820EF79C500F8C347 /* PreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3513AF620EF79C500F8C347 /* PreferenceWindowController.swift */; };
+		E3513AF920EF79C500F8C347 /* PreferenceWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3513AF720EF79C500F8C347 /* PreferenceWindowController.xib */; };
+		E3513AFB20F120F600F8C347 /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3513AFA20F120F600F8C347 /* PreferenceViewController.swift */; };
 		E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BD4AE20054BD9007635FC /* MainWindow.swift */; };
 		E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C12F6A201F281F00297964 /* FirstRunManager.swift */; };
 		E3CB75BB1FD998F5004DB10A /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F21E26CA24008755BB /* Regex.swift */; };
@@ -994,6 +997,9 @@
 		E34A0E022053F93A00B50097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefOSCToolbarSettingsSheetController.xib; sourceTree = "<group>"; };
 		E34A0E052053F93E00B50097 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefOSCToolbarSettingsSheetController.strings"; sourceTree = "<group>"; };
 		E34E0ADF2007E23600BDC8BA /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/FreeSelectingViewController.strings"; sourceTree = "<group>"; };
+		E3513AF620EF79C500F8C347 /* PreferenceWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceWindowController.swift; sourceTree = "<group>"; };
+		E3513AF720EF79C500F8C347 /* PreferenceWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferenceWindowController.xib; sourceTree = "<group>"; };
+		E3513AFA20F120F600F8C347 /* PreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
 		E38BD4AE20054BD9007635FC /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		E3C12F6A201F281F00297964 /* FirstRunManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunManager.swift; sourceTree = "<group>"; };
 		E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFilter.swift; sourceTree = "<group>"; };
@@ -1120,6 +1126,9 @@
 				8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */,
 				8400D5F81E1AB34D006785F5 /* PrefNetworkViewController.xib */,
 				84F5D49C1E44E9A50060A838 /* KeyBinding.strings */,
+				E3513AF620EF79C500F8C347 /* PreferenceWindowController.swift */,
+				E3513AF720EF79C500F8C347 /* PreferenceWindowController.xib */,
+				E3513AFA20F120F600F8C347 /* PreferenceViewController.swift */,
 			);
 			name = Preference;
 			sourceTree = "<group>";
@@ -1800,6 +1809,7 @@
 				845AC09C1E1AE6C10080B614 /* Localizable.strings in Resources */,
 				8400D5F61E1AB34D006785F5 /* PrefNetworkViewController.xib in Resources */,
 				8400D5D51E1AB317006785F5 /* FilterWindowController.xib in Resources */,
+				E3513AF920EF79C500F8C347 /* PreferenceWindowController.xib in Resources */,
 				84996F901EC11CE6009A8A39 /* HistoryWindowController.xib in Resources */,
 				8400D5DE1E1AB32A006785F5 /* PrefGeneralViewController.xib in Resources */,
 				8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */,
@@ -1959,6 +1969,7 @@
 				84C6D3671EB2A427009BF721 /* HistoryWindowController.swift in Sources */,
 				9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */,
 				840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */,
+				E3513AF820EF79C500F8C347 /* PreferenceWindowController.swift in Sources */,
 				841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */,
 				84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */,
 				840AF5841E73CE3900F4AF92 /* OpenSubSubtitle.swift in Sources */,
@@ -1995,6 +2006,7 @@
 				847C62CA1DC13CDA00E1EF16 /* PrefGeneralViewController.swift in Sources */,
 				84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */,
 				845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */,
+				E3513AFB20F120F600F8C347 /* PreferenceViewController.swift in Sources */,
 				E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */,
 				84F5D4A01E44F9DB0060A838 /* KeyBindingItem.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,

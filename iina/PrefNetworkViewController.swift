@@ -9,7 +9,7 @@
 import Cocoa
 
 @objcMembers
-class PrefNetworkViewController: NSViewController {
+class PrefNetworkViewController: NSViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefNetworkViewController")
@@ -21,7 +21,7 @@ class PrefNetworkViewController: NSViewController {
     return NSImage(named: .network)!
   }
 
-  var toolbarItemLabel: String {
+  var preferenceTabTitle: String {
     view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.network", comment: "Network")
   }

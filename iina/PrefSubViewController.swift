@@ -10,7 +10,7 @@ import Cocoa
 import PromiseKit
 
 @objcMembers
-class PrefSubViewController: NSViewController {
+class PrefSubViewController: NSViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefSubViewController")
@@ -22,7 +22,7 @@ class PrefSubViewController: NSViewController {
     return NSImage(named: .fontPanel)!
   }
 
-  var toolbarItemLabel: String {
+  var preferenceTabTitle: String {
     view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.subtitle", comment: "Subtitles")
   }

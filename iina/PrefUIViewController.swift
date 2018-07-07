@@ -19,7 +19,7 @@ fileprivate let SideTopTag = 0
 fileprivate let SideBottomTag = 1
 
 @objcMembers
-class PrefUIViewController: NSViewController, MASPreferencesViewController {
+class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefUIViewController")
@@ -33,7 +33,7 @@ class PrefUIViewController: NSViewController, MASPreferencesViewController {
     }
   }
 
-  var toolbarItemLabel: String? {
+  var preferenceTabTitle: String {
     get {
       view.layoutSubtreeIfNeeded()
       return NSLocalizedString("preference.ui", comment: "UI")

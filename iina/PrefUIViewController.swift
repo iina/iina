@@ -46,10 +46,17 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     }
   }
 
-  var hasResizableWidth: Bool = false
-  var hasResizableHeight: Bool = false
+  override var sectionViews: [NSView] {
+    return [sectionAppearanceView, sectionWindowView, sectionOSCView, sectionOSDView, sectionThumbnailView]
+  }
 
   private let toolbarSettingsSheetController = PrefOSCToolbarSettingsSheetController()
+
+  @IBOutlet var sectionAppearanceView: NSView!
+  @IBOutlet var sectionWindowView: NSView!
+  @IBOutlet var sectionOSCView: NSView!
+  @IBOutlet var sectionOSDView: NSView!
+  @IBOutlet var sectionThumbnailView: NSView!
 
   @IBOutlet weak var oscPreviewImageView: NSImageView!
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!

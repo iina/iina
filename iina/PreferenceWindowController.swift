@@ -48,7 +48,7 @@ class PreferenceWindowController: NSWindowController {
     contentView.subviews.forEach { $0.removeFromSuperview() }
     guard let vc = viewControllers[at: index] else { return }
     contentView.addSubview(vc.view)
-    Utility.quickConstraints(["H:|-20-[v]-20-|", "V:|-24-[v]-24-|"], ["v": vc.view])
+    Utility.quickConstraints(["H:|-20-[v]-20-|", "V:|-28-[v]-28-|"], ["v": vc.view])
   }
 
 }

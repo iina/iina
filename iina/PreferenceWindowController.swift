@@ -10,7 +10,15 @@ import Cocoa
 
 protocol PreferenceWindowEmbeddable where Self: NSViewController {
   var preferenceTabTitle: String { get }
+  var preferenceContentIsScrollable: Bool { get }
 }
+
+extension PreferenceWindowEmbeddable {
+  var preferenceContentIsScrollable: Bool {
+    return true
+  }
+}
+
 
 class PreferenceWindowController: NSWindowController {
 
@@ -19,7 +27,10 @@ class PreferenceWindowController: NSWindowController {
   }
 
   @IBOutlet weak var tableView: NSTableView!
+  @IBOutlet weak var scrollView: NSScrollView!
   @IBOutlet weak var contentView: NSView!
+
+  private var contentViewBottomConstraint: NSLayoutConstraint?
 
   private var viewControllers: [NSViewController & PreferenceWindowEmbeddable]
 
@@ -41,6 +52,10 @@ class PreferenceWindowController: NSWindowController {
     tableView.delegate = self
     tableView.dataSource = self
 
+    if #available(OSX 10.11, *) {
+      contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: contentView.superview!.bottomAnchor)
+    }
+
     loadTab(at: 0)
   }
 
@@ -49,6 +64,10 @@ class PreferenceWindowController: NSWindowController {
     guard let vc = viewControllers[at: index] else { return }
     contentView.addSubview(vc.view)
     Utility.quickConstraints(["H:|-20-[v]-20-|", "V:|-28-[v]-28-|"], ["v": vc.view])
+
+    let isScrollable = vc.preferenceContentIsScrollable
+    contentViewBottomConstraint?.isActive = !isScrollable
+    scrollView.verticalScrollElasticity = isScrollable ? .allowed : .none
   }
 
 }

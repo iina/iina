@@ -27,7 +27,9 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     return NSLocalizedString("preference.keybindings", comment: "Keybindings")
   }
 
-  var hasResizableWidth: Bool = false
+  var preferenceContentIsScrollable: Bool {
+    return false
+  }
 
   static let defaultConfigs: [String: String] = [
     "IINA Default": Bundle.main.path(forResource: "iina-default-input", ofType: "conf", inDirectory: "config")!,

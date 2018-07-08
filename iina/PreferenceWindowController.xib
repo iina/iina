@@ -9,6 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="PreferenceWindowController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="5R5-77-bmq" id="hTm-zX-BBk"/>
+                <outlet property="scrollView" destination="VYU-tb-v3l" id="n0b-YV-otV"/>
                 <outlet property="tableView" destination="vde-uJ-0ge" id="ezK-1d-1Px"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>

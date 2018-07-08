@@ -10,7 +10,7 @@ import Cocoa
 import MASPreferences
 
 @objcMembers
-class PrefAdvancedViewController: NSViewController, PreferenceWindowEmbeddable {
+class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefAdvancedViewController")
@@ -31,13 +31,17 @@ class PrefAdvancedViewController: NSViewController, PreferenceWindowEmbeddable {
 
   var options: [[String]] = []
 
+  override var sectionViews: [NSView] {
+    return [headerView, settingsView]
+  }
+
+  @IBOutlet var headerView: NSView!
+  @IBOutlet var settingsView: NSView!
 
   @IBOutlet weak var enableSettingsBtn: NSButton!
-  @IBOutlet weak var settingsView: NSView!
   @IBOutlet weak var optionsTableView: NSTableView!
   @IBOutlet weak var useAnotherConfigDirBtn: NSButton!
   @IBOutlet weak var chooseConfigDirBtn: NSButton!
-  @IBOutlet weak var userConfigLocLabel: NSTextField!
 
 
   override func viewDidLoad() {

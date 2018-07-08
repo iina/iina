@@ -10,7 +10,7 @@ import Cocoa
 import PromiseKit
 
 @objcMembers
-class PrefSubViewController: NSViewController, PreferenceWindowEmbeddable {
+class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefSubViewController")
@@ -27,8 +27,19 @@ class PrefSubViewController: NSViewController, PreferenceWindowEmbeddable {
     return NSLocalizedString("preference.subtitle", comment: "Subtitles")
   }
 
-  var hasResizableWidth: Bool = false
-  var hasResizableHeight: Bool = false
+  override var sectionViews: [NSView] {
+    return [sectionAutoLoadView, sectionASSView, sectionTextSubView, sectionPositionView, sectionOnlineSubView, sectionOtherView]
+  }
+
+  @IBOutlet var sectionAutoLoadView: NSView!
+  @IBOutlet var sectionASSView: NSView!
+  @IBOutlet var sectionTextSubView: NSView!
+  @IBOutlet var sectionPositionView: NSView!
+  @IBOutlet var sectionOnlineSubView: NSView!
+  @IBOutlet var sectionOtherView: NSView!
+
+  @IBOutlet weak var subSourceStackView: NSStackView!
+  @IBOutlet weak var subSourcePopUpButton: NSPopUpButton!
 
   @IBOutlet weak var subLangTokenView: NSTokenField!
   @IBOutlet weak var loginIndicator: NSProgressIndicator!
@@ -51,6 +62,8 @@ class PrefSubViewController: NSViewController, PreferenceWindowEmbeddable {
 
     subLangTokenView.delegate = self
     loginIndicator.isHidden = true
+
+    refreshOnlineSubSource()
   }
 
   @IBAction func chooseSubFontAction(_ sender: AnyObject) {
@@ -105,8 +118,24 @@ class PrefSubViewController: NSViewController, PreferenceWindowEmbeddable {
     PlayerCore.active.reloadAllSubs()
   }
   
-  @IBAction func OpenSubHelpBtnAction(_ sender: AnyObject) {
+  @IBAction func openSubHelpBtnAction(_ sender: AnyObject) {
     NSWorkspace.shared.open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#opensubtitles"))!)
+  }
+
+  @IBAction func assrtHelpBtnAction(_ sender: AnyObject) {
+    NSWorkspace.shared.open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#assrt"))!)
+  }
+
+  @IBAction func onlineSubSourceAction(_ sender: NSPopUpButton) {
+    refreshOnlineSubSource()
+  }
+
+  private func refreshOnlineSubSource() {
+    let tag = subSourcePopUpButton.selectedTag()
+    for (index, view) in subSourceStackView.views.enumerated() {
+      if index == 0 { continue }
+      subSourceStackView.setVisibilityPriority(index == tag ? .mustHold : .notVisible, for: view)
+    }
   }
 }
 

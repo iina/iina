@@ -122,7 +122,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <view translatesAutoresizingMaskIntoConstraints="NO" id="5R5-77-bmq">
+                                <view translatesAutoresizingMaskIntoConstraints="NO" id="5R5-77-bmq" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="460" width="480" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" placeholder="YES" id="zVF-kp-HmN"/>

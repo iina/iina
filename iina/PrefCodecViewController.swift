@@ -9,7 +9,7 @@
 import Cocoa
 
 @objcMembers
-class PrefCodecViewController: NSViewController, PreferenceWindowEmbeddable {
+class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefCodecViewController")
@@ -26,8 +26,12 @@ class PrefCodecViewController: NSViewController, PreferenceWindowEmbeddable {
     return NSLocalizedString("preference.codec", comment: "Codec")
   }
 
-  var hasResizableWidth: Bool = false
-  var hasResizableHeight: Bool = false
+  override var sectionViews: [NSView] {
+    return [sectionVideoView, sectionAudioView]
+  }
+
+  @IBOutlet var sectionVideoView: NSView!
+  @IBOutlet var sectionAudioView: NSView!
 
   @IBOutlet weak var spdifAC3Btn: NSButton!
   @IBOutlet weak var spdifDTSBtn: NSButton!

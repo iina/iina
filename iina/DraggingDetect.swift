@@ -25,7 +25,6 @@ extension PlayerCore {
         while let fileName = dirEnumerator.nextObject() as? String {
           // ignore hidden files
           guard !fileName.hasPrefix(".") else { continue }
-          // check extension
           if Utility.playableFileExt.contains(fileName.lowercasedPathExtension) {
             return true
           }
@@ -116,39 +115,37 @@ extension PlayerCore {
 
    - Parameters:
      - sender: The `NSDraggingInfo` object received in `draggingEntered(_:)`.
+     - isPlaylist: True when the caller is `PlaylistViewController`
    - Returns: The `NSDragOperation`.
    */
-  func acceptFromPasteboard(_ sender: NSDraggingInfo) -> NSDragOperation {
+  func acceptFromPasteboard(_ sender: NSDraggingInfo, isPlaylist: Bool = false) -> NSDragOperation {
     // ignore events from this window
     // must check `mainWindow.isWindowLoaded` otherwise window will be lazy-loaded unexpectedly
     if mainWindow.isWindowLoaded && (sender.draggingSource() as? NSView)?.window === mainWindow.window {
       return []
     }
 
-    // get info
     let pb = sender.draggingPasteboard()
     guard let types = pb.types else { return [] }
 
     if types.contains(.nsFilenames) {
-      // filenames
       guard let paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return [] }
       // check 3d lut files
       if paths.count == 1 && Utility.lut3dExt.contains(paths[0].lowercasedPathExtension) {
         return .copy
       }
-      // other files
-      let theOnlyPathIsBDFolder = paths.count == 1 && isBDFolder(URL(fileURLWithPath: paths[0]))
-      return theOnlyPathIsBDFolder ||
-        hasPlayableFiles(in: paths) ||
-        hasSubtitleFile(in: paths) ? .copy : []
-    } else if types.contains(.nsURL) {
-      // url
-      return .copy
-    } else if types.contains(.string) {
-      // string
-      guard let droppedString = pb.string(forType: .string) else {
-        return []
+
+      if isPlaylist {
+        return hasPlayableFiles(in: paths) ? .copy : []
+      } else {
+        let theOnlyPathIsBDFolder = paths.count == 1 && isBDFolder(URL(fileURLWithPath: paths[0]))
+        return theOnlyPathIsBDFolder ||
+          hasPlayableFiles(in: paths) ||
+          hasSubtitleFile(in: paths) ? .copy : []
       }
+    } else if types.contains(.nsURL) {
+      return .copy
+    } else if let droppedString = pb.string(forType: .string) {
       return Regex.url.matches(droppedString) || Regex.filePath.matches(droppedString) ? .copy : []
     }
     return []
@@ -162,12 +159,10 @@ extension PlayerCore {
    - Returns: The result for `performDragOperation(_:)`.
    */
   func openFromPasteboard(_ sender: NSDraggingInfo) -> Bool {
-    // get info
     let pb = sender.draggingPasteboard()
     guard let types = pb.types else { return false }
 
     if types.contains(.nsFilenames) {
-      // filenames
       guard let paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return false }
       // check 3d lut files
       if paths.count == 1 && Utility.lut3dExt.contains(paths[0].lowercasedPathExtension) {
@@ -180,7 +175,7 @@ extension PlayerCore {
         }
         return result
       }
-      // other files
+
       let urls = paths.map{ URL(fileURLWithPath: $0) }
       // try open files
       guard let loadedFileCount = openURLs(urls) else { return true }
@@ -204,15 +199,10 @@ extension PlayerCore {
         return true
       }
     } else if types.contains(.nsURL) {
-      // url
       guard let url = pb.propertyList(forType: .nsURL) as? [String] else { return false }
       openURLString(url[0])
       return true
-    } else if types.contains(.string) {
-      // string
-      guard let droppedString = pb.string(forType: .string) else {
-        return false
-      }
+    } else if let droppedString = pb.string(forType: .string) {
       if Regex.url.matches(droppedString) || Regex.filePath.matches(droppedString) {
         openURLString(droppedString)
         return true

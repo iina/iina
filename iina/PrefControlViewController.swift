@@ -10,7 +10,7 @@ import Cocoa
 import MASPreferences
 
 @objcMembers
-class PrefControlViewController: NSViewController, PreferenceWindowEmbeddable {
+class PrefControlViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     get {
@@ -33,12 +33,22 @@ class PrefControlViewController: NSViewController, PreferenceWindowEmbeddable {
     }
   }
 
-  var hasResizableWidth: Bool = false
-  var hasResizableHeight: Bool = false
+  override var sectionViews: [NSView] {
+    return [sectionTrackpadView, sectionMouseView]
+  }
+
+  @IBOutlet var sectionTrackpadView: NSView!
+  @IBOutlet var sectionMouseView: NSView!
+
+  @IBOutlet weak var forceTouchLabel: NSTextField!
+  @IBOutlet weak var scrollVerticallyLabel: NSTextField!
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do view setup here.
+
+    if #available(OSX 10.11, *) {
+      forceTouchLabel.widthAnchor.constraint(equalTo: scrollVerticallyLabel.widthAnchor, multiplier: 1).isActive = true
+    }
   }
 
 }

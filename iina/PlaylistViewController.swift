@@ -97,7 +97,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     playlistTableView.target = self
     
     // register for drag and drop
-    playlistTableView.registerForDraggedTypes([.iinaPlaylistItem, .nsFilenames])
+    playlistTableView.registerForDraggedTypes([.iinaPlaylistItem, .nsFilenames, .nsURL, .string])
 
     if let popoverView = subPopover.contentViewController?.view,
       popoverView.trackingAreas.isEmpty {
@@ -189,20 +189,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
 
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
-    let pasteboard = info.draggingPasteboard()
     playlistTableView.setDropRow(row, dropOperation: .above)
     if info.draggingSource() as? NSTableView === tableView {
       return .move
     }
-    if (info.draggingSource() as? NSView)?.window === mainWindow.window {
-      return []
-    }
-    if let paths = pasteboard.propertyList(forType: .nsFilenames) as? [String] {
-      if player.hasPlayableFiles(in: paths) {
-        return .copy
-      }
-    }
-    return []
+    return player.acceptFromPasteboard(info, isPlaylist: true)
   }
 
   func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
@@ -257,6 +248,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         return false
       }
       player.addToPlaylist(paths: playableFiles.map { $0.path }, at: row)
+    } else if let urls = pasteboard.propertyList(forType: .nsURL) as? [String] {
+      player.addToPlaylist(paths: urls, at: row)
+    } else if let droppedString = pasteboard.string(forType: .string), Regex.url.matches(droppedString) {
+      player.addToPlaylist(paths: [droppedString], at: row)
     } else {
       return false
     }

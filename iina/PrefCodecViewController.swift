@@ -23,7 +23,7 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
 
   var preferenceTabTitle: String {
     view.layoutSubtreeIfNeeded()
-    return NSLocalizedString("preference.codec", comment: "Codec")
+    return NSLocalizedString("preference.video_audio", comment: "Codec")
   }
 
   override var sectionViews: [NSView] {

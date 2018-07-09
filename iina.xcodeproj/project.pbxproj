@@ -1896,7 +1896,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $PROJECT_DIR/other/check_localizable.swift;
+			shellScript = "if [ \"$CONFIGURATION\" == \"Release\" ]; then\n $PROJECT_DIR/other/check_localizable.swift\nfi";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

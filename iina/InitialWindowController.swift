@@ -123,11 +123,7 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   func tableViewSelectionDidChange(_ notification: Notification) {
     guard let url = recentDocuments[at: recentFilesTableView.selectedRow] else { return }
-    if url.isExistingDirectory {
-      let _ = player.openURLs([url])
-    } else {
-      player.openURL(url, shouldAutoLoad: true)
-    }
+    let _ = player.openURLs([url])
     recentFilesTableView.deselectAll(nil)
   }
 
@@ -187,7 +183,7 @@ class InitialWindowViewActionButton: NSView {
     } else {
       if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
         let windowController = window?.windowController as? InitialWindowController {
-        windowController.player.openURL(lastFile, shouldAutoLoad: true)
+        let _ = windowController.player.openURLs([lastFile])
       }
     }
   }

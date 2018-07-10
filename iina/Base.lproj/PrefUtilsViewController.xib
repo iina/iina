@@ -77,6 +77,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="clearWatchLaterBtnAction:" target="-2" id="oL3-bX-caO"/>
+                    </connections>
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="2Kf-ce-zj1">
                     <rect key="frame" x="-2" y="179" width="484" height="28"/>
@@ -101,6 +104,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="clearHistoryBtnAction:" target="-2" id="IpD-Hy-YLH"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aCe-0n-uch">
                     <rect key="frame" x="-6" y="1" width="192" height="32"/>

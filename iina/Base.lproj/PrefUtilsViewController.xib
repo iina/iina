@@ -11,6 +11,10 @@
                 <outlet property="sectionBrowserExtView" destination="lOp-07-Z6M" id="UYs-O3-l9R"/>
                 <outlet property="sectionClearCacheView" destination="ve7-5i-dg4" id="Ki9-9t-e2h"/>
                 <outlet property="sectionDefaultAppView" destination="qu5-4u-ozP" id="icl-fU-YLA"/>
+                <outlet property="setAsDefaultAudioCheckBox" destination="bjj-u6-vYB" id="0Kh-Z0-n3P"/>
+                <outlet property="setAsDefaultPlaylistCheckBox" destination="MC6-FT-IVG" id="WYl-1W-kyJ"/>
+                <outlet property="setAsDefaultSheet" destination="gck-1e-Yi7" id="Rag-5U-yiu"/>
+                <outlet property="setAsDefaultVideoCheckBox" destination="dhO-nq-Edx" id="fM4-DO-zqv"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -18,6 +22,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <point key="canvasLocation" x="139" y="240"/>
         </customView>
         <customView id="qu5-4u-ozP">
             <rect key="frame" x="0.0" y="0.0" width="480" height="70"/>
@@ -37,6 +42,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="setIINAAsDefaultAction:" target="-2" id="GNE-Ev-Nhe"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>
@@ -195,6 +203,95 @@
             </constraints>
             <point key="canvasLocation" x="139" y="883"/>
         </customView>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="gck-1e-Yi7">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="163" y="199" width="448" height="193"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <view key="contentView" id="HNy-Eo-3UU">
+                <rect key="frame" x="0.0" y="0.0" width="448" height="189"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2JS-Ar-lM8">
+                        <rect key="frame" x="18" y="135" width="412" height="34"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Please select the media types that you want to make IINA as the default Application for." id="uvK-Y1-dZr">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dhO-nq-Edx">
+                        <rect key="frame" x="26" y="103" width="57" height="18"/>
+                        <buttonCell key="cell" type="check" title="Video" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8wH-Gi-mRV">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bjj-u6-vYB">
+                        <rect key="frame" x="26" y="81" width="57" height="18"/>
+                        <buttonCell key="cell" type="check" title="Audio" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="jFt-2a-nmc">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MC6-FT-IVG">
+                        <rect key="frame" x="26" y="59" width="65" height="18"/>
+                        <buttonCell key="cell" type="check" title="Playlist" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="MGo-J8-zWE">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lh7-1a-rsH">
+                        <rect key="frame" x="352" y="13" width="82" height="32"/>
+                        <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IkF-qG-s4j">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="setAsDefaultOKBtnAction:" target="-2" id="3so-iQ-OTg"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ak8-rh-mxC">
+                        <rect key="frame" x="274" y="13" width="82" height="32"/>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kbP-VI-dmT">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="setAsDefaultCancelBtnAction:" target="-2" id="P32-cT-Rbb"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bjj-u6-vYB" secondAttribute="trailing" constant="20" symbolic="YES" id="0ZT-JH-Zbm"/>
+                    <constraint firstItem="bjj-u6-vYB" firstAttribute="leading" secondItem="dhO-nq-Edx" secondAttribute="leading" id="3Ku-7Y-NAR"/>
+                    <constraint firstItem="Lh7-1a-rsH" firstAttribute="width" secondItem="ak8-rh-mxC" secondAttribute="width" id="54c-9v-WCr"/>
+                    <constraint firstItem="ak8-rh-mxC" firstAttribute="baseline" secondItem="Lh7-1a-rsH" secondAttribute="baseline" id="AfG-Xb-cpj"/>
+                    <constraint firstAttribute="trailing" secondItem="2JS-Ar-lM8" secondAttribute="trailing" constant="20" id="G09-sK-g2R"/>
+                    <constraint firstItem="Lh7-1a-rsH" firstAttribute="top" secondItem="MC6-FT-IVG" secondAttribute="bottom" constant="20" id="GTq-UW-ZEW"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dhO-nq-Edx" secondAttribute="trailing" constant="20" symbolic="YES" id="Rhm-ow-91d"/>
+                    <constraint firstItem="bjj-u6-vYB" firstAttribute="top" secondItem="dhO-nq-Edx" secondAttribute="bottom" constant="8" id="XWv-9W-BXl"/>
+                    <constraint firstItem="2JS-Ar-lM8" firstAttribute="top" secondItem="HNy-Eo-3UU" secondAttribute="top" constant="20" id="YgB-Yc-VSQ"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MC6-FT-IVG" secondAttribute="trailing" constant="20" symbolic="YES" id="at1-py-ImQ"/>
+                    <constraint firstItem="dhO-nq-Edx" firstAttribute="leading" secondItem="HNy-Eo-3UU" secondAttribute="leading" constant="28" id="bdF-xS-ZLj"/>
+                    <constraint firstAttribute="bottom" secondItem="Lh7-1a-rsH" secondAttribute="bottom" constant="20" id="h66-B2-syQ"/>
+                    <constraint firstItem="Lh7-1a-rsH" firstAttribute="leading" secondItem="ak8-rh-mxC" secondAttribute="trailing" constant="8" id="kVf-wV-Oej"/>
+                    <constraint firstItem="2JS-Ar-lM8" firstAttribute="leading" secondItem="HNy-Eo-3UU" secondAttribute="leading" constant="20" id="kty-rd-Imz"/>
+                    <constraint firstAttribute="trailing" secondItem="Lh7-1a-rsH" secondAttribute="trailing" constant="20" id="nl0-1Y-0mg"/>
+                    <constraint firstItem="dhO-nq-Edx" firstAttribute="top" secondItem="2JS-Ar-lM8" secondAttribute="bottom" constant="16" id="rN2-DP-FXq"/>
+                    <constraint firstItem="ak8-rh-mxC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HNy-Eo-3UU" secondAttribute="leading" constant="20" symbolic="YES" id="wgX-oS-kwi"/>
+                    <constraint firstItem="MC6-FT-IVG" firstAttribute="top" secondItem="bjj-u6-vYB" secondAttribute="bottom" constant="8" id="yfk-6H-Xqu"/>
+                    <constraint firstItem="MC6-FT-IVG" firstAttribute="leading" secondItem="bjj-u6-vYB" secondAttribute="leading" id="zaq-Rb-2fW"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="-493" y="582.5"/>
+        </window>
     </objects>
     <resources>
         <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>

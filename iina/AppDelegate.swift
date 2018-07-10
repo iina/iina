@@ -433,10 +433,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSWorkspace.shared.open(URL(string: AppData.websiteLink)!)
   }
 
-  @IBAction func setSelfAsDefaultAction(_ sender: AnyObject) {
-    Utility.setSelfAsDefaultForAllFileTypes()
-  }
-
   private func registerUserDefaultValues() {
     UserDefaults.standard.register(defaults: [String: Any](uniqueKeysWithValues: Preference.defaultPreference.map { ($0.0.rawValue, $0.1) }))
   }

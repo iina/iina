@@ -184,6 +184,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.commandLineStatus.assignMPVArguments(to: pc)
         return pc
       }
+      if let title = commandLineStatus.title {
+        getNewPlayerCore().title = title
+      }
       if commandLineStatus.isStdin {
         getNewPlayerCore().openURLString("-")
       } else {
@@ -450,6 +453,7 @@ struct CommandLineStatus {
   var mpvArguments: [(String, String)] = []
   var iinaArguments: [(String, String)] = []
   var filenames: [String] = []
+  var title: String? = nil
 
   mutating func parseArguments(_ args: [String]) {
     mpvArguments.removeAll()
@@ -458,6 +462,11 @@ struct CommandLineStatus {
       let splitted = arg.dropFirst(2).split(separator: "=", maxSplits: 2)
       let name = String(splitted[0])
       if (name.hasPrefix("mpv-")) {
+        guard name != "mpv-title" else {
+          title = String(splitted[1])
+          return
+        }
+        
         // mpv args
         if splitted.count <= 1 {
           mpvArguments.append((String(name.dropFirst(4)), "yes"))

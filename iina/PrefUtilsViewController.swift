@@ -99,6 +99,24 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
     view.window!.endSheet(setAsDefaultSheet)
   }
 
+  @IBAction func clearWatchLaterBtnAction(_ sender: Any) {
+    _ = Utility.quickAskPanel("clear_watch_later", useSheet: true) { confirmed in
+      guard confirmed else { return }
+      try? FileManager.default.removeItem(atPath: Utility.watchLaterURL.path)
+      Utility.createDirIfNotExist(url: Utility.watchLaterURL)
+      Utility.showAlert("clear_watch_later.success", style: .informational)
+    }
+  }
+
+  @IBAction func clearHistoryBtnAction(_ sender: Any) {
+    _ = Utility.quickAskPanel("clear_history", useSheet: true) { confirmed in
+      guard confirmed else { return }
+      try? FileManager.default.removeItem(atPath: Utility.playbackHistoryURL.path)
+      NSDocumentController.shared.clearRecentDocuments(self)
+      Utility.showAlert("clear_history.success", style: .informational)
+    }
+  }
+
   @IBAction func clearCacheBtnAction(_ sender: Any) {
     _ = Utility.quickAskPanel("clear_cache", useSheet: true) { confirmed in
       guard confirmed else { return }

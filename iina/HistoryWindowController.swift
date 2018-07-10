@@ -113,7 +113,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   @objc func doubleAction() {
     if let selected = outlineView.item(atRow: outlineView.clickedRow) as? PlaybackHistory {
-      PlayerCore.activeOrNew.openURL(selected.url, shouldAutoLoad: true)
+      PlayerCore.activeOrNew.openURL(selected.url)
     }
   }
 
@@ -237,12 +237,12 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   @IBAction func playAction(_ sender: AnyObject) {
     guard let firstEntry = selectedEntries.first else { return }
-    PlayerCore.active.openURL(firstEntry.url, shouldAutoLoad: true)
+    PlayerCore.active.openURL(firstEntry.url)
   }
 
   @IBAction func playInNewWindowAction(_ sender: AnyObject) {
     guard let firstEntry = selectedEntries.first else { return }
-    PlayerCore.newPlayerCore.openURL(firstEntry.url, shouldAutoLoad: true)
+    PlayerCore.newPlayerCore.openURL(firstEntry.url)
   }
 
   @IBAction func groupByChangedAction(_ sender: NSPopUpButton) {

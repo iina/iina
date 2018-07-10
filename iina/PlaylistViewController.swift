@@ -505,7 +505,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let files = selectedRows!.enumerated().map { (_, i) in
       URL(fileURLWithPath: player.info.playlist[i].filename)
     }
-    let _ = PlayerCore.newPlayerCore.openURLs(files, shouldAutoLoad: false)
+    PlayerCore.newPlayerCore.openURLs(files, shouldAutoLoad: false)
   }
 
   @IBAction func contextMenuRemove(_ sender: NSMenuItem) {

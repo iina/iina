@@ -29,10 +29,18 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
   @IBOutlet weak var setAsDefaultVideoCheckBox: NSButton!
   @IBOutlet weak var setAsDefaultAudioCheckBox: NSButton!
   @IBOutlet weak var setAsDefaultPlaylistCheckBox: NSButton!
+  @IBOutlet weak var thumbCacheSizeLabel: NSTextField!
 
   override func viewDidLoad() {
-      super.viewDidLoad()
-      // Do view setup here.
+    super.viewDidLoad()
+
+    DispatchQueue.main.async {
+      self.updateThumbnailCacheStat()
+    }
+  }
+
+  private func updateThumbnailCacheStat() {
+    thumbCacheSizeLabel.stringValue = FileSize.format(CacheManager.shared.getCacheSize(), unit: .b)
   }
 
   @IBAction func setIINAAsDefaultAction(_ sender: Any) {
@@ -89,6 +97,16 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
 
   @IBAction func setAsDefaultCancelBtnAction(_ sender: Any) {
     view.window!.endSheet(setAsDefaultSheet)
+  }
+
+  @IBAction func clearCacheBtnAction(_ sender: Any) {
+    _ = Utility.quickAskPanel("clear_cache", useSheet: true) { confirmed in
+      guard confirmed else { return }
+      try? FileManager.default.removeItem(atPath: Utility.thumbnailCacheURL.path)
+      Utility.createDirIfNotExist(url: Utility.thumbnailCacheURL)
+      self.updateThumbnailCacheStat()
+      Utility.showAlert("clear_cache.success", style: .informational)
+    }
   }
 
 }

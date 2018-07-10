@@ -61,8 +61,7 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   @IBOutlet weak var oscPreviewImageView: NSImageView!
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!
   @IBOutlet weak var oscToolbarStackView: NSStackView!
-  @IBOutlet weak var thumbCacheSizeLabel: NSTextField!
-  
+
   @IBOutlet weak var windowSizeCheckBox: NSButton!
   @IBOutlet weak var windowSizeTypePopUpButton: NSPopUpButton!
   @IBOutlet weak var windowSizeValueTextField: NSTextField!
@@ -108,15 +107,6 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     oscPreviewImageView.image = NSImage(named: NSImage.Name(rawValue: name))
   }
 
-  @IBAction func clearCacheBtnAction(_ sender: AnyObject) {
-    if Utility.quickAskPanel("clear_cache") {
-      try? FileManager.default.removeItem(atPath: Utility.thumbnailCacheURL.path)
-      Utility.createDirIfNotExist(url: Utility.thumbnailCacheURL)
-      updateThumbnailCacheStat()
-      Utility.showAlert("clear_cache.success", style: .informational)
-    }
-  }
-
   @IBAction func updateGeometryValue(_ sender: AnyObject) {
     var geometry = ""
     // size
@@ -159,12 +149,6 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     }
   }
 
-  override func viewDidAppear() {
-    DispatchQueue.main.async {
-      self.updateThumbnailCacheStat()
-    }
-  }
-
   private func updateOSCToolbarButtons() {
     oscToolbarStackView.views.forEach { oscToolbarStackView.removeView($0) }
     let buttons = PrefUIViewController.oscToolbarButtons
@@ -176,10 +160,6 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
       Utility.quickConstraints(["H:[btn(\(buttonWidth))]", "V:[btn(24)]"], ["btn": button])
       oscToolbarStackView.addView(button, in: .trailing)
     }
-  }
-
-  private func updateThumbnailCacheStat() {
-    thumbCacheSizeLabel.stringValue = FileSize.format(CacheManager.shared.getCacheSize(), unit: .b)
   }
 
   private func setupGeometryRelatedControls() {

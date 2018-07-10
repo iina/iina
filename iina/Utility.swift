@@ -86,7 +86,7 @@ class Utility {
      - messageComment: (Optional) Comment for message key.
    - Returns: Whether user dismissed the panel by clicking OK.
    */
-  static func quickAskPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil) -> Bool {
+  static func quickAskPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, useSheet: Bool = false, sheetCallback: ((Bool) -> Void)? = nil) -> Bool {
     let panel = NSAlert()
     let titleKey = "alert." + key + ".title"
     let messageKey = "alert." + key + ".message"
@@ -94,7 +94,16 @@ class Utility {
     panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
-    return panel.runModal() == .alertFirstButtonReturn
+    if useSheet {
+      panel.beginSheetModal(for: NSApp.keyWindow ?? NSApp.mainWindow ?? NSApp.windows[0]) { response in
+        if let sheetCallback = sheetCallback {
+          sheetCallback(response == .alertFirstButtonReturn)
+        }
+      }
+      return false
+    } else {
+      return panel.runModal() == .alertFirstButtonReturn
+    }
   }
 
   /**
@@ -293,35 +302,6 @@ class Utility {
     let version = infoDic["CFBundleShortVersionString"] as! String
     let build = infoDic["CFBundleVersion"] as! String
     return (version, build)
-  }
-
-  static func setSelfAsDefaultForAllFileTypes() {
-    guard
-    let docTypes = Bundle.main.infoDictionary?["CFBundleDocumentTypes"] as? [[String: Any]],
-    let cfBundleID = Bundle.main.bundleIdentifier as CFString?
-    else { return }
-
-    guard quickAskPanel("set_default") else { return }
-
-    var successCount = 0
-    var failedCount = 0
-    Logger.log("Set self as default")
-    for docType in docTypes {
-      if let exts = docType["CFBundleTypeExtensions"] as? [String] {
-        for ext in exts {
-          let utiString = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, ext as CFString, nil)!.takeUnretainedValue()
-          let status = LSSetDefaultRoleHandlerForContentType(utiString, .all, cfBundleID)
-          if status == kOSReturnSuccess {
-            successCount += 1
-          } else {
-            Logger.log("failed for \(ext): return value \(status)", level: .error)
-            failedCount += 1
-          }
-        }
-      }
-    }
-
-    showAlert("set_default.success", arguments: [successCount, failedCount], style: .informational)
   }
 
   static func createDirIfNotExist(url: URL) {

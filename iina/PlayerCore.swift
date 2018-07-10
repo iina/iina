@@ -132,6 +132,8 @@ class PlayerCore: NSObject {
   var useExactSeekForCurrentFile: Bool = true
 
   static var keyBindings: [String: KeyMapping] = [:]
+  
+  var title: String?
 
   override init() {
     super.init()

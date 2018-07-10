@@ -1670,7 +1670,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - UI: Title
 
   func updateTitle() {
-    if player.info.isNetworkResource {
+    if let title = player.title {
+      window?.title = title
+    } else if player.info.isNetworkResource {
       window?.title = player.getMediaTitle()
     } else {
       window?.representedURL = player.info.currentURL

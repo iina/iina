@@ -17,9 +17,6 @@ class OpenURLAccessoryViewController: NSViewController {
   @IBOutlet weak var usernameField: NSTextField!
   @IBOutlet weak var passwordField: NSSecureTextField!
 
-  private let safariExtensionLink = "https://github.com/lhc70000/iina/releases/download/v0.0.5/Open_In_IINA.safariextz"
-  private let chromeExtensionLink = "https://chrome.google.com/webstore/detail/open-in-iina/pdnojahnhpgmdhjdhgphgdcecehkbhfo"
-
   var url: URL? {
     get {
       guard !urlField.stringValue.isEmpty else { return nil }
@@ -49,14 +46,6 @@ class OpenURLAccessoryViewController: NSViewController {
     [safariLinkBtn, chromeLinkBtn].forEach {
       $0!.image = NSImage(named: .followLinkFreestandingTemplate)
     }
-  }
-    
-  @IBAction func safariLinkBtnAction(_ sender: AnyObject) {
-    NSWorkspace.shared.open(URL(string: safariExtensionLink)!)
-  }
-
-  @IBAction func chromeLinkBtnAction(_ sender: AnyObject) {
-    NSWorkspace.shared.open(URL(string: chromeExtensionLink)!)
   }
 
 }

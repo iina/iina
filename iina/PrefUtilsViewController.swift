@@ -127,4 +127,14 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
     }
   }
 
+  @IBAction func extSafariBtnAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: AppData.safariExtensionLink)!)
+  }
+
+  @IBAction func extChromeBtnAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: AppData.chromeExtensionLink)!)
+  }
+
+  @IBAction func extFirefoxBtnAction(_ sender: Any) {
+  }
 }

@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="OpenURLAccessoryViewController" customModule="IINA" customModuleProvider="target">
             <connections>
-                <outlet property="chromeLinkBtn" destination="ZrL-Dr-kW0" id="zlH-mZ-CDy"/>
                 <outlet property="passwordField" destination="iws-4E-RLR" id="TQQ-iH-Uy8"/>
-                <outlet property="safariLinkBtn" destination="jg3-Bk-btZ" id="HE2-Vt-q68"/>
                 <outlet property="urlField" destination="Xut-NB-Mqu" id="xHQ-O3-Fy7"/>
                 <outlet property="usernameField" destination="KvW-Xu-QXt" id="qdF-AV-3Vw"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
@@ -20,11 +18,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="463" height="170"/>
+            <rect key="frame" x="0.0" y="0.0" width="463" height="104"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xut-NB-Mqu" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="148" width="463" height="22"/>
+                    <rect key="frame" x="0.0" y="82" width="463" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="QYP-Aq-eWm"/>
                     </constraints>
@@ -34,58 +32,8 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <box title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="xCY-2N-ARN">
-                    <rect key="frame" x="-3" y="-4" width="469" height="60"/>
-                    <view key="contentView" id="QQu-Z6-AXt">
-                        <rect key="frame" x="2" y="2" width="465" height="56"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="evw-fV-m2R">
-                                <rect key="frame" x="10" y="32" width="445" height="16"/>
-                                <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Use our browser extension to open video right from webpages." id="sTz-HN-gNY">
-                                    <font key="font" metaFont="cellTitle"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZrL-Dr-kW0">
-                                <rect key="frame" x="401" y="7" width="56" height="17"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="eBr-Q7-j1n"/>
-                                </constraints>
-                                <buttonCell key="cell" type="inline" title="Chrome" bezelStyle="inline" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="0IK-4h-w0l">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="smallSystemBold"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="chromeLinkBtnAction:" target="-2" id="ZsX-Ht-wc9"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jg3-Bk-btZ">
-                                <rect key="frame" x="347" y="7" width="46" height="17"/>
-                                <buttonCell key="cell" type="inline" title="Safari" bezelStyle="inline" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="rXA-dB-SEo">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="smallSystemBold"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="safariLinkBtnAction:" target="-2" id="JzX-kB-UCG"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="evw-fV-m2R" firstAttribute="leading" secondItem="QQu-Z6-AXt" secondAttribute="leading" constant="12" id="BHl-lK-BK2"/>
-                            <constraint firstAttribute="bottom" secondItem="ZrL-Dr-kW0" secondAttribute="bottom" constant="8" id="Diw-en-1j5"/>
-                            <constraint firstItem="ZrL-Dr-kW0" firstAttribute="leading" secondItem="jg3-Bk-btZ" secondAttribute="trailing" constant="8" id="KZC-wc-dgq"/>
-                            <constraint firstItem="jg3-Bk-btZ" firstAttribute="centerY" secondItem="ZrL-Dr-kW0" secondAttribute="centerY" id="d2a-tf-br3"/>
-                            <constraint firstItem="evw-fV-m2R" firstAttribute="top" secondItem="QQu-Z6-AXt" secondAttribute="top" constant="8" id="mVW-6u-1Ml"/>
-                            <constraint firstItem="ZrL-Dr-kW0" firstAttribute="top" secondItem="evw-fV-m2R" secondAttribute="bottom" constant="8" id="qXh-IV-pEG"/>
-                            <constraint firstAttribute="trailing" secondItem="evw-fV-m2R" secondAttribute="trailing" constant="12" id="reb-jF-ezg"/>
-                            <constraint firstAttribute="trailing" secondItem="ZrL-Dr-kW0" secondAttribute="trailing" constant="8" id="xfa-xl-0Sh"/>
-                        </constraints>
-                    </view>
-                </box>
                 <box title="HTTP Authentication" translatesAutoresizingMaskIntoConstraints="NO" id="bwd-Ku-zin">
-                    <rect key="frame" x="-3" y="62" width="469" height="74"/>
+                    <rect key="frame" x="-3" y="-4" width="469" height="74"/>
                     <view key="contentView" id="hci-tg-nLK">
                         <rect key="frame" x="2" y="2" width="465" height="57"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -155,16 +103,13 @@
                 </box>
             </subviews>
             <constraints>
-                <constraint firstItem="xCY-2N-ARN" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="2cd-PL-LPG"/>
+                <constraint firstAttribute="bottom" secondItem="bwd-Ku-zin" secondAttribute="bottom" id="0Fc-qU-OvF"/>
                 <constraint firstAttribute="trailing" secondItem="bwd-Ku-zin" secondAttribute="trailing" id="2m4-vs-8Wo"/>
-                <constraint firstItem="xCY-2N-ARN" firstAttribute="top" secondItem="bwd-Ku-zin" secondAttribute="bottom" constant="12" id="9bx-RX-0PL"/>
                 <constraint firstItem="bwd-Ku-zin" firstAttribute="top" secondItem="Xut-NB-Mqu" secondAttribute="bottom" constant="12" id="KgE-5S-2k3"/>
                 <constraint firstAttribute="trailing" secondItem="Xut-NB-Mqu" secondAttribute="trailing" id="Rk4-Sz-4we"/>
                 <constraint firstItem="Xut-NB-Mqu" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="n7r-aK-dPW"/>
-                <constraint firstAttribute="trailing" secondItem="xCY-2N-ARN" secondAttribute="trailing" id="nGW-Vz-F0V"/>
                 <constraint firstItem="Xut-NB-Mqu" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="sBD-FV-QbQ"/>
                 <constraint firstItem="bwd-Ku-zin" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="vQl-aQ-gX2"/>
-                <constraint firstAttribute="bottom" secondItem="xCY-2N-ARN" secondAttribute="bottom" id="x1S-7f-v7b"/>
             </constraints>
             <point key="canvasLocation" x="131.5" y="157"/>
         </customView>

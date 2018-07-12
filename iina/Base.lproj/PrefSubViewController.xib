@@ -35,7 +35,7 @@
             <rect key="frame" x="0.0" y="0.0" width="666" height="180"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tej-f2-5d5">
+                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tej-f2-5d5">
                     <rect key="frame" x="-2" y="155" width="70" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Auto load:" id="raf-Yu-ck0">
                         <font key="font" metaFont="systemBold"/>
@@ -211,7 +211,7 @@
             <rect key="frame" x="0.0" y="0.0" width="546" height="92"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MEh-II-li7">
+                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MEh-II-li7">
                     <rect key="frame" x="-2" y="67" width="46" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Other:" id="LiG-iV-AQK">
                         <font key="font" metaFont="systemBold"/>
@@ -298,7 +298,7 @@
             <rect key="frame" x="0.0" y="0.0" width="546" height="97"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NlE-eQ-ofV">
+                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NlE-eQ-ofV">
                     <rect key="frame" x="-2" y="8" width="112" height="81"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Online Subtitles:" id="0fB-es-DmV">
                         <font key="font" metaFont="systemBold"/>
@@ -509,7 +509,7 @@
             <rect key="frame" x="0.0" y="0.0" width="546" height="289"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yw3-tf-Rka">
+                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yw3-tf-Rka">
                     <rect key="frame" x="-2" y="272" width="97" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Text subtitles:" id="Qda-dp-nhg">
                         <font key="font" metaFont="systemBold"/>
@@ -580,8 +580,8 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="LnO-CD-ImJ">
-                                <rect key="frame" x="141" y="33" width="29" height="18"/>
-                                <buttonCell key="cell" type="check" title="𝐼" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pNF-Fw-QtY">
+                                <rect key="frame" x="160" y="33" width="51" height="18"/>
+                                <buttonCell key="cell" type="check" title="Italic" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pNF-Fw-QtW">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -613,8 +613,8 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="EV7-O7-x1O">
-                                <rect key="frame" x="102" y="33" width="31" height="18"/>
-                                <buttonCell key="cell" type="check" title="𝐁" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="hEk-7E-10q">
+                                <rect key="frame" x="102" y="33" width="50" height="18"/>
+                                <buttonCell key="cell" type="check" title="Bold" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="hEk-7E-10r">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -965,7 +965,7 @@
             <rect key="frame" x="0.0" y="0.0" width="546" height="195"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WeJ-3X-tJy">
+                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WeJ-3X-tJy">
                     <rect key="frame" x="-2" y="170" width="61" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Position:" id="4Tb-Yh-PdP">
                         <font key="font" metaFont="systemBold"/>
@@ -1076,7 +1076,7 @@
                         <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subPos" id="khT-zn-XWA"/>
                     </connections>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9sd-YV-QMQ">
+                <textField identifier="AccessoryLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9sd-YV-QMQ">
                     <rect key="frame" x="316" y="60" width="15" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="%" id="JZo-4H-owW">
                         <font key="font" metaFont="system"/>
@@ -1202,7 +1202,7 @@
             <rect key="frame" x="0.0" y="0.0" width="546" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utN-qX-5BH">
+                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utN-qX-5BH">
                     <rect key="frame" x="-2" y="45" width="96" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="ASS subtitles:" id="mFm-Q6-aja">
                         <font key="font" metaFont="systemBold"/>

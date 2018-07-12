@@ -335,6 +335,14 @@
                     <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                     <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
+                <textField identifier="SectionTitle" hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OY4-8W-63j">
+                    <rect key="frame" x="642" y="480" width="55" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Settings" id="veZ-Si-Hv5">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="KZA-hu-vhZ" firstAttribute="top" secondItem="0le-1T-r5f" secondAttribute="bottom" constant="14" id="2Pk-ll-iUo"/>
@@ -357,7 +365,9 @@
                 <constraint firstItem="Le4-ai-PiB" firstAttribute="leading" secondItem="Mhk-DT-3CM" secondAttribute="leading" id="bgz-zS-geZ"/>
                 <constraint firstItem="bm5-rb-Qjb" firstAttribute="centerY" secondItem="LU9-QU-BFL" secondAttribute="centerY" id="dVn-Pj-vDl"/>
                 <constraint firstItem="LU9-QU-BFL" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="8" id="eIu-AE-LI1"/>
+                <constraint firstItem="OY4-8W-63j" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="eh7-Md-lD0"/>
                 <constraint firstItem="ZWR-gT-S2p" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="eyA-gW-IBL"/>
+                <constraint firstAttribute="trailing" secondItem="OY4-8W-63j" secondAttribute="trailing" id="fZe-ej-w66"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LAx-AE-9wU" secondAttribute="trailing" constant="20" symbolic="YES" id="jNW-B9-uvv"/>
                 <constraint firstItem="Mhk-DT-3CM" firstAttribute="top" secondItem="ZWR-gT-S2p" secondAttribute="bottom" constant="8" id="mYB-35-8YR"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KZA-hu-vhZ" secondAttribute="trailing" constant="8" id="ox7-Nd-BkO"/>

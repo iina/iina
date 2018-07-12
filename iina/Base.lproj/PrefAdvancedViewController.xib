@@ -196,6 +196,14 @@
                         <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="tsm-NE-EV2"/>
                     </connections>
                 </textField>
+                <textField identifier="SectionTitle" hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HmN-IK-rGn">
+                    <rect key="frame" x="-2" y="0.0" width="55" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Settings" id="Qmc-Tb-d7d">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="1NU-Lr-cuR" firstAttribute="leading" secondItem="bA7-7o-Vd0" secondAttribute="leading" id="3Zo-e3-ao5"/>
@@ -209,9 +217,11 @@
                 <constraint firstAttribute="trailing" secondItem="hbF-n4-jl3" secondAttribute="trailing" constant="8" id="FDJ-Cp-psA"/>
                 <constraint firstItem="zKI-kU-PWr" firstAttribute="leading" secondItem="SHQ-mh-jeX" secondAttribute="leading" id="Fvw-CC-nKH"/>
                 <constraint firstItem="1NU-Lr-cuR" firstAttribute="trailing" secondItem="bA7-7o-Vd0" secondAttribute="trailing" id="HTl-7I-Zcu"/>
+                <constraint firstAttribute="bottom" secondItem="HmN-IK-rGn" secondAttribute="bottom" id="Ivk-KG-oyA"/>
                 <constraint firstItem="1NU-Lr-cuR" firstAttribute="top" secondItem="bA7-7o-Vd0" secondAttribute="bottom" constant="-1" id="KSl-QB-xiy"/>
                 <constraint firstAttribute="bottom" secondItem="jsf-pn-h6s" secondAttribute="bottom" constant="18" id="P70-PP-vNV"/>
                 <constraint firstItem="bA7-7o-Vd0" firstAttribute="top" secondItem="wWR-n2-u2E" secondAttribute="bottom" constant="8" id="ZB8-eK-Abf"/>
+                <constraint firstItem="HmN-IK-rGn" firstAttribute="leading" secondItem="vY6-lX-1l5" secondAttribute="leading" id="aAj-ev-1k6"/>
                 <constraint firstItem="wWR-n2-u2E" firstAttribute="leading" secondItem="vY6-lX-1l5" secondAttribute="leading" constant="8" id="bQ8-hg-8SK"/>
                 <constraint firstItem="shz-CZ-kqM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SHQ-mh-jeX" secondAttribute="trailing" constant="8" id="bZ0-vF-cve"/>
                 <constraint firstItem="zKI-kU-PWr" firstAttribute="top" secondItem="SHQ-mh-jeX" secondAttribute="bottom" constant="8" id="bmT-aS-rnS"/>

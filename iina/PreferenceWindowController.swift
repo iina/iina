@@ -22,9 +22,93 @@ extension PreferenceWindowEmbeddable {
 
 class PreferenceWindowController: NSWindowController {
 
+  class Trie {
+    var s: String
+    let returnValue: (String, String?, String?)
+
+    class Node {
+
+      var children: [Node] = []
+      let char: Character
+
+      init(c: Character) {
+        char = c
+      }
+    }
+
+    let root: Node
+    var lastPosition: Node
+
+    var active: Bool
+
+    init(tab: String, section: String?, label: String?) {
+      s = tab
+      s += (section != nil) ? " " + section! : ""
+      s += (label != nil) ? " " + label! : ""
+      s = s.lowercased()
+      returnValue = (tab, section, label)
+
+      root = Node(c: " ")
+      lastPosition = root
+      active = true
+
+      let strings = s.components(separatedBy: " ")
+      for string in strings {
+        var t = string
+        while t.count != 0 {
+          addString(t)
+          t.removeFirst()
+        }
+      }
+    }
+
+    func reset() {
+      lastPosition = root
+      active = true
+    }
+
+    func addString(_ str: String) {
+      var current = root
+      for c in Array(str) {
+        var found = false
+        for child in current.children {
+          if child.char == c {
+            found = true
+            current = child
+            break
+          }
+        }
+        if !found {
+          let newNode = Node(c: c)
+          current.children.append(newNode)
+          current = newNode
+        }
+      }
+    }
+
+    func search(_ str: String) {
+      for c in Array(str) {
+        if c == " " {
+          lastPosition = root
+          continue
+        }
+        if let next = lastPosition.children.first(where: { $0.char == c }) {
+          lastPosition = next
+        } else {
+          active = false
+          return
+        }
+      }
+    }
+
+  }
+
   override var windowNibName: NSNib.Name {
     return NSNib.Name("PreferenceWindowController")
   }
+
+  private var tries: [Trie] = []
+  private var lastString: String = ""
 
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var scrollView: NSScrollView!
@@ -70,7 +154,34 @@ class PreferenceWindowController: NSWindowController {
 
     print(labelDict)
 
+    makeTries(labelDict)
+
     loadTab(at: 0)
+  }
+
+  @IBAction func searchFieldAction(_ sender: NSSearchField) {
+    let searchString = sender.stringValue.lowercased()
+    print("Searching: \(searchString)")
+    if searchString.hasPrefix(lastString) {
+      tries.filter { $0.active }.forEach { $0.search(String(searchString.dropFirst(lastString.count))) }
+    } else {
+      tries.forEach { $0.reset(); $0.search(searchString) }
+    }
+    lastString = searchString
+    print("\(tries.filter { $0.active }.map { $0.returnValue })")
+    print("\(tries.filter { $0.active }.map { $0.s })")
+  }
+
+  private func makeTries(_ labelDict: [String: [String: [String]]]) {
+    for (k1, v1) in labelDict {
+      tries.append(Trie(tab: k1, section: nil, label: nil))
+      for (k2, v2) in v1 {
+        tries.append(Trie(tab: k1, section: k2, label: nil))
+        for k3 in v2 {
+          tries.append(Trie(tab: k1, section: k2, label: k3))
+        }
+      }
+    }
   }
 
   private func loadTab(at index: Int) {

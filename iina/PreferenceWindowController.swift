@@ -31,7 +31,7 @@ class PreferenceWindowController: NSWindowController {
       var children: [Node] = []
       let char: Character
 
-      init(c: Character) {
+      init(_ c: Character) {
         char = c
       }
     }
@@ -42,13 +42,10 @@ class PreferenceWindowController: NSWindowController {
     var active: Bool
 
     init(tab: String, section: String?, label: String?) {
-      s = tab
-      s += (section != nil) ? " " + section! : ""
-      s += (label != nil) ? " " + label! : ""
-      s = s.lowercased()
+      s = "\(tab) \(section ?? "") \(label ?? "")".lowercased().trimmingCharacters(in: .whitespaces)
       returnValue = (tab, section, label)
 
-      root = Node(c: " ")
+      root = Node(" ")
       lastPosition = root
       active = true
 
@@ -70,16 +67,10 @@ class PreferenceWindowController: NSWindowController {
     func addString(_ str: String) {
       var current = root
       for c in Array(str) {
-        var found = false
-        for child in current.children {
-          if child.char == c {
-            found = true
-            current = child
-            break
-          }
-        }
-        if !found {
-          let newNode = Node(c: c)
+        if let next = current.children.first(where: { $0.char == c }) {
+          current = next
+        } else {
+          let newNode = Node(c)
           current.children.append(newNode)
           current = newNode
         }
@@ -87,7 +78,7 @@ class PreferenceWindowController: NSWindowController {
     }
 
     func search(_ str: String) {
-      for c in Array(str) {
+      for c in str {
         if c == " " {
           lastPosition = root
           continue
@@ -140,7 +131,7 @@ class PreferenceWindowController: NSWindowController {
       contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: contentView.superview!.bottomAnchor)
     }
 
-    let labelDict = Dictionary<String, [String: [String]]>(uniqueKeysWithValues:  [
+    let labelDict = [String: [String: [String]]](uniqueKeysWithValues:  [
       ["general", "PrefGeneralViewController"],
       ["ui", "PrefUIViewController"],
       ["sub", "PrefSubViewController"],
@@ -151,8 +142,6 @@ class PreferenceWindowController: NSWindowController {
       ["advanced", "PrefAdvancedViewController"],
       ["utilities", "PrefUtilsViewController"],
     ].map { (NSLocalizedString("preference.\($0[0])", comment: ""), self.getLabelDict(inNibNamed: $0[1])) })
-
-    print(labelDict)
 
     makeTries(labelDict)
 
@@ -200,7 +189,7 @@ class PreferenceWindowController: NSWindowController {
     Bundle.main.loadNibNamed(NSNib.Name(name), owner: nil, topLevelObjects: &objects)
     if let topObjects = objects as? [Any] {
       // we assume this nib is a preference view controller, so each section must be a top-level `NSView`.
-      return Dictionary<String, [String]>(uniqueKeysWithValues: topObjects.compactMap { view -> (title: String, labels: [String])? in
+      return [String: [String]](uniqueKeysWithValues: topObjects.compactMap { view -> (title: String, labels: [String])? in
         if let section = view as? NSView {
           return findLabels(inSection: section)
         } else {

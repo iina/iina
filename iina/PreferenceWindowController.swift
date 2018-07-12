@@ -56,6 +56,20 @@ class PreferenceWindowController: NSWindowController {
       contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: contentView.superview!.bottomAnchor)
     }
 
+    let labelDict = Dictionary<String, [String: [String]]>(uniqueKeysWithValues:  [
+      ["general", "PrefGeneralViewController"],
+      ["ui", "PrefUIViewController"],
+      ["sub", "PrefSubViewController"],
+      ["network", "PrefNetworkViewController"],
+      ["control", "PrefControlViewController"],
+      ["key_bindings", "PrefKeyBindingViewController"],
+      ["video_audio", "PrefCodecViewController"],
+      ["advanced", "PrefAdvancedViewController"],
+      ["utilities", "PrefUtilsViewController"],
+    ].map { ($0[0], self.getLabelDict(inNibNamed: $0[1])) })
+
+    print(labelDict)
+
     loadTab(at: 0)
   }
 
@@ -68,6 +82,49 @@ class PreferenceWindowController: NSWindowController {
     let isScrollable = vc.preferenceContentIsScrollable
     contentViewBottomConstraint?.isActive = !isScrollable
     scrollView.verticalScrollElasticity = isScrollable ? .allowed : .none
+  }
+
+  private func getLabelDict(inNibNamed name: String) -> [String: [String]] {
+    var objects: NSArray? = NSArray()
+    Bundle.main.loadNibNamed(NSNib.Name(name), owner: nil, topLevelObjects: &objects)
+    if let topObjects = objects as? [Any] {
+      // we assume this nib is a preference view controller, so each section must be a top-level `NSView`.
+      return Dictionary<String, [String]>(uniqueKeysWithValues: topObjects.compactMap { view -> (title: String, labels: [String])? in
+        if let section = view as? NSView {
+          return findLabels(inSection: section)
+        } else {
+          return nil
+        }
+      })
+    }
+    return [:]
+  }
+
+  private func findLabels(inSection section: NSView) -> (title: String, labels: [String])? {
+    guard let sectionTitleLabel = section.subviews.first(where: {
+        ($0 as? NSTextField)?.identifier?.rawValue == "SectionTitle"
+      }) else {
+        return nil
+    }
+    let title = (sectionTitleLabel as! NSTextField).stringValue
+    var labels = findLabels(in: section)
+    labels.remove(at: labels.index(of: title)!)
+    return (title, labels)
+  }
+
+  private func findLabels(in view: NSView) -> [String] {
+    var labels: [String] = []
+    for subView in view.subviews {
+      if let label = subView as? NSTextField,
+        !label.isEditable, label.textColor == .labelColor,
+        label.identifier?.rawValue != "AccessoryLabel", label.identifier?.rawValue != "Trigger" {
+        labels.append(label.stringValue)
+      } else if let button = subView as? NSButton, button.bezelStyle == .regularSquare {
+        labels.append(button.title)
+      }
+      labels.append(contentsOf: findLabels(in: subView))
+    }
+    return labels
   }
 
 }

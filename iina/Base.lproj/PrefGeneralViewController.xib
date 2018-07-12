@@ -27,7 +27,7 @@
             <rect key="frame" x="0.0" y="0.0" width="580" height="460"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38y-2I-MGs">
+                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38y-2I-MGs">
                     <rect key="frame" x="-2" y="435" width="66" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Behavior:" id="uQR-Fx-oEm">
                         <font key="font" metaFont="systemBold"/>
@@ -163,7 +163,7 @@
                     </connections>
                 </popUpButton>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="b7I-2V-MYa">
-                    <rect key="frame" x="118" y="61" width="412" height="18"/>
+                    <rect key="frame" x="118" y="61" width="411" height="18"/>
                     <buttonCell key="cell" type="check" title="Switch to &quot;music mode&quot; automatically when playing an audio file" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="KfL-r7-Uav">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -436,7 +436,7 @@
             <rect key="frame" x="0.0" y="0.0" width="580" height="72"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gO-wx-MWj">
+                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gO-wx-MWj">
                     <rect key="frame" x="-2" y="47" width="56" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Playlist:" id="6TV-DG-503">
                         <font key="font" metaFont="systemBold"/>
@@ -490,7 +490,7 @@
             </constraints>
             <point key="canvasLocation" x="-2190" y="598"/>
         </customView>
-        <customView id="ym1-pZ-4SZ">
+        <customView identifier="SectionTitle" id="ym1-pZ-4SZ">
             <rect key="frame" x="0.0" y="0.0" width="580" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
@@ -597,7 +597,7 @@
             </constraints>
             <point key="canvasLocation" x="-2190" y="726"/>
         </customView>
-        <customView id="Kmu-J1-cbE">
+        <customView identifier="SectionTitle" id="Kmu-J1-cbE">
             <rect key="frame" x="0.0" y="0.0" width="580" height="94"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>

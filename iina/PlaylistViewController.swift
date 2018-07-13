@@ -75,7 +75,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
     playlistTableView.menu?.delegate = self
 
-    [deleteBtn, loopBtn, shuffleBtn].forEach {
+    [deleteBtn, loopBtn, shuffleBtn, floatBtn].forEach {
       $0?.image?.isTemplate = true
       $0?.alternateImage?.isTemplate = true
     }

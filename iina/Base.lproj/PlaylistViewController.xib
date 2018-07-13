@@ -239,7 +239,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="5cn-Ug-qgv"/>
                                                 </constraints>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSFollowLinkFreestandingTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="i3j-at-e0Z">
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="float" imagePosition="overlaps" alignment="center" alternateImage="float-dark" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="i3j-at-e0Z">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -586,7 +586,8 @@
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
+        <image name="float" width="15" height="15"/>
+        <image name="float-dark" width="15" height="15"/>
         <image name="loop" width="16" height="15"/>
         <image name="loop-dark" width="16" height="15"/>
         <image name="shuffle" width="15" height="15"/>

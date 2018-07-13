@@ -31,17 +31,16 @@ extension PreferenceWindowEmbeddable {
 class PreferenceWindowController: NSWindowController {
 
   class Trie {
-    class Node {
 
+    class Node {
       var children: [Node] = []
       let char: Character
-
       init(_ c: Character) {
         char = c
       }
     }
 
-    typealias ReturnValue = (tab: String, section: String, label: String?)
+    typealias ReturnValue = (tab: String, strippedSection: String, strippedLabel: String?, section: String, label: String?)
 
     var s: String
     let returnValue: ReturnValue
@@ -53,7 +52,7 @@ class PreferenceWindowController: NSWindowController {
 
     init(tab: String, section: String, label: String?) {
       s = [tab, section, label].compactMap { $0 }.joined(separator: " ").lowercased()
-      returnValue = (tab, section.removedLastSemicolon(), label?.removedLastSemicolon())
+      returnValue = (tab, section.removedLastSemicolon(), label?.removedLastSemicolon(), section, label)
 
       root = Node(" ")
       lastPosition = root
@@ -119,6 +118,7 @@ class PreferenceWindowController: NSWindowController {
   @IBOutlet weak var contentView: NSView!
   @IBOutlet var completionPopover: NSPopover!
   @IBOutlet weak var completionTableView: NSTableView!
+  @IBOutlet weak var noResultLabel: NSTextField!
 
   private var contentViewBottomConstraint: NSLayoutConstraint?
 
@@ -200,6 +200,7 @@ class PreferenceWindowController: NSWindowController {
   }
 
   private func completeSearchField() {
+    noResultLabel.isHidden = currentCompletionResults.count != 0
     if !completionPopover.isShown {
       let range = searchField.currentEditor()?.selectedRange
       completionPopover.show(relativeTo: searchField.bounds, of: searchField, preferredEdge: .maxY)
@@ -217,7 +218,11 @@ class PreferenceWindowController: NSWindowController {
 
   // MARK: Tabs
 
-  private func loadTab(at index: Int) {
+  private func loadTab(at index: Int, thenFindLabelTitled title: String? = nil) {
+    // load view
+    if index != tableView.selectedRow {
+      tableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
+    }
     contentView.subviews.forEach { $0.removeFromSuperview() }
     guard let vc = viewControllers[at: index] else { return }
     contentView.addSubview(vc.view)
@@ -226,6 +231,11 @@ class PreferenceWindowController: NSWindowController {
     let isScrollable = vc.preferenceContentIsScrollable
     contentViewBottomConstraint?.isActive = !isScrollable
     scrollView.verticalScrollElasticity = isScrollable ? .allowed : .none
+
+    // find label
+    if let title = title, let label = findLabel(titled: title, in: vc.view) {
+      label.scrollToVisible(label.bounds.insetBy(dx: 0, dy: -20))
+    }
   }
 
   private func getLabelDict(inNibNamed name: String) -> [String: [String]] {
@@ -259,16 +269,35 @@ class PreferenceWindowController: NSWindowController {
   private func findLabels(in view: NSView) -> [String] {
     var labels: [String] = []
     for subView in view.subviews {
-      if let label = subView as? NSTextField,
-        !label.isEditable, label.textColor == .labelColor,
-        label.identifier?.rawValue != "AccessoryLabel", label.identifier?.rawValue != "Trigger" {
-        labels.append(label.stringValue)
-      } else if let button = subView as? NSButton, button.bezelStyle == .regularSquare {
-        labels.append(button.title)
+      if let title = getTitle(from: subView) {
+        labels.append(title)
       }
       labels.append(contentsOf: findLabels(in: subView))
     }
     return labels
+  }
+
+  private func findLabel(titled title: String, in view: NSView) -> NSView? {
+    for subView in view.subviews {
+      if getTitle(from: subView) == title {
+        return subView
+      }
+      if let r = findLabel(titled: title, in: subView) {
+        return r
+      }
+    }
+    return nil
+  }
+
+  private func getTitle(from view: NSView) -> String? {
+    if let label = view as? NSTextField,
+      !label.isEditable, label.textColor == .labelColor,
+      label.identifier?.rawValue != "AccessoryLabel", label.identifier?.rawValue != "Trigger" {
+      return label.stringValue
+    } else if let button = view as? NSButton, button.bezelStyle == .regularSquare {
+      return button.title
+    }
+    return nil
   }
 
 }
@@ -288,21 +317,28 @@ extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource
       return viewControllers[at: row]?.preferenceTabTitle
     } else {
       guard let result = currentCompletionResults[at: row] else { return nil }
-      let noLabel = result.label == nil
+      let noLabel = result.strippedLabel == nil
       return [
         "tab": result.tab,
         "noSection": noLabel,
-        "section": result.section,
-        "label": result.label ?? result.section,
+        "section": result.strippedSection,
+        "label": result.strippedLabel ?? result.strippedSection,
       ]
     }
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    if tableView == self.tableView {
+    if (notification.object as! NSTableView) == self.tableView {
       loadTab(at: tableView.selectedRow)
     } else {
-
+      dismissCompletionList()
+      guard
+        let result = currentCompletionResults[at: tableView.selectedRow],
+        let index = viewControllers.enumerated().first(where: { (_, vc) in vc.preferenceTabTitle == result.tab })?.offset
+        else {
+          return
+      }
+      loadTab(at: index, thenFindLabelTitled: result.label ?? result.section)
     }
   }
 

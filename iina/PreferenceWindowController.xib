@@ -12,6 +12,7 @@
                 <outlet property="completionPopover" destination="p0p-bU-ap2" id="CDT-9L-7cL"/>
                 <outlet property="completionTableView" destination="MUI-pR-u00" id="0hW-JH-Bsp"/>
                 <outlet property="contentView" destination="5R5-77-bmq" id="hTm-zX-BBk"/>
+                <outlet property="noResultLabel" destination="0yO-bT-GQW" id="9Yr-Yb-yWw"/>
                 <outlet property="scrollView" destination="VYU-tb-v3l" id="n0b-YV-otV"/>
                 <outlet property="searchField" destination="rKj-eM-MTH" id="h5z-XD-hFu"/>
                 <outlet property="tableView" destination="vde-uJ-0ge" id="ezK-1d-1Px"/>
@@ -185,6 +186,14 @@
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="XXu-SH-FYF">
             <rect key="frame" x="0.0" y="0.0" width="340" height="200"/>
             <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0yO-bT-GQW">
+                    <rect key="frame" x="137" y="92" width="67" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="No Result" id="jUU-3A-jLW">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxH-E2-abg">
                     <rect key="frame" x="0.0" y="0.0" width="340" height="200"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oMs-Q9-XbP">
@@ -360,7 +369,7 @@
                         </subviews>
                     </clipView>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="YUV-rX-dYH">
-                        <rect key="frame" x="1" y="79" width="161" height="16"/>
+                        <rect key="frame" x="0.0" y="184" width="340" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Z7a-JH-lv5">
@@ -370,10 +379,12 @@
                 </scrollView>
             </subviews>
             <constraints>
+                <constraint firstItem="0yO-bT-GQW" firstAttribute="centerY" secondItem="XXu-SH-FYF" secondAttribute="centerY" id="7XR-uJ-FPQ"/>
                 <constraint firstAttribute="bottom" secondItem="hxH-E2-abg" secondAttribute="bottom" id="C82-Xa-cOv"/>
                 <constraint firstItem="hxH-E2-abg" firstAttribute="top" secondItem="XXu-SH-FYF" secondAttribute="top" id="FWN-hs-t4q"/>
                 <constraint firstItem="hxH-E2-abg" firstAttribute="leading" secondItem="XXu-SH-FYF" secondAttribute="leading" id="UWc-B3-ZRl"/>
                 <constraint firstAttribute="trailing" secondItem="hxH-E2-abg" secondAttribute="trailing" id="msI-3J-8C7"/>
+                <constraint firstItem="0yO-bT-GQW" firstAttribute="centerX" secondItem="XXu-SH-FYF" secondAttribute="centerX" id="osT-cb-0bd"/>
             </constraints>
             <point key="canvasLocation" x="-307" y="307"/>
         </customView>

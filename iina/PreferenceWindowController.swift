@@ -8,6 +8,13 @@
 
 import Cocoa
 
+fileprivate func removeLastSemicolon(in string: String) -> String {
+  if string.hasSuffix(":") || string.hasSuffix("：") {
+    return String(string.dropLast())
+  }
+  return string
+}
+
 protocol PreferenceWindowEmbeddable where Self: NSViewController {
   var preferenceTabTitle: String { get }
   var preferenceContentIsScrollable: Bool { get }
@@ -19,13 +26,9 @@ extension PreferenceWindowEmbeddable {
   }
 }
 
-
-class PreferenceWindowController: NSWindowController {
+class PreferenceWindowController: NSWindowController, NSSearchFieldDelegate {
 
   class Trie {
-    var s: String
-    let returnValue: (String, String?, String?)
-
     class Node {
 
       var children: [Node] = []
@@ -36,13 +39,18 @@ class PreferenceWindowController: NSWindowController {
       }
     }
 
+    typealias ReturnValue = (tab: String, section: String, label: String?)
+
+    var s: String
+    let returnValue: ReturnValue
+
     let root: Node
     var lastPosition: Node
 
     var active: Bool
 
-    init(tab: String, section: String?, label: String?) {
-      s = "\(tab) \(section ?? "") \(label ?? "")".lowercased().trimmingCharacters(in: .whitespaces)
+    init(tab: String, section: String, label: String?) {
+      s = [tab, section, label].compactMap { $0 }.joined(separator: " ").lowercased()
       returnValue = (tab, section, label)
 
       root = Node(" ")
@@ -79,7 +87,8 @@ class PreferenceWindowController: NSWindowController {
 
     func search(_ str: String) {
       for c in str {
-        if c == " " {
+        // half-width and full-width spaces
+        if c == " " || c == "　" {
           lastPosition = root
           continue
         }
@@ -100,10 +109,14 @@ class PreferenceWindowController: NSWindowController {
 
   private var tries: [Trie] = []
   private var lastString: String = ""
+  private var currentCompletionResults: [Trie.ReturnValue] = []
 
+  @IBOutlet weak var searchField: NSSearchField!
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var scrollView: NSScrollView!
   @IBOutlet weak var contentView: NSView!
+  @IBOutlet var completionPopover: NSPopover!
+  @IBOutlet weak var completionTableView: NSTableView!
 
   private var contentViewBottomConstraint: NSLayoutConstraint?
 
@@ -124,8 +137,14 @@ class PreferenceWindowController: NSWindowController {
     window?.titlebarAppearsTransparent = true
     window?.isMovableByWindowBackground = true
 
+    if #available(OSX 10.11, *) {
+      searchField.delegate = self
+    }
+
     tableView.delegate = self
     tableView.dataSource = self
+    completionTableView.delegate = self
+    completionTableView.dataSource = self
 
     if #available(OSX 10.11, *) {
       contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: contentView.superview!.bottomAnchor)
@@ -134,10 +153,10 @@ class PreferenceWindowController: NSWindowController {
     let labelDict = [String: [String: [String]]](uniqueKeysWithValues:  [
       ["general", "PrefGeneralViewController"],
       ["ui", "PrefUIViewController"],
-      ["sub", "PrefSubViewController"],
+      ["subtitle", "PrefSubViewController"],
       ["network", "PrefNetworkViewController"],
       ["control", "PrefControlViewController"],
-      ["key_bindings", "PrefKeyBindingViewController"],
+      ["keybindings", "PrefKeyBindingViewController"],
       ["video_audio", "PrefCodecViewController"],
       ["advanced", "PrefAdvancedViewController"],
       ["utilities", "PrefUtilsViewController"],
@@ -148,22 +167,11 @@ class PreferenceWindowController: NSWindowController {
     loadTab(at: 0)
   }
 
-  @IBAction func searchFieldAction(_ sender: NSSearchField) {
-    let searchString = sender.stringValue.lowercased()
-    print("Searching: \(searchString)")
-    if searchString.hasPrefix(lastString) {
-      tries.filter { $0.active }.forEach { $0.search(String(searchString.dropFirst(lastString.count))) }
-    } else {
-      tries.forEach { $0.reset(); $0.search(searchString) }
-    }
-    lastString = searchString
-    print("\(tries.filter { $0.active }.map { $0.returnValue })")
-    print("\(tries.filter { $0.active }.map { $0.s })")
-  }
+  // MARK: Searching
 
   private func makeTries(_ labelDict: [String: [String: [String]]]) {
+    // search for sections and labels
     for (k1, v1) in labelDict {
-      tries.append(Trie(tab: k1, section: nil, label: nil))
       for (k2, v2) in v1 {
         tries.append(Trie(tab: k1, section: k2, label: nil))
         for k3 in v2 {
@@ -172,6 +180,28 @@ class PreferenceWindowController: NSWindowController {
       }
     }
   }
+
+  override func controlTextDidChange(_ obj: Notification) {
+    let searchString = searchField.stringValue.lowercased()
+    if searchString == lastString { return }
+    if searchString.hasPrefix(lastString) {
+      tries.filter { $0.active }.forEach { $0.search(String(searchString.dropFirst(lastString.count))) }
+    } else {
+      tries.forEach { $0.reset(); $0.search(searchString) }
+    }
+    lastString = searchString
+    currentCompletionResults = tries.filter { $0.active }.map { $0.returnValue }
+    completeSearchField()
+  }
+
+  private func completeSearchField() {
+    if !completionPopover.isShown {
+      completionPopover.show(relativeTo: searchField.bounds, of: searchField, preferredEdge: .maxY)
+    }
+    completionTableView.reloadData()
+  }
+
+  // MARK: Tabs
 
   private func loadTab(at index: Int) {
     contentView.subviews.forEach { $0.removeFromSuperview() }
@@ -206,7 +236,7 @@ class PreferenceWindowController: NSWindowController {
       }) else {
         return nil
     }
-    let title = (sectionTitleLabel as! NSTextField).stringValue
+    let title = removeLastSemicolon(in: (sectionTitleLabel as! NSTextField).stringValue)
     var labels = findLabels(in: section)
     labels.remove(at: labels.index(of: title)!)
     return (title, labels)
@@ -218,9 +248,9 @@ class PreferenceWindowController: NSWindowController {
       if let label = subView as? NSTextField,
         !label.isEditable, label.textColor == .labelColor,
         label.identifier?.rawValue != "AccessoryLabel", label.identifier?.rawValue != "Trigger" {
-        labels.append(label.stringValue)
+        labels.append(removeLastSemicolon(in: label.stringValue))
       } else if let button = subView as? NSButton, button.bezelStyle == .regularSquare {
-        labels.append(button.title)
+        labels.append(removeLastSemicolon(in: button.title))
       }
       labels.append(contentsOf: findLabels(in: subView))
     }
@@ -232,15 +262,34 @@ class PreferenceWindowController: NSWindowController {
 extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return viewControllers.count
+    if tableView == self.tableView {
+      return viewControllers.count
+    } else {
+      return currentCompletionResults.count
+    }
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    return viewControllers[at: row]?.preferenceTabTitle
+    if tableView == self.tableView {
+      return viewControllers[at: row]?.preferenceTabTitle
+    } else {
+      guard let result = currentCompletionResults[at: row] else { return nil }
+      let noLabel = result.label == nil
+      return [
+        "tab": result.tab,
+        "noSection": noLabel,
+        "section": result.section,
+        "label": result.label ?? result.section,
+      ]
+    }
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    loadTab(at: tableView.selectedRow)
+    if tableView == self.tableView {
+      loadTab(at: tableView.selectedRow)
+    } else {
+
+    }
   }
 
 }

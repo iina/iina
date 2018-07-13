@@ -22,6 +22,7 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
     return [sectionDefaultAppView, sectionClearCacheView, sectionBrowserExtView]
   }
 
+  @IBOutlet weak var searchField: NSSearchField!
   @IBOutlet var sectionDefaultAppView: NSView!
   @IBOutlet var sectionClearCacheView: NSView!
   @IBOutlet var sectionBrowserExtView: NSView!

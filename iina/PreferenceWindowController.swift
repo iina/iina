@@ -8,11 +8,13 @@
 
 import Cocoa
 
-fileprivate func removeLastSemicolon(in string: String) -> String {
-  if string.hasSuffix(":") || string.hasSuffix("：") {
-    return String(string.dropLast())
+fileprivate extension String{
+  func removedLastSemicolon() -> String {
+    if self.hasSuffix(":") || self.hasSuffix("：") {
+      return String(self.dropLast())
+    }
+    return self
   }
-  return string
 }
 
 protocol PreferenceWindowEmbeddable where Self: NSViewController {
@@ -26,7 +28,7 @@ extension PreferenceWindowEmbeddable {
   }
 }
 
-class PreferenceWindowController: NSWindowController, NSSearchFieldDelegate {
+class PreferenceWindowController: NSWindowController {
 
   class Trie {
     class Node {
@@ -51,7 +53,7 @@ class PreferenceWindowController: NSWindowController, NSSearchFieldDelegate {
 
     init(tab: String, section: String, label: String?) {
       s = [tab, section, label].compactMap { $0 }.joined(separator: " ").lowercased()
-      returnValue = (tab, section, label)
+      returnValue = (tab, section.removedLastSemicolon(), label?.removedLastSemicolon())
 
       root = Node(" ")
       lastPosition = root
@@ -137,10 +139,6 @@ class PreferenceWindowController: NSWindowController, NSSearchFieldDelegate {
     window?.titlebarAppearsTransparent = true
     window?.isMovableByWindowBackground = true
 
-    if #available(OSX 10.11, *) {
-      searchField.delegate = self
-    }
-
     tableView.delegate = self
     tableView.dataSource = self
     completionTableView.delegate = self
@@ -167,6 +165,10 @@ class PreferenceWindowController: NSWindowController, NSSearchFieldDelegate {
     loadTab(at: 0)
   }
 
+  override func mouseDown(with event: NSEvent) {
+    dismissCompletionList()
+  }
+
   // MARK: Searching
 
   private func makeTries(_ labelDict: [String: [String: [String]]]) {
@@ -181,9 +183,12 @@ class PreferenceWindowController: NSWindowController, NSSearchFieldDelegate {
     }
   }
 
-  override func controlTextDidChange(_ obj: Notification) {
+  @IBAction func searchFieldAction(_ sender: Any) {
     let searchString = searchField.stringValue.lowercased()
     if searchString == lastString { return }
+    if searchString.count == 0 {
+      dismissCompletionList()
+    }
     if searchString.hasPrefix(lastString) {
       tries.filter { $0.active }.forEach { $0.search(String(searchString.dropFirst(lastString.count))) }
     } else {
@@ -196,9 +201,18 @@ class PreferenceWindowController: NSWindowController, NSSearchFieldDelegate {
 
   private func completeSearchField() {
     if !completionPopover.isShown {
+      let range = searchField.currentEditor()?.selectedRange
       completionPopover.show(relativeTo: searchField.bounds, of: searchField, preferredEdge: .maxY)
+      searchField.selectText(self)
+      searchField.currentEditor()?.selectedRange = range ?? NSMakeRange(0, 0)
     }
     completionTableView.reloadData()
+  }
+
+  private func dismissCompletionList() {
+    if completionPopover.isShown {
+      completionPopover.close()
+    }
   }
 
   // MARK: Tabs
@@ -236,7 +250,7 @@ class PreferenceWindowController: NSWindowController, NSSearchFieldDelegate {
       }) else {
         return nil
     }
-    let title = removeLastSemicolon(in: (sectionTitleLabel as! NSTextField).stringValue)
+    let title = (sectionTitleLabel as! NSTextField).stringValue
     var labels = findLabels(in: section)
     labels.remove(at: labels.index(of: title)!)
     return (title, labels)
@@ -248,9 +262,9 @@ class PreferenceWindowController: NSWindowController, NSSearchFieldDelegate {
       if let label = subView as? NSTextField,
         !label.isEditable, label.textColor == .labelColor,
         label.identifier?.rawValue != "AccessoryLabel", label.identifier?.rawValue != "Trigger" {
-        labels.append(removeLastSemicolon(in: label.stringValue))
+        labels.append(label.stringValue)
       } else if let button = subView as? NSButton, button.bezelStyle == .regularSquare {
-        labels.append(removeLastSemicolon(in: button.title))
+        labels.append(button.title)
       }
       labels.append(contentsOf: findLabels(in: subView))
     }

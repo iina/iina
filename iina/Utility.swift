@@ -544,6 +544,13 @@ class Utility {
     }
   }
 
+  static func resolvePaths(_ paths: [String]) -> [String] {
+    return paths.map { (try? URL(resolvingAliasFileAt: URL(fileURLWithPath: $0)))?.path ?? $0 }
+  }
+
+  static func resolveURLs(_ urls: [URL]) -> [URL] {
+    return urls.map { (try? URL(resolvingAliasFileAt: $0)) ?? $0 }
+  }
 
 }
 

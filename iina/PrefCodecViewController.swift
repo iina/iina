@@ -15,14 +15,7 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
     return NSNib.Name("PrefCodecViewController")
   }
 
-  var viewIdentifier: String = "PrefCodecViewController"
-
-  var toolbarItemImage: NSImage {
-    return #imageLiteral(resourceName: "toolbar_codec")
-  }
-
   var preferenceTabTitle: String {
-    view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.video_audio", comment: "Codec")
   }
 

@@ -310,7 +310,8 @@ class PreferenceWindowController: NSWindowController {
       !label.isEditable, label.textColor == .labelColor,
       label.identifier?.rawValue != "AccessoryLabel", label.identifier?.rawValue != "Trigger" {
       return label.stringValue
-    } else if let button = view as? NSButton, button.bezelStyle == .regularSquare {
+    } else if let button = view as? NSButton,
+      (button.identifier?.rawValue == "FunctionalButton" || button.bezelStyle == .regularSquare) {
       return button.title
     }
     return nil

@@ -112,6 +112,9 @@ class PreferenceWindowController: NSWindowController {
   private var lastString: String = ""
   private var currentCompletionResults: [Trie.ReturnValue] = []
 
+  private let indexingQueue = DispatchQueue(label: "IINAPreferenceIndexingTask", qos: .userInitiated)
+  private var isIndexing: Bool = true
+
   @IBOutlet weak var searchField: NSSearchField!
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var maskView: PrefSearchResultMaskView!
@@ -161,7 +164,11 @@ class PreferenceWindowController: NSWindowController {
       ["utilities", "PrefUtilsViewController"],
     ].map { (NSLocalizedString("preference.\($0[0])", comment: ""), self.getLabelDict(inNibNamed: $0[1])) })
 
-    makeTries(labelDict)
+    indexingQueue.async{
+      self.isIndexing = true
+      self.makeTries(labelDict)
+      self.isIndexing = false
+    }
 
     loadTab(at: 0)
   }
@@ -185,6 +192,7 @@ class PreferenceWindowController: NSWindowController {
   }
 
   @IBAction func searchFieldAction(_ sender: Any) {
+    guard !isIndexing else { return }
     let searchString = searchField.stringValue.lowercased()
     if searchString == lastString { return }
     if searchString.count == 0 {

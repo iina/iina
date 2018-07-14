@@ -233,6 +233,8 @@ class PreferenceWindowController: NSWindowController {
     let isScrollable = vc.preferenceContentIsScrollable
     contentViewBottomConstraint?.isActive = !isScrollable
     scrollView.verticalScrollElasticity = isScrollable ? .allowed : .none
+    // scoll to top
+    scrollView.documentView?.scroll(.zero)
 
     // find label
     if let title = title, let label = findLabel(titled: title, in: vc.view) {
@@ -380,7 +382,10 @@ class PrefSearchResultMaskView: NSView {
   @objc func highlight(_ view: NSView) {
     isHidden = false
     alphaValue = 1
-    let rectInWindow = view.convert(view.bounds.insetBy(dx: -8, dy: -8), to: nil)
+
+    let viewToHighlight = view.identifier?.rawValue == "SectionTitle" ? view.superview! : view
+
+    let rectInWindow = viewToHighlight.convert(viewToHighlight.bounds.insetBy(dx: -8, dy: -8), to: nil)
     maskRect = convert(rectInWindow, from: nil)
     needsDisplay = true
 

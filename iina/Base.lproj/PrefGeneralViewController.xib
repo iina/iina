@@ -433,11 +433,11 @@
         <userDefaultsController representsSharedInstance="YES" id="IBP-Mz-Maa"/>
         <customObject id="7jz-PW-fuz" customClass="SUUpdater"/>
         <customView id="y7O-rd-dnT">
-            <rect key="frame" x="0.0" y="0.0" width="580" height="72"/>
+            <rect key="frame" x="0.0" y="0.0" width="580" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gO-wx-MWj">
-                    <rect key="frame" x="-2" y="47" width="56" height="17"/>
+                    <rect key="frame" x="-2" y="45" width="56" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Playlist:" id="6TV-DG-503">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -474,7 +474,6 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="xmd-ef-R8e" firstAttribute="baseline" secondItem="6gO-wx-MWj" secondAttribute="baseline" id="264-iA-d0e"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OVz-Nv-1WW" secondAttribute="trailing" id="9pX-b8-Q44"/>
                 <constraint firstItem="UHf-eK-ba5" firstAttribute="top" secondItem="OVz-Nv-1WW" secondAttribute="bottom" constant="8" id="Cp1-Yt-5u8"/>
                 <constraint firstItem="6gO-wx-MWj" firstAttribute="leading" secondItem="y7O-rd-dnT" secondAttribute="leading" id="HHh-Ci-kWH"/>
@@ -486,9 +485,10 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6gO-wx-MWj" secondAttribute="trailing" id="hMc-8k-u0x"/>
                 <constraint firstItem="OVz-Nv-1WW" firstAttribute="top" secondItem="xmd-ef-R8e" secondAttribute="bottom" constant="4" id="knP-0X-jJU"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xmd-ef-R8e" secondAttribute="trailing" id="o3a-bC-bx3"/>
+                <constraint firstItem="6gO-wx-MWj" firstAttribute="top" secondItem="xmd-ef-R8e" secondAttribute="top" id="q99-S9-zIq"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UHf-eK-ba5" secondAttribute="trailing" id="z5V-cR-cmi"/>
             </constraints>
-            <point key="canvasLocation" x="-2190" y="598"/>
+            <point key="canvasLocation" x="-2190" y="602"/>
         </customView>
         <customView identifier="SectionTitle" id="ym1-pZ-4SZ">
             <rect key="frame" x="0.0" y="0.0" width="580" height="80"/>
@@ -582,7 +582,6 @@
                 <constraint firstItem="ZA7-QS-FAH" firstAttribute="baseline" secondItem="Nj3-EX-JeL" secondAttribute="baseline" id="Ggf-3U-n6h"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tV0-X6-PhP" secondAttribute="trailing" id="Moh-Du-SXe"/>
                 <constraint firstItem="iLE-bn-UWS" firstAttribute="leading" secondItem="ym1-pZ-4SZ" secondAttribute="leading" id="OPk-QW-QHI"/>
-                <constraint firstItem="Nj3-EX-JeL" firstAttribute="baseline" secondItem="iLE-bn-UWS" secondAttribute="baseline" id="RPr-Vt-MhQ"/>
                 <constraint firstItem="LvL-fW-PG1" firstAttribute="baseline" secondItem="aEK-1q-7Vr" secondAttribute="baseline" id="VYM-y6-OU9"/>
                 <constraint firstItem="Nj3-EX-JeL" firstAttribute="leading" secondItem="ym1-pZ-4SZ" secondAttribute="leading" constant="120" id="XoW-36-hBX"/>
                 <constraint firstItem="ZA7-QS-FAH" firstAttribute="leading" secondItem="Nj3-EX-JeL" secondAttribute="trailing" constant="4" id="frH-VD-mPl"/>
@@ -590,6 +589,7 @@
                 <constraint firstItem="LvL-fW-PG1" firstAttribute="leading" secondItem="aEK-1q-7Vr" secondAttribute="trailing" constant="8" id="ldm-ou-kEt"/>
                 <constraint firstItem="tV0-X6-PhP" firstAttribute="top" secondItem="aEK-1q-7Vr" secondAttribute="bottom" constant="8" id="mjb-GH-EPV"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LvL-fW-PG1" secondAttribute="trailing" id="nc9-h5-iNW"/>
+                <constraint firstItem="iLE-bn-UWS" firstAttribute="top" secondItem="Nj3-EX-JeL" secondAttribute="top" id="o8m-2E-aK5"/>
                 <constraint firstAttribute="bottom" secondItem="tV0-X6-PhP" secondAttribute="bottom" constant="8" id="q5o-f0-7NU"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PKl-oI-CuN" secondAttribute="trailing" constant="8" id="vfN-bZ-HHg"/>
                 <constraint firstItem="tV0-X6-PhP" firstAttribute="leading" secondItem="aEK-1q-7Vr" secondAttribute="leading" id="y5m-Mq-oMY"/>
@@ -598,11 +598,11 @@
             <point key="canvasLocation" x="-2190" y="726"/>
         </customView>
         <customView identifier="SectionTitle" id="Kmu-J1-cbE">
-            <rect key="frame" x="0.0" y="0.0" width="580" height="94"/>
+            <rect key="frame" x="0.0" y="0.0" width="580" height="92"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pfH-CF-O2T">
-                    <rect key="frame" x="-2" y="69" width="57" height="17"/>
+                    <rect key="frame" x="-2" y="67" width="57" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="History:" id="jeK-46-2BG">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -657,6 +657,7 @@
                 <constraint firstItem="da1-EI-Ny1" firstAttribute="top" secondItem="gxK-Zo-PtQ" secondAttribute="bottom" constant="4" id="X9d-Gp-Gd2"/>
                 <constraint firstAttribute="bottom" secondItem="da1-EI-Ny1" secondAttribute="bottom" constant="8" id="Y9S-to-Uaw"/>
                 <constraint firstItem="gxK-Zo-PtQ" firstAttribute="leading" secondItem="4zm-YX-iM8" secondAttribute="leading" constant="20" id="YHa-jX-bEO"/>
+                <constraint firstItem="pfH-CF-O2T" firstAttribute="top" secondItem="AUU-c3-fW5" secondAttribute="top" id="YsQ-gV-evT"/>
                 <constraint firstItem="AUU-c3-fW5" firstAttribute="leading" secondItem="Kmu-J1-cbE" secondAttribute="leading" constant="120" id="ZbG-0Z-dQm"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pfH-CF-O2T" secondAttribute="trailing" id="anm-jv-kcZ"/>
                 <constraint firstItem="pfH-CF-O2T" firstAttribute="leading" secondItem="Kmu-J1-cbE" secondAttribute="leading" id="c9q-SG-bJV"/>
@@ -666,9 +667,8 @@
                 <constraint firstAttribute="trailing" secondItem="da1-EI-Ny1" secondAttribute="trailing" id="l2x-XY-er0"/>
                 <constraint firstItem="gxK-Zo-PtQ" firstAttribute="top" secondItem="4zm-YX-iM8" secondAttribute="bottom" constant="8" id="lnd-OY-DqJ"/>
                 <constraint firstItem="4zm-YX-iM8" firstAttribute="top" secondItem="AUU-c3-fW5" secondAttribute="bottom" constant="8" id="loj-lX-llR"/>
-                <constraint firstItem="AUU-c3-fW5" firstAttribute="baseline" secondItem="pfH-CF-O2T" secondAttribute="baseline" id="wkD-NP-OnZ"/>
             </constraints>
-            <point key="canvasLocation" x="-2190" y="466"/>
+            <point key="canvasLocation" x="-2190" y="469"/>
         </customView>
     </objects>
     <resources>

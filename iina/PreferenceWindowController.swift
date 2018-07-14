@@ -247,6 +247,10 @@ class PreferenceWindowController: NSWindowController {
     // find label
     if let title = title, let label = findLabel(titled: title, in: vc.view) {
       maskView.perform(#selector(maskView.highlight(_:)), with: label, afterDelay: 0.25)
+      if let collapseView = findCollapseView(label) {
+        collapseView.folded = false
+        collapseView.updateContentView(animated: false)
+      }
     }
   }
 
@@ -308,6 +312,17 @@ class PreferenceWindowController: NSWindowController {
       return label.stringValue
     } else if let button = view as? NSButton, button.bezelStyle == .regularSquare {
       return button.title
+    }
+    return nil
+  }
+
+  private func findCollapseView(_ view: NSView) -> CollapseView? {
+    if let superview = view.superview {
+      if let collapseView = superview as? CollapseView {
+        return collapseView
+      } else {
+        return findCollapseView(_:superview)
+      }
     }
     return nil
   }

@@ -12,6 +12,10 @@ fileprivate let triggerIdentifier = NSUserInterfaceItemIdentifier(rawValue: "Tri
 fileprivate let contentIdentifier = NSUserInterfaceItemIdentifier(rawValue: "Content")
 
 
+/// Create a collapse view in xib. To use this class, you need to:
+/// - Add a stackview and set its class to `CollapseView`;
+/// - Assign the collapseable view an identifier "Content";
+/// -
 class CollapseView: NSStackView {
 
   private var trigger: NSView?
@@ -33,7 +37,7 @@ class CollapseView: NSStackView {
     if let buttton = trigger as? NSButton {
       folded = buttton.state != .on
     }
-    updateContentView(withAnimation: false)
+    updateContentView(animated: false)
 
     originalTarget = trigger.target
     originalAction = trigger.action
@@ -50,9 +54,9 @@ class CollapseView: NSStackView {
     updateContentView()
   }
 
-  private func updateContentView(withAnimation: Bool = true) {
+  func updateContentView(animated: Bool = true) {
     setVisibilityPriority(folded ? .notVisible : .mustHold, for: contentView!)
-    if withAnimation {
+    if animated {
       NSAnimationContext.runAnimationGroup({ context in
         context.duration = 0.25
         context.allowsImplicitAnimation = true

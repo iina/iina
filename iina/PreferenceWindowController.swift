@@ -114,6 +114,7 @@ class PreferenceWindowController: NSWindowController {
 
   @IBOutlet weak var searchField: NSSearchField!
   @IBOutlet weak var tableView: NSTableView!
+  @IBOutlet weak var maskView: PrefSearchResultMaskView!
   @IBOutlet weak var scrollView: NSScrollView!
   @IBOutlet weak var contentView: NSView!
   @IBOutlet var completionPopover: NSPopover!
@@ -188,6 +189,7 @@ class PreferenceWindowController: NSWindowController {
     if searchString == lastString { return }
     if searchString.count == 0 {
       dismissCompletionList()
+      return
     }
     if searchString.hasPrefix(lastString) {
       tries.filter { $0.active }.forEach { $0.search(String(searchString.dropFirst(lastString.count))) }
@@ -235,6 +237,7 @@ class PreferenceWindowController: NSWindowController {
     // find label
     if let title = title, let label = findLabel(titled: title, in: vc.view) {
       label.scrollToVisible(label.bounds.insetBy(dx: 0, dy: -20))
+      maskView.perform(#selector(maskView.highlight(_:)), with: label, afterDelay: 0.25)
     }
   }
 
@@ -333,13 +336,59 @@ extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource
     } else {
       dismissCompletionList()
       guard
-        let result = currentCompletionResults[at: tableView.selectedRow],
+        let result = currentCompletionResults[at: completionTableView.selectedRow],
         let index = viewControllers.enumerated().first(where: { (_, vc) in vc.preferenceTabTitle == result.tab })?.offset
         else {
           return
       }
       loadTab(at: index, thenFindLabelTitled: result.label ?? result.section)
     }
+  }
+
+}
+
+class PrefSearchResultMaskView: NSView {
+
+  var maskRect: NSRect?
+
+  override static func defaultAnimation(forKey key: NSAnimatablePropertyKey) -> Any? {
+    if key.rawValue == "alphaValue" {
+      let kfa = CAKeyframeAnimation(keyPath: "alphaValue")
+      kfa.duration = 1.5
+      kfa.timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault), CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)]
+      kfa.values = [1, 1, 0]
+      kfa.keyTimes = [0, 0.75, 1.5]
+      return kfa
+    } else {
+      return super.defaultAnimation(forKey: key)
+    }
+  }
+
+  override func draw(_ dirtyRect: NSRect) {
+    guard let maskRect = maskRect else { return }
+    NSGraphicsContext.saveGraphicsState()
+    let framePath = NSBezierPath(rect: bounds)
+    let maskPath =  NSBezierPath(roundedRect: maskRect, xRadius: 6, yRadius: 6)
+    framePath.append(maskPath)
+    framePath.windingRule = .evenOddWindingRule
+    framePath.setClip()
+    NSColor(calibratedWhite: 0.5, alpha: 0.5).setFill()
+    dirtyRect.fill()
+    NSGraphicsContext.restoreGraphicsState()
+  }
+
+  @objc func highlight(_ view: NSView) {
+    isHidden = false
+    alphaValue = 1
+    let rectInWindow = view.convert(view.bounds.insetBy(dx: -8, dy: -8), to: nil)
+    maskRect = convert(rectInWindow, from: nil)
+    needsDisplay = true
+
+    NSAnimationContext.runAnimationGroup({ _ in
+      self.animator().alphaValue = 0
+    }, completionHandler: {
+      self.isHidden = true
+    })
   }
 
 }

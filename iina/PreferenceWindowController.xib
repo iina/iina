@@ -12,6 +12,7 @@
                 <outlet property="completionPopover" destination="p0p-bU-ap2" id="CDT-9L-7cL"/>
                 <outlet property="completionTableView" destination="MUI-pR-u00" id="0hW-JH-Bsp"/>
                 <outlet property="contentView" destination="5R5-77-bmq" id="hTm-zX-BBk"/>
+                <outlet property="maskView" destination="mpW-1b-ztU" id="1IU-tZ-HzF"/>
                 <outlet property="noResultLabel" destination="0yO-bT-GQW" id="9Yr-Yb-yWw"/>
                 <outlet property="scrollView" destination="VYU-tb-v3l" id="n0b-YV-otV"/>
                 <outlet property="searchField" destination="rKj-eM-MTH" id="h5z-XD-hFu"/>
@@ -25,7 +26,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="700" height="480"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <value key="minSize" type="size" width="480" height="360"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="700" height="480"/>
@@ -126,6 +127,9 @@
                     <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="anY-kd-ix3">
                         <rect key="frame" x="217" y="0.0" width="5" height="480"/>
                     </box>
+                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mpW-1b-ztU" customClass="PrefSearchResultMaskView" customModule="IINA" customModuleProvider="target">
+                        <rect key="frame" x="220" y="0.0" width="480" height="480"/>
+                    </customView>
                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYU-tb-v3l">
                         <rect key="frame" x="220" y="0.0" width="480" height="480"/>
                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="fAk-o1-RBn">
@@ -157,6 +161,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="VYU-tb-v3l" secondAttribute="trailing" id="1bS-bk-Lv2"/>
+                    <constraint firstItem="mpW-1b-ztU" firstAttribute="leading" secondItem="AO2-1e-7F6" secondAttribute="trailing" id="2TL-62-8WL"/>
                     <constraint firstItem="VYU-tb-v3l" firstAttribute="leading" secondItem="AO2-1e-7F6" secondAttribute="trailing" id="5eJ-ny-1La"/>
                     <constraint firstAttribute="bottom" secondItem="VYU-tb-v3l" secondAttribute="bottom" id="6S5-9o-5Ba"/>
                     <constraint firstItem="AO2-1e-7F6" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="77O-JU-GkV"/>
@@ -164,8 +169,11 @@
                     <constraint firstItem="anY-kd-ix3" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="IPO-JP-XJz"/>
                     <constraint firstAttribute="bottom" secondItem="AO2-1e-7F6" secondAttribute="bottom" id="Iae-jL-Lbe"/>
                     <constraint firstItem="anY-kd-ix3" firstAttribute="leading" secondItem="AO2-1e-7F6" secondAttribute="trailing" constant="-1" id="MfE-Gd-IRb"/>
+                    <constraint firstAttribute="trailing" secondItem="mpW-1b-ztU" secondAttribute="trailing" id="TaF-ES-bGg"/>
                     <constraint firstItem="AO2-1e-7F6" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="Yag-r7-077"/>
+                    <constraint firstAttribute="bottom" secondItem="mpW-1b-ztU" secondAttribute="bottom" id="ZFX-8N-eqw"/>
                     <constraint firstItem="VYU-tb-v3l" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="gJS-on-Kmb"/>
+                    <constraint firstItem="mpW-1b-ztU" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="zpa-gD-im9"/>
                 </constraints>
             </view>
             <connections>
@@ -225,10 +233,10 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gcv-io-aYI">
-                                                        <rect key="frame" x="12" y="5" width="102" height="30"/>
+                                                        <rect key="frame" x="12" y="5" width="86" height="30"/>
                                                         <subviews>
                                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="MoT-Tv-Eut">
-                                                                <rect key="frame" x="0.0" y="13" width="102" height="17"/>
+                                                                <rect key="frame" x="0.0" y="13" width="86" height="17"/>
                                                                 <subviews>
                                                                     <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WvU-OP-qKD">
                                                                         <rect key="frame" x="0.0" y="0.0" width="37" height="17"/>

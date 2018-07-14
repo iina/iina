@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import MASPreferences
 
 @objcMembers
 class PrefControlViewController: PreferenceViewController, PreferenceWindowEmbeddable {
@@ -18,17 +17,8 @@ class PrefControlViewController: PreferenceViewController, PreferenceWindowEmbed
     }
   }
 
-  var viewIdentifier: String = "PrefControlViewController"
-
-  var toolbarItemImage: NSImage? {
-    get {
-      return #imageLiteral(resourceName: "toolbar_control")
-    }
-  }
-
   var preferenceTabTitle: String {
     get {
-      view.layoutSubtreeIfNeeded()
       return NSLocalizedString("preference.control", comment: "Control")
     }
   }

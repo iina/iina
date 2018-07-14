@@ -5,7 +5,6 @@ target 'iina' do
   use_frameworks!
 
   # Pods for iina
-  pod 'MASPreferences'
   pod 'Just', :git => 'https://github.com/JustHTTP/Just.git', :branch => 'swift-4'
   pod 'PromiseKit'
   pod 'GzipSwift'

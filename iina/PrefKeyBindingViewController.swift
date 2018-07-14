@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import MASPreferences
 
 @objcMembers
 class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable {
@@ -16,14 +15,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     return NSNib.Name("PrefKeyBindingViewController")
   }
 
-  var viewIdentifier: String = "PrefKeyBindingViewController"
-
-  var toolbarItemImage: NSImage? {
-    return #imageLiteral(resourceName: "toolbar_key")
-  }
-
   var preferenceTabTitle: String {
-    view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.keybindings", comment: "Keybindings")
   }
 

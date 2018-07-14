@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import MASPreferences
 import Sparkle
 
 @objcMembers
@@ -21,8 +20,6 @@ class PrefGeneralViewController: PreferenceViewController, PreferenceWindowEmbed
 
   var preferenceTabTitle: String {
     get {
-      // dirty hack here: layout the view before `MASPreferencesWIndowController` getting `bounds`.
-      view.layoutSubtreeIfNeeded()
       return NSLocalizedString("preference.general", comment: "General")
     }
   }

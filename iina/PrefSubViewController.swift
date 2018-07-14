@@ -16,14 +16,7 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
     return NSNib.Name("PrefSubViewController")
   }
 
-  var viewIdentifier: String = "PrefSubViewController"
-
-  var toolbarItemImage: NSImage {
-    return NSImage(named: .fontPanel)!
-  }
-
   var preferenceTabTitle: String {
-    view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.subtitle", comment: "Subtitles")
   }
 

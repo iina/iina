@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import MASPreferences
 
 fileprivate let SizeWidthTag = 0
 fileprivate let SizeHeightTag = 1
@@ -25,17 +24,8 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     return NSNib.Name("PrefUIViewController")
   }
 
-  var viewIdentifier: String = "PrefUIViewController"
-
-  var toolbarItemImage: NSImage? {
-    get {
-      return #imageLiteral(resourceName: "toolbar_play")
-    }
-  }
-
   var preferenceTabTitle: String {
     get {
-      view.layoutSubtreeIfNeeded()
       return NSLocalizedString("preference.ui", comment: "UI")
     }
   }

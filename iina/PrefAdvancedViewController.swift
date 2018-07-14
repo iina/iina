@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import MASPreferences
 
 @objcMembers
 class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbeddable {

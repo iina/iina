@@ -8,7 +8,6 @@
 
 import Cocoa
 import MediaPlayer
-import MASPreferences
 import Sparkle
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */

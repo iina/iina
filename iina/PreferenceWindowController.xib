@@ -78,7 +78,7 @@
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="XDU-ud-pYc">
                                                                     <rect key="frame" x="20" y="10" width="177" height="17"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" drawsBackground="YES" id="Ukj-Vg-wHf">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" drawsBackground="YES" id="Ukj-Vg-wHf" customClass="PrefTabTitleLabelCell" customModule="IINA" customModuleProvider="target">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -127,7 +127,7 @@
                     <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="anY-kd-ix3">
                         <rect key="frame" x="217" y="0.0" width="5" height="480"/>
                     </box>
-                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mpW-1b-ztU" customClass="PrefSearchResultMaskView" customModule="IINA" customModuleProvider="target">
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="mpW-1b-ztU" customClass="PrefSearchResultMaskView" customModule="IINA" customModuleProvider="target">
                         <rect key="frame" x="220" y="0.0" width="480" height="480"/>
                     </customView>
                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYU-tb-v3l">

@@ -398,3 +398,15 @@ class PrefSearchResultMaskView: NSView {
   }
 
 }
+
+class PrefTabTitleLabelCell: NSTextFieldCell {
+  override var backgroundStyle: NSView.BackgroundStyle {
+    didSet {
+      if backgroundStyle == .dark {
+        self.textColor = NSColor.white
+      } else {
+        self.textColor = NSColor.controlTextColor
+      }
+    }
+  }
+}

@@ -12,8 +12,6 @@ class OpenURLAccessoryViewController: NSViewController {
 
   @IBOutlet weak var urlField: ShortcutAvailableTextField!
 
-  @IBOutlet weak var safariLinkBtn: NSButton!
-  @IBOutlet weak var chromeLinkBtn: NSButton!
   @IBOutlet weak var usernameField: NSTextField!
   @IBOutlet weak var passwordField: NSSecureTextField!
 
@@ -37,14 +35,6 @@ class OpenURLAccessoryViewController: NSViewController {
         }
       }
       return urlComponents.url
-    }
-  }
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    [safariLinkBtn, chromeLinkBtn].forEach {
-      $0!.image = NSImage(named: .followLinkFreestandingTemplate)
     }
   }
 

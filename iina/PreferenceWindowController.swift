@@ -238,7 +238,6 @@ class PreferenceWindowController: NSWindowController {
 
     // find label
     if let title = title, let label = findLabel(titled: title, in: vc.view) {
-      label.scrollToVisible(label.bounds.insetBy(dx: 0, dy: -20))
       maskView.perform(#selector(maskView.highlight(_:)), with: label, afterDelay: 0.25)
     }
   }
@@ -380,6 +379,8 @@ class PrefSearchResultMaskView: NSView {
   }
 
   @objc func highlight(_ view: NSView) {
+    view.scrollToVisible(view.bounds.insetBy(dx: 0, dy: -20))
+
     isHidden = false
     alphaValue = 1
 

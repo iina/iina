@@ -300,7 +300,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Min-k4-E1V">
-                    <rect key="frame" x="267" y="2" width="76" height="26"/>
+                    <rect key="frame" x="267" y="2" width="75" height="26"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="gCa-l2-dK8"/>
                     </constraints>
@@ -310,8 +310,6 @@
                         <menu key="menu" id="Vgx-Qo-7h4">
                             <items>
                                 <menuItem title="Item 1" state="on" id="iQf-Gb-IuO"/>
-                                <menuItem title="Item 2" id="FM0-py-Nwj"/>
-                                <menuItem title="Item 3" id="A5l-Nl-xk6"/>
                             </items>
                         </menu>
                     </popUpButtonCell>

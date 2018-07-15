@@ -243,7 +243,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         player.addToPlaylist(paths: before, at: 0)
       }
     } else if let paths = pasteboard.propertyList(forType: .nsFilenames) as? [String] {
-      let playableFiles = player.getPlayableFiles(in: paths.map{ URL(fileURLWithPath: $0) })
+      let playableFiles = Utility.resolveURLs(player.getPlayableFiles(in: paths.map{ URL(fileURLWithPath: $0) }))
       if playableFiles.count == 0 {
         return false
       }
@@ -505,7 +505,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let files = selectedRows!.enumerated().map { (_, i) in
       URL(fileURLWithPath: player.info.playlist[i].filename)
     }
-    let _ = PlayerCore.newPlayerCore.openURLs(files, shouldAutoLoad: false)
+    PlayerCore.newPlayerCore.openURLs(files, shouldAutoLoad: false)
   }
 
   @IBAction func contextMenuRemove(_ sender: NSMenuItem) {

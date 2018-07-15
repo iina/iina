@@ -129,7 +129,8 @@ extension PlayerCore {
     guard let types = pb.types else { return [] }
 
     if types.contains(.nsFilenames) {
-      guard let paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return [] }
+      guard var paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return [] }
+      paths = Utility.resolvePaths(paths)
       // check 3d lut files
       if paths.count == 1 && Utility.lut3dExt.contains(paths[0].lowercasedPathExtension) {
         return .copy
@@ -163,7 +164,8 @@ extension PlayerCore {
     guard let types = pb.types else { return false }
 
     if types.contains(.nsFilenames) {
-      guard let paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return false }
+      guard var paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return false }
+      paths = Utility.resolvePaths(paths)
       // check 3d lut files
       if paths.count == 1 && Utility.lut3dExt.contains(paths[0].lowercasedPathExtension) {
         let result = addVideoFilter(MPVFilter(lavfiName: "lut3d", label: "iina_quickl3d", paramDict: [

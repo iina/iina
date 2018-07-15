@@ -146,7 +146,7 @@ class PlayerCore: NSObject {
 
   // MARK: - Control
 
-  func openURL(_ url: URL?, shouldAutoLoad: Bool = false) {
+  private func open(_ url: URL?, shouldAutoLoad: Bool = false) {
     guard let url = url else {
       Logger.log("empty file path or url", level: .error, subsystem: subsystem)
       return
@@ -160,21 +160,6 @@ class PlayerCore: NSObject {
     openMainWindow(path: path, url: url, isNetwork: isNetwork)
   }
 
-  func openURLString(_ str: String) {
-    if str == "-" {
-      openMainWindow(path: str, url: URL(string: "stdin")!, isNetwork: false)
-    } else if str.first == "/" {
-      let url = URL(fileURLWithPath: str)
-      openMainWindow(path: str, url: url, isNetwork: false)
-    } else {
-      guard let pstr = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed), let url = URL(string: pstr) else {
-        Logger.log("Cannot add percent encoding for \(str)", level: .error, subsystem: subsystem)
-        return
-      }
-      openMainWindow(path: str, url: url, isNetwork: true)
-    }
-  }
-  
   /**
    Open a list of urls. If there are more than one urls, add the remaining ones to
    playlist and disable auto loading.
@@ -182,14 +167,16 @@ class PlayerCore: NSObject {
    - Returns: `nil` if no futher action is needed, like opened a BD Folder; otherwise the
    count of playable files.
    */
+  @discardableResult
   func openURLs(_ urls: [URL], shouldAutoLoad autoLoad: Bool = true) -> Int? {
     guard !urls.isEmpty else { return 0 }
+    var urls = Utility.resolveURLs(urls)
     
     // handle BD folders and m3u / m3u8 files first
     if urls.count == 1 && (isBDFolder(urls[0]) ||
       Utility.playlistFileExt.contains(urls[0].absoluteString.lowercasedPathExtension)) {
       info.shouldAutoLoadFiles = false
-      openURL(urls[0])
+      open(urls[0])
       return nil
     }
     
@@ -208,7 +195,7 @@ class PlayerCore: NSObject {
     }
     
     // open the first file
-    openURL(playableFiles[0])
+    open(playableFiles[0])
     // add the remaining to playlist
     for i in 1..<count {
       addToPlaylist(playableFiles[i].path)
@@ -222,6 +209,27 @@ class PlayerCore: NSObject {
     }
     return count
   }
+
+  func openURL(_ url: URL, shouldAutoLoad: Bool = true) {
+    openURLs([url], shouldAutoLoad: shouldAutoLoad)
+  }
+
+  func openURLString(_ str: String) {
+    if str == "-" {
+      openMainWindow(path: str, url: URL(string: "stdin")!, isNetwork: false)
+      return
+    }
+    if str.first == "/" {
+      openURL(URL(fileURLWithPath: str))
+    } else {
+      guard let pstr = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed), let url = URL(string: pstr) else {
+        Logger.log("Cannot add percent encoding for \(str)", level: .error, subsystem: subsystem)
+        return
+      }
+      openURL(url)
+    }
+  }
+
 
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
     Logger.log("Opening \(path) in main window", subsystem: subsystem)

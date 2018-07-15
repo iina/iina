@@ -196,10 +196,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         if commandLineStatus.openSeparateWindows {
           validFileURLs.forEach { url in
-            let _ = getNewPlayerCore().openURLs([url])
+            getNewPlayerCore().openURL(url)
           }
         } else {
-          let _ = getNewPlayerCore().openURLs(validFileURLs)
+          getNewPlayerCore().openURLs(validFileURLs)
         }
       }
     }
@@ -285,7 +285,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let urls = pendingFilesForOpenFile.map { URL(fileURLWithPath: $0) }
 
     pendingFilesForOpenFile.removeAll()
-    if let openedFileCount = PlayerCore.activeOrNew.openURLs(urls), openedFileCount == 0 {
+    if PlayerCore.activeOrNew.openURLs(urls) == 0 {
       Utility.showAlert("nothing_to_open")
     }
   }
@@ -356,7 +356,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
       let isAlternative = (sender as? NSMenuItem)?.tag == AlternativeMenuItemTag
       let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternative)
-      if let openedFileCount = playerCore.openURLs(panel.urls), openedFileCount == 0 {
+      if playerCore.openURLs(panel.urls) == 0 {
         Utility.showAlert("nothing_to_open")
       }
     }

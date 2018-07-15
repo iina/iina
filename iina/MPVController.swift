@@ -186,9 +186,7 @@ class MPVController: NSObject {
     if Preference.bool(for: PK.spdifDTSHD) { spdif.append("dts-hd") }
     setString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","))
 
-    if player.getAudioDevices().contains(where: { $0["name"] == Preference.string(for: .audioDevice)! }) {
-      setUserOption(PK.audioDevice, type: .string, forName: MPVOption.Audio.audioDevice)
-    }
+    setUserOption(PK.audioDevice, type: .string, forName: MPVOption.Audio.audioDevice)
 
     // - Sub
 

@@ -46,6 +46,15 @@ class CollapseView: NSStackView {
     trigger.action = #selector(self.triggerAction)
   }
 
+  func setCollapsed(_ collapsed: Bool, animated: Bool = true) {
+    guard collapsed != folded else { return }
+    folded = collapsed
+    if let triangle = trigger as? NSButton, triangle.bezelStyle == .disclosure {
+      triangle.state = folded ? .off : .on
+    }
+    updateContentView(animated: animated)
+  }
+
   @objc private func triggerAction(_ sender: NSControl) {
     folded = !folded
     if let action = originalAction {
@@ -54,7 +63,7 @@ class CollapseView: NSStackView {
     updateContentView()
   }
 
-  func updateContentView(animated: Bool = true) {
+  private func updateContentView(animated: Bool = true) {
     setVisibilityPriority(folded ? .notVisible : .mustHold, for: contentView!)
     if animated {
       NSAnimationContext.runAnimationGroup({ context in

@@ -248,8 +248,7 @@ class PreferenceWindowController: NSWindowController {
     if let title = title, let label = findLabel(titled: title, in: vc.view) {
       maskView.perform(#selector(maskView.highlight(_:)), with: label, afterDelay: 0.25)
       if let collapseView = findCollapseView(label) {
-        collapseView.folded = false
-        collapseView.updateContentView(animated: false)
+        collapseView.setCollapsed(false, animated: false)
       }
     }
   }

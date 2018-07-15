@@ -9,25 +9,22 @@
 import Cocoa
 
 @objcMembers
-class PrefCodecViewController: NSViewController {
+class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefCodecViewController")
   }
 
-  var viewIdentifier: String = "PrefCodecViewController"
-
-  var toolbarItemImage: NSImage {
-    return #imageLiteral(resourceName: "toolbar_codec")
+  var preferenceTabTitle: String {
+    return NSLocalizedString("preference.video_audio", comment: "Codec")
   }
 
-  var toolbarItemLabel: String {
-    view.layoutSubtreeIfNeeded()
-    return NSLocalizedString("preference.codec", comment: "Codec")
+  override var sectionViews: [NSView] {
+    return [sectionVideoView, sectionAudioView]
   }
 
-  var hasResizableWidth: Bool = false
-  var hasResizableHeight: Bool = false
+  @IBOutlet var sectionVideoView: NSView!
+  @IBOutlet var sectionAudioView: NSView!
 
   @IBOutlet weak var spdifAC3Btn: NSButton!
   @IBOutlet weak var spdifDTSBtn: NSButton!

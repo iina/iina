@@ -7,27 +7,21 @@
 //
 
 import Cocoa
-import MASPreferences
 
 @objcMembers
-class PrefKeyBindingViewController: NSViewController, MASPreferencesViewController {
+class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefKeyBindingViewController")
   }
 
-  var viewIdentifier: String = "PrefKeyBindingViewController"
-
-  var toolbarItemImage: NSImage? {
-    return #imageLiteral(resourceName: "toolbar_key")
-  }
-
-  var toolbarItemLabel: String? {
-    view.layoutSubtreeIfNeeded()
+  var preferenceTabTitle: String {
     return NSLocalizedString("preference.keybindings", comment: "Keybindings")
   }
 
-  var hasResizableWidth: Bool = false
+  var preferenceContentIsScrollable: Bool {
+    return false
+  }
 
   static let defaultConfigs: [String: String] = [
     "IINA Default": Bundle.main.path(forResource: "iina-default-input", ofType: "conf", inDirectory: "config")!,

@@ -12,13 +12,8 @@ class OpenURLAccessoryViewController: NSViewController {
 
   @IBOutlet weak var urlField: ShortcutAvailableTextField!
 
-  @IBOutlet weak var safariLinkBtn: NSButton!
-  @IBOutlet weak var chromeLinkBtn: NSButton!
   @IBOutlet weak var usernameField: NSTextField!
   @IBOutlet weak var passwordField: NSSecureTextField!
-
-  private let safariExtensionLink = "https://github.com/lhc70000/iina/releases/download/v0.0.5/Open_In_IINA.safariextz"
-  private let chromeExtensionLink = "https://chrome.google.com/webstore/detail/open-in-iina/pdnojahnhpgmdhjdhgphgdcecehkbhfo"
 
   var url: URL? {
     get {
@@ -41,22 +36,6 @@ class OpenURLAccessoryViewController: NSViewController {
       }
       return urlComponents.url
     }
-  }
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    [safariLinkBtn, chromeLinkBtn].forEach {
-      $0!.image = NSImage(named: .followLinkFreestandingTemplate)
-    }
-  }
-    
-  @IBAction func safariLinkBtnAction(_ sender: AnyObject) {
-    NSWorkspace.shared.open(URL(string: safariExtensionLink)!)
-  }
-
-  @IBAction func chromeLinkBtnAction(_ sender: AnyObject) {
-    NSWorkspace.shared.open(URL(string: chromeExtensionLink)!)
   }
 
 }

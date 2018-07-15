@@ -8,7 +8,6 @@
 
 import Cocoa
 import MediaPlayer
-import MASPreferences
 import Sparkle
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
@@ -60,7 +59,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }()
 
   lazy var preferenceWindowController: NSWindowController = {
-    return MASPreferencesWindowController(viewControllers: [
+    return PreferenceWindowController(viewControllers: [
       PrefGeneralViewController(),
       PrefUIViewController(),
       PrefCodecViewController(),
@@ -69,7 +68,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       PrefControlViewController(),
       PrefKeyBindingViewController(),
       PrefAdvancedViewController(),
-    ], title: NSLocalizedString("preference.title", comment: "Preference"))
+      PrefUtilsViewController(),
+    ])
   }()
 
   @IBOutlet weak var menuController: MenuController!
@@ -430,10 +430,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func websiteAction(_ sender: AnyObject) {
     NSWorkspace.shared.open(URL(string: AppData.websiteLink)!)
-  }
-
-  @IBAction func setSelfAsDefaultAction(_ sender: AnyObject) {
-    Utility.setSelfAsDefaultForAllFileTypes()
   }
 
   private func registerUserDefaultValues() {

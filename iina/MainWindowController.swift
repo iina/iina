@@ -2076,7 +2076,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     sliderCell?.isInDarkTheme = isDarkTheme
     volumeCell?.isInDarkTheme = isDarkTheme
 
-    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView].forEach {
+    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView].forEach {
       $0?.material = material
       $0?.appearance = appearance
     }

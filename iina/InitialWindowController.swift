@@ -71,9 +71,7 @@ class InitialWindowController: NSWindowController {
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
 
-    if #available(OSX 10.11, *) {
-      visualEffectView.material = .ultraDark
-    }
+    visualEffectView.material = .ultraDark
   }
 
   func loadLastPlaybackInfo() {

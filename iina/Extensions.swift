@@ -424,19 +424,6 @@ extension NSMenuItem {
 
 
 extension URL {
-  /**
-   Whether the URL represents a directory.
-   
-   - Attention: For 10.10-, it only checks if `path` ends with "/".
-   */
-  var representsDirectory: Bool {
-    if #available(OSX 10.11, *) {
-      return hasDirectoryPath
-    } else {
-      return path.hasSuffix("/")
-    }
-  }
-
   var isExistingDirectory: Bool {
     return (try? self.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
   }

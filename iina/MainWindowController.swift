@@ -44,11 +44,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @objc let monospacedFont: NSFont = {
     let fontSize = NSFont.systemFontSize(for: .small)
-    if #available(OSX 10.11, *) {
-      return NSFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
-    } else {
-      return NSFont.systemFont(ofSize: fontSize)
-    }
+    return NSFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
   }()
 
   // MARK: - Constants
@@ -910,16 +906,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isDragging = true
       guard !controlBarFloating.isDragging else { return }
       if mousePosRelatedToWindow != nil {
-        if #available(OSX 10.11, *) {
-          window?.performDrag(with: event)
-        } else {
-          let currentLocation = NSEvent.mouseLocation
-          let newOrigin = CGPoint(
-            x: currentLocation.x - mousePosRelatedToWindow!.x,
-            y: currentLocation.y - mousePosRelatedToWindow!.y
-          )
-          window?.setFrameOrigin(newOrigin)
-        }
+        window?.performDrag(with: event)
       }
     }
   }
@@ -1694,11 +1681,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let (osdString, osdType) = message.message()
 
     let osdTextSize = Preference.float(for: .osdTextSize)
-    if #available(OSX 10.11, *) {
-      osdLabel.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize), weight: .regular)
-    } else {
-      osdLabel.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
-    }
+    osdLabel.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize), weight: .regular)
     osdLabel.stringValue = osdString
 
     switch osdType {
@@ -2041,7 +2024,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       Logger.log("Nil material in setMaterial()", level: .warning)
       return
     }
-    guard #available(OSX 10.11, *) else { return }
 
     var appearance: NSAppearance? = nil
     var material: NSVisualEffectView.Material
@@ -2677,7 +2659,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.doubleValue
-    if #available(OSX 10.11, *), Preference.double(for: .maxVolume) > 100, abs(value - 100) < 0.5 {
+    if Preference.double(for: .maxVolume) > 100, abs(value - 100) < 0.5 {
       NSHapticFeedbackManager.defaultPerformer.perform(.generic, performanceTime: .default)
     }
     player.setVolume(value)

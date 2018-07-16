@@ -158,9 +158,7 @@ class PreferenceWindowController: NSWindowController {
     completionTableView.delegate = self
     completionTableView.dataSource = self
 
-    if #available(OSX 10.11, *) {
-      contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: contentView.superview!.bottomAnchor)
-    }
+    contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: contentView.superview!.bottomAnchor)
 
     let labelDict = [String: [String: [String]]](uniqueKeysWithValues:  [
       ["general", "PrefGeneralViewController"],

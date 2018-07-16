@@ -14,13 +14,7 @@ class FilterWindowController: NSWindowController {
     return NSNib.Name("FilterWindowController")
   }
 
-  @objc let monospacedFont: NSFont = {
-    if #available(OSX 10.11, *) {
-      return NSFont.monospacedDigitSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)
-    } else {
-      return NSFont.systemFont(ofSize: NSFont.systemFontSize)
-    }
-  }()
+  @objc let monospacedFont: NSFont = NSFont.monospacedDigitSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)
 
   @IBOutlet weak var splitView: NSSplitView!
   @IBOutlet weak var splitViewUpperView: NSView!

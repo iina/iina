@@ -53,7 +53,7 @@ extension PlayerCore {
         playableFiles.append(url)
         continue
       }
-      if url.representsDirectory {
+      if url.hasDirectoryPath {
         // is directory
         // `enumerator(at:includingPropertiesForKeys:)` doesn't work :(
         guard let dirEnumerator = FileManager.default.enumerator(atPath: url.path) else { return [] }
@@ -185,7 +185,7 @@ extension PlayerCore {
         // if no playable files, try add subtitle files
         var loadedSubtitle = false
         for url in urls {
-          if !url.representsDirectory && Utility.supportedFileExt[.sub]!.contains(url.pathExtension.lowercased()) {
+          if !url.hasDirectoryPath && Utility.supportedFileExt[.sub]!.contains(url.pathExtension.lowercased()) {
             loadExternalSubFile(url)
             loadedSubtitle = true
           }

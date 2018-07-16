@@ -36,9 +36,7 @@ class PrefControlViewController: PreferenceViewController, PreferenceWindowEmbed
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    if #available(OSX 10.11, *) {
-      forceTouchLabel.widthAnchor.constraint(equalTo: scrollVerticallyLabel.widthAnchor, multiplier: 1).isActive = true
-    }
+    forceTouchLabel.widthAnchor.constraint(equalTo: scrollVerticallyLabel.widthAnchor, multiplier: 1).isActive = true
   }
 
 }

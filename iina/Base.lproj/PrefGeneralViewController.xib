@@ -27,7 +27,7 @@
             <rect key="frame" x="0.0" y="0.0" width="580" height="460"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38y-2I-MGs">
+                <textField identifier="SectionTitleBehavior" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38y-2I-MGs">
                     <rect key="frame" x="-2" y="435" width="66" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Behavior:" id="uQR-Fx-oEm">
                         <font key="font" metaFont="systemBold"/>
@@ -186,7 +186,7 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <button identifier="Trigger" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RH1-Rj-Zte">
+                                <button identifier="Trigger0" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RH1-Rj-Zte">
                                     <rect key="frame" x="0.0" y="0.0" width="13" height="13"/>
                                     <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" imagePosition="only" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DYg-Nw-kHz">
                                         <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
@@ -204,7 +204,7 @@
                                 <constraint firstAttribute="bottom" secondItem="RH1-Rj-Zte" secondAttribute="bottom" id="u3n-QO-bLw"/>
                             </constraints>
                         </customView>
-                        <box identifier="Content" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="DZT-7n-S4M">
+                        <box identifier="Content0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="DZT-7n-S4M">
                             <rect key="frame" x="-3" y="-4" width="458" height="40"/>
                             <view key="contentView" id="867-m1-aVc">
                                 <rect key="frame" x="2" y="2" width="454" height="36"/>
@@ -271,7 +271,7 @@
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="W54-Em-Hx4">
                             <rect key="frame" x="0.0" y="106" width="452" height="17"/>
                             <subviews>
-                                <button identifier="Trigger" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CaQ-Om-AFL">
+                                <button identifier="Trigger1" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CaQ-Om-AFL">
                                     <rect key="frame" x="0.0" y="0.0" width="13" height="13"/>
                                     <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" imagePosition="only" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BUh-ql-yXZ">
                                         <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
@@ -297,7 +297,7 @@
                                 <constraint firstAttribute="bottom" secondItem="WSg-Sb-Mqv" secondAttribute="bottom" id="xta-fI-hJr"/>
                             </constraints>
                         </customView>
-                        <box identifier="Content" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="5RN-PV-pOZ">
+                        <box identifier="Content1" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="5RN-PV-pOZ">
                             <rect key="frame" x="-3" y="-4" width="458" height="108"/>
                             <view key="contentView" id="gWB-X2-AzC">
                                 <rect key="frame" x="2" y="2" width="454" height="104"/>
@@ -436,7 +436,7 @@
             <rect key="frame" x="0.0" y="0.0" width="580" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gO-wx-MWj">
+                <textField identifier="SectionTitlePlaylist" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gO-wx-MWj">
                     <rect key="frame" x="-2" y="45" width="56" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Playlist:" id="6TV-DG-503">
                         <font key="font" metaFont="systemBold"/>
@@ -490,7 +490,7 @@
             </constraints>
             <point key="canvasLocation" x="-2190" y="602"/>
         </customView>
-        <customView identifier="SectionTitle" id="ym1-pZ-4SZ">
+        <customView identifier="SectionTitleScreenshots" id="ym1-pZ-4SZ">
             <rect key="frame" x="0.0" y="0.0" width="580" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
@@ -597,7 +597,7 @@
             </constraints>
             <point key="canvasLocation" x="-2190" y="726"/>
         </customView>
-        <customView identifier="SectionTitle" id="Kmu-J1-cbE">
+        <customView identifier="SectionTitleHistory" id="Kmu-J1-cbE">
             <rect key="frame" x="0.0" y="0.0" width="580" height="92"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>

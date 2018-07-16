@@ -29,7 +29,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jnk-en-c84">
+                <textField identifier="SectionTitleDefaultApp" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jnk-en-c84">
                     <rect key="frame" x="-2" y="45" width="129" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default Application" id="ORO-lK-yK5">
                         <font key="font" metaFont="systemBold"/>
@@ -63,7 +63,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="248"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ggb-jX-7Sf">
+                <textField identifier="SectionTitleClearCache" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ggb-jX-7Sf">
                     <rect key="frame" x="-2" y="223" width="83" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Clear Cache" id="QHA-tO-oSn">
                         <font key="font" metaFont="systemBold"/>
@@ -71,7 +71,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button identifier="FunctionalButton" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bHj-vX-uFl">
+                <button identifier="FunctionalButtonClearProg" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bHj-vX-uFl">
                     <rect key="frame" x="-6" y="143" width="238" height="32"/>
                     <buttonCell key="cell" type="push" title="Clear Saved Playback Progress…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4nM-C4-9oM">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -98,7 +98,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button identifier="FunctionalButton" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SSk-Rd-BxH">
+                <button identifier="FunctionalButtonClearHistory" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SSk-Rd-BxH">
                     <rect key="frame" x="-6" y="84" width="187" height="32"/>
                     <buttonCell key="cell" type="push" title="Clear Playback History…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MP6-Em-Lp4">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -108,7 +108,7 @@
                         <action selector="clearHistoryBtnAction:" target="-2" id="IpD-Hy-YLH"/>
                     </connections>
                 </button>
-                <button identifier="FunctionalButton" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aCe-0n-uch">
+                <button identifier="FunctionalButtonClearThumb" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aCe-0n-uch">
                     <rect key="frame" x="-6" y="1" width="192" height="32"/>
                     <buttonCell key="cell" type="push" title="Clear Thumbnail Cache…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hsG-JB-TT9">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -178,7 +178,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="101"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Al6-1d-mCg">
+                <textField identifier="SectionTitleBrowserExt" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Al6-1d-mCg">
                     <rect key="frame" x="-2" y="76" width="211" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Get Browser Extensions for IINA" id="zCe-1f-tkF">
                         <font key="font" metaFont="systemBold"/>
@@ -186,7 +186,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button identifier="FunctionalButton" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q8s-Ex-f9e">
+                <button identifier="FunctionalButtonSafari" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q8s-Ex-f9e">
                     <rect key="frame" x="0.0" y="7" width="65" height="17"/>
                     <buttonCell key="cell" type="inline" title="Safari" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="oac-PR-9Yh">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -196,7 +196,7 @@
                         <action selector="extSafariBtnAction:" target="-2" id="ca3-lZ-svI"/>
                     </connections>
                 </button>
-                <button identifier="FunctionalButton" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HRq-fs-0uo">
+                <button identifier="FunctionalButtonChrome" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HRq-fs-0uo">
                     <rect key="frame" x="77" y="7" width="76" height="17"/>
                     <buttonCell key="cell" type="inline" title="Chrome" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="yuw-2i-ICd">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -206,7 +206,7 @@
                         <action selector="extChromeBtnAction:" target="-2" id="JZT-7q-PtK"/>
                     </connections>
                 </button>
-                <button identifier="FunctionalButton" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G58-js-HgZ">
+                <button identifier="FunctionalButtonFirefox" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G58-js-HgZ">
                     <rect key="frame" x="165" y="7" width="71" height="17"/>
                     <buttonCell key="cell" type="inline" title="Firefox" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="f9i-sS-MJN">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -247,7 +247,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="163" y="199" width="448" height="189"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="HNy-Eo-3UU">
                 <rect key="frame" x="0.0" y="0.0" width="448" height="189"/>
                 <autoresizingMask key="autoresizingMask"/>

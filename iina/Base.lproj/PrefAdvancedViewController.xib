@@ -196,7 +196,7 @@
                         <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="tsm-NE-EV2"/>
                     </connections>
                 </textField>
-                <textField identifier="SectionTitle" hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HmN-IK-rGn">
+                <textField identifier="SectionTitleSettings" hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HmN-IK-rGn">
                     <rect key="frame" x="-2" y="0.0" width="55" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Settings" id="Qmc-Tb-d7d">
                         <font key="font" metaFont="system"/>

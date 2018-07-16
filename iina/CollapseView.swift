@@ -8,14 +8,14 @@
 
 import Cocoa
 
-fileprivate let triggerIdentifier = NSUserInterfaceItemIdentifier(rawValue: "Trigger")
-fileprivate let contentIdentifier = NSUserInterfaceItemIdentifier(rawValue: "Content")
+fileprivate let triggerIdentifier = "Trigger"
+fileprivate let contentIdentifier = "Content"
 
 
 /// Create a collapse view in xib. To use this class, you need to:
 /// - Add a stackview and set its class to `CollapseView`;
-/// - Assign the collapseable view an identifier "Content";
-/// -
+/// - Assign the collapseable view an identifier starting with "Content";
+/// - Assign the trigger button an identifier starting with "Trigger".
 class CollapseView: NSStackView {
 
   private var trigger: NSView?
@@ -79,13 +79,16 @@ class CollapseView: NSStackView {
 
     while (queue.count > 0) {
       let view = queue.popLast()!
-      if view.identifier == triggerIdentifier {
-        trigger = view
-      } else if view.identifier == contentIdentifier {
-        contentView = view
-      } else {
-        view.subviews.forEach { queue.insert($0, at: 0) }
+      if let id = view.identifier?.rawValue {
+        if id.starts(with: triggerIdentifier) {
+          trigger = view
+          continue
+        } else if id.starts(with: contentIdentifier) {
+          contentView = view
+          continue
+        }
       }
+      view.subviews.forEach { queue.insert($0, at: 0) }
     }
   }
 }

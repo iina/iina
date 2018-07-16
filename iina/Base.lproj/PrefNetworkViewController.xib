@@ -25,7 +25,7 @@
             <rect key="frame" x="0.0" y="0.0" width="476" height="105"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2xw-S1-tBi">
+                <textField identifier="SectionTitleCache" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2xw-S1-tBi">
                     <rect key="frame" x="-2" y="80" width="50" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Cache:" id="LNk-io-MM7">
                         <font key="font" metaFont="systemBold"/>
@@ -181,7 +181,7 @@
             <rect key="frame" x="0.0" y="0.0" width="444" height="106"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HdV-Xi-RWi">
+                <textField identifier="SectionTitleNetwork" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HdV-Xi-RWi">
                     <rect key="frame" x="-2" y="81" width="64" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Network:" id="yrh-Jm-Q4e">
                         <font key="font" metaFont="systemBold"/>
@@ -306,7 +306,7 @@
             <rect key="frame" x="0.0" y="0.0" width="444" height="124"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mRg-vm-guk">
+                <textField identifier="SectionTitleYtdl" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mRg-vm-guk">
                     <rect key="frame" x="-2" y="99" width="80" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="youtube-dl:" id="1Ex-0X-pjo">
                         <font key="font" metaFont="systemBold"/>

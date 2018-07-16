@@ -335,7 +335,7 @@
                     <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                     <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
-                <textField identifier="SectionTitle" hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OY4-8W-63j">
+                <textField identifier="SectionTitleSettings" hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OY4-8W-63j">
                     <rect key="frame" x="642" y="480" width="55" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Settings" id="veZ-Si-Hv5">
                         <font key="font" metaFont="system"/>

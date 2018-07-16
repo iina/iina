@@ -8,12 +8,22 @@
 
 import Cocoa
 
-fileprivate extension String{
+fileprivate extension String {
   func removedLastSemicolon() -> String {
     if self.hasSuffix(":") || self.hasSuffix("：") {
       return String(self.dropLast())
     }
     return self
+  }
+}
+
+fileprivate extension NSView {
+  func identifierStartsWith(_ prefix: String) -> Bool {
+    if let id = identifier {
+      return id.rawValue.starts(with: prefix)
+    } else {
+      return false
+    }
   }
 }
 
@@ -271,7 +281,7 @@ class PreferenceWindowController: NSWindowController {
 
   private func findLabels(inSection section: NSView) -> (title: String, labels: [String])? {
     guard let sectionTitleLabel = section.subviews.first(where: {
-        ($0 as? NSTextField)?.identifier?.rawValue == "SectionTitle"
+        $0 is NSTextField && $0.identifierStartsWith("SectionTitle")
       }) else {
         return nil
     }
@@ -307,10 +317,10 @@ class PreferenceWindowController: NSWindowController {
   private func getTitle(from view: NSView) -> String? {
     if let label = view as? NSTextField,
       !label.isEditable, label.textColor == .labelColor,
-      label.identifier?.rawValue != "AccessoryLabel", label.identifier?.rawValue != "Trigger" {
+      !label.identifierStartsWith("AccessoryLabel"), !label.identifierStartsWith("Trigger") {
       return label.stringValue
     } else if let button = view as? NSButton,
-      (button.identifier?.rawValue == "FunctionalButton" || button.bezelStyle == .regularSquare) {
+      (button.identifierStartsWith("FunctionalButton") || button.bezelStyle == .regularSquare) {
       return button.title
     }
     return nil
@@ -407,7 +417,7 @@ class PrefSearchResultMaskView: NSView {
     isHidden = false
     alphaValue = 1
 
-    let viewToHighlight = view.identifier?.rawValue == "SectionTitle" ? view.superview! : view
+    let viewToHighlight = view.identifierStartsWith("SectionTitle") ? view.superview! : view
 
     let rectInWindow = viewToHighlight.convert(viewToHighlight.bounds.insetBy(dx: -8, dy: -8), to: nil)
     maskRect = convert(rectInWindow, from: nil)

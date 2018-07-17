@@ -871,13 +871,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func pressureChange(with event: NSEvent) {
-    if #available(OSX 10.10.3, *) {
-      if isCurrentPressInSecondStage == false && event.stage == 2 {
-        performMouseAction(Preference.enum(for: .forceTouchAction))
-        isCurrentPressInSecondStage = true
-      } else if event.stage == 1 {
-        isCurrentPressInSecondStage = false
-      }
+    if isCurrentPressInSecondStage == false && event.stage == 2 {
+      performMouseAction(Preference.enum(for: .forceTouchAction))
+      isCurrentPressInSecondStage = true
+    } else if event.stage == 1 {
+      isCurrentPressInSecondStage = false
     }
   }
 

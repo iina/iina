@@ -14,6 +14,8 @@ class MainWindow: NSWindow {
     let controller = windowController as! MainWindowController
     if let kb = PlayerCore.keyBindings["ESC"] {
       controller.handleKeyBinding(kb)
+    } else {
+      super.cancelOperation(sender)
     }
   }
 

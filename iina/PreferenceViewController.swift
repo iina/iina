@@ -25,9 +25,7 @@ class PreferenceViewController: NSViewController {
     stackView.orientation = .vertical
     stackView.alignment = .leading
     stackView.spacing = 16
-    if #available(OSX 10.11, *) {
-      stackView.distribution = .fill
-    }
+    stackView.distribution = .fill
 
     stackView.views.forEach { Utility.quickConstraints(["H:|[v]|"], ["v": $0]) }
 

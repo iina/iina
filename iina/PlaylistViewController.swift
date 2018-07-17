@@ -387,9 +387,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           cellView.textField?.stringValue = filename
         }
         // playback progress and duration
-        if #available(OSX 10.11, *) {
-          cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
-        }
+        cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
         cellView.durationLabel.stringValue = ""
         if let cached = player.info.cachedVideoDurationAndProgress[item.filename],
           let duration = cached.duration {

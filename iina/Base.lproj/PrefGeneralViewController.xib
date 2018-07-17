@@ -454,7 +454,7 @@
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.playlistAutoAdd" id="k4S-Nc-sCO"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OVz-Nv-1WW">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OVz-Nv-1WW">
                     <rect key="frame" x="136" y="30" width="206" height="14"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Requires restarting IINA to take effect." id="8kU-8g-VgX">
                         <font key="font" metaFont="smallSystem"/>
@@ -490,11 +490,11 @@
             </constraints>
             <point key="canvasLocation" x="-2190" y="602"/>
         </customView>
-        <customView identifier="SectionTitleScreenshots" id="ym1-pZ-4SZ">
+        <customView id="ym1-pZ-4SZ">
             <rect key="frame" x="0.0" y="0.0" width="580" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLE-bn-UWS">
+                <textField identifier="SectionTitleScreenshots" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLE-bn-UWS">
                     <rect key="frame" x="-2" y="55" width="90" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Screenshots:" id="pdx-zt-kf2">
                         <font key="font" metaFont="systemBold"/>
@@ -597,11 +597,11 @@
             </constraints>
             <point key="canvasLocation" x="-2190" y="726"/>
         </customView>
-        <customView identifier="SectionTitleHistory" id="Kmu-J1-cbE">
+        <customView id="Kmu-J1-cbE">
             <rect key="frame" x="0.0" y="0.0" width="580" height="92"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitle" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pfH-CF-O2T">
+                <textField identifier="SectionTitleHistory" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pfH-CF-O2T">
                     <rect key="frame" x="-2" y="67" width="57" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="History:" id="jeK-46-2BG">
                         <font key="font" metaFont="systemBold"/>
@@ -630,7 +630,7 @@
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.recordRecentFiles" id="VvQ-80-UOa"/>
                     </connections>
                 </button>
-                <textField autoresizesSubviews="NO" horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="da1-EI-Ny1">
+                <textField autoresizesSubviews="NO" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="da1-EI-Ny1">
                     <rect key="frame" x="156" y="8" width="426" height="14"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Otherwise only files that opened manually will show up in this menu." id="XFC-Lr-LmP">
                         <font key="font" metaFont="smallSystem"/>

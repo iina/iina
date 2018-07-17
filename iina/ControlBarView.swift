@@ -44,7 +44,7 @@ class ControlBarView: NSVisualEffectView {
       let xPosWhenCenter = (windowFrame.width - frame.width) / 2
       if abs(newOrigin.x - xPosWhenCenter) <= 5 {
         newOrigin.x = xPosWhenCenter
-        if #available(OSX 10.11, *), !isAlignFeedbackSent {
+        if !isAlignFeedbackSent {
           NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .default)
           isAlignFeedbackSent = true
         }

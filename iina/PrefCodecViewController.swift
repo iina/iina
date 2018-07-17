@@ -31,10 +31,40 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
   @IBOutlet weak var spdifDTSHDBtn: NSButton!
   @IBOutlet weak var hwdecDescriptionTextField: NSTextField!
 
+  @IBOutlet weak var audioDevicePopUp: NSPopUpButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
     updateHwdecDescription()
+  }
+
+  override func viewWillAppear() {
+    super.viewWillAppear()
+
+    audioDevicePopUp.removeAllItems()
+    let audioDevices = PlayerCore.active.getAudioDevices()
+    var selected = false
+    audioDevices.forEach { device in
+      audioDevicePopUp.addItem(withTitle: "[\(device["description"]!)] \(device["name"]!)")
+      audioDevicePopUp.lastItem!.representedObject = device
+      if device["name"] == Preference.string(for: .audioDevice) {
+        audioDevicePopUp.select(audioDevicePopUp.lastItem!)
+        selected = true
+      }
+    }
+    if !selected {
+      let device = ["name": Preference.string(for: .audioDevice)!,
+                    "description": Preference.string(for: .audioDeviceDesc)!]
+      audioDevicePopUp.addItem(withTitle: "[\(device["description"]!) (missing)] \(device["name"]!)")
+      audioDevicePopUp.lastItem!.representedObject = device
+      audioDevicePopUp.select(audioDevicePopUp.lastItem!)
+    }
+  }
+
+  @IBAction func audioDeviceAction(_ sender: Any) {
+    let device = audioDevicePopUp.selectedItem!.representedObject as! [String: String]
+    Preference.set(device["name"]!, for: .audioDevice)
+    Preference.set(device["description"]!, for: .audioDeviceDesc)
   }
 
   @IBAction func spdifBtnAction(_ sender: AnyObject) {

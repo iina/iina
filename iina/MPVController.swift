@@ -186,6 +186,8 @@ class MPVController: NSObject {
     if Preference.bool(for: PK.spdifDTSHD) { spdif.append("dts-hd") }
     setString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","))
 
+    setUserOption(PK.audioDevice, type: .string, forName: MPVOption.Audio.audioDevice)
+
     // - Sub
 
     chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subAuto, "no"))

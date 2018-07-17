@@ -292,6 +292,10 @@ class PlayerCore: NSObject {
     }
 
     mpv.mpvInit()
+
+    if !getAudioDevices().contains(where: { $0["name"] == Preference.string(for: .audioDevice)! }) {
+      setAudioDevice("auto")
+    }
   }
 
   func startMPVOpenGLCB(_ videoView: VideoView) {

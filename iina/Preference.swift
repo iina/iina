@@ -142,6 +142,9 @@ struct Preference {
     static let spdifDTS = Key("spdifDTS")
     static let spdifDTSHD = Key("spdifDTSHD")
 
+    static let audioDevice = Key("audioDevice")
+    static let audioDeviceDesc = Key("audioDeviceDesc")
+
     static let enableInitialVolume = Key("enableInitialVolume")
     static let initialVolume = Key("initialVolume")
 
@@ -666,6 +669,8 @@ struct Preference {
     .spdifAC3: false,
     .spdifDTS: false,
     .spdifDTSHD: false,
+    .audioDevice: "auto",
+    .audioDeviceDesc: "Autoselect device",
     .enableInitialVolume: false,
     .initialVolume: 100,
 

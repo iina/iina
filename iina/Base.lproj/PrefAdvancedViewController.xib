@@ -184,7 +184,7 @@
                         <action selector="chooseDirBtnAction:" target="-2" id="wqF-DD-4eM"/>
                     </connections>
                 </button>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-pn-h6s" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-pn-h6s">
                     <rect key="frame" x="26" y="18" width="466" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="~/.config/mpv/" drawsBackground="YES" id="gWN-ya-xRD">
                         <font key="font" metaFont="system"/>

@@ -41,7 +41,7 @@
                         <constraint firstAttribute="bottom" secondItem="Jqj-WM-ez4" secondAttribute="bottom" constant="7" id="vYA-uX-gzK"/>
                     </constraints>
                 </customView>
-                <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="24G-a7-cRM" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
+                <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="24G-a7-cRM">
                     <rect key="frame" x="0.0" y="7" width="480" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="gEe-Ws-Den"/>

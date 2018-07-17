@@ -21,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="463" height="104"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xut-NB-Mqu" customClass="ShortcutAvailableTextField" customModule="IINA" customModuleProvider="target">
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xut-NB-Mqu">
                     <rect key="frame" x="0.0" y="82" width="463" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="QYP-Aq-eWm"/>

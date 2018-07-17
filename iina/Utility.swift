@@ -204,7 +204,7 @@ class Utility {
     let messageKey = "alert." + key + ".message"
     panel.messageText = NSLocalizedString(titleKey, comment: titleComment ?? titleKey)
     panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
-    let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
+    let input = NSTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
     input.lineBreakMode = .byClipping
     input.usesSingleLineMode = true
     input.cell?.isScrollable = true
@@ -264,7 +264,7 @@ class Utility {
     panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
     let view = NSView(frame: NSRect(x: 0, y: 0, width: 240, height: 82))
     view.addSubview(quickLabel(NSLocalizedString("general.username", comment: "Username") + ":", 68))
-    let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 42, width: 240, height: 24))
+    let input = NSTextField(frame: NSRect(x: 0, y: 42, width: 240, height: 24))
     input.lineBreakMode = .byClipping
     input.usesSingleLineMode = true
     input.cell?.isScrollable = true

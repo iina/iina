@@ -345,9 +345,9 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     switch param.type {
     case .text:
       // Text field
-      let label = ShortcutAvailableTextField(frame: NSRect(x: 4, y: yPos,
-                                            width: scrollContentView.frame.width - 8,
-                                            height: 22))
+      let label = NSTextField(frame: NSRect(x: 4, y: yPos,
+                              width: scrollContentView.frame.width - 8,
+                              height: 22))
       label.stringValue = param.defaultValue.stringValue
       label.isSelectable = false
       label.isEditable = true

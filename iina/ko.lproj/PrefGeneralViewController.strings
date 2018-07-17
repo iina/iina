@@ -126,3 +126,7 @@
 "lOw-pu-Llm.title" = "전체 화면 전환시 재생 시작";
 
 "g2A-Kf-vct.title" = "전체 화면 중단시 일시 정지";
+
+/* Class = "NSButtonCell"; title = "Switch to "music mode" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
+"KfL-r7-Uav.title" = "음악을 재생할 때 \"음악 모드\"로 자동 전환";
+

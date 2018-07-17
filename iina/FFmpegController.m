@@ -133,7 +133,7 @@ return -1;\
   AVDictionary *optionsDict = NULL;
 
   avcodec_parameters_to_context(pCodecCtx, pVideoStream->codecpar);
-  av_codec_set_pkt_timebase(pCodecCtx, pVideoStream->time_base);
+  pCodecCtx->time_base = pVideoStream->time_base;
 
   ret = avcodec_open2(pCodecCtx, pCodec, &optionsDict);
   CHECK_SUCCESS(ret, @"Cannot open codec")

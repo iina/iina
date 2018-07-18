@@ -1492,11 +1492,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let aspect: NSSize
       let targetFrame: NSRect
       if toFullScreen {
-        aspect = window.screen!.frame.size
-        targetFrame = aspect.grow(toSize: window.frame.size).centeredRect(in: window.frame)
-      } else {
         aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
         targetFrame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
+      } else {
+        aspect = window.screen!.frame.size
+        targetFrame = aspect.grow(toSize: window.frame.size).centeredRect(in: window.frame)
       }
 
       setConstraintsForVideoView([

@@ -18,7 +18,7 @@ class Regex {
     // Don't depend on a string's length for functions that take NSRange.
     // The proper way to do this is to use `Range(_:in:)`, but getting the UTF-16 count
     // is similar enough to how Foundation NSStrings count characters.
-    if let matches = regex?.numberOfMatches(in: str, range: NSMakeRange(0, str.utf16.count)) {
+    if let matches = regex?.numberOfMatches(in: str, range: NSRange(str.startIndex ..< str.endIndex, in: str)) {
       return matches > 0
     } else {
       return false
@@ -30,7 +30,7 @@ class Regex {
     // Don't depend on a string's length for functions that take NSRange.
     // The proper way to do this is to use `Range(_:in:)`, but getting the UTF-16 count
     // is similar enough to how Foundation NSStrings count characters.
-    if let matches = regex?.matches(in: str, range: NSMakeRange(0, str.utf16.count)) {
+    if let matches = regex?.matches(in: str, range: NSRange(str.startIndex ..< str.endIndex, in: str)) {
       matches.forEach { match in
         for i in 0..<match.numberOfRanges {
           let range = match.range(at: i)

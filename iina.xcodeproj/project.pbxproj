@@ -91,8 +91,6 @@
 		845040471E0B0F500079C194 /* CropSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845040451E0B0F500079C194 /* CropSettingsViewController.swift */; };
 		8450404A1E0B13230079C194 /* CropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845040491E0B13230079C194 /* CropBoxView.swift */; };
 		8452DD851D3B956D008A543A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452DD841D3B956D008A543A /* Preference.swift */; };
-		8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD881D3CB4EF008A543A /* vertexShader.glsl */; };
-		8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8452DD8A1D3CB519008A543A /* fragmentShader.glsl */; };
 		845404AA1E4396F500B02B12 /* ScriptLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845404A91E4396F500B02B12 /* ScriptLoader.swift */; };
 		845404AC1E43980900B02B12 /* LuaScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845404AB1E43980900B02B12 /* LuaScript.swift */; };
 		845ABEAC1D4D19C000BFB15B /* MPVTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845ABEAB1D4D19C000BFB15B /* MPVTrack.swift */; };
@@ -615,8 +613,6 @@
 		845040451E0B0F500079C194 /* CropSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropSettingsViewController.swift; sourceTree = "<group>"; };
 		845040491E0B13230079C194 /* CropBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropBoxView.swift; sourceTree = "<group>"; };
 		8452DD841D3B956D008A543A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
-		8452DD881D3CB4EF008A543A /* vertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertexShader.glsl; sourceTree = "<group>"; };
-		8452DD8A1D3CB519008A543A /* fragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragmentShader.glsl; sourceTree = "<group>"; };
 		845404A91E4396F500B02B12 /* ScriptLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptLoader.swift; sourceTree = "<group>"; };
 		845404AB1E43980900B02B12 /* LuaScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuaScript.swift; sourceTree = "<group>"; };
 		845635401EE1AFA500D36591 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/Contribution.rtf; sourceTree = "<group>"; };
@@ -1564,8 +1560,6 @@
 			isa = PBXGroup;
 			children = (
 				84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */,
-				8452DD881D3CB4EF008A543A /* vertexShader.glsl */,
-				8452DD8A1D3CB519008A543A /* fragmentShader.glsl */,
 				8407D13F1E3A684C0043895D /* ViewLayer.swift */,
 			);
 			name = Video;
@@ -1785,7 +1779,6 @@
 				8400D5E71E1AB337006785F5 /* PrefKeyBindingViewController.xib in Resources */,
 				C789872F1E34EF170005769F /* InfoPlist.strings in Resources */,
 				8400D5DB1E1AB326006785F5 /* FontPickerWindowController.xib in Resources */,
-				8452DD891D3CB4EF008A543A /* vertexShader.glsl in Resources */,
 				8400D5EA1E1AB33B006785F5 /* KeyRecordViewController.xib in Resources */,
 				84EC12861F504D2500137C1E /* FilterPresets.strings in Resources */,
 				8400D5F01E1AB344006785F5 /* PrefCodecViewController.xib in Resources */,
@@ -1800,7 +1793,6 @@
 				84A09A0F1F2DF596000FF343 /* MiniPlayerWindowController.xib in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8400D5D81E1AB31B006785F5 /* AboutWindowController.xib in Resources */,
-				8452DD8B1D3CB519008A543A /* fragmentShader.glsl in Resources */,
 				8400D5F31E1AB348006785F5 /* PrefSubViewController.xib in Resources */,
 				84D0FB821F5E6A3800C6A6A7 /* FreeSelectingViewController.xib in Resources */,
 				8400D5E11E1AB32F006785F5 /* PrefUIViewController.xib in Resources */,

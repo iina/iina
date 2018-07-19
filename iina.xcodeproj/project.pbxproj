@@ -1036,6 +1036,9 @@
 		E5A9E1841E50F1E200950BD5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		E5C57C1E1F82A1ED00488ABA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
 		E5C57C1F1F82A20600488ABA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/FilterPresets.strings; sourceTree = "<group>"; };
+		E5EF3D0A20FFBB6200FEBE4C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
+		E5EF3D0C20FFBB9700FEBE4C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
+		E5EF3D0D2100878F00FEBE4C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
 		E92D617F1FE93B9B00ACC463 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		E92D61801FE93B9C00ACC463 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		E92D61811FE93B9C00ACC463 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
@@ -2046,6 +2049,7 @@
 				848F50902085A99500E998FD /* zh-Hans */,
 				C7E90B522087EC5700A58B6B /* ko */,
 				84D6C98B208A959B0050F980 /* sk */,
+				E5EF3D0A20FFBB6200FEBE4C /* fr */,
 			);
 			name = SubChooseViewController.xib;
 			sourceTree = "<group>";
@@ -2715,6 +2719,7 @@
 			children = (
 				E374161220F3C0AB00B4F7F9 /* Base */,
 				E374161520F3C0AD00B4F7F9 /* zh-Hans */,
+				E5EF3D0D2100878F00FEBE4C /* fr */,
 			);
 			name = PrefUtilsViewController.xib;
 			sourceTree = "<group>";
@@ -2724,6 +2729,7 @@
 			children = (
 				E3B3DD5820FDB8A600325184 /* Base */,
 				E3B3DD5B20FDB8A900325184 /* zh-Hans */,
+				E5EF3D0C20FFBB9700FEBE4C /* fr */,
 			);
 			name = PreferenceWindowController.xib;
 			sourceTree = "<group>";

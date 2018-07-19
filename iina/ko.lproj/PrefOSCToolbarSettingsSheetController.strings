@@ -8,6 +8,12 @@
 /* Class = "NSWindow"; title = "Window"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Window";
 
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Jrf-II-Cfc"; */
+"Jrf-II-Cfc.title" = "취소";
+
+/* Class = "NSButtonCell"; title = "Restore Default"; ObjectID = "SmC-AI-FG6"; */
+"SmC-AI-FG6.title" = "기본값으로 복원";
+
 /* Class = "NSTextFieldCell"; title = "Drag an item and drop it to the above box to add it."; ObjectID = "VCG-VX-E3M"; */
 "VCG-VX-E3M.title" = "추가하려는 항목을 마우스로 드래그하여 위쪽 상자에 떨구십시오.";
 
@@ -16,3 +22,4 @@
 
 /* Class = "NSTextFieldCell"; title = "Current Items:"; ObjectID = "rNU-8V-iQt"; */
 "rNU-8V-iQt.title" = "선택된 항목:";
+

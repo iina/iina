@@ -2,6 +2,8 @@
 
 "alert.add_filter.message" = "Veuillez renseigner une chaîne de caractères au format de la commande vf ou af de mpv.";
 "alert.add_filter.title" = "Nouveau filtre";
+"alert.add_url.message" = "Veuillez saisir l'URL :";
+"alert.add_url.title" = "Ajouter une URL";
 "alert.add_watch.message" = "Veuillez renseigner un nom de propriété mpv valide.";
 "alert.add_watch.title" = "Nouvelle propriété Watch";
 "alert.assrt_register" = "À cause du quota limité sur l'API d'Assrt, nous vous recommendons fortement d'utiliser votre propre token d'API. Le token par défaut est seulement disponible à des fins de démonstration, et vous risquez de rencontrer une erreur réseau en l'utilisant.";
@@ -16,6 +18,12 @@
 "alert.clear_cache.message" = "Voulez-vous vraiment supprimer le cache des miniatures ?";
 "alert.clear_cache.success" = "Cache supprimé";
 "alert.clear_cache.title" = "Vider le cache des miniatures";
+"alert.clear_history.message" = "Souhaitez-vous vraiment supprimer l'historique de lecture ?";
+"alert.clear_history.success" = "Historique de lecture supprimé.";
+"alert.clear_history.title" = "Vider l'historique de lecture";
+"alert.clear_watch_later.message" = "Souhaitez-vous vraiment supprimer les progressions de lecture sauvegardées (\"à regarder plus tard\") ?";
+"alert.clear_watch_later.success" = "Progressions de lecture supprimées.";
+"alert.clear_watch_later.title" = "Vider les progressions de lecture";
 "alert.config.cannot_create" = "Impossible de créer un fichier de configuration !";
 "alert.config.cannot_write" = "Impossible d'écrire sur le fichier de configuration !";
 "alert.config.duplicate.message" = "Veuillez entrer un nom pour le fichier de configuration dupliqué.";
@@ -154,8 +162,9 @@
 "osd.video_eq.hue" = "Teinte : %i";
 "osd.video_eq.saturation" = "Saturation : %i";
 "osd.volume" = "Volume : %i";
-"pl_menu.add_item" = "Ajouter...";
+"pl_menu.add_file" = "Ajouter un fichier…";
 "pl_menu.add_sub" = "Ajouter un sous-titre…";
+"pl_menu.add_url" = "Ajouter une URL…";
 "pl_menu.clear_playlist" = "Vider la playlist";
 "pl_menu.delete" = "Supprimer";
 "pl_menu.delete_after_play" = "Supprimer après lecture";
@@ -172,7 +181,6 @@
 "playlist.chapter_cap" = "CHAPITRES";
 "playlist.playlist_cap" = "PLAYLIST";
 "preference.advanced" = "Avancé";
-"preference.codec" = "Codec";
 "preference.control" = "Contrôles";
 "preference.general" = "Général";
 "preference.keybindings" = "Clavier";
@@ -184,9 +192,13 @@
 "preference.system_media_control" = "Utiliser les touches média système";
 "preference.title" = "Préférences";
 "preference.ui" = "UI";
+"preference.utilities" = "Utilitaires";
+"preference.video_audio" = "Vidéo/Audio";
 "quicksetting.item_default" = "Défaut";
 "quicksetting.item_none" = "Aucun";
 "subencoding.auto" = "";
+"subtrack.no_external" = "Aucun sous-titre externe trouvé";
+"subtrack.no_loaded" = "Aucun sous-titre chargé";
 "touchbar.ahead_15" = "15sec en avant";
 "touchbar.ahead_30" = "30sec en avant";
 "touchbar.back_15" = "15sec en arrière";
@@ -202,21 +214,3 @@
 "touchbar.seek" = "Chercher";
 "touchbar.time" = "Position horaire";
 "track.none" = "<Aucun>";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.title" = "Add URL";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.message" = "Please enter the URL:";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_file" = "Add File…";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_url" = "Add URL…";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_external" = "No External Subtitles Found";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_loaded" = "No Subtitles Loaded";

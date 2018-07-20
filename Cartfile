@@ -1,0 +1,5 @@
+git "https://github.com/JustHTTP/Just.git" "swift-4"
+github "mxcl/PromiseKit" ~> 6.0
+github "1024jp/GzipSwift"
+git "https://github.com/iina/GRMustache.swift.git"
+github "sparkle-project/Sparkle"

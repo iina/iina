@@ -2814,7 +2814,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MODULEMAP_FILE = module.modulemap;
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEBUG";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
 				PRODUCT_NAME = IINA;
 				SKIP_INSTALL = YES;
@@ -2850,7 +2850,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MODULEMAP_FILE = module.modulemap;
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DRELEASE";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
 				PRODUCT_NAME = IINA;
 				SKIP_INSTALL = NO;

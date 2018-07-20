@@ -84,7 +84,7 @@ extension MainWindowController {
     //  10: smaller size
     //  11: bigger size
     let size = sender.tag
-    guard let window = window, !isInFullScreen else { return }
+    guard let window = window, !screenState.isFullscreen else { return }
     
     let screenFrame = (window.screen ?? NSScreen.main!).visibleFrame
     let newFrame: NSRect

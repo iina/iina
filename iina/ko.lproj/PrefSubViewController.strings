@@ -45,7 +45,7 @@
 /* Class = "NSTextFieldCell"; title = "%"; ObjectID = "JZo-4H-owW"; */
 "JZo-4H-owW.title" = "%";
 
-/* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "zaE-bH-XfT"; */
+/* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
 "zaE-bH-XfT.title" = "선호 언어:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
@@ -209,3 +209,22 @@
 "R5q-Xd-PPr.label" = "스타일 및 위치";
 
 "9pv-1r-nuH.title" = "서체";
+
+/* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
+"vYb-qH-XkH.title" = "이 옵션을 선택하면 IINA는 20분을 넘는 동영상이 자막 없이 재생되는 경우에만 자동으로 인터넷에서 자막을 찾습니다.";
+
+/* Class = "NSButtonCell"; title = "Search online subtitles automatically"; ObjectID = "C3p-uP-8u8"; */
+"C3p-uP-8u8.title" = "자동으로 인터넷에서 자막 찾기";
+
+/* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "DUA-7H-Yje"; */
+"DUA-7H-Yje.title" = "고급설정";
+
+/* Class = "NSButtonCell"; title = "Italic"; ObjectID = "pNF-Fw-QtW"; */
+"pNF-Fw-QtW.title" = "기울임꼴";
+
+/* Class = "NSButtonCell"; title = "Bold"; ObjectID = "hEk-7E-10r"; */
+"hEk-7E-10r.title" = "굵게";
+
+/* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "X7X-18-FJg"; */
+"X7X-18-FJg.title" = "고급설정";
+

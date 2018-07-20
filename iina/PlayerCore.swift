@@ -9,7 +9,6 @@
 import Cocoa
 import MediaPlayer
 
-
 class PlayerCore: NSObject {
 
   // MARK: - Multiple instances
@@ -51,6 +50,7 @@ class PlayerCore: NSObject {
   }
 
   static var playerCores: [PlayerCore] = []
+  static private var playerCoreCounter = 0
 
   static private func findIdlePlayerCore() -> PlayerCore? {
     return playerCores.first { $0.info.isIdle && !$0.info.fileLoading }
@@ -58,8 +58,10 @@ class PlayerCore: NSObject {
 
   static private func createPlayerCore() -> PlayerCore {
     let pc = PlayerCore()
+    pc.label = "\(playerCoreCounter)"
     playerCores.append(pc)
     pc.startMPV()
+    playerCoreCounter += 1
     return pc
   }
 
@@ -69,6 +71,10 @@ class PlayerCore: NSObject {
   }
 
   // MARK: - Fields
+
+  lazy var subsystem = Logger.Subsystem(rawValue: "player\(label!)")
+
+  var label: String!
 
   @available(macOS 10.12.2, *)
   var touchBarSupport: TouchBarSupport {
@@ -125,12 +131,6 @@ class PlayerCore: NSObject {
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
 
-  private let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm"
-    return formatter
-  }()
-
   static var keyBindings: [String: KeyMapping] = [:]
 
   override init() {
@@ -144,15 +144,15 @@ class PlayerCore: NSObject {
     }
   }
 
-  // MARK: - Control commands
+  // MARK: - Control
 
-  // Open a file
-  func openURL(_ url: URL?, isNetworkResource: Bool = false, shouldAutoLoad: Bool = false) {
+  private func open(_ url: URL?, shouldAutoLoad: Bool = false) {
     guard let url = url else {
-      Utility.log("Error: empty file path or url")
+      Logger.log("empty file path or url", level: .error, subsystem: subsystem)
       return
     }
-    let isNetwork = isNetworkResource && !url.isFileURL
+    Logger.log("Open URL: \(url.absoluteString)", subsystem: subsystem)
+    let isNetwork = !url.isFileURL
     if shouldAutoLoad {
       info.shouldAutoLoadFiles = true
     }
@@ -160,22 +160,79 @@ class PlayerCore: NSObject {
     openMainWindow(path: path, url: url, isNetwork: isNetwork)
   }
 
+  /**
+   Open a list of urls. If there are more than one urls, add the remaining ones to
+   playlist and disable auto loading.
+   
+   - Returns: `nil` if no futher action is needed, like opened a BD Folder; otherwise the
+   count of playable files.
+   */
+  @discardableResult
+  func openURLs(_ urls: [URL], shouldAutoLoad autoLoad: Bool = true) -> Int? {
+    guard !urls.isEmpty else { return 0 }
+    var urls = Utility.resolveURLs(urls)
+    
+    // handle BD folders and m3u / m3u8 files first
+    if urls.count == 1 && (isBDFolder(urls[0]) ||
+      Utility.playlistFileExt.contains(urls[0].absoluteString.lowercasedPathExtension)) {
+      info.shouldAutoLoadFiles = false
+      open(urls[0])
+      return nil
+    }
+    
+    let playableFiles = getPlayableFiles(in: urls)
+    let count = playableFiles.count
+    
+    // check playable files count
+    if count == 0 {
+      return 0
+    }
+
+    if !autoLoad {
+      info.shouldAutoLoadFiles = false
+    } else {
+      info.shouldAutoLoadFiles = (count == 1)
+    }
+    
+    // open the first file
+    open(playableFiles[0])
+    // add the remaining to playlist
+    for i in 1..<count {
+      addToPlaylist(playableFiles[i].path)
+    }
+    
+    // refresh playlist
+    postNotification(.iinaPlaylistChanged)
+    // send OSD
+    if count > 1 {
+      sendOSD(.addToPlaylist(count))
+    }
+    return count
+  }
+
+  func openURL(_ url: URL, shouldAutoLoad: Bool = true) {
+    openURLs([url], shouldAutoLoad: shouldAutoLoad)
+  }
+
   func openURLString(_ str: String) {
     if str == "-" {
       openMainWindow(path: str, url: URL(string: "stdin")!, isNetwork: false)
-    } else if str.first == "/" {
-      let url = URL(fileURLWithPath: str)
-      openMainWindow(path: str, url: url, isNetwork: false)
+      return
+    }
+    if str.first == "/" {
+      openURL(URL(fileURLWithPath: str))
     } else {
-      guard let str = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed),
-        let url = URL(string: str) else {
-          return
+      guard let pstr = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed), let url = URL(string: pstr) else {
+        Logger.log("Cannot add percent encoding for \(str)", level: .error, subsystem: subsystem)
+        return
       }
-      openMainWindow(path: str, url: url, isNetwork: true)
+      openURL(url)
     }
   }
 
+
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
+    Logger.log("Opening \(path) in main window", subsystem: subsystem)
     info.currentURL = url
     // clear currentFolder since playlist is cleared, so need to auto-load again in playerCore#fileStarted
     info.currentFolder = nil
@@ -198,6 +255,7 @@ class PlayerCore: NSObject {
   }
 
   static func loadKeyBindings() {
+    Logger.log("Loading key bindings")
     let userConfigs = Preference.dictionary(for: .inputConfigs)
     let iinaDefaultConfPath = PrefKeyBindingViewController.defaultConfigs["IINA Default"]!
     var inputConfPath = iinaDefaultConfPath
@@ -210,6 +268,7 @@ class PlayerCore: NSObject {
   }
 
   static func setKeyBindings(_ keyMappings: [KeyMapping]) {
+    Logger.log("Set key bindings")
     var keyBindings: [String: KeyMapping] = [:]
     keyMappings.forEach { keyBindings[$0.key] = $0 }
     PlayerCore.keyBindings = keyBindings
@@ -224,13 +283,19 @@ class PlayerCore: NSObject {
       path = customYtdlPath + ":" + path
     }
     setenv("PATH", path, 1)
+    Logger.log("Set path to \(path)", subsystem: subsystem)
 
     // set http proxy
     if let proxy = Preference.string(for: .httpProxy), !proxy.isEmpty {
       setenv("http_proxy", "http://" + proxy, 1)
+      Logger.log("Set http_proxy to \(proxy)", subsystem: subsystem)
     }
 
     mpv.mpvInit()
+
+    if !getAudioDevices().contains(where: { $0["name"] == Preference.string(for: .audioDevice)! }) {
+      setAudioDevice("auto")
+    }
   }
 
   func startMPVOpenGLCB(_ videoView: VideoView) {
@@ -262,6 +327,7 @@ class PlayerCore: NSObject {
   }
 
   func switchToMiniPlayer(automatically: Bool = false) {
+    Logger.log("Switch to mini player, automatically=\(automatically)", subsystem: subsystem)
     if !automatically {
       switchedToMiniPlayerManually = true
     }
@@ -308,6 +374,7 @@ class PlayerCore: NSObject {
   }
 
   func switchBackFromMiniPlayer(automatically: Bool, showMainWindow: Bool = true) {
+    Logger.log("Switch to normal window from mini player, automatically=\(automatically)", subsystem: subsystem)
     if !automatically {
       switchedBackFromMiniPlayerManually = true
     }
@@ -443,6 +510,18 @@ class PlayerCore: NSObject {
     sendOSD(.abLoop(info.abLoopStatus))
   }
 
+  func clearAbLoop() {
+    if mpv.getFlag(MPVOption.PlaybackControl.abLoopA) {
+      if mpv.getFlag(MPVOption.PlaybackControl.abLoopB) {
+        info.abLoopStatus = 2
+      } else {
+        info.abLoopStatus = 1
+      }
+    } else {
+      info.abLoopStatus = 0
+    }
+  }
+
   func toggleFileLoop() {
     let isLoop = mpv.getFlag(MPVOption.PlaybackControl.loopFile)
     mpv.setFlag(MPVOption.PlaybackControl.loopFile, !isLoop)
@@ -569,6 +648,7 @@ class PlayerCore: NSObject {
   func loadExternalAudioFile(_ url: URL) {
     mpv.command(.audioAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
+        Logger.log("Unsupported audio: \(url.path)", level: .error, subsystem: self.subsystem)
         DispatchQueue.main.async {
           Utility.showAlert("unsupported_audio")
         }
@@ -584,6 +664,7 @@ class PlayerCore: NSObject {
 
     mpv.command(.subAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
+        Logger.log("Unsupported sub: \(url.path)", level: .error, subsystem: self.subsystem)
         // if another modal panel is shown, popping up an alert now will cause some infinite loop.
         if delay {
           DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
@@ -603,7 +684,7 @@ class PlayerCore: NSObject {
     for subTrack in info.subTracks {
       mpv.command(.subReload, args: ["\(subTrack.id)"], checkError: false) { code in
         if code < 0 {
-          Utility.log("Error code \(code) - Failed reloading subtitles")
+          Logger.log("Failed reloading subtitles: error code \(code)", level: .error, subsystem: self.subsystem)
         }
       }
     }
@@ -717,6 +798,7 @@ class PlayerCore: NSObject {
   }
 
   func addVideoFilter(_ filter: MPVFilter) -> Bool {
+    Logger.log("Adding video filter \(filter.stringFormat)...", subsystem: subsystem)
     // check hwdec
     let askHwdec: (() -> Bool) = {
       let panel = NSAlert()
@@ -754,6 +836,7 @@ class PlayerCore: NSObject {
     // try apply filter
     var result = true
     mpv.command(.vf, args: ["add", filter.stringFormat], checkError: false) { result = $0 >= 0 }
+    Logger.log(result ? "Succeeded" : "Failed", subsystem: self.subsystem)
     return result
   }
 
@@ -841,12 +924,14 @@ class PlayerCore: NSObject {
   func execKeyCode(_ code: String) {
     mpv.command(.keypress, args: [code], checkError: false) { errCode in
       if errCode < 0 {
-        Utility.log("Error when executing key code (\(errCode))")
+        Logger.log("Error when executing key code (\(errCode))", level: .error, subsystem: self.subsystem)
       }
     }
   }
 
   func savePlaybackPosition() {
+    guard Preference.bool(for: .resumeLastPosition) else { return }
+    Logger.log("Write watch later config", subsystem: subsystem)
     mpv.command(.writeWatchLaterConfig)
     if let url = info.currentURL {
       Preference.set(url, for: .iinaLastPlayedFilePath)
@@ -868,6 +953,7 @@ class PlayerCore: NSObject {
   // MARK: - Listeners
 
   func fileStarted() {
+    Logger.log("File started", subsystem: subsystem)
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
     currentMediaIsAudio = .unknown
@@ -881,10 +967,12 @@ class PlayerCore: NSObject {
     backgroundQueue.async {
       // add files in same folder
       if shouldAutoLoadFiles {
+        Logger.log("Started auto load", subsystem: self.subsystem)
         self.autoLoadFilesInCurrentFolder(ticket: currentTicket)
       }
       // auto load matched subtitles
       if let matchedSubs = self.info.matchedSubs[path] {
+        Logger.log("Found \(matchedSubs.count) subs for current file", subsystem: self.subsystem)
         for sub in matchedSubs {
           guard currentTicket == self.backgroundQueueTicket else { return }
           self.loadExternalSubFile(sub)
@@ -899,6 +987,7 @@ class PlayerCore: NSObject {
 
   /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
+    Logger.log("File loaded", subsystem: subsystem)
     invalidateTimer()
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
@@ -912,6 +1001,7 @@ class PlayerCore: NSObject {
     getSelectedTracks()
     getPlaylist()
     getChapters()
+    clearAbLoop()
     DispatchQueue.main.sync {
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
@@ -922,6 +1012,10 @@ class PlayerCore: NSObject {
       if info.aid == 0 {
         mainWindow.muteButton.isEnabled = false
         mainWindow.volumeSlider.isEnabled = false
+      }
+
+      if self.isInMiniPlayer {
+        miniPlayer.defaultAlbumArt.isHidden = !self.info.videoTracks.isEmpty
       }
     }
     // set initial properties for the first file
@@ -943,6 +1037,7 @@ class PlayerCore: NSObject {
   }
 
   func playbackRestarted() {
+    Logger.log("Playback restarted", subsystem: subsystem)
     reloadSavedIINAfilters()
     DispatchQueue.main.async {
       Timer.scheduledTimer(timeInterval: TimeInterval(0.2), target: self, selector: #selector(self.reEnableOSDAfterFileLoading), userInfo: nil, repeats: false)
@@ -950,6 +1045,7 @@ class PlayerCore: NSObject {
   }
 
   func trackListChanged() {
+    Logger.log("Track list changed", subsystem: subsystem)
     getTrackInfo()
     getSelectedTracks()
     let audioStatusWasUnkownBefore = currentMediaIsAudio == .unknown
@@ -959,12 +1055,14 @@ class PlayerCore: NSObject {
     if audioStatusIsAvailableNow && Preference.bool(for: .autoSwitchToMusicMode) {
       if currentMediaIsAudio == .isAudio {
         if !isInMiniPlayer && !mainWindow.screenState.isFullscreen && !switchedBackFromMiniPlayerManually {
+          Logger.log("Current media is audio, switch to mini player", subsystem: subsystem)
           DispatchQueue.main.sync {
             switchToMiniPlayer(automatically: false)
           }
         }
       } else {
         if isInMiniPlayer && !switchedToMiniPlayerManually {
+          Logger.log("Current media is not audio, switch to normal window", subsystem: subsystem)
           DispatchQueue.main.sync {
             miniPlayer.close()
             switchBackFromMiniPlayer(automatically: true)
@@ -981,12 +1079,12 @@ class PlayerCore: NSObject {
 
   private func autoSearchOnlineSub() {
     Thread.sleep(forTimeInterval: 0.5)
-    if Preference.bool(for: .autoSearchOnlineSub) && info.subTracks.isEmpty &&
-      info.videoDuration!.second >= Preference.double(for: .autoSearchThreshold) * 60 {
+    if Preference.bool(for: .autoSearchOnlineSub) &&
+      !info.isNetworkResource && info.subTracks.isEmpty &&
+      (info.videoDuration?.second ?? 0.0) >= Preference.double(for: .autoSearchThreshold) * 60 {
       mainWindow.menuActionHandler.menuFindOnlineSub(.dummy)
     }
   }
-
   /**
    Add files in the same folder to playlist.
    It basically follows the following steps:
@@ -1048,6 +1146,7 @@ class PlayerCore: NSObject {
   func syncUI(_ option: SyncUIOption) {
     // if window not loaded, ignore
     guard mainWindow.isWindowLoaded else { return }
+    Logger.log("Syncing UI \(option)", level: .verbose, subsystem: subsystem)
 
     switch option {
 
@@ -1089,20 +1188,10 @@ class PlayerCore: NSObject {
         }
       }
 
-    case .volume:
+    case .volume, .muteButton:
       DispatchQueue.main.async {
         self.mainWindow.updateVolume()
         self.miniPlayer.updateVolume()
-      }
-
-    case .muteButton:
-      let mute = mpv.getFlag(MPVOption.Audio.mute)
-      DispatchQueue.main.async {
-        if self.isInMiniPlayer {
-           self.miniPlayer.muteButton.state = mute ? .on : .off
-        } else {
-          self.mainWindow.muteButton.state = mute ? .on : .off
-        }
       }
 
     case .chapterList:
@@ -1122,7 +1211,7 @@ class PlayerCore: NSObject {
 
     case .additionalInfo:
       DispatchQueue.main.async {
-        let timeString = self.dateFormatter.string(from: Date())
+        let timeString = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .short)
         if let capacity = PowerSource.getList().filter({ $0.type == "InternalBattery" }).first?.currentCapacity {
           self.mainWindow.additionalInfoLabel.stringValue = "\(timeString) | \(capacity)%"
         } else {
@@ -1134,7 +1223,7 @@ class PlayerCore: NSObject {
 
   func sendOSD(_ osd: OSDMessage, autoHide: Bool = true, accessoryView: NSView? = nil) {
     // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
-    guard mainWindow.isWindowLoaded else { return }
+    guard mainWindow.isWindowLoaded && Preference.bool(for: .enableOSD) else { return }
     if info.disableOSDForFileLoading {
       guard case .fileStart = osd else {
         return
@@ -1165,6 +1254,7 @@ class PlayerCore: NSObject {
   }
 
   func generateThumbnails() {
+    Logger.log("Getting thumbnails", subsystem: subsystem)
     if #available(macOS 10.12.2, *) {
       DispatchQueue.main.async {
         self.touchBarSupport.touchBarPlaySlider?.resetCachedThumbnails()
@@ -1177,15 +1267,19 @@ class PlayerCore: NSObject {
     info.thumbnailsReady = false
     if Preference.bool(for: .enableThumbnailPreview) {
       if let cacheName = info.mpvMd5, ThumbnailCache.fileIsCached(forName: cacheName, forVideo: info.currentURL) {
+        Logger.log("Found thumbnail cache", subsystem: subsystem)
         thumbnailQueue.async {
           if let thumbnails = ThumbnailCache.read(forName: cacheName) {
             self.info.thumbnails = thumbnails
             self.info.thumbnailsReady = true
             self.info.thumbnailsProgress = 1
             self.refreshTouchBarSlider()
+          } else {
+            Logger.log("Cannot read thumbnail from cache", level: .error, subsystem: self.subsystem)
           }
         }
       } else {
+        Logger.log("Request new thumbnails", subsystem: subsystem)
         ffmpegController.generateThumbnail(forFile: path)
       }
     }
@@ -1300,7 +1394,7 @@ class PlayerCore: NSObject {
       } else {
         // we cannot get dwidth and dheight, which is unexpected. This block should never be executed
         // but just in case, let's log the error.
-        Utility.log("videoSizeForDisplay: Cannot get dwidth and dheight")
+        Logger.log("videoSizeForDisplay: Cannot get dwidth and dheight", level: .warning, subsystem: subsystem)
         width = AppData.widthWhenNoVideo
         height = AppData.heightWhenNoVideo
       }
@@ -1385,7 +1479,7 @@ class PlayerCore: NSObject {
     let duration = FFmpegController.probeVideoDuration(forFile: path)
     let progress = Utility.playbackProgressFromWatchLater(path.md5)
     info.cachedVideoDurationAndProgress[path] = (
-      duration: (duration > 0 ? duration : nil),
+      duration: duration,
       progress: progress?.second
     )
   }
@@ -1425,6 +1519,7 @@ extension PlayerCore: FFmpegControllerDelegate {
 
   func didUpdate(_ thumbnails: [FFThumbnail]?, forFile filename: String, withProgress progress: Int) {
     guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
+    Logger.log("Got new thumbnails, progress \(progress)", subsystem: subsystem)
     if let thumbnails = thumbnails {
       info.thumbnails.append(contentsOf: thumbnails)
     }
@@ -1434,6 +1529,7 @@ extension PlayerCore: FFmpegControllerDelegate {
 
   func didGenerate(_ thumbnails: [FFThumbnail], forFile filename: String, succeeded: Bool) {
     guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
+    Logger.log("Got all thumbnails, succeeded=\(succeeded)", subsystem: subsystem)
     if succeeded {
       info.thumbnails = thumbnails
       info.thumbnailsReady = true

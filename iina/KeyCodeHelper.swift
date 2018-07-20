@@ -257,7 +257,7 @@ class KeyCodeHelper {
     } else {
       // find the key from key code
       guard let keyName = KeyCodeHelper.keyMap[keyCode] else {
-        Utility.log("Undefined key code?")
+        Logger.log("Undefined key code?", level: .warning)
         return ""
       }
       keyChar = keyName.0

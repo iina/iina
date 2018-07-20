@@ -71,13 +71,12 @@ class InitialWindowController: NSWindowController {
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
 
-    if #available(OSX 10.11, *) {
-      visualEffectView.material = .ultraDark
-    }
+    visualEffectView.material = .ultraDark
   }
 
   func loadLastPlaybackInfo() {
     if Preference.bool(for: .recordRecentFiles),
+      Preference.bool(for: .resumeLastPosition),
       let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
       FileManager.default.fileExists(atPath: lastFile.path) {
       // if last file exists
@@ -92,6 +91,7 @@ class InitialWindowController: NSWindowController {
       lastPositionLabel.stringValue = VideoTime(lastPosition).stringRepresentation
       recentFilesTableTopConstraint.constant = 42
     } else {
+      lastPlaybackURL = nil
       lastFileContainerView.isHidden = true
       recentFilesTableTopConstraint.constant = 24
     }
@@ -99,7 +99,7 @@ class InitialWindowController: NSWindowController {
 
   func reloadData() {
     loadLastPlaybackInfo()
-    recentDocuments = NSDocumentController.shared.recentDocumentURLs.filter { $0 == lastPlaybackURL }
+    recentDocuments = NSDocumentController.shared.recentDocumentURLs.filter { $0 != lastPlaybackURL }
     recentFilesTableView.reloadData()
   }
 }
@@ -121,11 +121,7 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   func tableViewSelectionDidChange(_ notification: Notification) {
     guard let url = recentDocuments[at: recentFilesTableView.selectedRow] else { return }
-    if url.isExistingDirectory {
-      let _ = player.openURLs([url])
-    } else {
-      player.openURL(url, shouldAutoLoad: true)
-    }
+    player.openURL(url)
     recentFilesTableView.deselectAll(nil)
   }
 
@@ -185,7 +181,7 @@ class InitialWindowViewActionButton: NSView {
     } else {
       if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
         let windowController = window?.windowController as? InitialWindowController {
-        windowController.player.openURL(lastFile, shouldAutoLoad: true)
+        windowController.player.openURL(lastFile)
       }
     }
   }

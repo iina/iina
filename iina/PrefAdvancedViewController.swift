@@ -7,10 +7,9 @@
 //
 
 import Cocoa
-import MASPreferences
 
 @objcMembers
-class PrefAdvancedViewController: NSViewController, MASPreferencesViewController {
+class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefAdvancedViewController")
@@ -22,7 +21,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
     return NSImage(named: .advanced)!
   }
 
-  var toolbarItemLabel: String? {
+  var preferenceTabTitle: String {
     view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.advanced", comment: "Advanced")
   }
@@ -31,13 +30,17 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
 
   var options: [[String]] = []
 
+  override var sectionViews: [NSView] {
+    return [headerView, settingsView]
+  }
+
+  @IBOutlet var headerView: NSView!
+  @IBOutlet var settingsView: NSView!
 
   @IBOutlet weak var enableSettingsBtn: NSButton!
-  @IBOutlet weak var settingsView: NSView!
   @IBOutlet weak var optionsTableView: NSTableView!
   @IBOutlet weak var useAnotherConfigDirBtn: NSButton!
   @IBOutlet weak var chooseConfigDirBtn: NSButton!
-  @IBOutlet weak var userConfigLocLabel: NSTextField!
 
 
   override func viewDidLoad() {

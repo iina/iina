@@ -7,31 +7,25 @@
 //
 
 import Cocoa
-import MASPreferences
 
 @objcMembers
-class PrefKeyBindingViewController: NSViewController, MASPreferencesViewController {
+class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefKeyBindingViewController")
   }
 
-  var viewIdentifier: String = "PrefKeyBindingViewController"
-
-  var toolbarItemImage: NSImage? {
-    return #imageLiteral(resourceName: "toolbar_key")
-  }
-
-  var toolbarItemLabel: String? {
-    view.layoutSubtreeIfNeeded()
+  var preferenceTabTitle: String {
     return NSLocalizedString("preference.keybindings", comment: "Keybindings")
   }
 
-  var hasResizableWidth: Bool = false
+  var preferenceContentIsScrollable: Bool {
+    return false
+  }
 
   static let defaultConfigs: [String: String] = [
     "IINA Default": Bundle.main.path(forResource: "iina-default-input", ofType: "conf", inDirectory: "config")!,
-    "MPV Default": Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!,
+    "mpv Default": Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!,
     "VLC Default": Bundle.main.path(forResource: "vlc-default-input", ofType: "conf", inDirectory: "config")!,
     "Movist Default": Bundle.main.path(forResource: "movist-default-input", ofType: "conf", inDirectory: "config")!
   ]
@@ -81,7 +75,7 @@ class PrefKeyBindingViewController: NSViewController, MASPreferencesViewControll
     // - user
     guard let uc = Preference.dictionary(for: .inputConfigs)
     else  {
-      Utility.fatal("Cannot get config file list!")
+      Logger.fatal("Cannot get config file list!")
     }
     userConfigs = uc
     userConfigs.forEach {

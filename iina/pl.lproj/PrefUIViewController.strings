@@ -154,13 +154,13 @@
 "duf-3s-3bL.title" = "Nigdy";
 
 /* Class = "NSBox"; title = "On Screen Controller Toolbar:"; ObjectID = "fZh-cN-8FM"; */
-"fZh-cN-8FM.title" = "Pasek sterowania:";
+"fZh-cN-8FM.title" = "On Screen Controller Toolbar:";
 
 /* Class = "NSButtonCell"; title = "Use physical resolution on Retina displays"; ObjectID = "fsj-YE-OB7"; */
 "fsj-YE-OB7.title" = "Użyj fizycznej rozdzielczości na ekranach Retina";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Controller:"; ObjectID = "g06-Ja-Ot8"; */
-"g06-Ja-Ot8.title" = "Interfejs sterowania: ";
+"g06-Ja-Ot8.title" = "On Screen Controller: ";
 
 /* Class = "NSTextFieldCell"; title = "of the screen"; ObjectID = "iRn-3s-oQH"; */
 "iRn-3s-oQH.title" = "ekranu";
@@ -219,3 +219,8 @@
 /* Class = "NSButtonCell"; title = "Initial window size:"; ObjectID = "zOq-Em-wUe"; */
 "zOq-Em-wUe.title" = "Początkowy rozmiar okna:";
 
+/* Class = "NSTextFieldCell"; title = "Appearance:"; ObjectID = "mM7-1Q-FyL"; */
+"mM7-1Q-FyL.title" = "Wygląd:";
+
+/* Class = "NSTextFieldCell"; title = "Theme:"; ObjectID = "yLF-vu-1Gl"; */
+"yLF-vu-1Gl.title" = "Motyw:";

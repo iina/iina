@@ -6,7 +6,7 @@
 "alert.add_url.title" = "添加 URL";
 "alert.add_watch.message" = "请输入一个有效的 mpv 属性名。";
 "alert.add_watch.title" = "监视 mpv 属性";
-"alert.assrt_register" = "由于射手网(伪)的 API 请求数量限制，请务必在射手网（伪）注册账户后使用自己的 API token。自带 API token 仅用于测试用途，并且可能由于 API 使用超出限额而请求失败。";
+"alert.assrt_register" = "由于射手网(伪)的 API 请求数量限制，请务必在射手网(伪)注册账户后使用自己的 API token。自带 API token 仅用于测试用途，并且可能由于 API 使用超出限额而请求失败。";
 "alert.assrt_register.register" = "去射手网(伪)注册";
 "alert.assrt_register.try" = "先试用一下";
 "alert.assrt_token_invalid" = "你的射手网(伪) API token 格式错误。";
@@ -18,6 +18,12 @@
 "alert.clear_cache.message" = "确定清除所有缩略图缓存吗?";
 "alert.clear_cache.success" = "缓存已清除。";
 "alert.clear_cache.title" = "清除缩略图缓存";
+"alert.clear_history.message" = "确定删除所有播放历史吗？";
+"alert.clear_history.success" = "播放历史已删除。";
+"alert.clear_history.title" = "清除播放历史";
+"alert.clear_watch_later.message" = "确定清除所有保存的播放进度，即「watch later」数据吗？";
+"alert.clear_watch_later.success" = "已删除所有保存的播放进度。";
+"alert.clear_watch_later.title" = "清除保存的播放进度";
 "alert.config.cannot_create" = "无法创建配置文件！";
 "alert.config.cannot_write" = "无法写入配置文件！";
 "alert.config.duplicate.message" = "请输入复制后的配置文件名。";
@@ -32,7 +38,7 @@
 "alert.delete_history.title" = "删除历史记录";
 "alert.duplicate_config" = "默认配置不能被编辑。请先复制后再编辑。";
 "alert.error_deleting_file" = "无法删除文件。";
-"alert.error_finding_file" = "无法找到文件 %@ ！";
+"alert.error_finding_file" = "无法找到文件 %@!";
 "alert.error_loading_script" = "无法加载脚本 %@！";
 "alert.error_open" = "无法打开文件或流！";
 "alert.error_saving_file" = "保存文件 %@ 时出现错误 %@";
@@ -48,7 +54,7 @@
 "alert.filter_hwdec.use_copy" = "使用支持「拷贝」的解码器";
 "alert.jump_to.message" = "请输入希望跳转的时间。例: 20:35";
 "alert.jump_to.title" = "跳转至";
-"alert.keybinding_config.error" = "无法设置快捷键「%@」！已回退到 IINA 默认配置。请检查你的快捷键文件是否正确。";
+"alert.keybinding_config.error" = "无法设置快捷键「%@」! 已回退到 IINA 默认配置。请检查你的快捷键文件是否正确。";
 "alert.mpv_error" = "出现内部错误 %@ (%@) (设定选项 %@ 时)。";
 "alert.no_video_track" = "没有可用的视频轨道。";
 "alert.nothing_to_open" = "没有可打开的文件。";
@@ -175,7 +181,6 @@
 "playlist.chapter_cap" = "章节";
 "playlist.playlist_cap" = "播放列表";
 "preference.advanced" = "高级";
-"preference.codec" = "解码";
 "preference.control" = "控制";
 "preference.general" = "通用";
 "preference.keybindings" = "快捷键";
@@ -186,10 +191,14 @@
 "preference.subtitle" = "字幕";
 "preference.system_media_control" = "使用系统媒体控制";
 "preference.title" = "偏好设置";
-"preference.ui" = "UI";
+"preference.ui" = "界面";
+"preference.utilities" = "实用工具";
+"preference.video_audio" = "视频/音频";
 "quicksetting.item_default" = "默认";
 "quicksetting.item_none" = "无";
 "subencoding.auto" = "自动识别";
+"subtrack.no_external" = "没有找到外部字幕";
+"subtrack.no_loaded" = "没有已加载的字幕";
 "touchbar.ahead_15" = "前进 15 秒";
 "touchbar.ahead_30" = "前进 30 秒";
 "touchbar.back_15" = "后退 15 秒";
@@ -205,5 +214,3 @@
 "touchbar.seek" = "进度条";
 "touchbar.time" = "播放进度";
 "track.none" = "<无>";
-"subtrack.no_loaded" = "没有已加载的字幕";
-"subtrack.no_external" = "没有找到外部字幕";

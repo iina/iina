@@ -143,12 +143,12 @@
 
 "alert.filter.incorrect" = "Erro ao ajustar os filtros. Verifique os parâmetros.";
 "alert.add_filter.title" = "Novo Filtro";
-"alert.add_filter.message" = "Entre com uma string no formato de comandos vf ou af do MPV.";
+"alert.add_filter.message" = "Entre com uma string no formato de comandos vf ou af do mpv.";
 
 
 "alert.keybinding_config.error" = "Erro ao ler o arquivo de configurações de teclas \"%@\"! Usarei o padrão de teclas do INNA. Verifique sua configuração.";
 
-"alert.extra_option.cannot_read" = "Não consigo ler as opções extras de parâmetros do MPV.";
+"alert.extra_option.cannot_read" = "Não consigo ler as opções extras de parâmetros do mpv.";
 "alert.extra_option.empty" = "Chave ou valor não pode ser vazio!";
 "alert.extra_option.error" = "Erro ao ajustar opção --%@=%@ que retornou %d. Verifique seus ajustes extras em Preferencias > Avançado.";
 "alert.extra_option.config_folder" = "Erro ao ajustar o diretorio de configuração \"%@\".";
@@ -165,7 +165,7 @@
 "alert.set_default.success" = "Realizado com %d sucessos e %d falhas.";
 
 "alert.add_watch.title" = "Add Watch Property";
-"alert.add_watch.message" = "Entre com um nome de propriedade MPV válida.";
+"alert.add_watch.message" = "Entre com um nome de propriedade mpv válida.";
 
 "alert.jump_to.title" = "Pular para";
 "alert.jump_to.message" = "Entre com o tempo para o qual deseja pular. Exemplo: 20:35";
@@ -243,7 +243,7 @@
 "touchbar.remainingTime" = "Remaining Time";
 
 /* FIXME: Using English localization instead */
-"alert.beta_channel.message" = "IINA v1.0 is comming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
+"alert.beta_channel.message" = "IINA v1.0 is coming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
 
 /* FIXME: Using English localization instead */
 "alert.beta_channel.title" = "Receive Updates for Beta Versions";

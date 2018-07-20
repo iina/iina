@@ -424,19 +424,6 @@ extension NSMenuItem {
 
 
 extension URL {
-  /**
-   Whether the URL represents a directory.
-   
-   - Attention: For 10.10-, it only checks if `path` ends with "/".
-   */
-  var representsDirectory: Bool {
-    if #available(OSX 10.11, *) {
-      return hasDirectoryPath
-    } else {
-      return path.hasSuffix("/")
-    }
-  }
-
   var isExistingDirectory: Bool {
     return (try? self.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
   }
@@ -475,6 +462,15 @@ extension NSImage {
     image.isTemplate = false
 
     return image
+  }
+}
+
+
+extension NSBox {
+  static func horizontalLine() -> NSBox {
+    let box = NSBox(frame: NSRect(origin: .zero, size: NSSize(width: 100, height: 1)))
+    box.boxType = .separator
+    return box
   }
 }
 

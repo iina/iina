@@ -7,10 +7,9 @@
 //
 
 import Cocoa
-import MASPreferences
 
 @objcMembers
-class PrefControlViewController: NSViewController, MASPreferencesViewController {
+class PrefControlViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     get {
@@ -18,27 +17,26 @@ class PrefControlViewController: NSViewController, MASPreferencesViewController 
     }
   }
 
-  var viewIdentifier: String = "PrefControlViewController"
-
-  var toolbarItemImage: NSImage? {
+  var preferenceTabTitle: String {
     get {
-      return #imageLiteral(resourceName: "toolbar_control")
-    }
-  }
-
-  var toolbarItemLabel: String? {
-    get {
-      view.layoutSubtreeIfNeeded()
       return NSLocalizedString("preference.control", comment: "Control")
     }
   }
 
-  var hasResizableWidth: Bool = false
-  var hasResizableHeight: Bool = false
+  override var sectionViews: [NSView] {
+    return [sectionTrackpadView, sectionMouseView]
+  }
+
+  @IBOutlet var sectionTrackpadView: NSView!
+  @IBOutlet var sectionMouseView: NSView!
+
+  @IBOutlet weak var forceTouchLabel: NSTextField!
+  @IBOutlet weak var scrollVerticallyLabel: NSTextField!
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do view setup here.
+
+    forceTouchLabel.widthAnchor.constraint(equalTo: scrollVerticallyLabel.widthAnchor, multiplier: 1).isActive = true
   }
 
 }

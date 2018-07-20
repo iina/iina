@@ -11,52 +11,6 @@ import Foundation
 extension PlayerCore {
 
   /**
-   Open a list of urls. If there are more than one urls, add the remaining ones to
-   playlist and disable auto loading.
-
-   - Returns: `nil` if no futher action is needed, like opened a BD Folder; otherwise the
-     count of playable files.
-   */
-  func openURLs(_ urls: [URL]) -> Int? {
-    guard !urls.isEmpty else { return 0 }
-
-    // handle BD folders and m3u / m3u8 files first
-    if urls.count == 1 && (isBDFolder(urls[0]) ||
-       Utility.playlistFileExt.contains(urls[0].absoluteString.lowercasedPathExtension)) {
-      info.shouldAutoLoadFiles = false
-      openURL(urls[0])
-      return nil
-    }
-
-    let playableFiles = getPlayableFiles(in: urls)
-    let count = playableFiles.count
-
-    // check playable files count
-    if count == 0 {
-      return 0
-    } else if count == 1 {
-      info.shouldAutoLoadFiles = true
-    } else {
-      info.shouldAutoLoadFiles = false
-    }
-
-    // open the first file
-    openURL(playableFiles[0])
-    // add the remaining to playlist
-    for i in 1..<count {
-      addToPlaylist(playableFiles[i].path)
-    }
-
-    // refresh playlist
-    postNotification(.iinaPlaylistChanged)
-    // send OSD
-    if count > 1 {
-      sendOSD(.addToPlaylist(count))
-    }
-    return count
-  }
-
-  /**
    Checks whether the path list contains playable file and performs early return if so. Don't use this method for a non-file URL.
    
    - Parameters:
@@ -71,7 +25,6 @@ extension PlayerCore {
         while let fileName = dirEnumerator.nextObject() as? String {
           // ignore hidden files
           guard !fileName.hasPrefix(".") else { continue }
-          // check extension
           if Utility.playableFileExt.contains(fileName.lowercasedPathExtension) {
             return true
           }
@@ -100,7 +53,7 @@ extension PlayerCore {
         playableFiles.append(url)
         continue
       }
-      if url.representsDirectory {
+      if url.hasDirectoryPath {
         // is directory
         // `enumerator(at:includingPropertiesForKeys:)` doesn't work :(
         guard let dirEnumerator = FileManager.default.enumerator(atPath: url.path) else { return [] }
@@ -162,39 +115,38 @@ extension PlayerCore {
 
    - Parameters:
      - sender: The `NSDraggingInfo` object received in `draggingEntered(_:)`.
+     - isPlaylist: True when the caller is `PlaylistViewController`
    - Returns: The `NSDragOperation`.
    */
-  func acceptFromPasteboard(_ sender: NSDraggingInfo) -> NSDragOperation {
+  func acceptFromPasteboard(_ sender: NSDraggingInfo, isPlaylist: Bool = false) -> NSDragOperation {
     // ignore events from this window
     // must check `mainWindow.isWindowLoaded` otherwise window will be lazy-loaded unexpectedly
     if mainWindow.isWindowLoaded && (sender.draggingSource() as? NSView)?.window === mainWindow.window {
       return []
     }
 
-    // get info
     let pb = sender.draggingPasteboard()
     guard let types = pb.types else { return [] }
 
     if types.contains(.nsFilenames) {
-      // filenames
-      guard let paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return [] }
+      guard var paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return [] }
+      paths = Utility.resolvePaths(paths)
       // check 3d lut files
       if paths.count == 1 && Utility.lut3dExt.contains(paths[0].lowercasedPathExtension) {
         return .copy
       }
-      // other files
-      let theOnlyPathIsBDFolder = paths.count == 1 && isBDFolder(URL(fileURLWithPath: paths[0]))
-      return theOnlyPathIsBDFolder ||
-        hasPlayableFiles(in: paths) ||
-        hasSubtitleFile(in: paths) ? .copy : []
-    } else if types.contains(.nsURL) {
-      // url
-      return .copy
-    } else if types.contains(.string) {
-      // string
-      guard let droppedString = pb.string(forType: .string) else {
-        return []
+
+      if isPlaylist {
+        return hasPlayableFiles(in: paths) ? .copy : []
+      } else {
+        let theOnlyPathIsBDFolder = paths.count == 1 && isBDFolder(URL(fileURLWithPath: paths[0]))
+        return theOnlyPathIsBDFolder ||
+          hasPlayableFiles(in: paths) ||
+          hasSubtitleFile(in: paths) ? .copy : []
       }
+    } else if types.contains(.nsURL) {
+      return .copy
+    } else if let droppedString = pb.string(forType: .string) {
       return Regex.url.matches(droppedString) || Regex.filePath.matches(droppedString) ? .copy : []
     }
     return []
@@ -208,13 +160,12 @@ extension PlayerCore {
    - Returns: The result for `performDragOperation(_:)`.
    */
   func openFromPasteboard(_ sender: NSDraggingInfo) -> Bool {
-    // get info
     let pb = sender.draggingPasteboard()
     guard let types = pb.types else { return false }
 
     if types.contains(.nsFilenames) {
-      // filenames
-      guard let paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return false }
+      guard var paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return false }
+      paths = Utility.resolvePaths(paths)
       // check 3d lut files
       if paths.count == 1 && Utility.lut3dExt.contains(paths[0].lowercasedPathExtension) {
         let result = addVideoFilter(MPVFilter(lavfiName: "lut3d", label: "iina_quickl3d", paramDict: [
@@ -226,7 +177,7 @@ extension PlayerCore {
         }
         return result
       }
-      // other files
+
       let urls = paths.map{ URL(fileURLWithPath: $0) }
       // try open files
       guard let loadedFileCount = openURLs(urls) else { return true }
@@ -234,7 +185,7 @@ extension PlayerCore {
         // if no playable files, try add subtitle files
         var loadedSubtitle = false
         for url in urls {
-          if !url.representsDirectory && Utility.supportedFileExt[.sub]!.contains(url.pathExtension.lowercased()) {
+          if !url.hasDirectoryPath && Utility.supportedFileExt[.sub]!.contains(url.pathExtension.lowercased()) {
             loadExternalSubFile(url)
             loadedSubtitle = true
           }
@@ -250,15 +201,10 @@ extension PlayerCore {
         return true
       }
     } else if types.contains(.nsURL) {
-      // url
       guard let url = pb.propertyList(forType: .nsURL) as? [String] else { return false }
       openURLString(url[0])
       return true
-    } else if types.contains(.string) {
-      // string
-      guard let droppedString = pb.string(forType: .string) else {
-        return false
-      }
+    } else if let droppedString = pb.string(forType: .string) {
       if Regex.url.matches(droppedString) || Regex.filePath.matches(droppedString) {
         openURLString(droppedString)
         return true

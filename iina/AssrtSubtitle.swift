@@ -10,6 +10,8 @@ import Foundation
 import Just
 import PromiseKit
 
+fileprivate let subsystem = Logger.Subsystem(rawValue: "assrt")
+
 final class AssrtSubtitle: OnlineSubtitle {
 
   struct File {

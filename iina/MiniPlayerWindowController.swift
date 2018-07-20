@@ -20,6 +20,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     return NSNib.Name("MiniPlayerWindowController")
   }
 
+  @objc let monospacedFont: NSFont = {
+    let fontSize = NSFont.systemFontSize(for: .mini)
+    return NSFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
+  }()
+
   unowned var player: PlayerCore
 
   var menuActionHandler: MainMenuActionHandler!
@@ -144,11 +149,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
 
     backgroundView.state = .active
     [backgroundView, playlistWrapperView].forEach { view in
-      if #available(OSX 10.11, *) {
-        view?.material = .ultraDark
-      } else {
-        view?.material = .dark
-      }
+      view?.material = .ultraDark
     }
 
     // default album art
@@ -170,6 +171,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     NotificationCenter.default.addObserver(self, selector: #selector(updateTrack), name: .iinaMediaTitleChanged, object: player)
 
     updateVolume()
+    updatePlayButtonState(player.info.isPaused ? .off : .on)
+    rightLabel.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .duration
 
     if Preference.bool(for: .alwaysFloatOnTop) {
       setWindowFloatingOnTop(true)
@@ -210,10 +213,10 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
         if let iinaCommand = IINACommand(rawValue: kb.rawAction) {
           handleIINACommand(iinaCommand)
         } else {
-          Utility.log("Unknown iina command \(kb.rawAction)")
+          Logger.log("Unknown iina command \(kb.rawAction)", level: .error)
         }
       } else {
-        // - MPV command
+        // - mpv command
         let returnValue: Int32
         // execute the command
         switch kb.action[0] {
@@ -225,7 +228,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
         }
         // handle return value
         if returnValue != 0 {
-          Utility.log("Return value \(returnValue) when executing key command \(kb.rawAction)")
+          Logger.log("Return value \(returnValue) when executing key command \(kb.rawAction)", level: .warning)
         }
       }
     } else {
@@ -307,7 +310,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
     guard isWindowLoaded else { return }
     guard let duration = player.info.videoDuration, let pos = player.info.videoPosition else {
-      Utility.fatal("video info not available")
+      Logger.fatal("video info not available")
     }
     let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
@@ -345,8 +348,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   func updateVolume() {
     guard isWindowLoaded else { return }
     volumeSlider.doubleValue = player.info.volume
-    volumeLabel.intValue = Int32(Int(player.info.volume))
-    volumeButton.title = "\(Int(player.info.volume))"
+    volumeLabel.intValue = Int32(player.info.volume)
+    muteButton.state = player.info.isMuted ? .on : .off
   }
 
   func updateVideoSize() {
@@ -357,8 +360,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     let currentHeight = videoView.frame.height
     let newHeight = videoView.frame.width / aspect
     updateVideoViewAspectConstraint(withAspect: aspect)
-    // default album art
-    defaultAlbumArt.isHidden = !player.info.videoTracks.isEmpty
     // resize window
     var frame = window.frame
     frame.size.height += newHeight - currentHeight - 0.5
@@ -420,8 +421,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   }
 
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
-    let value = sender.doubleValue
-    player.setVolume(value)
+    player.mainWindow.volumeSliderChanges(sender)
   }
 
   @IBAction func backBtnAction(_ sender: NSButton) {

@@ -1,6 +1,3 @@
-/* Class = "NSTextFieldCell"; title = "Theme:"; ObjectID = "2Hu-qC-UMi"; */
-"2Hu-qC-UMi.title" = "테마:";
-
 /* Class = "NSButtonCell"; title = "Keep window open when playback finished"; ObjectID = "2iM-j7-AzQ"; */
 "2iM-j7-AzQ.title" = "재생이 끝난 후에도 윈도우를 닫지 않음";
 
@@ -67,9 +64,6 @@
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "oJY-Iz-3sO"; */
 "oJY-Iz-3sO.title" = "파일형식:";
 
-/* Class = "NSTextFieldCell"; title = "Appearance:"; ObjectID = "pHB-yo-Ret"; */
-"pHB-yo-Ret.title" = "모양새:";
-
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
 "pdx-zt-kf2.title" = "스크린샷:";
 
@@ -132,3 +126,7 @@
 "lOw-pu-Llm.title" = "전체 화면 전환시 재생 시작";
 
 "g2A-Kf-vct.title" = "전체 화면 중단시 일시 정지";
+
+/* Class = "NSButtonCell"; title = "Switch to "music mode" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
+"KfL-r7-Uav.title" = "음악을 재생할 때 \"음악 모드\"로 자동 전환";
+

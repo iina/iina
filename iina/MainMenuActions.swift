@@ -174,7 +174,7 @@ extension MainMenuActionHandler {
       player.setVideoAspect(aspectStr)
       player.sendOSD(.aspect(aspectStr))
     } else {
-      Utility.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject.debugDescription)")
+      Logger.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject.debugDescription)", level: .error)
     }
   }
 
@@ -182,7 +182,7 @@ extension MainMenuActionHandler {
     if let cropStr = sender.representedObject as? String {
       player.setCrop(fromString: cropStr)
     } else {
-      Utility.log("sender.representedObject is not a string in menuChangeCrop()")
+      Logger.log("sender.representedObject is not a string in menuChangeCrop()", level: .error)
     }
   }
 
@@ -221,7 +221,7 @@ extension MainMenuActionHandler {
       let newVolume = Double(volumeDelta) + player.info.volume
       player.setVolume(newVolume)
     } else {
-      Utility.log("sender.representedObject is not int in menuChangeVolume()")
+      Logger.log("sender.representedObject is not int in menuChangeVolume()", level: .error)
     }
   }
 
@@ -234,7 +234,7 @@ extension MainMenuActionHandler {
       let newDelay = player.info.audioDelay + delayDelta
       player.setAudioDelay(newDelay)
     } else {
-      Utility.log("sender.representedObject is not Double in menuChangeAudioDelay()")
+      Logger.log("sender.representedObject is not Double in menuChangeAudioDelay()", level: .error)
     }
   }
 
@@ -257,7 +257,7 @@ extension MainMenuActionHandler {
       let newDelay = player.info.subDelay + delayDelta
       player.setSubDelay(newDelay)
     } else {
-      Utility.log("sender.representedObject is not Double in menuChangeSubDelay()")
+      Logger.log("sender.representedObject is not Double in menuChangeSubDelay()", level: .error)
     }
   }
 
@@ -295,7 +295,7 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuFindOnlineSub(_ sender: NSMenuItem) {
-    // return if last search is undone
+    // return if last search is not finished
     guard let url = player.info.currentURL, !player.isSearchingOnlineSubtitle else { return }
 
     player.isSearchingOnlineSubtitle = true
@@ -312,7 +312,7 @@ extension MainMenuActionHandler {
           switch result {
           case .ok(let urls):
             for url in urls {
-              Utility.log("Saved subtitle to \(url.path)")
+              Logger.log("Saved subtitle to \(url.path)")
               self.player.loadExternalSubFile(url)
             }
             self.player.sendOSD(.downloadedSub(
@@ -324,6 +324,7 @@ extension MainMenuActionHandler {
           }
         }
       }
+      self.player.isSearchingOnlineSubtitle = false
     }
   }
 

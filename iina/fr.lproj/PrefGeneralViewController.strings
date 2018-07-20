@@ -3,9 +3,6 @@
 /* Class = "NSMenuItem"; title = "Show open file panel"; ObjectID = "1ce-4b-kgG"; */
 "1ce-4b-kgG.title" = "Ouvrir un fichier";
 
-/* Class = "NSTextFieldCell"; title = "Theme:"; ObjectID = "2Hu-qC-UMi"; */
-"2Hu-qC-UMi.title" = "Thème :";
-
 /* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
 "2iM-j7-AzQ.title" = "Laisser la fenêtre ouverte après la fin de lecture";
 
@@ -14,12 +11,6 @@
 
 /* Class = "NSMenuItem"; title = "PNG"; ObjectID = "3XO-ks-TDg"; */
 "3XO-ks-TDg.title" = "PNG";
-
-/* Class = "NSMenuItem"; title = "Ultra Dark"; ObjectID = "3XV-iO-y0C"; */
-"3XV-iO-y0C.title" = "Très sombre";
-
-/* Class = "NSMenuItem"; title = "Light"; ObjectID = "49l-le-9k6"; */
-"49l-le-9k6.title" = "Clair";
 
 /* Class = "NSButtonCell"; title = "Enable "Open Recent" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "Activer le menu \"Ouvrir l'élément récent\"";
@@ -63,6 +54,9 @@
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Assombrir les autres moniteurs en mode plein écran";
 
+/* Class = "NSButtonCell"; title = "Switch to "music mode" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
+"KfL-r7-Uav.title" = "Passer en \"mode musique\" automatiquement durant la lecture d'un fichier audio";
+
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Jouer le fichier suivant automatiquement";
 
@@ -92,9 +86,6 @@
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
 "YeH-hk-7NN.title" = "/path/to/screenshot/folder";
-
-/* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "bPK-Wy-OMI"; */
-"bPK-Wy-OMI.title" = "Moyennement clair";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Recevoir les mises à jour beta";
@@ -126,14 +117,8 @@
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "oJY-Iz-3sO"; */
 "oJY-Iz-3sO.title" = "Format :";
 
-/* Class = "NSTextFieldCell"; title = "Appearance:"; ObjectID = "pHB-yo-Ret"; */
-"pHB-yo-Ret.title" = "Apparence :";
-
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
 "pdx-zt-kf2.title" = "Captures d'écran :";
-
-/* Class = "NSMenuItem"; title = "Dark"; ObjectID = "qeB-ls-rwg"; */
-"qeB-ls-rwg.title" = "Sombre";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "heures";

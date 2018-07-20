@@ -123,19 +123,8 @@ class MPVController: NSObject {
     }
 
     // log
-    let enableLog = Preference.bool(for: .enableLogging)
-    if enableLog {
-      let date = Date()
-      let calendar = NSCalendar.current
-      let y = calendar.component(.year, from: date)
-      let m = calendar.component(.month, from: date)
-      let d = calendar.component(.day, from: date)
-      let h = calendar.component(.hour, from: date)
-      let mm = calendar.component(.minute, from: date)
-      let s = calendar.component(.second, from: date)
-      let token = Utility.ShortCodeGenerator.getCode(length: 6)
-      let logFileName = "\(y)-\(m)-\(d)-\(h)-\(mm)-\(s)_\(token).log"
-      let path = Utility.logDirURL.appendingPathComponent(logFileName).path
+    if Logger.enabled {
+      let path = Logger.logDirectory.appendingPathComponent("mpv.log").path
       chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.logFile, path))
     }
 
@@ -173,8 +162,8 @@ class MPVController: NSObject {
     }
 
     chkErr(mpv_set_option_string(mpv, "watch-later-directory", Utility.watchLaterURL.path))
-    chkErr(mpv_set_option_string(mpv, "resume-playback", "yes"))
     chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.savePositionOnQuit, "no"))
+    setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback")
 
     setUserOption(.initialWindowSizePosition, type: .string, forName: MPVOption.Window.geometry)
 
@@ -196,6 +185,8 @@ class MPVController: NSObject {
     if Preference.bool(for: PK.spdifDTS){ spdif.append("dts") }
     if Preference.bool(for: PK.spdifDTSHD) { spdif.append("dts-hd") }
     setString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","))
+
+    setUserOption(PK.audioDevice, type: .string, forName: MPVOption.Audio.audioDevice)
 
     // - Sub
 
@@ -274,6 +265,8 @@ class MPVController: NSObject {
 
     setUserOption(PK.ytdlEnabled, type: .bool, forName: MPVOption.ProgramBehavior.ytdl)
     setUserOption(PK.ytdlRawOptions, type: .string, forName: MPVOption.ProgramBehavior.ytdlRawOptions)
+    chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.resetOnNextFile,
+            "\(MPVOption.PlaybackControl.abLoopA),\(MPVOption.PlaybackControl.abLoopB)"))
 
     // Set user defined conf dir.
     if Preference.bool(for: .useUserDefinedConfDir) {
@@ -360,7 +353,7 @@ class MPVController: NSObject {
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {
     guard mpv != nil else { return }
     if args.count > 0 && args.last == nil {
-      Utility.fatal("Command do not need a nil suffix")
+      Logger.fatal("Command do not need a nil suffix")
     }
     var strArgs = args
     strArgs.insert(command.rawValue, at: 0)
@@ -441,7 +434,7 @@ class MPVController: NSObject {
 
   /** Get filter. only "af" or "vf" is supported for name */
   func getFilters(_ name: String) -> [MPVFilter] {
-    Utility.assert(name == MPVProperty.vf || name == MPVProperty.af, "getFilters() do not support \(name)!")
+    Logger.ensure(name == MPVProperty.vf || name == MPVProperty.af, "getFilters() do not support \(name)!")
 
     var result: [MPVFilter] = []
     var node = mpv_node()
@@ -459,7 +452,7 @@ class MPVController: NSObject {
 
   /** Set filter. only "af" or "vf" is supported for name */
   func setFilters(_ name: String, filters: [MPVFilter]) {
-    Utility.assert(name == MPVProperty.vf || name == MPVProperty.af, "setFilters() do not support \(name)!")
+    Logger.ensure(name == MPVProperty.vf || name == MPVProperty.af, "setFilters() do not support \(name)!")
     let cmd = name == MPVProperty.vf ? MPVCommand.vf : MPVCommand.af
 
     let str = filters.map { $0.stringFormat }.joined(separator: ",")
@@ -516,7 +509,7 @@ class MPVController: NSObject {
       let prefix = String(cString: (msg?.pointee.prefix)!)
       let level = String(cString: (msg?.pointee.level)!)
       let text = String(cString: (msg?.pointee.text)!)
-      Utility.log("MPV log: [\(prefix)] \(level): \(text)")
+      Logger.log("mpv log: [\(prefix)] \(level): \(text)", level: .warning, subsystem: .general, appendNewlineAtTheEnd: false)
 
     case MPV_EVENT_PROPERTY_CHANGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
@@ -536,7 +529,9 @@ class MPVController: NSObject {
       player.info.isIdle = false
       guard getString(MPVProperty.path) != nil else { break }
       player.fileStarted()
-      player.sendOSD(.fileStart(player.info.currentURL?.lastPathComponent ?? "-"))
+      let url = player.info.currentURL
+      let message = player.info.isNetworkResource ? url?.absoluteString : url?.lastPathComponent
+      player.sendOSD(.fileStart(message ?? "-"))
 
     case MPV_EVENT_FILE_LOADED:
       onFileLoaded()
@@ -589,7 +584,7 @@ class MPVController: NSObject {
 
     default:
       // let eventName = String(cString: mpv_event_name(eventId))
-      // Utility.log("MPV event (unhandled): \(eventName)")
+      // Utility.log("mpv event (unhandled): \(eventName)")
       break
     }
   }
@@ -902,7 +897,7 @@ class MPVController: NSObject {
 
     case .other:
       guard let tr = transformer else {
-        Utility.log("setUserOption: no transformer!")
+        Logger.log("setUserOption: no transformer!", level: .error)
         return
       }
       if let value = tr(key) {
@@ -957,7 +952,7 @@ class MPVController: NSObject {
 
       case .other:
         guard let tr = info.transformer else {
-          Utility.log("setUserOption: no transformer!")
+          Logger.log("setUserOption: no transformer!", level: .error)
           return
         }
         if let value = tr(info.prefKey) {
@@ -975,7 +970,7 @@ class MPVController: NSObject {
   private func chkErr(_ status: Int32!) {
     guard status < 0 else { return }
     DispatchQueue.main.async {
-      Utility.fatal("MPV API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
+      Logger.fatal("mpv API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
     }
   }
 

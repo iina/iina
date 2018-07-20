@@ -14,13 +14,7 @@ class FilterWindowController: NSWindowController {
     return NSNib.Name("FilterWindowController")
   }
 
-  @objc let monospacedFont: NSFont = {
-    if #available(OSX 10.11, *) {
-      return NSFont.monospacedDigitSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)
-    } else {
-      return NSFont.systemFont(ofSize: NSFont.systemFontSize)
-    }
-  }()
+  @objc let monospacedFont: NSFont = NSFont.monospacedDigitSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)
 
   @IBOutlet weak var splitView: NSSplitView!
   @IBOutlet weak var splitViewUpperView: NSView!
@@ -351,9 +345,9 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     switch param.type {
     case .text:
       // Text field
-      let label = ShortcutAvailableTextField(frame: NSRect(x: 4, y: yPos,
-                                            width: scrollContentView.frame.width - 8,
-                                            height: 22))
+      let label = NSTextField(frame: NSRect(x: 4, y: yPos,
+                              width: scrollContentView.frame.width - 8,
+                              height: 22))
       label.stringValue = param.defaultValue.stringValue
       label.isSelectable = false
       label.isEditable = true

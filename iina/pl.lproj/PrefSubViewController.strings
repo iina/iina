@@ -73,7 +73,7 @@
 "Luv-2B-9v8.title" = "Katalogi są oddzielone dwukropkami (:). Dopuszczalne są ścieżki względne i znaki wieloznaczne (*) na końcu.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
-"Mk1-sv-QB8.title" = "Proszę podać listę ciągów znaków oddzielonych przecinkami.";
+"Mk1-sv-QB8.title" = "Proszę podać listę oddzieloną przecinkami.";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
 "OcF-0z-7qe.title" = "Kiedy włączone, wszystkie napisy ASS będą wyświetlane ze stylem wybranym poniżej.";
@@ -106,7 +106,7 @@
 "Y75-4k-2Du.title" = "Domyślne kodowanie:";
 
 /* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
-"Z2M-dh-eq1.title" = "Opcja zostanie przechowywana jako kod języka ISO 639-2 oraz będzie działać zarówno z MPV jak i OpenSubtitles.";
+"Z2M-dh-eq1.title" = "Opcja zostanie przechowywana jako kod języka ISO 639-2 oraz będzie działać zarówno z mpv jak i OpenSubtitles.";
 
 /* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
 "aO9-D6-KG8.title" = "Blur:";
@@ -186,7 +186,7 @@
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
 "y1E-JR-KRI.title" = "Napisy zawierające nazwę pliku multimedialnego";
 
-/* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "zaE-bH-XfT"; */
+/* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
 "zaE-bH-XfT.title" = "Preferowany język:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */

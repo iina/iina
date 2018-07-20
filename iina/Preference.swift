@@ -107,10 +107,8 @@ struct Preference {
 
     static let controlBarToolbarButtons = Key("controlBarToolbarButtons")
 
-    /** OSD auto hide timeout (float) */
+    static let enableOSD = Key("enableOSD")
     static let osdAutoHideTimeout = Key("osdAutoHideTimeout")
-
-    /** OSD text size (float) */
     static let osdTextSize = Key("osdTextSize")
 
     static let usePhysicalResolution = Key("usePhysicalResolution")
@@ -143,6 +141,9 @@ struct Preference {
     static let spdifAC3 = Key("spdifAC3")
     static let spdifDTS = Key("spdifDTS")
     static let spdifDTSHD = Key("spdifDTSHD")
+
+    static let audioDevice = Key("audioDevice")
+    static let audioDeviceDesc = Key("audioDeviceDesc")
 
     static let enableInitialVolume = Key("enableInitialVolume")
     static let initialVolume = Key("initialVolume")
@@ -241,6 +242,7 @@ struct Preference {
 
     /** Log to log folder (bool) */
     static let enableLogging = Key("enableLogging")
+    static let logLevel = Key("logLevel")
 
     /** unused */
     // static let resizeFrameBuffer = Key("resizeFrameBuffer")
@@ -626,6 +628,7 @@ struct Preference {
     .playlistWidth: 270,
     .prefetchPlaylistVideoDuration: true,
     .themeMaterial: Theme.dark.rawValue,
+    .enableOSD: true,
     .osdAutoHideTimeout: Float(1),
     .osdTextSize: Float(20),
     .softVolume: 100,
@@ -666,6 +669,8 @@ struct Preference {
     .spdifAC3: false,
     .spdifDTS: false,
     .spdifDTSHD: false,
+    .audioDevice: "auto",
+    .audioDeviceDesc: "Autoselect device",
     .enableInitialVolume: false,
     .initialVolume: 100,
 
@@ -718,6 +723,7 @@ struct Preference {
     .enableAdvancedSettings: false,
     .useMpvOsd: false,
     .enableLogging: false,
+    .logLevel: Logger.Level.debug.rawValue,
     .userOptions: [],
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",

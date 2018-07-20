@@ -19,8 +19,10 @@ class Utility {
     .sub: ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc"]
   ]
   static let playableFileExt = supportedFileExt[.video]! + supportedFileExt[.audio]!
-  static let playlistFileExt = ["m3u", "m3u8", "pls", "cue"]
-  static let blacklistExt = supportedFileExt[.sub]! + playlistFileExt
+  static let singleFilePlaylistExt = ["cue"]
+  static let multipleFilePlaylistExt = ["m3u", "m3u8", "pls"]
+  static let playlistFileExt = singleFilePlaylistExt + multipleFilePlaylistExt
+  static let blacklistExt = supportedFileExt[.sub]! + multipleFilePlaylistExt
   static let lut3dExt = ["3dl", "cube", "dat", "m3d"]
 
   // MARK: - Logs, alerts
@@ -76,28 +78,6 @@ class Utility {
     alert.runModal()
   }
 
-  static func log(_ message: String) {
-    NSLog("%@", message)
-  }
-
-  static func assert(_ expr: Bool, _ errorMessage: String, _ block: () -> Void = {}) {
-    if !expr {
-      NSLog("%@", errorMessage)
-      showAlert("fatal_error", arguments: [errorMessage])
-      block()
-      exit(1)
-    }
-  }
-
-  static func fatal(_ message: String, _ block: () -> Void = {}) -> Never {
-    NSLog("%@\n", message)
-    NSLog(Thread.callStackSymbols.joined(separator: "\n"))
-    showAlert("fatal_error", arguments: [message])
-    block()
-    // Exit without crash since it's not uncatched/unhandled
-    exit(1)
-  }
-
   // MARK: - Panels, Alerts
 
   /** 
@@ -108,7 +88,7 @@ class Utility {
      - messageComment: (Optional) Comment for message key.
    - Returns: Whether user dismissed the panel by clicking OK.
    */
-  static func quickAskPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil) -> Bool {
+  static func quickAskPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, useSheet: Bool = false, sheetCallback: ((Bool) -> Void)? = nil) -> Bool {
     let panel = NSAlert()
     let titleKey = "alert." + key + ".title"
     let messageKey = "alert." + key + ".message"
@@ -116,7 +96,16 @@ class Utility {
     panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
-    return panel.runModal() == .alertFirstButtonReturn
+    if useSheet {
+      panel.beginSheetModal(for: NSApp.keyWindow ?? NSApp.mainWindow ?? NSApp.windows[0]) { response in
+        if let sheetCallback = sheetCallback {
+          sheetCallback(response == .alertFirstButtonReturn)
+        }
+      }
+      return false
+    } else {
+      return panel.runModal() == .alertFirstButtonReturn
+    }
   }
 
   /**
@@ -188,11 +177,11 @@ class Utility {
       panel.begin(completionHandler: handler)
     case .sheet:
       guard let sheetWindow = sheetWindow else {
-        Utility.fatal("No sheet window")
+        Logger.fatal("No sheet window")
       }
       panel.beginSheet(sheetWindow, completionHandler: handler)
     default:
-      Utility.log("quickSavePanel: Unsupported mode")
+      Logger.log("quickSavePanel: Unsupported mode", level: .error)
     }
   }
 
@@ -215,7 +204,7 @@ class Utility {
     let messageKey = "alert." + key + ".message"
     panel.messageText = NSLocalizedString(titleKey, comment: titleComment ?? titleKey)
     panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
-    let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
+    let input = NSTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
     input.lineBreakMode = .byClipping
     input.usesSingleLineMode = true
     input.cell?.isScrollable = true
@@ -235,7 +224,7 @@ class Utility {
       }
     case .sheetModal:
       guard let sheetWindow = sheetWindow else {
-        Utility.fatal("No sheet window")
+        Logger.fatal("No sheet window")
       }
       panel.beginSheetModal(for: sheetWindow) { response in
         if response == .alertFirstButtonReturn {
@@ -244,7 +233,7 @@ class Utility {
       }
       return false
     default:
-      Utility.log("quickPromptPanel: Unsupported mode")
+      Logger.log("quickPromptPanel: Unsupported mode", level: .error)
       return false
     }
   }
@@ -275,7 +264,7 @@ class Utility {
     panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
     let view = NSView(frame: NSRect(x: 0, y: 0, width: 240, height: 82))
     view.addSubview(quickLabel(NSLocalizedString("general.username", comment: "Username") + ":", 68))
-    let input = ShortcutAvailableTextField(frame: NSRect(x: 0, y: 42, width: 240, height: 24))
+    let input = NSTextField(frame: NSRect(x: 0, y: 42, width: 240, height: 24))
     input.lineBreakMode = .byClipping
     input.usesSingleLineMode = true
     input.cell?.isScrollable = true
@@ -317,35 +306,6 @@ class Utility {
     return (version, build)
   }
 
-  static func setSelfAsDefaultForAllFileTypes() {
-    guard
-    let docTypes = Bundle.main.infoDictionary?["CFBundleDocumentTypes"] as? [[String: Any]],
-    let cfBundleID = Bundle.main.bundleIdentifier as CFString?
-    else { return }
-
-    guard quickAskPanel("set_default") else { return }
-
-    var successCount = 0
-    var failedCount = 0
-    Utility.log("Set self as default...")
-    for docType in docTypes {
-      if let exts = docType["CFBundleTypeExtensions"] as? [String] {
-        for ext in exts {
-          let utiString = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, ext as CFString, nil)!.takeUnretainedValue()
-          let status = LSSetDefaultRoleHandlerForContentType(utiString, .all, cfBundleID)
-          if status == kOSReturnSuccess {
-            successCount += 1
-          } else {
-            Utility.log("failed for \(ext): return value \(status)")
-            failedCount += 1
-          }
-        }
-      }
-    }
-
-    showAlert("set_default.success", arguments: [successCount, failedCount], style: .informational)
-  }
-
   static func createDirIfNotExist(url: URL) {
     let path = url.path
     // check exist
@@ -353,7 +313,7 @@ class Utility {
       do {
       try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
       } catch {
-        Utility.fatal("Cannot create directory: \(url)")
+        Logger.fatal("Cannot create directory: \(url)")
       }
     }
   }
@@ -382,7 +342,7 @@ class Utility {
   static let appSupportDirUrl: URL = {
     // get path
     let asPath = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-    Utility.assert(asPath.count >= 1, "Cannot get path to Application Support directory")
+    Logger.ensure(asPath.count >= 1, "Cannot get path to Application Support directory")
     let bundleID = Bundle.main.bundleIdentifier!
     let appAsUrl = asPath.first!.appendingPathComponent(bundleID)
     createDirIfNotExist(url: appAsUrl)
@@ -398,7 +358,7 @@ class Utility {
   static let logDirURL: URL = {
     // get path
     let libraryPath = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)
-    Utility.assert(libraryPath.count >= 1, "Cannot get path to Logs directory")
+    Logger.ensure(libraryPath.count >= 1, "Cannot get path to Logs directory")
     let logsUrl = libraryPath.first!.appendingPathComponent("Logs", isDirectory: true)
     let bundleID = Bundle.main.bundleIdentifier!
     let appLogsUrl = logsUrl.appendingPathComponent(bundleID, isDirectory: true)
@@ -415,7 +375,7 @@ class Utility {
   static let thumbnailCacheURL: URL = {
     // get path
     let cachesPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
-    Utility.assert(cachesPath.count >= 1, "Cannot get path to Caches directory")
+    Logger.ensure(cachesPath.count >= 1, "Cannot get path to Caches directory")
     let bundleID = Bundle.main.bundleIdentifier!
     let appCachesUrl = cachesPath.first!.appendingPathComponent(bundleID, isDirectory: true)
     let appThumbnailCacheUrl = appCachesUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)
@@ -566,6 +526,13 @@ class Utility {
     }
   }
 
+  static func resolvePaths(_ paths: [String]) -> [String] {
+    return paths.map { (try? URL(resolvingAliasFileAt: URL(fileURLWithPath: $0)))?.path ?? $0 }
+  }
+
+  static func resolveURLs(_ urls: [URL]) -> [URL] {
+    return urls.map { (try? URL(resolvingAliasFileAt: $0)) ?? $0 }
+  }
 
 }
 

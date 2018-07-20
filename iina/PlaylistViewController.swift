@@ -97,7 +97,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     playlistTableView.target = self
     
     // register for drag and drop
-    playlistTableView.registerForDraggedTypes([.iinaPlaylistItem, .nsFilenames])
+    playlistTableView.registerForDraggedTypes([.iinaPlaylistItem, .nsFilenames, .nsURL, .string])
 
     if let popoverView = subPopover.contentViewController?.view,
       popoverView.trackingAreas.isEmpty {
@@ -189,20 +189,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
 
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
-    let pasteboard = info.draggingPasteboard()
     playlistTableView.setDropRow(row, dropOperation: .above)
     if info.draggingSource() as? NSTableView === tableView {
       return .move
     }
-    if (info.draggingSource() as? NSView)?.window === mainWindow.window {
-      return []
-    }
-    if let paths = pasteboard.propertyList(forType: .nsFilenames) as? [String] {
-      if player.hasPlayableFiles(in: paths) {
-        return .copy
-      }
-    }
-    return []
+    return player.acceptFromPasteboard(info, isPlaylist: true)
   }
 
   func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
@@ -252,11 +243,15 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         player.addToPlaylist(paths: before, at: 0)
       }
     } else if let paths = pasteboard.propertyList(forType: .nsFilenames) as? [String] {
-      let playableFiles = player.getPlayableFiles(in: paths.map{ URL(fileURLWithPath: $0) })
+      let playableFiles = Utility.resolveURLs(player.getPlayableFiles(in: paths.map{ URL(fileURLWithPath: $0) }))
       if playableFiles.count == 0 {
         return false
       }
       player.addToPlaylist(paths: playableFiles.map { $0.path }, at: row)
+    } else if let urls = pasteboard.propertyList(forType: .nsURL) as? [String] {
+      player.addToPlaylist(paths: urls, at: row)
+    } else if let droppedString = pasteboard.string(forType: .string), Regex.url.matches(droppedString) {
+      player.addToPlaylist(paths: [droppedString], at: row)
     } else {
       return false
     }
@@ -392,21 +387,21 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           cellView.textField?.stringValue = filename
         }
         // playback progress and duration
-        if #available(OSX 10.11, *) {
-          cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
-        }
+        cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
+        cellView.durationLabel.stringValue = ""
         if let cached = player.info.cachedVideoDurationAndProgress[item.filename],
           let duration = cached.duration {
           // if it's cached
-          cellView.durationLabel.stringValue = VideoTime(duration).stringRepresentation
-          if let progress = cached.progress {
-            cellView.playbackProgressView.percentage = progress / duration
-            cellView.playbackProgressView.needsDisplay = true
+          if duration > 0 {
+            // if FFmpeg got the duration succcessfully
+            cellView.durationLabel.stringValue = VideoTime(duration).stringRepresentation
+            if let progress = cached.progress {
+              cellView.playbackProgressView.percentage = progress / duration
+              cellView.playbackProgressView.needsDisplay = true
+            }
           }
         } else {
           // get related data and schedule a reload
-          cellView.durationLabel.stringValue = ""
-          cellView.playbackProgressView.percentage = 0
           if Preference.bool(for: .prefetchPlaylistVideoDuration) {
             player.playlistQueue.async {
               self.player.refreshCachedVideoProgress(forVideoPath: item.filename)
@@ -505,9 +500,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   @IBAction func contextMenuPlayInNewWindow(_ sender: NSMenuItem) {
-    guard let firstRow = selectedRows?.first, firstRow >= 0 else { return }
-    let filename = player.info.playlist[firstRow].filename
-    PlayerCore.newPlayerCore.openURL(URL(fileURLWithPath: filename))
+    let files = selectedRows!.enumerated().map { (_, i) in
+      URL(fileURLWithPath: player.info.playlist[i].filename)
+    }
+    PlayerCore.newPlayerCore.openURLs(files, shouldAutoLoad: false)
   }
 
   @IBAction func contextMenuRemove(_ sender: NSMenuItem) {
@@ -526,6 +522,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     var count = 0
     for index in selectedRows {
       player.playlistRemove(index)
+      guard !player.info.playlist[index].isNetworkResource else { continue }
       let url = URL(fileURLWithPath: player.info.playlist[index].filename)
       do {
         try FileManager.default.trashItem(at: url, resultingItemURL: nil)
@@ -547,7 +544,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     guard let selectedRows = selectedRows else { return }
     var urls: [URL] = []
     for index in selectedRows {
-      urls.append(URL(fileURLWithPath: player.info.playlist[index].filename))
+      if !player.info.playlist[index].isNetworkResource {
+        urls.append(URL(fileURLWithPath: player.info.playlist[index].filename))
+      }
     }
     playlistTableView.deselectAll(nil)
     NSWorkspace.shared.activateFileViewerSelecting(urls)
@@ -593,22 +592,27 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       result.addItem(withTitle: NSLocalizedString("pl_menu.play_in_new_window", comment: "Play in New Window"), action: #selector(self.contextMenuPlayInNewWindow(_:)))
       result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.remove" : "pl_menu.remove_multi", comment: "Remove"), action: #selector(self.contextMenuRemove(_:)))
 
-      result.addItem(NSMenuItem.separator())
-      if isSingleItem {
-        result.addItem(withTitle: String(format: NSLocalizedString("pl_menu.matched_sub", comment: "Matched %d Subtitle(s)"), matchedSubCount))
-        result.addItem(withTitle: NSLocalizedString("pl_menu.add_sub", comment: "Add Subtitle…"), action: #selector(self.contextMenuAddSubtitle(_:)))
-      }
-      if matchedSubCount != 0 {
-        result.addItem(withTitle: NSLocalizedString("pl_menu.wrong_sub", comment: "Wrong Subtitle"), action: #selector(self.contextMenuWrongSubtitle(_:)))
+      if !player.isInMiniPlayer {
+        result.addItem(NSMenuItem.separator())
+        if isSingleItem {
+          result.addItem(withTitle: String(format: NSLocalizedString("pl_menu.matched_sub", comment: "Matched %d Subtitle(s)"), matchedSubCount))
+          result.addItem(withTitle: NSLocalizedString("pl_menu.add_sub", comment: "Add Subtitle…"), action: #selector(self.contextMenuAddSubtitle(_:)))
+        }
+        if matchedSubCount != 0 {
+          result.addItem(withTitle: NSLocalizedString("pl_menu.wrong_sub", comment: "Wrong Subtitle"), action: #selector(self.contextMenuWrongSubtitle(_:)))
+        }
       }
 
       result.addItem(NSMenuItem.separator())
-      result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
-      // result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete_after_play" : "pl_menu.delete_after_play_multi", comment: "Delete After Playback"), action: #selector(self.contextMenuDeleteFileAfterPlayback(_:)))
 
-      // result.addItem(NSMenuItem.separator())
-      result.addItem(withTitle: NSLocalizedString("pl_menu.reveal_in_finder", comment: "Reveal in Finder"), action: #selector(self.contextMenuRevealInFinder(_:)))
-      result.addItem(NSMenuItem.separator())
+      // file related operations
+      if rows.contains (where: {!player.info.playlist[$0].isNetworkResource}) {
+        result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
+        // result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete_after_play" : "pl_menu.delete_after_play_multi", comment: "Delete After Playback"), action: #selector(self.contextMenuDeleteFileAfterPlayback(_:)))
+
+        result.addItem(withTitle: NSLocalizedString("pl_menu.reveal_in_finder", comment: "Reveal in Finder"), action: #selector(self.contextMenuRevealInFinder(_:)))
+        result.addItem(NSMenuItem.separator())
+      }
     }
     result.addItem(withTitle: NSLocalizedString("pl_menu.add_file", comment: "Add File"), action: #selector(self.addFileAction(_:)))
     result.addItem(withTitle: NSLocalizedString("pl_menu.add_url", comment: "Add URL"), action: #selector(self.addURLAction(_:)))
@@ -664,7 +668,7 @@ class PlaylistView: NSView {
     addCursorRect(rect, cursor: .resizeLeftRight)
   }
 
-  override var allowsVibrancy: Bool { return true }
+  // override var allowsVibrancy: Bool { return true }
 
 }
 

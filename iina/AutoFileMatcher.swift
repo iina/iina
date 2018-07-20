@@ -8,6 +8,8 @@
 
 import Foundation
 
+fileprivate let subsystem = Logger.Subsystem(rawValue: "fmatcher")
+
 class AutoFileMatcher {
 
   private enum AutoMatchingError: Error {
@@ -43,6 +45,7 @@ class AutoFileMatcher {
     // get all files in current directory
     guard let files = try? fm.contentsOfDirectory(at: currentFolder, includingPropertiesForKeys: nil, options: searchOptions) else { return }
 
+    Logger.log("Getting all media files...", subsystem: subsystem)
     // group by extension
     for file in files {
       let fileInfo = FileInfo(file)
@@ -51,12 +54,16 @@ class AutoFileMatcher {
       }
     }
 
+    Logger.log("Got all media files, video=\(filesGroupedByMediaType[.video]!.count), audio=\(filesGroupedByMediaType[.audio]!.count)", subsystem: subsystem)
+
     // natural sort
     filesGroupedByMediaType[.video]!.sort { $0.filename.localizedStandardCompare($1.filename) == .orderedAscending }
     filesGroupedByMediaType[.audio]!.sort { $0.filename.localizedStandardCompare($1.filename) == .orderedAscending }
   }
 
   private func getAllPossibleSubs() -> [FileInfo] {
+    Logger.log("Getting all sub files...", subsystem: subsystem)
+
     // search subs
     let subExts = Utility.supportedFileExt[.sub]!
     var subDirs: [URL] = []
@@ -87,6 +94,8 @@ class AutoFileMatcher {
       }
     }
 
+    Logger.log("Searching subtitles from \(subDirs.count) directories...", subsystem: subsystem)
+    Logger.log("\(subDirs)", level: .verbose, subsystem: subsystem)
     // get all possible sub files
     var subtitles = filesGroupedByMediaType[.sub]!
     for subDir in subDirs {
@@ -95,6 +104,7 @@ class AutoFileMatcher {
       }
     }
 
+    Logger.log("Got \(subtitles.count) subtitles", subsystem: subsystem)
     return subtitles
   }
 
@@ -102,6 +112,7 @@ class AutoFileMatcher {
     var addedCurrentVideo = false
     var needQuit = false
 
+    Logger.log("Adding files to playlist", subsystem: subsystem)
     // add videos
     for video in filesGroupedByMediaType[.video]! + filesGroupedByMediaType[.audio]! {
       // add to playlist
@@ -117,6 +128,9 @@ class AutoFileMatcher {
         player.addToPlaylist(video.path)
         player.mpv.command(.playlistMove, args: ["\(count)", "\(current)"], checkError: false) { err in
           if err == MPV_ERROR_COMMAND.rawValue { needQuit = true }
+          if err != 0 {
+            Logger.log("Error \(err) when adding files to playlist", level: .error, subsystem: subsystem)
+          }
         }
       }
       if needQuit { break }
@@ -127,6 +141,7 @@ class AutoFileMatcher {
     var prefixDistance: [String: [String: UInt]] = [:]
     var closestVideoForSub: [String: String] = [:]
 
+    Logger.log("Matching video and sub series...", subsystem: subsystem)
     // calculate edit distance between each v/s prefix
     for (sp, _) in subsGroupedBySeries {
       prefixDistance[sp] = [:]
@@ -143,6 +158,7 @@ class AutoFileMatcher {
       }
       closestVideoForSub[sp] = minVideo
     }
+    Logger.log("Calculated editing distance", subsystem: subsystem)
 
     var matchedPrefixes: [String: String] = [:]  // video: sub
     for (vp, vl) in videosGroupedBySeries {
@@ -159,22 +175,28 @@ class AutoFileMatcher {
       let threshold = UInt(Double(vp.count + minSub.count) * 0.6)
       if closestVideoForSub[minSub] == vp && minDist < threshold {
         matchedPrefixes[vp] = minSub
+        Logger.log("Matched \(vp) with \(minSub)", subsystem: subsystem)
       }
     }
 
+    Logger.log("Finished matching.", subsystem: subsystem)
     return matchedPrefixes
   }
 
   private func matchSubs(withMatchedSeries matchedPrefixes: [String: String]) throws {
+    Logger.log("Matching subs with matched series, prefixes=\(matchedPrefixes.count)...", subsystem: subsystem)
+
     // get auto load option
     let subAutoLoadOption: Preference.IINAAutoLoadAction = Preference.enum(for: .subAutoLoadIINA)
     guard subAutoLoadOption != .disabled else { return }
 
     for video in filesGroupedByMediaType[.video]! {
       var matchedSubs = Set<FileInfo>()
+      Logger.log("Matching for \(video.filename)", subsystem: subsystem)
 
       // match video and sub if both are the closest one to each other
       if subAutoLoadOption.shouldLoadSubsMatchedByIINA() {
+        Logger.log("Matching by IINA...", level: .verbose, subsystem: subsystem)
         // is in series
         if !video.prefix.isEmpty, let matchedSubPrefix = matchedPrefixes[video.prefix] {
           // find sub with same name
@@ -187,6 +209,7 @@ class AutoFileMatcher {
               nameMatched = vn == sn
             }
             if nameMatched {
+              Logger.log("Matched \(video.filename)(\(vn)) and \(sub.filename)(\(sn)) ...", level: .verbose, subsystem: subsystem)
               video.relatedSubs.append(sub)
               if sub.prefix == matchedSubPrefix {
                 try checkTicket()
@@ -197,27 +220,35 @@ class AutoFileMatcher {
             }
           }
         }
+        Logger.log("Finished", level: .verbose, subsystem: subsystem)
       }
 
       // add subs that contains video name
       if subAutoLoadOption.shouldLoadSubsContainingVideoName() {
+        Logger.log("Matching subtitles containing video name...", level: .verbose, subsystem: subsystem)
         try subtitles.filter {
           return $0.filename.contains(video.filename)
         }.forEach { sub in
           try checkTicket()
+          Logger.log("Matched \(sub.filename) and \(video.filename)", level: .verbose, subsystem: subsystem)
           player.info.matchedSubs[video.path, default: []].append(sub.url)
           sub.isMatched = true
           matchedSubs.insert(sub)
         }
+        Logger.log("Finished", level: .verbose, subsystem: subsystem)
       }
 
       // if no match
       if matchedSubs.isEmpty {
+        Logger.log("No matched sub for this file", subsystem: subsystem)
         unmatchedVideos.append(video)
+      } else {
+        Logger.log("Matched \(matchedSubs.count) subtitles", subsystem: subsystem)
       }
 
       // move the sub to front if it contains priority strings
       if let priorString = Preference.string(for: .subAutoLoadPriorityString), !matchedSubs.isEmpty {
+        Logger.log("Moving sub containing priority strings...", level: .verbose, subsystem: subsystem)
         let stringList = priorString
           .components(separatedBy: ",")
           .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -235,10 +266,12 @@ class AutoFileMatcher {
           .compactMap { player.info.matchedSubs[video.path]!.index(of: $0.url) }  // get index
           .forEach {  // move the sub with index to first
             try checkTicket()
+            Logger.log("Move \(player.info.matchedSubs[video.path]![$0]) to front", level: .verbose, subsystem: subsystem)
             if let s = player.info.matchedSubs[video.path]?.remove(at: $0) {
               player.info.matchedSubs[video.path]!.insert(s, at: 0)
             }
         }
+        Logger.log("Finished", level: .verbose, subsystem: subsystem)
       }
     }
 
@@ -249,12 +282,16 @@ class AutoFileMatcher {
   private func forceMatchUnmatchedVideos() throws {
     let unmatchedSubs = subtitles.filter { !$0.isMatched }
     guard unmatchedVideos.count * unmatchedSubs.count < 200 * 200 else {
-      Utility.log("Stopped auto matching subs - too many files")
+      Logger.log("Stopped force matching subs - too many files", level: .warning, subsystem: subsystem)
       return
     }
+
+    Logger.log("Force matching unmatched videos, video=\(unmatchedVideos.count), sub=\(unmatchedSubs.count)...", subsystem: subsystem)
     if unmatchedSubs.count > 0 && unmatchedVideos.count > 0 {
       // calculate edit distance
+      Logger.log("Calculating edit distance...", subsystem: subsystem)
       for sub in unmatchedSubs {
+        Logger.log("Calculating edit distance for \(sub.filename)", level: .verbose, subsystem: subsystem)
         var minDistToVideo: UInt = .max
         for video in unmatchedVideos {
           try checkTicket()
@@ -270,6 +307,7 @@ class AutoFileMatcher {
       }
 
       // match them
+      Logger.log("Force matching...", subsystem: subsystem)
       for video in unmatchedVideos {
         let minDistToSub = video.dist.reduce(UInt.max, { min($0, $1.value) })
         guard minDistToSub != .max else { continue }
@@ -282,11 +320,10 @@ class AutoFileMatcher {
   }
 
   func startMatching() {
-
+    Logger.log("**Start matching", subsystem: subsystem)
     let shouldAutoLoad = Preference.bool(for: .playlistAutoAdd)
 
     do {
-
       guard let folder = player.info.currentURL?.deletingLastPathComponent(), folder.isFileURL else { return }
       currentFolder = folder
 
@@ -303,8 +340,13 @@ class AutoFileMatcher {
       }
 
       // group video and sub files
+      Logger.log("Grouping video files...", subsystem: subsystem)
       videosGroupedBySeries = FileGroup.group(files: filesGroupedByMediaType[.video]!).flatten()
+      Logger.log("Finished with \(videosGroupedBySeries.count) groups", subsystem: subsystem)
+
+      Logger.log("Grouping sub files...", subsystem: subsystem)
       subsGroupedBySeries = FileGroup.group(files: subtitles).flatten()
+      Logger.log("Finished with \(subsGroupedBySeries.count) groups", subsystem: subsystem)
 
       // match video and sub series
       let matchedPrefixes = matchVideoAndSubSeries()
@@ -318,8 +360,9 @@ class AutoFileMatcher {
         try forceMatchUnmatchedVideos()
         player.postNotification(.iinaPlaylistChanged)
       }
-
-    } catch {
+      Logger.log("**Finished matching", subsystem: subsystem)
+    } catch let err {
+      Logger.log(err.localizedDescription, level: .error, subsystem: subsystem)
       return
     }
   }

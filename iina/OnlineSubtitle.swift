@@ -9,6 +9,8 @@
 import Foundation
 import PromiseKit
 
+fileprivate let subsystem = Logger.Subsystem(rawValue: "onlinesub")
+
 class OnlineSubtitle: NSObject {
 
   typealias SubCallback = ([OnlineSubtitle]) -> Void
@@ -53,6 +55,8 @@ class OnlineSubtitle: NSObject {
     } else {
       source = userSource!
     }
+
+    Logger.log("Search subtitle from \(source.name)...", subsystem: subsystem)
 
     playerCore.sendOSD(.startFindingSub(source.name), autoHide: false)
 
@@ -114,13 +118,11 @@ class OnlineSubtitle: NSObject {
         case OpenSubSupport.OpenSubError.cannotReadFile,
              OpenSubSupport.OpenSubError.fileTooSmall:
           osdMessage = .fileError
-        case OpenSubSupport.OpenSubError.loginFailed(let reason):
-          Utility.log("OpenSubtitles: \(reason)")
+        case OpenSubSupport.OpenSubError.loginFailed:
           osdMessage = .cannotLogin
         case OpenSubSupport.OpenSubError.userCanceled:
           osdMessage = .canceled
-        case OpenSubSupport.OpenSubError.xmlRpcError(let error):
-          Utility.log("OpenSubtitles: \(error.readableDescription)")
+        case OpenSubSupport.OpenSubError.xmlRpcError:
           osdMessage = .networkError
         case OpenSubSupport.OpenSubError.noResult:
           callback([])
@@ -152,7 +154,7 @@ class OnlineSubtitle: NSObject {
         case AssrtSupport.AssrtError.userCanceled:
           osdMessage = .canceled
         default:
-          Utility.log("Assrt: \(err.localizedDescription)")
+          Logger.log(err.localizedDescription, level: .error)
           osdMessage = .networkError
         }
         playerCore.sendOSD(osdMessage)

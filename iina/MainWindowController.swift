@@ -42,6 +42,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     return NSNib.Name("MainWindowController")
   }
 
+  @objc let monospacedFont: NSFont = {
+    let fontSize = NSFont.systemFontSize(for: .small)
+    return NSFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
+  }()
+
   // MARK: - Constants
 
   /** Minimum window size. */
@@ -265,7 +270,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       case .playlist:
         return CGFloat(Preference.integer(for: .playlistWidth)).clamped(to: PlaylistMinWidth...PlaylistMaxWidth)
       default:
-        Utility.fatal("SideBarViewType.width shouldn't be called here")
+        Logger.fatal("SideBarViewType.width shouldn't be called here")
       }
     }
   }
@@ -891,10 +896,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if let iinaCommand = IINACommand(rawValue: keyBinding.rawAction) {
         handleIINACommand(iinaCommand)
       } else {
-        Utility.log("Unknown iina command \(keyBinding.rawAction)")
+        Logger.log("Unknown iina command \(keyBinding.rawAction)", level: .error)
       }
     } else {
-      // - MPV command
+      // - mpv command
       let returnValue: Int32
       // execute the command
       switch keyBinding.action[0] {
@@ -911,19 +916,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           displayOSD(.screenshot)
         }
       } else {
-        Utility.log("Return value \(returnValue) when executing key command \(keyBinding.rawAction)")
+        Logger.log("Return value \(returnValue) when executing key command \(keyBinding.rawAction)", level: .error)
       }
     }
   }
 
   override func pressureChange(with event: NSEvent) {
-    if #available(OSX 10.10.3, *) {
-      if isCurrentPressInSecondStage == false && event.stage == 2 {
-        performMouseAction(Preference.enum(for: .forceTouchAction))
-        isCurrentPressInSecondStage = true
-      } else if event.stage == 1 {
-        isCurrentPressInSecondStage = false
-      }
+    if isCurrentPressInSecondStage == false && event.stage == 2 {
+      performMouseAction(Preference.enum(for: .forceTouchAction))
+      isCurrentPressInSecondStage = true
+    } else if event.stage == 1 {
+      isCurrentPressInSecondStage = false
     }
   }
 
@@ -952,16 +955,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isDragging = true
       guard !controlBarFloating.isDragging else { return }
       if mousePosRelatedToWindow != nil {
-        if #available(OSX 10.11, *) {
-          window?.performDrag(with: event)
-        } else {
-          let currentLocation = NSEvent.mouseLocation
-          let newOrigin = CGPoint(
-            x: currentLocation.x - mousePosRelatedToWindow!.x,
-            y: currentLocation.y - mousePosRelatedToWindow!.y
-          )
-          window?.setFrameOrigin(newOrigin)
-        }
+        window?.performDrag(with: event)
       }
     }
   }
@@ -1060,7 +1054,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   override func mouseEntered(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
-      Utility.log("No data for tracking area")
+      Logger.log("No data for tracking area", level: .warning)
       return
     }
     mouseExitEnterCount += 1
@@ -1085,7 +1079,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   override func mouseExited(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
-      Utility.log("No data for tracking area")
+      Logger.log("No data for tracking area", level: .warning)
       return
     }
     mouseExitEnterCount += 1
@@ -1124,7 +1118,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   override func scrollWheel(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
-    guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
+    guard !isMouseEvent(event, inAnyOf: [sideBarView, titleBarView, subPopoverView]) else { return }
+    if isMouseEvent(event, inAnyOf: [currentControlBar]) && !isMouseEvent(event, inAnyOf: [fragVolumeView, fragSliderView]) { return }
 
     let isMouse = event.phase.isEmpty
     let isTrackpadBegan = event.phase.contains(.began)
@@ -1180,10 +1175,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // perform action
 
-    if scrollAction == .seek {
+    if (isMouseEvent(event, inAnyOf: [fragSliderView]) && playSlider.isEnabled) || scrollAction == .seek {
       let seekAmount = (isMouse ? AppData.seekAmountMapMouse : AppData.seekAmountMap)[relativeSeekAmount] * delta
       player.seek(relativeSecond: seekAmount, option: useExtractSeek)
-    } else if scrollAction == .volume {
+    } else if (isMouseEvent(event, inAnyOf: [fragVolumeView]) && volumeSlider.isEnabled) || scrollAction == .volume {
       // don't use precised delta for mouse
       let newVolume = player.info.volume + (isMouse ? delta : AppData.volumeMap[volumeScrollAmount] * delta)
       player.setVolume(newVolume)
@@ -1495,7 +1490,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
         targetFrame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
       } else {
-        aspect = window.screen!.frame.size
+        aspect = window.screen?.frame.size ?? NSScreen.main!.frame.size
         targetFrame = aspect.grow(toSize: window.frame.size).centeredRect(in: window.frame)
       }
 
@@ -1734,11 +1729,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let (osdString, osdType) = message.message()
 
     let osdTextSize = Preference.float(for: .osdTextSize)
-    if #available(OSX 10.11, *) {
-      osdLabel.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize), weight: .regular)
-    } else {
-      osdLabel.font = NSFont.systemFont(ofSize: CGFloat(osdTextSize))
-    }
+    osdLabel.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize), weight: .regular)
     osdLabel.stringValue = osdString
 
     switch osdType {
@@ -1830,7 +1821,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // adjust sidebar width
     guard let view = (viewController as? NSViewController)?.view else {
-        Utility.fatal("viewController is not a NSViewController")
+        Logger.fatal("viewController is not a NSViewController")
     }
     sidebarAnimationState = .willShow
     let width = type.width()
@@ -2078,10 +2069,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Set material for OSC and title bar */
   private func setMaterial(_ theme: Preference.Theme?) {
     guard let theme = theme else {
-      Utility.log("Nil material in setMaterial()")
+      Logger.log("Nil material in setMaterial()", level: .warning)
       return
     }
-    guard #available(OSX 10.11, *) else { return }
 
     var appearance: NSAppearance? = nil
     var material: NSVisualEffectView.Material
@@ -2116,7 +2106,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     sliderCell?.isInDarkTheme = isDarkTheme
     volumeCell?.isInDarkTheme = isDarkTheme
 
-    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView].forEach {
+    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView].forEach {
       $0?.material = material
       $0?.appearance = appearance
     }
@@ -2464,7 +2454,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
     guard let duration = player.info.videoDuration, let pos = player.info.videoPosition else {
-      Utility.fatal("video info not available")
+      Logger.fatal("video info not available")
     }
     let percentage = (pos.second / duration.second) * 100
     leftLabel.stringValue = pos.stringRepresentation
@@ -2696,6 +2686,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** When slider changes */
   @IBAction func playSliderChanges(_ sender: NSSlider) {
     // guard let event = NSApp.currentEvent else { return }
+    guard !player.info.fileLoading else { return }
 
     // seek and update time
     let percentage = 100 * sender.doubleValue / sender.maxValue
@@ -2710,7 +2701,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.doubleValue
-    if #available(OSX 10.11, *), Preference.double(for: .maxVolume) > 100, abs(value - 100) < 0.5 {
+    if Preference.double(for: .maxVolume) > 100, abs(value - 100) < 0.5 {
       NSHapticFeedbackManager.defaultPerformer.perform(.generic, performanceTime: .default)
     }
     player.setVolume(value)

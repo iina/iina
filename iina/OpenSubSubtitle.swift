@@ -11,6 +11,8 @@ import Just
 import PromiseKit
 import Gzip
 
+fileprivate let subsystem = Logger.Subsystem(rawValue: "opensub")
+
 final class OpenSubSubtitle: OnlineSubtitle {
 
   @objc var filename: String = ""
@@ -167,11 +169,11 @@ class OpenSubSupport {
           let pStatus = parsed["status"] as! String
           if pStatus.hasPrefix("200") {
             self.token = parsed["token"] as! String
-            Utility.log("OpenSub: logged in as user \(finalUser)")
+            Logger.log("OpenSub: logged in as user \(finalUser)", subsystem: subsystem)
             self.startHeartbeat()
             resolver.fulfill(())
           } else {
-            Utility.log("OpenSub: login failed, \(pStatus)")
+            Logger.log("OpenSub: login failed, \(pStatus)", level: .error, subsystem: subsystem)
             resolver.reject(OpenSubError.loginFailed(pStatus))
           }
         case .failure:
@@ -188,7 +190,7 @@ class OpenSubSupport {
   func hash(_ url: URL) -> Promise<FileInfo> {
     return Promise { resolver in
       guard let file = try? FileHandle(forReadingFrom: url) else {
-        Utility.log("OpenSub: cannot get file handle")
+        Logger.log("OpenSub: cannot get file handle", level: .error, subsystem: subsystem)
         resolver.reject(OpenSubError.cannotReadFile)
         return
       }
@@ -197,8 +199,9 @@ class OpenSubSupport {
       let fileSize = file.offsetInFile
 
       if fileSize < 131072 {
-        Utility.log("File length less than 131072, skipped")
+        Logger.log("File length less than 131072, skipped", level: .warning, subsystem: subsystem)
         resolver.reject(OpenSubError.fileTooSmall)
+        return
       }
 
       let offsets: [UInt64] = [0, fileSize - UInt64(chunkSize)]
@@ -231,8 +234,9 @@ class OpenSubSupport {
         case .ok(let response):
           do {
             guard self.checkStatus(response) else { throw OpenSubError.wrongResponseFormat }
-            let IMDB = try self.findPath(["data", filename, "BestGuess", "IDMovieIMDB"], in: response)
-            resolver.fulfill(IMDB as? String ?? "")
+            let bestGuess = try self.findPath(["data", filename, "BestGuess"], in: response) as? [String: Any]
+            let IMDB = (bestGuess?["IDMovieIMDB"] as? String) ?? ""
+            resolver.fulfill(IMDB)
           } catch let (error) {
             resolver.reject(error)
             return
@@ -373,23 +377,23 @@ class OpenSubSupport {
       case .ok(let value):
         // 406 No session
         if let pValue = value as? [String: Any], (pValue["status"] as? String ?? "").hasPrefix("406") {
-          Utility.log("OpenSub: heartbeat no session")
+          Logger.log("heartbeat: no session", level: .warning, subsystem: subsystem)
           self.token = nil
           self.login().catch { err in
             switch err {
             case OpenSubError.loginFailed(let reason):
-              Utility.log("OpenSub: (re-login) \(reason)")
+              Logger.log("(re-login) \(reason)", level: .error, subsystem: subsystem)
             case OpenSubError.xmlRpcError(let error):
-              Utility.log("OpenSub: (re-login) \(error.readableDescription)")
+              Logger.log("(re-login) \(error.readableDescription)", level: .error, subsystem: subsystem)
             default:
-              Utility.log("OpenSub: (re-login) other error")
+              Logger.log("(re-login) \(err.localizedDescription)", level: .error, subsystem: subsystem)
             }
           }
         } else {
-          Utility.log("OpenSub: heartbeat ok")
+          Logger.log("OpenSub: heartbeat ok", subsystem: subsystem)
         }
       default:
-        Utility.log("OpenSub: heartbeat failed")
+        Logger.log("OpenSub: heartbeat failed", level: .error, subsystem: subsystem)
         self.token = nil
       }
     }

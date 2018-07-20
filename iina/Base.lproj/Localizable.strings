@@ -74,12 +74,13 @@
 "preference.title" = "Preferences";
 "preference.general" = "General";
 "preference.ui" = "UI";
-"preference.codec" = "Codec";
+"preference.video_audio" = "Video/Audio";
 "preference.subtitle" = "Subtitle";
 "preference.network" = "Network";
 "preference.control" = "Control";
 "preference.keybindings" = "Key Bindings";
 "preference.advanced" = "Advanced";
+"preference.utilities" = "Utilities";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Not logged in";
 "preference.logged_in_as" = "Logged in as %@";
@@ -114,7 +115,7 @@
 
 // Alerts
 "alert.beta_channel.title" = "Receive Updates for Beta Versions";
-"alert.beta_channel.message" = "IINA v1.0 is comming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
+"alert.beta_channel.message" = "IINA v1.0 is coming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
 
 "alert.title_error" = "Error";
 "alert.title_warning" = "Warning";
@@ -148,7 +149,7 @@
 
 "alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "New Filter";
-"alert.add_filter.message" = "Please enter a filter string in format of MPV's vf or af command.";
+"alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
 
 "alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
 
@@ -169,7 +170,7 @@
 "alert.set_default.success" = "Finished with %d success and %d failed.";
 
 "alert.add_watch.title" = "Add Watch Property";
-"alert.add_watch.message" = "Please enter a valid MPV property name.";
+"alert.add_watch.message" = "Please enter a valid mpv property name.";
 
 "alert.jump_to.title" = "Jump to";
 "alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
@@ -195,6 +196,14 @@
 "alert.clear_cache.title" = "Clear Thumbnail Cache";
 "alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
 "alert.clear_cache.success" = "Cache cleared.";
+
+"alert.clear_history.title" = "Clear Playback History";
+"alert.clear_history.message" = "Are you sure to delete all playback history?";
+"alert.clear_history.success" = "Playback history deleted.";
+
+"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
+"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
+"alert.clear_watch_later.success" = "All saved playback progress deleted.";
 
 "alert.nothing_to_open" = "Nothing to open.";
 

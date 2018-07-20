@@ -4,8 +4,8 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "1nQ-mn-luW"; */
 "1nQ-mn-luW.title" = "Text Cell";
 
-/* Class = "NSTextFieldCell"; title = "Additional MPV options"; ObjectID = "6F6-Y7-8oR"; */
-"6F6-Y7-8oR.title" = "추가 MPV 설정";
+/* Class = "NSTextFieldCell"; title = "Additional mpv options"; ObjectID = "6F6-Y7-8oR"; */
+"6F6-Y7-8oR.title" = "추가 mpv 설정";
 
 /* Class = "NSButtonCell"; title = "Enable advanced settings"; ObjectID = "7ml-VU-xWv"; */
 "7ml-VU-xWv.title" = "고급 설정 사용";
@@ -28,6 +28,9 @@
 /* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
 "MRT-u8-xTX.title" = "디렉토리 선택…";
 
+/* Class = "NSTextFieldCell"; title = "Settings"; ObjectID = "Qmc-Tb-d7d"; */
+"Qmc-Tb-d7d.title" = "설정";
+
 /* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "SX9-fy-bss"; */
 "SX9-fy-bss.headerCell.title" = "값";
 
@@ -37,6 +40,6 @@
 /* Class = "NSTextFieldCell"; placeholderString = "~/.config/mpv/"; ObjectID = "gWN-ya-xRD"; */
 "gWN-ya-xRD.placeholderString" = "~/.config/mpv/";
 
-/* Class = "NSButtonCell"; title = "Use MPV's OSD"; ObjectID = "phK-g9-Vbg"; */
-"phK-g9-Vbg.title" = "MPV의 OSD 사용";
+/* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
+"phK-g9-Vbg.title" = "mpv의 OSD 사용";
 

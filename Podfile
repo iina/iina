@@ -1,11 +1,10 @@
-platform :osx, '10.10'
+platform :osx, '10.11'
 
 target 'iina' do
   
   use_frameworks!
 
   # Pods for iina
-  pod 'MASPreferences'
   pod 'Just', :git => 'https://github.com/JustHTTP/Just.git', :branch => 'swift-4'
   pod 'PromiseKit'
   pod 'GzipSwift'

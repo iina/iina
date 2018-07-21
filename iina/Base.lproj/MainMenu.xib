@@ -688,8 +688,8 @@
                 <outlet property="delogo" destination="ArE-2s-JIV" id="zzg-gr-TsG"/>
                 <outlet property="doubleSize" destination="Hal-18-Tnf" id="vnl-Rb-Y3o"/>
                 <outlet property="encodingMenu" destination="Pf6-5i-B1E" id="Gat-gG-pkT"/>
-                <outlet property="file" destination="dMs-cI-mzQ" id="upe-AE-Gf6"/>
                 <outlet property="fileLoop" destination="D1y-kv-85s" id="xSv-oo-UJa"/>
+                <outlet property="fileMenu" destination="bib-Uj-vzu" id="Faa-yo-0DL"/>
                 <outlet property="findOnlineSub" destination="Mg3-WB-gjZ" id="Xft-hW-B9a"/>
                 <outlet property="fitToScreen" destination="SHd-63-Xoh" id="nzE-bA-wmk"/>
                 <outlet property="flip" destination="OIu-H0-Mht" id="fYJ-Fq-hak"/>

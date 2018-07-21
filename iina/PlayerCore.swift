@@ -49,6 +49,10 @@ class PlayerCore: NSObject {
     }
   }
 
+  static var playing: [PlayerCore] {
+    return playerCores.filter { !$0.info.isIdle }
+  }
+
   static var playerCores: [PlayerCore] = []
   static private var playerCoreCounter = 0
 
@@ -1506,7 +1510,7 @@ class PlayerCore: NSObject {
   }
 
   static func checkStatusForSleep() {
-    for player in playerCores.filter({ !$0.info.isIdle }) {
+    for player in playing {
       if !player.info.isPaused {
         SleepPreventer.preventSleep()
         return

@@ -2,6 +2,8 @@
 
 "alert.add_filter.message" = "Voer een filter in met het formaat van mpv's vf / af commando.";
 "alert.add_filter.title" = "Nieuw filter";
+"alert.add_url.message" = "Voer de URL in:";
+"alert.add_url.title" = "Voeg URL toe";
 "alert.add_watch.message" = "Voer een geldige mpv eigenschap in.";
 "alert.add_watch.title" = "Voeg eigenschap toe om te volgen";
 "alert.assrt_register" = "Vanwege een beperkt API-quotum wordt u ten zeerste aangeraden om uw eigen API-token te gebruiken. Het standaardtoken is alleen voor demo gebruik, en er kunnen netwerkfouten optreden.";
@@ -16,6 +18,12 @@
 "alert.clear_cache.message" = "Weet je zeker dat je de minatuur cache wilt wissen?";
 "alert.clear_cache.success" = "Cache gewist.";
 "alert.clear_cache.title" = "Wis miniatuur cache";
+"alert.clear_history.message" = "Weet je zeker dat je de afspeelgeschiedenis wilt wissen?";
+"alert.clear_history.success" = "Afspeelgeschiedenis gewist.";
+"alert.clear_history.title" = "Wis afspeelgeschiedenis";
+"alert.clear_watch_later.message" = "Weet je zeker dat je de opgeslagen afspeelvoortgang wilt wissen?";
+"alert.clear_watch_later.success" = "Opgeslagen afspeelvoortgang gewist.";
+"alert.clear_watch_later.title" = "Wis opgeslagen afspeelvoortgang";
 "alert.config.cannot_create" = "Kan configuratiebestand niet aanmaken!";
 "alert.config.cannot_write" = "Kan niet naar configuratiebestand schrijven!";
 "alert.config.duplicate.message" = "Voer een naam in voor het gedupliceerde configuratiebestand.";
@@ -50,7 +58,7 @@
 "alert.mpv_error" = "Interne fout: %@ (%@) bij het instellen van optie %@.";
 "alert.no_video_track" = "Er is geen video spoor.";
 "alert.nothing_to_open" = "Niets om te openen.";
-"alert.open_url.message" = "Voer URL in:";
+"alert.open_url.message" = "Voer de URL in:";
 "alert.open_url.title" = "Open URL";
 "alert.opensub.login.message" = "Voer je gebruikersnaam en wachtwoord in";
 "alert.opensub.login.title" = "OpenSubtitles Login";
@@ -154,8 +162,9 @@
 "osd.video_eq.hue" = "Tint: %i";
 "osd.video_eq.saturation" = "Verzadiging: %i";
 "osd.volume" = "Volume: %i";
-"pl_menu.add_item" = "Voeg bestand toe…";
+"pl_menu.add_file" = "Voeg bestand toe…";
 "pl_menu.add_sub" = "Voeg ondertiteling toe…";
+"pl_menu.add_url" = "Voeg URL toe…";
 "pl_menu.clear_playlist" = "Wis afspeellijst";
 "pl_menu.delete" = "Verplaats naar prullenmand";
 "pl_menu.delete_after_play" = "Verplaats naar prullenmand na afspelen";
@@ -172,7 +181,6 @@
 "playlist.chapter_cap" = "HOOFDSTUKKEN";
 "playlist.playlist_cap" = "AFSPEELLIJST";
 "preference.advanced" = "Geavanceerd";
-"preference.codec" = "Codec";
 "preference.control" = "Bediening";
 "preference.general" = "Algemeen";
 "preference.keybindings" = "Sneltoetsen";
@@ -184,9 +192,13 @@
 "preference.system_media_control" = "Gebruik systeem media bediening";
 "preference.title" = "Voorkeuren";
 "preference.ui" = "UI";
+"preference.utilities" = "Hulpmiddelen";
+"preference.video_audio" = "Video/Audio";
 "quicksetting.item_default" = "Standaard";
 "quicksetting.item_none" = "Geen";
 "subencoding.auto" = "Automatisch detecteren";
+"subtrack.no_external" = "Geen externe ondertiteling gevonden";
+"subtrack.no_loaded" = "Geen ondertiteling geladen";
 "touchbar.ahead_15" = "15sec vooruit";
 "touchbar.ahead_30" = "30sec vooruit";
 "touchbar.back_15" = "15sec terug";
@@ -202,21 +214,3 @@
 "touchbar.seek" = "Door- of terugspoelen";
 "touchbar.time" = "Verstreken tijd";
 "track.none" = "<Geen>";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.title" = "Add URL";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.message" = "Please enter the URL:";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_file" = "Add File…";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_url" = "Add URL…";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_external" = "No External Subtitles Found";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_loaded" = "No Subtitles Loaded";

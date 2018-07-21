@@ -9,9 +9,6 @@
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "Open URL…";
 
-/* Class = "NSMenuItem"; title = "Set IINA as the Default App…"; ObjectID = "0os-i1-tJF"; */
-"0os-i1-tJF.title" = "Stel IINA in als standaard applicatie…";
-
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "Ondertiteling";
 
@@ -27,11 +24,17 @@
 /* Class = "NSMenuItem"; title = "Jump to Beginning"; ObjectID = "2Ya-3g-1hy"; */
 "2Ya-3g-1hy.title" = "Spring naar begin";
 
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "2aU-bk-bmu"; */
+"2aU-bk-bmu.title" = "Knip";
+
 /* Class = "NSMenuItem"; title = "Jump to…"; ObjectID = "2id-wn-xsC"; */
 "2id-wn-xsC.title" = "Spring naar…";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
 "2t8-Ot-yoO.title" = "Toon snelle instellingen";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
+"3Ax-P3-QQu.title" = "Selecteer alles";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
 "43n-Ed-5kT.title" = "Toon snelle instellingen";
@@ -56,6 +59,15 @@
 
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
 "6yE-op-DTS.title" = "Ga 5s vooruit";
+
+/* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "7Bn-Mp-EvJ"; */
+"7Bn-Mp-EvJ.title" = "Omzetting";
+
+/* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "7rG-Yq-EYG"; */
+"7rG-Yq-EYG.title" = "Stop spraakfunctie";
+
+/* Class = "NSMenuItem"; title = "Speech"; ObjectID = "8Oy-tP-udW"; */
+"8Oy-tP-udW.title" = "Spraak";
 
 /* Class = "NSMenuItem"; title = "Audio Filters…"; ObjectID = "8Zh-hU-Cc4"; */
 "8Zh-hU-Cc4.title" = "Audio filters…";
@@ -207,6 +219,9 @@
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
 "NMo-om-nkz.title" = "Voorzieningen";
 
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "NdF-0z-k5s"; */
+"NdF-0z-k5s.title" = "Plak";
+
 /* Class = "NSMenuItem"; title = "Vertical (Flip)"; ObjectID = "OIu-H0-Mht"; */
 "OIu-H0-Mht.title" = "Verticaal (omgedraaid)";
 
@@ -252,11 +267,17 @@
 /* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
 "Td7-aD-5lo.title" = "Venster";
 
+/* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "Tue-O7-cei"; */
+"Tue-O7-cei.title" = "Zet om in beginhoofdletters";
+
 /* Class = "NSMenuItem"; title = "Pause"; ObjectID = "UOE-MJ-8ku"; */
 "UOE-MJ-8ku.title" = "Pauzeer";
 
 /* Class = "NSMenu"; title = "Second Subtitle"; ObjectID = "UwY-P2-Xdb"; */
 "UwY-P2-Xdb.title" = "Tweede ondertiteling";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
+"VDZ-ro-z5z.title" = "Opnieuw";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
 "Vdr-fp-XzO.title" = "Verberg andere";
@@ -272,6 +293,9 @@
 
 /* Class = "NSMenuItem"; title = "Scale Up"; ObjectID = "XHu-Dl-Vq2"; */
 "XHu-Dl-Vq2.title" = "Groter";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "XPz-ml-OQ3"; */
+"XPz-ml-OQ3.title" = "Herstel";
 
 /* Class = "NSMenuItem"; title = "Smaller Size"; ObjectID = "ZOF-MG-6II"; */
 "ZOF-MG-6II.title" = "Kleiner";
@@ -318,6 +342,9 @@
 /* Class = "NSMenu"; title = "Chapters"; ObjectID = "d9c-me-L2H"; */
 "d9c-me-L2H.title" = "Hoofdstukken";
 
+/* Class = "NSMenu"; title = "Transformations"; ObjectID = "dBM-BU-5xS"; */
+"dBM-BU-5xS.title" = "Omzetting";
+
 /* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
 "dMs-cI-mzQ.title" = "Bestand";
 
@@ -335,6 +362,9 @@
 
 /* Class = "NSMenuItem"; title = "Check for Updates..."; ObjectID = "gMo-qL-m08"; */
 "gMo-qL-m08.title" = "Controleer op updates...";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h9w-Rj-Hm1"; */
+"h9w-Rj-Hm1.title" = "Verwijder";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
 "hz9-B4-Xy5.title" = "Voorzieningen";
@@ -366,6 +396,9 @@
 /* Class = "NSMenuItem"; title = "Go to Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
 "lj0-Oo-7nB.title" = "Ga naar schermafbeeldingen map";
 
+/* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "m7w-hc-Y2F"; */
+"m7w-hc-Y2F.title" = "Zet om in hoofdletters";
+
 /* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
 "mGw-jm-5x2.title" = "Tweede ondertiteling";
 
@@ -396,6 +429,9 @@
 /* Class = "NSMenuItem"; title = "Subtitle Delay + 0.5s"; ObjectID = "pAo-L5-qTO"; */
 "pAo-L5-qTO.title" = "Ondertitel vertraging + 0.5s";
 
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "pWh-nh-0pN"; */
+"pWh-nh-0pN.title" = "Wijzig";
+
 /* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
 "pdj-9C-Fn1.title" = "Volume - 5%";
 
@@ -414,6 +450,9 @@
 /* Class = "NSMenuItem"; title = "Half Size"; ObjectID = "snW-S8-Cw5"; */
 "snW-S8-Cw5.title" = "Halve grootte";
 
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "tH0-KL-c9V"; */
+"tH0-KL-c9V.title" = "Kopieer";
+
 /* Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "tXI-mr-wws"; */
 "tXI-mr-wws.title" = "Open recente";
 
@@ -423,6 +462,9 @@
 /* Class = "NSMenuItem"; title = "Subtitle"; ObjectID = "uGZ-lo-pJJ"; */
 "uGZ-lo-pJJ.title" = "Ondertiteling";
 
+/* Class = "NSMenu"; title = "Speech"; ObjectID = "uO1-9S-6Yy"; */
+"uO1-9S-6Yy.title" = "Spraak";
+
 /* Class = "NSMenu"; title = "IINA"; ObjectID = "uQy-DD-JDr"; */
 "uQy-DD-JDr.title" = "IINA";
 
@@ -431,6 +473,9 @@
 
 /* Class = "NSMenu"; title = "Saved Audio Filters"; ObjectID = "vuV-uP-CAD"; */
 "vuV-uP-CAD.title" = "Opgeslagen audio filters";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "w8n-XJ-Pgi"; */
+"w8n-XJ-Pgi.title" = "Wijzig";
 
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
 "wex-rX-PcY.title" = "Blijf op voorgrond";
@@ -455,3 +500,9 @@
 
 /* Class = "NSMenuItem"; title = "Open in New Window…"; ObjectID = "z9W-ga-j3b"; */
 "z9W-ga-j3b.title" = "Open bestand in nieuw venster…";
+
+/* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "zez-g5-2Pt"; */
+"zez-g5-2Pt.title" = "Zet om in kleine letters";
+
+/* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
+"zpw-Ac-F3M.title" = "Start spraakfunctie";

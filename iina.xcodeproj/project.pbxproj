@@ -7,9 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01FF14C92102345A00CF53CA /* Gzip.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 01FF149F2102336800CF53CA /* Gzip.framework.dSYM */; };
+		01FF14CA2102345A00CF53CA /* Just.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 01FF14A02102336800CF53CA /* Just.framework.dSYM */; };
+		01FF14CB2102345A00CF53CA /* Mustache.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 01FF14A12102336800CF53CA /* Mustache.framework.dSYM */; };
+		01FF14CC2102345A00CF53CA /* PromiseKit.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 01FF149B2102336800CF53CA /* PromiseKit.framework.dSYM */; };
+		01FF14CD2102345A00CF53CA /* Sparkle.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 01FF149C2102336800CF53CA /* Sparkle.framework.dSYM */; };
+		01FF14DD2102351A00CF53CA /* Gzip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FF149E2102336800CF53CA /* Gzip.framework */; };
+		01FF14DE2102351A00CF53CA /* Gzip.framework in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 01FF149E2102336800CF53CA /* Gzip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01FF14DF2102351A00CF53CA /* Just.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FF149D2102336800CF53CA /* Just.framework */; };
+		01FF14E02102351A00CF53CA /* Just.framework in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 01FF149D2102336800CF53CA /* Just.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01FF14E12102351A00CF53CA /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FF149A2102336800CF53CA /* Mustache.framework */; };
+		01FF14E22102351A00CF53CA /* Mustache.framework in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 01FF149A2102336800CF53CA /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01FF14E32102351A00CF53CA /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FF14A32102336900CF53CA /* PromiseKit.framework */; };
+		01FF14E42102351A00CF53CA /* PromiseKit.framework in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 01FF14A32102336900CF53CA /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01FF14E52102351A00CF53CA /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FF14A22102336900CF53CA /* Sparkle.framework */; };
+		01FF14E62102351A00CF53CA /* Sparkle.framework in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 01FF14A22102336900CF53CA /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1326717E20852D0D000FA7E2 /* SubChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1326718020852D0D000FA7E2 /* SubChooseViewController.xib */; };
 		496B19921E2968530035AF10 /* PIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B19911E2968530035AF10 /* PIP.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867483705008F086E07B0A6B /* Pods_iina.framework */; };
 		6100FF2B1EDF9806002CF0FB /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */; };
 		8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */; };
 		8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */; };
@@ -221,6 +235,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		01FF14C82102342C00CF53CA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				01FF14C92102345A00CF53CA /* Gzip.framework.dSYM in CopyFiles */,
+				01FF14CA2102345A00CF53CA /* Just.framework.dSYM in CopyFiles */,
+				01FF14CB2102345A00CF53CA /* Mustache.framework.dSYM in CopyFiles */,
+				01FF14CC2102345A00CF53CA /* PromiseKit.framework.dSYM in CopyFiles */,
+				01FF14CD2102345A00CF53CA /* Sparkle.framework.dSYM in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8461BA631E423423008BB852 /* Copy Executables */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -246,16 +274,21 @@
 				841D58FB20FCE14C00A216D4 /* libfontconfig.1.dylib in Copy Dylibs */,
 				841D590120FCE14C00A216D4 /* libintl.8.dylib in Copy Dylibs */,
 				841D58F320FCE14C00A216D4 /* libavfilter.7.16.100.dylib in Copy Dylibs */,
+				01FF14E42102351A00CF53CA /* PromiseKit.framework in Copy Dylibs */,
 				841D590520FCE14C00A216D4 /* libmp3lame.0.dylib in Copy Dylibs */,
 				841D590B20FCE14C00A216D4 /* libswscale.5.1.100.dylib in Copy Dylibs */,
+				01FF14DE2102351A00CF53CA /* Gzip.framework in Copy Dylibs */,
 				841D590620FCE14C00A216D4 /* libmpv.1.26.0.dylib in Copy Dylibs */,
 				841D58FF20FCE14C00A216D4 /* libgraphite2.3.dylib in Copy Dylibs */,
 				841D590320FCE14C00A216D4 /* liblcms2.2.dylib in Copy Dylibs */,
 				841D58F420FCE14C00A216D4 /* libavformat.58.12.100.dylib in Copy Dylibs */,
 				841D590020FCE14C00A216D4 /* libharfbuzz.0.dylib in Copy Dylibs */,
 				841D590220FCE14C00A216D4 /* libjpeg.9.dylib in Copy Dylibs */,
+				01FF14E62102351A00CF53CA /* Sparkle.framework in Copy Dylibs */,
+				01FF14E02102351A00CF53CA /* Just.framework in Copy Dylibs */,
 				841D590C20FCE14C00A216D4 /* libuchardet.0.dylib in Copy Dylibs */,
 				841D58F020FCE14C00A216D4 /* libass.9.dylib in Copy Dylibs */,
+				01FF14E22102351A00CF53CA /* Mustache.framework in Copy Dylibs */,
 				841D58F620FCE14C00A216D4 /* libavutil.56.14.100.dylib in Copy Dylibs */,
 				841D58F520FCE14C00A216D4 /* libavresample.4.0.0.dylib in Copy Dylibs */,
 				841D58FE20FCE14C00A216D4 /* libglib-2.0.0.dylib in Copy Dylibs */,
@@ -309,6 +342,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		01FF149A2102336800CF53CA /* Mustache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mustache.framework; path = Carthage/Build/Mac/Mustache.framework; sourceTree = "<group>"; };
+		01FF149B2102336800CF53CA /* PromiseKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = PromiseKit.framework.dSYM; path = Carthage/Build/Mac/PromiseKit.framework.dSYM; sourceTree = "<group>"; };
+		01FF149C2102336800CF53CA /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
+		01FF149D2102336800CF53CA /* Just.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Just.framework; path = Carthage/Build/Mac/Just.framework; sourceTree = "<group>"; };
+		01FF149E2102336800CF53CA /* Gzip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Gzip.framework; path = Carthage/Build/Mac/Gzip.framework; sourceTree = "<group>"; };
+		01FF149F2102336800CF53CA /* Gzip.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Gzip.framework.dSYM; path = Carthage/Build/Mac/Gzip.framework.dSYM; sourceTree = "<group>"; };
+		01FF14A02102336800CF53CA /* Just.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Just.framework.dSYM; path = Carthage/Build/Mac/Just.framework.dSYM; sourceTree = "<group>"; };
+		01FF14A12102336800CF53CA /* Mustache.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Mustache.framework.dSYM; path = Carthage/Build/Mac/Mustache.framework.dSYM; sourceTree = "<group>"; };
+		01FF14A22102336900CF53CA /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
+		01FF14A32102336900CF53CA /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/Mac/PromiseKit.framework; sourceTree = "<group>"; };
 		1326717F20852D0D000FA7E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SubChooseViewController.xib; sourceTree = "<group>"; };
 		1326718120852D16000FA7E2 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
 		1326718220852EA6000FA7E2 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
@@ -443,7 +486,6 @@
 		4CA6B430201E85BB008F3FBA /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/FilterPresets.strings"; sourceTree = "<group>"; };
 		4CA6B431201E85BC008F3FBA /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
 		6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
-		61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.release.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.release.xcconfig"; sourceTree = "<group>"; };
 		649AD3111F11B06D00244738 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		649AD3121F11B06D00244738 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		649AD3131F11B06D00244738 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
@@ -898,7 +940,6 @@
 		84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCache.swift; sourceTree = "<group>"; };
 		84FF84701D2FF698001B318A /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
 		84FF84711D2FF698001B318A /* opengl_cb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl_cb.h; sourceTree = "<group>"; };
-		867483705008F086E07B0A6B /* Pods_iina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87E813251F83C05E00AA8D0C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		8F17B8FA2013956E0048FB5D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
 		8F6F50541EC5E053002B47B4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
@@ -909,7 +950,6 @@
 		9DB9ED5C20889D66006B1492 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
 		9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationDisplayTextField.swift; sourceTree = "<group>"; };
 		9E63CAB61E3F7D0E00EA66C9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
-		A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.debug.xcconfig"; sourceTree = "<group>"; };
 		B3066F5F1F161538004D7559 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		B3860ED81E50F73A00FF012B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		B38F24181E44D09F00FFE600 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -1089,8 +1129,12 @@
 				841D58E120FCE14500A216D4 /* libavcodec.58.18.100.dylib in Frameworks */,
 				841D58E620FCE14500A216D4 /* libavresample.4.0.0.dylib in Frameworks */,
 				8403CEA72007CBD400645516 /* MediaPlayer.framework in Frameworks */,
-				5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */,
 				841D58DD20FCE14500A216D4 /* libavformat.58.12.100.dylib in Frameworks */,
+				01FF14E12102351A00CF53CA /* Mustache.framework in Frameworks */,
+				01FF14E32102351A00CF53CA /* PromiseKit.framework in Frameworks */,
+				01FF14DD2102351A00CF53CA /* Gzip.framework in Frameworks */,
+				01FF14DF2102351A00CF53CA /* Just.framework in Frameworks */,
+				01FF14E52102351A00CF53CA /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1187,6 +1231,16 @@
 		848290731D95978100C3C76C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01FF149E2102336800CF53CA /* Gzip.framework */,
+				01FF149F2102336800CF53CA /* Gzip.framework.dSYM */,
+				01FF149D2102336800CF53CA /* Just.framework */,
+				01FF14A02102336800CF53CA /* Just.framework.dSYM */,
+				01FF149A2102336800CF53CA /* Mustache.framework */,
+				01FF14A12102336800CF53CA /* Mustache.framework.dSYM */,
+				01FF14A32102336900CF53CA /* PromiseKit.framework */,
+				01FF149B2102336800CF53CA /* PromiseKit.framework.dSYM */,
+				01FF14A22102336900CF53CA /* Sparkle.framework */,
+				01FF149C2102336800CF53CA /* Sparkle.framework.dSYM */,
 				841D58C620FCE14300A216D4 /* libass.9.dylib */,
 				841D58C320FCE14300A216D4 /* libavcodec.58.18.100.dylib */,
 				841D58C920FCE14300A216D4 /* libavdevice.58.3.100.dylib */,
@@ -1220,7 +1274,6 @@
 				8403CEA62007CBD300645516 /* MediaPlayer.framework */,
 				845E2F491E76CFC2002C6588 /* libz.tbd */,
 				496B19911E2968530035AF10 /* PIP.framework */,
-				867483705008F086E07B0A6B /* Pods_iina.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1593,7 +1646,6 @@
 				84EB1ED71D2F51D3004FA5A1 /* Products */,
 				8461BA641E42344D008BB852 /* Executables */,
 				848290731D95978100C3C76C /* Frameworks */,
-				AF119E67C2E61E10DC27039C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1659,15 +1711,6 @@
 			path = mpv;
 			sourceTree = "<group>";
 		};
-		AF119E67C2E61E10DC27039C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */,
-				61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		E3DE8DCB1FD8166A0021921C /* iina-cli */ = {
 			isa = PBXGroup;
 			children = (
@@ -1683,7 +1726,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84EB1EF91D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "iina" */;
 			buildPhases = (
-				36C8205F8EFBC756D3D0BD69 /* [CP] Check Pods Manifest.lock */,
 				E364D521203F339A0066215D /* Check Localizable.strings */,
 				84EB1ED21D2F51D3004FA5A1 /* Sources */,
 				84EB1ED31D2F51D3004FA5A1 /* Frameworks */,
@@ -1693,7 +1735,7 @@
 				84817CE81DBE2E3200CC2279 /* Copy Lua Scripts */,
 				84E745DA1DFDE9C600588DED /* Copy Configs */,
 				8461BA631E423423008BB852 /* Copy Executables */,
-				DFB4E0114268BBFB043A6097 /* [CP] Embed Pods Frameworks */,
+				01FF14C82102342C00CF53CA /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1828,24 +1870,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		36C8205F8EFBC756D3D0BD69 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-iina-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		84B1CE561F98CAE300994D63 /* Copy Dylib Symlinks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1859,34 +1883,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "echo \"Copy symlinks:\"\n\nfor file in \"${SRCROOT}/deps/lib/\"*.dylib; do\n    if [[ -h \"$file\" ]]; then\n        cp -R $file \"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/$(basename $file)\"\n    fi\ndone";
-		};
-		DFB4E0114268BBFB043A6097 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-iina/Pods-iina-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GRMustache.swift/Mustache.framework",
-				"${BUILT_PRODUCTS_DIR}/GzipSwift/Gzip.framework",
-				"${BUILT_PRODUCTS_DIR}/Just/Just.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
-				"${PODS_ROOT}/Sparkle/Sparkle.framework",
-				"${PODS_ROOT}/Sparkle/Sparkle.framework.dSYM",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mustache.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gzip.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Just.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/Sparkle.framework.dSYM",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iina/Pods-iina-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		E364D521203F339A0066215D /* Check Localizable.strings */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2860,9 +2856,7 @@
 		};
 		84EB1EFA1D2F51D3004FA5A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -2871,6 +2865,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/deps/include",
@@ -2885,7 +2880,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MODULEMAP_FILE = module.modulemap;
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEBUG";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
 				PRODUCT_NAME = IINA;
 				SKIP_INSTALL = YES;
@@ -2897,9 +2892,7 @@
 		};
 		84EB1EFB1D2F51D3004FA5A1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -2908,6 +2901,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/deps/include",
@@ -2922,7 +2916,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MODULEMAP_FILE = module.modulemap;
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DRELEASE";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
 				PRODUCT_NAME = IINA;
 				SKIP_INSTALL = NO;

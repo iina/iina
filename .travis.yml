@@ -20,16 +20,15 @@ before_install:
     - locale
     - gem install cocoapods -v 1.5.3 --no-rdoc --no-ri --no-document --quiet
     - pod install
-    - brew update && brew upgrade
-    - brew install youtube-dl
 
 # Build Jobs
-jobs:
-    include:
-        - stage: IINA.app
-          script: xcodebuild clean build -workspace iina.xcworkspace -scheme iina
-        - stage: IINA cli
-          script: xcodebuild clean build -workspace iina.xcworkspace -scheme iina-cli
+script:
+    # Clean
+    - xcodebuild clean
+    # IINA main app
+    - xcodebuild -workspace iina.xcworkspace -scheme iina
+    # IINA cli
+    - xcodebuild -workspace iina.xcworkspace -scheme iina-cli
 
 # After Build
 notifications:

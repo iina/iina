@@ -1,3 +1,8 @@
+#
+# .travis.yml
+# iina
+#
+
 # Enviornment
 language: swift
 osx_image: xcode9.4
@@ -5,8 +10,9 @@ os: osx
 
 env:
     global:
-        - LC_CTYPE=en_US.UTF-8
         - LANG=en_US.UTF-8
+        - LC_ALL=en_US.UTF-8
+        - LANGUAGE=en_US.UTF-8
 
 # CocoaPods
 before_install:
@@ -19,9 +25,9 @@ before_install:
 jobs:
     include:
         - stage: IINA.app
-          script: xcodebuild -workspace iina.xcworkspace -scheme iina
+          script: xcodebuild clean build -workspace iina.xcworkspace -scheme iina
         - stage: IINA cli
-          script: xcodebuild -workspace iina.xcworkspace -scheme iina-cli
+          script: xcodebuild clean build -workspace iina.xcworkspace -scheme iina-cli
 
 # After Build
 notifications:

@@ -20,6 +20,8 @@ before_install:
     - locale
     - gem install cocoapods -v 1.5.3 --no-rdoc --no-ri --no-document --quiet
     - pod install
+    - brew update && brew upgrade
+    - brew install youtube-dl
 
 # Build Jobs
 jobs:

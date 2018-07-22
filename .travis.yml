@@ -1,0 +1,12 @@
+# Enviornment
+language: swift
+osx_image: xcode9.4
+os: osx
+env:
+    - LC_CTYPE=en_US.UTF-8 LANG=en_US.UTF-8
+
+# CocoaPods
+before_install:
+    - gem install cocoapods
+    - pod install
+

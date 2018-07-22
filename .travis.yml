@@ -22,3 +22,7 @@ jobs:
           script: xcodebuild -workspace iina.xcworkspace -scheme iina
         - stage: IINA cli
           script: xcodebuild -workspace iina.xcworkspace -scheme iina-cli
+
+# After Build
+notifications:
+    email: false

@@ -7,6 +7,6 @@ env:
 
 # CocoaPods
 before_install:
-    - gem install cocoapods
+    - gem install cocoapods -v 1.5.3
     - pod install
 

@@ -18,7 +18,7 @@ before_install:
 # Build Jobs
 jobs:
     include:
-        - stage: iina main app
+        - stage: IINA.app
           script: xcodebuild -workspace iina.xcworkspace -scheme iina
-        - stage: iina cli
+        - stage: IINA cli
           script: xcodebuild -workspace iina.xcworkspace -scheme iina-cli

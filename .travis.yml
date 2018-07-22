@@ -2,11 +2,23 @@
 language: swift
 osx_image: xcode9.4
 os: osx
+
 env:
-    - LC_CTYPE=en_US.UTF-8 LANG=en_US.UTF-8
+    global:
+        - LC_CTYPE=en_US.UTF-8
+        - LANG=en_US.UTF-8
 
 # CocoaPods
 before_install:
-    - gem install cocoapods -v 1.5.3
+    - env
+    - locale
+    - gem install cocoapods -v 1.5.3 --no-rdoc --no-ri --no-document --quiet
     - pod install
 
+# Build Jobs
+jobs:
+    include:
+        - stage: iina main app
+          script: xcodebuild -workspace iina.xcworkspace -scheme iina
+        - stage: iina cli
+          script: xcodebuild -workspace iina.xcworkspace -scheme iina-cli

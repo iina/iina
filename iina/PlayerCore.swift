@@ -1495,7 +1495,6 @@ class PlayerCore: NSObject {
   var currentMediaIsAudio = CurrentMediaIsAudioStatus.unknown
 
   func checkCurrentMediaIsAudio() -> CurrentMediaIsAudioStatus {
-    guard !info.isNetworkResource else { return .notAudio }
     let noVideoTrack = info.videoTracks.isEmpty
     let noAudioTrack = info.audioTracks.isEmpty
     if noVideoTrack && noAudioTrack {

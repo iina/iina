@@ -2,12 +2,28 @@
 
 "alert.add_filter.message" = "請輸入 mpv 的 vf 或 af 指令串";
 "alert.add_filter.title" = "新濾鏡";
+"alert.add_url.message" = "請輸入 URL:";
+"alert.add_url.title" = "新增 URL";
 "alert.add_watch.message" = "請輸入一個有效的 mpv 屬性";
 "alert.add_watch.title" = "新增監視屬性";
+"alert.assrt_register" = "由於射手網(偽)的 API 請求數量限制，請務必在射手網(偽)註冊賬戶後使用自己的 API token。自帶 API token 僅用於測試用途，並且可能由於 API 使用超出限額而請求失敗。";
+"alert.assrt_register.register" = "去射手網(偽)註冊";
+"alert.assrt_register.try" = "先試用一下";
+"alert.assrt_token_invalid" = "你的射手網(偽) API token 格式錯誤。";
+"alert.assrt_token_prompt.message" = "請在彈出的網頁中註冊帳號，然後進入使用者首頁檢視 API token 並在下方輸入:";
+"alert.assrt_token_prompt.title" = "輸入你在射手網(偽)的 API token";
+"alert.beta_channel.message" = "在釋出 IINA 1.0 之前，你願意幫助我們測試 beta 版本嗎？\n\n你可以在「偏好設定-一般」中隨時修改此行為。";
+"alert.beta_channel.title" = "接受 beta 版本的更新";
 "alert.choose_media_file.title" = "選擇媒體檔案";
 "alert.clear_cache.message" = "確定清除所有縮圖快取?";
 "alert.clear_cache.success" = "快取已清除。";
 "alert.clear_cache.title" = "清除縮圖快取";
+"alert.clear_history.message" = "確定刪除所有播放記錄嗎？";
+"alert.clear_history.success" = "播放記錄已刪除。";
+"alert.clear_history.title" = "清除播放歷史";
+"alert.clear_watch_later.message" = "確定清除所有儲存的播放進度，即「watch later」資料嗎？";
+"alert.clear_watch_later.success" = "已刪除所有儲存的播放進度。";
+"alert.clear_watch_later.title" = "清除儲存的播放進度";
 "alert.config.cannot_create" = "無法建立設定檔";
 "alert.config.cannot_write" = "無法寫入設定檔";
 "alert.config.duplicate.message" = "請為重複的設定檔取名";
@@ -98,6 +114,12 @@
 "menu.volume" = "音量: %d";
 "menu.volume_down" = "音量 - %.0f%%";
 "menu.volume_up" = "音量 + %.0f%%";
+"osc_toolbar.full_screen" = "切換全螢幕";
+"osc_toolbar.music_mode" = "進入音樂模式";
+"osc_toolbar.pip" = "切換子母畫面";
+"osc_toolbar.playlist" = "播放列表和章節";
+"osc_toolbar.settings" = "快速設定";
+"osc_toolbar.sub_track" = "選擇字幕軌道";
 "osd.abloop.a" = "AB循環: A";
 "osd.abloop.b" = "AB循環: B";
 "osd.abloop.clear" = "AB循環: 復原";
@@ -140,8 +162,9 @@
 "osd.video_eq.hue" = "色調: %i";
 "osd.video_eq.saturation" = "飽和度: %i";
 "osd.volume" = "音量: %i";
-"pl_menu.add_item" = "加入檔案…";
+"pl_menu.add_file" = "新增檔案…";
 "pl_menu.add_sub" = "加入字幕…";
+"pl_menu.add_url" = "新增 URL…";
 "pl_menu.clear_playlist" = "清空播放列表";
 "pl_menu.delete" = "刪除";
 "pl_menu.delete_after_play" = "播放完畢後刪除";
@@ -158,7 +181,6 @@
 "playlist.chapter_cap" = "章節";
 "playlist.playlist_cap" = "播放列表";
 "preference.advanced" = "進階";
-"preference.codec" = "編碼";
 "preference.control" = "控制";
 "preference.general" = "一般";
 "preference.keybindings" = "快速鍵";
@@ -170,9 +192,13 @@
 "preference.system_media_control" = "使用系統媒體控制";
 "preference.title" = "偏好設定";
 "preference.ui" = "UI";
+"preference.utilities" = "實用工具";
+"preference.video_audio" = "視訊/音訊";
 "quicksetting.item_default" = "預設值";
 "quicksetting.item_none" = "空";
 "subencoding.auto" = "自動檢測";
+"subtrack.no_external" = "沒有找到外部字幕";
+"subtrack.no_loaded" = "沒有已載入的字幕";
 "touchbar.ahead_15" = "前進 15 秒";
 "touchbar.ahead_30" = "前進 30 秒";
 "touchbar.back_15" = "後退 15 秒";
@@ -183,68 +209,8 @@
 "touchbar.next_video" = "下一個視訊";
 "touchbar.play_pause" = "播放 / 暫停";
 "touchbar.prev_video" = "上一個視訊";
+"touchbar.remainingTime" = "剩餘時間";
 "touchbar.rewind" = "快退";
 "touchbar.seek" = "進度列";
 "touchbar.time" = "播放進度";
-"touchbar.remainingTime" = "剩餘時間";
 "track.none" = "<無>";
-
-/* FIXME: Using English localization instead */
-"alert.beta_channel.message" = "IINA v1.0 is coming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
-
-/* FIXME: Using English localization instead */
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register.try" = "Try First";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_prompt.title" = "Enter your API token";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_register.register" = "Register Now";
-
-/* FIXME: Using English localization instead */
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.sub_track" = "Choose subtitle track";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.playlist" = "Playlist and chapters";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.music_mode" = "Enter music mode";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.settings" = "Quick Settings";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.full_screen" = "Toggle full screen";
-
-/* FIXME: Using English localization instead */
-"osc_toolbar.pip" = "Toggle Picture-in-Picture";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.title" = "Add URL";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.message" = "Please enter the URL:";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_file" = "Add File…";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_url" = "Add URL…";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_external" = "No External Subtitles Found";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_loaded" = "No Subtitles Loaded";

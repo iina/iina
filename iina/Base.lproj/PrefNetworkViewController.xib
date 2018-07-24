@@ -303,11 +303,11 @@
             <point key="canvasLocation" x="-385" y="514"/>
         </customView>
         <customView id="GHK-tq-Ssh">
-            <rect key="frame" x="0.0" y="0.0" width="444" height="124"/>
+            <rect key="frame" x="0.0" y="0.0" width="444" height="136"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitleYtdl" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mRg-vm-guk">
-                    <rect key="frame" x="-2" y="99" width="80" height="17"/>
+                    <rect key="frame" x="-2" y="111" width="80" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="youtube-dl:" id="1Ex-0X-pjo">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -326,7 +326,7 @@
                     </connections>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="iwI-aJ-5PQ">
-                    <rect key="frame" x="118" y="98" width="133" height="18"/>
+                    <rect key="frame" x="118" y="98" width="133" height="32"/>
                     <buttonCell key="cell" type="check" title="Enable youtube-dl" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="cyH-Md-FAD">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -394,7 +394,7 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="iwI-aJ-5PQ" firstAttribute="baseline" secondItem="mRg-vm-guk" secondAttribute="baseline" id="2aY-ta-abM"/>
+                <constraint firstItem="iwI-aJ-5PQ" firstAttribute="top" secondItem="mRg-vm-guk" secondAttribute="top" id="2aY-ta-abM"/>
                 <constraint firstItem="mRg-vm-guk" firstAttribute="leading" secondItem="GHK-tq-Ssh" secondAttribute="leading" id="5TM-HE-Id6"/>
                 <constraint firstItem="keb-Tn-A5F" firstAttribute="leading" secondItem="oFK-vb-I8Q" secondAttribute="trailing" constant="8" id="8fW-As-rsP"/>
                 <constraint firstItem="YLm-l6-HXj" firstAttribute="top" secondItem="aSG-qR-qgc" secondAttribute="bottom" constant="8" id="CT8-tl-vQe"/>

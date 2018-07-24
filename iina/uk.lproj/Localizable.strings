@@ -254,3 +254,24 @@
 
 /* FIXME: Using English localization instead */
 "subtrack.no_loaded" = "No Subtitles Loaded";
+
+/* FIXME: Using English localization instead */
+"alert.clear_watch_later.success" = "All saved playback progress deleted.";
+
+/* FIXME: Using English localization instead */
+"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
+
+/* FIXME: Using English localization instead */
+"alert.clear_history.title" = "Clear Playback History";
+
+/* FIXME: Using English localization instead */
+"alert.clear_history.success" = "Playback history deleted.";
+
+/* FIXME: Using English localization instead */
+"preference.utilities" = "Utilities";
+
+/* FIXME: Using English localization instead */
+"alert.clear_history.message" = "Are you sure to delete all playback history?";
+
+/* FIXME: Using English localization instead */
+"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";

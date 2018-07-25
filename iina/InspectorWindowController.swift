@@ -65,7 +65,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   @IBOutlet weak var voFPSField: NSTextField!
   @IBOutlet weak var edispFPSField: NSTextField!
   @IBOutlet weak var watchTableView: NSTableView!
-
+  @IBOutlet weak var deleteButton: NSButton!
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -74,6 +74,8 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     watchProperties = Preference.array(for: .watchProperties) as! [String]
     watchTableView.delegate = self
     watchTableView.dataSource = self
+
+    deleteButton.isEnabled = false
 
     updateInfo()
 
@@ -250,6 +252,10 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
       watchProperties[row] = value
     }
     saveWatchList()
+  }
+
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    deleteButton.isEnabled = (watchTableView.selectedRow != -1)
   }
 
   @IBAction func addWatchAction(_ sender: AnyObject) {

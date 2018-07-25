@@ -16,6 +16,7 @@
                 <outlet property="asamplerateField" destination="Ghr-q6-WAW" id="iz6-4W-IyG"/>
                 <outlet property="avsyncField" destination="BSs-zY-Ycq" id="NEr-Qv-jhf"/>
                 <outlet property="chaptersField" destination="PgQ-KO-dy8" id="Yrh-D0-COd"/>
+                <outlet property="deleteButton" destination="Tel-U0-EC3" id="wLP-np-xQv"/>
                 <outlet property="displayFPSField" destination="Soa-90-mcv" id="Xp0-Pv-KoF"/>
                 <outlet property="droppedFramesField" destination="Evy-yh-2vU" id="k6S-ip-NB8"/>
                 <outlet property="durationField" destination="uzH-YO-YLT" id="zK3-y6-25V"/>

@@ -327,7 +327,7 @@
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0Ig-J7-VYp" secondAttribute="trailing" constant="20" symbolic="YES" id="0kB-CC-aOZ"/>
+                <constraint firstItem="0Ig-J7-VYp" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="bsP-Kc-xXR" secondAttribute="leading" constant="120" id="0kB-CC-aOZ"/>
                 <constraint firstItem="Taj-6a-uFI" firstAttribute="top" secondItem="qQz-rr-NFX" secondAttribute="bottom" constant="16" id="0ml-o0-wbT"/>
                 <constraint firstItem="iAK-W4-XCh" firstAttribute="leading" secondItem="iB2-dA-Y1E" secondAttribute="leading" id="2FR-9e-yO7"/>
                 <constraint firstItem="haq-Mp-LHn" firstAttribute="baseline" secondItem="Taj-6a-uFI" secondAttribute="baseline" id="2rA-mm-1Cr"/>

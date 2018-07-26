@@ -29,7 +29,7 @@
             <subviews>
                 <textField identifier="SectionTitleBehavior" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38y-2I-MGs">
                     <rect key="frame" x="-2" y="435" width="66" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Behavior:" id="uQR-Fx-oEm">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Behavior:" id="uQR-Fx-oEm">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -392,7 +392,7 @@
                 <constraint firstItem="b7I-2V-MYa" firstAttribute="top" secondItem="QvG-Ma-br0" secondAttribute="bottom" constant="16" id="9H8-4r-eDa"/>
                 <constraint firstItem="bV8-LP-cwH" firstAttribute="baseline" secondItem="OXi-vL-mzp" secondAttribute="baseline" id="9fY-Y6-onK"/>
                 <constraint firstItem="tUl-6f-ClP" firstAttribute="top" secondItem="ibu-Tq-kBr" secondAttribute="bottom" constant="8" id="DQg-F2-jP7"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="38y-2I-MGs" secondAttribute="trailing" id="Dd3-CV-21F"/>
+                <constraint firstItem="38y-2I-MGs" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="6zR-96-iKB" secondAttribute="leading" constant="120" id="Dd3-CV-21F"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6Hg-O4-cBP" secondAttribute="trailing" id="EU4-oh-Sn4"/>
                 <constraint firstItem="38y-2I-MGs" firstAttribute="top" secondItem="6zR-96-iKB" secondAttribute="top" constant="8" id="EkZ-1t-Li0"/>
                 <constraint firstItem="ONF-nX-zDm" firstAttribute="baseline" secondItem="ibu-Tq-kBr" secondAttribute="baseline" id="GtH-hr-0BD"/>
@@ -438,7 +438,7 @@
             <subviews>
                 <textField identifier="SectionTitlePlaylist" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gO-wx-MWj">
                     <rect key="frame" x="-2" y="45" width="56" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Playlist:" id="6TV-DG-503">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Playlist:" id="6TV-DG-503">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -482,7 +482,7 @@
                 <constraint firstItem="6gO-wx-MWj" firstAttribute="top" secondItem="y7O-rd-dnT" secondAttribute="top" constant="8" id="R9Q-BW-yNL"/>
                 <constraint firstItem="xmd-ef-R8e" firstAttribute="leading" secondItem="y7O-rd-dnT" secondAttribute="leading" constant="120" id="WmZ-xJ-nJr"/>
                 <constraint firstAttribute="bottom" secondItem="UHf-eK-ba5" secondAttribute="bottom" constant="8" id="fru-O3-rhE"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6gO-wx-MWj" secondAttribute="trailing" id="hMc-8k-u0x"/>
+                <constraint firstItem="6gO-wx-MWj" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="y7O-rd-dnT" secondAttribute="leading" constant="120" id="hMc-8k-u0x"/>
                 <constraint firstItem="OVz-Nv-1WW" firstAttribute="top" secondItem="xmd-ef-R8e" secondAttribute="bottom" constant="4" id="knP-0X-jJU"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xmd-ef-R8e" secondAttribute="trailing" id="o3a-bC-bx3"/>
                 <constraint firstItem="6gO-wx-MWj" firstAttribute="top" secondItem="xmd-ef-R8e" secondAttribute="top" id="q99-S9-zIq"/>
@@ -496,7 +496,7 @@
             <subviews>
                 <textField identifier="SectionTitleScreenshots" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLE-bn-UWS">
                     <rect key="frame" x="-2" y="55" width="90" height="17"/>
-                    <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" alignment="left" title="Screenshots:" id="pdx-zt-kf2">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Screenshots:" id="pdx-zt-kf2">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -578,7 +578,7 @@
                 <constraint firstItem="aEK-1q-7Vr" firstAttribute="leading" secondItem="Nj3-EX-JeL" secondAttribute="leading" id="5ir-o9-5rL"/>
                 <constraint firstItem="PKl-oI-CuN" firstAttribute="baseline" secondItem="Nj3-EX-JeL" secondAttribute="baseline" id="7dL-hn-NbC"/>
                 <constraint firstItem="iLE-bn-UWS" firstAttribute="top" secondItem="ym1-pZ-4SZ" secondAttribute="top" constant="8" id="8LP-jE-AHt"/>
-                <constraint firstItem="iLE-bn-UWS" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ym1-pZ-4SZ" secondAttribute="leading" constant="118" id="9xX-jB-SlI"/>
+                <constraint firstItem="iLE-bn-UWS" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ym1-pZ-4SZ" secondAttribute="leading" constant="120" id="9xX-jB-SlI"/>
                 <constraint firstItem="ZA7-QS-FAH" firstAttribute="baseline" secondItem="Nj3-EX-JeL" secondAttribute="baseline" id="Ggf-3U-n6h"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tV0-X6-PhP" secondAttribute="trailing" id="Moh-Du-SXe"/>
                 <constraint firstItem="iLE-bn-UWS" firstAttribute="leading" secondItem="ym1-pZ-4SZ" secondAttribute="leading" id="OPk-QW-QHI"/>
@@ -603,7 +603,7 @@
             <subviews>
                 <textField identifier="SectionTitleHistory" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pfH-CF-O2T">
                     <rect key="frame" x="-2" y="67" width="57" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="History:" id="jeK-46-2BG">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="History:" id="jeK-46-2BG">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -659,7 +659,7 @@
                 <constraint firstItem="gxK-Zo-PtQ" firstAttribute="leading" secondItem="4zm-YX-iM8" secondAttribute="leading" constant="20" id="YHa-jX-bEO"/>
                 <constraint firstItem="pfH-CF-O2T" firstAttribute="top" secondItem="AUU-c3-fW5" secondAttribute="top" id="YsQ-gV-evT"/>
                 <constraint firstItem="AUU-c3-fW5" firstAttribute="leading" secondItem="Kmu-J1-cbE" secondAttribute="leading" constant="120" id="ZbG-0Z-dQm"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pfH-CF-O2T" secondAttribute="trailing" id="anm-jv-kcZ"/>
+                <constraint firstItem="pfH-CF-O2T" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Kmu-J1-cbE" secondAttribute="leading" constant="120" id="anm-jv-kcZ"/>
                 <constraint firstItem="pfH-CF-O2T" firstAttribute="leading" secondItem="Kmu-J1-cbE" secondAttribute="leading" id="c9q-SG-bJV"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4zm-YX-iM8" secondAttribute="trailing" id="ca7-1x-vvq"/>
                 <constraint firstItem="pfH-CF-O2T" firstAttribute="top" secondItem="Kmu-J1-cbE" secondAttribute="top" constant="8" id="di6-Om-iYm"/>

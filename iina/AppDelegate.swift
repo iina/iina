@@ -329,12 +329,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // links
     if let host = parsed.host, host == "weblink" {
 
+      // parameter: url
       guard let urlValue = (parsed.queryItems?.first { $0.name == "url" }?.value) else {
         Logger.log("No parameter \"url\" for weblink")
         return
       }
-      Logger.log("Got weblink, url=\(urlValue)")
-      PlayerCore.active.openURLString(urlValue)
+
+      // parameter: add
+      var add = false
+      if let addValue = parsed.queryItems?.first(where: { $0.name == "add" })?.value {
+        add = NSString(string: addValue).boolValue
+      }
+
+      Logger.log("Got weblink, url=\(urlValue), add=\(add)")
+
+      if (!add) {
+        PlayerCore.active.openURLString(urlValue)
+      } else {
+        let playerCore = PlayerCore.lastActive
+        playerCore.addToPlaylist(urlValue)
+        playerCore.syncUI(.playlist)
+        playerCore.sendOSD(.addToPlaylist(2))
+      }
     }
   }
 

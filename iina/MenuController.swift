@@ -82,6 +82,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var abLoop: NSMenuItem!
   @IBOutlet weak var fileLoop: NSMenuItem!
   @IBOutlet weak var playlistPanel: NSMenuItem!
+  @IBOutlet weak var floatingPlaylist: NSMenuItem!
   @IBOutlet weak var playlist: NSMenuItem!
   @IBOutlet weak var playlistLoop: NSMenuItem!
   @IBOutlet weak var playlistMenu: NSMenu!
@@ -225,6 +226,7 @@ class MenuController: NSObject, NSMenuDelegate {
     chapterMenu.delegate = self
     playlistLoop.action = #selector(MainMenuActionHandler.menuPlaylistLoop(_:))
     playlistPanel.action = #selector(MainWindowController.menuShowPlaylistPanel(_:))
+    floatingPlaylist.action = #selector(MainWindowController.menuToggleFloatingPlaylist(_:))
     chapterPanel.action = #selector(MainWindowController.menuShowChaptersPanel(_:))
 
     nextMedia.action = #selector(MainMenuActionHandler.menuNextMedia(_:))

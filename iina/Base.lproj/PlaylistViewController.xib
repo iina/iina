@@ -14,6 +14,7 @@
                 <outlet property="chapterTableView" destination="BvG-MR-6LX" id="WoF-Wg-fqX"/>
                 <outlet property="chaptersBtn" destination="SOR-3l-PFj" id="W2q-tm-TA0"/>
                 <outlet property="deleteBtn" destination="7my-AM-8Ts" id="wTg-jz-wRa"/>
+                <outlet property="floatBtn" destination="cKC-Ss-KQI" id="blC-CP-AsI"/>
                 <outlet property="loopBtn" destination="IHI-5g-OMg" id="Sev-F9-8Dg"/>
                 <outlet property="playlistBtn" destination="5Zq-JQ-XO4" id="iAS-Co-wFQ"/>
                 <outlet property="playlistTableView" destination="xIa-sI-0Xn" id="JVO-9u-NdG"/>
@@ -44,11 +45,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="297"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnResizing="NO" autosaveColumns="NO" rowHeight="26" viewBased="YES" id="xIa-sI-0Xn">
+                                                <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnResizing="NO" autosaveColumns="NO" rowHeight="22" viewBased="YES" id="xIa-sI-0Xn" customClass="DraggableTableView" customModule="IINA" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="297"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.080000000000000002" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                                     <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
                                                     <color key="gridColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                                     <tableColumns>
@@ -72,7 +73,7 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="18" height="17"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="▶︎" id="4yj-cg-fli">
                                                                                 <font key="font" metaFont="system"/>
-                                                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                             <connections>
@@ -125,7 +126,7 @@
                                                                             <rect key="frame" x="13" y="0.0" width="96" height="17"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="Table View Cell" id="M5s-Bm-l3O">
                                                                                 <font key="font" metaFont="system"/>
-                                                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                             <connections>
@@ -206,32 +207,6 @@
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="X2W-MY-vYB" userLabel="ToolBar">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="24"/>
                                         <subviews>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W9C-Z7-hiI">
-                                                <rect key="frame" x="190" y="0.0" width="24" height="24"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="24" id="Wbf-h5-7Gb"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="tOv-Aj-8c4">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="addToPlaylistBtnAction:" target="-2" id="glx-Rv-Iri"/>
-                                                </connections>
-                                            </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7my-AM-8Ts">
-                                                <rect key="frame" x="214" y="0.0" width="24" height="24"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="24" id="6gk-wr-fJW"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="trash" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="4GG-b4-WLp">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="clearPlaylistBtnAction:" target="-2" id="7IC-nt-T1t"/>
-                                                </connections>
-                                            </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IHI-5g-OMg">
                                                 <rect key="frame" x="2" y="0.0" width="24" height="24"/>
                                                 <constraints>
@@ -255,19 +230,62 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
+                                                    <action selector="addToPlaylistBtnAction:" target="-2" id="glx-Rv-Iri"/>
                                                     <action selector="shuffleBtnAction:" target="-2" id="ZiC-jw-zzz"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cKC-Ss-KQI" userLabel="Float Button">
+                                                <rect key="frame" x="166" y="0.0" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="5cn-Ug-qgv"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="float" imagePosition="overlaps" alignment="center" alternateImage="float-dark" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="i3j-at-e0Z">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="floatBtnAction:" target="-2" id="Ybl-0c-ZED"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W9C-Z7-hiI" userLabel="Add Button">
+                                                <rect key="frame" x="190" y="0.0" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="Wbf-h5-7Gb"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="tOv-Aj-8c4">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="addToPlaylistBtnAction:" target="-2" id="Jtx-UI-zuc"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7my-AM-8Ts">
+                                                <rect key="frame" x="214" y="0.0" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="6gk-wr-fJW"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="trash" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="4GG-b4-WLp">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="clearPlaylistBtnAction:" target="-2" id="7IC-nt-T1t"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="7my-AM-8Ts" secondAttribute="trailing" constant="2" id="1Sc-nK-8IE"/>
+                                            <constraint firstAttribute="bottom" secondItem="cKC-Ss-KQI" secondAttribute="bottom" id="81q-lO-XIy"/>
                                             <constraint firstAttribute="bottom" secondItem="7my-AM-8Ts" secondAttribute="bottom" id="C8I-ns-vw9"/>
                                             <constraint firstAttribute="bottom" secondItem="W9C-Z7-hiI" secondAttribute="bottom" id="DTj-rn-hhY"/>
                                             <constraint firstItem="xhU-qn-3aa" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="Enh-zP-tlw"/>
                                             <constraint firstItem="7my-AM-8Ts" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="LE8-YD-ghx"/>
                                             <constraint firstItem="7my-AM-8Ts" firstAttribute="leading" secondItem="W9C-Z7-hiI" secondAttribute="trailing" id="TqF-O6-xHW"/>
+                                            <constraint firstItem="W9C-Z7-hiI" firstAttribute="leading" secondItem="cKC-Ss-KQI" secondAttribute="trailing" id="Uw6-Tf-H4F"/>
                                             <constraint firstItem="IHI-5g-OMg" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="VVG-ZO-opa"/>
                                             <constraint firstItem="xhU-qn-3aa" firstAttribute="leading" secondItem="IHI-5g-OMg" secondAttribute="trailing" id="beQ-YD-Oxf"/>
+                                            <constraint firstItem="cKC-Ss-KQI" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="faY-O0-raT"/>
                                             <constraint firstAttribute="bottom" secondItem="xhU-qn-3aa" secondAttribute="bottom" id="mPm-LR-ZkL"/>
                                             <constraint firstItem="W9C-Z7-hiI" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="qUl-cf-d3q"/>
                                             <constraint firstItem="IHI-5g-OMg" firstAttribute="leading" secondItem="X2W-MY-vYB" secondAttribute="leading" constant="2" id="shV-bB-ELD"/>
@@ -298,11 +316,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="31" rowSizeStyle="automatic" viewBased="YES" id="BvG-MR-6LX">
+                                                <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="31" rowSizeStyle="automatic" viewBased="YES" id="BvG-MR-6LX" customClass="DraggableTableView" customModule="IINA" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.080000000000000002" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                                     <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
                                                     <color key="gridColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                                     <tableColumns>
@@ -568,6 +586,8 @@
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="float" width="15" height="15"/>
+        <image name="float-dark" width="15" height="15"/>
         <image name="loop" width="16" height="15"/>
         <image name="loop-dark" width="16" height="15"/>
         <image name="shuffle" width="15" height="15"/>

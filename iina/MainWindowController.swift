@@ -101,6 +101,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var cachedScreenCount = 0
   var blackWindows: [NSWindow] = []
   
+  /** Floating Playlist */
+  var isFloatingPlaylist = false
+  var playlistWindow: PlaylistWindow?
+
   // MARK: - Status
 
   /** For mpv's `geometry` option. We cache the parsed structure
@@ -1231,6 +1235,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
+
+    NotificationCenter.default.post(name: .iinaMainWindowClosed, object: player)
   }
 
   // MARK: - Window delegate: Full screen
@@ -1775,8 +1781,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     sidebarAnimationState = .willShow
     let width = type.width()
-    sideBarWidthConstraint.constant = width
-    sideBarRightConstraint.constant = -width
+    if (sideBarWidthConstraint != nil) {
+      sideBarWidthConstraint.constant = width
+    }
+    if (sideBarRightConstraint != nil) {
+      sideBarRightConstraint.constant = -width
+    }
     sideBarView.isHidden = false
     // add view and constraints
     sideBarView.addSubview(view)
@@ -1790,7 +1800,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = SideBarAnimationDuration
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-      sideBarRightConstraint.animator().constant = 0
+      if (sideBarRightConstraint != nil) {
+        sideBarRightConstraint.animator().constant = 0
+      }
     }) {
       self.sidebarAnimationState = .shown
       self.sideBarStatus = type
@@ -1803,7 +1815,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = animate ? SideBarAnimationDuration : 0
       context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-      sideBarRightConstraint.animator().constant = -currWidth
+      if (sideBarRightConstraint != nil) {
+        sideBarRightConstraint.animator().constant = -currWidth
+      }
     }) {
       if self.sidebarAnimationState == .willHide {
         self.sideBarStatus = .hidden
@@ -2056,13 +2070,19 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     sliderCell?.isInDarkTheme = isDarkTheme
     volumeCell?.isInDarkTheme = isDarkTheme
 
-    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView].forEach {
+    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView, sideBarView].forEach {
       $0?.material = material
       $0?.appearance = appearance
     }
 
     if isInFullScreen {
       window!.appearance = appearance;
+    }
+
+    if isFloatingPlaylist {
+      playlistWindow?.appearance = appearance;
+      playlistWindow?.wrapperView?.material = material
+      playlistWindow?.wrapperView?.appearance = appearance
     }
 
     window?.appearance = appearance
@@ -2622,6 +2642,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /// Legacy IBAction, but still in use.
   func playlistButtonAction(_ sender: AnyObject) {
+    if isFloatingPlaylist {
+      disableFloatingPlaylist()
+    }
     if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
       return  // do not interrput other actions while it is animating
     }
@@ -2756,6 +2779,61 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     })
   }
   
+  // MARK: Floating Playlist
+
+  func enableFloatingPlaylist() {
+    // get playlist view reference
+    let view = playlistView.view
+
+    // reset down shift for playlistView
+    playlistView.downShift = 22
+
+    // hide sidebar
+    if sideBarStatus != .hidden {
+      hideSideBar(animate: false)
+    }
+
+    // create window
+    let window = PlaylistWindow(player: player, view: view)
+
+    // move playlist view to window
+    view.removeFromSuperview()
+    window.contentView?.addSubview(view)
+
+    // update playlist view constraints
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": view])
+
+    // persist window
+    playlistWindow = window
+
+    // update state
+    isFloatingPlaylist = true
+
+    Logger.log("Floating Playlist enabled.")
+  }
+
+  func disableFloatingPlaylist() {
+    // remove window
+    playlistWindow?.orderOut(self)
+    playlistWindow = nil
+
+    // update state
+    isFloatingPlaylist = false
+
+    Logger.log("Floating Playlist disabled.")
+  }
+
+  func toggleFloatingPlaylist() {
+    if (self.isFloatingPlaylist) {
+      disableFloatingPlaylist()
+      // show sidebar
+      if sideBarStatus == .hidden {
+        playlistButtonAction(self)
+      }
+    } else {
+      enableFloatingPlaylist()
+    }
+  }
 }
 
 // MARK: - Picture in Picture

@@ -91,6 +91,7 @@ struct Constants {
 
 extension Notification.Name {
   static let iinaMainWindowChanged = Notification.Name("IINAMainWindowChanged")
+  static let iinaMainWindowClosed = Notification.Name("IINAMainWindowClosed")
   static let iinaPlaylistChanged = Notification.Name("IINAPlaylistChanged")
   static let iinaTracklistChanged = Notification.Name("IINATracklistChanged")
   static let iinaMediaTitleChanged = Notification.Name("IINAMediaTitleChanged")

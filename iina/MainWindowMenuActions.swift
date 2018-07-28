@@ -137,6 +137,10 @@ extension MainWindowController {
     player.switchToMiniPlayer()
   }
 
+  @objc func menuToggleFloatingPlaylist(_ sender: NSMenuItem) {
+    toggleFloatingPlaylist()
+  }
+
   @objc func menuSetDelogo(_ sender: NSMenuItem) {
     if sender.state == .on {
       if let filter = player.info.delogoFilter {

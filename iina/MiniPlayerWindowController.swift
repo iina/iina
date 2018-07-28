@@ -84,9 +84,9 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   @IBOutlet weak var playlistWrapperView: NSVisualEffectView!
   @IBOutlet weak var mediaInfoView: NSView!
   @IBOutlet weak var controlView: NSView!
-  @IBOutlet weak var titleLabel: NSTextField!
+  @IBOutlet weak var titleLabel: ScrollingTextField!
   @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
-  @IBOutlet weak var artistAlbumLabel: NSTextField!
+  @IBOutlet weak var artistAlbumLabel: ScrollingTextField!
   @IBOutlet weak var playButton: NSButton!
   @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var rightLabel: DurationDisplayTextField!
@@ -250,7 +250,10 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
       closeButtonView.animator().alphaValue = 0
       controlView.animator().alphaValue = 0
       mediaInfoView.animator().alphaValue = 1
-    }, completionHandler: {})
+    }, completionHandler: {
+      self.titleLabel.startScrolling()
+      self.artistAlbumLabel.startScrolling()
+    })
   }
 
   override func mouseEntered(with event: NSEvent) {
@@ -323,6 +326,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     DispatchQueue.main.async {
       let (mediaTitle, mediaAlbum, mediaArtist) = self.player.getMusicMetadata()
       self.titleLabel.stringValue = mediaTitle
+      self.titleLabel.reset()
       self.window?.title = mediaTitle
       // hide artist & album label when info not available
       if mediaArtist.isEmpty && mediaAlbum.isEmpty {
@@ -336,6 +340,9 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
           self.artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
         }
       }
+      self.artistAlbumLabel.reset()
+      self.titleLabel.startScrolling()
+      self.artistAlbumLabel.startScrolling()
     }
   }
 

@@ -970,7 +970,7 @@
             <point key="canvasLocation" x="19" y="752"/>
         </customView>
         <customView id="M9c-Ak-HmK">
-            <rect key="frame" x="0.0" y="-1" width="580" height="34"/>
+            <rect key="frame" x="0.0" y="0.0" width="580" height="34"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitleAppearance" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="APB-Nm-aTA">
@@ -982,7 +982,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FNR-0h-DtW">
-                    <rect key="frame" x="172" y="4" width="121" height="26"/>
+                    <rect key="frame" x="172" y="4" width="201" height="26"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="115" id="Xa5-Xs-E4o"/>
                     </constraints>
@@ -992,9 +992,8 @@
                         <menu key="menu" id="Cpu-U2-hGC">
                             <items>
                                 <menuItem title="Dark" state="on" id="VvZ-mQ-wQB"/>
-                                <menuItem title="Ultra Dark" tag="1" id="pV2-12-PmM"/>
                                 <menuItem title="Light" tag="2" id="lZc-Dl-3cQ"/>
-                                <menuItem title="Medium Light" tag="3" id="TdN-pM-HHk"/>
+                                <menuItem title="Match System Appearance" tag="4" id="TdN-pM-HHk"/>
                             </items>
                         </menu>
                     </popUpButtonCell>

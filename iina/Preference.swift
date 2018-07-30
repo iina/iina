@@ -291,8 +291,8 @@ struct Preference {
 
   enum Theme: Int, InitializingFromKey {
     case dark = 0
-    case light
-    case system
+    case light = 2
+    case system = 4
 
     static var defaultValue = Theme.dark
 

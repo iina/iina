@@ -27,10 +27,6 @@ class PrefOSCToolbarSettingsSheetController: NSWindowController, PrefOSCToolbarC
 
   override func windowDidLoad() {
     super.windowDidLoad()
-
-    currentItemsView.wantsLayer = true
-    currentItemsView.layer?.backgroundColor = NSColor.secondarySelectedControlColor.cgColor
-    currentItemsView.layer?.cornerRadius = 4
     currentItemsView.registerForDraggedTypes([.iinaOSCAvailableToolbarButtonType, .iinaOSCCurrentToolbarButtonType])
     currentItemsView.currentItemsViewDelegate = self
     currentItemsView.initItems(fromItems: PrefUIViewController.oscToolbarButtons)

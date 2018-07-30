@@ -75,8 +75,6 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     super.viewDidLoad()
     oscPositionPopupBtnAction(oscPositionPopupButton)
     oscToolbarStackView.wantsLayer = true
-    oscToolbarStackView.layer?.backgroundColor = NSColor(calibratedWhite: 0.5, alpha: 0.2).cgColor
-    oscToolbarStackView.layer?.cornerRadius = 4
     updateOSCToolbarButtons()
     setupGeometryRelatedControls()
     setupResizingRelatedControls()

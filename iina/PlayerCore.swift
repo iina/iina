@@ -788,17 +788,20 @@ class PlayerCore: NSObject {
     }
   }
 
-  func setAudioEq(fromFilter filter: MPVFilter) {
-    filter.label = Constants.FilterName.audioEq
-    _ = addAudioFilter(filter)
-    info.audioEqFilter = filter
+  func setAudioEq(fromGains gains: [Double]) {
+    let channelCount = mpv.getInt(MPVProperty.audioParamsChannelCount)
+    let freqList = [31.25, 62.5, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
+    let filters = freqList.enumerated().map { (index, freq) -> MPVFilter in
+      let string = [Int](0..<channelCount).map { "c\($0) f=\(freq) w=\(freq / 1.224744871) g=\(gains[index])" }.joined(separator: "|")
+      return MPVFilter(name: "lavfi", label: "\(Constants.FilterName.audioEq)\(index)", paramString: "[anequalizer=\(string)]")
+    }
+    filters.forEach { _ = addAudioFilter($0) }
+    info.audioEqFilters = filters
   }
 
   func removeAudioEqFilter() {
-    if let prevFilter = info.audioEqFilter {
-      _ = removeAudioFilter(prevFilter)
-      info.audioEqFilter = nil
-    }
+    info.audioEqFilters?.compactMap { $0 }.forEach { _ = removeAudioFilter($0) }
+    info.audioEqFilters = nil
   }
 
   func addVideoFilter(_ filter: MPVFilter) -> Bool {
@@ -1472,11 +1475,13 @@ class PlayerCore: NSObject {
     let audioFilters = mpv.getFilters(MPVProperty.af)
     for filter in audioFilters {
       guard let label = filter.label else { continue }
-      switch label {
-      case Constants.FilterName.audioEq:
-        info.audioEqFilter = filter
-      default:
-        break
+      if label.hasPrefix(Constants.FilterName.audioEq) {
+        if info.audioEqFilters == nil {
+          info.audioEqFilters = Array(repeating: nil, count: 10)
+        }
+        if let index = Int(String(label.last!)) {
+          info.audioEqFilters![index] = filter
+        }
       }
     }
   }

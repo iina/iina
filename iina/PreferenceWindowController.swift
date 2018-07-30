@@ -384,10 +384,10 @@ class PrefSearchResultMaskView: NSView {
   var maskRect: NSRect?
 
   override static func defaultAnimation(forKey key: NSAnimatablePropertyKey) -> Any? {
-    if key.rawValue == "alphaValue" {
+    if key == "alphaValue" {
       let kfa = CAKeyframeAnimation(keyPath: "alphaValue")
       kfa.duration = 1.5
-      kfa.timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault), CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)]
+      kfa.timingFunctions = [CAMediaTimingFunction(name: .default), CAMediaTimingFunction(name: .linear)]
       kfa.values = [1, 1, 0]
       kfa.keyTimes = [0, 0.75, 1.5]
       return kfa
@@ -402,7 +402,7 @@ class PrefSearchResultMaskView: NSView {
     let framePath = NSBezierPath(rect: bounds)
     let maskPath =  NSBezierPath(roundedRect: maskRect, xRadius: 6, yRadius: 6)
     framePath.append(maskPath)
-    framePath.windingRule = .evenOddWindingRule
+    framePath.windingRule = .evenOdd
     framePath.setClip()
     NSColor(calibratedWhite: 0.5, alpha: 0.5).setFill()
     dirtyRect.fill()

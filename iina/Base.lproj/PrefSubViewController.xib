@@ -37,7 +37,7 @@
             <subviews>
                 <textField identifier="SectionTitleAutoLoad" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tej-f2-5d5">
                     <rect key="frame" x="-2" y="155" width="70" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Auto load:" id="raf-Yu-ck0">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Auto load:" id="raf-Yu-ck0">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -202,7 +202,7 @@
                 <constraint firstItem="cZs-HF-wZQ" firstAttribute="leading" secondItem="if4-Ls-9s6" secondAttribute="leading" id="ZiA-lh-Rfb"/>
                 <constraint firstAttribute="bottom" secondItem="cZs-HF-wZQ" secondAttribute="bottom" constant="4" id="aPs-QH-5v9"/>
                 <constraint firstItem="cZs-HF-wZQ" firstAttribute="top" secondItem="if4-Ls-9s6" secondAttribute="bottom" constant="8" id="nLB-Tp-Lee"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Tej-f2-5d5" secondAttribute="trailing" constant="20" symbolic="YES" id="o8G-bb-tes"/>
+                <constraint firstItem="Tej-f2-5d5" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="n8c-of-fDQ" secondAttribute="leading" constant="120" id="o8G-bb-tes"/>
                 <constraint firstItem="Tej-f2-5d5" firstAttribute="leading" secondItem="n8c-of-fDQ" secondAttribute="leading" id="xHQ-K2-9l0"/>
             </constraints>
             <point key="canvasLocation" x="-722" y="-252.5"/>
@@ -213,7 +213,7 @@
             <subviews>
                 <textField identifier="SectionTitleOther" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MEh-II-li7">
                     <rect key="frame" x="-2" y="67" width="46" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Other:" id="LiG-iV-AQK">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Other:" id="LiG-iV-AQK">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -300,7 +300,7 @@
             <subviews>
                 <textField identifier="SectionTitleOnlineSub" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NlE-eQ-ofV">
                     <rect key="frame" x="-2" y="72" width="112" height="81"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Online Subtitles:" id="0fB-es-DmV">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Online Subtitles:" id="0fB-es-DmV">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -536,7 +536,7 @@
             <subviews>
                 <textField identifier="SectionTitleText" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yw3-tf-Rka">
                     <rect key="frame" x="-2" y="272" width="97" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Text subtitles:" id="Qda-dp-nhg">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Text subtitles:" id="Qda-dp-nhg">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -992,7 +992,7 @@
             <subviews>
                 <textField identifier="SectionTitlePosition" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WeJ-3X-tJy">
                     <rect key="frame" x="-2" y="170" width="61" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Position:" id="4Tb-Yh-PdP">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Position:" id="4Tb-Yh-PdP">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1209,7 +1209,7 @@
                 <constraint firstItem="pyx-K4-cgm" firstAttribute="leading" secondItem="eAH-hV-xRg" secondAttribute="leading" id="TLe-Pk-PCH"/>
                 <constraint firstItem="9sd-YV-QMQ" firstAttribute="leading" secondItem="HKD-K0-lsV" secondAttribute="trailing" constant="8" id="VLx-gt-KS4"/>
                 <constraint firstItem="YBq-kz-Xxb" firstAttribute="leading" secondItem="pyx-K4-cgm" secondAttribute="leading" id="XL5-xx-1eM"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WeJ-3X-tJy" secondAttribute="trailing" constant="20" symbolic="YES" id="XWi-Vk-FhO"/>
+                <constraint firstItem="WeJ-3X-tJy" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ZpT-fB-Daq" secondAttribute="leading" constant="118" id="XWi-Vk-FhO"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9sd-YV-QMQ" secondAttribute="trailing" constant="20" symbolic="YES" id="b4z-Pm-kMs"/>
                 <constraint firstItem="HKD-K0-lsV" firstAttribute="leading" secondItem="eAH-hV-xRg" secondAttribute="trailing" constant="8" id="brp-Tf-Kqk"/>
                 <constraint firstItem="WeJ-3X-tJy" firstAttribute="top" secondItem="ZpT-fB-Daq" secondAttribute="top" constant="8" id="fSA-DB-ixN"/>
@@ -1229,7 +1229,7 @@
             <subviews>
                 <textField identifier="SectionTitleASS" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utN-qX-5BH">
                     <rect key="frame" x="-2" y="45" width="96" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="ASS subtitles:" id="mFm-Q6-aja">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="ASS subtitles:" id="mFm-Q6-aja">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1245,7 +1245,7 @@
                         <binding destination="5Up-Ab-aAm" name="value" keyPath="values.ignoreAssStyles" id="aqp-Hh-E8I"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uf9-KF-ykH">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Uf9-KF-ykH">
                     <rect key="frame" x="118" y="30" width="430" height="14"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="If enabled, all ASS subtitles will be drawn using the styles below." id="OcF-0z-7qe">
                         <font key="font" metaFont="smallSystem"/>
@@ -1303,7 +1303,7 @@
                 <constraint firstItem="Dg7-OH-h2a" firstAttribute="top" secondItem="Uf9-KF-ykH" secondAttribute="bottom" constant="8" id="p0C-xp-ndA"/>
                 <constraint firstItem="utN-qX-5BH" firstAttribute="top" secondItem="ATO-g6-mEy" secondAttribute="top" constant="8" id="pVk-D1-vRK"/>
                 <constraint firstAttribute="bottom" secondItem="Dg7-OH-h2a" secondAttribute="bottom" constant="8" id="rbY-5T-ZoB"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="utN-qX-5BH" secondAttribute="trailing" constant="20" symbolic="YES" id="z5s-tB-6So"/>
+                <constraint firstItem="utN-qX-5BH" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ATO-g6-mEy" secondAttribute="leading" constant="120" id="z5s-tB-6So"/>
                 <constraint firstItem="Dg7-OH-h2a" firstAttribute="leading" secondItem="VF9-G7-jts" secondAttribute="leading" id="z8L-ky-0tU"/>
             </constraints>
             <point key="canvasLocation" x="-722" y="-83"/>

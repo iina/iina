@@ -63,6 +63,8 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     confTableView.dataSource = self
     confTableView.delegate = self
 
+    removeKmBtn.isEnabled = false
+
     if #available(macOS 10.13, *) {
       useMediaKeysButton.title = NSLocalizedString("preference.system_media_control", comment: "Use system media control")
     }
@@ -286,7 +288,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
   private func changeButtonEnabledStatus() {
     shouldEnableEdit = !isDefaultConfig(currentConfName)
-    [revealConfFileBtn, deleteConfFileBtn, addKmBtn, removeKmBtn].forEach { btn in
+    [revealConfFileBtn, deleteConfFileBtn, addKmBtn].forEach { btn in
       btn.isEnabled = shouldEnableEdit
     }
     kbTableView.tableColumns.forEach { $0.isEditable = shouldEnableEdit }
@@ -419,10 +421,13 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    guard let tableView = notification.object as? NSTableView, tableView == confTableView else { return }
-    guard let title = userConfigNames[at: confTableView.selectedRow] else { return }
-    currentConfName = title
-    currentConfFilePath = getFilePath(forConfig: title)!
-    loadConfigFile()
+    if let tableView = notification.object as? NSTableView, tableView == confTableView {
+      guard let title = userConfigNames[at: confTableView.selectedRow] else { return }
+      currentConfName = title
+      currentConfFilePath = getFilePath(forConfig: title)!
+      loadConfigFile()
+    } else {
+      removeKmBtn.isEnabled = shouldEnableEdit && (kbTableView.selectedRow != -1)
+    }
   }
 }

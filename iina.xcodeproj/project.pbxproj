@@ -904,6 +904,9 @@
 		8F6F50541EC5E053002B47B4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
 		8F825CBD1F16280A0094B529 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		9D1C033A2067C24600919F84 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
+		9D8B490421007F58005113D9 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
+		9D8B490621007F84005113D9 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
+		9DB9ED5C20889D66006B1492 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
 		9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationDisplayTextField.swift; sourceTree = "<group>"; };
 		9E63CAB61E3F7D0E00EA66C9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.debug.xcconfig"; sourceTree = "<group>"; };
@@ -992,6 +995,10 @@
 		E3383688202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefOSCToolbarDraggingItemViewController.xib; sourceTree = "<group>"; };
 		E33BA5C3204315740069A0F6 /* AssrtSubtitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssrtSubtitle.swift; sourceTree = "<group>"; };
 		E33BA5C5204BD9FE0069A0F6 /* SubChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubChooseViewController.swift; sourceTree = "<group>"; };
+		E33C31592107017000983986 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/SubChooseViewController.strings"; sourceTree = "<group>"; };
+		E33C315B2107018000983986 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefOSCToolbarSettingsSheetController.strings"; sourceTree = "<group>"; };
+		E33C315D210701A100983986 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PrefUtilsViewController.strings"; sourceTree = "<group>"; };
+		E33C315F210701C200983986 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/PreferenceWindowController.strings"; sourceTree = "<group>"; };
 		E342832E20B7149800139865 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		E34A0E022053F93A00B50097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefOSCToolbarSettingsSheetController.xib; sourceTree = "<group>"; };
 		E34A0E052053F93E00B50097 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefOSCToolbarSettingsSheetController.strings"; sourceTree = "<group>"; };
@@ -2052,6 +2059,8 @@
 				C7E90B522087EC5700A58B6B /* ko */,
 				84D6C98B208A959B0050F980 /* sk */,
 				E5EF3D0A20FFBB6200FEBE4C /* fr */,
+				9DB9ED5C20889D66006B1492 /* nl */,
+				E33C31592107017000983986 /* zh-Hant */,
 			);
 			name = SubChooseViewController.xib;
 			sourceTree = "<group>";
@@ -2712,6 +2721,7 @@
 				6CD541A4206AD7AA000428E6 /* de */,
 				1326718420852F01000FA7E2 /* tr */,
 				84D6C98C208A95A60050F980 /* sk */,
+				E33C315B2107018000983986 /* zh-Hant */,
 			);
 			name = PrefOSCToolbarSettingsSheetController.xib;
 			sourceTree = "<group>";
@@ -2723,6 +2733,8 @@
 				E374161520F3C0AD00B4F7F9 /* zh-Hans */,
 				E5EF3D0D2100878F00FEBE4C /* fr */,
 				C715104221014A2900C6963C /* ko */,
+				9D8B490421007F58005113D9 /* nl */,
+				E33C315D210701A100983986 /* zh-Hant */,
 			);
 			name = PrefUtilsViewController.xib;
 			sourceTree = "<group>";
@@ -2734,6 +2746,8 @@
 				E3B3DD5B20FDB8A900325184 /* zh-Hans */,
 				E5EF3D0C20FFBB9700FEBE4C /* fr */,
 				C715104121014A1E00C6963C /* ko */,
+				9D8B490621007F84005113D9 /* nl */,
+				E33C315F210701C200983986 /* zh-Hant */,
 			);
 			name = PreferenceWindowController.xib;
 			sourceTree = "<group>";
@@ -2937,10 +2951,13 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 67CQ77V27R;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = YES;
+				SWIFT_FORCE_STATIC_LINK_STDLIB = NO;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -2956,9 +2973,12 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 67CQ77V27R;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = YES;
+				SWIFT_FORCE_STATIC_LINK_STDLIB = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 			};

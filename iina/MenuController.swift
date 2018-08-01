@@ -51,7 +51,7 @@ class MenuController: NSObject, NSMenuDelegate {
   private var stringForOpenURLAlternative: String!
 
   // File
-  @IBOutlet weak var file: NSMenuItem!
+  @IBOutlet weak var fileMenu: NSMenu!
   @IBOutlet weak var open: NSMenuItem!
   @IBOutlet weak var openAlternative: NSMenuItem!
   @IBOutlet weak var openURL: NSMenuItem!
@@ -173,17 +173,16 @@ class MenuController: NSObject, NSMenuDelegate {
     }
 
     // File menu
-    
-    savePlaylist.action = #selector(MainMenuActionHandler.menuSavePlaylist(_:))
-    deleteCurrentFile.action = #selector(MainMenuActionHandler.menuDeleteCurrentFile(_:))
+
+    fileMenu.delegate = self
 
     stringForOpen = open.title
     stringForOpenURL = openURL.title
     stringForOpenAlternative = openAlternative.title
     stringForOpenURLAlternative = openURLAlternative.title
-
-    updateOpenMenuItems()
-    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.alwaysOpenInNewWindow.rawValue, options: [], context: nil)
+    
+    savePlaylist.action = #selector(MainMenuActionHandler.menuSavePlaylist(_:))
+    deleteCurrentFile.action = #selector(MainMenuActionHandler.menuDeleteCurrentFile(_:))
 
     if Preference.bool(for: .enableCmdN) {
       newWindowSeparator.isHidden = false
@@ -384,18 +383,6 @@ class MenuController: NSObject, NSMenuDelegate {
     miniPlayer.action = #selector(MainWindowController.menuSwitchToMiniPlayer(_:))
   }
 
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath = keyPath else { return }
-
-    switch keyPath {
-    case Preference.Key.alwaysOpenInNewWindow.rawValue:
-      updateOpenMenuItems()
-    default:
-      return
-    }
-
-  }
-
   // MARK: - Update Menus
 
   private func updatePlaylist() {
@@ -546,23 +533,32 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   private func updateOpenMenuItems() {
-    if Preference.bool(for: .alwaysOpenInNewWindow) {
-      open.title = stringForOpenAlternative
+    if PlayerCore.playing.count == 0 {
+      open.title = stringForOpen
       openAlternative.title = stringForOpen
-      openURL.title = stringForOpenURLAlternative
+      openURL.title = stringForOpenURL
       openURLAlternative.title = stringForOpenURL
     } else {
-      open.title = stringForOpen
-      openAlternative.title = stringForOpenAlternative
-      openURL.title = stringForOpenURL
-      openURLAlternative.title = stringForOpenURLAlternative
+      if Preference.bool(for: .alwaysOpenInNewWindow) {
+        open.title = stringForOpenAlternative
+        openAlternative.title = stringForOpen
+        openURL.title = stringForOpenURLAlternative
+        openURLAlternative.title = stringForOpenURL
+      } else {
+        open.title = stringForOpen
+        openAlternative.title = stringForOpenAlternative
+        openURL.title = stringForOpenURL
+        openURLAlternative.title = stringForOpenURLAlternative
+      }
     }
   }
 
   // MARK: - Menu delegate
 
   func menuWillOpen(_ menu: NSMenu) {
-    if menu == playlistMenu {
+    if menu == fileMenu {
+      updateOpenMenuItems()
+    } else if menu == playlistMenu {
       updatePlaylist()
     } else if menu == chapterMenu {
       updateChapterList()

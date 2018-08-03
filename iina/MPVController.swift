@@ -644,16 +644,16 @@ class MPVController: NSObject {
 
   private func handlePropertyChange(_ name: String, _ property: mpv_event_property) {
 
-    DispatchQueue.main.async {
-      self.player.mainWindow.quickSettingView.reload()
-    }
+    var needReloadQuickSettingsView = false
 
     switch name {
 
     case MPVProperty.videoParams:
+      needReloadQuickSettingsView = true
       onVideoParamsChange(UnsafePointer<mpv_node_list>(OpaquePointer(property.data)))
 
     case MPVOption.TrackSelection.vid:
+      needReloadQuickSettingsView = true
       let data = getInt(MPVOption.TrackSelection.vid)
       player.info.vid = Int(data)
       player.getTrackInfo()
@@ -661,6 +661,7 @@ class MPVController: NSObject {
       player.sendOSD(.track(currTrack))
 
     case MPVOption.TrackSelection.aid:
+      needReloadQuickSettingsView = true
       let data = getInt(MPVOption.TrackSelection.aid)
       player.info.aid = Int(data)
       player.getTrackInfo()
@@ -672,6 +673,7 @@ class MPVController: NSObject {
       player.sendOSD(.track(currTrack))
 
     case MPVOption.TrackSelection.sid:
+      needReloadQuickSettingsView = true
       let data = getInt(MPVOption.TrackSelection.sid)
       player.info.sid = Int(data)
       player.getTrackInfo()
@@ -679,6 +681,7 @@ class MPVController: NSObject {
       player.sendOSD(.track(currTrack))
 
     case MPVOption.PlaybackControl.pause:
+      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
         if player.info.isPaused != data {
           player.sendOSD(data ? .pause : .resume)
@@ -695,16 +698,19 @@ class MPVController: NSObject {
       player.syncUI(.playButton)
 
     case MPVProperty.chapter:
+      needReloadQuickSettingsView = true
       player.syncUI(.time)
       player.syncUI(.chapterList)
 
     case MPVOption.PlaybackControl.speed:
+      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         player.info.playSpeed = data
         player.sendOSD(.speed(data))
       }
 
     case MPVOption.Video.deinterlace:
+      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
         // this property will fire a change event at file start
         if player.info.deinterlace != data {
@@ -714,6 +720,7 @@ class MPVController: NSObject {
       }
 
     case MPVOption.Audio.mute:
+      needReloadQuickSettingsView = true
       player.syncUI(.muteButton)
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
         player.info.isMuted = data
@@ -721,6 +728,7 @@ class MPVController: NSObject {
       }
 
     case MPVOption.Audio.volume:
+      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         player.info.volume = data
         player.syncUI(.volume)
@@ -728,18 +736,21 @@ class MPVController: NSObject {
       }
 
     case MPVOption.Audio.audioDelay:
+      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         player.info.audioDelay = data
         player.sendOSD(.audioDelay(data))
       }
 
     case MPVOption.Subtitles.subDelay:
+      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         player.info.subDelay = data
         player.sendOSD(.subDelay(data))
       }
 
     case MPVOption.Subtitles.subScale:
+      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         let displayValue = data >= 1 ? data : -1/data
         let truncated = round(displayValue * 100) / 100
@@ -747,11 +758,13 @@ class MPVController: NSObject {
       }
 
     case MPVOption.Subtitles.subPos:
+      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         player.sendOSD(.subPos(data))
       }
 
     case MPVOption.Equalizer.contrast:
+      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
         player.info.contrast = intData
@@ -759,6 +772,7 @@ class MPVController: NSObject {
       }
 
     case MPVOption.Equalizer.hue:
+      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
         player.info.hue = intData
@@ -766,6 +780,7 @@ class MPVController: NSObject {
       }
 
     case MPVOption.Equalizer.brightness:
+      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
         player.info.brightness = intData
@@ -773,6 +788,7 @@ class MPVController: NSObject {
       }
 
     case MPVOption.Equalizer.gamma:
+      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
         player.info.gamma = intData
@@ -780,6 +796,7 @@ class MPVController: NSObject {
       }
 
     case MPVOption.Equalizer.saturation:
+      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
         let intData = Int(data)
         player.info.saturation = intData
@@ -796,6 +813,7 @@ class MPVController: NSObject {
       player.postNotification(.iinaTracklistChanged)
 
     case MPVProperty.vf:
+      needReloadQuickSettingsView = true
       player.postNotification(.iinaVFChanged)
 
     case MPVProperty.af:
@@ -835,6 +853,12 @@ class MPVController: NSObject {
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")
       break
+    }
+
+    if (needReloadQuickSettingsView) {
+      DispatchQueue.main.async {
+        self.player.mainWindow.quickSettingView.reload()
+      }
     }
   }
 

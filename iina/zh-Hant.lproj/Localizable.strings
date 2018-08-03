@@ -70,14 +70,22 @@
 "general.off" = "關";
 "general.ok" = "好";
 "general.on" = "開";
+<<<<<<< HEAD
 "general.password" = 密碼";
+=======
+"general.password" = "密碼";
+>>>>>>> ba876347e8a754c851d846678280e66820396031
 "general.username" = "使用者名稱";
 "hwdec.auto" = "啟用硬體解碼。但是，大多數視訊濾鏡無法正常運作。";
 "hwdec.auto-copy" = "啟用硬體解碼。將使用大約兩倍的記憶體，但支援視訊濾鏡。";
 "hwdec.no" = "不啟用硬體解碼。";
 "keymapping.message" = "現在按下按鍵即可設定";
 "keymapping.title" = "快速鍵";
+<<<<<<< HEAD
 "main.buffering_indicator" = "緩衝中... %d%%";
+=======
+"main.buffering_indicator" = "緩衝中… %d%%";
+>>>>>>> ba876347e8a754c851d846678280e66820396031
 "menu.audio_delay" = "音訊延遲: %.2f秒";
 "menu.audio_delay_down" = "音訊延遲 - %.1fs";
 "menu.audio_delay_up" = "音訊延遲 + %.1fs";
@@ -115,7 +123,11 @@
 "osd.file_error" = "無法讀取檔案";
 "osd.filter_added" = "已新增濾鏡: %@";
 "osd.filter_removed" = "已刪除濾鏡";
+<<<<<<< HEAD
 "osd.find_online_sub" = "正在搜尋在線字幕...";
+=======
+"osd.find_online_sub" = "正在搜尋在線字幕…";
+>>>>>>> ba876347e8a754c851d846678280e66820396031
 "osd.mute" = "靜音";
 "osd.network_error" = "網路錯誤";
 "osd.pause" = "暫停";
@@ -128,7 +140,11 @@
 "osd.sub_delay.later" = "字幕延遲: 向後%.2f秒";
 "osd.sub_delay.nodelay" = "字幕延遲: 無";
 "osd.sub_downloaded" = "已下載字幕";
+<<<<<<< HEAD
 "osd.sub_found" = "已找到%d個字幕，下載中...";
+=======
+"osd.sub_found" = "已找到%d個字幕，下載中…";
+>>>>>>> ba876347e8a754c851d846678280e66820396031
 "osd.sub_not_found" = "找不到字幕";
 "osd.sub_saved" = "已儲存字幕";
 "osd.subtitle_pos" = "字幕位置: %.1f";
@@ -140,7 +156,11 @@
 "osd.video_eq.hue" = "色調: %i";
 "osd.video_eq.saturation" = "飽和度: %i";
 "osd.volume" = "音量: %i";
+<<<<<<< HEAD
 "pl_menu.add_item" = "加入檔案...";
+=======
+"pl_menu.add_item" = "加入檔案…";
+>>>>>>> ba876347e8a754c851d846678280e66820396031
 "pl_menu.add_sub" = "加入字幕…";
 "pl_menu.clear_playlist" = "清空播放列表";
 "pl_menu.delete" = "刪除";
@@ -203,6 +223,7 @@
 
 /* FIXME: Using English localization instead */
 "alert.assrt_token_prompt.title" = "Enter your API token";
+<<<<<<< HEAD
 
 /* FIXME: Using English localization instead */
 "alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
@@ -244,6 +265,49 @@
 "pl_menu.add_url" = "Add URL…";
 
 /* FIXME: Using English localization instead */
+=======
+
+/* FIXME: Using English localization instead */
+"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+
+/* FIXME: Using English localization instead */
+"alert.assrt_register.register" = "Register Now";
+
+/* FIXME: Using English localization instead */
+"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
+
+/* FIXME: Using English localization instead */
+"osc_toolbar.sub_track" = "Choose subtitle track";
+
+/* FIXME: Using English localization instead */
+"osc_toolbar.playlist" = "Playlist and chapters";
+
+/* FIXME: Using English localization instead */
+"osc_toolbar.music_mode" = "Enter music mode";
+
+/* FIXME: Using English localization instead */
+"osc_toolbar.settings" = "Quick Settings";
+
+/* FIXME: Using English localization instead */
+"osc_toolbar.full_screen" = "Toggle full screen";
+
+/* FIXME: Using English localization instead */
+"osc_toolbar.pip" = "Toggle Picture-in-Picture";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.title" = "Add URL";
+
+/* FIXME: Using English localization instead */
+"alert.add_url.message" = "Please enter the URL:";
+
+/* FIXME: Using English localization instead */
+"pl_menu.add_file" = "Add File…";
+
+/* FIXME: Using English localization instead */
+"pl_menu.add_url" = "Add URL…";
+
+/* FIXME: Using English localization instead */
+>>>>>>> ba876347e8a754c851d846678280e66820396031
 "subtrack.no_external" = "No External Subtitles Found";
 
 /* FIXME: Using English localization instead */

@@ -10,6 +10,12 @@ import Foundation
 
 class PlaybackInfo {
 
+  unowned let player: PlayerCore
+
+  init(_ pc: PlayerCore) {
+    player = pc
+  }
+
   var isIdle: Bool = true {
     didSet {
       PlayerCore.checkStatusForSleep()
@@ -53,9 +59,12 @@ class PlaybackInfo {
   var isPaused: Bool = false {
     didSet {
       PlayerCore.checkStatusForSleep()
-      if #available(macOS 10.13, *) {
-        if RemoteCommandController.useSystemMediaControl {
+      if player == PlayerCore.lastActive {
+        if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
           NowPlayingInfoManager.updateState(isPaused ? .paused : .playing)
+        }
+        if #available(macOS 10.12, *), player.mainWindow.pipStatus == .inPIP {
+          player.mainWindow.pip.playing = !isPaused
         }
       }
     }

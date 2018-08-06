@@ -681,7 +681,6 @@ class MPVController: NSObject {
       player.sendOSD(.track(currTrack))
 
     case MPVOption.PlaybackControl.pause:
-      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
         if player.info.isPaused != data {
           player.sendOSD(data ? .pause : .resume)
@@ -698,7 +697,6 @@ class MPVController: NSObject {
       player.syncUI(.playButton)
 
     case MPVProperty.chapter:
-      needReloadQuickSettingsView = true
       player.syncUI(.time)
       player.syncUI(.chapterList)
 
@@ -720,7 +718,6 @@ class MPVController: NSObject {
       }
 
     case MPVOption.Audio.mute:
-      needReloadQuickSettingsView = true
       player.syncUI(.muteButton)
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
         player.info.isMuted = data
@@ -728,7 +725,6 @@ class MPVController: NSObject {
       }
 
     case MPVOption.Audio.volume:
-      needReloadQuickSettingsView = true
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         player.info.volume = data
         player.syncUI(.volume)

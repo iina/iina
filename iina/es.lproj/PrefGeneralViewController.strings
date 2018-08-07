@@ -12,12 +12,6 @@
 /* Class = "NSMenuItem"; title = "PNG"; ObjectID = "3XO-ks-TDg"; */
 "3XO-ks-TDg.title" = "PNG";
 
-/* Class = "NSMenuItem"; title = "Ultra Dark"; ObjectID = "3XV-iO-y0C"; */
-"3XV-iO-y0C.title" = "Ultra oscuro";
-
-/* Class = "NSMenuItem"; title = "Light"; ObjectID = "49l-le-9k6"; */
-"49l-le-9k6.title" = "Claro";
-
 /* Class = "NSButtonCell"; title = "Enable "Open Recent" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "Habilitar el menú \"Abrir reciente\"";
 
@@ -60,6 +54,9 @@
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Apagar otros monitores mientras está en pantalla completa";
 
+/* Class = "NSButtonCell"; title = "Switch to "music mode" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
+"KfL-r7-Uav.title" = "Cambiar a \"modo de música\" automáticamente cuando se reproduce un archivo de audio";
+
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Reproducir automáticamente el siguiente archivo";
 
@@ -89,9 +86,6 @@
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
 "YeH-hk-7NN.title" = "/ruta/a/carpeta/capturas";
-
-/* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "bPK-Wy-OMI"; */
-"bPK-Wy-OMI.title" = "Medio claro";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Recibir actualizaciones beta";
@@ -125,9 +119,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
 "pdx-zt-kf2.title" = "Capturas de pantalla:";
-
-/* Class = "NSMenuItem"; title = "Dark"; ObjectID = "qeB-ls-rwg"; */
-"qeB-ls-rwg.title" = "Oscuro";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Cada hora";

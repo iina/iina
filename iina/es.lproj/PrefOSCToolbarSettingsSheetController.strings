@@ -9,6 +9,12 @@
 /* Class = "NSWindow"; title = "Window"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Window";
 
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Jrf-II-Cfc"; */
+"Jrf-II-Cfc.title" = "Cancelar";
+
+/* Class = "NSButtonCell"; title = "Restore Default"; ObjectID = "SmC-AI-FG6"; */
+"SmC-AI-FG6.title" = "Restaurar todo";
+
 /* Class = "NSTextFieldCell"; title = "Drag an item and drop it to the above box to add it."; ObjectID = "VCG-VX-E3M"; */
 "VCG-VX-E3M.title" = "Arrastre un elemento y suéltelo en la caja de arriba para agregarlo.";
 

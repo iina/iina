@@ -2,6 +2,8 @@
 
 "alert.add_filter.message" = "Por favor ingrese el filtro usando el formato de comando vf o af de mpv.";
 "alert.add_filter.title" = "Nuevo filtro";
+"alert.add_url.message" = "Por favor ingrese la URL:";
+"alert.add_url.title" = "Añadir URL";
 "alert.add_watch.message" = "Por favor, ingrese un nombre válido de propiedad de mpv.";
 "alert.add_watch.title" = "Añadir propiedad de monitoreo";
 "alert.assrt_register" = "Debido a la cuota limitada de la API, se recomienda el uso de su propio token de la API. El token predeterminado es solo para uso demostrativo, y puede presentar errores de red.";
@@ -16,6 +18,12 @@
 "alert.clear_cache.message" = "¿Está seguro de borrar toda la caché de miniaturas?";
 "alert.clear_cache.success" = "Caché borrada.";
 "alert.clear_cache.title" = "Borrar caché de miniaturas";
+"alert.clear_history.message" = "¿Estás seguro de borrar todo el historial de reproducción?";
+"alert.clear_history.success" = "Se borró el historial de reproducción.";
+"alert.clear_history.title" = "Limpiar historial de Reproducción";
+"alert.clear_watch_later.message" = "¿Estás seguro de borrar todo el progreso de reproducción guardado (datos de \"ver más tarde\")?";
+"alert.clear_watch_later.success" = "Se borró todo el progreso de reproducción guardado.";
+"alert.clear_watch_later.title" = "Borrar el progreso de reproducción guardada";
 "alert.config.cannot_create" = "¡No se puede crear el archivo de configuración!";
 "alert.config.cannot_write" = "¡No se puede escribir en el archivo de configuración!";
 "alert.config.duplicate.message" = "Por favor, introduzca el nombre para el archivo de configuración duplicado.";
@@ -154,8 +162,9 @@
 "osd.video_eq.hue" = "Matiz: %i";
 "osd.video_eq.saturation" = "Saturación: %i";
 "osd.volume" = "Volumen: %i";
-"pl_menu.add_item" = "Añadir elemento...";
+"pl_menu.add_file" = "Añadir archivo…";
 "pl_menu.add_sub" = "Añadir subtítulo...";
+"pl_menu.add_url" = "Añadir URL...";
 "pl_menu.clear_playlist" = "Borrar la lista de reproducción";
 "pl_menu.delete" = "Mover a la Papelera";
 "pl_menu.delete_after_play" = "Mover a la Papelera después de reproducir";
@@ -172,7 +181,6 @@
 "playlist.chapter_cap" = "CAPÍTULOS";
 "playlist.playlist_cap" = "LISTA DE REPRODUCCIÓN";
 "preference.advanced" = "Avanzado";
-"preference.video_audio" = "Códecs";
 "preference.control" = "Controles";
 "preference.general" = "General";
 "preference.keybindings" = "Atajos de teclado";
@@ -184,9 +192,13 @@
 "preference.system_media_control" = "Utilizar los controles multimedia del sistema";
 "preference.title" = "Preferencias";
 "preference.ui" = "Interfaz";
+"preference.utilities" = "Utilidades";
+"preference.video_audio" = "Códecs";
 "quicksetting.item_default" = "Predeterminado";
 "quicksetting.item_none" = "Ninguno";
 "subencoding.auto" = "Detección automática";
+"subtrack.no_external" = "No se encontraron subtítulos externos";
+"subtrack.no_loaded" = "No se cargaron subtítulos";
 "touchbar.ahead_15" = "Adelantar 15s";
 "touchbar.ahead_30" = "Adelantar 30s";
 "touchbar.back_15" = "Retroceder 15s";
@@ -202,42 +214,3 @@
 "touchbar.seek" = "Buscar";
 "touchbar.time" = "Posición en el tiempo";
 "track.none" = "<Ninguno>";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.title" = "Add URL";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.message" = "Please enter the URL:";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_file" = "Add File…";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_url" = "Add URL…";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_external" = "No External Subtitles Found";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_loaded" = "No Subtitles Loaded";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.success" = "All saved playback progress deleted.";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.title" = "Clear Playback History";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.success" = "Playback history deleted.";
-
-/* FIXME: Using English localization instead */
-"preference.utilities" = "Utilities";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.message" = "Are you sure to delete all playback history?";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";

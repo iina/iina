@@ -674,6 +674,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.cachedScreenCount = screenCount
     }
 
+    DistributedNotificationCenter.default().addObserver(forName: NSNotification.Name("AppleInterfaceThemeChangedNotification"), object: nil, queue: nil) {_ in
+      Swift.print("aaaaaaaa")
+    }
+
   }
 
   deinit {

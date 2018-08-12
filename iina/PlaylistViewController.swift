@@ -79,6 +79,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       $0?.alternateImage?.isTemplate = true
     }
 
+    // colors
+    if #available(OSX 10.13, *) {
+      withAllTableViews { $0.backgroundColor = .sidebarTableBackground }
+    }
 
     // handle pending switch tab request
     if pendingSwitchRequest != nil {

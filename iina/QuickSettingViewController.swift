@@ -118,6 +118,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.dataSource = self
       view.superview?.superview?.layer?.cornerRadius = 4
     }
+
+    // colors
+    if #available(OSX 10.13, *) {
+      withAllTableViews { tableView, _ in tableView.backgroundColor = .sidebarTableBackground }
+    }
+
     if pendingSwitchRequest != nil {
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil

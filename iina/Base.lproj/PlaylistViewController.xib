@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14306.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14306.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.3.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -68,7 +68,7 @@
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="eZG-xB-blk">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="18" height="17"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="▶︎" id="4yj-cg-fli">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -121,7 +121,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="mzW-2W-iPg">
-                                                                            <rect key="frame" x="13" y="0.0" width="96" height="18"/>
+                                                                            <rect key="frame" x="13" y="0.0" width="96" height="17"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="Table View Cell" id="M5s-Bm-l3O">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -132,7 +132,7 @@
                                                                             </connections>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yEn-uv-K8Z">
-                                                                            <rect key="frame" x="183" y="1" width="33" height="15"/>
+                                                                            <rect key="frame" x="183" y="2" width="33" height="14"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="zbw-ad-lgl">
                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -295,7 +295,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="6tr-hz-bdD">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="31" rowSizeStyle="automatic" viewBased="YES" id="BvG-MR-6LX">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="321"/>
@@ -431,10 +431,15 @@
                         <action selector="playlistBtnAction:" target="-2" id="cyl-Pk-pTN"/>
                     </connections>
                 </button>
+                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="glW-5x-LJr">
+                    <rect key="frame" x="0.0" y="318" width="240" height="5"/>
+                </box>
             </subviews>
             <constraints>
+                <constraint firstItem="glW-5x-LJr" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="39I-Qr-eeL"/>
                 <constraint firstItem="Yym-Zw-Hd8" firstAttribute="top" secondItem="5Zq-JQ-XO4" secondAttribute="bottom" id="EOu-Jc-A7S"/>
                 <constraint firstAttribute="bottom" secondItem="Yym-Zw-Hd8" secondAttribute="bottom" id="VEC-3U-YTI"/>
+                <constraint firstItem="Yym-Zw-Hd8" firstAttribute="top" secondItem="glW-5x-LJr" secondAttribute="bottom" constant="-1" id="WkM-Vo-1QO"/>
                 <constraint firstAttribute="trailing" secondItem="Yym-Zw-Hd8" secondAttribute="trailing" id="Wu2-Mo-8NM"/>
                 <constraint firstAttribute="trailing" secondItem="SOR-3l-PFj" secondAttribute="trailing" id="atA-b5-vwd"/>
                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="clJ-Nh-tAc"/>
@@ -443,6 +448,7 @@
                 <constraint firstItem="5Zq-JQ-XO4" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="hLh-Or-ZUd"/>
                 <constraint firstItem="Yym-Zw-Hd8" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="iKz-2C-iJv"/>
                 <constraint firstItem="SOR-3l-PFj" firstAttribute="top" secondItem="5Zq-JQ-XO4" secondAttribute="top" id="iZK-4D-ROr"/>
+                <constraint firstAttribute="trailing" secondItem="glW-5x-LJr" secondAttribute="trailing" id="kNZ-El-hDd"/>
                 <constraint firstItem="SOR-3l-PFj" firstAttribute="width" secondItem="Hz6-mo-xeY" secondAttribute="width" multiplier="0.5" id="owL-kO-fvO"/>
                 <constraint firstItem="SOR-3l-PFj" firstAttribute="height" secondItem="5Zq-JQ-XO4" secondAttribute="height" id="sRW-ep-6n7"/>
             </constraints>
@@ -465,7 +471,7 @@
             </connections>
         </popover>
         <customView id="3YN-KY-vJP">
-            <rect key="frame" x="0.0" y="-1" width="240" height="97"/>
+            <rect key="frame" x="0.0" y="0.0" width="240" height="96"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="hPw-DF-M14">
@@ -515,7 +521,7 @@
                     </scroller>
                 </scrollView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KT6-lD-Wq7">
-                    <rect key="frame" x="6" y="74" width="228" height="15"/>
+                    <rect key="frame" x="6" y="74" width="228" height="14"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Matched subtitles" id="j2t-mO-cpo">
                         <font key="font" metaFont="smallSystemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

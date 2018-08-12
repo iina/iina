@@ -9,6 +9,7 @@
 import Cocoa
 
 @available(macOS 10.13, *)
-extension NSColor {
-  static let sidebarTableBackground = NSColor(named: NSColor.Name("SidebarTableBackground"))!
+extension NSColor.Name {
+  static let sidebarTableBackground = NSColor.Name("SidebarTableBackground")
+  static let aboutWindowBackground = NSColor.Name("AboutWindowBackground")
 }

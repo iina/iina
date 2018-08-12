@@ -121,7 +121,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
     // colors
     if #available(OSX 10.13, *) {
-      withAllTableViews { tableView, _ in tableView.backgroundColor = .sidebarTableBackground }
+      withAllTableViews { tableView, _ in tableView.backgroundColor = NSColor(named: .sidebarTableBackground)! }
     }
 
     if pendingSwitchRequest != nil {

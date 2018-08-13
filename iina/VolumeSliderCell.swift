@@ -16,20 +16,16 @@ class VolumeSliderCell: NSSliderCell {
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
-    super.drawBar(inside: rect, flipped: flipped)
-
+    NSGraphicsContext.saveGraphicsState()
     if maxValue > 100 {
-      NSGraphicsContext.saveGraphicsState()
-      NSColor.controlColor.setStroke()
-      let x = rect.minX + rect.width * CGFloat(100 / maxValue)
-      let y0 = (flipped ? rect.height : 0) + 1
-      let y1 = y0 + rect.height - 2
-      let linePath = NSBezierPath()
-      linePath.move(to: NSPoint(x: x, y: y0))
-      linePath.line(to: NSPoint(x: x, y: y1))
-      linePath.stroke()
-      NSGraphicsContext.restoreGraphicsState()
+      // round this value to obtain a pixel perfect clip line
+      let x = round(rect.minX + rect.width * CGFloat(100 / maxValue))
+      let clipPath = NSBezierPath(rect: NSRect(x: rect.minX, y: rect.minY, width: x - 1, height: rect.height))
+      clipPath.append(NSBezierPath(rect: NSRect(x: x + 1, y: rect.minY, width: rect.maxX - x - 1, height: rect.height)))
+      clipPath.setClip()
     }
+    super.drawBar(inside: rect, flipped: flipped)
+    NSGraphicsContext.restoreGraphicsState()
   }
 
 }

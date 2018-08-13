@@ -117,7 +117,7 @@ class PlayerCore: NSObject {
     return controller
   }()
 
-  lazy var info: PlaybackInfo = PlaybackInfo()
+  lazy var info: PlaybackInfo = PlaybackInfo(self)
 
   var syncPlayTimeTimer: Timer?
 

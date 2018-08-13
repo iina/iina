@@ -160,7 +160,10 @@ class PlayerCore: NSObject {
     if shouldAutoLoad {
       info.shouldAutoLoadFiles = true
     }
-    let path = isNetwork ? url.absoluteString : url.path
+    var path = isNetwork ? url.absoluteString : url.path
+    if path.starts(with: "edl://") {
+      path = url.absoluteString.removingPercentEncoding ?? ""
+    }
     openMainWindow(path: path, url: url, isNetwork: isNetwork)
   }
 

@@ -188,7 +188,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         getNewPlayerCore().openURLString("-")
       } else {
         let validFileURLs: [URL] = commandLineStatus.filenames.compactMap { filename in
-          if Regex.url.matches(filename) {
+          if filename.starts(with: "edl://") {
+            return URL(dataRepresentation: filename.data(using: .utf8) ?? Data(), relativeTo: nil)
+          } else if Regex.url.matches(filename) {
             return URL(string: filename)
           } else {
             return FileManager.default.fileExists(atPath: filename) ? URL(fileURLWithPath: filename) : nil

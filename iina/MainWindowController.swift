@@ -629,6 +629,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     thumbnailPeekView.isHidden = true
 
     // other initialization
+    if #available(OSX 10.14, *) {
+      titleBarBottomBorder.fillColor = NSColor(named: .titleBarBorder)!
+    }
     cachedScreenCount = NSScreen.screens.count
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
       $0?.state = .active
@@ -757,9 +760,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
         titleBarHeightConstraint.constant = TitleBarHeightWithOSC
       }
-      titleBarBottomBorder.isHidden = true
+      // Remove this if it's acceptable in 10.13-
+      // titleBarBottomBorder.isHidden = true
     } else {
-      titleBarBottomBorder.isHidden = false
+      // titleBarBottomBorder.isHidden = false
     }
 
     if isSwitchingFromTop {

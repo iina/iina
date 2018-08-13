@@ -18,4 +18,6 @@ extension NSColor.Name {
   static let mainSliderBarChapterStroke = NSColor.Name("MainSliderBarChapterStroke")
   static let mainSliderKnob = NSColor.Name("MainSliderKnob")
   static let mainSliderKnobActive = NSColor.Name("MainSliderKnobActive")
+
+  static let titleBarBorder = NSColor.Name("TitleBarBorder")
 }

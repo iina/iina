@@ -509,9 +509,17 @@ extension NSAppearance {
       return nil
     }
   }
+
+  var isDark: Bool {
+    if #available(macOS 10.14, *) {
+      return name == .darkAqua || name == .vibrantDark || name == .accessibilityHighContrastDarkAqua || name == .accessibilityHighContrastVibrantDark
+    } else {
+      return name == .darkAqua || name == .vibrantDark
+    }
+  }
 }
 
 extension NSAppearance.Name {
   @available(macOS, obsoleted: 10.14)
-  static let darkAqua = NSAppearance.Name.init("NSAppearanceNameDarkAqua")
+  static let darkAqua = NSAppearance.Name("NSAppearanceNameDarkAqua")
 }

@@ -2027,11 +2027,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** Set material for OSC and title bar */
   private func setMaterial(_ theme: Preference.Theme?) {
-    guard let theme = theme else {
-      Logger.log("Nil material in setMaterial()", level: .warning)
-      return
+    guard let window = window, let theme = theme else { return }
+
+    window.appearance = NSAppearance(theme)
+
+    if #available(macOS 10.14, *) {} else {
+      // we don't need to trigger theme change manually since we use color category in 10.14+.
+      (playSlider.cell as? PlaySliderCell)?.isInDarkTheme = window.effectiveAppearance.isDark
     }
-    window?.appearance = NSAppearance(theme)
   }
 
   func updateBufferIndicatorView() {

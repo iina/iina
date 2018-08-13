@@ -189,7 +189,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       } else {
         let validFileURLs: [URL] = commandLineStatus.filenames.compactMap { filename in
           if filename.starts(with: "edl://") {
-            return URL(dataRepresentation: filename.data(using: .utf8) ?? Data(), relativeTo: nil)
+            let name = filename.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? ""
+            return URL(dataRepresentation: name.data(using: .utf8) ?? Data(), relativeTo: nil)
           } else if Regex.url.matches(filename) {
             return URL(string: filename)
           } else {

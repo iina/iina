@@ -682,6 +682,7 @@
 		84AABE921DBFAF1A00D138FD /* FontPickerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPickerWindowController.swift; sourceTree = "<group>"; };
 		84AABE961DBFB62F00D138FD /* FixedFontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedFontManager.h; sourceTree = "<group>"; };
 		84AABE971DBFB62F00D138FD /* FixedFontManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedFontManager.m; sourceTree = "<group>"; };
+		84AB8BCE2122235900E478BB /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
 		84AC621D1E87A4F3002D6F92 /* OpenURLAccessoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenURLAccessoryViewController.swift; sourceTree = "<group>"; };
 		84AC62221E87C6CF002D6F92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OpenURLAccessoryViewController.xib; sourceTree = "<group>"; };
 		84AC62251E87C6D1002D6F92 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OpenURLAccessoryViewController.strings"; sourceTree = "<group>"; };
@@ -2747,6 +2748,7 @@
 				E33C315D210701A100983986 /* zh-Hant */,
 				64F85F5C210FFBC300F8D8C0 /* es */,
 				B35E0A072107C0E500453AA7 /* it */,
+				84AB8BCE2122235900E478BB /* sk */,
 			);
 			name = PrefUtilsViewController.xib;
 			sourceTree = "<group>";

@@ -9,9 +9,6 @@
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "Otvoriť URL…";
 
-/* Class = "NSMenuItem"; title = "Set IINA as the Default App…"; ObjectID = "0os-i1-tJF"; */
-"0os-i1-tJF.title" = "Nastaviť IINA ako predvolenú aplikáciu…";
-
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "Titulky";
 
@@ -27,11 +24,17 @@
 /* Class = "NSMenuItem"; title = "Jump to Beginning"; ObjectID = "2Ya-3g-1hy"; */
 "2Ya-3g-1hy.title" = "Preskočiť Na Začiatok";
 
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "2aU-bk-bmu"; */
+"2aU-bk-bmu.title" = "Vyrezať";
+
 /* Class = "NSMenuItem"; title = "Jump to…"; ObjectID = "2id-wn-xsC"; */
 "2id-wn-xsC.title" = "Preskočiť Na…";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
 "2t8-Ot-yoO.title" = "Zobraziť Panel Rýchlych Nastavení";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
+"3Ax-P3-QQu.title" = "Označiť Všetko";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
 "43n-Ed-5kT.title" = "Zobraziť Panel Rýchlych Nastavení";
@@ -56,6 +59,15 @@
 
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
 "6yE-op-DTS.title" = "Posunúť Dopredu 5s";
+
+/* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "7Bn-Mp-EvJ"; */
+"7Bn-Mp-EvJ.title" = "Transformácie";
+
+/* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "7rG-Yq-EYG"; */
+"7rG-Yq-EYG.title" = "Zastaviť Rozprávanie";
+
+/* Class = "NSMenuItem"; title = "Speech"; ObjectID = "8Oy-tP-udW"; */
+"8Oy-tP-udW.title" = "Reč";
 
 /* Class = "NSMenuItem"; title = "Audio Filters…"; ObjectID = "8Zh-hU-Cc4"; */
 "8Zh-hU-Cc4.title" = "Zvukové Filtre…";
@@ -207,6 +219,9 @@
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
 "NMo-om-nkz.title" = "Služby";
 
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "NdF-0z-k5s"; */
+"NdF-0z-k5s.title" = "Prilepiť";
+
 /* Class = "NSMenuItem"; title = "Vertical (Flip)"; ObjectID = "OIu-H0-Mht"; */
 "OIu-H0-Mht.title" = "Vertikálne";
 
@@ -252,11 +267,17 @@
 /* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
 "Td7-aD-5lo.title" = "Okno";
 
+/* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "Tue-O7-cei"; */
+"Tue-O7-cei.title" = "Kapitalizovať";
+
 /* Class = "NSMenuItem"; title = "Pause"; ObjectID = "UOE-MJ-8ku"; */
 "UOE-MJ-8ku.title" = "Pozastaviť";
 
 /* Class = "NSMenu"; title = "Second Subtitle"; ObjectID = "UwY-P2-Xdb"; */
 "UwY-P2-Xdb.title" = "Ďalšie Titulky";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
+"VDZ-ro-z5z.title" = "Odvolať Vrátenie";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
 "Vdr-fp-XzO.title" = "Skryť Ostatné";
@@ -272,6 +293,9 @@
 
 /* Class = "NSMenuItem"; title = "Scale Up"; ObjectID = "XHu-Dl-Vq2"; */
 "XHu-Dl-Vq2.title" = "Zväčšiť";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "XPz-ml-OQ3"; */
+"XPz-ml-OQ3.title" = "Vrátiť Späť";
 
 /* Class = "NSMenuItem"; title = "Smaller Size"; ObjectID = "ZOF-MG-6II"; */
 "ZOF-MG-6II.title" = "Zmenšiť";
@@ -318,6 +342,9 @@
 /* Class = "NSMenu"; title = "Chapters"; ObjectID = "d9c-me-L2H"; */
 "d9c-me-L2H.title" = "Kapitola";
 
+/* Class = "NSMenu"; title = "Transformations"; ObjectID = "dBM-BU-5xS"; */
+"dBM-BU-5xS.title" = "Transformácia";
+
 /* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
 "dMs-cI-mzQ.title" = "Súbor";
 
@@ -335,6 +362,9 @@
 
 /* Class = "NSMenuItem"; title = "Check for Updates..."; ObjectID = "gMo-qL-m08"; */
 "gMo-qL-m08.title" = "Skontrolovať Aktualizácie...";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h9w-Rj-Hm1"; */
+"h9w-Rj-Hm1.title" = "Vymazať";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
 "hz9-B4-Xy5.title" = "Služby";
@@ -366,6 +396,9 @@
 /* Class = "NSMenuItem"; title = "Go to Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
 "lj0-Oo-7nB.title" = "Prejsť do Adresára so Screenshotmi";
 
+/* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "m7w-hc-Y2F"; */
+"m7w-hc-Y2F.title" = "Zapnúť Veľké Písmená";
+
 /* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
 "mGw-jm-5x2.title" = "Ďalšie Titulky";
 
@@ -396,6 +429,9 @@
 /* Class = "NSMenuItem"; title = "Subtitle Delay + 0.5s"; ObjectID = "pAo-L5-qTO"; */
 "pAo-L5-qTO.title" = "Oneskorenie Titulkov + 0.5s";
 
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "pWh-nh-0pN"; */
+"pWh-nh-0pN.title" = "Upraviť";
+
 /* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
 "pdj-9C-Fn1.title" = "Hlasitosť - 5%";
 
@@ -414,6 +450,9 @@
 /* Class = "NSMenuItem"; title = "Half Size"; ObjectID = "snW-S8-Cw5"; */
 "snW-S8-Cw5.title" = "Polovičná Veľkosť";
 
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "tH0-KL-c9V"; */
+"tH0-KL-c9V.title" = "Kopírovať";
+
 /* Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "tXI-mr-wws"; */
 "tXI-mr-wws.title" = "Otvoriť Nedávne";
 
@@ -423,6 +462,9 @@
 /* Class = "NSMenuItem"; title = "Subtitle"; ObjectID = "uGZ-lo-pJJ"; */
 "uGZ-lo-pJJ.title" = "Titulky";
 
+/* Class = "NSMenu"; title = "Speech"; ObjectID = "uO1-9S-6Yy"; */
+"uO1-9S-6Yy.title" = "Reč";
+
 /* Class = "NSMenu"; title = "IINA"; ObjectID = "uQy-DD-JDr"; */
 "uQy-DD-JDr.title" = "IINA";
 
@@ -431,6 +473,9 @@
 
 /* Class = "NSMenu"; title = "Saved Audio Filters"; ObjectID = "vuV-uP-CAD"; */
 "vuV-uP-CAD.title" = "Uložené Audio Filtre";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "w8n-XJ-Pgi"; */
+"w8n-XJ-Pgi.title" = "Upraviť";
 
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
 "wex-rX-PcY.title" = "Zobraziť na Vrchu";
@@ -455,4 +500,10 @@
 
 /* Class = "NSMenuItem"; title = "Open in New Window…"; ObjectID = "z9W-ga-j3b"; */
 "z9W-ga-j3b.title" = "Otvoriť v Novom Okne…";
+
+/* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "zez-g5-2Pt"; */
+"zez-g5-2Pt.title" = "Zapnúť Malé Písmená";
+
+/* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
+"zpw-Ac-F3M.title" = "Spustiť Rozprávanie";
 

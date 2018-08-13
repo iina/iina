@@ -18,6 +18,12 @@
 "alert.clear_cache.message" = "Naozaj Chceš Vyčistiť Cache s Náhľadmi?";
 "alert.clear_cache.success" = "Cache vyčistená.";
 "alert.clear_cache.title" = "Vyčistiť Cache s Náhľadmi";
+"alert.clear_history.message" = "Naozaj chcete vymazať históriu prehrávania?";
+"alert.clear_history.success" = "História prehrávania vymazaná.";
+"alert.clear_history.title" = "Vyčistiť Históriu Prehrávania";
+"alert.clear_watch_later.message" = "Naozaj chcete vymazať pozície prehrávaní (dáta v \"pozrieť neskôr\")?";
+"alert.clear_watch_later.success" = "Pozície prehrávaní vymazané.";
+"alert.clear_watch_later.title" = "Vymazať Pozície Prehrávaní";
 "alert.config.cannot_create" = "Nedá sa vytvoriť konfiguračný súbor!";
 "alert.config.cannot_write" = "Nedá sa zapisovať do konfiguračného súboru!";
 "alert.config.duplicate.message" = "Zadajte meno pre duplikovaný konfiguračný súbor.";
@@ -175,7 +181,6 @@
 "playlist.chapter_cap" = "KAPITOLY";
 "playlist.playlist_cap" = "PLAYLIST";
 "preference.advanced" = "Pokročilé";
-"preference.video_audio" = "Kodek";
 "preference.control" = "Ovládanie";
 "preference.general" = "Všeobecné";
 "preference.keybindings" = "Klávesové Skratky";
@@ -187,9 +192,13 @@
 "preference.system_media_control" = "Používať systémové multimediálne klávesy";
 "preference.title" = "Nastavenia";
 "preference.ui" = "UI";
+"preference.utilities" = "Utility";
+"preference.video_audio" = "Kodek";
 "quicksetting.item_default" = "Predvolené";
 "quicksetting.item_none" = "Žiadne";
 "subencoding.auto" = "Auto detekcia";
+"subtrack.no_external" = "Externé Titulky Nenájdené";
+"subtrack.no_loaded" = "Žiadne Načítané Titulky";
 "touchbar.ahead_15" = "15sec Dopredu";
 "touchbar.ahead_30" = "30sec Dopredu";
 "touchbar.back_15" = "15sec Dozadu";
@@ -205,27 +214,3 @@
 "touchbar.seek" = "Vyhľadať";
 "touchbar.time" = "Pozícia";
 "track.none" = "<Prázdne>";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_loaded" = "No Subtitles Loaded";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.success" = "All saved playback progress deleted.";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.title" = "Clear Playback History";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.success" = "Playback history deleted.";
-
-/* FIXME: Using English localization instead */
-"preference.utilities" = "Utilities";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.message" = "Are you sure to delete all playback history?";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";

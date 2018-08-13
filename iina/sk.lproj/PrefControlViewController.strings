@@ -39,6 +39,9 @@
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
 "Hm3-dh-jgb.title" = "Zobraziť na celej obrazovke";
 
+/* Class = "NSTextFieldCell"; title = "Trackpad"; ObjectID = "I6k-ab-IwJ"; */
+"I6k-ab-IwJ.title" = "Trackpad";
+
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "K9H-w9-wmT"; */
 "K9H-w9-wmT.title" = "Automaticky zvoliť";
 
@@ -74,6 +77,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Force Touch to:"; ObjectID = "dpH-PO-WKt"; */
 "dpH-PO-WKt.title" = "Force Touch:";
+
+/* Class = "NSTextFieldCell"; title = "Mouse"; ObjectID = "eA4-AD-oUu"; */
+"eA4-AD-oUu.title" = "Myš";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "guu-dK-YfL"; */
 "guu-dK-YfL.title" = "Prázdne";

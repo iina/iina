@@ -76,6 +76,10 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
     deleteButton.isEnabled = false
 
+    if #available(macOS 10.14, *) {} else {
+      window?.appearance = NSAppearance(named: .vibrantDark)
+    }
+
     updateInfo()
 
     updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)

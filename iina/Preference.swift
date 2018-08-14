@@ -291,12 +291,24 @@ struct Preference {
 
   enum Theme: Int, InitializingFromKey {
     case dark = 0
-    case light = 2
-    case system = 4
+    case ultraDark // 1
+    case light // 2
+    case mediumLight // 3
+    case system // 4
 
     static var defaultValue = Theme.dark
 
     init?(key: Key) {
+      let value = Preference.integer(for: key)
+      if #available(macOS 10.14, *) {
+        if value == 1 || value == 3 {
+          return nil
+        }
+      } else {
+        if value == 4 {
+          return nil
+        }
+      }
       self.init(rawValue: Preference.integer(for: key))
     }
   }

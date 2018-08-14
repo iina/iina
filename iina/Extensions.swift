@@ -499,13 +499,14 @@ extension NSUserInterfaceItemIdentifier {
 }
 
 extension NSAppearance {
-  convenience init?(_ theme: Preference.Theme) {
+  @available(macOS 10.14, *)
+  convenience init?(iinaTheme theme: Preference.Theme) {
     switch theme {
     case .dark:
       self.init(named: .darkAqua)
     case .light:
       self.init(named: .aqua)
-    case .system:
+    default:
       return nil
     }
   }
@@ -514,12 +515,7 @@ extension NSAppearance {
     if #available(macOS 10.14, *) {
       return name == .darkAqua || name == .vibrantDark || name == .accessibilityHighContrastDarkAqua || name == .accessibilityHighContrastVibrantDark
     } else {
-      return name == .darkAqua || name == .vibrantDark
+      return name == .vibrantDark
     }
   }
-}
-
-extension NSAppearance.Name {
-  @available(macOS, obsoleted: 10.14)
-  static let darkAqua = NSAppearance.Name("NSAppearanceNameDarkAqua")
 }

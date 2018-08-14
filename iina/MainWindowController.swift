@@ -451,13 +451,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var rightArrowButton: NSButton!
   @IBOutlet weak var settingsButton: NSButton!
   @IBOutlet weak var playlistButton: NSButton!
-  @IBOutlet weak var sideBarView: NSVisualEffectView! {
-    didSet {
-      if #available(OSX 10.11, *) {
-        sideBarView.material = .sidebar
-      }
-    }
-  }
+  @IBOutlet weak var sideBarView: NSVisualEffectView!
   @IBOutlet weak var bottomView: NSView!
   @IBOutlet weak var bufferIndicatorView: NSVisualEffectView!
   @IBOutlet weak var bufferProgressLabel: NSTextField!
@@ -492,13 +486,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var osdAccessoryText: NSTextField!
   @IBOutlet weak var osdAccessoryProgress: NSProgressIndicator!
 
-  @IBOutlet weak var pipOverlayView: NSVisualEffectView! {
-    didSet {
-      if #available(macOS 10.14, *) {
-        pipOverlayView.material = .windowBackground
-      }
-    }
-  }
+  @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
   lazy var subPopoverView = playlistView.subPopover?.contentViewController?.view
 
@@ -1288,7 +1276,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     player.mpv.setFlag(MPVOption.Window.keepaspect, true)
 
     // Set the appearance to match the theme so the titlebar matches the theme
-    window?.appearance = NSAppearance(Preference.enum(for: .themeMaterial) as Preference.Theme)
+    let iinaTheme = Preference.enum(for: .themeMaterial) as Preference.Theme
+    if #available(macOS 10.14, *) {
+      window?.appearance = NSAppearance(iinaTheme: iinaTheme)
+    } else {
+      switch(iinaTheme) {
+      case .dark, .ultraDark: window!.appearance = NSAppearance(named: .vibrantDark)
+      default: window!.appearance = NSAppearance(named: .vibrantLight)
+      }
+    }
 
     // show titlebar
     if oscPosition == .top {
@@ -2033,11 +2029,39 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private func setMaterial(_ theme: Preference.Theme?) {
     guard let window = window, let theme = theme else { return }
 
-    window.appearance = NSAppearance(theme)
+    if #available(OSX 10.14, *) {
+      window.appearance = NSAppearance(iinaTheme: theme)
+    } else {
+      var appearance: NSAppearance?
+      var material: NSVisualEffectView.Material
 
-    if #available(macOS 10.14, *) {} else {
-      // we don't need to trigger theme change manually since we use color category in 10.14+.
-      (playSlider.cell as? PlaySliderCell)?.isInDarkTheme = window.effectiveAppearance.isDark
+      switch theme {
+      case .ultraDark:
+        appearance = NSAppearance(named: .vibrantDark)
+        material = .ultraDark
+      case .light:
+        appearance = NSAppearance(named: .vibrantLight)
+        material = .light
+      case .mediumLight:
+        appearance = NSAppearance(named: .vibrantLight)
+        material = .mediumLight
+      default:
+        appearance = NSAppearance(named: .vibrantDark)
+        material = .dark
+      }
+
+      let isDarkTheme = appearance?.isDark ?? true
+      (playSlider.cell as? PlaySliderCell)?.isInDarkTheme = isDarkTheme
+
+      [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView, bufferIndicatorView].forEach {
+        $0?.material = material
+        $0?.appearance = appearance
+      }
+
+      sideBarView.material = .dark
+      sideBarView.appearance = NSAppearance(named: .vibrantDark)
+
+      window.appearance = appearance
     }
   }
 

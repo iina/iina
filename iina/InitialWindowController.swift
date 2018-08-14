@@ -121,7 +121,9 @@ class InitialWindowController: NSWindowController {
     recentFilesTableView.dataSource = self
 
     if #available(macOS 10.14, *) {} else {
-      visualEffectView.material = .dark
+      window?.appearance = NSAppearance(named: .vibrantDark)
+      mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
+      visualEffectView.material = .ultraDark
     }
   }
 

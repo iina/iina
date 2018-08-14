@@ -48,6 +48,7 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   @IBOutlet var sectionOSDView: NSView!
   @IBOutlet var sectionThumbnailView: NSView!
 
+  @IBOutlet weak var themeMenu: NSMenu!
   @IBOutlet weak var oscPreviewImageView: NSImageView!
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!
   @IBOutlet weak var oscToolbarStackView: NSStackView!
@@ -78,6 +79,18 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     updateOSCToolbarButtons()
     setupGeometryRelatedControls()
     setupResizingRelatedControls()
+
+    let removeThemeMenuItemWithTag = { (tag: Int) in
+      if let item = self.themeMenu.item(withTag: tag) {
+        self.themeMenu.removeItem(item)
+      }
+    }
+    if #available(macOS 10.14, *) {
+      removeThemeMenuItemWithTag(Preference.Theme.mediumLight.rawValue)
+      removeThemeMenuItemWithTag(Preference.Theme.ultraDark.rawValue)
+    } else {
+      removeThemeMenuItemWithTag(Preference.Theme.system.rawValue)
+    }
   }
 
   @IBAction func oscPositionPopupBtnAction(_ sender: NSPopUpButton) {

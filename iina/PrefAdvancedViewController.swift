@@ -104,9 +104,9 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   }
 }
 
-extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource {
+extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource, NSControlTextEditingDelegate {
 
-  override func controlTextDidEndEditing(_ obj: Notification) {
+  func controlTextDidEndEditing(_ obj: Notification) {
     saveToUserDefaults()
   }
 

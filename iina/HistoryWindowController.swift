@@ -22,7 +22,7 @@ fileprivate extension NSUserInterfaceItemIdentifier {
 }
 
 
-class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutlineViewDataSource, NSMenuDelegate {
+class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutlineViewDataSource, NSMenuDelegate, NSMenuItemValidation {
 
   enum SortOption: Int {
     case lastPlayed = 0
@@ -216,7 +216,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     }
   }
 
-  override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+  func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     switch menuItem.tag {
     case MenuItemTagRevealInFinder:
       if selectedEntries.isEmpty { return false }

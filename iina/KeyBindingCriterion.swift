@@ -73,7 +73,7 @@ class TextCriterion: Criterion {
 }
 
 
-class TextFieldCriterion: Criterion, NSTextFieldDelegate {
+class TextFieldCriterion: Criterion, NSTextFieldDelegate, NSControlTextEditingDelegate {
 
   private lazy var field = NSTextField(frame: NSRect(x: 0, y: 0, width: 50, height: 18))
 
@@ -91,7 +91,7 @@ class TextFieldCriterion: Criterion, NSTextFieldDelegate {
     return field
   }
 
-  override func controlTextDidChange(_ obj: Notification) {
+  func controlTextDidChange(_ obj: Notification) {
     NotificationCenter.default.post(Notification(name: .iinaKeyBindingInputChanged))
   }
 

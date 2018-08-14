@@ -125,11 +125,10 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     window.initialFirstResponder = nil
     window.styleMask = [.fullSizeContentView, .titled, .resizable, .closable]
     window.isMovableByWindowBackground = true
-    window.appearance = NSAppearance(named: .vibrantDark)
     window.titlebarAppearsTransparent = true
     window.titleVisibility = .hidden
     ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).forEach {
-      window.standardWindowButton($0)?.isHidden = true
+      window.standardWindowButton($0)?.removeFromSuperview()
     }
 
     setToInitialWindowSize(display: false, animate: false)
@@ -146,11 +145,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
       NSLayoutConstraint(item: trackingView, attribute: .top, relatedBy: .equal, toItem: videoWrapperView, attribute: .top, multiplier: 1, constant: 0)
     ])
     trackingView.addTrackingArea(NSTrackingArea(rect: trackingView.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited], owner: self, userInfo: nil))
-
-    backgroundView.state = .active
-    [backgroundView, playlistWrapperView].forEach { view in
-      view?.material = .ultraDark
-    }
 
     // default album art
     defaultAlbumArt.isHidden = false

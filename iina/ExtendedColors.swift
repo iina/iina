@@ -20,4 +20,12 @@ extension NSColor.Name {
   static let mainSliderKnobActive = NSColor.Name("MainSliderKnobActive")
 
   static let titleBarBorder = NSColor.Name("TitleBarBorder")
+
+  static let initialWindowActionButtonBackground = NSColor.Name("InitialWindowActionButtonBackground")
+  static let initialWindowActionButtonBackgroundHover = NSColor.Name("InitialWindowActionButtonBackgroundHover")
+  static let initialWindowActionButtonBackgroundPressed = NSColor.Name("InitialWindowActionButtonBackgroundPressed")
+  static let initialWindowLastFileBackground = NSColor.Name("InitialWindowLastFileBackground")
+  static let initialWindowLastFileBackgroundHover = NSColor.Name("InitialWindowLastFileBackgroundHover")
+  static let initialWindowLastFileBackgroundPressed = NSColor.Name("InitialWindowLastFileBackgroundPressed")
+  static let initialWindowBetaLabel = NSColor.Name("InitialWindowBetaLabel")
 }

@@ -1088,7 +1088,9 @@ class PlayerCore: NSObject {
     if Preference.bool(for: .autoSearchOnlineSub) &&
       !info.isNetworkResource && info.subTracks.isEmpty &&
       (info.videoDuration?.second ?? 0.0) >= Preference.double(for: .autoSearchThreshold) * 60 {
-      mainWindow.menuActionHandler.menuFindOnlineSub(.dummy)
+      DispatchQueue.main.async {
+        self.mainWindow.menuActionHandler.menuFindOnlineSub(.dummy)
+      }
     }
   }
   /**

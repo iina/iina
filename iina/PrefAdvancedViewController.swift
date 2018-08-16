@@ -41,7 +41,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   @IBOutlet weak var optionsTableView: NSTableView!
   @IBOutlet weak var useAnotherConfigDirBtn: NSButton!
   @IBOutlet weak var chooseConfigDirBtn: NSButton!
-
+  @IBOutlet weak var removeButton: NSButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,6 +55,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
 
     optionsTableView.dataSource = self
     optionsTableView.delegate = self
+    removeButton.isEnabled = false
   }
 
   func saveToUserDefaults() {
@@ -144,6 +145,7 @@ extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource
     if optionsTableView.selectedRowIndexes.count == 0 {
       optionsTableView.reloadData()
     }
+    removeButton.isEnabled = optionsTableView.selectedRow != -1
   }
 
 }

@@ -428,8 +428,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
       currentConfName = title
       currentConfFilePath = getFilePath(forConfig: title)!
       loadConfigFile()
-    } else {
-      removeKmBtn.isEnabled = shouldEnableEdit && (kbTableView.selectedRow != -1)
     }
+    removeKmBtn.isEnabled = shouldEnableEdit && (kbTableView.selectedRow != -1)
   }
 }

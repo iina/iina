@@ -152,8 +152,8 @@ extension NSRect {
   init(vertexPoint pt1: NSPoint, and pt2: NSPoint) {
     self.init(x: min(pt1.x, pt2.x),
               y: min(pt1.y, pt2.y),
-              width: fabs(pt1.x - pt2.x),
-              height: fabs(pt1.y - pt2.y))
+              width: abs(pt1.x - pt2.x),
+              height: abs(pt1.y - pt2.y))
   }
 
   func multiply(_ multiplier: CGFloat) -> NSRect {

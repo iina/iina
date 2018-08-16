@@ -9,6 +9,7 @@
 import Cocoa
 
 // These colors are for 10.13- only
+@available(macOS, obsoleted: 10.14)
 fileprivate extension NSColor {
   static let darkKnobColor = NSColor(red: 1, green: 1, blue: 1, alpha: 0.5)
   static let lightKnobColor = NSColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)

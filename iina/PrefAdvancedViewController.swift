@@ -94,7 +94,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   }
 
   @IBAction func chooseDirBtnAction(_ sender: AnyObject) {
-    Utility.quickOpenPanel(title: "Choose config directory", isDir: true) { url in
+    Utility.quickOpenPanel(title: "Choose config directory", chooseDir: true, sheetWindow: view.window) { url in
       Preference.set(url.path, for: .userDefinedConfDir)
       UserDefaults.standard.synchronize()
     }

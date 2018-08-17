@@ -262,7 +262,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   }
 
   @IBAction func addWatchAction(_ sender: AnyObject) {
-    let _ = Utility.quickPromptPanel("add_watch") { str in
+    Utility.quickPromptPanel("add_watch", sheetWindow: window) { str in
       self.watchProperties.append(str)
       self.watchTableView.reloadData()
       self.saveWatchList()

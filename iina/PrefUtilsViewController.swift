@@ -22,7 +22,6 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
     return [sectionDefaultAppView, sectionClearCacheView, sectionBrowserExtView]
   }
 
-  @IBOutlet weak var searchField: NSSearchField!
   @IBOutlet var sectionDefaultAppView: NSView!
   @IBOutlet var sectionClearCacheView: NSView!
   @IBOutlet var sectionBrowserExtView: NSView!
@@ -31,6 +30,8 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
   @IBOutlet weak var setAsDefaultAudioCheckBox: NSButton!
   @IBOutlet weak var setAsDefaultPlaylistCheckBox: NSButton!
   @IBOutlet weak var thumbCacheSizeLabel: NSTextField!
+  @IBOutlet weak var savedPlaybackProgressClearedLabel: NSTextField!
+  @IBOutlet weak var playHistoryClearedLabel: NSTextField!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -105,7 +106,7 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
       guard respond == .alertFirstButtonReturn else { return }
       try? FileManager.default.removeItem(atPath: Utility.watchLaterURL.path)
       Utility.createDirIfNotExist(url: Utility.watchLaterURL)
-      // Utility.showAlert("clear_watch_later.success", style: .informational)
+      self.savedPlaybackProgressClearedLabel.isHidden = false
     }
   }
 
@@ -114,7 +115,8 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
       guard respond == .alertFirstButtonReturn else { return }
       try? FileManager.default.removeItem(atPath: Utility.playbackHistoryURL.path)
       NSDocumentController.shared.clearRecentDocuments(self)
-      // Utility.showAlert("clear_history.success", style: .informational)
+      Preference.set(nil, for: .iinaLastPlayedFilePath)
+      self.playHistoryClearedLabel.isHidden = false
     }
   }
 
@@ -124,7 +126,6 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
       try? FileManager.default.removeItem(atPath: Utility.thumbnailCacheURL.path)
       Utility.createDirIfNotExist(url: Utility.thumbnailCacheURL)
       self.updateThumbnailCacheStat()
-      // Utility.showAlert("clear_cache.success", style: .informational)
     }
   }
 

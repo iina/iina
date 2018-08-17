@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.13.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefUtilsViewController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="playHistoryClearedLabel" destination="sI2-xW-v1S" id="7uc-8E-r0r"/>
+                <outlet property="savedPlaybackProgressClearedLabel" destination="btv-7s-L8M" id="mFv-fy-6Go"/>
                 <outlet property="sectionBrowserExtView" destination="lOp-07-Z6M" id="UYs-O3-l9R"/>
                 <outlet property="sectionClearCacheView" destination="ve7-5i-dg4" id="Ki9-9t-e2h"/>
                 <outlet property="sectionDefaultAppView" destination="qu5-4u-ozP" id="icl-fU-YLA"/>
@@ -142,17 +144,34 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sI2-xW-v1S">
+                    <rect key="frame" x="181" y="94" width="48" height="14"/>
+                    <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Cleared." id="Fb4-dy-CXX">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="btv-7s-L8M">
+                    <rect key="frame" x="232" y="153" width="48" height="14"/>
+                    <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Cleared." id="Efe-8C-4eV">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
+                <constraint firstItem="btv-7s-L8M" firstAttribute="firstBaseline" secondItem="bHj-vX-uFl" secondAttribute="firstBaseline" id="0S9-c6-mAK"/>
                 <constraint firstItem="bHj-vX-uFl" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" id="0gW-1v-lvU"/>
                 <constraint firstItem="H1t-lX-s9l" firstAttribute="leading" secondItem="2nt-Ax-K1T" secondAttribute="trailing" constant="8" id="0wR-aS-I1K"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SSk-Rd-BxH" secondAttribute="trailing" id="1wZ-U9-xrz"/>
                 <constraint firstAttribute="trailing" secondItem="2Kf-ce-zj1" secondAttribute="trailing" id="2OO-2C-XuI"/>
                 <constraint firstItem="2Kf-ce-zj1" firstAttribute="top" secondItem="ggb-jX-7Sf" secondAttribute="bottom" constant="16" id="4wd-3x-V1k"/>
                 <constraint firstItem="aCe-0n-uch" firstAttribute="top" secondItem="2nt-Ax-K1T" secondAttribute="bottom" constant="8" id="5MO-Ws-kl9"/>
                 <constraint firstItem="Eby-fI-erw" firstAttribute="top" secondItem="bHj-vX-uFl" secondAttribute="bottom" constant="16" id="5ss-60-YfH"/>
                 <constraint firstItem="ggb-jX-7Sf" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" id="8Wx-mc-D3G"/>
                 <constraint firstItem="oBG-5o-wZ1" firstAttribute="top" secondItem="SSk-Rd-BxH" secondAttribute="bottom" constant="18" id="A8x-pV-f6r"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="btv-7s-L8M" secondAttribute="trailing" id="CqF-Wr-Fe9"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="H1t-lX-s9l" secondAttribute="trailing" id="DJQ-2N-Iee"/>
                 <constraint firstItem="oBG-5o-wZ1" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" id="Fz6-WA-DvZ"/>
                 <constraint firstItem="bHj-vX-uFl" firstAttribute="top" secondItem="2Kf-ce-zj1" secondAttribute="bottom" constant="8" id="IGR-xM-GzV"/>
@@ -160,19 +179,23 @@
                 <constraint firstAttribute="bottom" secondItem="aCe-0n-uch" secondAttribute="bottom" constant="8" id="NVS-5F-WQF"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aCe-0n-uch" secondAttribute="trailing" id="O8f-oq-G8C"/>
                 <constraint firstItem="Eby-fI-erw" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" id="ONf-sb-lXx"/>
+                <constraint firstItem="sI2-xW-v1S" firstAttribute="firstBaseline" secondItem="SSk-Rd-BxH" secondAttribute="firstBaseline" id="Pjn-Os-dCj"/>
                 <constraint firstItem="SSk-Rd-BxH" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" id="QO1-85-aWx"/>
                 <constraint firstItem="SSk-Rd-BxH" firstAttribute="top" secondItem="Eby-fI-erw" secondAttribute="bottom" constant="8" id="R0O-Rh-rSa"/>
+                <constraint firstItem="btv-7s-L8M" firstAttribute="leading" secondItem="bHj-vX-uFl" secondAttribute="trailing" constant="8" id="WJg-zh-JMa"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bHj-vX-uFl" secondAttribute="trailing" id="WuM-dI-sLS"/>
+                <constraint firstItem="sI2-xW-v1S" firstAttribute="leading" secondItem="SSk-Rd-BxH" secondAttribute="trailing" constant="8" id="Y4R-V1-TZS"/>
                 <constraint firstAttribute="trailing" secondItem="Eby-fI-erw" secondAttribute="trailing" id="Yd3-8f-tuC"/>
                 <constraint firstAttribute="trailing" secondItem="oBG-5o-wZ1" secondAttribute="trailing" id="b2I-RE-KhA"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ggb-jX-7Sf" secondAttribute="trailing" id="bmh-Ky-JTi"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sI2-xW-v1S" secondAttribute="trailing" id="cXZ-6r-orn"/>
                 <constraint firstItem="aCe-0n-uch" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" id="dWb-Ts-MLj"/>
                 <constraint firstItem="2Kf-ce-zj1" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" id="iZX-Wh-11C"/>
                 <constraint firstItem="2nt-Ax-K1T" firstAttribute="leading" secondItem="oBG-5o-wZ1" secondAttribute="leading" id="sWZ-Vh-V9U"/>
                 <constraint firstItem="ggb-jX-7Sf" firstAttribute="top" secondItem="ve7-5i-dg4" secondAttribute="top" constant="8" id="t2W-Wg-LbY"/>
                 <constraint firstItem="2nt-Ax-K1T" firstAttribute="top" secondItem="oBG-5o-wZ1" secondAttribute="bottom" constant="8" id="vbU-bK-Ecb"/>
             </constraints>
-            <point key="canvasLocation" x="139" y="679.5"/>
+            <point key="canvasLocation" x="139" y="679"/>
         </customView>
         <customView id="lOp-07-Z6M">
             <rect key="frame" x="0.0" y="0.0" width="480" height="101"/>
@@ -243,11 +266,11 @@
             </constraints>
             <point key="canvasLocation" x="139" y="925"/>
         </customView>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="gck-1e-Yi7">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="gck-1e-Yi7">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="163" y="199" width="448" height="189"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="HNy-Eo-3UU">
                 <rect key="frame" x="0.0" y="0.0" width="448" height="189"/>
                 <autoresizingMask key="autoresizingMask"/>

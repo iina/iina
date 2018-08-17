@@ -11,14 +11,14 @@ import Cocoa
 // These colors are for 10.13- only
 @available(macOS, obsoleted: 10.14)
 fileprivate extension NSColor {
-  static let darkKnobColor = NSColor(red: 1, green: 1, blue: 1, alpha: 0.5)
-  static let lightKnobColor = NSColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
-  static let darkBarColorLeft = NSColor(white: 1, alpha: 0.3)
-  static let darkBarColorRight = NSColor(white: 1, alpha: 0.1)
-  static let lightBarColorLeft = NSColor(red: 0.239, green: 0.569, blue: 0.969, alpha: 1)
-  static let lightBarColorRight = NSColor(white: 0.5, alpha: 0.5)
-  static let lightChapterStrokeColor = NSColor(white: 0.4, alpha: 1)
-  static let darkChapterStrokeColor = NSColor(white: 0.2, alpha: 1)
+  static let darkKnobColor = NSColor(calibratedRed: 1, green: 1, blue: 1, alpha: 0.5)
+  static let lightKnobColor = NSColor(calibratedRed: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+  static let darkBarColorLeft = NSColor(calibratedWhite: 1, alpha: 0.3)
+  static let darkBarColorRight = NSColor(calibratedWhite: 1, alpha: 0.1)
+  static let lightBarColorLeft = NSColor(calibratedRed: 0.239, green: 0.569, blue: 0.969, alpha: 1)
+  static let lightBarColorRight = NSColor(calibratedWhite: 0.5, alpha: 0.5)
+  static let lightChapterStrokeColor = NSColor(calibratedWhite: 0.4, alpha: 1)
+  static let darkChapterStrokeColor = NSColor(calibratedWhite: 0.2, alpha: 1)
 }
 
 class PlaySliderCell: NSSliderCell {

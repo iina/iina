@@ -1875,7 +1875,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if #available(macOS 10.14, *) {
       window.backgroundColor = .windowBackgroundColor
     } else {
-      window.backgroundColor = NSColor(white: 0.1, alpha: 1)
+      window.backgroundColor = NSColor(calibratedWhite: 0.1, alpha: 1)
     }
 
     let (ow, oh) = player.originalVideoSize

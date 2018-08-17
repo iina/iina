@@ -19,49 +19,49 @@ fileprivate extension NSColor {
     if #available(macOS 10.14, *) {
       return NSColor(named: .initialWindowActionButtonBackground)!
     } else {
-      return NSColor(white: 0, alpha: 0)
+      return NSColor(calibratedWhite: 0, alpha: 0)
     }
   }()
   static let initialWindowActionButtonBackgroundHover: NSColor = {
     if #available(macOS 10.14, *) {
       return NSColor(named: .initialWindowActionButtonBackgroundHover)!
     } else {
-      return NSColor(white: 0, alpha: 0.25)
+      return NSColor(calibratedWhite: 0, alpha: 0.25)
     }
   }()
   static let initialWindowActionButtonBackgroundPressed: NSColor = {
     if #available(macOS 10.14, *) {
       return NSColor(named: .initialWindowActionButtonBackgroundPressed)!
     } else {
-      return NSColor(white: 0, alpha: 0.35)
+      return NSColor(calibratedWhite: 0, alpha: 0.35)
     }
   }()
   static let initialWindowLastFileBackground: NSColor = {
     if #available(macOS 10.14, *) {
       return NSColor(named: .initialWindowLastFileBackground)!
     } else {
-      return NSColor(white: 1, alpha: 0.1)
+      return NSColor(calibratedWhite: 1, alpha: 0.1)
     }
   }()
   static let initialWindowLastFileBackgroundHover: NSColor = {
     if #available(macOS 10.14, *) {
       return NSColor(named: .initialWindowLastFileBackgroundHover)!
     } else {
-      return NSColor(white: 0.5, alpha: 0.1)
+      return NSColor(calibratedWhite: 0.5, alpha: 0.1)
     }
   }()
   static let initialWindowLastFileBackgroundPressed: NSColor = {
     if #available(macOS 10.14, *) {
       return NSColor(named: .initialWindowLastFileBackgroundPressed)!
     } else {
-      return NSColor(white: 0, alpha: 0.1)
+      return NSColor(calibratedWhite: 0, alpha: 0.1)
     }
   }()
   static let initialWindowBetaLabel: NSColor = {
     if #available(macOS 10.14, *) {
       return NSColor(named: .initialWindowBetaLabel)!
     } else {
-      return NSColor(red: 1, green: 0.6, blue: 0.2, alpha: 1)
+      return NSColor(calibratedRed: 1, green: 0.6, blue: 0.2, alpha: 1)
     }
   }()
 }

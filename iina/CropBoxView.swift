@@ -13,7 +13,7 @@ fileprivate extension NSColor {
     if #available(OSX 10.14, *) {
       return NSColor(named: .cropBoxFill)!
     } else {
-      return NSColor(white: 0.5, alpha: 0.3)
+      return NSColor(calibratedWhite: 0.5, alpha: 0.3)
     }
   }()
   static let cropBoxBorder: NSColor = {

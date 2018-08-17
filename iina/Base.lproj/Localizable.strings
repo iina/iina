@@ -195,15 +195,12 @@
 
 "alert.clear_cache.title" = "Clear Thumbnail Cache";
 "alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
-"alert.clear_cache.success" = "Cache cleared.";
 
 "alert.clear_history.title" = "Clear Playback History";
 "alert.clear_history.message" = "Are you sure to delete all playback history?";
-"alert.clear_history.success" = "Playback history deleted.";
 
 "alert.clear_watch_later.title" = "Clear Saved Playback Progress";
 "alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
-"alert.clear_watch_later.success" = "All saved playback progress deleted.";
 
 "alert.nothing_to_open" = "Nothing to open.";
 

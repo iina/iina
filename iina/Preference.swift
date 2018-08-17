@@ -843,7 +843,7 @@ struct Preference {
     ud.set(value, forKey: key.rawValue)
   }
 
-  static func set(_ value: Any, for key: Key) {
+  static func set(_ value: Any?, for key: Key) {
     ud.set(value, forKey: key.rawValue)
   }
 

@@ -33,10 +33,6 @@ class PrefOSCToolbarDraggingItemViewController: NSViewController, NSPasteboardWr
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    view.wantsLayer = true
-    view.layer?.backgroundColor = NSColor.secondarySelectedControlColor.cgColor
-    view.layer?.cornerRadius = 4
-
     iconImageView.image = buttonType.image()
     iconImageView.translatesAutoresizingMaskIntoConstraints = false
     descriptionLabel.stringValue = buttonType.description()

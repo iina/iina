@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.13.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,11 +18,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="129"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="156"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="LZ8-DJ-i0e" customClass="KeyRecordView" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="83" width="480" height="46"/>
+                    <rect key="frame" x="0.0" y="110" width="480" height="46"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jqj-WM-ez4">
                             <rect key="frame" x="-2" y="7" width="484" height="31"/>
@@ -48,60 +48,77 @@
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" focusRingType="none" drawsBackground="YES" usesSingleLineMode="YES" id="z0F-wj-JKA">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q4h-ui-SRm">
-                    <rect key="frame" x="-2" y="57" width="484" height="14"/>
-                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Action:" id="gSW-bE-4yE">
+                    <rect key="frame" x="-2" y="84" width="76" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="bEJ-bs-24N"/>
+                    </constraints>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Select action:" id="gSW-bE-4yF">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="y9W-a9-7sk">
-                    <rect key="frame" x="0.0" y="27" width="480" height="26"/>
+                    <rect key="frame" x="0.0" y="55" width="480" height="25"/>
                     <clipView key="contentView" copiesOnScroll="NO" id="it8-db-s5l">
-                        <rect key="frame" x="1" y="1" width="478" height="24"/>
+                        <rect key="frame" x="1" y="1" width="478" height="23"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <ruleEditor nestingMode="simple" rowHeight="25" id="aaj-fS-PWS">
-                                <rect key="frame" x="0.0" y="0.0" width="478" height="24"/>
+                            <ruleEditor nestingMode="simple" rowHeight="24" id="aaj-fS-PWS">
+                                <rect key="frame" x="0.0" y="0.0" width="478" height="23"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </ruleEditor>
                         </subviews>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
                     <constraints>
-                        <constraint firstAttribute="height" constant="26" id="oKe-g6-ngE"/>
+                        <constraint firstAttribute="height" constant="25" id="oKe-g6-ngE"/>
                     </constraints>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="wdt-7b-vYv">
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="wdt-7b-vYv">
                         <rect key="frame" x="-100" y="-100" width="223" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Wtq-1A-G5b">
+                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Wtq-1A-G5b">
                         <rect key="frame" x="-100" y="-100" width="16" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OMX-mW-VXl">
+                    <rect key="frame" x="-2" y="33" width="131" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="HlN-0J-WTS"/>
+                    </constraints>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Or enter mpv command:" id="xhd-tg-xTO">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="24G-a7-cRM" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="4eP-VG-6UP"/>
+                <constraint firstItem="OMX-mW-VXl" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="7f6-Ji-0o5"/>
                 <constraint firstAttribute="trailing" secondItem="y9W-a9-7sk" secondAttribute="trailing" id="Jsy-8K-AVg"/>
                 <constraint firstItem="Q4h-ui-SRm" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="PWR-BD-XDF"/>
-                <constraint firstAttribute="trailing" secondItem="Q4h-ui-SRm" secondAttribute="trailing" id="WVx-dp-0NP"/>
-                <constraint firstItem="24G-a7-cRM" firstAttribute="top" secondItem="aaj-fS-PWS" secondAttribute="bottom" constant="-1" id="Ydo-eJ-Cgp"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Q4h-ui-SRm" secondAttribute="trailing" id="WVx-dp-0NP"/>
                 <constraint firstItem="y9W-a9-7sk" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="ZWv-09-F64"/>
                 <constraint firstItem="Q4h-ui-SRm" firstAttribute="top" secondItem="LZ8-DJ-i0e" secondAttribute="bottom" constant="12" id="aEA-7l-YDh"/>
+                <constraint firstItem="24G-a7-cRM" firstAttribute="top" secondItem="OMX-mW-VXl" secondAttribute="bottom" constant="4" id="btw-pf-JdW"/>
                 <constraint firstAttribute="trailing" secondItem="LZ8-DJ-i0e" secondAttribute="trailing" id="c0J-o9-dRP"/>
                 <constraint firstAttribute="bottom" secondItem="24G-a7-cRM" secondAttribute="bottom" constant="7" id="fFX-cM-Ju2"/>
                 <constraint firstAttribute="trailing" secondItem="24G-a7-cRM" secondAttribute="trailing" id="gwS-fV-JVt"/>
                 <constraint firstItem="LZ8-DJ-i0e" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="ohU-zG-czm"/>
+                <constraint firstItem="OMX-mW-VXl" firstAttribute="top" secondItem="y9W-a9-7sk" secondAttribute="bottom" constant="8" id="olC-AL-5gi"/>
                 <constraint firstItem="y9W-a9-7sk" firstAttribute="top" secondItem="Q4h-ui-SRm" secondAttribute="bottom" constant="4" id="rlA-oC-ItM"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OMX-mW-VXl" secondAttribute="trailing" id="w2h-eH-wdt"/>
                 <constraint firstItem="LZ8-DJ-i0e" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="zSD-EJ-u6N"/>
             </constraints>
-            <point key="canvasLocation" x="43" y="98"/>
+            <point key="canvasLocation" x="43" y="122"/>
         </customView>
     </objects>
 </document>

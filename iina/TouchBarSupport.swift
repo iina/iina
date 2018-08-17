@@ -41,16 +41,16 @@ fileprivate extension NSTouchBarItem.Identifier {
 // Image name, tag, custom label
 @available(macOS 10.12.2, *)
 fileprivate let touchBarItemBinding: [NSTouchBarItem.Identifier: (NSImage.Name, Int, String)] = [
-  .ahead15Sec: (.touchBarSkipAhead15SecondsTemplate, 15, NSLocalizedString("touchbar.ahead_15", comment: "15sec Ahead")),
-  .ahead30Sec: (.touchBarSkipAhead30SecondsTemplate, 30, NSLocalizedString("touchbar.ahead_30", comment: "30sec Ahead")),
-  .back15Sec: (.touchBarSkipBack15SecondsTemplate, -15, NSLocalizedString("touchbar.back_15", comment: "-15sec Ahead")),
-  .back30Sec: (.touchBarSkipBack30SecondsTemplate, -30, NSLocalizedString("touchbar.back_30", comment: "-30sec Ahead")),
-  .next: (.touchBarSkipAheadTemplate, 0, NSLocalizedString("touchbar.next_video", comment: "Next Video")),
-  .prev: (.touchBarSkipBackTemplate, 1, NSLocalizedString("touchbar.prev_video", comment: "Previous Video")),
-  .volumeUp: (.touchBarVolumeUpTemplate, 0, NSLocalizedString("touchbar.increase_volume", comment: "Volume +")),
-  .volumeDown: (.touchBarVolumeDownTemplate, 1, NSLocalizedString("touchbar.decrease_volume", comment: "Volume -")),
-  .rewind: (.touchBarRewindTemplate, 0, NSLocalizedString("touchbar.rewind", comment: "Rewind")),
-  .fastForward: (.touchBarFastForwardTemplate, 1, NSLocalizedString("touchbar.fast_forward", comment: "Fast Forward"))
+  .ahead15Sec: (NSImage.touchBarSkipAhead15SecondsTemplateName, 15, NSLocalizedString("touchbar.ahead_15", comment: "15sec Ahead")),
+  .ahead30Sec: (NSImage.touchBarSkipAhead30SecondsTemplateName, 30, NSLocalizedString("touchbar.ahead_30", comment: "30sec Ahead")),
+  .back15Sec: (NSImage.touchBarSkipBack15SecondsTemplateName, -15, NSLocalizedString("touchbar.back_15", comment: "-15sec Ahead")),
+  .back30Sec: (NSImage.touchBarSkipBack30SecondsTemplateName, -30, NSLocalizedString("touchbar.back_30", comment: "-30sec Ahead")),
+  .next: (NSImage.touchBarSkipAheadTemplateName, 0, NSLocalizedString("touchbar.next_video", comment: "Next Video")),
+  .prev: (NSImage.touchBarSkipBackTemplateName, 1, NSLocalizedString("touchbar.prev_video", comment: "Previous Video")),
+  .volumeUp: (NSImage.touchBarVolumeUpTemplateName, 0, NSLocalizedString("touchbar.increase_volume", comment: "Volume +")),
+  .volumeDown: (NSImage.touchBarVolumeDownTemplateName, 1, NSLocalizedString("touchbar.decrease_volume", comment: "Volume -")),
+  .rewind: (NSImage.touchBarRewindTemplateName, 0, NSLocalizedString("touchbar.rewind", comment: "Rewind")),
+  .fastForward: (NSImage.touchBarFastForwardTemplateName, 1, NSLocalizedString("touchbar.fast_forward", comment: "Fast Forward"))
 ]
 
 @available(macOS 10.12.2, *)
@@ -87,7 +87,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
 
     case .playPause:
       let item = NSCustomTouchBarItem(identifier: identifier)
-      item.view = NSButton(image: NSImage(named: .touchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
+      item.view = NSButton(image: NSImage(named: NSImage.touchBarPauseTemplateName)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
       item.customizationLabel = NSLocalizedString("touchbar.play_pause", comment: "Play / Pause")
       self.touchBarPlayPauseBtn = item.view as? NSButton
       return item
@@ -150,7 +150,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       
     case .exitFullScr:
       let item = NSCustomTouchBarItem(identifier: identifier)
-      item.view = NSButton(image: NSImage(named: .touchBarExitFullScreenTemplate)!, target: self, action: #selector(self.touchBarExitFullScrAction(_:)))
+      item.view = NSButton(image: NSImage(named: NSImage.touchBarExitFullScreenTemplateName)!, target: self, action: #selector(self.touchBarExitFullScrAction(_:)))
       self.touchBarExitFullScr = item.view as? NSButton
       return item
 
@@ -161,9 +161,9 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
 
   func updateTouchBarPlayBtn() {
     if player.info.isPaused {
-      touchBarPlayPauseBtn?.image = NSImage(named: .touchBarPlayTemplate)
+      touchBarPlayPauseBtn?.image = NSImage(named: NSImage.touchBarPlayTemplateName)
     } else {
-      touchBarPlayPauseBtn?.image = NSImage(named: .touchBarPauseTemplate)
+      touchBarPlayPauseBtn?.image = NSImage(named: NSImage.touchBarPauseTemplateName)
     }
   }
 

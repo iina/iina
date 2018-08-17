@@ -69,13 +69,16 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    window?.appearance = NSAppearance(named: .vibrantDark)
 
     watchProperties = Preference.array(for: .watchProperties) as! [String]
     watchTableView.delegate = self
     watchTableView.dataSource = self
 
     deleteButton.isEnabled = false
+
+    if #available(macOS 10.14, *) {} else {
+      window?.appearance = NSAppearance(named: .vibrantDark)
+    }
 
     updateInfo()
 

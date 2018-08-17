@@ -14,6 +14,59 @@ fileprivate extension NSUserInterfaceItemIdentifier {
   static let resumeLast = NSUserInterfaceItemIdentifier("resumeLast")
 }
 
+fileprivate extension NSColor {
+  static let initialWindowActionButtonBackground: NSColor = {
+    if #available(macOS 10.14, *) {
+      return NSColor(named: .initialWindowActionButtonBackground)!
+    } else {
+      return NSColor(calibratedWhite: 0, alpha: 0)
+    }
+  }()
+  static let initialWindowActionButtonBackgroundHover: NSColor = {
+    if #available(macOS 10.14, *) {
+      return NSColor(named: .initialWindowActionButtonBackgroundHover)!
+    } else {
+      return NSColor(calibratedWhite: 0, alpha: 0.25)
+    }
+  }()
+  static let initialWindowActionButtonBackgroundPressed: NSColor = {
+    if #available(macOS 10.14, *) {
+      return NSColor(named: .initialWindowActionButtonBackgroundPressed)!
+    } else {
+      return NSColor(calibratedWhite: 0, alpha: 0.35)
+    }
+  }()
+  static let initialWindowLastFileBackground: NSColor = {
+    if #available(macOS 10.14, *) {
+      return NSColor(named: .initialWindowLastFileBackground)!
+    } else {
+      return NSColor(calibratedWhite: 1, alpha: 0.1)
+    }
+  }()
+  static let initialWindowLastFileBackgroundHover: NSColor = {
+    if #available(macOS 10.14, *) {
+      return NSColor(named: .initialWindowLastFileBackgroundHover)!
+    } else {
+      return NSColor(calibratedWhite: 0.5, alpha: 0.1)
+    }
+  }()
+  static let initialWindowLastFileBackgroundPressed: NSColor = {
+    if #available(macOS 10.14, *) {
+      return NSColor(named: .initialWindowLastFileBackgroundPressed)!
+    } else {
+      return NSColor(calibratedWhite: 0, alpha: 0.1)
+    }
+  }()
+  static let initialWindowBetaLabel: NSColor = {
+    if #available(macOS 10.14, *) {
+      return NSColor(named: .initialWindowBetaLabel)!
+    } else {
+      return NSColor(calibratedRed: 1, green: 0.6, blue: 0.2, alpha: 1)
+    }
+  }()
+}
+
+
 class InitialWindowController: NSWindowController {
 
   override var windowNibName: NSNib.Name {
@@ -51,15 +104,11 @@ class InitialWindowController: NSWindowController {
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    window?.appearance = NSAppearance(named: .vibrantDark)
-    window?.titlebarAppearsTransparent = true
     window?.isMovableByWindowBackground = true
 
     window?.contentView?.registerForDraggedTypes([.nsFilenames, .nsURL, .string])
 
     mainView.wantsLayer = true
-    mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
-    appIcon.image = NSApp.applicationIconImage
 
     let (version, build) = Utility.iinaVersion()
     let isStableRelease = !version.contains("-")
@@ -71,7 +120,11 @@ class InitialWindowController: NSWindowController {
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
 
-    visualEffectView.material = .ultraDark
+    if #available(macOS 10.14, *) {} else {
+      window?.appearance = NSAppearance(named: .vibrantDark)
+      mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
+      visualEffectView.material = .ultraDark
+    }
   }
 
   func loadLastPlaybackInfo() {
@@ -82,10 +135,10 @@ class InitialWindowController: NSWindowController {
       // if last file exists
       lastPlaybackURL = lastFile
       lastFileContainerView.isHidden = false
-      lastFileContainerView.normalBackground = CGColor(gray: 1, alpha: 0.1)
-      lastFileContainerView.hoverBackground = CGColor(gray: 0.5, alpha: 0.1)
-      lastFileContainerView.pressedBackground = CGColor(gray: 0, alpha: 0.1)
-      lastFileIcon.image = #imageLiteral(resourceName: "history").tinted(.white)
+      lastFileContainerView.normalBackground = NSColor.initialWindowLastFileBackground
+      lastFileContainerView.hoverBackground = NSColor.initialWindowLastFileBackgroundHover
+      lastFileContainerView.pressedBackground = NSColor.initialWindowLastFileBackgroundPressed
+      lastFileIcon.image = #imageLiteral(resourceName: "history")
       lastFileNameLabel.stringValue = lastFile.lastPathComponent
       let lastPosition = Preference.double(for: .iinaLastPlayedFilePosition)
       lastPositionLabel.stringValue = VideoTime(lastPosition).stringRepresentation
@@ -147,33 +200,33 @@ class InitialWindowContentView: NSView {
 
 class InitialWindowViewActionButton: NSView {
 
-  var normalBackground = CGColor(gray: 0, alpha: 0) {
+  var normalBackground = NSColor.initialWindowActionButtonBackground {
     didSet {
-      self.layer?.backgroundColor = normalBackground
+      self.layer?.backgroundColor = normalBackground.cgColor
     }
   }
-  var hoverBackground = CGColor(gray: 0, alpha: 0.25)
-  var pressedBackground = CGColor(gray: 0, alpha: 0.35)
+  var hoverBackground = NSColor.initialWindowActionButtonBackgroundHover
+  var pressedBackground = NSColor.initialWindowActionButtonBackgroundPressed
 
   var action: Selector?
 
   override func awakeFromNib() {
     self.wantsLayer = true
     self.layer?.cornerRadius = 4
-    self.layer?.backgroundColor = normalBackground
+    self.layer?.backgroundColor = normalBackground.cgColor
     self.addTrackingArea(NSTrackingArea(rect: self.bounds, options: [.activeInKeyWindow, .mouseEnteredAndExited], owner: self, userInfo: nil))
   }
 
   override func mouseEntered(with event: NSEvent) {
-    self.layer?.backgroundColor = hoverBackground
+    self.layer?.backgroundColor = hoverBackground.cgColor
   }
 
   override func mouseExited(with event: NSEvent) {
-    self.layer?.backgroundColor = normalBackground
+    self.layer?.backgroundColor = normalBackground.cgColor
   }
 
   override func mouseDown(with event: NSEvent) {
-    self.layer?.backgroundColor = pressedBackground
+    self.layer?.backgroundColor = pressedBackground.cgColor
     if self.identifier == .openFile {
       (NSApp.delegate as! AppDelegate).openFile(self)
     } else if self.identifier == .openURL {
@@ -187,9 +240,9 @@ class InitialWindowViewActionButton: NSView {
   }
 
   override func mouseUp(with event: NSEvent) {
-    self.layer?.backgroundColor = hoverBackground
+    self.layer?.backgroundColor = hoverBackground.cgColor
   }
-  
+
 }
 
 
@@ -200,7 +253,7 @@ class BetaIndicatorView: NSView {
   @IBOutlet var text2: NSTextField!
 
   override func awakeFromNib() {
-    self.layer?.backgroundColor = CGColor(red: 1, green: 0.6, blue: 0.2, alpha: 1)
+    self.layer?.backgroundColor = NSColor.initialWindowBetaLabel.cgColor
     self.layer?.cornerRadius = 4
     self.addTrackingArea(NSTrackingArea(rect: self.bounds, options: [.activeInKeyWindow, .mouseEnteredAndExited], owner: self, userInfo: nil))
 

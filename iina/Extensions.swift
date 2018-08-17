@@ -152,8 +152,8 @@ extension NSRect {
   init(vertexPoint pt1: NSPoint, and pt2: NSPoint) {
     self.init(x: min(pt1.x, pt2.x),
               y: min(pt1.y, pt2.y),
-              width: fabs(pt1.x - pt2.x),
-              height: fabs(pt1.y - pt2.y))
+              width: abs(pt1.x - pt2.x),
+              height: abs(pt1.y - pt2.y))
   }
 
   func multiply(_ multiplier: CGFloat) -> NSRect {
@@ -496,4 +496,26 @@ extension NSUserInterfaceItemIdentifier {
   static let key = NSUserInterfaceItemIdentifier("Key")
   static let value = NSUserInterfaceItemIdentifier("Value")
   static let action = NSUserInterfaceItemIdentifier("Action")
+}
+
+extension NSAppearance {
+  @available(macOS 10.14, *)
+  convenience init?(iinaTheme theme: Preference.Theme) {
+    switch theme {
+    case .dark:
+      self.init(named: .darkAqua)
+    case .light:
+      self.init(named: .aqua)
+    default:
+      return nil
+    }
+  }
+
+  var isDark: Bool {
+    if #available(macOS 10.14, *) {
+      return name == .darkAqua || name == .vibrantDark || name == .accessibilityHighContrastDarkAqua || name == .accessibilityHighContrastVibrantDark
+    } else {
+      return name == .vibrantDark
+    }
+  }
 }

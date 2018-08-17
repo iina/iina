@@ -51,9 +51,16 @@
   pod install
   ```
   
-3. Open `.xcworkspace` file.
+3. Open `.xcworkspace` file using Xcode 10.
 
-Theoretically no extra work is needed. _If you are unwilling to use the provided dylibs, follow the instructions below._
+Due to a cocoapods bug, before cocoapods 1.6.0 is released, you need to do extra
+work to build IINA.
+
+- Find file `iina/Pods/Target Support Files/Pods-iina/Pods-iina-frameworks.sh`
+- Jump to line 104, change `EXPANDED_CODE_SIGN_IDENTITY` to `EXPANDED_CODE_SIGN_IDENTITY:-`
+
+
+_If you are unwilling to use the provided dylibs, follow the instructions below._
 
 **Build with the latest mpv**
 

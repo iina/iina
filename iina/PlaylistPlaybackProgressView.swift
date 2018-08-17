@@ -8,9 +8,19 @@
 
 import Cocoa
 
+fileprivate extension NSColor {
+  static let playlistProgressBar: NSColor = {
+    if #available(macOS 10.14, *) {
+      return NSColor(named: .playlistProgressBar)!
+    } else {
+      return NSColor(calibratedWhite: 1, alpha: 0.6)
+    }
+  }()
+}
+
 class PlaylistPlaybackProgressView: NSView {
 
-  private static let fillColor = NSColor(calibratedWhite: 1, alpha: 0.6)
+  private static let fillColor = NSColor.playlistProgressBar
 
   /// The percentage from 0 to 1.
   var percentage: Double = 0

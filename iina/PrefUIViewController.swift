@@ -48,6 +48,7 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   @IBOutlet var sectionOSDView: NSView!
   @IBOutlet var sectionThumbnailView: NSView!
 
+  @IBOutlet weak var themeMenu: NSMenu!
   @IBOutlet weak var oscPreviewImageView: NSImageView!
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!
   @IBOutlet weak var oscToolbarStackView: NSStackView!
@@ -75,15 +76,25 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     super.viewDidLoad()
     oscPositionPopupBtnAction(oscPositionPopupButton)
     oscToolbarStackView.wantsLayer = true
-    oscToolbarStackView.layer?.backgroundColor = NSColor(calibratedWhite: 0.5, alpha: 0.2).cgColor
-    oscToolbarStackView.layer?.cornerRadius = 4
     updateOSCToolbarButtons()
     setupGeometryRelatedControls()
     setupResizingRelatedControls()
+
+    let removeThemeMenuItemWithTag = { (tag: Int) in
+      if let item = self.themeMenu.item(withTag: tag) {
+        self.themeMenu.removeItem(item)
+      }
+    }
+    if #available(macOS 10.14, *) {
+      removeThemeMenuItemWithTag(Preference.Theme.mediumLight.rawValue)
+      removeThemeMenuItemWithTag(Preference.Theme.ultraDark.rawValue)
+    } else {
+      removeThemeMenuItemWithTag(Preference.Theme.system.rawValue)
+    }
   }
 
   @IBAction func oscPositionPopupBtnAction(_ sender: NSPopUpButton) {
-    var name: String
+    var name: NSImage.Name
     switch sender.selectedTag() {
     case 0:
       name = "osc_float"
@@ -94,7 +105,7 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     default:
       name = "osc_float"
     }
-    oscPreviewImageView.image = NSImage(named: NSImage.Name(rawValue: name))
+    oscPreviewImageView.image = NSImage(named: name)
   }
 
   @IBAction func updateGeometryValue(_ sender: AnyObject) {

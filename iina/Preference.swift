@@ -291,13 +291,24 @@ struct Preference {
 
   enum Theme: Int, InitializingFromKey {
     case dark = 0
-    case ultraDark
-    case light
-    case mediumLight
+    case ultraDark // 1
+    case light // 2
+    case mediumLight // 3
+    case system // 4
 
     static var defaultValue = Theme.dark
 
     init?(key: Key) {
+      let value = Preference.integer(for: key)
+      if #available(macOS 10.14, *) {
+        if value == 1 || value == 3 {
+          return nil
+        }
+      } else {
+        if value == 4 {
+          return nil
+        }
+      }
       self.init(rawValue: Preference.integer(for: key))
     }
   }
@@ -586,7 +597,7 @@ struct Preference {
 
     func image() -> NSImage {
       switch self {
-      case .settings: return NSImage(named: .actionTemplate)!
+      case .settings: return NSImage(named: NSImage.actionTemplateName)!
       case .playlist: return #imageLiteral(resourceName: "playlist")
       case .pip: return #imageLiteral(resourceName: "pip")
       case .fullScreen: return #imageLiteral(resourceName: "fullscreen")

@@ -111,7 +111,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
   // MARK: - IBActions
 
-  func showKeyBindingPanel(key: String = "", action: String = "", ok: (String, String) -> Void) {
+  func showKeyBindingPanel(key: String = "", action: String = "", ok: @escaping (String, String) -> Void) {
     let panel = NSAlert()
     let keyRecordViewController = KeyRecordViewController()
     keyRecordViewController.keyCode = key
@@ -122,8 +122,10 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     panel.window.initialFirstResponder = keyRecordViewController.keyRecordView
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
-    if panel.runModal() == .alertFirstButtonReturn {
-      ok(keyRecordViewController.keyCode, keyRecordViewController.action)
+    panel.beginSheetModal(for: view.window!) { respond in
+      if respond == .alertFirstButtonReturn {
+        ok(keyRecordViewController.keyCode, keyRecordViewController.action)
+      }
     }
   }
 
@@ -132,16 +134,16 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       guard !key.isEmpty && !action.isEmpty else { return }
       if action.hasPrefix("@iina") {
         let trimmedAction = action[action.index(action.startIndex, offsetBy: "@iina".count)...].trimmingCharacters(in: .whitespaces)
-        currentMapping.append(KeyMapping(key: key,
+        self.currentMapping.append(KeyMapping(key: key,
                                          rawAction: trimmedAction,
                                          isIINACommand: true))
       } else {
-        currentMapping.append(KeyMapping(key: key, rawAction: action))
+        self.currentMapping.append(KeyMapping(key: key, rawAction: action))
       }
 
-      kbTableView.reloadData()
-      kbTableView.scrollRowToVisible(currentMapping.count - 1)
-      saveToConfFile()
+      self.kbTableView.reloadData()
+      self.kbTableView.scrollRowToVisible(self.currentMapping.count - 1)
+      self.saveToConfFile()
     }
   }
 
@@ -415,8 +417,8 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
       guard !key.isEmpty && !action.isEmpty else { return }
       selectedData.key = key
       selectedData.rawAction = action
-      kbTableView.reloadData()
-      saveToConfFile()
+      self.kbTableView.reloadData()
+      self.saveToConfFile()
     }
   }
 
@@ -426,8 +428,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
       currentConfName = title
       currentConfFilePath = getFilePath(forConfig: title)!
       loadConfigFile()
-    } else {
-      removeKmBtn.isEnabled = shouldEnableEdit && (kbTableView.selectedRow != -1)
     }
+    removeKmBtn.isEnabled = shouldEnableEdit && (kbTableView.selectedRow != -1)
   }
 }

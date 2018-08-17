@@ -27,10 +27,6 @@ class PrefOSCToolbarSettingsSheetController: NSWindowController, PrefOSCToolbarC
 
   override func windowDidLoad() {
     super.windowDidLoad()
-
-    currentItemsView.wantsLayer = true
-    currentItemsView.layer?.backgroundColor = NSColor.secondarySelectedControlColor.cgColor
-    currentItemsView.layer?.cornerRadius = 4
     currentItemsView.registerForDraggedTypes([.iinaOSCAvailableToolbarButtonType, .iinaOSCCurrentToolbarButtonType])
     currentItemsView.currentItemsViewDelegate = self
     currentItemsView.initItems(fromItems: PrefUIViewController.oscToolbarButtons)
@@ -185,12 +181,12 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
   // Dragging destination
 
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-    let pboard = sender.draggingPasteboard()
+    let pboard = sender.draggingPasteboard
 
     if let _ = pboard.availableType(from: [.iinaOSCAvailableToolbarButtonType]) {
       // dragging available item in:
       // don't accept existing items, don't accept new items when already have 5 icons
-      guard let rawButtonType = sender.draggingPasteboard().propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
+      guard let rawButtonType = sender.draggingPasteboard.propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
         let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
         !items.contains(buttonType),
         items.count < 5 else {
@@ -206,7 +202,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
   }
 
   override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
-    let pboard = sender.draggingPasteboard()
+    let pboard = sender.draggingPasteboard
 
     let isAvailableItem = pboard.availableType(from: [.iinaOSCAvailableToolbarButtonType]) != nil
     let isCurrentItem = pboard.availableType(from: [.iinaOSCCurrentToolbarButtonType]) != nil
@@ -215,7 +211,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
     if isAvailableItem {
       // dragging available item in:
       // don't accept existing items, don't accept new items when already have 5 icons
-      guard let rawButtonType = sender.draggingPasteboard().propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
+      guard let rawButtonType = sender.draggingPasteboard.propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
         let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
         !items.contains(buttonType),
         items.count < 5 else {
@@ -224,7 +220,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
     }
 
     // get the expected drag destination position and index
-    let pos = convert(sender.draggingLocation(), from: nil)
+    let pos = convert(sender.draggingLocation, from: nil)
     var index = views.count - Int(floor((frame.width - pos.x) / 24)) - 1
     if index < 0 { index = 0 }
     dragDestIndex = index
@@ -254,7 +250,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
   }
 
   override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-    let pboard = sender.draggingPasteboard()
+    let pboard = sender.draggingPasteboard
 
     if views.contains(placeholderView) {
       removeView(placeholderView)
@@ -262,7 +258,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
 
     if let _ = pboard.availableType(from: [.iinaOSCAvailableToolbarButtonType]) {
       // dragging available item in; don't accept existing items
-      if let rawButtonType = sender.draggingPasteboard().propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
+      if let rawButtonType = sender.draggingPasteboard.propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
         let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
         items.count < 5,
         dragDestIndex >= 0,

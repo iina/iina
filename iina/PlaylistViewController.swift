@@ -79,6 +79,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       $0?.alternateImage?.isTemplate = true
     }
 
+    // colors
+    if #available(OSX 10.14, *) {
+      withAllTableViews { $0.backgroundColor = NSColor(named: .sidebarTableBackground)! }
+    }
 
     // handle pending switch tab request
     if pendingSwitchRequest != nil {
@@ -190,16 +194,16 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
     playlistTableView.setDropRow(row, dropOperation: .above)
-    if info.draggingSource() as? NSTableView === tableView {
+    if info.draggingSource as? NSTableView === tableView {
       return .move
     }
     return player.acceptFromPasteboard(info, isPlaylist: true)
   }
 
   func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
-    let pasteboard = info.draggingPasteboard()
+    let pasteboard = info.draggingPasteboard
 
-    if info.draggingSource() as? NSTableView === tableView {
+    if info.draggingSource as? NSTableView === tableView {
       if let rowData = pasteboard.data(forType: .iinaPlaylistItem) {
         let indexSet = NSKeyedUnarchiver.unarchiveObject(with: rowData) as! IndexSet
 

@@ -158,7 +158,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   // FIXME: may combine with duplicate action?
   @IBAction func newConfFileAction(_ sender: AnyObject) {
     // prompt
-    Utility.quickPromptPanel("config.new", mode: .sheetModal, sheetWindow: view.window) { newName in
+    Utility.quickPromptPanel("config.new", sheetWindow: view.window) { newName in
       guard !newName.isEmpty else {
         Utility.showAlert("config.empty_name")
         return
@@ -173,7 +173,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       let fm = FileManager.default
       // - if exists
       if fm.fileExists(atPath: newFilePath) {
-        if Utility.quickAskPanel("config.file_existing") {
+        if Utility.quickAskPanel("config.file_existing", sheetWindow: self.view.window) {
           // - delete file
           do {
             try fm.removeItem(atPath: newFilePath)
@@ -207,7 +207,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
   @IBAction func duplicateConfFileAction(_ sender: AnyObject) {
     // prompt
-    Utility.quickPromptPanel("config.duplicate", mode: .sheetModal, sheetWindow: view.window) { newName in
+    Utility.quickPromptPanel("config.duplicate", sheetWindow: view.window) { newName in
       if self.userConfigs[newName] != nil || PrefKeyBindingViewController.defaultConfigs[newName] != nil {
         Utility.showAlert("config.name_existing")
         return
@@ -219,7 +219,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       let fm = FileManager.default
       // - if exists
       if fm.fileExists(atPath: newFilePath) {
-        if Utility.quickAskPanel("config.file_existing") {
+        if Utility.quickAskPanel("config.file_existing", sheetWindow: self.view.window) {
           // - delete file
           do {
             try fm.removeItem(atPath: newFilePath)

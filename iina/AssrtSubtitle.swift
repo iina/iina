@@ -148,7 +148,7 @@ class AssrtSupport {
       // if user chose register
       NSWorkspace.shared.open(URL(string: AppData.assrtRegisterLink)!)
       var newToken = ""
-      if Utility.quickPromptPanel("assrt_token_prompt", ok: { newToken = $0 }) {
+      if Utility.quickPromptPanel("assrt_token_prompt", callback: { newToken = $0 }) {
         if newToken.count == 32 {
           Preference.set(newToken, for: .assrtToken)
           self.token = newToken

@@ -256,8 +256,9 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   @IBAction func deleteAction(_ sender: AnyObject) {
-    if Utility.quickAskPanel("delete_history") {
-      for entry in selectedEntries {
+    Utility.quickAskPanel("delete_history", sheetWindow: window) { respond in
+      guard respond == .alertFirstButtonReturn else { return }
+      for entry in self.selectedEntries {
         HistoryController.shared.remove(entry)
       }
     }

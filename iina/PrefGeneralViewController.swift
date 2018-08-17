@@ -36,7 +36,7 @@ class PrefGeneralViewController: PreferenceViewController, PreferenceWindowEmbed
   // MARK: - IBAction
 
   @IBAction func chooseScreenshotPathAction(_ sender: AnyObject) {
-    Utility.quickOpenPanel(title: "Choose screenshot save path", isDir: true) { url in
+    Utility.quickOpenPanel(title: "Choose screenshot save path", chooseDir: true, sheetWindow: view.window) { url in
       Preference.set(url.path, for: .screenshotFolder)
       UserDefaults.standard.synchronize()
     }

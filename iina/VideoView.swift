@@ -33,9 +33,12 @@ class VideoView: NSView {
   var uninitLock = NSLock()
 
   var draggingTimer: Timer?
-  var triggered: Bool = false
 
-  var lastPosition: NSPoint?
+  // whether auto show playlist is triggered
+  var playlistShown: Bool = false
+
+  // variable for tracing mouse position when dragging in the view
+  var lastMousePosition: NSPoint?
 
   var hasPlayableFiles: Bool = false
 
@@ -107,7 +110,7 @@ class VideoView: NSView {
 
   @objc func showPlaylist() {
     player.mainWindow.menuShowPlaylistPanel(.dummy)
-    triggered = true
+    playlistShown = true
   }
 
   private func createTimer() {
@@ -123,29 +126,25 @@ class VideoView: NSView {
   }
 
   override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
-    let position = NSEvent.mouseLocation
+
+    guard !playlistShown && hasPlayableFiles else { return super.draggingUpdated(sender) }
 
     func inTriggerArea(_ point: NSPoint?) -> Bool {
-      let windowFrame = player.mainWindow.window!.frame
-      guard let _ = point else { return false }
-      return point!.x > (windowFrame.maxX - windowFrame.width * 0.2)
+      guard let point = point, let frame = player.mainWindow.window?.frame else { return false }
+      return point.x > (frame.maxX - frame.width * 0.2)
     }
 
-    guard !triggered && hasPlayableFiles else { return super.draggingUpdated(sender) }
+    let position = NSEvent.mouseLocation
 
-    if position != lastPosition {
-      let nowIn = inTriggerArea(position)
-      let lastIn = inTriggerArea(lastPosition)
-      if nowIn && !lastIn {
-        createTimer()
-      } else if nowIn && lastIn {
-        destroyTimer()
-        createTimer()
-      } else if !nowIn && lastIn {
+    if position != lastMousePosition {
+      if inTriggerArea(lastMousePosition) {
         destroyTimer()
       }
+      if inTriggerArea(position) {
+        createTimer()
+      }
+      lastMousePosition = position
     }
-    lastPosition = position
 
     return super.draggingUpdated(sender)
   }
@@ -159,11 +158,11 @@ class VideoView: NSView {
   }
 
   override func draggingEnded(_ sender: NSDraggingInfo) {
-    if triggered {
+    if playlistShown {
       player.mainWindow.hideSideBar()
     }
-    triggered = false
-    lastPosition = nil
+    playlistShown = false
+    lastMousePosition = nil
   }
   
 }

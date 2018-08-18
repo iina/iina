@@ -110,6 +110,18 @@ class VideoView: NSView {
     triggered = true
   }
 
+  private func createTimer() {
+    draggingTimer = Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self,
+                                         selector: #selector(showPlaylist), userInfo: nil, repeats: false)
+  }
+
+  private func destroyTimer() {
+    if let draggingTimer = draggingTimer {
+      draggingTimer.invalidate()
+    }
+    draggingTimer = nil
+  }
+
   override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
     let position = NSEvent.mouseLocation
 
@@ -117,18 +129,6 @@ class VideoView: NSView {
       let windowFrame = player.mainWindow.window!.frame
       guard let _ = point else { return false }
       return point!.x > (windowFrame.maxX - windowFrame.width * 0.2)
-    }
-
-    func createTimer() {
-      draggingTimer = Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self,
-                            selector: #selector(showPlaylist), userInfo: nil, repeats: false)
-    }
-
-    func destroyTimer() {
-      if draggingTimer != nil {
-        draggingTimer!.invalidate()
-        draggingTimer = nil
-      }
     }
 
     guard !triggered && hasPlayableFiles else { return super.draggingUpdated(sender) }
@@ -148,6 +148,10 @@ class VideoView: NSView {
     lastPosition = position
 
     return super.draggingUpdated(sender)
+  }
+
+  override func draggingExited(_ sender: NSDraggingInfo?) {
+    destroyTimer()
   }
   
   override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {

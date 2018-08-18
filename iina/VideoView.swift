@@ -32,6 +32,16 @@ class VideoView: NSView {
 
   var uninitLock = NSLock()
 
+  var draggingTimer: Timer?
+
+  // whether auto show playlist is triggered
+  var playlistShown: Bool = false
+
+  // variable for tracing mouse position when dragging in the view
+  var lastMousePosition: NSPoint?
+
+  var hasPlayableFiles: Bool = false
+
   // MARK: - Attributes
 
   override var mouseDownCanMoveWindow: Bool {
@@ -56,7 +66,7 @@ class VideoView: NSView {
     // other settings
     autoresizingMask = [.width, .height]
     wantsBestResolutionOpenGLSurface = true
-  
+
     // dragging init
     registerForDraggedTypes([.nsFilenames, .nsURL, .string])
   }
@@ -94,11 +104,65 @@ class VideoView: NSView {
   // MARK: Drag and drop
   
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+    hasPlayableFiles = (player.acceptFromPasteboard(sender, isPlaylist: true) == .copy)
     return player.acceptFromPasteboard(sender)
+  }
+
+  @objc func showPlaylist() {
+    player.mainWindow.menuShowPlaylistPanel(.dummy)
+    playlistShown = true
+  }
+
+  private func createTimer() {
+    draggingTimer = Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self,
+                                         selector: #selector(showPlaylist), userInfo: nil, repeats: false)
+  }
+
+  private func destroyTimer() {
+    if let draggingTimer = draggingTimer {
+      draggingTimer.invalidate()
+    }
+    draggingTimer = nil
+  }
+
+  override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
+
+    guard !playlistShown && hasPlayableFiles else { return super.draggingUpdated(sender) }
+
+    func inTriggerArea(_ point: NSPoint?) -> Bool {
+      guard let point = point, let frame = player.mainWindow.window?.frame else { return false }
+      return point.x > (frame.maxX - frame.width * 0.2)
+    }
+
+    let position = NSEvent.mouseLocation
+
+    if position != lastMousePosition {
+      if inTriggerArea(lastMousePosition) {
+        destroyTimer()
+      }
+      if inTriggerArea(position) {
+        createTimer()
+      }
+      lastMousePosition = position
+    }
+
+    return super.draggingUpdated(sender)
+  }
+
+  override func draggingExited(_ sender: NSDraggingInfo?) {
+    destroyTimer()
   }
   
   override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
     return player.openFromPasteboard(sender)
+  }
+
+  override func draggingEnded(_ sender: NSDraggingInfo) {
+    if playlistShown {
+      player.mainWindow.hideSideBar()
+    }
+    playlistShown = false
+    lastMousePosition = nil
   }
   
 }

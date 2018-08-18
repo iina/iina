@@ -1001,12 +1001,12 @@ class PlayerCore: NSObject {
       generateThumbnails()
     }
     // main thread stuff
-    getTrackInfo()
-    getSelectedTracks()
-    getPlaylist()
-    getChapters()
-    clearAbLoop()
     DispatchQueue.main.sync {
+      getTrackInfo()
+      getSelectedTracks()
+      getPlaylist()
+      getChapters()
+      clearAbLoop()
       syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
                                                target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
       if #available(macOS 10.12.2, *) {

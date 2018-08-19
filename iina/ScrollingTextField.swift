@@ -12,7 +12,7 @@ class ScrollingTextField: NSTextField {
 
   let frequency: TimeInterval = 0.03
 
-  var isScrolling: Bool = false
+  private var isScrolling: Bool = false
 
   private var scroller: Timer?
   private var point: NSPoint = .zero
@@ -22,26 +22,48 @@ class ScrollingTextField: NSTextField {
 
   private var increment: CGFloat = 1
 
+  private var modifyInternally: Bool = false
+
+  override var stringValue: String {
+    didSet {
+      guard !modifyInternally else { return }
+      cachedStringValue = nil
+      reset()
+    }
+  }
+
   required init?(coder: NSCoder) {
     super.init(coder: coder)
     startScrolling()
   }
 
-  func startScrolling() {
-    let stringWidth = attributedStringValue.size().width
-    guard !isScrolling && stringWidth > frame.maxX else { return }
-    cachedStringValue = stringValue
-    stringValue += "  "
-    cachedStringWidth = attributedStringValue.size().width
-    stringValue += cachedStringValue!
-    scroller = Timer.scheduledTimer(timeInterval: frequency, target: self, selector: #selector(moveText), userInfo: nil, repeats: true)
-    isScrolling = true
+  private func setStringValue(_ newValue: String) {
+    modifyInternally = true
+    stringValue = newValue
+    modifyInternally = false
   }
 
-  func reset() {
+  func scroll() {
+    let stringWidth = attributedStringValue.size().width
+    guard !isScrolling && stringWidth > frame.maxX else { return }
+
+    isScrolling = true
+    Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(startScrolling), userInfo: nil, repeats: false)
+  }
+
+  @objc
+  private func startScrolling() {
+    cachedStringValue = stringValue
+    setStringValue(stringValue + "   ")
+    cachedStringWidth = attributedStringValue.size().width
+    setStringValue(stringValue + cachedStringValue!)
+    scroller = Timer.scheduledTimer(timeInterval: frequency, target: self, selector: #selector(moveText), userInfo: nil, repeats: true)
+  }
+
+  private func reset() {
     scroller?.invalidate()
     scroller = nil
-    stringValue = cachedStringValue ?? stringValue
+    setStringValue(cachedStringValue ?? stringValue)
     cachedStringValue = nil
     cachedStringWidth = nil
     point = .zero
@@ -51,8 +73,9 @@ class ScrollingTextField: NSTextField {
 
   @objc
   private func moveText() {
+    guard let cachedStringWidth = cachedStringWidth else { return }
     point.x -= increment
-    if point.x + cachedStringWidth! < 0 {
+    if point.x + cachedStringWidth < 0 {
       reset()
       return
     }

@@ -251,8 +251,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
       controlView.animator().alphaValue = 0
       mediaInfoView.animator().alphaValue = 1
     }, completionHandler: {
-      self.titleLabel.startScrolling()
-      self.artistAlbumLabel.startScrolling()
+      self.titleLabel.scroll()
+      self.artistAlbumLabel.scroll()
     })
   }
 
@@ -287,6 +287,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   func windowDidResize(_ notification: Notification) {
     guard let window = window, !window.inLiveResize else { return }
     self.player.mainWindow.videoView.videoLayer.draw()
+  }
+
+  func windowDidBecomeMain(_ notification: Notification) {
+    titleLabel.scroll()
+    artistAlbumLabel.scroll()
   }
 
   // MARK: - NSPopoverDelegate
@@ -326,7 +331,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     DispatchQueue.main.async {
       let (mediaTitle, mediaAlbum, mediaArtist) = self.player.getMusicMetadata()
       self.titleLabel.stringValue = mediaTitle
-      self.titleLabel.reset()
       self.window?.title = mediaTitle
       // hide artist & album label when info not available
       if mediaArtist.isEmpty && mediaAlbum.isEmpty {
@@ -340,9 +344,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
           self.artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
         }
       }
-      self.artistAlbumLabel.reset()
-      self.titleLabel.startScrolling()
-      self.artistAlbumLabel.startScrolling()
+      self.titleLabel.scroll()
+      self.artistAlbumLabel.scroll()
     }
   }
 

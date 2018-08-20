@@ -1159,20 +1159,22 @@ class PlayerCore: NSObject {
     switch option {
 
     case .time:
-      let time = mpv.getDouble(MPVProperty.timePos)
-      info.videoPosition?.second = time
+      info.videoPosition?.second = mpv.getDouble(MPVProperty.timePos)
+      if info.isNetworkResource {
+        info.videoDuration?.second = mpv.getDouble(MPVProperty.duration)
+      }
       info.constrainVideoPosition()
       DispatchQueue.main.async {
         if self.isInMiniPlayer {
-          self.miniPlayer.updatePlayTime(withDuration: false, andProgressBar: true)
+          self.miniPlayer.updatePlayTime(withDuration: self.info.isNetworkResource, andProgressBar: true)
         } else {
-          self.mainWindow.updatePlayTime(withDuration: false, andProgressBar: true)
+          self.mainWindow.updatePlayTime(withDuration: self.info.isNetworkResource, andProgressBar: true)
         }
       }
 
     case .timeAndCache:
-      let time = mpv.getDouble(MPVProperty.timePos)
-      info.videoPosition?.second = time
+      info.videoPosition?.second = mpv.getDouble(MPVProperty.timePos)
+      info.videoDuration?.second = mpv.getDouble(MPVProperty.duration)
       info.constrainVideoPosition()
       info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)
       info.cacheSize = mpv.getInt(MPVProperty.cacheSize)

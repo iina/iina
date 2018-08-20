@@ -250,20 +250,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Observers added to `UserDefauts.standard`. */
   private var notificationObservers: [NotificationCenter: [NSObjectProtocol]] = [:]
 
-  /** Cached user default values */
-  private var oscPosition: Preference.OSCPosition
   private var oscIsInitialized = false
-  private var useExtractSeek: Preference.SeekOption
-  private var relativeSeekAmount: Int
-  private var volumeScrollAmount: Int
-  private var horizontalScrollAction: Preference.ScrollAction
-  private var verticalScrollAction: Preference.ScrollAction
-  private var arrowBtnFunction: Preference.ArrowButtonAction
-  private var singleClickAction: Preference.MouseClickAction
-  private var doubleClickAction: Preference.MouseClickAction
-  private var pinchAction: Preference.PinchAction
-  private var followGlobalSeekTypeWhenAdjustSlider: Bool
-  var displayTimeAndBatteryInFullScreen: Bool
+  /** Cached user default values */
+  private lazy var oscPosition: Preference.OSCPosition = Preference.enum(for: .oscPosition)
+  private lazy var useExtractSeek: Preference.SeekOption = Preference.enum(for: .useExactSeek)
+  private lazy var relativeSeekAmount: Int = Preference.integer(for: .relativeSeekAmount)
+  private lazy var volumeScrollAmount: Int = Preference.integer(for: .volumeScrollAmount)
+  private lazy var horizontalScrollAction: Preference.ScrollAction = Preference.enum(for: .horizontalScrollAction)
+  private lazy var verticalScrollAction: Preference.ScrollAction = Preference.enum(for: .verticalScrollAction)
+  private lazy var arrowBtnFunction: Preference.ArrowButtonAction = Preference.enum(for: .arrowButtonAction)
+  private lazy var singleClickAction: Preference.MouseClickAction = Preference.enum(for: .singleClickAction)
+  private lazy var doubleClickAction: Preference.MouseClickAction = Preference.enum(for: .doubleClickAction)
+  private lazy var pinchAction: Preference.PinchAction = Preference.enum(for: .pinchAction)
+  private lazy var followGlobalSeekTypeWhenAdjustSlider: Bool = Preference.bool(for: .followGlobalSeekTypeWhenAdjustSlider)
+  lazy var displayTimeAndBatteryInFullScreen: Bool = Preference.bool(for: .displayTimeAndBatteryInFullScreen)
 
   /** A list of observed preference keys. */
   private let observedPrefKeys: [Preference.Key] = [
@@ -508,22 +508,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   init(playerCore: PlayerCore) {
     self.player = playerCore
-
-    oscPosition = Preference.enum(for: .oscPosition)
-    relativeSeekAmount = Preference.integer(for: .relativeSeekAmount)
-    volumeScrollAmount = Preference.integer(for: .volumeScrollAmount)
-    horizontalScrollAction = Preference.enum(for: .horizontalScrollAction)
-    verticalScrollAction = Preference.enum(for: .verticalScrollAction)
-    useExtractSeek = Preference.enum(for: .useExactSeek)
-    relativeSeekAmount = Preference.integer(for: .relativeSeekAmount)
-    volumeScrollAmount = Preference.integer(for: .volumeScrollAmount)
-    arrowBtnFunction = Preference.enum(for: .arrowButtonAction)
-    singleClickAction = Preference.enum(for: .singleClickAction)
-    doubleClickAction = Preference.enum(for: .doubleClickAction)
-    pinchAction = Preference.enum(for: .pinchAction)
-    followGlobalSeekTypeWhenAdjustSlider = Preference.bool(for: .followGlobalSeekTypeWhenAdjustSlider)
-    displayTimeAndBatteryInFullScreen = Preference.bool(for: .displayTimeAndBatteryInFullScreen)
-
     super.init(window: nil)
   }
 

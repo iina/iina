@@ -1,4 +1,4 @@
-# Document http://editorconfig.org
+# Document https://editorconfig.org
 
 root = true
 
@@ -10,8 +10,5 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 indent_size = 2
 
-[iina/scripts/*]
-indent_size = 4
-
-[deps/include/mpv/*]
+[deps/include/**]
 indent_size = 4

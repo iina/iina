@@ -16,13 +16,10 @@
 "alert.beta_channel.title" = "接受 beta 版本的更新";
 "alert.choose_media_file.title" = "选择媒体文件";
 "alert.clear_cache.message" = "确定清除所有缩略图缓存吗?";
-"alert.clear_cache.success" = "缓存已清除。";
 "alert.clear_cache.title" = "清除缩略图缓存";
 "alert.clear_history.message" = "确定删除所有播放历史吗？";
-"alert.clear_history.success" = "播放历史已删除。";
 "alert.clear_history.title" = "清除播放历史";
 "alert.clear_watch_later.message" = "确定清除所有保存的播放进度，即「watch later」数据吗？";
-"alert.clear_watch_later.success" = "已删除所有保存的播放进度。";
 "alert.clear_watch_later.title" = "清除保存的播放进度";
 "alert.config.cannot_create" = "无法创建配置文件！";
 "alert.config.cannot_write" = "无法写入配置文件！";
@@ -183,6 +180,8 @@
 "preference.advanced" = "高级";
 "preference.control" = "控制";
 "preference.general" = "通用";
+"preference.key_binding_hint_1" = "若要编辑此配置文件，请先点击「复制…」按钮来创建一个副本。";
+"preference.key_binding_hint_2" = "双击右边的任意一行来编辑相应的快捷键。";
 "preference.keybindings" = "快捷键";
 "preference.logged_in_as" = "已登录 %@";
 "preference.network" = "网络";

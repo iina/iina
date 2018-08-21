@@ -44,6 +44,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
   @IBOutlet weak var confTableView: NSTableView!
   @IBOutlet weak var kbTableView: NSTableView!
+  @IBOutlet weak var configHintLabel: NSTextField!
   @IBOutlet weak var addKmBtn: NSButton!
   @IBOutlet weak var removeKmBtn: NSButton!
   @IBOutlet weak var revealConfFileBtn: NSButton!
@@ -294,6 +295,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       btn.isEnabled = shouldEnableEdit
     }
     kbTableView.tableColumns.forEach { $0.isEditable = shouldEnableEdit }
+    configHintLabel.stringValue = NSLocalizedString("preference.key_binding_hint_\(shouldEnableEdit ? "2" : "1")", comment: "preference.key_binding_hint")
   }
 
   func saveToConfFile() {

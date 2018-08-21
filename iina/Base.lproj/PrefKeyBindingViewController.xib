@@ -147,7 +147,7 @@
                                     <action selector="removeKeyMappingBtnAction:" target="-2" id="AMw-dz-4NC"/>
                                 </connections>
                             </button>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="l2M-TH-eCt">
+                            <button toolTip="Show the raw mpv key code and command." translatesAutoresizingMaskIntoConstraints="NO" id="l2M-TH-eCt">
                                 <rect key="frame" x="381" y="1" width="104" height="18"/>
                                 <buttonCell key="cell" type="check" title="Display raw values" bezelStyle="regularSquare" imagePosition="left" controlSize="mini" inset="2" id="3RK-1k-otl">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>

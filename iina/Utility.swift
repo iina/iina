@@ -42,8 +42,8 @@ class Utility {
     alert.alertStyle = alertStyle
     alert.runModal()
   }
-  
-  static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlert.Style = .critical) {
+
+  static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlert.Style = .critical, sheetWindow: NSWindow? = nil) {
     let alert = NSAlert()
     switch style {
     case .critical:
@@ -68,7 +68,11 @@ class Utility {
     }
     
     alert.alertStyle = style
-    alert.runModal()
+    if let sheetWindow = sheetWindow {
+      alert.beginSheetModal(for: sheetWindow)
+    } else {
+      alert.runModal()
+    }
   }
 
   // MARK: - Panels, Alerts

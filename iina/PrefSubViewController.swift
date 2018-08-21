@@ -81,7 +81,8 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
           if status == errSecSuccess {
             Preference.set(username, for: .openSubUsername)
           } else {
-            Utility.showAlert("sub.cannot_save_passwd", arguments: [SecCopyErrorMessageString(status, nil) as! CVarArg])
+            Utility.showAlert("sub.cannot_save_passwd", arguments: [SecCopyErrorMessageString(status, nil) as! CVarArg],
+                              sheetWindow: self.view.window)
           }
         }.ensure {
           self.loginIndicator.isHidden = true
@@ -96,7 +97,7 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
           default:
             message = "Unknown error"
           }
-          Utility.showAlert("sub.cannot_login", arguments: [message])
+          Utility.showAlert("sub.cannot_login", arguments: [message], sheetWindow: self.view.window)
         }
       }
     } else {

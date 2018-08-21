@@ -99,12 +99,12 @@ class FilterWindowController: NSWindowController {
   func addFilter(_ filter: MPVFilter) {
     if filterType == MPVProperty.vf {
       guard PlayerCore.active.addVideoFilter(filter) else {
-        Utility.showAlert("filter.incorrect")
+        Utility.showAlert("filter.incorrect", sheetWindow: window)
         return
       }
     } else {
       guard PlayerCore.active.addAudioFilter(filter) else {
-        Utility.showAlert("filter.incorrect")
+        Utility.showAlert("filter.incorrect", sheetWindow: window)
         return
       }
     }
@@ -219,7 +219,7 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
         filters[row] = newFilter
         setFilters()
       } else {
-        Utility.showAlert("filter.incorrect")
+        Utility.showAlert("filter.incorrect", sheetWindow: window)
       }
     }
   }

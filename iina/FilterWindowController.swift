@@ -33,7 +33,8 @@ class FilterWindowController: NSWindowController {
   @IBOutlet weak var editFilterStringTextField: NSTextField!
   @IBOutlet weak var editFilterKeyRecordView: KeyRecordView!
   @IBOutlet weak var editFilterKeyRecordViewLabel: NSTextField!
-
+  @IBOutlet weak var removeButton: NSButton!
+  
   var filterType: String!
 
   var filters: [MPVFilter] = []
@@ -61,6 +62,8 @@ class FilterWindowController: NSWindowController {
 
     keyRecordView.delegate = self
     editFilterKeyRecordView.delegate = self
+
+    removeButton.isEnabled = false
 
     // notifications
     let notiName: Notification.Name = filterType == MPVProperty.af ? .iinaAFChanged : .iinaVFChanged
@@ -143,6 +146,10 @@ class FilterWindowController: NSWindowController {
       if success {
         reloadTable()
         pc.sendOSD(.removeFilter)
+        // FIXME: For some reason, after removeFilterAction is called, tableViewSelectionDidChange(_:)
+        // for currentFiltersTableView is not called. This is a workaround to ensure
+        // tableViewSelectionDidChange(_:) is called.
+        currentFiltersTableView.deselectAll(self)
       }
     }
   }
@@ -222,6 +229,10 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
         Utility.showAlert("filter.incorrect")
       }
     }
+  }
+
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    removeButton.isEnabled = currentFiltersTableView.selectedRow != -1
   }
 
 }

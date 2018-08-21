@@ -137,10 +137,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       self.withAllTableViews { tableView, _ in tableView.reloadData() }
     }
     observers.append(tracklistChangeObserver)
-    let afChangeObserver = NotificationCenter.default.addObserver(forName: .iinaAFChanged, object: player, queue: OperationQueue.main) { _ in
-      self.updateAudioEqState()
-    }
-    observers.append(afChangeObserver)
   }
 
   // MARK: - Validate UI
@@ -233,9 +229,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   private func updateAudioEqState() {
-    if let filter = player.info.audioEqFilter {
+    if let filters = player.info.audioEqFilters {
       withAllAudioEqSliders { slider in
-        slider.doubleValue = Double( filter.params!["e\(slider.tag)"] ?? "" ) ?? 0
+        if let gain = filters[slider.tag]?.stringFormat.dropLast().split(separator: "=").last {
+          slider.doubleValue = Double(gain) ?? 0
+        } else {
+          slider.doubleValue = 0
+        }
       }
     } else {
       withAllAudioEqSliders { $0.doubleValue = 0 }
@@ -563,24 +563,23 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func audioEqSliderAction(_ sender: NSSlider) {
-    let params: [String: String] = [
-      "e0": audioEqSlider1.stringValue,
-      "e1": audioEqSlider2.stringValue,
-      "e2": audioEqSlider3.stringValue,
-      "e3": audioEqSlider4.stringValue,
-      "e4": audioEqSlider5.stringValue,
-      "e5": audioEqSlider6.stringValue,
-      "e6": audioEqSlider7.stringValue,
-      "e7": audioEqSlider8.stringValue,
-      "e8": audioEqSlider9.stringValue,
-      "e9": audioEqSlider10.stringValue,
-    ]
-    let filter = MPVFilter(name: "equalizer", label: nil, params: params)
-    player.setAudioEq(fromFilter: filter)
+    player.setAudioEq(fromGains: [
+      audioEqSlider1.doubleValue,
+      audioEqSlider2.doubleValue,
+      audioEqSlider3.doubleValue,
+      audioEqSlider4.doubleValue,
+      audioEqSlider5.doubleValue,
+      audioEqSlider6.doubleValue,
+      audioEqSlider7.doubleValue,
+      audioEqSlider8.doubleValue,
+      audioEqSlider9.doubleValue,
+      audioEqSlider10.doubleValue,
+      ])
   }
 
   @IBAction func resetAudioEqAction(_ sender: AnyObject) {
     player.removeAudioEqFilter()
+    updateAudioEqState()
   }
 
 

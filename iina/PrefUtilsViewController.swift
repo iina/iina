@@ -93,7 +93,8 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
       }
     }
 
-    Utility.showAlert("set_default.success", arguments: [successCount, failedCount], style: .informational)
+    Utility.showAlert("set_default.success", arguments: [successCount, failedCount], style: .informational,
+                      sheetWindow: view.window)
     view.window!.endSheet(setAsDefaultSheet)
   }
 

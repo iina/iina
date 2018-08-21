@@ -161,11 +161,11 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     // prompt
     Utility.quickPromptPanel("config.new", sheetWindow: view.window) { newName in
       guard !newName.isEmpty else {
-        Utility.showAlert("config.empty_name")
+        Utility.showAlert("config.empty_name", sheetWindow: self.view.window)
         return
       }
       guard self.userConfigs[newName] == nil && PrefKeyBindingViewController.defaultConfigs[newName] == nil else {
-        Utility.showAlert("config.name_existing")
+        Utility.showAlert("config.name_existing", sheetWindow: self.view.window)
         return
       }
       // new file
@@ -179,7 +179,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
           do {
             try fm.removeItem(atPath: newFilePath)
           } catch {
-            Utility.showAlert("error_deleting_file")
+            Utility.showAlert("error_deleting_file", sheetWindow: self.view.window)
             return
           }
         } else {
@@ -189,7 +189,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       }
       // - new file
       if !fm.createFile(atPath: newFilePath, contents: nil, attributes: nil) {
-        Utility.showAlert("config.cannot_create")
+        Utility.showAlert("config.cannot_create", sheetWindow: self.view.window)
         return
       }
       // save
@@ -210,7 +210,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     // prompt
     Utility.quickPromptPanel("config.duplicate", sheetWindow: view.window) { newName in
       if self.userConfigs[newName] != nil || PrefKeyBindingViewController.defaultConfigs[newName] != nil {
-        Utility.showAlert("config.name_existing")
+        Utility.showAlert("config.name_existing", sheetWindow: self.view.window)
         return
       }
       // copy
@@ -225,7 +225,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
           do {
             try fm.removeItem(atPath: newFilePath)
           } catch {
-            Utility.showAlert("error_deleting_file")
+            Utility.showAlert("error_deleting_file", sheetWindow: self.view.window)
             return
           }
         } else {
@@ -237,7 +237,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       do {
         try fm.copyItem(atPath: currFilePath, toPath: newFilePath)
       } catch let error {
-        Utility.showAlert("config.cannot_create", arguments: [error.localizedDescription])
+        Utility.showAlert("config.cannot_create", arguments: [error.localizedDescription], sheetWindow: self.view.window)
         return
       }
       // save
@@ -262,7 +262,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     do {
       try FileManager.default.removeItem(atPath: currentConfFilePath)
     } catch {
-      Utility.showAlert("error_deleting_file")
+      Utility.showAlert("error_deleting_file", sheetWindow: view.window)
     }
     userConfigs.removeValue(forKey: currentConfName)
     Preference.set(userConfigs, for: Preference.Key.inputConfigs)
@@ -278,7 +278,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   }
 
   @IBAction func importConfigBtnAction(_ sender: Any) {
-    Utility.quickOpenPanel(title: "Select Config File to Import", chooseDir: false, allowedFileTypes: ["conf"]) { url in
+    Utility.quickOpenPanel(title: "Select Config File to Import", chooseDir: false, sheetWindow: view.window, allowedFileTypes: ["conf"]) { url in
       guard url.isFileURL, url.lastPathComponent.hasSuffix(".conf") else { return }
       let newFilePath = Utility.userInputConfDirURL.appendingPathComponent(url.lastPathComponent).path
       let newName = url.deletingPathExtension().lastPathComponent
@@ -286,7 +286,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       do {
         try FileManager.default.copyItem(atPath: url.path, toPath: newFilePath)
       } catch let error {
-        Utility.showAlert("config.cannot_create", arguments: [error.localizedDescription])
+        Utility.showAlert("config.cannot_create", arguments: [error.localizedDescription], sheetWindow: self.view.window)
         return
       }
       // save
@@ -328,7 +328,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     do {
       try KeyMapping.generateConfData(from: currentMapping).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
     } catch {
-      Utility.showAlert("config.cannot_write")
+      Utility.showAlert("config.cannot_write", sheetWindow: view.window)
     }
   }
 
@@ -340,7 +340,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       currentMapping = mapping
     } else {
       // on error
-      Utility.showAlert("keybinding_config.error", arguments: [currentConfName])
+      Utility.showAlert("keybinding_config.error", arguments: [currentConfName], sheetWindow: view.window)
       let title = "IINA Default"
       currentConfName = title
       currentConfFilePath = getFilePath(forConfig: title)!
@@ -362,7 +362,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       return uv
     } else {
       if showAlert {
-        Utility.showAlert("error_finding_file", arguments: ["config"])
+        Utility.showAlert("error_finding_file", arguments: ["config"], sheetWindow: view.window)
       }
       return nil
     }
@@ -377,7 +377,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   }
 
   private func tellUserToDuplicateConfig() {
-    Utility.showAlert("duplicate_config")
+    Utility.showAlert("duplicate_config", sheetWindow: view.window)
   }
 
 }

@@ -48,7 +48,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
     updateControlStatus(self)
 
     guard let op = Preference.value(for: .userOptions) as? [[String]] else {
-      Utility.showAlert("extra_option.cannot_read")
+      Utility.showAlert("extra_option.cannot_read", sheetWindow: view.window)
       return
     }
     options = op
@@ -129,7 +129,7 @@ extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource
     guard let value = object as? String,
       let identifier = tableColumn?.identifier else { return }
     guard !value.isEmpty else {
-      Utility.showAlert("extra_option.empty")
+      Utility.showAlert("extra_option.empty", sheetWindow: view.window)
       return
     }
     guard options.count > row else { return }

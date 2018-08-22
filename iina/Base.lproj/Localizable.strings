@@ -147,7 +147,7 @@
 "alert.config.name_existing" = "The name already exists.";
 "alert.config.file_existing.title" = "File Already Exists";
 "alert.config.file_existing.message" = "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.";
-"alert.config.cannot_create" = "Cannot create config file!";
+"alert.config.cannot_create" = "Cannot create config file!\n%@";
 "alert.config.cannot_write" = "Cannot write to config file!";
 
 "alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";

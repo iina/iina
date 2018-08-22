@@ -21,7 +21,7 @@
 "alert.clear_history.title" = "清除播放历史";
 "alert.clear_watch_later.message" = "确定清除所有保存的播放进度，即「watch later」数据吗？";
 "alert.clear_watch_later.title" = "清除保存的播放进度";
-"alert.config.cannot_create" = "无法创建配置文件！";
+"alert.config.cannot_create" = "无法创建配置文件！\n%@";
 "alert.config.cannot_write" = "无法写入配置文件！";
 "alert.config.duplicate.message" = "请输入复制后的配置文件名。";
 "alert.config.duplicate.title" = "复制快捷键配置";

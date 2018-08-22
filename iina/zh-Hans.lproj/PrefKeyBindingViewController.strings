@@ -9,6 +9,9 @@
 /* Class = "NSTableColumn"; headerCell.title = "Action"; ObjectID = "4Bn-MF-dfY"; */
 "4Bn-MF-dfY.headerCell.title" = "命令";
 
+/* Class = "NSButtonCell"; title = "Import an existing config file"; ObjectID = "6cO-C0-33g"; */
+"6cO-C0-33g.title" = "导入已有的配置文件";
+
 /* Class = "NSTableColumn"; headerCell.title = "Key"; ObjectID = "JwC-60-7Hp"; */
 "JwC-60-7Hp.headerCell.title" = "键位";
 

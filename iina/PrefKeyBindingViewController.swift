@@ -236,8 +236,8 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       // - copy file
       do {
         try fm.copyItem(atPath: currFilePath, toPath: newFilePath)
-      } catch {
-        Utility.showAlert("config.cannot_create")
+      } catch let error {
+        Utility.showAlert("config.cannot_create", arguments: [error.localizedDescription])
         return
       }
       // save
@@ -275,6 +275,31 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     currentConfFilePath = getFilePath(forConfig: currentConfName)
     confTableSelectRow(withTitle: currentConfName)
     loadConfigFile()
+  }
+
+  @IBAction func importConfigBtnAction(_ sender: Any) {
+    Utility.quickOpenPanel(title: "Select Config File to Import", chooseDir: false, allowedFileTypes: ["conf"]) { url in
+      guard url.isFileURL, url.lastPathComponent.hasSuffix(".conf") else { return }
+      let newFilePath = Utility.userInputConfDirURL.appendingPathComponent(url.lastPathComponent).path
+      let newName = url.deletingPathExtension().lastPathComponent
+      // copy file
+      do {
+        try FileManager.default.copyItem(atPath: url.path, toPath: newFilePath)
+      } catch let error {
+        Utility.showAlert("config.cannot_create", arguments: [error.localizedDescription])
+        return
+      }
+      // save
+      self.userConfigs[newName] = newFilePath
+      Preference.set(self.userConfigs, for: .inputConfigs)
+      // load
+      self.currentConfName = newName
+      self.currentConfFilePath = newFilePath
+      self.userConfigNames.append(newName)
+      self.confTableView.reloadData()
+      self.confTableSelectRow(withTitle: newName)
+      self.loadConfigFile()
+    }
   }
 
   @IBAction func displayRawValueAction(_ sender: NSButton) {

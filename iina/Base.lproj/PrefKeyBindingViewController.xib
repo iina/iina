@@ -351,6 +351,16 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AuR-Lj-Iz4">
+                    <rect key="frame" x="202" y="1" width="212" height="32"/>
+                    <buttonCell key="cell" type="push" title="Import an existing config file" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6cO-C0-33g">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="importConfigBtnAction:" target="-2" id="m3a-yn-NIE"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="KZA-hu-vhZ" firstAttribute="top" secondItem="0le-1T-r5f" secondAttribute="bottom" constant="14" id="2Pk-ll-iUo"/>
@@ -361,7 +371,10 @@
                 <constraint firstItem="bm5-rb-Qjb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LU9-QU-BFL" secondAttribute="trailing" constant="8" id="ASF-wJ-2pT"/>
                 <constraint firstItem="Le4-ai-PiB" firstAttribute="top" secondItem="Mhk-DT-3CM" secondAttribute="bottom" constant="-1" id="BKz-av-lUx"/>
                 <constraint firstItem="Le4-ai-PiB" firstAttribute="trailing" secondItem="Mhk-DT-3CM" secondAttribute="trailing" id="DeO-7U-TYb"/>
+                <constraint firstItem="AuR-Lj-Iz4" firstAttribute="firstBaseline" secondItem="KZA-hu-vhZ" secondAttribute="firstBaseline" id="Hrm-F3-qj5"/>
+                <constraint firstItem="AuR-Lj-Iz4" firstAttribute="leading" secondItem="KZA-hu-vhZ" secondAttribute="trailing" constant="12" id="LWW-j6-UPY"/>
                 <constraint firstItem="mLe-eI-lIk" firstAttribute="top" secondItem="2pX-29-I87" secondAttribute="bottom" constant="-1" id="LeQ-qP-FVe"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AuR-Lj-Iz4" secondAttribute="trailing" constant="8" id="M6E-Ra-d8q"/>
                 <constraint firstItem="Mhk-DT-3CM" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="8" id="OLU-oB-Se7"/>
                 <constraint firstItem="2pX-29-I87" firstAttribute="top" secondItem="Mhk-DT-3CM" secondAttribute="top" id="Pc1-MC-ctF"/>
                 <constraint firstAttribute="bottom" secondItem="KZA-hu-vhZ" secondAttribute="bottom" constant="8" id="QtF-OP-vXc"/>
@@ -382,7 +395,6 @@
                 <constraint firstItem="tP6-Ua-acA" firstAttribute="top" secondItem="ZWR-gT-S2p" secondAttribute="bottom" constant="4" id="krb-us-D9G"/>
                 <constraint firstItem="Mhk-DT-3CM" firstAttribute="top" secondItem="ZWR-gT-S2p" secondAttribute="bottom" constant="30" id="mYB-35-8YR"/>
                 <constraint firstItem="tP6-Ua-acA" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="olF-Fw-cWs"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KZA-hu-vhZ" secondAttribute="trailing" constant="8" id="ox7-Nd-BkO"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZWR-gT-S2p" secondAttribute="trailing" constant="8" id="tWl-b9-AcQ"/>
                 <constraint firstAttribute="trailing" secondItem="2pX-29-I87" secondAttribute="trailing" constant="8" id="tl2-El-aGp"/>
                 <constraint firstItem="OY4-8W-63j" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="twb-9l-3Mq"/>

@@ -44,6 +44,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
   @IBOutlet weak var confTableView: NSTableView!
   @IBOutlet weak var kbTableView: NSTableView!
+  @IBOutlet weak var configHintLabel: NSTextField!
   @IBOutlet weak var addKmBtn: NSButton!
   @IBOutlet weak var removeKmBtn: NSButton!
   @IBOutlet weak var revealConfFileBtn: NSButton!
@@ -235,8 +236,8 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       // - copy file
       do {
         try fm.copyItem(atPath: currFilePath, toPath: newFilePath)
-      } catch {
-        Utility.showAlert("config.cannot_create")
+      } catch let error {
+        Utility.showAlert("config.cannot_create", arguments: [error.localizedDescription])
         return
       }
       // save
@@ -276,6 +277,31 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     loadConfigFile()
   }
 
+  @IBAction func importConfigBtnAction(_ sender: Any) {
+    Utility.quickOpenPanel(title: "Select Config File to Import", chooseDir: false, allowedFileTypes: ["conf"]) { url in
+      guard url.isFileURL, url.lastPathComponent.hasSuffix(".conf") else { return }
+      let newFilePath = Utility.userInputConfDirURL.appendingPathComponent(url.lastPathComponent).path
+      let newName = url.deletingPathExtension().lastPathComponent
+      // copy file
+      do {
+        try FileManager.default.copyItem(atPath: url.path, toPath: newFilePath)
+      } catch let error {
+        Utility.showAlert("config.cannot_create", arguments: [error.localizedDescription])
+        return
+      }
+      // save
+      self.userConfigs[newName] = newFilePath
+      Preference.set(self.userConfigs, for: .inputConfigs)
+      // load
+      self.currentConfName = newName
+      self.currentConfFilePath = newFilePath
+      self.userConfigNames.append(newName)
+      self.confTableView.reloadData()
+      self.confTableSelectRow(withTitle: newName)
+      self.loadConfigFile()
+    }
+  }
+
   @IBAction func displayRawValueAction(_ sender: NSButton) {
     displayRawValues = sender.state == .on
     kbTableView.doubleAction = displayRawValues ? nil : #selector(editRow)
@@ -294,6 +320,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       btn.isEnabled = shouldEnableEdit
     }
     kbTableView.tableColumns.forEach { $0.isEditable = shouldEnableEdit }
+    configHintLabel.stringValue = NSLocalizedString("preference.key_binding_hint_\(shouldEnableEdit ? "2" : "1")", comment: "preference.key_binding_hint")
   }
 
   func saveToConfFile() {

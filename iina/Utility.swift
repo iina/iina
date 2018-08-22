@@ -110,13 +110,14 @@ class Utility {
      - sheetWindow: (Optional) The window on which to display the sheet.
      - callback: (Optional) Completion handler.
    */
-  static func quickOpenPanel(title: String, chooseDir: Bool, dir: URL? = nil, sheetWindow: NSWindow? = nil, callback: @escaping (URL) -> Void) {
+  static func quickOpenPanel(title: String, chooseDir: Bool, dir: URL? = nil, sheetWindow: NSWindow? = nil, allowedFileTypes: [String]? = nil, callback: @escaping (URL) -> Void) {
     let panel = NSOpenPanel()
     panel.title = title
     panel.canCreateDirectories = false
     panel.canChooseFiles = !chooseDir
     panel.canChooseDirectories = chooseDir
     panel.resolvesAliases = true
+    panel.allowedFileTypes = allowedFileTypes
     panel.allowsMultipleSelection = false
     panel.level = .modalPanel
     if let dir = dir {

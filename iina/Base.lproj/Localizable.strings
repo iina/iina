@@ -86,6 +86,9 @@
 "preference.logged_in_as" = "Logged in as %@";
 "preference.system_media_control" = "Use system media control";
 
+"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
+"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+
 "menu.volume"= "Volume: %d";
 "menu.audio_delay" = "Audio Delay: %.2fs";
 "menu.sub_delay" = "Subtitle Delay: %.2fs";
@@ -144,7 +147,7 @@
 "alert.config.name_existing" = "The name already exists.";
 "alert.config.file_existing.title" = "File Already Exists";
 "alert.config.file_existing.message" = "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.";
-"alert.config.cannot_create" = "Cannot create config file!";
+"alert.config.cannot_create" = "Cannot create config file!\n%@";
 "alert.config.cannot_write" = "Cannot write to config file!";
 
 "alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";

@@ -18,7 +18,7 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
   @IBOutlet weak var httpPrefixTextField: NSTextField!
   @IBOutlet weak var urlField: NSTextField!
   @IBOutlet weak var usernameField: NSTextField!
-  @IBOutlet weak var passwordField: NSTextField!
+  @IBOutlet weak var passwordField: NSSecureTextField!
   @IBOutlet weak var rememberPasswordCheckBox: NSButton!
   @IBOutlet weak var errorMessageLabel: NSTextField!
   @IBOutlet weak var openButton: NSButton!
@@ -45,6 +45,7 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
     urlField.stringValue = ""
     usernameField.stringValue = ""
     passwordField.stringValue = ""
+    rememberPasswordCheckBox.state = .on
     urlStackView.setVisibilityPriority(.notVisible, for: httpPrefixTextField)
     window?.makeFirstResponder(urlField)
   }
@@ -66,14 +67,6 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
       PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternativeAction).openURL(url)
     } else {
       Utility.showAlert("wrong_url_format")
-    }
-  }
-
-  private func getServiceName(forHost host: String, port: Int?) -> KeychainAccess.ServiceName {
-    if let port = port {
-      return KeychainAccess.ServiceName("IINA Saved password for \(host):\(port)")
-    } else {
-      return KeychainAccess.ServiceName("IINA Saved password for \(host)")
     }
   }
 
@@ -99,7 +92,7 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
     return (urlComponents.url, hasScheme)
   }
 
-  //
+  // NSControlTextEditingDelegate
 
   func controlTextDidChange(_ obj: Notification) {
     if let textView = obj.userInfo?["NSFieldEditor"] as? NSTextView, let str = textView.textStorage?.string, str.isEmpty {
@@ -109,7 +102,7 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
       return
     }
     let (url, hasScheme) = getURL()
-    if let url = url, url.host != nil {
+    if let url = url, let host = url.host {
       errorMessageLabel.isHidden = true
       urlField.textColor = .labelColor
       openButton.isEnabled = true
@@ -118,8 +111,14 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
       } else {
         urlStackView.setVisibilityPriority(.mustHold, for: httpPrefixTextField)
       }
-      // read url
-
+      // find saved password
+      if let (username, password) = try? KeychainAccess.read(username: nil, forService: .httpAuth, server: host, port: url.port) {
+        usernameField.stringValue = username
+        passwordField.stringValue = password
+      } else {
+        usernameField.stringValue = ""
+        passwordField.stringValue = ""
+      }
     } else {
       urlField.textColor = .systemRed
       errorMessageLabel.isHidden = false

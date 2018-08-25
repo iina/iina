@@ -23,11 +23,11 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
-            <rect key="contentRect" x="1062" y="556" width="520" height="270"/>
+            <rect key="contentRect" x="1062" y="556" width="576" height="270"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
-            <view key="contentView" wantsLayer="YES" misplaced="YES" id="se5-gp-TjO">
+            <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="576" height="256"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="behindWindow" material="underWindowBackground" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="X1z-XY-que">
                         <rect key="frame" x="0.0" y="0.0" width="576" height="256"/>
@@ -139,17 +139,20 @@ Gw
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P8y-xt-YCV">
+                                        <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P8y-xt-YCV">
                                             <rect key="frame" x="270" y="46" width="238" height="22"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="ub0-4i-uZc">
+                                            <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="ub0-4i-uZc">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
+                                                <allowedInputSourceLocales>
+                                                    <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                                </allowedInputSourceLocales>
+                                            </secureTextFieldCell>
                                             <connections>
                                                 <outlet property="nextKeyView" destination="AAr-OR-upR" id="ilu-Y6-atZ"/>
                                             </connections>
-                                        </textField>
+                                        </secureTextField>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NkO-nb-bTI">
                                             <rect key="frame" x="14" y="14" width="386" height="18"/>
                                             <buttonCell key="cell" type="check" title="Remember username and password for this host in keychain" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="m0D-hR-3pr">
@@ -212,5 +215,31 @@ Gw
             </connections>
             <point key="canvasLocation" x="158" y="171"/>
         </window>
+        <secureTextField verticalHuggingPriority="750" id="a3w-Hu-aMP">
+            <rect key="frame" x="0.0" y="0.0" width="96" height="22"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="o6r-Zv-w8b">
+                <font key="font" metaFont="system"/>
+                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                <allowedInputSourceLocales>
+                    <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                </allowedInputSourceLocales>
+            </secureTextFieldCell>
+            <point key="canvasLocation" x="194" y="425"/>
+        </secureTextField>
+        <secureTextField verticalHuggingPriority="750" id="hjA-b6-vjs">
+            <rect key="frame" x="0.0" y="0.0" width="96" height="22"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="BAX-zD-Sub">
+                <font key="font" metaFont="system"/>
+                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                <allowedInputSourceLocales>
+                    <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                </allowedInputSourceLocales>
+            </secureTextFieldCell>
+            <point key="canvasLocation" x="113" y="428"/>
+        </secureTextField>
     </objects>
 </document>

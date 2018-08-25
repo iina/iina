@@ -10,6 +10,12 @@ import Foundation
 
 class KeychainAccess {
 
+  enum KeychainError: Error {
+    case noResult
+    case unhandledError(message: String)
+    case unexpectedData
+  }
+
   struct ServiceName: RawRepresentable {
     typealias RawValue = String
     var rawValue: String
@@ -23,60 +29,77 @@ class KeychainAccess {
     }
 
     static let openSubAccount = ServiceName(rawValue: "IINA OpenSubtitles Account")
+    static let httpAuth = ServiceName(rawValue: "IINA Saved HTTP Password")
   }
 
-  static func write(username: String, password: String, forService serviceName: ServiceName) -> (succeeded: Bool, errorMessage: String?) {
-    let service = serviceName.rawValue as NSString
-    let accountName = username as NSString
-    let pw = password as NSString
-    let pwData = pw.data(using: String.Encoding.utf8.rawValue)! as NSData
-
+  static func write(username: String, password: String, forService serviceName: ServiceName, server: String? = nil, port: Int? = nil) throws {
     let status: OSStatus
-    // try to read the password
-    let (_, succeeded, _, readItemRef) = read(username: username, forService: serviceName)
-    if succeeded {
-      // else, try to modify the password
-      status = SecKeychainItemModifyContent(readItemRef!,
-                                            nil,
-                                            UInt32(pw.length),
-                                            pwData.bytes)
+
+    if let _ = try? read(username: username, forService: .openSubAccount, server: nil, port: nil) {
+
+      // if password exists, try to update the password
+      var query: [String: Any] = [kSecClass as String: kSecClassGenericPassword,
+                                  kSecAttrService as String: serviceName.rawValue]
+      if let server = server { query[kSecAttrServer as String] = server }
+      if let port = port { query[kSecAttrPort as String] = port }
+
+      // create attributes for updating
+      let passwordData = password.data(using: String.Encoding.utf8)!
+      let attributes: [String: Any] = [kSecAttrAccount as String: username,
+                                       kSecValueData as String: passwordData]
+      // update
+      status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
+
     } else {
-      // if can't read, try to add password
-      status = SecKeychainAddGenericPassword(nil,
-                                             UInt32(service.length),
-                                             service.utf8String,
-                                             UInt32(accountName.length),
-                                             accountName.utf8String,
-                                             UInt32(pw.length),
-                                             pwData.bytes,
-                                             nil)
+
+      // try to write the password
+      var query: [String: Any] = [kSecClass as String: kSecClassGenericPassword,
+                                  kSecAttrService as String: serviceName.rawValue,
+                                  kSecAttrAccount as String: username,
+                                  kSecValueData as String: password]
+      if let server = server { query[kSecAttrServer as String] = server }
+      if let port = port { query[kSecAttrPort as String] = port }
+      status = SecItemAdd(query as CFDictionary, nil)
     }
-    return (status == errSecSuccess, SecCopyErrorMessageString(status, nil) as String?)
+
+    // check result
+    guard status != errSecItemNotFound else { throw KeychainError.noResult }
+    guard status == errSecSuccess else {
+      let message = (SecCopyErrorMessageString(status, nil) as String?) ?? ""
+      throw KeychainError.unhandledError(message: message)
+    }
   }
 
-  static func read(username: String, forService serviceName: ServiceName) -> (password: String?, succeeded: Bool, errorMessage: String?, item: SecKeychainItem?) {
-    let service = serviceName.rawValue as NSString
-    let accountName = username as NSString
-    var pwLength = UInt32()
-    var pwData: UnsafeMutableRawPointer? = nil
-    var itemRef: SecKeychainItem? = nil
-    let status = SecKeychainFindGenericPassword(nil,
-                                                UInt32(service.length),
-                                                service.utf8String,
-                                                UInt32(accountName.length),
-                                                accountName.utf8String,
-                                                &pwLength,
-                                                &pwData,
-                                                &itemRef)
-    var password: String? = ""
-    let succeeded = status == errSecSuccess
-    if succeeded {
-      let data = Data(bytes: pwData!, count: Int(pwLength))
-      password = String(data: data, encoding: .utf8)
+  static func read(username: String?, forService serviceName: ServiceName, server: String? = nil, port: Int? = nil) throws -> (username: String, password: String) {
+    var query: [String: Any] = [kSecClass as String: kSecClassGenericPassword,
+                                kSecAttrService as String: serviceName.rawValue,
+                                kSecMatchLimit as String: kSecMatchLimitOne,
+                                kSecReturnAttributes as String: true,
+                                kSecReturnData as String: true]
+    if let username = username {
+      query[kSecAttrAccount as String] = username
     }
-    if pwData != nil {
-      SecKeychainItemFreeContent(nil, pwData)
+    if let server = server {
+      query[kSecAttrServer as String] = server
     }
-    return (password, succeeded, SecCopyErrorMessageString(status, nil) as String?, itemRef)
+
+    // initiate the search
+    var item: CFTypeRef?
+    let status = SecItemCopyMatching(query as CFDictionary, &item)
+    guard status != errSecItemNotFound else { throw KeychainError.noResult }
+    guard status == errSecSuccess else {
+      let message = (SecCopyErrorMessageString(status, nil) as String?) ?? ""
+      throw KeychainError.unhandledError(message: message)
+    }
+
+    // get data
+    guard let existingItem = item as? [String : Any],
+      let passwordData = existingItem[kSecValueData as String] as? Data,
+      let password = String(data: passwordData, encoding: String.Encoding.utf8),
+      let account = existingItem[kSecAttrAccount as String] as? String
+      else {
+        throw KeychainError.unexpectedData
+    }
+    return (account, password)
   }
 }

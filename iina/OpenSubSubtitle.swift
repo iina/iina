@@ -149,10 +149,9 @@ class OpenSubSupport {
         }
         // read password
         if let udUsername = Preference.string(for: .openSubUsername), !udUsername.isEmpty {
-          let (readPassword, readSucceed, _, _) = KeychainAccess.read(username: udUsername, forService: .openSubAccount)
-          if readSucceed {
+          if let (_, readPassword) = try? KeychainAccess.read(username: udUsername, forService: .openSubAccount) {
             finalUser = udUsername
-            finalPw = readPassword!
+            finalPw = readPassword
           }
         }
       }

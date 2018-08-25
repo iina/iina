@@ -56,9 +56,11 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
   @IBAction func openBtnAction(_ sender: Any) {
     if let url = getURL().url {
       if rememberPasswordCheckBox.state == .on, let host = url.host {
-        KeychainAccess.write(username: usernameField.stringValue,
-                             password: passwordField.stringValue,
-                             forService: getServiceName(forHost: host, port: url.port))
+        try? KeychainAccess.write(username: usernameField.stringValue,
+                                  password: passwordField.stringValue,
+                                  forService: .httpAuth,
+                                  server: host,
+                                  port: url.port)
       }
       window?.close()
       PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternativeAction).openURL(url)
@@ -116,6 +118,8 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
       } else {
         urlStackView.setVisibilityPriority(.mustHold, for: httpPrefixTextField)
       }
+      // read url
+
     } else {
       urlField.textColor = .systemRed
       errorMessageLabel.isHidden = false

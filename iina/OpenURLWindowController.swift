@@ -8,55 +8,45 @@
 
 import Cocoa
 
-class OpenURLWindowController: NSWindowController {
+class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSControlTextEditingDelegate {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("OpenURLWindowController")
   }
 
+  @IBOutlet weak var urlStackView: NSStackView!
+  @IBOutlet weak var httpPrefixTextField: NSTextField!
   @IBOutlet weak var urlField: NSTextField!
   @IBOutlet weak var usernameField: NSTextField!
   @IBOutlet weak var passwordField: NSTextField!
+  @IBOutlet weak var rememberPasswordCheckBox: NSButton!
+  @IBOutlet weak var errorMessageLabel: NSTextField!
+  @IBOutlet weak var openButton: NSButton!
 
   var isAlternativeAction = false
-
-  var url: URL? {
-    get {
-      guard !urlField.stringValue.isEmpty else { return nil }
-      let username = usernameField.stringValue
-      let password = passwordField.stringValue
-      guard var urlValue = urlField.stringValue.addingPercentEncoding(withAllowedCharacters: .urlAllowed) else {
-        return nil
-      }
-      if let url = URL(string: urlValue),
-        url.scheme == nil {
-        urlValue = "http://" + urlValue
-      }
-      guard let nsurl = NSURL(string: urlValue)?.standardized, let urlComponents = NSURLComponents(url: nsurl, resolvingAgainstBaseURL: false) else { return nil }
-      if !username.isEmpty {
-        urlComponents.user = username
-        if !password.isEmpty {
-          urlComponents.password = password
-        }
-      }
-      return urlComponents.url
-    }
-  }
 
   override func windowDidLoad() {
     super.windowDidLoad()
     window?.isMovableByWindowBackground = true
     window?.titlebarAppearsTransparent = true
     window?.titleVisibility = .hidden
+    urlStackView.setVisibilityPriority(.notVisible, for: httpPrefixTextField)
+    urlField.delegate = self
     ([.closeButton, .miniaturizeButton, .zoomButton] as [NSWindow.ButtonType]).forEach {
       window?.standardWindowButton($0)?.isHidden = true
     }
+  }
+
+  override func cancelOperation(_ sender: Any?) {
+    window?.close()
   }
 
   func resetFields() {
     urlField.stringValue = ""
     usernameField.stringValue = ""
     passwordField.stringValue = ""
+    urlStackView.setVisibilityPriority(.notVisible, for: httpPrefixTextField)
+    window?.makeFirstResponder(urlField)
   }
 
   @IBAction func cancelBtnAction(_ sender: Any) {
@@ -64,7 +54,12 @@ class OpenURLWindowController: NSWindowController {
   }
 
   @IBAction func openBtnAction(_ sender: Any) {
-    if let url = url {
+    if let url = getURL().url {
+      if rememberPasswordCheckBox.state == .on, let host = url.host {
+        KeychainAccess.write(username: usernameField.stringValue,
+                             password: passwordField.stringValue,
+                             forService: getServiceName(forHost: host, port: url.port))
+      }
       window?.close()
       PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternativeAction).openURL(url)
     } else {
@@ -72,7 +67,61 @@ class OpenURLWindowController: NSWindowController {
     }
   }
 
-  override func cancelOperation(_ sender: Any?) {
-    window?.close()
+  private func getServiceName(forHost host: String, port: Int?) -> KeychainAccess.ServiceName {
+    if let port = port {
+      return KeychainAccess.ServiceName("IINA Saved password for \(host):\(port)")
+    } else {
+      return KeychainAccess.ServiceName("IINA Saved password for \(host)")
+    }
   }
+
+  private func getURL() -> (url: URL?, hasScheme: Bool) {
+    guard !urlField.stringValue.isEmpty else { return (nil, false) }
+    let username = usernameField.stringValue
+    let password = passwordField.stringValue
+    guard var urlValue = urlField.stringValue.addingPercentEncoding(withAllowedCharacters: .urlAllowed) else {
+      return (nil, false)
+    }
+    var hasScheme = true
+    if let url = URL(string: urlValue), url.scheme == nil {
+      urlValue = "http://" + urlValue
+      hasScheme = false
+    }
+    guard let nsurl = NSURL(string: urlValue)?.standardized, let urlComponents = NSURLComponents(url: nsurl, resolvingAgainstBaseURL: false) else { return (nil, false) }
+    if !username.isEmpty {
+      urlComponents.user = username
+      if !password.isEmpty {
+        urlComponents.password = password
+      }
+    }
+    return (urlComponents.url, hasScheme)
+  }
+
+  //
+
+  func controlTextDidChange(_ obj: Notification) {
+    if let textView = obj.userInfo?["NSFieldEditor"] as? NSTextView, let str = textView.textStorage?.string, str.isEmpty {
+      errorMessageLabel.isHidden = true
+      urlStackView.setVisibilityPriority(.notVisible, for: httpPrefixTextField)
+      openButton.isEnabled = true
+      return
+    }
+    let (url, hasScheme) = getURL()
+    if let url = url, url.host != nil {
+      errorMessageLabel.isHidden = true
+      urlField.textColor = .labelColor
+      openButton.isEnabled = true
+      if hasScheme {
+        urlStackView.setVisibilityPriority(.notVisible, for: httpPrefixTextField)
+      } else {
+        urlStackView.setVisibilityPriority(.mustHold, for: httpPrefixTextField)
+      }
+    } else {
+      urlField.textColor = .systemRed
+      errorMessageLabel.isHidden = false
+      urlStackView.setVisibilityPriority(.notVisible, for: httpPrefixTextField)
+      openButton.isEnabled = false
+    }
+  }
+
 }

@@ -57,6 +57,18 @@ class MainMenuActionHandler: NSResponder {
     }
   }
 
+  // currently only being used for key command
+  @objc func menuDeleteCurrentFileHard(_ sender: NSMenuItem) {
+    guard let url = player.info.currentURL else { return }
+    do {
+      let index = player.mpv.getInt(MPVProperty.playlistPos)
+      player.playlistRemove(index)
+      try FileManager.default.removeItem(at: url)
+    } catch let error {
+      Utility.showAlert("playlist.error_deleting", arguments: [error.localizedDescription])
+    }
+  }
+
 }
 
 // MARK: - Control

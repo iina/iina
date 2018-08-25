@@ -2703,6 +2703,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.menuActionHandler.menuSavePlaylist(.dummy)
     case .deleteCurrentFile:
       self.menuActionHandler.menuDeleteCurrentFile(.dummy)
+    case .deleteCurrentFileHard:
+      self.menuActionHandler.menuDeleteCurrentFileHard(.dummy)
     case .findOnlineSubs:
       self.menuActionHandler.menuFindOnlineSub(.dummy)
     case .saveDownloadedSub:

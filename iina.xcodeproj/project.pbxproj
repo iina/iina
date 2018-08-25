@@ -202,6 +202,8 @@
 		E374161120F3C0AB00B4F7F9 /* PrefUtilsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E374161320F3C0AB00B4F7F9 /* PrefUtilsViewController.xib */; };
 		E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BD4AE20054BD9007635FC /* MainWindow.swift */; };
 		E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B3DD5920FDB8A600325184 /* PreferenceWindowController.xib */; };
+		E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */; };
+		E3BA79EF2131443A00529D99 /* OpenURLWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BA79ED2131443A00529D99 /* OpenURLWindowController.xib */; };
 		E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C12F6A201F281F00297964 /* FirstRunManager.swift */; };
 		E3CB75BB1FD998F5004DB10A /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F21E26CA24008755BB /* Regex.swift */; };
 		E3CB75BD1FDACB82004DB10A /* SavedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */; };
@@ -1023,6 +1025,8 @@
 		E38BD4AE20054BD9007635FC /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		E3B3DD5820FDB8A600325184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreferenceWindowController.xib; sourceTree = "<group>"; };
 		E3B3DD5B20FDB8A900325184 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PreferenceWindowController.strings"; sourceTree = "<group>"; };
+		E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLWindowController.swift; sourceTree = "<group>"; };
+		E3BA79ED2131443A00529D99 /* OpenURLWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenURLWindowController.xib; sourceTree = "<group>"; };
 		E3C12F6A201F281F00297964 /* FirstRunManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunManager.swift; sourceTree = "<group>"; };
 		E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFilter.swift; sourceTree = "<group>"; };
 		E3DE8DCA1FD8166A0021921C /* iina-cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "iina-cli"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1277,6 +1281,8 @@
 				8400D5DA1E1AB31B006785F5 /* AboutWindowController.xib */,
 				84AC621D1E87A4F3002D6F92 /* OpenURLAccessoryViewController.swift */,
 				84AC62231E87C6CF002D6F92 /* OpenURLAccessoryViewController.xib */,
+				E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */,
+				E3BA79ED2131443A00529D99 /* OpenURLWindowController.xib */,
 				84C6D3651EB2A427009BF721 /* HistoryWindowController.swift */,
 				84996F921EC11CE6009A8A39 /* HistoryWindowController.xib */,
 				846352571EEEE11A0043F0CC /* ThumbnailPeekView.swift */,
@@ -1839,6 +1845,7 @@
 				8400D5D51E1AB317006785F5 /* FilterWindowController.xib in Resources */,
 				E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */,
 				84996F901EC11CE6009A8A39 /* HistoryWindowController.xib in Resources */,
+				E3BA79EF2131443A00529D99 /* OpenURLWindowController.xib in Resources */,
 				8400D5DE1E1AB32A006785F5 /* PrefGeneralViewController.xib in Resources */,
 				8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */,
 			);
@@ -2006,6 +2013,7 @@
 				8488D6E71E11ABE900D5B952 /* PrefNetworkViewController.swift in Sources */,
 				84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */,
 				844C59E71F7C143D008D1B00 /* CacheManager.swift in Sources */,
+				E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */,
 				84FBCB381EEACDDD0076C77C /* FFmpegController.m in Sources */,
 				84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */,
 				84C6D3641EB276E9009BF721 /* PlaybackHistory.swift in Sources */,

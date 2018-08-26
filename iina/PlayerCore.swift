@@ -999,6 +999,7 @@ class PlayerCore: NSObject {
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     info.haveDownloadedSub = false
+    checkUnsyncedWindowOptions()
     // generate thumbnails if window has loaded video
     if mainWindow.isVideoLoaded {
       generateThumbnails()
@@ -1111,6 +1112,30 @@ class PlayerCore: NSObject {
    */
   private func autoLoadFilesInCurrentFolder(ticket: Int) {
     AutoFileMatcher(player: self, ticket: ticket).startMatching()
+  }
+
+  /**
+   Checkes unsynchronized window options, such as those set via mpv before window loaded.
+
+   These options currently include fullscreen and ontop.
+   */
+  private func checkUnsyncedWindowOptions() {
+    guard mainWindow.isWindowLoaded else { return }
+
+    let fs = mpv.getFlag(MPVOption.Window.fullscreen)
+    if fs != mainWindow.isInFullScreen {
+      DispatchQueue.main.async {
+        self.mainWindow.toggleWindowFullScreen()
+      }
+    }
+
+    let ontop = mpv.getFlag(MPVOption.Window.ontop)
+    if ontop != mainWindow.isOntop {
+      DispatchQueue.main.async {
+        self.mainWindow.isOntop = ontop
+        self.mainWindow.setWindowFloatingOnTop(ontop)
+      }
+    }
   }
 
   // MARK: - Sync with UI in MainWindow

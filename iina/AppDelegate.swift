@@ -191,7 +191,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       } else {
         let validFileURLs: [URL] = commandLineStatus.filenames.compactMap { filename in
           if Regex.url.matches(filename) {
-            return URL(string: filename)
+            return URL(string: filename.addingPercentEncoding(withAllowedCharacters: .urlAllowed) ?? filename)
           } else {
             return FileManager.default.fileExists(atPath: filename) ? URL(fileURLWithPath: filename) : nil
           }

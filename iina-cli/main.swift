@@ -19,11 +19,7 @@ execURL.resolveSymlinksInPath()
 
 let processInfo = ProcessInfo.processInfo
 
-#if DEBUG
-let iinaPath = execURL.deletingLastPathComponent().appendingPathComponent("IINA.app/Contents/MacOS/IINA").path
-#else
 let iinaPath = execURL.deletingLastPathComponent().appendingPathComponent("IINA").path
-#endif
 
 guard FileManager.default.fileExists(atPath: iinaPath) else {
   print("Cannot find IINA binary. This command line tool only works in IINA.app bundle.")

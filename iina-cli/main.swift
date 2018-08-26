@@ -40,6 +40,7 @@ guard let stdin = InputStream(fileAtPath: "/dev/stdin") else {
 stdin.open()
 
 let isStdin = stdin.hasBytesAvailable
+var keepRunning = false
 
 // Check arguments
 
@@ -60,6 +61,9 @@ if userArgs.contains(where: { $0 == "--help" || $0 == "-h" }) {
             You may also pipe to stdin directly. Sometimes iina-cli can detect whether
             stdin has file, but sometimes not. Therefore it's recommended to always
             supply this argument when piping to iina.
+    --keep-running:
+            Normally iina-cli launches IINA and quits immediately. Supply this option
+            if you would like to keep it running until the main application exits.
     --pip:
             Enter Picture-in-Picture after opening the media.
     --help | -h:
@@ -95,9 +99,11 @@ userArgs = userArgs.map { arg in
     return fileURL.path
   } else if arg == "-w" {
     return "--separate-windows"
-  } else {
-    return arg
   }
+  if arg == "--keep-running" {
+    keepRunning = true
+  }
+  return arg
 }
 
 // Handle stdin
@@ -127,13 +133,13 @@ func terminateTaskIfRunning() {
 }
 
 atexit {
-  if isStdin {
+  if isStdin || keepRunning {
     terminateTaskIfRunning()
   }
 }
 
 task.launch()
 
-if isStdin {
+if isStdin || keepRunning {
   task.waitUntilExit()
 }

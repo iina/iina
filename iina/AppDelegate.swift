@@ -179,9 +179,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       // check whether showing the welcome window after 0.1s
       Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(self.checkForShowingInitialWindow), userInfo: nil, repeats: false)
     } else {
+      var lastPlayerCore: PlayerCore? = nil
       let getNewPlayerCore = { () -> PlayerCore in
         let pc = PlayerCore.newPlayerCore
         self.commandLineStatus.assignMPVArguments(to: pc)
+        lastPlayerCore = pc
         return pc
       }
       if commandLineStatus.isStdin {
@@ -201,6 +203,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
           getNewPlayerCore().openURLs(validFileURLs)
         }
+      }
+
+      // enter PIP
+      if #available(OSX 10.12, *), let pc = lastPlayerCore, commandLineStatus.enterPIP {
+        pc.mainWindow.enterPIP()
       }
     }
 
@@ -495,6 +502,7 @@ struct CommandLineStatus {
   var isCommandLine = false
   var isStdin = false
   var openSeparateWindows = false
+  var enterPIP = false
   var mpvArguments: [(String, String)] = []
   var iinaArguments: [(String, String)] = []
   var filenames: [String] = []
@@ -524,6 +532,9 @@ struct CommandLineStatus {
         }
         if name == "separate-windows" {
           openSeparateWindows = true
+        }
+        if name == "pip" {
+          enterPIP = true
         }
       }
     }

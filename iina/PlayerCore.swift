@@ -201,8 +201,8 @@ class PlayerCore: NSObject {
     // open the first file
     open(playableFiles[0])
     // add the remaining to playlist
-    for i in 1..<count {
-      addToPlaylist(playableFiles[i].path)
+    playableFiles[1..<count].forEach { url in
+      addToPlaylist(url.isFileURL ? url.path : url.absoluteString)
     }
     
     // refresh playlist

@@ -60,6 +60,8 @@ if userArgs.contains(where: { $0 == "--help" || $0 == "-h" }) {
             You may also pipe to stdin directly. Sometimes iina-cli can detect whether
             stdin has file, but sometimes not. Therefore it's recommended to always
             supply this argument when piping to iina.
+    --pip:
+            Enter Picture-in-Picture after opening the media.
     --help | -h:
             Print this message.
 

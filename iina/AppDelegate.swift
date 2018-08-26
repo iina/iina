@@ -320,21 +320,73 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
+
+  /**
+   Parses the pending iina:// url.
+   - Parameter url: the pending URL.
+   - Note:
+   The iina:// URL scheme currently supports the following actions:
+
+   __/open__
+   - `url`: a url or string to open.
+   - `new_window`: 0 or 1 (default) to indicate whether open the media in a new window.
+   - `full_screen`: 0 (default) or 1 to indicate whether open the media and enter fullscreen.
+   - `pip`: 0 (default) or 1 to indicate whether open the media and enter pip.
+   - `mpv_*`: additional mpv options to be passed. e.g. `mpv_volume=20`.
+     Options starting with `no-` are not supported.
+   */
   private func parsePendingURL(_ url: String) {
     Logger.log("Parsing URL \(url)")
     guard let parsed = URLComponents(string: url) else {
       Logger.log("Cannot parse URL using URLComponents", level: .warning)
       return
     }
-    // links
-    if let host = parsed.host, host == "weblink" {
 
-      guard let urlValue = (parsed.queryItems?.first { $0.name == "url" }?.value) else {
-        Logger.log("No parameter \"url\" for weblink")
+    // handle url scheme
+    guard let host = parsed.host else { return }
+
+    if host == "open" || host == "weblink" {
+      // open a file or link
+      guard let queries = parsed.queryItems else { return }
+      let queryDict = [String: String](uniqueKeysWithValues: queries.map { ($0.name, $0.value ?? "") })
+
+      // url
+      guard let urlValue = queryDict["url"], !urlValue.isEmpty else {
+        Logger.log("Cannot find parameter \"url\", stopped")
         return
       }
-      Logger.log("Got weblink, url=\(urlValue)")
-      PlayerCore.active.openURLString(urlValue)
+
+      // new_window
+      let player: PlayerCore
+      if let newWindowValue = queryDict["new_window"], newWindowValue == "0" {
+        player = PlayerCore.active
+      } else {
+        player = PlayerCore.newPlayerCore
+      }
+      player.openURLString(urlValue)
+
+      // presentation options
+      if let fsValue = queryDict["full_screen"], fsValue == "1" {
+        // full_screeen
+        player.mpv.setFlag(MPVOption.Window.fullscreen, true)
+      } else if let pipValue = queryDict["pip"], pipValue == "1" {
+        // pip
+        if #available(OSX 10.12, *) {
+          player.mainWindow.enterPIP()
+        }
+      }
+
+      // mpv options
+      for query in queries {
+        if query.name.hasPrefix("mpv_") {
+          let mpvOptionName = String(query.name.dropFirst(4))
+          guard let mpvOptionValue = query.value else { continue }
+          Logger.log("Setting \(mpvOptionName) to \(mpvOptionValue)")
+          player.mpv.setString(mpvOptionName, mpvOptionValue)
+        }
+      }
+
+      Logger.log("Finished URL scheme handling")
     }
   }
 

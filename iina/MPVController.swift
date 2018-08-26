@@ -596,6 +596,7 @@ class MPVController: NSObject {
 
   private func onFileLoaded() {
     // mpvSuspend()
+    let paused = getFlag(MPVOption.PlaybackControl.pause)
     setFlag(MPVOption.PlaybackControl.pause, true)
     // Get video size and set the initial window size
     let width = getInt(MPVProperty.width)
@@ -615,7 +616,7 @@ class MPVController: NSObject {
     fileLoaded = true
     // mpvResume()
     if !Preference.bool(for: .pauseWhenOpen) {
-      setFlag(MPVOption.PlaybackControl.pause, false)
+      setFlag(MPVOption.PlaybackControl.pause, paused)
     }
     player.syncUI(.playlist)
   }

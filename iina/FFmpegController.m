@@ -119,7 +119,10 @@ return -1;\
 
   // Get the codec context for the video stream
   AVStream *pVideoStream = pFormatCtx->streams[videoStream];
-  if (av_q2d(pVideoStream->avg_frame_rate) == 0) {
+  AVRational videoAvgFrameRate = pVideoStream->avg_frame_rate;
+
+  // Check whether the denominator (AVRational.den) is zero to prevent division-by-zero
+  if (videoAvgFrameRate.den == 0 || av_q2d(videoAvgFrameRate) == 0) {
     NSLog(@"Avg frame rate = 0, ignore");
     return -1;
   }

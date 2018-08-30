@@ -371,7 +371,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       } else {
         player = PlayerCore.newPlayerCore
       }
-      player.openURLString(urlValue)
+
+      // enqueue
+      if let enqueueValue = queryDict["enqueue"], enqueueValue == "1", !PlayerCore.lastActive.info.playlist.isEmpty {
+        PlayerCore.lastActive.addToPlaylist(urlValue)
+        PlayerCore.lastActive.postNotification(.iinaPlaylistChanged)
+        PlayerCore.lastActive.sendOSD(.addToPlaylist(1))
+      } else {
+        player.openURLString(urlValue)
+      }
 
       // presentation options
       if let fsValue = queryDict["full_screen"], fsValue == "1" {

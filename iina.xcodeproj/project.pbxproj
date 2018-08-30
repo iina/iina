@@ -277,6 +277,13 @@
 			remoteGlobalIDString = E3DE8DC91FD8166A0021921C;
 			remoteInfo = "iina-cli";
 		};
+		724F96AA2136FA800007E4FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 724F96A62136FA7F0007E4FE /* iina-ql.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 724F96972136FA7F0007E4FE;
+			remoteInfo = "iina-ql";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -591,6 +598,7 @@
 		6DC77D441F1439A800E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DC77D451F1439A800E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = uk; path = uk.lproj/Contribution.rtf; sourceTree = "<group>"; };
 		6DC77D461F1439A800E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		724F96A62136FA7F0007E4FE /* iina-ql.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "iina-ql.xcodeproj"; path = "iina-ql/iina-ql.xcodeproj"; sourceTree = "<group>"; };
 		72CAEE6D1E229EAE00B8C894 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefGeneralViewController.strings"; sourceTree = "<group>"; };
 		8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		8400D5C71E1AB2F1006785F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
@@ -1356,6 +1364,14 @@
 			path = OpenInIINA;
 			sourceTree = "<group>";
 		};
+		724F96A72136FA7F0007E4FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				724F96AB2136FA800007E4FE /* iina-ql.qlgenerator */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		8452DD7F1D3A1F2A008A543A /* Preference */ = {
 			isa = PBXGroup;
 			children = (
@@ -1862,6 +1878,7 @@
 		84EB1ECD1D2F51D3004FA5A1 = {
 			isa = PBXGroup;
 			children = (
+				724F96A62136FA7F0007E4FE /* iina-ql.xcodeproj */,
 				84EB1ED81D2F51D3004FA5A1 /* iina */,
 				E3DE8DCB1FD8166A0021921C /* iina-cli */,
 				49542976216C34950058F680 /* OpenInIINA */,
@@ -2076,6 +2093,12 @@
 			mainGroup = 84EB1ECD1D2F51D3004FA5A1;
 			productRefGroup = 84EB1ED71D2F51D3004FA5A1 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 724F96A72136FA7F0007E4FE /* Products */;
+					ProjectRef = 724F96A62136FA7F0007E4FE /* iina-ql.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				84EB1ED51D2F51D3004FA5A1 /* iina */,
@@ -2084,6 +2107,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		724F96AB2136FA800007E4FE /* iina-ql.qlgenerator */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "iina-ql.qlgenerator";
+			remoteRef = 724F96AA2136FA800007E4FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		49542971216C34950058F680 /* Resources */ = {

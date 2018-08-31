@@ -2755,6 +2755,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     }
 
     pipStatus = .inPIP
+    showUI()
 
     pipVideo = NSViewController()
     pipVideo.view = videoView

@@ -127,6 +127,8 @@ struct Preference {
     static let enableThumbnailForRemoteFiles = Key("enableThumbnailForRemoteFiles")
 
     static let autoSwitchToMusicMode = Key("autoSwitchToMusicMode")
+    static let musicModeShowPlaylist = Key("musicModeShowPlaylist")
+    static let musicModeShowAlbumArt = Key("musicModeShowAlbumArt")
 
     static let displayTimeAndBatteryInFullScreen = Key("displayTimeAndBatteryInFullScreen")
 
@@ -672,6 +674,8 @@ struct Preference {
     .maxThumbnailPreviewCacheSize: 500,
     .enableThumbnailForRemoteFiles: false,
     .autoSwitchToMusicMode: true,
+    .musicModeShowPlaylist: false,
+    .musicModeShowAlbumArt: true,
     .displayTimeAndBatteryInFullScreen: false,
 
     .videoThreads: 0,

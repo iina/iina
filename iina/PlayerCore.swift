@@ -336,7 +336,10 @@ class PlayerCore: NSObject {
       switchedToMiniPlayerManually = true
     }
     switchedBackFromMiniPlayerManually = false
+
+    let needRestoreLayout = !miniPlayer.isWindowLoaded
     miniPlayer.showWindow(self)
+
     miniPlayer.updateTrack()
     let playlistView = mainWindow.playlistView.view
     let videoView = mainWindow.videoView
@@ -346,6 +349,7 @@ class PlayerCore: NSObject {
     if mainWindow.sideBarStatus != .hidden {
       mainWindow.hideSideBar(animate: false)
     }
+
     // move playist view
     playlistView.removeFromSuperview()
     mainWindow.playlistView.useCompactTabHeight = true
@@ -357,6 +361,7 @@ class PlayerCore: NSObject {
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
     let (dw, dh) = videoSizeForDisplay
     miniPlayer.updateVideoViewAspectConstraint(withAspect: CGFloat(dw) / CGFloat(dh))
+
     // if no video track (or video info is still not available now), set aspect ratio for main window
     if let mw = mainWindow.window, mw.aspectRatio == .zero {
       let size = NSSize(width: dw, height: dh)
@@ -372,9 +377,20 @@ class PlayerCore: NSObject {
       miniPlayer.setToInitialWindowSize(display: true, animate: false)
     }
     videoView.videoLayer.draw()
+
     // hide main window
     mainWindow.window?.orderOut(self)
     isInMiniPlayer = true
+
+    // restore layout
+    if needRestoreLayout {
+      if !Preference.bool(for: .musicModeShowAlbumArt) {
+        miniPlayer.toggleVideoView(self)
+      }
+      if Preference.bool(for: .musicModeShowPlaylist) {
+        miniPlayer.togglePlaylist(self)
+      }
+    }
   }
 
   func switchBackFromMiniPlayer(automatically: Bool, showMainWindow: Bool = true) {

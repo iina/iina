@@ -404,6 +404,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
       newFrame.size.height += DefaultPlaylistHeight
       window.setFrame(newFrame, display: true, animate: true)
     }
+    Preference.set(isPlaylistVisible, for: .musicModeShowPlaylist)
   }
 
   @IBAction func toggleVideoView(_ sender: Any) {
@@ -423,6 +424,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
       frame.size.height -= videoViewHeight
       window.setFrame(frame, display: true, animate: false)
     }
+    Preference.set(isVideoVisible, for: .musicModeShowAlbumArt)
   }
 
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {

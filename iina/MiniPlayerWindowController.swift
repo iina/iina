@@ -355,6 +355,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     let newHeight = videoView.frame.width / aspect
     updateVideoViewAspectConstraint(withAspect: aspect)
     // resize window
+    guard isVideoVisible else { return }
     var frame = window.frame
     frame.size.height += newHeight - currentHeight - 0.5
     window.setFrame(frame, display: true, animate: false)

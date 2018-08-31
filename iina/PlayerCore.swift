@@ -437,7 +437,7 @@ class PlayerCore: NSObject {
     invalidateTimer()
   }
 
-  func toogleMute(_ set: Bool? = nil) {
+  func toggleMute(_ set: Bool? = nil) {
     let newState = set ?? !mpv.getFlag(MPVOption.Audio.mute)
     mpv.setFlag(MPVOption.Audio.mute, newState)
   }

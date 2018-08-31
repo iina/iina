@@ -226,7 +226,7 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuToggleMute(_ sender: NSMenuItem) {
-    player.toogleMute()
+    player.toggleMute()
   }
 
   @objc func menuChangeAudioDelay(_ sender: NSMenuItem) {

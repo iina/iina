@@ -395,7 +395,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     }
   }
 
-  @IBAction func toogleVideoView(_ sender: Any) {
+  @IBAction func toggleVideoView(_ sender: Any) {
     guard let window = window else { return }
     isVideoVisible = !isVideoVisible
     videoWrapperViewBottomConstraint.isActive = isVideoVisible
@@ -448,7 +448,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   }
 
   @IBAction func muteBtnAction(_ sender: NSButton) {
-    player.toogleMute()
+    player.toggleMute()
   }
 
   @IBAction func playSliderChanges(_ sender: NSSlider) {

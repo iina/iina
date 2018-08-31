@@ -2472,7 +2472,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** mute button */
   @IBAction func muteButtonAction(_ sender: NSButton) {
-    player.toogleMute(nil)
+    player.toggleMute(nil)
     if player.info.isMuted {
       displayOSD(.mute)
     } else {

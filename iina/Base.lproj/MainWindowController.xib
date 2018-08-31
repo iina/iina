@@ -65,7 +65,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="IINAMainWindow" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5" customClass="MainWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -302,7 +302,7 @@
                 <constraints>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="g0O-v5-RQj" secondAttribute="bottom" constant="8" id="0pt-vB-Ycm"/>
                     <constraint firstAttribute="trailing" secondItem="DFb-1L-U9o" secondAttribute="trailing" id="3qV-vK-qlg"/>
-                    <constraint firstItem="OiF-pA-8Sd" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="leading" priority="750" constant="330" id="9z2-rX-b7C"/>
+                    <constraint firstItem="OiF-pA-8Sd" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="leading" priority="249" constant="330" id="9z2-rX-b7C"/>
                     <constraint firstAttribute="trailing" secondItem="Tdb-EA-alw" secondAttribute="trailing" id="Mqd-Wb-vqq"/>
                     <constraint firstAttribute="trailing" secondItem="epo-S6-QVB" secondAttribute="trailing" constant="-240" id="PAj-s6-32e"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="RFd-ZJ-29u"/>

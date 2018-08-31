@@ -337,6 +337,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
    __/open__
    - `url`: a url or string to open.
    - `new_window`: 0 or 1 (default) to indicate whether open the media in a new window.
+   - `enqueue`: 0 (default) or 1 to indicate whether to add the media to the current playlist.
    - `full_screen`: 0 (default) or 1 to indicate whether open the media and enter fullscreen.
    - `pip`: 0 (default) or 1 to indicate whether open the media and enter pip.
    - `mpv_*`: additional mpv options to be passed. e.g. `mpv_volume=20`.
@@ -370,7 +371,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       } else {
         player = PlayerCore.newPlayerCore
       }
-      player.openURLString(urlValue)
+
+      // enqueue
+      if let enqueueValue = queryDict["enqueue"], enqueueValue == "1", !PlayerCore.lastActive.info.playlist.isEmpty {
+        PlayerCore.lastActive.addToPlaylist(urlValue)
+        PlayerCore.lastActive.postNotification(.iinaPlaylistChanged)
+        PlayerCore.lastActive.sendOSD(.addToPlaylist(1))
+      } else {
+        player.openURLString(urlValue)
+      }
 
       // presentation options
       if let fsValue = queryDict["full_screen"], fsValue == "1" {

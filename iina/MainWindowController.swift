@@ -694,8 +694,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard !oscIsInitialized || oscPosition != newPosition else { return }
     oscIsInitialized = true
 
-    var isCurrentControlBarHidden = false
-
     let isSwitchingToTop = newPosition == .top
     let isSwitchingFromTop = oscPosition == .top
     let isFloating = newPosition == .floating
@@ -703,8 +701,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if let cb = currentControlBar {
       // remove current osc view from fadeable views
       fadeableViews = fadeableViews.filter { $0 != cb }
-      // record hidden status
-      isCurrentControlBarHidden = cb.isHidden
     }
 
     // reset
@@ -796,8 +792,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     if currentControlBar != nil {
       fadeableViews.append(currentControlBar!)
-      currentControlBar!.isHidden = isCurrentControlBarHidden
     }
+    showUI()
 
     if isFloating {
       fragControlViewMiddleButtons1Constraint.constant = 24

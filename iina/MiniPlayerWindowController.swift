@@ -84,9 +84,9 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   @IBOutlet weak var playlistWrapperView: NSVisualEffectView!
   @IBOutlet weak var mediaInfoView: NSView!
   @IBOutlet weak var controlView: NSView!
-  @IBOutlet weak var titleLabel: NSTextField!
+  @IBOutlet weak var titleLabel: ScrollingTextField!
   @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
-  @IBOutlet weak var artistAlbumLabel: NSTextField!
+  @IBOutlet weak var artistAlbumLabel: ScrollingTextField!
   @IBOutlet weak var playButton: NSButton!
   @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var rightLabel: DurationDisplayTextField!
@@ -250,7 +250,10 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
       closeButtonView.animator().alphaValue = 0
       controlView.animator().alphaValue = 0
       mediaInfoView.animator().alphaValue = 1
-    }, completionHandler: {})
+    }, completionHandler: {
+      self.titleLabel.scroll()
+      self.artistAlbumLabel.scroll()
+    })
   }
 
   override func mouseEntered(with event: NSEvent) {
@@ -284,6 +287,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   func windowDidResize(_ notification: Notification) {
     guard let window = window, !window.inLiveResize else { return }
     self.player.mainWindow.videoView.videoLayer.draw()
+  }
+
+  func windowDidBecomeMain(_ notification: Notification) {
+    titleLabel.scroll()
+    artistAlbumLabel.scroll()
   }
 
   // MARK: - NSPopoverDelegate
@@ -336,6 +344,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
           self.artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
         }
       }
+      self.titleLabel.scroll()
+      self.artistAlbumLabel.scroll()
     }
   }
 

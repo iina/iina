@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class FilterWindowController: NSWindowController {
+class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("FilterWindowController")
@@ -46,6 +46,7 @@ class FilterWindowController: NSWindowController {
 
   override func windowDidLoad() {
     super.windowDidLoad()
+    window?.delegate = self
 
     // title
     window?.title = filterType == MPVProperty.af ? NSLocalizedString("filter.audio_filters", comment: "Audio Filters") : NSLocalizedString("filter.video_filters", comment: "Video Filters")
@@ -63,7 +64,7 @@ class FilterWindowController: NSWindowController {
     keyRecordView.delegate = self
     editFilterKeyRecordView.delegate = self
 
-    removeButton.isEnabled = false
+    updateButtonStatus()
 
     // notifications
     let notiName: Notification.Name = filterType == MPVProperty.af ? .iinaAFChanged : .iinaVFChanged
@@ -232,7 +233,15 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    removeButton.isEnabled = currentFiltersTableView.selectedRow != -1
+    updateButtonStatus()
+  }
+
+  func windowDidBecomeKey(_ notification: Notification) {
+    updateButtonStatus()
+  }
+
+  private func updateButtonStatus() {
+    removeButton.isEnabled = currentFiltersTableView.selectedRow >= 0
   }
 
 }

@@ -35,7 +35,7 @@ class KeychainAccess {
   static func write(username: String, password: String, forService serviceName: ServiceName, server: String? = nil, port: Int? = nil) throws {
     let status: OSStatus
 
-    if let _ = try? read(username: username, forService: .openSubAccount, server: nil, port: nil) {
+    if let _ = try? read(username: username, forService: serviceName, server: nil, port: nil) {
 
       // if password exists, try to update the password
       var query: [String: Any] = [kSecAttrService as String: serviceName.rawValue]
@@ -54,6 +54,7 @@ class KeychainAccess {
 
       // try to write the password
       var query: [String: Any] = [kSecAttrService as String: serviceName.rawValue,
+                                  kSecAttrLabel as String: serviceName.rawValue,
                                   kSecAttrAccount as String: username,
                                   kSecValueData as String: password]
       if let server = server { query[kSecAttrServer as String] = server }
@@ -103,3 +104,4 @@ class KeychainAccess {
   }
   
 }
+

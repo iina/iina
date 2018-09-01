@@ -29,7 +29,7 @@ class AboutWindowController: NSWindowController {
   override func windowDidLoad() {
     super.windowDidLoad()
 
-    if #available(OSX 10.13, *) {
+    if #available(macOS 10.13, *) {
       windowBackgroundBox.fillColor = NSColor(named: .aboutWindowBackground)!
     } else {
       windowBackgroundBox.fillColor = .white

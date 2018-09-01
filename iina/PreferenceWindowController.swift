@@ -404,7 +404,7 @@ class PrefSearchResultMaskView: NSView {
     framePath.append(maskPath)
     framePath.windingRule = .evenOdd
     framePath.setClip()
-    if #available(OSX 10.14, *) {
+    if #available(macOS 10.14, *) {
       NSColor.windowBackgroundColor.withSystemEffect(.pressed).setFill()
     } else {
       NSColor(calibratedWhite: 0.5, alpha: 0.5).setFill()

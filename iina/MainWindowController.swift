@@ -601,7 +601,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     thumbnailPeekView.isHidden = true
 
     // other initialization
-    if #available(OSX 10.14, *) {
+    if #available(macOS 10.14, *) {
       titleBarBottomBorder.fillColor = NSColor(named: .titleBarBorder)!
     }
     cachedScreenCount = NSScreen.screens.count
@@ -1705,7 +1705,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if let accessoryView = accessoryView {
       isShowingPersistentOSD = true
 
-      accessoryView.appearance = NSAppearance(named: .vibrantDark)
+      if #available(macOS 10.14, *) {} else {
+        accessoryView.appearance = NSAppearance(named: .vibrantDark)
+      }
       let heightConstraint = NSLayoutConstraint(item: accessoryView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300)
       heightConstraint.priority = .defaultLow
       heightConstraint.isActive = true
@@ -2013,7 +2015,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private func setMaterial(_ theme: Preference.Theme?) {
     guard let window = window, let theme = theme else { return }
 
-    if #available(OSX 10.14, *) {
+    if #available(macOS 10.14, *) {
       window.appearance = NSAppearance(iinaTheme: theme)
     } else {
       var appearance: NSAppearance?

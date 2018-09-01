@@ -10,7 +10,7 @@ import Cocoa
 
 fileprivate extension NSColor {
   static let cropBoxFill: NSColor = {
-    if #available(OSX 10.14, *) {
+    if #available(macOS 10.14, *) {
       return NSColor(named: .cropBoxFill)!
     } else {
       return NSColor(calibratedWhite: 0.5, alpha: 0.3)

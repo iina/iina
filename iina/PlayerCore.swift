@@ -965,7 +965,9 @@ class PlayerCore: NSObject {
     info.disableOSDForFileLoading = true
     currentMediaIsAudio = .unknown
     guard let path = mpv.getString(MPVProperty.path) else { return }
-    info.currentURL = path.contains("://") ? URL(string: path) : URL(fileURLWithPath: path)
+    info.currentURL = path.contains("://") ?
+      URL(string: path.addingPercentEncoding(withAllowedCharacters: .urlAllowed) ?? path) :
+      URL(fileURLWithPath: path)
     info.isNetworkResource = !info.currentURL!.isFileURL
     // Auto load
     backgroundQueueTicket += 1

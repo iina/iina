@@ -1300,8 +1300,16 @@ class PlayerCore: NSObject {
         self.touchBarSupport.touchBarPlaySlider?.resetCachedThumbnails()
       }
     }
-    guard !info.isNetworkResource,
-      let path = info.currentURL?.path else { return }
+    guard !info.isNetworkResource, let url = info.currentURL else {
+      Logger.log("...stopped because cannot get file path", subsystem: subsystem)
+      return
+    }
+    if !Preference.bool(for: .enableThumbnailForRemoteFiles) {
+      if let attrs = try? url.resourceValues(forKeys: Set([.volumeIsLocalKey])), !attrs.volumeIsLocal! {
+        Logger.log("...stopped because file is on a mounted remote drive", subsystem: subsystem)
+        return
+      }
+    }
     info.thumbnails.removeAll(keepingCapacity: true)
     info.thumbnailsProgress = 0
     info.thumbnailsReady = false
@@ -1320,7 +1328,7 @@ class PlayerCore: NSObject {
         }
       } else {
         Logger.log("Request new thumbnails", subsystem: subsystem)
-        ffmpegController.generateThumbnail(forFile: path)
+        ffmpegController.generateThumbnail(forFile: url.path)
       }
     }
   }

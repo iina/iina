@@ -149,10 +149,9 @@ class OpenSubSupport {
         }
         // read password
         if let udUsername = Preference.string(for: .openSubUsername), !udUsername.isEmpty {
-          let (readResult, readPassword, _) = OpenSubSupport.findPassword(username: udUsername)
-          if readResult == errSecSuccess {
+          if let (_, readPassword) = try? KeychainAccess.read(username: udUsername, forService: .openSubAccount) {
             finalUser = udUsername
-            finalPw = readPassword!
+            finalPw = readPassword
           }
         }
       }
@@ -311,60 +310,6 @@ class OpenSubSupport {
       PlayerCore.active.sendOSD(.foundSub(subs.count), autoHide: false, accessoryView: subChooseViewController.view)
       subChooseViewController.tableView.reloadData()
     }
-  }
-
-  static func savePassword(username: String, passwd: String) -> OSStatus {
-    let service = OpenSubSupport.serviceName as NSString
-    let accountName = username as NSString
-    let pw = passwd as NSString
-    let pwData = pw.data(using: String.Encoding.utf8.rawValue)! as NSData
-
-    let status: OSStatus
-    // try read password
-    let (readResult, _, readItemRef) = findPassword(username: username)
-    if readResult == errSecSuccess {
-      // else, try modify the password
-      status = SecKeychainItemModifyContent(readItemRef!,
-                                            nil,
-                                            UInt32(pw.length),
-                                            pwData.bytes)
-    } else {
-      // if can't read, try add password
-      status = SecKeychainAddGenericPassword(nil,
-                                             UInt32(service.length),
-                                             service.utf8String,
-                                             UInt32(accountName.length),
-                                             accountName.utf8String,
-                                             UInt32(pw.length),
-                                             pwData.bytes,
-                                             nil)
-    }
-    return status
-  }
-
-  static func findPassword(username: String) -> (OSStatus, String?, SecKeychainItem?) {
-    let service = OpenSubSupport.serviceName as NSString
-    let accountName = username as NSString
-    var pwLength = UInt32()
-    var pwData: UnsafeMutableRawPointer? = nil
-    var itemRef: SecKeychainItem? = nil
-    let status = SecKeychainFindGenericPassword(nil,
-                                                UInt32(service.length),
-                                                service.utf8String,
-                                                UInt32(accountName.length),
-                                                accountName.utf8String,
-                                                &pwLength,
-                                                &pwData,
-                                                &itemRef)
-    var password: String? = ""
-    if status == errSecSuccess {
-      let data = Data(bytes: pwData!, count: Int(pwLength))
-      password = String(data: data, encoding: .utf8)
-    }
-    if pwData != nil {
-      SecKeychainItemFreeContent(nil, pwData)
-    }
-    return (status, password, itemRef)
   }
 
   private func startHeartbeat() {

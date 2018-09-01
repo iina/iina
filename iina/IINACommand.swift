@@ -31,6 +31,7 @@ enum IINACommand: String {
 
   case saveCurrentPlaylist = "save-playlist"
   case deleteCurrentFile = "delete-current-file"
+  case deleteCurrentFileHard = "delete-current-file-hard"
 
   case findOnlineSubs = "find-online-subs"
   case saveDownloadedSub = "save-downloaded-sub"

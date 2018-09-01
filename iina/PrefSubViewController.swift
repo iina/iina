@@ -40,7 +40,7 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     let defaultEncoding = Preference.string(for: .defaultEncoding)
     for encoding in AppData.encodings {
       defaultEncodingList.addItem(withTitle: encoding.title)
@@ -50,7 +50,7 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
         defaultEncodingList.select(lastItem)
       }
     }
-    
+
     defaultEncodingList.menu?.insertItem(NSMenuItem.separator(), at: 1)
 
     subLangTokenView.delegate = self
@@ -77,12 +77,15 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
         firstly {
           OpenSubSupport().login(testUser: username, password: password)
         }.map { _ in
-          let status = OpenSubSupport.savePassword(username: username, passwd: password)
-          if status == errSecSuccess {
+          do {
+            try KeychainAccess.write(username: username, password: password, forService: .openSubAccount)
             Preference.set(username, for: .openSubUsername)
-          } else {
-            Utility.showAlert("sub.cannot_save_passwd", arguments: [SecCopyErrorMessageString(status, nil) as! CVarArg],
-                              sheetWindow: self.view.window)
+          } catch KeychainAccess.KeychainError.noResult {
+            Utility.showAlert("sub.cannot_save_passwd", arguments: ["Cannot find password."], sheetWindow: self.view.window)
+          } catch KeychainAccess.KeychainError.unhandledError(let message) {
+            Utility.showAlert("sub.cannot_save_passwd", arguments: [message], sheetWindow: self.view.window)
+          } catch KeychainAccess.KeychainError.unexpectedData {
+            Utility.showAlert("sub.cannot_save_passwd", arguments: ["Unexcepted data when reading password."], sheetWindow: self.view.window)
           }
         }.ensure {
           self.loginIndicator.isHidden = true
@@ -105,13 +108,13 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
       Preference.set("", for: .openSubUsername)
     }
   }
-  
+
   @IBAction func changeDefaultEncoding(_ sender: NSPopUpButton) {
     Preference.set(sender.selectedItem!.representedObject!, for: .defaultEncoding)
     PlayerCore.active.setSubEncoding((sender.selectedItem?.representedObject as? String) ?? "auto")
     PlayerCore.active.reloadAllSubs()
   }
-  
+
   @IBAction func openSubHelpBtnAction(_ sender: AnyObject) {
     NSWorkspace.shared.open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#opensubtitles"))!)
   }
@@ -219,7 +222,7 @@ class SubLangToken: NSObject {
     guard let arr = value as? NSArray else { return "" }
     return arr.map{ ($0 as! SubLangToken).name }.joined(separator: ",")
   }
-  
+
 }
 
 
@@ -241,7 +244,7 @@ class SubLangToken: NSObject {
       return String(format: NSLocalizedString("preference.logged_in_as", comment: "Logged in as"), username)
     }
   }
-  
+
 }
 
 
@@ -259,5 +262,5 @@ class SubLangToken: NSObject {
     let username = value as? NSString ?? ""
     return NSLocalizedString((username.length == 0 ? "general.login" : "general.logout"), comment: "")
   }
-  
+
 }

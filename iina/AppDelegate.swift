@@ -41,6 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   // Windows
 
+  lazy var openURLWindow: OpenURLWindowController = OpenURLWindowController()
   lazy var aboutWindow: AboutWindowController = AboutWindowController()
   lazy var fontPicker: FontPickerWindowController = FontPickerWindowController()
   lazy var inspector: InspectorWindowController = InspectorWindowController()
@@ -432,23 +433,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func openURL(_ sender: AnyObject) {
     Logger.log("Menu - Open URL")
-    let panel = NSAlert()
-    panel.messageText = NSLocalizedString("alert.open_url.title", comment: "Open URL")
-    panel.informativeText = NSLocalizedString("alert.open_url.message", comment: "Please enter the URL:")
-    let inputViewController = OpenURLAccessoryViewController()
-    panel.accessoryView = inputViewController.view
-    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
-    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
-    panel.window.initialFirstResponder = inputViewController.urlField
-    let response = panel.runModal()
-    if response == .alertFirstButtonReturn {
-      if let url = inputViewController.url {
-        let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: sender.tag == AlternativeMenuItemTag)
-        playerCore.openURL(url)
-      } else {
-        Utility.showAlert("wrong_url_format")
-      }
-    }
+    openURLWindow.isAlternativeAction = sender.tag == AlternativeMenuItemTag
+    openURLWindow.showWindow(nil)
+    openURLWindow.resetFields()
   }
 
   @IBAction func menuNewWindow(_ sender: Any) {

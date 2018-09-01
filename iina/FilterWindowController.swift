@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class FilterWindowController: NSWindowController {
+class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("FilterWindowController")
@@ -33,7 +33,8 @@ class FilterWindowController: NSWindowController {
   @IBOutlet weak var editFilterStringTextField: NSTextField!
   @IBOutlet weak var editFilterKeyRecordView: KeyRecordView!
   @IBOutlet weak var editFilterKeyRecordViewLabel: NSTextField!
-
+  @IBOutlet weak var removeButton: NSButton!
+  
   var filterType: String!
 
   var filters: [MPVFilter] = []
@@ -45,6 +46,7 @@ class FilterWindowController: NSWindowController {
 
   override func windowDidLoad() {
     super.windowDidLoad()
+    window?.delegate = self
 
     // title
     window?.title = filterType == MPVProperty.af ? NSLocalizedString("filter.audio_filters", comment: "Audio Filters") : NSLocalizedString("filter.video_filters", comment: "Video Filters")
@@ -61,6 +63,8 @@ class FilterWindowController: NSWindowController {
 
     keyRecordView.delegate = self
     editFilterKeyRecordView.delegate = self
+
+    updateButtonStatus()
 
     // notifications
     let notiName: Notification.Name = filterType == MPVProperty.af ? .iinaAFChanged : .iinaVFChanged
@@ -143,6 +147,10 @@ class FilterWindowController: NSWindowController {
       if success {
         reloadTable()
         pc.sendOSD(.removeFilter)
+        // FIXME: For some reason, after removeFilterAction is called, tableViewSelectionDidChange(_:)
+        // for currentFiltersTableView is not called. This is a workaround to ensure
+        // tableViewSelectionDidChange(_:) is called.
+        currentFiltersTableView.deselectAll(self)
       }
     }
   }
@@ -222,6 +230,18 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
         Utility.showAlert("filter.incorrect")
       }
     }
+  }
+
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    updateButtonStatus()
+  }
+
+  func windowDidBecomeKey(_ notification: Notification) {
+    updateButtonStatus()
+  }
+
+  private func updateButtonStatus() {
+    removeButton.isEnabled = currentFiltersTableView.selectedRow >= 0
   }
 
 }

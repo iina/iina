@@ -76,11 +76,7 @@ extension SubChooseViewController: NSTableViewDelegate, NSTableViewDataSource {
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    if tableView.selectedRow != -1 {
-      downloadBtn.isEnabled = true
-    } else {
-      downloadBtn.isEnabled = false
-    }
+    downloadBtn.isEnabled = tableView.selectedRow != -1
   }
 
 }

@@ -18,16 +18,17 @@ class ScrollingTextField: NSTextField {
 
   private var state: State = .idle
 
-  let frequency: TimeInterval = 0.03
+  let updateInterval: TimeInterval = 0.03
+  let timeToWaitBeforeStart: TimeInterval = 0.2
 
   private var scrollingTimer: Timer?
-  private var pauseTimer: Timer?
-  private var point: NSPoint = .zero
+  private var startTimer: Timer?
+  private var drawPoint: NSPoint = .zero
 
-  private var increment: CGFloat = 1
+  private var step: CGFloat = 1
 
   private var scrollingString = NSAttributedString(string: "")
-  private var addedStringWidth: CGFloat = 0
+  private var appendedStringCopyWidth: CGFloat = 0
 
   override var stringValue: String {
     didSet {
@@ -37,38 +38,40 @@ class ScrollingTextField: NSTextField {
 
   func scroll() {
     let stringWidth = attributedStringValue.size().width
+    // FIXME: Use hard-coded width here. Should be changed to frame.width and handle the center alignment by ourself in draw().
     guard state == .idle && stringWidth > 252 else { return }
 
     state = .pause
-    pauseTimer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(startScrolling),
+    startTimer = Timer.scheduledTimer(timeInterval: timeToWaitBeforeStart, target: self, selector: #selector(startScrolling),
                                       userInfo: nil, repeats: false)
   }
 
   @objc
   private func startScrolling() {
     let attributes = attributedStringValue.attributes(at: 0, effectiveRange: nil)
-    let addedString = stringValue + "    "
-    addedStringWidth = NSAttributedString(string: addedString, attributes: attributes).size().width
-    scrollingString = NSAttributedString(string: addedString + stringValue, attributes: attributes)
+    // Add padding between end and start of the copy
+    let appendedStringCopy = "    " + stringValue
+    appendedStringCopyWidth = NSAttributedString(string: appendedStringCopy, attributes: attributes).size().width
+    scrollingString = NSAttributedString(string: stringValue + appendedStringCopy, attributes: attributes)
     state = .scroll
-    scrollingTimer = Timer.scheduledTimer(timeInterval: frequency, target: self, selector: #selector(moveText),
+    scrollingTimer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(moveText),
                                           userInfo: nil, repeats: true)
   }
 
   private func reset() {
     scrollingTimer?.invalidate()
     scrollingTimer = nil
-    pauseTimer?.invalidate()
-    pauseTimer = nil
-    point = .zero
+    startTimer?.invalidate()
+    startTimer = nil
+    drawPoint = .zero
     state = .idle
     needsDisplay = true
   }
 
   @objc
   private func moveText() {
-    point.x -= increment
-    if point.x + addedStringWidth < 0 {
+    drawPoint.x -= step
+    if drawPoint.x + appendedStringCopyWidth < 0 {
       reset()
       return
     }
@@ -77,9 +80,9 @@ class ScrollingTextField: NSTextField {
 
   override func draw(_ dirtyRect: NSRect) {
     if state == .scroll {
-      scrollingString.draw(at: point)
+      scrollingString.draw(at: drawPoint)
     } else {
-      attributedStringValue.draw(at: point)
+      attributedStringValue.draw(at: drawPoint)
     }
   }
 

@@ -271,6 +271,9 @@
 /* Buffering... %d%% */
 "main.buffering_indicator" = "준비중… %d%%";
 
+/* Opening Stream… */
+"main.opening_stream_indicator" = "스트림 여는 중…";
+
 /* Audio Delay: */
 "menu.audio_delay" = "오디오 지연: %.2f초";
 

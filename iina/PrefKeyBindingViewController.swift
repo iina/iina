@@ -439,6 +439,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
       tellUserToDuplicateConfig()
       return
     }
+    guard kbTableView.selectedRow != -1 else { return }
     let selectedData = currentMapping[kbTableView.selectedRow]
     showKeyBindingPanel(key: selectedData.key, action: selectedData.readableAction) { key, action in
       guard !key.isEmpty && !action.isEmpty else { return }

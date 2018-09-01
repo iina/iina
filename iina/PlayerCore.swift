@@ -1030,7 +1030,7 @@ class PlayerCore: NSObject {
     }
     // set initial properties for the first file
     if info.justLaunched {
-      if Preference.bool(for: .fullScreenWhenOpen) && mainWindow.screenState.isFullscreen && !isInMiniPlayer {
+      if Preference.bool(for: .fullScreenWhenOpen) && mainWindow.fsState.isFullscreen && !isInMiniPlayer {
         DispatchQueue.main.async(execute: self.mainWindow.toggleWindowFullScreen)
       }
       info.justLaunched = false
@@ -1064,7 +1064,7 @@ class PlayerCore: NSObject {
     // if need to switch to music mode
     if audioStatusIsAvailableNow && Preference.bool(for: .autoSwitchToMusicMode) {
       if currentMediaIsAudio == .isAudio {
-        if !isInMiniPlayer && !mainWindow.screenState.isFullscreen && !switchedBackFromMiniPlayerManually {
+        if !isInMiniPlayer && !mainWindow.fsState.isFullscreen && !switchedBackFromMiniPlayerManually {
           Logger.log("Current media is audio, switch to mini player", subsystem: subsystem)
           DispatchQueue.main.sync {
             switchToMiniPlayer(automatically: false)
@@ -1123,7 +1123,7 @@ class PlayerCore: NSObject {
     guard mainWindow.isWindowLoaded else { return }
 
     let fs = mpv.getFlag(MPVOption.Window.fullscreen)
-    if fs != mainWindow.isInFullScreen {
+    if fs != mainWindow.fsState.isFullscreen {
       DispatchQueue.main.async {
         self.mainWindow.toggleWindowFullScreen()
       }
@@ -1173,7 +1173,7 @@ class PlayerCore: NSObject {
       syncUI(.time)
     }
     if !isInMiniPlayer &&
-      mainWindow.screenState.isFullscreen && mainWindow.displayTimeAndBatteryInFullScreen &&
+      mainWindow.fsState.isFullscreen && mainWindow.displayTimeAndBatteryInFullScreen &&
       !mainWindow.additionalInfoView.isHidden {
         syncUI(.additionalInfo)
     }

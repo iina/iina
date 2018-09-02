@@ -4,10 +4,13 @@
 "2Ld-md-U2v.headerCell.title" = "Schriftfamilie";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Type to filter..."; ObjectID = "DwS-ve-MLJ"; */
-"DwS-ve-MLJ.placeholderString" = "Zum Filtern tippen …";
+"DwS-ve-MLJ.placeholderString" = "Zum Filtern Text eingeben";
 
 /* Class = "NSWindow"; title = "Choose a Font"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Schriftart wählen";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Ihd-HK-wsv"; */
+"Ihd-HK-wsv.title" = "Abbrechen";
 
 /* Class = "NSTextFieldCell"; title = "Filter:"; ObjectID = "Jhm-tD-3Xf"; */
 "Jhm-tD-3Xf.title" = "Filter:";

@@ -210,7 +210,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         var oldIndexOffset = 0
         var newIndexOffset = 0
 
-        // Supports multi-line drag & drop (https://goo.gl/cRUvuH)
+        // Drag & Drop list items (multiline), https://goo.gl/cRUvuH
         for oldIndex in indexSet {
           if oldIndex < row {
             player.playlistMove(oldIndex + oldIndexOffset, to: row)
@@ -219,7 +219,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
             player.playlistMove(oldIndex, to: row + newIndexOffset)
             newIndexOffset += 1
           }
-          Logger.log("Playlist drag & drop: \(oldIndex) -->  \(row)")
+          Logger.log("Playlist Drag & Drop from \(oldIndex) to \(row)")
         }
       }
     } else if let paths = pasteboard.propertyList(forType: .nsFilenames) as? [String] {

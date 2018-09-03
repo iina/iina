@@ -16,13 +16,10 @@
 "alert.beta_channel.title" = "Sťahovať Aktualizácie Beta Verzií";
 "alert.choose_media_file.title" = "Vyber Multimediálny Súbor";
 "alert.clear_cache.message" = "Naozaj Chceš Vyčistiť Cache s Náhľadmi?";
-"alert.clear_cache.success" = "Cache vyčistená.";
 "alert.clear_cache.title" = "Vyčistiť Cache s Náhľadmi";
 "alert.clear_history.message" = "Naozaj chcete vymazať históriu prehrávania?";
-"alert.clear_history.success" = "História prehrávania vymazaná.";
 "alert.clear_history.title" = "Vyčistiť Históriu Prehrávania";
 "alert.clear_watch_later.message" = "Naozaj chcete vymazať pozície prehrávaní (dáta v \"pozrieť neskôr\")?";
-"alert.clear_watch_later.success" = "Pozície prehrávaní vymazané.";
 "alert.clear_watch_later.title" = "Vymazať Pozície Prehrávaní";
 "alert.config.cannot_create" = "Nedá sa vytvoriť konfiguračný súbor!";
 "alert.config.cannot_write" = "Nedá sa zapisovať do konfiguračného súboru!";
@@ -183,6 +180,8 @@
 "preference.advanced" = "Pokročilé";
 "preference.control" = "Ovládanie";
 "preference.general" = "Všeobecné";
+"preference.key_binding_hint_1" = "Na upravenie priradených kláves v aktuálnom konfiguračnom súbore, kliknite \"Duplikovať…\" na vytvorenie kópie.";
+"preference.key_binding_hint_2" = "Dvakrát kliknite na riadok na pravú stranu, aby ste upravili priradené klávesy.";
 "preference.keybindings" = "Klávesové Skratky";
 "preference.logged_in_as" = "Prihlásený ako %@";
 "preference.network" = "Sieť";

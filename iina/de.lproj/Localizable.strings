@@ -21,7 +21,7 @@
 "alert.clear_history.title" = "Wiedergabeverlauf löschen";
 "alert.clear_watch_later.message" = "Möchtest du den Wiedergabefortschritt aller Videos löschen?";
 "alert.clear_watch_later.title" = "Gesicherten Wiedergabefortschritt löschen";
-"alert.config.cannot_create" = "Konfigurationsdatei konnte nicht erstellt werden.";
+"alert.config.cannot_create" = "Konfigurationsdatei konnte nicht erstellt werden.\n%@";
 "alert.config.cannot_write" = "Konfigurationsdatei nicht beschreibbar.";
 "alert.config.duplicate.message" = "Bitte gib einen Namen für die duplizierte Konfiguration ein.";
 "alert.config.duplicate.title" = "Konfiguration duplizieren";

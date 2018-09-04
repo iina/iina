@@ -2114,7 +2114,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if player.info.isNetworkResource {
       bufferIndicatorView.isHidden = false
       bufferSpin.startAnimation(nil)
-      bufferProgressLabel.stringValue = "Opening stream..."
+//      bufferProgressLabel.stringValue = NSLocalizedString("main.opening_stream", comment:"Opening stream…")
+      bufferProgressLabel.stringValue = "Opening stream…"
       bufferDetailLabel.stringValue = ""
     } else {
       bufferIndicatorView.isHidden = true

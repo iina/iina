@@ -91,6 +91,8 @@
 "keymapping.message" = "Zum Zuweisen beliebige Taste(n) drücken.";
 "keymapping.title" = "Kurzbefehle";
 "main.buffering_indicator" = "Puffern … %d%%";
+"main.opening_stream" = "Stream öffnen …";
+
 "menu.audio_delay" = "Audioverzögerung: %.2f s";
 "menu.audio_delay_down" = "Audioverzögerung − %.1f s";
 "menu.audio_delay_up" = "Audioverzögerung + %.1f s";
@@ -135,6 +137,7 @@
 "osd.filter_added" = "Filter \"%@\" hinzugefügt";
 "osd.filter_removed" = "Filter gelöscht";
 "osd.find_online_sub" = "Online nach Untertiteln suchen …";
+"osd.find_online_sub.source" = "Quelle:";
 "osd.mute" = "Stumm";
 "osd.network_error" = "Netzwerkfehler";
 "osd.pause" = "Pause";

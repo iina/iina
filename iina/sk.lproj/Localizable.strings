@@ -21,7 +21,7 @@
 "alert.clear_history.title" = "Vyčistiť Históriu Prehrávania";
 "alert.clear_watch_later.message" = "Naozaj chcete vymazať pozície prehrávaní (dáta v \"pozrieť neskôr\")?";
 "alert.clear_watch_later.title" = "Vymazať Pozície Prehrávaní";
-"alert.config.cannot_create" = "Nedá sa vytvoriť konfiguračný súbor!";
+"alert.config.cannot_create" = "Nedá sa vytvoriť konfiguračný súbor!\n%@";
 "alert.config.cannot_write" = "Nedá sa zapisovať do konfiguračného súboru!";
 "alert.config.duplicate.message" = "Zadajte meno pre duplikovaný konfiguračný súbor.";
 "alert.config.duplicate.title" = "Duplicitná Konfigurácia";

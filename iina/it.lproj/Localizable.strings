@@ -19,7 +19,7 @@
 "alert.clear_cache.title" = "Elimina la cache delle miniature";
 "alert.clear_history.message" = "Sei sicuro di eliminare tutta la cronologia delle riproduzioni?";
 "alert.clear_history.title" = "Elimina la cronologia delle riproduzioni";
-"alert.clear_watch_later.message" = "Sei sicuro di eliminare tutti gli avanzamenti di riproduzione salvati (e i dati \"guarda dopoi\")?";
+"alert.clear_watch_later.message" = "Sei sicuro di eliminare tutti gli avanzamenti di riproduzione salvati (e i dati \"guarda dopo\")?";
 "alert.clear_watch_later.title" = "Elimina gli avanzamenti di riproduzione salvati";
 "alert.config.cannot_create" = "Impossibile creare il file di configurazione!";
 "alert.config.cannot_write" = "Impossibile scrivere il file di configurazione!";
@@ -180,7 +180,7 @@
 "preference.advanced" = "Avanzate";
 "preference.control" = "Controlli";
 "preference.general" = "Generali";
-"preference.key_binding_hint_1" = "Per modificare le scorciatoie di tastiera nel file di configurazione corrente, fai prima click su \\\"Duplica…\\\" per crearne una copia.";
+"preference.key_binding_hint_1" = "Per modificare le scorciatoie di tastiera nel file di configurazione corrente, fai prima click su \"Duplica…\" per crearne una copia.";
 "preference.key_binding_hint_2" = "Fai doppio click nella riga sulla destra per modificare la scorciatoia di tastiera corrispondente.";
 "preference.keybindings" = "Abbreviazioni";
 "preference.logged_in_as" = "Collegato come %@";

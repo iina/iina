@@ -36,9 +36,9 @@ class MainMenuActionHandler: NSResponder {
         var playlist = "#EXTM3U\n\n"
         for item in self.player.info.playlist {
           // Track Info
-          playlist.append("#EXTINF:-1," + item.filenameForDisplay + "\n")
+          playlist.append("#EXTINF:-1,\(item.filenameForDisplay)\n")
           // Track Path / URL
-          playlist.append((item.filename + "\n\n"))
+          playlist.append("\(item.filename)\n\n")
         }
 
         do {

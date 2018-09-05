@@ -33,12 +33,12 @@ class MainMenuActionHandler: NSResponder {
       // Writes Extended M3U Playlist
       if url.isFileURL {
         // File Header
-        var playlist = "#EXTM3U\n"
+        var playlist = "#EXTM3U\n\n"
         for item in self.player.info.playlist {
           // Track Info
           playlist.append("#EXTINF:-1," + item.filenameForDisplay + "\n")
           // Track Path / URL
-          playlist.append((item.filename + "\n"))
+          playlist.append((item.filename + "\n\n"))
         }
 
         do {

@@ -37,6 +37,7 @@ protocol MPVEventDelegate {
 class MPVController: NSObject {
   // The mpv_handle
   var mpv: OpaquePointer!
+  var mpvRenderContext: OpaquePointer?
 
   var mpvClientName: UnsafePointer<CChar>!
   var mpvVersion: String!
@@ -327,19 +328,35 @@ class MPVController: NSObject {
 
     // Set options that can be override by user's config. mpv will log user config when initialize,
     // so we put them here.
-    chkErr(mpv_set_property_string(mpv, MPVOption.Video.vo, "opengl-cb"))
+    chkErr(mpv_set_property_string(mpv, MPVOption.Video.vo, "libmpv"))
     chkErr(mpv_set_property_string(mpv, MPVOption.Window.keepaspect, "no"))
-    chkErr(mpv_set_property_string(mpv, MPVOption.Video.openglHwdecInterop, "auto"))
+    chkErr(mpv_set_property_string(mpv, MPVOption.Video.gpuHwdecInterop, "auto"))
 
     // get version
     mpvVersion = getString(MPVProperty.mpvVersion)
   }
 
-  func mpvInitCB() -> UnsafeMutableRawPointer {
-    // Get opengl-cb context.
-    let mpvGL = mpv_get_sub_api(mpv, MPV_SUB_API_OPENGL_CB)!;
+  func mpvInitRendering() {
+    guard let mpv = mpv else {
+      fatalError("mpvInitRendering() should be called after mpv handle being initialized!")
+    }
+    let apiType = UnsafeMutableRawPointer(mutating: (MPV_RENDER_API_TYPE_OPENGL as NSString).utf8String)
+    var openGLInitParams = mpv_opengl_init_params(get_proc_address: mpvGetOpenGLFunc,
+                                                  get_proc_address_ctx: nil,
+                                                  extra_exts: nil)
+    var params = [
+      mpv_render_param(type: MPV_RENDER_PARAM_API_TYPE, data: apiType),
+      mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_INIT_PARAMS, data: &openGLInitParams),
+      mpv_render_param()
+    ]
+    mpv_render_context_create(&mpvRenderContext, mpv, &params)
+    mpv_render_context_set_update_callback(mpvRenderContext!, mpvUpdateCallback, mutableRawPointerOf(obj: player.mainWindow.videoView.videoLayer))
+  }
 
-    return mpvGL
+  func mpvUninitRendering() {
+    guard let mpvRenderContext = mpvRenderContext else { return }
+    mpv_render_context_set_update_callback(mpvRenderContext, nil, nil)
+    mpv_render_context_free(mpvRenderContext)
   }
 
   // Basically send quit to mpv
@@ -499,7 +516,7 @@ class MPVController: NSObject {
       if quitByMPV {
         NSApp.terminate(nil)
       } else {
-        mpv_detach_destroy(mpv)
+        mpv_destroy(mpv)
         mpv = nil
       }
 
@@ -994,6 +1011,19 @@ class MPVController: NSObject {
       Logger.fatal("mpv API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
     }
   }
+}
 
+fileprivate func mpvGetOpenGLFunc(_ ctx: UnsafeMutableRawPointer?, _ name: UnsafePointer<Int8>?) -> UnsafeMutableRawPointer? {
+  let symbolName: CFString = CFStringCreateWithCString(kCFAllocatorDefault, name, kCFStringEncodingASCII);
+  guard let addr = CFBundleGetFunctionPointerForName(CFBundleGetBundleWithIdentifier(CFStringCreateCopy(kCFAllocatorDefault, "com.apple.opengl" as CFString)), symbolName) else {
+    Logger.fatal("Cannot get OpenGL function pointer!")
+  }
+  return addr
+}
 
+fileprivate func mpvUpdateCallback(_ ctx: UnsafeMutableRawPointer?) {
+  let layer = unsafeBitCast(ctx, to: ViewLayer.self)
+  layer.mpvGLQueue.async {
+    layer.display()
+  }
 }

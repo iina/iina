@@ -632,13 +632,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     w.setIsVisible(true)
-    videoView.videoLayer.display()
 
     // gesture recognizer
     cv.addGestureRecognizer(magnificationGestureRecognizer)
 
-    // start mpv opengl_cb
-    player.startMPVOpenGLCB(videoView)
+    // init mpv render context.
+    // The video layer must be displayed once to get the OpenGL context initialized.
+    videoView.videoLayer.display()
+    player.mpv.mpvInitRendering()
 
     // init quick setting view now
     let _ = quickSettingView

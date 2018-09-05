@@ -1,5 +1,8 @@
+#define MPV_ENABLE_DEPRECATED 0
+
 #import <mpv/client.h>
-#import <mpv/opengl_cb.h>
+#import <mpv/render.h>
+#import <mpv/render_gl.h>
 
 #import <stdio.h>
 #import <stdlib.h>

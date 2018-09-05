@@ -6,6 +6,8 @@ struct MPVOption {
     static let alang = "alang"
     /** --slang=<languagecode[ */
     static let slang = "slang"
+    /** --vlang=<...> */
+    static let vlang = "vlang"
     /** --aid=<ID|auto|no> */
     static let aid = "aid"
     /** --sid=<ID|auto|no> */
@@ -142,6 +144,8 @@ struct MPVOption {
     static let ytdlFormat = "ytdl-format"
     /** --ytdl-raw-options=<key>=<value>[ */
     static let ytdlRawOptions = "ytdl-raw-options"
+    /** --load-stats-overlay=<yes|no> */
+    static let loadStatsOverlay = "load-stats-overlay"
     /** --player-operation-mode=<cplayer|pseudo-gui> */
     static let playerOperationMode = "player-operation-mode"
   }
@@ -161,8 +165,10 @@ struct MPVOption {
     static let displayFps = "display-fps"
     /** --hwdec=<api> */
     static let hwdec = "hwdec"
-    /** --opengl-hwdec-interop=<name> */
-    static let openglHwdecInterop = "opengl-hwdec-interop"
+    /** --gpu-hwdec-interop=<auto|all|no|name> */
+    static let gpuHwdecInterop = "gpu-hwdec-interop"
+    /** --hwdec-image-format=<name> */
+    static let hwdecImageFormat = "hwdec-image-format"
     /** --videotoolbox-format=<name> */
     static let videotoolboxFormat = "videotoolbox-format"
     /** --panscan=<0.0-1.0> */
@@ -254,8 +260,6 @@ struct MPVOption {
     static let replaygainClip = "replaygain-clip"
     /** --replaygain-fallback=<db> */
     static let replaygainFallback = "replaygain-fallback"
-    /** --balance=<value> */
-    static let balance = "balance"
     /** --audio-delay=<sec> */
     static let audioDelay = "audio-delay"
     /** --mute=<yes|no|auto> */
@@ -325,6 +329,8 @@ struct MPVOption {
     static let subDelay = "sub-delay"
     /** --sub-files=<file-list> */
     static let subFiles = "sub-files"
+    /** --sub-file=<filename> */
+    static let subFile = "sub-file"
     /** --secondary-sid=<ID|auto|no> */
     static let secondarySid = "secondary-sid"
     /** --sub-scale=<0-100> */
@@ -443,6 +449,8 @@ struct MPVOption {
     static let subFilterSdh = "sub-filter-sdh"
     /** --sub-filter-sdh-harder=<yes|no> */
     static let subFilterSdhHarder = "sub-filter-sdh-harder"
+    /** --sub-create-cc-track=<yes|no> */
+    static let subCreateCcTrack = "sub-create-cc-track"
   }
 
   struct Window {
@@ -506,8 +514,6 @@ struct MPVOption {
     static let forceRgbaOsdRendering = "force-rgba-osd-rendering"
     /** --force-window-position */
     static let forceWindowPosition = "force-window-position"
-    /** --heartbeat-interval=<sec> */
-    static let heartbeatInterval = "heartbeat-interval"
     /** --no-keepaspect */
     static let noKeepaspect = "no-keepaspect"
     /** --keepaspect */
@@ -641,8 +647,10 @@ struct MPVOption {
     static let demuxerRawvideoSize = "demuxer-rawvideo-size"
     /** --demuxer-max-bytes=<bytes> */
     static let demuxerMaxBytes = "demuxer-max-bytes"
-    /** --demuxer-max-packets=<packets> */
-    static let demuxerMaxPackets = "demuxer-max-packets"
+    /** --demuxer-max-back-bytes=<value> */
+    static let demuxerMaxBackBytes = "demuxer-max-back-bytes"
+    /** --demuxer-seekable-cache=<yes|no|auto> */
+    static let demuxerSeekableCache = "demuxer-seekable-cache"
     /** --demuxer-thread=<yes|no> */
     static let demuxerThread = "demuxer-thread"
     /** --demuxer-readahead-secs=<seconds> */
@@ -922,7 +930,7 @@ struct MPVOption {
     static let alsaIgnoreChmap = "alsa-ignore-chmap"
   }
 
-  struct OpenGLRendererOptions {
+  struct GPURendererOptions {
     /** --scale=<filter> */
     static let scale = "scale"
     /** --cscale=<filter> */
@@ -1047,14 +1055,30 @@ struct MPVOption {
     static let temporalDither = "temporal-dither"
     /** --temporal-dither-period=<1-128> */
     static let temporalDitherPeriod = "temporal-dither-period"
-    /** --opengl-debug */
-    static let openglDebug = "opengl-debug"
+    /** --gpu-debug */
+    static let gpuDebug = "gpu-debug"
     /** --opengl-swapinterval=<n> */
     static let openglSwapinterval = "opengl-swapinterval"
-    /** --opengl-shaders=<file-list> */
-    static let openglShaders = "opengl-shaders"
-    /** --opengl-shader=<file> */
-    static let openglShader = "opengl-shader"
+    /** --vulkan-swap-mode=<mode> */
+    static let vulkanSwapMode = "vulkan-swap-mode"
+    /** --vulkan-queue-count=<1..8> */
+    static let vulkanQueueCount = "vulkan-queue-count"
+    /** --d3d11-warp=<yes|no|auto> */
+    static let d3d11Warp = "d3d11-warp"
+    /** --d3d11-feature-level=<12_1|12_0|11_1|11_0|10_1|10_0|9_3|9_2|9_1> */
+    static let d3d11FeatureLevel = "d3d11-feature-level"
+    /** --d3d11-flip=<yes|no> */
+    static let d3d11Flip = "d3d11-flip"
+    /** --d3d11-sync-interval=<0..4> */
+    static let d3d11SyncInterval = "d3d11-sync-interval"
+    /** --d3d11va-zero-copy=<yes|no> */
+    static let d3d11vaZeroCopy = "d3d11va-zero-copy"
+    /** --spirv-compiler=<compiler> */
+    static let spirvCompiler = "spirv-compiler"
+    /** --glsl-shaders=<file-list> */
+    static let glslShaders = "glsl-shaders"
+    /** --glsl-shader=<file> */
+    static let glslShader = "glsl-shader"
     /** --deband */
     static let deband = "deband"
     /** --deband-iterations=<1..16> */
@@ -1077,8 +1101,6 @@ struct MPVOption {
     static let openglGlfinish = "opengl-glfinish"
     /** --opengl-waitvsync */
     static let openglWaitvsync = "opengl-waitvsync"
-    /** --opengl-vsync-fences=<N> */
-    static let openglVsyncFences = "opengl-vsync-fences"
     /** --opengl-dwmflush=<no|windowed|yes|auto> */
     static let openglDwmflush = "opengl-dwmflush"
     /** --angle-d3d11-feature-level=<11_0|10_1|10_0|9_3> */
@@ -1089,24 +1111,26 @@ struct MPVOption {
     static let angleEglWindowing = "angle-egl-windowing"
     /** --angle-flip=<yes|no> */
     static let angleFlip = "angle-flip"
-    /** --angle-max-frame-latency=<1-16> */
-    static let angleMaxFrameLatency = "angle-max-frame-latency"
     /** --angle-renderer=<d3d9|d3d11|auto> */
     static let angleRenderer = "angle-renderer"
-    /** --angle-swapchain-length=<2-16> */
-    static let angleSwapchainLength = "angle-swapchain-length"
     /** --cocoa-force-dedicated-gpu=<yes|no> */
     static let cocoaForceDedicatedGpu = "cocoa-force-dedicated-gpu"
-    /** --opengl-sw */
-    static let openglSw = "opengl-sw"
-    /** --opengl-backend=<sys> */
-    static let openglBackend = "opengl-backend"
+    /** --swapchain-depth=<N> */
+    static let swapchainDepth = "swapchain-depth"
+    /** --gpu-sw */
+    static let gpuSw = "gpu-sw"
+    /** --gpu-context=<sys> */
+    static let gpuContext = "gpu-context"
+    /** --gpu-api=<type> */
+    static let gpuApi = "gpu-api"
     /** --opengl-es=<mode> */
     static let openglEs = "opengl-es"
-    /** --opengl-fbo-format=<fmt> */
-    static let openglFboFormat = "opengl-fbo-format"
-    /** --opengl-gamma=<0.1..2.0> */
-    static let openglGamma = "opengl-gamma"
+    /** --opengl-restrict=<version> */
+    static let openglRestrict = "opengl-restrict"
+    /** --fbo-format=<fmt> */
+    static let fboFormat = "fbo-format"
+    /** --gamma-factor=<0.1..2.0> */
+    static let gammaFactor = "gamma-factor"
     /** --gamma-auto */
     static let gammaAuto = "gamma-auto"
     /** --target-prim=<value> */
@@ -1145,16 +1169,16 @@ struct MPVOption {
     static let openglRectangleTextures = "opengl-rectangle-textures"
     /** --background=<color> */
     static let background = "background"
-    /** --opengl-tex-pad-x */
-    static let openglTexPadX = "opengl-tex-pad-x"
-    /** --opengl-tex-pad-y */
-    static let openglTexPadY = "opengl-tex-pad-y"
+    /** --gpu-tex-pad-x */
+    static let gpuTexPadX = "gpu-tex-pad-x"
+    /** --gpu-tex-pad-y */
+    static let gpuTexPadY = "gpu-tex-pad-y"
     /** --opengl-early-flush=<yes|no|auto> */
     static let openglEarlyFlush = "opengl-early-flush"
-    /** --opengl-dumb-mode=<yes|no|auto> */
-    static let openglDumbMode = "opengl-dumb-mode"
-    /** --opengl-shader-cache-dir=<dirname> */
-    static let openglShaderCacheDir = "opengl-shader-cache-dir"
+    /** --gpu-dumb-mode=<yes|no|auto> */
+    static let gpuDumbMode = "gpu-dumb-mode"
+    /** --gpu-shader-cache-dir=<dirname> */
+    static let gpuShaderCacheDir = "gpu-shader-cache-dir"
     /** --cuda-decode-device=<auto|0..> */
     static let cudaDecodeDevice = "cuda-decode-device"
   }

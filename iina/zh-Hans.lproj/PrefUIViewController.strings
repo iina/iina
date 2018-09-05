@@ -87,17 +87,11 @@
 /* Class = "NSMenuItem"; title = "right"; ObjectID = "NYG-e9-DV0"; */
 "NYG-e9-DV0.title" = "右";
 
-/* Class = "NSButtonCell"; title = "Clear Cache…"; ObjectID = "OAh-HP-wST"; */
-"OAh-HP-wST.title" = "清除缓存…";
-
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "ObY-7B-NTO"; */
 "ObY-7B-NTO.title" = "s";
 
 /* Class = "NSButtonCell"; title = "Initial window position:"; ObjectID = "Ofm-qE-RgQ"; */
 "Ofm-qE-RgQ.title" = "初始窗口位置";
-
-/* Class = "NSTextFieldCell"; title = "Thumbnail cache:"; ObjectID = "R1l-SN-bG5"; */
-"R1l-SN-bG5.title" = "缩略图缓存:";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "S8H-Xr-uVa"; */
 "S8H-Xr-uVa.title" = "s";
@@ -141,9 +135,6 @@
 /* Class = "NSBox"; title = "Box"; ObjectID = "bYj-5g-zYO"; */
 "bYj-5g-zYO.title" = "Box";
 
-/* Class = "NSTextFieldCell"; title = "Calculating…"; ObjectID = "d60-w5-xXY"; */
-"d60-w5-xXY.title" = "计算中…";
-
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2 倍视频大小";
 
@@ -183,6 +174,9 @@
 /* Class = "NSMenuItem"; title = "top"; ObjectID = "oYc-L7-qQd"; */
 "oYc-L7-qQd.title" = "顶";
 
+/* Class = "NSBox"; title = "Box"; ObjectID = "omS-tS-OVJ"; */
+"omS-tS-OVJ.title" = "Box";
+
 /* Class = "NSTextFieldCell"; title = "1280"; ObjectID = "pNX-QN-Rpm"; */
 "pNX-QN-Rpm.title" = "1280";
 
@@ -191,6 +185,9 @@
 
 /* Class = "NSTextFieldCell"; title = "to the"; ObjectID = "qbc-CY-bdK"; */
 "qbc-CY-bdK.title" = "距离屏幕";
+
+/* Class = "NSMenuItem"; title = "Match System Appearance"; ObjectID = "qn6-Bp-Mqp"; */
+"qn6-Bp-Mqp.title" = "匹配系统外观";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "s2E-9N-K86"; */
 "s2E-9N-K86.title" = "像素";

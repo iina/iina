@@ -42,8 +42,8 @@
 /* Class = "NSButtonCell"; title = "Duplicate…"; ObjectID = "gpZ-Rh-DMn"; */
 "gpZ-Rh-DMn.title" = "Duplikovať...";
 
-/* Class = "NSButtonCell"; title = "Display raw values"; ObjectID = "l2M-TH-eCt"; */
-"l2M-TH-eCt.title" = "Zobraz surové hodnoty";
+/* Class = "NSButton"; ibShadowedToolTip = "Show the raw mpv key code and command."; ObjectID = "l2M-TH-eCt"; */
+"l2M-TH-eCt.ibShadowedToolTip" = "Zobraz mpv kód a príkaz.";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "mLe-eI-lIk"; */
 "mLe-eI-lIk.title" = "Box";

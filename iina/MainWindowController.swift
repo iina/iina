@@ -2256,7 +2256,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
       }
       // guard min size
-      videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize)
+      // must be slightly larger than the min size, or it will crash when the min size is auto saved as window frame size.
+      videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize.add(1))
       // check if have geometry set
       if let wfg = windowFrameFromGeometry(newSize: videoSize) {
         rect = wfg

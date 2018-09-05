@@ -37,6 +37,7 @@
 		840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D47971DFEEE6A000D9A64 /* KeyMapping.swift */; };
 		840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */; };
 		840D47A01DFEFC49000D9A64 /* KeyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */; };
+		8418A2F5213F5791003166AC /* OpenURLWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8418A2F7213F5791003166AC /* OpenURLWindowController.xib */; };
 		841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A599C1E1FF5800079E177 /* SleepPreventer.swift */; };
 		841B14281E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */; };
 		841D58D320FCE14500A216D4 /* libmpv.1.26.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D58B520FCE14000A216D4 /* libmpv.1.26.0.dylib */; };
@@ -202,7 +203,6 @@
 		E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BD4AE20054BD9007635FC /* MainWindow.swift */; };
 		E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B3DD5920FDB8A600325184 /* PreferenceWindowController.xib */; };
 		E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */; };
-		E3BA79EF2131443A00529D99 /* OpenURLWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BA79ED2131443A00529D99 /* OpenURLWindowController.xib */; };
 		E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C12F6A201F281F00297964 /* FirstRunManager.swift */; };
 		E3CB75BB1FD998F5004DB10A /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F21E26CA24008755BB /* Regex.swift */; };
 		E3CB75BD1FDACB82004DB10A /* SavedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */; };
@@ -565,6 +565,8 @@
 		840D47971DFEEE6A000D9A64 /* KeyMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyMapping.swift; sourceTree = "<group>"; };
 		840D47991DFEF649000D9A64 /* KeyRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRecordViewController.swift; sourceTree = "<group>"; };
 		840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRecordView.swift; sourceTree = "<group>"; };
+		8418A2F6213F5791003166AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OpenURLWindowController.xib; sourceTree = "<group>"; };
+		8418A2F8213F5794003166AC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OpenURLWindowController.strings"; sourceTree = "<group>"; };
 		841A599C1E1FF5800079E177 /* SleepPreventer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepPreventer.swift; sourceTree = "<group>"; };
 		841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabelOverflowedStackView.swift; sourceTree = "<group>"; };
 		841D58B420FCE14000A216D4 /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = deps/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
@@ -1010,7 +1012,6 @@
 		E3B3DD5820FDB8A600325184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreferenceWindowController.xib; sourceTree = "<group>"; };
 		E3B3DD5B20FDB8A900325184 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PreferenceWindowController.strings"; sourceTree = "<group>"; };
 		E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLWindowController.swift; sourceTree = "<group>"; };
-		E3BA79ED2131443A00529D99 /* OpenURLWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenURLWindowController.xib; sourceTree = "<group>"; };
 		E3C12F6A201F281F00297964 /* FirstRunManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunManager.swift; sourceTree = "<group>"; };
 		E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFilter.swift; sourceTree = "<group>"; };
 		E3DE8DCA1FD8166A0021921C /* iina-cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "iina-cli"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1262,7 +1263,7 @@
 				8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */,
 				8400D5DA1E1AB31B006785F5 /* AboutWindowController.xib */,
 				E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */,
-				E3BA79ED2131443A00529D99 /* OpenURLWindowController.xib */,
+				8418A2F7213F5791003166AC /* OpenURLWindowController.xib */,
 				84C6D3651EB2A427009BF721 /* HistoryWindowController.swift */,
 				84996F921EC11CE6009A8A39 /* HistoryWindowController.xib */,
 				846352571EEEE11A0043F0CC /* ThumbnailPeekView.swift */,
@@ -1825,7 +1826,7 @@
 				8400D5D51E1AB317006785F5 /* FilterWindowController.xib in Resources */,
 				E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */,
 				84996F901EC11CE6009A8A39 /* HistoryWindowController.xib in Resources */,
-				E3BA79EF2131443A00529D99 /* OpenURLWindowController.xib in Resources */,
+				8418A2F5213F5791003166AC /* OpenURLWindowController.xib in Resources */,
 				8400D5DE1E1AB32A006785F5 /* PrefGeneralViewController.xib in Resources */,
 				8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */,
 			);
@@ -2478,6 +2479,15 @@
 				4CA6B42B201E85BA008F3FBA /* pt-BR */,
 			);
 			name = PrefNetworkViewController.xib;
+			sourceTree = "<group>";
+		};
+		8418A2F7213F5791003166AC /* OpenURLWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8418A2F6213F5791003166AC /* Base */,
+				8418A2F8213F5794003166AC /* zh-Hans */,
+			);
+			name = OpenURLWindowController.xib;
 			sourceTree = "<group>";
 		};
 		845AC09E1E1AE6C10080B614 /* Localizable.strings */ = {

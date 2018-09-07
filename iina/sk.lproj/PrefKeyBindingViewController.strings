@@ -9,11 +9,17 @@
 /* Class = "NSTableColumn"; headerCell.title = "Action"; ObjectID = "4Bn-MF-dfY"; */
 "4Bn-MF-dfY.headerCell.title" = "Akcia";
 
+/* Class = "NSButtonCell"; title = "Import an existing config file"; ObjectID = "6cO-C0-33g"; */
+"6cO-C0-33g.title" = "Importovať existujúci configuračný súbor";
+
 /* Class = "NSTableColumn"; headerCell.title = "Key"; ObjectID = "JwC-60-7Hp"; */
 "JwC-60-7Hp.headerCell.title" = "Názov";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Le4-ai-PiB"; */
 "Le4-ai-PiB.title" = "Box";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "M4N-eg-JA8"; */
+"M4N-eg-JA8.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "OP1-cS-Hkt"; */
 "OP1-cS-Hkt.title" = "Text Cell";
@@ -35,6 +41,9 @@
 
 /* Class = "NSButtonCell"; title = "Duplicate…"; ObjectID = "gpZ-Rh-DMn"; */
 "gpZ-Rh-DMn.title" = "Duplikovať...";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Show the raw mpv key code and command."; ObjectID = "l2M-TH-eCt"; */
+"l2M-TH-eCt.ibShadowedToolTip" = "Zobraz mpv kód a príkaz.";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "mLe-eI-lIk"; */
 "mLe-eI-lIk.title" = "Box";

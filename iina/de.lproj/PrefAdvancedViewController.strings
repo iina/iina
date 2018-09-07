@@ -30,6 +30,9 @@
 /* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
 "MRT-u8-xTX.title" = "Ordner wählen …";
 
+/* Class = "NSTextFieldCell"; title = "Settings"; ObjectID = "Qmc-Tb-d7d"; */
+"Qmc-Tb-d7d.title" = "Einstellungen";
+
 /* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "SX9-fy-bss"; */
 "SX9-fy-bss.headerCell.title" = "Wert";
 
@@ -40,5 +43,5 @@
 "gWN-ya-xRD.placeholderString" = "~/.config/mpv/";
 
 /* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
-"phK-g9-Vbg.title" = "mpvs OSD benutzen";
+"phK-g9-Vbg.title" = "mpv-OSD benutzen";
 

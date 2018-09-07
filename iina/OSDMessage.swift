@@ -253,6 +253,7 @@ enum OSDMessage {
     case .startFindingSub(let source):
       return (
         NSLocalizedString("osd.find_online_sub", comment: "Finding online subtitles..."),
+//        .withText(NSLocalizedString("osd.find_online_sub.source", comment: "from") + " " + source)
         .withText("from " + source)
       )
 

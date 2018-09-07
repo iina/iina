@@ -207,44 +207,20 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       if let rowData = pasteboard.data(forType: .iinaPlaylistItem) {
         let indexSet = NSKeyedUnarchiver.unarchiveObject(with: rowData) as! IndexSet
 
-        let playlistCount = player.info.playlist.count
-        var order: [Int] = Array(0..<playlistCount)
-        var droppedRow = row
-        let reversedIndexSet = indexSet.reversed()
+        var oldIndexOffset = 0
+        var newIndexOffset = 0
 
-        for selectedRow in reversedIndexSet {
-          if selectedRow < row {
-            droppedRow -= 1
+        // Drag & Drop list items (multiline), https://goo.gl/cRUvuH
+        for oldIndex in indexSet {
+          if oldIndex < row {
+            player.playlistMove(oldIndex + oldIndexOffset, to: row)
+            oldIndexOffset -= 1
+          } else {
+            player.playlistMove(oldIndex, to: row + newIndexOffset)
+            newIndexOffset += 1
           }
-          order.remove(at: selectedRow)
+          Logger.log("Playlist Drag & Drop from \(oldIndex) to \(row)")
         }
-
-        for selectedRow in reversedIndexSet {
-          order.insert(selectedRow, at: droppedRow)
-        }
-
-        let fileList = player.info.playlist.map { $0.filename }
-        var current: Int?
-        for i in 0..<playlistCount {
-          if player.info.playlist[i].isCurrent {
-            current = i
-            continue
-          }
-        }
-        player.clearPlaylist()
-
-        var before: [String] = []
-        var after: [String] = []
-        var foundCurrent = false
-        for position in order {
-          if position == current! {
-            foundCurrent = true
-            continue
-          }
-          foundCurrent ? after.append(fileList[position]) : before.append(fileList[position])
-        }
-        player.addToPlaylist(paths: after, at: 1)
-        player.addToPlaylist(paths: before, at: 0)
       }
     } else if let paths = pasteboard.propertyList(forType: .nsFilenames) as? [String] {
       let playableFiles = Utility.resolveURLs(player.getPlayableFiles(in: paths.map{ URL(fileURLWithPath: $0) }))

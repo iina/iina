@@ -2114,7 +2114,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if player.info.isNetworkResource {
       bufferIndicatorView.isHidden = false
       bufferSpin.startAnimation(nil)
-      bufferProgressLabel.stringValue = "Opening stream..."
+//      bufferProgressLabel.stringValue = NSLocalizedString("main.opening_stream", comment:"Opening stream…")
+      bufferProgressLabel.stringValue = "Opening stream…"
       bufferDetailLabel.stringValue = ""
     } else {
       bufferIndicatorView.isHidden = true
@@ -2256,7 +2257,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
       }
       // guard min size
-      videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize)
+      // must be slightly larger than the min size, or it will crash when the min size is auto saved as window frame size.
+      videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize.add(1))
       // check if have geometry set
       if let wfg = windowFrameFromGeometry(newSize: videoSize) {
         rect = wfg

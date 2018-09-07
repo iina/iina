@@ -22,6 +22,7 @@
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering... %d%%";
+"main.opening_stream" = "Opening stream…";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Default";
@@ -60,6 +61,7 @@
 "osd.video_eq.saturation" = "Saturation: %i";
 "osd.video_eq.brightness" = "Brightness: %i";
 "osd.find_online_sub" = "Finding online subtitles...";
+"osd.find_online_sub.source" = "from";
 "osd.sub_not_found" = "No subtitles found";
 "osd.sub_found" = "%d subtitle(s) found. Downloading...";
 "osd.sub_downloaded" = "Subtitle downloaded";

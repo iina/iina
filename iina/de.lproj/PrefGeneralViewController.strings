@@ -12,12 +12,6 @@
 /* Class = "NSMenuItem"; title = "PNG"; ObjectID = "3XO-ks-TDg"; */
 "3XO-ks-TDg.title" = "PNG";
 
-/* Class = "NSMenuItem"; title = "Ultra Dark"; ObjectID = "3XV-iO-y0C"; */
-"3XV-iO-y0C.title" = "Sehr dunkel";
-
-/* Class = "NSMenuItem"; title = "Light"; ObjectID = "49l-le-9k6"; */
-"49l-le-9k6.title" = "Hell";
-
 /* Class = "NSButtonCell"; title = "Enable "Open Recent" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "„Benutzte Dokumente“-Menü aktivieren";
 
@@ -60,6 +54,9 @@
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Im Vollbildmodus andere Monitore abdunkeln";
 
+/* Class = "NSButtonCell"; title = "Switch to "music mode" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
+"KfL-r7-Uav.title" = "Beim Abspielen von Musik automatisch in den Musikmodus wechseln";
+
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Nächste Datei automatisch abspielen";
 
@@ -73,7 +70,7 @@
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
 
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
-"QJq-fO-hhK.title" = "Dateien im gleichen Ordner automatisch hinzufügen";
+"QJq-fO-hhK.title" = "Dateien im selben Ordner automatisch hinzufügen";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "REP-70-XOi"; */
 "REP-70-XOi.title" = "Monatlich";
@@ -90,14 +87,11 @@
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
 "YeH-hk-7NN.title" = "/path/to/screenshot/folder";
 
-/* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "bPK-Wy-OMI"; */
-"bPK-Wy-OMI.title" = "Mittelhell";
-
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Ich will Beta-Updates erhalten. ";
 
 /* Class = "NSButtonCell"; title = "Pause when left full screen"; ObjectID = "g2A-Kf-vct"; */
-"g2A-Kf-vct.title" = "Pausieren wenn Vollbildmodus verlassen wurde";
+"g2A-Kf-vct.title" = "Pausieren, wenn Vollbildmodus verlassen wurde";
 
 /* Class = "NSTextFieldCell"; title = "When launched:"; ObjectID = "gqT-CB-Puw"; */
 "gqT-CB-Puw.title" = "Beim Start:";
@@ -115,7 +109,7 @@
 "jeK-46-2BG.title" = "Verlauf:";
 
 /* Class = "NSButtonCell"; title = "Play when entered full screen"; ObjectID = "lOw-pu-Llm"; */
-"lOw-pu-Llm.title" = "Wiedergabe wenn Vollbildmodus gestartet wurde";
+"lOw-pu-Llm.title" = "Wiedergabe, wenn Vollbildmodus gestartet wurde";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
 "lvA-Rc-Sh6.title" = "Untertitel einbinden";
@@ -125,9 +119,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
 "pdx-zt-kf2.title" = "Bildschirmfotos:";
-
-/* Class = "NSMenuItem"; title = "Dark"; ObjectID = "qeB-ls-rwg"; */
-"qeB-ls-rwg.title" = "Dunkel";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Stündlich";
@@ -139,7 +130,7 @@
 "uQR-Fx-oEm.title" = "Verhalten:";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
-"xr2-rB-O0x.title" = "Pause/Wiedergabe wenn:";
+"xr2-rB-O0x.title" = "Pause/Wiedergabe, wenn:";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Willkommensfenster anzeigen";

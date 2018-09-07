@@ -706,6 +706,7 @@
 		84BAFD3A21404572006B3CC1 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
 		84BAFD3B2142FE25006B3CC1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		84BAFD3C2142FE2E006B3CC1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
+		84BAFD3E2142FF0A006B3CC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MiniPlayerWindowController.strings"; sourceTree = "<group>"; };
 		84BC784C1EEECBE30068BF17 /* avcodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avcodec.h; sourceTree = "<group>"; };
 		84BC784D1EEECBE30068BF17 /* avdct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avdct.h; sourceTree = "<group>"; };
 		84BC784E1EEECBE30068BF17 /* avfft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avfft.h; sourceTree = "<group>"; };
@@ -2697,6 +2698,7 @@
 				8F49C36F213EFB7E0076C4F9 /* Base */,
 				8F49C372213EFB830076C4F9 /* de */,
 				84BAFD3B2142FE25006B3CC1 /* ko */,
+				84BAFD3E2142FF0A006B3CC1 /* zh-Hans */,
 			);
 			name = MiniPlayerWindowController.xib;
 			sourceTree = "<group>";

@@ -213,3 +213,9 @@
 "touchbar.seek" = "Ricerca";
 "touchbar.time" = "Tempo";
 "track.none" = "<Nessuno>";
+
+/* FIXME: Using English localization instead */
+"osd.find_online_sub.source" = "from";
+
+/* FIXME: Using English localization instead */
+"main.opening_stream" = "Opening stream…";

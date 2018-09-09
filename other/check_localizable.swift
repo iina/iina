@@ -69,7 +69,7 @@ let stringFileURLs = lProjURLs.map { $0.appendingPathComponent("Localizable.stri
 // make sure all files exist
 stringFileURLs.forEach { url in
   guard fm.fileExists(atPath: url.path) else {
-    error("Localizable.strings doesn't exist.")
+    error("Localizable.strings doesn't exist: \(url.path)")
   }
 }
 

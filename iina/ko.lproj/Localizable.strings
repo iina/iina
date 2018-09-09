@@ -640,3 +640,9 @@
 /* <None> */
 "track.none" = "<없음>";
 
+
+/* FIXME: Using English localization instead */
+"osd.find_online_sub.source" = "from";
+
+/* FIXME: Using English localization instead */
+"main.opening_stream" = "Opening stream…";

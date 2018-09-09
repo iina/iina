@@ -214,3 +214,15 @@
 "touchbar.seek" = "Buscar";
 "touchbar.time" = "Posición en el tiempo";
 "track.none" = "<Ninguno>";
+
+/* FIXME: Using English localization instead */
+"osd.find_online_sub.source" = "from";
+
+/* FIXME: Using English localization instead */
+"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+
+/* FIXME: Using English localization instead */
+"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
+
+/* FIXME: Using English localization instead */
+"main.opening_stream" = "Opening stream…";

@@ -16,13 +16,10 @@
 "alert.beta_channel.title" = "接受 beta 版本的更新";
 "alert.choose_media_file.title" = "選擇媒體檔案";
 "alert.clear_cache.message" = "確定清除所有縮圖快取?";
-"alert.clear_cache.success" = "快取已清除。";
 "alert.clear_cache.title" = "清除縮圖快取";
 "alert.clear_history.message" = "確定刪除所有播放記錄嗎？";
-"alert.clear_history.success" = "播放記錄已刪除。";
 "alert.clear_history.title" = "清除播放歷史";
 "alert.clear_watch_later.message" = "確定清除所有儲存的播放進度，即「watch later」資料嗎？";
-"alert.clear_watch_later.success" = "已刪除所有儲存的播放進度。";
 "alert.clear_watch_later.title" = "清除儲存的播放進度";
 "alert.config.cannot_create" = "無法建立設定檔";
 "alert.config.cannot_write" = "無法寫入設定檔";
@@ -94,6 +91,7 @@
 "keymapping.message" = "現在按下按鍵即可設定";
 "keymapping.title" = "快速鍵";
 "main.buffering_indicator" = "緩衝中… %d%%";
+"main.opening_stream" = "正在開啟流……";
 "menu.audio_delay" = "音訊延遲: %.2f秒";
 "menu.audio_delay_down" = "音訊延遲 - %.1fs";
 "menu.audio_delay_up" = "音訊延遲 + %.1fs";
@@ -138,6 +136,7 @@
 "osd.filter_added" = "已新增濾鏡: %@";
 "osd.filter_removed" = "已刪除濾鏡";
 "osd.find_online_sub" = "正在搜尋在線字幕…";
+"osd.find_online_sub.source" = "从";
 "osd.mute" = "靜音";
 "osd.network_error" = "網路錯誤";
 "osd.pause" = "暫停";
@@ -183,6 +182,8 @@
 "preference.advanced" = "進階";
 "preference.control" = "控制";
 "preference.general" = "一般";
+"preference.key_binding_hint_1" = "若要編輯此設定檔案，請先點選「複製…」按鈕來建立一個副本。";
+"preference.key_binding_hint_2" = "雙擊右邊的任意一行來編輯相應的快速鍵。";
 "preference.keybindings" = "快速鍵";
 "preference.logged_in_as" = "以 %@ 登入";
 "preference.network" = "網路";

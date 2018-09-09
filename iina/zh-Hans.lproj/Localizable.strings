@@ -91,6 +91,7 @@
 "keymapping.message" = "请按任意键来开始录制。";
 "keymapping.title" = "快捷键";
 "main.buffering_indicator" = "缓冲中... %d%%";
+"main.opening_stream" = "正在打开流……";
 "menu.audio_delay" = "音频延迟: %.2f秒";
 "menu.audio_delay_down" = "音频延迟 - %.1fs";
 "menu.audio_delay_up" = "音频延迟 + %.1fs";
@@ -135,6 +136,7 @@
 "osd.filter_added" = "已添加滤镜: %@";
 "osd.filter_removed" = "已删除滤镜";
 "osd.find_online_sub" = "查找在线字幕中...";
+"osd.find_online_sub.source" = "从";
 "osd.mute" = "静音";
 "osd.network_error" = "网络错误";
 "osd.pause" = "暂停";

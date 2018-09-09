@@ -4,7 +4,7 @@
 "0Cz-OE-85L.title" = "Délai des sous-titres +0.1s";
 
 /* Class = "NSMenuItem"; title = "Show Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
-"0T7-Nu-SL7.title" = "Panneau des playlists";
+"0T7-Nu-SL7.title" = "Afficher la playlist";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "Ouvrir une adresse…";
@@ -79,7 +79,7 @@
 "8y7-Cy-lKT.title" = "Afficher les réglages rapides";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
-"91n-xW-L37.title" = "Accélérer jusqu'à 1.1x";
+"91n-xW-L37.title" = "Accélérer de 1.1x";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.1s"; ObjectID = "9ee-7i-xs7"; */
 "9ee-7i-xs7.title" = "Délai audio -0.1s";
@@ -124,7 +124,7 @@
 "DRb-Y8-xir.title" = "Piste audio";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
-"DUP-nm-BJt.title" = "Ralentir jusqu'à 0.9x";
+"DUP-nm-BJt.title" = "Ralentir de 0.9x";
 
 /* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
 "DVo-aG-piG.title" = "Fermer";
@@ -415,7 +415,7 @@
 "n90-to-nRT.title" = "Pivoter";
 
 /* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
-"npH-8B-XA4.title" = "Enlever le fichier actuel de la playlist";
+"npH-8B-XA4.title" = "Enlever le fichier en cours de la playlist";
 
 /* Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ"; */
 "oas-Oc-fiZ.title" = "Ouvrir l'élément récent";

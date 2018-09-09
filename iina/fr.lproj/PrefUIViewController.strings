@@ -87,17 +87,11 @@
 /* Class = "NSMenuItem"; title = "right"; ObjectID = "NYG-e9-DV0"; */
 "NYG-e9-DV0.title" = "droit";
 
-/* Class = "NSButtonCell"; title = "Clear Cache…"; ObjectID = "OAh-HP-wST"; */
-"OAh-HP-wST.title" = "Vider le cache…";
-
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "ObY-7B-NTO"; */
 "ObY-7B-NTO.title" = "s";
 
 /* Class = "NSButtonCell"; title = "Initial window position:"; ObjectID = "Ofm-qE-RgQ"; */
 "Ofm-qE-RgQ.title" = "Position initiale de la fenêtre :";
-
-/* Class = "NSTextFieldCell"; title = "Thumbnail cache:"; ObjectID = "R1l-SN-bG5"; */
-"R1l-SN-bG5.title" = "Cache des miniatures :";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "S8H-Xr-uVa"; */
 "S8H-Xr-uVa.title" = "s";
@@ -141,9 +135,6 @@
 /* Class = "NSBox"; title = "Box"; ObjectID = "bYj-5g-zYO"; */
 "bYj-5g-zYO.title" = "Box";
 
-/* Class = "NSTextFieldCell"; title = "Calculating…"; ObjectID = "d60-w5-xXY"; */
-"d60-w5-xXY.title" = "Calcul…";
-
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2x la taille de la vidéo";
 
@@ -183,6 +174,9 @@
 /* Class = "NSMenuItem"; title = "top"; ObjectID = "oYc-L7-qQd"; */
 "oYc-L7-qQd.title" = "haut";
 
+/* Class = "NSBox"; title = "Box"; ObjectID = "omS-tS-OVJ"; */
+"omS-tS-OVJ.title" = "Box";
+
 /* Class = "NSTextFieldCell"; title = "1280"; ObjectID = "pNX-QN-Rpm"; */
 "pNX-QN-Rpm.title" = "1280";
 
@@ -191,6 +185,9 @@
 
 /* Class = "NSTextFieldCell"; title = "to the"; ObjectID = "qbc-CY-bdK"; */
 "qbc-CY-bdK.title" = "du bord";
+
+/* Class = "NSMenuItem"; title = "Match System Appearance"; ObjectID = "qn6-Bp-Mqp"; */
+"qn6-Bp-Mqp.title" = "S'adapter au système";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "s2E-9N-K86"; */
 "s2E-9N-K86.title" = "points";
@@ -225,3 +222,11 @@
 /* Class = "NSButtonCell"; title = "Initial window size:"; ObjectID = "zOq-Em-wUe"; */
 "zOq-Em-wUe.title" = "Taille initiale de la fenêtre :";
 
+/* Class = "NSTextFieldCell"; title = "Calculating…"; ObjectID = "d60-w5-xXY"; */
+"d60-w5-xXY.title" = "Calcul…";
+
+/* Class = "NSTextFieldCell"; title = "Thumbnail cache:"; ObjectID = "R1l-SN-bG5"; */
+"R1l-SN-bG5.title" = "Cache des miniatures :";
+
+/* Class = "NSButtonCell"; title = "Clear Cache…"; ObjectID = "OAh-HP-wST"; */
+"OAh-HP-wST.title" = "Vider le cache…";

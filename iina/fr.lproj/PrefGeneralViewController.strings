@@ -19,7 +19,7 @@
 "5RN-PV-pOZ.title" = "Box";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
-"5Y9-bX-K0f.title" = "La fenêtre est minimisée/agrandie";
+"5Y9-bX-K0f.title" = "La fenêtre est réduite/agrandie";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
 "6TV-DG-503.title" = "Playlist :";
@@ -37,7 +37,7 @@
 "Ez8-qY-WAZ.title" = "jours";
 
 /* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
-"FbF-jJ-W5b.title" = "Pause";
+"FbF-jJ-W5b.title" = "Mettre en pause";
 
 /* Class = "NSTextFieldCell"; title = "When media opened:"; ObjectID = "GNV-VA-NBW"; */
 "GNV-VA-NBW.title" = "Quand un fichier est ouvert :";
@@ -91,7 +91,7 @@
 "f0j-Dn-cxt.title" = "Recevoir les mises à jour beta";
 
 /* Class = "NSButtonCell"; title = "Pause when left full screen"; ObjectID = "g2A-Kf-vct"; */
-"g2A-Kf-vct.title" = "Pause quand le mode plein écran est désactivé";
+"g2A-Kf-vct.title" = "Mettre en pause quand le mode plein écran est désactivé";
 
 /* Class = "NSTextFieldCell"; title = "When launched:"; ObjectID = "gqT-CB-Puw"; */
 "gqT-CB-Puw.title" = "Au démarrage :";
@@ -109,7 +109,7 @@
 "jeK-46-2BG.title" = "Historique :";
 
 /* Class = "NSButtonCell"; title = "Play when entered full screen"; ObjectID = "lOw-pu-Llm"; */
-"lOw-pu-Llm.title" = "Lancer la lecture en passage en mode plein écran";
+"lOw-pu-Llm.title" = "Lancer la lecture quand le mode plein écran est activé";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
 "lvA-Rc-Sh6.title" = "Inclure les sous-titres";

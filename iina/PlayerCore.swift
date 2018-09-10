@@ -313,7 +313,7 @@ class PlayerCore: NSObject {
   // unload main window video view
   func uninitVideo() {
     guard mainWindow.isWindowLoaded else { return }
-    mainWindow.videoView.stopDisplaylink()
+    mainWindow.videoView.stopDisplayLink()
     mainWindow.videoView.uninit()
   }
 

@@ -180,7 +180,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     var isFullscreen: Bool {
       switch self {
       case .fullscreen: return true
-      case .windowed, .animating: return false
+      case let .animating(toFullscreen: toFullScreen, legacy: _, priorWindowedFrame: _): return toFullScreen
+      default: return false
       }
     }
 

@@ -1026,10 +1026,10 @@ class PlayerCore: NSObject {
     if mainWindow.isVideoLoaded {
       generateThumbnails()
     }
+    // call `trackListChanged` to load tracks and check whether need to switch to music mode
+    trackListChanged()
     // main thread stuff
     DispatchQueue.main.sync {
-      getTrackInfo()
-      getSelectedTracks()
       getPlaylist()
       getChapters()
       clearAbLoop()

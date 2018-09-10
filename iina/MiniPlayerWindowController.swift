@@ -128,7 +128,14 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     window.titlebarAppearsTransparent = true
     window.titleVisibility = .hidden
     ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).forEach {
-      window.standardWindowButton($0)?.removeFromSuperview()
+      let button = window.standardWindowButton($0)
+      button?.isHidden = true
+      // The close button, being obscured by standard buttons, won't respond to clicking when window is inactive.
+      // i.e. clicking close button (or any position located in the standard buttons's frame) will only order the window
+      // to front, but it never becomes key or main window.
+      // Removing the button directly will also work but it causes crash on 10.12-, so for the sake of safety we don't use that way for now.
+      // FIXME: Not a perfect solution. It should respond to the first click.
+      button?.frame.size = .zero
     }
 
     setToInitialWindowSize(display: false, animate: false)

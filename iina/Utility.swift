@@ -420,6 +420,20 @@ class Utility {
     }
   }
 
+  // Do not use this function for macOS 10.14+
+  static func getAppearanceAndMaterial(from theme: Preference.Theme) -> (NSAppearance?, NSVisualEffectView.Material) {
+    switch theme {
+    case .ultraDark:
+      return (NSAppearance(named: .vibrantDark), .ultraDark)
+    case .light:
+      return (NSAppearance(named: .vibrantLight), .light)
+    case .mediumLight:
+      return (NSAppearance(named: .vibrantLight), .mediumLight)
+    default:
+      return (NSAppearance(named: .vibrantDark), .dark)
+    }
+  }
+
   // MARK: - Util classes
 
   class FontAttributes {

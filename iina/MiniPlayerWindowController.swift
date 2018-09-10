@@ -34,7 +34,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   private let observedPrefKeys: [Preference.Key] = [
     .showRemainingTime,
     .alwaysFloatOnTop,
-    .maxVolume
+    .maxVolume,
+    .themeMaterial
   ]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -60,6 +61,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
         if player.mpv.getDouble(MPVOption.Audio.volume) > Double(newValue) {
           player.mpv.setDouble(MPVOption.Audio.volume, Double(newValue))
         }
+      }
+
+    case PK.themeMaterial.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        setMaterial(Preference.Theme(rawValue: newValue))
       }
 
     default:
@@ -141,6 +147,9 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     setToInitialWindowSize(display: false, animate: false)
     
     controlViewTopConstraint.isActive = false
+
+    // set material
+    setMaterial(Preference.enum(for: .themeMaterial))
 
     // tracking area
     let trackingView = NSView()
@@ -299,6 +308,23 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   func windowDidBecomeMain(_ notification: Notification) {
     titleLabel.scroll()
     artistAlbumLabel.scroll()
+  }
+
+  private func setMaterial(_ theme: Preference.Theme?) {
+    guard let window = window, let theme = theme else { return }
+
+    if #available(macOS 10.14, *) {
+      window.appearance = NSAppearance(iinaTheme: theme)
+    } else {
+      let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)
+
+      [backgroundView, closeButtonBackgroundViewVE, playlistWrapperView].forEach {
+        $0?.appearance = appearance
+        $0?.material = material
+      }
+
+      window.appearance = appearance
+    }
   }
 
   // MARK: - NSPopoverDelegate

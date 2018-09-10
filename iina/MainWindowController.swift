@@ -2074,24 +2074,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if #available(macOS 10.14, *) {
       window.appearance = NSAppearance(iinaTheme: theme)
     } else {
-      var appearance: NSAppearance?
-      var material: NSVisualEffectView.Material
-
-      switch theme {
-      case .ultraDark:
-        appearance = NSAppearance(named: .vibrantDark)
-        material = .ultraDark
-      case .light:
-        appearance = NSAppearance(named: .vibrantLight)
-        material = .light
-      case .mediumLight:
-        appearance = NSAppearance(named: .vibrantLight)
-        material = .mediumLight
-      default:
-        appearance = NSAppearance(named: .vibrantDark)
-        material = .dark
-      }
-
+      let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)
       let isDarkTheme = appearance?.isDark ?? true
       (playSlider.cell as? PlaySliderCell)?.isInDarkTheme = isDarkTheme
 

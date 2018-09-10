@@ -240,6 +240,7 @@
 		E3719D68284310AA004E6633 /* libzimg.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3719D5F284310A1004E6633 /* libzimg.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E3719D69284310AA004E6633 /* libzmq.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3719D60284310A1004E6633 /* libzmq.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E3719D6A284310AA004E6633 /* libzstd.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3719D5D284310A1004E6633 /* libzstd.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E35306EF2147A8CE008FE492 /* JavascriptPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306EE2147A8CE008FE492 /* JavascriptPlugin.swift */; };
 		E374160C20F138A900B4F7F9 /* CollapseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160B20F138A900B4F7F9 /* CollapseView.swift */; };
 		E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */; };
 		E374161120F3C0AB00B4F7F9 /* PrefUtilsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E374161320F3C0AB00B4F7F9 /* PrefUtilsViewController.xib */; };
@@ -249,6 +250,7 @@
 		E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */; };
 		E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C12F6A201F281F00297964 /* FirstRunManager.swift */; };
 		E3CB258F222799B800A62C47 /* MPVHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB258E222799B800A62C47 /* MPVHook.swift */; };
+		E3CAD4AF2146DB47000B373A /* JavascriptAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CAD4AE2146DB47000B373A /* JavascriptAPI.swift */; };
 		E3CB75BB1FD998F5004DB10A /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F21E26CA24008755BB /* Regex.swift */; };
 		E3CB75BD1FDACB82004DB10A /* SavedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */; };
 		E3DBD239218B057A00B3AFBF /* Translators.json in Resources */ = {isa = PBXBuildFile; fileRef = E3DBD238218B057A00B3AFBF /* Translators.json */; };
@@ -1356,6 +1358,7 @@
 		E3719D5E284310A1004E6633 /* libXdmcp.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libXdmcp.6.dylib; path = deps/lib/libXdmcp.6.dylib; sourceTree = "<group>"; };
 		E3719D5F284310A1004E6633 /* libzimg.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libzimg.2.dylib; path = deps/lib/libzimg.2.dylib; sourceTree = "<group>"; };
 		E3719D60284310A1004E6633 /* libzmq.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libzmq.5.dylib; path = deps/lib/libzmq.5.dylib; sourceTree = "<group>"; };
+		E35306EE2147A8CE008FE492 /* JavascriptPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPlugin.swift; sourceTree = "<group>"; };
 		E374160B20F138A900B4F7F9 /* CollapseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapseView.swift; sourceTree = "<group>"; };
 		E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefUtilsViewController.swift; sourceTree = "<group>"; };
 		E374161220F3C0AB00B4F7F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefUtilsViewController.xib; sourceTree = "<group>"; };
@@ -1368,6 +1371,7 @@
 		E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLWindowController.swift; sourceTree = "<group>"; };
 		E3C12F6A201F281F00297964 /* FirstRunManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunManager.swift; sourceTree = "<group>"; };
 		E3CB258E222799B800A62C47 /* MPVHook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVHook.swift; sourceTree = "<group>"; };
+		E3CAD4AE2146DB47000B373A /* JavascriptAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPI.swift; sourceTree = "<group>"; };
 		E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFilter.swift; sourceTree = "<group>"; };
 		E3DBD238218B057A00B3AFBF /* Translators.json */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = text.json; path = Translators.json; sourceTree = "<group>"; tabWidth = 4; };
 		E3DBD23A218B199700B3AFBF /* Translators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translators.swift; sourceTree = "<group>"; };
@@ -2087,6 +2091,7 @@
 		84EB1ED81D2F51D3004FA5A1 /* iina */ = {
 			isa = PBXGroup;
 			children = (
+				E3CAD4AD2146DB23000B373A /* Javascript */,
 				84FF846D1D2FF698001B318A /* deps */,
 				84A0BAA21D2FAE8200BC8DA1 /* Assets */,
 				84A0BAA71D2FAF9700BC8DA1 /* Controllers */,
@@ -2136,6 +2141,24 @@
 				84FF84701D2FF698001B318A /* client.h */,
 			);
 			path = mpv;
+			sourceTree = "<group>";
+		};
+		AF119E67C2E61E10DC27039C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */,
+				61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E3CAD4AD2146DB23000B373A /* Javascript */ = {
+			isa = PBXGroup;
+			children = (
+				E3CAD4AE2146DB47000B373A /* JavascriptAPI.swift */,
+				E35306EE2147A8CE008FE492 /* JavascriptPlugin.swift */,
+			);
+			name = Javascript;
 			sourceTree = "<group>";
 		};
 		E3DE8DCB1FD8166A0021921C /* iina-cli */ = {
@@ -2402,6 +2425,7 @@
 				84A886E41E24F37D008755BB /* ShooterSubtitle.swift in Sources */,
 				84A09A0E1F2DF596000FF343 /* MiniPlayerWindowController.swift in Sources */,
 				84BEEC421DFEE46200F945CA /* StreamReader.swift in Sources */,
+				E3CAD4AF2146DB47000B373A /* JavascriptAPI.swift in Sources */,
 				84C644601E92BA2700B1410B /* TimeLabelOverflowedView.swift in Sources */,
 				E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */,
 				84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */,
@@ -2440,6 +2464,7 @@
 				845E70B2210CB59D00D06C42 /* ScrollingTextField.swift in Sources */,
 				8488D6DF1E11791300D5B952 /* PrefCodecViewController.swift in Sources */,
 				8487BEC11D744FA800FD17B0 /* FlippedView.swift in Sources */,
+				E35306EF2147A8CE008FE492 /* JavascriptPlugin.swift in Sources */,
 				84795C371E0825AD0059A648 /* GifGenerator.swift in Sources */,
 				845ABEAC1D4D19C000BFB15B /* MPVTrack.swift in Sources */,
 				84AABE981DBFB62F00D138FD /* FixedFontManager.m in Sources */,

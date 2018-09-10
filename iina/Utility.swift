@@ -372,7 +372,13 @@ class Utility {
     createDirIfNotExist(url: url)
     return url
   }()
-  
+
+  static let pluginsURL: URL = {
+    let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.pluginsFolder, isDirectory: true)
+    createDirIfNotExist(url: url)
+    return url
+  }()
+
   static let cacheURL: URL = {
     let cachesPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
     Logger.ensure(cachesPath.count >= 1, "Cannot get path to Caches directory")
@@ -386,7 +392,7 @@ class Utility {
     createDirIfNotExist(url: appThumbnailCacheUrl)
     return appThumbnailCacheUrl
   }()
-  
+
   static let screenshotCacheURL: URL = {
     let url = cacheURL.appendingPathComponent(AppData.screenshotCacheFolder, isDirectory: true)
     createDirIfNotExist(url: url)

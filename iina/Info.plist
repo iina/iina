@@ -425,6 +425,24 @@
 			<key>NSPersistentStoreTypeKey</key>
 			<string>XML</string>
 		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>iinaplugin</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_plugin.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>IINA Plugin</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>io.iina.iinaplugin</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
@@ -502,6 +520,29 @@ Released under GPLv3.</string>
 	<string>dsa_pub.pem</string>
 	<key>SUPublicEDKey</key>
 	<string>UpwCRYfYOg0OGgQHY6RUdrV29yPcdkvxGlEfq46r6a0=</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.composite-content</string>
+				<string>com.apple.package</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>IINA Plugin</string>
+			<key>UTTypeIconFile</key>
+			<string>doc_plugin.icns</string>
+			<key>UTTypeIdentifier</key>
+			<string>io.iina.iinaplugin</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>iinaplugin</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>

@@ -65,6 +65,7 @@ class PlayerCore: NSObject {
     pc.label = "\(playerCoreCounter)"
     playerCores.append(pc)
     pc.startMPV()
+    pc.loadPlugins()
     playerCoreCounter += 1
     return pc
   }
@@ -110,6 +111,7 @@ class PlayerCore: NSObject {
   var miniPlayer: MiniPlayerWindowController!
 
   var mpv: MPVController!
+  var plugins: [JavascriptPluginInstance] = []
 
   lazy var ffmpegController: FFmpegController = {
     let controller = FFmpegController()
@@ -150,6 +152,12 @@ class PlayerCore: NSObject {
     if #available(macOS 10.12.2, *) {
       self._touchBarSupport = TouchBarSupport(playerCore: self)
     }
+  }
+
+  // MARK: - Plugins
+
+  private func loadPlugins() {
+    self.plugins = JavascriptPlugin.plugins.compactMap { JavascriptPluginInstance(player: self, plugin: $0) }
   }
 
   // MARK: - Control

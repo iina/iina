@@ -1367,7 +1367,7 @@
 		724F96A72136FA7F0007E4FE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				724F96AB2136FA800007E4FE /* iina-ql.qlgenerator */,
+				724F96AB2136FA800007E4FE /* IINA.qlgenerator */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2054,7 +2054,6 @@
 					};
 					84EB1ED51D2F51D3004FA5A1 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 67CQ77V27R;
 						LastSwiftMigration = 1000;
 					};
 					E3DE8DC91FD8166A0021921C = {
@@ -2109,10 +2108,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		724F96AB2136FA800007E4FE /* iina-ql.qlgenerator */ = {
+		724F96AB2136FA800007E4FE /* IINA.qlgenerator */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "iina-ql.qlgenerator";
+			path = IINA.qlgenerator;
 			remoteRef = 724F96AA2136FA800007E4FE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -3389,7 +3388,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 67CQ77V27R;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
@@ -3427,7 +3426,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 67CQ77V27R;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",

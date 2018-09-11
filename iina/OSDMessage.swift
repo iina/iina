@@ -72,6 +72,7 @@ enum OSDMessage {
   case networkError
   case canceled
 
+  case custom(String)
 
   func message() -> (String, OSDType) {
     switch self {
@@ -304,6 +305,9 @@ enum OSDMessage {
         NSLocalizedString("osd.canceled", comment: "Canceled"),
         .normal
       )
+
+    case .custom(let message):
+      return (message, .normal)
     }
   }
 }

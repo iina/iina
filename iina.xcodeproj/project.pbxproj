@@ -473,6 +473,10 @@
 		64F85F5C210FFBC300F8D8C0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
 		64F85F5D211003A900F8D8C0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		64F85F5F211003DF00F8D8C0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
+		67C6C21A2148062400AFDE5C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
+		67C6C21C2148063900AFDE5C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
+		67C6C21E2148064400AFDE5C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
+		67C6C2202148064E00AFDE5C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
 		6C9C253F205B8C070092D7B0 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		6C9C2541205B8D9C0092D7B0 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
 		6C9C2542205B93CF0092D7B0 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/FilterPresets.strings; sourceTree = "<group>"; };
@@ -2084,6 +2088,7 @@
 				64F85F5A210FFBAF00F8D8C0 /* es */,
 				B3FC6F31210FB48600E7F6AF /* it */,
 				8F49C361213EF4AF0076C4F9 /* de */,
+				67C6C2202148064E00AFDE5C /* ja */,
 			);
 			name = SubChooseViewController.xib;
 			sourceTree = "<group>";
@@ -2506,6 +2511,7 @@
 				8F49C36A213EF9C70076C4F9 /* de */,
 				84BAFD3C2142FE2E006B3CC1 /* ko */,
 				E5A0D2142145779D00750FF3 /* fr */,
+				67C6C21C2148063900AFDE5C /* ja */,
 			);
 			name = OpenURLWindowController.xib;
 			sourceTree = "<group>";
@@ -2765,6 +2771,7 @@
 				B35E0A072107C0E500453AA7 /* it */,
 				84AB8BCE2122235900E478BB /* sk */,
 				8F9D0029213B7A000068FC73 /* de */,
+				67C6C21A2148062400AFDE5C /* ja */,
 			);
 			name = PrefUtilsViewController.xib;
 			sourceTree = "<group>";
@@ -2781,6 +2788,7 @@
 				64F85F5F211003DF00F8D8C0 /* es */,
 				B3FC6F2F210FB42700E7F6AF /* it */,
 				8F49C363213EF5400076C4F9 /* de */,
+				67C6C21E2148064400AFDE5C /* ja */,
 			);
 			name = PreferenceWindowController.xib;
 			sourceTree = "<group>";

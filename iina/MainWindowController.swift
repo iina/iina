@@ -1182,7 +1182,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // enter/exit fullscreen
       if recognizer.state == .began {
         let isEnlarge = recognizer.magnification > 0
-        if !isEnlarge {
+        if isEnlarge != fsState.isFullscreen {
           recognizer.state = .recognized
           self.toggleWindowFullScreen()
         }

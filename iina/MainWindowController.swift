@@ -1407,6 +1407,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     additionalInfoView.isHidden = true
     isMouseInSlider = false
 
+    if let index = fadeableViews.index(of: additionalInfoView) {
+      fadeableViews.remove(at: index)
+    }
+
     fsState.startAnimatingToWindow()
 
     videoView.videoLayer.mpvGLQueue.suspend()
@@ -1452,10 +1456,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // restore ontop status
     if !player.info.isPaused {
       setWindowFloatingOnTop(isOntop)
-    }
-
-    if let index = fadeableViews.index(of: additionalInfoView) {
-      fadeableViews.remove(at: index)
     }
 
     resetCollectionBehavior()

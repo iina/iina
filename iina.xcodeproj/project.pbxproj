@@ -241,6 +241,10 @@
 		E3719D69284310AA004E6633 /* libzmq.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3719D60284310A1004E6633 /* libzmq.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E3719D6A284310AA004E6633 /* libzstd.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3719D5D284310A1004E6633 /* libzstd.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E35306EF2147A8CE008FE492 /* JavascriptPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306EE2147A8CE008FE492 /* JavascriptPlugin.swift */; };
+		E35306F42147F78D008FE492 /* JavascriptAPICore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F32147F78D008FE492 /* JavascriptAPICore.swift */; };
+		E35306F62147F7AF008FE492 /* JavascriptAPIMpv.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */; };
+		E35306FA214808AB008FE492 /* JavascriptAPIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F9214808AB008FE492 /* JavascriptAPIEvent.swift */; };
+		E35306FC214813B7008FE492 /* JavascriptPluginInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306FB214813B7008FE492 /* JavascriptPluginInstance.swift */; };
 		E374160C20F138A900B4F7F9 /* CollapseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160B20F138A900B4F7F9 /* CollapseView.swift */; };
 		E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */; };
 		E374161120F3C0AB00B4F7F9 /* PrefUtilsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E374161320F3C0AB00B4F7F9 /* PrefUtilsViewController.xib */; };
@@ -1359,6 +1363,10 @@
 		E3719D5F284310A1004E6633 /* libzimg.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libzimg.2.dylib; path = deps/lib/libzimg.2.dylib; sourceTree = "<group>"; };
 		E3719D60284310A1004E6633 /* libzmq.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libzmq.5.dylib; path = deps/lib/libzmq.5.dylib; sourceTree = "<group>"; };
 		E35306EE2147A8CE008FE492 /* JavascriptPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPlugin.swift; sourceTree = "<group>"; };
+		E35306F32147F78D008FE492 /* JavascriptAPICore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPICore.swift; sourceTree = "<group>"; };
+		E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIMpv.swift; sourceTree = "<group>"; };
+		E35306F9214808AB008FE492 /* JavascriptAPIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIEvent.swift; sourceTree = "<group>"; };
+		E35306FB214813B7008FE492 /* JavascriptPluginInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginInstance.swift; sourceTree = "<group>"; };
 		E374160B20F138A900B4F7F9 /* CollapseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapseView.swift; sourceTree = "<group>"; };
 		E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefUtilsViewController.swift; sourceTree = "<group>"; };
 		E374161220F3C0AB00B4F7F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefUtilsViewController.xib; sourceTree = "<group>"; };
@@ -2152,11 +2160,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E35306F22147F770008FE492 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				E35306F32147F78D008FE492 /* JavascriptAPICore.swift */,
+				E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */,
+				E35306F9214808AB008FE492 /* JavascriptAPIEvent.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		E3CAD4AD2146DB23000B373A /* Javascript */ = {
 			isa = PBXGroup;
 			children = (
+				E35306F22147F770008FE492 /* API */,
 				E3CAD4AE2146DB47000B373A /* JavascriptAPI.swift */,
 				E35306EE2147A8CE008FE492 /* JavascriptPlugin.swift */,
+				E35306FB214813B7008FE492 /* JavascriptPluginInstance.swift */,
 			);
 			name = Javascript;
 			sourceTree = "<group>";
@@ -2405,6 +2425,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E35306FA214808AB008FE492 /* JavascriptAPIEvent.swift in Sources */,
 				849581F11F02728700D3B359 /* InitialWindowController.swift in Sources */,
 				8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */,
 				84F5D4A21E4796F50060A838 /* KeyBindingTranslator.swift in Sources */,
@@ -2481,6 +2502,7 @@
 				8450403D1E0A9EE20079C194 /* InspectorWindowController.swift in Sources */,
 				84C6D3671EB2A427009BF721 /* HistoryWindowController.swift in Sources */,
 				9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */,
+				E35306F62147F7AF008FE492 /* JavascriptAPIMpv.swift in Sources */,
 				840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */,
 				E3513AF820EF79C500F8C347 /* PreferenceWindowController.swift in Sources */,
 				841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */,
@@ -2511,12 +2533,14 @@
 				E301EFDA21312AB300BC8588 /* KeychainAccess.swift in Sources */,
 				8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */,
 				845404AC1E43980900B02B12 /* LuaScript.swift in Sources */,
+				E35306F42147F78D008FE492 /* JavascriptAPICore.swift in Sources */,
 				847557141F405F8C0006B0FF /* MainWindowMenuActions.swift in Sources */,
 				841B14281E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift in Sources */,
 				E33BA5C7204BD9FE0069A0F6 /* SubChooseViewController.swift in Sources */,
 				8460FBA91D6497490081841B /* PlaylistViewController.swift in Sources */,
 				8450404A1E0B13230079C194 /* CropBoxView.swift in Sources */,
 				84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */,
+				E35306FC214813B7008FE492 /* JavascriptPluginInstance.swift in Sources */,
 				84A0BA971D2FA1CE00BC8DA1 /* PlayerCore.swift in Sources */,
 				84D377671D737F58007F7396 /* MPVChapter.swift in Sources */,
 				84A886E61E24F3BD008755BB /* OnlineSubtitle.swift in Sources */,

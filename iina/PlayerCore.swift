@@ -113,6 +113,9 @@ class PlayerCore: NSObject {
   var mpv: MPVController!
   var plugins: [JavascriptPluginInstance] = []
 
+  var pluginMPVEventListeners: [String: [JavascriptAPIEventCallback]] = [:]
+  var pluginMPVPropertyListeners: [String: [JavascriptAPIEventCallback]] = [:]
+
   lazy var ffmpegController: FFmpegController = {
     let controller = FFmpegController()
     controller.delegate = self
@@ -158,6 +161,24 @@ class PlayerCore: NSObject {
 
   private func loadPlugins() {
     self.plugins = JavascriptPlugin.plugins.compactMap { JavascriptPluginInstance(player: self, plugin: $0) }
+  }
+
+  func pluginAddMPVEventListener(for event: String, callback: JavascriptAPIEventCallback) {
+    if pluginMPVEventListeners[event] == nil {
+      pluginMPVEventListeners[event] = []
+    }
+    pluginMPVEventListeners[event]?.append(callback)
+  }
+
+  func pluginAddMPVPropertyListener(for property: String, callback: JavascriptAPIEventCallback) {
+    // observe properties that isn't observed yet
+    if mpv.observeProperties[property] == nil {
+      mpv.observe(property: property)
+    }
+    if pluginMPVPropertyListeners[property] == nil {
+      pluginMPVPropertyListeners[property] = []
+    }
+    pluginMPVPropertyListeners[property]?.append(callback)
   }
 
   // MARK: - Control

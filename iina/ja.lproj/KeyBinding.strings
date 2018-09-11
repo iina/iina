@@ -38,7 +38,8 @@
 "iina.audio-panel" = "オーディオ パネル";
 "iina.bigger-window" = "ウィンドウを拡大";
 "iina.chapter-panel" = "チャプタ パネル";
-"iina.delete-current-file" = "現在のファイルを削除";
+"iina.delete-current-file" = "現在のファイルをゴミ箱に移動";
+"iina.delete-current-file-hard" = "現在のファイルを直接削除";
 "iina.find-online-subs" = "オンラインで字幕を探す";
 "iina.fit-to-screen" = "画面に合わせる";
 "iina.flip" = "フリップ(垂直)";

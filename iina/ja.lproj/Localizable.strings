@@ -2,6 +2,8 @@
 
 "alert.add_filter.message" = "mpvの vf または af オプションの形式でフィルタ名を入力してください。";
 "alert.add_filter.title" = "フィルタの新規作成";
+"alert.add_url.message" = "URLを入力:";
+"alert.add_url.title" = "URLを追加";
 "alert.add_watch.message" = "有効なmpvのプロパティ名を入力してください。";
 "alert.add_watch.title" = "監視するmpvのプロパティを追加";
 "alert.assrt_register" = "APIリクエスト数が制限されているため、自身で発行したAPIトークンを使用することを推奨しております。元から設定されているトークンは試用であり、ネットワークエラーが発生する恐れがあります。";
@@ -14,8 +16,11 @@
 "alert.beta_channel.title" = "ベータ版のアップデート通知を受け取る";
 "alert.choose_media_file.title" = "メディアファイルを選択";
 "alert.clear_cache.message" = "すべてのサムネイルキャッシュを消去しますか?";
-"alert.clear_cache.success" = "キャッシュをクリアしました。";
 "alert.clear_cache.title" = "サムネイルキャッシュをクリア";
+"alert.clear_history.message" = "すべての再生履歴を消去しますか?";
+"alert.clear_history.title" = "再生履歴をクリア";
+"alert.clear_watch_later.message" = "すべての保存済み再生位置(\"あとで見る\"情報)を消去しますか?";
+"alert.clear_watch_later.title" = "保存済み再生位置をクリア";
 "alert.config.cannot_create" = "設定ファイルは作成できません!";
 "alert.config.cannot_write" = "設定ファイルには書き込めません!";
 "alert.config.duplicate.message" = "複製する設定ファイルの名前を入力してください。";
@@ -86,6 +91,7 @@
 "keymapping.message" = "保存するには何かキーを押してください。";
 "keymapping.title" = "キーマッピング";
 "main.buffering_indicator" = "バッファ中... %d%%";
+"main.opening_stream" = "ストリームを展開中...";
 "menu.audio_delay" = "オーディオディレイ: %.2fs";
 "menu.audio_delay_down" = "オーディオディレイ - %.1fs";
 "menu.audio_delay_up" = "オーディオディレイ + %.1fs";
@@ -130,6 +136,7 @@
 "osd.filter_added" = "追加したフィルタ: %@";
 "osd.filter_removed" = "削除したフィルタ";
 "osd.find_online_sub" = "オンラインで字幕を探しています...";
+"osd.find_online_sub.source" = "検索先:";
 "osd.mute" = "ミュート";
 "osd.network_error" = "ネットワークエラー";
 "osd.pause" = "一時停止";
@@ -154,16 +161,17 @@
 "osd.video_eq.hue" = "色調: %i";
 "osd.video_eq.saturation" = "彩度: %i";
 "osd.volume" = "音量: %i";
-"pl_menu.add_item" = "アイテムの追加…";
+"pl_menu.add_file" = "ファイルの追加...";
 "pl_menu.add_sub" = "字幕の追加…";
-"pl_menu.clear_playlist" = "プレイリストのクリア";
+"pl_menu.add_url" = "URLの追加...";
+"pl_menu.clear_playlist" = "プレイリストをクリア";
 "pl_menu.delete" = "ゴミ箱へ移動";
 "pl_menu.delete_after_play" = "再生した後にゴミ箱へ移動";
 "pl_menu.delete_after_play_multi" = "再生した後に選択したファイルをゴミ箱へ移動";
 "pl_menu.delete_multi" = "選択したファイルをゴミ箱へ移動";
 "pl_menu.matched_sub" = "該当する字幕 %d 件";
 "pl_menu.play_in_new_window" = "新しいウィンドウで再生";
-"pl_menu.play_next" = "次を再生";
+"pl_menu.play_next" = "次に再生";
 "pl_menu.remove" = "削除";
 "pl_menu.remove_multi" = "選択して削除";
 "pl_menu.reveal_in_finder" = "Finderで表示";
@@ -172,9 +180,10 @@
 "playlist.chapter_cap" = "チャプタ";
 "playlist.playlist_cap" = "プレイリスト";
 "preference.advanced" = "拡張";
-"preference.video_audio" = "コーデック";
 "preference.control" = "コントロール";
 "preference.general" = "一般";
+"preference.key_binding_hint_1" = "この設定を編集するには、先に\"複製...\"ボタンをクリックしてコピーを作成してください。";
+"preference.key_binding_hint_2" = "右側の行をダブルクリックすることで対応するキー割り当て設定を編集できます。";
 "preference.keybindings" = "キーの割り当て";
 "preference.logged_in_as" = "%@でログイン中";
 "preference.network" = "ネットワーク";
@@ -184,9 +193,13 @@
 "preference.system_media_control" = "システムのメディアコントロールを使用";
 "preference.title" = "環境設定";
 "preference.ui" = "UI";
+"preference.utilities" = "ユーティリティー";
+"preference.video_audio" = "コーデック";
 "quicksetting.item_default" = "デフォルト";
 "quicksetting.item_none" = "なし";
 "subencoding.auto" = "自動検出";
+"subtrack.no_external" = "外部の字幕が見つかりません";
+"subtrack.no_loaded" = "字幕が読み込まれていません";
 "touchbar.ahead_15" = "15秒 進める";
 "touchbar.ahead_30" = "30秒 進める";
 "touchbar.back_15" = "15秒 戻す";
@@ -202,54 +215,3 @@
 "touchbar.seek" = "シーク";
 "touchbar.time" = "再生位置";
 "track.none" = "<なし>";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.title" = "Add URL";
-
-/* FIXME: Using English localization instead */
-"alert.add_url.message" = "Please enter the URL:";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_file" = "Add File…";
-
-/* FIXME: Using English localization instead */
-"pl_menu.add_url" = "Add URL…";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_external" = "No External Subtitles Found";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_loaded" = "No Subtitles Loaded";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.success" = "All saved playback progress deleted.";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.title" = "Clear Playback History";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.success" = "Playback history deleted.";
-
-/* FIXME: Using English localization instead */
-"preference.utilities" = "Utilities";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.message" = "Are you sure to delete all playback history?";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
-
-/* FIXME: Using English localization instead */
-"osd.find_online_sub.source" = "from";
-
-/* FIXME: Using English localization instead */
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
-
-/* FIXME: Using English localization instead */
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-
-/* FIXME: Using English localization instead */
-"main.opening_stream" = "Opening stream…";

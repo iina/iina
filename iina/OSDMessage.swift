@@ -74,6 +74,8 @@ enum OSDMessage {
   case fileLoop(Bool)
   case playlistLoop(Bool)
 
+  case custom(String)
+
   func message() -> (String, OSDType) {
     switch self {
     case .fileStart(let filename):
@@ -319,6 +321,8 @@ enum OSDMessage {
                enabled ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
         .normal
       )
+    case .custom(let message):
+      return (message, .normal)
     }
   }
 }

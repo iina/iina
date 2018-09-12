@@ -11,7 +11,6 @@ import JavaScriptCore
 
 @objc protocol JavascriptAPICoreExportable: JSExport {
   func osd(_ message: String)
-  func log(_ message: JSValue, _ level: JSValue)
 }
 
 class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
@@ -20,11 +19,6 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
     permit(to: .showOSD) {
       self.player.sendOSD(.custom(message))
     }
-  }
-
-  @objc func log(_ message: JSValue, _ level: JSValue) {
-    let level = level.isNumber ? Int(level.toInt32()) : Logger.Level.warning.rawValue
-    log(message.toString(), level: Logger.Level(rawValue: level) ?? .warning)
   }
 
   @objc func getWindowFrame() -> JSValue {

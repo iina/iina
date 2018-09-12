@@ -11,6 +11,13 @@ import JavaScriptCore
 
 class JavascriptPlugin {
 
+  enum Permission: String {
+    case networkRequest = "network-request"
+    case callProcess = "call-process"
+    case showOSD = "show-osd"
+    case showAlert = "show-alert"
+  }
+
   static var plugins = loadPlugins()
 
   let name: String
@@ -23,6 +30,9 @@ class JavascriptPlugin {
   let root: URL
   let entryPath: String
   let scriptPaths: [String]
+
+  let permissions: Set<Permission>
+  let domainList: [String]
 
   var entryURL: URL {
     return root.appendingPathComponent(entryPath)
@@ -69,6 +79,18 @@ class JavascriptPlugin {
     self.authorEmail = author["email"]
     self.description = jsonDict["description"] as? String
     self.scriptPaths = (jsonDict["scripts"] as? [String]) ?? []
+    var permissions = Set<Permission>()
+    if let permList = jsonDict["permissions"] as? [String] {
+      permList.forEach {
+        if let p = Permission(rawValue: $0) {
+          permissions.insert(p)
+        } else {
+          Logger.log("Unknown permission: \($0)", level: .warning)
+        }
+      }
+    }
+    self.permissions = permissions
+    self.domainList = (jsonDict["domainList"] as? [String]) ?? []
   }
 
 }

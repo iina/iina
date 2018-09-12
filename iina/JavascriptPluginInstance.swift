@@ -29,6 +29,7 @@ class JavascriptPluginInstance {
       "mpv": JavascriptAPIMpv(context: ctx, pluginInstance: self),
       "event": JavascriptAPIEvent(context: ctx, pluginInstance: self),
       "http": JavascriptAPIHttp(context: ctx, pluginInstance: self),
+      "console": JavascriptAPIConsole(context: ctx, pluginInstance: self),
     ]
     ctx.setObject(JavascriptAPIRequire, forKeyedSubscript: "require" as NSString)
     ctx.setObject(iinaObject, forKeyedSubscript: "iina" as NSString)
@@ -38,7 +39,7 @@ class JavascriptPluginInstance {
   weak var player: PlayerCore!
   weak var plugin: JavascriptPlugin!
 
-  lazy var subsystem: Logger.Subsystem = .init(rawValue: "JS|\(plugin.name)")
+  lazy var subsystem: Logger.Subsystem = .init(rawValue: "JS:\(plugin.name)")
 
   private var currentFile: URL?
 

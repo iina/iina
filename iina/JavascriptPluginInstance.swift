@@ -27,7 +27,8 @@ class JavascriptPluginInstance {
     let iinaObject: [String: Any] = [
       "core": JavascriptAPICore(context: ctx, pluginInstance: self),
       "mpv": JavascriptAPIMpv(context: ctx, pluginInstance: self),
-      "event": JavascriptAPIEvent(context: ctx, pluginInstance: self)
+      "event": JavascriptAPIEvent(context: ctx, pluginInstance: self),
+      "http": JavascriptAPIHttp(context: ctx, pluginInstance: self),
     ]
     ctx.setObject(JavascriptAPIRequire, forKeyedSubscript: "require" as NSString)
     ctx.setObject(iinaObject, forKeyedSubscript: "iina" as NSString)

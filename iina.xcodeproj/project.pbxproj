@@ -236,6 +236,7 @@
 		E35306F62147F7AF008FE492 /* JavascriptAPIMpv.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */; };
 		E35306FA214808AB008FE492 /* JavascriptAPIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F9214808AB008FE492 /* JavascriptAPIEvent.swift */; };
 		E35306FC214813B7008FE492 /* JavascriptPluginInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306FB214813B7008FE492 /* JavascriptPluginInstance.swift */; };
+		E3530700214908DD008FE492 /* JavascriptAPIHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */; };
 		E374160C20F138A900B4F7F9 /* CollapseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160B20F138A900B4F7F9 /* CollapseView.swift */; };
 		E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */; };
 		E374161120F3C0AB00B4F7F9 /* PrefUtilsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E374161320F3C0AB00B4F7F9 /* PrefUtilsViewController.xib */; };
@@ -1347,6 +1348,7 @@
 		E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIMpv.swift; sourceTree = "<group>"; };
 		E35306F9214808AB008FE492 /* JavascriptAPIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIEvent.swift; sourceTree = "<group>"; };
 		E35306FB214813B7008FE492 /* JavascriptPluginInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginInstance.swift; sourceTree = "<group>"; };
+		E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIHttp.swift; sourceTree = "<group>"; };
 		E374160B20F138A900B4F7F9 /* CollapseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapseView.swift; sourceTree = "<group>"; };
 		E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefUtilsViewController.swift; sourceTree = "<group>"; };
 		E374161220F3C0AB00B4F7F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefUtilsViewController.xib; sourceTree = "<group>"; };
@@ -2242,9 +2244,11 @@
 		E35306F22147F770008FE492 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				E3CAD4AE2146DB47000B373A /* JavascriptAPI.swift */,
 				E35306F32147F78D008FE492 /* JavascriptAPICore.swift */,
 				E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */,
 				E35306F9214808AB008FE492 /* JavascriptAPIEvent.swift */,
+				E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -2253,7 +2257,6 @@
 			isa = PBXGroup;
 			children = (
 				E35306F22147F770008FE492 /* API */,
-				E3CAD4AE2146DB47000B373A /* JavascriptAPI.swift */,
 				E35306EE2147A8CE008FE492 /* JavascriptPlugin.swift */,
 				E35306FB214813B7008FE492 /* JavascriptPluginInstance.swift */,
 			);
@@ -2623,6 +2626,7 @@
 				84D377671D737F58007F7396 /* MPVChapter.swift in Sources */,
 				84A886E61E24F3BD008755BB /* OnlineSubtitle.swift in Sources */,
 				847C62CA1DC13CDA00E1EF16 /* PrefGeneralViewController.swift in Sources */,
+				E3530700214908DD008FE492 /* JavascriptAPIHttp.swift in Sources */,
 				84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */,
 				845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */,
 				E3513AFB20F120F600F8C347 /* PreferenceViewController.swift in Sources */,

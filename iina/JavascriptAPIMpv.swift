@@ -15,6 +15,7 @@ import JavaScriptCore
   func getString(_ property: String) -> String?
   func getNative(_ property: String) -> Any?
   func set(_ property: String, _ value: JSValue)
+  func command(_ commandName: String, _ args: [String])
 }
 
 class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
@@ -45,6 +46,10 @@ class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
     } else {
       throwError(withMessage: "mpv.set only supports numbers, strings and booleans.")
     }
+  }
+
+  @objc func command(_ commandName: String, _ args: [String]) {
+    player.mpv.command(MPVCommand(commandName), args: args)
   }
 }
 

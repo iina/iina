@@ -515,8 +515,20 @@ class PlayerCore: NSObject {
 
   func screenshot() {
     let option = Preference.bool(for: .screenshotIncludeSubtitle) ? "subtitles" : "video"
-    mpv.command(.screenshot, args: [option])
-    sendOSD(.screenshot)
+    var tookScreenshot = false
+    if Preference.bool(for: .screenshotSaveToFile) {
+      mpv.command(.screenshot, args: [option])
+      tookScreenshot = true
+    }
+    if Preference.bool(for: .screenshotCopyToClipboard) {
+      let screenshot = mpv.getScreenshot(option)
+      NSPasteboard.general.clearContents()
+      NSPasteboard.general.writeObjects([screenshot])
+      tookScreenshot = true
+    }
+    if tookScreenshot {
+      sendOSD(.screenshot)
+    }
   }
 
   func abLoop() {

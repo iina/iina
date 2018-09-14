@@ -36,7 +36,7 @@ class FileSize {
     formatter.maximumFractionDigits = digits
 
     for (_, v) in unitValues.enumerated() {
-      if bytes > v.rawValue {
+      if bytes >= v.rawValue {
         let num = NSNumber(value: Double(bytes) / Double(v.rawValue))
         let str = formatter.string(from: num)
         return str == nil ? "Error" : "\(str!)\(v.string)"

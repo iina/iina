@@ -170,6 +170,7 @@ class PreferenceWindowController: NSWindowController {
       ["control", "PrefControlViewController"],
       ["keybindings", "PrefKeyBindingViewController"],
       ["video_audio", "PrefCodecViewController"],
+      ["plugin", "PrefPluginViewController"],
       ["advanced", "PrefAdvancedViewController"],
       ["utilities", "PrefUtilsViewController"],
     ].map { (NSLocalizedString("preference.\($0[0])", comment: ""), self.getLabelDict(inNibNamed: $0[1])) })

@@ -16,6 +16,15 @@ class JavascriptPlugin {
     case callProcess = "call-process"
     case showOSD = "show-osd"
     case showAlert = "show-alert"
+
+    var isDangerous: Bool {
+      switch self {
+      case .networkRequest, .callProcess:
+        return true
+      default:
+        return false
+      }
+    }
   }
 
   static var plugins = loadPlugins()

@@ -70,6 +70,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       PrefControlViewController(),
       PrefKeyBindingViewController(),
       PrefAdvancedViewController(),
+      PrefPluginViewController(),
       PrefUtilsViewController(),
     ])
   }()

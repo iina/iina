@@ -55,11 +55,11 @@ class MPVNode {
       let array = node.u.ba!.pointee
       let data = array.data!
       let size = array.size
-      var byte_array: [UInt8] = []
+      var byteArray: [UInt8] = []
       for i in 0 ..< size {
-        byte_array.append(data.load(fromByteOffset: i, as: UInt8.self))
+        byteArray.append(data.load(fromByteOffset: i, as: UInt8.self))
       }
-      return byte_array
+      return byteArray
 
     case MPV_FORMAT_NONE:
       return nil

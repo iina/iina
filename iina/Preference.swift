@@ -83,6 +83,8 @@ struct Preference {
     /** Show chapter pos in progress bar (bool) */
     static let showChapterPos = Key("showChapterPos")
 
+    static let screenshotSaveToFile = Key("screenshotSaveToFile")
+    static let screenshotCopyToClipboard = Key("screenshotCopyToClipboard")
     static let screenshotFolder = Key("screenShotFolder")
     static let screenshotIncludeSubtitle = Key("screenShotIncludeSubtitle")
     static let screenshotFormat = Key("screenShotFormat")
@@ -760,6 +762,8 @@ struct Preference {
     .pinchAction: PinchAction.windowSize.rawValue,
     .forceTouchAction: MouseClickAction.none.rawValue,
 
+    .screenshotSaveToFile: true,
+    .screenshotCopyToClipboard: false,
     .screenshotFolder: "~/Pictures/Screenshots",
     .screenshotIncludeSubtitle: true,
     .screenshotFormat: ScreenshotFormat.png.rawValue,

@@ -32,27 +32,28 @@ class JavascriptAPIEvent: JavascriptAPI, JavascriptAPIEventExportable {
       return
     }
     let eventName = String(splitted[1])
-    if isMpv {
-      if isEventListener {
-        player.pluginAddMPVEventListener(for: eventName, callback: JavascriptAPIEventCallback(callback))
-      } else {
-        player.pluginAddMPVPropertyListener(for: eventName, callback: JavascriptAPIEventCallback(callback))
-      }
-    } else { // isIINA
-      // TODO
+    if isMpv && isPropertyChangedListener && player.mpv.observeProperties[eventName] == nil {
+      player.mpv.observe(property: eventName)
     }
+    player.events.addListener(JavascriptAPIEventCallback(callback), for: .init(event))
   }
 
 }
 
-class JavascriptAPIEventCallback {
+class JavascriptAPIEventCallback: EventCallable {
   private var callback: JSValue!  // should we use `weak` here?
 
   init(_ callback: JSValue) {
     self.callback = callback
   }
 
-  func call(_ args: Any...) {
-    callback.call(withArguments: args)
+  func call(withArguments args: [Any]) {
+    callback.call(withArguments: args.map { arg in
+      if let rect = arg as? CGRect {
+        return JSValue(rect: rect, in: callback.context)
+      } else {
+        return arg
+      }
+    })
   }
 }

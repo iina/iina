@@ -499,6 +499,7 @@ struct CommandLineStatus {
   var isStdin = false
   var openSeparateWindows = false
   var enterPIP = false
+  var danmaku = false
   var mpvArguments: [(String, String)] = []
   var iinaArguments: [(String, String)] = []
   var filenames: [String] = []
@@ -531,6 +532,9 @@ struct CommandLineStatus {
         }
         if name == "pip" {
           enterPIP = true
+        }
+        if name == "danmaku" {
+          danmaku = true
         }
       }
     }

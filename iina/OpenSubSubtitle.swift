@@ -11,6 +11,8 @@ import Just
 import PromiseKit
 import Gzip
 
+fileprivate let subsystem = Logger.Subsystem(rawValue: "opensub")
+
 final class OpenSubSubtitle: OnlineSubtitle {
 
   @objc var filename: String = ""
@@ -44,7 +46,7 @@ final class OpenSubSubtitle: OnlineSubtitle {
       }
       let subFilename = "[\(self.index)]\(self.filename)"
       if let url = unzipped.saveToFolder(Utility.tempDirURL, filename: subFilename) {
-        callback(.ok(url))
+        callback(.ok([url]))
       }
     }
   }
@@ -57,6 +59,7 @@ class OpenSubSupport {
   typealias Subtitle = OpenSubSubtitle
 
   enum OpenSubError: Error {
+    case noResult
     // login failed (reason)
     case loginFailed(String)
     // file error
@@ -92,6 +95,8 @@ class OpenSubSupport {
   private static let serviceName: NSString = "IINA OpenSubtitles Account"
   private let xmlRpc: JustXMLRPC
 
+  private let subChooseViewController = SubChooseViewController(source: .openSub)
+
   var language: String
   var username: String = ""
 
@@ -111,8 +116,25 @@ class OpenSubSupport {
     self.xmlRpc = JustXMLRPC(apiPath)
   }
 
+  private func findPath(_ path: [String], in data: Any) throws -> Any? {
+    var current: Any? = data
+    for arg in path {
+      guard let next = current as? [String: Any] else { throw OpenSubError.wrongResponseFormat }
+      current = next[arg]
+    }
+    return current
+  }
+
+  private func checkStatus(_ data: Any) -> Bool {
+    if let parsed = try? findPath(["status"], in: data) {
+      return (parsed as? String ?? "").hasPrefix("200")
+    } else {
+      return false
+    }
+  }
+
   func login(testUser username: String? = nil, password: String? = nil) -> Promise<Void> {
-    return Promise { fulfill, reject in
+    return Promise { resolver in
       var finalUser = ""
       var finalPw = ""
       if let testUser = username, let testPw = password {
@@ -122,15 +144,14 @@ class OpenSubSupport {
       } else {
         // check logged in
         if self.loggedIn {
-          fulfill(())
+          resolver.fulfill(())
           return
         }
         // read password
         if let udUsername = Preference.string(for: .openSubUsername), !udUsername.isEmpty {
-          let (readResult, readPassword, _) = OpenSubSupport.findPassword(username: udUsername)
-          if readResult == errSecSuccess {
+          if let (_, readPassword) = try? KeychainAccess.read(username: udUsername, forService: .openSubAccount) {
             finalUser = udUsername
-            finalPw = readPassword!
+            finalPw = readPassword
           }
         }
       }
@@ -140,36 +161,36 @@ class OpenSubSupport {
         case .ok(let response):
           // OK
           guard let parsed = (response as? [String: Any]) else {
-            reject(OpenSubError.wrongResponseFormat)
+            resolver.reject(OpenSubError.wrongResponseFormat)
             return
           }
           // check status
           let pStatus = parsed["status"] as! String
           if pStatus.hasPrefix("200") {
-            self.token = parsed["token"] as! String
-            Utility.log("OpenSub: logged in as user \(finalUser)")
+            self.token = parsed["token"] as? String
+            Logger.log("OpenSub: logged in as user \(finalUser)", subsystem: subsystem)
             self.startHeartbeat()
-            fulfill(())
+            resolver.fulfill(())
           } else {
-            Utility.log("OpenSub: login failed, \(pStatus)")
-            reject(OpenSubError.loginFailed(pStatus))
+            Logger.log("OpenSub: login failed, \(pStatus)", level: .error, subsystem: subsystem)
+            resolver.reject(OpenSubError.loginFailed(pStatus))
           }
-        case .failure(_):
+        case .failure:
           // Failure
-          reject(OpenSubError.loginFailed("Failure"))
+          resolver.reject(OpenSubError.loginFailed("Failure"))
         case .error(let error):
           // Error
-          reject(OpenSubError.xmlRpcError(error))
+          resolver.reject(OpenSubError.xmlRpcError(error))
         }
       }
     }
   }
 
   func hash(_ url: URL) -> Promise<FileInfo> {
-    return Promise { fulfill, reject in
+    return Promise { resolver in
       guard let file = try? FileHandle(forReadingFrom: url) else {
-        Utility.log("OpenSub: cannot get file handle")
-        reject(OpenSubError.cannotReadFile)
+        Logger.log("OpenSub: cannot get file handle", level: .error, subsystem: subsystem)
+        resolver.reject(OpenSubError.cannotReadFile)
         return
       }
 
@@ -177,8 +198,9 @@ class OpenSubSupport {
       let fileSize = file.offsetInFile
 
       if fileSize < 131072 {
-        Utility.log("File length less than 131072, skipped")
-        reject(OpenSubError.fileTooSmall)
+        Logger.log("File length less than 131072, skipped", level: .warning, subsystem: subsystem)
+        resolver.reject(OpenSubError.fileTooSmall)
+        return
       }
 
       let offsets: [UInt64] = [0, fileSize - UInt64(chunkSize)]
@@ -192,36 +214,56 @@ class OpenSubSupport {
 
       file.closeFile()
 
-      fulfill(FileInfo(hashValue: String(format: "%016qx", hash), fileSize: fileSize))
+      resolver.fulfill(FileInfo(hashValue: String(format: "%016qx", hash), fileSize: fileSize))
     }
   }
 
-  func request(_ info: FileInfo) -> Promise<[OpenSubSubtitle]> {
-    return Promise { fulfill, reject in
+  func requestByName(_ fileURL: URL) -> Promise<[OpenSubSubtitle]> {
+    return requestIMDB(fileURL).then { imdb -> Promise<[OpenSubSubtitle]> in
+      let info = ["imdbid": imdb]
+      return self.request(info)
+    }
+  }
+
+  func requestIMDB(_ fileURL: URL) -> Promise<String> {
+    return Promise { resolver in
+      let filename = fileURL.lastPathComponent
+      xmlRpc.call("GuessMovieFromString", [token, [filename]]) { status in
+        switch status {
+        case .ok(let response):
+          do {
+            guard self.checkStatus(response) else { throw OpenSubError.wrongResponseFormat }
+            let bestGuess = try self.findPath(["data", filename, "BestGuess"], in: response) as? [String: Any]
+            let IMDB = (bestGuess?["IDMovieIMDB"] as? String) ?? ""
+            resolver.fulfill(IMDB)
+          } catch let (error) {
+            resolver.reject(error)
+            return
+          }
+        case .failure:
+          resolver.reject(OpenSubError.searchFailed("Failure"))
+        case .error(let error):
+          resolver.reject(OpenSubError.xmlRpcError(error))
+        }
+      }
+    }
+  }
+
+  func request(_ info: [String: String]) -> Promise<[OpenSubSubtitle]> {
+    return Promise { resolver in
       let limit = 100
-      var requestInfo = info.dictionary
+      var requestInfo = info
       requestInfo["sublanguageid"] = self.language
       xmlRpc.call("SearchSubtitles", [token, [requestInfo], ["limit": limit]]) { status in
         switch status {
         case .ok(let response):
-          // OK
-          guard let parsed = (response as? [String: Any]) else {
-            reject(OpenSubError.wrongResponseFormat)
-            return
-          }
-          // check status
-          let pStatus = parsed["status"] as! String
-          guard pStatus.hasPrefix("200") else {
-            reject(OpenSubError.searchFailed(pStatus))
-            return
-          }
-          // get data
-          guard let pData = (parsed["data"] as? ResponseFilesData) else {
-            reject(OpenSubError.wrongResponseFormat)
+          guard self.checkStatus(response) else { resolver.reject(OpenSubError.wrongResponseFormat); return }
+          guard let pData = try? self.findPath(["data"], in: response) as? ResponseFilesData else {
+            resolver.reject(OpenSubError.wrongResponseFormat)
             return
           }
           var result: [OpenSubSubtitle] = []
-          for (index, subData) in pData.enumerated() {
+          for (index, subData) in pData!.enumerated() {
             let sub = OpenSubSubtitle(index: index,
                                       filename: subData["SubFileName"] as! String,
                                       langID: subData["SubLanguageID"] as! String,
@@ -234,92 +276,40 @@ class OpenSubSupport {
                                       zipDlLink: subData["ZipDownloadLink"] as! String)
             result.append(sub)
           }
-          fulfill(result)
-        case .failure(_):
+          if result.isEmpty {
+            resolver.reject(OpenSubError.noResult)
+          } else {
+            resolver.fulfill(result)
+          }
+        case .failure:
           // Failure
-          reject(OpenSubError.searchFailed("Failure"))
+          resolver.reject(OpenSubError.searchFailed("Failure"))
         case .error(let error):
           // Error
-          reject(OpenSubError.xmlRpcError(error))
+          resolver.reject(OpenSubError.xmlRpcError(error))
         }
       }
     }
   }
 
-  func showSubSelectWindow(subs: [OpenSubSubtitle]) -> Promise<[OpenSubSubtitle]> {
-    return Promise { fulfill, reject in
+  func showSubSelectWindow(with subs: [OpenSubSubtitle]) -> Promise<[OpenSubSubtitle]> {
+    return Promise { resolver in
       // return when found 0 or 1 sub
       if subs.count <= 1 {
-        fulfill(subs)
+        resolver.fulfill(subs)
         return
       }
-      let subSelectWindow = (NSApp.delegate as! AppDelegate).subSelectWindow
-      subSelectWindow.whenUserAction = { subs in
-        fulfill(subs)
-      }
-      subSelectWindow.whenUserClosed = {
-        reject(OpenSubError.userCanceled)
-      }
-      DispatchQueue.main.async {
-        subSelectWindow.showWindow(self)
-        subSelectWindow.arrayController.content = nil
-        subSelectWindow.arrayController.add(contentsOf: subs)
-      }
-    }
-  }
+      subChooseViewController.subtitles = subs
 
-  static func savePassword(username: String, passwd: String) -> OSStatus {
-    let service = OpenSubSupport.serviceName as NSString
-    let accountName = username as NSString
-    let pw = passwd as NSString
-    let pwData = pw.data(using: String.Encoding.utf8.rawValue)! as NSData
-
-    let status: OSStatus
-    // try read password
-    let (readResult, _, readItemRef) = findPassword(username: username)
-    if readResult == errSecSuccess {
-      // else, try modify the password
-      status = SecKeychainItemModifyContent(readItemRef!,
-                                            nil,
-                                            UInt32(pw.length),
-                                            pwData.bytes)
-    } else {
-      // if can't read, try add password
-      status = SecKeychainAddGenericPassword(nil,
-                                             UInt32(service.length),
-                                             service.utf8String,
-                                             UInt32(accountName.length),
-                                             accountName.utf8String,
-                                             UInt32(pw.length),
-                                             pwData.bytes,
-                                             nil)
+      subChooseViewController.userDoneAction = { subs in
+        resolver.fulfill(subs as! [OpenSubSubtitle])
+      }
+      subChooseViewController.userCanceledAction = {
+        resolver.reject(OpenSubError.userCanceled)
+      }
+      PlayerCore.active.sendOSD(.foundSub(subs.count), autoHide: false, accessoryView: subChooseViewController.view)
+      subChooseViewController.tableView.reloadData()
     }
-    return status
-  }
-
-  static func findPassword(username: String) -> (OSStatus, String?, SecKeychainItem?) {
-    let service = OpenSubSupport.serviceName as NSString
-    let accountName = username as NSString
-    var pwLength = UInt32()
-    var pwData: UnsafeMutableRawPointer? = nil
-    var itemRef: SecKeychainItem? = nil
-    let status = SecKeychainFindGenericPassword(nil,
-                                                UInt32(service.length),
-                                                service.utf8String,
-                                                UInt32(accountName.length),
-                                                accountName.utf8String,
-                                                &pwLength,
-                                                &pwData,
-                                                &itemRef)
-    var password: String? = ""
-    if status == errSecSuccess {
-      let data = Data(bytes: pwData!, count: Int(pwLength))
-      password = String(data: data, encoding: .utf8)
-    }
-    if pwData != nil {
-      SecKeychainItemFreeContent(nil, pwData)
-    }
-    return (status, password, itemRef)
   }
 
   private func startHeartbeat() {
@@ -332,23 +322,23 @@ class OpenSubSupport {
       case .ok(let value):
         // 406 No session
         if let pValue = value as? [String: Any], (pValue["status"] as? String ?? "").hasPrefix("406") {
-          Utility.log("OpenSub: heartbeat no session")
+          Logger.log("heartbeat: no session", level: .warning, subsystem: subsystem)
           self.token = nil
           self.login().catch { err in
             switch err {
             case OpenSubError.loginFailed(let reason):
-              Utility.log("OpenSub: (re-login) \(reason)")
+              Logger.log("(re-login) \(reason)", level: .error, subsystem: subsystem)
             case OpenSubError.xmlRpcError(let error):
-              Utility.log("OpenSub: (re-login) \(error.readableDescription)")
+              Logger.log("(re-login) \(error.readableDescription)", level: .error, subsystem: subsystem)
             default:
-              Utility.log("OpenSub: (re-login) other error")
+              Logger.log("(re-login) \(err.localizedDescription)", level: .error, subsystem: subsystem)
             }
           }
         } else {
-          Utility.log("OpenSub: heartbeat ok")
+          Logger.log("OpenSub: heartbeat ok", subsystem: subsystem)
         }
       default:
-        Utility.log("OpenSub: heartbeat failed")
+        Logger.log("OpenSub: heartbeat failed", level: .error, subsystem: subsystem)
         self.token = nil
       }
     }

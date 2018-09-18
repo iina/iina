@@ -7,10 +7,10 @@
 //
 
 import Cocoa
-import MASPreferences
+import Sparkle
 
 @objcMembers
-class PrefGeneralViewController: NSViewController, MASPreferencesViewController {
+class PrefGeneralViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     get {
@@ -18,35 +18,25 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
     }
   }
 
-  var viewIdentifier: String = "PrefGeneralViewController"
-
-  var toolbarItemImage: NSImage? {
+  var preferenceTabTitle: String {
     get {
-      return NSImage(named: .preferencesGeneral)!
-    }
-  }
-
-  var toolbarItemLabel: String? {
-    get {
-      // dirty hack here: layout the view before `MASPreferencesWIndowController` getting `bounds`.
-      view.layoutSubtreeIfNeeded()
       return NSLocalizedString("preference.general", comment: "General")
     }
   }
 
-  // view size is handled by AutoLayout, so it's not resizable
-  var hasResizableWidth: Bool = false
-  var hasResizableHeight: Bool = false
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do view setup here.
+  override var sectionViews: [NSView] {
+    return [behaviorView, historyView, playlistView, screenshotsView]
   }
+
+  @IBOutlet var behaviorView: NSView!
+  @IBOutlet var historyView: NSView!
+  @IBOutlet var playlistView: NSView!
+  @IBOutlet var screenshotsView: NSView!
 
   // MARK: - IBAction
 
   @IBAction func chooseScreenshotPathAction(_ sender: AnyObject) {
-    Utility.quickOpenPanel(title: "Choose screenshot save path", isDir: true) { url in
+    Utility.quickOpenPanel(title: "Choose screenshot save path", chooseDir: true, sheetWindow: view.window) { url in
       Preference.set(url.path, for: .screenshotFolder)
       UserDefaults.standard.synchronize()
     }
@@ -56,6 +46,10 @@ class PrefGeneralViewController: NSViewController, MASPreferencesViewController 
     if sender.state == .off {
       NSDocumentController.shared.clearRecentDocuments(self)
     }
+  }
+
+  @IBAction func receiveBetaUpdatesChanged(_ sender: NSButton) {
+    SUUpdater.shared().feedURL = URL(string: sender.state == .on ? AppData.appcastBetaLink : AppData.appcastLink)!
   }
 
 }

@@ -9,9 +9,6 @@
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "打开 URL…";
 
-/* Class = "NSMenuItem"; title = "Set IINA as the Default App…"; ObjectID = "0os-i1-tJF"; */
-"0os-i1-tJF.title" = "将 IINA 设置为默认播放器…";
-
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "字幕";
 
@@ -27,11 +24,17 @@
 /* Class = "NSMenuItem"; title = "Jump to Beginning"; ObjectID = "2Ya-3g-1hy"; */
 "2Ya-3g-1hy.title" = "回到开头";
 
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "2aU-bk-bmu"; */
+"2aU-bk-bmu.title" = "剪切";
+
 /* Class = "NSMenuItem"; title = "Jump to…"; ObjectID = "2id-wn-xsC"; */
 "2id-wn-xsC.title" = "跳转至…";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
 "2t8-Ot-yoO.title" = "快速设置";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
+"3Ax-P3-QQu.title" = "全选";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
 "43n-Ed-5kT.title" = "快速设置";
@@ -56,6 +59,15 @@
 
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
 "6yE-op-DTS.title" = "前进5秒";
+
+/* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "7Bn-Mp-EvJ"; */
+"7Bn-Mp-EvJ.title" = "转换";
+
+/* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "7rG-Yq-EYG"; */
+"7rG-Yq-EYG.title" = "停止朗读";
+
+/* Class = "NSMenuItem"; title = "Speech"; ObjectID = "8Oy-tP-udW"; */
+"8Oy-tP-udW.title" = "语音";
 
 /* Class = "NSMenuItem"; title = "Audio Filters…"; ObjectID = "8Zh-hU-Cc4"; */
 "8Zh-hU-Cc4.title" = "音频滤镜…";
@@ -207,6 +219,9 @@
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
 "NMo-om-nkz.title" = "服务";
 
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "NdF-0z-k5s"; */
+"NdF-0z-k5s.title" = "粘贴";
+
 /* Class = "NSMenuItem"; title = "Vertical (Flip)"; ObjectID = "OIu-H0-Mht"; */
 "OIu-H0-Mht.title" = "垂直 (翻转)";
 
@@ -252,11 +267,17 @@
 /* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
 "Td7-aD-5lo.title" = "窗口";
 
+/* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "Tue-O7-cei"; */
+"Tue-O7-cei.title" = "首字母大写";
+
 /* Class = "NSMenuItem"; title = "Pause"; ObjectID = "UOE-MJ-8ku"; */
 "UOE-MJ-8ku.title" = "暂停";
 
 /* Class = "NSMenu"; title = "Second Subtitle"; ObjectID = "UwY-P2-Xdb"; */
 "UwY-P2-Xdb.title" = "副字幕";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
+"VDZ-ro-z5z.title" = "重做";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
 "Vdr-fp-XzO.title" = "隐藏其他";
@@ -272,6 +293,9 @@
 
 /* Class = "NSMenuItem"; title = "Scale Up"; ObjectID = "XHu-Dl-Vq2"; */
 "XHu-Dl-Vq2.title" = "放大";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "XPz-ml-OQ3"; */
+"XPz-ml-OQ3.title" = "撤销";
 
 /* Class = "NSMenuItem"; title = "Smaller Size"; ObjectID = "ZOF-MG-6II"; */
 "ZOF-MG-6II.title" = "小一点";
@@ -318,6 +342,9 @@
 /* Class = "NSMenu"; title = "Chapters"; ObjectID = "d9c-me-L2H"; */
 "d9c-me-L2H.title" = "章节";
 
+/* Class = "NSMenu"; title = "Transformations"; ObjectID = "dBM-BU-5xS"; */
+"dBM-BU-5xS.title" = "转换";
+
 /* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
 "dMs-cI-mzQ.title" = "文件";
 
@@ -335,6 +362,9 @@
 
 /* Class = "NSMenuItem"; title = "Check for Updates..."; ObjectID = "gMo-qL-m08"; */
 "gMo-qL-m08.title" = "检查更新…";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h9w-Rj-Hm1"; */
+"h9w-Rj-Hm1.title" = "删除";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
 "hz9-B4-Xy5.title" = "服务";
@@ -366,6 +396,9 @@
 /* Class = "NSMenuItem"; title = "Go to Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
 "lj0-Oo-7nB.title" = "前往截图文件夹";
 
+/* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "m7w-hc-Y2F"; */
+"m7w-hc-Y2F.title" = "变为大写";
+
 /* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
 "mGw-jm-5x2.title" = "副字幕";
 
@@ -396,11 +429,14 @@
 /* Class = "NSMenuItem"; title = "Subtitle Delay + 0.5s"; ObjectID = "pAo-L5-qTO"; */
 "pAo-L5-qTO.title" = "字幕延迟 + 0.5秒";
 
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "pWh-nh-0pN"; */
+"pWh-nh-0pN.title" = "编辑";
+
 /* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
 "pdj-9C-Fn1.title" = "音量 - 5%";
 
 /* Class = "NSMenuItem"; title = "Previous Chapter"; ObjectID = "pqF-SZ-Ifz"; */
-"pqF-SZ-Ifz.title" = "下一章节";
+"pqF-SZ-Ifz.title" = "上一章节";
 
 /* Class = "NSMenuItem"; title = "Font..."; ObjectID = "rme-fr-5rr"; */
 "rme-fr-5rr.title" = "字体…";
@@ -414,6 +450,9 @@
 /* Class = "NSMenuItem"; title = "Half Size"; ObjectID = "snW-S8-Cw5"; */
 "snW-S8-Cw5.title" = "一半大小";
 
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "tH0-KL-c9V"; */
+"tH0-KL-c9V.title" = "拷贝";
+
 /* Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "tXI-mr-wws"; */
 "tXI-mr-wws.title" = "打开最近文件";
 
@@ -423,6 +462,9 @@
 /* Class = "NSMenuItem"; title = "Subtitle"; ObjectID = "uGZ-lo-pJJ"; */
 "uGZ-lo-pJJ.title" = "字幕";
 
+/* Class = "NSMenu"; title = "Speech"; ObjectID = "uO1-9S-6Yy"; */
+"uO1-9S-6Yy.title" = "语音";
+
 /* Class = "NSMenu"; title = "IINA"; ObjectID = "uQy-DD-JDr"; */
 "uQy-DD-JDr.title" = "IINA";
 
@@ -431,6 +473,9 @@
 
 /* Class = "NSMenu"; title = "Saved Audio Filters"; ObjectID = "vuV-uP-CAD"; */
 "vuV-uP-CAD.title" = "保存的音频滤镜";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "w8n-XJ-Pgi"; */
+"w8n-XJ-Pgi.title" = "编辑";
 
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
 "wex-rX-PcY.title" = "窗口置顶";
@@ -455,4 +500,10 @@
 
 /* Class = "NSMenuItem"; title = "Open in New Window…"; ObjectID = "z9W-ga-j3b"; */
 "z9W-ga-j3b.title" = "在新窗口中打开…";
+
+/* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "zez-g5-2Pt"; */
+"zez-g5-2Pt.title" = "变为小写";
+
+/* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
+"zpw-Ac-F3M.title" = "开始朗读";
 

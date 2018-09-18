@@ -25,7 +25,7 @@ class MPVFilter: NSObject {
 
   static func crop(w: Int?, h: Int?, x: Int?, y: Int?) -> MPVFilter {
     let f = MPVFilter(name: "crop", label: nil,
-                      params: ["w": w?.toStr() ?? "", "h": h?.toStr() ?? "", "x": x?.toStr() ?? "", "y": y?.toStr() ?? ""])
+                      params: ["w": w?.description ?? "", "h": h?.description ?? "", "x": x?.description ?? "", "y": y?.description ?? ""])
     return f
   }
 
@@ -47,8 +47,8 @@ class MPVFilter: NSObject {
    - parameter amount: Anount for la and ca. Should be in [-1.5, 1.5].
    */
   static func unsharp(amount: Float, msize: Int = 5) -> MPVFilter {
-    let amoutStr = amount.toStr()
-    let msizeStr = msize.toStr()
+    let amoutStr = amount.description
+    let msizeStr = msize.description
     return MPVFilter(lavfiName: "unsharp", label: nil, params: [msizeStr, msizeStr, amoutStr, msizeStr, msizeStr, amoutStr])
   }
 
@@ -106,7 +106,7 @@ class MPVFilter: NSObject {
     let splitted = rawString.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: true).map { String($0) }
     guard splitted.count == 1 || splitted.count == 2 else { return nil }
     self.name = splitted[0]
-    self.rawParamString = splitted.at(1)
+    self.rawParamString = splitted[at: 1]
   }
 
   init(name: String, label: String?, paramString: String) {
@@ -158,7 +158,7 @@ class MPVFilter: NSObject {
 
   func cropParams(videoSize: NSSize) -> [String: Double] {
     guard type == .crop else {
-      Utility.fatal("Trying to get crop params from a non-crop filter!")
+      Logger.fatal("Trying to get crop params from a non-crop filter!")
     }
     guard let params = params else { return [:] }
     // w and h should always valid

@@ -3,6 +3,9 @@
 /* Class = "NSTextFieldCell"; title = "▶︎"; ObjectID = "4yj-cg-fli"; */
 "4yj-cg-fli.title" = "▶︎";
 
+/* Class = "NSMenuItem"; title = "Add File…"; ObjectID = "CI2-Gm-j4o"; */
+"CI2-Gm-j4o.title" = "添加文件…";
+
 /* Class = "NSButtonCell"; title = "…"; ObjectID = "CVl-Xv-m3u"; */
 "CVl-Xv-m3u.title" = "…";
 
@@ -14,6 +17,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "QFT-Lq-egc"; */
 "QFT-Lq-egc.title" = "Text Cell";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Folded common prefix"; ObjectID = "U4W-Xv-hkh"; */
+"U4W-Xv-hkh.ibShadowedToolTip" = "被折叠的公共前缀";
 
 /* Class = "NSTabViewItem"; label = "Chapters"; ObjectID = "aaR-kR-im0"; */
 "aaR-kR-im0.label" = "章节";
@@ -41,6 +47,12 @@
 
 /* Class = "NSTextFieldCell"; title = "Chapter Title"; ObjectID = "vmJ-Ry-xgK"; */
 "vmJ-Ry-xgK.title" = "Chapter Title";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "zbw-ad-lgl"; */
+"zbw-ad-lgl.title" = "Label";
+
+/* Class = "NSMenuItem"; title = "Add URL…"; ObjectID = "zeJ-cr-tRg"; */
+"zeJ-cr-tRg.title" = "添加 URL…";
 
 /* Class = "NSButtonCell"; title = "Wrong Subtitle!"; ObjectID = "zod-Ch-cOH"; */
 "zod-Ch-cOH.title" = "错误的字幕!";

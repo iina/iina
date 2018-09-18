@@ -51,7 +51,7 @@ class MenuController: NSObject, NSMenuDelegate {
   private var stringForOpenURLAlternative: String!
 
   // File
-  @IBOutlet weak var file: NSMenuItem!
+  @IBOutlet weak var fileMenu: NSMenu!
   @IBOutlet weak var open: NSMenuItem!
   @IBOutlet weak var openAlternative: NSMenuItem!
   @IBOutlet weak var openURL: NSMenuItem!
@@ -173,17 +173,16 @@ class MenuController: NSObject, NSMenuDelegate {
     }
 
     // File menu
-    
-    savePlaylist.action = #selector(MainMenuActionHandler.menuSavePlaylist(_:))
-    deleteCurrentFile.action = #selector(MainMenuActionHandler.menuDeleteCurrentFile(_:))
+
+    fileMenu.delegate = self
 
     stringForOpen = open.title
     stringForOpenURL = openURL.title
     stringForOpenAlternative = openAlternative.title
     stringForOpenURLAlternative = openURLAlternative.title
-
-    updateOpenMenuItems()
-    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.alwaysOpenInNewWindow.rawValue, options: [], context: nil)
+    
+    savePlaylist.action = #selector(MainMenuActionHandler.menuSavePlaylist(_:))
+    deleteCurrentFile.action = #selector(MainMenuActionHandler.menuDeleteCurrentFile(_:))
 
     if Preference.bool(for: .enableCmdN) {
       newWindowSeparator.isHidden = false
@@ -298,7 +297,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     savedVideoFiltersMenu.delegate = self
     updateSavedFilters(forType: MPVProperty.vf,
-                       from: Preference.array(for: .savedVideoFilters)?.flatMap(SavedFilter.init(dict:)) ?? [])
+                       from: Preference.array(for: .savedVideoFilters)?.compactMap(SavedFilter.init(dict:)) ?? [])
 
     // Audio menu
 
@@ -334,7 +333,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     savedAudioFiltersMenu.delegate = self
     updateSavedFilters(forType: MPVProperty.af,
-                       from: Preference.array(for: .savedAudioFilters)?.flatMap(SavedFilter.init(dict:)) ?? [])
+                       from: Preference.array(for: .savedAudioFilters)?.compactMap(SavedFilter.init(dict:)) ?? [])
 
     // Subtitle
 
@@ -384,18 +383,6 @@ class MenuController: NSObject, NSMenuDelegate {
     miniPlayer.action = #selector(MainWindowController.menuSwitchToMiniPlayer(_:))
   }
 
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath = keyPath else { return }
-
-    switch keyPath {
-    case Preference.Key.alwaysOpenInNewWindow.rawValue:
-      updateOpenMenuItems()
-    default:
-      return
-    }
-
-  }
-
   // MARK: - Update Menus
 
   private func updatePlaylist() {
@@ -411,7 +398,7 @@ class MenuController: NSObject, NSMenuDelegate {
     let info = PlayerCore.active.info
     for (index, chapter) in info.chapters.enumerated() {
       let menuTitle = "\(chapter.time.stringRepresentation) - \(chapter.title)"
-      let nextChapterTime = info.chapters.at(index+1)?.time ?? Constants.Time.infinite
+      let nextChapterTime = info.chapters[at: index+1]?.time ?? Constants.Time.infinite
       let isPlaying = info.videoPosition?.between(chapter.time, nextChapterTime) ?? false
       chapterMenu.addItem(withTitle: menuTitle, action: #selector(MainMenuActionHandler.menuChapterSwitch(_:)),
                           tag: index, obj: nil, stateOn: isPlaying)
@@ -444,10 +431,10 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   private func updateVideoMenu() {
-    let isInFullScreen = PlayerCore.active.mainWindow.isInFullScreen
+    let isInFullScreen = PlayerCore.active.mainWindow.fsState.isFullscreen
     let isInPIP = PlayerCore.active.mainWindow.pipStatus == .inPIP
     let isOntop = PlayerCore.active.isInMiniPlayer ? PlayerCore.active.miniPlayer.isOntop : PlayerCore.active.mainWindow.isOntop
-    let isDelogo = PlayerCore.active.info.delogoFiter != nil
+    let isDelogo = PlayerCore.active.info.delogoFilter != nil
     alwaysOnTop.state = isOntop ? .on : .off
     deinterlace.state = PlayerCore.active.info.deinterlace ? .on : .off
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
@@ -518,7 +505,7 @@ class MenuController: NSObject, NSMenuDelegate {
     if let titles = titles {
       // options and objects must be same
       guard objects == nil || titles.count == objects?.count else {
-        Utility.log("different object count when binding menu")
+        Logger.log("different object count when binding menu", level: .error)
         return
       }
       // add menu items
@@ -546,23 +533,32 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   private func updateOpenMenuItems() {
-    if Preference.bool(for: .alwaysOpenInNewWindow) {
-      open.title = stringForOpenAlternative
+    if PlayerCore.playing.count == 0 {
+      open.title = stringForOpen
       openAlternative.title = stringForOpen
-      openURL.title = stringForOpenURLAlternative
+      openURL.title = stringForOpenURL
       openURLAlternative.title = stringForOpenURL
     } else {
-      open.title = stringForOpen
-      openAlternative.title = stringForOpenAlternative
-      openURL.title = stringForOpenURL
-      openURLAlternative.title = stringForOpenURLAlternative
+      if Preference.bool(for: .alwaysOpenInNewWindow) {
+        open.title = stringForOpenAlternative
+        openAlternative.title = stringForOpen
+        openURL.title = stringForOpenURLAlternative
+        openURLAlternative.title = stringForOpenURL
+      } else {
+        open.title = stringForOpen
+        openAlternative.title = stringForOpenAlternative
+        openURL.title = stringForOpenURL
+        openURLAlternative.title = stringForOpenURLAlternative
+      }
     }
   }
 
   // MARK: - Menu delegate
 
   func menuWillOpen(_ menu: NSMenu) {
-    if menu == playlistMenu {
+    if menu == fileMenu {
+      updateOpenMenuItems()
+    } else if menu == playlistMenu {
       updatePlaylist()
     } else if menu == chapterMenu {
       updateChapterList()
@@ -617,7 +613,7 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   func updateKeyEquivalentsFrom(_ keyBindings: [KeyMapping]) {
-    let settings: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
+    var settings: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
       (deleteCurrentFile, true, ["delete-current-file"], false, nil, nil),
       (savePlaylist, true, ["save-playlist"], false, nil, nil),
       (quickSettingsVideo, true, ["video-panel"], false, nil, nil),
@@ -630,7 +626,6 @@ class MenuController: NSObject, NSMenuDelegate {
       (biggerSize, true, ["bigger-window"], false, nil, nil),
       (smallerSize, true, ["smaller-window"], false, nil, nil),
       (fitToScreen, true, ["fit-to-screen"], false, nil, nil),
-      (pictureInPicture, true, ["toggle-pip"], false, nil, nil),
       (miniPlayer, true, ["toggle-music-mode"], false, nil, nil),
       (cycleVideoTracks, false, ["cycle", "video"], false, nil, nil),
       (cycleAudioTracks, false, ["cycle", "audio"], false, nil, nil),
@@ -679,6 +674,11 @@ class MenuController: NSObject, NSMenuDelegate {
       (alwaysOnTop, false, ["cycle", "ontop"], false, nil, nil),
       (fullScreen, false, ["cycle", "fullscreen"], false, nil, nil)
     ]
+
+    if #available(macOS 10.12, *) {
+      settings.append((pictureInPicture, true, ["toggle-pip"], false, nil, nil))
+    }
+
     settings.forEach { (menuItem, isIINACmd, actions, normalizeLastNum, numRange, l10nKey) in
       var bound = false
       for kb in keyBindings {

@@ -15,13 +15,12 @@ class MPVPlaylistItem: NSObject {
 
   /** Title or the real filename */
   var filenameForDisplay: String {
-    get {
-      return title ?? NSString(string: filename).lastPathComponent
-    }
+    return title ?? (isNetworkResource ? filename : NSString(string: filename).lastPathComponent)
   }
 
   var isCurrent: Bool
   var isPlaying: Bool
+  var isNetworkResource: Bool
 
   var title: String?
 
@@ -30,5 +29,6 @@ class MPVPlaylistItem: NSObject {
     self.isCurrent = isCurrent
     self.isPlaying = isPlaying
     self.title = title
+    self.isNetworkResource = Regex.url.matches(filename)
   }
 }

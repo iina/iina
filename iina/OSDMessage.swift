@@ -17,7 +17,7 @@
 import Foundation
 
 fileprivate func toPercent(_ value: Double, _ bound: Double) -> Double {
-  return (value + bound).constrain(min: 0, max: bound * 2) / (bound * 2)
+  return (value + bound).clamped(to: 0...(bound * 2)) / (bound * 2)
 }
 
 enum OSDType {
@@ -253,12 +253,13 @@ enum OSDMessage {
     case .startFindingSub(let source):
       return (
         NSLocalizedString("osd.find_online_sub", comment: "Finding online subtitles..."),
+//        .withText(NSLocalizedString("osd.find_online_sub.source", comment: "from") + " " + source)
         .withText("from " + source)
       )
 
     case .foundSub(let count):
       let str = count == 0 ?
-        NSLocalizedString("osd.sub_not_found", comment: "No subtitle found.") :
+        NSLocalizedString("osd.sub_not_found", comment: "No subtitles found.") :
         String(format: NSLocalizedString("osd.sub_found", comment: "%d subtitle(s) found. Downloading..."), count)
       return (str, .normal)
 

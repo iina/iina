@@ -65,22 +65,27 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   @IBOutlet weak var voFPSField: NSTextField!
   @IBOutlet weak var edispFPSField: NSTextField!
   @IBOutlet weak var watchTableView: NSTableView!
-
+  @IBOutlet weak var deleteButton: NSButton!
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    window?.appearance = NSAppearance(named: .vibrantDark)
 
     watchProperties = Preference.array(for: .watchProperties) as! [String]
     watchTableView.delegate = self
     watchTableView.dataSource = self
 
+    deleteButton.isEnabled = false
+
+    if #available(macOS 10.14, *) {} else {
+      window?.appearance = NSAppearance(named: .vibrantDark)
+    }
+
     updateInfo()
 
     updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
 
-    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: Constants.Noti.fileLoaded, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: Constants.Noti.mainWindowChanged, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaFileLoaded, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaMainWindowChanged, object: nil)
   }
 
   deinit {
@@ -139,16 +144,23 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
         // track list
 
         self.trackPopup.removeAllItems()
+        var needSeparator = false
         for track in info.videoTracks {
           self.trackPopup.menu?.addItem(withTitle: "Video" + track.readableTitle,
                                    action: nil, tag: nil, obj: track, stateOn: false)
+          needSeparator = true
         }
-        self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        if needSeparator && !info.audioTracks.isEmpty {
+          self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        }
         for track in info.audioTracks {
           self.trackPopup.menu?.addItem(withTitle: "Audio" + track.readableTitle,
                                    action: nil, tag: nil, obj: track, stateOn: false)
+          needSeparator = true
         }
-        self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        if needSeparator && !info.subTracks.isEmpty {
+          self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        }
         for track in info.subTracks {
           self.trackPopup.menu?.addItem(withTitle: "Subtitle" + track.readableTitle,
                                    action: nil, tag: nil, obj: track, stateOn: false)
@@ -201,15 +213,15 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     setLabelColor(trackExternalField, by: track.isExternal)
 
     let strProperties: [(String?, NSTextField)] = [
-      (track.srcId?.toStr(), trackSourceIdField),
+      (track.srcId?.description, trackSourceIdField),
       (track.title, trackTitleField),
       (track.lang, trackLangField),
       (track.externalFilename, trackFilePathField),
       (track.codec, trackCodecField),
       (track.decoderDesc, trackDecoderField),
-      (track.demuxFps?.toStr(), trackFPSField),
+      (track.demuxFps?.description, trackFPSField),
       (track.demuxChannels, trackChannelsField),
-      (track.demuxSamplerate?.toStr(), trackSampleRateField)
+      (track.demuxSamplerate?.description, trackSampleRateField)
     ]
 
     for (str, field) in strProperties {
@@ -227,7 +239,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     guard let identifier = tableColumn?.identifier else { return nil }
 
-    guard let property = watchProperties.at(row) else { return nil }
+    guard let property = watchProperties[at: row] else { return nil }
     if identifier == .key {
       return property
     } else if identifier == .value {
@@ -245,8 +257,12 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     saveWatchList()
   }
 
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    deleteButton.isEnabled = (watchTableView.selectedRow != -1)
+  }
+
   @IBAction func addWatchAction(_ sender: AnyObject) {
-    let _ = Utility.quickPromptPanel("add_watch") { str in
+    Utility.quickPromptPanel("add_watch", sheetWindow: window) { str in
       self.watchProperties.append(str)
       self.watchTableView.reloadData()
       self.saveWatchList()

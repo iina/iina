@@ -66,7 +66,7 @@
 /* Class = "NSTextFieldCell"; title = "Y offset:"; ObjectID = "KCL-Ki-A0p"; */
 "KCL-Ki-A0p.title" = "Y смещение:";
 
-/* Class = "NSMenuItem"; title = "Fastforward / Rewind"; ObjectID = "KJT-iG-2xc"; */
+/* Class = "NSMenuItem"; title = "Fast Forward / Rewind"; ObjectID = "KJT-iG-2xc"; */
 "KJT-iG-2xc.title" = "Быстрая перемотка вперед/назад";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "L5c-uf-ged"; */
@@ -204,3 +204,8 @@
 /* Class = "NSButtonCell"; title = "Initial window size:"; ObjectID = "zOq-Em-wUe"; */
 "zOq-Em-wUe.title" = "Начальный размер окна:";
 
+/* Class = "NSTextFieldCell"; title = "Appearance:"; ObjectID = "mM7-1Q-FyL"; */
+"mM7-1Q-FyL.title" = "Внешний вид:";
+
+/* Class = "NSTextFieldCell"; title = "Theme:"; ObjectID = "yLF-vu-1Gl"; */
+"yLF-vu-1Gl.title" = "Тема:";

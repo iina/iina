@@ -1,30 +1,28 @@
 PODS:
-  - AEXML (4.2.2)
   - GRMustache.swift (2.0.0)
   - GzipSwift (4.0.4)
   - Just (0.6.0)
-  - MASPreferences (1.3)
-  - PromiseKit (4.4.0):
-    - PromiseKit/Foundation (= 4.4.0)
-    - PromiseKit/QuartzCore (= 4.4.0)
-    - PromiseKit/UIKit (= 4.4.0)
-  - PromiseKit/CorePromise (4.4.0)
-  - PromiseKit/Foundation (4.4.0):
+  - PromiseKit (6.2.5):
+    - PromiseKit/CorePromise (= 6.2.5)
+    - PromiseKit/Foundation (= 6.2.5)
+    - PromiseKit/UIKit (= 6.2.5)
+  - PromiseKit/CorePromise (6.2.5)
+  - PromiseKit/Foundation (6.2.5):
     - PromiseKit/CorePromise
-  - PromiseKit/QuartzCore (4.4.0):
-    - PromiseKit/CorePromise
-  - PromiseKit/UIKit (4.4.0):
-    - PromiseKit/CorePromise
-  - Sparkle (1.18.1)
+  - Sparkle (1.19.0)
 
 DEPENDENCIES:
-  - AEXML
   - GRMustache.swift (from `https://github.com/iina/GRMustache.swift.git`)
   - GzipSwift
   - Just (from `https://github.com/JustHTTP/Just.git`, branch `swift-4`)
-  - MASPreferences
   - PromiseKit
   - Sparkle
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - GzipSwift
+    - PromiseKit
+    - Sparkle
 
 EXTERNAL SOURCES:
   GRMustache.swift:
@@ -35,21 +33,19 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   GRMustache.swift:
-    :commit: c2e858e5bd7f2e4faf13ae4cc34e9966382e2ff8
+    :commit: 3e6778e4b8a134e3f96d04d6c15c7213bd7d9935
     :git: https://github.com/iina/GRMustache.swift.git
   Just:
     :commit: 93fc04992243fb459af37963797ef5ac5224b242
     :git: https://github.com/JustHTTP/Just.git
 
 SPEC CHECKSUMS:
-  AEXML: 5ebafc1b75e0bcf0f1b09b8ca8fed2d5a199479b
   GRMustache.swift: 53405b02c374520f9193cf41bfa677f03a6d70aa
   GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
   Just: 72e8a6e01ec5adba1aa0f7996ff4459aa6a3d710
-  MASPreferences: c08b8622dd17b47da87669e741efd7c92e970e8c
-  PromiseKit: ecf5fe92275d57ee77c9ede858af47a162e9b97e
-  Sparkle: 06ea33170007c5937ee54da481b4481af98fac79
+  PromiseKit: a26828b0a8d5874960dfdb575b57a70790ec36f1
+  Sparkle: 8486d2493599665e466b5076e72b28849776e32f
 
-PODFILE CHECKSUM: a64ce7e4133a69b8578df97545c13d6a3edec3ff
+PODFILE CHECKSUM: 960ae6eb563282d105a3f7a401cb7a434ddc611e
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.3

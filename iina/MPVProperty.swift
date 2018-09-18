@@ -137,6 +137,18 @@ struct MPVProperty {
   static let demuxerCacheTime = "demuxer-cache-time"
   /** demuxer-cache-idle */
   static let demuxerCacheIdle = "demuxer-cache-idle"
+  /** demuxer-cache-state */
+  static let demuxerCacheState = "demuxer-cache-state"
+  /** eof */
+  static let eof = "eof"
+  /** underrun */
+  static let underrun = "underrun"
+  /** idle */
+  static let idle = "idle"
+  /** total-bytes */
+  static let totalBytes = "total-bytes"
+  /** fw-bytes */
+  static let fwBytes = "fw-bytes"
   /** demuxer-via-network */
   static let demuxerViaNetwork = "demuxer-via-network"
   /** demuxer-start-time */
@@ -290,7 +302,7 @@ struct MPVProperty {
   /** playlist */
   static let playlist = "playlist"
   /** playlist/count */
-  static let playlistCount_ = "playlist/count"
+  static let playlistCount2 = "playlist/count"
   /** playlist/N/filename */
   static func playlistNFilename(_ n: Int) -> String {
     return "playlist/\(n)/filename"
@@ -489,8 +501,6 @@ struct MPVProperty {
   static let currentVo = "current-vo"
   /** current-ao */
   static let currentAo = "current-ao"
-  /** audio-out-detected-device */
-  static let audioOutDetectedDevice = "audio-out-detected-device"
   /** working-directory */
   static let workingDirectory = "working-directory"
   /** protocol-list */

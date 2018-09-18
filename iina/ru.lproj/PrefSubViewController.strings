@@ -103,7 +103,7 @@
 "Y75-4k-2Du.title" = "Кодировка по умолчанию:";
 
 /* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
-"Z2M-dh-eq1.title" = "Этот параметр будет сохранён как языковой код ISO 639-2 и применён для MPV и OpenSubtitles.org.";
+"Z2M-dh-eq1.title" = "Этот параметр будет сохранён как языковой код ISO 639-2 и применён для mpv и OpenSubtitles.org.";
 
 /* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
 "aO9-D6-KG8.title" = "Размытие:";
@@ -180,7 +180,7 @@
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
 "y1E-JR-KRI.title" = "Субтитры, содержащие имя медиафайла";
 
-/* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "zaE-bH-XfT"; */
+/* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
 "zaE-bH-XfT.title" = "Предпочитаемый язык:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */

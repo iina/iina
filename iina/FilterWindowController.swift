@@ -8,19 +8,13 @@
 
 import Cocoa
 
-class FilterWindowController: NSWindowController {
+class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("FilterWindowController")
   }
 
-  @objc let monospacedFont: NSFont = {
-    if #available(OSX 10.11, *) {
-      return NSFont.monospacedDigitSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)
-    } else {
-      return NSFont.systemFont(ofSize: NSFont.systemFontSize)
-    }
-  }()
+  @objc let monospacedFont: NSFont = NSFont.monospacedDigitSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)
 
   @IBOutlet weak var splitView: NSSplitView!
   @IBOutlet weak var splitViewUpperView: NSView!
@@ -39,7 +33,8 @@ class FilterWindowController: NSWindowController {
   @IBOutlet weak var editFilterStringTextField: NSTextField!
   @IBOutlet weak var editFilterKeyRecordView: KeyRecordView!
   @IBOutlet weak var editFilterKeyRecordViewLabel: NSTextField!
-
+  @IBOutlet weak var removeButton: NSButton!
+  
   var filterType: String!
 
   var filters: [MPVFilter] = []
@@ -51,6 +46,7 @@ class FilterWindowController: NSWindowController {
 
   override func windowDidLoad() {
     super.windowDidLoad()
+    window?.delegate = self
 
     // title
     window?.title = filterType == MPVProperty.af ? NSLocalizedString("filter.audio_filters", comment: "Audio Filters") : NSLocalizedString("filter.video_filters", comment: "Video Filters")
@@ -60,7 +56,7 @@ class FilterWindowController: NSWindowController {
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|", "H:|[w]|", "V:|[w]|"], ["v": upperView, "w": lowerView])
     splitView.setPosition(splitView.frame.height - 140, ofDividerAt: 0)
 
-    savedFilters = (Preference.array(for: filterType == MPVProperty.af ? .savedAudioFilters : .savedVideoFilters) ?? []).flatMap(SavedFilter.init(dict:))
+    savedFilters = (Preference.array(for: filterType == MPVProperty.af ? .savedAudioFilters : .savedVideoFilters) ?? []).compactMap(SavedFilter.init(dict:))
     filters = PlayerCore.active.mpv.getFilters(filterType)
     currentFiltersTableView.reloadData()
     savedFiltersTableView.reloadData()
@@ -68,10 +64,12 @@ class FilterWindowController: NSWindowController {
     keyRecordView.delegate = self
     editFilterKeyRecordView.delegate = self
 
+    updateButtonStatus()
+
     // notifications
-    let notiName = filterType == MPVProperty.af ? Constants.Noti.afChanged : Constants.Noti.vfChanged
+    let notiName: Notification.Name = filterType == MPVProperty.af ? .iinaAFChanged : .iinaVFChanged
     NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: notiName, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: Constants.Noti.mainWindowChanged, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: .iinaMainWindowChanged, object: nil)
   }
 
   @objc
@@ -103,11 +101,18 @@ class FilterWindowController: NSWindowController {
   }
 
   func addFilter(_ filter: MPVFilter) {
-    filters.append(filter)
-    guard PlayerCore.active.addVideoFilter(filter) else {
-      Utility.showAlert("filter.incorrect")
-      return
+    if filterType == MPVProperty.vf {
+      guard PlayerCore.active.addVideoFilter(filter) else {
+        Utility.showAlert("filter.incorrect", sheetWindow: window)
+        return
+      }
+    } else {
+      guard PlayerCore.active.addAudioFilter(filter) else {
+        Utility.showAlert("filter.incorrect", sheetWindow: window)
+        return
+      }
     }
+    filters.append(filter)
     reloadTable()
   }
 
@@ -133,9 +138,19 @@ class FilterWindowController: NSWindowController {
   @IBAction func removeFilterAction(_ sender: Any) {
     let pc = PlayerCore.active
     if currentFiltersTableView.selectedRow >= 0 {
-      if pc.removeVideoFilter(filters[currentFiltersTableView.selectedRow]) {
+      let success: Bool
+      if filterType == MPVProperty.vf {
+        success = pc.removeVideoFilter(filters[currentFiltersTableView.selectedRow])
+      } else {
+        success = pc.removeAudioFilter(filters[currentFiltersTableView.selectedRow])
+      }
+      if success {
         reloadTable()
         pc.sendOSD(.removeFilter)
+        // FIXME: For some reason, after removeFilterAction is called, tableViewSelectionDidChange(_:)
+        // for currentFiltersTableView is not called. This is a workaround to ensure
+        // tableViewSelectionDidChange(_:) is called.
+        currentFiltersTableView.deselectAll(self)
       }
     }
   }
@@ -193,14 +208,14 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     if tableView == currentFiltersTableView {
       if tableColumn?.identifier == .key {
-        return row.toStr()
+        return row.description
       } else if tableColumn?.identifier == .value {
-        return filters.at(row)?.stringFormat
+        return filters[at: row]?.stringFormat
       } else {
         return filterIsSaved[row]
       }
     } else {
-      return savedFilters.at(row)
+      return savedFilters[at: row]
     }
   }
 
@@ -212,9 +227,21 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
         filters[row] = newFilter
         setFilters()
       } else {
-        Utility.showAlert("filter.incorrect")
+        Utility.showAlert("filter.incorrect", sheetWindow: window)
       }
     }
+  }
+
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    updateButtonStatus()
+  }
+
+  func windowDidBecomeKey(_ notification: Notification) {
+    updateButtonStatus()
+  }
+
+  private func updateButtonStatus() {
+    removeButton.isEnabled = currentFiltersTableView.selectedRow >= 0
   }
 
 }
@@ -251,7 +278,8 @@ extension FilterWindowController {
     if let currentFilter = currentSavedFilter {
       currentFilter.name = editFilterNameTextField.stringValue
       currentFilter.filterString = editFilterStringTextField.stringValue
-      currentFilter.shortcutKey = editFilterKeyRecordView.currentRawKey
+      // FIXME: shouldn't be shift-modified; should examine this carefully
+      currentFilter.shortcutKey = editFilterKeyRecordView.currentRawKey.lowercased()
       currentFilter.shortcutKeyModifiers = editFilterKeyRecordView.currentKeyModifiers
       reloadTable()
       syncSavedFilter()
@@ -286,11 +314,11 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    return presets.at(row)?.localizedName
+    return presets[at: row]?.localizedName
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    guard let preset = presets.at(tableView.selectedRow) else { return }
+    guard let preset = presets[at: tableView.selectedRow] else { return }
     showSettings(for: preset)
   }
 
@@ -337,9 +365,9 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     switch param.type {
     case .text:
       // Text field
-      let label = ShortcutAvailableTextField(frame: NSRect(x: 4, y: yPos,
-                                            width: scrollContentView.frame.width - 8,
-                                            height: 22))
+      let label = NSTextField(frame: NSRect(x: 4, y: yPos,
+                              width: scrollContentView.frame.width - 8,
+                              height: 22))
       label.stringValue = param.defaultValue.stringValue
       label.isSelectable = false
       label.isEditable = true

@@ -28,7 +28,10 @@
 "cJP-ep-847.title" = "(100-1000)";
 
 /* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
-"g4c-vG-URh.title" = "固定初始音量";
+"g4c-vG-URh.title" = "固定初始音量:";
+
+/* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "iQf-Gb-IuO"; */
+"iQf-Gb-IuO.title" = "Item 1";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "视频:";
@@ -42,6 +45,9 @@
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
 "rFu-rL-EJC.title" = "禁用";
 
+/* Class = "NSTextFieldCell"; title = "Preferred audio device:"; ObjectID = "sLR-vV-xn2"; */
+"sLR-vV-xn2.title" = "默认音频设备:";
+
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
 "sV5-dL-MUt.title" = "音频:";
 
@@ -54,6 +60,6 @@
 /* Class = "NSTextFieldCell"; title = "S/PDIF output:"; ObjectID = "up6-6A-4sn"; */
 "up6-6A-4sn.title" = "S/PDIF 输出:";
 
-/* Class = "NSTextFieldCell"; title = "Prefered language:"; ObjectID = "wjt-O6-KbC"; */
+/* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
 "wjt-O6-KbC.title" = "偏好语言:";
 

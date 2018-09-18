@@ -10,14 +10,14 @@ import Cocoa
 
 // MARK: - Touch bar
 
-@available(OSX 10.12.2, *)
+@available(macOS 10.12.2, *)
 fileprivate extension NSTouchBar.CustomizationIdentifier {
 
   static let windowBar = NSTouchBar.CustomizationIdentifier("\(Bundle.main.bundleIdentifier!).windowTouchBar")
 
 }
 
-@available(OSX 10.12.2, *)
+@available(macOS 10.12.2, *)
 fileprivate extension NSTouchBarItem.Identifier {
 
   static let playPause = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.playPause")
@@ -27,28 +27,30 @@ fileprivate extension NSTouchBarItem.Identifier {
   static let rewind = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.rewind")
   static let fastForward = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.forward")
   static let time = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.time")
+  static let remainingTime = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.remainingTime")
   static let ahead15Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead15Sec")
   static let back15Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.back15Sec")
   static let ahead30Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead30Sec")
   static let back30Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.back30Sec")
   static let next = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.next")
   static let prev = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.prev")
+  static let exitFullScr = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.exitFullScr")
 
 }
 
 // Image name, tag, custom label
 @available(macOS 10.12.2, *)
 fileprivate let touchBarItemBinding: [NSTouchBarItem.Identifier: (NSImage.Name, Int, String)] = [
-  .ahead15Sec: (.touchBarSkipAhead15SecondsTemplate, 15, NSLocalizedString("touchbar.ahead_15", comment: "15sec Ahead")),
-  .ahead30Sec: (.touchBarSkipAhead30SecondsTemplate, 30, NSLocalizedString("touchbar.ahead_30", comment: "30sec Ahead")),
-  .back15Sec: (.touchBarSkipBack15SecondsTemplate, -15, NSLocalizedString("touchbar.back_15", comment: "-15sec Ahead")),
-  .back30Sec: (.touchBarSkipBack30SecondsTemplate, -30, NSLocalizedString("touchbar.back_30", comment: "-30sec Ahead")),
-  .next: (.touchBarSkipAheadTemplate, 0, NSLocalizedString("touchbar.next_video", comment: "Next Video")),
-  .prev: (.touchBarSkipBackTemplate, 1, NSLocalizedString("touchbar.prev_video", comment: "Previous Video")),
-  .volumeUp: (.touchBarVolumeUpTemplate, 0, NSLocalizedString("touchbar.increase_volume", comment: "Volume +")),
-  .volumeDown: (.touchBarVolumeDownTemplate, 1, NSLocalizedString("touchbar.decrease_volume", comment: "Volume -")),
-  .rewind: (.touchBarRewindTemplate, 0, NSLocalizedString("touchbar.rewind", comment: "Rewind")),
-  .fastForward: (.touchBarFastForwardTemplate, 1, NSLocalizedString("touchbar.fast_forward", comment: "Fast Forward"))
+  .ahead15Sec: (NSImage.touchBarSkipAhead15SecondsTemplateName, 15, NSLocalizedString("touchbar.ahead_15", comment: "15sec Ahead")),
+  .ahead30Sec: (NSImage.touchBarSkipAhead30SecondsTemplateName, 30, NSLocalizedString("touchbar.ahead_30", comment: "30sec Ahead")),
+  .back15Sec: (NSImage.touchBarSkipBack15SecondsTemplateName, -15, NSLocalizedString("touchbar.back_15", comment: "-15sec Ahead")),
+  .back30Sec: (NSImage.touchBarSkipBack30SecondsTemplateName, -30, NSLocalizedString("touchbar.back_30", comment: "-30sec Ahead")),
+  .next: (NSImage.touchBarSkipAheadTemplateName, 0, NSLocalizedString("touchbar.next_video", comment: "Next Video")),
+  .prev: (NSImage.touchBarSkipBackTemplateName, 1, NSLocalizedString("touchbar.prev_video", comment: "Previous Video")),
+  .volumeUp: (NSImage.touchBarVolumeUpTemplateName, 0, NSLocalizedString("touchbar.increase_volume", comment: "Volume +")),
+  .volumeDown: (NSImage.touchBarVolumeDownTemplateName, 1, NSLocalizedString("touchbar.decrease_volume", comment: "Volume -")),
+  .rewind: (NSImage.touchBarRewindTemplateName, 0, NSLocalizedString("touchbar.rewind", comment: "Rewind")),
+  .fastForward: (NSImage.touchBarFastForwardTemplateName, 1, NSLocalizedString("touchbar.fast_forward", comment: "Fast Forward"))
 ]
 
 @available(macOS 10.12.2, *)
@@ -60,14 +62,15 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
     let touchBar = NSTouchBar()
     touchBar.delegate = self
     touchBar.customizationIdentifier = .windowBar
-    touchBar.defaultItemIdentifiers = [.playPause, .slider, .time]
-    touchBar.customizationAllowedItemIdentifiers = [.playPause, .slider, .volumeUp, .volumeDown, .rewind, .fastForward, .time, .ahead15Sec, .ahead30Sec, .back15Sec, .back30Sec, .next, .prev, .fixedSpaceLarge]
+    touchBar.defaultItemIdentifiers = [.playPause, .time, .slider, .remainingTime]
+    touchBar.customizationAllowedItemIdentifiers = [.playPause, .slider, .volumeUp, .volumeDown, .rewind, .fastForward, .time, .remainingTime, .ahead15Sec, .ahead30Sec, .back15Sec, .back30Sec, .next, .prev, .fixedSpaceLarge]
     return touchBar
   }()
 
   weak var touchBarPlaySlider: TouchBarPlaySlider?
   weak var touchBarPlayPauseBtn: NSButton?
-  weak var touchBarCurrentPosLabel: DurationDisplayTextField?
+  weak var touchBarExitFullScr: NSButton?
+  var touchBarPosLabels: [DurationDisplayTextField] = []
   var touchBarPosLabelWidthLayout: NSLayoutConstraint?
   /** The current/remaining time label in Touch Bar. */
   lazy var sizingTouchBarTextField: NSTextField = {
@@ -84,7 +87,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
 
     case .playPause:
       let item = NSCustomTouchBarItem(identifier: identifier)
-      item.view = NSButton(image: NSImage(named: .touchBarPauseTemplate)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
+      item.view = NSButton(image: NSImage(named: NSImage.touchBarPauseTemplateName)!, target: self, action: #selector(self.touchBarPlayBtnAction(_:)))
       item.customizationLabel = NSLocalizedString("touchbar.play_pause", comment: "Play / Pause")
       self.touchBarPlayPauseBtn = item.view as? NSButton
       return item
@@ -115,10 +118,22 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       let item = NSCustomTouchBarItem(identifier: identifier)
       let label = DurationDisplayTextField(labelWithString: "00:00")
       label.alignment = .center
-      label.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .current
-      self.touchBarCurrentPosLabel = label
+      label.font = .monospacedDigitSystemFont(ofSize: 0, weight: .regular)
+      label.mode = .current
+      self.touchBarPosLabels.append(label)
       item.view = label
       item.customizationLabel = NSLocalizedString("touchbar.time", comment: "Time Position")
+      return item
+    
+    case .remainingTime:
+      let item = NSCustomTouchBarItem(identifier: identifier)
+      let label = DurationDisplayTextField(labelWithString: "00:00")
+      label.alignment = .center
+      label.font = .monospacedDigitSystemFont(ofSize: 0, weight: .regular)
+      label.mode = .remaining
+      self.touchBarPosLabels.append(label)
+      item.view = label
+      item.customizationLabel = NSLocalizedString("touchbar.remainingTime", comment: "Remaining Time Position")
       return item
 
     case .ahead15Sec,
@@ -132,6 +147,12 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
          .prev:
       guard let data = touchBarItemBinding[identifier] else { return nil }
       return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSkipAction(_:)))
+      
+    case .exitFullScr:
+      let item = NSCustomTouchBarItem(identifier: identifier)
+      item.view = NSButton(image: NSImage(named: NSImage.touchBarExitFullScreenTemplateName)!, target: self, action: #selector(self.touchBarExitFullScrAction(_:)))
+      self.touchBarExitFullScr = item.view as? NSButton
+      return item
 
     default:
       return nil
@@ -140,9 +161,9 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
 
   func updateTouchBarPlayBtn() {
     if player.info.isPaused {
-      touchBarPlayPauseBtn?.image = NSImage(named: .touchBarPlayTemplate)
+      touchBarPlayPauseBtn?.image = NSImage(named: NSImage.touchBarPlayTemplateName)
     } else {
-      touchBarPlayPauseBtn?.image = NSImage(named: .touchBarPauseTemplate)
+      touchBarPlayPauseBtn?.image = NSImage(named: NSImage.touchBarPauseTemplateName)
     }
   }
 
@@ -172,6 +193,10 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
     let percentage = 100 * sender.doubleValue / sender.maxValue
     player.seek(percent: percentage, forceExact: true)
   }
+  
+  @objc func touchBarExitFullScrAction(_ sender: NSButton) {
+    player.mainWindow.toggleWindowFullScreen()
+  }
 
   private func buttonTouchBarItem(withIdentifier identifier: NSTouchBarItem.Identifier, imageName: NSImage.Name, tag: Int, customLabel: String, action: Selector) -> NSCustomTouchBarItem {
     let item = NSCustomTouchBarItem(identifier: identifier)
@@ -186,17 +211,26 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
     let duration: VideoTime = player.info.videoDuration ?? .zero
     let pad: CGFloat = 16.0
     sizingTouchBarTextField.stringValue = duration.stringRepresentation
-    if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, let posLabel = touchBarCurrentPosLabel {
+    if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, !touchBarPosLabels.isEmpty {
       if let posConstraint = touchBarPosLabelWidthLayout {
         posConstraint.constant = widthConstant + pad
-        posLabel.setNeedsDisplay()
+        touchBarPosLabels.forEach { $0.setNeedsDisplay() }
       } else {
-        let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + pad)
-        posLabel.addConstraint(posConstraint)
-        touchBarPosLabelWidthLayout = posConstraint
+        for posLabel in touchBarPosLabels {
+          let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + pad)
+          posLabel.addConstraint(posConstraint)
+          touchBarPosLabelWidthLayout = posConstraint
+        }
       }
     }
-
+  }
+  
+  func toggleTouchBarEsc(enteringFullScr: Bool) {
+    if enteringFullScr, PlayerCore.keyBindings["ESC"]?.readableAction == "set fullscreen no" {
+      touchBar.escapeKeyReplacementItemIdentifier = .exitFullScr
+    } else {
+      touchBar.escapeKeyReplacementItemIdentifier = nil
+    }
   }
 }
 
@@ -240,6 +274,10 @@ class TouchBarPlaySlider: NSSlider {
     super.touchesEnded(with: event)
   }
 
+  func resetCachedThumbnails() {
+    (cell as! TouchBarPlaySliderCell).cachedThumbnailProgress = -1
+  }
+
   func setDoubleValueSafely(_ value: Double) {
     guard !isTouching else { return }
     doubleValue = value
@@ -250,8 +288,12 @@ class TouchBarPlaySlider: NSSlider {
 
 class TouchBarPlaySliderCell: NSSliderCell {
 
+  var cachedThumbnailProgress: Double = -1
+
   private let solidColor = NSColor.labelColor.withAlphaComponent(0.4)
   private let knobWidthWithImage: CGFloat = 60
+
+  private var backgroundImage: NSImage?
 
   var isTouching: Bool {
     return (self.controlView as! TouchBarPlaySlider).isTouching
@@ -330,26 +372,39 @@ class TouchBarPlaySliderCell: NSSliderCell {
     let info = playerCore.info
     guard !info.isIdle else { return }
     let barRect = self.barRect(flipped: flipped)
-    NSGraphicsContext.saveGraphicsState()
-    NSBezierPath(roundedRect: barRect, xRadius: 2.5, yRadius: 2.5).setClip()
-    let step: CGFloat = 3
-    let end = barRect.width
-    var i: CGFloat = 0
-    solidColor.setFill()
-    while (i < end + step) {
-      let percent = Double(i / end)
-      let dest = NSRect(x: barRect.origin.x + i, y: barRect.origin.y, width: 2, height: barRect.height)
-      if let dur = info.videoDuration?.second,
-        let image = info.getThumbnail(forSecond: percent * dur)?.image,
-        info.thumbnailsProgress >= percent {
-        let orig = NSRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
-        image.draw(in: dest, from: orig, operation: .copy, fraction: 1, respectFlipped: true, hints: nil)
-      } else {
-        NSBezierPath(rect: dest).fill()
+    if let image = backgroundImage, info.thumbnailsProgress == cachedThumbnailProgress {
+      // draw cached background image
+      image.draw(in: barRect)
+    } else {
+      // draw the background image
+      let imageRect = NSRect(origin: .zero, size: barRect.size)
+      let image = NSImage(size: barRect.size)
+      image.lockFocus()
+      NSGraphicsContext.saveGraphicsState()
+      NSBezierPath(roundedRect: imageRect, xRadius: 2.5, yRadius: 2.5).setClip()
+      let step: CGFloat = 3
+      let end = imageRect.width
+      var i: CGFloat = 0
+      solidColor.setFill()
+      while (i < end + step) {
+        let percent = Double(i / end)
+        let dest = NSRect(x: i, y: 0, width: 2, height: imageRect.height)
+        if let dur = info.videoDuration?.second,
+          let image = info.getThumbnail(forSecond: percent * dur)?.image,
+          info.thumbnailsProgress >= percent {
+          let orig = NSRect(origin: .zero, size: image.size)
+          image.draw(in: dest, from: orig, operation: .copy, fraction: 1, respectFlipped: true, hints: nil)
+        } else {
+          NSBezierPath(rect: dest).fill()
+        }
+        i += step
       }
-      i += step
+      NSGraphicsContext.restoreGraphicsState()
+      image.unlockFocus()
+      backgroundImage = image
+      cachedThumbnailProgress = info.thumbnailsProgress
+      image.draw(in: barRect)
     }
-    NSGraphicsContext.restoreGraphicsState()
   }
 
 }

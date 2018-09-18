@@ -1,7 +1,7 @@
-/* Class = "NSTextFieldCell"; title = "Theme:"; ObjectID = "2Hu-qC-UMi"; */
-"2Hu-qC-UMi.title" = "테마:";
+/* Class = "NSMenuItem"; title = "Show open file panel"; ObjectID = "1ce-4b-kgG"; */
+"1ce-4b-kgG.title" = "파일 열기 패널 보기";
 
-/* Class = "NSButtonCell"; title = "Keep window open when playback finished"; ObjectID = "2iM-j7-AzQ"; */
+/* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
 "2iM-j7-AzQ.title" = "재생이 끝난 후에도 윈도우를 닫지 않음";
 
 /* Class = "NSTextFieldCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
@@ -10,8 +10,8 @@
 /* Class = "NSMenuItem"; title = "PNG"; ObjectID = "3XO-ks-TDg"; */
 "3XO-ks-TDg.title" = "PNG";
 
-/* Class = "NSMenuItem"; title = "Ultra Dark"; ObjectID = "3XV-iO-y0C"; */
-"3XV-iO-y0C.title" = "Ultra Dark";
+/* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
+"5Y9-bX-K0f.title" = "윈도우 최소화/복원";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
 "6TV-DG-503.title" = "재생목록:";
@@ -19,113 +19,111 @@
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
 "8kU-8g-VgX.title" = "설정을 적용하려면 IINA를 종료한 후 다시 실행해야 합니다.";
 
-/* Class = "NSMenuItem"; title = "Light"; ObjectID = "49l-le-9k6"; */
-"49l-le-9k6.title" = "Light";
-
-/* Class = "NSButtonCell"; title = "Remember recently opened files"; ObjectID = "55O-ik-ql6"; */
+/* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "최근 재생된 항목 기억하기";
 
-/* Class = "NSMenuItem"; title = "PGM"; ObjectID = "A5p-u9-lqJ"; */
-"A5p-u9-lqJ.title" = "PGM";
+/* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
+"Ci8-j2-QS3.title" = "재생된 파일을 모두 「최근 파일 열기」 메뉴에 저장하기";
 
-/* Class = "NSButtonCell"; title = "Open a choose file panel after starting"; ObjectID = "IYU-9y-fBL"; */
-"IYU-9y-fBL.title" = "앱을 실행하면 파일 선택 상자 열기";
+/* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
+"Ez8-qY-WAZ.title" = "매일";
 
-/* Class = "NSMenuItem"; title = "PGM (YV12)"; ObjectID = "Kru-Ho-Wpv"; */
-"Kru-Ho-Wpv.title" = "PGM (YV12)";
+/* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
+"f0j-Dn-cxt.title" = "베타 업데이트 받음";
 
-/* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
-"Lac-Ol-g6E.title" = "다음 항목 자동 재생";
+/* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
+"FbF-jJ-W5b.title" = "일시 정지";
 
-/* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
-"NVh-C5-b9i.title" = "JPEG (.jpeg)";
+/* Class = "NSButtonCell"; title = "Pause when left full screen"; ObjectID = "g2A-Kf-vct"; */
+"g2A-Kf-vct.title" = "전체 화면 중단시 일시 정지";
 
-/* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
-"QJq-fO-hhK.title" = "같은 폴더에 있는 파일을 자동으로 추가";
+/* Class = "NSTextFieldCell"; title = "When media opened:"; ObjectID = "GNV-VA-NBW"; */
+"GNV-VA-NBW.title" = "미디어를 열때:";
 
-/* Class = "NSButtonCell"; title = "Quit when no window is opened"; ObjectID = "YLo-6E-tT7"; */
-"YLo-6E-tT7.title" = "모든 윈도우를 닫으면 앱을 종료";
+/* Class = "NSTextFieldCell"; title = "When launched:"; ObjectID = "gqT-CB-Puw"; */
+"gqT-CB-Puw.title" = "앱 실행시:";
 
-/* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/path/to/screenshot/folder";
+/* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
+"hWC-KJ-FuC.title" = "자동 업데이트 확인";
 
-/* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "bPK-Wy-OMI"; */
-"bPK-Wy-OMI.title" = "Medium Light";
+/* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
+"iGS-qN-f5q.title" = "재생 기록 사용하기";
 
-/* Class = "NSMenuItem"; title = "PPM"; ObjectID = "iSD-UA-cfL"; */
-"iSD-UA-cfL.title" = "PPM";
+/* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
+"Imf-6g-2Cd.title" = "매주";
+
+/* Class = "NSButtonCell"; title = "Window became inactive/active"; ObjectID = "J8g-aS-W6e"; */
+"J8g-aS-W6e.title" = "윈도우 비활성화/활성화";
+
+/* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
+"jeK-46-2BG.title" = "재생 기록:";
+
+/* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
+"JfZ-D8-aF2.title" = "동작 없음";
 
 /* Class = "NSButtonCell"; title = "Resume last playback position"; ObjectID = "jOB-D3-WT3"; */
 "jOB-D3-WT3.title" = "최근에 재생했던 위치로 복원";
 
+/* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
+"KfL-r7-Uav.title" = "음악을 재생할 때 \"음악 모드\"로 자동 전환";
+
+/* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
+"KYi-0W-zOr.title" = "전체 화면일 때 다른 모니터 끄기";
+
+/* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
+"Lac-Ol-g6E.title" = "다음 항목 자동 재생";
+
+/* Class = "NSButtonCell"; title = "Play when entered full screen"; ObjectID = "lOw-pu-Llm"; */
+"lOw-pu-Llm.title" = "전체 화면 전환시 재생 시작";
+
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
 "lvA-Rc-Sh6.title" = "자막 포함";
+
+/* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
+"M0z-bI-88d.title" = "항상 새로운 윈도우로 파일 열기";
+
+/* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
+"MlG-hl-goB.title" = "전체 화면";
+
+/* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
+"NVh-C5-b9i.title" = "JPEG (.jpeg)";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "oJY-Iz-3sO"; */
 "oJY-Iz-3sO.title" = "파일형식:";
 
-/* Class = "NSTextFieldCell"; title = "Appearance:"; ObjectID = "pHB-yo-Ret"; */
-"pHB-yo-Ret.title" = "모양새:";
-
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
 "pdx-zt-kf2.title" = "스크린샷:";
 
-/* Class = "NSMenuItem"; title = "TARGA"; ObjectID = "q9X-X2-uGt"; */
-"q9X-X2-uGt.title" = "TARGA";
+/* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
+"QJq-fO-hhK.title" = "같은 폴더에 있는 파일을 자동으로 추가";
 
-/* Class = "NSMenuItem"; title = "Dark"; ObjectID = "qeB-ls-rwg"; */
-"qeB-ls-rwg.title" = "Dark";
+/* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "REP-70-XOi"; */
+"REP-70-XOi.title" = "매월";
+
+/* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
+"slG-Jb-54B.title" = "매시간";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpg)"; ObjectID = "tmy-ty-8uK"; */
 "tmy-ty-8uK.title" = "JPEG (.jpg)";
 
+/* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
+"TvB-UM-FrS.title" = "이전 방식의 전체 화면 전환 사용 (10.6 이전)";
+
 /* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
 "uQR-Fx-oEm.title" = "동작:";
 
-"KYi-0W-zOr.title" = "전체 화면일 때 다른 모니터 끄기";
-
-"jeK-46-2BG.title" = "재생 기록:";
-
-"iGS-qN-f5q.title" = "재생 기록 사용하기";
-
-"Ci8-j2-QS3.title" = "재생된 파일을 모두 「최근 파일 열기」 메뉴에 저장하기";
-
+/* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu."; ObjectID = "XFC-Lr-LmP"; */
 "XFC-Lr-LmP.title" = "선택되지 않은 경우 수동으로 열었던 파일만 「최근 파일 열기」 메뉴에 보입니다.";
 
-"M0z-bI-88d.title" = "항상 새로운 윈도우로 파일 열기";
-
-"gqT-CB-Puw.title" = "앱 실행시:";
-
-"JfZ-D8-aF2.title" = "동작 없음";
-
-"1ce-4b-kgG.title" = "파일 열기 패널 보기";
-
-"z9T-8h-1T0.title" = "시작 윈도우 보기";
-
-"TvB-UM-FrS.title" = "이전 방식의 전체 화면 전환 사용 (10.6 이전)";
-
-"GNV-VA-NBW.title" = "미디어를 열때:";
-
-"FbF-jJ-W5b.title" = "일시 정지";
-
-"MlG-hl-goB.title" = "전체 화면";
-
-"hWC-KJ-FuC.title" = "자동 업데이트 확인";
-
-"slG-Jb-54B.title" = "매시간";
-
-"Ez8-qY-WAZ.title" = "매일";
-
-"Imf-6g-2Cd.title" = "매주";
-
-"REP-70-XOi.title" = "매월";
-
+/* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "다음의 경우 일시 정지/재생:";
 
-"5Y9-bX-K0f.title" = "윈도우 최소화/복원";
+/* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
+"YeH-hk-7NN.title" = "/path/to/screenshot/folder";
 
-"J8g-aS-W6e.title" = "윈도우 비활성화/활성화";
+/* Class = "NSButtonCell"; title = "Quit after all windows are closed"; ObjectID = "YLo-6E-tT7"; */
+"YLo-6E-tT7.title" = "모든 윈도우를 닫으면 앱을 종료";
 
-"lOw-pu-Llm.title" = "전체 화면 전환시 재생 시작";
+/* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
+"z9T-8h-1T0.title" = "시작 윈도우 보기";
 
-"g2A-Kf-vct.title" = "전체 화면 중단시 일시 정지";

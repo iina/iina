@@ -57,6 +57,18 @@ class MainMenuActionHandler: NSResponder {
     }
   }
 
+  // currently only being used for key command
+  @objc func menuDeleteCurrentFileHard(_ sender: NSMenuItem) {
+    guard let url = player.info.currentURL else { return }
+    do {
+      let index = player.mpv.getInt(MPVProperty.playlistPos)
+      player.playlistRemove(index)
+      try FileManager.default.removeItem(at: url)
+    } catch let error {
+      Utility.showAlert("playlist.error_deleting", arguments: [error.localizedDescription])
+    }
+  }
+
 }
 
 // MARK: - Control
@@ -106,7 +118,7 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuJumpTo(_ sender: NSMenuItem) {
-    let _ = Utility.quickPromptPanel("jump_to") { input in
+    Utility.quickPromptPanel("jump_to") { input in
       if let vt = VideoTime(input) {
         self.player.seek(absoluteSecond: Double(vt.second))
       }
@@ -174,7 +186,7 @@ extension MainMenuActionHandler {
       player.setVideoAspect(aspectStr)
       player.sendOSD(.aspect(aspectStr))
     } else {
-      Utility.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject.debugDescription)")
+      Logger.log("Unknown aspect in menuChangeAspect(): \(sender.representedObject.debugDescription)", level: .error)
     }
   }
 
@@ -182,7 +194,7 @@ extension MainMenuActionHandler {
     if let cropStr = sender.representedObject as? String {
       player.setCrop(fromString: cropStr)
     } else {
-      Utility.log("sender.representedObject is not a string in menuChangeCrop()")
+      Logger.log("sender.representedObject is not a string in menuChangeCrop()", level: .error)
     }
   }
 
@@ -219,14 +231,14 @@ extension MainMenuActionHandler {
   @objc func menuChangeVolume(_ sender: NSMenuItem) {
     if let volumeDelta = sender.representedObject as? Int {
       let newVolume = Double(volumeDelta) + player.info.volume
-      player.setVolume(newVolume, constrain: false)
+      player.setVolume(newVolume)
     } else {
-      Utility.log("sender.representedObject is not int in menuChangeVolume()")
+      Logger.log("sender.representedObject is not int in menuChangeVolume()", level: .error)
     }
   }
 
   @objc func menuToggleMute(_ sender: NSMenuItem) {
-    player.toogleMute()
+    player.toggleMute()
   }
 
   @objc func menuChangeAudioDelay(_ sender: NSMenuItem) {
@@ -234,7 +246,7 @@ extension MainMenuActionHandler {
       let newDelay = player.info.audioDelay + delayDelta
       player.setAudioDelay(newDelay)
     } else {
-      Utility.log("sender.representedObject is not Double in menuChangeAudioDelay()")
+      Logger.log("sender.representedObject is not Double in menuChangeAudioDelay()", level: .error)
     }
   }
 
@@ -247,8 +259,8 @@ extension MainMenuActionHandler {
 
 extension MainMenuActionHandler {
   @objc func menuLoadExternalSub(_ sender: NSMenuItem) {
-    Utility.quickOpenPanel(title: "Load external subtitle file", isDir: false) { url in
-      self.player.loadExternalSubFile(url)
+    Utility.quickOpenPanel(title: "Load external subtitle file", chooseDir: false) { url in
+      self.player.loadExternalSubFile(url, delay: true)
     }
   }
 
@@ -257,7 +269,7 @@ extension MainMenuActionHandler {
       let newDelay = player.info.subDelay + delayDelta
       player.setSubDelay(newDelay)
     } else {
-      Utility.log("sender.representedObject is not Double in menuChangeSubDelay()")
+      Logger.log("sender.representedObject is not Double in menuChangeSubDelay()", level: .error)
     }
   }
 
@@ -295,24 +307,36 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuFindOnlineSub(_ sender: NSMenuItem) {
-    guard let url = player.info.currentURL else { return }
-    OnlineSubtitle.getSub(forFile: url, playerCore: player) { subtitles in
+    // return if last search is not finished
+    guard let url = player.info.currentURL, !player.isSearchingOnlineSubtitle else { return }
+
+    player.isSearchingOnlineSubtitle = true
+    OnlineSubtitle.getSubtitle(forFile: url, playerCore: player) { subtitles in
       // send osd in main thread
       self.player.sendOSD(.foundSub(subtitles.count))
+      guard !subtitles.isEmpty else {
+        self.player.isSearchingOnlineSubtitle = false
+        return
+      }
       // download them
       for sub in subtitles {
         sub.download { result in
           switch result {
-          case .ok(let url):
-            Utility.log("Saved subtitle to \(url.path)")
-            self.player.loadExternalSubFile(url)
-            self.player.sendOSD(.downloadedSub(url.lastPathComponent))
+          case .ok(let urls):
+            for url in urls {
+              Logger.log("Saved subtitle to \(url.path)")
+              self.player.loadExternalSubFile(url)
+            }
+            self.player.sendOSD(.downloadedSub(
+              urls.map({ $0.lastPathComponent }).joined(separator: "\n")
+            ))
             self.player.info.haveDownloadedSub = true
           case .failed:
             self.player.sendOSD(.networkError)
           }
         }
       }
+      self.player.isSearchingOnlineSubtitle = false
     }
   }
 

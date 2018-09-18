@@ -14,13 +14,11 @@ class AboutWindowController: NSWindowController {
     return NSNib.Name("AboutWindowController")
   }
 
-
+  @IBOutlet weak var windowBackgroundBox: NSBox!
   @IBOutlet weak var iconImageView: NSImageView!
   @IBOutlet weak var iinaLabel: NSTextField! {
     didSet {
-      if #available(OSX 10.11, *) {
-        iinaLabel.font = NSFont.systemFont(ofSize: 24, weight: .light)
-      }
+      iinaLabel.font = NSFont.systemFont(ofSize: 24, weight: .light)
     }
   }
   @IBOutlet weak var versionLabel: NSTextField!
@@ -31,9 +29,11 @@ class AboutWindowController: NSWindowController {
   override func windowDidLoad() {
     super.windowDidLoad()
 
-    window?.titlebarAppearsTransparent = true
-    window?.backgroundColor = .white
-
+    if #available(macOS 10.13, *) {
+      windowBackgroundBox.fillColor = NSColor(named: .aboutWindowBackground)!
+    } else {
+      windowBackgroundBox.fillColor = .white
+    }
     iconImageView.image = NSApp.applicationIconImage
 
     let (version, build) = Utility.iinaVersion()
@@ -44,6 +44,7 @@ class AboutWindowController: NSWindowController {
 
     let contrubutionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf")!
     detailTextView.readRTFD(fromFile: contrubutionFile)
+    detailTextView.textColor = NSColor.textColor
   }
 
   @IBAction func creditsBtnAction(_ sender: Any) {

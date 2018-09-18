@@ -22,6 +22,7 @@
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering... %d%%";
+"main.opening_stream" = "Opening stream…";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Default";
@@ -60,7 +61,8 @@
 "osd.video_eq.saturation" = "Saturation: %i";
 "osd.video_eq.brightness" = "Brightness: %i";
 "osd.find_online_sub" = "Finding online subtitles...";
-"osd.sub_not_found" = "No subtitle found";
+"osd.find_online_sub.source" = "from";
+"osd.sub_not_found" = "No subtitles found";
 "osd.sub_found" = "%d subtitle(s) found. Downloading...";
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
@@ -74,20 +76,24 @@
 "preference.title" = "Preferences";
 "preference.general" = "General";
 "preference.ui" = "UI";
-"preference.codec" = "Codec";
+"preference.video_audio" = "Video/Audio";
 "preference.subtitle" = "Subtitle";
 "preference.network" = "Network";
 "preference.control" = "Control";
 "preference.keybindings" = "Key Bindings";
 "preference.advanced" = "Advanced";
+"preference.utilities" = "Utilities";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Not logged in";
 "preference.logged_in_as" = "Logged in as %@";
 "preference.system_media_control" = "Use system media control";
 
+"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
+"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+
 "menu.volume"= "Volume: %d";
 "menu.audio_delay" = "Audio Delay: %.2fs";
-"menu.sub_delay" = "Subtitie Delay: %.2fs";
+"menu.sub_delay" = "Subtitle Delay: %.2fs";
 "menu.fullscreen" = "Enter Full Screen";
 "menu.exit_fullscreen" = "Exit Full Screen";
 "menu.pip" = "Enter Picture-in-Picture";
@@ -109,7 +115,13 @@
 
 "track.none" = "<None>";
 
+"subtrack.no_loaded" = "No Subtitles Loaded";
+"subtrack.no_external" = "No External Subtitles Found";
+
 // Alerts
+"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+"alert.beta_channel.message" = "IINA v1.0 is coming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
+
 "alert.title_error" = "Error";
 "alert.title_warning" = "Warning";
 "alert.title_info" = "Information";
@@ -137,12 +149,12 @@
 "alert.config.name_existing" = "The name already exists.";
 "alert.config.file_existing.title" = "File Already Exists";
 "alert.config.file_existing.message" = "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.";
-"alert.config.cannot_create" = "Cannot create config file!";
+"alert.config.cannot_create" = "Cannot create config file!\n%@";
 "alert.config.cannot_write" = "Cannot write to config file!";
 
 "alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "New Filter";
-"alert.add_filter.message" = "Please enter a filter string in format of MPV's vf or af command.";
+"alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
 
 "alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
 
@@ -154,7 +166,7 @@
 "alert.playlist.error_deleting" = "Error deleting: %@";
 
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using opensubtitles. English(eng) will be used this time.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 
@@ -163,7 +175,7 @@
 "alert.set_default.success" = "Finished with %d success and %d failed.";
 
 "alert.add_watch.title" = "Add Watch Property";
-"alert.add_watch.message" = "Please enter a valid MPV property name.";
+"alert.add_watch.message" = "Please enter a valid mpv property name.";
 
 "alert.jump_to.title" = "Jump to";
 "alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
@@ -175,6 +187,9 @@
 "alert.open_url.message" = "Please enter the URL:";
 "alert.choose_media_file.title" = "Choose Media File";
 
+"alert.add_url.title" = "Add URL";
+"alert.add_url.message" = "Please enter the URL:";
+
 "alert.delete_history.title" = "Delete Playback History";
 "alert.delete_history.message" = "Are you sure to delete select entries?";
 
@@ -185,13 +200,25 @@
 
 "alert.clear_cache.title" = "Clear Thumbnail Cache";
 "alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
-"alert.clear_cache.success" = "Cache cleared.";
+
+"alert.clear_history.title" = "Clear Playback History";
+"alert.clear_history.message" = "Are you sure to delete all playback history?";
+
+"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
+"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
 
 "alert.nothing_to_open" = "Nothing to open.";
 
 "alert.no_video_track" = "There is no video track.";
 
 "alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate it before editing.";
+
+"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
+"alert.assrt_register.register" = "Register Now";
+"alert.assrt_register.try" = "Try First";
+"alert.assrt_token_prompt.title" = "Enter your API token";
+"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
+"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
 
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
@@ -203,7 +230,8 @@
 "pl_menu.delete_after_play" = "Move to Trash After Playback";
 "pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
 "pl_menu.reveal_in_finder" = "Reveal in Finder";
-"pl_menu.add_item" = "Add Item…";
+"pl_menu.add_file" = "Add File…";
+"pl_menu.add_url" = "Add URL…";
 "pl_menu.clear_playlist" = "Clear Playlist";
 "pl_menu.matched_sub" = "Matched %d Subtitle(s)";
 "pl_menu.add_sub" = "Add Subtitle…";
@@ -221,6 +249,13 @@
 
 "subencoding.auto" = "Auto detect";
 
+"osc_toolbar.settings" = "Quick Settings";
+"osc_toolbar.playlist" = "Playlist and chapters";
+"osc_toolbar.pip" = "Toggle Picture-in-Picture";
+"osc_toolbar.full_screen" = "Toggle full screen";
+"osc_toolbar.music_mode" = "Enter music mode";
+"osc_toolbar.sub_track" = "Choose subtitle track";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15sec Ahead";
@@ -236,3 +271,4 @@
 "touchbar.play_pause" = "Play / Pause";
 "touchbar.seek" = "Seek";
 "touchbar.time" = "Time Position";
+"touchbar.remainingTime" = "Remaining Time";

@@ -1,23 +1,38 @@
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "HJk-g1-sOy"; */
-"HJk-g1-sOy.title" = "Text Cell";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "QFT-Lq-egc"; */
-"QFT-Lq-egc.title" = "Text Cell";
+/* Class = "NSTextFieldCell"; title = "▶︎"; ObjectID = "4yj-cg-fli"; */
+"4yj-cg-fli.title" = "▶︎";
 
 /* Class = "NSTabViewItem"; label = "Chapters"; ObjectID = "aaR-kR-im0"; */
 "aaR-kR-im0.label" = "챕터";
 
+/* Class = "NSMenuItem"; title = "Add File…"; ObjectID = "CI2-Gm-j4o"; */
+"CI2-Gm-j4o.title" = "파일 추가…";
+
+/* Class = "NSButtonCell"; title = "…"; ObjectID = "CVl-Xv-m3u"; */
+"CVl-Xv-m3u.title" = "…";
+
 /* Class = "NSButtonCell"; title = "PLAYLIST"; ObjectID = "fAq-Pq-ThP"; */
 "fAq-Pq-ThP.title" = "재생목록";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "HJk-g1-sOy"; */
+"HJk-g1-sOy.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "▶︎"; ObjectID = "iCm-bC-upL"; */
 "iCm-bC-upL.title" = "▶︎";
 
+/* Class = "NSTextFieldCell"; title = "Matched subtitles"; ObjectID = "j2t-mO-cpo"; */
+"j2t-mO-cpo.title" = "일치하는 자막";
+
 /* Class = "NSButtonCell"; title = "CHAPTERS"; ObjectID = "jUF-xa-uRI"; */
 "jUF-xa-uRI.title" = "챕터";
 
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "QFT-Lq-egc"; */
+"QFT-Lq-egc.title" = "Text Cell";
+
 /* Class = "NSTabViewItem"; label = "Playlist"; ObjectID = "rjs-Qf-mT6"; */
 "rjs-Qf-mT6.label" = "재생목록";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Folded common prefix"; ObjectID = "U4W-Xv-hkh"; */
+"U4W-Xv-hkh.ibShadowedToolTip" = "파일 이름중 공통 부분을 감추거나 보이게 합니다";
 
 /* Class = "NSTextFieldCell"; title = "00:00 -> 00:00"; ObjectID = "v6p-4g-BZw"; */
 "v6p-4g-BZw.title" = "00:00 -> 00:00";
@@ -25,12 +40,9 @@
 /* Class = "NSTextFieldCell"; title = "Chapter Title"; ObjectID = "vmJ-Ry-xgK"; */
 "vmJ-Ry-xgK.title" = "챕터 제목";
 
-"j2t-mO-cpo.title" = "일치된 자막";
+/* Class = "NSMenuItem"; title = "Add URL…"; ObjectID = "zeJ-cr-tRg"; */
+"zeJ-cr-tRg.title" = "URL 추가…";
 
+/* Class = "NSButtonCell"; title = "Wrong Subtitle!"; ObjectID = "zod-Ch-cOH"; */
 "zod-Ch-cOH.title" = "잘못된 자막!";
 
-/* Class = "NSTextFieldCell"; title = "▶︎"; ObjectID = "4yj-cg-fli"; */
-"4yj-cg-fli.title" = "▶︎";
-
-/* Class = "NSButtonCell"; title = "…"; ObjectID = "CVl-Xv-m3u"; */
-"CVl-Xv-m3u.title" = "…";

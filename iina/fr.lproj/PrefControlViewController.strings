@@ -39,6 +39,9 @@
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
 "Hm3-dh-jgb.title" = "Plein écran";
 
+/* Class = "NSTextFieldCell"; title = "Trackpad"; ObjectID = "I6k-ab-IwJ"; */
+"I6k-ab-IwJ.title" = "Trackpad";
+
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "K9H-w9-wmT"; */
 "K9H-w9-wmT.title" = "Auto";
 
@@ -74,6 +77,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Force Touch to:"; ObjectID = "dpH-PO-WKt"; */
 "dpH-PO-WKt.title" = "Force Touch pour :";
+
+/* Class = "NSTextFieldCell"; title = "Mouse"; ObjectID = "eA4-AD-oUu"; */
+"eA4-AD-oUu.title" = "Souris";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "guu-dK-YfL"; */
 "guu-dK-YfL.title" = "Aucun";
@@ -119,16 +125,4 @@
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "Aucun";
-
-/* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "2Ig-fw-UvW"; */
-"2Ig-fw-UvW.title" = "Média précédent / suivant";
-
-/* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "kEB-gk-wuI"; */
-"kEB-gk-wuI.title" = "Utiliser les boutons droite/gauche pour :";
-
-/* Class = "NSMenuItem"; title = "Speed"; ObjectID = "hIG-5X-2Pm"; */
-"hIG-5X-2Pm.title" = "Vitesse";
-
-/* Class = "NSMenuItem"; title = "Fastforward / Rewind"; ObjectID = "q50-Po-JYO"; */
-"q50-Po-JYO.title" = "Avance rapide / Rembobiner";
 

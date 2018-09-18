@@ -2,13 +2,26 @@
 
 "alert.add_filter.message" = "请输入符合 mpv 的 vf 或 af 选项格式的滤镜字符串。";
 "alert.add_filter.title" = "添加滤镜";
+"alert.add_url.message" = "请输入 URL:";
+"alert.add_url.title" = "添加 URL";
 "alert.add_watch.message" = "请输入一个有效的 mpv 属性名。";
 "alert.add_watch.title" = "监视 mpv 属性";
+"alert.assrt_register" = "由于射手网(伪)的 API 请求数量限制，请务必在射手网(伪)注册账户后使用自己的 API token。自带 API token 仅用于测试用途，并且可能由于 API 使用超出限额而请求失败。";
+"alert.assrt_register.register" = "去射手网(伪)注册";
+"alert.assrt_register.try" = "先试用一下";
+"alert.assrt_token_invalid" = "你的射手网(伪) API token 格式错误。";
+"alert.assrt_token_prompt.message" = "请在弹出的网页中注册帐号，然后进入用户首页查看 API token 并在下方输入:";
+"alert.assrt_token_prompt.title" = "输入你在射手网(伪)的 API token";
+"alert.beta_channel.message" = "在发布 IINA 1.0 之前，你愿意帮助我们测试 beta 版本吗？\n\n你可以在「偏好设置-通用」中随时修改此行为。";
+"alert.beta_channel.title" = "接受 beta 版本的更新";
 "alert.choose_media_file.title" = "选择媒体文件";
 "alert.clear_cache.message" = "确定清除所有缩略图缓存吗?";
-"alert.clear_cache.success" = "缓存已清除。";
 "alert.clear_cache.title" = "清除缩略图缓存";
-"alert.config.cannot_create" = "无法创建配置文件！";
+"alert.clear_history.message" = "确定删除所有播放历史吗？";
+"alert.clear_history.title" = "清除播放历史";
+"alert.clear_watch_later.message" = "确定清除所有保存的播放进度，即「watch later」数据吗？";
+"alert.clear_watch_later.title" = "清除保存的播放进度";
+"alert.config.cannot_create" = "无法创建配置文件！\n%@";
 "alert.config.cannot_write" = "无法写入配置文件！";
 "alert.config.duplicate.message" = "请输入复制后的配置文件名。";
 "alert.config.duplicate.title" = "复制快捷键配置";
@@ -22,7 +35,7 @@
 "alert.delete_history.title" = "删除历史记录";
 "alert.duplicate_config" = "默认配置不能被编辑。请先复制后再编辑。";
 "alert.error_deleting_file" = "无法删除文件。";
-"alert.error_finding_file" = "无法找到文件 %@ ！";
+"alert.error_finding_file" = "无法找到文件 %@!";
 "alert.error_loading_script" = "无法加载脚本 %@！";
 "alert.error_open" = "无法打开文件或流！";
 "alert.error_saving_file" = "保存文件 %@ 时出现错误 %@";
@@ -30,17 +43,15 @@
 "alert.extra_option.config_folder" = "设置配置文件目录 \"%@\" 时出现错误。";
 "alert.extra_option.empty" = "键或值不能为空！";
 "alert.extra_option.error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查你的额外 mpv 选项。";
-"alert.fatal_error" = "严重错误：%@ 
-程序将立刻结束。";
+"alert.fatal_error" = "严重错误：%@ \n程序将立刻结束。";
 "alert.filter.incorrect" = "设置滤镜时出现错误。请检查你的参数格式。";
 "alert.filter_hwdec.abort" = "放弃";
-"alert.filter_hwdec.message" = "你正在添加视频滤镜。然而，当前的硬件解码器不能很好地支持视频滤镜。你可以禁用硬件解码，或使用支持「拷贝」的解码器 (将占用两倍内存)。
-你可能需要再操作一次（例如剪切）才能看到效果。";
+"alert.filter_hwdec.message" = "你正在添加视频滤镜。然而，当前的硬件解码器不能很好地支持视频滤镜。你可以禁用硬件解码，或使用支持「拷贝」的解码器 (将占用两倍内存)。\n你可能需要再操作一次（例如剪切）才能看到效果。";
 "alert.filter_hwdec.turn_off" = "关闭硬件解码";
 "alert.filter_hwdec.use_copy" = "使用支持「拷贝」的解码器";
 "alert.jump_to.message" = "请输入希望跳转的时间。例: 20:35";
 "alert.jump_to.title" = "跳转至";
-"alert.keybinding_config.error" = "无法设置快捷键「%@」！已回退到 IINA 默认配置。请检查你的快捷键文件是否正确。";
+"alert.keybinding_config.error" = "无法设置快捷键「%@」! 已回退到 IINA 默认配置。请检查你的快捷键文件是否正确。";
 "alert.mpv_error" = "出现内部错误 %@ (%@) (设定选项 %@ 时)。";
 "alert.no_video_track" = "没有可用的视频轨道。";
 "alert.nothing_to_open" = "没有可打开的文件。";
@@ -53,14 +64,10 @@
 "alert.set_default.success" = "操作已完成。%d 成功，%d 失败。";
 "alert.set_default.title" = "将 IINA 设为默认播放器";
 "alert.sleep" = "无法阻止系统睡眠。";
-"alert.sub.cannot_login" = "无法登录。请检查你的用户名、密码及网络状态。
-
-%@";
+"alert.sub.cannot_login" = "无法登录。请检查你的用户名、密码及网络状态。\n\n%@";
 "alert.sub.cannot_save_passwd" = "无法将密码保存到钥匙串：%@";
 "alert.sub.no_selected" = "请先启用一个下载的字幕。";
-"alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。
-
-0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";
+"alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。\n\n0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";
 "alert.title_error" = "错误";
 "alert.title_info" = "提示";
 "alert.title_warning" = "警告";
@@ -84,6 +91,7 @@
 "keymapping.message" = "请按任意键来开始录制。";
 "keymapping.title" = "快捷键";
 "main.buffering_indicator" = "缓冲中... %d%%";
+"main.opening_stream" = "正在打开流……";
 "menu.audio_delay" = "音频延迟: %.2f秒";
 "menu.audio_delay_down" = "音频延迟 - %.1fs";
 "menu.audio_delay_up" = "音频延迟 + %.1fs";
@@ -104,6 +112,12 @@
 "menu.volume" = "音量: %d";
 "menu.volume_down" = "音量 - %.0f%%";
 "menu.volume_up" = "音量 + %.0f%%";
+"osc_toolbar.full_screen" = "切换全屏";
+"osc_toolbar.music_mode" = "进入音乐模式";
+"osc_toolbar.pip" = "切换「画中画」模式";
+"osc_toolbar.playlist" = "播放列表和章节";
+"osc_toolbar.settings" = "快速设置";
+"osc_toolbar.sub_track" = "选择字幕轨道";
 "osd.abloop.a" = "AB循环：A";
 "osd.abloop.b" = "AB循环：B";
 "osd.abloop.clear" = "AB循环：清除";
@@ -122,6 +136,7 @@
 "osd.filter_added" = "已添加滤镜: %@";
 "osd.filter_removed" = "已删除滤镜";
 "osd.find_online_sub" = "查找在线字幕中...";
+"osd.find_online_sub.source" = "从";
 "osd.mute" = "静音";
 "osd.network_error" = "网络错误";
 "osd.pause" = "暂停";
@@ -146,8 +161,9 @@
 "osd.video_eq.hue" = "色调：%i";
 "osd.video_eq.saturation" = "饱和度：%i";
 "osd.volume" = "音量：%i";
-"pl_menu.add_item" = "添加项目…";
+"pl_menu.add_file" = "添加文件…";
 "pl_menu.add_sub" = "添加字幕…";
+"pl_menu.add_url" = "添加 URL…";
 "pl_menu.clear_playlist" = "清除播放列表";
 "pl_menu.delete" = "移到垃圾桶";
 "pl_menu.delete_after_play" = "播放后移到垃圾桶";
@@ -164,9 +180,10 @@
 "playlist.chapter_cap" = "章节";
 "playlist.playlist_cap" = "播放列表";
 "preference.advanced" = "高级";
-"preference.codec" = "解码";
 "preference.control" = "控制";
 "preference.general" = "通用";
+"preference.key_binding_hint_1" = "若要编辑此配置文件，请先点击「复制…」按钮来创建一个副本。";
+"preference.key_binding_hint_2" = "双击右边的任意一行来编辑相应的快捷键。";
 "preference.keybindings" = "快捷键";
 "preference.logged_in_as" = "已登录 %@";
 "preference.network" = "网络";
@@ -175,10 +192,14 @@
 "preference.subtitle" = "字幕";
 "preference.system_media_control" = "使用系统媒体控制";
 "preference.title" = "偏好设置";
-"preference.ui" = "UI";
+"preference.ui" = "界面";
+"preference.utilities" = "实用工具";
+"preference.video_audio" = "视频/音频";
 "quicksetting.item_default" = "默认";
 "quicksetting.item_none" = "无";
 "subencoding.auto" = "自动识别";
+"subtrack.no_external" = "没有找到外部字幕";
+"subtrack.no_loaded" = "没有已加载的字幕";
 "touchbar.ahead_15" = "前进 15 秒";
 "touchbar.ahead_30" = "前进 30 秒";
 "touchbar.back_15" = "后退 15 秒";
@@ -189,6 +210,7 @@
 "touchbar.next_video" = "下一个视频";
 "touchbar.play_pause" = "播放 / 暂停";
 "touchbar.prev_video" = "上一个视频";
+"touchbar.remainingTime" = "剩余时间";
 "touchbar.rewind" = "快退";
 "touchbar.seek" = "进度条";
 "touchbar.time" = "播放进度";

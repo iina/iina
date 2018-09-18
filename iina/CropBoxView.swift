@@ -8,10 +8,27 @@
 
 import Cocoa
 
+fileprivate extension NSColor {
+  static let cropBoxFill: NSColor = {
+    if #available(macOS 10.14, *) {
+      return NSColor(named: .cropBoxFill)!
+    } else {
+      return NSColor(calibratedWhite: 0.5, alpha: 0.3)
+    }
+  }()
+  static let cropBoxBorder: NSColor = {
+    if #available(macOS 10.14, *) {
+      return .controlAccentColor
+    } else {
+      return NSColor(calibratedRed: 0.4, green: 0.6, blue: 1, alpha: 1)
+    }
+  }()
+}
+
 class CropBoxView: NSView {
 
-  private let boxStrokeColor = NSColor(calibratedRed: 0.4, green: 0.6, blue: 1, alpha: 1)
-  private let boxFillColor = NSColor(calibratedWhite: 0.5, alpha: 0.3)
+  private let boxStrokeColor = NSColor.cropBoxBorder
+  private let boxFillColor = NSColor.cropBoxFill
 
   weak var settingsViewController: CropBoxViewController!
 
@@ -90,8 +107,8 @@ class CropBoxView: NSView {
     let xScale =  videoRect.width / actualSize.width
     let yScale =  videoRect.height / actualSize.height
 
-    let ix = selectedRect.x * xScale + videoRect.x
-    let iy = selectedRect.y * xScale + videoRect.y
+    let ix = selectedRect.minX * xScale + videoRect.minX
+    let iy = selectedRect.minY * xScale + videoRect.minY
     let iw = selectedRect.width * xScale
     let ih = selectedRect.height * yScale
 
@@ -126,7 +143,7 @@ class CropBoxView: NSView {
   }
 
   override func mouseDragged(with event: NSEvent) {
-    let mousePos = convert(event.locationInWindow, from: nil).constrain(in: videoRect)
+    let mousePos = convert(event.locationInWindow, from: nil).constrained(to: videoRect)
 
     if isDragging {
       // resizing selected box

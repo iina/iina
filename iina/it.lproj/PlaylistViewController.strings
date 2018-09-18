@@ -3,6 +3,9 @@
 /* Class = "NSTextFieldCell"; title = "▶︎"; ObjectID = "4yj-cg-fli"; */
 "4yj-cg-fli.title" = "▶︎";
 
+/* Class = "NSMenuItem"; title = "Add File…"; ObjectID = "CI2-Gm-j4o"; */
+"CI2-Gm-j4o.title" = "Aggiungi file…";
+
 /* Class = "NSButtonCell"; title = "…"; ObjectID = "CVl-Xv-m3u"; */
 "CVl-Xv-m3u.title" = "…";
 
@@ -14,6 +17,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "QFT-Lq-egc"; */
 "QFT-Lq-egc.title" = "Cella testo";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Folded common prefix"; ObjectID = "U4W-Xv-hkh"; */
+"U4W-Xv-hkh.ibShadowedToolTip" = "Tronca i nomi con il medesimo prefisso";
 
 /* Class = "NSTabViewItem"; label = "Chapters"; ObjectID = "aaR-kR-im0"; */
 "aaR-kR-im0.label" = "Capitoli";
@@ -28,7 +34,7 @@
 "j2t-mO-cpo.title" = "Sottotitoli corrispondenti";
 
 /* Class = "NSButtonCell"; title = "CHAPTERS"; ObjectID = "jUF-xa-uRI"; */
-"jUF-xa-uRI.title" = "Capitoli";
+"jUF-xa-uRI.title" = "CAPITOLI";
 
 /* Class = "NSTabViewItem"; label = "Playlist"; ObjectID = "rjs-Qf-mT6"; */
 "rjs-Qf-mT6.label" = "Playlist";
@@ -41,6 +47,12 @@
 
 /* Class = "NSTextFieldCell"; title = "Chapter Title"; ObjectID = "vmJ-Ry-xgK"; */
 "vmJ-Ry-xgK.title" = "Titolo del capitolo";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "zbw-ad-lgl"; */
+"zbw-ad-lgl.title" = "Label";
+
+/* Class = "NSMenuItem"; title = "Add URL…"; ObjectID = "zeJ-cr-tRg"; */
+"zeJ-cr-tRg.title" = "Aggiiungi URL…";
 
 /* Class = "NSButtonCell"; title = "Wrong Subtitle!"; ObjectID = "zod-Ch-cOH"; */
 "zod-Ch-cOH.title" = "Sottotitoli errati!";

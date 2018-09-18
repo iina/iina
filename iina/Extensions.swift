@@ -152,32 +152,8 @@ extension NSRect {
   init(vertexPoint pt1: NSPoint, and pt2: NSPoint) {
     self.init(x: min(pt1.x, pt2.x),
               y: min(pt1.y, pt2.y),
-              width: fabs(pt1.x - pt2.x),
-              height: fabs(pt1.y - pt2.y))
-  }
-
-  var x: CGFloat {
-    get {
-      return self.origin.x
-    }
-  }
-
-  var xMax: CGFloat {
-    get {
-      return self.origin.x + self.size.width
-    }
-  }
-
-  var y: CGFloat {
-    get {
-      return self.origin.y
-    }
-  }
-
-  var yMax: CGFloat {
-    get {
-      return self.origin.y + self.size.height
-    }
+              width: abs(pt1.x - pt2.x),
+              height: abs(pt1.y - pt2.y))
   }
 
   func multiply(_ multiplier: CGFloat) -> NSRect {
@@ -216,101 +192,85 @@ extension NSRect {
 }
 
 extension NSPoint {
-  func constrain(in rect: NSRect) -> NSPoint {
-    let l = rect.origin.x
-    let r = l + rect.width
-    let t = rect.origin.y
-    let b = t + rect.height
-    return NSMakePoint(x.constrain(min: l, max: r), y.constrain(min: t, max: b))
+  func constrained(to rect: NSRect) -> NSPoint {
+    return NSMakePoint(x.clamped(to: rect.minX...rect.maxX), y.clamped(to: rect.minY...rect.maxY))
   }
 }
 
 extension Array {
-  func at(_ pos: Int) -> Element? {
-    if pos >= 0 && pos < count {
-      return self[pos]
+  subscript(at index: Index) -> Element? {
+    if indices.contains(index) {
+      return self[index]
     } else {
       return nil
     }
   }
 }
 
-extension Dictionary {
-  mutating func safeAppend<T: Equatable>(_ value: T, for key: Key) where Value == Array<T> {
-    if self[key] == nil {
-      self[key] = Array<T>()
-    }
-    if self[key]!.contains(value) { return }
-    self[key]!.append(value)
-  }
-}
-
 extension NSMenu {
-  func addItem(withTitle string: String, action selector: Selector? = nil, tag: Int? = nil, obj: Any? = nil, stateOn: Bool = false) {
+  func addItem(withTitle string: String, action selector: Selector? = nil, target: AnyObject? = nil,
+               tag: Int? = nil, obj: Any? = nil, stateOn: Bool = false, enabled: Bool = true) {
     let menuItem = NSMenuItem(title: string, action: selector, keyEquivalent: "")
     menuItem.tag = tag ?? -1
     menuItem.representedObject = obj
+    menuItem.target = target
     menuItem.state = stateOn ? .on : .off
+    menuItem.isEnabled = enabled
     self.addItem(menuItem)
   }
 }
 
-extension Int {
-  func toStr() -> String {
-    return "\(self)"
-  }
-
-  func constrain(min: Int, max: Int) -> Int {
-    var value = self
-    if self < min { value = min }
-    if self > max { value = max }
-    return value
-  }
-}
-
-extension Float {
-  func toStr() -> String {
-    return "\(self)"
-  }
-}
-
 extension CGFloat {
-  func constrain(min: CGFloat, max: CGFloat) -> CGFloat {
-    var value = self
-    if self < min { value = min }
-    if self > max { value = max }
-    return value
-  }
-
   var unifiedDouble: Double {
     get {
-      return self == 0 ? 0 : (self > 0 ? 1 : -1)
+      return Double(copysign(1, self))
     }
   }
 }
 
 extension Double {
-  func toStr(format: String? = nil) -> String {
-    if let f = format {
-      return String(format: f, self)
-    } else {
-      return "\(self)"
-    }
-  }
-
-  func constrain(min: Double, max: Double) -> Double {
-    var value = self
-    if self < min { value = min }
-    if self > max { value = max }
-    return value
-  }
-
   func prettyFormat() -> String {
     let rounded = (self * 1000).rounded() / 1000
     if rounded.truncatingRemainder(dividingBy: 1) == 0 {
       return "\(Int(rounded))"
     } else {
       return "\(rounded)"
+    }
+  }
+}
+
+extension Comparable {
+  func clamped(to range: ClosedRange<Self>) -> Self {
+    if self < range.lowerBound {
+      return range.lowerBound
+    } else if self > range.upperBound {
+      return range.upperBound
+    } else {
+      return self
+    }
+  }
+}
+
+extension BinaryInteger {
+  func clamped(to range: Range<Self>) -> Self {
+    if self < range.lowerBound {
+      return range.lowerBound
+    } else if self >= range.upperBound {
+      return range.upperBound.advanced(by: -1)
+    } else {
+      return self
+    }
+  }
+}
+
+extension FloatingPoint {
+  func clamped(to range: Range<Self>) -> Self {
+    if self < range.lowerBound {
+      return range.lowerBound
+    } else if self >= range.upperBound {
+      return range.upperBound.nextDown
+    } else {
+      return self
     }
   }
 }
@@ -377,6 +337,7 @@ extension NSData {
       output.appendFormat("%02x", md5Buffer[i])
     }
 
+    md5Buffer.deallocate()
     return NSString(format: output)
   }
 }
@@ -430,8 +391,7 @@ extension String {
   }
 
   mutating func deleteLast(_ num: Int) {
-    guard num <= count else { self = ""; return }
-    self = String(self[...self.index(endIndex, offsetBy: -num)])
+    removeLast(Swift.min(num, count))
   }
 
   func countOccurances(of str: String, in range: Range<Index>?) -> Int {
@@ -465,23 +425,56 @@ extension NSMenuItem {
 
 
 extension URL {
-  /**
-   Whether the URL represents a directory.
-   
-   - Attention: For 10.10-, it only checks if `path` ends with "/".
-   */
-  var representsDirectory: Bool {
-    if #available(OSX 10.11, *) {
-      return hasDirectoryPath
-    } else {
-      return path.hasSuffix("/")
-    }
-  }
-
   var isExistingDirectory: Bool {
     return (try? self.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
   }
 }
+
+
+extension NSTextField {
+
+  func setHTMLValue(_ html: String) {
+    let font = self.font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
+    let color = self.textColor ?? NSColor.labelColor
+    let style = String(format: "<style>body{font-family: '%@'; font-size:%fpx;}</style>", font.fontName, font.pointSize)
+    if let data = (style + html).data(using: .utf8), let string = NSMutableAttributedString(html: data, options: [.textEncodingName: "utf8"], documentAttributes: nil) {
+      string.enumerateAttributes(in: NSMakeRange(0, string.length) , options: []) { attrs, range, _ in
+        if attrs[.link] == nil {
+          string.setAttributes([.foregroundColor: color], range: range)
+        }
+      }
+      self.attributedStringValue = string
+    }
+  }
+
+}
+
+extension NSImage {
+  func tinted(_ tintColor: NSColor) -> NSImage {
+    guard self.isTemplate else { return self }
+
+    let image = self.copy() as! NSImage
+    image.lockFocus()
+
+    tintColor.set()
+    NSRect(origin: .zero, size: image.size).fill(using: .sourceAtop)
+
+    image.unlockFocus()
+    image.isTemplate = false
+
+    return image
+  }
+}
+
+
+extension NSBox {
+  static func horizontalLine() -> NSBox {
+    let box = NSBox(frame: NSRect(origin: .zero, size: NSSize(width: 100, height: 1)))
+    box.boxType = .separator
+    return box
+  }
+}
+
 
 extension NSPasteboard.PasteboardType {
   static let nsURL = NSPasteboard.PasteboardType("NSURL")
@@ -504,4 +497,26 @@ extension NSUserInterfaceItemIdentifier {
   static let key = NSUserInterfaceItemIdentifier("Key")
   static let value = NSUserInterfaceItemIdentifier("Value")
   static let action = NSUserInterfaceItemIdentifier("Action")
+}
+
+extension NSAppearance {
+  @available(macOS 10.14, *)
+  convenience init?(iinaTheme theme: Preference.Theme) {
+    switch theme {
+    case .dark:
+      self.init(named: .darkAqua)
+    case .light:
+      self.init(named: .aqua)
+    default:
+      return nil
+    }
+  }
+
+  var isDark: Bool {
+    if #available(macOS 10.14, *) {
+      return name == .darkAqua || name == .vibrantDark || name == .accessibilityHighContrastDarkAqua || name == .accessibilityHighContrastVibrantDark
+    } else {
+      return name == .vibrantDark
+    }
+  }
 }

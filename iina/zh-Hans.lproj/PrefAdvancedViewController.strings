@@ -6,8 +6,8 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "1nQ-mn-luW"; */
 "1nQ-mn-luW.title" = "Text Cell";
 
-/* Class = "NSTextFieldCell"; title = "Additional MPV options"; ObjectID = "6F6-Y7-8oR"; */
-"6F6-Y7-8oR.title" = "额外 MPV 选项";
+/* Class = "NSTextFieldCell"; title = "Additional mpv options"; ObjectID = "6F6-Y7-8oR"; */
+"6F6-Y7-8oR.title" = "额外 mpv 选项";
 
 /* Class = "NSButtonCell"; title = "Enable advanced settings"; ObjectID = "7ml-VU-xWv"; */
 "7ml-VU-xWv.title" = "启用高级设置";
@@ -30,6 +30,9 @@
 /* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
 "MRT-u8-xTX.title" = "选择目录…";
 
+/* Class = "NSTextFieldCell"; title = "Settings"; ObjectID = "Qmc-Tb-d7d"; */
+"Qmc-Tb-d7d.title" = "设置";
+
 /* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "SX9-fy-bss"; */
 "SX9-fy-bss.headerCell.title" = "值";
 
@@ -39,6 +42,6 @@
 /* Class = "NSTextFieldCell"; placeholderString = "~/.config/mpv/"; ObjectID = "gWN-ya-xRD"; */
 "gWN-ya-xRD.placeholderString" = "~/.config/mpv/";
 
-/* Class = "NSButtonCell"; title = "Use MPV's OSD"; ObjectID = "phK-g9-Vbg"; */
-"phK-g9-Vbg.title" = "使用 MPV 的 OSD";
+/* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
+"phK-g9-Vbg.title" = "使用 mpv 的 OSD";
 

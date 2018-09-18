@@ -72,10 +72,10 @@ return -1;\
     if ([weakOp isCancelled]) {
       return;
     }
-    _timestamp = CACurrentMediaTime();
+    self->_timestamp = CACurrentMediaTime();
     int success = [self getPeeksForFile:file];
     if (self.delegate) {
-      [self.delegate didGenerateThumbnails:[NSArray arrayWithArray:_thumbnails]
+      [self.delegate didGenerateThumbnails:[NSArray arrayWithArray:self->_thumbnails]
                                    forFile: file
                                  succeeded:(success < 0 ? NO : YES)];
     }
@@ -88,7 +88,7 @@ return -1;\
 {
   int i, ret;
 
-  char *cFilename = strdup(file.UTF8String);
+  char *cFilename = strdup(file.fileSystemRepresentation);
   [_thumbnails removeAllObjects];
   [_thumbnailPartialResult removeAllObjects];
   [_addedTimestamps removeAllObjects];
@@ -119,7 +119,10 @@ return -1;\
 
   // Get the codec context for the video stream
   AVStream *pVideoStream = pFormatCtx->streams[videoStream];
-  if (av_q2d(pVideoStream->avg_frame_rate) == 0) {
+  AVRational videoAvgFrameRate = pVideoStream->avg_frame_rate;
+
+  // Check whether the denominator (AVRational.den) is zero to prevent division-by-zero
+  if (videoAvgFrameRate.den == 0 || av_q2d(videoAvgFrameRate) == 0) {
     NSLog(@"Avg frame rate = 0, ignore");
     return -1;
   }
@@ -133,7 +136,7 @@ return -1;\
   AVDictionary *optionsDict = NULL;
 
   avcodec_parameters_to_context(pCodecCtx, pVideoStream->codecpar);
-  av_codec_set_pkt_timebase(pCodecCtx, pVideoStream->time_base);
+  pCodecCtx->time_base = pVideoStream->time_base;
 
   ret = avcodec_open2(pCodecCtx, pCodec, &optionsDict);
   CHECK_SUCCESS(ret, @"Cannot open codec")
@@ -305,6 +308,31 @@ return -1;\
       _timestamp = currentTime;
     }
   }
+}
+
++ (double)probeVideoDurationForFile:(nonnull NSString *)file
+{
+  int ret;
+  int64_t duration;
+
+  char *cFilename = strdup(file.fileSystemRepresentation);
+
+  AVFormatContext *pFormatCtx = NULL;
+  ret = avformat_open_input(&pFormatCtx, cFilename, NULL, NULL);
+  free(cFilename);
+  if (ret < 0) return -1;
+
+  duration = pFormatCtx->duration;
+  if (duration <= 0) {
+    ret = avformat_find_stream_info(pFormatCtx, NULL);
+    if (ret < 0) return -1;
+    duration = pFormatCtx->duration;
+  }
+
+  avformat_close_input(&pFormatCtx);
+  avformat_free_context(pFormatCtx);
+
+  return (double)duration / AV_TIME_BASE;
 }
 
 @end

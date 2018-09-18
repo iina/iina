@@ -36,8 +36,8 @@ class CropBoxViewController: NSViewController {
   }
 
   private func updateCropValues(from rect: NSRect) {
-    cropx = Int(rect.x)
-    cropy = Int(CGFloat(mainWindow.player.info.videoHeight!) - rect.height - rect.y)
+    cropx = Int(rect.minX)
+    cropy = Int(CGFloat(mainWindow.player.info.videoHeight!) - rect.height - rect.minY)
     cropw = Int(rect.width)
     croph = Int(rect.height)
   }

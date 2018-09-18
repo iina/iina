@@ -10,25 +10,29 @@ import Cocoa
 import PromiseKit
 
 @objcMembers
-class PrefSubViewController: NSViewController {
+class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefSubViewController")
   }
 
-  var viewIdentifier: String = "PrefSubViewController"
-
-  var toolbarItemImage: NSImage {
-    return NSImage(named: .fontPanel)!
-  }
-
-  var toolbarItemLabel: String {
-    view.layoutSubtreeIfNeeded()
+  var preferenceTabTitle: String {
     return NSLocalizedString("preference.subtitle", comment: "Subtitles")
   }
 
-  var hasResizableWidth: Bool = false
-  var hasResizableHeight: Bool = false
+  override var sectionViews: [NSView] {
+    return [sectionAutoLoadView, sectionASSView, sectionTextSubView, sectionPositionView, sectionOnlineSubView, sectionOtherView]
+  }
+
+  @IBOutlet var sectionAutoLoadView: NSView!
+  @IBOutlet var sectionASSView: NSView!
+  @IBOutlet var sectionTextSubView: NSView!
+  @IBOutlet var sectionPositionView: NSView!
+  @IBOutlet var sectionOnlineSubView: NSView!
+  @IBOutlet var sectionOtherView: NSView!
+
+  @IBOutlet weak var subSourceStackView: NSStackView!
+  @IBOutlet weak var subSourcePopUpButton: NSPopUpButton!
 
   @IBOutlet weak var subLangTokenView: NSTokenField!
   @IBOutlet weak var loginIndicator: NSProgressIndicator!
@@ -36,7 +40,7 @@ class PrefSubViewController: NSViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     let defaultEncoding = Preference.string(for: .defaultEncoding)
     for encoding in AppData.encodings {
       defaultEncodingList.addItem(withTitle: encoding.title)
@@ -46,11 +50,13 @@ class PrefSubViewController: NSViewController {
         defaultEncodingList.select(lastItem)
       }
     }
-    
+
     defaultEncodingList.menu?.insertItem(NSMenuItem.separator(), at: 1)
 
     subLangTokenView.delegate = self
     loginIndicator.isHidden = true
+
+    refreshOnlineSubSource()
   }
 
   @IBAction func chooseSubFontAction(_ sender: AnyObject) {
@@ -70,14 +76,18 @@ class PrefSubViewController: NSViewController {
         loginIndicator.startAnimation(nil)
         firstly {
           OpenSubSupport().login(testUser: username, password: password)
-        }.then { (_) -> Void in
-          let status = OpenSubSupport.savePassword(username: username, passwd: password)
-          if status == errSecSuccess {
+        }.map { _ in
+          do {
+            try KeychainAccess.write(username: username, password: password, forService: .openSubAccount)
             Preference.set(username, for: .openSubUsername)
-          } else {
-            Utility.showAlert("sub.cannot_save_passwd", arguments: [SecCopyErrorMessageString(status, nil) as! CVarArg])
+          } catch KeychainAccess.KeychainError.noResult {
+            Utility.showAlert("sub.cannot_save_passwd", arguments: ["Cannot find password."], sheetWindow: self.view.window)
+          } catch KeychainAccess.KeychainError.unhandledError(let message) {
+            Utility.showAlert("sub.cannot_save_passwd", arguments: [message], sheetWindow: self.view.window)
+          } catch KeychainAccess.KeychainError.unexpectedData {
+            Utility.showAlert("sub.cannot_save_passwd", arguments: ["Unexcepted data when reading password."], sheetWindow: self.view.window)
           }
-        }.always {
+        }.ensure {
           self.loginIndicator.isHidden = true
           self.loginIndicator.stopAnimation(nil)
         }.catch { err in
@@ -90,7 +100,7 @@ class PrefSubViewController: NSViewController {
           default:
             message = "Unknown error"
           }
-          Utility.showAlert("sub.cannot_login", arguments: [message])
+          Utility.showAlert("sub.cannot_login", arguments: [message], sheetWindow: self.view.window)
         }
       }
     } else {
@@ -98,15 +108,31 @@ class PrefSubViewController: NSViewController {
       Preference.set("", for: .openSubUsername)
     }
   }
-  
+
   @IBAction func changeDefaultEncoding(_ sender: NSPopUpButton) {
     Preference.set(sender.selectedItem!.representedObject!, for: .defaultEncoding)
     PlayerCore.active.setSubEncoding((sender.selectedItem?.representedObject as? String) ?? "auto")
     PlayerCore.active.reloadAllSubs()
   }
-  
-  @IBAction func OpenSubHelpBtnAction(_ sender: AnyObject) {
+
+  @IBAction func openSubHelpBtnAction(_ sender: AnyObject) {
     NSWorkspace.shared.open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#opensubtitles"))!)
+  }
+
+  @IBAction func assrtHelpBtnAction(_ sender: AnyObject) {
+    NSWorkspace.shared.open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#assrt"))!)
+  }
+
+  @IBAction func onlineSubSourceAction(_ sender: NSPopUpButton) {
+    refreshOnlineSubSource()
+  }
+
+  private func refreshOnlineSubSource() {
+    let tag = subSourcePopUpButton.selectedTag()
+    for (index, view) in subSourceStackView.views.enumerated() {
+      if index == 0 { continue }
+      subSourceStackView.setVisibilityPriority(index == tag ? .mustHold : .notVisible, for: view)
+    }
   }
 }
 
@@ -130,7 +156,7 @@ extension PrefSubViewController: NSTokenFieldDelegate {
   }
 
   func tokenField(_ tokenField: NSTokenField, representedObjectForEditing editingString: String) -> Any? {
-    if let code = Regex.iso639_2Desc.captures(in: editingString).at(1) {
+    if let code = Regex.iso639_2Desc.captures(in: editingString)[at: 1] {
       return SubLangToken(code)
     } else {
       return SubLangToken(editingString)
@@ -196,7 +222,7 @@ class SubLangToken: NSObject {
     guard let arr = value as? NSArray else { return "" }
     return arr.map{ ($0 as! SubLangToken).name }.joined(separator: ",")
   }
-  
+
 }
 
 
@@ -218,7 +244,7 @@ class SubLangToken: NSObject {
       return String(format: NSLocalizedString("preference.logged_in_as", comment: "Logged in as"), username)
     }
   }
-  
+
 }
 
 
@@ -236,5 +262,5 @@ class SubLangToken: NSObject {
     let username = value as? NSString ?? ""
     return NSLocalizedString((username.length == 0 ? "general.login" : "general.logout"), comment: "")
   }
-  
+
 }

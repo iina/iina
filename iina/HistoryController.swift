@@ -29,9 +29,9 @@ class HistoryController: NSObject {
   func save() {
     let result = NSKeyedArchiver.archiveRootObject(history, toFile: plistURL.path)
     if !result {
-      Utility.log("Cannot save playback history!")
+      Logger.log("Cannot save playback history!", level: .error)
     }
-    NotificationCenter.default.post(Notification(name: Constants.Noti.historyUpdated))
+    NotificationCenter.default.post(Notification(name: .iinaHistoryUpdated))
   }
 
   func add(_ url: URL, duration: Double) {

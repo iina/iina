@@ -93,7 +93,7 @@ class MPVTrack: NSObject {
       }
       // info
       var components: [String] = []
-      if let ds = self.decoderDesc, let shortDs = ds.components(separatedBy: "(").at(0) {
+      if let ds = self.decoderDesc, let shortDs = ds.components(separatedBy: "(")[at: 0] {
         components.append("\(shortDs.replacingOccurrences(of: " ", with: ""))")
       }
       switch self.type {

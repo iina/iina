@@ -84,7 +84,7 @@ extension MainWindowController {
     //  10: smaller size
     //  11: bigger size
     let size = sender.tag
-    guard let window = window, !isInFullScreen else { return }
+    guard let window = window, !fsState.isFullscreen else { return }
     
     let screenFrame = (window.screen ?? NSScreen.main!).visibleFrame
     let newFrame: NSRect
@@ -139,9 +139,9 @@ extension MainWindowController {
 
   @objc func menuSetDelogo(_ sender: NSMenuItem) {
     if sender.state == .on {
-      if let filter = player.info.delogoFiter {
+      if let filter = player.info.delogoFilter {
         let _ = player.removeVideoFilter(filter)
-        player.info.delogoFiter = nil
+        player.info.delogoFilter = nil
       }
     } else {
       self.hideSideBar {
@@ -170,9 +170,9 @@ extension MainWindowController {
       if player.mpv.getFilters(type).contains(where: { $0.stringFormat == string }) {
         // remove
         if isVideo {
-          let _ = player.removeVideoFilter(filter)
+          _ = player.removeVideoFilter(filter)
         } else {
-          player.removeAudioFilter(filter)
+          _ = player.removeAudioFilter(filter)
         }
       } else {
         // add
@@ -181,7 +181,9 @@ extension MainWindowController {
             Utility.showAlert("filter.incorrect")
           }
         } else {
-          player.addAudioFilter(filter)
+          if !player.addAudioFilter(filter) {
+            Utility.showAlert("filter.incorrect")
+          }
         }
       }
     }

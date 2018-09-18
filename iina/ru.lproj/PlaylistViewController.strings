@@ -3,6 +3,9 @@
 /* Class = "NSTextFieldCell"; title = "▶︎"; ObjectID = "4yj-cg-fli"; */
 "4yj-cg-fli.title" = "▶︎";
 
+/* Class = "NSMenuItem"; title = "Add File…"; ObjectID = "CI2-Gm-j4o"; */
+"CI2-Gm-j4o.title" = "Добавить файл…";
+
 /* Class = "NSButtonCell"; title = "…"; ObjectID = "CVl-Xv-m3u"; */
 "CVl-Xv-m3u.title" = "…";
 
@@ -14,6 +17,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "QFT-Lq-egc"; */
 "QFT-Lq-egc.title" = "Text Cell";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Folded common prefix"; ObjectID = "U4W-Xv-hkh"; */
+"U4W-Xv-hkh.ibShadowedToolTip" = "Общий префикс";
 
 /* Class = "NSTabViewItem"; label = "Chapters"; ObjectID = "aaR-kR-im0"; */
 "aaR-kR-im0.label" = "Главы";
@@ -41,6 +47,12 @@
 
 /* Class = "NSTextFieldCell"; title = "Chapter Title"; ObjectID = "vmJ-Ry-xgK"; */
 "vmJ-Ry-xgK.title" = "Название главы";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "zbw-ad-lgl"; */
+"zbw-ad-lgl.title" = "Label";
+
+/* Class = "NSMenuItem"; title = "Add URL…"; ObjectID = "zeJ-cr-tRg"; */
+"zeJ-cr-tRg.title" = "Добавить URL…";
 
 /* Class = "NSButtonCell"; title = "Wrong Subtitle!"; ObjectID = "zod-Ch-cOH"; */
 "zod-Ch-cOH.title" = "Неверные субтитры!";

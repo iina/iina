@@ -187,6 +187,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         lastPlayerCore = pc
         return pc
       }
+      lastPlayerCore?.enableDanmaku = commandLineStatus.danmaku
       if commandLineStatus.isStdin {
         getNewPlayerCore().openURLString("-")
       } else {

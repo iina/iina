@@ -134,6 +134,9 @@ class PlayerCore: NSObject {
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
+  
+  // Danmaku
+  var enableDanmaku = false
 
   static var keyBindings: [String: KeyMapping] = [:]
 

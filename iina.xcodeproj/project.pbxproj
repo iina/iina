@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		013850FE214FDEF1003817CE /* DanmakuWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013850FD214FDEF1003817CE /* DanmakuWebView.swift */; };
 		1326717E20852D0D000FA7E2 /* SubChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1326718020852D0D000FA7E2 /* SubChooseViewController.xib */; };
 		49542975216C34950058F680 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49542974216C34950058F680 /* Cocoa.framework */; };
 		49542978216C34950058F680 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49542977216C34950058F680 /* SafariExtensionHandler.swift */; };
@@ -337,6 +338,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		013850FD214FDEF1003817CE /* DanmakuWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanmakuWebView.swift; sourceTree = "<group>"; };
 		1326717F20852D0D000FA7E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SubChooseViewController.xib; sourceTree = "<group>"; };
 		1326718120852D16000FA7E2 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
 		1326718220852EA6000FA7E2 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
@@ -1628,6 +1630,7 @@
 		84D377681D7413D8007F7396 /* Accessories */ = {
 			isa = PBXGroup;
 			children = (
+				013850FD214FDEF1003817CE /* DanmakuWebView.swift */,
 				9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */,
 				843FFD4C1D5DAA01001F3A44 /* RoundedTextFieldCell.swift */,
 				8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */,
@@ -2104,6 +2107,7 @@
 				84C6D3621EAF8D63009BF721 /* HistoryController.swift in Sources */,
 				847644081D48B413004F6DF5 /* MPVOption.swift in Sources */,
 				84817C961DBDCA5F00CC2279 /* SettingsListCellView.swift in Sources */,
+				013850FE214FDEF1003817CE /* DanmakuWebView.swift in Sources */,
 				84A886F31E26CA24008755BB /* Regex.swift in Sources */,
 				8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */,
 				8450403D1E0A9EE20079C194 /* InspectorWindowController.swift in Sources */,

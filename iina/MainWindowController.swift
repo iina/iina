@@ -622,6 +622,27 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     guard let cv = w.contentView else { return }
 
+    // danmaku view
+    if player.enableDanmaku {
+      let webView = DanmakuWebView()
+      webView.setValue(false, forKey: "drawsBackground")
+      cv.addSubview(webView, positioned: .below, relativeTo: nil)
+      webView.configuration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
+      webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
+      
+      if let resourcePath = Bundle(identifier: "com.xjbeta.iina-plus")?.resourcePath {
+        let url = URL(fileURLWithPath: resourcePath + "/index.htm")
+        webView.loadFileURL(url, allowingReadAccessTo: URL(fileURLWithPath: resourcePath))
+      }
+      
+      videoView.translatesAutoresizingMaskIntoConstraints = false
+      // add constraints
+      ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
+        videoViewConstraints[attr] = NSLayoutConstraint(item: webView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
+        videoViewConstraints[attr]!.isActive = true
+      }
+    }
+    
     // video view
     cv.autoresizesSubviews = false
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
@@ -633,7 +654,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     w.setIsVisible(true)
-
+    
     // gesture recognizer
     cv.addGestureRecognizer(magnificationGestureRecognizer)
 

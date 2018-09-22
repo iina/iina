@@ -70,10 +70,9 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
     let currUsername = Preference.string(for: .openSubUsername) ?? ""
     if currUsername.isEmpty {
       // if current username is empty, login
-      let _ = Utility.quickUsernamePasswordPanel("opensub.login") {
-        (username, password) in
-        loginIndicator.isHidden = false
-        loginIndicator.startAnimation(nil)
+      Utility.quickUsernamePasswordPanel("opensub.login", sheetWindow: self.view.window) { (username, password) in
+        self.loginIndicator.isHidden = false
+        self.loginIndicator.startAnimation(nil)
         firstly {
           OpenSubSupport().login(testUser: username, password: password)
         }.map { _ in

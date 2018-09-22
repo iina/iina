@@ -234,7 +234,7 @@ class Utility {
      - messageComment: (Optional) Comment for message key.
    - Returns: Whether user dismissed the panel by clicking OK.
    */
-  static func quickUsernamePasswordPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, callback: (String, String) -> Void) -> Bool {
+  static func quickUsernamePasswordPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, sheetWindow: NSWindow? = nil, callback: @escaping (String, String) -> Void) {
     let quickLabel: (String, Int) -> NSTextField = { title, yPos in
       let label = NSTextField(frame: NSRect(x: 0, y: yPos, width: 240, height: 14))
       label.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
@@ -265,12 +265,17 @@ class Utility {
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
-    let response = panel.runModal()
-    if response == .alertFirstButtonReturn {
-      callback(input.stringValue, pwField.stringValue)
-      return true
+    if let sheetWindow = sheetWindow {
+      panel.beginSheetModal(for: sheetWindow) { response in
+        if response == .alertFirstButtonReturn {
+          callback(input.stringValue, pwField.stringValue)
+        }
+      }
     } else {
-      return false
+      let response = panel.runModal()
+      if response == .alertFirstButtonReturn {
+        callback(input.stringValue, pwField.stringValue)
+      }
     }
   }
 

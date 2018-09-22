@@ -607,8 +607,11 @@ class MPVController: NSObject {
     case MPV_EVENT_END_FILE:
       // if receive end-file when loading file, might be error
       // wait for idle
+      let reason = event!.pointee.data.load(as: mpv_end_file_reason.self)
       if player.info.fileLoading {
-        receivedEndFileWhileLoading = true
+        if reason != MPV_END_FILE_REASON_STOP {
+          receivedEndFileWhileLoading = true
+        }
       } else {
         player.info.shouldAutoLoadFiles = false
       }

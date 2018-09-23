@@ -18,6 +18,8 @@ class ViewLayer: CAOpenGLLayer {
 
   private var fbo: GLint = 1
 
+  private var needsMPVRender = false
+
   override init() {
     super.init()
 
@@ -101,11 +103,12 @@ class ViewLayer: CAOpenGLLayer {
   // MARK: Draw
 
   override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
-    return true
+    return videoView.player.mpv!.shouldRenderUpdateFrame()
   }
 
   override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
     let mpv = videoView.player.mpv!
+    needsMPVRender = false
 
     videoView.uninitLock.lock()
     
@@ -151,7 +154,20 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   func draw() {
+    needsMPVRender = true
     display()
+    if needsMPVRender {
+      // draw(inCGLContext:) is not called, needs a skip render
+      if let context = videoView.player.mpv?.mpvRenderContext {
+        var skip: CInt = 1
+        var params: [mpv_render_param] = [
+          mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: &skip),
+          mpv_render_param()
+        ]
+        mpv_render_context_render(context, &params);
+      }
+      needsMPVRender = false
+    }
   }
 
   override func display() {

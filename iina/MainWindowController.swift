@@ -1368,7 +1368,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         self.videoView.needsLayout = true
         self.videoView.layoutSubtreeIfNeeded()
-        self.videoView.videoLayer.display()
+        self.videoView.videoLayer.draw()
       }
     }
 
@@ -1435,7 +1435,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         }
         self.videoView.needsLayout = true
         self.videoView.layoutSubtreeIfNeeded()
-        self.videoView.videoLayer.display()
+        self.videoView.videoLayer.draw()
       }
     }
 
@@ -1951,7 +1951,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // force rerender a frame
       videoView.videoLayer.mpvGLQueue.async {
         DispatchQueue.main.sync {
-          self.videoView.videoLayer.display()
+          self.videoView.videoLayer.draw()
         }
       }
     }

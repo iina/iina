@@ -239,98 +239,34 @@
 "touchbar.seek" = "Buscar";
 "touchbar.time" = "Posição do Tempo";
 
-/* FIXME: Using English localization instead */
-"touchbar.remainingTime" = "Remaining Time";
 
-/* FIXME: Using English localization instead */
-"alert.beta_channel.message" = "IINA v1.0 is coming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
 
-/* FIXME: Using English localization instead */
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
 
-/* FIXME: Using English localization instead */
-"alert.assrt_register.try" = "Try First";
 
-/* FIXME: Using English localization instead */
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
 
-/* FIXME: Using English localization instead */
-"alert.assrt_token_prompt.title" = "Enter your API token";
 
-/* FIXME: Using English localization instead */
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
 
-/* FIXME: Using English localization instead */
-"alert.assrt_register.register" = "Register Now";
 
-/* FIXME: Using English localization instead */
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
 
-/* FIXME: Using English localization instead */
-"osc_toolbar.sub_track" = "Choose subtitle track";
 
-/* FIXME: Using English localization instead */
-"osc_toolbar.playlist" = "Playlist and chapters";
 
-/* FIXME: Using English localization instead */
-"osc_toolbar.music_mode" = "Enter music mode";
 
-/* FIXME: Using English localization instead */
-"osc_toolbar.settings" = "Quick Settings";
 
-/* FIXME: Using English localization instead */
-"osc_toolbar.full_screen" = "Toggle full screen";
 
-/* FIXME: Using English localization instead */
-"osc_toolbar.pip" = "Toggle Picture-in-Picture";
 
-/* FIXME: Using English localization instead */
-"alert.add_url.title" = "Add URL";
 
-/* FIXME: Using English localization instead */
-"alert.add_url.message" = "Please enter the URL:";
 
-/* FIXME: Using English localization instead */
-"pl_menu.add_file" = "Add File…";
 
-/* FIXME: Using English localization instead */
-"pl_menu.add_url" = "Add URL…";
 
-/* FIXME: Using English localization instead */
-"subtrack.no_external" = "No External Subtitles Found";
 
-/* FIXME: Using English localization instead */
-"subtrack.no_loaded" = "No Subtitles Loaded";
 
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.success" = "All saved playback progress deleted.";
 
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
 
-/* FIXME: Using English localization instead */
-"alert.clear_history.title" = "Clear Playback History";
 
-/* FIXME: Using English localization instead */
-"alert.clear_history.success" = "Playback history deleted.";
 
-/* FIXME: Using English localization instead */
-"preference.utilities" = "Utilities";
 
-/* FIXME: Using English localization instead */
-"alert.clear_history.message" = "Are you sure to delete all playback history?";
 
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
 
-/* FIXME: Using English localization instead */
-"osd.find_online_sub.source" = "from";
 
-/* FIXME: Using English localization instead */
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
 
-/* FIXME: Using English localization instead */
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
 
-/* FIXME: Using English localization instead */
-"main.opening_stream" = "Opening stream…";

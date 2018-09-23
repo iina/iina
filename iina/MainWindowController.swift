@@ -1564,6 +1564,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Window delegate: Active status
 
+  func windowDidChangeScreen(_ notification: Notification) {
+    videoView.updateDisplaylink()
+  }
+
   func windowDidBecomeKey(_ notification: Notification) {
     window!.makeFirstResponder(window!)
     if Preference.bool(for: .pauseWhenInactive) && isPausedDueToInactive {

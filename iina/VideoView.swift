@@ -160,13 +160,11 @@ class VideoView: NSView {
   // MARK: Display link
 
   func startDisplayLink() {
-    guard let window = window else { return }
-    let displayId = UInt32(window.screen!.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! Int)
     CVDisplayLinkCreateWithActiveCGDisplays(&link)
     guard let link = link else {
       Logger.fatal("Cannot Create display link!")
     }
-    CVDisplayLinkSetCurrentCGDisplay(link, displayId)
+    updateDisplaylink()
     CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: player.mpv))
     CVDisplayLinkStart(link)
   }
@@ -180,6 +178,9 @@ class VideoView: NSView {
     guard let window = window, let link = link else { return }
     let displayId = UInt32(window.screen!.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! Int)
     CVDisplayLinkSetCurrentCGDisplay(link, displayId)
+    if let refreshRate = CGDisplayCopyDisplayMode(displayId)?.refreshRate {
+      player.mpv.setDouble(MPVOption.Video.displayFps, refreshRate)
+    }
   }
 
 }

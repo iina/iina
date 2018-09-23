@@ -875,6 +875,12 @@
 		84FF84701D2FF698001B318A /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
 		84FF84711D2FF698001B318A /* opengl_cb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl_cb.h; sourceTree = "<group>"; };
 		867483705008F086E07B0A6B /* Pods_iina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		875FDF9E2157873300F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
+		875FDFA02157874B00F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
+		875FDFA22157876200F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
+		875FDFA42157877000F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
+		875FDFA62157879900F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
+		875FDFA8215787A400F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
 		87E813251F83C05E00AA8D0C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		8F17B8FA2013956E0048FB5D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
 		8F49C361213EF4AF0076C4F9 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
@@ -2089,6 +2095,7 @@
 				B3FC6F31210FB48600E7F6AF /* it */,
 				8F49C361213EF4AF0076C4F9 /* de */,
 				67C6C2202148064E00AFDE5C /* ja */,
+				875FDFA8215787A400F7F7FD /* ru */,
 			);
 			name = SubChooseViewController.xib;
 			sourceTree = "<group>";
@@ -2512,6 +2519,7 @@
 				84BAFD3C2142FE2E006B3CC1 /* ko */,
 				E5A0D2142145779D00750FF3 /* fr */,
 				67C6C21C2148063900AFDE5C /* ja */,
+				875FDFA22157876200F7F7FD /* ru */,
 			);
 			name = OpenURLWindowController.xib;
 			sourceTree = "<group>";
@@ -2711,6 +2719,7 @@
 				84BAFD3B2142FE25006B3CC1 /* ko */,
 				84BAFD3E2142FF0A006B3CC1 /* zh-Hans */,
 				E5A0D212214576E200750FF3 /* fr */,
+				875FDFA42157877000F7F7FD /* ru */,
 			);
 			name = MiniPlayerWindowController.xib;
 			sourceTree = "<group>";
@@ -2754,6 +2763,7 @@
 				84D6C98C208A95A60050F980 /* sk */,
 				E33C315B2107018000983986 /* zh-Hant */,
 				64F85F5D211003A900F8D8C0 /* es */,
+				875FDFA02157874B00F7F7FD /* ru */,
 			);
 			name = PrefOSCToolbarSettingsSheetController.xib;
 			sourceTree = "<group>";
@@ -2772,6 +2782,7 @@
 				84AB8BCE2122235900E478BB /* sk */,
 				8F9D0029213B7A000068FC73 /* de */,
 				67C6C21A2148062400AFDE5C /* ja */,
+				875FDF9E2157873300F7F7FD /* ru */,
 			);
 			name = PrefUtilsViewController.xib;
 			sourceTree = "<group>";
@@ -2789,6 +2800,7 @@
 				B3FC6F2F210FB42700E7F6AF /* it */,
 				8F49C363213EF5400076C4F9 /* de */,
 				67C6C21E2148064400AFDE5C /* ja */,
+				875FDFA62157879900F7F7FD /* ru */,
 			);
 			name = PreferenceWindowController.xib;
 			sourceTree = "<group>";

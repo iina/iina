@@ -26,6 +26,7 @@ class OnlineSubtitle: NSObject {
     case shooter = 0
     case openSub
     case assrt
+    case kankan
 
     var name: String {
       switch self {
@@ -35,6 +36,8 @@ class OnlineSubtitle: NSObject {
         return "opensubtitles.org"
       case .assrt:
         return "assrt.net"
+      case .kankan:
+        return "kankan.com"
       }
     }
   }
@@ -159,6 +162,28 @@ class OnlineSubtitle: NSObject {
         }
         playerCore.sendOSD(osdMessage)
         playerCore.isSearchingOnlineSubtitle = false
+      }
+    case .kankan:
+      let subSupport = KankansubSupport.shared
+      firstly { () -> Promise<[KankanSubtitle]> in
+          return subSupport.search(url.deletingPathExtension().lastPathComponent)
+        }.then { subs in
+          subSupport.showSubSelectWindow(with: subs)
+        }.done { selectedSubs in
+          callback(selectedSubs)
+        }.ensure {
+          playerCore.hideOSD()
+        }.catch { err in
+          let osdMessage: OSDMessage
+          switch err {
+          case KankansubSupport.KankanError.userCanceled:
+            osdMessage = .canceled
+          default:
+            Logger.log(err.localizedDescription, level: .error)
+            osdMessage = .networkError
+          }
+          playerCore.sendOSD(osdMessage)
+          playerCore.isSearchingOnlineSubtitle = false
       }
     }
   }

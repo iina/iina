@@ -30,6 +30,8 @@ class SubChooseViewController: NSViewController {
       self.cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "AssrtCell")
     case .openSub:
       self.cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "OpenSubCell")
+    case .kankan:
+      self.cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "OpenSubCell")
     default:
       fatalError("Unsupported subtitle source.")
     }

@@ -146,6 +146,7 @@
 		84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */; };
 		8F49C36E213EFB7E0076C4F9 /* MiniPlayerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F49C370213EFB7E0076C4F9 /* MiniPlayerWindowController.xib */; };
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
+		AF31D1562157D4F1003FF03B /* KankanSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF31D1552157D4F1003FF03B /* KankanSubtitle.swift */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
 		E301EFDA21312AB300BC8588 /* KeychainAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = E301EFD921312AB300BC8588 /* KeychainAccess.swift */; };
 		E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */; };
@@ -898,6 +899,7 @@
 		9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationDisplayTextField.swift; sourceTree = "<group>"; };
 		9E63CAB61E3F7D0E00EA66C9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.debug.xcconfig"; sourceTree = "<group>"; };
+		AF31D1552157D4F1003FF03B /* KankanSubtitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KankanSubtitle.swift; sourceTree = "<group>"; };
 		B3066F5F1F161538004D7559 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		B35E0A072107C0E500453AA7 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
 		B3860ED81E50F73A00FF012B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/KeyBinding.strings; sourceTree = "<group>"; };
@@ -1373,6 +1375,7 @@
 		84A886E21E24F2D3008755BB /* Sub */ = {
 			isa = PBXGroup;
 			children = (
+				AF31D1552157D4F1003FF03B /* KankanSubtitle.swift */,
 				84A886E31E24F37D008755BB /* ShooterSubtitle.swift */,
 				840AF5831E73CE3900F4AF92 /* OpenSubSubtitle.swift */,
 				E33BA5C3204315740069A0F6 /* AssrtSubtitle.swift */,
@@ -1948,6 +1951,7 @@
 				8488D6E31E1183D300D5B952 /* PrefSubViewController.swift in Sources */,
 				846352581EEEE11A0043F0CC /* ThumbnailPeekView.swift in Sources */,
 				84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */,
+				AF31D1562157D4F1003FF03B /* KankanSubtitle.swift in Sources */,
 				840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */,
 				84F5D4951E44D5230060A838 /* KeyBindingCriterion.swift in Sources */,
 				846121BD1F35FCA500ABB39C /* DraggingDetect.swift in Sources */,

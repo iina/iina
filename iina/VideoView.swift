@@ -34,6 +34,9 @@ class VideoView: NSView {
   var lastMousePosition: NSPoint?
 
   var hasPlayableFiles: Bool = false
+  
+  // cached indicator to prevent unnecessary updates of DisplayLink
+  var currentDisplay: UInt32?
 
   // MARK: - Attributes
 
@@ -177,11 +180,16 @@ class VideoView: NSView {
   func updateDisplaylink() {
     guard let window = window, let link = link else { return }
     let displayId = window.screen!.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! UInt32
+    if (currentDisplay == displayId) {
+      return
+    }
+    
     CVDisplayLinkSetCurrentCGDisplay(link, displayId)
     if let refreshRate = CGDisplayCopyDisplayMode(displayId)?.refreshRate {
       player.mpv.setDouble(MPVOption.Video.displayFps, refreshRate)
     }
     setICCProfile(displayId)
+    currentDisplay = displayId
   }
   
   func setICCProfile(_ displayId: UInt32) {

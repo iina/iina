@@ -34,6 +34,9 @@ class VideoView: NSView {
   var lastMousePosition: NSPoint?
 
   var hasPlayableFiles: Bool = false
+  
+  // cached indicator to prevent unnecessary updates of DisplayLink
+  var currentDisplay: UInt32?
 
   // MARK: - Attributes
 
@@ -176,13 +179,45 @@ class VideoView: NSView {
 
   func updateDisplaylink() {
     guard let window = window, let link = link else { return }
-    let displayId = UInt32(window.screen!.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! Int)
+    let displayId = window.screen!.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! UInt32
+    if (currentDisplay == displayId) {
+      return
+    }
+    
     CVDisplayLinkSetCurrentCGDisplay(link, displayId)
     if let refreshRate = CGDisplayCopyDisplayMode(displayId)?.refreshRate {
       player.mpv.setDouble(MPVOption.Video.displayFps, refreshRate)
     }
+    setICCProfile(displayId)
+    currentDisplay = displayId
   }
+  
+  func setICCProfile(_ displayId: UInt32) {
+    typealias ProfileData = (uuid: CFUUID, profileUrl: URL?)
 
+    let uuid = CGDisplayCreateUUIDFromDisplayID(displayId).takeRetainedValue()
+    var argResult: ProfileData = (uuid, nil)
+    let dataPointer = UnsafeMutablePointer(&argResult)
+    
+    ColorSyncIterateDeviceProfiles({ (dict: CFDictionary?, ptr: UnsafeMutableRawPointer?) -> Bool in
+      if let info = dict as? [String: Any], let current = info["DeviceProfileIsCurrent"] as? Int {
+        let deviceID = info["DeviceID"] as! CFUUID
+        let ptr = ptr!.bindMemory(to: ProfileData.self, capacity: 1)
+        let uuid = ptr.pointee.uuid
+        
+        if current == 1, deviceID == uuid {
+          let profileURL = info["DeviceProfileURL"] as! URL
+          ptr.pointee.profileUrl = profileURL
+          return false
+        }
+      }
+      return true
+    }, dataPointer)
+    
+    if let iccProfilePath = argResult.profileUrl?.path, FileManager.default.fileExists(atPath: iccProfilePath) {
+      player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, iccProfilePath)
+    }
+  }
 }
 
 fileprivate func displayLinkCallback(

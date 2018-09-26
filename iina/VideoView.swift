@@ -176,42 +176,38 @@ class VideoView: NSView {
 
   func updateDisplaylink() {
     guard let window = window, let link = link else { return }
-    let displayId = UInt32(window.screen!.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! Int)
+    let displayId = window.screen!.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! UInt32
     CVDisplayLinkSetCurrentCGDisplay(link, displayId)
     if let refreshRate = CGDisplayCopyDisplayMode(displayId)?.refreshRate {
       player.mpv.setDouble(MPVOption.Video.displayFps, refreshRate)
     }
-    
-    setICCProfile()
+    setICCProfile(displayId)
   }
   
-  func setICCProfile() {
-    let deviceID = self.window?.screen?.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! NSNumber
-    let uuid = CGDisplayCreateUUIDFromDisplayID(deviceID.uint32Value).takeRetainedValue()
-    
-    var argResult = (uuid, "")
-    let data_ptr = UnsafeMutablePointer(&argResult)
+  func setICCProfile(_ displayId: UInt32) {
+    typealias ProfileData = (uuid: CFUUID, profileUrl: URL?)
+
+    let uuid = CGDisplayCreateUUIDFromDisplayID(displayId).takeRetainedValue()
+    var argResult: ProfileData = (uuid, nil)
+    let dataPointer = UnsafeMutablePointer(&argResult)
     
     ColorSyncIterateDeviceProfiles({ (dict: CFDictionary?, ptr: UnsafeMutableRawPointer?) -> Bool in
       if let info = dict as? [String: Any], let current = info["DeviceProfileIsCurrent"] as? Int {
         let deviceID = info["DeviceID"] as! CFUUID
-        let ptr = ptr!.bindMemory(to: (CFUUID, String).self, capacity: 1)
-        let uuid = ptr.pointee.0
+        let ptr = ptr!.bindMemory(to: ProfileData.self, capacity: 1)
+        let uuid = ptr.pointee.uuid
         
         if current == 1, deviceID == uuid {
           let profileURL = info["DeviceProfileURL"] as! URL
-          
-          ptr.pointee.1 = profileURL.absoluteString
-          
+          ptr.pointee.profileUrl = profileURL
           return false
         }
       }
-      
       return true
-    }, data_ptr)
+    }, dataPointer)
     
-    if let iccProfilePath = URL(string: argResult.1)?.path, FileManager.default.fileExists(atPath: iccProfilePath) {
-      self.player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, iccProfilePath)
+    if let iccProfilePath = argResult.profileUrl?.path, FileManager.default.fileExists(atPath: iccProfilePath) {
+      player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, iccProfilePath)
     }
   }
 }

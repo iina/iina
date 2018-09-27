@@ -131,12 +131,17 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
     subLoadSementedControl.image(forSegment: 1)?.isTemplate = true
 
-    // notifications
-    let tracklistChangeObserver = NotificationCenter.default.addObserver(forName: .iinaTracklistChanged, object: player, queue: OperationQueue.main) { _ in
-      self.player.getTrackInfo()
-      self.withAllTableViews { tableView, _ in tableView.reloadData() }
+    func observe(_ name: Notification.Name, block: @escaping (Notification) -> Void) {
+      observers.append(NotificationCenter.default.addObserver(forName: name, object: player, queue: .main, using: block))
     }
-    observers.append(tracklistChangeObserver)
+
+    // notifications
+    observe(.iinaTracklistChanged) { _ in
+      self.withAllTableViews { view, _ in view.reloadData() }
+    }
+    observe(.iinaVIDChanged) { _ in self.videoTableView.reloadData() }
+    observe(.iinaAIDChanged) { _ in self.audioTableView.reloadData() }
+    observe(.iinaSIDChanged) { _ in self.subTableView.reloadData() }
   }
 
   // MARK: - Validate UI
@@ -357,7 +362,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         let subId = view.selectedRow > 0 ? player.info.trackList(type)[view.selectedRow-1].id : 0
         self.player.setTrack(subId, forType: type)
         view.deselectAll(self)
-        view.reloadData()
       }
     }
     // Revalidate layout and controls

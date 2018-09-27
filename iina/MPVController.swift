@@ -717,6 +717,7 @@ class MPVController: NSObject {
       player.info.vid = Int(data)
       player.getTrackInfo()
       let currTrack = player.info.currentTrack(.video) ?? .noneVideoTrack
+      player.postNotification(.iinaVIDChanged)
       player.sendOSD(.track(currTrack))
 
     case MPVOption.TrackSelection.aid:
@@ -729,6 +730,7 @@ class MPVController: NSObject {
         player.mainWindow?.muteButton.isEnabled = (player.info.aid != 0)
         player.mainWindow?.volumeSlider.isEnabled = (player.info.aid != 0)
       }
+      player.postNotification(.iinaAIDChanged)
       player.sendOSD(.track(currTrack))
 
     case MPVOption.TrackSelection.sid:
@@ -737,6 +739,7 @@ class MPVController: NSObject {
       player.info.sid = Int(data)
       player.getTrackInfo()
       let currTrack = player.info.currentTrack(.sub) ?? .noneSubTrack
+      player.postNotification(.iinaSIDChanged)
       player.sendOSD(.track(currTrack))
 
     case MPVOption.PlaybackControl.pause:

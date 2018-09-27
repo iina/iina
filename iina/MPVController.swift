@@ -55,7 +55,7 @@ class MPVController: NSObject {
   var fileLoaded: Bool = false
 
   let observeProperties: [String: mpv_format] = [
-    MPVProperty.trackListCount: MPV_FORMAT_INT64,
+    MPVProperty.trackList: MPV_FORMAT_NONE,
     MPVProperty.vf: MPV_FORMAT_NONE,
     MPVProperty.af: MPV_FORMAT_NONE,
     MPVOption.TrackSelection.vid: MPV_FORMAT_INT64,
@@ -859,7 +859,7 @@ class MPVController: NSObject {
     case MPVProperty.playlistCount:
       player.postNotification(.iinaPlaylistChanged)
 
-    case MPVProperty.trackListCount:
+    case MPVProperty.trackList:
       player.trackListChanged()
       player.postNotification(.iinaTracklistChanged)
 

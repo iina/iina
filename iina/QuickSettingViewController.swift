@@ -141,7 +141,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
     observe(.iinaVIDChanged) { _ in self.videoTableView.reloadData() }
     observe(.iinaAIDChanged) { _ in self.audioTableView.reloadData() }
-    observe(.iinaSIDChanged) { _ in self.subTableView.reloadData() }
+    observe(.iinaSIDChanged) { _ in
+      self.subTableView.reloadData()
+      self.secSubTableView.reloadData()
+    }
   }
 
   // MARK: - Validate UI

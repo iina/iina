@@ -61,6 +61,7 @@ class MPVController: NSObject {
     MPVOption.TrackSelection.vid: MPV_FORMAT_INT64,
     MPVOption.TrackSelection.aid: MPV_FORMAT_INT64,
     MPVOption.TrackSelection.sid: MPV_FORMAT_INT64,
+    MPVOption.Subtitles.secondarySid: MPV_FORMAT_INT64,
     MPVOption.PlaybackControl.pause: MPV_FORMAT_FLAG,
     MPVProperty.chapter: MPV_FORMAT_INT64,
     MPVOption.Video.deinterlace: MPV_FORMAT_FLAG,
@@ -712,35 +713,27 @@ class MPVController: NSObject {
       onVideoParamsChange(UnsafePointer<mpv_node_list>(OpaquePointer(property.data)))
 
     case MPVOption.TrackSelection.vid:
-      needReloadQuickSettingsView = true
-      let data = getInt(MPVOption.TrackSelection.vid)
-      player.info.vid = Int(data)
-      player.getTrackInfo()
-      let currTrack = player.info.currentTrack(.video) ?? .noneVideoTrack
+      player.info.vid = Int(getInt(MPVOption.TrackSelection.vid))
       player.postNotification(.iinaVIDChanged)
-      player.sendOSD(.track(currTrack))
+      player.sendOSD(.track(player.info.currentTrack(.video) ?? .noneVideoTrack))
 
     case MPVOption.TrackSelection.aid:
-      needReloadQuickSettingsView = true
-      let data = getInt(MPVOption.TrackSelection.aid)
-      player.info.aid = Int(data)
-      player.getTrackInfo()
-      let currTrack = player.info.currentTrack(.audio) ?? .noneAudioTrack
+      player.info.aid = Int(getInt(MPVOption.TrackSelection.aid))
       DispatchQueue.main.sync {
         player.mainWindow?.muteButton.isEnabled = (player.info.aid != 0)
         player.mainWindow?.volumeSlider.isEnabled = (player.info.aid != 0)
       }
       player.postNotification(.iinaAIDChanged)
-      player.sendOSD(.track(currTrack))
+      player.sendOSD(.track(player.info.currentTrack(.audio) ?? .noneAudioTrack))
 
     case MPVOption.TrackSelection.sid:
-      needReloadQuickSettingsView = true
-      let data = getInt(MPVOption.TrackSelection.sid)
-      player.info.sid = Int(data)
-      player.getTrackInfo()
-      let currTrack = player.info.currentTrack(.sub) ?? .noneSubTrack
+      player.info.sid = Int(getInt(MPVOption.TrackSelection.sid))
       player.postNotification(.iinaSIDChanged)
-      player.sendOSD(.track(currTrack))
+      player.sendOSD(.track(player.info.currentTrack(.sub) ?? .noneSubTrack))
+
+    case MPVOption.Subtitles.secondarySid:
+      player.info.secondSid = Int(getInt(MPVOption.Subtitles.secondarySid))
+      player.postNotification(.iinaSIDChanged)
 
     case MPVOption.PlaybackControl.pause:
       if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {

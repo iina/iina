@@ -178,8 +178,8 @@ class VideoView: NSView {
   }
 
   func updateDisplaylink() {
-    guard let window = window, let link = link else { return }
-    let displayId = window.screen!.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! UInt32
+    guard let window = window, let link = link, let screen = window.screen else { return }
+    let displayId = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! UInt32
     if (currentDisplay == displayId) {
       return
     }

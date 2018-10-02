@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.15" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.15"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,7 +19,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="563" height="342"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1057"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="563" height="342"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -266,13 +266,13 @@
         </window>
         <menu title="Context Menu" identifier="ContextMenu" id="lR3-1E-Rwr" userLabel="Context Menu">
             <items>
-                <menuItem title="Play" id="oMR-4K-aR2">
+                <menuItem title="Play" tag="300" id="oMR-4K-aR2">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="playAction:" target="-2" id="Fje-Oq-MI4"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Play in New Window" id="mXt-wb-fgT">
+                <menuItem title="Play in New Window" tag="301" id="mXt-wb-fgT">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="playInNewWindowAction:" target="-2" id="kou-6P-1pI"/>

@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1326717E20852D0D000FA7E2 /* SubChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1326718020852D0D000FA7E2 /* SubChooseViewController.xib */; };
+		49542975216C34950058F680 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49542974216C34950058F680 /* Cocoa.framework */; };
+		49542978216C34950058F680 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49542977216C34950058F680 /* SafariExtensionHandler.swift */; };
+		49542980216C34950058F680 /* open-in-iina.js in Resources */ = {isa = PBXBuildFile; fileRef = 4954297F216C34950058F680 /* open-in-iina.js */; };
+		49542982216C34950058F680 /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 49542981216C34950058F680 /* ToolbarItemIcon.pdf */; };
+		49542986216C34950058F680 /* OpenInIINA.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 49542973216C34950058F680 /* OpenInIINA.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		496B19921E2968530035AF10 /* PIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B19911E2968530035AF10 /* PIP.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867483705008F086E07B0A6B /* Pods_iina.framework */; };
 		6100FF2B1EDF9806002CF0FB /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */; };
@@ -215,6 +220,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		49542984216C34950058F680 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84EB1ECE1D2F51D3004FA5A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 49542972216C34950058F680;
+			remoteInfo = OpenInIINA;
+		};
 		497747ED20D287C1004B243A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84EB1ECE1D2F51D3004FA5A1 /* Project object */;
@@ -225,6 +237,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		4954298A216C34960058F680 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				49542986216C34950058F680 /* OpenInIINA.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8461BA631E423423008BB852 /* Copy Executables */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -414,6 +437,13 @@
 		440DDE4A1E9010430063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		440DDE4B1E9010440063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ru; path = ru.lproj/Contribution.rtf; sourceTree = "<group>"; };
 		440DDE4C1E9010440063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		49542973216C34950058F680 /* OpenInIINA.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OpenInIINA.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		49542974216C34950058F680 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		49542977216C34950058F680 /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
+		4954297E216C34950058F680 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4954297F216C34950058F680 /* open-in-iina.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "open-in-iina.js"; sourceTree = "<group>"; };
+		49542981216C34950058F680 /* ToolbarItemIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ToolbarItemIcon.pdf; sourceTree = "<group>"; };
+		49542983216C34950058F680 /* OpenInIINA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenInIINA.entitlements; sourceTree = "<group>"; };
 		496B19911E2968530035AF10 /* PIP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIP.framework; path = ../../../../System/Library/PrivateFrameworks/PIP.framework; sourceTree = "<group>"; };
 		4CA6B416201E85B7008F3FBA /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		4CA6B417201E85B7008F3FBA /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
@@ -1101,6 +1131,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		49542970216C34950058F680 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49542975216C34950058F680 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84EB1ED31D2F51D3004FA5A1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1131,6 +1169,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49542976216C34950058F680 /* OpenInIINA */ = {
+			isa = PBXGroup;
+			children = (
+				49542977216C34950058F680 /* SafariExtensionHandler.swift */,
+				4954297E216C34950058F680 /* Info.plist */,
+				4954297F216C34950058F680 /* open-in-iina.js */,
+				49542981216C34950058F680 /* ToolbarItemIcon.pdf */,
+				49542983216C34950058F680 /* OpenInIINA.entitlements */,
+			);
+			path = OpenInIINA;
+			sourceTree = "<group>";
+		};
 		8452DD7F1D3A1F2A008A543A /* Preference */ = {
 			isa = PBXGroup;
 			children = (
@@ -1248,6 +1298,7 @@
 				845E2F491E76CFC2002C6588 /* libz.tbd */,
 				496B19911E2968530035AF10 /* PIP.framework */,
 				867483705008F086E07B0A6B /* Pods_iina.framework */,
+				49542974216C34950058F680 /* Cocoa.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1620,18 +1671,23 @@
 			children = (
 				84EB1ED81D2F51D3004FA5A1 /* iina */,
 				E3DE8DCB1FD8166A0021921C /* iina-cli */,
+				49542976216C34950058F680 /* OpenInIINA */,
 				84EB1ED71D2F51D3004FA5A1 /* Products */,
 				8461BA641E42344D008BB852 /* Executables */,
 				848290731D95978100C3C76C /* Frameworks */,
 				AF119E67C2E61E10DC27039C /* Pods */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
 		};
 		84EB1ED71D2F51D3004FA5A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				84EB1ED61D2F51D3004FA5A1 /* IINA.app */,
 				E3DE8DCA1FD8166A0021921C /* iina-cli */,
+				49542973216C34950058F680 /* OpenInIINA.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1709,6 +1765,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		49542972216C34950058F680 /* OpenInIINA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49542989216C34960058F680 /* Build configuration list for PBXNativeTarget "OpenInIINA" */;
+			buildPhases = (
+				4954296F216C34950058F680 /* Sources */,
+				49542970216C34950058F680 /* Frameworks */,
+				49542971216C34950058F680 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenInIINA;
+			productName = OpenInIINA;
+			productReference = 49542973216C34950058F680 /* OpenInIINA.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		84EB1ED51D2F51D3004FA5A1 /* iina */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84EB1EF91D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "iina" */;
@@ -1724,11 +1797,13 @@
 				84E745DA1DFDE9C600588DED /* Copy Configs */,
 				8461BA631E423423008BB852 /* Copy Executables */,
 				DFB4E0114268BBFB043A6097 /* [CP] Embed Pods Frameworks */,
+				4954298A216C34960058F680 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				497747EE20D287C1004B243A /* PBXTargetDependency */,
+				49542985216C34950058F680 /* PBXTargetDependency */,
 			);
 			name = iina;
 			productName = mpvx;
@@ -1758,10 +1833,14 @@
 		84EB1ECE1D2F51D3004FA5A1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0910;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = lhc;
 				TargetAttributes = {
+					49542972216C34950058F680 = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Manual;
+					};
 					84EB1ED51D2F51D3004FA5A1 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 67CQ77V27R;
@@ -1806,11 +1885,21 @@
 			targets = (
 				84EB1ED51D2F51D3004FA5A1 /* iina */,
 				E3DE8DC91FD8166A0021921C /* iina-cli */,
+				49542972216C34950058F680 /* OpenInIINA */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		49542971216C34950058F680 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49542982216C34950058F680 /* ToolbarItemIcon.pdf in Resources */,
+				49542980216C34950058F680 /* open-in-iina.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84EB1ED41D2F51D3004FA5A1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1897,7 +1986,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-iina/Pods-iina-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-iina/Pods-iina-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GRMustache.swift/Mustache.framework",
 				"${BUILT_PRODUCTS_DIR}/GzipSwift/Gzip.framework",
 				"${BUILT_PRODUCTS_DIR}/Just/Just.framework",
@@ -1916,7 +2005,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iina/Pods-iina-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iina/Pods-iina-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E364D521203F339A0066215D /* Check Localizable.strings */ = {
@@ -1937,6 +2026,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4954296F216C34950058F680 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49542978216C34950058F680 /* SafariExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84EB1ED21D2F51D3004FA5A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2072,6 +2169,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		49542985216C34950058F680 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 49542972216C34950058F680 /* OpenInIINA */;
+			targetProxy = 49542984216C34950058F680 /* PBXContainerItemProxy */;
+		};
 		497747EE20D287C1004B243A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E3DE8DC91FD8166A0021921C /* iina-cli */;
@@ -2808,6 +2910,57 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		49542987216C34960058F680 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = OpenInIINA/OpenInIINA.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OpenInIINA/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina.OpenInIINA;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		49542988216C34960058F680 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = OpenInIINA/OpenInIINA.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OpenInIINA/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina.OpenInIINA;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 		84EB1EF71D2F51D3004FA5A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3042,6 +3195,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		49542989216C34960058F680 /* Build configuration list for PBXNativeTarget "OpenInIINA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49542987216C34960058F680 /* Debug */,
+				49542988216C34960058F680 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		84EB1ED11D2F51D3004FA5A1 /* Build configuration list for PBXProject "iina" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

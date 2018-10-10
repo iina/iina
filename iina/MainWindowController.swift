@@ -2809,7 +2809,11 @@ extension MainWindowController: PIPViewControllerDelegate {
 
   func exitPIP() {
     if pipShouldClose(pip) {
-      pip.dismiss(pipVideo)
+      // Prod Swift to pick the dismiss(_ viewController: NSViewController)
+      // overload over dismiss(_ sender: Any?). A change in the way implicitly
+      // unwrapped optionals are handled in Swift means that the wrong method
+      // is chosen in this case. See https://bugs.swift.org/browse/SR-8956.
+      pip.dismiss(pipVideo!)
     }
   }
 

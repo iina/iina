@@ -29,7 +29,7 @@
 
 
 <!-- If your issue is related to playback, please check whether mpv has the same problem. If so, this might not be an issue with IINA but rather an bug with mpv. Try reporting an issue there. -->
-- [x] MPV does not have this problem.
+- [ ] MPV does not have this problem.
 
 
 <!-- Again, N/A for feature requests -->

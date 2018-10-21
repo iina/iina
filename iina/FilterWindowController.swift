@@ -100,20 +100,21 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     NotificationCenter.default.removeObserver(self)
   }
 
-  func addFilter(_ filter: MPVFilter) {
+  func addFilter(_ filter: MPVFilter) -> Bool {
     if filterType == MPVProperty.vf {
       guard PlayerCore.active.addVideoFilter(filter) else {
         Utility.showAlert("filter.incorrect", sheetWindow: window)
-        return
+        return false
       }
     } else {
       guard PlayerCore.active.addAudioFilter(filter) else {
         Utility.showAlert("filter.incorrect", sheetWindow: window)
-        return
+        return false
       }
     }
     filters.append(filter)
     reloadTable()
+    return true
   }
 
   func saveFilter(_ filter: MPVFilter) {
@@ -431,8 +432,9 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
       }
     }
     // create filter
-    filterWindow.addFilter(preset.transformer(instance))
-    PlayerCore.active.sendOSD(.addFilter(preset.localizedName))
+    if filterWindow.addFilter(preset.transformer(instance)) {
+      PlayerCore.active.sendOSD(.addFilter(preset.localizedName))
+    }
   }
 
   @IBAction func sheetCancelBtnAction(_ sender: Any) {

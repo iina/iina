@@ -1284,7 +1284,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
       window.animator().setFrame(screen.frame, display: true)
-    }, completionHandler: .none)
+    }, completionHandler: nil)
 
   }
 

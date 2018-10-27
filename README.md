@@ -53,11 +53,10 @@
   
 3. Open `.xcworkspace` file using Xcode 10.
 
-Due to a cocoapods bug, before cocoapods 1.6.0 is released, you need to do extra
-work to build IINA.
-
-- Find file `iina/Pods/Target Support Files/Pods-iina/Pods-iina-frameworks.sh`
-- Jump to line 104, change `EXPANDED_CODE_SIGN_IDENTITY` to `EXPANDED_CODE_SIGN_IDENTITY:-`
+There's a bug in cocoapods 1.5.*, so that you cannot complie IINA with it. Thankfully the bug was fixed in their master branch. We are using pre-release of cocoapods (currently 1.6.0 beta2) to avoid that bug. You can install the pre-release version of cocoapods via
+```
+sudo gem install cocoapods --pre
+```
 
 
 _If you are unwilling to use the provided dylibs, follow the instructions below._

@@ -122,7 +122,7 @@ class VideoView: NSView {
 
   override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
 
-    guard !playlistShown && hasPlayableFiles else { return super.draggingUpdated(sender) }
+    guard !player.isInMiniPlayer && !playlistShown && hasPlayableFiles else { return super.draggingUpdated(sender) }
 
     func inTriggerArea(_ point: NSPoint?) -> Bool {
       guard let point = point, let frame = player.mainWindow.window?.frame else { return false }

@@ -465,7 +465,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   }
 
   @IBAction func backBtnAction(_ sender: NSButton) {
-    window?.orderOut(self)
     player.switchBackFromMiniPlayer(automatically: false)
   }
 

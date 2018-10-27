@@ -8,6 +8,7 @@
 
 import Cocoa
 import Mustache
+import WebKit
 
 fileprivate typealias PK = Preference.Key
 
@@ -545,6 +546,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
   private var oscFloatingLeadingTrailingConstraint: [NSLayoutConstraint]?
 
+  var danmakuWebView: DanmakuWebView!
+  var danmakuWebViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
   // MARK: - PIP
 
   @available(macOS 10.12, *)
@@ -624,22 +627,32 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // danmaku view
     if player.enableDanmaku {
-      let webView = DanmakuWebView()
-      webView.setValue(false, forKey: "drawsBackground")
-      cv.addSubview(webView, positioned: .below, relativeTo: nil)
-      webView.configuration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
-      webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
+      Logger.log("Init Danmaku webView.")
+      danmakuWebView = DanmakuWebView()
+      danmakuWebView.navigationDelegate = self
       
-      if let resourcePath = Bundle(identifier: "com.xjbeta.iina-plus")?.resourcePath {
-        let url = URL(fileURLWithPath: resourcePath + "/index.htm")
-        webView.loadFileURL(url, allowingReadAccessTo: URL(fileURLWithPath: resourcePath))
+      danmakuWebView.setValue(false, forKey: "drawsBackground")
+      danmakuWebView.configuration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
+      #if DEBUG
+      danmakuWebView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
+      #endif
+      
+      do {
+        var resourcesDirectory = try FileManager.default.url(for: .applicationDirectory, in: .systemDomainMask, appropriateFor: nil, create: false)
+        resourcesDirectory.appendPathComponent("iina+.app/Contents/Resources")
+        let url = URL(fileURLWithPath: resourcesDirectory.path + "/index.htm")
+        danmakuWebView.loadFileURL(url, allowingReadAccessTo: resourcesDirectory)
+      } catch let error {
+        print(error)
       }
       
-      videoView.translatesAutoresizingMaskIntoConstraints = false
+      
+      cv.addSubview(danmakuWebView, positioned: .below, relativeTo: nil)
+      danmakuWebView.translatesAutoresizingMaskIntoConstraints = false
       // add constraints
       ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
-        videoViewConstraints[attr] = NSLayoutConstraint(item: webView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
-        videoViewConstraints[attr]!.isActive = true
+        danmakuWebViewConstraints[attr] = NSLayoutConstraint(item: danmakuWebView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
+        danmakuWebViewConstraints[attr]!.isActive = true
       }
     }
     
@@ -2888,4 +2901,20 @@ extension MainWindowController: PIPViewControllerDelegate {
 
 protocol SidebarViewController {
   var downShift: CGFloat { get set }
+}
+
+extension MainWindowController: WKNavigationDelegate {
+  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    Logger.log("Danmaku webView finish loading.")
+    player.mpv.setString(MPVOption.OSD.osdMsg3, "Danmaku webView didFinish.")
+  }
+  
+  func evaluateJavaScript(_ str: String) {
+    Logger.log("Received danmaku script: \(str).")
+    danmakuWebView.evaluateJavaScript(str) { _, error in
+      if let error = error {
+        Logger.log("webView.evaluateJavaScript error \(error)")
+      }
+    }
+  }
 }

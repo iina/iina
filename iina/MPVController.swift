@@ -80,7 +80,8 @@ class MPVController: NSObject {
     MPVOption.Window.fullscreen: MPV_FORMAT_FLAG,
     MPVOption.Window.ontop: MPV_FORMAT_FLAG,
     MPVOption.Window.windowScale: MPV_FORMAT_DOUBLE,
-    MPVProperty.mediaTitle: MPV_FORMAT_STRING
+    MPVProperty.mediaTitle: MPV_FORMAT_STRING,
+    MPVProperty.osdMsg3: MPV_FORMAT_STRING
   ]
 
   init(playerCore: PlayerCore) {
@@ -898,6 +899,13 @@ class MPVController: NSObject {
     case MPVProperty.mediaTitle:
       player.postNotification(.iinaMediaTitleChanged)
 
+    case MPVProperty.osdMsg3:
+      guard player.mainWindow.isWindowLoaded,
+        player.enableDanmaku,
+        let str = getString(MPVOption.OSD.osdMsg3) else { break }
+      DispatchQueue.main.async {
+        self.player.mainWindow.evaluateJavaScript(str)
+      }
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")
       break

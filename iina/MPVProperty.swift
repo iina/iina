@@ -571,4 +571,7 @@ struct MPVProperty {
   static let propertyList = "property-list"
   /** profile-list */
   static let profileList = "profile-list"
+  
+  /** osd-msg3 */
+  static let osdMsg3 = "osd-msg3"
 }

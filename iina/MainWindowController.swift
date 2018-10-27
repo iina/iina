@@ -2906,7 +2906,7 @@ protocol SidebarViewController {
 extension MainWindowController: WKNavigationDelegate {
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
     Logger.log("Danmaku webView finish loading.")
-    player.mpv.setString(MPVOption.OSD.osdMsg3, "Danmaku webView didFinish.")
+    DistributedNotificationCenter.default().post(name: NSNotification.Name("IINADanmakuFinishLoading"), object: nil)
   }
   
   func evaluateJavaScript(_ str: String) {

@@ -184,10 +184,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       let getNewPlayerCore = { () -> PlayerCore in
         let pc = PlayerCore.newPlayerCore
         self.commandLineStatus.assignMPVArguments(to: pc)
+        pc.enableDanmaku = self.commandLineStatus.danmaku
         lastPlayerCore = pc
         return pc
       }
-      lastPlayerCore?.enableDanmaku = commandLineStatus.danmaku
       if commandLineStatus.isStdin {
         getNewPlayerCore().openURLString("-")
       } else {

@@ -147,6 +147,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       let info = player.info
       let selectedDuration = playlistTableView.selectedRowIndexes
         .compactMap { info.cachedVideoDurationAndProgress[info.playlist[$0].filename]?.duration }
+        .compactMap { $0 > 0 ? $0 : 0 }
         .reduce(0, +)
       totalLengthLabel.stringValue = String(format: NSLocalizedString("playlist.total_length_with_selected", comment: "%@ of %@ selected"),
                                             VideoTime(selectedDuration).stringRepresentation,
@@ -165,7 +166,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     var totalDuration: Double? = 0
     for p in player.info.playlist {
       if let duration = player.info.cachedVideoDurationAndProgress[p.filename]?.duration {
-        totalDuration! += duration
+        totalDuration! += duration > 0 ? duration : 0
       } else {
         totalDuration = nil
         break

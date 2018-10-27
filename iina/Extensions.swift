@@ -390,6 +390,10 @@ extension String {
     return (self as NSString).pathExtension.lowercased()
   }
 
+  var mpvFixedLengthQuoted: String {
+    return "%\(count)%\(self)"
+  }
+
   mutating func deleteLast(_ num: Int) {
     removeLast(Swift.min(num, count))
   }

@@ -698,6 +698,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.cachedScreenCount = screenCount
       self.videoView.updateDisplaylink()
     }
+
+    NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification, object: nil, queue: nil, using: { [unowned self] _ in
+      if Preference.bool(for: .pauseWhenGoesToSleep) {
+        self.player.togglePause(true)
+      }
+    })
   }
 
   deinit {

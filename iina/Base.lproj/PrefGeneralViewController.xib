@@ -22,11 +22,11 @@
             <point key="canvasLocation" x="-1463" y="259"/>
         </customView>
         <customView id="6zR-96-iKB">
-            <rect key="frame" x="0.0" y="0.0" width="580" height="463"/>
+            <rect key="frame" x="0.0" y="0.0" width="580" height="485"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitleBehavior" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38y-2I-MGs">
-                    <rect key="frame" x="-2" y="438" width="66" height="17"/>
+                    <rect key="frame" x="-2" y="460" width="66" height="17"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Behavior:" id="uQR-Fx-oEm">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -34,7 +34,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OXi-vL-mzp">
-                    <rect key="frame" x="118" y="438" width="102" height="17"/>
+                    <rect key="frame" x="118" y="460" width="102" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="When launched:" id="gqT-CB-Puw">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -42,7 +42,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bV8-LP-cwH">
-                    <rect key="frame" x="224" y="433" width="178" height="25"/>
+                    <rect key="frame" x="224" y="455" width="178" height="25"/>
                     <popUpButtonCell key="cell" type="push" title="Show welcome window" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="z9T-8h-1T0" id="6y1-KS-0tJ">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
@@ -171,7 +171,7 @@
                     </connections>
                 </button>
                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aKH-Me-5XB" customClass="CollapseView" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="120" y="375" width="452" height="55"/>
+                    <rect key="frame" x="120" y="397" width="452" height="55"/>
                     <subviews>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Pga-vd-zGA">
                             <rect key="frame" x="0.0" y="38" width="452" height="17"/>
@@ -264,10 +264,10 @@
                     </customSpacing>
                 </stackView>
                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8iE-FU-0g0" customClass="CollapseView" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="120" y="242" width="452" height="125"/>
+                    <rect key="frame" x="120" y="242" width="452" height="147"/>
                     <subviews>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="W54-Em-Hx4">
-                            <rect key="frame" x="0.0" y="108" width="452" height="17"/>
+                            <rect key="frame" x="0.0" y="130" width="452" height="17"/>
                             <subviews>
                                 <button identifier="Trigger1" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CaQ-Om-AFL">
                                     <rect key="frame" x="0.0" y="0.0" width="13" height="13"/>
@@ -296,13 +296,13 @@
                             </constraints>
                         </customView>
                         <box identifier="Content1" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="5RN-PV-pOZ">
-                            <rect key="frame" x="-3" y="-4" width="458" height="110"/>
+                            <rect key="frame" x="-3" y="-4" width="458" height="132"/>
                             <view key="contentView" id="gWB-X2-AzC">
-                                <rect key="frame" x="3" y="3" width="452" height="104"/>
+                                <rect key="frame" x="3" y="3" width="452" height="126"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UFY-vM-qHd">
-                                        <rect key="frame" x="14" y="76" width="171" height="18"/>
+                                        <rect key="frame" x="14" y="98" width="171" height="18"/>
                                         <buttonCell key="cell" type="check" title="Minimized/un-minimized" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5Y9-bX-K0f">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -312,7 +312,7 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="mr8-te-85z">
-                                        <rect key="frame" x="14" y="54" width="214" height="18"/>
+                                        <rect key="frame" x="14" y="76" width="214" height="18"/>
                                         <buttonCell key="cell" type="check" title="Window became inactive/active" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="J8g-aS-W6e">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -322,7 +322,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H40-Tk-atD">
-                                        <rect key="frame" x="14" y="32" width="201" height="18"/>
+                                        <rect key="frame" x="14" y="54" width="201" height="18"/>
                                         <buttonCell key="cell" type="check" title="Play when entered full screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="lOw-pu-Llm">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -332,7 +332,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DX0-mO-Ick">
-                                        <rect key="frame" x="14" y="10" width="185" height="18"/>
+                                        <rect key="frame" x="14" y="32" width="185" height="18"/>
                                         <buttonCell key="cell" type="check" title="Pause when left full screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="g2A-Kf-vct">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -341,16 +341,26 @@
                                             <binding destination="IBP-Mz-Maa" name="value" keyPath="values.pauseWhenLeavingFullScreen" id="bNZ-4U-cix"/>
                                         </connections>
                                     </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MJd-4d-ykB">
+                                        <rect key="frame" x="14" y="10" width="235" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Pause when machine goes to sleep" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="i4A-86-dGC">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="DX0-mO-Ick" firstAttribute="top" secondItem="H40-Tk-atD" secondAttribute="bottom" constant="8" id="2bf-Yi-7JZ"/>
+                                    <constraint firstItem="MJd-4d-ykB" firstAttribute="leading" secondItem="gWB-X2-AzC" secondAttribute="leading" constant="16" id="9rs-fj-ecW"/>
                                     <constraint firstItem="UFY-vM-qHd" firstAttribute="leading" secondItem="gWB-X2-AzC" secondAttribute="leading" constant="16" id="BYI-IT-W2G"/>
                                     <constraint firstItem="H40-Tk-atD" firstAttribute="top" secondItem="mr8-te-85z" secondAttribute="bottom" constant="8" id="L96-wP-FQU"/>
                                     <constraint firstItem="UFY-vM-qHd" firstAttribute="top" secondItem="gWB-X2-AzC" secondAttribute="top" constant="12" id="M28-VE-MMP"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MJd-4d-ykB" secondAttribute="trailing" constant="16" id="Rub-0B-HeP"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mr8-te-85z" secondAttribute="trailing" constant="16" id="TpM-U0-fum"/>
                                     <constraint firstItem="mr8-te-85z" firstAttribute="top" secondItem="UFY-vM-qHd" secondAttribute="bottom" constant="8" id="WO9-uu-y18"/>
-                                    <constraint firstAttribute="bottom" secondItem="DX0-mO-Ick" secondAttribute="bottom" constant="12" id="WUu-4G-5jL"/>
                                     <constraint firstItem="mr8-te-85z" firstAttribute="leading" secondItem="gWB-X2-AzC" secondAttribute="leading" constant="16" id="cVq-3x-7hI"/>
+                                    <constraint firstAttribute="bottom" secondItem="MJd-4d-ykB" secondAttribute="bottom" constant="12" id="dTa-GC-CHm"/>
+                                    <constraint firstItem="MJd-4d-ykB" firstAttribute="top" secondItem="DX0-mO-Ick" secondAttribute="bottom" constant="8" id="fBY-T0-PMR"/>
                                     <constraint firstItem="DX0-mO-Ick" firstAttribute="leading" secondItem="gWB-X2-AzC" secondAttribute="leading" constant="16" id="hLJ-NT-FCE"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DX0-mO-Ick" secondAttribute="trailing" constant="16" id="j3z-3M-mEG"/>
                                     <constraint firstItem="H40-Tk-atD" firstAttribute="leading" secondItem="gWB-X2-AzC" secondAttribute="leading" constant="16" id="oTi-j9-wws"/>
@@ -359,7 +369,7 @@
                                 </constraints>
                             </view>
                             <constraints>
-                                <constraint firstAttribute="height" constant="104" id="0iy-IO-vHF"/>
+                                <constraint firstAttribute="height" constant="126" id="0iy-IO-vHF"/>
                             </constraints>
                         </box>
                     </subviews>
@@ -426,7 +436,7 @@
                 <constraint firstItem="Xi9-i5-9V4" firstAttribute="leading" secondItem="5G0-Ih-CIb" secondAttribute="leading" id="vs3-xk-YxI"/>
                 <constraint firstItem="38y-2I-MGs" firstAttribute="leading" secondItem="6zR-96-iKB" secondAttribute="leading" id="ykt-2x-cLQ"/>
             </constraints>
-            <point key="canvasLocation" x="-2189" y="114"/>
+            <point key="canvasLocation" x="-2189" y="113.5"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="IBP-Mz-Maa"/>
         <customObject id="7jz-PW-fuz" customClass="SUUpdater"/>

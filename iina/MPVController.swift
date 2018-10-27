@@ -81,7 +81,8 @@ class MPVController: NSObject {
     MPVOption.Window.ontop: MPV_FORMAT_FLAG,
     MPVOption.Window.windowScale: MPV_FORMAT_DOUBLE,
     MPVProperty.mediaTitle: MPV_FORMAT_STRING,
-    MPVProperty.osdMsg3: MPV_FORMAT_STRING
+    MPVProperty.osdMsg3: MPV_FORMAT_STRING,
+    MPVProperty.timePos: MPV_FORMAT_DOUBLE
   ]
 
   init(playerCore: PlayerCore) {
@@ -906,6 +907,14 @@ class MPVController: NSObject {
       DispatchQueue.main.async {
         self.player.mainWindow.evaluateJavaScript(str)
       }
+    case MPVProperty.timePos:
+      guard player.mainWindow.isWindowLoaded,
+        player.enableDanmaku else { break }
+      let timePos = getDouble(MPVProperty.timePos)
+      DispatchQueue.main.async {
+        self.player.mainWindow.updateDanmakuTime(timePos)
+      }
+      
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")
       break

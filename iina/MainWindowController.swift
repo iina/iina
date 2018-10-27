@@ -2920,4 +2920,8 @@ extension MainWindowController: WKNavigationDelegate {
       }
     }
   }
+  
+  func updateDanmakuTime(_ timePos: Double) {
+    danmakuWebView.evaluateJavaScript("window.cm.time(Math.floor(\(timePos * 1000)));")
+  }
 }

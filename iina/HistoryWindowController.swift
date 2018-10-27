@@ -108,6 +108,10 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
       default:
         break
       }
+    } else if event.charactersIgnoringModifiers == "\u{7f}" {
+      outlineView.selectedRowIndexes
+        .compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
+        .forEach { HistoryController.shared.remove($0) }
     }
   }
 

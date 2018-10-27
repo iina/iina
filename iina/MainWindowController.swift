@@ -2910,8 +2910,11 @@ extension MainWindowController: WKNavigationDelegate {
   }
   
   func evaluateJavaScript(_ str: String) {
-    Logger.log("Received danmaku script: \(str).")
-    danmakuWebView.evaluateJavaScript(str) { _, error in
+    guard let data = Data(base64Encoded: str),
+      let script = String(data: data, encoding: .utf8) else { return }
+    
+    Logger.log("Received danmaku script: \(script).")
+    danmakuWebView.evaluateJavaScript(script) { _, error in
       if let error = error {
         Logger.log("webView.evaluateJavaScript error \(error)")
       }

@@ -12,6 +12,8 @@ fileprivate let MenuItemTagRevealInFinder = 100
 fileprivate let MenuItemTagDelete = 101
 fileprivate let MenuItemTagSearchFilename = 200
 fileprivate let MenuItemTagSearchFullPath = 201
+fileprivate let MenuItemTagPlay = 300
+fileprivate let MenuItemTagPlayInNewWindow = 301
 
 fileprivate extension NSUserInterfaceItemIdentifier {
   static let time = NSUserInterfaceItemIdentifier("Time")
@@ -106,6 +108,10 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
       default:
         break
       }
+    } else if event.charactersIgnoringModifiers == "\u{7f}" {
+      outlineView.selectedRowIndexes
+        .compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
+        .forEach { HistoryController.shared.remove($0) }
     }
   }
 
@@ -207,10 +213,16 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   private var selectedEntries: [PlaybackHistory] = []
 
   func menuNeedsUpdate(_ menu: NSMenu) {
+    let selectedRow = outlineView.selectedRowIndexes
+    let clickedRow = outlineView.clickedRow
+    var indexSet = IndexSet()
     if menu.identifier == .contextMenu {
-      var indexSet = outlineView.selectedRowIndexes
-      if outlineView.clickedRow >= 0 {
-        indexSet.insert(outlineView.clickedRow)
+      if clickedRow != -1 {
+        if selectedRow.contains(clickedRow) {
+          indexSet = selectedRow
+        } else {
+          indexSet.insert(clickedRow)
+        }
       }
       selectedEntries = indexSet.compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
     }
@@ -221,7 +233,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     case MenuItemTagRevealInFinder:
       if selectedEntries.isEmpty { return false }
       return !selectedEntries.filter { FileManager.default.fileExists(atPath: $0.url.path) }.isEmpty
-    case MenuItemTagDelete:
+    case MenuItemTagDelete, MenuItemTagPlay, MenuItemTagPlayInNewWindow:
       return !selectedEntries.isEmpty
     case MenuItemTagSearchFilename:
       menuItem.state = searchOption == .filename ? .on : .off

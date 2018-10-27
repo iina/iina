@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,13 +19,13 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="563" height="342"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="563" height="342"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfA-G1-DVj">
-                        <rect key="frame" x="361" y="320" width="200" height="19"/>
+                        <rect key="frame" x="355" y="320" width="200" height="19"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="200" id="8T5-1l-PW8"/>
                         </constraints>
@@ -251,7 +251,7 @@
                     <constraint firstItem="dcE-VR-Vxk" firstAttribute="leading" secondItem="ob0-Up-S1q" secondAttribute="trailing" constant="9" id="7dv-Eh-lkU"/>
                     <constraint firstItem="II4-dF-AGa" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="-1" id="He6-cF-muG"/>
                     <constraint firstItem="nfA-G1-DVj" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="3" id="Mi6-SQ-f1j"/>
-                    <constraint firstAttribute="trailing" secondItem="nfA-G1-DVj" secondAttribute="trailing" constant="2" id="SpX-3c-5W7"/>
+                    <constraint firstAttribute="trailing" secondItem="nfA-G1-DVj" secondAttribute="trailing" constant="8" id="SpX-3c-5W7"/>
                     <constraint firstItem="nfA-G1-DVj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dcE-VR-Vxk" secondAttribute="trailing" constant="8" id="Srg-PF-efH"/>
                     <constraint firstItem="dcE-VR-Vxk" firstAttribute="baseline" secondItem="ob0-Up-S1q" secondAttribute="baseline" id="ZRj-0I-lre"/>
                     <constraint firstItem="II4-dF-AGa" firstAttribute="top" secondItem="nfA-G1-DVj" secondAttribute="bottom" constant="2" id="gs2-8g-scW"/>
@@ -266,13 +266,13 @@
         </window>
         <menu title="Context Menu" identifier="ContextMenu" id="lR3-1E-Rwr" userLabel="Context Menu">
             <items>
-                <menuItem title="Play" id="oMR-4K-aR2">
+                <menuItem title="Play" tag="300" id="oMR-4K-aR2">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="playAction:" target="-2" id="Fje-Oq-MI4"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Play in New Window" id="mXt-wb-fgT">
+                <menuItem title="Play in New Window" tag="301" id="mXt-wb-fgT">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="playInNewWindowAction:" target="-2" id="kou-6P-1pI"/>

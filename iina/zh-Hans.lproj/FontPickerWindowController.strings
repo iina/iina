@@ -12,17 +12,14 @@
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Ihd-HK-wsv"; */
 "Ihd-HK-wsv.title" = "取消";
 
-/* Class = "NSTextFieldCell"; title = "Filter:"; ObjectID = "Jhm-tD-3Xf"; */
-"Jhm-tD-3Xf.title" = "过滤:";
-
-/* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "KPy-vq-mpf"; */
-"KPy-vq-mpf.title" = "自定义:";
-
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "S5m-SJ-Ggp"; */
 "S5m-SJ-Ggp.title" = "好";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "TPh-rU-Vee"; */
 "TPh-rU-Vee.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Choose a font:"; ObjectID = "TSI-Wt-Edx"; */
+"TSI-Wt-Edx.title" = "选择字体:";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Wib-jE-Vgi"; */
 "Wib-jE-Vgi.title" = "Text Cell";
@@ -35,4 +32,7 @@
 
 /* Class = "NSTextFieldCell"; title = "Test"; ObjectID = "qwM-r2-9ki"; */
 "qwM-r2-9ki.title" = "测试";
+
+/* Class = "NSTextFieldCell"; title = "Or enter the font name:"; ObjectID = "waR-LB-484"; */
+"waR-LB-484.title" = "或输入字体名称:";
 

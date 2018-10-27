@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.13.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefUtilsViewController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="firefoxExtButton" destination="G58-js-HgZ" id="xaI-Je-Yq8"/>
                 <outlet property="playHistoryClearedLabel" destination="sI2-xW-v1S" id="7uc-8E-r0r"/>
                 <outlet property="savedPlaybackProgressClearedLabel" destination="btv-7s-L8M" id="mFv-fy-6Go"/>
                 <outlet property="sectionBrowserExtView" destination="lOp-07-Z6M" id="UYs-O3-l9R"/>
@@ -270,7 +271,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="163" y="199" width="448" height="189"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1057"/>
             <view key="contentView" id="HNy-Eo-3UU">
                 <rect key="frame" x="0.0" y="0.0" width="448" height="189"/>
                 <autoresizingMask key="autoresizingMask"/>

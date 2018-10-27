@@ -52,8 +52,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBOutlet weak var deleteBtn: NSButton!
   @IBOutlet weak var loopBtn: NSButton!
   @IBOutlet weak var shuffleBtn: NSButton!
+  @IBOutlet weak var totalLengthLabel: NSTextField!
   @IBOutlet var subPopover: NSPopover!
   @IBOutlet var addFileMenu: NSMenu!
+
+  private var playlistTotalLengthIsReady = false
+  private var playlistTotalLength: Double? = nil
 
   var downShift: CGFloat = 0 {
     didSet {
@@ -79,6 +83,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       $0?.alternateImage?.isTemplate = true
     }
 
+    hideTotalLength()
+
     // colors
     if #available(macOS 10.14, *) {
       withAllTableViews { $0.backgroundColor = NSColor(named: .sidebarTableBackground)! }
@@ -92,6 +98,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
     // nofitications
     playlistChangeObserver = NotificationCenter.default.addObserver(forName: .iinaPlaylistChanged, object: player, queue: OperationQueue.main) { _ in
+      self.playlistTotalLengthIsReady = false
       self.reloadData(playlist: true, chapters: false)
     }
     
@@ -130,6 +137,50 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     if chapters {
       player.getChapters()
       chapterTableView.reloadData()
+    }
+  }
+
+  private func showTotalLength() {
+    guard let playlistTotalLength = playlistTotalLength, playlistTotalLengthIsReady else { return }
+    totalLengthLabel.isHidden = false
+    if playlistTableView.numberOfSelectedRows > 0 {
+      let info = player.info
+      let selectedDuration = playlistTableView.selectedRowIndexes
+        .compactMap { info.cachedVideoDurationAndProgress[info.playlist[$0].filename]?.duration }
+        .reduce(0, +)
+      totalLengthLabel.stringValue = String(format: NSLocalizedString("playlist.total_length_with_selected", comment: "%@ of %@ selected"),
+                                            VideoTime(selectedDuration).stringRepresentation,
+                                            VideoTime(playlistTotalLength).stringRepresentation)
+    } else {
+      totalLengthLabel.stringValue = String(format: NSLocalizedString("playlist.total_length", comment: "%@ in total"),
+                                            VideoTime(playlistTotalLength).stringRepresentation)
+    }
+  }
+
+  private func hideTotalLength() {
+    totalLengthLabel.isHidden = true
+  }
+
+  private func refreshTotalLength() {
+    var totalDuration: Double? = 0
+    for p in player.info.playlist {
+      if let duration = player.info.cachedVideoDurationAndProgress[p.filename]?.duration {
+        totalDuration! += duration
+      } else {
+        totalDuration = nil
+        break
+      }
+    }
+    if let duration = totalDuration {
+      playlistTotalLengthIsReady = true
+      playlistTotalLength = duration
+      DispatchQueue.main.async {
+        self.showTotalLength()
+      }
+    } else {
+      DispatchQueue.main.async {
+        self.hideTotalLength()
+      }
     }
   }
 
@@ -326,6 +377,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   func tableViewSelectionDidChange(_ notification: Notification) {
     let tv = notification.object as! NSTableView
+    if tv == playlistTableView {
+      showTotalLength()
+    }
     guard tv.numberOfSelectedRows > 0 else { return }
     if tv == chapterTableView {
       let index = tv.selectedRow
@@ -379,12 +433,14 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
               cellView.playbackProgressView.percentage = progress / duration
               cellView.playbackProgressView.needsDisplay = true
             }
+            self.refreshTotalLength()
           }
         } else {
           // get related data and schedule a reload
           if Preference.bool(for: .prefetchPlaylistVideoDuration) {
             player.playlistQueue.async {
               self.player.refreshCachedVideoProgress(forVideoPath: item.filename)
+              self.refreshTotalLength()
               DispatchQueue.main.async {
                 self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
               }

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefCodecViewController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="audioDevicePopUp" destination="Min-k4-E1V" id="gOa-nX-tNk"/>
+                <outlet property="audioLangTokenField" destination="Mib-1U-RcV" id="r2O-EA-DIJ"/>
                 <outlet property="hwdecDescriptionTextField" destination="0Re-PY-hmC" id="AXN-kV-1hB"/>
                 <outlet property="sectionAudioView" destination="bsP-Kc-xXR" id="1QS-jd-Kg7"/>
                 <outlet property="sectionVideoView" destination="gZf-gF-XoY" id="pg5-8W-sPk"/>
@@ -55,7 +56,7 @@
                             <real key="minimum" value="0.0"/>
                         </numberFormatter>
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
@@ -71,7 +72,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EWs-Ib-pVZ">
-                    <rect key="frame" x="244" y="20" width="125" height="26"/>
+                    <rect key="frame" x="244" y="21" width="125" height="25"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="P27-F4-Ogg"/>
                     </constraints>
@@ -154,7 +155,7 @@
                             <real key="minimum" value="0.0"/>
                         </numberFormatter>
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
@@ -169,20 +170,24 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mib-1U-RcV">
+                <tokenField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mib-1U-RcV">
                     <rect key="frame" x="269" y="5" width="193" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="NAx-xr-hr8"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="RBR-T9-Cw3">
+                    <tokenFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" allowsEditingTextAttributes="YES" id="RBR-T9-Cw3">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
+                    </tokenFieldCell>
                     <connections>
-                        <binding destination="pxc-7C-SGP" name="value" keyPath="values.audioLanguage" id="JUe-KZ-wac"/>
+                        <binding destination="pxc-7C-SGP" name="value" keyPath="values.audioLanguage" id="9KU-ga-wKj">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">ISO639Transformer</string>
+                            </dictionary>
+                        </binding>
                     </connections>
-                </textField>
+                </tokenField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SEM-Qm-KeU">
                     <rect key="frame" x="335" y="107" width="92" height="14"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default: 0 (Auto)" id="2yO-To-el7">
@@ -250,7 +255,7 @@
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="PqJ-4v-Gdd">
                         <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="vF2-0l-fNp"/>
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
@@ -276,7 +281,7 @@
                             <real key="maximum" value="1000"/>
                         </numberFormatter>
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
@@ -292,7 +297,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Min-k4-E1V">
-                    <rect key="frame" x="267" y="35" width="74" height="26"/>
+                    <rect key="frame" x="267" y="36" width="75" height="25"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="gCa-l2-dK8"/>
                     </constraints>

@@ -220,6 +220,8 @@
 "alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
 "alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
 
+"playlist.total_length" = "%@ in total";
+"playlist.total_length_with_selected" = "%@ of %@ selected";
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.play_in_new_window" = "Play in New Window";

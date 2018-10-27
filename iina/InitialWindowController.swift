@@ -88,6 +88,23 @@ class InitialWindowController: NSWindowController {
   @IBOutlet weak var lastPositionLabel: NSTextField!
   @IBOutlet weak var recentFilesTableTopConstraint: NSLayoutConstraint!
 
+  private let observedPrefKeys: [Preference.Key] = [.themeMaterial]
+
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    guard let keyPath = keyPath, let change = change else { return }
+
+    switch keyPath {
+
+    case Preference.Key.themeMaterial.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        setMaterial(Preference.Theme(rawValue: newValue))
+      }
+
+    default:
+      return
+    }
+  }
+
   lazy var recentDocuments: [URL] = {
     NSDocumentController.shared.recentDocumentURLs.filter { $0 != lastPlaybackURL }
   }()
@@ -120,8 +137,19 @@ class InitialWindowController: NSWindowController {
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
 
-    if #available(macOS 10.14, *) {} else {
-      window?.appearance = NSAppearance(named: .vibrantDark)
+    setMaterial(Preference.enum(for: .themeMaterial))
+
+    observedPrefKeys.forEach { key in
+      UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
+    }
+  }
+
+  private func setMaterial(_ theme: Preference.Theme?) {
+    guard let window = window, let theme = theme else { return }
+    if #available(macOS 10.14, *) {
+      window.appearance = NSAppearance(iinaTheme: theme)
+    } else {
+      window.appearance = NSAppearance(named: .vibrantDark)
       mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
       visualEffectView.material = .ultraDark
     }

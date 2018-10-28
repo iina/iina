@@ -548,6 +548,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   var danmakuWebView: DanmakuWebView!
   var danmakuWebViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
+  var danmakuFinishLoading = false
   // MARK: - PIP
 
   @available(macOS 10.12, *)
@@ -2900,11 +2901,13 @@ protocol SidebarViewController {
 extension MainWindowController: WKNavigationDelegate {
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
     Logger.log("Danmaku webView finish loading.")
+    danmakuFinishLoading = true
     evaluateJavaScript("window.initDM();")
     evaluateJavaScript("window.resize();")
   }
   
   func evaluateJavaScript(_ str: String) {
+    guard danmakuFinishLoading else { return }
     danmakuWebView.evaluateJavaScript(str) { _, error in
       if let error = error {
         Logger.log("webView.evaluateJavaScript error \(error)")
@@ -2913,6 +2916,7 @@ extension MainWindowController: WKNavigationDelegate {
   }
   
   func updateDanmakuTime(_ timePos: Double) {
+    guard danmakuFinishLoading else { return }
     danmakuWebView.evaluateJavaScript("window.cm.time(Math.floor(\(timePos * 1000)));")
   }
 }

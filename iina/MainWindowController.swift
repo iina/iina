@@ -696,7 +696,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
       // Update the cached value
       self.cachedScreenCount = screenCount
-      self.videoView.updateDisplaylink()
+      self.videoView.updateDisplayLink()
     }
 
     NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification, object: nil, queue: nil, using: { [unowned self] _ in
@@ -1253,6 +1253,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       p.lineBreakMode = .byTruncatingMiddle
       attrTitle.addAttribute(.paragraphStyle, value: p, range: NSRange(location: 0, length: attrTitle.length))
     }
+    videoView.startDisplayLink()
   }
 
   func windowWillClose(_ notification: Notification) {
@@ -1266,7 +1267,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if !player.isMpvTerminated {
       player.savePlaybackPosition()
       player.stop()
-      // videoView.stopDisplayLink()
+      videoView.stopDisplayLink()
     }
     player.info.currentFolder = nil
     player.info.matchedSubs.removeAll()
@@ -1570,7 +1571,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Window delegate: Active status
 
   func windowDidChangeScreen(_ notification: Notification) {
-    videoView.updateDisplaylink()
+    videoView.updateDisplayLink()
   }
 
   func windowDidBecomeKey(_ notification: Notification) {

@@ -636,14 +636,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       #if DEBUG
       danmakuWebView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
       #endif
-      
-      do {
-        var resourcesDirectory = try FileManager.default.url(for: .applicationDirectory, in: .systemDomainMask, appropriateFor: nil, create: false)
-        resourcesDirectory.appendPathComponent("iina+.app/Contents/Resources")
-        let url = URL(fileURLWithPath: resourcesDirectory.path + "/index.htm")
-        danmakuWebView.loadFileURL(url, allowingReadAccessTo: resourcesDirectory)
-      } catch let error {
-        print(error)
+      if let url = URL(string: "http://127.0.0.1:19080/danmaku/index.htm") {
+        danmakuWebView.load(URLRequest(url: url))
       }
       
       
@@ -2906,15 +2900,12 @@ protocol SidebarViewController {
 extension MainWindowController: WKNavigationDelegate {
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
     Logger.log("Danmaku webView finish loading.")
-    DistributedNotificationCenter.default().post(name: NSNotification.Name("IINADanmakuFinishLoading"), object: nil)
+    evaluateJavaScript("window.initDM();")
+    evaluateJavaScript("window.resize();")
   }
   
   func evaluateJavaScript(_ str: String) {
-    guard let data = Data(base64Encoded: str),
-      let script = String(data: data, encoding: .utf8) else { return }
-    
-    Logger.log("Received danmaku script: \(script).")
-    danmakuWebView.evaluateJavaScript(script) { _, error in
+    danmakuWebView.evaluateJavaScript(str) { _, error in
       if let error = error {
         Logger.log("webView.evaluateJavaScript error \(error)")
       }

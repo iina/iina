@@ -895,6 +895,9 @@ class MPVController: NSObject {
           self.player.mainWindow.setWindowScale(windowScale)
         }
       }
+      DispatchQueue.main.async {
+        self.player.mainWindow.updateDanmakuSize()
+      }
 
     case MPVProperty.mediaTitle:
       player.postNotification(.iinaMediaTitleChanged)

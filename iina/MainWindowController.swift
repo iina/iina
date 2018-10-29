@@ -1581,7 +1581,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       controlBarFloating.xConstraint.constant = xPos
       controlBarFloating.yConstraint.constant = yPos
     }
-    updateDanmakuSize()
   }
 
   // resize framebuffer in videoView after resizing.

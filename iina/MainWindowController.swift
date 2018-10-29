@@ -1581,6 +1581,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       controlBarFloating.xConstraint.constant = xPos
       controlBarFloating.yConstraint.constant = yPos
     }
+    updateDanmakuSize()
   }
 
   // resize framebuffer in videoView after resizing.
@@ -2917,6 +2918,10 @@ extension MainWindowController: WKNavigationDelegate {
   
   func updateDanmakuTime(_ timePos: Double) {
     evaluateJavaScript("window.cm.time(Math.floor(\(timePos * 1000)));")
+  }
+  
+  func updateDanmakuSize() {
+    evaluateJavaScript("window.resize();")
   }
   
   func updateDanmakuStatus(_ isPaused: Bool) {

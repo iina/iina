@@ -643,7 +643,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let _ = quickSettingView
 
     // buffer indicator view
-    bufferIndicatorView.layer?.cornerRadius = 10
+    bufferIndicatorView.maskImage = .maskImage(cornerRadius: 10)
     updateBufferIndicatorView()
 
     // thumbnail peek view
@@ -660,8 +660,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     // hide other views
     osdVisualEffectView.isHidden = true
-    osdVisualEffectView.layer?.cornerRadius = 10
-    additionalInfoView.layer?.cornerRadius = 10
+    osdVisualEffectView.maskImage = .maskImage(cornerRadius: 10)
+    additionalInfoView.maskImage = .maskImage(cornerRadius: 10)
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
     timePreviewWhenSeek.isHidden = true

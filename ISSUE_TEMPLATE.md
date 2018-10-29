@@ -13,16 +13,25 @@
 <!-- If this is feature request, please use this section to explain the rationale behind your idea and why you believe it would be beneficial. -->
 **Actual behavior:**
 
-<!-- If you're reporting a crash, please copy the stack trace below, between the backticks (you can find these in ~/Library/Logs/DiagnosticReports/; the filename should prefixed with IINA and include the crash time).  If not, feel free to delete this section. -->
-- Crash report:
-```
+<!-- If you're reporting a crash, please copy the stack trace below, between the <pre> </pre> tags (you can find these in ~/Library/Logs/DiagnosticReports/; the filename should prefixed with IINA and include the crash time). If not, feel free to delete this section. -->
+<details>
+<summary><b>Crash report:</b></summary>
+<pre>
+<!-- Put your crash log here -->
+</pre>
+</details>
 
-```
+<br>
+
 <!-- Please provide mpv log if applicable (if you haven't done so already, you can enable logging in Preferences > Advanced). -->
-- MPV log:
-```
+<details>
+<summary><b>mpv log:</b></summary>
+<pre>
+<!-- Put your mpv log here -->
+</pre>
+</details>
 
-```
+<br>
 
 <!-- N/A if this is a feature request -->
 **Steps to reproduce:**

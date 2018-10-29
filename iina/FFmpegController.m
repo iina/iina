@@ -143,6 +143,13 @@ return -1;\
   avcodec_parameters_to_context(pCodecCtx, pVideoStream->codecpar);
   pCodecCtx->time_base = pVideoStream->time_base;
 
+  if (pCodecCtx->pix_fmt < 0 || pCodecCtx->pix_fmt >= AV_PIX_FMT_NB) {
+    avcodec_free_context(&pCodecCtx);
+    avformat_close_input(&pFormatCtx);
+    NSLog(@"Error when getting thumbnails: Pixel format is null");
+    return -1;
+  }
+  
   ret = avcodec_open2(pCodecCtx, pCodec, &optionsDict);
   CHECK_SUCCESS(ret, @"Cannot open codec")
 

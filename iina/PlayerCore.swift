@@ -1260,6 +1260,8 @@ class PlayerCore: NSObject {
         if #available(macOS 10.12.2, *) {
           self.touchBarSupport.updateTouchBarPlayBtn()
         }
+        guard self.enableDanmaku else { return }
+        self.mainWindow.updateDanmakuStatus(pause)
       }
 
     case .volume, .muteButton:

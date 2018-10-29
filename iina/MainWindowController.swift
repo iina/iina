@@ -2916,7 +2916,11 @@ extension MainWindowController: WKNavigationDelegate {
   }
   
   func updateDanmakuTime(_ timePos: Double) {
-    guard danmakuFinishLoading else { return }
-    danmakuWebView.evaluateJavaScript("window.cm.time(Math.floor(\(timePos * 1000)));")
+    evaluateJavaScript("window.cm.time(Math.floor(\(timePos * 1000)));")
+  }
+  
+  func updateDanmakuStatus(_ isPaused: Bool) {
+    let str = isPaused ? "window.cm.stop();" : "window.cm.start();"
+    evaluateJavaScript(str)
   }
 }

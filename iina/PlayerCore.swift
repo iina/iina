@@ -184,7 +184,7 @@ class PlayerCore: NSObject {
       return nil
     }
 
-    let playableFiles = getPlayableFiles(in: urls)
+    let playableFiles = getPlayableFiles(in: urls, sorted: true)
     let count = playableFiles.count
 
     // check playable files count
@@ -769,12 +769,17 @@ class PlayerCore: NSObject {
     mpv.command(.playlistRemove, args: [index.description])
   }
 
-  func clearPlaylist() {
-    mpv.command(.playlistClear)
+  func playlistRemove(_ indexSet: IndexSet) {
+    var count = 0
+    for i in indexSet {
+      playlistRemove(i - count)
+      count += 1
+    }
+    postNotification(.iinaPlaylistChanged)
   }
 
-  func removeFromPlaylist(index: Int) {
-    mpv.command(.playlistRemove, args: ["\(index)"])
+  func clearPlaylist() {
+    mpv.command(.playlistClear)
   }
 
   func playFile(_ path: String) {

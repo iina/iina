@@ -11,6 +11,11 @@ import Cocoa
 fileprivate let PrefixMinLength = 7
 fileprivate let FilenameMinLength = 12
 
+fileprivate let MenuItemTagCut = 601
+fileprivate let MenuItemTagCopy = 602
+fileprivate let MenuItemTagPaste = 603
+fileprivate let MenuItemTagDelete = 604
+
 class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSMenuDelegate, SidebarViewController, NSMenuItemValidation {
 
   override var nibName: NSNib.Name {
@@ -302,13 +307,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     if currentTab == .playlist {
-      switch menuItem.title {
-      case "Cut", "Copy", "Delete":
+      switch menuItem.tag {
+      case MenuItemTagCut, MenuItemTagCopy, MenuItemTagDelete:
         return playlistTableView.selectedRow != -1
-      case "Paste":
+      case MenuItemTagPaste:
         return NSPasteboard.general.types?.contains(.nsFilenames) ?? false
-      // case "Redo":
-      // case "Undo":
       default:
         break
       }
@@ -334,15 +337,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @objc func delete(_ sender: NSMenuItem) {
     player.playlistRemove(playlistTableView.selectedRowIndexes)
   }
-
-  //  @objc func undo(_ sender: NSMenuItem) {
-  //
-  //  }
-  //
-  //  @objc func redo(_ sender: NSMenuItem) {
-  //
-  //  }
-
 
   // MARK: - private methods
 

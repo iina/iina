@@ -163,22 +163,22 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="iaV-uE-XkO"/>
-                            <menuItem title="Cut" keyEquivalent="x" id="2aU-bk-bmu">
+                            <menuItem title="Cut" tag="601" keyEquivalent="x" id="2aU-bk-bmu">
                                 <connections>
                                     <action selector="cut:" target="-1" id="Ru2-2a-FLw"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Copy" keyEquivalent="c" id="tH0-KL-c9V">
+                            <menuItem title="Copy" tag="602" keyEquivalent="c" id="tH0-KL-c9V">
                                 <connections>
                                     <action selector="copy:" target="-1" id="tIe-wX-OC5"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Paste" keyEquivalent="v" id="NdF-0z-k5s">
+                            <menuItem title="Paste" tag="603" keyEquivalent="v" id="NdF-0z-k5s">
                                 <connections>
                                     <action selector="paste:" target="-1" id="VK0-VG-8z5"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Delete" id="h9w-Rj-Hm1">
+                            <menuItem title="Delete" tag="604" id="h9w-Rj-Hm1">
                                 <string key="keyEquivalent" base64-UTF8="YES">
 CA
 </string>

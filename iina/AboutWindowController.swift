@@ -25,9 +25,15 @@ class AboutWindowController: NSWindowController {
   @IBOutlet weak var mpvVersionLabel: NSTextField!
   @IBOutlet var detailTextView: NSTextView!
 
+  @IBOutlet weak var licenseButton: NSButton!
 
   override func windowDidLoad() {
     super.windowDidLoad()
+
+    licenseButton.wantsLayer = true
+    licenseButton.layer?.cornerRadius = 4
+    (licenseButton.cell as! NSButtonCell).backgroundColor = .systemBlue
+    print(Translator.all)
 
     if #available(macOS 10.13, *) {
       windowBackgroundBox.fillColor = NSColor(named: .aboutWindowBackground)!
@@ -44,7 +50,7 @@ class AboutWindowController: NSWindowController {
 
     let contrubutionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf")!
     detailTextView.readRTFD(fromFile: contrubutionFile)
-    detailTextView.textColor = NSColor.textColor
+    detailTextView.textColor = NSColor.secondaryLabelColor
   }
 
   @IBAction func creditsBtnAction(_ sender: Any) {

@@ -6,11 +6,17 @@
 /* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
 "2iM-j7-AzQ.title" = "Fenster nach Wiedergabe geöffnet halten";
 
-/* Class = "NSTextFieldCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
+/* Class = "NSButtonCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
 "2rJ-mg-OuU.title" = "Sichern unter";
 
 /* Class = "NSMenuItem"; title = "PNG"; ObjectID = "3XO-ks-TDg"; */
 "3XO-ks-TDg.title" = "PNG";
+
+/* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
+"3gs-3w-rg6.title" = "In die Zwischenablage kopieren";
+
+/* Class = "NSTextFieldCell"; title = "Options:"; ObjectID = "4Qe-7S-8xK"; */
+"4Qe-7S-8xK.title" = "Optionen:";
 
 /* Class = "NSButtonCell"; title = "Enable "Open Recent" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "„Benutzte Dokumente“-Menü aktivieren";
@@ -19,7 +25,7 @@
 "5RN-PV-pOZ.title" = "Box";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
-"5Y9-bX-K0f.title" = "Minimiert/un-minimiert";
+"5Y9-bX-K0f.title" = "Wiedergabefenster wird im Dock abgelegt oder wiederhergestellt";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
 "6TV-DG-503.title" = "Wiedergabeliste:";
@@ -37,7 +43,7 @@
 "Ez8-qY-WAZ.title" = "Täglich";
 
 /* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
-"FbF-jJ-W5b.title" = "Pause";
+"FbF-jJ-W5b.title" = "Wiedergabe pausieren";
 
 /* Class = "NSTextFieldCell"; title = "When media opened:"; ObjectID = "GNV-VA-NBW"; */
 "GNV-VA-NBW.title" = "Wenn Datei geöffnet wird:";
@@ -46,7 +52,7 @@
 "Imf-6g-2Cd.title" = "Wöchentlich";
 
 /* Class = "NSButtonCell"; title = "Window became inactive/active"; ObjectID = "J8g-aS-W6e"; */
-"J8g-aS-W6e.title" = "Fenster wurde inaktiv/aktiv";
+"J8g-aS-W6e.title" = "Wiedergabefenster wird inaktiv oder aktiv";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
 "JfZ-D8-aF2.title" = "Aktion abwarten";
@@ -64,10 +70,13 @@
 "M0z-bI-88d.title" = "Dateien immer in neuem Fenster öffnen";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
-"MlG-hl-goB.title" = "Vollbild";
+"MlG-hl-goB.title" = "Vollbildmodus aktivieren";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
+
+/* Class = "NSTextFieldCell"; title = "Destination:"; ObjectID = "PhL-vP-i7L"; */
+"PhL-vP-i7L.title" = "Speicherort:";
 
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
 "QJq-fO-hhK.title" = "Dateien im selben Ordner automatisch hinzufügen";
@@ -76,7 +85,7 @@
 "REP-70-XOi.title" = "Monatlich";
 
 /* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
-"TvB-UM-FrS.title" = "Alten Vollbildmodus verwenden";
+"TvB-UM-FrS.title" = "Alternativen Vollbildmodus verwenden";
 
 /* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu."; ObjectID = "XFC-Lr-LmP"; */
 "XFC-Lr-LmP.title" = "Andernfalls werden dort nur manuell geöffnete Dateien aufgeführt.";
@@ -88,7 +97,7 @@
 "YeH-hk-7NN.title" = "/path/to/screenshot/folder";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
-"f0j-Dn-cxt.title" = "Ich will Beta-Updates erhalten. ";
+"f0j-Dn-cxt.title" = "Beta-Updates erhalten";
 
 /* Class = "NSButtonCell"; title = "Pause when left full screen"; ObjectID = "g2A-Kf-vct"; */
 "g2A-Kf-vct.title" = "Pausieren, wenn Vollbildmodus verlassen wurde";
@@ -98,6 +107,9 @@
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
 "hWC-KJ-FuC.title" = "Nach Updates suchen:";
+
+/* Class = "NSButtonCell"; title = "Pause when machine goes to sleep"; ObjectID = "i4A-86-dGC"; */
+"i4A-86-dGC.title" = "Pausieren, wenn Mac in den Ruhezustand wechselt";
 
 /* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
 "iGS-qN-f5q.title" = "Wiedergabeverlauf aktivieren";

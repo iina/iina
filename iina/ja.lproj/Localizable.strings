@@ -179,6 +179,8 @@
 "pl_menu.wrong_sub" = "誤った字幕!";
 "playlist.chapter_cap" = "チャプタ";
 "playlist.playlist_cap" = "プレイリスト";
+"playlist.total_length" = "合計 %@";
+"playlist.total_length_with_selected" = "%@ / %@を選択中";
 "preference.advanced" = "拡張";
 "preference.control" = "コントロール";
 "preference.general" = "一般";

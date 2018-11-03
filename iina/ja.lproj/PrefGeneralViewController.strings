@@ -6,11 +6,17 @@
 /* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
 "2iM-j7-AzQ.title" = "再生終了時にウィンドウを開いたままにする";
 
-/* Class = "NSTextFieldCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
+/* Class = "NSButtonCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
 "2rJ-mg-OuU.title" = "保存先";
 
 /* Class = "NSMenuItem"; title = "PNG"; ObjectID = "3XO-ks-TDg"; */
 "3XO-ks-TDg.title" = "PNG";
+
+/* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
+"3gs-3w-rg6.title" = "クリップボードにコピー";
+
+/* Class = "NSTextFieldCell"; title = "Options:"; ObjectID = "4Qe-7S-8xK"; */
+"4Qe-7S-8xK.title" = "オプション:";
 
 /* Class = "NSButtonCell"; title = "Enable "Open Recent" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "最近使った項目を保存する";
@@ -69,6 +75,9 @@
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
 
+/* Class = "NSTextFieldCell"; title = "Destination:"; ObjectID = "PhL-vP-i7L"; */
+"PhL-vP-i7L.title" = "出力先:";
+
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
 "QJq-fO-hhK.title" = "自動で同じフォルダにファイルを追加する";
 
@@ -98,6 +107,9 @@
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
 "hWC-KJ-FuC.title" = "アップデートの確認";
+
+/* Class = "NSButtonCell"; title = "Pause when machine goes to sleep"; ObjectID = "i4A-86-dGC"; */
+"i4A-86-dGC.title" = "PCがスリープしたら一時停止";
 
 /* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
 "iGS-qN-f5q.title" = "再生履歴を保存する";

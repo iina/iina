@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -809,6 +809,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <binding destination="lH7-Vv-0M1" name="enabled" keyPath="values.enableOSD" id="QgN-QS-b6a"/>
                         <binding destination="lH7-Vv-0M1" name="value" keyPath="values.osdAutoHideTimeout" id="kIE-1e-vDY"/>
                     </connections>
                 </textField>
@@ -850,6 +851,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <binding destination="lH7-Vv-0M1" name="enabled" keyPath="values.enableOSD" id="1vd-4B-k7o"/>
                         <binding destination="lH7-Vv-0M1" name="value" keyPath="values.osdTextSize" id="AJx-Kb-5i1"/>
                     </connections>
                 </textField>
@@ -860,6 +862,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
+                        <binding destination="lH7-Vv-0M1" name="enabled" keyPath="values.enableOSD" id="ttG-Ef-d9S"/>
                         <binding destination="lH7-Vv-0M1" name="value" keyPath="values.displayTimeAndBatteryInFullScreen" id="Qd0-qD-NZX"/>
                     </connections>
                 </button>
@@ -912,7 +915,7 @@
             <point key="canvasLocation" x="-30.5" y="670"/>
         </customView>
         <customView id="3uJ-UU-1zw">
-            <rect key="frame" x="0.0" y="-1" width="586" height="56"/>
+            <rect key="frame" x="0.0" y="0.0" width="586" height="56"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitleThumb" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="maZ-e8-1vw">
@@ -945,6 +948,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <binding destination="lH7-Vv-0M1" name="enabled" keyPath="values.enableThumbnailPreview" id="e2f-1G-Pga"/>
                         <binding destination="lH7-Vv-0M1" name="value" keyPath="values.maxThumbnailPreviewCacheSize" id="2zZ-MS-KX5"/>
                     </connections>
                 </textField>
@@ -981,7 +985,7 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Oba-nc-n1C" secondAttribute="trailing" id="wxc-GQ-2XV"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mvX-qm-iUh" secondAttribute="trailing" id="zVT-gB-Pix"/>
             </constraints>
-            <point key="canvasLocation" x="19" y="752"/>
+            <point key="canvasLocation" x="5" y="832"/>
         </customView>
         <customView id="M9c-Ak-HmK">
             <rect key="frame" x="0.0" y="0.0" width="580" height="33"/>

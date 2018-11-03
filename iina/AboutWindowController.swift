@@ -24,16 +24,17 @@ class AboutWindowController: NSWindowController {
   @IBOutlet weak var versionLabel: NSTextField!
   @IBOutlet weak var mpvVersionLabel: NSTextField!
   @IBOutlet var detailTextView: NSTextView!
+  @IBOutlet var creditsTextView: NSTextView!
 
-  @IBOutlet weak var licenseButton: NSButton!
+  @IBOutlet weak var licenseButton: AboutWindowButton!
+  @IBOutlet weak var contributorsButton: AboutWindowButton!
+  @IBOutlet weak var creditsButton: AboutWindowButton!
+  @IBOutlet weak var tabView: NSTabView!
 
   override func windowDidLoad() {
     super.windowDidLoad()
 
-    licenseButton.wantsLayer = true
-    licenseButton.layer?.cornerRadius = 4
-    (licenseButton.cell as! NSButtonCell).backgroundColor = .systemBlue
-    print(Translator.all)
+    // print(Translator.all)
 
     if #available(macOS 10.13, *) {
       windowBackgroundBox.fillColor = NSColor(named: .aboutWindowBackground)!
@@ -48,14 +49,48 @@ class AboutWindowController: NSWindowController {
 
     mpvVersionLabel.stringValue = PlayerCore.active.mpv.mpvVersion
 
-    let contrubutionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf")!
-    detailTextView.readRTFD(fromFile: contrubutionFile)
-    detailTextView.textColor = NSColor.secondaryLabelColor
+    if let contrubutionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf") {
+      detailTextView.readRTFD(fromFile: contrubutionFile)
+      detailTextView.textColor = NSColor.secondaryLabelColor
+    }
+
+    if let creditsFile = Bundle.main.path(forResource: "Credits", ofType: "rtf") {
+      creditsTextView.readRTFD(fromFile: creditsFile)
+      creditsTextView.textColor = NSColor.secondaryLabelColor
+    }
   }
 
-  @IBAction func creditsBtnAction(_ sender: Any) {
-    guard let path = Bundle.main.path(forResource: "Credits", ofType: "rtf") else { return }
-    NSWorkspace.shared.openFile(path)
+  @IBAction func sectionBtnAction(_ sender: NSButton) {
+    tabView.selectTabViewItem(at: sender.tag)
+    [licenseButton, contributorsButton, creditsButton].forEach {
+      $0?.state = $0 == sender ? .on : .off
+      $0?.updateState()
+    }
   }
 
+  private func getContributors() {
+
+  }
+
+}
+
+class AboutWindowButton: NSButton {
+
+  override func awakeFromNib() {
+    wantsLayer = true
+    layer?.cornerRadius = 4
+    updateState()
+  }
+
+  func updateState() {
+    if let cell = self.cell as? NSButtonCell {
+      if #available(OSX 10.14, *) {
+        cell.backgroundColor = state == .on ? .controlAccentColor : .clear
+      } else {
+        cell.backgroundColor = state == .on ? .systemBlue : .clear
+      }
+    }
+    attributedTitle = NSAttributedString(string: title,
+                                         attributes: [.foregroundColor: state == .on ? NSColor.white : NSColor.labelColor])
+  }
 }

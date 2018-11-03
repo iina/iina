@@ -179,6 +179,8 @@
 "pl_menu.wrong_sub" = "错误的字幕!";
 "playlist.chapter_cap" = "章节";
 "playlist.playlist_cap" = "播放列表";
+"playlist.total_length" = "总计 %@";
+"playlist.total_length_with_selected" = "选中 %@ / %@";
 "preference.advanced" = "高级";
 "preference.control" = "控制";
 "preference.general" = "通用";

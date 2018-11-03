@@ -367,6 +367,7 @@
 		133400271EB3831F007FE17E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ja; path = ja.lproj/Contribution.rtf; sourceTree = "<group>"; };
 		133400281EB3831F007FE17E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		134C1370205FB181002C7BE4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
+		13B82A33218D4A3B00F515A1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		13D511921ED0396D0072D1C0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
 		13D77DE01F85A2980076990A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		13D77DE21F8656FC0076990A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
@@ -2834,6 +2835,7 @@
 				84BAFD3E2142FF0A006B3CC1 /* zh-Hans */,
 				E5A0D212214576E200750FF3 /* fr */,
 				875FDFA42157877000F7F7FD /* ru */,
+				13B82A33218D4A3B00F515A1 /* ja */,
 			);
 			name = MiniPlayerWindowController.xib;
 			sourceTree = "<group>";

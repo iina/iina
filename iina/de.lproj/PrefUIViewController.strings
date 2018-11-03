@@ -88,13 +88,13 @@
 "NYG-e9-DV0.title" = "rechten";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "ObY-7B-NTO"; */
-"ObY-7B-NTO.title" = "s";
+"ObY-7B-NTO.title" = "Sekunden";
 
 /* Class = "NSButtonCell"; title = "Initial window position:"; ObjectID = "Ofm-qE-RgQ"; */
 "Ofm-qE-RgQ.title" = "Startposition des Fensters:";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "S8H-Xr-uVa"; */
-"S8H-Xr-uVa.title" = "s";
+"S8H-Xr-uVa.title" = "Sekunden";
 
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
 "SFX-ct-8MB.title" = "Während der Wiedergabe immer oben schweben";
@@ -151,7 +151,7 @@
 "iRn-3s-oQH.title" = "Bildschirmrand entfernt";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
-"kOT-8q-E57.title" = "Zeit und Batterie-Informationen im Vollbildmodus anzeigen";
+"kOT-8q-E57.title" = "Zeit und Batteriestatus im Vollbildmodus anzeigen";
 
 /* Class = "NSTextFieldCell"; title = "Thumbnail Preview:"; ObjectID = "kYu-0l-jQQ"; */
 "kYu-0l-jQQ.title" = "Miniaturbild-Vorschau:";
@@ -203,6 +203,9 @@
 
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
 "vdi-lO-q6e.title" = "an Bildschirm anpassen";
+
+/* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
+"xMh-SP-nkc.title" = "On-Screen-Anzeige aktivieren";
 
 /* Class = "NSTextFieldCell"; title = "Toolbar:"; ObjectID = "xP1-Vh-27X"; */
 "xP1-Vh-27X.title" = "Werkzeugleiste:";

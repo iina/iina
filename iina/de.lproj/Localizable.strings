@@ -92,7 +92,6 @@
 "keymapping.title" = "Kurzbefehle";
 "main.buffering_indicator" = "Puffern … %d%%";
 "main.opening_stream" = "Stream öffnen …";
-
 "menu.audio_delay" = "Audioverzögerung: %.2f s";
 "menu.audio_delay_down" = "Audioverzögerung − %.1f s";
 "menu.audio_delay_up" = "Audioverzögerung + %.1f s";
@@ -180,6 +179,8 @@
 "pl_menu.wrong_sub" = "Falscher Untertitel!";
 "playlist.chapter_cap" = "KAPITEL";
 "playlist.playlist_cap" = "WIEDERGABELISTE";
+"playlist.total_length" = "%@ insgesamt";
+"playlist.total_length_with_selected" = "%@ von %@ ausgewählt";
 "preference.advanced" = "Erweitert";
 "preference.control" = "Steuerung";
 "preference.general" = "Allgemein";
@@ -215,4 +216,4 @@
 "touchbar.rewind" = "Zurückspulen";
 "touchbar.seek" = "Verlauf";
 "touchbar.time" = "Position";
-"track.none" = "<Keine>";
+"track.none" = "Keine";

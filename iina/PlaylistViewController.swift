@@ -361,8 +361,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
   }
 
-  // MARK: - Table delegates
-
   @IBAction func prefixBtnAction(_ sender: PlaylistPrefixButton) {
     sender.isFolded = !sender.isFolded
   }
@@ -374,6 +372,18 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     vc.tableView.reloadData()
     vc.heightConstraint.constant = (vc.tableView.rowHeight + vc.tableView.intercellSpacing.height) * CGFloat(vc.tableView.numberOfRows)
     subPopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .maxY)
+  }
+
+  // MARK: - Table delegates
+
+  // Due to NSTableView's type select feature, space key will be passed to
+  // other responders like other keys. This is a workaround to prevent space
+  // key cannot toggle pause when the table view is first responder.
+  func tableView(_ tableView: NSTableView, shouldTypeSelectFor event: NSEvent, withCurrentSearch searchString: String?) -> Bool {
+    if event.characters == " " {
+      mainWindow.keyDown(with: event)
+    }
+    return false
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
@@ -704,6 +714,8 @@ class PlaylistView: NSView {
     let rect = NSRect(x: frame.origin.x - 4, y: frame.origin.y, width: 4, height: frame.height)
     addCursorRect(rect, cursor: .resizeLeftRight)
   }
+
+  override func mouseDown(with event: NSEvent) {}
 
   // override var allowsVibrancy: Bool { return true }
 

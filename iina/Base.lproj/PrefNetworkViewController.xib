@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -77,10 +77,11 @@
                             <real key="minimum" value="0.0"/>
                         </numberFormatter>
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.enableCache" id="Hzs-mZ-91S"/>
                         <binding destination="KNf-nq-d77" name="value" keyPath="values.defaultCacheSize" id="avo-pt-T2i"/>
                     </connections>
                 </textField>
@@ -94,10 +95,11 @@
                             <real key="minimum" value="0.0"/>
                         </numberFormatter>
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.enableCache" id="A0v-9P-z1q"/>
                         <binding destination="KNf-nq-d77" name="value" keyPath="values.cacheBufferSize" id="EoE-Q5-fOq"/>
                     </connections>
                 </textField>
@@ -111,10 +113,11 @@
                             <real key="minimum" value="0.0"/>
                         </numberFormatter>
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.enableCache" id="l6l-ff-nHb"/>
                         <binding destination="KNf-nq-d77" name="value" keyPath="values.secPrefech" id="TqT-p9-nKp"/>
                     </connections>
                 </textField>
@@ -190,7 +193,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jI5-X0-mph">
-                    <rect key="frame" x="118" y="81" width="80" height="17"/>
+                    <rect key="frame" x="118" y="81" width="79" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="User agent:" id="eN6-Sk-kUa">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -198,10 +201,10 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FE2-RS-jZf">
-                    <rect key="frame" x="204" y="78" width="240" height="22"/>
+                    <rect key="frame" x="203" y="78" width="241" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Jw4-M2-mMx">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
@@ -217,7 +220,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qEG-Qx-abX">
-                    <rect key="frame" x="322" y="2" width="85" height="26"/>
+                    <rect key="frame" x="322" y="3" width="85" height="25"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="63b-Mz-B7s"/>
                     </constraints>
@@ -238,7 +241,7 @@
                     </connections>
                 </popUpButton>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xq3-48-bOX">
-                    <rect key="frame" x="118" y="56" width="80" height="17"/>
+                    <rect key="frame" x="118" y="56" width="79" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="HTTP proxy:" id="9ut-ID-ffZ">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -246,10 +249,10 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JPi-nK-njc">
-                    <rect key="frame" x="246" y="53" width="198" height="22"/>
+                    <rect key="frame" x="245" y="53" width="199" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="ah9-Ow-96R">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
@@ -257,7 +260,7 @@
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8XM-Bb-OoC">
-                    <rect key="frame" x="202" y="33" width="244" height="14"/>
+                    <rect key="frame" x="201" y="33" width="245" height="14"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Requires restarting IINA to take effect." id="RwW-JS-iTv">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -265,7 +268,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LJ5-Mm-ydF">
-                    <rect key="frame" x="202" y="56" width="42" height="17"/>
+                    <rect key="frame" x="201" y="56" width="42" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="http://" id="WTb-HK-6vU">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -318,10 +321,11 @@
                     <rect key="frame" x="206" y="25" width="238" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="nKq-aq-AMN">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.ytdlEnabled" id="RM3-Tc-D6I"/>
                         <binding destination="KNf-nq-d77" name="value" keyPath="values.ytdlRawOptions" id="FWf-jQ-YRV"/>
                     </connections>
                 </textField>
@@ -366,11 +370,12 @@
                     <rect key="frame" x="280" y="72" width="164" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="/usr/local/bin" drawsBackground="YES" id="Smc-bL-Dvq">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <accessibility help="/usr/local/bin"/>
                     <connections>
+                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.ytdlEnabled" id="Tum-wY-bCg"/>
                         <binding destination="KNf-nq-d77" name="value" keyPath="values.ytdlSearchPath" id="vBs-Yu-Ywd"/>
                     </connections>
                 </textField>

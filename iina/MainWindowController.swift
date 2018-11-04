@@ -672,7 +672,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let _ = quickSettingView
 
     // buffer indicator view
-    bufferIndicatorView.layer?.cornerRadius = 10
+    bufferIndicatorView.maskImage = .maskImage(cornerRadius: 10)
     updateBufferIndicatorView()
 
     // thumbnail peek view
@@ -689,8 +689,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     // hide other views
     osdVisualEffectView.isHidden = true
-    osdVisualEffectView.layer?.cornerRadius = 10
-    additionalInfoView.layer?.cornerRadius = 10
+    osdVisualEffectView.maskImage = .maskImage(cornerRadius: 10)
+    additionalInfoView.maskImage = .maskImage(cornerRadius: 10)
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
     timePreviewWhenSeek.isHidden = true
@@ -957,7 +957,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // playlist resizing
     if sideBarStatus == .playlist {
       let sf = sideBarView.frame
-      if NSPointInRect(mousePosRelatedToWindow!, NSMakeRect(sf.origin.x-4, sf.origin.y, 4, sf.height)) {
+      if NSPointInRect(mousePosRelatedToWindow!, NSMakeRect(sf.origin.x - 4, sf.origin.y, 4, sf.height)) {
         isResizingSidebar = true
       }
     }
@@ -2136,8 +2136,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if player.info.isNetworkResource {
       bufferIndicatorView.isHidden = false
       bufferSpin.startAnimation(nil)
-//      bufferProgressLabel.stringValue = NSLocalizedString("main.opening_stream", comment:"Opening stream…")
-      bufferProgressLabel.stringValue = "Opening stream…"
+      bufferProgressLabel.stringValue = NSLocalizedString("main.opening_stream", comment:"Opening stream…")
       bufferDetailLabel.stringValue = ""
     } else {
       bufferIndicatorView.isHidden = true

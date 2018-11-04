@@ -21,7 +21,7 @@
 "alert.clear_history.title" = "再生履歴をクリア";
 "alert.clear_watch_later.message" = "すべての保存済み再生位置(\"あとで見る\"情報)を消去しますか?";
 "alert.clear_watch_later.title" = "保存済み再生位置をクリア";
-"alert.config.cannot_create" = "設定ファイルは作成できません!";
+"alert.config.cannot_create" = "設定ファイルは作成できません!\n%@";
 "alert.config.cannot_write" = "設定ファイルには書き込めません!";
 "alert.config.duplicate.message" = "複製する設定ファイルの名前を入力してください。";
 "alert.config.duplicate.title" = "設定の複製";
@@ -179,6 +179,8 @@
 "pl_menu.wrong_sub" = "誤った字幕!";
 "playlist.chapter_cap" = "チャプタ";
 "playlist.playlist_cap" = "プレイリスト";
+"playlist.total_length" = "合計 %@";
+"playlist.total_length_with_selected" = "%@ / %@を選択中";
 "preference.advanced" = "拡張";
 "preference.control" = "コントロール";
 "preference.general" = "一般";

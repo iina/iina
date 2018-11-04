@@ -16,15 +16,12 @@
 "alert.beta_channel.title" = "Ontvang updates voor bètaversies";
 "alert.choose_media_file.title" = "Kies bestand";
 "alert.clear_cache.message" = "Weet je zeker dat je de minatuur cache wilt wissen?";
-"alert.clear_cache.success" = "Cache gewist.";
 "alert.clear_cache.title" = "Wis miniatuur cache";
 "alert.clear_history.message" = "Weet je zeker dat je de afspeelgeschiedenis wilt wissen?";
-"alert.clear_history.success" = "Afspeelgeschiedenis gewist.";
 "alert.clear_history.title" = "Wis afspeelgeschiedenis";
 "alert.clear_watch_later.message" = "Weet je zeker dat je de opgeslagen afspeelvoortgang wilt wissen?";
-"alert.clear_watch_later.success" = "Opgeslagen afspeelvoortgang gewist.";
 "alert.clear_watch_later.title" = "Wis opgeslagen afspeelvoortgang";
-"alert.config.cannot_create" = "Kan configuratiebestand niet aanmaken!";
+"alert.config.cannot_create" = "Kan configuratiebestand niet aanmaken!\n%@";
 "alert.config.cannot_write" = "Kan niet naar configuratiebestand schrijven!";
 "alert.config.duplicate.message" = "Voer een naam in voor het gedupliceerde configuratiebestand.";
 "alert.config.duplicate.title" = "Dupliceer configuratie";
@@ -94,6 +91,7 @@
 "keymapping.message" = "Druk op een toets.";
 "keymapping.title" = "Sneltoetsen";
 "main.buffering_indicator" = "Bufferen... %d%%";
+"main.opening_stream" = "Stream openen…";
 "menu.audio_delay" = "Audio vertraging: %.2fs";
 "menu.audio_delay_down" = "Audio vertraging - %.1fs";
 "menu.audio_delay_up" = "Audio vertraging + %.1fs";
@@ -138,6 +136,7 @@
 "osd.filter_added" = "Filter toegevoegd: %@";
 "osd.filter_removed" = "Filter verwijderd";
 "osd.find_online_sub" = "Online zoeken naar ondertitels...";
+"osd.find_online_sub.source" = "van";
 "osd.mute" = "Geluid uit";
 "osd.network_error" = "Netwerkfout";
 "osd.pause" = "Gepauzeerd";
@@ -180,9 +179,13 @@
 "pl_menu.wrong_sub" = "Verkeerde ondertiteling!";
 "playlist.chapter_cap" = "HOOFDSTUKKEN";
 "playlist.playlist_cap" = "AFSPEELLIJST";
+"playlist.total_length" = "%@ in totaal";
+"playlist.total_length_with_selected" = "%@ van %@ geselecteerd";
 "preference.advanced" = "Geavanceerd";
 "preference.control" = "Bediening";
 "preference.general" = "Algemeen";
+"preference.key_binding_hint_1" = "Om sneltoetsen in het geselecteerde configuratiebestand te bewerken, klikt u eerst op \"Dupliceer…\" om een kopie te maken.";
+"preference.key_binding_hint_2" = "Klik dubbel op een rij om de bijbehorende sneltoets te bewerken.";
 "preference.keybindings" = "Sneltoetsen";
 "preference.logged_in_as" = "Ingelogd als %@";
 "preference.network" = "Netwerk";
@@ -214,15 +217,3 @@
 "touchbar.seek" = "Door- of terugspoelen";
 "touchbar.time" = "Verstreken tijd";
 "track.none" = "<Geen>";
-
-/* FIXME: Using English localization instead */
-"osd.find_online_sub.source" = "from";
-
-/* FIXME: Using English localization instead */
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
-
-/* FIXME: Using English localization instead */
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-
-/* FIXME: Using English localization instead */
-"main.opening_stream" = "Opening stream…";

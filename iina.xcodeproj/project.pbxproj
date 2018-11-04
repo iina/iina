@@ -215,6 +215,8 @@
 		E3CB75BD1FDACB82004DB10A /* SavedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */; };
 		E3DBD239218B057A00B3AFBF /* Translators.json in Resources */ = {isa = PBXBuildFile; fileRef = E3DBD238218B057A00B3AFBF /* Translators.json */; };
 		E3DBD23B218B199700B3AFBF /* Translators.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DBD23A218B199700B3AFBF /* Translators.swift */; };
+		E3DBD23E218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DBD23C218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift */; };
+		E3DBD23F218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3DBD23D218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.xib */; };
 		E3DE8DCD1FD8166A0021921C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DE8DCC1FD8166A0021921C /* main.swift */; };
 		E3DE8DD31FD848BA0021921C /* iina-cli in Copy Executables */ = {isa = PBXBuildFile; fileRef = E3DE8DCA1FD8166A0021921C /* iina-cli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E3ECC89E1FE9A6D900BED8C7 /* GeometryDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */; };
@@ -1072,6 +1074,8 @@
 		E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFilter.swift; sourceTree = "<group>"; };
 		E3DBD238218B057A00B3AFBF /* Translators.json */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = text.json; path = Translators.json; sourceTree = "<group>"; tabWidth = 4; };
 		E3DBD23A218B199700B3AFBF /* Translators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translators.swift; sourceTree = "<group>"; };
+		E3DBD23C218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowContributorAvatarItem.swift; sourceTree = "<group>"; };
+		E3DBD23D218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutWindowContributorAvatarItem.xib; sourceTree = "<group>"; };
 		E3DE8DCA1FD8166A0021921C /* iina-cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "iina-cli"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3DE8DCC1FD8166A0021921C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryDef.swift; sourceTree = "<group>"; };
@@ -1635,6 +1639,8 @@
 		84D377681D7413D8007F7396 /* Accessories */ = {
 			isa = PBXGroup;
 			children = (
+				E3DBD23C218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift */,
+				E3DBD23D218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.xib */,
 				9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */,
 				843FFD4C1D5DAA01001F3A44 /* RoundedTextFieldCell.swift */,
 				8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */,
@@ -1915,6 +1921,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8400D5E71E1AB337006785F5 /* PrefKeyBindingViewController.xib in Resources */,
+				E3DBD23F218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.xib in Resources */,
 				C789872F1E34EF170005769F /* InfoPlist.strings in Resources */,
 				8400D5DB1E1AB326006785F5 /* FontPickerWindowController.xib in Resources */,
 				8400D5EA1E1AB33B006785F5 /* KeyRecordViewController.xib in Resources */,
@@ -2053,6 +2060,7 @@
 				8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */,
 				E38B32192157DC18000F6D27 /* ISO639TokenFieldDelegate.swift in Sources */,
 				84F5D4A21E4796F50060A838 /* KeyBindingTranslator.swift in Sources */,
+				E3DBD23E218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift in Sources */,
 				8452DD851D3B956D008A543A /* Preference.swift in Sources */,
 				8488D6E31E1183D300D5B952 /* PrefSubViewController.swift in Sources */,
 				846352581EEEE11A0043F0CC /* ThumbnailPeekView.swift in Sources */,

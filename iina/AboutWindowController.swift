@@ -7,6 +7,21 @@
 //
 
 import Cocoa
+import Just
+
+fileprivate extension NSUserInterfaceItemIdentifier {
+  static let dataSourceItem = NSUserInterfaceItemIdentifier(rawValue: "dataSourceItem")
+}
+
+struct Contributor: Decodable {
+  let username: String
+  let avatarURL: String
+
+  enum CodingKeys: String, CodingKey {
+    case username = "login"
+    case avatarURL = "avatar_url"
+  }
+}
 
 class AboutWindowController: NSWindowController {
 
@@ -30,6 +45,10 @@ class AboutWindowController: NSWindowController {
   @IBOutlet weak var contributorsButton: AboutWindowButton!
   @IBOutlet weak var creditsButton: AboutWindowButton!
   @IBOutlet weak var tabView: NSTabView!
+  @IBOutlet weak var contributorsCollectionView: NSCollectionView!
+  @IBOutlet weak var contributorsFooterView: NSVisualEffectView!
+
+  private lazy var contributors = getContributors()
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -58,6 +77,23 @@ class AboutWindowController: NSWindowController {
       creditsTextView.readRTFD(fromFile: creditsFile)
       creditsTextView.textColor = NSColor.secondaryLabelColor
     }
+
+    contributorsCollectionView.dataSource = self
+    contributorsCollectionView.backgroundColors = [.clear]
+    contributorsCollectionView.register(AboutWindowContributorAvatarItem.self, forItemWithIdentifier: .dataSourceItem)
+
+    if #available(OSX 10.14, *) {
+      contributorsFooterView.material = .windowBackground
+    }
+    let image = NSImage(size: contributorsFooterView.frame.size)
+    let rect = CGRect(origin: .zero, size: contributorsFooterView.frame.size)
+    image.lockFocus()
+    let loc: [CGFloat] = [0, 0.3, 0.6, 0.8, 1]
+    let colors: [CGFloat] = [1, 0.95, 0.8, 0.05, 0]
+    let gradient = NSGradient(colors: colors.map { NSColor(white: 0, alpha: $0) }, atLocations: loc, colorSpace: .deviceGray)
+    gradient!.draw(in: rect, angle: 90)
+    image.unlockFocus()
+    contributorsFooterView.maskImage = image
   }
 
   @IBAction func sectionBtnAction(_ sender: NSButton) {
@@ -67,12 +103,42 @@ class AboutWindowController: NSWindowController {
       $0?.updateState()
     }
   }
+}
 
-  private func getContributors() {
-
+extension AboutWindowController: NSCollectionViewDataSource {
+  func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+    return contributors.count
   }
 
+  func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+    let item = contributorsCollectionView.makeItem(withIdentifier: .dataSourceItem, for: indexPath) as! AboutWindowContributorAvatarItem
+    guard let contributor = contributors[at: indexPath.item] else { return item }
+    item.avatarURL = contributor.avatarURL
+    return item
+  }
+
+  private func getContributors() -> [Contributor] {
+    // This method will be called only once when `self.contributor` is needed,
+    // i.e. when `contributorsCollectionView` is being initialized.
+    loadContributors(from: "https://api.github.com/repos/lhc70000/iina/contributors")
+    return []
+  }
+
+  private func loadContributors(from url: String) {
+    Just.get(url) { response in
+      guard let data = response.content,
+        let contributors = try? JSONDecoder().decode([Contributor].self, from: data) else { return }
+      self.contributors.append(contentsOf: contributors)
+      DispatchQueue.main.sync {
+        self.contributorsCollectionView.reloadData()
+      }
+      if let nextURL = response.links["next"]?["url"] {
+        self.loadContributors(from: nextURL)
+      }
+    }
+  }
 }
+
 
 class AboutWindowButton: NSButton {
 

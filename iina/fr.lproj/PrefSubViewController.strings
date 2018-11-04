@@ -40,7 +40,7 @@
 "9N4-Zg-M7m.title" = "Position verticale :";
 
 /* Class = "NSBox"; title = "Font"; ObjectID = "9pv-1r-nuH"; */
-"9pv-1r-nuH.title" = "Police";
+"9pv-1r-nuH.title" = "Police de caractères";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "ALz-LB-8sf"; */
 "ALz-LB-8sf.title" = "Y :";
@@ -52,7 +52,7 @@
 "C3p-uP-8u8.title" = "Chercher des sous-titres en ligne automatiquement";
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
-"C4C-XP-i2S.title" = "Police";
+"C4C-XP-i2S.title" = "Police :";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "CdS-9J-f2h"; */
 "CdS-9J-f2h.title" = " X :";
@@ -181,7 +181,7 @@
 "vDc-dw-liI.title" = "Couleur :";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "Si actif, IINA cherchera automatiquement des sous-titres en ligne ; seulement pour les vidéos sans sous-titres et plus longues que 20 minutes.";
+"vYb-qH-XkH.title" = "Si activé, IINA cherchera automatiquement des sous-titres en ligne pour les vidéos sans sous-titres de plus de 20 minutes.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
 "xGf-fF-4Hx.title" = "Y :";

@@ -6,11 +6,17 @@
 /* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
 "2iM-j7-AzQ.title" = "Laisser la fenêtre ouverte après la fin de lecture";
 
-/* Class = "NSTextFieldCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
+/* Class = "NSButtonCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
 "2rJ-mg-OuU.title" = "Sauvegarder dans";
 
 /* Class = "NSMenuItem"; title = "PNG"; ObjectID = "3XO-ks-TDg"; */
 "3XO-ks-TDg.title" = "PNG";
+
+/* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
+"3gs-3w-rg6.title" = "Copier dans le presse-papier";
+
+/* Class = "NSTextFieldCell"; title = "Options:"; ObjectID = "4Qe-7S-8xK"; */
+"4Qe-7S-8xK.title" = "Options :";
 
 /* Class = "NSButtonCell"; title = "Enable "Open Recent" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "Activer le menu \"Ouvrir l'élément récent\"";
@@ -69,6 +75,9 @@
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
 
+/* Class = "NSTextFieldCell"; title = "Destination:"; ObjectID = "PhL-vP-i7L"; */
+"PhL-vP-i7L.title" = "Destination :";
+
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
 "QJq-fO-hhK.title" = "Ajouter les fichiers du même dossier automatiquement";
 
@@ -98,6 +107,9 @@
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
 "hWC-KJ-FuC.title" = "Vérifier les mises à jour tou(te)s les";
+
+/* Class = "NSButtonCell"; title = "Pause when machine goes to sleep"; ObjectID = "i4A-86-dGC"; */
+"i4A-86-dGC.title" = "Mettre en pause quand la machine se met en veille";
 
 /* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
 "iGS-qN-f5q.title" = "Activer l'historique de lecture";

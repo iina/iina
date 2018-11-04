@@ -44,6 +44,7 @@ struct AppData {
   static let thumbnailCacheFolder = "thumb_cache"
 
   static let githubLink = "https://github.com/lhc70000/iina"
+  static let contributorsLink = "https://github.com/lhc70000/iina/graphs/contributors"
   static let wikiLink = "https://github.com/lhc70000/iina/wiki"
   static let websiteLink = "https://lhc70000.github.io/iina/"
   static let emailLink = "developers@iina.io"

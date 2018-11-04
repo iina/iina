@@ -108,6 +108,10 @@ class AboutWindowController: NSWindowController {
       $0?.updateState()
     }
   }
+
+  @IBAction func contributorsBtnAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: AppData.contributorsLink)!)
+  }
 }
 
 extension AboutWindowController: NSCollectionViewDataSource {

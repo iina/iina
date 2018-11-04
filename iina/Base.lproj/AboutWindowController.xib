@@ -236,6 +236,9 @@
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystemBold"/>
                                                         </buttonCell>
+                                                        <connections>
+                                                            <action selector="contributorsBtnAction:" target="-2" id="DAF-9S-mHR"/>
+                                                        </connections>
                                                     </button>
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSW-ob-hln">
                                                         <rect key="frame" x="0.0" y="12" width="384" height="151"/>

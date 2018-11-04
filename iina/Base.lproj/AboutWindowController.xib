@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="contributorsButton" destination="ZI5-MK-cHL" id="ITp-Pd-sWy"/>
                 <outlet property="contributorsCollectionView" destination="KDi-R3-lE7" id="WHw-ob-ruR"/>
+                <outlet property="contributorsCollectionViewHeightConstraint" destination="sdf-6T-smZ" id="F2B-4f-ecY"/>
                 <outlet property="contributorsFooterView" destination="nmC-ZN-RcQ" id="d3K-PG-wt2"/>
                 <outlet property="creditsButton" destination="XuI-3z-cJF" id="IQr-94-1fD"/>
                 <outlet property="creditsTextView" destination="Vex-sA-zx3" id="xid-ke-4Xp"/>

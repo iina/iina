@@ -46,6 +46,7 @@ class AboutWindowController: NSWindowController {
   @IBOutlet weak var creditsButton: AboutWindowButton!
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var contributorsCollectionView: NSCollectionView!
+  @IBOutlet weak var contributorsCollectionViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var contributorsFooterView: NSVisualEffectView!
   @IBOutlet weak var translatorsTableView: NSTableView!
 
@@ -127,7 +128,7 @@ extension AboutWindowController: NSCollectionViewDataSource {
   }
 
   private func getContributors() -> [Contributor] {
-    // This method will be called only once when `self.contributor` is needed,
+    // This method will be called only once when `self.contributors` is needed,
     // i.e. when `contributorsCollectionView` is being initialized.
     loadContributors(from: "https://api.github.com/repos/lhc70000/iina/contributors")
     return []
@@ -136,7 +137,12 @@ extension AboutWindowController: NSCollectionViewDataSource {
   private func loadContributors(from url: String) {
     Just.get(url) { response in
       guard let data = response.content,
-        let contributors = try? JSONDecoder().decode([Contributor].self, from: data) else { return }
+        let contributors = try? JSONDecoder().decode([Contributor].self, from: data) else {
+          DispatchQueue.main.async {
+            self.contributorsCollectionViewHeightConstraint.constant = 24
+          }
+          return
+      }
       self.contributors.append(contentsOf: contributors)
       DispatchQueue.main.sync {
         self.contributorsCollectionView.reloadData()

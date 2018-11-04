@@ -928,7 +928,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // playlist resizing
     if sideBarStatus == .playlist {
       let sf = sideBarView.frame
-      if NSPointInRect(mousePosRelatedToWindow!, NSMakeRect(sf.origin.x-4, sf.origin.y, 4, sf.height)) {
+      if NSPointInRect(mousePosRelatedToWindow!, NSMakeRect(sf.origin.x - 4, sf.origin.y, 4, sf.height)) {
         isResizingSidebar = true
       }
     }

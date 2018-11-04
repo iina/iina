@@ -715,6 +715,8 @@ class PlaylistView: NSView {
     addCursorRect(rect, cursor: .resizeLeftRight)
   }
 
+  override func mouseDown(with event: NSEvent) {}
+
   // override var allowsVibrancy: Bool { return true }
 
 }

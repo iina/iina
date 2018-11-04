@@ -6,6 +6,9 @@
 /* Class = "NSMenuItem"; title = "0.5x video size"; ObjectID = "0eK-kv-btH"; */
 "0eK-kv-btH.title" = "비디오 크기의 0.5배";
 
+/* Class = "NSBox"; title = "Box"; ObjectID = "0kj-QC-B9P"; */
+"0kj-QC-B9P.title" = "Box";
+
 /* Class = "NSButtonCell"; title = "Customize…"; ObjectID = "1nM-AX-Ozm"; */
 "1nM-AX-Ozm.title" = "사용자설정…";
 
@@ -69,8 +72,14 @@
 /* Class = "NSMenuItem"; title = "Fast Forward / Rewind"; ObjectID = "KJT-iG-2xc"; */
 "KJT-iG-2xc.title" = "빨리 감기 / 되감기";
 
+/* Class = "NSBox"; title = "Box"; ObjectID = "L5c-uf-ged"; */
+"L5c-uf-ged.title" = "Box";
+
 /* Class = "NSMenuItem"; title = "1x video size"; ObjectID = "MR7-Ac-SAO"; */
 "MR7-Ac-SAO.title" = "원래 비디오 크기";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "Mye-uz-WUr"; */
+"Mye-uz-WUr.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "NUr-hY-gfo"; */
 "NUr-hY-gfo.title" = "일정 시간후 자동 숨김:";
@@ -123,6 +132,9 @@
 /* Class = "NSTextFieldCell"; title = "Resize the window to fit video size:"; ObjectID = "Zjr-q7-WsD"; */
 "Zjr-q7-WsD.title" = "비디오에 맞게 윈도우 크기 조정:";
 
+/* Class = "NSBox"; title = "Box"; ObjectID = "bYj-5g-zYO"; */
+"bYj-5g-zYO.title" = "Box";
+
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "비디오 크기의 2배";
 
@@ -162,6 +174,9 @@
 /* Class = "NSMenuItem"; title = "top"; ObjectID = "oYc-L7-qQd"; */
 "oYc-L7-qQd.title" = "위";
 
+/* Class = "NSBox"; title = "Box"; ObjectID = "omS-tS-OVJ"; */
+"omS-tS-OVJ.title" = "Box";
+
 /* Class = "NSTextFieldCell"; title = "1280"; ObjectID = "pNX-QN-Rpm"; */
 "pNX-QN-Rpm.title" = "1280";
 
@@ -172,7 +187,7 @@
 "qbc-CY-bdK.title" = "화면";
 
 /* Class = "NSMenuItem"; title = "Match System Appearance"; ObjectID = "qn6-Bp-Mqp"; */
-"qn6-Bp-Mqp.title" = "시스템 모양새 설정을 따름";
+"qn6-Bp-Mqp.title" = "화면 모드에 맞춤";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "s2E-9N-K86"; */
 "s2E-9N-K86.title" = "포인트";
@@ -191,6 +206,9 @@
 
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
 "vdi-lO-q6e.title" = "화면 크기에 맞춤";
+
+/* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
+"xMh-SP-nkc.title" = "OSD 사용";
 
 /* Class = "NSTextFieldCell"; title = "Toolbar:"; ObjectID = "xP1-Vh-27X"; */
 "xP1-Vh-27X.title" = "도구막대:";

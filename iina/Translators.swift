@@ -23,12 +23,12 @@ struct LangObj: Decodable {
 }
 
 struct Translator {
-  static let all: [String: [Translator]]? = {
+  static let all: [String: [Translator]] = {
     guard
       let resource = Bundle.main.path(forResource: "Translators", ofType: "json"),
       let data = try? Data(contentsOf: URL(fileURLWithPath: resource)),
       let languages = try? JSONDecoder().decode([LangObj].self, from: data)
-      else { return nil }
+      else { return [:] }
     let pairs = languages.map {(
         $0.lang,
         $0.translators.map { Translator(name: $0.name, url: $0.link.url, title: $0.link.title, email: $0.link.email) }

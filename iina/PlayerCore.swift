@@ -380,11 +380,12 @@ class PlayerCore: NSObject {
     if !miniPlayer.isPlaylistVisible {
       miniPlayer.setToInitialWindowSize(display: true, animate: false)
     }
-    videoView.videoLayer.draw()
 
     // hide main window
     mainWindow.window?.orderOut(self)
     isInMiniPlayer = true
+
+    videoView.videoLayer.draw(forced: true)
 
     // restore layout
     if needRestoreLayout {
@@ -427,6 +428,9 @@ class PlayerCore: NSObject {
     // hide mini player
     miniPlayer.window?.orderOut(nil)
     isInMiniPlayer = false
+
+    mainWindow.videoView.videoLayer.draw(forced: true)
+
     mainWindow.updateTitle()
   }
 

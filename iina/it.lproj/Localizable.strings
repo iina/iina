@@ -21,7 +21,7 @@
 "alert.clear_history.title" = "Elimina la cronologia delle riproduzioni";
 "alert.clear_watch_later.message" = "Sei sicuro di eliminare tutti gli avanzamenti di riproduzione salvati (e i dati \"guarda dopo\")?";
 "alert.clear_watch_later.title" = "Elimina gli avanzamenti di riproduzione salvati";
-"alert.config.cannot_create" = "Impossibile creare il file di configurazione!";
+"alert.config.cannot_create" = "Impossibile creare il file di configurazione!\n%@";
 "alert.config.cannot_write" = "Impossibile scrivere il file di configurazione!";
 "alert.config.duplicate.message" = "Inserisci il nome per il duplicato del file di configurazione.";
 "alert.config.duplicate.title" = "Configurazione del duplicato";

@@ -144,11 +144,12 @@ extension AboutWindowController: NSCollectionViewDataSource {
           return
       }
       self.contributors.append(contentsOf: contributors)
-      DispatchQueue.main.sync {
-        self.contributorsCollectionView.reloadData()
-      }
       if let nextURL = response.links["next"]?["url"] {
         self.loadContributors(from: nextURL)
+      } else {
+        DispatchQueue.main.sync {
+          self.contributorsCollectionView.reloadData()
+        }
       }
     }
   }

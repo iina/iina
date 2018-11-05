@@ -56,13 +56,7 @@ class AboutWindowController: NSWindowController {
   override func windowDidLoad() {
     super.windowDidLoad()
 
-    // print(Translator.all)
-
-    if #available(macOS 10.13, *) {
-      windowBackgroundBox.fillColor = NSColor(named: .aboutWindowBackground)!
-    } else {
-      windowBackgroundBox.fillColor = .white
-    }
+    windowBackgroundBox.fillColor = .windowBackgroundColor
     iconImageView.image = NSApp.applicationIconImage
 
     let (version, build) = Utility.iinaVersion()

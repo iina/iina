@@ -2833,6 +2833,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     videoView.frame = window?.contentView?.frame ?? .zero
 
     videoView.videoLayer.draw(forced: true)
+    updateTimer()
   }
 
   func pipShouldClose(_ pip: PIPViewController) -> Bool {

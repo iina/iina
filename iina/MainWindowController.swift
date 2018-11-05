@@ -2811,6 +2811,8 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     pip.presentAsPicture(inPicture: pipVideo)
     pipOverlayView.isHidden = false
+
+    videoView.videoLayer.draw(forced: true)
   }
 
   func exitPIP() {
@@ -2829,6 +2831,8 @@ extension MainWindowController: PIPViewControllerDelegate {
     pipOverlayView.isHidden = true
     window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
     videoView.frame = window?.contentView?.frame ?? .zero
+
+    videoView.videoLayer.draw(forced: true)
   }
 
   func pipShouldClose(_ pip: PIPViewController) -> Bool {

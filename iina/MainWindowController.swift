@@ -77,9 +77,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** The playlist and chapter sidebar. */
   lazy var playlistView: PlaylistViewController = {
-    let playListView = PlaylistViewController()
-    playListView.mainWindow = self
-    return playListView
+    let playlistView = PlaylistViewController()
+    playlistView.mainWindow = self
+    return playlistView
   }()
 
   /** The control view for interactive mode. */

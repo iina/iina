@@ -21,7 +21,7 @@
 "alert.clear_history.title" = "Limpiar historial de Reproducción";
 "alert.clear_watch_later.message" = "¿Estás seguro de borrar todo el progreso de reproducción guardado (datos de \"ver más tarde\")?";
 "alert.clear_watch_later.title" = "Borrar el progreso de reproducción guardada";
-"alert.config.cannot_create" = "¡No se puede crear el archivo de configuración!";
+"alert.config.cannot_create" = "¡No se puede crear el archivo de configuración!\n%@";
 "alert.config.cannot_write" = "¡No se puede escribir en el archivo de configuración!";
 "alert.config.duplicate.message" = "Por favor, introduzca el nombre para el archivo de configuración duplicado.";
 "alert.config.duplicate.title" = "Configuración duplicada";

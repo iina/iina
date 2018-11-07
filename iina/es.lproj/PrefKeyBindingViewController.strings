@@ -42,6 +42,9 @@
 /* Class = "NSButtonCell"; title = "Duplicate…"; ObjectID = "gpZ-Rh-DMn"; */
 "gpZ-Rh-DMn.title" = "Duplicar...";
 
+/* Class = "NSButton"; ibShadowedToolTip = "Show the raw mpv key code and command."; ObjectID = "l2M-TH-eCt"; */
+"l2M-TH-eCt.ibShadowedToolTip" = "Mostrar el código y el comando de mpv en bruto.";
+
 /* Class = "NSBox"; title = "Box"; ObjectID = "mLe-eI-lIk"; */
 "mLe-eI-lIk.title" = "Caja";
 

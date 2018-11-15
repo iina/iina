@@ -387,6 +387,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     volumeSlider.doubleValue = player.info.volume
     volumeLabel.intValue = Int32(player.info.volume)
     muteButton.state = player.info.isMuted ? .on : .off
+    volumeButton.image = player.info.isMuted ? NSImage(named: "mute") : NSImage(named: "volume")
   }
 
   func updateVideoSize() {

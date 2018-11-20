@@ -79,7 +79,8 @@ class AboutWindowController: NSWindowController {
     contributorsCollectionView.backgroundColors = [.clear]
     contributorsCollectionView.register(AboutWindowContributorAvatarItem.self, forItemWithIdentifier: .dataSourceItem)
 
-    if #available(OSX 10.14, *) {
+
+    if #available(macOS 10.14, *) {
       contributorsFooterView.material = .windowBackground
     }
     let image = NSImage(size: contributorsFooterView.frame.size)

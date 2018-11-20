@@ -231,7 +231,6 @@ class AboutWindowButton: NSButton {
         cell.backgroundColor = state == .on ? .controlAccentColor : .clear
       } else {
         layer?.backgroundColor = state == .on ? CGColor(red: 0.188, green: 0.482, blue: 0.965, alpha: 1) : .clear
-        alignment = .center
       }
     }
     // Workground for macOS 10.13-

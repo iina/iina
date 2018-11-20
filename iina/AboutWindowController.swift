@@ -227,13 +227,19 @@ class AboutWindowButton: NSButton {
 
   func updateState() {
     if let cell = self.cell as? NSButtonCell {
-      if #available(OSX 10.14, *) {
+      if #available(macOS 10.14, *) {
         cell.backgroundColor = state == .on ? .controlAccentColor : .clear
       } else {
-        cell.backgroundColor = state == .on ? .systemBlue : .clear
+        layer?.backgroundColor = state == .on ? CGColor(red: 0.188, green: 0.482, blue: 0.965, alpha: 1) : .clear
+        alignment = .center
       }
     }
+    // Workground for macOS 10.13-
+    // For some reason the text alignment setting will lost after setting in layer
+    // Remove paragraph settings when dropping macOS 10.13 support
+    let paragraph = NSMutableParagraphStyle()
+    paragraph.alignment = .center
     attributedTitle = NSAttributedString(string: title,
-                                         attributes: [.foregroundColor: state == .on ? NSColor.white : NSColor.labelColor])
+                                         attributes: [.foregroundColor: state == .on ? NSColor.white : NSColor.labelColor, .paragraphStyle: paragraph])
   }
 }

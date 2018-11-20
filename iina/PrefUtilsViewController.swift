@@ -18,6 +18,10 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
     return NSLocalizedString("preference.utilities", comment: "Utilities")
   }
 
+  var preferenceTabImage: NSImage {
+    return NSImage(named: NSImage.Name("pref_utils"))!
+  }
+
   override var sectionViews: [NSView] {
     return [sectionDefaultAppView, sectionClearCacheView, sectionBrowserExtView]
   }

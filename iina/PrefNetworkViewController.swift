@@ -17,8 +17,8 @@ class PrefNetworkViewController: PreferenceViewController, PreferenceWindowEmbed
 
   var viewIdentifier: String = "PrefNetworkViewController"
 
-  var toolbarItemImage: NSImage {
-    return NSImage(named: NSImage.networkName)!
+  var preferenceTabImage: NSImage {
+    return NSImage(named: NSImage.Name("pref_network"))!
   }
 
   var preferenceTabTitle: String {

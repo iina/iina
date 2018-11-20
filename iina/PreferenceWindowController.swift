@@ -29,6 +29,7 @@ fileprivate extension NSView {
 
 protocol PreferenceWindowEmbeddable where Self: NSViewController {
   var preferenceTabTitle: String { get }
+  var preferenceTabImage: NSImage { get }
   var preferenceContentIsScrollable: Bool { get }
 }
 
@@ -349,7 +350,10 @@ extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     if tableView == self.tableView {
-      return viewControllers[at: row]?.preferenceTabTitle
+      return [
+        "image": viewControllers[at: row]?.preferenceTabImage,
+        "title": viewControllers[at: row]?.preferenceTabTitle
+      ] as [String: Any]
     } else {
       guard let result = currentCompletionResults[at: row] else { return nil }
       let noLabel = result.strippedLabel == nil

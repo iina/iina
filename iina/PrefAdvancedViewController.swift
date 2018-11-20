@@ -17,13 +17,13 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
 
   var viewIdentifier: String = "PrefAdvancedViewController"
 
-  var toolbarItemImage: NSImage? {
-    return NSImage(named: NSImage.advancedName)!
-  }
-
   var preferenceTabTitle: String {
     view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.advanced", comment: "Advanced")
+  }
+
+  var preferenceTabImage: NSImage {
+    return NSImage(named: NSImage.Name("pref_advanced"))!
   }
 
   var hasResizableWidth: Bool = false

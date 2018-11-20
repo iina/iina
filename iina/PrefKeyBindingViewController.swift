@@ -19,6 +19,10 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     return NSLocalizedString("preference.keybindings", comment: "Keybindings")
   }
 
+  var preferenceTabImage: NSImage {
+    return NSImage(named: NSImage.Name("pref_kb"))!
+  }
+
   var preferenceContentIsScrollable: Bool {
     return false
   }

@@ -20,6 +20,10 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
     return NSLocalizedString("preference.subtitle", comment: "Subtitles")
   }
 
+  var preferenceTabImage: NSImage {
+    return NSImage(named: NSImage.Name("pref_sub"))!
+  }
+
   override var sectionViews: [NSView] {
     return [sectionAutoLoadView, sectionASSView, sectionTextSubView, sectionPositionView, sectionOnlineSubView, sectionOtherView]
   }

@@ -11,6 +11,7 @@
                 <outlet property="contributorsButton" destination="ZI5-MK-cHL" id="ITp-Pd-sWy"/>
                 <outlet property="contributorsCollectionView" destination="KDi-R3-lE7" id="WHw-ob-ruR"/>
                 <outlet property="contributorsCollectionViewHeightConstraint" destination="sdf-6T-smZ" id="F2B-4f-ecY"/>
+                <outlet property="contributorsFooterImage" destination="bUk-MP-jkv" id="9oa-Gt-Sym"/>
                 <outlet property="contributorsFooterView" destination="nmC-ZN-RcQ" id="d3K-PG-wt2"/>
                 <outlet property="creditsButton" destination="XuI-3z-cJF" id="IQr-94-1fD"/>
                 <outlet property="creditsTextView" destination="Vex-sA-zx3" id="xid-ke-4Xp"/>
@@ -225,6 +226,10 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
                                                     </scrollView>
+                                                    <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bUk-MP-jkv">
+                                                        <rect key="frame" x="0.0" y="204" width="384" height="60"/>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Q2i-kp-Z0G"/>
+                                                    </imageView>
                                                     <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="withinWindow" material="underWindowBackground" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="nmC-ZN-RcQ">
                                                         <rect key="frame" x="0.0" y="204" width="384" height="60"/>
                                                         <constraints>
@@ -340,7 +345,9 @@
                                                     <constraint firstAttribute="bottom" secondItem="bSW-ob-hln" secondAttribute="bottom" constant="12" id="3VX-ZQ-I0N"/>
                                                     <constraint firstAttribute="trailing" secondItem="bSW-ob-hln" secondAttribute="trailing" id="5ys-ab-5TY"/>
                                                     <constraint firstItem="JBU-E6-YHT" firstAttribute="centerX" secondItem="Rtt-1M-7Kd" secondAttribute="centerX" id="6Am-YL-nt0"/>
+                                                    <constraint firstItem="bUk-MP-jkv" firstAttribute="bottom" secondItem="nmC-ZN-RcQ" secondAttribute="bottom" id="Ava-A0-JqP"/>
                                                     <constraint firstAttribute="trailing" secondItem="iaQ-kz-jCh" secondAttribute="trailing" constant="4" id="Foe-AW-ovM"/>
+                                                    <constraint firstItem="bUk-MP-jkv" firstAttribute="leading" secondItem="nmC-ZN-RcQ" secondAttribute="leading" id="GG2-tx-nu0"/>
                                                     <constraint firstItem="iaQ-kz-jCh" firstAttribute="top" secondItem="Rtt-1M-7Kd" secondAttribute="top" id="Tqt-1D-AOb"/>
                                                     <constraint firstItem="bSW-ob-hln" firstAttribute="leading" secondItem="Rtt-1M-7Kd" secondAttribute="leading" id="ZQE-qt-K4x"/>
                                                     <constraint firstAttribute="trailing" secondItem="nmC-ZN-RcQ" secondAttribute="trailing" id="ceK-j8-ptp"/>
@@ -348,6 +355,8 @@
                                                     <constraint firstItem="bSW-ob-hln" firstAttribute="top" secondItem="JBU-E6-YHT" secondAttribute="bottom" constant="8" id="ffj-KJ-uzM"/>
                                                     <constraint firstItem="0PM-oG-4Qs" firstAttribute="centerX" secondItem="nmC-ZN-RcQ" secondAttribute="centerX" id="h29-pz-GL1"/>
                                                     <constraint firstItem="nmC-ZN-RcQ" firstAttribute="bottom" secondItem="0PM-oG-4Qs" secondAttribute="top" constant="20" id="hVS-pi-lV1"/>
+                                                    <constraint firstItem="bUk-MP-jkv" firstAttribute="top" secondItem="nmC-ZN-RcQ" secondAttribute="top" id="iZ0-M4-muf"/>
+                                                    <constraint firstItem="bUk-MP-jkv" firstAttribute="trailing" secondItem="nmC-ZN-RcQ" secondAttribute="trailing" id="vLM-Uv-FeK"/>
                                                     <constraint firstItem="nmC-ZN-RcQ" firstAttribute="leading" secondItem="Rtt-1M-7Kd" secondAttribute="leading" id="xo5-ma-AoO"/>
                                                 </constraints>
                                             </view>

@@ -48,6 +48,7 @@ class AboutWindowController: NSWindowController {
   @IBOutlet weak var contributorsCollectionView: NSCollectionView!
   @IBOutlet weak var contributorsCollectionViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var contributorsFooterView: NSVisualEffectView!
+  @IBOutlet weak var contributorsFooterImage: NSImageView!
   @IBOutlet weak var translatorsTableView: NSTableView!
 
   private lazy var contributors = getContributors()
@@ -79,19 +80,22 @@ class AboutWindowController: NSWindowController {
     contributorsCollectionView.backgroundColors = [.clear]
     contributorsCollectionView.register(AboutWindowContributorAvatarItem.self, forItemWithIdentifier: .dataSourceItem)
 
-
-    if #available(macOS 10.14, *) {
-      contributorsFooterView.material = .windowBackground
-    }
     let image = NSImage(size: contributorsFooterView.frame.size)
     let rect = CGRect(origin: .zero, size: contributorsFooterView.frame.size)
     image.lockFocus()
     let loc: [CGFloat] = [0, 0.3, 0.6, 0.8, 1]
     let colors: [CGFloat] = [1, 0.95, 0.8, 0.05, 0]
-    let gradient = NSGradient(colors: colors.map { NSColor(white: 0, alpha: $0) }, atLocations: loc, colorSpace: .deviceGray)
+    let gradient = NSGradient(colors: colors.map { NSColor(white: 0.925, alpha: $0) }, atLocations: loc, colorSpace: .deviceGray)
     gradient!.draw(in: rect, angle: 90)
     image.unlockFocus()
-    contributorsFooterView.maskImage = image
+    if #available(macOS 10.14, *) {
+      contributorsFooterView.material = .windowBackground
+      contributorsFooterView.maskImage = image
+    } else {
+      contributorsFooterView.isHidden = true
+      contributorsFooterImage.image = image
+      contributorsFooterImage.isHidden = false
+    }
 
     translatorsTableView.dataSource = self
     translatorsTableView.delegate = self

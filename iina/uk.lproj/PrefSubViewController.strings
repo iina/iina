@@ -53,6 +53,12 @@
 /* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "TPK-CJ-HX7"; */
 "TPK-CJ-HX7.title" = "Завантажити субтитри звідси:";
 
+/* Class = "NSButtonCell"; title = "Search online subtitles automatically"; ObjectID = "C3p-uP-8u8"; */
+"C3p-uP-8u8.title" = "Автоматично шукати субтитри в Інтернеті";
+
+/* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
+"vYb-qH-XkH.title" = "Коли ввімкнено, IINA буде автоматично шукати субтитри в Інтернеті тільки для відео які не містять субтитрівб а також довших за 20 хвилин.";
+
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
 "Qda-dp-nhg.title" = "Текстові субтитри:";
 
@@ -98,6 +104,9 @@
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
 "raf-Yu-ck0.title" = "Завантажити автоматично:";
 
+/* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "DUA-7H-Yje"; */
+"DUA-7H-Yje.title" = "Додатково";
+
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "e0e-dB-Ir6"; */
 "e0e-dB-Ir6.title" = "Ценрувати";
 
@@ -113,8 +122,14 @@
 /* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "XiL-eE-jah"; */
 "XiL-eE-jah.title" = "Розумно виявити засобами IINA";
 
+/* Class = "NSBox"; title = "Font"; ObjectID = "9pv-1r-nuH"; */
+"9pv-1r-nuH.title" = "Шрифт";
+
 /* Class = "NSBox"; title = "Font"; ObjectID = "C4C-XP-i2S"; */
 "C4C-XP-i2S.title" = "Шрифт";
+
+/* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "X7X-18-FJg"; */
+"X7X-18-FJg.title" = "Додатково";
 
 /* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "fUB-ll-Nvz"; */
 "fUB-ll-Nvz.title" = "Не увійшли";

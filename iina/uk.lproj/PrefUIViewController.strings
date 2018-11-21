@@ -1,9 +1,63 @@
 
+/* Class = "NSButtonCell"; title = "Initial window size:"; ObjectID = "zOq-Em-wUe"; */
+"zOq-Em-wUe.title" = "Початковий розвір вікна:";
+
+/* Class = "NSButtonCell"; title = "Initial window position:"; ObjectID = "Ofm-qE-RgQ"; */
+"Ofm-qE-RgQ.title" = "Початкове положення вікна:";
+
+/* Class = "NSTextFieldCell"; title = "Resize the window to fit video size:"; ObjectID = "Zjr-q7-WsD"; */
+"Zjr-q7-WsD.title" = "Змінювати розмір вікна відповідно до розміру відео:";
+
+/* Class = "NSButtonCell"; title = "Always"; ObjectID = "yIN-jg-MxS"; */
+"yIN-jg-MxS.title" = "Завжди";
+
+/* Class = "NSButtonCell"; title = "When media is opened manually"; ObjectID = "CJE-ap-IH8"; */
+"CJE-ap-IH8.title" = "Коли файл відкривається вручну";
+
+/* Class = "NSButtonCell"; title = "Disabled"; ObjectID = "duf-3s-3bL"; */
+"duf-3s-3bL.title" = "Вимкнути";
+
+/* Class = "NSTextFieldCell"; title = "Resize window to:"; ObjectID = "7td-lH-8aK"; */
+"7td-lH-8aK.title" = "Змінити розмір вікна:";
+
+/* Class = "NSMenuItem"; title = "0.5x video size"; ObjectID = "0eK-kv-btH"; */
+"0eK-kv-btH.title" = "0.5x від розмеру відео";
+
+/* Class = "NSMenuItem"; title = "1x video size"; ObjectID = "MR7-Ac-SAO"; */
+"MR7-Ac-SAO.title" = "1x від розмеру відео";
+
+/* Class = "NSMenuItem"; title = "1.5x video size"; ObjectID = "Goh-X4-4f1"; */
+"Goh-X4-4f1.title" = "1.5x від розмеру відео";
+
+/* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
+"dUG-QD-CXL.title" = "2x від розмеру відео";
+
+/* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
+"vdi-lO-q6e.title" = "Весь екран";
+
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "0Gp-vj-UzY"; */
 "0Gp-vj-UzY.title" = "Долі";
 
 /* Class = "NSMenuItem"; title = "Floating"; ObjectID = "7Dv-q2-5TV"; */
 "7Dv-q2-5TV.title" = "Плаваючий";
+
+/* Class = "NSTextFieldCell"; title = "Toolbar:"; ObjectID = "xP1-Vh-27X"; */
+"xP1-Vh-27X.title" = "Панель інструментів:";
+
+/* Class = "NSButtonCell"; title = "Customize…"; ObjectID = "1nM-AX-Ozm"; */
+"1nM-AX-Ozm.title" = "Налаштувати...";
+
+/* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "3CY-YS-rG6"; */
+"3CY-YS-rG6.title" = "Використову ліву/праву кнопки для:";
+
+/* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
+"TWq-Xb-8Ee.title" = "Швідкисть";
+
+/* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "oJ8-74-L3z"; */
+"oJ8-74-L3z.title" = "Попередній/Наступний файл";
+
+/* Class = "NSMenuItem"; title = "Fast Forward / Rewind"; ObjectID = "KJT-iG-2xc"; */
+"KJT-iG-2xc.title" = "Перемотування вперед/назад";
 
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "82A-XQ-BvS"; */
 "82A-XQ-BvS.title" = "Сховати авто після:";
@@ -23,9 +77,6 @@
 /* Class = "NSTextFieldCell"; title = "pt"; ObjectID = "I8t-ey-016"; */
 "I8t-ey-016.title" = "пт";
 
-/* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "NUr-hY-gfo"; */
-"NUr-hY-gfo.title" = "Сховати зразу після:";
-
 /* Class = "NSButtonCell"; title = "Clear Cache…"; ObjectID = "OAh-HP-wST"; */
 "OAh-HP-wST.title" = "Очистити Кеш…";
 
@@ -40,9 +91,6 @@
 
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
 "SFX-ct-8MB.title" = "Завджи показувати згори під час програвання";
-
-/* Class = "NSButtonCell"; title = "Enable thumbnail preview"; ObjectID = "Xey-3m-f6G"; */
-"Xey-3m-f6G.title" = "Увімкнути показ мініатюр";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "bYj-5g-zYO"; */
 "bYj-5g-zYO.title" = "Вікно";
@@ -65,8 +113,17 @@
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "se2-DE-pJk"; */
 "se2-DE-pJk.title" = "Нагору";
 
+/* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
+"xMh-SP-nkc.title" = "Показувати деталі на екрані";
+
+/* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "NUr-hY-gfo"; */
+"NUr-hY-gfo.title" = "Сховати зразу після:";
+
 /* Class = "NSTextFieldCell"; title = "Text size:"; ObjectID = "suy-e8-j4i"; */
 "suy-e8-j4i.title" = "Розмір тексту:";
+
+/* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
+"kOT-8q-E57.title" = "Показувати час та інформацію про батарею в режимі повного екрану";
 
 /* Class = "NSButtonCell"; title = "Resize to video size only when opening files manually"; ObjectID = "uD1-HB-46y"; */
 "uD1-HB-46y.title" = "Змінити розмір відео до оригінального тільки коли файли відкриваються вручну";
@@ -76,3 +133,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Theme:"; ObjectID = "yLF-vu-1Gl"; */
 "yLF-vu-1Gl.title" = "Тема:";
+
+/* Class = "NSButtonCell"; title = "Enable thumbnail preview"; ObjectID = "Xey-3m-f6G"; */
+"Xey-3m-f6G.title" = "Увімкнути показ мініатюр";
+
+/* Class = "NSTextFieldCell"; title = "Maximum cache size:"; ObjectID = "GYe-Y3-bOR"; */
+"GYe-Y3-bOR.title" = "Максимальний розмір кеша:";

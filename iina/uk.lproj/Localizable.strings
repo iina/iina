@@ -5,7 +5,7 @@
 "alert.add_watch.message" = "Будь-ласка введіть правильний ключ опції mpv.";
 "alert.add_watch.title" = "Додайте Ключ Перегляду";
 "alert.choose_media_file.title" = "Вибрати Медіа Файл";
-"alert.clear_cache.message" = "Впевнені, що хочете почистити весь кеш мініатюр?";
+"alert.clear_cache.message" = "Ви впевнені, що хочете почистити весь кеш мініатюр?";
 "alert.clear_cache.success" = "Кеш Очищено.";
 "alert.clear_cache.title" = "Почистити Кеш Мініатюр";
 "alert.config.cannot_create" = "Не можу створити файл налаштувань!";
@@ -20,7 +20,7 @@
 "alert.config.new.title" = "Нові Налаштунки";
 "alert.delete_history.message" = "Ви впевнені, що хочете видалити вибрані елементи?";
 "alert.delete_history.title" = "Видалити Історію Відтворення";
-"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate it before editing.";
+"alert.duplicate_config" = "Конфігурація за замовчуванням не може буде змінена. Будь ласка зробіть копію перед редагуванням.";
 "alert.error_deleting_file" = "Не можу видалити файл.";
 "alert.error_finding_file" = "Не можу знайти файл %@!";
 "alert.error_loading_script" = "Не можу завантажити скрипт %@!";
@@ -30,20 +30,18 @@
 "alert.extra_option.config_folder" = "Помилка при створенні директорії конфігурації \"%@\".";
 "alert.extra_option.empty" = "Ключ чи Значення не може бути порожнім!";
 "alert.extra_option.error" = "Помилка при встановленні --%@=%@ зі значенням %d. Будь-ласка перевірте ваші додаткові опції в Налаштуваннях > Просунуті.";
-"alert.fatal_error" = "Критична помилка: %@ 
-Програма зараз закриється.";
+"alert.fatal_error" = "Критична помилка: %@ Програма зараз закриється.";
 "alert.filter.incorrect" = "Помилки при застосуванні фільтрів. Будь-ласка перевірте формат параметрів.";
 "alert.filter_hwdec.abort" = "Скасувати";
-"alert.filter_hwdec.message" = "Ви зараз застосуєте відео фільтр. Хоча, ваш апаратний декодер можливо не підтримує відео фільтри нормально. Ви можете вимкнути апаратне декодування або Перейти до Авто(Копії), що використає у два рази більше пам'яті.
-Вам треба буде повторити попередню операцію (наприклад, встановлення обрізування) щоб воно запрацювало.";
+"alert.filter_hwdec.message" = "Ви зараз застосуєте відео фільтр. Хоча, ваш апаратний декодер можливо не підтримує відео фільтри нормально. Ви можете вимкнути апаратне декодування або Перейти до Авто(Копії), що використає у два рази більше пам'яті. Вам треба буде повторити попередню операцію (наприклад, встановлення обрізування) щоб воно запрацювало.";
 "alert.filter_hwdec.turn_off" = "Вимкнути апаратне декодування";
 "alert.filter_hwdec.use_copy" = "Перейти до Авто(Копії)";
 "alert.jump_to.message" = "Будь-ласка введіть час куди ви хочете перейти. Наприклад: 20:35";
 "alert.jump_to.title" = "Перейти до";
 "alert.keybinding_config.error" = "Помилка при парсінгу файлу налаштувань клавіш \"%@\"! Встановіть дефолтні налаштування клавіш IINA. Перевірте ваші налаштування.";
 "alert.mpv_error" = "Внутрішня помилка %@ (%@) застосовуючи опцію %@.";
-"alert.no_video_track" = "There is no video track.";
-"alert.nothing_to_open" = "Nothing to open.";
+"alert.no_video_track" = "Відео доріжка відсутня.";
+"alert.nothing_to_open" = "Не можу знайти що відкрити.";
 "alert.open_url.message" = "Введіть будь-ласка URL:";
 "alert.open_url.title" = "Відкрити URL";
 "alert.opensub.login.message" = "Будь-ласка введіть ваш юзернейм і пароль";
@@ -83,25 +81,25 @@
 "keymapping.title" = "Налаштування Клавіш";
 "main.buffering_indicator" = "Буферизація... %d%%";
 "menu.audio_delay" = "Затримка Аудіо: %.2fс";
-"menu.audio_delay_down" = "Audio Delay - %.1fs";
-"menu.audio_delay_up" = "Audio Delay + %.1fs";
+"menu.audio_delay_down" = "Аудіо затримка - %.1fs";
+"menu.audio_delay_up" = "Аудіо затримка + %.1fs";
 "menu.exit_fullscreen" = "Вийти з повноекранного";
 "menu.exit_pip" = "Вийти з Picture-in-Picture";
 "menu.fullscreen" = "Повноекранний режим";
 "menu.pause" = "Пауза";
 "menu.pip" = "Застосувати Picture-in-Picture";
 "menu.resume" = "Продовжити";
-"menu.seek_backward" = "Step Backward %.0fs";
-"menu.seek_forward" = "Step Forward %.0fs";
-"menu.speed" = "Speed: %.2fx";
-"menu.speed_down" = "Speed Down to %.1fx";
-"menu.speed_up" = "Speed Up to %.1fx";
+"menu.seek_backward" = "Крок назад %.0fs";
+"menu.seek_forward" = "Крок вперед %.0fs";
+"menu.speed" = "Швидкість: %.2fx";
+"menu.speed_down" = "Уповільнити до %.1fx";
+"menu.speed_up" = "Пришвидшити до %.1fx";
 "menu.sub_delay" = "Затримка Субтитрів: %.2fс";
-"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
-"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
+"menu.sub_delay_down" = "Затриска Субтитрів - %.1fs";
+"menu.sub_delay_up" = "Затриска Субтитрів + %.1fs";
 "menu.volume" = "Гучність: %d";
-"menu.volume_down" = "Volume - %.0f%%";
-"menu.volume_up" = "Volume + %.0f%%";
+"menu.volume_down" = "Гучність - %.0f%%";
+"menu.volume_up" = "Гучність + %.0f%%";
 "osd.abloop.a" = "Цикл AB: A";
 "osd.abloop.b" = "Цикл AB: B";
 "osd.abloop.clear" = "Цико AB: Очищено";
@@ -117,8 +115,8 @@
 "osd.crop" = "Обрізати: %@";
 "osd.deinterlace" = "Деінтерлейсинг: %@";
 "osd.file_error" = "Помилка читання файлу";
-"osd.filter_added" = "Added Filter: %@";
-"osd.filter_removed" = "Removed Filter";
+"osd.filter_added" = "Додано фільтр: %@";
+"osd.filter_removed" = "Прибрано фільтр";
 "osd.find_online_sub" = "Шукаю субтитри онлайн...";
 "osd.mute" = "Приглушити";
 "osd.network_error" = "Помилка Мережі";
@@ -171,7 +169,7 @@
 "preference.not_logged_in" = "Не зайшов";
 "preference.scripts" = "Скрипти";
 "preference.subtitle" = "Субтитри";
-"preference.system_media_control" = "Use system media control";
+"preference.system_media_control" = "Використовувити системний медіа контролер";
 "preference.title" = "Налаштування";
 "preference.ui" = "Інтерфейс";
 "quicksetting.item_default" = "Стандартне";
@@ -193,13 +191,13 @@
 "track.none" = "<Нема>";
 
 /* FIXME: Using English localization instead */
-"touchbar.remainingTime" = "Remaining Time";
+"touchbar.remainingTime" = "Залишилось часу";
 
 /* FIXME: Using English localization instead */
 "alert.beta_channel.message" = "IINA v1.0 is coming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
 
 /* FIXME: Using English localization instead */
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+"alert.beta_channel.title" = "Отримувати онвлення бета-версій";
 
 /* FIXME: Using English localization instead */
 "alert.assrt_register.try" = "Try First";
@@ -214,13 +212,13 @@
 "alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
 
 /* FIXME: Using English localization instead */
-"alert.assrt_register.register" = "Register Now";
+"alert.assrt_register.register" = "Зараєструватись";
 
 /* FIXME: Using English localization instead */
 "alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
 
 /* FIXME: Using English localization instead */
-"osc_toolbar.sub_track" = "Choose subtitle track";
+"osc_toolbar.sub_track" = "Обрати трек субтитрів";
 
 /* FIXME: Using English localization instead */
 "osc_toolbar.playlist" = "Playlist and chapters";
@@ -229,7 +227,7 @@
 "osc_toolbar.music_mode" = "Enter music mode";
 
 /* FIXME: Using English localization instead */
-"osc_toolbar.settings" = "Quick Settings";
+"osc_toolbar.settings" = "Швидкі налаштування";
 
 /* FIXME: Using English localization instead */
 "osc_toolbar.full_screen" = "Toggle full screen";
@@ -244,7 +242,7 @@
 "alert.add_url.message" = "Please enter the URL:";
 
 /* FIXME: Using English localization instead */
-"pl_menu.add_file" = "Add File…";
+"pl_menu.add_file" = "Додати файл…";
 
 /* FIXME: Using English localization instead */
 "pl_menu.add_url" = "Add URL…";
@@ -253,28 +251,28 @@
 "subtrack.no_external" = "No External Subtitles Found";
 
 /* FIXME: Using English localization instead */
-"subtrack.no_loaded" = "No Subtitles Loaded";
+"subtrack.no_loaded" = "Субтитри не завантажено";
 
 /* FIXME: Using English localization instead */
-"alert.clear_watch_later.success" = "All saved playback progress deleted.";
+"alert.clear_watch_later.success" = "Прогрес Переглядів видалено.";
 
 /* FIXME: Using English localization instead */
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
+"alert.clear_watch_later.title" = "Очистити Збережений Прогрес Переглядів.";
 
 /* FIXME: Using English localization instead */
-"alert.clear_history.title" = "Clear Playback History";
+"alert.clear_history.title" = "Видалити Історію Переглядів";
 
 /* FIXME: Using English localization instead */
-"alert.clear_history.success" = "Playback history deleted.";
+"alert.clear_history.success" = "Історію Переглядів видалена.";
 
 /* FIXME: Using English localization instead */
-"preference.utilities" = "Utilities";
+"preference.utilities" = "Утиліти";
 
 /* FIXME: Using English localization instead */
-"alert.clear_history.message" = "Are you sure to delete all playback history?";
+"alert.clear_history.message" = "Ви впевнені що хочете видалити вcю історію переглядів?";
 
 /* FIXME: Using English localization instead */
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
+"alert.clear_watch_later.message" = "Ви впевнені що хочете видалити увесь збережений прогрес переглядів (Файли \"Переглянути пізніше\")?";
 
 /* FIXME: Using English localization instead */
 "osd.find_online_sub.source" = "from";

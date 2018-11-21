@@ -179,6 +179,8 @@
 "pl_menu.wrong_sub" = "Неверные субтитры!";
 "playlist.chapter_cap" = "ГЛАВЫ";
 "playlist.playlist_cap" = "ПЛЕЙЛИСТ";
+"playlist.total_length" = "%@ в общей сложности";
+"playlist.total_length_with_selected" = "%@ из %@ выбрано";
 "preference.advanced" = "Дополнительно";
 "preference.control" = "Управление";
 "preference.general" = "Основные";

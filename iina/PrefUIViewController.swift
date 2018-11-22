@@ -37,17 +37,20 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   }
 
   override var sectionViews: [NSView] {
-    return [sectionAppearanceView, sectionWindowView, sectionOSCView, sectionOSDView, sectionThumbnailView]
+    return [sectionLaunguageView, sectionAppearanceView, sectionWindowView, sectionOSCView, sectionOSDView, sectionThumbnailView]
   }
 
   private let toolbarSettingsSheetController = PrefOSCToolbarSettingsSheetController()
 
+  @IBOutlet var sectionLaunguageView: NSView!
   @IBOutlet var sectionAppearanceView: NSView!
   @IBOutlet var sectionWindowView: NSView!
   @IBOutlet var sectionOSCView: NSView!
   @IBOutlet var sectionOSDView: NSView!
   @IBOutlet var sectionThumbnailView: NSView!
 
+  @IBOutlet weak var languagePopupButton: NSPopUpButton!
+  @IBOutlet weak var noticeTextField: NSTextField!
   @IBOutlet weak var themeMenu: NSMenu!
   @IBOutlet weak var oscPreviewImageView: NSImageView!
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!
@@ -79,6 +82,14 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     updateOSCToolbarButtons()
     setupGeometryRelatedControls()
     setupResizingRelatedControls()
+    
+    languagePopupButton.removeAllItems()
+    Preference.Language.allCases.forEach { (language: Preference.Language) in
+      languagePopupButton.menu?.addItem(withTitle: language.name)
+      if language.code == Locale.current.languageCode {
+        languagePopupButton.selectItem(withTitle: language.name)
+      }
+    }
 
     let removeThemeMenuItemWithTag = { (tag: Int) in
       if let item = self.themeMenu.item(withTag: tag) {
@@ -150,6 +161,17 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     }
   }
 
+  @IBAction func selectLanguage(_ sender: NSPopUpButton) {
+    if let language = Preference.Language.init(rawValue: sender.indexOfSelectedItem) {
+      UserDefaults.standard.set([language.code], forKey: "AppleLanguages")
+      if language.code != Locale.current.languageCode {
+        noticeTextField.isHidden = false
+      } else {
+        noticeTextField.isHidden = true
+      }
+    }
+  }
+  
   private func updateOSCToolbarButtons() {
     oscToolbarStackView.views.forEach { oscToolbarStackView.removeView($0) }
     let buttons = PrefUIViewController.oscToolbarButtons

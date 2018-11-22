@@ -8,10 +8,13 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefUIViewController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="languagePopupButton" destination="lQq-DT-lnw" id="3jD-hy-cwG"/>
+                <outlet property="noticeTextField" destination="kEB-uT-yQV" id="fQu-vW-Hlr"/>
                 <outlet property="oscPositionPopupButton" destination="GbG-nw-ict" id="Dd0-cC-7Rk"/>
                 <outlet property="oscPreviewImageView" destination="yaR-pw-wfD" id="18Z-EN-2f2"/>
                 <outlet property="oscToolbarStackView" destination="8jY-9m-q4O" id="J9u-Ui-dUT"/>
                 <outlet property="sectionAppearanceView" destination="M9c-Ak-HmK" id="96r-w6-H5K"/>
+                <outlet property="sectionLaunguageView" destination="N1z-hG-Egz" id="D10-6D-D4B"/>
                 <outlet property="sectionOSCView" destination="gjB-It-iFS" id="cbg-O0-qMd"/>
                 <outlet property="sectionOSDView" destination="c8m-G4-or8" id="e6Y-FN-x1t"/>
                 <outlet property="sectionThumbnailView" destination="3uJ-UU-1zw" id="Noy-VW-Uax"/>
@@ -862,8 +865,8 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="lH7-Vv-0M1" name="enabled" keyPath="values.enableOSD" id="ttG-Ef-d9S"/>
                         <binding destination="lH7-Vv-0M1" name="value" keyPath="values.displayTimeAndBatteryInFullScreen" id="Qd0-qD-NZX"/>
+                        <binding destination="lH7-Vv-0M1" name="enabled" keyPath="values.enableOSD" id="ttG-Ef-d9S"/>
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="63o-gu-DxA">
@@ -1042,6 +1045,66 @@
                 <constraint firstAttribute="bottom" secondItem="BMi-Ax-7wP" secondAttribute="bottom" constant="8" id="wlh-tx-VdQ"/>
             </constraints>
             <point key="canvasLocation" x="19" y="-265"/>
+        </customView>
+        <customView id="N1z-hG-Egz" userLabel="Section Launguage View">
+            <rect key="frame" x="0.0" y="0.0" width="580" height="61"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField identifier="SectionTitleAppearance" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZcW-Yk-VOQ">
+                    <rect key="frame" x="-2" y="36" width="72" height="17"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Language:" id="9xH-H2-qyq">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lQq-DT-lnw">
+                    <rect key="frame" x="168" y="30" width="120" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="115" id="ZsB-eZ-dDs"/>
+                    </constraints>
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="eAc-Iu-BbV" userLabel="Launguage">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="aFC-no-lbA"/>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="selectLanguage:" target="-2" id="AYt-0M-kZc"/>
+                        <binding destination="lH7-Vv-0M1" name="selectedTag" keyPath="values.language" id="O2E-al-5Xr"/>
+                    </connections>
+                </popUpButton>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4FX-gV-Nrb">
+                    <rect key="frame" x="118" y="36" width="46" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Select:" id="97Q-mF-lXb">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kEB-uT-yQV">
+                    <rect key="frame" x="118" y="8" width="219" height="17"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="✓ Changes take effect after restart." id="1b5-X1-VuN">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="lQq-DT-lnw" firstAttribute="baseline" secondItem="4FX-gV-Nrb" secondAttribute="baseline" id="2SO-U8-oIa"/>
+                <constraint firstItem="4FX-gV-Nrb" firstAttribute="leading" secondItem="N1z-hG-Egz" secondAttribute="leading" constant="120" id="3f7-CH-bJU"/>
+                <constraint firstItem="kEB-uT-yQV" firstAttribute="top" secondItem="lQq-DT-lnw" secondAttribute="bottom" constant="8" id="4xM-TH-1sJ"/>
+                <constraint firstItem="ZcW-Yk-VOQ" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="N1z-hG-Egz" secondAttribute="leading" constant="120" id="6ec-ca-KQX"/>
+                <constraint firstAttribute="bottom" secondItem="kEB-uT-yQV" secondAttribute="bottom" constant="8" id="Ct1-yh-Q8c"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kEB-uT-yQV" secondAttribute="trailing" constant="20" symbolic="YES" id="LkD-HD-ije"/>
+                <constraint firstItem="kEB-uT-yQV" firstAttribute="leading" secondItem="N1z-hG-Egz" secondAttribute="leading" constant="120" id="Odd-hz-DSa"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lQq-DT-lnw" secondAttribute="trailing" constant="20" symbolic="YES" id="PXH-Vs-ZAc"/>
+                <constraint firstItem="ZcW-Yk-VOQ" firstAttribute="leading" secondItem="N1z-hG-Egz" secondAttribute="leading" id="cNO-Pm-dab"/>
+                <constraint firstItem="4FX-gV-Nrb" firstAttribute="top" secondItem="ZcW-Yk-VOQ" secondAttribute="top" id="eUu-UT-evq"/>
+                <constraint firstItem="lQq-DT-lnw" firstAttribute="leading" secondItem="4FX-gV-Nrb" secondAttribute="trailing" constant="8" id="nV9-BX-lJo"/>
+                <constraint firstItem="ZcW-Yk-VOQ" firstAttribute="top" secondItem="N1z-hG-Egz" secondAttribute="top" constant="8" id="tUg-1D-WKb"/>
+            </constraints>
+            <point key="canvasLocation" x="19" y="-352"/>
         </customView>
     </objects>
     <resources>

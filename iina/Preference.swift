@@ -267,6 +267,8 @@ struct Preference {
 
     static let iinaLastPlayedFilePath = Key("iinaLastPlayedFilePath")
     static let iinaLastPlayedFilePosition = Key("iinaLastPlayedFilePosition")
+    
+    static let language = Key("language")
   }
 
   // MARK: - Enums
@@ -625,6 +627,59 @@ struct Preference {
       return NSLocalizedString("osc_toolbar.\(key)", comment: key)
     }
   }
+  
+  enum Language: Int, InitializingFromKey, CaseIterable {
+    case danish = 0
+    case dutch
+    case english
+    case french
+    case german
+    case italian
+    case japanese
+    case korean
+    case polish
+    case portuguese
+    case russian
+    case slovak
+    case spanish
+    case turkish
+    case ukrainian
+    case simplifiedChinese
+    case traditionalChinese
+
+    var code: String {
+      switch self {
+      case .danish: return "da"
+      case .dutch: return "nl"
+      case .english: return "en"
+      case .french: return "fr"
+      case .german: return "de"
+      case .italian: return "it"
+      case .japanese: return "ja"
+      case .korean: return "ko"
+      case .polish: return "pl"
+      case .portuguese: return "pt"
+      case .russian: return "ru"
+      case .slovak: return "sk"
+      case .spanish: return "es"
+      case .turkish: return "tr"
+      case .ukrainian: return "uk"
+      case .simplifiedChinese: return "zh-Hans"
+      case .traditionalChinese: return "zh-Hant"
+      }
+    }
+    
+    var name: String {
+      return Locale.current.localizedString(forIdentifier: self.code) ?? "Unknown Language"
+    }
+    
+    static var defaultValue = Language.english
+    
+    init?(key: Preference.Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+  }
 
   // MARK: - Defaults
 
@@ -773,7 +828,8 @@ struct Preference {
 
     .watchProperties: [],
     .savedVideoFilters: [],
-    .savedAudioFilters: []
+    .savedAudioFilters: [],
+    .language: Language.english.rawValue
   ]
 
 

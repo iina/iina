@@ -91,6 +91,7 @@
 "keymapping.message" = "Stlač hociktorú klávesu pre zaznamenanie.";
 "keymapping.title" = "Klávesové Skratky";
 "main.buffering_indicator" = "Načítava sa... %d%%";
+"main.opening_stream" = "Otvára sa stream…";
 "menu.audio_delay" = "Oneskorenie Zvuku: %.2fs";
 "menu.audio_delay_down" = "Oneskorenie Zvuku - %.1fs";
 "menu.audio_delay_up" = "Oneskorenie Zvuku + %.1fs";
@@ -135,6 +136,7 @@
 "osd.filter_added" = "Pridaný Filter: %@";
 "osd.filter_removed" = "Filter Odstránený";
 "osd.find_online_sub" = "Titulky sa vyhľadávajú online...";
+"osd.find_online_sub.source" = "z";
 "osd.mute" = "Stlmiť";
 "osd.network_error" = "Problém so sieťou";
 "osd.pause" = "Pozastaviť";
@@ -177,6 +179,8 @@
 "pl_menu.wrong_sub" = "Nesprávne Titulky!";
 "playlist.chapter_cap" = "KAPITOLY";
 "playlist.playlist_cap" = "PLAYLIST";
+"playlist.total_length" = "%@ celkovo";
+"playlist.total_length_with_selected" = "%@ z %@ označených";
 "preference.advanced" = "Pokročilé";
 "preference.control" = "Ovládanie";
 "preference.general" = "Všeobecné";
@@ -213,15 +217,3 @@
 "touchbar.seek" = "Vyhľadať";
 "touchbar.time" = "Pozícia";
 "track.none" = "<Prázdne>";
-
-/* FIXME: Using English localization instead */
-"osd.find_online_sub.source" = "from";
-
-/* FIXME: Using English localization instead */
-"main.opening_stream" = "Opening stream…";
-
-/* FIXME: Using English localization instead */
-"playlist.total_length_with_selected" = "%@ of %@ selected";
-
-/* FIXME: Using English localization instead */
-"playlist.total_length" = "%@ in total";

@@ -53,10 +53,8 @@
 		8404572A21A91A0900DF2424 /* libswresample.3.3.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404570121A91A0500DF2424 /* libswresample.3.3.100.dylib */; };
 		8404572B21A91A0900DF2424 /* libvorbisenc.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404570221A91A0500DF2424 /* libvorbisenc.2.dylib */; };
 		8404572C21A91A0900DF2424 /* libtheoradec.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404570321A91A0500DF2424 /* libtheoradec.1.dylib */; };
-		8404572D21A91A0900DF2424 /* libx265.165.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404570421A91A0500DF2424 /* libx265.165.dylib */; };
 		8404572E21A91A0900DF2424 /* liblzma.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404570521A91A0500DF2424 /* liblzma.5.dylib */; };
 		8404572F21A91A0900DF2424 /* libavdevice.58.5.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404570621A91A0500DF2424 /* libavdevice.58.5.100.dylib */; };
-		8404573021A91A0900DF2424 /* libx264.152.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404570721A91A0600DF2424 /* libx264.152.dylib */; };
 		8404573121A91A0900DF2424 /* libsnappy.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404570821A91A0600DF2424 /* libsnappy.1.dylib */; };
 		8404573221A91A0900DF2424 /* libarchive.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404570921A91A0600DF2424 /* libarchive.13.dylib */; };
 		8404573321A91A0900DF2424 /* libpcre.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404570A21A91A0600DF2424 /* libpcre.1.dylib */; };
@@ -115,8 +113,6 @@
 		8404579621A91CBB00DF2424 /* libuchardet.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 840456F821A91A0400DF2424 /* libuchardet.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8404579721A91CBB00DF2424 /* libvorbis.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8404570021A91A0500DF2424 /* libvorbis.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8404579821A91CBB00DF2424 /* libvorbisenc.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8404570221A91A0500DF2424 /* libvorbisenc.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8404579921A91CBB00DF2424 /* libx264.152.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8404570721A91A0600DF2424 /* libx264.152.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8404579A21A91CBB00DF2424 /* libx265.165.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 8404570421A91A0500DF2424 /* libx265.165.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8407D1401E3A684C0043895D /* ViewLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407D13F1E3A684C0043895D /* ViewLayer.swift */; };
 		840820111ECF6C1800361416 /* FileGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840820101ECF6C1800361416 /* FileGroup.swift */; };
 		840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AF5811E732C8F00F4AF92 /* JustXMLRPC.swift */; };
@@ -352,8 +348,6 @@
 				8404579621A91CBB00DF2424 /* libuchardet.0.dylib in Copy Dylibs */,
 				8404579721A91CBB00DF2424 /* libvorbis.0.dylib in Copy Dylibs */,
 				8404579821A91CBB00DF2424 /* libvorbisenc.2.dylib in Copy Dylibs */,
-				8404579921A91CBB00DF2424 /* libx264.152.dylib in Copy Dylibs */,
-				8404579A21A91CBB00DF2424 /* libx265.165.dylib in Copy Dylibs */,
 			);
 			name = "Copy Dylibs";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -772,10 +766,8 @@
 		8404570121A91A0500DF2424 /* libswresample.3.3.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswresample.3.3.100.dylib; path = deps/lib/libswresample.3.3.100.dylib; sourceTree = "<group>"; };
 		8404570221A91A0500DF2424 /* libvorbisenc.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvorbisenc.2.dylib; path = deps/lib/libvorbisenc.2.dylib; sourceTree = "<group>"; };
 		8404570321A91A0500DF2424 /* libtheoradec.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtheoradec.1.dylib; path = deps/lib/libtheoradec.1.dylib; sourceTree = "<group>"; };
-		8404570421A91A0500DF2424 /* libx265.165.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libx265.165.dylib; path = deps/lib/libx265.165.dylib; sourceTree = "<group>"; };
 		8404570521A91A0500DF2424 /* liblzma.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblzma.5.dylib; path = deps/lib/liblzma.5.dylib; sourceTree = "<group>"; };
 		8404570621A91A0500DF2424 /* libavdevice.58.5.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavdevice.58.5.100.dylib; path = deps/lib/libavdevice.58.5.100.dylib; sourceTree = "<group>"; };
-		8404570721A91A0600DF2424 /* libx264.152.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libx264.152.dylib; path = deps/lib/libx264.152.dylib; sourceTree = "<group>"; };
 		8404570821A91A0600DF2424 /* libsnappy.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsnappy.1.dylib; path = deps/lib/libsnappy.1.dylib; sourceTree = "<group>"; };
 		8404570921A91A0600DF2424 /* libarchive.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libarchive.13.dylib; path = deps/lib/libarchive.13.dylib; sourceTree = "<group>"; };
 		8404570A21A91A0600DF2424 /* libpcre.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcre.1.dylib; path = deps/lib/libpcre.1.dylib; sourceTree = "<group>"; };
@@ -1264,8 +1256,6 @@
 				8404573721A91A0900DF2424 /* libmp3lame.0.dylib in Frameworks */,
 				8404574321A91A0900DF2424 /* liblcms2.2.dylib in Frameworks */,
 				8404571F21A91A0900DF2424 /* libintl.8.dylib in Frameworks */,
-				8404572D21A91A0900DF2424 /* libx265.165.dylib in Frameworks */,
-				8404573021A91A0900DF2424 /* libx264.152.dylib in Frameworks */,
 				8404571C21A91A0900DF2424 /* libfribidi.0.dylib in Frameworks */,
 				8404574021A91A0900DF2424 /* libavcodec.58.35.100.dylib in Frameworks */,
 				8404572121A91A0900DF2424 /* libuchardet.0.dylib in Frameworks */,
@@ -1419,8 +1409,6 @@
 				840456F821A91A0400DF2424 /* libuchardet.0.dylib */,
 				8404570021A91A0500DF2424 /* libvorbis.0.dylib */,
 				8404570221A91A0500DF2424 /* libvorbisenc.2.dylib */,
-				8404570721A91A0600DF2424 /* libx264.152.dylib */,
-				8404570421A91A0500DF2424 /* libx265.165.dylib */,
 				8403CEA62007CBD300645516 /* MediaPlayer.framework */,
 				845E2F491E76CFC2002C6588 /* libz.tbd */,
 				496B19911E2968530035AF10 /* PIP.framework */,

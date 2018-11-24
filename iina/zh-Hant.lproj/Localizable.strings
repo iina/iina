@@ -215,3 +215,9 @@
 "touchbar.seek" = "進度列";
 "touchbar.time" = "播放進度";
 "track.none" = "<無>";
+
+/* FIXME: Using English localization instead */
+"playlist.total_length_with_selected" = "%@ of %@ selected";
+
+/* FIXME: Using English localization instead */
+"playlist.total_length" = "%@ in total";

@@ -121,6 +121,7 @@ extension AboutWindowController: NSCollectionViewDataSource {
 
   func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
     let item = contributorsCollectionView.makeItem(withIdentifier: .dataSourceItem, for: indexPath) as! AboutWindowContributorAvatarItem
+    item.imageView?.image = nil
     guard let contributor = contributors[at: indexPath.item] else { return item }
     item.avatarURL = contributor.avatarURL
     return item
@@ -135,6 +136,7 @@ extension AboutWindowController: NSCollectionViewDataSource {
 
   private func loadContributors(from url: String) {
     Just.get(url) { response in
+      let prevCount = self.contributors.count
       guard let data = response.content,
         let contributors = try? JSONDecoder().decode([Contributor].self, from: data) else {
           DispatchQueue.main.async {
@@ -143,12 +145,16 @@ extension AboutWindowController: NSCollectionViewDataSource {
           return
       }
       self.contributors.append(contentsOf: contributors)
+      // avoid possible crash
+      guard self.contributors.count > prevCount else { return }
+      let insertIndices = ([Int](prevCount..<self.contributors.count)).map {
+        IndexPath(item: $0, section: 0)
+      }
+      DispatchQueue.main.sync {
+        self.contributorsCollectionView.insertItems(at: Set(insertIndices))
+      }
       if let nextURL = response.links["next"]?["url"] {
         self.loadContributors(from: nextURL)
-      } else {
-        DispatchQueue.main.sync {
-          self.contributorsCollectionView.reloadData()
-        }
       }
     }
   }

@@ -507,8 +507,6 @@ struct MPVProperty {
   static let protocolList = "protocol-list"
   /** decoder-list */
   static let decoderList = "decoder-list"
-  /** family */
-  static let family = "family"
   /** codec */
   static let codec = "codec"
   /** driver */
@@ -517,6 +515,8 @@ struct MPVProperty {
   static let description = "description"
   /** encoder-list */
   static let encoderList = "encoder-list"
+  /** demuxer-lavf-list */
+  static let demuxerLavfList = "demuxer-lavf-list"
   /** mpv-version */
   static let mpvVersion = "mpv-version"
   /** mpv-configuration */

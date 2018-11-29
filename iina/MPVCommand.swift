@@ -66,7 +66,7 @@ struct MPVCommand: RawRepresentable {
   static let subSeek = MPVCommand("sub-seek")
   /** print-text "<string>" */
   static let printText = MPVCommand("print-text")
-  /** show-text "<string>" [<duration>|- [<level>]] */
+  /** show-text "<string>" [<duration>|-1 [<level>]] */
   static let showText = MPVCommand("show-text")
   /** expand-text "<string>" */
   static let expandText = MPVCommand("expand-text")
@@ -128,4 +128,6 @@ struct MPVCommand: RawRepresentable {
   static let applyProfile = MPVCommand("apply-profile")
   /** load-script "<path>" */
   static let loadScript = MPVCommand("load-script")
+  /** change-list "<option>" "<operation>" "<value>" */
+  static let changeList = MPVCommand("change-list")
 }

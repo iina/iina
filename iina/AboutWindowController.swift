@@ -57,6 +57,9 @@ class AboutWindowController: NSWindowController {
   override func windowDidLoad() {
     super.windowDidLoad()
 
+    window?.titlebarAppearsTransparent = true
+    window?.titleVisibility = .hidden
+
     windowBackgroundBox.fillColor = .windowBackgroundColor
     iconImageView.image = NSApp.applicationIconImage
 

@@ -152,6 +152,7 @@ class PreferenceWindowController: NSWindowController {
     super.windowDidLoad()
 
     window?.titlebarAppearsTransparent = true
+    window?.titleVisibility = .hidden
     window?.isMovableByWindowBackground = true
 
     tableView.delegate = self

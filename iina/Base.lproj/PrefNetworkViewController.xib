@@ -81,8 +81,8 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.enableCache" id="Hzs-mZ-91S"/>
                         <binding destination="KNf-nq-d77" name="value" keyPath="values.defaultCacheSize" id="avo-pt-T2i"/>
+                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.enableCache" id="Hzs-mZ-91S"/>
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KgO-2A-tSs">
@@ -99,8 +99,8 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.enableCache" id="A0v-9P-z1q"/>
                         <binding destination="KNf-nq-d77" name="value" keyPath="values.cacheBufferSize" id="EoE-Q5-fOq"/>
+                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.enableCache" id="A0v-9P-z1q"/>
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8qr-PT-G7W">
@@ -396,6 +396,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="ytdlHelpAction:" target="-2" id="Tlh-FM-2Ue"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>

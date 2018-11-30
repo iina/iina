@@ -48,6 +48,7 @@ struct AppData {
   static let wikiLink = "https://github.com/lhc70000/iina/wiki"
   static let websiteLink = "https://lhc70000.github.io/iina/"
   static let emailLink = "developers@iina.io"
+  static let ytdlHelpLink = "https://github.com/rg3/youtube-dl/blob/master/README.md#readme"
   static let appcastLink = "https://www.iina.io/appcast.xml"
   static let appcastBetaLink = "https://www.iina.io/appcast-beta.xml"
   static let assrtRegisterLink = "https://secure.assrt.net/user/register.xml?redir=http%3A%2F%2Fassrt.net%2Fusercp.php"

@@ -61,12 +61,15 @@ export function openInIINA(tabId, url, options = {}) {
     const baseURL = `iina://open?`;
     const params = [`url=${encodeURIComponent(url)}`];
     switch (options.mode) {
-        case "fullscreen":
+        case "fullScreen":
             params.push("full_screen=1"); break;
         case "pip":
             params.push("pip=1"); break;
         case "enqueue":
             params.push("enqueue=1"); break;
+    }
+    if (options.newWindow) {
+        params.push("new_window=1");
     }
     const code = `
         var link = document.createElement('a');

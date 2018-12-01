@@ -2,8 +2,8 @@
   "manifest_version": 2,
 
   "name": "Open In IINA",
-  "description": "Open current media in IINA",
-  "version": "1.0.0",
+  "description": "Open videos and audios in IINA.",
+  "version": "2.0.0",
   "options_page": "options.html",
   "background": {
     "page": "background.html"

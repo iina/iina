@@ -21,7 +21,7 @@
 "alert.clear_history.title" = "Очистить историю воспроизведения";
 "alert.clear_watch_later.message" = "Вы уверены, что хотите удалить весь сохраненный прогресс воспроизведения (Посмотреть позже)?";
 "alert.clear_watch_later.title" = "Очистить сохраненный прогресс воспроизведения";
-"alert.config.cannot_create" = "Не удалось создать файл конфигурации!";
+"alert.config.cannot_create" = "Не удалось создать файл конфигурации!\n%@";
 "alert.config.cannot_write" = "Не удалось записать файл конфигурации!";
 "alert.config.duplicate.message" = "Введите имя для дублированного файла конфигурации.";
 "alert.config.duplicate.title" = "Дублировать конфигурацию";
@@ -179,6 +179,8 @@
 "pl_menu.wrong_sub" = "Неверные субтитры!";
 "playlist.chapter_cap" = "ГЛАВЫ";
 "playlist.playlist_cap" = "ПЛЕЙЛИСТ";
+"playlist.total_length" = "%@ в общей сложности";
+"playlist.total_length_with_selected" = "%@ из %@ выбрано";
 "preference.advanced" = "Дополнительно";
 "preference.control" = "Управление";
 "preference.general" = "Основные";

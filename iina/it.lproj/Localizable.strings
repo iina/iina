@@ -21,7 +21,7 @@
 "alert.clear_history.title" = "Elimina la cronologia delle riproduzioni";
 "alert.clear_watch_later.message" = "Sei sicuro di eliminare tutti gli avanzamenti di riproduzione salvati (e i dati \"guarda dopo\")?";
 "alert.clear_watch_later.title" = "Elimina gli avanzamenti di riproduzione salvati";
-"alert.config.cannot_create" = "Impossibile creare il file di configurazione!";
+"alert.config.cannot_create" = "Impossibile creare il file di configurazione!\n%@";
 "alert.config.cannot_write" = "Impossibile scrivere il file di configurazione!";
 "alert.config.duplicate.message" = "Inserisci il nome per il duplicato del file di configurazione.";
 "alert.config.duplicate.title" = "Configurazione del duplicato";
@@ -91,6 +91,7 @@
 "keymapping.message" = "Premi i nuovi tasti per aggiungere o modficare le abbreviazioni.";
 "keymapping.title" = "Abbreviazioni";
 "main.buffering_indicator" = "Buffer… %d%%";
+"main.opening_stream" = "Apertura stream…";
 "menu.audio_delay" = "Differenza audio: %.2fs";
 "menu.audio_delay_down" = "Anticipa audio - %.1fs";
 "menu.audio_delay_up" = "Ritarda audio + %.1fs";
@@ -135,6 +136,7 @@
 "osd.filter_added" = "Aggiungto filtro: %@";
 "osd.filter_removed" = "Filtro rimosso";
 "osd.find_online_sub" = "Trova sottotitoli online…";
+"osd.find_online_sub.source" = "da";
 "osd.mute" = "Muto";
 "osd.network_error" = "Errore di rete";
 "osd.pause" = "Pausa";
@@ -177,6 +179,8 @@
 "pl_menu.wrong_sub" = "Sotttotioli errati!";
 "playlist.chapter_cap" = "CAPITOLI";
 "playlist.playlist_cap" = "PLAYLIST";
+"playlist.total_length" = "%@ sul totale";
+"playlist.total_length_with_selected" = "%@ di %@ selezionato";
 "preference.advanced" = "Avanzate";
 "preference.control" = "Controlli";
 "preference.general" = "Generali";
@@ -213,9 +217,3 @@
 "touchbar.seek" = "Ricerca";
 "touchbar.time" = "Tempo";
 "track.none" = "<Nessuno>";
-
-/* FIXME: Using English localization instead */
-"osd.find_online_sub.source" = "from";
-
-/* FIXME: Using English localization instead */
-"main.opening_stream" = "Opening stream…";

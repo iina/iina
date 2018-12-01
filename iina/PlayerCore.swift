@@ -380,11 +380,12 @@ class PlayerCore: NSObject {
     if !miniPlayer.isPlaylistVisible {
       miniPlayer.setToInitialWindowSize(display: true, animate: false)
     }
-    videoView.videoLayer.draw()
 
     // hide main window
     mainWindow.window?.orderOut(self)
     isInMiniPlayer = true
+
+    videoView.videoLayer.draw(forced: true)
 
     // restore layout
     if needRestoreLayout {
@@ -427,6 +428,9 @@ class PlayerCore: NSObject {
     // hide mini player
     miniPlayer.window?.orderOut(nil)
     isInMiniPlayer = false
+
+    mainWindow.videoView.videoLayer.draw(forced: true)
+
     mainWindow.updateTitle()
   }
 
@@ -1511,10 +1515,21 @@ class PlayerCore: NSObject {
   }
 
   func getMusicMetadata() -> (title: String, album: String, artist: String) {
-    let title = mpv.getString(MPVProperty.mediaTitle) ?? ""
-    let album = mpv.getString("metadata/by-key/album") ?? ""
-    let artist = mpv.getString("metadata/by-key/artist") ?? ""
-    return (title, album, artist)
+    if mpv.getInt(MPVProperty.chapters) > 0 {
+      let chapter = mpv.getInt(MPVProperty.chapter)
+      let chapterTitle = mpv.getString(MPVProperty.chapterListNTitle(chapter))
+      return (
+        chapterTitle ?? mpv.getString(MPVProperty.mediaTitle) ?? "",
+        mpv.getString("metadata/by-key/album") ?? "",
+        mpv.getString("chapter-metadata/by-key/performer") ?? mpv.getString("metadata/by-key/artist") ?? ""
+      )
+    } else {
+      return (
+        mpv.getString(MPVProperty.mediaTitle) ?? "",
+        mpv.getString("metadata/by-key/album") ?? "",
+        mpv.getString("metadata/by-key/artist") ?? ""
+      )
+    }
   }
 
   /** Check if there are IINA filters saved in watch_later file. */

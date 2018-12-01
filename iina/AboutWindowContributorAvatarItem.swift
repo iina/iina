@@ -11,6 +11,8 @@ import Just
 
 class AboutWindowContributorAvatarItem: NSCollectionViewItem {
 
+  static let imageCache = NSCache<NSString, NSImage>()
+
   override func viewDidLoad() {
     guard let imageView = imageView else { return }
     imageView.wantsLayer = true
@@ -27,10 +29,16 @@ class AboutWindowContributorAvatarItem: NSCollectionViewItem {
   var avatarURL: String? {
     didSet {
       guard let url = avatarURL else { return }
-      Just.get(url) { respond in
-        guard let data = respond.content, let image = NSImage(data: data) else { return }
-        DispatchQueue.main.async {
-          self.imageView!.image = image.rounded()
+      if let data = AboutWindowContributorAvatarItem.imageCache.object(forKey: url as NSString) {
+        self.imageView!.image = data
+      } else {
+        Just.get(url) { respond in
+          guard let data = respond.content, var image = NSImage(data: data) else { return }
+          image = image.rounded()
+          DispatchQueue.main.async {
+            self.imageView!.image = image
+          }
+          AboutWindowContributorAvatarItem.imageCache.setObject(image, forKey: url as NSString)
         }
       }
     }

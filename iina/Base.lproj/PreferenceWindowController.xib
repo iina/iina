@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14306.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14306.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,7 +25,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="700" height="480"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <value key="minSize" type="size" width="480" height="360"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="700" height="480"/>
@@ -76,23 +76,37 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="XDU-ud-pYc">
-                                                                    <rect key="frame" x="20" y="9" width="177" height="18"/>
+                                                                    <rect key="frame" x="46" y="10" width="151" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" drawsBackground="YES" id="Ukj-Vg-wHf" customClass="PrefTabTitleLabelCell" customModule="IINA" customModuleProvider="target">
-                                                                        <font key="font" metaFont="system"/>
+                                                                        <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="Cky-oa-sEY" name="value" keyPath="objectValue" id="5eA-cY-ClT"/>
+                                                                        <binding destination="Cky-oa-sEY" name="value" keyPath="objectValue.title" id="pdj-Rl-qDR"/>
                                                                     </connections>
                                                                 </textField>
+                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Yr-Dy-tXq">
+                                                                    <rect key="frame" x="20" y="9" width="18" height="18"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="5Yr-Dy-tXq" secondAttribute="height" multiplier="1:1" id="ITq-jp-a8v"/>
+                                                                        <constraint firstAttribute="width" constant="18" id="W2O-qT-W0s"/>
+                                                                    </constraints>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="feg-Zf-aMd"/>
+                                                                    <connections>
+                                                                        <binding destination="Cky-oa-sEY" name="value" keyPath="objectValue.image" id="C2q-6f-8qZ"/>
+                                                                    </connections>
+                                                                </imageView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="XDU-ud-pYc" firstAttribute="leading" secondItem="Cky-oa-sEY" secondAttribute="leading" constant="20" id="CQ7-BF-K42"/>
                                                                 <constraint firstAttribute="trailing" secondItem="XDU-ud-pYc" secondAttribute="trailing" constant="20" id="GBQ-e5-LaX"/>
+                                                                <constraint firstItem="XDU-ud-pYc" firstAttribute="leading" secondItem="5Yr-Dy-tXq" secondAttribute="trailing" constant="8" id="N2o-JC-vPx"/>
+                                                                <constraint firstItem="5Yr-Dy-tXq" firstAttribute="centerY" secondItem="Cky-oa-sEY" secondAttribute="centerY" id="eBq-gK-JL2"/>
+                                                                <constraint firstItem="5Yr-Dy-tXq" firstAttribute="leading" secondItem="Cky-oa-sEY" secondAttribute="leading" constant="20" id="ekq-kA-abF"/>
                                                                 <constraint firstItem="XDU-ud-pYc" firstAttribute="centerY" secondItem="Cky-oa-sEY" secondAttribute="centerY" id="h97-II-d9Q"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="imageView" destination="5Yr-Dy-tXq" id="AEl-yO-dwj"/>
                                                                 <outlet property="textField" destination="XDU-ud-pYc" id="NpG-es-Dgj"/>
                                                             </connections>
                                                         </tableCellView>
@@ -194,7 +208,7 @@
             <rect key="frame" x="0.0" y="0.0" width="340" height="200"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0yO-bT-GQW">
-                    <rect key="frame" x="137" y="91" width="67" height="18"/>
+                    <rect key="frame" x="137" y="92" width="67" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="No Result" id="jUU-3A-jLW">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -205,7 +219,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="340" height="200"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oMs-Q9-XbP">
                         <rect key="frame" x="0.0" y="0.0" width="340" height="200"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" rowSizeStyle="automatic" viewBased="YES" id="MUI-pR-u00">
                                 <rect key="frame" x="0.0" y="0.0" width="340" height="200"/>

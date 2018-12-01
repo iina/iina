@@ -212,6 +212,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
     }
 
+    NSRunningApplication.current.activate(options: [.activateIgnoringOtherApps, .activateAllWindows])
+
     NSApplication.shared.servicesProvider = self
   }
 

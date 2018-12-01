@@ -494,6 +494,17 @@ extension NSImage {
 }
 
 
+extension NSVisualEffectView {
+  func roundCorners(withRadius cornerRadius: CGFloat) {
+    if #available(macOS 10.14, *) {
+      maskImage = .maskImage(cornerRadius: cornerRadius)
+    } else {
+      layer?.cornerRadius = cornerRadius
+    }
+  }
+}
+
+
 extension NSBox {
   static func horizontalLine() -> NSBox {
     let box = NSBox(frame: NSRect(origin: .zero, size: NSSize(width: 100, height: 1)))

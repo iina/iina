@@ -171,7 +171,7 @@
                             <constraint firstAttribute="bottom" secondItem="EU2-5a-Lpj" secondAttribute="bottom" id="hjJ-mb-hIo"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                     <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Gf8-9e-wu7">

@@ -753,6 +753,7 @@ class MPVController: NSObject {
     case MPVProperty.chapter:
       player.syncUI(.time)
       player.syncUI(.chapterList)
+      player.postNotification(.iinaMediaTitleChanged)
 
     case MPVOption.PlaybackControl.speed:
       needReloadQuickSettingsView = true

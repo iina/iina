@@ -832,6 +832,10 @@
 		846352571EEEE11A0043F0CC /* ThumbnailPeekView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailPeekView.swift; sourceTree = "<group>"; };
 		846654921F4EEA5500C91B8C /* vlc-default-input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "vlc-default-input.conf"; sourceTree = "<group>"; };
 		8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSettingViewController.swift; sourceTree = "<group>"; };
+		846BE12D21B347830084ABB9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/OpenURLWindowController.strings"; sourceTree = "<group>"; };
+		846BE12F21B347920084ABB9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MiniPlayerWindowController.strings"; sourceTree = "<group>"; };
+		846BE13021B349030084ABB9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/FilterPresets.strings"; sourceTree = "<group>"; };
+		846BE13121B34E760084ABB9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hant"; path = "zh-Hant.lproj/Contribution.rtf"; sourceTree = "<group>"; };
 		846DD8C81FB39A9800991A81 /* movist-default-input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "movist-default-input.conf"; sourceTree = "<group>"; };
 		847557131F405F8C0006B0FF /* MainWindowMenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowMenuActions.swift; sourceTree = "<group>"; };
 		847557151F406D360006B0FF /* MiniPlayerWindowMenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniPlayerWindowMenuActions.swift; sourceTree = "<group>"; };
@@ -2808,6 +2812,7 @@
 				9D02FB79218CEF53005FEB2B /* nl */,
 				64AB73DB218FE89000450974 /* es */,
 				E1298BB821A517C400B646AD /* sv */,
+				846BE12D21B347830084ABB9 /* zh-Hant */,
 			);
 			name = OpenURLWindowController.xib;
 			sourceTree = "<group>";
@@ -2932,6 +2937,7 @@
 				E92D61981FE93B9E00ACC463 /* da */,
 				4CA6B42F201E85BB008F3FBA /* pt-BR */,
 				E1298BCE21A517CA00B646AD /* sv */,
+				846BE13121B34E760084ABB9 /* zh-Hant */,
 			);
 			name = Contribution.rtf;
 			sourceTree = "<group>";
@@ -2978,6 +2984,7 @@
 				6C9C2542205B93CF0092D7B0 /* pl */,
 				6CD541A2206AD71C000428E6 /* de */,
 				E1298BCF21A517CA00B646AD /* sv */,
+				846BE13021B349030084ABB9 /* zh-Hant */,
 			);
 			name = FilterPresets.strings;
 			sourceTree = "<group>";
@@ -3022,6 +3029,7 @@
 				64AB73DD218FE97900450974 /* es */,
 				5879479521A87DD700757A6F /* sk */,
 				E1298BBB21A517C500B646AD /* sv */,
+				846BE12F21B347920084ABB9 /* zh-Hant */,
 			);
 			name = MiniPlayerWindowController.xib;
 			sourceTree = "<group>";

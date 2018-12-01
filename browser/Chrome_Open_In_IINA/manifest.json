@@ -4,9 +4,9 @@
   "name": "Open In IINA",
   "description": "Open current media in IINA",
   "version": "1.0.0",
-
-  "background": { 
-    "scripts": [ "background.js" ] 
+  "options_page": "options.html",
+  "background": {
+    "page": "background.html"
   },
   "browser_action": {
     "default_icon": "icon.png",
@@ -14,9 +14,11 @@
   },
   "permissions": [
     "tabs",
-    "activeTab"
+    "activeTab",
+    "contextMenus",
+    "storage"
   ],
-  "icons": { 
+  "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
     "128": "icon128.png"

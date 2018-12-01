@@ -728,6 +728,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
+    var buttons = buttons
+    if #available(macOS 10.12.2, *) {} else {
+      buttons = buttons.filter { $0 != .pip }
+    }
     fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
     for buttonType in buttons {
       let button = NSButton()

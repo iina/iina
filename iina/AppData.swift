@@ -52,8 +52,8 @@ struct AppData {
   static let appcastLink = "https://www.iina.io/appcast.xml"
   static let appcastBetaLink = "https://www.iina.io/appcast-beta.xml"
   static let assrtRegisterLink = "https://secure.assrt.net/user/register.xml?redir=http%3A%2F%2Fassrt.net%2Fusercp.php"
-  static let safariExtensionLink = "https://github.com/lhc70000/iina/releases/download/v0.0.5/Open_In_IINA.safariextz"
   static let chromeExtensionLink = "https://chrome.google.com/webstore/detail/open-in-iina/pdnojahnhpgmdhjdhgphgdcecehkbhfo"
+  static let firefoxExtensionLink = "https://addons.mozilla.org/addon/open-in-iina-x"
 
   static let widthWhenNoVideo = 480
   static let heightWhenNoVideo = 480

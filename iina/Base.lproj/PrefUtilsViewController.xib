@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefUtilsViewController" customModule="IINA" customModuleProvider="target">
             <connections>
-                <outlet property="firefoxExtButton" destination="G58-js-HgZ" id="xaI-Je-Yq8"/>
                 <outlet property="playHistoryClearedLabel" destination="sI2-xW-v1S" id="7uc-8E-r0r"/>
                 <outlet property="savedPlaybackProgressClearedLabel" destination="btv-7s-L8M" id="mFv-fy-6Go"/>
                 <outlet property="sectionBrowserExtView" destination="lOp-07-Z6M" id="UYs-O3-l9R"/>
@@ -210,18 +209,8 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button identifier="FunctionalButtonSafari" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q8s-Ex-f9e">
-                    <rect key="frame" x="0.0" y="7" width="65" height="17"/>
-                    <buttonCell key="cell" type="inline" title="Safari" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="oac-PR-9Yh">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="smallSystemBold"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="extSafariBtnAction:" target="-2" id="ca3-lZ-svI"/>
-                    </connections>
-                </button>
                 <button identifier="FunctionalButtonChrome" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HRq-fs-0uo">
-                    <rect key="frame" x="77" y="7" width="76" height="17"/>
+                    <rect key="frame" x="0.0" y="7" width="76" height="17"/>
                     <buttonCell key="cell" type="inline" title="Chrome" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="yuw-2i-ICd">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
@@ -231,7 +220,7 @@
                     </connections>
                 </button>
                 <button identifier="FunctionalButtonFirefox" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G58-js-HgZ">
-                    <rect key="frame" x="165" y="7" width="71" height="17"/>
+                    <rect key="frame" x="88" y="7" width="71" height="17"/>
                     <buttonCell key="cell" type="inline" title="Firefox" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="f9i-sS-MJN">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
@@ -250,20 +239,18 @@
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="Q8s-Ex-f9e" firstAttribute="leading" secondItem="lOp-07-Z6M" secondAttribute="leading" id="14P-a1-lfH"/>
                 <constraint firstItem="DZn-sK-pTY" firstAttribute="top" secondItem="Al6-1d-mCg" secondAttribute="bottom" constant="16" id="2ik-uq-Qwt"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Al6-1d-mCg" secondAttribute="trailing" id="8CU-Kr-zH1"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="G58-js-HgZ" secondAttribute="trailing" id="8h7-mK-XFK"/>
-                <constraint firstItem="Q8s-Ex-f9e" firstAttribute="top" secondItem="DZn-sK-pTY" secondAttribute="bottom" constant="8" id="9EY-df-kcF"/>
-                <constraint firstAttribute="bottom" secondItem="Q8s-Ex-f9e" secondAttribute="bottom" constant="8" id="9zC-15-VcB"/>
                 <constraint firstItem="G58-js-HgZ" firstAttribute="baseline" secondItem="HRq-fs-0uo" secondAttribute="baseline" id="AOw-Dw-AuU"/>
-                <constraint firstItem="HRq-fs-0uo" firstAttribute="baseline" secondItem="Q8s-Ex-f9e" secondAttribute="baseline" id="BRP-zW-a1v"/>
                 <constraint firstItem="DZn-sK-pTY" firstAttribute="leading" secondItem="lOp-07-Z6M" secondAttribute="leading" id="CkD-fd-bWU"/>
                 <constraint firstItem="G58-js-HgZ" firstAttribute="leading" secondItem="HRq-fs-0uo" secondAttribute="trailing" constant="12" id="In7-L9-1EH"/>
                 <constraint firstItem="Al6-1d-mCg" firstAttribute="leading" secondItem="lOp-07-Z6M" secondAttribute="leading" id="gkP-JQ-Jov"/>
+                <constraint firstItem="HRq-fs-0uo" firstAttribute="leading" secondItem="lOp-07-Z6M" secondAttribute="leading" id="jhd-yd-lnA"/>
+                <constraint firstAttribute="bottom" secondItem="HRq-fs-0uo" secondAttribute="bottom" constant="8" id="rd0-xS-Ehg"/>
+                <constraint firstItem="HRq-fs-0uo" firstAttribute="top" secondItem="DZn-sK-pTY" secondAttribute="bottom" constant="8" id="tN3-Bb-JbP"/>
                 <constraint firstAttribute="trailing" secondItem="DZn-sK-pTY" secondAttribute="trailing" id="uEn-NP-ZYa"/>
                 <constraint firstItem="Al6-1d-mCg" firstAttribute="top" secondItem="lOp-07-Z6M" secondAttribute="top" constant="8" id="vMZ-SW-pO3"/>
-                <constraint firstItem="HRq-fs-0uo" firstAttribute="leading" secondItem="Q8s-Ex-f9e" secondAttribute="trailing" constant="12" id="ydt-AI-r4f"/>
             </constraints>
             <point key="canvasLocation" x="139" y="925"/>
         </customView>

@@ -36,12 +36,9 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
   @IBOutlet weak var thumbCacheSizeLabel: NSTextField!
   @IBOutlet weak var savedPlaybackProgressClearedLabel: NSTextField!
   @IBOutlet weak var playHistoryClearedLabel: NSTextField!
-  @IBOutlet weak var firefoxExtButton: NSButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    firefoxExtButton.isHidden = true
 
     DispatchQueue.main.async {
       self.updateThumbnailCacheStat()
@@ -137,14 +134,11 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
     }
   }
 
-  @IBAction func extSafariBtnAction(_ sender: Any) {
-    NSWorkspace.shared.open(URL(string: AppData.safariExtensionLink)!)
-  }
-
   @IBAction func extChromeBtnAction(_ sender: Any) {
     NSWorkspace.shared.open(URL(string: AppData.chromeExtensionLink)!)
   }
 
   @IBAction func extFirefoxBtnAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: AppData.firefoxExtensionLink)!)
   }
 }

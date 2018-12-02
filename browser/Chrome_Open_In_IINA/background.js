@@ -1,16 +1,14 @@
-var activeWindowQuery = { currentWindow: true, active: true }
+import { updateBrowserAction, openInIINA } from "./common.js";
 
-chrome.browserAction.onClicked.addListener(function(tab) { 
-  // get active window
-  chrome.tabs.query(activeWindowQuery, function(tabs) {
-    if (tabs.length == 0)
-      return
-    // TODO: filter url
-    var url = "iina://weblink?url=" + encodeURIComponent(tabs[0].url)
-    var code = "var link = document.createElement('a');" +
-      "link.href='" + url + "';" +
-      "document.body.appendChild(link);" +
-      "link.click();";
-    chrome.tabs.executeScript(tabs[0].id, { code: code })
-  })
-})
+updateBrowserAction();
+
+[["page", "url"], ["link", "linkUrl"], ["video", "srcUrl"], ["audio", "srcUrl"]].forEach(([item, linkType]) => {
+    chrome.contextMenus.create({
+        title: `Open this ${item} in IINA`,
+        id: `open${item}iniina`,
+        contexts: [item],
+        onclick: (info, tab) => {
+            openInIINA(tab.id, info[linkType]);
+        },
+    });
+});

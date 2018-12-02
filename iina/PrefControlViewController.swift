@@ -12,15 +12,15 @@ import Cocoa
 class PrefControlViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
-    get {
-      return NSNib.Name("PrefControlViewController")
-    }
+    return NSNib.Name("PrefControlViewController")
   }
 
   var preferenceTabTitle: String {
-    get {
-      return NSLocalizedString("preference.control", comment: "Control")
-    }
+    return NSLocalizedString("preference.control", comment: "Control")
+  }
+
+  var preferenceTabImage: NSImage {
+    return NSImage(named: NSImage.Name("pref_control"))!
   }
 
   override var sectionViews: [NSView] {

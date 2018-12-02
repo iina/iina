@@ -19,6 +19,10 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
     return NSLocalizedString("preference.video_audio", comment: "Codec")
   }
 
+  var preferenceTabImage: NSImage {
+    return NSImage(named: NSImage.Name("pref_av"))!
+  }
+
   override var sectionViews: [NSView] {
     return [sectionVideoView, sectionAudioView]
   }

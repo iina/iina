@@ -12,17 +12,17 @@
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Ihd-HK-wsv"; */
 "Ihd-HK-wsv.title" = "Отмена";
 
-/* Class = "NSTextFieldCell"; title = "Filter:"; ObjectID = "Jhm-tD-3Xf"; */
-"Jhm-tD-3Xf.title" = "Поиск:";
-
-/* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "KPy-vq-mpf"; */
-"KPy-vq-mpf.title" = "Другой:";
+/* Class = "NSTextFieldCell"; placeholderString = "sans-serif"; ObjectID = "Kt3-me-43R"; */
+"Kt3-me-43R.placeholderString" = "sans-serif";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "S5m-SJ-Ggp"; */
 "S5m-SJ-Ggp.title" = "OK";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "TPh-rU-Vee"; */
 "TPh-rU-Vee.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Choose a font:"; ObjectID = "TSI-Wt-Edx"; */
+"TSI-Wt-Edx.title" = "Выберите шрифт:";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Wib-jE-Vgi"; */
 "Wib-jE-Vgi.title" = "Text Cell";
@@ -35,4 +35,7 @@
 
 /* Class = "NSTextFieldCell"; title = "Test"; ObjectID = "qwM-r2-9ki"; */
 "qwM-r2-9ki.title" = "Проба пера";
+
+/* Class = "NSTextFieldCell"; title = "Or enter the font name:"; ObjectID = "waR-LB-484"; */
+"waR-LB-484.title" = "Или введите название шрифта:";
 

@@ -5,7 +5,7 @@
 "alert.add_url.message" = "Veuillez saisir l'URL :";
 "alert.add_url.title" = "Ajouter une URL";
 "alert.add_watch.message" = "Veuillez renseigner un nom de propriété mpv valide.";
-"alert.add_watch.title" = "Nouvelle propriété Watch";
+"alert.add_watch.title" = "Nouvelle propriété à observer";
 "alert.assrt_register" = "À cause du quota limité sur l'API d'Assrt, nous vous recommendons fortement d'utiliser votre propre token d'API. Le token par défaut est seulement disponible à des fins de démonstration, et vous risquez de rencontrer une erreur réseau en l'utilisant.";
 "alert.assrt_register.register" = "S'inscrire";
 "alert.assrt_register.try" = "Essayer sans token";
@@ -56,7 +56,7 @@
 "alert.no_video_track" = "Il n'y a pas de piste vidéo.";
 "alert.nothing_to_open" = "Aucun fichier à ouvrir.";
 "alert.open_url.message" = "Veuillez entrer l'URL :";
-"alert.open_url.title" = "Ouvrir une URL";
+"alert.open_url.title" = "Ouvrir une adresse";
 "alert.opensub.login.message" = "Veuillez renseigner votre nom d'utilisateur et mot de passe";
 "alert.opensub.login.title" = "Login OpenSubtitles";
 "alert.playlist.error_deleting" = "Erreur lors de la suppression de : %@";
@@ -179,6 +179,8 @@
 "pl_menu.wrong_sub" = "Mauvais sous-titre !";
 "playlist.chapter_cap" = "CHAPITRES";
 "playlist.playlist_cap" = "PLAYLIST";
+"playlist.total_length" = "%@ au total";
+"playlist.total_length_with_selected" = "%@ sur %@ sélectionnés";
 "preference.advanced" = "Avancé";
 "preference.control" = "Contrôles";
 "preference.general" = "Général";
@@ -215,7 +217,3 @@
 "touchbar.seek" = "Chercher";
 "touchbar.time" = "Position horaire";
 "track.none" = "<Aucun>";
-
-
-
-

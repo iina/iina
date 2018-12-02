@@ -468,6 +468,18 @@ extension NSImage {
 
     return image
   }
+
+  func rounded() -> NSImage {
+    let image = NSImage(size: size)
+    image.lockFocus()
+
+    let frame = NSRect(origin: .zero, size: size)
+    NSBezierPath(ovalIn: frame).addClip()
+    draw(at: .zero, from: frame, operation: .sourceOver, fraction: 1)
+
+    image.unlockFocus()
+    return image
+  }
   
   static func maskImage(cornerRadius: CGFloat) -> NSImage {
     let image = NSImage(size: NSSize(width: cornerRadius * 2, height: cornerRadius * 2), flipped: false) { rectangle in
@@ -478,6 +490,17 @@ extension NSImage {
     }
     image.capInsets = NSEdgeInsets(top: cornerRadius, left: cornerRadius, bottom: cornerRadius, right: cornerRadius)
     return image
+  }
+}
+
+
+extension NSVisualEffectView {
+  func roundCorners(withRadius cornerRadius: CGFloat) {
+    if #available(macOS 10.14, *) {
+      maskImage = .maskImage(cornerRadius: cornerRadius)
+    } else {
+      layer?.cornerRadius = cornerRadius
+    }
   }
 }
 

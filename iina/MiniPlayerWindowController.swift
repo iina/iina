@@ -171,7 +171,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     closeButtonVE.action = #selector(self.close)
     closeButtonBox.action = #selector(self.close)
     closeButtonView.alphaValue = 0
-    closeButtonBackgroundViewVE.maskImage = .maskImage(cornerRadius: 10)
+    closeButtonBackgroundViewVE.roundCorners(withRadius: 8)
     closeButtonBackgroundViewBox.isHidden = true
 
     // switching UI
@@ -387,6 +387,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     volumeSlider.doubleValue = player.info.volume
     volumeLabel.intValue = Int32(player.info.volume)
     muteButton.state = player.info.isMuted ? .on : .off
+    volumeButton.image = player.info.isMuted ? NSImage(named: "mute") : NSImage(named: "volume")
   }
 
   func updateVideoSize() {

@@ -25,9 +25,11 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   }
 
   var preferenceTabTitle: String {
-    get {
-      return NSLocalizedString("preference.ui", comment: "UI")
-    }
+    return NSLocalizedString("preference.ui", comment: "UI")
+  }
+
+  var preferenceTabImage: NSImage {
+    return NSImage(named: NSImage.Name("pref_ui"))!
   }
 
   static var oscToolbarButtons: [Preference.ToolBarButton] {

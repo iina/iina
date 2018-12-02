@@ -409,6 +409,7 @@ enum AVCodecID {
     AV_CODEC_ID_DXV,
     AV_CODEC_ID_SCREENPRESSO,
     AV_CODEC_ID_RSCC,
+    AV_CODEC_ID_AVS2,
 
     AV_CODEC_ID_Y41P = 0x8000,
     AV_CODEC_ID_AVRP,
@@ -446,6 +447,11 @@ enum AVCodecID {
     AV_CODEC_ID_SVG,
     AV_CODEC_ID_GDV,
     AV_CODEC_ID_FITS,
+    AV_CODEC_ID_IMM4,
+    AV_CODEC_ID_PROSUMER,
+    AV_CODEC_ID_MWSC,
+    AV_CODEC_ID_WCMV,
+    AV_CODEC_ID_RASC,
 
     /* various PCM "codecs" */
     AV_CODEC_ID_FIRST_AUDIO = 0x10000,     ///< A dummy id pointing at the start of audio codecs
@@ -485,6 +491,7 @@ enum AVCodecID {
     AV_CODEC_ID_PCM_S64BE,
     AV_CODEC_ID_PCM_F16LE,
     AV_CODEC_ID_PCM_F24LE,
+    AV_CODEC_ID_PCM_VIDC,
 
     /* various ADPCM codecs */
     AV_CODEC_ID_ADPCM_IMA_QT = 0x11000,
@@ -637,6 +644,7 @@ enum AVCodecID {
     AV_CODEC_ID_APTX,
     AV_CODEC_ID_APTX_HD,
     AV_CODEC_ID_SBC,
+    AV_CODEC_ID_ATRAC9,
 
     /* subtitle codecs */
     AV_CODEC_ID_FIRST_SUBTITLE = 0x17000,          ///< A dummy ID pointing at the start of subtitle codecs.
@@ -665,6 +673,7 @@ enum AVCodecID {
     AV_CODEC_ID_PJS,
     AV_CODEC_ID_ASS,
     AV_CODEC_ID_HDMV_TEXT_SUBTITLE,
+    AV_CODEC_ID_TTML,
 
     /* other specific kind of codecs (generally used for attachments) */
     AV_CODEC_ID_FIRST_UNKNOWN = 0x18000,           ///< A dummy ID pointing at the start of various fake codecs.
@@ -1358,6 +1367,12 @@ enum AVPacketSideDataType {
     AV_PKT_DATA_ENCRYPTION_INFO,
 
     /**
+     * Active Format Description data consisting of a single byte as specified
+     * in ETSI TS 101 154 using AVActiveFormatDescription enum.
+     */
+    AV_PKT_DATA_AFD,
+
+    /**
      * The number of side data types.
      * This is not part of the public API/ABI in the sense that it may
      * change when new side data types are added.
@@ -1612,6 +1627,7 @@ typedef struct AVCodecContext {
      * The allocated memory should be AV_INPUT_BUFFER_PADDING_SIZE bytes larger
      * than extradata_size to avoid problems if it is read with the bitstream reader.
      * The bytewise contents of extradata must not depend on the architecture or CPU endianness.
+     * Must be allocated with the av_malloc() family of functions.
      * - encoding: Set/allocated/freed by libavcodec.
      * - decoding: Set/allocated/freed by user.
      */
@@ -5766,6 +5782,7 @@ typedef struct AVBitStreamFilter {
     int (*init)(AVBSFContext *ctx);
     int (*filter)(AVBSFContext *ctx, AVPacket *pkt);
     void (*close)(AVBSFContext *ctx);
+    void (*flush)(AVBSFContext *ctx);
 } AVBitStreamFilter;
 
 #if FF_API_OLD_BSF
@@ -5891,6 +5908,11 @@ int av_bsf_send_packet(AVBSFContext *ctx, AVPacket *pkt);
  * AVERROR(EAGAIN) immediately after a successful av_bsf_send_packet() call.
  */
 int av_bsf_receive_packet(AVBSFContext *ctx, AVPacket *pkt);
+
+/**
+ * Reset the internal bitstream filter state / flush internal buffers.
+ */
+void av_bsf_flush(AVBSFContext *ctx);
 
 /**
  * Free a bitstream filter context and everything associated with it; write NULL

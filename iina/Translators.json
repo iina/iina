@@ -36,6 +36,18 @@
         ]
     },
     {
+        "lang": "sv",
+        "translators": [
+            {
+                "name": "Andreas",
+                "link": {
+                    "url": "https://github.com/anohren",
+                    "title": "@anohren"
+                }
+            }
+        ]
+    },
+    {
         "lang": "fr",
         "translators": [
             {
@@ -147,19 +159,19 @@
             {
                 "name": "Eugene F.",
                 "link": {
-                    "email": "mailto:eugenef@eu.spb.ru"
+                    "email": "eugenef@eu.spb.ru"
                 }
             },
             {
                 "name": "Alexey A.",
                 "link": {
-                    "email": "mailto:aleksey.kota@gmail.com"
+                    "email": "aleksey.kota@gmail.com"
                 }
             },
             {
                 "name": "Ruslan T.",
                 "link": {
-                    "link": "https://github.com/Semty",
+                    "url": "https://github.com/Semty",
                     "title": "@Semty"
                 }
             }
@@ -213,7 +225,7 @@
                 }
             },
             {
-                "name": "ErikMinekus",
+                "name": "Erik Minekus",
                 "link": {
                     "url": "https://github.com/ErikMinekus",
                     "title": "@ErikMinekus"
@@ -227,8 +239,8 @@
             {
                 "name": "Marian Vinicay",
                 "link": {
-                    "url": "https://github.com/sevenfourk",
-                    "title": "@sevenfourk"
+                    "url": "https://github.com/Marvin99com",
+                    "title": "@Marvin99com"
                 }
             }
         ]
@@ -239,7 +251,7 @@
             {
                 "name": "Thomas Kirk",
                 "link": {
-                    "url": "https://github.com/sevenfourk",
+                    "url": "https://github.com/thkir",
                     "title": "@sevenfourk"
                 }
             }

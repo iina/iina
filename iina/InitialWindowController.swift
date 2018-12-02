@@ -121,6 +121,9 @@ class InitialWindowController: NSWindowController {
 
   override func windowDidLoad() {
     super.windowDidLoad()
+
+    window?.titlebarAppearsTransparent = true
+    window?.titleVisibility = .hidden
     window?.isMovableByWindowBackground = true
 
     window?.contentView?.registerForDraggedTypes([.nsFilenames, .nsURL, .string])

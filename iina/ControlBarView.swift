@@ -20,7 +20,7 @@ class ControlBarView: NSVisualEffectView {
   private var isAlignFeedbackSent = false
 
   override func awakeFromNib() {
-    self.maskImage = .maskImage(cornerRadius: 10)
+    self.roundCorners(withRadius: 6)
     self.translatesAutoresizingMaskIntoConstraints = false
   }
 

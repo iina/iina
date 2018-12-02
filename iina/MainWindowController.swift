@@ -78,9 +78,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** The playlist and chapter sidebar. */
   lazy var playlistView: PlaylistViewController = {
-    let playListView = PlaylistViewController()
-    playListView.mainWindow = self
-    return playListView
+    let playlistView = PlaylistViewController()
+    playlistView.mainWindow = self
+    return playlistView
   }()
 
   /** The control view for interactive mode. */
@@ -672,7 +672,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let _ = quickSettingView
 
     // buffer indicator view
-    bufferIndicatorView.maskImage = .maskImage(cornerRadius: 10)
+    bufferIndicatorView.roundCorners(withRadius: 10)
     updateBufferIndicatorView()
 
     // thumbnail peek view
@@ -689,8 +689,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     // hide other views
     osdVisualEffectView.isHidden = true
-    osdVisualEffectView.maskImage = .maskImage(cornerRadius: 10)
-    additionalInfoView.maskImage = .maskImage(cornerRadius: 10)
+    osdVisualEffectView.roundCorners(withRadius: 10)
+    additionalInfoView.roundCorners(withRadius: 10)
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
     timePreviewWhenSeek.isHidden = true
@@ -757,6 +757,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
+    var buttons = buttons
+    if #available(macOS 10.12.2, *) {} else {
+      buttons = buttons.filter { $0 != .pip }
+    }
     fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
     for buttonType in buttons {
       let button = NSButton()
@@ -2718,7 +2722,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.doubleValue
-    if Preference.double(for: .maxVolume) > 100, abs(value - 100) < 0.5 {
+    if Preference.double(for: .maxVolume) > 100, value > 100 && value < 101 {
       NSHapticFeedbackManager.defaultPerformer.perform(.generic, performanceTime: .default)
     }
     player.setVolume(value)
@@ -2840,6 +2844,8 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     pip.presentAsPicture(inPicture: pipVideo)
     pipOverlayView.isHidden = false
+
+    videoView.videoLayer.draw(forced: true)
   }
 
   func exitPIP() {
@@ -2858,6 +2864,9 @@ extension MainWindowController: PIPViewControllerDelegate {
     pipOverlayView.isHidden = true
     window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
     videoView.frame = window?.contentView?.frame ?? .zero
+
+    videoView.videoLayer.draw(forced: true)
+    updateTimer()
   }
 
   func pipShouldClose(_ pip: PIPViewController) -> Bool {

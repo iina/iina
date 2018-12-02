@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AboutWindowContributorAvatarItem" customModule="IINA" customModuleProvider="target">
+            <connections>
+                <outlet property="imageView" destination="ov2-nA-yyd" id="BHP-aU-iad"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ov2-nA-yyd">
+                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="xDz-km-aAu"/>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="ov2-nA-yyd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="Dfk-GM-gOW"/>
+                <constraint firstAttribute="bottom" secondItem="ov2-nA-yyd" secondAttribute="bottom" id="HD5-LY-6Ll"/>
+                <constraint firstAttribute="trailing" secondItem="ov2-nA-yyd" secondAttribute="trailing" id="MTc-WG-UJu"/>
+                <constraint firstItem="ov2-nA-yyd" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="U4F-7S-Lvn"/>
+            </constraints>
+            <point key="canvasLocation" x="22.5" y="112.5"/>
+        </customView>
+    </objects>
+</document>

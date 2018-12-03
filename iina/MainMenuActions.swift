@@ -170,11 +170,11 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuNextChapter(_ sender: NSMenuItem) {
-    player.mpv.command(.add, args: ["chapter", "1"])
+    player.mpv.command(.add, args: ["chapter", "1"], checkError: false)
   }
 
   @objc func menuPreviousChapter(_ sender: NSMenuItem) {
-    player.mpv.command(.add, args: ["chapter", "-1"])
+    player.mpv.command(.add, args: ["chapter", "-1"], checkError: false)
   }
 }
 

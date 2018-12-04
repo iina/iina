@@ -27,6 +27,11 @@ NSLog(@"Error when getting thumbnails: %@ (%d)", msg, ret);\
 return -1;\
 }
 
+#define CHECK(ret,msg) if (!(ret)) {\
+NSLog(@"Error when getting thumbnails: %@", msg);\
+return -1;\
+}
+
 @implementation FFThumbnail
 
 @end
@@ -171,6 +176,7 @@ return -1;\
   CHECK_SUCCESS(ret, @"Cannot fill data for RGBA frame")
 
   // Create a sws context for converting color space and resizing
+  CHECK(pCodecCtx->pix_fmt != AV_PIX_FMT_NONE, @"Pixel format is none")
   struct SwsContext *sws_ctx = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt,
                                               pFrameRGB->width, pFrameRGB->height, pFrameRGB->format,
                                               SWS_BILINEAR,

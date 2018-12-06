@@ -31,5 +31,5 @@ class PlaylistPlaybackProgressView: NSView {
     PlaylistPlaybackProgressView.fillColor.setFill()
     NSBezierPath(rect: rect).fill()
   }
-    
+
 }

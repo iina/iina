@@ -99,8 +99,8 @@ class PlayerCore: NSObject {
    Each task holds a copy of ticket value at creation, so that a previous task will perceive and
    quit early if new tasks is awaiting.
 
-   **See also**: 
-   
+   **See also**:
+
    `autoLoadFilesInCurrentFolder(ticket:)`
    */
   var backgroundQueueTicket = 0
@@ -167,7 +167,7 @@ class PlayerCore: NSObject {
   /**
    Open a list of urls. If there are more than one urls, add the remaining ones to
    playlist and disable auto loading.
-   
+
    - Returns: `nil` if no futher action is needed, like opened a BD Folder; otherwise the
    count of playable files.
    */
@@ -175,7 +175,7 @@ class PlayerCore: NSObject {
   func openURLs(_ urls: [URL], shouldAutoLoad autoLoad: Bool = true) -> Int? {
     guard !urls.isEmpty else { return 0 }
     var urls = Utility.resolveURLs(urls)
-    
+
     // handle BD folders and m3u / m3u8 files first
     if urls.count == 1 && (isBDFolder(urls[0]) ||
       Utility.playlistFileExt.contains(urls[0].absoluteString.lowercasedPathExtension)) {
@@ -183,10 +183,10 @@ class PlayerCore: NSObject {
       open(urls[0])
       return nil
     }
-    
+
     let playableFiles = getPlayableFiles(in: urls)
     let count = playableFiles.count
-    
+
     // check playable files count
     if count == 0 {
       return 0
@@ -197,14 +197,14 @@ class PlayerCore: NSObject {
     } else {
       info.shouldAutoLoadFiles = (count == 1)
     }
-    
+
     // open the first file
     open(playableFiles[0])
     // add the remaining to playlist
     playableFiles[1..<count].forEach { url in
       addToPlaylist(url.isFileURL ? url.path : url.absoluteString)
     }
-    
+
     // refresh playlist
     postNotification(.iinaPlaylistChanged)
     // send OSD
@@ -1142,8 +1142,8 @@ class PlayerCore: NSObject {
    - Try match videos and subs by series and filename.
    - For unmatched videos and subs, perform fuzzy (but slow, O(n^2)) match for them.
 
-   **Remark**: 
-   
+   **Remark**:
+
    This method is expected to be executed in `backgroundQueue` (see `backgroundQueueTicket`).
    Therefore accesses to `self.info` and mpv playlist must be guarded.
    */

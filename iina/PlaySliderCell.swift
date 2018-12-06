@@ -134,15 +134,15 @@ class PlaySliderCell: NSSliderCell {
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
     let info = playerCore.info
-    
+
     let slider = self.controlView as! NSSlider
-    
+
     /// The position of the knob, rounded for cleaner drawing
     let knobPos : CGFloat = round(knobRect(flipped: flipped).origin.x);
-    
+
     /// How far progressed the current video is, used for drawing the bar background
     var progress : CGFloat = 0;
-    
+
     if info.isNetworkResource,
       info.cacheTime != 0,
       let duration = info.videoDuration,
@@ -152,7 +152,7 @@ class PlaySliderCell: NSSliderCell {
     } else {
       progress = knobPos;
     }
-    
+
     let rect = NSMakeRect(rect.origin.x, rect.origin.y + 1, rect.width, rect.height - 2)
     let path = NSBezierPath(roundedRect: rect, xRadius: barRadius, yRadius: barRadius)
 
@@ -166,7 +166,7 @@ class PlaySliderCell: NSSliderCell {
       // Clip 1px around the knob
       path.append(NSBezierPath(rect: NSRect(x: knobPos - 1, y: rect.origin.y, width: knobWidth + 2, height: rect.height)).reversed);
     }
-    
+
     barColorLeft.setFill()
     path.fill()
     NSGraphicsContext.restoreGraphicsState()

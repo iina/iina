@@ -9,15 +9,15 @@
 import Foundation
 
 class DurationDisplayTextField: NSTextField {
-  
+
   enum DisplayMode {
     case current
     case duration // displays the duration of the movie
     case remaining // displays the remaining time in the movie
   }
-  
+
   var mode: DisplayMode = .duration
-  
+
   /** Switches the display mode for the right label */
   func switchMode() {
     switch mode {
@@ -27,10 +27,10 @@ class DurationDisplayTextField: NSTextField {
       mode = .duration
     }
   }
-  
-  
+
+
   func updateText(with duration: VideoTime, given current: VideoTime) {
-    
+
     let stringValue: String
     switch mode {
     case .current:
@@ -46,12 +46,12 @@ class DurationDisplayTextField: NSTextField {
     }
     self.stringValue = stringValue
   }
-  
+
   override func mouseDown(with event: NSEvent) {
     super.mouseDown(with: event)
-    
+
     self.switchMode()
     Preference.set(mode == .remaining, for: .showRemainingTime)
   }
-  
+
 }

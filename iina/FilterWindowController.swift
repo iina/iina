@@ -34,7 +34,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var editFilterKeyRecordView: KeyRecordView!
   @IBOutlet weak var editFilterKeyRecordViewLabel: NSTextField!
   @IBOutlet weak var removeButton: NSButton!
-  
+
   var filterType: String!
 
   var filters: [MPVFilter] = []

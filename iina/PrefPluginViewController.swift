@@ -11,13 +11,16 @@ import Cocoa
 fileprivate let cellViewIndentifier = NSUserInterfaceItemIdentifier("PluginCell")
 
 class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
-
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefPluginViewController")
   }
 
   var preferenceTabTitle: String {
     return NSLocalizedString("preference.plugins", comment: "Plug-ins")
+  }
+
+  var preferenceTabImage: NSImage {
+    return NSImage(named: NSImage.Name("pref_general"))!
   }
 
   var preferenceContentIsScrollable: Bool {

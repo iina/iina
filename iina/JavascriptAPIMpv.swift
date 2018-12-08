@@ -49,7 +49,7 @@ class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
   }
 
   @objc func command(_ commandName: String, _ args: [String]) {
-    player.mpv.command(MPVCommand(commandName), args: args)
+    player.mpv.command(MPVCommand(commandName), args: args, checkError: false)
   }
 }
 

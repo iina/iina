@@ -29,7 +29,7 @@ class JavascriptAPI: NSObject {
     Logger.log(message, level: level, subsystem: pluginInstance.subsystem)
   }
 
-  func permit<T>(to permission: JavascriptPlugin.Permission, block: () -> T) -> T? {
+  func whenPermitted<T>(to permission: JavascriptPlugin.Permission, block: () -> T) -> T? {
     if pluginInstance.plugin.permissions.contains(permission) {
       return block()
     } else {

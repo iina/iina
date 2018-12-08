@@ -16,6 +16,7 @@ class JavascriptPlugin {
     case callProcess = "call-process"
     case showOSD = "show-osd"
     case showAlert = "show-alert"
+    case addMenuItems = "menu-items"
 
     var isDangerous: Bool {
       switch self {

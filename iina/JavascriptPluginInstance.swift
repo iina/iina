@@ -30,6 +30,7 @@ class JavascriptPluginInstance {
       "event": JavascriptAPIEvent(context: ctx, pluginInstance: self),
       "http": JavascriptAPIHttp(context: ctx, pluginInstance: self),
       "console": JavascriptAPIConsole(context: ctx, pluginInstance: self),
+      "menu": JavascriptAPIMenu(context: ctx, pluginInstance: self),
     ]
     ctx.setObject(JavascriptAPIRequire, forKeyedSubscript: "require" as NSString)
     ctx.setObject(iinaObject, forKeyedSubscript: "iina" as NSString)
@@ -39,6 +40,8 @@ class JavascriptPluginInstance {
   weak var player: PlayerCore!
   weak var plugin: JavascriptPlugin!
 
+  var menuItems: [JavascriptPluginMenuItem] = []
+
   lazy var subsystem: Logger.Subsystem = .init(rawValue: "JS:\(plugin.name)")
 
   private var currentFile: URL?
@@ -47,6 +50,13 @@ class JavascriptPluginInstance {
     self.player = player
     self.plugin = plugin
     _ = evaluateFile(plugin.entryURL)
+  }
+
+  @objc func menuItemAction(_ sender: NSMenuItem) {
+    guard let action = sender.representedObject as? JSValue else { return }
+    if action.call(withArguments: []) == nil {
+      Logger.log("Menu item is not a function", level: .error, subsystem: subsystem)
+    }
   }
 
   private func evaluateFile(_ url: URL, asModule: Bool = false) -> JSValue! {

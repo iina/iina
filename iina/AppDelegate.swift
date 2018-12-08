@@ -169,12 +169,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
     }
 
+    let _ = PlayerCore.first
+
     // if have pending open request
     if let url = pendingURL {
       parsePendingURL(url)
     }
-
-    let _ = PlayerCore.first
 
     if !commandLineStatus.isCommandLine {
       // check whether showing the welcome window after 0.1s

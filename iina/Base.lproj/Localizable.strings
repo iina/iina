@@ -316,3 +316,5 @@
 "permissions.show-alert.desc" = "This plug-in can show alerts";
 "permissions.call-process.name" = "Call Subprocess";
 "permissions.call-process.desc" = "This plug-in can call a subprocess, which can be perform dangerous operations including modifying or uploading your local files. Please make sure that the plug-in source is trustable";
+"permissions.menu-items.name" = "Add menu items";
+"permissions.menu-items.desc" = "This plug-in can add items to the Plugin menu.";

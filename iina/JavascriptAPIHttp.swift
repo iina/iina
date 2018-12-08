@@ -51,7 +51,7 @@ class JavascriptAPIHttp: JavascriptAPI, JavascriptAPIHttpExportable {
   }
 
   private func request(_ method: HTTPMethod, url: String, options: [String: Any]?) -> JSValue? {
-    return permit(to: .networkRequest) {
+    return whenPermitted(to: .networkRequest) {
       // check host
       guard hostIsValid(url) else {
         return JSValue(undefinedIn: context)

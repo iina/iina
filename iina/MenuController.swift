@@ -158,6 +158,8 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var subFont: NSMenuItem!
   @IBOutlet weak var findOnlineSub: NSMenuItem!
   @IBOutlet weak var saveDownloadedSub: NSMenuItem!
+  // Plugin
+  @IBOutlet weak var pluginMenu: NSMenu!
   // Window
   @IBOutlet weak var customTouchBar: NSMenuItem!
   @IBOutlet weak var inspector: NSMenuItem!
@@ -376,6 +378,10 @@ class MenuController: NSObject, NSMenuDelegate {
     // Separate Auto from other encoding types
     encodingMenu.insertItem(NSMenuItem.separator(), at: 1)
 
+    // Plugin
+
+    pluginMenu.delegate = self
+
     // Window
 
     if #available(macOS 10.12.2, *) {
@@ -503,6 +509,48 @@ class MenuController: NSObject, NSMenuDelegate {
     }
   }
 
+  func updatePluginMenu() {
+    pluginMenu.removeAllItems()
+    pluginMenu.addItem(withTitle: "Manage Plugins…")
+    pluginMenu.addItem(.separator())
+    for (index, plugin) in PlayerCore.active.plugins.enumerated() {
+      var counter = 0
+      var rootMenu: NSMenu! = pluginMenu
+      if plugin.menuItems.isEmpty { continue }
+      if index != 0 {
+        pluginMenu.addItem(.separator())
+      }
+      pluginMenu.addItem(withTitle: plugin.plugin.name)
+      for item in plugin.menuItems {
+        if counter == 10 {
+          Logger.log("Please avoid adding too much first-level menu items. IINA will only display the first 10 of them.",
+                     level: .warning, subsystem: plugin.subsystem)
+          let moreItem = NSMenuItem()
+          moreItem.title = "More…"
+          rootMenu = NSMenu()
+          moreItem.submenu = rootMenu
+          pluginMenu.addItem(moreItem)
+        }
+        add(menuItemDef: item, to: rootMenu, for: plugin)
+        counter += 1
+      }
+    }
+  }
+
+  @discardableResult
+  private func add(menuItemDef item: JavascriptPluginMenuItem, to menu: NSMenu, for plugin: JavascriptPluginInstance) -> NSMenuItem {
+    let menuItem = menu.addItem(withTitle: item.title,
+                                action: #selector(plugin.menuItemAction(_:)), target: plugin,
+                                obj: item.action)
+    if !item.items.isEmpty {
+      menuItem.submenu = NSMenu()
+      for submenuItem in item.items {
+        add(menuItemDef: submenuItem, to: menuItem.submenu!, for: plugin)
+      }
+    }
+    return menuItem
+  }
+
   /**
    Bind a menu with a list of available options.
 
@@ -572,36 +620,40 @@ class MenuController: NSObject, NSMenuDelegate {
   // MARK: - Menu delegate
 
   func menuWillOpen(_ menu: NSMenu) {
-    if menu == fileMenu {
+    switch menu {
+    case fileMenu:
       updateOpenMenuItems()
-    } else if menu == playlistMenu {
+    case playlistMenu:
       updatePlaylist()
-    } else if menu == chapterMenu {
+    case chapterMenu:
       updateChapterList()
-    } else if menu == playbackMenu {
+    case playbackMenu:
       updatePlaybackMenu()
-    } else if menu == videoMenu {
+    case videoMenu:
       updateVideoMenu()
-    } else if menu == videoTrackMenu {
+    case videoTrackMenu:
       updateTracks(forMenu: menu, type: .video)
-    } else if menu == flipMenu {
+    case flipMenu:
       updateFlipAndMirror()
-    } else if menu == audioMenu {
+    case audioMenu:
       updateAudioMenu()
-    } else if menu == audioTrackMenu {
+    case audioTrackMenu:
       updateTracks(forMenu: menu, type: .audio)
-    } else if menu == audioDeviceMenu {
+    case audioDeviceMenu:
       updateAudioDevice()
-    } else if menu == subMenu {
+    case subMenu:
       updateSubMenu()
-    } else if menu == subTrackMenu {
+    case subTrackMenu:
       updateTracks(forMenu: menu, type: .sub)
-    } else if menu == secondSubTrackMenu {
+    case secondSubTrackMenu:
       updateTracks(forMenu: menu, type: .secondSub)
-    } else if menu == savedVideoFiltersMenu {
+    case savedVideoFiltersMenu:
       updateSavedFiltersMenu(type: MPVProperty.vf)
-    } else if menu == savedAudioFiltersMenu {
+    case savedAudioFiltersMenu:
       updateSavedFiltersMenu(type: MPVProperty.af)
+    case pluginMenu:
+      updatePluginMenu()
+    default: break
     }
     // check conveniently bound menus
     if let checkEnableBlock = menuBindingList[menu] {

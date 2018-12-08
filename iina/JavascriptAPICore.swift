@@ -10,13 +10,18 @@ import Foundation
 import JavaScriptCore
 
 @objc protocol JavascriptAPICoreExportable: JSExport {
+  func open(_ url: String)
   func osd(_ message: String)
+  func getWindowFrame() -> JSValue
 }
 
 class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
+  @objc func open(_ url: String) {
+    self.player.openURLString(url)
+  }
 
   @objc func osd(_ message: String) {
-    permit(to: .showOSD) {
+    whenPermitted(to: .showOSD) {
       self.player.sendOSD(.custom(message))
     }
   }

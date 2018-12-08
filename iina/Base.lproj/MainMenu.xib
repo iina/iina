@@ -600,6 +600,10 @@ CA
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Plugin" id="fgL-UI-RVf">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Plugin" id="Y6q-cI-vfM"/>
+                </menuItem>
                 <menuItem title="Window" id="aUF-d1-5bR">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
@@ -741,6 +745,7 @@ CA
                 <outlet property="playlistLoop" destination="aSc-P6-fiZ" id="V5V-Wv-Pxk"/>
                 <outlet property="playlistMenu" destination="aXa-aM-Jaq" id="Nkw-YD-NAi"/>
                 <outlet property="playlistPanel" destination="0T7-Nu-SL7" id="kIo-HV-YPh"/>
+                <outlet property="pluginMenu" destination="Y6q-cI-vfM" id="FVO-Du-Prd"/>
                 <outlet property="previousChapter" destination="pqF-SZ-Ifz" id="91k-3h-xnp"/>
                 <outlet property="previousFrame" destination="oxF-BB-lBy" id="Kx8-vs-jMi"/>
                 <outlet property="previousMedia" destination="oqG-7L-NLD" id="8th-d4-X6L"/>

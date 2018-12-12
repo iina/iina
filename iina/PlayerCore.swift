@@ -886,13 +886,7 @@ class PlayerCore: NSObject {
   }
 
   func removeVideoFilter(_ filter: MPVFilter) -> Bool {
-    var result = true
-    if let label = filter.label {
-      mpv.command(.vf, args: ["del", "@" + label], checkError: false) { result = $0 >= 0 }
-    } else {
-      mpv.command(.vf, args: ["del", filter.stringFormat], checkError: false) { result = $0 >= 0 }
-    }
-    return result
+    return removeFilter(filter, for: .vf)
   }
 
   func addAudioFilter(_ filter: MPVFilter) -> Bool {
@@ -902,8 +896,20 @@ class PlayerCore: NSObject {
   }
 
   func removeAudioFilter(_ filter: MPVFilter) -> Bool {
-    var result = true
-    mpv.command(.af, args: ["del", filter.stringFormat], checkError: false)  { result = $0 >= 0 }
+    return removeFilter(filter, for: .af)
+  }
+  
+  func removeFilter(_ filter: MPVFilter, for command: MPVCommand) -> Bool {
+    var result = false
+    if let label = filter.label {
+      mpv.command(command, args: ["del", "@" + label], checkError: false) { result = $0 >= 0 }
+    } else if let index = mpv.getFilters(command.rawValue).enumerated().filter({
+      $0.element.name == filter.name &&
+        $0.element.label == filter.label &&
+        $0.element.params == filter.params
+    }).first?.offset {
+      mpv.command(command, args: ["del", "\(index)"], checkError: false) { result = $0 >= 0 }
+    }
     return result
   }
 

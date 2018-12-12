@@ -197,7 +197,7 @@ class VideoView: NSView {
   func setICCProfile(_ displayId: UInt32) {
     typealias ProfileData = (uuid: CFUUID, profileUrl: URL?)
 
-    let uuid = CGDisplayCreateUUIDFromDisplayID(displayId).takeRetainedValue()
+    guard let uuid = CGDisplayCreateUUIDFromDisplayID(displayId)?.takeRetainedValue() else { return }
     var argResult: ProfileData = (uuid, nil)
     let dataPointer = UnsafeMutablePointer(&argResult)
     

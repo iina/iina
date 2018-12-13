@@ -2800,11 +2800,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 extension MainWindowController: PIPViewControllerDelegate {
 
   func enterPIP() {
-    // Exit fullscreen if necessary
-    if fsState.isFullscreen {
-      toggleWindowFullScreen()
-    }
-
     pipStatus = .inPIP
     showUI()
 

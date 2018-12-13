@@ -131,13 +131,14 @@ class PreferenceWindowController: NSWindowController {
   @IBOutlet weak var maskView: PrefSearchResultMaskView!
   @IBOutlet weak var scrollView: NSScrollView!
   @IBOutlet weak var contentView: NSView!
-  @IBOutlet var completionPopover: NSPopover!
-  @IBOutlet weak var completionTableView: NSTableView!
   @IBOutlet weak var noResultLabel: NSTextField!
 
   private var contentViewBottomConstraint: NSLayoutConstraint?
 
   private var viewControllers: [NSViewController & PreferenceWindowEmbeddable]
+  
+  private var isSearching = false
+  private var selectedTab = -1
 
   init(viewControllers: [NSViewController & PreferenceWindowEmbeddable]) {
     self.viewControllers = viewControllers
@@ -157,8 +158,8 @@ class PreferenceWindowController: NSWindowController {
 
     tableView.delegate = self
     tableView.dataSource = self
-    completionTableView.delegate = self
-    completionTableView.dataSource = self
+    
+    noResultLabel.isHidden = true
 
     contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: contentView.superview!.bottomAnchor)
 
@@ -184,7 +185,7 @@ class PreferenceWindowController: NSWindowController {
   }
 
   override func mouseDown(with event: NSEvent) {
-    dismissCompletionList()
+    dismissCompletionList(true)
   }
 
   // MARK: Searching
@@ -221,21 +222,37 @@ class PreferenceWindowController: NSWindowController {
 
   private func completeSearchField() {
     noResultLabel.isHidden = currentCompletionResults.count != 0
-    if !completionPopover.isShown {
+    if !isSearching {
+      isSearching = true
+      selectedTab = tableView.selectedRow
       let range = searchField.currentEditor()?.selectedRange
-      completionPopover.show(relativeTo: searchField.bounds, of: searchField, preferredEdge: .maxY)
       searchField.selectText(self)
       searchField.currentEditor()?.selectedRange = range ?? NSMakeRange(0, 0)
     }
-    completionTableView.reloadData()
+    tableView.reloadData()
   }
 
-  private func dismissCompletionList() {
-    if completionPopover.isShown {
-      completionPopover.close()
+  private func dismissCompletionList(_ isCancel: Bool = false) {
+    guard isSearching else { return }
+    isSearching = false
+    noResultLabel.isHidden = true
+    tableView.reloadData()
+    if isCancel, selectedTab >= 0, selectedTab < tableView.numberOfRows {
+      tableView.selectRowIndexes(IndexSet(integer: selectedTab), byExtendingSelection: false)
     }
+    selectedTab = -1
   }
-
+    
+  @IBAction func completeSearch(_ sender: NSTableView) {
+    guard isSearching else { return }
+    dismissCompletionList()
+    guard let result = currentCompletionResults[at: sender.clickedRow],
+      let index = viewControllers.enumerated().first(where: { (_, vc) in vc.preferenceTabTitle == result.tab })?.offset else {
+        return
+      }
+    loadTab(at: index, thenFindLabelTitled: result.label ?? result.section)
+  }
+    
   // MARK: Tabs
 
   private func loadTab(at index: Int, thenFindLabelTitled title: String? = nil) {
@@ -342,15 +359,42 @@ class PreferenceWindowController: NSWindowController {
 extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   func numberOfRows(in tableView: NSTableView) -> Int {
-    if tableView == self.tableView {
+    if !isSearching {
       return viewControllers.count
     } else {
       return currentCompletionResults.count
     }
   }
 
+  func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+    let defaultSize: CGFloat = 36
+    if !isSearching {
+      return defaultSize
+    } else {
+      guard let result = currentCompletionResults[at: row] else { return defaultSize }
+      let cell = NSTextFieldCell()
+      cell.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+      cell.stringValue = result.strippedLabel ?? result.strippedSection
+      let labelHeight = cell.cellSize(forBounds: NSRect(x: 0, y: 0,
+                                                        width: tableView.frame.width - 24 - tableView.intercellSpacing.width,
+                                                        height: 250)).height
+      
+      
+      
+      let h = labelHeight + 6 + 2 + 11
+        
+      return h
+    }
+  }
+
+  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    let i = isSearching ? "PreferenceSidebarCell2" : "PreferenceSidebarCell1"
+    let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(i), owner: nil)
+    return view
+  }
+  
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    if tableView == self.tableView {
+    if !isSearching {
       return [
         "image": viewControllers[at: row]?.preferenceTabImage,
         "title": viewControllers[at: row]?.preferenceTabTitle
@@ -368,17 +412,8 @@ extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    if (notification.object as! NSTableView) == self.tableView {
+    if !isSearching {
       loadTab(at: tableView.selectedRow)
-    } else {
-      dismissCompletionList()
-      guard
-        let result = currentCompletionResults[at: completionTableView.selectedRow],
-        let index = viewControllers.enumerated().first(where: { (_, vc) in vc.preferenceTabTitle == result.tab })?.offset
-        else {
-          return
-      }
-      loadTab(at: index, thenFindLabelTitled: result.label ?? result.section)
     }
   }
 

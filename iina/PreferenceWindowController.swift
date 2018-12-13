@@ -27,6 +27,11 @@ fileprivate extension NSView {
   }
 }
 
+fileprivate extension NSUserInterfaceItemIdentifier {
+  static let sidebarItem = NSUserInterfaceItemIdentifier("SidebarItem")
+  static let searchResult = NSUserInterfaceItemIdentifier("SearchResult")
+}
+
 protocol PreferenceWindowEmbeddable where Self: NSViewController {
   var preferenceTabTitle: String { get }
   var preferenceTabImage: NSImage { get }
@@ -388,8 +393,8 @@ extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource
   }
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-    let i = isSearching ? "PreferenceSidebarCell2" : "PreferenceSidebarCell1"
-    let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(i), owner: nil)
+    let identifier: NSUserInterfaceItemIdentifier = isSearching ? .searchResult : .sidebarItem
+    let view = tableView.makeView(withIdentifier: identifier, owner: nil)
     return view
   }
   

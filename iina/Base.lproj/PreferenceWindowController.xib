@@ -69,7 +69,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="PreferenceSidebarCell1" id="Cky-oa-sEY">
+                                                        <tableCellView identifier="SidebarItem" id="Cky-oa-sEY">
                                                             <rect key="frame" x="1" y="1" width="217" height="36"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -108,7 +108,7 @@
                                                                 <outlet property="textField" destination="XDU-ud-pYc" id="NpG-es-Dgj"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="PreferenceSidebarCell2" id="t5K-Yc-aVh">
+                                                        <tableCellView identifier="SearchResult" id="t5K-Yc-aVh">
                                                             <rect key="frame" x="1" y="39" width="217" height="40"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>

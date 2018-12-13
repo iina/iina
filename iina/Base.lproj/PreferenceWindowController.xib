@@ -27,7 +27,7 @@
             <value key="minSize" type="size" width="480" height="360"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="700" height="480"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <visualEffectView blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="AO2-1e-7F6">
                         <rect key="frame" x="0.0" y="0.0" width="220" height="480"/>
@@ -113,10 +113,10 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MRE-fk-D39">
-                                                                    <rect key="frame" x="12" y="5" width="86" height="30"/>
+                                                                    <rect key="frame" x="12" y="5" width="198" height="30"/>
                                                                     <subviews>
                                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="HJd-aR-GMn">
-                                                                            <rect key="frame" x="0.0" y="13" width="86" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="13" width="198" height="17"/>
                                                                             <subviews>
                                                                                 <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kwF-Cp-hYj">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="37" height="17"/>
@@ -141,95 +141,21 @@
                                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="zs8-66-dZi"/>
                                                                             </constraints>
                                                                         </customView>
-                                                                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BMH-8h-bke">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="86" height="11"/>
-                                                                            <subviews>
-                                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="0aP-by-92v">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="41" height="11"/>
-                                                                                    <subviews>
-                                                                                        <textField horizontalHuggingPriority="751" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cEc-FN-OZk">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="28" height="11"/>
-                                                                                            <textFieldCell key="cell" controlSize="mini" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Label" drawsBackground="YES" id="b6c-Ze-P6Z">
-                                                                                                <font key="font" metaFont="miniSystem"/>
-                                                                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
-                                                                                            </textFieldCell>
-                                                                                            <connections>
-                                                                                                <binding destination="t5K-Yc-aVh" name="value" keyPath="objectValue.tab" id="1WU-jF-X68"/>
-                                                                                            </connections>
-                                                                                        </textField>
-                                                                                        <textField horizontalHuggingPriority="751" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="naI-7m-rEa">
-                                                                                            <rect key="frame" x="30" y="0.0" width="11" height="11"/>
-                                                                                            <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="»" drawsBackground="YES" id="PHK-Kc-rLF">
-                                                                                                <font key="font" metaFont="miniSystem"/>
-                                                                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
-                                                                                            </textFieldCell>
-                                                                                        </textField>
-                                                                                    </subviews>
-                                                                                    <constraints>
-                                                                                        <constraint firstAttribute="trailing" secondItem="naI-7m-rEa" secondAttribute="trailing" id="97j-Ks-sLR"/>
-                                                                                        <constraint firstItem="naI-7m-rEa" firstAttribute="baseline" secondItem="cEc-FN-OZk" secondAttribute="baseline" id="A8j-QF-V7e"/>
-                                                                                        <constraint firstItem="cEc-FN-OZk" firstAttribute="leading" secondItem="0aP-by-92v" secondAttribute="leading" id="Zkp-Dp-OVn"/>
-                                                                                        <constraint firstItem="cEc-FN-OZk" firstAttribute="centerY" secondItem="0aP-by-92v" secondAttribute="centerY" id="lCY-ux-eov"/>
-                                                                                        <constraint firstItem="naI-7m-rEa" firstAttribute="leading" secondItem="cEc-FN-OZk" secondAttribute="trailing" constant="2" id="o1R-Xu-gQI"/>
-                                                                                    </constraints>
-                                                                                </customView>
-                                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="MBi-Jl-IIF">
-                                                                                    <rect key="frame" x="45" y="0.0" width="41" height="11"/>
-                                                                                    <subviews>
-                                                                                        <textField horizontalHuggingPriority="751" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D5Z-aP-9gn">
-                                                                                            <rect key="frame" x="30" y="0.0" width="11" height="11"/>
-                                                                                            <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="»" drawsBackground="YES" id="qUF-GF-Ydu">
-                                                                                                <font key="font" metaFont="miniSystem"/>
-                                                                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
-                                                                                            </textFieldCell>
-                                                                                        </textField>
-                                                                                        <textField horizontalHuggingPriority="751" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dhK-Up-WDm">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="28" height="11"/>
-                                                                                            <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" drawsBackground="YES" id="nbt-Dc-hYn">
-                                                                                                <font key="font" metaFont="miniSystem"/>
-                                                                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
-                                                                                            </textFieldCell>
-                                                                                            <connections>
-                                                                                                <binding destination="t5K-Yc-aVh" name="value" keyPath="objectValue.section" id="cND-LF-gsi"/>
-                                                                                            </connections>
-                                                                                        </textField>
-                                                                                    </subviews>
-                                                                                    <constraints>
-                                                                                        <constraint firstItem="dhK-Up-WDm" firstAttribute="top" secondItem="MBi-Jl-IIF" secondAttribute="top" id="2CL-9J-1bf"/>
-                                                                                        <constraint firstItem="dhK-Up-WDm" firstAttribute="leading" secondItem="MBi-Jl-IIF" secondAttribute="leading" id="dL2-a3-NHK"/>
-                                                                                        <constraint firstItem="dhK-Up-WDm" firstAttribute="baseline" secondItem="D5Z-aP-9gn" secondAttribute="baseline" id="dbG-yO-pWc"/>
-                                                                                        <constraint firstItem="D5Z-aP-9gn" firstAttribute="leading" secondItem="dhK-Up-WDm" secondAttribute="trailing" constant="2" id="sWx-zT-Lf5"/>
-                                                                                        <constraint firstAttribute="trailing" secondItem="D5Z-aP-9gn" secondAttribute="trailing" id="wWU-Rc-sja"/>
-                                                                                    </constraints>
-                                                                                    <connections>
-                                                                                        <binding destination="t5K-Yc-aVh" name="hidden" keyPath="objectValue.noSection" id="Zhz-no-urd"/>
-                                                                                    </connections>
-                                                                                </customView>
-                                                                            </subviews>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="bottom" secondItem="0aP-by-92v" secondAttribute="bottom" id="180-nd-1wi"/>
-                                                                                <constraint firstItem="0aP-by-92v" firstAttribute="top" secondItem="BMH-8h-bke" secondAttribute="top" id="Js2-GA-dG8"/>
-                                                                                <constraint firstAttribute="height" constant="11" id="jel-iR-RbY"/>
-                                                                            </constraints>
-                                                                            <visibilityPriorities>
-                                                                                <integer value="1000"/>
-                                                                                <integer value="1000"/>
-                                                                            </visibilityPriorities>
-                                                                            <customSpacing>
-                                                                                <real value="3.4028234663852886e+38"/>
-                                                                                <real value="3.4028234663852886e+38"/>
-                                                                            </customSpacing>
-                                                                        </stackView>
+                                                                        <textField horizontalHuggingPriority="751" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cEc-FN-OZk">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="28" height="11"/>
+                                                                            <textFieldCell key="cell" controlSize="mini" truncatesLastVisibleLine="YES" sendsActionOnEndEditing="YES" title="Label" drawsBackground="YES" id="b6c-Ze-P6Z">
+                                                                                <font key="font" metaFont="system" size="9"/>
+                                                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
+                                                                            </textFieldCell>
+                                                                            <connections>
+                                                                                <binding destination="t5K-Yc-aVh" name="value" keyPath="objectValue.navigation" id="rgK-20-cHn"/>
+                                                                            </connections>
+                                                                        </textField>
                                                                     </subviews>
                                                                     <constraints>
                                                                         <constraint firstItem="HJd-aR-GMn" firstAttribute="leading" secondItem="MRE-fk-D39" secondAttribute="leading" id="R8Q-VU-wpf"/>
-                                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BMH-8h-bke" secondAttribute="trailing" id="RHg-DD-1RA"/>
                                                                         <constraint firstAttribute="trailing" secondItem="HJd-aR-GMn" secondAttribute="trailing" id="apZ-M3-J3K"/>
-                                                                        <constraint firstItem="BMH-8h-bke" firstAttribute="leading" secondItem="MRE-fk-D39" secondAttribute="leading" id="yXX-MZ-Sm1"/>
                                                                     </constraints>
                                                                     <visibilityPriorities>
                                                                         <integer value="1000"/>

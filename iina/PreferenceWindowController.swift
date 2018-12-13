@@ -56,7 +56,7 @@ class PreferenceWindowController: NSWindowController {
       }
     }
 
-    typealias ReturnValue = (tab: String, strippedSection: String, strippedLabel: String?, section: String, label: String?)
+    typealias ReturnValue = (tab: String, strippedSection: String, strippedLabel: String?, section: String, label: String?, navigation: String)
 
     var s: String
     let returnValue: ReturnValue
@@ -68,7 +68,7 @@ class PreferenceWindowController: NSWindowController {
 
     init(tab: String, section: String, label: String?) {
       s = [tab, section, label].compactMap { $0 }.joined(separator: " ").lowercased()
-      returnValue = (tab, section.removedLastSemicolon(), label?.removedLastSemicolon(), section, label)
+      returnValue = (tab, section.removedLastSemicolon(), label?.removedLastSemicolon(), section, label, tab + "  »  " + section.removedLastSemicolon() + "  »  ")
 
       root = Node(" ")
       lastPosition = root
@@ -378,17 +378,19 @@ extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource
     } else {
       guard let result = currentCompletionResults[at: row] else { return defaultSize }
       let cell = NSTextFieldCell()
-      cell.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+      let cellRect = NSRect(x: 0, y: 0,
+                            width: tableView.frame.width - 24 - tableView.intercellSpacing.width,
+                            height: 250)
+      
+      cell.stringValue = result.navigation
+      cell.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize - 2)
+      let navigationHeight = cell.cellSize(forBounds: cellRect).height
+      
       cell.stringValue = result.strippedLabel ?? result.strippedSection
-      let labelHeight = cell.cellSize(forBounds: NSRect(x: 0, y: 0,
-                                                        width: tableView.frame.width - 24 - tableView.intercellSpacing.width,
-                                                        height: 250)).height
+      cell.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+      let labelHeight = cell.cellSize(forBounds: cellRect).height
       
-      
-      
-      let h = labelHeight + 6 + 2 + 11
-        
-      return h
+      return labelHeight + 10 + 2 + navigationHeight
     }
   }
 
@@ -408,9 +410,8 @@ extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource
       guard let result = currentCompletionResults[at: row] else { return nil }
       let noLabel = result.strippedLabel == nil
       return [
-        "tab": result.tab,
         "noSection": noLabel,
-        "section": result.strippedSection,
+        "navigation": result.navigation,
         "label": result.strippedLabel ?? result.strippedSection,
       ]
     }

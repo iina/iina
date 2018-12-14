@@ -945,7 +945,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let newWidth = window!.frame.width - currentLocation.x - 2
       sideBarWidthConstraint.constant = newWidth.clamped(to: PlaylistMinWidth...PlaylistMaxWidth)
     } else if !fsState.isFullscreen {
-      if let p1 = mousePosRelatedToWindow {
+      if let p1 = mousePosRelatedToWindow, !isDragging {
         let p2 = currentLocation
         let distance = sqrt(pow((p1.x - p2.x), 2) + pow((p1.y - p2.y), 2))
         isDragging = distance > 0.5

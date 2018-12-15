@@ -728,9 +728,9 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
   @IBOutlet weak var playlistTableView: NSTableView!
   @IBOutlet weak var heightConstraint: NSLayoutConstraint!
 
-  lazy var playerCore: PlayerCore = {
-    let windowController = self.playlistTableView.window!.windowController
-    return (windowController as? MainWindowController)?.player ?? (windowController as! MiniPlayerWindowController).player
+  lazy var playerCore: PlayerCore? = {
+    let windowController = self.playlistTableView?.window?.windowController
+    return (windowController as? MainWindowController)?.player ?? (windowController as? MiniPlayerWindowController)?.player
   }()
 
   var filePath: String = ""
@@ -740,18 +740,18 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    guard let matchedSubs = playerCore.info.matchedSubs[filePath] else { return nil }
+    guard let matchedSubs = playerCore?.info.matchedSubs[filePath] else { return nil }
     return matchedSubs[row].lastPathComponent
   }
 
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return playerCore.info.matchedSubs[filePath]?.count ?? 0
+    return playerCore?.info.matchedSubs[filePath]?.count ?? 0
   }
 
   @IBAction func wrongSubBtnAction(_ sender: AnyObject) {
-    playerCore.info.matchedSubs[filePath]?.removeAll()
+    playerCore?.info.matchedSubs[filePath]?.removeAll()
     tableView.reloadData()
-    if let row = playerCore.info.playlist.index(where: { $0.filename == filePath }) {
+    if let row = playerCore?.info.playlist.index(where: { $0.filename == filePath }) {
       playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
     }
   }

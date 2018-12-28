@@ -187,9 +187,27 @@ class VideoView: NSView {
     }
 
     CVDisplayLinkSetCurrentCGDisplay(link, displayId)
-    if let refreshRate = CGDisplayCopyDisplayMode(displayId)?.refreshRate {
-      player.mpv.setDouble(MPVOption.Video.displayFps, refreshRate)
+    let actualData = CVDisplayLinkGetActualOutputVideoRefreshPeriod(link)
+    let nominalData = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(link)
+    var actualFps: Double = 0;
+
+    if (nominalData.flags & Int32(CVTimeFlags.isIndefinite.rawValue)) < 1 {
+      let nominalFps = Double(nominalData.timeScale) / Double(nominalData.timeValue)
+      
+      if actualData > 0 {
+        actualFps = 1/actualData
+      }
+      
+      if abs(actualFps - nominalFps) > 1 {
+        Logger.log("Falling back to nominal display refresh rate: \(nominalFps) from \(actualFps)")
+        actualFps = nominalFps;
+      }
+    } else {
+      Logger.log("Falling back to standard display refresh rate: 60 from \(actualFps)")
+      actualFps = 60;
     }
+    player.mpv.setDouble(MPVOption.Video.displayFps, actualFps)
+    
     setICCProfile(displayId)
     currentDisplay = displayId
   }

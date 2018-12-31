@@ -124,7 +124,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       item.view = label
       item.customizationLabel = NSLocalizedString("touchbar.time", comment: "Time Position")
       return item
-    
+
     case .remainingTime:
       let item = NSCustomTouchBarItem(identifier: identifier)
       let label = DurationDisplayTextField(labelWithString: "00:00")
@@ -147,7 +147,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
          .prev:
       guard let data = touchBarItemBinding[identifier] else { return nil }
       return buttonTouchBarItem(withIdentifier: identifier, imageName: data.0, tag: data.1, customLabel: data.2, action: #selector(self.touchBarSkipAction(_:)))
-      
+
     case .exitFullScr:
       let item = NSCustomTouchBarItem(identifier: identifier)
       item.view = NSButton(image: NSImage(named: NSImage.touchBarExitFullScreenTemplateName)!, target: self, action: #selector(self.touchBarExitFullScrAction(_:)))
@@ -193,7 +193,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
     let percentage = 100 * sender.doubleValue / sender.maxValue
     player.seek(percent: percentage, forceExact: true)
   }
-  
+
   @objc func touchBarExitFullScrAction(_ sender: NSButton) {
     player.mainWindow.toggleWindowFullScreen()
   }
@@ -224,7 +224,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       }
     }
   }
-  
+
   func toggleTouchBarEsc(enteringFullScr: Bool) {
     if enteringFullScr, PlayerCore.keyBindings["ESC"]?.readableAction == "set fullscreen no" {
       touchBar.escapeKeyReplacementItemIdentifier = .exitFullScr

@@ -42,7 +42,7 @@ class ViewLayer: CAOpenGLLayer {
     autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
 
   }
-  
+
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -112,12 +112,12 @@ class ViewLayer: CAOpenGLLayer {
     needsMPVRender = false
 
     videoView.uninitLock.lock()
-    
+
     guard !videoView.isUninited else {
       videoView.uninitLock.unlock()
       return
     }
-    
+
     CGLLockContext(ctx)
     CGLSetCurrentContext(ctx)
 

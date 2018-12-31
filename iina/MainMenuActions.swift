@@ -17,7 +17,7 @@ class MainMenuActionHandler: NSResponder {
     self.player = playerCore
     super.init()
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -27,7 +27,7 @@ class MainMenuActionHandler: NSResponder {
     inspector.showWindow(self)
     inspector.updateInfo()
   }
-  
+
   @objc func menuSavePlaylist(_ sender: NSMenuItem) {
     Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"]) { (url) in
       if url.isFileURL {
@@ -35,7 +35,7 @@ class MainMenuActionHandler: NSResponder {
         for item in self.player.info.playlist {
           playlist.append((item.filename + "\n"))
         }
-        
+
         do {
           try playlist.write(to: url, atomically: true, encoding: String.Encoding.utf8)
         } catch let error as NSError {
@@ -170,11 +170,11 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuNextChapter(_ sender: NSMenuItem) {
-    player.mpv.command(.add, args: ["chapter", "1"])
+    player.mpv.command(.add, args: ["chapter", "1"], checkError: false)
   }
 
   @objc func menuPreviousChapter(_ sender: NSMenuItem) {
-    player.mpv.command(.add, args: ["chapter", "-1"])
+    player.mpv.command(.add, args: ["chapter", "-1"], checkError: false)
   }
 }
 

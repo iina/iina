@@ -77,13 +77,13 @@ extension NSSize {
     }
   }
 
-  /** 
+  /**
    Given another size S, returns a size that:
 
    - maintains the same aspect ratio;
    - has same height or/and width as S;
    - always bigger than S.
-   
+
    - parameter toSize: The given size S.
 
    ```
@@ -109,7 +109,7 @@ extension NSSize {
    - maintains the same aspect ratio;
    - has same height or/and width as S;
    - always smaller than S.
-   
+
    - parameter toSize: The given size S.
 
    ```
@@ -480,7 +480,7 @@ extension NSImage {
     image.unlockFocus()
     return image
   }
-  
+
   static func maskImage(cornerRadius: CGFloat) -> NSImage {
     let image = NSImage(size: NSSize(width: cornerRadius * 2, height: cornerRadius * 2), flipped: false) { rectangle in
       let bezierPath = NSBezierPath(roundedRect: rectangle, xRadius: cornerRadius, yRadius: cornerRadius)

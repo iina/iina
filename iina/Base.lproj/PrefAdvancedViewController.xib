@@ -35,6 +35,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
+                        <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="tPN-n7-7Wr"/>
                         <binding destination="nyg-fH-Pug" name="value" keyPath="values.enableLogging" id="AvT-IQ-GhJ"/>
                     </connections>
                 </button>
@@ -48,6 +49,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
+                        <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="kEe-GU-chP"/>
                         <binding destination="nyg-fH-Pug" name="value" keyPath="values.useMpvOsd" id="lOz-BL-YHr"/>
                     </connections>
                 </button>
@@ -59,6 +61,7 @@
                     </buttonCell>
                     <connections>
                         <action selector="revealLogDir:" target="-2" id="VoU-0Y-IN8"/>
+                        <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="CH7-kE-1sm"/>
                     </connections>
                 </button>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bA7-7o-Vd0">
@@ -101,6 +104,9 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                     </tableColumn>
                                 </tableColumns>
+                                <connections>
+                                    <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="YzD-U7-qHq"/>
+                                </connections>
                             </tableView>
                         </subviews>
                     </clipView>
@@ -146,6 +152,7 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="addOptionBtnAction:" target="-2" id="NIn-fH-EeK"/>
+                                    <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="xWE-hY-lvV"/>
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="EU2-5a-Lpj">
@@ -159,6 +166,7 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="removeOptionBtnAction:" target="-2" id="5ff-xC-dEc"/>
+                                    <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="LaY-r1-ff3"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -184,6 +192,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
+                        <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="Tkk-E5-xQi"/>
                         <binding destination="nyg-fH-Pug" name="value" keyPath="values.useUserDefinedConfDir" id="RwC-LQ-wlP"/>
                     </connections>
                 </button>
@@ -195,6 +204,14 @@
                     </buttonCell>
                     <connections>
                         <action selector="chooseDirBtnAction:" target="-2" id="wqF-DD-4eM"/>
+                        <binding destination="nyg-fH-Pug" name="enabled2" keyPath="values.enableAdvancedSettings" previousBinding="TqF-Pi-es4" id="dKC-ka-bQk">
+                            <dictionary key="options">
+                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                <integer key="NSNullPlaceholder" value="-1"/>
+                            </dictionary>
+                        </binding>
                         <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.useUserDefinedConfDir" id="TqF-Pi-es4"/>
                     </connections>
                 </button>
@@ -207,6 +224,14 @@
                     </textFieldCell>
                     <accessibility description="~/.config/mpv/"/>
                     <connections>
+                        <binding destination="nyg-fH-Pug" name="enabled2" keyPath="values.enableAdvancedSettings" previousBinding="aM7-j1-TIV" id="NQW-AQ-cOO">
+                            <dictionary key="options">
+                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                <integer key="NSNullPlaceholder" value="-1"/>
+                            </dictionary>
+                        </binding>
                         <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.useUserDefinedConfDir" id="aM7-j1-TIV"/>
                         <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="tsm-NE-EV2"/>
                     </connections>
@@ -264,7 +289,6 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="updateControlStatus:" target="-2" id="9Ld-Pn-CIQ"/>
                         <binding destination="nyg-fH-Pug" name="value" keyPath="values.enableAdvancedSettings" id="JrO-M2-KNJ"/>
                     </connections>
                 </button>

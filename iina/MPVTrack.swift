@@ -86,14 +86,14 @@ class MPVTrack: NSObject {
       let title = self.title ?? ""
       // lang
       let language: String
-      if let lang = self.lang, lang != "und", let rawLang = ISO639_2Helper.dictionary[lang] {
+      if let lang = self.lang, lang != "und", let rawLang = ISO639Helper.dictionary[lang] {
         language = "[\(rawLang)]"
       } else {
         language = ""
       }
       // info
       var components: [String] = []
-      if let ds = self.decoderDesc, let shortDs = ds.components(separatedBy: "(").at(0) {
+      if let ds = self.decoderDesc, let shortDs = ds.components(separatedBy: "(")[at: 0] {
         components.append("\(shortDs.replacingOccurrences(of: " ", with: ""))")
       }
       switch self.type {

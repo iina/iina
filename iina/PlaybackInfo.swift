@@ -10,6 +10,12 @@ import Foundation
 
 class PlaybackInfo {
 
+  unowned let player: PlayerCore
+
+  init(_ pc: PlayerCore) {
+    player = pc
+  }
+
   var isIdle: Bool = true {
     didSet {
       PlayerCore.checkStatusForSleep()
@@ -38,20 +44,29 @@ class PlaybackInfo {
 
   var rotation: Int = 0
 
-  var videoPosition: VideoTime? {
-    didSet {
-      guard let duration = videoDuration else { return }
-      if videoPosition!.second < 0 { videoPosition!.second = 0 }
-      if videoPosition!.second > duration.second { videoPosition!.second = duration.second }
-    }
-  }
-
+  var videoPosition: VideoTime?
   var videoDuration: VideoTime?
+
+  var cachedWindowScale: Double = 1.0
+
+  func constrainVideoPosition() {
+    guard let duration = videoDuration else { return }
+    if videoPosition!.second < 0 { videoPosition!.second = 0 }
+    if videoPosition!.second > duration.second { videoPosition!.second = duration.second }
+  }
 
   var isSeeking: Bool = false
   var isPaused: Bool = false {
     didSet {
       PlayerCore.checkStatusForSleep()
+      if player == PlayerCore.lastActive {
+        if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
+          NowPlayingInfoManager.updateState(isPaused ? .paused : .playing)
+        }
+        if #available(macOS 10.12, *), player.mainWindow.pipStatus == .inPIP {
+          player.mainWindow.pip.playing = !isPaused
+        }
+      }
     }
   }
 
@@ -67,8 +82,8 @@ class PlaybackInfo {
   var cropFilter: MPVFilter?
   var flipFilter: MPVFilter?
   var mirrorFilter: MPVFilter?
-  var audioEqFilter: MPVFilter?
-  var delogoFiter: MPVFilter?
+  var audioEqFilters: [MPVFilter?]?
+  var delogoFilter: MPVFilter?
 
   var deinterlace: Bool = false
 
@@ -83,7 +98,7 @@ class PlaybackInfo {
 
   var isMuted: Bool = false
 
-  var playSpeed: Double = 0
+  var playSpeed: Double = 1
 
   var audioDelay: Double = 0
   var subDelay: Double = 0
@@ -158,6 +173,7 @@ class PlaybackInfo {
   var matchedSubs: [String: [URL]] = [:]
   var currentSubsInfo: [FileInfo] = []
   var currentVideosInfo: [FileInfo] = []
+  var cachedVideoDurationAndProgress: [String: (duration: Double?, progress: Double?)] = [:]
 
   var thumbnailsReady = false
   var thumbnailsProgress: Double = 0

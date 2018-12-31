@@ -36,7 +36,7 @@ final class ShooterSubtitle: OnlineSubtitle {
       }
       let fileName = "[\(self.index)]\(response.fileName ?? "")"
       if let url = data.saveToFolder(Utility.tempDirURL, filename: fileName) {
-        callback(.ok(url))
+        callback(.ok([url]))
       }
     }
   }
@@ -81,9 +81,9 @@ class ShooterSupport {
   }
 
   func hash(_ url: URL) -> Promise<FileInfo> {
-    return Promise { fulfill, reject in
+    return Promise { resolver in
       guard let file = try? FileHandle(forReadingFrom: url) else {
-        reject(ShooterError.cannotReadFile)
+        resolver.reject(ShooterError.cannotReadFile)
         return
       }
 
@@ -91,7 +91,7 @@ class ShooterSupport {
       let fileSize: UInt64 = file.offsetInFile
 
       guard fileSize >= 12288 else {
-        reject(ShooterError.fileTooSmall)
+        resolver.reject(ShooterError.fileTooSmall)
         return
       }
 
@@ -109,19 +109,19 @@ class ShooterSupport {
 
       file.closeFile()
 
-      fulfill(FileInfo(hashValue: hash, path: url.path))
+      resolver.fulfill(FileInfo(hashValue: hash, path: url.path))
     }
   }
 
   func request(_ info: FileInfo) -> Promise<[ShooterSubtitle]> {
-    return Promise { fulfill, reject in
+    return Promise { resolver in
       Just.post(apiPath, params: info.dictionary, timeout: 10) { response in
         guard response.ok else {
-          reject(ShooterError.networkError)
+          resolver.reject(ShooterError.networkError)
           return
         }
         guard let json = response.json as? ResponseData else {
-          fulfill([])
+          resolver.fulfill([])
           return
         }
 
@@ -139,7 +139,7 @@ class ShooterSupport {
           subtitles.append(ShooterSubtitle(index: index, desc: desc, delay: delay, files: files))
           index += 1
         }
-        fulfill(subtitles)
+        resolver.fulfill(subtitles)
       }
     }
   }

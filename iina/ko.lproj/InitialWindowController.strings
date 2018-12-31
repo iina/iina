@@ -1,6 +1,11 @@
+/* Class = "NSTextFieldCell"; title = "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://lhc70000.github.io/iina/\">official website</a>."; ObjectID = "3aN-Hg-GkT"; */
+"3aN-Hg-GkT.title" = "환경 설정 -> 일반탭에서 「베타 업데이트 받음」 선택을 해제한 다음, <a href=\"https://lhc70000.github.io/iina/\">공식 웹사이트</a>에서 안정 버전을 설치하십시오.";
 
-/* Class = "NSButtonCell"; title = "Show this window at launch"; ObjectID = "6Yl-OE-6nZ"; */
-"6Yl-OE-6nZ.title" = "시작할 때 이 윈도우 보기";
+/* Class = "NSTextFieldCell"; title = "Report to us via <a href=\"mailto:developers@iina.io\">email</a> or <a href=\"https://github.com/lhc70000/iina/issues\">GitHub issue</a>."; ObjectID = "BIz-NQ-0qD"; */
+"BIz-NQ-0qD.title" = "<a href=\"mailto:developers@iina.io\">전자우편</a> 또는 <a href=\"https://github.com/lhc70000/iina/issues\">GitHub issue</a>를 통해 오류를 알려주십시오.";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "ejb-iU-Lro"; */
+"ejb-iU-Lro.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Open URL…"; ObjectID = "FKG-Tz-TCV"; */
 "FKG-Tz-TCV.title" = "URL 열기…";
@@ -8,14 +13,20 @@
 /* Class = "NSTextFieldCell"; title = "⌘O"; ObjectID = "FKk-kb-jEw"; */
 "FKk-kb-jEw.title" = "⌘O";
 
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "VLQ-Oo-gK9"; */
-"VLQ-Oo-gK9.title" = "Table View Cell";
+/* Class = "NSTextFieldCell"; title = "BETA"; ObjectID = "g2g-dy-qBH"; */
+"g2g-dy-qBH.title" = "베타";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "ejb-iU-Lro"; */
-"ejb-iU-Lro.title" = "Label";
+/* Class = "NSTextFieldCell"; title = "You are using a beta version of IINA"; ObjectID = "H7D-2H-wQn"; */
+"H7D-2H-wQn.title" = "베타 버전을 사용하고 있습니다";
+
+/* Class = "NSTextFieldCell"; title = "Found a bug?"; ObjectID = "I6R-Jl-2Jk"; */
+"I6R-Jl-2Jk.title" = "오류를 찾으셨습니까？";
 
 /* Class = "NSTextFieldCell"; title = "⇧⌘O"; ObjectID = "kBV-5X-8Bp"; */
 "kBV-5X-8Bp.title" = "⇧⌘O";
+
+/* Class = "NSTextFieldCell"; title = "Resume"; ObjectID = "KWZ-BM-GBN"; */
+"KWZ-BM-GBN.title" = "이어보기";
 
 /* Class = "NSTextFieldCell"; title = "IINA"; ObjectID = "n70-xD-8He"; */
 "n70-xD-8He.title" = "IINA";
@@ -23,5 +34,18 @@
 /* Class = "NSTextFieldCell"; title = "Open…"; ObjectID = "qsU-lZ-WQq"; */
 "qsU-lZ-WQq.title" = "열기…";
 
+/* Class = "NSTextFieldCell"; title = "Want to rollback?"; ObjectID = "s3U-4u-gYp"; */
+"s3U-4u-gYp.title" = "안정 버전을 사용하시겠습니까?";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "tzb-ey-DZ9"; */
+"tzb-ey-DZ9.title" = "Label";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "UfC-Vv-Izn"; */
+"UfC-Vv-Izn.title" = "Label";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "VLQ-Oo-gK9"; */
+"VLQ-Oo-gK9.title" = "Table View Cell";
+
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "zVA-nb-1Rx"; */
 "zVA-nb-1Rx.title" = "Text Cell";
+

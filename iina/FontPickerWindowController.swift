@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
+class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate, NSControlTextEditingDelegate {
 
   struct FontInfo {
     var name: String
@@ -91,10 +91,15 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     }
   }
 
-  override func keyUp(with event: NSEvent) {
+  // - MARK: NSTextField delegate
+
+  func controlTextDidChange(_ obj: Notification) {
+    familyTableView.deselectAll(searchField)
     let str = searchField.stringValue
     if str.isEmpty {
       isSearching = false
+      familyTableView.reloadData()
+      faceTableView.reloadData()
     } else {
       isSearching = true
       filteredFontNames = fontNames.filter { $0.localizedName.lowercased() .contains(str.lowercased()) }
@@ -115,6 +120,10 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
       // remove the listener
       finishedPicking = nil
     }
+    self.close()
+  }
+
+  @IBAction func cancelBtnPressed(_ sender: AnyObject) {
     self.close()
   }
 

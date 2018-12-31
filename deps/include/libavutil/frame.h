@@ -25,6 +25,7 @@
 #ifndef AVUTIL_FRAME_H
 #define AVUTIL_FRAME_H
 
+#include <stddef.h>
 #include <stdint.h>
 
 #include "avutil.h"
@@ -127,6 +128,44 @@ enum AVFrameSideDataType {
      * libavutil/spherical.h.
      */
     AV_FRAME_DATA_SPHERICAL,
+
+    /**
+     * Content light level (based on CTA-861.3). This payload contains data in
+     * the form of the AVContentLightMetadata struct.
+     */
+    AV_FRAME_DATA_CONTENT_LIGHT_LEVEL,
+
+    /**
+     * The data contains an ICC profile as an opaque octet buffer following the
+     * format described by ISO 15076-1 with an optional name defined in the
+     * metadata key entry "name".
+     */
+    AV_FRAME_DATA_ICC_PROFILE,
+
+#if FF_API_FRAME_QP
+    /**
+     * Implementation-specific description of the format of AV_FRAME_QP_TABLE_DATA.
+     * The contents of this side data are undocumented and internal; use
+     * av_frame_set_qp_table() and av_frame_get_qp_table() to access this in a
+     * meaningful way instead.
+     */
+    AV_FRAME_DATA_QP_TABLE_PROPERTIES,
+
+    /**
+     * Raw QP table data. Its format is described by
+     * AV_FRAME_DATA_QP_TABLE_PROPERTIES. Use av_frame_set_qp_table() and
+     * av_frame_get_qp_table() to access this instead.
+     */
+    AV_FRAME_DATA_QP_TABLE_DATA,
+#endif
+
+    /**
+     * Timecode which conforms to SMPTE ST 12-1. The data is an array of 4 uint32_t
+     * where the first uint32_t describes how many (1-3) of the other timecodes are used.
+     * The timecode format is described in the av_timecode_get_smpte_from_framenum()
+     * function in libavutil/timecode.c.
+     */
+    AV_FRAME_DATA_S12M_TIMECODE,
 };
 
 enum AVActiveFormatDescription {
@@ -234,9 +273,18 @@ typedef struct AVFrame {
     uint8_t **extended_data;
 
     /**
-     * width and height of the video frame
+     * @name Video dimensions
+     * Video frames only. The coded dimensions (in pixels) of the video frame,
+     * i.e. the size of the rectangle that contains some well-defined values.
+     *
+     * @note The part of the frame intended for display/presentation is further
+     * restricted by the @ref cropping "Cropping rectangle".
+     * @{
      */
     int width, height;
+    /**
+     * @}
+     */
 
     /**
      * number of audio samples (per channel) described by this frame
@@ -506,6 +554,7 @@ typedef struct AVFrame {
     attribute_deprecated
     int qscale_type;
 
+    attribute_deprecated
     AVBufferRef *qp_table_buf;
 #endif
     /**
@@ -524,39 +573,93 @@ typedef struct AVFrame {
      * purpose.
      */
     AVBufferRef *opaque_ref;
+
+    /**
+     * @anchor cropping
+     * @name Cropping
+     * Video frames only. The number of pixels to discard from the the
+     * top/bottom/left/right border of the frame to obtain the sub-rectangle of
+     * the frame intended for presentation.
+     * @{
+     */
+    size_t crop_top;
+    size_t crop_bottom;
+    size_t crop_left;
+    size_t crop_right;
+    /**
+     * @}
+     */
+
+    /**
+     * AVBufferRef for internal use by a single libav* library.
+     * Must not be used to transfer data between libraries.
+     * Has to be NULL when ownership of the frame leaves the respective library.
+     *
+     * Code outside the FFmpeg libs should never check or change the contents of the buffer ref.
+     *
+     * FFmpeg calls av_buffer_unref() on it when the frame is unreferenced.
+     * av_frame_copy_props() calls create a new reference with av_buffer_ref()
+     * for the target frame's private_ref field.
+     */
+    AVBufferRef *private_ref;
 } AVFrame;
 
+#if FF_API_FRAME_GET_SET
 /**
  * Accessors for some AVFrame fields. These used to be provided for ABI
  * compatibility, and do not need to be used anymore.
  */
+attribute_deprecated
 int64_t av_frame_get_best_effort_timestamp(const AVFrame *frame);
+attribute_deprecated
 void    av_frame_set_best_effort_timestamp(AVFrame *frame, int64_t val);
+attribute_deprecated
 int64_t av_frame_get_pkt_duration         (const AVFrame *frame);
+attribute_deprecated
 void    av_frame_set_pkt_duration         (AVFrame *frame, int64_t val);
+attribute_deprecated
 int64_t av_frame_get_pkt_pos              (const AVFrame *frame);
+attribute_deprecated
 void    av_frame_set_pkt_pos              (AVFrame *frame, int64_t val);
+attribute_deprecated
 int64_t av_frame_get_channel_layout       (const AVFrame *frame);
+attribute_deprecated
 void    av_frame_set_channel_layout       (AVFrame *frame, int64_t val);
+attribute_deprecated
 int     av_frame_get_channels             (const AVFrame *frame);
+attribute_deprecated
 void    av_frame_set_channels             (AVFrame *frame, int     val);
+attribute_deprecated
 int     av_frame_get_sample_rate          (const AVFrame *frame);
+attribute_deprecated
 void    av_frame_set_sample_rate          (AVFrame *frame, int     val);
+attribute_deprecated
 AVDictionary *av_frame_get_metadata       (const AVFrame *frame);
+attribute_deprecated
 void          av_frame_set_metadata       (AVFrame *frame, AVDictionary *val);
+attribute_deprecated
 int     av_frame_get_decode_error_flags   (const AVFrame *frame);
+attribute_deprecated
 void    av_frame_set_decode_error_flags   (AVFrame *frame, int     val);
+attribute_deprecated
 int     av_frame_get_pkt_size(const AVFrame *frame);
+attribute_deprecated
 void    av_frame_set_pkt_size(AVFrame *frame, int val);
-AVDictionary **avpriv_frame_get_metadatap(AVFrame *frame);
 #if FF_API_FRAME_QP
+attribute_deprecated
 int8_t *av_frame_get_qp_table(AVFrame *f, int *stride, int *type);
+attribute_deprecated
 int av_frame_set_qp_table(AVFrame *f, AVBufferRef *buf, int stride, int type);
 #endif
+attribute_deprecated
 enum AVColorSpace av_frame_get_colorspace(const AVFrame *frame);
+attribute_deprecated
 void    av_frame_set_colorspace(AVFrame *frame, enum AVColorSpace val);
+attribute_deprecated
 enum AVColorRange av_frame_get_color_range(const AVFrame *frame);
+attribute_deprecated
 void    av_frame_set_color_range(AVFrame *frame, enum AVColorRange val);
+#endif
 
 /**
  * Get the name of a colorspace.
@@ -642,7 +745,9 @@ void av_frame_move_ref(AVFrame *dst, AVFrame *src);
  *           cases.
  *
  * @param frame frame in which to store the new buffers.
- * @param align required buffer size alignment
+ * @param align Required buffer size alignment. If equal to 0, alignment will be
+ *              chosen automatically for the current CPU. It is highly
+ *              recommended to pass 0 here unless you know what you are doing.
  *
  * @return 0 on success, a negative AVERROR on error.
  */
@@ -722,6 +827,22 @@ AVFrameSideData *av_frame_new_side_data(AVFrame *frame,
                                         int size);
 
 /**
+ * Add a new side data to a frame from an existing AVBufferRef
+ *
+ * @param frame a frame to which the side data should be added
+ * @param type  the type of the added side data
+ * @param buf   an AVBufferRef to add as side data. The ownership of
+ *              the reference is transferred to the frame.
+ *
+ * @return newly added side data on success, NULL on error. On failure
+ *         the frame is unchanged and the AVBufferRef remains owned by
+ *         the caller.
+ */
+AVFrameSideData *av_frame_new_side_data_from_buf(AVFrame *frame,
+                                                 enum AVFrameSideDataType type,
+                                                 AVBufferRef *buf);
+
+/**
  * @return a pointer to the side data of a given type on success, NULL if there
  * is no side data with such type in this frame.
  */
@@ -733,6 +854,40 @@ AVFrameSideData *av_frame_get_side_data(const AVFrame *frame,
  * from the frame.
  */
 void av_frame_remove_side_data(AVFrame *frame, enum AVFrameSideDataType type);
+
+
+/**
+ * Flags for frame cropping.
+ */
+enum {
+    /**
+     * Apply the maximum possible cropping, even if it requires setting the
+     * AVFrame.data[] entries to unaligned pointers. Passing unaligned data
+     * to FFmpeg API is generally not allowed, and causes undefined behavior
+     * (such as crashes). You can pass unaligned data only to FFmpeg APIs that
+     * are explicitly documented to accept it. Use this flag only if you
+     * absolutely know what you are doing.
+     */
+    AV_FRAME_CROP_UNALIGNED     = 1 << 0,
+};
+
+/**
+ * Crop the given video AVFrame according to its crop_left/crop_top/crop_right/
+ * crop_bottom fields. If cropping is successful, the function will adjust the
+ * data pointers and the width/height fields, and set the crop fields to 0.
+ *
+ * In all cases, the cropping boundaries will be rounded to the inherent
+ * alignment of the pixel format. In some cases, such as for opaque hwaccel
+ * formats, the left/top cropping is ignored. The crop fields are set to 0 even
+ * if the cropping was rounded or ignored.
+ *
+ * @param frame the frame which should be cropped
+ * @param flags Some combination of AV_FRAME_CROP_* flags, or 0.
+ *
+ * @return >= 0 on success, a negative AVERROR on error. If the cropping fields
+ * were invalid, AVERROR(ERANGE) is returned, and nothing is changed.
+ */
+int av_frame_apply_cropping(AVFrame *frame, int flags);
 
 /**
  * @return a string identifying the side data type

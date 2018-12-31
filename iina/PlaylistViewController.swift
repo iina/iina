@@ -48,14 +48,26 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBOutlet weak var chaptersBtn: NSButton!
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var tabHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var deleteBtn: NSButton!
   @IBOutlet weak var loopBtn: NSButton!
   @IBOutlet weak var shuffleBtn: NSButton!
+  @IBOutlet weak var totalLengthLabel: NSTextField!
   @IBOutlet var subPopover: NSPopover!
-  
+  @IBOutlet var addFileMenu: NSMenu!
+
+  private var playlistTotalLengthIsReady = false
+  private var playlistTotalLength: Double? = nil
+
   var downShift: CGFloat = 0 {
     didSet {
       buttonTopConstraint.constant = downShift
+    }
+  }
+
+  var useCompactTabHeight = false {
+    didSet {
+      tabHeightConstraint.constant = useCompactTabHeight ? 32 : 48
     }
   }
 
@@ -71,6 +83,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       $0?.alternateImage?.isTemplate = true
     }
 
+    hideTotalLength()
+
+    // colors
+    if #available(macOS 10.14, *) {
+      withAllTableViews { $0.backgroundColor = NSColor(named: .sidebarTableBackground)! }
+    }
 
     // handle pending switch tab request
     if pendingSwitchRequest != nil {
@@ -79,7 +97,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
 
     // nofitications
-    playlistChangeObserver = NotificationCenter.default.addObserver(forName: Constants.Noti.playlistChanged, object: nil, queue: OperationQueue.main) { _ in
+    playlistChangeObserver = NotificationCenter.default.addObserver(forName: .iinaPlaylistChanged, object: player, queue: OperationQueue.main) { _ in
+      self.playlistTotalLengthIsReady = false
       self.reloadData(playlist: true, chapters: false)
     }
     
@@ -89,7 +108,14 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     playlistTableView.target = self
     
     // register for drag and drop
-    playlistTableView.registerForDraggedTypes([.iinaPlaylistItem, .nsFilenames])
+    playlistTableView.registerForDraggedTypes([.iinaPlaylistItem, .nsFilenames, .nsURL, .string])
+
+    if let popoverView = subPopover.contentViewController?.view,
+      popoverView.trackingAreas.isEmpty {
+      popoverView.addTrackingArea(NSTrackingArea(rect: popoverView.bounds,
+                                                 options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved],
+                                                 owner: mainWindow, userInfo: ["obj": 0]))
+    }
   }
 
   override func viewDidAppear() {
@@ -111,6 +137,51 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     if chapters {
       player.getChapters()
       chapterTableView.reloadData()
+    }
+  }
+
+  private func showTotalLength() {
+    guard let playlistTotalLength = playlistTotalLength, playlistTotalLengthIsReady else { return }
+    totalLengthLabel.isHidden = false
+    if playlistTableView.numberOfSelectedRows > 0 {
+      let info = player.info
+      let selectedDuration = playlistTableView.selectedRowIndexes
+        .compactMap { info.cachedVideoDurationAndProgress[info.playlist[$0].filename]?.duration }
+        .compactMap { $0 > 0 ? $0 : 0 }
+        .reduce(0, +)
+      totalLengthLabel.stringValue = String(format: NSLocalizedString("playlist.total_length_with_selected", comment: "%@ of %@ selected"),
+                                            VideoTime(selectedDuration).stringRepresentation,
+                                            VideoTime(playlistTotalLength).stringRepresentation)
+    } else {
+      totalLengthLabel.stringValue = String(format: NSLocalizedString("playlist.total_length", comment: "%@ in total"),
+                                            VideoTime(playlistTotalLength).stringRepresentation)
+    }
+  }
+
+  private func hideTotalLength() {
+    totalLengthLabel.isHidden = true
+  }
+
+  private func refreshTotalLength() {
+    var totalDuration: Double? = 0
+    for p in player.info.playlist {
+      if let duration = player.info.cachedVideoDurationAndProgress[p.filename]?.duration {
+        totalDuration! += duration > 0 ? duration : 0
+      } else {
+        totalDuration = nil
+        break
+      }
+    }
+    if let duration = totalDuration {
+      playlistTotalLengthIsReady = true
+      playlistTotalLength = duration
+      DispatchQueue.main.async {
+        self.showTotalLength()
+      }
+    } else {
+      DispatchQueue.main.async {
+        self.hideTotalLength()
+      }
     }
   }
 
@@ -174,78 +245,49 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
 
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
-    let pasteboard = info.draggingPasteboard()
     playlistTableView.setDropRow(row, dropOperation: .above)
-    if info.draggingSource() as? NSTableView === tableView {
+    if info.draggingSource as? NSTableView === tableView {
       return .move
     }
-    if (info.draggingSource() as? NSView)?.window === mainWindow.window {
-      return []
-    }
-    if let paths = pasteboard.propertyList(forType: .nsFilenames) as? [String] {
-      if player.hasPlayableFiles(in: paths) {
-        return .copy
-      }
-    }
-    return []
+    return player.acceptFromPasteboard(info, isPlaylist: true)
   }
 
   func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
-    let pasteboard = info.draggingPasteboard()
+    let pasteboard = info.draggingPasteboard
 
-    if info.draggingSource() as? NSTableView === tableView {
+    if info.draggingSource as? NSTableView === tableView {
       if let rowData = pasteboard.data(forType: .iinaPlaylistItem) {
         let indexSet = NSKeyedUnarchiver.unarchiveObject(with: rowData) as! IndexSet
 
-        let playlistCount = player.info.playlist.count
-        var order: [Int] = Array(0..<playlistCount)
-        var droppedRow = row
-        let reversedIndexSet = indexSet.reversed()
+        var oldIndexOffset = 0
+        var newIndexOffset = 0
 
-        for selectedRow in reversedIndexSet {
-          if selectedRow < row {
-            droppedRow -= 1
+        // Drag & Drop list items (multiline), https://goo.gl/cRUvuH
+        for oldIndex in indexSet {
+          if oldIndex < row {
+            player.playlistMove(oldIndex + oldIndexOffset, to: row)
+            oldIndexOffset -= 1
+          } else {
+            player.playlistMove(oldIndex, to: row + newIndexOffset)
+            newIndexOffset += 1
           }
-          order.remove(at: selectedRow)
+          Logger.log("Playlist Drag & Drop from \(oldIndex) to \(row)")
         }
-
-        for selectedRow in reversedIndexSet {
-          order.insert(selectedRow, at: droppedRow)
-        }
-
-        let fileList = player.info.playlist.map { $0.filename }
-        var current: Int?
-        for i in 0..<playlistCount {
-          if player.info.playlist[i].isCurrent {
-            current = i
-            continue
-          }
-        }
-        player.clearPlaylist()
-
-        var before: [String] = []
-        var after: [String] = []
-        var foundCurrent = false
-        for position in order {
-          if position == current! {
-            foundCurrent = true
-            continue
-          }
-          foundCurrent ? after.append(fileList[position]) : before.append(fileList[position])
-        }
-        player.addToPlaylist(paths: after, at: 1)
-        player.addToPlaylist(paths: before, at: 0)
       }
     } else if let paths = pasteboard.propertyList(forType: .nsFilenames) as? [String] {
-      let playableFiles = player.getPlayableFiles(in: paths.map{ URL(fileURLWithPath: $0) })
+      let playableFiles = Utility.resolveURLs(player.getPlayableFiles(in: paths.map{ URL(fileURLWithPath: $0) }))
       if playableFiles.count == 0 {
         return false
       }
       player.addToPlaylist(paths: playableFiles.map { $0.path }, at: row)
+    } else if let urls = pasteboard.propertyList(forType: .nsURL) as? [String] {
+      player.addToPlaylist(paths: urls, at: row)
+    } else if let droppedString = pasteboard.string(forType: .string), Regex.url.matches(droppedString) {
+      player.addToPlaylist(paths: [droppedString], at: row)
     } else {
       return false
     }
-    NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+    player.postNotification(.iinaPlaylistChanged)
     return true
   }
 
@@ -258,13 +300,29 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   // MARK: - IBActions
 
-  @IBAction func addToPlaylistBtnAction(_ sender: AnyObject) {
+  @IBAction func addToPlaylistBtnAction(_ sender: NSButton) {
+    addFileMenu.popUp(positioning: nil, at: .zero, in: sender)
+  }
+
+  @IBAction func addFileAction(_ sender: AnyObject) {
     Utility.quickMultipleOpenPanel(title: "Add to playlist", canChooseDir: true) { urls in
       let playableFiles = self.player.getPlayableFiles(in: urls)
       if playableFiles.count != 0 {
         self.player.addToPlaylist(paths: playableFiles.map { $0.path }, at: self.player.info.playlist.count)
         self.player.mainWindow.playlistView.reloadData(playlist: true, chapters: false)
         self.player.sendOSD(.addToPlaylist(playableFiles.count))
+      }
+    }
+  }
+
+  @IBAction func addURLAction(_ sender: AnyObject) {
+    Utility.quickPromptPanel("add_url") { url in
+      if Regex.url.matches(url) {
+        self.player.addToPlaylist(url)
+        self.player.mainWindow.playlistView.reloadData(playlist: true, chapters: false)
+        self.player.sendOSD(.addToPlaylist(1))
+      } else {
+        Utility.showAlert("wrong_url_format")
       }
     }
   }
@@ -303,8 +361,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
   }
 
-  // MARK: - Table delegates
-
   @IBAction func prefixBtnAction(_ sender: PlaylistPrefixButton) {
     sender.isFolded = !sender.isFolded
   }
@@ -314,11 +370,27 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     guard let vc = subPopover.contentViewController as? SubPopoverViewController else { return }
     vc.filePath = player.info.playlist[row].filename
     vc.tableView.reloadData()
+    vc.heightConstraint.constant = (vc.tableView.rowHeight + vc.tableView.intercellSpacing.height) * CGFloat(vc.tableView.numberOfRows)
     subPopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .maxY)
+  }
+
+  // MARK: - Table delegates
+
+  // Due to NSTableView's type select feature, space key will be passed to
+  // other responders like other keys. This is a workaround to prevent space
+  // key cannot toggle pause when the table view is first responder.
+  func tableView(_ tableView: NSTableView, shouldTypeSelectFor event: NSEvent, withCurrentSearch searchString: String?) -> Bool {
+    if event.characters == " " {
+      mainWindow.keyDown(with: event)
+    }
+    return false
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
     let tv = notification.object as! NSTableView
+    if tv == playlistTableView {
+      showTotalLength()
+    }
     guard tv.numberOfSelectedRows > 0 else { return }
     if tv == chapterTableView {
       let index = tv.selectedRow
@@ -349,21 +421,50 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         let filenameWithoutExt: String = NSString(string: filename).deletingPathExtension
         if let prefix = player.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix,
           !prefix.isEmpty,
-          prefix.characters.count <= filenameWithoutExt.characters.count,  // check whether prefix length > filename length
-          prefix.characters.count >= PrefixMinLength,
-          filename.characters.count > FilenameMinLength {
+          prefix.count <= filenameWithoutExt.count,  // check whether prefix length > filename length
+          prefix.count >= PrefixMinLength,
+          filename.count > FilenameMinLength {
           cellView.prefixBtn.hasPrefix = true
           cellView.prefixBtn.text = prefix
-          cellView.textField?.stringValue = String(filename[filename.index(filename.startIndex, offsetBy: prefix.characters.count)...])
+          cellView.textField?.stringValue = String(filename[filename.index(filename.startIndex, offsetBy: prefix.count)...])
         } else {
           cellView.prefixBtn.hasPrefix = false
           cellView.textField?.stringValue = filename
         }
+        // playback progress and duration
+        cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
+        cellView.durationLabel.stringValue = ""
+        if let cached = player.info.cachedVideoDurationAndProgress[item.filename],
+          let duration = cached.duration {
+          // if it's cached
+          if duration > 0 {
+            // if FFmpeg got the duration succcessfully
+            cellView.durationLabel.stringValue = VideoTime(duration).stringRepresentation
+            if let progress = cached.progress {
+              cellView.playbackProgressView.percentage = progress / duration
+              cellView.playbackProgressView.needsDisplay = true
+            }
+            self.refreshTotalLength()
+          }
+        } else {
+          // get related data and schedule a reload
+          if Preference.bool(for: .prefetchPlaylistVideoDuration) {
+            player.playlistQueue.async {
+              self.player.refreshCachedVideoProgress(forVideoPath: item.filename)
+              self.refreshTotalLength()
+              DispatchQueue.main.async {
+                self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
+              }
+            }
+          }
+        }
         // sub button
         if let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
           cellView.subBtn.isHidden = false
+          cellView.subBtnWidthConstraint.constant = 12
         } else {
           cellView.subBtn.isHidden = true
+          cellView.subBtnWidthConstraint.constant = 0
         }
         cellView.subBtn.image?.isTemplate = true
       }
@@ -374,7 +475,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       let chapters = info.chapters
       let chapter = chapters[row]
       // next chapter time
-      let nextChapterTime = chapters.at(row+1)?.time ?? Constants.Time.infinite
+      let nextChapterTime = chapters[at: row+1]?.time ?? .infinite
       // construct view
 
       if identifier == .isChosen {
@@ -406,14 +507,21 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   var selectedRows: IndexSet?
 
   func menuNeedsUpdate(_ menu: NSMenu) {
-    var indexSet = playlistTableView.selectedRowIndexes
-    if playlistTableView.clickedRow >= 0 {
-      indexSet.insert(playlistTableView.clickedRow)
+    let selectedRow = playlistTableView.selectedRowIndexes
+    let clickedRow = playlistTableView.clickedRow
+    var target = IndexSet()
+
+    if clickedRow != -1 {
+      if selectedRow.contains(clickedRow) {
+        target = selectedRow
+      } else {
+        target.insert(clickedRow)
+      }
     }
 
-    selectedRows = indexSet
+    selectedRows = target
     menu.removeAllItems()
-    let items = buildMenu(forRows: indexSet).items
+    let items = buildMenu(forRows: target).items
     for item in items {
       menu.addItem(item)
     }
@@ -435,13 +543,14 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       mc += 1
     }
     playlistTableView.deselectAll(nil)
-    NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+    player.postNotification(.iinaPlaylistChanged)
   }
 
   @IBAction func contextMenuPlayInNewWindow(_ sender: NSMenuItem) {
-    guard let firstRow = selectedRows?.first, firstRow >= 0 else { return }
-    let filename = player.info.playlist[firstRow].filename
-    PlayerCore.newPlayerCore.openURL(URL(fileURLWithPath: filename))
+    let files = selectedRows!.enumerated().map { (_, i) in
+      URL(fileURLWithPath: player.info.playlist[i].filename)
+    }
+    PlayerCore.newPlayerCore.openURLs(files, shouldAutoLoad: false)
   }
 
   @IBAction func contextMenuRemove(_ sender: NSMenuItem) {
@@ -452,7 +561,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       count += 1
     }
     playlistTableView.deselectAll(nil)
-    NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+    player.postNotification(.iinaPlaylistChanged)
   }
 
   @IBAction func contextMenuDeleteFile(_ sender: NSMenuItem) {
@@ -460,6 +569,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     var count = 0
     for index in selectedRows {
       player.playlistRemove(index)
+      guard !player.info.playlist[index].isNetworkResource else { continue }
       let url = URL(fileURLWithPath: player.info.playlist[index].filename)
       do {
         try FileManager.default.trashItem(at: url, resultingItemURL: nil)
@@ -470,7 +580,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       }
     }
     playlistTableView.deselectAll(nil)
-    NotificationCenter.default.post(Notification(name: Constants.Noti.playlistChanged))
+    player.postNotification(.iinaPlaylistChanged)
   }
 
   @IBAction func contextMenuDeleteFileAfterPlayback(_ sender: NSMenuItem) {
@@ -481,7 +591,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     guard let selectedRows = selectedRows else { return }
     var urls: [URL] = []
     for index in selectedRows {
-      urls.append(URL(fileURLWithPath: player.info.playlist[index].filename))
+      if !player.info.playlist[index].isNetworkResource {
+        urls.append(URL(fileURLWithPath: player.info.playlist[index].filename))
+      }
     }
     playlistTableView.deselectAll(nil)
     NSWorkspace.shared.activateFileViewerSelecting(urls)
@@ -494,7 +606,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     Utility.quickMultipleOpenPanel(title: NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File"), dir: fileURL, canChooseDir: true) { subURLs in
       for subURL in subURLs {
         guard Utility.supportedFileExt[.sub]!.contains(subURL.pathExtension.lowercased()) else { return }
-        self.player.info.matchedSubs.safeAppend(subURL, for: filename)
+        self.player.info.matchedSubs[filename, default: []].append(subURL)
       }
       self.playlistTableView.reloadData(forRowIndexes: selectedRows, columnIndexes: IndexSet(integersIn: 0...1))
     }
@@ -527,22 +639,30 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       result.addItem(withTitle: NSLocalizedString("pl_menu.play_in_new_window", comment: "Play in New Window"), action: #selector(self.contextMenuPlayInNewWindow(_:)))
       result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.remove" : "pl_menu.remove_multi", comment: "Remove"), action: #selector(self.contextMenuRemove(_:)))
 
-      result.addItem(NSMenuItem.separator())
-      if isSingleItem {
-        result.addItem(withTitle: String(format: NSLocalizedString("pl_menu.matched_sub", comment: "Matched %d Subtitle(s)"), matchedSubCount))
-        result.addItem(withTitle: NSLocalizedString("pl_menu.add_sub", comment: "Add Subtitle…"), action: #selector(self.contextMenuAddSubtitle(_:)))
+      if !player.isInMiniPlayer {
+        result.addItem(NSMenuItem.separator())
+        if isSingleItem {
+          result.addItem(withTitle: String(format: NSLocalizedString("pl_menu.matched_sub", comment: "Matched %d Subtitle(s)"), matchedSubCount))
+          result.addItem(withTitle: NSLocalizedString("pl_menu.add_sub", comment: "Add Subtitle…"), action: #selector(self.contextMenuAddSubtitle(_:)))
+        }
+        if matchedSubCount != 0 {
+          result.addItem(withTitle: NSLocalizedString("pl_menu.wrong_sub", comment: "Wrong Subtitle"), action: #selector(self.contextMenuWrongSubtitle(_:)))
+        }
       }
-      result.addItem(withTitle: NSLocalizedString("pl_menu.wrong_sub", comment: "Wrong Subtitle"), action: #selector(self.contextMenuWrongSubtitle(_:)))
 
       result.addItem(NSMenuItem.separator())
-      result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
-      // result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete_after_play" : "pl_menu.delete_after_play_multi", comment: "Delete After Playback"), action: #selector(self.contextMenuDeleteFileAfterPlayback(_:)))
 
-      // result.addItem(NSMenuItem.separator())
-      result.addItem(withTitle: NSLocalizedString("pl_menu.reveal_in_finder", comment: "Reveal in Finder"), action: #selector(self.contextMenuRevealInFinder(_:)))
-      result.addItem(NSMenuItem.separator())
+      // file related operations
+      if rows.contains (where: {!player.info.playlist[$0].isNetworkResource}) {
+        result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
+        // result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete_after_play" : "pl_menu.delete_after_play_multi", comment: "Delete After Playback"), action: #selector(self.contextMenuDeleteFileAfterPlayback(_:)))
+
+        result.addItem(withTitle: NSLocalizedString("pl_menu.reveal_in_finder", comment: "Reveal in Finder"), action: #selector(self.contextMenuRevealInFinder(_:)))
+        result.addItem(NSMenuItem.separator())
+      }
     }
-    result.addItem(withTitle: NSLocalizedString("pl_menu.add_item", comment: "Add Item"), action: #selector(self.addToPlaylistBtnAction(_:)))
+    result.addItem(withTitle: NSLocalizedString("pl_menu.add_file", comment: "Add File"), action: #selector(self.addFileAction(_:)))
+    result.addItem(withTitle: NSLocalizedString("pl_menu.add_url", comment: "Add URL"), action: #selector(self.addURLAction(_:)))
     result.addItem(withTitle: NSLocalizedString("pl_menu.clear_playlist", comment: "Clear Playlist"), action: #selector(self.clearPlaylistBtnAction(_:)))
     return result
   }
@@ -553,7 +673,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 class PlaylistTrackCellView: NSTableCellView {
 
   @IBOutlet weak var subBtn: NSButton!
+  @IBOutlet weak var subBtnWidthConstraint: NSLayoutConstraint!
   @IBOutlet weak var prefixBtn: PlaylistPrefixButton!
+  @IBOutlet weak var durationLabel: NSTextField!
+  @IBOutlet weak var playbackProgressView: PlaylistPlaybackProgressView!
 
 }
 
@@ -592,6 +715,10 @@ class PlaylistView: NSView {
     addCursorRect(rect, cursor: .resizeLeftRight)
   }
 
+  override func mouseDown(with event: NSEvent) {}
+
+  // override var allowsVibrancy: Bool { return true }
+
 }
 
 
@@ -599,12 +726,18 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
 
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var playlistTableView: NSTableView!
+  @IBOutlet weak var heightConstraint: NSLayoutConstraint!
 
   lazy var playerCore: PlayerCore = {
-    return (self.playlistTableView.window!.windowController as! MainWindowController).player
+    let windowController = self.playlistTableView.window!.windowController
+    return (windowController as? MainWindowController)?.player ?? (windowController as! MiniPlayerWindowController).player
   }()
 
   var filePath: String = ""
+
+  func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+    return false
+  }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     guard let matchedSubs = playerCore.info.matchedSubs[filePath] else { return nil }
@@ -617,9 +750,17 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
 
   @IBAction func wrongSubBtnAction(_ sender: AnyObject) {
     playerCore.info.matchedSubs[filePath]?.removeAll()
+    tableView.reloadData()
     if let row = playerCore.info.playlist.index(where: { $0.filename == filePath }) {
       playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
     }
   }
 
 }
+
+class ChapterTableCellView: NSTableCellView {
+
+  @IBOutlet weak var durationTextField: NSTextField!
+
+}
+

@@ -46,7 +46,7 @@ class VideoTime {
   }
 
   convenience init?(_ format: String) {
-    let split = format.characters.split(separator: ":").map { (seq) -> Int? in
+    let split = format.split(separator: ":").map { (seq) -> Int? in
       return Int(String(seq))
     }
     if !(split.contains {$0 == nil}) {

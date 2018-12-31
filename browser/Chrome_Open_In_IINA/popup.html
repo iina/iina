@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .menu {
+            font-family: sans-serif;
+            white-space: nowrap;
+        }
+        .menu .menu-item {
+            padding: 0.5rem;
+            transition: all 0.1s ease-out;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        .menu .menu-item:hover {
+            background: #e4e4e4;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <div class="menu-item" id="open-normal">Open in IINA</div>
+        <div class="menu-item" id="open-fullScreen">Open in IINA and enter full screen</div>
+        <div class="menu-item" id="open-pip">Open in IINA and enter Picture-in-Picture</div>
+        <div class="menu-item" id="open-newWindow">Open in a new IINA window</div>
+        <div class="menu-item" id="open-enqueue">Add to IINA playlist</div>
+    </div>
+    <script src="./popup.js" type="module"></script>
+</body>
+</html>

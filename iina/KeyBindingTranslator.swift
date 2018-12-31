@@ -51,22 +51,22 @@ class KeyBindingTranslator {
         if part.contains("#") {
           // check '#' syntax
           let ss = part.components(separatedBy: "#")
-          data[ss[0]] = commands.at(index) ?? ss[1]
+          data[ss[0]] = commands[at: index] ?? ss[1]
         } else if part.contains(":") {
           // check ':' syntax
           let ss = part.components(separatedBy: ":")
           let key = ss[0]
-          let value = commands.at(index)
+          let value = commands[at: index]
           let choices = ss[1].components(separatedBy: "|")
           let boolKey = key + "_" + (value ?? choices[0])
           data[boolKey] = "true"
-          data[key] = commands.at(index)
+          data[key] = commands[at: index]
         } else if part.hasSuffix("...") {
           var mPart = part
-          mPart.characters.removeLast(3)
+          mPart.removeLast(3)
           data[mPart] = commands[index..<commands.count].joined(separator: " ")
         } else {
-          data[part] = commands.at(index)
+          data[part] = commands[at: index]
         }
       }
       // add translation for property
@@ -88,7 +88,7 @@ class KeyBindingTranslator {
             data["abs"] = "true"
           } else if value.hasPrefix("-") {
             data["bwd"] = "true"
-            data["value"]!.characters.removeFirst()
+            data["value"]!.removeFirst()
           } else {
             data["fwd"] = "true"
           }

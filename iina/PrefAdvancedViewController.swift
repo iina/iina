@@ -7,10 +7,9 @@
 //
 
 import Cocoa
-import MASPreferences
 
 @objcMembers
-class PrefAdvancedViewController: NSViewController, MASPreferencesViewController {
+class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefAdvancedViewController")
@@ -18,40 +17,45 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
 
   var viewIdentifier: String = "PrefAdvancedViewController"
 
-  var toolbarItemImage: NSImage? {
-    return NSImage(named: .advanced)!
-  }
-
-  var toolbarItemLabel: String? {
+  var preferenceTabTitle: String {
     view.layoutSubtreeIfNeeded()
     return NSLocalizedString("preference.advanced", comment: "Advanced")
+  }
+
+  var preferenceTabImage: NSImage {
+    return NSImage(named: NSImage.Name("pref_advanced"))!
   }
 
   var hasResizableWidth: Bool = false
 
   var options: [[String]] = []
 
+  override var sectionViews: [NSView] {
+    return [headerView, settingsView]
+  }
+
+  @IBOutlet var headerView: NSView!
+  @IBOutlet var settingsView: NSView!
 
   @IBOutlet weak var enableSettingsBtn: NSButton!
-  @IBOutlet weak var settingsView: NSView!
   @IBOutlet weak var optionsTableView: NSTableView!
   @IBOutlet weak var useAnotherConfigDirBtn: NSButton!
   @IBOutlet weak var chooseConfigDirBtn: NSButton!
-  @IBOutlet weak var userConfigLocLabel: NSTextField!
-
+  @IBOutlet weak var removeButton: NSButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
     updateControlStatus(self)
 
     guard let op = Preference.value(for: .userOptions) as? [[String]] else {
-      Utility.showAlert("extra_option.cannot_read")
+      Utility.showAlert("extra_option.cannot_read", sheetWindow: view.window)
       return
     }
     options = op
 
     optionsTableView.dataSource = self
     optionsTableView.delegate = self
+    removeButton.isEnabled = false
   }
 
   func saveToUserDefaults() {
@@ -90,7 +94,7 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   }
 
   @IBAction func chooseDirBtnAction(_ sender: AnyObject) {
-    Utility.quickOpenPanel(title: "Choose config directory", isDir: true) { url in
+    Utility.quickOpenPanel(title: "Choose config directory", chooseDir: true, sheetWindow: view.window) { url in
       Preference.set(url.path, for: .userDefinedConfDir)
       UserDefaults.standard.synchronize()
     }
@@ -101,9 +105,9 @@ class PrefAdvancedViewController: NSViewController, MASPreferencesViewController
   }
 }
 
-extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource {
+extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource, NSControlTextEditingDelegate {
 
-  override func controlTextDidEndEditing(_ obj: Notification) {
+  func controlTextDidEndEditing(_ obj: Notification) {
     saveToUserDefaults()
   }
 
@@ -125,7 +129,7 @@ extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource
     guard let value = object as? String,
       let identifier = tableColumn?.identifier else { return }
     guard !value.isEmpty else {
-      Utility.showAlert("extra_option.empty")
+      Utility.showAlert("extra_option.empty", sheetWindow: view.window)
       return
     }
     guard options.count > row else { return }
@@ -141,6 +145,7 @@ extension PrefAdvancedViewController: NSTableViewDelegate, NSTableViewDataSource
     if optionsTableView.selectedRowIndexes.count == 0 {
       optionsTableView.reloadData()
     }
+    removeButton.isEnabled = optionsTableView.selectedRow != -1
   }
 
 }

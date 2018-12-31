@@ -6,18 +6,14 @@ struct MPVOption {
     static let alang = "alang"
     /** --slang=<languagecode[ */
     static let slang = "slang"
+    /** --vlang=<...> */
+    static let vlang = "vlang"
     /** --aid=<ID|auto|no> */
     static let aid = "aid"
     /** --sid=<ID|auto|no> */
     static let sid = "sid"
     /** --vid=<ID|auto|no> */
     static let vid = "vid"
-    /** --ff-aid=<ID|auto|no> */
-    static let ffAid = "ff-aid"
-    /** --ff-sid=<ID|auto|no> */
-    static let ffSid = "ff-sid"
-    /** --ff-vid=<ID|auto|no> */
-    static let ffVid = "ff-vid"
     /** --edition=<ID|auto> */
     static let edition = "edition"
     /** --track-auto-selection=<yes|no> */
@@ -27,7 +23,7 @@ struct MPVOption {
   struct PlaybackControl {
     /** --start=<relative time> */
     static let start = "start"
-    /** --end=<time> */
+    /** --end=<relative time> */
     static let end = "end"
     /** --length=<relative time> */
     static let length = "length"
@@ -142,6 +138,8 @@ struct MPVOption {
     static let ytdlFormat = "ytdl-format"
     /** --ytdl-raw-options=<key>=<value>[ */
     static let ytdlRawOptions = "ytdl-raw-options"
+    /** --load-stats-overlay=<yes|no> */
+    static let loadStatsOverlay = "load-stats-overlay"
     /** --player-operation-mode=<cplayer|pseudo-gui> */
     static let playerOperationMode = "player-operation-mode"
   }
@@ -157,14 +155,20 @@ struct MPVOption {
     static let untimed = "untimed"
     /** --framedrop=<mode> */
     static let framedrop = "framedrop"
+    /** --video-latency-hacks=<yes|no> */
+    static let videoLatencyHacks = "video-latency-hacks"
     /** --display-fps=<fps> */
     static let displayFps = "display-fps"
     /** --hwdec=<api> */
     static let hwdec = "hwdec"
-    /** --opengl-hwdec-interop=<name> */
-    static let openglHwdecInterop = "opengl-hwdec-interop"
-    /** --videotoolbox-format=<name> */
-    static let videotoolboxFormat = "videotoolbox-format"
+    /** --gpu-hwdec-interop=<auto|all|no|name> */
+    static let gpuHwdecInterop = "gpu-hwdec-interop"
+    /** --hwdec-image-format=<name> */
+    static let hwdecImageFormat = "hwdec-image-format"
+    /** --cuda-decode-device=<auto|0..> */
+    static let cudaDecodeDevice = "cuda-decode-device"
+    /** --vaapi-device=<device file> */
+    static let vaapiDevice = "vaapi-device"
     /** --panscan=<0.0-1.0> */
     static let panscan = "panscan"
     /** --video-aspect=<ratio|no> */
@@ -225,6 +229,8 @@ struct MPVOption {
     static let vdLavcFramedrop = "vd-lavc-framedrop"
     /** --vd-lavc-threads=<N> */
     static let vdLavcThreads = "vd-lavc-threads"
+    /** --vd-lavc-assume-old-x264=<yes|no> */
+    static let vdLavcAssumeOldX264 = "vd-lavc-assume-old-x264"
   }
 
   struct Audio {
@@ -254,8 +260,6 @@ struct MPVOption {
     static let replaygainClip = "replaygain-clip"
     /** --replaygain-fallback=<db> */
     static let replaygainFallback = "replaygain-fallback"
-    /** --balance=<value> */
-    static let balance = "balance"
     /** --audio-delay=<sec> */
     static let audioDelay = "audio-delay"
     /** --mute=<yes|no|auto> */
@@ -280,8 +284,6 @@ struct MPVOption {
     static let noDtshd = "no-dtshd"
     /** --audio-channels=<auto-safe|auto|layouts> */
     static let audioChannels = "audio-channels"
-    /** --audio-normalize-downmix=<yes|no> */
-    static let audioNormalizeDownmix = "audio-normalize-downmix"
     /** --audio-display=<no|attachment> */
     static let audioDisplay = "audio-display"
     /** --audio-files=<files> */
@@ -325,6 +327,8 @@ struct MPVOption {
     static let subDelay = "sub-delay"
     /** --sub-files=<file-list> */
     static let subFiles = "sub-files"
+    /** --sub-file=<filename> */
+    static let subFile = "sub-file"
     /** --secondary-sid=<ID|auto|no> */
     static let secondarySid = "secondary-sid"
     /** --sub-scale=<0-100> */
@@ -443,6 +447,8 @@ struct MPVOption {
     static let subFilterSdh = "sub-filter-sdh"
     /** --sub-filter-sdh-harder=<yes|no> */
     static let subFilterSdhHarder = "sub-filter-sdh-harder"
+    /** --sub-create-cc-track=<yes|no> */
+    static let subCreateCcTrack = "sub-create-cc-track"
   }
 
   struct Window {
@@ -506,8 +512,6 @@ struct MPVOption {
     static let forceRgbaOsdRendering = "force-rgba-osd-rendering"
     /** --force-window-position */
     static let forceWindowPosition = "force-window-position"
-    /** --heartbeat-interval=<sec> */
-    static let heartbeatInterval = "heartbeat-interval"
     /** --no-keepaspect */
     static let noKeepaspect = "no-keepaspect"
     /** --keepaspect */
@@ -591,7 +595,7 @@ struct MPVOption {
     static let demuxer = "demuxer"
     /** --demuxer-lavf-analyzeduration=<value> */
     static let demuxerLavfAnalyzeduration = "demuxer-lavf-analyzeduration"
-    /** --demuxer-lavf-probe-info=<yes|no|auto> */
+    /** --demuxer-lavf-probe-info=<yes|no|auto|nostreams> */
     static let demuxerLavfProbeInfo = "demuxer-lavf-probe-info"
     /** --demuxer-lavf-probescore=<1-100> */
     static let demuxerLavfProbescore = "demuxer-lavf-probescore"
@@ -601,8 +605,6 @@ struct MPVOption {
     static let demuxerLavfFormat = "demuxer-lavf-format"
     /** --demuxer-lavf-hacks=<yes|no> */
     static let demuxerLavfHacks = "demuxer-lavf-hacks"
-    /** --demuxer-lavf-genpts-mode=<no|lavf> */
-    static let demuxerLavfGenptsMode = "demuxer-lavf-genpts-mode"
     /** --demuxer-lavf-o=<key>=<value>[ */
     static let demuxerLavfO = "demuxer-lavf-o"
     /** --demuxer-lavf-probesize=<value> */
@@ -639,10 +641,12 @@ struct MPVOption {
     static let demuxerRawvideoCodec = "demuxer-rawvideo-codec"
     /** --demuxer-rawvideo-size=<value> */
     static let demuxerRawvideoSize = "demuxer-rawvideo-size"
-    /** --demuxer-max-bytes=<bytes> */
+    /** --demuxer-max-bytes=<bytesize> */
     static let demuxerMaxBytes = "demuxer-max-bytes"
-    /** --demuxer-max-packets=<packets> */
-    static let demuxerMaxPackets = "demuxer-max-packets"
+    /** --demuxer-max-back-bytes=<bytesize> */
+    static let demuxerMaxBackBytes = "demuxer-max-back-bytes"
+    /** --demuxer-seekable-cache=<yes|no|auto> */
+    static let demuxerSeekableCache = "demuxer-seekable-cache"
     /** --demuxer-thread=<yes|no> */
     static let demuxerThread = "demuxer-thread"
     /** --demuxer-readahead-secs=<seconds> */
@@ -707,6 +711,8 @@ struct MPVOption {
     static let noOsdBar = "no-osd-bar"
     /** --osd-bar */
     static let osdBar = "osd-bar"
+    /** --osd-on-seek=<no */
+    static let osdOnSeek = "osd-on-seek"
     /** --osd-duration=<time> */
     static let osdDuration = "osd-duration"
     /** --osd-font=<name> */
@@ -809,6 +815,23 @@ struct MPVOption {
     static let swsCvs = "sws-cvs"
   }
 
+  struct AudioResampler {
+    /** --audio-resample-filter-size=<length> */
+    static let audioResampleFilterSize = "audio-resample-filter-size"
+    /** --audio-resample-phase-shift=<count> */
+    static let audioResamplePhaseShift = "audio-resample-phase-shift"
+    /** --audio-resample-cutoff=<cutoff> */
+    static let audioResampleCutoff = "audio-resample-cutoff"
+    /** --audio-resample-linear=<yes|no> */
+    static let audioResampleLinear = "audio-resample-linear"
+    /** --audio-normalize-downmix=<yes|no> */
+    static let audioNormalizeDownmix = "audio-normalize-downmix"
+    /** --audio-resample-max-output-size=<length> */
+    static let audioResampleMaxOutputSize = "audio-resample-max-output-size"
+    /** --audio-swresample-o=<string> */
+    static let audioSwresampleO = "audio-swresample-o"
+  }
+
   struct Terminal {
     /** --quiet */
     static let quiet = "quiet"
@@ -859,10 +882,12 @@ struct MPVOption {
     static let noCache = "no-cache"
     /** --cache-secs=<seconds> */
     static let cacheSecs = "cache-secs"
-    /** --cache-pause */
+    /** --cache-pause=<yes|no> */
     static let cachePause = "cache-pause"
-    /** --no-cache-pause */
-    static let noCachePause = "no-cache-pause"
+    /** --cache-pause-wait=<seconds> */
+    static let cachePauseWait = "cache-pause-wait"
+    /** --cache-pause-initial=<yes|no> */
+    static let cachePauseInitial = "cache-pause-initial"
   }
 
   struct Network {
@@ -876,6 +901,8 @@ struct MPVOption {
     static let cookiesFile = "cookies-file"
     /** --http-header-fields=<field1 */
     static let httpHeaderFields = "http-header-fields"
+    /** --http-proxy=<proxy> */
+    static let httpProxy = "http-proxy"
     /** --tls-ca-file=<filename> */
     static let tlsCaFile = "tls-ca-file"
     /** --tls-verify */
@@ -920,9 +947,13 @@ struct MPVOption {
     static let alsaNonInterleaved = "alsa-non-interleaved"
     /** --alsa-ignore-chmap */
     static let alsaIgnoreChmap = "alsa-ignore-chmap"
+    /** --alsa-buffer-time=<microseconds> */
+    static let alsaBufferTime = "alsa-buffer-time"
+    /** --alsa-periods=<number> */
+    static let alsaPeriods = "alsa-periods"
   }
 
-  struct OpenGLRendererOptions {
+  struct GPURendererOptions {
     /** --scale=<filter> */
     static let scale = "scale"
     /** --cscale=<filter> */
@@ -1047,14 +1078,34 @@ struct MPVOption {
     static let temporalDither = "temporal-dither"
     /** --temporal-dither-period=<1-128> */
     static let temporalDitherPeriod = "temporal-dither-period"
-    /** --opengl-debug */
-    static let openglDebug = "opengl-debug"
+    /** --gpu-debug */
+    static let gpuDebug = "gpu-debug"
     /** --opengl-swapinterval=<n> */
     static let openglSwapinterval = "opengl-swapinterval"
-    /** --opengl-shaders=<file-list> */
-    static let openglShaders = "opengl-shaders"
-    /** --opengl-shader=<file> */
-    static let openglShader = "opengl-shader"
+    /** --vulkan-swap-mode=<mode> */
+    static let vulkanSwapMode = "vulkan-swap-mode"
+    /** --vulkan-queue-count=<1..8> */
+    static let vulkanQueueCount = "vulkan-queue-count"
+    /** --vulkan-async-transfer */
+    static let vulkanAsyncTransfer = "vulkan-async-transfer"
+    /** --vulkan-async-compute */
+    static let vulkanAsyncCompute = "vulkan-async-compute"
+    /** --d3d11-warp=<yes|no|auto> */
+    static let d3d11Warp = "d3d11-warp"
+    /** --d3d11-feature-level=<12_1|12_0|11_1|11_0|10_1|10_0|9_3|9_2|9_1> */
+    static let d3d11FeatureLevel = "d3d11-feature-level"
+    /** --d3d11-flip=<yes|no> */
+    static let d3d11Flip = "d3d11-flip"
+    /** --d3d11-sync-interval=<0..4> */
+    static let d3d11SyncInterval = "d3d11-sync-interval"
+    /** --d3d11va-zero-copy=<yes|no> */
+    static let d3d11vaZeroCopy = "d3d11va-zero-copy"
+    /** --spirv-compiler=<compiler> */
+    static let spirvCompiler = "spirv-compiler"
+    /** --glsl-shaders=<file-list> */
+    static let glslShaders = "glsl-shaders"
+    /** --glsl-shader=<file> */
+    static let glslShader = "glsl-shader"
     /** --deband */
     static let deband = "deband"
     /** --deband-iterations=<1..16> */
@@ -1077,8 +1128,6 @@ struct MPVOption {
     static let openglGlfinish = "opengl-glfinish"
     /** --opengl-waitvsync */
     static let openglWaitvsync = "opengl-waitvsync"
-    /** --opengl-vsync-fences=<N> */
-    static let openglVsyncFences = "opengl-vsync-fences"
     /** --opengl-dwmflush=<no|windowed|yes|auto> */
     static let openglDwmflush = "opengl-dwmflush"
     /** --angle-d3d11-feature-level=<11_0|10_1|10_0|9_3> */
@@ -1089,35 +1138,47 @@ struct MPVOption {
     static let angleEglWindowing = "angle-egl-windowing"
     /** --angle-flip=<yes|no> */
     static let angleFlip = "angle-flip"
-    /** --angle-max-frame-latency=<1-16> */
-    static let angleMaxFrameLatency = "angle-max-frame-latency"
     /** --angle-renderer=<d3d9|d3d11|auto> */
     static let angleRenderer = "angle-renderer"
-    /** --angle-swapchain-length=<2-16> */
-    static let angleSwapchainLength = "angle-swapchain-length"
     /** --cocoa-force-dedicated-gpu=<yes|no> */
     static let cocoaForceDedicatedGpu = "cocoa-force-dedicated-gpu"
-    /** --opengl-sw */
-    static let openglSw = "opengl-sw"
-    /** --opengl-backend=<sys> */
-    static let openglBackend = "opengl-backend"
+    /** --cocoa-cb-sw-renderer=<yes|no|auto> */
+    static let cocoaCbSwRenderer = "cocoa-cb-sw-renderer"
+    /** --macos-title-bar-style=<dark|ultradark|light|mediumlight|auto> */
+    static let macosTitleBarStyle = "macos-title-bar-style"
+    /** --macos-fs-animation-duration=<default|0-1000> */
+    static let macosFsAnimationDuration = "macos-fs-animation-duration"
+    /** --android-surface-size=<WxH> */
+    static let androidSurfaceSize = "android-surface-size"
+    /** --swapchain-depth=<N> */
+    static let swapchainDepth = "swapchain-depth"
+    /** --gpu-sw */
+    static let gpuSw = "gpu-sw"
+    /** --gpu-context=<sys> */
+    static let gpuContext = "gpu-context"
+    /** --gpu-api=<type> */
+    static let gpuApi = "gpu-api"
     /** --opengl-es=<mode> */
     static let openglEs = "opengl-es"
-    /** --opengl-fbo-format=<fmt> */
-    static let openglFboFormat = "opengl-fbo-format"
-    /** --opengl-gamma=<0.1..2.0> */
-    static let openglGamma = "opengl-gamma"
+    /** --opengl-restrict=<version> */
+    static let openglRestrict = "opengl-restrict"
+    /** --fbo-format=<fmt> */
+    static let fboFormat = "fbo-format"
+    /** --gamma-factor=<0.1..2.0> */
+    static let gammaFactor = "gamma-factor"
     /** --gamma-auto */
     static let gammaAuto = "gamma-auto"
     /** --target-prim=<value> */
     static let targetPrim = "target-prim"
     /** --target-trc=<value> */
     static let targetTrc = "target-trc"
+    /** --target-peak=<nits> */
+    static let targetPeak = "target-peak"
     /** --tone-mapping=<value> */
     static let toneMapping = "tone-mapping"
     /** --tone-mapping-param=<value> */
     static let toneMappingParam = "tone-mapping-param"
-    /** --hdr-compute-peak */
+    /** --hdr-compute-peak=<auto|yes|no> */
     static let hdrComputePeak = "hdr-compute-peak"
     /** --tone-mapping-desaturate=<value> */
     static let toneMappingDesaturate = "tone-mapping-desaturate"
@@ -1135,7 +1196,7 @@ struct MPVOption {
     static let iccIntent = "icc-intent"
     /** --icc-3dlut-size=<r>x<g>x<b> */
     static let icc3dlutSize = "icc-3dlut-size"
-    /** --icc-contrast=<0-100000> */
+    /** --icc-contrast=<0-1000000> */
     static let iccContrast = "icc-contrast"
     /** --blend-subtitles=<yes|video|no> */
     static let blendSubtitles = "blend-subtitles"
@@ -1145,18 +1206,16 @@ struct MPVOption {
     static let openglRectangleTextures = "opengl-rectangle-textures"
     /** --background=<color> */
     static let background = "background"
-    /** --opengl-tex-pad-x */
-    static let openglTexPadX = "opengl-tex-pad-x"
-    /** --opengl-tex-pad-y */
-    static let openglTexPadY = "opengl-tex-pad-y"
+    /** --gpu-tex-pad-x */
+    static let gpuTexPadX = "gpu-tex-pad-x"
+    /** --gpu-tex-pad-y */
+    static let gpuTexPadY = "gpu-tex-pad-y"
     /** --opengl-early-flush=<yes|no|auto> */
     static let openglEarlyFlush = "opengl-early-flush"
-    /** --opengl-dumb-mode=<yes|no|auto> */
-    static let openglDumbMode = "opengl-dumb-mode"
-    /** --opengl-shader-cache-dir=<dirname> */
-    static let openglShaderCacheDir = "opengl-shader-cache-dir"
-    /** --cuda-decode-device=<auto|0..> */
-    static let cudaDecodeDevice = "cuda-decode-device"
+    /** --gpu-dumb-mode=<yes|no|auto> */
+    static let gpuDumbMode = "gpu-dumb-mode"
+    /** --gpu-shader-cache-dir=<dirname> */
+    static let gpuShaderCacheDir = "gpu-shader-cache-dir"
   }
 
   struct Miscellaneous {
@@ -1166,6 +1225,8 @@ struct MPVOption {
     static let mc = "mc"
     /** --autosync=<factor> */
     static let autosync = "autosync"
+    /** --video-timing-offset=<seconds> */
+    static let videoTimingOffset = "video-timing-offset"
     /** --video-sync=<audio|...> */
     static let videoSync = "video-sync"
     /** --video-sync-max-video-change=<value> */

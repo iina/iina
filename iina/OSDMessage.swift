@@ -17,7 +17,7 @@
 import Foundation
 
 fileprivate func toPercent(_ value: Double, _ bound: Double) -> Double {
-  return (value + bound).constrain(min: 0, max: bound * 2) / (bound * 2)
+  return (value + bound).clamped(to: 0...(bound * 2)) / (bound * 2)
 }
 
 enum OSDType {
@@ -45,7 +45,7 @@ enum OSDMessage {
   case subPos(Double)
   case mute
   case unMute
-  case screenShot
+  case screenshot
   case abLoop(Int)
   case stop
   case chapter(String)
@@ -58,6 +58,9 @@ enum OSDMessage {
   case saturation(Int)
   case brightness(Int)
   case gamma(Int)
+
+  case addFilter(String)
+  case removeFilter
 
   case startFindingSub(String)  // sub source
   case foundSub(Int)
@@ -159,7 +162,7 @@ enum OSDMessage {
     case .unMute:
       return (NSLocalizedString("osd.unmute", comment: "Unmute"), .normal)
 
-    case .screenShot:
+    case .screenshot:
       return (NSLocalizedString("osd.screenshot", comment: "Screenshot Captured"), .normal)
 
     case .abLoop(let value):
@@ -186,7 +189,7 @@ enum OSDMessage {
       case .video: trackTypeStr = "Video"
       case .audio: trackTypeStr = "Audio"
       case .sub: trackTypeStr = "Subtitle"
-      case .secondSub: trackTypeStr = "Second Sub"
+      case .secondSub: trackTypeStr = "Second Subtitle"
       }
       return (trackTypeStr + ": " + track.readableTitle, .normal)
 
@@ -235,15 +238,27 @@ enum OSDMessage {
         .withProgress(toPercent(Double(value), 100))
       )
 
+    case .addFilter(let name):
+      return (
+        String(format: NSLocalizedString("osd.filter_added", comment: "Added Filter: %@"), name),
+        .normal
+      )
+
+    case .removeFilter:
+      return (
+        NSLocalizedString("osd.filter_removed", comment: "Removed Filter"),
+        .normal
+      )
+
     case .startFindingSub(let source):
       return (
         NSLocalizedString("osd.find_online_sub", comment: "Finding online subtitles..."),
-        .withText("from " + source)
+        .withText(NSLocalizedString("osd.find_online_sub.source", comment: "from") + " " + source)
       )
 
     case .foundSub(let count):
       let str = count == 0 ?
-        NSLocalizedString("osd.sub_not_found", comment: "No subtitle found.") :
+        NSLocalizedString("osd.sub_not_found", comment: "No subtitles found.") :
         String(format: NSLocalizedString("osd.sub_found", comment: "%d subtitle(s) found. Downloading..."), count)
       return (str, .normal)
 

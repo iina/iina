@@ -4,8 +4,8 @@
 <!-- Change these to match your system. If you're using a version compiled from source, please mention so here along with the commit you're using. -->
 **System and IINA version:**
 
-- macOS 10.13
-- IINA 0.0.12
+- macOS <!-- Your macOS version -->
+- IINA <!-- Your IINA version -->
 
 **Expected behavior:**
 
@@ -13,23 +13,32 @@
 <!-- If this is feature request, please use this section to explain the rationale behind your idea and why you believe it would be beneficial. -->
 **Actual behavior:**
 
-<!-- If you're reporting a crash, please copy the stack trace below, between the backticks (you can find these in ~/Library/Logs/DiagnosticReports/; the filename should prefixed with IINA and include the crash time).  If not, feel free to delete this section. -->
-- Crash report:
-```
+<!-- If you're reporting a crash, please copy the stack trace below, between the <pre> </pre> tags (you can find these in ~/Library/Logs/DiagnosticReports/; the filename should prefixed with IINA and include the crash time). If not, feel free to delete this section. -->
+<details>
+<summary><b>Crash report:</b></summary>
+<pre>
+<!-- Put your crash log here -->
+</pre>
+</details>
 
-```
+<br>
+
 <!-- Please provide mpv log if applicable (if you haven't done so already, you can enable logging in Preferences > Advanced). -->
-- MPV log:
-```
+<details>
+<summary><b>mpv log:</b></summary>
+<pre>
+<!-- Put your mpv log here -->
+</pre>
+</details>
 
-```
+<br>
 
 <!-- N/A if this is a feature request -->
 **Steps to reproduce:**
 
 
 <!-- If your issue is related to playback, please check whether mpv has the same problem. If so, this might not be an issue with IINA but rather an bug with mpv. Try reporting an issue there. -->
-- [x] MPV does not have this problem.
+- [ ] MPV does not have this problem.
 
 
 <!-- Again, N/A for feature requests -->

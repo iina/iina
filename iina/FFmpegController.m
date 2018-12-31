@@ -27,6 +27,11 @@ NSLog(@"Error when getting thumbnails: %@ (%d)", msg, ret);\
 return -1;\
 }
 
+#define CHECK(ret,msg) if (!(ret)) {\
+NSLog(@"Error when getting thumbnails: %@", msg);\
+return -1;\
+}
+
 @implementation FFThumbnail
 
 @end
@@ -41,7 +46,7 @@ return -1;\
 }
 
 - (int)getPeeksForFile:(NSString *)file;
-- (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second;
+- (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second forFile:(NSString *)file;
 
 @end
 
@@ -57,6 +62,7 @@ return -1;\
     _thumbnailPartialResult = [[NSMutableArray alloc] init];
     _addedTimestamps = [[NSMutableSet alloc] init];
     _queue = [[NSOperationQueue alloc] init];
+    _queue.maxConcurrentOperationCount = 1;
   }
   return self;
 }
@@ -65,13 +71,21 @@ return -1;\
 - (void)generateThumbnailForFile:(NSString *)file
 {
   [_queue cancelAllOperations];
-  [_queue addOperationWithBlock: ^(){
-    _timestamp = CACurrentMediaTime();
+  NSBlockOperation *op = [[NSBlockOperation alloc] init];
+  __weak NSBlockOperation *weakOp = op;
+  [op addExecutionBlock:^(){
+    if ([weakOp isCancelled]) {
+      return;
+    }
+    self->_timestamp = CACurrentMediaTime();
     int success = [self getPeeksForFile:file];
     if (self.delegate) {
-      [self.delegate didGeneratedThumbnails:[NSArray arrayWithArray:_thumbnails] succeeded:(success < 0 ? NO : YES)];
+      [self.delegate didGenerateThumbnails:[NSArray arrayWithArray:self->_thumbnails]
+                                   forFile: file
+                                 succeeded:(success < 0 ? NO : YES)];
     }
   }];
+  [_queue addOperation:op];
 }
 
 
@@ -79,7 +93,7 @@ return -1;\
 {
   int i, ret;
 
-  char *cFilename = strdup(file.UTF8String);
+  char *cFilename = strdup(file.fileSystemRepresentation);
   [_thumbnails removeAllObjects];
   [_thumbnailPartialResult removeAllObjects];
   [_addedTimestamps removeAllObjects];
@@ -110,7 +124,10 @@ return -1;\
 
   // Get the codec context for the video stream
   AVStream *pVideoStream = pFormatCtx->streams[videoStream];
-  if (av_q2d(pVideoStream->avg_frame_rate) == 0) {
+  AVRational videoAvgFrameRate = pVideoStream->avg_frame_rate;
+
+  // Check whether the denominator (AVRational.den) is zero to prevent division-by-zero
+  if (videoAvgFrameRate.den == 0 || av_q2d(videoAvgFrameRate) == 0) {
     NSLog(@"Avg frame rate = 0, ignore");
     return -1;
   }
@@ -124,7 +141,7 @@ return -1;\
   AVDictionary *optionsDict = NULL;
 
   avcodec_parameters_to_context(pCodecCtx, pVideoStream->codecpar);
-  av_codec_set_pkt_timebase(pCodecCtx, pVideoStream->time_base);
+  pCodecCtx->time_base = pVideoStream->time_base;
 
   ret = avcodec_open2(pCodecCtx, pCodec, &optionsDict);
   CHECK_SUCCESS(ret, @"Cannot open codec")
@@ -159,6 +176,7 @@ return -1;\
   CHECK_SUCCESS(ret, @"Cannot fill data for RGBA frame")
 
   // Create a sws context for converting color space and resizing
+  CHECK(pCodecCtx->pix_fmt != AV_PIX_FMT_NONE, @"Pixel format is none")
   struct SwsContext *sws_ctx = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt,
                                               pFrameRGB->width, pFrameRGB->height, pFrameRGB->format,
                                               SWS_BILINEAR,
@@ -207,7 +225,7 @@ return -1;\
           double currentTime = CACurrentMediaTime();
           if (currentTime - _timestamp > 1) {
             if (self.delegate) {
-              [self.delegate didUpdatedThumbnails:NULL withProgress: i];
+              [self.delegate didUpdateThumbnails:NULL forFile: file withProgress: i];
               _timestamp = currentTime;
             }
           }
@@ -231,7 +249,8 @@ return -1;\
                       width:pFrameRGB->width
                      height:pFrameRGB->height
                       index:i
-                   realTime:(pFrame->best_effort_timestamp * timebaseDouble)];
+                   realTime:(pFrame->best_effort_timestamp * timebaseDouble)
+                    forFile:file];
         break;
       }
 
@@ -255,7 +274,7 @@ return -1;\
   return 0;
 }
 
-- (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second
+- (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second forFile: (NSString *)file
 {
   // Create CGImage
   CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
@@ -287,12 +306,39 @@ return -1;\
   if (currentTime - _timestamp >= 0.2) {  // min notification interval: 0.2s
     if (_thumbnailPartialResult.count >= 10 || (currentTime - _timestamp >= 1 && _thumbnailPartialResult.count > 0)) {
       if (self.delegate) {
-        [self.delegate didUpdatedThumbnails:[NSArray arrayWithArray:_thumbnailPartialResult] withProgress: index];
+        [self.delegate didUpdateThumbnails:[NSArray arrayWithArray:_thumbnailPartialResult]
+                                   forFile: file
+                              withProgress: index];
       }
       [_thumbnailPartialResult removeAllObjects];
       _timestamp = currentTime;
     }
   }
+}
+
++ (double)probeVideoDurationForFile:(nonnull NSString *)file
+{
+  int ret;
+  int64_t duration;
+
+  char *cFilename = strdup(file.fileSystemRepresentation);
+
+  AVFormatContext *pFormatCtx = NULL;
+  ret = avformat_open_input(&pFormatCtx, cFilename, NULL, NULL);
+  free(cFilename);
+  if (ret < 0) return -1;
+
+  duration = pFormatCtx->duration;
+  if (duration <= 0) {
+    ret = avformat_find_stream_info(pFormatCtx, NULL);
+    if (ret < 0) return -1;
+    duration = pFormatCtx->duration;
+  }
+
+  avformat_close_input(&pFormatCtx);
+  avformat_free_context(pFormatCtx);
+
+  return (double)duration / AV_TIME_BASE;
 }
 
 @end

@@ -10,32 +10,20 @@ import Cocoa
 import OpenGL.GL
 import OpenGL.GL3
 
-
-fileprivate func mpvGetOpenGL(_ ctx: UnsafeMutableRawPointer?, _ name: UnsafePointer<Int8>?) -> UnsafeMutableRawPointer? {
-  let symbolName: CFString = CFStringCreateWithCString(kCFAllocatorDefault, name, kCFStringEncodingASCII);
-  guard let addr = CFBundleGetFunctionPointerForName(CFBundleGetBundleWithIdentifier(CFStringCreateCopy(kCFAllocatorDefault, "com.apple.opengl" as CFString!)), symbolName) else {
-    Utility.fatal("Cannot get OpenGL function pointer!")
-  }
-  return addr
-}
-
-fileprivate func mpvUpdateCallback(_ ctx: UnsafeMutableRawPointer?) {
-  let layer = unsafeBitCast(ctx, to: ViewLayer.self)
-  layer.mpvGLQueue.async {
-    layer.display()
-  }
-}
-
-
-
 class ViewLayer: CAOpenGLLayer {
 
   weak var videoView: VideoView!
 
-  lazy var mpvGLQueue: DispatchQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl")
+  lazy var mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
+
+  private var fbo: GLint = 1
+
+  private var needsMPVRender = false
+  private var forceRender = false
 
   override init() {
     super.init()
+
     isOpaque = true
     isAsynchronous = false
 
@@ -57,13 +45,6 @@ class ViewLayer: CAOpenGLLayer {
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-
-  func initMpvStuff() {
-    // Initialize the mpv OpenGL state.
-    mpv_opengl_cb_init_gl(videoView.mpvGLContext, nil, mpvGetOpenGL, nil)
-    // Set the callback that notifies you when a new video frame is available, or requires a redraw.
-    mpv_opengl_cb_set_update_callback(videoView.mpvGLContext, mpvUpdateCallback, mutableRawPointerOf(obj: self))
   }
 
   override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj {
@@ -102,7 +83,7 @@ class ViewLayer: CAOpenGLLayer {
       CGLChoosePixelFormat(attributes2, &pix, &npix)
     }
 
-    Utility.assert(pix != nil, "Cannot create OpenGL pixel format!")
+    Logger.ensure(pix != nil, "Cannot create OpenGL pixel format!")
 
     return pix!
   }
@@ -123,10 +104,13 @@ class ViewLayer: CAOpenGLLayer {
   // MARK: Draw
 
   override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
-    return true
+    return forceRender || videoView.player.mpv!.shouldRenderUpdateFrame()
   }
 
   override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
+    let mpv = videoView.player.mpv!
+    needsMPVRender = false
+
     videoView.uninitLock.lock()
     
     guard !videoView.isUninited else {
@@ -144,8 +128,21 @@ class ViewLayer: CAOpenGLLayer {
     var dims: [GLint] = [0, 0, 0, 0]
     glGetIntegerv(GLenum(GL_VIEWPORT), &dims);
 
-    if let context = videoView.mpvGLContext {
-      mpv_opengl_cb_draw(context, i, dims[2], -dims[3])
+    var flip: CInt = 1
+
+    if let context = mpv.mpvRenderContext {
+      fbo = i != 0 ? i : fbo
+
+      var data = mpv_opengl_fbo(fbo: Int32(fbo),
+                                w: Int32(dims[2]),
+                                h: Int32(dims[3]),
+                                internal_format: 0)
+      var params: [mpv_render_param] = [
+        mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_FBO, data: &data),
+        mpv_render_param(type: MPV_RENDER_PARAM_FLIP_Y, data: &flip),
+        mpv_render_param()
+      ]
+      mpv_render_context_render(context, &params);
       ignoreGLError()
     } else {
       glClearColor(0, 0, 0, 1)
@@ -155,14 +152,28 @@ class ViewLayer: CAOpenGLLayer {
 
     CGLUnlockContext(ctx)
     videoView.uninitLock.unlock()
-
-    if let context = videoView.mpvGLContext {
-      mpv_opengl_cb_report_flip(context, 0)
-    }
   }
 
-  func draw() {
+  func draw(forced: Bool = false) {
+    needsMPVRender = true
+    if forced { forceRender = true }
     display()
+    if forced {
+      forceRender = false
+      return
+    }
+    if needsMPVRender {
+      // draw(inCGLContext:) is not called, needs a skip render
+      if let context = videoView.player.mpv?.mpvRenderContext {
+        var skip: CInt = 1
+        var params: [mpv_render_param] = [
+          mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: &skip),
+          mpv_render_param()
+        ]
+        mpv_render_context_render(context, &params);
+      }
+      needsMPVRender = false
+    }
   }
 
   override func display() {

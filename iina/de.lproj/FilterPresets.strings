@@ -1,0 +1,52 @@
+/* 
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+
+/* It's optional to localize descriptions for each parameter! */
+
+"blur" = "Weichzeichnen";
+"blur.amount" = "Intensität";
+"blur.msize" = "Matrizengröße";
+
+"crop" = "Zuschneiden";
+"crop.h" = "Höhe (Standard: Videohöhe)";
+"crop.w" = "Breite (Standard: Videobreite)";
+"crop.x" = "Ursprungspunkt X-Achse (Standard: Mitte)";
+"crop.y" = "Ursprungspunkt Y-Achse (Standard: Mitte)";
+
+"custom_ffmpeg" = "Benutzerdef. (FFmpeg)";
+"custom_ffmpeg.name" = "Filtername";
+"custom_ffmpeg.string" = "Wert";
+
+"custom_mpv" = "Benutzerdef. (mpv)";
+"custom_mpv.name" = "Filtername";
+"custom_mpv.string" = "Wert";
+
+"delogo" = "Logo entfernen";
+"delogo.h" = "Höhe";
+"delogo.w" = "Breite";
+"delogo.x" = "Ursprungspunkt X-Achse";
+"delogo.y" = "Ursprungspunkt Y-Achse";
+
+"expand" = "Ausdehnen";
+"expand.aspect" = "Auf Seitenverhältnis ausdehnen (z. B. 4/3)";
+"expand.h" = "Höhe (Standard: Videohöhe)";
+"expand.round" = "Aufrunden bis durch diesen Wert teilbar";
+"expand.w" = "Breite (Standard: Videobreite)";
+"expand.x" = "Ursprungspunkt X-Achse (Standard: Mitte)";
+"expand.y" = "Ursprungspunkt Y-Achse (Standard: Mitte)";
+
+"hflip" = "Horiz. spiegeln";
+"lut3d" = "3D LUT";
+"lut3d.file" = "Datei";
+"lut3d.interp" = "Interpolationsmodus";
+"negative" = "Negativ";
+"sharpen" = "Schärfen";
+"sharpen.amount" = "Intensität";
+"sharpen.msize" = "Matrizengröße";
+"vflip" = "Vert. spiegeln";

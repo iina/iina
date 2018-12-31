@@ -243,6 +243,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     pboard.setPropertyList(filePaths, forType: .nsFilenames)
   }
 
+  @discardableResult
   func pasteFromPasteboard(_ tableView: NSTableView, row: Int, from pboard: NSPasteboard) -> Bool {
     if let paths = pboard.propertyList(forType: .nsFilenames) as? [String] {
       let playableFiles = Utility.resolveURLs(player.getPlayableFiles(in: paths.map{
@@ -330,7 +331,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   @objc func paste(_ sender: NSMenuItem) {
     let dest = playlistTableView.selectedRowIndexes.first ?? 0
-    _ = pasteFromPasteboard(playlistTableView, row: dest, from: .general)
+    pasteFromPasteboard(playlistTableView, row: dest, from: .general)
   }
 
 

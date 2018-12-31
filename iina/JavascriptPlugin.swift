@@ -49,7 +49,15 @@ class JavascriptPlugin {
   }
 
   static private func loadPlugins() -> [JavascriptPlugin] {
-    return ["test"].compactMap(JavascriptPlugin.init(filename:))
+    guard let contents = try? FileManager.default.contentsOfDirectory(at: Utility.pluginsURL,
+                                                                      includingPropertiesForKeys: [.isDirectoryKey],
+                                                                      options: [.skipsHiddenFiles, .skipsPackageDescendants])
+    else {
+      Logger.log("Unable to read plugin directory.")
+      return []
+    }
+    return contents.filter { $0.pathExtension == "iinaplugin" && $0.isExistingDirectory }
+      .compactMap { JavascriptPlugin.init(filename: $0.deletingPathExtension().lastPathComponent) }
   }
 
   init?(filename: String) {

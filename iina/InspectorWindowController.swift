@@ -119,7 +119,6 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
           MPVProperty.currentAo: self.aoField,
           MPVProperty.audioParamsFormat: self.aformatField,
           MPVProperty.audioParamsChannels: self.achannelsField,
-          MPVProperty.audioBitrate: self.abitrateField,
           MPVProperty.audioParamsSamplerate: self.asamplerateField
         ]
 

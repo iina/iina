@@ -53,7 +53,7 @@
 
 3. Open `.xcworkspace` file using Xcode 10.
 
-There's a bug in cocoapods 1.5.*, so that you cannot complie IINA with it. Thankfully the bug was fixed in their master branch. We are using pre-release of cocoapods (currently 1.6.0 beta2) to avoid that bug. You can install the pre-release version of cocoapods via
+There's a bug in cocoapods 1.5.*, so that you cannot compile IINA with it. Thankfully the bug was fixed in their master branch. We are using pre-release of cocoapods (currently 1.6.0 beta2) to avoid that bug. You can install the pre-release version of cocoapods via
 ```
 sudo gem install cocoapods --pre
 ```

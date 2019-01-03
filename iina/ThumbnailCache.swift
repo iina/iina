@@ -70,7 +70,7 @@ class ThumbnailCache {
   static func write(_ thumbnails: [FFThumbnail], forName name: String, forVideo videoPath: URL?) {
     Logger.log("Writing thumbnail cache...", subsystem: subsystem)
 
-    let maxCacheSize = Preference.integer(for: .maxThumbnailPreviewCacheSize) * FileSize.Unit.mb.rawValue
+    let maxCacheSize = Preference.integer(for: .maxThumbnailPreviewCacheSize) * FloatingPointByteCountFormatter.PrefixFactor.mi.rawValue
     if maxCacheSize == 0 {
       return
     } else if CacheManager.shared.getCacheSize() > maxCacheSize {

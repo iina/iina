@@ -26,16 +26,40 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   }()
 
   unowned var player: PlayerCore
+  
+  /** We need to pause the video when a user starts seeking by scrolling.
+   This property records whether the video is paused initially so we can
+   recover the status when scrolling finished. */
+  var wasPlayingWhenSeekBegan: Bool?
+  
+  /** The direction of current scrolling event. */
+  enum ScrollDirection {
+    case horizontal
+    case vertical
+  }
+  
+  var scrollDirection: ScrollDirection?
 
   var menuActionHandler: MainMenuActionHandler!
 
   // MARK: - Observed user defaults
+  
+  private lazy var useExtractSeek: Preference.SeekOption = Preference.enum(for: .useExactSeek)
+  private lazy var relativeSeekAmount: Int = Preference.integer(for: .relativeSeekAmount)
+  private lazy var volumeScrollAmount: Int = Preference.integer(for: .volumeScrollAmount)
+  private lazy var horizontalScrollAction: Preference.ScrollAction = Preference.enum(for: .horizontalScrollAction)
+  private lazy var verticalScrollAction: Preference.ScrollAction = Preference.enum(for: .verticalScrollAction)
 
   private let observedPrefKeys: [Preference.Key] = [
     .showRemainingTime,
     .alwaysFloatOnTop,
     .maxVolume,
-    .themeMaterial
+    .themeMaterial,
+    .useExactSeek,
+    .relativeSeekAmount,
+    .volumeScrollAmount,
+    .horizontalScrollAction,
+    .verticalScrollAction,
   ]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -66,6 +90,31 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     case PK.themeMaterial.rawValue:
       if let newValue = change[.newKey] as? Int {
         setMaterial(Preference.Theme(rawValue: newValue))
+      }
+      
+    case PK.useExactSeek.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        useExtractSeek = Preference.SeekOption(rawValue: newValue)!
+      }
+      
+    case PK.relativeSeekAmount.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        relativeSeekAmount = newValue.clamped(to: 1...5)
+      }
+      
+    case PK.volumeScrollAmount.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        volumeScrollAmount = newValue.clamped(to: 1...4)
+      }
+      
+    case PK.verticalScrollAction.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        verticalScrollAction = Preference.ScrollAction(rawValue: newValue)!
+      }
+      
+    case PK.horizontalScrollAction.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        horizontalScrollAction = Preference.ScrollAction(rawValue: newValue)!
       }
 
     default:
@@ -279,6 +328,91 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   override func mouseExited(with event: NSEvent) {
     guard !volumePopover.isShown else { return }
     hideControl()
+  }
+  
+  override func scrollWheel(with event: NSEvent) {
+    let isMouse = event.phase.isEmpty
+    let isTrackpadBegan = event.phase.contains(.began)
+    let isTrackpadEnd = event.phase.contains(.ended)
+    
+    // determine direction
+    
+    if isMouse || isTrackpadBegan {
+      if event.scrollingDeltaX != 0 {
+        scrollDirection = .horizontal
+      } else if event.scrollingDeltaY != 0 {
+        scrollDirection = .vertical
+      }
+    } else if isTrackpadEnd {
+      scrollDirection = nil
+    }
+    
+    let scrollAction = scrollDirection == .horizontal ? horizontalScrollAction : verticalScrollAction
+    
+    // pause video when seek begins.
+    
+    if scrollAction == .seek && isTrackpadBegan {
+      // record pause status
+      wasPlayingWhenSeekBegan = !player.info.isPaused
+      if wasPlayingWhenSeekBegan! {
+        player.togglePause(true)
+      }
+    }
+    
+    if isTrackpadEnd && wasPlayingWhenSeekBegan != nil {
+      // only resume playback when it was playing when began
+      if wasPlayingWhenSeekBegan! {
+        player.togglePause(false)
+      }
+      wasPlayingWhenSeekBegan = nil
+    }
+    
+    // show volume popover when volume seek begins and hide on end
+    
+    if scrollAction == .volume && isTrackpadBegan {
+      // enabling animation here causes user not seeing their volume changes during popover transition
+      volumePopover.animates = false
+      volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+    } else if scrollAction == .volume && isTrackpadEnd {
+      volumePopover.animates = true
+      volumePopover.performClose(self)
+    } else if isMouse && !volumePopover.isShown {
+      // if its a mouse, simply show then hide after a while
+      volumePopover.animates = false
+      volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        self.volumePopover.animates = true
+        self.volumePopover.performClose(self)
+      }
+    }
+    
+    // handle the delta value
+    
+    let isPrecise = event.hasPreciseScrollingDeltas
+    let isNatural = event.isDirectionInvertedFromDevice
+    
+    var deltaX = isPrecise ? Double(event.scrollingDeltaX) : event.scrollingDeltaX.unifiedDouble
+    var deltaY = isPrecise ? Double(event.scrollingDeltaY) : event.scrollingDeltaY.unifiedDouble * 2
+    
+    if isNatural {
+      deltaY = -deltaY
+    } else {
+      deltaX = -deltaX
+    }
+    
+    let delta = scrollDirection == .horizontal ? deltaX : deltaY
+    
+    // perform action
+    
+    if scrollAction == .seek {
+      let seekAmount = (isMouse ? AppData.seekAmountMapMouse : AppData.seekAmountMap)[relativeSeekAmount] * delta
+      player.seek(relativeSecond: seekAmount, option: useExtractSeek)
+    } else if scrollAction == .volume {
+      // don't use precised delta for mouse
+      let newVolume = player.info.volume + (isMouse ? delta : AppData.volumeMap[volumeScrollAmount] * delta)
+      player.setVolume(newVolume)
+      volumeSlider.doubleValue = newVolume
+    }
   }
 
   func windowDidEndLiveResize(_ notification: Notification) {

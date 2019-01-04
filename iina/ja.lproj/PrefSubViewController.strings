@@ -91,7 +91,7 @@
 "SIh-Sv-6XI.title" = "色:";
 
 /* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "TPK-CJ-HX7"; */
-"TPK-CJ-HX7.title" = "字幕のダウンロード:";
+"TPK-CJ-HX7.title" = "字幕のダウンロード先:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "Vbl-Im-3UI"; */
 "Vbl-Im-3UI.title" = "サイズ:";
@@ -106,13 +106,13 @@
 "XiL-eE-jah.title" = "IINAによる自動選択";
 
 /* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "Y75-4k-2Du"; */
-"Y75-4k-2Du.title" = "デフォルトエンコーディング:";
+"Y75-4k-2Du.title" = "デフォルトのエンコーディング:";
 
 /* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
 "Z2M-dh-eq1.title" = "ISO639-2の言語コードをカンマで区切って使用してください。\nこの設定はmpvとopensubtitlesの両方に適用されます。";
 
 /* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
-"aO9-D6-KG8.title" = "ブラー:";
+"aO9-D6-KG8.title" = "ぼかし:";
 
 /* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "azJ-oz-BKZ"; */
 "azJ-oz-BKZ.title" = "sans-serif";
@@ -130,7 +130,7 @@
 "eYO-c0-Rjp.title" = "背景:";
 
 /* Class = "NSBox"; title = "Other Styles"; ObjectID = "egf-g3-b7a"; */
-"egf-g3-b7a.title" = "Box";
+"egf-g3-b7a.title" = "その他のスタイル";
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
 "gAq-Vr-hRY.title" = "無視の度合い:";
@@ -157,7 +157,7 @@
 "nH7-kO-S15.title" = "選択…";
 
 /* Class = "NSButtonCell"; title = "Italic"; ObjectID = "pNF-Fw-QtW"; */
-"pNF-Fw-QtW.title" = "斜体";
+"pNF-Fw-QtW.title" = "斜字";
 
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
 "pRe-wv-VVi.title" = "マージン";

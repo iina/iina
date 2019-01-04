@@ -119,6 +119,8 @@ struct Preference {
     static let initialWindowSizePosition = Key("initialWindowSizePosition")
     static let resizeWindowTiming = Key("resizeWindowTiming")
     static let resizeWindowOption = Key("resizeWindowOption")
+    
+    static let hideWindowWhenPip = Key("hideWindowWhenPip")
 
     static let oscPosition = Key("oscPosition")
 
@@ -673,6 +675,7 @@ struct Preference {
     .initialWindowSizePosition: "",
     .resizeWindowTiming: ResizeWindowTiming.onlyWhenOpen.rawValue,
     .resizeWindowOption: ResizeWindowOption.videoSize10.rawValue,
+    .hideWindowWhenPip: true,
     .showRemainingTime: false,
     .enableThumbnailPreview: true,
     .maxThumbnailPreviewCacheSize: 500,

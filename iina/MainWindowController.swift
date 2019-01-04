@@ -2815,7 +2815,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     
     // Hiding the main window when entering PiP but only if the window is not in fullscreen mode
     if let window = NSApp.mainWindow {
-      if !window.styleMask.contains(.fullScreen) {
+      if !window.styleMask.contains(.fullScreen) && Preference.bool(for: .hideWindowWhenPip) {
         window.orderOut(self)
       }
     }

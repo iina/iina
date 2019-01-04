@@ -2812,6 +2812,13 @@ extension MainWindowController: PIPViewControllerDelegate {
     pipOverlayView.isHidden = false
 
     videoView.videoLayer.draw(forced: true)
+    
+    // Hiding the main window when entering PiP but only if the window is not in fullscreen mode
+    if let window = NSApp.mainWindow {
+      if !window.styleMask.contains(.fullScreen) {
+        window.orderOut(self)
+      }
+    }
   }
 
   func exitPIP() {

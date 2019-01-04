@@ -25,7 +25,7 @@
 "GBe-wd-tne.title" = "フォーマット: <key>=<value>[,<key>=<value>[,…]]";
 
 /* Class = "NSTextFieldCell"; title = "Seconds to prefech:"; ObjectID = "J96-32-M9A"; */
-"J96-32-M9A.title" = "事前読み込み時間(秒):";
+"J96-32-M9A.title" = "事前読み込み時間 (秒):";
 
 /* Class = "NSTextFieldCell"; title = "Cache:"; ObjectID = "LNk-io-MM7"; */
 "LNk-io-MM7.title" = "キャッシュ:";
@@ -61,7 +61,7 @@
 "fab-7d-mMQ.title" = "デフォルト: 100";
 
 /* Class = "NSButtonCell"; title = "Enable cache"; ObjectID = "fpV-al-bn7"; */
-"fpV-al-bn7.title" = "キャッシュの有効化";
+"fpV-al-bn7.title" = "キャッシュを有効化";
 
 /* Class = "NSTextFieldCell"; title = "Transport RTSP stream through:"; ObjectID = "hfn-h6-NCd"; */
 "hfn-h6-NCd.title" = "RTSPの通信方式:";

@@ -354,12 +354,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
       scrollDirection = nil
     }
     
-    var scrollAction = scrollDirection == .horizontal ? horizontalScrollAction : verticalScrollAction
-    if isMouseEvent(event, inAnyOf: [playSlider]) {
-      scrollAction = .seek
-    } else if isMouseEvent(event, inAnyOf: [volumeSlider]) {
-      scrollAction = .volume
-    }
+    let scrollAction = scrollDirection == .horizontal ? horizontalScrollAction : verticalScrollAction
     
     // pause video when seek begins.
     
@@ -381,7 +376,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     
     // show volume popover when volume seek begins and hide on end
     
-    if scrollAction == .volume && !isMouseEvent(event, inAnyOf: [volumeSlider]) {
+    if scrollAction == .volume {
       if isTrackpadBegan {
         // enabling animation here causes user not seeing their volume changes during popover transition
         volumePopover.animates = false
@@ -696,13 +691,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
       break
     }
   }
-  
-  func isMouseEvent(_ event: NSEvent, inAnyOf views: [NSView?]) -> Bool {
-    return views.filter { $0 != nil }.reduce(false, { (result, view) in
-      return result || view!.isMousePoint(view!.convert(event.locationInWindow, from: nil), in: view!.bounds)
-    })
-  }
-
 }
 
 fileprivate extension NSRect {

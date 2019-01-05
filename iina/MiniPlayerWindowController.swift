@@ -369,20 +369,22 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     
     // show volume popover when volume seek begins and hide on end
     
-    if scrollAction == .volume && isTrackpadBegan {
-      // enabling animation here causes user not seeing their volume changes during popover transition
-      volumePopover.animates = false
-      volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
-    } else if scrollAction == .volume && isTrackpadEnd {
-      volumePopover.animates = true
-      volumePopover.performClose(self)
-    } else if isMouse && !volumePopover.isShown {
-      // if its a mouse, simply show then hide after a while
-      volumePopover.animates = false
-      volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-        self.volumePopover.animates = true
-        self.volumePopover.performClose(self)
+    if scrollAction == .volume {
+      if isTrackpadBegan {
+        // enabling animation here causes user not seeing their volume changes during popover transition
+        volumePopover.animates = false
+        volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+      } else if isTrackpadEnd {
+        volumePopover.animates = true
+        volumePopover.performClose(self)
+      } else if isMouse && !volumePopover.isShown {
+        // if its a mouse, simply show popover then hide after a while
+        volumePopover.animates = false
+        volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+          self.volumePopover.animates = true
+          self.volumePopover.performClose(self)
+        }
       }
     }
     

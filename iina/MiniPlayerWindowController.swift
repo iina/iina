@@ -157,6 +157,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   var videoViewAspectConstraint: NSLayoutConstraint?
 
   private var originalWindowFrame: NSRect!
+  
+  var hideVolumePopover: DispatchWorkItem?
 
   init(player: PlayerCore) {
     self.player = player
@@ -242,6 +244,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     // add use default observers
     observedPrefKeys.forEach { key in
       UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
+    }
+    
+    hideVolumePopover = DispatchWorkItem {
+      self.volumePopover.animates = true
+      self.volumePopover.performClose(self)
     }
   }
 
@@ -375,16 +382,19 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
         volumePopover.animates = false
         volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
       } else if isTrackpadEnd {
-        volumePopover.animates = true
-        volumePopover.performClose(self)
-      } else if isMouse && !volumePopover.isShown {
-        // if its a mouse, simply show popover then hide after a while
-        volumePopover.animates = false
-        volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: hideVolumePopover!)
+      } else if isMouse {
+        // if its a mouse, simply show popover then hide after a while when user stops scrolling
+        if !volumePopover.isShown {
+          volumePopover.animates = false
+          volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+        }
+        hideVolumePopover?.cancel()
+        hideVolumePopover = DispatchWorkItem {
           self.volumePopover.animates = true
           self.volumePopover.performClose(self)
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: hideVolumePopover!)
       }
     }
     

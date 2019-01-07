@@ -135,7 +135,7 @@ class Utility {
     if let sheetWindow = sheetWindow {
       panel.beginSheetModal(for: sheetWindow, completionHandler: handler)
     } else {
-      panel.begin(completionHandler: handler)
+      handler(panel.runModal())
     }
   }
 

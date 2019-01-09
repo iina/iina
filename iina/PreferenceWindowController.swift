@@ -354,7 +354,7 @@ extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource
       return [
         "image": viewControllers[at: row]?.preferenceTabImage,
         "title": viewControllers[at: row]?.preferenceTabTitle
-      ] as [String: Any]
+      ] as [String: Any?]
     } else {
       guard let result = currentCompletionResults[at: row] else { return nil }
       let noLabel = result.strippedLabel == nil

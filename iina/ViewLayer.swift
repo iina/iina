@@ -104,7 +104,13 @@ class ViewLayer: CAOpenGLLayer {
   // MARK: Draw
 
   override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
-    return forceRender || videoView.player.mpv!.shouldRenderUpdateFrame()
+    if forceRender { return true }
+
+    videoView.uninitLock.lock()
+    let result = videoView.player.mpv!.shouldRenderUpdateFrame()
+    videoView.uninitLock.unlock()
+
+    return result
   }
 
   override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
@@ -163,8 +169,9 @@ class ViewLayer: CAOpenGLLayer {
       return
     }
     if needsMPVRender {
+      videoView.uninitLock.lock()
       // draw(inCGLContext:) is not called, needs a skip render
-      if let context = videoView.player.mpv?.mpvRenderContext {
+      if !videoView.isUninited, let context = videoView.player.mpv?.mpvRenderContext {
         var skip: CInt = 1
         var params: [mpv_render_param] = [
           mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: &skip),
@@ -172,6 +179,7 @@ class ViewLayer: CAOpenGLLayer {
         ]
         mpv_render_context_render(context, &params);
       }
+      videoView.uninitLock.unlock()
       needsMPVRender = false
     }
   }

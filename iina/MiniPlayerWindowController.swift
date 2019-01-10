@@ -377,6 +377,11 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     // show volume popover when volume seek begins and hide on end
     
     if scrollAction == .volume {
+      hideVolumePopover?.cancel()
+      hideVolumePopover = DispatchWorkItem {
+        self.volumePopover.animates = true
+        self.volumePopover.performClose(self)
+      }
       if isTrackpadBegan {
         // enabling animation here causes user not seeing their volume changes during popover transition
         volumePopover.animates = false
@@ -389,11 +394,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
         if !volumePopover.isShown {
           volumePopover.animates = false
           volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
-        }
-        hideVolumePopover?.cancel()
-        hideVolumePopover = DispatchWorkItem {
-          self.volumePopover.animates = true
-          self.volumePopover.performClose(self)
         }
         let timeout = Preference.double(for: .osdAutoHideTimeout)
         DispatchQueue.main.asyncAfter(deadline: .now() + timeout, execute: hideVolumePopover!)

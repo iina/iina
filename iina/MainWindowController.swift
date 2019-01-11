@@ -2821,6 +2821,9 @@ extension MainWindowController: PIPViewControllerDelegate {
 
   func exitPIP() {
     if pipShouldClose(pip) {
+      if window?.isMiniaturized ?? true {
+        window?.deminiaturize(self)
+      }
       // Prod Swift to pick the dismiss(_ viewController: NSViewController)
       // overload over dismiss(_ sender: Any?). A change in the way implicitly
       // unwrapped optionals are handled in Swift means that the wrong method
@@ -2830,9 +2833,6 @@ extension MainWindowController: PIPViewControllerDelegate {
   }
 
   func doneExitingPIP() {
-    if window?.isMiniaturized ?? true {
-      window?.deminiaturize(self)
-    }
     pipStatus = .notInPIP
 
     pipOverlayView.isHidden = true

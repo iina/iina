@@ -423,7 +423,7 @@ class PlayerCore: NSObject {
     }
     // if aspect ratio is not set
     if mainWindow.window?.aspectRatio == nil {
-      mainWindow.window?.aspectRatio = NSSize(width: AppData.widthWhenNoVideo, height: AppData.heightWhenNoVideo)
+      mainWindow.window?.aspectRatio = AppData.sizeWhenNoVideo
     }
     // hide mini player
     miniPlayer.window?.orderOut(nil)

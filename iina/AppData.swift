@@ -57,6 +57,7 @@ struct AppData {
 
   static let widthWhenNoVideo = 480
   static let heightWhenNoVideo = 480
+  static let sizeWhenNoVideo = NSSize(width: widthWhenNoVideo, height: heightWhenNoVideo)
 }
 
 

@@ -603,6 +603,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       w.setFrame(wf, display: false)
     }
 
+    w.aspectRatio = AppData.sizeWhenNoVideo
+
     // sidebar views
     sideBarView.isHidden = true
 

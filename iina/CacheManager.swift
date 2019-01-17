@@ -39,7 +39,7 @@ class CacheManager {
 
     let maxCacheSize = Preference.integer(for: .maxThumbnailPreviewCacheSize)
     // if full, delete 50% of max cache
-    let cacheToDelete = maxCacheSize * FileSize.Unit.mb.rawValue / 2
+    let cacheToDelete = maxCacheSize * FloatingPointByteCountFormatter.PrefixFactor.mi.rawValue / 2
 
     // sort by access date
     guard let contents = cacheFolderContents()?.sorted(by: { url1, url2 in

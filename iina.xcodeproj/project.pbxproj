@@ -166,7 +166,7 @@
 		84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84879A961E0FFC7E0004F894 /* PrefUIViewController.swift */; };
 		8487BEC11D744FA800FD17B0 /* FlippedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487BEC01D744FA800FD17B0 /* FlippedView.swift */; };
 		8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487BEC21D76A1AF00FD17B0 /* MenuController.swift */; };
-		8488D6DC1E1167EF00D5B952 /* FileSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6DB1E1167EF00D5B952 /* FileSize.swift */; };
+		8488D6DC1E1167EF00D5B952 /* FloatingPointByteCountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6DB1E1167EF00D5B952 /* FloatingPointByteCountFormatter.swift */; };
 		8488D6DF1E11791300D5B952 /* PrefCodecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6DD1E11791300D5B952 /* PrefCodecViewController.swift */; };
 		8488D6E31E1183D300D5B952 /* PrefSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6E11E1183D300D5B952 /* PrefSubViewController.swift */; };
 		8488D6E71E11ABE900D5B952 /* PrefNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */; };
@@ -798,7 +798,7 @@
 		84879A961E0FFC7E0004F894 /* PrefUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefUIViewController.swift; sourceTree = "<group>"; };
 		8487BEC01D744FA800FD17B0 /* FlippedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FlippedView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8487BEC21D76A1AF00FD17B0 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
-		8488D6DB1E1167EF00D5B952 /* FileSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSize.swift; sourceTree = "<group>"; };
+		8488D6DB1E1167EF00D5B952 /* FloatingPointByteCountFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingPointByteCountFormatter.swift; sourceTree = "<group>"; };
 		8488D6DD1E11791300D5B952 /* PrefCodecViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefCodecViewController.swift; sourceTree = "<group>"; };
 		8488D6E11E1183D300D5B952 /* PrefSubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefSubViewController.swift; sourceTree = "<group>"; };
 		8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefNetworkViewController.swift; sourceTree = "<group>"; };
@@ -1427,7 +1427,7 @@
 				840D47971DFEEE6A000D9A64 /* KeyMapping.swift */,
 				84BEEC411DFEE46200F945CA /* StreamReader.swift */,
 				84795C361E0825AD0059A648 /* GifGenerator.swift */,
-				8488D6DB1E1167EF00D5B952 /* FileSize.swift */,
+				8488D6DB1E1167EF00D5B952 /* FloatingPointByteCountFormatter.swift */,
 				841A599C1E1FF5800079E177 /* SleepPreventer.swift */,
 				84A886F21E26CA24008755BB /* Regex.swift */,
 				84E295BF1E2CF9F4006388F7 /* ObjcUtils.m */,
@@ -2179,7 +2179,7 @@
 				84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */,
 				840AF5841E73CE3900F4AF92 /* OpenSubSubtitle.swift in Sources */,
 				84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */,
-				8488D6DC1E1167EF00D5B952 /* FileSize.swift in Sources */,
+				8488D6DC1E1167EF00D5B952 /* FloatingPointByteCountFormatter.swift in Sources */,
 				8488D6E71E11ABE900D5B952 /* PrefNetworkViewController.swift in Sources */,
 				84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */,
 				844C59E71F7C143D008D1B00 /* CacheManager.swift in Sources */,

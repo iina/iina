@@ -139,7 +139,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
         self.vsizeField.stringValue = "\(vwidth)\u{d7}\(vheight)"
 
         let fileSize = controller.getInt(MPVProperty.fileSize)
-        self.fileSizeField.stringValue = FileSize.format(fileSize, unit: .b)
+        self.fileSizeField.stringValue = "\(FloatingPointByteCountFormatter.string(fromByteCount: fileSize))B"
 
         // track list
 
@@ -171,10 +171,10 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
       }
 
       let vbitrate = controller.getInt(MPVProperty.videoBitrate)
-      self.vbitrateField.stringValue = FileSize.format(vbitrate, unit: .b) + "bps"
+      self.vbitrateField.stringValue = FloatingPointByteCountFormatter.string(fromByteCount: vbitrate) + "bps"
 
       let abitrate = controller.getInt(MPVProperty.audioBitrate)
-      self.abitrateField.stringValue = FileSize.format(abitrate, unit: .b) + "bps"
+      self.abitrateField.stringValue = FloatingPointByteCountFormatter.string(fromByteCount: abitrate) + "bps"
 
       let dynamicStrProperties: [String: NSTextField] = [
         MPVProperty.avsync: self.avsyncField,

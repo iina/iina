@@ -1335,6 +1335,9 @@ class PlayerCore: NSObject {
 
   func generateThumbnails() {
     Logger.log("Getting thumbnails", subsystem: subsystem)
+    info.thumbnailsReady = false
+    info.thumbnails.removeAll(keepingCapacity: true)
+    info.thumbnailsProgress = 0
     if #available(macOS 10.12.2, *) {
       DispatchQueue.main.async {
         self.touchBarSupport.touchBarPlaySlider?.resetCachedThumbnails()
@@ -1350,9 +1353,6 @@ class PlayerCore: NSObject {
         return
       }
     }
-    info.thumbnails.removeAll(keepingCapacity: true)
-    info.thumbnailsProgress = 0
-    info.thumbnailsReady = false
     if Preference.bool(for: .enableThumbnailPreview) {
       if let cacheName = info.mpvMd5, ThumbnailCache.fileIsCached(forName: cacheName, forVideo: info.currentURL) {
         Logger.log("Found thumbnail cache", subsystem: subsystem)

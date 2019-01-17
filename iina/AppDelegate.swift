@@ -23,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   /** Whether performed some basic initialization, like bind menu items. */
   var isReady = false
-  /** 
+  /**
    Becomes true once `application(_:openFile:)` or `droppedText()` is called.
    Mainly used to distinguish normal launches from others triggered by drag-and-dropping files.
    */
@@ -309,7 +309,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       PlayerCore.active.openURLString(url)
     }
   }
-  
+
   // MARK: - Dock menu
 
   func applicationDockMenu(_ sender: NSApplication) -> NSMenu? {

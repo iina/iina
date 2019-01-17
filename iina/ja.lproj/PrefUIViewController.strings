@@ -4,7 +4,7 @@
 "0Gp-vj-UzY.title" = "下に固定";
 
 /* Class = "NSMenuItem"; title = "0.5x video size"; ObjectID = "0eK-kv-btH"; */
-"0eK-kv-btH.title" = "ビデオのサイズを0.5倍";
+"0eK-kv-btH.title" = "ビデオのサイズの0.5倍";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "0kj-QC-B9P"; */
 "0kj-QC-B9P.title" = "Box";
@@ -49,7 +49,7 @@
 "EAa-gN-8dL.title" = "残り時間を表示";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Display:"; ObjectID = "F2e-CS-KXl"; */
-"F2e-CS-KXl.title" = "表示画面:";
+"F2e-CS-KXl.title" = "オンスクリーン\nディスプレイ (OSD):";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "GKy-3g-4MB"; */
 "GKy-3g-4MB.title" = "ウィンドウ:";
@@ -112,7 +112,7 @@
 "UhG-bZ-2zY.title" = "ポイント";
 
 /* Class = "NSMenuItem"; title = "Dark"; ObjectID = "VvZ-mQ-wQB"; */
-"VvZ-mQ-wQB.title" = "Dark";
+"VvZ-mQ-wQB.title" = "ダーク";
 
 /* Class = "NSTextFieldCell"; title = "20"; ObjectID = "WPh-0F-JGL"; */
 "WPh-0F-JGL.title" = "20";
@@ -145,7 +145,7 @@
 "fsj-YE-OB7.title" = "Retinaディスプレイならばその解像度を使用する";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Controller:"; ObjectID = "g06-Ja-Ot8"; */
-"g06-Ja-Ot8.title" = "画面上のコントローラ:";
+"g06-Ja-Ot8.title" = "オンスクリーン\nコントローラ (OSC):";
 
 /* Class = "NSTextFieldCell"; title = "of the screen"; ObjectID = "iRn-3s-oQH"; */
 "iRn-3s-oQH.title" = "側の画面へ";
@@ -160,7 +160,7 @@
 "l54-63-V6n.title" = "レイアウト:";
 
 /* Class = "NSMenuItem"; title = "Light"; ObjectID = "lZc-Dl-3cQ"; */
-"lZc-Dl-3cQ.title" = "Light";
+"lZc-Dl-3cQ.title" = "ライト";
 
 /* Class = "NSTextFieldCell"; title = "Appearance:"; ObjectID = "mM7-1Q-FyL"; */
 "mM7-1Q-FyL.title" = "外観:";
@@ -208,13 +208,13 @@
 "vdi-lO-q6e.title" = "スクリーンに合わせる";
 
 /* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
-"xMh-SP-nkc.title" = "OSDの有効化";
+"xMh-SP-nkc.title" = "OSDを有効化";
 
 /* Class = "NSTextFieldCell"; title = "Toolbar:"; ObjectID = "xP1-Vh-27X"; */
 "xP1-Vh-27X.title" = "ツールバー:";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "xrJ-Um-BrJ"; */
-"xrJ-Um-BrJ.title" = "%（画面の割合）";
+"xrJ-Um-BrJ.title" = "% (画面の割合)";
 
 /* Class = "NSButtonCell"; title = "Always"; ObjectID = "yIN-jg-MxS"; */
 "yIN-jg-MxS.title" = "常に";

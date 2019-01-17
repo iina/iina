@@ -862,5 +862,5 @@ struct Preference {
   static func `enum`<T: InitializingFromKey>(for key: Key) -> T {
     return T.init(key: key) ?? T.defaultValue
   }
-  
+
 }

@@ -53,20 +53,20 @@ class Utility {
     case .warning:
       alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
     }
-    
+
     var format: String
     if let stringComment = comment {
       format = NSLocalizedString("alert." + key, comment: stringComment)
     } else {
       format = NSLocalizedString("alert." + key, comment: key)
     }
-    
+
     if let stringArguments = arguments {
       alert.informativeText = String(format: format, arguments: stringArguments)
     } else {
       alert.informativeText = String(format: format)
     }
-    
+
     alert.alertStyle = style
     if let sheetWindow = sheetWindow {
       alert.beginSheetModal(for: sheetWindow)
@@ -77,7 +77,7 @@ class Utility {
 
   // MARK: - Panels, Alerts
 
-  /** 
+  /**
    Pop up an ask panel.
    - Parameters:
      - key: A localization key. "alert.`key`.title" will be used as alert title, and "alert.`key`.message" will be the informative text.
@@ -318,7 +318,7 @@ class Utility {
   }
 
   static func getFilePath(Configs userConfigs: [String: Any]!, forConfig conf: String, showAlert: Bool = true) -> String? {
-    
+
     // if is default config
     if let dv = PrefKeyBindingViewController.defaultConfigs[conf] {
       return dv
@@ -331,7 +331,7 @@ class Utility {
       return nil
     }
   }
-  
+
   static let appSupportDirUrl: URL = {
     // get path
     let asPath = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)

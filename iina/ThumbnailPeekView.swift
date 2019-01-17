@@ -24,5 +24,5 @@ class ThumbnailPeekView: NSView {
     self.imageView.layer?.cornerRadius = 4
     self.imageView.layer?.masksToBounds = true
   }
-    
+
 }

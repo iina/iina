@@ -21,7 +21,7 @@ class SleepPreventer: NSObject {
     if preventedSleep {
       return
     }
-    
+
     let success = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep as NSString,
                                               IOPMAssertionLevel(kIOPMAssertionLevelOn),
                                               reason,

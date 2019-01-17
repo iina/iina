@@ -18,11 +18,11 @@ struct AppData {
 //  static let availableSpeedValues: [Double] = [-32, -16, -8, -4, -2, -1, 1, 2, 4, 8, 16, 32]
   // Stopgap for https://github.com/mpv-player/mpv/issues/4000
   static let availableSpeedValues: [Double] = [0.03125, 0.0625, 0.125, 0.25, 0.5, 1, 2, 4, 8, 16, 32]
-  
+
   /** min/max speed for playback **/
   static let minSpeed = 0.25
   static let maxSpeed = 16.0
-  
+
   /** generate aspect and crop options in menu */
   static let aspects: [String] = ["4:3", "5:4", "16:9", "16:10", "1:1", "3:2", "2.21:1", "2.35:1", "2.39:1"]
 
@@ -57,6 +57,7 @@ struct AppData {
 
   static let widthWhenNoVideo = 480
   static let heightWhenNoVideo = 480
+  static let sizeWhenNoVideo = NSSize(width: widthWhenNoVideo, height: heightWhenNoVideo)
 }
 
 

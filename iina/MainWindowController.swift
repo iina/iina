@@ -603,6 +603,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       w.setFrame(wf, display: false)
     }
 
+    w.aspectRatio = AppData.sizeWhenNoVideo
+
     // sidebar views
     sideBarView.isHidden = true
 
@@ -1343,7 +1345,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     standardWindowButtons.forEach { $0.alphaValue = 0 }
     titleTextField?.alphaValue = 0
-    
+
     setWindowFloatingOnTop(false)
 
     thumbnailPeekView.isHidden = true
@@ -2800,11 +2802,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 extension MainWindowController: PIPViewControllerDelegate {
 
   func enterPIP() {
-    // Exit fullscreen if necessary
-    if fsState.isFullscreen {
-      toggleWindowFullScreen()
-    }
-
     pipStatus = .inPIP
     showUI()
 

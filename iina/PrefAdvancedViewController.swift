@@ -45,7 +45,6 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    updateControlStatus(self)
 
     guard let op = Preference.value(for: .userOptions) as? [[String]] else {
       Utility.showAlert("extra_option.cannot_read", sheetWindow: view.window)
@@ -64,15 +63,6 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   }
 
   // MARK: - IBAction
-
-  @IBAction func updateControlStatus(_ sender: AnyObject) {
-    let enable = enableSettingsBtn.state == .on
-    settingsView.subviews.forEach { view in
-      if let control = view as? NSControl {
-        control.isEnabled = enable
-      }
-    }
-  }
 
   @IBAction func revealLogDir(_ sender: AnyObject) {
     NSWorkspace.shared.open(Utility.logDirURL)

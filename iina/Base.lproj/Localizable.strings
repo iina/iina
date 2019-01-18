@@ -21,7 +21,7 @@
 "playlist.chapter_cap" = "CHAPTERS";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering... %d%%";
+"main.buffering_indicator" = "Buffering… %d%%";
 "main.opening_stream" = "Opening stream…";
 
 // QuickSettingViewController.swift
@@ -63,7 +63,7 @@
 "osd.find_online_sub" = "Finding online subtitles...";
 "osd.find_online_sub.source" = "from";
 "osd.sub_not_found" = "No subtitles found";
-"osd.sub_found" = "%d subtitle(s) found. Downloading...";
+"osd.sub_found" = "%d subtitles found. Downloading...";
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
 "osd.network_error" = "Network error";
@@ -148,7 +148,7 @@
 "alert.config.empty_name" = "The name cannot be empty.";
 "alert.config.name_existing" = "The name already exists.";
 "alert.config.file_existing.title" = "File Already Exists";
-"alert.config.file_existing.message" = "It should not happen. Choose OK to overwrite, Cancel to reveal the file in finder.";
+"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
 "alert.config.cannot_create" = "Cannot create config file!\n%@";
 "alert.config.cannot_write" = "Cannot write to config file!";
 
@@ -166,7 +166,7 @@
 "alert.playlist.error_deleting" = "Error deleting: %@";
 
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle language in preferences before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 
@@ -185,15 +185,15 @@
 
 "alert.open_url.title" = "Open URL";
 "alert.open_url.message" = "Please enter the URL:";
-"alert.choose_media_file.title" = "Choose Media File";
+"alert.choose_media_file.title" = "Choose Media Files";
 
 "alert.add_url.title" = "Add URL";
 "alert.add_url.message" = "Please enter the URL:";
 
 "alert.delete_history.title" = "Delete Playback History";
-"alert.delete_history.message" = "Are you sure to delete select entries?";
+"alert.delete_history.message" = "Are you sure to delete selected entries?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video fliter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like, setting the crop) to get it working.";
+"alert.filter_hwdec.message" = "You are about to apply a video fliter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Abort";
 "alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
 "alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
@@ -211,7 +211,7 @@
 
 "alert.no_video_track" = "There is no video track.";
 
-"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate it before editing.";
+"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
 
 "alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
 "alert.assrt_register.register" = "Register Now";
@@ -245,9 +245,9 @@
 "filter.video_filters" = "Video Filters";
 "filter.audio_filters" = "Audio Filters";
 
-"hwdec.no" = "Disable Hardware decoding.";
-"hwdec.auto" = "Enable hardware decoding. However, most video filters won't work properly.";
-"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but works with video filters.";
+"hwdec.no" = "Disable hardware decoding.";
+"hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
+"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
 
 "subencoding.auto" = "Auto detect";
 

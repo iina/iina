@@ -5,7 +5,7 @@
 
 # Enviornment
 language: swift
-osx_image: xcode9.4
+osx_image: xcode10
 os: osx
 
 env:
@@ -18,7 +18,7 @@ env:
 before_install:
     - env
     - locale
-    - gem install cocoapods -v 1.5.3 --no-rdoc --no-ri --no-document --quiet
+    - gem install cocoapods -v 1.6.0.beta.2 --no-rdoc --no-ri --no-document --quiet
     - pod install
 
 # Build Jobs

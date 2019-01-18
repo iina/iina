@@ -1,35 +1,13 @@
-#
-# .travis.yml
-# iina
-#
-
-# Enviornment
 language: swift
-osx_image: xcode10
-os: osx
+osx_image: xcode10.1
 
-env:
-    global:
-        - LANG=en_US.UTF-8
-        - LC_ALL=en_US.UTF-8
-        - LANGUAGE=en_US.UTF-8
-
-# CocoaPods
 before_install:
-    - env
-    - locale
-    - gem install cocoapods -v 1.6.0.beta.2 --no-rdoc --no-ri --no-document --quiet
-    - pod install
+  # Workaround for https://github.com/CocoaPods/CocoaPods/issues/7708.
+  # Remove when CocoaPods 1.6.0 is released.
+  - gem install cocoapods --pre
 
-# Build Jobs
-script:
-    # Clean
-    - xcodebuild clean
-    # IINA main app
-    - xcodebuild -workspace iina.xcworkspace -scheme iina
-    # IINA cli
-    - xcodebuild -workspace iina.xcworkspace -scheme iina-cli
+# Build the main app, which happens to depend on the other two targets.
+script: xcodebuild -workspace iina.xcworkspace -scheme iina
 
-# After Build
 notifications:
-    email: false
+  email: false

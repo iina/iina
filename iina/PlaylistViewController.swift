@@ -115,6 +115,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     // register for drag and drop
     playlistTableView.registerForDraggedTypes([.iinaPlaylistItem, .nsFilenames, .nsURL, .string])
 
+    (subPopover.contentViewController as! SubPopoverViewController).player = player
     if let popoverView = subPopover.contentViewController?.view,
       popoverView.trackingAreas.isEmpty {
       popoverView.addTrackingArea(NSTrackingArea(rect: popoverView.bounds,
@@ -770,10 +771,7 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
   @IBOutlet weak var playlistTableView: NSTableView!
   @IBOutlet weak var heightConstraint: NSLayoutConstraint!
 
-  lazy var playerCore: PlayerCore = {
-    let windowController = self.playlistTableView.window!.windowController
-    return (windowController as? MainWindowController)?.player ?? (windowController as! MiniPlayerWindowController).player
-  }()
+  weak var player: PlayerCore!
 
   var filePath: String = ""
 
@@ -782,18 +780,18 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    guard let matchedSubs = playerCore.info.matchedSubs[filePath] else { return nil }
+    guard let matchedSubs = player.info.matchedSubs[filePath] else { return nil }
     return matchedSubs[row].lastPathComponent
   }
 
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return playerCore.info.matchedSubs[filePath]?.count ?? 0
+    return player.info.matchedSubs[filePath]?.count ?? 0
   }
 
   @IBAction func wrongSubBtnAction(_ sender: AnyObject) {
-    playerCore.info.matchedSubs[filePath]?.removeAll()
+    player.info.matchedSubs[filePath]?.removeAll()
     tableView.reloadData()
-    if let row = playerCore.info.playlist.index(where: { $0.filename == filePath }) {
+    if let row = player.info.playlist.index(where: { $0.filename == filePath }) {
       playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
     }
   }

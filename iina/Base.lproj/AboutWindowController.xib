@@ -200,7 +200,7 @@
                                                     </textField>
                                                     <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaQ-kz-jCh">
                                                         <rect key="frame" x="4" y="204" width="376" height="140"/>
-                                                        <clipView key="contentView" copiesOnScroll="NO" id="WXV-ZB-2K2">
+                                                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="WXV-ZB-2K2">
                                                             <rect key="frame" x="0.0" y="0.0" width="376" height="140"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>

@@ -90,8 +90,8 @@
 "hwdec.no" = "Dezactivează decodarea hardware.";
 "keymapping.message" = "Apasă o tasta pentru a înregistra.";
 "keymapping.title" = "Atribuire de taste";
-"main.buffering_indicator" = "Buffering... %d%%";
-"main.opening_stream" = "Se deschide streamul...";
+"main.buffering_indicator" = "Buffering… %d%%";
+"main.opening_stream" = "Se deschide streamul…";
 "menu.audio_delay" = "Întârziere audio: %.2fs";
 "menu.audio_delay_down" = "Întârziere audio -%.1fs";
 "menu.audio_delay_up" = "Întârziere audio +%.1fs";
@@ -135,7 +135,7 @@
 "osd.file_error" = "Eroare la citirea fișierului";
 "osd.filter_added" = "Filtru adăugat: %@";
 "osd.filter_removed" = "Filtru șters";
-"osd.find_online_sub" = "Găsește subtitrări online...";
+"osd.find_online_sub" = "Găsește subtitrări online…";
 "osd.find_online_sub.source" = "de la";
 "osd.mute" = "Mut";
 "osd.network_error" = "Eroare de rețea";
@@ -149,7 +149,7 @@
 "osd.sub_delay.later" = "Întârziere subtitrare: %.2fs mai târziu";
 "osd.sub_delay.nodelay" = "Întârziere subtitrare: Fără întârziere";
 "osd.sub_downloaded" = "Subitrare descărcată";
-"osd.sub_found" = "%d subtitrări găsite. Se descarcă...";
+"osd.sub_found" = "%d subtitrări găsite. Se descarcă…";
 "osd.sub_not_found" = "Nu s-au găsit subtitrări";
 "osd.sub_saved" = "Subtitrare salvată";
 "osd.subtitle_pos" = "Poziție subtitrare: %.1f";
@@ -161,9 +161,9 @@
 "osd.video_eq.hue" = "Nuanță: %i";
 "osd.video_eq.saturation" = "Saturație: %i";
 "osd.volume" = "Volum: %i";
-"pl_menu.add_file" = "Adaugă Fișier...";
-"pl_menu.add_sub" = "Adaugă subtitrare...";
-"pl_menu.add_url" = "Adaugă URL...";
+"pl_menu.add_file" = "Adaugă Fișier…";
+"pl_menu.add_sub" = "Adaugă subtitrare…";
+"pl_menu.add_url" = "Adaugă URL…";
 "pl_menu.clear_playlist" = "Șterge lista de redare";
 "pl_menu.delete" = "Mută la Coș";
 "pl_menu.delete_after_play" = "Mută la Coș după redare";
@@ -184,7 +184,7 @@
 "preference.advanced" = "Avansat";
 "preference.control" = "Control";
 "preference.general" = "General";
-"preference.key_binding_hint_1" = "Pentru a edita o atribuire de taste in configurația curentă, click pe butonul „Duplicare...” pentru a crea o copie.";
+"preference.key_binding_hint_1" = "Pentru a edita o atribuire de taste in configurația curentă, click pe butonul „Duplicare…” pentru a crea o copie.";
 "preference.key_binding_hint_2" = "Dublu click pe un rând din dreapta pentru a edita tasta atribuită.";
 "preference.keybindings" = "Atribuiri de taste";
 "preference.logged_in_as" = "Logat ca %@";

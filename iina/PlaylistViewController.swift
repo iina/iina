@@ -36,8 +36,14 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
    view is ready. The value will be handled after loaded.
    */
   private var pendingSwitchRequest: TabViewType?
+  
+  /// Whether the playlist item currently loaded should be made visible immediately in the playlist view in order to avoid having to scroll manually, e.g. after opening an .m3u with 1000 entries and resuming playback of the 500th. Set to false after scrolling has been performed.
+  private var shouldScrollToCurrentPlaylistItem: Bool = true
 
   var playlistChangeObserver: NSObjectProtocol?
+  
+  /// Observes whenever the user manually replaces the entire playlist with a new one by opening a file/URL. Used to determine whether it is desirable to auto-scroll the playlist to the current (resumed) item. Actually performing the scroll has to wait until whenever mpv reports an updated playlist.
+  var playlistReplacedObserver: NSObjectProtocol?
 
   /** Enum for tab switching */
   enum TabViewType: Int {
@@ -106,6 +112,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       self.playlistTotalLengthIsReady = false
       self.reloadData(playlist: true, chapters: false)
     }
+    playlistReplacedObserver = NotificationCenter.default.addObserver(forName: .iinaPlaylistReplaced, object: player, queue: OperationQueue.main) { _ in
+      // The user manually replaced the entire playlist; now is a good time to auto-scroll
+      self.shouldScrollToCurrentPlaylistItem = true
+    }
+
 
     // register for double click action
     let action = #selector(performDoubleAction(sender:))
@@ -123,10 +134,17 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
                                                  owner: mainWindow, userInfo: ["obj": 0]))
     }
   }
-
-  override func viewDidAppear() {
+  
+  override func viewWillAppear() {
+    super.viewWillAppear()
+    
     reloadData(playlist: true, chapters: true)
-
+  }
+  
+  
+  override func viewDidAppear() {
+    super.viewDidAppear()
+    
     let loopStatus = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     loopBtn.state = (loopStatus == "inf" || loopStatus == "force") ? .on : .off
   }
@@ -139,13 +157,27 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     if playlist {
       player.getPlaylist()
       playlistTableView.reloadData()
+      
+      // check whether to perfrom an auto-scroll to the current item
+      // Since `PlayerCore` for some unknown reason seems to want to directly reload these views' data when replacing the playlist, this is the only place to check whether to perform auto-scrolling (for now, since `playlistTableView` is still non-private).
+      self.scrollToCurrentPlaylistItemIfNecessary()
     }
     if chapters {
       player.getChapters()
       chapterTableView.reloadData()
     }
   }
-
+  
+  /// Will perform a scroll in the playlist table if `shouldScrollToCurrentPlaylistItem` is `true`
+  private func scrollToCurrentPlaylistItemIfNecessary() {
+    guard self.shouldScrollToCurrentPlaylistItem else { return }
+    
+    guard let currentItemIndex = self.player.info.playlist.firstIndex(where: { $0.isCurrent }) else { return }
+    self.playlistTableView.scrollRowToVisible(currentItemIndex)
+    
+    self.shouldScrollToCurrentPlaylistItem = false
+  }
+  
   private func showTotalLength() {
     guard let playlistTotalLength = playlistTotalLength, playlistTotalLengthIsReady else { return }
     totalLengthLabel.isHidden = false

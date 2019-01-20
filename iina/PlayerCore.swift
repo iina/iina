@@ -156,6 +156,10 @@ class PlayerCore: NSObject {
       return
     }
     Logger.log("Open URL: \(url.absoluteString)", subsystem: subsystem)
+    
+    // The user has at this point manually replaced the entire playlist
+    self.postNotification(.iinaPlaylistReplaced)
+
     let isNetwork = !url.isFileURL
     if shouldAutoLoad {
       info.shouldAutoLoadFiles = true
@@ -1285,7 +1289,7 @@ class PlayerCore: NSObject {
     case .playlist:
       DispatchQueue.main.async {
         if self.isInMiniPlayer ? self.miniPlayer.isPlaylistVisible : self.mainWindow.sideBarStatus == .playlist {
-          self.mainWindow.playlistView.playlistTableView.reloadData()
+          self.mainWindow.playlistView.reloadData(playlist: true, chapters: false)
         }
       }
 

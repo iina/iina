@@ -17,3 +17,10 @@ target 'iina' do
 #  end
 
 end
+
+target 'iina-server' do
+
+  pod 'Swifter', '~> 1.4.5'
+  pod 'BlueSocket'
+
+end

@@ -1,4 +1,5 @@
 PODS:
+  - BlueSocket (1.0.44)
   - GRMustache.swift (2.0.0)
   - GzipSwift (4.0.4)
   - Just (0.7.1)
@@ -10,19 +11,24 @@ PODS:
   - PromiseKit/Foundation (6.8.3):
     - PromiseKit/CorePromise
   - Sparkle (1.21.2)
+  - Swifter (1.4.5)
 
 DEPENDENCIES:
+  - BlueSocket
   - GRMustache.swift (from `https://github.com/iina/GRMustache.swift.git`)
   - GzipSwift
   - Just (from `https://github.com/JustHTTP/Just.git`)
   - PromiseKit
   - Sparkle
+  - Swifter (~> 1.4.5)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
+    - BlueSocket
     - GzipSwift
     - PromiseKit
     - Sparkle
+    - Swifter
 
 EXTERNAL SOURCES:
   GRMustache.swift:
@@ -39,12 +45,14 @@ CHECKOUT OPTIONS:
     :git: https://github.com/JustHTTP/Just.git
 
 SPEC CHECKSUMS:
+  BlueSocket: 4812c58c34e6d667bc43736ec9c855cf408b98f0
   GRMustache.swift: 53405b02c374520f9193cf41bfa677f03a6d70aa
   GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
   Just: 60c0995e04718eb621a07abef45ce6883c562f2b
   PromiseKit: 94c6e781838c5bf4717677d0d882b0e7250c80fc
   Sparkle: 1678d4707e7665960c7d1b43aca125e6392d11c4
+  Swifter: eb2bc1d192a1c09169c7fefd01971565fa940521
 
-PODFILE CHECKSUM: c149e2f5a370325310fa22313fe8c514d0967750
+PODFILE CHECKSUM: 034b69bffad73c5646ce6c96a6124dd10f129a76
 
 COCOAPODS: 1.6.0

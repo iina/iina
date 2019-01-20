@@ -41,12 +41,12 @@ IINA ships with pre-compiled dynamic libraries for convenience reasons. If you a
 
 *Note: The current stable version of CocoaPods [has an unfortunate bug](https://github.com/CocoaPods/CocoaPods/issues/7708) that prevents IINA from building, which has luckily been fixed in their master branch and set to roll out in version 1.6. To get access to this version, please install CocoaPods with `sudo gem install cocoapods --pre` and ignore the installation instructions below*.
 
-### Using RubyGems
+#### Using RubyGems
 ```console
 $ sudo gem install cocoapods
 ```
 
-### Using Homebrew
+#### Using Homebrew
 ```console
 $ brew install cocoapods
 ```
@@ -55,7 +55,7 @@ $ brew install cocoapods
 
 3. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
 
-## Building mpv manually
+### Building mpv manually
 
 1. Install mpv:
 
@@ -75,7 +75,7 @@ Feel free to include your own copies of the other libraries if you'd like.
 
 IINA is always looking for contributions, whether it's through bug reports, code, or new translations.
 
-* If you find a bug in IINA, or would like to suggest a new feature or enhancement, it'd be nice if you could [search your problem first](https://github.com/iina/iina/issues); while we don't mind duplicates, keeping issues unique helps us save time and considates effort. If you can't find your issue, feel free [to file a new one](https://github.com/iina/iina/issues/new).
+* If you find a bug in IINA, or would like to suggest a new feature or enhancement, it'd be nice if you could [search your problem first](https://github.com/iina/iina/issues); while we don't mind duplicates, keeping issues unique helps us save time and considates effort. If you can't find your issue, feel free to [file a new one](https://github.com/iina/iina/issues/new).
 
 * If you're looking to contribute code, please read [CONTRIBUTING.md](CONTRIBUTING.md)–it has information on IINA's process for handling contributions, and tips on how the code is structured to make your work easier.
 * If you'd like to translate IINA to your language, please check the [Translation Status](https://github.com/iina/iina/wiki/Translation-Status) page first: if a language is labeled as "Need help", then feel free to [update the translation](https://github.com/iina/iina/wiki/Translation#update-translations). If it doesn't contain your language at all, you can [submit a new translation](https://github.com/iina/iina/wiki/Translation). If you need help working on a translation, you can contact [@lhc70000](https://github.com/lhc70000) or file an issue and one of the maintainers will try to help you out.

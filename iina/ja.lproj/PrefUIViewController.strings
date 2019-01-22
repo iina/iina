@@ -36,6 +36,9 @@
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
 "AE4-BD-wZi.title" = "% 画面";
 
+/* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
+"AmS-Sl-b2h.title" = "ウィンドウ:";
+
 /* Class = "NSMenuItem"; title = "Width:"; ObjectID = "B1c-oO-fIs"; */
 "B1c-oO-fIs.title" = "幅:";
 
@@ -48,8 +51,15 @@
 /* Class = "NSButtonCell"; title = "Show remaining time instead of total duration"; ObjectID = "EAa-gN-8dL"; */
 "EAa-gN-8dL.title" = "残り時間を表示";
 
+/* Class = "NSTextFieldCell"; title = "When entering Picture-in-Picture:"; ObjectID = "EUd-RD-g0T"; */
+"EUd-RD-g0T.title" = "Picture-in-Pictureの使用時:";
+
 /* Class = "NSTextFieldCell"; title = "On Screen Display:"; ObjectID = "F2e-CS-KXl"; */
 "F2e-CS-KXl.title" = "表示画面:";
+
+/* Class = "NSTextFieldCell"; title = "Picture-in-
+Picture:"; ObjectID = "G8w-J7-1q1"; */
+"G8w-J7-1q1.title" = "Picture-in-\nPicture:";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "GKy-3g-4MB"; */
 "GKy-3g-4MB.title" = "ウィンドウ:";
@@ -62,6 +72,9 @@
 
 /* Class = "NSMenuItem"; title = "1.5x video size"; ObjectID = "Goh-X4-4f1"; */
 "Goh-X4-4f1.title" = "ビデオサイズの1.5倍";
+
+/* Class = "NSButtonCell"; title = "Minimize"; ObjectID = "H1F-mm-Saq"; */
+"H1F-mm-Saq.title" = "最小化";
 
 /* Class = "NSTextFieldCell"; title = "pt"; ObjectID = "I8t-ey-016"; */
 "I8t-ey-016.title" = "pt";
@@ -86,6 +99,9 @@
 
 /* Class = "NSMenuItem"; title = "right"; ObjectID = "NYG-e9-DV0"; */
 "NYG-e9-DV0.title" = "右";
+
+/* Class = "NSButtonCell"; title = "Automatically pause playback"; ObjectID = "O8C-Vi-rSp"; */
+"O8C-Vi-rSp.title" = "自動で再生を一時停止する";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "ObY-7B-NTO"; */
 "ObY-7B-NTO.title" = "秒後";
@@ -129,17 +145,26 @@
 /* Class = "NSTextFieldCell"; title = "X offset:"; ObjectID = "Ymw-tr-6rw"; */
 "Ymw-tr-6rw.title" = "X座標:";
 
+/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "Zc7-sP-Rdp"; */
+"Zc7-sP-Rdp.title" = "何もしない";
+
 /* Class = "NSTextFieldCell"; title = "Resize the window to fit video size:"; ObjectID = "Zjr-q7-WsD"; */
 "Zjr-q7-WsD.title" = "ウィンドウの大きさをビデオサイズに合わせる:";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "bYj-5g-zYO"; */
 "bYj-5g-zYO.title" = "Box";
 
+/* Class = "NSButtonCell"; title = "Toggle Picture-in-Picture by minimizing/un-minimizing the window"; ObjectID = "baY-O6-fcB"; */
+"baY-O6-fcB.title" = "ウィンドウの最小化/復元時にPicture-in-Pictureを切り替える";
+
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "ビデオサイズの2倍";
 
 /* Class = "NSButtonCell"; title = "Disabled"; ObjectID = "duf-3s-3bL"; */
 "duf-3s-3bL.title" = "無効";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "eTQ-fy-fNJ"; */
+"eTQ-fy-fNJ.title" = "Box";
 
 /* Class = "NSButtonCell"; title = "Use physical resolution on Retina displays"; ObjectID = "fsj-YE-OB7"; */
 "fsj-YE-OB7.title" = "Retinaディスプレイならばその解像度を使用する";
@@ -215,6 +240,9 @@
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "xrJ-Um-BrJ"; */
 "xrJ-Um-BrJ.title" = "%（画面の割合）";
+
+/* Class = "NSButtonCell"; title = "Hide"; ObjectID = "xtL-XT-xzb"; */
+"xtL-XT-xzb.title" = "隠す";
 
 /* Class = "NSButtonCell"; title = "Always"; ObjectID = "yIN-jg-MxS"; */
 "yIN-jg-MxS.title" = "常に";

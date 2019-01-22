@@ -120,6 +120,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
   var isVideoLoaded: Bool = false
+  
+  var isWindowHidden: Bool = false
+  var isWindowMiniaturizedDueToPip = false
 
   // might use another obj to handle slider?
   var isMouseInWindow: Bool = false
@@ -1620,11 +1623,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       player.togglePause(true)
     }
   }
+  
+  func windowDidMiniaturize(_ notification: Notification) {
+    if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
+      if #available(OSX 10.12, *) {
+        enterPIP()
+      }
+    }
+  }
 
   func windowDidDeminiaturize(_ notification: Notification) {
     if Preference.bool(for: .pauseWhenMinimized) && isPausedDueToMiniaturization {
       player.togglePause(false)
       isPausedDueToMiniaturization = false
+    }
+    if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
+      if #available(OSX 10.12, *) {
+        exitPIP()
+      }
     }
   }
 
@@ -2813,17 +2829,29 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     videoView.videoLayer.draw(forced: true)
     
-    // Minimizing the main window when entering PiP but only if the window is not in fullscreen mode
-    if !(window?.styleMask.contains(.fullScreen) ?? false) && Preference.bool(for: .hideWindowWhenPip) {
-      window?.miniaturize(self)
+    if let window = self.window {
+      let windowShouldDoNothing = window.styleMask.contains(.fullScreen) || window.isMiniaturized
+      let pipBehavior = windowShouldDoNothing ? .doNothing : Preference.enum(for: .windowBehaviorWhenPip) as Preference.WindowBehaviorWhenPip
+      switch pipBehavior {
+      case .doNothing:
+        break
+      case .hide:
+        isWindowHidden = true
+        window.orderOut(self)
+        break
+      case .minimize:
+        isWindowMiniaturizedDueToPip = true
+        window.miniaturize(self)
+        break
+      }
+      if Preference.bool(for: .pauseWhenPip) {
+        player.togglePause(true)
+      }
     }
   }
 
   func exitPIP() {
     if pipShouldClose(pip) {
-      if window?.isMiniaturized ?? true {
-        window?.deminiaturize(self)
-      }
       // Prod Swift to pick the dismiss(_ viewController: NSViewController)
       // overload over dismiss(_ sender: Any?). A change in the way implicitly
       // unwrapped optionals are handled in Swift means that the wrong method
@@ -2833,6 +2861,10 @@ extension MainWindowController: PIPViewControllerDelegate {
   }
 
   func doneExitingPIP() {
+    if isWindowHidden {
+      window?.makeKeyAndOrderFront(self)
+    }
+    
     pipStatus = .notInPIP
 
     pipOverlayView.isHidden = true
@@ -2841,6 +2873,9 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     videoView.videoLayer.draw(forced: true)
     updateTimer()
+    
+    isWindowMiniaturizedDueToPip = false
+    isWindowHidden = false
   }
 
   func pipShouldClose(_ pip: PIPViewController) -> Bool {

@@ -39,7 +39,7 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   }
 
   override var sectionViews: [NSView] {
-    return [sectionAppearanceView, sectionWindowView, sectionOSCView, sectionOSDView, sectionThumbnailView]
+    return [sectionAppearanceView, sectionWindowView, sectionOSCView, sectionOSDView, sectionThumbnailView, sectionPictureInPictureView]
   }
 
   private let toolbarSettingsSheetController = PrefOSCToolbarSettingsSheetController()
@@ -49,7 +49,8 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   @IBOutlet var sectionOSCView: NSView!
   @IBOutlet var sectionOSDView: NSView!
   @IBOutlet var sectionThumbnailView: NSView!
-
+  @IBOutlet var sectionPictureInPictureView: NSView!
+    
   @IBOutlet weak var themeMenu: NSMenu!
   @IBOutlet weak var oscPreviewImageView: NSImageView!
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!
@@ -72,8 +73,11 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   @IBOutlet weak var windowResizeAlwaysButton: NSButton!
   @IBOutlet weak var windowResizeOnlyWhenOpenButton: NSButton!
   @IBOutlet weak var windowResizeNeverButton: NSButton!
-
-
+  
+  @IBOutlet weak var pipDoNothing: NSButton!
+  @IBOutlet weak var pipHideWindow: NSButton!
+  @IBOutlet weak var pipMinimizeWindow: NSButton!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     oscPositionPopupBtnAction(oscPositionPopupButton)
@@ -81,6 +85,7 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     updateOSCToolbarButtons()
     setupGeometryRelatedControls()
     setupResizingRelatedControls()
+    setupPipBehaviorRelatedControls()
 
     let removeThemeMenuItemWithTag = { (tag: Int) in
       if let item = self.themeMenu.item(withTag: tag) {
@@ -138,6 +143,10 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
 
   @IBAction func setupResizingRelatedControls(_ sender: NSButton) {
     Preference.set(sender.tag, for: .resizeWindowTiming)
+  }
+
+  @IBAction func setupPipBehaviorRelatedControls(_ sender: NSButton) {
+    Preference.set(sender.tag, for: .windowBehaviorWhenPip)
   }
 
   @IBAction func customizeOSCToolbarAction(_ sender: Any) {
@@ -215,6 +224,12 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     let resizeOption = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
     ([windowResizeNeverButton, windowResizeOnlyWhenOpenButton, windowResizeAlwaysButton] as [NSButton])
       .first { $0.tag == resizeOption.rawValue }?.state = .on
+  }
+
+  private func setupPipBehaviorRelatedControls() {
+    let pipBehaviorOption = Preference.enum(for: .windowBehaviorWhenPip) as Preference.WindowBehaviorWhenPip
+    ([pipDoNothing, pipHideWindow, pipMinimizeWindow] as [NSButton])
+        .first { $0.tag == pipBehaviorOption.rawValue }?.state = .on
   }
 
   private func setSubViews(of view: NSBox, enabled: Bool) {

@@ -120,6 +120,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
   var isVideoLoaded: Bool = false
+  
+  var isWindowHidden: Bool = false
+  var isWindowMiniaturizedDueToPip = false
 
   // might use another obj to handle slider?
   var isMouseInWindow: Bool = false
@@ -1622,11 +1625,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       player.togglePause(true)
     }
   }
+  
+  func windowDidMiniaturize(_ notification: Notification) {
+    if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
+      if #available(OSX 10.12, *) {
+        enterPIP()
+      }
+    }
+  }
 
   func windowDidDeminiaturize(_ notification: Notification) {
     if Preference.bool(for: .pauseWhenMinimized) && isPausedDueToMiniaturization {
       player.togglePause(false)
       isPausedDueToMiniaturization = false
+    }
+    if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
+      if #available(OSX 10.12, *) {
+        exitPIP()
+      }
     }
   }
 
@@ -2814,6 +2830,26 @@ extension MainWindowController: PIPViewControllerDelegate {
     pipOverlayView.isHidden = false
 
     videoView.videoLayer.draw(forced: true)
+    
+    if let window = self.window {
+      let windowShouldDoNothing = window.styleMask.contains(.fullScreen) || window.isMiniaturized
+      let pipBehavior = windowShouldDoNothing ? .doNothing : Preference.enum(for: .windowBehaviorWhenPip) as Preference.WindowBehaviorWhenPip
+      switch pipBehavior {
+      case .doNothing:
+        break
+      case .hide:
+        isWindowHidden = true
+        window.orderOut(self)
+        break
+      case .minimize:
+        isWindowMiniaturizedDueToPip = true
+        window.miniaturize(self)
+        break
+      }
+      if Preference.bool(for: .pauseWhenPip) {
+        player.togglePause(true)
+      }
+    }
   }
 
   func exitPIP() {
@@ -2827,6 +2863,10 @@ extension MainWindowController: PIPViewControllerDelegate {
   }
 
   func doneExitingPIP() {
+    if isWindowHidden {
+      window?.makeKeyAndOrderFront(self)
+    }
+    
     pipStatus = .notInPIP
 
     pipOverlayView.isHidden = true
@@ -2835,6 +2875,9 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     videoView.videoLayer.draw(forced: true)
     updateTimer()
+    
+    isWindowMiniaturizedDueToPip = false
+    isWindowHidden = false
   }
 
   func pipShouldClose(_ pip: PIPViewController) -> Bool {

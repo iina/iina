@@ -62,12 +62,12 @@
             <windowPositionMask key="initialPositionMask" rightStrut="YES"/>
             <rect key="contentRect" x="1539" y="436" width="424" height="395"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
-                <view key="contentView" id="se5-gp-TjO">
+            <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="424" height="397"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <tabView drawsBackground="NO" controlSize="small" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="wHY-jo-uW0">
-                        <rect key="frame" x="12" y="12" width="400" height="349"/>                        
+                        <rect key="frame" x="12" y="12" width="400" height="349"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="oPY-Uu-Jby"/>
                         </constraints>
@@ -401,7 +401,7 @@
                                     <subviews>
                                         <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o1n-DX-V8d">
                                             <rect key="frame" x="10" y="323" width="37" height="14"/>
-                                                <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Track:" id="f7i-wX-uxQ">
+                                            <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Track:" id="f7i-wX-uxQ">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -409,7 +409,7 @@
                                         </textField>
                                         <popUpButton horizontalHuggingPriority="240" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="hGJ-d0-aJu">
                                             <rect key="frame" x="53" y="319" width="338" height="22"/>
-                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="oaq-Mf-xDk">
+                                            <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="oaq-Mf-xDk">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <menu key="menu" id="aXL-3e-ZgD"/>
@@ -462,7 +462,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dl1-oz-GjJ">
-                                            <rect key="frame" x="10" y="201" width="78" height="14"/>
+                                            <rect key="frame" x="10" y="203" width="78" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Language:" id="FIw-CH-b05">
                                                 <font key="font" metaFont="smallSystemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

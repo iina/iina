@@ -3,19 +3,19 @@
 "0ju-Sf-fcb.title" = "0";
 
 /* Class = "NSTextFieldCell"; title = "Speed:"; ObjectID = "1KQ-oZ-A2x"; */
-"1KQ-oZ-A2x.title" = "Speed:";
+"1KQ-oZ-A2x.title" = "गति:";
 
 /* Class = "NSTextFieldCell"; title = "125"; ObjectID = "1cq-dc-JfM"; */
 "1cq-dc-JfM.title" = "125";
 
 /* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
-"22j-ra-GAY.title" = "Width:";
+"22j-ra-GAY.title" = "चौड़ाई:";
 
 /* Class = "NSMenuItem"; title = "0"; ObjectID = "3eG-mV-UGW"; */
 "3eG-mV-UGW.title" = "0";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "3kI-6i-ujt"; */
-"3kI-6i-ujt.title" = "Color:";
+"3kI-6i-ujt.title" = "रंग:";
 
 /* Class = "NSTextFieldCell"; title = "+12 dB"; ObjectID = "4BZ-H1-GEU"; */
 "4BZ-H1-GEU.title" = "+12 dB";
@@ -27,25 +27,25 @@
 "51L-l6-3vz.title" = "Table View Cell";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "6LO-6y-IsA"; */
-"6LO-6y-IsA.title" = "Color:";
+"6LO-6y-IsA.title" = "रंग:";
 
 /* Class = "NSMenuItem"; title = "5"; ObjectID = "7su-au-nwq"; */
 "7su-au-nwq.title" = "5";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track..."; ObjectID = "8Ax-5X-osl"; */
-"8Ax-5X-osl.title" = "Load External Audio Track...";
+"8Ax-5X-osl.title" = "बाहरी ऑडियो ट्रैक लोड करें...";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "9ss-EF-bby"; */
 "9ss-EF-bby.title" = "Text Cell";
 
 /* Class = "NSSegmentedCell"; AB5-UZ-euc.ibShadowedLabels[0] = "Load Subtitle…"; ObjectID = "AB5-UZ-euc"; */
-"AB5-UZ-euc.ibShadowedLabels[0]" = "Load Subtitle…";
+"AB5-UZ-euc.ibShadowedLabels[0]" = "लोड उपशीर्षक…";
 
 /* Class = "NSTextFieldCell"; title = "Audio delay:"; ObjectID = "AKs-VQ-fKF"; */
-"AKs-VQ-fKF.title" = "Audio delay:";
+"AKs-VQ-fKF.title" = "ऑडियो में देरी:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "ANn-CR-JOV"; */
-"ANn-CR-JOV.title" = "Color:";
+"ANn-CR-JOV.title" = "रंग:";
 
 /* Class = "NSMenuItem"; title = "70"; ObjectID = "AmU-VN-wGN"; */
 "AmU-VN-wGN.title" = "70";
@@ -66,7 +66,7 @@
 "CI9-tC-NBv.title" = "Text Cell";
 
 /* Class = "NSTabViewItem"; label = "Video"; ObjectID = "CYP-el-A6A"; */
-"CYP-el-A6A.label" = "Video";
+"CYP-el-A6A.label" = "वीडियो";
 
 /* Class = "NSMenuItem"; title = "0.25"; ObjectID = "DdO-VX-HCz"; */
 "DdO-VX-HCz.title" = "0.25";
@@ -81,7 +81,7 @@
 "GXH-iA-cJP.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "BORDER"; ObjectID = "GlZ-YU-dNm"; */
-"GlZ-YU-dNm.title" = "BORDER";
+"GlZ-YU-dNm.title" = "बॉर्डर";
 
 /* Class = "NSTextFieldCell"; title = "31.25"; ObjectID = "HBF-J7-Tie"; */
 "HBF-J7-Tie.title" = "31.25";
@@ -105,7 +105,7 @@
 "LEZ-fv-buL.title" = "0s";
 
 /* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
-"Lnu-kz-cql.title" = "External audio:";
+"Lnu-kz-cql.title" = "बाहरी ऑडियो:";
 
 /* Class = "NSTextFieldCell"; title = "-12 dB"; ObjectID = "Lpw-ws-Ezh"; */
 "Lpw-ws-Ezh.title" = "-12 dB";
@@ -123,7 +123,7 @@
 "N1f-X9-gS0.title" = "Text Cell";
 
 /* Class = "NSButtonCell"; title = "SUBTITLES"; ObjectID = "NxO-to-jcI"; */
-"NxO-to-jcI.title" = "SUBTITLES";
+"NxO-to-jcI.title" = "उपशीर्षक";
 
 /* Class = "NSMenuItem"; title = "45"; ObjectID = "OVn-Oj-YAr"; */
 "OVn-Oj-YAr.title" = "45";
@@ -138,13 +138,13 @@
 "Qpg-8B-Eks.title" = "Table View Cell";
 
 /* Class = "NSTextFieldCell"; title = "External subtitles:"; ObjectID = "RA1-fF-OrB"; */
-"RA1-fF-OrB.title" = "External subtitles:";
+"RA1-fF-OrB.title" = "बाहरी उपशीर्षक:";
 
 /* Class = "NSSegmentedCell"; Rbb-wh-cLc.ibShadowedLabels[0] = "Search Online…"; ObjectID = "Rbb-wh-cLc"; */
-"Rbb-wh-cLc.ibShadowedLabels[0]" = "Search Online…";
+"Rbb-wh-cLc.ibShadowedLabels[0]" = "ऑनलाइन खोजें…";
 
 /* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "Rky-lo-Buu"; */
-"Rky-lo-Buu.title" = "Saturation:";
+"Rky-lo-Buu.title" = "संतृप्ति:";
 
 /* Class = "NSTextFieldCell"; title = "1k"; ObjectID = "Rtc-Eg-J2u"; */
 "Rtc-Eg-J2u.title" = "1k";
@@ -156,22 +156,22 @@
 "Spe-xo-cXu.title" = "Table View Cell";
 
 /* Class = "NSButtonCell"; title = "Deinterlace"; ObjectID = "TXm-bA-7y3"; */
-"TXm-bA-7y3.title" = "Deinterlace";
+"TXm-bA-7y3.title" = "असंग्रथित";
 
 /* Class = "NSTextFieldCell"; title = "Video track:"; ObjectID = "VzC-tM-KT7"; */
-"VzC-tM-KT7.title" = "Video track:";
+"VzC-tM-KT7.title" = "वीडियो ट्रैक:";
 
 /* Class = "NSTextFieldCell"; title = "x"; ObjectID = "W7H-mU-v3D"; */
 "W7H-mU-v3D.title" = "x";
 
 /* Class = "NSTextFieldCell"; title = "Scale:"; ObjectID = "Wbx-Ti-qiS"; */
-"Wbx-Ti-qiS.title" = "Scale:";
+"Wbx-Ti-qiS.title" = "स्केल:";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle delay:"; ObjectID = "Wkz-wW-sOM"; */
-"Wkz-wW-sOM.title" = "Subtitle delay:";
+"Wkz-wW-sOM.title" = "उपशीर्षक में देरी:";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "Xez-sb-mfB"; */
-"Xez-sb-mfB.title" = "Equalizer";
+"Xez-sb-mfB.title" = "इक्वलाइज़र";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "YCG-xK-eAs"; */
 "YCG-xK-eAs.title" = "-5s";
@@ -183,10 +183,10 @@
 "YTM-1c-Gl0.title" = "50";
 
 /* Class = "NSTextFieldCell"; title = "Aspect Ratio:"; ObjectID = "YgL-iV-bca"; */
-"YgL-iV-bca.title" = "Aspect Ratio:";
+"YgL-iV-bca.title" = "आस्पेक्ट अनुपात:";
 
 /* Class = "NSTextFieldCell"; title = "Text Style:"; ObjectID = "ZBd-13-lA1"; */
-"ZBd-13-lA1.title" = "Text Style:";
+"ZBd-13-lA1.title" = "पाठ शैली:";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Zmu-ck-pua"; */
 "Zmu-ck-pua.title" = "Text Cell";
@@ -195,7 +195,7 @@
 "avJ-cW-Iws.title" = "0.5";
 
 /* Class = "NSTextFieldCell"; title = "Secondary subtitle:"; ObjectID = "bKb-pW-HnS"; */
-"bKb-pW-HnS.title" = "Secondary subtitle:";
+"bKb-pW-HnS.title" = "द्वितीयक उपशीर्षक:";
 
 /* Class = "NSTextFieldCell"; title = "0"; ObjectID = "bZu-Wx-06O"; */
 "bZu-Wx-06O.title" = "0";
@@ -204,10 +204,10 @@
 "bxa-ha-AXL.title" = "2";
 
 /* Class = "NSTabViewItem"; label = "Audio"; ObjectID = "bzk-c2-LH5"; */
-"bzk-c2-LH5.label" = "Audio";
+"bzk-c2-LH5.label" = "ऑडियो";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
-"cMu-YF-riv.ibShadowedLabels[0]" = "Default";
+"cMu-YF-riv.ibShadowedLabels[0]" = "डिफ़ॉल्ट";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[1] = "4:3"; ObjectID = "cMu-YF-riv"; */
 "cMu-YF-riv.ibShadowedLabels[1]" = "4:3";
@@ -225,10 +225,10 @@
 "cMu-YF-riv.ibShadowedLabels[5]" = "5:4";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "cdR-uY-riN"; */
-"cdR-uY-riN.title" = "Brightness:";
+"cdR-uY-riN.title" = "चमक:";
 
 /* Class = "NSButtonCell"; title = "AUDIO"; ObjectID = "cpm-5o-a2c"; */
-"cpm-5o-a2c.title" = "AUDIO";
+"cpm-5o-a2c.title" = "ऑडियो";
 
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "dlX-H5-BCo"; */
 "dlX-H5-BCo.title" = "Table View Cell";
@@ -237,13 +237,13 @@
 "e4X-H4-VxS.title" = "8k";
 
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "eDl-Si-LSa"; */
-"eDl-Si-LSa.title" = "Contrast:";
+"eDl-Si-LSa.title" = "कन्ट्रास्ट:";
 
 /* Class = "NSTextFieldCell"; title = "Hue:"; ObjectID = "eLh-fu-pMj"; */
-"eLh-fu-pMj.title" = "Hue:";
+"eLh-fu-pMj.title" = "रंग:";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle:"; ObjectID = "eXZ-HN-qL4"; */
-"eXZ-HN-qL4.title" = "Subtitle:";
+"eXZ-HN-qL4.title" = "उपशीर्षक:";
 
 /* Class = "NSTextFieldCell"; title = "0"; ObjectID = "ejc-n7-36j"; */
 "ejc-n7-36j.title" = "0";
@@ -258,10 +258,10 @@
 "f23-sU-Thx.title" = "Table View Cell";
 
 /* Class = "NSTextFieldCell"; title = "FONT"; ObjectID = "g6B-DC-lJ0"; */
-"g6B-DC-lJ0.title" = "FONT";
+"g6B-DC-lJ0.title" = "फ़ॉन्ट";
 
 /* Class = "NSButtonCell"; title = "Font..."; ObjectID = "ghy-e7-7Of"; */
-"ghy-e7-7Of.title" = "Font...";
+"ghy-e7-7Of.title" = "फ़ॉन्ट...";
 
 /* Class = "NSMenuItem"; title = "3"; ObjectID = "h6k-DT-fv5"; */
 "h6k-DT-fv5.title" = "3";
@@ -270,10 +270,10 @@
 "i0j-2a-vKD.title" = "4k";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "iS4-Zr-9Ig"; */
-"iS4-Zr-9Ig.title" = "Equalizer";
+"iS4-Zr-9Ig.title" = "इक्वलाइज़र";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
-"iuN-rN-jT7.ibShadowedLabels[0]" = "None";
+"iuN-rN-jT7.ibShadowedLabels[0]" = "कोई नहीं";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[1] = "4:3"; ObjectID = "iuN-rN-jT7"; */
 "iuN-rN-jT7.ibShadowedLabels[1]" = "4:3";
@@ -294,7 +294,7 @@
 "j9w-YU-EcC.title" = "2k";
 
 /* Class = "NSTabViewItem"; label = "Subtitle"; ObjectID = "jND-MZ-sKB"; */
-"jND-MZ-sKB.label" = "Subtitle";
+"jND-MZ-sKB.label" = "उपशीर्षक";
 
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "jWy-C5-Xu9"; */
 "jWy-C5-Xu9.title" = "Table View Cell";
@@ -303,13 +303,13 @@
 "lBn-YS-jL7.title" = "0 dB";
 
 /* Class = "NSButtonCell"; title = "VIDEO"; ObjectID = "lQt-I0-jHO"; */
-"lQt-I0-jHO.title" = "VIDEO";
+"lQt-I0-jHO.title" = "वीडियो";
 
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "ldQ-YL-IEp"; */
 "ldQ-YL-IEp.title" = "1x";
 
 /* Class = "NSTextFieldCell"; title = "Crop:"; ObjectID = "m9e-IB-IDJ"; */
-"m9e-IB-IDJ.title" = "Crop:";
+"m9e-IB-IDJ.title" = "क्रॉप:";
 
 /* Class = "NSMenuItem"; title = "55"; ObjectID = "mep-aa-rk7"; */
 "mep-aa-rk7.title" = "55";
@@ -330,25 +330,25 @@
 "qpa-hD-ImC.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "Gamma:"; ObjectID = "r6x-z0-oFC"; */
-"r6x-z0-oFC.title" = "Gamma:";
+"r6x-z0-oFC.title" = "गामा:";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "s3F-Tl-Siy"; */
 "s3F-Tl-Siy.title" = "0s";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "s9l-Hb-SCk"; */
-"s9l-Hb-SCk.title" = "Size:";
+"s9l-Hb-SCk.title" = "आकार:";
 
 /* Class = "NSMenuItem"; title = "4"; ObjectID = "ssK-tS-ogL"; */
 "ssK-tS-ogL.title" = "4";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "t03-36-Zge"; */
-"t03-36-Zge.title" = "Position:";
+"t03-36-Zge.title" = "स्थिति:";
 
 /* Class = "NSTextFieldCell"; title = "500"; ObjectID = "tHa-vN-OlI"; */
 "tHa-vN-OlI.title" = "500";
 
 /* Class = "NSTextFieldCell"; title = "Rotation:"; ObjectID = "to3-rc-Agv"; */
-"to3-rc-Agv.title" = "Rotation:";
+"to3-rc-Agv.title" = "घुमाना:";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
 "uCX-EC-jXM.title" = "-5s";
@@ -357,22 +357,22 @@
 "upM-Lz-YwK.title" = "0s";
 
 /* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
-"uqb-mz-A22.title" = "BACKGROUND";
+"uqb-mz-A22.title" = "पृष्ठभूमि";
 
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "vDh-JM-5Wz"; */
 "vDh-JM-5Wz.title" = "Table View Cell";
 
 /* Class = "NSButtonCell"; title = "Custom..."; ObjectID = "vFD-HU-RVz"; */
-"vFD-HU-RVz.title" = "Custom...";
+"vFD-HU-RVz.title" = "कस्टम...";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
-"wBD-pZ-Bvu.title" = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type.";
+"wBD-pZ-Bvu.title" = "उपशीर्षक शैली के विकल्प ASS प्रतिपादन को तोड़ सकते हैं, और उनमें से कुछ उपशीर्षक प्रकार के आधार पर अक्षम हो जाएंगे।";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "wgA-op-JP4"; */
 "wgA-op-JP4.title" = "0s";
 
 /* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
-"x39-62-7KC.title" = "Audio track:";
+"x39-62-7KC.title" = "ऑडियो ट्रैक:";
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
 "xfX-wr-DTJ.title" = "+5s";

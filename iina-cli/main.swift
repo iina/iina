@@ -72,7 +72,7 @@ if userArgs.contains(where: { $0 == "--help" || $0 == "-h" }) {
   exit(0)
 }
 
-if let dashIndex = userArgs.index(of: "--") {
+if let dashIndex = userArgs.firstIndex(of: "--") {
   userArgs.remove(at: dashIndex)
   for i in dashIndex..<userArgs.count {
     let arg = userArgs[i]

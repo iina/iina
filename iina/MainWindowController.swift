@@ -1422,7 +1422,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     additionalInfoView.isHidden = true
     isMouseInSlider = false
 
-    if let index = fadeableViews.index(of: additionalInfoView) {
+    if let index = fadeableViews.firstIndex(of: additionalInfoView) {
       fadeableViews.remove(at: index)
     }
 

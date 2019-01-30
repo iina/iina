@@ -524,7 +524,7 @@ class MPVController: NSObject {
   func getNode(_ name: String) -> Any? {
     var node = mpv_node()
     mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node)
-    let parsed = try? MPVNode.parse(node)
+    let parsed = ((try? MPVNode.parse(node)) as Any??)
     mpv_free_node_contents(&node)
     return parsed!
   }

@@ -126,7 +126,7 @@ class OpenSubSupport {
   }
 
   private func checkStatus(_ data: Any) -> Bool {
-    if let parsed = try? findPath(["status"], in: data) {
+    if let parsed = ((try? findPath(["status"], in: data)) as Any??) {
       return (parsed as? String ?? "").hasPrefix("200")
     } else {
       return false
@@ -258,7 +258,7 @@ class OpenSubSupport {
         switch status {
         case .ok(let response):
           guard self.checkStatus(response) else { resolver.reject(OpenSubError.wrongResponseFormat); return }
-          guard let pData = try? self.findPath(["data"], in: response) as? ResponseFilesData else {
+          guard let pData = ((try? self.findPath(["data"], in: response) as? ResponseFilesData) as OpenSubSupport.ResponseFilesData??) else {
             resolver.reject(OpenSubError.wrongResponseFormat)
             return
           }

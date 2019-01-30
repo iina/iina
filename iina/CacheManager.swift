@@ -43,8 +43,8 @@ class CacheManager {
 
     // sort by access date
     guard let contents = cacheFolderContents()?.sorted(by: { url1, url2 in
-      let date1 = (try? url1.resourceValues(forKeys: [.contentAccessDateKey]).contentAccessDate) ?? Date.distantPast
-      let date2 = (try? url2.resourceValues(forKeys: [.contentAccessDateKey]).contentAccessDate) ?? Date.distantPast
+      let date1 = (((try? url1.resourceValues(forKeys: [.contentAccessDateKey]).contentAccessDate) as Date??)) ?? Date.distantPast
+      let date2 = (((try? url2.resourceValues(forKeys: [.contentAccessDateKey]).contentAccessDate) as Date??)) ?? Date.distantPast
       return date1!.compare(date2!) == .orderedAscending
     }) else { return }
 

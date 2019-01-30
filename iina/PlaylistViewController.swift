@@ -439,16 +439,15 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let tv = notification.object as! NSTableView
     if tv == playlistTableView {
       showTotalLength()
+      return
     }
     guard tv.numberOfSelectedRows > 0 else { return }
-    if tv == chapterTableView {
-      let index = tv.selectedRow
-      player.playChapter(index)
-      let chapter = player.info.chapters[index]
-      tv.deselectAll(self)
-      tv.reloadData()
-      mainWindow.displayOSD(.chapter(chapter.title))
-    }
+    let index = tv.selectedRow
+    player.playChapter(index)
+    let chapter = player.info.chapters[index]
+    tv.deselectAll(self)
+    tv.reloadData()
+    mainWindow.displayOSD(.chapter(chapter.title))
   }
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

@@ -801,6 +801,7 @@ class PlayerCore: NSObject {
   func playChapter(_ pos: Int) {
     let chapter = info.chapters[pos]
     mpv.command(.seek, args: ["\(chapter.time.second)", "absolute"])
+    togglePause(false)
     // need to update time pos
     syncUITime()
   }

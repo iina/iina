@@ -9,7 +9,7 @@
 <p align=center>
 <a href="https://iina.io">Website</a> ·
 <a href="https://github.com/iina/iina/releases">Releases</a> ·
-<a href="https://t.me/IINAUsers">Telegram Group</a>
+<a href="https://t.me/joinchat/IINAUsers">Telegram Group</a>
 </p>
 
 ---

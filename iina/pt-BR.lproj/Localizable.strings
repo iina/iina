@@ -21,8 +21,8 @@
 "alert.clear_history.title" = "Limpar histórico de reprodução";
 "alert.clear_watch_later.message" = "Tem certeza que deseja excluir o progresso de reprodução (dados de \"ver mais tarde\")?";
 "alert.clear_watch_later.title" = "Limpar progresso de reprodução";
-"alert.config.cannot_create" = "Não consigo criar arquivo de configuração!";
-"alert.config.cannot_write" = "Não consigo escrever no arquivo de configuração!";
+"alert.config.cannot_create" = "Não é possível criar arquivo de configuração!\n%@";
+"alert.config.cannot_write" = "Não é possível escrever no arquivo de configuração!";
 "alert.config.duplicate.message" = "Escolha um nome para a Configuração Duplicada";
 "alert.config.duplicate.title" = "Configuração duplicada";
 "alert.config.empty_name" = "Nome não pode ser vazio.";

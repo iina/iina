@@ -6,4 +6,34 @@ function handleContextMenu(event) {
   safari.extension.setContextMenuEventUserInfo(event, { "url": target.href });
 }
 
+function handleClick(event) {
+  const url = event.target.src;
+  if(url !== "") {
+    if (url !== undefined && event.target.nodeName === "VIDEO") {
+      extension = url.split('.').pop().toLowerCase();
+      if (extension.substring(0,4) === "webm") {
+        safari.extension.dispatchMessage("OpenLinkInIINA", { url: url });
+      }
+    }
+  } else {
+    if (event.target.nodeName === "VIDEO"){
+      let sourceCount = 0;
+      let url;
+      for (i = 0; i < event.target.childNodes.length; i++) {
+        if (event.target.childNodes[i].nodeName == "SOURCE") {
+          sourceCount += 1;
+          extension = event.target.childNodes[i].src.split('.').pop().toLowerCase();
+          if (extension.substring(0,4) === "webm") {
+            url = event.target.childNodes[i].src;
+          }
+        }
+      }
+      if (url.length !== 0 && sourceCount === 1) {
+        safari.extension.dispatchMessage("OpenLinkInIINA", { url: url });
+      }
+    }
+  }
+}
+
 document.addEventListener("contextmenu", handleContextMenu, false);
+document.addEventListener("click", handleClick, false);

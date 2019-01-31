@@ -50,6 +50,17 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
       assertionFailure("Invalid command")
     }
   }
+  
+  override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]? = nil) {
+    switch messageName {
+    case "OpenLinkInIINA":
+      (userInfo?["url"] as? String).flatMap {
+        launchIINA(withURL: $0)
+      }
+    default:
+      assertionFailure("Invalid message")
+    }
+  }
 
   func launchIINA(withURL url: String) {
     guard let escapedURL = url.addingPercentEncoding(withAllowedCharacters: .alphanumerics),

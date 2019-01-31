@@ -15,13 +15,13 @@
 "3os-7u-lv8.title" = "डिफ़ॉल्ट: 153600";
 
 /* Class = "NSMenuItem"; title = "TCP"; ObjectID = "6JF-48-aCE"; */
-"6JF-48-aCE.title" = "TCP";
+"6JF-48-aCE.title" = "टीसीपी";
 
 /* Class = "NSTextFieldCell"; title = "HTTP proxy:"; ObjectID = "9ut-ID-ffZ"; */
-"9ut-ID-ffZ.title" = "HTTP proxy:";
+"9ut-ID-ffZ.title" = "एचटीटीपी प्रॉक्सी:";
 
 /* Class = "NSTextFieldCell"; title = "Format: <key>=<value>[,<key>=<value>[,...]]"; ObjectID = "GBe-wd-tne"; */
-"GBe-wd-tne.title" = "Format: <key>=<value>[,<key>=<value>[,...]]";
+"GBe-wd-tne.title" = "फार्मेट: <key>=<value>[,<key>=<value>[,...]]";
 
 /* Class = "NSTextFieldCell"; title = "Seconds to prefech:"; ObjectID = "J96-32-M9A"; */
 "J96-32-M9A.title" = "प्रीफ़ैच करने के लिए सेकंड:";
@@ -30,7 +30,7 @@
 "LNk-io-MM7.title" = "कैश:";
 
 /* Class = "NSMenuItem"; title = "HTTP"; ObjectID = "NWQ-Bm-1mJ"; */
-"NWQ-Bm-1mJ.title" = "HTTP";
+"NWQ-Bm-1mJ.title" = "एचटीटीपी";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "RwW-JS-iTv"; */
 "RwW-JS-iTv.title" = "प्रभावी होने के लिए IINA को पुनः आरंभ करने की आवश्यकता है।";
@@ -69,7 +69,7 @@
 "hfn-h6-NCd.title" = "परिवहन RTSP स्ट्रीम के माध्यम से:";
 
 /* Class = "NSMenuItem"; title = "UDP"; ObjectID = "qhq-St-KZq"; */
-"qhq-St-KZq.title" = "UDP";
+"qhq-St-KZq.title" = "यूडीपी";
 
 /* Class = "NSTextFieldCell"; title = "Network:"; ObjectID = "yrh-Jm-Q4e"; */
 "yrh-Jm-Q4e.title" = "नेटवर्क:";

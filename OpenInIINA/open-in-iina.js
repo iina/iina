@@ -20,7 +20,7 @@ function handleClick(event) {
       let sourceCount = 0;
       let url;
       for (i = 0; i < event.target.childNodes.length; i++) {
-        if (event.target.childNodes[i].nodeName == "SOURCE") {
+        if (event.target.childNodes[i].nodeName === "SOURCE") {
           sourceCount += 1;
           extension = event.target.childNodes[i].src.split('.').pop().toLowerCase();
           if (extension.substring(0,4) === "webm") {

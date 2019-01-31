@@ -1,0 +1,277 @@
+/* 
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+// Common
+"general.on" = "चालू";
+"general.off" = "बंद";
+"general.login" = "लॉग इन";
+"general.logout" = "लोग आउट";
+"general.ok" = "ठीक";
+"general.cancel" = "रद्द";
+"general.username" = "उपयोगकर्ता नाम";
+"general.password" = "पारण शब्द";
+
+// PlaylistViewController.swift
+"playlist.playlist_cap" = "प्लेलिस्ट";
+"playlist.chapter_cap" = "अध्याय";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "बफरिंग… %d%%";
+"main.opening_stream" = "खुलने की धारा…";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "डिफ़ॉल्ट";
+"quicksetting.item_none" = "कोई नहीं";
+
+// OSDMessage.swift
+"osd.pause" = "रोकें";
+"osd.resume" = "पुनः आरंभ";
+"osd.volume" = "ध्वनि: %i";
+"osd.speed" = "गति: %.2fx";
+"osd.aspect" = "आस्पेक्ट अनुपात: %@";
+"osd.crop" = "क्रॉप: %@";
+"osd.rotate" = "घुमाएँ: %i°";
+"osd.deinterlace" = "डीइंटरलेस: %@";
+"osd.audio_delay.nodelay" = "ऑडियो विलंब: विलंब न करें";
+"osd.audio_delay.later" = "ऑडियो विलंब: %.2fs बाद में";
+"osd.audio_delay.earlier" = "ऑडियो विलंब: %.2fs पूर्व";
+"osd.sub_delay.nodelay" = "उपशीर्षक देरी: विलंब न करें";
+"osd.sub_delay.later" = "उपशीर्षक देरी: %.2fs बाद में";
+"osd.sub_delay.earlier" = "उपशीर्षक देरी: %.2fs पूर्व";
+"osd.subtitle_pos" = "उपशीर्षक पद: %.1f";
+"osd.mute" = "Mute";
+"osd.unmute" = "Unmute";
+"osd.screenshot" = "स्क्रीनशॉट कैप्चर किया गया";
+"osd.abloop.a" = "AB-लूप: A";
+"osd.abloop.b" = "AB-लूप: B";
+"osd.abloop.clear" = "AB-लूप: साफ़ किया गया";
+"osd.stop" = "रुकें";
+"osd.chapter" = "अध्याय: %@";
+"osd.subtitle_scale" = "उपशीर्षक स्केल: %.2fx";
+"osd.add_to_playlist" = " प्लेलिस्ट में %i फ़ाइलें जोड़ी गईं";
+"osd.clear_playlist" = "क्लीयर प्लेलिस्ट";
+"osd.video_eq.contrast" = "कन्ट्रास्ट: %i";
+"osd.video_eq.gamma" = "गामा: %i";
+"osd.video_eq.hue" = "रंग: %i";
+"osd.video_eq.saturation" = "संतृप्ति: %i";
+"osd.video_eq.brightness" = "चमक: %i";
+"osd.find_online_sub" = "ऑनलाइन उपशीर्षक ढूँढना...";
+"osd.find_online_sub.source" = "from";
+"osd.sub_not_found" = "कोई उपशीर्षक नहीं मिला";
+"osd.sub_found" = "%d  उपशीर्षक मिले। डाउनलोडिंग...";
+"osd.sub_downloaded" = "उपशीर्षक डाउनलोड किया गया";
+"osd.sub_saved" = "उपशीर्षक सहेजा गया";
+"osd.network_error" = "नेटवर्क त्रुटि";
+"osd.file_error" = "फ़ाइल पढ़ने में त्रुटि";
+"osd.cannot_login" = "लॉग इन नहीं कर सकता";
+"osd.canceled" = "रद्द";
+"osd.filter_added" = "जोड़ा गया फ़िल्टर: %@";
+"osd.filter_removed" = "फ़िल्टर हटाया गया";
+
+"preference.title" = "पसंद";
+"preference.general" = "सामान्य";
+"preference.ui" = "यूआई";
+"preference.video_audio" = "वीडियो/ऑडियो";
+"preference.subtitle" = "उपशीर्षक";
+"preference.network" = "नेटवर्क";
+"preference.control" = "नियंत्रण";
+"preference.keybindings" = "कुंजी बाइंडिंग";
+"preference.advanced" = "उन्नत";
+"preference.utilities" = "उपयोगिताएँ";
+"preference.scripts" = "स्क्रिप्ट";
+"preference.not_logged_in" = "लोग इन नहीं है";
+"preference.logged_in_as" = "%@ के रूप में लॉग इन किया";
+"preference.system_media_control" = "सिस्टम मीडिया नियंत्रण का उपयोग करें";
+
+"preference.key_binding_hint_1" = "वर्तमान कॉन्फ़िगरेशन फ़ाइल में मुख्य बाइंडिंग को संपादित करने के लिए, प्रतिलिपि बनाने के लिए सबसे पहले \"डुप्लीकेट…\" बटन पर क्लिक करें।";
+"preference.key_binding_hint_2" = "संबंधित कुंजी बंधन को संपादित करने के लिए दाईं ओर एक पंक्ति पर डबल क्लिक करें।";
+
+"menu.volume"= "ध्वनि: %d";
+"menu.audio_delay" = "ऑडियो विलंब: %.2fs";
+"menu.sub_delay" = "उपशीर्षक देरी: %.2fs";
+"menu.fullscreen" = "पूर्ण स्क्रीन दर्ज करें";
+"menu.exit_fullscreen" = "पूर्ण स्क्रीन से बाहर निकलें";
+"menu.pip" = "पिक्चर-इन-पिक्चर डालें";
+"menu.exit_pip" = "पिक्चर-इन-पिक्चर से बाहर निकलें";
+"menu.pause" = "रोकें";
+"menu.resume" = "पुनः आरंभ";
+"menu.speed" = "गति: %.2fx";
+
+"menu.seek_forward" = "आगे कदम %.0fs";
+"menu.seek_backward" = "पीछे जाओ %.0fs";
+"menu.speed_up" = "%.1fx तक स्पीड";
+"menu.speed_down" = "गति %.1fx करने के लिए नीचे";
+"menu.volume_up" = "ध्वनि + %.0f%%";
+"menu.volume_down" = "ध्वनि - %.0f%%";
+"menu.audio_delay_up" = "ऑडियो विलंब + %.1fs";
+"menu.audio_delay_down" = "ऑडियो विलंब - %.1fs";
+"menu.sub_delay_up" = "उपशीर्षक देरी + %.1fs";
+"menu.sub_delay_down" = "उपशीर्षक देरी - %.1fs";
+
+"track.none" = "<कोई नहीं>";
+
+"subtrack.no_loaded" = "कोई उपशीर्षक लोड नहीं हुआ";
+"subtrack.no_external" = "कोई बाहरी उपशीर्षक नहीं मिला";
+
+// Alerts
+"alert.beta_channel.title" = "बीटा संस्करणों के लिए अपडेट प्राप्त करें";
+"alert.beta_channel.message" = "IINA v1.0 आ रहा है! क्या आप बीटा संस्करणों का परीक्षण करने में हमारी सहायता करना चाहेंगे? \ n \ n आप इस व्यवहार को कभी भी प्राथमिकता - सामान्य में बदल सकते हैं।";
+
+"alert.title_error" = "त्रुटि";
+"alert.title_warning" = "चेतावनी";
+"alert.title_info" = "जानकारी";
+
+"alert.fatal_error" = "घातक त्रुटि: %@ \n एप्लिकेशन अब बाहर निकल जाएगा।";
+"alert.mpv_error" = "आंतरिक गलती %@ (%@) विकल्प सेट करते समय %@।";
+"alert.sleep" = "प्रदर्शन नींद को रोक नहीं सकता!";
+
+"alert.unsupported_audio" = "असमर्थित बाहरी ऑडियो फ़ाइल।";
+"alert.unsupported_sub" = "असमर्थित बाहरी उपशीर्षक।";
+"alert.unsupported_url" = "असमर्थित यूआरएल।";
+"alert.wrong_url_format" = "गलत यूआरएल प्रारूप।";
+
+"alert.error_open" = "फ़ाइल या स्ट्रीम नहीं खोल सकता!";
+"alert.error_finding_file" = "%@ फ़ाइल नहीं मिल रही है!";
+"alert.error_loading_script" = "स्क्रिप्ट %@! लोड नहीं किया जा सकता";
+"alert.error_saving_file" = "%@: %@ को सहेजते समय त्रुटि आई
+";
+"alert.error_deleting_file" = "फ़ाइल को हटा नहीं सकता।";
+
+"alert.config.new.title" = "नया इनपुट कॉन्फ़िगरेशन";
+"alert.config.new.message" = "कृपया नए कॉन्फ़िगरेशन के लिए एक नाम दर्ज करें।";
+"alert.config.duplicate.title" = "डुप्लिकेट कॉन्फ़िगरेशन";
+"alert.config.duplicate.message" = "कृपया डुप्लिकेट कॉन्फ़िगरेशन फ़ाइल के लिए नाम दर्ज करें।";
+"alert.config.empty_name" = "नाम खाली नहीं हो सकता।";
+"alert.config.name_existing" = "नाम पहले से मौजूद है।";
+"alert.config.file_existing.title" = "फ़ाइल पहले से ही मौजूद है";
+"alert.config.file_existing.message" = "ऐसा न हो कि। अधिलेखित करने के लिए ठीक चुनें, फ़ाइल को खोजक में प्रकट करने के लिए रद्द करें।";
+"alert.config.cannot_create" = "कॉन्फ़िगरेशन फ़ाइल नहीं बना सकता है!\n%@";
+"alert.config.cannot_write" = "फ़ाइल को कॉन्फ़िगर करने के लिए नहीं लिख सकता!";
+
+"alert.filter.incorrect" = "फ़िल्टर सेट करते समय त्रुटि आई। कृपया अपना पैरामीटर प्रारूप जांचें।";
+"alert.add_filter.title" = "नया फ़िल्टर";
+"alert.add_filter.message" = "कृपया mpv के vf या af कमांड के प्रारूप में एक फिल्टर स्ट्रिंग दर्ज करें।";
+
+"alert.keybinding_config.error" = "कीबाइंडिंग कॉन्फ़िगरेशन फ़ाइल पार्स करने में त्रुटि \"%@\"! IINA डिफ़ॉल्ट कीबाइंडिंग सेटिंग में गिरावट। कृपया अपना कॉन्फ़िगरेशन जांचें।";
+
+"alert.extra_option.cannot_read" = "अतिरिक्त परिभाषित एमपीवी विकल्पों को उपयोगकर्ता पढ़ नहीं सकता।";
+"alert.extra_option.empty" = "कुंजी या मान रिक्त नहीं हो सकता!";
+"alert.extra_option.error" = "रिटर्न सेटिंग %d के साथ विकल्प --%@=%@ को सेट करने में त्रुटि। कृपया वरीयता> उन्नत में अपनी अतिरिक्त विकल्प सेटिंग्स की जाँच करें।";
+"alert.extra_option.config_folder" = "कॉन्फ़िगरेशन निर्देशिका को सेट करने में त्रुटि \"%@\".";
+
+"alert.playlist.error_deleting" = "हटाने में त्रुटि: %@";
+
+"alert.sub.no_selected" = "कृपया पहले डाउनलोड किए गए उपशीर्षक का चयन करें।";
+"alert.sub_lang_not_set" = "OpenSubtitles का उपयोग करने से पहले वरीयताओं को पसंदीदा उपशीर्षक भाषाओं में सेट करें। इस बार अंग्रेजी (संलग्न) का उपयोग किया जाएगा।";
+"alert.sub.cannot_save_passwd" = "किचेन में अपना पासवर्ड नहीं सहेज सकता: %@";
+"alert.sub.cannot_login" = "लॉग इन नहीं कर सकता। कृपया अपना उपयोगकर्ता नाम, पासवर्ड और नेटवर्क स्थिति जांचें। \n\n%@";
+
+"alert.set_default.title" = "डिफ़ॉल्ट ऐप के रूप में IINA की स्थापना";
+"alert.set_default.message" = "IINA सभी फ़ाइल प्रकारों के लिए डिफ़ॉल्ट ऐप के रूप में सेट किया जाएगा जो इसका समर्थन करता है।";
+"alert.set_default.success" = "%d सफलता के साथ समाप्त हुआ और %d विफल रहा।";
+
+"alert.add_watch.title" = "वॉच प्रॉपर्टी जोड़ें";
+"alert.add_watch.message" = "कृपया एक मान्य mpv गुण नाम दर्ज करें।";
+
+"alert.jump_to.title" = "पर कूदना";
+"alert.jump_to.message" = "कृपया उस समय को दर्ज करें जिसमें आप कूदना चाहते हैं। उदाहरण: 20:35";
+
+"alert.opensub.login.title" = "OpenSubtitles लॉगिन करें";
+"alert.opensub.login.message" = "कृपया अपना यूज़रनेम और पासवर्ड दर्ज करें";
+
+"alert.open_url.title" = "यूआरएल खोलें";
+"alert.open_url.message" = "कृपया यहां यूआरएल दर्ज करें:";
+"alert.choose_media_file.title" = "मीडिया फ़ाइलें चुनें";
+
+"alert.add_url.title" = "यूआरएल जोड़िये";
+"alert.add_url.message" = "कृपया यहां यूआरएल दर्ज करें:";
+
+"alert.delete_history.title" = "प्लेबैक इतिहास हटाएं";
+"alert.delete_history.message" = "क्या आप चयनित प्रविष्टियों को हटाना सुनिश्चित करते हैं?";
+
+"alert.filter_hwdec.message" = "आप एक वीडियो फ़्लिटर लागू करने वाले हैं। हालाँकि, आपका वर्तमान हार्डवेयर डिकोडर अच्छी तरह से वीडियो फिल्टर का समर्थन नहीं कर सकता है। आप या तो हार्डवेयर डिकोडिंग को अक्षम कर सकते हैं या ऑटो (कॉपी) पर स्विच कर सकते हैं, जो मेमोरी का दोगुना उपभोग करेगा।\nआपको इसे काम करने के लिए पिछला ऑपरेशन (जैसे फसल सेट करना) दोहराना पड़ सकता है।";
+"alert.filter_hwdec.abort" = "निरस्त करें";
+"alert.filter_hwdec.turn_off" = "हार्डवेयर डिकोडिंग को बंद करें";
+"alert.filter_hwdec.use_copy" = "ऑटो पर स्विच करें (कॉपी करें)";
+
+"alert.clear_cache.title" = "स्पष्ट थंबनेल कैश";
+"alert.clear_cache.message" = "क्या आप सभी थंबनेल कैश को साफ़ करना चाहते हैं?";
+
+"alert.clear_history.title" = "प्लेबैक इतिहास मिटा दें";
+"alert.clear_history.message" = "क्या आप सभी प्लेबैक इतिहास हटाना चाहते हैं?";
+
+"alert.clear_watch_later.title" = "स्पष्ट प्लेबैक प्रगति को बचाया";
+"alert.clear_watch_later.message" = "क्या आप सभी सहेजे गए प्लेबैक प्रगति (\"बाद में देखना\" डेटा) को हटाना सुनिश्चित कर रहे हैं?";
+
+"alert.nothing_to_open" = "कुछ भी नहीं खोलने के लिए।";
+
+"alert.no_video_track" = "कोई वीडियो ट्रैक नहीं है।";
+
+"alert.duplicate_config" = "आप डिफ़ॉल्ट कॉन्फ़िगरेशन को सीधे संपादित नहीं कर सकते। कृपया संपादन से पहले एक डुप्लिकेट करें।";
+
+"alert.assrt_register" = "सीमित एपीआई कोटा के कारण, आपको अपने स्वयं के एपीआई टोकन का उपयोग करने की दृढ़ता से अनुशंसा की जाती है। डिफ़ॉल्ट टोकन केवल डेमो उपयोग के लिए है, और आप नेटवर्क त्रुटि का सामना कर सकते हैं।";
+"alert.assrt_register.register" = "अभी पंजीकरण करें";
+"alert.assrt_register.try" = "पहले प्रयास करें";
+"alert.assrt_token_prompt.title" = "अपना API टोकन दर्ज करें";
+"alert.assrt_token_prompt.message" = "कृपया खुले हुए वेबपेज में पंजीकरण करें। अपने उपयोगकर्ता मुख पृष्ठ में अपना टोकन प्राप्त करें और इसे नीचे दर्ज करें:";
+"alert.assrt_token_invalid" = "आपका Assrt API टोकन अमान्य लगता है।";
+
+"playlist.total_length" = "कुल %@";
+"playlist.total_length_with_selected" = "%@ में से %@ का चयन किया गया ";
+"pl_menu.title_multi" = "%d आइटम";
+"pl_menu.play_next" = "आगे चलाएं";
+"pl_menu.play_in_new_window" = "नई विंडो में चलाएं";
+"pl_menu.remove" = "हटाना";
+"pl_menu.remove_multi" = "चुना हुआ हटाओ";
+"pl_menu.delete" = "ट्रैश में डालें";
+"pl_menu.delete_multi" = "चयनित फ़ाइलों को ट्रैश में ले जाएं";
+"pl_menu.delete_after_play" = "प्लेबैक के बाद ट्रैश में जाएं";
+"pl_menu.delete_after_play_multi" = "प्लेबैक के बाद ट्रैश में चयनित फ़ाइलों को स्थानांतरित करें";
+"pl_menu.reveal_in_finder" = "खोजक में पता चलता है";
+"pl_menu.add_file" = "फाइल जोडें…";
+"pl_menu.add_url" = "यू आर एल जोड़िये…";
+"pl_menu.clear_playlist" = "क्लियर प्लेलिस्ट";
+"pl_menu.matched_sub" = "मेल खाने वाले %d उपशीर्षक(रों)";
+"pl_menu.add_sub" = "उपशीर्षक जोड़ें…";
+"pl_menu.wrong_sub" = "गलत उपशीर्षक!";
+
+"keymapping.title" = "कुंजी मानचित्रण";
+"keymapping.message" = "रिकॉर्ड करने के लिए कोई भी कुंजी दबाएँ।";
+
+"filter.video_filters" = "वीडियो फिल्टर";
+"filter.audio_filters" = "ऑडियो फिल्टर";
+
+"hwdec.no" = "हार्डवेयर डिकोडिंग अक्षम करें।";
+"hwdec.auto" = "हार्डवेयर डिकोडिंग सक्षम करें। हालाँकि, अधिकांश वीडियो फ़िल्टर ठीक से काम नहीं करेंगे।";
+"hwdec.auto-copy" = "हार्डवेयर डिकोडिंग सक्षम करें। यह मेमोरी को दोगुना कर देगा लेकिन वीडियो फिल्टर के साथ काम करेगा।";
+
+"subencoding.auto" = "स्वयं पता लगाना";
+
+"osc_toolbar.settings" = "शीग्र सेटिंग्स";
+"osc_toolbar.playlist" = "प्लेलिस्ट और अध्याय";
+"osc_toolbar.pip" = "टॉगल पिक्चर-इन-पिक्चर";
+"osc_toolbar.full_screen" = "पूर्णस्क्रीन चालू करें";
+"osc_toolbar.music_mode" = "संगीत मोड दर्ज करें";
+"osc_toolbar.sub_track" = "उपशीर्षक ट्रैक चुनें";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15 सेकेंड आगे";
+"touchbar.ahead_30" = "30 सेकेंड आगे";
+"touchbar.back_15" = "15 सेकेंड पीछे";
+"touchbar.back_30" = "30 सेकेंड पीछे";
+"touchbar.next_video" = "अगला वीडियो";
+"touchbar.prev_video" = "पिछला वीडियो";
+"touchbar.increase_volume" = "ध्वनि +";
+"touchbar.decrease_volume" = "ध्वनि -";
+"touchbar.rewind" = "रिवाइंड";
+"touchbar.fast_forward" = "तेजी से आगे बढ़ना";
+"touchbar.play_pause" = "चलाएं / ठहरें";
+"touchbar.seek" = "खोजना";
+"touchbar.time" = "समय की स्थिति";
+"touchbar.remainingTime" = "बचा हुआ समय";

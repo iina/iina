@@ -989,8 +989,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           }
         } else if event.clickCount == 2 {
           // double click
+          if isMouseEvent(event, inAnyOf: [titleBarView]) {
+            let userDefault = UserDefaults.standard.string(forKey: "AppleActionOnDoubleClick")
+            if userDefault == "Minimize" {
+              window?.performMiniaturize(nil)
+            } else if userDefault == "Maximize" {
+              window?.performZoom(nil)
+            }
+            return
+          }
           // disable double click for sideBar / OSC
-          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
+          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, subPopoverView]) else { return }
           // double click
           guard doubleClickAction != .none else { return }
           // if already scheduled a single click timer, invalidate it

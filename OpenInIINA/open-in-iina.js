@@ -28,7 +28,7 @@ function handleClick(event) {
           }
         }
       }
-      if (url.length !== 0 && sourceCount === 1) {
+      if (url !== undefined && sourceCount === 1) {
         safari.extension.dispatchMessage("OpenLinkInIINA", { url: url });
       }
     }

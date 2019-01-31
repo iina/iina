@@ -807,7 +807,7 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
   @IBAction func wrongSubBtnAction(_ sender: AnyObject) {
     player.info.matchedSubs[filePath]?.removeAll()
     tableView.reloadData()
-    if let row = player.info.playlist.index(where: { $0.filename == filePath }) {
+    if let row = player.info.playlist.firstIndex(where: { $0.filename == filePath }) {
       playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
     }
   }

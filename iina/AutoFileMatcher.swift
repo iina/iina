@@ -263,7 +263,7 @@ class AutoFileMatcher {
         }
         try matchedSubs
           .filter { $0.priorityStringOccurances > minOccurances }  // eliminate false positives in filenames
-          .compactMap { player.info.matchedSubs[video.path]!.index(of: $0.url) }  // get index
+          .compactMap { player.info.matchedSubs[video.path]!.firstIndex(of: $0.url) }  // get index
           .forEach {  // move the sub with index to first
             try checkTicket()
             Logger.log("Move \(player.info.matchedSubs[video.path]![$0]) to front", level: .verbose, subsystem: subsystem)

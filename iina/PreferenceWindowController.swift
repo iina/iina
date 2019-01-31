@@ -287,7 +287,7 @@ class PreferenceWindowController: NSWindowController {
     }
     let title = (sectionTitleLabel as! NSTextField).stringValue
     var labels = findLabels(in: section)
-    labels.remove(at: labels.index(of: title)!)
+    labels.remove(at: labels.firstIndex(of: title)!)
     return (title, labels)
   }
 

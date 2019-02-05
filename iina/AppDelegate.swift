@@ -79,6 +79,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private func getReady() {
     registerUserDefaultValues()
+    setGroupUserDefaultValues()
     menuController.bindMenuItems()
     PlayerCore.loadKeyBindings()
     isReady = true
@@ -492,6 +493,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private func registerUserDefaultValues() {
     UserDefaults.standard.register(defaults: [String: Any](uniqueKeysWithValues: Preference.defaultPreference.map { ($0.0.rawValue, $0.1) }))
+  }
+  
+  private func setGroupUserDefaultValues() {
+    Preference.groupUserDefaults().setValuesForKeys([String: Any](uniqueKeysWithValues: Preference.defaultGroupPreference.map { (Preference.groupUserDefaults().object(forKey: $0.0.rawValue) == nil) ? ($0.0.rawValue, $0.1) : ($0.0.rawValue, Preference.groupUserDefaults().bool(forKey: $0.0.rawValue)) }))
   }
 
 }

@@ -1209,6 +1209,7 @@
 		E5EF3D0A20FFBB6200FEBE4C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
 		E5EF3D0C20FFBB9700FEBE4C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
 		E5EF3D0D2100878F00FEBE4C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
+		E841924622093046004AF546 /* IINA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IINA.entitlements; sourceTree = "<group>"; };
 		F4C61DFA1E20423A00A43BCC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PrefUIViewController.strings; sourceTree = "<group>"; };
 		FB0119E821F8C03D00477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		FB0119E921F8C03D00477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/MainWindowController.strings; sourceTree = "<group>"; };
@@ -1856,6 +1857,7 @@
 		84EB1ED81D2F51D3004FA5A1 /* iina */ = {
 			isa = PBXGroup;
 			children = (
+				E841924622093046004AF546 /* IINA.entitlements */,
 				84FF846D1D2FF698001B318A /* deps */,
 				84A0BAA21D2FAE8200BC8DA1 /* Assets */,
 				84A0BAA71D2FAF9700BC8DA1 /* Controllers */,
@@ -2002,11 +2004,21 @@
 					49542972216C34950058F680 = {
 						CreatedOnToolsVersion = 10.1;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+						};
 					};
 					84EB1ED51D2F51D3004FA5A1 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 67CQ77V27R;
 						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+						};
 					};
 					E3DE8DC91FD8166A0021921C = {
 						CreatedOnToolsVersion = 9.1;
@@ -3289,6 +3301,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = iina/IINA.entitlements;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 67CQ77V27R;
@@ -3327,6 +3340,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = iina/IINA.entitlements;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 67CQ77V27R;

@@ -23,11 +23,12 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
   }
 
   override var sectionViews: [NSView] {
-    return [sectionDefaultAppView, sectionClearCacheView, sectionBrowserExtView]
+    return [sectionDefaultAppView, sectionClearCacheView, sectionSafariExtView, sectionBrowserExtView]
   }
 
   @IBOutlet var sectionDefaultAppView: NSView!
   @IBOutlet var sectionClearCacheView: NSView!
+  @IBOutlet var sectionSafariExtView: NSView!
   @IBOutlet var sectionBrowserExtView: NSView!
   @IBOutlet var setAsDefaultSheet: NSWindow!
   @IBOutlet weak var setAsDefaultVideoCheckBox: NSButton!
@@ -36,10 +37,14 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
   @IBOutlet weak var thumbCacheSizeLabel: NSTextField!
   @IBOutlet weak var savedPlaybackProgressClearedLabel: NSTextField!
   @IBOutlet weak var playHistoryClearedLabel: NSTextField!
-
+  @IBOutlet weak var safariOpenCurrentPageIINACheckBox: NSButton!
+  @IBOutlet weak var safariOpenLinkIINACheckBox: NSButton!
+  @IBOutlet weak var safariOpenWebmIINACheckBox: NSButton!
+    
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    self.updateSafariExtensionPreferanceState()
     DispatchQueue.main.async {
       self.updateThumbnailCacheStat()
     }
@@ -47,6 +52,12 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
 
   private func updateThumbnailCacheStat() {
     thumbCacheSizeLabel.stringValue = "\(FloatingPointByteCountFormatter.string(fromByteCount: CacheManager.shared.getCacheSize(), countStyle: .binary))B"
+  }
+    
+  private func updateSafariExtensionPreferanceState() {
+    safariOpenCurrentPageIINACheckBox.state = (Preference.groupUserDefaults().bool(forKey: Preference.Key.safariOpenCurrentPageIINA.rawValue) == true) ? .on : .off
+    safariOpenLinkIINACheckBox.state = (Preference.groupUserDefaults().bool(forKey: Preference.Key.safariOpenLinkIINA.rawValue) == true) ? .on : .off
+    safariOpenWebmIINACheckBox.state = (Preference.groupUserDefaults().bool(forKey: Preference.Key.safariOpenWebmIINA.rawValue) == true) ? .on : .off
   }
 
   @IBAction func setIINAAsDefaultAction(_ sender: Any) {
@@ -133,7 +144,19 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
       self.updateThumbnailCacheStat()
     }
   }
-
+    
+  @IBAction func setSafariOpenCurrentPageIINAState(_ sender: Any) {
+    (Preference.groupUserDefaults().bool(forKey: Preference.Key.safariOpenCurrentPageIINA.rawValue) == true) ? Preference.groupUserDefaults().set(false, forKey: Preference.Key.safariOpenCurrentPageIINA.rawValue) : Preference.groupUserDefaults().set(true, forKey: Preference.Key.safariOpenCurrentPageIINA.rawValue)
+  }
+    
+  @IBAction func setSafariOpenLinkIINAState(_ sender: Any) {
+    (Preference.groupUserDefaults().bool(forKey: Preference.Key.safariOpenLinkIINA.rawValue) == true) ? Preference.groupUserDefaults().set(false, forKey: Preference.Key.safariOpenLinkIINA.rawValue) : Preference.groupUserDefaults().set(true, forKey: Preference.Key.safariOpenLinkIINA.rawValue)
+  }
+  
+  @IBAction func setSafariOpenWebmIINAState(_ sender: Any) {
+    (Preference.groupUserDefaults().bool(forKey: Preference.Key.safariOpenWebmIINA.rawValue) == true) ? Preference.groupUserDefaults().set(false, forKey: Preference.Key.safariOpenWebmIINA.rawValue) : Preference.groupUserDefaults().set(true, forKey: Preference.Key.safariOpenWebmIINA.rawValue)
+  }
+    
   @IBAction func extChromeBtnAction(_ sender: Any) {
     NSWorkspace.shared.open(URL(string: AppData.chromeExtensionLink)!)
   }

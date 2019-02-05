@@ -9,10 +9,14 @@
         <customObject id="-2" userLabel="File's Owner" customClass="PrefUtilsViewController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="playHistoryClearedLabel" destination="sI2-xW-v1S" id="7uc-8E-r0r"/>
+                <outlet property="safariOpenCurrentPageIINACheckBox" destination="AbY-2p-pBT" id="xOH-oU-0w7"/>
+                <outlet property="safariOpenLinkIINACheckBox" destination="vVK-oD-76L" id="0Cb-kf-Tut"/>
+                <outlet property="safariOpenWebmIINACheckBox" destination="NMK-2Z-p4g" id="0G6-4R-O2R"/>
                 <outlet property="savedPlaybackProgressClearedLabel" destination="btv-7s-L8M" id="mFv-fy-6Go"/>
                 <outlet property="sectionBrowserExtView" destination="lOp-07-Z6M" id="UYs-O3-l9R"/>
                 <outlet property="sectionClearCacheView" destination="ve7-5i-dg4" id="Ki9-9t-e2h"/>
                 <outlet property="sectionDefaultAppView" destination="qu5-4u-ozP" id="icl-fU-YLA"/>
+                <outlet property="sectionSafariExtView" destination="b3B-7a-fwY" id="aaT-7J-xYo"/>
                 <outlet property="setAsDefaultAudioCheckBox" destination="bjj-u6-vYB" id="0Kh-Z0-n3P"/>
                 <outlet property="setAsDefaultPlaylistCheckBox" destination="MC6-FT-IVG" id="WYl-1W-kyJ"/>
                 <outlet property="setAsDefaultSheet" destination="gck-1e-Yi7" id="Rag-5U-yiu"/>
@@ -197,6 +201,89 @@
             </constraints>
             <point key="canvasLocation" x="139" y="679"/>
         </customView>
+        <customView id="b3B-7a-fwY">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="118"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField identifier="SectionTitleSafariExt" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3hL-Wr-Jzb">
+                    <rect key="frame" x="-2" y="93" width="109" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Safari Extension" id="brC-nu-mpo">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField identifier="SectionTitleContextMenu" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fQ4-Ow-tTa">
+                    <rect key="frame" x="-2" y="60" width="99" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Context menu:" id="oCg-Zy-F4y">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="AbY-2p-pBT">
+                    <rect key="frame" x="118" y="61" width="181" height="18"/>
+                    <buttonCell key="cell" type="check" title="Open Current Page in IINA" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="woy-Z6-gOH">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="setSafariOpenCurrentPageIINAState:" target="-2" id="IMR-hs-cfC"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="vVK-oD-76L">
+                    <rect key="frame" x="118" y="39" width="127" height="18"/>
+                    <buttonCell key="cell" type="check" title="Open Link in IINA" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="AHC-Hw-n1E">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="setSafariOpenLinkIINAState:" target="-2" id="pti-ym-rdN"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="NMK-2Z-p4g">
+                    <rect key="frame" x="118" y="6" width="306" height="21"/>
+                    <buttonCell key="cell" type="check" title="On Unsupported Video Frame Open Webm File" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="eJE-qM-AJv">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="setSafariOpenWebmIINAState:" target="-2" id="mE2-tF-Eu5"/>
+                    </connections>
+                </button>
+                <textField identifier="SectionTitleLeftClick" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="50Z-Ly-Ssu">
+                    <rect key="frame" x="-2" y="8" width="68" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Left click:" id="SnA-g1-LOT">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="NMK-2Z-p4g" firstAttribute="top" secondItem="vVK-oD-76L" secondAttribute="bottom" constant="16" id="5Pw-oE-K7B"/>
+                <constraint firstAttribute="bottom" secondItem="NMK-2Z-p4g" secondAttribute="bottom" constant="8" id="9ID-20-m2w"/>
+                <constraint firstItem="50Z-Ly-Ssu" firstAttribute="top" secondItem="NMK-2Z-p4g" secondAttribute="top" id="9a6-YB-kaY"/>
+                <constraint firstItem="3hL-Wr-Jzb" firstAttribute="top" secondItem="b3B-7a-fwY" secondAttribute="top" constant="8" id="Aa7-Vi-joX"/>
+                <constraint firstItem="NMK-2Z-p4g" firstAttribute="leading" secondItem="50Z-Ly-Ssu" secondAttribute="leading" constant="120" id="Hvq-MZ-BZD"/>
+                <constraint firstItem="fQ4-Ow-tTa" firstAttribute="leading" secondItem="b3B-7a-fwY" secondAttribute="leading" id="Php-Q8-rVp"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NMK-2Z-p4g" secondAttribute="trailing" constant="20" symbolic="YES" id="Qo4-aq-sYM"/>
+                <constraint firstItem="50Z-Ly-Ssu" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="b3B-7a-fwY" secondAttribute="leading" constant="120" id="VP5-HK-gXa"/>
+                <constraint firstItem="AbY-2p-pBT" firstAttribute="top" secondItem="fQ4-Ow-tTa" secondAttribute="top" id="Yth-iY-UiX"/>
+                <constraint firstItem="50Z-Ly-Ssu" firstAttribute="leading" secondItem="b3B-7a-fwY" secondAttribute="leading" id="bdA-p1-QWf"/>
+                <constraint firstItem="vVK-oD-76L" firstAttribute="top" secondItem="AbY-2p-pBT" secondAttribute="bottom" constant="8" id="evE-XP-dpR"/>
+                <constraint firstItem="3hL-Wr-Jzb" firstAttribute="leading" secondItem="b3B-7a-fwY" secondAttribute="leading" id="fpC-D3-aAD"/>
+                <constraint firstItem="AbY-2p-pBT" firstAttribute="leading" secondItem="b3B-7a-fwY" secondAttribute="leading" constant="120" id="h8c-sB-qMz"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vVK-oD-76L" secondAttribute="trailing" constant="20" symbolic="YES" id="jzT-VF-jnb"/>
+                <constraint firstItem="vVK-oD-76L" firstAttribute="leading" secondItem="AbY-2p-pBT" secondAttribute="leading" id="kYA-ZT-gpc"/>
+                <constraint firstItem="fQ4-Ow-tTa" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="b3B-7a-fwY" secondAttribute="leading" constant="120" id="l2t-gp-weh"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AbY-2p-pBT" secondAttribute="trailing" id="o47-pp-m85"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3hL-Wr-Jzb" secondAttribute="trailing" id="py0-H3-wBi"/>
+                <constraint firstItem="fQ4-Ow-tTa" firstAttribute="top" secondItem="3hL-Wr-Jzb" secondAttribute="bottom" constant="16" id="tW0-tJ-qoJ"/>
+                <constraint firstAttribute="bottom" secondItem="50Z-Ly-Ssu" secondAttribute="bottom" constant="8" id="yfg-Dp-I7B"/>
+            </constraints>
+            <point key="canvasLocation" x="138" y="912"/>
+        </customView>
         <customView id="lOp-07-Z6M">
             <rect key="frame" x="0.0" y="0.0" width="480" height="101"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -252,13 +339,13 @@
                 <constraint firstAttribute="trailing" secondItem="DZn-sK-pTY" secondAttribute="trailing" id="uEn-NP-ZYa"/>
                 <constraint firstItem="Al6-1d-mCg" firstAttribute="top" secondItem="lOp-07-Z6M" secondAttribute="top" constant="8" id="vMZ-SW-pO3"/>
             </constraints>
-            <point key="canvasLocation" x="139" y="925"/>
+            <point key="canvasLocation" x="139" y="1072"/>
         </customView>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="gck-1e-Yi7">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="163" y="199" width="448" height="189"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="HNy-Eo-3UU">
                 <rect key="frame" x="0.0" y="0.0" width="448" height="189"/>
                 <autoresizingMask key="autoresizingMask"/>

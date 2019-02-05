@@ -253,6 +253,13 @@ struct Preference {
     /** Log to log folder (bool) */
     static let enableLogging = Key("enableLogging")
     static let logLevel = Key("logLevel")
+    
+    // Utilities
+    
+    /** Safari extension options */
+    static let safariOpenCurrentPageIINA = Key("safariOpenCurrentPageIINA")
+    static let safariOpenLinkIINA = Key("safariOpenLinkIINA")
+    static let safariOpenWebmIINA = Key("safariOpenWebmIINA")
 
     /** unused */
     // static let resizeFrameBuffer = Key("resizeFrameBuffer")
@@ -795,9 +802,15 @@ struct Preference {
     .savedVideoFilters: [],
     .savedAudioFilters: []
   ]
-
+  
+  static let defaultGroupPreference: [Preference.Key: Any] = [
+    .safariOpenCurrentPageIINA: true,
+    .safariOpenLinkIINA: true,
+    .safariOpenWebmIINA: false
+  ]
 
   static private let ud = UserDefaults.standard
+  static private let gud = UserDefaults(suiteName: "67CQ77V27R.com.colliderli.iina")
 
   static func object(for key: Key) -> Any? {
     return ud.object(forKey: key.rawValue)
@@ -849,6 +862,10 @@ struct Preference {
 
   static func mpvColor(for key: Key) -> String? {
     return ud.mpvColor(forKey: key.rawValue)
+  }
+  
+  static func groupUserDefaults() -> UserDefaults {
+    return gud!
   }
 
   static func set(_ value: Bool, for key: Key) {

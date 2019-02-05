@@ -9,6 +9,8 @@
 import SafariServices
 
 class SafariExtensionHandler: SFSafariExtensionHandler {
+  
+  let groupUserDefaults = UserDefaults(suiteName: "67CQ77V27R.com.colliderli.iina")
 
   override func toolbarItemClicked(in window: SFSafariWindow) {
     window.getActiveTab {
@@ -26,9 +28,17 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
   {
     switch command {
     case "OpenInIINA":
-      validationHandler(false, nil)
+      if (groupUserDefaults?.bool(forKey: "safariOpenCurrentPageIINA") == true){
+        validationHandler(false, nil)
+      } else {
+        validationHandler(true, nil)
+      }
     case "OpenLinkInIINA":
-      validationHandler(userInfo?["url"] as? String == nil, nil)
+      if (groupUserDefaults?.bool(forKey: "safariOpenLinkIINA") == true){
+        validationHandler(userInfo?["url"] as? String == nil, nil)
+      } else {
+        validationHandler(true, nil)
+      }
     default:
       assertionFailure("Invalid command")
     }
@@ -53,9 +63,11 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
   
   override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]? = nil) {
     switch messageName {
-    case "OpenLinkInIINA":
-      (userInfo?["url"] as? String).flatMap {
-        launchIINA(withURL: $0)
+    case "OpenWebmInIINA":
+      if (groupUserDefaults?.bool(forKey: "safariOpenWebmIINA") == true){
+        (userInfo?["url"] as? String).flatMap {
+          launchIINA(withURL: $0)
+        }
       }
     default:
       assertionFailure("Invalid message")

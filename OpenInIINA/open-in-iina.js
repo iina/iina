@@ -12,7 +12,7 @@ function handleClick(event) {
     if (url !== undefined && event.target.nodeName === "VIDEO") {
       extension = url.split('.').pop().toLowerCase();
       if (extension.substring(0,4) === "webm") {
-        safari.extension.dispatchMessage("OpenLinkInIINA", { url: url });
+        safari.extension.dispatchMessage("OpenWebmInIINA", { url: url });
       }
     }
   } else {
@@ -29,7 +29,7 @@ function handleClick(event) {
         }
       }
       if (url !== undefined && sourceCount === 1) {
-        safari.extension.dispatchMessage("OpenLinkInIINA", { url: url });
+        safari.extension.dispatchMessage("OpenWebmInIINA", { url: url });
       }
     }
   }

@@ -165,7 +165,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       if RemoteCommandController.useSystemMediaControl {
         Logger.log("Setting up MediaPlayer integration")
         RemoteCommandController.setup()
-        NowPlayingInfoManager.updateState(.playing)
+        NowPlayingInfoManager.updateState(.unknown)
       }
     }
 

@@ -706,14 +706,16 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
       result.addItem(NSMenuItem.separator())
       // network resources related operations
-      if rows.contains (where: {player.info.playlist[$0].isNetworkResource}) {
+      let count_network = rows.count (where: {player.info.playlist[$0].isNetworkResource})
+      if count_network != 0 {
         result.addItem(withTitle: NSLocalizedString("pl_menu.browser", comment: "Open in Browser"), action: #selector(self.contextOpenInBrowser(_:)))
-        result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.copy_url" : "pl_menu.copy_url_multi", comment: "Copy URL(s)"), action: #selector(self.contextCopyURL(_:)))
+        result.addItem(withTitle: NSLocalizedString(count_network == 1 ? "pl_menu.copy_url" : "pl_menu.copy_url_multi", comment: "Copy URL(s)"), action: #selector(self.contextCopyURL(_:)))
         result.addItem(NSMenuItem.separator())
       }
       // file related operations
-      if rows.contains (where: {!player.info.playlist[$0].isNetworkResource}) {
-        result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
+      let count_non_network = rows.count - count_network
+      if count_non_network != 0 {
+        result.addItem(withTitle: NSLocalizedString(count_non_network == 1 ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
         // result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete_after_play" : "pl_menu.delete_after_play_multi", comment: "Delete After Playback"), action: #selector(self.contextMenuDeleteFileAfterPlayback(_:)))
 
         result.addItem(withTitle: NSLocalizedString("pl_menu.reveal_in_finder", comment: "Reveal in Finder"), action: #selector(self.contextMenuRevealInFinder(_:)))

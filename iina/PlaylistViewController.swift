@@ -664,6 +664,26 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   }
 
+  @IBAction func contextOpenInBrowser(_ sender: NSMenuItem) {
+    guard let selectedRows = selectedRows else { return }
+    selectedRows.forEach { i in
+      let info = player.info.playlist[i]
+      if info.isNetworkResource, let url = URL(string: info.filename) {
+        NSWorkspace.shared.open(url)
+      }
+    }
+  }
+
+  @IBAction func contextCopyURL(_ sender: NSMenuItem) {
+    guard let selectedRows = selectedRows else { return }
+    let urls = selectedRows.compactMap { i -> String? in
+      let info = player.info.playlist[i]
+      return info.isNetworkResource ? info.filename : nil
+    }
+    NSPasteboard.general.clearContents()
+    NSPasteboard.general.writeObjects([urls.joined(separator: "\n") as NSString])
+  }
+
   private func buildMenu(forRows rows: IndexSet) -> NSMenu {
     let result = NSMenu()
     let isSingleItem = rows.count == 1
@@ -693,7 +713,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       }
 
       result.addItem(NSMenuItem.separator())
-
+      // network resources related operations
+      if rows.contains (where: {player.info.playlist[$0].isNetworkResource}) {
+        result.addItem(withTitle: NSLocalizedString("pl_menu.browser", comment: "Open in Browser"), action: #selector(self.contextOpenInBrowser(_:)))
+        result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.copy_url" : "pl_menu.copy_url_multi", comment: "Copy URL(s)"), action: #selector(self.contextCopyURL(_:)))
+        result.addItem(NSMenuItem.separator())
+      }
       // file related operations
       if rows.contains (where: {!player.info.playlist[$0].isNetworkResource}) {
         result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))

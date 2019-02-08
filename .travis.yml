@@ -2,9 +2,7 @@ language: swift
 osx_image: xcode10.1
 
 before_install:
-  # Workaround for https://github.com/CocoaPods/CocoaPods/issues/7708.
-  # Remove when CocoaPods 1.6.0 is released.
-  - gem install cocoapods --pre
+  - gem install cocoapods
 
 # Build the main app, which happens to depend on the other two targets.
 script: xcodebuild -workspace iina.xcworkspace -scheme iina

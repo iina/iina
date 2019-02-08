@@ -39,8 +39,6 @@ IINA ships with pre-compiled dynamic libraries for convenience reasons. If you a
 
 1. IINA uses [CocoaPods](https://cocoapods.org) for managing the installation of third-party libraries. If you don't already have it installed, here's how you can do so:
 
-*Note: The current stable version of CocoaPods [has an unfortunate bug](https://github.com/CocoaPods/CocoaPods/issues/7708) that prevents IINA from building, which has luckily been fixed in their master branch and set to roll out in version 1.6. To get access to this version, please install CocoaPods with `sudo gem install cocoapods --pre` and ignore the installation instructions below*.
-
 #### Using RubyGems
 ```console
 $ sudo gem install cocoapods

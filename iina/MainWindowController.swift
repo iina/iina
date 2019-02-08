@@ -2863,6 +2863,7 @@ extension MainWindowController: PIPViewControllerDelegate {
   }
 
   func exitPIP() {
+    guard pipStatus == .inPIP else { return }
     if pipShouldClose(pip) {
       // Prod Swift to pick the dismiss(_ viewController: NSViewController)
       // overload over dismiss(_ sender: Any?). A change in the way implicitly

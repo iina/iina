@@ -2827,6 +2827,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 extension MainWindowController: PIPViewControllerDelegate {
 
   func enterPIP() {
+    guard pipStatus != .inPIP else { return }
     pipStatus = .inPIP
     showUI()
 

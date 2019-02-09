@@ -164,7 +164,10 @@
 "pl_menu.add_file" = "Додати файл…";
 "pl_menu.add_sub" = "Додати субтитри…";
 "pl_menu.add_url" = "Додати URL…";
+"pl_menu.browser" = "Відкрити в браузері";
 "pl_menu.clear_playlist" = "Очистити підбірку";
+"pl_menu.copy_url" = "Копіювати URL";
+"pl_menu.copy_url_multi" = "Копіювати кілька URL";
 "pl_menu.delete" = "Перемістити у Смітник";
 "pl_menu.delete_after_play" = "Перемістити у Смітник після перегляду";
 "pl_menu.delete_after_play_multi" = "Перемістити вибрані файли у Смітник після перегляду";
@@ -214,4 +217,5 @@
 "touchbar.rewind" = "Перемотати назад";
 "touchbar.seek" = "Перемотати";
 "touchbar.time" = "Часова позиція";
+"touchbar.toggle_pip" = "Перемкнути «Кадр в кадрі»";
 "track.none" = "<—>";

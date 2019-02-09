@@ -35,7 +35,7 @@ fileprivate extension NSTouchBarItem.Identifier {
   static let next = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.next")
   static let prev = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.prev")
   static let exitFullScr = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.exitFullScr")
-
+  static let togglePIP = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.togglePIP")
 }
 
 // Image name, tag, custom label
@@ -63,13 +63,12 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
     touchBar.delegate = self
     touchBar.customizationIdentifier = .windowBar
     touchBar.defaultItemIdentifiers = [.playPause, .time, .slider, .remainingTime]
-    touchBar.customizationAllowedItemIdentifiers = [.playPause, .slider, .volumeUp, .volumeDown, .rewind, .fastForward, .time, .remainingTime, .ahead15Sec, .ahead30Sec, .back15Sec, .back30Sec, .next, .prev, .fixedSpaceLarge]
+    touchBar.customizationAllowedItemIdentifiers = [.playPause, .slider, .volumeUp, .volumeDown, .rewind, .fastForward, .time, .remainingTime, .ahead15Sec, .ahead30Sec, .back15Sec, .back30Sec, .next, .prev, .togglePIP, .fixedSpaceLarge]
     return touchBar
   }()
 
   weak var touchBarPlaySlider: TouchBarPlaySlider?
   weak var touchBarPlayPauseBtn: NSButton?
-  weak var touchBarExitFullScr: NSButton?
   var touchBarPosLabels: [DurationDisplayTextField] = []
   var touchBarPosLabelWidthLayout: NSLayoutConstraint?
   /** The current/remaining time label in Touch Bar. */
@@ -151,7 +150,13 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
     case .exitFullScr:
       let item = NSCustomTouchBarItem(identifier: identifier)
       item.view = NSButton(image: NSImage(named: NSImage.touchBarExitFullScreenTemplateName)!, target: self, action: #selector(self.touchBarExitFullScrAction(_:)))
-      self.touchBarExitFullScr = item.view as? NSButton
+      return item
+
+    case .togglePIP:
+      let item = NSCustomTouchBarItem(identifier: identifier)
+      // FIXME: we might need a better icon for this
+      item.view = NSButton(image: Bundle.main.image(forResource: "pip")!, target: self, action: #selector(self.touchBarTogglePIP(_:)))
+      item.customizationLabel = NSLocalizedString("touchbar.toggle_pip", comment: "Toggle PIP")
       return item
 
     default:
@@ -196,6 +201,10 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
 
   @objc func touchBarExitFullScrAction(_ sender: NSButton) {
     player.mainWindow.toggleWindowFullScreen()
+  }
+
+  @objc func touchBarTogglePIP(_ sender: NSButton) {
+    player.mainWindow.menuTogglePIP(.dummy)
   }
 
   private func buttonTouchBarItem(withIdentifier identifier: NSTouchBarItem.Identifier, imageName: NSImage.Name, tag: Int, customLabel: String, action: Selector) -> NSCustomTouchBarItem {

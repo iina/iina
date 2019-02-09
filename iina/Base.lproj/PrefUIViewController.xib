@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.55"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -11,9 +11,13 @@
                 <outlet property="oscPositionPopupButton" destination="GbG-nw-ict" id="Dd0-cC-7Rk"/>
                 <outlet property="oscPreviewImageView" destination="yaR-pw-wfD" id="18Z-EN-2f2"/>
                 <outlet property="oscToolbarStackView" destination="8jY-9m-q4O" id="J9u-Ui-dUT"/>
+                <outlet property="pipDoNothing" destination="o7N-Tm-Aly" id="xg5-HZ-Usj"/>
+                <outlet property="pipHideWindow" destination="BMA-ed-2gf" id="UJv-H3-HDi"/>
+                <outlet property="pipMinimizeWindow" destination="YWw-1J-3Gr" id="5eN-rl-utd"/>
                 <outlet property="sectionAppearanceView" destination="M9c-Ak-HmK" id="96r-w6-H5K"/>
                 <outlet property="sectionOSCView" destination="gjB-It-iFS" id="cbg-O0-qMd"/>
                 <outlet property="sectionOSDView" destination="c8m-G4-or8" id="e6Y-FN-x1t"/>
+                <outlet property="sectionPictureInPictureView" destination="1fz-oP-RhZ" id="HLa-yv-R91"/>
                 <outlet property="sectionThumbnailView" destination="3uJ-UU-1zw" id="Noy-VW-Uax"/>
                 <outlet property="sectionWindowView" destination="D77-Iw-nrY" id="qGB-hx-chL"/>
                 <outlet property="themeMenu" destination="Cpu-U2-hGC" id="jer-bS-DhW"/>
@@ -1039,6 +1043,128 @@
                 <constraint firstAttribute="bottom" secondItem="BMi-Ax-7wP" secondAttribute="bottom" constant="8" id="wlh-tx-VdQ"/>
             </constraints>
             <point key="canvasLocation" x="19" y="-265"/>
+        </customView>
+        <customView id="1fz-oP-RhZ">
+            <rect key="frame" x="0.0" y="0.0" width="588" height="119"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField identifier="SectionTitlePictureInPicture" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ghC-br-cK9">
+                    <rect key="frame" x="-2" y="77" width="124" height="34"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="G8w-J7-1q1">
+                        <font key="font" metaFont="systemBold"/>
+                        <string key="title">Picture-in-
+Picture:</string>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A7f-Up-23R">
+                    <rect key="frame" x="118" y="6" width="425" height="18"/>
+                    <buttonCell key="cell" type="check" title="Toggle Picture-in-Picture by minimizing/un-minimizing the window" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="baY-O6-fcB">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="lH7-Vv-0M1" name="value" keyPath="values.togglePipByMinimizingWindow" id="5bT-bg-lmw"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="l21-mq-zWd">
+                    <rect key="frame" x="118" y="94" width="209" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="When entering Picture-in-Picture:" id="EUd-RD-g0T">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <box title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="eTQ-fy-fNJ">
+                    <rect key="frame" x="117" y="34" width="466" height="56"/>
+                    <view key="contentView" id="ucO-5V-y9Y">
+                        <rect key="frame" x="3" y="3" width="460" height="50"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField identifier="AccessoryLabelWindowAction" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aYB-ub-yxd">
+                                <rect key="frame" x="14" y="28" width="50" height="14"/>
+                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Window:" id="AmS-Sl-b2h">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o7N-Tm-Aly">
+                                <rect key="frame" x="68" y="26" width="80" height="18"/>
+                                <buttonCell key="cell" type="radio" title="Do nothing" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="Zc7-sP-Rdp">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="setupPipBehaviorRelatedControls:" target="-2" id="eEc-JE-2jA"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="BMA-ed-2gf">
+                                <rect key="frame" x="153" y="26" width="47" height="18"/>
+                                <buttonCell key="cell" type="radio" title="Hide" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="xtL-XT-xzb">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="setupPipBehaviorRelatedControls:" target="-2" id="Fby-66-bDj"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="YWw-1J-3Gr">
+                                <rect key="frame" x="205" y="26" width="69" height="18"/>
+                                <buttonCell key="cell" type="radio" title="Minimize" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="H1F-mm-Saq">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="setupPipBehaviorRelatedControls:" target="-2" id="PF4-5Q-3H3"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W5N-fX-5w2">
+                                <rect key="frame" x="13" y="5" width="178" height="18"/>
+                                <buttonCell key="cell" type="check" title="Automatically pause playback" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="O8C-Vi-rSp">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="lH7-Vv-0M1" name="value" keyPath="values.pauseWhenPip" id="YHk-nr-5Rm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="o7N-Tm-Aly" firstAttribute="baseline" secondItem="aYB-ub-yxd" secondAttribute="baseline" id="4cW-Ef-WnW"/>
+                            <constraint firstItem="W5N-fX-5w2" firstAttribute="top" secondItem="aYB-ub-yxd" secondAttribute="bottom" constant="8" id="68o-jc-nYY"/>
+                            <constraint firstItem="BMA-ed-2gf" firstAttribute="baseline" secondItem="o7N-Tm-Aly" secondAttribute="baseline" id="Bu7-Kt-Qwg"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YWw-1J-3Gr" secondAttribute="trailing" constant="8" id="D49-FS-oNE"/>
+                            <constraint firstItem="o7N-Tm-Aly" firstAttribute="leading" secondItem="aYB-ub-yxd" secondAttribute="trailing" constant="8" id="FPm-Lq-9po"/>
+                            <constraint firstItem="aYB-ub-yxd" firstAttribute="top" secondItem="ucO-5V-y9Y" secondAttribute="top" constant="8" id="FSF-EM-tue"/>
+                            <constraint firstItem="YWw-1J-3Gr" firstAttribute="leading" secondItem="BMA-ed-2gf" secondAttribute="trailing" constant="8" id="JGM-hK-the"/>
+                            <constraint firstItem="BMA-ed-2gf" firstAttribute="leading" secondItem="o7N-Tm-Aly" secondAttribute="trailing" constant="8" id="K7p-4T-1F4"/>
+                            <constraint firstItem="YWw-1J-3Gr" firstAttribute="baseline" secondItem="BMA-ed-2gf" secondAttribute="baseline" id="RlE-qd-6Yf"/>
+                            <constraint firstAttribute="bottom" secondItem="W5N-fX-5w2" secondAttribute="bottom" constant="8" id="XR3-iC-Bwy"/>
+                            <constraint firstItem="aYB-ub-yxd" firstAttribute="leading" secondItem="ucO-5V-y9Y" secondAttribute="leading" constant="16" id="eiD-ON-QfE"/>
+                            <constraint firstItem="W5N-fX-5w2" firstAttribute="leading" secondItem="ucO-5V-y9Y" secondAttribute="leading" constant="16" id="qO8-J2-ang"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="W5N-fX-5w2" secondAttribute="trailing" id="qS4-Z8-OB6"/>
+                        </constraints>
+                    </view>
+                </box>
+            </subviews>
+            <constraints>
+                <constraint firstItem="ghC-br-cK9" firstAttribute="top" secondItem="1fz-oP-RhZ" secondAttribute="top" constant="8" id="5nx-h9-8G4"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="A7f-Up-23R" secondAttribute="trailing" id="6vX-hX-s1z"/>
+                <constraint firstItem="ghC-br-cK9" firstAttribute="leading" secondItem="1fz-oP-RhZ" secondAttribute="leading" id="A1p-op-Aj1"/>
+                <constraint firstItem="eTQ-fy-fNJ" firstAttribute="top" secondItem="l21-mq-zWd" secondAttribute="bottom" constant="6" id="IVY-I6-WXc"/>
+                <constraint firstAttribute="bottom" secondItem="A7f-Up-23R" secondAttribute="bottom" constant="8" id="KI3-bx-05m"/>
+                <constraint firstAttribute="trailing" secondItem="eTQ-fy-fNJ" secondAttribute="trailing" constant="8" id="KZx-Lw-Sfh"/>
+                <constraint firstItem="l21-mq-zWd" firstAttribute="top" secondItem="ghC-br-cK9" secondAttribute="top" id="N7b-nm-9lF"/>
+                <constraint firstItem="l21-mq-zWd" firstAttribute="leading" secondItem="1fz-oP-RhZ" secondAttribute="leading" constant="120" id="Soe-cB-SYk"/>
+                <constraint firstItem="A7f-Up-23R" firstAttribute="leading" secondItem="eTQ-fy-fNJ" secondAttribute="leading" id="XVe-n6-qzG"/>
+                <constraint firstItem="A7f-Up-23R" firstAttribute="top" secondItem="eTQ-fy-fNJ" secondAttribute="bottom" constant="16" id="Xso-UC-S3D"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="l21-mq-zWd" secondAttribute="trailing" id="l5H-rO-WnB"/>
+                <constraint firstItem="ghC-br-cK9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1fz-oP-RhZ" secondAttribute="leading" constant="120" id="pTG-PR-Adh"/>
+                <constraint firstItem="eTQ-fy-fNJ" firstAttribute="leading" secondItem="l21-mq-zWd" secondAttribute="leading" id="xog-r6-yIL"/>
+            </constraints>
+            <point key="canvasLocation" x="6" y="977"/>
         </customView>
     </objects>
     <resources>

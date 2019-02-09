@@ -177,8 +177,9 @@
 "pl_menu.reveal_in_finder" = "在 Finder 中打開";
 "pl_menu.title_multi" = "%d個檔案";
 "pl_menu.wrong_sub" = "錯誤的字幕!";
-"playlist.chapter_cap" = "章節";
-"playlist.playlist_cap" = "播放列表";
+"pl_menu.browser" = "在瀏覽器中打開";
+"pl_menu.copy_url" = "複製鏈接";
+"pl_menu.copy_url_multi" = "複製鏈接";
 "playlist.total_length" = "總計 %@";
 "playlist.total_length_with_selected" = "選中 %@ / %@";
 "preference.advanced" = "進階";
@@ -216,4 +217,5 @@
 "touchbar.rewind" = "快退";
 "touchbar.seek" = "進度列";
 "touchbar.time" = "播放進度";
+"touchbar.toggle_pip" = "切換「畫中畫」模式";
 "track.none" = "<無>";

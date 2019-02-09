@@ -184,7 +184,7 @@ class PlayerCore: NSObject {
       return nil
     }
 
-    let playableFiles = getPlayableFiles(in: urls)
+    let playableFiles = getPlayableFiles(in: urls, sorted: true)
     let count = playableFiles.count
 
     // check playable files count
@@ -769,12 +769,17 @@ class PlayerCore: NSObject {
     mpv.command(.playlistRemove, args: [index.description])
   }
 
-  func clearPlaylist() {
-    mpv.command(.playlistClear)
+  func playlistRemove(_ indexSet: IndexSet) {
+    var count = 0
+    for i in indexSet {
+      playlistRemove(i - count)
+      count += 1
+    }
+    postNotification(.iinaPlaylistChanged)
   }
 
-  func removeFromPlaylist(index: Int) {
-    mpv.command(.playlistRemove, args: ["\(index)"])
+  func clearPlaylist() {
+    mpv.command(.playlistClear)
   }
 
   func playFile(_ path: String) {
@@ -796,6 +801,7 @@ class PlayerCore: NSObject {
   func playChapter(_ pos: Int) {
     let chapter = info.chapters[pos]
     mpv.command(.seek, args: ["\(chapter.time.second)", "absolute"])
+    togglePause(false)
     // need to update time pos
     syncUITime()
   }
@@ -1330,6 +1336,9 @@ class PlayerCore: NSObject {
 
   func generateThumbnails() {
     Logger.log("Getting thumbnails", subsystem: subsystem)
+    info.thumbnailsReady = false
+    info.thumbnails.removeAll(keepingCapacity: true)
+    info.thumbnailsProgress = 0
     if #available(macOS 10.12.2, *) {
       DispatchQueue.main.async {
         self.touchBarSupport.touchBarPlaySlider?.resetCachedThumbnails()
@@ -1345,9 +1354,6 @@ class PlayerCore: NSObject {
         return
       }
     }
-    info.thumbnails.removeAll(keepingCapacity: true)
-    info.thumbnailsProgress = 0
-    info.thumbnailsReady = false
     if Preference.bool(for: .enableThumbnailPreview) {
       if let cacheName = info.mpvMd5, ThumbnailCache.fileIsCached(forName: cacheName, forVideo: info.currentURL) {
         Logger.log("Found thumbnail cache", subsystem: subsystem)

@@ -44,6 +44,10 @@ class KeyRecordView: NSView {
     layer?.cornerRadius = 4
   }
 
+  override func updateLayer() {
+    layer?.backgroundColor = NSColor.keyRecordViewBackgroundActive.cgColor
+  }
+  
   override var acceptsFirstResponder: Bool {
     return true
   }

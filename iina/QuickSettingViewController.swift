@@ -282,33 +282,17 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   /** Switch tab (for internal call) */
   private func switchToTab(_ tab: TabViewType) {
     let button: NSButton
-    let tabIndex: Int
     switch tab {
     case .video:
       button = videoTabBtn
-      tabIndex = 0
     case .audio:
       button = audioTabBtn
-      tabIndex = 1
     case .sub:
       button = subTabBtn
-      tabIndex = 2
     default:
       return
     }
-    tabView.selectTabViewItem(at: tabIndex)
-    // cancel current active button
-    for btn in [videoTabBtn, audioTabBtn, subTabBtn] {
-      if let btn = btn {
-        let title = btn.title
-        btn.attributedTitle = NSAttributedString(string: title, attributes: Utility.tabTitleFontAttributes)
-      }
-    }
-    // the active one
-    let title = button.title
-    button.attributedTitle = NSAttributedString(string: title, attributes: Utility.tabTitleActiveFontAttributes)
-
-    currentTab = tab
+    tabBtnAction(button)
   }
 
   // MARK: - NSTableView delegate
@@ -391,16 +375,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func tabBtnAction(_ sender: NSButton) {
     tabView.selectTabViewItem(at: sender.tag)
-    // cancel current active button
-    [videoTabBtn, audioTabBtn, subTabBtn].forEach { btn in
-      if let btn = btn {
-        let title = btn.title
-        btn.attributedTitle = NSAttributedString(string: title, attributes: Utility.tabTitleFontAttributes)
-      }
-    }
-    // the active one
-    let title = sender.title
-    sender.attributedTitle = NSAttributedString(string: title, attributes: Utility.tabTitleActiveFontAttributes)
+    [videoTabBtn, audioTabBtn, subTabBtn].forEach { Utility.setActive($0, false) }
+    Utility.setActive(sender, true)
     reload()
   }
 

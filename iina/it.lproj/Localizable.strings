@@ -164,7 +164,10 @@
 "pl_menu.add_file" = "Aggiungi file…";
 "pl_menu.add_sub" = "Aggiungi sottotitoli…";
 "pl_menu.add_url" = "Aggiungi URL…";
+"pl_menu.browser" = "Apri nel browser";
 "pl_menu.clear_playlist" = "Cancella la playlist";
+"pl_menu.copy_url" = "Copia URL";
+"pl_menu.copy_url_multi" = "Copia URLs";
 "pl_menu.delete" = "Sposta nel cestino";
 "pl_menu.delete_after_play" = "Sposta nel cestino dopo la riporoduzione";
 "pl_menu.delete_after_play_multi" = "Muovi i file selezionati nel cestiono dopo la riproduzione";
@@ -214,4 +217,5 @@
 "touchbar.rewind" = "Indietro";
 "touchbar.seek" = "Ricerca";
 "touchbar.time" = "Tempo";
+"touchbar.toggle_pip" = "Attiva / disattiva Picture-in-Picture";
 "track.none" = "<Nessuno>";

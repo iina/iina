@@ -164,7 +164,10 @@
 "pl_menu.add_file" = "Adaugă Fișier…";
 "pl_menu.add_sub" = "Adaugă subtitrare…";
 "pl_menu.add_url" = "Adaugă URL…";
+"pl_menu.browser" = "Deschide în Browser";
 "pl_menu.clear_playlist" = "Șterge lista de redare";
+"pl_menu.copy_url" = "Copiază URL";
+"pl_menu.copy_url_multi" = "Copiază URL-uri";
 "pl_menu.delete" = "Mută la Coș";
 "pl_menu.delete_after_play" = "Mută la Coș după redare";
 "pl_menu.delete_after_play_multi" = "Mută elementele selectare la Coș după ce au fost redate";
@@ -214,4 +217,5 @@
 "touchbar.rewind" = "Înapoi";
 "touchbar.seek" = "Căutare";
 "touchbar.time" = "Timp curent";
+"touchbar.toggle_pip" = "Activează Picture-in-Picture";
 "track.none" = "<None>";

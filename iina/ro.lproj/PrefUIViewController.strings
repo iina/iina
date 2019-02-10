@@ -36,6 +36,9 @@
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
 "AE4-BD-wZi.title" = "% din ecran";
 
+/* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
+"AmS-Sl-b2h.title" = "Fereastra:";
+
 /* Class = "NSMenuItem"; title = "Width:"; ObjectID = "B1c-oO-fIs"; */
 "B1c-oO-fIs.title" = "Lățime:";
 
@@ -48,8 +51,16 @@
 /* Class = "NSButtonCell"; title = "Show remaining time instead of total duration"; ObjectID = "EAa-gN-8dL"; */
 "EAa-gN-8dL.title" = "Arată timpul rămas în locul duratei totale";
 
+/* Class = "NSTextFieldCell"; title = "When entering Picture-in-Picture:"; ObjectID = "EUd-RD-g0T"; */
+"EUd-RD-g0T.title" = "La activarea Pictrure-in-Picture:";
+
 /* Class = "NSTextFieldCell"; title = "On Screen Display:"; ObjectID = "F2e-CS-KXl"; */
 "F2e-CS-KXl.title" = "On Screen Display:";
+
+/* Class = "NSTextFieldCell"; title = "Picture-in-
+Picture:"; ObjectID = "G8w-J7-1q1"; */
+"G8w-J7-1q1.title" = "Picture-in-
+Picture:";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "GKy-3g-4MB"; */
 "GKy-3g-4MB.title" = "Fereastră:";
@@ -62,6 +73,9 @@
 
 /* Class = "NSMenuItem"; title = "1.5x video size"; ObjectID = "Goh-X4-4f1"; */
 "Goh-X4-4f1.title" = "1,5x din video";
+
+/* Class = "NSButtonCell"; title = "Minimize"; ObjectID = "H1F-mm-Saq"; */
+"H1F-mm-Saq.title" = "Se minimizează";
 
 /* Class = "NSTextFieldCell"; title = "pt"; ObjectID = "I8t-ey-016"; */
 "I8t-ey-016.title" = "pt";
@@ -86,6 +100,9 @@
 
 /* Class = "NSMenuItem"; title = "right"; ObjectID = "NYG-e9-DV0"; */
 "NYG-e9-DV0.title" = "dreapta";
+
+/* Class = "NSButtonCell"; title = "Automatically pause playback"; ObjectID = "O8C-Vi-rSp"; */
+"O8C-Vi-rSp.title" = "Pune pauză redării în mod automat";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "ObY-7B-NTO"; */
 "ObY-7B-NTO.title" = "s";
@@ -129,17 +146,26 @@
 /* Class = "NSTextFieldCell"; title = "X offset:"; ObjectID = "Ymw-tr-6rw"; */
 "Ymw-tr-6rw.title" = "Compensare X:";
 
+/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "Zc7-sP-Rdp"; */
+"Zc7-sP-Rdp.title" = "Nu face nimic";
+
 /* Class = "NSTextFieldCell"; title = "Resize the window to fit video size:"; ObjectID = "Zjr-q7-WsD"; */
 "Zjr-q7-WsD.title" = "Redimensionează fereastra pentru a se potrivi dimensiunii video:";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "bYj-5g-zYO"; */
 "bYj-5g-zYO.title" = "Casetă";
 
+/* Class = "NSButtonCell"; title = "Toggle Picture-in-Picture by minimizing/un-minimizing the window"; ObjectID = "baY-O6-fcB"; */
+"baY-O6-fcB.title" = "Activează Picture-in-Picture la minimizarea/re-afișarea ferestrei";
+
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2x din video";
 
 /* Class = "NSButtonCell"; title = "Disabled"; ObjectID = "duf-3s-3bL"; */
 "duf-3s-3bL.title" = "Dezactivat";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "eTQ-fy-fNJ"; */
+"eTQ-fy-fNJ.title" = "Casetă";
 
 /* Class = "NSButtonCell"; title = "Use physical resolution on Retina displays"; ObjectID = "fsj-YE-OB7"; */
 "fsj-YE-OB7.title" = "Utilizează dimensiunea fizică pe ecranele Retina";
@@ -169,7 +195,7 @@
 "mdD-if-Wqw.title" = "Snap pe centru în timpul mutării";
 
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "oJ8-74-L3z"; */
-"oJ8-74-L3z.title" = "Previous / Next Media";
+"oJ8-74-L3z.title" = "Precedentul / Următorul element media";
 
 /* Class = "NSMenuItem"; title = "top"; ObjectID = "oYc-L7-qQd"; */
 "oYc-L7-qQd.title" = "susul";
@@ -215,6 +241,9 @@
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "xrJ-Um-BrJ"; */
 "xrJ-Um-BrJ.title" = "% din ecran";
+
+/* Class = "NSButtonCell"; title = "Hide"; ObjectID = "xtL-XT-xzb"; */
+"xtL-XT-xzb.title" = "Se ascunde";
 
 /* Class = "NSButtonCell"; title = "Always"; ObjectID = "yIN-jg-MxS"; */
 "yIN-jg-MxS.title" = "Întotdeauna";

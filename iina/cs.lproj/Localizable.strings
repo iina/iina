@@ -1,4 +1,4 @@
-﻿/* 
+/* 
   String_ui.strings
   iina
 
@@ -15,6 +15,10 @@
 "general.cancel" = "Zrušit";
 "general.username" = "Uživatel";
 "general.password" = "Heslo";
+
+// PlaylistViewController.swift
+"playlist.playlist_cap" = "PLAYLIST";
+"playlist.chapter_cap" = "KAPITOLY";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítá se... %d%%";
@@ -234,9 +238,6 @@
 "pl_menu.matched_sub" = "Vyhovujících titulků %d";
 "pl_menu.add_sub" = "Přidat titulky…";
 "pl_menu.wrong_sub" = "Nesprávné titulky!";
-"pl_menu.browser" = "Otevřít v prohlížeči";
-"pl_menu.copy_url" = "Kopírovat URL";
-"pl_menu.copy_url_multi" = "Kopírovat URL";
 
 "keymapping.title" = "Klávesové zkratky";
 "keymapping.message" = "Pro záznam stiskněte jakoukoliv klávesu.";
@@ -273,4 +274,3 @@
 "touchbar.seek" = "Vyhledat";
 "touchbar.time" = "Pozice";
 "touchbar.remainingTime" = "Zbývající čas";
-"touchbar.toggle_pip" = "Přepnout obraz v obrazu";

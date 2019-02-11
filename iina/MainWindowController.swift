@@ -1293,6 +1293,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
+    if case .fullscreen(legacy: true, priorWindowedFrame: let frame) = fsState {
+      legacyAnimateToWindowed(framePriorToBeingInFullscreen: frame)
+    }
   }
 
   // MARK: - Window delegate: Full screen

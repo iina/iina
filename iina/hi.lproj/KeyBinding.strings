@@ -1,0 +1,117 @@
+/* 
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "नज़रअंदाज़ करना";
+"cmd.seek" = "खोजना";
+"cmd.revert-seek" = "फिर से तलाश करें";
+"cmd.set" = "सेट";
+"cmd.cycle" = "चक्र";
+"cmd.cycle-values" = "में चक्र";
+"cmd.add" = "परिवर्तन";
+"cmd.multiply" = "गुणा";
+"cmd.frame-step" = "अगला फ्रेम";
+"cmd.frame-back-step" = "पिछला फ्रेम";
+"cmd.ab-loop" = "A-B लूप";
+"cmd.sub-seek" = "उपशीर्षक की तलाश";
+"cmd.playlist-next" = "अगला मीडिया";
+"cmd.playlist-prev" = "पिछला मीडिया";
+"cmd.playlist-move" = "प्लेलिस्ट आइटम ले जाएं";
+"cmd.playlist-clear" = "प्लेलिस्ट साफ़ करें";
+"cmd.playlist-remove" = "करंट हटा दें";
+"cmd.playlist-shuffle" = "फेंटना";
+"cmd.write-watch-later-config" = "रिकॉर्ड प्ले इतिहास";
+"cmd.stop" = "रुकें";
+"cmd.quit" = "छोड़ना";
+"cmd.quit-watch-later" = "छोड़ो (प्रगति सहेजें)";
+"cmd.screenshot" = "स्क्रीनशॉट";
+"cmd.screenshot-to-file" = "फाइल करने के लिए स्क्रीनशॉट";
+"cmd.loadfile" = "फाइल लोड करो";
+"cmd.loadlist" = "प्लेलिस्ट लोड करें";
+"cmd.run" = "Run";
+
+"iina.flip" = "फ्लिप";
+"iina.mirror" = "आईना";
+
+"iina.toggle-pip" = "टॉगल पिक्चर-इन-पिक्चर";
+"iina.toggle-music-mode" = "संगीत मोड टॉगल करें";
+"iina.open-file" = "खुली फाइल";
+"iina.open-url" = "यूआरएल खोलें";
+"iina.video-panel" = "वीडियो पैनल";
+"iina.audio-panel" = "ऑडियो पैनल";
+"iina.sub-panel" = "उपशीर्षक पैनल";
+"iina.playlist-panel" = "प्लेलिस्ट पैनल";
+"iina.chapter-panel" = "चैप्टर पैनल";
+"iina.bigger-window" = "बड़ी खिड़की";
+"iina.smaller-window" = "छोटी खिड़की";
+"iina.fit-to-screen" = "स्क्रीन में फिट";
+"iina.toggle-flip" = "टॉगल फ्लिप";
+"iina.toggle-mirror" = " टॉगल दर्पण";
+"iina.save-playlist" = "वर्तमान प्लेलिस्ट सहेजें";
+"iina.delete-current-file" = "वर्तमान फ़ाइल हटाएं";
+"iina.delete-current-file-hard" = "कचरा हटाए बिना सीधे वर्तमान फ़ाइल हटाएं";
+"iina.find-online-subs" = "ऑनलाइन उपशीर्षक खोजें";
+"iina.save-downloaded-sub" = "डाउनलोड किए गए उपशीर्षक को सहेजें";
+
+"yes" = "हाँ";
+"no" = "नहीं";
+"to" = "से";
+"by" = "द्वारा";
+"in" = "में";
+"add" = "बढ़ना";
+"minus" = "कमी";
+"forward" = "आगे";
+"backward" = "पिछड़ा";
+"seek-to" = "से";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (exact)";
+"relative-percent+exact" = "% (exact)";
+"absolute+keyframe" = "s (keyframe)";
+"absolute-percent+keyframe" = "% (keyframe)";
+
+"opt.pause" = "ठहरें";
+"opt.speed" = "गति";
+
+"opt.window-scale" = "खिड़की का पैमाना";
+
+"opt.video" = "वीडियो ट्रैक";
+"opt.video-aspect" = "वीडियो पहलू";
+"opt.contrast" = "कन्ट्रास्ट";
+"opt.brightness" = "चमक";
+"opt.gamma" = "गामा";
+"opt.saturation" = "संतृप्ति";
+"opt.deinterlace" = "असंग्रथित";
+
+"opt.audio" = "ऑडियो ट्रैक";
+"opt.volume" = "ध्वनि";
+"opt.mute" = "म्यूट";
+"opt.audio-delay" = "ऑडियो देरी";
+
+"opt.sub" = "उपशीर्षक ट्रैक";
+"opt.sub-delay" = "उपशीर्षक देरी";
+"opt.sub-pos" = "उपशीर्षक स्थिति";
+"opt.sub-scale" = "उपशीर्षक पैमाने";
+"opt.sub-visibility" = "उपशीर्षक दृश्यता";
+"opt.sub-ass-style-override" = "ASS स्टाइल ओवरराइड";
+
+"opt.fullscreen" = "पूर्ण स्क्रीन";
+"opt.ontop" = "ऊपर तैरता है";
+
+"opt.chapter" = "अध्याय";
+
+
+"read.set" = "सेट {{property}} से {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "गुणा {{property}} द्वारा {{factor}}x";
+"read.cycle" = "चक्र {{property}}{{#dir_down}} नीचे की ओर{{/dir_down}}";
+"read.cycle-values" = "चक्र {{property}} में ({{{values}}})";
+"read.seek" = "खोजना {{#fwd}}forward{{/fwd}}{{#bwd}}पिछड़ा{{/bwd}}{{#abs}}से{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "खोजना से {{#skip_1}}आगामी{{/skip_1}}{{#skip_-1}}पिछला{{/skip_-1}} उपशीर्षक";

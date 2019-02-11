@@ -2,14 +2,14 @@ PODS:
   - GRMustache.swift (2.0.0)
   - GzipSwift (4.0.4)
   - Just (0.7.1)
-  - PromiseKit (6.2.5):
-    - PromiseKit/CorePromise (= 6.2.5)
-    - PromiseKit/Foundation (= 6.2.5)
-    - PromiseKit/UIKit (= 6.2.5)
-  - PromiseKit/CorePromise (6.2.5)
-  - PromiseKit/Foundation (6.2.5):
+  - PromiseKit (6.8.3):
+    - PromiseKit/CorePromise (= 6.8.3)
+    - PromiseKit/Foundation (= 6.8.3)
+    - PromiseKit/UIKit (= 6.8.3)
+  - PromiseKit/CorePromise (6.8.3)
+  - PromiseKit/Foundation (6.8.3):
     - PromiseKit/CorePromise
-  - Sparkle (1.19.0)
+  - Sparkle (1.21.2)
 
 DEPENDENCIES:
   - GRMustache.swift (from `https://github.com/iina/GRMustache.swift.git`)
@@ -42,9 +42,9 @@ SPEC CHECKSUMS:
   GRMustache.swift: 53405b02c374520f9193cf41bfa677f03a6d70aa
   GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
   Just: 60c0995e04718eb621a07abef45ce6883c562f2b
-  PromiseKit: a26828b0a8d5874960dfdb575b57a70790ec36f1
-  Sparkle: 8486d2493599665e466b5076e72b28849776e32f
+  PromiseKit: 94c6e781838c5bf4717677d0d882b0e7250c80fc
+  Sparkle: 1678d4707e7665960c7d1b43aca125e6392d11c4
 
 PODFILE CHECKSUM: c149e2f5a370325310fa22313fe8c514d0967750
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.6.0

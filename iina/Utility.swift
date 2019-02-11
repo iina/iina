@@ -10,9 +10,6 @@ import Cocoa
 
 class Utility {
 
-  static let tabTitleFontAttributes = FontAttributes(font: .system, size: .system, align: .center).value
-  static let tabTitleActiveFontAttributes = FontAttributes(font: .systemBold, size: .system, align: .center).value
-
   static let supportedFileExt: [MPVTrack.TrackType: [String]] = [
     .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "mts", "m2ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt", "dv", "mpg", "mpeg", "mxf", "vob", "gif"],
     .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "oga", "mogg", "m4a", "ac3", "opus", "wav", "wv", "aiff", "ape", "tta", "tak"],
@@ -386,6 +383,11 @@ class Utility {
 
 
   // MARK: - Util functions
+
+  static func setActive(_ button: NSButton, _ active: Bool) {
+    button.attributedTitle = NSAttributedString(string: button.title,
+                                                attributes: FontAttributes(font: active ? .systemBold : .system, size: .system, align: .center).value)
+  }
 
   static func toRealSubScale(fromDisplaySubScale scale: Double) -> Double {
     return scale > 0 ? scale : -1 / scale

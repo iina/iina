@@ -989,8 +989,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           }
         } else if event.clickCount == 2 {
           // double click
+          if isMouseEvent(event, inAnyOf: [titleBarView]) {
+            let userDefault = UserDefaults.standard.string(forKey: "AppleActionOnDoubleClick")
+            if userDefault == "Minimize" {
+              window?.performMiniaturize(nil)
+            } else if userDefault == "Maximize" {
+              window?.performZoom(nil)
+            }
+            return
+          }
           // disable double click for sideBar / OSC
-          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
+          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, subPopoverView]) else { return }
           // double click
           guard doubleClickAction != .none else { return }
           // if already scheduled a single click timer, invalidate it
@@ -1284,6 +1293,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
+    if case .fullscreen(legacy: true, priorWindowedFrame: let frame) = fsState {
+      legacyAnimateToWindowed(framePriorToBeingInFullscreen: frame)
+    }
   }
 
   // MARK: - Window delegate: Full screen
@@ -2818,6 +2830,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 extension MainWindowController: PIPViewControllerDelegate {
 
   func enterPIP() {
+    guard pipStatus != .inPIP else { return }
     pipStatus = .inPIP
     showUI()
 
@@ -2853,6 +2866,7 @@ extension MainWindowController: PIPViewControllerDelegate {
   }
 
   func exitPIP() {
+    guard pipStatus == .inPIP else { return }
     if pipShouldClose(pip) {
       // Prod Swift to pick the dismiss(_ viewController: NSViewController)
       // overload over dismiss(_ sender: Any?). A change in the way implicitly

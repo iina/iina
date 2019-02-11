@@ -232,7 +232,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     switch menuItem.tag {
     case MenuItemTagRevealInFinder:
       if selectedEntries.isEmpty { return false }
-      return !selectedEntries.filter { FileManager.default.fileExists(atPath: $0.url.path) }.isEmpty
+      return selectedEntries.contains { FileManager.default.fileExists(atPath: $0.url.path) }
     case MenuItemTagDelete, MenuItemTagPlay, MenuItemTagPlayInNewWindow:
       return !selectedEntries.isEmpty
     case MenuItemTagSearchFilename:

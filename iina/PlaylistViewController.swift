@@ -205,18 +205,15 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   /** Switch tab (for internal call) */
   private func switchToTab(_ tab: TabViewType) {
-    let playlistStr = NSLocalizedString("playlist.playlist_cap", comment: "PLAYLIST")
-    let chapterStr = NSLocalizedString("playlist.chapter_cap", comment: "CHAPTERS")
-
     switch tab {
     case .playlist:
       tabView.selectTabViewItem(at: 0)
-      playlistBtn.attributedTitle = NSAttributedString(string: playlistStr, attributes: Utility.tabTitleActiveFontAttributes)
-      chaptersBtn.attributedTitle = NSAttributedString(string: chapterStr, attributes: Utility.tabTitleFontAttributes)
+      Utility.setActive(playlistBtn, true)
+      Utility.setActive(chaptersBtn, false)
     case .chapters:
       tabView.selectTabViewItem(at: 1)
-      chaptersBtn.attributedTitle = NSAttributedString(string: chapterStr, attributes: Utility.tabTitleActiveFontAttributes)
-      playlistBtn.attributedTitle = NSAttributedString(string: playlistStr, attributes: Utility.tabTitleFontAttributes)
+      Utility.setActive(chaptersBtn, true)
+      Utility.setActive(playlistBtn, false)
     }
 
     currentTab = tab
@@ -439,16 +436,15 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let tv = notification.object as! NSTableView
     if tv == playlistTableView {
       showTotalLength()
+      return
     }
     guard tv.numberOfSelectedRows > 0 else { return }
-    if tv == chapterTableView {
-      let index = tv.selectedRow
-      player.playChapter(index)
-      let chapter = player.info.chapters[index]
-      tv.deselectAll(self)
-      tv.reloadData()
-      mainWindow.displayOSD(.chapter(chapter.title))
-    }
+    let index = tv.selectedRow
+    player.playChapter(index)
+    let chapter = player.info.chapters[index]
+    tv.deselectAll(self)
+    tv.reloadData()
+    mainWindow.displayOSD(.chapter(chapter.title))
   }
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -665,6 +661,26 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   }
 
+  @IBAction func contextOpenInBrowser(_ sender: NSMenuItem) {
+    guard let selectedRows = selectedRows else { return }
+    selectedRows.forEach { i in
+      let info = player.info.playlist[i]
+      if info.isNetworkResource, let url = URL(string: info.filename) {
+        NSWorkspace.shared.open(url)
+      }
+    }
+  }
+
+  @IBAction func contextCopyURL(_ sender: NSMenuItem) {
+    guard let selectedRows = selectedRows else { return }
+    let urls = selectedRows.compactMap { i -> String? in
+      let info = player.info.playlist[i]
+      return info.isNetworkResource ? info.filename : nil
+    }
+    NSPasteboard.general.clearContents()
+    NSPasteboard.general.writeObjects([urls.joined(separator: "\n") as NSString])
+  }
+
   private func buildMenu(forRows rows: IndexSet) -> NSMenu {
     let result = NSMenu()
     let isSingleItem = rows.count == 1
@@ -694,7 +710,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       }
 
       result.addItem(NSMenuItem.separator())
-
+      // network resources related operations
+      if rows.contains (where: {player.info.playlist[$0].isNetworkResource}) {
+        result.addItem(withTitle: NSLocalizedString("pl_menu.browser", comment: "Open in Browser"), action: #selector(self.contextOpenInBrowser(_:)))
+        result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.copy_url" : "pl_menu.copy_url_multi", comment: "Copy URL(s)"), action: #selector(self.contextCopyURL(_:)))
+        result.addItem(NSMenuItem.separator())
+      }
       // file related operations
       if rows.contains (where: {!player.info.playlist[$0].isNetworkResource}) {
         result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))

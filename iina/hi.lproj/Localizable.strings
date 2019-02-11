@@ -235,6 +235,9 @@
 "pl_menu.reveal_in_finder" = "खोजक में पता चलता है";
 "pl_menu.add_file" = "फाइल जोडें…";
 "pl_menu.add_url" = "यू आर एल जोड़िये…";
+"pl_menu.browser" = "ब्राउज़र में खोलें";
+"pl_menu.copy_url" = "यूआरएल कॉपी करें";
+"pl_menu.copy_url_multi" = "सारे यूआरएल कॉपी करें";
 "pl_menu.clear_playlist" = "क्लियर प्लेलिस्ट";
 "pl_menu.matched_sub" = "मेल खाने वाले %d उपशीर्षक(रों)";
 "pl_menu.add_sub" = "उपशीर्षक जोड़ें…";
@@ -275,3 +278,4 @@
 "touchbar.seek" = "खोजना";
 "touchbar.time" = "समय की स्थिति";
 "touchbar.remainingTime" = "बचा हुआ समय";
+"touchbar.toggle_pip" = "टॉगल पिक्चर-इन-पिक्चर";

@@ -44,7 +44,7 @@ class Regex {
 let ignorePlaceHolderTitle = true
 let checkRedundantKey = false
 
-let languages = ["de", "fr", "it", "ja", "ko", "pl", "zh-Hans", "zh-Hant", "ru", "tr", "es", "uk", "nl", "sk", "da", "sv", "ro", "pt-BR"]
+let languages = ["de", "fr", "it", "ja", "ko", "pl", "zh-Hans", "zh-Hant", "ru", "tr", "es", "uk", "nl", "sk", "da", "sv", "ro", "hi", "pt-BR"]
 var testLanguages: [String] = []
 
 let ignoredStrings = ["Label", "Multiline Label", "Text Cell", "Box", "Table View Cell", "Title", "Item", "Context Menu", "0:00:00", "00:00 AM", "9:99:99", "999:99"]

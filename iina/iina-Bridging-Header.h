@@ -1,18 +1,34 @@
+#import <Availability.h>
+#import <CommonCrypto/CommonCrypto.h>
+
+#pragma mark - MPV
+
 #define MPV_ENABLE_DEPRECATED 0
 
 #import <mpv/client.h>
 #import <mpv/render.h>
 #import <mpv/render_gl.h>
 
-#import <stdio.h>
-#import <stdlib.h>
+#pragma mark - FFmpeg
+
+#import <libavcodec/avcodec.h>
+#import <libavformat/avformat.h>
+#import <libswscale/swscale.h>
+#import <libavutil/avutil.h>
+#import <libavutil/imgutils.h>
+
+// Unfortunately, these two are declared as macros in such a way that they can't
+// be used in Swift-thus, we need to wrap them.
+AVRational avTimeBaseQ = AV_TIME_BASE_Q;
+
+int averror(int error) {
+  return AVERROR(error);
+}
+
+#pragma mark - IINA
+
 #import "FixedFontManager.h"
 #import "ObjcUtils.h"
-#import "FFmpegController.h"
-
-#import <CommonCrypto/CommonCrypto.h>
-
-#import <Availability.h>
 
 #pragma mark - PIP.framework
 

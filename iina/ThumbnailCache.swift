@@ -67,7 +67,7 @@ class ThumbnailCache {
 
   /// Write thumbnail cache to file.
   /// This method is expected to be called when the file doesn't exist.
-  static func write(_ thumbnails: [FFThumbnail], forName name: String, forVideo videoPath: URL?) {
+  static func write(_ thumbnails: [FFmpegThumbnail], forName name: String, forVideo videoPath: URL?) {
     Logger.log("Writing thumbnail cache...", subsystem: subsystem)
 
     let maxCacheSize = Preference.integer(for: .maxThumbnailPreviewCacheSize) * FloatingPointByteCountFormatter.PrefixFactor.mi.rawValue
@@ -115,8 +115,9 @@ class ThumbnailCache {
 
     // data blocks
     for tb in thumbnails {
-      let timestampData = Data(bytes: &tb.realTime, count: sizeofDouble)
-      guard let tiffData = tb.image?.tiffRepresentation else {
+      var timestamp = tb.timestamp
+      let timestampData = Data(bytes: &timestamp, count: sizeofDouble)
+      guard let tiffData = tb.image.tiffRepresentation else {
         Logger.log("Cannot generate tiff data.", level: .error, subsystem: subsystem)
         return
       }
@@ -137,7 +138,7 @@ class ThumbnailCache {
 
   /// Read thumbnail cache to file.
   /// This method is expected to be called when the file exists.
-  static func read(forName name: String) -> [FFThumbnail]? {
+  static func read(forName name: String) -> [FFmpegThumbnail]? {
     Logger.log("Reading thumbnail cache...", subsystem: subsystem)
 
     let pathURL = urlFor(name)
@@ -147,7 +148,7 @@ class ThumbnailCache {
     }
     Logger.log("Reading from \(pathURL.path)", subsystem: subsystem)
 
-    var result: [FFThumbnail] = []
+    var result: [FFmpegThumbnail] = []
 
     // get file length
     file.seekToEndOfFile()
@@ -178,9 +179,7 @@ class ThumbnailCache {
         return nil
       }
       // construct
-      let tb = FFThumbnail()
-      tb.realTime = timestamp
-      tb.image = image
+      let tb = FFmpegThumbnail(image: image, timestamp: timestamp)
       result.append(tb)
     }
 

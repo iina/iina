@@ -1578,7 +1578,9 @@ class PlayerCore: NSObject {
    It may take some time to run this method, so it should be used in background.
    */
   func refreshCachedVideoProgress(forVideoPath path: String) {
-    let duration = FFmpegController.videoDuration(forFileAtPath: path)
+    // Swift apparently cannot reason about our category methods, so force the
+    // method call to occur through the Objective-C runtime.
+    let duration = (FFmpegController.self as AnyClass).videoDuration(forFileAtPath: path)
     let progress = Utility.playbackProgressFromWatchLater(path.md5)
     info.cachedVideoDurationAndProgress[path] = (
       duration: duration,

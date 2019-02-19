@@ -164,7 +164,10 @@
 "pl_menu.add_file" = "Lägg till fil...";
 "pl_menu.add_sub" = "Lägg till undertext...";
 "pl_menu.add_url" = "Lägg till URL...";
+"pl_menu.browser" = "Öppna i webbläsare";
 "pl_menu.clear_playlist" = "Rensa spellista";
+"pl_menu.copy_url" = "Kopiera URL";
+"pl_menu.copy_url_multi" = "Kopiera URL:er";
 "pl_menu.delete" = "Flytta till papperskorgen";
 "pl_menu.delete_after_play" = "Flytta till papperskorgen efter uppspelning";
 "pl_menu.delete_after_play_multi" = "Flytta markerade filer till papperskorgen efter uppspelning";
@@ -214,4 +217,5 @@
 "touchbar.rewind" = "Backa";
 "touchbar.seek" = "Spola";
 "touchbar.time" = "Tidsposition";
+"touchbar.toggle_pip" = "Växla bild-i-bild";
 "track.none" = "<Inget>";

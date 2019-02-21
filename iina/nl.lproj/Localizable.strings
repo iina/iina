@@ -164,7 +164,10 @@
 "pl_menu.add_file" = "Voeg bestand toe…";
 "pl_menu.add_sub" = "Voeg ondertiteling toe…";
 "pl_menu.add_url" = "Voeg URL toe…";
+"pl_menu.browser" = "Open in browser";
 "pl_menu.clear_playlist" = "Wis afspeellijst";
+"pl_menu.copy_url" = "Kopieer URL";
+"pl_menu.copy_url_multi" = "Kopieer geselecteerde URLs";
 "pl_menu.delete" = "Verplaats naar prullenmand";
 "pl_menu.delete_after_play" = "Verplaats naar prullenmand na afspelen";
 "pl_menu.delete_after_play_multi" = "Verplaats geselecteerde bestanden naar prullenmand na afspelen";
@@ -172,7 +175,7 @@
 "pl_menu.matched_sub" = "%d ondertitel(s) gematched";
 "pl_menu.play_in_new_window" = "Speel in nieuw venster";
 "pl_menu.play_next" = "Speel volgende";
-"pl_menu.remove" = "Verwijderen";
+"pl_menu.remove" = "Verwijder";
 "pl_menu.remove_multi" = "Verwijder geselecteerde";
 "pl_menu.reveal_in_finder" = "Toon in Finder";
 "pl_menu.title_multi" = "%d bestanden";
@@ -214,4 +217,5 @@
 "touchbar.rewind" = "Terugspoelen";
 "touchbar.seek" = "Door- of terugspoelen";
 "touchbar.time" = "Verstreken tijd";
+"touchbar.toggle_pip" = "Beeld-in-beeld";
 "track.none" = "<Geen>";

@@ -510,7 +510,7 @@ struct CommandLineStatus {
     mpvArguments.removeAll()
     iinaArguments.removeAll()
     for arg in args {
-      let splitted = arg.dropFirst(2).split(separator: "=", maxSplits: 2)
+      let splitted = arg.dropFirst(2).split(separator: "=", maxSplits: 1)
       let name = String(splitted[0])
       if (name.hasPrefix("mpv-")) {
         // mpv args

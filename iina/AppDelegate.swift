@@ -165,7 +165,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       if RemoteCommandController.useSystemMediaControl {
         Logger.log("Setting up MediaPlayer integration")
         RemoteCommandController.setup()
-        NowPlayingInfoManager.updateState(.playing)
+        NowPlayingInfoManager.updateState(.unknown)
       }
     }
 
@@ -249,6 +249,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+    guard !PlayerCore.active.mainWindow.isWindowHidden else { return .terminateCancel }
     Logger.log("App should terminate")
     for pc in PlayerCore.playerCores {
      pc.terminateMPV()

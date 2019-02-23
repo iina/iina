@@ -112,8 +112,8 @@
 "menu.volume" = "Volume : %d";
 "menu.volume_down" = "Volume -%.0f%%";
 "menu.volume_up" = "Volume +%.0f%%";
-"osc_toolbar.full_screen" = "Mode plein écran";
-"osc_toolbar.music_mode" = "Mode musique";
+"osc_toolbar.full_screen" = "Activer le mode plein écran";
+"osc_toolbar.music_mode" = "Activer le mode musique";
 "osc_toolbar.pip" = "Image dans l'Image";
 "osc_toolbar.playlist" = "Playlist et chapitres";
 "osc_toolbar.settings" = "Réglages rapides";
@@ -164,7 +164,10 @@
 "pl_menu.add_file" = "Ajouter un fichier…";
 "pl_menu.add_sub" = "Ajouter un sous-titre…";
 "pl_menu.add_url" = "Ajouter une URL…";
+"pl_menu.browser" = "Ouvrir dans le navigateur";
 "pl_menu.clear_playlist" = "Vider la playlist";
+"pl_menu.copy_url" = "Copier l'URL";
+"pl_menu.copy_url_multi" = "Copier les URLs";
 "pl_menu.delete" = "Supprimer";
 "pl_menu.delete_after_play" = "Supprimer après lecture";
 "pl_menu.delete_after_play_multi" = "Supprimer après lecture";
@@ -177,8 +180,6 @@
 "pl_menu.reveal_in_finder" = "Afficher dans le Finder";
 "pl_menu.title_multi" = "%d éléments";
 "pl_menu.wrong_sub" = "Mauvais sous-titre !";
-"playlist.chapter_cap" = "CHAPITRES";
-"playlist.playlist_cap" = "PLAYLIST";
 "playlist.total_length" = "%@ au total";
 "playlist.total_length_with_selected" = "%@ sur %@ sélectionnés";
 "preference.advanced" = "Avancé";
@@ -216,4 +217,5 @@
 "touchbar.rewind" = "Rembobiner";
 "touchbar.seek" = "Chercher";
 "touchbar.time" = "Position horaire";
+"touchbar.toggle_pip" = "Activer le mode Image dans l'image";
 "track.none" = "<Aucun>";

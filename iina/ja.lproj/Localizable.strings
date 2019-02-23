@@ -177,8 +177,6 @@
 "pl_menu.reveal_in_finder" = "Finderで表示";
 "pl_menu.title_multi" = "%d個のアイテム";
 "pl_menu.wrong_sub" = "誤った字幕です！";
-"playlist.chapter_cap" = "チャプタ";
-"playlist.playlist_cap" = "プレイリスト";
 "playlist.total_length" = "合計 %@";
 "playlist.total_length_with_selected" = "%@ / %@を選択中";
 "preference.advanced" = "拡張";
@@ -217,3 +215,15 @@
 "touchbar.seek" = "シーク";
 "touchbar.time" = "再生位置";
 "track.none" = "<なし>";
+
+/* FIXME: Using English localization instead */
+"pl_menu.browser" = "Open in Browser";
+
+/* FIXME: Using English localization instead */
+"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
+
+/* FIXME: Using English localization instead */
+"pl_menu.copy_url_multi" = "Copy URLs";
+
+/* FIXME: Using English localization instead */
+"pl_menu.copy_url" = "Copy URL";

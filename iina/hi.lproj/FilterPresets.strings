@@ -1,0 +1,55 @@
+/* 
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+
+/* It's optional to localize descriptions for each parameter! */
+
+"crop" = "क्रॉप";
+"crop.w" = "चौड़ाई (डिफ़ॉल्ट: वीडियो चौड़ाई)";
+"crop.h" = "ऊंचाई (डिफ़ॉल्ट: वीडियो ऊंचाई)";
+"crop.x" = "मूल X (डिफ़ॉल्ट: केंद्र)";
+"crop.y" = "मूल Y (डिफ़ॉल्ट: केंद्र)";
+
+"expand" = "विस्तार";
+"expand.w" = "चौड़ाई (डिफ़ॉल्ट: वीडियो चौड़ाई)";
+"expand.h" = "ऊंचाई (डिफ़ॉल्ट: वीडियो ऊंचाई)";
+"expand.x" = "मूल X (default: center)";
+"expand.y" = "मूल Y (default: center)";
+"expand.aspect" = "एक पहलू फिट करने के लिए फैलता है (जैसे: 4/3)";
+"expand.round" = "इस मान से विभाज्य बनाने के लिए सीमाएँ";
+
+"sharpen" = "तेज करो";
+"sharpen.msize" = "मैट्रिक्स का आकार";
+"sharpen.amount" = "मात्रा";
+
+"blur" = "धब्बा";
+"blur.msize" = "मैट्रिक्स का आकार";
+"blur.amount" = "मात्रा";
+
+"delogo" = "Delogo";
+"delogo.w" = "चौड़ाई";
+"delogo.h" = "ऊंचाई";
+"delogo.x" = "मूल X";
+"delogo.y" = "मूल Y";
+
+"negative" = "नकारात्मक";
+
+"vflip" = "फ्लिप";
+"hflip" = "आईना";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "फ़ाइल";
+"lut3d.interp" = "इंटरपोलेशन मोड";
+
+"custom_mpv" = "कस्टम (mpv)";
+"custom_mpv.name" = "फ़िल्टर नाम";
+"custom_mpv.string" = "फ़िल्टर मान";
+
+"custom_ffmpeg" = "कस्टम (FFmpeg)";
+"custom_ffmpeg.name" = "फ़िल्टर नाम";
+"custom_ffmpeg.string" = "फ़िल्टर मान";

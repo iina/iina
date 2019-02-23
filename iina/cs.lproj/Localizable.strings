@@ -1,0 +1,276 @@
+﻿/* 
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+// Common
+"general.on" = "Zapnuto";
+"general.off" = "Vypnuto";
+"general.login" = "Přihlásit se";
+"general.logout" = "Odhlásit se";
+"general.ok" = "OK";
+"general.cancel" = "Zrušit";
+"general.username" = "Uživatel";
+"general.password" = "Heslo";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "Načítá se... %d%%";
+"main.opening_stream" = "Otevírám stream…";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "Výchozí";
+"quicksetting.item_none" = "Žádný";
+
+// OSDMessage.swift
+"osd.pause" = "Pozastaveno";
+"osd.resume" = "Pokračování";
+"osd.volume" = "Hlasitost: %i";
+"osd.speed" = "Rychlost: %.2fx";
+"osd.aspect" = "Poměr stran: %@";
+"osd.crop" = "Ořez: %@";
+"osd.rotate" = "Otočení: %i°";
+"osd.deinterlace" = "Odebrání prokládání: %@";
+"osd.audio_delay.nodelay" = "Zpoždění zvuku: Žádné";
+"osd.audio_delay.later" = "Zpoždění zvuku: %.2f s";
+"osd.audio_delay.earlier" = "Zpoždění zvuku: -%.2f s";
+"osd.sub_delay.nodelay" = "Zpoždění titulků: Žádné";
+"osd.sub_delay.later" = "Zpoždění titulků: %.2f s";
+"osd.sub_delay.earlier" = "Zpoždění titulků: -%.2f s";
+"osd.subtitle_pos" = "Umístění titulků: %.1f";
+"osd.mute" = "Ztlumeno";
+"osd.unmute" = "Zesíleno";
+"osd.screenshot" = "Snímek obrazovky pořízen";
+"osd.abloop.a" = "AB-Smyčka: A";
+"osd.abloop.b" = "AB-Smyčka: B";
+"osd.abloop.clear" = "AB-Smyčka zrušena";
+"osd.stop" = "Zastaveno";
+"osd.chapter" = "Kapitola: %@";
+"osd.subtitle_scale" = "Velikost titulků: %.2fx";
+"osd.add_to_playlist" = "Souborů přidáno do playlistu: %i";
+"osd.clear_playlist" = "Playlist smazán";
+"osd.video_eq.contrast" = "Kontrast: %i";
+"osd.video_eq.gamma" = "Gama: %i";
+"osd.video_eq.hue" = "Odstín: %i";
+"osd.video_eq.saturation" = "Saturace: %i";
+"osd.video_eq.brightness" = "Jas: %i";
+"osd.find_online_sub" = "Vyhledávám titulky online...";
+"osd.find_online_sub.source" = "z";
+"osd.sub_not_found" = "Titulky nenalezeny";
+"osd.sub_found" = "Nalezeno titulků: %d. Stahuji...";
+"osd.sub_downloaded" = "Titulky staženy";
+"osd.sub_saved" = "Titulky uloženy";
+"osd.network_error" = "Chyba sítě";
+"osd.file_error" = "Soubor nelze načíst";
+"osd.cannot_login" = "Nelze se přihlásit";
+"osd.canceled" = "Zrušeno";
+"osd.filter_added" = "Přidán filtr: %@";
+"osd.filter_removed" = "Filtr odebrán";
+
+"preference.title" = "Předvolby";
+"preference.general" = "Obecné";
+"preference.ui" = "UI";
+"preference.video_audio" = "Video/Audio";
+"preference.subtitle" = "Titulky";
+"preference.network" = "Síť";
+"preference.control" = "Ovládání";
+"preference.keybindings" = "Klávesové zkratky";
+"preference.advanced" = "Pokročilé";
+"preference.utilities" = "Utilitity";
+"preference.scripts" = "Skripty";
+"preference.not_logged_in" = "Nepřihlášen";
+"preference.logged_in_as" = "Přihlášen jako %@";
+"preference.system_media_control" = "Používat systémové multimediální klávesy";
+
+"preference.key_binding_hint_1" = "Pro úpravy konfiguračního souboru klávesových zkratek, vytvořte jejich kopii stisknutím \"Duplikovat…\".";
+"preference.key_binding_hint_2" = "Pro změnu klávesové zkratky, klikněte dvakrát na odpovídající řádek po pravé straně.";
+
+"menu.volume"= "Hlasitost: %d";
+"menu.audio_delay" = "Zpoždění zvuku: %.2f s";
+"menu.sub_delay" = "Zpoždění titulků: %.2f s";
+"menu.fullscreen" = "Spustit režim celé obrazovky";
+"menu.exit_fullscreen" = "Ukončit režim celé obrazovky";
+"menu.pip" = "Spustit obraz v obrazu";
+"menu.exit_pip" = "Ukončit obraz v obrazu";
+"menu.pause" = "Pozastavit";
+"menu.resume" = "Pokračovat";
+"menu.speed" = "Rychlost: %.2fx";
+
+"menu.seek_forward" = "Posunout vpřed %.0f s";
+"menu.seek_backward" = "Posunout vzad %.0f s";
+"menu.speed_up" = "Zrychlit na %.1fx";
+"menu.speed_down" = "Zpomalit na %.1fx";
+"menu.volume_up" = "Hlasitost + %.0f%%";
+"menu.volume_down" = "Hlasitost - %.0f%%";
+"menu.audio_delay_up" = "Zpoždění zvuku + %.1f s";
+"menu.audio_delay_down" = "Zpoždění zvuku - %.1f s";
+"menu.sub_delay_up" = "Zpoždění titulků + %.1f s";
+"menu.sub_delay_down" = "Zpoždění titulků - %.1f s";
+
+"track.none" = "Prázdné";
+
+"subtrack.no_loaded" = "Nejsou načteny žádné titulky";
+"subtrack.no_external" = "Nenalezeny žádné externí titulky";
+
+// Alerts
+"alert.beta_channel.title" = "Dostávat beta aktualizace";
+"alert.beta_channel.message" = "Rádi byste nám pomohli otestovat beta verze? \n\nTuto možnost můžete změnit kdykoli v Předvolby > Obecné.";
+
+"alert.title_error" = "Chyba";
+"alert.title_warning" = "Varování";
+"alert.title_info" = "Informace";
+
+"alert.fatal_error" = "Závažná chyba: %@ \nAplikace se teď ukončí.";
+"alert.mpv_error" = "Interní chyba %@ (%@) při nastavení možnosti %@.";
+"alert.sleep" = "Nelze zakázat automatické uspání monitoru!";
+
+"alert.unsupported_audio" = "Nepodporovaný externí zvukový soubor.";
+"alert.unsupported_sub" = "Nepodporované externí titulky.";
+"alert.unsupported_url" = "Nepodporovaná URL.";
+"alert.wrong_url_format" = "Špatný formát URL.";
+
+"alert.error_open" = "Nelze otevřít soubor nebo stream!";
+"alert.error_finding_file" = "Soubor %@ nelze nalézt!";
+"alert.error_loading_script" = "Skript %@ nelze načíst!";
+"alert.error_saving_file" = "Během ukládání %@: %@ nastala chyba.";
+"alert.error_deleting_file" = "Soubor nelze odstranit.";
+
+"alert.config.new.title" = "Konfigurace nového vstupu";
+"alert.config.new.message" = "Zadejte název nové konfigurace.";
+"alert.config.duplicate.title" = "Duplicitní konfigurace";
+"alert.config.duplicate.message" = "Zadejte název pro duplicitní konfigurační soubor.";
+"alert.config.empty_name" = "Název nemůže být prázdný.";
+"alert.config.name_existing" = "Název již existuje.";
+"alert.config.file_existing.title" = "Soubor již existuje.";
+"alert.config.file_existing.message" = "Toto by se nemělo stát. Zvolte OK pro nahrazení, Zrušit pro zobrazení souboru ve Finderu.";
+"alert.config.cannot_create" = "Konfigurační soubor nelze vytvořit!\n%@";
+"alert.config.cannot_write" = "Nelze zapisovat do konfiguračního souboru!";
+
+"alert.filter.incorrect" = "Při nastavování filtrů nastala chyba. Zkontrolujte prosím parametry formátu.";
+"alert.add_filter.title" = "Přidat filtr";
+"alert.add_filter.message" = "Zadejte řetězec filtru ve formátu mpv příkazu vf nebo af.";
+
+"alert.keybinding_config.error" = "Chyba analýzy konfiguračního souboru klávesových zkratek \"%@\"! Vraťte se k výchozímu IINA nastavení klávesových zkratek. Zkontrolujte prosím vaši konfiguraci.";
+
+"alert.extra_option.cannot_read" = "Nelze načíst uživatelsky vymezené další možnosti mpv.";
+"alert.extra_option.empty" = "Název nebo hodnota nemohou být prázdné!";
+"alert.extra_option.error" = "Při nastavování %@=%@ se vyskytla chyba číslo %d. Prosím zkontrolujte vaše nastavení dalších možností v Předvolby > Pokročilé.";
+"alert.extra_option.config_folder" = "Chyba při nastavování konfiguračního adresáře \"%@\".";
+
+"alert.playlist.error_deleting" = "%@ nelze smazat";
+
+"alert.sub.no_selected" = "Nejdříve vyberte stažené titulky.";
+"alert.sub_lang_not_set" = "Před používáním OpenSubtitles nastavte v předvolbách upřednostňovaný jazyk titulků. Angličtina (eng) bude použita tentokrát.";
+"alert.sub.cannot_save_passwd" = "Nelze uložit vaše heslo do svazku klíčů: %@";
+"alert.sub.cannot_login" = "Nelze se přihlásit. Zkontrolujte prosím uživatelské jméno, heslo a připojení k síti.\n\n%@";
+
+"alert.set_default.title" = "Nastavit IINA jako výchozí aplikaci";
+"alert.set_default.message" = "IINA bude nastavena jako výchozí aplikace pro všechny typy souborů, které podporuje.";
+"alert.set_default.success" = "Provedeno u %d úspěšně, %d selhalo.";
+
+"alert.add_watch.title" = "Přidat možnost sledování";
+"alert.add_watch.message" = "Zadejte platný název možnosti mpv.";
+
+"alert.jump_to.title" = "Přejít na";
+"alert.jump_to.message" = "Zadejte čas, na který chcete přejít. Příklad: 20:35";
+
+"alert.opensub.login.title" = "Přihlášení k OpenSubtitles";
+"alert.opensub.login.message" = "Zadejte své uživatelské jméno a heslo";
+
+"alert.open_url.title" = "Otevřít URL";
+"alert.open_url.message" = "Zadejte URL:";
+"alert.choose_media_file.title" = "Zvolte soubor";
+
+"alert.add_url.title" = "Přidat URL";
+"alert.add_url.message" = "Zadejte URL:";
+
+"alert.delete_history.title" = "Smazat historii přehrávání";
+"alert.delete_history.message" = "Opravdu chcete smazat zvolené záznamy?";
+
+"alert.filter_hwdec.message" = "Chystáte se použít video filtr, avšak váš současný hardware nemusí optimálně video filtry podporovat. Můžete buď vypnout hardwarové dekódování, nebo přepnout na automatické nastavení, které spotřebuje dvojnásobek paměti.\nMůže být nutné zopakovat předchozí krok (například, nastavení ořezu).";
+"alert.filter_hwdec.abort" = "Přerušit";
+"alert.filter_hwdec.turn_off" = "Vypnout hardwarové dekódování";
+"alert.filter_hwdec.use_copy" = "Přepnout na Automaticky (Kopie)";
+
+"alert.clear_cache.title" = "Smazat načtené náhledy";
+"alert.clear_cache.message" = "Opravdu chcete smazat všechny načtené náhledy?";
+
+"alert.clear_history.title" = "Smazat historii přehrávání";
+"alert.clear_history.message" = "Opravdu chcete smazat celou historii přehrávání?";
+
+"alert.clear_watch_later.title" = "Smazat uložené pozice přehrávání";
+"alert.clear_watch_later.message" = "Opravdu chcete smazat všechny uložené pozice přehrávání? (Data ve složce \"Přehrát později\")";
+
+"alert.nothing_to_open" = "Žádný soubor k přehrání.";
+
+"alert.no_video_track" = "Video stopa nenalezena.";
+
+"alert.duplicate_config" = "Nelze upravit výchozí konfiguraci. Před úpravami je nutné ji duplikovat.";
+
+"alert.assrt_register" = "Vzhledem k omezenému množství API, důrazně doporučujeme použít vlastní API token. Výchozí token je určen pouze pro zkušební využití a můžete se setkat s chybou sítě.";
+"alert.assrt_register.register" = "Registrovat";
+"alert.assrt_register.try" = "Vyzkoušet";
+"alert.assrt_token_prompt.title" = "Zadejte váš API token";
+"alert.assrt_token_prompt.message" = "Zaregistrujte se prosím na otevřené webové stránce. Získejte token na domovské stránce uživatele a zadejte jej níže:";
+"alert.assrt_token_invalid" = "Váš Assrt API token se zdá být neplatný.";
+
+"playlist.total_length" = "%@ celkem";
+"playlist.total_length_with_selected" = "Vybráno %@ z %@";
+"pl_menu.title_multi" = "Položek: %d";
+"pl_menu.play_next" = "Přehrát další";
+"pl_menu.play_in_new_window" = "Přehrát v novém okně";
+"pl_menu.remove" = "Odebrat";
+"pl_menu.remove_multi" = "Odebrat vybrané";
+"pl_menu.delete" = "Přesunout do koše";
+"pl_menu.delete_multi" = "Přesunout vybrané soubory do koše";
+"pl_menu.delete_after_play" = "Po přehrání přesunout do koše";
+"pl_menu.delete_after_play_multi" = "Po přehrání přesunout vybrané soubory do koše";
+"pl_menu.reveal_in_finder" = "Zobrazit ve Finderu";
+"pl_menu.add_file" = "Přidat soubor…";
+"pl_menu.add_url" = "Přidat URL…";
+"pl_menu.clear_playlist" = "Smazat Playlist";
+"pl_menu.matched_sub" = "Vyhovujících titulků %d";
+"pl_menu.add_sub" = "Přidat titulky…";
+"pl_menu.wrong_sub" = "Nesprávné titulky!";
+"pl_menu.browser" = "Otevřít v prohlížeči";
+"pl_menu.copy_url" = "Kopírovat URL";
+"pl_menu.copy_url_multi" = "Kopírovat URLs";
+
+"keymapping.title" = "Klávesové zkratky";
+"keymapping.message" = "Pro záznam stiskněte jakoukoliv klávesu.";
+
+"filter.video_filters" = "Video filtry";
+"filter.audio_filters" = "Zvukové filtry";
+
+"hwdec.no" = "Hardwarové dekódování vypnuto.";
+"hwdec.auto" = "Hardwarové dekódování zapnuto. Většina video filtrů však nebude pracovat správně.";
+"hwdec.auto-copy" = "Hardwarové dekódování zapnuto. Spotřebuje dvojnásobek paměti, kompatibilní s video filtry.";
+
+"subencoding.auto" = "Automaticky";
+
+"osc_toolbar.settings" = "Rychlá nastavení";
+"osc_toolbar.playlist" = "Playlisty a kapitoly";
+"osc_toolbar.pip" = "Obraz v obrazu";
+"osc_toolbar.full_screen" = "Režim celé obrazovky";
+"osc_toolbar.music_mode" = "Spustit hudební režim";
+"osc_toolbar.sub_track" = "Vybrat stopu titulků";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15 s vpřed";
+"touchbar.ahead_30" = "30 s vpřed";
+"touchbar.back_15" = "15 s zpět";
+"touchbar.back_30" = "30 s zpět";
+"touchbar.next_video" = "Další video";
+"touchbar.prev_video" = "Předchozí video";
+"touchbar.increase_volume" = "Hlasitost +";
+"touchbar.decrease_volume" = "Hlasitost -";
+"touchbar.rewind" = "Přetočit";
+"touchbar.fast_forward" = "Rychle vpřed";
+"touchbar.play_pause" = "Přehrát/Pozastavit";
+"touchbar.seek" = "Vyhledat";
+"touchbar.time" = "Pozice";
+"touchbar.remainingTime" = "Zbývající čas";
+"touchbar.toggle_pip" = "Přepnout obraz v obrazu";

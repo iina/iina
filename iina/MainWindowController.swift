@@ -120,6 +120,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
   var isVideoLoaded: Bool = false
+  
+  var isWindowHidden: Bool = false
+  var isWindowMiniaturizedDueToPip = false
 
   // might use another obj to handle slider?
   var isMouseInWindow: Bool = false
@@ -986,8 +989,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           }
         } else if event.clickCount == 2 {
           // double click
+          if isMouseEvent(event, inAnyOf: [titleBarView]) {
+            let userDefault = UserDefaults.standard.string(forKey: "AppleActionOnDoubleClick")
+            if userDefault == "Minimize" {
+              window?.performMiniaturize(nil)
+            } else if userDefault == "Maximize" {
+              window?.performZoom(nil)
+            }
+            return
+          }
           // disable double click for sideBar / OSC
-          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
+          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, subPopoverView]) else { return }
           // double click
           guard doubleClickAction != .none else { return }
           // if already scheduled a single click timer, invalidate it
@@ -1281,6 +1293,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
+    if case .fullscreen(legacy: true, priorWindowedFrame: let frame) = fsState {
+      legacyAnimateToWindowed(framePriorToBeingInFullscreen: frame)
+    }
   }
 
   // MARK: - Window delegate: Full screen
@@ -1622,11 +1637,24 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       player.togglePause(true)
     }
   }
+  
+  func windowDidMiniaturize(_ notification: Notification) {
+    if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
+      if #available(OSX 10.12, *) {
+        enterPIP()
+      }
+    }
+  }
 
   func windowDidDeminiaturize(_ notification: Notification) {
     if Preference.bool(for: .pauseWhenMinimized) && isPausedDueToMiniaturization {
       player.togglePause(false)
       isPausedDueToMiniaturization = false
+    }
+    if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
+      if #available(OSX 10.12, *) {
+        exitPIP()
+      }
     }
   }
 
@@ -2480,13 +2508,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let needShowIndicator = player.info.pausedForCache || player.info.isSeeking
 
     if needShowIndicator {
-      let sizeStr = FileSize.format(player.info.cacheSize, unit: .kb)
-      let usedStr = FileSize.format(player.info.cacheUsed, unit: .kb)
-      let speedStr = FileSize.format(player.info.cacheSpeed, unit: .b)
+      let sizeStr = FloatingPointByteCountFormatter.string(fromByteCount: player.info.cacheSize, prefixedBy: .ki)
+      let usedStr = FloatingPointByteCountFormatter.string(fromByteCount: player.info.cacheUsed, prefixedBy: .ki)
+      let speedStr = FloatingPointByteCountFormatter.string(fromByteCount: player.info.cacheSpeed)
       let bufferingState = player.info.bufferingState
       bufferIndicatorView.isHidden = false
       bufferProgressLabel.stringValue = String(format: NSLocalizedString("main.buffering_indicator", comment:"Buffering... %d%%"), bufferingState)
-      bufferDetailLabel.stringValue = "\(usedStr)/\(sizeStr) (\(speedStr)/s)"
+      bufferDetailLabel.stringValue = "\(usedStr)B/\(sizeStr)B (\(speedStr)/s)"
     } else {
       bufferIndicatorView.isHidden = true
     }
@@ -2802,6 +2830,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 extension MainWindowController: PIPViewControllerDelegate {
 
   func enterPIP() {
+    guard pipStatus != .inPIP else { return }
     pipStatus = .inPIP
     showUI()
 
@@ -2814,9 +2843,30 @@ extension MainWindowController: PIPViewControllerDelegate {
     pipOverlayView.isHidden = false
 
     videoView.videoLayer.draw(forced: true)
+    
+    if let window = self.window {
+      let windowShouldDoNothing = window.styleMask.contains(.fullScreen) || window.isMiniaturized
+      let pipBehavior = windowShouldDoNothing ? .doNothing : Preference.enum(for: .windowBehaviorWhenPip) as Preference.WindowBehaviorWhenPip
+      switch pipBehavior {
+      case .doNothing:
+        break
+      case .hide:
+        isWindowHidden = true
+        window.orderOut(self)
+        break
+      case .minimize:
+        isWindowMiniaturizedDueToPip = true
+        window.miniaturize(self)
+        break
+      }
+      if Preference.bool(for: .pauseWhenPip) {
+        player.togglePause(true)
+      }
+    }
   }
 
   func exitPIP() {
+    guard pipStatus == .inPIP else { return }
     if pipShouldClose(pip) {
       // Prod Swift to pick the dismiss(_ viewController: NSViewController)
       // overload over dismiss(_ sender: Any?). A change in the way implicitly
@@ -2827,6 +2877,10 @@ extension MainWindowController: PIPViewControllerDelegate {
   }
 
   func doneExitingPIP() {
+    if isWindowHidden {
+      window?.makeKeyAndOrderFront(self)
+    }
+    
     pipStatus = .notInPIP
 
     pipOverlayView.isHidden = true
@@ -2835,6 +2889,9 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     videoView.videoLayer.draw(forced: true)
     updateTimer()
+    
+    isWindowMiniaturizedDueToPip = false
+    isWindowHidden = false
   }
 
   func pipShouldClose(_ pip: PIPViewController) -> Bool {

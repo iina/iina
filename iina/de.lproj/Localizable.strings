@@ -177,8 +177,6 @@
 "pl_menu.reveal_in_finder" = "Im Finder anzeigen";
 "pl_menu.title_multi" = "%d Dateien";
 "pl_menu.wrong_sub" = "Falscher Untertitel!";
-"playlist.chapter_cap" = "KAPITEL";
-"playlist.playlist_cap" = "WIEDERGABELISTE";
 "playlist.total_length" = "%@ insgesamt";
 "playlist.total_length_with_selected" = "%@ von %@ ausgewählt";
 "preference.advanced" = "Erweitert";
@@ -217,3 +215,15 @@
 "touchbar.seek" = "Verlauf";
 "touchbar.time" = "Position";
 "track.none" = "Keine";
+
+/* FIXME: Using English localization instead */
+"pl_menu.browser" = "Open in Browser";
+
+/* FIXME: Using English localization instead */
+"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
+
+/* FIXME: Using English localization instead */
+"pl_menu.copy_url_multi" = "Copy URLs";
+
+/* FIXME: Using English localization instead */
+"pl_menu.copy_url" = "Copy URL";

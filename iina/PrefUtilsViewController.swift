@@ -46,7 +46,7 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
   }
 
   private func updateThumbnailCacheStat() {
-    thumbCacheSizeLabel.stringValue = FileSize.format(CacheManager.shared.getCacheSize(), unit: .b)
+    thumbCacheSizeLabel.stringValue = "\(FloatingPointByteCountFormatter.string(fromByteCount: CacheManager.shared.getCacheSize(), countStyle: .binary))B"
   }
 
   @IBAction func setIINAAsDefaultAction(_ sender: Any) {

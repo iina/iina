@@ -394,6 +394,7 @@
 				<string>tta</string>
 				<string>tak</string>
 				<string>opus</string>
+				<string>cue</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>doc_other_a.icns</string>
@@ -528,7 +529,7 @@
 				<string>public.audio</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Monkey's Audio Lossless Audio</string>
+			<string>Monkey&apos;s Audio Lossless Audio</string>
 			<key>UTTypeIdentifier</key>
 			<string>io.iina.ape</string>
 			<key>UTTypeTagSpecification</key>
@@ -1115,6 +1116,21 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>webm</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string>io.iina.cue</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cue</string>
 				</array>
 			</dict>
 		</dict>

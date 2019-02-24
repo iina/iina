@@ -11,6 +11,8 @@ import JavaScriptCore
 
 class JavascriptPluginInstance {
 
+  var apis: [String: Any]?
+
   lazy var js: JSContext = {
     let ctx = JSContext()!
     ctx.exceptionHandler = self.exceptionHandler
@@ -24,7 +26,7 @@ class JavascriptPluginInstance {
       return self.evaluateFile(requiredURL, asModule: true)
     }
 
-    let iinaObject: [String: Any] = [
+    let iinaObject = [
       "core": JavascriptAPICore(context: ctx, pluginInstance: self),
       "mpv": JavascriptAPIMpv(context: ctx, pluginInstance: self),
       "event": JavascriptAPIEvent(context: ctx, pluginInstance: self),
@@ -33,6 +35,7 @@ class JavascriptPluginInstance {
       "menu": JavascriptAPIMenu(context: ctx, pluginInstance: self),
       "overlay": JavascriptAPIOverlay(context: ctx, pluginInstance: self),
     ]
+    apis = iinaObject
     ctx.setObject(JavascriptAPIRequire, forKeyedSubscript: "require" as NSString)
     ctx.setObject(iinaObject, forKeyedSubscript: "iina" as NSString)
     return ctx
@@ -40,6 +43,13 @@ class JavascriptPluginInstance {
 
   weak var player: PlayerCore!
   weak var plugin: JavascriptPlugin!
+
+  lazy var overlayView: PluginOverlayView = {
+    let view = PluginOverlayView.create(pluginInstance: self)
+    view.attachTo(windowController: player.mainWindow)
+    return view
+  }()
+  var overlayViewLoaded = false
 
   var menuItems: [JavascriptPluginMenuItem] = []
 

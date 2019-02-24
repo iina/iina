@@ -459,15 +459,13 @@ class MainWindowController: PlayerWindowController {
 
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
-  lazy var pluginOverlayView: PluginOverlayView! = {
+  lazy var pluginOverlayViewContainer: NSView! = {
     guard let window = window, let cv = window.contentView else { return nil }
-    let webView = PluginOverlayView(frame: .zero)
-    webView.translatesAutoresizingMaskIntoConstraints = false
-    cv.addSubview(webView, positioned: .below, relativeTo: bufferIndicatorView)
-    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": webView])
-    webView.setValue(false, forKey: "drawsBackground")
-    webView.isHidden = true
-    return webView
+    let view = NSView(frame: .zero)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    cv.addSubview(view, positioned: .below, relativeTo: bufferIndicatorView)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": view])
+    return view
   }()
 
   lazy var subPopoverView = playlistView.subPopover?.contentViewController?.view

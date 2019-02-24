@@ -160,6 +160,7 @@
 		B4E4470125CE3F930069F06E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = B4E4470025CE3F930069F06E /* Sparkle */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
 		E301EFDA21312AB300BC8588 /* KeychainAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = E301EFD921312AB300BC8588 /* KeychainAccess.swift */; };
+		E30D2EBD21F5FD2600E1FF0D /* PluginOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */; };
 		E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */; };
 		E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */; };
 		E32712B224F2B8CA00359DAB /* ScreenshootOSDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32712B424F2B8CA00359DAB /* ScreenshootOSDView.xib */; };
@@ -311,6 +312,7 @@
 		E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C12F6A201F281F00297964 /* FirstRunManager.swift */; };
 		E3CB258F222799B800A62C47 /* MPVHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB258E222799B800A62C47 /* MPVHook.swift */; };
 		E3CAD4AF2146DB47000B373A /* JavascriptAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CAD4AE2146DB47000B373A /* JavascriptAPI.swift */; };
+		E3CB258B2222885E00A62C47 /* JavascriptAPIOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB258A2222885E00A62C47 /* JavascriptAPIOverlay.swift */; };
 		E3CB75BB1FD998F5004DB10A /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F21E26CA24008755BB /* Regex.swift */; };
 		E3CB75BD1FDACB82004DB10A /* SavedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */; };
 		E3DBD239218B057A00B3AFBF /* Translators.json in Resources */ = {isa = PBXBuildFile; fileRef = E3DBD238218B057A00B3AFBF /* Translators.json */; };
@@ -1310,6 +1312,7 @@
 		E1298BCF21A517CA00B646AD /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		E1298BD021A517CA00B646AD /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		E301EFD921312AB300BC8588 /* KeychainAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccess.swift; sourceTree = "<group>"; };
+		E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginOverlayView.swift; sourceTree = "<group>"; };
 		E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistPlaybackProgressView.swift; sourceTree = "<group>"; };
 		E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshootOSDView.swift; sourceTree = "<group>"; };
 		E32712B324F2B8CA00359DAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ScreenshootOSDView.xib; sourceTree = "<group>"; };
@@ -1436,6 +1439,7 @@
 		E3C12F6A201F281F00297964 /* FirstRunManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunManager.swift; sourceTree = "<group>"; };
 		E3CB258E222799B800A62C47 /* MPVHook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVHook.swift; sourceTree = "<group>"; };
 		E3CAD4AE2146DB47000B373A /* JavascriptAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPI.swift; sourceTree = "<group>"; };
+		E3CB258A2222885E00A62C47 /* JavascriptAPIOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIOverlay.swift; sourceTree = "<group>"; };
 		E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFilter.swift; sourceTree = "<group>"; };
 		E3DBD238218B057A00B3AFBF /* Translators.json */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = text.json; path = Translators.json; sourceTree = "<group>"; tabWidth = 4; };
 		E3DBD23A218B199700B3AFBF /* Translators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translators.swift; sourceTree = "<group>"; };
@@ -2276,6 +2280,7 @@
 				E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */,
 				E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */,
 				E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */,
+				E3CB258A2222885E00A62C47 /* JavascriptAPIOverlay.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -2287,6 +2292,7 @@
 				E35306EE2147A8CE008FE492 /* JavascriptPlugin.swift */,
 				E35306FB214813B7008FE492 /* JavascriptPluginInstance.swift */,
 				E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */,
+				E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */,
 			);
 			name = Javascript;
 			sourceTree = "<group>";
@@ -2556,6 +2562,7 @@
 				84E295C01E2CF9F5006388F7 /* ObjcUtils.m in Sources */,
 				8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */,
 				84A886E41E24F37D008755BB /* ShooterSubtitle.swift in Sources */,
+				E3CB258B2222885E00A62C47 /* JavascriptAPIOverlay.swift in Sources */,
 				84A09A0E1F2DF596000FF343 /* MiniPlayerWindowController.swift in Sources */,
 				84BEEC421DFEE46200F945CA /* StreamReader.swift in Sources */,
 				E3CAD4AF2146DB47000B373A /* JavascriptAPI.swift in Sources */,
@@ -2637,6 +2644,7 @@
 				84C6D3641EB276E9009BF721 /* PlaybackHistory.swift in Sources */,
 				E3CB258F222799B800A62C47 /* MPVHook.swift in Sources */,
 				843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */,
+				E30D2EBD21F5FD2600E1FF0D /* PluginOverlayView.swift in Sources */,
 				8407D1401E3A684C0043895D /* ViewLayer.swift in Sources */,
 				84A0BA9B1D2FAB4100BC8DA1 /* Parameter.swift in Sources */,
 				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,

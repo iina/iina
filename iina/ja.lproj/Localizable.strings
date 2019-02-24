@@ -96,10 +96,10 @@
 "menu.audio_delay_down" = "オーディオディレイ - %.1fs";
 "menu.audio_delay_up" = "オーディオディレイ + %.1fs";
 "menu.exit_fullscreen" = "フルスクリーンを解除";
-"menu.exit_pip" = "Picture-in-Pictureをオフ";
+"menu.exit_pip" = "ピクチャ・イン・ピクチャをオフ";
 "menu.fullscreen" = "フルスクリーンにする";
 "menu.pause" = "一時停止";
-"menu.pip" = "Picture-in-Pictureを使用";
+"menu.pip" = "ピクチャ・イン・ピクチャを使用";
 "menu.resume" = "再生";
 "menu.seek_backward" = "%.0f秒戻る";
 "menu.seek_forward" = "%.0f秒進む";
@@ -114,7 +114,7 @@
 "menu.volume_up" = "音量 + %.0f%%";
 "osc_toolbar.full_screen" = "フルスクリーン切り替え";
 "osc_toolbar.music_mode" = "ミュージックモード切り替え";
-"osc_toolbar.pip" = "Picture-in-Picture切り替え";
+"osc_toolbar.pip" = "ピクチャ・イン・ピクチャ切り替え";
 "osc_toolbar.playlist" = "プレイリストとチャプター";
 "osc_toolbar.settings" = "クイック設定";
 "osc_toolbar.sub_track" = "字幕トラックを選択";

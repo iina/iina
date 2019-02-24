@@ -26,6 +26,7 @@ class EventController {
     init?(rawValue: RawValue) { self.rawValue = rawValue }
 
     // IINA events
+    static let windowLoaded = Name("iina.window-loaded")
     static let windowMoved = Name("iina.window-moved")
     static let windowResized = Name("iina.window-resized")
     static let pipChanged = Name("iina.pip.changed")

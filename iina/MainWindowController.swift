@@ -8,6 +8,7 @@
 
 import Cocoa
 import Mustache
+import WebKit
 
 fileprivate let isMacOS11: Bool = {
   var res = false
@@ -458,6 +459,17 @@ class MainWindowController: PlayerWindowController {
 
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
+  lazy var pluginOverlayView: PluginOverlayView! = {
+    guard let window = window, let cv = window.contentView else { return nil }
+    let webView = PluginOverlayView(frame: .zero)
+    webView.translatesAutoresizingMaskIntoConstraints = false
+    cv.addSubview(webView, positioned: .below, relativeTo: bufferIndicatorView)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": webView])
+    webView.setValue(false, forKey: "drawsBackground")
+    webView.isHidden = true
+    return webView
+  }()
+
   lazy var subPopoverView = playlistView.subPopover?.contentViewController?.view
 
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
@@ -595,6 +607,14 @@ class MainWindowController: PlayerWindowController {
       guard self.fsState.isFullscreen, Preference.bool(for: .useLegacyFullScreen) else { return }
       setWindowFrameForLegacyFullScreen()
     }
+
+    NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification, object: nil, queue: nil, using: { [unowned self] _ in
+      if Preference.bool(for: .pauseWhenGoesToSleep) {
+        self.player.pause()
+      }
+    })
+
+    player.events.emit(.windowLoaded)
   }
 
   /** Set material for OSC and title bar */

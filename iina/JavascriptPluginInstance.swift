@@ -31,6 +31,7 @@ class JavascriptPluginInstance {
       "http": JavascriptAPIHttp(context: ctx, pluginInstance: self),
       "console": JavascriptAPIConsole(context: ctx, pluginInstance: self),
       "menu": JavascriptAPIMenu(context: ctx, pluginInstance: self),
+      "overlay": JavascriptAPIOverlay(context: ctx, pluginInstance: self),
     ]
     ctx.setObject(JavascriptAPIRequire, forKeyedSubscript: "require" as NSString)
     ctx.setObject(iinaObject, forKeyedSubscript: "iina" as NSString)

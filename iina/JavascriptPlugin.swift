@@ -17,6 +17,7 @@ class JavascriptPlugin {
     case showOSD = "show-osd"
     case showAlert = "show-alert"
     case addMenuItems = "menu-items"
+    case videoOverlay = "video-overlay"
 
     var isDangerous: Bool {
       switch self {

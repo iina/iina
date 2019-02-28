@@ -352,7 +352,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   @IBAction func addFileAction(_ sender: AnyObject) {
     Utility.quickMultipleOpenPanel(title: "Add to playlist", canChooseDir: true) { urls in
-      let playableFiles = self.player.getPlayableFiles(in: urls, sorted: true)
+      let playableFiles = self.player.getPlayableFiles(in: urls)
       if playableFiles.count != 0 {
         self.player.addToPlaylist(paths: playableFiles.map { $0.path }, at: self.player.info.playlist.count)
         self.player.mainWindow.playlistView.reloadData(playlist: true, chapters: false)

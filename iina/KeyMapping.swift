@@ -29,7 +29,7 @@ class KeyMapping: NSObject {
   
   @objc var actionForDisplay: String {
     get {
-      return UserDefaults.standard.bool(forKey: "displayRawValue") ? prettyCommand : readableAction
+      return UserDefaults.standard.bool(forKey: "displayRawValue") ? readableAction : prettyCommand
     }
     set {
       rawAction = newValue
@@ -64,7 +64,7 @@ class KeyMapping: NSObject {
 
   var comment: String?
 
-  var readableAction: String {
+  @objc var readableAction: String {
     get {
       let joined = action.joined(separator: " ")
       return isIINACommand ? ("@iina " + joined) : joined
@@ -81,7 +81,7 @@ class KeyMapping: NSObject {
     }
   }
 
-  var prettyCommand: String {
+  @objc var prettyCommand: String {
     return KeyBindingTranslator.readableCommand(fromAction: action, isIINACommand: isIINACommand)
   }
 

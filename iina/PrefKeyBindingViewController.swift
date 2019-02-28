@@ -54,6 +54,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   @IBOutlet weak var newConfigBtn: NSButton!
   @IBOutlet weak var duplicateConfigBtn: NSButton!
   @IBOutlet weak var useMediaKeysButton: NSButton!
+  @IBOutlet weak var keyMappingSearchField: NSSearchField!
   @IBOutlet var mappingController: NSArrayController!
 
   override func viewDidLoad() {
@@ -384,6 +385,8 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
 extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSource {
 
+  // NSTableViewDataSource
+
   func numberOfRows(in tableView: NSTableView) -> Int {
     return userConfigNames.count
   }
@@ -395,6 +398,8 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
       "isHidden": !isDefaultConfig(name)
     ]
   }
+
+  // NSTableViewDelegate
 
   func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
     if tableView == kbTableView {
@@ -429,4 +434,5 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
     }
     removeKmBtn.isEnabled = shouldEnableEdit && kbTableView.selectedRow != -1
   }
+
 }

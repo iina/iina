@@ -37,12 +37,10 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   var userConfigs: [String: Any]!
   var userConfigNames: [String] = []
 
-  var currentMapping: [KeyMapping] = []
   var currentConfName: String!
   var currentConfFilePath: String!
 
   var shouldEnableEdit: Bool = true
-  var displayRawValues: Bool = false
 
   // MARK: - Outlets
 
@@ -56,15 +54,13 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   @IBOutlet weak var newConfigBtn: NSButton!
   @IBOutlet weak var duplicateConfigBtn: NSButton!
   @IBOutlet weak var useMediaKeysButton: NSButton!
-
+  @IBOutlet var mappingController: NSArrayController!
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    // tableview
-    kbTableView.dataSource = self
     kbTableView.delegate = self
-    kbTableView.doubleAction = #selector(editRow)
+    kbTableView.doubleAction = UserDefaults.standard.bool(forKey: "displayRawValue") ? nil : #selector(editRow)
     confTableView.dataSource = self
     confTableView.delegate = self
 
@@ -106,6 +102,8 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     guard let path = getFilePath(forConfig: currentConf) else { return }
     currentConfFilePath = path
     loadConfigFile()
+    
+    NotificationCenter.default.addObserver(forName: .iinaKeyBindingChange, object: nil, queue: .main, using: saveToConfFile)
   }
 
   private func confTableSelectRow(withTitle title: String) {
@@ -139,25 +137,21 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       guard !key.isEmpty && !action.isEmpty else { return }
       if action.hasPrefix("@iina") {
         let trimmedAction = action[action.index(action.startIndex, offsetBy: "@iina".count)...].trimmingCharacters(in: .whitespaces)
-        self.currentMapping.append(KeyMapping(key: key,
-                                         rawAction: trimmedAction,
-                                         isIINACommand: true))
+        self.mappingController.addObject(KeyMapping(key: key,
+                                        rawAction: trimmedAction,
+                                        isIINACommand: true))
       } else {
-        self.currentMapping.append(KeyMapping(key: key, rawAction: action))
+        self.mappingController.addObject(KeyMapping(key: key, rawAction: action))
       }
 
-      self.kbTableView.reloadData()
-      self.kbTableView.scrollRowToVisible(self.currentMapping.count - 1)
-      self.saveToConfFile()
+      self.kbTableView.scrollRowToVisible((self.mappingController.arrangedObjects as! [AnyObject]).count - 1)
+      NotificationCenter.default.post(Notification(name: .iinaKeyBindingChange))
     }
   }
 
   @IBAction func removeKeyMappingBtnAction(_ sender: AnyObject) {
-    if kbTableView.selectedRow >= 0 {
-      currentMapping.remove(at: kbTableView.selectedRow)
-      kbTableView.reloadData()
-    }
-    saveToConfFile()
+    mappingController.remove(sender)
+    NotificationCenter.default.post(Notification(name: .iinaKeyBindingChange))
   }
 
   // FIXME: may combine with duplicate action?
@@ -307,8 +301,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   }
 
   @IBAction func displayRawValueAction(_ sender: NSButton) {
-    displayRawValues = sender.state == .on
-    kbTableView.doubleAction = displayRawValues ? nil : #selector(editRow)
+    kbTableView.doubleAction = UserDefaults.standard.bool(forKey: "displayRawValue") ? nil : #selector(editRow)
     kbTableView.reloadData()
   }
 
@@ -327,10 +320,10 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     configHintLabel.stringValue = NSLocalizedString("preference.key_binding_hint_\(shouldEnableEdit ? "2" : "1")", comment: "preference.key_binding_hint")
   }
 
-  func saveToConfFile() {
+  func saveToConfFile(_ sender: Notification) {
     setKeybindingsForPlayerCore()
     do {
-      try KeyMapping.generateConfData(from: currentMapping).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
+      try KeyMapping.generateConfData(from: mappingController.arrangedObjects as! [KeyMapping]).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
     } catch {
       Utility.showAlert("config.cannot_write", sheetWindow: view.window)
     }
@@ -341,7 +334,9 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
   private func loadConfigFile() {
     if let mapping = KeyMapping.parseInputConf(at: currentConfFilePath) {
-      currentMapping = mapping
+      mappingController.content = nil
+      mappingController.add(contentsOf: mapping)
+      mappingController.setSelectionIndexes(IndexSet())
     } else {
       // on error
       Utility.showAlert("keybinding_config.error", arguments: [currentConfName], sheetWindow: view.window)
@@ -354,7 +349,6 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     }
     Preference.set(currentConfName, for: .currentInputConfigName)
     setKeybindingsForPlayerCore()
-    kbTableView.reloadData()
     changeButtonEnabledStatus()
   }
 
@@ -377,7 +371,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   }
 
   private func setKeybindingsForPlayerCore() {
-    PlayerCore.setKeyBindings(currentMapping)
+    PlayerCore.setKeyBindings(mappingController.arrangedObjects as! [KeyMapping])
   }
 
   private func tellUserToDuplicateConfig() {
@@ -391,48 +385,20 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSource {
 
   func numberOfRows(in tableView: NSTableView) -> Int {
-    if tableView == kbTableView {
-      return currentMapping.count
-    } else {
-      return userConfigNames.count
-    }
+    return userConfigNames.count
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    if tableView == kbTableView {
-      guard let identifier = tableColumn?.identifier else { return nil }
-
-      guard let mapping = currentMapping[at: row] else { return nil }
-      if identifier == .key {
-        return displayRawValues ? mapping.key : mapping.prettyKey
-      } else if identifier == .action {
-        return displayRawValues ? mapping.readableAction : mapping.prettyCommand
-      }
-      return ""
-    } else {
-      let name = userConfigNames[row]
-      return [
-        "name": name,
-        "isHidden": !isDefaultConfig(name)
-      ]
-    }
-  }
-
-  func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
-    guard tableView == kbTableView else { return }
-    guard let value = object as? String,
-      let identifier = tableColumn?.identifier else { return }
-    if identifier == .key {
-      currentMapping[row].key = value
-    } else if identifier == .action {
-      currentMapping[row].rawAction = value
-    }
-    saveToConfFile()
+    let name = userConfigNames[row]
+    return [
+      "name": name,
+      "isHidden": !isDefaultConfig(name)
+    ]
   }
 
   func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
     if tableView == kbTableView {
-      return displayRawValues
+      return UserDefaults.standard.bool(forKey: "displayRawValue")
     } else {
       return false
     }
@@ -444,13 +410,13 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
       return
     }
     guard kbTableView.selectedRow != -1 else { return }
-    let selectedData = currentMapping[kbTableView.selectedRow]
+    let selectedData = mappingController.selectedObjects[0] as! KeyMapping
     showKeyBindingPanel(key: selectedData.key, action: selectedData.readableAction) { key, action in
       guard !key.isEmpty && !action.isEmpty else { return }
       selectedData.key = key
       selectedData.rawAction = action
       self.kbTableView.reloadData()
-      self.saveToConfFile()
+      NotificationCenter.default.post(Notification(name: .iinaKeyBindingChange))
     }
   }
 
@@ -461,6 +427,6 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
       currentConfFilePath = getFilePath(forConfig: title)!
       loadConfigFile()
     }
-    removeKmBtn.isEnabled = shouldEnableEdit && (kbTableView.selectedRow != -1)
+    removeKmBtn.isEnabled = shouldEnableEdit && kbTableView.selectedRow != -1
   }
 }

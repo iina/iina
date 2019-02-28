@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.13.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,7 +13,8 @@
                 <outlet property="configHintLabel" destination="tP6-Ua-acA" id="bRT-AA-zL7"/>
                 <outlet property="deleteConfFileBtn" destination="EpF-t6-PtC" id="3NC-Xb-5kT"/>
                 <outlet property="duplicateConfigBtn" destination="5WK-s3-J9x" id="Ri8-b5-d3s"/>
-                <outlet property="kbTableView" destination="1Z4-NL-6P3" id="v4p-E7-gvv"/>
+                <outlet property="kbTableView" destination="1Z4-NL-6P3" id="OyE-OE-MSd"/>
+                <outlet property="mappingController" destination="xGz-Vh-hMb" id="hDG-Z5-OmL"/>
                 <outlet property="newConfigBtn" destination="iCp-ho-SlQ" id="LI0-TX-tNs"/>
                 <outlet property="removeKmBtn" destination="uFG-OF-DJ5" id="XWN-Lt-tmc"/>
                 <outlet property="revealConfFileBtn" destination="KZA-hu-vhZ" id="lVg-3j-Qgp"/>
@@ -67,6 +68,9 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        <connections>
+                                            <binding destination="xGz-Vh-hMb" name="value" keyPath="arrangedObjects.keyForDisplay" id="FWk-cQ-DIx"/>
+                                        </connections>
                                     </tableColumn>
                                     <tableColumn identifier="Action" width="367" minWidth="40" maxWidth="1000" id="4Bn-MF-dfY">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Action">
@@ -80,8 +84,15 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        <connections>
+                                            <binding destination="xGz-Vh-hMb" name="value" keyPath="arrangedObjects.actionForDisplay" id="lft-aO-sfz"/>
+                                        </connections>
                                     </tableColumn>
                                 </tableColumns>
+                                <connections>
+                                    <binding destination="xGz-Vh-hMb" name="content" keyPath="arrangedObjects" id="msx-K3-0J4"/>
+                                    <binding destination="xGz-Vh-hMb" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="msx-K3-0J4" id="Bzi-wl-Zks"/>
+                                </connections>
                             </tableView>
                         </subviews>
                     </clipView>
@@ -144,7 +155,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="removeKeyMappingBtnAction:" target="-2" id="AMw-dz-4NC"/>
+                                    <action selector="removeKeyMappingBtnAction:" target="-2" id="aeN-fq-0zS"/>
                                 </connections>
                             </button>
                             <button toolTip="Show the raw mpv key code and command." translatesAutoresizingMaskIntoConstraints="NO" id="l2M-TH-eCt">
@@ -155,6 +166,7 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="displayRawValueAction:" target="-2" id="EX1-Ia-ua1"/>
+                                    <binding destination="XM5-Sj-lhw" name="value" keyPath="values.displayRawValue" id="cXv-OP-hZr"/>
                                 </connections>
                             </button>
                             <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="GnK-98-Zrg">
@@ -406,6 +418,7 @@
             <point key="canvasLocation" x="121.5" y="248.5"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="XM5-Sj-lhw"/>
+        <arrayController objectClassName="KeyMapping" id="xGz-Vh-hMb"/>
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>

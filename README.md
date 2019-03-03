@@ -58,9 +58,8 @@ $ brew install cocoapods
 1. Install mpv:
 
 ```console
-$ brew install mpv --with-uchardet
+$ brew install mpv
 ```
-Feel free to include your own copies of the other libraries if you'd like.
 
 2. Copy latest [header files](https://github.com/mpv-player/mpv/tree/master/libmpv) into `libmpv/include/mpv/`.
 

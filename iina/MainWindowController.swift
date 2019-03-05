@@ -1056,6 +1056,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       player.togglePause(nil)
     case .hideOSC:
       hideUI()
+    case .togglePIP:
+      if #available(OSX 10.12, *) {
+        togglePIP()
+      }
+      break
     }
   }
 
@@ -2828,6 +2833,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
 @available(macOS 10.12, *)
 extension MainWindowController: PIPViewControllerDelegate {
+
+  func togglePIP() {
+    switch pipStatus {
+    case .notInPIP:
+      enterPIP()
+    case .inPIP:
+      exitPIP()
+    default:
+      return
+    }
+  }
 
   func enterPIP() {
     guard pipStatus != .inPIP else { return }

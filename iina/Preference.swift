@@ -352,6 +352,7 @@ struct Preference {
     case fullscreen
     case pause
     case hideOSC
+    case togglePIP
 
     static var defaultValue = MouseClickAction.none
 

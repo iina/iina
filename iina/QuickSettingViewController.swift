@@ -8,6 +8,12 @@
 
 import Cocoa
 
+fileprivate extension QuickSettingViewController.TabViewType {
+  init(buttonTag: Int) {
+    self = [.video, .audio, .sub][at: buttonTag] ?? .video
+  }
+}
+
 class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, SidebarViewController {
 
   override var nibName: NSNib.Name {
@@ -375,8 +381,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func tabBtnAction(_ sender: NSButton) {
     tabView.selectTabViewItem(at: sender.tag)
-    [videoTabBtn, audioTabBtn, subTabBtn].forEach { Utility.setActive($0, false) }
-    Utility.setActive(sender, true)
+    [videoTabBtn, audioTabBtn, subTabBtn].forEach { Utility.setBoldTitle(for: $0, $0 == sender) }
+    currentTab = .init(buttonTag: sender.tag)
     reload()
   }
 

@@ -35,6 +35,7 @@ class JavascriptPlugin {
   let authorName: String
   let authorEmail: String?
   let authorURL: String?
+  let identifier: String
   let version: String
   let description: String?
 
@@ -84,10 +85,11 @@ class JavascriptPlugin {
       let name = jsonDict["name"] as? String,
       let author = jsonDict["author"] as? [String: String],
       let authorName = author["name"],
+      let identifier = jsonDict["identifier"] as? String,
       let version = jsonDict["version"] as? String,
       let entry = jsonDict["entry"] as? String
       else {
-      Logger.log("Info.json must contain these keys: name, author, version, entry.", level: .error)
+      Logger.log("Info.json must contain these keys: name, author, identifier, version and entry.", level: .error)
       return nil
     }
     self.name = name
@@ -96,6 +98,7 @@ class JavascriptPlugin {
     self.authorName = authorName
     self.authorURL = author["url"]
     self.authorEmail = author["email"]
+    self.identifier = identifier
     self.description = jsonDict["description"] as? String
     self.scriptPaths = (jsonDict["scripts"] as? [String]) ?? []
     var permissions = Set<Permission>()

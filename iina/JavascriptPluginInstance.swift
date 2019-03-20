@@ -11,7 +11,7 @@ import JavaScriptCore
 
 class JavascriptPluginInstance {
 
-  var apis: [String: Any]?
+  var apis: [String: JavascriptAPI]?
 
   lazy var js: JSContext = {
     let ctx = JSContext()!
@@ -34,10 +34,13 @@ class JavascriptPluginInstance {
       "console": JavascriptAPIConsole(context: ctx, pluginInstance: self),
       "menu": JavascriptAPIMenu(context: ctx, pluginInstance: self),
       "overlay": JavascriptAPIOverlay(context: ctx, pluginInstance: self),
+      "utils": JavascriptAPIUtils(context: ctx, pluginInstance: self),
     ]
     apis = iinaObject
     ctx.setObject(JavascriptAPIRequire, forKeyedSubscript: "require" as NSString)
     ctx.setObject(iinaObject, forKeyedSubscript: "iina" as NSString)
+
+    apis!.values.forEach { $0.extraSetup() }
     return ctx
   }()
 
@@ -52,6 +55,10 @@ class JavascriptPluginInstance {
   var overlayViewLoaded = false
 
   var menuItems: [JavascriptPluginMenuItem] = []
+
+  lazy var queue: DispatchQueue = {
+    DispatchQueue(label: "com.colliderli.iina.plugin.\(plugin.identifier)", qos: .background)
+  }()
 
   lazy var subsystem: Logger.Subsystem = .init(rawValue: "JS:\(plugin.name)")
 

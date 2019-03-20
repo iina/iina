@@ -87,10 +87,6 @@ class JavascriptAPIHttp: JavascriptAPI, JavascriptAPIHttpExportable {
     }
     return true
   }
-
-  private func createPromise(_ block: @escaping @convention(block) (JSValue, JSValue) -> Void) -> JSValue {
-    return context.objectForKeyedSubscript("Promise")!.construct(withArguments: [JSValue(object: block, in: context)])
-  }
 }
 
 @objc protocol JavascriptAPIXmlrpcExportable: JSExport {
@@ -122,10 +118,6 @@ class JavascriptAPIXmlrpc: JavascriptAPI, JavascriptAPIXmlrpcExportable {
         }
       }
     }
-  }
-
-  private func createPromise(_ block: @escaping @convention(block) (JSValue, JSValue) -> Void) -> JSValue {
-    return context.objectForKeyedSubscript("Promise")!.construct(withArguments: [JSValue(object: block, in: context)])
   }
 }
 

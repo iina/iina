@@ -28,13 +28,21 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   }
 
   var plugins: [JavascriptPlugin] = []
+  var currentPlugin: JavascriptPlugin?
 
+  @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var pluginInfoContentView: NSView!
   @IBOutlet weak var pluginNameLabel: NSTextField!
-  @IBOutlet weak var pluginVersoinLabel: NSTextField!
+  @IBOutlet weak var pluginVersionLabel: NSTextField!
+  @IBOutlet weak var pluginAuthorLabel: NSTextField!
   @IBOutlet weak var pluginDescLabel: NSTextField!
   @IBOutlet weak var pluginPermissionsView: NSStackView!
+  @IBOutlet weak var pluginWebsiteEmailStackView: NSStackView!
+  @IBOutlet weak var pluginWebsiteBtn: NSButton!
+  @IBOutlet weak var pluginEmailBtn: NSButton!
+  @IBOutlet weak var pluginSupportStackView: NSStackView!
+  @IBOutlet weak var pluginBinaryHelpTextView: NSView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -46,6 +54,26 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     clearPluginPage()
   }
 
+  @IBAction func tabSwitched(_ sender: NSSegmentedControl) {
+    tabView.selectTabViewItem(at: sender.selectedSegment)
+  }
+
+  @IBAction func websiteBtnAction(_ sender: NSButton) {
+    if let website = currentPlugin?.authorURL, let url = URL(string: website) {
+      NSWorkspace.shared.open(url)
+    }
+  }
+
+  @IBAction func emailBtnAction(_ sender: NSButton) {
+    if let email = currentPlugin?.authorEmail, let url = URL(string: "mailto:\(email)") {
+      NSWorkspace.shared.open(url)
+    }
+  }
+
+  @IBAction func openBinaryDirBtnAction(_ sender: Any) {
+    NSWorkspace.shared.open(Utility.binariesURL)
+  }
+
   private func clearPluginPage() {
     pluginInfoContentView.isHidden = true
   }
@@ -53,8 +81,12 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   private func loadPluginPage(_ plugin: JavascriptPlugin) {
     pluginInfoContentView.isHidden = false
     pluginNameLabel.stringValue = plugin.name
-    pluginVersoinLabel.stringValue = plugin.version
+    pluginAuthorLabel.stringValue = plugin.authorName
+    pluginVersionLabel.stringValue = plugin.version
     pluginDescLabel.stringValue = plugin.description ?? "No Description"
+    pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorEmail == nil ? .notVisible : .mustHold, for: pluginEmailBtn)
+    pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorURL == nil ? .notVisible : .mustHold, for: pluginWebsiteBtn)
+    pluginSupportStackView.setVisibilityPriority(.notVisible, for: pluginBinaryHelpTextView)
 
     pluginPermissionsView.views.forEach { pluginPermissionsView.removeView($0) }
 
@@ -65,16 +97,20 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
       var desc = l10n("desc")
       if case .networkRequest = permission {
         if plugin.domainList.contains("*") {
-          desc += "\n   - \(l10n("any_site"))"
+          desc += "\n- \(l10n("any_site"))"
         } else {
-          desc += "\n   - "
-          desc += plugin.domainList.joined(separator: "\n   - ")
+          desc += "\n- "
+          desc += plugin.domainList.joined(separator: "\n- ")
         }
+      } else if case .callProcess = permission {
+        pluginSupportStackView.setVisibilityPriority(.mustHold, for: pluginBinaryHelpTextView)
       }
       let vc = PrefPluginPermissionView(name: l10n("name"), desc: desc, isDangerous: permission.isDangerous)
       pluginPermissionsView.addView(vc.view, in: .top)
       Utility.quickConstraints(["H:|-0-[v]-0-|"], ["v": vc.view])
     }
+
+    currentPlugin = plugin
   }
 
 }

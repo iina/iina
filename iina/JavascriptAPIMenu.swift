@@ -20,6 +20,7 @@ class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
   }
 
   @objc func addItem(_ item: JavascriptPluginMenuItem) {
+    guard permitted(to: .addMenuItems) else { return }
     self.pluginInstance.menuItems.append(item)
   }
 }

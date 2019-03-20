@@ -42,6 +42,7 @@ struct AppData {
   static let userInputConfFolder = "input_conf"
   static let watchLaterFolder = "watch_later"
   static let pluginsFolder = "plugins"
+  static let binariesFolder = "bin"
   static let historyFile = "history.plist"
   static let thumbnailCacheFolder = "thumb_cache"
   static let screenshotCacheFolder = "screenshot_cache"

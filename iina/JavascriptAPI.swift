@@ -30,11 +30,23 @@ class JavascriptAPI: NSObject {
   }
 
   func whenPermitted<T>(to permission: JavascriptPlugin.Permission, block: () -> T) -> T? {
-    if pluginInstance.plugin.permissions.contains(permission) {
-      return block()
-    } else {
-      log("To call this API, the plugin must declare permission \(permission.rawValue) in Info.json.", level: .error)
+    guard permitted(to: permission) else {
+      return nil
     }
-    return nil
+    return block()
+  }
+
+  func permitted(to permission: JavascriptPlugin.Permission) -> Bool {
+    guard pluginInstance.plugin.permissions.contains(permission) else {
+      log("To call this API, the plugin must declare permission \(permission.rawValue) in Info.json.", level: .error)
+      return false
+    }
+    return true
+  }
+
+  func extraSetup() { }
+
+  func createPromise(_ block: @escaping @convention(block) (JSValue, JSValue) -> Void) -> JSValue {
+    return context.objectForKeyedSubscript("Promise")!.construct(withArguments: [JSValue(object: block, in: context)])
   }
 }

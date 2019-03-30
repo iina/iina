@@ -44,10 +44,9 @@ extension PlayerCore {
 
    - Parameters:
      - urls: The list as an array of `URL`.
-     - sorted: Whether the return array is sorted and deduplicated
    - Returns: URLs of all playable files as an array of `URL`.
    */
-  func getPlayableFiles(in urls: [URL], sorted: Bool = false) -> [URL] {
+  func getPlayableFiles(in urls: [URL]) -> [URL] {
     var playableFiles: [URL] = []
     for url in urls {
       if !url.isFileURL {
@@ -70,9 +69,6 @@ extension PlayerCore {
           playableFiles.append(url)
         }
       }
-    }
-    if !sorted {
-      return playableFiles
     }
     return Array(Set(playableFiles)).sorted { url1, url2 in
       let folder1 = url1.deletingLastPathComponent(), folder2 = url2.deletingLastPathComponent()

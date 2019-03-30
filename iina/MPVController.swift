@@ -54,6 +54,9 @@ class MPVController: NSObject {
 
   var fileLoaded: Bool = false
 
+  private var hooks: [UInt64: () -> Void] = [:]
+  private var hookCounter: UInt64 = 1
+
   let observeProperties: [String: mpv_format] = [
     MPVProperty.trackList: MPV_FORMAT_NONE,
     MPVProperty.vf: MPV_FORMAT_NONE,
@@ -529,6 +532,14 @@ class MPVController: NSObject {
     return parsed!
   }
 
+  // MARK: - Hooks
+
+  func addHook(_ name: MPVHook, priority: Int32 = 0, hook: @escaping () -> Void) {
+    mpv_hook_add(mpv, hookCounter, name.rawValue, priority)
+    hooks[hookCounter] = hook
+    hookCounter += 1
+  }
+
   // MARK: - Events
 
   // Read event and handle it async
@@ -566,6 +577,15 @@ class MPVController: NSObject {
       let level = String(cString: (msg?.pointee.level)!)
       let text = String(cString: (msg?.pointee.text)!)
       Logger.log("mpv log: [\(prefix)] \(level): \(text)", level: .warning, subsystem: .general, appendNewlineAtTheEnd: false)
+
+    case MPV_EVENT_HOOK:
+      let userData = event.pointee.reply_userdata
+      let hookEvent = event.pointee.data.bindMemory(to: mpv_event_hook.self, capacity: 1).pointee
+      let hookID = hookEvent.id
+      if let hook = hooks[userData] {
+        hook()
+      }
+      mpv_hook_continue(mpv, hookID)
 
     case MPV_EVENT_PROPERTY_CHANGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)

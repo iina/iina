@@ -184,7 +184,7 @@ class PlayerCore: NSObject {
       return nil
     }
 
-    let playableFiles = getPlayableFiles(in: urls, sorted: true)
+    let playableFiles = getPlayableFiles(in: urls)
     let count = playableFiles.count
 
     // check playable files count

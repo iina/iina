@@ -208,12 +208,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     switch tab {
     case .playlist:
       tabView.selectTabViewItem(at: 0)
-      Utility.setActive(playlistBtn, true)
-      Utility.setActive(chaptersBtn, false)
+      Utility.setBoldTitle(for: playlistBtn, true)
+      Utility.setBoldTitle(for: chaptersBtn, false)
     case .chapters:
       tabView.selectTabViewItem(at: 1)
-      Utility.setActive(chaptersBtn, true)
-      Utility.setActive(playlistBtn, false)
+      Utility.setBoldTitle(for: chaptersBtn, true)
+      Utility.setBoldTitle(for: playlistBtn, false)
     }
 
     currentTab = tab
@@ -352,7 +352,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   @IBAction func addFileAction(_ sender: AnyObject) {
     Utility.quickMultipleOpenPanel(title: "Add to playlist", canChooseDir: true) { urls in
-      let playableFiles = self.player.getPlayableFiles(in: urls, sorted: true)
+      let playableFiles = self.player.getPlayableFiles(in: urls)
       if playableFiles.count != 0 {
         self.player.addToPlaylist(paths: playableFiles.map { $0.path }, at: self.player.info.playlist.count)
         self.player.mainWindow.playlistView.reloadData(playlist: true, chapters: false)

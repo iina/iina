@@ -102,7 +102,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
       faceTableView.reloadData()
     } else {
       isSearching = true
-      filteredFontNames = fontNames.filter { $0.localizedName.lowercased() .contains(str.lowercased()) }
+      filteredFontNames = fontNames.filter { $0.localizedName.lowercased().contains(str.lowercased()) }
       chosenFontMembers = nil
       familyTableView.reloadData()
       faceTableView.reloadData()

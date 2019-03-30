@@ -3,6 +3,7 @@ osx_image: xcode10.1
 
 before_install:
   - gem install cocoapods
+  - pod update
 
 # Build the main app, which happens to depend on the other two targets.
 script: xcodebuild -workspace iina.xcworkspace -scheme iina

@@ -96,10 +96,10 @@
 "menu.audio_delay_down" = "オーディオディレイ - %.1fs";
 "menu.audio_delay_up" = "オーディオディレイ + %.1fs";
 "menu.exit_fullscreen" = "フルスクリーンを解除";
-"menu.exit_pip" = "Picture-in-Pictureをオフ";
+"menu.exit_pip" = "ピクチャ・イン・ピクチャをオフ";
 "menu.fullscreen" = "フルスクリーンにする";
 "menu.pause" = "一時停止";
-"menu.pip" = "Picture-in-Pictureを使用";
+"menu.pip" = "ピクチャ・イン・ピクチャを使用";
 "menu.resume" = "再生";
 "menu.seek_backward" = "%.0f秒戻る";
 "menu.seek_forward" = "%.0f秒進む";
@@ -114,7 +114,7 @@
 "menu.volume_up" = "音量 + %.0f%%";
 "osc_toolbar.full_screen" = "フルスクリーン切り替え";
 "osc_toolbar.music_mode" = "ミュージックモード切り替え";
-"osc_toolbar.pip" = "Picture-in-Picture切り替え";
+"osc_toolbar.pip" = "ピクチャ・イン・ピクチャ切り替え";
 "osc_toolbar.playlist" = "プレイリストとチャプター";
 "osc_toolbar.settings" = "クイック設定";
 "osc_toolbar.sub_track" = "字幕トラックを選択";
@@ -164,7 +164,10 @@
 "pl_menu.add_file" = "ファイルの追加...";
 "pl_menu.add_sub" = "字幕の追加…";
 "pl_menu.add_url" = "URLの追加...";
+"pl_menu.browser" = "ブラウザで開く";
 "pl_menu.clear_playlist" = "プレイリストをクリア";
+"pl_menu.copy_url" = "URLをコピー";
+"pl_menu.copy_url_multi" = "URLをコピー";
 "pl_menu.delete" = "ゴミ箱へ移動";
 "pl_menu.delete_after_play" = "再生した後にゴミ箱へ移動";
 "pl_menu.delete_after_play_multi" = "再生した後に選択したファイルをゴミ箱へ移動";
@@ -214,16 +217,5 @@
 "touchbar.rewind" = "巻き戻し";
 "touchbar.seek" = "シーク";
 "touchbar.time" = "再生位置";
+"touchbar.toggle_pip" = "ピクチャ・イン・ピクチャの切り替え";
 "track.none" = "<なし>";
-
-/* FIXME: Using English localization instead */
-"pl_menu.browser" = "Open in Browser";
-
-/* FIXME: Using English localization instead */
-"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
-
-/* FIXME: Using English localization instead */
-"pl_menu.copy_url_multi" = "Copy URLs";
-
-/* FIXME: Using English localization instead */
-"pl_menu.copy_url" = "Copy URL";

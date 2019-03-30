@@ -8,7 +8,7 @@
 
 import Foundation
 
-class KeyMapping {
+class KeyMapping: NSObject {
 
   static private let modifierOrder: [String: Int] = [
     "Ctrl": 0,
@@ -16,6 +16,26 @@ class KeyMapping {
     "Shift": 2,
     "Meta": 3
   ]
+
+  @objc var keyForDisplay: String {
+    get {
+      return UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues") ? key : prettyKey
+    }
+    set {
+      key = newValue
+      NotificationCenter.default.post(Notification(name: .iinaKeyBindingChanged))
+    }
+  }
+  
+  @objc var actionForDisplay: String {
+    get {
+      return UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues") ? readableAction : prettyCommand
+    }
+    set {
+      rawAction = newValue
+      NotificationCenter.default.post(Notification(name: .iinaKeyBindingChanged))
+    }
+  }
 
   var isIINACommand: Bool
 
@@ -44,7 +64,7 @@ class KeyMapping {
 
   var comment: String?
 
-  var readableAction: String {
+  @objc var readableAction: String {
     get {
       let joined = action.joined(separator: " ")
       return isIINACommand ? ("@iina " + joined) : joined
@@ -61,7 +81,7 @@ class KeyMapping {
     }
   }
 
-  var prettyCommand: String {
+  @objc var prettyCommand: String {
     return KeyBindingTranslator.readableCommand(fromAction: action, isIINACommand: isIINACommand)
   }
 

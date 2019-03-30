@@ -70,6 +70,6 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
     guard let name = dict[0] as? String else { return }
     let data = dict[1]
     guard let callback = listeners[name] else { return }
-    callback.call(withArguments: [JSValue(object: data, in: pluginInstance.js)])
+    callback.call(withArguments: [JSValue(object: data, in: pluginInstance.js)!])
   }
 }

@@ -19,21 +19,21 @@ class KeyMapping: NSObject {
 
   @objc var keyForDisplay: String {
     get {
-      return UserDefaults.standard.bool(forKey: "displayRawValue") ? key : prettyKey
+      return UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues") ? key : prettyKey
     }
     set {
       key = newValue
-      NotificationCenter.default.post(Notification(name: .iinaKeyBindingChange))
+      NotificationCenter.default.post(Notification(name: .iinaKeyBindingChanged))
     }
   }
   
   @objc var actionForDisplay: String {
     get {
-      return UserDefaults.standard.bool(forKey: "displayRawValue") ? readableAction : prettyCommand
+      return UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues") ? readableAction : prettyCommand
     }
     set {
       rawAction = newValue
-      NotificationCenter.default.post(Notification(name: .iinaKeyBindingChange))
+      NotificationCenter.default.post(Notification(name: .iinaKeyBindingChanged))
     }
   }
 

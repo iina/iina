@@ -61,7 +61,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     super.viewDidLoad()
 
     kbTableView.delegate = self
-    kbTableView.doubleAction = UserDefaults.standard.bool(forKey: "displayRawValue") ? nil : #selector(editRow)
+    kbTableView.doubleAction = UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues") ? nil : #selector(editRow)
     confTableView.dataSource = self
     confTableView.delegate = self
 
@@ -104,7 +104,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     currentConfFilePath = path
     loadConfigFile()
     
-    NotificationCenter.default.addObserver(forName: .iinaKeyBindingChange, object: nil, queue: .main, using: saveToConfFile)
+    NotificationCenter.default.addObserver(forName: .iinaKeyBindingChanged, object: nil, queue: .main, using: saveToConfFile)
   }
 
   private func confTableSelectRow(withTitle title: String) {
@@ -146,13 +146,13 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       }
 
       self.kbTableView.scrollRowToVisible((self.mappingController.arrangedObjects as! [AnyObject]).count - 1)
-      NotificationCenter.default.post(Notification(name: .iinaKeyBindingChange))
+      NotificationCenter.default.post(Notification(name: .iinaKeyBindingChanged))
     }
   }
 
   @IBAction func removeKeyMappingBtnAction(_ sender: AnyObject) {
     mappingController.remove(sender)
-    NotificationCenter.default.post(Notification(name: .iinaKeyBindingChange))
+    NotificationCenter.default.post(Notification(name: .iinaKeyBindingChanged))
   }
 
   // FIXME: may combine with duplicate action?
@@ -302,7 +302,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   }
 
   @IBAction func displayRawValueAction(_ sender: NSButton) {
-    kbTableView.doubleAction = UserDefaults.standard.bool(forKey: "displayRawValue") ? nil : #selector(editRow)
+    kbTableView.doubleAction = UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues") ? nil : #selector(editRow)
     kbTableView.reloadData()
   }
 
@@ -403,7 +403,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
 
   func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
     if tableView == kbTableView {
-      return UserDefaults.standard.bool(forKey: "displayRawValue")
+      return UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues")
     } else {
       return false
     }
@@ -421,7 +421,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
       selectedData.key = key
       selectedData.rawAction = action
       self.kbTableView.reloadData()
-      NotificationCenter.default.post(Notification(name: .iinaKeyBindingChange))
+      NotificationCenter.default.post(Notification(name: .iinaKeyBindingChanged))
     }
   }
 

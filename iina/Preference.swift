@@ -254,7 +254,7 @@ struct Preference {
     static let enableLogging = Key("enableLogging")
     static let logLevel = Key("logLevel")
 
-    static let displayRawValue = Key("displayRawValue")
+    static let displayKeyBindingRawValues = Key("displayKeyBindingRawValues")
 
     /** unused */
     // static let resizeFrameBuffer = Key("resizeFrameBuffer")
@@ -767,7 +767,7 @@ struct Preference {
     .useMpvOsd: false,
     .enableLogging: false,
     .logLevel: Logger.Level.debug.rawValue,
-    .displayRawValue: false,
+    .displayKeyBindingRawValues: false,
     .userOptions: [],
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",

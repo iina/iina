@@ -167,7 +167,7 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="displayRawValueAction:" target="-2" id="EX1-Ia-ua1"/>
-                                    <binding destination="XM5-Sj-lhw" name="value" keyPath="values.displayRawValue" id="cXv-OP-hZr"/>
+                                    <binding destination="XM5-Sj-lhw" name="value" keyPath="values.displayKeyBindingRawValues" id="MXC-5c-KeU"/>
                                 </connections>
                             </button>
                             <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="GnK-98-Zrg">

@@ -329,6 +329,8 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     currentPreset = preset
     currentBindings.removeAll()
     scrollContentView.subviews.forEach { $0.removeFromSuperview() }
+    addButton.isEnabled = true
+
     var maxY: CGFloat = 0
     let generateInputs: (String, FilterParameter) -> Void = { (name, param) in
       self.scrollContentView.addSubview(self.quickLabel(yPos: maxY, title: preset.localizedParamName(name)))

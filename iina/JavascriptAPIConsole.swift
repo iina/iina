@@ -29,7 +29,7 @@ class JavascriptAPIConsole: JavascriptAPI, JavascriptAPIConsoleExportable {
 
   private func prettifyAndLog(_ message: JSValue, level: Logger.Level) {
     let string = context.objectForKeyedSubscript("JSON")!
-      .invokeMethod("stringify", withArguments: [message, JSValue(nullIn: context), 2])!
+      .invokeMethod("stringify", withArguments: [message, JSValue(nullIn: context)!, 2])!
     log(string.toString(), level: level)
   }
 

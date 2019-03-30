@@ -319,6 +319,14 @@ class Utility {
     }
   }
 
+  static func createFileIfNotExist(url: URL) {
+    let path = url.path
+    // check exist
+    if !FileManager.default.fileExists(atPath: path) {
+      FileManager.default.createFile(atPath: url.path, contents: nil, attributes: nil)
+    }
+  }
+
   static private let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
 
   static func mediaType(forExtension ext: String) -> MPVTrack.TrackType? {

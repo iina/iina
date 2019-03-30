@@ -58,8 +58,8 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
         process.waitUntilExit()
         resolve.call(withArguments: [[
           "status": process.terminationStatus,
-          "stdout": String(data: stdout.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? JSValue(nullIn: self.context),
-          "stderr": String(data: stderr.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? JSValue(nullIn: self.context)
+          "stdout": String(data: stdout.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? JSValue(nullIn: self.context)!,
+          "stderr": String(data: stderr.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? JSValue(nullIn: self.context)!
         ] as [String: Any]])
       }
     }

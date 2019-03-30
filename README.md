@@ -55,18 +55,32 @@ $ brew install cocoapods
 
 ### Building mpv manually
 
-1. Install mpv:
+1. Build your own copy of mpv. If you're using a package manager to manage dependencies, the steps below outline the process.
+
+#### Homebrew
+
+Use our tap, since passes the correct flags during configuration:
 
 ```console
-$ brew install mpv
+$ brew tap iina/homebrew-mpv-iina
+$ brew install mpv-iina
+```
+
+#### MacPorts
+
+Pass in the flags when installing:
+
+```console
+# port install mpv +uchardet -bundle -rubberband configure.args="--enable-libmpv-shared --enable-lua --enable-libarchive --enable-libbluray --disable-swift --disable-rubberband" 
 ```
 
 2. Copy latest [header files](https://github.com/mpv-player/mpv/tree/master/libmpv) into `libmpv/include/mpv/`.
 
 3. Run `other/parse_doc.rb`. This script will fetch the latest mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. This is only needed when updating libmpv. Note that if the API changes, the player source code may also need to be changed.
 
-4. Run `other/change_lib_dependencies.rb`. This script will deploy the depended libraries into `libmpv/libs`.
-  Make sure you have a phase copying of all these dylibs in Xcode's build settings.
+4. Run `other/change_lib_dependencies.rb`. This script will deploy the depended libraries into `libmpv/libs`. Once this is finished, go to Xcode and delete all of the dylibs from the Frameworks group in the sidebar and drag in your own from `libmpv/libs`; do the same in the "Embedded Binaries" section of the iina target.
+
+5. Run a fresh build in Xcode.
 
 ## Contributing
 

@@ -54,8 +54,22 @@ class DylibFile
   end
 end
 
-linked_files = Dir["#{`brew --prefix mpv`.chomp}/lib/*.dylib"]
-linked_files += Dir["#{`brew --prefix ffmpeg`.chomp}/lib/*.dylib"]
+if ARGV.length <= 1
+  abort <<~END
+    Usage: change_lib_dependencies.rb prefix libraries...
+
+    If you're using Homebrew, your invokation might look like this:
+      $ ./change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv)/lib/*.dylib"
+
+    If you're using MacPorts, your invokcation might look like this:
+      $ port contents mpv | grep '\.dylib$' | xargs ./change_lib_dependencies.rb /opt/local
+  END
+end
+
+prefix = ARGV.shift
+
+linked_files = ARGV
+
 proj_path = File.expand_path(File.join(File.dirname(__FILE__), '../'))
 lib_folder = File.join(proj_path, "deps/lib/")
 
@@ -65,19 +79,20 @@ rm_rf lib_folder
 mkdir lib_folder
 
 linked_files.each do |file|
-  dest = File.join(lib_folder, File.basename(file))
+  # Grab the actual library on disk.
+  file = File.realpath(file)
+
+  # Keep the output filename the same as the library's install name
+  dylib = DylibFile.new file
+  dylib.parse_otool_L_output!
+  dest = File.join(lib_folder, File.basename(dylib.id))
+
   puts "cp -p #{file} #{dest}"
   copy_entry file, dest, preserve: true
-  libs << dest unless File.symlink?(dest)
+  libs << dest
 end
 
 fix_count = 0
-
-libs.each do |file|
-  fix_count += 1
-  dylib = DylibFile.new file
-  dylib.change_id!
-end
 
 while !libs.empty?
   file = libs.pop
@@ -85,7 +100,7 @@ while !libs.empty?
   dylib = DylibFile.new file
   dylib.change_id!
   dylib.deps.each do |dep|
-    if dep.start_with?("/usr/local")
+    if dep.start_with?(prefix)
       fix_count += 1
       basename = File.basename(dep)
       new_name = "@rpath/#{basename}"

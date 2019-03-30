@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import WebKit
 
 fileprivate let cellViewIndentifier = NSUserInterfaceItemIdentifier("PluginCell")
 
@@ -43,6 +44,10 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   @IBOutlet weak var pluginEmailBtn: NSButton!
   @IBOutlet weak var pluginSupportStackView: NSStackView!
   @IBOutlet weak var pluginBinaryHelpTextView: NSView!
+  @IBOutlet weak var pluginPreferencesContentView: NSView!
+  var pluginPreferencesWebView: WKWebView!
+  var pluginPreferencesWebViewHeight: NSLayoutConstraint!
+  var pluginPreferencesViewController: PrefPluginPreferencesViewController!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -54,8 +59,86 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     clearPluginPage()
   }
 
+  private func createPreferenceView() {
+    let config = WKWebViewConfiguration()
+    config.userContentController.addUserScript(WKUserScript(source: """
+      let counter = 0;
+      window.onerror = (msg, url, line, col, error) => {
+        window.iina._post("error", [msg, url, line, col, error]);
+      };
+      window.iina = {
+        log(message) {
+          this._post("log", [message])
+        },
+        _post(name, data) {
+          webkit.messageHandlers.iina.postMessage([name, data]);
+        },
+        _callbacks: {},
+        _call(id, data) {
+          this._callbacks[id].call(null, data);
+          delete this._callbacks[id];
+        }
+      };
+      window.iina.preferences = {
+        set(name, value) {
+          window.iina._post("set", [name, value]);
+        },
+        get(name, callback) {
+          counter++;
+          window.iina._post("get", [name, counter]);
+          if (typeof callback !== "function")
+            throw Error("Callback is not provided.");
+          window.iina._callbacks[counter] = callback;
+        },
+      };
+    """, injectionTime: .atDocumentStart, forMainFrameOnly: true))
+
+    config.userContentController.addUserScript(WKUserScript(source: """
+      const { preferences } = window.iina;
+      const inputs = document.querySelectorAll("input[data-pref-key]");
+      Array.prototype.forEach.call(inputs, input => {
+          const key = input.dataset.prefKey;
+          iina.log(key)
+          preferences.get(key, (value) => {
+              iina.log(value)
+              input.value = value;
+          });
+          input.addEventListener("change", () => {
+              let value = input.value;
+              switch (input.dataset.type) {
+                  case "int": value = parseInt(value); break;
+                  case "float": value = parseFloat(value); break;
+              }
+              preferences.set(key, value);
+          });
+      });
+    """, injectionTime: .atDocumentEnd, forMainFrameOnly: true))
+
+    config.userContentController.add(self, name: "iina")
+    
+    pluginPreferencesWebView = WKWebView(frame: .zero, configuration: config)
+    pluginPreferencesViewController = PrefPluginPreferencesViewController()
+    pluginPreferencesViewController.view = pluginPreferencesWebView
+
+    pluginPreferencesWebView.navigationDelegate = self
+    pluginPreferencesWebView.translatesAutoresizingMaskIntoConstraints = false
+    pluginPreferencesContentView.addSubview(pluginPreferencesWebView)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": pluginPreferencesWebView])
+    pluginPreferencesWebViewHeight = NSLayoutConstraint(item: pluginPreferencesWebView!, attribute: .height,
+                                                        relatedBy: .equal, toItem: nil, attribute: .notAnAttribute,
+                                                        multiplier: 1, constant: 0)
+    pluginPreferencesWebView.addConstraint(pluginPreferencesWebViewHeight)
+  }
+
   @IBAction func tabSwitched(_ sender: NSSegmentedControl) {
     tabView.selectTabViewItem(at: sender.selectedSegment)
+    if sender.selectedSegment == 2, let currentPlugin = currentPlugin, let prefURL = currentPlugin.preferencesPageURL {
+      if pluginPreferencesWebView == nil {
+        createPreferenceView()
+      }
+      pluginPreferencesWebView.loadFileURL(prefURL, allowingReadAccessTo: currentPlugin.root)
+      pluginPreferencesViewController.plugin = currentPlugin
+    }
   }
 
   @IBAction func websiteBtnAction(_ sender: NSButton) {
@@ -139,5 +222,58 @@ extension PrefPluginViewController: NSTableViewDelegate, NSTableViewDataSource {
       return
     }
     loadPluginPage(plugin)
+  }
+}
+
+extension PrefPluginViewController: WKNavigationDelegate {
+  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    self.pluginPreferencesWebView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+      if complete != nil {
+        self.pluginPreferencesWebView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
+          self.pluginPreferencesWebViewHeight.constant = height as! CGFloat
+        })
+      }
+    })
+  }
+}
+
+extension PrefPluginViewController: WKScriptMessageHandler {
+  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+    guard let plugin = currentPlugin else { return }
+    guard let dict = message.body as? [Any], dict.count == 2 else { return }
+    guard let name = dict[0] as? String else { return }
+    guard let data = dict[1] as? [Any], let prefName = data[0] as? String else { return }
+    if name == "set" {
+      plugin.preferences[prefName] = data[1]
+    } else if name == "get" {
+      let value = plugin.preferences[prefName]
+      let result: String
+      if let value = value {
+        if JSONSerialization.isValidJSONObject(value), let json = try? String(data: JSONSerialization.data(withJSONObject: value, options: []), encoding: .utf8) {
+          result = json
+        } else if value is String {
+          result = "\"\(value)\""
+        } else {
+          result = "\(value)"
+        }
+      } else {
+        result = "null"
+      }
+      pluginPreferencesWebView.evaluateJavaScript("window.iina._call(\(data[1]), \(result))")
+    } else if name == "error" {
+      Logger.log("JS:\(plugin.name) Preference page \(data[0]) \(data[2]),\(data[3]): \(data[4])")
+    } else if name == "log" {
+      Logger.log("JS:\(plugin.name) Preference page: \(data[0])")
+    }
+  }
+}
+
+class PrefPluginPreferencesViewController: NSViewController {
+  var plugin: JavascriptPlugin?
+
+  override func viewWillDisappear() {
+    if let plugin = plugin {
+      plugin.syncPreferences()
+    }
   }
 }

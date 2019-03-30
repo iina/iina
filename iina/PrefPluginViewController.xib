@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,6 +15,7 @@
                 <outlet property="pluginInfoContentView" destination="dBW-JH-AvA" id="bfY-d9-lEp"/>
                 <outlet property="pluginNameLabel" destination="RQj-8e-E8x" id="WwQ-IZ-EKU"/>
                 <outlet property="pluginPermissionsView" destination="PzT-T3-f8b" id="CXe-3k-9Vt"/>
+                <outlet property="pluginPreferencesContentView" destination="rrW-9x-IB9" id="j5I-9V-Ahk"/>
                 <outlet property="pluginSupportStackView" destination="eVh-8y-rUw" id="T4A-rP-HI8"/>
                 <outlet property="pluginVersionLabel" destination="XdS-aQ-bSd" id="vvY-SV-EdS"/>
                 <outlet property="pluginWebsiteBtn" destination="xPq-ai-SYY" id="nFi-fF-gJj"/>
@@ -152,11 +153,11 @@
                                         <tabViewItems>
                                             <tabViewItem label="Permissions" identifier="" id="ALD-n6-A0r">
                                                 <view key="view" id="vcw-rr-7hi">
-                                                    <rect key="frame" x="0.0" y="0.0" width="635" height="252"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="524" height="252"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PzT-T3-f8b">
-                                                            <rect key="frame" x="8" y="8" width="619" height="236"/>
+                                                            <rect key="frame" x="8" y="8" width="508" height="236"/>
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
@@ -294,7 +295,7 @@
                                             </tabViewItem>
                                             <tabViewItem label="Preferences" identifier="" id="eyS-eb-H4e">
                                                 <view key="view" id="rrW-9x-IB9">
-                                                    <rect key="frame" x="0.0" y="0.0" width="518" height="252"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="524" height="252"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                             </tabViewItem>
@@ -354,7 +355,7 @@
                         <rect key="frame" x="1" y="312" width="524" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="eSh-BD-Twe">
+                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="eSh-BD-Twe">
                         <rect key="frame" x="509" y="1" width="16" height="327"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>

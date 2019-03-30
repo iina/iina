@@ -50,7 +50,7 @@ class JavascriptAPIEventCallback: EventCallable {
   func call(withArguments args: [Any]) {
     callback.call(withArguments: args.map { arg in
       if let rect = arg as? CGRect {
-        return JSValue(rect: rect, in: callback.context)
+        return JSValue(rect: rect, in: callback.context)!
       } else {
         return arg
       }

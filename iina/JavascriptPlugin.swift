@@ -42,6 +42,7 @@ class JavascriptPlugin {
   let root: URL
   let entryPath: String
   let scriptPaths: [String]
+  let preferencesPage: String?
 
   let permissions: Set<Permission>
   let domainList: [String]
@@ -49,6 +50,19 @@ class JavascriptPlugin {
   var entryURL: URL {
     return root.appendingPathComponent(entryPath)
   }
+
+  var preferencesPageURL: URL? {
+    if let preferencePage = preferencesPage {
+      return root.appendingPathComponent(preferencePage)
+    } else {
+      return nil
+    }
+  }
+
+  lazy var preferences: [String: Any] = {
+    NSDictionary(contentsOfFile: preferencesFileURL.path) as? [String: Any] ?? [:]
+  }()
+  let defaultPrefernces: [String: Any]
 
   static private func loadPlugins() -> [JavascriptPlugin] {
     guard let contents = try? FileManager.default.contentsOfDirectory(at: Utility.pluginsURL,
@@ -101,6 +115,7 @@ class JavascriptPlugin {
     self.identifier = identifier
     self.description = jsonDict["description"] as? String
     self.scriptPaths = (jsonDict["scripts"] as? [String]) ?? []
+    self.preferencesPage = jsonDict["preferencesPage"] as? String
     var permissions = Set<Permission>()
     if let permList = jsonDict["permissions"] as? [String] {
       permList.forEach {
@@ -113,6 +128,32 @@ class JavascriptPlugin {
     }
     self.permissions = permissions
     self.domainList = (jsonDict["domainList"] as? [String]) ?? []
+    if let defaultPrefernces = jsonDict["preferenceDefaults"] as? [String: Any] {
+      self.defaultPrefernces = defaultPrefernces
+    } else {
+      Logger.log("Unable to read preferenceDefaults", level: .warning)
+      self.defaultPrefernces = [:]
+    }
   }
 
+  func syncPreferences() {
+    let url = preferencesFileURL
+    Utility.createFileIfNotExist(url: url)
+    if #available(OSX 10.13, *) {
+      do {
+        try (preferences as NSDictionary).write(to: url)
+      } catch let e {
+        Logger.log("Unable to write preferences file: \(e.localizedDescription)", level: .error)
+      }
+    } else {
+      (preferences as NSDictionary).write(to: url, atomically: true)
+    }
+  }
+
+  private var preferencesFileURL: URL {
+    let url = Utility.pluginsURL
+      .appendingPathComponent(".preferences", isDirectory: true)
+    Utility.createDirIfNotExist(url: url)
+    return url.appendingPathComponent("\(identifier).plist", isDirectory: false)
+  }
 }

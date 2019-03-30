@@ -299,7 +299,8 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
   @IBOutlet weak var filterWindow: FilterWindowController!
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var scrollContentView: NSView!
-
+  @IBOutlet weak var addButton: NSButton!
+  
   private var currentPreset: FilterPreset?
   private var currentBindings: [String: NSControl] = [:]
   private var presets: [FilterPreset] = []
@@ -328,11 +329,18 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     currentPreset = preset
     currentBindings.removeAll()
     scrollContentView.subviews.forEach { $0.removeFromSuperview() }
+    addButton.isEnabled = true
+
     var maxY: CGFloat = 0
     let generateInputs: (String, FilterParameter) -> Void = { (name, param) in
       self.scrollContentView.addSubview(self.quickLabel(yPos: maxY, title: preset.localizedParamName(name)))
       maxY += 21
       let input = self.quickInput(yPos: &maxY, param: param)
+      // For preventing crash due to adding a filter with no name:
+      if name == "name", preset.name.starts(with: "custom_"), let textField = input as? NSTextField {
+        textField.delegate = self
+        self.addButton.isEnabled = !textField.stringValue.isEmpty
+      }
       self.scrollContentView.addSubview(input)
       self.currentBindings[name] = input
     }
@@ -441,4 +449,13 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     filterWindow.window!.endSheet(filterWindow.newFilterSheet, returnCode: .cancel)
   }
 
+}
+
+/* For preventing crash due to to adding filter with no name */
+extension NewFilterSheetViewController: NSTextFieldDelegate {
+  func controlTextDidChange(_ obj: Notification) {
+    if let textField = obj.object as? NSTextField {
+      self.addButton.isEnabled = !textField.stringValue.isEmpty
+    }
+  }
 }

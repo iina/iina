@@ -295,11 +295,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         }
         Logger.log("Playlist Drag & Drop from \(oldIndex) to \(row)")
       }
-    } else {
-      // Otherwise, could be copy/cut & paste within playlistTableView
-      return pasteFromPasteboard(tableView, row: row, from: info.draggingPasteboard)
+      player.postNotification(.iinaPlaylistChanged)
+      return true
     }
-    return true
+    // Otherwise, could be copy/cut & paste within playlistTableView
+    return pasteFromPasteboard(tableView, row: row, from: info.draggingPasteboard)
   }
 
   // MARK: - Edit Menu Support

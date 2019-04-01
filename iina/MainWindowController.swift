@@ -1510,11 +1510,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       ])
     }
 
-    // is paused or very low fps (assume audio file), draw new frame
-    if player.info.isPaused || player.currentMediaIsAudio == .isAudio {
-      videoView.videoLayer.draw()
-    }
-
     // interactive mode
     if (isInInteractiveMode) {
       cropSettingsView?.cropBoxView.resized(with: videoView.frame)

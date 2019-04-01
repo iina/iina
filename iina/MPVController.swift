@@ -1080,6 +1080,9 @@ fileprivate func mpvGetOpenGLFunc(_ ctx: UnsafeMutableRawPointer?, _ name: Unsaf
 
 fileprivate func mpvUpdateCallback(_ ctx: UnsafeMutableRawPointer?) {
   let layer = unsafeBitCast(ctx, to: ViewLayer.self)
+  if layer.blocked {
+    return
+  }
   layer.mpvGLQueue.async {
     layer.draw()
   }

@@ -431,7 +431,7 @@ class Utility {
     }
   }
 
-  // Do not use this function for macOS 10.14+
+  @available(macOS, deprecated: 10.14, message: "Use the system appearance-based APIs instead.")
   static func getAppearanceAndMaterial(from theme: Preference.Theme) -> (NSAppearance?, NSVisualEffectView.Material) {
     switch theme {
     case .ultraDark:

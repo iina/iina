@@ -15,6 +15,7 @@ class ViewLayer: CAOpenGLLayer {
   weak var videoView: VideoView!
 
   lazy var mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
+  var blocked = false
 
   private var fbo: GLint = 1
 
@@ -88,7 +89,6 @@ class ViewLayer: CAOpenGLLayer {
     return pix!
   }
 
-
   override func copyCGLContext(forPixelFormat pf: CGLPixelFormatObj) -> CGLContextObj {
     let ctx = super.copyCGLContext(forPixelFormat: pf)
 
@@ -158,6 +158,17 @@ class ViewLayer: CAOpenGLLayer {
 
     CGLUnlockContext(ctx)
     videoView.uninitLock.unlock()
+  }
+
+  func suspend() {
+    blocked = true
+    mpvGLQueue.suspend()
+  }
+  
+  func resume() {
+    blocked = false
+    draw(forced: true)
+    mpvGLQueue.resume()
   }
 
   func draw(forced: Bool = false) {

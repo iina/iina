@@ -1335,9 +1335,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       exitInteractiveMode(immediately: true)
     }
 
-    // Let mpv decide the correct render region in full screen
-    player.mpv.setFlag(MPVOption.Window.keepaspect, true)
-
     // Set the appearance to match the theme so the titlebar matches the theme
     let iinaTheme = Preference.enum(for: .themeMaterial) as Preference.Theme
     if #available(macOS 10.14, *) {
@@ -1376,7 +1373,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       exitPIP()
     }
 
-    videoView.videoLayer.mpvGLQueue.suspend()
+    videoView.videoLayer.suspend()
+    // Let mpv decide the correct render region in full screen
+    player.mpv.setFlag(MPVOption.Window.keepaspect, true)
   }
 
   func windowDidEnterFullScreen(_ notification: Notification) {
@@ -1385,19 +1384,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     titleTextField?.alphaValue = 1
     removeStandardButtonsFromFadeableViews()
 
-    videoView.videoLayer.mpvGLQueue.resume()
-
-    // we must block the mpv rendering queue to do the following atomically
-    videoView.videoLayer.mpvGLQueue.async {
-      DispatchQueue.main.sync {
-        for (_, constraint) in self.videoViewConstraints {
-          constraint.constant = 0
-        }
-        self.videoView.needsLayout = true
-        self.videoView.layoutSubtreeIfNeeded()
-        self.videoView.videoLayer.draw()
-      }
+    for (_, constraint) in self.videoViewConstraints {
+      constraint.constant = 0
     }
+    self.videoView.needsLayout = true
+    self.videoView.layoutSubtreeIfNeeded()
+    videoView.videoLayer.resume()
 
     if Preference.bool(for: .blackOutMonitor) {
       blackOutOtherMonitors()
@@ -1440,12 +1432,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     fsState.startAnimatingToWindow()
 
-    videoView.videoLayer.mpvGLQueue.suspend()
+    videoView.videoLayer.suspend()
+    self.player.mpv.setFlag(MPVOption.Window.keepaspect, false)
   }
 
   func windowDidExitFullScreen(_ notification: Notification) {
-    videoView.videoLayer.mpvGLQueue.resume()
-
     if oscPosition != .top {
       addBackTitlebarViewToFadeableViews()
     }
@@ -1453,18 +1444,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     titleBarView.isHidden = false
     showUI()
 
-    videoView.videoLayer.mpvGLQueue.async {
-      // reset `keepaspect`
-      self.player.mpv.setFlag(MPVOption.Window.keepaspect, false)
-      DispatchQueue.main.sync {
-        for (_, constraint) in self.videoViewConstraints {
-          constraint.constant = 0
-        }
-        self.videoView.needsLayout = true
-        self.videoView.layoutSubtreeIfNeeded()
-        self.videoView.videoLayer.draw()
-      }
+    for (_, constraint) in self.videoViewConstraints {
+      constraint.constant = 0
     }
+    videoView.needsLayout = true
+    videoView.layoutSubtreeIfNeeded()
+    videoView.videoLayer.resume()
 
     fsState.finishAnimating()
 
@@ -1523,11 +1508,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         .bottom: -targetFrame.minY,
         .top: window.frame.height - targetFrame.maxY
       ])
-    }
-
-    // is paused or very low fps (assume audio file), draw new frame
-    if player.info.isPaused || player.currentMediaIsAudio == .isAudio {
-      videoView.videoLayer.draw()
     }
 
     // interactive mode

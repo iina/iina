@@ -1384,11 +1384,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     titleTextField?.alphaValue = 1
     removeStandardButtonsFromFadeableViews()
 
-    for (_, constraint) in self.videoViewConstraints {
-      constraint.constant = 0
-    }
-    self.videoView.needsLayout = true
-    self.videoView.layoutSubtreeIfNeeded()
+    videoViewConstraints.values.forEach { $0.constant = 0 }
+    videoView.needsLayout = true
+    videoView.layoutSubtreeIfNeeded()
     videoView.videoLayer.resume()
 
     if Preference.bool(for: .blackOutMonitor) {
@@ -1433,7 +1431,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fsState.startAnimatingToWindow()
 
     videoView.videoLayer.suspend()
-    self.player.mpv.setFlag(MPVOption.Window.keepaspect, false)
+    player.mpv.setFlag(MPVOption.Window.keepaspect, false)
   }
 
   func windowDidExitFullScreen(_ notification: Notification) {
@@ -1444,9 +1442,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     titleBarView.isHidden = false
     showUI()
 
-    for (_, constraint) in self.videoViewConstraints {
-      constraint.constant = 0
-    }
+    videoViewConstraints.values.forEach { $0.constant = 0 }
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
     videoView.videoLayer.resume()

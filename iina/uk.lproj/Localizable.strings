@@ -96,10 +96,10 @@
 "menu.audio_delay_down" = "Затримка звуку на –%.1f с";
 "menu.audio_delay_up" = "Затримка звуку на +%.1f с";
 "menu.exit_fullscreen" = "Вийти з повноекранного режиму";
-"menu.exit_pip" = "Вийти з режиму «Кадр у кадрі»";
+"menu.exit_pip" = "Вийти з режиму «Картинка в картинці»";
 "menu.fullscreen" = "Увійти до повноекранного режиму";
 "menu.pause" = "Пауза";
-"menu.pip" = "Режим «Кадр у кадрі»";
+"menu.pip" = "Режим «Картинка в картинці»";
 "menu.resume" = "Відновити";
 "menu.seek_backward" = "Крок назад на %.0f с";
 "menu.seek_forward" = "Крок уперед на %.0f с";
@@ -114,7 +114,7 @@
 "menu.volume_up" = "Гучність +%.0f% %";
 "osc_toolbar.full_screen" = "Повноекранний режим";
 "osc_toolbar.music_mode" = "Режим музики";
-"osc_toolbar.pip" = "Режим «Кадр у кадрі»";
+"osc_toolbar.pip" = "Режим «Картинка в картинці»";
 "osc_toolbar.playlist" = "Підбірка та розділи";
 "osc_toolbar.settings" = "Швидке налаштування";
 "osc_toolbar.sub_track" = "Наявні субтитри";
@@ -217,5 +217,5 @@
 "touchbar.rewind" = "Перемотати назад";
 "touchbar.seek" = "Перемотати";
 "touchbar.time" = "Часова позиція";
-"touchbar.toggle_pip" = "Перемкнути «Кадр в кадрі»";
+"touchbar.toggle_pip" = "Перемкнути режим «Картинка в картинці»";
 "track.none" = "<—>";

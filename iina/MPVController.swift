@@ -359,12 +359,6 @@ class MPVController: NSObject {
     mpv_render_context_set_update_callback(mpvRenderContext!, mpvUpdateCallback, mutableRawPointerOf(obj: player.mainWindow.videoView.videoLayer))
   }
 
-  func mpvUninitRendering() {
-    guard let mpvRenderContext = mpvRenderContext else { return }
-    mpv_render_context_set_update_callback(mpvRenderContext, nil, nil)
-    mpv_render_context_free(mpvRenderContext)
-  }
-
   func mpvReportSwap() {
     guard let mpvRenderContext = mpvRenderContext else { return }
     mpv_render_context_report_swap(mpvRenderContext)
@@ -562,9 +556,8 @@ class MPVController: NSObject {
 
     switch eventId {
     case MPV_EVENT_SHUTDOWN:
-      let quitByMPV = !player.isMpvTerminated
-      if quitByMPV {
-        NSApp.terminate(nil)
+      if !player.isMpvTerminated {
+        PlayerCore.recycle(player)
       } else {
         mpv_destroy(mpv)
         mpv = nil

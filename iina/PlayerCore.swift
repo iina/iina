@@ -74,6 +74,14 @@ class PlayerCore: NSObject {
     return useNew ? newPlayerCore : active
   }
 
+  static func recycle(_ player: PlayerCore) {
+    DispatchQueue.main.sync {
+      player.mainWindow.close()
+    }
+    player.terminateMPV(sendQuit: false)
+    playerCores.removeAll { $0 === player }
+  }
+
   // MARK: - Fields
 
   lazy var subsystem = Logger.Subsystem(rawValue: "player\(label!)")
@@ -310,19 +318,29 @@ class PlayerCore: NSObject {
     mainWindow.videoView.startDisplayLink()
   }
 
-  // unload main window video view
-  func uninitVideo() {
-    guard mainWindow.isWindowLoaded else { return }
-    mainWindow.videoView.stopDisplayLink()
-    mainWindow.videoView.uninit()
-  }
-
   // Terminate mpv
   func terminateMPV(sendQuit: Bool = true) {
     guard !isMpvTerminated else { return }
     savePlaybackPosition()
     invalidateTimer()
-    uninitVideo()
+
+    mainWindow.videoView.uninitLock.lock()
+    if mainWindow.videoView.isUninited {
+      mainWindow.videoView.uninitLock.unlock()
+    } else {
+      if mainWindow.isWindowLoaded {
+        mainWindow.videoView.stopDisplayLink()
+        if !mainWindow.videoView.isUninited, let mpvRenderContext = mpv.mpvRenderContext {
+          mpv_render_context_set_update_callback(mpvRenderContext, nil, nil)
+          if sendQuit {
+            mpv_render_context_free(mpvRenderContext)
+          }
+        }
+      }
+      mainWindow.videoView.isUninited = true
+      mainWindow.videoView.uninitLock.unlock()
+    }
+
     if sendQuit {
       mpv.mpvQuit()
     }

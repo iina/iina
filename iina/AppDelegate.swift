@@ -251,9 +251,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
     guard !PlayerCore.active.mainWindow.isWindowHidden else { return .terminateCancel }
     Logger.log("App should terminate")
-    for pc in PlayerCore.playerCores {
-     pc.terminateMPV()
-    }
     return .terminateNow
   }
 
@@ -266,6 +263,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationWillTerminate(_ notification: Notification) {
     Logger.log("App will terminate")
+    PlayerCore.playerCores.forEach { $0.terminateMPV() }
     Logger.closeLogFile()
   }
 

@@ -118,7 +118,7 @@ class ViewLayer: CAOpenGLLayer {
     needsMPVRender = false
 
     videoView.uninitLock.lock()
-    
+
     guard !videoView.isUninited else {
       videoView.uninitLock.unlock()
       return

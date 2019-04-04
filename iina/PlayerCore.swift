@@ -75,10 +75,10 @@ class PlayerCore: NSObject {
   }
 
   static func recycle(_ player: PlayerCore) {
-    DispatchQueue.main.sync {
+    player.terminateMPV(sendQuit: false)
+    DispatchQueue.main.async {
       player.mainWindow.close()
     }
-    player.terminateMPV(sendQuit: false)
     playerCores.removeAll { $0 === player }
   }
 
@@ -324,21 +324,9 @@ class PlayerCore: NSObject {
     savePlaybackPosition()
     invalidateTimer()
 
-    mainWindow.videoView.uninitLock.lock()
-    if mainWindow.videoView.isUninited {
-      mainWindow.videoView.uninitLock.unlock()
-    } else {
-      if mainWindow.isWindowLoaded {
-        mainWindow.videoView.stopDisplayLink()
-        if !mainWindow.videoView.isUninited, let mpvRenderContext = mpv.mpvRenderContext {
-          mpv_render_context_set_update_callback(mpvRenderContext, nil, nil)
-          if sendQuit {
-            mpv_render_context_free(mpvRenderContext)
-          }
-        }
-      }
-      mainWindow.videoView.isUninited = true
-      mainWindow.videoView.uninitLock.unlock()
+    if mainWindow.isWindowLoaded {
+      mainWindow.videoView.stopDisplayLink()
+      mainWindow.videoView.uninit()
     }
 
     if sendQuit {

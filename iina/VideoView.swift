@@ -71,6 +71,17 @@ class VideoView: NSView {
     fatalError("init(coder:) has not been implemented")
   }
 
+  func uninit() {
+    uninitLock.lock()
+    guard !isUninited else {
+      uninitLock.unlock()
+      return
+    }
+    player.mpv.mpvUninitRendering()
+    isUninited = true
+    uninitLock.unlock()
+  }
+
   override func draw(_ dirtyRect: NSRect) {
     // do nothing
   }

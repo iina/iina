@@ -562,12 +562,16 @@ class MPVController: NSObject {
 
     switch eventId {
     case MPV_EVENT_SHUTDOWN:
-      if !player.isMpvTerminated {
-        PlayerCore.recycle(player)
-      } else {
-        mpv_destroy(mpv)
-        mpv = nil
+      guard !player.isMpvTerminated else { return }
+      player.savePlaybackPosition()
+      if player.mainWindow.isWindowLoaded {
+        DispatchQueue.main.sync {
+          self.player.mainWindow.close()
+        }
+        player.isMpvTerminated = true
       }
+      mpv_destroy(mpv)
+      mpv = nil
 
     case MPV_EVENT_LOG_MESSAGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)

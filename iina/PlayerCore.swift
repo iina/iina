@@ -74,14 +74,6 @@ class PlayerCore: NSObject {
     return useNew ? newPlayerCore : active
   }
 
-  static func recycle(_ player: PlayerCore) {
-    player.terminateMPV(sendQuit: false)
-    DispatchQueue.main.async {
-      player.mainWindow.close()
-    }
-    playerCores.removeAll { $0 === player }
-  }
-
   // MARK: - Fields
 
   lazy var subsystem = Logger.Subsystem(rawValue: "player\(label!)")
@@ -316,23 +308,6 @@ class PlayerCore: NSObject {
     mainWindow.videoView.videoLayer.display()
     mpv.mpvInitRendering()
     mainWindow.videoView.startDisplayLink()
-  }
-
-  // Terminate mpv
-  func terminateMPV(sendQuit: Bool = true) {
-    guard !isMpvTerminated else { return }
-    savePlaybackPosition()
-    invalidateTimer()
-
-    if mainWindow.isWindowLoaded {
-      mainWindow.videoView.stopDisplayLink()
-      mainWindow.videoView.uninit()
-    }
-
-    if sendQuit {
-      mpv.mpvQuit()
-    }
-    isMpvTerminated = true
   }
 
   // invalidate timer

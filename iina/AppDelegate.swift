@@ -263,7 +263,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationWillTerminate(_ notification: Notification) {
     Logger.log("App will terminate")
-    PlayerCore.playerCores.forEach { $0.terminateMPV() }
+    PlayerCore.playerCores.forEach { $0.mpv.mpvQuit() }
     Logger.closeLogFile()
   }
 

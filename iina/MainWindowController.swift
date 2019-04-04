@@ -1281,17 +1281,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         exitPIP()
       }
     }
-    // stop playing
-    if !player.isMpvTerminated {
-      if case .fullscreen(legacy: true, priorWindowedFrame: let frame) = fsState {
-        legacyAnimateToWindowed(framePriorToBeingInFullscreen: frame)
-      }
-      player.savePlaybackPosition()
-      player.stop()
-      videoView.stopDisplayLink()
+    if case .fullscreen(legacy: true, priorWindowedFrame: _) = fsState {
+      resetDesktop()
     }
-    player.info.currentFolder = nil
-    player.info.matchedSubs.removeAll()
+    player.invalidateTimer()
+    if !player.isMpvTerminated {
+      videoView.stopDisplayLink()
+      videoView.uninit()
+      player.mpv.mpvQuit()
+    }
+    PlayerCore.playerCores.removeAll { $0 === player }
     // stop tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
@@ -2389,6 +2388,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  private func resetDesktop() {
+    NSApp.presentationOptions.remove(.autoHideMenuBar)
+    NSApp.presentationOptions.remove(.autoHideDock)
+  }
+
   private func legacyAnimateToWindowed(framePriorToBeingInFullscreen: NSRect) {
     guard let window = self.window else { fatalError("make sure the window exists before animating") }
 
@@ -2398,8 +2402,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     window.styleMask.remove(.borderless)
     window.styleMask.remove(.fullScreen)
     // cancel auto hide for menu and dock
-    NSApp.presentationOptions.remove(.autoHideMenuBar)
-    NSApp.presentationOptions.remove(.autoHideDock)
+    resetDesktop()
     // restore window frame ans aspect ratio
     let videoSize = player.videoSizeForDisplay
     let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)
@@ -2425,7 +2428,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     window.styleMask.insert(.fullScreen)
     // cancel aspect ratio
     window.resizeIncrements = NSSize(width: 1, height: 1)
-    // auto hide menubar and dock
+    // auto hide for menu and dock
     NSApp.presentationOptions.insert(.autoHideMenuBar)
     NSApp.presentationOptions.insert(.autoHideDock)
     // set frame

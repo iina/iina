@@ -771,6 +771,7 @@ class MPVController: NSObject {
       player.syncUI(.playButton)
 
     case MPVProperty.chapter:
+      player.info.chapter = Int(getInt(MPVProperty.chapter))
       player.syncUI(.time)
       player.syncUI(.chapterList)
       player.postNotification(.iinaMediaTitleChanged)

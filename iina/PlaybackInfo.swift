@@ -169,6 +169,7 @@ class PlaybackInfo {
 
   var playlist: [MPVPlaylistItem] = []
   var chapters: [MPVChapter] = []
+  var chapter = 0
 
   var matchedSubs: [String: [URL]] = [:]
   var currentSubsInfo: [FileInfo] = []

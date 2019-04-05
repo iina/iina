@@ -525,12 +525,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
       if identifier == .isChosen {
         // left column
-        let currentPos = info.videoPosition!
-        if currentPos.between(chapter.time, nextChapterTime) {
-          v.textField?.stringValue = Constants.String.play
-        } else {
-          v.textField?.stringValue = ""
-        }
+        v.textField?.stringValue = (info.chapter == row) ? Constants.String.play : ""
         return v
       } else if identifier == .trackName {
         // right column

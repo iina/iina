@@ -61,7 +61,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     super.viewDidLoad()
 
     kbTableView.delegate = self
-    kbTableView.doubleAction = UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues") ? nil : #selector(editRow)
+    kbTableView.doubleAction = Preference.bool(for: .displayKeyBindingRawValues) ? nil : #selector(editRow)
     confTableView.dataSource = self
     confTableView.delegate = self
 
@@ -302,7 +302,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   }
 
   @IBAction func displayRawValueAction(_ sender: NSButton) {
-    kbTableView.doubleAction = UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues") ? nil : #selector(editRow)
+    kbTableView.doubleAction = Preference.bool(for: .displayKeyBindingRawValues) ? nil : #selector(editRow)
     kbTableView.reloadData()
   }
 
@@ -403,7 +403,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
 
   func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
     if tableView == kbTableView {
-      return UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues")
+      return Preference.bool(for: .displayKeyBindingRawValues)
     } else {
       return false
     }

@@ -93,7 +93,7 @@ class VideoView: NSView {
   }
 
   override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
-    return true
+    return Preference.bool(for: .videoViewAcceptsFirstMouse)
   }
 
   // MARK: Drag and drop

@@ -28,7 +28,7 @@ extern "C" {
 
 #define __ACTUALLY_CONCATENATE(a, b) a##b
 #define __CONCATENATE(a, b) __ACTUALLY_CONCATENATE(a, b)
-#define DEFER(cleanup) std::shared_ptr<void> __CONCATENATE(__defer_, __LINE__)(nullptr, cleanup)
+#define DEFER(cleanup) std::shared_ptr<void> __CONCATENATE(__defer_, __LINE__)(nullptr, [&](...) cleanup)
 
 @implementation FFmpegController (Bridge)
 
@@ -37,7 +37,7 @@ extern "C" {
   if (avformat_open_input(&formatContext, path.fileSystemRepresentation, nullptr, nullptr) < 0) {
     return NO;
   }
-  DEFER([&](...) {
+  DEFER({
     avformat_close_input(&formatContext);
   });
 
@@ -59,7 +59,7 @@ extern "C" {
   auto codec = avcodec_find_decoder(videoStream->codecpar->codec_id);
 
   AVCodecContext *codecContext = avcodec_alloc_context3(codec);
-  DEFER([&](...) {
+  DEFER({
     avcodec_free_context(&codecContext);
   });
   if (!codecContext) {
@@ -74,7 +74,7 @@ extern "C" {
   if (avcodec_open2(codecContext, codec, nullptr) < 0) {
     return NO;
   }
-  DEFER([&](...) {
+  DEFER({
     avcodec_close(codecContext);
   });
 
@@ -82,14 +82,14 @@ extern "C" {
   if (!frame) {
     return NO;
   }
-  DEFER([&](...) {
+  DEFER({
     av_frame_free(&frame);
   });
   AVFrame *frameRGB = av_frame_alloc();
   if (!frameRGB) {
     return NO;
   }
-  DEFER([&](...) {
+  DEFER({
     av_frame_free(&frameRGB);
   });
 
@@ -106,7 +106,7 @@ extern "C" {
     return NO;
   }
   uint8_t *frameRGBBuffer = static_cast<uint8_t *>(av_malloc(size));
-  DEFER([&](...) {
+  DEFER({
     av_free(frameRGBBuffer);
   });
   if (av_image_fill_arrays(
@@ -121,6 +121,7 @@ extern "C" {
   }
 
   SwsContext* swsContext = sws_getContext(
+  GUARD(av_image_fill_arrays(
       codecContext->width,
       codecContext->height,
       codecContext->pix_fmt,
@@ -133,7 +134,7 @@ extern "C" {
   if (!swsContext) {
     return NO;
   }
-  DEFER([&](...) {
+  DEFER({
     sws_freeContext(swsContext);
   });
 
@@ -148,7 +149,7 @@ extern "C" {
         AVSEEK_FLAG_BACKWARD);
     AVPacket packet;
     while (!av_read_frame(formatContext, &packet)) {
-      DEFER([&](...) {
+      DEFER({
         av_packet_unref(&packet);
       });
       if (packet.stream_index == videoStreamIndex - formatContext->streams) {
@@ -191,7 +192,7 @@ extern "C" {
   if (avformat_open_input(&formatContext, path.fileSystemRepresentation, nullptr, nullptr) < 0) {
     return -1;
   }
-  DEFER([&](...){
+  DEFER({
     avformat_close_input(&formatContext);
   });
   if (formatContext->duration < 0) {

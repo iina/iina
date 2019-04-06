@@ -59,14 +59,29 @@ class PlaybackInfo {
   var isPaused: Bool = false {
     didSet {
       PlayerCore.checkStatusForSleep()
+      if isPaused && player.mainWindow.isFastForwarding{
+        player.setSpeed(1)
+        player.mainWindow.speedValueIndex = AppData.availableSpeedValues.count / 2
+        DispatchQueue.main.async {
+          self.player.mainWindow.cancelFastForward()
+        }
+      }
       if player == PlayerCore.lastActive {
         if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
           NowPlayingInfoManager.updateState(isPaused ? .paused : .playing)
         }
         if #available(macOS 10.12, *), player.mainWindow.pipStatus == .inPIP {
-          player.mainWindow.pip.playing = !isPaused
+          player.mainWindow.pip.playing = isPlaying
         }
       }
+    }
+  }
+  var isPlaying: Bool {
+    get {
+      return !isPaused
+    }
+    set {
+      isPaused = isPlaying
     }
   }
 

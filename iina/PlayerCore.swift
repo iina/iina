@@ -444,11 +444,6 @@ class PlayerCore: NSObject {
   
   func pause() {
     mpv.setFlag(MPVOption.PlaybackControl.pause, true)
-    if mainWindow.isFastForwarding {
-      setSpeed(1)
-    }
-    mainWindow.speedValueIndex = AppData.availableSpeedValues.count / 2
-    mainWindow.cancelFastForward()
   }
   
   func resume() {
@@ -1611,7 +1606,7 @@ class PlayerCore: NSObject {
 
   static func checkStatusForSleep() {
     for player in playing {
-      if !player.info.isPaused {
+      if player.info.isPlaying {
         SleepPreventer.preventSleep()
         return
       }

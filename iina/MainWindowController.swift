@@ -427,7 +427,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.alwaysFloatOnTop.rawValue:
       if let newValue = change[.newKey] as? Bool {
-        if !player.info.isPaused {
+        if player.info.isPlaying {
           self.isOntop = newValue
           setWindowFloatingOnTop(newValue)
         }
@@ -1151,7 +1151,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     if scrollAction == .seek && isTrackpadBegan {
       // record pause status
-      wasPlayingWhenSeekBegan = !player.info.isPaused
+      wasPlayingWhenSeekBegan = player.info.isPlaying
       if wasPlayingWhenSeekBegan! {
         player.pause()
       }
@@ -1462,7 +1462,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // restore ontop status
-    if !player.info.isPaused {
+    if player.info.isPlaying {
       setWindowFloatingOnTop(isOntop)
     }
 
@@ -1585,7 +1585,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if NSApp.keyWindow == nil ||
       (NSApp.keyWindow?.windowController is MainWindowController ||
         (NSApp.keyWindow?.windowController is MiniPlayerWindowController && NSApp.keyWindow?.windowController != player.miniPlayer)) {
-      if Preference.bool(for: .pauseWhenInactive), !player.info.isPaused {
+      if Preference.bool(for: .pauseWhenInactive), player.info.isPlaying {
         player.pause()
         isPausedDueToInactive = true
       }
@@ -1611,7 +1611,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillMiniaturize(_ notification: Notification) {
-    if Preference.bool(for: .pauseWhenMinimized), !player.info.isPaused {
+    if Preference.bool(for: .pauseWhenMinimized), player.info.isPlaying {
       isPausedDueToMiniaturization = true
       player.pause()
     }
@@ -2508,12 +2508,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   /** Play button: pause & resume */
   @IBAction func playButtonAction(_ sender: NSButton) {
-    if sender.state == .on {
-      player.resume()
-    }
-    if sender.state == .off {
-      player.pause()
-    }
+    sender.state == .on ? player.resume() : player.pause()
   }
 
   /** mute button */
@@ -2805,7 +2800,7 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     pipVideo = NSViewController()
     pipVideo.view = videoView
-    pip.playing = !player.info.isPaused
+    pip.playing = player.info.isPlaying
     pip.title = window?.title
 
     pip.presentAsPicture(inPicture: pipVideo)

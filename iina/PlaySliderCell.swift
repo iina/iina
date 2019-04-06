@@ -23,7 +23,7 @@ fileprivate extension NSColor {
 
 class PlaySliderCell: NSSliderCell {
 
-  lazy var playerCore: PlayerCore = {
+  lazy var player: PlayerCore = {
     return (self.controlView!.window!.windowController as! MainWindowController).player
   }()
 
@@ -86,7 +86,7 @@ class PlaySliderCell: NSSliderCell {
 
   var drawChapters = Preference.bool(for: .showChapterPos)
 
-  var isPausedBeforeSeeking = false
+  var isPlayingBeforeSeeking = false
 
   override func awakeFromNib() {
     minValue = 0
@@ -133,7 +133,7 @@ class PlaySliderCell: NSSliderCell {
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
-    let info = playerCore.info
+    let info = player.info
 
     let slider = self.controlView as! NSSlider
 
@@ -207,18 +207,18 @@ class PlaySliderCell: NSSliderCell {
 
 
   override func startTracking(at startPoint: NSPoint, in controlView: NSView) -> Bool {
-    isPausedBeforeSeeking = playerCore.info.isPaused
+    isPlayingBeforeSeeking = player.info.isPlaying
     let result = super.startTracking(at: startPoint, in: controlView)
     if result {
-      playerCore.pause()
-      playerCore.mainWindow.thumbnailPeekView.isHidden = true
+      player.pause()
+      player.mainWindow.thumbnailPeekView.isHidden = true
     }
     return result
   }
 
   override func stopTracking(last lastPoint: NSPoint, current stopPoint: NSPoint, in controlView: NSView, mouseIsUp flag: Bool) {
-    if !isPausedBeforeSeeking {
-      playerCore.resume()
+    if !isPlayingBeforeSeeking {
+      player.resume()
     }
     super.stopTracking(last: lastPoint, current: stopPoint, in: controlView, mouseIsUp: flag)
   }

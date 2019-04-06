@@ -29,32 +29,30 @@ extern "C" {
 #define __ACTUALLY_CONCATENATE(a, b) a##b
 #define __CONCATENATE(a, b) __ACTUALLY_CONCATENATE(a, b)
 #define DEFER(cleanup) std::shared_ptr<void> __CONCATENATE(__defer_, __LINE__)(nullptr, [&](...) cleanup)
+#define GUARD(condition)    \
+  do {                    \
+    if (!(condition)) {  \
+      return NO;      \
+    }                   \
+  } while (0)
 
 @implementation FFmpegController (Bridge)
 
 - (BOOL)synchronouslyGenerateThumbnailsForFileAtPath:(NSString *)path {
   AVFormatContext *formatContext = NULL;
-  if (avformat_open_input(&formatContext, path.fileSystemRepresentation, nullptr, nullptr) < 0) {
-    return NO;
-  }
+  GUARD(avformat_open_input(&formatContext, path.fileSystemRepresentation, nullptr, nullptr) >= 0);
   DEFER({
     avformat_close_input(&formatContext);
   });
 
-  if (avformat_find_stream_info(formatContext, nullptr) < 0) {
-    return NO;
-  }
+  GUARD(avformat_find_stream_info(formatContext, nullptr) >= 0);
   auto videoStreamIndex = std::find_if(formatContext->streams, formatContext->streams + formatContext->nb_streams, [](const AVStream *stream) {
     return stream->codecpar->codec_type == AVMEDIA_TYPE_VIDEO;
   });
-  if (videoStreamIndex >= formatContext->streams + formatContext->nb_streams) {
-    return NO;
-  }
+  GUARD(videoStreamIndex < formatContext->streams + formatContext->nb_streams);
   auto videoStream = *videoStreamIndex;
 
-  if (av_q2d(videoStream->avg_frame_rate) < 0) {
-    return NO;
-  }
+  GUARD(av_q2d(videoStream->avg_frame_rate) >= 0);
 
   auto codec = avcodec_find_decoder(videoStream->codecpar->codec_id);
 
@@ -62,33 +60,23 @@ extern "C" {
   DEFER({
     avcodec_free_context(&codecContext);
   });
-  if (!codecContext) {
-    return NO;
-  }
+  GUARD(codecContext /* != nullptr */);
 
-  if (avcodec_parameters_to_context(codecContext, videoStream->codecpar) < 0) {
-    return NO;
-  }
+  GUARD(avcodec_parameters_to_context(codecContext, videoStream->codecpar) >= 0);
   codecContext->time_base = videoStream->time_base;
 
-  if (avcodec_open2(codecContext, codec, nullptr) < 0) {
-    return NO;
-  }
+  GUARD(avcodec_open2(codecContext, codec, nullptr) >= 0);
   DEFER({
     avcodec_close(codecContext);
   });
 
   AVFrame *frame = av_frame_alloc();
-  if (!frame) {
-    return NO;
-  }
+  GUARD(frame /* != nullptr */);
   DEFER({
     av_frame_free(&frame);
   });
   AVFrame *frameRGB = av_frame_alloc();
-  if (!frameRGB) {
-    return NO;
-  }
+  GUARD(frameRGB /* != nullptr */);
   DEFER({
     av_frame_free(&frameRGB);
   });
@@ -102,26 +90,21 @@ extern "C" {
       frameRGB->width,
       frameRGB->height,
       1);
-  if (size < 0) {
-    return NO;
-  }
+  GUARD(size >= 0);
   uint8_t *frameRGBBuffer = static_cast<uint8_t *>(av_malloc(size));
   DEFER({
     av_free(frameRGBBuffer);
   });
-  if (av_image_fill_arrays(
-          frameRGB->data,
-          frameRGB->linesize,
-          frameRGBBuffer,
-          AV_PIX_FMT_RGBA,
-          frameRGB->width,
-          frameRGB->height,
-          1) < 0) {
-    return NO;
-  }
-
-  SwsContext* swsContext = sws_getContext(
   GUARD(av_image_fill_arrays(
+            frameRGB->data,
+            frameRGB->linesize,
+            frameRGBBuffer,
+            AV_PIX_FMT_RGBA,
+            frameRGB->width,
+            frameRGB->height,
+            1) >= 0);
+
+  SwsContext *swsContext = sws_getContext(
       codecContext->width,
       codecContext->height,
       codecContext->pix_fmt,
@@ -131,9 +114,7 @@ extern "C" {
       nullptr,
       nullptr,
       nullptr);
-  if (!swsContext) {
-    return NO;
-  }
+  GUARD(swsContext /* != nullptr */);
   DEFER({
     sws_freeContext(swsContext);
   });
@@ -169,16 +150,14 @@ extern "C" {
         break;
       }
 
-      if (sws_scale(
-              swsContext,
-              frame->data,
-              frame->linesize,
-              0,
-              codecContext->height,
-              frameRGB->data,
-              frameRGB->linesize) < 0) {
-        return NO;
-      }
+      GUARD(sws_scale(
+                swsContext,
+                frame->data,
+                frame->linesize,
+                0,
+                codecContext->height,
+                frameRGB->data,
+                frameRGB->linesize) >= 0);
 
       [self saveWithThumbnail:*frameRGB->data width:frameRGB->width height:frameRGB->height index:progress timestamp:frame->best_effort_timestamp * av_q2d(videoStream->time_base) forFileAtPath:path];
       break;

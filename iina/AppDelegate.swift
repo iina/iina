@@ -554,15 +554,15 @@ class RemoteCommandController {
 
   static func setup() {
     remoteCommand.playCommand.addTarget { _ in
-      PlayerCore.lastActive.togglePause(false)
+      PlayerCore.lastActive.resume()
       return .success
     }
     remoteCommand.pauseCommand.addTarget { _ in
-      PlayerCore.lastActive.togglePause(true)
+      PlayerCore.lastActive.pause()
       return .success
     }
     remoteCommand.togglePlayPauseCommand.addTarget { _ in
-      PlayerCore.lastActive.togglePause(nil)
+      PlayerCore.lastActive.togglePause()
       return .success
     }
     remoteCommand.stopCommand.addTarget { _ in

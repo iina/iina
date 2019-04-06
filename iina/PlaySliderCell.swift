@@ -210,7 +210,7 @@ class PlaySliderCell: NSSliderCell {
     isPausedBeforeSeeking = playerCore.info.isPaused
     let result = super.startTracking(at: startPoint, in: controlView)
     if result {
-      playerCore.togglePause(true)
+      playerCore.pause()
       playerCore.mainWindow.thumbnailPeekView.isHidden = true
     }
     return result
@@ -218,7 +218,7 @@ class PlaySliderCell: NSSliderCell {
 
   override func stopTracking(last lastPoint: NSPoint, current stopPoint: NSPoint, in controlView: NSView, mouseIsUp flag: Bool) {
     if !isPausedBeforeSeeking {
-      playerCore.togglePause(false)
+      playerCore.resume()
     }
     super.stopTracking(last: lastPoint, current: stopPoint, in: controlView, mouseIsUp: flag)
   }

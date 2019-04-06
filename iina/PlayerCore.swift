@@ -436,26 +436,27 @@ class PlayerCore: NSObject {
 
   // MARK: - MPV commands
 
-  /** Pause / resume. Reset speed to 0 when pause. */
-  func togglePause(_ set: Bool?) {
-    if let setPause = set {
-      // if paused by EOF, replay the video.
-      if !setPause {
-        if mpv.getFlag(MPVProperty.eofReached) {
-          seek(absoluteSecond: 0)
-        }
-      }
-      mpv.setFlag(MPVOption.PlaybackControl.pause, setPause)
-    } else {
-      if (info.isPaused) {
-        if mpv.getFlag(MPVProperty.eofReached) {
-          seek(absoluteSecond: 0)
-        }
-        mpv.setFlag(MPVOption.PlaybackControl.pause, false)
-      } else {
-        mpv.setFlag(MPVOption.PlaybackControl.pause, true)
-      }
+  /** Pause / resume. Reset speed to 1 when pause. */
+  func togglePause(_ set: Bool? = nil) {
+    let newState = set ?? !info.isPaused
+    newState ? pause() : resume()
+  }
+  
+  func pause() {
+    mpv.setFlag(MPVOption.PlaybackControl.pause, true)
+    if mainWindow.isFastForwarding {
+      setSpeed(1)
     }
+    mainWindow.speedValueIndex = AppData.availableSpeedValues.count / 2
+    mainWindow.cancelFastForward()
+  }
+  
+  func resume() {
+    // Restart playback when reached EOF
+    if mpv.getFlag(MPVProperty.eofReached) {
+      seek(absoluteSecond: 0)
+    }
+    mpv.setFlag(MPVOption.PlaybackControl.pause, false)
   }
 
   func stop() {
@@ -607,6 +608,9 @@ class PlayerCore: NSObject {
 
   /** Set speed. */
   func setSpeed(_ speed: Double) {
+    if !mainWindow.isFastForwarding {
+      mainWindow.cancelFastForward()
+    }
     mpv.setDouble(MPVOption.PlaybackControl.speed, speed)
   }
 
@@ -801,7 +805,7 @@ class PlayerCore: NSObject {
   func playChapter(_ pos: Int) {
     let chapter = info.chapters[pos]
     mpv.command(.seek, args: ["\(chapter.time.second)", "absolute"])
-    togglePause(false)
+    resume()
     // need to update time pos
     syncUITime()
   }

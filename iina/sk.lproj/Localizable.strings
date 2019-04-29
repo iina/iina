@@ -164,7 +164,10 @@
 "pl_menu.add_file" = "Pridať Súbor…";
 "pl_menu.add_sub" = "Pridať Titulky…";
 "pl_menu.add_url" = "Pridať URL…";
+"pl_menu.browser" = "Otvoriť vo Webovom Prehliadači";
 "pl_menu.clear_playlist" = "Vyčistiť Playlist";
+"pl_menu.copy_url" = "Kopírovať URL";
+"pl_menu.copy_url_multi" = "Kopírovať URLs";
 "pl_menu.delete" = "Presunúť do Koša";
 "pl_menu.delete_after_play" = "Presunúť do Koša po Prehraní";
 "pl_menu.delete_after_play_multi" = "Presunúť Vybrané Súbory do Koša po Prehraní";
@@ -214,16 +217,5 @@
 "touchbar.rewind" = "Pretočiť";
 "touchbar.seek" = "Vyhľadať";
 "touchbar.time" = "Pozícia";
+"touchbar.toggle_pip" = "Zapnúť/Vypnúť Picture-in-Picture";
 "track.none" = "<Prázdne>";
-
-/* FIXME: Using English localization instead */
-"pl_menu.browser" = "Open in Browser";
-
-/* FIXME: Using English localization instead */
-"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
-
-/* FIXME: Using English localization instead */
-"pl_menu.copy_url_multi" = "Copy URLs";
-
-/* FIXME: Using English localization instead */
-"pl_menu.copy_url" = "Copy URL";

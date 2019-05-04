@@ -322,9 +322,13 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   }
 
   func saveToConfFile(_ sender: Notification) {
+    let predicate = mappingController.filterPredicate
+    mappingController.filterPredicate = nil
+    let keyMapping = mappingController.arrangedObjects as! [KeyMapping]
     setKeybindingsForPlayerCore()
+    mappingController.filterPredicate = predicate
     do {
-      try KeyMapping.generateConfData(from: mappingController.arrangedObjects as! [KeyMapping]).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
+      try KeyMapping.generateConfData(from: keyMapping).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
     } catch {
       Utility.showAlert("config.cannot_write", sheetWindow: view.window)
     }

@@ -1,6 +1,6 @@
 PODS:
   - GRMustache.swift (2.0.0)
-  - GzipSwift (4.0.4)
+  - GzipSwift (4.1.0)
   - Just (0.7.1)
   - PromiseKit (6.8.3):
     - PromiseKit/CorePromise (= 6.8.3)
@@ -40,7 +40,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   GRMustache.swift: 53405b02c374520f9193cf41bfa677f03a6d70aa
-  GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
+  GzipSwift: df1636fa095bd8f21d98db14e7393ecc9e230fed
   Just: 60c0995e04718eb621a07abef45ce6883c562f2b
   PromiseKit: 94c6e781838c5bf4717677d0d882b0e7250c80fc
   Sparkle: 1678d4707e7665960c7d1b43aca125e6392d11c4

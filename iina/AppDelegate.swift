@@ -370,10 +370,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
       // new_window
       let player: PlayerCore
-      if let newWindowValue = queryDict["new_window"], newWindowValue == "0" {
-        player = PlayerCore.active
-      } else {
+      if let newWindowValue = queryDict["new_window"], newWindowValue == "1" {
         player = PlayerCore.newPlayerCore
+      } else {
+        player = PlayerCore.active
       }
 
       // enqueue

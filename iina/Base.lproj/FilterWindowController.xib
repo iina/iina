@@ -211,6 +211,7 @@ Gw
         </window>
         <viewController id="bda-X5-kCJ" customClass="NewFilterSheetViewController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="addButton" destination="THV-Yh-VnK" id="GeO-qk-FbF"/>
                 <outlet property="filterWindow" destination="-2" id="Pjr-CT-nJA"/>
                 <outlet property="scrollContentView" destination="ZHP-RK-Ly4" id="NhJ-gL-sPY"/>
                 <outlet property="tableView" destination="n0t-vk-dME" id="IBk-xT-LkA"/>

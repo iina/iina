@@ -164,7 +164,10 @@
 "pl_menu.add_file" = "Добавить файл…";
 "pl_menu.add_sub" = "Добавить субтитры…";
 "pl_menu.add_url" = "Добавить URL…";
+"pl_menu.browser" = "Открыть в браузере";
 "pl_menu.clear_playlist" = "Очистить плейлист";
+"pl_menu.copy_url" = "Копировать ссылку";
+"pl_menu.copy_url_multi" = "Копировать ссылки";
 "pl_menu.delete" = "Переместить в Корзину";
 "pl_menu.delete_after_play" = "Переместить в Корзину после воспроизведения";
 "pl_menu.delete_after_play_multi" = "Переместить выбранные в Корзину после воспроизведения";
@@ -214,4 +217,5 @@
 "touchbar.rewind" = "Перемотка назад";
 "touchbar.seek" = "Перемотка";
 "touchbar.time" = "Временная позиция";
+"touchbar.toggle_pip" = "Переключить в \"Картинка в картинке\"";
 "track.none" = "<Нет>";

@@ -384,7 +384,7 @@ class Utility {
 
   // MARK: - Util functions
 
-  static func setActive(_ button: NSButton, _ active: Bool) {
+  static func setBoldTitle(for button: NSButton, _ active: Bool) {
     button.attributedTitle = NSAttributedString(string: button.title,
                                                 attributes: FontAttributes(font: active ? .systemBold : .system, size: .system, align: .center).value)
   }

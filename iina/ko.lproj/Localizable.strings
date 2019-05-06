@@ -164,7 +164,10 @@
 "pl_menu.add_file" = "파일 추가…";
 "pl_menu.add_sub" = "자막 추가…";
 "pl_menu.add_url" = "URL 추가…";
+"pl_menu.browser" = "브라우저에서 열기";
 "pl_menu.clear_playlist" = "재생목록 지움";
+"pl_menu.copy_url" = "URL 복사";
+"pl_menu.copy_url_multi" = "여러 URL 복사";
 "pl_menu.delete" = "휴지통에 버리기";
 "pl_menu.delete_after_play" = "재생 후 휴지통에 버리기";
 "pl_menu.delete_after_play_multi" = "선택항목 재생 후 휴지통에 버리기";
@@ -214,4 +217,5 @@
 "touchbar.rewind" = "되감기";
 "touchbar.seek" = "탐색";
 "touchbar.time" = "재생 위치";
+"touchbar.toggle_pip" = "화면 속 화면 전환/복귀";
 "track.none" = "<없음>";

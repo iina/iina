@@ -78,7 +78,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @IBOutlet weak var dockMenu: NSMenu!
 
   private func getReady() {
-    registerUserDefaultValues()
     menuController.bindMenuItems()
     PlayerCore.loadKeyBindings()
     isReady = true
@@ -87,6 +86,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   // MARK: - App Delegate
 
   func applicationWillFinishLaunching(_ notification: Notification) {
+    registerUserDefaultValues()
     Logger.log("App will launch")
 
     // register for url event
@@ -245,11 +245,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
     guard PlayerCore.active.mainWindow.isWindowLoaded || PlayerCore.active.initialWindow.isWindowLoaded else { return false }
+    guard !PlayerCore.active.mainWindow.isWindowHidden else { return false }
     return Preference.bool(for: .quitWhenNoOpenedWindow)
   }
 
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
-    guard !PlayerCore.active.mainWindow.isWindowHidden else { return .terminateCancel }
     Logger.log("App should terminate")
     for pc in PlayerCore.playerCores {
      pc.terminateMPV()
@@ -370,10 +370,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
       // new_window
       let player: PlayerCore
-      if let newWindowValue = queryDict["new_window"], newWindowValue == "0" {
-        player = PlayerCore.active
-      } else {
+      if let newWindowValue = queryDict["new_window"], newWindowValue == "1" {
         player = PlayerCore.newPlayerCore
+      } else {
+        player = PlayerCore.active
       }
 
       // enqueue
@@ -510,7 +510,7 @@ struct CommandLineStatus {
     mpvArguments.removeAll()
     iinaArguments.removeAll()
     for arg in args {
-      let splitted = arg.dropFirst(2).split(separator: "=", maxSplits: 2)
+      let splitted = arg.dropFirst(2).split(separator: "=", maxSplits: 1)
       let name = String(splitted[0])
       if (name.hasPrefix("mpv-")) {
         // mpv args

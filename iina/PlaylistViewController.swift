@@ -208,12 +208,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     switch tab {
     case .playlist:
       tabView.selectTabViewItem(at: 0)
-      Utility.setActive(playlistBtn, true)
-      Utility.setActive(chaptersBtn, false)
+      Utility.setBoldTitle(for: playlistBtn, true)
+      Utility.setBoldTitle(for: chaptersBtn, false)
     case .chapters:
       tabView.selectTabViewItem(at: 1)
-      Utility.setActive(chaptersBtn, true)
-      Utility.setActive(playlistBtn, false)
+      Utility.setBoldTitle(for: chaptersBtn, true)
+      Utility.setBoldTitle(for: playlistBtn, false)
     }
 
     currentTab = tab
@@ -295,11 +295,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         }
         Logger.log("Playlist Drag & Drop from \(oldIndex) to \(row)")
       }
-    } else {
-      // Otherwise, could be copy/cut & paste within playlistTableView
-      return pasteFromPasteboard(tableView, row: row, from: info.draggingPasteboard)
+      player.postNotification(.iinaPlaylistChanged)
+      return true
     }
-    return true
+    // Otherwise, could be copy/cut & paste within playlistTableView
+    return pasteFromPasteboard(tableView, row: row, from: info.draggingPasteboard)
   }
 
   // MARK: - Edit Menu Support
@@ -352,7 +352,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   @IBAction func addFileAction(_ sender: AnyObject) {
     Utility.quickMultipleOpenPanel(title: "Add to playlist", canChooseDir: true) { urls in
-      let playableFiles = self.player.getPlayableFiles(in: urls, sorted: true)
+      let playableFiles = self.player.getPlayableFiles(in: urls)
       if playableFiles.count != 0 {
         self.player.addToPlaylist(paths: playableFiles.map { $0.path }, at: self.player.info.playlist.count)
         self.player.mainWindow.playlistView.reloadData(playlist: true, chapters: false)
@@ -525,12 +525,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
       if identifier == .isChosen {
         // left column
-        let currentPos = info.videoPosition!
-        if currentPos.between(chapter.time, nextChapterTime) {
-          v.textField?.stringValue = Constants.String.play
-        } else {
-          v.textField?.stringValue = ""
-        }
+        v.textField?.stringValue = (info.chapter == row) ? Constants.String.play : ""
         return v
       } else if identifier == .trackName {
         // right column

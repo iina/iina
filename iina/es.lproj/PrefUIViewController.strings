@@ -36,6 +36,9 @@
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
 "AE4-BD-wZi.title" = "% de pantalla";
 
+/* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
+"AmS-Sl-b2h.title" = "Ventana:";
+
 /* Class = "NSMenuItem"; title = "Width:"; ObjectID = "B1c-oO-fIs"; */
 "B1c-oO-fIs.title" = "Ancho:";
 
@@ -48,8 +51,15 @@
 /* Class = "NSButtonCell"; title = "Show remaining time instead of total duration"; ObjectID = "EAa-gN-8dL"; */
 "EAa-gN-8dL.title" = "Mostrar el tiempo restante";
 
+/* Class = "NSTextFieldCell"; title = "When entering Picture-in-Picture:"; ObjectID = "EUd-RD-g0T"; */
+"EUd-RD-g0T.title" = "Al entrar en Imagen dentro de imagen:";
+
 /* Class = "NSTextFieldCell"; title = "On Screen Display:"; ObjectID = "F2e-CS-KXl"; */
 "F2e-CS-KXl.title" = "Visualización en pantalla:";
+
+/* Class = "NSTextFieldCell"; title = "Picture-in-
+Picture:"; ObjectID = "G8w-J7-1q1"; */
+"G8w-J7-1q1.title" = "Imagen dentro\nde imagen:";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "GKy-3g-4MB"; */
 "GKy-3g-4MB.title" = "Ventana:";
@@ -62,6 +72,9 @@
 
 /* Class = "NSMenuItem"; title = "1.5x video size"; ObjectID = "Goh-X4-4f1"; */
 "Goh-X4-4f1.title" = "1.5x tamaño del vídeo";
+
+/* Class = "NSButtonCell"; title = "Minimize"; ObjectID = "H1F-mm-Saq"; */
+"H1F-mm-Saq.title" = "Minimizar";
 
 /* Class = "NSTextFieldCell"; title = "pt"; ObjectID = "I8t-ey-016"; */
 "I8t-ey-016.title" = "pt";
@@ -86,6 +99,9 @@
 
 /* Class = "NSMenuItem"; title = "right"; ObjectID = "NYG-e9-DV0"; */
 "NYG-e9-DV0.title" = "derecho";
+
+/* Class = "NSButtonCell"; title = "Automatically pause playback"; ObjectID = "O8C-Vi-rSp"; */
+"O8C-Vi-rSp.title" = "Pausar automáticamente la reproducción";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "ObY-7B-NTO"; */
 "ObY-7B-NTO.title" = "s";
@@ -129,17 +145,26 @@
 /* Class = "NSTextFieldCell"; title = "X offset:"; ObjectID = "Ymw-tr-6rw"; */
 "Ymw-tr-6rw.title" = "Desplazar en X:";
 
+/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "Zc7-sP-Rdp"; */
+"Zc7-sP-Rdp.title" = "No hacer nada";
+
 /* Class = "NSTextFieldCell"; title = "Resize the window to fit video size:"; ObjectID = "Zjr-q7-WsD"; */
 "Zjr-q7-WsD.title" = "Cambiar el tamaño de la ventana para adaptarse al tamaño del video:";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "bYj-5g-zYO"; */
 "bYj-5g-zYO.title" = "Caja";
 
+/* Class = "NSButtonCell"; title = "Toggle Picture-in-Picture by minimizing/un-minimizing the window"; ObjectID = "baY-O6-fcB"; */
+"baY-O6-fcB.title" = "Alternar Imagen dentro de imagen al minimizar/desminimizar la ventana";
+
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2x tamaño del vídeo";
 
 /* Class = "NSButtonCell"; title = "Disabled"; ObjectID = "duf-3s-3bL"; */
 "duf-3s-3bL.title" = "Deshabilitado";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "eTQ-fy-fNJ"; */
+"eTQ-fy-fNJ.title" = "Caja";
 
 /* Class = "NSButtonCell"; title = "Use physical resolution on Retina displays"; ObjectID = "fsj-YE-OB7"; */
 "fsj-YE-OB7.title" = "Utilizar la resolución física en pantallas retina";
@@ -215,6 +240,9 @@
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "xrJ-Um-BrJ"; */
 "xrJ-Um-BrJ.title" = "% de pantalla";
+
+/* Class = "NSButtonCell"; title = "Hide"; ObjectID = "xtL-XT-xzb"; */
+"xtL-XT-xzb.title" = "Ocular";
 
 /* Class = "NSButtonCell"; title = "Always"; ObjectID = "yIN-jg-MxS"; */
 "yIN-jg-MxS.title" = "Siempre";

@@ -164,7 +164,10 @@
 "pl_menu.add_file" = "Adicionar Arquivo...";
 "pl_menu.add_sub" = "Adicionar Legenda…";
 "pl_menu.add_url" = "Adicionar URL...";
+"pl_menu.browser" = "Abrir no navegador";
 "pl_menu.clear_playlist" = "Limpar Playlist";
+"pl_menu.copy_url" = "Copiar URL";
+"pl_menu.copy_url_multi" = "Copiar URLs";
 "pl_menu.delete" = "Mover pro Lixo";
 "pl_menu.delete_after_play" = "Mover pro Lixo depois de tocar";
 "pl_menu.delete_after_play_multi" = "Mover arquivos selecionados pro Lixo depois de tocar";
@@ -214,4 +217,5 @@
 "touchbar.rewind" = "Voltar Rápido";
 "touchbar.seek" = "Buscar";
 "touchbar.time" = "Posição do Tempo";
+"touchbar.toggle_pip" = "Ativar/Desativar Picture-in-Picture";
 "track.none" = "<Nenhuma>";

@@ -58,10 +58,10 @@ if ARGV.length <= 1
   abort <<~END
     Usage: change_lib_dependencies.rb prefix libraries...
 
-    If you're using Homebrew, your invokation might look like this:
-      $ ./change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv)/lib/*.dylib"
+    If you're using Homebrew, your invocation might look like this:
+      $ ./change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv-iina)/lib/libmpv.dylib"
 
-    If you're using MacPorts, your invokcation might look like this:
+    If you're using MacPorts, your invocation might look like this:
       $ port contents mpv | grep '\.dylib$' | xargs ./change_lib_dependencies.rb /opt/local
   END
 end

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html, body {
+      margin: 0;
+    }
+    body {
+      background: #ddd;
+    }
+    #message {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-size: 24px;
+      color: #777;
+      text-align: center;
+    }
+    #btn {
+      position: absolute;
+      bottom: 10;
+      left: 10;
+      z-index: 200;
+    }
+  </style>
+</head>
+<body width="1280" height="800">
+  <canvas id="canvas"></canvas>
+  <div id="message"></div>
+  <button id="btn">Click</button>
+  <script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const canvas = document.getElementById("canvas");
+      const message = document.getElementById("message");
+
+      const width = canvas.width = window.innerWidth;
+      const height = canvas.height = window.innerHeight;
+
+      const ctx = canvas.getContext("2d");
+
+      const socket = new WebSocket("ws://localhost:23339");
+
+      function draw() {
+        socket.send("draw");
+      }
+
+      window.addEventListener("scroll", (e) => {
+        e.preventDefault();
+      });
+
+      socket.addEventListener("open", (event) => {
+        // draw();
+        socket.send(`size:${width},${height}`);
+      });
+
+      socket.addEventListener("close", (event) => {
+        if (event.code === 1000 || event.code === 1006) { return; }
+      });
+
+      socket.addEventListener("error", (event) => {
+        message.innerHTML = `
+          <div>Error: Cannot connect to IINA.</div>
+          `;
+      });
+
+      socket.addEventListener('message', (event) => {
+        if (typeof event.data === "string") {
+          if (event.data === "ready") {
+            draw();
+          }
+        } else if (event.data instanceof Blob) {
+          let img = new Image();
+          img.onload = () => {
+            ctx.drawImage(img, 0, 0);
+            requestAnimationFrame(draw);
+          }
+          img.src = URL.createObjectURL(event.data);
+        }
+      });
+
+    })
+  </script>
+</body>
+
+</html>

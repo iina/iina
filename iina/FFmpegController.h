@@ -2,44 +2,29 @@
 //  FFmpegController.h
 //  iina
 //
-//  Created by lhc on 9/6/2017.
-//  Copyright © 2017 lhc. All rights reserved.
+//  Created by Saagar Jha on 2/16/19.
+//  Copyright © 2019 lhc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#ifndef FFmpegController_h
+#define FFmpegController_h
 
+@import Foundation;
 
-@interface FFThumbnail: NSObject
+NS_ASSUME_NONNULL_BEGIN
 
-@property(nonatomic) NSImage * _Nullable image;
-@property(nonatomic) double realTime;
-
+// Dummy interface for the Swift parts of FFmpegController we want to call.
+@interface FFmpegController : NSObject
+- (void)saveWithThumbnail:(nullable void *)thumbnail width:(NSInteger)width height:(NSInteger)height index:(NSInteger)index timestamp:(NSInteger)timestamp forFileAtPath:(NSString *)path;
+- (BOOL)handleNewTimestamp:(int64_t)timestamp progress:(NSInteger)progress forFileAtPath:(NSString *)path;
 @end
 
-
-@protocol FFmpegControllerDelegate <NSObject>
-
-/**
- A notification being sent
- */
-- (void)didUpdateThumbnails:(nullable NSArray<FFThumbnail *> *)thumbnails forFile:(nonnull NSString *)filename withProgress:(NSInteger)progress;
-
-/** 
- Did generated thumbnails for the video.
- */
-- (void)didGenerateThumbnails:(nonnull NSArray<FFThumbnail *> *)thumbnails forFile:(nonnull NSString *)filename succeeded:(BOOL)succeeded;
-
+// Additional bits that we add in Objective-C++.
+@interface FFmpegController (Bridge)
+- (BOOL)synchronouslyGenerateThumbnailsForFileAtPath:(NSString *)path;
++ (double)videoDurationForFileAtPath:(NSString *)path NS_SWIFT_NAME(videoDuration(forFileAtPath:));
 @end
 
+NS_ASSUME_NONNULL_END
 
-@interface FFmpegController: NSObject
-
-@property(nonatomic, weak) id<FFmpegControllerDelegate> _Nullable delegate;
-
-@property(nonatomic) NSInteger thumbnailCount;
-
-- (void)generateThumbnailForFile:(nonnull NSString *)file;
-
-+ (double)probeVideoDurationForFile:(nonnull NSString *)file;
-
-@end
+#endif /* FFmpegController_h */

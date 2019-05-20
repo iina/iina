@@ -1369,7 +1369,7 @@ class PlayerCore: NSObject {
         }
       } else {
         Logger.log("Request new thumbnails", subsystem: subsystem)
-        ffmpegController.generateThumbnail(forFile: url.path)
+        ffmpegController.generateThumbnailsForFile(atPath: url.path)
       }
     }
   }
@@ -1578,7 +1578,9 @@ class PlayerCore: NSObject {
    It may take some time to run this method, so it should be used in background.
    */
   func refreshCachedVideoProgress(forVideoPath path: String) {
-    let duration = FFmpegController.probeVideoDuration(forFile: path)
+    // Swift apparently cannot reason about our category methods, so force the
+    // method call to occur through the Objective-C runtime.
+    let duration = (FFmpegController.self as AnyClass).videoDuration(forFileAtPath: path)
     let progress = Utility.playbackProgressFromWatchLater(path.md5)
     info.cachedVideoDurationAndProgress[path] = (
       duration: duration,
@@ -1618,9 +1620,9 @@ class PlayerCore: NSObject {
 
 
 extension PlayerCore: FFmpegControllerDelegate {
-
-  func didUpdate(_ thumbnails: [FFThumbnail]?, forFile filename: String, withProgress progress: Int) {
-    guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
+  
+  func didUpdateThumbnails(_ thumbnails: [FFmpegThumbnail]?, forFileAtPath path: String, withProgress progress: Int) {
+    guard let currentFilePath = info.currentURL?.path, currentFilePath == path else { return }
     Logger.log("Got new thumbnails, progress \(progress)", subsystem: subsystem)
     if let thumbnails = thumbnails {
       info.thumbnails.append(contentsOf: thumbnails)
@@ -1629,8 +1631,8 @@ extension PlayerCore: FFmpegControllerDelegate {
     refreshTouchBarSlider()
   }
 
-  func didGenerate(_ thumbnails: [FFThumbnail], forFile filename: String, succeeded: Bool) {
-    guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
+  func didGenerateThumbnails(_ thumbnails: [FFmpegThumbnail], forFileAtPath path: String, succeeded: Bool) {
+    guard let currentFilePath = info.currentURL?.path, currentFilePath == path else { return }
     Logger.log("Got all thumbnails, succeeded=\(succeeded)", subsystem: subsystem)
     if succeeded {
       info.thumbnails = thumbnails

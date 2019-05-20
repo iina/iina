@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1326717E20852D0D000FA7E2 /* SubChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1326718020852D0D000FA7E2 /* SubChooseViewController.xib */; };
+		49318BCB20BC0FB8002BF014 /* FFmpegController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49318BCA20BC0FB8002BF014 /* FFmpegController.swift */; };
 		49542975216C34950058F680 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49542974216C34950058F680 /* Cocoa.framework */; };
 		49542978216C34950058F680 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49542977216C34950058F680 /* SafariExtensionHandler.swift */; };
 		49542980216C34950058F680 /* open-in-iina.js in Resources */ = {isa = PBXBuildFile; fileRef = 4954297F216C34950058F680 /* open-in-iina.js */; };
 		49542982216C34950058F680 /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 49542981216C34950058F680 /* ToolbarItemIcon.pdf */; };
 		49542986216C34950058F680 /* OpenInIINA.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 49542973216C34950058F680 /* OpenInIINA.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		496B19921E2968530035AF10 /* PIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B19911E2968530035AF10 /* PIP.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		49B1F26B22190F58003283ED /* FFmpegController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49B1F26A22190F58003283ED /* FFmpegController.mm */; };
 		5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867483705008F086E07B0A6B /* Pods_iina.framework */; };
 		6100FF2B1EDF9806002CF0FB /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */; };
 		8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */; };
@@ -225,7 +227,6 @@
 		84F5D4A21E4796F50060A838 /* KeyBindingTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D4A11E4796F50060A838 /* KeyBindingTranslator.swift */; };
 		84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */; };
 		84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7258E1D486185000DEF1B /* MPVProperty.swift */; };
-		84FBCB381EEACDDD0076C77C /* FFmpegController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FBCB371EEACDDD0076C77C /* FFmpegController.m */; };
 		84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */; };
 		8F49C36E213EFB7E0076C4F9 /* MiniPlayerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F49C370213EFB7E0076C4F9 /* MiniPlayerWindowController.xib */; };
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
@@ -465,6 +466,7 @@
 		440DDE4A1E9010430063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		440DDE4B1E9010440063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ru; path = ru.lproj/Contribution.rtf; sourceTree = "<group>"; };
 		440DDE4C1E9010440063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		49318BCA20BC0FB8002BF014 /* FFmpegController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFmpegController.swift; sourceTree = "<group>"; };
 		49542973216C34950058F680 /* OpenInIINA.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OpenInIINA.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		49542974216C34950058F680 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		49542977216C34950058F680 /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
@@ -473,6 +475,8 @@
 		49542981216C34950058F680 /* ToolbarItemIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ToolbarItemIcon.pdf; sourceTree = "<group>"; };
 		49542983216C34950058F680 /* OpenInIINA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenInIINA.entitlements; sourceTree = "<group>"; };
 		496B19911E2968530035AF10 /* PIP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIP.framework; path = ../../../../System/Library/PrivateFrameworks/PIP.framework; sourceTree = "<group>"; };
+		49B1F26922190C68003283ED /* FFmpegController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFmpegController.h; sourceTree = "<group>"; };
+		49B1F26A22190F58003283ED /* FFmpegController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FFmpegController.mm; sourceTree = "<group>"; };
 		5879479521A87DD700757A6F /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		5879479621A87E6100757A6F /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
 		5EF9F7E521FB42E900748374 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MainMenu.strings"; sourceTree = "<group>"; };
@@ -999,8 +1003,6 @@
 		84F5D4A11E4796F50060A838 /* KeyBindingTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingTranslator.swift; sourceTree = "<group>"; };
 		84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VolumeSliderCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84F7258E1D486185000DEF1B /* MPVProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVProperty.swift; sourceTree = "<group>"; };
-		84FBCB361EEACDDD0076C77C /* FFmpegController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFmpegController.h; sourceTree = "<group>"; };
-		84FBCB371EEACDDD0076C77C /* FFmpegController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFmpegController.m; sourceTree = "<group>"; };
 		84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCache.swift; sourceTree = "<group>"; };
 		84FF84701D2FF698001B318A /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
 		867483705008F086E07B0A6B /* Pods_iina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1581,14 +1583,15 @@
 			isa = PBXGroup;
 			children = (
 				84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */,
-				84A0BA961D2FA1CE00BC8DA1 /* PlayerCore.swift */,
-				84A0BA981D2FAAA700BC8DA1 /* MPVController.swift */,
-				845404A91E4396F500B02B12 /* ScriptLoader.swift */,
-				84C6D3611EAF8D63009BF721 /* HistoryController.swift */,
-				84FBCB361EEACDDD0076C77C /* FFmpegController.h */,
-				84FBCB371EEACDDD0076C77C /* FFmpegController.m */,
 				842904E11F0EC01600478376 /* AutoFileMatcher.swift */,
 				846121BC1F35FCA500ABB39C /* DraggingDetect.swift */,
+				49B1F26922190C68003283ED /* FFmpegController.h */,
+				49B1F26A22190F58003283ED /* FFmpegController.mm */,
+				49318BCA20BC0FB8002BF014 /* FFmpegController.swift */,
+				84C6D3611EAF8D63009BF721 /* HistoryController.swift */,
+				84A0BA981D2FAAA700BC8DA1 /* MPVController.swift */,
+				84A0BA961D2FA1CE00BC8DA1 /* PlayerCore.swift */,
+				845404A91E4396F500B02B12 /* ScriptLoader.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -2306,6 +2309,7 @@
 				84A886F31E26CA24008755BB /* Regex.swift in Sources */,
 				8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */,
 				8450403D1E0A9EE20079C194 /* InspectorWindowController.swift in Sources */,
+				49318BCB20BC0FB8002BF014 /* FFmpegController.swift in Sources */,
 				84C6D3671EB2A427009BF721 /* HistoryWindowController.swift in Sources */,
 				9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */,
 				840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */,
@@ -2319,7 +2323,6 @@
 				84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */,
 				844C59E71F7C143D008D1B00 /* CacheManager.swift in Sources */,
 				E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */,
-				84FBCB381EEACDDD0076C77C /* FFmpegController.m in Sources */,
 				84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */,
 				84C6D3641EB276E9009BF721 /* PlaybackHistory.swift in Sources */,
 				E3CB258F222799B800A62C47 /* MPVHook.swift in Sources */,
@@ -2357,6 +2360,7 @@
 				842F55A51EA17E7E0081D475 /* IINACommand.swift in Sources */,
 				8434BAAD1D5E4546003BECF2 /* SlideUpButton.swift in Sources */,
 				840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */,
+				49B1F26B22190F58003283ED /* FFmpegController.mm in Sources */,
 				84BEEC3F1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3379,6 +3383,10 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MODULEMAP_FILE = module.modulemap;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-fcxx-modules",
+				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
 				PRODUCT_NAME = IINA;
@@ -3417,6 +3425,10 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MODULEMAP_FILE = module.modulemap;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-fcxx-modules",
+				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
 				PRODUCT_NAME = IINA;

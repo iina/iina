@@ -912,7 +912,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if returnValue == 0 {
         // screenshot
         if keyBinding.action[0] == MPVCommand.screenshot.rawValue {
-          displayOSD(.screenshot)
+          player.sendOSD(.screenshot)
         }
       } else {
         Logger.log("Return value \(returnValue) when executing key command \(keyBinding.rawAction)", level: .error)
@@ -1735,6 +1735,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - UI: OSD
 
+  // Do not call displayOSD directly, call PlayerCore.sendOSD instead.
   func displayOSD(_ message: OSDMessage, autoHide: Bool = true, accessoryView: NSView? = nil) {
     guard player.displayOSD && !isShowingPersistentOSD else { return }
 
@@ -2534,9 +2535,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBAction func muteButtonAction(_ sender: NSButton) {
     player.toggleMute(nil)
     if player.info.isMuted {
-      displayOSD(.mute)
+      player.sendOSD(.mute)
     } else {
-      displayOSD(.unMute)
+      player.sendOSD(.unMute)
     }
   }
 

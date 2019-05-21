@@ -376,7 +376,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBAction func clearPlaylistBtnAction(_ sender: AnyObject) {
     player.clearPlaylist()
     reloadData(playlist: true, chapters: false)
-    mainWindow.displayOSD(.clearPlaylist)
+    player.sendOSD(.clearPlaylist)
   }
 
   @IBAction func playlistBtnAction(_ sender: AnyObject) {
@@ -444,7 +444,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let chapter = player.info.chapters[index]
     tv.deselectAll(self)
     tv.reloadData()
-    mainWindow.displayOSD(.chapter(chapter.title))
+    player.sendOSD(.chapter(chapter.title))
   }
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

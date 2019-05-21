@@ -391,19 +391,19 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func aspectChangedAction(_ sender: NSSegmentedControl) {
     let aspect = AppData.aspectsInPanel[sender.selectedSegment]
     player.setVideoAspect(aspect)
-    mainWindow.displayOSD(.aspect(aspect))
+    player.sendOSD(.aspect(aspect))
   }
 
   @IBAction func cropChangedAction(_ sender: NSSegmentedControl) {
     let cropStr = AppData.cropsInPanel[sender.selectedSegment]
     player.setCrop(fromString: cropStr)
-    mainWindow.displayOSD(.crop(cropStr))
+    player.sendOSD(.crop(cropStr))
   }
 
   @IBAction func rotationChangedAction(_ sender: NSSegmentedControl) {
     let value = AppData.rotations[sender.selectedSegment]
     player.setVideoRotate(value)
-    mainWindow.displayOSD(.rotate(value))
+    player.sendOSD(.rotate(value))
   }
 
   @IBAction func customAspectEditFinishedAction(_ sender: AnyObject?) {
@@ -411,7 +411,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if value != "" {
       aspectSegment.setSelected(false, forSegment: aspectSegment.selectedSegment)
       player.setVideoAspect(value)
-      mainWindow.displayOSD(.aspect(value))
+      player.sendOSD(.aspect(value))
     }
   }
 

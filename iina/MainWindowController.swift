@@ -674,7 +674,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     pipOverlayView.isHidden = true
     rightLabel.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .duration
 
-    osdProgressBarWidthConstraint = NSLayoutConstraint(item: osdAccessoryProgress, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150)
+    osdProgressBarWidthConstraint = NSLayoutConstraint(item: osdAccessoryProgress as Any, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150)
 
     // add user default observers
     observedPrefKeys.forEach { key in
@@ -865,7 +865,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       fragControlViewMiddleButtons1Constraint.constant = 24
       fragControlViewMiddleButtons2Constraint.constant = 24
       oscFloatingLeadingTrailingConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=10)-[v]-(>=10)-|",
-                                                                            options: [], metrics: nil, views: ["v": controlBarFloating])
+                                                                            options: [], metrics: nil, views: ["v": controlBarFloating as Any])
       NSLayoutConstraint.activate(oscFloatingLeadingTrailingConstraint!)
     } else {
       fragControlViewMiddleButtons1Constraint.constant = 16
@@ -1424,7 +1424,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     additionalInfoView.isHidden = true
     isMouseInSlider = false
 
-    if let index = fadeableViews.index(of: additionalInfoView) {
+    if let index = fadeableViews.firstIndex(of: additionalInfoView) {
       fadeableViews.remove(at: index)
     }
 
@@ -1908,7 +1908,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func removeTitlebarViewFromFadeableViews() {
-    if let index = (self.fadeableViews.index { $0 === titleBarView }) {
+    if let index = (self.fadeableViews.firstIndex { $0 === titleBarView }) {
       self.fadeableViews.remove(at: index)
     }
   }

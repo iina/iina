@@ -350,15 +350,16 @@ extension Data {
   }
 
   var chksum64: UInt64 {
-    get {
-      let count64 = self.count / MemoryLayout<UInt64>.size
-      return self.withUnsafeBytes{ (ptr: UnsafePointer<UInt64>) -> UInt64 in
-        let bufferPtr = UnsafeBufferPointer(start: ptr, count: count64)
-        return bufferPtr.reduce(UInt64(0), &+)
-      }
+    return withUnsafeBytes {
+      $0.bindMemory(to: UInt64.self).reduce(0, &+)
     }
   }
 
+  init<T>(bytesOf thing: T) {
+    var copyOfThing = thing // Hopefully CoW?
+    self.init(bytes: &copyOfThing, count: MemoryLayout.size(ofValue: thing))
+  }
+  
   func saveToFolder(_ url: URL, filename: String) -> URL? {
     let fileUrl = url.appendingPathComponent(filename)
     do {
@@ -368,6 +369,14 @@ extension Data {
       return nil
     }
     return fileUrl
+  }
+}
+
+extension FileHandle {
+  func read<T>(type: T.Type /* To prevent unintended specializations */) -> T {
+    return readData(ofLength: MemoryLayout<T>.size).withUnsafeBytes {
+      $0.bindMemory(to: T.self).first!
+    }
   }
 }
 

@@ -108,7 +108,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   }
 
   private func confTableSelectRow(withTitle title: String) {
-    if let index = userConfigNames.index(of: title) {
+    if let index = userConfigNames.firstIndex(of: title) {
       confTableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
     }
   }
@@ -266,7 +266,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     userConfigs.removeValue(forKey: currentConfName)
     Preference.set(userConfigs, for: Preference.Key.inputConfigs)
     // load
-    if let index = userConfigNames.index(of: currentConfName) {
+    if let index = userConfigNames.firstIndex(of: currentConfName) {
       userConfigNames.remove(at: index)
     }
     confTableView.reloadData()

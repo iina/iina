@@ -82,7 +82,7 @@ class AboutWindowController: NSWindowController {
     contributorsCollectionView.dataSource = self
     contributorsCollectionView.backgroundColors = [.clear]
     contributorsCollectionView.register(AboutWindowContributorAvatarItem.self, forItemWithIdentifier: .dataSourceItem)
-    
+
     let image = NSImage(size: contributorsFooterView.frame.size)
     let rect = CGRect(origin: .zero, size: contributorsFooterView.frame.size)
     image.lockFocus()
@@ -99,7 +99,7 @@ class AboutWindowController: NSWindowController {
       contributorsFooterImage.image = image
       contributorsFooterImage.isHidden = false
     }
-    
+
     contributorsCollectionView.enclosingScrollView?.contentInsets.bottom = contributorsFooterView.frame.height * loc[colors.firstIndex(of: 0)! - 1]
 
     translatorsTableView.dataSource = self

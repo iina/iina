@@ -61,7 +61,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     super.viewDidLoad()
 
     kbTableView.delegate = self
-    kbTableView.doubleAction = UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues") ? nil : #selector(editRow)
+    kbTableView.doubleAction = Preference.bool(for: .displayKeyBindingRawValues) ? nil : #selector(editRow)
     confTableView.dataSource = self
     confTableView.delegate = self
 
@@ -302,7 +302,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   }
 
   @IBAction func displayRawValueAction(_ sender: NSButton) {
-    kbTableView.doubleAction = UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues") ? nil : #selector(editRow)
+    kbTableView.doubleAction = Preference.bool(for: .displayKeyBindingRawValues) ? nil : #selector(editRow)
     kbTableView.reloadData()
   }
 
@@ -322,9 +322,13 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   }
 
   func saveToConfFile(_ sender: Notification) {
+    let predicate = mappingController.filterPredicate
+    mappingController.filterPredicate = nil
+    let keyMapping = mappingController.arrangedObjects as! [KeyMapping]
     setKeybindingsForPlayerCore()
+    mappingController.filterPredicate = predicate
     do {
-      try KeyMapping.generateConfData(from: mappingController.arrangedObjects as! [KeyMapping]).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
+      try KeyMapping.generateConfData(from: keyMapping).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
     } catch {
       Utility.showAlert("config.cannot_write", sheetWindow: view.window)
     }
@@ -403,7 +407,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
 
   func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
     if tableView == kbTableView {
-      return UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues")
+      return Preference.bool(for: .displayKeyBindingRawValues)
     } else {
       return false
     }

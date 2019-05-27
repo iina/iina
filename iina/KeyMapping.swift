@@ -19,7 +19,7 @@ class KeyMapping: NSObject {
 
   @objc var keyForDisplay: String {
     get {
-      return UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues") ? key : prettyKey
+      return Preference.bool(for: .displayKeyBindingRawValues) ? key : prettyKey
     }
     set {
       key = newValue
@@ -29,7 +29,7 @@ class KeyMapping: NSObject {
   
   @objc var actionForDisplay: String {
     get {
-      return UserDefaults.standard.bool(forKey: "displayKeyBindingRawValues") ? readableAction : prettyCommand
+      return Preference.bool(for: .displayKeyBindingRawValues) ? readableAction : prettyCommand
     }
     set {
       rawAction = newValue

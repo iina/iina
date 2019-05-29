@@ -625,18 +625,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
     fadeableViews.append(titleBarView)
 
-    guard let cv = w.contentView else { return }
-
     // video view
+    guard let cv = w.contentView else { return }
     cv.autoresizesSubviews = false
-    cv.addSubview(videoView, positioned: .below, relativeTo: nil)
-    videoView.translatesAutoresizingMaskIntoConstraints = false
-    // add constraints
-    ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
-      videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
-      videoViewConstraints[attr]!.isActive = true
-    }
-
+    addVideoViewToWindow()
     w.setIsVisible(true)
 
     // gesture recognizer
@@ -721,6 +713,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           center.removeObserver(observer)
         }
       }
+    }
+  }
+
+  private func addVideoViewToWindow() {
+    guard let cv = window?.contentView else { return }
+    cv.addSubview(videoView, positioned: .below, relativeTo: nil)
+    videoView.translatesAutoresizingMaskIntoConstraints = false
+    // add constraints
+    ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
+      videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
+      videoViewConstraints[attr]!.isActive = true
     }
   }
 
@@ -1367,12 +1370,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let isLegacyFullScreen = notification.name == .iinaLegacyFullScreen
     fsState.startAnimatingToFullScreen(legacy: isLegacyFullScreen, priorWindowedFrame: window!.frame)
 
-    // Exit PIP if necessary
-    if pipStatus == .inPIP,
-      #available(macOS 10.12, *) {
-      exitPIP()
-    }
-
     videoView.videoLayer.suspend()
     // Let mpv decide the correct render region in full screen
     player.mpv.setFlag(MPVOption.Window.keepaspect, true)
@@ -1406,6 +1403,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     updateWindowParametersForMPV()
+    
+    // Exit PIP if necessary
+    if pipStatus == .inPIP,
+      #available(macOS 10.12, *) {
+      exitPIP()
+    }
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
@@ -1507,7 +1510,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // interactive mode
-    if (isInInteractiveMode) {
+    if isInInteractiveMode {
       cropSettingsView?.cropBoxView.resized(with: videoView.frame)
     }
 
@@ -2867,8 +2870,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     
     pipStatus = .notInPIP
 
-    window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
-    videoView.frame = window?.contentView?.frame ?? .zero
+    addVideoViewToWindow()
 
     // Similarly, we need to run a redraw here as well. We check to make sure we
     // are paused, because this causes a janky animation in either case but as
@@ -2894,7 +2896,21 @@ extension MainWindowController: PIPViewControllerDelegate {
     pipOverlayView.isHidden = true
 
     // Set frame to animate back to
-    pip.replacementRect = window?.contentView?.frame ?? .zero
+    if fsState.isFullscreen {
+      let videoFrame = videoView.frame
+      let videoRatio = videoFrame.width / videoFrame.height
+      let frame = window!.frame
+      let testWidth = videoRatio * frame.height
+      if testWidth > frame.width {
+        let newHeight = (1 / videoRatio) * frame.width
+        pip.replacementRect = NSRect.init(x: 0, y: (frame.height - newHeight) / 2, width: frame.width, height: newHeight)
+      } else {
+        let newWidth = videoRatio * frame.height
+        pip.replacementRect = NSRect.init(x: (frame.width - newWidth) / 2, y: 0, width: newWidth, height: frame.height)
+      }
+    } else {
+      pip.replacementRect = window?.contentView?.frame ?? .zero
+    }
     pip.replacementWindow = window
 
     // Bring the window to the front and deminiaturize it

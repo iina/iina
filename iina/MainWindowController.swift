@@ -2822,7 +2822,11 @@ extension MainWindowController: PIPViewControllerDelegate {
     pip.presentAsPicture(inPicture: pipVideo)
     pipOverlayView.isHidden = false
 
-    videoView.videoLayer.draw(forced: true)
+    // If the video is paused, it will end up in a weird state due to the
+    // animation. By forcing a redraw it will keep its paused image throughout.
+    if player.info.isPaused {
+      videoView.videoLayer.draw(forced: true)
+    }
     
     if let window = self.window {
       let windowShouldDoNothing = window.styleMask.contains(.fullScreen) || window.isMiniaturized
@@ -2863,11 +2867,17 @@ extension MainWindowController: PIPViewControllerDelegate {
     
     pipStatus = .notInPIP
 
-    pipOverlayView.isHidden = true
     window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
     videoView.frame = window?.contentView?.frame ?? .zero
 
-    videoView.videoLayer.draw(forced: true)
+    // Similarly, we need to run a redraw here as well. We check to make sure we
+    // are paused, because this causes a janky animation in either case but as
+    // it's not necessary while the video is playing and significantly more
+    // noticeable, we only redraw if we are paused.
+    if player.info.isPaused {
+      videoView.videoLayer.draw(forced: true)
+    }
+    
     updateTimer()
     
     isWindowMiniaturizedDueToPip = false
@@ -2877,6 +2887,11 @@ extension MainWindowController: PIPViewControllerDelegate {
   func pipShouldClose(_ pip: PIPViewController) -> Bool {
     // This is called right before we're about to close the PIP
     pipStatus = .intermediate
+    
+    // Hide the overlay view preemptively, to prevent any issues where it does
+    // not hide in time and ends up covering the video view (which will be added
+    // to the window under everything else, including the overlay).
+    pipOverlayView.isHidden = true
 
     // Set frame to animate back to
     pip.replacementRect = window?.contentView?.frame ?? .zero

@@ -135,7 +135,7 @@ extension AboutWindowController: NSCollectionViewDataSource {
   private func getContributors() -> [Contributor] {
     // This method will be called only once when `self.contributors` is needed,
     // i.e. when `contributorsCollectionView` is being initialized.
-    loadContributors(from: "https://api.github.com/repos/lhc70000/iina/contributors")
+    loadContributors(from: "https://api.github.com/repos/iina/iina/contributors")
     return []
   }
 

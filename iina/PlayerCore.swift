@@ -1254,7 +1254,11 @@ class PlayerCore: NSObject {
       info.cacheTime = mpv.getInt(MPVProperty.demuxerCacheTime)
       info.bufferingState = mpv.getInt(MPVProperty.cacheBufferingState)
       DispatchQueue.main.async {
-        self.mainWindow.updatePlayTime(withDuration: true, andProgressBar: true)
+        if self.isInMiniPlayer {
+          self.miniPlayer.updatePlayTime(withDuration: true, andProgressBar: true)
+        } else {
+          self.mainWindow.updatePlayTime(withDuration: true, andProgressBar: true)
+        }
         self.mainWindow.updateNetworkState()
       }
 

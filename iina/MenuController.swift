@@ -396,12 +396,21 @@ class MenuController: NSObject, NSMenuDelegate {
   private func updateChapterList() {
     chapterMenu.removeAllItems()
     let info = PlayerCore.active.info
+    let padder = { (time: String) -> String in
+      let standard = (info.chapters.last?.time.stringRepresentation ?? "").reversed()
+      return String((time.reversed() + standard[standard.index(standard.startIndex, offsetBy: time.count)...].map {
+        $0 == ":" ? ":" : "0"
+      }).reversed())
+    }
     for (index, chapter) in info.chapters.enumerated() {
-      let menuTitle = "\(chapter.time.stringRepresentation) - \(chapter.title)"
+      let menuTitle = "\(padder(chapter.time.stringRepresentation)) – \(chapter.title)"
       let nextChapterTime = info.chapters[at: index+1]?.time ?? Constants.Time.infinite
       let isPlaying = info.videoPosition?.between(chapter.time, nextChapterTime) ?? false
-      chapterMenu.addItem(withTitle: menuTitle, action: #selector(MainMenuActionHandler.menuChapterSwitch(_:)),
-                          tag: index, obj: nil, stateOn: isPlaying)
+      let menuItem = NSMenuItem(title: menuTitle, action: #selector(MainMenuActionHandler.menuChapterSwitch(_:)), keyEquivalent: "")
+      menuItem.tag = index
+      menuItem.state = isPlaying ? .on : .off
+      menuItem.attributedTitle = NSAttributedString(string: menuTitle, attributes: [.font: NSFont.monospacedDigitSystemFont(ofSize: 0, weight: .regular)])
+      chapterMenu.addItem(menuItem)
     }
   }
 

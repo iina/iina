@@ -1619,7 +1619,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   func windowDidMiniaturize(_ notification: Notification) {
     if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
-      if #available(OSX 10.12, *) {
+      if #available(macOS 10.12, *) {
         enterPIP()
       }
     }
@@ -1631,7 +1631,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isPausedDueToMiniaturization = false
     }
     if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
-      if #available(OSX 10.12, *) {
+      if #available(macOS 10.12, *) {
         exitPIP()
       }
     }

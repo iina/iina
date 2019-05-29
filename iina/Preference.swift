@@ -138,7 +138,6 @@ struct Preference {
     static let windowBehaviorWhenPip = Key("windowBehaviorWhenPip")
     static let pauseWhenPip = Key("pauseWhenPip")
     static let togglePipByMinimizingWindow = Key("togglePipByMinimizingWindow")
-    static let enterPipWhenSwitchingSpaces = Key("enterPipWhenSwitchingSpaces")
 
     // Codec
 

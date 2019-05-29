@@ -709,14 +709,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         self.player.togglePause(true)
       }
     })
-    
-    if #available(macOS 10.12, *) {
-      NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.activeSpaceDidChangeNotification, object: nil, queue: nil, using: { [unowned self] _ in
-        if Preference.bool(for: .enterPipWhenSwitchingSpaces) {
-          self.enterPIP()
-        }
-      })
-    }
   }
 
   deinit {

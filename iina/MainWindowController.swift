@@ -2897,17 +2897,8 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     // Set frame to animate back to
     if fsState.isFullscreen {
-      let videoFrame = videoView.frame
-      let videoRatio = videoFrame.width / videoFrame.height
-      let frame = window!.frame
-      let testWidth = videoRatio * frame.height
-      if testWidth > frame.width {
-        let newHeight = (1 / videoRatio) * frame.width
-        pip.replacementRect = NSRect.init(x: 0, y: (frame.height - newHeight) / 2, width: frame.width, height: newHeight)
-      } else {
-        let newWidth = videoRatio * frame.height
-        pip.replacementRect = NSRect.init(x: (frame.width - newWidth) / 2, y: 0, width: newWidth, height: frame.height)
-      }
+      let newVideoSize = videoView.videoSize!.satisfyMaxSizeWithSameAspectRatio(window!.frame.size)
+      pip.replacementRect = newVideoSize.centeredRect(in: window!.frame)
     } else {
       pip.replacementRect = window?.contentView?.frame ?? .zero
     }

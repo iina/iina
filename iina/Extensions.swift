@@ -13,6 +13,7 @@ extension NSSlider {
   func knobPointPosition() -> CGFloat {
     let sliderOrigin = frame.origin.x + knobThickness / 2
     let sliderWidth = frame.width - knobThickness
+    assert(maxValue > minValue)
     let knobPos = sliderOrigin + sliderWidth * CGFloat((doubleValue - minValue) / (maxValue - minValue))
     return knobPos
   }
@@ -37,6 +38,7 @@ extension NSSize {
 
   var aspect: CGFloat {
     get {
+      assert(width != 0 && height != 0)
       return width / height
     }
   }

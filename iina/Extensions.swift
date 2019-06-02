@@ -95,6 +95,9 @@ extension NSSize {
    ```
    */
   func grow(toSize size: NSSize) -> NSSize {
+    if width == 0 || height == 0 {
+      return size
+    }
     let sizeAspect = size.aspect
     if aspect > sizeAspect {  // self is wider, grow to meet height
       return NSSize(width: size.height * aspect, height: size.height)
@@ -121,7 +124,10 @@ extension NSSize {
    ```
    */
   func shrink(toSize size: NSSize) -> NSSize {
-    let  sizeAspect = size.aspect
+    if width == 0 || height == 0 {
+      return size
+    }
+    let sizeAspect = size.aspect
     if aspect < sizeAspect { // self is taller, shrink to meet height
       return NSSize(width: size.height * aspect, height: size.height)
     } else {

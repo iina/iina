@@ -59,40 +59,40 @@ IINA ships with pre-compiled dynamic libraries for convenience reasons. If you a
 
 1. Build your own copy of mpv. If you're using a package manager to manage dependencies, the steps below outline the process.
 
-#### Homebrew
+    #### Homebrew
 
-Use our tap as it passes in the correct flags to mpv's configure script:
+    Use our tap as it passes in the correct flags to mpv's configure script:
 
-```console
-$ brew tap iina/homebrew-mpv-iina
-$ brew install mpv-iina
-```
+    ```console
+    $ brew tap iina/homebrew-mpv-iina
+    $ brew install mpv-iina
+    ```
 
-#### MacPorts
+    #### MacPorts
 
-Pass in these flags when installing:
+    Pass in these flags when installing:
 
-```console
-# port install mpv +uchardet -bundle -rubberband configure.args="--enable-libmpv-shared --enable-lua --enable-libarchive --enable-libbluray --disable-swift --disable-rubberband" 
-```
+    ```console
+    # port install mpv +uchardet -bundle -rubberband configure.args="--enable-libmpv-shared --enable-lua --enable-libarchive --enable-libbluray --disable-swift --disable-rubberband" 
+    ```
 
 2. Copy the latest [header files from mpv](https://github.com/mpv-player/mpv/tree/master/libmpv) (\*.h) into `deps/include/mpv/`.
 
 3. Run `other/parse_doc.rb`. This script will fetch the latest mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. This is only needed when updating libmpv. Note that if the API changes, the player source code may also need to be changed.
 
 4. Run `other/change_lib_dependencies.rb`. This script will deploy the dependent libraries into `deps/libs`. If you're using a package manager to manage dependencies, invoke it like so:
+  
+    #### Homebrew
 
-#### Homebrew
+    ```console
+    $ other/change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv-iina)/lib/libmpv.dylib"
+    ```
 
-```console
-$ other/change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv-iina)/lib/libmpv.dylib"
-```
+    #### MacPorts
 
-#### MacPorts
-
-```console
-$ port contents mpv | grep '\.dylib$' | xargs other/change_lib_dependencies.rb /opt/local
-```
+    ```console
+    $ port contents mpv | grep '\.dylib$' | xargs other/change_lib_dependencies.rb /opt/local
+    ```
 
 5. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.* 
 

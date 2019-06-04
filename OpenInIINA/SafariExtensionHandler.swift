@@ -53,7 +53,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
 
   func launchIINA(withURL url: String) {
     guard let escapedURL = url.addingPercentEncoding(withAllowedCharacters: .alphanumerics),
-      let url = URL(string: "iina://weblink?url=\(escapedURL)") else {
+      let url = URL(string: "iina://weblink?url=\(escapedURL)&new_window=1") else {
         return
     }
     NSWorkspace.shared.open(url)

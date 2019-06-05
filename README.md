@@ -35,15 +35,15 @@
 
 1. IINA uses [CocoaPods](https://cocoapods.org) for managing the installation of third-party libraries. If you don't already have it installed, here's how you can do so:
 
-#### Using RubyGems
-```console
-$ sudo gem install cocoapods
-```
+	#### Using RubyGems
+	```console
+	$ sudo gem install cocoapods
+	```
 
-#### Using Homebrew
-```console
-$ brew install cocoapods
-```
+	#### Using Homebrew
+	```console
+	$ brew install cocoapods
+	```
 
 2. Run `pod install` in project's root directory.
 
@@ -59,22 +59,22 @@ IINA ships with pre-compiled dynamic libraries for convenience reasons. If you a
 
 1. Build your own copy of mpv. If you're using a package manager to manage dependencies, the steps below outline the process.
 
-    #### Homebrew
+	#### Homebrew
 
-    Use our tap as it passes in the correct flags to mpv's configure script:
+	Use our tap as it passes in the correct flags to mpv's configure script:
 
-    ```console
-    $ brew tap iina/homebrew-mpv-iina
-    $ brew install mpv-iina
-    ```
+	```console
+	$ brew tap iina/homebrew-mpv-iina
+	$ brew install mpv-iina
+	```
 
-    #### MacPorts
+	#### MacPorts
 
-    Pass in these flags when installing:
+	Pass in these flags when installing:
 
-    ```console
-    # port install mpv +uchardet -bundle -rubberband configure.args="--enable-libmpv-shared --enable-lua --enable-libarchive --enable-libbluray --disable-swift --disable-rubberband" 
-    ```
+	```console
+	# port install mpv +uchardet -bundle -rubberband configure.args="--enable-libmpv-shared --enable-lua --enable-libarchive --enable-libbluray --disable-swift --disable-rubberband" 
+	```
 
 2. Copy the latest [header files from mpv](https://github.com/mpv-player/mpv/tree/master/libmpv) (\*.h) into `deps/include/mpv/`.
 

@@ -741,6 +741,11 @@ class PlaylistTrackCellView: NSTableCellView {
   @IBOutlet weak var durationLabel: NSTextField!
   @IBOutlet weak var playbackProgressView: PlaylistPlaybackProgressView!
 
+  override func prepareForReuse() {
+     playbackProgressView.percentage = 0
+     playbackProgressView.needsDisplay = true
+  }
+
 }
 
 

@@ -80,7 +80,7 @@ IINA ships with pre-compiled dynamic libraries for convenience reasons. If you a
 
 3. Run `other/parse_doc.rb`. This script will fetch the latest mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. This is only needed when updating libmpv. Note that if the API changes, the player source code may also need to be changed.
 
-4. Run `other/change_lib_dependencies.rb`. This script will deploy the dependent libraries into `deps/libs`. If you're using a package manager to manage dependencies, invoke it like so:
+4. Run `other/change_lib_dependencies.rb`. This script will deploy the dependent libraries into `deps/lib`. If you're using a package manager to manage dependencies, invoke it like so:
   
     #### Homebrew
 
@@ -96,9 +96,9 @@ IINA ships with pre-compiled dynamic libraries for convenience reasons. If you a
 
 5. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.* 
 
-6. Remove all of references to .dylib files from the Frameworks group in the sidebar and drag all the .dylib files in `deps/libs` to that group.
+6. Remove all of references to .dylib files from the Frameworks group in the sidebar and drag all the .dylib files in `deps/lib` to that group.
 
-7. Drag all the .dylib files in `deps/libs` into the "Embedded Binaries" section of the iina target.
+7. Drag all the .dylib files in `deps/lib` into the "Embedded Binaries" section of the iina target.
 
 8. Build the project.
 

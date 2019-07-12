@@ -89,13 +89,13 @@ class FileGroup {
     group.tryGroupFiles()
     return group
   }
-
+  
   init(prefix: String, contents: [FileInfo] = []) {
     self.prefix = prefix
     self.contents = contents
     self.groups = []
   }
-
+  
   private func tryGroupFiles() {
     Logger.log("Try group files, prefix=\(prefix), count=\(contents.count)", level: .verbose, subsystem: subsystem)
     guard contents.count >= 3 else {
@@ -106,9 +106,10 @@ class FileGroup {
     var tempGroup: [String: [FileInfo]] = [:]
     var currChars: [(Character, String)] = []
     var i = prefix.count
-
+    
     while tempGroup.count < 2 {
-      var lastPrefix = ""
+      var lastPrefix = prefix
+      var anyProcessed = false
       for finfo in contents {
         // if reached string end
         if i >= finfo.characters.count {
@@ -125,6 +126,7 @@ class FileGroup {
           currChars.append((c, p))
         }
         tempGroup[p]!.append(finfo)
+        anyProcessed = true
       }
       // if all items have the same prefix
       if tempGroup.count == 1 {
@@ -133,6 +135,10 @@ class FileGroup {
         currChars.removeAll()
       }
       i += 1
+      // if all items have the same name
+      if false == anyProcessed {
+        break
+      }
     }
 
     let maxSubGroupCount = tempGroup.reduce(0, { max($0, $1.value.count) })
@@ -148,7 +154,7 @@ class FileGroup {
       }
     }
   }
-
+  
   func flatten() -> [String: [FileInfo]] {
     var result: [String: [FileInfo]] = [:]
     var search: ((FileGroup) -> Void)!
@@ -164,7 +170,7 @@ class FileGroup {
     search(self)
     return result
   }
-
+  
   private func stopGrouping(_ chars: [(Character, String)]) -> Bool {
     var chineseNumberCount = 0
     for (c, _) in chars {
@@ -175,6 +181,6 @@ class FileGroup {
     }
     return false
   }
-
+  
 }
 

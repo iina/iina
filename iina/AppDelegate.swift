@@ -207,7 +207,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
 
       // enter PIP
-      if #available(OSX 10.12, *), let pc = lastPlayerCore, commandLineStatus.enterPIP {
+      if #available(macOS 10.12, *), let pc = lastPlayerCore, commandLineStatus.enterPIP {
         pc.mainWindow.enterPIP()
       }
     }
@@ -370,10 +370,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
       // new_window
       let player: PlayerCore
-      if let newWindowValue = queryDict["new_window"], newWindowValue == "0" {
-        player = PlayerCore.active
-      } else {
+      if let newWindowValue = queryDict["new_window"], newWindowValue == "1" {
         player = PlayerCore.newPlayerCore
+      } else {
+        player = PlayerCore.active
       }
 
       // enqueue
@@ -391,7 +391,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         player.mpv.setFlag(MPVOption.Window.fullscreen, true)
       } else if let pipValue = queryDict["pip"], pipValue == "1" {
         // pip
-        if #available(OSX 10.12, *) {
+        if #available(macOS 10.12, *) {
           player.mainWindow.enterPIP()
         }
       }

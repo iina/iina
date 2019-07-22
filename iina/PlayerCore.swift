@@ -621,7 +621,7 @@ class PlayerCore: NSObject {
   }
 
   func setVideoRotate(_ degree: Int) {
-    if AppData.rotations.index(of: degree)! >= 0 {
+    if AppData.rotations.firstIndex(of: degree)! >= 0 {
       mpv.setInt(MPVOption.Video.videoRotate, degree)
       info.rotation = degree
     }
@@ -1253,7 +1253,11 @@ class PlayerCore: NSObject {
       info.cacheTime = mpv.getInt(MPVProperty.demuxerCacheTime)
       info.bufferingState = mpv.getInt(MPVProperty.cacheBufferingState)
       DispatchQueue.main.async {
-        self.mainWindow.updatePlayTime(withDuration: true, andProgressBar: true)
+        if self.isInMiniPlayer {
+          self.miniPlayer.updatePlayTime(withDuration: true, andProgressBar: true)
+        } else {
+          self.mainWindow.updatePlayTime(withDuration: true, andProgressBar: true)
+        }
         self.mainWindow.updateNetworkState()
       }
 

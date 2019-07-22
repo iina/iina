@@ -1,20 +1,20 @@
 PODS:
   - GRMustache.swift (2.0.0)
-  - GzipSwift (4.0.4)
+  - GzipSwift (5.0.0)
   - Just (0.7.1)
-  - PromiseKit (6.8.3):
-    - PromiseKit/CorePromise (= 6.8.3)
-    - PromiseKit/Foundation (= 6.8.3)
-    - PromiseKit/UIKit (= 6.8.3)
-  - PromiseKit/CorePromise (6.8.3)
-  - PromiseKit/Foundation (6.8.3):
+  - PromiseKit (6.8.4):
+    - PromiseKit/CorePromise (= 6.8.4)
+    - PromiseKit/Foundation (= 6.8.4)
+    - PromiseKit/UIKit (= 6.8.4)
+  - PromiseKit/CorePromise (6.8.4)
+  - PromiseKit/Foundation (6.8.4):
     - PromiseKit/CorePromise
-  - Sparkle (1.21.2)
+  - Sparkle (1.21.3)
 
 DEPENDENCIES:
-  - GRMustache.swift (from `https://github.com/iina/GRMustache.swift.git`)
+  - GRMustache.swift (from `https://github.com/iina/GRMustache.swift`)
   - GzipSwift
-  - Just (from `https://github.com/JustHTTP/Just.git`)
+  - Just (from `https://github.com/iina/Just`, branch `swift-5`)
   - PromiseKit
   - Sparkle
 
@@ -26,25 +26,26 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   GRMustache.swift:
-    :git: https://github.com/iina/GRMustache.swift.git
+    :git: https://github.com/iina/GRMustache.swift
   Just:
-    :git: https://github.com/JustHTTP/Just.git
+    :branch: swift-5
+    :git: https://github.com/iina/Just
 
 CHECKOUT OPTIONS:
   GRMustache.swift:
-    :commit: 3e6778e4b8a134e3f96d04d6c15c7213bd7d9935
-    :git: https://github.com/iina/GRMustache.swift.git
+    :commit: a46e65d00b4753449b90465be813bbdb1a9ffc9d
+    :git: https://github.com/iina/GRMustache.swift
   Just:
-    :commit: b314be4ac8652b66182cfbd4a9893dfcb3808bbf
-    :git: https://github.com/JustHTTP/Just.git
+    :commit: d0ae3f9bc2d6bf247b19217764a096bbac55f007
+    :git: https://github.com/iina/Just
 
 SPEC CHECKSUMS:
   GRMustache.swift: 53405b02c374520f9193cf41bfa677f03a6d70aa
-  GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
+  GzipSwift: 5592f4d62b641e04d06443ba471f8ed76b1363e4
   Just: 60c0995e04718eb621a07abef45ce6883c562f2b
-  PromiseKit: 94c6e781838c5bf4717677d0d882b0e7250c80fc
-  Sparkle: 1678d4707e7665960c7d1b43aca125e6392d11c4
+  PromiseKit: 51794a832647e7b819336dc2279039ce9f1cc49b
+  Sparkle: 3f75576db8b0265adef36c43249d747f22d0b708
 
-PODFILE CHECKSUM: c149e2f5a370325310fa22313fe8c514d0967750
+PODFILE CHECKSUM: 4969f0d73fe5d871a1a1853ad7807a345443e71a
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.7.1

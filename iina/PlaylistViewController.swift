@@ -376,7 +376,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBAction func clearPlaylistBtnAction(_ sender: AnyObject) {
     player.clearPlaylist()
     reloadData(playlist: true, chapters: false)
-    mainWindow.displayOSD(.clearPlaylist)
+    player.sendOSD(.clearPlaylist)
   }
 
   @IBAction func playlistBtnAction(_ sender: AnyObject) {
@@ -444,7 +444,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let chapter = player.info.chapters[index]
     tv.deselectAll(self)
     tv.reloadData()
-    mainWindow.displayOSD(.chapter(chapter.title))
+    player.sendOSD(.chapter(chapter.title))
   }
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -706,14 +706,18 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
       result.addItem(NSMenuItem.separator())
       // network resources related operations
-      if rows.contains (where: {player.info.playlist[$0].isNetworkResource}) {
+      let networkCount = rows.filter {
+        player.info.playlist[$0].isNetworkResource
+      }.count
+      if networkCount != 0 {
         result.addItem(withTitle: NSLocalizedString("pl_menu.browser", comment: "Open in Browser"), action: #selector(self.contextOpenInBrowser(_:)))
-        result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.copy_url" : "pl_menu.copy_url_multi", comment: "Copy URL(s)"), action: #selector(self.contextCopyURL(_:)))
+        result.addItem(withTitle: NSLocalizedString(networkCount == 1 ? "pl_menu.copy_url" : "pl_menu.copy_url_multi", comment: "Copy URL(s)"), action: #selector(self.contextCopyURL(_:)))
         result.addItem(NSMenuItem.separator())
       }
       // file related operations
-      if rows.contains (where: {!player.info.playlist[$0].isNetworkResource}) {
-        result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
+      let localCount = rows.count - networkCount
+      if localCount != 0 {
+        result.addItem(withTitle: NSLocalizedString(localCount == 1 ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
         // result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete_after_play" : "pl_menu.delete_after_play_multi", comment: "Delete After Playback"), action: #selector(self.contextMenuDeleteFileAfterPlayback(_:)))
 
         result.addItem(withTitle: NSLocalizedString("pl_menu.reveal_in_finder", comment: "Reveal in Finder"), action: #selector(self.contextMenuRevealInFinder(_:)))
@@ -736,6 +740,11 @@ class PlaylistTrackCellView: NSTableCellView {
   @IBOutlet weak var prefixBtn: PlaylistPrefixButton!
   @IBOutlet weak var durationLabel: NSTextField!
   @IBOutlet weak var playbackProgressView: PlaylistPlaybackProgressView!
+
+  override func prepareForReuse() {
+     playbackProgressView.percentage = 0
+     playbackProgressView.needsDisplay = true
+  }
 
 }
 
@@ -807,7 +816,7 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
   @IBAction func wrongSubBtnAction(_ sender: AnyObject) {
     player.info.matchedSubs[filePath]?.removeAll()
     tableView.reloadData()
-    if let row = player.info.playlist.index(where: { $0.filename == filePath }) {
+    if let row = player.info.playlist.firstIndex(where: { $0.filename == filePath }) {
       playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
     }
   }

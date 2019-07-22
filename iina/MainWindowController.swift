@@ -625,18 +625,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
     fadeableViews.append(titleBarView)
 
-    guard let cv = w.contentView else { return }
-
     // video view
+    guard let cv = w.contentView else { return }
     cv.autoresizesSubviews = false
-    cv.addSubview(videoView, positioned: .below, relativeTo: nil)
-    videoView.translatesAutoresizingMaskIntoConstraints = false
-    // add constraints
-    ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
-      videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
-      videoViewConstraints[attr]!.isActive = true
-    }
-
+    addVideoViewToWindow()
     w.setIsVisible(true)
 
     // gesture recognizer
@@ -674,7 +666,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     pipOverlayView.isHidden = true
     rightLabel.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .duration
 
-    osdProgressBarWidthConstraint = NSLayoutConstraint(item: osdAccessoryProgress, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150)
+    osdProgressBarWidthConstraint = NSLayoutConstraint(item: osdAccessoryProgress as Any, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150)
 
     // add user default observers
     observedPrefKeys.forEach { key in
@@ -721,6 +713,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
           center.removeObserver(observer)
         }
       }
+    }
+  }
+
+  private func addVideoViewToWindow() {
+    guard let cv = window?.contentView else { return }
+    cv.addSubview(videoView, positioned: .below, relativeTo: nil)
+    videoView.translatesAutoresizingMaskIntoConstraints = false
+    // add constraints
+    ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
+      videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
+      videoViewConstraints[attr]!.isActive = true
     }
   }
 
@@ -865,7 +868,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       fragControlViewMiddleButtons1Constraint.constant = 24
       fragControlViewMiddleButtons2Constraint.constant = 24
       oscFloatingLeadingTrailingConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=10)-[v]-(>=10)-|",
-                                                                            options: [], metrics: nil, views: ["v": controlBarFloating])
+                                                                            options: [], metrics: nil, views: ["v": controlBarFloating as Any])
       NSLayoutConstraint.activate(oscFloatingLeadingTrailingConstraint!)
     } else {
       fragControlViewMiddleButtons1Constraint.constant = 16
@@ -912,7 +915,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       if returnValue == 0 {
         // screenshot
         if keyBinding.action[0] == MPVCommand.screenshot.rawValue {
-          displayOSD(.screenshot)
+          player.sendOSD(.screenshot)
         }
       } else {
         Logger.log("Return value \(returnValue) when executing key command \(keyBinding.rawAction)", level: .error)
@@ -1367,12 +1370,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let isLegacyFullScreen = notification.name == .iinaLegacyFullScreen
     fsState.startAnimatingToFullScreen(legacy: isLegacyFullScreen, priorWindowedFrame: window!.frame)
 
-    // Exit PIP if necessary
-    if pipStatus == .inPIP,
-      #available(macOS 10.12, *) {
-      exitPIP()
-    }
-
     videoView.videoLayer.suspend()
     // Let mpv decide the correct render region in full screen
     player.mpv.setFlag(MPVOption.Window.keepaspect, true)
@@ -1406,6 +1403,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     updateWindowParametersForMPV()
+    
+    // Exit PIP if necessary
+    if pipStatus == .inPIP,
+      #available(macOS 10.12, *) {
+      exitPIP()
+    }
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
@@ -1424,7 +1427,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     additionalInfoView.isHidden = true
     isMouseInSlider = false
 
-    if let index = fadeableViews.index(of: additionalInfoView) {
+    if let index = fadeableViews.firstIndex(of: additionalInfoView) {
       fadeableViews.remove(at: index)
     }
 
@@ -1507,7 +1510,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // interactive mode
-    if (isInInteractiveMode) {
+    if isInInteractiveMode {
       cropSettingsView?.cropBoxView.resized(with: videoView.frame)
     }
 
@@ -1619,7 +1622,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   
   func windowDidMiniaturize(_ notification: Notification) {
     if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
-      if #available(OSX 10.12, *) {
+      if #available(macOS 10.12, *) {
         enterPIP()
       }
     }
@@ -1631,7 +1634,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       isPausedDueToMiniaturization = false
     }
     if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
-      if #available(OSX 10.12, *) {
+      if #available(macOS 10.12, *) {
         exitPIP()
       }
     }
@@ -1735,6 +1738,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - UI: OSD
 
+  // Do not call displayOSD directly, call PlayerCore.sendOSD instead.
   func displayOSD(_ message: OSDMessage, autoHide: Bool = true, accessoryView: NSView? = nil) {
     guard player.displayOSD && !isShowingPersistentOSD else { return }
 
@@ -1907,7 +1911,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func removeTitlebarViewFromFadeableViews() {
-    if let index = (self.fadeableViews.index { $0 === titleBarView }) {
+    if let index = (self.fadeableViews.firstIndex { $0 === titleBarView }) {
       self.fadeableViews.remove(at: index)
     }
   }
@@ -2263,7 +2267,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       }
       // guard min size
       // must be slightly larger than the min size, or it will crash when the min size is auto saved as window frame size.
-      videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize.add(1))
+      videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize)
       // check if have geometry set
       if let wfg = windowFrameFromGeometry(newSize: videoSize) {
         rect = wfg
@@ -2515,9 +2519,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBAction func muteButtonAction(_ sender: NSButton) {
     player.toggleMute(nil)
     if player.info.isMuted {
-      displayOSD(.mute)
+      player.sendOSD(.mute)
     } else {
-      displayOSD(.unMute)
+      player.sendOSD(.unMute)
     }
   }
 
@@ -2806,7 +2810,11 @@ extension MainWindowController: PIPViewControllerDelegate {
     pip.presentAsPicture(inPicture: pipVideo)
     pipOverlayView.isHidden = false
 
-    videoView.videoLayer.draw(forced: true)
+    // If the video is paused, it will end up in a weird state due to the
+    // animation. By forcing a redraw it will keep its paused image throughout.
+    if player.info.isPaused {
+      videoView.videoLayer.draw(forced: true)
+    }
     
     if let window = self.window {
       let windowShouldDoNothing = window.styleMask.contains(.fullScreen) || window.isMiniaturized
@@ -2847,11 +2855,16 @@ extension MainWindowController: PIPViewControllerDelegate {
     
     pipStatus = .notInPIP
 
-    pipOverlayView.isHidden = true
-    window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
-    videoView.frame = window?.contentView?.frame ?? .zero
+    addVideoViewToWindow()
 
-    videoView.videoLayer.draw(forced: true)
+    // Similarly, we need to run a redraw here as well. We check to make sure we
+    // are paused, because this causes a janky animation in either case but as
+    // it's not necessary while the video is playing and significantly more
+    // noticeable, we only redraw if we are paused.
+    if player.info.isPaused {
+      videoView.videoLayer.draw(forced: true)
+    }
+    
     updateTimer()
     
     isWindowMiniaturizedDueToPip = false
@@ -2861,9 +2874,19 @@ extension MainWindowController: PIPViewControllerDelegate {
   func pipShouldClose(_ pip: PIPViewController) -> Bool {
     // This is called right before we're about to close the PIP
     pipStatus = .intermediate
+    
+    // Hide the overlay view preemptively, to prevent any issues where it does
+    // not hide in time and ends up covering the video view (which will be added
+    // to the window under everything else, including the overlay).
+    pipOverlayView.isHidden = true
 
     // Set frame to animate back to
-    pip.replacementRect = window?.contentView?.frame ?? .zero
+    if fsState.isFullscreen {
+      let newVideoSize = videoView.videoSize!.satisfyMaxSizeWithSameAspectRatio(window!.frame.size)
+      pip.replacementRect = newVideoSize.centeredRect(in: window!.frame)
+    } else {
+      pip.replacementRect = window?.contentView?.frame ?? .zero
+    }
     pip.replacementWindow = window
 
     // Bring the window to the front and deminiaturize it

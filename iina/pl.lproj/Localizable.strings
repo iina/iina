@@ -3,7 +3,7 @@
 "alert.add_filter.message" = "Wprowadź filtry w formacie zgodnym ze specyfikacją mpv.";
 "alert.add_filter.title" = "Nowy filtr";
 "alert.add_url.message" = "Wprowadź adres URL:";
-"alert.add_url.title" = "Dodaj URL";
+"alert.add_url.title" = "Dodaj adres URL";
 "alert.add_watch.message" = "Wprowadź poprawną nazwę parametru MPV.";
 "alert.add_watch.title" = "Dodaj obiekt do obejrzenia";
 "alert.assrt_register" = "Z powodu limitu zapytań do API, zalecamy korzystanie z własnego tokenu API. Domyślny token jest przeznaczony wyłącznie do celów demonstracyjnych.";
@@ -12,8 +12,8 @@
 "alert.assrt_token_invalid" = "Twój token Assrt API wygląda na nieprawidłowy.";
 "alert.assrt_token_prompt.message" = "Zarejestruj się na otwartej właśnie stronie. Następnie na stronie profilu wygeneruj własny token i wprowadź go poniżej.";
 "alert.assrt_token_prompt.title" = "Wprowadź token API";
-"alert.beta_channel.message" = "IINA v1.0 is coming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+"alert.beta_channel.message" = "IINA v1.0 nadchodzi! Czy chcesz pomóc w testowaniu wersji Beta? \n\nMożesz w każdej chwili zmienić to ustawienie w Preferencjach -> Ogólne";
+"alert.beta_channel.title" = "Otrzymuj aktualizację wersj Beta";
 "alert.choose_media_file.title" = "Wybierz plik multimedialny";
 "alert.clear_cache.message" = "Jesteś pewien, że chcesz wyczyścić wszystkie miniatury z pamięci?";
 "alert.clear_cache.success" = "Wyczyszczono pamięć podręczną.";
@@ -21,7 +21,7 @@
 "alert.config.cannot_create" = "Nie można utworzyć pliku konfiguracyjnego!";
 "alert.config.cannot_write" = "Nie można zapisać pliku konfiguracyjnego!";
 "alert.config.duplicate.message" = "Proszę wprowadzić nazwę dla duplikatu pliku konfiguracyjnego.";
-"alert.config.duplicate.title" = "Duplikowanie konfiguracji";
+"alert.config.duplicate.title" = "Zduplikuj konfiguracje";
 "alert.config.empty_name" = "Nazwa nie może być pusta.";
 "alert.config.file_existing.message" = "Coś poszło nie tak. Wybierz OK, aby nadpisać lub Anuluj, aby pokazać plik w Finderze.";
 "alert.config.file_existing.title" = "Plik już istnieje";
@@ -30,7 +30,7 @@
 "alert.config.new.title" = "Nowa konfiguracja wejściowa";
 "alert.delete_history.message" = "Czy na pewno chcesz usunąć zaznaczone pozycje?";
 "alert.delete_history.title" = "Usuń historię odtwarzania";
-"alert.duplicate_config" = "Zduplikuj domyślną konfigurację do nowego pliku, by móc ją edytować.";
+"alert.duplicate_config" = "Zduplikuj domyślną konfigurację do nowego pliku, aby móc ją edytować.";
 "alert.error_deleting_file" = "Nie można usunąć pliku.";
 "alert.error_finding_file" = "Nie odnaleziono %@!";
 "alert.error_loading_script" = "Nie można załadować skryptu %@!";
@@ -91,7 +91,7 @@
 "menu.audio_delay" = "Opóźnienie audio: %.2fs";
 "menu.audio_delay_down" = "Opóźnienie audio -%.1fs";
 "menu.audio_delay_up" = "Opóźnienie audio +%.1fs";
-"menu.exit_fullscreen" = "Opuść tryb pełnoekranowy";
+"menu.exit_screen" = "Opuść tryb pełnoekranowy";
 "menu.exit_pip" = "Wyłącz Obraz-w-obrazie";
 "menu.fullscreen" = "Pełny ekran";
 "menu.pause" = "Pauza";
@@ -207,54 +207,20 @@
 "touchbar.seek" = "Szukaj";
 "touchbar.time" = "Pozycja czasowa";
 "track.none" = "<Brak>";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.success" = "All saved playback progress deleted.";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.title" = "Clear Playback History";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.success" = "Playback history deleted.";
-
-/* FIXME: Using English localization instead */
-"preference.utilities" = "Utilities";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.message" = "Are you sure to delete all playback history?";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
-
-/* FIXME: Using English localization instead */
-"osd.find_online_sub.source" = "from";
-
-/* FIXME: Using English localization instead */
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
-
-/* FIXME: Using English localization instead */
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-
-/* FIXME: Using English localization instead */
-"main.opening_stream" = "Opening stream…";
-
-/* FIXME: Using English localization instead */
-"playlist.total_length_with_selected" = "%@ of %@ selected";
-
-/* FIXME: Using English localization instead */
-"playlist.total_length" = "%@ in total";
-
-/* FIXME: Using English localization instead */
-"pl_menu.browser" = "Open in Browser";
-
-/* FIXME: Using English localization instead */
-"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
-
-/* FIXME: Using English localization instead */
-"pl_menu.copy_url_multi" = "Copy URLs";
-
-/* FIXME: Using English localization instead */
-"pl_menu.copy_url" = "Copy URL";
+"alert.clear_watch_later.success" = "Postęp odtwarzania został wyczyszczony.";
+"alert.clear_watch_later.title" = "Wyczyść zapisany postęp odtwarzania";
+"alert.clear_history.title" = "Wyczyść historię odtwarzania";
+"alert.clear_history.success" = "Historia odtwarzania została wyczyszczona.";
+"preference.utilities" = "Narzędzia";
+"alert.clear_history.message" = "Czy napewno chcesz wyczyścić historę odtwarzania?";
+"alert.clear_watch_later.message" = "Czy napewno chcesz wyczyścić postęp odtwarzania? (dane \"oglądaj później\")?";
+"osd.find_online_sub.source" = "z";
+"preference.key_binding_hint_2" = "Kliknij dwukrotnie na rząd po prawej stronie, aby zmienić przypisany skrót klawiszowy";
+"preference.key_binding_hint_1" = "Aby zmienić skróty klawiszowe klinij \"Zduplikuj konfiguracje\", aby móc ją edytować";
+"main.opening_stream" = "Otwórz strumień…";
+"playlist.total_length_with_selected" = "Zaznaczono %@ z %@";
+"playlist.total_length" = "Całkowity czas %@";
+"pl_menu.browser" = "Otwórz w przeglądarce";
+"touchbar.toggle_pip" = "Włącz/Wyłącz Obraz-w-Obrazie";
+"pl_menu.copy_url_multi" = "Kopiuj adresy URL";
+"pl_menu.copy_url" = "Kopiuj adres URL";

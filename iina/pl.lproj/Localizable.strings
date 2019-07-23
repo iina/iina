@@ -19,9 +19,9 @@
 "alert.clear_cache.title" = "Wyczyść miniatury z pamięci podręcznej";
 "alert.clear_history.message" = "Czy na pewno chcesz usunąć całą historię odtwarzania?";
 "alert.clear_history.title" = "Wyczyść historię odtwarzania";
-"alert.clear_watch_later.message" = "Czy na pewno chcesz usunąć wszystkie postępy odtwarzania (dane "obejrzyj później") ?";
+"alert.clear_watch_later.message" = "Czy na pewno chcesz usunąć wszystkie postępy odtwarzania (dane \"obejrzyj później\") ?";
 "alert.clear_watch_later.title" = "Wyczyść zapisane postępy odtwarzania";
-"alert.config.cannot_create" = "Nie można utworzyć pliku konfiguracyjnego!";
+"alert.config.cannot_create" = "Nie można utworzyć pliku konfiguracyjnego!\n%@";
 "alert.config.cannot_write" = "Nie można zapisać pliku konfiguracyjnego!";
 "alert.config.duplicate.message" = "Proszę wprowadzić nazwę dla duplikatu pliku konfiguracyjnego.";
 "alert.config.duplicate.title" = "Zduplikuj konfiguracje";

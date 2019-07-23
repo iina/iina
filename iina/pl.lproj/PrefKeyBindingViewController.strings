@@ -9,11 +9,17 @@
 /* Class = "NSTableColumn"; headerCell.title = "Action"; ObjectID = "4Bn-MF-dfY"; */
 "4Bn-MF-dfY.headerCell.title" = "Akcja";
 
+/* Class = "NSButtonCell"; title = "Import an existing config file"; ObjectID = "6cO-C0-33g"; */
+"6cO-C0-33g.title" = "Importuj istniejący plik konfiguracyjny";
+
 /* Class = "NSTableColumn"; headerCell.title = "Key"; ObjectID = "JwC-60-7Hp"; */
 "JwC-60-7Hp.headerCell.title" = "Klawisz";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Le4-ai-PiB"; */
 "Le4-ai-PiB.title" = "Box";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "M4N-eg-JA8"; */
+"M4N-eg-JA8.title" = "Etykieta";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "OP1-cS-Hkt"; */
 "OP1-cS-Hkt.title" = "Text Cell";
@@ -41,4 +47,7 @@
 
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "rVW-78-nDm"; */
 "rVW-78-nDm.title" = "Table View Cell";
+
+/* Class = "NSTextFieldCell"; title = "Settings"; ObjectID = "veZ-Si-Hv5"; */
+"veZ-Si-Hv5.title" = "Ustawienia";
 

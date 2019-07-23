@@ -16,8 +16,11 @@
 "alert.beta_channel.title" = "Otrzymuj aktualizację wersj Beta";
 "alert.choose_media_file.title" = "Wybierz plik multimedialny";
 "alert.clear_cache.message" = "Jesteś pewien, że chcesz wyczyścić wszystkie miniatury z pamięci?";
-"alert.clear_cache.success" = "Wyczyszczono pamięć podręczną.";
 "alert.clear_cache.title" = "Wyczyść miniatury z pamięci podręcznej";
+"alert.clear_history.message" = "Czy na pewno chcesz usunąć całą historię odtwarzania?";
+"alert.clear_history.title" = "Wyczyść historię odtwarzania";
+"alert.clear_watch_later.message" = "Czy na pewno chcesz usunąć wszystkie postępy odtwarzania (dane "obejrzyj później") ?";
+"alert.clear_watch_later.title" = "Wyczyść zapisane postępy odtwarzania";
 "alert.config.cannot_create" = "Nie można utworzyć pliku konfiguracyjnego!";
 "alert.config.cannot_write" = "Nie można zapisać pliku konfiguracyjnego!";
 "alert.config.duplicate.message" = "Proszę wprowadzić nazwę dla duplikatu pliku konfiguracyjnego.";
@@ -88,6 +91,7 @@
 "keymapping.message" = "Naciśnij dowolny klawisz, aby zapisać.";
 "keymapping.title" = "Mapowanie klawiszy";
 "main.buffering_indicator" = "Buforowanie… %d%%";
+"main.opening_stream" = "Otwieram strumień...";
 "menu.audio_delay" = "Opóźnienie audio: %.2fs";
 "menu.audio_delay_down" = "Opóźnienie audio -%.1fs";
 "menu.audio_delay_up" = "Opóźnienie audio +%.1fs";
@@ -159,7 +163,10 @@
 "pl_menu.add_file" = "Dodaj plik…";
 "pl_menu.add_sub" = "Dodaj napisy…";
 "pl_menu.add_url" = "Dodaj URL…";
+"pl_menu.browser" = "Owtórz w przeglądarce";
 "pl_menu.clear_playlist" = "Wyczyść playlistę";
+"pl_menu.copy_url" = "Kopiuj adres URL";
+"pl_menu.copy_url_multi" = "Kopiuj adresy URL";
 "pl_menu.delete" = "Przenieś plik do kosza";
 "pl_menu.delete_after_play" = "Przenieś plik do kosza po zakończeniu odtwarzania";
 "pl_menu.delete_after_play_multi" = "Przenieś po odtwarzaniu wybrane pliki do kosza";
@@ -172,10 +179,7 @@
 "pl_menu.reveal_in_finder" = "Pokaż w Finderze";
 "pl_menu.title_multi" = "%d plików";
 "pl_menu.wrong_sub" = "Nie można odczytać formatu napisów";
-"playlist.chapter_cap" = "ROZDZIAŁY";
-"playlist.playlist_cap" = "PLAYLISTA";
 "preference.advanced" = "Zaawansowane";
-"preference.video_audio" = "Kodek";
 "preference.control" = "Kontrola";
 "preference.general" = "Ogólne";
 "preference.keybindings" = "Skróty klawiszowe";
@@ -187,6 +191,8 @@
 "preference.system_media_control" = "Sterowanie odtwarzania klawiszami multimedialnymi";
 "preference.title" = "Preferencje";
 "preference.ui" = "Interfejs";
+"preference.utilities" = "Narzędzia";
+"preference.video_audio" = "Kodek";
 "quicksetting.item_default" = "Domyślne";
 "quicksetting.item_none" = "Brak";
 "subencoding.auto" = "Auto detekcja";
@@ -206,21 +212,13 @@
 "touchbar.rewind" = "Przewijanie do tyłu";
 "touchbar.seek" = "Szukaj";
 "touchbar.time" = "Pozycja czasowa";
+"touchbar.toggle_pip" = "Przełącz tryb Picture-in-Picture";
 "track.none" = "<Brak>";
+
 "alert.clear_watch_later.success" = "Postęp odtwarzania został wyczyszczony.";
-"alert.clear_watch_later.title" = "Wyczyść zapisany postęp odtwarzania";
-"alert.clear_history.title" = "Wyczyść historię odtwarzania";
 "alert.clear_history.success" = "Historia odtwarzania została wyczyszczona.";
-"preference.utilities" = "Narzędzia";
-"alert.clear_history.message" = "Czy napewno chcesz wyczyścić historę odtwarzania?";
-"alert.clear_watch_later.message" = "Czy napewno chcesz wyczyścić postęp odtwarzania? (dane \"oglądaj później\")?";
 "osd.find_online_sub.source" = "z";
 "preference.key_binding_hint_2" = "Kliknij dwukrotnie na rząd po prawej stronie, aby zmienić przypisany skrót klawiszowy";
 "preference.key_binding_hint_1" = "Aby zmienić skróty klawiszowe klinij \"Zduplikuj konfiguracje\", aby móc ją edytować";
-"main.opening_stream" = "Otwórz strumień…";
 "playlist.total_length_with_selected" = "Zaznaczono %@ z %@";
 "playlist.total_length" = "Całkowity czas %@";
-"pl_menu.browser" = "Otwórz w przeglądarce";
-"touchbar.toggle_pip" = "Włącz/Wyłącz Obraz-w-Obrazie";
-"pl_menu.copy_url_multi" = "Kopiuj adresy URL";
-"pl_menu.copy_url" = "Kopiuj adres URL";

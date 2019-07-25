@@ -60,6 +60,9 @@
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Wygaś pozostałe monitory podczas pełnego ekranu";
 
+/* Class = "NSButtonCell"; title = "Switch to "music mode" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
+"KfL-r7-Uav.title" = "Przełącz do trybu muzyki automatycznie po odtworzeniu pliku audio";
+
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Odtwórz następny element automatycznie";
 

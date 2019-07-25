@@ -95,7 +95,7 @@
 "menu.audio_delay" = "Opóźnienie audio: %.2fs";
 "menu.audio_delay_down" = "Opóźnienie audio -%.1fs";
 "menu.audio_delay_up" = "Opóźnienie audio +%.1fs";
-"menu.exit_screen" = "Opuść tryb pełnoekranowy";
+"menu.exit_fullscreen" = "Opuść tryb pełnoekranowy";
 "menu.exit_pip" = "Wyłącz Obraz-w-obrazie";
 "menu.fullscreen" = "Pełny ekran";
 "menu.pause" = "Pauza";
@@ -136,6 +136,7 @@
 "osd.filter_added" = "Dodano filtr: %@";
 "osd.filter_removed" = "Usunięto filtr";
 "osd.find_online_sub" = "Szukanie napisów online…";
+"osd.find_online_sub.source" = "z";
 "osd.mute" = "Wycisz";
 "osd.network_error" = "Błąd sieci";
 "osd.pause" = "Pauza";
@@ -179,9 +180,13 @@
 "pl_menu.reveal_in_finder" = "Pokaż w Finderze";
 "pl_menu.title_multi" = "%d plików";
 "pl_menu.wrong_sub" = "Nie można odczytać formatu napisów";
+"playlist.total_length" = "Całkowity czas %@";
+"playlist.total_length_with_selected" = "Zaznaczono %@ z %@";
 "preference.advanced" = "Zaawansowane";
 "preference.control" = "Kontrola";
 "preference.general" = "Ogólne";
+"preference.key_binding_hint_1" = "Aby zmienić skróty klawiszowe klinij \"Zduplikuj konfiguracje\", aby móc ją edytować";
+"preference.key_binding_hint_2" = "Kliknij dwukrotnie na rząd po prawej stronie, aby zmienić przypisany skrót klawiszowy";
 "preference.keybindings" = "Skróty klawiszowe";
 "preference.logged_in_as" = "Zalogowano jako %@";
 "preference.network" = "Sieć";
@@ -214,11 +219,3 @@
 "touchbar.time" = "Pozycja czasowa";
 "touchbar.toggle_pip" = "Przełącz tryb Picture-in-Picture";
 "track.none" = "<Brak>";
-
-"alert.clear_watch_later.success" = "Postęp odtwarzania został wyczyszczony.";
-"alert.clear_history.success" = "Historia odtwarzania została wyczyszczona.";
-"osd.find_online_sub.source" = "z";
-"preference.key_binding_hint_2" = "Kliknij dwukrotnie na rząd po prawej stronie, aby zmienić przypisany skrót klawiszowy";
-"preference.key_binding_hint_1" = "Aby zmienić skróty klawiszowe klinij \"Zduplikuj konfiguracje\", aby móc ją edytować";
-"playlist.total_length_with_selected" = "Zaznaczono %@ z %@";
-"playlist.total_length" = "Całkowity czas %@";

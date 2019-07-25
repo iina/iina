@@ -138,6 +138,9 @@
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "gkc-qt-sD9"; */
 "gkc-qt-sD9.title" = "Rozmiar:";
 
+/* Class = "NSButtonCell"; title = "Bold"; ObjectID = "hEk-7E-10r"; */
+"hEk-7E-10r.title" = "Wytłuszczenie";
+
 /* Class = "NSBox"; title = "Align"; ObjectID = "kvJ-Tj-KMb"; */
 "kvJ-Tj-KMb.title" = "Wyrównaj";
 
@@ -152,6 +155,9 @@
 
 /* Class = "NSButtonCell"; title = "Choose..."; ObjectID = "nH7-kO-S15"; */
 "nH7-kO-S15.title" = "Wybierz…";
+
+/* Class = "NSButtonCell"; title = "Italic"; ObjectID = "pNF-Fw-QtW"; */
+"pNF-Fw-QtW.title" = "Kursywa";
 
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
 "pRe-wv-VVi.title" = "Margines";

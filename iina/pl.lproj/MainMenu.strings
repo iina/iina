@@ -60,6 +60,12 @@
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
 "6yE-op-DTS.title" = "Przewiń w przód 5s";
 
+/* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "7Bn-Mp-EvJ"; */
+"7Bn-Mp-EvJ.title" = "Transformacje";
+
+/* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "7rG-Yq-EYG"; */
+"7rG-Yq-EYG.title" = "Przestań mówić";
+
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "8Oy-tP-udW"; */
 "8Oy-tP-udW.title" = "Mowa";
 
@@ -261,6 +267,9 @@
 /* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
 "Td7-aD-5lo.title" = "Okno";
 
+/* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "Tue-O7-cei"; */
+"Tue-O7-cei.title" = "Zamień na wielkie litery";
+
 /* Class = "NSMenuItem"; title = "Pause"; ObjectID = "UOE-MJ-8ku"; */
 "UOE-MJ-8ku.title" = "Pauza";
 
@@ -332,6 +341,9 @@
 
 /* Class = "NSMenu"; title = "Chapters"; ObjectID = "d9c-me-L2H"; */
 "d9c-me-L2H.title" = "Rozdział";
+
+/* Class = "NSMenu"; title = "Transformations"; ObjectID = "dBM-BU-5xS"; */
+"dBM-BU-5xS.title" = "Transformacje";
 
 /* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
 "dMs-cI-mzQ.title" = "Plik";
@@ -491,4 +503,7 @@
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "zez-g5-2Pt"; */
 "zez-g5-2Pt.title" = "Zamień na małe litery";
+
+/* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
+"zpw-Ac-F3M.title" = "Zacznij mówić";
 

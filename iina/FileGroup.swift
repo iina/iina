@@ -136,7 +136,7 @@ class FileGroup {
       }
       i += 1
       // if all items have the same name
-      if false == anyProcessed {
+      if !anyProcessed {
         break
       }
     }

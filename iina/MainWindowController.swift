@@ -701,6 +701,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         self.player.togglePause(true)
       }
     })
+
+    player.isWindowLoaded = true
   }
 
   deinit {

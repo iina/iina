@@ -564,7 +564,9 @@ class MPVController: NSObject {
     case MPV_EVENT_SHUTDOWN:
       let quitByMPV = !player.isMpvTerminated
       if quitByMPV {
-        NSApp.terminate(nil)
+        DispatchQueue.main.sync {
+          NSApp.terminate(nil)
+        }
       } else {
         mpv_destroy(mpv)
         mpv = nil
@@ -760,7 +762,7 @@ class MPVController: NSObject {
           player.sendOSD(data ? .pause : .resume)
           player.info.isPaused = data
         }
-        if player.mainWindow.isWindowLoaded {
+        if player.isWindowLoaded {
           if Preference.bool(for: .alwaysFloatOnTop) {
             DispatchQueue.main.async {
               self.player.mainWindow.setWindowFloatingOnTop(!data)
@@ -892,14 +894,14 @@ class MPVController: NSObject {
       player.postNotification(.iinaAFChanged)
 
     case MPVOption.Window.fullscreen:
-      guard player.mainWindow.isWindowLoaded else { break }
+      guard player.isWindowLoaded else { break }
       let fs = getFlag(MPVOption.Window.fullscreen)
       if fs != player.mainWindow.fsState.isFullscreen {
         DispatchQueue.main.async(execute: self.player.mainWindow.toggleWindowFullScreen)
       }
 
     case MPVOption.Window.ontop:
-      guard player.mainWindow.isWindowLoaded else { break }
+      guard player.isWindowLoaded else { break }
       let ontop = getFlag(MPVOption.Window.ontop)
       if ontop != player.mainWindow.isOntop {
         DispatchQueue.main.async {
@@ -909,7 +911,7 @@ class MPVController: NSObject {
       }
 
     case MPVOption.Window.windowScale:
-      guard player.mainWindow.isWindowLoaded else { break }
+      guard player.isWindowLoaded else { break }
       let windowScale = getDouble(MPVOption.Window.windowScale)
       if fabs(windowScale - player.info.cachedWindowScale) > 10e-10 {
         DispatchQueue.main.async {

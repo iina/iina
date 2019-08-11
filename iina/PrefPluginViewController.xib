@@ -20,6 +20,7 @@
                 <outlet property="pluginVersionLabel" destination="XdS-aQ-bSd" id="vvY-SV-EdS"/>
                 <outlet property="pluginWebsiteBtn" destination="xPq-ai-SYY" id="nFi-fF-gJj"/>
                 <outlet property="pluginWebsiteEmailStackView" destination="8Oq-36-bBu" id="LQq-Oa-5Fr"/>
+                <outlet property="segmentControl" destination="304-WM-rM6" id="JOK-lk-Dga"/>
                 <outlet property="tabView" destination="Cly-9N-1cz" id="lkr-NQ-D34"/>
                 <outlet property="tableView" destination="4ST-kN-zXF" id="RRR-s6-IQV"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>

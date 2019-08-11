@@ -18,7 +18,14 @@ import JavaScriptCore
 class JavascriptAPIPreferences: JavascriptAPI, JavascriptAPIPreferencesExportable {
   @objc func get(_ key: String) -> Any? {
     let plugin = pluginInstance.plugin!
-    return plugin.preferences[key, default: plugin.defaultPrefernces[key]!]
+    if let value = plugin.preferences[key] {
+      return value
+    }
+    if let value = plugin.defaultPrefernces[key] {
+      return value
+    }
+    Logger.log("Trying to get preference value for undefined key \(key)", level: .warning, subsystem: pluginInstance.subsystem)
+    return nil
   }
 
   @objc func set(_ key: String, _ value: Any) {

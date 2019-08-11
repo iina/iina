@@ -11,6 +11,8 @@ import JavaScriptCore
 
 @objc protocol JavascriptAPIConsoleExportable: JSExport {
   func log(_ message: JSValue)
+  func warn(_ message: JSValue)
+  func error(_ message: JSValue)
 }
 
 class JavascriptAPIConsole: JavascriptAPI, JavascriptAPIConsoleExportable {

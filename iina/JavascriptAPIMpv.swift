@@ -44,8 +44,12 @@ class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
       player.mpv.setString(property, value.toString())
     } else if value.isBoolean {
       player.mpv.setFlag(property, value.toBool())
+    } else if value.isObject {
+      if let object = value.toObject() {
+        player.mpv.setNode(property, object)
+      }
     } else {
-      throwError(withMessage: "mpv.set only supports numbers, strings and booleans.")
+      throwError(withMessage: "mpv.set only supports numbers, strings, booleans and objects.")
     }
   }
 
@@ -54,8 +58,12 @@ class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
   }
 
   @objc func addHook(_ name: String, _ priority: Int, _ callback: JSValue) {
-    player.mpv.addHook(MPVHook(name), priority: Int32(priority)) {
-      callback.call(withArguments: [])
+    player.mpv.addHook(MPVHook(name), priority: Int32(priority)) { next in
+      let block: @convention(block) () -> Void = { next() }
+      callback.call(withArguments: [JSValue(object: block, in: self.context)!])
+      if callback.forProperty("constructor")?.forProperty("name")?.toString() != "AsyncFunction" {
+        next()
+      }
     }
   }
 }

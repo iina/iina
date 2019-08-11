@@ -520,7 +520,7 @@ class MenuController: NSObject, NSMenuDelegate {
       if index != 0 {
         pluginMenu.addItem(.separator())
       }
-      pluginMenu.addItem(withTitle: plugin.plugin.name)
+      pluginMenu.addItem(withTitle: plugin.plugin.name, enabled: false)
       for item in plugin.menuItems {
         if counter == 10 {
           Logger.log("Please avoid adding too much first-level menu items. IINA will only display the first 10 of them.",

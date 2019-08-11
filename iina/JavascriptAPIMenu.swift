@@ -12,15 +12,20 @@ import JavaScriptCore
 @objc protocol JavascriptAPIMenuExportable: JSExport {
   func item(_ title: String, _ action: JSValue) -> JavascriptPluginMenuItem
   func addItem(_ item: JavascriptPluginMenuItem)
+  func removeAllItems()
 }
 
 class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
-  func item(_ title: String, _ action: JSValue) -> JavascriptPluginMenuItem {
+  @objc func item(_ title: String, _ action: JSValue) -> JavascriptPluginMenuItem {
     return JavascriptPluginMenuItem(title: title, action: action)
   }
 
   @objc func addItem(_ item: JavascriptPluginMenuItem) {
     guard permitted(to: .addMenuItems) else { return }
     self.pluginInstance.menuItems.append(item)
+  }
+
+  @objc func removeAllItems() {
+    self.pluginInstance.menuItems.removeAll()
   }
 }

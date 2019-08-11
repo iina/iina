@@ -25,6 +25,7 @@ fileprivate let no_str = "no"
  */
 fileprivate let MPVLogLevel = "warn"
 
+typealias Hook = (@escaping () -> Void) -> Void
 
 // Global functions
 
@@ -58,7 +59,7 @@ class MPVController: NSObject {
 
   var fileLoaded: Bool = false
 
-  private var hooks: [UInt64: () -> Void] = [:]
+  private var hooks: [UInt64: Hook] = [:]
   private var hookCounter: UInt64 = 1
 
   let observeProperties: [String: mpv_format] = [
@@ -683,9 +684,18 @@ class MPVController: NSObject {
     return parsed
   }
 
+  func setNode(_ name: String, _ value: Any) {
+    guard var node = try? MPVNode.create(value) else {
+      Logger.log("setNode: cannot encode value for \(name)", level: .error)
+      return
+    }
+    mpv_set_property(mpv, name, MPV_FORMAT_NODE, &node)
+    MPVNode.free(node)
+  }
+
   // MARK: - Hooks
 
-  func addHook(_ name: MPVHook, priority: Int32 = 0, hook: @escaping () -> Void) {
+  func addHook(_ name: MPVHook, priority: Int32 = 0, hook: @escaping Hook) {
     mpv_hook_add(mpv, hookCounter, name.rawValue, priority)
     hooks[hookCounter] = hook
     hookCounter += 1
@@ -736,9 +746,10 @@ class MPVController: NSObject {
       let hookEvent = event.pointee.data.bindMemory(to: mpv_event_hook.self, capacity: 1).pointee
       let hookID = hookEvent.id
       if let hook = hooks[userData] {
-        hook()
+        hook {
+          mpv_hook_continue(self.mpv, hookID)
+        }
       }
-      mpv_hook_continue(mpv, hookID)
 
     case MPV_EVENT_PROPERTY_CHANGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
@@ -1141,7 +1152,7 @@ class MPVController: NSObject {
         data = property.data.bindMemory(to: Double.self, capacity: 1).pointee
       case MPV_FORMAT_STRING:
         data = property.data.bindMemory(to: String.self, capacity: 1).pointee
-      default: 
+      default:
         data = 0
       }
       player.events.emit(eventName, data: data)

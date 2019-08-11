@@ -137,7 +137,7 @@ class PlayerCore: NSObject {
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
-  
+
   var isPlaylistVisible: Bool {
     isInMiniPlayer ? miniPlayer.isPlaylistVisible : mainWindow.sideBarStatus == .playlist
   }
@@ -270,7 +270,7 @@ class PlayerCore: NSObject {
       mainWindow.showWindow(nil)
       mainWindow.windowDidOpen()
     }
-    
+
     // Send load file command
     info.fileLoading = true
     info.justOpenedFile = true
@@ -455,11 +455,11 @@ class PlayerCore: NSObject {
   func togglePause(_ set: Bool? = nil) {
     info.isPaused ? resume() : pause()
   }
-  
+
   func pause() {
     mpv.setFlag(MPVOption.PlaybackControl.pause, true)
   }
-  
+
   func resume() {
     // Restart playback when reached EOF
     if mpv.getFlag(MPVProperty.eofReached) {
@@ -1364,9 +1364,10 @@ class PlayerCore: NSObject {
     }
   }
 
-  func sendOSD(_ osd: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil) {
+  func sendOSD(_ osd: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil, external: Bool = false) {
+    // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
     guard mainWindow.loaded && Preference.bool(for: .enableOSD) else { return }
-    if info.disableOSDForFileLoading {
+    if info.disableOSDForFileLoading && !external {
       guard case .fileStart = osd else {
         return
       }

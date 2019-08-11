@@ -33,6 +33,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
 
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
+  @IBOutlet weak var segmentControl: NSSegmentedControl!
   @IBOutlet weak var pluginInfoContentView: NSView!
   @IBOutlet weak var pluginNameLabel: NSTextField!
   @IBOutlet weak var pluginVersionLabel: NSTextField!
@@ -98,9 +99,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
       const inputs = document.querySelectorAll("input[data-pref-key]");
       Array.prototype.forEach.call(inputs, input => {
           const key = input.dataset.prefKey;
-          iina.log(key)
           preferences.get(key, (value) => {
-              iina.log(value)
               input.value = value;
           });
           input.addEventListener("change", () => {
@@ -136,7 +135,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
       if pluginPreferencesWebView == nil {
         createPreferenceView()
       }
-      pluginPreferencesWebView.loadFileURL(prefURL, allowingReadAccessTo: currentPlugin.root)
+      pluginPreferencesWebView.loadFileURL(prefURL, allowingReadAccessTo: Utility.pluginsURL)
       pluginPreferencesViewController.plugin = currentPlugin
     }
   }
@@ -162,6 +161,8 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   }
 
   private func loadPluginPage(_ plugin: JavascriptPlugin) {
+    tabView.selectTabViewItem(at: 0)
+    segmentControl.selectedSegment = 0
     pluginInfoContentView.isHidden = false
     pluginNameLabel.stringValue = plugin.name
     pluginAuthorLabel.stringValue = plugin.authorName
@@ -226,6 +227,16 @@ extension PrefPluginViewController: NSTableViewDelegate, NSTableViewDataSource {
 }
 
 extension PrefPluginViewController: WKNavigationDelegate {
+  func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    guard let url = navigationAction.request.url,
+      let currentPluginPrefPageURL = currentPlugin?.preferencesPageURL,
+      url.absoluteString.starts(with: currentPluginPrefPageURL.absoluteString) else {
+        decisionHandler(.cancel)
+        return
+    }
+    decisionHandler(.allow)
+  }
+
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
     self.pluginPreferencesWebView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
       if complete != nil {

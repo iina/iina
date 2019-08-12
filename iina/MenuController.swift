@@ -522,8 +522,8 @@ class MenuController: NSObject, NSMenuDelegate {
       }
       pluginMenu.addItem(withTitle: plugin.plugin.name, enabled: false)
       for item in plugin.menuItems {
-        if counter == 10 {
-          Logger.log("Please avoid adding too much first-level menu items. IINA will only display the first 10 of them.",
+        if counter == 5 {
+          Logger.log("Please avoid adding too much first-level menu items. IINA will only display the first 5 of them.",
                      level: .warning, subsystem: plugin.subsystem)
           let moreItem = NSMenuItem()
           moreItem.title = "More…"
@@ -542,6 +542,8 @@ class MenuController: NSObject, NSMenuDelegate {
     let menuItem = menu.addItem(withTitle: item.title,
                                 action: #selector(plugin.menuItemAction(_:)), target: plugin,
                                 obj: item.action)
+    menuItem.isEnabled = item.enabled
+    menuItem.state = item.selected ? .on : .off
     if !item.items.isEmpty {
       menuItem.submenu = NSMenu()
       for submenuItem in item.items {

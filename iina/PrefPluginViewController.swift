@@ -97,10 +97,21 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     config.userContentController.addUserScript(WKUserScript(source: """
       const { preferences } = window.iina;
       const inputs = document.querySelectorAll("input[data-pref-key]");
+      const radioNames = new Set();
       Array.prototype.forEach.call(inputs, input => {
-          const key = input.dataset.prefKey;
+        const key = input.dataset.prefKey;
+        const type = input.type;
+        if (type === "radio") {
+          radioNames.add(input.name);
+        } else {
           preferences.get(key, (value) => {
-              input.value = value;
+              if (type === "number") {
+                input.value = parseFloat(value);
+              } else if (type === "checkbox") {
+                input.checked = value;
+              } else {
+                input.value = value;
+              }
           });
           input.addEventListener("change", () => {
               let value = input.value;
@@ -108,9 +119,21 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
                   case "int": value = parseInt(value); break;
                   case "float": value = parseFloat(value); break;
               }
-              preferences.set(key, value);
+              preferences.set(key, input.type === "checkbox" ? !!input.checked : value);
           });
+        }
       });
+      for (const name of radioNames.values()) {
+        const inputs = document.getElementsByName(name);
+        preferences.get(name, (value) => {
+          Array.prototype.forEach.call(inputs, input => {
+            if (input.value === value) input.checked = true;
+            input.addEventListener("change", () => {
+              if (input.checked) preferences.set(name, input.value);
+            });
+          });
+        });
+      }
     """, injectionTime: .atDocumentEnd, forMainFrameOnly: true))
 
     config.userContentController.add(self, name: "iina")
@@ -257,7 +280,12 @@ extension PrefPluginViewController: WKScriptMessageHandler {
     if name == "set" {
       plugin.preferences[prefName] = data[1]
     } else if name == "get" {
-      let value = plugin.preferences[prefName]
+      var value: Any? = nil
+      if let v = plugin.preferences[prefName] {
+        value = v
+      } else if let v = plugin.defaultPrefernces[prefName] {
+        value = v
+      }
       let result: String
       if let value = value {
         if JSONSerialization.isValidJSONObject(value), let json = try? String(data: JSONSerialization.data(withJSONObject: value, options: []), encoding: .utf8) {

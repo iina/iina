@@ -13,6 +13,8 @@ import JavaScriptCore
   var items: [JavascriptPluginMenuItem] { get set }
   var title: String { get set }
   var action: JSValue { get set }
+  var selected: Bool { get set }
+  var enabled: Bool { get set }
 
   func addSubMenuItem(_ item: JavascriptPluginMenuItem)
 }
@@ -21,10 +23,14 @@ class JavascriptPluginMenuItem: NSObject, JavascriptPluginMenuItemExportable {
   var items: [JavascriptPluginMenuItem] = []
   var title: String
   var action: JSValue
+  var selected: Bool
+  var enabled: Bool
 
-  init(title: String, action: JSValue) {
+  init(title: String, action: JSValue, selected: Bool, enabled: Bool) {
     self.title = title
     self.action = action
+    self.selected = selected
+    self.enabled = enabled
   }
 
   func addSubMenuItem(_ item: JavascriptPluginMenuItem) {

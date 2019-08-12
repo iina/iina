@@ -10,14 +10,14 @@ import Foundation
 import JavaScriptCore
 
 @objc protocol JavascriptAPIMenuExportable: JSExport {
-  func item(_ title: String, _ action: JSValue) -> JavascriptPluginMenuItem
+  func item(_ title: String, _ action: JSValue, _ selected: Bool, _ enabled: Bool) -> JavascriptPluginMenuItem
   func addItem(_ item: JavascriptPluginMenuItem)
   func removeAllItems()
 }
 
 class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
-  @objc func item(_ title: String, _ action: JSValue) -> JavascriptPluginMenuItem {
-    return JavascriptPluginMenuItem(title: title, action: action)
+  @objc func item(_ title: String, _ action: JSValue, _ selected: Bool = false, _ enabled: Bool = true) -> JavascriptPluginMenuItem {
+    return JavascriptPluginMenuItem(title: title, action: action, selected: selected, enabled: enabled)
   }
 
   @objc func addItem(_ item: JavascriptPluginMenuItem) {

@@ -348,11 +348,11 @@ class MPVController: NSObject {
     var openGLInitParams = mpv_opengl_init_params(get_proc_address: mpvGetOpenGLFunc,
                                                   get_proc_address_ctx: nil,
                                                   extra_exts: nil)
-    var advanced: CInt = 1
+    // var advanced: CInt = 1
     var params = [
       mpv_render_param(type: MPV_RENDER_PARAM_API_TYPE, data: apiType),
       mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_INIT_PARAMS, data: &openGLInitParams),
-      mpv_render_param(type: MPV_RENDER_PARAM_ADVANCED_CONTROL, data: &advanced),
+      // mpv_render_param(type: MPV_RENDER_PARAM_ADVANCED_CONTROL, data: &advanced),
       mpv_render_param()
     ]
     mpv_render_context_create(&mpvRenderContext, mpv, &params)

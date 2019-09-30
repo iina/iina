@@ -35,6 +35,8 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var editFilterKeyRecordViewLabel: NSTextField!
   @IBOutlet weak var removeButton: NSButton!
 
+  var loaded = false
+
   var filterType: String!
 
   var filters: [MPVFilter] = []
@@ -46,6 +48,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   override func windowDidLoad() {
     super.windowDidLoad()
+    loaded = true
     window?.delegate = self
 
     // title

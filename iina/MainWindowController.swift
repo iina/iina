@@ -107,6 +107,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
    so never need to parse it every time. */
   var cachedGeometry: GeometryDef?
 
+  var loaded: Bool = false
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
   var isResizingSidebar: Bool = false
@@ -573,6 +574,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   override func windowDidLoad() {
 
     super.windowDidLoad()
+    loaded = true
 
     guard let w = self.window else { return }
 
@@ -2119,7 +2121,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func updateBufferIndicatorView() {
-    guard isWindowLoaded else { return }
+    guard loaded else { return }
 
     if player.info.isNetworkResource {
       bufferIndicatorView.isHidden = false

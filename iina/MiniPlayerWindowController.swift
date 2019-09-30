@@ -101,6 +101,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   @IBOutlet weak var volumeLabel: NSTextField!
   @IBOutlet weak var defaultAlbumArt: NSView!
 
+  var loaded = false
   var isOntop = false
   var isPlaylistVisible = false
   var isVideoVisible = true
@@ -120,6 +121,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
 
   override func windowDidLoad() {
     super.windowDidLoad()
+    loaded = true
 
     guard let window = window else { return }
 
@@ -338,12 +340,12 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   // MARK: - Sync UI with playback
 
   func updatePlayButtonState(_ state: NSControl.StateValue) {
-    guard isWindowLoaded else { return }
+    guard loaded else { return }
     playButton.state = state
   }
 
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
-    guard isWindowLoaded else { return }
+    guard loaded else { return }
     guard let duration = player.info.videoDuration, let pos = player.info.videoPosition else {
       Logger.fatal("video info not available")
     }
@@ -383,7 +385,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   }
 
   func updateVolume() {
-    guard isWindowLoaded else { return }
+    guard loaded else { return }
     volumeSlider.doubleValue = player.info.volume
     volumeLabel.intValue = Int32(player.info.volume)
     muteButton.state = player.info.isMuted ? .on : .off

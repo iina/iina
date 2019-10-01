@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,7 +19,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="563" height="342"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="563" height="342"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -30,7 +30,7 @@
                             <constraint firstAttribute="width" constant="200" id="8T5-1l-PW8"/>
                         </constraints>
                         <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" focusRingType="none" usesSingleLineMode="YES" bezelStyle="round" recentsAutosaveName="IINAHistorySearchField" id="k5B-TS-AUl">
-                            <font key="font" metaFont="smallSystem"/>
+                            <font key="font" metaFont="palette"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </searchFieldCell>
@@ -47,19 +47,19 @@
                             <subviews>
                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" autosaveColumns="NO" rowHeight="20" headerView="MiB-ow-W6T" viewBased="YES" indentationPerLevel="16" outlineTableColumn="DIC-tR-R2F" id="6jR-CS-fgx">
                                     <rect key="frame" x="0.0" y="0.0" width="563" height="295"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
                                         <tableColumn identifier="Filename" width="367" minWidth="40" maxWidth="1000" id="DIC-tR-R2F">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="File">
-                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="font" metaFont="palette"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                             </tableHeaderCell>
                                             <textFieldCell key="dataCell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="lyw-91-dHG">
-                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="font" metaFont="palette"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -73,7 +73,7 @@
                                                             <rect key="frame" x="19" y="1" width="348" height="14"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="hAx-fJ-3rD">
-                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <font key="font" metaFont="palette"/>
                                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -114,12 +114,12 @@
                                         </tableColumn>
                                         <tableColumn identifier="Progress" width="107" minWidth="107" maxWidth="3.4028234663852886e+38" id="MJU-JY-7fx">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Progress">
-                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="font" metaFont="palette"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </tableHeaderCell>
                                             <textFieldCell key="dataCell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="kHb-nh-KTm">
-                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="font" metaFont="palette"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -141,7 +141,7 @@
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="NmX-g8-rAb"/>
                                                             </constraints>
                                                             <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="0:00:00" id="cu8-Oe-yca">
-                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <font key="font" metaFont="palette"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -163,12 +163,12 @@
                                         </tableColumn>
                                         <tableColumn identifier="Time" width="73" minWidth="40" maxWidth="1000" id="M7K-6H-OPw">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Played at">
-                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="font" metaFont="palette"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                             </tableHeaderCell>
                                             <textFieldCell key="dataCell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" title="Text Cell" id="amS-Lf-wNT">
-                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="font" metaFont="palette"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -182,7 +182,7 @@
                                                             <rect key="frame" x="0.0" y="1" width="80" height="14"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="00:00 AM" id="z9u-td-fQW">
-                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <font key="font" metaFont="palette"/>
                                                                 <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -220,7 +220,7 @@
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ob0-Up-S1q">
                         <rect key="frame" x="6" y="323" width="56" height="14"/>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Group by:" id="z6c-c4-dgd">
-                            <font key="font" metaFont="smallSystem"/>
+                            <font key="font" metaFont="palette"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -232,7 +232,7 @@
                         </constraints>
                         <popUpButtonCell key="cell" type="roundRect" title="Date" bezelStyle="roundedRect" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="QBO-JS-dNV" id="geF-qk-cXT">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="smallSystem"/>
+                            <font key="font" metaFont="palette"/>
                             <menu key="menu" id="IlO-8S-UTZ">
                                 <items>
                                     <menuItem title="Date" state="on" id="QBO-JS-dNV"/>

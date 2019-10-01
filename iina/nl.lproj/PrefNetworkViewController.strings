@@ -22,7 +22,7 @@
 "9ut-ID-ffZ.title" = "HTTP-proxy:";
 
 /* Class = "NSTextFieldCell"; title = "Format: <key>=<value>[,<key>=<value>[,...]]"; ObjectID = "GBe-wd-tne"; */
-"GBe-wd-tne.title" = "Formaat: <key>=<value>[,<key>=<value>[,...]]";
+"GBe-wd-tne.title" = "Structuur: <key>=<value>[,<key>=<value>[,...]]";
 
 /* Class = "NSTextFieldCell"; title = "Seconds to prefech:"; ObjectID = "J96-32-M9A"; */
 "J96-32-M9A.title" = "Seconden inladen:";
@@ -43,10 +43,10 @@
 "WTb-HK-6vU.title" = "http://";
 
 /* Class = "NSTextFieldCell"; title = "IINA will search youtube-dl in this folder. Restart needed."; ObjectID = "YqE-yV-BvQ"; */
-"YqE-yV-BvQ.title" = "youtube-dl wordt in deze map gezocht. IINA zal opnieuw moeten opstarten.";
+"YqE-yV-BvQ.title" = "IINA zoekt youtube-dl in deze map. Let op: IINA moet opnieuw opstarten voor deze instelling.";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "aNr-lv-K0r"; */
-"aNr-lv-K0r.title" = "Auto";
+"aNr-lv-K0r.title" = "Automatisch";
 
 /* Class = "NSButtonCell"; title = "Enable youtube-dl"; ObjectID = "cyH-Md-FAD"; */
 "cyH-Md-FAD.title" = "Schakel youtube-dl in";
@@ -55,7 +55,7 @@
 "dDD-g3-54w.title" = "Cache buffergrootte (KB):";
 
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
-"eN6-Sk-kUa.title" = "User agent:";
+"eN6-Sk-kUa.title" = "Gebruikersagent:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 100"; ObjectID = "fab-7d-mMQ"; */
 "fab-7d-mMQ.title" = "Standaard: 100";
@@ -73,4 +73,5 @@
 "yrh-Jm-Q4e.title" = "Netwerk:";
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
-"zCD-9d-ziV.title" = "Werkelijke opties:";
+"zCD-9d-ziV.title" = "Ruwe opties:";
+

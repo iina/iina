@@ -4,19 +4,19 @@
 "0aU-O1-R6G.title" = "Assrt API-token:";
 
 /* Class = "NSTextFieldCell"; title = "Online Subtitles:"; ObjectID = "0fB-es-DmV"; */
-"0fB-es-DmV.title" = "Online ondertitels:";
+"0fB-es-DmV.title" = "Online ondertitelingen:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
 "1Tq-5k-o6R.title" = "Boven";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
-"2XY-Un-0Fg.title" = "Positioneer ondertiteling in schermvullende weergave in de letterboxen";
+"2XY-Un-0Fg.title" = "Toon ondertiteling in de zwarte balken van schermvullende weergave";
 
 /* Class = "NSMenuItem"; title = "OpenSubtitles.org"; ObjectID = "39k-VH-tOz"; */
 "39k-VH-tOz.title" = "OpenSubtitles.org";
 
 /* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "strip";
+"3H8-Ei-cTm.title" = "volledig";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
 "4Tb-Yh-PdP.title" = "Positie:";
@@ -28,7 +28,7 @@
 "7YD-rw-eCZ.title" = "Shooter.cn";
 
 /* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
-"7pf-Kb-TNr.title" = "Ondertitels met de volgende tekst in de bestandsnaam krijgen prioriteit:";
+"7pf-Kb-TNr.title" = "Ondertitelingsbestanden met de volgende tekst in de bestandsnaam krijgen prioriteit:";
 
 /* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "8hj-ki-R0h"; */
 "8hj-ki-R0h.title" = "Schaal ondertiteling mee met venstergrootte";
@@ -49,7 +49,7 @@
 "BgE-Kk-MXC.title" = "Schaduw";
 
 /* Class = "NSButtonCell"; title = "Search online subtitles automatically"; ObjectID = "C3p-uP-8u8"; */
-"C3p-uP-8u8.title" = "Zoek automatisch online naar ondertitels";
+"C3p-uP-8u8.title" = "Zoek automatisch online naar ondertiteling";
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
 "C4C-XP-i2S.title" = "Lettertype:";
@@ -70,28 +70,28 @@
 "JZo-4H-owW.title" = "%";
 
 /* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "LiG-iV-AQK"; */
-"LiG-iV-AQK.title" = "Andere:";
+"LiG-iV-AQK.title" = "Overige:";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
-"Luv-2B-9v8.title" = "Scheidt mappen met een dubbele punt (:). Relatieve locaties en wildcards (*) zijn toegestaan.";
+"Luv-2B-9v8.title" = "Voer desgewenst een dubbele-punt-gescheiden lijst van mappen in (:). Gebruik eventueel relatieve locaties en wildcards (*).";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
-"Mk1-sv-QB8.title" = "Voer een kommagescheiden lijst in.";
+"Mk1-sv-QB8.title" = "Voer desgewenst een kommagescheiden lijst in.";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
-"OcF-0z-7qe.title" = "Indien ingeschakeld zullen alle ASS-ondertitels getoond worden met de onderstaande instelling.";
+"OcF-0z-7qe.title" = "Indien ingeschakeld zullen alle ASS-ondertitelingen getoond worden met de onderstaande opties.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
 "Qda-dp-nhg.title" = "Weergave ondertiteling:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
-"QsS-wD-2hY.title" = "Zoek ook op ondertitels in de volgende mappen:";
+"QsS-wD-2hY.title" = "Zoek ook naar ondertiteling in de volgende mappen:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
 "SIh-Sv-6XI.title" = "Kleur:";
 
 /* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "TPK-CJ-HX7"; */
-"TPK-CJ-HX7.title" = "Download ondertitels van:";
+"TPK-CJ-HX7.title" = "Download ondertiteling van:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "Vbl-Im-3UI"; */
 "Vbl-Im-3UI.title" = "Grootte:";
@@ -103,7 +103,7 @@
 "X7X-18-FJg.title" = "Geavanceerd";
 
 /* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "XiL-eE-jah"; */
-"XiL-eE-jah.title" = "IINA detecteert automatisch";
+"XiL-eE-jah.title" = "Automatische detectie";
 
 /* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "Y75-4k-2Du"; */
 "Y75-4k-2Du.title" = "Standaard tekstcodering:";
@@ -130,13 +130,13 @@
 "eYO-c0-Rjp.title" = "Achtergrond:";
 
 /* Class = "NSBox"; title = "Other Styles"; ObjectID = "egf-g3-b7a"; */
-"egf-g3-b7a.title" = "Andere stijlen";
+"egf-g3-b7a.title" = "Overige opties:";
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
-"gAq-Vr-hRY.title" = "Overschrijfniveau:";
+"gAq-Vr-hRY.title" = "Negeren:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "gkc-qt-sD9"; */
-"gkc-qt-sD9.title" = "Grootte:";
+"gkc-qt-sD9.title" = "Dikte:";
 
 /* Class = "NSButtonCell"; title = "Bold"; ObjectID = "hEk-7E-10r"; */
 "hEk-7E-10r.title" = "Vet";
@@ -151,7 +151,7 @@
 "lQt-Cg-6Zd.title" = "Assrt.net";
 
 /* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "mFm-Q6-aja"; */
-"mFm-Q6-aja.title" = "ASS-ondertitels:";
+"mFm-Q6-aja.title" = "ASS-ondertiteling:";
 
 /* Class = "NSButtonCell"; title = "Choose..."; ObjectID = "nH7-kO-S15"; */
 "nH7-kO-S15.title" = "Kies...";
@@ -181,7 +181,7 @@
 "vDc-dw-liI.title" = "Kleur:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "Indien ingeschakeld zoekt IINA automatisch online ondertiteling op voor video's zonder ondertiteling die langer zijn dan 20 minuten.";
+"vYb-qH-XkH.title" = "Indien ingeschakeld zoekt IINA automatisch online naar ondertiteling voor video's langer dan 20 minuten die geen ondertiteling bevatten.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
 "xGf-fF-4Hx.title" = "Y:";
@@ -190,10 +190,10 @@
 "xid-E9-FC9.title" = "Kleur:";
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
-"y1E-JR-KRI.title" = "Ondertitels met bestandsnaam";
+"y1E-JR-KRI.title" = "Dezelfde bestandsnaam";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
-"zaE-bH-XfT.title" = "Voorkeurstaal:";
+"zaE-bH-XfT.title" = "Voorkeurstalen:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
 "zml-kt-LN8.title" = "Links";

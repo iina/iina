@@ -50,7 +50,7 @@
 "alert.filter_hwdec.turn_off" = "Schakel de hardwaredecoder uit";
 "alert.filter_hwdec.use_copy" = "Zet automatisch een gefilterde kopie in";
 "alert.jump_to.message" = "Voer een tijd in. Bijvoorbeeld: 20:35";
-"alert.jump_to.title" = "Spoel terug/vooruit naar…";
+"alert.jump_to.title" = "Spoel terug/door naar...";
 "alert.keybinding_config.error" = "Fout bij het lezen van sneltoetsen-configuratiebestand \"%@\"! De IINA standaardinstellingen worden hersteld. Controleer je configuratie.";
 "alert.mpv_error" = "Interne fout: %@ (%@) bij het instellen van optie %@.";
 "alert.no_video_track" = "Geen videospoor.";
@@ -215,7 +215,7 @@
 "touchbar.prev_video" = "Vorige video";
 "touchbar.remainingTime" = "Resterende tijd";
 "touchbar.rewind" = "Spoel terug";
-"touchbar.seek" = "Spoel terug/vooruit";
+"touchbar.seek" = "Spoel vooruit of terug";
 "touchbar.time" = "Verstreken tijd";
 "touchbar.toggle_pip" = "Schakel beeld in beeld in/uit";
 "track.none" = "<Geen>";

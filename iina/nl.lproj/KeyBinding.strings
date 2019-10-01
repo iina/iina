@@ -9,8 +9,8 @@
 "by" = "met";
 "cmd.ab-loop" = "AB-herhaling";
 "cmd.add" = "Verander";
-"cmd.cycle" = "Cycleer";
-"cmd.cycle-values" = "Cycleer in";
+"cmd.cycle" = "Schakel:";
+"cmd.cycle-values" = "Schakel:";
 "cmd.frame-back-step" = "Vorige frame";
 "cmd.frame-step" = "Volgende frame";
 "cmd.ignore" = "Negeer";
@@ -83,8 +83,8 @@
 "opt.volume" = "Volume";
 "opt.window-scale" = "Vensterschaal";
 "read.add" = "{{property}} {{value}}";
-"read.cycle" = "Cycleer {{property}}{{#dir_down}} naar beneden{{/dir_down}}";
-"read.cycle-values" = "Cycleer {{property}} in ({{{values}}})";
+"read.cycle" = "Schakel: {{property}}{{#dir_down}} naar beneden{{/dir_down}}";
+"read.cycle-values" = "Schakel: {{property}} in ({{{values}}})";
 "read.multiply" = "Vermenigvuldig {{property}} met {{factor}}x";
 "read.seek" = "Ga{{#abs}} naar{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#fwd}}vooruit{{/fwd}}{{#bwd}}terug{{/bwd}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
 "read.set" = "Stel {{property}} in op {{value}}";

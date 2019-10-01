@@ -7,7 +7,7 @@
 "add" = "toenemen";
 "backward" = "terug";
 "by" = "met";
-"cmd.ab-loop" = "A-B herhaling";
+"cmd.ab-loop" = "AB-herhaling";
 "cmd.add" = "Verander";
 "cmd.cycle" = "Cycleer";
 "cmd.cycle-values" = "Cycleer in";
@@ -54,7 +54,7 @@
 "iina.toggle-flip" = "Schakel verticaal spiegelen in of uit";
 "iina.toggle-mirror" = "Schakel horizontaal spiegelen in of uit";
 "iina.toggle-music-mode" = "Schakel muziekmodus in of uit";
-"iina.toggle-pip" = "Schakel beeld in beeld in/uit";
+"iina.toggle-pip" = "Schakel Beeld-in-beeld in/uit";
 "iina.video-panel" = "Videopaneel";
 "in" = "in";
 "minus" = "afnemen";
@@ -79,7 +79,7 @@
 "opt.sub-scale" = "Ondertitelschaal";
 "opt.sub-visibility" = "Ondertitel-zichtbaarheid";
 "opt.video" = "Videospoor";
-"opt.video-aspect" = "Videoresolutie";
+"opt.video-aspect" = "Beeldverhouding";
 "opt.volume" = "Volume";
 "opt.window-scale" = "Vensterschaal";
 "read.add" = "{{property}} {{value}}";

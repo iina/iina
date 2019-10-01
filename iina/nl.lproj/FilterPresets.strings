@@ -20,13 +20,13 @@
 "delogo.x" = "Beginpunt X";
 "delogo.y" = "Beginpunt Y";
 "expand" = "Uitbreiden";
-"expand.aspect" = "Breidt uit naar een beeldverhouding (bv: 4/3)";
-"expand.h" = "Hoogte (standaard: video hoogte)";
-"expand.round" = "Rondt af om deelbaar te maken door deze waarde";
-"expand.w" = "Breedte (standaard: video breedte)";
-"expand.x" = "Beginpunt X (standaard: gecentreerd)";
-"expand.y" = "Beginpunt Y (standaard: gecentreerd)";
-"hflip" = "Spiegelen";
+"expand.aspect" = "Breid uit naar een beeldverhouding (bv. 4:3)";
+"expand.h" = "Hoogte (standaard: videohoogte)";
+"expand.round" = "Rond af om deelbaar te maken door deze waarde";
+"expand.w" = "Breedte (standaard: videobreedte)";
+"expand.x" = "Beginpunt X (standaard: midden)";
+"expand.y" = "Beginpunt Y (standaard: midden)";
+"hflip" = "Horiz. spiegelen";
 "lut3d" = "3D LUT";
 "lut3d.file" = "Bestand";
 "lut3d.interp" = "Interpolatiemodus";
@@ -34,4 +34,4 @@
 "sharpen" = "Verscherpen";
 "sharpen.amount" = "Hoeveelheid";
 "sharpen.msize" = "Matrixgrootte";
-"vflip" = "Omdraaien";
+"vflip" = "Vert. spiegelen";

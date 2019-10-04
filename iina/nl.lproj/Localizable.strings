@@ -87,7 +87,7 @@
 "general.username" = "Gebruikersnaam";
 "hwdec.auto" = "Met Automatisch maakt IINA automatisch gebruik van hardware-acceleratie. Dat levert een hoge prestatie op voor relatief weinig energie. Deze optie biedt geen ondersteuning voor software-gebaseerde videofilters.";
 "hwdec.auto-copy" = "Met Automatisch maakt IINA automatisch gebruik van hardware-acceleratie. Dat levert een hoge prestatie op voor relatief weinig energie. Om software-gebaseerde videofilters te ondersteunen wordt gebruik gemaakt van een voorgefilterde kopie van de video. Deze optie gebruikt daarom dubbel zoveel geheugen.";
-"hwdec.no" = " Zonder Hardware-acceleratie heeft IINA meer energie nodig, en presteert het mogelijk minder optimaal.";
+"hwdec.no" = "Zonder hardware-acceleratie heeft IINA meer energie nodig, en presteert het mogelijk minder optimaal.";
 "keymapping.message" = "Druk op een toets om de opname te starten.";
 "keymapping.title" = "Sneltoetsen";
 "main.buffering_indicator" = "Bufferen... %d%%";

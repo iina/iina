@@ -446,27 +446,18 @@ class Utility {
   }
   
   // MARK: - Number formatters
-  private static let f1: NumberFormatter = {
+  private static var formatter: NumberFormatter = {
     var formatter = NumberFormatter()
     formatter.locale = NSLocale.current
     formatter.numberStyle = .decimal
-    formatter.minimumFractionDigits = 1
-    formatter.maximumFractionDigits = 1
     return formatter
   }()
 
-  private static let f2: NumberFormatter = {
-    var formatter = NumberFormatter()
-    formatter.locale = NSLocale.current
-    formatter.numberStyle = .decimal
-    formatter.minimumFractionDigits = 2
-    formatter.maximumFractionDigits = 2
-    return formatter
-  }()
-  
   static func localizedNumber(_ number: Double, _ decimal: Int) -> String {
     let v = NSNumber(value: number)
-    return (decimal == 1 ? f1 : f2).string(from: v)!
+    formatter.minimumFractionDigits = decimal
+    formatter.maximumFractionDigits = decimal
+    return formatter.string(from: v)!
   }
 
   // MARK: - Util classes

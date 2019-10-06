@@ -697,10 +697,12 @@ class MenuController: NSObject, NSMenuDelegate {
           menuItem.keyEquivalent = kEqv
           menuItem.keyEquivalentModifierMask = kMdf
           if let value = value, let l10nKey = l10nKey {
-            var s = Utility.localizedNumber(abs(value), 2)
-            if s.hasSuffix("0") {
-              s = String(s.dropLast())
+            var decimal = 0
+            let splittedStr = actions.last!.split(separator: ".")
+            if splittedStr.count == 2 {
+              decimal = splittedStr[1].count
             }
+            let s = Utility.localizedNumber(abs(value), decimal)
             menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), s)
             menuItem.representedObject = value
           }

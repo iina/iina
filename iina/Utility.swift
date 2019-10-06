@@ -446,12 +446,6 @@ class Utility {
   }
   
   // MARK: - Number formatters
-  static let f: NumberFormatter = {
-    var formatter = NumberFormatter()
-    formatter.locale = NSLocale.current
-    return formatter
-  }()
-  
   private static let f1: NumberFormatter = {
     var formatter = NumberFormatter()
     formatter.locale = NSLocale.current

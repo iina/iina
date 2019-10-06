@@ -28,18 +28,18 @@
 "osd.pause" = "Pause";
 "osd.resume" = "Resume";
 "osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Aspect Ratio: %@";
 "osd.crop" = "Crop: %@";
 "osd.rotate" = "Rotate: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
 "osd.audio_delay.nodelay" = "Audio Delay: No Delay";
-"osd.audio_delay.later" = "Audio Delay: %.2fs Later";
-"osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
+"osd.audio_delay.later" = "Audio Delay: %@s Later";
+"osd.audio_delay.earlier" = "Audio Delay: %@s Earlier";
 "osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
-"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
-"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
-"osd.subtitle_pos" = "Subtitle Position: %.1f";
+"osd.sub_delay.later" = "Subtitle Delay: %@s Later";
+"osd.sub_delay.earlier" = "Subtitle Delay: %@s Earlier";
+"osd.subtitle_pos" = "Subtitle Position: %@";
 "osd.mute" = "Mute";
 "osd.unmute" = "Unmute";
 "osd.screenshot" = "Screenshot Captured";
@@ -48,7 +48,7 @@
 "osd.abloop.clear" = "AB-Loop: Cleared";
 "osd.stop" = "Stop";
 "osd.chapter" = "Chapter: %@";
-"osd.subtitle_scale" = "Subtitle Scale: %.2fx";
+"osd.subtitle_scale" = "Subtitle Scale: %@x";
 "osd.add_to_playlist" = "Added %i Files to Playlist";
 "osd.clear_playlist" = "Cleared Playlist";
 "osd.video_eq.contrast" = "Contrast: %i";
@@ -56,10 +56,10 @@
 "osd.video_eq.hue" = "Hue: %i";
 "osd.video_eq.saturation" = "Saturation: %i";
 "osd.video_eq.brightness" = "Brightness: %i";
-"osd.find_online_sub" = "Finding online subtitles...";
+"osd.find_online_sub" = "Finding online subtitles⋯";
 "osd.find_online_sub.source" = "from";
 "osd.sub_not_found" = "No subtitles found";
-"osd.sub_found" = "%d subtitles found. Downloading...";
+"osd.sub_found" = "%d subtitles found. Downloading⋯";
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
 "osd.network_error" = "Network error";
@@ -88,26 +88,26 @@
 "preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
 
 "menu.volume"= "Volume: %d";
-"menu.audio_delay" = "Audio Delay: %.2fs";
-"menu.sub_delay" = "Subtitle Delay: %.2fs";
+"menu.audio_delay" = "Audio Delay: %@s";
+"menu.sub_delay" = "Subtitle Delay: %@s";
 "menu.fullscreen" = "Enter Full Screen";
 "menu.exit_fullscreen" = "Exit Full Screen";
 "menu.pip" = "Enter Picture-in-Picture";
 "menu.exit_pip" = "Exit Picture-in-Picture";
 "menu.pause" = "Pause";
 "menu.resume" = "Resume";
-"menu.speed" = "Speed: %.2fx";
+"menu.speed" = "Speed: %@x";
 
 "menu.seek_forward" = "Step Forward %.0fs";
 "menu.seek_backward" = "Step Backward %.0fs";
-"menu.speed_up" = "Speed Up by %.1fx";
-"menu.speed_down" = "Speed Down by %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Volume + %.0f%%";
 "menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Audio Delay + %.1fs";
-"menu.audio_delay_down" = "Audio Delay - %.1fs";
-"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
-"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
+"menu.audio_delay_up" = "Audio Delay + %@s";
+"menu.audio_delay_down" = "Audio Delay - %@s";
+"menu.sub_delay_up" = "Subtitle Delay + %@s";
+"menu.sub_delay_down" = "Subtitle Delay - %@s";
 
 "track.none" = "<None>";
 

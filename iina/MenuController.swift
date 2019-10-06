@@ -436,7 +436,7 @@ class MenuController: NSObject, NSMenuDelegate {
     fileLoop.state = isLoop ? .on : .off
     let isPlaylistLoop = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     playlistLoop.state = (isPlaylistLoop == "inf" || isPlaylistLoop == "force") ? .on : .off
-    speedIndicator.title = String(format: NSLocalizedString("menu.speed", comment: "Speed:"), player.info.playSpeed)
+    speedIndicator.title = String(format: NSLocalizedString("menu.speed", comment: "Speed:"), Utility.localizedNumber(player.info.playSpeed, 2))
   }
 
   private func updateVideoMenu() {
@@ -454,7 +454,7 @@ class MenuController: NSObject, NSMenuDelegate {
   private func updateAudioMenu() {
     let player = PlayerCore.active
     volumeIndicator.title = String(format: NSLocalizedString("menu.volume", comment: "Volume:"), Int(player.info.volume))
-    audioDelayIndicator.title = String(format: NSLocalizedString("menu.audio_delay", comment: "Audio Delay:"), player.info.audioDelay)
+    audioDelayIndicator.title = String(format: NSLocalizedString("menu.audio_delay", comment: "Audio Delay:"), Utility.localizedNumber(player.info.audioDelay, 2))
   }
 
   private func updateAudioDevice() {
@@ -476,7 +476,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateSubMenu() {
     let player = PlayerCore.active
-    subDelayIndicator.title = String(format: NSLocalizedString("menu.sub_delay", comment: "Subtitle Delay:"), player.info.subDelay)
+    subDelayIndicator.title = String(format: NSLocalizedString("menu.sub_delay", comment: "Subtitle Delay:"), Utility.localizedNumber(player.info.subDelay, 2))
 
     let encodingCode = player.info.subEncoding ?? "auto"
     for encoding in AppData.encodings {
@@ -697,7 +697,11 @@ class MenuController: NSObject, NSMenuDelegate {
           menuItem.keyEquivalent = kEqv
           menuItem.keyEquivalentModifierMask = kMdf
           if let value = value, let l10nKey = l10nKey {
-            menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), abs(value))
+            var s = Utility.localizedNumber(abs(value), 2)
+            if s.hasSuffix("0") {
+              s = String(s.dropLast())
+            }
+            menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), s)
             menuItem.representedObject = value
           }
           bound = true

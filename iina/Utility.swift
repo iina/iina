@@ -444,6 +444,36 @@ class Utility {
       return (NSAppearance(named: .vibrantDark), .dark)
     }
   }
+  
+  // MARK: - Number formatters
+  static let f: NumberFormatter = {
+    var formatter = NumberFormatter()
+    formatter.locale = NSLocale.current
+    return formatter
+  }()
+  
+  private static let f1: NumberFormatter = {
+    var formatter = NumberFormatter()
+    formatter.locale = NSLocale.current
+    formatter.numberStyle = .decimal
+    formatter.minimumFractionDigits = 1
+    formatter.maximumFractionDigits = 1
+    return formatter
+  }()
+
+  private static let f2: NumberFormatter = {
+    var formatter = NumberFormatter()
+    formatter.locale = NSLocale.current
+    formatter.numberStyle = .decimal
+    formatter.minimumFractionDigits = 2
+    formatter.maximumFractionDigits = 2
+    return formatter
+  }()
+  
+  static func localizedNumber(_ number: Double, _ decimal: Int) -> String {
+    let v = NSNumber(value: number)
+    return (decimal == 1 ? f1 : f2).string(from: v)!
+  }
 
   // MARK: - Util classes
 

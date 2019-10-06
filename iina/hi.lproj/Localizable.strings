@@ -28,18 +28,18 @@
 "osd.pause" = "रोकें";
 "osd.resume" = "पुनः आरंभ";
 "osd.volume" = "ध्वनि: %i";
-"osd.speed" = "गति: %.2fx";
+"osd.speed" = "गति: %@x";
 "osd.aspect" = "आस्पेक्ट अनुपात: %@";
 "osd.crop" = "क्रॉप: %@";
 "osd.rotate" = "घुमाएँ: %i°";
 "osd.deinterlace" = "डीइंटरलेस: %@";
 "osd.audio_delay.nodelay" = "ऑडियो विलंब: विलंब न करें";
-"osd.audio_delay.later" = "ऑडियो विलंब: %.2fs बाद में";
-"osd.audio_delay.earlier" = "ऑडियो विलंब: %.2fs पूर्व";
+"osd.audio_delay.later" = "ऑडियो विलंब: %@s बाद में";
+"osd.audio_delay.earlier" = "ऑडियो विलंब: %@s पूर्व";
 "osd.sub_delay.nodelay" = "उपशीर्षक देरी: विलंब न करें";
-"osd.sub_delay.later" = "उपशीर्षक देरी: %.2fs बाद में";
-"osd.sub_delay.earlier" = "उपशीर्षक देरी: %.2fs पूर्व";
-"osd.subtitle_pos" = "उपशीर्षक पद: %.1f";
+"osd.sub_delay.later" = "उपशीर्षक देरी: %@s बाद में";
+"osd.sub_delay.earlier" = "उपशीर्षक देरी: %@s पूर्व";
+"osd.subtitle_pos" = "उपशीर्षक पद: %@";
 "osd.mute" = "Mute";
 "osd.unmute" = "Unmute";
 "osd.screenshot" = "स्क्रीनशॉट कैप्चर किया गया";
@@ -48,7 +48,7 @@
 "osd.abloop.clear" = "AB-लूप: साफ़ किया गया";
 "osd.stop" = "रुकें";
 "osd.chapter" = "अध्याय: %@";
-"osd.subtitle_scale" = "उपशीर्षक स्केल: %.2fx";
+"osd.subtitle_scale" = "उपशीर्षक स्केल: %@x";
 "osd.add_to_playlist" = " प्लेलिस्ट में %i फ़ाइलें जोड़ी गईं";
 "osd.clear_playlist" = "क्लीयर प्लेलिस्ट";
 "osd.video_eq.contrast" = "कन्ट्रास्ट: %i";
@@ -56,10 +56,10 @@
 "osd.video_eq.hue" = "रंग: %i";
 "osd.video_eq.saturation" = "संतृप्ति: %i";
 "osd.video_eq.brightness" = "चमक: %i";
-"osd.find_online_sub" = "ऑनलाइन उपशीर्षक ढूँढना...";
+"osd.find_online_sub" = "ऑनलाइन उपशीर्षक ढूँढना⋯";
 "osd.find_online_sub.source" = "from";
 "osd.sub_not_found" = "कोई उपशीर्षक नहीं मिला";
-"osd.sub_found" = "%d  उपशीर्षक मिले। डाउनलोडिंग...";
+"osd.sub_found" = "%d  उपशीर्षक मिले। डाउनलोडिंग⋯";
 "osd.sub_downloaded" = "उपशीर्षक डाउनलोड किया गया";
 "osd.sub_saved" = "उपशीर्षक सहेजा गया";
 "osd.network_error" = "नेटवर्क त्रुटि";
@@ -88,26 +88,26 @@
 "preference.key_binding_hint_2" = "संबंधित कुंजी बंधन को संपादित करने के लिए दाईं ओर एक पंक्ति पर डबल क्लिक करें।";
 
 "menu.volume"= "ध्वनि: %d";
-"menu.audio_delay" = "ऑडियो विलंब: %.2fs";
-"menu.sub_delay" = "उपशीर्षक देरी: %.2fs";
+"menu.audio_delay" = "ऑडियो विलंब: %@s";
+"menu.sub_delay" = "उपशीर्षक देरी: %@s";
 "menu.fullscreen" = "पूर्ण स्क्रीन दर्ज करें";
 "menu.exit_fullscreen" = "पूर्ण स्क्रीन से बाहर निकलें";
 "menu.pip" = "पिक्चर-इन-पिक्चर डालें";
 "menu.exit_pip" = "पिक्चर-इन-पिक्चर से बाहर निकलें";
 "menu.pause" = "रोकें";
 "menu.resume" = "पुनः आरंभ";
-"menu.speed" = "गति: %.2fx";
+"menu.speed" = "गति: %@x";
 
 "menu.seek_forward" = "आगे कदम %.0fs";
 "menu.seek_backward" = "पीछे जाओ %.0fs";
-"menu.speed_up" = "%.1fx तक स्पीड";
-"menu.speed_down" = "गति %.1fx करने के लिए नीचे";
+"menu.speed_up" = "%@x तक स्पीड";
+"menu.speed_down" = "गति %@x करने के लिए नीचे";
 "menu.volume_up" = "ध्वनि + %.0f%%";
 "menu.volume_down" = "ध्वनि - %.0f%%";
-"menu.audio_delay_up" = "ऑडियो विलंब + %.1fs";
-"menu.audio_delay_down" = "ऑडियो विलंब - %.1fs";
-"menu.sub_delay_up" = "उपशीर्षक देरी + %.1fs";
-"menu.sub_delay_down" = "उपशीर्षक देरी - %.1fs";
+"menu.audio_delay_up" = "ऑडियो विलंब + %@s";
+"menu.audio_delay_down" = "ऑडियो विलंब - %@s";
+"menu.sub_delay_up" = "उपशीर्षक देरी + %@s";
+"menu.sub_delay_down" = "उपशीर्षक देरी - %@s";
 
 "track.none" = "<कोई नहीं>";
 

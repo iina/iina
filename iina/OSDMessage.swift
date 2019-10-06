@@ -94,7 +94,7 @@ enum OSDMessage {
 
     case .speed(let value):
       return (
-        String(format: NSLocalizedString("osd.speed", comment: "Speed: %.2fx"), value),
+        String(format: NSLocalizedString("osd.speed", comment: "Speed: %@x"), Utility.localizedNumber(value, 2)),
         .normal
       )
 
@@ -135,7 +135,8 @@ enum OSDMessage {
           .withProgress(0.5)
         )
       } else {
-        let str = value > 0 ? String(format: NSLocalizedString("osd.audio_delay.later", comment: "Audio Delay: %fs Later"),abs(value)) : String(format: NSLocalizedString("osd.audio_delay.earlier", comment: "Audio Delay: %fs Earlier"), abs(value))
+        let s = Utility.localizedNumber(abs(value), 2)
+        let str = value > 0 ? String(format: NSLocalizedString("osd.audio_delay.later", comment: "Audio Delay: %@s Later"), s) : String(format: NSLocalizedString("osd.audio_delay.earlier", comment: "Audio Delay: %@s Earlier"), s)
         return (str, .withProgress(toPercent(value, 10)))
       }
 
@@ -146,13 +147,14 @@ enum OSDMessage {
           .withProgress(0.5)
         )
       } else {
-        let str = value > 0 ? String(format: NSLocalizedString("osd.sub_delay.later", comment: "Subtitle Delay: %fs Later"),abs(value)) : String(format: NSLocalizedString("osd.sub_delay.earlier", comment: "Subtitle Delay: %fs Earlier"), abs(value))
+        let s = Utility.localizedNumber(abs(value), 2)
+        let str = value > 0 ? String(format: NSLocalizedString("osd.sub_delay.later", comment: "Subtitle Delay: %@s Later"), s) : String(format: NSLocalizedString("osd.sub_delay.earlier", comment: "Subtitle Delay: %@s Earlier"), s)
         return (str, .withProgress(toPercent(value, 10)))
       }
 
     case .subPos(let value):
       return (
-        String(format: NSLocalizedString("osd.subtitle_pos", comment: "Subtitle Position: %f"), value),
+        String(format: NSLocalizedString("osd.subtitle_pos", comment: "Subtitle Position: %f"), Utility.localizedNumber(value, 1)),
         .withProgress(value / 100)
       )
 
@@ -195,7 +197,7 @@ enum OSDMessage {
 
     case .subScale(let value):
       return (
-        String(format: NSLocalizedString("osd.subtitle_scale", comment: "Subtitle Scale: %.2fx"), value),
+        String(format: NSLocalizedString("osd.subtitle_scale", comment: "Subtitle Scale: %@x"), Utility.localizedNumber(value, 2)),
         .normal
       )
 
@@ -252,14 +254,14 @@ enum OSDMessage {
 
     case .startFindingSub(let source):
       return (
-        NSLocalizedString("osd.find_online_sub", comment: "Finding online subtitles..."),
+        NSLocalizedString("osd.find_online_sub", comment: "Finding online subtitles⋯"),
         .withText(NSLocalizedString("osd.find_online_sub.source", comment: "from") + " " + source)
       )
 
     case .foundSub(let count):
       let str = count == 0 ?
         NSLocalizedString("osd.sub_not_found", comment: "No subtitles found.") :
-        String(format: NSLocalizedString("osd.sub_found", comment: "%d subtitle(s) found. Downloading..."), count)
+        String(format: NSLocalizedString("osd.sub_found", comment: "%d subtitle(s) found. Downloading⋯"), count)
       return (str, .normal)
 
     case .downloadedSub(let filename):

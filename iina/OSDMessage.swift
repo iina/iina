@@ -154,7 +154,7 @@ enum OSDMessage {
 
     case .subPos(let value):
       return (
-        String(format: NSLocalizedString("osd.subtitle_pos", comment: "Subtitle Position: %f"), Utility.localizedNumber(value, 1)),
+        String(format: NSLocalizedString("osd.subtitle_pos", comment: "Subtitle Position: %@"), Utility.localizedNumber(value, 1)),
         .withProgress(value / 100)
       )
 

@@ -446,10 +446,22 @@ class MPVController: NSObject {
     mpv_get_property(mpv, name, MPV_FORMAT_INT64, &data)
     return Int(data)
   }
+  
+  func getIntOpt(_ name: String) -> Int? {
+    var data = Int64()
+    guard mpv_get_property(mpv, name, MPV_FORMAT_INT64, &data) >= 0 else { return nil }
+    return Int(data)
+  }
 
   func getDouble(_ name: String) -> Double {
     var data = Double()
     mpv_get_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
+    return data
+  }
+  
+  func getDoubleOpt(_ name: String) -> Double? {
+    var data = Double()
+    guard mpv_get_property(mpv, name, MPV_FORMAT_DOUBLE, &data) >= 0 else { return nil }
     return data
   }
 

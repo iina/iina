@@ -450,14 +450,28 @@ class Utility {
     var formatter = NumberFormatter()
     formatter.locale = NSLocale.current
     formatter.numberStyle = .decimal
+    formatter.minimumFractionDigits = 0
     return formatter
   }()
 
   static func localizedNumber(_ number: Double, _ decimal: Int) -> String {
     let v = NSNumber(value: number)
-    formatter.minimumFractionDigits = decimal
-    formatter.maximumFractionDigits = decimal
+    formatter.maximumFractionDigits = decimal == -1 ? 20 : decimal
     return formatter.string(from: v)!
+  }
+  
+  static func localizedNumber(_ number: Int) -> String {
+    return localizedNumber(Double(number), 0)
+  }
+  
+  static func localizedNumberOpt(_ number: Double?, _ decimal: Int) -> String? {
+    guard let number = number else { return nil }
+    return localizedNumber(number, decimal)
+  }
+  
+  static func localizedNumberOpt(_ number: Int?) -> String? {
+    guard let number = number else { return nil }
+    return localizedNumber(number)
   }
 
   // MARK: - Util classes

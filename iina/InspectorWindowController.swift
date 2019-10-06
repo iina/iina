@@ -93,6 +93,22 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
       NotificationCenter.default.removeObserver(self)
     }
   }
+  
+  private func updateLables(_ properties: [(String, NSTextField)], _ controller: MPVController) {
+    for (k, v) in properties {
+      let value = controller.getString(k)
+      v.stringValue = value ?? "N/A"
+      self.setLabelColor(v, by: value != nil)
+    }
+  }
+  
+  private func updateLables(_ properties: [(String, NSTextField, Int)], _ controller: MPVController) {
+    for (k, v, d) in properties {
+      let value = controller.getDoubleOpt(k)
+      v.stringValue = Utility.localizedNumberOpt(value, d) ?? "N/A"
+      self.setLabelColor(v, by: value != nil)
+    }
+  }
 
   func updateInfo(dynamic: Bool = false) {
     let controller = PlayerCore.lastActive.mpv!
@@ -102,32 +118,30 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
       if !dynamic {
 
-        // string properties
+        // string & number properties
 
-        let strProperties: [String: NSTextField] = [
-          MPVProperty.path: self.pathField,
-          MPVProperty.fileFormat: self.fileFormatField,
-          MPVProperty.chapters: self.chaptersField,
-          MPVProperty.editions: self.editionsField,
-
-          MPVProperty.videoFormat: self.vformatField,
-          MPVProperty.videoCodec: self.vcodecField,
-          MPVProperty.hwdecCurrent: self.vdecoderField,
-          MPVProperty.containerFps: self.vfpsField,
-          MPVProperty.currentVo: self.voField,
-          MPVProperty.audioCodec: self.acodecField,
-          MPVProperty.currentAo: self.aoField,
-          MPVProperty.audioParamsFormat: self.aformatField,
-          MPVProperty.audioParamsChannels: self.achannelsField,
-          MPVProperty.audioBitrate: self.abitrateField,
-          MPVProperty.audioParamsSamplerate: self.asamplerateField
+        let strProperties: [(String, NSTextField)] = [
+          (MPVProperty.path, self.pathField),
+          (MPVProperty.fileFormat, self.fileFormatField),
+          (MPVProperty.videoFormat, self.vformatField),
+          (MPVProperty.videoCodec, self.vcodecField),
+          (MPVProperty.hwdecCurrent, self.vdecoderField),
+          (MPVProperty.currentVo, self.voField),
+          (MPVProperty.audioCodec, self.acodecField),
+          (MPVProperty.currentAo, self.aoField),
+          (MPVProperty.audioParamsFormat, self.aformatField),
+          (MPVProperty.audioParamsChannels, self.achannelsField),
         ]
 
-        for (k, v) in strProperties {
-          let value = controller.getString(k)
-          v.stringValue = value ?? "N/A"
-          self.setLabelColor(v, by: value != nil)
-        }
+        let numberProperties: [(String, NSTextField, Int)] = [
+          (MPVProperty.containerFps, self.vfpsField, 6),
+          (MPVProperty.audioParamsSamplerate, self.asamplerateField, 0),
+          (MPVProperty.chapters, self.chaptersField, 0),
+          (MPVProperty.editions, self.editionsField, 0),
+        ]
+
+        self.updateLables(strProperties, controller)
+        self.updateLables(numberProperties, controller)
 
         // other properties
 
@@ -176,21 +190,17 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
       let abitrate = controller.getInt(MPVProperty.audioBitrate)
       self.abitrateField.stringValue = FloatingPointByteCountFormatter.string(fromByteCount: abitrate) + "bps"
 
-      let dynamicStrProperties: [String: NSTextField] = [
-        MPVProperty.avsync: self.avsyncField,
-        MPVProperty.totalAvsyncChange: self.totalAvsyncField,
-        MPVProperty.frameDropCount: self.droppedFramesField,
-        MPVProperty.mistimedFrameCount: self.mistimedFramesField,
-        MPVProperty.displayFps: self.displayFPSField,
-        MPVProperty.estimatedVfFps: self.voFPSField,
-        MPVProperty.estimatedDisplayFps: self.edispFPSField
+      let dynamicProperties: [(String, NSTextField, Int)] = [
+        (MPVProperty.avsync, self.avsyncField, 6),
+        (MPVProperty.totalAvsyncChange, self.totalAvsyncField, 6),
+        (MPVProperty.frameDropCount, self.droppedFramesField, 0),
+        (MPVProperty.mistimedFrameCount, self.mistimedFramesField, 0),
+        (MPVProperty.displayFps, self.displayFPSField, 6),
+        (MPVProperty.estimatedVfFps, self.voFPSField, 6),
+        (MPVProperty.estimatedDisplayFps, self.edispFPSField, 6)
       ]
 
-      for (k, v) in dynamicStrProperties {
-        let value = controller.getString(k)
-        v.stringValue = value ?? "N/A"
-        self.setLabelColor(v, by: value != nil)
-      }
+      self.updateLables(dynamicProperties, controller)
     }
   }
 
@@ -219,9 +229,9 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
       (track.externalFilename, trackFilePathField),
       (track.codec, trackCodecField),
       (track.decoderDesc, trackDecoderField),
-      (track.demuxFps?.description, trackFPSField),
+      (Utility.localizedNumberOpt(track.demuxFps, -1), trackFPSField),
       (track.demuxChannels, trackChannelsField),
-      (track.demuxSamplerate?.description, trackSampleRateField)
+      (Utility.localizedNumberOpt(track.demuxSamplerate), trackSampleRateField)
     ]
 
     for (str, field) in strProperties {

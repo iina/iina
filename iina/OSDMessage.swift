@@ -254,14 +254,14 @@ enum OSDMessage {
 
     case .startFindingSub(let source):
       return (
-        NSLocalizedString("osd.find_online_sub", comment: "Finding online subtitles⋯"),
+        NSLocalizedString("osd.find_online_sub", comment: "Finding online subtitles…"),
         .withText(NSLocalizedString("osd.find_online_sub.source", comment: "from") + " " + source)
       )
 
     case .foundSub(let count):
       let str = count == 0 ?
         NSLocalizedString("osd.sub_not_found", comment: "No subtitles found.") :
-        String(format: NSLocalizedString("osd.sub_found", comment: "%d subtitle(s) found. Downloading⋯"), count)
+        String(format: NSLocalizedString("osd.sub_found", comment: "%d subtitle(s) found. Downloading…"), count)
       return (str, .normal)
 
     case .downloadedSub(let filename):

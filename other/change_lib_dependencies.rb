@@ -22,7 +22,7 @@ class DylibFile
   end
 
   def parse_otool_L_output!
-    stdout, stderr, status = Open3.capture3("otool -L #{path}")
+    stdout, stderr, status = Open3.capture3("otool -L \"#{path}\"")
     abort(stderr) unless status.success?
     libs = stdout.split("\n")
     libs.shift # first line is the filename

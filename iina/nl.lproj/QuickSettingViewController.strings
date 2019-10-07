@@ -34,7 +34,7 @@
 "7su-au-nwq.title" = "5";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
-"8Ax-5X-osl.title" = "Laad extern audio spoor…";
+"8Ax-5X-osl.title" = "Laad extern audiospoor…";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "9ss-EF-bby"; */
 "9ss-EF-bby.title" = "Text Cell";
@@ -43,7 +43,7 @@
 "AB5-UZ-euc.ibShadowedLabels[0]" = "Laad ondertiteling…";
 
 /* Class = "NSTextFieldCell"; title = "Audio delay:"; ObjectID = "AKs-VQ-fKF"; */
-"AKs-VQ-fKF.title" = "Audio vertraging:";
+"AKs-VQ-fKF.title" = "Audiovertraging:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "ANn-CR-JOV"; */
 "ANn-CR-JOV.title" = "Kleur:";
@@ -106,7 +106,7 @@
 "LEZ-fv-buL.title" = "0s";
 
 /* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
-"Lnu-kz-cql.title" = "Extern geluid:";
+"Lnu-kz-cql.title" = "Extern audiospoor:";
 
 /* Class = "NSTextFieldCell"; title = "-12 dB"; ObjectID = "Lpw-ws-Ezh"; */
 "Lpw-ws-Ezh.title" = "-12 dB";
@@ -160,7 +160,7 @@
 "TXm-bA-7y3.title" = "Deinterlace";
 
 /* Class = "NSTextFieldCell"; title = "Video track:"; ObjectID = "VzC-tM-KT7"; */
-"VzC-tM-KT7.title" = "Video spoor:";
+"VzC-tM-KT7.title" = "Videospoor:";
 
 /* Class = "NSTextFieldCell"; title = "x"; ObjectID = "W7H-mU-v3D"; */
 "W7H-mU-v3D.title" = "x";
@@ -169,10 +169,10 @@
 "Wbx-Ti-qiS.title" = "Schaal:";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle delay:"; ObjectID = "Wkz-wW-sOM"; */
-"Wkz-wW-sOM.title" = "Ondertitel vertraging:";
+"Wkz-wW-sOM.title" = "Ondertitelingvertraging:";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "Xez-sb-mfB"; */
-"Xez-sb-mfB.title" = "Beeld";
+"Xez-sb-mfB.title" = "Pas beeld aan";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "YCG-xK-eAs"; */
 "YCG-xK-eAs.title" = "-5s";
@@ -367,13 +367,13 @@
 "vFD-HU-RVz.title" = "Pas aan…";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
-"wBD-pZ-Bvu.title" = "Ondertitelstijlen kunnen fouten geven in de ASS-weergave, en afhankelijk van het type ondertiteling zullen sommige worden uitgeschakeld.";
+"wBD-pZ-Bvu.title" = "Stijlopties kunnen fouten opleveren bij de weergave van ASS-ondertiteling. Bij sommige soorten ondertiteling zullen enkele opties niet worden meegenomen.";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "wgA-op-JP4"; */
 "wgA-op-JP4.title" = "0s";
 
 /* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
-"x39-62-7KC.title" = "Audio spoor:";
+"x39-62-7KC.title" = "Audiospoor:";
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
 "xfX-wr-DTJ.title" = "+5s";
@@ -395,3 +395,4 @@
 
 /* Class = "NSMenuItem"; title = "35"; ObjectID = "zcb-7y-OVG"; */
 "zcb-7y-OVG.title" = "35";
+

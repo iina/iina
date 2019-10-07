@@ -103,7 +103,6 @@ class MPVTrack: NSObject {
         }
         if let fps = self.demuxFps {
           components.append("\(Utility.localizedNumber(fps, 3))fps")
-          // components.append("\(fps.prettyFormat())fps")
         }
       case .audio:
         if let ch = self.demuxChannelCount {
@@ -111,7 +110,6 @@ class MPVTrack: NSObject {
         }
         if let sr = self.demuxSamplerate {
           components.append("\(Utility.localizedNumber((Double(sr) / 1000), 3))kHz")
-          // components.append("\((Double(sr)/1000).prettyFormat())kHz")
         }
       default:
         break

@@ -236,17 +236,6 @@ extension CGFloat {
   }
 }
 
-extension Double {
-  func prettyFormat() -> String {
-    let rounded = (self * 1000).rounded() / 1000
-    if rounded.truncatingRemainder(dividingBy: 1) == 0 {
-      return "\(Int(rounded))"
-    } else {
-      return "\(rounded)"
-    }
-  }
-}
-
 extension Comparable {
   func clamped(to range: ClosedRange<Self>) -> Self {
     if self < range.lowerBound {

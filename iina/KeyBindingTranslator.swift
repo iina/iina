@@ -69,6 +69,12 @@ class KeyBindingTranslator {
           data[part] = commands[at: index]
         }
       }
+      // localize numbers
+      for (key, value) in data {
+        if let localized = Utility.localizedNumberOpt(Double(value), 3) {
+          data[key] = localized
+        }
+      }
       // add translation for property
       if let opt = data["property"], let optTranslation = l10nDic["opt." + opt] {
         data["property"] = optTranslation
@@ -113,6 +119,7 @@ class KeyBindingTranslator {
     if let translationForCmd = l10nDic["cmd." + cmd] {
       commands[0] = translationForCmd
     }
+    commands = commands.map { Utility.localizedNumberOpt(Double($0), 3) ?? $0 }
     return commands.joined(separator: " ")
   }
 
@@ -135,7 +142,7 @@ class KeyBindingTranslator {
         if sign == "minus" {
           doubleValue = -doubleValue
         }
-        mapped.append(doubleValue.prettyFormat())
+        mapped.append(Utility.localizedNumber(doubleValue, 3))
       } else {
         mapped.removeLast()
       }
@@ -152,7 +159,7 @@ class KeyBindingTranslator {
         if mapped[1] == "backward" {
           doubleValue = -doubleValue
         }
-        mapped[2] = doubleValue.prettyFormat()
+        mapped[2] = Utility.localizedNumber(doubleValue, 3)
       }
       mapped.remove(at: 1)
     }

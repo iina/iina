@@ -72,7 +72,6 @@ struct Logger {
     logFileHandle.closeFile()
   }
 
-  @inline(__always)
   static func log(_ message: String, level: Level = .debug, subsystem: Subsystem = .general, appendNewlineAtTheEnd: Bool = true) {
     #if !DEBUG
     guard enabled else { return }

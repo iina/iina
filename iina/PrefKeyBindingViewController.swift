@@ -124,7 +124,8 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     panel.informativeText = NSLocalizedString("keymapping.message", comment: "Press any key to record.")
     panel.accessoryView = keyRecordViewController.view
     panel.window.initialFirstResponder = keyRecordViewController.keyRecordView
-    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    let okButton = panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    okButton.cell!.bind(.enabled, to: keyRecordViewController, withKeyPath: "ready", options: nil)
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.beginSheetModal(for: view.window!) { respond in
       if respond == .alertFirstButtonReturn {

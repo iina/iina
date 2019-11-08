@@ -3,6 +3,9 @@
 /* Class = "NSTextFieldCell"; title = "▶︎"; ObjectID = "4yj-cg-fli"; */
 "4yj-cg-fli.title" = "▶︎";
 
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "6J7-iM-V5h"; */
+"6J7-iM-V5h.title" = "Etiket";
+
 /* Class = "NSMenuItem"; title = "Add File…"; ObjectID = "CI2-Gm-j4o"; */
 "CI2-Gm-j4o.title" = "Dosya Ekle...";
 
@@ -17,6 +20,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "QFT-Lq-egc"; */
 "QFT-Lq-egc.title" = "Text Cell";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Folded common prefix"; ObjectID = "U4W-Xv-hkh"; */
+"U4W-Xv-hkh.ibShadowedToolTip" = "Karlanmış ortak önek";
 
 /* Class = "NSTabViewItem"; label = "Chapters"; ObjectID = "aaR-kR-im0"; */
 "aaR-kR-im0.label" = "Bölümler";
@@ -44,6 +50,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Chapter Title"; ObjectID = "vmJ-Ry-xgK"; */
 "vmJ-Ry-xgK.title" = "Bölüm Başlığı";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "zbw-ad-lgl"; */
+"zbw-ad-lgl.title" = "Etiket";
 
 /* Class = "NSMenuItem"; title = "Add URL…"; ObjectID = "zeJ-cr-tRg"; */
 "zeJ-cr-tRg.title" = "URL Ekle...";

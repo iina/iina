@@ -16,8 +16,11 @@
 "alert.beta_channel.title" = "Beta Sürümler için Güncellemeleri Al";
 "alert.choose_media_file.title" = "Medya Dosyası Seç";
 "alert.clear_cache.message" = "Küçük resim önbelleğini silmek istediğinizden emin misiniz?";
-"alert.clear_cache.success" = "Önbellek temizlendi.";
 "alert.clear_cache.title" = "Küçük Resim Önbelleğini Temizle";
+"alert.clear_history.message" = "Tüm oynatma geçmişi silinecek emin misin?";
+"alert.clear_history.title" = "Oynatma Geçmişini Temizle";
+"alert.clear_watch_later.message" = "Kayıtlı tüm oynatma ilerlemesi silinecek emin misiniz (\"daha sonra izleyin\" verisi)?";
+"alert.clear_watch_later.title" = "Kayıtlı Oynatma İşlemlerini Temizle";
 "alert.config.cannot_create" = "Yapılandırma (config file) dosyası oluşturulamıyor!";
 "alert.config.cannot_write" = "Yapılandırma dosyasına yazılamıyor!";
 "alert.config.duplicate.message" = "Lütfen çoğaltılan yapılandırma dosyası için bir ad girin.";
@@ -88,6 +91,7 @@
 "keymapping.message" = "Kaydetmek için herhangi bir tuşa basın.";
 "keymapping.title" = "Klavye Kestirmeleri";
 "main.buffering_indicator" = "Ara belleğe alınıyor... %d%%";
+"main.opening_stream" = "Akış açılıyor...";
 "menu.audio_delay" = "Ses Gecikmesi: %.2fs";
 "menu.audio_delay_down" = "Ses Gecikmesi - %.1fs";
 "menu.audio_delay_up" = "Ses Gecikmesi + %.1fs";
@@ -132,6 +136,7 @@
 "osd.filter_added" = "Eklenen filtre: %@";
 "osd.filter_removed" = "Filtre kaldırıldı";
 "osd.find_online_sub" = "Çevrimiçi altyazılar bulunuyor...";
+"osd.find_online_sub.source" = "dan";
 "osd.mute" = "Ses Kapalı";
 "osd.network_error" = "Ağ hatası";
 "osd.pause" = "Duraklatıldı";
@@ -159,7 +164,10 @@
 "pl_menu.add_file" = "Dosya Ekle";
 "pl_menu.add_sub" = "Altyazı ekle...";
 "pl_menu.add_url" = "Internet Adresi (URL) Ekle...";
+"pl_menu.browser" = "Tarayıcıda aç";
 "pl_menu.clear_playlist" = "Oynatma Listesini Temizle";
+"pl_menu.copy_url" = "URL'yi kopyala";
+"pl_menu.copy_url_multi" = "URL'leri kopyala";
 "pl_menu.delete" = "Çöp Kutusuna Taşı";
 "pl_menu.delete_after_play" = "Oynatma İşleminden Sonra Çöp Kutusuna Taşı";
 "pl_menu.delete_after_play_multi" = "Seçilen Dosyaları Oynatma İşleminden Sonra Çöp Kutusuna Taşı";
@@ -172,12 +180,13 @@
 "pl_menu.reveal_in_finder" = "Finder'da göster";
 "pl_menu.title_multi" = "%d Öğe";
 "pl_menu.wrong_sub" = "Yanlış Altyazı!";
-"playlist.chapter_cap" = "BÖLÜMLER";
-"playlist.playlist_cap" = "OYNATMA LİSTESİ";
+"playlist.total_length" = "toplamda %@";
+"playlist.total_length_with_selected" = "%@ of %@ seçildi";
 "preference.advanced" = "Gelişmiş";
-"preference.video_audio" = "Çözücü";
 "preference.control" = "Kontrol";
 "preference.general" = "Genel";
+"preference.key_binding_hint_1" = "Geçerli yapılandırma dosyasındaki kestirmeleri düzenlemek için, önce \"Çoğalt ...\" düğmesine tıklayarak kopya oluşturun.";
+"preference.key_binding_hint_2" = "İlgili kestirmeyi düzenlemek için sağ taraftaki bir satırı çift tıklayın.";
 "preference.keybindings" = "Kestirmeler";
 "preference.logged_in_as" = "%@ olarak giriş yapıldı";
 "preference.network" = "Ağ";
@@ -187,9 +196,13 @@
 "preference.system_media_control" = "Sistem medya kontrol tuşlarını kullan";
 "preference.title" = "Tercihler";
 "preference.ui" = "Arayüz";
+"preference.utilities" = "Araçlar";
+"preference.video_audio" = "Çözücü";
 "quicksetting.item_default" = "Varsayılan";
 "quicksetting.item_none" = "Hiçbiri";
 "subencoding.auto" = "Otomatik belirle";
+"subtrack.no_external" = "Harici Altyazı Bulunamadı";
+"subtrack.no_loaded" = "Yüklenmiş Altyazı Yok";
 "touchbar.ahead_15" = "15sn ileriye";
 "touchbar.ahead_30" = "30sn ileriye";
 "touchbar.back_15" = "15sn geriye";
@@ -204,61 +217,5 @@
 "touchbar.rewind" = "Geriye Sar";
 "touchbar.seek" = "Sar";
 "touchbar.time" = "Zaman Pozisyonu";
+"touchbar.toggle_pip" = "Resim-İçinde-Resim'e Geç";
 "track.none" = "<Hiçbiri>";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_external" = "No External Subtitles Found";
-
-/* FIXME: Using English localization instead */
-"subtrack.no_loaded" = "No Subtitles Loaded";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.success" = "All saved playback progress deleted.";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.title" = "Clear Playback History";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.success" = "Playback history deleted.";
-
-/* FIXME: Using English localization instead */
-"preference.utilities" = "Utilities";
-
-/* FIXME: Using English localization instead */
-"alert.clear_history.message" = "Are you sure to delete all playback history?";
-
-/* FIXME: Using English localization instead */
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
-
-/* FIXME: Using English localization instead */
-"osd.find_online_sub.source" = "from";
-
-/* FIXME: Using English localization instead */
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
-
-/* FIXME: Using English localization instead */
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-
-/* FIXME: Using English localization instead */
-"main.opening_stream" = "Opening stream…";
-
-/* FIXME: Using English localization instead */
-"playlist.total_length_with_selected" = "%@ of %@ selected";
-
-/* FIXME: Using English localization instead */
-"playlist.total_length" = "%@ in total";
-
-/* FIXME: Using English localization instead */
-"pl_menu.browser" = "Open in Browser";
-
-/* FIXME: Using English localization instead */
-"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
-
-/* FIXME: Using English localization instead */
-"pl_menu.copy_url_multi" = "Copy URLs";
-
-/* FIXME: Using English localization instead */
-"pl_menu.copy_url" = "Copy URL";

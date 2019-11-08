@@ -30,6 +30,9 @@
 /* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
 "g4c-vG-URh.title" = "Başlangıç Ses Yüksekliği:";
 
+/* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "iQf-Gb-IuO"; */
+"iQf-Gb-IuO.title" = "Öğe bir";
+
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Video:";
 
@@ -41,6 +44,9 @@
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
 "rFu-rL-EJC.title" = "Etkin Değil";
+
+/* Class = "NSTextFieldCell"; title = "Preferred audio device:"; ObjectID = "sLR-vV-xn2"; */
+"sLR-vV-xn2.title" = "Tercih edilen ses aygıtı:";
 
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
 "sV5-dL-MUt.title" = "Ses:";

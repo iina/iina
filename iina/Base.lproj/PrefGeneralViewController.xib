@@ -560,7 +560,10 @@
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZA7-QS-FAH">
-                    <rect key="frame" x="185" y="104" width="164" height="22"/>
+                    <rect key="frame" x="185" y="110" width="164" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="kQE-Of-ecG"/>
+                    </constraints>
                     <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="/path/to/screenshot/folder" id="YeH-hk-7NN">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>

@@ -551,6 +551,7 @@ class RemoteCommandController {
   static let remoteCommand = MPRemoteCommandCenter.shared()
 
   static var useSystemMediaControl: Bool = Preference.bool(for: .useMediaKeys)
+  static let timer = DispatchSource.makeTimerSource(flags: [], queue: .main)
 
   static func setup() {
     remoteCommand.playCommand.addTarget { _ in
@@ -600,6 +601,38 @@ class RemoteCommandController {
     }
     remoteCommand.changePlaybackPositionCommand.addTarget { event in
       PlayerCore.lastActive.seek(absoluteSecond: (event as! MPChangePlaybackPositionCommandEvent).positionTime)
+      return .success
+    }
+
+    remoteCommand.seekForwardCommand.addTarget { event in
+      switch (event as! MPSeekCommandEvent).type {
+      case .beginSeeking:
+        timer.schedule(deadline: .now(), repeating: .seconds(1))
+        timer.setEventHandler {
+          PlayerCore.lastActive.seek(relativeSecond: 5, option: .relative)
+        }
+        timer.resume()
+      case .endSeeking:
+        timer.suspend()
+      @unknown default:
+        return .commandFailed
+      }
+      return .success
+    }
+    
+    remoteCommand.seekBackwardCommand.addTarget { event in
+      switch (event as! MPSeekCommandEvent).type {
+      case .beginSeeking:
+        timer.schedule(deadline: .now(), repeating: .seconds(1))
+        timer.setEventHandler {
+          PlayerCore.lastActive.seek(relativeSecond: -5, option: .relative)
+        }
+        timer.resume()
+      case .endSeeking:
+        timer.suspend()
+      @unknown default:
+        return .commandFailed
+      }
       return .success
     }
   }

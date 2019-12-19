@@ -564,7 +564,9 @@ class MPVController: NSObject {
     case MPV_EVENT_SHUTDOWN:
       let quitByMPV = !player.isMpvTerminated
       if quitByMPV {
-        NSApp.terminate(nil)
+        DispatchQueue.main.async {
+          NSApp.terminate(nil)
+        }
       } else {
         mpv_destroy(mpv)
         mpv = nil

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.13.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,11 +18,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="156"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="155"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="LZ8-DJ-i0e" customClass="KeyRecordView" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="110" width="480" height="46"/>
+                    <rect key="frame" x="0.0" y="109" width="480" height="46"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jqj-WM-ez4">
                             <rect key="frame" x="-2" y="7" width="484" height="31"/>
@@ -31,6 +31,9 @@
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
+                            <connections>
+                                <outlet property="delegate" destination="-2" id="Owg-ud-gCI"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <constraints>
@@ -51,33 +54,35 @@
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="KCO-hs-Ur3"/>
+                    </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q4h-ui-SRm">
-                    <rect key="frame" x="-2" y="84" width="76" height="14"/>
+                    <rect key="frame" x="-2" y="83" width="76" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="bEJ-bs-24N"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Select action:" id="gSW-bE-4yF">
-                        <font key="font" metaFont="smallSystem"/>
+                        <font key="font" metaFont="controlContent" size="11"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="y9W-a9-7sk">
-                    <rect key="frame" x="0.0" y="55" width="480" height="25"/>
-                    <clipView key="contentView" copiesOnScroll="NO" id="it8-db-s5l">
-                        <rect key="frame" x="1" y="1" width="478" height="23"/>
+                    <rect key="frame" x="0.0" y="55" width="480" height="24"/>
+                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="it8-db-s5l">
+                        <rect key="frame" x="1" y="1" width="478" height="22"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <ruleEditor nestingMode="simple" rowHeight="24" id="aaj-fS-PWS">
-                                <rect key="frame" x="0.0" y="0.0" width="478" height="23"/>
+                                <rect key="frame" x="0.0" y="0.0" width="478" height="22"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </ruleEditor>
                         </subviews>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
                     <constraints>
-                        <constraint firstAttribute="height" constant="25" id="oKe-g6-ngE"/>
+                        <constraint firstAttribute="height" constant="24" id="oKe-g6-ngE"/>
                     </constraints>
                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="wdt-7b-vYv">
                         <rect key="frame" x="-100" y="-100" width="223" height="15"/>
@@ -94,7 +99,7 @@
                         <constraint firstAttribute="height" constant="14" id="HlN-0J-WTS"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Or enter mpv command:" id="xhd-tg-xTO">
-                        <font key="font" metaFont="smallSystem"/>
+                        <font key="font" metaFont="controlContent" size="11"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

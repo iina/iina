@@ -2493,13 +2493,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let needShowIndicator = player.info.pausedForCache || player.info.isSeeking
 
     if needShowIndicator {
-      let sizeStr = FloatingPointByteCountFormatter.string(fromByteCount: player.info.cacheSize, prefixedBy: .ki)
       let usedStr = FloatingPointByteCountFormatter.string(fromByteCount: player.info.cacheUsed, prefixedBy: .ki)
       let speedStr = FloatingPointByteCountFormatter.string(fromByteCount: player.info.cacheSpeed)
       let bufferingState = player.info.bufferingState
       bufferIndicatorView.isHidden = false
       bufferProgressLabel.stringValue = String(format: NSLocalizedString("main.buffering_indicator", comment:"Buffering... %d%%"), bufferingState)
-      bufferDetailLabel.stringValue = "\(usedStr)B/\(sizeStr)B (\(speedStr)/s)"
+      bufferDetailLabel.stringValue = "\(usedStr)B (\(speedStr)/s)"
     } else {
       bufferIndicatorView.isHidden = true
     }

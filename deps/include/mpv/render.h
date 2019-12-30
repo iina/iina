@@ -94,6 +94,18 @@ extern "C" {
  *  - if the mpv_handle parameter refers to a different mpv core than the one
  *    you're rendering for (very obscure, but allowed)
  *
+ * Note about old libmpv version:
+ *
+ *      Before API version 1.105 (basically in mpv 0.29.x), simply enabling
+ *      MPV_RENDER_PARAM_ADVANCED_CONTROL could cause deadlock issues. This can
+ *      be worked around by setting the "vd-lavc-dr" option to "no".
+ *      In addition, you were required to call all mpv_render*() API functions
+ *      from the same thread on which mpv_render_context_create() was originally
+ *      run (for the same the mpv_render_context). Not honoring it led to UB
+ *      (deadlocks, use of invalid pthread_t handles), even if you moved your GL
+ *      context to a different thread correctly.
+ *      These problems were addressed in API version 1.105 (mpv 0.30.0).
+ *
  * Context and handle lifecycle
  * ----------------------------
  *
@@ -227,6 +239,13 @@ typedef enum mpv_render_param_type {
      *  - Rendering screenshots with the GPU API if supported by the backend
      *    (instead of using a suboptimal software fallback via libswscale).
      *
+     * Warning: do not just add this without reading the "Threading" section
+     *          above, and then wondering that deadlocks happen. The
+     *          requirements are tricky. But also note that even if advanced
+     *          control is disabled, not adhering to the rules will lead to
+     *          playback problems. Enabling advanced controls simply makes
+     *          violating these rules fatal.
+     *
      * Type: int*: 0 for disable (default), 1 for enable
      */
     MPV_RENDER_PARAM_ADVANCED_CONTROL = 10,
@@ -277,18 +296,29 @@ typedef enum mpv_render_param_type {
      */
     MPV_RENDER_PARAM_SKIP_RENDERING = 13,
     /**
-     * DRM display, contains drm display handles.
-     * Valid for mpv_render_context_create().
+     * Deprecated. Not supported. Use MPV_RENDER_PARAM_DRM_DISPLAY_V2 instead.
      * Type : struct mpv_opengl_drm_params*
      */
     MPV_RENDER_PARAM_DRM_DISPLAY = 14,
     /**
-     * DRM osd size, contains osd dimensions.
+     * DRM draw surface size, contains draw surface dimensions.
      * Valid for mpv_render_context_create().
-     * Type : struct mpv_opengl_drm_osd_size*
+     * Type : struct mpv_opengl_drm_draw_surface_size*
      */
-    MPV_RENDER_PARAM_DRM_OSD_SIZE = 15,
+    MPV_RENDER_PARAM_DRM_DRAW_SURFACE_SIZE = 15,
+    /**
+     * DRM display, contains drm display handles.
+     * Valid for mpv_render_context_create().
+     * Type : struct mpv_opengl_drm_params_v2*
+    */
+    MPV_RENDER_PARAM_DRM_DISPLAY_V2 = 16,
 } mpv_render_param_type;
+
+/**
+ * For backwards compatibility with the old naming of
+ * MPV_RENDER_PARAM_DRM_DRAW_SURFACE_SIZE
+ */
+#define MPV_RENDER_PARAM_DRM_OSD_SIZE MPV_RENDER_PARAM_DRM_DRAW_SURFACE_SIZE
 
 /**
  * Used to pass arbitrary parameters to some mpv_render_* functions. The

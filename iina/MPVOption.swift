@@ -35,8 +35,6 @@ struct MPVOption {
     static let pause = "pause"
     /** --shuffle */
     static let shuffle = "shuffle"
-    /** --chapter=<start[-end]> */
-    static let chapter = "chapter"
     /** --playlist-start=<auto|index> */
     static let playlistStart = "playlist-start"
     /** --playlist=<filename> */
@@ -79,6 +77,22 @@ struct MPVOption {
     static let sstep = "sstep"
     /** --stop-playback-on-init-failure=<yes|no> */
     static let stopPlaybackOnInitFailure = "stop-playback-on-init-failure"
+    /** --play-dir=<forward|+|backward|-> */
+    static let playDir = "play-dir"
+    /** --video-reversal-buffer=<bytesize> */
+    static let videoReversalBuffer = "video-reversal-buffer"
+    /** --audio-reversal-buffer=<bytesize> */
+    static let audioReversalBuffer = "audio-reversal-buffer"
+    /** --video-backward-overlap=<auto|number> */
+    static let videoBackwardOverlap = "video-backward-overlap"
+    /** --audio-backward-overlap=<auto|number> */
+    static let audioBackwardOverlap = "audio-backward-overlap"
+    /** --video-backward-batch=<number> */
+    static let videoBackwardBatch = "video-backward-batch"
+    /** --audio-backward-batch=<number> */
+    static let audioBackwardBatch = "audio-backward-batch"
+    /** --demuxer-backward-playback-step=<seconds> */
+    static let demuxerBackwardPlaybackStep = "demuxer-backward-playback-step"
   }
 
   struct ProgramBehavior {
@@ -102,6 +116,8 @@ struct MPVOption {
     static let configDir = "config-dir"
     /** --save-position-on-quit */
     static let savePositionOnQuit = "save-position-on-quit"
+    /** --watch-later-directory=<path> */
+    static let watchLaterDirectory = "watch-later-directory"
     /** --dump-stats=<filename> */
     static let dumpStats = "dump-stats"
     /** --idle=<no|yes|once> */
@@ -112,12 +128,16 @@ struct MPVOption {
     static let loadScripts = "load-scripts"
     /** --script=<filename> */
     static let script = "script"
+    /** --scripts=file1.lua:file2.lua:... */
+    static let scripts = "scripts"
     /** --script-opts=key1=value1 */
     static let scriptOpts = "script-opts"
     /** --merge-files */
     static let mergeFiles = "merge-files"
     /** --no-resume-playback */
     static let noResumePlayback = "no-resume-playback"
+    /** --resume-playback-check-mtime */
+    static let resumePlaybackCheckMtime = "resume-playback-check-mtime"
     /** --profile=<profile1 */
     static let profile = "profile"
     /** --reset-on-next-file=<all|option1 */
@@ -140,6 +160,8 @@ struct MPVOption {
     static let ytdlRawOptions = "ytdl-raw-options"
     /** --load-stats-overlay=<yes|no> */
     static let loadStatsOverlay = "load-stats-overlay"
+    /** --load-osd-console=<yes|no> */
+    static let loadOsdConsole = "load-osd-console"
     /** --player-operation-mode=<cplayer|pseudo-gui> */
     static let playerOperationMode = "player-operation-mode"
   }
@@ -157,12 +179,16 @@ struct MPVOption {
     static let framedrop = "framedrop"
     /** --video-latency-hacks=<yes|no> */
     static let videoLatencyHacks = "video-latency-hacks"
+    /** --override-display-fps=<fps> */
+    static let overrideDisplayFps = "override-display-fps"
     /** --display-fps=<fps> */
     static let displayFps = "display-fps"
     /** --hwdec=<api> */
     static let hwdec = "hwdec"
     /** --gpu-hwdec-interop=<auto|all|no|name> */
     static let gpuHwdecInterop = "gpu-hwdec-interop"
+    /** --hwdec-extra-frames=<N> */
+    static let hwdecExtraFrames = "hwdec-extra-frames"
     /** --hwdec-image-format=<name> */
     static let hwdecImageFormat = "hwdec-image-format"
     /** --cuda-decode-device=<auto|0..> */
@@ -171,8 +197,8 @@ struct MPVOption {
     static let vaapiDevice = "vaapi-device"
     /** --panscan=<0.0-1.0> */
     static let panscan = "panscan"
-    /** --video-aspect=<ratio|no> */
-    static let videoAspect = "video-aspect"
+    /** --video-aspect-override=<ratio|no> */
+    static let videoAspectOverride = "video-aspect-override"
     /** --video-aspect-method=<bitstream|container> */
     static let videoAspectMethod = "video-aspect-method"
     /** --video-unscaled=<no|yes|downscale-big> */
@@ -183,14 +209,20 @@ struct MPVOption {
     static let videoPanY = "video-pan-y"
     /** --video-rotate=<0-359|no> */
     static let videoRotate = "video-rotate"
-    /** --video-stereo-mode=<no|mode> */
-    static let videoStereoMode = "video-stereo-mode"
     /** --video-zoom=<value> */
     static let videoZoom = "video-zoom"
     /** --video-align-x=<-1-1> */
     static let videoAlignX = "video-align-x"
     /** --video-align-y=<-1-1> */
     static let videoAlignY = "video-align-y"
+    /** --video-margin-ratio-left=<val> */
+    static let videoMarginRatioLeft = "video-margin-ratio-left"
+    /** --video-margin-ratio-right=<val> */
+    static let videoMarginRatioRight = "video-margin-ratio-right"
+    /** --video-margin-ratio-top=<val> */
+    static let videoMarginRatioTop = "video-margin-ratio-top"
+    /** --video-margin-ratio-bottom=<val> */
+    static let videoMarginRatioBottom = "video-margin-ratio-bottom"
     /** --correct-pts */
     static let correctPts = "correct-pts"
     /** --no-correct-pts */
@@ -231,6 +263,8 @@ struct MPVOption {
     static let vdLavcThreads = "vd-lavc-threads"
     /** --vd-lavc-assume-old-x264=<yes|no> */
     static let vdLavcAssumeOldX264 = "vd-lavc-assume-old-x264"
+    /** --swapchain-depth=<N> */
+    static let swapchainDepth = "swapchain-depth"
   }
 
   struct Audio {
@@ -339,10 +373,8 @@ struct MPVOption {
     static let subScaleWithWindow = "sub-scale-with-window"
     /** --sub-ass-scale-with-window=<yes|no> */
     static let subAssScaleWithWindow = "sub-ass-scale-with-window"
-    /** --embeddedfonts */
+    /** --embeddedfonts=<yes|no> */
     static let embeddedfonts = "embeddedfonts"
-    /** --no-embeddedfonts */
-    static let noEmbeddedfonts = "no-embeddedfonts"
     /** --sub-pos=<0-100> */
     static let subPos = "sub-pos"
     /** --sub-speed=<0.1-10.0> */
@@ -449,6 +481,8 @@ struct MPVOption {
     static let subFilterSdhHarder = "sub-filter-sdh-harder"
     /** --sub-create-cc-track=<yes|no> */
     static let subCreateCcTrack = "sub-create-cc-track"
+    /** --sub-font-provider=<auto|none|fontconfig> */
+    static let subFontProvider = "sub-font-provider"
   }
 
   struct Window {
@@ -500,6 +534,10 @@ struct MPVOption {
     static let autofitSmaller = "autofit-smaller"
     /** --window-scale=<factor> */
     static let windowScale = "window-scale"
+    /** --window-minimized=<yes|no> */
+    static let windowMinimized = "window-minimized"
+    /** --window-maximized=<yes|no> */
+    static let windowMaximized = "window-maximized"
     /** --cursor-autohide=<number|no|always> */
     static let cursorAutohide = "cursor-autohide"
     /** --cursor-autohide-fs-only */
@@ -611,6 +649,10 @@ struct MPVOption {
     static let demuxerLavfProbesize = "demuxer-lavf-probesize"
     /** --demuxer-lavf-buffersize=<value> */
     static let demuxerLavfBuffersize = "demuxer-lavf-buffersize"
+    /** --demuxer-lavf-linearize-timestamps=<yes|no|auto> */
+    static let demuxerLavfLinearizeTimestamps = "demuxer-lavf-linearize-timestamps"
+    /** --demuxer-lavf-propagate-opts=<yes|no> */
+    static let demuxerLavfPropagateOpts = "demuxer-lavf-propagate-opts"
     /** --demuxer-mkv-subtitle-preroll=<yes|index|no> */
     static let demuxerMkvSubtitlePreroll = "demuxer-mkv-subtitle-preroll"
     /** --mkv-subtitle-preroll */
@@ -641,6 +683,8 @@ struct MPVOption {
     static let demuxerRawvideoCodec = "demuxer-rawvideo-codec"
     /** --demuxer-rawvideo-size=<value> */
     static let demuxerRawvideoSize = "demuxer-rawvideo-size"
+    /** --demuxer-cue-codepage=<codepage> */
+    static let demuxerCueCodepage = "demuxer-cue-codepage"
     /** --demuxer-max-bytes=<bytesize> */
     static let demuxerMaxBytes = "demuxer-max-bytes"
     /** --demuxer-max-back-bytes=<bytesize> */
@@ -649,12 +693,16 @@ struct MPVOption {
     static let demuxerSeekableCache = "demuxer-seekable-cache"
     /** --demuxer-thread=<yes|no> */
     static let demuxerThread = "demuxer-thread"
+    /** --demuxer-termination-timeout=<seconds> */
+    static let demuxerTerminationTimeout = "demuxer-termination-timeout"
     /** --demuxer-readahead-secs=<seconds> */
     static let demuxerReadaheadSecs = "demuxer-readahead-secs"
     /** --prefetch-playlist=<yes|no> */
     static let prefetchPlaylist = "prefetch-playlist"
     /** --force-seekable=<yes|no> */
     static let forceSeekable = "force-seekable"
+    /** --demuxer-cache-wait=<yes|no> */
+    static let demuxerCacheWait = "demuxer-cache-wait"
   }
 
   struct Input {
@@ -686,8 +734,8 @@ struct MPVOption {
     static let noInputTerminal = "no-input-terminal"
     /** --input-ipc-server=<filename> */
     static let inputIpcServer = "input-ipc-server"
-    /** --input-appleremote=<yes|no> */
-    static let inputAppleremote = "input-appleremote"
+    /** --input-gamepad=<yes|no> */
+    static let inputGamepad = "input-gamepad"
     /** --input-cursor */
     static let inputCursor = "input-cursor"
     /** --no-input-cursor */
@@ -775,6 +823,8 @@ struct MPVOption {
     static let osdSpacing = "osd-spacing"
     /** --video-osd=<yes|no> */
     static let videoOsd = "video-osd"
+    /** --osd-font-provider=<...> */
+    static let osdFontProvider = "osd-font-provider"
   }
 
   struct Screenshot {
@@ -796,6 +846,12 @@ struct MPVOption {
     static let screenshotPngCompression = "screenshot-png-compression"
     /** --screenshot-png-filter=<0-5> */
     static let screenshotPngFilter = "screenshot-png-filter"
+    /** --screenshot-webp-lossless=<yes|no> */
+    static let screenshotWebpLossless = "screenshot-webp-lossless"
+    /** --screenshot-webp-quality=<0-100> */
+    static let screenshotWebpQuality = "screenshot-webp-quality"
+    /** --screenshot-webp-compression=<0-6> */
+    static let screenshotWebpCompression = "screenshot-webp-compression"
   }
 
   struct SoftwareScaler {
@@ -813,6 +869,28 @@ struct MPVOption {
     static let swsChs = "sws-chs"
     /** --sws-cvs=<v> */
     static let swsCvs = "sws-cvs"
+    /** --sws-bitexact=<yes|no> */
+    static let swsBitexact = "sws-bitexact"
+    /** --sws-fast=<yes|no> */
+    static let swsFast = "sws-fast"
+    /** --sws-allow-zimg=<yes|no> */
+    static let swsAllowZimg = "sws-allow-zimg"
+    /** --zimg-scaler=<point|bilinear|bicubic|spline16|spline36|lanczos> */
+    static let zimgScaler = "zimg-scaler"
+    /** --zimg-scaler-param-a=<default|float> */
+    static let zimgScalerParamA = "zimg-scaler-param-a"
+    /** --zimg-scaler-param-b=<default|float> */
+    static let zimgScalerParamB = "zimg-scaler-param-b"
+    /** --zimg-scaler-chroma=... */
+    static let zimgScalerChroma = "zimg-scaler-chroma"
+    /** --zimg-scaler-chroma-param-a */
+    static let zimgScalerChromaParamA = "zimg-scaler-chroma-param-a"
+    /** --zimg-scaler-chroma-param-b */
+    static let zimgScalerChromaParamB = "zimg-scaler-chroma-param-b"
+    /** --zimg-dither=<no|ordered|random|error-diffusion> */
+    static let zimgDither = "zimg-dither"
+    /** --zimg-fast=<yes|no> */
+    static let zimgFast = "zimg-fast"
   }
 
   struct AudioResampler {
@@ -864,30 +942,26 @@ struct MPVOption {
   }
 
   struct Cache {
-    /** --cache=<kBytes|yes|no|auto> */
+    /** --cache=<yes|no|auto> */
     static let cache = "cache"
-    /** --cache-default=<kBytes|no> */
-    static let cacheDefault = "cache-default"
-    /** --cache-initial=<kBytes> */
-    static let cacheInitial = "cache-initial"
-    /** --cache-seek-min=<kBytes> */
-    static let cacheSeekMin = "cache-seek-min"
-    /** --cache-backbuffer=<kBytes> */
-    static let cacheBackbuffer = "cache-backbuffer"
-    /** --cache-file=<TMP|path> */
-    static let cacheFile = "cache-file"
-    /** --cache-file-size=<kBytes> */
-    static let cacheFileSize = "cache-file-size"
     /** --no-cache */
     static let noCache = "no-cache"
     /** --cache-secs=<seconds> */
     static let cacheSecs = "cache-secs"
+    /** --cache-on-disk=<yes|no> */
+    static let cacheOnDisk = "cache-on-disk"
+    /** --cache-dir=<path> */
+    static let cacheDir = "cache-dir"
     /** --cache-pause=<yes|no> */
     static let cachePause = "cache-pause"
     /** --cache-pause-wait=<seconds> */
     static let cachePauseWait = "cache-pause-wait"
     /** --cache-pause-initial=<yes|no> */
     static let cachePauseInitial = "cache-pause-initial"
+    /** --cache-unlink-files=<immediate|whendone|no> */
+    static let cacheUnlinkFiles = "cache-unlink-files"
+    /** --stream-buffer-size=<bytesize> */
+    static let streamBufferSize = "stream-buffer-size"
   }
 
   struct Network {
@@ -922,7 +996,9 @@ struct MPVOption {
   }
 
   struct DVB {
-    /** --dvbin-card=<1-4> */
+    /** --dvbin-prog=<string> */
+    static let dvbinProg = "dvbin-prog"
+    /** --dvbin-card=<0-15> */
     static let dvbinCard = "dvbin-card"
     /** --dvbin-file=<filename> */
     static let dvbinFile = "dvbin-file"
@@ -930,6 +1006,8 @@ struct MPVOption {
     static let dvbinTimeout = "dvbin-timeout"
     /** --dvbin-full-transponder=<yes|no> */
     static let dvbinFullTransponder = "dvbin-full-transponder"
+    /** --dvbin-channel-switch-offset=<integer> */
+    static let dvbinChannelSwitchOffset = "dvbin-channel-switch-offset"
   }
 
   struct ALSAAudioOutputOptions {
@@ -1058,10 +1136,18 @@ struct MPVOption {
     static let scalerLutSize = "scaler-lut-size"
     /** --scaler-resizes-only */
     static let scalerResizesOnly = "scaler-resizes-only"
-    /** --linear-scaling */
-    static let linearScaling = "linear-scaling"
     /** --correct-downscaling */
     static let correctDownscaling = "correct-downscaling"
+    /** --linear-downscaling */
+    static let linearDownscaling = "linear-downscaling"
+    /** --linear-upscaling */
+    static let linearUpscaling = "linear-upscaling"
+    /** --sigmoid-upscaling */
+    static let sigmoidUpscaling = "sigmoid-upscaling"
+    /** --sigmoid-center */
+    static let sigmoidCenter = "sigmoid-center"
+    /** --sigmoid-slope */
+    static let sigmoidSlope = "sigmoid-slope"
     /** --interpolation */
     static let interpolation = "interpolation"
     /** --interpolation-threshold=<0..1 */
@@ -1072,12 +1158,14 @@ struct MPVOption {
     static let ditherDepth = "dither-depth"
     /** --dither-size-fruit=<2-8> */
     static let ditherSizeFruit = "dither-size-fruit"
-    /** --dither=<fruit|ordered|no> */
+    /** --dither=<fruit|ordered|error-diffusion|no> */
     static let dither = "dither"
     /** --temporal-dither */
     static let temporalDither = "temporal-dither"
     /** --temporal-dither-period=<1-128> */
     static let temporalDitherPeriod = "temporal-dither-period"
+    /** --error-diffusion=<kernel> */
+    static let errorDiffusion = "error-diffusion"
     /** --gpu-debug */
     static let gpuDebug = "gpu-debug"
     /** --opengl-swapinterval=<n> */
@@ -1098,14 +1186,24 @@ struct MPVOption {
     static let d3d11Flip = "d3d11-flip"
     /** --d3d11-sync-interval=<0..4> */
     static let d3d11SyncInterval = "d3d11-sync-interval"
+    /** --d3d11-adapter=<adapter name|help> */
+    static let d3d11Adapter = "d3d11-adapter"
+    /** --d3d11-output-format=<auto|rgba8|bgra8|rgb10_a2|rgba16f> */
+    static let d3d11OutputFormat = "d3d11-output-format"
+    /** --d3d11-output-csp=<auto|srgb|linear|pq|bt.2020> */
+    static let d3d11OutputCsp = "d3d11-output-csp"
     /** --d3d11va-zero-copy=<yes|no> */
     static let d3d11vaZeroCopy = "d3d11va-zero-copy"
+    /** --wayland-frame-wait-offset=<-500..3000> */
+    static let waylandFrameWaitOffset = "wayland-frame-wait-offset"
+    /** --wayland-disable-vsync=<yes|no> */
+    static let waylandDisableVsync = "wayland-disable-vsync"
     /** --spirv-compiler=<compiler> */
     static let spirvCompiler = "spirv-compiler"
-    /** --glsl-shaders=<file-list> */
-    static let glslShaders = "glsl-shaders"
     /** --glsl-shader=<file> */
     static let glslShader = "glsl-shader"
+    /** --glsl-shaders=<file-list> */
+    static let glslShaders = "glsl-shaders"
     /** --deband */
     static let deband = "deband"
     /** --deband-iterations=<1..16> */
@@ -1116,12 +1214,6 @@ struct MPVOption {
     static let debandRange = "deband-range"
     /** --deband-grain=<0..4096> */
     static let debandGrain = "deband-grain"
-    /** --sigmoid-upscaling */
-    static let sigmoidUpscaling = "sigmoid-upscaling"
-    /** --sigmoid-center */
-    static let sigmoidCenter = "sigmoid-center"
-    /** --sigmoid-slope */
-    static let sigmoidSlope = "sigmoid-slope"
     /** --sharpen=<value> */
     static let sharpen = "sharpen"
     /** --opengl-glfinish */
@@ -1144,14 +1236,18 @@ struct MPVOption {
     static let cocoaForceDedicatedGpu = "cocoa-force-dedicated-gpu"
     /** --cocoa-cb-sw-renderer=<yes|no|auto> */
     static let cocoaCbSwRenderer = "cocoa-cb-sw-renderer"
-    /** --macos-title-bar-style=<dark|ultradark|light|mediumlight|auto> */
-    static let macosTitleBarStyle = "macos-title-bar-style"
+    /** --cocoa-cb-10bit-context=<yes|no> */
+    static let cocoaCb10bitContext = "cocoa-cb-10bit-context"
+    /** --macos-title-bar-appearance=<appearance> */
+    static let macosTitleBarAppearance = "macos-title-bar-appearance"
+    /** --macos-title-bar-material=<material> */
+    static let macosTitleBarMaterial = "macos-title-bar-material"
+    /** --macos-title-bar-color=<color> */
+    static let macosTitleBarColor = "macos-title-bar-color"
     /** --macos-fs-animation-duration=<default|0-1000> */
     static let macosFsAnimationDuration = "macos-fs-animation-duration"
     /** --android-surface-size=<WxH> */
     static let androidSurfaceSize = "android-surface-size"
-    /** --swapchain-depth=<N> */
-    static let swapchainDepth = "swapchain-depth"
     /** --gpu-sw */
     static let gpuSw = "gpu-sw"
     /** --gpu-context=<sys> */
@@ -1172,16 +1268,26 @@ struct MPVOption {
     static let targetPrim = "target-prim"
     /** --target-trc=<value> */
     static let targetTrc = "target-trc"
-    /** --target-peak=<nits> */
+    /** --target-peak=<auto|nits> */
     static let targetPeak = "target-peak"
     /** --tone-mapping=<value> */
     static let toneMapping = "tone-mapping"
     /** --tone-mapping-param=<value> */
     static let toneMappingParam = "tone-mapping-param"
+    /** --tone-mapping-max-boost=<1.0..10.0> */
+    static let toneMappingMaxBoost = "tone-mapping-max-boost"
     /** --hdr-compute-peak=<auto|yes|no> */
     static let hdrComputePeak = "hdr-compute-peak"
-    /** --tone-mapping-desaturate=<value> */
+    /** --hdr-peak-decay-rate=<1.0..1000.0> */
+    static let hdrPeakDecayRate = "hdr-peak-decay-rate"
+    /** --hdr-scene-threshold-low=<0.0..100.0> */
+    static let hdrSceneThresholdLow = "hdr-scene-threshold-low"
+    /** --hdr-scene-threshold-high=<0.0..100.0> */
+    static let hdrSceneThresholdHigh = "hdr-scene-threshold-high"
+    /** --tone-mapping-desaturate=<0.0..1.0> */
     static let toneMappingDesaturate = "tone-mapping-desaturate"
+    /** --tone-mapping-desaturate-exponent=<0.0..20.0> */
+    static let toneMappingDesaturateExponent = "tone-mapping-desaturate-exponent"
     /** --gamut-warning */
     static let gamutWarning = "gamut-warning"
     /** --use-embedded-icc-profile */
@@ -1196,7 +1302,7 @@ struct MPVOption {
     static let iccIntent = "icc-intent"
     /** --icc-3dlut-size=<r>x<g>x<b> */
     static let icc3dlutSize = "icc-3dlut-size"
-    /** --icc-contrast=<0-1000000> */
+    /** --icc-contrast=<0-1000000|inf> */
     static let iccContrast = "icc-contrast"
     /** --blend-subtitles=<yes|video|no> */
     static let blendSubtitles = "blend-subtitles"
@@ -1257,8 +1363,17 @@ struct MPVOption {
     static let autoloadFiles = "autoload-files"
     /** --record-file=<file> */
     static let recordFile = "record-file"
+    /** --stream-record=<file> */
+    static let streamRecord = "stream-record"
     /** --lavfi-complex=<string> */
     static let lavfiComplex = "lavfi-complex"
+    /** --metadata-codepage=<codepage> */
+    static let metadataCodepage = "metadata-codepage"
+  }
+
+  struct Debugging {
+    /** --unittest=<name> */
+    static let unittest = "unittest"
   }
 
 }

@@ -19,6 +19,8 @@ struct MPVProperty {
   static let estimatedFrameNumber = "estimated-frame-number"
   /** path */
   static let path = "path"
+  /** stream-open-filename */
+  static let streamOpenFilename = "stream-open-filename"
   /** media-title */
   static let mediaTitle = "media-title"
   /** file-format */
@@ -65,18 +67,8 @@ struct MPVProperty {
   static let chapter = "chapter"
   /** edition */
   static let edition = "edition"
-  /** disc-titles */
-  static let discTitles = "disc-titles"
-  /** disc-titles/count */
-  static let discTitlesCount = "disc-titles/count"
-  /** disc-titles/id */
-  static let discTitlesId = "disc-titles/id"
-  /** disc-titles/length */
-  static let discTitlesLength = "disc-titles/length"
-  /** disc-title-list */
-  static let discTitleList = "disc-title-list"
-  /** disc-title */
-  static let discTitle = "disc-title"
+  /** current-edition */
+  static let currentEdition = "current-edition"
   /** chapters */
   static let chapters = "chapters"
   /** editions */
@@ -97,8 +89,6 @@ struct MPVProperty {
   static func editionListNTitle(_ n: Int) -> String {
     return "edition-list/\(n)/title"
   }
-  /** angle */
-  static let angle = "angle"
   /** metadata */
   static let metadata = "metadata"
   /** metadata/list/count */
@@ -119,18 +109,8 @@ struct MPVProperty {
   static let idleActive = "idle-active"
   /** core-idle */
   static let coreIdle = "core-idle"
-  /** cache */
-  static let cache = "cache"
-  /** cache-size */
-  static let cacheSize = "cache-size"
-  /** cache-free */
-  static let cacheFree = "cache-free"
-  /** cache-used */
-  static let cacheUsed = "cache-used"
   /** cache-speed */
   static let cacheSpeed = "cache-speed"
-  /** cache-idle */
-  static let cacheIdle = "cache-idle"
   /** demuxer-cache-duration */
   static let demuxerCacheDuration = "demuxer-cache-duration"
   /** demuxer-cache-time */
@@ -147,8 +127,6 @@ struct MPVProperty {
   static let idle = "idle"
   /** total-bytes */
   static let totalBytes = "total-bytes"
-  /** fw-bytes */
-  static let fwBytes = "fw-bytes"
   /** demuxer-via-network */
   static let demuxerViaNetwork = "demuxer-via-network"
   /** demuxer-start-time */
@@ -259,8 +237,8 @@ struct MPVProperty {
   static let estimatedVfFps = "estimated-vf-fps"
   /** window-scale */
   static let windowScale = "window-scale"
-  /** window-minimized */
-  static let windowMinimized = "window-minimized"
+  /** current-window-scale */
+  static let currentWindowScale = "current-window-scale"
   /** display-names */
   static let displayNames = "display-names"
   /** display-fps */
@@ -269,6 +247,8 @@ struct MPVProperty {
   static let estimatedDisplayFps = "estimated-display-fps"
   /** vsync-jitter */
   static let vsyncJitter = "vsync-jitter"
+  /** display-hidpi-scale */
+  static let displayHidpiScale = "display-hidpi-scale"
   /** video-aspect */
   static let videoAspect = "video-aspect"
   /** osd-width */
@@ -277,22 +257,12 @@ struct MPVProperty {
   static let osdHeight = "osd-height"
   /** osd-par */
   static let osdPar = "osd-par"
-  /** program */
-  static let program = "program"
-  /** dvb-channel */
-  static let dvbChannel = "dvb-channel"
-  /** dvb-channel-name */
-  static let dvbChannelName = "dvb-channel-name"
   /** sub-text */
   static let subText = "sub-text"
-  /** tv-brightness */
-  static let tvBrightness = "tv-brightness"
-  /** tv-contrast */
-  static let tvContrast = "tv-contrast"
-  /** tv-saturation */
-  static let tvSaturation = "tv-saturation"
-  /** tv-hue */
-  static let tvHue = "tv-hue"
+  /** sub-start */
+  static let subStart = "sub-start"
+  /** sub-end */
+  static let subEnd = "sub-end"
   /** playlist-pos */
   static let playlistPos = "playlist-pos"
   /** playlist-pos-1 */
@@ -403,6 +373,18 @@ struct MPVProperty {
   static func trackListNDemuxFps(_ n: Int) -> String {
     return "track-list/\(n)/demux-fps"
   }
+  /** track-list/N/demux-bitrate */
+  static func trackListNDemuxBitrate(_ n: Int) -> String {
+    return "track-list/\(n)/demux-bitrate"
+  }
+  /** track-list/N/demux-rotation */
+  static func trackListNDemuxRotation(_ n: Int) -> String {
+    return "track-list/\(n)/demux-rotation"
+  }
+  /** track-list/N/demux-par */
+  static func trackListNDemuxPar(_ n: Int) -> String {
+    return "track-list/\(n)/demux-par"
+  }
   /** track-list/N/audio-channels */
   static func trackListNAudioChannels(_ n: Int) -> String {
     return "track-list/\(n)/audio-channels"
@@ -501,6 +483,8 @@ struct MPVProperty {
   static let currentVo = "current-vo"
   /** current-ao */
   static let currentAo = "current-ao"
+  /** shared-script-properties */
+  static let sharedScriptProperties = "shared-script-properties"
   /** working-directory */
   static let workingDirectory = "working-directory"
   /** protocol-list */
@@ -571,4 +555,8 @@ struct MPVProperty {
   static let propertyList = "property-list"
   /** profile-list */
   static let profileList = "profile-list"
+  /** command-list */
+  static let commandList = "command-list"
+  /** input-bindings */
+  static let inputBindings = "input-bindings"
 }

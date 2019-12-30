@@ -1248,8 +1248,7 @@ class PlayerCore: NSObject {
       info.videoDuration?.second = mpv.getDouble(MPVProperty.duration)
       info.constrainVideoPosition()
       info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)
-      info.cacheSize = mpv.getInt(MPVProperty.cacheSize)
-      info.cacheUsed = mpv.getInt(MPVProperty.cacheUsed)
+      info.cacheUsed = ((mpv.getNode(MPVProperty.demuxerCacheState) as? [String: Any])?["fw-bytes"] as? Int) ?? 0
       info.cacheSpeed = mpv.getInt(MPVProperty.cacheSpeed)
       info.cacheTime = mpv.getInt(MPVProperty.demuxerCacheTime)
       info.bufferingState = mpv.getInt(MPVProperty.cacheBufferingState)

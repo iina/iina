@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -72,7 +72,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="300" height="72"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xAK-xc-Njn" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
-                                <rect key="frame" x="260" y="10" width="36" height="11"/>
+                                <rect key="frame" x="260" y="9" width="36" height="11"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="Dnz-rF-ikZ"/>
                                 </constraints>
@@ -86,7 +86,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9EY-2T-Ebf">
-                                <rect key="frame" x="4" y="10" width="36" height="11"/>
+                                <rect key="frame" x="4" y="9" width="36" height="11"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="1iE-QR-s8H"/>
                                 </constraints>
@@ -100,7 +100,7 @@
                                 </connections>
                             </textField>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="e3M-Ma-JJM">
-                                <rect key="frame" x="44" y="8" width="212" height="15"/>
+                                <rect key="frame" x="42" y="5" width="216" height="19"/>
                                 <sliderCell key="cell" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="Y51-2C-Qcg" customClass="PlaySliderCell" customModule="IINA" customModuleProvider="target"/>
                                 <connections>
                                     <action selector="playSliderChanges:" target="-2" id="qdw-Jb-iyq"/>
@@ -110,7 +110,7 @@
                                 <rect key="frame" x="0.0" y="24" width="300" height="48"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h25-bp-EvL" customClass="ScrollingTextField" customModule="IINA" customModuleProvider="target">
-                                        <rect key="frame" x="133" y="25" width="35" height="17"/>
+                                        <rect key="frame" x="133" y="26" width="35" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="center" title="Title" id="Rs9-6l-6vp">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -118,9 +118,9 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kcj-EY-i9R" customClass="ScrollingTextField" customModule="IINA" customModuleProvider="target">
-                                        <rect key="frame" x="109" y="7" width="82" height="14"/>
+                                        <rect key="frame" x="109" y="8" width="82" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Artist - Album" id="Nle-gv-CWY">
-                                            <font key="font" metaFont="smallSystem"/>
+                                            <font key="font" metaFont="message" size="11"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -422,7 +422,7 @@
                         <constraint firstAttribute="width" constant="30" id="UDC-wZ-xua"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="50" id="aot-6J-Jp7">
-                        <font key="font" metaFont="smallSystem"/>
+                        <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -448,9 +448,9 @@
                 <constraint firstItem="MP6-sS-T7f" firstAttribute="leading" secondItem="Ene-VG-UYY" secondAttribute="trailing" constant="8" id="Jfv-7v-xAE"/>
                 <constraint firstAttribute="trailing" secondItem="MP6-sS-T7f" secondAttribute="trailing" constant="8" id="Nkd-PC-I2B"/>
                 <constraint firstItem="5Og-lg-qvH" firstAttribute="width" secondItem="5Og-lg-qvH" secondAttribute="height" multiplier="17:14" id="Sh7-eY-TU8"/>
+                <constraint firstItem="5Og-lg-qvH" firstAttribute="centerY" secondItem="JoU-Y0-cxJ" secondAttribute="centerY" id="U0k-sl-lgS"/>
                 <constraint firstAttribute="bottom" secondItem="Ene-VG-UYY" secondAttribute="bottom" constant="8" id="Yba-0E-lbi"/>
                 <constraint firstItem="Ene-VG-UYY" firstAttribute="leading" secondItem="5Og-lg-qvH" secondAttribute="trailing" constant="8" id="agK-tV-GdH"/>
-                <constraint firstItem="Ene-VG-UYY" firstAttribute="baseline" secondItem="5Og-lg-qvH" secondAttribute="baseline" id="n1M-hG-maU"/>
             </constraints>
             <point key="canvasLocation" x="63.5" y="349.5"/>
         </customView>

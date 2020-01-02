@@ -529,7 +529,7 @@ class MPVController: NSObject {
     mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node)
     let parsed = try? MPVNode.parse(node)
     mpv_free_node_contents(&node)
-    return parsed!
+    return parsed
   }
 
   // MARK: - Hooks

@@ -7,7 +7,7 @@
 "2iM-j7-AzQ.title" = "Oynatma bittiğinde pencereyi açık tut";
 
 /* Class = "NSButtonCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
-"2rJ-mg-OuU.title" = "Kaydet";
+"2rJ-mg-OuU.title" = "Şuraya kaydet";
 
 /* Class = "NSMenuItem"; title = "PNG"; ObjectID = "3XO-ks-TDg"; */
 "3XO-ks-TDg.title" = "PNG";
@@ -19,7 +19,7 @@
 "4Qe-7S-8xK.title" = "Ayarlar:";
 
 /* Class = "NSButtonCell"; title = "Enable "Open Recent" menu"; ObjectID = "55O-ik-ql6"; */
-"55O-ik-ql6.title" = "En son açılan dosyaları hatırla";
+"55O-ik-ql6.title" = "\"Son Kullanılanı Aç\" menüsünü etkinleştir";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
 "5RN-PV-pOZ.title" = "Box";
@@ -28,13 +28,13 @@
 "5Y9-bX-K0f.title" = "IINA küçüldüğünde/eski haline geldiğinde";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
-"6TV-DG-503.title" = "Oynatma Listeleri:";
+"6TV-DG-503.title" = "Oynatma Listesi:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
 "8kU-8g-VgX.title" = "Etkili olabilmesi için IINA'nın yeniden başlatılması gerekli.";
 
 /* Class = "NSButtonCell"; title = "Track all played files in "Open Recent" menu"; ObjectID = "Ci8-j2-QS3"; */
-"Ci8-j2-QS3.title" = "Oynatılan her dosyayı Son Kullanılan Dosyalar'a ekle";
+"Ci8-j2-QS3.title" = "Oynatılan her dosyayı Son Kullanılanı Aç'a ekle";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
 "DZT-7n-S4M.title" = "Box";
@@ -64,10 +64,10 @@
 "KfL-r7-Uav.title" = "Ses dosyası çalarken otomatik olarak \"müzik kipine\" geç";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
-"Lac-Ol-g6E.title" = "Sıradakini otomatik oynat";
+"Lac-Ol-g6E.title" = "Sıradaki öğeyi otomatik oynat";
 
 /* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
-"M0z-bI-88d.title" = "Yeni medyayı her zaman yeni pencerede aç";
+"M0z-bI-88d.title" = "Medyayı her zaman yeni pencerede aç";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
 "MlG-hl-goB.title" = "Tam ekrana geç";
@@ -91,10 +91,10 @@
 "XFC-Lr-LmP.title" = "Bu ayar seçilmezse sadece IINA içinden manuel olarak açılan dosyalar eklenir";
 
 /* Class = "NSButtonCell"; title = "Quit after all windows are closed"; ObjectID = "YLo-6E-tT7"; */
-"YLo-6E-tT7.title" = "Hiçbir pencere açık değilkse IINA'dan çık";
+"YLo-6E-tT7.title" = "Hiçbir pencere açık değilse IINA'dan çık";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/path/to/screenshot/folder";
+"YeH-hk-7NN.title" = "/ekrangörüntüsü/klasörü/yolu/";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Beta güncellemeleri al";
@@ -118,7 +118,7 @@
 "jOB-D3-WT3.title" = "Kaldığın yerden devam et";
 
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
-"jeK-46-2BG.title" = "Geçmiş Dosyalar:";
+"jeK-46-2BG.title" = "Geçmiş:";
 
 /* Class = "NSButtonCell"; title = "Play when entered full screen"; ObjectID = "lOw-pu-Llm"; */
 "lOw-pu-Llm.title" = "Tam ekrana geçince oynat";
@@ -142,7 +142,7 @@
 "uQR-Fx-oEm.title" = "Davranış:";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
-"xr2-rB-O0x.title" = "Oynat/Duraklat:";
+"xr2-rB-O0x.title" = "Şunlar olduğunda Duraklat/Sürdür:";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Karşılama penceresini göster";

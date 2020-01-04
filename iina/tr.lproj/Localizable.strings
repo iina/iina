@@ -21,7 +21,7 @@
 "alert.clear_history.title" = "Oynatma Geçmişini Temizle";
 "alert.clear_watch_later.message" = "Kayıtlı tüm oynatma ilerlemesi silinecek emin misiniz (\"daha sonra izleyin\" verisi)?";
 "alert.clear_watch_later.title" = "Kayıtlı Oynatma İşlemlerini Temizle";
-"alert.config.cannot_create" = "Yapılandırma (config file) dosyası oluşturulamıyor!\n%@";
+"alert.config.cannot_create" = "Yapılandırma dosyası oluşturulamıyor!\n%@";
 "alert.config.cannot_write" = "Yapılandırma dosyasına yazılamıyor!";
 "alert.config.duplicate.message" = "Lütfen çoğaltılan yapılandırma dosyası için bir ad girin.";
 "alert.config.duplicate.title" = "Çoğaltılan Yapılandırma";

@@ -550,6 +550,7 @@
                                 <menuItem title="Floating" state="on" id="7Dv-q2-5TV"/>
                                 <menuItem title="Top" tag="1" id="se2-DE-pJk"/>
                                 <menuItem title="Bottom" tag="2" id="0Gp-vj-UzY"/>
+                                <menuItem title="None" tag="3" id="2B1-vS-bUw"/>
                             </items>
                         </menu>
                     </popUpButtonCell>

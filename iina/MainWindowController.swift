@@ -859,6 +859,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       oscBottomMainView.setVisibilityPriority(.mustHold, for: fragSliderView)
       oscBottomMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
       oscBottomMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
+    case .none:
+      currentControlBar = nil
     }
 
     if currentControlBar != nil {

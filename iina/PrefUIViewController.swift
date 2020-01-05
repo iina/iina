@@ -109,6 +109,8 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
       name = "osc_top"
     case 2:
       name = "osc_bottom"
+    case 3:
+      name = "osc_none"
     default:
       name = "osc_float"
     }

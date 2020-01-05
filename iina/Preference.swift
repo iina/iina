@@ -329,6 +329,7 @@ struct Preference {
     case floating = 0
     case top
     case bottom
+    case none
 
     static var defaultValue = OSCPosition.floating
 

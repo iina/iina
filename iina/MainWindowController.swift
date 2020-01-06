@@ -1288,6 +1288,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
     // stop playing
     if !player.isMpvTerminated {
+      if case .fullscreen(legacy: true, priorWindowedFrame: _) = fsState {
+        restoreDockSettings()
+      }
       player.savePlaybackPosition()
       player.stop()
       videoView.stopDisplayLink()
@@ -1298,9 +1301,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
-    if case .fullscreen(legacy: true, priorWindowedFrame: let frame) = fsState {
-      legacyAnimateToWindowed(framePriorToBeingInFullscreen: frame)
-    }
   }
 
   // MARK: - Window delegate: Full screen
@@ -2394,6 +2394,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       return
     }
   }
+  
+  private func restoreDockSettings() {
+    NSApp.presentationOptions.remove(.autoHideMenuBar)
+    NSApp.presentationOptions.remove(.autoHideDock)
+  }
 
   private func legacyAnimateToWindowed(framePriorToBeingInFullscreen: NSRect) {
     guard let window = self.window else { fatalError("make sure the window exists before animating") }
@@ -2403,9 +2408,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     // stylemask
     window.styleMask.remove(.borderless)
     window.styleMask.remove(.fullScreen)
-    // cancel auto hide for menu and dock
-    NSApp.presentationOptions.remove(.autoHideMenuBar)
-    NSApp.presentationOptions.remove(.autoHideDock)
+
+    restoreDockSettings()
     // restore window frame ans aspect ratio
     let videoSize = player.videoSizeForDisplay
     let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)

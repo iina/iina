@@ -1,6 +1,9 @@
 /* Class = "NSTextFieldCell"; title = "Crop"; ObjectID = "6tX-fN-Gm2"; */
 "6tX-fN-Gm2.title" = "화면자르기";
 
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "BtO-vw-tiy"; */
+"BtO-vw-tiy.title" = "취소";
+
 /* Class = "NSSegmentedCell"; bQc-2s-1MS.ibShadowedLabels[0] = "4:3"; ObjectID = "bQc-2s-1MS"; */
 "bQc-2s-1MS.ibShadowedLabels[0]" = "4:3";
 
@@ -19,12 +22,5 @@
 /* Class = "NSSegmentedCell"; bQc-2s-1MS.ibShadowedLabels[5] = "21:9"; ObjectID = "bQc-2s-1MS"; */
 "bQc-2s-1MS.ibShadowedLabels[5]" = "21:9";
 
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "BtO-vw-tiy"; */
-"BtO-vw-tiy.title" = "취소";
-
 /* Class = "NSButtonCell"; title = "Done"; ObjectID = "eu5-yH-hHg"; */
 "eu5-yH-hHg.title" = "완료";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "Fgl-Cs-eEh"; */
-"Fgl-Cs-eEh.title" = "Label";
-

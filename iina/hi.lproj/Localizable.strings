@@ -1,12 +1,12 @@
-/* 
+/*
   String_ui.strings
   iina
 
   Created by lhc on 3/1/2017.
   Copyright © 2017 lhc. All rights reserved.
 */
-
 // Common
+
 "general.on" = "चालू";
 "general.off" = "बंद";
 "general.login" = "लॉग इन";
@@ -87,7 +87,7 @@
 "preference.key_binding_hint_1" = "वर्तमान कॉन्फ़िगरेशन फ़ाइल में मुख्य बाइंडिंग को संपादित करने के लिए, प्रतिलिपि बनाने के लिए सबसे पहले \"डुप्लीकेट…\" बटन पर क्लिक करें।";
 "preference.key_binding_hint_2" = "संबंधित कुंजी बंधन को संपादित करने के लिए दाईं ओर एक पंक्ति पर डबल क्लिक करें।";
 
-"menu.volume"= "ध्वनि: %d";
+"menu.volume" = "ध्वनि: %d";
 "menu.audio_delay" = "ऑडियो विलंब: %.2fs";
 "menu.sub_delay" = "उपशीर्षक देरी: %.2fs";
 "menu.fullscreen" = "पूर्ण स्क्रीन दर्ज करें";
@@ -116,7 +116,7 @@
 
 // Alerts
 "alert.beta_channel.title" = "बीटा संस्करणों के लिए अपडेट प्राप्त करें";
-"alert.beta_channel.message" = "IINA v1.0 आ रहा है! क्या आप बीटा संस्करणों का परीक्षण करने में हमारी सहायता करना चाहेंगे? \ n \ n आप इस व्यवहार को कभी भी प्राथमिकता - सामान्य में बदल सकते हैं।";
+"alert.beta_channel.message" = "IINA v1.0 आ रहा है! क्या आप बीटा संस्करणों का परीक्षण करने में हमारी सहायता करना चाहेंगे? \\ n \\ n आप इस व्यवहार को कभी भी प्राथमिकता - सामान्य में बदल सकते हैं।";
 
 "alert.title_error" = "त्रुटि";
 "alert.title_warning" = "चेतावनी";
@@ -134,8 +134,7 @@
 "alert.error_open" = "फ़ाइल या स्ट्रीम नहीं खोल सकता!";
 "alert.error_finding_file" = "%@ फ़ाइल नहीं मिल रही है!";
 "alert.error_loading_script" = "स्क्रिप्ट %@! लोड नहीं किया जा सकता";
-"alert.error_saving_file" = "%@: %@ को सहेजते समय त्रुटि आई
-";
+"alert.error_saving_file" = "%@: %@ को सहेजते समय त्रुटि आई\n";
 "alert.error_deleting_file" = "फ़ाइल को हटा नहीं सकता।";
 
 "alert.config.new.title" = "नया इनपुट कॉन्फ़िगरेशन";
@@ -231,13 +230,13 @@
 "pl_menu.reveal_in_finder" = "खोजक में पता चलता है";
 "pl_menu.add_file" = "फाइल जोडें…";
 "pl_menu.add_url" = "यू आर एल जोड़िये…";
-"pl_menu.browser" = "ब्राउज़र में खोलें";
-"pl_menu.copy_url" = "यूआरएल कॉपी करें";
-"pl_menu.copy_url_multi" = "सारे यूआरएल कॉपी करें";
 "pl_menu.clear_playlist" = "क्लियर प्लेलिस्ट";
 "pl_menu.matched_sub" = "मेल खाने वाले %d उपशीर्षक(रों)";
 "pl_menu.add_sub" = "उपशीर्षक जोड़ें…";
 "pl_menu.wrong_sub" = "गलत उपशीर्षक!";
+"pl_menu.browser" = "ब्राउज़र में खोलें";
+"pl_menu.copy_url" = "यूआरएल कॉपी करें";
+"pl_menu.copy_url_multi" = "सारे यूआरएल कॉपी करें";
 
 "keymapping.title" = "कुंजी मानचित्रण";
 "keymapping.message" = "रिकॉर्ड करने के लिए कोई भी कुंजी दबाएँ।";

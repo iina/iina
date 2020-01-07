@@ -1,33 +1,14 @@
-
 /* Class = "NSTextFieldCell"; title = "Forced"; ObjectID = "0vG-Pg-DIl"; */
 "0vG-Pg-DIl.title" = "Vynútené";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
 "1dz-Vt-0MO.title" = "FPS:";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "21M-40-ac5"; */
-"21M-40-ac5.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "3bw-Kl-SeY"; */
-"3bw-Kl-SeY.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "4Ph-yc-lsv"; */
-"4Ph-yc-lsv.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "4di-sR-tOh"; */
-"4di-sR-tOh.title" = "Label";
-
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
 "4jf-w4-kkv.title" = "Umiestnenie Súboru:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "5H6-qJ-RDS"; */
 "5H6-qJ-RDS.title" = "Formát:";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "6mx-wH-SBP"; */
-"6mx-wH-SBP.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "7Iw-nT-Mdz"; */
-"7Iw-nT-Mdz.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
 "7QX-tu-rvs.title" = "FPS:";
@@ -39,22 +20,16 @@
 "A4y-LL-x0z.title" = "Bit Rate:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
-"AYt-pH-UCi.title" = "Zle Načasované Snímky:"; //???
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "Aes-4j-UT6"; */
-"Aes-4j-UT6.title" = "Label";
+"AYt-pH-UCi.title" = "Zle Načasované Snímky:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
-"AjU-1T-aGR.title" = "Zobrazené FPS:"; //???
+"AjU-1T-aGR.title" = "Zobrazené FPS:";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
 "CrF-UR-udW.title" = "Vynechané Snímky:";
 
 /* Class = "NSTextFieldCell"; title = "Hw Decoder:"; ObjectID = "DHh-ne-10f"; */
 "DHh-ne-10f.title" = "Hw Dekodér:";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "ElK-iN-YiE"; */
-"ElK-iN-YiE.title" = "Label";
 
 /* Class = "NSWindow"; title = "Inspector"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Inšpektor";
@@ -74,26 +49,14 @@
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[3] = "Status"; ObjectID = "Fqo-1c-3L1"; */
 "Fqo-1c-3L1.ibShadowedLabels[3]" = "Stav";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "Go3-bS-2ev"; */
-"Go3-bS-2ev.title" = "Label";
-
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "I2E-6Z-Gnn"; */
 "I2E-6Z-Gnn.title" = "Ovládač:";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "IME-9M-YdQ"; */
-"IME-9M-YdQ.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
 "JN9-3E-OJp.title" = "Odhad Zobrazovaného FPS";
 
-/* Class = "NSTextFieldCell"; title = "Multiline Label"; ObjectID = "JkC-3s-Ela"; */
-"JkC-3s-Ela.title" = "Multiline Label";
-
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
 "Jxp-Wf-BhU.title" = "Umiestnenie Súboru:";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "KS6-aw-wh6"; */
-"KS6-aw-wh6.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "KqD-NM-WiK"; */
 "KqD-NM-WiK.title" = "Veľkosť:";
@@ -101,20 +64,11 @@
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "Luq-rQ-aO4"; */
 "Luq-rQ-aO4.title" = "Kanály:";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "MKd-dP-Mkb"; */
-"MKd-dP-Mkb.title" = "Label";
-
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "MME-KZ-jrG"; */
 "MME-KZ-jrG.title" = "Ovládač:";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "MTG-ez-V2R"; */
-"MTG-ez-V2R.title" = "Label";
-
 /* Class = "NSTextFieldCell"; title = "Duration:"; ObjectID = "OCm-zb-deg"; */
 "OCm-zb-deg.title" = "Dĺžka:";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "OZx-CU-1b5"; */
-"OZx-CU-1b5.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Selected"; ObjectID = "P65-zr-dOH"; */
 "P65-zr-dOH.title" = "Označené";
@@ -131,26 +85,11 @@
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "PQD-yB-mm6"; */
 "PQD-yB-mm6.title" = "Formát:";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "QTi-nO-v8c"; */
-"QTi-nO-v8c.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "R14-IF-0dZ"; */
-"R14-IF-0dZ.title" = "Label";
-
 /* Class = "NSTextFieldCell"; title = "Default"; ObjectID = "S3X-Df-UMB"; */
 "S3X-Df-UMB.title" = "Predvolené";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "SzU-uF-10g"; */
-"SzU-uF-10g.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "UPK-o2-eTo"; */
-"UPK-o2-eTo.title" = "Label";
-
 /* Class = "NSTabViewItem"; label = "Tracks"; ObjectID = "UuR-M1-YLj"; */
 "UuR-M1-YLj.label" = "Stopy";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "V7s-Tp-SD6"; */
-"V7s-Tp-SD6.title" = "Label";
 
 /* Class = "NSTabViewItem"; label = "Status"; ObjectID = "VGm-BL-xOI"; */
 "VGm-BL-xOI.label" = "Stav";
@@ -158,35 +97,14 @@
 /* Class = "NSTabViewItem"; label = "File"; ObjectID = "WrI-Sr-O2S"; */
 "WrI-Sr-O2S.label" = "Súbor";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "YcG-9Y-Qn6"; */
-"YcG-9Y-Qn6.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "ZIA-g4-WqZ"; */
-"ZIA-g4-WqZ.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "Zaf-qd-A4D"; */
-"Zaf-qd-A4D.title" = "Label";
-
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "bki-sE-xCA"; */
 "bki-sE-xCA.title" = "Kodek:";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "c6m-YO-xqZ"; */
-"c6m-YO-xqZ.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "cCV-DA-Kkq"; */
-"cCV-DA-Kkq.title" = "Text Cell";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "cwF-5C-5nd"; */
-"cwF-5C-5nd.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "daB-hU-mku"; */
 "daB-hU-mku.title" = "Kodek:";
 
 /* Class = "NSTextFieldCell"; title = "Properties:"; ObjectID = "dtn-wS-j6U"; */
 "dtn-wS-j6U.title" = "Vlastnosti:";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "etG-FX-Rzo"; */
-"etG-FX-Rzo.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "f2P-qb-wRx"; */
 "f2P-qb-wRx.title" = "Veľkosť:";
@@ -197,17 +115,11 @@
 /* Class = "NSTextFieldCell"; title = "Track:"; ObjectID = "f7i-wX-uxQ"; */
 "f7i-wX-uxQ.title" = "Skladba:";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "fYh-pA-yDU"; */
-"fYh-pA-yDU.title" = "Label";
-
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
 "g8p-Ec-awO.title" = "Odhad Výstupu FPS:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "VIDEO";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "iMk-qU-kVv"; */
-"iMk-qU-kVv.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "A/V Sync Diff:"; ObjectID = "iVK-Ck-Lyq"; */
 "iVK-Ck-Lyq.title" = "A/V Sync Rozdiel:";
@@ -217,9 +129,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Source ID:"; ObjectID = "jCY-og-BAa"; */
 "jCY-og-BAa.title" = "ID Zdroja:";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "jMN-aN-DqI"; */
-"jMN-aN-DqI.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "jyV-Pd-UvH"; */
 "jyV-Pd-UvH.title" = "Bit Rate:";
@@ -239,38 +148,14 @@
 /* Class = "NSTextFieldCell"; title = "AUDIO"; ObjectID = "nrG-IH-kFg"; */
 "nrG-IH-kFg.title" = "ZVUK";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "qPy-MN-AEF"; */
-"qPy-MN-AEF.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "rcA-a7-rVn"; */
-"rcA-a7-rVn.title" = "Label";
-
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
-"sbO-Cn-gpI.title" = "Úplný A/V Sync:"; //???
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "sgp-Kk-awA"; */
-"sgp-Kk-awA.title" = "Label";
+"sbO-Cn-gpI.title" = "Úplný A/V Sync:";
 
 /* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
 "tNS-gW-PcC.title" = "Pozrieť";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "u39-dg-rLQ"; */
-"u39-dg-rLQ.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "ujs-p7-wXC"; */
-"ujs-p7-wXC.title" = "Label";
-
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "vrP-XL-Weg"; */
 "vrP-XL-Weg.title" = "Vzorkovacia Frekvencia:";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "wMU-ig-9zP"; */
-"wMU-ig-9zP.title" = "Label";
-
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "xIH-Dc-ZRT"; */
-"xIH-Dc-ZRT.title" = "Label";
-
 /* Class = "NSTextFieldCell"; title = "Decoder:"; ObjectID = "xix-0S-ehE"; */
 "xix-0S-ehE.title" = "Dekodér:";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "ydW-J5-Kk2"; */
-"ydW-J5-Kk2.title" = "Text Cell";

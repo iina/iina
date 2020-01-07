@@ -70,9 +70,6 @@
 /* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "Rky-lo-Buu"; */
 "Rky-lo-Buu.title" = "Saturace:";
 
-/* Class = "NSTextFieldCell"; title = "1k"; ObjectID = "Rtc-Eg-J2u"; */
-"Rtc-Eg-J2u.title" = "1k";
-
 /* Class = "NSButtonCell"; title = "Deinterlace"; ObjectID = "TXm-bA-7y3"; */
 "TXm-bA-7y3.title" = "Odebrat prokládání";
 
@@ -93,9 +90,6 @@
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "YCG-xK-eAs"; */
 "YCG-xK-eAs.title" = "-5s";
-
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "YOu-ft-k7r"; */
-"YOu-ft-k7r.title" = "Table View Cell";
 
 /* Class = "NSTextFieldCell"; title = "Aspect Ratio:"; ObjectID = "YgL-iV-bca"; */
 "YgL-iV-bca.title" = "Poměr stran:";
@@ -121,9 +115,6 @@
 /* Class = "NSButtonCell"; title = "AUDIO"; ObjectID = "cpm-5o-a2c"; */
 "cpm-5o-a2c.title" = "ZVUK";
 
-/* Class = "NSTextFieldCell"; title = "8k"; ObjectID = "e4X-H4-VxS"; */
-"e4X-H4-VxS.title" = "8k";
-
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "eDl-Si-LSa"; */
 "eDl-Si-LSa.title" = "Kontrast:";
 
@@ -133,29 +124,17 @@
 /* Class = "NSTextFieldCell"; title = "Subtitle:"; ObjectID = "eXZ-HN-qL4"; */
 "eXZ-HN-qL4.title" = "Titulky:";
 
-/* Class = "NSTextFieldCell"; title = "16k"; ObjectID = "era-AG-bSl"; */
-"era-AG-bSl.title" = "16k";
-
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "f23-sU-Thx"; */
-"f23-sU-Thx.title" = "Table View Cell";
-
 /* Class = "NSTextFieldCell"; title = "FONT"; ObjectID = "g6B-DC-lJ0"; */
 "g6B-DC-lJ0.title" = "PÍSMO";
 
 /* Class = "NSButtonCell"; title = "Font…"; ObjectID = "ghy-e7-7Of"; */
 "ghy-e7-7Of.title" = "Písmo…";
 
-/* Class = "NSTextFieldCell"; title = "4k"; ObjectID = "i0j-2a-vKD"; */
-"i0j-2a-vKD.title" = "4k";
-
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "iS4-Zr-9Ig"; */
 "iS4-Zr-9Ig.title" = "Ekvalizér";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
 "iuN-rN-jT7.ibShadowedLabels[0]" = "Není";
-
-/* Class = "NSTextFieldCell"; title = "2k"; ObjectID = "j9w-YU-EcC"; */
-"j9w-YU-EcC.title" = "2k";
 
 /* Class = "NSTabViewItem"; label = "Subtitle"; ObjectID = "jND-MZ-sKB"; */
 "jND-MZ-sKB.label" = "Titulky";
@@ -181,9 +160,6 @@
 /* Class = "NSTextFieldCell"; title = "Gamma:"; ObjectID = "r6x-z0-oFC"; */
 "r6x-z0-oFC.title" = "Gama:";
 
-/* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "s3F-Tl-Siy"; */
-"s3F-Tl-Siy.title" = "0s";
-
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "s9l-Hb-SCk"; */
 "s9l-Hb-SCk.title" = "Velikost:";
 
@@ -196,9 +172,6 @@
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
 "uCX-EC-jXM.title" = "-5s";
 
-/* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "upM-Lz-YwK"; */
-"upM-Lz-YwK.title" = "0s";
-
 /* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
 "uqb-mz-A22.title" = "POZADÍ";
 
@@ -207,9 +180,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
 "wBD-pZ-Bvu.title" = "Volby stylu titulků mohou porušit vykreslování ASS, některé z nich budou zakázány v závislosti na typu titulků.";
-
-/* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "wgA-op-JP4"; */
-"wgA-op-JP4.title" = "0s";
 
 /* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
 "x39-62-7KC.title" = "Zvuková stopa:";

@@ -5,8 +5,8 @@
   Created by lhc on 3/1/2017.
   Copyright © 2017 lhc. All rights reserved.
 */
-
 // Common
+
 "general.on" = "On";
 "general.off" = "Off";
 "general.login" = "Login";
@@ -87,7 +87,7 @@
 "preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
 "preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
 
-"menu.volume"= "Volume: %d";
+"menu.volume" = "Volume: %d";
 "menu.audio_delay" = "Audio Delay: %.2fs";
 "menu.sub_delay" = "Subtitle Delay: %.2fs";
 "menu.fullscreen" = "Enter Full Screen";

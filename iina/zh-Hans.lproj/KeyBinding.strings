@@ -70,8 +70,6 @@
 
 "relative" = "秒";
 "absolute" = "秒";
-"absolute-percent" = "%";
-"relative-percent" = "%";
 "relative+exact" = "秒（精确）";
 "relative-percent+exact" = "%（精确）";
 "absolute+keyframe" = "秒（关键帧）";
@@ -86,7 +84,7 @@
 "opt.video-aspect" = "长宽比";
 "opt.contrast" = "对比度";
 "opt.brightness" = "亮度";
-"opt.gamma" = "Gamma";
+"opt.gamma" = "伽马";
 "opt.saturation" = "明度";
 "opt.deinterlace" = "反交错";
 

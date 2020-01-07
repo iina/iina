@@ -1,12 +1,12 @@
-/* 
+/*
   String_ui.strings
   iina
 
   Created by lhc on 3/1/2017.
   Copyright © 2017 lhc. All rights reserved.
 */
-
 // Common
+
 "general.on" = "Zapnuto";
 "general.off" = "Vypnuto";
 "general.login" = "Přihlásit se";
@@ -87,7 +87,7 @@
 "preference.key_binding_hint_1" = "Pro úpravy konfiguračního souboru klávesových zkratek, vytvořte jejich kopii stisknutím \"Duplikovat…\".";
 "preference.key_binding_hint_2" = "Pro změnu klávesové zkratky, klikněte dvakrát na odpovídající řádek po pravé straně.";
 
-"menu.volume"= "Hlasitost: %d";
+"menu.volume" = "Hlasitost: %d";
 "menu.audio_delay" = "Zpoždění zvuku: %.2f s";
 "menu.sub_delay" = "Zpoždění titulků: %.2f s";
 "menu.fullscreen" = "Spustit režim celé obrazovky";

@@ -10,14 +10,8 @@
 /* Class = "NSTextFieldCell"; title = "The button below will delete all cached thumbnails."; ObjectID = "Bag-TV-Stp"; */
 "Bag-TV-Stp.title" = "저장된 모든 썸네일을 지웁니다.";
 
-/* Class = "NSButtonCell"; title = "Set IINA as the Default Application…"; ObjectID = "e1p-Aa-WFG"; */
-"e1p-Aa-WFG.title" = "IINA를 기본 응용프로그램으로 지정…";
-
 /* Class = "NSTextFieldCell"; title = "Cleared."; ObjectID = "Efe-8C-4eV"; */
 "Efe-8C-4eV.title" = "지워졌습니다.";
-
-/* Class = "NSButtonCell"; title = "Firefox"; ObjectID = "f9i-sS-MJN"; */
-"f9i-sS-MJN.title" = "FireFox";
 
 /* Class = "NSTextFieldCell"; title = "Cleared."; ObjectID = "Fb4-dy-CXX"; */
 "Fb4-dy-CXX.title" = "지워졌습니다.";
@@ -25,20 +19,8 @@
 /* Class = "NSTextFieldCell"; title = "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."; ObjectID = "GAo-fx-NG0"; */
 "GAo-fx-NG0.title" = "한번의 클릭으로 링크 또는 방문중인 웹페이지의 영상을 재생합니다.\nyoutube-dl 프로그램이 지원하는 웹페이지에서만 동작합니다.";
 
-/* Class = "NSWindow"; title = "Window"; ObjectID = "gck-1e-Yi7"; */
-"gck-1e-Yi7.title" = "Window";
-
-/* Class = "NSButtonCell"; title = "Clear Thumbnail Cache…"; ObjectID = "hsG-JB-TT9"; */
-"hsG-JB-TT9.title" = "썸네일 캐시 비우기…";
-
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "IkF-qG-s4j"; */
 "IkF-qG-s4j.title" = "승인";
-
-/* Class = "NSButtonCell"; title = "Audio"; ObjectID = "jFt-2a-nmc"; */
-"jFt-2a-nmc.title" = "오디오";
-
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "kbP-VI-dmT"; */
-"kbP-VI-dmT.title" = "취소";
 
 /* Class = "NSButtonCell"; title = "Playlist"; ObjectID = "MGo-J8-zWE"; */
 "MGo-J8-zWE.title" = "재생목록";
@@ -49,11 +31,29 @@
 /* Class = "NSTextFieldCell"; title = "Default Application"; ObjectID = "ORO-lK-yK5"; */
 "ORO-lK-yK5.title" = "기본 응용프로그램";
 
-/* Class = "NSTextFieldCell"; title = "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."; ObjectID = "pPC-q2-9Gh"; */
-"pPC-q2-9Gh.title" = "\"watch later\" 폴더에 있는 모든 이어보기 파일을 지웁니다.\n이 파일에는 재생중에 적용된 모든 설정과 재생위치가 기록되어 있습니다.";
-
 /* Class = "NSTextFieldCell"; title = "Clear Cache"; ObjectID = "QHA-tO-oSn"; */
 "QHA-tO-oSn.title" = "캐시 지우기";
+
+/* Class = "NSButtonCell"; title = "Set IINA as the Default Application…"; ObjectID = "e1p-Aa-WFG"; */
+"e1p-Aa-WFG.title" = "IINA를 기본 응용프로그램으로 지정…";
+
+/* Class = "NSButtonCell"; title = "Firefox"; ObjectID = "f9i-sS-MJN"; */
+"f9i-sS-MJN.title" = "FireFox";
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "gck-1e-Yi7"; */
+"gck-1e-Yi7.title" = "Window";
+
+/* Class = "NSButtonCell"; title = "Clear Thumbnail Cache…"; ObjectID = "hsG-JB-TT9"; */
+"hsG-JB-TT9.title" = "썸네일 캐시 비우기…";
+
+/* Class = "NSButtonCell"; title = "Audio"; ObjectID = "jFt-2a-nmc"; */
+"jFt-2a-nmc.title" = "오디오";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "kbP-VI-dmT"; */
+"kbP-VI-dmT.title" = "취소";
+
+/* Class = "NSTextFieldCell"; title = "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."; ObjectID = "pPC-q2-9Gh"; */
+"pPC-q2-9Gh.title" = "\"watch later\" 폴더에 있는 모든 이어보기 파일을 지웁니다.\n이 파일에는 재생중에 적용된 모든 설정과 재생위치가 기록되어 있습니다.";
 
 /* Class = "NSTextFieldCell"; title = "Calculating…"; ObjectID = "tRq-eU-AV3"; */
 "tRq-eU-AV3.title" = "계산중…";
@@ -69,4 +69,3 @@
 
 /* Class = "NSTextFieldCell"; title = "Get Browser Extensions for IINA"; ObjectID = "zCe-1f-tkF"; */
 "zCe-1f-tkF.title" = "IINA용 브라우저 확장 프로그램 가져오기";
-

@@ -27,7 +27,7 @@
 "cmd.write-watch-later-config" = "记录播放进度";
 "cmd.stop" = "停止";
 "cmd.quit" = "退出";
-"cmd.quit-watch-later" = "退出";
+"cmd.quit-watch-later" = "退出（保存进度）";
 "cmd.screenshot" = "截图";
 "cmd.screenshot-to-file" = "截图至文件";
 "cmd.loadfile" = "打开文件";

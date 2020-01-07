@@ -1,4 +1,3 @@
-
 /* Class = "NSTextFieldCell"; title = "Seek type:"; ObjectID = "1yb-m4-1sK"; */
 "1yb-m4-1sK.title" = "Spol type:";
 
@@ -38,6 +37,9 @@
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
 "Hm3-dh-jgb.title" = "Fuldskærm";
 
+/* Class = "NSTextFieldCell"; title = "Trackpad"; ObjectID = "I6k-ab-IwJ"; */
+"I6k-ab-IwJ.title" = "Trackpad";
+
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "K9H-w9-wmT"; */
 "K9H-w9-wmT.title" = "Auto";
 
@@ -73,6 +75,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Force Touch to:"; ObjectID = "dpH-PO-WKt"; */
 "dpH-PO-WKt.title" = "Force Touch til:";
+
+/* Class = "NSTextFieldCell"; title = "Mouse"; ObjectID = "eA4-AD-oUu"; */
+"eA4-AD-oUu.title" = "Mouse";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "guu-dK-YfL"; */
 "guu-dK-YfL.title" = "Ingen";

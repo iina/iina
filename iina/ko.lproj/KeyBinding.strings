@@ -1,292 +1,116 @@
-/* (No Comment) */
-"absolute" = "초";
-
-/* (No Comment) */
-"absolute-percent" = "%";
-
-/* (No Comment) */
-"absolute-percent+keyframe" = "% (키프레임)";
-
-/* (No Comment) */
-"absolute+keyframe" = "초 (키프레임)";
-
-/* (No Comment) */
-"add" = "증가";
-
-/* (No Comment) */
-"backward" = "뒤로";
-
-/* (No Comment) */
-"by" = "다음만큼";
-
-/* (No Comment) */
-"cmd.ab-loop" = "구간 반복";
-
-/* (No Comment) */
-"cmd.add" = "변경";
-
-/* (No Comment) */
-"cmd.cycle" = "순환";
-
-/* (No Comment) */
-"cmd.cycle-values" = "설정값 안에서 순환";
-
-/* (No Comment) */
-"cmd.frame-back-step" = "이전 프레임";
-
-/* (No Comment) */
-"cmd.frame-step" = "다음 프레임";
-
-/* KeyBinding.strings
+/*
+  KeyBinding.strings
   iina
 
   Created by lhc on 4/2/2017.
-  Copyright © 2017 lhc. All rights reserved. */
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
 "cmd.ignore" = "키입력 무시";
-
-/* (No Comment) */
-"cmd.loadfile" = "파일 열기";
-
-/* (No Comment) */
-"cmd.loadlist" = "재생목록 열기";
-
-/* (No Comment) */
-"cmd.multiply" = "설정값 배수";
-
-/* (No Comment) */
-"cmd.playlist-clear" = "재생목록 지우기";
-
-/* (No Comment) */
-"cmd.playlist-move" = "재생목록 항목 이동";
-
-/* (No Comment) */
-"cmd.playlist-next" = "다음 항목";
-
-/* (No Comment) */
-"cmd.playlist-prev" = "이전 항목";
-
-/* (No Comment) */
-"cmd.playlist-remove" = "재생목록에서 제거";
-
-/* (No Comment) */
-"cmd.playlist-shuffle" = "임의 재생";
-
-/* (No Comment) */
-"cmd.quit" = "IINA 종료";
-
-/* (No Comment) */
-"cmd.quit-watch-later" = "이어보기 정보 저장후 종료";
-
-/* (No Comment) */
+"cmd.seek" = "탐색";
 "cmd.revert-seek" = "탐색 취소";
-
-/* (No Comment) */
+"cmd.set" = "설정";
+"cmd.cycle" = "순환";
+"cmd.cycle-values" = "설정값 안에서 순환";
+"cmd.add" = "변경";
+"cmd.multiply" = "설정값 배수";
+"cmd.frame-step" = "다음 프레임";
+"cmd.frame-back-step" = "이전 프레임";
+"cmd.ab-loop" = "구간 반복";
+"cmd.sub-seek" = "자막 탐색";
+"cmd.playlist-next" = "다음 항목";
+"cmd.playlist-prev" = "이전 항목";
+"cmd.playlist-move" = "재생목록 항목 이동";
+"cmd.playlist-clear" = "재생목록 지우기";
+"cmd.playlist-remove" = "재생목록에서 제거";
+"cmd.playlist-shuffle" = "임의 재생";
+"cmd.write-watch-later-config" = "이어보기 정보 기록";
+"cmd.stop" = "재생 중단";
+"cmd.quit" = "IINA 종료";
+"cmd.quit-watch-later" = "이어보기 정보 저장후 종료";
+"cmd.screenshot" = "스크린샷";
+"cmd.screenshot-to-file" = "파일로 스크린샷 저장";
+"cmd.loadfile" = "파일 열기";
+"cmd.loadlist" = "재생목록 열기";
 "cmd.run" = "실행";
 
-/* (No Comment) */
-"cmd.screenshot" = "스크린샷";
-
-/* (No Comment) */
-"cmd.screenshot-to-file" = "파일로 스크린샷 저장";
-
-/* (No Comment) */
-"cmd.seek" = "탐색";
-
-/* (No Comment) */
-"cmd.set" = "설정";
-
-/* (No Comment) */
-"cmd.stop" = "재생 중단";
-
-/* (No Comment) */
-"cmd.sub-seek" = "자막 탐색";
-
-/* (No Comment) */
-"cmd.write-watch-later-config" = "이어보기 정보 기록";
-
-/* (No Comment) */
-"forward" = "앞으로";
-
-/* (No Comment) */
-"iina.audio-panel" = "오디오 패널";
-
-/* (No Comment) */
-"iina.bigger-window" = "윈도우 크게";
-
-/* (No Comment) */
-"iina.chapter-panel" = "챕터 목록 패널";
-
-/* (No Comment) */
-"iina.delete-current-file" = "현재 파일 삭제";
-
-/* (No Comment) */
-"iina.delete-current-file-hard" = "현재 파일을 휴지통에 버리지 않고 바로 삭제";
-
-/* (No Comment) */
-"iina.find-online-subs" = "인터넷에서 자막 찾기";
-
-/* (No Comment) */
-"iina.fit-to-screen" = "화면크기에 맞춤";
-
-/* (No Comment) */
 "iina.flip" = "상하 뒤집기";
-
-/* (No Comment) */
 "iina.mirror" = "좌우 뒤집기";
 
-/* (No Comment) */
+"iina.toggle-pip" = "화면 속 화면 전환/복귀";
+"iina.toggle-music-mode" = "음악 모드 전환/복귀";
 "iina.open-file" = "파일 열기";
-
-/* (No Comment) */
 "iina.open-url" = "URL 열기";
-
-/* (No Comment) */
+"iina.video-panel" = "비디오 패널";
+"iina.audio-panel" = "오디오 패널";
+"iina.sub-panel" = "자막 패널";
 "iina.playlist-panel" = "재생목록 패널";
-
-/* (No Comment) */
+"iina.chapter-panel" = "챕터 목록 패널";
+"iina.bigger-window" = "윈도우 크게";
+"iina.smaller-window" = "윈도우 작게";
+"iina.fit-to-screen" = "화면크기에 맞춤";
+"iina.toggle-flip" = "상하 뒤집기 전환/복귀";
+"iina.toggle-mirror" = "좌우 뒤집기 전환/복귀";
+"iina.save-playlist" = "현재 재생목록 저장";
+"iina.delete-current-file" = "현재 파일 삭제";
+"iina.delete-current-file-hard" = "현재 파일을 휴지통에 버리지 않고 바로 삭제";
+"iina.find-online-subs" = "인터넷에서 자막 찾기";
 "iina.save-downloaded-sub" = "다운로드된 자막 저장";
 
-/* (No Comment) */
-"iina.save-playlist" = "현재 재생목록 저장";
-
-/* (No Comment) */
-"iina.smaller-window" = "윈도우 작게";
-
-/* (No Comment) */
-"iina.sub-panel" = "자막 패널";
-
-/* (No Comment) */
-"iina.toggle-flip" = "상하 뒤집기 전환/복귀";
-
-/* (No Comment) */
-"iina.toggle-mirror" = "좌우 뒤집기 전환/복귀";
-
-/* (No Comment) */
-"iina.toggle-music-mode" = "음악 모드 전환/복귀";
-
-/* (No Comment) */
-"iina.toggle-pip" = "화면 속 화면 전환/복귀";
-
-/* (No Comment) */
-"iina.video-panel" = "비디오 패널";
-
-/* (No Comment) */
-"in" = "다음 값 중에서";
-
-/* (No Comment) */
-"minus" = "감소";
-
-/* (No Comment) */
+"yes" = "예";
 "no" = "아니오";
-
-/* (No Comment) */
-"opt.audio" = "오디오 트랙";
-
-/* (No Comment) */
-"opt.audio-delay" = "오디오 지연";
-
-/* (No Comment) */
-"opt.brightness" = "밝기";
-
-/* (No Comment) */
-"opt.chapter" = "챕터";
-
-/* (No Comment) */
-"opt.contrast" = "대비";
-
-/* (No Comment) */
-"opt.deinterlace" = "디인터레이스";
-
-/* (No Comment) */
-"opt.fullscreen" = "전체 화면";
-
-/* (No Comment) */
-"opt.gamma" = "감마";
-
-/* (No Comment) */
-"opt.mute" = "소리 끔";
-
-/* (No Comment) */
-"opt.ontop" = "모든 윈도우 위에 두기";
-
-/* (No Comment) */
-"opt.pause" = "일시 정지";
-
-/* (No Comment) */
-"opt.saturation" = "채도";
-
-/* (No Comment) */
-"opt.speed" = "재생속도";
-
-/* (No Comment) */
-"opt.sub" = "자막 트랙";
-
-/* (No Comment) */
-"opt.sub-ass-style-override" = "ASS 자막 효과 덮어쓰기";
-
-/* (No Comment) */
-"opt.sub-delay" = "자막 지연";
-
-/* (No Comment) */
-"opt.sub-pos" = "자막 위치";
-
-/* (No Comment) */
-"opt.sub-scale" = "자막 크기";
-
-/* (No Comment) */
-"opt.sub-visibility" = "자막 보이기";
-
-/* (No Comment) */
-"opt.video" = "비디오 트랙";
-
-/* (No Comment) */
-"opt.video-aspect" = "비디오 화면비";
-
-/* (No Comment) */
-"opt.volume" = "음량";
-
-/* (No Comment) */
-"opt.window-scale" = "윈도우 크기";
-
-/* (No Comment) */
-"read.add" = "{{property}} {{value}}";
-
-/* (No Comment) */
-"read.cycle" = "{{#dir_down}}역순으로{{/dir_down}} {{property}} 켜기/끄기";
-
-/* (No Comment) */
-"read.cycle-values" = "({{{values}}})값 안에서 {{property}} 순환";
-
-/* (No Comment) */
-"read.multiply" = "{{property}} 속성값의 {{factor}}x 배수로 설정";
-
-/* (No Comment) */
-"read.seek" = "{{#abs}}위치{{/abs}} {{value}}{{#sec}}초{{/sec}}{{#per}}%{{/per}} {{#exact}}(정확){{/exact}}{{#kf}}(키프레임){{/kf}} {{#fwd}}앞으로{{/fwd}}{{#bwd}}뒤로{{/bwd}} 탐색";
-
-/* (No Comment) */
-"read.set" = "{{property}} 속성을 {{value}} 값으로 설정";
-
-/* (No Comment) */
-"read.sub-seek" = "{{#skip_1}}다음{{/skip_1}}{{#skip_-1}}이전{{/skip_-1}} 자막 탐색";
-
-/* (No Comment) */
-"relative" = "초";
-
-/* (No Comment) */
-"relative-percent" = "%";
-
-/* (No Comment) */
-"relative-percent+exact" = "% (정확)";
-
-/* (No Comment) */
-"relative+exact" = "초 (정확)";
-
-/* (No Comment) */
+"to" = "(을)를";
+"by" = "다음만큼";
+"in" = "다음 값 중에서";
+"add" = "증가";
+"minus" = "감소";
+"forward" = "앞으로";
+"backward" = "뒤로";
 "seek-to" = "위치로";
 
-/* (No Comment) */
-"to" = "(을)를";
+"relative" = "초";
+"absolute" = "초";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "초 (정확)";
+"relative-percent+exact" = "% (정확)";
+"absolute+keyframe" = "초 (키프레임)";
+"absolute-percent+keyframe" = "% (키프레임)";
 
-/* (No Comment) */
-"yes" = "예";
+"opt.pause" = "일시 정지";
+"opt.speed" = "재생속도";
 
+"opt.window-scale" = "윈도우 크기";
+
+"opt.video" = "비디오 트랙";
+"opt.video-aspect" = "비디오 화면비";
+"opt.contrast" = "대비";
+"opt.brightness" = "밝기";
+"opt.gamma" = "감마";
+"opt.saturation" = "채도";
+"opt.deinterlace" = "디인터레이스";
+
+"opt.audio" = "오디오 트랙";
+"opt.volume" = "음량";
+"opt.mute" = "소리 끔";
+"opt.audio-delay" = "오디오 지연";
+
+"opt.sub" = "자막 트랙";
+"opt.sub-delay" = "자막 지연";
+"opt.sub-pos" = "자막 위치";
+"opt.sub-scale" = "자막 크기";
+"opt.sub-visibility" = "자막 보이기";
+"opt.sub-ass-style-override" = "ASS 자막 효과 덮어쓰기";
+
+"opt.fullscreen" = "전체 화면";
+"opt.ontop" = "모든 윈도우 위에 두기";
+
+"opt.chapter" = "챕터";
+
+"read.set" = "{{property}} 속성을 {{value}} 값으로 설정";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "{{property}} 속성값의 {{factor}}x 배수로 설정";
+"read.cycle" = "{{#dir_down}}역순으로{{/dir_down}} {{property}} 켜기/끄기";
+"read.cycle-values" = "({{{values}}})값 안에서 {{property}} 순환";
+"read.seek" = "{{#abs}}위치{{/abs}} {{value}}{{#sec}}초{{/sec}}{{#per}}%{{/per}} {{#exact}}(정확){{/exact}}{{#kf}}(키프레임){{/kf}} {{#fwd}}앞으로{{/fwd}}{{#bwd}}뒤로{{/bwd}} 탐색";
+"read.sub-seek" = "{{#skip_1}}다음{{/skip_1}}{{#skip_-1}}이전{{/skip_-1}} 자막 탐색";

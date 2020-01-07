@@ -90,8 +90,8 @@
 "hwdec.no" = "Avaktivera hårdvaruavkodning.";
 "keymapping.message" = "Tryck på valfri tangent för att fånga.";
 "keymapping.title" = "Kortkommando";
-"main.buffering_indicator" = "Buffrar... %d%%";
-"main.opening_stream" = "Öppnar ström...";
+"main.buffering_indicator" = "Buffrar… %d%%";
+"main.opening_stream" = "Öppnar ström…";
 "menu.audio_delay" = "Ljudfördröjning: %.2fs";
 "menu.audio_delay_down" = "Ljudfördröjning -%.1f s";
 "menu.audio_delay_up" = "Ljudfördröjning +%.1f s";
@@ -135,7 +135,7 @@
 "osd.file_error" = "Fel vid inläsning av fil";
 "osd.filter_added" = "La till filter: %@";
 "osd.filter_removed" = "Tog bort filter";
-"osd.find_online_sub" = "Hittar undertexter online...";
+"osd.find_online_sub" = "Hittar undertexter online…";
 "osd.find_online_sub.source" = "från";
 "osd.mute" = "Tysta";
 "osd.network_error" = "Nätverksfel";
@@ -149,7 +149,7 @@
 "osd.sub_delay.later" = "Undertextfördröjning: %.2f s senare";
 "osd.sub_delay.nodelay" = "Undertextfördröjning: ingen fördröjning";
 "osd.sub_downloaded" = "Undertext nedladdad";
-"osd.sub_found" = "%d undertexter hittade. Laddar ner...";
+"osd.sub_found" = "%d undertexter hittade. Laddar ner…";
 "osd.sub_not_found" = "Inga undertexter hittades";
 "osd.sub_saved" = "Undertext sparad";
 "osd.subtitle_pos" = "Undertextposition: %.1f";
@@ -161,9 +161,9 @@
 "osd.video_eq.hue" = "Färgton: %i";
 "osd.video_eq.saturation" = "Mättnad: %i";
 "osd.volume" = "Volym: %i";
-"pl_menu.add_file" = "Lägg till fil...";
-"pl_menu.add_sub" = "Lägg till undertext...";
-"pl_menu.add_url" = "Lägg till URL...";
+"pl_menu.add_file" = "Lägg till fil…";
+"pl_menu.add_sub" = "Lägg till undertext…";
+"pl_menu.add_url" = "Lägg till URL…";
 "pl_menu.browser" = "Öppna i webbläsare";
 "pl_menu.clear_playlist" = "Rensa spellista";
 "pl_menu.copy_url" = "Kopiera URL";
@@ -185,7 +185,7 @@
 "preference.advanced" = "Avancerat";
 "preference.control" = "Kontroll";
 "preference.general" = "Allmänt";
-"preference.key_binding_hint_1" = "För att redigera snabbtangenter i nuvarande konfigurationsfil, klicka på \"Duplicera...\" först för att skapa en kopia.";
+"preference.key_binding_hint_1" = "För att redigera snabbtangenter i nuvarande konfigurationsfil, klicka på \"Duplicera…\" först för att skapa en kopia.";
 "preference.key_binding_hint_2" = "Dubbelklicka på en rad på höger sida för att redigera motsvarande kortkommando.";
 "preference.keybindings" = "Kortkommandon";
 "preference.logged_in_as" = "Inloggad som %@";

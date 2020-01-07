@@ -90,7 +90,7 @@
 "hwdec.no" = "Вимкнути апаратне декодування.";
 "keymapping.message" = "Натисніть будь-яку клавішу для записування.";
 "keymapping.title" = "Призначення клавіш";
-"main.buffering_indicator" = "Буферизація... %d%%";
+"main.buffering_indicator" = "Буферизація… %d%%";
 "main.opening_stream" = "Відкриття потоку…";
 "menu.audio_delay" = "Затримка звуку: %.2f с";
 "menu.audio_delay_down" = "Затримка звуку на –%.1f с";
@@ -149,7 +149,7 @@
 "osd.sub_delay.later" = "Затримка субтитрів: +%.2f с";
 "osd.sub_delay.nodelay" = "Затримка субтитрів: без затримки";
 "osd.sub_downloaded" = "Субтитри завантажено";
-"osd.sub_found" = "Знайдено %d субтитрів. Завантажую...";
+"osd.sub_found" = "Знайдено %d субтитрів. Завантажую…";
 "osd.sub_not_found" = "Субтитрів не знайдено";
 "osd.sub_saved" = "Субтитри збережено";
 "osd.subtitle_pos" = "Позиція субтитрів: %.1f";

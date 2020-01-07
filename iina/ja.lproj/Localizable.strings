@@ -90,8 +90,8 @@
 "hwdec.no" = "ハードウェアデコーディングをオフにします。";
 "keymapping.message" = "保存するには何かキーを押してください。";
 "keymapping.title" = "キーマッピング";
-"main.buffering_indicator" = "バッファ中... %d%%";
-"main.opening_stream" = "ストリームを展開中...";
+"main.buffering_indicator" = "バッファ中… %d%%";
+"main.opening_stream" = "ストリームを展開中…";
 "menu.audio_delay" = "オーディオディレイ: %.2fs";
 "menu.audio_delay_down" = "オーディオディレイ - %.1fs";
 "menu.audio_delay_up" = "オーディオディレイ + %.1fs";
@@ -135,7 +135,7 @@
 "osd.file_error" = "ファイルの読み込みエラー";
 "osd.filter_added" = "追加したフィルタ: %@";
 "osd.filter_removed" = "削除したフィルタ";
-"osd.find_online_sub" = "オンラインで字幕を探しています...";
+"osd.find_online_sub" = "オンラインで字幕を探しています…";
 "osd.find_online_sub.source" = "検索先:";
 "osd.mute" = "ミュート";
 "osd.network_error" = "ネットワークエラー";
@@ -149,7 +149,7 @@
 "osd.sub_delay.later" = "字幕ディレイ: %.2f秒 遅く";
 "osd.sub_delay.nodelay" = "字幕ディレイ: ディレイなし";
 "osd.sub_downloaded" = "字幕をダウンロードしました";
-"osd.sub_found" = "%d個の字幕が見つかりました。ダウンロードしています...";
+"osd.sub_found" = "%d個の字幕が見つかりました。ダウンロードしています…";
 "osd.sub_not_found" = "字幕が見つかりませんでした";
 "osd.sub_saved" = "字幕を保存しました";
 "osd.subtitle_pos" = "字幕の位置: %.1f";
@@ -161,9 +161,9 @@
 "osd.video_eq.hue" = "色調: %i";
 "osd.video_eq.saturation" = "彩度: %i";
 "osd.volume" = "音量: %i";
-"pl_menu.add_file" = "ファイルの追加...";
+"pl_menu.add_file" = "ファイルの追加…";
 "pl_menu.add_sub" = "字幕の追加…";
-"pl_menu.add_url" = "URLの追加...";
+"pl_menu.add_url" = "URLの追加…";
 "pl_menu.browser" = "ブラウザで開く";
 "pl_menu.clear_playlist" = "プレイリストをクリア";
 "pl_menu.copy_url" = "URLをコピー";
@@ -185,7 +185,7 @@
 "preference.advanced" = "拡張";
 "preference.control" = "コントロール";
 "preference.general" = "一般";
-"preference.key_binding_hint_1" = "この設定を編集するには、先に\"複製...\"ボタンをクリックしてコピーを作成してください。";
+"preference.key_binding_hint_1" = "この設定を編集するには、先に\"複製…\"ボタンをクリックしてコピーを作成してください。";
 "preference.key_binding_hint_2" = "右側の行をダブルクリックすることで対応するキー割り当て設定を編集できます。";
 "preference.keybindings" = "キーの割り当て";
 "preference.logged_in_as" = "%@でログイン中";

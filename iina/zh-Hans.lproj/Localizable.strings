@@ -90,7 +90,7 @@
 "hwdec.no" = "不启用硬件解码。";
 "keymapping.message" = "请按任意键来开始录制。";
 "keymapping.title" = "快捷键";
-"main.buffering_indicator" = "缓冲中... %d%%";
+"main.buffering_indicator" = "缓冲中… %d%%";
 "main.opening_stream" = "正在打开流……";
 "menu.audio_delay" = "音频延迟: %.2f秒";
 "menu.audio_delay_down" = "音频延迟 - %.1fs";
@@ -135,7 +135,7 @@
 "osd.file_error" = "读取文件错误";
 "osd.filter_added" = "已添加滤镜: %@";
 "osd.filter_removed" = "已删除滤镜";
-"osd.find_online_sub" = "查找在线字幕中...";
+"osd.find_online_sub" = "查找在线字幕中…";
 "osd.find_online_sub.source" = "从";
 "osd.mute" = "静音";
 "osd.network_error" = "网络错误";
@@ -149,7 +149,7 @@
 "osd.sub_delay.later" = "字幕延迟：延迟 %.2f 秒";
 "osd.sub_delay.nodelay" = "字幕延迟：无延迟";
 "osd.sub_downloaded" = "字幕已下载";
-"osd.sub_found" = "已找到 %d 个字幕。下载中...";
+"osd.sub_found" = "已找到 %d 个字幕。下载中…";
 "osd.sub_not_found" = "未找到字幕";
 "osd.sub_saved" = "字幕已保存";
 "osd.subtitle_pos" = "字幕位置：%.1f";

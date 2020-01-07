@@ -90,7 +90,7 @@
 "hwdec.no" = "Désactive le décodage matériel.";
 "keymapping.message" = "Appuyez sur la touche à configurer.";
 "keymapping.title" = "Configurer une touche";
-"main.buffering_indicator" = "Mise en mémoire tampon... %d%%";
+"main.buffering_indicator" = "Mise en mémoire tampon… %d%%";
 "main.opening_stream" = "Lancement du stream…";
 "menu.audio_delay" = "Délai audio : %.2fs";
 "menu.audio_delay_down" = "Délai audio -%.1fs";
@@ -135,7 +135,7 @@
 "osd.file_error" = "Erreur lors de la lecture du fichier";
 "osd.filter_added" = "Filtre ajouté : %@";
 "osd.filter_removed" = "Filtre supprimé";
-"osd.find_online_sub" = "Recherche de sous-titres en ligne...";
+"osd.find_online_sub" = "Recherche de sous-titres en ligne…";
 "osd.find_online_sub.source" = "de";
 "osd.mute" = "Son coupé";
 "osd.network_error" = "Erreur réseau";
@@ -149,7 +149,7 @@
 "osd.sub_delay.later" = "Délai des sous-titres : %.2fs en avance";
 "osd.sub_delay.nodelay" = "Délai des sous-titres : aucun";
 "osd.sub_downloaded" = "Sous-titre téléchargé";
-"osd.sub_found" = "%d sous-titre(s) trouvé(s). Téléchargement...";
+"osd.sub_found" = "%d sous-titre(s) trouvé(s). Téléchargement…";
 "osd.sub_not_found" = "Aucun sous-titre trouvé";
 "osd.sub_saved" = "Sous-titre sauvegardé";
 "osd.subtitle_pos" = "Positon des sous-titres : %.1f";
@@ -185,7 +185,7 @@
 "preference.advanced" = "Avancé";
 "preference.control" = "Contrôles";
 "preference.general" = "Général";
-"preference.key_binding_hint_1" = "Pour modifier les raccourcis clavier de cette configuration, cliquez sur le bouton \"Dupliquer...\" pour en créer une copie.";
+"preference.key_binding_hint_1" = "Pour modifier les raccourcis clavier de cette configuration, cliquez sur le bouton \"Dupliquer…\" pour en créer une copie.";
 "preference.key_binding_hint_2" = "Double-cliquez sur une ligne pour modifier le raccourci clavier correspondant.";
 "preference.keybindings" = "Raccourcis clavier";
 "preference.logged_in_as" = "Connecté en tant que %@";

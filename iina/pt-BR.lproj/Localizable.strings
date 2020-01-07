@@ -90,8 +90,8 @@
 "hwdec.no" = "Está Desabilitado o decodificador de Hardware.";
 "keymapping.message" = "Pressione algo para iniciar gravação.";
 "keymapping.title" = "Mapeamento de teclas";
-"main.buffering_indicator" = "Carregando... %d%%";
-"main.opening_stream" = "Abrindo stream...";
+"main.buffering_indicator" = "Carregando… %d%%";
+"main.opening_stream" = "Abrindo stream…";
 "menu.audio_delay" = "Atraso de Áudio: %.2fs";
 "menu.audio_delay_down" = "Atraso de Áudio - %.1fs";
 "menu.audio_delay_up" = "Atraso de Áudio + %.1fs";
@@ -135,7 +135,7 @@
 "osd.file_error" = "Erro lendo arquivo";
 "osd.filter_added" = "Filtro adicionado: %@";
 "osd.filter_removed" = "Filtro removido";
-"osd.find_online_sub" = "Buscando legendas online...";
+"osd.find_online_sub" = "Buscando legendas online…";
 "osd.find_online_sub.source" = "de";
 "osd.mute" = "Sem Audio";
 "osd.network_error" = "Erro de rede";
@@ -149,7 +149,7 @@
 "osd.sub_delay.later" = "Atraso de Legenda: %.2fs Atrasada";
 "osd.sub_delay.nodelay" = "Atraso de Legenda: Sem Atraso";
 "osd.sub_downloaded" = "Legenda baixada";
-"osd.sub_found" = "Encontrei %d legenda(s). Baixando...";
+"osd.sub_found" = "Encontrei %d legenda(s). Baixando…";
 "osd.sub_not_found" = "Nenhuma legenda encontrada";
 "osd.sub_saved" = "Legenda salva";
 "osd.subtitle_pos" = "Posição da Legenda: %.1f";
@@ -161,9 +161,9 @@
 "osd.video_eq.hue" = "Hue: %i";
 "osd.video_eq.saturation" = "Cor: %i";
 "osd.volume" = "Volume: %i";
-"pl_menu.add_file" = "Adicionar Arquivo...";
+"pl_menu.add_file" = "Adicionar Arquivo…";
 "pl_menu.add_sub" = "Adicionar Legenda…";
-"pl_menu.add_url" = "Adicionar URL...";
+"pl_menu.add_url" = "Adicionar URL…";
 "pl_menu.browser" = "Abrir no navegador";
 "pl_menu.clear_playlist" = "Limpar Playlist";
 "pl_menu.copy_url" = "Copiar URL";
@@ -185,7 +185,7 @@
 "preference.advanced" = "Avançado";
 "preference.control" = "Controles";
 "preference.general" = "Geral";
-"preference.key_binding_hint_1" = "Para editar as combinações de teclas no arquivo de configuração atual, clique primeiro no botão \"Duplicar ...\" para criar uma cópia.";
+"preference.key_binding_hint_1" = "Para editar as combinações de teclas no arquivo de configuração atual, clique primeiro no botão \"Duplicar …\" para criar uma cópia.";
 "preference.key_binding_hint_2" = "Clique duas vezes em uma linha no lado direito para editar as combinações de teclas.";
 "preference.keybindings" = "Combinações de teclas";
 "preference.logged_in_as" = "Logado como %@";

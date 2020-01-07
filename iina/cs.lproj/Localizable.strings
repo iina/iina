@@ -1,4 +1,4 @@
-﻿/* 
+/* 
   String_ui.strings
   iina
 
@@ -17,7 +17,7 @@
 "general.password" = "Heslo";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Načítá se... %d%%";
+"main.buffering_indicator" = "Načítá se… %d%%";
 "main.opening_stream" = "Otevírám stream…";
 
 // QuickSettingViewController.swift
@@ -56,10 +56,10 @@
 "osd.video_eq.hue" = "Odstín: %i";
 "osd.video_eq.saturation" = "Saturace: %i";
 "osd.video_eq.brightness" = "Jas: %i";
-"osd.find_online_sub" = "Vyhledávám titulky online...";
+"osd.find_online_sub" = "Vyhledávám titulky online…";
 "osd.find_online_sub.source" = "z";
 "osd.sub_not_found" = "Titulky nenalezeny";
-"osd.sub_found" = "Nalezeno titulků: %d. Stahuji...";
+"osd.sub_found" = "Nalezeno titulků: %d. Stahuji…";
 "osd.sub_downloaded" = "Titulky staženy";
 "osd.sub_saved" = "Titulky uloženy";
 "osd.network_error" = "Chyba sítě";

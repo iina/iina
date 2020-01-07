@@ -90,7 +90,7 @@
 "hwdec.no" = "Zonder hardware-acceleratie heeft IINA meer energie nodig, en presteert het mogelijk minder optimaal.";
 "keymapping.message" = "Druk op een toets om de opname te starten.";
 "keymapping.title" = "Sneltoetsen";
-"main.buffering_indicator" = "Bufferen... %d%%";
+"main.buffering_indicator" = "Bufferen… %d%%";
 "main.opening_stream" = "Stream openen…";
 "menu.audio_delay" = "Audiovertraging: %.2fs";
 "menu.audio_delay_down" = "Audiovertraging - %.1fs";
@@ -149,7 +149,7 @@
 "osd.sub_delay.later" = "Ondertiteling versneld met %.2fs";
 "osd.sub_delay.nodelay" = "Geen ondertitelingvertraging";
 "osd.sub_downloaded" = "Ondertiteling gedownload";
-"osd.sub_found" = "%d ondertiteling(en) gevonden. Downloaden...";
+"osd.sub_found" = "%d ondertiteling(en) gevonden. Downloaden…";
 "osd.sub_not_found" = "Geen ondertiteling gevonden";
 "osd.sub_saved" = "Ondertiteling opgeslagen";
 "osd.subtitle_pos" = "Ondertitelingspositie: %.1f";

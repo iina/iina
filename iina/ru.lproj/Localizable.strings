@@ -91,7 +91,7 @@
 "keymapping.message" = "Нажмите любую клавишу для записи.";
 "keymapping.title" = "Назначить клавиши";
 "main.buffering_indicator" = "Буферизация… %d%%";
-"main.opening_stream" = "Открытие потока...";
+"main.opening_stream" = "Открытие потока…";
 "menu.audio_delay" = "Задержка аудио: %.2f с";
 "menu.audio_delay_down" = "Задержка аудио - %.1f с";
 "menu.audio_delay_up" = "Задержка аудио + %.1f с";
@@ -135,7 +135,7 @@
 "osd.file_error" = "Ошибка при чтении файла";
 "osd.filter_added" = "Добавлен фильтр: %@";
 "osd.filter_removed" = "Фильтр удален";
-"osd.find_online_sub" = "Поиск субтитров в интернете...";
+"osd.find_online_sub" = "Поиск субтитров в интернете…";
 "osd.find_online_sub.source" = "from";
 "osd.mute" = "Отключение";
 "osd.network_error" = "Ошибка сети";
@@ -185,7 +185,7 @@
 "preference.advanced" = "Дополнительно";
 "preference.control" = "Управление";
 "preference.general" = "Основные";
-"preference.key_binding_hint_1" = "Чтобы изменить привязки клавиш в текущем файле конфигурации, сначала нажмите кнопку \"Дублировать...\", чтобы создать копию.";
+"preference.key_binding_hint_1" = "Чтобы изменить привязки клавиш в текущем файле конфигурации, сначала нажмите кнопку \"Дублировать…\", чтобы создать копию.";
 "preference.key_binding_hint_2" = "Дважды щелкните строку справа, чтобы отредактировать соответствующую привязку клавиш.";
 "preference.keybindings" = "Клавиши";
 "preference.logged_in_as" = "Выполнен вход как %@";

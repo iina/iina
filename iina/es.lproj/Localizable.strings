@@ -90,7 +90,7 @@
 "hwdec.no" = "Desactivar la descodificación por hardware.";
 "keymapping.message" = "Pulse cualquier tecla para grabar.";
 "keymapping.title" = "Asignación de teclas";
-"main.buffering_indicator" = "Cargando... %d%%";
+"main.buffering_indicator" = "Cargando… %d%%";
 "main.opening_stream" = "Abrir flujo de datos";
 "menu.audio_delay" = "Retraso de audio: %.2fs";
 "menu.audio_delay_down" = "Retrasar audio - %.1fs";
@@ -135,7 +135,7 @@
 "osd.file_error" = "Error al leer el archivo";
 "osd.filter_added" = "Filtro Añadido: %@";
 "osd.filter_removed" = "Filtro Eliminado";
-"osd.find_online_sub" = "Buscando subtítulos en línea...";
+"osd.find_online_sub" = "Buscando subtítulos en línea…";
 "osd.find_online_sub.source" = "desde";
 "osd.mute" = "Silenciar";
 "osd.network_error" = "Error de red";
@@ -149,7 +149,7 @@
 "osd.sub_delay.later" = "Retraso de subtítulos: %.2fs Después";
 "osd.sub_delay.nodelay" = "Retraso de subtítulos: Sin Retraso";
 "osd.sub_downloaded" = "Subtítulos descargados";
-"osd.sub_found" = "%d subtítulos encontrados. Descargando...";
+"osd.sub_found" = "%d subtítulos encontrados. Descargando…";
 "osd.sub_not_found" = "No se encontraron subtítulos";
 "osd.sub_saved" = "Subtítulo guardado";
 "osd.subtitle_pos" = "Posición de subtítulos: %.1f";
@@ -162,8 +162,8 @@
 "osd.video_eq.saturation" = "Saturación: %i";
 "osd.volume" = "Volumen: %i";
 "pl_menu.add_file" = "Añadir archivo…";
-"pl_menu.add_sub" = "Añadir subtítulo...";
-"pl_menu.add_url" = "Añadir URL...";
+"pl_menu.add_sub" = "Añadir subtítulo…";
+"pl_menu.add_url" = "Añadir URL…";
 "pl_menu.browser" = "Abrir en el navegador";
 "pl_menu.clear_playlist" = "Borrar la lista de reproducción";
 "pl_menu.copy_url" = "Copiar URL";
@@ -185,7 +185,7 @@
 "preference.advanced" = "Avanzado";
 "preference.control" = "Controles";
 "preference.general" = "General";
-"preference.key_binding_hint_1" = "Para editar los atajos en el archivo de configuración actual, haga primero clic en el botón \"Duplicar ...\" para crear una copia.";
+"preference.key_binding_hint_1" = "Para editar los atajos en el archivo de configuración actual, haga primero clic en el botón \"Duplicar …\" para crear una copia.";
 "preference.key_binding_hint_2" = "Haga doble clic en una fila del lado derecho para editar el atajo correspondiente.";
 "preference.keybindings" = "Atajos de teclado";
 "preference.logged_in_as" = "Conectado como %@";

@@ -75,7 +75,7 @@ class MainMenuActionHandler: NSResponder {
 
 extension MainMenuActionHandler {
   @objc func menuTogglePause(_ sender: NSMenuItem) {
-    player.togglePause(!player.info.isPaused)
+    player.togglePause()
   }
 
   @objc func menuStop(_ sender: NSMenuItem) {
@@ -94,7 +94,7 @@ extension MainMenuActionHandler {
 
   @objc func menuStepFrame(_ sender: NSMenuItem) {
     if !player.info.isPaused {
-      player.togglePause(true)
+      player.pause()
     }
     if sender.tag == 0 { // -> 1f
       player.frameStep(backwards: false)

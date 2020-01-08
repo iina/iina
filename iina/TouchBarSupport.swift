@@ -173,7 +173,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
   }
 
   @objc func touchBarPlayBtnAction(_ sender: NSButton) {
-    player.togglePause(nil)
+    player.togglePause()
   }
 
   @objc func touchBarVolumeAction(_ sender: NSButton) {
@@ -273,13 +273,13 @@ class TouchBarPlaySlider: NSSlider {
 
   override func touchesBegan(with event: NSEvent) {
     isTouching = true
-    playerCore.togglePause(true)
+    playerCore.pause()
     super.touchesBegan(with: event)
   }
 
   override func touchesEnded(with event: NSEvent) {
     isTouching = false
-    playerCore.togglePause(false)
+    playerCore.resume()
     super.touchesEnded(with: event)
   }
 

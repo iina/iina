@@ -7,8 +7,8 @@
 */
 // Common
 
-"general.on" = "On";
-"general.off" = "Off";
+"general.on" = "Activé";
+"general.off" = "Désactivé";
 "general.login" = "Connexion";
 "general.logout" = "Déconnexion";
 "general.ok" = "OK";
@@ -71,7 +71,7 @@
 
 "preference.title" = "Préférences";
 "preference.general" = "Général";
-"preference.ui" = "UI";
+"preference.ui" = "Interface";
 "preference.video_audio" = "Vidéo/Audio";
 "preference.subtitle" = "Sous-titres";
 "preference.network" = "Réseau";
@@ -248,7 +248,7 @@
 "hwdec.auto" = "Active le décodage matériel. Cependant, la plupart des filtres vidéos ne fonctionneront pas correctement.";
 "hwdec.auto-copy" = "Active le décodage matériel. Cela va consommer 2x plus de ressources, mais les filtres vidéos fonctionneront.";
 
-"subencoding.auto" = "Auto detect";
+"subencoding.auto" = "Détection automatique";
 
 "osc_toolbar.settings" = "Réglages rapides";
 "osc_toolbar.playlist" = "Playlist et chapitres";

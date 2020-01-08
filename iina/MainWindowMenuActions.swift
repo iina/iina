@@ -187,7 +187,7 @@ extension MainWindowController {
         }
       }
     }
-    if let vfWindow = (NSApp.delegate as? AppDelegate)?.vfWindow, vfWindow.isWindowLoaded {
+    if let vfWindow = (NSApp.delegate as? AppDelegate)?.vfWindow, vfWindow.loaded {
       vfWindow.reloadTable()
     }
   }

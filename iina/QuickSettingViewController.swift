@@ -177,17 +177,17 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   private func updateVideoTabControl() {
-    if let index = AppData.aspectsInPanel.index(of: player.info.unsureAspect) {
+    if let index = AppData.aspectsInPanel.firstIndex(of: player.info.unsureAspect) {
       aspectSegment.selectedSegment = index
     } else {
       aspectSegment.selectedSegment = -1
     }
-    if let index = AppData.cropsInPanel.index(of: player.info.unsureCrop) {
+    if let index = AppData.cropsInPanel.firstIndex(of: player.info.unsureCrop) {
       cropSegment.selectedSegment = index
     } else {
       cropSegment.selectedSegment = -1
     }
-    rotateSegment.selectSegment(withTag: AppData.rotations.index(of: player.info.rotation) ?? -1)
+    rotateSegment.selectSegment(withTag: AppData.rotations.firstIndex(of: player.info.rotation) ?? -1)
     deinterlaceCheckBtn.state = player.info.deinterlace ? .on : .off
     let speed = player.mpv.getDouble(MPVOption.PlaybackControl.speed)
     customSpeedTextField.doubleValue = speed

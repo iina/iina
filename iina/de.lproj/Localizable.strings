@@ -164,7 +164,10 @@
 "pl_menu.add_file" = "Datei hinzufügen …";
 "pl_menu.add_sub" = "Untertitel hinzufügen …";
 "pl_menu.add_url" = "Adresse hinzufügen …";
+"pl_menu.browser" = "In Browser öffnen";
 "pl_menu.clear_playlist" = "Wiedergabeliste leeren";
+"pl_menu.copy_url" = "URL kopieren";
+"pl_menu.copy_url_multi" = "URLs kopieren";
 "pl_menu.delete" = "In den Papierkorb legen";
 "pl_menu.delete_after_play" = "Nach Wiedergabe in den Papierkorb legen";
 "pl_menu.delete_after_play_multi" = "Auswahl nach Wiedergabe in den Papierkorb legen";
@@ -214,16 +217,5 @@
 "touchbar.rewind" = "Zurückspulen";
 "touchbar.seek" = "Verlauf";
 "touchbar.time" = "Position";
+"touchbar.toggle_pip" = "Bild-in-Bild ein-/ausschalten";
 "track.none" = "Keine";
-
-/* FIXME: Using English localization instead */
-"pl_menu.browser" = "Open in Browser";
-
-/* FIXME: Using English localization instead */
-"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
-
-/* FIXME: Using English localization instead */
-"pl_menu.copy_url_multi" = "Copy URLs";
-
-/* FIXME: Using English localization instead */
-"pl_menu.copy_url" = "Copy URL";

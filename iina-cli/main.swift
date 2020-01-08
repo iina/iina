@@ -90,7 +90,7 @@ if (!userSpecifiedStdin) {
   isStdin = stdin.hasBytesAvailable
 }
 
-if let dashIndex = userArgs.index(of: "--") {
+if let dashIndex = userArgs.firstIndex(of: "--") {
   userArgs.remove(at: dashIndex)
   for i in dashIndex..<userArgs.count {
     let arg = userArgs[i]

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEditorDelegate {
+class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEditorDelegate, NSTextFieldDelegate {
 
   @IBOutlet weak var keyRecordView: KeyRecordView!
   @IBOutlet weak var keyLabel: NSTextField!
@@ -19,6 +19,8 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
 
   private var pendingKey: String?
   private var pendingAction: String?
+
+  @objc dynamic var ready = false
 
   var keyCode: String {
     get {
@@ -55,6 +57,9 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     ruleEditor.delegate = self
     ruleEditor.addRow(self)
 
+    keyLabel.delegate = self
+    actionTextField.delegate = self
+
     if let pk = pendingKey {
       keyLabel.stringValue = pk
       pendingKey = nil
@@ -71,6 +76,7 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
 
   func keyRecordView(_ view: KeyRecordView, recordedKeyDownWith event: NSEvent) {
     keyLabel.stringValue = KeyCodeHelper.mpvKeyCode(from: event)
+    NotificationCenter.default.post(.init(name: NSControl.textDidChangeNotification, object: keyLabel))
   }
 
   // MARK: - NSRuleEditorDelegate
@@ -112,6 +118,7 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     default:
       break
     }
+    NotificationCenter.default.post(.init(name: NSControl.textDidChangeNotification, object: keyLabel))
   }
 
   // MARK: - Other
@@ -119,7 +126,11 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
   private func updateCommandField() {
     guard let criterions = ruleEditor.criteria(forRow: 0) as? [Criterion] else { return }
     actionTextField.stringValue = KeyBindingTranslator.string(fromCriteria: criterions)
+    NotificationCenter.default.post(.init(name: NSControl.textDidChangeNotification, object: actionTextField))
   }
 
+  func controlTextDidChange(_ obj: Notification) {
+    ready = !keyCode.isEmpty && !action.isEmpty
+  }
 }
 

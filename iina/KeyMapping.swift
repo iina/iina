@@ -124,7 +124,7 @@ class KeyMapping: NSObject {
         continue
       }
       // remove inline comment
-      if let sharpIndex = line.index(of: "#") {
+      if let sharpIndex = line.firstIndex(of: "#") {
         line = String(line[...line.index(before: sharpIndex)])
       }
       // split

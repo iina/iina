@@ -65,10 +65,10 @@ class FileInfo: Hashable {
     self.nameInSeries = String(name)
   }
 
-  var hashValue: Int {
-    return path.hashValue
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(path)
   }
-
+  
   static func == (lhs: FileInfo, rhs: FileInfo) -> Bool {
     return lhs.path == rhs.path
   }

@@ -52,10 +52,10 @@
 "Imf-6g-2Cd.title" = "Her Hafta";
 
 /* Class = "NSButtonCell"; title = "Window became inactive/active"; ObjectID = "J8g-aS-W6e"; */
-"J8g-aS-W6e.title" = "Pencere arkaplanda kaldığında/öne geldiğinde";
+"J8g-aS-W6e.title" = "Pencere aktif/inaktif olduğunda";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
-"JfZ-D8-aF2.title" = "Hiç bir şey yapma";
+"JfZ-D8-aF2.title" = "Hiçbir şey yapma";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Tam ekrandayken diğer monitörleri karartın";
@@ -103,7 +103,7 @@
 "g2A-Kf-vct.title" = "Tam ekrandan çıkınca duraklat";
 
 /* Class = "NSTextFieldCell"; title = "When launched:"; ObjectID = "gqT-CB-Puw"; */
-"gqT-CB-Puw.title" = "IINA açıldığında:";
+"gqT-CB-Puw.title" = "IINA başlatıldığında:";
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
 "hWC-KJ-FuC.title" = "Güncellemeleri denetle";

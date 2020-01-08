@@ -11,7 +11,7 @@
 "general.off" = "オフ";
 "general.login" = "ログイン";
 "general.logout" = "ログアウト";
-"general.ok" = "OK";
+"general.ok" = "はい";
 "general.cancel" = "キャンセル";
 "general.username" = "ユーザ名";
 "general.password" = "パスワード";
@@ -71,7 +71,7 @@
 
 "preference.title" = "環境設定";
 "preference.general" = "一般";
-"preference.ui" = "UI";
+"preference.ui" = "インターフェース";
 "preference.video_audio" = "コーデック";
 "preference.subtitle" = "字幕";
 "preference.network" = "ネットワーク";

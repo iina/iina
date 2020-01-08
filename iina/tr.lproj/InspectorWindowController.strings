@@ -22,7 +22,7 @@
 "4jf-w4-kkv.title" = "Dosya yolu:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "5H6-qJ-RDS"; */
-"5H6-qJ-RDS.title" = "Format:";
+"5H6-qJ-RDS.title" = "Biçim:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "6mx-wH-SBP"; */
 "6mx-wH-SBP.title" = "Label";
@@ -67,7 +67,7 @@
 "Fqo-1c-3L1.ibShadowedLabels[0]" = "Genel";
 
 /* Class = "NSSegmentedCell"; ibShadowedLabels[1] = "Tracks"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[1]" = "Parçalar";
+"Fqo-1c-3L1.ibShadowedLabels[1]" = "İzler";
 
 /* Class = "NSSegmentedCell"; ibShadowedLabels[2] = "File"; ObjectID = "Fqo-1c-3L1"; */
 "Fqo-1c-3L1.ibShadowedLabels[2]" = "Dosya";
@@ -130,7 +130,7 @@
 "POj-mQ-zP9.title" = "Sürümler:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "PQD-yB-mm6"; */
-"PQD-yB-mm6.title" = "Format:";
+"PQD-yB-mm6.title" = "Biçim:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "QTi-nO-v8c"; */
 "QTi-nO-v8c.title" = "Label";
@@ -223,16 +223,16 @@
 "jMN-aN-DqI.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "jyV-Pd-UvH"; */
-"jyV-Pd-UvH.title" = "Bit Oranı:";
+"jyV-Pd-UvH.title" = "Bit Hızı:";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "llF-4b-Z8b"; */
-"llF-4b-Z8b.title" = "Aynı Oran:";
+"llF-4b-Z8b.title" = "Örnek Hızı:";
 
 /* Class = "NSTextFieldCell"; title = "ID:"; ObjectID = "mZG-ik-Led"; */
 "mZG-ik-Led.title" = "ID:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "mgl-Et-20K"; */
-"mgl-Et-20K.title" = "Format:";
+"mgl-Et-20K.title" = "Biçim:";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "n0s-eM-42w"; */
 "n0s-eM-42w.title" = "Kodek:";
@@ -262,7 +262,7 @@
 "ujs-p7-wXC.title" = "Label";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "vrP-XL-Weg"; */
-"vrP-XL-Weg.title" = "Örnek Oran:";
+"vrP-XL-Weg.title" = "Örnek Hızı:";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "wMU-ig-9zP"; */
 "wMU-ig-9zP.title" = "Label";

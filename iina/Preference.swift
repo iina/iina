@@ -752,7 +752,7 @@ struct Preference {
     .enableCache: true,
     .defaultCacheSize: 153600,
     .cacheBufferSize: 153600,
-    .secPrefech: 100,
+    .secPrefech: 36000,
     .userAgent: "",
     .transportRTSPThrough: RTSPTransportation.tcp.rawValue,
     .ytdlEnabled: true,

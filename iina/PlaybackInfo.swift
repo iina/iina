@@ -105,7 +105,6 @@ class PlaybackInfo {
 
   // cache related
   var pausedForCache: Bool = false
-  var cacheSize: Int = 0
   var cacheUsed: Int = 0
   var cacheSpeed: Int = 0
   var cacheTime: Int = 0

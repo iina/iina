@@ -7,7 +7,7 @@
 "BIz-NQ-0qD.title" = "Lütfen sorunu <a href=\"mailto:developers@iina.io\">adresine</a> mail olarak veya <a href=\"https://github.com/iina/iina/issues\"> GitHub sayfası üzerinden</a> bildirin.";
 
 /* Class = "NSTextFieldCell"; title = "Open URL…"; ObjectID = "FKG-Tz-TCV"; */
-"FKG-Tz-TCV.title" = "Internet Adresi Aç…";
+"FKG-Tz-TCV.title" = "URL Aç…";
 
 /* Class = "NSTextFieldCell"; title = "⌘O"; ObjectID = "FKk-kb-jEw"; */
 "FKk-kb-jEw.title" = "⌘O";
@@ -18,6 +18,12 @@
 /* Class = "NSTextFieldCell"; title = "Found a bug?"; ObjectID = "I6R-Jl-2Jk"; */
 "I6R-Jl-2Jk.title" = "Bir hata mı buldunuz?";
 
+/* Class = "NSTextFieldCell"; title = "Resume"; ObjectID = "KWZ-BM-GBN"; */
+"KWZ-BM-GBN.title" = "Sürdür";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "UfC-Vv-Izn"; */
+"UfC-Vv-Izn.title" = "Etiket";
+
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "VLQ-Oo-gK9"; */
 "VLQ-Oo-gK9.title" = "Table View Cell";
 
@@ -25,7 +31,7 @@
 "ejb-iU-Lro.title" = "Etiket";
 
 /* Class = "NSTextFieldCell"; title = "BETA"; ObjectID = "g2g-dy-qBH"; */
-"g2g-dy-qBH.title" = "Beta";
+"g2g-dy-qBH.title" = "BETA";
 
 /* Class = "NSTextFieldCell"; title = "⇧⌘O"; ObjectID = "kBV-5X-8Bp"; */
 "kBV-5X-8Bp.title" = "⇧⌘O";
@@ -38,6 +44,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Want to rollback?"; ObjectID = "s3U-4u-gYp"; */
 "s3U-4u-gYp.title" = "Eski sürüme dönmek ister misiniz?";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "tzb-ey-DZ9"; */
+"tzb-ey-DZ9.title" = "Etiket";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "zVA-nb-1Rx"; */
 "zVA-nb-1Rx.title" = "Text Cell";

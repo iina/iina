@@ -2,13 +2,13 @@
 "02L-0u-zae.title" = "Guardar";
 
 /* Class = "NSTableColumn"; headerCell.title = "Filter String"; ObjectID = "4g6-LW-373"; */
-"4g6-LW-373.headerCell.title" = "Cadena de filtro";
+"4g6-LW-373.headerCell.title" = "Filtrar por texto";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "6fq-yx-3dE"; */
 "6fq-yx-3dE.title" = "Cancelar";
 
 /* Class = "NSTextFieldCell"; title = "By saving a filter, you can enable or disable it conveniently and even assign a shortcut key to it."; ObjectID = "8JN-kb-kGF"; */
-"8JN-kb-kGF.title" = "Al guardar un filtro, puede activarlo o desactivarlo convenientemente e incluso asignar una tecla de acceso directo a este.";
+"8JN-kb-kGF.title" = "Al guardar un filtro, puedes activarlo o desactivarlo cuando quieras e incluso asignar una tecla rápida a este.";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "9Au-ZV-KXN"; */
 "9Au-ZV-KXN.title" = "Cancelar";
@@ -29,19 +29,19 @@
 "KGV-G1-A2l.title" = "Guardar Filtro";
 
 /* Class = "NSTextFieldCell"; title = "Shortcut key:"; ObjectID = "M9z-ss-1Ma"; */
-"M9z-ss-1Ma.title" = "Tecla de acceso directo:";
+"M9z-ss-1Ma.title" = "Tecla rápida:";
 
 /* Class = "NSTextFieldCell"; title = "Shortcut key:"; ObjectID = "Nzk-zW-mIL"; */
-"Nzk-zW-mIL.title" = "Tecla de acceso directo:";
+"Nzk-zW-mIL.title" = "Tecla rápida:";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Xqd-Ft-hTS"; */
 "Xqd-Ft-hTS.title" = "Cancelar";
 
 /* Class = "NSTextFieldCell"; title = "Press any button to record"; ObjectID = "dL4-so-Qss"; */
-"dL4-so-Qss.title" = "Presione cualquier botón para grabar";
+"dL4-so-Qss.title" = "Pulsa cualquier botón para grabar";
 
 /* Class = "NSTextFieldCell"; title = "Press any button to record"; ObjectID = "jJk-0R-KQo"; */
-"jJk-0R-KQo.title" = "Presione cualquier botón para grabar";
+"jJk-0R-KQo.title" = "Pulsa cualquier botón para grabar";
 
 /* Class = "NSButtonCell"; title = "Add"; ObjectID = "ljR-R1-mo7"; */
 "ljR-R1-mo7.title" = "Añadir";
@@ -50,7 +50,7 @@
 "m5X-Zl-aOj.title" = "Filtros guardados";
 
 /* Class = "NSTextFieldCell"; title = "Filter string:"; ObjectID = "t9F-EU-fKj"; */
-"t9F-EU-fKj.title" = "Cadena de filtro:";
+"t9F-EU-fKj.title" = "Texto del filtro:";
 
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "tPs-K2-ZPz"; */
 "tPs-K2-ZPz.title" = "Guardar";

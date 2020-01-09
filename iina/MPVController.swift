@@ -147,11 +147,9 @@ class MPVController: NSObject {
 
     setUserOption(PK.screenshotTemplate, type: .string, forName: MPVOption.Screenshot.screenshotTemplate)
 
-    if #available(macOS 10.13, *) {
-      chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, no_str))
-    } else {
-      setUserOption(PK.useMediaKeys, type: .bool, forName: MPVOption.Input.inputMediaKeys)
-    }
+    // Disable mpv's media key system as it now uses the MediaPlayer Framework.
+    // Dropped media key support in 10.11 and 10.12.
+    chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, no_str))
 
     setUserOption(PK.keepOpenOnFileEnd, type: .other, forName: MPVOption.Window.keepOpen) { key in
       let keepOpen = Preference.bool(for: PK.keepOpenOnFileEnd)

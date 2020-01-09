@@ -53,7 +53,7 @@
 "I2E-6Z-Gnn.title" = "Controlador:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
-"JN9-3E-OJp.title" = "Estimado de FPS mostrados";
+"JN9-3E-OJp.title" = "FPS Estimados";
 
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
 "Jxp-Wf-BhU.title" = "Ruta del archivo:";
@@ -86,7 +86,7 @@
 "PQD-yB-mm6.title" = "Formato:";
 
 /* Class = "NSTextFieldCell"; title = "Default"; ObjectID = "S3X-Df-UMB"; */
-"S3X-Df-UMB.title" = "Predeterminado";
+"S3X-Df-UMB.title" = "Por defecto";
 
 /* Class = "NSTabViewItem"; label = "Tracks"; ObjectID = "UuR-M1-YLj"; */
 "UuR-M1-YLj.label" = "Pistas";
@@ -146,13 +146,13 @@
 "n0s-eM-42w.title" = "Códec:";
 
 /* Class = "NSTextFieldCell"; title = "AUDIO"; ObjectID = "nrG-IH-kFg"; */
-"nrG-IH-kFg.title" = "AUDIO";
+"nrG-IH-kFg.title" = "SONIDO";
 
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
 "sbO-Cn-gpI.title" = "Sincronización A/V total:";
 
 /* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
-"tNS-gW-PcC.title" = "Monitorear";
+"tNS-gW-PcC.title" = "Monitorizar";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "vrP-XL-Weg"; */
 "vrP-XL-Weg.title" = "Tasa de muestreo:";

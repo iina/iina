@@ -30,15 +30,15 @@
 "cmd.quit-watch-later" = "Salir (guardar progreso)";
 "cmd.screenshot" = "Captura de pantalla";
 "cmd.screenshot-to-file" = "Captura de pantalla en archivo";
-"cmd.loadfile" = "Carga Archivo";
-"cmd.loadlist" = "Cargar lista de reproducción";
-"cmd.run" = "Ejecutar";
+"cmd.loadfile" = "Abrir Archivo";
+"cmd.loadlist" = "Abrir lista de reproducción";
+"cmd.run" = "Reproducir";
 
-"iina.flip" = "Voltear";
+"iina.flip" = "Girar";
 "iina.mirror" = "Reflejar";
 
-"iina.toggle-pip" = "Alternar picture in picture";
-"iina.toggle-music-mode" = "Alternar modo Música";
+"iina.toggle-pip" = "Alternar Picture-in-Picture";
+"iina.toggle-music-mode" = "Alternar Modo Música";
 "iina.open-file" = "Abrir archivo";
 "iina.open-url" = "Abrir URL";
 "iina.video-panel" = "Panel de vídeo";

@@ -1603,7 +1603,7 @@ class PlayerCore: NSObject {
 
   static func checkStatusForSleep() {
     for player in playing {
-      if !player.info.isPaused {
+      if player.info.isPlaying {
         SleepPreventer.preventSleep()
         return
       }

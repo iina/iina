@@ -93,7 +93,7 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuStepFrame(_ sender: NSMenuItem) {
-    if !player.info.isPaused {
+    if player.info.isPlaying {
       player.pause()
     }
     if sender.tag == 0 { // -> 1f

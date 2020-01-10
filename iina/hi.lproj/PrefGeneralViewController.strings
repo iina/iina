@@ -1,4 +1,3 @@
-
 /* Class = "NSMenuItem"; title = "Show open file panel"; ObjectID = "1ce-4b-kgG"; */
 "1ce-4b-kgG.title" = "खुला फ़ाइल पैनल दिखाएं";
 
@@ -8,9 +7,6 @@
 /* Class = "NSButtonCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
 "2rJ-mg-OuU.title" = "पर सहेजें";
 
-/* Class = "NSMenuItem"; title = "PNG"; ObjectID = "3XO-ks-TDg"; */
-"3XO-ks-TDg.title" = "PNG";
-
 /* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
 "3gs-3w-rg6.title" = "क्लिपबोर्ड पर कॉपी करें";
 
@@ -19,9 +15,6 @@
 
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "\"हाल ही में खुला\" मेनू सक्षम करें";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
-"5RN-PV-pOZ.title" = "बॉक्स";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
 "5Y9-bX-K0f.title" = "कम से कम / बिना कम से कम";
@@ -34,9 +27,6 @@
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
 "Ci8-j2-QS3.title" = "सभी खेले गए फ़ाइलों को ट्रैक करें \"हाल ही में खुला\" मेनू";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
-"DZT-7n-S4M.title" = "बॉक्स";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
 "Ez8-qY-WAZ.title" = "रोज";
@@ -70,9 +60,6 @@
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
 "MlG-hl-goB.title" = "पूर्ण स्क्रीन दर्ज करें";
-
-/* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
-"NVh-C5-b9i.title" = "JPEG (.jpeg)";
 
 /* Class = "NSTextFieldCell"; title = "Destination:"; ObjectID = "PhL-vP-i7L"; */
 "PhL-vP-i7L.title" = "गंतव्य:";
@@ -133,9 +120,6 @@
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "प्रति घंटा";
-
-/* Class = "NSMenuItem"; title = "JPEG (.jpg)"; ObjectID = "tmy-ty-8uK"; */
-"tmy-ty-8uK.title" = "JPEG (.jpg)";
 
 /* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
 "uQR-Fx-oEm.title" = "व्यवहार:";

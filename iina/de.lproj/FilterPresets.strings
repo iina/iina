@@ -1,52 +1,55 @@
-/* 
+/*
   FilterPresets.strings
   iina
 
   Created by lhc on 25/8/2017.
   Copyright © 2017 lhc. All rights reserved.
 */
-
-
 /* It's optional to localize descriptions for each parameter! */
 
-"blur" = "Weichzeichnen";
-"blur.amount" = "Intensität";
-"blur.msize" = "Matrizengröße";
+
 
 "crop" = "Zuschneiden";
-"crop.h" = "Höhe (Standard: Videohöhe)";
 "crop.w" = "Breite (Standard: Videobreite)";
+"crop.h" = "Höhe (Standard: Videohöhe)";
 "crop.x" = "Ursprungspunkt X-Achse (Standard: Mitte)";
 "crop.y" = "Ursprungspunkt Y-Achse (Standard: Mitte)";
 
-"custom_ffmpeg" = "Benutzerdef. (FFmpeg)";
-"custom_ffmpeg.name" = "Filtername";
-"custom_ffmpeg.string" = "Wert";
+"expand" = "Ausdehnen";
+"expand.w" = "Breite (Standard: Videobreite)";
+"expand.h" = "Höhe (Standard: Videohöhe)";
+"expand.x" = "Ursprungspunkt X-Achse (Standard: Mitte)";
+"expand.y" = "Ursprungspunkt Y-Achse (Standard: Mitte)";
+"expand.aspect" = "Auf Seitenverhältnis ausdehnen (z. B. 4/3)";
+"expand.round" = "Aufrunden bis durch diesen Wert teilbar";
+
+"sharpen" = "Schärfen";
+"sharpen.msize" = "Matrizengröße";
+"sharpen.amount" = "Intensität";
+
+"blur" = "Weichzeichnen";
+"blur.msize" = "Matrizengröße";
+"blur.amount" = "Intensität";
+
+"delogo" = "Logo entfernen";
+"delogo.w" = "Breite";
+"delogo.h" = "Höhe";
+"delogo.x" = "Ursprungspunkt X-Achse";
+"delogo.y" = "Ursprungspunkt Y-Achse";
+
+"negative" = "Negativ";
+
+"vflip" = "Vert. spiegeln";
+"hflip" = "Horiz. spiegeln";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Datei";
+"lut3d.interp" = "Interpolationsmodus";
 
 "custom_mpv" = "Benutzerdef. (mpv)";
 "custom_mpv.name" = "Filtername";
 "custom_mpv.string" = "Wert";
 
-"delogo" = "Logo entfernen";
-"delogo.h" = "Höhe";
-"delogo.w" = "Breite";
-"delogo.x" = "Ursprungspunkt X-Achse";
-"delogo.y" = "Ursprungspunkt Y-Achse";
-
-"expand" = "Ausdehnen";
-"expand.aspect" = "Auf Seitenverhältnis ausdehnen (z. B. 4/3)";
-"expand.h" = "Höhe (Standard: Videohöhe)";
-"expand.round" = "Aufrunden bis durch diesen Wert teilbar";
-"expand.w" = "Breite (Standard: Videobreite)";
-"expand.x" = "Ursprungspunkt X-Achse (Standard: Mitte)";
-"expand.y" = "Ursprungspunkt Y-Achse (Standard: Mitte)";
-
-"hflip" = "Horiz. spiegeln";
-"lut3d" = "3D LUT";
-"lut3d.file" = "Datei";
-"lut3d.interp" = "Interpolationsmodus";
-"negative" = "Negativ";
-"sharpen" = "Schärfen";
-"sharpen.amount" = "Intensität";
-"sharpen.msize" = "Matrizengröße";
-"vflip" = "Vert. spiegeln";
+"custom_ffmpeg" = "Benutzerdef. (FFmpeg)";
+"custom_ffmpeg.name" = "Filtername";
+"custom_ffmpeg.string" = "Wert";

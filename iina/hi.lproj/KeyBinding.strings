@@ -1,4 +1,4 @@
-/* 
+/*
   KeyBinding.strings
   iina
 
@@ -70,8 +70,6 @@
 
 "relative" = "s";
 "absolute" = "s";
-"absolute-percent" = "%";
-"relative-percent" = "%";
 "relative+exact" = "s (exact)";
 "relative-percent+exact" = "% (exact)";
 "absolute+keyframe" = "s (keyframe)";
@@ -106,7 +104,6 @@
 "opt.ontop" = "ऊपर तैरता है";
 
 "opt.chapter" = "अध्याय";
-
 
 "read.set" = "सेट {{property}} से {{value}}";
 "read.add" = "{{property}} {{value}}";

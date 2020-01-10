@@ -62,7 +62,7 @@
 "LiG-iV-AQK.title" = "Övrigt:";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
-"Luv-2B-9v8.title" = "Kataloger är separerade med kolon (:). Relativa sökvägar och jokertecken (*) i ändarna är tillåtna.";
+"Luv-2B-9v8.title" = "Kataloger är separerade med kolon (:). Relativa sökvägar och wildcards (*) i ändarna är tillåtna.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
 "Mk1-sv-QB8.title" = "Vänligen ange en kommaseparerad lista med strängar.";
@@ -74,7 +74,7 @@
 "Qda-dp-nhg.title" = "Text-undertexter:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
-"QsS-wD-2hY.title" = "Sök äver efter undertexter i följande kataloger:";
+"QsS-wD-2hY.title" = "Sök även efter undertexter i följande kataloger:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
 "SIh-Sv-6XI.title" = "Färg:";
@@ -107,10 +107,10 @@
 "cov-Uy-wnc.title" = "Ej inloggad";
 
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "dtP-9o-yhy"; */
-"dtP-9o-yhy.title" = "Offset:";
+"dtP-9o-yhy.title" = "Förskjutning:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "e0e-dB-Ir6"; */
-"e0e-dB-Ir6.title" = "Center";
+"e0e-dB-Ir6.title" = "Centrera";
 
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "eYO-c0-Rjp"; */
 "eYO-c0-Rjp.title" = "Bakgrund:";
@@ -152,7 +152,7 @@
 "raf-Yu-ck0.title" = "Läs in automatiskt:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
-"slU-Ox-aeF.title" = "Center";
+"slU-Ox-aeF.title" = "Centrera";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "t5n-mc-dss"; */
 "t5n-mc-dss.title" = "Kant";

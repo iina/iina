@@ -41,7 +41,7 @@
 "BgE-Kk-MXC.title" = "Gölge";
 
 /* Class = "NSButtonCell"; title = "Search online subtitles automatically"; ObjectID = "C3p-uP-8u8"; */
-"C3p-uP-8u8.title" = "Search online subtitles automatically";
+"C3p-uP-8u8.title" = "Çevrimiçi altyazıları otomatik olarak ara";
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
 "C4C-XP-i2S.title" = "Yazı Görünümü";
@@ -50,7 +50,7 @@
 "CdS-9J-f2h.title" = " X:";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "DUA-7H-Yje"; */
-"DUA-7H-Yje.title" = "Advanced";
+"DUA-7H-Yje.title" = "Gelişmiş";
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "Gie-38-Kk4"; */
 "Gie-38-Kk4.title" = "Sağ";
@@ -89,7 +89,7 @@
 "WHk-sk-gmK.title" = "Oturum Aç";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "X7X-18-FJg"; */
-"X7X-18-FJg.title" = "Advanced";
+"X7X-18-FJg.title" = "Gelişmiş";
 
 /* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "XiL-eE-jah"; */
 "XiL-eE-jah.title" = "IINA akıllıca seçsin";
@@ -113,7 +113,7 @@
 "e0e-dB-Ir6.title" = "Ortala";
 
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "eYO-c0-Rjp"; */
-"eYO-c0-Rjp.title" = "Arkaplan:";
+"eYO-c0-Rjp.title" = "Arka plan:";
 
 /* Class = "NSBox"; title = "Other Styles"; ObjectID = "egf-g3-b7a"; */
 "egf-g3-b7a.title" = "Box";
@@ -125,7 +125,7 @@
 "gkc-qt-sD9.title" = "Boyut:";
 
 /* Class = "NSButtonCell"; title = "Bold"; ObjectID = "hEk-7E-10r"; */
-"hEk-7E-10r.title" = "Bold";
+"hEk-7E-10r.title" = "Kalın";
 
 /* Class = "NSBox"; title = "Align"; ObjectID = "kvJ-Tj-KMb"; */
 "kvJ-Tj-KMb.title" = "Hizala";
@@ -140,7 +140,7 @@
 "nH7-kO-S15.title" = "Seç...";
 
 /* Class = "NSButtonCell"; title = "Italic"; ObjectID = "pNF-Fw-QtW"; */
-"pNF-Fw-QtW.title" = "Italic";
+"pNF-Fw-QtW.title" = "Yatık";
 
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
 "pRe-wv-VVi.title" = "Kenar boşluğu";
@@ -155,16 +155,16 @@
 "slU-Ox-aeF.title" = "Merkez";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "t5n-mc-dss"; */
-"t5n-mc-dss.title" = "Çerçeve";
+"t5n-mc-dss.title" = "Kenar";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
-"u31-eV-Arr.title" = "Etkin Değil";
+"u31-eV-Arr.title" = "Devredışı";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
 "vDc-dw-liI.title" = "Renk:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues.";
+"vYb-qH-XkH.title" = "Etkinleştirilirse, IINA çevrimiçi altyazıları yalnızca altyazısız ve 20 dakikadan uzun videolar için otomatik olarak arar.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
 "xGf-fF-4Hx.title" = "Y:";

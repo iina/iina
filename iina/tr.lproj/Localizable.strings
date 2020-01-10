@@ -18,7 +18,7 @@
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Ara belleğe alınıyor... %d%%";
-"main.opening_stream" = "Opening stream…";
+"main.opening_stream" = "Akış açılıyor...";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Varsayılan";
@@ -57,7 +57,7 @@
 "osd.video_eq.saturation" = "Doygunluk: %i";
 "osd.video_eq.brightness" = "Parlaklık: %i";
 "osd.find_online_sub" = "Çevrimiçi altyazılar bulunuyor...";
-"osd.find_online_sub.source" = "from";
+"osd.find_online_sub.source" = "dan";
 "osd.sub_not_found" = "Altyazı bulunamadı";
 "osd.sub_found" = "%d altyazı bulundu. ";
 "osd.sub_downloaded" = "Altyazı indirildi";
@@ -78,14 +78,14 @@
 "preference.control" = "Kontrol";
 "preference.keybindings" = "Kestirmeler";
 "preference.advanced" = "Gelişmiş";
-"preference.utilities" = "Utilities";
+"preference.utilities" = "Araçlar";
 "preference.scripts" = "Betikler";
 "preference.not_logged_in" = "Giriş yapılmadı";
 "preference.logged_in_as" = "%@ olarak giriş yapıldı";
 "preference.system_media_control" = "Sistem medya kontrol tuşlarını kullan";
 
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+"preference.key_binding_hint_1" = "Geçerli yapılandırma dosyasındaki kestirmeleri düzenlemek için, önce \"Çoğalt ...\" düğmesine tıklayarak kopya oluşturun.";
+"preference.key_binding_hint_2" = "İlgili kestirmeyi düzenlemek için sağ taraftaki bir satırı çift tıklayın.";
 
 "menu.volume" = "Ses: %d";
 "menu.audio_delay" = "Ses Gecikmesi: %.2fs";
@@ -111,8 +111,8 @@
 
 "track.none" = "<Hiçbiri>";
 
-"subtrack.no_loaded" = "No Subtitles Loaded";
-"subtrack.no_external" = "No External Subtitles Found";
+"subtrack.no_loaded" = "Yüklenmiş Altyazı Yok";
+"subtrack.no_external" = "Harici Altyazı Bulunamadı";
 
 // Alerts
 "alert.beta_channel.title" = "Beta Sürümler için Güncellemeleri Al";
@@ -145,7 +145,7 @@
 "alert.config.name_existing" = "Bu isim zaten alınmış.";
 "alert.config.file_existing.title" = "Dosya Zaten Mevcut";
 "alert.config.file_existing.message" = "Bu olmamalıydı. Dosyanın üzerine yazmak için Tamam'ı, dosyayı Finder'da göstermek için İptal'i seçin.";
-"alert.config.cannot_create" = "Yapılandırma (config file) dosyası oluşturulamıyor!";
+"alert.config.cannot_create" = "Yapılandırma dosyası oluşturulamıyor!\n%@";
 "alert.config.cannot_write" = "Yapılandırma dosyasına yazılamıyor!";
 
 "alert.filter.incorrect" = "Filtreler ayarlanırken hata oluştu. Lütfen parametre biçiminizi kontrol edin.";
@@ -197,11 +197,11 @@
 "alert.clear_cache.title" = "Küçük Resim Önbelleğini Temizle";
 "alert.clear_cache.message" = "Küçük resim önbelleğini silmek istediğinizden emin misiniz?";
 
-"alert.clear_history.title" = "Clear Playback History";
-"alert.clear_history.message" = "Are you sure to delete all playback history?";
+"alert.clear_history.title" = "Oynatma Geçmişini Temizle";
+"alert.clear_history.message" = "Tüm oynatma geçmişi silinecek emin misin?";
 
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
+"alert.clear_watch_later.title" = "Kayıtlı Oynatma İşlemlerini Temizle";
+"alert.clear_watch_later.message" = "Kayıtlı tüm oynatma ilerlemesi silinecek emin misiniz (\"daha sonra izleyin\" verisi)?";
 
 "alert.nothing_to_open" = "Açılacak bir şey yok.";
 
@@ -216,8 +216,8 @@
 "alert.assrt_token_prompt.message" = "Lütfen açılan web sayfasında kayıt olun. Kullanıcı web sayfasından tokeniniz alın ve aşağıya girin:";
 "alert.assrt_token_invalid" = "Assrt API tokeniniz geçerli gözükmüyor.";
 
-"playlist.total_length" = "%@ in total";
-"playlist.total_length_with_selected" = "%@ of %@ selected";
+"playlist.total_length" = "toplamda %@";
+"playlist.total_length_with_selected" = "%@ of %@ seçildi";
 "pl_menu.title_multi" = "%d Öğe";
 "pl_menu.play_next" = "Sıradakini Oynat";
 "pl_menu.play_in_new_window" = "Yeni Pencerede Oynat";
@@ -234,9 +234,9 @@
 "pl_menu.matched_sub" = "%d altyazı eşleşti";
 "pl_menu.add_sub" = "Altyazı ekle...";
 "pl_menu.wrong_sub" = "Yanlış Altyazı!";
-"pl_menu.browser" = "Open in Browser";
-"pl_menu.copy_url" = "Copy URL";
-"pl_menu.copy_url_multi" = "Copy URLs";
+"pl_menu.browser" = "Tarayıcıda aç";
+"pl_menu.copy_url" = "URL'yi kopyala";
+"pl_menu.copy_url_multi" = "URL'leri kopyala";
 
 "keymapping.title" = "Klavye Kestirmeleri";
 "keymapping.message" = "Kaydetmek için herhangi bir tuşa basın.";
@@ -273,4 +273,4 @@
 "touchbar.seek" = "Sar";
 "touchbar.time" = "Zaman Pozisyonu";
 "touchbar.remainingTime" = "Kalan Zaman";
-"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
+"touchbar.toggle_pip" = "Resim-İçinde-Resim'e Geç";

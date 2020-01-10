@@ -8,7 +8,7 @@
 "4jf-w4-kkv.title" = "Dosya yolu:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "5H6-qJ-RDS"; */
-"5H6-qJ-RDS.title" = "Format:";
+"5H6-qJ-RDS.title" = "Biçim:";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
 "7QX-tu-rvs.title" = "FPS:";
@@ -41,7 +41,7 @@
 "Fqo-1c-3L1.ibShadowedLabels[0]" = "Genel";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[1] = "Tracks"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[1]" = "Parçalar";
+"Fqo-1c-3L1.ibShadowedLabels[1]" = "İzler";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[2] = "File"; ObjectID = "Fqo-1c-3L1"; */
 "Fqo-1c-3L1.ibShadowedLabels[2]" = "Dosya";
@@ -83,7 +83,7 @@
 "POj-mQ-zP9.title" = "Sürümler:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "PQD-yB-mm6"; */
-"PQD-yB-mm6.title" = "Format:";
+"PQD-yB-mm6.title" = "Biçim:";
 
 /* Class = "NSTextFieldCell"; title = "Default"; ObjectID = "S3X-Df-UMB"; */
 "S3X-Df-UMB.title" = "Varsayılan";
@@ -131,16 +131,16 @@
 "jCY-og-BAa.title" = "Kaynak ID:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "jyV-Pd-UvH"; */
-"jyV-Pd-UvH.title" = "Bit Oranı:";
+"jyV-Pd-UvH.title" = "Bit Hızı:";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "llF-4b-Z8b"; */
-"llF-4b-Z8b.title" = "Aynı Oran:";
+"llF-4b-Z8b.title" = "Örnek Hızı:";
 
 /* Class = "NSTextFieldCell"; title = "ID:"; ObjectID = "mZG-ik-Led"; */
 "mZG-ik-Led.title" = "ID:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "mgl-Et-20K"; */
-"mgl-Et-20K.title" = "Format:";
+"mgl-Et-20K.title" = "Biçim:";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "n0s-eM-42w"; */
 "n0s-eM-42w.title" = "Kodek:";
@@ -155,7 +155,7 @@
 "tNS-gW-PcC.title" = "İzle";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "vrP-XL-Weg"; */
-"vrP-XL-Weg.title" = "Örnek Oran:";
+"vrP-XL-Weg.title" = "Örnek Hızı:";
 
 /* Class = "NSTextFieldCell"; title = "Decoder:"; ObjectID = "xix-0S-ehE"; */
 "xix-0S-ehE.title" = "Çözücü:";

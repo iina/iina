@@ -5,7 +5,7 @@
 "0T7-Nu-SL7.title" = "Oynatma Listesi Paneli";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
-"0m7-3r-twH.title" = "Ağ aç…";
+"0m7-3r-twH.title" = "URL Aç…";
 
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "Altyazı";
@@ -47,7 +47,7 @@
 "5kV-Vb-QxS.title" = "IINA Hakkında";
 
 /* Class = "NSMenu"; title = "Rotation"; ObjectID = "5xN-ZB-VLI"; */
-"5xN-ZB-VLI.title" = "Döndür";
+"5xN-ZB-VLI.title" = "Döndürme";
 
 /* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "6Eq-ni-6hG"; */
 "6Eq-ni-6hG.title" = "Tam Ekrana Geç";
@@ -80,7 +80,7 @@
 "9ee-7i-xs7.title" = "Ses Gecikmesi - 0.1s";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
-"9pa-9C-ueQ.title" = "<None>";
+"9pa-9C-ueQ.title" = "<Hiçbiri>";
 
 /* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
 "9zk-co-roT.title" = "İndirilmiş Altyazıyı Kaydet";
@@ -191,13 +191,13 @@
 "LND-1n-DU2.title" = "Oynatma Geçmişi";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
-"Lc4-4W-thE.title" = "Ses Gecikmesi - 0.5s";
+"Lc4-4W-thE.title" = "Ses Gecikmesi - 0.5 sn";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 2x"; ObjectID = "Lqa-OG-EEg"; */
 "Lqa-OG-EEg.title" = "2x Hızlandır";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.5s"; ObjectID = "LsU-Qz-dax"; */
-"LsU-Qz-dax.title" = "Altyazı Gecikmesi - 0.5s";
+"LsU-Qz-dax.title" = "Altyazı Gecikmesi - 0.5 sn";
 
 /* Class = "NSMenuItem"; title = "Find Online Subtitles…"; ObjectID = "Mg3-WB-gjZ"; */
 "Mg3-WB-gjZ.title" = "Çevrimiçi Altyazı Bul…";
@@ -239,7 +239,7 @@
 "R4o-n2-Eq4.title" = "Yakınlaştır";
 
 /* Class = "NSMenuItem"; title = "Website"; ObjectID = "Rqg-VS-aIj"; */
-"Rqg-VS-aIj.title" = "Websitesi";
+"Rqg-VS-aIj.title" = "Web Sitesi";
 
 /* Class = "NSMenuItem"; title = "Fit to Screen"; ObjectID = "SHd-63-Xoh"; */
 "SHd-63-Xoh.title" = "Ekrana Sığdır";
@@ -272,10 +272,10 @@
 "Vdr-fp-XzO.title" = "Diğer Uygulamaları Gizle";
 
 /* Class = "NSMenuItem"; title = "Mute"; ObjectID = "WOL-Us-ByA"; */
-"WOL-Us-ByA.title" = "Sesi Kapa";
+"WOL-Us-ByA.title" = "Sesi Kapat";
 
 /* Class = "NSMenuItem"; title = "Volume + 5%"; ObjectID = "Wbq-vt-hzX"; */
-"Wbq-vt-hzX.title" = "Ses + 5%";
+"Wbq-vt-hzX.title" = "Ses Seviyesi + 5%";
 
 /* Class = "NSMenuItem"; title = "Next Frame"; ObjectID = "XDC-Pc-rS1"; */
 "XDC-Pc-rS1.title" = "Sonraki Kare";
@@ -290,7 +290,7 @@
 "ZOF-MG-6II.title" = "Küçült";
 
 /* Class = "NSMenuItem"; title = "Volume - 1%"; ObjectID = "Zhv-Bz-I5V"; */
-"Zhv-Bz-I5V.title" = "Ses - 1%";
+"Zhv-Bz-I5V.title" = "Ses Seviyesi - 1%";
 
 /* Class = "NSMenuItem"; title = "Custom Touch Bar…"; ObjectID = "ZnF-yX-7jP"; */
 "ZnF-yX-7jP.title" = "Touch Bar'ı Düzenle...";
@@ -305,7 +305,7 @@
 "aXa-aM-Jaq.title" = "Oynatma Listesi";
 
 /* Class = "NSMenuItem"; title = "Rotation"; ObjectID = "ar5-3T-O9h"; */
-"ar5-3T-O9h.title" = "Döndür";
+"ar5-3T-O9h.title" = "Döndürme";
 
 /* Class = "NSMenuItem"; title = "Music Mode"; ObjectID = "bGN-E4-V5A"; */
 "bGN-E4-V5A.title" = "Müzik Modu";
@@ -323,7 +323,7 @@
 "c1x-bx-69F.title" = "Normal Boyut (Retina)";
 
 /* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
-"c6Y-0e-vgf.title" = "Ses + 1%";
+"c6Y-0e-vgf.title" = "Ses Seviyesi + 1%";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
 "d15-8v-dXA.title" = "En/Boy Oranı";
@@ -362,7 +362,7 @@
 "i3P-Xw-8D7.title" = "A-B Döngüsü";
 
 /* Class = "NSMenuItem"; title = "Volume:"; ObjectID = "iQF-1S-9EK"; */
-"iQF-1S-9EK.title" = "Ses:";
+"iQF-1S-9EK.title" = "Ses Seviyesi:";
 
 /* Class = "NSMenuItem"; title = "Video Track"; ObjectID = "j8P-Gb-HR7"; */
 "j8P-Gb-HR7.title" = "Video İzi";
@@ -392,7 +392,7 @@
 "mGw-jm-5x2.title" = "İkinci Altyazı";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
-"mND-N8-z6o.title" = "Resim-İçinde-Resim (PIP) Moduna Geç";
+"mND-N8-z6o.title" = "Resim İçinde Resim'e Geç";
 
 /* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
 "mT1-1m-HwN.title" = "Çevir";
@@ -422,7 +422,7 @@
 "pWh-nh-0pN.title" = "Düzenle";
 
 /* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
-"pdj-9C-Fn1.title" = "Ses - 5%";
+"pdj-9C-Fn1.title" = "Ses Seviyesi - 5%";
 
 /* Class = "NSMenuItem"; title = "Previous Chapter"; ObjectID = "pqF-SZ-Ifz"; */
 "pqF-SZ-Ifz.title" = "Önceki Bölüm";

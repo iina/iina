@@ -34,11 +34,11 @@
 "osd.rotate" = "Döndür: %i°";
 "osd.deinterlace" = "Taramasızlık: %@";
 "osd.audio_delay.nodelay" = "Ses Gecikmesi: Gecikme Yok";
-"osd.audio_delay.later" = "Ses Gecikmesi: %.2fs Geç";
-"osd.audio_delay.earlier" = "Ses Gecikmesi: %.2fs Erken";
+"osd.audio_delay.later" = "Ses Gecikmesi: %.2f sn Geç";
+"osd.audio_delay.earlier" = "Ses Gecikmesi: %.2f sn Erken";
 "osd.sub_delay.nodelay" = "Altyazı Gecikmesi: Gecikme Yok";
-"osd.sub_delay.later" = "Altyazı Gecikmesi: %.2fs Geç";
-"osd.sub_delay.earlier" = "Altyazı Gecikmesi: %.2fs Erken";
+"osd.sub_delay.later" = "Altyazı Gecikmesi: %.2f sn Geç";
+"osd.sub_delay.earlier" = "Altyazı Gecikmesi: %.2f sn Erken";
 "osd.subtitle_pos" = "Altyazı Konumu: %.1f";
 "osd.mute" = "Sesi Kapat";
 "osd.unmute" = "Sesi Aç";
@@ -57,9 +57,9 @@
 "osd.video_eq.saturation" = "Doygunluk: %i";
 "osd.video_eq.brightness" = "Parlaklık: %i";
 "osd.find_online_sub" = "Çevrimiçi altyazılar bulunuyor...";
-"osd.find_online_sub.source" = "dan";
+"osd.find_online_sub.source" = "şu siteden";
 "osd.sub_not_found" = "Altyazı bulunamadı";
-"osd.sub_found" = "%d altyazı bulundu. ";
+"osd.sub_found" = "%d altyazı bulundu. İndiriliyor…";
 "osd.sub_downloaded" = "Altyazı indirildi";
 "osd.sub_saved" = "Altyazı kaydedildi";
 "osd.network_error" = "Ağ hatası";
@@ -88,8 +88,8 @@
 "preference.key_binding_hint_2" = "İlgili kestirmeyi düzenlemek için sağ taraftaki bir satırı çift tıklayın.";
 
 "menu.volume" = "Ses Seviyesi: %d";
-"menu.audio_delay" = "Ses Gecikmesi: %.2fs";
-"menu.sub_delay" = "Altyazı Gecikmesi: %.2fs";
+"menu.audio_delay" = "Ses Gecikmesi: %.2f sn";
+"menu.sub_delay" = "Altyazı Gecikmesi: %.2f sn";
 "menu.fullscreen" = "Tam Ekrana Geç";
 "menu.exit_fullscreen" = "Tam Ekrandan Çık";
 "menu.pip" = "Resim İçinde Resim'e Geç";
@@ -104,10 +104,10 @@
 "menu.speed_down" = "Hızı %.1fx ayarına düşür";
 "menu.volume_up" = "Ses Seviyesi + %.0f%%";
 "menu.volume_down" = "Ses Seviyesi - %.0f%%";
-"menu.audio_delay_up" = "Ses Gecikmesi + %.1fs";
-"menu.audio_delay_down" = "Ses Gecikmesi - %.1fs";
-"menu.sub_delay_up" = "Altyazı Gecikmesi + %.1fs";
-"menu.sub_delay_down" = "Altyazı Gecikmesi - %.1fs";
+"menu.audio_delay_up" = "Ses Gecikmesi + %.1f sn";
+"menu.audio_delay_down" = "Ses Gecikmesi - %.1f sn";
+"menu.sub_delay_up" = "Altyazı Gecikmesi + %.1f sn";
+"menu.sub_delay_down" = "Altyazı Gecikmesi - %.1f sn";
 
 "track.none" = "<Hiçbiri>";
 

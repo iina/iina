@@ -10,8 +10,8 @@
 "cmd.seek" = "Sar";
 "cmd.revert-seek" = "Sarmaya geri dön";
 "cmd.set" = "Ayarla";
-"cmd.cycle" = "Çevrim";
-"cmd.cycle-values" = "Şurada çevrim";
+"cmd.cycle" = "Geçiş yap";
+"cmd.cycle-values" = "Şunlar Arasında Geçiş yap:";
 "cmd.add" = "Değiştir";
 "cmd.multiply" = "Çarp";
 "cmd.frame-step" = "Sonraki kare";
@@ -108,7 +108,7 @@
 "read.set" = "Ayarla {{property}} şuna {{value}}";
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "{{property}} özelliğini {{factor}}x ile çarp";
-"read.cycle" = "Döngü {{property}}{{#dir_down}}Aşağı doğru{{/dir_down}}";
-"read.cycle-values" = "Döngü {{property}} şurada ({{{values}}})";
+"read.cycle" = "Geçiş yap {{property}}{{#dir_down}} Aşağı doğru{{/dir_down}}";
+"read.cycle-values" = "Geçiş yap {{property}} şunlar arasında ({{{values}}})";
 "read.seek" = "Sar {{#fwd}}ileri{{/fwd}}{{#bwd}}geri{{/bwd}}{{#abs}}şuraya{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
 "read.sub-seek" = "Şuna sar {{#skip_1}}sıradaki{{/skip_1}}{{#skip_-1}}önceki{{/skip_-1}} altyazı";

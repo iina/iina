@@ -49,7 +49,7 @@
 "iina.bigger-window" = "Daha Büyük Pencere";
 "iina.smaller-window" = "Daha Küçük Pencere";
 "iina.fit-to-screen" = "Ekrana Sığdır";
-"iina.toggle-flip" = "Çevirme Aç/Kapa";
+"iina.toggle-flip" = "Ters çevirmeyi Aç/Kapa";
 "iina.toggle-mirror" = "Aynalamayı Aç/Kapa";
 "iina.save-playlist" = "Şuanki oynatma listesini kaydet";
 "iina.delete-current-file" = "Şuanki dosyayı sil";
@@ -97,7 +97,7 @@
 "opt.sub-delay" = "Altyazı gecikmesi";
 "opt.sub-pos" = "Altyazı pozisyonu";
 "opt.sub-scale" = "Altyazı boyutu";
-"opt.sub-visibility" = "Altyazı opaklığı";
+"opt.sub-visibility" = "Altyazı görünürlüğü";
 "opt.sub-ass-style-override" = "ASS tipi üzerine yazma";
 
 "opt.fullscreen" = "Tam ekran";

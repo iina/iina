@@ -1913,7 +1913,7 @@
                                                                                 <action selector="subTextColorAction:" target="-2" id="K9J-nN-LTp"/>
                                                                             </connections>
                                                                         </colorWell>
-                                                                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xtF-tn-m9W" userLabel="Text fint size">
+                                                                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xtF-tn-m9W" userLabel="Text font size">
                                                                             <rect key="frame" x="142" y="119" width="76" height="22"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="d7u-5q-vDg"/>

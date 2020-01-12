@@ -6,7 +6,7 @@ before_install:
   - pod update
 
 # Build the main app, which happens to depend on the other two targets.
-script: xcodebuild -workspace iina.xcworkspace -scheme iina
+script: xcodebuild -workspace iina.xcworkspace -scheme iina CODE_SIGNING_ALLOWED=NO
 
 notifications:
   email: false

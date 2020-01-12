@@ -707,10 +707,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func subTextSizeAction(_ sender: AnyObject) {
-    if let selectedItem = subTextSizePopUp.selectedItem {
-      if let value = Double(selectedItem.title) {
-        player.setSubTextSize(value)
-      }
+    if let selectedItem = subTextSizePopUp.selectedItem, let value = Double(selectedItem.title) {
+      player.setSubTextSize(value)
     }
   }
 
@@ -719,7 +717,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func subTextBorderWidthAction(_ sender: AnyObject) {
-    if let value = Double(subTextBorderWidthPopUp.stringValue) {
+    if let selectedItem = subTextBorderWidthPopUp.selectedItem, let value = Double(selectedItem.title) {
       player.setSubTextBorderSize(value)
     }
   }

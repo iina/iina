@@ -11,7 +11,7 @@ import Cocoa
 fileprivate let subsystem = Logger.Subsystem(rawValue: "thumbcache")
 
 class ThumbnailCache {
-  static private var version = 2
+  static private let version: UInt8 = 2
   
   static private let sizeofMetadata = MemoryLayout<UInt8>.size + MemoryLayout<UInt64>.size + MemoryLayout<Int64>.size
 
@@ -50,7 +50,7 @@ class ThumbnailCache {
         return false
       }
 
-      let cacheVersion = Int(file.read(type: UInt8.self))
+      let cacheVersion = file.read(type: UInt8.self)
       if cacheVersion != version { return false }
 
       return file.read(type: UInt64.self) == fileSize &&

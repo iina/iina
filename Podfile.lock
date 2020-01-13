@@ -19,10 +19,9 @@ DEPENDENCIES:
   - Sparkle
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - GzipSwift
     - PromiseKit
-  trunk:
     - Sparkle
 
 EXTERNAL SOURCES:

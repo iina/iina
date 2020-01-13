@@ -1,3 +1,12 @@
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: ''
+assignees: ''
+
+---
+
 <!-- Please use English, if possible. If you really feel the need to use a different language to get your point across, you may add a description in your native language to supplement your report. -->
 <!-- Please also try to search for your issue to avoid it being closed as a duplicate. -->
 
@@ -10,7 +19,6 @@
 **Expected behavior:**
 
 
-<!-- If this is feature request, please use this section to explain the rationale behind your idea and why you believe it would be beneficial. -->
 **Actual behavior:**
 
 <!-- If you're reporting a crash, please copy the stack trace below, between the <pre> </pre> tags (you can find these in ~/Library/Logs/DiagnosticReports/; the filename should prefixed with IINA and include the crash time). If not, feel free to delete this section. -->
@@ -35,7 +43,6 @@
 
 <br>
 
-<!-- N/A if this is a feature request -->
 **Steps to reproduce:**
 
 
@@ -43,5 +50,4 @@
 - [ ] MPV does not have this problem.
 
 
-<!-- Again, N/A for feature requests -->
 **How often does this happen?**

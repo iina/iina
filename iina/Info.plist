@@ -500,6 +500,8 @@
 	<string>https://www.iina.io/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
+	<key>SUPublicEDKey</key>
+	<string>UpwCRYfYOg0OGgQHY6RUdrV29yPcdkvxGlEfq46r6a0=</string>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>

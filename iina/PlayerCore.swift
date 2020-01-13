@@ -436,26 +436,20 @@ class PlayerCore: NSObject {
 
   // MARK: - MPV commands
 
-  /** Pause / resume. Reset speed to 0 when pause. */
-  func togglePause(_ set: Bool?) {
-    if let setPause = set {
-      // if paused by EOF, replay the video.
-      if !setPause {
-        if mpv.getFlag(MPVProperty.eofReached) {
-          seek(absoluteSecond: 0)
-        }
-      }
-      mpv.setFlag(MPVOption.PlaybackControl.pause, setPause)
-    } else {
-      if (info.isPaused) {
-        if mpv.getFlag(MPVProperty.eofReached) {
-          seek(absoluteSecond: 0)
-        }
-        mpv.setFlag(MPVOption.PlaybackControl.pause, false)
-      } else {
-        mpv.setFlag(MPVOption.PlaybackControl.pause, true)
-      }
+  func togglePause(_ set: Bool? = nil) {
+    info.isPaused ? resume() : pause()
+  }
+  
+  func pause() {
+    mpv.setFlag(MPVOption.PlaybackControl.pause, true)
+  }
+  
+  func resume() {
+    // Restart playback when reached EOF
+    if mpv.getFlag(MPVProperty.eofReached) {
+      seek(absoluteSecond: 0)
     }
+    mpv.setFlag(MPVOption.PlaybackControl.pause, false)
   }
 
   func stop() {
@@ -801,7 +795,7 @@ class PlayerCore: NSObject {
   func playChapter(_ pos: Int) {
     let chapter = info.chapters[pos]
     mpv.command(.seek, args: ["\(chapter.time.second)", "absolute"])
-    togglePause(false)
+    resume()
     // need to update time pos
     syncUITime()
   }
@@ -1609,7 +1603,7 @@ class PlayerCore: NSObject {
 
   static func checkStatusForSleep() {
     for player in playing {
-      if !player.info.isPaused {
+      if player.info.isPlaying {
         SleepPreventer.preventSleep()
         return
       }

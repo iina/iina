@@ -428,7 +428,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     case PK.alwaysFloatOnTop.rawValue:
       if let newValue = change[.newKey] as? Bool {
-        if !player.info.isPaused {
+        if player.info.isPlaying {
           self.isOntop = newValue
           setWindowFloatingOnTop(newValue)
         }
@@ -700,7 +700,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification, object: nil, queue: nil, using: { [unowned self] _ in
       if Preference.bool(for: .pauseWhenGoesToSleep) {
-        self.player.togglePause(true)
+        self.player.pause()
       }
     })
   }
@@ -1058,7 +1058,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     case .fullscreen:
       toggleWindowFullScreen()
     case .pause:
-      player.togglePause(nil)
+      player.togglePause()
     case .hideOSC:
       hideUI()
     }
@@ -1156,16 +1156,16 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     if scrollAction == .seek && isTrackpadBegan {
       // record pause status
-      wasPlayingWhenSeekBegan = !player.info.isPaused
+      wasPlayingWhenSeekBegan = player.info.isPlaying
       if wasPlayingWhenSeekBegan! {
-        player.togglePause(true)
+        player.pause()
       }
     }
 
     if isTrackpadEnd && wasPlayingWhenSeekBegan != nil {
       // only resume playback when it was playing when began
       if wasPlayingWhenSeekBegan! {
-        player.togglePause(false)
+        player.resume()
       }
       wasPlayingWhenSeekBegan = nil
     }
@@ -1397,7 +1397,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     if Preference.bool(for: .playWhenEnteringFullScreen) && player.info.isPaused {
-      player.togglePause(false)
+      player.resume()
     }
 
     if #available(macOS 10.12.2, *) {
@@ -1458,8 +1458,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       removeBlackWindow()
     }
 
-    if Preference.bool(for: .pauseWhenLeavingFullScreen) && !player.info.isPaused {
-      player.togglePause(true)
+    if Preference.bool(for: .pauseWhenLeavingFullScreen) && player.info.isPlaying {
+      player.pause()
     }
 
     if #available(macOS 10.12.2, *) {
@@ -1467,7 +1467,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
 
     // restore ontop status
-    if !player.info.isPaused {
+    if player.info.isPlaying {
       setWindowFloatingOnTop(isOntop)
     }
 
@@ -1579,7 +1579,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func windowDidBecomeKey(_ notification: Notification) {
     window!.makeFirstResponder(window!)
     if Preference.bool(for: .pauseWhenInactive) && isPausedDueToInactive {
-      player.togglePause(false)
+      player.resume()
       isPausedDueToInactive = false
     }
   }
@@ -1590,8 +1590,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if NSApp.keyWindow == nil ||
       (NSApp.keyWindow?.windowController is MainWindowController ||
         (NSApp.keyWindow?.windowController is MiniPlayerWindowController && NSApp.keyWindow?.windowController != player.miniPlayer)) {
-      if Preference.bool(for: .pauseWhenInactive), !player.info.isPaused {
-        player.togglePause(true)
+      if Preference.bool(for: .pauseWhenInactive), player.info.isPlaying {
+        player.pause()
         isPausedDueToInactive = true
       }
     }
@@ -1616,9 +1616,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func windowWillMiniaturize(_ notification: Notification) {
-    if Preference.bool(for: .pauseWhenMinimized), !player.info.isPaused {
+    if Preference.bool(for: .pauseWhenMinimized), player.info.isPlaying {
       isPausedDueToMiniaturization = true
-      player.togglePause(true)
+      player.pause()
     }
   }
   
@@ -1632,7 +1632,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidDeminiaturize(_ notification: Notification) {
     if Preference.bool(for: .pauseWhenMinimized) && isPausedDueToMiniaturization {
-      player.togglePause(false)
+      player.resume()
       isPausedDueToMiniaturization = false
     }
     if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
@@ -1952,7 +1952,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       return
     }
 
-    player.togglePause(true)
+    player.pause()
     isInInteractiveMode = true
     hideUI()
 
@@ -2032,7 +2032,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   func exitInteractiveMode(immediately: Bool = false, then: @escaping () -> Void = {}) {
     window?.backgroundColor = .black
 
-    player.togglePause(false)
+    player.resume()
     isInInteractiveMode = false
     cropSettingsView?.cropBoxView.isHidden = true
 
@@ -2523,10 +2523,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   /** Play button: pause & resume */
   @IBAction func playButtonAction(_ sender: NSButton) {
     if sender.state == .on {
-      player.togglePause(false)
+      player.resume()
     }
     if sender.state == .off {
-      player.togglePause(true)
+      player.pause()
       // speed is already reset by playerCore
       speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
@@ -2644,7 +2644,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       // if is paused
       if playButton.state == .off {
         updatePlayButtonState(.on)
-        player.togglePause(false)
+        player.resume()
       }
 
     case .playlist:
@@ -2824,7 +2824,7 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     pipVideo = NSViewController()
     pipVideo.view = videoView
-    pip.playing = !player.info.isPaused
+    pip.playing = player.info.isPlaying
     pip.title = window?.title
 
     pip.presentAsPicture(inPicture: pipVideo)
@@ -2852,7 +2852,7 @@ extension MainWindowController: PIPViewControllerDelegate {
         break
       }
       if Preference.bool(for: .pauseWhenPip) {
-        player.togglePause(true)
+        player.pause()
       }
     }
   }
@@ -2921,16 +2921,16 @@ extension MainWindowController: PIPViewControllerDelegate {
   }
 
   func pipActionPlay(_ pip: PIPViewController) {
-    player.togglePause(false)
+    player.resume()
   }
 
   func pipActionPause(_ pip: PIPViewController) {
-    player.togglePause(true)
+    player.pause()
   }
 
   func pipActionStop(_ pip: PIPViewController) {
     // Stopping PIP pauses playback
-    player.togglePause(true)
+    player.pause()
   }
 }
 

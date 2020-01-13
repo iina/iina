@@ -472,11 +472,7 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   }
 
   @IBAction func playBtnAction(_ sender: NSButton) {
-    if player.info.isPaused {
-      player.togglePause(false)
-    } else {
-      player.togglePause(true)
-    }
+    player.info.isPaused ? player.resume() : player.pause()
   }
 
   @IBAction func nextBtnAction(_ sender: NSButton) {

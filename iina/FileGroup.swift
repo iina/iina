@@ -108,7 +108,8 @@ class FileGroup {
     var i = prefix.count
 
     while tempGroup.count < 2 {
-      var lastPrefix = ""
+      var lastPrefix = prefix
+      var anyProcessed = false
       for finfo in contents {
         // if reached string end
         if i >= finfo.characters.count {
@@ -125,6 +126,7 @@ class FileGroup {
           currChars.append((c, p))
         }
         tempGroup[p]!.append(finfo)
+        anyProcessed = true
       }
       // if all items have the same prefix
       if tempGroup.count == 1 {
@@ -133,6 +135,10 @@ class FileGroup {
         currChars.removeAll()
       }
       i += 1
+      // if all items have the same name
+      if !anyProcessed {
+        break
+      }
     }
 
     let maxSubGroupCount = tempGroup.reduce(0, { max($0, $1.value.count) })

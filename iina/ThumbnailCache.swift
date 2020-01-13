@@ -11,9 +11,13 @@ import Cocoa
 fileprivate let subsystem = Logger.Subsystem(rawValue: "thumbcache")
 
 class ThumbnailCache {
-  static private var version = 2
+  private typealias CacheVersion = UInt8
+  private typealias FileSize = UInt64
+  private typealias FileTimestamp = Int64
+
+  static private let version: CacheVersion = 2
   
-  static private let sizeofMetadata = MemoryLayout<UInt8>.size + MemoryLayout<UInt64>.size + MemoryLayout<Int64>.size
+  static private let sizeofMetadata = MemoryLayout<CacheVersion>.size + MemoryLayout<FileSize>.size + MemoryLayout<FileTimestamp>.size
 
 
   static private let imageProperties: [NSBitmapImageRep.PropertyKey: Any] = [
@@ -31,7 +35,7 @@ class ThumbnailCache {
     }
 
     // file size
-    guard let fileSize = fileAttr[.size] as? UInt64 else {
+    guard let fileSize = fileAttr[.size] as? FileSize else {
       Logger.log("Cannot get video file size", level: .error, subsystem: subsystem)
       return false
     }
@@ -41,7 +45,7 @@ class ThumbnailCache {
       Logger.log("Cannot get video file modification date", level: .error, subsystem: subsystem)
       return false
     }
-    let fileTimestamp = Int64(fileModifiedDate.timeIntervalSince1970)
+    let fileTimestamp = FileTimestamp(fileModifiedDate.timeIntervalSince1970)
 
     // Check metadate in the cache
     if self.fileExists(forName: name) {
@@ -50,11 +54,11 @@ class ThumbnailCache {
         return false
       }
 
-      let cacheVersion = Int(file.read(type: UInt8.self))
+      let cacheVersion = file.read(type: CacheVersion.self)
       if cacheVersion != version { return false }
 
-      return file.read(type: UInt64.self) == fileSize &&
-        file.read(type: Int64.self) == fileTimestamp
+      return file.read(type: FileSize.self) == fileSize &&
+        file.read(type: FileTimestamp.self) == fileTimestamp
     }
 
     return false
@@ -92,7 +96,7 @@ class ThumbnailCache {
     }
 
     // file size
-    guard let fileSize = fileAttr[.size] as? UInt64 else {
+    guard let fileSize = fileAttr[.size] as? FileSize else {
       Logger.log("Cannot get video file size", level: .error, subsystem: subsystem)
       return
     }
@@ -104,7 +108,7 @@ class ThumbnailCache {
       Logger.log("Cannot get video file modification date", level: .error, subsystem: subsystem)
       return
     }
-    let fileTimestamp = Int64(fileModifiedDate.timeIntervalSince1970)
+    let fileTimestamp = FileTimestamp(fileModifiedDate.timeIntervalSince1970)
     let fileModificationDateData = Data(bytesOf: fileTimestamp)
     file.write(fileModificationDateData)
 

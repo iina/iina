@@ -70,6 +70,8 @@
 
 "relative" = "秒";
 "absolute" = "秒";
+"absolute-percent" = "%";
+"relative-percent" = "%";
 "relative+exact" = "秒（精确）";
 "relative-percent+exact" = "%（精确）";
 "absolute+keyframe" = "秒（关键帧）";

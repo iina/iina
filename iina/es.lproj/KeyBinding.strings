@@ -70,6 +70,8 @@
 
 "relative" = "s";
 "absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
 "relative+exact" = "s (exacto)";
 "relative-percent+exact" = "% (exacto)";
 "absolute+keyframe" = "s (Fotograma)";

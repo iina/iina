@@ -2894,11 +2894,6 @@ extension MainWindowController: PIPViewControllerDelegate {
   func pipShouldClose(_ pip: PIPViewController) -> Bool {
     // This is called right before we're about to close the PIP
     pipStatus = .intermediate
-    
-    // Hide the overlay view preemptively, to prevent any issues where it does
-    // not hide in time and ends up covering the video view (which will be added
-    // to the window under everything else, including the overlay).
-    pipOverlayView.isHidden = true
 
     // Set frame to animate back to
     if fsState.isFullscreen {
@@ -2917,6 +2912,10 @@ extension MainWindowController: PIPViewControllerDelegate {
   }
 
   func pipDidClose(_ pip: PIPViewController) {
+    // Hide the overlay view preemptively, to prevent any issues where it does
+    // not hide in time and ends up covering the video view (which will be added
+    // to the window under everything else, including the overlay).
+    pipOverlayView.isHidden = true
     doneExitingPIP()
   }
 

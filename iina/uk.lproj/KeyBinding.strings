@@ -70,6 +70,8 @@
 
 "relative" = " с";
 "absolute" = " с";
+"absolute-percent" = "%";
+"relative-percent" = "%";
 "relative+exact" = " с (точно)";
 "relative-percent+exact" = " % (точно)";
 "absolute+keyframe" = " с (кадр)";

@@ -70,6 +70,8 @@
 
 "relative" = "sn";
 "absolute" = "sn";
+"absolute-percent" = "%";
+"relative-percent" = "%";
 "relative+exact" = "sn (tam)";
 "relative-percent+exact" = "% (tam)";
 "absolute+keyframe" = "sn (anahtar-kare)";

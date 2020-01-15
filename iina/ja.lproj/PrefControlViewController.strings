@@ -35,7 +35,7 @@
 "Gyd-Qt-FEo.title" = "ミドルクリック:";
 
 /* Class = "NSButtonCell"; title = "Acccepts first mouse"; ObjectID = "gZK-ry-lQs"; */
-"gZK-ry-lQs.title" = "Accepts first mouse click when not focused";
+"gZK-ry-lQs.title" = "非アクティブなウィンドウをクリックした時もマウスイベントを発生させる";
 
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
 "Hm3-dh-jgb.title" = "フルスクリーンにする";
@@ -56,7 +56,7 @@
 "OOM-jo-N4V.title" = "OSCを隠す";
 
 /* Class = "NSMenuItem"; title = "Adjust window size"; ObjectID = "Ols-Lr-fiH"; */
-"Ols-Lr-fiH.title" = "ウィンドウのサイズを合わせる";
+"Ols-Lr-fiH.title" = "ウィンドウサイズを調節";
 
 /* Class = "NSTextFieldCell"; title = "Single click to:"; ObjectID = "QhO-As-ZLL"; */
 "QhO-As-ZLL.title" = "クリック:";
@@ -104,7 +104,7 @@
 "oOk-y6-lek.title" = "なし";
 
 /* Class = "NSTextFieldCell"; title = "Sensitivity for normal seek:"; ObjectID = "of2-ec-OkC"; */
-"of2-ec-OkC.title" = "普通のシークの感度:";
+"of2-ec-OkC.title" = "通常のシーク感度:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "unj-zt-RyU"; */
 "unj-zt-RyU.title" = "なし";

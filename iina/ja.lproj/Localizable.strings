@@ -123,7 +123,7 @@
 "alert.title_info" = "情報";
 
 "alert.fatal_error" = "致命的なエラー: %@ \nアプリケーションを終了します。";
-"alert.mpv_error" = "ユーザーオプション %@ の設定中に内部エラー %@ (%@) が発生しました。";
+"alert.mpv_error" = "内部エラー %@ (%@) がユーザーオプション %@ の設定中に発生しました。";
 "alert.sleep" = "ディスプレイのスリープを解除できません!";
 
 "alert.unsupported_audio" = "対応していない外部のオーディオファイルです。";
@@ -195,7 +195,7 @@
 "alert.filter_hwdec.use_copy" = "自動 (コピー) 方式に切り替え";
 
 "alert.clear_cache.title" = "サムネイルキャッシュをクリア";
-"alert.clear_cache.message" = "本当にすべてのサムネイルキャッシュを消去しますか?";
+"alert.clear_cache.message" = "本当にすべてのサムネイルキャッシュを消去しますか？";
 
 "alert.clear_history.title" = "再生履歴をクリア";
 "alert.clear_history.message" = "本当にすべての再生履歴を消去しますか？";

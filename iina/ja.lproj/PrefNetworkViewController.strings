@@ -17,7 +17,7 @@
 "GBe-wd-tne.title" = "フォーマット: <key>=<value>[,<key>=<value>[,…]]";
 
 /* Class = "NSTextFieldCell"; title = "Seconds to prefech:"; ObjectID = "J96-32-M9A"; */
-"J96-32-M9A.title" = "事前読み込み時間 (秒):";
+"J96-32-M9A.title" = "事前読み込み秒数:";
 
 /* Class = "NSTextFieldCell"; title = "Cache:"; ObjectID = "LNk-io-MM7"; */
 "LNk-io-MM7.title" = "キャッシュ:";
@@ -32,7 +32,7 @@
 "aNr-lv-K0r.title" = "自動";
 
 /* Class = "NSButtonCell"; title = "Enable youtube-dl"; ObjectID = "cyH-Md-FAD"; */
-"cyH-Md-FAD.title" = "youtube-dlの有効化";
+"cyH-Md-FAD.title" = "youtube-dlを有効化";
 
 /* Class = "NSTextFieldCell"; title = "Cache buffer size (KB):"; ObjectID = "dDD-g3-54w"; */
 "dDD-g3-54w.title" = "バッファのキャッシュサイズ (KB):";

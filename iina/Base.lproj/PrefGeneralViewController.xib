@@ -561,6 +561,9 @@
                 </button>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZA7-QS-FAH">
                     <rect key="frame" x="185" y="110" width="164" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="ECP-qk-dP6"/>
+                    </constraints>
                     <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="/path/to/screenshot/folder" id="YeH-hk-7NN">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -623,6 +626,7 @@
                 <constraint firstItem="pYE-LR-OAu" firstAttribute="leading" secondItem="Frw-Lf-9ka" secondAttribute="leading" id="Ben-El-cDI"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7zO-JV-oG5" secondAttribute="trailing" id="Gbb-qY-zhc"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pYE-LR-OAu" secondAttribute="trailing" id="Gso-zO-p5Q"/>
+                <constraint firstItem="PKl-oI-CuN" firstAttribute="centerY" secondItem="Frw-Lf-9ka" secondAttribute="centerY" id="I7q-82-mzg"/>
                 <constraint firstItem="aEK-1q-7Vr" firstAttribute="top" secondItem="Frw-Lf-9ka" secondAttribute="bottom" constant="8" id="McK-PO-jyd"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tV0-X6-PhP" secondAttribute="trailing" id="Moh-Du-SXe"/>
                 <constraint firstItem="7zO-JV-oG5" firstAttribute="top" secondItem="iLE-bn-UWS" secondAttribute="top" id="NH3-uV-S8y"/>
@@ -637,9 +641,7 @@
                 <constraint firstItem="tV0-X6-PhP" firstAttribute="leading" secondItem="Frw-Lf-9ka" secondAttribute="leading" id="mOG-2g-8V0"/>
                 <constraint firstItem="7zO-JV-oG5" firstAttribute="leading" secondItem="ym1-pZ-4SZ" secondAttribute="leading" constant="120" id="me9-8P-Q8Z"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LvL-fW-PG1" secondAttribute="trailing" id="nc9-h5-iNW"/>
-                <constraint firstItem="PKl-oI-CuN" firstAttribute="centerY" secondItem="ZA7-QS-FAH" secondAttribute="centerY" id="pcB-TZ-i0d"/>
                 <constraint firstAttribute="bottom" secondItem="tV0-X6-PhP" secondAttribute="bottom" constant="8" id="q5o-f0-7NU"/>
-                <constraint firstItem="PKl-oI-CuN" firstAttribute="firstBaseline" secondItem="ZA7-QS-FAH" secondAttribute="firstBaseline" id="rDy-Um-SKu"/>
                 <constraint firstItem="nvy-Qn-oAE" firstAttribute="leading" secondItem="7zO-JV-oG5" secondAttribute="leading" id="uUA-Z7-irA"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PKl-oI-CuN" secondAttribute="trailing" constant="8" id="vfN-bZ-HHg"/>
                 <constraint firstItem="PKl-oI-CuN" firstAttribute="leading" secondItem="ZA7-QS-FAH" secondAttribute="trailing" constant="8" id="zkv-na-jFg"/>

@@ -1,4 +1,4 @@
-/* 
+/*
   FilterPresets.strings
   iina
 
@@ -9,47 +9,47 @@
 
 /* It's optional to localize descriptions for each parameter! */
 
-"crop" = "Crop";
-"crop.w" = "Width (default: video width)";
-"crop.h" = "Height (default: video height)";
-"crop.x" = "Origin X (default: center)";
-"crop.y" = "Origin Y (default: center)";
+"crop" = "Escapça";
+"crop.w" = "Amplada (per defecte: amplada del vídeo)";
+"crop.h" = "Alçada (per defecte: alçada del vídeo)";
+"crop.x" = "Orígen X (per defecte: centre)";
+"crop.y" = "Orígen Y (per defecte: centre)";
 
-"expand" = "Expand";
-"expand.w" = "Width (default: video width)";
-"expand.h" = "Height (default: video height)";
-"expand.x" = "Origin X (default: center)";
-"expand.y" = "Origin Y (default: center)";
-"expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
-"expand.round" = "Rounds up to make divisible by this value";
+"expand" = "Amplia";
+"expand.w" = "Amplada (per defecte: amplada del vídeo";
+"expand.h" = "Alçada (per defecte: alçada del vídeo)";
+"expand.x" = "Orígen X (per defecte: centre)";
+"expand.y" = "Orígen Y (per defecte: centre)";
+"expand.aspect" = "Amplia per ajustar la relació d'aspecte (ex.: 4/3)";
+"expand.round" = "Arrodonir per fer divisible per aquest valor";
 
-"sharpen" = "Sharpen";
-"sharpen.msize" = "Matrix size";
-"sharpen.amount" = "Amount";
+"sharpen" = "Augmenta la nitidesa";
+"sharpen.msize" = "Mida de la matriu";
+"sharpen.amount" = "Quantitat";
 
-"blur" = "Blur";
-"blur.msize" = "Matrix size";
-"blur.amount" = "Amount";
+"blur" = "Difumina";
+"blur.msize" = "Mida de la matriu";
+"blur.amount" = "Quantitat";
 
 "delogo" = "Delogo";
-"delogo.w" = "Width";
-"delogo.h" = "Height";
-"delogo.x" = "Origin X";
-"delogo.y" = "Origin Y";
+"delogo.w" = "Amplada";
+"delogo.h" = "Alçada";
+"delogo.x" = "Orígen X";
+"delogo.y" = "Orígen Y";
 
-"negative" = "Negative";
+"negative" = "Negatiu";
 
-"vflip" = "Flip";
-"hflip" = "Mirror";
+"vflip" = "Inverteix";
+"hflip" = "Reflecteix";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "File";
-"lut3d.interp" = "Interpolation mode";
+"lut3d.file" = "Fitxer";
+"lut3d.interp" = "Mode d'interpolació";
 
-"custom_mpv" = "Custom (mpv)";
-"custom_mpv.name" = "Filter name";
-"custom_mpv.string" = "Filter value";
+"custom_mpv" = "Personalitzat (mpv)";
+"custom_mpv.name" = "Nom del filtre";
+"custom_mpv.string" = "Valor del filtre";
 
-"custom_ffmpeg" = "Custom (FFmpeg)";
-"custom_ffmpeg.name" = "Filter name";
-"custom_ffmpeg.string" = "Filter value";
+"custom_ffmpeg" = "Personalitzat (FFmpeg)";
+"custom_ffmpeg.name" = "Nom del filtre";
+"custom_ffmpeg.string" = "Valor del filtre";

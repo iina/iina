@@ -183,6 +183,10 @@ class PlaybackInfo {
   var currentSubsInfo: [FileInfo] = []
   var currentVideosInfo: [FileInfo] = []
   var cachedVideoDurationAndProgress: [String: (duration: Double?, progress: Double?)] = [:]
+  
+  // Dictionary and other containers in Swift is not thread-safe, make sure to guard them
+  // TODO: Guard other properties if needed
+  let infoQueue = DispatchQueue(label: "IINAPlaybackInfo")
 
   var thumbnailsReady = false
   var thumbnailsProgress: Double = 0

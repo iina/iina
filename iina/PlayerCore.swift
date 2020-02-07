@@ -982,7 +982,9 @@ class PlayerCore: NSObject {
       Preference.set(url, for: .iinaLastPlayedFilePath)
       // Write to cache directly (rather than calling `refreshCachedVideoProgress`).
       // If user only closed the window but didn't quit the app, this can make sure playlist displays the correct progress.
-      info.cachedVideoDurationAndProgress[url.path] = (duration: info.videoDuration?.second, progress: info.videoPosition?.second)
+      info.infoQueue.async {
+        self.info.cachedVideoDurationAndProgress[url.path] = (duration: self.info.videoDuration?.second, progress: self.info.videoPosition?.second)
+      }
     }
     if let position = info.videoPosition?.second {
       Preference.set(position, for: .iinaLastPlayedFilePosition)
@@ -1576,10 +1578,12 @@ class PlayerCore: NSObject {
   func refreshCachedVideoProgress(forVideoPath path: String) {
     let duration = FFmpegController.probeVideoDuration(forFile: path)
     let progress = Utility.playbackProgressFromWatchLater(path.md5)
-    info.cachedVideoDurationAndProgress[path] = (
-      duration: duration,
-      progress: progress?.second
-    )
+    info.infoQueue.async {  // Running in the background thread
+      self.info.cachedVideoDurationAndProgress[path] = (
+        duration: duration,
+        progress: progress?.second
+      )
+    }
   }
 
   enum CurrentMediaIsAudioStatus {

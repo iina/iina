@@ -978,9 +978,9 @@ class PlayerCore: NSObject {
     mpv.command(.writeWatchLaterConfig)
     if let url = info.currentURL {
       Preference.set(url, for: .iinaLastPlayedFilePath)
-      // Write to cache directly (rather than calling `refreshCachedVideoProgress`).
-      // If user only closed the window but didn't quit the app, this can make sure playlist displays the correct progress.
-      info.infoQueue.async {
+      playlistQueue.async {
+        // Write to cache directly (rather than calling `refreshCachedVideoProgress`).
+        // If user only closed the window but didn't quit the app, this can make sure playlist displays the correct progress.
         self.info.cachedVideoDurationAndProgress[url.path] = (duration: self.info.videoDuration?.second, progress: self.info.videoPosition?.second)
       }
     }
@@ -1579,12 +1579,10 @@ class PlayerCore: NSObject {
   func refreshCachedVideoProgress(forVideoPath path: String) {
     let duration = FFmpegController.probeVideoDuration(forFile: path)
     let progress = Utility.playbackProgressFromWatchLater(path.md5)
-    info.infoQueue.async {  // Running in the background thread
-      self.info.cachedVideoDurationAndProgress[path] = (
-        duration: duration,
-        progress: progress?.second
-      )
-    }
+    info.cachedVideoDurationAndProgress[path] = (
+      duration: duration,
+      progress: progress?.second
+    )
   }
 
   enum CurrentMediaIsAudioStatus {

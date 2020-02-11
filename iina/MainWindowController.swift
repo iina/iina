@@ -1446,6 +1446,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     addBackStandardButtonsToFadeableViews()
     titleBarView.isHidden = false
     showUI()
+    updateTimer()
 
     videoViewConstraints.values.forEach { $0.constant = 0 }
     videoView.needsLayout = true

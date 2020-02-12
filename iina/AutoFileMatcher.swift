@@ -227,7 +227,7 @@ class AutoFileMatcher {
       if subAutoLoadOption.shouldLoadSubsContainingVideoName() {
         Logger.log("Matching subtitles containing video name...", level: .verbose, subsystem: subsystem)
         try subtitles.filter {
-          return $0.filename.contains(video.filename)
+          $0.filename.contains(video.filename) && !$0.isMatched
         }.forEach { sub in
           try checkTicket()
           Logger.log("Matched \(sub.filename) and \(video.filename)", level: .verbose, subsystem: subsystem)

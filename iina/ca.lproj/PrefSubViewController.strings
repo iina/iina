@@ -1,0 +1,182 @@
+/* Class = "NSTextFieldCell"; title = "Assrt API token:"; ObjectID = "0aU-O1-R6G"; */
+"0aU-O1-R6G.title" = "Token API Assrt:";
+
+/* Class = "NSTextFieldCell"; title = "Online Subtitles:"; ObjectID = "0fB-es-DmV"; */
+"0fB-es-DmV.title" = "Subtítols en línia:";
+
+/* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
+"1Tq-5k-o6R.title" = "Superior";
+
+/* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
+"2XY-Un-0Fg.title" = "Mostra els subtítols en mode cinema en pantalla completa";
+
+/* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
+"3H8-Ei-cTm.title" = "tira";
+
+/* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
+"4Tb-Yh-PdP.title" = "Posició:";
+
+/* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
+"6i0-Sx-V7F.title" = "Inferior";
+
+/* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
+"7pf-Kb-TNr.title" = "Els subtítols tenen prioritat quan el nom del fitxer conté:";
+
+/* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "8hj-ki-R0h"; */
+"8hj-ki-R0h.title" = "Escala els subtítols a la mida de la finestra";
+
+/* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "9EP-XB-lyO"; */
+"9EP-XB-lyO.title" = "Espaiat del tipus de lletra:";
+
+/* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "9N4-Zg-M7m"; */
+"9N4-Zg-M7m.title" = "Posició vertical:";
+
+/* Class = "NSBox"; title = "Font"; ObjectID = "9pv-1r-nuH"; */
+"9pv-1r-nuH.title" = "Tipus de lletra";
+
+/* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "ALz-LB-8sf"; */
+"ALz-LB-8sf.title" = "Y:";
+
+/* Class = "NSBox"; title = "Shadow"; ObjectID = "BgE-Kk-MXC"; */
+"BgE-Kk-MXC.title" = "Ombra";
+
+/* Class = "NSButtonCell"; title = "Search online subtitles automatically"; ObjectID = "C3p-uP-8u8"; */
+"C3p-uP-8u8.title" = "Cerca subtítols en línia automàticament";
+
+/* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
+"C4C-XP-i2S.title" = "Tipus de lletra:";
+
+/* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "CdS-9J-f2h"; */
+"CdS-9J-f2h.title" = " X:";
+
+/* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "DUA-7H-Yje"; */
+"DUA-7H-Yje.title" = "Avançat";
+
+/* Class = "NSMenuItem"; title = "Right"; ObjectID = "Gie-38-Kk4"; */
+"Gie-38-Kk4.title" = "Dreta";
+
+/* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "Iax-cc-YIO"; */
+"Iax-cc-YIO.title" = "Compte d'usuari d'OpenSubtitles:";
+
+/* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "LiG-iV-AQK"; */
+"LiG-iV-AQK.title" = "Altres:";
+
+/* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
+"Luv-2B-9v8.title" = "Els directoris estan separats per dos punts (:). Els camins relatius i comodins (*) són vàlids al final.";
+
+/* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
+"Mk1-sv-QB8.title" = "Si us play, introdueix una llista de cadenes de text separada per comes.";
+
+/* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
+"OcF-0z-7qe.title" = "Habilitat, tots els subtítols ASS es dibuixaràn utilitzant els estils següents.";
+
+/* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
+"Qda-dp-nhg.title" = "Text:";
+
+/* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
+"QsS-wD-2hY.title" = "També cerca suubtítols en els directoris següents:";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
+"SIh-Sv-6XI.title" = "Color:";
+
+/* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "TPK-CJ-HX7"; */
+"TPK-CJ-HX7.title" = "Baixa subtítols de:";
+
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "Vbl-Im-3UI"; */
+"Vbl-Im-3UI.title" = "Mida:";
+
+/* Class = "NSButtonCell"; title = "Login"; ObjectID = "WHk-sk-gmK"; */
+"WHk-sk-gmK.title" = "Inicia la sessió";
+
+/* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "X7X-18-FJg"; */
+"X7X-18-FJg.title" = "Avançat";
+
+/* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "XiL-eE-jah"; */
+"XiL-eE-jah.title" = "Detecció intel·ligent d'IINA";
+
+/* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "Y75-4k-2Du"; */
+"Y75-4k-2Du.title" = "Codificació per defecte:";
+
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
+"Z2M-dh-eq1.title" = "Aquesta opció es desarà amb format ISO 639'2 i funcionarà tant per mpv com per opensubtitles.";
+
+/* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
+"aO9-D6-KG8.title" = "Difuminat:";
+
+/* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "cov-Uy-wnc"; */
+"cov-Uy-wnc.title" = "Sense sessió";
+
+/* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "dtP-9o-yhy"; */
+"dtP-9o-yhy.title" = "Desplaçament:";
+
+/* Class = "NSMenuItem"; title = "Center"; ObjectID = "e0e-dB-Ir6"; */
+"e0e-dB-Ir6.title" = "Centre";
+
+/* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "eYO-c0-Rjp"; */
+"eYO-c0-Rjp.title" = "Fins:";
+
+/* Class = "NSBox"; title = "Other Styles"; ObjectID = "egf-g3-b7a"; */
+"egf-g3-b7a.title" = "Altres estils";
+
+/* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
+"gAq-Vr-hRY.title" = "Nivell d'anul·lació:";
+
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "gkc-qt-sD9"; */
+"gkc-qt-sD9.title" = "Mida:";
+
+/* Class = "NSButtonCell"; title = "Bold"; ObjectID = "hEk-7E-10r"; */
+"hEk-7E-10r.title" = "Negreta";
+
+/* Class = "NSBox"; title = "Align"; ObjectID = "kvJ-Tj-KMb"; */
+"kvJ-Tj-KMb.title" = "Alinea";
+
+/* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "l7l-ZO-W79"; */
+"l7l-ZO-W79.title" = " X:";
+
+/* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "mFm-Q6-aja"; */
+"mFm-Q6-aja.title" = "Subtítols ASS:";
+
+/* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "nH7-kO-S15"; */
+"nH7-kO-S15.title" = "Tria...";
+
+/* Class = "NSButtonCell"; title = "Italic"; ObjectID = "pNF-Fw-QtW"; */
+"pNF-Fw-QtW.title" = "Cursiva";
+
+/* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
+"pRe-wv-VVi.title" = "Marge";
+
+/* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "rZf-bj-qbV"; */
+"rZf-bj-qbV.title" = "Ignora estils ASS";
+
+/* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
+"raf-Yu-ck0.title" = "Càrrega automàtica:";
+
+/* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
+"slU-Ox-aeF.title" = "Centre";
+
+/* Class = "NSBox"; title = "Border"; ObjectID = "t5n-mc-dss"; */
+"t5n-mc-dss.title" = "Vora";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
+"u31-eV-Arr.title" = "Disabled";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
+"vDc-dw-liI.title" = "Color:";
+
+/* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
+"vYb-qH-XkH.title" = "Habilitat, IINA cercarà automàticament subtítols en línia només per videos que no tinguin subtítols i no de més de 20 minuts.";
+
+/* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
+"xGf-fF-4Hx.title" = "Y:";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "xid-E9-FC9"; */
+"xid-E9-FC9.title" = "Color:";
+
+/* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
+"y1E-JR-KRI.title" = "Subtítols que contenen el nom del fitxer";
+
+/* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
+"zaE-bH-XfT.title" = "Idioma preferit:";
+
+/* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
+"zml-kt-LN8.title" = "Esquerra";

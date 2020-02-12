@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -73,7 +73,11 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="KNf-nq-d77" name="value" keyPath="values.defaultCacheSize" id="avo-pt-T2i"/>
+                        <binding destination="KNf-nq-d77" name="value" keyPath="values.defaultCacheSize" id="4ud-bT-8hK">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                            </dictionary>
+                        </binding>
                         <binding destination="KNf-nq-d77" name="enabled" keyPath="values.enableCache" id="Hzs-mZ-91S"/>
                     </connections>
                 </textField>
@@ -91,8 +95,12 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <binding destination="KNf-nq-d77" name="value" keyPath="values.secPrefech" id="sml-CA-piQ">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                            </dictionary>
+                        </binding>
                         <binding destination="KNf-nq-d77" name="enabled" keyPath="values.enableCache" id="l6l-ff-nHb"/>
-                        <binding destination="KNf-nq-d77" name="value" keyPath="values.secPrefech" id="TqT-p9-nKp"/>
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VFl-PR-eId">
@@ -166,7 +174,11 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="KNf-nq-d77" name="value" keyPath="values.userAgent" id="WTV-JO-bHI"/>
+                        <binding destination="KNf-nq-d77" name="value" keyPath="values.userAgent" id="KhE-3I-Cj2">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xX8-Nn-BdK">
@@ -214,7 +226,11 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="KNf-nq-d77" name="value" keyPath="values.httpProxy" id="5or-8i-P1x"/>
+                        <binding destination="KNf-nq-d77" name="value" keyPath="values.httpProxy" id="fKR-Qf-U64">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8XM-Bb-OoC">
@@ -283,8 +299,12 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <binding destination="KNf-nq-d77" name="value" keyPath="values.ytdlRawOptions" id="bQV-W1-oMf">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                            </dictionary>
+                        </binding>
                         <binding destination="KNf-nq-d77" name="enabled" keyPath="values.ytdlEnabled" id="RM3-Tc-D6I"/>
-                        <binding destination="KNf-nq-d77" name="value" keyPath="values.ytdlRawOptions" id="FWf-jQ-YRV"/>
                     </connections>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="iwI-aJ-5PQ">
@@ -333,8 +353,12 @@
                     </textFieldCell>
                     <accessibility help="/usr/local/bin"/>
                     <connections>
+                        <binding destination="KNf-nq-d77" name="value" keyPath="values.ytdlSearchPath" id="k2w-ov-mMJ">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                            </dictionary>
+                        </binding>
                         <binding destination="KNf-nq-d77" name="enabled" keyPath="values.ytdlEnabled" id="Tum-wY-bCg"/>
-                        <binding destination="KNf-nq-d77" name="value" keyPath="values.ytdlSearchPath" id="vBs-Yu-Ywd"/>
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YLm-l6-HXj">

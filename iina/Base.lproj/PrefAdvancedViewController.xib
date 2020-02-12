@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -65,21 +65,21 @@
                     </connections>
                 </button>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bA7-7o-Vd0">
-                    <rect key="frame" x="8" y="104" width="484" height="132"/>
+                    <rect key="frame" x="8" y="103" width="484" height="134"/>
                     <clipView key="contentView" id="aL1-v5-nLY">
-                        <rect key="frame" x="1" y="0.0" width="482" height="131"/>
+                        <rect key="frame" x="1" y="0.0" width="482" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="wiq-g9-ouS" id="LPs-2B-Pt0">
-                                <rect key="frame" x="0.0" y="0.0" width="482" height="108"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <rect key="frame" x="0.0" y="0.0" width="482" height="110"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
                                     <tableColumn identifier="Key" width="118" minWidth="40" maxWidth="1000" id="E3I-Q7-9t1">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
-                                            <font key="font" metaFont="smallSystem"/>
+                                            <font key="font" metaFont="message" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
@@ -92,7 +92,7 @@
                                     </tableColumn>
                                     <tableColumn identifier="Value" width="358" minWidth="40" maxWidth="1000" id="SX9-fy-bss">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Value">
-                                            <font key="font" metaFont="smallSystem"/>
+                                            <font key="font" metaFont="message" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
@@ -127,7 +127,7 @@
                     </tableHeaderView>
                 </scrollView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wWR-n2-u2E">
-                    <rect key="frame" x="6" y="244" width="143" height="17"/>
+                    <rect key="frame" x="6" y="245" width="143" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Additional mpv options" id="6F6-Y7-8oR">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -135,7 +135,7 @@
                     </textFieldCell>
                 </textField>
                 <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="1NU-Lr-cuR">
-                    <rect key="frame" x="8" y="83" width="484" height="22"/>
+                    <rect key="frame" x="8" y="82" width="484" height="22"/>
                     <view key="contentView" id="HB1-1I-BjW">
                         <rect key="frame" x="1" y="1" width="482" height="20"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -183,7 +183,7 @@
                     <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Gf8-9e-wu7">
-                    <rect key="frame" x="6" y="46" width="149" height="18"/>
+                    <rect key="frame" x="6" y="45" width="149" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="nel-hG-EmW"/>
                     </constraints>
@@ -197,7 +197,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hbF-n4-jl3">
-                    <rect key="frame" x="344" y="37" width="154" height="32"/>
+                    <rect key="frame" x="344" y="36" width="154" height="32"/>
                     <buttonCell key="cell" type="push" title="Choose directory…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRT-u8-xTX">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -216,7 +216,7 @@
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-pn-h6s">
-                    <rect key="frame" x="26" y="18" width="466" height="22"/>
+                    <rect key="frame" x="26" y="18" width="466" height="21"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="~/.config/mpv/" drawsBackground="YES" id="gWN-ya-xRD">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -224,6 +224,11 @@
                     </textFieldCell>
                     <accessibility description="~/.config/mpv/"/>
                     <connections>
+                        <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="Oxo-tN-gsj">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                            </dictionary>
+                        </binding>
                         <binding destination="nyg-fH-Pug" name="enabled2" keyPath="values.enableAdvancedSettings" previousBinding="aM7-j1-TIV" id="NQW-AQ-cOO">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -233,11 +238,10 @@
                             </dictionary>
                         </binding>
                         <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.useUserDefinedConfDir" id="aM7-j1-TIV"/>
-                        <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="tsm-NE-EV2"/>
                     </connections>
                 </textField>
                 <textField identifier="SectionTitleSettings" hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HmN-IK-rGn">
-                    <rect key="frame" x="-2" y="0.0" width="55" height="17"/>
+                    <rect key="frame" x="-2" y="0.0" width="55" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Settings" id="Qmc-Tb-d7d">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -295,7 +299,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M2l-at-Cbp">
                     <rect key="frame" x="18" y="8" width="476" height="14"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="The following settings will require restarting IINA to take effect." id="HMa-Vz-EUk">
-                        <font key="font" metaFont="smallSystem"/>
+                        <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

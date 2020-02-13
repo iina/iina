@@ -54,27 +54,26 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
       enableSettingsSwitch = NSSwitch()
       enableSettingsSwitchText = NSTextField()
       if let enableSettingsSwitch = enableSettingsSwitch, let enableSettingsSwitchText = enableSettingsSwitchText {
+        enableSettingsBtn.removeFromSuperview()
+        // set bindings
+        enableSettingsSwitch.bind(.value, to: NSUserDefaultsController.shared, withKeyPath: "values.enableAdvancedSettings", options: nil)
         enableSettingsSwitchText.stringValue = enableSettingsBtn.title
         enableSettingsSwitchText.isEditable = false
         enableSettingsSwitchText.isSelectable = false
         enableSettingsSwitchText.isBordered = false
         enableSettingsSwitchText.drawsBackground = false
-        enableSettingsBtn.isHidden = true
         let constraints = [
           enableSettingsSwitch.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(8)),
-          enableSettingsSwitch.topAnchor.constraint(equalTo: view.topAnchor),
+          enableSettingsSwitch.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(8)),
+          enableSettingsSwitch.bottomAnchor.constraint(equalTo: label.topAnchor, constant: CGFloat(-8)),
           enableSettingsSwitchText.centerYAnchor.constraint(equalTo: enableSettingsSwitch.centerYAnchor),
           enableSettingsSwitchText.leadingAnchor.constraint(equalTo: enableSettingsSwitch.trailingAnchor, constant: CGFloat(8)),
           enableSettingsSwitchText.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor),
-          // enableSettingsSwitchText.heightAnchor.constraint(equalToConstant: CGFloat(14)),
         ]
-        // enableSettingsSwitch.wantsLayer = true
         enableSettingsSwitch.translatesAutoresizingMaskIntoConstraints = false
         enableSettingsSwitchText.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(enableSettingsSwitch)
         view.addSubview(enableSettingsSwitchText)
-        // Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": enableSettingsSwitch_])
-        // Utility.quickConstraints([""], ["b": enableSettingsSwitch, "t": enableSettingsSwitchText])
         NSLayoutConstraint.activate(constraints)
       }
     }

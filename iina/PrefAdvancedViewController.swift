@@ -43,7 +43,8 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   @IBOutlet weak var chooseConfigDirBtn: NSButton!
   @IBOutlet weak var removeButton: NSButton!
   @IBOutlet weak var label: NSTextField!
-
+  @IBOutlet weak var helpButton: NSButton!
+  
   var enableSettingsSwitch: NSControl?
   var enableSettingsSwitchText: NSTextField?
 
@@ -68,7 +69,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
           enableSettingsSwitch.bottomAnchor.constraint(equalTo: label.topAnchor, constant: CGFloat(-8)),
           enableSettingsSwitchText.centerYAnchor.constraint(equalTo: enableSettingsSwitch.centerYAnchor),
           enableSettingsSwitchText.leadingAnchor.constraint(equalTo: enableSettingsSwitch.trailingAnchor, constant: CGFloat(8)),
-          enableSettingsSwitchText.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor),
+          enableSettingsSwitchText.trailingAnchor.constraint(lessThanOrEqualTo: helpButton.leadingAnchor),
         ]
         enableSettingsSwitch.translatesAutoresizingMaskIntoConstraints = false
         enableSettingsSwitchText.translatesAutoresizingMaskIntoConstraints = false

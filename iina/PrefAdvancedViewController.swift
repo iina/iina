@@ -51,7 +51,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    if #available(OSX 10.15, *) {
+    if #available(macOS 10.15, *) {
       enableSettingsSwitch = NSSwitch()
       enableSettingsSwitchText = NSTextField()
       if let enableSettingsSwitch = enableSettingsSwitch, let enableSettingsSwitchText = enableSettingsSwitchText {

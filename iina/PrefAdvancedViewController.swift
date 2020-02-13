@@ -42,9 +42,42 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   @IBOutlet weak var useAnotherConfigDirBtn: NSButton!
   @IBOutlet weak var chooseConfigDirBtn: NSButton!
   @IBOutlet weak var removeButton: NSButton!
+  @IBOutlet weak var label: NSTextField!
+
+  var enableSettingsSwitch: NSControl?
+  var enableSettingsSwitchText: NSTextField?
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    if #available(OSX 10.15, *) {
+      enableSettingsSwitch = NSSwitch()
+      enableSettingsSwitchText = NSTextField()
+      if let enableSettingsSwitch = enableSettingsSwitch, let enableSettingsSwitchText = enableSettingsSwitchText {
+        enableSettingsSwitchText.stringValue = enableSettingsBtn.title
+        enableSettingsSwitchText.isEditable = false
+        enableSettingsSwitchText.isSelectable = false
+        enableSettingsSwitchText.isBordered = false
+        enableSettingsSwitchText.drawsBackground = false
+        enableSettingsBtn.isHidden = true
+        let constraints = [
+          enableSettingsSwitch.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(8)),
+          enableSettingsSwitch.topAnchor.constraint(equalTo: view.topAnchor),
+          enableSettingsSwitchText.centerYAnchor.constraint(equalTo: enableSettingsSwitch.centerYAnchor),
+          enableSettingsSwitchText.leadingAnchor.constraint(equalTo: enableSettingsSwitch.trailingAnchor, constant: CGFloat(8)),
+          enableSettingsSwitchText.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor),
+          // enableSettingsSwitchText.heightAnchor.constraint(equalToConstant: CGFloat(14)),
+        ]
+        // enableSettingsSwitch.wantsLayer = true
+        enableSettingsSwitch.translatesAutoresizingMaskIntoConstraints = false
+        enableSettingsSwitchText.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(enableSettingsSwitch)
+        view.addSubview(enableSettingsSwitchText)
+        // Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": enableSettingsSwitch_])
+        // Utility.quickConstraints([""], ["b": enableSettingsSwitch, "t": enableSettingsSwitchText])
+        NSLayoutConstraint.activate(constraints)
+      }
+    }
 
     guard let op = Preference.value(for: .userOptions) as? [[String]] else {
       Utility.showAlert("extra_option.cannot_read", sheetWindow: view.window)

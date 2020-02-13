@@ -11,6 +11,7 @@
                 <outlet property="chooseConfigDirBtn" destination="hbF-n4-jl3" id="QYy-Do-vje"/>
                 <outlet property="enableSettingsBtn" destination="ymk-Ax-TcO" id="9Lx-0u-h5t"/>
                 <outlet property="headerView" destination="vDK-ld-vAF" id="cRU-Jb-NlK"/>
+                <outlet property="label" destination="M2l-at-Cbp" id="bGM-Ow-5Lu"/>
                 <outlet property="optionsTableView" destination="LPs-2B-Pt0" id="jFp-3K-Ub8"/>
                 <outlet property="removeButton" destination="EU2-5a-Lpj" id="If1-8o-8PG"/>
                 <outlet property="settingsView" destination="vY6-lX-1l5" id="NN6-qU-bqp"/>
@@ -79,7 +80,7 @@
                                 <tableColumns>
                                     <tableColumn identifier="Key" width="118" minWidth="40" maxWidth="1000" id="E3I-Q7-9t1">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
-                                            <font key="font" metaFont="message" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
@@ -92,7 +93,7 @@
                                     </tableColumn>
                                     <tableColumn identifier="Value" width="358" minWidth="40" maxWidth="1000" id="SX9-fy-bss">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Value">
-                                            <font key="font" metaFont="message" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
@@ -224,11 +225,6 @@
                     </textFieldCell>
                     <accessibility description="~/.config/mpv/"/>
                     <connections>
-                        <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="Oxo-tN-gsj">
-                            <dictionary key="options">
-                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                            </dictionary>
-                        </binding>
                         <binding destination="nyg-fH-Pug" name="enabled2" keyPath="values.enableAdvancedSettings" previousBinding="aM7-j1-TIV" id="NQW-AQ-cOO">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -238,6 +234,11 @@
                             </dictionary>
                         </binding>
                         <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.useUserDefinedConfDir" id="aM7-j1-TIV"/>
+                        <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="Oxo-tN-gsj">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </textField>
                 <textField identifier="SectionTitleSettings" hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HmN-IK-rGn">
@@ -297,7 +298,7 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M2l-at-Cbp">
-                    <rect key="frame" x="18" y="8" width="476" height="14"/>
+                    <rect key="frame" x="6" y="8" width="488" height="14"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="The following settings will require restarting IINA to take effect." id="HMa-Vz-EUk">
                         <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -324,7 +325,7 @@
                 <constraint firstItem="3Gg-Io-SlS" firstAttribute="top" secondItem="vDK-ld-vAF" secondAttribute="top" constant="8" id="kUt-ct-UDL"/>
                 <constraint firstItem="ymk-Ax-TcO" firstAttribute="leading" secondItem="vDK-ld-vAF" secondAttribute="leading" constant="8" id="nFS-Q2-X8f"/>
                 <constraint firstItem="M2l-at-Cbp" firstAttribute="top" secondItem="ymk-Ax-TcO" secondAttribute="bottom" constant="8" id="q3n-6M-i1G"/>
-                <constraint firstItem="M2l-at-Cbp" firstAttribute="leading" secondItem="vDK-ld-vAF" secondAttribute="leading" constant="20" id="xzV-Ko-9nU"/>
+                <constraint firstItem="M2l-at-Cbp" firstAttribute="leading" secondItem="vDK-ld-vAF" secondAttribute="leading" constant="8" id="xzV-Ko-9nU"/>
             </constraints>
             <point key="canvasLocation" x="-397" y="-163"/>
         </customView>

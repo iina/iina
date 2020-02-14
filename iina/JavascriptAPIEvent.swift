@@ -10,7 +10,8 @@ import Foundation
 import JavaScriptCore
 
 @objc protocol JavascriptAPIEventExportable: JSExport {
-  func on(_ event: String, _ callback: JSValue)
+  func on(_ event: String, _ callback: JSValue) -> String?
+  func off(_ event: String, _ id: String)
 }
 
 // Examples:
@@ -21,23 +22,28 @@ import JavaScriptCore
 
 class JavascriptAPIEvent: JavascriptAPI, JavascriptAPIEventExportable {
 
-  @objc func on(_ event: String, _ callback: JSValue) {
+  @objc func on(_ event: String, _ callback: JSValue) -> String? {
     let splitted = event.split(separator: ".")
     let isEventListener = splitted.count == 2
     let isPropertyChangedListener = splitted.count == 3 && splitted[2] == "changed"
     let isMpv = splitted[0] == "mpv"
     let isIINA = splitted[0] == "iina"
     guard (isEventListener || isPropertyChangedListener) && (isMpv || isIINA) else {
-      throwError(withMessage: "Incorrect event name syntax.")
-      return
+      throwError(withMessage: "Incorrect event name syntax: \"\(event)\"")
+      return nil
     }
     let eventName = String(splitted[1])
     if isMpv && isPropertyChangedListener && player.mpv.observeProperties[eventName] == nil {
       player.mpv.observe(property: eventName)
     }
-    player.events.addListener(JavascriptAPIEventCallback(callback), for: .init(event))
+    return player.events.addListener(JavascriptAPIEventCallback(callback), for: .init(event))
   }
 
+  @objc func off(_ event: String,_ id: String) {
+    if !player.events.removeListener(id, for: .init(event)) {
+      log("Event listener not found for id \(id)", level: .warning)
+    }
+  }
 }
 
 class JavascriptAPIEventCallback: EventCallable {

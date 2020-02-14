@@ -72,9 +72,10 @@ class JavascriptPluginInstance {
   }
 
   @objc func menuItemAction(_ sender: NSMenuItem) {
-    guard let action = sender.representedObject as? JSValue else { return }
-    if action.call(withArguments: []) == nil {
-      Logger.log("Menu item is not a function", level: .error, subsystem: subsystem)
+    guard let item = sender.representedObject as? JavascriptPluginMenuItem,
+      let action = item.action else { return }
+    if action.call(withArguments: [item]) == nil {
+      Logger.log("Action of the menu item \"\(item.title)\" is not a function", level: .error, subsystem: subsystem)
     }
   }
 
@@ -88,7 +89,6 @@ class JavascriptPluginInstance {
     if asModule {
       script =
       """
-      "use strict";
       (function() {
       const module = {};
       \(content)
@@ -98,7 +98,6 @@ class JavascriptPluginInstance {
     } else {
       script =
       """
-      "use strict";
       \(content)
       """
     }

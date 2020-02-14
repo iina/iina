@@ -11,6 +11,7 @@ import JavaScriptCore
 
 @objc protocol JavascriptAPIMenuExportable: JSExport {
   func item(_ title: String, _ action: JSValue, _ selected: Bool, _ enabled: Bool) -> JavascriptPluginMenuItem
+  func separator() -> JavascriptPluginMenuItem
   func addItem(_ item: JavascriptPluginMenuItem)
   func removeAllItems()
 }
@@ -18,6 +19,12 @@ import JavaScriptCore
 class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
   @objc func item(_ title: String, _ action: JSValue, _ selected: Bool = false, _ enabled: Bool = true) -> JavascriptPluginMenuItem {
     return JavascriptPluginMenuItem(title: title, action: action, selected: selected, enabled: enabled)
+  }
+
+  @objc func separator() -> JavascriptPluginMenuItem {
+    let item = JavascriptPluginMenuItem(title: "", action: nil, selected: false, enabled: false)
+    item.isSeparator = true
+    return item
   }
 
   @objc func addItem(_ item: JavascriptPluginMenuItem) {

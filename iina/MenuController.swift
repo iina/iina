@@ -539,9 +539,22 @@ class MenuController: NSObject, NSMenuDelegate {
 
   @discardableResult
   private func add(menuItemDef item: JavascriptPluginMenuItem, to menu: NSMenu, for plugin: JavascriptPluginInstance) -> NSMenuItem {
-    let menuItem = menu.addItem(withTitle: item.title,
-                                action: #selector(plugin.menuItemAction(_:)), target: plugin,
-                                obj: item.action)
+    if (item.isSeparator) {
+      let item = NSMenuItem.separator()
+      menu.addItem(item)
+      return item
+    }
+
+    let menuItem: NSMenuItem
+    if item.action == nil {
+      menuItem = menu.addItem(withTitle: item.title, action: nil, target: plugin, obj: item)
+    } else {
+      menuItem = menu.addItem(withTitle: item.title,
+                              action: #selector(plugin.menuItemAction(_:)),
+                              target: plugin,
+                              obj: item)
+    }
+
     menuItem.isEnabled = item.enabled
     menuItem.state = item.selected ? .on : .off
     if !item.items.isEmpty {

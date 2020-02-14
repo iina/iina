@@ -12,28 +12,31 @@ import JavaScriptCore
 @objc protocol JavascriptPluginMenuItemExportable: JSExport {
   var items: [JavascriptPluginMenuItem] { get set }
   var title: String { get set }
-  var action: JSValue { get set }
+  var action: JSValue? { get set }
   var selected: Bool { get set }
   var enabled: Bool { get set }
 
-  func addSubMenuItem(_ item: JavascriptPluginMenuItem)
+  func addSubMenuItem(_ item: JavascriptPluginMenuItem) -> Self
 }
 
 class JavascriptPluginMenuItem: NSObject, JavascriptPluginMenuItemExportable {
   var items: [JavascriptPluginMenuItem] = []
   var title: String
-  var action: JSValue
+  var action: JSValue?
   var selected: Bool
   var enabled: Bool
+  var isSeparator: Bool
 
-  init(title: String, action: JSValue, selected: Bool, enabled: Bool) {
+  init(title: String, action: JSValue?, selected: Bool, enabled: Bool) {
     self.title = title
     self.action = action
     self.selected = selected
     self.enabled = enabled
+    self.isSeparator = false
   }
 
-  func addSubMenuItem(_ item: JavascriptPluginMenuItem) {
+  func addSubMenuItem(_ item: JavascriptPluginMenuItem) -> Self {
     self.items.append(item)
+    return self
   }
 }

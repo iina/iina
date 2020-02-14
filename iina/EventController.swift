@@ -32,14 +32,23 @@ class EventController {
     static let pipChanged = Name("iina.pip.changed")
   }
 
-  var listeners: [Name: [EventCallable]] = [:]
+  var listeners: [Name: [String: EventCallable]] = [:]
 
   func hasListener(for name: Name) -> Bool {
     return listeners[name] != nil
   }
 
-  func addListener(_ listener: EventCallable, for name: Name) {
-    listeners[name, default: []].append(listener)
+  func addListener(_ listener: EventCallable, for name: Name) -> String {
+    let uuid = UUID().uuidString
+    listeners[name, default: [:]][uuid] = listener
+    return uuid
+  }
+
+  func removeListener(_ id: String, for name: Name) -> Bool {
+    if listeners[name] == nil { return false }
+    if listeners[name]![id] == nil { return false }
+    listeners[name]![id] = nil
+    return true
   }
 
   func removeAllListener(for name: Name) {
@@ -48,7 +57,7 @@ class EventController {
 
   func emit(_ eventName: Name, data: Any...) {
     guard let listeners = listeners[eventName] else { return }
-    for listener in listeners {
+    for listener in listeners.values {
       listener.call(withArguments: data)
     }
   }

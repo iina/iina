@@ -266,6 +266,7 @@ extension MiniPlayerWindowController {
 class TouchBarPlaySlider: NSSlider {
 
   var isTouching = false
+  var wasPlayingBeforeToucing = false
 
   var playerCore: PlayerCore {
     return (self.window?.windowController as? MainWindowController)?.player ?? .active
@@ -273,13 +274,16 @@ class TouchBarPlaySlider: NSSlider {
 
   override func touchesBegan(with event: NSEvent) {
     isTouching = true
+    wasPlayingBeforeToucing = playerCore.info.isPlaying
     playerCore.pause()
     super.touchesBegan(with: event)
   }
 
   override func touchesEnded(with event: NSEvent) {
     isTouching = false
-    playerCore.resume()
+    if (wasPlayingBeforeToucing) {
+      playerCore.resume()
+    }
     super.touchesEnded(with: event)
   }
 

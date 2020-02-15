@@ -178,7 +178,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
       addFilterFunction = pc.addVideoFilter
       removeFilterFunction = pc.removeVideoFilter
     } else {
-      addFilterFunction = pc.addAudioFilter(_:)
+      addFilterFunction = pc.addAudioFilter
       removeFilterFunction = pc.removeAudioFilter
     }
 

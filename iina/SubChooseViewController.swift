@@ -45,6 +45,10 @@ class SubChooseViewController: NSViewController {
 
     tableView.delegate = self
     tableView.dataSource = self
+
+    // Download subtitle when table view row is double clicked
+    tableView.target = self
+    tableView.doubleAction = #selector(downloadBtnAction(_:))
   }
 
   @IBAction func downloadBtnAction(_ sender: Any) {

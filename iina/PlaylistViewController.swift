@@ -354,6 +354,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     addFileMenu.popUp(positioning: nil, at: .zero, in: sender)
   }
 
+  @IBAction func removeBtnAction(_ sender: NSButton) {
+    player.playlistRemove(playlistTableView.selectedRowIndexes)
+  }
+
   @IBAction func addFileAction(_ sender: AnyObject) {
     Utility.quickMultipleOpenPanel(title: "Add to playlist", canChooseDir: true) { urls in
       let playableFiles = self.player.getPlayableFiles(in: urls)

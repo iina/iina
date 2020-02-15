@@ -164,19 +164,34 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     saveFilter(filters[row])
   }
 
+  /// User activates or deactivates previously saved audio or video filter
+  /// - Parameter sender: A checkbox in lower portion of filter window
   @IBAction func toggleSavedFilterAction(_ sender: NSButton) {
     let row = savedFiltersTableView.row(for: sender)
-    let filter = savedFilters[row]
+    let savedFilter = savedFilters[row]
     let pc = PlayerCore.active
-    if sender.state == .on {
-      if pc.addVideoFilter(MPVFilter(rawString: filter.filterString)!) {
-        pc.sendOSD(.addFilter(filter.name))
-      }
+
+    // choose approriate add/remove functions for .af/.vf
+    var addFilterFunction: (MPVFilter) -> Bool
+    var removeFilterFunction: (MPVFilter) -> Bool
+    if filterType == MPVProperty.vf {
+      addFilterFunction = pc.addVideoFilter
+      removeFilterFunction = pc.removeVideoFilter
     } else {
-      if pc.removeVideoFilter(MPVFilter(rawString: filter.filterString)!) {
+      addFilterFunction = pc.addAudioFilter
+      removeFilterFunction = pc.removeAudioFilter
+    }
+
+    if sender.state == .on {  // user activated filter
+      if addFilterFunction(MPVFilter(rawString: savedFilter.filterString)!) {
+        pc.sendOSD(.addFilter(savedFilter.name))
+      }
+    } else {  // user deactivated filter
+      if removeFilterFunction(MPVFilter(rawString: savedFilter.filterString)!) {
         pc.sendOSD(.removeFilter)
       }
     }
+
     reloadTable()
   }
 

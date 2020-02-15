@@ -1245,7 +1245,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   func windowWillOpen() {
     if loaded {
-      window?.setFrame(NSSize(width: 640, height: 400).centeredRect(in: NSScreen.main!.frame), display: true)
+      window?.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: NSScreen.main!.frame), display: true)
       videoView.videoLayer.draw(forced: true)
     }
   }

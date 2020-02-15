@@ -406,16 +406,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     guard let tv = sender as? NSTableView, tv.numberOfSelectedRows > 0 else { return }
     if tv == playlistTableView {
       player.playFileInPlaylist(tv.selectedRow)
-      tv.deselectAll(self)
-      tv.reloadData()
     } else {
       let index = tv.selectedRow
       player.playChapter(index)
-      let chapter = player.info.chapters[index]
-      tv.deselectAll(self)
-      tv.reloadData()
-      player.sendOSD(.chapter(chapter.title))
     }
+    tv.deselectAll(self)
+    tv.reloadData()
   }
 
   @IBAction func prefixBtnAction(_ sender: PlaylistPrefixButton) {

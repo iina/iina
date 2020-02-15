@@ -447,7 +447,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let tv = notification.object as! NSTableView
     if tv == playlistTableView {
       showTotalLength()
-      selectedRows = playlistTableView.selectedRowIndexes
       return
     }
   }

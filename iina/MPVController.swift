@@ -717,7 +717,9 @@ class MPVController: NSObject {
       // video size changed
       player.info.displayWidth = dwidth
       player.info.displayHeight = dheight
-      player.notifyMainWindowVideoSizeChanged()
+      DispatchQueue.main.sync {
+        player.notifyMainWindowVideoSizeChanged()
+      }
     }
   }
 

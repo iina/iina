@@ -365,11 +365,11 @@ class PlayerCore: NSObject {
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
 
     let (width, height) = originalVideoSize
-    let aspect = width == 0 || height == 0 ? 1 : CGFloat(width) / CGFloat(height)
+    let aspect = (width == 0 || height == 0) ? 1 : CGFloat(width) / CGFloat(height)
     miniPlayer.updateVideoViewAspectConstraint(withAspect: aspect)
 
     // if received video size before switching to music mode, hide default album art
-    if !info.videoTracks.isEmpty {
+    if info.vid != 0 {
       miniPlayer.defaultAlbumArt.isHidden = true
     }
     // in case of video size changed, reset mini player window size if playlist is folded
@@ -1061,8 +1061,12 @@ class PlayerCore: NSObject {
         mainWindow.volumeSlider.isEnabled = false
       }
 
+      if info.vid == 0 {
+        notifyMainWindowVideoSizeChanged()
+      }
+
       if self.isInMiniPlayer {
-        miniPlayer.defaultAlbumArt.isHidden = !self.info.videoTracks.isEmpty
+        miniPlayer.defaultAlbumArt.isHidden = self.info.vid != 0
       }
     }
     // set initial properties for the first file
@@ -1086,10 +1090,6 @@ class PlayerCore: NSObject {
   func playbackRestarted() {
     Logger.log("Playback restarted", subsystem: subsystem)
     reloadSavedIINAfilters()
-
-    if info.vid == 0 {
-      notifyMainWindowVideoSizeChanged()
-    }
 
     DispatchQueue.main.async {
       Timer.scheduledTimer(timeInterval: TimeInterval(0.2), target: self, selector: #selector(self.reEnableOSDAfterFileLoading), userInfo: nil, repeats: false)
@@ -1182,11 +1182,9 @@ class PlayerCore: NSObject {
   // MARK: - Sync with UI in MainWindow
 
   func notifyMainWindowVideoSizeChanged() {
-    DispatchQueue.main.sync {
-      self.mainWindow.adjustFrameByVideoSize()
-      if self.isInMiniPlayer {
-        self.miniPlayer.updateVideoSize()
-      }
+    mainWindow.adjustFrameByVideoSize()
+    if isInMiniPlayer {
+      miniPlayer.updateVideoSize()
     }
   }
 

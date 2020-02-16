@@ -363,17 +363,13 @@ class PlayerCore: NSObject {
     videoView.removeFromSuperview()
     miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
-    let (dw, dh) = videoSizeForDisplay
-    miniPlayer.updateVideoViewAspectConstraint(withAspect: CGFloat(dw) / CGFloat(dh))
 
-    // if no video track (or video info is still not available now), set aspect ratio for main window
-    if let mw = mainWindow.window, mw.aspectRatio == .zero {
-      let size = NSSize(width: dw, height: dh)
-      mw.setFrame(NSRect(origin: mw.frame.origin, size: size), display: false)
-      mw.aspectRatio = size
-    }
+    let (width, height) = originalVideoSize
+    let aspect = (width == 0 || height == 0) ? 1 : CGFloat(width) / CGFloat(height)
+    miniPlayer.updateVideoViewAspectConstraint(withAspect: aspect)
+
     // if received video size before switching to music mode, hide default album art
-    if !info.videoTracks.isEmpty {
+    if info.vid != 0 {
       miniPlayer.defaultAlbumArt.isHidden = true
     }
     // in case of video size changed, reset mini player window size if playlist is folded
@@ -422,7 +418,8 @@ class PlayerCore: NSObject {
       mainWindow.window?.makeKeyAndOrderFront(self)
     }
     // if aspect ratio is not set
-    if mainWindow.window?.aspectRatio == nil {
+    let (width, height) = originalVideoSize
+    if width == 0 && height == 0 {
       mainWindow.window?.aspectRatio = AppData.sizeWhenNoVideo
     }
     // hide mini player
@@ -1064,8 +1061,12 @@ class PlayerCore: NSObject {
         mainWindow.volumeSlider.isEnabled = false
       }
 
+      if info.vid == 0 {
+        notifyMainWindowVideoSizeChanged()
+      }
+
       if self.isInMiniPlayer {
-        miniPlayer.defaultAlbumArt.isHidden = !self.info.videoTracks.isEmpty
+        miniPlayer.defaultAlbumArt.isHidden = self.info.vid != 0
       }
     }
     // set initial properties for the first file
@@ -1089,6 +1090,7 @@ class PlayerCore: NSObject {
   func playbackRestarted() {
     Logger.log("Playback restarted", subsystem: subsystem)
     reloadSavedIINAfilters()
+
     DispatchQueue.main.async {
       Timer.scheduledTimer(timeInterval: TimeInterval(0.2), target: self, selector: #selector(self.reEnableOSDAfterFileLoading), userInfo: nil, repeats: false)
     }
@@ -1180,11 +1182,9 @@ class PlayerCore: NSObject {
   // MARK: - Sync with UI in MainWindow
 
   func notifyMainWindowVideoSizeChanged() {
-    DispatchQueue.main.sync {
-      self.mainWindow.adjustFrameByVideoSize()
-      if self.isInMiniPlayer {
-        self.miniPlayer.updateVideoSize()
-      }
+    mainWindow.adjustFrameByVideoSize()
+    if isInMiniPlayer {
+      miniPlayer.updateVideoSize()
     }
   }
 

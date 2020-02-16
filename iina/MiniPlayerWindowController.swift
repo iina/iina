@@ -395,8 +395,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   func updateVideoSize() {
     guard let window = window else { return }
     let videoView = player.mainWindow.videoView
-    let (width, height) = player.videoSizeForDisplay
-    let aspect = CGFloat(width) / CGFloat(height)
+    let (width, height) = player.originalVideoSize
+    let aspect = (width == 0 || height == 0) ? 1 : CGFloat(width) / CGFloat(height)
     let currentHeight = videoView.frame.height
     let newHeight = videoView.frame.width / aspect
     updateVideoViewAspectConstraint(withAspect: aspect)

@@ -61,19 +61,16 @@ class PlayerWindowController: NSWindowController {
     
     setMaterial(Preference.enum(for: .themeMaterial))
     
-    notificationCenter(.default, addObserverfor: .iinaMediaTitleChanged, object: player) { [unowned self] _ in
+    notificationCenter(.default, addObserverForName: .iinaMediaTitleChanged, object: player) { [unowned self] _ in
         self.updateTitle()
     }
     
     updateVolume()
   }
   
-  internal func notificationCenter(_ center: NotificationCenter, addObserverfor name: NSNotification.Name, object: Any? = nil, using block: @escaping (Notification) -> Void) {
+  internal func notificationCenter(_ center: NotificationCenter, addObserverForName name: Notification.Name, object: Any? = nil, using block: @escaping (Notification) -> Void) {
     let observer = center.addObserver(forName: name, object: object, queue: .main, using: block)
-    if notificationObservers[center] == nil {
-      notificationObservers[center] = []
-    }
-    notificationObservers[center]!.append(observer)
+    notificationObservers[center, default: []].append(observer)
   }
 
   
@@ -144,32 +141,28 @@ class PlayerWindowController: NSWindowController {
   /** This method will not set `isOntop`! */
   func setWindowFloatingOnTop(_ onTop: Bool) {
     guard let window = window else { return }
-    if onTop {
-      window.level = .iinaFloating
-    } else {
-      window.level = .normal
-    }
+    window.level = onTop ? .iinaFloating : .normal
   }
   
   internal func handleIINACommand(_ cmd: IINACommand) {
-    let appDeletate = (NSApp.delegate! as! AppDelegate)
+    let appDelegate = (NSApp.delegate! as! AppDelegate)
     switch cmd {
     case .openFile:
-      appDeletate.openFile(self)
+      appDelegate.openFile(self)
     case .openURL:
-      appDeletate.openURL(self)
+      appDelegate.openURL(self)
     case .flip:
-      self.menuActionHandler.menuToggleFlip(.dummy)
+      menuActionHandler.menuToggleFlip(.dummy)
     case .mirror:
-      self.menuActionHandler.menuToggleMirror(.dummy)
+      menuActionHandler.menuToggleMirror(.dummy)
     case .saveCurrentPlaylist:
-      self.menuActionHandler.menuSavePlaylist(.dummy)
+      menuActionHandler.menuSavePlaylist(.dummy)
     case .deleteCurrentFile:
-      self.menuActionHandler.menuDeleteCurrentFile(.dummy)
+      menuActionHandler.menuDeleteCurrentFile(.dummy)
     case .findOnlineSubs:
-      self.menuActionHandler.menuFindOnlineSub(.dummy)
+      menuActionHandler.menuFindOnlineSub(.dummy)
     case .saveDownloadedSub:
-      self.menuActionHandler.saveDownloadedSub(.dummy)
+      menuActionHandler.saveDownloadedSub(.dummy)
     default:
       break
     }

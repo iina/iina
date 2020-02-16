@@ -2655,34 +2655,34 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
     switch cmd {
     case .togglePIP:
       if #available(macOS 10.12, *) {
-        self.menuTogglePIP(.dummy)
+        menuTogglePIP(.dummy)
       }
     case .videoPanel:
-      self.menuShowVideoQuickSettings(.dummy)
+      menuShowVideoQuickSettings(.dummy)
     case .audioPanel:
-      self.menuShowAudioQuickSettings(.dummy)
+      menuShowAudioQuickSettings(.dummy)
     case .subPanel:
-      self.menuShowSubQuickSettings(.dummy)
+      menuShowSubQuickSettings(.dummy)
     case .playlistPanel:
-      self.menuShowPlaylistPanel(.dummy)
+      menuShowPlaylistPanel(.dummy)
     case .chapterPanel:
-      self.menuShowChaptersPanel(.dummy)
+      menuShowChaptersPanel(.dummy)
     case .toggleMusicMode:
-      self.menuSwitchToMiniPlayer(.dummy)
+      menuSwitchToMiniPlayer(.dummy)
     case .deleteCurrentFileHard:
-      self.menuActionHandler.menuDeleteCurrentFileHard(.dummy)
+      menuActionHandler.menuDeleteCurrentFileHard(.dummy)
     case .biggerWindow:
       let item = NSMenuItem()
       item.tag = 11
-      self.menuChangeWindowSize(item)
+      menuChangeWindowSize(item)
     case .smallerWindow:
       let item = NSMenuItem()
       item.tag = 10
-      self.menuChangeWindowSize(item)
+      menuChangeWindowSize(item)
     case .fitToScreen:
       let item = NSMenuItem()
       item.tag = 3
-      self.menuChangeWindowSize(item)
+      menuChangeWindowSize(item)
     default:
       break
     }

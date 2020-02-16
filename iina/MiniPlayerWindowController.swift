@@ -303,23 +303,23 @@ class MiniPlayerWindowController: PlayerWindowController, NSWindowDelegate, NSPo
   // MARK: - Sync UI with playback
   @objc
   override func updateTitle() {
-    let (mediaTitle, mediaAlbum, mediaArtist) = self.player.getMusicMetadata()
-    self.titleLabel.stringValue = mediaTitle
-    self.window?.title = mediaTitle
+    let (mediaTitle, mediaAlbum, mediaArtist) = player.getMusicMetadata()
+    titleLabel.stringValue = mediaTitle
+    window?.title = mediaTitle
     // hide artist & album label when info not available
     if mediaArtist.isEmpty && mediaAlbum.isEmpty {
-      self.titleLabelTopConstraint.constant = 6 + 10
-      self.artistAlbumLabel.stringValue = ""
+      titleLabelTopConstraint.constant = 6 + 10
+      artistAlbumLabel.stringValue = ""
     } else {
-      self.titleLabelTopConstraint.constant = 6
+      titleLabelTopConstraint.constant = 6
       if mediaArtist.isEmpty || mediaAlbum.isEmpty {
-        self.artistAlbumLabel.stringValue = "\(mediaArtist)\(mediaAlbum)"
+        artistAlbumLabel.stringValue = "\(mediaArtist)\(mediaAlbum)"
       } else {
-        self.artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
+        artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
       }
     }
-    self.titleLabel.scroll()
-    self.artistAlbumLabel.scroll()
+    titleLabel.scroll()
+    artistAlbumLabel.scroll()
   }
 
   override func updateVolume() {
@@ -430,7 +430,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSWindowDelegate, NSPo
     super.handleIINACommand(cmd)
     switch cmd {
     case .toggleMusicMode:
-      self.menuSwitchToMiniPlayer(.dummy)
+      menuSwitchToMiniPlayer(.dummy)
     default:
       break
     }

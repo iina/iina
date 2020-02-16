@@ -14,7 +14,7 @@ fileprivate let DefaultPlaylistHeight: CGFloat = 300
 fileprivate let AutoHidePlaylistThreshold: CGFloat = 200
 fileprivate let AnimationDurationShowControl: TimeInterval = 0.2
 
-class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopoverDelegate {
+class MiniPlayerWindowController: PlayerWindowController, NSWindowDelegate, NSPopoverDelegate {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("MiniPlayerWindowController")
@@ -24,10 +24,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     let fontSize = NSFont.systemFontSize(for: .mini)
     return NSFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
   }()
-
-  unowned var player: PlayerCore
-
-  var menuActionHandler: MainMenuActionHandler!
 
   // MARK: - Observed user defaults
 
@@ -73,7 +69,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     }
   }
 
-  @IBOutlet weak var muteButton: NSButton!
   @IBOutlet weak var volumeButton: NSButton!
   @IBOutlet var volumePopover: NSPopover!
   @IBOutlet weak var backgroundView: NSVisualEffectView!
@@ -93,15 +88,9 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   @IBOutlet weak var titleLabel: ScrollingTextField!
   @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var artistAlbumLabel: ScrollingTextField!
-  @IBOutlet weak var playButton: NSButton!
-  @IBOutlet weak var leftLabel: NSTextField!
-  @IBOutlet weak var rightLabel: DurationDisplayTextField!
-  @IBOutlet weak var playSlider: NSSlider!
-  @IBOutlet weak var volumeSlider: NSSlider!
   @IBOutlet weak var volumeLabel: NSTextField!
   @IBOutlet weak var defaultAlbumArt: NSView!
 
-  var loaded = false
   var isOntop = false
   var isPlaylistVisible = false
   var isVideoVisible = true
@@ -110,30 +99,13 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
 
   private var originalWindowFrame: NSRect!
 
-  init(player: PlayerCore) {
-    self.player = player
-    super.init(window: nil)
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
   override func windowDidLoad() {
     super.windowDidLoad()
-    loaded = true
 
     guard let window = window else { return }
 
-    menuActionHandler = MainMenuActionHandler(playerCore: player)
-    let responder = window.nextResponder
-    window.nextResponder = menuActionHandler
-    menuActionHandler.nextResponder = responder
-
-    window.initialFirstResponder = nil
     window.styleMask = [.fullSizeContentView, .titled, .resizable, .closable]
     window.isMovableByWindowBackground = true
-    window.titlebarAppearsTransparent = true
     window.titleVisibility = .hidden
     ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).forEach {
       let button = window.standardWindowButton($0)
@@ -149,9 +121,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     setToInitialWindowSize(display: false, animate: false)
 
     controlViewTopConstraint.isActive = false
-
-    // set material
-    setMaterial(Preference.enum(for: .themeMaterial))
 
     // tracking area
     let trackingView = NSView()
@@ -179,10 +148,6 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     // switching UI
     controlView.alphaValue = 0
 
-    // notifications
-    NotificationCenter.default.addObserver(self, selector: #selector(updateTrack), name: .iinaMediaTitleChanged, object: player)
-
-    updateVolume()
     updatePlayButtonState(player.info.isPaused ? .off : .on)
     rightLabel.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .duration
 
@@ -312,12 +277,10 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     artistAlbumLabel.scroll()
   }
 
-  private func setMaterial(_ theme: Preference.Theme?) {
+  override internal func setMaterial(_ theme: Preference.Theme?) {
     guard let window = window, let theme = theme else { return }
 
-    if #available(macOS 10.14, *) {
-      window.appearance = NSAppearance(iinaTheme: theme)
-    } else {
+    if #available(macOS 10.14, *) {} else {
       let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)
 
       [backgroundView, closeButtonBackgroundViewVE, playlistWrapperView].forEach {
@@ -338,57 +301,31 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
   }
 
   // MARK: - Sync UI with playback
-
-  func updatePlayButtonState(_ state: NSControl.StateValue) {
-    guard loaded else { return }
-    playButton.state = state
-  }
-
-  func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
-    guard loaded else { return }
-    guard let duration = player.info.videoDuration, let pos = player.info.videoPosition else {
-      Logger.fatal("video info not available")
-    }
-    let percentage = (pos.second / duration.second) * 100
-    leftLabel.stringValue = pos.stringRepresentation
-    rightLabel.updateText(with: duration, given: pos)
-    if andProgressBar {
-      playSlider.doubleValue = percentage
-      if #available(macOS 10.12.2, *) {
-        player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
-        player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
-      }
-    }
-  }
-
   @objc
-  func updateTrack() {
-    DispatchQueue.main.async {
-      let (mediaTitle, mediaAlbum, mediaArtist) = self.player.getMusicMetadata()
-      self.titleLabel.stringValue = mediaTitle
-      self.window?.title = mediaTitle
-      // hide artist & album label when info not available
-      if mediaArtist.isEmpty && mediaAlbum.isEmpty {
-        self.titleLabelTopConstraint.constant = 6 + 10
-        self.artistAlbumLabel.stringValue = ""
+  override func updateTitle() {
+    let (mediaTitle, mediaAlbum, mediaArtist) = self.player.getMusicMetadata()
+    self.titleLabel.stringValue = mediaTitle
+    self.window?.title = mediaTitle
+    // hide artist & album label when info not available
+    if mediaArtist.isEmpty && mediaAlbum.isEmpty {
+      self.titleLabelTopConstraint.constant = 6 + 10
+      self.artistAlbumLabel.stringValue = ""
+    } else {
+      self.titleLabelTopConstraint.constant = 6
+      if mediaArtist.isEmpty || mediaAlbum.isEmpty {
+        self.artistAlbumLabel.stringValue = "\(mediaArtist)\(mediaAlbum)"
       } else {
-        self.titleLabelTopConstraint.constant = 6
-        if mediaArtist.isEmpty || mediaAlbum.isEmpty {
-          self.artistAlbumLabel.stringValue = "\(mediaArtist)\(mediaAlbum)"
-        } else {
-          self.artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
-        }
+        self.artistAlbumLabel.stringValue = "\(mediaArtist) - \(mediaAlbum)"
       }
-      self.titleLabel.scroll()
-      self.artistAlbumLabel.scroll()
     }
+    self.titleLabel.scroll()
+    self.artistAlbumLabel.scroll()
   }
 
-  func updateVolume() {
+  override func updateVolume() {
     guard loaded else { return }
-    volumeSlider.doubleValue = player.info.volume
+    super.updateVolume()
     volumeLabel.intValue = Int32(player.info.volume)
-    muteButton.state = player.info.isMuted ? .on : .off
     volumeButton.image = player.info.isMuted ? NSImage(named: "mute") : NSImage(named: "volume")
   }
 
@@ -463,16 +400,8 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     Preference.set(isVideoVisible, for: .musicModeShowAlbumArt)
   }
 
-  @IBAction func volumeSliderChanges(_ sender: NSSlider) {
-    player.mainWindow.volumeSliderChanges(sender)
-  }
-
   @IBAction func backBtnAction(_ sender: NSButton) {
     player.switchBackFromMiniPlayer(automatically: false)
-  }
-
-  @IBAction func playBtnAction(_ sender: NSButton) {
-    player.info.isPaused ? player.resume() : player.pause()
   }
 
   @IBAction func nextBtnAction(_ sender: NSButton) {
@@ -491,52 +420,17 @@ class MiniPlayerWindowController: NSWindowController, NSWindowDelegate, NSPopove
     }
   }
 
-  @IBAction func muteBtnAction(_ sender: NSButton) {
-    player.toggleMute()
-  }
-
-  @IBAction func playSliderChanges(_ sender: NSSlider) {
-    let percentage = 100 * sender.doubleValue / sender.maxValue
-    player.seek(percent: percentage, forceExact: true)
-  }
-
-
   // MARK: - Utils
-
-  func setWindowFloatingOnTop(_ onTop: Bool) {
-    guard let window = window else { return }
-    if onTop {
-      window.level = .iinaFloating
-    } else {
-      window.level = .normal
-    }
-  }
 
   private func normalWindowHeight() -> CGFloat {
     return 72 + (isVideoVisible ? videoWrapperView.frame.height : 0)
   }
 
-  private func handleIINACommand(_ cmd: IINACommand) {
-    let appDeletate = (NSApp.delegate! as! AppDelegate)
+  internal override func handleIINACommand(_ cmd: IINACommand) {
+    super.handleIINACommand(cmd)
     switch cmd {
-    case .openFile:
-      appDeletate.openFile(self)
-    case .openURL:
-      appDeletate.openURL(self)
     case .toggleMusicMode:
       self.menuSwitchToMiniPlayer(.dummy)
-    case .flip:
-      self.menuActionHandler.menuToggleFlip(.dummy)
-    case .mirror:
-      self.menuActionHandler.menuToggleMirror(.dummy)
-    case .saveCurrentPlaylist:
-      self.menuActionHandler.menuSavePlaylist(.dummy)
-    case .deleteCurrentFile:
-      self.menuActionHandler.menuDeleteCurrentFile(.dummy)
-    case .findOnlineSubs:
-      self.menuActionHandler.menuFindOnlineSub(.dummy)
-    case .saveDownloadedSub:
-      self.menuActionHandler.saveDownloadedSub(.dummy)
     default:
       break
     }

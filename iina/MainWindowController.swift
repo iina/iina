@@ -36,7 +36,7 @@ fileprivate extension NSStackView.VisibilityPriority {
 }
 
 
-class MainWindowController: NSWindowController, NSWindowDelegate {
+class MainWindowController: PlayerWindowController, NSWindowDelegate {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("MainWindowController")
@@ -57,16 +57,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Objects, Views
 
-  unowned var player: PlayerCore
-
   lazy var videoView: VideoView = {
     let view = VideoView(frame: self.window!.contentView!.bounds)
     view.player = self.player
     return view
   }()
-
-  /** A responder handling general menu actions. */
-  var menuActionHandler: MainMenuActionHandler!
 
   /** The quick setting sidebar (video, audio, subtitles). */
   lazy var quickSettingView: QuickSettingViewController = {
@@ -107,7 +102,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
    so never need to parse it every time. */
   var cachedGeometry: GeometryDef?
 
-  var loaded: Bool = false
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
   var isResizingSidebar: Bool = false
@@ -307,9 +301,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Observed user defaults
 
-  /** Observers added to `UserDefauts.standard`. */
-  private var notificationObservers: [NotificationCenter: [NSObjectProtocol]] = [:]
-
   private var oscIsInitialized = false
   /** Cached user default values */
   private lazy var oscPosition: Preference.OSCPosition = Preference.enum(for: .oscPosition)
@@ -322,7 +313,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   private lazy var singleClickAction: Preference.MouseClickAction = Preference.enum(for: .singleClickAction)
   private lazy var doubleClickAction: Preference.MouseClickAction = Preference.enum(for: .doubleClickAction)
   private lazy var pinchAction: Preference.PinchAction = Preference.enum(for: .pinchAction)
-  private lazy var followGlobalSeekTypeWhenAdjustSlider: Bool = Preference.bool(for: .followGlobalSeekTypeWhenAdjustSlider)
   lazy var displayTimeAndBatteryInFullScreen: Bool = Preference.bool(for: .displayTimeAndBatteryInFullScreen)
 
   /** A list of observed preference keys. */
@@ -498,11 +488,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   @IBOutlet weak var controlBarFloating: ControlBarView!
   @IBOutlet weak var controlBarBottom: NSVisualEffectView!
-  @IBOutlet weak var playButton: NSButton!
-  @IBOutlet weak var playSlider: NSSlider!
-  @IBOutlet weak var volumeSlider: NSSlider!
   @IBOutlet weak var timePreviewWhenSeek: NSTextField!
-  @IBOutlet weak var muteButton: NSButton!
   @IBOutlet weak var leftArrowButton: NSButton!
   @IBOutlet weak var rightArrowButton: NSButton!
   @IBOutlet weak var settingsButton: NSButton!
@@ -530,8 +516,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet var fragControlViewLeftView: NSView!
   @IBOutlet var fragControlViewRightView: NSView!
 
-  @IBOutlet weak var rightLabel: DurationDisplayTextField!
-  @IBOutlet weak var leftLabel: NSTextField!
   @IBOutlet weak var leftArrowLabel: NSTextField!
   @IBOutlet weak var rightArrowLabel: NSTextField!
 
@@ -562,32 +546,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Initialization
 
-  init(playerCore: PlayerCore) {
-    self.player = playerCore
-    super.init(window: nil)
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
   override func windowDidLoad() {
-
     super.windowDidLoad()
-    loaded = true
 
     guard let w = self.window else { return }
 
-    w.initialFirstResponder = nil
-
-    // Insert `menuActionHandler` into the responder chain
-    menuActionHandler = MainMenuActionHandler(playerCore: player)
-    let responder = w.nextResponder
-    w.nextResponder = menuActionHandler
-    menuActionHandler.nextResponder = responder
-
     w.styleMask.insert(.fullSizeContentView)
-    w.titlebarAppearsTransparent = true
 
     // need to deal with control bar, so we handle it manually
     // w.isMovableByWindowBackground  = true
@@ -598,9 +562,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay
 
     updateTitle()
-
-    // set material
-    setMaterial(Preference.enum(for: .themeMaterial))
 
     // size
     w.minSize = minSize
@@ -682,10 +643,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.quickSettingView.reload()
     }
 
-    notificationCenter(.default, addObserverfor: .iinaMediaTitleChanged, object: player) { [unowned self] _ in
-      self.updateTitle()
-    }
-
     notificationCenter(.default, addObserverfor: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
       let screenCount = NSScreen.screens.count
@@ -727,14 +684,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
       videoViewConstraints[attr]!.isActive = true
     }
-  }
-
-  private func notificationCenter(_ center: NotificationCenter, addObserverfor name: NSNotification.Name, object: Any? = nil, using block: @escaping (Notification) -> Void) {
-    let observer = center.addObserver(forName: name, object: object, queue: .main, using: block)
-    if notificationObservers[center] == nil {
-      notificationObservers[center] = []
-    }
-    notificationObservers[center]!.append(observer)
   }
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
@@ -1736,7 +1685,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - UI: Title
 
-  func updateTitle() {
+  @objc
+  override func updateTitle() {
     if player.info.isNetworkResource {
       window?.title = player.getMediaTitle()
     } else {
@@ -2106,12 +2056,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   /** Set material for OSC and title bar */
-  private func setMaterial(_ theme: Preference.Theme?) {
+  override internal func setMaterial(_ theme: Preference.Theme?) {
     guard let window = window, let theme = theme else { return }
 
-    if #available(macOS 10.14, *) {
-      window.appearance = NSAppearance(iinaTheme: theme)
-    } else {
+    if #available(macOS 10.14, *) {} else {
       let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)
       let isDarkTheme = appearance?.isDark ?? true
       (playSlider.cell as? PlaySliderCell)?.isInDarkTheme = isDarkTheme
@@ -2320,7 +2268,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)
-    updateVolume()
   }
 
   func updateWindowParametersForMPV(withFrame frame: NSRect? = nil) {
@@ -2455,15 +2402,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
   }
 
-  /** This method will not set `isOntop`! */
-  func setWindowFloatingOnTop(_ onTop: Bool) {
-    guard let window = window else { return }
+  override func setWindowFloatingOnTop(_ onTop: Bool) {
     guard !fsState.isFullscreen else { return }
-    if onTop {
-      window.level = .iinaFloating
-    } else {
-      window.level = .normal
-    }
+    super.setWindowFloatingOnTop(onTop)
 
     resetCollectionBehavior()
 
@@ -2473,29 +2414,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Sync UI with playback
 
-  func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
-    guard let duration = player.info.videoDuration, let pos = player.info.videoPosition else {
-      Logger.fatal("video info not available")
-    }
-    let percentage = (pos.second / duration.second) * 100
-    leftLabel.stringValue = pos.stringRepresentation
-    rightLabel.updateText(with: duration, given: pos)
-    if andProgressBar {
-      playSlider.doubleValue = percentage
-      if #available(macOS 10.12.2, *) {
-        player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
-        player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
-      }
-    }
-  }
-
-  func updateVolume() {
-    volumeSlider.doubleValue = player.info.volume
-    muteButton.state = player.info.isMuted ? .on : .off
-  }
-
-  func updatePlayButtonState(_ state: NSControl.StateValue) {
-    playButton.state = state
+  override func updatePlayButtonState(_ state: NSControl.StateValue) {
+    super.updatePlayButtonState(state)
     if state == .off {
       speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
@@ -2531,12 +2451,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - IBAction
 
   /** Play button: pause & resume */
-  @IBAction func playButtonAction(_ sender: NSButton) {
-    if sender.state == .on {
-      player.resume()
-    }
-    if sender.state == .off {
-      player.pause()
+  @IBAction override func playButtonAction(_ sender: NSButton) {
+    super.playButtonAction(sender)
+    if (player.info.isPaused) {
       // speed is already reset by playerCore
       speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
@@ -2550,13 +2467,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
   }
 
   /** mute button */
-  @IBAction func muteButtonAction(_ sender: NSButton) {
-    player.toggleMute(nil)
-    if player.info.isMuted {
-      player.sendOSD(.mute)
-    } else {
-      player.sendOSD(.unMute)
-    }
+  @IBAction override func muteButtonAction(_ sender: NSButton) {
+    super.muteButtonAction(sender)
+    player.sendOSD(player.info.isMuted ? .mute : .unMute)
   }
 
   /** left btn */
@@ -2704,9 +2617,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
 
   /** When slider changes */
-  @IBAction func playSliderChanges(_ sender: NSSlider) {
+  @IBAction override func playSliderChanges(_ sender: NSSlider) {
     // guard let event = NSApp.currentEvent else { return }
     guard !player.info.fileLoading else { return }
+    super.playSliderChanges(sender)
 
     // seek and update time
     let percentage = 100 * sender.doubleValue / sender.maxValue
@@ -2715,16 +2629,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       x: round(sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2),
       y: playSlider.frame.origin.y + 16)
     timePreviewWhenSeek.stringValue = (player.info.videoDuration! * percentage * 0.01).stringRepresentation
-    player.seek(percent: percentage, forceExact: !followGlobalSeekTypeWhenAdjustSlider)
-  }
-
-
-  @IBAction func volumeSliderChanges(_ sender: NSSlider) {
-    let value = sender.doubleValue
-    if Preference.double(for: .maxVolume) > 100, value > 100 && value < 101 {
-      NSHapticFeedbackManager.defaultPerformer.perform(.generic, performanceTime: .default)
-    }
-    player.setVolume(value)
   }
 
   @objc func toolBarButtonAction(_ sender: NSButton) {
@@ -2753,13 +2657,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Utility
 
-  func handleIINACommand(_ cmd: IINACommand) {
-    let appDeletate = (NSApp.delegate! as! AppDelegate)
+  internal override func handleIINACommand(_ cmd: IINACommand) {
+    super.handleIINACommand(cmd)
     switch cmd {
-    case .openFile:
-      appDeletate.openFile(self)
-    case .openURL:
-      appDeletate.openURL(self)
     case .togglePIP:
       if #available(macOS 10.12, *) {
         self.menuTogglePIP(.dummy)
@@ -2776,20 +2676,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       self.menuShowChaptersPanel(.dummy)
     case .toggleMusicMode:
       self.menuSwitchToMiniPlayer(.dummy)
-    case .flip:
-      self.menuActionHandler.menuToggleFlip(.dummy)
-    case .mirror:
-      self.menuActionHandler.menuToggleMirror(.dummy)
-    case .saveCurrentPlaylist:
-      self.menuActionHandler.menuSavePlaylist(.dummy)
-    case .deleteCurrentFile:
-      self.menuActionHandler.menuDeleteCurrentFile(.dummy)
     case .deleteCurrentFileHard:
       self.menuActionHandler.menuDeleteCurrentFileHard(.dummy)
-    case .findOnlineSubs:
-      self.menuActionHandler.menuFindOnlineSub(.dummy)
-    case .saveDownloadedSub:
-      self.menuActionHandler.saveDownloadedSub(.dummy)
     case .biggerWindow:
       let item = NSMenuItem()
       item.tag = 11
@@ -2802,6 +2690,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let item = NSMenuItem()
       item.tag = 3
       self.menuChangeWindowSize(item)
+    default:
+      break
     }
   }
 

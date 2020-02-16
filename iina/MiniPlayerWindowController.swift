@@ -8,8 +8,6 @@
 
 import Cocoa
 
-fileprivate typealias PK = Preference.Key
-
 fileprivate let DefaultPlaylistHeight: CGFloat = 300
 fileprivate let AutoHidePlaylistThreshold: CGFloat = 200
 fileprivate let AnimationDurationShowControl: TimeInterval = 0.2
@@ -27,43 +25,10 @@ class MiniPlayerWindowController: PlayerWindowController, NSWindowDelegate, NSPo
 
   // MARK: - Observed user defaults
 
-  private let observedPrefKeys: [Preference.Key] = [
-    .showRemainingTime,
-    .alwaysFloatOnTop,
-    .maxVolume,
-    .themeMaterial
-  ]
-
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-
-    guard let keyPath = keyPath, let change = change else { return }
-
+    super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+    guard let _ = keyPath, let _ = change else { return }
     switch keyPath {
-
-    case PK.showRemainingTime.rawValue:
-      if let newValue = change[.newKey] as? Bool {
-        rightLabel.mode = newValue ? .remaining : .duration
-      }
-
-    case PK.alwaysFloatOnTop.rawValue:
-      if let newValue = change[.newKey] as? Bool {
-        self.isOntop = newValue
-        setWindowFloatingOnTop(newValue)
-      }
-
-    case PK.maxVolume.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        volumeSlider.maxValue = Double(newValue)
-        if player.mpv.getDouble(MPVOption.Audio.volume) > Double(newValue) {
-          player.mpv.setDouble(MPVOption.Audio.volume, Double(newValue))
-        }
-      }
-
-    case PK.themeMaterial.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        setMaterial(Preference.Theme(rawValue: newValue))
-      }
-
     default:
       return
     }
@@ -91,7 +56,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSWindowDelegate, NSPo
   @IBOutlet weak var volumeLabel: NSTextField!
   @IBOutlet weak var defaultAlbumArt: NSView!
 
-  var isOntop = false
   var isPlaylistVisible = false
   var isVideoVisible = true
 
@@ -156,19 +120,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSWindowDelegate, NSPo
     }
     volumeSlider.maxValue = Double(Preference.integer(for: .maxVolume))
     volumePopover.delegate = self
-
-    // add use default observers
-    observedPrefKeys.forEach { key in
-      UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
-    }
-  }
-
-  deinit {
-    ObjcUtils.silenced {
-      for key in self.observedPrefKeys {
-        UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
-      }
-    }
   }
 
   func windowWillClose(_ notification: Notification) {
@@ -370,7 +321,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSWindowDelegate, NSPo
     } else {
       // show
       isPlaylistVisible = true
-      playlistView.reloadData(playlist: true, chapters: true)
+      player.mainWindow.playlistView.reloadData(playlist: true, chapters: true)
 
       var newFrame = window.frame
       newFrame.origin.y -= DefaultPlaylistHeight

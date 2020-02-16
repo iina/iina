@@ -9,8 +9,6 @@
 import Cocoa
 import Foundation
 
-fileprivate typealias PK = Preference.Key
-
 fileprivate let yes_str = "yes"
 fileprivate let no_str = "no"
 

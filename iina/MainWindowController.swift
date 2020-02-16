@@ -9,8 +9,6 @@
 import Cocoa
 import Mustache
 
-fileprivate typealias PK = Preference.Key
-
 fileprivate let TitleBarHeightNormal: CGFloat = 22
 fileprivate let TitleBarHeightWithOSC: CGFloat = 22 + 24 + 10
 fileprivate let TitleBarHeightWithOSCInFullScreen: CGFloat = 24 + 10
@@ -70,6 +68,13 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
     return quickSettingView
   }()
 
+  /** The playlist and chapter sidebar. */
+  lazy var playlistView: PlaylistViewController = {
+    let playlistView = PlaylistViewController()
+    playlistView.mainWindow = self
+    return playlistView
+  }()
+
   /** The control view for interactive mode. */
   var cropSettingsView: CropBoxViewController?
 
@@ -98,12 +103,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
   var isResizingSidebar: Bool = false
-
-  var isOntop: Bool = false {
-    didSet {
-      player.mpv.setFlag(MPVOption.Window.ontop, isOntop)
-    }
-  }
 
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
@@ -295,11 +294,9 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
   // MARK: - Observed user defaults
 
   private var oscIsInitialized = false
-  /** Cached user default values */
+
+  // Cached user default values
   private lazy var oscPosition: Preference.OSCPosition = Preference.enum(for: .oscPosition)
-  private lazy var useExtractSeek: Preference.SeekOption = Preference.enum(for: .useExactSeek)
-  private lazy var relativeSeekAmount: Int = Preference.integer(for: .relativeSeekAmount)
-  private lazy var volumeScrollAmount: Int = Preference.integer(for: .volumeScrollAmount)
   private lazy var horizontalScrollAction: Preference.ScrollAction = Preference.enum(for: .horizontalScrollAction)
   private lazy var verticalScrollAction: Preference.ScrollAction = Preference.enum(for: .verticalScrollAction)
   private lazy var arrowBtnFunction: Preference.ArrowButtonAction = Preference.enum(for: .arrowButtonAction)
@@ -309,38 +306,26 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
   lazy var displayTimeAndBatteryInFullScreen: Bool = Preference.bool(for: .displayTimeAndBatteryInFullScreen)
 
   /** A list of observed preference keys. */
-  private let observedPrefKeys: [Preference.Key] = [
-    .themeMaterial,
+  private let observedPrefKeys: [PK] = [
     .oscPosition,
     .showChapterPos,
-    .useExactSeek,
-    .relativeSeekAmount,
-    .volumeScrollAmount,
     .horizontalScrollAction,
     .verticalScrollAction,
     .arrowButtonAction,
     .singleClickAction,
     .doubleClickAction,
     .pinchAction,
-    .showRemainingTime,
     .blackOutMonitor,
-    .alwaysFloatOnTop,
     .useLegacyFullScreen,
-    .maxVolume,
     .displayTimeAndBatteryInFullScreen,
     .controlBarToolbarButtons
   ]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
     guard let keyPath = keyPath, let change = change else { return }
+    super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
 
     switch keyPath {
-
-    case PK.themeMaterial.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        setMaterial(Preference.Theme(rawValue: newValue))
-      }
-
     case PK.oscPosition.rawValue:
       if let newValue = change[.newKey] as? Int {
         setupOnScreenController(withPosition: Preference.OSCPosition(rawValue: newValue) ?? .floating)
@@ -349,21 +334,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
     case PK.showChapterPos.rawValue:
       if let newValue = change[.newKey] as? Bool {
         (playSlider.cell as! PlaySliderCell).drawChapters = newValue
-      }
-
-    case PK.useExactSeek.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        useExtractSeek = Preference.SeekOption(rawValue: newValue)!
-      }
-
-    case PK.relativeSeekAmount.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        relativeSeekAmount = newValue.clamped(to: 1...5)
-      }
-
-    case PK.volumeScrollAmount.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        volumeScrollAmount = newValue.clamped(to: 1...4)
       }
 
     case PK.verticalScrollAction.rawValue:
@@ -397,11 +367,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
         pinchAction = Preference.PinchAction(rawValue: newValue)!
       }
 
-    case PK.showRemainingTime.rawValue:
-      if let newValue = change[.newKey] as? Bool {
-        rightLabel.mode = newValue ? .remaining : .duration
-      }
-
     case PK.blackOutMonitor.rawValue:
       if let newValue = change[.newKey] as? Bool {
         if fsState.isFullscreen {
@@ -409,24 +374,8 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
         }
       }
 
-    case PK.alwaysFloatOnTop.rawValue:
-      if let newValue = change[.newKey] as? Bool {
-        if player.info.isPlaying {
-          self.isOntop = newValue
-          setWindowFloatingOnTop(newValue)
-        }
-      }
-
     case PK.useLegacyFullScreen.rawValue:
       resetCollectionBehavior()
-
-    case PK.maxVolume.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        volumeSlider.maxValue = Double(newValue)
-        if player.mpv.getDouble(MPVOption.Audio.volume) > Double(newValue) {
-          player.mpv.setDouble(MPVOption.Audio.volume, Double(newValue))
-        }
-      }
 
     case PK.displayTimeAndBatteryInFullScreen.rawValue:
       if let newValue = change[.newKey] as? Bool {
@@ -631,12 +580,12 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
 
     // add notification observers
 
-    notificationCenter(.default, addObserverfor: .iinaFileLoaded, object: player) { [unowned self] _ in
+    notificationCenter(.default, addObserverForName: .iinaFileLoaded, object: player) { [unowned self] _ in
       self.updateTitle()
       self.quickSettingView.reload()
     }
 
-    notificationCenter(.default, addObserverfor: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
+    notificationCenter(.default, addObserverForName: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
       let screenCount = NSScreen.screens.count
       if self.fsState.isFullscreen && Preference.bool(for: .blackOutMonitor) && self.cachedScreenCount != screenCount {

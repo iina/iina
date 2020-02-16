@@ -9,18 +9,18 @@
 import Cocoa
 
 class PlayerWindowController: NSWindowController {
+  
+  internal typealias PK = Preference.Key
 
   unowned var player: PlayerCore
 
-  /** The playlist and chapter sidebar. */
-  lazy var playlistView: PlaylistViewController = {
-    let playlistView = PlaylistViewController()
-    playlistView.mainWindow = self
-    return playlistView
-  }()
-
   var menuActionHandler: MainMenuActionHandler!
   
+  var isOntop = false {
+    didSet {
+      player.mpv.setFlag(MPVOption.Window.ontop, isOntop)
+    }
+  }
   var loaded = false
   
   init(playerCore: PlayerCore) {
@@ -32,7 +32,71 @@ class PlayerWindowController: NSWindowController {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // Cached user defaults values
   internal lazy var followGlobalSeekTypeWhenAdjustSlider: Bool = Preference.bool(for: .followGlobalSeekTypeWhenAdjustSlider)
+  internal lazy var useExtractSeek: Preference.SeekOption = Preference.enum(for: .useExactSeek)
+  internal lazy var relativeSeekAmount: Int = Preference.integer(for: .relativeSeekAmount)
+  internal lazy var volumeScrollAmount: Int = Preference.integer(for: .volumeScrollAmount)
+  
+  private let observedPrefKeys: [PK] = [
+    .themeMaterial,
+    .showRemainingTime,
+    .alwaysFloatOnTop,
+    .maxVolume,
+    .useExactSeek,
+    .relativeSeekAmount,
+    .volumeScrollAmount,
+  ]
+  
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    guard let keyPath = keyPath, let change = change else { return }
+    
+    switch keyPath {
+    case PK.themeMaterial.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        setMaterial(Preference.Theme(rawValue: newValue))
+      }
+
+    case PK.showRemainingTime.rawValue:
+      if let newValue = change[.newKey] as? Bool {
+        rightLabel.mode = newValue ? .remaining : .duration
+      }
+
+    case PK.alwaysFloatOnTop.rawValue:
+      if let newValue = change[.newKey] as? Bool {
+        if player.info.isPlaying {
+          self.isOntop = newValue
+          setWindowFloatingOnTop(newValue)
+        }
+      }
+
+    case PK.maxVolume.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        volumeSlider.maxValue = Double(newValue)
+        if player.mpv.getDouble(MPVOption.Audio.volume) > Double(newValue) {
+          player.mpv.setDouble(MPVOption.Audio.volume, Double(newValue))
+        }
+      }
+
+    case PK.useExactSeek.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        useExtractSeek = Preference.SeekOption(rawValue: newValue)!
+      }
+
+    case PK.relativeSeekAmount.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        relativeSeekAmount = newValue.clamped(to: 1...5)
+      }
+
+    case PK.volumeScrollAmount.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        volumeScrollAmount = newValue.clamped(to: 1...4)
+      }
+
+    default:
+      return
+    }
+  }
   
   /** Observers added to `UserDefauts.standard`. */
   internal var notificationObservers: [NotificationCenter: [NSObjectProtocol]] = [:]

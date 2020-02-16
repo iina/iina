@@ -8,6 +8,8 @@
 
 import Cocoa
 
+typealias PK = Preference.Key
+
 class Utility {
 
   static let supportedFileExt: [MPVTrack.TrackType: [String]] = [

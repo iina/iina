@@ -22,7 +22,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     return NSNib.Name("PlaylistViewController")
   }
 
-  weak var mainWindow: PlayerWindowController! {
+  weak var mainWindow: MainWindowController! {
     didSet {
       self.player = mainWindow.player
     }

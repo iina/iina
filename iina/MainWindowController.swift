@@ -2287,7 +2287,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       let newHeight = frame.width / CGFloat(width) * CGFloat(height)
       let newSize = NSSize(width: frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
       rect = NSRect(origin: frame.origin, size: newSize)
-
     }
 
     // maybe not a good position, consider putting these at playback-restart
@@ -2297,6 +2296,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     if fsState.isFullscreen {
       fsState.priorWindowedFrame = rect
     } else {
+      if let screenFrame = window.screen?.frame {
+        rect = rect.constrain(in: screenFrame)
+      }
       // animated `setFrame` can be inaccurate!
       window.setFrame(rect, display: true, animate: true)
       window.setFrame(rect, display: true)

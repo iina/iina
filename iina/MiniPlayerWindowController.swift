@@ -370,7 +370,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSWindowDelegate, NSPo
     } else {
       // show
       isPlaylistVisible = true
-      player.mainWindow.playlistView.reloadData(playlist: true, chapters: true)
+      playlistView.reloadData(playlist: true, chapters: true)
 
       var newFrame = window.frame
       newFrame.origin.y -= DefaultPlaylistHeight

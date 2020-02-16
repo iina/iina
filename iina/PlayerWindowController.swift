@@ -6,11 +6,19 @@
 //  Copyright © 2020 lhc. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 class PlayerWindowController: NSWindowController {
+
   unowned var player: PlayerCore
-  
+
+  /** The playlist and chapter sidebar. */
+  lazy var playlistView: PlaylistViewController = {
+    let playlistView = PlaylistViewController()
+    playlistView.mainWindow = self
+    return playlistView
+  }()
+
   var menuActionHandler: MainMenuActionHandler!
   
   var loaded = false

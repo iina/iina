@@ -82,9 +82,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
     return NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
   }()
 
-  /** Differentiate between single clicks and double clicks. */
-  private var singleClickTimer: Timer?
-
   /** For auto hiding UI after a timeout. */
   var hideControlTimer: Timer?
   var hideOSDTimer: Timer?
@@ -150,7 +147,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
    recover the status when scrolling finished. */
   var wasPlayingWhenSeekBegan: Bool?
 
-  var mouseExitEnterCount = 0
 
   /** For force touch action */
   var isCurrentPressInSecondStage = false
@@ -300,20 +296,15 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
   private lazy var horizontalScrollAction: Preference.ScrollAction = Preference.enum(for: .horizontalScrollAction)
   private lazy var verticalScrollAction: Preference.ScrollAction = Preference.enum(for: .verticalScrollAction)
   private lazy var arrowBtnFunction: Preference.ArrowButtonAction = Preference.enum(for: .arrowButtonAction)
-  private lazy var singleClickAction: Preference.MouseClickAction = Preference.enum(for: .singleClickAction)
-  private lazy var doubleClickAction: Preference.MouseClickAction = Preference.enum(for: .doubleClickAction)
   private lazy var pinchAction: Preference.PinchAction = Preference.enum(for: .pinchAction)
   lazy var displayTimeAndBatteryInFullScreen: Bool = Preference.bool(for: .displayTimeAndBatteryInFullScreen)
 
-  /** A list of observed preference keys. */
-  private let observedPrefKeys: [PK] = [
+  private let localObservedPrefKeys: [PK] = [
     .oscPosition,
     .showChapterPos,
     .horizontalScrollAction,
     .verticalScrollAction,
     .arrowButtonAction,
-    .singleClickAction,
-    .doubleClickAction,
     .pinchAction,
     .blackOutMonitor,
     .useLegacyFullScreen,
@@ -350,16 +341,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
       if let newValue = change[.newKey] as? Int {
         arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)!
         updateArrowButtonImage()
-      }
-
-    case PK.singleClickAction.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        singleClickAction = Preference.MouseClickAction(rawValue: newValue)!
-      }
-
-    case PK.doubleClickAction.rawValue:
-      if let newValue = change[.newKey] as? Int {
-        doubleClickAction = Preference.MouseClickAction(rawValue: newValue)!
       }
 
     case PK.pinchAction.rawValue:
@@ -491,27 +472,25 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
   override func windowDidLoad() {
     super.windowDidLoad()
 
-    guard let w = self.window else { return }
+    guard let window = self.window else { return }
 
-    w.styleMask.insert(.fullSizeContentView)
+    window.styleMask.insert(.fullSizeContentView)
 
     // need to deal with control bar, so we handle it manually
     // w.isMovableByWindowBackground  = true
 
     // set background color to black
-    w.backgroundColor = .black
+    window.backgroundColor = .black
 
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay
 
-    updateTitle()
-
     // size
-    w.minSize = minSize
+    window.minSize = minSize
     if let wf = windowFrameFromGeometry() {
-      w.setFrame(wf, display: false)
+      window.setFrame(wf, display: false)
     }
 
-    w.aspectRatio = AppData.sizeWhenNoVideo
+    window.aspectRatio = AppData.sizeWhenNoVideo
 
     // sidebar views
     sideBarView.isHidden = true
@@ -531,10 +510,10 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
     fadeableViews.append(titleBarView)
 
     // video view
-    guard let cv = w.contentView else { return }
+    guard let cv = window.contentView else { return }
     cv.autoresizesSubviews = false
     addVideoViewToWindow()
-    w.setIsVisible(true)
+    window.setIsVisible(true)
 
     // gesture recognizer
     cv.addGestureRecognizer(magnificationGestureRecognizer)
@@ -549,7 +528,7 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
     updateBufferIndicatorView()
 
     // thumbnail peek view
-    w.contentView?.addSubview(thumbnailPeekView)
+    window.contentView?.addSubview(thumbnailPeekView)
     thumbnailPeekView.isHidden = true
 
     // other initialization
@@ -569,11 +548,11 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
     timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
     pipOverlayView.isHidden = true
-    rightLabel.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .duration
 
     osdProgressBarWidthConstraint = NSLayoutConstraint(item: osdAccessoryProgress as Any, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150)
 
     // add user default observers
+    observedPrefKeys.append(contentsOf: localObservedPrefKeys)
     observedPrefKeys.forEach { key in
       UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
     }
@@ -581,7 +560,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
     // add notification observers
 
     notificationCenter(.default, addObserverForName: .iinaFileLoaded, object: player) { [unowned self] _ in
-      self.updateTitle()
       self.quickSettingView.reload()
     }
 
@@ -595,25 +573,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
       // Update the cached value
       self.cachedScreenCount = screenCount
       self.videoView.updateDisplayLink()
-    }
-
-    NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification, object: nil, queue: nil, using: { [unowned self] _ in
-      if Preference.bool(for: .pauseWhenGoesToSleep) {
-        self.player.pause()
-      }
-    })
-  }
-
-  deinit {
-    ObjcUtils.silenced {
-      for key in self.observedPrefKeys {
-        UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
-      }
-      for (center, observers) in self.notificationObservers {
-        for observer in observers {
-          center.removeObserver(observer)
-        }
-      }
     }
   }
 
@@ -775,45 +734,13 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
 
   // MARK: - Mouse / Trackpad event
 
-  override func keyDown(with event: NSEvent) {
-    guard !isInInteractiveMode else { return }
-    let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
-    if let kb = PlayerCore.keyBindings[keyCode] {
-      handleKeyBinding(kb)
-    } else {
-      super.keyDown(with: event)
+  @discardableResult
+  override func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
+    let success = super.handleKeyBinding(keyBinding)
+    if (success && keyBinding.action[0] == MPVCommand.screenshot.rawValue) {
+      player.sendOSD(.screenshot)
     }
-  }
-
-  func handleKeyBinding(_ keyBinding: KeyMapping) {
-    if keyBinding.isIINACommand {
-      // - IINA command
-      if let iinaCommand = IINACommand(rawValue: keyBinding.rawAction) {
-        handleIINACommand(iinaCommand)
-      } else {
-        Logger.log("Unknown iina command \(keyBinding.rawAction)", level: .error)
-      }
-    } else {
-      // - mpv command
-      let returnValue: Int32
-      // execute the command
-      switch keyBinding.action[0] {
-      case MPVCommand.abLoop.rawValue:
-        player.abLoop()
-        returnValue = 0
-      default:
-        returnValue = player.mpv.command(rawString: keyBinding.rawAction)
-      }
-      // handle return value, display osd if needed
-      if returnValue == 0 {
-        // screenshot
-        if keyBinding.action[0] == MPVCommand.screenshot.rawValue {
-          player.sendOSD(.screenshot)
-        }
-      } else {
-        Logger.log("Return value \(returnValue) when executing key command \(keyBinding.rawAction)", level: .error)
-      }
-    }
+    return success
   }
 
   override func pressureChange(with event: NSEvent) {
@@ -866,92 +793,46 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
       Preference.set(Int(sideBarWidthConstraint.constant), for: .playlistWidth)
     } else {
       // if it's a mouseup after clicking
-      if !isMouseEvent(event, inAnyOf: [sideBarView, subPopoverView]) && sideBarStatus != .hidden {
-        // if sidebar is shown, hide it first
+      if event.clickCount == 1 && !isMouseEvent(event, inAnyOf: [sideBarView, subPopoverView]) && sideBarStatus != .hidden {
         hideSideBar()
-      } else {
-        if event.clickCount == 1 {
-          // single click or first click of a double click
-          // disable single click for sideBar / OSC / titleBar
-          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
-          // single click
-          if doubleClickAction == .none {
-            // if double click action is none, it's safe to perform action immediately
-            performMouseAction(singleClickAction)
-          } else {
-            // else start a timer to check for double clicking
-            singleClickTimer = Timer.scheduledTimer(timeInterval: NSEvent.doubleClickInterval, target: self, selector: #selector(self.performMouseActionLater(_:)), userInfo: singleClickAction, repeats: false)
-            mouseExitEnterCount = 0
-          }
-        } else if event.clickCount == 2 {
-          // double click
-          if isMouseEvent(event, inAnyOf: [titleBarView]) {
-            let userDefault = UserDefaults.standard.string(forKey: "AppleActionOnDoubleClick")
-            if userDefault == "Minimize" {
-              window?.performMiniaturize(nil)
-            } else if userDefault == "Maximize" {
-              window?.performZoom(nil)
-            }
-            return
-          }
-          // disable double click for sideBar / OSC
-          guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, subPopoverView]) else { return }
-          // double click
-          guard doubleClickAction != .none else { return }
-          // if already scheduled a single click timer, invalidate it
-          if let timer = singleClickTimer {
-            timer.invalidate()
-            singleClickTimer = nil
-          }
-          performMouseAction(doubleClickAction)
-        } else {
-          return
-        }
+        return
       }
+
+      if event.clickCount == 2 && isMouseEvent(event, inAnyOf: [titleBarView]) {
+        let userDefault = UserDefaults.standard.string(forKey: "AppleActionOnDoubleClick")
+        if userDefault == "Minimize" {
+          window?.performMiniaturize(nil)
+        } else if userDefault == "Maximize" {
+          window?.performZoom(nil)
+        }
+        return
+      }
+
+      guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
+      
+      super.mouseUp(with: event)
     }
   }
 
   override func rightMouseUp(with event: NSEvent) {
-    // Disable mouseUp for sideBar / OSC / titleBar
     guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
-
-    performMouseAction(Preference.enum(for: .rightClickAction))
+    super.rightMouseUp(with: event)
   }
 
   override func otherMouseUp(with event: NSEvent) {
-    if event.buttonNumber == 2 {
-      performMouseAction(Preference.enum(for: .middleClickAction))
-    } else {
-      super.otherMouseUp(with: event)
-    }
+    guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
+    super.otherMouseUp(with: event)
   }
 
-  /**
-   Being called to perform single click action after timeout.
-
-   - SeeAlso:
-   mouseUp(with:)
-   */
-  @objc private func performMouseActionLater(_ timer: Timer) {
-    guard let action = timer.userInfo as? Preference.MouseClickAction else { return }
-    if mouseExitEnterCount >= 2 && action == .hideOSC {
-      // the counter being greater than or equal to 2 means that the mouse re-entered the window
-      // `showUI()` must be called due to the movement in the window, thus `hideOSC` action should be cancelled
-      return
-    }
-    performMouseAction(action)
-  }
-
-  private func performMouseAction(_ action: Preference.MouseClickAction) {
+  override internal func performMouseAction(_ action: Preference.MouseClickAction) {
+    super.performMouseAction(action)
     switch action {
-    case .none:
-      break
     case .fullscreen:
       toggleWindowFullScreen()
-    case .pause:
-      player.togglePause()
     case .hideOSC:
       hideUI()
+    default:
+      break
     }
   }
 
@@ -2644,12 +2525,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
     } else {
       window?.collectionBehavior = [.managed, .fullScreenPrimary]
     }
-  }
-
-  func isMouseEvent(_ event: NSEvent, inAnyOf views: [NSView?]) -> Bool {
-    return views.filter { $0 != nil }.reduce(false, { (result, view) in
-      return result || view!.isMousePoint(view!.convert(event.locationInWindow, from: nil), in: view!.bounds)
-    })
   }
 
 }

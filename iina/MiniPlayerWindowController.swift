@@ -112,9 +112,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSWindowDelegate, NSPo
     // switching UI
     controlView.alphaValue = 0
 
-    updatePlayButtonState(player.info.isPaused ? .off : .on)
-    rightLabel.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .duration
-
     if Preference.bool(for: .alwaysFloatOnTop) {
       setWindowFloatingOnTop(true)
     }
@@ -132,41 +129,25 @@ class MiniPlayerWindowController: PlayerWindowController, NSWindowDelegate, NSPo
   func windowWillStartLiveResize(_ notification: Notification) {
     originalWindowFrame = window!.frame
   }
-
-  override func keyDown(with event: NSEvent) {
-    let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
-    if let kb = PlayerCore.keyBindings[keyCode] {
-      if kb.isIINACommand {
-        // - IINA command
-        if let iinaCommand = IINACommand(rawValue: kb.rawAction) {
-          handleIINACommand(iinaCommand)
-        } else {
-          Logger.log("Unknown iina command \(kb.rawAction)", level: .error)
-        }
-      } else {
-        // - mpv command
-        let returnValue: Int32
-        // execute the command
-        switch kb.action[0] {
-        case MPVCommand.abLoop.rawValue:
-          player.abLoop()
-          returnValue = 0
-        default:
-          returnValue = player.mpv.command(rawString: kb.rawAction)
-        }
-        // handle return value
-        if returnValue != 0 {
-          Logger.log("Return value \(returnValue) when executing key command \(kb.rawAction)", level: .warning)
-        }
-      }
-    } else {
-      super.keyDown(with: event)
-    }
-  }
-
+  
   override func mouseDown(with event: NSEvent) {
     window?.makeFirstResponder(window)
     super.mouseDown(with: event)
+  }
+  
+  override func mouseUp(with event: NSEvent) {
+    guard !isMouseEvent(event, inAnyOf: [backgroundView]) else { return }
+    super.mouseUp(with: event)
+  }
+  
+  override func rightMouseUp(with event: NSEvent) {
+    guard !isMouseEvent(event, inAnyOf: [backgroundView]) else { return }
+    super.rightMouseUp(with: event)
+  }
+  
+  override func otherMouseUp(with event: NSEvent) {
+    guard !isMouseEvent(event, inAnyOf: [backgroundView]) else { return }
+    super.otherMouseUp(with: event)
   }
 
   private func showControl() {

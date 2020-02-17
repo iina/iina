@@ -27,17 +27,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     return player.mainWindow.videoView
   }
 
-  // MARK: - Observed user defaults
-
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-    guard let _ = keyPath, let _ = change else { return }
-    switch keyPath {
-    default:
-      return
-    }
-  }
-
   @IBOutlet weak var volumeButton: NSButton!
   @IBOutlet var volumePopover: NSPopover!
   @IBOutlet weak var volumeSliderView: NSView!

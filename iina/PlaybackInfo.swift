@@ -68,6 +68,7 @@ class PlaybackInfo {
           player.mainWindow.pip.playing = isPlaying
         }
       }
+      player.events.emit(isPaused ? .playbackPaused : .playbackResumed)
     }
   }
   var isPlaying: Bool {

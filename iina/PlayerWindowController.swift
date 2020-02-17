@@ -280,8 +280,8 @@ class PlayerWindowController: NSWindowController {
     performMouseAction(action)
   }
 
-  internal func setMaterial(_ theme: Preference.Theme?) {
-    guard let window = window, let theme = theme else { return }
+  internal func setMaterial(_ theme: Preference.Theme) {
+    guard let window = window else { return }
 
     if #available(macOS 10.14, *) {
       window.appearance = NSAppearance(iinaTheme: theme)

@@ -209,8 +209,8 @@ class MiniPlayerWindowController: PlayerWindowController, NSWindowDelegate, NSPo
     artistAlbumLabel.scroll()
   }
 
-  override internal func setMaterial(_ theme: Preference.Theme?) {
-    guard let window = window, let theme = theme else { return }
+  override internal func setMaterial(_ theme: Preference.Theme) {
+    guard let window = window else { return }
 
     if #available(macOS 10.14, *) {} else {
       let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)

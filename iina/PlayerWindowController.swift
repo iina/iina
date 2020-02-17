@@ -8,11 +8,15 @@
 
 import Cocoa
 
-class PlayerWindowController: NSWindowController {
+class PlayerWindowController: NSWindowController, NSWindowDelegate {
   
   internal typealias PK = Preference.Key
 
   unowned var player: PlayerCore
+  
+  var videoView: VideoView {
+    fatalError("Subclass must implement")
+  }
 
   var menuActionHandler: MainMenuActionHandler!
   
@@ -39,6 +43,8 @@ class PlayerWindowController: NSWindowController {
   internal lazy var volumeScrollAmount: Int = Preference.integer(for: .volumeScrollAmount)
   internal lazy var singleClickAction: Preference.MouseClickAction = Preference.enum(for: .singleClickAction)
   internal lazy var doubleClickAction: Preference.MouseClickAction = Preference.enum(for: .doubleClickAction)
+  internal lazy var horizontalScrollAction: Preference.ScrollAction = Preference.enum(for: .horizontalScrollAction)
+  internal lazy var verticalScrollAction: Preference.ScrollAction = Preference.enum(for: .verticalScrollAction)
   
   internal var observedPrefKeys: [PK] = [
     .themeMaterial,
@@ -50,6 +56,8 @@ class PlayerWindowController: NSWindowController {
     .volumeScrollAmount,
     .singleClickAction,
     .doubleClickAction,
+    .horizontalScrollAction,
+    .verticalScrollAction,
   ]
   
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -58,7 +66,7 @@ class PlayerWindowController: NSWindowController {
     switch keyPath {
     case PK.themeMaterial.rawValue:
       if let newValue = change[.newKey] as? Int {
-        setMaterial(Preference.Theme(rawValue: newValue))
+        setMaterial(Preference.Theme(rawValue: newValue) ?? .system)
       }
 
     case PK.showRemainingTime.rawValue:
@@ -121,10 +129,32 @@ class PlayerWindowController: NSWindowController {
   @IBOutlet weak var playSlider: NSSlider!
   @IBOutlet weak var rightLabel: DurationDisplayTextField!
   @IBOutlet weak var leftLabel: NSTextField!
-  
+
   /** Differentiate between single clicks and double clicks. */
   internal var singleClickTimer: Timer?
   internal var mouseExitEnterCount = 0
+
+  // Scroll direction
+
+  /** The direction of current scrolling event. */
+  enum ScrollDirection {
+    case horizontal
+    case vertical
+  }
+
+  internal var scrollDirection: ScrollDirection?
+
+  /** We need to pause the video when a user starts seeking by scrolling.
+   This property records whether the video is paused initially so we can
+   recover the status when scrolling finished. */
+  internal var wasPlayingWhenSeekBegan: Bool?
+  
+  /** Subclasses should set these value to true if the mouse is in some
+   special views (e.g. volume slider, play slider) before calling
+   `super.scrollWheel()` and set them back to false after calling
+   `super.scrollWheel()`.*/
+  internal var seekOverride = false
+  internal var volumeOverride = false
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -182,6 +212,15 @@ class PlayerWindowController: NSWindowController {
   internal func notificationCenter(_ center: NotificationCenter, addObserverForName name: Notification.Name, object: Any? = nil, using block: @escaping (Notification) -> Void) {
     let observer = center.addObserver(forName: name, object: object, queue: .main, using: block)
     notificationObservers[center, default: []].append(observer)
+  }
+
+  internal func setMaterial(_ theme: Preference.Theme) {
+    guard let window = window else { return }
+
+    if #available(macOS 10.14, *) {
+      window.appearance = NSAppearance(iinaTheme: theme)
+    }
+    // See overridden functions for 10.14-
   }
   
   // MARK: - Mouse / Trackpad event
@@ -263,6 +302,82 @@ class PlayerWindowController: NSWindowController {
       break
     }
   }
+  
+  override func scrollWheel(with event: NSEvent) {
+    let isMouse = event.phase.isEmpty
+    let isTrackpadBegan = event.phase.contains(.began)
+    let isTrackpadEnd = event.phase.contains(.ended)
+
+    // determine direction
+
+    if isMouse || isTrackpadBegan {
+      if event.scrollingDeltaX != 0 {
+        scrollDirection = .horizontal
+      } else if event.scrollingDeltaY != 0 {
+        scrollDirection = .vertical
+      }
+    } else if isTrackpadEnd {
+      scrollDirection = nil
+    }
+
+    let scrollAction: Preference.ScrollAction
+    if seekOverride {
+      scrollAction = .seek
+    } else if volumeOverride {
+      scrollAction = .volume
+    } else {
+      scrollAction = scrollDirection == .horizontal ? horizontalScrollAction : verticalScrollAction
+    }
+
+    // pause video when seek begins.
+
+    if scrollAction == .seek && isTrackpadBegan {
+      // record pause status
+      wasPlayingWhenSeekBegan = player.info.isPlaying
+      if wasPlayingWhenSeekBegan! {
+        player.pause()
+      }
+    }
+
+    if isTrackpadEnd && wasPlayingWhenSeekBegan != nil {
+      // only resume playback when it was playing when began
+      if wasPlayingWhenSeekBegan! {
+        player.resume()
+      }
+      wasPlayingWhenSeekBegan = nil
+    }
+
+    // handle the delta value
+
+    let isPrecise = event.hasPreciseScrollingDeltas
+    let isNatural = event.isDirectionInvertedFromDevice
+
+    var deltaX = isPrecise ? Double(event.scrollingDeltaX) : event.scrollingDeltaX.unifiedDouble
+    var deltaY = isPrecise ? Double(event.scrollingDeltaY) : event.scrollingDeltaY.unifiedDouble * 2
+
+    if isNatural {
+      deltaY = -deltaY
+    } else {
+      deltaX = -deltaX
+    }
+
+    let delta = scrollDirection == .horizontal ? deltaX : deltaY
+
+    // perform action
+    
+    switch scrollAction {
+    case .seek:
+      let seekAmount = (isMouse ? AppData.seekAmountMapMouse : AppData.seekAmountMap)[relativeSeekAmount] * delta
+      player.seek(relativeSecond: seekAmount, option: useExtractSeek)
+    case .volume:
+      // don't use precised delta for mouse
+      let newVolume = player.info.volume + (isMouse ? delta : AppData.volumeMap[volumeScrollAmount] * delta)
+      player.setVolume(newVolume)
+      volumeSlider.doubleValue = newVolume
+    default:
+      break
+    }
+  }
 
   /**
    Being called to perform single click action after timeout.
@@ -279,14 +394,33 @@ class PlayerWindowController: NSWindowController {
     }
     performMouseAction(action)
   }
-
-  internal func setMaterial(_ theme: Preference.Theme) {
-    guard let window = window else { return }
-
-    if #available(macOS 10.14, *) {
-      window.appearance = NSAppearance(iinaTheme: theme)
+  
+  // MARK: - Window delegate: Open / Close
+  
+  func windowDidOpen() {
+    if Preference.bool(for: .alwaysFloatOnTop) {
+      isOntop = true
+      setWindowFloatingOnTop(true)
     }
-    // See overridden functions for 10.14-
+    videoView.startDisplayLink()
+  }
+  
+  // MARK: - Window delegate: Activeness status
+
+  func windowDidChangeScreen(_ notification: Notification) {
+    videoView.updateDisplayLink()
+  }
+  
+  func windowDidBecomeMain(_ notification: Notification) {
+    PlayerCore.lastActive = player
+    if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
+      NowPlayingInfoManager.updateState(player.info.isPaused ? .paused : .playing)
+    }
+    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
+  }
+  
+  func windowDidResignMain(_ notification: Notification) {
+    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
   }
   
   @objc

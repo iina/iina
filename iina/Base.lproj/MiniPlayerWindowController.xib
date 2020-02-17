@@ -35,6 +35,7 @@
                 <outlet property="volumeLabel" destination="MP6-sS-T7f" id="Ztm-8c-Zay"/>
                 <outlet property="volumePopover" destination="yea-QL-Hlq" id="ByH-tP-YzC"/>
                 <outlet property="volumeSlider" destination="Ene-VG-UYY" id="0cq-9R-Yk9"/>
+                <outlet property="volumeSliderView" destination="JoU-Y0-cxJ" id="aKh-R6-I13"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -77,7 +78,7 @@
                                     <constraint firstAttribute="width" constant="32" id="Dnz-rF-ikZ"/>
                                 </constraints>
                                 <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="-:--:--" id="V74-PQ-Yfr">
-                                    <font key="font" metaFont="miniSystem"/>
+                                    <font key="font" metaFont="label" size="9"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -91,7 +92,7 @@
                                     <constraint firstAttribute="width" constant="32" id="1iE-QR-s8H"/>
                                 </constraints>
                                 <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="-:--:--" id="WnA-NE-3bG">
-                                    <font key="font" metaFont="miniSystem"/>
+                                    <font key="font" metaFont="label" size="9"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -112,7 +113,7 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h25-bp-EvL" customClass="ScrollingTextField" customModule="IINA" customModuleProvider="target">
                                         <rect key="frame" x="133" y="26" width="35" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="center" title="Title" id="Rs9-6l-6vp">
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -120,7 +121,7 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kcj-EY-i9R" customClass="ScrollingTextField" customModule="IINA" customModuleProvider="target">
                                         <rect key="frame" x="109" y="8" width="82" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Artist - Album" id="Nle-gv-CWY">
-                                            <font key="font" metaFont="message" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -149,7 +150,7 @@
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" alternateImage="pause" refusesFirstResponder="YES" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="F9X-N7-Uv0">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="playBtnAction:" target="-2" id="7Hb-fd-gCC"/>
@@ -163,7 +164,7 @@
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="nextr" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="DPp-zB-KXR">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="nextBtnAction:" target="-2" id="ivD-3f-1va"/>
@@ -177,7 +178,7 @@
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="nextl" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="bti-JU-2h9">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="prevBtnAction:" target="-2" id="BDa-Ku-caU"/>
@@ -191,7 +192,7 @@
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="playlist" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="9be-Tw-9hy">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="togglePlaylist:" target="-2" id="0da-p5-HBI"/>
@@ -205,7 +206,7 @@
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="9bz-eY-31X">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="volumeBtnAction:" target="-2" id="ynf-E4-jte"/>
@@ -219,7 +220,7 @@
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="toggle-album-art" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="VB3-JD-dpR">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="toggleVideoView:" target="-2" id="Q4b-pa-4UM"/>
@@ -290,7 +291,7 @@
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="A3f-Go-Xss">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
                                     <button toolTip="Back to video mode" translatesAutoresizingMaskIntoConstraints="NO" id="WS6-ix-uBJ">
@@ -301,7 +302,7 @@
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="back" imagePosition="overlaps" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="FaS-tJ-QNE">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="backBtnAction:" target="-2" id="wwC-Mg-w9P"/>
@@ -332,7 +333,7 @@
                                             </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="T9Y-J8-Nj6">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="label" size="13"/>
+                                                <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
                                         <button toolTip="Back to video mode" translatesAutoresizingMaskIntoConstraints="NO" id="K7j-vB-FlK">
@@ -343,7 +344,7 @@
                                             </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="back" imagePosition="overlaps" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="wd8-60-NJn">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="label" size="13"/>
+                                                <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
                                                 <action selector="backBtnAction:" target="-2" id="At6-dB-7qN"/>
@@ -434,7 +435,7 @@
                     </constraints>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="6jy-7B-dv6">
                         <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="label" size="13"/>
+                        <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
                         <action selector="muteButtonAction:" target="-2" id="u5U-Dm-QKi"/>

@@ -34,7 +34,7 @@ fileprivate extension NSStackView.VisibilityPriority {
 }
 
 
-class MainWindowController: PlayerWindowController, NSWindowDelegate {
+class MainWindowController: PlayerWindowController {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("MainWindowController")
@@ -55,11 +55,11 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
 
   // MARK: - Objects, Views
 
-  lazy var videoView: VideoView = {
-    let view = VideoView(frame: self.window!.contentView!.bounds)
-    view.player = self.player
-    return view
-  }()
+  override var videoView: VideoView {
+    return _videoView
+  }
+  
+  lazy private var _videoView: VideoView = VideoView(frame: window!.contentView!.bounds, player: player)
 
   /** The quick setting sidebar (video, audio, subtitles). */
   lazy var quickSettingView: QuickSettingViewController = {
@@ -141,12 +141,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
       }
     }
   }
-
-  /** We need to pause the video when a user starts seeking by scrolling.
-   This property records whether the video is paused initially so we can
-   recover the status when scrolling finished. */
-  var wasPlayingWhenSeekBegan: Bool?
-
 
   /** For force touch action */
   var isCurrentPressInSecondStage = false
@@ -234,16 +228,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
   var osdAnimationState: UIAnimationState = .hidden
   var sidebarAnimationState: UIAnimationState = .hidden
 
-  // Scroll direction
-
-  /** The direction of current scrolling event. */
-  enum ScrollDirection {
-    case horizontal
-    case vertical
-  }
-
-  var scrollDirection: ScrollDirection?
-
   // Sidebar
 
   /** Type of the view embedded in sidebar. */
@@ -293,8 +277,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
 
   // Cached user default values
   private lazy var oscPosition: Preference.OSCPosition = Preference.enum(for: .oscPosition)
-  private lazy var horizontalScrollAction: Preference.ScrollAction = Preference.enum(for: .horizontalScrollAction)
-  private lazy var verticalScrollAction: Preference.ScrollAction = Preference.enum(for: .verticalScrollAction)
   private lazy var arrowBtnFunction: Preference.ArrowButtonAction = Preference.enum(for: .arrowButtonAction)
   private lazy var pinchAction: Preference.PinchAction = Preference.enum(for: .pinchAction)
   lazy var displayTimeAndBatteryInFullScreen: Bool = Preference.bool(for: .displayTimeAndBatteryInFullScreen)
@@ -302,8 +284,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
   private let localObservedPrefKeys: [PK] = [
     .oscPosition,
     .showChapterPos,
-    .horizontalScrollAction,
-    .verticalScrollAction,
     .arrowButtonAction,
     .pinchAction,
     .blackOutMonitor,
@@ -576,6 +556,28 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
     }
   }
 
+  /** Set material for OSC and title bar */
+  override internal func setMaterial(_ theme: Preference.Theme) {
+    guard let window = window else { return }
+
+    if #available(macOS 10.14, *) {} else {
+      let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)
+      let isDarkTheme = appearance?.isDark ?? true
+      (playSlider.cell as? PlaySliderCell)?.isInDarkTheme = isDarkTheme
+
+      [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView, bufferIndicatorView].forEach {
+        $0?.material = material
+        $0?.appearance = appearance
+      }
+
+      sideBarView.material = .dark
+      sideBarView.appearance = NSAppearance(named: .vibrantDark)
+
+      window.appearance = appearance
+    }
+  }
+
+
   private func addVideoViewToWindow() {
     guard let cv = window?.contentView else { return }
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
@@ -836,6 +838,24 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
     }
   }
 
+  override func scrollWheel(with event: NSEvent) {
+    guard !isInInteractiveMode else { return }
+    guard !isMouseEvent(event, inAnyOf: [sideBarView, titleBarView, subPopoverView]) else { return }
+
+    if isMouseEvent(event, inAnyOf: [fragSliderView]) && playSlider.isEnabled {
+      seekOverride = true
+    } else if isMouseEvent(event, inAnyOf: [fragVolumeView]) && volumeSlider.isEnabled {
+      volumeOverride = true
+    } else {
+      guard !isMouseEvent(event, inAnyOf: [currentControlBar]) else { return }
+    }
+
+    super.scrollWheel(with: event)
+
+    seekOverride = false
+    volumeOverride = false
+  }
+
   override func mouseEntered(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
@@ -901,76 +921,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
     }
   }
 
-  override func scrollWheel(with event: NSEvent) {
-    guard !isInInteractiveMode else { return }
-    guard !isMouseEvent(event, inAnyOf: [sideBarView, titleBarView, subPopoverView]) else { return }
-    if isMouseEvent(event, inAnyOf: [currentControlBar]) && !isMouseEvent(event, inAnyOf: [fragVolumeView, fragSliderView]) { return }
-
-    let isMouse = event.phase.isEmpty
-    let isTrackpadBegan = event.phase.contains(.began)
-    let isTrackpadEnd = event.phase.contains(.ended)
-
-    // determine direction
-
-    if isMouse || isTrackpadBegan {
-      if event.scrollingDeltaX != 0 {
-        scrollDirection = .horizontal
-      } else if event.scrollingDeltaY != 0 {
-        scrollDirection = .vertical
-      }
-    } else if isTrackpadEnd {
-      scrollDirection = nil
-    }
-
-    let scrollAction = scrollDirection == .horizontal ? horizontalScrollAction : verticalScrollAction
-
-    // pause video when seek begins.
-
-    if scrollAction == .seek && isTrackpadBegan {
-      // record pause status
-      wasPlayingWhenSeekBegan = player.info.isPlaying
-      if wasPlayingWhenSeekBegan! {
-        player.pause()
-      }
-    }
-
-    if isTrackpadEnd && wasPlayingWhenSeekBegan != nil {
-      // only resume playback when it was playing when began
-      if wasPlayingWhenSeekBegan! {
-        player.resume()
-      }
-      wasPlayingWhenSeekBegan = nil
-    }
-
-    // handle the delta value
-
-    let isPrecise = event.hasPreciseScrollingDeltas
-    let isNatural = event.isDirectionInvertedFromDevice
-
-    var deltaX = isPrecise ? Double(event.scrollingDeltaX) : event.scrollingDeltaX.unifiedDouble
-    var deltaY = isPrecise ? Double(event.scrollingDeltaY) : event.scrollingDeltaY.unifiedDouble * 2
-
-    if isNatural {
-      deltaY = -deltaY
-    } else {
-      deltaX = -deltaX
-    }
-
-    let delta = scrollDirection == .horizontal ? deltaX : deltaY
-
-    // perform action
-
-    if (isMouseEvent(event, inAnyOf: [fragSliderView]) && playSlider.isEnabled) || scrollAction == .seek {
-      let seekAmount = (isMouse ? AppData.seekAmountMapMouse : AppData.seekAmountMap)[relativeSeekAmount] * delta
-      player.seek(relativeSecond: seekAmount, option: useExtractSeek)
-    } else if (isMouseEvent(event, inAnyOf: [fragVolumeView]) && volumeSlider.isEnabled) || scrollAction == .volume {
-      // don't use precised delta for mouse
-      let newVolume = player.info.volume + (isMouse ? delta : AppData.volumeMap[volumeScrollAmount] * delta)
-      player.setVolume(newVolume)
-      volumeSlider.doubleValue = newVolume
-    }
-  }
-
   @objc func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
     guard pinchAction != .none else { return }
     guard !isInInteractiveMode, let window = window, let screenFrame = NSScreen.main?.visibleFrame else { return }
@@ -1023,7 +973,9 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
   }
 
   /** A method being called when window open. Pretend to be a window delegate. */
-  func windowDidOpen() {
+  override func windowDidOpen() {
+    super.windowDidOpen()
+
     window!.makeMain()
     window!.makeKeyAndOrderFront(nil)
     resetCollectionBehavior()
@@ -1044,18 +996,12 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
 
     // update timer
     updateTimer()
-    // always on top
-    if Preference.bool(for: .alwaysFloatOnTop) {
-      isOntop = true
-      setWindowFloatingOnTop(true)
-    }
     // truncate middle for title
     if let attrTitle = titleTextField?.attributedStringValue.mutableCopy() as? NSMutableAttributedString, attrTitle.length > 0 {
       let p = attrTitle.attribute(.paragraphStyle, at: 0, effectiveRange: nil) as! NSMutableParagraphStyle
       p.lineBreakMode = .byTruncatingMiddle
       attrTitle.addAttribute(.paragraphStyle, value: p, range: NSRange(location: 0, length: attrTitle.length))
     }
-    videoView.startDisplayLink()
   }
 
   func windowWillClose(_ notification: Notification) {
@@ -1350,11 +1296,7 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
 
   }
 
-  // MARK: - Window delegate: Active status
-
-  func windowDidChangeScreen(_ notification: Notification) {
-    videoView.updateDisplayLink()
-  }
+  // MARK: - Window delegate: Activeness status
 
   func windowDidBecomeKey(_ notification: Notification) {
     window!.makeFirstResponder(window!)
@@ -1377,22 +1319,19 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
     }
   }
 
-  func windowDidBecomeMain(_ notification: Notification) {
-    PlayerCore.lastActive = player
+  override func windowDidBecomeMain(_ notification: Notification) {
+    super.windowDidBecomeMain(notification)
+
     if fsState.isFullscreen && Preference.bool(for: .blackOutMonitor) {
       blackOutOtherMonitors()
     }
-    if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
-      NowPlayingInfoManager.updateState(player.info.isPaused ? .paused : .playing)
-    }
-    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
   }
 
-  func windowDidResignMain(_ notification: Notification) {
+  override func windowDidResignMain(_ notification: Notification) {
+    super.windowDidResignMain(notification)
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()
     }
-    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
   }
 
   func windowWillMiniaturize(_ notification: Notification) {
@@ -1875,27 +1814,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
       } else {
         thumbnailPeekView.isHidden = true
       }
-    }
-  }
-
-  /** Set material for OSC and title bar */
-  override internal func setMaterial(_ theme: Preference.Theme) {
-    guard let window = window else { return }
-
-    if #available(macOS 10.14, *) {} else {
-      let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)
-      let isDarkTheme = appearance?.isDark ?? true
-      (playSlider.cell as? PlaySliderCell)?.isInDarkTheme = isDarkTheme
-
-      [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView, bufferIndicatorView].forEach {
-        $0?.material = material
-        $0?.appearance = appearance
-      }
-
-      sideBarView.material = .dark
-      sideBarView.appearance = NSAppearance(named: .vibrantDark)
-
-      window.appearance = appearance
     }
   }
 
@@ -2437,7 +2355,6 @@ class MainWindowController: PlayerWindowController, NSWindowDelegate {
       }
     }
   }
-
 
   /** When slider changes */
   @IBAction override func playSliderChanges(_ sender: NSSlider) {

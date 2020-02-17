@@ -163,7 +163,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     if isMouseEvent(event, inAnyOf: [playSlider]) && playSlider.isEnabled {
       seekOverride = true
     } else if isMouseEvent(event, inAnyOf: [volumeSliderView]) && volumeSlider.isEnabled {
-    volumeOverride = true
+      volumeOverride = true
     } else {
       guard !isMouseEvent(event, inAnyOf: [backgroundView]) else { return }
     }

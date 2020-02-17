@@ -539,11 +539,11 @@ class MainWindowController: PlayerWindowController {
 
     // add notification observers
 
-    notificationCenter(.default, addObserverForName: .iinaFileLoaded, object: player) { [unowned self] _ in
+    addObserver(to: .default, forName: .iinaFileLoaded, object: player) { [unowned self] _ in
       self.quickSettingView.reload()
     }
 
-    notificationCenter(.default, addObserverForName: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
+    addObserver(to: .default, forName: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
       let screenCount = NSScreen.screens.count
       if self.fsState.isFullscreen && Preference.bool(for: .blackOutMonitor) && self.cachedScreenCount != screenCount {
@@ -739,7 +739,7 @@ class MainWindowController: PlayerWindowController {
   @discardableResult
   override func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
     let success = super.handleKeyBinding(keyBinding)
-    if (success && keyBinding.action[0] == MPVCommand.screenshot.rawValue) {
+    if (success && keyBinding.action.first! == MPVCommand.screenshot.rawValue) {
       player.sendOSD(.screenshot)
     }
     return success

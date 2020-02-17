@@ -119,10 +119,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       return
     }
   }
-  
-  /** Observers added to `UserDefauts.standard`. */
-  internal var notificationObservers: [NotificationCenter: [NSObjectProtocol]] = [:]
-  
+
   @IBOutlet weak var volumeSlider: NSSlider!
   @IBOutlet weak var muteButton: NSButton!
   @IBOutlet weak var playButton: NSButton!
@@ -147,7 +144,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   /** We need to pause the video when a user starts seeking by scrolling.
    This property records whether the video is paused initially so we can
    recover the status when scrolling finished. */
-  internal var wasPlayingWhenSeekBegan: Bool?
+  private var wasPlayingBeforeSeeking = false
   
   /** Subclasses should set these value to true if the mouse is in some
    special views (e.g. volume slider, play slider) before calling
@@ -173,7 +170,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     setMaterial(Preference.enum(for: .themeMaterial))
     
-    notificationCenter(.default, addObserverForName: .iinaMediaTitleChanged, object: player) { [unowned self] _ in
+    addObserver(to: .default, forName: .iinaMediaTitleChanged, object: player) { [unowned self] _ in
         self.updateTitle()
     }
     
@@ -185,7 +182,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
     }
     
-    notificationCenter(.default, addObserverForName: .iinaFileLoaded, object: player) { [unowned self] _ in
+    addObserver(to: .default, forName: .iinaFileLoaded, object: player) { [unowned self] _ in
       self.updateTitle()
     }
     
@@ -201,17 +198,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       for key in self.observedPrefKeys {
         UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
       }
-      for (center, observers) in self.notificationObservers {
-        for observer in observers {
-          center.removeObserver(observer)
-        }
-      }
     }
   }
   
-  internal func notificationCenter(_ center: NotificationCenter, addObserverForName name: Notification.Name, object: Any? = nil, using block: @escaping (Notification) -> Void) {
-    let observer = center.addObserver(forName: name, object: object, queue: .main, using: block)
-    notificationObservers[center, default: []].append(observer)
+  internal func addObserver(to notificationCenter: NotificationCenter, forName name: Notification.Name, object: Any? = nil, using block: @escaping (Notification) -> Void) {
+    notificationCenter.addObserver(forName: name, object: object, queue: .main, using: block)
   }
 
   internal func setMaterial(_ theme: Preference.Theme) {
@@ -249,7 +240,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       // - mpv command
       let returnValue: Int32
       // execute the command
-      switch keyBinding.action[0] {
+      switch keyBinding.action.first! {
       case MPVCommand.abLoop.rawValue:
         player.abLoop()
         returnValue = 0
@@ -329,22 +320,22 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       scrollAction = scrollDirection == .horizontal ? horizontalScrollAction : verticalScrollAction
     }
 
-    // pause video when seek begins.
+    // pause video when seek begins
 
     if scrollAction == .seek && isTrackpadBegan {
       // record pause status
-      wasPlayingWhenSeekBegan = player.info.isPlaying
-      if wasPlayingWhenSeekBegan! {
+      if player.info.isPlaying {
         player.pause()
+        wasPlayingBeforeSeeking = true
       }
     }
 
-    if isTrackpadEnd && wasPlayingWhenSeekBegan != nil {
-      // only resume playback when it was playing when began
-      if wasPlayingWhenSeekBegan! {
+    if isTrackpadEnd && wasPlayingBeforeSeeking {
+      // only resume playback when it was playing before seeking
+      if wasPlayingBeforeSeeking {
         player.resume()
       }
-      wasPlayingWhenSeekBegan = nil
+      wasPlayingBeforeSeeking = false
     }
 
     // handle the delta value

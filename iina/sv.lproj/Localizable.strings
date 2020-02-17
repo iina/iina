@@ -52,7 +52,7 @@
 "osd.add_to_playlist" = "La till %i filer till spellistan";
 "osd.clear_playlist" = "Spellista rensad";
 "osd.video_eq.contrast" = "Kontrast: %i";
-"osd.video_eq.gamma" = "Gamma: %i";
+"osd.video_eq.gamma" = "Gammakorrigering: %i";
 "osd.video_eq.hue" = "Färgton: %i";
 "osd.video_eq.saturation" = "Mättnad: %i";
 "osd.video_eq.brightness" = "Ljusstyrka: %i";
@@ -118,7 +118,7 @@
 "alert.beta_channel.title" = "Ta emot beta-versionsuppdateringar";
 "alert.beta_channel.message" = "IINA v1.0 är på väg! Vill du hjälpa oss testa beta-versioner?";
 
-"alert.title_error" = "Error";
+"alert.title_error" = "Fel";
 "alert.title_warning" = "Varning";
 "alert.title_info" = "Information";
 

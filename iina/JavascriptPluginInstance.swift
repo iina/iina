@@ -26,7 +26,7 @@ class JavascriptPluginInstance {
       return self.evaluateFile(requiredURL, asModule: true)
     }
 
-    let iinaObject = [
+    apis = [
       "core": JavascriptAPICore(context: ctx, pluginInstance: self),
       "mpv": JavascriptAPIMpv(context: ctx, pluginInstance: self),
       "event": JavascriptAPIEvent(context: ctx, pluginInstance: self),
@@ -38,9 +38,9 @@ class JavascriptPluginInstance {
       "utils": JavascriptAPIUtils(context: ctx, pluginInstance: self),
       "preferences": JavascriptAPIPreferences(context: ctx, pluginInstance: self)
     ]
-    apis = iinaObject
+
     ctx.setObject(JavascriptAPIRequire, forKeyedSubscript: "require" as NSString)
-    ctx.setObject(iinaObject, forKeyedSubscript: "iina" as NSString)
+    ctx.setObject(apis, forKeyedSubscript: "iina" as NSString)
 
     apis!.values.forEach { $0.extraSetup() }
     return ctx

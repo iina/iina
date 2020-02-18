@@ -734,6 +734,17 @@ class PlayerCore: NSObject {
     }
     mpv.command(.set, args: [optionName, value.description])
   }
+  
+  func loadExternalVideoFile(_ url: URL) {
+    mpv.command(.videoAdd, args: [url.path], checkError: false) { code in
+      if code < 0 {
+        Logger.log("Unsupported video: \(url.path)", level: .error, subsystem: self.subsystem)
+        DispatchQueue.main.async {
+          Utility.showAlert("unsupported_audio")
+        }
+      }
+    }
+  }
 
   func loadExternalAudioFile(_ url: URL) {
     mpv.command(.audioAdd, args: [url.path], checkError: false) { code in

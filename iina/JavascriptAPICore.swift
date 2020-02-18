@@ -13,6 +13,9 @@ import JavaScriptCore
   func open(_ url: String)
   func osd(_ message: String)
   func getWindowFrame() -> JSValue
+  func loadVideoTrack(_ filename: String)
+  func loadAudioTrack(_ filename: String)
+  func loadSubtitle(_ filename: String)
 }
 
 class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
@@ -30,5 +33,20 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
   @objc func getWindowFrame() -> JSValue {
     guard let frame = player.mainWindow.window?.frame else { return JSValue(undefinedIn: context) }
     return JSValue(rect: frame, in: context)
+  }
+  
+  @objc func loadVideoTrack(_ filename: String) {
+    guard let dir = JavascriptAPIFile.currentDir(player) else { return }
+    player.loadExternalVideoFile(dir.appendingPathComponent(filename, isDirectory: false))
+  }
+  
+  @objc func loadAudioTrack(_ filename: String) {
+    guard let dir = JavascriptAPIFile.currentDir(player) else { return }
+    player.loadExternalAudioFile(dir.appendingPathComponent(filename, isDirectory: false))
+  }
+
+  @objc func loadSubtitle(_ filename: String) {
+    guard let dir = JavascriptAPIFile.currentDir(player) else { return }
+    player.loadExternalSubFile(dir.appendingPathComponent(filename, isDirectory: false))
   }
 }

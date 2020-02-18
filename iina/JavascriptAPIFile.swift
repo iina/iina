@@ -10,9 +10,9 @@ import Foundation
 import JavaScriptCore
 
 @objc protocol JavascriptAPIFileExportable: JSExport {
-  func getFileNamesFromCurrentDir() -> JSValue
+  func getFileNamesFromCurrentDir() -> JSValue?
   func write(_ fileName: String, _ content: String)
-  func read(_ fileName: String) -> String
+  func read(_ fileName: String) -> String?
 }
 
 class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
@@ -35,14 +35,17 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
     return folder?.isFileURL ?? false ? folder : nil
   }
 
-  @objc func getFileNamesFromCurrentDir() -> JSValue {
-    guard let folder = JavascriptAPIFile.currentDir(player) else { return JSValue(nullIn: context) }
+  @objc func getFileNamesFromCurrentDir() -> JSValue? {
+    guard let folder = JavascriptAPIFile.currentDir(player) else {
+      throwError(withMessage: "Cannot get current folder.")
+      return nil
+    }
     let urls: [String]
     do {
       urls = try fileManager.contentsOfDirectory(atPath: folder.path)
-    } catch (let err) {
-      log(err as! String, level: .error)
-      return JSValue(newErrorFromMessage: "Error when fetching contents of directory.", in: context)
+    } catch {
+      throwError(withMessage: "Error when fetching contents of directory.")
+      return nil
     }
     return JSValue(object: urls, in: context)
   }
@@ -55,10 +58,10 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
     }
   }
 
-  @objc func read(_ fileName: String) -> String {
+  @objc func read(_ fileName: String) -> String? {
     guard let streamReader = StreamReader(path: dataFolderPath + fileName) else {
       throwError(withMessage: "Cannot open the file.")
-      return ""
+      return nil
     }
     var ret = ""
     while let line = streamReader.nextLine() {

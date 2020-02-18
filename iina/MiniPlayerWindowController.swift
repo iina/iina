@@ -57,6 +57,8 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
   private var originalWindowFrame: NSRect!
 
+  // MARK: - Initialization
+
   override func windowDidLoad() {
     super.windowDidLoad()
 
@@ -128,16 +130,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     }
   }
 
-  func windowWillClose(_ notification: Notification) {
-    player.switchedToMiniPlayerManually = false
-    player.switchedBackFromMiniPlayerManually = false
-    player.switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
-    player.mainWindow.close()
-  }
-
-  func windowWillStartLiveResize(_ notification: Notification) {
-    originalWindowFrame = window!.frame
-  }
+  // MARK: - Mouse / Trackpad events
 
   override func mouseDown(with event: NSEvent) {
     window?.makeFirstResponder(window)
@@ -174,27 +167,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     volumeOverride = false
   }
 
-  private func showControl() {
-    NSAnimationContext.runAnimationGroup({ context in
-      context.duration = AnimationDurationShowControl
-      closeButtonView.animator().alphaValue = 1
-      controlView.animator().alphaValue = 1
-      mediaInfoView.animator().alphaValue = 0
-    }, completionHandler: {})
-  }
-
-  private func hideControl() {
-    NSAnimationContext.runAnimationGroup({ context in
-      context.duration = AnimationDurationShowControl
-      closeButtonView.animator().alphaValue = 0
-      controlView.animator().alphaValue = 0
-      mediaInfoView.animator().alphaValue = 1
-    }, completionHandler: {
-      self.titleLabel.scroll()
-      self.artistAlbumLabel.scroll()
-    })
-  }
-
   override func mouseEntered(with event: NSEvent) {
     showControl()
   }
@@ -202,6 +174,26 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   override func mouseExited(with event: NSEvent) {
     guard !volumePopover.isShown else { return }
     hideControl()
+  }
+
+  // MARK: - Window delegate: Open / Close
+
+  func windowWillClose(_ notification: Notification) {
+    player.switchedToMiniPlayerManually = false
+    player.switchedBackFromMiniPlayerManually = false
+    player.switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
+    player.mainWindow.close()
+  }
+
+  // MARK: - Window delegate: Size
+
+  func windowWillStartLiveResize(_ notification: Notification) {
+    originalWindowFrame = window!.frame
+  }
+
+  func windowDidResize(_ notification: Notification) {
+    guard let window = window, !window.inLiveResize else { return }
+    videoView.videoLayer.draw()
   }
 
   func windowDidEndLiveResize(_ notification: Notification) {
@@ -223,13 +215,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     }
   }
 
-  // MARK: - Window delegate: Size
-
-  func windowDidResize(_ notification: Notification) {
-    guard let window = window, !window.inLiveResize else { return }
-    videoView.videoLayer.draw()
-  }
-
   // MARK: - Window delegate: Activeness status
 
   override func windowDidBecomeMain(_ notification: Notification) {
@@ -239,15 +224,30 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     artistAlbumLabel.scroll()
   }
 
-  // MARK: - NSPopoverDelegate
+  // MARK: - UI: Show / Hide
 
-  func popoverWillClose(_ notification: Notification) {
-    if NSWindow.windowNumber(at: NSEvent.mouseLocation, belowWindowWithWindowNumber: 0) != window!.windowNumber {
-      hideControl()
-    }
+  private func showControl() {
+    NSAnimationContext.runAnimationGroup({ context in
+      context.duration = AnimationDurationShowControl
+      closeButtonView.animator().alphaValue = 1
+      controlView.animator().alphaValue = 1
+      mediaInfoView.animator().alphaValue = 0
+    }, completionHandler: {})
   }
 
-  // MARK: - Sync UI with playback
+  private func hideControl() {
+    NSAnimationContext.runAnimationGroup({ context in
+      context.duration = AnimationDurationShowControl
+      closeButtonView.animator().alphaValue = 0
+      controlView.animator().alphaValue = 0
+      mediaInfoView.animator().alphaValue = 1
+    }, completionHandler: {
+      self.titleLabel.scroll()
+      self.artistAlbumLabel.scroll()
+    })
+  }
+
+  // MARK: - UI
   @objc
   override func updateTitle() {
     let (mediaTitle, mediaAlbum, mediaArtist) = player.getMusicMetadata()
@@ -304,7 +304,15 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     window.setFrame(window.frame.rectWithoutPlaylistHeight(providedWindowHeight: normalWindowHeight()), display: display, animate: animate)
   }
 
-  // MARK: - IBAction
+  // MARK: - NSPopoverDelegate
+
+  func popoverWillClose(_ notification: Notification) {
+    if NSWindow.windowNumber(at: NSEvent.mouseLocation, belowWindowWithWindowNumber: 0) != window!.windowNumber {
+      hideControl()
+    }
+  }
+
+  // MARK: - IBActions
 
   @IBAction func togglePlaylist(_ sender: Any) {
     guard let window = window else { return }

@@ -724,7 +724,7 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  // MARK: - Mouse / Trackpad event
+  // MARK: - Mouse / Trackpad events
 
   @discardableResult
   override func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
@@ -1189,6 +1189,78 @@ class MainWindowController: PlayerWindowController {
 
     resetCollectionBehavior()
     updateWindowParametersForMPV()
+  }
+
+  func toggleWindowFullScreen() {
+    guard let window = self.window else { fatalError("make sure the window exists before animating") }
+
+    switch fsState {
+    case .windowed:
+      guard !player.isInMiniPlayer else { return }
+      if Preference.bool(for: .useLegacyFullScreen) {
+        self.legacyAnimateToFullscreen()
+      } else {
+        window.toggleFullScreen(self)
+      }
+    case let .fullscreen(legacy, oldFrame):
+      if legacy {
+        self.legacyAnimateToWindowed(framePriorToBeingInFullscreen: oldFrame)
+      } else {
+        window.toggleFullScreen(self)
+      }
+    default:
+      return
+    }
+  }
+  
+  private func restoreDockSettings() {
+    NSApp.presentationOptions.remove(.autoHideMenuBar)
+    NSApp.presentationOptions.remove(.autoHideDock)
+  }
+
+  private func legacyAnimateToWindowed(framePriorToBeingInFullscreen: NSRect) {
+    guard let window = self.window else { fatalError("make sure the window exists before animating") }
+
+    // call delegate
+    windowWillExitFullScreen(Notification(name: .iinaLegacyFullScreen))
+    // stylemask
+    window.styleMask.remove(.borderless)
+    window.styleMask.remove(.fullScreen)
+
+    restoreDockSettings()
+    // restore window frame ans aspect ratio
+    let videoSize = player.videoSizeForDisplay
+    let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)
+    let useAnimation = Preference.bool(for: .legacyFullScreenAnimation)
+    if useAnimation {
+      // firstly resize to a big frame with same aspect ratio for better visual experience
+      let aspectFrame = aspectRatio.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
+      window.setFrame(aspectFrame, display: true, animate: false)
+    }
+    // then animate to the original frame
+    window.setFrame(framePriorToBeingInFullscreen, display: true, animate: useAnimation)
+    window.aspectRatio = aspectRatio
+    // call delegate
+    windowDidExitFullScreen(Notification(name: .iinaLegacyFullScreen))
+  }
+
+  private func legacyAnimateToFullscreen() {
+    guard let window = self.window else { fatalError("make sure the window exists before animating") }
+    // call delegate
+    windowWillEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
+    // stylemask
+    window.styleMask.insert(.borderless)
+    window.styleMask.insert(.fullScreen)
+    // cancel aspect ratio
+    window.resizeIncrements = NSSize(width: 1, height: 1)
+    // auto hide menubar and dock
+    NSApp.presentationOptions.insert(.autoHideMenuBar)
+    NSApp.presentationOptions.insert(.autoHideDock)
+    // set frame
+    let screen = window.screen ?? NSScreen.main!
+    window.setFrame(NSRect(origin: .zero, size: screen.frame.size), display: true, animate: true)
+    // call delegate
+    windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
   }
 
   // MARK: - Window delegate: Size
@@ -1820,7 +1892,7 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  // MARK: - Window size / aspect
+  // MARK: - UI: Window size / aspect
 
   /** Calculate the window frame from a parsed struct of mpv's `geometry` option. */
   func windowFrameFromGeometry(newSize: NSSize? = nil) -> NSRect? {
@@ -2037,6 +2109,8 @@ class MainWindowController: PlayerWindowController {
     window.setFrame(newFrame, display: true, animate: true)
   }
 
+  // MARK: - UI: Others
+
   private func blackOutOtherMonitors() {
     screens = NSScreen.screens.filter { $0 != window?.screen }
 
@@ -2059,78 +2133,6 @@ class MainWindowController: PlayerWindowController {
       window.orderOut(self)
     }
     blackWindows = []
-  }
-
-  func toggleWindowFullScreen() {
-    guard let window = self.window else { fatalError("make sure the window exists before animating") }
-
-    switch fsState {
-    case .windowed:
-      guard !player.isInMiniPlayer else { return }
-      if Preference.bool(for: .useLegacyFullScreen) {
-        self.legacyAnimateToFullscreen()
-      } else {
-        window.toggleFullScreen(self)
-      }
-    case let .fullscreen(legacy, oldFrame):
-      if legacy {
-        self.legacyAnimateToWindowed(framePriorToBeingInFullscreen: oldFrame)
-      } else {
-        window.toggleFullScreen(self)
-      }
-    default:
-      return
-    }
-  }
-  
-  private func restoreDockSettings() {
-    NSApp.presentationOptions.remove(.autoHideMenuBar)
-    NSApp.presentationOptions.remove(.autoHideDock)
-  }
-
-  private func legacyAnimateToWindowed(framePriorToBeingInFullscreen: NSRect) {
-    guard let window = self.window else { fatalError("make sure the window exists before animating") }
-
-    // call delegate
-    windowWillExitFullScreen(Notification(name: .iinaLegacyFullScreen))
-    // stylemask
-    window.styleMask.remove(.borderless)
-    window.styleMask.remove(.fullScreen)
-
-    restoreDockSettings()
-    // restore window frame ans aspect ratio
-    let videoSize = player.videoSizeForDisplay
-    let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)
-    let useAnimation = Preference.bool(for: .legacyFullScreenAnimation)
-    if useAnimation {
-      // firstly resize to a big frame with same aspect ratio for better visual experience
-      let aspectFrame = aspectRatio.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
-      window.setFrame(aspectFrame, display: true, animate: false)
-    }
-    // then animate to the original frame
-    window.setFrame(framePriorToBeingInFullscreen, display: true, animate: useAnimation)
-    window.aspectRatio = aspectRatio
-    // call delegate
-    windowDidExitFullScreen(Notification(name: .iinaLegacyFullScreen))
-  }
-
-  private func legacyAnimateToFullscreen() {
-    guard let window = self.window else { fatalError("make sure the window exists before animating") }
-    // call delegate
-    windowWillEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
-    // stylemask
-    window.styleMask.insert(.borderless)
-    window.styleMask.insert(.fullScreen)
-    // cancel aspect ratio
-    window.resizeIncrements = NSSize(width: 1, height: 1)
-    // auto hide menubar and dock
-    NSApp.presentationOptions.insert(.autoHideMenuBar)
-    NSApp.presentationOptions.insert(.autoHideDock)
-    // set frame
-    let screen = window.screen ?? NSScreen.main!
-    window.setFrame(NSRect(origin: .zero, size: screen.frame.size), display: true, animate: true)
-    // call delegate
-    windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
   }
 
   override func setWindowFloatingOnTop(_ onTop: Bool) {
@@ -2179,9 +2181,8 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  // MARK: - IBAction
+  // MARK: - IBActions
 
-  /** Play button: pause & resume */
   @IBAction override func playButtonAction(_ sender: NSButton) {
     super.playButtonAction(sender)
     if (player.info.isPaused) {
@@ -2197,13 +2198,11 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  /** mute button */
   @IBAction override func muteButtonAction(_ sender: NSButton) {
     super.muteButtonAction(sender)
     player.sendOSD(player.info.isMuted ? .mute : .unMute)
   }
 
-  /** left btn */
   @IBAction func leftButtonAction(_ sender: NSButton) {
     if arrowBtnFunction == .speed {
       let speeds = AppData.availableSpeedValues.count
@@ -2459,7 +2458,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     if player.info.isPaused {
       videoView.videoLayer.draw(forced: true)
     }
-    
+
     if let window = self.window {
       let windowShouldDoNothing = window.styleMask.contains(.fullScreen) || window.isMiniaturized
       let pipBehavior = windowShouldDoNothing ? .doNothing : Preference.enum(for: .windowBehaviorWhenPip) as Preference.WindowBehaviorWhenPip

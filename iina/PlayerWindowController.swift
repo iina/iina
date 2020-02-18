@@ -142,6 +142,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   internal var seekOverride = false
   internal var volumeOverride = false
 
+  // MARK: - Initiaization
+
   override func windowDidLoad() {
     super.windowDidLoad()
     loaded = true
@@ -202,17 +204,9 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     }
     // See overridden functions for 10.14-
   }
-  
-  // MARK: - Mouse / Trackpad event
-  
-  override func keyDown(with event: NSEvent) {
-    let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
-    if let kb = PlayerCore.keyBindings[keyCode] {
-      handleKeyBinding(kb)
-    } else {
-      super.keyDown(with: event)
-    }
-  }
+
+  // MARK: - Mouse / Trackpad events
+
 
   @discardableResult
   func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
@@ -244,7 +238,16 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       }
     }
   }
-  
+
+  override func keyDown(with event: NSEvent) {
+    let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
+    if let kb = PlayerCore.keyBindings[keyCode] {
+      handleKeyBinding(kb)
+    } else {
+      super.keyDown(with: event)
+    }
+  }
+
   override func mouseUp(with event: NSEvent) {
     if event.clickCount == 1 {
       if doubleClickAction == .none {
@@ -267,7 +270,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
   
   override func otherMouseUp(with event: NSEvent) {
-    if event.buttonNumber == 2 {
+    if event.type == .otherMouseUp {
       performMouseAction(Preference.enum(for: .middleClickAction))
     } else {
       super.otherMouseUp(with: event)
@@ -387,10 +390,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   
   // MARK: - Window delegate: Activeness status
 
-  func windowDidChangeScreen(_ notification: Notification) {
-    videoView.updateDisplayLink()
-  }
-  
   func windowDidBecomeMain(_ notification: Notification) {
     PlayerCore.lastActive = player
     if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
@@ -402,7 +401,13 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   func windowDidResignMain(_ notification: Notification) {
     NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
   }
-  
+
+  func windowDidChangeScreen(_ notification: Notification) {
+    videoView.updateDisplayLink()
+  }
+
+  // MARK: - UI
+
   @objc
   func updateTitle() {
     fatalError("Must implement in the subclass")
@@ -434,7 +439,15 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     guard loaded else { return }
     playButton.state = state
   }
-  
+
+  /** This method will not set `isOntop`! */
+  func setWindowFloatingOnTop(_ onTop: Bool) {
+    guard let window = window else { return }
+    window.level = onTop ? .iinaFloating : .normal
+  }
+
+  // MARK: - IBActions
+
   @IBAction func volumeSliderChanges(_ sender: NSSlider) {
     let value = sender.doubleValue
     if Preference.double(for: .maxVolume) > 100, value > 100 && value < 101 {
@@ -442,27 +455,21 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     }
     player.setVolume(value)
   }
-  
+
   @IBAction func playButtonAction(_ sender: NSButton) {
     player.info.isPaused ? player.resume() : player.pause()
   }
-  
+
   @IBAction func muteButtonAction(_ sender: NSButton) {
     player.toggleMute()
   }
-  
+
   @IBAction func playSliderChanges(_ sender: NSSlider) {
     guard !player.info.fileLoading else { return }
     let percentage = 100 * sender.doubleValue / sender.maxValue
     player.seek(percent: percentage, forceExact: !followGlobalSeekTypeWhenAdjustSlider)
   }
-  
-  /** This method will not set `isOntop`! */
-  func setWindowFloatingOnTop(_ onTop: Bool) {
-    guard let window = window else { return }
-    window.level = onTop ? .iinaFloating : .normal
-  }
-  
+
   internal func handleIINACommand(_ cmd: IINACommand) {
     let appDelegate = (NSApp.delegate! as! AppDelegate)
     switch cmd {
@@ -486,7 +493,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       break
     }
   }
-  
+
   internal func isMouseEvent(_ event: NSEvent, inAnyOf views: [NSView?]) -> Bool {
     return views.filter { $0 != nil }.reduce(false, { (result, view) in
       return result || view!.isMousePoint(view!.convert(event.locationInWindow, from: nil), in: view!.bounds)

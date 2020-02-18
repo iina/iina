@@ -281,7 +281,7 @@ class MainWindowController: PlayerWindowController {
   private lazy var pinchAction: Preference.PinchAction = Preference.enum(for: .pinchAction)
   lazy var displayTimeAndBatteryInFullScreen: Bool = Preference.bool(for: .displayTimeAndBatteryInFullScreen)
 
-  private let localObservedPrefKeys: [PK] = [
+  private let localObservedPrefKeys: [Preference.Key] = [
     .oscPosition,
     .showChapterPos,
     .arrowButtonAction,
@@ -301,43 +301,35 @@ class MainWindowController: PlayerWindowController {
       if let newValue = change[.newKey] as? Int {
         setupOnScreenController(withPosition: Preference.OSCPosition(rawValue: newValue) ?? .floating)
       }
-
     case PK.showChapterPos.rawValue:
       if let newValue = change[.newKey] as? Bool {
         (playSlider.cell as! PlaySliderCell).drawChapters = newValue
       }
-
     case PK.verticalScrollAction.rawValue:
       if let newValue = change[.newKey] as? Int {
         verticalScrollAction = Preference.ScrollAction(rawValue: newValue)!
       }
-
     case PK.horizontalScrollAction.rawValue:
       if let newValue = change[.newKey] as? Int {
         horizontalScrollAction = Preference.ScrollAction(rawValue: newValue)!
       }
-
     case PK.arrowButtonAction.rawValue:
       if let newValue = change[.newKey] as? Int {
         arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)!
         updateArrowButtonImage()
       }
-
     case PK.pinchAction.rawValue:
       if let newValue = change[.newKey] as? Int {
         pinchAction = Preference.PinchAction(rawValue: newValue)!
       }
-
     case PK.blackOutMonitor.rawValue:
       if let newValue = change[.newKey] as? Bool {
         if fsState.isFullscreen {
           newValue ? blackOutOtherMonitors() : removeBlackWindow()
         }
       }
-
     case PK.useLegacyFullScreen.rawValue:
       resetCollectionBehavior()
-
     case PK.displayTimeAndBatteryInFullScreen.rawValue:
       if let newValue = change[.newKey] as? Bool {
         displayTimeAndBatteryInFullScreen = newValue
@@ -345,12 +337,10 @@ class MainWindowController: PlayerWindowController {
           additionalInfoView.isHidden = true
         }
       }
-
     case PK.controlBarToolbarButtons.rawValue:
       if let newValue = change[.newKey] as? [Int] {
         setupOSCToolbarButtons(newValue.compactMap(Preference.ToolBarButton.init(rawValue:)))
       }
-
     default:
       return
     }
@@ -452,7 +442,7 @@ class MainWindowController: PlayerWindowController {
   override func windowDidLoad() {
     super.windowDidLoad()
 
-    guard let window = self.window else { return }
+    guard let window = window else { return }
 
     window.styleMask.insert(.fullSizeContentView)
 
@@ -739,7 +729,7 @@ class MainWindowController: PlayerWindowController {
   @discardableResult
   override func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
     let success = super.handleKeyBinding(keyBinding)
-    if (success && keyBinding.action.first! == MPVCommand.screenshot.rawValue) {
+    if success && keyBinding.action.first! == MPVCommand.screenshot.rawValue {
       player.sendOSD(.screenshot)
     }
     return success

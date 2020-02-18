@@ -9,8 +9,6 @@
 import Cocoa
 
 class PlayerWindowController: NSWindowController, NSWindowDelegate {
-  
-  internal typealias PK = Preference.Key
 
   unowned var player: PlayerCore
   
@@ -46,7 +44,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   internal lazy var horizontalScrollAction: Preference.ScrollAction = Preference.enum(for: .horizontalScrollAction)
   internal lazy var verticalScrollAction: Preference.ScrollAction = Preference.enum(for: .verticalScrollAction)
   
-  internal var observedPrefKeys: [PK] = [
+  internal var observedPrefKeys: [Preference.Key] = [
     .themeMaterial,
     .showRemainingTime,
     .alwaysFloatOnTop,
@@ -68,12 +66,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       if let newValue = change[.newKey] as? Int {
         setMaterial(Preference.Theme(rawValue: newValue) ?? .system)
       }
-
     case PK.showRemainingTime.rawValue:
       if let newValue = change[.newKey] as? Bool {
         rightLabel.mode = newValue ? .remaining : .duration
       }
-
     case PK.alwaysFloatOnTop.rawValue:
       if let newValue = change[.newKey] as? Bool {
         if player.info.isPlaying {
@@ -81,7 +77,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
           setWindowFloatingOnTop(newValue)
         }
       }
-
     case PK.maxVolume.rawValue:
       if let newValue = change[.newKey] as? Int {
         volumeSlider.maxValue = Double(newValue)
@@ -89,32 +84,26 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
           player.mpv.setDouble(MPVOption.Audio.volume, Double(newValue))
         }
       }
-
     case PK.useExactSeek.rawValue:
       if let newValue = change[.newKey] as? Int {
         useExtractSeek = Preference.SeekOption(rawValue: newValue)!
       }
-
     case PK.relativeSeekAmount.rawValue:
       if let newValue = change[.newKey] as? Int {
         relativeSeekAmount = newValue.clamped(to: 1...5)
       }
-
     case PK.volumeScrollAmount.rawValue:
       if let newValue = change[.newKey] as? Int {
         volumeScrollAmount = newValue.clamped(to: 1...4)
       }
-
     case PK.singleClickAction.rawValue:
       if let newValue = change[.newKey] as? Int {
         singleClickAction = Preference.MouseClickAction(rawValue: newValue)!
       }
-
     case PK.doubleClickAction.rawValue:
       if let newValue = change[.newKey] as? Int {
         doubleClickAction = Preference.MouseClickAction(rawValue: newValue)!
       }
-
     default:
       return
     }
@@ -261,7 +250,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       if doubleClickAction == .none {
         performMouseAction(singleClickAction)
       } else {
-        singleClickTimer = Timer.scheduledTimer(timeInterval: NSEvent.doubleClickInterval, target: self, selector: #selector(self.performMouseActionLater(_:)), userInfo: singleClickAction, repeats: false)
+        singleClickTimer = Timer.scheduledTimer(timeInterval: NSEvent.doubleClickInterval, target: self, selector: #selector(performMouseActionLater), userInfo: singleClickAction, repeats: false)
         mouseExitEnterCount = 0
       }
     } else if event.clickCount == 2 {

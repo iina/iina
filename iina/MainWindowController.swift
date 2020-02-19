@@ -1243,6 +1243,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Window delegate: Open / Close
 
+  func windowWillOpen() {
+    if loaded {
+      window?.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: NSScreen.main!.frame), display: true)
+      videoView.videoLayer.draw(forced: true)
+    }
+  }
+
   /** A method being called when window open. Pretend to be a window delegate. */
   func windowDidOpen() {
     window!.makeMain()

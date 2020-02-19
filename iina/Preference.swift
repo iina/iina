@@ -741,7 +741,7 @@ struct Preference {
     .subMarginY: Float(22),
     .subPos: Float(100),
     .subLang: "",
-    .onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
+    .onlineSubSource: OnlineSubtitle.Source.openSub.rawValue,
     .displayInLetterBox: true,
     .subScaleWithWindow: true,
     .openSubUsername: "",

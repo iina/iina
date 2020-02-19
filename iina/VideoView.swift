@@ -51,7 +51,6 @@ class VideoView: NSView {
   // MARK: - Init
 
   override init(frame: CGRect) {
-
     super.init(frame: frame)
 
     // set up layer
@@ -65,6 +64,11 @@ class VideoView: NSView {
 
     // dragging init
     registerForDraggedTypes([.nsFilenames, .nsURL, .string])
+  }
+  
+  convenience init(frame: CGRect, player: PlayerCore) {
+    self.init(frame: frame)
+    self.player = player
   }
 
   required init?(coder: NSCoder) {

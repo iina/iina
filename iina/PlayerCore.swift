@@ -141,8 +141,8 @@ class PlayerCore: NSObject {
     super.init()
     self.mpv = MPVController(playerCore: self)
     self.mainWindow = MainWindowController(playerCore: self)
+    self.miniPlayer = MiniPlayerWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)
-    self.miniPlayer = MiniPlayerWindowController(player: self)
     if #available(macOS 10.12.2, *) {
       self._touchBarSupport = TouchBarSupport(playerCore: self)
     }
@@ -345,7 +345,7 @@ class PlayerCore: NSObject {
     let needRestoreLayout = !miniPlayer.loaded
     miniPlayer.showWindow(self)
 
-    miniPlayer.updateTrack()
+    miniPlayer.updateTitle()
     let playlistView = mainWindow.playlistView.view
     let videoView = mainWindow.videoView
     // reset down shift for playlistView

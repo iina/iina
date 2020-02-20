@@ -136,6 +136,7 @@
 		84D377671D737F58007F7396 /* MPVChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D377661D737F58007F7396 /* MPVChapter.swift */; };
 		84E295C01E2CF9F5006388F7 /* ObjcUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E295BF1E2CF9F4006388F7 /* ObjcUtils.m */; };
 		84E48D4E1E0F1090002C7A3F /* FilterWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E48D4C1E0F1090002C7A3F /* FilterWindowController.swift */; };
+		84E5221323FF3D080006FDA1 /* JavascriptAPIPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5221223FF3D080006FDA1 /* JavascriptAPIPlaylist.swift */; };
 		84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E745D51DFDD4FD00588DED /* KeyCodeHelper.swift */; };
 		84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */; };
 		84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */; };
@@ -1233,6 +1234,7 @@
 		84E295BF1E2CF9F4006388F7 /* ObjcUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcUtils.m; sourceTree = "<group>"; };
 		84E295C11E2CFA18006388F7 /* ObjcUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcUtils.h; sourceTree = "<group>"; };
 		84E48D4C1E0F1090002C7A3F /* FilterWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterWindowController.swift; sourceTree = "<group>"; };
+		84E5221223FF3D080006FDA1 /* JavascriptAPIPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIPlaylist.swift; sourceTree = "<group>"; };
 		84E745D51DFDD4FD00588DED /* KeyCodeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCodeHelper.swift; sourceTree = "<group>"; };
 		84E745D81DFDE8C100588DED /* input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.conf; sourceTree = "<group>"; };
 		84EA52C32404E83900F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -2459,6 +2461,7 @@
 				E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */,
 				E3CB258A2222885E00A62C47 /* JavascriptAPIOverlay.swift */,
 				847357C323FBA9E4004EB627 /* JavascriptAPIFile.swift */,
+				84E5221223FF3D080006FDA1 /* JavascriptAPIPlaylist.swift */,
 				E33FEEB42229A44F00B59711 /* JavascriptAPIUtils.swift */,
 				E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */,
 			);
@@ -2859,6 +2862,7 @@
 				E3513AFB20F120F600F8C347 /* PreferenceViewController.swift in Sources */,
 				E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */,
 				84F5D4A01E44F9DB0060A838 /* KeyBindingItem.swift in Sources */,
+				84E5221323FF3D080006FDA1 /* JavascriptAPIPlaylist.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,
 				847557161F406D360006B0FF /* MiniPlayerWindowMenuActions.swift in Sources */,
 				842F55A51EA17E7E0081D475 /* IINACommand.swift in Sources */,

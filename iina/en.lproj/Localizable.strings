@@ -324,3 +324,5 @@
 "permissions.file-IO.desc" = "This plug-in can read and file in a confined folder.";
 "permissions.filename-currentdir.name" = "Get Filenames";
 "permissions.filename-currentdir.desc" = "This plug-in can get the filenames from the directory of the current media.";
+"permissions.playlist.name" = "Read and Change Playlist";
+"permissions.playlist.desc" = "This plug-in can read and change the current playlist.";

@@ -18,6 +18,8 @@ class JavascriptPlugin {
     case showAlert = "show-alert"
     case addMenuItems = "menu-items"
     case videoOverlay = "video-overlay"
+    case fileIO = "file-IO"
+    case filenameCurrentdir = "filename-currentdir"
 
     var isDangerous: Bool {
       switch self {

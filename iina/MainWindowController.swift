@@ -1897,7 +1897,7 @@ class MainWindowController: PlayerWindowController {
   /** Calculate the window frame from a parsed struct of mpv's `geometry` option. */
   func windowFrameFromGeometry(newSize: NSSize? = nil) -> NSRect? {
     // set geometry. using `!` should be safe since it passed the regex.
-    if let geometry = cachedGeometry ?? player.getGeometry(), let screenFrame = NSScreen.main?.visibleFrame {
+    if let geometry = cachedGeometry ?? player.getGeometry(), let screenFrame = window?.screen?.visibleFrame {
       cachedGeometry = geometry
       var winFrame = window!.frame
       if let ns = newSize {

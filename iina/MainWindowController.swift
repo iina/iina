@@ -2009,13 +2009,15 @@ class MainWindowController: PlayerWindowController {
       let resizeRatio = (Preference.enum(for: .resizeWindowOption) as Preference.ResizeWindowOption).ratio
       // get videoSize on screen
       var videoSize = originalVideoSize
+      let screenRect = window.screen?.visibleFrame
+
       if Preference.bool(for: .usePhysicalResolution) {
         videoSize = window.convertFromBacking(
           NSMakeRect(window.frame.origin.x, window.frame.origin.y, CGFloat(width), CGFloat(height))).size
       }
       if player.info.justStartedFile {
         if resizeRatio < 0 {
-          if let screenSize = NSScreen.main?.visibleFrame.size {
+          if let screenSize = screenRect?.size {
             videoSize = videoSize.shrink(toSize: screenSize)
           }
         } else {
@@ -2023,7 +2025,7 @@ class MainWindowController: PlayerWindowController {
         }
       }
       // check screen size
-      if let screenSize = NSScreen.main?.visibleFrame.size {
+      if let screenSize = screenRect?.size {
         videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
       }
       // guard min size
@@ -2033,7 +2035,7 @@ class MainWindowController: PlayerWindowController {
       if let wfg = windowFrameFromGeometry(newSize: videoSize) {
         rect = wfg
       } else {
-        if player.info.justStartedFile, resizeRatio < 0, let screenRect = NSScreen.main?.visibleFrame {
+        if player.info.justStartedFile, resizeRatio < 0, let screenRect = screenRect {
           rect = screenRect.centeredResize(to: videoSize)
         } else {
           rect = frame.centeredResize(to: videoSize)

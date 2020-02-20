@@ -20,6 +20,7 @@ class JavascriptPlugin {
     case videoOverlay = "video-overlay"
     case fileIO = "file-IO"
     case filenameCurrentdir = "filename-currentdir"
+    case playlist = "playlist"
 
     var isDangerous: Bool {
       switch self {

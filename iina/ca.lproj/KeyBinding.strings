@@ -1,0 +1,116 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Ignora";
+"cmd.seek" = "Cerca";
+"cmd.revert-seek" = "Inverteix cerca";
+"cmd.set" = "Estableix";
+"cmd.cycle" = "Cicle";
+"cmd.cycle-values" = "Cicle entre";
+"cmd.add" = "Canvia";
+"cmd.multiply" = "Multiplica";
+"cmd.frame-step" = "Fotograma següent";
+"cmd.frame-back-step" = "Fotograma anterior";
+"cmd.ab-loop" = "Bucle A-B";
+"cmd.sub-seek" = "Cerca subtítols";
+"cmd.playlist-next" = "Següent";
+"cmd.playlist-prev" = "Anterior";
+"cmd.playlist-move" = "Mou element de la llista de reproddució";
+"cmd.playlist-clear" = "Buida la llista de reproducció";
+"cmd.playlist-remove" = "Suprimeix actual";
+"cmd.playlist-shuffle" = "Mescla";
+"cmd.write-watch-later-config" = "Registra l'historial de reproducció";
+"cmd.stop" = "Atura";
+"cmd.quit" = "Surt";
+"cmd.quit-watch-later" = "Surt (desa el progrés)";
+"cmd.screenshot" = "Captura de pantalla";
+"cmd.screenshot-to-file" = "Desa captura de pantalla en un fitxer";
+"cmd.loadfile" = "Carrega un fitxer";
+"cmd.loadlist" = "Carrega una llista de reproducció";
+"cmd.run" = "Executa";
+
+"iina.flip" = "Inverteix";
+"iina.mirror" = "Reflecteix";
+
+"iina.toggle-pip" = "Commuta Picture-in-Picture";
+"iina.toggle-music-mode" = "Commuta al mode de música";
+"iina.open-file" = "Obre fitxer";
+"iina.open-url" = "Obre enllaç";
+"iina.video-panel" = "Panell de vídeo";
+"iina.audio-panel" = "Panell d'àudio";
+"iina.sub-panel" = "Panell de subtítols";
+"iina.playlist-panel" = "Panell de llista de reproducció";
+"iina.chapter-panel" = "Panell de capítols";
+"iina.bigger-window" = "Finestra més gran";
+"iina.smaller-window" = "Finestra més petita";
+"iina.fit-to-screen" = "Ajusta a la mida de la pantalla";
+"iina.toggle-flip" = "Commuta invertir";
+"iina.toggle-mirror" = "Commuta reflectir";
+"iina.save-playlist" = "Desa la llista de reproducció actual";
+"iina.delete-current-file" = "Suprimeix el fitxer actual";
+"iina.delete-current-file-hard" = "Suprimeix directament el fitxer actual sense moure'l a la paperera";
+"iina.find-online-subs" = "Cerca subtítols en línia";
+"iina.save-downloaded-sub" = "Desa els subtítols baixats";
+
+"yes" = "Sí";
+"no" = "No";
+"to" = "a";
+"by" = "per";
+"in" = "en";
+"add" = "afegeix";
+"minus" = "redueix";
+"forward" = "avança";
+"backward" = "retrocedeix";
+"seek-to" = "a";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (exacte)";
+"relative-percent+exact" = "% (exacte)";
+"absolute+keyframe" = "s (fotograma)";
+"absolute-percent+keyframe" = "% (fotograma)";
+
+"opt.pause" = "Pausa";
+"opt.speed" = "Velocitat";
+
+"opt.window-scale" = "Escala de la finestra";
+
+"opt.video" = "Pista de vídeo";
+"opt.video-aspect" = "Aspecte de vídeo";
+"opt.contrast" = "Contrast";
+"opt.brightness" = "Brillantor";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Saturació";
+"opt.deinterlace" = "Desentrellaçament";
+
+"opt.audio" = "Pista d'àudio";
+"opt.volume" = "Volum";
+"opt.mute" = "Silencia";
+"opt.audio-delay" = "Retard de l'àudio";
+
+"opt.sub" = "Pista de subtítols";
+"opt.sub-delay" = "Retard dels subtítols";
+"opt.sub-pos" = "Posició dels subtítols";
+"opt.sub-scale" = "Escala dels subtítols";
+"opt.sub-visibility" = "Visibilitat dels subtítols";
+"opt.sub-ass-style-override" = "Sobreesciure estil ASS";
+
+"opt.fullscreen" = "Pantalla completa";
+"opt.ontop" = "Sempre per damunt";
+
+"opt.chapter" = "Capítol";
+
+"read.set" = "Estableix {{property}} a {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Multiplica {{property}} per {{factor}}x";
+"read.cycle" = "Commuta {{property}}{{#dir_down}} Downwards{{/dir_down}}";
+"read.cycle-values" = "Commuta {{property}} entre ({{{values}}})";
+"read.seek" = "Cerca {{#fwd}}endavant{{/fwd}}{{#bwd}}endarrere{{/bwd}}{{#abs}}a{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exacte){{/exact}}{{#kf}}(fotograma){{/kf}}";
+"read.sub-seek" = "Cerca del {{#skip_1}}següent{{/skip_1}}{{#skip_-1}}anterior{{/skip_-1}} subtítol";

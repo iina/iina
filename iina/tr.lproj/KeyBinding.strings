@@ -6,21 +6,21 @@
   Copyright © 2017 lhc. All rights reserved.
 */
 
-"cmd.ignore" = "Atla";
+"cmd.ignore" = "Yoksay";
 "cmd.seek" = "Sar";
-"cmd.revert-seek" = "Sarmaya geri dön";
+"cmd.revert-seek" = "Sarmayı eski haline döndür";
 "cmd.set" = "Ayarla";
-"cmd.cycle" = "Tekrar";
-"cmd.cycle-values" = "Şurada tekrar";
+"cmd.cycle" = "Geçiş yap";
+"cmd.cycle-values" = "Şunlar Arasında Geçiş yap:";
 "cmd.add" = "Değiştir";
-"cmd.multiply" = "Çoğalt";
+"cmd.multiply" = "Çarp";
 "cmd.frame-step" = "Sonraki kare";
 "cmd.frame-back-step" = "Önceki kare";
 "cmd.ab-loop" = "A-B döngüsü";
 "cmd.sub-seek" = "Altyazı ara";
 "cmd.playlist-next" = "Sıradaki medya";
 "cmd.playlist-prev" = "Önceki medya";
-"cmd.playlist-move" = "Dosyayı listeye taşı";
+"cmd.playlist-move" = "Oynatma listesi öğesini taşı";
 "cmd.playlist-clear" = "Listeyi temizle";
 "cmd.playlist-remove" = "Şuankini kaldır";
 "cmd.playlist-shuffle" = "Karıştır";
@@ -31,16 +31,16 @@
 "cmd.screenshot" = "Ekran Görüntüsü";
 "cmd.screenshot-to-file" = "Dosyaya ekran görüntüsü";
 "cmd.loadfile" = "Dosya yükle";
-"cmd.loadlist" = "Liste yükle";
+"cmd.loadlist" = "Oynatma listesi yükle";
 "cmd.run" = "Çalıştır";
 
 "iina.flip" = "Çevir";
 "iina.mirror" = "Ayna";
 
-"iina.toggle-pip" = "Resim-içinde-Resim (PIP) Aç/Kapa";
-"iina.toggle-music-mode" = "Müzik Modunu Aç/Kapa";
+"iina.toggle-pip" = "Resim İçinde Resim'e Geç";
+"iina.toggle-music-mode" = "Müzik Kipine Geç";
 "iina.open-file" = "Dosya aç";
-"iina.open-url" = "Internet Adresi Aç";
+"iina.open-url" = "URL Aç";
 "iina.video-panel" = "Video paneli";
 "iina.audio-panel" = "Ses paneli";
 "iina.sub-panel" = "Altyazı Paneli";
@@ -49,7 +49,7 @@
 "iina.bigger-window" = "Daha Büyük Pencere";
 "iina.smaller-window" = "Daha Küçük Pencere";
 "iina.fit-to-screen" = "Ekrana Sığdır";
-"iina.toggle-flip" = "Çevirme Aç/Kapa";
+"iina.toggle-flip" = "Ters çevirmeyi Aç/Kapa";
 "iina.toggle-mirror" = "Aynalamayı Aç/Kapa";
 "iina.save-playlist" = "Şuanki oynatma listesini kaydet";
 "iina.delete-current-file" = "Şuanki dosyayı sil";
@@ -61,43 +61,45 @@
 "no" = "Hayır";
 "to" = "Şuraya";
 "by" = "tarafından";
-"in" = "in";
+"in" = "burda";
 "add" = "Yükselt";
-"minus" = "Azalt";
-"forward" = "İleri";
-"backward" = "Geri";
-"seek-to" = "Şuradan ara";
+"minus" = "azalt";
+"forward" = "ileri";
+"backward" = "geri";
+"seek-to" = "şuraya";
 
-"relative" = "s";
-"absolute" = "s";
-"relative+exact" = "s (çıkar)";
-"relative-percent+exact" = "% (çıkar)";
-"absolute+keyframe" = "s (keyframe)";
-"absolute-percent+keyframe" = "% (keyframe)";
+"relative" = "sn";
+"absolute" = "sn";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "sn (tam)";
+"relative-percent+exact" = "% (tam)";
+"absolute+keyframe" = "sn (anahtar-kare)";
+"absolute-percent+keyframe" = "% (anahtar-kare)";
 
 "opt.pause" = "Duraklat";
 "opt.speed" = "Hız";
 
-"opt.window-scale" = "Pencere Oranı";
+"opt.window-scale" = "Pencere ölçeği";
 
-"opt.video" = "Video İzi";
-"opt.video-aspect" = "Video görünüşü";
+"opt.video" = "Video izi";
+"opt.video-aspect" = "Video En/Boy Oranı";
 "opt.contrast" = "Kontrast";
 "opt.brightness" = "Parlaklık";
 "opt.gamma" = "Gama";
 "opt.saturation" = "Doygunluk";
 "opt.deinterlace" = "Netleştir (Deinterlace)";
 
-"opt.audio" = "Ses parçası";
-"opt.volume" = "Ses Yüksekliği";
-"opt.mute" = "Sessiz";
+"opt.audio" = "Ses izi";
+"opt.volume" = "Ses Seviyesi";
+"opt.mute" = "Sesi Kapat";
 "opt.audio-delay" = "Ses gecikmesi";
 
-"opt.sub" = "Altyazı parçası";
+"opt.sub" = "Altyazı izi";
 "opt.sub-delay" = "Altyazı gecikmesi";
 "opt.sub-pos" = "Altyazı pozisyonu";
 "opt.sub-scale" = "Altyazı boyutu";
-"opt.sub-visibility" = "Altyazı opaklığı";
+"opt.sub-visibility" = "Altyazı görünürlüğü";
 "opt.sub-ass-style-override" = "ASS tipi üzerine yazma";
 
 "opt.fullscreen" = "Tam ekran";
@@ -107,8 +109,8 @@
 
 "read.set" = "Ayarla {{property}} şuna {{value}}";
 "read.add" = "{{property}} {{value}}";
-"read.multiply" = "Çoğalt {{property}} tarafından {{factor}}x";
-"read.cycle" = "Döngü {{property}}{{#dir_down}}Aşağı doğru{{/dir_down}}";
-"read.cycle-values" = "Döngü {{property}} şurada ({{{values}}})";
+"read.multiply" = "{{property}} özelliğini {{factor}}x ile çarp";
+"read.cycle" = "Geçiş yap {{property}}{{#dir_down}} Aşağı doğru{{/dir_down}}";
+"read.cycle-values" = "Geçiş yap {{property}} şunlar arasında ({{{values}}})";
 "read.seek" = "Sar {{#fwd}}ileri{{/fwd}}{{#bwd}}geri{{/bwd}}{{#abs}}şuraya{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
 "read.sub-seek" = "Şuna sar {{#skip_1}}sıradaki{{/skip_1}}{{#skip_-1}}önceki{{/skip_-1}} altyazı";

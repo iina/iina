@@ -10,7 +10,7 @@
 "general.on" = "Açık";
 "general.off" = "Kapalı";
 "general.login" = "Oturum Aç";
-"general.logout" = "Çıkış Yap";
+"general.logout" = "Oturumu Kapat";
 "general.ok" = "Tamam";
 "general.cancel" = "Vazgeç";
 "general.username" = "Kullanıcı Adı";
@@ -25,23 +25,23 @@
 "quicksetting.item_none" = "Hiçbiri";
 
 // OSDMessage.swift
-"osd.pause" = "Duraklatıldı";
-"osd.resume" = "Devam Ediyor";
-"osd.volume" = "Ses: %i";
+"osd.pause" = "Duraklat";
+"osd.resume" = "Sürdür";
+"osd.volume" = "Ses Seviyesi: %i";
 "osd.speed" = "Hız: %.2fx";
 "osd.aspect" = "En Boy Oranı: %@";
-"osd.crop" = "Kırpma: %@";
-"osd.rotate" = "Döndürme: %i°";
+"osd.crop" = "Kırp: %@";
+"osd.rotate" = "Döndür: %i°";
 "osd.deinterlace" = "Taramasızlık: %@";
 "osd.audio_delay.nodelay" = "Ses Gecikmesi: Gecikme Yok";
-"osd.audio_delay.later" = "Ses Gecikmesi: %.2fs Geç";
-"osd.audio_delay.earlier" = "Ses Gecikmesi: %.2fs Erken";
+"osd.audio_delay.later" = "Ses Gecikmesi: %.2f sn Geç";
+"osd.audio_delay.earlier" = "Ses Gecikmesi: %.2f sn Erken";
 "osd.sub_delay.nodelay" = "Altyazı Gecikmesi: Gecikme Yok";
-"osd.sub_delay.later" = "Altyazı Gecikmesi: %.2fs Geç";
-"osd.sub_delay.earlier" = "Altyazı Gecikmesi: %.2fs Erken";
+"osd.sub_delay.later" = "Altyazı Gecikmesi: %.2f sn Geç";
+"osd.sub_delay.earlier" = "Altyazı Gecikmesi: %.2f sn Erken";
 "osd.subtitle_pos" = "Altyazı Konumu: %.1f";
-"osd.mute" = "Ses Kapalı";
-"osd.unmute" = "Ses Açık";
+"osd.mute" = "Sesi Kapat";
+"osd.unmute" = "Sesi Aç";
 "osd.screenshot" = "Ekran Görüntüsü Alındı";
 "osd.abloop.a" = "A-B Döngüsü: A";
 "osd.abloop.b" = "A-B Döngüsü: B";
@@ -49,17 +49,17 @@
 "osd.stop" = "Durdur";
 "osd.chapter" = "Bölüm: %@";
 "osd.subtitle_scale" = "Altyazı Boyutu: %.2fx";
-"osd.add_to_playlist" = "%i Oynatma Listesine Eklendi";
-"osd.clear_playlist" = "Oynatma Listesi silindi";
+"osd.add_to_playlist" = "%i Dosya Oynatma Listesine Eklendi";
+"osd.clear_playlist" = "Oynatma Listesi Temizlendi";
 "osd.video_eq.contrast" = "Kontrast: %i";
 "osd.video_eq.gamma" = "Gama: %i";
 "osd.video_eq.hue" = "Renk: %i";
 "osd.video_eq.saturation" = "Doygunluk: %i";
 "osd.video_eq.brightness" = "Parlaklık: %i";
 "osd.find_online_sub" = "Çevrimiçi altyazılar bulunuyor...";
-"osd.find_online_sub.source" = "dan";
+"osd.find_online_sub.source" = "şu siteden";
 "osd.sub_not_found" = "Altyazı bulunamadı";
-"osd.sub_found" = "%d altyazı bulundu. ";
+"osd.sub_found" = "%d altyazı bulundu. İndiriliyor…";
 "osd.sub_downloaded" = "Altyazı indirildi";
 "osd.sub_saved" = "Altyazı kaydedildi";
 "osd.network_error" = "Ağ hatası";
@@ -87,27 +87,27 @@
 "preference.key_binding_hint_1" = "Geçerli yapılandırma dosyasındaki kestirmeleri düzenlemek için, önce \"Çoğalt ...\" düğmesine tıklayarak kopya oluşturun.";
 "preference.key_binding_hint_2" = "İlgili kestirmeyi düzenlemek için sağ taraftaki bir satırı çift tıklayın.";
 
-"menu.volume" = "Ses: %d";
-"menu.audio_delay" = "Ses Gecikmesi: %.2fs";
-"menu.sub_delay" = "Altyazı Gecikmesi: %.2fs";
+"menu.volume" = "Ses Seviyesi: %d";
+"menu.audio_delay" = "Ses Gecikmesi: %.2f sn";
+"menu.sub_delay" = "Altyazı Gecikmesi: %.2f sn";
 "menu.fullscreen" = "Tam Ekrana Geç";
 "menu.exit_fullscreen" = "Tam Ekrandan Çık";
-"menu.pip" = "Resim-İçinde-Resim (PIP) Moduna Geç";
-"menu.exit_pip" = "Resim-İçinde-Resim (PIP) Modundan Çık";
+"menu.pip" = "Resim İçinde Resim'e Geç";
+"menu.exit_pip" = "Resim İçinde Resim'den Çık";
 "menu.pause" = "Duraklat";
-"menu.resume" = "Devam Ettir";
+"menu.resume" = "Sürdür";
 "menu.speed" = "Hız: %.2fx";
 
 "menu.seek_forward" = "%.0fs ileriye sar";
 "menu.seek_backward" = "%.0fs geriye sar";
 "menu.speed_up" = "Hızı %.1fx ayarına yükselt";
 "menu.speed_down" = "Hızı %.1fx ayarına düşür";
-"menu.volume_up" = "Ses + %.0f%%";
-"menu.volume_down" = "Ses - %.0f%%";
-"menu.audio_delay_up" = "Ses Gecikmesi + %.1fs";
-"menu.audio_delay_down" = "Ses Gecikmesi - %.1fs";
-"menu.sub_delay_up" = "Altyazı Gecikmesi + %.1fs";
-"menu.sub_delay_down" = "Altyazı Gecikmesi - %.1fs";
+"menu.volume_up" = "Ses Seviyesi + %.0f%%";
+"menu.volume_down" = "Ses Seviyesi - %.0f%%";
+"menu.audio_delay_up" = "Ses Gecikmesi + %.1f sn";
+"menu.audio_delay_down" = "Ses Gecikmesi - %.1f sn";
+"menu.sub_delay_up" = "Altyazı Gecikmesi + %.1f sn";
+"menu.sub_delay_down" = "Altyazı Gecikmesi - %.1f sn";
 
 "track.none" = "<Hiçbiri>";
 
@@ -139,7 +139,7 @@
 
 "alert.config.new.title" = "Yeni Giriş Konfigürasyonu";
 "alert.config.new.message" = "Lütfen yeni yapılandırma için bir ad girin.";
-"alert.config.duplicate.title" = "Çoğaltılan Yapılandırma";
+"alert.config.duplicate.title" = "Yapılandırmayı Çoğalt";
 "alert.config.duplicate.message" = "Lütfen çoğaltılan yapılandırma dosyası için bir ad girin.";
 "alert.config.empty_name" = "Ad alanı boş olamaz.";
 "alert.config.name_existing" = "Bu isim zaten alınmış.";
@@ -173,17 +173,17 @@
 "alert.add_watch.title" = "İzleme Özelliği Ekle";
 "alert.add_watch.message" = "Lütfen geçerli bir mpv özellik adını girin.";
 
-"alert.jump_to.title" = "Atla";
+"alert.jump_to.title" = "Şu zamana atla";
 "alert.jump_to.message" = "Lütfen atlamak istediğiniz zamanı girin. Örnek: 20:35";
 
-"alert.opensub.login.title" = "OpenSubtitles Giriş";
+"alert.opensub.login.title" = "OpenSubtitles Oturum Aç";
 "alert.opensub.login.message" = "Lütfen kullanıcı adınızı ve şifrenizi giriniz";
 
-"alert.open_url.title" = "URL açın";
+"alert.open_url.title" = "URL Aç";
 "alert.open_url.message" = "Lütfen URL'yi girin:";
-"alert.choose_media_file.title" = "Medya Dosyası Seç";
+"alert.choose_media_file.title" = "Medya Dosyaları Seç";
 
-"alert.add_url.title" = "Internet Adresi (URL) Ekle";
+"alert.add_url.title" = "URL Ekle";
 "alert.add_url.message" = "Lütfen URL adresini girin:";
 
 "alert.delete_history.title" = "Oynatma listesi geçmişini sil";
@@ -192,7 +192,7 @@
 "alert.filter_hwdec.message" = "Video filtresi uygulamak üzeresiniz ancak donanımsal çözücünüz video filtrelerini iyi desteklemiyor olabilir. \n\nDonanımsal çözücüyü devre dışı bırakabilirsiniz veya “Auto (Copy)” seçeneğini etkinleştirebilirsiniz. “Auto (Copy)” seçeneği donanım çözücüsünü kullanır ancak bellek kullanımı 2 kat fazladır. \n \nEylemin çalışması için son operasyonu tekrarlamanız gerekebilir (kırpma ayarı gibi).";
 "alert.filter_hwdec.abort" = "İptal Et";
 "alert.filter_hwdec.turn_off" = "Donanım Çözücüsünü Kapat";
-"alert.filter_hwdec.use_copy" = "Auto (Copy)'yi Etkinleştir";
+"alert.filter_hwdec.use_copy" = "Otomatik (Kopya)'yı Etkinleştir";
 
 "alert.clear_cache.title" = "Küçük Resim Önbelleğini Temizle";
 "alert.clear_cache.message" = "Küçük resim önbelleğini silmek istediğinizden emin misiniz?";
@@ -217,7 +217,7 @@
 "alert.assrt_token_invalid" = "Assrt API tokeniniz geçerli gözükmüyor.";
 
 "playlist.total_length" = "toplamda %@";
-"playlist.total_length_with_selected" = "%@ of %@ seçildi";
+"playlist.total_length_with_selected" = "%@ / %@ seçildi";
 "pl_menu.title_multi" = "%d Öğe";
 "pl_menu.play_next" = "Sıradakini Oynat";
 "pl_menu.play_in_new_window" = "Yeni Pencerede Oynat";
@@ -231,10 +231,10 @@
 "pl_menu.add_file" = "Dosya Ekle";
 "pl_menu.add_url" = "Internet Adresi (URL) Ekle...";
 "pl_menu.clear_playlist" = "Oynatma Listesini Temizle";
-"pl_menu.matched_sub" = "%d altyazı eşleşti";
-"pl_menu.add_sub" = "Altyazı ekle...";
+"pl_menu.matched_sub" = "%d Altyazı Eşleşti";
+"pl_menu.add_sub" = "Altyazı Ekle…";
 "pl_menu.wrong_sub" = "Yanlış Altyazı!";
-"pl_menu.browser" = "Tarayıcıda aç";
+"pl_menu.browser" = "Tarayıcıda Aç";
 "pl_menu.copy_url" = "URL'yi kopyala";
 "pl_menu.copy_url_multi" = "URL'leri kopyala";
 
@@ -252,7 +252,7 @@
 
 "osc_toolbar.settings" = "Hızlı Ayarlar";
 "osc_toolbar.playlist" = "Oynatma listesi ve bölümler";
-"osc_toolbar.pip" = "Resim-içinde-Resim (PIP) Aç/Kapa";
+"osc_toolbar.pip" = "Resim İçinde Resim'i Aç/Kapa";
 "osc_toolbar.full_screen" = "Tam Ekran Aç/Kapa";
 "osc_toolbar.music_mode" = "Müzik moduna geç";
 "osc_toolbar.sub_track" = "Altyazı izini seç";
@@ -265,12 +265,12 @@
 "touchbar.back_30" = "30sn geriye";
 "touchbar.next_video" = "Sıradaki Video";
 "touchbar.prev_video" = "Önceki Video";
-"touchbar.increase_volume" = "Ses +";
-"touchbar.decrease_volume" = "Ses -";
+"touchbar.increase_volume" = "Ses Seviyesi +";
+"touchbar.decrease_volume" = "Ses Seviyesi -";
 "touchbar.rewind" = "Geriye Sar";
 "touchbar.fast_forward" = "Hızlı İlerletme";
-"touchbar.play_pause" = "Oynat / Duraklak";
+"touchbar.play_pause" = "Oynat / Duraklat";
 "touchbar.seek" = "Sar";
 "touchbar.time" = "Zaman Pozisyonu";
 "touchbar.remainingTime" = "Kalan Zaman";
-"touchbar.toggle_pip" = "Resim-İçinde-Resim'e Geç";
+"touchbar.toggle_pip" = "Resim İçinde Resim'i Aç/Kapa";

@@ -68,8 +68,10 @@
 "backward" = "bakåt";
 "seek-to" = "till";
 
-"relative" = "s";
-"absolute" = "s";
+"relative" = "sek";
+"absolute" = "sek";
+"absolute-percent" = "%";
+"relative-percent" = "%";
 "relative+exact" = "s (exakt)";
 "relative-percent+exact" = "% (exakt)";
 "absolute+keyframe" = "s (nyckelbild)";
@@ -84,7 +86,7 @@
 "opt.video-aspect" = "Videoförhållande";
 "opt.contrast" = "Kontrast";
 "opt.brightness" = "Ljusstyrka";
-"opt.gamma" = "Gamma";
+"opt.gamma" = "Gammakorrigering";
 "opt.saturation" = "Mättnad";
 "opt.deinterlace" = "Avfläta";
 

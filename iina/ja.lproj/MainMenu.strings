@@ -26,13 +26,13 @@
 "2id-wn-xsC.title" = "時間を指定して移動…";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "クイック設定パネル";
+"2t8-Ot-yoO.title" = "クイック設定パネルを表示";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
 "3Ax-P3-QQu.title" = "すべて選択";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
-"43n-Ed-5kT.title" = "クイック設定パネル";
+"43n-Ed-5kT.title" = "クイック設定パネルを表示";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
 "4ae-MT-2L1.title" = "オーディオディレイ + 0.5秒";
@@ -41,7 +41,7 @@
 "4sb-4s-VLi.title" = "IINA を終了";
 
 /* Class = "NSMenuItem"; title = "Reset Speed"; ObjectID = "5Gn-90-oDu"; */
-"5Gn-90-oDu.title" = "再生速度をリセット";
+"5Gn-90-oDu.title" = "再生速度をリセット";
 
 /* Class = "NSMenuItem"; title = "About IINA"; ObjectID = "5kV-Vb-QxS"; */
 "5kV-Vb-QxS.title" = "IINA について";
@@ -62,13 +62,13 @@
 "7rG-Yq-EYG.title" = "読み上げを停止";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "8Oy-tP-udW"; */
-"8Oy-tP-udW.title" = "スピーチ";
+"8Oy-tP-udW.title" = "読み上げ";
 
 /* Class = "NSMenuItem"; title = "Audio Filters…"; ObjectID = "8Zh-hU-Cc4"; */
 "8Zh-hU-Cc4.title" = "オーディオフィルタ一覧…";
 
 /* Class = "NSMenuItem"; title = "Speed:"; ObjectID = "8pV-XQ-AvB"; */
-"8pV-XQ-AvB.title" = "再生速度:";
+"8pV-XQ-AvB.title" = "再生速度:";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "8y7-Cy-lKT"; */
 "8y7-Cy-lKT.title" = "クイック設定 パネル";
@@ -86,7 +86,7 @@
 "9zk-co-roT.title" = "ダウンロードした字幕を保存";
 
 /* Class = "NSMenuItem"; title = "Take a Screenshot"; ObjectID = "AoP-K6-Kb5"; */
-"AoP-K6-Kb5.title" = "スクリーンショット";
+"AoP-K6-Kb5.title" = "スクリーンショットを撮る";
 
 /* Class = "NSMenuItem"; title = "Delogo"; ObjectID = "ArE-2s-JIV"; */
 "ArE-2s-JIV.title" = "ウォーターマーク除去";
@@ -104,7 +104,7 @@
 "BtY-iQ-6Pf.title" = "共有";
 
 /* Class = "NSMenuItem"; title = "Advanced Screenshot…"; ObjectID = "CKi-JE-yLT"; */
-"CKi-JE-yLT.title" = "拡張スクリーンショット…";
+"CKi-JE-yLT.title" = "高度なスクリーンショット…";
 
 /* Class = "NSMenuItem"; title = "File Loop"; ObjectID = "D1y-kv-85s"; */
 "D1y-kv-85s.title" = "リピート";
@@ -119,7 +119,7 @@
 "DVo-aG-piG.title" = "閉じる";
 
 /* Class = "NSMenuItem"; title = "Show Chapters Panel"; ObjectID = "DwM-3d-Eb9"; */
-"DwM-3d-Eb9.title" = "チャプタ パネル";
+"DwM-3d-Eb9.title" = "チャプタパネルを表示";
 
 /* Class = "NSMenu"; title = "Subtitles"; ObjectID = "EKp-Qx-4Mn"; */
 "EKp-Qx-4Mn.title" = "字幕";
@@ -131,7 +131,7 @@
 "F6G-Ln-fqI.title" = "次のチャプタ";
 
 /* Class = "NSMenuItem"; title = "IINA Help"; ObjectID = "FKE-Sm-Kum"; */
-"FKE-Sm-Kum.title" = "ドキュメント / ヘルプ";
+"FKE-Sm-Kum.title" = "IINA ヘルプ";
 
 /* Class = "NSMenu"; title = "Video Track"; ObjectID = "FTu-CF-O0R"; */
 "FTu-CF-O0R.title" = "ビデオトラック";
@@ -185,7 +185,7 @@
 "Kd2-mp-pUS.title" = "すべて表示する";
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
-"LE2-aR-0XJ.title" = "すべてを手前に移動";
+"LE2-aR-0XJ.title" = "すべてを前面に移動";
 
 /* Class = "NSMenuItem"; title = "Playback History"; ObjectID = "LND-1n-DU2"; */
 "LND-1n-DU2.title" = "再生履歴";
@@ -263,7 +263,7 @@
 "UOE-MJ-8ku.title" = "一時停止";
 
 /* Class = "NSMenu"; title = "Second Subtitle"; ObjectID = "UwY-P2-Xdb"; */
-"UwY-P2-Xdb.title" = "第二の字幕";
+"UwY-P2-Xdb.title" = "副字幕";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
 "VDZ-ro-z5z.title" = "やり直す";
@@ -293,7 +293,7 @@
 "Zhv-Bz-I5V.title" = "音量 - 1%";
 
 /* Class = "NSMenuItem"; title = "Custom Touch Bar…"; ObjectID = "ZnF-yX-7jP"; */
-"ZnF-yX-7jP.title" = "タッチバーの設定…";
+"ZnF-yX-7jP.title" = "Touch Barの設定…";
 
 /* Class = "NSMenuItem"; title = "Playlist Loop"; ObjectID = "aSc-P6-fiZ"; */
 "aSc-P6-fiZ.title" = "プレイリストをリピート";
@@ -392,7 +392,7 @@
 "mGw-jm-5x2.title" = "副字幕";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
-"mND-N8-z6o.title" = "Picture-in-Pictureを使用";
+"mND-N8-z6o.title" = "ピクチャ・イン・ピクチャを使用";
 
 /* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
 "mT1-1m-HwN.title" = "フリップ";
@@ -452,22 +452,22 @@
 "uGZ-lo-pJJ.title" = "字幕";
 
 /* Class = "NSMenu"; title = "Speech"; ObjectID = "uO1-9S-6Yy"; */
-"uO1-9S-6Yy.title" = "スピーチ";
+"uO1-9S-6Yy.title" = "読み上げ";
 
 /* Class = "NSMenuItem"; title = "Clear Menu"; ObjectID = "vNY-rz-j42"; */
 "vNY-rz-j42.title" = "メニューを消去";
 
 /* Class = "NSMenu"; title = "Saved Audio Filters"; ObjectID = "vuV-uP-CAD"; */
-"vuV-uP-CAD.title" = "保存したオーディオフィルタ";
+"vuV-uP-CAD.title" = "保存済みのオーディオフィルタ";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "w8n-XJ-Pgi"; */
 "w8n-XJ-Pgi.title" = "編集";
 
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
-"wex-rX-PcY.title" = "常に最前面に表示";
+"wex-rX-PcY.title" = "最前面に固定";
 
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
-"wgZ-DO-nn3.title" = "保存したオーディオフィルタ";
+"wgZ-DO-nn3.title" = "保存済みのオーディオフィルタ";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
 "wpr-3q-Mcd.title" = "ヘルプ";

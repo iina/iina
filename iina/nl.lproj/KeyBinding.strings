@@ -14,8 +14,8 @@
 "cmd.cycle-values" = "Schakel:";
 "cmd.add" = "Verander";
 "cmd.multiply" = "Vermenigvuldig";
-"cmd.frame-step" = "Volgende frame";
-"cmd.frame-back-step" = "Vorige frame";
+"cmd.frame-step" = "Volgend frame";
+"cmd.frame-back-step" = "Vorig frame";
 "cmd.ab-loop" = "Herhaal gedeelte";
 "cmd.sub-seek" = "Zoek ondertiteling";
 "cmd.playlist-next" = "Open volgende bestand";
@@ -68,8 +68,10 @@
 "backward" = "terug";
 "seek-to" = "naar";
 
-"relative" = "s";
-"absolute" = "s";
+"relative" = "sec";
+"absolute" = "sec";
+"absolute-percent" = "%";
+"relative-percent" = "%";
 "relative+exact" = "s (exact)";
 "relative-percent+exact" = "% (exact)";
 "absolute+keyframe" = "s (keyframe)";

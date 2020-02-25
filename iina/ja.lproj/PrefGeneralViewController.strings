@@ -2,7 +2,7 @@
 "1ce-4b-kgG.title" = "ファイル選択パネルを表示";
 
 /* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
-"2iM-j7-AzQ.title" = "再生終了時もウィンドウを開いたままにする";
+"2iM-j7-AzQ.title" = "再生終了後もウィンドウを開いたままにする";
 
 /* Class = "NSButtonCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
 "2rJ-mg-OuU.title" = "保存先";
@@ -71,10 +71,10 @@
 "REP-70-XOi.title" = "毎月";
 
 /* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
-"TvB-UM-FrS.title" = "古いフルスクリーンを使う";
+"TvB-UM-FrS.title" = "古いフルスクリーン(OS X 10.6以前)を使う";
 
 /* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu."; ObjectID = "XFC-Lr-LmP"; */
-"XFC-Lr-LmP.title" = "そうでない場合は、手動で開いたファイルのみ表示します";
+"XFC-Lr-LmP.title" = "そうでない場合、このメニューには手動で開いたファイルのみが表示されます。";
 
 /* Class = "NSButtonCell"; title = "Quit after all windows are closed"; ObjectID = "YLo-6E-tT7"; */
 "YLo-6E-tT7.title" = "ウィンドウを全て閉じた時にアプリを終了する";
@@ -110,7 +110,7 @@
 "lOw-pu-Llm.title" = "フルスクリーン時に再開";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
-"lvA-Rc-Sh6.title" = "字幕を含む";
+"lvA-Rc-Sh6.title" = "字幕を含める";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "oJY-Iz-3sO"; */
 "oJY-Iz-3sO.title" = "形式:";
@@ -125,7 +125,7 @@
 "uQR-Fx-oEm.title" = "動作:";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
-"xr2-rB-O0x.title" = "再生を一時停止/再開する時:";
+"xr2-rB-O0x.title" = "次の場合再生を一時停止/再開する:";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "開始ウィンドウを表示";

@@ -58,7 +58,7 @@
 "iina.save-downloaded-sub" = "다운로드된 자막 저장";
 
 "yes" = "예";
-"no" = "아니오";
+"no" = "아니요";
 "to" = "(을)를";
 "by" = "다음만큼";
 "in" = "다음 값 중에서";
@@ -70,6 +70,8 @@
 
 "relative" = "초";
 "absolute" = "초";
+"absolute-percent" = "%";
+"relative-percent" = "%";
 "relative+exact" = "초 (정확)";
 "relative-percent+exact" = "% (정확)";
 "absolute+keyframe" = "초 (키프레임)";

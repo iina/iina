@@ -34,6 +34,9 @@
 /* Class = "NSTextFieldCell"; title = "Middle click to:"; ObjectID = "Gyd-Qt-FEo"; */
 "Gyd-Qt-FEo.title" = "ミドルクリック:";
 
+/* Class = "NSButtonCell"; title = "Acccepts first mouse"; ObjectID = "gZK-ry-lQs"; */
+"gZK-ry-lQs.title" = "非アクティブなウィンドウをクリックした時もマウスイベントを発生させる";
+
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
 "Hm3-dh-jgb.title" = "フルスクリーンにする";
 
@@ -53,7 +56,7 @@
 "OOM-jo-N4V.title" = "OSCを隠す";
 
 /* Class = "NSMenuItem"; title = "Adjust window size"; ObjectID = "Ols-Lr-fiH"; */
-"Ols-Lr-fiH.title" = "ウィンドウのサイズを合わせる";
+"Ols-Lr-fiH.title" = "ウィンドウサイズを調節";
 
 /* Class = "NSTextFieldCell"; title = "Single click to:"; ObjectID = "QhO-As-ZLL"; */
 "QhO-As-ZLL.title" = "クリック:";
@@ -65,10 +68,10 @@
 "Rqy-g2-AP2.title" = "右クリック:";
 
 /* Class = "NSMenuItem"; title = "Adjust volume"; ObjectID = "SYg-hW-b6r"; */
-"SYg-hW-b6r.title" = "音量調整";
+"SYg-hW-b6r.title" = "音量調節";
 
 /* Class = "NSTextFieldCell"; title = "Sensitivity for volume:"; ObjectID = "YQH-1a-WcM"; */
-"YQH-1a-WcM.title" = "音量調整の感度:";
+"YQH-1a-WcM.title" = "音量調節の感度:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "chS-d2-TG1"; */
 "chS-d2-TG1.title" = "なし";
@@ -86,7 +89,7 @@
 "hDh-Lk-FJe.title" = "フルスクリーン切り替え";
 
 /* Class = "NSTextFieldCell"; title = "Scroll vertically to:"; ObjectID = "hNU-dJ-5Cj"; */
-"hNU-dJ-5Cj.title" = "縦スクロール (垂直):";
+"hNU-dJ-5Cj.title" = "縦スクロール:";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "iFF-Gq-tVx"; */
 "iFF-Gq-tVx.title" = "OSCを隠す";
@@ -101,7 +104,7 @@
 "oOk-y6-lek.title" = "なし";
 
 /* Class = "NSTextFieldCell"; title = "Sensitivity for normal seek:"; ObjectID = "of2-ec-OkC"; */
-"of2-ec-OkC.title" = "普通のシークの感度:";
+"of2-ec-OkC.title" = "通常のシーク感度:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "unj-zt-RyU"; */
 "unj-zt-RyU.title" = "なし";
@@ -110,7 +113,7 @@
 "uqM-UM-Xvb.title" = "一時停止 / 再生";
 
 /* Class = "NSTextFieldCell"; title = "Scroll horizontally to:"; ObjectID = "w1Y-jy-vNc"; */
-"w1Y-jy-vNc.title" = "横スクロール (水平):";
+"w1Y-jy-vNc.title" = "横スクロール:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "w54-7I-QfW"; */
 "w54-7I-QfW.title" = "なし";

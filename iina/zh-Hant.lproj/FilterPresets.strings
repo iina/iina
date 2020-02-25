@@ -21,7 +21,7 @@
 "expand.x" = "原點 X（預設：中央）";
 "expand.y" = "原點 Y（預設：中央）";
 "expand.aspect" = "擴展以符合比例（例如：4/3）";
-"expand.round" = "往上四捨五入以被此值整除";
+"expand.round" = "四捨五入整除此值";
 
 "sharpen" = "銳利化";
 "sharpen.msize" = "矩陣大小";
@@ -31,7 +31,7 @@
 "blur.msize" = "矩陣大小";
 "blur.amount" = "模糊量";
 
-"delogo" = "去 logo";
+"delogo" = "去水印";
 "delogo.w" = "寬度";
 "delogo.h" = "高度";
 "delogo.x" = "原點 X";
@@ -44,7 +44,7 @@
 
 "lut3d" = "3D LUT";
 "lut3d.file" = "檔案";
-"lut3d.interp" = "內插模式";
+"lut3d.interp" = "補幀模式";
 
 "custom_mpv" = "自定（mpv）";
 "custom_mpv.name" = "濾鏡名稱";

@@ -34,6 +34,9 @@
 /* Class = "NSTextFieldCell"; title = "Middle click to:"; ObjectID = "Gyd-Qt-FEo"; */
 "Gyd-Qt-FEo.title" = "Click centrale:";
 
+/* Class = "NSButtonCell"; title = "Acccepts first mouse"; ObjectID = "gZK-ry-lQs"; */
+"gZK-ry-lQs.title" = "Accepts first mouse click when not focused";
+
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
 "Hm3-dh-jgb.title" = "A tutto schermo";
 
@@ -41,7 +44,7 @@
 "I6k-ab-IwJ.title" = "Trackpad";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "K9H-w9-wmT"; */
-"K9H-w9-wmT.title" = "Auto";
+"K9H-w9-wmT.title" = "Automatico";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "M6K-ME-cve"; */
 "M6K-ME-cve.title" = "Nascondi controlli";

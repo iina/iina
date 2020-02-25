@@ -11,7 +11,7 @@
 "general.off" = "オフ";
 "general.login" = "ログイン";
 "general.logout" = "ログアウト";
-"general.ok" = "はい";
+"general.ok" = "OK";
 "general.cancel" = "キャンセル";
 "general.username" = "ユーザ名";
 "general.password" = "パスワード";
@@ -50,7 +50,7 @@
 "osd.chapter" = "チャプタ: %@";
 "osd.subtitle_scale" = "字幕の大きさ: %.2fx";
 "osd.add_to_playlist" = "%i個のファイルをプレイリストに追加しました";
-"osd.clear_playlist" = "プレイリストをクリア";
+"osd.clear_playlist" = "プレイリストをクリアしました";
 "osd.video_eq.contrast" = "コントラスト: %i";
 "osd.video_eq.gamma" = "ガンマ値: %i";
 "osd.video_eq.hue" = "色調: %i";
@@ -71,17 +71,17 @@
 
 "preference.title" = "環境設定";
 "preference.general" = "一般";
-"preference.ui" = "インターフェース";
-"preference.video_audio" = "コーデック";
+"preference.ui" = "UI";
+"preference.video_audio" = "ビデオ/オーディオ";
 "preference.subtitle" = "字幕";
 "preference.network" = "ネットワーク";
 "preference.control" = "コントロール";
 "preference.keybindings" = "キーの割り当て";
-"preference.advanced" = "拡張";
-"preference.utilities" = "ユーティリティー";
+"preference.advanced" = "詳細設定";
+"preference.utilities" = "ユーティリティ";
 "preference.scripts" = "スクリプト";
 "preference.not_logged_in" = "ログインしていません";
-"preference.logged_in_as" = "%@でログイン中";
+"preference.logged_in_as" = "%@としてログイン中";
 "preference.system_media_control" = "システムのメディアコントロールを使用";
 
 "preference.key_binding_hint_1" = "この設定を編集するには、先に\"複製…\"ボタンをクリックしてコピーを作成してください。";
@@ -93,7 +93,7 @@
 "menu.fullscreen" = "フルスクリーンにする";
 "menu.exit_fullscreen" = "フルスクリーンを解除";
 "menu.pip" = "ピクチャ・イン・ピクチャを使用";
-"menu.exit_pip" = "ピクチャ・イン・ピクチャをオフ";
+"menu.exit_pip" = "ピクチャ・イン・ピクチャを終了";
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
 "menu.speed" = "再生速度: %.2f倍";
@@ -116,7 +116,7 @@
 
 // Alerts
 "alert.beta_channel.title" = "ベータ版のアップデート通知を受け取る";
-"alert.beta_channel.message" = "もうすぐIINA v1.0リリースされます！ ベータ版のテストを手伝っていただけますか？\n\nこの設定は 環境設定 > 一般 からいつでも変更することができます。";
+"alert.beta_channel.message" = "まもなくIINA v1.0がリリースされます！ ベータ版のテストを手伝っていただけますか？\n\nこの設定は 環境設定 > 一般 からいつでも変更することができます。";
 
 "alert.title_error" = "エラー";
 "alert.title_warning" = "警告";
@@ -132,7 +132,7 @@
 "alert.wrong_url_format" = "URLの形式が間違っています。";
 
 "alert.error_open" = "ファイルもしくはURLが開けません！";
-"alert.error_finding_file" = "%@ というファイルは見つかりません!";
+"alert.error_finding_file" = "%@ というファイルは見つかりません！";
 "alert.error_loading_script" = "次のスクリプトは読み込めません！%@";
 "alert.error_saving_file" = "%@の保存時にエラーが発生しました: %@";
 "alert.error_deleting_file" = "ファイルを削除できません。";
@@ -144,11 +144,11 @@
 "alert.config.empty_name" = "名前を入力してください。";
 "alert.config.name_existing" = "すでに同名のファイルが存在しています。";
 "alert.config.file_existing.title" = "ファイルが既に存在しています";
-"alert.config.file_existing.message" = "上書きするにはOKを選択、Finderで表示するにはキャンセルを選択してください。";
-"alert.config.cannot_create" = "設定ファイルは作成できません!\n%@";
-"alert.config.cannot_write" = "設定ファイルには書き込めません!";
+"alert.config.file_existing.message" = "既にファイルが存在しています。上書きするにはOKを選択、Finderで表示するにはキャンセルを選択してください。";
+"alert.config.cannot_create" = "設定ファイルが作成できません！\n%@";
+"alert.config.cannot_write" = "設定ファイルに書き込めません！";
 
-"alert.filter.incorrect" = "フィルタの設定時にエラーが起きました。パラメータの形式を確認してください。";
+"alert.filter.incorrect" = "フィルタの設定時にエラーが発生しました。パラメータの形式を確認してください。";
 "alert.add_filter.title" = "フィルタの新規作成";
 "alert.add_filter.message" = "mpvの vf または af オプションの形式でフィルタ名を入力してください。";
 
@@ -162,19 +162,19 @@
 "alert.playlist.error_deleting" = "削除エラー: %@";
 
 "alert.sub.no_selected" = "ダウンロードした字幕を最初に選択してください。";
-"alert.sub_lang_not_set" = "OpenSubtitlesを利用する前に、環境設定で字幕の優先言語を設定してください。英語(eng)が今回使用されます。";
+"alert.sub_lang_not_set" = "OpenSubtitlesを利用する前に、環境設定で字幕の優先言語を設定してください。今回は英語(eng)が使用されます。";
 "alert.sub.cannot_save_passwd" = "パスワードをキーチェーンに保存できません: %@";
 "alert.sub.cannot_login" = "ログインできません。ユーザー名とパスワード、ネットワーク環境をご確認ください。\n\n%@";
 
 "alert.set_default.title" = "IINAをデフォルトのアプリケーションに設定";
-"alert.set_default.message" = "対応する形式のファイルすべてにIINAを設定します。";
+"alert.set_default.message" = "対応する全てのファイル形式にIINAをデフォルトアプリケーションとして設定します。";
 "alert.set_default.success" = "完了しました。(成功: %d件, 失敗: %d件)";
 
 "alert.add_watch.title" = "監視するmpvのプロパティを追加";
 "alert.add_watch.message" = "有効なmpvのプロパティ名を入力してください。";
 
-"alert.jump_to.title" = "時間の指定";
-"alert.jump_to.message" = "位置をジャンプしたい時間を入力してください。例: 20:35";
+"alert.jump_to.title" = "次の時間へジャンプ";
+"alert.jump_to.message" = "ジャンプしたい位置の時間を入力してください。例: 20:35";
 
 "alert.opensub.login.title" = "OpenSubtitlesにログイン";
 "alert.opensub.login.message" = "ユーザ名とパスワードを入力してください";
@@ -187,7 +187,7 @@
 "alert.add_url.message" = "URLを入力:";
 
 "alert.delete_history.title" = "再生履歴の削除";
-"alert.delete_history.message" = "選択した項目を削除しますか?";
+"alert.delete_history.message" = "本当に選択した項目を削除しますか？";
 
 "alert.filter_hwdec.message" = "あなたは今ビデオフィルタを適用しようとしていますが、お使いのハードウェアデコーダはビデオフィルタリングに対応していない可能性があります。ハードウェアデコーディングをオフにするか、2倍のメモリを消費する\"自動(コピー)\"をご使用ください。\n設定後、正常に動作させるには操作をやり直す(クロップ範囲の再設定など)必要がある場合があります。";
 "alert.filter_hwdec.abort" = "破棄";
@@ -195,13 +195,13 @@
 "alert.filter_hwdec.use_copy" = "自動 (コピー) 方式に切り替え";
 
 "alert.clear_cache.title" = "サムネイルキャッシュをクリア";
-"alert.clear_cache.message" = "すべてのサムネイルキャッシュを消去しますか?";
+"alert.clear_cache.message" = "本当にすべてのサムネイルキャッシュを消去しますか？";
 
 "alert.clear_history.title" = "再生履歴をクリア";
-"alert.clear_history.message" = "すべての再生履歴を消去しますか?";
+"alert.clear_history.message" = "本当にすべての再生履歴を消去しますか？";
 
 "alert.clear_watch_later.title" = "保存済み再生位置をクリア";
-"alert.clear_watch_later.message" = "すべての保存済み再生位置(\"あとで見る\"情報)を消去しますか?";
+"alert.clear_watch_later.message" = "本当にすべての保存済み再生位置(\"あとで見る\"情報)を消去しますか？";
 
 "alert.nothing_to_open" = "開くファイルがありません。";
 
@@ -209,7 +209,7 @@
 
 "alert.duplicate_config" = "デフォルト設定は編集できません。編集前に設定を複製してください。";
 
-"alert.assrt_register" = "APIリクエスト数が制限されているため、自身で発行したAPIトークンを使用することを推奨しております。元から設定されているトークンは試用であり、ネットワークエラーが発生する恐れがあります。";
+"alert.assrt_register" = "APIリクエスト数が制限されているため、ご自身で発行したAPIトークンを使用することを推奨しています。元から設定されているトークンは試用であり、ネットワークエラーが発生する恐れがあります。";
 "alert.assrt_register.register" = "今すぐ登録する";
 "alert.assrt_register.try" = "使ってみる";
 "alert.assrt_token_prompt.title" = "APIトークンを入力";
@@ -244,14 +244,14 @@
 "filter.video_filters" = "ビデオフィルタ一覧";
 "filter.audio_filters" = "オーディオフィルタ一覧";
 
-"hwdec.no" = "ハードウェアデコーディングをオフにします。";
+"hwdec.no" = "ハードウェアデコーディングを使用しません。";
 "hwdec.auto" = "ハードウェアデコーディングを使用します。多くのビデオフィルタは正常に動作しません。";
 "hwdec.auto-copy" = "ハードウェアデコーディングを使用します。二倍のメモリを使用しますが、ビデオフィルタを適用できます。";
 
 "subencoding.auto" = "自動検出";
 
 "osc_toolbar.settings" = "クイック設定";
-"osc_toolbar.playlist" = "プレイリストとチャプター";
+"osc_toolbar.playlist" = "プレイリストとチャプタ";
 "osc_toolbar.pip" = "ピクチャ・イン・ピクチャ切り替え";
 "osc_toolbar.full_screen" = "フルスクリーン切り替え";
 "osc_toolbar.music_mode" = "ミュージックモード切り替え";
@@ -269,7 +269,7 @@
 "touchbar.decrease_volume" = "音量 -";
 "touchbar.rewind" = "巻き戻し";
 "touchbar.fast_forward" = "早送り";
-"touchbar.play_pause" = "再生 / 停止";
+"touchbar.play_pause" = "再生 / 一時停止";
 "touchbar.seek" = "シーク";
 "touchbar.time" = "再生位置";
 "touchbar.remainingTime" = "残り時間";

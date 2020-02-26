@@ -142,6 +142,8 @@ extern "C" {
  *   wrapper script).
  * - Using UNIX IPC (off by default) will override the SIGPIPE signal handler,
  *   and set it to SIG_IGN.
+ * - mpv will reseed the legacy C random number generator by calling srand() at
+ *   some random point once.
  *
  * Encoding of filenames
  * ---------------------

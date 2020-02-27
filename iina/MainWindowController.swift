@@ -547,24 +547,26 @@ class MainWindowController: PlayerWindowController {
   }
 
   /** Set material for OSC and title bar */
-  override internal func setMaterial(_ theme: Preference.Theme) {
-    guard let window = window else { return }
-
-    if #available(macOS 10.14, *) {} else {
-      let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)
-      let isDarkTheme = appearance?.isDark ?? true
-      (playSlider.cell as? PlaySliderCell)?.isInDarkTheme = isDarkTheme
-
-      [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView, bufferIndicatorView].forEach {
-        $0?.material = material
-        $0?.appearance = appearance
-      }
-
-      sideBarView.material = .dark
-      sideBarView.appearance = NSAppearance(named: .vibrantDark)
-
-      window.appearance = appearance
+  override internal func setMaterial(_ theme: Preference.Theme?) {
+    if #available(macOS 10.14, *) {
+      super.setMaterial(theme)
+      return
     }
+    guard let window = window, let theme = theme else { return }
+
+    let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)
+    let isDarkTheme = appearance?.isDark ?? true
+    (playSlider.cell as? PlaySliderCell)?.isInDarkTheme = isDarkTheme
+
+    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView, bufferIndicatorView].forEach {
+      $0?.material = material
+      $0?.appearance = appearance
+    }
+
+    sideBarView.material = .dark
+    sideBarView.appearance = NSAppearance(named: .vibrantDark)
+
+    window.appearance = appearance
   }
 
 

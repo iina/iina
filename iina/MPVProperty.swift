@@ -119,14 +119,6 @@ struct MPVProperty {
   static let demuxerCacheIdle = "demuxer-cache-idle"
   /** demuxer-cache-state */
   static let demuxerCacheState = "demuxer-cache-state"
-  /** eof */
-  static let eof = "eof"
-  /** underrun */
-  static let underrun = "underrun"
-  /** idle */
-  static let idle = "idle"
-  /** total-bytes */
-  static let totalBytes = "total-bytes"
   /** demuxer-via-network */
   static let demuxerViaNetwork = "demuxer-via-network"
   /** demuxer-start-time */
@@ -257,6 +249,8 @@ struct MPVProperty {
   static let osdHeight = "osd-height"
   /** osd-par */
   static let osdPar = "osd-par"
+  /** osd-dimensions */
+  static let osdDimensions = "osd-dimensions"
   /** sub-text */
   static let subText = "sub-text"
   /** sub-start */
@@ -271,8 +265,8 @@ struct MPVProperty {
   static let playlistCount = "playlist-count"
   /** playlist */
   static let playlist = "playlist"
-  /** playlist/count */
-  static let playlistCount2 = "playlist/count"
+  /** playlistCount1 */
+  static let playlistCount1 = "playlistCount1"
   /** playlist/N/filename */
   static func playlistNFilename(_ n: Int) -> String {
     return "playlist/\(n)/filename"
@@ -491,12 +485,6 @@ struct MPVProperty {
   static let protocolList = "protocol-list"
   /** decoder-list */
   static let decoderList = "decoder-list"
-  /** codec */
-  static let codec = "codec"
-  /** driver */
-  static let driver = "driver"
-  /** description */
-  static let description = "description"
   /** encoder-list */
   static let encoderList = "encoder-list"
   /** demuxer-lavf-list */

@@ -16,6 +16,12 @@ import JavaScriptCore
   func loadVideoTrack(_ filename: String)
   func loadAudioTrack(_ filename: String)
   func loadSubtitle(_ filename: String)
+  func pause()
+  func resume()
+  func stop()
+  func setSpeed(_ speed: Double)
+  func getChapters() -> [String]
+  func playChapter(index: Int)
 }
 
 class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
@@ -48,5 +54,30 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
   @objc func loadSubtitle(_ filename: String) {
     guard let dir = JavascriptAPIFile.currentDir(player) else { return }
     player.loadExternalSubFile(dir.appendingPathComponent(filename, isDirectory: false))
+  }
+
+  @objc func pause() {
+    player.pause()
+  }
+
+  @objc func resume() {
+    player.resume()
+  }
+
+  @objc func stop() {
+    player.stop()
+  }
+
+  @objc func setSpeed(_ speed: Double) {
+    player.setSpeed(speed)
+  }
+
+  @objc func getChapters() -> [String] {
+    player.getChapters()
+    return player.info.chapters.map{ $0.title }
+  }
+
+  @objc func playChapter(index: Int) {
+    player.playChapter(index)
   }
 }

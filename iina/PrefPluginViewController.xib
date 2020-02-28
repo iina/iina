@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -29,24 +29,24 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="710" height="463"/>
+            <rect key="frame" x="0.0" y="0.0" width="710" height="460"/>
             <subviews>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="38" horizontalPageScroll="10" verticalLineScroll="38" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZO-wR-pQN">
-                    <rect key="frame" x="8" y="8" width="160" height="329"/>
+                    <rect key="frame" x="8" y="8" width="160" height="328"/>
                     <clipView key="contentView" id="MLE-fd-V2n">
-                        <rect key="frame" x="1" y="1" width="158" height="327"/>
+                        <rect key="frame" x="1" y="1" width="158" height="326"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="36" rowSizeStyle="automatic" viewBased="YES" id="4ST-kN-zXF">
-                                <rect key="frame" x="0.0" y="0.0" width="158" height="327"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <rect key="frame" x="0.0" y="0.0" width="158" height="326"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
                                     <tableColumn width="155" minWidth="40" maxWidth="1000" id="dgl-ce-9KZ">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                            <font key="font" metaFont="smallSystem"/>
+                                            <font key="font" metaFont="label" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
@@ -62,7 +62,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="VA5-Ts-gih">
-                                                        <rect key="frame" x="28" y="10" width="96" height="17"/>
+                                                        <rect key="frame" x="28" y="10" width="96" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="jfJ-CL-fci">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -75,6 +75,9 @@
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
+                                                        <connections>
+                                                            <binding destination="qQC-sZ-neM" name="value" keyPath="objectValue.enabled" id="Zad-g7-2YR"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -107,16 +110,16 @@
                     </scroller>
                 </scrollView>
                 <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCG-6E-fwa">
-                    <rect key="frame" x="176" y="8" width="526" height="329"/>
+                    <rect key="frame" x="176" y="8" width="526" height="328"/>
                     <clipView key="contentView" id="qAI-Vk-KZx">
-                        <rect key="frame" x="1" y="1" width="524" height="327"/>
+                        <rect key="frame" x="1" y="1" width="524" height="326"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view translatesAutoresizingMaskIntoConstraints="NO" id="dBW-JH-AvA" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="524" height="327"/>
+                                <rect key="frame" x="0.0" y="0.0" width="524" height="326"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RQj-8e-E8x">
-                                        <rect key="frame" x="10" y="298" width="40" height="17"/>
+                                        <rect key="frame" x="10" y="298" width="40" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="4KW-9v-rlv"/>
                                         </constraints>
@@ -129,7 +132,7 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XdS-aQ-bSd">
                                         <rect key="frame" x="54" y="298" width="33" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Label" id="QZS-KU-s1Z">
-                                            <font key="font" metaFont="smallSystem"/>
+                                            <font key="font" metaFont="label" size="11"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -137,7 +140,7 @@
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="8U3-yT-6HJ">
                                         <rect key="frame" x="10" y="280" width="504" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" selectable="YES" title="Multiline Label" id="T11-Rl-GHV">
-                                            <font key="font" metaFont="smallSystem"/>
+                                            <font key="font" metaFont="label" size="11"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -146,7 +149,7 @@
                                         <rect key="frame" x="452" y="296" width="60" height="17"/>
                                         <buttonCell key="cell" type="roundRect" title="Uninstall" bezelStyle="roundedRect" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ue8-hU-kLm">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="smallSystem"/>
+                                            <font key="font" metaFont="label" size="11"/>
                                         </buttonCell>
                                     </button>
                                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Cly-9N-1cz">
@@ -184,13 +187,13 @@
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LeP-Yg-Cr3">
                                                                             <rect key="frame" x="10" y="51" width="40" height="14"/>
                                                                             <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Author" id="Dkk-JQ-qHA">
-                                                                                <font key="font" metaFont="smallSystem"/>
+                                                                                <font key="font" metaFont="label" size="11"/>
                                                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O3b-AR-B6u">
-                                                                            <rect key="frame" x="10" y="30" width="37" height="17"/>
+                                                                            <rect key="frame" x="10" y="31" width="37" height="16"/>
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="gKz-C8-h17">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -198,10 +201,10 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Oq-36-bBu">
-                                                                            <rect key="frame" x="12" y="8" width="149" height="16"/>
+                                                                            <rect key="frame" x="12" y="8" width="149" height="17"/>
                                                                             <subviews>
                                                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xPq-ai-SYY">
-                                                                                    <rect key="frame" x="0.0" y="-1" width="78" height="17"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="78" height="17"/>
                                                                                     <buttonCell key="cell" type="inline" title="Website" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="leading" alignment="center" controlSize="mini" borderStyle="border" inset="2" id="X6J-6H-IPn">
                                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -211,7 +214,7 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xpC-Zo-zZZ">
-                                                                                    <rect key="frame" x="86" y="-1" width="63" height="17"/>
+                                                                                    <rect key="frame" x="86" y="0.0" width="63" height="17"/>
                                                                                     <buttonCell key="cell" type="inline" title="Email" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="left" alignment="center" controlSize="mini" borderStyle="border" inset="2" id="EHl-kr-ZZf">
                                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -249,7 +252,7 @@
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="uXv-av-egZ">
                                                                             <rect key="frame" x="10" y="34" width="504" height="42"/>
                                                                             <textFieldCell key="cell" controlSize="small" selectable="YES" id="lCu-ZC-ZX4">
-                                                                                <font key="font" metaFont="smallSystem"/>
+                                                                                <font key="font" metaFont="label" size="11"/>
                                                                                 <string key="title">This plugin may require a binary file that you must download from the author and add to IINA's binary path. Please check out the description on how to obtain the binary and then move it to the following folder.</string>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -259,7 +262,7 @@
                                                                             <rect key="frame" x="7" y="2" width="173" height="27"/>
                                                                             <buttonCell key="cell" type="push" title="Open IINA's binary directory" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8FM-t8-z8y">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                <font key="font" metaFont="smallSystem"/>
+                                                                                <font key="font" metaFont="label" size="11"/>
                                                                             </buttonCell>
                                                                             <connections>
                                                                                 <action selector="openBinaryDirBtnAction:" target="-2" id="VXR-Mo-Gnv"/>
@@ -307,9 +310,9 @@
                                         <rect key="frame" x="0.0" y="262" width="524" height="5"/>
                                     </box>
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="304-WM-rM6">
-                                        <rect key="frame" x="145" y="254" width="235" height="21"/>
+                                        <rect key="frame" x="149" y="254" width="226" height="21"/>
                                         <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="KTN-5r-mMm">
-                                            <font key="font" metaFont="smallSystem"/>
+                                            <font key="font" metaFont="label" size="11"/>
                                             <segments>
                                                 <segment label="Permissions" selected="YES"/>
                                                 <segment label="Support" tag="1"/>
@@ -354,24 +357,24 @@
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="Eud-HL-zMW"/>
                     </constraints>
                     <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="jco-u7-SJs">
-                        <rect key="frame" x="1" y="312" width="524" height="16"/>
+                        <rect key="frame" x="1" y="311" width="524" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="eSh-BD-Twe">
-                        <rect key="frame" x="509" y="1" width="16" height="327"/>
+                        <rect key="frame" x="509" y="1" width="16" height="326"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aJi-Tg-tph">
-                    <rect key="frame" x="6" y="420" width="698" height="14"/>
+                    <rect key="frame" x="6" y="418" width="698" height="14"/>
                     <textFieldCell key="cell" controlSize="small" title="Install new plugin by opening an *.iinaplgz file or clicking the &quot;Install New Plug-in&quot; button below." id="fnl-uA-X7r">
-                        <font key="font" metaFont="smallSystem"/>
+                        <font key="font" metaFont="label" size="11"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XzQ-9h-Ysp">
-                    <rect key="frame" x="6" y="345" width="113" height="17"/>
+                    <rect key="frame" x="6" y="344" width="113" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Installed plug-ins:" id="Ztn-MG-D7D">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -379,14 +382,14 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DbD-Cu-uoz">
-                    <rect key="frame" x="2" y="384" width="165" height="32"/>
+                    <rect key="frame" x="2" y="382" width="165" height="32"/>
                     <buttonCell key="cell" type="push" title="Install New Plug-in..." bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="enP-C1-4vu">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EIM-00-eRR">
-                    <rect key="frame" x="6" y="438" width="55" height="17"/>
+                    <rect key="frame" x="6" y="436" width="55" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Plug-ins" id="tfn-0I-n6p">
                         <font key="font" usesAppearanceFont="YES"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -394,7 +397,7 @@
                     </textFieldCell>
                 </textField>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="q8W-0n-Rem">
-                    <rect key="frame" x="8" y="372" width="694" height="5"/>
+                    <rect key="frame" x="8" y="370" width="694" height="5"/>
                 </box>
             </subviews>
             <constraints>

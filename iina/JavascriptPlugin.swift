@@ -9,7 +9,7 @@
 import Foundation
 import JavaScriptCore
 
-class JavascriptPlugin {
+class JavascriptPlugin: NSObject {
 
   enum Permission: String {
     case networkRequest = "network-request"
@@ -34,13 +34,19 @@ class JavascriptPlugin {
 
   static var plugins = loadPlugins()
 
+  @objc var enabled: Bool {
+    didSet {
+      UserDefaults.standard.set(enabled, forKey: "IINAPlugin" + identifier)
+    }
+  }
+
   let name: String
   let authorName: String
   let authorEmail: String?
   let authorURL: String?
   let identifier: String
   let version: String
-  let description: String?
+  let desc: String?
 
   let root: URL
   let entryPath: String
@@ -116,7 +122,7 @@ class JavascriptPlugin {
     self.authorURL = author["url"]
     self.authorEmail = author["email"]
     self.identifier = identifier
-    self.description = jsonDict["description"] as? String
+    self.desc = jsonDict["description"] as? String
     self.scriptPaths = (jsonDict["scripts"] as? [String]) ?? []
     self.preferencesPage = jsonDict["preferencesPage"] as? String
     var permissions = Set<Permission>()
@@ -129,6 +135,7 @@ class JavascriptPlugin {
         }
       }
     }
+    enabled = UserDefaults.standard.bool(forKey: "IINAPlugin" + identifier)
     self.permissions = permissions
     self.domainList = (jsonDict["domainList"] as? [String]) ?? []
     if let defaultPrefernces = jsonDict["preferenceDefaults"] as? [String: Any] {
@@ -142,7 +149,7 @@ class JavascriptPlugin {
   func syncPreferences() {
     let url = preferencesFileURL
     Utility.createFileIfNotExist(url: url)
-    if #available(OSX 10.13, *) {
+    if #available(macOS 10.13, *) {
       do {
         try (preferences as NSDictionary).write(to: url)
       } catch let e {

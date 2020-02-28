@@ -804,12 +804,22 @@ class PlayerCore: NSObject {
     mpv.setDouble(MPVOption.Subtitles.subDelay, delay)
   }
 
-  func addToPlaylist(_ path: String) {
+  private func _addToPlaylist(_ path: String) {
     mpv.command(.loadfile, args: [path, "append"])
   }
 
-  func playlistMove(_ from: Int, to: Int) {
+  func addToPlaylist(_ path: String) {
+    _addToPlaylist(path)
+    postNotification(.iinaPlaylistChanged)
+  }
+
+  private func _playlistMove(_ from: Int, to: Int) {
     mpv.command(.playlistMove, args: ["\(from)", "\(to)"])
+  }
+
+  func playlistMove(_ from: Int, to: Int) {
+    _playlistMove(from, to: to)
+    postNotification(.iinaPlaylistChanged)
   }
 
   func addToPlaylist(paths: [String], at index: Int) {
@@ -822,10 +832,16 @@ class PlayerCore: NSObject {
     for i in 0..<paths.count {
       playlistMove(previousCount + i, to: index + i)
     }
+    postNotification(.iinaPlaylistChanged)
+  }
+
+  private func _playlistRemove(_ index: Int) {
+    mpv.command(.playlistRemove, args: [index.description])
   }
 
   func playlistRemove(_ index: Int) {
-    mpv.command(.playlistRemove, args: [index.description])
+    _playlistRemove(index)
+    postNotification(.iinaPlaylistChanged)
   }
 
   func playlistRemove(_ indexSet: IndexSet) {
@@ -839,6 +855,7 @@ class PlayerCore: NSObject {
 
   func clearPlaylist() {
     mpv.command(.playlistClear)
+    postNotification(.iinaPlaylistChanged)
   }
 
   func playFile(_ path: String) {

@@ -190,7 +190,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     pluginNameLabel.stringValue = plugin.name
     pluginAuthorLabel.stringValue = plugin.authorName
     pluginVersionLabel.stringValue = plugin.version
-    pluginDescLabel.stringValue = plugin.description ?? "No Description"
+    pluginDescLabel.stringValue = plugin.desc ?? "No Description"
     pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorEmail == nil ? .notVisible : .mustHold, for: pluginEmailBtn)
     pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorURL == nil ? .notVisible : .mustHold, for: pluginWebsiteBtn)
     pluginSupportStackView.setVisibilityPriority(.notVisible, for: pluginBinaryHelpTextView)

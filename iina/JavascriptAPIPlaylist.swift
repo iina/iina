@@ -10,54 +10,64 @@ import Foundation
 import JavaScriptCore
 
 @objc protocol JavascriptAPIPlaylistExportable: JSExport {
-  func getPlaylist() -> [String]?
-  func addMutiple(_ urls: [String], _ at: Int)
-  func add(_ url: String, _ at: Int)
-  func appendMutiple(_ urls: [String])
-  func append(_ url: String)
-  func deleteMutiple(_ indexes: [Int])
-  func delete(_ index: Int)
+  func list() -> [String]?
+  func add(_ url: JSValue, _ at: Int)
+  func append(_ url: JSValue)
+  func delete(_ index: JSValue)
+  func move(_ index: Int, _ to: Int)
   func play(_ index: Int)
+  func playNext()
+  func playPrevious()
 }
 
 class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
 
-  @objc func getPlaylist() -> [String]? {
+  @objc func list() -> [String]? {
     return whenPermitted(to: .playlist) {
       return player.info.playlist.map { $0.filename }
     }
   }
 
-  @objc func addMutiple(_ urls: [String], _ at: Int) {
+  @objc func add(_ url: JSValue, _ at: Int) {
     whenPermitted(to: .playlist) {
-      player.addToPlaylist(paths: urls, at: at)
+      if (url.isArray) {
+        player.addToPlaylist(paths: url.toArray() as! [String], at: at)
+      } else {
+        player.addToPlaylist(url.toString())
+      }
     }
   }
 
-  @objc func add(_ url: String, _ at: Int) {
-    addMutiple([url], at)
+  @objc func append(_ url: JSValue) {
+    add(url, player.info.playlist.count)
   }
 
-  @objc func appendMutiple(_ urls: [String]) {
-    addMutiple(urls, player.info.playlist.count)
-  }
-
-  @objc func append(_ url: String) {
-    appendMutiple([url])
-  }
-
-  @objc func deleteMutiple(_ indexes: [Int]) {
+  @objc func delete(_ index: JSValue) {
     whenPermitted(to: .playlist) {
-      player.playlistRemove(IndexSet(indexes))
+      if (index.isArray) {
+        player.playlistRemove(IndexSet(index.toArray() as! [Int]))
+      } else {
+        player.playlistRemove(Int(index.toInt32()))
+      }
     }
   }
 
-  @objc func delete(_ index: Int) {
-    deleteMutiple([index])
+  @objc func move(_ index: Int, _ to: Int) {
+    whenPermitted(to: .playlist) {
+      player.playlistMove(index, to: to)
+    }
   }
 
   @objc func play(_ index: Int) {
     player.playFileInPlaylist(index)
+  }
+
+  @objc func playNext() {
+    player.navigateInPlaylist(nextMedia: true)
+  }
+
+  @objc func playPrevious() {
+    player.navigateInPlaylist(nextMedia: false)
   }
 
 }

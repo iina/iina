@@ -959,7 +959,7 @@ class MainWindowController: PlayerWindowController {
 
   func windowWillOpen() {
     if loaded {
-      window?.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: NSScreen.main!.frame), display: true)
+      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: window!.screen!.visibleFrame), display: true)
       videoView.videoLayer.draw(forced: true)
     }
   }

@@ -36,7 +36,7 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
   }
 
   @objc func getFileNamesFromCurrentDir() -> JSValue? {
-    return whenPermitted(to: .filenameCurrentdir) {
+    return whenPermitted(to: .fileSystem) {
       guard let folder = JavascriptAPIFile.currentDir(player) else {
         throwError(withMessage: "Cannot get current folder.")
         return nil

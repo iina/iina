@@ -19,7 +19,7 @@ class JavascriptPlugin: NSObject {
     case addMenuItems = "menu-items"
     case videoOverlay = "video-overlay"
     case fileIO = "file-IO"
-    case filenameCurrentdir = "filename-currentdir"
+    case fileSystem = "file-system"
     case playlist = "playlist"
 
     var isDangerous: Bool {

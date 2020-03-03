@@ -38,7 +38,7 @@ class JavascriptAPI: NSObject {
 
   func permitted(to permission: JavascriptPlugin.Permission) -> Bool {
     guard pluginInstance.plugin.permissions.contains(permission) else {
-      log("To call this API, the plugin must declare permission \(permission.rawValue) in Info.json.", level: .error)
+      log("To call this API, the plugin must declare permission \(permission.rawValue) in its Info.json.", level: .error)
       return false
     }
     return true

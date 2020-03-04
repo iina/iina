@@ -959,7 +959,14 @@ class MainWindowController: PlayerWindowController {
 
   func windowWillOpen() {
     if loaded {
-      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: window!.screen!.visibleFrame), display: true)
+      var screen = window!.screen!
+      if let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String {
+        let rect = NSRectFromString(rectString)
+        if let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.visibleFrame) }) {
+          screen = lastScreen
+        }
+      }
+      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true)
       videoView.videoLayer.draw(forced: true)
     }
   }
@@ -1018,6 +1025,7 @@ class MainWindowController: PlayerWindowController {
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
+    UserDefaults.standard.set(NSStringFromRect(window!.frame), forKey: "MainWindowLastPosition")
   }
 
   // MARK: - Window delegate: Full screen

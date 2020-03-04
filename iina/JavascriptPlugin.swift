@@ -17,9 +17,8 @@ class JavascriptPlugin: NSObject {
     case showOSD = "show-osd"
     case showAlert = "show-alert"
     case addMenuItems = "menu-items"
-    case videoOverlay = "video-overlay"
-    case fileIO = "file-IO"
-    case fileSystem = "file-system"
+    case displayVideoOverlay = "video-overlay"
+    case accessFileSystem = "file-system"
     case playlist = "playlist"
 
     var isDangerous: Bool {
@@ -166,4 +165,17 @@ class JavascriptPlugin: NSObject {
     Utility.createDirIfNotExist(url: url)
     return url.appendingPathComponent("\(identifier).plist", isDirectory: false)
   }
+
+  lazy var dataURL: URL = {
+    let url = Utility.pluginsURL.appendingPathComponent(".data", isDirectory: true)
+      .appendingPathComponent(identifier, isDirectory: true)
+    Utility.createDirIfNotExist(url: url)
+    return url
+  }()
+
+  lazy var tmpURL: URL = {
+    let url = Utility.tempDirURL.appendingPathComponent("iina-\(identifier)", isDirectory: true)
+    Utility.createDirIfNotExist(url: url)
+    return url
+  }()
 }

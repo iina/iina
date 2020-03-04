@@ -15,35 +15,39 @@ import WebKit
   func hide()
   func setOpacity(_ opacity: Float)
   func loadFile(_ path: String)
+  func simpleMode()
+  func setStyle(_ style: String)
+  func setContent(_ content: String)
   func sendMessage(_ name: String, _ data: JSValue)
   func onMessage(_ name: String, _ callback: JSValue)
 }
 
 class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScriptMessageHandler {
   private var listeners: [String: JSValue] = [:]
+  private var inSimpleMode = false
 
-  @objc func show() {
+  func show() {
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     DispatchQueue.main.async {
       self.pluginInstance.overlayView.isHidden = false
     }
   }
 
-  @objc func hide() {
+  func hide() {
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     DispatchQueue.main.async {
       self.pluginInstance.overlayView.isHidden = true
     }
   }
 
-  @objc func setOpacity(_ opacity: Float) {
+  func setOpacity(_ opacity: Float) {
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     DispatchQueue.main.async {
       self.pluginInstance.overlayView.alphaValue = CGFloat(opacity)
     }
   }
 
-  @objc func loadFile(_ path: String) {
+  func loadFile(_ path: String) {
     guard player.mainWindow.isWindowLoaded && permitted(to: .displayVideoOverlay) else {
       throwError(withMessage: "overlay.loadFile called when window is not available. Please call it after receiving event \"iina.window-loaded\".")
       return
@@ -52,16 +56,47 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
     let url = rootURL.appendingPathComponent(path)
     pluginInstance.overlayView.loadFileURL(url, allowingReadAccessTo: rootURL)
     pluginInstance.overlayViewLoaded = true
+    inSimpleMode = false
   }
 
-  @objc func sendMessage(_ name: String, _ data: JSValue) {
+  func simpleMode() {
+    pluginInstance.overlayView.loadHTMLString(simpleModeHTMLString, baseURL: nil)
+    pluginInstance.overlayViewLoaded = true
+    inSimpleMode = true
+  }
+
+  func setStyle(_ style: String) {
+    guard inSimpleMode else {
+      log("overlay.setStyle is only available in simple mode.", level: .error)
+      return
+    }
+    pluginInstance.overlayView.evaluateJavaScript("window.iina._simpleModeSetStyle(`\(style)`)") { (_, error) in
+      if let error = error {
+        self.log(error.localizedDescription, level: .error)
+      }
+    }
+  }
+
+  func setContent(_ content: String) {
+    guard inSimpleMode else {
+      log("overlay.setContent is only available in simple mode.", level: .error)
+      return
+    }
+    pluginInstance.overlayView.evaluateJavaScript("window.iina._simpleModeSetContent(`\(content)`)") { (_, error) in
+      if let error = error {
+        self.log(error.localizedDescription, level: .error)
+      }
+    }
+  }
+
+  func sendMessage(_ name: String, _ data: JSValue) {
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     DispatchQueue.main.async {
       self.pluginInstance.overlayView.evaluateJavaScript("window.iina._emit(`\(name)`, \(data))")
     }
   }
 
-  @objc func onMessage(_ name: String, _ callback: JSValue) {
+  func onMessage(_ name: String, _ callback: JSValue) {
     listeners[name] = callback
   }
 
@@ -73,3 +108,27 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
     callback.call(withArguments: [JSValue(object: data, in: pluginInstance.js)!])
   }
 }
+
+
+fileprivate let simpleModeHTMLString = """
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlay</title>
+    <style>
+    body {
+        font-size: 13px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: white;
+        text-shadow: 0 1px 0 black, 0 -1px 0 black, -1px 0 0 black, 1px 0 0 black;
+    }
+    </style>
+    <style id="style"></style>
+</head>
+<body>
+    <div id="content"></div>
+</body>
+</html>
+"""

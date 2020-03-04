@@ -21,23 +21,7 @@ class PluginOverlayView: WKWebView {
 
   static func create(pluginInstance: JavascriptPluginInstance) -> PluginOverlayView {
     let config = WKWebViewConfiguration()
-    config.userContentController.addUserScript(WKUserScript(source: """
-      window.iina = {
-        listeners: {},
-        _emit(name, data) {
-          const callback = this.listeners[name];
-          if (typeof callback === "function") {
-            callback.call(null, data);
-          }
-        },
-        onMessage(name, callback) {
-          this.listeners[name] = callback;
-        },
-        postMessage(name, data) {
-          webkit.messageHandlers.iina.postMessage([name, data]);
-        },
-      };
-    """, injectionTime: .atDocumentStart, forMainFrameOnly: true))
+    config.userContentController.addUserScript(WKUserScript(source: injectedScript, injectionTime: .atDocumentStart, forMainFrameOnly: true))
 
     config.userContentController.add(pluginInstance.apis!["overlay"] as! WKScriptMessageHandler, name: "iina")
 
@@ -48,5 +32,29 @@ class PluginOverlayView: WKWebView {
 
     return webView
   }
-
 }
+
+
+fileprivate let injectedScript = """
+window.iina = {
+  listeners: {},
+  _emit(name, data) {
+    const callback = this.listeners[name];
+    if (typeof callback === "function") {
+      callback.call(null, data);
+    }
+  },
+  _simpleModeSetStyle(string) {
+    document.getElementById("style").innerHTML = string;
+  },
+  _simpleModeSetContent(string) {
+    document.getElementById("content").innerHTML = string;
+  },
+  onMessage(name, callback) {
+    this.listeners[name] = callback;
+  },
+  postMessage(name, data) {
+    webkit.messageHandlers.iina.postMessage([name, data]);
+  },
+};
+"""

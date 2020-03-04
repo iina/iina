@@ -10,64 +10,119 @@ import Foundation
 import JavaScriptCore
 
 @objc protocol JavascriptAPIPlaylistExportable: JSExport {
-  func list() -> [String]?
-  func add(_ url: JSValue, _ at: Int)
-  func append(_ url: JSValue)
-  func delete(_ index: JSValue)
-  func move(_ index: Int, _ to: Int)
+  func list() -> [[String: Any]]
+  func count() -> Int
+  func add(_ url: JSValue, _ at: Int) -> Any
+  func remove(_ index: JSValue) -> Any
+  func move(_ index: Int, _ to: Int) -> Any
   func play(_ index: Int)
   func playNext()
   func playPrevious()
 }
 
 class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
+  private func isPlaying() -> Bool {
+    if player.info.isIdle {
+      log("Playlist API is only available when playing files.", level: .error)
+      return false
+    }
+    return true
+  }
 
-  @objc func list() -> [String]? {
-    return whenPermitted(to: .playlist) {
-      return player.info.playlist.map { $0.filename }
+  func list() -> [[String: Any]] {
+    guard isPlaying() else { return [] }
+
+    return player.info.playlist.map {
+      [
+        "filename": $0.filename,
+        "title": $0.title ?? NSNull(),
+        "isPlaying": $0.isPlaying,
+        "isCurrent": $0.isCurrent
+      ]
     }
   }
 
-  @objc func add(_ url: JSValue, _ at: Int) {
-    whenPermitted(to: .playlist) {
-      if (url.isArray) {
-        player.addToPlaylist(paths: url.toArray() as! [String], at: at)
-      } else {
-        player.addToPlaylist(url.toString())
+  func count() -> Int {
+    return player.info.playlist.count
+  }
+
+  func add(_ url: JSValue, _ at: Int = -1) -> Any {
+    guard isPlaying() else { return false }
+
+    let count = player.info.playlist.count
+    guard at < count else {
+      log("playlist.add: Invalid index.", level: .error)
+      return false
+    }
+    if url.isArray {
+      if let paths = url.toArray() as? [String] {
+        player.addToPlaylist(paths: paths, at: at)
+        return true
       }
+    } else if url.isString {
+      player.addToPlaylist(paths: [url.toString()], at: at)
+      return true
     }
+    log("playlist.add: The first argument should be a string or an array of strings.", level: .error)
+    return false
   }
 
-  @objc func append(_ url: JSValue) {
-    add(url, player.info.playlist.count)
-  }
+  func remove(_ index: JSValue) -> Any {
+    guard isPlaying() else { return false }
+    let count = player.info.playlist.count
 
-  @objc func delete(_ index: JSValue) {
-    whenPermitted(to: .playlist) {
-      if (index.isArray) {
-        player.playlistRemove(IndexSet(index.toArray() as! [Int]))
-      } else {
-        player.playlistRemove(Int(index.toInt32()))
+    if index.isArray, let indices = index.toArray() as? [Int] {
+      guard indices.allSatisfy({ $0 >= 0 && $0 < count }) else {
+        log("playlist.remove: Invalid index.", level: .error)
+        return false
       }
+      player.playlistRemove(IndexSet(indices))
+      return true
+    } else if index.isNumber {
+      let index = Int(index.toInt32())
+      guard index >= 0 && index < count else {
+        log("playlist.remove: Invalid index.", level: .error)
+        return false
+      }
+      player.playlistRemove(index)
+      return true
     }
+    log("playlist.remove: The argument should be a number or an array of numbers.", level: .error)
+    return false
   }
 
-  @objc func move(_ index: Int, _ to: Int) {
-    whenPermitted(to: .playlist) {
-      player.playlistMove(index, to: to)
+  func move(_ index: Int, _ to: Int) -> Any {
+    guard isPlaying() else { return false }
+    let count = player.info.playlist.count
+
+    guard index >= 0 && index < count && to >= 0 && to < count && index != to else {
+      log("playlist.move: Invalid index.", level: .error)
+      return false
     }
+    player.playlistMove(index, to: to)
+    return true
   }
 
-  @objc func play(_ index: Int) {
+  func play(_ index: Int) {
+    guard isPlaying() else { return }
+    let count = player.info.playlist.count
+
+    guard index >= 0 && index < count else {
+      log("playlist.play: Invalid index.", level: .error)
+      return
+    }
     player.playFileInPlaylist(index)
   }
 
-  @objc func playNext() {
+  func playNext() {
+    guard isPlaying() else { return }
+
     player.navigateInPlaylist(nextMedia: true)
   }
 
-  @objc func playPrevious() {
+  func playPrevious() {
+    guard isPlaying() else { return }
+
     player.navigateInPlaylist(nextMedia: false)
   }
-
 }

@@ -248,7 +248,7 @@
 "hwdec.auto" = "Hardwaredecoding aktiviert. Die meisten Videofilter werden nicht richtig funktionieren.";
 "hwdec.auto-copy" = "Hardwaredecoding aktiviert. Benötigt doppelten Speicher, funktioniert aber mit Videofiltern.";
 
-"subencoding.auto" = "Automatisch bestimmen";
+"subencoding.auto" = "Automatisch erkennen";
 
 "osc_toolbar.settings" = "Einstellungspanel";
 "osc_toolbar.playlist" = "Wiedergabeliste und Kapitel";

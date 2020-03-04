@@ -23,28 +23,28 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   private var listeners: [String: JSValue] = [:]
 
   @objc func show() {
-    guard pluginInstance.overlayViewLoaded && permitted(to: .videoOverlay) else { return }
+    guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     DispatchQueue.main.async {
       self.pluginInstance.overlayView.isHidden = false
     }
   }
 
   @objc func hide() {
-    guard pluginInstance.overlayViewLoaded && permitted(to: .videoOverlay) else { return }
+    guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     DispatchQueue.main.async {
       self.pluginInstance.overlayView.isHidden = true
     }
   }
 
   @objc func setOpacity(_ opacity: Float) {
-    guard pluginInstance.overlayViewLoaded && permitted(to: .videoOverlay) else { return }
+    guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     DispatchQueue.main.async {
       self.pluginInstance.overlayView.alphaValue = CGFloat(opacity)
     }
   }
 
   @objc func loadFile(_ path: String) {
-    guard player.mainWindow.isWindowLoaded && permitted(to: .videoOverlay) else {
+    guard player.mainWindow.isWindowLoaded && permitted(to: .displayVideoOverlay) else {
       throwError(withMessage: "overlay.loadFile called when window is not available. Please call it after receiving event \"iina.window-loaded\".")
       return
     }
@@ -55,7 +55,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   }
 
   @objc func sendMessage(_ name: String, _ data: JSValue) {
-    guard pluginInstance.overlayViewLoaded && permitted(to: .videoOverlay) else { return }
+    guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     DispatchQueue.main.async {
       self.pluginInstance.overlayView.evaluateJavaScript("window.iina._emit(`\(name)`, \(data))")
     }

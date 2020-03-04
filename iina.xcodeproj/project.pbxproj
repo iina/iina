@@ -74,7 +74,6 @@
 		846654941F4EEBE300C91B8C /* vlc-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = 846654921F4EEA5500C91B8C /* vlc-default-input.conf */; };
 		8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */; };
 		846DD8CA1FB39B2500991A81 /* movist-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = 846DD8C81FB39A9800991A81 /* movist-default-input.conf */; };
-		847357C423FBA9E4004EB627 /* JavascriptAPIFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847357C323FBA9E4004EB627 /* JavascriptAPIFile.swift */; };
 		847557141F405F8C0006B0FF /* MainWindowMenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847557131F405F8C0006B0FF /* MainWindowMenuActions.swift */; };
 		847557161F406D360006B0FF /* MiniPlayerWindowMenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847557151F406D360006B0FF /* MiniPlayerWindowMenuActions.swift */; };
 		847644081D48B413004F6DF5 /* MPVOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847644071D48B413004F6DF5 /* MPVOption.swift */; };
@@ -852,7 +851,6 @@
 		846BE13121B34E760084ABB9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hant"; path = "zh-Hant.lproj/Contribution.rtf"; sourceTree = "<group>"; };
 		846BE13221B351CE0084ABB9 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		846DD8C81FB39A9800991A81 /* movist-default-input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "movist-default-input.conf"; sourceTree = "<group>"; };
-		847357C323FBA9E4004EB627 /* JavascriptAPIFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIFile.swift; sourceTree = "<group>"; };
 		847557131F405F8C0006B0FF /* MainWindowMenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowMenuActions.swift; sourceTree = "<group>"; };
 		847557151F406D360006B0FF /* MiniPlayerWindowMenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniPlayerWindowMenuActions.swift; sourceTree = "<group>"; };
 		847644071D48B413004F6DF5 /* MPVOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVOption.swift; sourceTree = "<group>"; };
@@ -1818,6 +1816,7 @@
 				E3F698862120D878005792C9 /* ExtendedColors.swift */,
 				E301EFD921312AB300BC8588 /* KeychainAccess.swift */,
 				E38B3215214FF700000F6D27 /* EventController.swift */,
+				E39A11FC240F176E00A67F9F /* StringEncodingName.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2210,7 +2209,6 @@
 				E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */,
 				E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */,
 				E3CB258A2222885E00A62C47 /* JavascriptAPIOverlay.swift */,
-				847357C323FBA9E4004EB627 /* JavascriptAPIFile.swift */,
 				84E5221223FF3D080006FDA1 /* JavascriptAPIPlaylist.swift */,
 				E33FEEB42229A44F00B59711 /* JavascriptAPIUtils.swift */,
 				E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */,
@@ -2558,6 +2556,7 @@
 				84A886F31E26CA24008755BB /* Regex.swift in Sources */,
 				8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */,
 				8450403D1E0A9EE20079C194 /* InspectorWindowController.swift in Sources */,
+				E39A11FD240F176E00A67F9F /* StringEncodingName.swift in Sources */,
 				E33FEEB52229A44F00B59711 /* JavascriptAPIUtils.swift in Sources */,
 				84C6D3671EB2A427009BF721 /* HistoryWindowController.swift in Sources */,
 				9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */,
@@ -2584,7 +2583,6 @@
 				8407D1401E3A684C0043895D /* ViewLayer.swift in Sources */,
 				84A0BA9B1D2FAB4100BC8DA1 /* Parameter.swift in Sources */,
 				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,
-				847357C423FBA9E4004EB627 /* JavascriptAPIFile.swift in Sources */,
 				84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */,
 				845404AA1E4396F500B02B12 /* ScriptLoader.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,

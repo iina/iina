@@ -20,7 +20,7 @@
 "cmd.sub-seek" = "字幕のシーク";
 "cmd.playlist-next" = "次のメディアへ";
 "cmd.playlist-prev" = "前のメディアへ";
-"cmd.playlist-move" = "プレイリストのアイテムを移動";
+"cmd.playlist-move" = "プレイリストの項目を移動";
 "cmd.playlist-clear" = "プレイリストのクリア";
 "cmd.playlist-remove" = "プレイリストを削除";
 "cmd.playlist-shuffle" = "シャッフル";
@@ -34,7 +34,7 @@
 "cmd.loadlist" = "プレイリストの読み込み";
 "cmd.run" = "実行";
 
-"iina.flip" = "フリップ(垂直)";
+"iina.flip" = "反転";
 "iina.mirror" = "ミラー(水平)";
 
 "iina.toggle-pip" = "ピクチャ・イン・ピクチャ切り替え";
@@ -49,7 +49,7 @@
 "iina.bigger-window" = "ウィンドウを拡大";
 "iina.smaller-window" = "ウィンドウを縮小";
 "iina.fit-to-screen" = "画面に合わせる";
-"iina.toggle-flip" = "フリップ (垂直)";
+"iina.toggle-flip" = "反転切り替え";
 "iina.toggle-mirror" = "ミラー (水平)";
 "iina.save-playlist" = "現在のプレイリストを保存";
 "iina.delete-current-file" = "現在のファイルをゴミ箱に移動";

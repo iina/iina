@@ -77,7 +77,7 @@
 "preference.network" = "ネットワーク";
 "preference.control" = "コントロール";
 "preference.keybindings" = "キーの割り当て";
-"preference.advanced" = "詳細設定";
+"preference.advanced" = "高度な設定";
 "preference.utilities" = "ユーティリティ";
 "preference.scripts" = "スクリプト";
 "preference.not_logged_in" = "ログインしていません";
@@ -218,7 +218,7 @@
 
 "playlist.total_length" = "合計 %@";
 "playlist.total_length_with_selected" = "%@ / %@を選択中";
-"pl_menu.title_multi" = "%d個のアイテム";
+"pl_menu.title_multi" = "%d個の項目";
 "pl_menu.play_next" = "次に再生";
 "pl_menu.play_in_new_window" = "新しいウィンドウで再生";
 "pl_menu.remove" = "削除";

@@ -19,7 +19,6 @@ class JavascriptPlugin: NSObject {
     case addMenuItems = "menu-items"
     case displayVideoOverlay = "video-overlay"
     case accessFileSystem = "file-system"
-    case playlist = "playlist"
 
     var isDangerous: Bool {
       switch self {

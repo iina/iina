@@ -822,15 +822,16 @@ class PlayerCore: NSObject {
     postNotification(.iinaPlaylistChanged)
   }
 
-  func addToPlaylist(paths: [String], at index: Int) {
+  func addToPlaylist(paths: [String], at index: Int = -1) {
     getPlaylist()
-    guard index <= info.playlist.count && index >= 0 else { return }
-    let previousCount = info.playlist.count
     for path in paths {
-      addToPlaylist(path)
+      _addToPlaylist(path)
     }
-    for i in 0..<paths.count {
-      playlistMove(previousCount + i, to: index + i)
+    if index <= info.playlist.count && index >= 0 {
+      let previousCount = info.playlist.count
+      for i in 0..<paths.count {
+        playlistMove(previousCount + i, to: index + i)
+      }
     }
     postNotification(.iinaPlaylistChanged)
   }
@@ -847,7 +848,7 @@ class PlayerCore: NSObject {
   func playlistRemove(_ indexSet: IndexSet) {
     var count = 0
     for i in indexSet {
-      playlistRemove(i - count)
+      _playlistRemove(i - count)
       count += 1
     }
     postNotification(.iinaPlaylistChanged)

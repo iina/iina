@@ -10,20 +10,13 @@ import Foundation
 import JavaScriptCore
 
 class JavascriptPluginInstance {
-
-  var apis: [String: JavascriptAPI]?
+  var apis: [String: JavascriptAPI]!
+  private var polyfill: JavascriptPolyfill!
 
   lazy var js: JSContext = {
     let ctx = JSContext()!
-    ctx.exceptionHandler = self.exceptionHandler
-
-    let JavascriptAPIRequire: @convention(block) (String) -> JSValue = { path in
-      let currentPath = self.currentFile!.deletingLastPathComponent()
-      let requiredURL = currentPath.appendingPathComponent(path).standardized
-      guard requiredURL.absoluteString.hasPrefix(self.plugin.root.absoluteString) else {
-        return JSValue(nullIn: ctx)
-      }
-      return self.evaluateFile(requiredURL, asModule: true)
+    ctx.exceptionHandler = { [unowned self] context, exception in
+      Logger.log(exception?.toString() ?? "Unknown exception", level: .error, subsystem: self.subsystem)
     }
 
     apis = [
@@ -39,10 +32,12 @@ class JavascriptPluginInstance {
       "preferences": JavascriptAPIPreferences(context: ctx, pluginInstance: self)
     ]
 
-    ctx.setObject(JavascriptAPIRequire, forKeyedSubscript: "require" as NSString)
     ctx.setObject(apis, forKeyedSubscript: "iina" as NSString)
+    apis.values.forEach { $0.extraSetup() }
 
-    apis!.values.forEach { $0.extraSetup() }
+    polyfill = JavascriptPolyfill(pluginInstance: self)
+    polyfill.register(inContext: ctx)
+
     return ctx
   }()
 
@@ -64,7 +59,7 @@ class JavascriptPluginInstance {
 
   lazy var subsystem: Logger.Subsystem = .init(rawValue: "JS:\(plugin.name)")
 
-  private var currentFile: URL?
+  var currentFile: URL?
 
   init?(player: PlayerCore, plugin: JavascriptPlugin) {
     self.player = player
@@ -73,14 +68,13 @@ class JavascriptPluginInstance {
   }
 
   @objc func menuItemAction(_ sender: NSMenuItem) {
-    guard let item = sender.representedObject as? JavascriptPluginMenuItem,
-      let action = item.action else { return }
-    if action.call(withArguments: [item]) == nil {
+    guard let item = sender.representedObject as? JavascriptPluginMenuItem else { return }
+    if !item.callAction() {
       Logger.log("Action of the menu item \"\(item.title)\" is not a function", level: .error, subsystem: subsystem)
     }
   }
 
-  private func evaluateFile(_ url: URL, asModule: Bool = false) -> JSValue! {
+  func evaluateFile(_ url: URL, asModule: Bool = false) -> JSValue! {
     currentFile = url
     guard let content = try? String(contentsOf: url) else {
       Logger.log("Cannot read script \(url.path)", level: .error, subsystem: subsystem)

@@ -10,7 +10,6 @@ import Foundation
 import JavaScriptCore
 
 class JavascriptPlugin: NSObject {
-
   enum Permission: String {
     case networkRequest = "network-request"
     case callProcess = "call-process"
@@ -35,6 +34,7 @@ class JavascriptPlugin: NSObject {
   @objc var enabled: Bool {
     didSet {
       UserDefaults.standard.set(enabled, forKey: "IINAPlugin" + identifier)
+      PlayerCore.playerCores.forEach { $0.loadPlugins() }
     }
   }
 

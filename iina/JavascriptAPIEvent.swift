@@ -21,6 +21,7 @@ import JavaScriptCore
 // event.on("iina.pip.changed")
 
 class JavascriptAPIEvent: JavascriptAPI, JavascriptAPIEventExportable {
+  private var addedListeners: [(String, EventController.Name)] = []
 
   @objc func on(_ event: String, _ callback: JSValue) -> String? {
     let splitted = event.split(separator: ".")
@@ -36,12 +37,21 @@ class JavascriptAPIEvent: JavascriptAPI, JavascriptAPIEventExportable {
     if isMpv && isPropertyChangedListener && player.mpv.observeProperties[eventName] == nil {
       player.mpv.observe(property: eventName)
     }
-    return player.events.addListener(JavascriptAPIEventCallback(callback), for: .init(event))
+    let name = EventController.Name(event)
+    let id = player.events.addListener(JavascriptAPIEventCallback(callback), for: name)
+    addedListeners.append((id, name))
+    return id
   }
 
   @objc func off(_ event: String,_ id: String) {
     if !player.events.removeListener(id, for: .init(event)) {
       log("Event listener not found for id \(id)", level: .warning)
+    }
+  }
+
+  deinit {
+    addedListeners.forEach { (id, name) in
+      player.events.removeListener(id, for: name)
     }
   }
 }

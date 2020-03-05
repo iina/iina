@@ -73,9 +73,9 @@ class EventController {
     return uuid
   }
 
+  @discardableResult
   func removeListener(_ id: String, for name: Name) -> Bool {
-    if listeners[name] == nil { return false }
-    if listeners[name]![id] == nil { return false }
+    guard let t = listeners[name], let _ = t[id] else { return false }
     listeners[name]![id] = nil
     return true
   }

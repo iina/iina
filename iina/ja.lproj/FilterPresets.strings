@@ -47,9 +47,9 @@
 "lut3d.interp" = "補間モード";
 
 "custom_mpv" = "カスタム (mpv)";
-"custom_mpv.name" = "フィルタ名";
-"custom_mpv.string" = "フィルタの値";
+"custom_mpv.name" = "フィルター名";
+"custom_mpv.string" = "フィルターの値";
 
 "custom_ffmpeg" = "カスタム (FFmpeg)";
-"custom_ffmpeg.name" = "フィルタ名";
-"custom_ffmpeg.string" = "フィルタの値";
+"custom_ffmpeg.name" = "フィルター名";
+"custom_ffmpeg.string" = "フィルターの値";

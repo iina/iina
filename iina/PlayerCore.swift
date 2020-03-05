@@ -157,8 +157,11 @@ class PlayerCore: NSObject {
 
   // MARK: - Plugins
 
-  private func loadPlugins() {
-    self.plugins = JavascriptPlugin.plugins.compactMap { JavascriptPluginInstance(player: self, plugin: $0) }
+  func loadPlugins() {
+    plugins = JavascriptPlugin.plugins.compactMap { plugin in
+      guard plugin.enabled else { return nil }
+      return JavascriptPluginInstance(player: self, plugin: plugin)
+    }
   }
 
   // MARK: - Control

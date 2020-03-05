@@ -18,11 +18,12 @@ import JavaScriptCore
 
 class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
   @objc func item(_ title: String, _ action: JSValue, _ selected: Bool = false, _ enabled: Bool = true) -> JavascriptPluginMenuItem {
-    return JavascriptPluginMenuItem(title: title, action: action, selected: selected, enabled: enabled)
+    let item = JavascriptPluginMenuItem(title: title, action: action, selected: selected, enabled: enabled)
+    return item
   }
 
   @objc func separator() -> JavascriptPluginMenuItem {
-    let item = JavascriptPluginMenuItem(title: "", action: nil, selected: false, enabled: false)
+    let item = JavascriptPluginMenuItem(title: "", selected: false, enabled: false)
     item.isSeparator = true
     return item
   }

@@ -46,7 +46,7 @@
                                 <tableColumns>
                                     <tableColumn width="155" minWidth="40" maxWidth="1000" id="dgl-ce-9KZ">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
@@ -132,7 +132,7 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XdS-aQ-bSd">
                                         <rect key="frame" x="54" y="298" width="33" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Label" id="QZS-KU-s1Z">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -140,7 +140,7 @@
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="8U3-yT-6HJ">
                                         <rect key="frame" x="10" y="280" width="504" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" selectable="YES" title="Multiline Label" id="T11-Rl-GHV">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -149,7 +149,7 @@
                                         <rect key="frame" x="452" y="296" width="60" height="17"/>
                                         <buttonCell key="cell" type="roundRect" title="Uninstall" bezelStyle="roundedRect" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ue8-hU-kLm">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                         </buttonCell>
                                     </button>
                                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Cly-9N-1cz">
@@ -187,7 +187,7 @@
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LeP-Yg-Cr3">
                                                                             <rect key="frame" x="10" y="51" width="40" height="14"/>
                                                                             <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Author" id="Dkk-JQ-qHA">
-                                                                                <font key="font" metaFont="label" size="11"/>
+                                                                                <font key="font" metaFont="controlContent" size="11"/>
                                                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -252,7 +252,7 @@
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="uXv-av-egZ">
                                                                             <rect key="frame" x="10" y="34" width="504" height="42"/>
                                                                             <textFieldCell key="cell" controlSize="small" selectable="YES" id="lCu-ZC-ZX4">
-                                                                                <font key="font" metaFont="label" size="11"/>
+                                                                                <font key="font" metaFont="controlContent" size="11"/>
                                                                                 <string key="title">This plugin may require a binary file that you must download from the author and add to IINA's binary path. Please check out the description on how to obtain the binary and then move it to the following folder.</string>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -262,7 +262,7 @@
                                                                             <rect key="frame" x="7" y="2" width="173" height="27"/>
                                                                             <buttonCell key="cell" type="push" title="Open IINA's binary directory" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8FM-t8-z8y">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                <font key="font" metaFont="label" size="11"/>
+                                                                                <font key="font" metaFont="controlContent" size="11"/>
                                                                             </buttonCell>
                                                                             <connections>
                                                                                 <action selector="openBinaryDirBtnAction:" target="-2" id="VXR-Mo-Gnv"/>
@@ -312,7 +312,7 @@
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="304-WM-rM6">
                                         <rect key="frame" x="149" y="254" width="226" height="21"/>
                                         <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="KTN-5r-mMm">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <segments>
                                                 <segment label="Permissions" selected="YES"/>
                                                 <segment label="Support" tag="1"/>
@@ -368,7 +368,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aJi-Tg-tph">
                     <rect key="frame" x="6" y="418" width="698" height="14"/>
                     <textFieldCell key="cell" controlSize="small" title="Install new plugin by opening an *.iinaplgz file or clicking the &quot;Install New Plug-in&quot; button below." id="fnl-uA-X7r">
-                        <font key="font" metaFont="label" size="11"/>
+                        <font key="font" metaFont="controlContent" size="11"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

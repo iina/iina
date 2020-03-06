@@ -112,6 +112,7 @@ class PlayerCore: NSObject {
 
   var mpv: MPVController!
   var plugins: [JavascriptPluginInstance] = []
+  private var pluginMap: [String: JavascriptPluginInstance] = [:]
   var events = EventController()
 
   lazy var ffmpegController: FFmpegController = {
@@ -158,10 +159,31 @@ class PlayerCore: NSObject {
   // MARK: - Plugins
 
   func loadPlugins() {
+    pluginMap.removeAll()
     plugins = JavascriptPlugin.plugins.compactMap { plugin in
       guard plugin.enabled else { return nil }
-      return JavascriptPluginInstance(player: self, plugin: plugin)
+      let instance = JavascriptPluginInstance(player: self, plugin: plugin)
+      pluginMap[plugin.identifier] = instance
+      return instance
     }
+  }
+
+  func reloadPlugin(_ plugin: JavascriptPlugin, forced: Bool = false) {
+    let id = plugin.identifier
+    if let _ = pluginMap[id] {
+      if plugin.enabled {
+        // no need to reload, unless forced
+        guard forced else { return }
+        pluginMap[id] = JavascriptPluginInstance(player: self, plugin: plugin)
+      } else {
+        pluginMap.removeValue(forKey: id)
+      }
+    } else {
+      guard plugin.enabled else { return }
+      pluginMap[id] = JavascriptPluginInstance(player: self, plugin: plugin)
+    }
+
+    plugins = JavascriptPlugin.plugins.compactMap { pluginMap[$0.identifier] }
   }
 
   // MARK: - Control

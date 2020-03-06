@@ -11,6 +11,10 @@ import WebKit
 
 fileprivate let cellViewIndentifier = NSUserInterfaceItemIdentifier("PluginCell")
 
+fileprivate extension NSPasteboard.PasteboardType {
+  static let iinaPluginID = NSPasteboard.PasteboardType(rawValue: "com.colliderli.iina.pluginID")
+}
+
 class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefPluginViewController")
@@ -53,9 +57,9 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    plugins = JavascriptPlugin.plugins
     tableView.delegate = self
     tableView.dataSource = self
+    tableView.registerForDraggedTypes([.iinaPluginID])
 
     clearPluginPage()
   }
@@ -224,24 +228,52 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
 
 extension PrefPluginViewController: NSTableViewDelegate, NSTableViewDataSource {
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return plugins.count
+    return JavascriptPlugin.plugins.count
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    return plugins[at: row]
+    return JavascriptPlugin.plugins[at: row]
   }
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     guard
       let view = tableView.makeView(withIdentifier: cellViewIndentifier, owner: self) as? NSTableCellView,
-      let plugin = plugins[at: row]
+      let plugin = JavascriptPlugin.plugins[at: row]
       else { return nil }
     view.textField?.stringValue = plugin.name
     return view
   }
 
+  func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
+    guard rowIndexes.count == 1, let item = JavascriptPlugin.plugins[at: rowIndexes[rowIndexes.startIndex]] else { return false }
+    pboard.setString(item.identifier, forType: .iinaPluginID)
+    return true
+  }
+
+  func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+    tableView.setDropRow(row, dropOperation: .above)
+    guard info.draggingSource as? NSTableView == tableView else { return [] }
+    return .move
+  }
+
+  func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
+    guard
+      let id = info.draggingPasteboard.string(forType: .iinaPluginID),
+      let originalRow = JavascriptPlugin.plugins.firstIndex(where: { $0.identifier == id })
+      else { return false }
+
+    let p = JavascriptPlugin.plugins.remove(at: originalRow)
+    JavascriptPlugin.plugins.insert(p, at: originalRow < row ? row - 1 : row)
+    JavascriptPlugin.savePluginOrder()
+
+    tableView.beginUpdates()
+    tableView.moveRow(at: originalRow, to: row)
+    tableView.endUpdates()
+    return true
+  }
+
   func tableViewSelectionDidChange(_ notification: Notification) {
-    guard let plugin = plugins[at: tableView.selectedRow] else {
+    guard let plugin = JavascriptPlugin.plugins[at: tableView.selectedRow] else {
       clearPluginPage()
       return
     }

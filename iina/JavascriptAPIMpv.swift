@@ -20,6 +20,15 @@ import JavaScriptCore
 }
 
 class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
+  private var identifier: String!
+
+  override func extraSetup() {
+    identifier = pluginInstance.plugin.identifier
+  }
+
+  deinit {
+    player.mpv.removeHooks(withIdentifier: identifier)
+  }
 
   @objc func getFlag(_ property: String) -> Bool {
     return player.mpv.getFlag(property)
@@ -58,12 +67,7 @@ class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
   }
 
   @objc func addHook(_ name: String, _ priority: Int, _ callback: JSValue) {
-    player.mpv.addHook(MPVHook(name), priority: Int32(priority)) { next in
-      let block: @convention(block) () -> Void = { next() }
-      callback.call(withArguments: [JSValue(object: block, in: self.context)!])
-      if callback.forProperty("constructor")?.forProperty("name")?.toString() != "AsyncFunction" {
-        next()
-      }
-    }
+    let hook = MPVHookValue(withIdentifier: identifier, jsContext: context, jsBlock: callback)
+    player.mpv.addHook(MPVHook(name), priority: Int32(priority), hook: hook)
   }
 }

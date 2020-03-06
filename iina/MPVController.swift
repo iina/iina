@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import Foundation
+import JavaScriptCore
 
 fileprivate let yes_str = "yes"
 fileprivate let no_str = "no"
@@ -25,7 +25,42 @@ fileprivate let no_str = "no"
  */
 fileprivate let MPVLogLevel = "warn"
 
-typealias Hook = (@escaping () -> Void) -> Void
+
+struct MPVHookValue {
+  typealias Block = (@escaping () -> Void) -> Void
+
+  var id: String?
+  var isJavascript: Bool
+  var block: Block?
+  var jsBlock: JSManagedValue!
+  var context: JSContext!
+
+  init(withIdentifier id: String, jsContext context: JSContext, jsBlock block: JSValue) {
+    self.id = id
+    self.isJavascript = true
+    self.jsBlock = JSManagedValue(value: block)
+    self.context = context
+    context.virtualMachine.addManagedReference(block, withOwner: self)
+  }
+
+  init(withBlock block: @escaping Block) {
+    self.isJavascript = false
+    self.block = block
+  }
+
+  func call(withNextBlock next: @escaping () -> Void) {
+    if isJavascript {
+      let block: @convention(block) () -> Void = { next() }
+      guard let callback = jsBlock.value else { return }
+      callback.call(withArguments: [JSValue(object: block, in: context)!])
+      if callback.forProperty("constructor")?.forProperty("name")?.toString() != "AsyncFunction" {
+        next()
+      }
+    } else {
+      block!(next)
+    }
+  }
+}
 
 // Global functions
 
@@ -59,7 +94,7 @@ class MPVController: NSObject {
 
   var fileLoaded: Bool = false
 
-  private var hooks: [UInt64: Hook] = [:]
+  private var hooks: [UInt64: MPVHookValue] = [:]
   private var hookCounter: UInt64 = 1
 
   let observeProperties: [String: mpv_format] = [
@@ -695,10 +730,14 @@ class MPVController: NSObject {
 
   // MARK: - Hooks
 
-  func addHook(_ name: MPVHook, priority: Int32 = 0, hook: @escaping Hook) {
+  func addHook(_ name: MPVHook, priority: Int32 = 0, hook: MPVHookValue) {
     mpv_hook_add(mpv, hookCounter, name.rawValue, priority)
     hooks[hookCounter] = hook
     hookCounter += 1
+  }
+
+  func removeHooks(withIdentifier id: String) {
+    hooks.filter { (k, v) in v.isJavascript && v.id == id }.keys.forEach { hooks.removeValue(forKey: $0) }
   }
 
   // MARK: - Events
@@ -746,7 +785,7 @@ class MPVController: NSObject {
       let hookEvent = event.pointee.data.bindMemory(to: mpv_event_hook.self, capacity: 1).pointee
       let hookID = hookEvent.id
       if let hook = hooks[userData] {
-        hook {
+        hook.call {
           mpv_hook_continue(self.mpv, hookID)
         }
       }

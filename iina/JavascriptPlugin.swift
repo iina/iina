@@ -145,7 +145,7 @@ class JavascriptPlugin: NSObject {
         }
       }
     }
-    enabled = UserDefaults.standard.bool(forKey: "IINAPlugin" + identifier)
+    enabled = UserDefaults.standard.bool(forKey: "PluginEnabled." + identifier)
     self.permissions = permissions
     self.domainList = (jsonDict["domainList"] as? [String]) ?? []
     if let defaultPrefernces = jsonDict["preferenceDefaults"] as? [String: Any] {

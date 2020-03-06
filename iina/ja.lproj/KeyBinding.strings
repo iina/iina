@@ -12,7 +12,7 @@
 "cmd.set" = "値の設定";
 "cmd.cycle" = "循環";
 "cmd.cycle-values" = "指定値内を循環";
-"cmd.add" = "加算";
+"cmd.add" = "増減";
 "cmd.multiply" = "乗算";
 "cmd.frame-step" = "次のフレームへ";
 "cmd.frame-back-step" = "前のフレームへ";
@@ -61,11 +61,11 @@
 "no" = "いいえ";
 "to" = "を";
 "by" = "x";
-"in" = "を次の値で";
+"in" = "を次の値で循環";
 "add" = "増加";
 "minus" = "減少";
 "forward" = "進める";
-"backward" = "戻す";
+"backward" = "戻る";
 "seek-to" = "時間の指定";
 
 "relative" = "秒";

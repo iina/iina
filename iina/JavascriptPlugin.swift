@@ -33,8 +33,8 @@ class JavascriptPlugin: NSObject {
 
   @objc var enabled: Bool {
     didSet {
-      UserDefaults.standard.set(enabled, forKey: "IINAPlugin" + identifier)
-      PlayerCore.playerCores.forEach { $0.loadPlugins() }
+      UserDefaults.standard.set(enabled, forKey: "PluginEnabled." + identifier)
+      PlayerCore.playerCores.forEach { $0.reloadPlugin(self) }
     }
   }
 
@@ -79,8 +79,20 @@ class JavascriptPlugin: NSObject {
       Logger.log("Unable to read plugin directory.")
       return []
     }
-    return contents.filter { $0.pathExtension == "iinaplugin" && $0.isExistingDirectory }
+
+    let order = UserDefaults.standard.array(forKey: "PluginOrder") as? [String] ?? []
+    let orderDict = [String: Int](uniqueKeysWithValues: zip(order, 0...order.count))
+
+    let result = contents.filter { $0.pathExtension == "iinaplugin" && $0.isExistingDirectory }
       .compactMap { JavascriptPlugin.init(filename: $0.deletingPathExtension().lastPathComponent) }
+      .sorted { orderDict[$0.identifier, default: Int.max] < orderDict[$1.identifier, default: Int.max] }
+
+    savePluginOrder(result)
+    return result
+  }
+
+  static func savePluginOrder(_ values: [JavascriptPlugin]? = nil) {
+    UserDefaults.standard.set((values ?? plugins).map({ $0.identifier }), forKey: "PluginOrder")
   }
 
   init?(filename: String) {
@@ -88,7 +100,7 @@ class JavascriptPlugin: NSObject {
     let url = Utility.pluginsURL.appendingPathComponent("\(filename).iinaplugin")
     Logger.log("Loading JS plugin from \(url.path)")
     guard url.isFileURL && url.isExistingDirectory else {
-      Logger.log("Plugin package doesn't exist.")
+      Logger.log("The plugin package doesn't exist.")
       return nil
     }
     self.root = url

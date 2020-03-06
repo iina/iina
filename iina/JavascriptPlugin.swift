@@ -42,7 +42,7 @@ class JavascriptPlugin: NSObject {
   let authorName: String
   let authorEmail: String?
   let authorURL: String?
-  let identifier: String
+  var identifier: String
   let version: String
   let desc: String?
 
@@ -72,19 +72,33 @@ class JavascriptPlugin: NSObject {
   let defaultPrefernces: [String: Any]
 
   static private func loadPlugins() -> [JavascriptPlugin] {
-    guard let contents = try? FileManager.default.contentsOfDirectory(at: Utility.pluginsURL,
-                                                                      includingPropertiesForKeys: [.isDirectoryKey],
-                                                                      options: [.skipsHiddenFiles, .skipsPackageDescendants])
+    guard let contents = try?
+      FileManager.default.contentsOfDirectory(at: Utility.pluginsURL,
+                                              includingPropertiesForKeys: [.isDirectoryKey],
+                                              options: [.skipsHiddenFiles, .skipsPackageDescendants])
     else {
       Logger.log("Unable to read plugin directory.")
       return []
     }
 
-    let order = UserDefaults.standard.array(forKey: "PluginOrder") as? [String] ?? []
+    let orderArray = UserDefaults.standard.array(forKey: "PluginOrder") as? [String] ?? []
+    let order = Array(NSOrderedSet(array: orderArray)) as! [String]
     let orderDict = [String: Int](uniqueKeysWithValues: zip(order, 0...order.count))
+    var identifiers = Set<String>()
 
-    let result = contents.filter { $0.pathExtension == "iinaplugin" && $0.isExistingDirectory }
-      .compactMap { JavascriptPlugin.init(filename: $0.deletingPathExtension().lastPathComponent) }
+    let result = contents
+      .filter { $0.pathExtension == "iinaplugin" && $0.isExistingDirectory }
+      .compactMap { path -> JavascriptPlugin? in
+        if let plugin = JavascriptPlugin(filename: path.deletingPathExtension().lastPathComponent) {
+          if identifiers.contains(plugin.identifier) {
+            Utility.showAlert("duplicated_plugin_id", comment: nil, arguments: [plugin.identifier])
+            plugin.identifier += ".\(UUID().uuidString)"
+          }
+          identifiers.insert(plugin.identifier)
+          return plugin
+        }
+        return nil
+      }
       .sorted { orderDict[$0.identifier, default: Int.max] < orderDict[$1.identifier, default: Int.max] }
 
     savePluginOrder(result)

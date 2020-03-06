@@ -236,6 +236,8 @@
 "alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
 "alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
 
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+
 "playlist.total_length" = "%@ in total";
 "playlist.total_length_with_selected" = "%@ of %@ selected";
 "pl_menu.title_multi" = "%d Items";

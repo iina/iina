@@ -9,7 +9,7 @@
 
 
 
-"crop" = "Crop";
+"crop" = "Klippa";
 "crop.w" = "Width (default: video width)";
 "crop.h" = "Height (default: video height)";
 "crop.x" = "Origin X (default: center)";
@@ -24,31 +24,31 @@
 "expand.round" = "Rounds up to make divisible by this value";
 
 "sharpen" = "Sharpen";
-"sharpen.msize" = "Matrix size";
-"sharpen.amount" = "Amount";
+"sharpen.msize" = "Fylkja stærð";
+"sharpen.amount" = "Upphæð";
 
-"blur" = "Blur";
-"blur.msize" = "Matrix size";
-"blur.amount" = "Amount";
+"blur" = "Þoka";
+"blur.msize" = "Fylkja stærð";
+"blur.amount" = "Upphæð";
 
 "delogo" = "Delogo";
-"delogo.w" = "Width";
-"delogo.h" = "Height";
-"delogo.x" = "Origin X";
-"delogo.y" = "Origin Y";
+"delogo.w" = "Breidd";
+"delogo.h" = "Hæð";
+"delogo.x" = "Uprunalega X";
+"delogo.y" = "Upprunalega Y";
 
-"negative" = "Negative";
+"negative" = "Neikvætt";
 
-"vflip" = "Flip";
-"hflip" = "Mirror";
+"vflip" = "Snúa";
+"hflip" = "Spegla";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "File";
+"lut3d.file" = "Skrá";
 "lut3d.interp" = "Interpolation mode";
 
 "custom_mpv" = "Custom (mpv)";
-"custom_mpv.name" = "Filter name";
-"custom_mpv.string" = "Filter value";
+"custom_mpv.name" = "Sía nafn";
+"custom_mpv.string" = "Sía gildi";
 
 "custom_ffmpeg" = "Custom (FFmpeg)";
 "custom_ffmpeg.name" = "Filter name";
